@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQPlotAxisLabelRendererOptionsCategoryLabels.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqPlot.options.axis</a> &gt; <span class="el_source">JQPlotAxisLabelRendererOptionsCategoryLabels.java</span></div><h1>JQPlotAxisLabelRendererOptionsCategoryLabels.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqPlot.options.axis;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import za.co.mmagon.jwebswing.components.jqPlot.JQPlotGraph;
+import za.co.mmagon.jwebswing.components.jqPlot.parts.interfaces.JQPlotAxisLabelRenderer;
+import za.co.mmagon.jwebswing.components.jqPlot.parts.interfaces.JQPlotTickRenderer;
+import za.co.mmagon.jwebswing.components.jqPlot.references.JQPlotJavascriptReferencePool;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ *
+ * @author GedMarc
+ * @since 29 Feb 2016
+ */
+public class JQPlotAxisLabelRendererOptionsCategoryLabels&lt;O extends JavaScriptPart &amp; JQPlotTickRenderer&gt; extends JavaScriptPart
+        implements JQPlotAxisLabelRenderer
+{
+
+    @JsonIgnore
+    private JQPlotGraph linkedGraph;
+
+    /**
+     * The Default Axis Label Renderer Options
+     *
+     * @param linkedGraph
+     */
+    public JQPlotAxisLabelRendererOptionsCategoryLabels(JQPlotGraph linkedGraph)
+<span class="fc" id="L46">    {</span>
+<span class="fc" id="L47">        this.linkedGraph = linkedGraph;</span>
+<span class="fc" id="L48">        linkedGraph.getJavascriptReferences().add(JQPlotJavascriptReferencePool.CategoryAxisRenderer.getReference());</span>
+<span class="fc" id="L49">    }</span>
+
+    @JsonProperty(&quot;renderer&quot;)
+    @JsonRawValue
+    @Override
+    public String getRenderer()
+    {
+<span class="fc" id="L56">        return &quot;$.jqplot.CategoryAxisRenderer&quot;;</span>
+    }
+
+    /**
+     * Gets the linked graph
+     *
+     * @return
+     */
+    public JQPlotGraph getLinkedGraph()
+    {
+<span class="nc" id="L66">        return linkedGraph;</span>
+    }
+
+    /**
+     * Sets the linked graph
+     *
+     * @param linkedGraph
+     */
+    public void setLinkedGraph(JQPlotGraph linkedGraph)
+    {
+<span class="nc" id="L76">        this.linkedGraph = linkedGraph;</span>
+<span class="nc" id="L77">    }</span>
+
+    /**
+     * True to sort tick labels when labels are created by merging x axis values from multiple series.
+     */
+    private Boolean sortMergedLabels;
+    /**
+     * A class of a rendering engine for creating the ticks labels displayed on the plot, See $.jqplot.AxisTickRenderer.
+     */
+    private O tickRenderer;
+
+    /**
+     * True to sort tick labels when labels are created by merging x axis values from multiple series.
+     *
+     * @return
+     */
+    public Boolean getSortMergedLabels()
+    {
+<span class="nc" id="L95">        return sortMergedLabels;</span>
+    }
+
+    /**
+     * True to sort tick labels when labels are created by merging x axis values from multiple series.
+     *
+     * @param sortMergedLabels
+     */
+    public void setSortMergedLabels(Boolean sortMergedLabels)
+    {
+<span class="nc" id="L105">        this.sortMergedLabels = sortMergedLabels;</span>
+<span class="nc" id="L106">    }</span>
+
+    /**
+     * A class of a rendering engine for creating the ticks labels displayed on the plot, See $.jqplot.AxisTickRenderer.
+     *
+     * @return
+     */
+    public O getTickRenderer()
+    {
+<span class="nc" id="L115">        return tickRenderer;</span>
+    }
+
+    /**
+     * A class of a rendering engine for creating the ticks labels displayed on the plot, See $.jqplot.AxisTickRenderer.
+     *
+     * @param tickRenderer
+     */
+    public void setTickRenderer(O tickRenderer)
+    {
+<span class="nc" id="L125">        this.tickRenderer = tickRenderer;</span>
+<span class="nc" id="L126">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,0 +1,28 @@
+{
+  "name": "vertical-timeline-jwebswing",
+  "authors": [
+    "GedMarc <ged_marc@hotmail.com>"
+  ],
+  "description": "A responsive vertical timeline from https://codyhouse.co/gem/vertical-timeline/ that doesn't work with id's but classes",
+  "main": "",
+  "keywords": [
+    "jwebswing",
+    "java",
+    "web",
+    "framework",
+    "timeline",
+    "vertical",
+    "timeline",
+    "time",
+    "line"
+  ],
+  "license": "MIT",
+  "homepage": "http://www.armineasy.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

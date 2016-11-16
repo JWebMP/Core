@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQUIDialogOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqueryUI.dialog</a> &gt; <span class="el_source">JQUIDialogOptions.java</span></div><h1>JQUIDialogOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2014 mmagon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqueryUI.dialog;
+
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.components.jqueryUI.position.Position;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ * The options available for the JQuery Dialog feature
+ *
+ * @author mmagon
+ */
+<span class="nc" id="L28">public class JQUIDialogOptions extends JavaScriptPart</span>
+{
+
+    private static final long serialVersionUID = 1L;
+
+    private Component appendTo;
+    private Boolean autoOpen;
+    /**
+     * TODO : buttons implementation
+     */
+    //private Component[] buttons;
+    private Boolean closeOnEscape;
+    private String closeText;
+    private String dialogClass;
+    private Boolean draggable;
+    private Integer height;
+    private Boolean hide;
+    private Integer maxHeight;
+    private Integer maxWidth;
+    private Integer minHeight;
+    private Integer minWidth;
+    private Boolean modal;
+    private Position position;
+    private Boolean resizable;
+    private Boolean show;
+    private String title;
+    private Integer width;
+
+    /**
+     * Which element the dialog (and overlay, if modal) should be appended to.
+     *
+     * @return
+     */
+    public Component getAppendTo()
+    {
+<span class="nc" id="L63">        return appendTo;</span>
+    }
+
+    /**
+     * Which element the dialog (and overlay, if modal) should be appended to.
+     *
+     * @param appendTo
+     */
+    public void setAppendTo(Component appendTo)
+    {
+<span class="nc" id="L73">        this.appendTo = appendTo;</span>
+<span class="nc" id="L74">    }</span>
+
+    /**
+     * If set to true, the dialog will automatically open upon initialization. If false, the dialog will stay hidden until the open() method is called.
+     *
+     * @return
+     */
+    public Boolean getAutoOpen()
+    {
+<span class="nc" id="L83">        return autoOpen;</span>
+    }
+
+    /**
+     * If set to true, the dialog will automatically open upon initialization. If false, the dialog will stay hidden until the open() method is called.
+     *
+     * @param autoOpen
+     */
+    public void setAutoOpen(Boolean autoOpen)
+    {
+<span class="nc" id="L93">        this.autoOpen = autoOpen;</span>
+<span class="nc" id="L94">    }</span>
+
+    /**
+     * Specifies whether the dialog should close when it has focus and the user presses the escape (ESC) key.
+     *
+     * @return
+     */
+    public Boolean getCloseOnEscape()
+    {
+<span class="nc" id="L103">        return closeOnEscape;</span>
+    }
+
+    /**
+     * Specifies whether the dialog should close when it has focus and the user presses the escape (ESC) key.
+     *
+     * @param closeOnEscape
+     */
+    public void setCloseOnEscape(Boolean closeOnEscape)
+    {
+<span class="nc" id="L113">        this.closeOnEscape = closeOnEscape;</span>
+<span class="nc" id="L114">    }</span>
+
+    /**
+     * Specifies the text for the close button. Note that the close text is visibly hidden when using a standard theme
+     *
+     * @return
+     */
+    public String getCloseText()
+    {
+<span class="nc" id="L123">        return closeText;</span>
+    }
+
+    /**
+     * Specifies the text for the close button. Note that the close text is visibly hidden when using a standard theme
+     *
+     * @param closeText
+     */
+    public void setCloseText(String closeText)
+    {
+<span class="nc" id="L133">        this.closeText = closeText;</span>
+<span class="nc" id="L134">    }</span>
+
+    /**
+     * The specified class name(s) will be added to the dialog, for additional theming.
+     *
+     * @return
+     */
+    public String getDialogClass()
+    {
+<span class="nc" id="L143">        return dialogClass;</span>
+    }
+
+    /**
+     * The specified class name(s) will be added to the dialog, for additional theming.
+     *
+     * @param dialogClass
+     */
+    public void setDialogClass(String dialogClass)
+    {
+<span class="nc" id="L153">        this.dialogClass = dialogClass;</span>
+<span class="nc" id="L154">    }</span>
+
+    /**
+     * If set to true, the dialog will be draggable by the title bar. Requires the jQuery UI Draggable widget to be included.
+     *
+     * @return
+     */
+    public Boolean getDraggable()
+    {
+<span class="nc" id="L163">        return draggable;</span>
+    }
+
+    /**
+     * If set to true, the dialog will be draggable by the title bar. Requires the jQuery UI Draggable widget to be included.
+     *
+     * @param draggable
+     */
+    public void setDraggable(Boolean draggable)
+    {
+<span class="nc" id="L173">        this.draggable = draggable;</span>
+<span class="nc" id="L174">    }</span>
+
+    /**
+     * The height of the dialog.
+     *
+     * @return
+     */
+    public Integer getHeight()
+    {
+<span class="nc" id="L183">        return height;</span>
+    }
+
+    /**
+     * The height of the dialog.
+     *
+     * @param height
+     */
+    public void setHeight(Integer height)
+    {
+<span class="nc" id="L193">        this.height = height;</span>
+<span class="nc" id="L194">    }</span>
+
+    /**
+     * If and how to animate the hiding of the dialog.
+     *
+     * @return
+     */
+    public Boolean getHide()
+    {
+<span class="nc" id="L203">        return hide;</span>
+    }
+
+    /**
+     * If and how to animate the hiding of the dialog.
+     *
+     * @param hide
+     */
+    public void setHide(Boolean hide)
+    {
+<span class="nc" id="L213">        this.hide = hide;</span>
+<span class="nc" id="L214">    }</span>
+
+    /**
+     * The maximum height to which the dialog can be resized, in pixels.
+     *
+     * @return
+     */
+    public Integer getMaxHeight()
+    {
+<span class="nc" id="L223">        return maxHeight;</span>
+    }
+
+    /**
+     * The maximum height to which the dialog can be resized, in pixels.
+     *
+     * @param maxHeight
+     */
+    public void setMaxHeight(Integer maxHeight)
+    {
+<span class="nc" id="L233">        this.maxHeight = maxHeight;</span>
+<span class="nc" id="L234">    }</span>
+
+    /**
+     * The maximum width to which the dialog can be resized, in pixels.
+     *
+     * @return
+     */
+    public Integer getMaxWidth()
+    {
+<span class="nc" id="L243">        return maxWidth;</span>
+    }
+
+    /**
+     * The maximum width to which the dialog can be resized, in pixels.
+     *
+     * @param maxWidth
+     */
+    public void setMaxWidth(Integer maxWidth)
+    {
+<span class="nc" id="L253">        this.maxWidth = maxWidth;</span>
+<span class="nc" id="L254">    }</span>
+
+    /**
+     * The minimum height to which the dialog can be resized, in pixels.
+     *
+     * @return
+     */
+    public Integer getMinHeight()
+    {
+<span class="nc" id="L263">        return minHeight;</span>
+    }
+
+    /**
+     * The minimum height to which the dialog can be resized, in pixels.
+     *
+     * @param minHeight
+     */
+    public void setMinHeight(Integer minHeight)
+    {
+<span class="nc" id="L273">        this.minHeight = minHeight;</span>
+<span class="nc" id="L274">    }</span>
+
+    /**
+     * The minimum width to which the dialog can be resized, in pixels.
+     *
+     * @return
+     */
+    public Integer getMinWidth()
+    {
+<span class="nc" id="L283">        return minWidth;</span>
+    }
+
+    /**
+     * The minimum width to which the dialog can be resized, in pixels.
+     *
+     * @param minWidth
+     */
+    public void setMinWidth(Integer minWidth)
+    {
+<span class="nc" id="L293">        this.minWidth = minWidth;</span>
+<span class="nc" id="L294">    }</span>
+
+    /**
+     * If set to true, the dialog will have modal behavior; other items on the page will be disabled, i.e., cannot be interacted with. Modal dialogs create an overlay below the dialog but above other
+     * page elements.
+     *
+     * @return
+     */
+    public Boolean getModal()
+    {
+<span class="nc" id="L304">        return modal;</span>
+    }
+
+    /**
+     * If set to true, the dialog will have modal behavior; other items on the page will be disabled, i.e., cannot be interacted with. Modal dialogs create an overlay below the dialog but above other
+     * page elements.
+     *
+     * @param modal
+     */
+    public void setModal(Boolean modal)
+    {
+<span class="nc" id="L315">        this.modal = modal;</span>
+<span class="nc" id="L316">    }</span>
+
+    /**
+     *
+     * &lt;p&gt;
+     * Specifies where the dialog should be displayed when opened. The dialog will handle collisions such that as much of the dialog is visible as possible.
+     * &lt;p&gt;
+     * The of property defaults to the window, but you can specify another element to position against. You can refer to the jQuery UI Position utility for more details about the available properties.
+     *
+     * @return
+     */
+    public Position getPosition()
+    {
+<span class="nc" id="L329">        return position;</span>
+    }
+
+    /**
+     *
+     * &lt;p&gt;
+     * Specifies where the dialog should be displayed when opened. The dialog will handle collisions such that as much of the dialog is visible as possible.
+     * &lt;p&gt;
+     * The of property defaults to the window, but you can specify another element to position against. You can refer to the jQuery UI Position utility for more details about the available properties.
+     *
+     * @param position
+     */
+    public void setPosition(Position position)
+    {
+<span class="nc" id="L343">        this.position = position;</span>
+<span class="nc" id="L344">    }</span>
+
+    /**
+     * If set to true, the dialog will be resizable. Requires the jQuery UI Resizable widget to be included
+     *
+     * @return
+     */
+    public Boolean getResizable()
+    {
+<span class="nc" id="L353">        return resizable;</span>
+    }
+
+    /**
+     * If set to true, the dialog will be resizable. Requires the jQuery UI Resizable widget to be included
+     *
+     * @param resizable
+     */
+    public void setResizable(Boolean resizable)
+    {
+<span class="nc" id="L363">        this.resizable = resizable;</span>
+<span class="nc" id="L364">    }</span>
+
+    /**
+     * If and how to animate the showing of the dialog.
+     *
+     * @return
+     */
+    public Boolean getShow()
+    {
+<span class="nc" id="L373">        return show;</span>
+    }
+
+    /**
+     * If and how to animate the showing of the dialog.
+     *
+     * @param show
+     */
+    public void setShow(Boolean show)
+    {
+<span class="nc" id="L383">        this.show = show;</span>
+<span class="nc" id="L384">    }</span>
+
+    /**
+     * Specifies the title of the dialog. If the value is null, the title attribute on the dialog source element will be used.
+     *
+     * @return
+     */
+    public String getTitle()
+    {
+<span class="nc" id="L393">        return title;</span>
+    }
+
+    /**
+     * Specifies the title of the dialog. If the value is null, the title attribute on the dialog source element will be used.
+     *
+     * @param title
+     */
+    public void setTitle(String title)
+    {
+<span class="nc" id="L403">        this.title = title;</span>
+<span class="nc" id="L404">    }</span>
+
+    /**
+     * The width of the dialog, in pixels
+     *
+     * @return
+     */
+    public Integer getWidth()
+    {
+<span class="nc" id="L413">        return width;</span>
+    }
+
+    /**
+     * The width of the dialog, in pixels
+     *
+     * @param width
+     */
+    public void setWidth(Integer width)
+    {
+<span class="nc" id="L423">        this.width = width;</span>
+<span class="nc" id="L424">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

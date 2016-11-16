@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TableColumn.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">TableColumn.java</span></div><h1>TableColumn.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2014 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.base.html;
+
+import org.apache.log4j.Logger;
+import za.co.mmagon.LoggerFactory;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.html.attributes.TableColumnAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.TableColumnGroupChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+
+/**
+ * Definition and Usage&lt;p&gt;
+ * &lt;p&gt;
+ * The &amp;lt;col&amp;gt; tag specifies column properties for each column within a colgroup element.&lt;p&gt;
+ * &lt;p&gt;
+ * The &amp;lt;col&amp;gt; tag is useful for applying styles to entire columns, instead of repeating the styles for each cell, for each row.&lt;p&gt;
+ * &lt;p&gt;
+ * Browser Support Element &amp;lt;col&amp;gt; Yes Yes Yes Yes Yes&lt;p&gt;
+ * &lt;p&gt;
+ * Differences Between HTML 4.01 and HTML5&lt;p&gt;
+ * &lt;p&gt;
+ * Most of the attributes in HTML 4.01 are not supported in HTML5. Differences Between HTML and XHTML&lt;p&gt;
+ * &lt;p&gt;
+ * In HTML the &amp;lt;col&amp;gt; tag has no end tag.&lt;p&gt;
+ * &lt;p&gt;
+ * In XHTML, the &amp;lt;col&amp;gt; tag must be properly closed.&lt;p&gt;
+ * &lt;p&gt;
+ * @author GedMarc
+ * @since 2014/12/20
+ */
+public class TableColumn extends Component&lt;NoChildren, TableColumnAttributes, GlobalFeatures, GlobalEvents, TableColumn&gt; implements TableColumnGroupChildren
+{
+
+<span class="fc" id="L52">    private static final Logger log = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;TableColumn&quot;);</span>
+
+    /**
+     * Constructs a new table column
+     */
+    public TableColumn()
+    {
+<span class="fc" id="L59">        super(ComponentTypes.TableColumn);</span>
+<span class="fc" id="L60">    }</span>
+
+    /**
+     * Differences Between HTML and XHTML
+     * &lt;p&gt;
+     * In HTML the base tag has no end tag.
+     * &lt;p&gt;
+     * In XHTML the base tag must be properly closed.
+     */
+    @Override
+    public void preConfigure()
+    {
+<span class="fc" id="L72">        super.preConfigure();</span>
+        try
+        {
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">            if (getPage().getHtmlVersion().name().startsWith(&quot;X&quot;))</span>
+            {
+<span class="nc" id="L77">                setInlineClosingTag(true);</span>
+            }
+        }
+<span class="nc" id="L80">        catch (Exception e)</span>
+        {
+<span class="nc" id="L82">            log.trace(&quot;Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.&quot;,e);</span>
+<span class="fc" id="L83">        }</span>
+<span class="fc" id="L84">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AjaxReceiver.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.servlets</a> &gt; <span class="el_source">AjaxReceiver.java</span></div><h1>AjaxReceiver.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.servlets;
+
+import com.google.inject.Singleton;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
+import za.co.mmagon.LoggerFactory;
+import za.co.mmagon.jwebswing.Event;
+import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.base.ComponentEventBase;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
+import za.co.mmagon.jwebswing.base.ajax.AjaxEventValue;
+import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
+import za.co.mmagon.jwebswing.base.ajax.AjaxResponseReaction;
+import za.co.mmagon.jwebswing.base.ajax.AjaxResponseType;
+import za.co.mmagon.jwebswing.base.ajax.ReactionType;
+import za.co.mmagon.jwebswing.base.ajax.exceptions.InvalidRequestException;
+import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+import za.co.mmagon.jwebswing.utilities.TextUtilities;
+
+/**
+ * Handles all AJAX Requests performed by a client connection. Session codes are used in order to identify
+ * &lt;p&gt;
+ * @author Marc Magon
+ */
+@Singleton
+public class AjaxReceiver extends JWDefaultServlet
+{
+
+<span class="fc" id="L41">    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;AJAXServlet&quot;);</span>
+    private static final long serialVersionUID = 1L;
+
+    public AjaxReceiver()
+<span class="fc" id="L45">    {</span>
+<span class="fc" id="L46">    }</span>
+
+    /**
+     * Processes requests for both HTTP &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt; methods.
+     *
+     * @param request  Servlet request
+     * @param response Servlet response
+     * @throws ServletException if a Servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs
+     */
+    protected synchronized void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        Date startDate;
+<span class="nc" id="L60">        String output = new String();</span>
+<span class="nc" id="L61">        String _eventType = &quot;Servlet Accessed&quot;;</span>
+<span class="nc" id="L62">        long renderTime = 1L;</span>
+<span class="nc" id="L63">        long fireTime = 1L;</span>
+
+        try
+        {
+            String json;
+<span class="nc" id="L68">            try ( </span>
+<span class="nc" id="L69">                    BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream())))</span>
+            {
+<span class="nc" id="L71">                json = &quot;&quot;;</span>
+<span class="nc" id="L72">                json += br.readLine();</span>
+<span class="nc bnc" id="L73" title="All 8 branches missed.">            }</span>
+
+<span class="nc" id="L75">            AjaxCall ajaxCall = JavaScriptPart.getJsonObjectMapper().readValue(json, AjaxCall.class);</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">            if (ajaxCall.getComponentId() == null)</span>
+            {
+<span class="nc" id="L78">                LOG.error(&quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Security]-[Component ID Not Found]&quot;);</span>
+<span class="nc" id="L79">                throw new InvalidRequestException(&quot;There is no Component ID in this call.&quot;);</span>
+            }
+
+<span class="nc" id="L82">            String componentId = ajaxCall.getComponentId();</span>
+<span class="nc bnc" id="L83" title="All 4 branches missed.">            if (componentId == null || componentId.isEmpty())</span>
+            {
+<span class="nc" id="L85">                LOG.trace(&quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Security]-[Component ID Incorrect]&quot;);</span>
+<span class="nc" id="L86">                throw new InvalidRequestException(&quot;Component ID Was Incorrect.&quot;);</span>
+            }
+
+<span class="nc" id="L89">            Page page = (Page) request.getSession().getAttribute(&quot;jwpage&quot;);</span>
+
+            ComponentHierarchyBase triggerComponent;
+<span class="nc" id="L92">            page.buildComponentHierarchy();</span>
+<span class="nc" id="L93">            HashMap&lt;String, ComponentHierarchyBase&gt; comps = page.getComponentCache();</span>
+<span class="nc" id="L94">            triggerComponent = comps.get(componentId);</span>
+<span class="nc" id="L95">            ajaxCall.setComponent(triggerComponent);</span>
+
+<span class="nc bnc" id="L97" title="All 2 branches missed.">            if (triggerComponent == null)</span>
+            {
+<span class="nc" id="L99">                LOG.error(&quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Security]-[Invalid Component Specified]&quot;);</span>
+<span class="nc" id="L100">                throw new MissingComponentException(&quot;Component could not be found to process any events.&quot;);</span>
+            }
+
+<span class="nc" id="L103">            Date datetime = ajaxCall.getDatetime();</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">            if (datetime == null)</span>
+            {
+<span class="nc" id="L106">                LOG.trace(&quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Security]-[Date Time Incorrect]&quot;);</span>
+<span class="nc" id="L107">                throw new InvalidRequestException(&quot;Invalid Date Time Value&quot;);</span>
+            }
+<span class="nc" id="L109">            EventTypes eventType = ajaxCall.getEventType();</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">            if (eventType == null)</span>
+            {
+<span class="nc" id="L112">                LOG.trace(&quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Security]-[Event Type Incorrect]&quot;);</span>
+<span class="nc" id="L113">                throw new InvalidRequestException(&quot;Invalid Event Type&quot;);</span>
+            }
+<span class="nc" id="L115">            _eventType = eventType.toString();</span>
+
+<span class="nc" id="L117">            EventTypes eventTypeFrom = ajaxCall.getEventTypeFrom();</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">            if (eventTypeFrom == null)</span>
+            {
+<span class="nc" id="L120">                LOG.trace(&quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Security]-[Event From Incorrect]&quot;);</span>
+<span class="nc" id="L121">                throw new InvalidRequestException(&quot;Invalid Event Type From&quot;);</span>
+            }
+
+<span class="nc" id="L124">            AjaxEventValue value = ajaxCall.getValue();</span>
+
+<span class="nc bnc" id="L126" title="All 2 branches missed.">            if (value == null)</span>
+            {
+<span class="nc" id="L128">                LOG.trace(&quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Security]-[Value Is Missing]&quot;);</span>
+<span class="nc" id="L129">                throw new InvalidRequestException(&quot;Invalid Event Value&quot;);</span>
+            }
+
+<span class="nc" id="L132">            Date ajaxCallObjectCreated = new Date();</span>
+<span class="nc" id="L133">            ArrayList&lt;ComponentEventBase&gt; events = getEvents(ajaxCall, ajaxCall.getEventTypeFrom());</span>
+
+<span class="nc" id="L135">            AjaxResponse ajaxResponse = new AjaxResponse();</span>
+
+<span class="nc bnc" id="L137" title="All 2 branches missed.">            for (Iterator&lt;ComponentEventBase&gt; iterator = events.iterator(); iterator.hasNext();)</span>
+            {
+<span class="nc" id="L139">                Event next = (Event) iterator.next();</span>
+<span class="nc" id="L140">                next.fireEvent(ajaxCall, ajaxResponse);</span>
+<span class="nc" id="L141">            }</span>
+
+<span class="nc" id="L143">            fireTime = ajaxCallObjectCreated.getTime() - new Date().getTime();</span>
+<span class="nc" id="L144">            startDate = new Date();</span>
+<span class="nc" id="L145">            output = ajaxResponse.toString();</span>
+<span class="nc" id="L146">            page.buildComponentHierarchy();</span>
+<span class="nc" id="L147">            renderTime = new Date().getTime() - startDate.getTime();</span>
+        }
+<span class="nc" id="L149">        catch (InvalidRequestException ie)</span>
+        {
+<span class="nc" id="L151">            AjaxResponse ajaxResponse = new AjaxResponse();</span>
+<span class="nc" id="L152">            ajaxResponse.setSuccess(false);</span>
+<span class="nc" id="L153">            AjaxResponseReaction arr = new AjaxResponseReaction(&quot;Invalid Request Value&quot;,</span>
+                                                                &quot;A value in the request was found to be incorrect.&lt;br&gt;&quot;
+<span class="nc" id="L155">                                                                + ie.getMessage(), ReactionType.DialogDisplay);</span>
+<span class="nc" id="L156">            arr.setResponseType(AjaxResponseType.Danger);</span>
+<span class="nc" id="L157">            ajaxResponse.addReaction(arr);</span>
+<span class="nc" id="L158">            startDate = new Date();</span>
+<span class="nc" id="L159">            output = ajaxResponse.toString();</span>
+<span class="nc" id="L160">            renderTime = new Date().getTime() - startDate.getTime();</span>
+<span class="nc" id="L161">            LOG.error(&quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Exception]-[Invalid Request]&quot;,ie);</span>
+        }
+<span class="nc" id="L163">        catch (MissingComponentException mce)</span>
+        {
+<span class="nc" id="L165">            AjaxResponse ajaxResponse = new AjaxResponse();</span>
+<span class="nc" id="L166">            ajaxResponse.setSuccess(false);</span>
+<span class="nc" id="L167">            AjaxResponseReaction arr = new AjaxResponseReaction(&quot;Invalid Request Value&quot;,</span>
+                                                                &quot;The specified Component ID does not seem linked to the page.&lt;br&gt;&quot;
+<span class="nc" id="L169">                                                                + mce.getMessage(), ReactionType.DialogDisplay);</span>
+<span class="nc" id="L170">            arr.setResponseType(AjaxResponseType.Danger);</span>
+<span class="nc" id="L171">            ajaxResponse.addReaction(arr);</span>
+<span class="nc" id="L172">            startDate = new Date();</span>
+<span class="nc" id="L173">            output = ajaxResponse.toString();</span>
+<span class="nc" id="L174">            renderTime = new Date().getTime() - startDate.getTime();</span>
+<span class="nc" id="L175">            LOG.error(&quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Exception]-[Missing Component]&quot;,mce);</span>
+        }
+<span class="nc" id="L177">        catch (IOException T)</span>
+        {
+<span class="nc" id="L179">            AjaxResponse ajaxResponse = new AjaxResponse();</span>
+<span class="nc" id="L180">            ajaxResponse.setSuccess(false);</span>
+<span class="nc" id="L181">            AjaxResponseReaction arr = new AjaxResponseReaction(&quot;Unknown Error&quot;,</span>
+                                                                &quot;An AJAX call resulted in an unknown server error&lt;br&gt;&quot;
+<span class="nc" id="L183">                                                                + T.getMessage() + &quot;&lt;br&gt;&quot; + TextUtilities.stackTraceToString(T), ReactionType.DialogDisplay);</span>
+<span class="nc" id="L184">            arr.setResponseType(AjaxResponseType.Danger);</span>
+<span class="nc" id="L185">            ajaxResponse.addReaction(arr);</span>
+<span class="nc" id="L186">            startDate = new Date();</span>
+<span class="nc" id="L187">            output = ajaxResponse.toString();</span>
+<span class="nc" id="L188">            renderTime = new Date().getTime() - startDate.getTime();</span>
+<span class="nc" id="L189">            LOG.error(&quot;Unknown in ajax reply\n&quot;, T);</span>
+        }
+<span class="nc" id="L191">        catch (Exception T)</span>
+        {
+<span class="nc" id="L193">            AjaxResponse ajaxResponse = new AjaxResponse();</span>
+<span class="nc" id="L194">            ajaxResponse.setSuccess(false);</span>
+<span class="nc" id="L195">            AjaxResponseReaction arr = new AjaxResponseReaction(&quot;Unknown Error&quot;,</span>
+                                                                &quot;An AJAX call resulted in an unknown server error&lt;br&gt;&quot;
+<span class="nc" id="L197">                                                                + T.getMessage() + &quot;&lt;br&gt;&quot; + TextUtilities.stackTraceToString(T), ReactionType.DialogDisplay);</span>
+<span class="nc" id="L198">            arr.setResponseType(AjaxResponseType.Danger);</span>
+<span class="nc" id="L199">            ajaxResponse.addReaction(arr);</span>
+<span class="nc" id="L200">            startDate = new Date();</span>
+<span class="nc" id="L201">            output = ajaxResponse.toString();</span>
+<span class="nc" id="L202">            renderTime = new Date().getTime() - startDate.getTime();</span>
+<span class="nc" id="L203">            LOG.error(&quot;Unknown in ajax reply\n&quot;, T);</span>
+        }
+        finally
+        {
+<span class="nc" id="L207">            try</span>
+            {
+<span class="nc" id="L209">                Date dataTransferDate = new Date();</span>
+<span class="nc" id="L210">                response.setContentType(&quot;application/json;charset=UTF-8&quot;);</span>
+<span class="nc" id="L211">                response.setCharacterEncoding(&quot;UTF-8&quot;);</span>
+<span class="nc" id="L212">                response.getWriter().write(output);</span>
+                //LOG.trace(&quot;[Ajax Reply]-[&quot; + output + &quot;]&quot;);
+<span class="nc" id="L214">                long transferTime = new Date().getTime() - dataTransferDate.getTime();</span>
+<span class="nc" id="L215">                LOG.debug(&quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];[EventType]-[&quot; + _eventType + &quot;];[Render Time]-[&quot; + renderTime + &quot;];&quot;</span>
+<span class="nc" id="L216">                        + &quot;[Data Size]-[&quot; + output.length() + &quot;];[Transer Time]-[&quot; + (transferTime) + &quot;];&quot;</span>
+                        + &quot;[Fire Time]-[&quot; + fireTime + &quot;]&quot;);
+            }
+<span class="nc" id="L219">            catch (IOException io)</span>
+            {
+<span class="nc" id="L221">                LOG.fatal(&quot;Unable to send response to client&quot;, io);</span>
+<span class="nc" id="L222">            }</span>
+<span class="nc" id="L223">        }</span>
+<span class="nc" id="L224">    }</span>
+
+    /**
+     * Handles the HTTP &lt;code&gt;POST&lt;/code&gt; method.
+     *
+     * @param request  servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+<span class="nc" id="L238">        super.doGet(request, response);</span>
+<span class="nc" id="L239">        processRequest(request, response);</span>
+<span class="nc" id="L240">    }</span>
+
+    /**
+     * This returns all the event associated with a call
+     *
+     * @param callObject The call object to process
+     * @param eventType  The ComponentEventBase Type to get events for
+     * @return
+     */
+    private ArrayList&lt;ComponentEventBase&gt; getEvents(AjaxCall callObject, EventTypes eventType)
+    {
+<span class="nc" id="L251">        return callObject.getComponent().getEventsFor(eventType);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

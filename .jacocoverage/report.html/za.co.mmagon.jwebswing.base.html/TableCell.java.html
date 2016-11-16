@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TableCell.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">TableCell.java</span></div><h1>TableCell.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html;
+
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.html.attributes.TableCellAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.TableRowChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+
+/**
+ * A Basic Table Cell Component&lt;p&gt;
+ * &lt;p&gt;
+ * Browser Support&lt;p&gt;
+ * &lt;p&gt;
+ * Internet Explorer Firefox Opera Google Chrome Safari&lt;p&gt;
+ * &lt;p&gt;
+ * The td tag is supported in all major browsers.
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * Definition and Usage&lt;p&gt;
+ * &lt;p&gt;
+ * The td tag defines a standard cell in an HTML table.&lt;p&gt;
+ * &lt;p&gt;
+ * An HTML table has two kinds of cells:
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * Header cells - contains header information (created with the th element) Standard cells - contains data (created with the td element)
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * The text in th elements are bold and centered by default.&lt;p&gt;
+ * &lt;p&gt;
+ * The text in td elements are regular and left-aligned by default.
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * Tips and Notes&lt;p&gt;
+ * &lt;p&gt;
+ * Tip: Use the colspan and rowspan attribute to let the content span over multiple columns or rows! Differences Between HTML 4.01 and HTML5&lt;p&gt;
+ * &lt;p&gt;
+ * Some HTML 4.01 attributes are not supported in HTML5.&lt;p&gt;
+ * &lt;p&gt;
+ * @author Marc Magon
+ * @version 1.0
+ * @since 2012/10/01
+ */
+public class TableCell extends Component&lt;GlobalChildren, TableCellAttributes, GlobalFeatures, GlobalEvents, TableCell&gt; implements TableRowChildren&lt;TableCellAttributes&gt;
+{
+
+    /**
+     * Constructs a normal table cell
+     */
+    public TableCell()
+    {
+<span class="nc" id="L54">        this((GlobalChildren) null);</span>
+<span class="nc" id="L55">    }</span>
+
+    /**
+     * Constructs a table cell with the given child.
+     *
+     * @param dataDisplay The component that is a child
+     */
+    public TableCell(GlobalChildren dataDisplay)
+    {
+<span class="fc" id="L64">        super(ComponentTypes.TableCell);</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (dataDisplay != null)</span>
+        {
+<span class="fc" id="L67">            add(GlobalChildren.class.cast(dataDisplay));</span>
+        }
+<span class="fc" id="L69">    }</span>
+
+    /**
+     * A paragraph as a child. Good for testing or Render on Load
+     *
+     * @param dataDisplay
+     */
+    public TableCell(String dataDisplay)
+    {
+<span class="fc" id="L78">        this(new Paragraph(dataDisplay));</span>
+<span class="fc" id="L79">    }</span>
+
+    /**
+     * Returns this table cell column span
+     *
+     * @return Integer of Column Span
+     */
+    public int getColumnSpan()
+    {
+<span class="nc" id="L88">        String s = getAttribute(TableCellAttributes.ColSpan);</span>
+<span class="nc bnc" id="L89" title="All 4 branches missed.">        if (s == null || s.isEmpty())</span>
+        {
+<span class="nc" id="L91">            s = &quot;0&quot;;</span>
+        }
+<span class="nc" id="L93">        return new Integer(s);</span>
+    }
+
+    /**
+     *
+     * @param columnSpan Sets this table cells column span
+     */
+    public void setColumnSpan(int columnSpan)
+    {
+<span class="fc" id="L102">        addAttribute(TableCellAttributes.ColSpan, columnSpan);</span>
+<span class="fc" id="L103">    }</span>
+
+    /**
+     * Gets this table cells row span
+     *
+     * @return Integer of Row Span
+     */
+    public int getRowSpan()
+    {
+
+<span class="nc" id="L113">        return new Integer(getAttribute(TableCellAttributes.RowSpan));</span>
+    }
+
+    /**
+     * Sets this objects row span
+     *
+     * @param rowSpan Integer that is row span
+     */
+    public void setRowSpan(int rowSpan)
+    {
+<span class="nc" id="L123">        addAttribute(TableCellAttributes.RowSpan, Integer.toString(rowSpan));</span>
+<span class="nc" id="L124">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

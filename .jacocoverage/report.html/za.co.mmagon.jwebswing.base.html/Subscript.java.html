@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Subscript.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">Subscript.java</span></div><h1>Subscript.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html;
+
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+
+/**
+ * Definition and Usage
+ * &lt;p&gt;
+ * The &amp;lt;sub&amp;gt; tag defines subscript text.&lt;p&gt; 
+ * Subscript text appears half a character below the normal line, and is sometimes rendered in a smaller font.&lt;p&gt;
+ * Subscript text can be used for chemical
+ * formulas, like H2O.
+ * &lt;p&gt;
+ *
+Tip: Use the &amp;lt;sup&amp;gt; tag to define superscripted text.&lt;p&gt;
+ * Browser Support&lt;p&gt;
+ * Element
+ * &lt;p&gt;
+ * &amp;lt;sub&amp;gt; Yes Yes Yes Yes Yes&lt;p&gt;
+ * Differences Between HTML 4.01 and HTML5&lt;p&gt;
+ * &lt;p&gt;
+ * NONE.&lt;p&gt;
+ * @author Marc Magon
+ * @since forever
+ * @version 1.0
+ */
+public class Subscript extends Component&lt;ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, Subscript&gt; implements NoNewLineBeforeClosingTag,NoNewLineForRawText
+{
+    /**
+     * Constructs an empty sub script
+     */
+    public Subscript()
+    {
+<span class="nc" id="L41">        this(null);</span>
+<span class="nc" id="L42">    }</span>
+
+    /**
+     * Constructs a new subscript section with the relevant text as raw text
+     * @param text 
+     */
+    public Subscript(String text)
+    {
+<span class="fc" id="L50">        super(&quot;sub&quot;, ComponentTypes.Subscript);</span>
+<span class="fc" id="L51">        setText(text);</span>
+<span class="fc" id="L52">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

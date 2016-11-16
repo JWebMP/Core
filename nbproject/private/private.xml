@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>test/za/co/mmagon/jwebswing/components/jquery/bootstrap/themes/sbadmin2/chat/SB2ChatLeftMessageTest.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>39</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group name="JW Group">
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/extendedcomponents/graph/JWBarGraph.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/test/za/co/mmagon/jwebswing/htmlbuilder/javascript/JavaScriptPartTest.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/extendedcomponents/layout/JWLayout.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/extendedcomponents/layout/JWLayoutOptions.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/extendedcomponents/layout/JWLayoutDefaultOptions.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/src/za/co/mmagon/jwebswing/base/Page.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/src/za/co/mmagon/jwebswing/base/html/Body.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/javascript/JavaScriptPart.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/extendedcomponents/graph/JWGraphFeature.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/extendedcomponents/graph/renderers/options/JWGraphOptions.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/extendedcomponents/tree/JWRadialReingoldTilfordTree.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/extendedcomponents/tree/JWRadialReingoldTilfordTreeOptions.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/src/META-INF/resources/javascript/jquery.d3/radialReingoldTilfordTree.js</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/extendedcomponents/tree/JWReingoldTilfordTree.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/extendedcomponents/tree/JWRadialReingoldTilfordTreeFeature.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/extendedcomponents/tree/JWRadialTreeItem.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/src/za/co/mmagon/jwebswing/base/html/Div.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/extendedcomponents/layout/JWLayoutDiv.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/src/za/co/mmagon/jwebswing/base/Component.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/javascript/streamer/Loader.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/test/za/co/mmagon/jwebswing/base/html/BoldTest.java</file>
+            <file>file:/C:/Users/AngelFire/OneDrive/JWebSwing/JWebSwing/test/za/co/mmagon/jwebswing/base/html/BodyTest.java</file>
+        </group>
+        <group name="Yum"/>
+        <group>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/dynamicsourcecode/DynamicSourceCodeFeature.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/components/dynamicsourcecode/DynamicSourceCodeTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jqxWidgets/buttons/JQXButtonFeature.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/modernizr/ModernizrDto.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/META-INF/resources/dynamicSourceCodeFetcher/DynamicSourceCodeLoad.js</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/dynamicsourcecode/DynamicSourceCode.java</file>
+        </group>
+        <group name="JWebSwing">
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jqueryLayout/layout/JQLayoutDiv.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jqueryLayout/layout/JQLayout.java</file>
+        </group>
+    </open-files>
+</project-private>

@@ -1,0 +1,806 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQUISortableOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqueryUI.sortable</a> &gt; <span class="el_source">JQUISortableOptions.java</span></div><h1>JQUISortableOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqueryUI.sortable;
+
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.jqueryUI.draggable.Axis;
+import za.co.mmagon.jwebswing.components.jqueryUI.position.Position;
+import za.co.mmagon.jwebswing.htmlbuilder.css.displays.Cursors;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
+
+/**
+ * The jQuery UI Sortable plugin makes selected elements sortable by dragging
+ * with the mouse.
+ * &lt;p&gt;
+ * Note: In order to sort table rows, the tbody must be made sortable, not the
+ * table.
+ * &lt;p&gt;
+ * @author GedMarc
+ * @since Mar 17, 2015
+ * @version 1.0
+ * &lt;p&gt;
+ * &lt;p&gt;
+ */
+public class JQUISortableOptions extends JavaScriptPart
+{
+
+    /**
+     * Constructs a new instance of the JWSortable Options
+     */
+    public JQUISortableOptions()
+<span class="nc" id="L47">    {</span>
+
+<span class="nc" id="L49">    }</span>
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Defines where the helper that moves with the mouse is being appended to
+     * during the drag (for example, to resolve overlap/zIndex issues).
+     * Multiple types supported:
+     * &lt;p&gt;
+     * jQuery: A jQuery object containing the element to append the helper to.
+     * Element: The element to append the helper to.
+     * Selector: A selector specifying which element to append the helper to.
+     * String: The string &quot;parent&quot; will cause the helper to be a sibling of the
+     * sortable item
+     */
+    private String appendTo;
+    /**
+     * If defined, the items can be dragged only horizontally or vertically.
+     * Possible values: &quot;x&quot;, &quot;y&quot;.
+     */
+    private Axis axis;
+    /**
+     * Prevents sorting if you start on elements matching the selector.
+     */
+    private ComponentTypes cancel;
+    /**
+     * A selector of other sortable elements that the items from this list
+     * should be connected to.
+     * This is a one-way relationship, if you want the
+     * items to be connected in both directions, the connectWith option must be
+     * set on both sortable elements.
+     */
+    private String connectWith;
+    /**
+     *
+     * &lt;p&gt;
+     * Defines a bounding box that the sortable items are constrained to while
+     * dragging.
+     * &lt;p&gt;
+     * Note: The element specified for containment must have a calculated width
+     * and height (though it need not be explicit). For example, if you have
+     * float: left sortable children and specify containment: &quot;parent&quot; be sure
+     * to have float: left on the sortable/parent container as well or it will
+     * have height: 0, causing undefined behavior.
+     * &lt;p&gt;
+     */
+    private String containment;
+    /**
+     * Defines the cursor that is being shown while sorting.
+     */
+    private Cursors cursor;
+    /**
+     * Moves the sorting element or helper so the cursor always appears to drag
+     * from the same position. Coordinates can be given as a hash using a
+     * combination of one or two keys: { top, left, right, bottom }.
+     */
+    private Position cursorAt;
+    /**
+     * Time in milliseconds to define when the sorting should start. Adding a
+     * delay helps preventing unwanted drags when clicking on an element.
+     */
+    private Integer delay;
+    /**
+     * Disables the sortable if set to true.
+     */
+    private Boolean disabled;
+    /**
+     * Tolerance, in pixels, for when sorting should start. If specified,
+     * sorting will not start until after mouse is dragged beyond distance. Can
+     * be used to allow for clicks on elements within a handle.
+     */
+    private Integer distance;
+    /**
+     * If false, items from this sortable can't be dropped on an empty connect
+     * sortable (see the connectWith option.
+     */
+    private Boolean dropOnEmpty;
+    /**
+     * If true, forces the helper to have a size.
+     * Code examples:
+     * &lt;p&gt;
+     * Initialize the sortable with the forceHelperSize option specified:
+     */
+    private Boolean forceHelperSize;
+    /**
+     * If true, forces the placeholder to have a size.
+     */
+    private Integer forcePlaceholderSize;
+    /**
+     * Snaps the sorting element or helper to a grid, every x and y pixels.
+     * Array values: [ x, y ].
+     */
+    private Integer[] grid;
+    /**
+     * Restricts sort start click to the specified element.
+     */
+    private String handle;
+    /**
+     * Default: &quot;original&quot;
+     * Allows for a helper element to be used for dragging display.
+     */
+    private SortableHelpers helper;
+    /**
+     * Specifies which items inside the element should be sortable.
+     */
+    private ComponentTypes items;
+    /**
+     * Defines the opacity of the helper while sorting. From 0.01 to 1.
+     */
+    private Double opacity;
+    /**
+     * A class name that gets applied to the otherwise white space.
+     */
+    private String placeholder;
+    /**
+     * Whether the sortable items should revert to their new positions using a
+     * smooth animation.
+     * Multiple types supported:
+     * &lt;p&gt;
+     * Boolean: When set to true, the items will animate with the default
+     * duration.
+     * Number: The duration for the animation, in milliseconds.
+     * &lt;p&gt;
+     */
+    private Boolean revert;
+    /**
+     * If set to true, the page scrolls when coming to an edge.
+     */
+    private Boolean scroll;
+    /**
+     * Defines how near the mouse must be to an edge to start scrolling.
+     */
+    private Integer scrollSensitivity;
+    /**
+     * Default: 20
+     * The speed at which the window should scroll once the mouse pointer gets
+     * within the scrollSensitivity distance.
+     */
+    private Integer scrollSpeed;
+    /**
+     * Specifies which mode to use for testing whether the item being moved is
+     * hovering over another item. Possible values:
+     * &lt;p&gt;
+     * &quot;intersect&quot;: The item overlaps the other item by at least 50%.
+     * &quot;pointer&quot;: The mouse pointer overlaps the other item.
+     * &lt;p&gt;
+     */
+    private Integer tolerance;
+    /**
+     * &lt;p&gt;
+     * Z-index for element/helper while being sorted.
+     * Default: 1000
+     */
+    private Integer zIndex;
+
+    /**
+     * Defines where the helper that moves with the mouse is being appended to
+     * during the drag (for example, to resolve overlap/zIndex issues).
+     * Multiple types supported:
+     * &lt;p&gt;
+     * jQuery: A jQuery object containing the element to append the helper to.
+     * Element: The element to append the helper to.
+     * Selector: A selector specifying which element to append the helper to.
+     * String: The string &quot;parent&quot; will cause the helper to be a sibling of the
+     * sortable item
+     * &lt;p&gt;
+     * @return
+     */
+    public String getAppendTo()
+    {
+<span class="nc" id="L219">        return appendTo;</span>
+    }
+
+    /**
+     * Defines where the helper that moves with the mouse is being appended to
+     * during the drag (for example, to resolve overlap/zIndex issues).
+     * Multiple types supported:
+     * &lt;p&gt;
+     * jQuery: A jQuery object containing the element to append the helper to.
+     * Element: The element to append the helper to.
+     * Selector: A selector specifying which element to append the helper to.
+     * String: The string &quot;parent&quot; will cause the helper to be a sibling of the
+     * sortable item
+     * &lt;p&gt;
+     * @param appendTo
+     */
+    public void setAppendTo(Component appendTo)
+    {
+<span class="nc" id="L237">        this.appendTo = appendTo.getID(true);</span>
+<span class="nc" id="L238">    }</span>
+
+    /**
+     * If defined, the items can be dragged only horizontally or vertically.
+     * Possible values: &quot;x&quot;, &quot;y&quot;.
+     * &lt;p&gt;
+     * @return
+     */
+    public Axis getAxis()
+    {
+<span class="nc" id="L248">        return axis;</span>
+    }
+
+    /**
+     * If defined, the items can be dragged only horizontally or vertically.
+     * Possible values: &quot;x&quot;, &quot;y&quot;.
+     * &lt;p&gt;
+     * @param axis
+     */
+    public void setAxis(Axis axis)
+    {
+<span class="nc" id="L259">        this.axis = axis;</span>
+<span class="nc" id="L260">    }</span>
+
+    /**
+     * Prevents sorting if you start on elements matching the selector.
+     * &lt;p&gt;
+     * @return
+     */
+    public ComponentTypes getCancel()
+    {
+<span class="nc" id="L269">        return cancel;</span>
+    }
+
+    /**
+     * Prevents sorting if you start on elements matching the selector.
+     * &lt;p&gt;
+     * @param cancel
+     */
+    public void setCancel(ComponentTypes cancel)
+    {
+<span class="nc" id="L279">        this.cancel = cancel;</span>
+<span class="nc" id="L280">    }</span>
+
+    /**
+     * A selector of other sortable elements that the items from this list
+     * should be connected to.
+     * This is a one-way relationship, if you want the
+     * items to be connected in both directions, the connectWith option must be
+     * set on both sortable elements.
+     * &lt;p&gt;
+     * @return
+     */
+    public String getConnectWith()
+    {
+<span class="nc" id="L293">        return connectWith;</span>
+    }
+
+    /**
+     * A selector of other sortable elements that the items from this list
+     * should be connected to.
+     * This is a one-way relationship, if you want the
+     * items to be connected in both directions, the connectWith option must be
+     * set on both sortable elements.
+     * &lt;p&gt;
+     * @param connectWith
+     */
+    public void setConnectWith(Component connectWith)
+    {
+<span class="nc" id="L307">        this.connectWith = connectWith.getID(true);</span>
+<span class="nc" id="L308">    }</span>
+
+    /**
+     *
+     * &lt;p&gt;
+     * Defines a bounding box that the sortable items are constrained to while
+     * dragging.
+     * &lt;p&gt;
+     * Note: The element specified for containment must have a calculated width
+     * and height (though it need not be explicit). For example, if you have
+     * float: left sortable children and specify containment: &quot;parent&quot; be sure
+     * to have float: left on the sortable/parent container as well or it will
+     * have height: 0, causing undefined behavior.
+     * &lt;p&gt;
+     * @return
+     */
+    public String getContainment()
+    {
+<span class="nc" id="L326">        return containment;</span>
+    }
+
+    /**
+     *
+     * &lt;p&gt;
+     * Defines a bounding box that the sortable items are constrained to while
+     * dragging.
+     * &lt;p&gt;
+     * Note: The element specified for containment must have a calculated width
+     * and height (though it need not be explicit). For example, if you have
+     * float: left sortable children and specify containment: &quot;parent&quot; be sure
+     * to have float: left on the sortable/parent container as well or it will
+     * have height: 0, causing undefined behavior.
+     * &lt;p&gt;
+     * @param containment
+     */
+    public void setContainment(Component containment)
+    {
+<span class="nc" id="L345">        this.containment = containment.getID(true);</span>
+<span class="nc" id="L346">    }</span>
+
+    /**
+     * Defines the cursor that is being shown while sorting.
+     * &lt;p&gt;
+     * @return
+     */
+    public Cursors getCursor()
+    {
+<span class="nc" id="L355">        return cursor;</span>
+    }
+
+    /**
+     * Defines the cursor that is being shown while sorting.
+     * &lt;p&gt;
+     * @param cursor
+     */
+    public void setCursor(Cursors cursor)
+    {
+<span class="nc" id="L365">        this.cursor = cursor;</span>
+<span class="nc" id="L366">    }</span>
+
+    /**
+     * Moves the sorting element or helper so the cursor always appears to drag
+     * from the same position. Coordinates can be given as a hash using a
+     * combination of one or two keys: { top, left, right, bottom }.
+     * TODO Redo this implementation
+     * &lt;p&gt;
+     * @return
+     */
+    public Position getCursorAt()
+    {
+<span class="nc" id="L378">        return cursorAt;</span>
+    }
+
+    /**
+     * Moves the sorting element or helper so the cursor always appears to drag
+     * from the same position. Coordinates can be given as a hash using a
+     * combination of one or two keys: { top, left, right, bottom }.
+     * TODO Redo this implementation
+     * &lt;p&gt;
+     * @param cursorAt
+     */
+    public void setCursorAt(Position cursorAt)
+    {
+<span class="nc" id="L391">        this.cursorAt = cursorAt;</span>
+<span class="nc" id="L392">    }</span>
+
+    /**
+     * Time in milliseconds to define when the sorting should start. Adding a
+     * delay helps preventing unwanted drags when clicking on an element.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getDelay()
+    {
+<span class="nc" id="L402">        return delay;</span>
+    }
+
+    /**
+     * Time in milliseconds to define when the sorting should start. Adding a
+     * delay helps preventing unwanted drags when clicking on an element.
+     * &lt;p&gt;
+     * @param delay
+     */
+    public void setDelay(Integer delay)
+    {
+<span class="nc" id="L413">        this.delay = delay;</span>
+<span class="nc" id="L414">    }</span>
+
+    /**
+     * Disables the sortable if set to true.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getDisabled()
+    {
+<span class="nc" id="L423">        return disabled;</span>
+    }
+
+    /**
+     * Disables the sortable if set to true.
+     * &lt;p&gt;
+     * @param disabled
+     */
+    public void setDisabled(Boolean disabled)
+    {
+<span class="nc" id="L433">        this.disabled = disabled;</span>
+<span class="nc" id="L434">    }</span>
+
+    /**
+     * Tolerance, in pixels, for when sorting should start. If specified,
+     * sorting will not start until after mouse is dragged beyond distance. Can
+     * be used to allow for clicks on elements within a handle.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getDistance()
+    {
+<span class="nc" id="L445">        return distance;</span>
+    }
+
+    /**
+     * Tolerance, in pixels, for when sorting should start. If specified,
+     * sorting will not start until after mouse is dragged beyond distance. Can
+     * be used to allow for clicks on elements within a handle.
+     * &lt;p&gt;
+     * @param distance
+     */
+    public void setDistance(Integer distance)
+    {
+<span class="nc" id="L457">        this.distance = distance;</span>
+<span class="nc" id="L458">    }</span>
+
+    /**
+     * If false, items from this sortable can't be dropped on an empty connect
+     * sortable (see the connectWith option.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getDropOnEmpty()
+    {
+<span class="nc" id="L468">        return dropOnEmpty;</span>
+    }
+
+    /**
+     * If false, items from this sortable can't be dropped on an empty connect
+     * sortable (see the connectWith option.
+     * &lt;p&gt;
+     * @param dropOnEmpty
+     */
+    public void setDropOnEmpty(Boolean dropOnEmpty)
+    {
+<span class="nc" id="L479">        this.dropOnEmpty = dropOnEmpty;</span>
+<span class="nc" id="L480">    }</span>
+
+    /**
+     * If true, forces the helper to have a size.
+     * Code examples:
+     * &lt;p&gt;
+     * Initialize the sortable with the forceHelperSize option specified:
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getForceHelperSize()
+    {
+<span class="nc" id="L492">        return forceHelperSize;</span>
+    }
+
+    /**
+     * If true, forces the helper to have a size.
+     * Code examples:
+     * &lt;p&gt;
+     * Initialize the sortable with the forceHelperSize option specified:
+     * &lt;p&gt;
+     * @param forceHelperSize
+     */
+    public void setForceHelperSize(Boolean forceHelperSize)
+    {
+<span class="nc" id="L505">        this.forceHelperSize = forceHelperSize;</span>
+<span class="nc" id="L506">    }</span>
+
+    /**
+     * If true, forces the placeholder to have a size.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getForcePlaceholderSize()
+    {
+<span class="nc" id="L515">        return forcePlaceholderSize;</span>
+    }
+
+    /**
+     * If true, forces the placeholder to have a size.
+     * &lt;p&gt;
+     * @param forcePlaceholderSize
+     */
+    public void setForcePlaceholderSize(Integer forcePlaceholderSize)
+    {
+<span class="nc" id="L525">        this.forcePlaceholderSize = forcePlaceholderSize;</span>
+<span class="nc" id="L526">    }</span>
+
+    /**
+     * Snaps the sorting element or helper to a grid, every x and y pixels.
+     * Array values: [ x, y ].
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer[] getGrid()
+    {
+<span class="nc" id="L536">        return grid;</span>
+    }
+
+    /**
+     * Snaps the sorting element or helper to a grid, every x and y pixels.
+     * Array values: [ x, y ].
+     * &lt;p&gt;
+     * @param grid
+     */
+    public void setGrid(Integer[] grid)
+    {
+<span class="nc" id="L547">        this.grid = grid;</span>
+<span class="nc" id="L548">    }</span>
+
+    /**
+     * Restricts sort start click to the specified element.
+     * &lt;p&gt;
+     * @return
+     */
+    public String getHandle()
+    {
+<span class="nc" id="L557">        return handle;</span>
+    }
+
+    /**
+     * Restricts sort start click to the specified element.
+     * &lt;p&gt;
+     * @param handle
+     */
+    public void setHandle(Component handle)
+    {
+<span class="nc" id="L567">        this.handle = handle.getID(true);</span>
+<span class="nc" id="L568">    }</span>
+
+    /**
+     * Default: &quot;original&quot;
+     * Allows for a helper element to be used for dragging display.
+     * &lt;p&gt;
+     * @return
+     */
+    public SortableHelpers getHelper()
+    {
+<span class="nc" id="L578">        return helper;</span>
+    }
+
+    /**
+     * Default: &quot;original&quot;
+     * Allows for a helper element to be used for dragging display.
+     * &lt;p&gt;
+     * @param helper
+     */
+    public void setHelper(SortableHelpers helper)
+    {
+<span class="nc" id="L589">        this.helper = helper;</span>
+<span class="nc" id="L590">    }</span>
+
+    /**
+     * Specifies which items inside the element should be sortable.
+     * &lt;p&gt;
+     * @return
+     */
+    public ComponentTypes getItems()
+    {
+<span class="nc" id="L599">        return items;</span>
+    }
+
+    /**
+     * Specifies which items inside the element should be sortable.
+     * &lt;p&gt;
+     * @param items
+     */
+    public void setItems(ComponentTypes items)
+    {
+<span class="nc" id="L609">        this.items = items;</span>
+<span class="nc" id="L610">    }</span>
+
+    /**
+     * Defines the opacity of the helper while sorting. From 0.01 to 1.
+     * &lt;p&gt;
+     * @return
+     */
+    public Double getOpacity()
+    {
+<span class="nc" id="L619">        return opacity;</span>
+    }
+
+    /**
+     * Defines the opacity of the helper while sorting. From 0.01 to 1.
+     * &lt;p&gt;
+     * @param opacity
+     */
+    public void setOpacity(Double opacity)
+    {
+<span class="nc" id="L629">        this.opacity = opacity;</span>
+<span class="nc" id="L630">    }</span>
+
+    /**
+     * A class name that gets applied to the otherwise white space.
+     * &lt;p&gt;
+     * @return
+     */
+    public String getPlaceholder()
+    {
+<span class="nc" id="L639">        return placeholder;</span>
+    }
+
+    /**
+     * A class name that gets applied to the otherwise white space.
+     * &lt;p&gt;
+     * @param placeholder
+     */
+    public void setPlaceholder(String placeholder)
+    {
+<span class="nc" id="L649">        this.placeholder = placeholder;</span>
+<span class="nc" id="L650">    }</span>
+
+    /**
+     * Whether the sortable items should revert to their new positions using a
+     * smooth animation.
+     * Multiple types supported:
+     * &lt;p&gt;
+     * Boolean: When set to true, the items will animate with the default
+     * duration.
+     * Number: The duration for the animation, in milliseconds.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getRevert()
+    {
+<span class="nc" id="L665">        return revert;</span>
+    }
+
+    /**
+     * Whether the sortable items should revert to their new positions using a
+     * smooth animation.
+     * Multiple types supported:
+     * &lt;p&gt;
+     * Boolean: When set to true, the items will animate with the default
+     * duration.
+     * Number: The duration for the animation, in milliseconds.
+     * &lt;p&gt;
+     * @param revert
+     */
+    public void setRevert(Boolean revert)
+    {
+<span class="nc" id="L681">        this.revert = revert;</span>
+<span class="nc" id="L682">    }</span>
+
+    /**
+     * If set to true, the page scrolls when coming to an edge.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getScroll()
+    {
+<span class="nc" id="L691">        return scroll;</span>
+    }
+
+    /**
+     * If set to true, the page scrolls when coming to an edge.
+     * &lt;p&gt;
+     * @param scroll
+     */
+    public void setScroll(Boolean scroll)
+    {
+<span class="nc" id="L701">        this.scroll = scroll;</span>
+<span class="nc" id="L702">    }</span>
+
+    /**
+     * Defines how near the mouse must be to an edge to start scrolling.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getScrollSensitivity()
+    {
+<span class="nc" id="L711">        return scrollSensitivity;</span>
+    }
+
+    /**
+     * Defines how near the mouse must be to an edge to start scrolling.
+     * &lt;p&gt;
+     * @param scrollSensitivity
+     */
+    public void setScrollSensitivity(Integer scrollSensitivity)
+    {
+<span class="nc" id="L721">        this.scrollSensitivity = scrollSensitivity;</span>
+<span class="nc" id="L722">    }</span>
+
+    /**
+     * Default: 20
+     * The speed at which the window should scroll once the mouse pointer gets
+     * within the scrollSensitivity distance.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getScrollSpeed()
+    {
+<span class="nc" id="L733">        return scrollSpeed;</span>
+    }
+
+    /**
+     * Default: 20
+     * The speed at which the window should scroll once the mouse pointer gets
+     * within the scrollSensitivity distance.
+     * &lt;p&gt;
+     * @param scrollSpeed
+     */
+    public void setScrollSpeed(Integer scrollSpeed)
+    {
+<span class="nc" id="L745">        this.scrollSpeed = scrollSpeed;</span>
+<span class="nc" id="L746">    }</span>
+
+    /**
+     * Specifies which mode to use for testing whether the item being moved is
+     * hovering over another item. Possible values:
+     * &lt;p&gt;
+     * &quot;intersect&quot;: The item overlaps the other item by at least 50%.
+     * &quot;pointer&quot;: The mouse pointer overlaps the other item.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getTolerance()
+    {
+<span class="nc" id="L759">        return tolerance;</span>
+    }
+
+    /**
+     * Specifies which mode to use for testing whether the item being moved is
+     * hovering over another item. Possible values:
+     * &lt;p&gt;
+     * &quot;intersect&quot;: The item overlaps the other item by at least 50%.
+     * &quot;pointer&quot;: The mouse pointer overlaps the other item.
+     * &lt;p&gt;
+     * @param tolerance
+     */
+    public void setTolerance(Integer tolerance)
+    {
+<span class="nc" id="L773">        this.tolerance = tolerance;</span>
+<span class="nc" id="L774">    }</span>
+
+    /**
+     * &lt;p&gt;
+     * Z-index for element/helper while being sorted.
+     * Default: 1000
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getzIndex()
+    {
+<span class="nc" id="L785">        return zIndex;</span>
+    }
+
+    /**
+     * &lt;p&gt;
+     * Z-index for element/helper while being sorted.
+     * Default: 1000
+     * &lt;p&gt;
+     * @param zIndex
+     */
+    public void setzIndex(Integer zIndex)
+    {
+<span class="nc" id="L797">        this.zIndex = zIndex;</span>
+<span class="nc" id="L798">    }</span>
+
+    @Override
+    public JavascriptPartType getJavascriptType()
+    {
+<span class="nc" id="L803">        return JavascriptPartType.Javascript;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

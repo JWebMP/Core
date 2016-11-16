@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JWReingoldTilfordTreeOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.d3.reingoldTilfordTree</a> &gt; <span class="el_source">JWReingoldTilfordTreeOptions.java</span></div><h1>JWReingoldTilfordTreeOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.d3.reingoldTilfordTree;
+
+import za.co.mmagon.jwebswing.components.d3.radialReingoldTilfordTree.JWRadialTreeItem;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
+
+/**
+ * The JavaScript part for the radial Reingold-Tilford tree
+ * &lt;p&gt;
+ * @author Marc Magon
+ * @since 29 Aug 2015
+ * @version 1.0
+ */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class JWReingoldTilfordTreeOptions extends JavaScriptPart
+{
+
+    /**
+     * Version 1
+     */
+    private static final long serialVersionUID = 1L;
+    /**
+     * The diameter
+     */
+    private Integer diameter;
+    /**
+     * The root node of the tree
+     */
+    private JWRadialTreeItem data;
+    private Integer marginLeft;
+    private Integer marginRight;
+    private Integer marginTop;
+    private Integer marginBottom;
+    /**
+     * The animation speed
+     */
+    private Integer animationSpeed;
+    /**
+     * The maximum amount of degrees
+     */
+    private Integer maximumDegrees;
+
+    private JWReingoldTilfordTreeNodeOptions nodeMarker;
+    private JWReingoldTilfordTreeNodeOptions nodeWithChildrenMarker;
+    private JWReingoldTilfordTreeNodeOptions nodeEnterMarker;
+    private JWReingoldTilfordTreeNodeOptions nodeExitMarker;
+    private JWReingoldTilfordTreeTextOptions nodeText;
+    private JWReingoldTilfordTreeTextOptions nodeEnterText;
+    private JWReingoldTilfordTreeTextOptions nodeExitText;
+    private JWReingoldTilfordTreeLinkOptions nodeLink;
+    private JWReingoldTilfordTreeLinkOptions nodeEnterLink;
+    private JWReingoldTilfordTreeLinkOptions nodeExitLink;
+
+    public JWReingoldTilfordTreeOptions()
+<span class="nc" id="L72">    {</span>
+
+<span class="nc" id="L74">    }</span>
+
+    /**
+     * Get the diameter of the tree
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getDiameter()
+    {
+<span class="nc" id="L83">        return diameter;</span>
+    }
+
+    /**
+     * Set the diameter of the tree
+     * &lt;p&gt;
+     * @param diameter
+     */
+    public void setDiameter(Integer diameter)
+    {
+<span class="nc" id="L93">        this.diameter = diameter;</span>
+<span class="nc" id="L94">    }</span>
+
+    /**
+     * Gets the root node with all the children.
+     * Never null for data
+     * &lt;p&gt;
+     * @return
+     */
+    public JWRadialTreeItem getData()
+    {
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        if (data == null)</span>
+        {
+<span class="nc" id="L106">            data = new JWRadialTreeItem();</span>
+        }
+<span class="nc" id="L108">        return data;</span>
+    }
+
+    /**
+     * Sets the data associated with this tree
+     * &lt;p&gt;
+     * @param data
+     */
+    public void setData(JWRadialTreeItem data)
+    {
+<span class="nc" id="L118">        this.data = data;</span>
+<span class="nc" id="L119">    }</span>
+
+    @Override
+    public JavascriptPartType getJavascriptType()
+    {
+<span class="nc" id="L124">        return JavascriptPartType.Javascript;</span>
+    }
+
+    /**
+     * Gets the left margin specified
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getMarginLeft()
+    {
+<span class="nc" id="L134">        return marginLeft;</span>
+    }
+
+    /**
+     * Sets the left margin
+     * &lt;p&gt;
+     * @param marginLeft
+     */
+    public void setMarginLeft(Integer marginLeft)
+    {
+<span class="nc" id="L144">        this.marginLeft = marginLeft;</span>
+<span class="nc" id="L145">    }</span>
+
+    /**
+     * Gets the right margin
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getMarginRight()
+    {
+<span class="nc" id="L154">        return marginRight;</span>
+    }
+
+    /**
+     * Sets the right margin
+     * &lt;p&gt;
+     * @param marginRight
+     */
+    public void setMarginRight(Integer marginRight)
+    {
+<span class="nc" id="L164">        this.marginRight = marginRight;</span>
+<span class="nc" id="L165">    }</span>
+
+    /**
+     * Gets the margin top
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getMarginTop()
+    {
+<span class="nc" id="L174">        return marginTop;</span>
+    }
+
+    /**
+     * Sets the margin top
+     * &lt;p&gt;
+     * @param marginTop
+     */
+    public void setMarginTop(Integer marginTop)
+    {
+<span class="nc" id="L184">        this.marginTop = marginTop;</span>
+<span class="nc" id="L185">    }</span>
+
+    /**
+     * Gets the margin bottom
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getMarginBottom()
+    {
+<span class="nc" id="L194">        return marginBottom;</span>
+    }
+
+    /**
+     * Sets the margin bottom
+     * &lt;p&gt;
+     * @param marginBottom
+     */
+    public void setMarginBottom(Integer marginBottom)
+    {
+<span class="nc" id="L204">        this.marginBottom = marginBottom;</span>
+<span class="nc" id="L205">    }</span>
+
+    /**
+     * Gets the animation speed
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getAnimationSpeed()
+    {
+<span class="nc" id="L214">        return animationSpeed;</span>
+    }
+
+    /**
+     * Sets the animation speed
+     * &lt;p&gt;
+     * @param animationSpeed
+     */
+    public void setAnimationSpeed(Integer animationSpeed)
+    {
+<span class="nc" id="L224">        this.animationSpeed = animationSpeed;</span>
+<span class="nc" id="L225">    }</span>
+
+    /**
+     * Return the available amount of degrees to render in
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getMaximumDegrees()
+    {
+<span class="nc" id="L234">        return maximumDegrees;</span>
+    }
+
+    /**
+     * Sets the maximum amount of degrees to render in
+     * &lt;p&gt;
+     * @param maximumDegrees
+     */
+    public void setMaximumDegrees(Integer maximumDegrees)
+    {
+<span class="nc" id="L244">        this.maximumDegrees = maximumDegrees;</span>
+<span class="nc" id="L245">    }</span>
+
+    public JWReingoldTilfordTreeNodeOptions getNodeMarker()
+    {
+<span class="nc bnc" id="L249" title="All 2 branches missed.">        if (nodeMarker == null)</span>
+        {
+<span class="nc" id="L251">            nodeMarker = new JWReingoldTilfordTreeNodeOptions();</span>
+        }
+<span class="nc" id="L253">        return nodeMarker;</span>
+    }
+
+    public void setNodeMarker(JWReingoldTilfordTreeNodeOptions nodeMarker)
+    {
+<span class="nc" id="L258">        this.nodeMarker = nodeMarker;</span>
+<span class="nc" id="L259">    }</span>
+
+    public JWReingoldTilfordTreeNodeOptions getNodeWithChildrenMarker()
+    {
+<span class="nc bnc" id="L263" title="All 2 branches missed.">        if (nodeWithChildrenMarker == null)</span>
+        {
+<span class="nc" id="L265">            nodeWithChildrenMarker = new JWReingoldTilfordTreeNodeOptions();</span>
+        }
+<span class="nc" id="L267">        return nodeWithChildrenMarker;</span>
+    }
+
+    public void setNodeWithChildrenMarker(JWReingoldTilfordTreeNodeOptions nodeWithChildrenMarker)
+    {
+<span class="nc" id="L272">        this.nodeWithChildrenMarker = nodeWithChildrenMarker;</span>
+<span class="nc" id="L273">    }</span>
+
+    public JWReingoldTilfordTreeNodeOptions getNodeEnterMarker()
+    {
+<span class="nc bnc" id="L277" title="All 2 branches missed.">        if (nodeEnterMarker == null)</span>
+        {
+<span class="nc" id="L279">            nodeEnterMarker = new JWReingoldTilfordTreeNodeOptions();</span>
+        }
+<span class="nc" id="L281">        return nodeEnterMarker;</span>
+    }
+
+    public void setNodeEnterMarker(JWReingoldTilfordTreeNodeOptions nodeEnterMarker)
+    {
+<span class="nc" id="L286">        this.nodeEnterMarker = nodeEnterMarker;</span>
+<span class="nc" id="L287">    }</span>
+
+    public JWReingoldTilfordTreeNodeOptions getNodeExitMarker()
+    {
+<span class="nc bnc" id="L291" title="All 2 branches missed.">        if (nodeExitMarker == null)</span>
+        {
+<span class="nc" id="L293">            nodeExitMarker = new JWReingoldTilfordTreeNodeOptions();</span>
+        }
+<span class="nc" id="L295">        return nodeExitMarker;</span>
+    }
+
+    public void setNodeExitMarker(JWReingoldTilfordTreeNodeOptions nodeExitMarker)
+    {
+<span class="nc" id="L300">        this.nodeExitMarker = nodeExitMarker;</span>
+<span class="nc" id="L301">    }</span>
+
+    public JWReingoldTilfordTreeTextOptions getNodeText()
+    {
+<span class="nc bnc" id="L305" title="All 2 branches missed.">        if (nodeText == null)</span>
+        {
+<span class="nc" id="L307">            nodeText = new JWReingoldTilfordTreeTextOptions();</span>
+        }
+<span class="nc" id="L309">        return nodeText;</span>
+    }
+
+    public void setNodeText(JWReingoldTilfordTreeTextOptions nodeText)
+    {
+<span class="nc" id="L314">        this.nodeText = nodeText;</span>
+<span class="nc" id="L315">    }</span>
+
+    public JWReingoldTilfordTreeTextOptions getNodeEnterText()
+    {
+<span class="nc bnc" id="L319" title="All 2 branches missed.">        if (nodeEnterText == null)</span>
+        {
+<span class="nc" id="L321">            nodeEnterText = new JWReingoldTilfordTreeTextOptions();</span>
+        }
+<span class="nc" id="L323">        return nodeEnterText;</span>
+    }
+
+    public void setNodeEnterText(JWReingoldTilfordTreeTextOptions nodeEnterText)
+    {
+<span class="nc" id="L328">        this.nodeEnterText = nodeEnterText;</span>
+<span class="nc" id="L329">    }</span>
+
+    public JWReingoldTilfordTreeTextOptions getNodeExitText()
+    {
+<span class="nc bnc" id="L333" title="All 2 branches missed.">        if (nodeExitText == null)</span>
+        {
+<span class="nc" id="L335">            nodeExitText = new JWReingoldTilfordTreeTextOptions();</span>
+        }
+<span class="nc" id="L337">        return nodeExitText;</span>
+    }
+
+    public void setNodeExitText(JWReingoldTilfordTreeTextOptions nodeExitText)
+    {
+<span class="nc" id="L342">        this.nodeExitText = nodeExitText;</span>
+<span class="nc" id="L343">    }</span>
+
+    public JWReingoldTilfordTreeLinkOptions getNodeLink()
+    {
+<span class="nc bnc" id="L347" title="All 2 branches missed.">        if (nodeLink == null)</span>
+        {
+<span class="nc" id="L349">            nodeLink = new JWReingoldTilfordTreeLinkOptions();</span>
+        }
+<span class="nc" id="L351">        return nodeLink;</span>
+    }
+
+    public void setNodeLink(JWReingoldTilfordTreeLinkOptions nodeLink)
+    {
+<span class="nc" id="L356">        this.nodeLink = nodeLink;</span>
+<span class="nc" id="L357">    }</span>
+
+    public JWReingoldTilfordTreeLinkOptions getNodeEnterLink()
+    {
+<span class="nc bnc" id="L361" title="All 2 branches missed.">        if (nodeEnterLink == null)</span>
+        {
+<span class="nc" id="L363">            nodeEnterLink = new JWReingoldTilfordTreeLinkOptions();</span>
+        }
+<span class="nc" id="L365">        return nodeEnterLink;</span>
+    }
+
+    public void setNodeEnterLink(JWReingoldTilfordTreeLinkOptions nodeEnterLink)
+    {
+<span class="nc" id="L370">        this.nodeEnterLink = nodeEnterLink;</span>
+<span class="nc" id="L371">    }</span>
+
+    public JWReingoldTilfordTreeLinkOptions getNodeExitLink()
+    {
+<span class="nc bnc" id="L375" title="All 2 branches missed.">        if (nodeExitLink == null)</span>
+        {
+<span class="nc" id="L377">            nodeExitLink = new JWReingoldTilfordTreeLinkOptions();</span>
+        }
+<span class="nc" id="L379">        return nodeExitLink;</span>
+    }
+
+    public void setNodeExitLink(JWReingoldTilfordTreeLinkOptions nodeExitLink)
+    {
+<span class="nc" id="L384">        this.nodeExitLink = nodeExitLink;</span>
+<span class="nc" id="L385">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

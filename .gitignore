@@ -1,0 +1,9 @@
+/build/
+/dist/
+Thumbs.db
+nbproject/build-native.xml~
+JWebSwingComplete.zip
+javadoc.zip
+persistence.xml
+/src/META-INF/resources/bower_components/vertical-timeline-jwebswing/nbproject/private/
+/javadoc/

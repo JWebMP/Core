@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>GuiceInjectionFilter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon</a> &gt; <span class="el_source">GuiceInjectionFilter.java</span></div><h1>GuiceInjectionFilter.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon;
+
+import com.google.inject.servlet.ServletModule;
+import org.apache.log4j.Logger;
+import za.co.mmagon.jwebswing.base.servlets.AjaxReceiver;
+import za.co.mmagon.jwebswing.base.servlets.AngularDataServlet;
+import za.co.mmagon.jwebswing.base.servlets.AngularServlet;
+import za.co.mmagon.jwebswing.base.servlets.CSSServlet;
+import za.co.mmagon.jwebswing.base.servlets.JavaScriptServlet;
+
+/**
+ *
+ * @author GedMarc
+ * @since Nov 14, 2016
+ * @version 1.0
+ *
+ */
+public class GuiceInjectionFilter extends ServletModule
+{
+
+    /**
+     * The logger for the swing Servlet
+     */
+<span class="nc" id="L40">    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;GuiceFilter&quot;);</span>
+<span class="nc" id="L41">    private static boolean gzip = true;</span>
+<span class="nc" id="L42">    private static boolean cacheAll = true;</span>
+
+    public GuiceInjectionFilter()
+<span class="nc" id="L45">    {</span>
+
+<span class="nc" id="L47">    }</span>
+
+    @Override
+    protected void configureServlets()
+    {
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if (gzip)</span>
+        {
+<span class="nc" id="L54">            LOG.trace(&quot;Enabling GZIP&quot;);</span>
+<span class="nc" id="L55">            filter(&quot;/*&quot;).through(GZipServletFilter.class);</span>
+        }
+        else
+        {
+
+        }
+
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (cacheAll)</span>
+        {
+<span class="nc" id="L64">            LOG.trace(&quot;Enabling Cache&quot;);</span>
+<span class="nc" id="L65">            filter(&quot;/*&quot;).through(CacheControlFilter.class);</span>
+        }
+
+<span class="nc" id="L68">        LOG.trace(&quot;Configuring Servlets For Injection&quot;);</span>
+<span class="nc" id="L69">        serve(&quot;/js/*&quot;).with(JavaScriptServlet.class);</span>
+<span class="nc" id="L70">        serve(&quot;/ajax/*&quot;).with(AjaxReceiver.class);</span>
+<span class="nc" id="L71">        serve(&quot;/css/*&quot;).with(CSSServlet.class);</span>
+<span class="nc" id="L72">        serve(&quot;/ad/*&quot;).with(AngularDataServlet.class);</span>
+<span class="nc" id="L73">        serve(&quot;/as/*&quot;).with(AngularServlet.class);</span>
+<span class="nc" id="L74">    }</span>
+
+    /**
+     * If the context is set to GZIP
+     *
+     * @return
+     */
+    public static boolean isGzip()
+    {
+<span class="nc" id="L83">        return gzip;</span>
+    }
+
+    /**
+     * Set if the content must be GZIP
+     *
+     * @param gzip
+     */
+    public static void setGzip(boolean gzip)
+    {
+<span class="nc" id="L93">        GuiceInjectionFilter.gzip = gzip;</span>
+<span class="nc" id="L94">    }</span>
+
+    /**
+     * Sets if must cache all
+     *
+     * @return
+     */
+    public static boolean isCacheAll()
+    {
+<span class="nc" id="L103">        return cacheAll;</span>
+    }
+
+    /**
+     * Sets cache all
+     *
+     * @param cacheAll
+     */
+    public static void setCacheAll(boolean cacheAll)
+    {
+<span class="nc" id="L113">        GuiceInjectionFilter.cacheAll = cacheAll;</span>
+<span class="nc" id="L114">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

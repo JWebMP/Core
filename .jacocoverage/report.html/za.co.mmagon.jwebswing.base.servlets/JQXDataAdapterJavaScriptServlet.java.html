@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQXDataAdapterJavaScriptServlet.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.servlets</a> &gt; <span class="el_source">JQXDataAdapterJavaScriptServlet.java</span></div><h1>JQXDataAdapterJavaScriptServlet.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.base.servlets;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+import java.util.Iterator;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.apache.log4j.Logger;
+import za.co.mmagon.LoggerFactory;
+import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.components.jqxWidgets.dataadapter.JQXDataAdapter;
+
+/**
+ * This Servlet supplies all the JavaScript for a given HTML Page
+ *
+ * @author GedMarc
+ */
+<span class="nc" id="L41">public class JQXDataAdapterJavaScriptServlet extends HttpServlet</span>
+{
+
+<span class="nc" id="L44">    private static final Logger log = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;JavaScriptServlet&quot;);</span>
+    private static final long serialVersionUID = 1L;
+    private HttpSession session;
+    private String sessionID;
+    private JWebSwingServlet servlet;
+    private Page page;
+
+    /**
+     * The Object Mapper for rendering the JSON with Jackson
+     */
+<span class="nc" id="L54">    private static final ObjectMapper jsonObjectMapper = new ObjectMapper();</span>
+
+    static
+    {
+<span class="nc" id="L58">        jsonObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);</span>
+<span class="nc" id="L59">        log.trace(&quot;JavaScript Servlet Instantiated&quot;);</span>
+<span class="nc" id="L60">    }</span>
+
+    /**
+     * Processes requests for both HTTP &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt; methods.
+     *
+     * @param request  Servlet request
+     * @param response Servlet response
+     * @throws ServletException if a Servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+<span class="nc" id="L73">        response.setContentType(&quot;text/html&quot;);</span>
+<span class="nc" id="L74">        String componentId = request.getParameter(&quot;do&quot;);</span>
+<span class="nc" id="L75">        session = request.getSession();</span>
+<span class="nc" id="L76">        sessionID = session.getId();</span>
+
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        if (sessionID == null)</span>
+        {
+<span class="nc" id="L80">            log.error(&quot;Session Doesn't Exist&quot;, new ServletException(&quot;There is no session for a data pull&quot;));</span>
+<span class="nc" id="L81">            throw new ServletException(&quot;There is no session for a data pull&quot;);</span>
+        }
+<span class="nc" id="L83">        servlet = JWebSwingServlet.getSessionServlet(sessionID);</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        if (servlet == null)</span>
+        {
+<span class="nc" id="L86">            log.error(&quot;Servlet Doesn't Exist&quot;, new ServletException(&quot;There is no Servlet Loaded for the entry.&quot;));</span>
+<span class="nc" id="L87">            throw new ServletException(&quot;There is no Servlet Loaded for the entry.&quot;);</span>
+        }
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        if (!servlet.isUserLoggedIn())</span>
+        {
+<span class="nc" id="L91">            log.error(&quot;Not Logged In&quot;, new ServletException(&quot;User Has Not Logged Into The System&quot;));</span>
+<span class="nc" id="L92">            throw new ServletException(&quot;User Has Not Logged Into The System&quot;);</span>
+        }
+<span class="nc" id="L94">        this.page = servlet.getCurrentPage(request.getSession());</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        if (page == null)</span>
+        {
+<span class="nc" id="L97">            log.error(&quot;No Page&quot;, new ServletException(&quot;No Page Currently Loaded&quot;));</span>
+<span class="nc" id="L98">            throw new ServletException(&quot;No Page Currently Loaded&quot;);</span>
+        }
+
+<span class="nc" id="L101">        StringBuilder dataAdaptersValues = new StringBuilder();</span>
+<span class="nc" id="L102">        dataAdaptersValues.append(getAllDataAdapters());</span>
+
+<span class="nc" id="L104">        Date startDate = new Date();</span>
+        //StringBuilder scripts = this.page.renderJavascripts(0, true);
+<span class="nc" id="L106">        StringBuilder scripts = dataAdaptersValues;</span>
+        //scripts.insert(0, &quot;$(document).ready(function(){\n&quot;).
+        //scripts.append(page.getNewLine());
+        //scripts.append(&quot;$(window).resize();&quot;).append(page.getNewLine());
+        //scripts.append(&quot;});&quot;).append(page.getNewLine());
+<span class="nc" id="L111">        Date endDate = new Date();</span>
+        //Render the Pages JavaScript
+<span class="nc" id="L113">        try (PrintWriter out = response.getWriter())</span>
+        {
+<span class="nc" id="L115">            response.setContentType(&quot;application/javascript&quot;);</span>
+<span class="nc" id="L116">            out.println(scripts);</span>
+            //out.flush();
+<span class="nc" id="L118">            Date dataTransferDate = new Date();</span>
+<span class="nc" id="L119">            log.trace(&quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Render Time]-[&quot; + (endDate.getTime() - startDate.getTime()) + &quot;];[Data Size]-[&quot; + scripts.length() + &quot;];[Transer Time]=[&quot; + (dataTransferDate.getTime() - startDate.getTime()) + &quot;]&quot;);</span>
+<span class="nc bnc" id="L120" title="All 8 branches missed.">        }</span>
+<span class="nc" id="L121">    }</span>
+
+    public StringBuilder getAllDataAdapters()
+    {
+<span class="nc" id="L125">        StringBuilder sb = new StringBuilder();</span>
+        /*
+         * page.getBody().getChildrenHierarchy().stream().filter((comp) -&gt; (comp.getDataAdapter() != null)).forEach((comp)
+         * -&gt;
+         * {
+         * for (Iterator iterator = comp.getDataAdapter().iterator(); iterator.hasNext();)
+         * {
+         * JQXDataAdapter next = (JQXDataAdapter) iterator.next();
+         * //next.setTiny(page.isTiny());
+         * next.setTiny(true);
+         * sb.append(next.renderJavascripts(0));
+         * }
+         * });
+         */
+<span class="nc" id="L139">        return sb;</span>
+    }
+
+    private JQXDataAdapter getAllAdapters(String id)
+    {
+<span class="nc bnc" id="L144" title="All 2 branches missed.">        for (Iterator&lt;ComponentHierarchyBase&gt; it = page.getBody().getChildrenHierarchy().iterator(); it.hasNext();)</span>
+        {
+<span class="nc" id="L146">            ComponentHierarchyBase comp = it.next();</span>
+            /*
+             * for (Iterator it = comp.getDataAdapter().iterator(); it.hasNext();)
+             * {
+             * JQXDataAdapter dataAdapter = (JQXDataAdapter) it.next();
+             * if (dataAdapter.getDAID().equals(id))
+             * {
+             * return dataAdapter;
+             * }
+             * }
+             */
+<span class="nc" id="L157">        }</span>
+<span class="nc" id="L158">        return null;</span>
+    }
+
+    /**
+     * Handles the HTTP &lt;code&gt;GET&lt;/code&gt; method.
+     *
+     * @param request  Servlet request
+     * @param response Servlet response
+     * @throws ServletException if a Servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        //Standard Web Build Call
+<span class="nc bnc" id="L174" title="All 4 branches missed.">        if (request.getHeader(&quot;Content-Type&quot;) == null || request.getHeader(&quot;Content-Type&quot;).isEmpty())</span>
+        {
+<span class="nc" id="L176">            processRequest(request, response);</span>
+        }
+<span class="nc" id="L178">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

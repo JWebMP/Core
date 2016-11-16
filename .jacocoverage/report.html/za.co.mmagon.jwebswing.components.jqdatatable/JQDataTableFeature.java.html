@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQDataTableFeature.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqdatatable</a> &gt; <span class="el_source">JQDataTableFeature.java</span></div><h1>JQDataTableFeature.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.components.jqdatatable;
+
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.Feature;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.components.pools.jqueryDataTables.JQDataTableReferencePool;
+
+/**
+ * Implements the jQuery DataTable plugin
+ * &lt;p&gt;
+ * @since 2014 09 30
+ * @version 1.0
+ * @author MMagon
+ *
+ * &lt;p&gt;
+ */
+public class JQDataTableFeature extends Feature&lt;JQDataTableOptions, JQDataTableFeature&gt; implements GlobalFeatures
+{
+
+    private static final long serialVersionUID = 1L;
+    private Component comp;
+
+    /**
+     * Construct a new JW Data Table
+     * &lt;p&gt;
+     * @param component The Table to apply the Data Table features to.
+     */
+    public JQDataTableFeature(Component component)
+    {
+<span class="nc" id="L30">        super(&quot;JWDataFeature&quot;);</span>
+<span class="nc" id="L31">        addJavaScriptReference(JQDataTableReferencePool.JQueryDataTables.getJavaScriptReference());</span>
+<span class="nc" id="L32">        addJavaScriptReference(JQDataTableReferencePool.JQueryDataTablesUI.getJavaScriptReference());</span>
+<span class="nc" id="L33">        addCssReference(JQDataTableReferencePool.JQueryDataTables.getCssReference());</span>
+<span class="nc" id="L34">        addCssReference(JQDataTableReferencePool.JQueryDataTablesUI.getCssReference());</span>
+<span class="nc" id="L35">        component.addVariable(getDTID());</span>
+<span class="nc" id="L36">        this.comp = component;</span>
+<span class="nc" id="L37">    }</span>
+
+    public String getDTID()
+    {
+<span class="nc" id="L41">        return &quot;dt_&quot; + comp.getID();</span>
+    }
+
+    @Override
+    public void assignFunctionsToComponent()
+    {
+        //Set a new ID for every call to render. Cannot re-initialize a data table
+        //String s = &quot;if((&quot; + getDTID() + &quot; === null))&quot; + getNewLine();
+<span class="nc" id="L49">        String s = &quot;if (typeof &quot; + getDTID() + &quot; === \&quot;undefined\&quot;)&quot; + getNewLine();</span>
+<span class="nc" id="L50">        s += &quot;{&quot; + getNewLine();</span>
+<span class="nc" id="L51">        s += getDTID() + &quot; = &quot; + comp.getJQueryID() + &quot;DataTable(&quot; + getOptions() + &quot;);&quot; + getNewLine();</span>
+<span class="nc" id="L52">        s += &quot;}&quot; + getNewLine();</span>
+<span class="nc" id="L53">        s += &quot;else&quot; + getNewLine();</span>
+<span class="nc" id="L54">        s += &quot;{&quot; + getNewLine();</span>
+        //s += &quot;alert('dt variable ' + &quot; + getDTID() + &quot;);&quot; + getNewLine();
+        // s += getDTID() + &quot;.dataTable('refresh');&quot; + getNewLine();
+<span class="nc" id="L57">        s += comp.getJQueryID() + &quot;DataTable(&quot; + getOptions() + &quot;);&quot; + getNewLine();</span>
+<span class="nc" id="L58">        s += getDTID() + &quot; = &quot; + comp.getJQueryID() + &quot;DataTable(&quot; + getOptions() + &quot;);&quot; + getNewLine();</span>
+<span class="nc" id="L59">        s += &quot;}&quot; + getNewLine();</span>
+
+<span class="nc" id="L61">        addQuery(s);</span>
+<span class="nc" id="L62">    }</span>
+
+    private JQDataTableOptions options;
+
+    @Override
+    public JQDataTableOptions getOptions()
+    {
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        if (options == null)</span>
+        {
+<span class="nc" id="L71">            options = new JQDataTableOptions();</span>
+        }
+<span class="nc" id="L73">        return options;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

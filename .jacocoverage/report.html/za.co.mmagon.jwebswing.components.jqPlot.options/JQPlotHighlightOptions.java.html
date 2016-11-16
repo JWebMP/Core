@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQPlotHighlightOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqPlot.options</a> &gt; <span class="el_source">JQPlotHighlightOptions.java</span></div><h1>JQPlotHighlightOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2014 mmagon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqPlot.options;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.components.jqPlot.JQPlotGraph;
+import za.co.mmagon.jwebswing.components.jqPlot.parts.interfaces.JQPlotMarkerRenderer;
+import za.co.mmagon.jwebswing.components.jqPlot.parts.interfaces.JQPlotRendererDefault;
+import za.co.mmagon.jwebswing.components.jqPlot.references.JQPlotJavascriptReferencePool;
+import za.co.mmagon.jwebswing.generics.CompassPoints;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ * Plugin which will highlight data points when they are moused over.
+ * &lt;p&gt;
+ * To use this plugin, include the js file in your source:
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * A tooltip providing information about the data point is enabled by default. To disable the tooltip, set “showTooltip” to false.
+ * &lt;p&gt;
+ * You can control what data is displayed in the tooltip with various options. The “tooltipAxes” option controls whether the x, y or both data values are displayed.
+ * &lt;p&gt;
+ * Some chart types (e.g. hi-low-close) have more than one y value per data point. To display the additional values in the tooltip, set the “yvalues” option to the desired number of y values present
+ * (3 for a hlc chart).
+ * &lt;p&gt;
+ * By default, data values will be formatted with the same formatting specifiers as used to format the axis ticks. A custom format code can be supplied with the tooltipFormatString option. This will
+ * apply to all values in the tooltip.
+ * &lt;p&gt;
+ * For more complete control, the “formatString” option can be set. This Allows conplete control over tooltip formatting. Values are passed to the format string in an order determined by the
+ * “tooltipAxes” and “yvalues” options. So, if you have a hi-low-close chart and you just want to display the hi-low-close values in the tooltip, you could set a formatString like:
+ *
+ * @author mmagon
+ */
+public class JQPlotHighlightOptions&lt;O extends JavaScriptPart &amp; JQPlotMarkerRenderer&gt; extends JavaScriptPart implements JQPlotRendererDefault
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * true to show the highlight.
+     */
+    private Boolean show;
+    /**
+     * Renderer used to draw the marker of the highlighted point.
+     */
+    private String markerRenderer;
+    @JsonProperty(&quot;markerRenderer&quot;)
+    private O markerRendererOptions;
+
+    /**
+     * true to show the marker
+     */
+<span class="fc" id="L69">    private Boolean showMarker = false;</span>
+    /**
+     * Pixels to add to the lineWidth of the highlight.
+     */
+    private Integer lineWidthAdjust;
+    /**
+     * Pixels to add to the overall size of the highlight.
+     */
+    private Integer sizeAdjust;
+    /**
+     * Show a ToolTip with data point values.
+     */
+<span class="fc" id="L81">    private Boolean showTooltip = false;</span>
+    /**
+     * Where to position tooltip, ‘n’, ‘ne’, ‘e’, ‘se’, ‘s’, ‘sw’, ‘w’, ‘nw’
+     */
+    private CompassPoints tooltipLocation;
+    /**
+     * true = fade in/out tooltip, false = show/hide tooltip
+     */
+    private Boolean fadeTooltip;
+    /**
+     * number of milliseconds.
+     */
+    private Integer tooltipFadeSpeed;
+    /**
+     * Pixel offset of tooltip from the highlight.
+     */
+    private Integer tooltipOffset;
+    /**
+     * Which axes to display in tooltip, ‘x’, ‘y’ or ‘both’, ‘xy’ or ‘yx’ ‘both’
+     * and ‘xy’ are equivalent, ‘yx’ reverses order of labels.
+     */
+    private String tooltipAxes;
+    /**
+     * Use the x and y axes formatters to format the text in the tooltip.
+     */
+    private Boolean useAxesFormatters;
+    /**
+     * sprintf format string for the tooltip.
+     */
+    private String tooltipFormatString;
+    /**
+     * alternative to tooltipFormatString will format the whole tooltip text,
+     * populating with x, y values as indicated by tooltipAxes option.
+     */
+    private String formatString;
+    /**
+     * Number of y values to expect in the data point array.
+     */
+    private Integer yvalues;
+    /**
+     * This option requires jQuery 1.4+ True to bring the series of the
+     * highlighted point to the front of other series.
+     */
+    private Boolean bringSeriesToFront;
+
+    @JsonIgnore
+    private JQPlotGraph linkedGraph;
+
+    /**
+     * Constructs a new highlight options class with the given graph
+     *
+     * @param linkedGraph
+     */
+    public JQPlotHighlightOptions(JQPlotGraph linkedGraph)
+<span class="fc" id="L135">    {</span>
+<span class="fc" id="L136">        this.linkedGraph = linkedGraph;</span>
+<span class="fc" id="L137">        linkedGraph.getJavascriptReferences().add(JQPlotJavascriptReferencePool.HighlightRenderer.getReference());</span>
+<span class="fc" id="L138">    }</span>
+
+    /**
+     * true to show the highlight.
+     * &lt;p&gt;
+     * @return Current value
+     */
+    public Boolean isShow()
+    {
+<span class="nc" id="L147">        return show;</span>
+    }
+
+    /**
+     * True to show the highlight
+     * &lt;p&gt;
+     * @param show
+     */
+    public void setShow(Boolean show)
+    {
+<span class="fc" id="L157">        this.show = show;</span>
+<span class="fc" id="L158">    }</span>
+
+    /**
+     * Renderer used to draw the marker of the highlighted point.
+     * &lt;p&gt;
+     * @return The renderer used
+     */
+    public String getMarkerRenderer()
+    {
+<span class="nc" id="L167">        return markerRenderer;</span>
+    }
+
+    /**
+     * true to show the marker
+     * &lt;p&gt;
+     * @return Current Value
+     */
+    public Boolean isShowMarker()
+    {
+<span class="nc" id="L177">        return showMarker;</span>
+    }
+
+    /**
+     * true to show the marker
+     * &lt;p&gt;
+     * @param showMarker Show Marker Boolean
+     */
+    public void setShowMarker(Boolean showMarker)
+    {
+<span class="nc" id="L187">        this.showMarker = showMarker;</span>
+<span class="nc" id="L188">    }</span>
+
+    /**
+     * Pixels to add to the lineWidth of the highlight.
+     * &lt;p&gt;
+     * @return The pixels adjustment
+     */
+    public Integer getLineWidthAdjust()
+    {
+<span class="nc" id="L197">        return lineWidthAdjust;</span>
+    }
+
+    /**
+     * Pixels to add to the lineWidth of the highlight.
+     * &lt;p&gt;
+     * @param lineWidthAdjust The line adjustment width
+     */
+    public void setLineWidthAdjust(Integer lineWidthAdjust)
+    {
+<span class="nc" id="L207">        this.lineWidthAdjust = lineWidthAdjust;</span>
+<span class="nc" id="L208">    }</span>
+
+    /**
+     * Pixels to add to the overall size of the highlight.
+     * &lt;p&gt;
+     * @return The Size Adjustment
+     */
+    public Integer getSizeAdjust()
+    {
+<span class="nc" id="L217">        return sizeAdjust;</span>
+    }
+
+    /**
+     * Pixels to add to the overall size of the highlight.
+     * &lt;p&gt;
+     * @param sizeAdjust The size to adjust by
+     */
+    public void setSizeAdjust(Integer sizeAdjust)
+    {
+<span class="nc" id="L227">        this.sizeAdjust = sizeAdjust;</span>
+<span class="nc" id="L228">    }</span>
+
+    /**
+     * Show a tooltip with data point values
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean isShowTooltip()
+    {
+<span class="nc" id="L237">        return showTooltip;</span>
+    }
+
+    /**
+     * Show a tooltip with data point values.
+     * &lt;p&gt;
+     * @param showTooltip To show the tooltip
+     */
+    public void setShowTooltip(Boolean showTooltip)
+    {
+<span class="nc" id="L247">        this.showTooltip = showTooltip;</span>
+<span class="nc" id="L248">    }</span>
+
+    /**
+     * Where to position tooltip, ‘n’, ‘ne’, ‘e’, ‘se’, ‘s’, ‘sw’, ‘w’, ‘nw’
+     * &lt;p&gt;
+     * @return Position
+     */
+    public CompassPoints getTooltipLocation()
+    {
+<span class="nc" id="L257">        return tooltipLocation;</span>
+    }
+
+    /**
+     * Where to position tooltip, ‘n’, ‘ne’, ‘e’, ‘se’, ‘s’, ‘sw’, ‘w’, ‘nw’
+     * &lt;p&gt;
+     * @param tooltipLocation The location
+     */
+    public void setTooltipLocation(CompassPoints tooltipLocation)
+    {
+<span class="nc" id="L267">        this.tooltipLocation = tooltipLocation;</span>
+<span class="nc" id="L268">    }</span>
+
+    /**
+     * true = fade in/out tooltip, false = show/hide tooltip
+     * &lt;p&gt;
+     * @return Fading
+     */
+    public Boolean isFadeTooltip()
+    {
+<span class="nc" id="L277">        return fadeTooltip;</span>
+    }
+
+    /**
+     * true = fade in/out tooltip, false = show/hide tooltip
+     * &lt;p&gt;
+     * @param fadeTooltip True or False
+     */
+    public void setFadeTooltip(Boolean fadeTooltip)
+    {
+<span class="nc" id="L287">        this.fadeTooltip = fadeTooltip;</span>
+<span class="nc" id="L288">    }</span>
+
+    /**
+     * number of milliseconds
+     * &lt;p&gt;
+     * @return Number of milliseconds
+     */
+    public Integer getTooltipFadeSpeed()
+    {
+<span class="nc" id="L297">        return tooltipFadeSpeed;</span>
+    }
+
+    /**
+     * number of milliseconds
+     * &lt;p&gt;
+     * @param tooltipFadeSpeed The fading speed in milliseconds
+     */
+    public void setTooltipFadeSpeed(Integer tooltipFadeSpeed)
+    {
+<span class="nc" id="L307">        this.tooltipFadeSpeed = tooltipFadeSpeed;</span>
+<span class="nc" id="L308">    }</span>
+
+    /**
+     * Pixel offset of tooltip from the highlight.
+     * &lt;p&gt;
+     * @return The offset from the highlight
+     */
+    public Integer getTooltipOffset()
+    {
+<span class="nc" id="L317">        return tooltipOffset;</span>
+    }
+
+    /**
+     * Pixel offset of tooltip from the highlight.
+     * &lt;p&gt;
+     * @param tooltipOffset The offest
+     */
+    public void setTooltipOffset(Integer tooltipOffset)
+    {
+<span class="nc" id="L327">        this.tooltipOffset = tooltipOffset;</span>
+<span class="nc" id="L328">    }</span>
+
+    /**
+     * Which axes to display in tooltip, ‘x’, ‘y’ or ‘both’, ‘xy’ or ‘yx’ ‘both’
+     * and ‘xy’ are equivalent, ‘yx’ reverses order of labels.
+     * &lt;p&gt;
+     * @return The Axes to use
+     */
+    public String getTooltipAxes()
+    {
+<span class="nc" id="L338">        return tooltipAxes;</span>
+    }
+
+    /**
+     * Which axes to display in tooltip, ‘x’, ‘y’ or ‘both’, ‘xy’ or ‘yx’ ‘both’
+     * and ‘xy’ are equivalent, ‘yx’ reverses order of labels.
+     * &lt;p&gt;
+     * @param tooltipAxes
+     */
+    public void setTooltipAxes(String tooltipAxes)
+    {
+<span class="nc" id="L349">        this.tooltipAxes = tooltipAxes;</span>
+<span class="nc" id="L350">    }</span>
+
+    /**
+     * Use the x and y axes formatters to format the text in the tooltip
+     * &lt;p&gt;
+     * @return The text in the formatters
+     */
+    public Boolean isUseAxesFormatters()
+    {
+<span class="nc" id="L359">        return useAxesFormatters;</span>
+    }
+
+    /**
+     * Use the x and y axes formatters to format the text in the tooltip
+     * &lt;p&gt;
+     * @param useAxesFormatters True or False
+     */
+    public void setUseAxesFormatters(Boolean useAxesFormatters)
+    {
+<span class="nc" id="L369">        this.useAxesFormatters = useAxesFormatters;</span>
+<span class="nc" id="L370">    }</span>
+
+    /**
+     * sprintf format string for the tooltip.
+     * &lt;p&gt;
+     * @return The tooltip format string
+     */
+    public String getTooltipFormatString()
+    {
+<span class="nc" id="L379">        return tooltipFormatString;</span>
+    }
+
+    /**
+     * sprintf format string for the tooltip.
+     * &lt;p&gt;
+     * @param tooltipFormatString The sprintf format for the tooltip
+     */
+    public void setTooltipFormatString(String tooltipFormatString)
+    {
+<span class="nc" id="L389">        this.tooltipFormatString = tooltipFormatString;</span>
+<span class="nc" id="L390">    }</span>
+
+    /**
+     * Alternative to tooltipFormatString will format the whole tooltip text,
+     * populating with x, y values as indicated by tooltipAxes option.
+     * &lt;p&gt;
+     * @return
+     */
+    public String getFormatString()
+    {
+<span class="nc" id="L400">        return formatString;</span>
+    }
+
+    /**
+     * Alternative to tooltipFormatString will format the whole tooltip text,
+     * populating with x, y values as indicated by tooltipAxes option.
+     * &lt;p&gt;
+     * @param formatString The HTML to use as a tooltip
+     */
+    public void setFormatString(String formatString)
+    {
+<span class="nc" id="L411">        this.formatString = formatString;</span>
+<span class="nc" id="L412">    }</span>
+
+    /**
+     * Alternative to tooltipFormatString will format the whole tooltip text,
+     * populating with x, y values as indicated by tooltipAxes option.
+     * &lt;p&gt;
+     * @param formatString The HTML to use as a tooltip
+     */
+    public void setFormatString(Div formatString)
+    {
+<span class="nc" id="L422">        this.formatString = formatString.toString(true).toString();</span>
+<span class="nc" id="L423">    }</span>
+
+    /**
+     * Number of y values to expect in the data point array.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getYvalues()
+    {
+<span class="nc" id="L432">        return yvalues;</span>
+    }
+
+    /**
+     * Number of y values to expect in the data point array.
+     * &lt;p&gt;
+     * @param yvalues
+     */
+    public void setYvalues(Integer yvalues)
+    {
+<span class="nc" id="L442">        this.yvalues = yvalues;</span>
+<span class="nc" id="L443">    }</span>
+
+    /**
+     * True to bring the series of the highlighted point to the front of other
+     * series.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean isBringSeriesToFront()
+    {
+<span class="nc" id="L453">        return bringSeriesToFront;</span>
+    }
+
+    /**
+     * True to bring the series of the highlighted point to the front of other
+     * series.
+     * &lt;p&gt;
+     * @param bringSeriesToFront
+     */
+    public void setBringSeriesToFront(Boolean bringSeriesToFront)
+    {
+<span class="nc" id="L464">        this.bringSeriesToFront = bringSeriesToFront;</span>
+<span class="nc" id="L465">    }</span>
+
+    /**
+     * Sets the marker renderer accordingly
+     * &lt;p&gt;
+     */
+    public void setMarkerRendererOptions(O markerRendererOptions)
+    {
+<span class="nc" id="L473">        this.markerRenderer = markerRendererOptions.getMarkerRenderer();</span>
+<span class="nc" id="L474">        this.markerRendererOptions = markerRendererOptions;</span>
+<span class="nc" id="L475">    }</span>
+
+    public static long getSerialVersionUID()
+    {
+<span class="nc" id="L479">        return serialVersionUID;</span>
+    }
+
+    /**
+     * true to show the highlight.
+     *
+     * @return
+     */
+    public Boolean getShow()
+    {
+<span class="nc" id="L489">        return show;</span>
+    }
+
+    /**
+     * Return the marker rendering options with the highlighter
+     *
+     * @return
+     */
+    public O getMarkerRendererOptions()
+    {
+<span class="nc bnc" id="L499" title="All 2 branches missed.">        if (markerRendererOptions == null)</span>
+        {
+<span class="nc" id="L501">            markerRendererOptions = (O) new JQPlotMarkerOptions(getLinkedGraph());</span>
+<span class="nc" id="L502">            this.markerRenderer = markerRendererOptions.getMarkerRenderer();</span>
+        }
+<span class="nc" id="L504">        return markerRendererOptions;</span>
+    }
+
+    /**
+     * Whether or not to show the marker
+     *
+     * @return
+     */
+    public Boolean getShowMarker()
+    {
+<span class="nc" id="L514">        return showMarker;</span>
+    }
+
+    /**
+     * Whether or not to show the tooltip
+     *
+     * @return
+     */
+    public Boolean getShowTooltip()
+    {
+<span class="nc" id="L524">        return showTooltip;</span>
+    }
+
+    /**
+     * whether or not to fade the tooltip
+     *
+     * @return
+     */
+    public Boolean getFadeTooltip()
+    {
+<span class="nc" id="L534">        return fadeTooltip;</span>
+    }
+
+    /**
+     * Use axes formatters for display or not
+     *
+     * @return
+     */
+    public Boolean getUseAxesFormatters()
+    {
+<span class="nc" id="L544">        return useAxesFormatters;</span>
+    }
+
+    /**
+     * Always have the series in front
+     *
+     * @return
+     */
+    public Boolean getBringSeriesToFront()
+    {
+<span class="nc" id="L554">        return bringSeriesToFront;</span>
+    }
+
+    /**
+     * Returns the linked graph with this object
+     *
+     * @return
+     */
+    public JQPlotGraph getLinkedGraph()
+    {
+<span class="nc" id="L564">        return linkedGraph;</span>
+    }
+
+    @Override
+    public String getRenderer()
+    {
+<span class="nc" id="L570">        return &quot;$.jqplot.Highlighter&quot;;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

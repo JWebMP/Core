@@ -1,0 +1,1183 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQXGridOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqxWidgets.grid</a> &gt; <span class="el_source">JQXGridOptions.java</span></div><h1>JQXGridOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqxWidgets.grid;
+
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptFunction;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
+
+/**
+ * All the options for the JQX Grid library
+ * &lt;p&gt;
+ * @author GedMarc
+ * @since Mar 4, 2015
+ * @version 1.0
+ * &lt;p&gt;
+ * &lt;p&gt;
+ */
+public class JQXGridOptions extends JavaScriptPart
+{
+
+    private Boolean altrows;// 	Boolean 	false
+    private Integer altstart;// 	Number 	1
+    private Integer altstep;// 	Number 	1
+    private Boolean autoshowloadelement;// 	Boolean 	true
+    private Boolean autoshowfiltericon;// 	Boolean 	true
+    private Boolean autoshowcolumnsmenubutton;// 	Boolean 	true
+    private Boolean clipboard;// 	Boolean 	true
+    private Boolean closeablegroups;// 	Boolean 	true
+    private Integer columnsmenuwidth;// 	Number 	15
+    private JavascriptFunction columnmenuopening;// 	Function 	null
+    private JavascriptFunction columnmenuclosing;// 	Function 	null
+    private JavascriptFunction cellhover;// 	Function 	null
+    private Boolean enablekeyboarddelete;// 	Boolean 	true
+    private Boolean enableellipsis;// 	Boolean 	true
+    private Boolean enablemousewheel;// 	Boolean 	true
+    private Boolean enableanimations;// 	Boolean 	true
+    private Boolean enabletooltips;// 	Boolean 	false
+    private Boolean enablehover;//Boolean 	true
+    private Boolean enablebrowserselection;// 	Boolean 	false
+    private String everpresentrowposition;// 	String 	'top'
+    private Integer everpresentrowheight;// 	Number 	30
+    private String everpresentrowactions;//String 	&quot;add reset&quot;
+    private String everpresentrowactionsmode;// 	String 	&quot;popup&quot;
+    private Integer filterrowheight;//Number 	31
+    private String filtermode;//String 	&quot;default&quot;
+    private JavascriptFunction groupsrenderer;// 	function 	null
+    private JavascriptFunction groupcolumnrenderer;// 	function 	null
+    private Boolean groupsexpandedbydefault;// 	Boolean 	false
+    private JavascriptFunction handlekeyboardnavigation;// 	function 	null
+    private JavascriptFunction pagerrenderer;// 	function 	null
+    private Boolean rtl;// 	Boolean 	false
+    private Boolean showdefaultloadelement;// 	Boolean 	true
+    private Boolean showfiltercolumnbackground;// 	Boolean 	true
+    private Boolean showfiltermenuitems;// 	Boolean 	true
+    private Boolean showpinnedcolumnbackground;// 	Boolean 	true
+    private Boolean showsortcolumnbackground;// 	Boolean 	true
+    private Boolean showsortmenuitems;// 	Boolean 	true
+    private Boolean showgroupmenuitems;// 	Boolean 	true
+    private Boolean showrowdetailscolumn;// 	Boolean 	true
+    private Boolean showheader;// 	Boolean 	true
+    private Boolean showgroupsheader;// 	Boolean 	true
+    private Boolean showaggregates;// 	Boolean 	false
+    private Boolean showeverpresentrow;// 	Boolean 	false
+    private Boolean showfilterrow;// 	Boolean 	false
+    private Boolean showemptyrow;// 	Boolean 	true
+    private Boolean showstatusbar;// 	Boolean 	false
+    private Integer statusbarheight;// 	Number 	34
+    private Boolean showtoolbar;// 	Boolean 	false
+    private String selectionmode;// 	String 	'singlerow'
+    private String theme;// 	String 	''
+    private Integer toolbarheight;// 	Number 	34
+
+    private Boolean autoheight;// 	Boolean 	false
+    private Boolean autorowheight;// Boolean 	false
+    private Integer columnsheight;// Number 	25
+    private JWXGridDeferredDataFields deferreddatafields;// 	Array 	[]
+    private Integer groupsheaderheight;//  	Number/String 	34
+    private Integer groupindentwidth;// 	Number 	20
+    private Integer height;//  	Number/String 	400
+    private Integer pagerheight;//  	Number/String 	28
+    private Integer rowsheight;//  	Number 	25
+    private Integer scrollbarsize;//  	Number 	15
+    private String scrollmode;//  	String 	&quot;default&quot;
+    private JavascriptFunction scrollfeedback;//  	function 	null
+    private Integer width;//  	Number/String 	600
+
+    private Boolean autosavestate;//  	Boolean 	false
+    private Boolean autoloadstate;//  	Boolean 	false
+    private JQXGridColumns columns;// 	Array 	[]
+    private JQXGridColumns columngroups;// 	Array 	[]
+    private Boolean columnsmenu;//  	Boolean 	true
+    private Boolean columnsresize;//  	Boolean 	false
+    private Boolean columnsautoresize;//  	Boolean 	true
+    private Boolean columnsreorder;//  	Boolean 	false
+    private Boolean disabled;//  	Boolean 	false
+    private Boolean editable;//  	Boolean 	false
+    private String editmode;// 	String 	'selectedcell'
+    private Boolean filterable;//  	Boolean 	false
+    private Boolean groupable;//  	Boolean 	false
+    private JQXGridGroups groups;// 	Array 	[]
+    private Integer horizontalscrollbarstep;//  	Number 	5
+    private Integer horizontalscrollbarlargestep;//  	Number 	50
+    private JavascriptFunction initrowdetails;//  	function 	null
+    private Boolean keyboardnavigation;//  	Boolean 	true
+    private Integer pagesize;//  	Number 	10
+    private Integer[] pagesizeoptions;// 	Array 	['5', '10', '20']
+    private String pagermode;// 	String 	&quot;default&quot;
+    private Integer pagerbuttonscount;//  	Number 	5
+    private Boolean pageable;//  	Boolean 	false
+    private Boolean rowdetails;//  	Boolean 	false
+    private JQXGridRowDetailsTemplate rowdetailstemplate;// 	Object 	null
+    private JavascriptFunction ready;//  	function 	null
+    private JavascriptFunction rendered;//  	function 	null
+    private JavascriptFunction renderstatusbar;//  	function 	null
+    private JavascriptFunction rendertoolbar;//  	function 	null
+    private JavascriptFunction rendergridrows;//  	function 	null
+    private Boolean sortable;//  	Boolean 	false
+    private Integer selectedrowindex;//  	Number 	-1
+    private JQXSelectedRowIndexes selectedrowindexes;// 	Array 	[]
+    private Object source;// 	Object 	{}
+    private String sorttogglestates;//  	String 	2
+    private Integer updatedelay;//  	Number 	0
+    private Boolean virtualmode;//  	Boolean 	false
+    private Integer verticalscrollbarstep;//  	Number 	5
+    private Integer verticalscrollbarlargestep;// 	Number 	400
+
+    public JQXGridOptions()
+<span class="nc" id="L142">    {</span>
+
+<span class="nc" id="L144">    }</span>
+
+    @Override
+    public JavascriptPartType getJavascriptType()
+    {
+<span class="nc" id="L149">        return JavascriptPartType.Javascript;</span>
+    }
+
+    public Boolean getAltrows()
+    {
+<span class="nc" id="L154">        return altrows;</span>
+    }
+
+    public void setAltrows(Boolean altrows)
+    {
+<span class="nc" id="L159">        this.altrows = altrows;</span>
+<span class="nc" id="L160">    }</span>
+
+    public Integer getAltstart()
+    {
+<span class="nc" id="L164">        return altstart;</span>
+    }
+
+    public void setAltstart(Integer altstart)
+    {
+<span class="nc" id="L169">        this.altstart = altstart;</span>
+<span class="nc" id="L170">    }</span>
+
+    public Integer getAltstep()
+    {
+<span class="nc" id="L174">        return altstep;</span>
+    }
+
+    public void setAltstep(Integer altstep)
+    {
+<span class="nc" id="L179">        this.altstep = altstep;</span>
+<span class="nc" id="L180">    }</span>
+
+    public Boolean getAutoshowloadelement()
+    {
+<span class="nc" id="L184">        return autoshowloadelement;</span>
+    }
+
+    public void setAutoshowloadelement(Boolean autoshowloadelement)
+    {
+<span class="nc" id="L189">        this.autoshowloadelement = autoshowloadelement;</span>
+<span class="nc" id="L190">    }</span>
+
+    public Boolean getAutoshowfiltericon()
+    {
+<span class="nc" id="L194">        return autoshowfiltericon;</span>
+    }
+
+    public void setAutoshowfiltericon(Boolean autoshowfiltericon)
+    {
+<span class="nc" id="L199">        this.autoshowfiltericon = autoshowfiltericon;</span>
+<span class="nc" id="L200">    }</span>
+
+    public Boolean getAutoshowcolumnsmenubutton()
+    {
+<span class="nc" id="L204">        return autoshowcolumnsmenubutton;</span>
+    }
+
+    public void setAutoshowcolumnsmenubutton(Boolean autoshowcolumnsmenubutton)
+    {
+<span class="nc" id="L209">        this.autoshowcolumnsmenubutton = autoshowcolumnsmenubutton;</span>
+<span class="nc" id="L210">    }</span>
+
+    public Boolean getClipboard()
+    {
+<span class="nc" id="L214">        return clipboard;</span>
+    }
+
+    public void setClipboard(Boolean clipboard)
+    {
+<span class="nc" id="L219">        this.clipboard = clipboard;</span>
+<span class="nc" id="L220">    }</span>
+
+    public Boolean getCloseablegroups()
+    {
+<span class="nc" id="L224">        return closeablegroups;</span>
+    }
+
+    public void setCloseablegroups(Boolean closeablegroups)
+    {
+<span class="nc" id="L229">        this.closeablegroups = closeablegroups;</span>
+<span class="nc" id="L230">    }</span>
+
+    public Integer getColumnsmenuwidth()
+    {
+<span class="nc" id="L234">        return columnsmenuwidth;</span>
+    }
+
+    public void setColumnsmenuwidth(Integer columnsmenuwidth)
+    {
+<span class="nc" id="L239">        this.columnsmenuwidth = columnsmenuwidth;</span>
+<span class="nc" id="L240">    }</span>
+
+    public JavascriptFunction getColumnmenuopening()
+    {
+<span class="nc" id="L244">        return columnmenuopening;</span>
+    }
+
+    public void setColumnmenuopening(JavascriptFunction columnmenuopening)
+    {
+<span class="nc" id="L249">        this.columnmenuopening = columnmenuopening;</span>
+<span class="nc" id="L250">    }</span>
+
+    public JavascriptFunction getColumnmenuclosing()
+    {
+<span class="nc" id="L254">        return columnmenuclosing;</span>
+    }
+
+    public void setColumnmenuclosing(JavascriptFunction columnmenuclosing)
+    {
+<span class="nc" id="L259">        this.columnmenuclosing = columnmenuclosing;</span>
+<span class="nc" id="L260">    }</span>
+
+    public JavascriptFunction getCellhover()
+    {
+<span class="nc" id="L264">        return cellhover;</span>
+    }
+
+    public void setCellhover(JavascriptFunction cellhover)
+    {
+<span class="nc" id="L269">        this.cellhover = cellhover;</span>
+<span class="nc" id="L270">    }</span>
+
+    public Boolean getEnablekeyboarddelete()
+    {
+<span class="nc" id="L274">        return enablekeyboarddelete;</span>
+    }
+
+    public void setEnablekeyboarddelete(Boolean enablekeyboarddelete)
+    {
+<span class="nc" id="L279">        this.enablekeyboarddelete = enablekeyboarddelete;</span>
+<span class="nc" id="L280">    }</span>
+
+    public Boolean getEnableellipsis()
+    {
+<span class="nc" id="L284">        return enableellipsis;</span>
+    }
+
+    public void setEnableellipsis(Boolean enableellipsis)
+    {
+<span class="nc" id="L289">        this.enableellipsis = enableellipsis;</span>
+<span class="nc" id="L290">    }</span>
+
+    public Boolean getEnablemousewheel()
+    {
+<span class="nc" id="L294">        return enablemousewheel;</span>
+    }
+
+    public void setEnablemousewheel(Boolean enablemousewheel)
+    {
+<span class="nc" id="L299">        this.enablemousewheel = enablemousewheel;</span>
+<span class="nc" id="L300">    }</span>
+
+    public Boolean getEnableanimations()
+    {
+<span class="nc" id="L304">        return enableanimations;</span>
+    }
+
+    public void setEnableanimations(Boolean enableanimations)
+    {
+<span class="nc" id="L309">        this.enableanimations = enableanimations;</span>
+<span class="nc" id="L310">    }</span>
+
+    public Boolean getEnabletooltips()
+    {
+<span class="nc" id="L314">        return enabletooltips;</span>
+    }
+
+    public void setEnabletooltips(Boolean enabletooltips)
+    {
+<span class="nc" id="L319">        this.enabletooltips = enabletooltips;</span>
+<span class="nc" id="L320">    }</span>
+
+    public Boolean getEnablehover()
+    {
+<span class="nc" id="L324">        return enablehover;</span>
+    }
+
+    public void setEnablehover(Boolean enablehover)
+    {
+<span class="nc" id="L329">        this.enablehover = enablehover;</span>
+<span class="nc" id="L330">    }</span>
+
+    public Boolean getEnablebrowserselection()
+    {
+<span class="nc" id="L334">        return enablebrowserselection;</span>
+    }
+
+    public void setEnablebrowserselection(Boolean enablebrowserselection)
+    {
+<span class="nc" id="L339">        this.enablebrowserselection = enablebrowserselection;</span>
+<span class="nc" id="L340">    }</span>
+
+    public String getEverpresentrowposition()
+    {
+<span class="nc" id="L344">        return everpresentrowposition;</span>
+    }
+
+    public void setEverpresentrowposition(String everpresentrowposition)
+    {
+<span class="nc" id="L349">        this.everpresentrowposition = everpresentrowposition;</span>
+<span class="nc" id="L350">    }</span>
+
+    public Integer getEverpresentrowheight()
+    {
+<span class="nc" id="L354">        return everpresentrowheight;</span>
+    }
+
+    public void setEverpresentrowheight(Integer everpresentrowheight)
+    {
+<span class="nc" id="L359">        this.everpresentrowheight = everpresentrowheight;</span>
+<span class="nc" id="L360">    }</span>
+
+    public String getEverpresentrowactions()
+    {
+<span class="nc" id="L364">        return everpresentrowactions;</span>
+    }
+
+    public void setEverpresentrowactions(String everpresentrowactions)
+    {
+<span class="nc" id="L369">        this.everpresentrowactions = everpresentrowactions;</span>
+<span class="nc" id="L370">    }</span>
+
+    public String getEverpresentrowactionsmode()
+    {
+<span class="nc" id="L374">        return everpresentrowactionsmode;</span>
+    }
+
+    public void setEverpresentrowactionsmode(String everpresentrowactionsmode)
+    {
+<span class="nc" id="L379">        this.everpresentrowactionsmode = everpresentrowactionsmode;</span>
+<span class="nc" id="L380">    }</span>
+
+    public Integer getFilterrowheight()
+    {
+<span class="nc" id="L384">        return filterrowheight;</span>
+    }
+
+    public void setFilterrowheight(Integer filterrowheight)
+    {
+<span class="nc" id="L389">        this.filterrowheight = filterrowheight;</span>
+<span class="nc" id="L390">    }</span>
+
+    public String getFiltermode()
+    {
+<span class="nc" id="L394">        return filtermode;</span>
+    }
+
+    public void setFiltermode(String filtermode)
+    {
+<span class="nc" id="L399">        this.filtermode = filtermode;</span>
+<span class="nc" id="L400">    }</span>
+
+    public JavascriptFunction getGroupsrenderer()
+    {
+<span class="nc" id="L404">        return groupsrenderer;</span>
+    }
+
+    public void setGroupsrenderer(JavascriptFunction groupsrenderer)
+    {
+<span class="nc" id="L409">        this.groupsrenderer = groupsrenderer;</span>
+<span class="nc" id="L410">    }</span>
+
+    public JavascriptFunction getGroupcolumnrenderer()
+    {
+<span class="nc" id="L414">        return groupcolumnrenderer;</span>
+    }
+
+    public void setGroupcolumnrenderer(JavascriptFunction groupcolumnrenderer)
+    {
+<span class="nc" id="L419">        this.groupcolumnrenderer = groupcolumnrenderer;</span>
+<span class="nc" id="L420">    }</span>
+
+    public Boolean getGroupsexpandedbydefault()
+    {
+<span class="nc" id="L424">        return groupsexpandedbydefault;</span>
+    }
+
+    public void setGroupsexpandedbydefault(Boolean groupsexpandedbydefault)
+    {
+<span class="nc" id="L429">        this.groupsexpandedbydefault = groupsexpandedbydefault;</span>
+<span class="nc" id="L430">    }</span>
+
+    public JavascriptFunction getHandlekeyboardnavigation()
+    {
+<span class="nc" id="L434">        return handlekeyboardnavigation;</span>
+    }
+
+    public void setHandlekeyboardnavigation(JavascriptFunction handlekeyboardnavigation)
+    {
+<span class="nc" id="L439">        this.handlekeyboardnavigation = handlekeyboardnavigation;</span>
+<span class="nc" id="L440">    }</span>
+
+    public JavascriptFunction getPagerrenderer()
+    {
+<span class="nc" id="L444">        return pagerrenderer;</span>
+    }
+
+    public void setPagerrenderer(JavascriptFunction pagerrenderer)
+    {
+<span class="nc" id="L449">        this.pagerrenderer = pagerrenderer;</span>
+<span class="nc" id="L450">    }</span>
+
+    public Boolean getRtl()
+    {
+<span class="nc" id="L454">        return rtl;</span>
+    }
+
+    public void setRtl(Boolean rtl)
+    {
+<span class="nc" id="L459">        this.rtl = rtl;</span>
+<span class="nc" id="L460">    }</span>
+
+    public Boolean getShowdefaultloadelement()
+    {
+<span class="nc" id="L464">        return showdefaultloadelement;</span>
+    }
+
+    public void setShowdefaultloadelement(Boolean showdefaultloadelement)
+    {
+<span class="nc" id="L469">        this.showdefaultloadelement = showdefaultloadelement;</span>
+<span class="nc" id="L470">    }</span>
+
+    public Boolean getShowfiltercolumnbackground()
+    {
+<span class="nc" id="L474">        return showfiltercolumnbackground;</span>
+    }
+
+    public void setShowfiltercolumnbackground(Boolean showfiltercolumnbackground)
+    {
+<span class="nc" id="L479">        this.showfiltercolumnbackground = showfiltercolumnbackground;</span>
+<span class="nc" id="L480">    }</span>
+
+    public Boolean getShowfiltermenuitems()
+    {
+<span class="nc" id="L484">        return showfiltermenuitems;</span>
+    }
+
+    public void setShowfiltermenuitems(Boolean showfiltermenuitems)
+    {
+<span class="nc" id="L489">        this.showfiltermenuitems = showfiltermenuitems;</span>
+<span class="nc" id="L490">    }</span>
+
+    public Boolean getShowpinnedcolumnbackground()
+    {
+<span class="nc" id="L494">        return showpinnedcolumnbackground;</span>
+    }
+
+    public void setShowpinnedcolumnbackground(Boolean showpinnedcolumnbackground)
+    {
+<span class="nc" id="L499">        this.showpinnedcolumnbackground = showpinnedcolumnbackground;</span>
+<span class="nc" id="L500">    }</span>
+
+    public Boolean getShowsortcolumnbackground()
+    {
+<span class="nc" id="L504">        return showsortcolumnbackground;</span>
+    }
+
+    public void setShowsortcolumnbackground(Boolean showsortcolumnbackground)
+    {
+<span class="nc" id="L509">        this.showsortcolumnbackground = showsortcolumnbackground;</span>
+<span class="nc" id="L510">    }</span>
+
+    public Boolean getShowsortmenuitems()
+    {
+<span class="nc" id="L514">        return showsortmenuitems;</span>
+    }
+
+    public void setShowsortmenuitems(Boolean showsortmenuitems)
+    {
+<span class="nc" id="L519">        this.showsortmenuitems = showsortmenuitems;</span>
+<span class="nc" id="L520">    }</span>
+
+    public Boolean getShowgroupmenuitems()
+    {
+<span class="nc" id="L524">        return showgroupmenuitems;</span>
+    }
+
+    public void setShowgroupmenuitems(Boolean showgroupmenuitems)
+    {
+<span class="nc" id="L529">        this.showgroupmenuitems = showgroupmenuitems;</span>
+<span class="nc" id="L530">    }</span>
+
+    public Boolean getShowrowdetailscolumn()
+    {
+<span class="nc" id="L534">        return showrowdetailscolumn;</span>
+    }
+
+    public void setShowrowdetailscolumn(Boolean showrowdetailscolumn)
+    {
+<span class="nc" id="L539">        this.showrowdetailscolumn = showrowdetailscolumn;</span>
+<span class="nc" id="L540">    }</span>
+
+    public Boolean getShowheader()
+    {
+<span class="nc" id="L544">        return showheader;</span>
+    }
+
+    public void setShowheader(Boolean showheader)
+    {
+<span class="nc" id="L549">        this.showheader = showheader;</span>
+<span class="nc" id="L550">    }</span>
+
+    public Boolean getShowgroupsheader()
+    {
+<span class="nc" id="L554">        return showgroupsheader;</span>
+    }
+
+    public void setShowgroupsheader(Boolean showgroupsheader)
+    {
+<span class="nc" id="L559">        this.showgroupsheader = showgroupsheader;</span>
+<span class="nc" id="L560">    }</span>
+
+    public Boolean getShowaggregates()
+    {
+<span class="nc" id="L564">        return showaggregates;</span>
+    }
+
+    public void setShowaggregates(Boolean showaggregates)
+    {
+<span class="nc" id="L569">        this.showaggregates = showaggregates;</span>
+<span class="nc" id="L570">    }</span>
+
+    public Boolean getShoweverpresentrow()
+    {
+<span class="nc" id="L574">        return showeverpresentrow;</span>
+    }
+
+    public void setShoweverpresentrow(Boolean showeverpresentrow)
+    {
+<span class="nc" id="L579">        this.showeverpresentrow = showeverpresentrow;</span>
+<span class="nc" id="L580">    }</span>
+
+    public Boolean getShowfilterrow()
+    {
+<span class="nc" id="L584">        return showfilterrow;</span>
+    }
+
+    public void setShowfilterrow(Boolean showfilterrow)
+    {
+<span class="nc" id="L589">        this.showfilterrow = showfilterrow;</span>
+<span class="nc" id="L590">    }</span>
+
+    public Boolean getShowemptyrow()
+    {
+<span class="nc" id="L594">        return showemptyrow;</span>
+    }
+
+    public void setShowemptyrow(Boolean showemptyrow)
+    {
+<span class="nc" id="L599">        this.showemptyrow = showemptyrow;</span>
+<span class="nc" id="L600">    }</span>
+
+    public Boolean getShowstatusbar()
+    {
+<span class="nc" id="L604">        return showstatusbar;</span>
+    }
+
+    public void setShowstatusbar(Boolean showstatusbar)
+    {
+<span class="nc" id="L609">        this.showstatusbar = showstatusbar;</span>
+<span class="nc" id="L610">    }</span>
+
+    public Integer getStatusbarheight()
+    {
+<span class="nc" id="L614">        return statusbarheight;</span>
+    }
+
+    public void setStatusbarheight(Integer statusbarheight)
+    {
+<span class="nc" id="L619">        this.statusbarheight = statusbarheight;</span>
+<span class="nc" id="L620">    }</span>
+
+    public Boolean getShowtoolbar()
+    {
+<span class="nc" id="L624">        return showtoolbar;</span>
+    }
+
+    public void setShowtoolbar(Boolean showtoolbar)
+    {
+<span class="nc" id="L629">        this.showtoolbar = showtoolbar;</span>
+<span class="nc" id="L630">    }</span>
+
+    public String getSelectionmode()
+    {
+<span class="nc" id="L634">        return selectionmode;</span>
+    }
+
+    public void setSelectionmode(String selectionmode)
+    {
+<span class="nc" id="L639">        this.selectionmode = selectionmode;</span>
+<span class="nc" id="L640">    }</span>
+
+    public String getTheme()
+    {
+<span class="nc" id="L644">        return theme;</span>
+    }
+
+    public void setTheme(String theme)
+    {
+<span class="nc" id="L649">        this.theme = theme;</span>
+<span class="nc" id="L650">    }</span>
+
+    public Integer getToolbarheight()
+    {
+<span class="nc" id="L654">        return toolbarheight;</span>
+    }
+
+    public void setToolbarheight(Integer toolbarheight)
+    {
+<span class="nc" id="L659">        this.toolbarheight = toolbarheight;</span>
+<span class="nc" id="L660">    }</span>
+
+    public Boolean getAutoheight()
+    {
+<span class="nc" id="L664">        return autoheight;</span>
+    }
+
+    public void setAutoheight(Boolean autoheight)
+    {
+<span class="nc" id="L669">        this.autoheight = autoheight;</span>
+<span class="nc" id="L670">    }</span>
+
+    public Boolean getAutorowheight()
+    {
+<span class="nc" id="L674">        return autorowheight;</span>
+    }
+
+    public void setAutorowheight(Boolean autorowheight)
+    {
+<span class="nc" id="L679">        this.autorowheight = autorowheight;</span>
+<span class="nc" id="L680">    }</span>
+
+    public Integer getColumnsheight()
+    {
+<span class="nc" id="L684">        return columnsheight;</span>
+    }
+
+    public void setColumnsheight(Integer columnsheight)
+    {
+<span class="nc" id="L689">        this.columnsheight = columnsheight;</span>
+<span class="nc" id="L690">    }</span>
+
+    public JWXGridDeferredDataFields getDeferreddatafields()
+    {
+<span class="nc" id="L694">        return deferreddatafields;</span>
+    }
+
+    public void setDeferreddatafields(JWXGridDeferredDataFields deferreddatafields)
+    {
+<span class="nc" id="L699">        this.deferreddatafields = deferreddatafields;</span>
+<span class="nc" id="L700">    }</span>
+
+    public Integer getGroupsheaderheight()
+    {
+<span class="nc" id="L704">        return groupsheaderheight;</span>
+    }
+
+    public void setGroupsheaderheight(Integer groupsheaderheight)
+    {
+<span class="nc" id="L709">        this.groupsheaderheight = groupsheaderheight;</span>
+<span class="nc" id="L710">    }</span>
+
+    public Integer getGroupindentwidth()
+    {
+<span class="nc" id="L714">        return groupindentwidth;</span>
+    }
+
+    public void setGroupindentwidth(Integer groupindentwidth)
+    {
+<span class="nc" id="L719">        this.groupindentwidth = groupindentwidth;</span>
+<span class="nc" id="L720">    }</span>
+
+    public Integer getHeight()
+    {
+<span class="nc" id="L724">        return height;</span>
+    }
+
+    public void setHeight(Integer height)
+    {
+<span class="nc" id="L729">        this.height = height;</span>
+<span class="nc" id="L730">    }</span>
+
+    public Integer getPagerheight()
+    {
+<span class="nc" id="L734">        return pagerheight;</span>
+    }
+
+    public void setPagerheight(Integer pagerheight)
+    {
+<span class="nc" id="L739">        this.pagerheight = pagerheight;</span>
+<span class="nc" id="L740">    }</span>
+
+    public Integer getRowsheight()
+    {
+<span class="nc" id="L744">        return rowsheight;</span>
+    }
+
+    public void setRowsheight(Integer rowsheight)
+    {
+<span class="nc" id="L749">        this.rowsheight = rowsheight;</span>
+<span class="nc" id="L750">    }</span>
+
+    public Integer getScrollbarsize()
+    {
+<span class="nc" id="L754">        return scrollbarsize;</span>
+    }
+
+    public void setScrollbarsize(Integer scrollbarsize)
+    {
+<span class="nc" id="L759">        this.scrollbarsize = scrollbarsize;</span>
+<span class="nc" id="L760">    }</span>
+
+    public String getScrollmode()
+    {
+<span class="nc" id="L764">        return scrollmode;</span>
+    }
+
+    public void setScrollmode(String scrollmode)
+    {
+<span class="nc" id="L769">        this.scrollmode = scrollmode;</span>
+<span class="nc" id="L770">    }</span>
+
+    public JavascriptFunction getScrollfeedback()
+    {
+<span class="nc" id="L774">        return scrollfeedback;</span>
+    }
+
+    public void setScrollfeedback(JavascriptFunction scrollfeedback)
+    {
+<span class="nc" id="L779">        this.scrollfeedback = scrollfeedback;</span>
+<span class="nc" id="L780">    }</span>
+
+    public Integer getWidth()
+    {
+<span class="nc" id="L784">        return width;</span>
+    }
+
+    public void setWidth(Integer width)
+    {
+<span class="nc" id="L789">        this.width = width;</span>
+<span class="nc" id="L790">    }</span>
+
+    public Boolean getAutosavestate()
+    {
+<span class="nc" id="L794">        return autosavestate;</span>
+    }
+
+    public void setAutosavestate(Boolean autosavestate)
+    {
+<span class="nc" id="L799">        this.autosavestate = autosavestate;</span>
+<span class="nc" id="L800">    }</span>
+
+    public Boolean getAutoloadstate()
+    {
+<span class="nc" id="L804">        return autoloadstate;</span>
+    }
+
+    public void setAutoloadstate(Boolean autoloadstate)
+    {
+<span class="nc" id="L809">        this.autoloadstate = autoloadstate;</span>
+<span class="nc" id="L810">    }</span>
+
+    public JQXGridColumns getColumns()
+    {
+<span class="nc" id="L814">        return columns;</span>
+    }
+
+    public void setColumns(JQXGridColumns columns)
+    {
+<span class="nc" id="L819">        this.columns = columns;</span>
+<span class="nc" id="L820">    }</span>
+
+    public JQXGridColumns getColumngroups()
+    {
+<span class="nc" id="L824">        return columngroups;</span>
+    }
+
+    public void setColumngroups(JQXGridColumns columngroups)
+    {
+<span class="nc" id="L829">        this.columngroups = columngroups;</span>
+<span class="nc" id="L830">    }</span>
+
+    public Boolean getColumnsmenu()
+    {
+<span class="nc" id="L834">        return columnsmenu;</span>
+    }
+
+    public void setColumnsmenu(Boolean columnsmenu)
+    {
+<span class="nc" id="L839">        this.columnsmenu = columnsmenu;</span>
+<span class="nc" id="L840">    }</span>
+
+    public Boolean getColumnsresize()
+    {
+<span class="nc" id="L844">        return columnsresize;</span>
+    }
+
+    public void setColumnsresize(Boolean columnsresize)
+    {
+<span class="nc" id="L849">        this.columnsresize = columnsresize;</span>
+<span class="nc" id="L850">    }</span>
+
+    public Boolean getColumnsautoresize()
+    {
+<span class="nc" id="L854">        return columnsautoresize;</span>
+    }
+
+    public void setColumnsautoresize(Boolean columnsautoresize)
+    {
+<span class="nc" id="L859">        this.columnsautoresize = columnsautoresize;</span>
+<span class="nc" id="L860">    }</span>
+
+    public Boolean getColumnsreorder()
+    {
+<span class="nc" id="L864">        return columnsreorder;</span>
+    }
+
+    public void setColumnsreorder(Boolean columnsreorder)
+    {
+<span class="nc" id="L869">        this.columnsreorder = columnsreorder;</span>
+<span class="nc" id="L870">    }</span>
+
+    public Boolean getDisabled()
+    {
+<span class="nc" id="L874">        return disabled;</span>
+    }
+
+    public void setDisabled(Boolean disabled)
+    {
+<span class="nc" id="L879">        this.disabled = disabled;</span>
+<span class="nc" id="L880">    }</span>
+
+    public Boolean getEditable()
+    {
+<span class="nc" id="L884">        return editable;</span>
+    }
+
+    public void setEditable(Boolean editable)
+    {
+<span class="nc" id="L889">        this.editable = editable;</span>
+<span class="nc" id="L890">    }</span>
+
+    public String getEditmode()
+    {
+<span class="nc" id="L894">        return editmode;</span>
+    }
+
+    public void setEditmode(String editmode)
+    {
+<span class="nc" id="L899">        this.editmode = editmode;</span>
+<span class="nc" id="L900">    }</span>
+
+    public Boolean getFilterable()
+    {
+<span class="nc" id="L904">        return filterable;</span>
+    }
+
+    public void setFilterable(Boolean filterable)
+    {
+<span class="nc" id="L909">        this.filterable = filterable;</span>
+<span class="nc" id="L910">    }</span>
+
+    public Boolean getGroupable()
+    {
+<span class="nc" id="L914">        return groupable;</span>
+    }
+
+    public void setGroupable(Boolean groupable)
+    {
+<span class="nc" id="L919">        this.groupable = groupable;</span>
+<span class="nc" id="L920">    }</span>
+
+    public JQXGridGroups getGroups()
+    {
+<span class="nc" id="L924">        return groups;</span>
+    }
+
+    public void setGroups(JQXGridGroups groups)
+    {
+<span class="nc" id="L929">        this.groups = groups;</span>
+<span class="nc" id="L930">    }</span>
+
+    public Integer getHorizontalscrollbarstep()
+    {
+<span class="nc" id="L934">        return horizontalscrollbarstep;</span>
+    }
+
+    public void setHorizontalscrollbarstep(Integer horizontalscrollbarstep)
+    {
+<span class="nc" id="L939">        this.horizontalscrollbarstep = horizontalscrollbarstep;</span>
+<span class="nc" id="L940">    }</span>
+
+    public Integer getHorizontalscrollbarlargestep()
+    {
+<span class="nc" id="L944">        return horizontalscrollbarlargestep;</span>
+    }
+
+    public void setHorizontalscrollbarlargestep(Integer horizontalscrollbarlargestep)
+    {
+<span class="nc" id="L949">        this.horizontalscrollbarlargestep = horizontalscrollbarlargestep;</span>
+<span class="nc" id="L950">    }</span>
+
+    public JavascriptFunction getInitrowdetails()
+    {
+<span class="nc" id="L954">        return initrowdetails;</span>
+    }
+
+    public void setInitrowdetails(JavascriptFunction initrowdetails)
+    {
+<span class="nc" id="L959">        this.initrowdetails = initrowdetails;</span>
+<span class="nc" id="L960">    }</span>
+
+    public Boolean getKeyboardnavigation()
+    {
+<span class="nc" id="L964">        return keyboardnavigation;</span>
+    }
+
+    public void setKeyboardnavigation(Boolean keyboardnavigation)
+    {
+<span class="nc" id="L969">        this.keyboardnavigation = keyboardnavigation;</span>
+<span class="nc" id="L970">    }</span>
+
+    public Integer getPagesize()
+    {
+<span class="nc" id="L974">        return pagesize;</span>
+    }
+
+    public void setPagesize(Integer pagesize)
+    {
+<span class="nc" id="L979">        this.pagesize = pagesize;</span>
+<span class="nc" id="L980">    }</span>
+
+    public Integer[] getPagesizeoptions()
+    {
+<span class="nc" id="L984">        return pagesizeoptions;</span>
+    }
+
+    public void setPagesizeoptions(Integer[] pagesizeoptions)
+    {
+<span class="nc" id="L989">        this.pagesizeoptions = pagesizeoptions;</span>
+<span class="nc" id="L990">    }</span>
+
+    public String getPagermode()
+    {
+<span class="nc" id="L994">        return pagermode;</span>
+    }
+
+    public void setPagermode(String pagermode)
+    {
+<span class="nc" id="L999">        this.pagermode = pagermode;</span>
+<span class="nc" id="L1000">    }</span>
+
+    public Integer getPagerbuttonscount()
+    {
+<span class="nc" id="L1004">        return pagerbuttonscount;</span>
+    }
+
+    public void setPagerbuttonscount(Integer pagerbuttonscount)
+    {
+<span class="nc" id="L1009">        this.pagerbuttonscount = pagerbuttonscount;</span>
+<span class="nc" id="L1010">    }</span>
+
+    public Boolean getPageable()
+    {
+<span class="nc" id="L1014">        return pageable;</span>
+    }
+
+    public void setPageable(Boolean pageable)
+    {
+<span class="nc" id="L1019">        this.pageable = pageable;</span>
+<span class="nc" id="L1020">    }</span>
+
+    public Boolean getRowdetails()
+    {
+<span class="nc" id="L1024">        return rowdetails;</span>
+    }
+
+    public void setRowdetails(Boolean rowdetails)
+    {
+<span class="nc" id="L1029">        this.rowdetails = rowdetails;</span>
+<span class="nc" id="L1030">    }</span>
+
+    public JQXGridRowDetailsTemplate getRowdetailstemplate()
+    {
+<span class="nc" id="L1034">        return rowdetailstemplate;</span>
+    }
+
+    public void setRowdetailstemplate(JQXGridRowDetailsTemplate rowdetailstemplate)
+    {
+<span class="nc" id="L1039">        this.rowdetailstemplate = rowdetailstemplate;</span>
+<span class="nc" id="L1040">    }</span>
+
+    public JavascriptFunction getReady()
+    {
+<span class="nc" id="L1044">        return ready;</span>
+    }
+
+    public void setReady(JavascriptFunction ready)
+    {
+<span class="nc" id="L1049">        this.ready = ready;</span>
+<span class="nc" id="L1050">    }</span>
+
+    public JavascriptFunction getRendered()
+    {
+<span class="nc" id="L1054">        return rendered;</span>
+    }
+
+    public void setRendered(JavascriptFunction rendered)
+    {
+<span class="nc" id="L1059">        this.rendered = rendered;</span>
+<span class="nc" id="L1060">    }</span>
+
+    public JavascriptFunction getRenderstatusbar()
+    {
+<span class="nc" id="L1064">        return renderstatusbar;</span>
+    }
+
+    public void setRenderstatusbar(JavascriptFunction renderstatusbar)
+    {
+<span class="nc" id="L1069">        this.renderstatusbar = renderstatusbar;</span>
+<span class="nc" id="L1070">    }</span>
+
+    public JavascriptFunction getRendertoolbar()
+    {
+<span class="nc" id="L1074">        return rendertoolbar;</span>
+    }
+
+    public void setRendertoolbar(JavascriptFunction rendertoolbar)
+    {
+<span class="nc" id="L1079">        this.rendertoolbar = rendertoolbar;</span>
+<span class="nc" id="L1080">    }</span>
+
+    public JavascriptFunction getRendergridrows()
+    {
+<span class="nc" id="L1084">        return rendergridrows;</span>
+    }
+
+    public void setRendergridrows(JavascriptFunction rendergridrows)
+    {
+<span class="nc" id="L1089">        this.rendergridrows = rendergridrows;</span>
+<span class="nc" id="L1090">    }</span>
+
+    public Boolean getSortable()
+    {
+<span class="nc" id="L1094">        return sortable;</span>
+    }
+
+    public void setSortable(Boolean sortable)
+    {
+<span class="nc" id="L1099">        this.sortable = sortable;</span>
+<span class="nc" id="L1100">    }</span>
+
+    public Integer getSelectedrowindex()
+    {
+<span class="nc" id="L1104">        return selectedrowindex;</span>
+    }
+
+    public void setSelectedrowindex(Integer selectedrowindex)
+    {
+<span class="nc" id="L1109">        this.selectedrowindex = selectedrowindex;</span>
+<span class="nc" id="L1110">    }</span>
+
+    public JQXSelectedRowIndexes getSelectedrowindexes()
+    {
+<span class="nc" id="L1114">        return selectedrowindexes;</span>
+    }
+
+    public void setSelectedrowindexes(JQXSelectedRowIndexes selectedrowindexes)
+    {
+<span class="nc" id="L1119">        this.selectedrowindexes = selectedrowindexes;</span>
+<span class="nc" id="L1120">    }</span>
+
+    public Object getSource()
+    {
+<span class="nc" id="L1124">        return source;</span>
+    }
+
+    public void setSource(Object source)
+    {
+<span class="nc" id="L1129">        this.source = source;</span>
+<span class="nc" id="L1130">    }</span>
+
+    public String getSorttogglestates()
+    {
+<span class="nc" id="L1134">        return sorttogglestates;</span>
+    }
+
+    public void setSorttogglestates(String sorttogglestates)
+    {
+<span class="nc" id="L1139">        this.sorttogglestates = sorttogglestates;</span>
+<span class="nc" id="L1140">    }</span>
+
+    public Integer getUpdatedelay()
+    {
+<span class="nc" id="L1144">        return updatedelay;</span>
+    }
+
+    public void setUpdatedelay(Integer updatedelay)
+    {
+<span class="nc" id="L1149">        this.updatedelay = updatedelay;</span>
+<span class="nc" id="L1150">    }</span>
+
+    public Boolean getVirtualmode()
+    {
+<span class="nc" id="L1154">        return virtualmode;</span>
+    }
+
+    public void setVirtualmode(Boolean virtualmode)
+    {
+<span class="nc" id="L1159">        this.virtualmode = virtualmode;</span>
+<span class="nc" id="L1160">    }</span>
+
+    public Integer getVerticalscrollbarstep()
+    {
+<span class="nc" id="L1164">        return verticalscrollbarstep;</span>
+    }
+
+    public void setVerticalscrollbarstep(Integer verticalscrollbarstep)
+    {
+<span class="nc" id="L1169">        this.verticalscrollbarstep = verticalscrollbarstep;</span>
+<span class="nc" id="L1170">    }</span>
+
+    public Integer getVerticalscrollbarlargestep()
+    {
+<span class="nc" id="L1174">        return verticalscrollbarlargestep;</span>
+    }
+
+    public void setVerticalscrollbarlargestep(Integer verticalscrollbarlargestep)
+    {
+<span class="nc" id="L1179">        this.verticalscrollbarlargestep = verticalscrollbarlargestep;</span>
+<span class="nc" id="L1180">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

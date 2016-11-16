@@ -1,0 +1,38 @@
+{
+  "name": "jquery-layout-latest-1-5",
+  "version": "1.5.13",
+  "authors": [
+    "Copyright (c) 2014 Kevin Dalman (http://jquery-dev.com) Based on work by Fabrizio Balliano (http://www.fabrizioballiano.net)"
+  ],
+  "description": "A variation of the JQuery UI Layout with all the addons for compatibility. Angular enabled version available",
+  "main": "jquery.layout_and_plugins.js",
+  "keywords": [
+    "JQuery",
+    "UI",
+    "Layout",
+    "WebUI",
+    "WebBorderLayout",
+    "Web"
+  ],
+  "license": "MIT",
+  "homepage": "http://layout.jquery-dev.com/index.cfm http://www.armineasy.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.0.0"
+  },
+  "_release": "1.5.13",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.5.13",
+    "commit": "7b3ff9d6001bd918c58b7512669d2d58262b39e7"
+  },
+  "_source": "git://git.code.sf.net/p/jwebswing/jquery-ui-layout-jw",
+  "_target": "^1.5.12",
+  "_originalSource": "jquery-ui-latest-jwebswing"
+}

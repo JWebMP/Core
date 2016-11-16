@@ -1,0 +1,37 @@
+{
+  "name": "jqplot-jwebswing",
+  "version": "1.0.9",
+  "authors": [
+    "http://www.jqplot.com/"
+  ],
+  "description": "A JQPlot Shim for v1.09 as none existed as of 2016/06/25",
+  "main": "",
+  "keywords": [
+    "JQPlot",
+    "Plot",
+    "JQuery",
+    "Plot",
+    "JQuery",
+    "Graphing",
+    "JWebswing",
+    "Framework"
+  ],
+  "license": "MIT",
+  "homepage": "http://www.jqplot.com/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "1.0.9",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.9",
+    "commit": "8b10844499e8e9b03516214c55c76e3da5de18ec"
+  },
+  "_source": "git://git.code.sf.net/p/jwebswing/jquery-jqplot",
+  "_target": "^1.0.9",
+  "_originalSource": "jqplot-jwebswing"
+}

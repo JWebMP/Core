@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Moment.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.moment</a> &gt; <span class="el_source">Moment.java</span></div><h1>Moment.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.moment;
+
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+
+/**
+ * The Moment.js implementation
+ * &lt;p&gt;
+ * @author Marc Magon
+ * @since 29 Aug 2015
+ * @version 1.0
+ */
+public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatures, MomentEvents, Moment&gt; implements GlobalChildren
+{
+
+    private static final long serialVersionUID = 1L;
+
+    private static MomentAngularModule angularModule;
+
+    private MomentFeature feature;
+
+    private Date assignedDate;
+    private String variableName;
+
+    private Map&lt;MomentFilters, String&gt; appliedFilters;
+
+    /**
+     * Constructs an empty moment component
+     */
+    public Moment()
+<span class="nc" id="L53">    {</span>
+        
+<span class="nc" id="L55">    }</span>
+
+    /**
+     * Constructs a new moment with the given date and tag type
+     *
+     * @param assignedDate The date to use
+     * @param myComponent  THe component tag to use
+     */
+    public Moment(Date assignedDate, ComponentTypes myComponent)
+    {
+<span class="fc" id="L65">        super(myComponent);</span>
+<span class="fc" id="L66">        this.assignedDate = assignedDate;</span>
+<span class="fc" id="L67">    }</span>
+
+    /**
+     * Constructs a new moment with the given angular variable name
+     *
+     * @param variableName The angular variable name to use
+     * @param myComponent  The component type to use
+     */
+    public Moment(String variableName, ComponentTypes myComponent)
+    {
+<span class="nc" id="L77">        super(myComponent);</span>
+<span class="nc" id="L78">        this.variableName = variableName;</span>
+<span class="nc" id="L79">    }</span>
+
+    /**
+     * Constructs a new DIV with the given date
+     *
+     * @param assignedDate The date to use
+     */
+    public Moment(Date assignedDate)
+<span class="nc" id="L87">    {</span>
+<span class="nc" id="L88">        this.assignedDate = assignedDate;</span>
+<span class="nc" id="L89">    }</span>
+
+    /**
+     * Constructs a new DIV with the given angular variable
+     *
+     * @param variableName the new angular variable
+     */
+    public Moment(String variableName)
+<span class="nc" id="L97">    {</span>
+<span class="nc" id="L98">        this.variableName = variableName;</span>
+<span class="nc" id="L99">    }</span>
+
+    /**
+     * Returns the given feature
+     *
+     * @return
+     */
+    public final MomentFeature getFeature()
+    {
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        if (feature == null)</span>
+        {
+<span class="nc" id="L110">            feature = new MomentFeature(this);</span>
+        }
+<span class="nc" id="L112">        return feature;</span>
+    }
+
+    /**
+     * Returns no Options
+     *
+     * @return No options available for a moment
+     */
+    @Override
+    public MomentOptions getOptions()
+    {
+<span class="nc" id="L123">        return getFeature().getOptions();</span>
+    }
+
+    /**
+     * Returns the assigned date
+     *
+     * @return
+     */
+    public Date getAssignedDate()
+    {
+<span class="nc" id="L133">        return assignedDate;</span>
+    }
+
+    /**
+     * Returns the assigned date
+     *
+     * @param assignedDate
+     */
+    public void setAssignedDate(Date assignedDate)
+    {
+<span class="nc" id="L143">        this.assignedDate = assignedDate;</span>
+<span class="nc" id="L144">    }</span>
+
+    /**
+     * Returns the assigned variable name
+     *
+     * @return
+     */
+    public String getVariableName()
+    {
+<span class="nc" id="L153">        return variableName;</span>
+    }
+
+    /**
+     * Sets the assigned variable name
+     *
+     * @param variableName
+     */
+    public void setVariableName(String variableName)
+    {
+<span class="nc" id="L163">        this.variableName = variableName;</span>
+<span class="nc" id="L164">    }</span>
+
+    /**
+     * Return the HashMap of filters applied to this moment
+     *
+     * @return
+     */
+    public Map&lt;MomentFilters, String&gt; getAppliedFilters()
+    {
+<span class="fc bfc" id="L173" title="All 2 branches covered.">        if (appliedFilters == null)</span>
+        {
+<span class="fc" id="L175">            appliedFilters = new HashMap&lt;&gt;();</span>
+        }
+<span class="fc" id="L177">        return appliedFilters;</span>
+    }
+
+    /**
+     * Sets this moment list of applied filters
+     *
+     * @param appliedFilters
+     */
+    public void setAppliedFilters(HashMap&lt;MomentFilters, String&gt; appliedFilters)
+    {
+<span class="nc" id="L187">        this.appliedFilters = appliedFilters;</span>
+<span class="nc" id="L188">    }</span>
+
+    @Override
+    public void preConfigure()
+    {
+<span class="pc bpc" id="L193" title="1 of 2 branches missed.">        if (!isConfigured())</span>
+        {
+<span class="fc bfc" id="L195" title="All 2 branches covered.">            if (angularModule == null)</span>
+            {
+<span class="fc" id="L197">                angularModule = new MomentAngularModule(getPage());</span>
+            }
+<span class="fc" id="L199">            getPage().getAngular().addModule(angularModule);</span>
+<span class="fc" id="L200">            addAttribute(MomentAttributes.am_time_ago, buildAttributeString());</span>
+        }
+<span class="fc" id="L202">        super.preConfigure();</span>
+<span class="fc" id="L203">    }</span>
+
+    /**
+     * Builds the list of given filters
+     *
+     * @return
+     */
+    private String buildAttributeString()
+    {
+<span class="fc" id="L212">        StringBuilder sb = new StringBuilder();</span>
+<span class="pc bpc" id="L213" title="1 of 2 branches missed.">        if (variableName != null)</span>
+        {
+<span class="nc" id="L215">            sb.append(variableName);</span>
+        }
+<span class="fc bfc" id="L217" title="All 2 branches covered.">        else if (assignedDate != null)</span>
+        {
+<span class="fc" id="L219">            sb.append(&quot;'&quot;).append(DateFormatter.format(assignedDate)).append(&quot;'&quot;);</span>
+<span class="fc" id="L220">            getAppliedFilters().put(MomentFilters.amParse, &quot;YYYY-MM-DD HH:mm:ss&quot;);</span>
+        }
+<span class="fc bfc" id="L222" title="All 2 branches covered.">        if (!getAppliedFilters().isEmpty())</span>
+        {
+<span class="fc" id="L224">            getAppliedFilters().entrySet().stream().forEach((entry)</span>
+                    -&gt; 
+                    {
+<span class="fc" id="L227">                        MomentFilters key = entry.getKey();</span>
+<span class="fc" id="L228">                        String value = entry.getValue();</span>
+<span class="pc bpc" id="L229" title="1 of 2 branches missed.">                        if (value != null)</span>
+                        {
+<span class="fc" id="L231">                            sb.append(&quot; | &quot;).append(key).append(&quot; : '&quot;).append(value).append(&quot;'&quot;);</span>
+                        }
+                        else
+                        {
+<span class="nc" id="L235">                            sb.append(&quot; | &quot;).append(key);</span>
+                        }
+<span class="fc" id="L237">            });</span>
+        }
+<span class="fc" id="L239">        return sb.toString();</span>
+    }
+
+    /**
+     * The default date formatter which is parsed
+     */
+<span class="fc" id="L245">    private static final SimpleDateFormat DateFormatter = (SimpleDateFormat) SimpleDateFormat.getInstance();// new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+    static
+    {
+<span class="fc" id="L248">        DateFormatter.applyPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+    }
+    /**
+     * Parses a custom-formatted date into a moment object that can be used with the am-time-ago directive and the other filters. For example, the following code will accept dates that are formatted
+     * like &quot;2015.04.25 22:00:15':
+     * &lt;p&gt;
+     * am-time-ago=&quot;message.time | amParse:'YYYY.MM.DD HH:mm:ss'&quot;
+     * &lt;p&gt;
+     * Note: To use amParse, install angular-moment version 1.0.0-beta.3 or newer
+     *
+     * @param parseSyntax
+     */
+    public void AddParseFilter(String parseSyntax)
+    {
+<span class="nc" id="L262">        getAppliedFilters().put(MomentFilters.amParse, parseSyntax);</span>
+<span class="nc" id="L263">    }</span>
+
+    /**
+     * Converts a unix-timestamp (seconds since 1/1/1970) into a moment object. Example:
+     * &lt;p&gt;
+     * span am-time-ago=&quot;message.unixTime | amFromUnix&quot;
+     */
+    public void AddFromUnixFilter()
+    {
+<span class="nc" id="L272">        getAppliedFilters().put(MomentFilters.amFromUnix, null);</span>
+<span class="nc" id="L273">    }</span>
+
+    /**
+     * Create / switch the current moment object into UTC mode. For example, given a date object in message.date, the following code will display the time in UTC instead of the local timezone:
+     * &lt;p&gt;
+     * {{message.date | amUtc | amDateFormat:'MM.DD.YYYY HH:mm:ss'}}
+     */
+    public void AddUtc()
+    {
+<span class="nc" id="L282">        getAppliedFilters().put(MomentFilters.amUtc, null);</span>
+<span class="nc" id="L283">    }</span>
+
+<span class="fc" id="L285">    private static final NumberFormat nf = NumberFormat.getInstance();</span>
+
+    static
+    {
+<span class="fc" id="L289">        nf.setGroupingUsed(false);</span>
+<span class="fc" id="L290">        nf.setMaximumFractionDigits(2);</span>
+<span class="fc" id="L291">        nf.setMinimumIntegerDigits(2);</span>
+<span class="fc" id="L292">    }</span>
+
+    /**
+     * Uses the given U offset when displaying a date. For example, the following code will display the date with a UTC + 3 hours time offset:
+     * &lt;p&gt;
+     * {{message.date | amUtcOffset:'+0300' | amDateFormat:'MM.DD.YYYY HH:mm:ss'}}/span
+     *
+     * @param timeToChange the time to change, use like 3.0, or 3.30
+     */
+    public void AddUtcOffsetFilter(double timeToChange)
+    {
+<span class="nc" id="L303">        String timeSet = &quot;+&quot; + nf.format(timeToChange).replace(&quot;.&quot;, &quot;&quot;);</span>
+<span class="nc" id="L304">        getAppliedFilters().put(MomentFilters.amUtcOffset, timeSet);</span>
+<span class="nc" id="L305">    }</span>
+
+    /**
+     * Changes the given moment object to be in the local timezone. Usually used in conjunction with amUtc / amTimezone for timezone conversion. For example, the following will convert the given UTC
+     * date to local time:
+     * &lt;p&gt;
+     * {{message.date | amUtc | amLocal | amDateFormat:'MM.DD.YYYY HH:mm:ss'}}
+     */
+    public void AddLocalFilter()
+    {
+<span class="nc" id="L315">        getAppliedFilters().put(MomentFilters.amLocal, null);</span>
+<span class="nc" id="L316">    }</span>
+
+    /**
+     * TODO this guy needs to get done https://github.com/urish/angular-moment
+     */
+    public void AddTimezoneFilter()
+    {
+
+<span class="nc" id="L324">    }</span>
+
+    /**
+     * Format dates using moment.js format() method. Example:
+     * &lt;p&gt;
+     * {{message.time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}
+     * &lt;p&gt;
+     * This snippet will format the given time as &quot;Monday, October 7th 2013, 12:36:29 am&quot;.
+     *
+     * @param dateformat
+     */
+    public void AddDateFormatFilter(String dateformat)
+    {
+<span class="nc" id="L337">        getAppliedFilters().put(MomentFilters.amDateeFormat, dateformat);</span>
+<span class="nc" id="L338">    }</span>
+
+    /**
+     * Format dates using moment.js calendar() method. Example:
+     * &lt;p&gt;
+     * span&amp;gt;{{message.time | amCalendar:referenceTime:formats}}/span
+     * &lt;p&gt;
+     * This snippet will format the given time as e.g. &quot;Today 2:30 AM&quot; or &quot;Last Monday 2:30 AM&quot; etc..
+     */
+    public void AddCalendarFilter()
+    {
+<span class="nc" id="L349">        getAppliedFilters().put(MomentFilters.amCalendar, &quot;referenceTime:formats&quot;);</span>
+<span class="nc" id="L350">    }</span>
+
+    /**
+     * TODO this guy... ;/ https://github.com/urish/angular-moment
+     */
+    public void AddDifferenceFilter()
+    {
+<span class="nc" id="L357">        getAppliedFilters().put(MomentFilters.amDifference, &quot;referenceTime:formats&quot;);</span>
+<span class="nc" id="L358">    }</span>
+
+    /**
+     * Formats a duration (such as 5 days) in a human readable format. See Moment.JS documentation for a list of supported duration formats, and humanize() documentation for explanation about the
+     * formatting algorithm.
+     * &lt;p&gt;
+     * Example:
+     * &lt;p&gt;
+     * Message age: {{message.ageInMinutes | amDurationFormat : 'minute' }}
+     * &lt;p&gt;
+     * Will display the age of the message (e.g. 10 minutes, 1 hour, 2 days, etc).
+     *
+     * @param duration
+     */
+    public void AddDurationFilter(DurationFilters duration)
+    {
+<span class="nc" id="L374">        getAppliedFilters().put(MomentFilters.amDurationFormat, duration.toString());</span>
+<span class="nc" id="L375">    }</span>
+
+    /**
+     * Subtract values (hours, minutes, seconds ...) from a specified date.
+     *
+     * @param amount
+     * @param part
+     */
+    public void AddSubtractionFilter(int amount, DurationFilters part)
+    {
+<span class="nc" id="L385">        getAppliedFilters().put(MomentFilters.amSubtract, &quot;&quot; + amount + &quot;' : '&quot; + part.toString() + &quot;&quot;);</span>
+<span class="nc" id="L386">    }</span>
+
+    /**
+     * Adds values (hours, minutes, seconds ...) from a specified date.
+     *
+     * @param amount
+     * @param part
+     */
+    public void AddAdditionFilter(int amount, DurationFilters part)
+    {
+<span class="nc" id="L396">        getAppliedFilters().put(MomentFilters.amAdd, &quot;&quot; + amount + &quot;' : '&quot; + part.toString() + &quot;&quot;);</span>
+<span class="nc" id="L397">    }</span>
+
+    /**
+     * The available descernable parts
+     */
+<span class="nc" id="L402">    public enum DurationFilters</span>
+    {
+<span class="nc" id="L404">        Years,</span>
+<span class="nc" id="L405">        Hours,</span>
+<span class="nc" id="L406">        Minutes,</span>
+<span class="nc" id="L407">        Days,</span>
+<span class="nc" id="L408">        Months,</span>
+<span class="nc" id="L409">        Seconds;</span>
+
+        @Override
+        public String toString()
+        {
+<span class="nc" id="L414">            return name().toLowerCase();</span>
+        }
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

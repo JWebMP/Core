@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQUITabOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqueryUI.tabs</a> &gt; <span class="el_source">JQUITabOptions.java</span></div><h1>JQUITabOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 MXM3727
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqueryUI.tabs;
+
+import za.co.mmagon.jwebswing.htmlbuilder.effects.JWAnimationEffectsPart;
+import za.co.mmagon.jwebswing.components.jqueryUI.accordion.JQUIAccordionHeightStyle;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.mouseevents.MouseEventType;
+
+/**
+ * The options for the tab component
+ * &lt;p&gt;
+ * @author Marc Magon
+ * @since 2014/04/27
+ */
+<span class="fc" id="L31">public class JQUITabOptions extends JavaScriptPart</span>
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * The panel to show as active
+     */
+    private Integer active;
+    /**
+     * Whether or not the tab is collapsible
+     */
+    private Boolean collapsible;
+    /**
+     * The disabled value of the
+     */
+    private Boolean disabled;
+    /**
+     * The mouse event to activate on
+     */
+    private MouseEventType event;
+    /**
+     * The height style
+     */
+    private JQUIAccordionHeightStyle heightStyle;
+    /**
+     * The animation effect for hide
+     */
+    private JWAnimationEffectsPart hide;
+    /**
+     * The animation effect for show
+     */
+    private JWAnimationEffectsPart show;
+
+    /**
+     * Which panel is currently open.
+     * Multiple types supported:
+     * &lt;p&gt;
+     * Boolean: Setting active to false will collapse all panels. This requires the collapsible option to be true.
+     * Integer: The zero-based index of the panel that is active (open). A negative value selects panels going backward from the last panel.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getActive()
+    {
+<span class="nc" id="L76">        return active;</span>
+    }
+
+    /**
+     * Which panel is currently open.
+     * Multiple types supported:
+     * &lt;p&gt;
+     * Boolean: Setting active to false will collapse all panels. This requires the collapsible option to be true.
+     * Integer: The zero-based index of the panel that is active (open). A negative value selects panels going backward from the last panel.
+     * &lt;p&gt;
+     * @param active
+     */
+    public void setActive(Integer active)
+    {
+<span class="nc" id="L90">        this.active = active;</span>
+<span class="nc" id="L91">    }</span>
+
+    /**
+     * When set to true, the active panel can be closed.
+     * Code examples:
+     * &lt;p&gt;
+     * Initialize the tabs with the collapsible option specified:
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getCollapsible()
+    {
+<span class="nc" id="L103">        return collapsible;</span>
+    }
+
+    /**
+     * When set to true, the active panel can be closed.
+     * Code examples:
+     * &lt;p&gt;
+     * Initialize the tabs with the collapsible option specified:
+     * &lt;p&gt;
+     * @param collapsible
+     */
+    public void setCollapsible(Boolean collapsible)
+    {
+<span class="nc" id="L116">        this.collapsible = collapsible;</span>
+<span class="nc" id="L117">    }</span>
+
+    /**
+     * Which tabs are disabled.
+     * Multiple types supported:
+     * &lt;p&gt;
+     * Boolean: Enable or disable all tabs.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getDisabled()
+    {
+<span class="nc" id="L129">        return disabled;</span>
+    }
+
+    /**
+     * Which tabs are disabled.
+     * Multiple types supported:
+     * &lt;p&gt;
+     * Boolean: Enable or disable all tabs.
+     * &lt;p&gt;
+     * @param disabled
+     */
+    public void setDisabled(Boolean disabled)
+    {
+<span class="nc" id="L142">        this.disabled = disabled;</span>
+<span class="nc" id="L143">    }</span>
+
+    /**
+     * The type of event that the tabs should react to in order to activate the tab. To activate on hover, use &quot;mouseover&quot;.
+     * &lt;p&gt;
+     * @return
+     */
+    public MouseEventType getEvent()
+    {
+<span class="nc" id="L152">        return event;</span>
+    }
+
+    /**
+     * The type of event that the tabs should react to in order to activate the tab. To activate on hover, use &quot;mouseover&quot;.
+     * &lt;p&gt;
+     * @param event
+     */
+    public void setEvent(MouseEventType event)
+    {
+<span class="nc" id="L162">        this.event = event;</span>
+<span class="nc" id="L163">    }</span>
+
+    /**
+     * Controls the height of the tabs widget and each panel. Possible values:
+     * &lt;p&gt;
+     * &quot;auto&quot;: All panels will be set to the height of the tallest panel.
+     * &quot;fill&quot;: Expand to the available height based on the tabs' parent height.
+     * &quot;content&quot;: Each panel will be only as tall as its content.
+     * &lt;p&gt;
+     * @return
+     */
+    public JQUIAccordionHeightStyle getHeightStyle()
+    {
+<span class="nc" id="L176">        return heightStyle;</span>
+    }
+
+    /**
+     * Controls the height of the tabs widget and each panel. Possible values:
+     * &lt;p&gt;
+     * &quot;auto&quot;: All panels will be set to the height of the tallest panel.
+     * &quot;fill&quot;: Expand to the available height based on the tabs' parent height.
+     * &quot;content&quot;: Each panel will be only as tall as its content.
+     * &lt;p&gt;
+     * @param heightStyle
+     */
+    public void setHeightStyle(JQUIAccordionHeightStyle heightStyle)
+    {
+<span class="nc" id="L190">        this.heightStyle = heightStyle;</span>
+<span class="nc" id="L191">    }</span>
+
+    /**
+     * If and how to animate the hiding of the panel.
+     * &lt;p&gt;
+     * @return
+     */
+    public JWAnimationEffectsPart getHide()
+    {
+<span class="nc" id="L200">        return hide;</span>
+    }
+
+    /**
+     * If and how to animate the hiding of the panel.
+     * &lt;p&gt;
+     * @param hide
+     */
+    public void setHide(JWAnimationEffectsPart hide)
+    {
+<span class="nc" id="L210">        this.hide = hide;</span>
+<span class="nc" id="L211">    }</span>
+
+    /**
+     * If and how to animate the showing of the panel.
+     * &lt;p&gt;
+     * @return
+     */
+    public JWAnimationEffectsPart getShow()
+    {
+<span class="nc" id="L220">        return show;</span>
+    }
+
+    /**
+     * If and how to animate the showing of the panel.
+     * &lt;p&gt;
+     * @param show
+     */
+    public void setShow(JWAnimationEffectsPart show)
+    {
+<span class="nc" id="L230">        this.show = show;</span>
+<span class="nc" id="L231">    }</span>
+
+    @Override
+    public JavascriptPartType getJavascriptType()
+    {
+<span class="fc" id="L236">        return JavascriptPartType.Javascript;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

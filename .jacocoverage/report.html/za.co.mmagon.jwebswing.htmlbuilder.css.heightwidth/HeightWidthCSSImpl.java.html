@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>HeightWidthCSSImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.htmlbuilder.css.heightwidth</a> &gt; <span class="el_source">HeightWidthCSSImpl.java</span></div><h1>HeightWidthCSSImpl.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.htmlbuilder.css.heightwidth;
+
+import java.lang.annotation.Annotation;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementTypes;
+
+/**
+ *
+ * @author GedMarc
+ * @since 18 Jan 2016
+ */
+public class HeightWidthCSSImpl implements HeightWidthCSS
+{
+
+    public HeightWidthCSSImpl()
+<span class="nc" id="L33">    {</span>
+<span class="nc" id="L34">    }</span>
+
+    private MeasurementCSS Height;
+    private HeightSetting Height$;
+    private MeasurementCSS Width;
+    private WidthSetting Width$;
+    private MeasurementCSS Min_Height;
+    private MeasurementCSS Max_Height;
+    private MeasurementCSS Min_Width;
+    private MeasurementCSS Max_Width;
+
+    @Override
+    public Class&lt;? extends Annotation&gt; annotationType()
+    {
+<span class="nc" id="L48">        return HeightWidthCSS.class;</span>
+    }
+
+    /**
+     * Sets the height of an element
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Height()
+    {
+<span class="nc" id="L59">        return Height;</span>
+    }
+
+    /**
+     * Sets the height of an element
+     *
+     * @return
+     */
+    @Override
+    public HeightSetting Height$()
+    {
+<span class="nc" id="L70">        return Height$;</span>
+    }
+
+    /**
+     * Sets the width of an element
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Width()
+    {
+<span class="nc" id="L81">        return Width;</span>
+    }
+
+    /**
+     * Sets the width of an element
+     *
+     * @return
+     */
+    @Override
+    public WidthSetting Width$()
+    {
+<span class="nc" id="L92">        return Width$;</span>
+    }
+
+    /**
+     * Sets the min height of an element
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Min_Height()
+    {
+<span class="nc" id="L103">        return Min_Height;</span>
+    }
+
+    /**
+     * Sets the max height of an element
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Max_Height()
+    {
+<span class="nc" id="L114">        return Max_Height;</span>
+    }
+
+    /**
+     * Sets the min width of an element
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Min_Width()
+    {
+<span class="nc" id="L125">        return Min_Width;</span>
+    }
+
+    /**
+     * Sets the max height of an element
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Max_Width()
+    {
+<span class="nc" id="L136">        return Max_Width;</span>
+    }
+
+    /**
+     * Sets the height of an element
+     *
+     * @param Height
+     */
+    public void setHeight(MeasurementCSS Height)
+    {
+<span class="nc" id="L146">        this.Height = Height;</span>
+<span class="nc" id="L147">    }</span>
+
+    /**
+     * Sets the height of an element
+     *
+     * @param Height$
+     */
+    public void setHeight$(HeightSetting Height$)
+    {
+<span class="nc" id="L156">        this.Height$ = Height$;</span>
+<span class="nc" id="L157">    }</span>
+
+    /**
+     * Sets the width of an element
+     *
+     * @param Width
+     */
+    public void setWidth(MeasurementCSS Width)
+    {
+<span class="nc" id="L166">        this.Width = Width;</span>
+<span class="nc" id="L167">    }</span>
+
+    /**
+     * Sets the width of an element
+     *
+     * @param Width$
+     */
+    public void setWidth$(WidthSetting Width$)
+    {
+<span class="nc" id="L176">        this.Width$ = Width$;</span>
+<span class="nc" id="L177">    }</span>
+
+    /**
+     * Sets the width of an element
+     *
+     * @param Min_Height
+     */
+    public void setMin_Height(MeasurementCSS Min_Height)
+    {
+<span class="nc" id="L186">        this.Min_Height = Min_Height;</span>
+<span class="nc" id="L187">    }</span>
+
+    /**
+     * Sets the width of an element
+     *
+     * @param Max_Height
+     */
+    public void setMax_Height(MeasurementCSS Max_Height)
+    {
+<span class="nc" id="L196">        this.Max_Height = Max_Height;</span>
+<span class="nc" id="L197">    }</span>
+
+    /**
+     * Sets the width of an element
+     *
+     * @param Min_Width
+     */
+    public void setMin_Width(MeasurementCSS Min_Width)
+    {
+<span class="nc" id="L206">        this.Min_Width = Min_Width;</span>
+<span class="nc" id="L207">    }</span>
+
+    /**
+     * Sets the width of an element
+     *
+     * @param Max_Width
+     */
+    public void setMax_Width(MeasurementCSS Max_Width)
+    {
+<span class="nc" id="L216">        this.Max_Width = Max_Width;</span>
+<span class="nc" id="L217">    }</span>
+
+    /**
+     * Convenience method setting the Width
+     * &lt;p&gt;
+     * @param Width           The width to set
+     * @param measurementType The measurement type
+     */
+    public void setWidth(int Width, MeasurementTypes measurementType)
+    {
+<span class="nc" id="L227">        setWidth(new MeasurementCSSImpl(Width, measurementType));</span>
+<span class="nc" id="L228">    }</span>
+
+    /**
+     * Convenience method setting the inner HTML value - Default of Pixels
+     * &lt;p&gt;
+     * @param Width Width
+     */
+    public void setWidth(int Width)
+    {
+<span class="nc" id="L237">        setWidth(Width, MeasurementTypes.Pixels);</span>
+<span class="nc" id="L238">    }</span>
+
+    /**
+     * Convenience method setting the Width
+     * &lt;p&gt;
+     * @param Width           The width to set
+     * @param measurementType The measurement type
+     */
+    public void setHeight(int Width, MeasurementTypes measurementType)
+    {
+<span class="nc" id="L248">        setHeight(new MeasurementCSSImpl(Width, measurementType));</span>
+<span class="nc" id="L249">    }</span>
+
+    /**
+     * Convenience method setting the inner HTML value - Default of Pixels
+     * &lt;p&gt;
+     * @param Width Width
+     */
+    public void setHeight(int Width)
+    {
+<span class="nc" id="L258">        setHeight(Width, MeasurementTypes.Pixels);</span>
+<span class="nc" id="L259">    }</span>
+
+    /**
+     * Convenience method setting the Width
+     * &lt;p&gt;
+     * @param Width           The width to set
+     * @param measurementType The measurement type
+     */
+    public void setMin_Width(int Width, MeasurementTypes measurementType)
+    {
+<span class="nc" id="L269">        setMin_Width(new MeasurementCSSImpl(Width, measurementType));</span>
+<span class="nc" id="L270">    }</span>
+
+    /**
+     * Convenience method setting the inner HTML value - Default of Pixels
+     * &lt;p&gt;
+     * @param Width Width
+     */
+    public void setMin_Width(int Width)
+    {
+<span class="nc" id="L279">        setMin_Width(Width, MeasurementTypes.Pixels);</span>
+<span class="nc" id="L280">    }</span>
+
+    /**
+     * Convenience method setting the Width
+     * &lt;p&gt;
+     * @param Width           The width to set
+     * @param measurementType The measurement type
+     */
+    public void setMax_Width(int Width, MeasurementTypes measurementType)
+    {
+<span class="nc" id="L290">        setMax_Width(new MeasurementCSSImpl(Width, measurementType));</span>
+<span class="nc" id="L291">    }</span>
+
+    /**
+     * Convenience method setting the inner HTML value - Default of Pixels
+     * &lt;p&gt;
+     * @param Width Width
+     */
+    public void setMax_Width(int Width)
+    {
+<span class="nc" id="L300">        setMax_Width(Width, MeasurementTypes.Pixels);</span>
+<span class="nc" id="L301">    }</span>
+
+    /**
+     * Convenience method setting the Width
+     * &lt;p&gt;
+     * @param Width           The width to set
+     * @param measurementType The measurement type
+     */
+    public void setMin_Height(int Width, MeasurementTypes measurementType)
+    {
+<span class="nc" id="L311">        setMin_Height(new MeasurementCSSImpl(Width, measurementType));</span>
+<span class="nc" id="L312">    }</span>
+
+    /**
+     * Convenience method setting the inner HTML value - Default of Pixels
+     * &lt;p&gt;
+     * @param Width Width
+     */
+    public void setMin_Height(int Width)
+    {
+<span class="nc" id="L321">        setMin_Height(Width, MeasurementTypes.Pixels);</span>
+<span class="nc" id="L322">    }</span>
+
+    /**
+     * Convenience method setting the Width
+     * &lt;p&gt;
+     * @param Width           The width to set
+     * @param measurementType The measurement type
+     */
+    public void setMax_Height(int Width, MeasurementTypes measurementType)
+    {
+<span class="nc" id="L332">        setMax_Height(new MeasurementCSSImpl(Width, measurementType));</span>
+<span class="nc" id="L333">    }</span>
+
+    /**
+     * Convenience method setting the inner HTML value - Default of Pixels
+     * &lt;p&gt;
+     * @param Width Width
+     */
+    public void setMax_Height(int Width)
+    {
+<span class="nc" id="L342">        setMax_Height(Width, MeasurementTypes.Pixels);</span>
+<span class="nc" id="L343">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Event.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing</a> &gt; <span class="el_source">Event.java</span></div><h1>Event.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 ged_m
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing;
+
+import java.util.ArrayList;
+import za.co.mmagon.jwebswing.base.ComponentEventBase;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
+import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
+import za.co.mmagon.jwebswing.base.exceptions.NullComponentException;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+
+/**
+ * Container Class for Events.
+ * Splits from the component hierarchy
+ *
+ * @author GedMarc
+ * @param &lt;A&gt; Ajax Event type object back
+ * @param &lt;J&gt; This class
+ * @since 23 Apr 2016
+ */
+public class Event&lt;A extends JavaScriptPart, J extends Event&gt;
+        extends ComponentEventBase&lt;GlobalFeatures, GlobalEvents, Event&gt;
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Creates an event with the given component and type
+     *
+     * @param eventTypes
+     * @param component
+     */
+    public Event(EventTypes eventTypes, ComponentHierarchyBase component)
+    {
+<span class="fc" id="L54">        this(eventTypes.name(), eventTypes);</span>
+<span class="fc" id="L55">        setComponent(component);</span>
+<span class="fc" id="L56">        component.getPage().setAngularEnabled(true);</span>
+<span class="fc" id="L57">    }</span>
+
+    /**
+     * Adds a variable to return on the call
+     *
+     * @param returnVariable The name of the variable to return
+     */
+    public void registerReturnVariableName(String returnVariable)
+    {
+<span class="nc" id="L66">        getVariables().add(returnVariable);</span>
+<span class="nc" id="L67">    }</span>
+    
+    /**
+     * Adds a variable to return on the call
+     *
+     * @param returnVariable The name of the variable to return
+     * @param owningComponent The component to assign this variable to
+     */
+    public void registerReturnVariableName(String returnVariable,String owningComponent)
+    {
+<span class="nc" id="L77">        getVariables().add(returnVariable);</span>
+<span class="nc" id="L78">    }</span>
+
+    /**
+     * The variables to return
+     */
+    private ArrayList&lt;String&gt; variables;
+
+    /**
+     * Render the variable return array
+     *
+     * @return
+     */
+    public String renderVariables()
+    {
+<span class="fc" id="L92">        final StringBuilder s = new StringBuilder(&quot;[&quot;);</span>
+<span class="fc" id="L93">        getVariables().stream().forEach((event) -&gt;</span>
+        {
+<span class="nc" id="L95">            s.append(&quot;'&quot;).append(event).append(&quot;'&quot;).append(&quot;,&quot;);</span>
+<span class="nc" id="L96">        });</span>
+        StringBuilder s2;
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">        if (s.indexOf(&quot;,&quot;) &gt; 0)</span>
+        {
+<span class="nc" id="L100">            s2 = s.deleteCharAt(s.lastIndexOf(&quot;,&quot;));</span>
+        }
+        else
+        {
+<span class="fc" id="L104">            s2 = s;</span>
+        }
+<span class="fc" id="L106">        s2.append(&quot;]&quot;);</span>
+        
+        //append Event ID
+<span class="fc" id="L109">        s2.append(&quot;,'&quot;).append(getID()).append(&quot;'&quot;);</span>
+        
+<span class="fc" id="L111">        return s2.toString();</span>
+    }
+
+    /**
+     * Returns the list of currently associated variables
+     *
+     * @return
+     */
+    @Override
+    public ArrayList&lt;String&gt; getVariables()
+    {
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">        if (variables == null)</span>
+        {
+<span class="fc" id="L124">            variables = new ArrayList&lt;&gt;();</span>
+        }
+<span class="fc" id="L126">        return variables;</span>
+    }
+
+    /**
+     * Sets the current list of variables to return
+     *
+     * @param variables
+     */
+    public void setVariables(ArrayList&lt;String&gt; variables)
+    {
+<span class="nc" id="L136">        this.variables = variables;</span>
+<span class="nc" id="L137">    }</span>
+
+    /**
+     * Constructs an event with the given name
+     *
+     * @param name
+     * @param eventType
+     */
+    public Event(String name, EventTypes eventType)
+    {
+<span class="fc" id="L147">        this(name, eventType, null);</span>
+<span class="fc" id="L148">    }</span>
+
+    /**
+     * Constructs an event with the given name
+     *
+     * @param name      The name of this event
+     * @param eventType The event type of this event
+     * @param component The component type of this event
+     */
+    public Event(String name, EventTypes eventType, ComponentHierarchyBase component)
+    {
+<span class="fc" id="L159">        super(ComponentTypes.Event);</span>
+<span class="fc" id="L160">        setName(name);</span>
+<span class="fc" id="L161">        this.component = component;</span>
+<span class="fc" id="L162">        setEventType(eventType);</span>
+<span class="fc" id="L163">    }</span>
+
+    /**
+     * The method that is fired on call
+     *
+     * @param call     The component that made the call
+     * @param response The Response Object Being Returned
+     */
+    public void fireEvent(AjaxCall call, AjaxResponse response)
+    {
+
+<span class="nc" id="L174">    }</span>
+
+    /**
+     * Returns the linked component if required
+     *
+     * @return
+     */
+    public ComponentHierarchyBase getComponent()
+    {
+<span class="fc" id="L183">        return component;</span>
+    }
+
+    /**
+     * Sets the linked component if required
+     *
+     * @param component
+     */
+    public void setComponent(ComponentHierarchyBase component)
+    {
+<span class="pc bpc" id="L193" title="1 of 2 branches missed.">        if (component == null)</span>
+        {
+<span class="nc" id="L195">            throw new NullComponentException(&quot;Components set for events cannot be null&quot;);</span>
+        }
+<span class="fc" id="L197">        this.component = component;</span>
+<span class="fc" id="L198">    }</span>
+
+    /**
+     * Adds a query to builder
+     *
+     * @param query
+     * @return Adds a query to the window
+     */
+    public J addQuery(StringBuilder query)
+    {
+<span class="nc bnc" id="L208" title="All 2 branches missed.">        if (!getQueries().contains(query))</span>
+        {
+<span class="nc" id="L210">            getQueries().add(query);</span>
+        }
+<span class="nc" id="L212">        return (J) this;</span>
+    }
+
+    /**
+     * Adds a query to builder
+     *
+     * @param query
+     * @return
+     */
+    public J addQuery(String query)
+    {
+<span class="nc" id="L223">        StringBuilder sb = new StringBuilder(query);</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">        if (!getQueries().contains(sb))</span>
+        {
+<span class="nc" id="L226">            getQueries().add(new StringBuilder(query));</span>
+        }
+<span class="nc" id="L228">        return (J) this;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

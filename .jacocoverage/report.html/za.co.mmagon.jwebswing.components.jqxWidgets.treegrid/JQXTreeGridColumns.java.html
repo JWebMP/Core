@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQXTreeGridColumns.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqxWidgets.treegrid</a> &gt; <span class="el_source">JQXTreeGridColumns.java</span></div><h1>JQXTreeGridColumns.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqxWidgets.treegrid;
+
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptFunction;
+
+/**
+ * This Class
+ *
+ * @author GedMarc
+ * @since 25 Dec 2015
+ */
+public class JQXTreeGridColumns
+{
+
+    /**
+     * string property which sets the column headers text.
+     */
+    private String text;
+    /**
+     * string property which sets the columns bound field. It should be unique and should point to a data field defined in the jqxDataAdapters dataFields array.
+     */
+    private String dataField;
+    /**
+     * string property which sets the columns display field. It should be unique and should point to a data field defined in the jqxDataAdapters dataFields array.
+     */
+    private String displayField;
+    /**
+     * boolean property which determines whether the column is sortable.
+     */
+    private Boolean sortable;
+    /**
+     * boolean property which determines whether the column is filterable.
+     */
+    private Boolean filterable;
+    /**
+     * boolean property which determines whether the column is visible or hidden.
+     */
+    private Boolean hidden;
+    /**
+     * string property which determines the name of the columns parent group. It should point to a valid name defined in the columnGroups.
+     */
+    private String columnGroup;
+    /**
+     * boolean property which determines whether the cells data wrapping is enabled. This property is set to true by default. When autoRowHeight is enabled and autoCellHeight is set to false, the
+     * cells data will not be wrapped.
+     */
+    private Boolean autoCellHeight;
+    /**
+     * callback function for custom rendering of the columns header.
+     */
+    private JavascriptFunction renderer;
+
+    public JQXTreeGridColumns()
+<span class="nc" id="L69">    {</span>
+<span class="nc" id="L70">    }</span>
+
+    public String getText()
+    {
+<span class="nc" id="L74">        return text;</span>
+    }
+
+    public void setText(String text)
+    {
+<span class="nc" id="L79">        this.text = text;</span>
+<span class="nc" id="L80">    }</span>
+
+    public String getDataField()
+    {
+<span class="nc" id="L84">        return dataField;</span>
+    }
+
+    public void setDataField(String dataField)
+    {
+<span class="nc" id="L89">        this.dataField = dataField;</span>
+<span class="nc" id="L90">    }</span>
+
+    public String getDisplayField()
+    {
+<span class="nc" id="L94">        return displayField;</span>
+    }
+
+    public void setDisplayField(String displayField)
+    {
+<span class="nc" id="L99">        this.displayField = displayField;</span>
+<span class="nc" id="L100">    }</span>
+
+    public Boolean getSortable()
+    {
+<span class="nc" id="L104">        return sortable;</span>
+    }
+
+    public void setSortable(Boolean sortable)
+    {
+<span class="nc" id="L109">        this.sortable = sortable;</span>
+<span class="nc" id="L110">    }</span>
+
+    public Boolean getFilterable()
+    {
+<span class="nc" id="L114">        return filterable;</span>
+    }
+
+    public void setFilterable(Boolean filterable)
+    {
+<span class="nc" id="L119">        this.filterable = filterable;</span>
+<span class="nc" id="L120">    }</span>
+
+    public Boolean getHidden()
+    {
+<span class="nc" id="L124">        return hidden;</span>
+    }
+
+    public void setHidden(Boolean hidden)
+    {
+<span class="nc" id="L129">        this.hidden = hidden;</span>
+<span class="nc" id="L130">    }</span>
+
+    public String getColumnGroup()
+    {
+<span class="nc" id="L134">        return columnGroup;</span>
+    }
+
+    public void setColumnGroup(String columnGroup)
+    {
+<span class="nc" id="L139">        this.columnGroup = columnGroup;</span>
+<span class="nc" id="L140">    }</span>
+
+    public Boolean getAutoCellHeight()
+    {
+<span class="nc" id="L144">        return autoCellHeight;</span>
+    }
+
+    public void setAutoCellHeight(Boolean autoCellHeight)
+    {
+<span class="nc" id="L149">        this.autoCellHeight = autoCellHeight;</span>
+<span class="nc" id="L150">    }</span>
+
+    public JavascriptFunction getRenderer()
+    {
+<span class="nc" id="L154">        return renderer;</span>
+    }
+
+    public void setRenderer(JavascriptFunction renderer)
+    {
+<span class="nc" id="L159">        this.renderer = renderer;</span>
+<span class="nc" id="L160">    }</span>
+
+    @Override
+    public String toString()
+    {
+<span class="nc" id="L165">        return super.toString();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

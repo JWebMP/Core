@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQLayoutDiv.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqueryLayout.layout</a> &gt; <span class="el_source">JQLayoutDiv.java</span></div><h1>JQLayoutDiv.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.components.jqueryLayout.layout;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import java.util.ArrayList;
+import java.util.List;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.base.html.HeaderText;
+import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.components.jqueryLayout.layout.events.AddPinButtonFeature;
+import za.co.mmagon.jwebswing.components.jqueryLayout.layout.events.AddToggleButtonFeature;
+import za.co.mmagon.jwebswing.components.jqueryLayout.layout.events.CloseLayoutDivFeature;
+import za.co.mmagon.jwebswing.components.jqueryLayout.layout.events.OpenLayoutDivFeature;
+import za.co.mmagon.jwebswing.components.jqueryLayout.layout.interfaces.JWLayoutDivChildren;
+import za.co.mmagon.jwebswing.components.jqueryUI.themes.JQUIThemeBlocks;
+
+/**
+ * This class makes sure only layout DIV's gets added to Layout's Also adds capability of headers and footers
+ *
+ * @author MMagon
+ * @since 16 Jul 2013
+ * @version 1.0
+ */
+public class JQLayoutDiv extends Div&lt;JWLayoutDivChildren, NoAttributes, GlobalFeatures, GlobalEvents, JQLayoutDiv&gt; 
+        implements BodyChildren,GlobalChildren, IJQLayoutDiv
+{
+
+    /**
+     * Version 1
+     */
+    private static final long serialVersionUID = 1L;
+    /**
+     * The layout area of this particular Layout Div
+     */
+    private JQLayoutArea area;
+    /**
+     * All the header containers
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private final List&lt;Div&gt; headers;
+    /**
+     * All the footer containers
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List&lt;Component&gt; footers;
+    /**
+     * The main center div
+     */
+    private final Div contentDiv;
+    /**
+     * The layout div
+     */
+    @JsonIgnore
+    private JQLayout layout;
+    
+    /**
+     * Returns a clean version of this components options
+     * @return 
+     */
+    public IJQLayoutDiv asMe()
+    {
+<span class="nc" id="L67">        return this;</span>
+    }
+
+    /**
+     * Constructs a new Border Layout Div
+     * &lt;p&gt;
+     * @param layout     The layout applying to
+     * @param area       The area this div is for
+     * @param contentDiv The content div. Never null please
+     */
+    public JQLayoutDiv(JQLayout layout, JQLayoutArea area, Div contentDiv)
+<span class="nc" id="L78">    {</span>
+<span class="nc" id="L79">        this.headers = new ArrayList();</span>
+<span class="nc" id="L80">        this.footers = new ArrayList();</span>
+<span class="nc" id="L81">        this.layout = layout;</span>
+<span class="nc" id="L82">        this.area = area;</span>
+        Div contentDivUse;
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        if (contentDiv == null)</span>
+        {
+<span class="nc" id="L86">            contentDivUse = new Div();</span>
+        }
+        else
+        {
+<span class="nc" id="L90">            contentDivUse = contentDiv;</span>
+        }
+<span class="nc" id="L92">        this.contentDiv = contentDivUse;</span>
+<span class="nc" id="L93">        this.contentDiv.addClass(&quot;ui-layout-content&quot;);</span>
+<span class="nc" id="L94">        super.add(contentDiv);</span>
+<span class="nc" id="L95">        addClass(area.getAreaClass());</span>
+<span class="nc" id="L96">    }</span>
+
+    /**
+     * Adds all the layout DIV's in order
+     */
+    @Override
+    public void preConfigure()
+    {
+<span class="nc" id="L104">        super.preConfigure();</span>
+<span class="nc" id="L105">    }</span>
+
+    /**
+     * Adds the Div as a header and applies the class Widget Header
+     * &lt;p&gt;
+     * @param headerDiv
+     */
+    @Override
+    public void addHeader(Div headerDiv)
+    {
+<span class="nc" id="L115">        headers.add(headerDiv);</span>
+<span class="nc" id="L116">        headerDiv.addClass(&quot;ui-layout-header&quot;);</span>
+<span class="nc" id="L117">        getChildren().add(headers.size() - 1, headerDiv);</span>
+<span class="nc" id="L118">    }</span>
+
+    /**
+     * *
+     * Adds a new header to the div and applies the Widget Header class
+     * &lt;p&gt;
+     * @param headerDivString
+     */
+    public void addHeader(String headerDivString)
+    {
+<span class="nc" id="L128">        Div headerDiv = new Div();</span>
+<span class="nc" id="L129">        headerDiv.add(headerDivString);</span>
+<span class="nc" id="L130">        headers.add(headerDiv);</span>
+<span class="nc" id="L131">        headerDiv.addClass(&quot;ui-layout-header&quot;);</span>
+<span class="nc" id="L132">        getChildren().add(headers.size() - 1, headerDiv);</span>
+<span class="nc" id="L133">    }</span>
+
+    /**
+     * Adds the header to the layout div
+     * &lt;p&gt;
+     * @param headerDivString
+     */
+    @Override
+    public void addHeader(HeaderText headerDivString)
+    {
+<span class="nc" id="L143">        Div headerDiv = new Div();</span>
+<span class="nc" id="L144">        headerDiv.add(headerDivString);</span>
+<span class="nc" id="L145">        headers.add(headerDiv);</span>
+<span class="nc" id="L146">        headerDiv.addClass(&quot;ui-layout-header&quot;);</span>
+<span class="nc" id="L147">        getChildren().add(headers.size() - 1, headerDiv);</span>
+<span class="nc" id="L148">    }</span>
+
+    /**
+     * Sets this layout div to include all UI Theme capabilities using classes
+     * &lt;p&gt;
+     */
+    public void addThemes()
+    {
+<span class="nc" id="L156">        addClass(JQUIThemeBlocks.UI_Widget_Content);</span>
+<span class="nc" id="L157">    }</span>
+
+    /**
+     * Adds a Pin for this Div
+     * &lt;p&gt;
+     * @param component
+     * @return The Span
+     */
+    @Override
+    public Component addPin(Component component)
+    {
+        //span.addClass(&quot;pin-button&quot;);
+<span class="nc" id="L169">        component.addFeature(new AddPinButtonFeature(this, component));</span>
+        //getChildren().add(0, span);
+<span class="nc" id="L171">        return component;</span>
+    }
+
+    /**
+     * Adds the close event to the component
+     * &lt;p&gt;
+     * @param button The button to add a close event to
+     */
+    @Override
+    public void addCloseButton(Component button)
+    {
+<span class="nc" id="L182">          button.addFeature(new CloseLayoutDivFeature(this));</span>
+<span class="nc" id="L183">    }</span>
+
+    /**
+     * Adds the open event to a component
+     * &lt;p&gt;
+     * @param button The component to add the open event to
+     */
+    @Override
+    public void addOpenButton(Component button)
+    {
+<span class="nc" id="L193">          button.addFeature(new OpenLayoutDivFeature(this));</span>
+<span class="nc" id="L194">    }</span>
+    
+    /**
+     * Adds the open event to a component
+     * &lt;p&gt;
+     * @param button The component to add the open event to
+     */
+    @Override
+    public void addToggleButton(Component button)
+    {
+<span class="nc" id="L204">          button.addFeature(new AddToggleButtonFeature(this,button));</span>
+<span class="nc" id="L205">    }</span>
+
+    /**
+     * Adds the footer to the component
+     * &lt;p&gt;
+     * @param footerDiv
+     */
+    @Override
+    public void addFooter(Component footerDiv)
+    {
+<span class="nc bnc" id="L215" title="All 2 branches missed.">        if (footerDiv != null)</span>
+        {
+<span class="nc" id="L217">            getFooters().add(footerDiv);</span>
+        }
+        else
+        {
+        }
+<span class="nc" id="L222">    }</span>
+
+    /**
+     * Returns the footers listing
+     *
+     * @return
+     */
+    @Override
+    public List&lt;Component&gt; getFooters()
+    {
+<span class="nc bnc" id="L232" title="All 2 branches missed.">        if (footers == null)</span>
+        {
+<span class="nc" id="L234">            footers = new ArrayList&lt;&gt;();</span>
+        }
+<span class="nc" id="L236">        return footers;</span>
+    }
+
+    /**
+     * Adds the footer
+     * &lt;p&gt;
+     * @param footerDivString
+     */
+    @Override
+    public void addFooter(String footerDivString)
+    {
+<span class="nc" id="L247">        Div headerDiv = new Div();</span>
+<span class="nc" id="L248">        headerDiv.add(footerDivString);</span>
+<span class="nc" id="L249">        headerDiv.addClass(&quot;ui-layout-footer&quot;);</span>
+<span class="nc" id="L250">        footers.add(headerDiv);</span>
+<span class="nc" id="L251">        getChildren().add(headerDiv);</span>
+<span class="nc" id="L252">    }</span>
+
+    /**
+     * Adds the footer header
+     * &lt;p&gt;
+     * @param footerDivString
+     */
+    @Override
+    public void addFooter(HeaderText footerDivString)
+    {
+<span class="nc" id="L262">        Div headerDiv = new Div();</span>
+<span class="nc" id="L263">        headerDiv.add(footerDivString);</span>
+<span class="nc" id="L264">        headerDiv.addClass(&quot;ui-layout-footer&quot;);</span>
+<span class="nc" id="L265">        footers.add(headerDiv);</span>
+<span class="nc" id="L266">        getChildren().add(headerDiv);</span>
+<span class="nc" id="L267">    }</span>
+
+    /**
+     * Removes the footer
+     * &lt;p&gt;
+     * @param footerDiv
+     */
+    @Override
+    public void removeFooter(Div footerDiv)
+    {
+<span class="nc" id="L277">        footers.remove(footerDiv);</span>
+<span class="nc" id="L278">        getChildren().remove(footerDiv);</span>
+<span class="nc" id="L279">    }</span>
+
+    /**
+     * Removes the header
+     * &lt;p&gt;
+     * @param headerDiv
+     */
+    @Override
+    public void removeHeader(Div headerDiv)
+    {
+<span class="nc" id="L289">        headers.remove(headerDiv);</span>
+<span class="nc" id="L290">        getChildren().remove(headerDiv);</span>
+<span class="nc" id="L291">    }</span>
+
+    /**
+     * Gets the current assigned area
+     * &lt;p&gt;
+     * @return
+     */
+    public JQLayoutArea getArea()
+    {
+<span class="nc" id="L300">        return area;</span>
+    }
+
+    /**
+     * Sets the current assigned area
+     * &lt;p&gt;
+     * @param area
+     */
+    @Override
+    public void setArea(JQLayoutArea area)
+    {
+<span class="nc" id="L311">        this.area = area;</span>
+<span class="nc" id="L312">    }</span>
+
+    /**
+     * Returns the current content div
+     * &lt;p&gt;
+     * @return
+     */
+    @Override
+    public Div getContentDiv()
+    {
+<span class="nc" id="L322">        return contentDiv;</span>
+    }
+
+    /**
+     * Returns the layout attached to this layout div
+     * &lt;p&gt;
+     * @return
+     */
+    @Override
+    public JQLayout getLayout()
+    {
+<span class="nc" id="L333">        return layout;</span>
+    }
+
+    /**
+     * Sets the layout for this div
+     * &lt;p&gt;
+     * @param layout
+     */
+    @Override
+    public void setLayout(JQLayout layout)
+    {
+<span class="nc" id="L344">        this.layout = layout;</span>
+<span class="nc" id="L345">    }</span>
+
+//    @Override
+    @Override
+    public JQLayoutDefaultOptions getOptions()
+    {
+<span class="nc bnc" id="L351" title="All 6 branches missed.">        switch (this.getArea())</span>
+        {
+            case North:
+<span class="nc" id="L354">                return getLayout().getOptions().getNorth();</span>
+            case Center:
+<span class="nc" id="L356">                return getLayout().getOptions().getCenter();</span>
+            case South:
+<span class="nc" id="L358">                return getLayout().getOptions().getSouth();</span>
+            case East:
+<span class="nc" id="L360">                return getLayout().getOptions().getEast();</span>
+            case West:
+<span class="nc" id="L362">                return getLayout().getOptions().getWest();</span>
+            default:
+<span class="nc" id="L364">                return getLayout().getOptions().getCenter();</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

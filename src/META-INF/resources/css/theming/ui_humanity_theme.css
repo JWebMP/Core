@@ -1,0 +1,1175 @@
+/*! jQuery UI - v1.10.2 - 2013-03-14
+* http://jqueryui.com
+* Includes: jquery.ui.core.css, jquery.ui.accordion.css, jquery.ui.autocomplete.css, jquery.ui.button.css, jquery.ui.datepicker.css, jquery.ui.dialog.css, jquery.ui.menu.css, jquery.ui.progressbar.css, jquery.ui.resizable.css, jquery.ui.selectable.css, jquery.ui.slider.css, jquery.ui.spinner.css, jquery.ui.tabs.css, jquery.ui.tooltip.css
+* To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Helvetica%2CArial%2Csans-serif&fwDefault=normal&fsDefault=1.1em&cornerRadius=6px&bgColorHeader=cb842e&bgTextureHeader=glass&bgImgOpacityHeader=25&borderColorHeader=d49768&fcHeader=ffffff&iconColorHeader=ffffff&bgColorContent=f4f0ec&bgTextureContent=inset_soft&bgImgOpacityContent=100&borderColorContent=e0cfc2&fcContent=1e1b1d&iconColorContent=c47a23&bgColorDefault=ede4d4&bgTextureDefault=glass&bgImgOpacityDefault=70&borderColorDefault=cdc3b7&fcDefault=3f3731&iconColorDefault=f08000&bgColorHover=f5f0e5&bgTextureHover=glass&bgImgOpacityHover=100&borderColorHover=f5ad66&fcHover=a46313&iconColorHover=f08000&bgColorActive=f4f0ec&bgTextureActive=highlight_hard&bgImgOpacityActive=100&borderColorActive=e0cfc2&fcActive=b85700&iconColorActive=f35f07&bgColorHighlight=f5f5b5&bgTextureHighlight=highlight_hard&bgImgOpacityHighlight=75&borderColorHighlight=d9bb73&fcHighlight=060200&iconColorHighlight=cb672b&bgColorError=fee4bd&bgTextureError=highlight_hard&bgImgOpacityError=65&borderColorError=f8893f&fcError=592003&iconColorError=ff7519&bgColorOverlay=aaaaaa&bgTextureOverlay=flat&bgImgOpacityOverlay=75&opacityOverlay=30&bgColorShadow=aaaaaa&bgTextureShadow=flat&bgImgOpacityShadow=75&opacityShadow=30&thicknessShadow=8px&offsetTopShadow=-8px&offsetLeftShadow=-8px&cornerRadiusShadow=8px
+* Copyright 2013 jQuery Foundation and other contributors Licensed MIT */
+
+/* Layout helpers
+----------------------------------*/
+.uihumanity .ui-helper-hidden {
+	display: none;
+}
+.uihumanity .ui-helper-hidden-accessible {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+.uihumanity .ui-helper-reset {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	line-height: 1.3;
+	text-decoration: none;
+	font-size: 100%;
+	list-style: none;
+}
+.uihumanity .ui-helper-clearfix:before,
+.uihumanity .ui-helper-clearfix:after {
+	content: "";
+	display: table;
+	border-collapse: collapse;
+}
+.uihumanity .ui-helper-clearfix:after {
+	clear: both;
+}
+.uihumanity .ui-helper-clearfix {
+	min-height: 0; /* support: IE7 */
+}
+.uihumanity .ui-helper-zfix {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: absolute;
+	opacity: 0;
+	filter:Alpha(Opacity=0);
+}
+
+.uihumanity .ui-front {
+	z-index: 100;
+}
+
+
+/* Interaction Cues
+----------------------------------*/
+.uihumanity .ui-state-disabled {
+	cursor: default !important;
+}
+
+
+/* Icons
+----------------------------------*/
+
+/* states and images */
+.uihumanity .ui-icon {
+	display: block;
+	text-indent: -99999px;
+	overflow: hidden;
+	background-repeat: no-repeat;
+}
+
+
+/* Misc visuals
+----------------------------------*/
+
+/* Overlays */
+.uihumanity .ui-widget-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.uihumanity .ui-accordion .ui-accordion-header {
+	display: block;
+	cursor: pointer;
+	position: relative;
+	margin-top: 2px;
+	padding: .5em .5em .5em .7em;
+	min-height: 0; /* support: IE7 */
+}
+.uihumanity .ui-accordion .ui-accordion-icons {
+	padding-left: 2.2em;
+}
+.uihumanity .ui-accordion .ui-accordion-noicons {
+	padding-left: .7em;
+}
+.uihumanity .ui-accordion .ui-accordion-icons .ui-accordion-icons {
+	padding-left: 2.2em;
+}
+.uihumanity .ui-accordion .ui-accordion-header .ui-accordion-header-icon {
+	position: absolute;
+	left: .5em;
+	top: 50%;
+	margin-top: -8px;
+}
+.uihumanity .ui-accordion .ui-accordion-content {
+	padding: 1em 2.2em;
+	border-top: 0;
+	overflow: auto;
+}
+.uihumanity .ui-autocomplete {
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: default;
+}
+.uihumanity .ui-button {
+	display: inline-block;
+	position: relative;
+	padding: 0;
+	line-height: normal;
+	margin-right: .1em;
+	cursor: pointer;
+	vertical-align: middle;
+	text-align: center;
+	overflow: visible; /* removes extra width in IE */
+}
+.uihumanity .ui-button,
+.uihumanity .ui-button:link,
+.uihumanity .ui-button:visited,
+.uihumanity .ui-button:hover,
+.uihumanity .ui-button:active {
+	text-decoration: none;
+}
+/* to make room for the icon, a width needs to be set here */
+.uihumanity .ui-button-icon-only {
+	width: 2.2em;
+}
+/* button elements seem to need a little more width */
+button.ui-button-icon-only {
+	width: 2.4em;
+}
+.uihumanity .ui-button-icons-only {
+	width: 3.4em;
+}
+button.ui-button-icons-only {
+	width: 3.7em;
+}
+
+/* button text element */
+.uihumanity .ui-button .ui-button-text {
+	display: block;
+	line-height: normal;
+}
+.uihumanity .ui-button-text-only .ui-button-text {
+	padding: .4em 1em;
+}
+.uihumanity .ui-button-icon-only .ui-button-text,
+.uihumanity .ui-button-icons-only .ui-button-text {
+	padding: .4em;
+	text-indent: -9999999px;
+}
+.uihumanity .ui-button-text-icon-primary .ui-button-text,
+.uihumanity .ui-button-text-icons .ui-button-text {
+	padding: .4em 1em .4em 2.1em;
+}
+.uihumanity .ui-button-text-icon-secondary .ui-button-text,
+.uihumanity .ui-button-text-icons .ui-button-text {
+	padding: .4em 2.1em .4em 1em;
+}
+.uihumanity .ui-button-text-icons .ui-button-text {
+	padding-left: 2.1em;
+	padding-right: 2.1em;
+}
+/* no icon support for input elements, provide padding by default */
+input.ui-button {
+	padding: .4em 1em;
+}
+
+/* button icon element(s) */
+.uihumanity .ui-button-icon-only .ui-icon,
+.uihumanity .ui-button-text-icon-primary .ui-icon,
+.uihumanity .ui-button-text-icon-secondary .ui-icon,
+.uihumanity .ui-button-text-icons .ui-icon,
+.uihumanity .ui-button-icons-only .ui-icon {
+	position: absolute;
+	top: 50%;
+	margin-top: -8px;
+}
+.uihumanity .ui-button-icon-only .ui-icon {
+	left: 50%;
+	margin-left: -8px;
+}
+.uihumanity .ui-button-text-icon-primary .ui-button-icon-primary,
+.uihumanity .ui-button-text-icons .ui-button-icon-primary,
+.uihumanity .ui-button-icons-only .ui-button-icon-primary {
+	left: .5em;
+}
+.uihumanity .ui-button-text-icon-secondary .ui-button-icon-secondary,
+.uihumanity .ui-button-text-icons .ui-button-icon-secondary,
+.uihumanity .ui-button-icons-only .ui-button-icon-secondary {
+	right: .5em;
+}
+
+/* button sets */
+.uihumanity .ui-buttonset {
+	margin-right: 7px;
+}
+.uihumanity .ui-buttonset .ui-button {
+	margin-left: 0;
+	margin-right: -.3em;
+}
+
+/* workarounds */
+/* reset extra padding in Firefox, see h5bp.com/l */
+input.ui-button::-moz-focus-inner,
+button.ui-button::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+.uihumanity .ui-datepicker {
+	width: 17em;
+	padding: .2em .2em 0;
+	display: none;
+}
+.uihumanity .ui-datepicker .ui-datepicker-header {
+	position: relative;
+	padding: .2em 0;
+}
+.uihumanity .ui-datepicker .ui-datepicker-prev,
+.uihumanity .ui-datepicker .ui-datepicker-next {
+	position: absolute;
+	top: 2px;
+	width: 1.8em;
+	height: 1.8em;
+}
+.uihumanity .ui-datepicker .ui-datepicker-prev-hover,
+.uihumanity .ui-datepicker .ui-datepicker-next-hover {
+	top: 1px;
+}
+.uihumanity .ui-datepicker .ui-datepicker-prev {
+	left: 2px;
+}
+.uihumanity .ui-datepicker .ui-datepicker-next {
+	right: 2px;
+}
+.uihumanity .ui-datepicker .ui-datepicker-prev-hover {
+	left: 1px;
+}
+.uihumanity .ui-datepicker .ui-datepicker-next-hover {
+	right: 1px;
+}
+.uihumanity .ui-datepicker .ui-datepicker-prev span,
+.uihumanity .ui-datepicker .ui-datepicker-next span {
+	display: block;
+	position: absolute;
+	left: 50%;
+	margin-left: -8px;
+	top: 50%;
+	margin-top: -8px;
+}
+.uihumanity .ui-datepicker .ui-datepicker-title {
+	margin: 0 2.3em;
+	line-height: 1.8em;
+	text-align: center;
+}
+.uihumanity .ui-datepicker .ui-datepicker-title select {
+	font-size: 1em;
+	margin: 1px 0;
+}
+.uihumanity .ui-datepicker select.ui-datepicker-month-year {
+	width: 100%;
+}
+.uihumanity .ui-datepicker select.ui-datepicker-month,
+.uihumanity .ui-datepicker select.ui-datepicker-year {
+	width: 49%;
+}
+.uihumanity .ui-datepicker table {
+	width: 100%;
+	font-size: .9em;
+	border-collapse: collapse;
+	margin: 0 0 .4em;
+}
+.uihumanity .ui-datepicker th {
+	padding: .7em .3em;
+	text-align: center;
+	font-weight: bold;
+	border: 0;
+}
+.uihumanity .ui-datepicker td {
+	border: 0;
+	padding: 1px;
+}
+.uihumanity .ui-datepicker td span,
+.uihumanity .ui-datepicker td a {
+	display: block;
+	padding: .2em;
+	text-align: right;
+	text-decoration: none;
+}
+.uihumanity .ui-datepicker .ui-datepicker-buttonpane {
+	background-image: none;
+	margin: .7em 0 0 0;
+	padding: 0 .2em;
+	border-left: 0;
+	border-right: 0;
+	border-bottom: 0;
+}
+.uihumanity .ui-datepicker .ui-datepicker-buttonpane button {
+	float: right;
+	margin: .5em .2em .4em;
+	cursor: pointer;
+	padding: .2em .6em .3em .6em;
+	width: auto;
+	overflow: visible;
+}
+.uihumanity .ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current {
+	float: left;
+}
+
+/* with multiple calendars */
+.uihumanity .ui-datepicker.ui-datepicker-multi {
+	width: auto;
+}
+.uihumanity .ui-datepicker-multi .ui-datepicker-group {
+	float: left;
+}
+.uihumanity .ui-datepicker-multi .ui-datepicker-group table {
+	width: 95%;
+	margin: 0 auto .4em;
+}
+.uihumanity .ui-datepicker-multi-2 .ui-datepicker-group {
+	width: 50%;
+}
+.uihumanity .ui-datepicker-multi-3 .ui-datepicker-group {
+	width: 33.3%;
+}
+.uihumanity .ui-datepicker-multi-4 .ui-datepicker-group {
+	width: 25%;
+}
+.uihumanity .ui-datepicker-multi .ui-datepicker-group-last .ui-datepicker-header,
+.uihumanity .ui-datepicker-multi .ui-datepicker-group-middle .ui-datepicker-header {
+	border-left-width: 0;
+}
+.uihumanity .ui-datepicker-multi .ui-datepicker-buttonpane {
+	clear: left;
+}
+.uihumanity .ui-datepicker-row-break {
+	clear: both;
+	width: 100%;
+	font-size: 0;
+}
+
+/* RTL support */
+.uihumanity .ui-datepicker-rtl {
+	direction: rtl;
+}
+.uihumanity .ui-datepicker-rtl .ui-datepicker-prev {
+	right: 2px;
+	left: auto;
+}
+.uihumanity .ui-datepicker-rtl .ui-datepicker-next {
+	left: 2px;
+	right: auto;
+}
+.uihumanity .ui-datepicker-rtl .ui-datepicker-prev:hover {
+	right: 1px;
+	left: auto;
+}
+.uihumanity .ui-datepicker-rtl .ui-datepicker-next:hover {
+	left: 1px;
+	right: auto;
+}
+.uihumanity .ui-datepicker-rtl .ui-datepicker-buttonpane {
+	clear: right;
+}
+.uihumanity .ui-datepicker-rtl .ui-datepicker-buttonpane button {
+	float: left;
+}
+.uihumanity .ui-datepicker-rtl .ui-datepicker-buttonpane button.ui-datepicker-current,
+.uihumanity .ui-datepicker-rtl .ui-datepicker-group {
+	float: right;
+}
+.uihumanity .ui-datepicker-rtl .ui-datepicker-group-last .ui-datepicker-header,
+.uihumanity .ui-datepicker-rtl .ui-datepicker-group-middle .ui-datepicker-header {
+	border-right-width: 0;
+	border-left-width: 1px;
+}
+.uihumanity .ui-dialog {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: .2em;
+	outline: 0;
+}
+.uihumanity .ui-dialog .ui-dialog-titlebar {
+	padding: .4em 1em;
+	position: relative;
+}
+.uihumanity .ui-dialog .ui-dialog-title {
+	float: left;
+	margin: .1em 0;
+	white-space: nowrap;
+	width: 90%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.uihumanity .ui-dialog .ui-dialog-titlebar-close {
+	position: absolute;
+	right: .3em;
+	top: 50%;
+	width: 21px;
+	margin: -10px 0 0 0;
+	padding: 1px;
+	height: 20px;
+}
+.uihumanity .ui-dialog .ui-dialog-content {
+	position: relative;
+	border: 0;
+	padding: .5em 1em;
+	background: none;
+	overflow: auto;
+}
+.uihumanity .ui-dialog .ui-dialog-buttonpane {
+	text-align: left;
+	border-width: 1px 0 0 0;
+	background-image: none;
+	margin-top: .5em;
+	padding: .3em 1em .5em .4em;
+}
+.uihumanity .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+	float: right;
+}
+.uihumanity .ui-dialog .ui-dialog-buttonpane button {
+	margin: .5em .4em .5em 0;
+	cursor: pointer;
+}
+.uihumanity .ui-dialog .ui-resizable-se {
+	width: 12px;
+	height: 12px;
+	right: -5px;
+	bottom: -5px;
+	background-position: 16px 16px;
+}
+.uihumanity .ui-draggable .ui-dialog-titlebar {
+	cursor: move;
+}
+.uihumanity .ui-menu {
+	list-style: none;
+	padding: 2px;
+	margin: 0;
+	display: block;
+	outline: none;
+}
+.uihumanity .ui-menu .ui-menu {
+	margin-top: -3px;
+	position: absolute;
+}
+.uihumanity .ui-menu .ui-menu-item {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+.uihumanity .ui-menu .ui-menu-divider {
+	margin: 5px -2px 5px -2px;
+	height: 0;
+	font-size: 0;
+	line-height: 0;
+	border-width: 1px 0 0 0;
+}
+.uihumanity .ui-menu .ui-menu-item a {
+	text-decoration: none;
+	display: block;
+	padding: 2px .4em;
+	line-height: 1.5;
+	min-height: 0; /* support: IE7 */
+	font-weight: normal;
+}
+.uihumanity .ui-menu .ui-menu-item a.ui-state-focus,
+.uihumanity .ui-menu .ui-menu-item a.ui-state-active {
+	font-weight: normal;
+	margin: -1px;
+}
+
+.uihumanity .ui-menu .ui-state-disabled {
+	font-weight: normal;
+	margin: .4em 0 .2em;
+	line-height: 1.5;
+}
+.uihumanity .ui-menu .ui-state-disabled a {
+	cursor: default;
+}
+
+/* icon support */
+.uihumanity .ui-menu-icons {
+	position: relative;
+}
+.uihumanity .ui-menu-icons .ui-menu-item a {
+	position: relative;
+	padding-left: 2em;
+}
+
+/* left-aligned */
+.uihumanity .ui-menu .ui-icon {
+	position: absolute;
+	top: .2em;
+	left: .2em;
+}
+
+/* right-aligned */
+.uihumanity .ui-menu .ui-menu-icon {
+	position: static;
+	float: right;
+}
+.uihumanity .ui-progressbar {
+	height: 2em;
+	text-align: left;
+	overflow: hidden;
+}
+.uihumanity .ui-progressbar .ui-progressbar-value {
+	margin: -1px;
+	height: 100%;
+}
+.uihumanity .ui-progressbar .ui-progressbar-overlay {
+	background: url("images/animated-overlay.gif");
+	height: 100%;
+	filter: alpha(opacity=25);
+	opacity: 0.25;
+}
+.uihumanity .ui-progressbar-indeterminate .ui-progressbar-value {
+	background-image: none;
+}
+.uihumanity .ui-resizable {
+	position: relative;
+}
+.uihumanity .ui-resizable-handle {
+	position: absolute;
+	font-size: 0.1px;
+	display: block;
+}
+.uihumanity .ui-resizable-disabled .ui-resizable-handle,
+.uihumanity .ui-resizable-autohide .ui-resizable-handle {
+	display: none;
+}
+.uihumanity .ui-resizable-n {
+	cursor: n-resize;
+	height: 7px;
+	width: 100%;
+	top: -5px;
+	left: 0;
+}
+.uihumanity .ui-resizable-s {
+	cursor: s-resize;
+	height: 7px;
+	width: 100%;
+	bottom: -5px;
+	left: 0;
+}
+.uihumanity .ui-resizable-e {
+	cursor: e-resize;
+	width: 7px;
+	right: -5px;
+	top: 0;
+	height: 100%;
+}
+.uihumanity .ui-resizable-w {
+	cursor: w-resize;
+	width: 7px;
+	left: -5px;
+	top: 0;
+	height: 100%;
+}
+.uihumanity .ui-resizable-se {
+	cursor: se-resize;
+	width: 12px;
+	height: 12px;
+	right: 1px;
+	bottom: 1px;
+}
+.uihumanity .ui-resizable-sw {
+	cursor: sw-resize;
+	width: 9px;
+	height: 9px;
+	left: -5px;
+	bottom: -5px;
+}
+.uihumanity .ui-resizable-nw {
+	cursor: nw-resize;
+	width: 9px;
+	height: 9px;
+	left: -5px;
+	top: -5px;
+}
+.uihumanity .ui-resizable-ne {
+	cursor: ne-resize;
+	width: 9px;
+	height: 9px;
+	right: -5px;
+	top: -5px;
+}
+.uihumanity .ui-selectable-helper {
+	position: absolute;
+	z-index: 100;
+	border: 1px dotted black;
+}
+.uihumanity .ui-slider {
+	position: relative;
+	text-align: left;
+}
+.uihumanity .ui-slider .ui-slider-handle {
+	position: absolute;
+	z-index: 2;
+	width: 1.2em;
+	height: 1.2em;
+	cursor: default;
+}
+.uihumanity .ui-slider .ui-slider-range {
+	position: absolute;
+	z-index: 1;
+	font-size: .7em;
+	display: block;
+	border: 0;
+	background-position: 0 0;
+}
+
+/* For IE8 - See #6727 */
+.uihumanity .ui-slider.ui-state-disabled .ui-slider-handle,
+.uihumanity .ui-slider.ui-state-disabled .ui-slider-range {
+	filter: inherit;
+}
+
+.uihumanity .ui-slider-horizontal {
+	height: .8em;
+}
+.uihumanity .ui-slider-horizontal .ui-slider-handle {
+	top: -.3em;
+	margin-left: -.6em;
+}
+.uihumanity .ui-slider-horizontal .ui-slider-range {
+	top: 0;
+	height: 100%;
+}
+.uihumanity .ui-slider-horizontal .ui-slider-range-min {
+	left: 0;
+}
+.uihumanity .ui-slider-horizontal .ui-slider-range-max {
+	right: 0;
+}
+
+.uihumanity .ui-slider-vertical {
+	width: .8em;
+	height: 100px;
+}
+.uihumanity .ui-slider-vertical .ui-slider-handle {
+	left: -.3em;
+	margin-left: 0;
+	margin-bottom: -.6em;
+}
+.uihumanity .ui-slider-vertical .ui-slider-range {
+	left: 0;
+	width: 100%;
+}
+.uihumanity .ui-slider-vertical .ui-slider-range-min {
+	bottom: 0;
+}
+.uihumanity .ui-slider-vertical .ui-slider-range-max {
+	top: 0;
+}
+.uihumanity .ui-spinner {
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+	padding: 0;
+	vertical-align: middle;
+}
+.uihumanity .ui-spinner-input {
+	border: none;
+	background: none;
+	color: inherit;
+	padding: 0;
+	margin: .2em 0;
+	vertical-align: middle;
+	margin-left: .4em;
+	margin-right: 22px;
+}
+.uihumanity .ui-spinner-button {
+	width: 16px;
+	height: 50%;
+	font-size: .5em;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	position: absolute;
+	cursor: default;
+	display: block;
+	overflow: hidden;
+	right: 0;
+}
+/* more specificity required here to overide default borders */
+.uihumanity .ui-spinner a.ui-spinner-button {
+	border-top: none;
+	border-bottom: none;
+	border-right: none;
+}
+/* vertical centre icon */
+.uihumanity .ui-spinner .ui-icon {
+	position: absolute;
+	margin-top: -8px;
+	top: 50%;
+	left: 0;
+}
+.uihumanity .ui-spinner-up {
+	top: 0;
+}
+.uihumanity .ui-spinner-down {
+	bottom: 0;
+}
+
+/* TR overrides */
+.uihumanity .ui-spinner .ui-icon-triangle-1-s {
+	/* need to fix icons sprite */
+	background-position: -65px -16px;
+}
+.uihumanity .ui-tabs {
+	position: relative;/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+	padding: .2em;
+}
+.uihumanity .ui-tabs .ui-tabs-nav {
+	margin: 0;
+	padding: .2em .2em 0;
+}
+.uihumanity .ui-tabs .ui-tabs-nav li {
+	list-style: none;
+	float: left;
+	position: relative;
+	top: 0;
+	margin: 1px .2em 0 0;
+	border-bottom-width: 0;
+	padding: 0;
+	white-space: nowrap;
+}
+.uihumanity .ui-tabs .ui-tabs-nav li a {
+	float: left;
+	padding: .5em 1em;
+	text-decoration: none;
+}
+.uihumanity .ui-tabs .ui-tabs-nav li.ui-tabs-active {
+	margin-bottom: -1px;
+	padding-bottom: 1px;
+}
+.uihumanity .ui-tabs .ui-tabs-nav li.ui-tabs-active a,
+.uihumanity .ui-tabs .ui-tabs-nav li.ui-state-disabled a,
+.uihumanity .ui-tabs .ui-tabs-nav li.ui-tabs-loading a {
+	cursor: text;
+}
+.uihumanity .ui-tabs .ui-tabs-nav li a, /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+.uihumanity .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
+	cursor: pointer;
+}
+.uihumanity .ui-tabs .ui-tabs-panel {
+	display: block;
+	border-width: 0;
+	padding: 1em 1.4em;
+	background: none;
+}
+.uihumanity .ui-tooltip {
+	padding: 8px;
+	position: absolute;
+	z-index: 9999;
+	max-width: 300px;
+	-webkit-box-shadow: 0 0 5px #aaa;
+	box-shadow: 0 0 5px #aaa;
+}
+body .ui-tooltip {
+	border-width: 2px;
+}
+
+/* Component containers
+----------------------------------*/
+.uihumanity .ui-widget {
+	font-family: Helvetica,Arial,sans-serif;
+	font-size: 1.1em;
+}
+.uihumanity .ui-widget .ui-widget {
+	font-size: 1em;
+}
+.uihumanity .ui-widget input,
+.uihumanity .ui-widget select,
+.uihumanity .ui-widget textarea,
+.uihumanity .ui-widget button {
+	font-family: Helvetica,Arial,sans-serif;
+	font-size: 1em;
+}
+.uihumanity .ui-widget-content {
+	border: 1px solid #e0cfc2;
+	background: #f4f0ec url(images/ui-bg_inset-soft_100_f4f0ec_1x100.png) 50% bottom repeat-x;
+	color: #1e1b1d;
+}
+.uihumanity .ui-widget-content a {
+	color: #1e1b1d;
+}
+.uihumanity .ui-widget-header {
+	border: 1px solid #d49768;
+	background: #cb842e url(images/ui-bg_glass_25_cb842e_1x400.png) 50% 50% repeat-x;
+	color: #ffffff;
+	font-weight: bold;
+}
+.uihumanity .ui-widget-header a {
+	color: #ffffff;
+}
+
+/* Interaction states
+----------------------------------*/
+.uihumanity .ui-state-default,
+.uihumanity .ui-widget-content .ui-state-default,
+.uihumanity .ui-widget-header .ui-state-default {
+	border: 1px solid #cdc3b7;
+	background: #ede4d4 url(images/ui-bg_glass_70_ede4d4_1x400.png) 50% 50% repeat-x;
+	font-weight: normal;
+	color: #3f3731;
+}
+.uihumanity .ui-state-default a,
+.uihumanity .ui-state-default a:link,
+.uihumanity .ui-state-default a:visited {
+	color: #3f3731;
+	text-decoration: none;
+}
+.uihumanity .ui-state-hover,
+.uihumanity .ui-widget-content .ui-state-hover,
+.uihumanity .ui-widget-header .ui-state-hover,
+.uihumanity .ui-state-focus,
+.uihumanity .ui-widget-content .ui-state-focus,
+.uihumanity .ui-widget-header .ui-state-focus {
+	border: 1px solid #f5ad66;
+	background: #f5f0e5 url(images/ui-bg_glass_100_f5f0e5_1x400.png) 50% 50% repeat-x;
+	font-weight: normal;
+	color: #a46313;
+}
+.uihumanity .ui-state-hover a,
+.uihumanity .ui-state-hover a:hover,
+.uihumanity .ui-state-hover a:link,
+.uihumanity .ui-state-hover a:visited {
+	color: #a46313;
+	text-decoration: none;
+}
+.uihumanity .ui-state-active,
+.uihumanity .ui-widget-content .ui-state-active,
+.uihumanity .ui-widget-header .ui-state-active {
+	border: 1px solid #e0cfc2;
+	background: #f4f0ec url(images/ui-bg_highlight-hard_100_f4f0ec_1x100.png) 50% 50% repeat-x;
+	font-weight: normal;
+	color: #b85700;
+}
+.uihumanity .ui-state-active a,
+.uihumanity .ui-state-active a:link,
+.uihumanity .ui-state-active a:visited {
+	color: #b85700;
+	text-decoration: none;
+}
+
+/* Interaction Cues
+----------------------------------*/
+.uihumanity .ui-state-highlight,
+.uihumanity .ui-widget-content .ui-state-highlight,
+.uihumanity .ui-widget-header .ui-state-highlight {
+	border: 1px solid #d9bb73;
+	background: #f5f5b5 url(images/ui-bg_highlight-hard_75_f5f5b5_1x100.png) 50% top repeat-x;
+	color: #060200;
+}
+.uihumanity .ui-state-highlight a,
+.uihumanity .ui-widget-content .ui-state-highlight a,
+.uihumanity .ui-widget-header .ui-state-highlight a {
+	color: #060200;
+}
+.uihumanity .ui-state-error,
+.uihumanity .ui-widget-content .ui-state-error,
+.uihumanity .ui-widget-header .ui-state-error {
+	border: 1px solid #f8893f;
+	background: #fee4bd url(images/ui-bg_highlight-hard_65_fee4bd_1x100.png) 50% top repeat-x;
+	color: #592003;
+}
+.uihumanity .ui-state-error a,
+.uihumanity .ui-widget-content .ui-state-error a,
+.uihumanity .ui-widget-header .ui-state-error a {
+	color: #592003;
+}
+.uihumanity .ui-state-error-text,
+.uihumanity .ui-widget-content .ui-state-error-text,
+.uihumanity .ui-widget-header .ui-state-error-text {
+	color: #592003;
+}
+.uihumanity .ui-priority-primary,
+.uihumanity .ui-widget-content .ui-priority-primary,
+.uihumanity .ui-widget-header .ui-priority-primary {
+	font-weight: bold;
+}
+.uihumanity .ui-priority-secondary,
+.uihumanity .ui-widget-content .ui-priority-secondary,
+.uihumanity .ui-widget-header .ui-priority-secondary {
+	opacity: .7;
+	filter:Alpha(Opacity=70);
+	font-weight: normal;
+}
+.uihumanity .ui-state-disabled,
+.uihumanity .ui-widget-content .ui-state-disabled,
+.uihumanity .ui-widget-header .ui-state-disabled {
+	opacity: .35;
+	filter:Alpha(Opacity=35);
+	background-image: none;
+}
+.uihumanity .ui-state-disabled .ui-icon {
+	filter:Alpha(Opacity=35); /* For IE8 - See #6059 */
+}
+
+/* Icons
+----------------------------------*/
+
+/* states and images */
+.uihumanity .ui-icon {
+	width: 16px;
+	height: 16px;
+}
+.uihumanity .ui-icon,
+.uihumanity .ui-widget-content .ui-icon {
+	background-image: url(images/ui-icons_c47a23_256x240.png);
+}
+.uihumanity .ui-widget-header .ui-icon {
+	background-image: url(images/ui-icons_ffffff_256x240.png);
+}
+.uihumanity .ui-state-default .ui-icon {
+	background-image: url(images/ui-icons_f08000_256x240.png);
+}
+.uihumanity .ui-state-hover .ui-icon,
+.uihumanity .ui-state-focus .ui-icon {
+	background-image: url(images/ui-icons_f08000_256x240.png);
+}
+.uihumanity .ui-state-active .ui-icon {
+	background-image: url(images/ui-icons_f35f07_256x240.png);
+}
+.uihumanity .ui-state-highlight .ui-icon {
+	background-image: url(images/ui-icons_cb672b_256x240.png);
+}
+.uihumanity .ui-state-error .ui-icon,
+.uihumanity .ui-state-error-text .ui-icon {
+	background-image: url(images/ui-icons_ff7519_256x240.png);
+}
+
+/* positioning */
+.uihumanity .ui-icon-blank { background-position: 16px 16px; }
+.uihumanity .ui-icon-carat-1-n { background-position: 0 0; }
+.uihumanity .ui-icon-carat-1-ne { background-position: -16px 0; }
+.uihumanity .ui-icon-carat-1-e { background-position: -32px 0; }
+.uihumanity .ui-icon-carat-1-se { background-position: -48px 0; }
+.uihumanity .ui-icon-carat-1-s { background-position: -64px 0; }
+.uihumanity .ui-icon-carat-1-sw { background-position: -80px 0; }
+.uihumanity .ui-icon-carat-1-w { background-position: -96px 0; }
+.uihumanity .ui-icon-carat-1-nw { background-position: -112px 0; }
+.uihumanity .ui-icon-carat-2-n-s { background-position: -128px 0; }
+.uihumanity .ui-icon-carat-2-e-w { background-position: -144px 0; }
+.uihumanity .ui-icon-triangle-1-n { background-position: 0 -16px; }
+.uihumanity .ui-icon-triangle-1-ne { background-position: -16px -16px; }
+.uihumanity .ui-icon-triangle-1-e { background-position: -32px -16px; }
+.uihumanity .ui-icon-triangle-1-se { background-position: -48px -16px; }
+.uihumanity .ui-icon-triangle-1-s { background-position: -64px -16px; }
+.uihumanity .ui-icon-triangle-1-sw { background-position: -80px -16px; }
+.uihumanity .ui-icon-triangle-1-w { background-position: -96px -16px; }
+.uihumanity .ui-icon-triangle-1-nw { background-position: -112px -16px; }
+.uihumanity .ui-icon-triangle-2-n-s { background-position: -128px -16px; }
+.uihumanity .ui-icon-triangle-2-e-w { background-position: -144px -16px; }
+.uihumanity .ui-icon-arrow-1-n { background-position: 0 -32px; }
+.uihumanity .ui-icon-arrow-1-ne { background-position: -16px -32px; }
+.uihumanity .ui-icon-arrow-1-e { background-position: -32px -32px; }
+.uihumanity .ui-icon-arrow-1-se { background-position: -48px -32px; }
+.uihumanity .ui-icon-arrow-1-s { background-position: -64px -32px; }
+.uihumanity .ui-icon-arrow-1-sw { background-position: -80px -32px; }
+.uihumanity .ui-icon-arrow-1-w { background-position: -96px -32px; }
+.uihumanity .ui-icon-arrow-1-nw { background-position: -112px -32px; }
+.uihumanity .ui-icon-arrow-2-n-s { background-position: -128px -32px; }
+.uihumanity .ui-icon-arrow-2-ne-sw { background-position: -144px -32px; }
+.uihumanity .ui-icon-arrow-2-e-w { background-position: -160px -32px; }
+.uihumanity .ui-icon-arrow-2-se-nw { background-position: -176px -32px; }
+.uihumanity .ui-icon-arrowstop-1-n { background-position: -192px -32px; }
+.uihumanity .ui-icon-arrowstop-1-e { background-position: -208px -32px; }
+.uihumanity .ui-icon-arrowstop-1-s { background-position: -224px -32px; }
+.uihumanity .ui-icon-arrowstop-1-w { background-position: -240px -32px; }
+.uihumanity .ui-icon-arrowthick-1-n { background-position: 0 -48px; }
+.uihumanity .ui-icon-arrowthick-1-ne { background-position: -16px -48px; }
+.uihumanity .ui-icon-arrowthick-1-e { background-position: -32px -48px; }
+.uihumanity .ui-icon-arrowthick-1-se { background-position: -48px -48px; }
+.uihumanity .ui-icon-arrowthick-1-s { background-position: -64px -48px; }
+.uihumanity .ui-icon-arrowthick-1-sw { background-position: -80px -48px; }
+.uihumanity .ui-icon-arrowthick-1-w { background-position: -96px -48px; }
+.uihumanity .ui-icon-arrowthick-1-nw { background-position: -112px -48px; }
+.uihumanity .ui-icon-arrowthick-2-n-s { background-position: -128px -48px; }
+.uihumanity .ui-icon-arrowthick-2-ne-sw { background-position: -144px -48px; }
+.uihumanity .ui-icon-arrowthick-2-e-w { background-position: -160px -48px; }
+.uihumanity .ui-icon-arrowthick-2-se-nw { background-position: -176px -48px; }
+.uihumanity .ui-icon-arrowthickstop-1-n { background-position: -192px -48px; }
+.uihumanity .ui-icon-arrowthickstop-1-e { background-position: -208px -48px; }
+.uihumanity .ui-icon-arrowthickstop-1-s { background-position: -224px -48px; }
+.uihumanity .ui-icon-arrowthickstop-1-w { background-position: -240px -48px; }
+.uihumanity .ui-icon-arrowreturnthick-1-w { background-position: 0 -64px; }
+.uihumanity .ui-icon-arrowreturnthick-1-n { background-position: -16px -64px; }
+.uihumanity .ui-icon-arrowreturnthick-1-e { background-position: -32px -64px; }
+.uihumanity .ui-icon-arrowreturnthick-1-s { background-position: -48px -64px; }
+.uihumanity .ui-icon-arrowreturn-1-w { background-position: -64px -64px; }
+.uihumanity .ui-icon-arrowreturn-1-n { background-position: -80px -64px; }
+.uihumanity .ui-icon-arrowreturn-1-e { background-position: -96px -64px; }
+.uihumanity .ui-icon-arrowreturn-1-s { background-position: -112px -64px; }
+.uihumanity .ui-icon-arrowrefresh-1-w { background-position: -128px -64px; }
+.uihumanity .ui-icon-arrowrefresh-1-n { background-position: -144px -64px; }
+.uihumanity .ui-icon-arrowrefresh-1-e { background-position: -160px -64px; }
+.uihumanity .ui-icon-arrowrefresh-1-s { background-position: -176px -64px; }
+.uihumanity .ui-icon-arrow-4 { background-position: 0 -80px; }
+.uihumanity .ui-icon-arrow-4-diag { background-position: -16px -80px; }
+.uihumanity .ui-icon-extlink { background-position: -32px -80px; }
+.uihumanity .ui-icon-newwin { background-position: -48px -80px; }
+.uihumanity .ui-icon-refresh { background-position: -64px -80px; }
+.uihumanity .ui-icon-shuffle { background-position: -80px -80px; }
+.uihumanity .ui-icon-transfer-e-w { background-position: -96px -80px; }
+.uihumanity .ui-icon-transferthick-e-w { background-position: -112px -80px; }
+.uihumanity .ui-icon-folder-collapsed { background-position: 0 -96px; }
+.uihumanity .ui-icon-folder-open { background-position: -16px -96px; }
+.uihumanity .ui-icon-document { background-position: -32px -96px; }
+.uihumanity .ui-icon-document-b { background-position: -48px -96px; }
+.uihumanity .ui-icon-note { background-position: -64px -96px; }
+.uihumanity .ui-icon-mail-closed { background-position: -80px -96px; }
+.uihumanity .ui-icon-mail-open { background-position: -96px -96px; }
+.uihumanity .ui-icon-suitcase { background-position: -112px -96px; }
+.uihumanity .ui-icon-comment { background-position: -128px -96px; }
+.uihumanity .ui-icon-person { background-position: -144px -96px; }
+.uihumanity .ui-icon-print { background-position: -160px -96px; }
+.uihumanity .ui-icon-trash { background-position: -176px -96px; }
+.uihumanity .ui-icon-locked { background-position: -192px -96px; }
+.uihumanity .ui-icon-unlocked { background-position: -208px -96px; }
+.uihumanity .ui-icon-bookmark { background-position: -224px -96px; }
+.uihumanity .ui-icon-tag { background-position: -240px -96px; }
+.uihumanity .ui-icon-home { background-position: 0 -112px; }
+.uihumanity .ui-icon-flag { background-position: -16px -112px; }
+.uihumanity .ui-icon-calendar { background-position: -32px -112px; }
+.uihumanity .ui-icon-cart { background-position: -48px -112px; }
+.uihumanity .ui-icon-pencil { background-position: -64px -112px; }
+.uihumanity .ui-icon-clock { background-position: -80px -112px; }
+.uihumanity .ui-icon-disk { background-position: -96px -112px; }
+.uihumanity .ui-icon-calculator { background-position: -112px -112px; }
+.uihumanity .ui-icon-zoomin { background-position: -128px -112px; }
+.uihumanity .ui-icon-zoomout { background-position: -144px -112px; }
+.uihumanity .ui-icon-search { background-position: -160px -112px; }
+.uihumanity .ui-icon-wrench { background-position: -176px -112px; }
+.uihumanity .ui-icon-gear { background-position: -192px -112px; }
+.uihumanity .ui-icon-heart { background-position: -208px -112px; }
+.uihumanity .ui-icon-star { background-position: -224px -112px; }
+.uihumanity .ui-icon-link { background-position: -240px -112px; }
+.uihumanity .ui-icon-cancel { background-position: 0 -128px; }
+.uihumanity .ui-icon-plus { background-position: -16px -128px; }
+.uihumanity .ui-icon-plusthick { background-position: -32px -128px; }
+.uihumanity .ui-icon-minus { background-position: -48px -128px; }
+.uihumanity .ui-icon-minusthick { background-position: -64px -128px; }
+.uihumanity .ui-icon-close { background-position: -80px -128px; }
+.uihumanity .ui-icon-closethick { background-position: -96px -128px; }
+.uihumanity .ui-icon-key { background-position: -112px -128px; }
+.uihumanity .ui-icon-lightbulb { background-position: -128px -128px; }
+.uihumanity .ui-icon-scissors { background-position: -144px -128px; }
+.uihumanity .ui-icon-clipboard { background-position: -160px -128px; }
+.uihumanity .ui-icon-copy { background-position: -176px -128px; }
+.uihumanity .ui-icon-contact { background-position: -192px -128px; }
+.uihumanity .ui-icon-image { background-position: -208px -128px; }
+.uihumanity .ui-icon-video { background-position: -224px -128px; }
+.uihumanity .ui-icon-script { background-position: -240px -128px; }
+.uihumanity .ui-icon-alert { background-position: 0 -144px; }
+.uihumanity .ui-icon-info { background-position: -16px -144px; }
+.uihumanity .ui-icon-notice { background-position: -32px -144px; }
+.uihumanity .ui-icon-help { background-position: -48px -144px; }
+.uihumanity .ui-icon-check { background-position: -64px -144px; }
+.uihumanity .ui-icon-bullet { background-position: -80px -144px; }
+.uihumanity .ui-icon-radio-on { background-position: -96px -144px; }
+.uihumanity .ui-icon-radio-off { background-position: -112px -144px; }
+.uihumanity .ui-icon-pin-w { background-position: -128px -144px; }
+.uihumanity .ui-icon-pin-s { background-position: -144px -144px; }
+.uihumanity .ui-icon-play { background-position: 0 -160px; }
+.uihumanity .ui-icon-pause { background-position: -16px -160px; }
+.uihumanity .ui-icon-seek-next { background-position: -32px -160px; }
+.uihumanity .ui-icon-seek-prev { background-position: -48px -160px; }
+.uihumanity .ui-icon-seek-end { background-position: -64px -160px; }
+.uihumanity .ui-icon-seek-start { background-position: -80px -160px; }
+/* ui-icon-seek-first is deprecated, use ui-icon-seek-start instead */
+.uihumanity .ui-icon-seek-first { background-position: -80px -160px; }
+.uihumanity .ui-icon-stop { background-position: -96px -160px; }
+.uihumanity .ui-icon-eject { background-position: -112px -160px; }
+.uihumanity .ui-icon-volume-off { background-position: -128px -160px; }
+.uihumanity .ui-icon-volume-on { background-position: -144px -160px; }
+.uihumanity .ui-icon-power { background-position: 0 -176px; }
+.uihumanity .ui-icon-signal-diag { background-position: -16px -176px; }
+.uihumanity .ui-icon-signal { background-position: -32px -176px; }
+.uihumanity .ui-icon-battery-0 { background-position: -48px -176px; }
+.uihumanity .ui-icon-battery-1 { background-position: -64px -176px; }
+.uihumanity .ui-icon-battery-2 { background-position: -80px -176px; }
+.uihumanity .ui-icon-battery-3 { background-position: -96px -176px; }
+.uihumanity .ui-icon-circle-plus { background-position: 0 -192px; }
+.uihumanity .ui-icon-circle-minus { background-position: -16px -192px; }
+.uihumanity .ui-icon-circle-close { background-position: -32px -192px; }
+.uihumanity .ui-icon-circle-triangle-e { background-position: -48px -192px; }
+.uihumanity .ui-icon-circle-triangle-s { background-position: -64px -192px; }
+.uihumanity .ui-icon-circle-triangle-w { background-position: -80px -192px; }
+.uihumanity .ui-icon-circle-triangle-n { background-position: -96px -192px; }
+.uihumanity .ui-icon-circle-arrow-e { background-position: -112px -192px; }
+.uihumanity .ui-icon-circle-arrow-s { background-position: -128px -192px; }
+.uihumanity .ui-icon-circle-arrow-w { background-position: -144px -192px; }
+.uihumanity .ui-icon-circle-arrow-n { background-position: -160px -192px; }
+.uihumanity .ui-icon-circle-zoomin { background-position: -176px -192px; }
+.uihumanity .ui-icon-circle-zoomout { background-position: -192px -192px; }
+.uihumanity .ui-icon-circle-check { background-position: -208px -192px; }
+.uihumanity .ui-icon-circlesmall-plus { background-position: 0 -208px; }
+.uihumanity .ui-icon-circlesmall-minus { background-position: -16px -208px; }
+.uihumanity .ui-icon-circlesmall-close { background-position: -32px -208px; }
+.uihumanity .ui-icon-squaresmall-plus { background-position: -48px -208px; }
+.uihumanity .ui-icon-squaresmall-minus { background-position: -64px -208px; }
+.uihumanity .ui-icon-squaresmall-close { background-position: -80px -208px; }
+.uihumanity .ui-icon-grip-dotted-vertical { background-position: 0 -224px; }
+.uihumanity .ui-icon-grip-dotted-horizontal { background-position: -16px -224px; }
+.uihumanity .ui-icon-grip-solid-vertical { background-position: -32px -224px; }
+.uihumanity .ui-icon-grip-solid-horizontal { background-position: -48px -224px; }
+.uihumanity .ui-icon-gripsmall-diagonal-se { background-position: -64px -224px; }
+.uihumanity .ui-icon-grip-diagonal-se { background-position: -80px -224px; }
+
+
+/* Misc visuals
+----------------------------------*/
+
+/* Corner radius */
+.uihumanity .ui-corner-all,
+.uihumanity .ui-corner-top,
+.uihumanity .ui-corner-left,
+.uihumanity .ui-corner-tl {
+	border-top-left-radius: 6px;
+}
+.uihumanity .ui-corner-all,
+.uihumanity .ui-corner-top,
+.uihumanity .ui-corner-right,
+.uihumanity .ui-corner-tr {
+	border-top-right-radius: 6px;
+}
+.uihumanity .ui-corner-all,
+.uihumanity .ui-corner-bottom,
+.uihumanity .ui-corner-left,
+.uihumanity .ui-corner-bl {
+	border-bottom-left-radius: 6px;
+}
+.uihumanity .ui-corner-all,
+.uihumanity .ui-corner-bottom,
+.uihumanity .ui-corner-right,
+.uihumanity .ui-corner-br {
+	border-bottom-right-radius: 6px;
+}
+
+/* Overlays */
+.uihumanity .ui-widget-overlay {
+	background: #aaaaaa url(images/ui-bg_flat_75_aaaaaa_40x100.png) 50% 50% repeat-x;
+	opacity: .3;
+	filter: Alpha(Opacity=30);
+}
+.uihumanity .ui-widget-shadow {
+	margin: -8px 0 0 -8px;
+	padding: 8px;
+	background: #aaaaaa url(images/ui-bg_flat_75_aaaaaa_40x100.png) 50% 50% repeat-x;
+	opacity: .3;
+	filter: Alpha(Opacity=30);
+	border-radius: 8px;
+}

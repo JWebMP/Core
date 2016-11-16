@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TableCaption.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">TableCaption.java</span></div><h1>TableCaption.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html;
+
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.TableChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+
+/**
+ * Definition and Usage&lt;p&gt;
+ * &lt;p&gt;
+ * The &amp;lt;caption&amp;gt; tag defines a table caption.
+ * &lt;p&gt;
+ * The &amp;lt;caption&amp;gt; tag must be inserted immediately after the table tag.
+ * &lt;p&gt;
+ * Note: You can specify only one caption per table.
+ * &lt;p&gt;
+ * Tip: By default, a table caption will be center-aligned above a table. However, the CSS properties text-align and caption-side can be used to align and place the caption. Browser Support Element
+ * &amp;lt;caption&amp;gt; Yes Yes Yes Yes Yes
+ * &lt;p&gt;
+ * Differences Between HTML 4.01 and HTML5
+ * &lt;p&gt;
+ * The align attribute is removed from HTML5.
+ * &lt;p&gt;
+ * @author Marc Magon
+ * @since forever
+ */
+public class TableCaption extends Component&lt;NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, TableCaption&gt; implements TableChildren&lt;NoAttributes&gt;, NoNewLineBeforeClosingTag, NoNewLineForRawText
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Constructs a new table caption
+     * &lt;p&gt;
+     * @param caption The caption
+     */
+    public TableCaption(String caption)
+    {
+<span class="fc" id="L44">        super(ComponentTypes.TableCaption);</span>
+<span class="fc" id="L45">        setText(caption);</span>
+<span class="fc" id="L46">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

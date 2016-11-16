@@ -1,0 +1,30 @@
+{
+  "name": "globalize-languages",
+  "authors": [
+    "google"
+  ],
+  "description": "All the languages for the google globalize project",
+  "main": "",
+  "keywords": [
+    "Globalize",
+    "Localization"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "e139ea1fd1",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "e139ea1fd182b1963b8098ea82f9d129283ab440"
+  },
+  "_source": "git://git.code.sf.net/p/jwebswing/globalize-languages",
+  "_target": "*",
+  "_originalSource": "globalize-languages"
+}

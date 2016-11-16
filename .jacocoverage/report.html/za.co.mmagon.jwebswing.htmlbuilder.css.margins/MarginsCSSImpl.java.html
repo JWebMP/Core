@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MarginsCSSImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.htmlbuilder.css.margins</a> &gt; <span class="el_source">MarginsCSSImpl.java</span></div><h1>MarginsCSSImpl.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.htmlbuilder.css.margins;
+
+import java.lang.annotation.Annotation;
+import za.co.mmagon.jwebswing.htmlbuilder.css.MarginSetting;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+
+/**
+ * The CSS margin properties are used to generate space around elements.
+ * &lt;p&gt;
+ * The margin properties set the size of the white space OUTSIDE the border.
+ * &lt;p&gt;
+ *
+ * @author GedMarc
+ * @since 18 Jan 2016
+ */
+public class MarginsCSSImpl implements MarginsCSS
+{
+
+    public MarginsCSSImpl()
+<span class="nc" id="L36">    {</span>
+<span class="nc" id="L37">    }</span>
+
+    @Override
+    public Class&lt;? extends Annotation&gt; annotationType()
+    {
+<span class="nc" id="L42">        return MarginsCSS.class;</span>
+    }
+
+    private Margin Margin;
+    private MeasurementCSS Margin_Right;
+    private MarginSetting Margin_Right$;
+    private MeasurementCSS Margin_Left;
+    private MarginSetting Margin_Left$;
+    private MeasurementCSS Margin_Top;
+    private MarginSetting Margin_Top$;
+    private MeasurementCSS Margin_Bottom;
+    private MarginSetting Margin_Bottom$;
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Margin_Right()
+    {
+<span class="nc" id="L63">        return Margin_Right;</span>
+    }
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     *
+     * @return
+     */
+    @Override
+    public MarginSetting Margin_Right$()
+    {
+<span class="nc" id="L74">        return Margin_Right$;</span>
+    }
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Margin_Left()
+    {
+<span class="nc" id="L85">        return Margin_Left;</span>
+    }
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     *
+     * @return
+     */
+    @Override
+    public MarginSetting Margin_Left$()
+    {
+<span class="nc" id="L96">        return Margin_Left$;</span>
+    }
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Margin_Top()
+    {
+<span class="nc" id="L107">        return Margin_Top;</span>
+    }
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     * &lt;p&gt;
+     */
+    public void setMargin_Right(MeasurementCSS Margin_Right)
+    {
+<span class="nc" id="L116">        this.Margin_Right = Margin_Right;</span>
+<span class="nc" id="L117">    }</span>
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     * &lt;p&gt;
+     */
+    public void setMargin_Right$(MarginSetting Margin_Right$)
+    {
+<span class="nc" id="L125">        this.Margin_Right$ = Margin_Right$;</span>
+<span class="nc" id="L126">    }</span>
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     * &lt;p&gt;
+     */
+    public void setMargin_Left(MeasurementCSS Margin_Left)
+    {
+<span class="nc" id="L134">        this.Margin_Left = Margin_Left;</span>
+<span class="nc" id="L135">    }</span>
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     * &lt;p&gt;
+     */
+    public void setMargin_Left$(MarginSetting Margin_Left$)
+    {
+<span class="nc" id="L143">        this.Margin_Left$ = Margin_Left$;</span>
+<span class="nc" id="L144">    }</span>
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     * &lt;p&gt;
+     */
+    public void setMargin_Top(MeasurementCSS Margin_Top)
+    {
+<span class="nc" id="L152">        this.Margin_Top = Margin_Top;</span>
+<span class="nc" id="L153">    }</span>
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     *
+     * @return
+     */
+    @Override
+    public MarginSetting Margin_Top$()
+    {
+<span class="nc" id="L163">        return Margin_Top$;</span>
+    }
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Margin_Bottom()
+    {
+<span class="nc" id="L174">        return Margin_Bottom;</span>
+    }
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     *
+     * @return
+     */
+    @Override
+    public MarginSetting Margin_Bottom$()
+    {
+<span class="nc" id="L185">        return Margin_Bottom$;</span>
+    }
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     *
+     * @param Margin_Top$
+     */
+    public void setMargin_Top$(MarginSetting Margin_Top$)
+    {
+<span class="nc" id="L195">        this.Margin_Top$ = Margin_Top$;</span>
+<span class="nc" id="L196">    }</span>
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     *
+     * @param Margin_Bottom
+     */
+    public void setMargin_Bottom(MeasurementCSS Margin_Bottom)
+    {
+<span class="nc" id="L205">        this.Margin_Bottom = Margin_Bottom;</span>
+<span class="nc" id="L206">    }</span>
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     *
+     * @param Margin_Bottom$
+     */
+    public void setMargin_Bottom$(MarginSetting Margin_Bottom$)
+    {
+<span class="nc" id="L215">        this.Margin_Bottom$ = Margin_Bottom$;</span>
+<span class="nc" id="L216">    }</span>
+
+    /**
+     * Shorthand for Margin
+     *
+     * @return
+     */
+    @Override
+    public za.co.mmagon.jwebswing.htmlbuilder.css.margins.Margin Margin()
+    {
+<span class="nc" id="L226">        return Margin;</span>
+    }
+
+    /**
+     * Set the shorthand for the margin.
+     * &lt;p&gt;
+     * If the margin property has four values:
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * margin: 25px 50px 75px 100px;
+     * &lt;p&gt;
+     * top margin is 25px
+     * &lt;p&gt;
+     * right margin is 50px
+     * &lt;p&gt;
+     * bottom margin is 75px
+     * &lt;p&gt;
+     * left margin is 100px
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * If the margin property has three values:
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * margin: 25px 50px 75px;
+     * &lt;p&gt;
+     * top margin is 25px
+     * &lt;p&gt;
+     * right and left margins are 50px
+     * &lt;p&gt;
+     * bottom margin is 75px
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * If the margin property has two values:
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * margin: 25px 50px;
+     * &lt;p&gt;
+     * top and bottom margins are 25px
+     * &lt;p&gt;
+     * right and left margins are 50px
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * If the margin property has one value:
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * margin: 25px;
+     * &lt;p&gt;
+     * all four margins are 25px
+     *
+     *
+     * @param Margin
+     */
+    public void setMargin(za.co.mmagon.jwebswing.htmlbuilder.css.margins.Margin Margin)
+    {
+<span class="nc" id="L280">        this.Margin = Margin;</span>
+<span class="nc" id="L281">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

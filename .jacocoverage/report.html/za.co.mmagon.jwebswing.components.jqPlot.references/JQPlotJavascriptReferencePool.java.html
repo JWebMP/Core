@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQPlotJavascriptReferencePool.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqPlot.references</a> &gt; <span class="el_source">JQPlotJavascriptReferencePool.java</span></div><h1>JQPlotJavascriptReferencePool.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqPlot.references;
+
+import za.co.mmagon.jwebswing.base.references.JavascriptReference;
+
+/**
+ * References for all the graphing Java Scripts
+ * &lt;p&gt;
+ * @author Marc Magon
+ * @since 08 Aug 2015
+ * @version 1.0
+ */
+<span class="pc" id="L28">public enum JQPlotJavascriptReferencePool</span>
+{
+
+    /**
+     * The basic core for the graphing system
+     */
+<span class="fc" id="L34">    GraphCore(new JavascriptReference(&quot;jqPlot&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/jquery.jqplot.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/jquery.jqplot.js&quot;, 15)),</span>
+    /**
+     * If the ie is less than version 9 this is required
+     */
+<span class="fc" id="L38">    ExCanvas(new JavascriptReference(&quot;excanvas&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/excanvas.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/excanvas.js&quot;, 16)),</span>
+    /**
+     * Builds a Bezier Curve Graph
+     */
+<span class="fc" id="L42">    BezierCurveRenderer(new JavascriptReference(&quot;jqplotBezeierCurve&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.BezierCurveRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.BezierCurveRenderer.js&quot;, 17)),</span>
+    /**
+     * Renders the Bars
+     */
+<span class="fc" id="L46">    BarRenderer(new JavascriptReference(&quot;jqplotBar&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.barRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.barRenderer.js&quot;, 20)),</span>
+<span class="fc" id="L47">    AxisLabelRenderer(new JavascriptReference(&quot;jqplotAxisLabelRenderer&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.axisLabelRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.axisLabelRenderer.js&quot;, 17)),</span>
+<span class="fc" id="L48">    BlockRenderer(new JavascriptReference(&quot;jqplotBlock&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.blockRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.blockRenderer.js&quot;, 20)),</span>
+<span class="fc" id="L49">    BubbleRenderer(new JavascriptReference(&quot;jqplotBubble&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.bubbleRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.bubbleRenderer.js&quot;, 20)),</span>
+<span class="fc" id="L50">    CanvasAxisLabelRenderer(new JavascriptReference(&quot;jqplotAxisLabel&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.canvasAxisLabelRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.canvasAxisLabelRenderer.js&quot;, 17)),</span>
+<span class="fc" id="L51">    CanvasAxisTickRenderer(new JavascriptReference(&quot;jqplotAxisTickLabel&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.canvasAxisTickRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.canvasAxisTickRenderer.js&quot;, 17)),</span>
+<span class="fc" id="L52">    CanvasOverlayRenderer(new JavascriptReference(&quot;jqplotCanvasOverlay&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.canvasOverlay.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.canvasOverlay.js&quot;, 20)),</span>
+<span class="fc" id="L53">    CanvasTextRenderer(new JavascriptReference(&quot;jqplotTextRenderer&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.canvasTextRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.canvasTextRenderer.js&quot;, 16)),</span>
+<span class="fc" id="L54">    CategoryAxisRenderer(new JavascriptReference(&quot;jqplotCategoryAxisRenderer&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.categoryAxisRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.categoryAxisRenderer.js&quot;, 17)),</span>
+<span class="fc" id="L55">    CIParserRenderer(new JavascriptReference(&quot;jqplotCIParser&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.ciParser.min.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.ciParser.min.js&quot;, 17)),</span>
+<span class="fc" id="L56">    CursorRenderer(new JavascriptReference(&quot;jqplotCursor&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.cursor.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.cursor.js&quot;, 17)),</span>
+<span class="fc" id="L57">    DateAxisRenderer(new JavascriptReference(&quot;jqplotDateAxis&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.dateAxisRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.dateAxisRenderer.js&quot;, 17)),</span>
+<span class="fc" id="L58">    DoughnutRenderer(new JavascriptReference(&quot;jqplotDoughnut&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.donutRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.donutRenderer.js&quot;, 20)),</span>
+<span class="fc" id="L59">    DraggableRenderer(new JavascriptReference(&quot;jqplotDrag&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.dragable.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.dragable.js&quot;, 17)),</span>
+<span class="fc" id="L60">    EnhancedLegenedRenderer(new JavascriptReference(&quot;jqplotEnhancedLegend&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.enhancedLegendRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.enhancedLegendRenderer.js&quot;, 20)),</span>
+<span class="fc" id="L61">    EnhancedPieLegenedRenderer(new JavascriptReference(&quot;jqplotEnhancedLegend&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.enhancedPieLegendRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.enhancedPieLegendRenderer.js&quot;, 20)),</span>
+<span class="fc" id="L62">    FunnelRenderer(new JavascriptReference(&quot;jqplotFunnel&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.funnelRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.funnelRenderer.js&quot;, 20)),</span>
+<span class="fc" id="L63">    HighlightRenderer(new JavascriptReference(&quot;jqplotHighlight&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.highlighter.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.highlighter.js&quot;, 17)),</span>
+<span class="fc" id="L64">    JSON2Renderer(new JavascriptReference(&quot;jqplotJSON2&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.json2.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.json2.js&quot;, 16)),</span>
+<span class="fc" id="L65">    LogAxisRenderer(new JavascriptReference(&quot;jqplotLogAxis&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.logAxisRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.logAxisRenderer.js&quot;, 17)),</span>
+<span class="fc" id="L66">    MekkoAxisRenderer(new JavascriptReference(&quot;jqplotMekkoAxis&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.mekkoAxisRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.mekkoAxisRenderer.js&quot;, 20)),</span>
+<span class="fc" id="L67">    MekkoRenderer(new JavascriptReference(&quot;jqplotMekko&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.mekkoRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.mekkoRenderer.js&quot;, 20)),</span>
+<span class="fc" id="L68">    MeterGaugeRenderer(new JavascriptReference(&quot;jqplotMeter&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.meterGaugeRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.meterGaugeRenderer.js&quot;, 20)),</span>
+<span class="fc" id="L69">    Mobile(new JavascriptReference(&quot;jqplotMobile&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.mobile.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.mobile.js&quot;, 16)),</span>
+<span class="fc" id="L70">    OHLCRenderer(new JavascriptReference(&quot;jqplotOLHC&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.ohlcRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.ohlcRenderer.js&quot;, 20)),</span>
+<span class="fc" id="L71">    PieRenderer(new JavascriptReference(&quot;jqplotPie&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.pieRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.pieRenderer.js&quot;, 20)),</span>
+<span class="fc" id="L72">    PointLabelsRenderer(new JavascriptReference(&quot;jqplotPointLabels&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.pointLabels.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.pointLabels.js&quot;, 20)),</span>
+<span class="fc" id="L73">    PyramidAxisRenderer(new JavascriptReference(&quot;jqplotPyramidAxisRender&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.pyramidAxisRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.pyramidAxisRenderer.js&quot;, 20)),</span>
+<span class="fc" id="L74">    PyramidGridRenderer(new JavascriptReference(&quot;jqplotPyramidGridRender&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.pyramidGridRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.pyramidGridRenderer.js&quot;, 20)),</span>
+<span class="fc" id="L75">    PyramidRenderer(new JavascriptReference(&quot;jqplotPyramid&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.pyramidRenderer.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.pyramidRenderer.js&quot;, 20)),</span>
+<span class="fc" id="L76">    TrendlineRenderer(new JavascriptReference(&quot;jqplotTrendLine&quot;, 1.09, &quot;bower_components/jqplot-jwebswing/plugins/jqplot.trendline.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.9/plugins/jqplot.trendline.js&quot;, 20)),;</span>
+    private final JavascriptReference reference;
+
+    private JQPlotJavascriptReferencePool(JavascriptReference reference)
+<span class="fc" id="L80">    {</span>
+<span class="fc" id="L81">        this.reference = reference;</span>
+
+<span class="fc" id="L83">    }</span>
+
+    public JavascriptReference getReference()
+    {
+<span class="fc" id="L87">        return reference;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

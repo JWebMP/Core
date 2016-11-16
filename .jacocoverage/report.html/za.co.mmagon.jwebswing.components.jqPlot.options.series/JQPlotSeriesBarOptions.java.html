@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQPlotSeriesBarOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqPlot.options.series</a> &gt; <span class="el_source">JQPlotSeriesBarOptions.java</span></div><h1>JQPlotSeriesBarOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqPlot.options.series;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.Orientation;
+import za.co.mmagon.jwebswing.components.jqPlot.JQPlotGraph;
+import za.co.mmagon.jwebswing.components.jqPlot.parts.interfaces.JQPlotSeriesRenderer;
+import za.co.mmagon.jwebswing.components.jqPlot.references.JQPlotJavascriptReferencePool;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ *
+ * @author Marc Magon
+ * @since 09 Aug 2015
+ * @version 1.0
+ */
+public class JQPlotSeriesBarOptions extends JavaScriptPart implements JQPlotSeriesRenderer
+{
+
+    private Boolean disableStack;
+
+    /**
+     * The graph that this is linked to
+     */
+    @JsonIgnore
+    private JQPlotGraph linkedGraph;
+
+    public JQPlotSeriesBarOptions(JQPlotGraph linkedGraph)
+<span class="fc" id="L45">    {</span>
+<span class="fc" id="L46">        this.linkedGraph = linkedGraph;</span>
+<span class="fc" id="L47">        linkedGraph.getJavascriptReferences().add(JQPlotJavascriptReferencePool.BarRenderer.getReference());</span>
+<span class="fc" id="L48">    }</span>
+
+    private Boolean fillToZero;
+
+    /**
+     * Number of pixels between adjacent bars at the same axis value.
+     */
+    private Integer barPadding;
+    /**
+     * Number of pixels between groups of bars at adjacent axis values.
+     */
+    private Integer barMargin;
+    /**
+     * ‘vertical’ = up and down bars, ‘horizontal’ = side to side bars
+     */
+    private Orientation barDirection;
+    /**
+     * Width of the bar in pixels (auto by devaul).
+     */
+    private Integer barWidth;
+    /**
+     * offset of the shadow from the slice and offset of each succesive stroke of the shadow from the last.
+     */
+    private Double shadowOffset;
+    /**
+     * number of strokes to apply to the shadow, each stroke offset shadowOffset from the last.
+     */
+    private Double shadowDepth;
+    /**
+     * transparency of the shadow (0 = transparent, 1 = opaque)
+     */
+    private Double shadowAlpha;
+    /**
+     * true to enable waterfall plot.
+     */
+    private Boolean waterfall;
+    /**
+     * group bars into this many groups
+     */
+    private Integer groups;
+    /**
+     * true to color each bar of a series separately rather than have every bar of a given series the same color.
+     */
+    private Boolean varyBarColor;
+    /**
+     * True to highlight slice when moused over.
+     */
+    private Boolean highlightMouseOver;
+    /**
+     * True to highlight when a mouse button is pressed over a slice.
+     */
+    private Boolean highlightMouseDown;
+    /**
+     * an array of colors to use when highlighting a bar.
+     */
+    private ArrayList&lt;String&gt; highlightColors;
+    /**
+     * NOT IMPLEMENTED YET.
+     * True if this is a horizontal bar plot and x and y values are “transposed”.
+     * Transposed, or “swapped”, data is required prior to rev.
+     * 894 builds of jqPlot with horizontal bars.
+     * Allows backward compatability of bar renderer horizontal bars with old style data sets.
+     */
+    private Boolean transposedData;
+
+    private Boolean useNegativeColors;
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Number of pixels between adjacent bars at the same axis value.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getBarPadding()
+    {
+<span class="nc" id="L124">        return barPadding;</span>
+    }
+
+    /**
+     * Number of pixels between adjacent bars at the same axis value.
+     * &lt;p&gt;
+     * @param barPadding
+     */
+    public void setBarPadding(Integer barPadding)
+    {
+<span class="nc" id="L134">        this.barPadding = barPadding;</span>
+<span class="nc" id="L135">    }</span>
+
+    /**
+     * Number of pixels between groups of bars at adjacent axis values.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getBarMargin()
+    {
+<span class="nc" id="L144">        return barMargin;</span>
+    }
+
+    /**
+     * Number of pixels between groups of bars at adjacent axis values.
+     * &lt;p&gt;
+     * @param barMargin
+     */
+    public void setBarMargin(Integer barMargin)
+    {
+<span class="nc" id="L154">        this.barMargin = barMargin;</span>
+<span class="nc" id="L155">    }</span>
+
+    /**
+     * ‘vertical’ = up and down bars, ‘horizontal’ = side to side bars
+     * &lt;p&gt;
+     * @return
+     */
+    public Orientation getBarDirection()
+    {
+<span class="nc" id="L164">        return barDirection;</span>
+    }
+
+    /**
+     * ‘vertical’ = up and down bars, ‘horizontal’ = side to side bars
+     * &lt;p&gt;
+     * @param barDirection
+     */
+    public void setBarDirection(Orientation barDirection)
+    {
+<span class="nc" id="L174">        this.barDirection = barDirection;</span>
+<span class="nc" id="L175">    }</span>
+
+    /**
+     * Width of the bar in pixels (auto by devaul).
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getBarWidth()
+    {
+<span class="nc" id="L184">        return barWidth;</span>
+    }
+
+    /**
+     * Width of the bar in pixels (auto by devaul).
+     * &lt;p&gt;
+     * @param barWidth
+     */
+    public void setBarWidth(Integer barWidth)
+    {
+<span class="nc" id="L194">        this.barWidth = barWidth;</span>
+<span class="nc" id="L195">    }</span>
+
+    /**
+     * offset of the shadow from the slice and offset of each succesive stroke of the shadow from the last.
+     * &lt;p&gt;
+     * @return
+     */
+    public Double getShadowOffset()
+    {
+<span class="nc" id="L204">        return shadowOffset;</span>
+    }
+
+    /**
+     * offset of the shadow from the slice and offset of each succesive stroke of the shadow from the last.
+     * &lt;p&gt;
+     * @param shadowOffset
+     */
+    public void setShadowOffset(Double shadowOffset)
+    {
+<span class="nc" id="L214">        this.shadowOffset = shadowOffset;</span>
+<span class="nc" id="L215">    }</span>
+
+    /**
+     * number of strokes to apply to the shadow, each stroke offset shadowOffset from the last.
+     * &lt;p&gt;
+     * @return
+     */
+    public Double getShadowDepth()
+    {
+<span class="nc" id="L224">        return shadowDepth;</span>
+    }
+
+    /**
+     * number of strokes to apply to the shadow, each stroke offset shadowOffset from the last.
+     * &lt;p&gt;
+     * @param shadowDepth
+     */
+    public void setShadowDepth(Double shadowDepth)
+    {
+<span class="nc" id="L234">        this.shadowDepth = shadowDepth;</span>
+<span class="nc" id="L235">    }</span>
+
+    /**
+     * transparency of the shadow (0 = transparent, 1 = opaque)
+     * &lt;p&gt;
+     * @return
+     */
+    public Double getShadowAlpha()
+    {
+<span class="nc" id="L244">        return shadowAlpha;</span>
+    }
+
+    /**
+     * transparency of the shadow (0 = transparent, 1 = opaque)
+     * &lt;p&gt;
+     * @param shadowAlpha
+     */
+    public void setShadowAlpha(Double shadowAlpha)
+    {
+<span class="nc" id="L254">        this.shadowAlpha = shadowAlpha;</span>
+<span class="nc" id="L255">    }</span>
+
+    /**
+     * true to enable waterfall plot.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getWaterfall()
+    {
+<span class="nc" id="L264">        return waterfall;</span>
+    }
+
+    /**
+     * true to enable waterfall plot.
+     * &lt;p&gt;
+     * @param waterfall
+     */
+    public void setWaterfall(Boolean waterfall)
+    {
+<span class="nc" id="L274">        this.waterfall = waterfall;</span>
+<span class="nc" id="L275">    }</span>
+
+    /**
+     * group bars into this many groups
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getGroups()
+    {
+<span class="nc" id="L284">        return groups;</span>
+    }
+
+    /**
+     * group bars into this many groups
+     * &lt;p&gt;
+     * @param groups
+     */
+    public void setGroups(Integer groups)
+    {
+<span class="nc" id="L294">        this.groups = groups;</span>
+<span class="nc" id="L295">    }</span>
+
+    /**
+     * true to color each bar of a series separately rather than have every bar of a given series the same color.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getVaryBarColor()
+    {
+<span class="nc" id="L304">        return varyBarColor;</span>
+    }
+
+    /**
+     * true to color each bar of a series separately rather than have every bar of a given series the same color.
+     * &lt;p&gt;
+     * @param varyBarColor
+     */
+    public void setVaryBarColor(Boolean varyBarColor)
+    {
+<span class="nc" id="L314">        this.varyBarColor = varyBarColor;</span>
+<span class="nc" id="L315">    }</span>
+
+    /**
+     * *
+     * True to highlight slice when moused over.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getHighlightMouseOver()
+    {
+<span class="nc" id="L325">        return highlightMouseOver;</span>
+    }
+
+    /**
+     * True to highlight slice when moused over.
+     * &lt;p&gt;
+     * @param highlightMouseOver
+     */
+    public void setHighlightMouseOver(Boolean highlightMouseOver)
+    {
+<span class="nc" id="L335">        this.highlightMouseOver = highlightMouseOver;</span>
+<span class="nc" id="L336">    }</span>
+
+    /**
+     * True to highlight when a mouse button is pressed over a slice.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getHighlightMouseDown()
+    {
+<span class="nc" id="L345">        return highlightMouseDown;</span>
+    }
+
+    /**
+     * True to highlight when a mouse button is pressed over a slice.
+     * &lt;p&gt;
+     * @param highlightMouseDown
+     */
+    public void setHighlightMouseDown(Boolean highlightMouseDown)
+    {
+<span class="nc" id="L355">        this.highlightMouseDown = highlightMouseDown;</span>
+<span class="nc" id="L356">    }</span>
+
+    /**
+     * an array of colors to use when highlighting a bar.
+     * &lt;p&gt;
+     * @return
+     */
+    public ArrayList&lt;String&gt; getHighlightColors()
+    {
+<span class="nc bnc" id="L365" title="All 2 branches missed.">        if (highlightColors == null)</span>
+        {
+<span class="nc" id="L367">            highlightColors = new ArrayList&lt;&gt;();</span>
+        }
+<span class="nc" id="L369">        return highlightColors;</span>
+    }
+
+    /**
+     * an array of colors to use when highlighting a bar.
+     * &lt;p&gt;
+     * @param highlightColors
+     */
+    public void setHighlightColors(ArrayList&lt;String&gt; highlightColors)
+    {
+<span class="nc" id="L379">        this.highlightColors = highlightColors;</span>
+<span class="nc" id="L380">    }</span>
+
+    /**
+     * NOT IMPLEMENTED YET. True if this is a horizontal bar plot and x and y values are “transposed”.
+     * Tranposed, or “swapped”, data is required prior to rev. 894 builds of jqPlot with horizontal
+     * bars.
+     * Allows backward compatability of bar renderer horizontal bars with old style data sets.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getTransposedData()
+    {
+<span class="nc" id="L392">        return transposedData;</span>
+    }
+
+    /**
+     * NOT IMPLEMENTED YET. True if this is a horizontal bar plot and x and y values are “transposed”.
+     * Tranposed, or “swapped”, data is required prior to rev. 894 builds of jqPlot with horizontal
+     * bars.
+     * Allows backward compatability of bar renderer horizontal bars with old style data sets.
+     * &lt;p&gt;
+     * @param transposedData
+     */
+    public void setTransposedData(Boolean transposedData)
+    {
+<span class="nc" id="L405">        this.transposedData = transposedData;</span>
+<span class="nc" id="L406">    }</span>
+
+    /**
+     * Gets the graph associated with this options
+     *
+     * @return
+     */
+    public JQPlotGraph getLinkedGraph()
+    {
+<span class="nc" id="L415">        return linkedGraph;</span>
+    }
+
+    /**
+     * Sets the graph that is linked to this options
+     *
+     * @param linkedGraph
+     */
+    public void setLinkedGraph(JQPlotGraph linkedGraph)
+    {
+<span class="nc" id="L425">        this.linkedGraph = linkedGraph;</span>
+<span class="nc" id="L426">    }</span>
+
+    /**
+     * Gets to fill to zero for negative numbers
+     *
+     * @return
+     */
+    public Boolean getFillToZero()
+    {
+<span class="nc" id="L435">        return fillToZero;</span>
+    }
+
+    /**
+     * sets fill to zero for negative numbers
+     *
+     * @param fillToZero
+     */
+    public void setFillToZero(Boolean fillToZero)
+    {
+<span class="nc" id="L445">        this.fillToZero = fillToZero;</span>
+<span class="nc" id="L446">    }</span>
+
+    @Override
+    public String getRenderer()
+    {
+<span class="fc" id="L451">        return &quot;$.jqplot.BarRenderer&quot;;</span>
+    }
+
+    /**
+     * Whether or not to use negative colours
+     *
+     * @return
+     */
+    public Boolean getUseNegativeColors()
+    {
+<span class="nc" id="L461">        return useNegativeColors;</span>
+    }
+
+    /**
+     * Whether or not to use negative colours
+     *
+     * @param useNegativeColors
+     */
+    public void setUseNegativeColors(Boolean useNegativeColors)
+    {
+<span class="nc" id="L471">        this.useNegativeColors = useNegativeColors;</span>
+<span class="nc" id="L472">    }</span>
+
+    /**
+     * Sets whether or not disable stack should be implement
+     *
+     * @return
+     */
+    public Boolean getDisableStack()
+    {
+<span class="nc" id="L481">        return disableStack;</span>
+    }
+
+    /**
+     * Sets disable stack for the bar graph
+     *
+     * @param disableStack
+     */
+    public void setDisableStack(Boolean disableStack)
+    {
+<span class="nc" id="L491">        this.disableStack = disableStack;</span>
+<span class="nc" id="L492">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

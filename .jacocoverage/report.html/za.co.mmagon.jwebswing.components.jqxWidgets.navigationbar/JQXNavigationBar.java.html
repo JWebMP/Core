@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQXNavigationBar.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqxWidgets.navigationbar</a> &gt; <span class="el_source">JQXNavigationBar.java</span></div><h1>JQXNavigationBar.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqxWidgets.navigationbar;
+
+import java.util.ArrayList;
+import java.util.Objects;
+import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.base.html.Paragraph;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.utilities.ComponentUtils;
+
+/**
+ * jqxNavigationBar represents a jQuery widget that has header and content sections(like tabs). Click headers to expand or collapse the content.
+ * Optionally you can change the default toggle mode to double-click or mouse-over.
+ * &lt;p&gt;
+ * @author Marc Magon
+ * @since 29 Aug 2015
+ * @version 1.0
+ */
+public class JQXNavigationBar extends Div&lt;GlobalChildren, JQXNavigationBarAttributes, JQXNavigationBarFeature, JQXNavigationBarEvents, JQXNavigationBar&gt;
+{
+
+    private static final long serialVersionUID = 1L;
+    private JQXNavigationBarFeature feature;
+    private ArrayList&lt;NavigationBarGroup&gt; groups;
+
+    public JQXNavigationBar()
+<span class="nc" id="L42">    {</span>
+<span class="nc" id="L43">        addFeature(getFeature());</span>
+<span class="nc" id="L44">    }</span>
+
+    public final JQXNavigationBarFeature getFeature()
+    {
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        if (feature == null)</span>
+        {
+<span class="nc" id="L50">            feature = new JQXNavigationBarFeature(this);</span>
+        }
+<span class="nc" id="L52">        return feature;</span>
+    }
+
+    @Override
+    public JQXNavigationBarOptions getOptions()
+    {
+<span class="nc" id="L58">        return getFeature().getOptions();</span>
+    }
+
+    public void addGroup(NavigationBarGroup group)
+    {
+<span class="nc" id="L63">        getGroups().add(group);</span>
+<span class="nc" id="L64">        add(group.getHeader());</span>
+<span class="nc" id="L65">        add(group.getContent());</span>
+<span class="nc" id="L66">    }</span>
+
+    public ArrayList&lt;NavigationBarGroup&gt; getGroups()
+    {
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        if (groups == null)</span>
+        {
+<span class="nc" id="L72">            groups = new ArrayList&lt;&gt;();</span>
+        }
+<span class="nc" id="L74">        return groups;</span>
+    }
+
+    public void setGroups(ArrayList&lt;NavigationBarGroup&gt; groups)
+    {
+<span class="nc" id="L79">        this.groups = groups;</span>
+<span class="nc" id="L80">    }</span>
+
+    public static class NavigationBarGroup
+    {
+
+        private Div header;
+        private Div content;
+        private String name;
+
+        public NavigationBarGroup()
+        {
+<span class="nc" id="L91">            this(&quot;No Header&quot;);</span>
+<span class="nc" id="L92">        }</span>
+
+        public NavigationBarGroup(String header)
+        {
+<span class="nc" id="L96">            this(header, new Div());</span>
+<span class="nc" id="L97">        }</span>
+
+        public NavigationBarGroup(String header, Div content)
+<span class="nc" id="L100">        {</span>
+<span class="nc" id="L101">            this.header = new Div();</span>
+<span class="nc" id="L102">            ComponentUtils.removeAllMargins(this.header);</span>
+<span class="nc" id="L103">            ComponentUtils.removeAllMargins(content);</span>
+<span class="nc" id="L104">            Paragraph p = new Paragraph(header);</span>
+<span class="nc" id="L105">            ComponentUtils.removeAllMargins(p);</span>
+<span class="nc" id="L106">            this.header.add(p);</span>
+<span class="nc" id="L107">            setName(header);</span>
+<span class="nc" id="L108">            this.content = content;</span>
+<span class="nc" id="L109">        }</span>
+
+        public Div getHeader()
+        {
+<span class="nc" id="L113">            return header;</span>
+        }
+
+        public Div getContent()
+        {
+<span class="nc" id="L118">            return content;</span>
+        }
+
+        public String getName()
+        {
+<span class="nc" id="L123">            return name;</span>
+        }
+
+        public void setName(String name)
+        {
+<span class="nc" id="L128">            this.name = name;</span>
+<span class="nc" id="L129">        }</span>
+
+        @Override
+        public int hashCode()
+        {
+<span class="nc" id="L134">            int hash = 7;</span>
+<span class="nc" id="L135">            hash = 67 * hash + Objects.hashCode(this.name);</span>
+<span class="nc" id="L136">            return hash;</span>
+        }
+
+        @Override
+        public boolean equals(Object obj)
+        {
+<span class="nc bnc" id="L142" title="All 2 branches missed.">            if (this == obj)</span>
+            {
+<span class="nc" id="L144">                return true;</span>
+            }
+<span class="nc bnc" id="L146" title="All 2 branches missed.">            if (obj == null)</span>
+            {
+<span class="nc" id="L148">                return false;</span>
+            }
+<span class="nc bnc" id="L150" title="All 2 branches missed.">            if (getClass() != obj.getClass())</span>
+            {
+<span class="nc" id="L152">                return false;</span>
+            }
+<span class="nc" id="L154">            final NavigationBarGroup other = (NavigationBarGroup) obj;</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">            if (!Objects.equals(this.name, other.name))</span>
+            {
+<span class="nc" id="L157">                return false;</span>
+            }
+<span class="nc" id="L159">            return true;</span>
+        }
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

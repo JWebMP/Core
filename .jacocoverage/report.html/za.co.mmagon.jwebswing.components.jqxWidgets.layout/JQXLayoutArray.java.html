@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQXLayoutArray.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqxWidgets.layout</a> &gt; <span class="el_source">JQXLayoutArray.java</span></div><h1>JQXLayoutArray.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqxWidgets.layout;
+
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import java.util.ArrayList;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.Orientation;
+import za.co.mmagon.jwebswing.components.jqxWidgets.dockinglayout.JQXDockingLayoutAlignment;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ * This Class
+ *
+ * @author GedMarc
+ * @since 15 Dec 2015
+ */
+//@Json
+public class JQXLayoutArray extends JavaScriptPart
+{
+
+    /**
+     * . Possible values:
+     * 'layoutGroup' - container for other groups. It has no visual features. The root item is always of this type.
+     * 'tabbedGroup' - a group that contains layoutPanels. It is represented by a jqxWindow-like panel with a bottom-aligned jqxRibbon inside.
+     * 'documentGroup' - a group that contains documentPanels. It is represented by a top-aligned jqxRibbon.
+     * 'autoHideGroup' - a group that contains layoutPanels. It is represented by a jqxRibbon with mode: 'popup'. Each ribbon item has a jqxWindow-like panel in its content. This group has to be
+     * either the first or the last child item of its parent layoutGroup.
+     * 'layoutPanel' - a panel that can be inserted in a tabbedGroup or autoHideGroup. When it is in a tabbedGroup it is represented by a ribbon item and in an autoHideGroup - by a jqxWindow-like
+     * panel inside a ribbon item.
+     * 'documentPanel' - a panel that can be inserted in a documentGroup. It is represented by a ribbon item.
+     */
+    private JQXLayoutType type;
+    /**
+     * - sets the alignment of an autoHideGroup. Possible values:
+     * 'left'
+     * 'right'
+     * 'top'
+     * 'bottom'
+     */
+    private JQXDockingLayoutAlignment alignment;
+    /**
+     * Applicable to tabbedGroups, layoutPanels and documentPanels. If set to true, the group/panel can be closed.
+     */
+    private Boolean allowClose;
+    /**
+     * Applicable only to tabbedGroups. If set to false, the group cannot be pinned.
+     */
+    private Boolean allowPin;
+    /**
+     * Applicable only to autoHideGroups. If set to false, the group cannot be unpinned.
+     */
+    private Boolean allowUnpin;
+    /**
+     * Indicates which HTML element has the content of the panel. The required value is the value of an existing HTML element's data-container attribute. N/A to groups.
+     */
+    private String contentContainer;
+    /**
+     * Sets the height of a group (N/A to panels). Used only if the parent group's orientation is 'vertical'. The heights of all such groups have to be set either in pixels or percents (not a mix of
+     * both).
+     */
+    private String height;
+    /**
+     * A callback function to be called when a panel is opened for the first time. Useful for initializing widgets in panels. N/A to groups.
+     */
+    @JsonRawValue(true)
+    private String initContent;
+    /**
+     * Sets the minimum height (in pixels) of a group which is vertically aligned within its parent group. Disregards the value of the minGroupHeight property.
+     */
+    private Integer minHeight;
+    /**
+     * Sets the minimum width (in pixels) of a group which is horizontally aligned within its parent group. Disregards the value of the minGroupWidth property.
+     */
+    private String minWidth;
+    /**
+     * Orients child items either horizontally or vertically. Applicable only to layoutGroups. Possible values:
+     * 'horizontal'
+     * 'vertical'
+     */
+    private Orientation orientation;
+    /**
+     * Sets what the height of a tabbedGroup will be after it is pinned.
+     */
+    private Integer pinnedHeight;
+    /**
+     * Sets what the width of a tabbedGroup will be after it is pinned.
+     */
+    private Integer pinnedWidth;
+    /**
+     * Sets whether a panel is initially selected. N/A to groups.
+     */
+    private Boolean selected;
+    /**
+     * Sets the title of a panel. Represented by the corresponding ribbon item's title. N/A to groups.
+     */
+    private String title;
+    /**
+     * sets what the height of an autoHideGroup will be after it is unpinned.
+     */
+    private Integer unpinnedHeight;// -
+    /**
+     * sets what the width of an autoHideGroup will be after it is unpinned.
+     */
+    private Integer unpinnedWidth;// -
+    /**
+     * sets the width of a group (N/A to panels). Used only if the parent group's orientation is 'horizontal'. The widths of all such groups have to be set either in pixels or percents (not a mix of
+     * both).
+     */
+    private String width;
+    /**
+     * - an array of item objects with the fields described above. N/A to panels.
+     */
+    private ArrayList&lt;JQXLayoutArray&gt; items;
+
+    public JQXLayoutArray()
+<span class="fc" id="L132">    {</span>
+<span class="fc" id="L133">    }</span>
+
+    @Override
+    public String toString()
+    {
+<span class="nc" id="L138">        return super.toString();</span>
+    }
+
+    public JQXLayoutType getType()
+    {
+<span class="nc" id="L143">        return type;</span>
+    }
+
+    public void setType(JQXLayoutType type)
+    {
+<span class="nc" id="L148">        this.type = type;</span>
+<span class="nc" id="L149">    }</span>
+
+    public JQXDockingLayoutAlignment getAlignment()
+    {
+<span class="nc" id="L153">        return alignment;</span>
+    }
+
+    public void setAlignment(JQXDockingLayoutAlignment alignment)
+    {
+<span class="nc" id="L158">        this.alignment = alignment;</span>
+<span class="nc" id="L159">    }</span>
+
+    public Boolean getAllowClose()
+    {
+<span class="nc" id="L163">        return allowClose;</span>
+    }
+
+    public void setAllowClose(Boolean allowClose)
+    {
+<span class="nc" id="L168">        this.allowClose = allowClose;</span>
+<span class="nc" id="L169">    }</span>
+
+    public Boolean getAllowPin()
+    {
+<span class="nc" id="L173">        return allowPin;</span>
+    }
+
+    public void setAllowPin(Boolean allowPin)
+    {
+<span class="fc" id="L178">        this.allowPin = allowPin;</span>
+<span class="fc" id="L179">    }</span>
+
+    public Boolean getAllowUnpin()
+    {
+<span class="nc" id="L183">        return allowUnpin;</span>
+    }
+
+    public void setAllowUnpin(Boolean allowUnpin)
+    {
+<span class="nc" id="L188">        this.allowUnpin = allowUnpin;</span>
+<span class="nc" id="L189">    }</span>
+
+    public String getContentContainer()
+    {
+<span class="nc" id="L193">        return contentContainer;</span>
+    }
+
+    public void setContentContainer(Component contentContainer)
+    {
+<span class="nc" id="L198">        this.contentContainer = contentContainer.getID();</span>
+<span class="nc" id="L199">    }</span>
+
+    public void setContentContainer(String contentContainer)
+    {
+<span class="nc" id="L203">        this.contentContainer = contentContainer;</span>
+<span class="nc" id="L204">    }</span>
+
+    public String getHeight()
+    {
+<span class="nc" id="L208">        return height;</span>
+    }
+
+    public void setHeight(Integer height)
+    {
+<span class="nc" id="L213">        this.height = height.toString();</span>
+<span class="nc" id="L214">    }</span>
+
+    public String getInitContent()
+    {
+<span class="nc" id="L218">        return initContent;</span>
+    }
+
+    public void setInitContent(String initContent)
+    {
+<span class="fc" id="L223">        this.initContent = initContent;</span>
+<span class="fc" id="L224">    }</span>
+
+    public Integer getMinHeight()
+    {
+<span class="nc" id="L228">        return minHeight;</span>
+    }
+
+    public void setMinHeight(Integer minHeight)
+    {
+<span class="nc" id="L233">        this.minHeight = minHeight;</span>
+<span class="nc" id="L234">    }</span>
+
+    public String getMinWidth()
+    {
+<span class="nc" id="L238">        return minWidth;</span>
+    }
+
+    public void setMinWidth(Integer minWidth)
+    {
+<span class="nc" id="L243">        this.minWidth = minWidth.toString();</span>
+<span class="nc" id="L244">    }</span>
+
+    public void setMinWidth(MeasurementCSSImpl minWidth)
+    {
+<span class="nc" id="L248">        this.minWidth = minWidth.toString();</span>
+<span class="nc" id="L249">    }</span>
+
+    public Orientation getOrientation()
+    {
+<span class="nc" id="L253">        return orientation;</span>
+    }
+
+    public void setOrientation(Orientation orientation)
+    {
+<span class="nc" id="L258">        this.orientation = orientation;</span>
+<span class="nc" id="L259">    }</span>
+
+    public Integer getPinnedHeight()
+    {
+<span class="nc" id="L263">        return pinnedHeight;</span>
+    }
+
+    public void setPinnedHeight(Integer pinnedHeight)
+    {
+<span class="nc" id="L268">        this.pinnedHeight = pinnedHeight;</span>
+<span class="nc" id="L269">    }</span>
+
+    public Integer getPinnedWidth()
+    {
+<span class="nc" id="L273">        return pinnedWidth;</span>
+    }
+
+    public void setPinnedWidth(Integer pinnedWidth)
+    {
+<span class="nc" id="L278">        this.pinnedWidth = pinnedWidth;</span>
+<span class="nc" id="L279">    }</span>
+
+    public Boolean getSelected()
+    {
+<span class="nc" id="L283">        return selected;</span>
+    }
+
+    public void setSelected(Boolean selected)
+    {
+<span class="nc" id="L288">        this.selected = selected;</span>
+<span class="nc" id="L289">    }</span>
+
+    public String getTitle()
+    {
+<span class="nc" id="L293">        return title;</span>
+    }
+
+    public void setTitle(String title)
+    {
+<span class="fc" id="L298">        this.title = title;</span>
+<span class="fc" id="L299">    }</span>
+
+    public Integer getUnpinnedHeight()
+    {
+<span class="nc" id="L303">        return unpinnedHeight;</span>
+    }
+
+    public void setUnpinnedHeight(Integer unpinnedHeight)
+    {
+<span class="nc" id="L308">        this.unpinnedHeight = unpinnedHeight;</span>
+<span class="nc" id="L309">    }</span>
+
+    public Integer getUnpinnedWidth()
+    {
+<span class="nc" id="L313">        return unpinnedWidth;</span>
+    }
+
+    public void setUnpinnedWidth(Integer unpinnedWidth)
+    {
+<span class="nc" id="L318">        this.unpinnedWidth = unpinnedWidth;</span>
+<span class="nc" id="L319">    }</span>
+
+    public String getWidth()
+    {
+<span class="nc" id="L323">        return width;</span>
+    }
+
+    public void setWidth(Integer width)
+    {
+<span class="nc" id="L328">        this.width = width.toString();</span>
+<span class="nc" id="L329">    }</span>
+
+    public void setWidth(MeasurementCSSImpl width)
+    {
+<span class="nc" id="L333">        this.width = width.toString();</span>
+<span class="nc" id="L334">    }</span>
+
+    public void setHeight(MeasurementCSSImpl height)
+    {
+<span class="nc" id="L338">        this.height = height.toString();</span>
+<span class="nc" id="L339">    }</span>
+
+    public ArrayList&lt;JQXLayoutArray&gt; getItems()
+    {
+<span class="nc bnc" id="L343" title="All 2 branches missed.">        if (items == null)</span>
+        {
+<span class="nc" id="L345">            items = new ArrayList&lt;&gt;();</span>
+        }
+<span class="nc" id="L347">        return items;</span>
+    }
+
+    public void setItems(ArrayList&lt;JQXLayoutArray&gt; items)
+    {
+<span class="nc" id="L352">        this.items = items;</span>
+<span class="nc" id="L353">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

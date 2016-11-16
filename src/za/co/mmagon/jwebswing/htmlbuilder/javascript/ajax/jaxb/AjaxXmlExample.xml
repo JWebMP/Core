@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+    <Component>
+        <ID>aaba95001d0-90a7-43dd-6640-156979c0</ID>
+        
+        <EventTypes>
+            <EventType>onClick</EventType>
+        </EventTypes>
+        <Scripts>
+            <AjaxScript>	bindEvent('ab80f2408cb-a207-60ac-580e-1515d154','onClick');
+            </AjaxScript>
+        </Scripts>
+        <CssUpdate>
+            inline=inline;
+        </CssUpdate>
+        <Command>
+            
+        </Command>
+        <ReplacementHTML>&lt;H1 class=&quot;Header_H1_aaba95001d0-90a7-43dd-6640-156979c0&quot; id=&quot;aaba95001d0-90a7-43dd-6640-156979c0&quot;&gt; [H1 - Ajax Clicked. Total Header Clicked So Far [1]!&lt;/H1&gt;</ReplacementHTML>
+    </Component>
+</Root>

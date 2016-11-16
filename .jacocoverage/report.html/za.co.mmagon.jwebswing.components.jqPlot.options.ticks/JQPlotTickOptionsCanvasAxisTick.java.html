@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQPlotTickOptionsCanvasAxisTick.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqPlot.options.ticks</a> &gt; <span class="el_source">JQPlotTickOptionsCanvasAxisTick.java</span></div><h1>JQPlotTickOptionsCanvasAxisTick.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqPlot.options.ticks;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import za.co.mmagon.jwebswing.components.jqPlot.JQPlotGraph;
+import za.co.mmagon.jwebswing.components.jqPlot.parts.interfaces.JQPlotTickRenderer;
+import za.co.mmagon.jwebswing.components.jqPlot.references.JQPlotJavascriptReferencePool;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourHex;
+import za.co.mmagon.jwebswing.htmlbuilder.css.fonts.FontFamilies;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ *
+ * @author Marc Magon
+ * @since 07 Aug 2015
+ * @version 1.0
+ */
+public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements JQPlotTickRenderer
+{
+
+    private static final long serialVersionUID = 1L;
+    /**
+     * tick mark on the axis.
+     * One of ‘inside’, ‘outside’, ‘cross’, ‘’ or null.
+     */
+    private String mark;
+    /**
+     * Whether or not to show the mark on the axis.
+     */
+    private Boolean showMark;
+    /**
+     * Whether or not to draw the gridline on the grid at this tick.
+     */
+    private Boolean showGridline;
+    /**
+     * css spec for the font-size css attribute.
+     */
+    private Integer angle;
+    /**
+     * if this is a minor tick.
+     */
+    private Boolean isMinorTick;
+    /**
+     * Length of the tick marks in pixels.
+     */
+    private Boolean markSize;
+    /**
+     * Whether or not to show the tick (mark and label).
+     */
+    private Boolean show;
+    /**
+     * wether or not to show the label.
+     */
+    private Boolean showLabel;
+    /**
+     * A class of a formatter for the tick text.
+     * $.jqplot.DefaultTickFormatter
+     * &lt;p&gt;
+     * A class of a formatter for the tick text. sprintf by default.
+     */
+    private String formatter;
+    /**
+     * String to prepend to the tick label.
+     */
+    private String prefix;
+    /**
+     * string passed to the formatter.
+     * &lt;p&gt;
+     */
+    private String formatString;
+    /**
+     * css spec for the font-family css attribute.
+     */
+    private FontFamilies fontFamily;
+    /**
+     * css spec for the font-size css attribute.
+     */
+    private Integer fontSize;
+    /**
+     * css spec for the color attribute.
+     */
+    private ColourHex textColor;
+    /**
+     * true to escape HTML entities in the label.
+     */
+    private Boolean escapeHTML;
+
+    /**
+     * ‘auto’, ‘start’, ‘middle’ or ‘end’.
+     */
+    private String labelPosition;
+
+    @JsonIgnore
+    private JQPlotGraph linkedGraph;
+
+    /**
+     * Constructs a new tick options canvas
+     *
+     * @param linkedGraph
+     */
+    public JQPlotTickOptionsCanvasAxisTick(JQPlotGraph linkedGraph)
+<span class="nc" id="L118">    {</span>
+<span class="nc" id="L119">        this.linkedGraph = linkedGraph;</span>
+<span class="nc" id="L120">        linkedGraph.getJavascriptReferences().add(JQPlotJavascriptReferencePool.CanvasAxisTickRenderer.getReference());</span>
+<span class="nc" id="L121">        linkedGraph.getJavascriptReferences().add(JQPlotJavascriptReferencePool.CanvasTextRenderer.getReference());</span>
+<span class="nc" id="L122">    }</span>
+
+    /**
+     * tick mark on the axis.
+     * One of ‘inside’, ‘outside’, ‘cross’, ‘’ or null.
+     * &lt;p&gt;
+     * @return
+     */
+    public String getMark()
+    {
+<span class="nc" id="L132">        return mark;</span>
+    }
+
+    /**
+     * tick mark on the axis.
+     * One of ‘inside’, ‘outside’, ‘cross’, ‘’ or null.
+     * &lt;p&gt;
+     * @param mark
+     */
+    public void setMark(String mark)
+    {
+<span class="nc" id="L143">        this.mark = mark;</span>
+<span class="nc" id="L144">    }</span>
+
+    /**
+     * Show the mark or not
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getShowMark()
+    {
+<span class="nc" id="L153">        return showMark;</span>
+    }
+
+    /**
+     * Show the mark or not
+     * &lt;p&gt;
+     * @param showMark
+     */
+    public void setShowMark(Boolean showMark)
+    {
+<span class="nc" id="L163">        this.showMark = showMark;</span>
+<span class="nc" id="L164">    }</span>
+
+    /**
+     * Whether to show the grid line
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getShowGridline()
+    {
+<span class="nc" id="L173">        return showGridline;</span>
+    }
+
+    /**
+     * Whether to show the grid line
+     * &lt;p&gt;
+     * @param showGridline
+     */
+    public void setShowGridline(Boolean showGridline)
+    {
+<span class="nc" id="L183">        this.showGridline = showGridline;</span>
+<span class="nc" id="L184">    }</span>
+
+    /**
+     * The angle of the text
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getAngle()
+    {
+<span class="nc" id="L193">        return angle;</span>
+    }
+
+    /**
+     * The angle of the text
+     * &lt;p&gt;
+     * @param angle
+     */
+    public void setAngle(Integer angle)
+    {
+<span class="nc" id="L203">        this.angle = angle;</span>
+<span class="nc" id="L204">    }</span>
+
+    /**
+     * Display minor ticks or not
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getIsMinorTick()
+    {
+<span class="nc" id="L213">        return isMinorTick;</span>
+    }
+
+    /**
+     * Display minor ticks or not
+     * &lt;p&gt;
+     * @param isMinorTick
+     */
+    public void setIsMinorTick(Boolean isMinorTick)
+    {
+<span class="nc" id="L223">        this.isMinorTick = isMinorTick;</span>
+<span class="nc" id="L224">    }</span>
+
+    /**
+     * Gets the mark size
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getMarkSize()
+    {
+<span class="nc" id="L233">        return markSize;</span>
+    }
+
+    /**
+     * Sets the mark size
+     * &lt;p&gt;
+     * @param markSize
+     */
+    public void setMarkSize(Boolean markSize)
+    {
+<span class="nc" id="L243">        this.markSize = markSize;</span>
+<span class="nc" id="L244">    }</span>
+
+    /**
+     * Whether or not to show the ticks
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getShow()
+    {
+<span class="nc" id="L253">        return show;</span>
+    }
+
+    /**
+     * Whether or not to show the ticks
+     * &lt;p&gt;
+     * @param show
+     */
+    public void setShow(Boolean show)
+    {
+<span class="nc" id="L263">        this.show = show;</span>
+<span class="nc" id="L264">    }</span>
+
+    /**
+     * Whether or not to show the label
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getShowLabel()
+    {
+<span class="nc" id="L273">        return showLabel;</span>
+    }
+
+    /**
+     * Whether or not to show the label
+     * &lt;p&gt;
+     * @param showLabel
+     */
+    public void setShowLabel(Boolean showLabel)
+    {
+<span class="nc" id="L283">        this.showLabel = showLabel;</span>
+<span class="nc" id="L284">    }</span>
+
+    /**
+     * Get a sprintf formatter
+     * &lt;p&gt;
+     * @return
+     */
+    public String getFormatter()
+    {
+<span class="nc" id="L293">        return formatter;</span>
+    }
+
+    /**
+     * Set the sprint f format string
+     * &lt;p&gt;
+     * @param formatter
+     */
+    public void setFormatter(String formatter)
+    {
+<span class="nc" id="L303">        this.formatter = formatter;</span>
+<span class="nc" id="L304">    }</span>
+
+    /**
+     * Text to display before the value
+     * &lt;p&gt;
+     * @return
+     */
+    public String getPrefix()
+    {
+<span class="nc" id="L313">        return prefix;</span>
+    }
+
+    /**
+     * Text to display before the prefix
+     * &lt;p&gt;
+     * @param prefix
+     */
+    public void setPrefix(String prefix)
+    {
+<span class="nc" id="L323">        this.prefix = prefix;</span>
+<span class="nc" id="L324">    }</span>
+
+    /**
+     * The string to pass to the formatter
+     * &lt;p&gt;
+     * @return
+     */
+    public String getFormatString()
+    {
+<span class="nc" id="L333">        return formatString;</span>
+    }
+
+    /**
+     * The string to pass to the formatter
+     * &lt;p&gt;
+     * @param formatString
+     */
+    public void setFormatString(String formatString)
+    {
+<span class="nc" id="L343">        this.formatString = formatString;</span>
+<span class="nc" id="L344">    }</span>
+
+    /**
+     * The CSS Font Family
+     * &lt;p&gt;
+     * @return
+     */
+    public FontFamilies getFontFamily()
+    {
+<span class="nc" id="L353">        return fontFamily;</span>
+    }
+
+    /**
+     * The CSS Font Family
+     * &lt;p&gt;
+     * @param fontFamily
+     */
+    public void setFontFamily(FontFamilies fontFamily)
+    {
+<span class="nc" id="L363">        this.fontFamily = fontFamily;</span>
+<span class="nc" id="L364">    }</span>
+
+    /**
+     * The font size setting
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getFontSize()
+    {
+<span class="nc" id="L373">        return fontSize;</span>
+    }
+
+    /**
+     * The font size setting
+     * &lt;p&gt;
+     * @param fontSize
+     */
+    public void setFontSize(Integer fontSize)
+    {
+<span class="nc" id="L383">        this.fontSize = fontSize;</span>
+<span class="nc" id="L384">    }</span>
+
+    /**
+     * The text colour
+     * &lt;p&gt;
+     * @return
+     */
+    public ColourHex getTextColor()
+    {
+<span class="nc" id="L393">        return textColor;</span>
+    }
+
+    /**
+     * The text colour
+     * &lt;p&gt;
+     * @param textColor
+     */
+    public void setTextColor(ColourHex textColor)
+    {
+<span class="nc" id="L403">        this.textColor = textColor;</span>
+<span class="nc" id="L404">    }</span>
+
+    /**
+     * Escape html characters in the axis label or not
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getEscapeHTML()
+    {
+<span class="nc" id="L413">        return escapeHTML;</span>
+    }
+
+    /**
+     * Escape html characters in the axis label or not
+     * &lt;p&gt;
+     * @param escapeHTML
+     */
+    public void setEscapeHTML(Boolean escapeHTML)
+    {
+<span class="nc" id="L423">        this.escapeHTML = escapeHTML;</span>
+<span class="nc" id="L424">    }</span>
+
+    /**
+     * ‘auto’, ‘start’, ‘middle’ or ‘end’.
+     * &lt;p&gt;
+     * @return
+     */
+    public String getLabelPosition()
+    {
+<span class="nc" id="L433">        return labelPosition;</span>
+    }
+
+    /**
+     * ‘auto’, ‘start’, ‘middle’ or ‘end’.
+     * &lt;p&gt;
+     * @param labelPosition
+     */
+    public void setLabelPosition(String labelPosition)
+    {
+<span class="nc" id="L443">        this.labelPosition = labelPosition;</span>
+<span class="nc" id="L444">    }</span>
+
+    @Override
+    @JsonRawValue
+    public String getRenderer()
+    {
+<span class="nc" id="L450">        return &quot;$.jqplot.CanvasAxisTickRenderer&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

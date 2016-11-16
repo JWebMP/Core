@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQUIThemes.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqueryUI.themes</a> &gt; <span class="el_source">JQUIThemes.java</span></div><h1>JQUIThemes.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqueryUI.themes;
+
+import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
+
+/**
+ * This Class
+ *
+ * @author GedMarc
+ * @since 22 Dec 2015
+ */
+<span class="pc" id="L27">public enum JQUIThemes</span>
+{
+<span class="fc" id="L29">    BlackTie(new BlackTieTheme()),</span>
+<span class="fc" id="L30">    Blitzer(new BlizterTheme()),</span>
+<span class="fc" id="L31">    Cupertino(new CupertinoTheme()),</span>
+<span class="fc" id="L32">    DarkHive(new DarkHiveTheme()),</span>
+<span class="fc" id="L33">    DotLuv(new DotLuvTheme()),</span>
+<span class="fc" id="L34">    Eggplant(new EggplantTheme()),</span>
+<span class="fc" id="L35">    ExciteBike(new ExciteBikeTheme()),</span>
+<span class="fc" id="L36">    Flick(new FlickTheme()),</span>
+<span class="fc" id="L37">    HotSneak(new HotSneaksTheme()),</span>
+<span class="fc" id="L38">    Humanity(new HumanityTheme()),</span>
+<span class="fc" id="L39">    LeFrog(new LeFrogTheme()),</span>
+<span class="fc" id="L40">    Lightness(new LightnessTheme()),</span>
+<span class="fc" id="L41">    Overcast(new OvercastTheme()),</span>
+<span class="fc" id="L42">    PepperGrinder(new PepperGrinderTheme()),</span>
+<span class="fc" id="L43">    Redmond(new RedmondTheme()),</span>
+<span class="fc" id="L44">    Smoothness(new SmoothnessTheme()),</span>
+<span class="fc" id="L45">    SouthStreet(new SouthStreetTheme()),</span>
+<span class="fc" id="L46">    Start(new StartTheme()),</span>
+<span class="fc" id="L47">    Sunny(new SunnyTheme()),</span>
+<span class="fc" id="L48">    SwankyPurse(new SwankyPurseTheme()),</span>
+<span class="fc" id="L49">    Trontastic(new TrontasticTheme()),</span>
+<span class="fc" id="L50">    Vader(new VaderTheme()),;</span>
+    private Theme theme;
+
+    private JQUIThemes(Theme theme)
+<span class="fc" id="L54">    {</span>
+<span class="fc" id="L55">        this.theme = theme;</span>
+<span class="fc" id="L56">    }</span>
+
+    public Theme getTheme()
+    {
+<span class="fc" id="L60">        return theme;</span>
+    }
+
+    @Override
+    public String toString()
+    {
+<span class="nc" id="L66">        return super.toString().toLowerCase();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

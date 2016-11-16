@@ -1,0 +1,27 @@
+{
+  "name": "jqd3",
+  "version" : 1.0,
+  "authors": [
+    "Marc Magon <marc.magon@gmail.com>"
+  ],
+  "description": "JQuery based implementations of the d3 graph library for easy access",
+  "main": "",
+  "keywords": [
+    "D3",
+    "JQuery",
+    "JQ",
+    "JWebswing",
+    "Framework",
+    "Web",
+    "UI"
+  ],
+  "license": "MIT",
+  "homepage": "http://www.armineasy.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

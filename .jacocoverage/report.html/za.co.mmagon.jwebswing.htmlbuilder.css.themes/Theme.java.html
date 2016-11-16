@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Theme.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.htmlbuilder.css.themes</a> &gt; <span class="el_source">Theme.java</span></div><h1>Theme.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.htmlbuilder.css.themes;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Objects;
+import za.co.mmagon.jwebswing.base.references.CSSReference;
+import za.co.mmagon.jwebswing.base.references.JavascriptReference;
+
+/**
+ * Base class for defining a Theme Includes an icon image for Pretties sake
+ *
+ * @author Marc Magon
+ * @version 2.0
+ * @since 2.0 on 20140705
+ *
+ */
+public abstract class Theme implements ITheme, Comparator&lt;Theme&gt;
+{
+
+    private final String name;
+    private final String cssClassName;
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private ArrayList&lt;CSSReference&gt; cssRefs;
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private ArrayList&lt;JavascriptReference&gt; javascriptRefs;
+    private final String icon30;
+    private final String icon60;
+    private final String icon90;
+<span class="fc" id="L30">    private boolean renderClassName = true;</span>
+
+    /**
+     * Loads a theme with the default icons. This cannot be changed later on
+     *
+     * @param name         The Theme Name
+     * @param cssClassName The CSS Class Associated with the Theme as generated
+     *                     by Theme Roller
+     */
+    protected Theme(String name, String cssClassName)
+    {
+<span class="fc" id="L41">        this(name, cssClassName, null, null, null);</span>
+<span class="fc" id="L42">    }</span>
+
+    /**
+     * Constructs a new theme object with all specified lines if available
+     *
+     * @param name         The Theme Name
+     * @param cssClassName The CSS Class Associated with the Theme as generated
+     *                     by Theme Roller
+     * @param icon30       The location of the size 30 icon for the theme
+     * @param icon60       The location of the size 60 icon for the theme
+     * @param icon90       The location of the size 90 icon for the theme
+     */
+    public Theme(String name, String cssClassName, String icon30, String icon60, String icon90)
+<span class="fc" id="L55">    {</span>
+<span class="fc" id="L56">        this.name = name;</span>
+<span class="fc" id="L57">        this.cssClassName = cssClassName;</span>
+<span class="fc" id="L58">        this.icon30 = icon30;</span>
+<span class="fc" id="L59">        this.icon60 = icon60;</span>
+<span class="fc" id="L60">        this.icon90 = icon90;</span>
+<span class="fc" id="L61">    }</span>
+
+    /**
+     * Returns this theme's class name
+     *
+     * @return
+     */
+    @Override
+    public final String getClassName()
+    {
+<span class="fc" id="L71">        return cssClassName;</span>
+    }
+
+    /**
+     * Returns this object Java class name
+     *
+     * @return
+     */
+    @Override
+    public final String toString()
+    {
+<span class="nc" id="L82">        return getName();</span>
+    }
+
+    /**
+     * Returns the CSS Class name for this theme
+     *
+     * @return
+     */
+    @Override
+    public final String getName()
+    {
+<span class="fc" id="L93">        return name;</span>
+    }
+
+    /**
+     * Compares themes via their name
+     *
+     * @param o1 Theme 1
+     * @param o2 Theme 2
+     * @return -1 to 1 on sorting
+     */
+    @Override
+    public int compare(Theme o1, Theme o2)
+    {
+<span class="nc" id="L106">        return o1.getName().compareTo(o2.getName());</span>
+    }
+
+    /**
+     * Returns all the CSS References used by this theme
+     * &lt;p&gt;
+     * @return
+     */
+    @Override
+    public final ArrayList&lt;CSSReference&gt; getCssReferences()
+    {
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        if (cssRefs == null)</span>
+        {
+<span class="fc" id="L119">            cssRefs = new ArrayList&lt;&gt;();</span>
+        }
+<span class="fc" id="L121">        return cssRefs;</span>
+    }
+
+    /**
+     * Returns all JavaScript references used by this theme
+     * &lt;p&gt;
+     * @return
+     */
+    @Override
+    public final ArrayList&lt;JavascriptReference&gt; getJavascriptReferences()
+    {
+<span class="fc bfc" id="L132" title="All 2 branches covered.">        if (javascriptRefs == null)</span>
+        {
+<span class="fc" id="L134">            javascriptRefs = new ArrayList&lt;&gt;();</span>
+        }
+<span class="fc" id="L136">        return javascriptRefs;</span>
+    }
+
+    /**
+     * Returns a size 30x30 icon if present
+     * &lt;p&gt;
+     * @return
+     */
+    @Override
+    public final String getSize30Icon()
+    {
+<span class="fc" id="L147">        return this.icon30;</span>
+    }
+
+    /**
+     * Returns a size 60x60 icon if present
+     * &lt;p&gt;
+     * @return
+     */
+    @Override
+    public final String getSize60Icon()
+    {
+<span class="fc" id="L158">        return this.icon60;</span>
+    }
+
+    /**
+     * Returns a size 90x90 icon if present
+     * &lt;p&gt;
+     * @return
+     */
+    @Override
+    public final String getSize90Icon()
+    {
+<span class="fc" id="L169">        return this.icon90;</span>
+    }
+
+    /**
+     * Sets if the class name should be rendered
+     *
+     * @return
+     */
+    public boolean isRenderClassName()
+    {
+<span class="fc" id="L179">        return renderClassName;</span>
+    }
+
+    /**
+     * Sets if the class name should be rendered
+     *
+     * @param renderClassName
+     */
+    public void setRenderClassName(Boolean renderClassName)
+    {
+<span class="nc" id="L189">        this.renderClassName = renderClassName;</span>
+<span class="nc" id="L190">    }</span>
+
+    @Override
+    public int hashCode()
+    {
+<span class="nc" id="L195">        int hash = 5;</span>
+<span class="nc" id="L196">        hash = 53 * hash + Objects.hashCode(this.name);</span>
+<span class="nc" id="L197">        hash = 53 * hash + Objects.hashCode(this.cssRefs);</span>
+<span class="nc" id="L198">        hash = 53 * hash + Objects.hashCode(this.javascriptRefs);</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">        hash = 53 * hash + (this.renderClassName ? 1 : 0);</span>
+<span class="nc" id="L200">        return hash;</span>
+    }
+
+    /**
+     * Equals for themes
+     *
+     * @param obj
+     * @return
+     */
+    @Override
+    public boolean equals(Object obj)
+    {
+<span class="nc bnc" id="L212" title="All 2 branches missed.">        if (this == obj)</span>
+        {
+<span class="nc" id="L214">            return true;</span>
+        }
+<span class="nc bnc" id="L216" title="All 2 branches missed.">        if (obj == null)</span>
+        {
+<span class="nc" id="L218">            return false;</span>
+        }
+<span class="nc bnc" id="L220" title="All 2 branches missed.">        if (getClass() != obj.getClass())</span>
+        {
+<span class="nc" id="L222">            return false;</span>
+        }
+<span class="nc" id="L224">        final Theme other = (Theme) obj;</span>
+<span class="nc bnc" id="L225" title="All 2 branches missed.">        if (this.renderClassName != other.renderClassName)</span>
+        {
+<span class="nc" id="L227">            return false;</span>
+        }
+<span class="nc bnc" id="L229" title="All 2 branches missed.">        if (!Objects.equals(this.name, other.name))</span>
+        {
+<span class="nc" id="L231">            return false;</span>
+        }
+<span class="nc bnc" id="L233" title="All 2 branches missed.">        if (!Objects.equals(this.cssRefs, other.cssRefs))</span>
+        {
+<span class="nc" id="L235">            return false;</span>
+        }
+<span class="nc bnc" id="L237" title="All 2 branches missed.">        if (!Objects.equals(this.javascriptRefs, other.javascriptRefs))</span>
+        {
+<span class="nc" id="L239">            return false;</span>
+        }
+<span class="nc" id="L241">        return true;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

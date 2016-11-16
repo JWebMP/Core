@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ComponentTypes.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.servlets.enumarations</a> &gt; <span class="el_source">ComponentTypes.java</span></div><h1>ComponentTypes.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2014 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.base.servlets.enumarations;
+
+import com.fasterxml.jackson.annotation.JsonValue;
+
+/**
+ * This class registers all HTML accepted tags that can be used across all
+ * browsers (IE6+)
+ * &lt;p&gt;
+ * When Enum get's extend capability then can add the HTML 5 components too, but
+ * adding them here would break the point of jQuery
+ * &lt;p&gt;
+ * @author Marc Magon
+ */
+<span class="pc" id="L30">public enum ComponentTypes</span>
+{
+
+    /**
+     * Defines a document type
+     */
+    /**
+     * Defines a document type
+     */
+    /**
+     * Defines a document type
+     */
+    /**
+     * Defines a document type
+     */
+<span class="fc" id="L45">    DocumentType(&quot;!&quot;),</span>
+    /**
+     * The CSS CSSLink Component
+     */
+<span class="fc" id="L49">    CSSLink(&quot;link&quot;),</span>
+<span class="fc" id="L50">    Comment(&quot;&quot;),</span>
+    /**
+     * The normal link component
+     */
+<span class="fc" id="L54">    Link(&quot;a&quot;),</span>
+    /**
+     * The abbreviation component
+     */
+<span class="fc" id="L58">    Abbreviation(&quot;abbr&quot;),</span>
+    /**
+     * The address component
+     */
+<span class="fc" id="L62">    Address(&quot;addr&quot;),</span>
+    /**
+     * Defines an acronym. Displays as ABBR when being viewed by HTML 5
+     */
+<span class="fc" id="L66">    Acronym(&quot;acronym&quot;),</span>
+    /**
+     * Defines a Java Applet
+     */
+<span class="fc" id="L70">    Applet(&quot;applet&quot;),</span>
+    /**
+     * The A specific article. Only renders properly in HTML 5
+     */
+<span class="fc" id="L74">    Article(&quot;article&quot;),</span>
+    /**
+     * The area tag defines an area inside an image-map (an image-map is an
+     * image with clickable areas).
+     */
+<span class="fc" id="L79">    Area(&quot;area&quot;),</span>
+    /**
+     * The ASide component only renders in HTML 5
+     */
+<span class="fc" id="L83">    Aside(&quot;aside&quot;),</span>
+    /**
+     * The Audio Component
+     */
+<span class="fc" id="L87">    Audio(&quot;audio&quot;),</span>
+    /**
+     * The Bold Component
+     */
+<span class="fc" id="L91">    Bold(&quot;b&quot;),</span>
+    /**
+     * The Base Component (The tag Base)
+     */
+<span class="fc" id="L95">    Base(&quot;base&quot;),</span>
+    /**
+     * The base font, deprecated I believe
+     * &lt;p&gt;
+     * @deprecated
+     */
+<span class="fc" id="L101">    BaseFont(&quot;basefont&quot;),</span>
+    /**
+     * The Body Div
+     */
+<span class="fc" id="L105">    Body(&quot;body&quot;),</span>
+    /**
+     * bdo stands for Bi-Directional Override.
+     * &lt;p&gt;
+     * The tag is used to override the current text direction.
+     */
+<span class="fc" id="L111">    BiDirectionalOverride(&quot;bdo&quot;),</span>
+    /**
+     * bdi stands for Bi-directional Isolation.
+     * &lt;p&gt;
+     * The &amp;gt;bdi&amp;lt; tag isolates a part of text that might be formatted in a
+     * different direction from other text outside it.
+     */
+<span class="fc" id="L118">    BiDirectionalIsolation(&quot;bdi&quot;),</span>
+    /**
+     * The &amp;gt;blockquote&amp;lt; tag specifies a section that is quoted from
+     * another source.
+     */
+<span class="fc" id="L123">    BlockQuotes(&quot;blockquote&quot;),</span>
+    /**
+     * Denotes a line break
+     */
+<span class="fc" id="L127">    LineBreak(&quot;br&quot;),</span>
+    /**
+     * The button tag defines a clickable button.
+     */
+<span class="fc" id="L131">    Button(&quot;button&quot;),</span>
+    /**
+     * The canvas tag is used to draw graphics, on the fly, via scripting
+     * (usually JavaScript).
+     */
+<span class="fc" id="L136">    Canvas(&quot;canvas&quot;),</span>
+    /**
+     * The caption tag defines a table caption.
+     */
+<span class="fc" id="L140">    TableCaption(&quot;caption&quot;),</span>
+    /**
+     * The center tag is not supported in HTML5. Use CSS instead.
+     * &lt;p&gt;
+     * The center tag is used to center-align text.
+     */
+<span class="fc" id="L146">    Center(&quot;center&quot;),</span>
+    /**
+     * The cite tag defines the title of a work (e.g. a book, a song, a movie, a
+     * TV show, a painting, a sculpture, etc.).
+     */
+<span class="fc" id="L151">    Cite(&quot;cite&quot;),</span>
+    /**
+     * Defines a piece of computer code
+     */
+<span class="fc" id="L155">    Code(&quot;code&quot;),</span>
+    /**
+     * Defines a table column
+     */
+<span class="fc" id="L159">    TableColumn(&quot;col&quot;),</span>
+    /**
+     * The colgroup tag specifies a group of one or more columns in a table for
+     * formatting.
+     */
+<span class="fc" id="L164">    TableColumnGroup(&quot;colgroup&quot;),</span>
+    /**
+     * The datalist tag specifies a list of pre-defined options for an input
+     * element.
+     */
+<span class="fc" id="L169">    DataList(&quot;datalist&quot;),</span>
+    /**
+     * The dd tag is used to describe a term/name in a description list.
+     */
+<span class="fc" id="L173">    DataDescription(&quot;dd&quot;),</span>
+    /**
+     * The del tag defines text that has been deleted from a document.
+     */
+<span class="fc" id="L177">    Deleted(&quot;del&quot;),</span>
+    /**
+     * The details tag specifies additional details that the user can view or
+     * hide on demand.
+     */
+<span class="fc" id="L182">    Details(&quot;details&quot;),</span>
+    /**
+     * The dfn tag represents the defining instance of a term in HTML.
+     */
+<span class="fc" id="L186">    Definition(&quot;dfn&quot;),</span>
+    /**
+     * The dir tag is not supported in HTML5. Use CSS instead. The dir tag is
+     * used to list directory titles.
+     * &lt;p&gt;
+     * @deprecated
+     */
+<span class="fc" id="L193">    DirectoryList(&quot;dir&quot;),</span>
+    /**
+     * The div tag defines a division or a section in an HTML document.
+     * &lt;p&gt;
+     * The dir tag is used to group block-elements to format them with CSS.
+     */
+<span class="fc" id="L199">    Div(&quot;div&quot;),</span>
+    /**
+     * The dl tag defines a definition list.
+     */
+<span class="fc" id="L203">    DescriptionList(&quot;dl&quot;),</span>
+    /**
+     * The dt tag defines a term/name in a description list.
+     */
+<span class="fc" id="L207">    DescriptionTag(&quot;dt&quot;),</span>
+    /**
+     * The em tag is a phrase tag. It renders as emphasized text.
+     */
+<span class="fc" id="L211">    Emphasized(&quot;em&quot;),</span>
+    /**
+     * The embed tag defines a container for an external application or
+     * interactive content (a plug-in)
+     */
+<span class="fc" id="L216">    Embed(&quot;embed&quot;),</span>
+    /**
+     * The field-set tag is used to group related elements in a form.
+     */
+<span class="fc" id="L220">    FieldSet(&quot;fieldset&quot;),</span>
+    /**
+     * Defines a caption for a figure
+     */
+<span class="fc" id="L224">    FigureCaption(&quot;figcaption&quot;),</span>
+    /**
+     * The figure tag specifies self-contained content, like illustrations,
+     * diagrams, photos, code listings, etc.
+     */
+<span class="fc" id="L229">    Figure(&quot;figure&quot;),</span>
+    /**
+     * Denotes a footer section of an address tag
+     */
+<span class="fc" id="L233">    Footer(&quot;footer&quot;),</span>
+    /**
+     * Defines a form container that posts back
+     */
+<span class="fc" id="L237">    Form(&quot;form&quot;),</span>
+    /**
+     * The Head Element for all meta-data about the web page
+     */
+<span class="fc" id="L241">    Head(&quot;head&quot;),</span>
+    /**
+     * The header element represents a container for introductory content or a
+     * set of navigational links.
+     */
+<span class="fc" id="L246">    Header(&quot;header&quot;),</span>
+    /**
+     * The hgroup tag is used to group heading elements.
+     */
+<span class="fc" id="L250">    HeaderGroup(&quot;hgroup&quot;),</span>
+    /**
+     * Largest Header Size
+     */
+<span class="fc" id="L254">    Header1(&quot;h1&quot;),</span>
+    /**
+     * 2nd Largest Header Size
+     */
+<span class="fc" id="L258">    Header2(&quot;h2&quot;),</span>
+    /**
+     * Header Level 3
+     */
+<span class="fc" id="L262">    Header3(&quot;h3&quot;),</span>
+    /**
+     * Header Level 4
+     */
+<span class="fc" id="L266">    Header4(&quot;h4&quot;),</span>
+    /**
+     * Header Level 5
+     */
+<span class="fc" id="L270">    Header5(&quot;h5&quot;),</span>
+    /**
+     * Header Level 6
+     */
+<span class="fc" id="L274">    Header6(&quot;h6&quot;),</span>
+    /**
+     * Specifies an option in a data list or normal list
+     */
+<span class="fc" id="L278">    HorizontalRule(&quot;hr&quot;),</span>
+    /**
+     * The HTML tag tells the browser that this is an HTML document.
+     */
+<span class="fc" id="L282">    Html(&quot;html&quot;),</span>
+    /*
+     * Displays as Italic
+     */
+<span class="fc" id="L286">    Italic(&quot;i&quot;),</span>
+    /**
+     * Image Reference
+     */
+<span class="fc" id="L290">    Image(&quot;img&quot;),</span>
+    /**
+     * Specifies an IFrame
+     */
+<span class="fc" id="L294">    IFrame(&quot;iframe&quot;),</span>
+    /**
+     * Specifies an Input for a form tag
+     */
+<span class="fc" id="L298">    Input(&quot;input&quot;),</span>
+    /**
+     * Defines keyboard input
+     */
+<span class="fc" id="L302">    KeyboardInput(&quot;kbd&quot;),</span>
+    /**
+     * The keygen tag specifies a key-pair generator field used for forms.
+     * &lt;p&gt;
+     * When the form is submitted, the private key is stored locally, and the
+     * public key is sent to the server.
+     */
+<span class="fc" id="L309">    KeyGen(&quot;keygen&quot;),</span>
+    /**
+     * The label tag defines a label for an input element.
+     */
+<span class="fc" id="L313">    Label(&quot;label&quot;),</span>
+    /**
+     * The legend tag defines a caption for the fieldset element.
+     */
+<span class="fc" id="L317">    Legend(&quot;legend&quot;),</span>
+    /**
+     * Defines a list item
+     */
+<span class="fc" id="L321">    ListItem(&quot;li&quot;),</span>
+    /**
+     * An unordered list
+     */
+<span class="fc" id="L325">    UnorderedList(&quot;ul&quot;),</span>
+    /**
+     * An ordered list
+     */
+<span class="fc" id="L329">    OrderedList(&quot;ol&quot;),</span>
+    /**
+     * A Map Component
+     */
+<span class="fc" id="L333">    Map(&quot;map&quot;),</span>
+    /**
+     * Highlights Text
+     */
+<span class="fc" id="L337">    Marker(&quot;mark&quot;),</span>
+    /**
+     * Specifies the meta-data for a page
+     */
+<span class="fc" id="L341">    Metadata(&quot;meta&quot;),</span>
+    /**
+     * Navigation Section
+     */
+<span class="fc" id="L345">    Navigation(&quot;nav&quot;),</span>
+    /**
+     * Displayed when no JavaScript is available
+     */
+<span class="fc" id="L349">    NoScript(&quot;noscript&quot;),</span>
+    /**
+     * The object tag defines an embedded object within an HTML document. Use
+     * this element to embed multimedia (like audio, video, Java applets,
+     * ActiveX, PDF, and Flash) in your web pages.
+     */
+<span class="fc" id="L355">    Object(&quot;object&quot;),</span>
+    /**
+     * Defines an option group for the select components children
+     */
+<span class="fc" id="L359">    OptionGroup(&quot;optgroup&quot;),</span>
+    /**
+     * The &amp;lt;option&amp;gt; tag defines an option in a select list.
+     * &lt;p&gt;
+     * &amp;lt;option&amp;gt; elements go inside a &amp;lt;select&amp;gt; or &amp;lt;datalist&amp;gt;
+     * element.
+     */
+<span class="fc" id="L366">    Option(&quot;option&quot;),</span>
+    /**
+     * The output tag represents the result of a calculation (like one performed
+     * by a script).
+     *
+     * @deprecated No Support in I.E.
+     */
+<span class="fc" id="L373">    Output(&quot;output&quot;),</span>
+    /**
+     * The param tag is used to define parameters for plugins embedded with an
+     * object element.
+     */
+<span class="fc" id="L378">    Parameter(&quot;param&quot;),</span>
+    /**
+     * Defines a text paragraph
+     */
+<span class="fc" id="L382">    Paragraph(&quot;p&quot;),</span>
+    /**
+     * The &amp;gt;pre&amp;lt; tag defines preformatted text.
+     * &lt;p&gt;
+     * Text in a &amp;gt;pre&amp;lt; element is displayed in a fixed-width font (usually
+     * Courier), and it preserves both spaces and line breaks.
+     */
+<span class="fc" id="L389">    PreFormatted(&quot;pre&quot;),</span>
+    /**
+     * Displays a progress bar
+     */
+<span class="fc" id="L393">    ProgressBar(&quot;progress&quot;),</span>
+    /**
+     * Defines a Quotation
+     */
+<span class="fc" id="L397">    Quotation(&quot;q&quot;),</span>
+    /**
+     * The rb tags sets what to show when the browser does not support ruby
+     * annotations
+     */
+<span class="fc" id="L402">    RubyNoSupport(&quot;rp&quot;),</span>
+    /**
+     * Ruby Script
+     */
+<span class="fc" id="L406">    RubyTranslate(&quot;rt&quot;),</span>
+    /**
+     * Ruby
+     */
+<span class="fc" id="L410">    Ruby(&quot;ruby&quot;),</span>
+    /**
+     * The s tag marks information that is no longer relevant
+     */
+<span class="fc" id="L414">    S(&quot;s&quot;),</span>
+    /**
+     * defines sample output from a computer program.
+     */
+<span class="fc" id="L418">    SampleCode(&quot;samp&quot;),</span>
+    /**
+     * Defines a script object
+     */
+<span class="fc" id="L422">    Script(&quot;script&quot;),</span>
+    /**
+     * Defines sections in a document, such as chapters, headers, footers, or
+     * any other sections of the document.
+     */
+<span class="fc" id="L427">    Section(&quot;section&quot;),</span>
+    /**
+     * The select element is used to create a drop-down list.
+     */
+<span class="fc" id="L431">    Select(&quot;select&quot;),</span>
+    /**
+     * Specifies Small Text
+     */
+<span class="fc" id="L435">    SmallText(&quot;small&quot;),</span>
+    /**
+     * Specifies a source for a Video or a Audio Object
+     */
+<span class="fc" id="L439">    Source(&quot;source&quot;),</span>
+    /**
+     * used to group inline-elements in a document.
+     */
+<span class="fc" id="L443">    Span(&quot;span&quot;),</span>
+    /**
+     * Defines important text
+     */
+<span class="fc" id="L447">    Strong(&quot;strong&quot;),</span>
+    /**
+     * Used to define style information for an HTML document.
+     */
+<span class="fc" id="L451">    Style(&quot;style&quot;),</span>
+    /**
+     * Specifies Sub Script
+     */
+<span class="fc" id="L455">    Subscript(&quot;sub&quot;),</span>
+    /**
+     * Defines a summary text for a detail object
+     */
+<span class="fc" id="L459">    Summary(&quot;summary&quot;),</span>
+    /**
+     * Defines superscript text
+     */
+<span class="fc" id="L463">    SuperScript(&quot;sup&quot;),</span>
+    /**
+     * defines a table
+     */
+<span class="fc" id="L467">    Table(&quot;table&quot;),</span>
+    /**
+     * A table body group
+     */
+<span class="fc" id="L471">    TableBodyGroup(&quot;tbody&quot;),</span>
+    /**
+     * Defines a table cell
+     */
+<span class="fc" id="L475">    TableCell(&quot;td&quot;),</span>
+    /**
+     * Defines a Text Area Input
+     */
+<span class="fc" id="L479">    TextArea(&quot;textarea&quot;),</span>
+    /**
+     * Defines a table footer group
+     */
+<span class="fc" id="L483">    TableFooterGroup(&quot;tfoot&quot;),</span>
+    /**
+     * Defines a Table
+     */
+<span class="fc" id="L487">    TableHeader(&quot;th&quot;),</span>
+    /**
+     * Defines a table header group
+     */
+<span class="fc" id="L491">    TableHeaderGroup(&quot;thead&quot;),</span>
+    /**
+     * The time object - Only for HTML 5 only
+     */
+<span class="fc" id="L495">    Time(&quot;time&quot;),</span>
+    /**
+     * Defines the title of a document
+     */
+<span class="fc" id="L499">    HeadTitle(&quot;title&quot;),</span>
+    /**
+     * Defines a table row
+     */
+<span class="fc" id="L503">    TableRow(&quot;tr&quot;),</span>
+    /**
+     * Defines a video Track
+     */
+<span class="fc" id="L507">    Track(&quot;track&quot;),</span>
+    /**
+     * Specifies Underlined Text
+     */
+<span class="fc" id="L511">    Underline(&quot;u&quot;),</span>
+    /**
+     * Defines a Variable type phrase
+     */
+<span class="fc" id="L515">    Variable(&quot;var&quot;),</span>
+    /**
+     * Defines a Video. HTML 5 Only
+     */
+<span class="fc" id="L519">    Video(&quot;video&quot;),</span>
+    /**
+     * Assists resizing by showing the browser where to set word breaks
+     */
+<span class="fc" id="L523">    WordBreak(&quot;wbr&quot;),</span>
+    /**
+     *
+     */
+<span class="fc" id="L527">    Feature(&quot;feature&quot;),</span>
+<span class="fc" id="L528">    Event(&quot;event&quot;),</span>
+<span class="fc" id="L529">    PageHTML(&quot;html&quot;),</span>
+    /**
+     * Formats a component as a CSS Class Name Reference Only
+     */
+<span class="fc" id="L533">    CSSClass(&quot;meh&quot;),;</span>
+
+    private String componentTag;
+    private Class classType;
+    private Object instance;
+
+    private ComponentTypes()
+<span class="nc" id="L540">    {</span>
+<span class="nc" id="L541">    }</span>
+
+    private ComponentTypes(String componentTag)
+<span class="fc" id="L544">    {</span>
+<span class="fc" id="L545">        this.componentTag = componentTag;</span>
+<span class="fc" id="L546">    }</span>
+
+    /**
+     * Returns an array of all the values
+     *
+     * @return
+     */
+    public static ComponentTypes[] getAll()
+    {
+<span class="nc" id="L555">        return values();</span>
+    }
+
+    /**
+     * Returns the component tag
+     *
+     * @return
+     */
+    public String getComponentTag()
+    {
+<span class="fc" id="L565">        return componentTag;</span>
+    }
+
+    /**
+     * Descriptive string of the reference
+     *
+     * @return
+     */
+    @JsonValue
+    @Override
+    public String toString()
+    {
+<span class="fc" id="L577">        return this.name().toLowerCase();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

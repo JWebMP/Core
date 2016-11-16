@@ -1,0 +1,14 @@
+{
+  "name": "jqwidgets",
+  "homepage": "https://github.com/jqwidgets/jQWidgets",
+  "version": "4.3.0",
+  "_release": "4.3.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v4.3.0",
+    "commit": "5dd13e18e7e2e126313a3e09fd219f1babc12465"
+  },
+  "_source": "https://github.com/jqwidgets/jQWidgets.git",
+  "_target": "^4.3.0",
+  "_originalSource": "jqwidgets"
+}

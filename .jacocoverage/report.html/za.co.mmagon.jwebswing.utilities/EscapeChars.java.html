@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>EscapeChars.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.utilities</a> &gt; <span class="el_source">EscapeChars.java</span></div><h1>EscapeChars.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.utilities;
+
+import java.net.URLEncoder;
+import java.io.UnsupportedEncodingException;
+import java.text.CharacterIterator;
+import java.text.StringCharacterIterator;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+
+/*
+import hirondelle.web4j.security.SafeText;
+import hirondelle.web4j.ui.translate.Text;
+import hirondelle.web4j.ui.translate.Tooltips;
+import hirondelle.web4j.ui.translate.TextFlow;
+import hirondelle.web4j.ui.tag.Populate;
+import hirondelle.web4j.database.Report;*
+
+/**
+ Convenience methods for escaping special characters related to HTML, XML, 
+ and regular expressions.
+ 
+ &amp;lt;P&amp;gt;To keep you safe by default, WEB4J goes to some effort to escape 
+ characters in your data when appropriate, such that you &amp;lt;em&amp;gt;usually&amp;lt;/em&amp;gt;
+ don't need to think too much about escaping special characters. Thus, you
+  shouldn't need to &amp;lt;em&amp;gt;directly&amp;lt;/em&amp;gt; use the services of this class very often. 
+ 
+ &amp;lt;P&amp;gt;&amp;lt;span class='highlight'&amp;gt;For Model Objects containing free form user input, 
+ it is highly recommended that you use {@link SafeText}, not &amp;lt;tt&amp;gt;String&amp;lt;/tt&amp;gt;&amp;lt;/span&amp;gt;.
+ Free form user input is open to malicious use, such as
+ &amp;lt;a href='http://www.owasp.org/index.php/Cross_Site_Scripting'&amp;gt;Cross Site Scripting&amp;lt;/a&amp;gt;
+ attacks. 
+ Using &amp;lt;tt&amp;gt;SafeText&amp;lt;/tt&amp;gt; will protect you from such attacks, by always escaping 
+ special characters automatically in its &amp;lt;tt&amp;gt;toString()&amp;lt;/tt&amp;gt; method.   
+ 
+ &amp;lt;P&amp;gt;The following WEB4J classes will automatically escape special characters 
+ for you, when needed : 
+ &amp;lt;ul&amp;gt;
+ &amp;lt;li&amp;gt;the {@link SafeText} class, used as a building block class for your 
+ application's Model Objects, for modeling all free form user input
+ &amp;lt;li&amp;gt;the {@link Populate} tag used with forms
+ &amp;lt;li&amp;gt;the {@link Report} class used for creating quick reports
+ &amp;lt;li&amp;gt;the {@link Text}, {@link TextFlow}, and {@link Tooltips} custom tags used 
+ for translation
+ &amp;lt;/ul&amp;gt; 
+*/
+public final class EscapeChars {
+
+  /**
+    Escape characters for text appearing in HTML markup.
+    
+    &amp;lt;P&amp;gt;This method exists as a defence against Cross Site Scripting (XSS) hacks.
+    The idea is to neutralize control characters commonly used by scripts, such that
+    they will not be executed by the browser. This is done by replacing the control
+    characters with their escaped equivalents.  
+    See {link hirondelle.web4j.security.SafeText} as well.
+   */
+   public static String forHTML(String aText){
+<span class="nc" id="L59">     final StringBuilder result = new StringBuilder();</span>
+<span class="nc" id="L60">     final StringCharacterIterator iterator = new StringCharacterIterator(aText);</span>
+<span class="nc" id="L61">     char character =  iterator.current();</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">     while (character != CharacterIterator.DONE ){</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">       if (character == '&lt;') {</span>
+<span class="nc" id="L64">         result.append(&quot;&amp;lt;&quot;);</span>
+       }
+<span class="nc bnc" id="L66" title="All 2 branches missed.">       else if (character == '&gt;') {</span>
+<span class="nc" id="L67">         result.append(&quot;&amp;gt;&quot;);</span>
+       }
+<span class="nc bnc" id="L69" title="All 2 branches missed.">       else if (character == '&amp;') {</span>
+<span class="nc" id="L70">         result.append(&quot;&amp;amp;&quot;);</span>
+      }
+<span class="nc bnc" id="L72" title="All 2 branches missed.">       else if (character == '\&quot;') {</span>
+<span class="nc" id="L73">         result.append(&quot;&amp;quot;&quot;);</span>
+       }
+<span class="nc bnc" id="L75" title="All 2 branches missed.">       else if (character == '\t') {</span>
+<span class="nc" id="L76">         addCharEntity(9, result);</span>
+       }
+<span class="nc bnc" id="L78" title="All 2 branches missed.">       else if (character == '!') {</span>
+<span class="nc" id="L79">         addCharEntity(33, result);</span>
+       }
+<span class="nc bnc" id="L81" title="All 2 branches missed.">       else if (character == '#') {</span>
+<span class="nc" id="L82">         addCharEntity(35, result);</span>
+       }
+<span class="nc bnc" id="L84" title="All 2 branches missed.">       else if (character == '$') {</span>
+<span class="nc" id="L85">         addCharEntity(36, result);</span>
+       }
+<span class="nc bnc" id="L87" title="All 2 branches missed.">       else if (character == '%') {</span>
+<span class="nc" id="L88">         addCharEntity(37, result);</span>
+       }
+<span class="nc bnc" id="L90" title="All 2 branches missed.">       else if (character == '\'') {</span>
+<span class="nc" id="L91">         addCharEntity(39, result);</span>
+       }
+<span class="nc bnc" id="L93" title="All 2 branches missed.">       else if (character == '(') {</span>
+<span class="nc" id="L94">         addCharEntity(40, result);</span>
+       }
+<span class="nc bnc" id="L96" title="All 2 branches missed.">       else if (character == ')') {</span>
+<span class="nc" id="L97">         addCharEntity(41, result);</span>
+       }
+<span class="nc bnc" id="L99" title="All 2 branches missed.">       else if (character == '*') {</span>
+<span class="nc" id="L100">         addCharEntity(42, result);</span>
+       }
+<span class="nc bnc" id="L102" title="All 2 branches missed.">       else if (character == '+') {</span>
+<span class="nc" id="L103">         addCharEntity(43, result);</span>
+       }
+<span class="nc bnc" id="L105" title="All 2 branches missed.">       else if (character == ',') {</span>
+<span class="nc" id="L106">         addCharEntity(44, result);</span>
+       }
+<span class="nc bnc" id="L108" title="All 2 branches missed.">       else if (character == '-') {</span>
+<span class="nc" id="L109">         addCharEntity(45, result);</span>
+       }
+<span class="nc bnc" id="L111" title="All 2 branches missed.">       else if (character == '.') {</span>
+<span class="nc" id="L112">         addCharEntity(46, result);</span>
+       }
+<span class="nc bnc" id="L114" title="All 2 branches missed.">       else if (character == '/') {</span>
+<span class="nc" id="L115">         addCharEntity(47, result);</span>
+       }
+<span class="nc bnc" id="L117" title="All 2 branches missed.">       else if (character == ':') {</span>
+<span class="nc" id="L118">         addCharEntity(58, result);</span>
+       }
+<span class="nc bnc" id="L120" title="All 2 branches missed.">       else if (character == ';') {</span>
+<span class="nc" id="L121">         addCharEntity(59, result);</span>
+       }
+<span class="nc bnc" id="L123" title="All 2 branches missed.">       else if (character == '=') {</span>
+<span class="nc" id="L124">         addCharEntity(61, result);</span>
+       }
+<span class="nc bnc" id="L126" title="All 2 branches missed.">       else if (character == '?') {</span>
+<span class="nc" id="L127">         addCharEntity(63, result);</span>
+       }
+<span class="nc bnc" id="L129" title="All 2 branches missed.">       else if (character == '@') {</span>
+<span class="nc" id="L130">         addCharEntity(64, result);</span>
+       }
+<span class="nc bnc" id="L132" title="All 2 branches missed.">       else if (character == '[') {</span>
+<span class="nc" id="L133">         addCharEntity(91, result);</span>
+       }
+<span class="nc bnc" id="L135" title="All 2 branches missed.">       else if (character == '\\') {</span>
+<span class="nc" id="L136">         addCharEntity(92, result);</span>
+       }
+<span class="nc bnc" id="L138" title="All 2 branches missed.">       else if (character == ']') {</span>
+<span class="nc" id="L139">         addCharEntity(93, result);</span>
+       }
+<span class="nc bnc" id="L141" title="All 2 branches missed.">       else if (character == '^') {</span>
+<span class="nc" id="L142">         addCharEntity(94, result);</span>
+       }
+<span class="nc bnc" id="L144" title="All 2 branches missed.">       else if (character == '_') {</span>
+<span class="nc" id="L145">         addCharEntity(95, result);</span>
+       }
+<span class="nc bnc" id="L147" title="All 2 branches missed.">       else if (character == '`') {</span>
+<span class="nc" id="L148">         addCharEntity(96, result);</span>
+       }
+<span class="nc bnc" id="L150" title="All 2 branches missed.">       else if (character == '{') {</span>
+<span class="nc" id="L151">         addCharEntity(123, result);</span>
+       }
+<span class="nc bnc" id="L153" title="All 2 branches missed.">       else if (character == '|') {</span>
+<span class="nc" id="L154">         addCharEntity(124, result);</span>
+       }
+<span class="nc bnc" id="L156" title="All 2 branches missed.">       else if (character == '}') {</span>
+<span class="nc" id="L157">         addCharEntity(125, result);</span>
+       }
+<span class="nc bnc" id="L159" title="All 2 branches missed.">       else if (character == '~') {</span>
+<span class="nc" id="L160">         addCharEntity(126, result);</span>
+       }
+       else {
+         //the char is not a special one
+         //add it to the result as is
+<span class="nc" id="L165">         result.append(character);</span>
+       }
+<span class="nc" id="L167">       character = iterator.next();</span>
+     }
+<span class="nc" id="L169">     return result.toString();</span>
+  }
+  
+
+  /**
+   Escape all ampersand characters in a URL. 
+*/
+  public static String forHrefAmpersand(String aURL){
+<span class="nc" id="L177">    return aURL.replace(&quot;&amp;&quot;, &quot;&amp;amp;&quot;);</span>
+  }
+
+   public static String forURL(String aURLFragment){
+<span class="nc" id="L181">     String result = null;</span>
+     try {
+<span class="nc" id="L183">       result = URLEncoder.encode(aURLFragment, &quot;UTF-8&quot;);</span>
+     }
+<span class="nc" id="L185">     catch (UnsupportedEncodingException ex){</span>
+<span class="nc" id="L186">       throw new RuntimeException(&quot;UTF-8 not supported&quot;, ex);</span>
+<span class="nc" id="L187">     }</span>
+<span class="nc" id="L188">     return result;</span>
+   }
+
+  /**
+   Escape characters for text appearing as XML data, between tags.
+*/
+  public static String forXML(String aText){
+<span class="nc" id="L195">    final StringBuilder result = new StringBuilder();</span>
+<span class="nc" id="L196">    final StringCharacterIterator iterator = new StringCharacterIterator(aText);</span>
+<span class="nc" id="L197">    char character =  iterator.current();</span>
+<span class="nc bnc" id="L198" title="All 2 branches missed.">    while (character != CharacterIterator.DONE ){</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">      if (character == '&lt;') {</span>
+<span class="nc" id="L200">        result.append(&quot;&amp;lt;&quot;);</span>
+      }
+<span class="nc bnc" id="L202" title="All 2 branches missed.">      else if (character == '&gt;') {</span>
+<span class="nc" id="L203">        result.append(&quot;&amp;gt;&quot;);</span>
+      }
+<span class="nc bnc" id="L205" title="All 2 branches missed.">      else if (character == '\&quot;') {</span>
+<span class="nc" id="L206">        result.append(&quot;&amp;quot;&quot;);</span>
+      }
+<span class="nc bnc" id="L208" title="All 2 branches missed.">      else if (character == '\'') {</span>
+<span class="nc" id="L209">        result.append(&quot;&amp;#039;&quot;);</span>
+      }
+<span class="nc bnc" id="L211" title="All 2 branches missed.">      else if (character == '&amp;') {</span>
+<span class="nc" id="L212">         result.append(&quot;&amp;amp;&quot;);</span>
+      }
+      else {
+        //the char is not a special one
+        //add it to the result as is
+<span class="nc" id="L217">        result.append(character);</span>
+      }
+<span class="nc" id="L219">      character = iterator.next();</span>
+    }
+<span class="nc" id="L221">    return result.toString();</span>
+  }
+  
+  /**
+   Escapes characters for text appearing as data in the 
+  */
+  public static String forJSON(String aText){
+<span class="nc" id="L228">    final StringBuilder result = new StringBuilder();</span>
+<span class="nc" id="L229">    StringCharacterIterator iterator = new StringCharacterIterator(aText);</span>
+<span class="nc" id="L230">    char character = iterator.current();</span>
+<span class="nc bnc" id="L231" title="All 2 branches missed.">    while (character != StringCharacterIterator.DONE){</span>
+<span class="nc bnc" id="L232" title="All 2 branches missed.">      if( character == '\&quot;' ){</span>
+<span class="nc" id="L233">        result.append(&quot;\\\&quot;&quot;);</span>
+      }
+<span class="nc bnc" id="L235" title="All 2 branches missed.">      else if(character == '\\'){</span>
+<span class="nc" id="L236">        result.append(&quot;\\\\&quot;);</span>
+      }
+<span class="nc bnc" id="L238" title="All 2 branches missed.">      else if(character == '/'){</span>
+<span class="nc" id="L239">        result.append(&quot;\\/&quot;);</span>
+      }
+<span class="nc bnc" id="L241" title="All 2 branches missed.">      else if(character == '\b'){</span>
+<span class="nc" id="L242">        result.append(&quot;\\b&quot;);</span>
+      }
+<span class="nc bnc" id="L244" title="All 2 branches missed.">      else if(character == '\f'){</span>
+<span class="nc" id="L245">        result.append(&quot;\\f&quot;);</span>
+      }
+<span class="nc bnc" id="L247" title="All 2 branches missed.">      else if(character == '\n'){</span>
+<span class="nc" id="L248">        result.append(&quot;\\n&quot;);</span>
+      }
+<span class="nc bnc" id="L250" title="All 2 branches missed.">      else if(character == '\r'){</span>
+<span class="nc" id="L251">        result.append(&quot;\\r&quot;);</span>
+      }
+<span class="nc bnc" id="L253" title="All 2 branches missed.">      else if(character == '\t'){</span>
+<span class="nc" id="L254">        result.append(&quot;\\t&quot;);</span>
+      }
+      else {
+        //the char is not a special one
+        //add it to the result as is
+<span class="nc" id="L259">        result.append(character);</span>
+      }
+<span class="nc" id="L261">      character = iterator.next();</span>
+    }
+<span class="nc" id="L263">    return result.toString();    </span>
+  }
+
+  /**
+   Returns opening and closing tags replaced with the HTML Equivalents
+   replaced by their escaped equivalents.
+  */
+  public static String toDisableTags(String aText){
+<span class="nc" id="L271">    final StringBuilder result = new StringBuilder();</span>
+<span class="nc" id="L272">    final StringCharacterIterator iterator = new StringCharacterIterator(aText);</span>
+<span class="nc" id="L273">    char character =  iterator.current();</span>
+<span class="nc bnc" id="L274" title="All 2 branches missed.">    while (character != CharacterIterator.DONE ){</span>
+<span class="nc bnc" id="L275" title="All 2 branches missed.">      if (character == '&lt;') {</span>
+<span class="nc" id="L276">        result.append(&quot;&amp;lt;&quot;);</span>
+      }
+<span class="nc bnc" id="L278" title="All 2 branches missed.">      else if (character == '&gt;') {</span>
+<span class="nc" id="L279">        result.append(&quot;&amp;gt;&quot;);</span>
+      }
+      else {
+        //the char is not a special one
+        //add it to the result as is
+<span class="nc" id="L284">        result.append(character);</span>
+      }
+<span class="nc" id="L286">      character = iterator.next();</span>
+    }
+<span class="nc" id="L288">    return result.toString();</span>
+  }
+  
+
+  /**
+   Replace characters having special meaning in regular expressions
+   with their escaped equivalents, preceded by a '\' character.
+  */
+  public static String forRegex(String aRegexFragment){
+<span class="nc" id="L297">    final StringBuilder result = new StringBuilder();</span>
+
+<span class="nc" id="L299">    final StringCharacterIterator iterator = </span>
+      new StringCharacterIterator(aRegexFragment)
+    ;
+<span class="nc" id="L302">    char character =  iterator.current();</span>
+<span class="nc bnc" id="L303" title="All 2 branches missed.">    while (character != CharacterIterator.DONE ){</span>
+      /*
+       All literals need to have backslashes doubled.
+      */
+<span class="nc bnc" id="L307" title="All 2 branches missed.">      if (character == '.') {</span>
+<span class="nc" id="L308">        result.append(&quot;\\.&quot;);</span>
+      }
+<span class="nc bnc" id="L310" title="All 2 branches missed.">      else if (character == '\\') {</span>
+<span class="nc" id="L311">        result.append(&quot;\\\\&quot;);</span>
+      }
+<span class="nc bnc" id="L313" title="All 2 branches missed.">      else if (character == '?') {</span>
+<span class="nc" id="L314">        result.append(&quot;\\?&quot;);</span>
+      }
+<span class="nc bnc" id="L316" title="All 2 branches missed.">      else if (character == '*') {</span>
+<span class="nc" id="L317">        result.append(&quot;\\*&quot;);</span>
+      }
+<span class="nc bnc" id="L319" title="All 2 branches missed.">      else if (character == '+') {</span>
+<span class="nc" id="L320">        result.append(&quot;\\+&quot;);</span>
+      }
+<span class="nc bnc" id="L322" title="All 2 branches missed.">      else if (character == '&amp;') {</span>
+<span class="nc" id="L323">        result.append(&quot;\\&amp;&quot;);</span>
+      }
+<span class="nc bnc" id="L325" title="All 2 branches missed.">      else if (character == ':') {</span>
+<span class="nc" id="L326">        result.append(&quot;\\:&quot;);</span>
+      }
+<span class="nc bnc" id="L328" title="All 2 branches missed.">      else if (character == '{') {</span>
+<span class="nc" id="L329">        result.append(&quot;\\{&quot;);</span>
+      }
+<span class="nc bnc" id="L331" title="All 2 branches missed.">      else if (character == '}') {</span>
+<span class="nc" id="L332">        result.append(&quot;\\}&quot;);</span>
+      }
+<span class="nc bnc" id="L334" title="All 2 branches missed.">      else if (character == '[') {</span>
+<span class="nc" id="L335">        result.append(&quot;\\[&quot;);</span>
+      }
+<span class="nc bnc" id="L337" title="All 2 branches missed.">      else if (character == ']') {</span>
+<span class="nc" id="L338">        result.append(&quot;\\]&quot;);</span>
+      }
+<span class="nc bnc" id="L340" title="All 2 branches missed.">      else if (character == '(') {</span>
+<span class="nc" id="L341">        result.append(&quot;\\(&quot;);</span>
+      }
+<span class="nc bnc" id="L343" title="All 2 branches missed.">      else if (character == ')') {</span>
+<span class="nc" id="L344">        result.append(&quot;\\)&quot;);</span>
+      }
+<span class="nc bnc" id="L346" title="All 2 branches missed.">      else if (character == '^') {</span>
+<span class="nc" id="L347">        result.append(&quot;\\^&quot;);</span>
+      }
+<span class="nc bnc" id="L349" title="All 2 branches missed.">      else if (character == '$') {</span>
+<span class="nc" id="L350">        result.append(&quot;\\$&quot;);</span>
+      }
+      else {
+        //the char is not a special one
+        //add it to the result as is
+<span class="nc" id="L355">        result.append(character);</span>
+      }
+<span class="nc" id="L357">      character = iterator.next();</span>
+    }
+<span class="nc" id="L359">    return result.toString();</span>
+  }
+  
+  /**
+   Escape &lt;tt&gt;'$'&lt;/tt&gt; and &lt;tt&gt;'\'&lt;/tt&gt; characters in replacement strings.
+  */
+  public static String forReplacementString(String aInput){
+<span class="nc" id="L366">    return Matcher.quoteReplacement(aInput);</span>
+  }
+  
+  /**
+   Disable all script tags
+  */  
+  public static String forScriptTagsOnly(String aText){
+<span class="nc" id="L373">    String result = null;</span>
+<span class="nc" id="L374">    Matcher matcher = SCRIPT.matcher(aText);</span>
+<span class="nc" id="L375">    result = matcher.replaceAll(&quot;&amp;gt;SCRIPT&amp;lt;&quot;);</span>
+<span class="nc" id="L376">    matcher = SCRIPT_END.matcher(result);</span>
+<span class="nc" id="L377">    result = matcher.replaceAll(&quot;&amp;gt;/SCRIPT&amp;lt;&quot;);</span>
+<span class="nc" id="L378">    return result;</span>
+  }
+  
+  // PRIVATE //
+  
+<span class="nc" id="L383">  private EscapeChars(){</span>
+    //empty - prevent construction
+<span class="nc" id="L385">  }</span>
+  
+<span class="nc" id="L387">  private static final Pattern SCRIPT = Pattern.compile(</span>
+    &quot;&lt;SCRIPT&gt;&quot;, Pattern.CASE_INSENSITIVE
+   );
+<span class="nc" id="L390">  private static final Pattern SCRIPT_END = Pattern.compile(</span>
+    &quot;&lt;/SCRIPT&gt;&quot;, Pattern.CASE_INSENSITIVE
+  );
+  
+  private static void addCharEntity(Integer aIdx, StringBuilder aBuilder){
+<span class="nc" id="L395">    String padding = &quot;&quot;;</span>
+<span class="nc bnc" id="L396" title="All 2 branches missed.">    if( aIdx &lt;= 9 ){</span>
+<span class="nc" id="L397">       padding = &quot;00&quot;;</span>
+    }
+<span class="nc bnc" id="L399" title="All 2 branches missed.">    else if( aIdx &lt;= 99 ){</span>
+<span class="nc" id="L400">      padding = &quot;0&quot;;</span>
+    }
+    else {
+      //no prefix
+    }
+<span class="nc" id="L405">    String number = padding + aIdx.toString();</span>
+<span class="nc" id="L406">    aBuilder.append(&quot;&amp;#&quot;).append(number).append(&quot;;&quot;);</span>
+<span class="nc" id="L407">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

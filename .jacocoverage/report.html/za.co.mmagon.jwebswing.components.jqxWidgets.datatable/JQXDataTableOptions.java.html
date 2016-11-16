@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQXDataTableOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqxWidgets.datatable</a> &gt; <span class="el_source">JQXDataTableOptions.java</span></div><h1>JQXDataTableOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqxWidgets.datatable;
+
+import java.util.ArrayList;
+import za.co.mmagon.jwebswing.components.jqxWidgets.JQXDefaultJavaScriptPart;
+import za.co.mmagon.jwebswing.components.jqxWidgets.JQXLocalization;
+import za.co.mmagon.jwebswing.components.jqxWidgets.JQXPagerPositions;
+
+/**
+ * All the options for the JQX Data Library library
+ * &lt;p&gt;
+ * @author GedMarc
+ * @since Mar 4, 2015
+ * @version 1.0
+ * &lt;p&gt;
+ * &lt;p&gt;
+ */
+public class JQXDataTableOptions extends JQXDefaultJavaScriptPart
+{
+
+    private Boolean altRows;// 	Boolean 	false
+    private Boolean autoRowHeight;// 	Boolean 	true
+    private Integer aggregatesHeight;// 	Number 	34
+    private Boolean autoShowLoadElement;// 	Boolean 	true
+    private Integer columnsHeight;// 	Number 	30
+    private ArrayList&lt;JQXDataTableColumns&gt; columns;// 	Array 	[]
+    private JQXDataTableColumnGroups columnGroups;// 	Array 	[]
+    private Boolean columnsResize;// 	Boolean 	false
+    private Boolean columnsReorder;// 	Boolean 	false
+    private Boolean disabled;// 	Boolean 	false
+    private Boolean editable;// 	Boolean 	false
+    private JQXDataTableEditSettings editSettings;// 	Object 	{ saveOnPageChange: true, saveOnBlur: true, saveOnSelectionChange: true, cancelOnEsc: true, saveOnEnter: true, editSingleCell: false, editOnDoubleClick: true, editOnF2: true }
+    private JQXDataTableExportSettings exportSettings;// 	Object 	{ columnsHeader: true, hiddenColumns: false, serverURL: null, characterSet: null, recordsInView: true, fileName: &quot;jqxDataTable&quot;}
+    private Boolean enableHover;// 	Boolean 	true
+    private Boolean enableBrowserSelection;// 	Boolean 	false
+    private Boolean filterable;// 	Boolean 	false
+    private Integer filterHeight;// 	Number 	30
+    private JQXDataTableFilterModes filterMode;// 	String 	&quot;default&quot;
+    private ArrayList&lt;String&gt; groups;// 	Array 	[]
+    private String groupsRenderer;// 	Function 	null
+    private String initRowDetails;// 	Function 	null
+    private Boolean incrementalSearch;// 	Boolean 	trued
+    private JQXLocalization localization;// 	Object 	default localization strings.
+    private Integer pagerHeight;// 	Number 	28
+    private Integer pageSize;// 	Number 	10
+    private Integer[] pageSizeOptions;// 	Array 	['5', '10', '20']
+    private Boolean pageable;// 	Boolean 	false
+    private JQXPagerPositions pagerPosition;// 	String 	&quot;bottom&quot;
+    private JQXPagerModes pagerMode;// 	String 	&quot;default&quot;
+    private Integer pagerButtonsCount;// 	Number 	5
+    private String pagerRenderer;// 	Function 	nullddd
+    private String ready;// 	Function 	null
+    private Boolean rowDetails;// 	Boolean 	false
+    private String renderToolbar;// 	Function 	null
+    private String renderStatusbar;// 	Function 	null
+    private String rendering;// 	Function 	null
+    private String rendered;// 	Function 	null
+    private Boolean rtl;// 	Boolean 	false
+    private JQXDataTableData source;// 	Object 	null
+    private Boolean sortable;// 	Boolean 	false
+    private Boolean showAggregates;// 	Boolean 	false
+    private Boolean showToolbar;// 	Boolean 	false
+    private Boolean showStatusbar;// 	Boolean 	false
+    private Integer statusBarHeight;// 	Number 	34
+    private Integer scrollBarSize;// 	Number 	17
+    private JQXDataTableSelectionModes selectionMode;// 	String 	&quot;multipleRows&quot;
+    private Boolean serverProcessing;// 	Boolean 	false
+    private Boolean showHeader;// 	Boolean 	true
+    private Integer toolbarHeight;// 	Number 	34
+
+    public JQXDataTableOptions()
+<span class="nc" id="L87">    {</span>
+
+<span class="nc" id="L89">    }</span>
+
+    public Boolean getAltRows()
+    {
+<span class="nc" id="L93">        return altRows;</span>
+    }
+
+    public void setAltRows(Boolean altRows)
+    {
+<span class="nc" id="L98">        this.altRows = altRows;</span>
+<span class="nc" id="L99">    }</span>
+
+    public Boolean getAutoRowHeight()
+    {
+<span class="nc" id="L103">        return autoRowHeight;</span>
+    }
+
+    public void setAutoRowHeight(Boolean autoRowHeight)
+    {
+<span class="nc" id="L108">        this.autoRowHeight = autoRowHeight;</span>
+<span class="nc" id="L109">    }</span>
+
+    public Integer getAggregatesHeight()
+    {
+<span class="nc" id="L113">        return aggregatesHeight;</span>
+    }
+
+    public void setAggregatesHeight(Integer aggregatesHeight)
+    {
+<span class="nc" id="L118">        this.aggregatesHeight = aggregatesHeight;</span>
+<span class="nc" id="L119">    }</span>
+
+    public Boolean getAutoShowLoadElement()
+    {
+<span class="nc" id="L123">        return autoShowLoadElement;</span>
+    }
+
+    public void setAutoShowLoadElement(Boolean autoShowLoadElement)
+    {
+<span class="nc" id="L128">        this.autoShowLoadElement = autoShowLoadElement;</span>
+<span class="nc" id="L129">    }</span>
+
+    public Integer getColumnsHeight()
+    {
+<span class="nc" id="L133">        return columnsHeight;</span>
+    }
+
+    public void setColumnsHeight(Integer columnsHeight)
+    {
+<span class="nc" id="L138">        this.columnsHeight = columnsHeight;</span>
+<span class="nc" id="L139">    }</span>
+
+    public ArrayList&lt;JQXDataTableColumns&gt; getColumns()
+    {
+<span class="nc" id="L143">        return columns;</span>
+    }
+
+    public void setColumns(ArrayList&lt;JQXDataTableColumns&gt; columns)
+    {
+<span class="nc" id="L148">        this.columns = columns;</span>
+<span class="nc" id="L149">    }</span>
+
+    public JQXDataTableColumnGroups getColumnGroups()
+    {
+<span class="nc" id="L153">        return columnGroups;</span>
+    }
+
+    public void setColumnGroups(JQXDataTableColumnGroups columnGroups)
+    {
+<span class="nc" id="L158">        this.columnGroups = columnGroups;</span>
+<span class="nc" id="L159">    }</span>
+
+    public Boolean getColumnsResize()
+    {
+<span class="nc" id="L163">        return columnsResize;</span>
+    }
+
+    public void setColumnsResize(Boolean columnsResize)
+    {
+<span class="nc" id="L168">        this.columnsResize = columnsResize;</span>
+<span class="nc" id="L169">    }</span>
+
+    public Boolean getColumnsReorder()
+    {
+<span class="nc" id="L173">        return columnsReorder;</span>
+    }
+
+    public void setColumnsReorder(Boolean columnsReorder)
+    {
+<span class="nc" id="L178">        this.columnsReorder = columnsReorder;</span>
+<span class="nc" id="L179">    }</span>
+
+    public Boolean getDisabled()
+    {
+<span class="nc" id="L183">        return disabled;</span>
+    }
+
+    public void setDisabled(Boolean disabled)
+    {
+<span class="nc" id="L188">        this.disabled = disabled;</span>
+<span class="nc" id="L189">    }</span>
+
+    public Boolean getEditable()
+    {
+<span class="nc" id="L193">        return editable;</span>
+    }
+
+    public void setEditable(Boolean editable)
+    {
+<span class="nc" id="L198">        this.editable = editable;</span>
+<span class="nc" id="L199">    }</span>
+
+    public JQXDataTableEditSettings getEditSettings()
+    {
+<span class="nc" id="L203">        return editSettings;</span>
+    }
+
+    public void setEditSettings(JQXDataTableEditSettings editSettings)
+    {
+<span class="nc" id="L208">        this.editSettings = editSettings;</span>
+<span class="nc" id="L209">    }</span>
+
+    public JQXDataTableExportSettings getExportSettings()
+    {
+<span class="nc" id="L213">        return exportSettings;</span>
+    }
+
+    public void setExportSettings(JQXDataTableExportSettings exportSettings)
+    {
+<span class="nc" id="L218">        this.exportSettings = exportSettings;</span>
+<span class="nc" id="L219">    }</span>
+
+    public Boolean getEnableHover()
+    {
+<span class="nc" id="L223">        return enableHover;</span>
+    }
+
+    public void setEnableHover(Boolean enableHover)
+    {
+<span class="nc" id="L228">        this.enableHover = enableHover;</span>
+<span class="nc" id="L229">    }</span>
+
+    public Boolean getEnableBrowserSelection()
+    {
+<span class="nc" id="L233">        return enableBrowserSelection;</span>
+    }
+
+    public void setEnableBrowserSelection(Boolean enableBrowserSelection)
+    {
+<span class="nc" id="L238">        this.enableBrowserSelection = enableBrowserSelection;</span>
+<span class="nc" id="L239">    }</span>
+
+    public Boolean getFilterable()
+    {
+<span class="nc" id="L243">        return filterable;</span>
+    }
+
+    public void setFilterable(Boolean filterable)
+    {
+<span class="nc" id="L248">        this.filterable = filterable;</span>
+<span class="nc" id="L249">    }</span>
+
+    public Integer getFilterHeight()
+    {
+<span class="nc" id="L253">        return filterHeight;</span>
+    }
+
+    public void setFilterHeight(Integer filterHeight)
+    {
+<span class="nc" id="L258">        this.filterHeight = filterHeight;</span>
+<span class="nc" id="L259">    }</span>
+
+    public JQXDataTableFilterModes getFilterMode()
+    {
+<span class="nc" id="L263">        return filterMode;</span>
+    }
+
+    public void setFilterMode(JQXDataTableFilterModes filterMode)
+    {
+<span class="nc" id="L268">        this.filterMode = filterMode;</span>
+<span class="nc" id="L269">    }</span>
+
+    public ArrayList&lt;String&gt; getGroups()
+    {
+<span class="nc" id="L273">        return groups;</span>
+    }
+
+    public void setGroups(ArrayList&lt;String&gt; groups)
+    {
+<span class="nc" id="L278">        this.groups = groups;</span>
+<span class="nc" id="L279">    }</span>
+
+    public String getGroupsRenderer()
+    {
+<span class="nc" id="L283">        return groupsRenderer;</span>
+    }
+
+    public void setGroupsRenderer(String groupsRenderer)
+    {
+<span class="nc" id="L288">        this.groupsRenderer = groupsRenderer;</span>
+<span class="nc" id="L289">    }</span>
+
+    public String getInitRowDetails()
+    {
+<span class="nc" id="L293">        return initRowDetails;</span>
+    }
+
+    public void setInitRowDetails(String initRowDetails)
+    {
+<span class="nc" id="L298">        this.initRowDetails = initRowDetails;</span>
+<span class="nc" id="L299">    }</span>
+
+    public Boolean getIncrementalSearch()
+    {
+<span class="nc" id="L303">        return incrementalSearch;</span>
+    }
+
+    public void setIncrementalSearch(Boolean incrementalSearch)
+    {
+<span class="nc" id="L308">        this.incrementalSearch = incrementalSearch;</span>
+<span class="nc" id="L309">    }</span>
+
+    public JQXLocalization getLocalization()
+    {
+<span class="nc" id="L313">        return localization;</span>
+    }
+
+    public void setLocalization(JQXLocalization localization)
+    {
+<span class="nc" id="L318">        this.localization = localization;</span>
+<span class="nc" id="L319">    }</span>
+
+    public Integer getPagerHeight()
+    {
+<span class="nc" id="L323">        return pagerHeight;</span>
+    }
+
+    public void setPagerHeight(Integer pagerHeight)
+    {
+<span class="nc" id="L328">        this.pagerHeight = pagerHeight;</span>
+<span class="nc" id="L329">    }</span>
+
+    public Integer getPageSize()
+    {
+<span class="nc" id="L333">        return pageSize;</span>
+    }
+
+    public void setPageSize(Integer pageSize)
+    {
+<span class="nc" id="L338">        this.pageSize = pageSize;</span>
+<span class="nc" id="L339">    }</span>
+
+    public Integer[] getPageSizeOptions()
+    {
+<span class="nc" id="L343">        return pageSizeOptions;</span>
+    }
+
+    public void setPageSizeOptions(Integer[] pageSizeOptions)
+    {
+<span class="nc" id="L348">        this.pageSizeOptions = pageSizeOptions;</span>
+<span class="nc" id="L349">    }</span>
+
+    public Boolean getPageable()
+    {
+<span class="nc" id="L353">        return pageable;</span>
+    }
+
+    public void setPageable(Boolean pageable)
+    {
+<span class="nc" id="L358">        this.pageable = pageable;</span>
+<span class="nc" id="L359">    }</span>
+
+    public JQXPagerPositions getPagerPosition()
+    {
+<span class="nc" id="L363">        return pagerPosition;</span>
+    }
+
+    public void setPagerPosition(JQXPagerPositions pagerPosition)
+    {
+<span class="nc" id="L368">        this.pagerPosition = pagerPosition;</span>
+<span class="nc" id="L369">    }</span>
+
+    public JQXPagerModes getPagerMode()
+    {
+<span class="nc" id="L373">        return pagerMode;</span>
+    }
+
+    public void setPagerMode(JQXPagerModes pagerMode)
+    {
+<span class="nc" id="L378">        this.pagerMode = pagerMode;</span>
+<span class="nc" id="L379">    }</span>
+
+    public Integer getPagerButtonsCount()
+    {
+<span class="nc" id="L383">        return pagerButtonsCount;</span>
+    }
+
+    public void setPagerButtonsCount(Integer pagerButtonsCount)
+    {
+<span class="nc" id="L388">        this.pagerButtonsCount = pagerButtonsCount;</span>
+<span class="nc" id="L389">    }</span>
+
+    public String getPagerRenderer()
+    {
+<span class="nc" id="L393">        return pagerRenderer;</span>
+    }
+
+    public void setPagerRenderer(String pagerRenderer)
+    {
+<span class="nc" id="L398">        this.pagerRenderer = pagerRenderer;</span>
+<span class="nc" id="L399">    }</span>
+
+    public String getReady()
+    {
+<span class="nc" id="L403">        return ready;</span>
+    }
+
+    public void setReady(String ready)
+    {
+<span class="nc" id="L408">        this.ready = ready;</span>
+<span class="nc" id="L409">    }</span>
+
+    public Boolean getRowDetails()
+    {
+<span class="nc" id="L413">        return rowDetails;</span>
+    }
+
+    public void setRowDetails(Boolean rowDetails)
+    {
+<span class="nc" id="L418">        this.rowDetails = rowDetails;</span>
+<span class="nc" id="L419">    }</span>
+
+    public String getRenderToolbar()
+    {
+<span class="nc" id="L423">        return renderToolbar;</span>
+    }
+
+    public void setRenderToolbar(String renderToolbar)
+    {
+<span class="nc" id="L428">        this.renderToolbar = renderToolbar;</span>
+<span class="nc" id="L429">    }</span>
+
+    public String getRenderStatusbar()
+    {
+<span class="nc" id="L433">        return renderStatusbar;</span>
+    }
+
+    public void setRenderStatusbar(String renderStatusbar)
+    {
+<span class="nc" id="L438">        this.renderStatusbar = renderStatusbar;</span>
+<span class="nc" id="L439">    }</span>
+
+    public String getRendering()
+    {
+<span class="nc" id="L443">        return rendering;</span>
+    }
+
+    public void setRendering(String rendering)
+    {
+<span class="nc" id="L448">        this.rendering = rendering;</span>
+<span class="nc" id="L449">    }</span>
+
+    public String getRendered()
+    {
+<span class="nc" id="L453">        return rendered;</span>
+    }
+
+    public void setRendered(String rendered)
+    {
+<span class="nc" id="L458">        this.rendered = rendered;</span>
+<span class="nc" id="L459">    }</span>
+
+    public Boolean getRtl()
+    {
+<span class="nc" id="L463">        return rtl;</span>
+    }
+
+    public void setRtl(Boolean rtl)
+    {
+<span class="nc" id="L468">        this.rtl = rtl;</span>
+<span class="nc" id="L469">    }</span>
+
+    public JQXDataTableData getSource()
+    {
+<span class="nc" id="L473">        return source;</span>
+    }
+
+    public void setSource(JQXDataTableData source)
+    {
+<span class="nc" id="L478">        this.source = source;</span>
+<span class="nc" id="L479">    }</span>
+
+    public Boolean getSortable()
+    {
+<span class="nc" id="L483">        return sortable;</span>
+    }
+
+    public void setSortable(Boolean sortable)
+    {
+<span class="nc" id="L488">        this.sortable = sortable;</span>
+<span class="nc" id="L489">    }</span>
+
+    public Boolean getShowAggregates()
+    {
+<span class="nc" id="L493">        return showAggregates;</span>
+    }
+
+    public void setShowAggregates(Boolean showAggregates)
+    {
+<span class="nc" id="L498">        this.showAggregates = showAggregates;</span>
+<span class="nc" id="L499">    }</span>
+
+    public Boolean getShowToolbar()
+    {
+<span class="nc" id="L503">        return showToolbar;</span>
+    }
+
+    public void setShowToolbar(Boolean showToolbar)
+    {
+<span class="nc" id="L508">        this.showToolbar = showToolbar;</span>
+<span class="nc" id="L509">    }</span>
+
+    public Boolean getShowStatusbar()
+    {
+<span class="nc" id="L513">        return showStatusbar;</span>
+    }
+
+    public void setShowStatusbar(Boolean showStatusbar)
+    {
+<span class="nc" id="L518">        this.showStatusbar = showStatusbar;</span>
+<span class="nc" id="L519">    }</span>
+
+    public Integer getStatusBarHeight()
+    {
+<span class="nc" id="L523">        return statusBarHeight;</span>
+    }
+
+    public void setStatusBarHeight(Integer statusBarHeight)
+    {
+<span class="nc" id="L528">        this.statusBarHeight = statusBarHeight;</span>
+<span class="nc" id="L529">    }</span>
+
+    public Integer getScrollBarSize()
+    {
+<span class="nc" id="L533">        return scrollBarSize;</span>
+    }
+
+    public void setScrollBarSize(Integer scrollBarSize)
+    {
+<span class="nc" id="L538">        this.scrollBarSize = scrollBarSize;</span>
+<span class="nc" id="L539">    }</span>
+
+    public JQXDataTableSelectionModes getSelectionMode()
+    {
+<span class="nc" id="L543">        return selectionMode;</span>
+    }
+
+    public void setSelectionMode(JQXDataTableSelectionModes selectionMode)
+    {
+<span class="nc" id="L548">        this.selectionMode = selectionMode;</span>
+<span class="nc" id="L549">    }</span>
+
+    public Boolean getServerProcessing()
+    {
+<span class="nc" id="L553">        return serverProcessing;</span>
+    }
+
+    public void setServerProcessing(Boolean serverProcessing)
+    {
+<span class="nc" id="L558">        this.serverProcessing = serverProcessing;</span>
+<span class="nc" id="L559">    }</span>
+
+    public Boolean getShowHeader()
+    {
+<span class="nc" id="L563">        return showHeader;</span>
+    }
+
+    public void setShowHeader(Boolean showHeader)
+    {
+<span class="nc" id="L568">        this.showHeader = showHeader;</span>
+<span class="nc" id="L569">    }</span>
+
+    public Integer getToolbarHeight()
+    {
+<span class="nc" id="L573">        return toolbarHeight;</span>
+    }
+
+    public void setToolbarHeight(Integer toolbarHeight)
+    {
+<span class="nc" id="L578">        this.toolbarHeight = toolbarHeight;</span>
+<span class="nc" id="L579">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MarginSetting.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.htmlbuilder.css</a> &gt; <span class="el_source">MarginSetting.java</span></div><h1>MarginSetting.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.htmlbuilder.css;
+
+import za.co.mmagon.jwebswing.base.client.CSSVersions;
+
+/**
+ *
+ * @author MMagon
+ * @since 24 Sep 2013
+ * @version 1.0
+ */
+<span class="pc" id="L11">public enum MarginSetting implements CSSEnumeration&lt;MarginSetting&gt;</span>
+{
+    /**
+     * Sets to auto, use to center items
+     */
+<span class="fc" id="L16">    Auto,</span>
+    /**
+     * Inherit from parent
+     */
+<span class="fc" id="L20">    Inherit,</span>
+    /**
+     * None
+     */
+<span class="fc" id="L24">    None,</span>
+    
+<span class="fc" id="L26">    Unset;</span>
+
+    @Override
+    public String getValue()
+    {
+<span class="nc" id="L31">        return name().toLowerCase();</span>
+    }
+
+    @Override
+    public MarginSetting getDefault()
+    {
+<span class="fc" id="L37">        return Unset;</span>
+    }
+
+    @Override
+    public String getJavascriptSyntax()
+    {
+<span class="nc" id="L43">        return &quot;style.margin&quot;;</span>
+    }
+
+    @Override
+    public CSSVersions getCSSVersion()
+    {
+<span class="nc" id="L49">        return CSSVersions.CSS3;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

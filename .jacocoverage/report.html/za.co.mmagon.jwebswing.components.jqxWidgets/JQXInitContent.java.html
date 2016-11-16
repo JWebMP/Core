@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQXInitContent.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqxWidgets</a> &gt; <span class="el_source">JQXInitContent.java</span></div><h1>JQXInitContent.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqxWidgets;
+
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.components.jqxWidgets.navigationbar.JQXNavigationBar;
+import za.co.mmagon.jwebswing.components.jqxWidgets.ribbon.JQXRibbon;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptLiteralFunction;
+
+/**
+ * This Class
+ *
+ * @author GedMarc
+ * @since 30 Dec 2015
+ */
+public class JQXInitContent extends JavascriptLiteralFunction
+{
+
+    private static final long serialVersionUID = 1L;
+
+    public JQXInitContent(JQXRibbon ribbon)
+<span class="nc" id="L36">    {</span>
+<span class="nc" id="L37">        setFunctionArugments(&quot;index&quot;);</span>
+<span class="nc" id="L38">        StringBuilder indexInits = new StringBuilder();</span>
+<span class="nc" id="L39">        String ifString = &quot;if (index == &quot;;</span>
+<span class="nc" id="L40">        String ifStart2 = &quot;) {&quot;;</span>
+<span class="nc" id="L41">        String ifEnd = &quot;}&quot;;</span>
+
+<span class="nc" id="L43">        ribbon.getRibbonItems().stream().forEach((ribbonScreen) -&gt;</span>
+        {
+<span class="nc" id="L45">            int indexNumber = ribbon.getRibbonItems().indexOf(ribbonScreen);</span>
+<span class="nc" id="L46">            String start = ifString + indexNumber;</span>
+<span class="nc" id="L47">            start += ifStart2;</span>
+<span class="nc" id="L48">            start += ribbonScreen.getContent().renderJavascriptAll();</span>
+<span class="nc" id="L49">            start += ifEnd;</span>
+
+<span class="nc" id="L51">            indexInits.append(start);</span>
+
+<span class="nc" id="L53">            ribbonScreen.getContent().getChildrenHierarchy().stream().filter((child) -&gt; (child instanceof Component)).forEach((child) -&gt;</span>
+            {
+<span class="nc" id="L55">                Component.class.cast(child).setJavascriptRenderedElsewhere(true);</span>
+<span class="nc" id="L56">            });</span>
+            
+<span class="nc" id="L58">        });</span>
+        
+        //indexInits.append(&quot;resizeLayouts();&quot;);
+<span class="nc" id="L61">        indexInits.append(&quot;$(window).resize();&quot;);</span>
+<span class="nc" id="L62">        setLiteralFunction(indexInits);</span>
+<span class="nc" id="L63">    }</span>
+
+    /**
+     * Configures a function to run the Init content 
+     * @param navBar 
+     */
+    public JQXInitContent(JQXNavigationBar navBar)
+<span class="nc" id="L70">    {</span>
+<span class="nc" id="L71">        setFunctionArugments(&quot;index&quot;);</span>
+<span class="nc" id="L72">        StringBuilder indexInits = new StringBuilder();</span>
+<span class="nc" id="L73">        String ifString = &quot;if (index == &quot;;</span>
+<span class="nc" id="L74">        String ifStart2 = &quot;) {&quot;;</span>
+<span class="nc" id="L75">        String ifEnd = &quot;}&quot;;</span>
+
+<span class="nc" id="L77">        navBar.getGroups().stream().forEach((ribbonScreen) -&gt;</span>
+        {
+<span class="nc" id="L79">            int indexNumber = navBar.getGroups().indexOf(ribbonScreen);</span>
+<span class="nc" id="L80">            String start = ifString + indexNumber;</span>
+<span class="nc" id="L81">            start += ifStart2;</span>
+<span class="nc" id="L82">            start += ribbonScreen.getContent().renderJavascriptAll();</span>
+<span class="nc" id="L83">            start += ifEnd;</span>
+<span class="nc" id="L84">            indexInits.append(start);</span>
+
+<span class="nc" id="L86">            ribbonScreen.getContent().getChildrenHierarchy().stream().filter((child) -&gt; (child instanceof Component)).forEach((child) -&gt;</span>
+            {
+<span class="nc" id="L88">                Component.class.cast(child).setJavascriptRenderedElsewhere(true);</span>
+<span class="nc" id="L89">            });</span>
+<span class="nc" id="L90">        });</span>
+<span class="nc" id="L91">        setLiteralFunction(indexInits);</span>
+<span class="nc" id="L92">    }</span>
+
+    @Override
+    public String toString()
+    {
+<span class="nc" id="L97">        return super.toString();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

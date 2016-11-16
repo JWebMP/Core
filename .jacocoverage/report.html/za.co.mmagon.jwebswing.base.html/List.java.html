@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>List.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">List.java</span></div><h1>List.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html;
+
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
+import za.co.mmagon.jwebswing.base.html.interfaces.DisplayObjectType;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.ListChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.jqueryUI.sortable.JQUISortableChildren;
+import za.co.mmagon.jwebswing.components.jqueryUI.tabs.JQUITabsChildren;
+import za.co.mmagon.jwebswing.components.jqxWidgets.dropdownlist.JQXDropDownListChildren;
+import za.co.mmagon.jwebswing.components.jqxWidgets.menu.JQXMenuChildren;
+import za.co.mmagon.jwebswing.components.jqxWidgets.ribbon.JQXRibbonChildren;
+
+/**
+ * Defines the List HTML Tag&lt;p&gt;
+ * &lt;p&gt;
+ * Browser Support&lt;p&gt;
+ * &lt;p&gt;
+ * Internet Explorer Firefox Opera Google Chrome Safari&lt;p&gt;
+ * &lt;p&gt;
+ * The ol tag is supported in all major browsers. Definition and Usage&lt;p&gt;
+ * &lt;p&gt;
+ * The ol tag defines an ordered list. An ordered list can be numerical or alphabetical.&lt;p&gt;
+ * &lt;p&gt;
+ * Use the li tag to define list items. Tips and Notes&lt;p&gt;
+ * &lt;p&gt;
+ * Tip: For unordered list, use the ul tag.&lt;p&gt;
+ * &lt;p&gt;
+ * Tip: Use CSS to style lists. Differences Between HTML 4.01 and HTML5&lt;p&gt;
+ * &lt;p&gt;
+ * The &quot;start&quot; and &quot;type&quot; attributes were deprecated in HTML 4.01, but IS supported in HTML5.&lt;p&gt;
+ * &lt;p&gt;
+ * The &quot;reversed&quot; attribute is new in HTML5.&lt;p&gt;
+ * &lt;p&gt;
+ * The &quot;compact&quot; attribute is not supported in HTML5.&lt;p&gt;
+ * &lt;p&gt;
+ * @author Marc Magon
+ */
+public class List&lt;C extends ListChildren, A extends Enum &amp; AttributeDefinitions, J extends List&gt;
+        extends Component&lt;C, A, GlobalFeatures, GlobalEvents, J&gt;
+        implements ListChildren, JQUITabsChildren, JQUISortableChildren, DisplayObjectType, JQXRibbonChildren, JQXDropDownListChildren,
+        JQXMenuChildren, ListItemChildren
+{
+
+    /**
+     * Constructs an unordered list
+     */
+    public List()
+    {
+<span class="fc" id="L53">        this(false);</span>
+<span class="fc" id="L54">    }</span>
+
+    /**
+     * Specifies if the list is ordered or unordered
+     *
+     * @param orderedList
+     */
+    public List(boolean orderedList)
+    {
+<span class="pc bpc" id="L63" title="2 of 4 branches missed.">        super(orderedList ? &quot;ol&quot; : &quot;ul&quot;, orderedList ? ComponentTypes.OrderedList : ComponentTypes.UnorderedList, false);</span>
+<span class="fc" id="L64">    }</span>
+
+    @Override
+    public C add(String textToAdd)
+    {
+<span class="nc" id="L69">        ListItem li = new ListItem(textToAdd);</span>
+<span class="nc" id="L70">        add((C) li);</span>
+<span class="nc" id="L71">        return (C) li;</span>
+    }
+
+    /**
+     * Returns a list of the specified text
+     *
+     * @param textToAdd
+     * @return
+     */
+    public List addList(String textToAdd)
+    {
+<span class="nc" id="L82">        ListItem lit = new ListItem(textToAdd);</span>
+<span class="nc" id="L83">        List li = new List(false);</span>
+<span class="nc" id="L84">        lit.add(li);</span>
+<span class="nc" id="L85">        add((C) lit);</span>
+<span class="nc" id="L86">        return li;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

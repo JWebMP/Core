@@ -1,0 +1,21 @@
+{
+  "name": "globalize-languages",
+  "authors": [
+    "google"
+  ],
+  "description": "All the languages for the google globalize project",
+  "main": "",
+  "keywords": [
+    "Globalize",
+    "Localization"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

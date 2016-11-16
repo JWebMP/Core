@@ -1,0 +1,13 @@
+{
+  "name": "jwebswing-moderniz",
+  "version": "3.3.1",
+  "_release": "3.3.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v3.3.1",
+    "commit": "4e2ba8789fa25557566282d4f8b90dfb2a40699b"
+  },
+  "_source": "git://git.code.sf.net/p/jwebswing/jwebswing-modernizr",
+  "_target": "^3.3.1",
+  "_originalSource": "jwebswing-moderniz"
+}

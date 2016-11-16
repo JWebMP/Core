@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Input.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">Input.java</span></div><h1>Input.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2014 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.base.html;
+
+import org.apache.log4j.Logger;
+import za.co.mmagon.LoggerFactory;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
+import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
+import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.jqueryUI.autocomplete.JQUIAutoCompleteChildren;
+import za.co.mmagon.jwebswing.components.jqueryUI.spinner.JQUISpinnerChildren;
+
+/**
+ *
+ * Please note I have left out all the input type attributes that are not cross-browser - rather use the features available.&lt;p&gt;
+ * &lt;p&gt;
+ * Browser Support&lt;p&gt;
+ * &lt;p&gt;
+ * Internet Explorer Firefox Opera Google Chrome Safari&lt;p&gt;
+ * &lt;p&gt;
+ * The input tag is supported in all major browsers. Definition and Usage&lt;p&gt;
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * The input tag specifies an input field where the user can enter data.&lt;p&gt;
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * input elements are used within a form element to declare input controls that allow users to input data.&lt;p&gt;
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * An input field can vary in many ways, depending on the type attribute. Tips and Notes&lt;p&gt;
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * Note: The input element is empty, it contains attributes only.&lt;p&gt;
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * Tip: Use the label element to define labels for input elements. Differences Between HTML 4.01 and HTML5&lt;p&gt;
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * The &quot;align&quot; attribute is not supported in HTML5.&lt;p&gt;
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * In HTML5, the input tag has several new attributes, and the type attribute has several new values. Differences Between HTML and XHTML&lt;p&gt;
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * In HTML, the input tag has no end tag.&lt;p&gt;
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * In XHTML, the input tag must be properly closed.&lt;p&gt;
+ * &lt;p&gt;
+ * @author Marc Magon
+ * @param &lt;A&gt; The attribute set for the input component
+ */
+public class Input&lt;A extends Enum &amp; AttributeDefinitions&gt; extends Component&lt;NoChildren, A, GlobalFeatures, GlobalEvents, Input&gt;
+        implements NoClosingTag, GlobalChildren, ParagraphChildren, JQUISpinnerChildren, JQUIAutoCompleteChildren
+{
+
+<span class="fc" id="L79">    private static final Logger log = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;Input&quot;);</span>
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * The input type of this input tag
+     */
+    private InputTypes inputType;
+
+    public Input()
+    {
+<span class="nc" id="L89">        this(null);</span>
+<span class="nc" id="L90">    }</span>
+
+    /**
+     * Construct a new instance of the input type field
+     * &lt;p&gt;
+     * @param inputType
+     */
+    public Input(InputTypes inputType)
+    {
+<span class="fc" id="L99">        super(ComponentTypes.Input);</span>
+
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">        if (inputType != null)</span>
+
+        {
+<span class="fc" id="L104">            this.inputType = inputType;</span>
+<span class="fc" id="L105">            addAttribute(GlobalAttributes.Type, getInputType().name().toLowerCase());</span>
+        }
+
+<span class="fc" id="L108">    }</span>
+
+    /**
+     * Returns the input type of the input field
+     * &lt;p&gt;
+     * @return
+     */
+    public final InputTypes getInputType()
+    {
+<span class="fc" id="L117">        return inputType;</span>
+    }
+
+    /**
+     * Sets the input type of this field
+     * &lt;p&gt;
+     * @param inputType
+     */
+    public void setInputType(InputTypes inputType)
+    {
+<span class="nc" id="L127">        this.inputType = inputType;</span>
+<span class="nc" id="L128">    }</span>
+
+    /**
+     * Differences Between HTML and XHTML
+     * &lt;p&gt;
+     * In HTML the base tag has no end tag.
+     * &lt;p&gt;
+     * In XHTML the base tag must be properly closed.
+     */
+    @Override
+    public void preConfigure()
+    {
+<span class="fc" id="L140">        super.preConfigure();</span>
+        try
+        {
+<span class="pc bpc" id="L143" title="1 of 2 branches missed.">            if (getPage().getHtmlVersion().name().startsWith(&quot;X&quot;))</span>
+            {
+<span class="nc" id="L145">                setInlineClosingTag(true);</span>
+            }
+        }
+<span class="nc" id="L148">        catch (Exception e)</span>
+        {
+<span class="nc" id="L150">            log.trace(&quot;Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.&quot;,e);</span>
+<span class="fc" id="L151">        }</span>
+<span class="fc" id="L152">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

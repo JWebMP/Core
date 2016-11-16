@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>C3DataOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.c3.options.data</a> &gt; <span class="el_source">C3DataOptions.java</span></div><h1>C3DataOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.c3.options.data;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
+import java.util.HashMap;
+import za.co.mmagon.jwebswing.components.c3.options.C3DataSelectionOptions;
+import za.co.mmagon.jwebswing.components.c3.options.C3RegionOptions;
+import za.co.mmagon.jwebswing.components.c3.series.C3DataColumnHeader;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourHex;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptFunction;
+
+/**
+ * Represents a C3 Graphing Data Structure
+ *
+ * @author GedMarc
+ * @since 09 Mar 2016
+ */
+public class C3DataOptions extends JavaScriptPart
+{
+
+    private static final long serialVersionUID = 1L;
+
+    private String url;
+    private JavaScriptPart json;
+    private C3RowData rows;
+    private C3ColumnData columns;
+    private String mimeType;
+    private ArrayList&lt;String&gt; keys;
+    private C3DataColumnHeader x;
+    private HashMap&lt;C3DataColumnHeader, C3DataXAxis&gt; xs;
+    private String xFormat;
+    private String xLocaltime;
+    private String xSort;
+    private HashMap&lt;C3DataColumnHeader, String&gt; names;
+    private HashMap&lt;C3DataColumnHeader, String&gt; classes;
+    private ArrayList&lt;ArrayList&lt;C3DataColumnHeader&gt;&gt; groups;
+    private HashMap&lt;C3DataColumnHeader, C3DataAxesOptions&gt; axes;
+    private C3GraphTypeOptions type;
+    private HashMap&lt;C3DataColumnHeader, C3GraphTypeOptions&gt; types;
+    private Boolean labels;
+    private C3DataOrderOptions order;
+    private HashMap&lt;C3DataColumnHeader, C3RegionOptions&gt; regions;
+    private JavascriptFunction color;
+    private HashMap&lt;C3DataColumnHeader, ColourHex&gt; colors;
+    private ArrayList&lt;C3DataColumnHeader&gt; hide;
+    private C3DataEmptyOptions empty;//empty.label.text
+    private C3DataSelectionOptions selection;
+
+    @JsonIgnore
+    private ArrayList&lt;C3DataColumnHeader&gt; columnHeaders;
+    @JsonIgnore
+    private boolean renderByRow;
+    @JsonIgnore
+    private boolean renderByColumn;
+
+    /**
+     * Constructs a new Data Options Object
+     */
+    public C3DataOptions()
+<span class="nc" id="L77">    {</span>
+<span class="nc" id="L78">    }</span>
+
+    /**
+     * Constructs a new instance of data options with the column headers set
+     *
+     * @param columnHeaders
+     */
+    public C3DataOptions(ArrayList&lt;C3DataColumnHeader&gt; columnHeaders)
+<span class="nc" id="L86">    {</span>
+<span class="nc" id="L87">        this.columnHeaders = columnHeaders;</span>
+<span class="nc" id="L88">    }</span>
+
+    /**
+     * Returns the current column headers array
+     *
+     * @return
+     */
+    public ArrayList&lt;C3DataColumnHeader&gt; getColumnHeaders()
+    {
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        if (columnHeaders == null)</span>
+        {
+<span class="nc" id="L99">            columnHeaders = new ArrayList&lt;&gt;();</span>
+        }
+<span class="nc" id="L101">        return columnHeaders;</span>
+    }
+
+    /**
+     * Sets the column headers array
+     *
+     * @param columnHeaders
+     */
+    public void setColumnHeaders(ArrayList&lt;C3DataColumnHeader&gt; columnHeaders)
+    {
+<span class="nc" id="L111">        this.columnHeaders = columnHeaders;</span>
+<span class="nc" id="L112">    }</span>
+
+    /**
+     * Returns if the data should be delivered by row
+     *
+     * @return
+     */
+    public boolean isRenderByRow()
+    {
+<span class="nc" id="L121">        return renderByRow;</span>
+    }
+
+    /**
+     * Sets if the data should be delivered by row
+     *
+     * @param renderByRow
+     */
+    public void setRenderByRow(boolean renderByRow)
+    {
+<span class="nc" id="L131">        this.renderByRow = renderByRow;</span>
+<span class="nc" id="L132">    }</span>
+
+    /**
+     * Gets if the data should be delivered by column
+     *
+     * @return
+     */
+    public boolean isRenderByColumn()
+    {
+<span class="nc" id="L141">        return renderByColumn;</span>
+    }
+
+    /**
+     * Sets if the data should be rendered by column
+     *
+     * @param renderByColumn
+     */
+    public void setRenderByColumn(boolean renderByColumn)
+    {
+<span class="nc" id="L151">        this.renderByColumn = renderByColumn;</span>
+<span class="nc" id="L152">    }</span>
+
+    /**
+     * *************************************************************************************************
+     * args
+     ***************************************************************************************************
+     */
+    /**
+     * Load a CSV or JSON file from a URL. Note that this will not work if loading via the &quot;file://&quot; protocol as most browsers with block XMLHTTPRequests.
+     *
+     * @return
+     */
+    public String getUrl()
+    {
+<span class="nc" id="L166">        return url;</span>
+    }
+
+    /**
+     * Load a CSV or JSON file from a URL. Note that this will not work if loading via the &quot;file://&quot; protocol as most browsers with block XMLHTTPRequests.
+     *
+     * @param url
+     */
+    public void setUrl(String url)
+    {
+<span class="nc" id="L176">        this.url = url;</span>
+<span class="nc" id="L177">    }</span>
+
+    /**
+     * Parse a JSON object for data. See also data.keys.
+     */
+    public JavaScriptPart getJson()
+    {
+<span class="nc" id="L184">        return json;</span>
+    }
+
+    /**
+     * Parse a JSON object for data. See also data.keys.
+     *
+     * @param json
+     */
+    public void setJson(JavaScriptPart json)
+    {
+<span class="nc" id="L194">        this.json = json;</span>
+<span class="nc" id="L195">    }</span>
+
+    /**
+     * Load data from a multidimensional array, with the first element containing the data names, the following containing related data in that order.
+     *
+     * @return
+     */
+    public C3RowData getRows()
+    {
+<span class="nc bnc" id="L204" title="All 2 branches missed.">        if (rows == null)</span>
+        {
+<span class="nc" id="L206">            rows = new C3RowData();</span>
+        }
+<span class="nc" id="L208">        return rows;</span>
+    }
+
+    /**
+     * Load data from a multidimensional array, with the first element containing the data names, the following containing related data in that order.
+     *
+     * @param rows
+     */
+    public void setRows(C3RowData rows)
+    {
+<span class="nc" id="L218">        this.rows = rows;</span>
+<span class="nc" id="L219">    }</span>
+
+    /**
+     * Load data from a multidimensional array, with each element containing an array consisting of a datum name and associated data values.
+     *
+     * @return
+     */
+    public C3ColumnData getColumns()
+    {
+<span class="nc bnc" id="L228" title="All 2 branches missed.">        if (columns == null)</span>
+        {
+<span class="nc" id="L230">            columns = new C3ColumnData(new C3DataColumnHeader(&quot;Header&quot;));</span>
+        }
+<span class="nc" id="L232">        return columns;</span>
+    }
+
+    /**
+     * Load data from a multidimensional array, with each element containing an array consisting of a datum name and associated data values.
+     *
+     * @param columns
+     */
+    public void setColumns(C3ColumnData columns)
+    {
+<span class="nc" id="L242">        this.columns = columns;</span>
+<span class="nc" id="L243">    }</span>
+
+    /**
+     * Used if loading JSON via data.url:
+     *
+     * @return
+     */
+    public String getMimeType()
+    {
+<span class="nc" id="L252">        return mimeType;</span>
+    }
+
+    /**
+     * Used if loading JSON via data.url:
+     *
+     * @param mimeType
+     */
+    public void setMimeType(String mimeType)
+    {
+<span class="nc" id="L262">        this.mimeType = mimeType;</span>
+<span class="nc" id="L263">    }</span>
+
+    /**
+     * Choose which JSON object keys correspond to desired data.
+     *
+     * @return
+     */
+    public ArrayList&lt;String&gt; getKeys()
+    {
+<span class="nc bnc" id="L272" title="All 2 branches missed.">        if (keys == null)</span>
+        {
+<span class="nc" id="L274">            keys = new ArrayList&lt;&gt;();</span>
+        }
+<span class="nc" id="L276">        return keys;</span>
+    }
+
+    /**
+     * Choose which JSON object keys correspond to aggregate data.
+     *
+     * @param keys
+     */
+    public void setKeys(ArrayList&lt;String&gt; keys)
+    {
+<span class="nc" id="L286">        this.keys = keys;</span>
+<span class="nc" id="L287">    }</span>
+
+    /**
+     * Specify the key of x values in the data.
+     * &lt;p&gt;
+     * We can show the data with non-index x values by this option. This option is required when the type of x axis is timeseries. If this option is set on category axis, the values of the data on the
+     * key will be used for category names
+     *
+     * @return
+     */
+    public C3DataColumnHeader getX()
+    {
+<span class="nc" id="L299">        return x;</span>
+    }
+
+    /**
+     * Specify the key of x values in the data.
+     * &lt;p&gt;
+     * We can show the data with non-index x values by this option. This option is required when the type of x axis is timeseries. If this option is set on category axis, the values of the data on the
+     * key will be used for category names
+     *
+     * @param x
+     */
+    public void setX(C3DataColumnHeader x)
+    {
+<span class="nc" id="L312">        this.x = x;</span>
+<span class="nc" id="L313">    }</span>
+
+    /**
+     * Specify the keys of the x values for each data.
+     * &lt;p&gt;
+     * This option can be used if we want to show the data that has different x values.
+     *
+     * @return
+     */
+    public HashMap&lt;C3DataColumnHeader, C3DataXAxis&gt; getXs()
+    {
+<span class="nc bnc" id="L324" title="All 2 branches missed.">        if (xs == null)</span>
+        {
+<span class="nc" id="L326">            xs = new HashMap&lt;&gt;();</span>
+        }
+<span class="nc" id="L328">        return xs;</span>
+    }
+
+    /**
+     * Specify the keys of the x values for each data.
+     * &lt;p&gt;
+     * This option can be used if we want to show the data that has different x values.
+     *
+     * @param xs
+     */
+    public void setXs(HashMap&lt;C3DataColumnHeader, C3DataXAxis&gt; xs)
+    {
+<span class="nc" id="L340">        this.xs = xs;</span>
+<span class="nc" id="L341">    }</span>
+
+    /**
+     * Set a format to parse string specifed as x.
+     *
+     * @return
+     */
+    public String getxFormat()
+    {
+<span class="nc" id="L350">        return xFormat;</span>
+    }
+
+    /**
+     * Set a format to parse string specifed as x.
+     *
+     * @param xFormat
+     */
+    public void setxFormat(String xFormat)
+    {
+<span class="nc" id="L360">        this.xFormat = xFormat;</span>
+<span class="nc" id="L361">    }</span>
+
+    /**
+     * not yet
+     *
+     * @deprecated
+     * @return
+     */
+    public String getxLocaltime()
+    {
+<span class="nc" id="L371">        return xLocaltime;</span>
+    }
+
+    /**
+     * not yet
+     *
+     * @deprecated
+     * @param xLocaltime
+     */
+    public void setxLocaltime(String xLocaltime)
+    {
+<span class="nc" id="L382">        this.xLocaltime = xLocaltime;</span>
+<span class="nc" id="L383">    }</span>
+
+    /**
+     * not yet
+     *
+     * @deprecated
+     * @return
+     */
+    public String getxSort()
+    {
+<span class="nc" id="L393">        return xSort;</span>
+    }
+
+    /**
+     * not yet
+     *
+     * @deprecated
+     * @param xSort
+     */
+    public void setxSort(String xSort)
+    {
+<span class="nc" id="L404">        this.xSort = xSort;</span>
+<span class="nc" id="L405">    }</span>
+
+    /**
+     * Set custom data name.
+     *
+     * @return
+     */
+    public HashMap&lt;C3DataColumnHeader, String&gt; getNames()
+    {
+<span class="nc bnc" id="L414" title="All 2 branches missed.">        if (names == null)</span>
+        {
+<span class="nc" id="L416">            names = new HashMap&lt;&gt;();</span>
+        }
+<span class="nc" id="L418">        return names;</span>
+    }
+
+    /**
+     * Set custom data name.
+     *
+     * @param names
+     */
+    public void setNames(HashMap&lt;C3DataColumnHeader, String&gt; names)
+    {
+<span class="nc" id="L428">        this.names = names;</span>
+<span class="nc" id="L429">    }</span>
+
+    /**
+     * Set custom data class.
+     * &lt;p&gt;
+     * If this option is specified, the element g for the data has an additional class that has the prefix c3-target- (e.g. c3-target-additional-data1-class).
+     *
+     * @return
+     */
+    public HashMap&lt;C3DataColumnHeader, String&gt; getClasses()
+    {
+<span class="nc bnc" id="L440" title="All 2 branches missed.">        if (classes == null)</span>
+        {
+<span class="nc" id="L442">            classes = new HashMap&lt;&gt;();</span>
+        }
+<span class="nc" id="L444">        return classes;</span>
+    }
+
+    /**
+     * Set custom data class.
+     * &lt;p&gt;
+     * If this option is specified, the element g for the data has an additional class that has the prefix c3-target- (e.g. c3-target-additional-data1-class).
+     *
+     * @param classes
+     */
+    public void setClasses(HashMap&lt;C3DataColumnHeader, String&gt; classes)
+    {
+<span class="nc" id="L456">        this.classes = classes;</span>
+<span class="nc" id="L457">    }</span>
+
+    /**
+     * Sets the columns that are grouped together for the stacked effect
+     *
+     * @return
+     */
+    public ArrayList&lt;ArrayList&lt;C3DataColumnHeader&gt;&gt; getGroups()
+    {
+<span class="nc bnc" id="L466" title="All 2 branches missed.">        if (groups == null)</span>
+        {
+<span class="nc" id="L468">            groups = new ArrayList&lt;&gt;();</span>
+        }
+<span class="nc" id="L470">        return groups;</span>
+    }
+
+    /**
+     * Sets the columns that are grouped together for the stacked effect
+     *
+     * @param groups
+     */
+    public void setGroups(ArrayList&lt;ArrayList&lt;C3DataColumnHeader&gt;&gt; groups)
+    {
+<span class="nc" id="L480">        this.groups = groups;</span>
+<span class="nc" id="L481">    }</span>
+
+    /**
+     * Set y axis the data related to. y and y2 can be used.
+     *
+     * @return
+     */
+    public HashMap&lt;C3DataColumnHeader, C3DataAxesOptions&gt; getAxes()
+    {
+<span class="nc bnc" id="L490" title="All 2 branches missed.">        if (axes == null)</span>
+        {
+<span class="nc" id="L492">            axes = new HashMap&lt;&gt;();</span>
+        }
+<span class="nc" id="L494">        return axes;</span>
+    }
+
+    /**
+     * Set y axis the data related to. y and y2 can be used.
+     *
+     * @param axes
+     */
+    public void setAxes(HashMap&lt;C3DataColumnHeader, C3DataAxesOptions&gt; axes)
+    {
+<span class="nc" id="L504">        this.axes = axes;</span>
+<span class="nc" id="L505">    }</span>
+
+    /**
+     * Set chart type at once.
+     * &lt;p&gt;
+     * If this option is specified, the type will be applied to every data. This setting can be overwritten by data.types.
+     *
+     * @return
+     */
+    public C3GraphTypeOptions getType()
+    {
+<span class="nc" id="L516">        return type;</span>
+    }
+
+    /**
+     * Set chart type at once.
+     * &lt;p&gt;
+     * If this option is specified, the type will be applied to every data. This setting can be overwritten by data.types.
+     *
+     * @param type
+     */
+    public void setType(C3GraphTypeOptions type)
+    {
+<span class="nc" id="L528">        this.type = type;</span>
+<span class="nc" id="L529">    }</span>
+
+    /**
+     * Set chart type for each data.
+     * &lt;p&gt;
+     * This setting overwrites data.type setting.
+     *
+     * @return
+     */
+    public HashMap&lt;C3DataColumnHeader, C3GraphTypeOptions&gt; getTypes()
+    {
+<span class="nc bnc" id="L540" title="All 2 branches missed.">        if (types == null)</span>
+        {
+<span class="nc" id="L542">            types = new HashMap&lt;&gt;();</span>
+        }
+<span class="nc" id="L544">        return types;</span>
+    }
+
+    /**
+     * Set chart type for each data.
+     * &lt;p&gt;
+     * This setting overwrites data.type setting.
+     *
+     * @param types
+     */
+    public void setTypes(HashMap&lt;C3DataColumnHeader, C3GraphTypeOptions&gt; types)
+    {
+<span class="nc" id="L556">        this.types = types;</span>
+<span class="nc" id="L557">    }</span>
+
+    /**
+     * Show labels on each data points.
+     *
+     * @return
+     */
+    public Boolean getLabels()
+    {
+<span class="nc" id="L566">        return labels;</span>
+    }
+
+    /**
+     * Show labels on each data points.
+     *
+     * @param labels
+     */
+    public void setLabels(Boolean labels)
+    {
+<span class="nc" id="L576">        this.labels = labels;</span>
+<span class="nc" id="L577">    }</span>
+
+    /**
+     * Define the order of the data.
+     * &lt;p&gt;
+     * This option changes the order of stacking the data and pieces of pie/donut. If null specified, it will be the order the data loaded. If function specified, it will be used to sort the data and
+     * it will recieve the data as argument.
+     *
+     * @return
+     */
+    public C3DataOrderOptions getOrder()
+    {
+<span class="nc" id="L589">        return order;</span>
+    }
+
+    /**
+     * Define the order of the data.
+     * &lt;p&gt;
+     * This option changes the order of stacking the data and pieces of pie/donut. If null specified, it will be the order the data loaded. If function specified, it will be used to sort the data and
+     * it will recieve the data as argument.
+     *
+     * @param order
+     */
+    public void setOrder(C3DataOrderOptions order)
+    {
+<span class="nc" id="L602">        this.order = order;</span>
+<span class="nc" id="L603">    }</span>
+
+    /**
+     * Define regions for each data.
+     * &lt;p&gt;
+     * The values must be an array for each data and it should include an object that has start, end, style.
+     * If start is not set, the start will be the first data point. If end is not set, the end
+     * will be the last data point.
+     * &lt;p&gt;
+     * Currently this option supports only line chart and dashed style. If this option specified, the line will be dashed only in the regions.
+     *
+     * @return
+     */
+    public HashMap&lt;C3DataColumnHeader, C3RegionOptions&gt; getRegions()
+    {
+<span class="nc" id="L618">        return regions;</span>
+    }
+
+    /**
+     * Define regions for each data.
+     * &lt;p&gt;
+     * The values must be an array for each data and it should include an object that has start, end, style.
+     * If start is not set, the start will be the first data point. If end is not set, the end
+     * will be the last data point.
+     * &lt;p&gt;
+     * Currently this option supports only line chart and dashed style. If this option specified, the line will be dashed only in the regions.
+     *
+     * @param regions
+     */
+    public void setRegions(HashMap&lt;C3DataColumnHeader, C3RegionOptions&gt; regions)
+    {
+<span class="nc" id="L634">        this.regions = regions;</span>
+<span class="nc" id="L635">    }</span>
+
+    /**
+     * Set color converter function.
+     * &lt;p&gt;
+     * This option should a function and the specified function receives color (e.g. '#ff0000') and d that has data parameters like id, value, index, etc. And it must return a string that represents
+     * color (e.g. '#00ff00').
+     *
+     * @return
+     */
+    public JavascriptFunction getColor()
+    {
+<span class="nc" id="L647">        return color;</span>
+    }
+
+    /**
+     * Set color converter function.
+     * &lt;p&gt;
+     * This option should a function and the specified function receives color (e.g. '#ff0000') and d that has data parameters like id, value, index, etc. And it must return a string that represents
+     * color (e.g. '#00ff00').
+     *
+     * @param color
+     */
+    public void setColor(JavascriptFunction color)
+    {
+<span class="nc" id="L660">        this.color = color;</span>
+<span class="nc" id="L661">    }</span>
+
+    /**
+     * Set color for each data.
+     *
+     * @return
+     */
+    public HashMap&lt;C3DataColumnHeader, ColourHex&gt; getColors()
+    {
+<span class="nc bnc" id="L670" title="All 2 branches missed.">        if (colors == null)</span>
+        {
+<span class="nc" id="L672">            colors = new HashMap&lt;&gt;();</span>
+        }
+<span class="nc" id="L674">        return colors;</span>
+    }
+
+    /**
+     * Set color for each data.
+     *
+     * @param colors
+     */
+    public void setColors(HashMap&lt;C3DataColumnHeader, ColourHex&gt; colors)
+    {
+<span class="nc" id="L684">        this.colors = colors;</span>
+<span class="nc" id="L685">    }</span>
+
+    /**
+     * Hide each data when the chart appears.
+     *
+     * @return
+     */
+    public ArrayList&lt;C3DataColumnHeader&gt; getHide()
+    {
+<span class="nc bnc" id="L694" title="All 2 branches missed.">        if (hide == null)</span>
+        {
+<span class="nc" id="L696">            hide = new ArrayList&lt;&gt;();</span>
+        }
+<span class="nc" id="L698">        return hide;</span>
+    }
+
+    /**
+     * Hide each data when the chart appears.
+     *
+     * @param hide
+     */
+    public void setHide(ArrayList&lt;C3DataColumnHeader&gt; hide)
+    {
+<span class="nc" id="L708">        this.hide = hide;</span>
+<span class="nc" id="L709">    }</span>
+
+    /**
+     *
+     * @return
+     */
+    public C3DataEmptyOptions getEmpty()
+    {
+<span class="nc" id="L717">        return empty;</span>
+    }
+
+    public void setEmpty(C3DataEmptyOptions empty)
+    {
+<span class="nc" id="L722">        this.empty = empty;</span>
+<span class="nc" id="L723">    }</span>
+
+    public C3DataSelectionOptions getSelection()
+    {
+<span class="nc" id="L727">        return selection;</span>
+    }
+
+    public void setSelection(C3DataSelectionOptions selection)
+    {
+<span class="nc" id="L732">        this.selection = selection;</span>
+<span class="nc" id="L733">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

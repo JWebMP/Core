@@ -1,0 +1,26 @@
+{
+  "name": "radial-svg-slider-jwebswing",
+  "authors": [
+    "GedMarc <ged_marc@hotmail.com>"
+  ],
+  "description": "The radial slider implementation a little more genericized so it can be portable across pages and multiple instances can exist",
+  "main": "",
+  "keywords": [
+    "jwebswing",
+    "java",
+    "slider",
+    "radial",
+    "slider",
+    "web",
+    "framework"
+  ],
+  "license": "MIT",
+  "homepage": "http://www.armineasy.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MomentFilters.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.moment</a> &gt; <span class="el_source">MomentFilters.java</span></div><h1>MomentFilters.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.moment;
+
+/**
+ * All the available filters for a moment display
+ *
+ * @author GedMarc
+ * @since Oct 5, 2016
+ *
+ */
+<span class="pc" id="L26">public enum MomentFilters</span>
+{
+    /**
+     * Parses a custom-formatted date into a moment object that can be used with the am-time-ago directive and the other filters. For example, the following code will accept dates that are formatted
+     * like &quot;2015.04.25 22:00:15':
+     *//**
+     * Parses a custom-formatted date into a moment object that can be used with the am-time-ago directive and the other filters. For example, the following code will accept dates that are formatted
+     * like &quot;2015.04.25 22:00:15':
+     */
+<span class="fc" id="L35">    amParse,</span>
+    /**
+     * Converts a unix-timestamp (seconds since 1/1/1970) into a moment object. Example:
+     */
+<span class="fc" id="L39">    amFromUnix,</span>
+    /**
+     * Create / switch the current moment object into UTC mode. For example, given a date object in message.date, the following code will display the time in UTC instead of the local timezone:
+     */
+<span class="fc" id="L43">    amUtc,</span>
+    /**
+     * Uses the given UTC offset when displaying a date. For example, the following code will display the date with a UTC + 3 hours time offset:
+     */
+<span class="fc" id="L47">    amUtcOffset,</span>
+    /**
+     * Changes the given moment object to be in the local timezone. Usually used in conjunction with amUtc / amTimezone for timezone conversion. For example, the following will convert the given UTC
+     * date to local time:
+     */
+<span class="fc" id="L52">    amLocal,</span>
+    /**
+     * Applies a timezone to the given date / moment object. You need to include moment-timezone.js in your project and load timezone data in order to use this filter. The following example displays
+     * the time in Israel's timezone:
+     */
+<span class="fc" id="L57">    amTimezone,</span>
+    /**
+     * Format dates using moment.js format() method. Example:
+     */
+<span class="fc" id="L61">    amDateeFormat,</span>
+    /**
+     * Format dates using moment.js calendar() method. Example:
+     *
+     * &amp;lt;span&amp;gt;{{message.time | amCalendar:referenceTime:formats}}&amp;lt;/span&amp;gt;
+     *
+     * This snippet will format the given time as e.g. &quot;Today 2:30 AM&quot; or &quot;Last Monday 2:30 AM&quot; etc..
+     */
+<span class="fc" id="L69">    amCalendar,</span>
+    /**
+     * Get the difference between two dates in milliseconds. Parameters are date, units and usePrecision. Date defaults to current date. Example:
+     *
+     * &amp;lt;span&amp;gt;Scheduled {{message.createdAt | amDifference : null : 'days' }} days from now&amp;lt;/span&amp;gt;
+     *
+     * This snippet will return the number of days between the current date and the date filtered.
+     */
+<span class="fc" id="L77">    amDifference,</span>
+    /**
+     * Formats a duration (such as 5 days) in a human readable format. See Moment.JS documentation for a list of supported duration formats, and humanize() documentation for explanation about the
+     * formatting algorithm.
+     *
+     * Example:
+     *
+     * &amp;lt;span&amp;gt;Message age: {{message.ageInMinutes | amDurationFormat : 'minute' }}&amp;lt;/span&amp;gt;
+     *
+     * Will display the age of the message (e.g. 10 minutes, 1 hour, 2 days, etc).
+     */
+<span class="fc" id="L88">    amDurationFormat,</span>
+    /**
+     * Subtract values (hours, minutes, seconds ...) from a specified date.
+     */
+<span class="fc" id="L92">    amSubtract,</span>
+    /**
+     * Add values (hours, minutes, seconds ...) to a specified date.
+     *
+     * See Moment.JS documentation for a list of supported duration formats.
+     *
+     * Example:
+     *
+     * &amp;lt;span&amp;gt;Start time: {{day.start | amAdd : '1' : 'hours' | amDateFormat : 'hh'}} : {{day.start | amAdd : '30' : 'minutes' | amDateFormat : 'mm'}}&amp;lt;/span&amp;gt;
+     *
+     */
+<span class="fc" id="L103">    amAdd,</span>
+    /**
+     * Mutates the original moment by setting it to the start of a unit(minute, hour, day..) of time.
+     */
+<span class="fc" id="L107">    amStartOf,</span>
+    /**
+     * Mutates the original moment by setting it to the end of a unit(minute, hour, day..) of time.
+     */
+<span class="fc" id="L111">    amEndOf;</span>
+
+    private MomentFilters()
+<span class="fc" id="L114">    {</span>
+
+<span class="fc" id="L116">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

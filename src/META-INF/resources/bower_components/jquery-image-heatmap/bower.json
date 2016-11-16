@@ -1,0 +1,24 @@
+{
+  "name": "jquery-image-heatmap",
+  "authors": [
+    "Marc Magon <marc.magon@gmail.com>"
+  ],
+  "description": "A variation on the ie8 compatible map hilight plugin with static click, drill down and custom per area options",
+  "main": "",
+  "keywords": [
+    "MapHilight",
+    "JWebswing",
+    "JQuery",
+    "Imagemap",
+    "Heatmap"
+  ],
+  "license": "MIT",
+  "homepage": "http://www.armineasy.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

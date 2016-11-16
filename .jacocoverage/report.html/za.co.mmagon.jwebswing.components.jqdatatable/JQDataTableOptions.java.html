@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQDataTableOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqdatatable</a> &gt; <span class="el_source">JQDataTableOptions.java</span></div><h1>JQDataTableOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqdatatable;
+
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
+
+/**
+ * The Options for the Data Table
+ * &lt;p&gt;
+ * @author GedMarc
+ * @since 09 May 2015
+ */
+public class JQDataTableOptions extends JavaScriptPart
+{
+
+    private static final long serialVersionUID = 1L;
+
+    public JQDataTableOptions()
+<span class="nc" id="L34">    {</span>
+
+<span class="nc" id="L36">    }</span>
+
+    /**
+     * the document object model layout
+     */
+    private String dom;
+
+    /**
+     * Add or modify data submitted to the server upon an Ajax request
+     */
+    private String ajax_data;
+
+    /**
+     * Data property or manipulation method for table data
+     */
+    private String ajax_dataSrc;
+
+    /**
+     * Load data for the table's content from an Ajax source
+     */
+    private String ajax;
+
+    /**
+     * Data to use as the display data for the table.
+     */
+    private String data;
+
+    /**
+     * Feature control DataTables' smart column width handling
+     */
+    private Boolean autoWidth;
+
+    /**
+     * Feature control deferred rendering for additional speed of initialization.
+     */
+    private Boolean deferRender;
+
+    /**
+     * Feature control table information display field
+     */
+    private Boolean info;
+
+    /**
+     * Use markup and classes for the table to be themed by jQuery UI ThemeRoller.
+     *
+     * @deprecated
+     */
+    private Boolean jQueryUI;
+
+    /**
+     * Feature control the end user's ability to change the paging display length of the table.
+     */
+    private Boolean lengthChange;
+
+    /**
+     * Feature control ordering (sorting) abilities in DataTables.
+     */
+    private Boolean ordering;
+
+    /**
+     * Enable or disable table pagination.
+     */
+    private Boolean paging;
+
+    /**
+     * Feature control the processing indicator.
+     */
+    private Boolean processing;
+
+    /**
+     * Horizontal scrolling
+     */
+    private Boolean scrollX;
+    /**
+     * Horizontal scrolling
+     */
+    private Integer scrollXNum;
+
+    /**
+     * Vertical scrolling
+     */
+    private Boolean scrollY;
+    /**
+     * Vertical scrolling
+     */
+    private Integer scrollYNum;
+
+    /**
+     * Feature control search (filtering) abilities
+     */
+    private Boolean searching;
+
+    /**
+     * Feature control DataTables' server-side processing mode.
+     */
+    private Boolean serverSide;
+
+    /**
+     * State saving - restore table state on page reload
+     */
+    private Boolean stateSave;
+
+    /**
+     * State saving - restore table state on page reload
+     */
+<span class="nc" id="L141">    private Boolean retrieve = true;</span>
+    private Boolean destroy;
+
+    public Boolean getAutoWidth()
+    {
+<span class="nc" id="L146">        return autoWidth;</span>
+    }
+
+    public void setAutoWidth(Boolean autoWidth)
+    {
+<span class="nc" id="L151">        this.autoWidth = autoWidth;</span>
+<span class="nc" id="L152">    }</span>
+
+    public Boolean getDeferRender()
+    {
+<span class="nc" id="L156">        return deferRender;</span>
+    }
+
+    public void setDeferRender(Boolean deferRender)
+    {
+<span class="nc" id="L161">        this.deferRender = deferRender;</span>
+<span class="nc" id="L162">    }</span>
+
+    public Boolean getInfo()
+    {
+<span class="nc" id="L166">        return info;</span>
+    }
+
+    public void setInfo(Boolean info)
+    {
+<span class="nc" id="L171">        this.info = info;</span>
+<span class="nc" id="L172">    }</span>
+
+    /**
+     * @deprecated
+     * @return
+     */
+    public Boolean getjQueryUI()
+    {
+<span class="nc" id="L180">        return jQueryUI;</span>
+    }
+
+    /**
+     * @deprecated
+     * @param jQueryUI
+     */
+    public void setjQueryUI(Boolean jQueryUI)
+    {
+<span class="nc" id="L189">        this.jQueryUI = jQueryUI;</span>
+<span class="nc" id="L190">    }</span>
+
+    public Boolean getLengthChange()
+    {
+<span class="nc" id="L194">        return lengthChange;</span>
+    }
+
+    public void setLengthChange(Boolean lengthChange)
+    {
+<span class="nc" id="L199">        this.lengthChange = lengthChange;</span>
+<span class="nc" id="L200">    }</span>
+
+    public Boolean getOrdering()
+    {
+<span class="nc" id="L204">        return ordering;</span>
+    }
+
+    public void setOrdering(Boolean ordering)
+    {
+<span class="nc" id="L209">        this.ordering = ordering;</span>
+<span class="nc" id="L210">    }</span>
+
+    public Boolean getPaging()
+    {
+<span class="nc" id="L214">        return paging;</span>
+    }
+
+    public void setPaging(Boolean paging)
+    {
+<span class="nc" id="L219">        this.paging = paging;</span>
+<span class="nc" id="L220">    }</span>
+
+    public Boolean getProcessing()
+    {
+<span class="nc" id="L224">        return processing;</span>
+    }
+
+    public void setProcessing(Boolean processing)
+    {
+<span class="nc" id="L229">        this.processing = processing;</span>
+<span class="nc" id="L230">    }</span>
+
+    public Boolean getScrollX()
+    {
+<span class="nc" id="L234">        return scrollX;</span>
+    }
+
+    public void setScrollX(Boolean scrollX)
+    {
+<span class="nc" id="L239">        this.scrollX = scrollX;</span>
+<span class="nc" id="L240">    }</span>
+
+    public Integer getScrollXNum()
+    {
+<span class="nc" id="L244">        return scrollXNum;</span>
+    }
+
+    public void setScrollXNum(Integer scrollXNum)
+    {
+<span class="nc" id="L249">        this.scrollXNum = scrollXNum;</span>
+<span class="nc" id="L250">    }</span>
+
+    public Boolean getScrollY()
+    {
+<span class="nc" id="L254">        return scrollY;</span>
+    }
+
+    public void setScrollY(Boolean scrollY)
+    {
+<span class="nc" id="L259">        this.scrollY = scrollY;</span>
+<span class="nc" id="L260">    }</span>
+
+    public Integer getScrollYNum()
+    {
+<span class="nc" id="L264">        return scrollYNum;</span>
+    }
+
+    public void setScrollYNum(Integer scrollYNum)
+    {
+<span class="nc" id="L269">        this.scrollYNum = scrollYNum;</span>
+<span class="nc" id="L270">    }</span>
+
+    public Boolean getSearching()
+    {
+<span class="nc" id="L274">        return searching;</span>
+    }
+
+    public void setSearching(Boolean searching)
+    {
+<span class="nc" id="L279">        this.searching = searching;</span>
+<span class="nc" id="L280">    }</span>
+
+    public Boolean getServerSide()
+    {
+<span class="nc" id="L284">        return serverSide;</span>
+    }
+
+    public void setServerSide(Boolean serverSide)
+    {
+<span class="nc" id="L289">        this.serverSide = serverSide;</span>
+<span class="nc" id="L290">    }</span>
+
+    public Boolean getStateSave()
+    {
+<span class="nc" id="L294">        return stateSave;</span>
+    }
+
+    public void setStateSave(Boolean stateSave)
+    {
+<span class="nc" id="L299">        this.stateSave = stateSave;</span>
+<span class="nc" id="L300">    }</span>
+
+    public String getAjax_data()
+    {
+<span class="nc" id="L304">        return ajax_data;</span>
+    }
+
+    public void setAjax_data(String ajax_data)
+    {
+<span class="nc" id="L309">        this.ajax_data = ajax_data;</span>
+<span class="nc" id="L310">    }</span>
+
+    public String getAjax_dataSrc()
+    {
+<span class="nc" id="L314">        return ajax_dataSrc;</span>
+    }
+
+    public void setAjax_dataSrc(String ajax_dataSrc)
+    {
+<span class="nc" id="L319">        this.ajax_dataSrc = ajax_dataSrc;</span>
+<span class="nc" id="L320">    }</span>
+
+    public String getAjax()
+    {
+<span class="nc" id="L324">        return ajax;</span>
+    }
+
+    public void setAjax(String ajax)
+    {
+<span class="nc" id="L329">        this.ajax = ajax;</span>
+<span class="nc" id="L330">    }</span>
+
+    public String getData()
+    {
+<span class="nc" id="L334">        return data;</span>
+    }
+
+    public void setData(String data)
+    {
+<span class="nc" id="L339">        this.data = data;</span>
+<span class="nc" id="L340">    }</span>
+
+    @Override
+    public JavascriptPartType getJavascriptType()
+    {
+<span class="nc" id="L345">        return JavascriptPartType.Javascript;</span>
+    }
+
+    public Boolean getRetrieve()
+    {
+<span class="nc" id="L350">        return retrieve;</span>
+    }
+
+    public void setRetrieve(Boolean retrieve)
+    {
+<span class="nc" id="L355">        this.retrieve = retrieve;</span>
+<span class="nc" id="L356">    }</span>
+
+    public Boolean getDestroy()
+    {
+<span class="nc" id="L360">        return destroy;</span>
+    }
+
+    public void setDestroy(Boolean destroy)
+    {
+<span class="nc" id="L365">        this.destroy = destroy;</span>
+<span class="nc" id="L366">    }</span>
+
+    /**
+     *
+     * &lt;p&gt;
+     * As is described by the basic DOM positioning example you can use the dom initialisation parameter to move DataTables features around the table to where you want them.
+     * &lt;p&gt;
+     * In addition to this, you can also use dom to create multiple instances of these table controls. Simply include the feature's identification letter where you want it to appear, as many times as
+     * you wish, and the controls will all sync up (note that obviously the table (t) should be included only once).
+     * &lt;p&gt;
+     * This is shown in the demo below where for four key build-in features are duplicated above and below the table.
+     *
+     * @return
+     */
+    public String getDom()
+    {
+<span class="nc" id="L382">        return dom;</span>
+    }
+
+    /**
+     *
+     * &lt;p&gt;
+     * As is described by the basic DOM positioning example you can use the dom initialisation parameter to move DataTables features around the table to where you want them.
+     * &lt;p&gt;
+     * In addition to this, you can also use dom to create multiple instances of these table controls. Simply include the feature's identification letter where you want it to appear, as many times as
+     * you wish, and the controls will all sync up (note that obviously the table (t) should be included only once).
+     * &lt;p&gt;
+     * This is shown in the demo below where for four key build-in features are duplicated above and below the table.
+     *
+     * @param dom
+     */
+    public void setDom(String dom)
+    {
+<span class="nc" id="L399">        this.dom = dom;</span>
+<span class="nc" id="L400">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

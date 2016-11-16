@@ -1,0 +1,54 @@
+/* 
+    Document   : DefaultThemeNoMarginsBorders
+    Created on : 14 Jan 2013, 7:31:43 PM
+    Author     : MMagon
+    Description: Removes all borders margins and cell spacing
+*/
+/*
+*
+{
+    border-bottom-width:0px;
+    border-left-width:0px;
+    border-right-width:0px;
+    border-top-width:0px; 
+    margin-bottom:0px;
+    margin-left:0px;
+    margin-right:0px;
+    margin-top:0px;
+    outline-width:0px;
+    padding-bottom:0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+
+hr
+{
+    border-bottom-width:1px;
+}
+*/
+
+.vertical270deg{
+    writing-mode:vertical-lr;
+    -webkit-transform:rotate(270deg);
+    -moz-transform:rotate(270deg);
+    -o-transform: rotate(270deg);
+    white-space:nowrap;
+    display:block;
+    bottom:0;
+    width:100%;
+    height:auto;
+}
+
+.vertical90deg{
+    writing-mode:vertical-rl;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -o-transform: rotate(90deg); 
+    white-space:nowrap;
+    display:block;
+    bottom:0; 
+    width:100%;
+    height:auto;
+}
+ 

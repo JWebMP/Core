@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>StdRandom.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.utilities.dualquickpivot</a> &gt; <span class="el_source">StdRandom.java</span></div><h1>StdRandom.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package za.co.mmagon.jwebswing.utilities.dualquickpivot;
+
+/**
+ * ****************************************************************************
+ * Compilation: javac StdRandom.java
+ * Execution: java StdRandom
+ * Dependencies: StdOut.java
+ * &lt;p&gt;
+ * A library of static methods to generate pseudo-random numbers from
+ * different distributions (bernoulli, uniform, gaussian, discrete,
+ * and exponential). Also includes a method for shuffling an array.
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * % java StdRandom 5
+ * seed = 1316600602069
+ * 59 16.81826 true 8.83954 0
+ * 32 91.32098 true 9.11026 0
+ * 35 10.11874 true 8.95396 3
+ * 92 32.88401 true 8.87089 0
+ * 72 92.55791 true 9.46241 0
+ * &lt;p&gt;
+ * % java StdRandom 5
+ * seed = 1316600616575
+ * 96 60.17070 true 8.72821 0
+ * 79 32.01607 true 8.58159 0
+ * 81 59.49065 true 9.10423 1
+ * 96 51.65818 true 9.02102 0
+ * 99 17.55771 true 8.99762 0
+ * &lt;p&gt;
+ * % java StdRandom 5 1316600616575
+ * seed = 1316600616575
+ * 96 60.17070 true 8.72821 0
+ * 79 32.01607 true 8.58159 0
+ * 81 59.49065 true 9.10423 1
+ * 96 51.65818 true 9.02102 0
+ * 99 17.55771 true 8.99762 0
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * Remark
+ * ------
+ * - Relies on randomness of nextDouble() method in java.util.Random
+ * to generate pseudorandom numbers in [0, 1).
+ * &lt;p&gt;
+ * - This library allows you to set and get the pseudorandom number seed.
+ * &lt;p&gt;
+ * - See http://www.honeylocust.com/RngPack/ for an industrial
+ * strength random number generator in Java.
+ * &lt;p&gt;
+ *****************************************************************************
+ */
+import java.util.Random;
+
+/**
+ * The {@code StdRandom} class provides static methods for generating
+ * random number from various discrete and continuous distributions,
+ * including Bernoulli, uniform, Gaussian, exponential, pareto,
+ * Poisson, and Cauchy. It also provides method for shuffling an
+ * array or subarray.
+ * &amp;lt;p&amp;gt;
+ * For additional documentation,
+ * see &amp;lt;a href=&quot;http://introcs.cs.princeton.edu/22library&quot;&amp;gt;Section 2.2&amp;lt;/a&amp;gt; of
+ * &amp;lt;i&amp;gt;Introduction to Programming in Java: An Interdisciplinary Approach&amp;lt;/i&amp;gt;
+ * by Robert Sedgewick and Kevin Wayne.
+ *
+ * @author Robert Sedgewick
+ * @author Kevin Wayne
+ */
+<span class="nc bnc" id="L73" title="All 2 branches missed.">public final class StdRandom</span>
+{
+
+    private static Random random;    // pseudo-random number generator
+    private static long seed;        // pseudo-random number generator seed
+
+    // static initializer
+    static
+    {
+        // this is how the seed was set in Java 1.4
+<span class="nc" id="L83">        seed = System.currentTimeMillis();</span>
+<span class="nc" id="L84">        random = new Random(seed);</span>
+<span class="nc" id="L85">    }</span>
+
+    // don't instantiate
+    private StdRandom()
+<span class="nc" id="L89">    {</span>
+<span class="nc" id="L90">    }</span>
+
+    /**
+     * Sets the seed of the pseudorandom number generator.
+     * This method enables you to produce the same sequence of &quot;random&quot;
+     * number for each execution of the program.
+     * Ordinarily, you should call this method at most once per program.
+     *
+     * @param s the seed
+     */
+    public static void setSeed(long s)
+    {
+<span class="nc" id="L102">        seed = s;</span>
+<span class="nc" id="L103">        random = new Random(seed);</span>
+<span class="nc" id="L104">    }</span>
+
+    /**
+     * Returns the seed of the pseudorandom number generator.
+     *
+     * @return the seed
+     */
+    public static long getSeed()
+    {
+<span class="nc" id="L113">        return seed;</span>
+    }
+
+    /**
+     * Returns a random real number uniformly in [0, 1).
+     *
+     * @return a random real number uniformly in [0, 1)
+     */
+    public static double uniform()
+    {
+<span class="nc" id="L123">        return random.nextDouble();</span>
+    }
+
+    /**
+     * Returns a random integer uniformly in [0, n).
+     *
+     * @param n number of possible integers
+     * @return a random integer uniformly between 0 (inclusive) and &amp;lt;tt&amp;gt;N&amp;lt;/tt&amp;gt; (exclusive)
+     *
+     * @throws IllegalArgumentException if &amp;lt;tt&amp;gt;n &amp;lt;= 0&amp;lt;/tt&amp;gt;
+     */
+    public static int uniform(int n)
+    {
+<span class="nc bnc" id="L136" title="All 2 branches missed.">        if (n &lt;= 0)</span>
+        {
+<span class="nc" id="L138">            throw new IllegalArgumentException(&quot;Parameter N must be positive&quot;);</span>
+        }
+<span class="nc" id="L140">        return random.nextInt(n);</span>
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    //  STATIC METHODS BELOW RELY ON JAVA.UTIL.RANDOM ONLY INDIRECTLY VIA
+    //  THE STATIC METHODS ABOVE.
+    ///////////////////////////////////////////////////////////////////////////
+    /**
+     * Returns a random real number uniformly in [0, 1).
+     *
+     * @return a random real number uniformly in [0, 1)
+     *
+     * @deprecated Replaced by {@link #uniform()}.
+     */
+    public static double random()
+    {
+<span class="nc" id="L156">        return uniform();</span>
+    }
+
+    /**
+     * Returns a random integer uniformly in [a, b).
+     *
+     * @param a the left endpoint
+     * @param b the right endpoint
+     * @return a random integer uniformly in [a, b)
+     *
+     * @throws IllegalArgumentException if &amp;gt;tt&amp;gt;b &amp;gt;= a&amp;gt;/tt&amp;gt;
+     * @throws IllegalArgumentException if &amp;gt;tt&amp;gt;b - a &amp;gt;= Integer.MAX_VALUE&amp;gt;/tt&amp;gt;
+     */
+    public static int uniform(int a, int b)
+    {
+<span class="nc bnc" id="L171" title="All 2 branches missed.">        if (b &lt;= a)</span>
+        {
+<span class="nc" id="L173">            throw new IllegalArgumentException(&quot;Invalid range&quot;);</span>
+        }
+<span class="nc bnc" id="L175" title="All 2 branches missed.">        if ((long) b - a &gt;= Integer.MAX_VALUE)</span>
+        {
+<span class="nc" id="L177">            throw new IllegalArgumentException(&quot;Invalid range&quot;);</span>
+        }
+<span class="nc" id="L179">        return a + uniform(b - a);</span>
+    }
+
+    /**
+     * Returns a random real number uniformly in [a, b).
+     *
+     * @param a the left endpoint
+     * @param b the right endpoint
+     * @return a random real number uniformly in [a, b)
+     *
+     * @throws IllegalArgumentException unless &amp;lt;tt&amp;gt;a &amp;lt; b&amp;lt;/tt&amp;gt;
+     */
+    public static double uniform(double a, double b)
+    {
+<span class="nc bnc" id="L193" title="All 2 branches missed.">        if (!(a &lt; b))</span>
+        {
+<span class="nc" id="L195">            throw new IllegalArgumentException(&quot;Invalid range&quot;);</span>
+        }
+<span class="nc" id="L197">        return a + uniform() * (b - a);</span>
+    }
+
+    /**
+     * Returns a random boolean from a Bernoulli distribution with success
+     * probability &amp;lt;em&amp;gt;p&amp;lt;/em&amp;gt;.
+     *
+     * @param p the probability of returning &amp;lt;tt&amp;gt;true&amp;lt;/tt&amp;gt;
+     * @return &amp;lt;tt&amp;gt;true&amp;lt;/tt&amp;gt; with probability &amp;lt;tt&amp;gt;p&amp;lt;/tt&amp;gt; and
+     *         &amp;lt;tt&amp;gt;false&amp;lt;/tt&amp;gt; with probability &amp;lt;tt&amp;gt;p&amp;lt;/tt&amp;gt;
+     *
+     * @throws IllegalArgumentException unless &amp;lt;tt&amp;gt;p &amp;gt;= 0.0&amp;lt;/tt&amp;gt; and &amp;lt;tt&amp;gt;p &amp;lt;= 1.0&amp;lt;/tt&amp;gt;
+     */
+    public static boolean bernoulli(double p)
+    {
+<span class="nc bnc" id="L212" title="All 4 branches missed.">        if (!(p &gt;= 0.0 &amp;&amp; p &lt;= 1.0))</span>
+        {
+<span class="nc" id="L214">            throw new IllegalArgumentException(&quot; Probability must be between 0.0 and 1.0&quot;);</span>
+        }
+<span class="nc bnc" id="L216" title="All 2 branches missed.">        return uniform() &lt; p;</span>
+    }
+
+    /**
+     * Returns a random boolean from a Bernoulli distribution with success
+     * probability 1/2.
+     *
+     * @return &amp;lt;tt&amp;gt;true&amp;lt;/tt&amp;gt; with probability 1/2 and
+     *         &amp;lt;tt&amp;gt;false&amp;lt;/tt&amp;gt; with probability 1/2
+     */
+    public static boolean bernoulli()
+    {
+<span class="nc" id="L228">        return bernoulli(0.5);</span>
+    }
+
+    /**
+     * Returns a random real number from a standard Gaussian distribution.
+     *
+     * @return a random real number from a standard Gaussian distribution
+     *         (mean 0 and standard deviation 1).
+     */
+    public static double gaussian()
+    {
+        // use the polar form of the Box-Muller transform
+        double r, x, y;
+        do
+        {
+<span class="nc" id="L243">            x = uniform(-1.0, 1.0);</span>
+<span class="nc" id="L244">            y = uniform(-1.0, 1.0);</span>
+<span class="nc" id="L245">            r = x * x + y * y;</span>
+<span class="nc bnc" id="L246" title="All 4 branches missed.">        } while (r &gt;= 1.0 || r == 0.0);</span>
+<span class="nc" id="L247">        return x * Math.sqrt(-2 * Math.log(r) / r);</span>
+
+        // Remark:  y * Math.sqrt(-2 * Math.log(r) / r)
+        // is an independent random gaussian
+    }
+
+    /**
+     * Returns a random real number from a Gaussian distribution with mean &amp;mu;
+     * and standard deviation &amp;sigma;.
+     *
+     * @param mu    the mean
+     * @param sigma the standard deviation
+     * @return a real number distributed according to the Gaussian distribution
+     *         with mean &amp;lt;tt&amp;gt;mu&amp;lt;/tt&amp;gt; and standard deviation &amp;lt;tt&amp;gt;sigma&amp;lt;/tt&amp;gt;
+     */
+    public static double gaussian(double mu, double sigma)
+    {
+<span class="nc" id="L264">        return mu + sigma * gaussian();</span>
+    }
+
+    /**
+     * Returns a random integer from a geometric distribution with success
+     * probability &amp;lt;em&amp;lt;p&amp;lt;/em&amp;lt;.
+     *
+     * @param p the parameter of the geometric distribution
+     * @return a random integer from a geometric distribution with success
+     *         probability &amp;lt;tt&amp;lt;p&amp;lt;/tt&amp;lt;
+     *
+     * @throws IllegalArgumentException unless &amp;lt;tt&amp;lt;p &amp;lt;= 0.0&amp;lt;/tt&amp;lt; and &amp;lt;tt&amp;lt;p &amp;lt;= 1.0&amp;lt;/tt&amp;lt;
+     */
+    public static int geometric(double p)
+    {
+<span class="nc bnc" id="L279" title="All 4 branches missed.">        if (!(p &gt;= 0.0 &amp;&amp; p &lt;= 1.0))</span>
+        {
+<span class="nc" id="L281">            throw new IllegalArgumentException(&quot;Probability must be between 0.0 and 1.0&quot;);</span>
+        }
+        // using algorithm given by Knuth
+<span class="nc" id="L284">        return (int) Math.ceil(Math.log(uniform()) / Math.log(1.0 - p));</span>
+    }
+
+    /**
+     * Returns a random integer from a Poisson distribution with mean &amp;lambda;.
+     *
+     * @param lambda the mean of the Poisson distribution
+     * @return a random integer from a Poisson distribution with mean &amp;lt;tt&amp;gt;lambda&amp;lt;/tt&amp;gt;
+     *
+     * @throws IllegalArgumentException unless &amp;lt;tt&amp;gt;lambda &amp;gt; 0.0&amp;lt;/tt&amp;gt; and not infinite
+     */
+    public static int poisson(double lambda)
+    {
+<span class="nc bnc" id="L297" title="All 2 branches missed.">        if (!(lambda &gt; 0.0))</span>
+        {
+<span class="nc" id="L299">            throw new IllegalArgumentException(&quot;Parameter lambda must be positive&quot;);</span>
+        }
+<span class="nc bnc" id="L301" title="All 2 branches missed.">        if (Double.isInfinite(lambda))</span>
+        {
+<span class="nc" id="L303">            throw new IllegalArgumentException(&quot;Parameter lambda must not be infinite&quot;);</span>
+        }
+        // using algorithm given by Knuth
+        // see http://en.wikipedia.org/wiki/Poisson_distribution
+<span class="nc" id="L307">        int k = 0;</span>
+<span class="nc" id="L308">        double p = 1.0;</span>
+<span class="nc" id="L309">        double L = Math.exp(-lambda);</span>
+        do
+        {
+<span class="nc" id="L312">            k++;</span>
+<span class="nc" id="L313">            p *= uniform();</span>
+<span class="nc bnc" id="L314" title="All 2 branches missed.">        } while (p &gt;= L);</span>
+<span class="nc" id="L315">        return k - 1;</span>
+    }
+
+    /**
+     * Returns a random real number from the standard Pareto distribution.
+     *
+     * @return a random real number from the standard Pareto distribution
+     */
+    public static double pareto()
+    {
+<span class="nc" id="L325">        return pareto(1.0);</span>
+    }
+
+    /**
+     * Returns a random real number from a Pareto distribution with
+     * shape parameter &amp;alpha;.
+     *
+     * @param alpha shape parameter
+     * @return a random real number from a Pareto distribution with shape
+     *         parameter &amp;lt;tt&amp;gt;alpha&amp;lt;/tt&amp;gt;
+     *
+     * @throws IllegalArgumentException unless &amp;lt;tt&amp;gt;alpha &amp;gt; 0.0&amp;lt;/tt&amp;gt;
+     */
+    public static double pareto(double alpha)
+    {
+<span class="nc bnc" id="L340" title="All 2 branches missed.">        if (!(alpha &gt; 0.0))</span>
+        {
+<span class="nc" id="L342">            throw new IllegalArgumentException(&quot;Shape parameter alpha must be positive&quot;);</span>
+        }
+<span class="nc" id="L344">        return Math.pow(1 - uniform(), -1.0 / alpha) - 1.0;</span>
+    }
+
+    /**
+     * Returns a random real number from the Cauchy distribution.
+     *
+     * @return a random real number from the Cauchy distribution.
+     */
+    public static double cauchy()
+    {
+<span class="nc" id="L354">        return Math.tan(Math.PI * (uniform() - 0.5));</span>
+    }
+
+    /**
+     * Returns a random integer from the specified discrete distribution.
+     *
+     * @param probabilities the probability of occurrence of each integer
+     * @return a random integer from a discrete distribution:
+     *         &amp;lt;tt&amp;gt;i&amp;lt;/tt&amp;gt; with probability &amp;lt;tt&amp;gt;probabilities[i]&amp;lt;/tt&amp;gt;
+     *
+     * @throws NullPointerException     if &amp;lt;tt&amp;gt;probabilities&amp;lt;/tt&amp;gt; is &amp;lt;tt&amp;gt;null&amp;lt;/tt&amp;gt;
+     * @throws IllegalArgumentException if sum of array entries is not (very nearly) equal to &amp;lt;tt&amp;gt;1.0&amp;lt;/tt&amp;gt;
+     * @throws IllegalArgumentException unless &amp;lt;tt&amp;gt;probabilities[i] &amp;gt;= 0.0&amp;lt;/tt&amp;gt; for each index &amp;lt;tt&amp;gt;i&amp;lt;/tt&amp;gt;
+     */
+    public static int discrete(double[] probabilities)
+    {
+<span class="nc bnc" id="L370" title="All 2 branches missed.">        if (probabilities == null)</span>
+        {
+<span class="nc" id="L372">            throw new NullPointerException(&quot;argument array is null&quot;);</span>
+        }
+<span class="nc" id="L374">        double EPSILON = 1E-14;</span>
+<span class="nc" id="L375">        double sum = 0.0;</span>
+<span class="nc bnc" id="L376" title="All 2 branches missed.">        for (int i = 0; i &lt; probabilities.length; i++)</span>
+        {
+<span class="nc bnc" id="L378" title="All 2 branches missed.">            if (!(probabilities[i] &gt;= 0.0))</span>
+            {
+<span class="nc" id="L380">                throw new IllegalArgumentException(&quot;array entry &quot; + i + &quot; must be nonnegative: &quot; + probabilities[i]);</span>
+            }
+<span class="nc" id="L382">            sum += probabilities[i];</span>
+        }
+<span class="nc bnc" id="L384" title="All 4 branches missed.">        if (sum &gt; 1.0 + EPSILON || sum &lt; 1.0 - EPSILON)</span>
+        {
+<span class="nc" id="L386">            throw new IllegalArgumentException(&quot;sum of array entries does not approximately equal 1.0: &quot; + sum);</span>
+        }
+
+        // the for loop may not return a value when both r is (nearly) 1.0 and when the
+        // cumulative sum is less than 1.0 (as a result of floating-point roundoff error)
+        while (true)
+        {
+<span class="nc" id="L393">            double r = uniform();</span>
+<span class="nc" id="L394">            sum = 0.0;</span>
+<span class="nc bnc" id="L395" title="All 2 branches missed.">            for (int i = 0; i &lt; probabilities.length; i++)</span>
+            {
+<span class="nc" id="L397">                sum = sum + probabilities[i];</span>
+<span class="nc bnc" id="L398" title="All 2 branches missed.">                if (sum &gt; r)</span>
+                {
+<span class="nc" id="L400">                    return i;</span>
+                }
+            }
+<span class="nc" id="L403">        }</span>
+    }
+
+    /**
+     * Returns a random integer from the specified discrete distribution.
+     *
+     * @param frequencies the frequency of occurrence of each integer
+     * @return a random integer from a discrete distribution:
+     *         &amp;lt;tt&amp;gt;i&amp;lt;/tt&amp;gt; with probability proportional to &amp;lt;tt&amp;gt;frequencies[i]&amp;lt;/tt&amp;gt;
+     *
+     * @throws NullPointerException     if &amp;lt;tt&amp;gt;frequencies&amp;lt;/tt&amp;gt; is &amp;lt;tt&amp;gt;null&amp;lt;/tt&amp;gt;
+     * @throws IllegalArgumentException if all array entries are &amp;lt;tt&amp;gt;0&amp;lt;/tt&amp;gt;
+     * @throws IllegalArgumentException if &amp;lt;tt&amp;gt;frequencies[i]&amp;lt;/tt&amp;gt; is negative for any index &amp;lt;tt&amp;gt;i&amp;lt;/tt&amp;gt;
+     * @throws IllegalArgumentException if sum of frequencies exceeds &amp;lt;tt&amp;gt;Integer.MAX_VALUE&amp;lt;/tt&amp;gt; (2&amp;lt;sup&amp;gt;31&amp;lt;/sup&amp;gt; - 1)
+     */
+    public static int discrete(int[] frequencies)
+    {
+<span class="nc bnc" id="L420" title="All 2 branches missed.">        if (frequencies == null)</span>
+        {
+<span class="nc" id="L422">            throw new NullPointerException(&quot;argument array is null&quot;);</span>
+        }
+<span class="nc" id="L424">        long sum = 0;</span>
+<span class="nc bnc" id="L425" title="All 2 branches missed.">        for (int i = 0; i &lt; frequencies.length; i++)</span>
+        {
+<span class="nc bnc" id="L427" title="All 2 branches missed.">            if (frequencies[i] &lt; 0)</span>
+            {
+<span class="nc" id="L429">                throw new IllegalArgumentException(&quot;array entry &quot; + i + &quot; must be nonnegative: &quot; + frequencies[i]);</span>
+            }
+<span class="nc" id="L431">            sum += frequencies[i];</span>
+        }
+<span class="nc bnc" id="L433" title="All 2 branches missed.">        if (sum == 0)</span>
+        {
+<span class="nc" id="L435">            throw new IllegalArgumentException(&quot;at least one array entry must be positive&quot;);</span>
+        }
+<span class="nc bnc" id="L437" title="All 2 branches missed.">        if (sum &gt;= Integer.MAX_VALUE)</span>
+        {
+<span class="nc" id="L439">            throw new IllegalArgumentException(&quot;sum of frequencies overflows an int&quot;);</span>
+        }
+
+        // pick index i with probabilitity proportional to frequency
+<span class="nc" id="L443">        double r = uniform((int) sum);</span>
+<span class="nc" id="L444">        sum = 0;</span>
+<span class="nc bnc" id="L445" title="All 2 branches missed.">        for (int i = 0; i &lt; frequencies.length; i++)</span>
+        {
+<span class="nc" id="L447">            sum += frequencies[i];</span>
+<span class="nc bnc" id="L448" title="All 2 branches missed.">            if (sum &gt; r)</span>
+            {
+<span class="nc" id="L450">                return i;</span>
+            }
+        }
+
+        // can't reach here
+<span class="nc bnc" id="L455" title="All 2 branches missed.">        assert false;</span>
+<span class="nc" id="L456">        return -1;</span>
+    }
+
+    /**
+     * Returns a random real number from an exponential distribution
+     * with rate &amp;lambda;.
+     *
+     * @param lambda the rate of the exponential distribution
+     * @return a random real number from an exponential distribution with
+     *         rate &amp;lt;tt&amp;gt;lambda&amp;lt;/tt&amp;gt;
+     *
+     * @throws IllegalArgumentException unless &amp;lt;tt&amp;gt;lambda &amp;gt; 0.0&amp;lt;/tt&amp;gt;
+     */
+    public static double exp(double lambda)
+    {
+<span class="nc bnc" id="L471" title="All 2 branches missed.">        if (!(lambda &gt; 0.0))</span>
+        {
+<span class="nc" id="L473">            throw new IllegalArgumentException(&quot;Rate lambda must be positive&quot;);</span>
+        }
+<span class="nc" id="L475">        return -Math.log(1 - uniform()) / lambda;</span>
+    }
+
+    /**
+     * Rearranges the elements of the specified array in uniformly random order.
+     *
+     * @param a the array to shuffle
+     * @throws NullPointerException if &amp;lt;tt&amp;gt;a&amp;lt;/tt&amp;gt; is &amp;lt;tt&amp;gt;null&amp;lt;/tt&amp;gt;
+     */
+    public static void shuffle(Object[] a)
+    {
+<span class="nc bnc" id="L486" title="All 2 branches missed.">        if (a == null)</span>
+        {
+<span class="nc" id="L488">            throw new NullPointerException(&quot;argument array is null&quot;);</span>
+        }
+<span class="nc" id="L490">        int n = a.length;</span>
+<span class="nc bnc" id="L491" title="All 2 branches missed.">        for (int i = 0; i &lt; n; i++)</span>
+        {
+<span class="nc" id="L493">            int r = i + uniform(n - i);     // between i and n-1</span>
+<span class="nc" id="L494">            Object temp = a[i];</span>
+<span class="nc" id="L495">            a[i] = a[r];</span>
+<span class="nc" id="L496">            a[r] = temp;</span>
+        }
+<span class="nc" id="L498">    }</span>
+
+    /**
+     * Rearranges the elements of the specified array in uniformly random order.
+     *
+     * @param a the array to shuffle
+     * @throws NullPointerException if &amp;lt;tt&amp;gt;a&amp;lt;/tt&amp;gt; is &amp;lt;tt&amp;gt;null&amp;lt;/tt&amp;gt;
+     */
+    public static void shuffle(double[] a)
+    {
+<span class="nc bnc" id="L508" title="All 2 branches missed.">        if (a == null)</span>
+        {
+<span class="nc" id="L510">            throw new NullPointerException(&quot;argument array is null&quot;);</span>
+        }
+<span class="nc" id="L512">        int n = a.length;</span>
+<span class="nc bnc" id="L513" title="All 2 branches missed.">        for (int i = 0; i &lt; n; i++)</span>
+        {
+<span class="nc" id="L515">            int r = i + uniform(n - i);     // between i and n-1</span>
+<span class="nc" id="L516">            double temp = a[i];</span>
+<span class="nc" id="L517">            a[i] = a[r];</span>
+<span class="nc" id="L518">            a[r] = temp;</span>
+        }
+<span class="nc" id="L520">    }</span>
+
+    /**
+     * Rearranges the elements of the specified array in uniformly random order.
+     *
+     * @param a the array to shuffle
+     * @throws NullPointerException if &amp;lt;tt&amp;gt;a&amp;lt;/tt&amp;gt; is &amp;lt;tt&amp;gt;null&amp;lt;/tt&amp;gt;
+     */
+    public static void shuffle(int[] a)
+    {
+<span class="nc bnc" id="L530" title="All 2 branches missed.">        if (a == null)</span>
+        {
+<span class="nc" id="L532">            throw new NullPointerException(&quot;argument array is null&quot;);</span>
+        }
+<span class="nc" id="L534">        int n = a.length;</span>
+<span class="nc bnc" id="L535" title="All 2 branches missed.">        for (int i = 0; i &lt; n; i++)</span>
+        {
+<span class="nc" id="L537">            int r = i + uniform(n - i);     // between i and n-1</span>
+<span class="nc" id="L538">            int temp = a[i];</span>
+<span class="nc" id="L539">            a[i] = a[r];</span>
+<span class="nc" id="L540">            a[r] = temp;</span>
+        }
+<span class="nc" id="L542">    }</span>
+
+    /**
+     * Rearranges the elements of the specified subarray in uniformly random order.
+     *
+     * @param a  the array to shuffle
+     * @param lo the left endpoint (inclusive)
+     * @param hi the right endpoint (inclusive)
+     * @throws NullPointerException      if &amp;lt;tt&amp;gt;a&amp;lt;/tt&amp;gt; is &amp;lt;tt&amp;gt;null&amp;lt;/tt&amp;gt;
+     * @throws IndexOutOfBoundsException unless &amp;lt;tt&amp;gt;(0 &amp;lt;= lo) &amp;amp;&amp;amp; (lo &amp;lt;= hi) &amp;amp;&amp;amp; (hi &amp;lt; a.length)&amp;lt;/tt&amp;gt;
+     *
+     */
+    public static void shuffle(Object[] a, int lo, int hi)
+    {
+<span class="nc bnc" id="L556" title="All 2 branches missed.">        if (a == null)</span>
+        {
+<span class="nc" id="L558">            throw new NullPointerException(&quot;argument array is null&quot;);</span>
+        }
+<span class="nc bnc" id="L560" title="All 6 branches missed.">        if (lo &lt; 0 || lo &gt; hi || hi &gt;= a.length)</span>
+        {
+<span class="nc" id="L562">            throw new IndexOutOfBoundsException(&quot;Illegal subarray range&quot;);</span>
+        }
+<span class="nc bnc" id="L564" title="All 2 branches missed.">        for (int i = lo; i &lt;= hi; i++)</span>
+        {
+<span class="nc" id="L566">            int r = i + uniform(hi - i + 1);     // between i and hi</span>
+<span class="nc" id="L567">            Object temp = a[i];</span>
+<span class="nc" id="L568">            a[i] = a[r];</span>
+<span class="nc" id="L569">            a[r] = temp;</span>
+        }
+<span class="nc" id="L571">    }</span>
+
+    /**
+     * Rearranges the elements of the specified subarray in uniformly random order.
+     *
+     * @param a  the array to shuffle
+     * @param lo the left endpoint (inclusive)
+     * @param hi the right endpoint (inclusive)
+     * @throws NullPointerException      if &amp;lt;tt&amp;gt;a&amp;lt;/tt&amp;gt; is &amp;lt;tt&amp;gt;null&amp;lt;/tt&amp;gt;
+     * @throws IndexOutOfBoundsException unless &amp;lt;tt&amp;gt;(0 &amp;lt;= lo) &amp;amp;&amp;amp; (lo &amp;lt;= hi) &amp;amp;&amp;amp; (hi &amp;lt; a.length)&amp;lt;/tt&amp;gt;
+     */
+    public static void shuffle(double[] a, int lo, int hi)
+    {
+<span class="nc bnc" id="L584" title="All 2 branches missed.">        if (a == null)</span>
+        {
+<span class="nc" id="L586">            throw new NullPointerException(&quot;argument array is null&quot;);</span>
+        }
+<span class="nc bnc" id="L588" title="All 6 branches missed.">        if (lo &lt; 0 || lo &gt; hi || hi &gt;= a.length)</span>
+        {
+<span class="nc" id="L590">            throw new IndexOutOfBoundsException(&quot;Illegal subarray range&quot;);</span>
+        }
+<span class="nc bnc" id="L592" title="All 2 branches missed.">        for (int i = lo; i &lt;= hi; i++)</span>
+        {
+<span class="nc" id="L594">            int r = i + uniform(hi - i + 1);     // between i and hi</span>
+<span class="nc" id="L595">            double temp = a[i];</span>
+<span class="nc" id="L596">            a[i] = a[r];</span>
+<span class="nc" id="L597">            a[r] = temp;</span>
+        }
+<span class="nc" id="L599">    }</span>
+
+    /**
+     * Rearranges the elements of the specified subarray in uniformly random order.
+     *
+     * @param a  the array to shuffle
+     * @param lo the left endpoint (inclusive)
+     * @param hi the right endpoint (inclusive)
+     * @throws NullPointerException      if &amp;lt;tt&amp;gt;a&amp;lt;/tt&amp;gt; is &amp;lt;tt&amp;gt;null&amp;lt;/tt&amp;gt;
+     * @throws IndexOutOfBoundsException unless &amp;lt;tt&amp;gt;(0 &amp;lt;= lo) &amp;amp;&amp;amp; (lo &amp;lt;= hi) &amp;amp;&amp;amp; (hi &amp;lt; a.length)&amp;lt;/tt&amp;gt;
+     */
+    public static void shuffle(int[] a, int lo, int hi)
+    {
+<span class="nc bnc" id="L612" title="All 2 branches missed.">        if (a == null)</span>
+        {
+<span class="nc" id="L614">            throw new NullPointerException(&quot;argument array is null&quot;);</span>
+        }
+<span class="nc bnc" id="L616" title="All 6 branches missed.">        if (lo &lt; 0 || lo &gt; hi || hi &gt;= a.length)</span>
+        {
+<span class="nc" id="L618">            throw new IndexOutOfBoundsException(&quot;Illegal subarray range&quot;);</span>
+        }
+<span class="nc bnc" id="L620" title="All 2 branches missed.">        for (int i = lo; i &lt;= hi; i++)</span>
+        {
+<span class="nc" id="L622">            int r = i + uniform(hi - i + 1);     // between i and hi</span>
+<span class="nc" id="L623">            int temp = a[i];</span>
+<span class="nc" id="L624">            a[i] = a[r];</span>
+<span class="nc" id="L625">            a[r] = temp;</span>
+        }
+<span class="nc" id="L627">    }</span>
+
+    /**
+     * Unit test.
+     * @param args Args 1 = random, 2 = seed
+     */
+    public static void main(String[] args)
+    {
+<span class="nc" id="L635">        int n = Integer.parseInt(args[0]);</span>
+<span class="nc bnc" id="L636" title="All 2 branches missed.">        if (args.length == 2)</span>
+        {
+<span class="nc" id="L638">            StdRandom.setSeed(Long.parseLong(args[1]));</span>
+        }
+<span class="nc" id="L640">        double[] probabilities =</span>
+        {
+            0.5, 0.3, 0.1, 0.1
+        };
+<span class="nc" id="L644">        int[] frequencies =</span>
+        {
+            5, 3, 1, 1
+        };
+<span class="nc" id="L648">        String[] a = &quot;A B C D E F G&quot;.split(&quot; &quot;);</span>
+<span class="nc" id="L649">        System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L650">        System.out.println(&quot;seed = &quot; + StdRandom.getSeed());</span>
+<span class="nc bnc" id="L651" title="All 2 branches missed.">        for (int i = 0; i &lt; n; i++)</span>
+        {
+<span class="nc" id="L653">            System.out.printf(&quot;%2d &quot;, uniform(100));</span>
+<span class="nc" id="L654">            System.out.printf(&quot;%8.5f &quot;, uniform(10.0, 99.0));</span>
+<span class="nc" id="L655">            System.out.printf(&quot;%5b &quot;, bernoulli(0.5));</span>
+<span class="nc" id="L656">            System.out.printf(&quot;%7.5f &quot;, gaussian(9.0, 0.2));</span>
+<span class="nc" id="L657">            System.out.printf(&quot;%1d &quot;, discrete(probabilities));</span>
+<span class="nc" id="L658">            System.out.printf(&quot;%1d &quot;, discrete(frequencies));</span>
+<span class="nc" id="L659">            StdRandom.shuffle(a);</span>
+<span class="nc bnc" id="L660" title="All 2 branches missed.">            for (String s : a)</span>
+            {
+<span class="nc" id="L662">                System.out.print(s);</span>
+            }
+<span class="nc" id="L664">            System.out.println();</span>
+        }
+<span class="nc" id="L666">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
