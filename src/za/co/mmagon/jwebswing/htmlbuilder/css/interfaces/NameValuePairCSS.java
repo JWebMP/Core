@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
 
 /**
- *
+ * Any name and value pair
  * @author magon
  */
 @Target(

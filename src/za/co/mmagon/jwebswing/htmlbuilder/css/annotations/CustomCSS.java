@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.NameValuePairCSS;
 
 /**
- *
+ * Defines any name value pair of a CSS
  * @author mmagon
  */
 @za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType
@@ -20,6 +20,5 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.NameValuePairCSS;
 @Inherited
 public @interface CustomCSS
 {
-
     public NameValuePairCSS[] value() default @NameValuePairCSS;
 }
