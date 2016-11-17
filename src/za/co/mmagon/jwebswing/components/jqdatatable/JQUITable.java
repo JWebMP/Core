@@ -8,7 +8,7 @@ import za.co.mmagon.jwebswing.base.html.TableHeaderGroup;
 import za.co.mmagon.jwebswing.base.html.TableRow;
 import za.co.mmagon.jwebswing.base.html.attributes.TableAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.components.jqueryUI.tabs.JQUITabsChildren;
+import za.co.mmagon.jwebswing.components.jqueryui.tabs.JQUITabsChildren;
 
 /**
  * The JWDataTable implementation

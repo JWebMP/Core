@@ -16,8 +16,6 @@
  */
 package za.co.mmagon.jwebswing.components.newcomponents;
 
-import za.co.mmagon.jwebswing.components.jqxWidgets.tree.*;
-import za.co.mmagon.jwebswing.components.jqxWidgets.loader.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 
 /**

@@ -16,11 +16,12 @@
  */
 package za.co.mmagon.jwebswing.components.jqPlot.options;
 
+import za.co.mmagon.jwebswing.components.jqplot.options.JQPlotOptions;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.Orientation;
-import za.co.mmagon.jwebswing.components.jqPlot.graphs.JQPlotBarGraph;
-import za.co.mmagon.jwebswing.components.jqPlot.graphs.display.JQPlotBar;
-import za.co.mmagon.jwebswing.components.jqPlot.options.series.JQPlotSeriesBarOptions;
+import za.co.mmagon.jwebswing.components.jqplot.graphs.JQPlotBarGraph;
+import za.co.mmagon.jwebswing.components.jqplot.graphs.display.JQPlotBar;
+import za.co.mmagon.jwebswing.components.jqplot.options.series.JQPlotSeriesBarOptions;
 
 /**
  *

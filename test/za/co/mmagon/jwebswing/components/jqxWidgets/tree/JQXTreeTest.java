@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqxWidgets.tree;
 
+import za.co.mmagon.jwebswing.components.jqxwidgets.tree.JQXTree;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.Page;
 

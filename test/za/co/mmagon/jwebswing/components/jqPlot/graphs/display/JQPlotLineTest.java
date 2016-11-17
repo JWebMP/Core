@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqPlot.graphs.display;
 
+import za.co.mmagon.jwebswing.components.jqplot.graphs.display.JQPlotLine;
 import org.junit.Assert;
 import org.junit.Test;
 

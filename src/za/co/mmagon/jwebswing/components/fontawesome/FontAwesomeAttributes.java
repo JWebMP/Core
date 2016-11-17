@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.components.fontawesome;
 
 import za.co.mmagon.jwebswing.components.newcomponents.*;
-import za.co.mmagon.jwebswing.components.jqxWidgets.tree.*;
 
 /**
  *

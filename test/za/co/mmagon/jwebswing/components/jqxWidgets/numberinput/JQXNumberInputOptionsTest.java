@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqxWidgets.numberinput;
 
+import za.co.mmagon.jwebswing.components.jqxwidgets.numberinput.JQXNumberInputOptions;
 import org.junit.Test;
 
 /**

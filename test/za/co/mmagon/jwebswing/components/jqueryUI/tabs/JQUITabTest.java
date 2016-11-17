@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqueryUI.tabs;
 
+import za.co.mmagon.jwebswing.components.jqueryui.tabs.JQUITab;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.base.html.Div;
 

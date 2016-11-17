@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqueryLayout.layout;
 
+import za.co.mmagon.jwebswing.components.jquerylayout.layout.JQLayout;
 import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.Page;

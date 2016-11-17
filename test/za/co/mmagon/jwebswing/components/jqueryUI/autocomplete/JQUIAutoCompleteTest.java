@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqueryUI.autocomplete;
 
+import za.co.mmagon.jwebswing.components.jqueryui.autocomplete.JQUIAutoComplete;
 import junit.framework.Assert;
 import org.junit.Test;
 import za.co.mmagon.BaseTestClass;

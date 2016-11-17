@@ -9,7 +9,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.TableChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.TableRowChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqueryUI.themes.JQUIThemeBlocks;
+import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemeBlocks;
 
 /**
  * Browser Support

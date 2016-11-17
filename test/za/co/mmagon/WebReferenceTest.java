@@ -20,9 +20,9 @@ import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.components.pools.jquery.JQueryReferencePool;
-import za.co.mmagon.jwebswing.components.pools.jqueryUI.JQUIReferencePool;
+import za.co.mmagon.jwebswing.components.pools.jqueryui.JQUIReferencePool;
 import za.co.mmagon.jwebswing.components.pools.jquerylayout.JQLayoutReferencePool;
-import za.co.mmagon.jwebswing.components.references.jqxWidgets.JQXCoreJavaScriptReference;
+import za.co.mmagon.jwebswing.components.references.jqxwidgets.JQXCoreJavaScriptReference;
 import za.co.mmagon.jwebswing.generics.WebReference;
 
 /**

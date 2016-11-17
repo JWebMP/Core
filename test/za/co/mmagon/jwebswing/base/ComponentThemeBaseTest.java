@@ -18,7 +18,7 @@ package za.co.mmagon.jwebswing.base;
 
 import org.junit.Test;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqueryUI.themes.JQUIThemes;
+import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemes;
 
 /**
  *

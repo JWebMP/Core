@@ -9,7 +9,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.DetailsChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqueryUI.tabs.JQUITabsChildren;
+import za.co.mmagon.jwebswing.components.jqueryui.tabs.JQUITabsChildren;
 
 /**
  * This class defines a paragraph as per<p>

@@ -16,11 +16,12 @@
  */
 package za.co.mmagon.jwebswing.components.jqxWidgets;
 
+import za.co.mmagon.jwebswing.components.jqxwidgets.JQXDefaultJavaScriptPart;
 import org.junit.Assert;
 import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.components.jqxWidgets.themes.JQXWidgetThemes;
+import za.co.mmagon.jwebswing.components.jqxwidgets.themes.JQXWidgetThemes;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementTypes;
 

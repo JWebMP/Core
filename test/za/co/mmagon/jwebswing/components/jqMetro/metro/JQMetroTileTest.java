@@ -16,13 +16,14 @@
  */
 package za.co.mmagon.jwebswing.components.jqMetro.metro;
 
+import za.co.mmagon.jwebswing.components.jqmetro.metro.JQMetroTiles;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.components.jqMetro.metro.enumerations.TileAccentThemes;
-import za.co.mmagon.jwebswing.components.jqMetro.metro.references.JQMetroJavascriptReference;
+import za.co.mmagon.jwebswing.components.jqmetro.metro.enumerations.TileAccentThemes;
+import za.co.mmagon.jwebswing.components.jqmetro.metro.references.JQMetroJavascriptReference;
 
 /**
  *

@@ -28,19 +28,19 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.ImageMapChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqMetro.metro.interfaces.JQMetroTileChildren;
+import za.co.mmagon.jwebswing.components.jqmetro.metro.interfaces.JQMetroTileChildren;
 import za.co.mmagon.jwebswing.components.bootstrap.modal.BSModalChildren;
-import za.co.mmagon.jwebswing.components.jqueryLayout.layout.interfaces.JWLayoutChildren;
-import za.co.mmagon.jwebswing.components.jqueryLayout.layout.interfaces.JWLayoutDivChildren;
-import za.co.mmagon.jwebswing.components.jqueryUI.accordion.JQUIAccordionChildren;
-import za.co.mmagon.jwebswing.components.jqueryUI.dialog.JQUIDialogChildren;
-import za.co.mmagon.jwebswing.components.jqueryUI.radiobutton.JQUIRadioButtonGroupChildren;
-import za.co.mmagon.jwebswing.components.jqueryUI.tabs.JQUITabsChildren;
-import za.co.mmagon.jwebswing.components.jqxWidgets.dropdownlist.JQXDropDownListChildren;
-import za.co.mmagon.jwebswing.components.jqxWidgets.layout.JQXLayoutChildren;
-import za.co.mmagon.jwebswing.components.jqxWidgets.navigationbar.JQXNavigationBarChildren;
-import za.co.mmagon.jwebswing.components.jqxWidgets.notification.JQXNotificationChildren;
-import za.co.mmagon.jwebswing.components.jqxWidgets.ribbon.JQXRibbonChildren;
+import za.co.mmagon.jwebswing.components.jquerylayout.layout.interfaces.JWLayoutChildren;
+import za.co.mmagon.jwebswing.components.jquerylayout.layout.interfaces.JWLayoutDivChildren;
+import za.co.mmagon.jwebswing.components.jqueryui.accordion.JQUIAccordionChildren;
+import za.co.mmagon.jwebswing.components.jqueryui.dialog.JQUIDialogChildren;
+import za.co.mmagon.jwebswing.components.jqueryui.radiobutton.JQUIRadioButtonGroupChildren;
+import za.co.mmagon.jwebswing.components.jqueryui.tabs.JQUITabsChildren;
+import za.co.mmagon.jwebswing.components.jqxwidgets.dropdownlist.JQXDropDownListChildren;
+import za.co.mmagon.jwebswing.components.jqxwidgets.layout.JQXLayoutChildren;
+import za.co.mmagon.jwebswing.components.jqxwidgets.navigationbar.JQXNavigationBarChildren;
+import za.co.mmagon.jwebswing.components.jqxwidgets.notification.JQXNotificationChildren;
+import za.co.mmagon.jwebswing.components.jqxwidgets.ribbon.JQXRibbonChildren;
 
 /**
  * Definition and Usage

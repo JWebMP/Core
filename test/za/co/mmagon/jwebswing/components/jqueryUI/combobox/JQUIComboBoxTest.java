@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqueryUI.combobox;
 
+import za.co.mmagon.jwebswing.components.jqueryui.combobox.JQUIComboBox;
 import org.junit.Assert;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.base.html.Option;

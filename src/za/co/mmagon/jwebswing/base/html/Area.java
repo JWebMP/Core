@@ -13,8 +13,8 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.AreaChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.MapChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqImageMap.imagemap.JQImageMap;
-import za.co.mmagon.jwebswing.components.jqImageMap.imagemap.JQMapInteractiveFeature;
+import za.co.mmagon.jwebswing.components.jqimagemap.imagemap.JQImageMap;
+import za.co.mmagon.jwebswing.components.jqimagemap.imagemap.JQMapInteractiveFeature;
 
 /**
  * Browser Support<p>

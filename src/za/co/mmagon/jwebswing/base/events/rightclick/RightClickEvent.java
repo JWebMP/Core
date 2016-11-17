@@ -9,8 +9,8 @@ import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.BodyEvents;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.ParagraphEvents;
-import za.co.mmagon.jwebswing.components.jqueryUI.button.JQUIButtonEvents;
-import za.co.mmagon.jwebswing.components.jqxWidgets.radiobutton.JQXRadioButtonEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.button.JQUIButtonEvents;
+import za.co.mmagon.jwebswing.components.jqxwidgets.radiobutton.JQXRadioButtonEvents;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 
 /**

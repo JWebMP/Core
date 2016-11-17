@@ -18,7 +18,7 @@ package za.co.mmagon.jwebswing.htmlbuilder.javascript;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Test;
-import za.co.mmagon.jwebswing.components.jqueryLayout.layout.JQLayoutDefaultOptions;
+import za.co.mmagon.jwebswing.components.jquerylayout.layout.JQLayoutDefaultOptions;
 
 /**
  *

@@ -4,10 +4,10 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.base.html.Area;
-import za.co.mmagon.jwebswing.components.jqImageMap.imagemap.JQImageMap;
-import za.co.mmagon.jwebswing.components.jqueryUI.position.Position;
-import za.co.mmagon.jwebswing.components.jqueryUI.position.PositionLocationHorizontal;
-import za.co.mmagon.jwebswing.components.jqueryUI.position.PositionLocationVertical;
+import za.co.mmagon.jwebswing.components.jqimagemap.imagemap.JQImageMap;
+import za.co.mmagon.jwebswing.components.jqueryui.position.Position;
+import za.co.mmagon.jwebswing.components.jqueryui.position.PositionLocationHorizontal;
+import za.co.mmagon.jwebswing.components.jqueryui.position.PositionLocationVertical;
 
 /**
  *

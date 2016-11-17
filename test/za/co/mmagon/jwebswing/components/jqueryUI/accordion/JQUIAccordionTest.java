@@ -16,6 +16,8 @@
  */
 package za.co.mmagon.jwebswing.components.jqueryUI.accordion;
 
+import za.co.mmagon.jwebswing.components.jqueryui.accordion.JQUIAccordion;
+import za.co.mmagon.jwebswing.components.jqueryui.accordion.JQUIAccordionTab;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import org.junit.Assert;

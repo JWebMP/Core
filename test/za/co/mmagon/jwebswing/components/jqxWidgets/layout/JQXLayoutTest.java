@@ -16,6 +16,8 @@
  */
 package za.co.mmagon.jwebswing.components.jqxWidgets.layout;
 
+import za.co.mmagon.jwebswing.components.jqxwidgets.layout.JQXLayoutArray;
+import za.co.mmagon.jwebswing.components.jqxwidgets.layout.JQXLayout;
 import org.junit.Test;
 
 /**

@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqueryUI.button;
 
+import za.co.mmagon.jwebswing.components.jqueryui.button.JQUIButton;
 import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
 

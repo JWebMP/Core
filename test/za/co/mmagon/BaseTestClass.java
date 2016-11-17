@@ -21,7 +21,7 @@ import java.io.IOException;
 import za.co.mmagon.jwebswing.Feature;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.html.Body;
-import za.co.mmagon.jwebswing.components.jqxWidgets.dataadapter.JQXDataAdapter;
+import za.co.mmagon.jwebswing.components.jqxwidgets.dataadapter.JQXDataAdapter;
 import za.co.mmagon.jwebswing.components.pace.preloadedThemes.PaceTheme;
 import za.co.mmagon.jwebswing.components.pace.PaceLoaderReferencePool;
 

@@ -19,8 +19,8 @@ package za.co.mmagon.jwebswing.components.jqPlot;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.Orientation;
-import za.co.mmagon.jwebswing.components.jqPlot.graphs.JQPlotBarGraph;
-import za.co.mmagon.jwebswing.components.jqPlot.graphs.display.JQPlotBar;
+import za.co.mmagon.jwebswing.components.jqplot.graphs.JQPlotBarGraph;
+import za.co.mmagon.jwebswing.components.jqplot.graphs.display.JQPlotBar;
 
 /**
  *

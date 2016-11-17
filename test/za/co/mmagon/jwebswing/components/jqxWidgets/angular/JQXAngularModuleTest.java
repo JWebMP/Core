@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqxWidgets.angular;
 
+import za.co.mmagon.jwebswing.components.jqxwidgets.angular.JQXAngularModule;
 import org.junit.Before;
 import org.junit.Test;
 import za.co.mmagon.BaseTestClass;

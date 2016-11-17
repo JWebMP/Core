@@ -16,10 +16,12 @@
  */
 package za.co.mmagon.jwebswing.components.jqPlot.options.axis;
 
+import za.co.mmagon.jwebswing.components.jqplot.options.axis.JQPlotAxisOptions;
+import za.co.mmagon.jwebswing.components.jqplot.options.axis.JQPlotAxisDateRendererOptions;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.Orientation;
-import za.co.mmagon.jwebswing.components.jqPlot.graphs.JQPlotBarGraph;
-import za.co.mmagon.jwebswing.components.jqPlot.options.ticks.JQPlotTickOptionsAxisTick;
+import za.co.mmagon.jwebswing.components.jqplot.graphs.JQPlotBarGraph;
+import za.co.mmagon.jwebswing.components.jqplot.options.ticks.JQPlotTickOptionsAxisTick;
 
 /**
  *

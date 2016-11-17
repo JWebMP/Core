@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqPlot.graphs;
 
+import za.co.mmagon.jwebswing.components.jqplot.graphs.JQPlotBubbleGraph;
 import org.junit.Test;
 
 /**

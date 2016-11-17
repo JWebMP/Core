@@ -8,7 +8,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.ListChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqueryUI.tabs.JQUITabsChildren;
+import za.co.mmagon.jwebswing.components.jqueryui.tabs.JQUITabsChildren;
 
 /**
  * Definition and Usage<p>

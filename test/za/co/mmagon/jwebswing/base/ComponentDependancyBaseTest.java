@@ -21,7 +21,7 @@ import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.components.pools.jquery.JQueryReferencePool;
-import za.co.mmagon.jwebswing.components.pools.jqueryUI.JQueryUIReferencePool;
+import za.co.mmagon.jwebswing.components.pools.jqueryui.JQueryUIReferencePool;
 
 /**
  *

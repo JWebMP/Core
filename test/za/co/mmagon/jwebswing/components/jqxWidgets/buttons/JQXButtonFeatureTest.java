@@ -16,9 +16,11 @@
  */
 package za.co.mmagon.jwebswing.components.jqxWidgets.buttons;
 
+import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.JQXButtonTemplates;
+import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.JQXButton;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import za.co.mmagon.jwebswing.components.jqxWidgets.themes.JQXWidgetThemes;
+import za.co.mmagon.jwebswing.components.jqxwidgets.themes.JQXWidgetThemes;
 
 /**
  *

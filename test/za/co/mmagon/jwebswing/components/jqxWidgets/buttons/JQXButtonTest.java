@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqxWidgets.buttons;
 
+import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.JQXButton;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -16,11 +16,12 @@
  */
 package za.co.mmagon.jwebswing.components.jqxWidgets.dataadapter;
 
+import za.co.mmagon.jwebswing.components.jqxwidgets.dataadapter.JQXDataAdapter;
 import org.junit.Before;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.components.jqxWidgets.dropdownlist.JQXDropDownListNameValuePair;
-import za.co.mmagon.jwebswing.components.jqxWidgets.tree.JQXTreeItem;
+import za.co.mmagon.jwebswing.components.jqxwidgets.dropdownlist.JQXDropDownListNameValuePair;
+import za.co.mmagon.jwebswing.components.jqxwidgets.tree.JQXTreeItem;
 
 /**
  *

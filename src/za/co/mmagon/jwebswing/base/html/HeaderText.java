@@ -28,7 +28,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeaderGroupChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
-import za.co.mmagon.jwebswing.components.jqueryUI.accordion.JQUIAccordionChildren;
+import za.co.mmagon.jwebswing.components.jqueryui.accordion.JQUIAccordionChildren;
 
 /**
  * HTML Headings<p>

@@ -26,10 +26,10 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqueryUI.autocomplete.JQUIAutoCompleteChildren;
-import za.co.mmagon.jwebswing.components.jqueryUI.checkbox.JQUICheckBoxGroupChildren;
-import za.co.mmagon.jwebswing.components.jqueryUI.radiobutton.JQUIRadioButtonGroupChildren;
-import za.co.mmagon.jwebswing.components.jqueryUI.spinner.JQUISpinnerChildren;
+import za.co.mmagon.jwebswing.components.jqueryui.autocomplete.JQUIAutoCompleteChildren;
+import za.co.mmagon.jwebswing.components.jqueryui.checkbox.JQUICheckBoxGroupChildren;
+import za.co.mmagon.jwebswing.components.jqueryui.radiobutton.JQUIRadioButtonGroupChildren;
+import za.co.mmagon.jwebswing.components.jqueryui.spinner.JQUISpinnerChildren;
 
 /**
  * Definition and Usage<p>

@@ -20,7 +20,7 @@ import org.junit.Test;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.client.InternetExplorerCompatibilityMode;
 import za.co.mmagon.jwebswing.base.html.Body;
-import za.co.mmagon.jwebswing.components.jqueryUI.button.JQUIButton;
+import za.co.mmagon.jwebswing.components.jqueryui.button.JQUIButton;
 import za.co.mmagon.jwebswing.generics.WebReference;
 
 /**

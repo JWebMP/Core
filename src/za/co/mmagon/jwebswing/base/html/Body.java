@@ -28,7 +28,7 @@ import za.co.mmagon.jwebswing.components.modernizr.ModernizrFeature;
 import za.co.mmagon.jwebswing.components.pace.PaceLoader;
 import za.co.mmagon.jwebswing.components.pace.preloadedThemes.PaceTheme;
 import za.co.mmagon.jwebswing.components.pools.jquery.JQueryReferencePool;
-import za.co.mmagon.jwebswing.components.pools.jqueryUI.JQueryUIReferencePool;
+import za.co.mmagon.jwebswing.components.pools.jqueryui.JQueryUIReferencePool;
 
 /**
  * Browser Support<p>
