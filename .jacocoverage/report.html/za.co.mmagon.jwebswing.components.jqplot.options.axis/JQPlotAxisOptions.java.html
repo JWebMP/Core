@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQPlotAxisOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqplot.options.axis</a> &gt; <span class="el_source">JQPlotAxisOptions.java</span></div><h1>JQPlotAxisOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqplot.options.axis;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import java.util.List;
+import za.co.mmagon.jwebswing.components.jqplot.JQPlotGraph;
+import za.co.mmagon.jwebswing.components.jqplot.options.ticks.JQPlotTickOptionsAxisTick;
+import za.co.mmagon.jwebswing.components.jqplot.parts.interfaces.JQPlotAxisLabelRenderer;
+import za.co.mmagon.jwebswing.components.jqplot.parts.interfaces.JQPlotTickRenderer;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourHex;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ *
+ * @author Marc Magon
+ * @since 07 Aug 2015
+ * @version 1.0
+ */
+public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabelRenderer&gt;
+        extends JavaScriptPart
+{
+
+    private static final long serialVersionUID = 1L;
+    @JsonIgnore
+    private JQPlotGraph linkedGraph;
+    /**
+     * whether or not to renderer the axis. Determined automatically.
+     */
+    private Boolean show;
+    /**
+     * Whether or not to show a label
+     */
+    private Boolean showLabel;
+    /**
+     * Auto-Scale the axis min and max values to provide sensible tick spacing.
+     */
+    private Boolean autoscale;
+    /**
+     * minimum numerical value of the axis. Determined automatically.
+     */
+    private Integer min;
+    /**
+     * maximum num vertical value of the axis. Determined automatically.
+     */
+    private Integer max;
+    /**
+     * a factor multiplied by the data range on the axis to give the
+     */
+    private Double pad;
+    /**
+     * axis range so that data points don't fall on the edges of the axis.
+     * a 1D [val1, val2, ...], or 2D [[val, label], [val, label], ...]
+     */
+    @JsonIgnore
+    private List&lt;String&gt; ticks;
+    /**
+     * array of ticks to use. Computed automatically.
+     */
+    private Integer numberTicks;
+    /**
+     * array of ticks to use. Computed automatically.
+     */
+    private Integer tickInterval;
+    /**
+     * renderer to use to draw the axis,
+     */
+    // @JsonRawValue
+    //private String renderer;
+
+    //private JavaScriptPart rendererOptions;
+    /**
+     * whether or not to show the tick labels,
+     * Wether to show the ticks (both marks and labels) or not.
+     */
+    private Boolean showTicks;
+    /**
+     * Whether or not to show the tick marks
+     * Wether to show the tick marks (line crossing grid) or not.
+     */
+    private Boolean showTickMarks;
+    /**
+     * A class of a rendering engine for creating the ticks labels displayed on the plot, See $.jqplot.AxisTickRenderer.
+     */
+    @JsonRawValue
+    private String tickRenderer;
+    /**
+     * The options associated with the tick renderer
+     */
+    @JsonProperty(&quot;tickOptions&quot;)
+    private JavaScriptPart tickRendererOptions;
+
+    /**
+     * The specific renderer options
+     */
+    @JsonProperty(&quot;rendererOptions&quot;)
+    private O rendererOptions;
+    /**
+     * Label for the axis
+     */
+    private String label;
+
+    /**
+     * Padding to extend the range above data bounds.
+     */
+    private Integer padMax;
+    /**
+     * Padding to extend the range below data bounds.
+     */
+    private Integer padMin;
+
+    /**
+     * Whether or not to show minor ticks.
+     */
+    private Boolean showMinorTicks;
+    /**
+     * Use the color of the first series associated with this axis for the tick marks and line bordering this axis.
+     */
+    private Boolean useSeriesColor;
+    /**
+     * width of line stroked at the border of the axis.
+     */
+    private Integer borderWidth;
+    /**
+     * color of the border adjacent to the axis.
+     */
+    private String borderColor;
+    /**
+     * true to try and synchronize tick spacing across multiple axes so that ticks and grid lines line up.
+     */
+    private Boolean syncTicks;
+    /**
+     * Approximate pixel spacing between ticks on graph.
+     */
+    private Integer tickSpacing;
+
+    /**
+     * The linked graph
+     *
+     * @param linkedGraph
+     */
+    public JQPlotAxisOptions(JQPlotGraph linkedGraph)
+<span class="fc" id="L159">    {</span>
+<span class="fc" id="L160">        this.linkedGraph = linkedGraph;</span>
+<span class="fc" id="L161">    }</span>
+
+    /**
+     * Returns the linked graph to this options
+     *
+     * @return
+     */
+    public JQPlotGraph getLinkedGraph()
+    {
+<span class="nc" id="L170">        return linkedGraph;</span>
+    }
+
+    /**
+     * Sets the linked graph
+     *
+     * @param linkedGraph
+     */
+    public void setLinkedGraph(JQPlotGraph linkedGraph)
+    {
+<span class="nc" id="L180">        this.linkedGraph = linkedGraph;</span>
+<span class="nc" id="L181">    }</span>
+
+    
+
+    /**
+     * Whether or not to show the axis
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getShow()
+    {
+<span class="nc" id="L192">        return show;</span>
+    }
+
+    /**
+     * Whether or not to show the axis
+     * &lt;p&gt;
+     * @param show
+     */
+    public void setShow(Boolean show)
+    {
+<span class="nc" id="L202">        this.show = show;</span>
+<span class="nc" id="L203">    }</span>
+
+    /**
+     * Whether or not to show a label
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getShowLabel()
+    {
+<span class="nc" id="L212">        return showLabel;</span>
+    }
+
+    /**
+     * Whether or not to show a label
+     * &lt;p&gt;
+     * @param showLabel
+     */
+    public void setShowLabel(Boolean showLabel)
+    {
+<span class="nc" id="L222">        this.showLabel = showLabel;</span>
+<span class="nc" id="L223">    }</span>
+
+    /**
+     * Autoscale the axis min and max values to provide sensible tick spacing.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getAutoscale()
+    {
+<span class="nc" id="L232">        return autoscale;</span>
+    }
+
+    /**
+     * Autoscale the axis min and max values to provide sensible tick spacing.
+     * &lt;p&gt;
+     * @param autoscale
+     */
+    public void setAutoscale(Boolean autoscale)
+    {
+<span class="nc" id="L242">        this.autoscale = autoscale;</span>
+<span class="nc" id="L243">    }</span>
+
+    /**
+     * minimum numerical value of the axis. Determined automatically.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getMin()
+    {
+<span class="nc" id="L252">        return min;</span>
+    }
+
+    /**
+     * minimum numerical value of the axis. Determined automatically.
+     * &lt;p&gt;
+     * @param min
+     */
+    public void setMin(Integer min)
+    {
+<span class="fc" id="L262">        this.min = min;</span>
+<span class="fc" id="L263">    }</span>
+
+    /**
+     * maximum num vertical value of the axis. Determined automatically
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getMax()
+    {
+<span class="nc" id="L272">        return max;</span>
+    }
+
+    /**
+     * maximum num vertical value of the axis. Determined automatically
+     * &lt;p&gt;
+     * @param max
+     */
+    public void setMax(Integer max)
+    {
+<span class="nc" id="L282">        this.max = max;</span>
+<span class="nc" id="L283">    }</span>
+
+    /**
+     * a factor multiplied by the data range on the axis to give the
+     * &lt;p&gt;
+     * @return
+     */
+    public Double getPad()
+    {
+<span class="nc" id="L292">        return pad;</span>
+    }
+
+    /**
+     * a factor multiplied by the data range on the axis to give the
+     * &lt;p&gt;
+     * @param pad
+     */
+    public void setPad(Double pad)
+    {
+<span class="nc" id="L302">        this.pad = pad;</span>
+<span class="nc" id="L303">    }</span>
+
+    /**
+     * axis range so that data points don't fall on the edges of the axis.
+     * a 1D [val1, val2, ...], or 2D [[val, label], [val, label], ...]
+     * &lt;p&gt;
+     * @return
+     */
+    @JsonProperty(&quot;ticks&quot;)
+    public List&lt;String&gt; getTicks()
+    {
+<span class="fc" id="L314">        return ticks;</span>
+    }
+
+    /**
+     * axis range so that data points don't fall on the edges of the axis.
+     * a 1D [val1, val2, ...], or 2D [[val, label], [val, label], ...]
+     * &lt;p&gt;
+     * @param ticks
+     */
+    public void setTicks(List&lt;String&gt; ticks)
+    {
+<span class="fc" id="L325">        this.ticks = ticks;</span>
+<span class="fc" id="L326">    }</span>
+
+    /**
+     * array of ticks to use. Computed automatically.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getNumberTicks()
+    {
+<span class="nc" id="L335">        return numberTicks;</span>
+    }
+
+    /**
+     * array of ticks to use. Computed automatically.
+     * &lt;p&gt;
+     * @param numberTicks
+     */
+    public void setNumberTicks(Integer numberTicks)
+    {
+<span class="nc" id="L345">        this.numberTicks = numberTicks;</span>
+<span class="nc" id="L346">    }</span>
+
+    /**
+     * array of ticks to use. Computed automatically.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getTickInterval()
+    {
+<span class="nc" id="L355">        return tickInterval;</span>
+    }
+
+    /**
+     * array of ticks to use. Computed automatically.
+     * &lt;p&gt;
+     * @param tickInterval
+     */
+    public void setTickInterval(Integer tickInterval)
+    {
+<span class="nc" id="L365">        this.tickInterval = tickInterval;</span>
+<span class="nc" id="L366">    }</span>
+
+    /**
+     * renderer to use to draw the axis,
+     * &lt;p&gt;
+     * @return
+     */
+    // public String getRenderer()
+    // {
+    //    return renderer;
+    // }
+    /**
+     * renderer to use to draw the axis,
+     * &lt;p&gt;
+     * @param renderer
+     */
+    //  public void setRenderer(JWGraphAxisRenderers renderer)
+    //  {
+    //      this.renderer = renderer.getRendererString();
+    //      this.rendererOptions = renderer.getOptions();
+    //  }
+    /**
+     * Whether to show the ticks (both marks and labels) or not.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getShowTicks()
+    {
+<span class="nc" id="L394">        return showTicks;</span>
+    }
+
+    /**
+     * Whether to show the ticks (both marks and labels) or not.
+     * &lt;p&gt;
+     * @param showTicks
+     */
+    public void setShowTicks(Boolean showTicks)
+    {
+<span class="nc" id="L404">        this.showTicks = showTicks;</span>
+<span class="nc" id="L405">    }</span>
+
+    /**
+     * Whether to show the tick marks (line crossing grid) or not.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getShowTickMarks()
+    {
+<span class="nc" id="L414">        return showTickMarks;</span>
+    }
+
+    /**
+     * Whether to show the tick marks (line crossing grid) or not.
+     * &lt;p&gt;
+     * @param showTickMarks
+     */
+    public void setShowTickMarks(Boolean showTickMarks)
+    {
+<span class="nc" id="L424">        this.showTickMarks = showTickMarks;</span>
+<span class="nc" id="L425">    }</span>
+
+    /**
+     * A class of a rendering engine for creating the ticks labels displayed on the plot, See $.jqplot.AxisTickRenderer.
+     * &lt;p&gt;
+     * @return
+     */
+    public String getTickRenderer()
+    {
+<span class="nc" id="L434">        return tickRenderer;</span>
+    }
+
+    /**
+     * Get Tick Renderer Options
+     * Default JQPlotTickOptionsAxisTick
+     *
+     * @return
+     */
+    public JavaScriptPart getTickRendererOptions()
+    {
+<span class="pc bpc" id="L445" title="1 of 2 branches missed.">        if (tickRendererOptions == null)</span>
+        {
+<span class="fc" id="L447">            tickRendererOptions = new JQPlotTickOptionsAxisTick();</span>
+        }
+<span class="fc" id="L449">        return tickRendererOptions;</span>
+    }
+
+    /**
+     * Set the tick renderer
+     *
+     * @param &lt;O&gt;                 A Valid Tick Renderer
+     * @param tickRendererOptions The Actual Options Class
+     */
+    public &lt;O extends JavaScriptPart &amp; JQPlotTickRenderer&gt; void setTickRendererOptions(O tickRendererOptions)
+    {
+<span class="nc" id="L460">        this.tickRenderer = tickRendererOptions.getRenderer();</span>
+<span class="nc" id="L461">        this.tickRendererOptions = tickRendererOptions;</span>
+<span class="nc" id="L462">    }</span>
+
+    /**
+     * Label for the axis
+     * &lt;p&gt;
+     * @return
+     */
+    public String getLabel()
+    {
+<span class="nc" id="L471">        return label;</span>
+    }
+
+    /**
+     * Label for the axis
+     * &lt;p&gt;
+     * @param label
+     */
+    public void setLabel(String label)
+    {
+<span class="nc" id="L481">        this.label = label;</span>
+<span class="nc" id="L482">    }</span>
+
+    /**
+     * Padding to extend the range above data bounds.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getPadMax()
+    {
+<span class="nc" id="L491">        return padMax;</span>
+    }
+
+    /**
+     * Padding to extend the range above data bounds.
+     * &lt;p&gt;
+     * @param padMax
+     */
+    public void setPadMax(Integer padMax)
+    {
+<span class="nc" id="L501">        this.padMax = padMax;</span>
+<span class="nc" id="L502">    }</span>
+
+    /**
+     * Padding to extend the range below data bounds.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getPadMin()
+    {
+<span class="nc" id="L511">        return padMin;</span>
+    }
+
+    /**
+     * Padding to extend the range below data bounds.
+     * &lt;p&gt;
+     * @param padMin
+     */
+    public void setPadMin(Integer padMin)
+    {
+<span class="nc" id="L521">        this.padMin = padMin;</span>
+<span class="nc" id="L522">    }</span>
+
+    /**
+     * Whether or not to show minor ticks.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getShowMinorTicks()
+    {
+<span class="nc" id="L531">        return showMinorTicks;</span>
+    }
+
+    /**
+     * Whether or not to show minor ticks.
+     * &lt;p&gt;
+     * @param showMinorTicks
+     */
+    public void setShowMinorTicks(Boolean showMinorTicks)
+    {
+<span class="nc" id="L541">        this.showMinorTicks = showMinorTicks;</span>
+<span class="nc" id="L542">    }</span>
+
+    /**
+     * Use the color of the first series associated with this axis for the tick marks and line bordering this axis.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getUseSeriesColor()
+    {
+<span class="nc" id="L551">        return useSeriesColor;</span>
+    }
+
+    /**
+     * Use the color of the first series associated with this axis for the tick marks and line bordering this axis.
+     * &lt;p&gt;
+     * @param useSeriesColor
+     */
+    public void setUseSeriesColor(Boolean useSeriesColor)
+    {
+<span class="nc" id="L561">        this.useSeriesColor = useSeriesColor;</span>
+<span class="nc" id="L562">    }</span>
+
+    /**
+     * width of line stroked at the border of the axis.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getBorderWidth()
+    {
+<span class="nc" id="L571">        return borderWidth;</span>
+    }
+
+    /**
+     * width of line stroked at the border of the axis.
+     * &lt;p&gt;
+     * @param borderWidth
+     */
+    public void setBorderWidth(Integer borderWidth)
+    {
+<span class="nc" id="L581">        this.borderWidth = borderWidth;</span>
+<span class="nc" id="L582">    }</span>
+
+    /**
+     * color of the border adjacent to the axis.
+     * &lt;p&gt;
+     * @return
+     */
+    public String getBorderColor()
+    {
+<span class="nc" id="L591">        return borderColor;</span>
+    }
+
+    /**
+     * color of the border adjacent to the axis.
+     * &lt;p&gt;
+     * @param borderColor
+     */
+    public void setBorderColor(ColourHex borderColor)
+    {
+<span class="nc" id="L601">        this.borderColor = borderColor.getValue();</span>
+<span class="nc" id="L602">    }</span>
+
+    /**
+     * true to try and synchronize tick spacing across multiple axes so that ticks and grid lines line up.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getSyncTicks()
+    {
+<span class="nc" id="L611">        return syncTicks;</span>
+    }
+
+    /**
+     * true to try and synchronize tick spacing across multiple axes so that ticks and grid lines line up.
+     * &lt;p&gt;
+     * @param syncTicks
+     */
+    public void setSyncTicks(Boolean syncTicks)
+    {
+<span class="nc" id="L621">        this.syncTicks = syncTicks;</span>
+<span class="nc" id="L622">    }</span>
+
+    /**
+     * Approximate pixel spacing between ticks on graph.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getTickSpacing()
+    {
+<span class="nc" id="L631">        return tickSpacing;</span>
+    }
+
+    /**
+     * Approximate pixel spacing between ticks on graph.
+     * &lt;p&gt;
+     * @param tickSpacing
+     */
+    public void setTickSpacing(Integer tickSpacing)
+    {
+<span class="nc" id="L641">        this.tickSpacing = tickSpacing;</span>
+<span class="nc" id="L642">    }</span>
+
+    /**
+     * Returns the assigned axis renderer options
+     *
+     * @return
+     */
+    public O getRendererOptions()
+    {
+<span class="nc" id="L651">        return rendererOptions;</span>
+    }
+
+    /**
+     * The the options
+     * &lt;p&gt;
+     * @param rendererOptions
+     */
+    public void setRendererOptions(O rendererOptions)
+    {
+<span class="fc" id="L661">        this.rendererOptions = rendererOptions;</span>
+<span class="fc" id="L662">        this.renderer = rendererOptions.getRenderer();</span>
+<span class="fc" id="L663">    }</span>
+
+    @JsonRawValue
+    private String renderer;
+
+    /**
+     * Returns the renderer
+     *
+     * @return
+     */
+    public String getRenderer()
+    {
+<span class="nc" id="L675">        return renderer;</span>
+    }
+
+    @JsonRawValue
+    private String labelRenderer;
+
+    private JQPlotAxisLabelRenderer labelRendererOptions;
+
+    /**
+     * Sets the label renderer options
+     *
+     * @param labelRendererOptions
+     */
+    public void setLabelRendererOptions(JQPlotAxisLabelRenderer labelRendererOptions)
+    {
+<span class="nc" id="L690">        this.labelRendererOptions = labelRendererOptions;</span>
+<span class="nc" id="L691">        this.labelRenderer = labelRendererOptions.getRenderer();</span>
+<span class="nc" id="L692">    }</span>
+
+    /**
+     * Gets the label renderer options
+     * JQPlotAxisLabelRendererOptionsCanvasLabels by default
+     *
+     * @return
+     */
+    public JQPlotAxisLabelRenderer getLabelRendererOptions()
+    {
+<span class="nc bnc" id="L702" title="All 2 branches missed.">        if (labelRendererOptions == null)</span>
+        {
+<span class="nc" id="L704">            setLabelRendererOptions(new JQPlotAxisLabelRendererOptionsCanvasLabels(getLinkedGraph()));</span>
+        }
+<span class="nc" id="L706">        return labelRendererOptions;</span>
+    }
+
+    /**
+     * Returns the label renderer string assigned with this axis plot
+     *
+     * @return
+     */
+    public String getLabelRenderer()
+    {
+<span class="nc" id="L716">        return labelRenderer;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

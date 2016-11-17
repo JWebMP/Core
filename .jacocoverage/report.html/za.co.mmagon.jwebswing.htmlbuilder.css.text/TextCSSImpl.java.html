@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TextCSSImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.htmlbuilder.css.text</a> &gt; <span class="el_source">TextCSSImpl.java</span></div><h1>TextCSSImpl.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.htmlbuilder.css.text;
+
+import java.lang.annotation.Annotation;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+
+/**
+ *
+ * @author GedMarc
+ * @since 18 Jan 2016
+ */
+public class TextCSSImpl implements TextCSS
+{
+
+    public TextCSSImpl()
+<span class="nc" id="L33">    {</span>
+<span class="nc" id="L34">    }</span>
+
+    @Override
+    public String toString()
+    {
+<span class="nc" id="L39">        return &quot;&quot;;</span>
+    }
+
+    private ColourCSS Color;
+    private ColourNames Color$;
+    private TextDirections Direction;
+    private MeasurementCSS Letter_Spacing;
+    private MeasurementCSS Line_Height;
+    private TextAlignments Text_Align;
+    private TextDecorations Text_Decoration;
+    private MeasurementCSS Text_Indent;
+    private TextTransforms Text_Transform;
+    private UnicodeBidis Unicode_Bidi;
+    private VerticalAlignments Vertical_Align;
+    private WhiteSpacing White_Space;
+    private MeasurementCSS Word_Spacing;
+
+    @Override
+    public Class&lt;? extends Annotation&gt; annotationType()
+    {
+<span class="nc" id="L59">        return TextCSS.class;</span>
+    }
+
+    /**
+     * Sets the colour
+     *
+     * @return
+     */
+    @Override
+    public ColourCSS Color()
+    {
+<span class="nc" id="L70">        return Color;</span>
+    }
+
+    /**
+     * Sets the color
+     *
+     * @return
+     */
+    @Override
+    public ColourNames Color$()
+    {
+<span class="nc" id="L81">        return Color$;</span>
+    }
+
+    /**
+     * Sets the Text Direction
+     *
+     * @return
+     */
+    @Override
+    public TextDirections Direction()
+    {
+<span class="nc" id="L92">        return Direction;</span>
+    }
+
+    /**
+     * Sets the letter spacing
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Letter_Spacing()
+    {
+<span class="nc" id="L103">        return Letter_Spacing;</span>
+    }
+
+    /**
+     * Sets the Line Height
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Line_Height()
+    {
+<span class="nc" id="L114">        return Line_Height;</span>
+    }
+
+    /**
+     * Sets the Text Alignment
+     *
+     * @return
+     */
+    @Override
+    public TextAlignments Text_Align()
+    {
+<span class="nc" id="L125">        return Text_Align;</span>
+    }
+
+    /**
+     * Sets the Text Direction
+     *
+     * @return
+     */
+    @Override
+    public TextDecorations Text_Decoration()
+    {
+<span class="nc" id="L136">        return Text_Decoration;</span>
+    }
+
+    /**
+     * Sets the Text Indentation
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Text_Indent()
+    {
+<span class="nc" id="L147">        return Text_Indent;</span>
+    }
+
+    /**
+     * Sets any text transformations
+     *
+     * @return
+     */
+    @Override
+    public TextTransforms Text_Transform()
+    {
+<span class="nc" id="L158">        return Text_Transform;</span>
+    }
+
+    /**
+     * Used together with the direction property to set or return whether the text should be overridden to support multiple languages in the same document
+     *
+     * @return
+     */
+    @Override
+    public UnicodeBidis Unicode_Bidi()
+    {
+<span class="nc" id="L169">        return Unicode_Bidi;</span>
+    }
+
+    /**
+     * Sets the Vertical Alignment
+     *
+     * @return
+     */
+    @Override
+    public VerticalAlignments Vertical_Align()
+    {
+<span class="nc" id="L180">        return Vertical_Align;</span>
+    }
+
+    /**
+     * Sets the white spacing to be used
+     *
+     * @return
+     */
+    @Override
+    public WhiteSpacing White_Space()
+    {
+<span class="nc" id="L191">        return White_Space;</span>
+    }
+
+    /**
+     * Sets the word spacing to be used
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Word_Spacing()
+    {
+<span class="nc" id="L202">        return Word_Spacing;</span>
+    }
+
+    /**
+     * Sets the Colour
+     *
+     * @param Color
+     */
+    public void setColor(ColourCSS Color)
+    {
+<span class="nc" id="L212">        this.Color = Color;</span>
+<span class="nc" id="L213">    }</span>
+
+    /**
+     * Sets the colour
+     *
+     * @param Color$
+     */
+    public void setColor$(ColourNames Color$)
+    {
+<span class="nc" id="L222">        this.Color$ = Color$;</span>
+<span class="nc" id="L223">    }</span>
+
+    /**
+     * Sets the direction
+     *
+     * @param Direction
+     */
+    public void setDirection(TextDirections Direction)
+    {
+<span class="nc" id="L232">        this.Direction = Direction;</span>
+<span class="nc" id="L233">    }</span>
+
+    /**
+     * Set the letter spacing
+     *
+     * @param Letter_Spacing
+     */
+    public void setLetter_Spacing(MeasurementCSS Letter_Spacing)
+    {
+<span class="nc" id="L242">        this.Letter_Spacing = Letter_Spacing;</span>
+<span class="nc" id="L243">    }</span>
+
+    /**
+     * Line Height
+     *
+     * @param Line_Height
+     */
+    public void setLine_Height(MeasurementCSS Line_Height)
+    {
+<span class="nc" id="L252">        this.Line_Height = Line_Height;</span>
+<span class="nc" id="L253">    }</span>
+
+    /**
+     * Text Alignment
+     *
+     * @param Text_Align
+     */
+    public void setText_Align(TextAlignments Text_Align)
+    {
+<span class="nc" id="L262">        this.Text_Align = Text_Align;</span>
+<span class="nc" id="L263">    }</span>
+
+    /**
+     * Sets the Text Decoration
+     *
+     * @param Text_Decoration
+     */
+    public void setText_Decoration(TextDecorations Text_Decoration)
+    {
+<span class="nc" id="L272">        this.Text_Decoration = Text_Decoration;</span>
+<span class="nc" id="L273">    }</span>
+
+    /**
+     * Sets the text indentation
+     *
+     * @param Text_Indent
+     */
+    public void setText_Indent(MeasurementCSS Text_Indent)
+    {
+<span class="nc" id="L282">        this.Text_Indent = Text_Indent;</span>
+<span class="nc" id="L283">    }</span>
+
+    /**
+     * Sets the Text Transforms
+     *
+     * @param Text_Transform
+     */
+    public void setText_Transform(TextTransforms Text_Transform)
+    {
+<span class="nc" id="L292">        this.Text_Transform = Text_Transform;</span>
+<span class="nc" id="L293">    }</span>
+
+    /**
+     * Used together with the direction property to set or return whether the text should be overridden to support multiple languages in the same document
+     *
+     * @param Unicode_Bidi
+     */
+    public void setUnicode_Bidi(UnicodeBidis Unicode_Bidi)
+    {
+<span class="nc" id="L302">        this.Unicode_Bidi = Unicode_Bidi;</span>
+<span class="nc" id="L303">    }</span>
+
+    /**
+     * Sets the vertical alignment
+     *
+     * @param Vertical_Align
+     */
+    public void setVertical_Align(VerticalAlignments Vertical_Align)
+    {
+<span class="nc" id="L312">        this.Vertical_Align = Vertical_Align;</span>
+<span class="nc" id="L313">    }</span>
+
+    /**
+     * Sets the white space
+     *
+     * @param White_Space
+     */
+    public void setWhite_Space(WhiteSpacing White_Space)
+    {
+<span class="nc" id="L322">        this.White_Space = White_Space;</span>
+<span class="nc" id="L323">    }</span>
+
+    /**
+     * Sets the word spacing
+     *
+     * @param Word_Spacing
+     */
+    public void setWord_Spacing(MeasurementCSS Word_Spacing)
+    {
+<span class="nc" id="L332">        this.Word_Spacing = Word_Spacing;</span>
+<span class="nc" id="L333">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

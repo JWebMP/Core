@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JWebSwingServlet.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.servlets</a> &gt; <span class="el_source">JWebSwingServlet.java</span></div><h1>JWebSwingServlet.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.servlets;
+
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+import java.util.HashMap;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import net.sf.uadetector.ReadableUserAgent;
+import net.sf.uadetector.UserAgentStringParser;
+import net.sf.uadetector.service.UADetectorServiceFactory;
+import org.apache.log4j.AppenderSkeleton;
+import org.apache.log4j.Logger;
+import za.co.mmagon.LoggerFactory;
+import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
+import za.co.mmagon.jwebswing.base.client.Browsers;
+import za.co.mmagon.jwebswing.base.html.Body;
+import za.co.mmagon.jwebswing.utilities.TextUtilities;
+
+/**
+ * The base Servlet for the JWebSwing environment. Constructs each page on call
+ *
+ * @author Marc Magon
+ * @version 1.1
+ * @since 2012/10/09
+ */
+@Singleton
+public abstract class JWebSwingServlet extends JWDefaultServlet
+{
+
+    /**
+     * The logger for the swing Servlet
+     */
+<span class="nc" id="L39">    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;JWebSwingServlet&quot;);</span>
+    /**
+     * The logger for the session handler Servlet
+     */
+<span class="nc" id="L43">    private static final Logger SESSION_LOG = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;SessionHandler&quot;);</span>
+
+    /**
+     * Version 1
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * All the current sessions and their pages. Static for direct reference
+     */
+    private static HashMap&lt;String, JWebSwingServlet&gt; sessionPages;
+
+    /**
+     * The User Agent Parser
+     */
+<span class="nc" id="L58">    private static final UserAgentStringParser userAgentParser = UADetectorServiceFactory.getResourceModuleParser();</span>
+
+    /**
+     * Constructs a new JWebSwing Servlet that is not session aware
+     */
+    public JWebSwingServlet()
+<span class="nc" id="L64">    {</span>
+<span class="nc" id="L65">    }</span>
+
+    /**
+     * Returns the number of sessions
+     *
+     * @return
+     */
+    public int getNumberOfSessions()
+    {
+<span class="nc" id="L74">        return getSessionPages().size();</span>
+    }
+
+    /**
+     * Reads the variables into the HTTP session
+     *
+     * @param request
+     * @throws MissingComponentException
+     */
+    private void readRequestVariables(HttpServletRequest request) throws MissingComponentException
+    {
+<span class="nc" id="L85">        Page currentPage = getNewPage(request.getSession().getId());</span>
+<span class="nc" id="L86">        request.getSession().setAttribute(&quot;jwpage&quot;, currentPage);</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        if (currentPage == null)</span>
+        {
+<span class="nc" id="L89">            throw new MissingComponentException(&quot;[No Page]-[getPage() returning null in servlet class]&quot;);</span>
+        }
+<span class="nc" id="L91">        getCurrentPage(request.getSession()).setServlet(this);</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        if (request.getSession().isNew())</span>
+        {
+<span class="nc" id="L94">            getSessionPages().put(request.getSession().getId(), this);</span>
+<span class="nc" id="L95">            SESSION_LOG.trace(&quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];[Name]-[User Login];[Action]-[Session Added];&quot; + &quot;[Session Count]-[&quot; + getNumberOfSessions() + &quot;]&quot;);</span>
+        }
+<span class="nc" id="L97">    }</span>
+
+    /**
+     * Reads the user agent header into the browser object and places it for the page to render
+     *
+     * @param request
+     */
+    private void readBrowserInformation(HttpServletRequest request)
+    {
+<span class="nc" id="L106">        String headerInformation = request.getHeader(&quot;User-Agent&quot;);</span>
+<span class="nc" id="L107">        ReadableUserAgent agent = userAgentParser.parse(headerInformation);</span>
+<span class="nc" id="L108">        getCurrentPage(request.getSession()).setUserAgent(agent);</span>
+        Browsers b;
+<span class="nc bnc" id="L110" title="All 4 branches missed.">        if (agent.getVersionNumber().getMajor().isEmpty() &amp;&amp; agent.getVersionNumber().getMinor().isEmpty())</span>
+        {
+<span class="nc" id="L112">            b = Browsers.getBrowserFromNameAndVersion(&quot;Edge&quot;, 13);</span>
+        }
+        else
+        {
+<span class="nc" id="L116">            b = Browsers.getBrowserFromNameAndVersion(agent.getName(), Double.parseDouble(agent.getVersionNumber().getMajor() + &quot;.&quot; + agent.getVersionNumber().getMinor()));</span>
+        }
+<span class="nc" id="L118">        getCurrentPage(request.getSession()).setBrowser(b);</span>
+<span class="nc bnc" id="L119" title="All 4 branches missed.">        if (agent.getVersionNumber().getMajor() == null || agent.getVersionNumber().getMajor().isEmpty())</span>
+        {
+<span class="nc" id="L121">            LOG.trace(&quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Browser]-[&quot; + b.getBrowserGroup().toString() + &quot;];[Version]-[&quot; + b.getBrowserVersion() + &quot;];[Operating System]-[&quot; + agent.getOperatingSystem().getName() + &quot;];[Device Category]-[&quot; + agent.getDeviceCategory().getCategory() + &quot;];[Device]-[&quot; + agent.getDeviceCategory().getName() + &quot;];&quot; + &quot;[CSS]-[&quot; + b.getCapableCSSVersion() + &quot;];[HTML]-[&quot; + b.getHtmlVersion() + &quot;];&quot;);</span>
+        }
+        else
+        {
+<span class="nc" id="L125">            LOG.trace(&quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Browser]-[&quot; + agent.getName() + &quot;];[Version]-[&quot; + agent.getVersionNumber().getMajor() + &quot;.&quot; + agent.getVersionNumber().getMinor() + &quot;];[Operating System]-[&quot; + agent.getOperatingSystem().getName() + &quot;];[Device Category]-[&quot; + agent.getDeviceCategory().getCategory() + &quot;];[Device]-[&quot; + agent.getDeviceCategory().getName() + &quot;];&quot; + &quot;[CSS]-[&quot; + b.getCapableCSSVersion() + &quot;];[HTML]-[&quot; + b.getHtmlVersion() + &quot;];&quot;);</span>
+        }
+<span class="nc" id="L127">    }</span>
+
+    /**
+     * Sends the page out
+     *
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    private void sendPage(HttpServletRequest request, HttpServletResponse response) throws IOException
+    {
+<span class="nc" id="L138">        response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+<span class="nc" id="L139">        PrintWriter out = null;</span>
+        try
+        {
+<span class="nc" id="L142">            Date startDate = new Date();</span>
+<span class="nc" id="L143">            StringBuilder sb = getPageHTML(request.getSession());</span>
+<span class="nc" id="L144">            Date endDate = new Date();</span>
+<span class="nc" id="L145">            Date transferStart = new Date();</span>
+<span class="nc" id="L146">            out = response.getWriter();</span>
+<span class="nc" id="L147">            out.println(sb);</span>
+<span class="nc" id="L148">            Date dataTransferDate = new Date();</span>
+<span class="nc" id="L149">            LOG.trace(&quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Render Time]-[&quot; + (endDate.getTime() - startDate.getTime()) + &quot;];[Data Size]-[&quot; + sb.length() + &quot;];[Transer Time]=[&quot; + (dataTransferDate.getTime() - transferStart.getTime()) + &quot;]&quot;);</span>
+        }
+<span class="nc" id="L151">        catch (IOException ex)</span>
+        {
+<span class="nc" id="L153">            LOG.fatal(&quot;[Network]-[Connection Dead]&quot;, ex);</span>
+<span class="nc" id="L154">            throw ex;</span>
+        }
+        finally
+        {
+<span class="nc" id="L158">            try</span>
+            {
+<span class="nc bnc" id="L160" title="All 4 branches missed.">                if (out != null)</span>
+                {
+<span class="nc" id="L162">                    out.close();</span>
+                }
+            }
+<span class="nc" id="L165">            catch (Exception e)</span>
+            {
+<span class="nc" id="L167">                LOG.error(e);</span>
+<span class="nc" id="L168">            }</span>
+<span class="nc" id="L169">        }</span>
+<span class="nc" id="L170">    }</span>
+
+    /**
+     * Processes requests for the WebSwing Servlet.
+     *
+     * @param request The Default Servlet request
+     * @param response The Default Servlet response
+     * @throws ServletException if a Servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        try
+        {
+<span class="nc" id="L185">            readRequestVariables(request);</span>
+<span class="nc" id="L186">            readBrowserInformation(request);</span>
+<span class="nc" id="L187">            sendPage(request, response);</span>
+        }
+<span class="nc" id="L189">        catch (MissingComponentException mce)</span>
+        {
+<span class="nc" id="L191">            LOG.fatal(&quot;No Page For Servlet&quot;, mce);</span>
+<span class="nc" id="L192">            Page p = new Page();</span>
+<span class="nc" id="L193">            p.getBody().add(&quot;No Page or Body Configured for the JWebSwingServlet. [getPage()] returned nothing&quot;);</span>
+<span class="nc" id="L194">            response.getWriter().write(p.toString(true));</span>
+        }
+<span class="nc" id="L196">        catch (IOException | NumberFormatException ex)</span>
+        {
+
+<span class="nc" id="L199">            LOG.fatal(&quot;Couldn't Render Page in Servlet. Fatal Error.&quot;, ex);</span>
+<span class="nc" id="L200">            response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+<span class="nc" id="L201">            PrintWriter out = null;</span>
+            try
+            {
+<span class="nc" id="L204">                out = response.getWriter();</span>
+<span class="nc" id="L205">                out.println(getErrorPageHtml(ex).toString(true));</span>
+            }
+<span class="nc" id="L207">            catch (IOException ex1)</span>
+            {
+<span class="nc" id="L209">                LOG.fatal(&quot;Unable to generate page html to return!&quot;, ex1);</span>
+            }
+            finally
+            {
+<span class="nc" id="L213">                try</span>
+                {
+<span class="nc bnc" id="L215" title="All 6 branches missed.">                    if (out != null)</span>
+                    {
+<span class="nc" id="L217">                        out.close();</span>
+                    }
+                }
+<span class="nc" id="L220">                catch (Exception e)</span>
+                {
+<span class="nc" id="L222">                    LOG.fatal(e);</span>
+<span class="nc" id="L223">                }</span>
+<span class="nc" id="L224">            }</span>
+        }
+<span class="nc" id="L226">        catch (Exception t)</span>
+        {
+<span class="nc" id="L228">            response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+<span class="nc" id="L229">            PrintWriter out = null;</span>
+            try
+            {
+<span class="nc" id="L232">                out = response.getWriter();</span>
+<span class="nc" id="L233">                out.println(getErrorPageHtml(t).toString(true));</span>
+            }
+<span class="nc" id="L235">            catch (IOException ex1)</span>
+            {
+<span class="nc" id="L237">                LOG.fatal(&quot;Unable to generate page html to return!&quot;, ex1);</span>
+            }
+            finally
+            {
+<span class="nc" id="L241">                try</span>
+                {
+<span class="nc bnc" id="L243" title="All 6 branches missed.">                    if (out != null)</span>
+                    {
+<span class="nc" id="L245">                        out.close();</span>
+                    }
+                }
+<span class="nc" id="L248">                catch (Exception e)</span>
+                {
+<span class="nc" id="L250">                    LOG.fatal(e);</span>
+<span class="nc" id="L251">                }</span>
+<span class="nc" id="L252">            }</span>
+<span class="nc" id="L253">        }</span>
+<span class="nc" id="L254">    }</span>
+
+    /**
+     * Generates the Page HTML
+     *
+     * @return
+     */
+    private StringBuilder getPageHTML(HttpSession session)
+    {
+        StringBuilder html;
+<span class="nc" id="L264">        html = new StringBuilder(getCurrentPage(session).toString(true));</span>
+<span class="nc" id="L265">        return html;</span>
+    }
+
+    /**
+     * In the event of any error return this page.
+     *
+     * @param t The exception thrown
+     * @return The rendered HTML.
+     */
+    protected Page getErrorPageHtml(Exception t)
+    {
+<span class="nc" id="L276">        Page p = new Page();</span>
+<span class="nc" id="L277">        p.setTitle(&quot;Exception occured in application&quot;);</span>
+<span class="nc" id="L278">        p.setAuthor(&quot;Marc Magon&quot;);</span>
+<span class="nc" id="L279">        p.setDescription(&quot;JWebSwing Error Generated Page&quot;);</span>
+<span class="nc" id="L280">        p.setGenerator(&quot;JWebSwing - https://sourceforge.net/projects/jwebswing/&quot;);</span>
+<span class="nc" id="L281">        Body b = new Body(p);</span>
+<span class="nc" id="L282">        b.add(&quot;The following error was encountered during render&lt;br/&gt;&lt;hr/&gt;&quot;);</span>
+<span class="nc" id="L283">        b.add(TextUtilities.stackTraceToString(t));</span>
+<span class="nc" id="L284">        return p;</span>
+    }
+
+    /**
+     * In the event of any error return this page.
+     *
+     * @param t The exception thrown
+     * @return The rendered HTML.
+     */
+    protected Page getErrorPageHtml(Error t)
+    {
+<span class="nc" id="L295">        Page p = new Page();</span>
+<span class="nc" id="L296">        p.setTitle(&quot;ERROR : Error occured in application&quot;);</span>
+<span class="nc" id="L297">        p.setAuthor(&quot;Marc Magon&quot;);</span>
+<span class="nc" id="L298">        p.setDescription(&quot;JWebSwing Error Generated Page&quot;);</span>
+<span class="nc" id="L299">        p.setGenerator(&quot;JWebSwing - https://sourceforge.net/projects/jwebswing/&quot;);</span>
+<span class="nc" id="L300">        Body b = new Body(p);</span>
+<span class="nc" id="L301">        b.add(&quot;The following error was encountered during render&lt;br/&gt;&lt;hr/&gt;&quot;);</span>
+<span class="nc" id="L302">        b.add(TextUtilities.stackTraceToString(t));</span>
+<span class="nc" id="L303">        return p;</span>
+    }
+
+    /**
+     * Return the Mobile Page HTML
+     *
+     * @param session
+     * @return
+     */
+    protected StringBuilder getPageMobileHTML(HttpSession session)
+    {
+<span class="nc" id="L314">        LOG.trace(&quot;Started Rendering Mobile HTML&quot;);</span>
+        StringBuilder html;
+<span class="nc" id="L316">        html = new StringBuilder(getCurrentPage(session).toString(true));</span>
+<span class="nc" id="L317">        return html;</span>
+    }
+
+    /**
+     * Return a custom log appender. Is appended on application start
+     *
+     * @return The type required to operate.
+     */
+    public AppenderSkeleton getLogAppender()
+    {
+<span class="nc" id="L327">        return null;</span>
+    }
+
+    /**
+     * The initial page for this Servlet
+     *
+     * @param sessionId The session to return the current page
+     * @return A Page for the Servlet
+     */
+    public abstract Page getNewPage(String sessionId);
+
+    /**
+     * Handles the HTTP &lt;code&gt;GET&lt;/code&gt; method.
+     *
+     * @param request Servlet request
+     * @param response Servlet response
+     * @throws ServletException if a Servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+<span class="nc" id="L350">        super.doGet(request, response);</span>
+<span class="nc bnc" id="L351" title="All 4 branches missed.">        if (request.getHeader(&quot;Content-Type&quot;) == null || request.getHeader(&quot;Content-Type&quot;).isEmpty())</span>
+        {
+<span class="nc" id="L353">            processRequest(request, response);</span>
+        }
+<span class="nc" id="L355">    }</span>
+
+    /**
+     * Returns a session's JWebSwing's Servlet
+     *
+     * @param sessionID The session ID
+     * @return The session Servlet
+     */
+    public static final JWebSwingServlet getSessionServlet(String sessionID)
+    {
+<span class="nc" id="L365">        return getSessionPages().get(sessionID);</span>
+    }
+
+    /**
+     * Receives all Session Pages
+     *
+     * @return
+     */
+    public static HashMap&lt;String, JWebSwingServlet&gt; getSessionPages()
+    {
+<span class="nc bnc" id="L375" title="All 2 branches missed.">        if (sessionPages == null)</span>
+        {
+<span class="nc" id="L377">            sessionPages = new HashMap&lt;&gt;();</span>
+        }
+<span class="nc" id="L379">        return sessionPages;</span>
+    }
+
+    /**
+     * Returns if the user is logged in or not
+     *
+     * @return
+     */
+    public boolean isUserLoggedIn()
+    {
+<span class="nc" id="L389">        return true;</span>
+    }
+
+    /**
+     * Returns the current page being displayed with this Servlet
+     *
+     * @param session
+     * @return
+     */
+    @Inject
+    public Page getCurrentPage(HttpSession session)
+    {
+<span class="nc" id="L401">        return (Page) session.getAttribute(&quot;jwpage&quot;);</span>
+    }
+
+    @Override
+    public void init() throws ServletException
+    {
+<span class="nc" id="L407">        AppenderSkeleton as = getLogAppender();</span>
+<span class="nc bnc" id="L408" title="All 2 branches missed.">        if (as != null)</span>
+        {
+<span class="nc" id="L410">            LoggerFactory.getInstance().addLogAppender(getLogAppender());</span>
+<span class="nc" id="L411">            LOG.trace(&quot;[Log Appender]-[&quot; + getLogAppender().getClass().getSimpleName() + &quot; Added]&quot;);</span>
+        }
+<span class="nc" id="L413">        LOG.trace(&quot;[JWebSwingServlet]-[Constructed];&quot;);</span>
+<span class="nc" id="L414">        super.init();</span>
+<span class="nc" id="L415">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

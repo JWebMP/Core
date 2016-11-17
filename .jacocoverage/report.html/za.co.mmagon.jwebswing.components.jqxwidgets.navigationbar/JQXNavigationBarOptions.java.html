@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQXNavigationBarOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqxwidgets.navigationbar</a> &gt; <span class="el_source">JQXNavigationBarOptions.java</span></div><h1>JQXNavigationBarOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqxwidgets.navigationbar;
+
+import za.co.mmagon.jwebswing.components.jqxwidgets.JQXDefaultJavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.effects.EasingEffects;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptFunction;
+
+/**
+ * All the options for the Navigation Bar library
+ * &lt;p&gt;
+ * @author GedMarc
+ * @since Mar 4, 2015
+ * @version 1.0
+ * &lt;p&gt;
+ * &lt;p&gt;
+ */
+public class JQXNavigationBarOptions extends JQXDefaultJavaScriptPart
+{
+
+    private EasingEffects animationType;// 	String 	'slide'
+    private JQXNavigationBarArrowPosition arrowPosition;// 	String 	'right'
+    private Integer collapseAnimationDuration;// 	Number 	400
+    private Boolean disabled;// 	Boolean 	false
+    private Integer expandAnimationDuration;// 	Number 	400
+    private JQXNavigationBarExpandModes expandMode;// 	String 	'singleFitHeight'
+//expandedIndexes 	Array 	[]
+    private JavascriptFunction initContent;// 	function 	null
+    private Boolean rtl;// 	Boolean 	false
+    private Boolean showArrow;// 	Boolean 	true
+    private JQXNavigationBarToggleModes toggleMode;// 	String 	click
+
+    public JQXNavigationBarOptions()
+<span class="nc" id="L48">    {</span>
+
+<span class="nc" id="L50">    }</span>
+
+    public EasingEffects getAnimationType()
+    {
+<span class="nc" id="L54">        return animationType;</span>
+    }
+
+    public void setAnimationType(EasingEffects animationType)
+    {
+<span class="nc" id="L59">        this.animationType = animationType;</span>
+<span class="nc" id="L60">    }</span>
+
+    public JQXNavigationBarArrowPosition getArrowPosition()
+    {
+<span class="nc" id="L64">        return arrowPosition;</span>
+    }
+
+    public void setArrowPosition(JQXNavigationBarArrowPosition arrowPosition)
+    {
+<span class="nc" id="L69">        this.arrowPosition = arrowPosition;</span>
+<span class="nc" id="L70">    }</span>
+
+    public Integer getCollapseAnimationDuration()
+    {
+<span class="nc" id="L74">        return collapseAnimationDuration;</span>
+    }
+
+    public void setCollapseAnimationDuration(Integer collapseAnimationDuration)
+    {
+<span class="nc" id="L79">        this.collapseAnimationDuration = collapseAnimationDuration;</span>
+<span class="nc" id="L80">    }</span>
+
+    public Boolean getDisabled()
+    {
+<span class="nc" id="L84">        return disabled;</span>
+    }
+
+    public void setDisabled(Boolean disabled)
+    {
+<span class="nc" id="L89">        this.disabled = disabled;</span>
+<span class="nc" id="L90">    }</span>
+
+    public Integer getExpandAnimationDuration()
+    {
+<span class="nc" id="L94">        return expandAnimationDuration;</span>
+    }
+
+    public void setExpandAnimationDuration(Integer expandAnimationDuration)
+    {
+<span class="nc" id="L99">        this.expandAnimationDuration = expandAnimationDuration;</span>
+<span class="nc" id="L100">    }</span>
+
+    public JQXNavigationBarExpandModes getExpandMode()
+    {
+<span class="nc" id="L104">        return expandMode;</span>
+    }
+
+    public void setExpandMode(JQXNavigationBarExpandModes expandMode)
+    {
+<span class="nc" id="L109">        this.expandMode = expandMode;</span>
+<span class="nc" id="L110">    }</span>
+
+    public JavascriptFunction getInitContent()
+    {
+<span class="nc" id="L114">        return initContent;</span>
+    }
+
+    public void setInitContent(JavascriptFunction initContent)
+    {
+<span class="nc" id="L119">        this.initContent = initContent;</span>
+<span class="nc" id="L120">    }</span>
+
+    public Boolean getRtl()
+    {
+<span class="nc" id="L124">        return rtl;</span>
+    }
+
+    public void setRtl(Boolean rtl)
+    {
+<span class="nc" id="L129">        this.rtl = rtl;</span>
+<span class="nc" id="L130">    }</span>
+
+    public Boolean getShowArrow()
+    {
+<span class="nc" id="L134">        return showArrow;</span>
+    }
+
+    public void setShowArrow(Boolean showArrow)
+    {
+<span class="nc" id="L139">        this.showArrow = showArrow;</span>
+<span class="nc" id="L140">    }</span>
+
+    public JQXNavigationBarToggleModes getToggleMode()
+    {
+<span class="nc" id="L144">        return toggleMode;</span>
+    }
+
+    public void setToggleMode(JQXNavigationBarToggleModes toggleMode)
+    {
+<span class="nc" id="L149">        this.toggleMode = toggleMode;</span>
+<span class="nc" id="L150">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQueryUIReferencePool.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.pools.jqueryui</a> &gt; <span class="el_source">JQueryUIReferencePool.java</span></div><h1>JQueryUIReferencePool.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.pools.jqueryui;
+
+import za.co.mmagon.jwebswing.base.references.JavascriptReference;
+import za.co.mmagon.jwebswing.base.references.CSSReference;
+import za.co.mmagon.jwebswing.base.servlets.interfaces.ReferencePool;
+
+/**
+ *
+ * @author GedMarc
+ * @since Mar 4, 2015
+ * @version 1.0
+ */
+<span class="pc" id="L29">public enum JQueryUIReferencePool implements ReferencePool</span>
+{
+    
+    /**
+     * The core of JQuery UI
+     */
+<span class="fc" id="L35">    Core(new JQueryUICoreJavaScriptReference(), new JQueryUICoreCSSReference()),</span>
+    /**
+     * The widget library of JQuery UI
+     */
+<span class="fc" id="L39">    Widget(new JQueryUIWidgetJavaScriptReference(), new JQueryUIWidgetCSSReference()),</span>
+    /**
+     * The Mouse Library of JQuery UI
+     */
+<span class="fc" id="L43">    Mouse(new JQueryUIMouseJavaScriptReference(), null),</span>
+    /**
+     * The accordion setup of JQueryUI
+     */
+<span class="fc" id="L47">    Accordion(new JQUIAccordionJavaScriptReference(), new JQUIAccordionCSSReference()),</span>
+    /**
+     * The auto complete setup of JQueryUI
+     */
+<span class="fc" id="L51">    AutoComplete(new JQUIAutoCompleteJavaScriptReference(), new JQUIAutoCompleteCSSReference()),</span>
+    /**
+     * Provides the auto complete with categorization support
+     */
+<span class="fc" id="L55">    AutoComplete_Categorization(new JQUIAutoCompleteCategorizeJavaScriptReference(), new JQUIAutoCompleteCategorizeCSSReference()),</span>
+    /**
+     * Provides the auto complete with categorization support
+     */
+<span class="fc" id="L59">    AutoComplete_ComboBox(new JQUIAutoCompleteComboBoxJavaScriptReference(), new JQUIAutoCompleteComboBoxCSSReference()),</span>
+    /**
+     * The button setup of JQuery UI
+     */
+<span class="fc" id="L63">    Button(new JQUIButtonJavaScriptReference(), new JQUIButtonCSSReference()),</span>
+    /**
+     * The date picker element of JQuery UI
+     */
+<span class="fc" id="L67">    DatePicker(new JQUIDatePickerJavaScriptReference(), new JQUIDatePickerCSSReference()),</span>
+    /**
+     * The dialog element of JQuery UI
+     */
+<span class="fc" id="L71">    Dialog(new JQUIDialogJavaScriptReference(), new JQUIDialogCSSReference()),</span>
+    /**
+     * The menu element of JQuery UI
+     */
+<span class="fc" id="L75">    Menu(new JQUIMenuJavaScriptReference(), new JQUIMenuCSSReference()),</span>
+    /**
+     * The position element of JQuery UI
+     */
+<span class="fc" id="L79">    Position(new JQUIPositionJavaScriptReference(), null),</span>
+    /**
+     * Progress Bar
+     */
+<span class="fc" id="L83">    ProgressBar(new JQUIProgressBarJavaScriptReference(), new JQUIProgressBarCSSReference()),</span>
+    /**
+     * Select Menu
+     */
+<span class="fc" id="L87">    SelectMenu(new JQUISelectMenuJavaScriptReference(), new JQUISelectMenuCSSReference()),</span>
+    /**
+     * The select menu add-ons script from JQuery UI .com
+     */
+<span class="fc" id="L91">    SelectMenuIcons(new JQUISelectMenuIconsJavaScriptReference(), null),</span>
+    /**
+     * The Slider add-ons
+     */
+<span class="fc" id="L95">    Slider(new JQUISliderJavaScriptReference(), new JQUISliderCSSReference()),</span>
+    /**
+     * The spinner class
+     */
+<span class="fc" id="L99">    Spinner(new JQUISpinnerJavaScriptReference(), new JQUISpinnerCSSReference()),</span>
+    /**
+     * The tabs scripts for JQuery UI
+     */
+<span class="fc" id="L103">    Tabs(new JQUITabsJavaScriptReference(), new JQUITabsCSSReference()),</span>
+    /**
+     * The JQuery UI Tooltip Functionality
+     */
+<span class="fc" id="L107">    Tooltip(new JQueryUITooltipJavaScriptReference(), new JQueryUITooltipCSSReference()),</span>
+    /**
+     * The JQuery UI draggable feature
+     */
+<span class="fc" id="L111">    Draggable(new JQUIDraggableJavaScriptReference(), new JQUIDraggableCSSReference()),</span>
+    /**
+     * The JQuery UI droppable
+     */
+<span class="fc" id="L115">    Droppable(new JQUIDroppableJavaScriptReference(), null),</span>
+    /**
+     * The JQuery UI Resizable
+     */
+<span class="fc" id="L119">    Resizable(new JQUIResizableJavaScriptReference(), new JQUIResizableCSSReference()),</span>
+    /**
+     * The selectable widget implementation
+     */
+<span class="fc" id="L123">    Selectable(new JQUISelectableJavaScriptReference(), new JQUISelectableCSSReference()),</span>
+    /**
+     * The sortable implementation
+     */
+<span class="fc" id="L127">    Sortable(new JQUISortableJavaScriptReference(), new JQUISortableCSSReference()),;</span>
+
+    private JavascriptReference javaScriptReference;
+    private CSSReference cssReference;
+
+    private JQueryUIReferencePool(JavascriptReference javaScriptReference, CSSReference cssReference)
+<span class="fc" id="L133">    {</span>
+<span class="fc" id="L134">        this.javaScriptReference = javaScriptReference;</span>
+<span class="fc" id="L135">        this.cssReference = cssReference;</span>
+<span class="fc" id="L136">    }</span>
+
+    @Override
+    public JavascriptReference getJavaScriptReference()
+    {
+<span class="fc" id="L141">        return javaScriptReference;</span>
+    }
+
+    @Override
+    public void setJavaScriptReference(JavascriptReference javaScriptReference)
+    {
+<span class="nc" id="L147">        this.javaScriptReference = javaScriptReference;</span>
+<span class="nc" id="L148">    }</span>
+
+    @Override
+    public CSSReference getCssReference()
+    {
+<span class="fc" id="L153">        return cssReference;</span>
+    }
+
+    @Override
+    public void setCssReference(CSSReference cssReference)
+    {
+<span class="nc" id="L159">        this.cssReference = cssReference;</span>
+<span class="nc" id="L160">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

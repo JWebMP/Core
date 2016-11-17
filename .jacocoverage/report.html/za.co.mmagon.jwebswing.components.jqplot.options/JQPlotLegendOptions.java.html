@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQPlotLegendOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqplot.options</a> &gt; <span class="el_source">JQPlotLegendOptions.java</span></div><h1>JQPlotLegendOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqplot.options;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import java.util.ArrayList;
+import za.co.mmagon.jwebswing.components.jqplot.JQPlotGraph;
+import za.co.mmagon.jwebswing.components.jqplot.options.legends.JQPlotLegendRendererEnhancedOptions;
+import za.co.mmagon.jwebswing.components.jqplot.parts.interfaces.JQPlotLegendRenderer;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourHex;
+import za.co.mmagon.jwebswing.htmlbuilder.css.fonts.FontFamilies;
+import za.co.mmagon.jwebswing.generics.CompassPoints;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ * The Legend options
+ *
+ * @author Marc Magon
+ * @since 07 Aug 2015
+ * @version 1.0
+ */
+public class JQPlotLegendOptions&lt;O extends JavaScriptPart &amp; JQPlotLegendRenderer&gt; extends JavaScriptPart
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * The legend renderer string
+     */
+    @JsonRawValue
+    private String renderer;
+
+    /**
+     * The legend renderer options
+     */
+    private O rendererOptions;
+
+    /**
+     * Whether to display the legend on the graph.
+     */
+    private Boolean show;
+    /**
+     * Placement of the legend.
+     * compass direction, nw, n, ne, e, se, s, sw, w.
+     */
+    private CompassPoints location;
+    /**
+     * pixel offset of the legend box from the x (or x2) axis.
+     * &lt;p&gt;
+     * @deprecated
+     */
+    private Integer xoffset;
+    /**
+     * pixel offset of the legend box from the y (or y2) axis.
+     * &lt;p&gt;
+     * @deprecated
+     */
+    private Integer yoffset;
+
+    /**
+     * Array of labels to use.
+     */
+    private ArrayList&lt;String&gt; labels;
+    /**
+     * true to show the label text on the legend.
+     */
+    private Boolean showLabels;
+    /**
+     * true to show the color swatches on the legend.
+     */
+    private Boolean showSwatch;
+    /**
+     * “insideGrid” places legend inside the grid area of the plot.
+     */
+    private String placement;
+    /**
+     * CSS spec for the border around the legend box.
+     */
+    private String border;
+    /**
+     * CSS spec for the background of the legend box.
+     */
+    private String background;
+    /**
+     * CSS color spec for the legend text.
+     */
+    private String textColor;
+    /**
+     * CSS font-family spec for the legend text.
+     */
+    private FontFamilies fontFamily;
+    /**
+     * CSS font-size spec for the legend text.
+     */
+    private Integer fontSize;
+    /**
+     * CSS padding-top spec for the rows in the legend.
+     */
+    private Integer rowSpacing;
+
+    /**
+     * Whether to draw the legend before the series or not.
+     */
+    private Boolean predraw;
+    /**
+     * CSS margin for the legend DOM element.
+     */
+    private Integer marginTop;
+    /**
+     * CSS margin for the legend DOM element.
+     */
+    private Integer marginRight;
+    /**
+     * CSS margin for the legend DOM element.
+     */
+    private Integer marginBottom;
+    /**
+     * CSS margin for the legend DOM element.
+     */
+    private Integer marginLeft;
+
+    @JsonIgnore
+    private JQPlotGraph linkedGraph;
+
+    /**
+     * Sets the linked graph for this options
+     *
+     * @param linkedGraph
+     */
+    public JQPlotLegendOptions(JQPlotGraph linkedGraph)
+<span class="nc" id="L146">    {</span>
+<span class="nc" id="L147">        this.linkedGraph = linkedGraph;</span>
+<span class="nc" id="L148">    }</span>
+
+    /**
+     * Whether to display the legend on the graph.
+     */
+    public Boolean getShow()
+    {
+<span class="nc" id="L155">        return show;</span>
+    }
+
+    /**
+     * Whether to display the legend on the graph.
+     * &lt;p&gt;
+     * @param show
+     */
+    public void setShow(Boolean show)
+    {
+<span class="nc" id="L165">        this.show = show;</span>
+<span class="nc" id="L166">    }</span>
+
+    /**
+     * Placement of the legend.
+     * compass direction, nw, n, ne, e, se, s, sw, w.
+     * &lt;p&gt;
+     * @return
+     */
+    public CompassPoints getLocation()
+    {
+<span class="nc" id="L176">        return location;</span>
+    }
+
+    /**
+     * Placement of the legend.
+     * compass direction, nw, n, ne, e, se, s, sw, w.
+     * &lt;p&gt;
+     * @param location
+     */
+    public void setLocation(CompassPoints location)
+    {
+<span class="nc" id="L187">        this.location = location;</span>
+<span class="nc" id="L188">    }</span>
+
+    /**
+     * pixel offset of the legend box from the x (or x2) axis.
+     * &lt;p&gt;
+     * @deprecated
+     *
+     */
+    public Integer getXoffset()
+    {
+<span class="nc" id="L198">        return xoffset;</span>
+    }
+
+    /**
+     * pixel offset of the legend box from the x (or x2) axis.
+     * &lt;p&gt;
+     * @deprecated
+     * @param xoffset
+     */
+    public void setXoffset(Integer xoffset)
+    {
+<span class="nc" id="L209">        this.xoffset = xoffset;</span>
+<span class="nc" id="L210">    }</span>
+
+    /**
+     * pixel offset of the legend box from the x (or x2) axis.
+     * &lt;p&gt;
+     * @deprecated
+     * @return
+     */
+    public Integer getYoffset()
+    {
+<span class="nc" id="L220">        return yoffset;</span>
+    }
+
+    /**
+     * pixel offset of the legend box from the x (or x2) axis.
+     * &lt;p&gt;
+     * @deprecated
+     * @param yoffset
+     */
+    public void setYoffset(Integer yoffset)
+    {
+<span class="nc" id="L231">        this.yoffset = yoffset;</span>
+<span class="nc" id="L232">    }</span>
+
+    /**
+     * Custom list of labels
+     * &lt;p&gt;
+     * @return
+     */
+    public ArrayList&lt;String&gt; getLabels()
+    {
+<span class="nc bnc" id="L241" title="All 2 branches missed.">        if (labels == null)</span>
+        {
+<span class="nc" id="L243">            labels = new ArrayList&lt;&gt;();</span>
+        }
+<span class="nc" id="L245">        return labels;</span>
+    }
+
+    /**
+     * Sets a custom display list for labels
+     * &lt;p&gt;
+     * @param labels
+     */
+    public void setLabels(ArrayList&lt;String&gt; labels)
+    {
+<span class="nc" id="L255">        this.labels = labels;</span>
+<span class="nc" id="L256">    }</span>
+
+    /**
+     * Sets to show the labels or not
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getShowLabels()
+    {
+<span class="nc" id="L265">        return showLabels;</span>
+    }
+
+    /**
+     * Sets to show the labels
+     * &lt;p&gt;
+     * @param showLabels
+     */
+    public void setShowLabels(Boolean showLabels)
+    {
+<span class="nc" id="L275">        this.showLabels = showLabels;</span>
+<span class="nc" id="L276">    }</span>
+
+    /**
+     * Whether to show the swatch or not
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getShowSwatch()
+    {
+<span class="nc" id="L285">        return showSwatch;</span>
+    }
+
+    /**
+     * Whether to show the swatch or not
+     * &lt;p&gt;
+     * @param showSwatch
+     */
+    public void setShowSwatch(Boolean showSwatch)
+    {
+<span class="nc" id="L295">        this.showSwatch = showSwatch;</span>
+<span class="nc" id="L296">    }</span>
+
+    /**
+     * ”insideGrid” places legend inside the grid area of the plot
+     * “outsideGrid” places the legend outside the grid but inside the plot container, shrinking the grid to accomodate the legend
+     * “inside” synonym for “insideGrid”,
+     * &lt;p&gt;
+     * “outside” places the legend ouside the grid area, but does not shrink the grid which can cause the legend to overflow the plot container.
+     * &lt;p&gt;
+     * @return
+     */
+    public String getPlacement()
+    {
+<span class="nc" id="L309">        return placement;</span>
+    }
+
+    /**
+     * ”insideGrid” places legend inside the grid area of the plot&lt;p&gt;
+     * “outsideGrid” places the legend outside the grid but inside the plot container, shrinking the grid to accomodate the legend&lt;p&gt;
+     * “inside” synonym for “insideGrid”,
+     * &lt;p&gt;
+     * “outside” places the legend ouside the grid area, but does not shrink the grid which can cause the legend to overflow the plot container.&lt;p&gt;
+     * &lt;p&gt;
+     * @param placement
+     */
+    public void setPlacement(String placement)
+    {
+<span class="nc" id="L323">        this.placement = placement;</span>
+<span class="nc" id="L324">    }</span>
+
+    /**
+     * CSS Border Configuration line
+     * &lt;p&gt;
+     * @return
+     */
+    public String getBorder()
+    {
+<span class="nc" id="L333">        return border;</span>
+    }
+
+    /**
+     * Sets the css border configuration
+     * &lt;p&gt;
+     * @param border
+     */
+    public void setBorder(String border)
+    {
+<span class="nc" id="L343">        this.border = border;</span>
+<span class="nc" id="L344">    }</span>
+
+    /**
+     * Sets the CSS Background
+     * &lt;p&gt;
+     * @return
+     */
+    public String getBackground()
+    {
+<span class="nc" id="L353">        return background;</span>
+    }
+
+    /**
+     * Sets the CSS Background
+     * &lt;p&gt;
+     * @param background
+     */
+    public void setBackground(String background)
+    {
+<span class="nc" id="L363">        this.background = background;</span>
+<span class="nc" id="L364">    }</span>
+
+    /**
+     * Gets the text colour
+     * &lt;p&gt;
+     * @return
+     */
+    public String getTextColor()
+    {
+<span class="nc" id="L373">        return textColor;</span>
+    }
+
+    /**
+     * Sets the text colour
+     * &lt;p&gt;
+     * @param textColor
+     */
+    public void setTextColor(ColourHex textColor)
+    {
+<span class="nc" id="L383">        this.textColor = textColor.getValue();</span>
+<span class="nc" id="L384">    }</span>
+
+    /**
+     * Gets the font family used
+     * &lt;p&gt;
+     * @return
+     */
+    public FontFamilies getFontFamily()
+    {
+<span class="nc" id="L393">        return fontFamily;</span>
+    }
+
+    /**
+     * Sets the font family used
+     * &lt;p&gt;
+     * @param fontFamily
+     */
+    public void setFontFamily(FontFamilies fontFamily)
+    {
+<span class="nc" id="L403">        this.fontFamily = fontFamily;</span>
+<span class="nc" id="L404">    }</span>
+
+    /**
+     * Gets the font size
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getFontSize()
+    {
+<span class="nc" id="L413">        return fontSize;</span>
+    }
+
+    /**
+     * Sets the font size
+     * &lt;p&gt;
+     * @param fontSize
+     */
+    public void setFontSize(Integer fontSize)
+    {
+<span class="nc" id="L423">        this.fontSize = fontSize;</span>
+<span class="nc" id="L424">    }</span>
+
+    /**
+     * Gets the row spacing
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getRowSpacing()
+    {
+<span class="nc" id="L433">        return rowSpacing;</span>
+    }
+
+    /**
+     * Sets the row spacing
+     * &lt;p&gt;
+     * @param rowSpacing
+     */
+    public void setRowSpacing(Integer rowSpacing)
+    {
+<span class="nc" id="L443">        this.rowSpacing = rowSpacing;</span>
+<span class="nc" id="L444">    }</span>
+
+    /**
+     * Whether to draw the legend before the series or not.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getPredraw()
+    {
+<span class="nc" id="L453">        return predraw;</span>
+    }
+
+    /**
+     * Whether to draw the legend before the series or not.
+     * &lt;p&gt;
+     * @param predraw
+     */
+    public void setPredraw(Boolean predraw)
+    {
+<span class="nc" id="L463">        this.predraw = predraw;</span>
+<span class="nc" id="L464">    }</span>
+
+    /**
+     * Sets the margin top
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getMarginTop()
+    {
+<span class="nc" id="L473">        return marginTop;</span>
+    }
+
+    /**
+     * Sets the margin top
+     * &lt;p&gt;
+     * @param marginTop
+     */
+    public void setMarginTop(Integer marginTop)
+    {
+<span class="nc" id="L483">        this.marginTop = marginTop;</span>
+<span class="nc" id="L484">    }</span>
+
+    /**
+     * Sets the margin right
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getMarginRight()
+    {
+<span class="nc" id="L493">        return marginRight;</span>
+    }
+
+    /**
+     * Sets the margin right
+     * &lt;p&gt;
+     * @param marginRight
+     */
+    public void setMarginRight(Integer marginRight)
+    {
+<span class="nc" id="L503">        this.marginRight = marginRight;</span>
+<span class="nc" id="L504">    }</span>
+
+    /**
+     * Gets the margin bottom
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getMarginBottom()
+    {
+<span class="nc" id="L513">        return marginBottom;</span>
+    }
+
+    /**
+     * Sets the margin bottom
+     * &lt;p&gt;
+     * @param marginBottom
+     */
+    public void setMarginBottom(Integer marginBottom)
+    {
+<span class="nc" id="L523">        this.marginBottom = marginBottom;</span>
+<span class="nc" id="L524">    }</span>
+
+    /**
+     * Sets the margin left
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getMarginLeft()
+    {
+<span class="nc" id="L533">        return marginLeft;</span>
+    }
+
+    /**
+     * Sets the margin left
+     * &lt;p&gt;
+     * @param marginLeft
+     */
+    public void setMarginLeft(Integer marginLeft)
+    {
+<span class="nc" id="L543">        this.marginLeft = marginLeft;</span>
+<span class="nc" id="L544">    }</span>
+
+    /**
+     * Gets the linked graph for this legends box
+     *
+     * @return
+     */
+    public JQPlotGraph getLinkedGraph()
+    {
+<span class="nc" id="L553">        return linkedGraph;</span>
+    }
+
+    /**
+     * Sets the linked graph for this box
+     *
+     * @param linkedGraph
+     */
+    public void setLinkedGraph(JQPlotGraph linkedGraph)
+    {
+<span class="nc" id="L563">        this.linkedGraph = linkedGraph;</span>
+<span class="nc" id="L564">    }</span>
+
+    /**
+     * Legend Renderer Options
+     * &lt;p&gt;
+     * Defaults to JQPlotLegendRendererEnhancedOptions
+     *
+     * @return
+     */
+    public O getRendererOptions()
+    {
+<span class="nc bnc" id="L575" title="All 2 branches missed.">        if (rendererOptions == null)</span>
+        {
+<span class="nc" id="L577">            setRendererOptions((O) new JQPlotLegendRendererEnhancedOptions(getLinkedGraph()));</span>
+        }
+<span class="nc" id="L579">        return rendererOptions;</span>
+    }
+
+    /**
+     * Sets legend renderer options
+     *
+     * @param rendererOptions
+     */
+    public void setRendererOptions(O rendererOptions)
+    {
+<span class="nc" id="L589">        this.renderer = rendererOptions.getRenderer();</span>
+<span class="nc" id="L590">        this.rendererOptions = rendererOptions;</span>
+<span class="nc" id="L591">    }</span>
+
+    /**
+     * Returns the renderer string for the options
+     *
+     * @return
+     */
+    public String getRenderer()
+    {
+<span class="nc" id="L600">        return renderer;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

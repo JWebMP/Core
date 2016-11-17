@@ -1,0 +1,1277 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Page.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing</a> &gt; <span class="el_source">Page.java</span></div><h1>Page.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 ged_m
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
+import net.sf.uadetector.DeviceCategory;
+import net.sf.uadetector.OperatingSystem;
+import net.sf.uadetector.ReadableUserAgent;
+import net.sf.uadetector.UserAgent;
+import net.sf.uadetector.UserAgentFamily;
+import net.sf.uadetector.UserAgentType;
+import net.sf.uadetector.VersionNumber;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.base.angular.AngularFeature;
+import za.co.mmagon.jwebswing.base.client.InternetExplorerCompatibilityMode;
+import za.co.mmagon.jwebswing.base.html.Base;
+import za.co.mmagon.jwebswing.base.html.CSSLink;
+import za.co.mmagon.jwebswing.base.html.Comment;
+import za.co.mmagon.jwebswing.base.html.DocumentType;
+import za.co.mmagon.jwebswing.base.html.Html;
+import za.co.mmagon.jwebswing.base.html.Meta;
+import za.co.mmagon.jwebswing.base.html.Script;
+import za.co.mmagon.jwebswing.base.html.Style;
+import za.co.mmagon.jwebswing.base.html.Title;
+import za.co.mmagon.jwebswing.base.html.attributes.CSSLinkAttributes;
+import za.co.mmagon.jwebswing.base.html.attributes.MetaAttributes;
+import za.co.mmagon.jwebswing.base.html.attributes.ScriptAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
+import za.co.mmagon.jwebswing.base.interfaces.IPage;
+import za.co.mmagon.jwebswing.base.references.CSSReference;
+import za.co.mmagon.jwebswing.base.references.JavascriptReference;
+import za.co.mmagon.jwebswing.base.servlets.JWebSwingServlet;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
+import za.co.mmagon.jwebswing.generics.WebReference;
+
+/**
+ * Top level of any HTML page. Has only two children, head and body. Sometimes scripts are added right at the end but we try to avoid that as much as possible.
+ *
+ * @author GedMarc
+ * @since 24 Apr 2016
+ * @version 2.0
+ *
+ * Replacement of the old page object
+ */
+public class Page extends Html implements IPage
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Whether or not to render pace loader
+     */
+<span class="fc" id="L77">    private boolean paceEnabled = true;</span>
+    /**
+     * Whether or not to render jQuery
+     */
+    private boolean jQueryEnabled;
+    /**
+     * Whether or not to render jQuery UI
+     */
+    private boolean jQueryUIEnabled;
+    /**
+     * Whether or not to render angular
+     */
+    private boolean angularEnabled;
+    /**
+     * Whether or not to render bootstrap
+     */
+    private boolean bootstrapEnabled;
+    /**
+     * Whether or not to dynamic render the requirements
+     */
+<span class="fc" id="L97">    private boolean dynamicRender = true;</span>
+    /**
+     * Whether or not modernizr is enabled
+     */
+    private boolean modernizrEnabled;
+
+    /**
+     * Page Author
+     */
+    private Meta author;
+    /**
+     * Page Author
+     */
+    private Meta KeywordsMeta;
+    /**
+     * Page Author
+     */
+    private Meta applicationNameMeta;
+    /**
+     * Page Author
+     */
+    private Meta descriptionMeta;
+    /**
+     * Page Author
+     */
+    private Meta generatorMeta;
+    /**
+     * Page HTTP Meta
+     */
+    private Meta httpEquivMeta;
+    /**
+     * Page Author
+     */
+    private Meta cacheControl;
+    /**
+     * The link for the Site icon
+     */
+    private CSSLink favIconLink;
+    /**
+     * The title of this page
+     */
+    private Title title;
+    /**
+     * The base of this page
+     */
+    private Base base;
+
+    /**
+     * The current user agent of the render
+     */
+    @JsonIgnore
+    private transient ReadableUserAgent userAgent;
+    /**
+     * The Servlet attached to this page
+     */
+    @JsonIgnore
+    private JWebSwingServlet servlet;
+    /**
+     * The session of this page
+     */
+    @JsonIgnore
+    private transient HttpSession session;
+
+    /**
+     * The angular feature
+     */
+    private AngularFeature angular;
+
+    /**
+     * Cache for all the associated components throughout the life-cycle of the application
+     */
+    private HashMap&lt;String, ComponentHierarchyBase&gt; componentCache;
+
+    /**
+     * Renders all the children to a string builder
+     *
+     * @return
+     */
+    @Override
+    protected StringBuilder renderChildren()
+    {
+<span class="fc" id="L178">        StringBuilder pageOutput = new StringBuilder();</span>
+<span class="fc" id="L179">        StringBuilder bodyOutput = null;</span>
+
+<span class="fc bfc" id="L181" title="All 2 branches covered.">        if (!isBodyEmpty())</span>
+        {
+<span class="fc" id="L183">            bodyOutput = new StringBuilder(getBody().toString(1));</span>
+        }
+<span class="pc bpc" id="L185" title="1 of 2 branches missed.">        if (!isHeadEmpty())</span>
+        {
+<span class="fc" id="L187">            pageOutput.append(getNewLine()).append(getCurrentTabIndentString()).append(getHead().toString(1));</span>
+        }
+<span class="fc bfc" id="L189" title="All 2 branches covered.">        if (bodyOutput != null)</span>
+        {
+<span class="fc" id="L191">            pageOutput.append(getNewLine()).append(getCurrentTabIndentString()).append(bodyOutput);</span>
+        }
+<span class="fc" id="L193">        return pageOutput;</span>
+    }
+
+    @Override
+    public void init()
+    {
+<span class="pc bpc" id="L199" title="1 of 2 branches missed.">        if(!isInitialized())</span>
+        {
+<span class="fc" id="L201">            getBody().init();</span>
+        }
+<span class="fc" id="L203">        super.init();</span>
+<span class="fc" id="L204">    }</span>
+    
+    /**
+     * Configures the page and all its components
+     */
+    @Override
+    public void preConfigure()
+    {
+<span class="pc bpc" id="L212" title="1 of 2 branches missed.">        if (!isConfigured())</span>
+        {
+<span class="fc" id="L214">            getBody().preConfigure();</span>
+<span class="fc" id="L215">            getAngular().preConfigure();</span>
+
+<span class="fc" id="L217">            configurePageHeader();</span>
+
+<span class="fc" id="L219">            addVariablesScriptToPage();</span>
+
+<span class="fc" id="L221">            addScriptsToBody();</span>
+
+<span class="fc" id="L223">            ArrayList&lt;Script&gt; allScripts = getJavaScript();</span>
+<span class="pc bpc" id="L224" title="1 of 2 branches missed.">            allScripts.stream().filter((script) -&gt; (script != null)).forEach((script)</span>
+                    -&gt;
+            {
+<span class="fc" id="L227">                getBody().add(script);</span>
+<span class="fc" id="L228">            });</span>
+
+<span class="fc" id="L230">            ArrayList&lt;ComponentHierarchyBase&gt; requirements = new ArrayList&lt;&gt;();</span>
+            //render CSS only
+<span class="fc bfc" id="L232" title="All 2 branches covered.">            for (RequirementsPriority priority : RequirementsPriority.values())</span>
+            {
+<span class="fc" id="L234">                getPriorityRequirements(priority, requirements, true, false).stream().forEach((comp) -&gt;</span>
+                {
+<span class="fc" id="L236">                    getHead().getChildren().add(comp);</span>
+<span class="fc" id="L237">                });</span>
+            }
+
+            //Add the CSS Styles
+<span class="fc" id="L241">            getHead().add((HeadChildren) getCssStyle());</span>
+<span class="fc" id="L242">            buildComponentHierarchy();</span>
+        }
+<span class="fc" id="L244">        super.preConfigure();</span>
+<span class="fc" id="L245">    }</span>
+
+    /** 
+     * Returns the component with only it's methods
+     *
+     * @return
+     */
+    public IPage asMe()
+    {
+<span class="nc" id="L254">        return this;</span>
+    }
+
+    /**
+     * Returns this pages current component cache
+     *
+     * @return
+     */
+    @Override
+    public HashMap&lt;String, ComponentHierarchyBase&gt; getComponentCache()
+    {
+<span class="fc bfc" id="L265" title="All 2 branches covered.">        if (componentCache == null)</span>
+        {
+<span class="fc" id="L267">            componentCache = new HashMap&lt;&gt;();</span>
+        }
+<span class="fc" id="L269">        return componentCache;</span>
+    }
+
+    /**
+     * Returns all the components currently associated with this page
+     *
+     * @return
+     */
+    public ArrayList&lt;ComponentHierarchyBase&gt; getAllComponents()
+    {
+<span class="nc" id="L279">        ArrayList&lt;ComponentHierarchyBase&gt; b = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L280">        b.addAll(this.componentCache.values());</span>
+<span class="nc" id="L281">        return b;</span>
+    }
+
+    /**
+     * Builds the component hierarchy from scratch
+     */
+    public void buildComponentHierarchy()
+    {
+        //getComponentCache().clear();
+<span class="fc" id="L290">        getComponentCache().put(getBody().getID(), getBody());</span>
+<span class="fc" id="L291">        buildComponentHierarchy(getBody(), getComponentCache());</span>
+<span class="fc" id="L292">    }</span>
+
+    /**
+     * Builds up or adds components to the page
+     *
+     * @param startingPoint The starting component to update with
+     * @param addToMap The map to add to
+     */
+    public void buildComponentHierarchy(ComponentHierarchyBase startingPoint, HashMap&lt;String, ComponentHierarchyBase&gt; addToMap)
+    {
+<span class="pc bpc" id="L302" title="1 of 2 branches missed.">        startingPoint.getChildren().stream().filter((child) -&gt; !(child == null)).map((child)</span>
+                -&gt;
+        {
+<span class="fc" id="L305">            ComponentHierarchyBase c = (ComponentHierarchyBase) child;</span>
+<span class="fc" id="L306">            addToMap.put(c.getID(), c);</span>
+<span class="fc" id="L307">            return child;</span>
+<span class="fc" id="L308">        }).forEach((child)</span>
+                -&gt;
+        {
+<span class="fc" id="L311">            ComponentHierarchyBase c = (ComponentHierarchyBase) child;</span>
+<span class="pc bpc" id="L312" title="1 of 2 branches missed.">            if (child != null)</span>
+            {
+<span class="fc" id="L314">                buildComponentHierarchy(c, addToMap);</span>
+            }
+<span class="fc" id="L316">        });</span>
+<span class="fc" id="L317">    }</span>
+
+    /**
+     * Sets the current component cache
+     *
+     * @param componentCache
+     */
+    @Override
+    public void setComponentCache(HashMap&lt;String, ComponentHierarchyBase&gt; componentCache)
+    {
+<span class="nc" id="L327">        this.componentCache = componentCache;</span>
+<span class="nc" id="L328">    }</span>
+
+    /**
+     * Returns the style object. If dynamic rendering is enabled it will point to the Servlet.
+     *
+     * @return
+     */
+    public ComponentHierarchyBase getCssStyle()
+    {
+<span class="fc bfc" id="L337" title="All 2 branches covered.">        if (isDynamicRender())</span>
+        {
+<span class="fc" id="L339">            CSSLink renderedCSS = new CSSLink(&quot;css&quot;);</span>
+<span class="fc" id="L340">            return renderedCSS;</span>
+        }
+        else
+        {
+            //Add CSS
+<span class="fc" id="L345">            StringBuilder css = getBody().renderCss(0);</span>
+<span class="pc bpc" id="L346" title="1 of 2 branches missed.">            if (css.length() &gt; 0)</span>
+            {
+<span class="nc" id="L348">                Style style = new Style();</span>
+<span class="nc" id="L349">                style.setText(css);</span>
+<span class="nc" id="L350">                return style;</span>
+            }
+        }
+<span class="fc" id="L353">        return null;</span>
+    }
+
+    /**
+     * Returns the script reference
+     *
+     * @return
+     */
+    private ArrayList&lt;Script&gt; getJavaScript()
+    {
+<span class="fc" id="L363">        ArrayList&lt;Script&gt; allScripts = new ArrayList&lt;&gt;();</span>
+        
+<span class="fc bfc" id="L365" title="All 2 branches covered.">        if (isAngularEnabled())</span>
+        {
+<span class="pc bpc" id="L367" title="1 of 2 branches missed.">            if (isDynamicRender())</span>
+            {
+<span class="fc" id="L369">                Script dynamicScript = new Script();</span>
+<span class="fc" id="L370">                dynamicScript.addAttribute(ScriptAttributes.Type, &quot;application/javascript&quot;);</span>
+<span class="fc" id="L371">                dynamicScript.addAttribute(ScriptAttributes.Src, &quot;as&quot;);</span>
+                //dynamicScript.setTiny(true);
+                //dynamicScript.setText(&quot;$.ajax({cache:false,async:false,dataType:'script',url:'as'}).fail(function(){alert('session lost'); });&quot;);
+<span class="fc" id="L374">                allScripts.add(dynamicScript);</span>
+<span class="fc" id="L375">            }</span>
+            else
+            {
+<span class="nc" id="L378">                StringBuilder js = getAngular().renderTemplateScripts(&quot;jwangular&quot;);// getBody().renderJavascriptAll();</span>
+<span class="nc bnc" id="L379" title="All 2 branches missed.">                if (!js.toString().trim().isEmpty())</span>
+                {
+<span class="nc" id="L381">                    Script s = new Script();</span>
+<span class="nc" id="L382">                    s.addAttribute(ScriptAttributes.Type, &quot;application/javascript&quot;);</span>
+<span class="nc" id="L383">                    s.setText(js);</span>
+<span class="nc" id="L384">                    allScripts.add(s);</span>
+                }
+            }
+        }
+<span class="fc bfc" id="L388" title="All 2 branches covered.">        if (isDynamicRender())</span>
+        {
+<span class="fc" id="L390">            StringBuilder js = getBody().renderJavascriptAll();</span>
+<span class="fc bfc" id="L391" title="All 2 branches covered.">            if (!js.toString().trim().isEmpty())</span>
+            {
+<span class="fc" id="L393">                Script dynamicScript = new Script();</span>
+<span class="fc" id="L394">                dynamicScript.addAttribute(ScriptAttributes.Type, &quot;application/javascript&quot;);</span>
+<span class="fc" id="L395">                dynamicScript.addAttribute(ScriptAttributes.Src, &quot;js&quot;);</span>
+                //dynamicScript.setTiny(true);
+                //dynamicScript.setText(&quot;$.ajax({cache:false,dataType:'script',url:'js'}).fail(function(){alert('session lost'); });&quot;);
+<span class="fc" id="L398">                allScripts.add(dynamicScript);</span>
+            }
+<span class="fc" id="L400">        }</span>
+        else
+        {
+<span class="fc" id="L403">            StringBuilder js = getBody().renderJavascriptAll();</span>
+<span class="pc bpc" id="L404" title="1 of 2 branches missed.">            if (!js.toString().trim().isEmpty())</span>
+            {
+<span class="fc" id="L406">                Script s = new Script();</span>
+<span class="fc" id="L407">                s.addAttribute(ScriptAttributes.Type, &quot;application/javascript&quot;);</span>
+<span class="fc" id="L408">                s.setText(js);</span>
+<span class="fc" id="L409">                allScripts.add(s);</span>
+            }
+        }
+
+        
+<span class="fc" id="L414">        return allScripts;</span>
+    }
+
+    /**
+     * Builds up the Header Tag
+     */
+    private void configurePageHeader()
+    {
+<span class="fc bfc" id="L422" title="All 2 branches covered.">        if (title != null)</span>
+        {
+<span class="fc" id="L424">            getHead().add(title);</span>
+        }
+<span class="fc bfc" id="L426" title="All 2 branches covered.">        if (base != null)</span>
+        {
+<span class="fc" id="L428">            getHead().add(this.base);</span>
+        }
+<span class="fc" id="L430">        getHead().add(this.httpEquivMeta);</span>
+<span class="fc" id="L431">        getHead().add(cacheControl);</span>
+<span class="fc" id="L432">        getHead().add(author);</span>
+<span class="fc" id="L433">        getHead().add(this.applicationNameMeta);</span>
+<span class="fc" id="L434">        getHead().add(this.generatorMeta);</span>
+<span class="fc" id="L435">        getHead().add(descriptionMeta);</span>
+<span class="fc" id="L436">        getHead().add(this.KeywordsMeta);</span>
+<span class="fc" id="L437">        getHead().add(this.favIconLink);</span>
+
+<span class="fc" id="L439">        getHead().getChildren().stream().forEach((headObject)</span>
+                -&gt;
+        {
+<span class="fc" id="L442">            headObject.preConfigure();</span>
+<span class="fc" id="L443">        });</span>
+<span class="fc" id="L444">    }</span>
+
+    /**
+     * Adds the variables in the application to the collection
+     */
+    private void addVariablesScriptToPage()
+    {
+<span class="fc" id="L451">        StringBuilder variablesScriptBuilder = new StringBuilder();</span>
+<span class="fc bfc" id="L452" title="All 2 branches covered.">        for (Iterator it = getBody().getVariablesAll().iterator(); it.hasNext();)</span>
+        {
+<span class="fc" id="L454">            String var = (String) it.next();</span>
+<span class="fc" id="L455">            variablesScriptBuilder.append(&quot;var &quot;).append(var).append(&quot;;&quot;);</span>
+<span class="fc" id="L456">        }</span>
+<span class="fc bfc" id="L457" title="All 2 branches covered.">        if (variablesScriptBuilder.length() &gt; 0)</span>
+        {
+<span class="fc" id="L459">            Script variablesScript = new Script();</span>
+<span class="fc" id="L460">            variablesScript.setID(&quot;variables&quot;);</span>
+<span class="fc" id="L461">            variablesScript.setNewLineForRawText(true);</span>
+<span class="fc" id="L462">            variablesScript.addAttribute(ScriptAttributes.Type, &quot;text/javascript&quot;);</span>
+<span class="fc" id="L463">            variablesScript.setText(variablesScriptBuilder.toString());</span>
+<span class="pc bpc" id="L464" title="1 of 2 branches missed.">            if (!getHead().getChildren().contains(variablesScript))</span>
+            {
+<span class="fc" id="L466">                getHead().add(variablesScript);</span>
+            }
+        }
+<span class="fc" id="L469">    }</span>
+
+    private void addScriptsToBody()
+    {
+<span class="fc" id="L473">        ArrayList&lt;ComponentHierarchyBase&gt; requirements = new ArrayList&lt;&gt;();</span>
+
+        //render JS only
+<span class="fc bfc" id="L476" title="All 2 branches covered.">        for (RequirementsPriority priority : RequirementsPriority.values())</span>
+        {
+<span class="fc bfc" id="L478" title="All 2 branches covered.">            if (!getPriorityRequirements(priority, requirements, true, false).isEmpty())</span>
+            {
+<span class="fc" id="L480">                getBody().add(new Comment(&quot;Priority [&quot; + priority + &quot;] Values&quot;));</span>
+            }
+
+<span class="fc" id="L483">            getPriorityRequirements(priority, requirements, false, true).stream().forEach((comp)</span>
+                    -&gt;
+            {
+<span class="fc" id="L486">                getBody().add(comp);</span>
+<span class="fc" id="L487">            });</span>
+        }
+<span class="fc" id="L489">    }</span>
+
+    /**
+     * Adds all the stuff for a given priority
+     *
+     * @param css CSS
+     * @param input the hierarchy to read from
+     * @param priority the priority
+     * @param javascript to return JavaScript or not
+     */
+    private ArrayList&lt;ComponentHierarchyBase&gt; getPriorityRequirements(RequirementsPriority priority, ArrayList&lt;ComponentHierarchyBase&gt; input, boolean css, boolean javascript)
+    {
+<span class="fc" id="L501">        ArrayList&lt;ComponentHierarchyBase&gt; requirements = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L502" title="All 2 branches covered.">        if (css)</span>
+        {
+<span class="pc bpc" id="L504" title="2 of 4 branches missed.">            getAllCssLinks(priority).stream().filter((cssLink) -&gt; (!input.contains(cssLink) &amp;&amp; !requirements.contains(cssLink))).forEach((cssLink)</span>
+                    -&gt;
+            {
+                //cssLink.setTiny(true);
+<span class="fc" id="L508">                requirements.add(cssLink);</span>
+<span class="fc" id="L509">            });</span>
+        }
+<span class="fc bfc" id="L511" title="All 2 branches covered.">        if (javascript)</span>
+        {
+<span class="pc bpc" id="L513" title="2 of 4 branches missed.">            getAllScripts(priority).stream().filter((script) -&gt; (!input.contains(script) &amp;&amp; !requirements.contains(script))).forEach((script)</span>
+                    -&gt;
+            {
+                //script.setTiny(true);
+<span class="fc" id="L517">                requirements.add(script);</span>
+<span class="fc" id="L518">            });</span>
+        }
+
+<span class="fc" id="L521">        return requirements;</span>
+    }
+
+    /**
+     * Gets all the links for all the bodies components
+     *
+     * @param priority
+     * @return
+     */
+    private List&lt;CSSLink&gt; getAllCssLinks(RequirementsPriority priority)
+    {
+<span class="fc" id="L532">        List&lt;CSSReference&gt; allReferences = getBody().getCssReferencesAll(priority);</span>
+<span class="fc" id="L533">        allReferences.sort(WebReference.getDummyReference());</span>
+<span class="fc" id="L534">        ArrayList&lt;CSSLink&gt; allLinks = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L535">        allReferences.stream().map((ref) -&gt; new CSSLink(ref)).forEach((link)</span>
+                -&gt;
+        {
+<span class="fc" id="L538">            allLinks.add(link);</span>
+<span class="fc" id="L539">        });</span>
+<span class="fc" id="L540">        return allLinks;</span>
+    }
+
+    /**
+     * Gets all the scripts for all the body components
+     *
+     * @param priority
+     * @return
+     */
+    private List&lt;Script&gt; getAllScripts(RequirementsPriority priority)
+    {
+<span class="fc" id="L551">        List&lt;JavascriptReference&gt; allJavascripts = getBody().getJavascriptReferencesAll(priority);</span>
+<span class="fc" id="L552">        allJavascripts.sort(WebReference.getDummyReference());</span>
+<span class="fc" id="L553">        ArrayList&lt;Script&gt; allScripts = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L554">        allJavascripts.stream().map((js) -&gt; new Script(js)).forEach((s)</span>
+                -&gt;
+        {
+<span class="fc" id="L557">            s.setNewLineForClosingTag(false);</span>
+<span class="fc" id="L558">            allScripts.add(s);</span>
+<span class="fc" id="L559">        });</span>
+<span class="fc" id="L560">        return allScripts;</span>
+    }
+
+    /**
+     * Returns if the head object is empty
+     *
+     * @return
+     */
+    private boolean isHeadEmpty()
+    {
+<span class="fc" id="L570">        return getHead().getChildren().isEmpty();</span>
+    }
+
+    /**
+     * Returns if the body object is empty
+     *
+     * @return
+     */
+    private boolean isBodyEmpty()
+    {
+<span class="fc" id="L580">        return getBody().getChildren().isEmpty();</span>
+    }
+
+    /**
+     * Whether or not to render the JQuery requirements
+     *
+     * @return
+     */
+    @Override
+    public boolean isjQueryEnabled()
+    {
+<span class="fc" id="L591">        return jQueryEnabled;</span>
+    }
+
+    /**
+     * Whether or not to render the JQuery Requirements
+     *
+     * @param jQueryEnabled
+     */
+    @Override
+    public void setjQueryEnabled(boolean jQueryEnabled)
+    {
+<span class="fc" id="L602">        this.jQueryEnabled = jQueryEnabled;</span>
+<span class="pc bpc" id="L603" title="1 of 2 branches missed.">        if (this.jQueryEnabled)</span>
+        {
+<span class="fc" id="L605">            getBody().configureJQuery();</span>
+        }
+<span class="fc" id="L607">    }</span>
+
+    /**
+     * Whether or not to render the JQuery UI Requirements
+     *
+     * @return
+     */
+    @Override
+    public boolean isjQueryUIEnabled()
+    {
+<span class="fc" id="L617">        return jQueryUIEnabled;</span>
+    }
+
+    /**
+     * Whether or not to render the JQuery UI Requirements
+     *
+     * @param jQueryUIEnabled
+     */
+    @Override
+    public void setjQueryUIEnabled(boolean jQueryUIEnabled)
+    {
+<span class="fc" id="L628">        this.jQueryUIEnabled = jQueryUIEnabled;</span>
+<span class="pc bpc" id="L629" title="1 of 2 branches missed.">        if (jQueryUIEnabled)</span>
+        {
+<span class="fc" id="L631">            setjQueryEnabled(true);</span>
+<span class="fc" id="L632">            getBody().configureJQueryUI();</span>
+        }
+<span class="fc" id="L634">    }</span>
+
+    /**
+     * whether or not to render angular
+     *
+     * @return
+     */
+    @Override
+    public boolean isAngularEnabled()
+    {
+<span class="fc" id="L644">        return angularEnabled;</span>
+    }
+
+    /**
+     * Whether or not to render angular
+     *
+     * @param angularEnabled
+     */
+    @Override
+    public void setAngularEnabled(boolean angularEnabled)
+    {
+<span class="fc" id="L655">        this.angularEnabled = angularEnabled;</span>
+<span class="pc bpc" id="L656" title="1 of 2 branches missed.">        if (angularEnabled)</span>
+        {
+<span class="fc" id="L658">            setjQueryEnabled(true);</span>
+<span class="fc" id="L659">            getBody().configureAngular();</span>
+        }
+<span class="fc" id="L661">    }</span>
+
+    /**
+     * Whether or not to render bootstrap
+     *
+     * @return
+     */
+    @Override
+    public boolean isBootstrapEnabled()
+    {
+<span class="fc" id="L671">        return bootstrapEnabled;</span>
+    }
+
+    /**
+     * Whether or not to render bootstrap
+     *
+     * @param bootstrapEnabled
+     */
+    @Override
+    public void setBootstrapEnabled(boolean bootstrapEnabled)
+    {
+<span class="fc" id="L682">        this.bootstrapEnabled = bootstrapEnabled;</span>
+<span class="pc bpc" id="L683" title="1 of 2 branches missed.">        if (bootstrapEnabled)</span>
+        {
+<span class="fc" id="L685">            getBody().configureBootstrap();</span>
+        }
+<span class="fc" id="L687">    }</span>
+
+    /**
+     * Returns if pace should be set as the default render
+     *
+     * @return
+     */
+    @Override
+    public boolean isPaceEnabled()
+    {
+<span class="fc" id="L697">        return paceEnabled;</span>
+    }
+
+    /**
+     * Sets if pace should be rendered s the default loader
+     *
+     * @param paceEnabled
+     */
+    @Override
+    public void setPaceEnabled(boolean paceEnabled)
+    {
+<span class="fc" id="L708">        this.paceEnabled = paceEnabled;</span>
+<span class="fc" id="L709">        getBody().configurePace();</span>
+<span class="fc" id="L710">    }</span>
+
+    /**
+     * Sets the author of this page
+     *
+     * @param author The author of this page
+     */
+    @Override
+    public final void setAuthor(String author)
+    {
+<span class="fc" id="L720">        this.author = new Meta(Meta.MetadataFields.Author, author);</span>
+<span class="fc" id="L721">    }</span>
+
+    /**
+     * Sets the description of this page
+     *
+     * @param description The description of the page
+     */
+    @Override
+    public final void setDescription(String description)
+    {
+<span class="pc bpc" id="L731" title="1 of 2 branches missed.">        if (descriptionMeta == null)</span>
+        {
+<span class="fc" id="L733">            descriptionMeta = new Meta(Meta.MetadataFields.Description, description);</span>
+        }
+        else
+        {
+<span class="nc" id="L737">            descriptionMeta.addAttribute(MetaAttributes.Content, description);</span>
+        }
+<span class="fc" id="L739">    }</span>
+
+    /**
+     * Returns the description of the page
+     *
+     * @return Meta The meta tag
+     */
+    @Override
+    public final Meta getDescription()
+    {
+<span class="nc" id="L749">        return descriptionMeta;</span>
+    }
+
+    /**
+     * Returns the Application Name of the page
+     *
+     * @return Meta The meta tag
+     */
+    @Override
+    public final Meta getApplicationName()
+    {
+<span class="nc" id="L760">        return applicationNameMeta;</span>
+    }
+
+    /**
+     * Sets the Application Name of this page
+     *
+     * @param applicationName The Application Name of the page
+     */
+    @Override
+    public final void setApplicationNameMeta(String applicationName)
+    {
+<span class="pc bpc" id="L771" title="1 of 2 branches missed.">        if (applicationNameMeta == null)</span>
+        {
+<span class="fc" id="L773">            applicationNameMeta = new Meta(Meta.MetadataFields.Application_Name, applicationName);</span>
+        }
+        else
+        {
+<span class="nc" id="L777">            applicationNameMeta.addAttribute(MetaAttributes.Content, applicationName);</span>
+        }
+<span class="fc" id="L779">    }</span>
+
+    /**
+     * Returns the Application Name of the page
+     *
+     * @return Meta The meta tag
+     */
+    @Override
+    public final Meta getGenerator()
+    {
+<span class="nc" id="L789">        return generatorMeta;</span>
+    }
+
+    /**
+     * Sets the Generator of this page
+     *
+     * @param Generator The Generator of the page
+     */
+    @Override
+    public final void setGenerator(String Generator)
+    {
+<span class="pc bpc" id="L800" title="1 of 2 branches missed.">        if (generatorMeta == null)</span>
+        {
+<span class="fc" id="L802">            generatorMeta = new Meta(Meta.MetadataFields.Generator, Generator);</span>
+        }
+        else
+        {
+<span class="nc" id="L806">            generatorMeta.addAttribute(MetaAttributes.Content, Generator);</span>
+        }
+<span class="fc" id="L808">    }</span>
+
+    /**
+     * Returns the Application Name of the page
+     *
+     * @return Meta The meta tag
+     */
+    @Override
+    public final Meta getKeywords()
+    {
+<span class="nc" id="L818">        return KeywordsMeta;</span>
+    }
+
+    /**
+     * Sets the Keywords of this page
+     *
+     * @param Keywords The Keywords of the page
+     */
+    @Override
+    public final void setKeywords(String Keywords)
+    {
+<span class="pc bpc" id="L829" title="1 of 2 branches missed.">        if (KeywordsMeta == null)</span>
+        {
+<span class="fc" id="L831">            KeywordsMeta = new Meta(Meta.MetadataFields.Keywords, Keywords);</span>
+        }
+        else
+        {
+<span class="nc" id="L835">            KeywordsMeta.addAttribute(MetaAttributes.Content, Keywords);</span>
+        }
+<span class="fc" id="L837">    }</span>
+
+    /**
+     * Removes Title from the Header
+     *
+     * @return Remove
+     */
+    @Override
+    public final boolean removeTitle()
+    {
+<span class="nc" id="L847">        return getHead().getChildren().remove(getTitle());</span>
+    }
+
+    /**
+     * Returns the Application Name of the page
+     *
+     * @return Meta The meta tag
+     */
+    @Override
+    public final Meta getCompatibilityMode()
+    {
+<span class="nc" id="L858">        return httpEquivMeta;</span>
+    }
+
+    /**
+     * Returns the Application Name of the page
+     *
+     * @param dummyInt Serves no function
+     * @return String The actual used compatibility mode
+     */
+    @Override
+    public final String getCompatibilityMode(int dummyInt)
+    {
+<span class="nc" id="L870">        return httpEquivMeta.getAttribute(MetaAttributes.Http_Equiv);</span>
+    }
+
+    /**
+     * Sets the Application Name of this page Null removes compatibility specification
+     *
+     * @param httpEquiv The Application Name of the page
+     */
+    @Override
+    public final void setCompatibilityMode(InternetExplorerCompatibilityMode httpEquiv)
+    {
+<span class="pc bpc" id="L881" title="3 of 4 branches missed.">        if (httpEquivMeta != null &amp;&amp; httpEquiv != null)</span>
+        {
+<span class="nc" id="L883">            httpEquivMeta.addAttribute(MetaAttributes.Content, httpEquiv.getValue());</span>
+        }
+<span class="fc bfc" id="L885" title="All 2 branches covered.">        else if (httpEquiv != null)</span>
+        {
+<span class="fc" id="L887">            httpEquivMeta = new Meta(Meta.MetadataFields.http_equiv, httpEquiv.getValue());</span>
+        }
+        else
+        {
+<span class="fc" id="L891">            httpEquivMeta = null;</span>
+        }
+<span class="fc" id="L893">    }</span>
+
+    /**
+     * Is Modernizr Enabled
+     *
+     * @return
+     */
+    @Override
+    public boolean isModernizrEnabled()
+    {
+<span class="fc" id="L903">        return modernizrEnabled;</span>
+    }
+
+    /**
+     * Sets if Modernizr is enabled
+     *
+     * @param modernizrEnabled
+     */
+    @Override
+    public void setModernizrEnabled(boolean modernizrEnabled)
+    {
+<span class="fc" id="L914">        this.modernizrEnabled = modernizrEnabled;</span>
+<span class="fc" id="L915">        getBody().configureModernizr();</span>
+<span class="fc" id="L916">    }</span>
+
+    /**
+     * Sets the Icon in the browser address bar
+     *
+     * @param favIconURL The path to the icon
+     */
+    @Override
+    public void setFavIcon(String favIconURL)
+    {
+<span class="nc" id="L926">        favIconLink.addAttribute(CSSLinkAttributes.Rel, &quot;icon&quot;);</span>
+<span class="nc" id="L927">        String favType = favIconURL.substring(favIconURL.lastIndexOf(&quot;.&quot;));</span>
+<span class="nc" id="L928">        String mimeType = &quot;&quot;;</span>
+        try
+        {
+
+<span class="nc" id="L932">            mimeType = Files.probeContentType(new File(favIconURL).toPath());</span>
+        }
+<span class="nc" id="L934">        catch (IOException ex)</span>
+        {
+<span class="nc" id="L936">            Logger.getLogger(Page.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L937">        }</span>
+        //@TODO define the image type from url
+<span class="nc" id="L939">        favIconLink.addAttribute(CSSLinkAttributes.Type, mimeType);</span>
+<span class="nc" id="L940">        favIconLink.addAttribute(CSSLinkAttributes.HRef, favIconURL);</span>
+<span class="nc" id="L941">    }</span>
+
+    /**
+     * Sets the Cache Control.
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * HTTP 1.1. Allowed values = PUBLIC | PRIVATE | NO-CACHE | NO-STORE.&lt;p&gt;
+     * &lt;p&gt;
+     * Public - may be cached in public shared caches.&lt;p&gt;
+     * Private - may only be cached in private cache.&lt;p&gt;
+     * No-Cache - may not be cached.&lt;p&gt;
+     * No-Store - may be cached but not archived.&lt;p&gt;
+     * &lt;p&gt;
+     * The directive CACHE-CONTROL:NO-CACHE indicates cached information should not be used and instead requests should be forwarded to the origin server. This directive has the same semantics as
+     * the&lt;p&gt;
+     * PRAGMA:NO-CACHE.&lt;p&gt;
+     * &lt;p&gt;
+     * Clients SHOULD include both PRAGMA: NO-CACHE and CACHE-CONTROL: NO-CACHE when a no-cache request is sent to a server not known to be HTTP/1.1 compliant. Also see EXPIRES.&lt;p&gt;
+     * &lt;p&gt;
+     * Note: It may be better to specify cache commands in HTTP than in META statements, where they can influence more than the browser, but proxies and other intermediaries that may cache&lt;p&gt;
+     * information.
+     *
+     * @param enable
+     */
+    @Override
+    public void setCacheControl(boolean enable)
+    {
+<span class="nc bnc" id="L969" title="All 2 branches missed.">        if (enable)</span>
+        {
+<span class="nc" id="L971">            cacheControl = new Meta(&quot;cache-control&quot;);</span>
+<span class="nc" id="L972">            cacheControl.addAttribute(MetaAttributes.Content, &quot;public&quot;);</span>
+        }
+        else
+        {
+<span class="nc" id="L976">            cacheControl = null;</span>
+        }
+<span class="nc" id="L978">    }</span>
+
+    /**
+     * Returns the Cache Control Meta Object
+     *
+     * @return
+     */
+    @Override
+    public Meta getCacheControl()
+    {
+<span class="nc" id="L988">        return cacheControl;</span>
+    }
+
+    /**
+     * Returns the Application Name of the page
+     *
+     * @return Meta The meta tag
+     */
+    @Override
+    public final Base getBase()
+    {
+<span class="nc" id="L999">        return this.base;</span>
+    }
+
+    /**
+     * Returns the Application Name of the page
+     *
+     * @return Meta The meta tag
+     */
+    @Override
+    public final Title getTitle()
+    {
+<span class="nc" id="L1010">        return this.title;</span>
+    }
+
+    /**
+     * Sets the Title of this page
+     *
+     * @param Title The Title of the page
+     */
+    @Override
+    public final void setTitle(Title Title)
+    {
+<span class="fc" id="L1021">        this.title = Title;</span>
+<span class="pc bpc" id="L1022" title="1 of 2 branches missed.">        if (title != null)</span>
+        {
+<span class="nc" id="L1024">            title.setPage(this);</span>
+        }
+<span class="fc" id="L1026">    }</span>
+
+    /**
+     * Sets the Title of this page
+     *
+     * @param Title The Title of the page
+     */
+    @Override
+    public final void setTitle(String Title)
+    {
+<span class="fc" id="L1036">        this.title = new Title(Title);</span>
+<span class="pc bpc" id="L1037" title="1 of 2 branches missed.">        if (title != null)</span>
+        {
+<span class="fc" id="L1039">            title.setPage(this);</span>
+        }
+<span class="fc" id="L1041">    }</span>
+
+    /**
+     * Sets the Base of this page
+     *
+     * @param base The Base of the page
+     */
+    @Override
+    public final void setBase(Base base)
+    {
+<span class="fc" id="L1051">        this.base = base;</span>
+<span class="fc bfc" id="L1052" title="All 2 branches covered.">        if (base != null)</span>
+        {
+<span class="fc" id="L1054">            base.setPage(this);</span>
+        }
+<span class="fc" id="L1056">    }</span>
+
+    /**
+     * Removes Base from the Header
+     *
+     * @return Remove
+     */
+    @Override
+    public final boolean removeBase()
+    {
+<span class="nc" id="L1066">        return getHead().getChildren().remove(getBase());</span>
+    }
+
+    /**
+     * Returns a readable user agent, or null if just a basic render
+     *
+     * @return
+     */
+    @Override
+    public ReadableUserAgent getUserAgent()
+    {
+<span class="nc bnc" id="L1077" title="All 2 branches missed.">        if (userAgent == null)</span>
+        {
+<span class="nc" id="L1079">            userAgent = new UserAgent(DeviceCategory.EMPTY, UserAgentFamily.FIREFOX, &quot;&quot;, &quot;&quot;, OperatingSystem.EMPTY, &quot;&quot;, &quot;&quot;, UserAgentType.BROWSER, &quot;&quot;, &quot;&quot;, VersionNumber.UNKNOWN);</span>
+        }
+<span class="nc" id="L1081">        return userAgent;</span>
+    }
+
+    /**
+     * Sets the userAgent
+     *
+     * @param userAgent
+     */
+    @Override
+    public void setUserAgent(ReadableUserAgent userAgent)
+    {
+<span class="nc" id="L1092">        this.userAgent = userAgent;</span>
+<span class="nc" id="L1093">    }</span>
+
+    /**
+     * Returns the attached session if available
+     *
+     * @return HTTPSession or NULL
+     */
+    @Override
+    public final HttpSession getSession()
+    {
+<span class="nc" id="L1103">        return session;</span>
+    }
+
+    /**
+     * Sets this pages session
+     *
+     * @param session HttpSession or null
+     */
+    @Override
+    public final void setSession(HttpSession session)
+    {
+<span class="nc" id="L1114">        this.session = session;</span>
+<span class="nc" id="L1115">    }</span>
+
+    /**
+     * Returns the Servlet processing requests
+     *
+     * @return The JWebSwingServlet
+     */
+    @Override
+    public JWebSwingServlet getServlet()
+    {
+<span class="nc" id="L1125">        return servlet;</span>
+    }
+
+    /**
+     * Sets the Servlet to a new Servlet
+     *
+     * @param servlet The Servlet to set
+     */
+    @Override
+    public void setServlet(JWebSwingServlet servlet)
+    {
+<span class="nc" id="L1136">        this.servlet = servlet;</span>
+<span class="nc" id="L1137">    }</span>
+
+    /**
+     * Whether or not to dynamic render the requirements
+     *
+     * @return
+     */
+    @Override
+    public boolean isDynamicRender()
+    {
+<span class="fc" id="L1147">        return dynamicRender;</span>
+    }
+
+    /**
+     * Whether or not to dynamic render the requirements
+     *
+     * @param dynamicRender
+     */
+    @Override
+    public void setDynamicRender(boolean dynamicRender)
+    {
+<span class="fc" id="L1158">        this.dynamicRender = dynamicRender;</span>
+<span class="fc" id="L1159">    }</span>
+
+    /**
+     * Populates all my components. Excludes this page
+     */
+    /**
+     * @param title Sets the title of the page
+     * @param compatibilityMode Sets the Internet explorer mode to work on
+     * @param base Sets the base tag for the page. Convenience Parameter
+     */
+    public Page(Title title, InternetExplorerCompatibilityMode compatibilityMode, Base base)
+<span class="fc" id="L1170">    {</span>
+<span class="fc" id="L1171">        setTitle(title);</span>
+<span class="fc" id="L1172">        setCompatibilityMode(compatibilityMode);</span>
+<span class="fc" id="L1173">        setBase(base);</span>
+<span class="fc" id="L1174">        setID(&quot;jwPage&quot;);</span>
+        //setGenerator(&quot;JWebSwing - https://sourceforge.net/projects/jwebswing/&quot;);
+<span class="fc" id="L1176">    }</span>
+
+    /**
+     * @param title Sets the title of the page
+     * @param compatibilityMode Sets the Internet explorer mode to work on
+     */
+    public Page(Title title, InternetExplorerCompatibilityMode compatibilityMode)
+    {
+<span class="nc" id="L1184">        this(title, compatibilityMode, null);</span>
+<span class="nc" id="L1185">    }</span>
+
+    /**
+     * @param title Sets the title of the page
+     */
+    public Page(Title title)
+    {
+<span class="nc" id="L1192">        this(title, null, null);</span>
+<span class="nc" id="L1193">    }</span>
+
+    /**
+     * @param title Sets the title of the page
+     */
+    public Page(String title)
+    {
+<span class="nc" id="L1200">        this(new Title(title), null, null);</span>
+<span class="nc" id="L1201">    }</span>
+
+    /**
+     * Constructs an empty page object
+     */
+    public Page()
+    {
+<span class="fc" id="L1208">        this(null, null, null);</span>
+<span class="fc" id="L1209">    }</span>
+
+    /**
+     * Returns the document type that will be rendered with this HTML page real-time
+     * &lt;p&gt;
+     * @return Document Type
+     */
+    @Override
+    public DocumentType getDocumentType()
+    {
+<span class="nc" id="L1219">        return new DocumentType(getBrowser().getHtmlVersion());</span>
+    }
+
+    /**
+     * Sets all component in the head and body to tiny
+     *
+     * @param tiny
+     * @return
+     */
+    @Override
+    public Page setTiny(boolean tiny)
+    {
+<span class="fc" id="L1231">        super.setTiny(tiny);</span>
+<span class="fc" id="L1232">        getHead().setTiny(tiny);</span>
+<span class="fc" id="L1233">        getBody().setTiny(tiny);</span>
+<span class="fc" id="L1234">        return this;</span>
+    }
+
+    /**
+     * Returns the JavaScript render for the body
+     *
+     * @return
+     */
+    @Override
+    public StringBuilder renderJavascript()
+    {
+<span class="nc" id="L1245">        return getBody().renderJavascript();</span>
+    }
+
+    /**
+     * Adds a variable into angular
+     *
+     * @param variableName
+     * @return
+     */
+    @Override
+    public Page addAngularVariable(String variableName)
+    {
+<span class="fc" id="L1257">        getAngular().getAngularVariables().add(variableName);</span>
+<span class="fc" id="L1258">        return this;</span>
+    }
+
+    /**
+     * Returns the angular object
+     *
+     * @return
+     */
+    @Override
+    public AngularFeature getAngular()
+    {
+<span class="fc bfc" id="L1269" title="All 2 branches covered.">        if (angular == null)</span>
+        {
+<span class="fc" id="L1271">            angular = new AngularFeature(getBody());</span>
+<span class="fc" id="L1272">            getBody().addFeature(angular);</span>
+        }
+<span class="fc" id="L1274">        return angular;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

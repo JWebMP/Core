@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Script.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">Script.java</span></div><h1>Script.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html;
+
+import org.apache.log4j.Logger;
+import za.co.mmagon.LoggerFactory;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.base.html.attributes.ScriptAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoClassAttribute;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
+import za.co.mmagon.jwebswing.base.references.JavascriptReference;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+
+/**
+ * The Base Component&lt;p&gt;
+ * &lt;p&gt;
+ * Browser Support&lt;p&gt;
+ * &lt;p&gt;
+ * Internet Explorer Firefox Opera Google Chrome Safari&lt;p&gt;
+ * &lt;p&gt;
+ * The script tag is supported in all major browsers. Definition and Usage&lt;p&gt;
+ * &lt;p&gt;
+ * The script tag is used to define a client-side script, such as a JavaScript.&lt;p&gt;
+ * &lt;p&gt;
+ * The script element either contains scripting statements, or it points to an external script file through the src attribute.&lt;p&gt;
+ * &lt;p&gt;
+ * Common uses for JavaScript are image manipulation, form validation, and dynamic changes of content.&lt;p&gt;
+ * &lt;p&gt;
+ * Tips and Notes&lt;p&gt;
+ * &lt;p&gt;
+ * Note: If the &quot;src&quot; attribute is present, the script element must be empty.&lt;p&gt;
+ * &lt;p&gt;
+ * Tip: Also look at the noscript element for users that have disabled scripts in their browser, or have a browser that doesn’t support client-side scripting.&lt;p&gt;
+ * &lt;p&gt;
+ * Note: There are several ways an external script can be executed:
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * If async=&quot;async&quot;: The script is executed asynchronously with the rest of the page (the script will be executed while the page continues the parsing) If async is not present and defer=&quot;defer&quot;:
+ * The&lt;p&gt;
+ * script is executed when the page has finished parsing If neither async or defer is present: The script is fetched and executed immediately, before the browser continues parsing the page&lt;p&gt;
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * Differences Between HTML 4.01 and HTML5&lt;p&gt;
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * The &quot;type&quot; attribute is required in HTML 4, but optional in HTML5.&lt;p&gt;
+ * &lt;p&gt;
+ * The &quot;async&quot; attribute is new in HTML5.&lt;p&gt;
+ * &lt;p&gt;
+ * The HTML 4.01 attribute: &quot;xml:space&quot;, is not supported in HTML5.&lt;p&gt;
+ * &lt;p&gt;
+ * &lt;/p&gt;
+ *
+ * @since 2013/11/12
+ * @version 1.0
+ * @author MMagon
+ *
+ *
+ */
+public class Script extends ComponentHierarchyBase&lt;NoChildren, ScriptAttributes, NoFeatures, NoEvents, Script&gt;
+        implements NoIDTag, HeadChildren, NoClassAttribute
+{
+
+<span class="fc" id="L66">    private static final Logger logger = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;&lt;SCRIPT&gt;&quot;);</span>
+    private static final long serialVersionUID = 1L;
+    private JavascriptReference reference;
+
+    /**
+     * Constructs a script with the given reference
+     *
+     * @param reference
+     */
+    public Script(JavascriptReference reference)
+    {
+<span class="fc" id="L77">        this(reference.toString());</span>
+<span class="fc" id="L78">        this.reference = reference;</span>
+<span class="fc" id="L79">    }</span>
+
+    /**
+     * Constructs a script component
+     */
+    public Script()
+    {
+<span class="fc" id="L86">        super(ComponentTypes.Script);</span>
+<span class="fc" id="L87">    }</span>
+
+    /**
+     * Constructs a new script with a specified source and type
+     * &lt;p&gt;
+     * @param src  The source of the file
+     * @param type The type of script
+     */
+    public Script(String src, String type)
+    {
+<span class="nc" id="L97">        this();</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        if (src != null)</span>
+        {
+<span class="nc" id="L100">            addAttribute(ScriptAttributes.Src, src);</span>
+        }
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        if (type != null)</span>
+        {
+<span class="nc" id="L104">            addAttribute(ScriptAttributes.Type, type);</span>
+        }
+<span class="nc" id="L106">    }</span>
+
+    /**
+     * Constructs a new script with a specified source and the type of JavaScript
+     * &lt;p&gt;
+     * @param src The source of the file
+     */
+    public Script(String src)
+    {
+<span class="fc" id="L115">        this();</span>
+<span class="fc" id="L116">        addAttribute(ScriptAttributes.Src, src);</span>
+<span class="fc" id="L117">        addAttribute(ScriptAttributes.Type, &quot;text/javascript&quot;);</span>
+<span class="fc" id="L118">    }</span>
+
+    /**
+     * Sets this script's JavaScript AS-IS
+     *
+     * @param javascript The JavaScript to directly insert
+     */
+    public void setJavascript(String javascript)
+    {
+<span class="fc" id="L127">        setText(javascript);</span>
+<span class="fc" id="L128">    }</span>
+
+    /**
+     * Returns the currently set JavaScript with no indentation
+     *
+     * @return The JavaScript
+     */
+    public StringBuilder getJavascript()
+    {
+<span class="nc" id="L137">        return getJavascript(0);</span>
+    }
+
+    /**
+     * Returns the currently set JavaScript with the specified indentation
+     *
+     * @param tabCount The indentation of the JavaScript
+     * &lt;p&gt;
+     * @return The JavaScript
+     */
+    public StringBuilder getJavascript(Integer tabCount)
+    {
+<span class="nc" id="L149">        preConfigure();</span>
+<span class="nc" id="L150">        return getText(tabCount);</span>
+    }
+
+    /**
+     * Differences Between HTML and XHTML
+     * &lt;p&gt;
+     * In XHTML, the content inside scripts is declared as #PCDATA (instead of CDATA), which means that entities will be parsed.
+     * &lt;p&gt;
+     * This means that in XHTML, all special characters should be encoded, or all content should be wrapped inside a CDATA section:
+     */
+    @Override
+    public void preConfigure()
+    {
+<span class="fc" id="L163">        super.preConfigure();</span>
+
+<span class="pc bpc" id="L165" title="1 of 4 branches missed.">        if (getAttribute(ScriptAttributes.Src) != null &amp;&amp; !getAttribute(ScriptAttributes.Src).isEmpty())</span>
+        {
+            // setInlineClosingTag(true);
+        }
+<span class="pc bpc" id="L169" title="3 of 4 branches missed.">        if (getAttribute(ScriptAttributes.Src) != null || !getAttribute(ScriptAttributes.Src).isEmpty())</span>
+        {
+            try
+            {
+<span class="pc bpc" id="L173" title="1 of 2 branches missed.">                if (getPage().getHtmlVersion().name().startsWith(&quot;X&quot;))</span>
+                {
+<span class="nc" id="L175">                    StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L176">                    sb.append(&quot;//&lt;![CDATA[&quot;);</span>
+<span class="nc" id="L177">                    sb.append(getText(0));</span>
+<span class="nc" id="L178">                    sb.append(&quot;//]]&quot;);</span>
+<span class="nc" id="L179">                    setText(sb.toString());</span>
+                }
+            }
+<span class="nc" id="L182">            catch (Exception e)</span>
+            {
+<span class="nc" id="L184">                logger.trace(&quot;Unable to determine whether XHTML or HTML. Skipping CDATA Implementation&quot;,e);</span>
+<span class="fc" id="L185">            }</span>
+        }
+<span class="fc" id="L187">    }</span>
+
+    @Override
+    public boolean equals(Object obj)
+    {
+<span class="pc bpc" id="L192" title="1 of 2 branches missed.">        if (obj == null)</span>
+        {
+<span class="nc" id="L194">            return false;</span>
+        }
+<span class="fc bfc" id="L196" title="All 2 branches covered.">        if (obj.getClass() != getClass())</span>
+        {
+<span class="fc" id="L198">            return false;</span>
+        }
+
+<span class="fc" id="L201">        Script s = (Script) obj;</span>
+<span class="fc bfc" id="L202" title="All 2 branches covered.">        if (s.getAttribute(ScriptAttributes.Src).equals(getAttribute(ScriptAttributes.Src)))</span>
+        {
+<span class="fc bfc" id="L204" title="All 2 branches covered.">            if (s.getAttribute(ScriptAttributes.Type).equals(getAttribute(ScriptAttributes.Type)))</span>
+            {
+<span class="pc bpc" id="L206" title="1 of 2 branches missed.">                if (s.getText(0).toString().equals(getText(0).toString()))</span>
+                {
+                    //System.out.println(&quot;everything equal? script is [&quot; + getText(0).toString() + &quot;] - [&quot; + s.getText(0).toString());
+<span class="fc" id="L209">                    return true;</span>
+                }
+            }
+            else
+            {
+<span class="fc" id="L214">                return false;</span>
+            }
+        }
+        else
+        {
+<span class="fc" id="L219">            return false;</span>
+        }
+<span class="nc" id="L221">        return false;</span>
+    }
+
+    @Override
+    public int hashCode()
+    {
+<span class="nc" id="L227">        int hash = 7;</span>
+<span class="nc" id="L228">        return hash;</span>
+    }
+
+    /**
+     * Returns a reference if one was attached
+     *
+     * @return
+     */
+    public JavascriptReference getReference()
+    {
+<span class="nc" id="L238">        return reference;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

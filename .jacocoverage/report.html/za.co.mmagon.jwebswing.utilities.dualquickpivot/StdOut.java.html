@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>StdOut.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.utilities.dualquickpivot</a> &gt; <span class="el_source">StdOut.java</span></div><h1>StdOut.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package za.co.mmagon.jwebswing.utilities.dualquickpivot;
+
+/**
+ * ****************************************************************************
+ * Compilation: javac StdOut.java
+ * Execution: java StdOut
+ * Dependencies: none
+ * &lt;p&gt;
+ * Writes data of various types to standard output.
+ * &lt;p&gt;
+ *****************************************************************************
+ */
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.Locale;
+
+/**
+ * This class provides methods for printing strings and numbers to standard output.
+ * &lt;p&gt;
+ * &lt;b&gt;Getting started.&lt;/b&gt;
+ * To use this class, you must have &lt;tt&gt;StdOut.class&lt;/tt&gt; in your
+ * Java classpath. If you used our autoinstaller, you should be all set.
+ * Otherwise, download
+ * &lt;a href = &quot;http://introcs.cs.princeton.edu/java/stdlib/StdOut.java&quot;&gt;StdOut.java&lt;/a&gt;
+ * and put a copy in your working directory.
+ * &lt;p&gt;
+ * Here is an example program that uses &lt;code&gt;StdOut&lt;/code&gt;:
+ * &lt;pre&gt;
+ *   public class TestStdOut {
+ *       public static void main(String[] args) {
+ *           int a = 17;
+ *           int b = 23;
+ *           int sum = a + b;
+ *           StdOut.println(&quot;Hello, World&quot;);
+ *           StdOut.printf(&quot;%d + %d = %d\n&quot;, a, b, sum);
+ *       }
+ *   }
+ * &lt;/pre&gt;
+ * &lt;p&gt;
+ * &lt;b&gt;Differences with System.out.&lt;/b&gt;
+ * The behavior of &lt;code&gt;StdOut&lt;/code&gt; is similar to that of {@link System#out},
+ * but there are a few subtle differences:
+ * &lt;ul&gt;
+ * &lt;li&gt; &lt;code&gt;StdOut&lt;/code&gt; coerces the character-set encoding to UTF-8,
+ * which is a standard character encoding for Unicode.
+ * &lt;li&gt; &lt;code&gt;StdOut&lt;/code&gt; coerces the locale to {@link Locale#US},
+ * for consistency with {@link StdIn}, {@link Double#parseDouble(String)},
+ * and floating-point literals.
+ * &lt;li&gt; &lt;code&gt;StdOut&lt;/code&gt; &lt;em&gt;flushes&lt;/em&gt; standard output after each call to
+ * &lt;code&gt;print()&lt;/code&gt; so that text will appear immediately in the terminal.
+ * &lt;/ul&gt;
+ * &lt;p&gt;
+ * &lt;b&gt;Reference.&lt;/b&gt;
+ * For additional documentation,
+ * see &lt;a href=&quot;http://introcs.cs.princeton.edu/15inout&quot;&gt;Section 1.5&lt;/a&gt; of
+ * &lt;em&gt;Introduction to Programming in Java: An Interdisciplinary Approach&lt;/em&gt;
+ * by Robert Sedgewick and Kevin Wayne.
+ *
+ * @author Robert Sedgewick
+ * @author Kevin Wayne
+ */
+public final class StdOut
+{
+
+    // force Unicode UTF-8 encoding; otherwise it's system dependent
+    private static final String CHARSET_NAME = &quot;UTF-8&quot;;
+
+    // assume language = English, country = US for consistency with StdIn
+<span class="nc" id="L75">    private static final Locale LOCALE = Locale.US;</span>
+
+    // send output here
+    private static PrintWriter out;
+
+    // this is called before invoking any methods
+    static
+    {
+        try
+        {
+<span class="nc" id="L85">            out = new PrintWriter(new OutputStreamWriter(System.out, CHARSET_NAME), true);</span>
+        }
+<span class="nc" id="L87">        catch (UnsupportedEncodingException e)</span>
+        {
+<span class="nc" id="L89">            System.out.println(e);</span>
+<span class="nc" id="L90">        }</span>
+<span class="nc" id="L91">    }</span>
+
+    // don't instantiate
+    private StdOut()
+<span class="nc" id="L95">    {</span>
+<span class="nc" id="L96">    }</span>
+
+    /**
+     * Closes standard output.
+     */
+    public static void close()
+    {
+<span class="nc" id="L103">        out.close();</span>
+<span class="nc" id="L104">    }</span>
+
+    /**
+     * Terminates the current line by printing the line-separator string.
+     */
+    public static void println()
+    {
+<span class="nc" id="L111">        out.println();</span>
+<span class="nc" id="L112">    }</span>
+
+    /**
+     * Prints an object to this output stream and then terminates the line.
+     *
+     * @param x the object to print
+     */
+    public static void println(Object x)
+    {
+<span class="nc" id="L121">        out.println(x);</span>
+<span class="nc" id="L122">    }</span>
+
+    /**
+     * Prints a boolean to standard output and then terminates the line.
+     *
+     * @param x the boolean to print
+     */
+    public static void println(boolean x)
+    {
+<span class="nc" id="L131">        out.println(x);</span>
+<span class="nc" id="L132">    }</span>
+
+    /**
+     * Prints a character to standard output and then terminates the line.
+     *
+     * @param x the character to print
+     */
+    public static void println(char x)
+    {
+<span class="nc" id="L141">        out.println(x);</span>
+<span class="nc" id="L142">    }</span>
+
+    /**
+     * Prints a double to standard output and then terminates the line.
+     *
+     * @param x the double to print
+     */
+    public static void println(double x)
+    {
+<span class="nc" id="L151">        out.println(x);</span>
+<span class="nc" id="L152">    }</span>
+
+    /**
+     * Prints an integer to standard output and then terminates the line.
+     *
+     * @param x the integer to print
+     */
+    public static void println(float x)
+    {
+<span class="nc" id="L161">        out.println(x);</span>
+<span class="nc" id="L162">    }</span>
+
+    /**
+     * Prints an integer to standard output and then terminates the line.
+     *
+     * @param x the integer to print
+     */
+    public static void println(int x)
+    {
+<span class="nc" id="L171">        out.println(x);</span>
+<span class="nc" id="L172">    }</span>
+
+    /**
+     * Prints a long to standard output and then terminates the line.
+     *
+     * @param x the long to print
+     */
+    public static void println(long x)
+    {
+<span class="nc" id="L181">        out.println(x);</span>
+<span class="nc" id="L182">    }</span>
+
+    /**
+     * Prints a short integer to standard output and then terminates the line.
+     *
+     * @param x the short to print
+     */
+    public static void println(short x)
+    {
+<span class="nc" id="L191">        out.println(x);</span>
+<span class="nc" id="L192">    }</span>
+
+    /**
+     * Prints a byte to standard output and then terminates the line.
+     * &lt;p&gt;
+     *
+     * @param x the byte to print
+     */
+    public static void println(byte x)
+    {
+<span class="nc" id="L202">        out.println(x);</span>
+<span class="nc" id="L203">    }</span>
+
+    /**
+     * Flushes standard output.
+     */
+    public static void print()
+    {
+<span class="nc" id="L210">        out.flush();</span>
+<span class="nc" id="L211">    }</span>
+
+    /**
+     * Prints an object to standard output and flushes standard output.
+     *
+     * @param x the object to print
+     */
+    public static void print(Object x)
+    {
+<span class="nc" id="L220">        out.print(x);</span>
+<span class="nc" id="L221">        out.flush();</span>
+<span class="nc" id="L222">    }</span>
+
+    /**
+     * Prints a boolean to standard output and flushes standard output.
+     *
+     * @param x the boolean to print
+     */
+    public static void print(boolean x)
+    {
+<span class="nc" id="L231">        out.print(x);</span>
+<span class="nc" id="L232">        out.flush();</span>
+<span class="nc" id="L233">    }</span>
+
+    /**
+     * Prints a character to standard output and flushes standard output.
+     *
+     * @param x the character to print
+     */
+    public static void print(char x)
+    {
+<span class="nc" id="L242">        out.print(x);</span>
+<span class="nc" id="L243">        out.flush();</span>
+<span class="nc" id="L244">    }</span>
+
+    /**
+     * Prints a double to standard output and flushes standard output.
+     *
+     * @param x the double to print
+     */
+    public static void print(double x)
+    {
+<span class="nc" id="L253">        out.print(x);</span>
+<span class="nc" id="L254">        out.flush();</span>
+<span class="nc" id="L255">    }</span>
+
+    /**
+     * Prints a float to standard output and flushes standard output.
+     *
+     * @param x the float to print
+     */
+    public static void print(float x)
+    {
+<span class="nc" id="L264">        out.print(x);</span>
+<span class="nc" id="L265">        out.flush();</span>
+<span class="nc" id="L266">    }</span>
+
+    /**
+     * Prints an integer to standard output and flushes standard output.
+     *
+     * @param x the integer to print
+     */
+    public static void print(int x)
+    {
+<span class="nc" id="L275">        out.print(x);</span>
+<span class="nc" id="L276">        out.flush();</span>
+<span class="nc" id="L277">    }</span>
+
+    /**
+     * Prints a long integer to standard output and flushes standard output.
+     *
+     * @param x the long integer to print
+     */
+    public static void print(long x)
+    {
+<span class="nc" id="L286">        out.print(x);</span>
+<span class="nc" id="L287">        out.flush();</span>
+<span class="nc" id="L288">    }</span>
+
+    /**
+     * Prints a short integer to standard output and flushes standard output.
+     *
+     * @param x the short integer to print
+     */
+    public static void print(short x)
+    {
+<span class="nc" id="L297">        out.print(x);</span>
+<span class="nc" id="L298">        out.flush();</span>
+<span class="nc" id="L299">    }</span>
+
+    /**
+     * Prints a byte to standard output and flushes standard output.
+     *
+     * @param x the byte to print
+     */
+    public static void print(byte x)
+    {
+<span class="nc" id="L308">        out.print(x);</span>
+<span class="nc" id="L309">        out.flush();</span>
+<span class="nc" id="L310">    }</span>
+
+    /**
+     * Prints a formatted string to standard output, using the specified format
+     * string and arguments, and then flushes standard output.
+     *
+     *
+     * @param format the &lt;a href = &quot;http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax&quot;&gt;format string&lt;/a&gt;
+     * @param args   the arguments accompanying the format string
+     */
+    public static void printf(String format, Object... args)
+    {
+<span class="nc" id="L322">        out.printf(LOCALE, format, args);</span>
+<span class="nc" id="L323">        out.flush();</span>
+<span class="nc" id="L324">    }</span>
+
+    /**
+     * Prints a formatted string to standard output, using the locale and
+     * the specified format string and arguments; then flushes standard output.
+     *
+     * @param locale the locale
+     * @param format the &lt;a href = &quot;http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html#syntax&quot;&gt;format string&lt;/a&gt;
+     * @param args   the arguments accompanying the format string
+     */
+    public static void printf(Locale locale, String format, Object... args)
+    {
+<span class="nc" id="L336">        out.printf(locale, format, args);</span>
+<span class="nc" id="L337">        out.flush();</span>
+<span class="nc" id="L338">    }</span>
+
+    /**
+     * Unit tests some of the methods in &lt;tt&gt;StdOut&lt;/tt&gt;.
+     */
+    public static void main(String[] args)
+    {
+
+        // write to stdout
+<span class="nc" id="L347">        StdOut.println(&quot;Test&quot;);</span>
+<span class="nc" id="L348">        StdOut.println(17);</span>
+<span class="nc" id="L349">        StdOut.println(true);</span>
+<span class="nc" id="L350">        StdOut.printf(&quot;%.6f\n&quot;, 1.0 / 7.0);</span>
+<span class="nc" id="L351">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

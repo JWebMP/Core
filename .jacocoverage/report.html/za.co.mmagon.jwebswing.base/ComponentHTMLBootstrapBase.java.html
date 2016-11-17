@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ComponentHTMLBootstrapBase.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base</a> &gt; <span class="el_source">ComponentHTMLBootstrapBase.java</span></div><h1>ComponentHTMLBootstrapBase.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+
+package za.co.mmagon.jwebswing.base;
+
+import za.co.mmagon.jwebswing.base.interfaces.IComponentHTMLBootstrapBase;
+import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.bootstrap.BootstrapClasses;
+import za.co.mmagon.jwebswing.components.bootstrap.BootstrapGlyphicons;
+import za.co.mmagon.jwebswing.components.bootstrap.columnlayout.BSColumnWidths;
+import za.co.mmagon.jwebswing.components.bootstrap.columnlayout.BSComponentHiding;
+import za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2.SB2ThemeClasses;
+
+/**
+ * A convenience class for accessing all the bootstrap methods
+ * 
+ * @author GedMarc
+
+ * @since Oct 10, 2016
+ * @version 1.0
+ * 
+ * @param &lt;C&gt; The children allowed for this component
+ * @param &lt;A&gt; The allowed local attributes (Separate from Global Attributes)
+ * @param &lt;F&gt; The allowed feature JavaScripts
+ * @param &lt;E&gt; The allowed associated Events
+ * @param &lt;J&gt; Component output for cloning. Returned on CloneComponent
+ */
+public class ComponentHTMLBootstrapBase&lt;C, A extends Enum &amp; AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentStyleBase&gt;
+        extends ComponentStyleBase&lt;C, A, F, E, J&gt; implements IComponentHTMLBootstrapBase
+{
+
+    private static final long serialVersionUID = 1L;
+
+    public ComponentHTMLBootstrapBase(ComponentTypes componentType)
+    {
+<span class="fc" id="L53">        super(componentType);</span>
+<span class="fc" id="L54">    }</span>
+    
+    /**
+     * Returns this component with only the bootstrap specific methods
+     * @return 
+     */
+    public IComponentHTMLBootstrapBase asBootstrap()
+    {
+<span class="nc" id="L62">        return this;</span>
+    }
+    
+    /**
+     * Adds a class name to the class list
+     * &lt;p&gt;
+     * @param blockName The class name to add
+     * &lt;p&gt;
+     * @return True if it was added, false if it already existed
+     */
+    @Override
+    public boolean addClass(BootstrapClasses blockName)
+    {
+<span class="fc" id="L75">        getPage().setBootstrapEnabled(true);</span>
+<span class="fc" id="L76">        String className = blockName.toString();</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (!getClasses().contains(className))</span>
+        {
+<span class="fc" id="L79">            getClasses().add(className);</span>
+<span class="fc" id="L80">            return true;</span>
+        }
+        else
+        {
+<span class="fc" id="L84">            return false;</span>
+        }
+    }
+    
+    
+    /**
+     * Adds a class name to the class list
+     * &lt;p&gt;
+     * @param blockName The class name to add
+     * &lt;p&gt;
+     * @return True if it was added, false if it already existed
+     */
+    @Override
+    public boolean addClass(SB2ThemeClasses blockName)
+    {
+<span class="fc" id="L99">        getPage().setBootstrapEnabled(true);</span>
+<span class="fc" id="L100">        String className = blockName.toString();</span>
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">        if (!getClasses().contains(className))</span>
+        {
+<span class="fc" id="L103">            getClasses().add(className);</span>
+<span class="fc" id="L104">            return true;</span>
+        }
+        else
+        {
+<span class="nc" id="L108">            return false;</span>
+        }
+    }
+    
+    /**
+     * Adds a class name to the class list
+     * &lt;p&gt;
+     * @param position The position of to add the class
+     * @param blockName The class name to add
+     * &lt;p&gt;
+     * @return True if it was added, false if it already existed
+     */
+    public boolean addClass(int position, SB2ThemeClasses blockName)
+    {
+<span class="fc" id="L122">        getPage().setBootstrapEnabled(true);</span>
+<span class="fc" id="L123">        String className = blockName.toString();</span>
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">        if (!getClasses().contains(className))</span>
+        {
+<span class="fc" id="L126">            getClasses().add(position,className);</span>
+<span class="fc" id="L127">            return true;</span>
+        }
+        else
+        {
+<span class="nc" id="L131">            return false;</span>
+        }
+    }
+    
+    /**
+     * Adds the specified column width settings to the class
+     * @param blockName
+     * @return 
+     */
+    @Override
+    public boolean addClass(BSColumnWidths blockName)
+    {
+<span class="nc" id="L143">        getPage().setBootstrapEnabled(true);</span>
+<span class="nc" id="L144">        String className = blockName.toString();</span>
+<span class="nc bnc" id="L145" title="All 2 branches missed.">        if (!getClasses().contains(className))</span>
+        {
+<span class="nc" id="L147">            getClasses().add(className);</span>
+<span class="nc" id="L148">            return true;</span>
+        }
+        else
+        {
+<span class="nc" id="L152">            return false;</span>
+        }
+    }
+    
+    /**
+     * Adds the specified column width settings to the class
+     * @param blockName
+     * @return 
+     */
+    @Override
+    public boolean addClass(BSComponentHiding blockName)
+    {
+<span class="nc" id="L164">        getPage().setBootstrapEnabled(true);</span>
+<span class="nc" id="L165">        String className = blockName.toString();</span>
+<span class="nc bnc" id="L166" title="All 2 branches missed.">        if (!getClasses().contains(className))</span>
+        {
+<span class="nc" id="L168">            getClasses().add(className);</span>
+<span class="nc" id="L169">            return true;</span>
+        }
+        else
+        {
+<span class="nc" id="L173">            return false;</span>
+        }
+    }
+
+    /**
+     * Adds the specified column width settings to the class
+     * @param blockName
+     * @return 
+     */
+    @Override
+    public boolean addClass(BootstrapGlyphicons blockName)
+    {
+<span class="nc" id="L185">        getPage().setBootstrapEnabled(true);</span>
+<span class="nc" id="L186">        String className = blockName.toString();</span>
+<span class="nc bnc" id="L187" title="All 2 branches missed.">        if (!getClasses().contains(className))</span>
+        {
+<span class="nc" id="L189">            getClasses().add(className);</span>
+<span class="nc" id="L190">            return true;</span>
+        }
+        else
+        {
+<span class="nc" id="L194">            return false;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

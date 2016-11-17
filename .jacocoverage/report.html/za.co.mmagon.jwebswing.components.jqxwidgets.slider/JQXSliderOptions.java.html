@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQXSliderOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqxwidgets.slider</a> &gt; <span class="el_source">JQXSliderOptions.java</span></div><h1>JQXSliderOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqxwidgets.slider;
+
+import java.util.ArrayList;
+import za.co.mmagon.jwebswing.components.jqxwidgets.JQXDefaultJavaScriptPart;
+import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.JQXButtonTemplates;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptFunction;
+
+/**
+ * All the options for the tooltip library
+ * &lt;p&gt;
+ * @author GedMarc
+ * @since Mar 4, 2015
+ * @version 1.0
+ * &lt;p&gt;
+ * &lt;p&gt;
+ */
+public class JQXSliderOptions extends JQXDefaultJavaScriptPart
+{
+
+    private static final long serialVersionUID = 1L;
+
+    private JQXSliderButtonPositions buttonsPosition;// 	String 	both
+    private Boolean disabled;// 	Boolean 	false
+    private JQXSliderLayouts layout;// 	String 	&quot;normal&quot;
+    private JQXSliderModes mode;// 	String 	default
+    private Integer minorTicksFrequency;// 	Number 	1
+    private Integer minorTickSize;// 	Number 	4
+    private Integer max;// 	Number 	10
+    private Integer min;// 	Number 	0
+    private Boolean rangeSlider;// 	Bool 	false
+    private Boolean rtl;// 	Boolean 	false
+    private Integer step;// 	Number 	1
+    private Boolean showTicks;// 	Boolean 	true
+    private Boolean showMinorTicks;// 	Boolean 	false
+    private Boolean showTickLabels;// 	Boolean 	false
+    private Boolean showButtons;// 	Bool 	true
+    private Boolean showRange;// 	Bool 	true
+    private JQXSliderTickPositions ticksPosition;// 	String 	both
+    private Integer ticksFrequency;// 	Number 	2
+    private Integer tickSize;// 	Number 	7
+    private JavascriptFunction tickLabelFormatFunction;// 	Function 	null
+    private Boolean tooltip;// 	Boolean 	false
+    private Integer tooltipHideDelay;// 	Numer 	500
+    private JQXSliderPositions tooltipPosition;// 	String 	&quot;near&quot;
+    private JavascriptFunction tooltipFormatFunction;// 	Function 	null
+    private Integer value;// 	Number/Object 	0
+    private ArrayList&lt;Integer&gt; values;// 	Array 	[0, 10]
+    private JQXButtonTemplates template;
+
+    public JQXSliderOptions()
+<span class="nc" id="L67">    {</span>
+
+<span class="nc" id="L69">    }</span>
+
+    /**
+     * Sets or gets scroll buttons position.
+     * Possible Values:
+     * &lt;p&gt;
+     * 'both'
+     * &lt;p&gt;
+     * 'left'
+     * &lt;p&gt;
+     * 'right'
+     *
+     * @return
+     */
+    public JQXSliderButtonPositions getButtonsPosition()
+    {
+<span class="nc" id="L85">        return buttonsPosition;</span>
+    }
+
+    /**
+     * Sets or gets scroll buttons position.
+     * Possible Values:
+     * &lt;p&gt;
+     * 'both'
+     * &lt;p&gt;
+     * 'left'
+     * &lt;p&gt;
+     * 'right'
+     *
+     * @param buttonsPosition
+     */
+    public void setButtonsPosition(JQXSliderButtonPositions buttonsPosition)
+    {
+<span class="nc" id="L102">        this.buttonsPosition = buttonsPosition;</span>
+<span class="nc" id="L103">    }</span>
+
+    /**
+     * Sets or gets whether the slider is disabled.
+     *
+     * @return
+     */
+    public Boolean getDisabled()
+    {
+<span class="nc" id="L112">        return disabled;</span>
+    }
+
+    /**
+     * Sets or gets whether the slider is disabled.
+     *
+     * @param disabled
+     */
+    public void setDisabled(Boolean disabled)
+    {
+<span class="nc" id="L122">        this.disabled = disabled;</span>
+<span class="nc" id="L123">    }</span>
+
+    /**
+     * Sets or gets the slider's layout.
+     *
+     * @return
+     */
+    public JQXSliderLayouts getLayout()
+    {
+<span class="nc" id="L132">        return layout;</span>
+    }
+
+    /**
+     * Sets or gets the slider's layout.
+     *
+     * @param layout
+     */
+    public void setLayout(JQXSliderLayouts layout)
+    {
+<span class="nc" id="L142">        this.layout = layout;</span>
+<span class="nc" id="L143">    }</span>
+
+    /**
+     * Sets or gets slider's mode.
+     * Possible Values:
+     * &lt;p&gt;
+     * 'default'- the slider's thumb can be dragged smoothly ( like a scrollbar )
+     * &lt;p&gt;
+     * 'fixed'- the thumb is dragged with a 'step' specified by the 'step' property.
+     *
+     * @return
+     */
+    public JQXSliderModes getMode()
+    {
+<span class="nc" id="L157">        return mode;</span>
+    }
+
+    /**
+     * Sets or gets slider's mode.
+     * Possible Values:
+     * &lt;p&gt;
+     * 'default'- the slider's thumb can be dragged smoothly ( like a scrollbar )
+     * &lt;p&gt;
+     * 'fixed'- the thumb is dragged with a 'step' specified by the 'step' property.
+     *
+     * @param mode
+     */
+    public void setMode(JQXSliderModes mode)
+    {
+<span class="nc" id="L172">        this.mode = mode;</span>
+<span class="nc" id="L173">    }</span>
+
+    /**
+     * Set the minorTicksFrequency property.
+     *
+     * @return
+     */
+    public Integer getMinorTicksFrequency()
+    {
+<span class="nc" id="L182">        return minorTicksFrequency;</span>
+    }
+
+    /**
+     * Set the minorTicksFrequency property.
+     *
+     * @param minorTicksFrequency
+     */
+    public void setMinorTicksFrequency(Integer minorTicksFrequency)
+    {
+<span class="nc" id="L192">        this.minorTicksFrequency = minorTicksFrequency;</span>
+<span class="nc" id="L193">    }</span>
+
+    /**
+     * Sets or gets slider's minor ticks size.
+     *
+     * @return
+     */
+    public Integer getMinorTickSize()
+    {
+<span class="nc" id="L202">        return minorTickSize;</span>
+    }
+
+    /**
+     * Sets or gets slider's minor ticks size.
+     *
+     * @param minorTickSize
+     */
+    public void setMinorTickSize(Integer minorTickSize)
+    {
+<span class="nc" id="L212">        this.minorTickSize = minorTickSize;</span>
+<span class="nc" id="L213">    }</span>
+
+    /**
+     * Sets or gets slider's maximum value.
+     *
+     * @return
+     */
+    public Integer getMax()
+    {
+<span class="nc" id="L222">        return max;</span>
+    }
+
+    /**
+     * Sets or gets slider's maximum value.
+     *
+     * @param max
+     */
+    public void setMax(Integer max)
+    {
+<span class="nc" id="L232">        this.max = max;</span>
+<span class="nc" id="L233">    }</span>
+
+    /**
+     * Sets or gets slider's minimum value.
+     *
+     * @return
+     */
+    public Integer getMin()
+    {
+<span class="nc" id="L242">        return min;</span>
+    }
+
+    /**
+     * Sets or gets slider's minimum value.
+     *
+     * @param min
+     */
+    public void setMin(Integer min)
+    {
+<span class="nc" id="L252">        this.min = min;</span>
+<span class="nc" id="L253">    }</span>
+
+    /**
+     * Sets or gets whether the slider is displayed as a range slider and has 2 thumbs. This allows the user to select a range of values. By default, end-users can select only a single value.
+     *
+     * @return
+     */
+    public Boolean getRangeSlider()
+    {
+<span class="nc" id="L262">        return rangeSlider;</span>
+    }
+
+    /**
+     * Sets or gets whether the slider is displayed as a range slider and has 2 thumbs. This allows the user to select a range of values. By default, end-users can select only a single value.
+     *
+     * @param rangeSlider
+     */
+    public void setRangeSlider(Boolean rangeSlider)
+    {
+<span class="nc" id="L272">        this.rangeSlider = rangeSlider;</span>
+<span class="nc" id="L273">    }</span>
+
+    /**
+     * Gets RTL
+     *
+     * @return
+     */
+    public Boolean getRtl()
+    {
+<span class="nc" id="L282">        return rtl;</span>
+    }
+
+    /**
+     * Sets RTL
+     *
+     * @param rtl
+     */
+    public void setRtl(Boolean rtl)
+    {
+<span class="nc" id="L292">        this.rtl = rtl;</span>
+<span class="nc" id="L293">    }</span>
+
+    /**
+     * Sets or gets the slider's step when the user is using the keyboard arrows, slider increment and decrement buttons or the mouse wheel for changing the slider's value.
+     *
+     * @return
+     */
+    public Integer getStep()
+    {
+<span class="nc" id="L302">        return step;</span>
+    }
+
+    /**
+     * Sets or gets the slider's step when the user is using the keyboard arrows, slider increment and decrement buttons or the mouse wheel for changing the slider's value.
+     *
+     * @param step
+     */
+    public void setStep(Integer step)
+    {
+<span class="nc" id="L312">        this.step = step;</span>
+<span class="nc" id="L313">    }</span>
+
+    /**
+     * Sets or gets whether ticks will be shown.
+     *
+     * @return
+     */
+    public Boolean getShowTicks()
+    {
+<span class="nc" id="L322">        return showTicks;</span>
+    }
+
+    /**
+     * Sets or gets whether ticks will be shown.
+     *
+     * @param showTicks
+     */
+    public void setShowTicks(Boolean showTicks)
+    {
+<span class="nc" id="L332">        this.showTicks = showTicks;</span>
+<span class="nc" id="L333">    }</span>
+
+    /**
+     * Sets or gets whether minor ticks will be shown.
+     *
+     * @return
+     */
+    public Boolean getShowMinorTicks()
+    {
+<span class="nc" id="L342">        return showMinorTicks;</span>
+    }
+
+    /**
+     * Sets or gets whether minor ticks will be shown.
+     *
+     * @param showMinorTicks
+     */
+    public void setShowMinorTicks(Boolean showMinorTicks)
+    {
+<span class="nc" id="L352">        this.showMinorTicks = showMinorTicks;</span>
+<span class="nc" id="L353">    }</span>
+
+    /**
+     * Sets or gets whether major tick labels will be shown.
+     *
+     * @return
+     */
+    public Boolean getShowTickLabels()
+    {
+<span class="nc" id="L362">        return showTickLabels;</span>
+    }
+
+    /**
+     * Sets or gets whether major tick labels will be shown.
+     *
+     * @param showTickLabels
+     */
+    public void setShowTickLabels(Boolean showTickLabels)
+    {
+<span class="nc" id="L372">        this.showTickLabels = showTickLabels;</span>
+<span class="nc" id="L373">    }</span>
+
+    /**
+     * Sets or gets whether the scroll buttons will be shown.
+     *
+     * @return
+     */
+    public Boolean getShowButtons()
+    {
+<span class="nc" id="L382">        return showButtons;</span>
+    }
+
+    /**
+     * Sets or gets whether the scroll buttons will be shown.
+     *
+     * @param showButtons
+     */
+    public void setShowButtons(Boolean showButtons)
+    {
+<span class="nc" id="L392">        this.showButtons = showButtons;</span>
+<span class="nc" id="L393">    }</span>
+
+    /**
+     * Sets or gets whether the slider range background is displayed. This is the fill between the slider's left button and the slider's thumb to indicate the selected value. In range slider mode, the
+     * space between the handles is filled to indicate the selected values.
+     *
+     * @return
+     */
+    public Boolean getShowRange()
+    {
+<span class="nc" id="L403">        return showRange;</span>
+    }
+
+    /**
+     * Sets or gets whether the slider range background is displayed. This is the fill between the slider's left button and the slider's thumb to indicate the selected value. In range slider mode, the
+     * space between the handles is filled to indicate the selected values.
+     *
+     * @param showRange
+     */
+    public void setShowRange(Boolean showRange)
+    {
+<span class="nc" id="L414">        this.showRange = showRange;</span>
+<span class="nc" id="L415">    }</span>
+
+    /**
+     * Sets or gets slider's ticks position.
+     *
+     * @return
+     */
+    public JQXSliderTickPositions getTicksPosition()
+    {
+<span class="nc" id="L424">        return ticksPosition;</span>
+    }
+
+    /**
+     * Sets or gets slider's ticks position.
+     *
+     * @param ticksPosition
+     */
+    public void setTicksPosition(JQXSliderTickPositions ticksPosition)
+    {
+<span class="nc" id="L434">        this.ticksPosition = ticksPosition;</span>
+<span class="nc" id="L435">    }</span>
+
+    /**
+     * Sets or gets slider's major ticks frequency.
+     *
+     * @return
+     */
+    public Integer getTicksFrequency()
+    {
+<span class="nc" id="L444">        return ticksFrequency;</span>
+    }
+
+    /**
+     * Sets or gets slider's major ticks frequency.
+     *
+     * @param ticksFrequency
+     */
+    public void setTicksFrequency(Integer ticksFrequency)
+    {
+<span class="nc" id="L454">        this.ticksFrequency = ticksFrequency;</span>
+<span class="nc" id="L455">    }</span>
+
+    /**
+     * Sets or gets slider's major ticks size.
+     *
+     * @return
+     */
+    public Integer getTickSize()
+    {
+<span class="nc" id="L464">        return tickSize;</span>
+    }
+
+    /**
+     * Sets or gets slider's major ticks size.
+     *
+     * @param tickSize
+     */
+    public void setTickSize(Integer tickSize)
+    {
+<span class="nc" id="L474">        this.tickSize = tickSize;</span>
+<span class="nc" id="L475">    }</span>
+
+    /**
+     * Sets or gets the major ticks labels formatting function.
+     *
+     * @return
+     */
+    public JavascriptFunction getTickLabelFormatFunction()
+    {
+<span class="nc" id="L484">        return tickLabelFormatFunction;</span>
+    }
+
+    /**
+     * Sets or gets the major ticks labels formatting function.
+     *
+     * @param tickLabelFormatFunction
+     */
+    public void setTickLabelFormatFunction(JavascriptFunction tickLabelFormatFunction)
+    {
+<span class="nc" id="L494">        this.tickLabelFormatFunction = tickLabelFormatFunction;</span>
+<span class="nc" id="L495">    }</span>
+
+    /**
+     * Sets or gets whether the slider tooltip will be shown.
+     *
+     * @return
+     */
+    public Boolean getTooltip()
+    {
+<span class="nc" id="L504">        return tooltip;</span>
+    }
+
+    /**
+     * Sets or gets whether the slider tooltip will be shown.
+     *
+     * @param tooltip
+     */
+    public void setTooltip(Boolean tooltip)
+    {
+<span class="nc" id="L514">        this.tooltip = tooltip;</span>
+<span class="nc" id="L515">    }</span>
+
+    /**
+     * Sets or gets the tooltip's hide delay.
+     *
+     * @return
+     */
+    public Integer getTooltipHideDelay()
+    {
+<span class="nc" id="L524">        return tooltipHideDelay;</span>
+    }
+
+    /**
+     * Sets or gets the tooltip's hide delay.
+     *
+     * @param tooltipHideDelay
+     */
+    public void setTooltipHideDelay(Integer tooltipHideDelay)
+    {
+<span class="nc" id="L534">        this.tooltipHideDelay = tooltipHideDelay;</span>
+<span class="nc" id="L535">    }</span>
+
+    /**
+     * Sets or gets the tooltip's position. Possible values: &quot;near&quot;, &quot;far&quot;
+     *
+     * @return
+     */
+    public JQXSliderPositions getTooltipPosition()
+    {
+<span class="nc" id="L544">        return tooltipPosition;</span>
+    }
+
+    /**
+     * Sets or gets the tooltip's position. Possible values: &quot;near&quot;, &quot;far&quot;
+     *
+     * @param tooltipPosition
+     */
+    public void setTooltipPosition(JQXSliderPositions tooltipPosition)
+    {
+<span class="nc" id="L554">        this.tooltipPosition = tooltipPosition;</span>
+<span class="nc" id="L555">    }</span>
+
+    public JavascriptFunction getTooltipFormatFunction()
+    {
+<span class="nc" id="L559">        return tooltipFormatFunction;</span>
+    }
+
+    public void setTooltipFormatFunction(JavascriptFunction tooltipFormatFunction)
+    {
+<span class="nc" id="L564">        this.tooltipFormatFunction = tooltipFormatFunction;</span>
+<span class="nc" id="L565">    }</span>
+
+    /**
+     * Sets or gets slider's value. This poperty will be an object with the following structure { rangeStart: range_start, rangeEnd: range_end } if the slider is range slider otherwise it's going to
+     * be a number.
+     *
+     * @return
+     */
+    public Integer getValue()
+    {
+<span class="nc" id="L575">        return value;</span>
+    }
+
+    /**
+     * Sets or gets slider's value. This poperty will be an object with the following structure { rangeStart: range_start, rangeEnd: range_end } if the slider is range slider otherwise it's going to
+     * be a number.
+     *
+     * @param value
+     */
+    public void setValue(Integer value)
+    {
+<span class="nc" id="L586">        this.value = value;</span>
+<span class="nc" id="L587">    }</span>
+
+    /**
+     * Sets or gets range slider's values.The 'rangeSlider' property should be set to true.
+     *
+     * @return
+     */
+    public ArrayList&lt;Integer&gt; getValues()
+    {
+<span class="nc bnc" id="L596" title="All 2 branches missed.">        if (values == null)</span>
+        {
+<span class="nc" id="L598">            values = new ArrayList&lt;&gt;();</span>
+        }
+<span class="nc" id="L600">        return values;</span>
+    }
+
+    /**
+     * Sets or gets range slider's values.The 'rangeSlider' property should be set to true.
+     *
+     * @param values
+     */
+    public void setValues(ArrayList&lt;Integer&gt; values)
+    {
+<span class="nc" id="L610">        this.values = values;</span>
+<span class="nc" id="L611">    }</span>
+
+    /**
+     * Determines the template as an alternative of the default styles.
+     * Possible Values:
+     * &lt;p&gt;
+     * 'default' - the default template. The style depends only on the &quot;theme&quot; property value.
+     * &lt;p&gt;
+     * 'primary' - dark blue style for extra visual weight.
+     * &lt;p&gt;
+     * 'success' - green style for successful or positive action.
+     * &lt;p&gt;
+     * 'warning' - orange style which indicates caution.
+     * &lt;p&gt;
+     * 'danger' - red style which indicates a dangerous or negative action.
+     * &lt;p&gt;
+     * 'info' - blue button, not tied to a semantic action or use.
+     *
+     * @return
+     */
+    public JQXButtonTemplates getTemplate()
+    {
+<span class="nc" id="L633">        return template;</span>
+    }
+
+    /**
+     * Determines the template as an alternative of the default styles.
+     * Possible Values:
+     * &lt;p&gt;
+     * 'default' - the default template. The style depends only on the &quot;theme&quot; property value.
+     * &lt;p&gt;
+     * 'primary' - dark blue style for extra visual weight.
+     * &lt;p&gt;
+     * 'success' - green style for successful or positive action.
+     * &lt;p&gt;
+     * 'warning' - orange style which indicates caution.
+     * &lt;p&gt;
+     * 'danger' - red style which indicates a dangerous or negative action.
+     * &lt;p&gt;
+     * 'info' - blue button, not tied to a semantic action or use.
+     *
+     * @param template
+     */
+    public void setTemplate(JQXButtonTemplates template)
+    {
+<span class="nc" id="L656">        this.template = template;</span>
+<span class="nc" id="L657">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

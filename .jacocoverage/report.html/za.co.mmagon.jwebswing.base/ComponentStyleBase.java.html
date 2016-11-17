@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ComponentStyleBase.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base</a> &gt; <span class="el_source">ComponentStyleBase.java</span></div><h1>ComponentStyleBase.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 ged_m
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.base;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import java.util.HashMap;
+import java.util.Map;
+import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.interfaces.IComponentStyleBase;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSBlockIdentifier;
+import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSComposer;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
+
+/**
+ * The CSS Portion of the Component.
+ *
+ * @author GedMarc
+ * @since 24 Apr 2016
+ */
+public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentBase&gt;
+        extends ComponentHierarchyBase&lt;C, A, F, E, J&gt; implements IComponentStyleBase&lt;J&gt;
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * The CSS Object for all styling
+     */
+    private CSSImpl css;
+    /**
+     * The Hover CSS Object
+     */
+    private CSSImpl hoverCss;
+    /**
+     * The Active CSS Object
+     */
+    private CSSImpl activeCss;
+    /**
+     * The Link CSS Object
+     */
+    private CSSImpl linkCss;
+    /**
+     * The visited CSS Object
+     */
+    private CSSImpl visitedCss;
+    /**
+     * The CSS Class name if required
+     */
+    private String cssName;
+
+    /**
+     * Container for all the CSS Types
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private HashMap&lt;CSSTypes, CSSImpl&gt; cssTypeHashMap;
+
+    /**
+     * Constructs a tag with styling options enabled
+     *
+     * @param componentType
+     */
+    public ComponentStyleBase(ComponentTypes componentType)
+    {
+<span class="fc" id="L82">        super(componentType);</span>
+<span class="fc" id="L83">    }</span>
+
+    /**
+     * Returns a ComponentStyleBase component of this
+     *
+     * @return
+     */
+    public IComponentStyleBase asStyleBase()
+    {
+<span class="nc" id="L92">        return (ComponentStyleBase) this;</span>
+    }
+
+    /**
+     * Returns the current HashMap of all CSS Entries for the component
+     *
+     * @return
+     */
+    @Override
+    public HashMap&lt;CSSTypes, CSSImpl&gt; getCssTypeHashMap()
+    {
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        if (cssTypeHashMap == null)</span>
+        {
+<span class="fc" id="L105">            cssTypeHashMap = new HashMap&lt;&gt;();</span>
+        }
+<span class="fc" id="L107">        return cssTypeHashMap;</span>
+    }
+
+    /**
+     * Gets the CSS Object used for styling
+     *
+     * @return
+     */
+    @Override
+    public CSSImpl getCss()
+    {
+<span class="fc bfc" id="L118" title="All 2 branches covered.">        if (css == null)</span>
+        {
+<span class="fc" id="L120">            css = new CSSImpl(getID(), CSSTypes.None, CSSBlockIdentifier.Id);</span>
+<span class="fc" id="L121">            getCssTypeHashMap().put(CSSTypes.None, css);</span>
+        }
+<span class="fc" id="L123">        return css;</span>
+    }
+
+    /**
+     * Sets the CSS Object used for styling
+     *
+     * @param css
+     */
+    @Override
+    public void setCss(CSSImpl css)
+    {
+<span class="nc" id="L134">        this.css = css;</span>
+<span class="nc" id="L135">    }</span>
+
+    /**
+     * Renders the component CSS at the specified tab count with the
+     * &amp;lt;style&amp;gt; tag
+     * &lt;p&gt;
+     * @param tabCount Tab indentation for the SQL
+     * &lt;p&gt;
+     * @return The Component CSS
+     */
+    @Override
+    public StringBuilder renderCss(int tabCount)
+    {
+<span class="fc" id="L148">        return renderCss(tabCount, true, false, false);</span>
+    }
+
+    /**
+     * Renders the component CSS at the specified tab count with the
+     * &amp;lt;style&amp;gt; tag This includes everything from this classes CSS, to the
+     * CSS for each field. It will also populate the lower level
+     * child CSS for fields in this class
+     * &lt;p&gt;
+     * @param tabCount           Tab indentation for the SQL
+     * @param renderOpening      Whether or not to render the opening XML tag
+     *                           for a CSS style
+     * @param renderInQuotations Sets whether to render the CSS Fields in
+     *                           Quotations
+     * @param isAjaxCall         Sets whether the CSS is being called from an
+     *                           AJAX call
+     * &lt;p&gt;
+     * @return The Component CSS
+     */
+    @Override
+    public StringBuilder renderCss(int tabCount, boolean renderOpening, boolean renderInQuotations, boolean isAjaxCall)
+    {
+<span class="fc" id="L170">        CSSComposer comp = new CSSComposer();</span>
+<span class="fc" id="L171">        comp.addComponent(this, true);</span>
+<span class="fc" id="L172">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L173">        sb.append(comp.toString());</span>
+<span class="fc" id="L174">        return sb;</span>
+    }
+
+    /**
+     * Returns the currently assigned CSS Name
+     *
+     * @return
+     */
+    @Override
+    public String getCssName()
+    {
+<span class="nc" id="L185">        return cssName;</span>
+    }
+
+    /**
+     * Sets the currently assigned CSS Name
+     *
+     * @param cssName
+     */
+    @Override
+    public void setCssName(String cssName)
+    {
+<span class="nc" id="L196">        this.cssName = cssName;</span>
+<span class="nc" id="L197">    }</span>
+
+    /**
+     * Gets the hover format CSS
+     *
+     * @return
+     */
+    @Override
+    public CSSImpl getHoverCss()
+    {
+<span class="nc bnc" id="L207" title="All 2 branches missed.">        if (hoverCss == null)</span>
+        {
+<span class="nc" id="L209">            hoverCss = new CSSImpl(getID(), CSSTypes.Hover, CSSBlockIdentifier.Id);</span>
+<span class="nc" id="L210">            getCssTypeHashMap().put(hoverCss.getCssObjectType(), hoverCss);</span>
+        }
+<span class="nc" id="L212">        return hoverCss;</span>
+    }
+
+    /**
+     * Sets the hover format CSS
+     *
+     * @param hoverCss
+     */
+    @Override
+    public void setHoverCss(CSSImpl hoverCss)
+    {
+
+<span class="nc" id="L224">        this.hoverCss = hoverCss;</span>
+<span class="nc" id="L225">    }</span>
+
+    /**
+     * Gets the active CSS
+     *
+     * @return
+     */
+    @Override
+    public CSSImpl getActiveCss()
+    {
+<span class="nc bnc" id="L235" title="All 2 branches missed.">        if (activeCss == null)</span>
+        {
+<span class="nc" id="L237">            activeCss = new CSSImpl(getID(), CSSTypes.Active, CSSBlockIdentifier.Id);</span>
+<span class="nc" id="L238">            getCssTypeHashMap().put(CSSTypes.Active, activeCss);</span>
+        }
+<span class="nc" id="L240">        return activeCss;</span>
+    }
+
+    /**
+     * Sets the active CSS
+     *
+     * @param activeCss
+     */
+    @Override
+    public void setActiveCss(CSSImpl activeCss)
+    {
+<span class="nc" id="L251">        this.activeCss = activeCss;</span>
+<span class="nc" id="L252">    }</span>
+
+    /**
+     * Gets the link CSS
+     *
+     * @return
+     */
+    @Override
+    public CSSImpl getLinkCss()
+    {
+<span class="nc bnc" id="L262" title="All 2 branches missed.">        if (linkCss == null)</span>
+        {
+<span class="nc" id="L264">            linkCss = new CSSImpl(getID(), CSSTypes.Link, CSSBlockIdentifier.Id);</span>
+<span class="nc" id="L265">            getCssTypeHashMap().put(linkCss.getCssObjectType(), linkCss);</span>
+        }
+<span class="nc" id="L267">        return linkCss;</span>
+    }
+
+    /**
+     * Sets the Link CSS
+     *
+     * @param linkCss
+     */
+    @Override
+    public void setLinkCss(CSSImpl linkCss)
+    {
+<span class="nc" id="L278">        this.linkCss = linkCss;</span>
+<span class="nc" id="L279">    }</span>
+
+    /**
+     * Gets the Visited CSS
+     *
+     * @return
+     */
+    @Override
+    public CSSImpl getVisitedCss()
+    {
+<span class="nc bnc" id="L289" title="All 2 branches missed.">        if (visitedCss == null)</span>
+        {
+<span class="nc" id="L291">            visitedCss = new CSSImpl(getID(), CSSTypes.Visited, CSSBlockIdentifier.Id);</span>
+<span class="nc" id="L292">            getCssTypeHashMap().put(visitedCss.getCssObjectType(), visitedCss);</span>
+        }
+<span class="nc" id="L294">        return visitedCss;</span>
+    }
+
+    /**
+     * Sets the Visited CSS
+     *
+     * @param visitedCss
+     */
+    @Override
+    public void setVisitedCss(CSSImpl visitedCss)
+    {
+<span class="nc" id="L305">        this.visitedCss = visitedCss;</span>
+<span class="nc" id="L306">    }</span>
+
+    /**
+     * Adds a CSS object to the component with the given type
+     *
+     * @param cssItem
+     */
+    @Override
+    public void addCSSEntry(CSSImpl cssItem)
+    {
+<span class="nc" id="L316">        getCssTypeHashMap().put(cssItem.getCssObjectType(), cssItem);</span>
+<span class="nc" id="L317">    }</span>
+
+    /**
+     * Removes a CSS item for the component
+     *
+     * @param cssType
+     */
+    @Override
+    public void removeCSSEntry(CSSTypes cssType)
+    {
+<span class="nc" id="L327">        getCssTypeHashMap().remove(cssType);</span>
+<span class="nc" id="L328">    }</span>
+
+    /**
+     * Updates the ID of all the CSS Objects
+     *
+     * @param id The ID to update with
+     * @return Me
+     */
+    @Override
+    public J setID(String id)
+    {
+<span class="fc" id="L339">        J me = super.setID(id);</span>
+<span class="fc bfc" id="L340" title="All 2 branches covered.">        for (Map.Entry&lt;CSSTypes, CSSImpl&gt; entry : getCssTypeHashMap().entrySet())</span>
+        {
+<span class="fc" id="L342">            CSSTypes key = entry.getKey();</span>
+<span class="fc" id="L343">            CSSImpl value = entry.getValue();</span>
+<span class="fc" id="L344">            value.setCssName(me.getID());</span>
+<span class="fc" id="L345">        }</span>
+<span class="fc" id="L346">        return me;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

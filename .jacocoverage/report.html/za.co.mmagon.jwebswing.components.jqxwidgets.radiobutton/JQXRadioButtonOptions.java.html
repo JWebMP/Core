@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQXRadioButtonOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqxwidgets.radiobutton</a> &gt; <span class="el_source">JQXRadioButtonOptions.java</span></div><h1>JQXRadioButtonOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqxwidgets.radiobutton;
+
+import za.co.mmagon.jwebswing.components.jqxwidgets.JQXDefaultJavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
+
+/**
+ * All the options for the tooltip library
+ * &lt;p&gt;
+ * @author GedMarc
+ * @since Mar 4, 2015
+ * @version 1.0
+ * &lt;p&gt;
+ * &lt;p&gt;
+ */
+public class JQXRadioButtonOptions extends JQXDefaultJavaScriptPart
+{
+
+    private Integer animationShowDelay;// 	Number 	250
+    private Integer animationHideDelay;// 	Number 	300
+    private MeasurementCSSImpl boxSize;// 	String 	&quot;13px&quot;
+    private Boolean checked;// 	Boolean 	false
+    private Boolean disabled;// 	Boolean 	false
+    private Boolean enableContainerClick;// 	Boolean 	true
+    private String groupName;// 	String 	&quot;&quot;
+    private Boolean hasThreeStates;// 	Boolean 	false
+    private Boolean rtl;// 	Boolean 	false
+
+    public JQXRadioButtonOptions()
+<span class="nc" id="L45">    {</span>
+
+<span class="nc" id="L47">    }</span>
+
+    public Integer getAnimationShowDelay()
+    {
+<span class="nc" id="L51">        return animationShowDelay;</span>
+    }
+
+    public void setAnimationShowDelay(Integer animationShowDelay)
+    {
+<span class="nc" id="L56">        this.animationShowDelay = animationShowDelay;</span>
+<span class="nc" id="L57">    }</span>
+
+    public Integer getAnimationHideDelay()
+    {
+<span class="nc" id="L61">        return animationHideDelay;</span>
+    }
+
+    public void setAnimationHideDelay(Integer animationHideDelay)
+    {
+<span class="nc" id="L66">        this.animationHideDelay = animationHideDelay;</span>
+<span class="nc" id="L67">    }</span>
+
+    public MeasurementCSSImpl getBoxSize()
+    {
+<span class="nc" id="L71">        return boxSize;</span>
+    }
+
+    public void setBoxSize(MeasurementCSSImpl boxSize)
+    {
+<span class="nc" id="L76">        this.boxSize = boxSize;</span>
+<span class="nc" id="L77">    }</span>
+
+    public Boolean getChecked()
+    {
+<span class="nc" id="L81">        return checked;</span>
+    }
+
+    public void setChecked(Boolean checked)
+    {
+<span class="nc" id="L86">        this.checked = checked;</span>
+<span class="nc" id="L87">    }</span>
+
+    public Boolean getDisabled()
+    {
+<span class="nc" id="L91">        return disabled;</span>
+    }
+
+    public void setDisabled(Boolean disabled)
+    {
+<span class="nc" id="L96">        this.disabled = disabled;</span>
+<span class="nc" id="L97">    }</span>
+
+    public Boolean getEnableContainerClick()
+    {
+<span class="nc" id="L101">        return enableContainerClick;</span>
+    }
+
+    public void setEnableContainerClick(Boolean enableContainerClick)
+    {
+<span class="nc" id="L106">        this.enableContainerClick = enableContainerClick;</span>
+<span class="nc" id="L107">    }</span>
+
+    public String getGroupName()
+    {
+<span class="nc" id="L111">        return groupName;</span>
+    }
+
+    public void setGroupName(String groupName)
+    {
+<span class="nc" id="L116">        this.groupName = groupName;</span>
+<span class="nc" id="L117">    }</span>
+
+    public Boolean getHasThreeStates()
+    {
+<span class="nc" id="L121">        return hasThreeStates;</span>
+    }
+
+    public void setHasThreeStates(Boolean hasThreeStates)
+    {
+<span class="nc" id="L126">        this.hasThreeStates = hasThreeStates;</span>
+<span class="nc" id="L127">    }</span>
+
+    public Boolean getRtl()
+    {
+<span class="nc" id="L131">        return rtl;</span>
+    }
+
+    public void setRtl(Boolean rtl)
+    {
+<span class="nc" id="L136">        this.rtl = rtl;</span>
+<span class="nc" id="L137">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

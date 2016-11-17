@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Head.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">Head.java</span></div><h1>Head.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html;
+
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoClassAttribute;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.HtmlChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+
+/**
+ * The head tag for HTML
+ * &lt;p&gt;
+ * Definition and Usage
+ * &lt;p&gt;
+ * The &amp;lt;head&amp;gt; element is a container for all the head elements.&lt;p&gt;
+ * &lt;p&gt;
+ * The &amp;lt;head&amp;gt; element can include a title for the document, scripts, styles, meta information, and more.&lt;p&gt;
+ * &lt;p&gt;
+ * The following elements can go inside the &amp;lt;head&amp;gt; element:
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * &amp;lt;title&amp;gt; (this element is required in an HTML document)
+ * &lt;p&gt;
+ * &amp;lt;style&amp;gt;
+ * &lt;p&gt;
+ * &amp;lt;base&amp;gt;
+ * &lt;p&gt;
+ * &amp;lt;link&amp;gt;
+ * &lt;p&gt;
+ * &amp;lt;meta&amp;gt;
+ * &lt;p&gt;
+ * &amp;lt;script&amp;gt;
+ * &lt;p&gt;
+ * &amp;lt;noscript&amp;gt;
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * Browser Support Element
+ * &amp;lt;head&amp;gt; Yes Yes Yes Yes Yes&lt;p&gt;
+ * &lt;p&gt;
+ * Differences Between HTML 4.01 and HTML5&lt;p&gt;
+ * &lt;p&gt;
+ * In HTML 4.01 the &amp;lt;head&amp;gt; element is required.&lt;p&gt;
+ * &lt;p&gt;
+ * In HTML5, the &amp;lt;head&amp;gt; element can be omitted. The following code will validate as HTML5:
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * @since 2013/11/12
+ * @version 1.0
+ * @author MMagon
+ * &lt;p&gt;
+ * &lt;p&gt;
+ */
+public class Head extends ComponentHierarchyBase&lt;HeadChildren, NoAttributes, NoFeatures, NoEvents, Component&gt;
+        implements NoIDTag, HtmlChildren, NoClassAttribute
+{
+
+    /**
+     * Constructs a new Head Tag
+     */
+    public Head()
+    {
+<span class="fc" id="L66">        super(ComponentTypes.Head);</span>
+<span class="fc" id="L67">        setRenderIDAttibute(false);</span>
+<span class="fc" id="L68">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

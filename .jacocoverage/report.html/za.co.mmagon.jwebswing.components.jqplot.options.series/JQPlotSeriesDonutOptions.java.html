@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQPlotSeriesDonutOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqplot.options.series</a> &gt; <span class="el_source">JQPlotSeriesDonutOptions.java</span></div><h1>JQPlotSeriesDonutOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqplot.options.series;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
+import java.util.List;
+import za.co.mmagon.jwebswing.components.jqplot.JQPlotGraph;
+import za.co.mmagon.jwebswing.components.jqplot.parts.interfaces.JQPlotSeriesRenderer;
+import za.co.mmagon.jwebswing.components.jqplot.references.JQPlotJavascriptReferencePool;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ * The properties for a line graph
+ *
+ * @author Marc Magon
+ * @since 09 Aug 2015
+ * @version 1.0
+ */
+public class JQPlotSeriesDonutOptions extends JavaScriptPart implements JQPlotSeriesRenderer
+{
+
+    /**
+     * The graph that this is linked to
+     */
+    @JsonIgnore
+    private JQPlotGraph linkedGraph;
+    
+    /**
+     * Outer diameter of the pie, auto computed by default
+     */
+    private Integer diameter;//
+    /**
+     * padding between the pie and plot edges, legend, etc.
+     */
+    private Double padding;
+    /**
+     * angular spacing between pie slices in degrees.
+     */
+    private Integer sliceMargin;
+    /**
+     * true or false, whether to fil the slices.
+     */
+    private Boolean fill;
+    /**
+     * offset of the shadow from the slice and offset of each succesive stroke of the shadow from the last.
+     */
+    private Integer shadowOffset;
+    /**
+     * transparency of the shadow (0 = transparent, 1 = opaque)
+     */
+    private Double shadowAlpha;
+    /**
+     * number of strokes to apply to the shadow, each stroke offset shadowOffset from the last.
+     */
+    private Integer shadowDepth;
+    /**
+     * True to highlight slice when moused over.
+     */
+    private Boolean highlightMouseOver;
+    /**
+     * True to highlight when a mouse button is pressed over a slice.
+     */
+    private Boolean highlightMouseDown;
+    /**
+     * an array of colors to use when highlighting a slice.
+     */
+    private List&lt;String&gt; highlightColors;
+    /**
+     * Either ‘label’, ‘value’, ‘percent’ or an array of labels to place on the pie slices.
+     */
+    private String dataLabels;
+    /**
+     * true to show data labels on slices.
+     */
+    private Boolean showDataLabels;
+    /**
+     * Format string for data labels.
+     */
+    private String dataLabelFormatString;
+    /**
+     * Threshold in percentage (0-100) of pie area, below which no label will be displayed.
+     */
+    private Integer dataLabelThreshold;
+    /**
+     * A Multiplier (0-1) of the pie radius which controls position of label on slice.
+     */
+    private Double dataLabelPositionFactor;
+    /**
+     * Number of pixels to slide the label away from (+) or toward (-) the center of the pie.
+     */
+    private Integer dataLabelNudge;
+    /**
+     * True to center the data label at its position.
+     */
+    private Boolean dataLabelCenterOn;
+    /**
+     * Angle to start drawing pie in degrees.
+     */
+    private Integer startAngle;
+    /**
+     * Array for whether the pie chart slice for a data element should be displayed.
+     */
+    private List&lt;Boolean&gt; showSlice;
+    
+    
+
+    /**
+     * Constructs a new Line Options for the given graph
+     *
+     * @param linkedGraph
+     */
+    public JQPlotSeriesDonutOptions(JQPlotGraph linkedGraph)
+<span class="fc" id="L128">    {</span>
+<span class="fc" id="L129">        this.linkedGraph = linkedGraph;</span>
+<span class="fc" id="L130">        linkedGraph.getJavascriptReferences().add(JQPlotJavascriptReferencePool.DoughnutRenderer.getReference());</span>
+<span class="fc" id="L131">    }</span>
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Gets the graph associated with this options
+     *
+     * @return
+     */
+    public JQPlotGraph getLinkedGraph()
+    {
+<span class="nc" id="L142">        return linkedGraph;</span>
+    }
+
+    /**
+     * Sets the graph that is linked to this options
+     *
+     * @param linkedGraph
+     */
+    public void setLinkedGraph(JQPlotGraph linkedGraph)
+    {
+<span class="nc" id="L152">        this.linkedGraph = linkedGraph;</span>
+<span class="nc" id="L153">    }</span>
+
+    /**
+     * Sets the series render to bubble
+     *
+     * @return
+     */
+    @Override
+    public String getRenderer()
+    {
+<span class="fc" id="L163">        return &quot;$.jqplot.DonutRenderer&quot;;</span>
+    }
+
+    
+
+    /**
+     * Outer diameter of the pie, auto computed by default
+     *
+     * @return
+     */
+    public Integer getDiameter()
+    {
+<span class="nc" id="L175">        return diameter;</span>
+    }
+
+    /**
+     * Outer diameter of the pie, auto computed by default
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * @param diameter
+     */
+    public void setDiameter(Integer diameter)
+    {
+<span class="nc" id="L186">        this.diameter = diameter;</span>
+<span class="nc" id="L187">    }</span>
+
+    /**
+     * padding between the pie and plot edges, legend, etc.
+     *
+     * @return
+     */
+    public Double getPadding()
+    {
+<span class="nc" id="L196">        return padding;</span>
+    }
+
+    /**
+     * padding between the pie and plot edges, legend, etc.
+     * &lt;p&gt;
+     * @param padding
+     */
+    public void setPadding(Double padding)
+    {
+<span class="nc" id="L206">        this.padding = padding;</span>
+<span class="nc" id="L207">    }</span>
+
+    /**
+     * angular spacing between pie slices in degrees.
+     *
+     * @return
+     */
+    public Integer getSliceMargin()
+    {
+<span class="nc" id="L216">        return sliceMargin;</span>
+    }
+
+    /**
+     * angular spacing between pie slices in degrees.
+     * &lt;p&gt;
+     * @param sliceMargin
+     */
+    public void setSliceMargin(Integer sliceMargin)
+    {
+<span class="nc" id="L226">        this.sliceMargin = sliceMargin;</span>
+<span class="nc" id="L227">    }</span>
+
+    /**
+     * true or false, whether to fil the slices.
+     *
+     * @return
+     */
+    public Boolean getFill()
+    {
+<span class="nc" id="L236">        return fill;</span>
+    }
+
+    /**
+     * true or false, whether to fill the slices.
+     * &lt;p&gt;
+     * @param fill
+     */
+    public void setFill(Boolean fill)
+    {
+<span class="nc" id="L246">        this.fill = fill;</span>
+<span class="nc" id="L247">    }</span>
+
+    /**
+     * offset of the shadow from the slice and offset of each succesive stroke of the shadow from the last.
+     *
+     * @return
+     */
+    public Integer getShadowOffset()
+    {
+<span class="nc" id="L256">        return shadowOffset;</span>
+    }
+
+    /**
+     * offset of the shadow from the slice and offset of each succesive stroke of the shadow from the last.
+     * &lt;p&gt;
+     * @param shadowOffset
+     */
+    public void setShadowOffset(Integer shadowOffset)
+    {
+<span class="nc" id="L266">        this.shadowOffset = shadowOffset;</span>
+<span class="nc" id="L267">    }</span>
+
+    /**
+     * transparency of the shadow (0 = transparent, 1 = opaque)
+     *
+     * @return
+     */
+    public Double getShadowAlpha()
+    {
+<span class="nc" id="L276">        return shadowAlpha;</span>
+    }
+
+    /**
+     * transparency of the shadow (0 = transparent, 1 = opaque)
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * @param shadowAlpha
+     */
+    public void setShadowAlpha(Double shadowAlpha)
+    {
+<span class="nc" id="L287">        this.shadowAlpha = shadowAlpha;</span>
+<span class="nc" id="L288">    }</span>
+
+    /**
+     * number of strokes to apply to the shadow, each stroke offset shadowOffset from the last.
+     *
+     * @return
+     */
+    public Integer getShadowDepth()
+    {
+<span class="nc" id="L297">        return shadowDepth;</span>
+    }
+
+    /**
+     * number of strokes to apply to the shadow, each stroke offset shadowOffset from the last.
+     * &lt;p&gt;
+     * @param shadowDepth
+     */
+    public void setShadowDepth(Integer shadowDepth)
+    {
+<span class="nc" id="L307">        this.shadowDepth = shadowDepth;</span>
+<span class="nc" id="L308">    }</span>
+
+    /**
+     * True to highlight slice when moused over.
+     *
+     * @return
+     */
+    public Boolean getHighlightMouseOver()
+    {
+<span class="nc" id="L317">        return highlightMouseOver;</span>
+    }
+
+    /**
+     * True to highlight slice when moused over.
+     * &lt;p&gt;
+     * @param highlightMouseOver
+     */
+    public void setHighlightMouseOver(Boolean highlightMouseOver)
+    {
+<span class="nc" id="L327">        this.highlightMouseOver = highlightMouseOver;</span>
+<span class="nc" id="L328">    }</span>
+
+    /**
+     * True to highlight when a mouse button is pressed over a slice.
+     *
+     * @return
+     */
+    public Boolean getHighlightMouseDown()
+    {
+<span class="nc" id="L337">        return highlightMouseDown;</span>
+    }
+
+    /**
+     * True to highlight when a mouse button is pressed over a slice.
+     * &lt;p&gt;
+     * @param highlightMouseDown
+     */
+    public void setHighlightMouseDown(Boolean highlightMouseDown)
+    {
+<span class="nc" id="L347">        this.highlightMouseDown = highlightMouseDown;</span>
+<span class="nc" id="L348">    }</span>
+
+    /**
+     * an array of colors to use when highlighting a slice.
+     *
+     * @return
+     */
+    public List&lt;String&gt; getHighlightColors()
+    {
+<span class="nc" id="L357">        return highlightColors;</span>
+    }
+
+    /**
+     * an array of colors to use when highlighting a slice.
+     * &lt;p&gt;
+     * @param highlightColors
+     */
+    public void setHighlightColors(ArrayList&lt;String&gt; highlightColors)
+    {
+<span class="nc" id="L367">        this.highlightColors = highlightColors;</span>
+<span class="nc" id="L368">    }</span>
+
+    /**
+     * Either ‘label’, ‘value’, ‘percent’ or an array of labels to place on the pie slices.
+     *
+     * @return
+     */
+    public String getDataLabels()
+    {
+<span class="nc" id="L377">        return dataLabels;</span>
+    }
+
+    /**
+     * Either ‘label’, ‘value’, ‘percent’ or an array of labels to place on the pie slices.
+     * &lt;p&gt;
+     * @param dataLabels
+     */
+    public void setDataLabels(String dataLabels)
+    {
+<span class="nc" id="L387">        this.dataLabels = dataLabels;</span>
+<span class="nc" id="L388">    }</span>
+
+    /**
+     * true to show data labels on slices
+     *
+     * @return
+     */
+    public Boolean getShowDataLabels()
+    {
+<span class="nc" id="L397">        return showDataLabels;</span>
+    }
+
+    /**
+     * true to show data labels on slices
+     * &lt;p&gt;
+     * @param showDataLabels
+     */
+    public void setShowDataLabels(Boolean showDataLabels)
+    {
+<span class="nc" id="L407">        this.showDataLabels = showDataLabels;</span>
+<span class="nc" id="L408">    }</span>
+
+    /**
+     * Format string for data labels. If none, ‘%s’ is used for “label” and for arrays, ‘%d’ for value and ‘%d%%’ for percentage.
+     *
+     * @return
+     */
+    public String getDataLabelFormatString()
+    {
+<span class="nc" id="L417">        return dataLabelFormatString;</span>
+    }
+
+    /**
+     * Format string for data labels. If none, ‘%s’ is used for “label” and for arrays, ‘%d’ for value and ‘%d%%’ for percentage.
+     * &lt;p&gt;
+     * @param dataLabelFormatString
+     */
+    public void setDataLabelFormatString(String dataLabelFormatString)
+    {
+<span class="nc" id="L427">        this.dataLabelFormatString = dataLabelFormatString;</span>
+<span class="nc" id="L428">    }</span>
+
+    /**
+     * Threshhold in percentage (0-100) of pie area, below which no label will be displayed.
+     *
+     * @return
+     */
+    public Integer getDataLabelThreshold()
+    {
+<span class="nc" id="L437">        return dataLabelThreshold;</span>
+    }
+
+    /**
+     * Threshhold in percentage (0-100) of pie area, below which no label will be displayed.
+     * &lt;p&gt;
+     * @param dataLabelThreshold
+     */
+    public void setDataLabelThreshold(Integer dataLabelThreshold)
+    {
+<span class="nc" id="L447">        this.dataLabelThreshold = dataLabelThreshold;</span>
+<span class="nc" id="L448">    }</span>
+
+    /**
+     * A Multiplier (0-1) of the pie radius which controls position of label on slice.
+     *
+     * @return
+     */
+    public Double getDataLabelPositionFactor()
+    {
+<span class="nc" id="L457">        return dataLabelPositionFactor;</span>
+    }
+
+    /**
+     * A Multiplier (0-1) of the pie radius which controls position of label on slice.
+     * &lt;p&gt;
+     * @param dataLabelPositionFactor
+     */
+    public void setDataLabelPositionFactor(Double dataLabelPositionFactor)
+    {
+<span class="nc" id="L467">        this.dataLabelPositionFactor = dataLabelPositionFactor;</span>
+<span class="nc" id="L468">    }</span>
+
+    /**
+     * Number of pixels to slide the label away from (+) or toward (-) the center of the pie.
+     *
+     * @return
+     */
+    public Integer getDataLabelNudge()
+    {
+<span class="nc" id="L477">        return dataLabelNudge;</span>
+    }
+
+    /**
+     * Number of pixels to slide the label away from (+) or toward (-) the center of the pie.
+     * &lt;p&gt;
+     * @param dataLabelNudge
+     */
+    public void setDataLabelNudge(Integer dataLabelNudge)
+    {
+<span class="nc" id="L487">        this.dataLabelNudge = dataLabelNudge;</span>
+<span class="nc" id="L488">    }</span>
+
+    /**
+     * True to center the data label at its position.
+     *
+     * @return
+     */
+    public Boolean getDataLabelCenterOn()
+    {
+<span class="nc" id="L497">        return dataLabelCenterOn;</span>
+    }
+
+    /**
+     * True to center the data label at its position.
+     * &lt;p&gt;
+     * @param dataLabelCenterOn
+     */
+    public void setDataLabelCenterOn(Boolean dataLabelCenterOn)
+    {
+<span class="nc" id="L507">        this.dataLabelCenterOn = dataLabelCenterOn;</span>
+<span class="nc" id="L508">    }</span>
+
+    /**
+     * Angle to start drawing pie in degrees.
+     *
+     * @return
+     */
+    public Integer getStartAngle()
+    {
+<span class="nc" id="L517">        return startAngle;</span>
+    }
+
+    /**
+     * Angle to start drawing pie in degrees.
+     * &lt;p&gt;
+     * @param startAngle
+     */
+    public void setStartAngle(Integer startAngle)
+    {
+<span class="nc" id="L527">        this.startAngle = startAngle;</span>
+<span class="nc" id="L528">    }</span>
+
+    /**
+     * Array for whether the pie chart slice for a data element should be displayed.
+     *
+     * @return
+     */
+    public List&lt;Boolean&gt; getShowSlice()
+    {
+<span class="nc" id="L537">        return showSlice;</span>
+    }
+
+    /**
+     * Array for whether the pie chart slice for a data element should be displayed.
+     * &lt;p&gt;
+     * @param showSlice
+     */
+    public void setShowSlice(List&lt;Boolean&gt; showSlice)
+    {
+<span class="nc" id="L547">        this.showSlice = showSlice;</span>
+<span class="nc" id="L548">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

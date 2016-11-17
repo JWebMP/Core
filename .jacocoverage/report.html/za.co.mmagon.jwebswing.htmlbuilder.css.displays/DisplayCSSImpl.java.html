@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DisplayCSSImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.htmlbuilder.css.displays</a> &gt; <span class="el_source">DisplayCSSImpl.java</span></div><h1>DisplayCSSImpl.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.htmlbuilder.css.displays;
+
+import java.lang.annotation.Annotation;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+
+/**
+ * The display property is the most important CSS property for controlling layout.
+ *
+ * @author GedMarc
+ * @since 18 Jan 2016
+ */
+public class DisplayCSSImpl implements DisplayCSS
+{
+
+    public DisplayCSSImpl()
+<span class="nc" id="L32">    {</span>
+<span class="nc" id="L33">    }</span>
+
+    public Displays Display;
+    public Cursors Cursor;
+    public Overflows Overflow;
+    public Overflows Overflow_X;
+    public Overflows Overflow_Y;
+    public Positions Position;
+    public za.co.mmagon.jwebswing.htmlbuilder.css.displays.Float Float;
+    public MeasurementCSS Z_Index;
+    public MeasurementCSS Bottom;
+    public MeasurementCSS Left;
+    public MeasurementCSS Right;
+    public MeasurementCSS Top;
+
+    @Override
+    public Class&lt;? extends Annotation&gt; annotationType()
+    {
+<span class="nc" id="L51">        return DisplayCSS.class;</span>
+    }
+
+    /**
+     * Sets the Display Format
+     * The display Property
+     * &lt;p&gt;
+     * The display property specifies if/how an element is displayed.
+     * &lt;p&gt;
+     * Every HTML element has a default display value depending on what type of element it is. The default display value for most elements is block or inline.
+     * Block-level Elements
+     * &lt;p&gt;
+     * A block-level element always starts on a new line and takes up the full width available (stretches out to the left and right as far as it can).
+     * The &amp;lt;div&amp;gt; element is a block-level element.
+     * &lt;p&gt;
+     * Examples of block-level elements:
+     * &lt;p&gt;
+     * &amp;lt;div&amp;gt;
+     * &amp;lt;h1&amp;gt; - &amp;lt;h6&amp;gt;
+     * &lt;p&gt;
+     * &amp;lt;form&amp;gt;
+     * &amp;lt;header&amp;gt;
+     * &amp;lt;footer&amp;gt;
+     * &amp;lt;section&amp;gt;
+     * &lt;p&gt;
+     * Inline Elements
+     * &lt;p&gt;
+     * An inline element does not start on a new line and only takes up as much width as necessary.
+     * &lt;p&gt;
+     * This is an inline &amp;lt;span&amp;gt; element inside a paragraph.
+     * &lt;p&gt;
+     * Examples of inline elements:
+     * &lt;p&gt;
+     * &amp;lt;span&amp;gt;
+     * &amp;lt;a&amp;gt;
+     * &amp;lt;img&amp;gt;
+     *
+     * @return
+     */
+    @Override
+    public Displays Display()
+    {
+<span class="nc" id="L93">        return Display;</span>
+    }
+
+    /**
+     * Sets the mouse cursor
+     *
+     * @return
+     */
+    @Override
+    public Cursors Cursor()
+    {
+<span class="nc" id="L104">        return Cursor;</span>
+    }
+
+    /**
+     * Sets the overflow
+     *
+     * @return
+     */
+    @Override
+    public Overflows Overflow()
+    {
+<span class="nc" id="L115">        return Overflow;</span>
+    }
+
+    /**
+     * Sets the Horizontal Overflow
+     *
+     * @return
+     */
+    @Override
+    public Overflows Overflow_X()
+    {
+<span class="nc" id="L126">        return Overflow_X;</span>
+    }
+
+    /**
+     * Sets the vertical overflow
+     *
+     * @return
+     */
+    @Override
+    public Overflows Overflow_Y()
+    {
+<span class="nc" id="L137">        return Overflow_Y;</span>
+    }
+
+    /**
+     * Sets the display position
+     *
+     * @return
+     */
+    @Override
+    public Positions Position()
+    {
+<span class="nc" id="L148">        return Position;</span>
+    }
+
+    /**
+     * Sets the component floating
+     *
+     * @return
+     */
+    @Override
+    public za.co.mmagon.jwebswing.htmlbuilder.css.displays.Float Float()
+    {
+<span class="nc" id="L159">        return Float;</span>
+    }
+
+    /**
+     * Sets the Z-Index
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Z_Index()
+    {
+<span class="nc" id="L170">        return Z_Index;</span>
+    }
+
+    /**
+     * Sets the bottom margin edge for a positioned box
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Bottom()
+    {
+<span class="nc" id="L181">        return Bottom;</span>
+    }
+
+    /**
+     * Sets the bottom margin edge for a positioned box
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Left()
+    {
+<span class="nc" id="L192">        return Left;</span>
+    }
+
+    /**
+     * Sets the bottom margin edge for a positioned box
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Right()
+    {
+<span class="nc" id="L203">        return Right;</span>
+    }
+
+    /**
+     * Sets the bottom margin edge for a positioned box
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Top()
+    {
+<span class="nc" id="L214">        return Top;</span>
+    }
+
+    /**
+     * Sets the Display Format
+     * The display Property
+     * &lt;p&gt;
+     * The display property specifies if/how an element is displayed.
+     * &lt;p&gt;
+     * Every HTML element has a default display value depending on what type of element it is. The default display value for most elements is block or inline.
+     * Block-level Elements
+     * &lt;p&gt;
+     * A block-level element always starts on a new line and takes up the full width available (stretches out to the left and right as far as it can).
+     * The &amp;lt;div&amp;gt; element is a block-level element.
+     * &lt;p&gt;
+     * Examples of block-level elements:
+     * &lt;p&gt;
+     * &amp;lt;div&amp;gt;
+     * &amp;lt;h1&amp;gt; - &amp;lt;h6&amp;gt;
+     * &lt;p&gt;
+     * &amp;lt;form&amp;gt;
+     * &amp;lt;header&amp;gt;
+     * &amp;lt;footer&amp;gt;
+     * &amp;lt;section&amp;gt;
+     * &lt;p&gt;
+     * Inline Elements
+     * &lt;p&gt;
+     * An inline element does not start on a new line and only takes up as much width as necessary.
+     * &lt;p&gt;
+     * This is an inline &amp;lt;span&amp;gt; element inside a paragraph.
+     * &lt;p&gt;
+     * Examples of inline elements:
+     * &lt;p&gt;
+     * &amp;lt;span&amp;gt;
+     * &amp;lt;a&amp;gt;
+     * &amp;lt;img&amp;gt;
+     *
+     * @param Display
+     */
+    public void setDisplay(Displays Display)
+    {
+<span class="nc" id="L255">        this.Display = Display;</span>
+<span class="nc" id="L256">    }</span>
+
+    /**
+     * Sets the mouse cursor
+     *
+     * @param Cursor
+     */
+    public void setCursor(Cursors Cursor)
+    {
+<span class="nc" id="L265">        this.Cursor = Cursor;</span>
+<span class="nc" id="L266">    }</span>
+
+    /**
+     * Sets the overflow
+     *
+     * @param Overflow
+     */
+    public void setOverflow(Overflows Overflow)
+    {
+<span class="nc" id="L275">        this.Overflow = Overflow;</span>
+<span class="nc" id="L276">    }</span>
+
+    /**
+     * Sets the horizontal overflow
+     *
+     * @param Overflow_X
+     */
+    public void setOverflow_X(Overflows Overflow_X)
+    {
+<span class="nc" id="L285">        this.Overflow_X = Overflow_X;</span>
+<span class="nc" id="L286">    }</span>
+
+    /**
+     * Sets the vertical overflow
+     *
+     * @param Overflow_Y
+     */
+    public void setOverflow_Y(Overflows Overflow_Y)
+    {
+<span class="nc" id="L295">        this.Overflow_Y = Overflow_Y;</span>
+<span class="nc" id="L296">    }</span>
+
+    /**
+     * Sets the display position
+     *
+     * @param Position
+     */
+    public void setPosition(Positions Position)
+    {
+<span class="nc" id="L305">        this.Position = Position;</span>
+<span class="nc" id="L306">    }</span>
+
+    /**
+     * Sets the flow to be applied
+     *
+     * @param Float
+     */
+    public void setFloat(za.co.mmagon.jwebswing.htmlbuilder.css.displays.Float Float)
+    {
+<span class="nc" id="L315">        this.Float = Float;</span>
+<span class="nc" id="L316">    }</span>
+
+    /**
+     * Sets the Z-Index
+     *
+     * @param Z_Index
+     */
+    public void setZ_Index(MeasurementCSS Z_Index)
+    {
+<span class="nc" id="L325">        this.Z_Index = Z_Index;</span>
+<span class="nc" id="L326">    }</span>
+
+    /**
+     * Sets the bottom margin edge for a positioned box
+     *
+     * @param Bottom
+     */
+    public void setBottom(MeasurementCSS Bottom)
+    {
+<span class="nc" id="L335">        this.Bottom = Bottom;</span>
+<span class="nc" id="L336">    }</span>
+
+    /**
+     * Sets the bottom margin edge for a positioned box
+     *
+     * @param Left
+     */
+    public void setLeft(MeasurementCSS Left)
+    {
+<span class="nc" id="L345">        this.Left = Left;</span>
+<span class="nc" id="L346">    }</span>
+
+    /**
+     * Sets the bottom margin edge for a positioned box
+     *
+     * @param Right
+     */
+    public void setRight(MeasurementCSS Right)
+    {
+<span class="nc" id="L355">        this.Right = Right;</span>
+<span class="nc" id="L356">    }</span>
+
+    /**
+     * Sets the bottom margin edge for a positioned box
+     *
+     * @param Top
+     */
+    public void setTop(MeasurementCSS Top)
+    {
+<span class="nc" id="L365">        this.Top = Top;</span>
+<span class="nc" id="L366">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

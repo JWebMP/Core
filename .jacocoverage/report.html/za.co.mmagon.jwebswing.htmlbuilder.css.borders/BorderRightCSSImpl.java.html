@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BorderRightCSSImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.htmlbuilder.css.borders</a> &gt; <span class="el_source">BorderRightCSSImpl.java</span></div><h1>BorderRightCSSImpl.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
+
+import java.lang.annotation.Annotation;
+import za.co.mmagon.jwebswing.htmlbuilder.css.BorderStyles;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+
+/**
+ * CSS Border Properties
+ * &lt;p&gt;
+ * The CSS border properties allow you to specify the style, width, and color of an element's border.
+ * &lt;p&gt;
+ * @author GedMarc
+ * @since 18 Jan 2016
+ */
+public class BorderRightCSSImpl implements BorderRightCSS
+{
+
+    public BorderRightCSSImpl()
+<span class="nc" id="L37">    {</span>
+<span class="nc" id="L38">    }</span>
+
+    @Override
+    public String toString()
+    {
+<span class="nc" id="L43">        String out = &quot;&quot;;</span>
+<span class="nc" id="L44">        out += Border_Right_Width + &quot; &quot;;</span>
+<span class="nc" id="L45">        out += Border_Right_Style + &quot; &quot;;</span>
+<span class="nc" id="L46">        out += Border_Right_Color + &quot; &quot;;</span>
+<span class="nc" id="L47">        out += Border_Right_Color$ + &quot; &quot;;</span>
+<span class="nc" id="L48">        out = out.replaceAll(&quot;null&quot;, &quot;&quot;);</span>
+<span class="nc" id="L49">        out = out.trim();</span>
+<span class="nc" id="L50">        return out;</span>
+    }
+
+    private ColourCSS Border_Right_Color;
+    private ColourNames Border_Right_Color$;
+    private BorderStyles Border_Right_Style;
+    private MeasurementCSS Border_Right_Width;
+
+    @Override
+    public Class&lt;? extends Annotation&gt; annotationType()
+    {
+<span class="nc" id="L61">        return BorderCSS.class;</span>
+    }
+
+    /**
+     * Gets the colour of the right border
+     *
+     * @return
+     */
+    @Override
+    public ColourCSS Border_Right_Color()
+    {
+<span class="nc" id="L72">        return Border_Right_Color;</span>
+    }
+
+    /**
+     * Sets the colour of the right border
+     *
+     * @return
+     */
+    @Override
+    public ColourNames Border_Right_Color$()
+    {
+<span class="nc" id="L83">        return Border_Right_Color$;</span>
+    }
+
+    /**
+     * Gets the style of the right border
+     *
+     * @return
+     */
+    @Override
+    public BorderStyles Border_Right_Style()
+    {
+<span class="nc" id="L94">        return Border_Right_Style;</span>
+    }
+
+    /**
+     * Gets the width of the right border
+     *
+     * @return
+     */
+    @Override
+    public MeasurementCSS Border_Right_Width()
+    {
+<span class="nc" id="L105">        return Border_Right_Width;</span>
+    }
+
+    /**
+     * Sets the colour of the right border
+     *
+     * @param Border_Right_Color
+     */
+    public void setBorder_Right_Color(ColourCSS Border_Right_Color)
+    {
+<span class="nc" id="L115">        this.Border_Right_Color = Border_Right_Color;</span>
+<span class="nc" id="L116">    }</span>
+
+    /**
+     * Sets the colour of the right border
+     *
+     * @param Border_Right_Color$
+     */
+    public void setBorder_Right_Color$(ColourNames Border_Right_Color$)
+    {
+<span class="nc" id="L125">        this.Border_Right_Color$ = Border_Right_Color$;</span>
+<span class="nc" id="L126">    }</span>
+
+    /**
+     * Sets the style of the right border
+     *
+     * @param Border_Right_Style
+     */
+    public void setBorder_Right_Style(BorderStyles Border_Right_Style)
+    {
+<span class="nc" id="L135">        this.Border_Right_Style = Border_Right_Style;</span>
+<span class="nc" id="L136">    }</span>
+
+    /**
+     * Sets the width of the right border
+     *
+     * @param Border_Right_Width
+     */
+    public void setBorder_Right_Width(MeasurementCSS Border_Right_Width)
+    {
+<span class="nc" id="L145">        this.Border_Right_Width = Border_Right_Width;</span>
+<span class="nc" id="L146">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

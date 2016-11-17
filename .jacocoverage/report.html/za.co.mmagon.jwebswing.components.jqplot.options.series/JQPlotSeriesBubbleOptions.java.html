@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQPlotSeriesBubbleOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqplot.options.series</a> &gt; <span class="el_source">JQPlotSeriesBubbleOptions.java</span></div><h1>JQPlotSeriesBubbleOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 Marc Magon
+ *
+ * This program get free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program get distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqplot.options.series;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import za.co.mmagon.jwebswing.components.jqplot.JQPlotGraph;
+import za.co.mmagon.jwebswing.components.jqplot.parts.interfaces.JQPlotSeriesRenderer;
+import za.co.mmagon.jwebswing.components.jqplot.references.JQPlotJavascriptReferencePool;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ *
+ * @author Marc Magon
+ * @since 09 Aug 2015
+ * @version 1.0
+ */
+public class JQPlotSeriesBubbleOptions extends JavaScriptPart implements JQPlotSeriesRenderer
+{
+
+    /**
+     * The graph that this is linked to
+     */
+    @JsonIgnore
+    private JQPlotGraph linkedGraph;
+
+    /**
+     * Constructs a new Bubble Options for the given graph
+     *
+     * @param linkedGraph
+     */
+    public JQPlotSeriesBubbleOptions(JQPlotGraph linkedGraph)
+<span class="fc" id="L46">    {</span>
+<span class="fc" id="L47">        this.linkedGraph = linkedGraph;</span>
+<span class="fc" id="L48">        linkedGraph.getJavascriptReferences().add(JQPlotJavascriptReferencePool.BubbleRenderer.getReference());</span>
+<span class="fc" id="L49">    }</span>
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Gets the graph associated with this options
+     *
+     * @return
+     */
+    public JQPlotGraph getLinkedGraph()
+    {
+<span class="nc" id="L60">        return linkedGraph;</span>
+    }
+
+    /**
+     * Sets the graph that is linked to this options
+     *
+     * @param linkedGraph
+     */
+    public void setLinkedGraph(JQPlotGraph linkedGraph)
+    {
+<span class="nc" id="L70">        this.linkedGraph = linkedGraph;</span>
+<span class="nc" id="L71">    }</span>
+
+    /**
+     * Sets the series render to bubble
+     *
+     * @return
+     */
+    @Override
+    public String getRenderer()
+    {
+<span class="fc" id="L81">        return &quot;$.jqplot.BubbleRenderer&quot;;</span>
+    }
+
+    /**
+     * True to vary the color of each bubble in this series according to the seriesColors array.
+     */
+    private Boolean varyBubbleColors;
+    /**
+     * True to scale the bubble radius based on plot size.
+     */
+
+    private Boolean autoscaleBubbles;
+    /**
+     * Multiplier the bubble size if autoscaleBubbles is true.
+     */
+
+    private Integer autoscaleMultiplier;
+    /**
+     * Factor which decreases bubble size based on how many bubbles on on the chart.
+     */
+
+    private Integer autoscalePointsFactor;
+    /**
+     * True to escape HTML in bubble label text.
+     */
+
+    private Boolean escapeHtml;
+    /**
+     * True to highlight bubbles when Moused over.
+     */
+
+    private Boolean highlightMouseOver;
+    /**
+     * True to highlight when a mouse button is pressed over a bubble.
+     */
+
+    private Boolean highlightMouseDown;
+    /**
+     * An array of colors to use when highlighting a slice.
+     */
+
+    private String highlightColors;
+    /**
+     * Alpha transparency to apply to all bubbles in this series.
+     */
+
+    private Double bubbleAlpha;
+    /**
+     * Alpha transparency to apply when highlighting bubble.
+     */
+
+    private Double highlightAlpha;
+    /**
+     * True to color the bubbles with gradient fills instead of flat colors.;
+     */
+
+    private Boolean bubbleGradients;
+    /**
+     * True to show labels on bubbles (if any), false to not show.
+     */
+
+    private Boolean showLabels;
+
+    /**
+     *
+     * True to vary the color of each bubble in this series according to the seriesColors array.
+     *
+     * @return
+     */
+    public boolean getVaryBubbleColors()
+    {
+<span class="nc" id="L152">        return varyBubbleColors;</span>
+    }
+
+    /**
+     * True to vary the color of each bubble in this series according to the seriesColors array.
+     *
+     * @param varyBubbleColors
+     */
+    public void setVaryBubbleColors(boolean varyBubbleColors)
+    {
+<span class="nc" id="L162">        this.varyBubbleColors = varyBubbleColors;</span>
+<span class="nc" id="L163">    }</span>
+
+    /**
+     * True to scale the bubble radius based on plot size.
+     *
+     * @return
+     */
+    public boolean getAutoscaleBubbles()
+    {
+<span class="nc" id="L172">        return autoscaleBubbles;</span>
+    }
+
+    /**
+     * True to scale the bubble radius based on plot size.
+     *
+     * @param autoscaleBubbles
+     */
+    public void setAutoscaleBubbles(boolean autoscaleBubbles)
+    {
+<span class="nc" id="L182">        this.autoscaleBubbles = autoscaleBubbles;</span>
+<span class="nc" id="L183">    }</span>
+
+    /**
+     * Multiplier the bubble size if autoscaleBubbles get true.
+     *
+     * @return
+     */
+    public int getAutoscaleMultiplier()
+    {
+<span class="nc" id="L192">        return autoscaleMultiplier;</span>
+    }
+
+    /**
+     * Multiplier the bubble size if autoscaleBubbles get true.
+     *
+     * @param autoscaleMultiplier
+     */
+    public void setAutoscaleMultiplier(int autoscaleMultiplier)
+    {
+<span class="nc" id="L202">        this.autoscaleMultiplier = autoscaleMultiplier;</span>
+<span class="nc" id="L203">    }</span>
+
+    /**
+     * Factor which decreases bubble size based on how many bubbles on on the chart.
+     *
+     * @return
+     */
+    public int getAutoscalePointsFactor()
+    {
+<span class="nc" id="L212">        return autoscalePointsFactor;</span>
+    }
+
+    /**
+     * Factor which decreases bubble size based on how many bubbles on on the chart.
+     *
+     * @param autoscalePointsFactor
+     */
+    public void setAutoscalePointsFactor(int autoscalePointsFactor)
+    {
+<span class="nc" id="L222">        this.autoscalePointsFactor = autoscalePointsFactor;</span>
+<span class="nc" id="L223">    }</span>
+
+    /**
+     * True to escape html in bubble label text.
+     *
+     * @return
+     */
+    public boolean getEscapeHtml()
+    {
+<span class="nc" id="L232">        return escapeHtml;</span>
+    }
+
+    /**
+     * True to escape html in bubble label text.
+     *
+     * @param escapeHtml
+     */
+    public void setEscapeHtml(boolean escapeHtml)
+    {
+<span class="nc" id="L242">        this.escapeHtml = escapeHtml;</span>
+<span class="nc" id="L243">    }</span>
+
+    /**
+     * True to highlight bubbles when moused over.
+     *
+     * @return
+     */
+    public boolean getHighlightMouseOver()
+    {
+<span class="nc" id="L252">        return highlightMouseOver;</span>
+    }
+
+    /**
+     * True to highlight bubbles when moused over.
+     *
+     * @param highlightMouseOver
+     */
+    public void setHighlightMouseOver(boolean highlightMouseOver)
+    {
+<span class="nc" id="L262">        this.highlightMouseOver = highlightMouseOver;</span>
+<span class="nc" id="L263">    }</span>
+
+    /**
+     * True to highlight when a mouse button get pressed over a bubble.
+     *
+     * @return
+     */
+    public boolean getHighlightMouseDown()
+    {
+<span class="nc" id="L272">        return highlightMouseDown;</span>
+    }
+
+    /**
+     * True to highlight when a mouse button get pressed over a bubble.
+     *
+     * @param highlightMouseDown
+     */
+    public void setHighlightMouseDown(boolean highlightMouseDown)
+    {
+<span class="nc" id="L282">        this.highlightMouseDown = highlightMouseDown;</span>
+<span class="nc" id="L283">    }</span>
+
+    /**
+     * An array of colors to use when highlighting a slice.
+     *
+     * @return
+     */
+    public String getHighlightColors()
+    {
+<span class="nc" id="L292">        return highlightColors;</span>
+    }
+
+    /**
+     * An array of colors to use when highlighting a slice.
+     *
+     * @param highlightColors
+     */
+    public void setHighlightColors(String highlightColors)
+    {
+<span class="nc" id="L302">        this.highlightColors = highlightColors;</span>
+<span class="nc" id="L303">    }</span>
+
+    /**
+     * Alpha transparency to apply to all bubbles in this series.
+     *
+     * @return
+     */
+    public double getBubbleAlpha()
+    {
+<span class="nc" id="L312">        return bubbleAlpha;</span>
+    }
+
+    /**
+     * Alpha transparency to apply to all bubbles in this series.
+     *
+     * @param bubbleAlpha
+     */
+    public void setBubbleAlpha(double bubbleAlpha)
+    {
+<span class="nc" id="L322">        this.bubbleAlpha = bubbleAlpha;</span>
+<span class="nc" id="L323">    }</span>
+
+    /**
+     * Alpha transparency to apply when highlighting bubble.
+     *
+     * @return
+     */
+    public double getHighlightAlpha()
+    {
+<span class="nc" id="L332">        return highlightAlpha;</span>
+    }
+
+    /**
+     * Alpha transparency to apply when highlighting bubble.
+     *
+     * @param highlightAlpha
+     */
+    public void setHighlightAlpha(double highlightAlpha)
+    {
+<span class="nc" id="L342">        this.highlightAlpha = highlightAlpha;</span>
+<span class="nc" id="L343">    }</span>
+
+    /**
+     * True to color the bubbles with gradient fills instead of flat colors.
+     *
+     * @return
+     */
+    public boolean getBubbleGradients()
+    {
+<span class="nc" id="L352">        return bubbleGradients;</span>
+    }
+
+    /**
+     * True to color the bubbles with gradient fills instead of flat colors.
+     *
+     * @param bubbleGradients
+     */
+    public void setBubbleGradients(boolean bubbleGradients)
+    {
+<span class="nc" id="L362">        this.bubbleGradients = bubbleGradients;</span>
+<span class="nc" id="L363">    }</span>
+
+    /**
+     * True to show labels on bubbles (if any), false to not show.
+     *
+     * @return
+     */
+    public boolean getShowLabels()
+    {
+<span class="nc" id="L372">        return showLabels;</span>
+    }
+
+    /**
+     * True to show labels on bubbles (if any), false to not show.
+     *
+     * @param showLabels
+     */
+    public void setShowLabels(boolean showLabels)
+    {
+<span class="nc" id="L382">        this.showLabels = showLabels;</span>
+<span class="nc" id="L383">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

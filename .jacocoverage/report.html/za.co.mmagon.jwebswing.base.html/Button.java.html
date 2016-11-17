@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Button.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">Button.java</span></div><h1>Button.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html;
+
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.html.attributes.ButtonAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+
+/**
+ * Definition and Usage &amp;gt;p&amp;lt;
+ * &lt;p&gt;
+ * The &amp;gt;button&amp;lt; tag defines a clickable button. &amp;gt;p&amp;lt;
+ * &lt;p&gt;
+ * Inside a &amp;gt;button&amp;lt; element you can put content, like text or images.&lt;p&gt;
+ * This is the difference between
+ * this element and buttons created with the &amp;gt;input&amp;lt; element. &amp;gt;p&amp;lt;
+ * &lt;p&gt;
+ * Tip: Always specify the type attribute for a &amp;gt;button&amp;lt; element.&lt;p&gt;
+ * Different browsers use different default types for
+ * the &amp;gt;button&amp;lt; element. Browser Support
+ * &lt;p&gt;
+ * Element &amp;gt;button&amp;lt; Yes Yes Yes Yes Yes &amp;gt;p&amp;lt;
+ * &lt;p&gt;
+ * Tips and Notes &amp;gt;p&amp;lt;
+ * &lt;p&gt;
+ * Note: If you use the &amp;gt;button&amp;lt; element in an HTML form, different
+ * browsers may submit different values.
+ * &lt;p&gt;
+ * Use &amp;gt;input&amp;lt; to create buttons in an HTML form.&lt;p&gt;
+ * Differences Between HTML 4.01 and HTML5 &amp;gt;p&amp;lt; HTML5 has the following new
+ * attributes: autofocus, form,
+ * formaction, formenctype, formmethod, formnovalidate, and formtarget.
+ * &amp;gt;p&amp;lt;
+ * &lt;p&gt;
+ * @author Marc Magon
+ * @since 2014/12/20
+ */
+public class Button extends Component&lt;GlobalChildren, ButtonAttributes, GlobalFeatures, GlobalEvents, Button&gt;
+        implements GlobalChildren
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Constructs a new button object with no text
+     */
+    public Button()
+    {
+<span class="fc" id="L50">        this(&quot;&quot;);</span>
+<span class="fc" id="L51">    }</span>
+
+    /**
+     * Constructs a new button object with the given text
+     * &lt;p&gt;
+     * @param text The text to show on the button
+     */
+    public Button(String text)
+    {
+<span class="fc" id="L60">        super(ComponentTypes.Button);</span>
+<span class="fc" id="L61">        setText(text);</span>
+<span class="fc" id="L62">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

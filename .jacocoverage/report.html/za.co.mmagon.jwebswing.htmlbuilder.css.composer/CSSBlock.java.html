@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CSSBlock.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.htmlbuilder.css.composer</a> &gt; <span class="el_source">CSSBlock.java</span></div><h1>CSSBlock.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
+
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import org.apache.log4j.Logger;
+import za.co.mmagon.LoggerFactory;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
+import za.co.mmagon.jwebswing.utilities.TextUtilities;
+
+/**
+ * A Block of CSS
+ *
+ * @author MMagon
+ * @since 07 Apr 2013
+ * @version 1.0
+ */
+public class CSSBlock
+{
+
+<span class="fc" id="L20">    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;CSSBlock&quot;);</span>
+<span class="pc" id="L21">    private ArrayList&lt;String&gt; linkedBlocks = new ArrayList();</span>
+    private CSSLines cssLines;
+    private CSSTypes blockType;
+    private CSSBlockIdentifier blockIdentifer;
+<span class="fc" id="L25">    private static final CSSLineSorter SORTER = new CSSLineSorter();</span>
+    private String idOfBlock;
+
+    /**
+     * Creates a new ID (#) block of ID with no type
+     *
+     * @param blockID
+     */
+    public CSSBlock(String blockID)
+<span class="fc" id="L34">    {</span>
+<span class="pc bpc" id="L35" title="1 of 2 branches missed.">        if (blockID.contains(&quot; &quot;))</span>
+        {
+<span class="nc" id="L37">            throw new UnsupportedOperationException(&quot;Cannot create an id with a space in it&quot;);</span>
+        }
+<span class="fc" id="L39">        this.idOfBlock = blockID;</span>
+<span class="fc" id="L40">        cssLines = new CSSLines();</span>
+<span class="fc" id="L41">        cssLines.setPrettyPrint(true);</span>
+<span class="fc" id="L42">        cssLines.setRenderBraces(true);</span>
+<span class="fc" id="L43">        cssLines.setRenderInQuotations(false);</span>
+<span class="fc" id="L44">        blockType = CSSTypes.None;</span>
+<span class="fc" id="L45">        blockIdentifer = CSSBlockIdentifier.Id;</span>
+<span class="fc" id="L46">    }</span>
+
+    /**
+     * Creates a new In-Line block inside quotations
+     */
+    public CSSBlock()
+<span class="fc" id="L52">    {</span>
+<span class="fc" id="L53">        this.idOfBlock = null;</span>
+<span class="fc" id="L54">        cssLines = new CSSLines();</span>
+<span class="fc" id="L55">        cssLines.setPrettyPrint(false);</span>
+<span class="fc" id="L56">        cssLines.setRenderBraces(false);</span>
+<span class="fc" id="L57">        cssLines.setRenderInQuotations(false);</span>
+<span class="fc" id="L58">        blockType = CSSTypes.None;</span>
+<span class="fc" id="L59">        blockIdentifer = CSSBlockIdentifier.Inline;</span>
+<span class="fc" id="L60">    }</span>
+
+    /**
+     *
+     * @param blockType      The block type, active or changed
+     * @param blockIdentifer The block identifier
+     * @param idOfBlock      the id of whatever to put this onto
+     */
+    public CSSBlock(CSSTypes blockType, CSSBlockIdentifier blockIdentifer, String idOfBlock)
+<span class="nc" id="L69">    {</span>
+<span class="nc" id="L70">        this.blockType = blockType;</span>
+<span class="nc" id="L71">        this.idOfBlock = idOfBlock;</span>
+
+<span class="nc" id="L73">        cssLines = new CSSLines();</span>
+<span class="nc" id="L74">        cssLines.setPrettyPrint(true);</span>
+<span class="nc" id="L75">        cssLines.setRenderBraces(true);</span>
+<span class="nc" id="L76">        cssLines.setRenderInQuotations(false);</span>
+<span class="nc" id="L77">    }</span>
+
+    /**
+     *
+     * @param blockType      The block type, active or changed
+     * @param blockIdentifer The block identifier
+     * @param idOfBlock      the id of whatever to put this onto
+     */
+    public CSSBlock(CSSTypes blockType, CSSBlockIdentifier blockIdentifer, String idOfBlock, boolean prettyPrint, boolean renderBraces, boolean renderQuotations)
+<span class="nc" id="L86">    {</span>
+<span class="nc" id="L87">        this.blockType = blockType;</span>
+<span class="nc" id="L88">        this.idOfBlock = idOfBlock;</span>
+<span class="nc" id="L89">        cssLines = new CSSLines();</span>
+<span class="nc" id="L90">        cssLines.setPrettyPrint(true);</span>
+<span class="nc" id="L91">        cssLines.setRenderBraces(true);</span>
+<span class="nc" id="L92">        cssLines.setRenderInQuotations(false);</span>
+<span class="nc" id="L93">    }</span>
+
+    /**
+     * Adds a property value pair to the Lines group. If it already exists, just returns it
+     *
+     * @param line Input Line to add to the lines collection
+     * @return The input Line
+     */
+    public CSSLine add(CSSLine line)
+    {
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        if (line == null)</span>
+        {
+<span class="fc" id="L105">            return null;</span>
+        }
+
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">        if (cssLines.getCssLines().contains(line))</span>
+        {
+<span class="nc" id="L110">            return line;</span>
+        }
+        else
+        {
+<span class="fc" id="L114">            cssLines.getCssLines().add(line);</span>
+<span class="fc" id="L115">            java.util.Collections.sort(cssLines.getCssLines(), SORTER);</span>
+<span class="fc" id="L116">            return line;</span>
+        }
+    }
+
+    /**
+     * Removes a line from the list
+     *
+     * @param line The line to be removed
+     * @return True if it could be removed
+     */
+    public boolean remove(CSSLine line)
+    {
+<span class="nc bnc" id="L128" title="All 2 branches missed.">        if (cssLines.getCssLines().contains(line))</span>
+        {
+<span class="nc" id="L130">            cssLines.getCssLines().remove(line);</span>
+<span class="nc" id="L131">            return true;</span>
+        }
+        else
+        {
+<span class="nc" id="L135">            return false;</span>
+        }
+    }
+
+    /**
+     * This blocks CSS according to how it is configured with 0 tabs
+     *
+     * @return This blocks CSS according to how it is configured with 0 tabs
+     */
+    @Override
+    public String toString()
+    {
+<span class="fc" id="L147">        return toString(01);</span>
+    }
+
+    /**
+     * Returns a generated block ID to apply on top of this CSS
+     *
+     * @param block The linked block
+     * @return
+     */
+    private String generateBlockID(CSSBlock block)
+    {
+<span class="fc" id="L158">        return generateBlockID(block, 0);</span>
+    }
+
+    /**
+     * Returns a generated block ID to apply on top of this CSS
+     *
+     * @param block The linked block
+     * @return
+     */
+    private String generateBlockID(CSSBlock block, int tabCount)
+    {
+<span class="fc" id="L169">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc bfc" id="L170" title="All 2 branches covered.">        if (cssLines.isPrettyPrint())</span>
+        {
+<span class="fc" id="L172">            sb.append(TextUtilities.getTabString(tabCount - 1));</span>
+        }
+
+<span class="pc bpc" id="L175" title="2 of 6 branches missed.">        switch (block.blockIdentifer)</span>
+        {
+            case Class:
+            {
+<span class="fc" id="L179">                sb.append(&quot;.&quot;).append(block.getIdOfBlock()).append(&quot; &quot;);</span>
+<span class="fc" id="L180">                break;</span>
+            }
+            case Element:
+            {
+<span class="fc" id="L184">                sb.append(&quot;&quot;).append(block.getIdOfBlock()).append(&quot; &quot;);</span>
+<span class="fc" id="L185">                break;</span>
+            }
+            case Inline:
+            {
+<span class="fc" id="L189">                break;</span>
+            }
+            case Id:
+            {
+<span class="fc" id="L193">                sb.append(&quot;#&quot;).append(block.getIdOfBlock()).append(&quot; &quot;);</span>
+<span class="fc" id="L194">                break;</span>
+            }
+            case Theme:
+            {
+<span class="nc" id="L198">                break;</span>
+            }
+            default:
+            {
+<span class="nc" id="L202">                throw new UnsupportedOperationException(&quot;Block Identifier has not been catered for in generate block id&quot;);</span>
+            }
+        }
+
+<span class="pc bpc" id="L206" title="1 of 5 branches missed.">        switch (block.blockType)</span>
+        {
+            case Active:
+            {
+<span class="fc" id="L210">                sb = new StringBuilder(sb.toString().trim());</span>
+<span class="fc" id="L211">                sb.append(&quot;:active&quot;);</span>
+<span class="fc" id="L212">                break;</span>
+            }
+            case Link:
+            {
+<span class="fc" id="L216">                sb = new StringBuilder(sb.toString().trim());</span>
+<span class="fc" id="L217">                sb.append(&quot;:link&quot;);</span>
+<span class="fc" id="L218">                break;</span>
+            }
+            case Hover:
+            {
+<span class="fc" id="L222">                sb = new StringBuilder(sb.toString().trim());</span>
+<span class="fc" id="L223">                sb.append(&quot;:hover&quot;);</span>
+<span class="fc" id="L224">                break;</span>
+            }
+            case Visited:
+            {
+<span class="nc" id="L228">                sb = new StringBuilder(sb.toString().trim());</span>
+<span class="nc" id="L229">                sb.append(&quot;:visited&quot;);</span>
+                break;
+            }
+        }
+
+        //addBlockID(idOfBlock);
+<span class="fc" id="L235">        return sb.toString();</span>
+    }
+
+    /**
+     * Returns a generated block ID to apply on top of this CSS
+     *
+     * @param block The linked block
+     * @return
+     */
+    public String addBlockID(String block)
+    {
+<span class="pc bpc" id="L246" title="1 of 2 branches missed.">        if (!linkedBlocks.contains(block))</span>
+        {
+<span class="fc" id="L248">            linkedBlocks.add(block);</span>
+        }
+<span class="fc" id="L250">        return block;</span>
+    }
+
+    /**
+     * Generates this block ID
+     *
+     * @return This blocks linked and itself ID
+     */
+    private String generateBlockIDS(int tabCount)
+    {
+<span class="fc" id="L260">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc bfc" id="L261" title="All 2 branches covered.">        for (String cssBlock : linkedBlocks)</span>
+        {
+<span class="fc" id="L263">            sb.append(cssBlock);</span>
+<span class="fc" id="L264">            sb.append(&quot;,&quot;);</span>
+<span class="pc bpc" id="L265" title="1 of 2 branches missed.">            if (cssLines.isPrettyPrint())</span>
+            {
+<span class="fc" id="L267">                sb.append(TextUtilities.getTabString(tabCount - 1));</span>
+            }
+<span class="fc" id="L269">        }</span>
+<span class="fc" id="L270">        sb.append(generateBlockID(this));</span>
+<span class="fc" id="L271">        return sb.toString();</span>
+    }
+
+    /**
+     * This blocks CSS according to how it is configured with Set tabs
+     *
+     * @return This blocks CSS according to how it is configured with Set tabs
+     */
+    public String toString(int tabCount)
+    {
+<span class="fc" id="L281">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc bfc" id="L282" title="All 2 branches covered.">        if (cssLines.getCssLines().isEmpty())</span>
+        {
+<span class="fc" id="L284">            return &quot;&quot;;</span>
+        }
+<span class="fc" id="L286">        sb.append(generateBlockIDS(tabCount));</span>
+<span class="fc bfc" id="L287" title="All 2 branches covered.">        if (!(this.blockType == CSSTypes.None))</span>
+        {
+<span class="fc" id="L289">            sb.append(&quot; &quot;);</span>
+        }
+<span class="fc bfc" id="L291" title="All 2 branches covered.">        sb.append(cssLines.toString(tabCount, this.blockType == CSSTypes.None));</span>
+<span class="fc bfc" id="L292" title="All 2 branches covered.">        if (this.blockType == CSSTypes.None)</span>
+        {
+<span class="fc" id="L294">            sb = new StringBuilder(sb.toString().replaceAll(&quot;,&quot;, &quot;;&quot;));</span>
+        }
+<span class="fc" id="L296">        return sb.toString();</span>
+    }
+
+    /**
+     *
+     * @return This objects CSS Lines string
+     */
+    public CSSLines getCssLines()
+    {
+<span class="fc" id="L305">        return cssLines;</span>
+    }
+
+    /**
+     * Adds a block ID into this blocks generated String
+     *
+     * @param linkedBlock The block to test if it's contents match, if so, then it is added
+     * @return True if the block can be added to this one
+     */
+    public boolean addLinkedBlock(CSSBlock linkedBlock)
+    {
+<span class="fc" id="L316">        addBlockID(linkedBlock.generateBlockID(linkedBlock));</span>
+<span class="fc" id="L317">        return true;</span>
+    }
+
+    /**
+     * Returns the full ID of this block as a string
+     *
+     * @return Returns the full ID of this block as a string
+     */
+    public String getIdOfBlock()
+    {
+<span class="fc" id="L327">        return idOfBlock;</span>
+    }
+
+    /**
+     * Sets the ID of the block to be built
+     *
+     * @param idOfBlock
+     */
+    public void setIdOfBlock(String idOfBlock)
+    {
+<span class="fc" id="L337">        this.idOfBlock = idOfBlock;</span>
+<span class="fc" id="L338">    }</span>
+
+    /**
+     * Compares the body string to each other
+     *
+     * @param o The CSS Block to compare
+     * @return True or false if they same
+     */
+    @Override
+    public boolean equals(Object o)
+    {
+<span class="pc bpc" id="L349" title="1 of 2 branches missed.">        if (!(o instanceof CSSBlock))</span>
+        {
+<span class="nc" id="L351">            return false;</span>
+        }
+        else
+        {
+<span class="fc" id="L355">            CSSBlock block = (CSSBlock) o;</span>
+<span class="fc bfc" id="L356" title="All 2 branches covered.">            if (this.toString().equals(block.toString()))</span>
+            {
+<span class="fc" id="L358">                return true;</span>
+            }
+            else
+            {
+<span class="fc" id="L362">                return false;</span>
+            }
+            /*
+             * if (block.getCssLines().equals(getCssLines()) &amp;&amp; block.idOfBlock.equals(idOfBlock) &amp;&amp; block.blockType == this.blockType &amp;&amp; block.blockIdentifer == this.blockIdentifer)
+             * {
+             * return true;
+             * }
+             * else
+             * {
+             * return false;
+             * }
+             */
+        }
+    }
+
+    /**
+     * Returns a custom HashCode for ArrayList compare ability
+     *
+     * @return Custom hash
+     */
+    @Override
+    public int hashCode()
+    {
+<span class="nc" id="L385">        int hash = 7;</span>
+<span class="nc" id="L386">        hash = 53 * hash;</span>
+<span class="nc" id="L387">        return hash;</span>
+    }
+
+    /**
+     * Gets the block ID's that are currently linked
+     *
+     * @return
+     */
+    public ArrayList&lt;String&gt; getLinkedBlocks()
+    {
+<span class="nc" id="L397">        return linkedBlocks;</span>
+    }
+
+    /**
+     * Sets the block ID's that are linked to this block
+     *
+     * @param linkedBlocks
+     */
+    public void setLinkedBlocks(ArrayList&lt;String&gt; linkedBlocks)
+    {
+<span class="nc" id="L407">        this.linkedBlocks = linkedBlocks;</span>
+<span class="nc" id="L408">    }</span>
+
+    /**
+     * Gets this Master block's Type
+     *
+     * @return
+     */
+    public CSSTypes getBlockType()
+    {
+<span class="nc" id="L417">        return blockType;</span>
+    }
+
+    /**
+     * Sets this Block Type
+     *
+     * @param blockType
+     */
+    public void setBlockType(CSSTypes blockType)
+    {
+<span class="fc" id="L427">        this.blockType = blockType;</span>
+<span class="fc" id="L428">    }</span>
+
+    /**
+     * Sets how this block is identified
+     *
+     * @return
+     */
+    public CSSBlockIdentifier getBlockIdentifer()
+    {
+<span class="nc" id="L437">        return blockIdentifer;</span>
+    }
+
+    /**
+     * Sets how this block is identified
+     *
+     * @param blockIdentifer
+     */
+    public void setBlockIdentifer(CSSBlockIdentifier blockIdentifer)
+    {
+<span class="fc" id="L447">        this.blockIdentifer = blockIdentifer;</span>
+<span class="fc" id="L448">    }</span>
+
+    public static void main(String... args)
+    {
+<span class="nc" id="L452">        GregorianCalendar date = new GregorianCalendar();</span>
+<span class="nc" id="L453">        CSSBlock cssIDComponentBlock = new CSSBlock(&quot;idOfTag&quot;);</span>
+<span class="nc" id="L454">        cssIDComponentBlock.add(null);</span>
+<span class="nc" id="L455">        cssIDComponentBlock.add(new CSSLine(&quot;property2:value2&quot;));</span>
+<span class="nc" id="L456">        cssIDComponentBlock.add(new CSSLine(&quot;property2:value1&quot;));</span>
+<span class="nc" id="L457">        cssIDComponentBlock.add(new CSSLine(&quot;property1:value1&quot;));</span>
+<span class="nc" id="L458">        cssIDComponentBlock.add(new CSSLine(&quot;property1:value2&quot;));</span>
+<span class="nc" id="L459">        System.out.println(&quot;CSS Block : \n&quot; + cssIDComponentBlock);</span>
+
+<span class="nc" id="L461">        CSSBlock cssIDComponentBlockActive = new CSSBlock(&quot;className&quot;);</span>
+<span class="nc" id="L462">        cssIDComponentBlockActive.blockType = CSSTypes.Active;</span>
+<span class="nc" id="L463">        cssIDComponentBlockActive.blockIdentifer = CSSBlockIdentifier.Class;</span>
+<span class="nc" id="L464">        cssIDComponentBlockActive.add(null);</span>
+<span class="nc" id="L465">        cssIDComponentBlockActive.add(new CSSLine(&quot;property2:value2&quot;));</span>
+<span class="nc" id="L466">        cssIDComponentBlockActive.add(new CSSLine(&quot;property2:value1&quot;));</span>
+<span class="nc" id="L467">        cssIDComponentBlockActive.add(new CSSLine(&quot;property1:value1&quot;));</span>
+<span class="nc" id="L468">        cssIDComponentBlockActive.add(new CSSLine(&quot;property1:value2&quot;));</span>
+<span class="nc" id="L469">        System.out.println(&quot;\n&quot; + cssIDComponentBlockActive);</span>
+
+<span class="nc" id="L471">        CSSBlock cssTagComponent = new CSSBlock(&quot;normal-tag&quot;);</span>
+<span class="nc" id="L472">        cssTagComponent.blockType = CSSTypes.Hover;</span>
+<span class="nc" id="L473">        cssTagComponent.blockIdentifer = CSSBlockIdentifier.Id;</span>
+<span class="nc" id="L474">        cssTagComponent.add(null);</span>
+<span class="nc" id="L475">        cssTagComponent.add(new CSSLine(&quot;property2:value2&quot;));</span>
+<span class="nc" id="L476">        cssTagComponent.add(new CSSLine(&quot;property2:value1&quot;));</span>
+<span class="nc" id="L477">        cssTagComponent.add(new CSSLine(&quot;property1:value1&quot;));</span>
+<span class="nc" id="L478">        cssTagComponent.add(new CSSLine(&quot;property1:value2&quot;));</span>
+<span class="nc" id="L479">        cssTagComponent.addLinkedBlock(cssTagComponent);</span>
+<span class="nc" id="L480">        System.out.println(&quot;\n&quot; + cssTagComponent);</span>
+
+<span class="nc" id="L482">        CSSBlock cssInLineComponent = new CSSBlock();</span>
+<span class="nc" id="L483">        cssInLineComponent.add(null);</span>
+<span class="nc" id="L484">        cssInLineComponent.add(new CSSLine(&quot;property2:value2&quot;));</span>
+<span class="nc" id="L485">        cssInLineComponent.add(new CSSLine(&quot;property2:value1&quot;));</span>
+<span class="nc" id="L486">        cssInLineComponent.add(new CSSLine(&quot;property1:value1&quot;));</span>
+<span class="nc" id="L487">        cssInLineComponent.add(new CSSLine(&quot;property1:value2&quot;));</span>
+<span class="nc" id="L488">        System.out.println(&quot;\n&quot; + cssInLineComponent);</span>
+
+<span class="nc" id="L490">        GregorianCalendar date2 = new GregorianCalendar();</span>
+<span class="nc" id="L491">        System.out.println(&quot;Time Taken : &quot; + (date2.getTimeInMillis() - date.getTimeInMillis()) + &quot;milliseconds.&quot;);</span>
+<span class="nc" id="L492">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

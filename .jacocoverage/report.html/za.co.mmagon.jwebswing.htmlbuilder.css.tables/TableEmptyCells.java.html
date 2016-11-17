@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TableEmptyCells.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.htmlbuilder.css.tables</a> &gt; <span class="el_source">TableEmptyCells.java</span></div><h1>TableEmptyCells.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.htmlbuilder.css.tables;
+
+import za.co.mmagon.jwebswing.base.client.CSSVersions;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
+
+/**
+ * Definition and Usage
+ * &lt;p&gt;
+ * The empty-cells property sets whether or not to display borders and background on empty cells in a table (only for the &quot;separated borders&quot; model).
+ * Default value: show
+ * Inherited: yes
+ * Animatable: no. Read about animatable
+ * Version: CSS2
+ * JavaScript syntax: object.style.emptyCells=&quot;hide&quot;
+ *
+ * @author GedMarc
+ * @since 18 Jan 2016
+ */
+<span class="nc" id="L36">@CSSAnnotationType</span>
+public enum TableEmptyCells implements CSSEnumeration&lt;TableEmptyCells&gt;
+{
+    /**
+     * Background and borders are shown on empty cells. This is default
+     */
+<span class="nc" id="L42">    Show,</span>
+    /**
+     * No background or borders are shown on empty cells
+     */
+<span class="nc" id="L46">    Hide,</span>
+    /**
+     * Sets this property to its default value
+     *
+     * see http://www.w3schools.com/cssref/css_initial.asp
+     */
+<span class="nc" id="L52">    Initial,</span>
+    /**
+     * Inherits this property from its parent element.
+     *
+     * see http://www.w3schools.com/cssref/css_inherit.asp
+     */
+<span class="nc" id="L58">    Inherit,</span>
+    /**
+     * Sets this field as not set
+     */
+<span class="nc" id="L62">    Unset;</span>
+
+    ;
+
+    @Override
+    public String toString()
+    {
+<span class="nc" id="L69">        return name().toLowerCase();</span>
+    }
+
+    private TableEmptyCells()
+<span class="nc" id="L73">    {</span>
+<span class="nc" id="L74">    }</span>
+
+    @Override
+    public String getJavascriptSyntax()
+    {
+<span class="nc" id="L79">        return &quot;style.emptyCells&quot;;</span>
+    }
+
+    @Override
+    public CSSVersions getCSSVersion()
+    {
+<span class="nc" id="L85">        return CSSVersions.CSS2;</span>
+    }
+
+    @Override
+    public String getValue()
+    {
+<span class="nc" id="L91">        return name();</span>
+    }
+
+    @Override
+    public TableEmptyCells getDefault()
+    {
+<span class="nc" id="L97">        return Unset;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

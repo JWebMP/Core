@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQXTreeFeature.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqxwidgets.tree</a> &gt; <span class="el_source">JQXTreeFeature.java</span></div><h1>JQXTreeFeature.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.components.jqxwidgets.tree;
+
+import java.util.ArrayList;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.Feature;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.components.pools.jqxwidgets.JQXReferencePool;
+
+/**
+ * Adds on a ToolTip, String for custom text using header theme, Div for custom contents
+ *
+ * @author MMagon
+ * @since 2013/01/16
+ * @version 1.0
+ */
+public class JQXTreeFeature extends Feature&lt;JQXTreeOptions, JQXTreeFeature&gt; implements JQXTreeFeatures, GlobalFeatures
+{
+
+    private static final long serialVersionUID = 1L;
+
+    private final Component forComponent;
+    private JQXTreeOptions options;
+
+    /**
+     * Constructs a new Tooltip ComponentFeatureBase for a component. Adds the tooltip text as the Title attribute to the component
+     * &lt;p&gt;
+     * @param forComponent
+     */
+    public JQXTreeFeature(Component forComponent)
+    {
+<span class="fc" id="L31">        super(&quot;JQXTreeFeature&quot;);</span>
+<span class="fc" id="L32">        this.forComponent = forComponent;</span>
+<span class="fc" id="L33">        getJavascriptReferences().add(JQXReferencePool.Core.getJavaScriptReference());</span>
+<span class="fc" id="L34">        getCssReferences().add(JQXReferencePool.Core.getCssReference());</span>
+
+<span class="fc" id="L36">        getJavascriptReferences().add(JQXReferencePool.Button.getJavaScriptReference());</span>
+<span class="fc" id="L37">        getJavascriptReferences().add(JQXReferencePool.ScrollBar.getJavaScriptReference());</span>
+        //getJavascriptReferences().add(JQXReferencePool.Panel.getJavaScriptReference());
+<span class="fc" id="L39">        getJavascriptReferences().add(JQXReferencePool.Tree.getJavaScriptReference());</span>
+<span class="fc" id="L40">    }</span>
+
+    /**
+     * Returns all the tooltip options
+     * &lt;p&gt;
+     * @return
+     */
+    @Override
+    public JQXTreeOptions getOptions()
+    {
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (options == null)</span>
+        {
+<span class="fc" id="L52">            options = new JQXTreeOptions();</span>
+        }
+<span class="fc" id="L54">        return options;</span>
+    }
+
+    @Override
+    public void assignFunctionsToComponent()
+    {
+<span class="fc" id="L60">        ArrayList&lt;String&gt; queries = new ArrayList();</span>
+<span class="fc" id="L61">        String requiredString = forComponent.getJQueryID() + &quot;jqxTree(&quot;;</span>
+<span class="fc" id="L62">        requiredString += getOptions().toString();</span>
+<span class="fc" id="L63">        requiredString += &quot;);&quot; + getNewLine();</span>
+<span class="fc" id="L64">        addQuery(requiredString);</span>
+
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">        if (getOptions().isExpandAll())</span>
+        {
+<span class="nc" id="L68">            addQuery(forComponent.getJQueryID() + &quot;jqxTree(&quot; + &quot;'expandAll'&quot; + &quot;);&quot; + getNewLine());</span>
+        }
+
+<span class="fc" id="L71">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQMetroOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqmetro.metro</a> &gt; <span class="el_source">JQMetroOptions.java</span></div><h1>JQMetroOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqmetro.metro;
+
+import za.co.mmagon.jwebswing.components.jqmetro.metro.enumerations.JQMetroModes;
+import za.co.mmagon.jwebswing.components.jqmetro.metro.enumerations.JQMetroSwapOptions;
+import za.co.mmagon.jwebswing.components.jqmetro.metro.enumerations.JQMetroBounceDirections;
+import java.util.ArrayList;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.Orientation;
+import za.co.mmagon.jwebswing.htmlbuilder.effects.EasingEffects;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.mouseevents.MouseEventType;
+
+/**
+ * All the options for the tooltip library
+ * &lt;p&gt;
+ * @author GedMarc
+ * @since Mar 4, 2015
+ * @version 1.0
+ * &lt;p&gt;
+ * &lt;p&gt;
+ */
+public class JQMetroOptions extends JavaScriptPart
+{
+
+    private JQMetroModes mode;
+    private Integer speed;
+    private Integer initDelay;
+    private Integer delay;
+    private Boolean startNow;
+    private ArrayList&lt;String&gt; stops;
+    private Boolean stack;
+    private Orientation direction;
+    private Boolean bounce;
+    private ArrayList&lt;JQMetroBounceDirections&gt; bounceDirections;
+    private Boolean bounceFollowsMove;
+    private String link;
+    private Boolean newWindow;
+    private String animationDirection;
+    private Boolean autoAniDirection;
+    private Boolean ignoreDataAttributes;
+    private Boolean pauseOnHover;
+    private Boolean playOnHover;
+    private Integer onHoverDelay;
+    private Integer onHoverOutDelay;
+    private Integer repeatCount;
+    private Boolean appendBack;
+    private Boolean alwaysTrigger;
+    private Boolean flipListOnHover;
+    private MouseEventType flipListOnHoverEvent;
+    private Double noHAflipOpacity;
+    private EasingEffects haTransFunc;
+    private EasingEffects noHaTransFunc;
+    private Integer currentIndex;
+    private Boolean useModernizr;
+    private Boolean useHardwareAccel;
+    private JQMetroSwapOptions swap;
+    private Boolean useTranslate;
+    private JQMetroSwapOptions swapFront;
+    private JQMetroSwapOptions swapBack;
+
+    public JQMetroOptions()
+<span class="fc" id="L77">    {</span>
+
+<span class="fc" id="L79">    }</span>
+
+    public JQMetroModes getMode()
+    {
+<span class="nc" id="L83">        return mode;</span>
+    }
+
+    public void setMode(JQMetroModes mode)
+    {
+<span class="nc" id="L88">        this.mode = mode;</span>
+<span class="nc" id="L89">    }</span>
+
+    public Integer getSpeed()
+    {
+<span class="nc" id="L93">        return speed;</span>
+    }
+
+    public void setSpeed(Integer speed)
+    {
+<span class="nc" id="L98">        this.speed = speed;</span>
+<span class="nc" id="L99">    }</span>
+
+    public Integer getInitDelay()
+    {
+<span class="nc" id="L103">        return initDelay;</span>
+    }
+
+    public void setInitDelay(Integer initDelay)
+    {
+<span class="nc" id="L108">        this.initDelay = initDelay;</span>
+<span class="nc" id="L109">    }</span>
+
+    public Integer getDelay()
+    {
+<span class="nc" id="L113">        return delay;</span>
+    }
+
+    public void setDelay(Integer delay)
+    {
+<span class="nc" id="L118">        this.delay = delay;</span>
+<span class="nc" id="L119">    }</span>
+
+    public Boolean getStartNow()
+    {
+<span class="nc" id="L123">        return startNow;</span>
+    }
+
+    public void setStartNow(Boolean startNow)
+    {
+<span class="nc" id="L128">        this.startNow = startNow;</span>
+<span class="nc" id="L129">    }</span>
+
+    public ArrayList&lt;String&gt; getStops()
+    {
+<span class="nc" id="L133">        return stops;</span>
+    }
+
+    public void setStops(ArrayList&lt;String&gt; stops)
+    {
+<span class="nc" id="L138">        this.stops = stops;</span>
+<span class="nc" id="L139">    }</span>
+
+    public Boolean getStack()
+    {
+<span class="nc" id="L143">        return stack;</span>
+    }
+
+    public void setStack(Boolean stack)
+    {
+<span class="nc" id="L148">        this.stack = stack;</span>
+<span class="nc" id="L149">    }</span>
+
+    public Orientation getDirection()
+    {
+<span class="nc" id="L153">        return direction;</span>
+    }
+
+    public void setDirection(Orientation direction)
+    {
+<span class="nc" id="L158">        this.direction = direction;</span>
+<span class="nc" id="L159">    }</span>
+
+    public Boolean getBounce()
+    {
+<span class="nc" id="L163">        return bounce;</span>
+    }
+
+    public void setBounce(Boolean bounce)
+    {
+<span class="nc" id="L168">        this.bounce = bounce;</span>
+<span class="nc" id="L169">    }</span>
+
+    public ArrayList&lt;JQMetroBounceDirections&gt; getBounceDirections()
+    {
+<span class="nc" id="L173">        return bounceDirections;</span>
+    }
+
+    public void setBounceDirections(ArrayList&lt;JQMetroBounceDirections&gt; bounceDirections)
+    {
+<span class="nc" id="L178">        this.bounceDirections = bounceDirections;</span>
+<span class="nc" id="L179">    }</span>
+
+    public Boolean getBounceFollowsMove()
+    {
+<span class="nc" id="L183">        return bounceFollowsMove;</span>
+    }
+
+    public void setBounceFollowsMove(Boolean bounceFollowsMove)
+    {
+<span class="nc" id="L188">        this.bounceFollowsMove = bounceFollowsMove;</span>
+<span class="nc" id="L189">    }</span>
+
+    public String getLink()
+    {
+<span class="nc" id="L193">        return link;</span>
+    }
+
+    public void setLink(String link)
+    {
+<span class="nc" id="L198">        this.link = link;</span>
+<span class="nc" id="L199">    }</span>
+
+    public Boolean getNewWindow()
+    {
+<span class="nc" id="L203">        return newWindow;</span>
+    }
+
+    public void setNewWindow(Boolean newWindow)
+    {
+<span class="nc" id="L208">        this.newWindow = newWindow;</span>
+<span class="nc" id="L209">    }</span>
+
+    public String getAnimationDirection()
+    {
+<span class="nc" id="L213">        return animationDirection;</span>
+    }
+
+    public void setAnimationDirection(String animationDirection)
+    {
+<span class="nc" id="L218">        this.animationDirection = animationDirection;</span>
+<span class="nc" id="L219">    }</span>
+
+    public Boolean getAutoAniDirection()
+    {
+<span class="nc" id="L223">        return autoAniDirection;</span>
+    }
+
+    public void setAutoAniDirection(Boolean autoAniDirection)
+    {
+<span class="nc" id="L228">        this.autoAniDirection = autoAniDirection;</span>
+<span class="nc" id="L229">    }</span>
+
+    public Boolean getIgnoreDataAttributes()
+    {
+<span class="nc" id="L233">        return ignoreDataAttributes;</span>
+    }
+
+    public void setIgnoreDataAttributes(Boolean ignoreDataAttributes)
+    {
+<span class="nc" id="L238">        this.ignoreDataAttributes = ignoreDataAttributes;</span>
+<span class="nc" id="L239">    }</span>
+
+    public Boolean getPauseOnHover()
+    {
+<span class="nc" id="L243">        return pauseOnHover;</span>
+    }
+
+    public void setPauseOnHover(Boolean pauseOnHover)
+    {
+<span class="nc" id="L248">        this.pauseOnHover = pauseOnHover;</span>
+<span class="nc" id="L249">    }</span>
+
+    public Boolean getPlayOnHover()
+    {
+<span class="nc" id="L253">        return playOnHover;</span>
+    }
+
+    public void setPlayOnHover(Boolean playOnHover)
+    {
+<span class="nc" id="L258">        this.playOnHover = playOnHover;</span>
+<span class="nc" id="L259">    }</span>
+
+    public Integer getOnHoverDelay()
+    {
+<span class="nc" id="L263">        return onHoverDelay;</span>
+    }
+
+    public void setOnHoverDelay(Integer onHoverDelay)
+    {
+<span class="nc" id="L268">        this.onHoverDelay = onHoverDelay;</span>
+<span class="nc" id="L269">    }</span>
+
+    public Integer getOnHoverOutDelay()
+    {
+<span class="nc" id="L273">        return onHoverOutDelay;</span>
+    }
+
+    public void setOnHoverOutDelay(Integer onHoverOutDelay)
+    {
+<span class="nc" id="L278">        this.onHoverOutDelay = onHoverOutDelay;</span>
+<span class="nc" id="L279">    }</span>
+
+    public Integer getRepeatCount()
+    {
+<span class="nc" id="L283">        return repeatCount;</span>
+    }
+
+    public void setRepeatCount(Integer repeatCount)
+    {
+<span class="nc" id="L288">        this.repeatCount = repeatCount;</span>
+<span class="nc" id="L289">    }</span>
+
+    public Boolean getAppendBack()
+    {
+<span class="nc" id="L293">        return appendBack;</span>
+    }
+
+    public void setAppendBack(Boolean appendBack)
+    {
+<span class="nc" id="L298">        this.appendBack = appendBack;</span>
+<span class="nc" id="L299">    }</span>
+
+    public Boolean getAlwaysTrigger()
+    {
+<span class="nc" id="L303">        return alwaysTrigger;</span>
+    }
+
+    public void setAlwaysTrigger(Boolean alwaysTrigger)
+    {
+<span class="nc" id="L308">        this.alwaysTrigger = alwaysTrigger;</span>
+<span class="nc" id="L309">    }</span>
+
+    public Boolean getFlipListOnHover()
+    {
+<span class="nc" id="L313">        return flipListOnHover;</span>
+    }
+
+    public void setFlipListOnHover(Boolean flipListOnHover)
+    {
+<span class="nc" id="L318">        this.flipListOnHover = flipListOnHover;</span>
+<span class="nc" id="L319">    }</span>
+
+    public MouseEventType getFlipListOnHoverEvent()
+    {
+<span class="nc" id="L323">        return flipListOnHoverEvent;</span>
+    }
+
+    public void setFlipListOnHoverEvent(MouseEventType flipListOnHoverEvent)
+    {
+<span class="nc" id="L328">        this.flipListOnHoverEvent = flipListOnHoverEvent;</span>
+<span class="nc" id="L329">    }</span>
+
+    public Double getNoHAflipOpacity()
+    {
+<span class="nc" id="L333">        return noHAflipOpacity;</span>
+    }
+
+    public void setNoHAflipOpacity(Double noHAflipOpacity)
+    {
+<span class="nc" id="L338">        this.noHAflipOpacity = noHAflipOpacity;</span>
+<span class="nc" id="L339">    }</span>
+
+    public EasingEffects getHaTransFunc()
+    {
+<span class="nc" id="L343">        return haTransFunc;</span>
+    }
+
+    public void setHaTransFunc(EasingEffects haTransFunc)
+    {
+<span class="nc" id="L348">        this.haTransFunc = haTransFunc;</span>
+<span class="nc" id="L349">    }</span>
+
+    public EasingEffects getNoHaTransFunc()
+    {
+<span class="nc" id="L353">        return noHaTransFunc;</span>
+    }
+
+    public void setNoHaTransFunc(EasingEffects noHaTransFunc)
+    {
+<span class="nc" id="L358">        this.noHaTransFunc = noHaTransFunc;</span>
+<span class="nc" id="L359">    }</span>
+
+    public Integer getCurrentIndex()
+    {
+<span class="nc" id="L363">        return currentIndex;</span>
+    }
+
+    public void setCurrentIndex(Integer currentIndex)
+    {
+<span class="nc" id="L368">        this.currentIndex = currentIndex;</span>
+<span class="nc" id="L369">    }</span>
+
+    public Boolean getUseModernizr()
+    {
+<span class="nc" id="L373">        return useModernizr;</span>
+    }
+
+    public void setUseModernizr(Boolean useModernizr)
+    {
+<span class="nc" id="L378">        this.useModernizr = useModernizr;</span>
+<span class="nc" id="L379">    }</span>
+
+    public Boolean getUseHardwareAccel()
+    {
+<span class="nc" id="L383">        return useHardwareAccel;</span>
+    }
+
+    public void setUseHardwareAccel(Boolean useHardwareAccel)
+    {
+<span class="nc" id="L388">        this.useHardwareAccel = useHardwareAccel;</span>
+<span class="nc" id="L389">    }</span>
+
+    public JQMetroSwapOptions getSwap()
+    {
+<span class="nc" id="L393">        return swap;</span>
+    }
+
+    public void setSwap(JQMetroSwapOptions swap)
+    {
+<span class="nc" id="L398">        this.swap = swap;</span>
+<span class="nc" id="L399">    }</span>
+
+    public Boolean getUseTranslate()
+    {
+<span class="nc" id="L403">        return useTranslate;</span>
+    }
+
+    public void setUseTranslate(Boolean useTranslate)
+    {
+<span class="nc" id="L408">        this.useTranslate = useTranslate;</span>
+<span class="nc" id="L409">    }</span>
+
+    public JQMetroSwapOptions getSwapFront()
+    {
+<span class="nc" id="L413">        return swapFront;</span>
+    }
+
+    public void setSwapFront(JQMetroSwapOptions swapFront)
+    {
+<span class="nc" id="L418">        this.swapFront = swapFront;</span>
+<span class="nc" id="L419">    }</span>
+
+    public JQMetroSwapOptions getSwapBack()
+    {
+<span class="nc" id="L423">        return swapBack;</span>
+    }
+
+    public void setSwapBack(JQMetroSwapOptions swapBack)
+    {
+<span class="nc" id="L428">        this.swapBack = swapBack;</span>
+<span class="nc" id="L429">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

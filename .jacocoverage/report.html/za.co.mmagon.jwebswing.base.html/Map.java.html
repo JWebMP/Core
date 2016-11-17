@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Map.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">Map.java</span></div><h1>Map.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html;
+
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
+import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.ImageMapChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.MapChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+
+/**
+ * Browser Support&lt;p&gt;
+ * &lt;p&gt;
+ * Internet Explorer Firefox Opera Google Chrome Safari&lt;p&gt;
+ * &lt;p&gt;
+ * The map tag is supported in all major browsers. Definition and Usage&lt;p&gt;
+ * &lt;p&gt;
+ * The map tag is used to define a client-side image-map. An image-map is an image with clickable areas.&lt;p&gt;
+ * &lt;p&gt;
+ * The required name attribute of the map element is associated with the img's usemap attribute and creates a relationship between the image and the map.&lt;p&gt;
+ * &lt;p&gt;
+ * The map element contains a number of area elements, that defines the clickable areas in the image map. Differences Between HTML 4.01 and HTML5&lt;p&gt;
+ * &lt;p&gt;
+ * Note: In HTML5, if the id attribute of the map tag is also specified, it must have the same value as the name attribute. Differences Between HTML and XHTML&lt;p&gt;
+ * &lt;p&gt;
+ * In XHTML, the name attribute is deprecated, and will be removed. Use the id attribute instead.&lt;p&gt;
+ *
+ * @since 2013/11/22
+ * @version 1.0
+ * @author MMagon
+ *
+ *
+ */
+public class Map extends Component&lt;MapChildren, NoAttributes, GlobalFeatures, GlobalEvents, Map&gt; implements ImageMapChildren
+{
+
+    /**
+     * Constructs a new Map for use with the Image Map
+     * Useless really without
+     */
+    public Map()
+    {
+<span class="fc" id="L44">        super(ComponentTypes.Map);</span>
+<span class="fc" id="L45">    }</span>
+
+    /**
+     * Adds the absolute CSS Configuration, and sets the name to the ID of the Map
+     */
+    @Override
+    public void preConfigure()
+    {
+<span class="fc" id="L53">        super.preConfigure();</span>
+<span class="fc" id="L54">        addAttribute(GlobalAttributes.Name, getID());</span>
+<span class="fc" id="L55">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

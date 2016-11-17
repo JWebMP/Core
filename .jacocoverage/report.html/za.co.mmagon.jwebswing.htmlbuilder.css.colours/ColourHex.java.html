@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ColourHex.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.htmlbuilder.css.colours</a> &gt; <span class="el_source">ColourHex.java</span></div><h1>ColourHex.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.htmlbuilder.css.colours;
+
+import com.fasterxml.jackson.annotation.JsonValue;
+import za.co.mmagon.jwebswing.base.client.CSSVersions;
+
+/**
+ *
+ * @author Marc Magon
+ */
+public class ColourHex implements CssColour&lt;ColourHex&gt;
+{
+
+    private String thisHex;
+
+    public ColourHex(String thisHex)
+<span class="nc" id="L16">    {</span>
+<span class="nc bnc" id="L17" title="All 2 branches missed.">        if (thisHex.startsWith(&quot;#&quot;))</span>
+        {
+<span class="nc" id="L19">            this.thisHex = thisHex;</span>
+        }
+        else
+        {
+<span class="nc" id="L23">            this.thisHex = &quot;#&quot; + thisHex;</span>
+        }
+<span class="nc" id="L25">    }</span>
+
+    public ColourHex(ColourNames colourName)
+<span class="nc" id="L28">    {</span>
+<span class="nc" id="L29">        this.thisHex = colourName.toString();</span>
+<span class="nc" id="L30">    }</span>
+
+    @Override
+    public String getValue()
+    {
+<span class="nc" id="L35">        return thisHex;</span>
+    }
+
+    @Override
+    public ColourHex getDefault()
+    {
+<span class="nc" id="L41">        return new ColourHex(&quot;#ffffff&quot;);</span>
+    }
+
+    @JsonValue(true)
+    @Override
+    public String toString()
+    {
+<span class="nc" id="L48">        return thisHex;</span>
+    }
+
+    @Override
+    public String getJavascriptSyntax()
+    {
+<span class="nc" id="L54">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+    }
+
+    @Override
+    public CSSVersions getCSSVersion()
+    {
+<span class="nc" id="L60">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

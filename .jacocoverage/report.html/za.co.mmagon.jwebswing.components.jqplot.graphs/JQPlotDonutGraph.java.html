@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQPlotDonutGraph.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqplot.graphs</a> &gt; <span class="el_source">JQPlotDonutGraph.java</span></div><h1>JQPlotDonutGraph.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2014 mmagon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqplot.graphs;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.log4j.Logger;
+import za.co.mmagon.LoggerFactory;
+import za.co.mmagon.jwebswing.components.jqplot.JQPlotGraph;
+import za.co.mmagon.jwebswing.components.jqplot.graphs.display.JQPlotDonutGroup;
+import za.co.mmagon.jwebswing.components.jqplot.graphs.display.JQPlotPieSlice;
+import za.co.mmagon.jwebswing.components.jqplot.options.JQPlotOptions;
+import za.co.mmagon.jwebswing.components.jqplot.options.series.JQPlotSeriesDonutOptions;
+
+/**
+ * The line graph implementation
+ *
+ * @author mmagon
+ * @since 2014/07/08
+ */
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class JQPlotDonutGraph extends JQPlotGraph&lt;JQPlotOptions&gt;
+{
+
+    /**
+     * The logger for the swing Servlet
+     */
+<span class="fc" id="L48">    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;JQPlotDonutGraph&quot;);</span>
+
+    private static final long serialVersionUID = 1L;
+
+    @JsonIgnore
+    private JQPlotSeriesDonutOptions donutOptions;
+
+    @JsonIgnore
+    private JQPlotDonutGroup donutGroup;
+
+    public JQPlotDonutGraph()
+<span class="fc" id="L59">    {</span>
+<span class="fc" id="L60">        getOptions().getSeriesDefaults().setRendererOptions(donutOptions = new JQPlotSeriesDonutOptions(this));</span>
+<span class="fc" id="L61">        donutGroup = new JQPlotDonutGroup();</span>
+<span class="fc" id="L62">    }</span>
+
+    /**
+     * Returns the plot lines on this graph
+     *
+     * @param donutGroup
+     * @return
+     */
+    public List&lt;JQPlotPieSlice&gt; getPlotSlices(int donutGroup)
+    {
+<span class="nc" id="L72">        List&lt;JQPlotPieSlice&gt; arr = getDonutGroup().get(donutGroup);</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (arr == null)</span>
+        {
+<span class="nc" id="L75">            getDonutGroup().add(donutGroup, arr);</span>
+        }
+
+<span class="nc" id="L78">        return getDonutGroup().get(donutGroup);</span>
+    }
+
+    /**
+     * Each line should consist of data-points in the form of x,y,x,y,x,y,x,y
+     *
+     * @param doubleGroup the donut group number to assign towards
+     * @param name
+     * @param values
+     * @return
+     */
+    public JQPlotPieSlice addSlice(int doubleGroup, String name, double values)
+    {
+<span class="nc" id="L91">        JQPlotPieSlice slice = new JQPlotPieSlice(name, values);</span>
+<span class="nc" id="L92">        getDonutGroupSlices(doubleGroup).add(slice);</span>
+<span class="nc" id="L93">        return slice;</span>
+    }
+
+    /**
+     * Each line should consist of data-points in the form of x,y,x,y,x,y,x,y
+     *
+     * @param doubleGroup The group to add the pie values to
+     * @param values An array of x,y values continual
+     * @return
+     */
+    public List&lt;JQPlotPieSlice&gt; addSlices(int doubleGroup, double[] values)
+    {
+<span class="fc" id="L105">        List&lt;JQPlotPieSlice&gt; newSlices = getDonutGroupSlices(doubleGroup);</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        for (int i = 0; i &lt; values.length; i++)</span>
+        {
+<span class="fc" id="L108">            double value = values[i];</span>
+<span class="fc" id="L109">            JQPlotPieSlice slice = new JQPlotPieSlice(&quot;Slice &quot; + i, value);</span>
+<span class="fc" id="L110">            newSlices.add(slice);</span>
+        }
+
+<span class="fc" id="L113">        return newSlices;</span>
+    }
+
+    /**
+     * 3 Bracket start
+     *
+     * @return
+     */
+    @Override
+    protected StringBuilder getDataPointRender()
+    {
+<span class="fc" id="L124">        StringBuilder sb = new StringBuilder();</span>
+        String jsonInString;
+<span class="fc" id="L126">        jsonInString = getDonutGroupJSON().toString();</span>
+<span class="fc" id="L127">        sb.append(jsonInString);</span>
+
+<span class="fc" id="L129">        return sb;</span>
+    }
+
+    /**
+     * The donut options
+     *
+     * @return
+     */
+    public JQPlotSeriesDonutOptions getDonutOptions()
+    {
+<span class="nc" id="L139">        return donutOptions;</span>
+    }
+
+    /**
+     * The donut options
+     *
+     * @param donutOptions
+     */
+    public void setDonutOptions(JQPlotSeriesDonutOptions donutOptions)
+    {
+<span class="nc" id="L149">        this.donutOptions = donutOptions;</span>
+<span class="nc" id="L150">    }</span>
+
+    /**
+     * Returns a specific donut group. Rendered as [] in
+     *
+     * @return
+     */
+    @JsonRawValue
+    @JsonFormat(shape = JsonFormat.Shape.ARRAY)
+    public List&lt;List&lt;JQPlotPieSlice&gt;&gt; getDonutGroupJSON()
+    {
+<span class="fc" id="L161">        return getDonutGroup();</span>
+    }
+
+    /**
+     * Keep Group Number In oRder. if number is not in the size list, array list index out of bounds or
+     *
+     * @param groupNumber
+     * @return
+     */
+    public List&lt;JQPlotPieSlice&gt; getDonutGroupSlices(int groupNumber) throws ArrayIndexOutOfBoundsException
+    {
+<span class="pc bpc" id="L172" title="1 of 2 branches missed.">        if (getDonutGroup().size() &gt;= groupNumber)</span>
+        {
+<span class="fc" id="L174">            List&lt;JQPlotPieSlice&gt; newList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L175">            getDonutGroup().add(newList);</span>
+        }
+<span class="fc" id="L177">        return getDonutGroup().get(groupNumber);</span>
+    }
+
+    public List&lt;List&lt;JQPlotPieSlice&gt;&gt; getDonutGroup()
+    {
+<span class="pc bpc" id="L182" title="1 of 2 branches missed.">        if (this.donutGroup == null)</span>
+        {
+<span class="nc" id="L184">            donutGroup = new JQPlotDonutGroup();</span>
+        }
+<span class="fc" id="L186">        return this.donutGroup.getDonutGroup();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

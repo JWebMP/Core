@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Position.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqueryui.position</a> &gt; <span class="el_source">Position.java</span></div><h1>Position.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.components.jqueryui.position;
+
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
+
+/**
+ * This defines the JavaScript part for JQuery UI for Position
+ *
+ * @author MMagon
+ * @since 07 Apr 2013
+ * @version 1.0
+ */
+public class Position extends JavaScriptPart
+{
+
+    private static final long serialVersionUID = 1L;
+
+    private PositionLocationHorizontal myX;
+    private PositionLocationVertical myY;
+    private PositionLocationHorizontal atX;
+    private PositionLocationVertical atY;
+
+    private String at;
+    private String my;
+    private String of;
+
+    public Position()
+<span class="nc" id="L30">    {</span>
+<span class="nc" id="L31">    }</span>
+
+    /**
+     * Constructs a new JavaScript Part &quot;Position&quot;
+     *
+     * @param myX My X Location
+     * @param myY My Y Location
+     * @param atX At X Location
+     * @param atY At Y Location
+     * @param of  Of Which Component
+     */
+    public Position(PositionLocationHorizontal myX, PositionLocationVertical myY, PositionLocationHorizontal atX, PositionLocationVertical atY, ComponentHierarchyBase of)
+<span class="fc" id="L43">    {</span>
+<span class="fc" id="L44">        this.myY = myY;</span>
+<span class="fc" id="L45">        this.myX = myX;</span>
+<span class="fc" id="L46">        this.atX = atX;</span>
+<span class="fc" id="L47">        this.atY = atY;</span>
+<span class="fc" id="L48">        this.of = of.getID(true);</span>
+<span class="fc" id="L49">    }</span>
+
+    /**
+     * My x at target X
+     * &lt;p&gt;
+     * @param myX
+     * @param atX
+     */
+    public Position(PositionLocationHorizontal myX, PositionLocationHorizontal atX)
+<span class="nc" id="L58">    {</span>
+<span class="nc" id="L59">        this.myX = myX;</span>
+<span class="nc" id="L60">        this.atX = atX;</span>
+<span class="nc" id="L61">    }</span>
+
+    /**
+     * At target X
+     * &lt;p&gt;
+     * @param atX
+     */
+    public Position(PositionLocationHorizontal atX)
+<span class="nc" id="L69">    {</span>
+<span class="nc" id="L70">        this.atX = atX;</span>
+<span class="nc" id="L71">    }</span>
+
+    /**
+     * My X at X of Component
+     * &lt;p&gt;
+     * @param myX
+     * @param atX
+     * @param of
+     */
+    public Position(PositionLocationHorizontal myX, PositionLocationHorizontal atX, Component of)
+<span class="nc" id="L81">    {</span>
+<span class="nc" id="L82">        this.myX = myX;</span>
+<span class="nc" id="L83">        this.atX = atX;</span>
+<span class="nc" id="L84">        this.of = of.getID(true);</span>
+<span class="nc" id="L85">    }</span>
+
+    /**
+     * My 7 at target Y
+     * &lt;p&gt;
+     * @param myY
+     * @param atY
+     */
+    public Position(PositionLocationVertical myY, PositionLocationVertical atY)
+<span class="nc" id="L94">    {</span>
+<span class="nc" id="L95">        this.myY = myY;</span>
+<span class="nc" id="L96">        this.atY = atY;</span>
+<span class="nc" id="L97">    }</span>
+
+    /**
+     * My corners at corners
+     * &lt;p&gt;
+     * @param myX
+     * @param myY
+     * @param atX
+     * @param atY
+     */
+    public Position(PositionLocationHorizontal myX, PositionLocationVertical myY, PositionLocationHorizontal atX, PositionLocationVertical atY)
+<span class="nc" id="L108">    {</span>
+<span class="nc" id="L109">        this.myX = myX;</span>
+<span class="nc" id="L110">        this.myY = myY;</span>
+<span class="nc" id="L111">        this.atX = atX;</span>
+<span class="nc" id="L112">        this.atY = atY;</span>
+<span class="nc" id="L113">    }</span>
+
+    /**
+     * Gets the My String Part
+     *
+     * @return The Section of &quot;My&quot; Part
+     */
+    public String getMyString()
+    {
+<span class="nc" id="L122">        return myX.name() + &quot; &quot; + myY.name() + &quot;&quot;;</span>
+    }
+
+    /**
+     * Gets the At String Part
+     *
+     * @return The Section of &quot;At&quot; Part
+     */
+    public String getAtString()
+    {
+<span class="nc" id="L132">        return atX.name() + &quot; &quot; + atY.name() + &quot;&quot;;</span>
+    }
+
+    /**
+     * The Of String Part
+     *
+     * @return The Component ID to position at
+     */
+    public String getOfString()
+    {
+<span class="nc" id="L142">        return of;</span>
+    }
+
+    public void setOf(Component comp)
+    {
+<span class="nc" id="L147">        this.of = comp.getID(true);</span>
+<span class="nc" id="L148">    }</span>
+
+    @Override
+    public JavascriptPartType getJavascriptType()
+    {
+<span class="fc" id="L153">        return JavascriptPartType.Javascript;</span>
+    }
+
+    public String getAt()
+    {
+<span class="nc" id="L158">        return at;</span>
+    }
+
+    public void setAt(String at)
+    {
+<span class="nc" id="L163">        this.at = at;</span>
+<span class="nc" id="L164">    }</span>
+
+    public String getMy()
+    {
+<span class="nc" id="L168">        return my;</span>
+    }
+
+    public void setMy(String my)
+    {
+<span class="nc" id="L173">        this.my = my;</span>
+<span class="nc" id="L174">    }</span>
+
+    public String getOf()
+    {
+<span class="nc" id="L178">        return of;</span>
+    }
+
+    public void setOf(String of)
+    {
+<span class="nc" id="L183">        this.of = of;</span>
+<span class="nc" id="L184">    }</span>
+
+    public void setMyX(PositionLocationHorizontal myX)
+    {
+<span class="nc" id="L188">        this.myX = myX;</span>
+<span class="nc" id="L189">    }</span>
+
+    public void setMyY(PositionLocationVertical myY)
+    {
+<span class="nc" id="L193">        this.myY = myY;</span>
+<span class="nc" id="L194">    }</span>
+
+    public void setAtX(PositionLocationHorizontal atX)
+    {
+<span class="nc" id="L198">        this.atX = atX;</span>
+<span class="nc" id="L199">    }</span>
+
+    public void setAtY(PositionLocationVertical atY)
+    {
+<span class="nc" id="L203">        this.atY = atY;</span>
+<span class="nc" id="L204">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

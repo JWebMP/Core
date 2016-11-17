@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Tile.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqmetro.metro.tiles</a> &gt; <span class="el_source">Tile.java</span></div><h1>Tile.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.components.jqmetro.metro.tiles;
+
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.base.html.Span;
+import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.components.jqmetro.metro.JQMetroChildren;
+import za.co.mmagon.jwebswing.components.jqmetro.metro.enumerations.TileAccentThemes;
+import za.co.mmagon.jwebswing.components.jqmetro.metro.enumerations.TileCount;
+import za.co.mmagon.jwebswing.components.jqmetro.metro.enumerations.TileProportions;
+import za.co.mmagon.jwebswing.components.jqmetro.metro.interfaces.JQMetroTileAttributes;
+import za.co.mmagon.jwebswing.components.jqmetro.metro.interfaces.JQMetroTileChildren;
+
+/**
+ * A Tile
+ * &lt;p&gt;
+ * @author MMagon
+ * @param &lt;A&gt; A valid set of attributes for a metro JS tile
+ * @since 13 Sep 2013
+ * @version 1.0
+ */
+public abstract class Tile&lt;A extends Enum &amp; JQMetroTileAttributes &amp; AttributeDefinitions&gt;
+        extends Div&lt;JQMetroTileChildren, A, GlobalFeatures, GlobalEvents, Tile&gt; implements JQMetroChildren, IMetroTile
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * The tile proportion - tall or half
+     */
+    private TileProportions tileProportion;
+
+    /**
+     * Denotes a live tile
+     */
+    public Tile()
+<span class="nc" id="L39">    {</span>
+<span class="nc" id="L40">        addClass(&quot;live-tile&quot;);</span>
+<span class="nc" id="L41">    }</span>
+
+    /**
+     * Sets the new tiles proportion
+     *
+     * @param tileProportion
+     */
+    public Tile(TileProportions tileProportion)
+<span class="nc" id="L49">    {</span>
+<span class="nc" id="L50">        this.tileProportion = tileProportion;</span>
+<span class="nc" id="L51">        addClass(&quot;live-tile&quot;);</span>
+<span class="nc" id="L52">    }</span>
+    
+    /**
+     * Returns this tiles configurable properties
+     * @return 
+     */
+    public IMetroTile asTile()
+    {
+<span class="nc" id="L60">        return this;</span>
+    }
+
+    /**
+     * Sets the tile proportion
+     *
+     * @return
+     */
+    @Override
+    public TileProportions getTileProportion()
+    {
+<span class="nc" id="L71">        return tileProportion;</span>
+    }
+
+    /**
+     * Returns the tile proportion
+     *
+     * @param tileProportion
+     */
+    @Override
+    public void setTileProportion(TileProportions tileProportion)
+    {
+<span class="nc" id="L82">        removeClass(&quot;half&quot; + this.tileProportion + &quot;&quot;);</span>
+<span class="nc" id="L83">        removeClass(&quot;&quot;);</span>
+<span class="nc" id="L84">        this.tileProportion = tileProportion;</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">        addClass(tileProportion == null ? &quot;&quot; : &quot;half&quot; + tileProportion + &quot;&quot;);</span>
+<span class="nc" id="L86">    }</span>
+
+    /**
+     * Returns the tile title
+     *
+     * @return
+     */
+    /*@Override
+    public Div getTileTitle()
+    {
+        return tileTitle;
+    }*/
+
+    /**
+     * Sets the tile title
+     *
+     * @param tileTitle
+     */
+    /*@Override
+    public void setTileTitle(Div tileTitle)
+    {
+        if(this.tileTitle != null)
+        {
+            remove(this.tileTitle);
+        }
+        this.tileTitle = tileTitle;
+        
+        if(tileTitle != null)
+        {
+            tileTitle.addClass(&quot;tile-title&quot;);
+            //add(this.tileTitle);
+        }
+    }*/
+
+
+    /**
+     * Removes any applied colour themes
+     */
+    private void removeExistingThemes()
+    {
+<span class="nc bnc" id="L126" title="All 2 branches missed.">        for (TileAccentThemes theme : TileAccentThemes.values())</span>
+        {
+<span class="nc" id="L128">            removeClass(theme.toString());</span>
+        }
+<span class="nc" id="L130">    }</span>
+    
+    /**
+     * Remove existing tiles
+     */
+    private void removeExistingTileCounts()
+    {
+<span class="nc bnc" id="L137" title="All 2 branches missed.">        for (TileCount tileCount : TileCount.values())</span>
+        {
+<span class="nc" id="L139">            removeClass(tileCount.toString());</span>
+        }
+<span class="nc" id="L141">    }</span>
+    
+    /**
+     * Sets the current tile accent theme
+     * @param theme 
+     */
+    @Override
+    public void setTheme(TileAccentThemes theme)
+    {
+<span class="nc" id="L150">        removeExistingThemes();</span>
+<span class="nc" id="L151">        addClass(theme.toString());</span>
+<span class="nc" id="L152">    }</span>
+    
+    /**
+     * Sets the current tile count
+     * @param theme 
+     */
+    @Override
+    public void setTileCount(TileCount theme)
+    {
+<span class="nc" id="L161">        removeExistingTileCounts();</span>
+<span class="nc" id="L162">        addClass(theme.toString());</span>
+<span class="nc" id="L163">    }</span>
+    
+    /**
+     * Adds a new tile face
+     * @param &lt;T&gt; Any Div
+     * @param newFace The new face to add
+     * @param title
+     * @return The input div
+     */
+    @Override
+    public &lt;T extends Div&gt; T addFace(T newFace, String title)
+    {
+<span class="nc" id="L175">        getChildren().add(newFace);</span>
+<span class="nc" id="L176">        Span titleDiv = new Span();</span>
+<span class="nc" id="L177">        titleDiv.addClass(&quot;tile-title&quot;);</span>
+<span class="nc" id="L178">        titleDiv.add(title);</span>
+<span class="nc" id="L179">        newFace.add(titleDiv);</span>
+<span class="nc" id="L180">        return newFace;</span>
+    }
+    
+    /**
+     * Adds a new tile face
+     * @param &lt;T&gt; Any Div
+     * @param newFace The new face to add
+     * @param title
+     * @return The input div
+     */
+    @Override
+    public &lt;T extends Div&gt; T addFace(T newFace, ComponentHierarchyBase title)
+    {
+<span class="nc" id="L193">        getChildren().add(newFace);</span>
+<span class="nc" id="L194">        title.addClass(&quot;tile-title&quot;);</span>
+<span class="nc" id="L195">        newFace.add(title);</span>
+<span class="nc" id="L196">        return newFace;</span>
+    }
+    
+    /**
+     * Adds a new tile face
+     * @param &lt;T&gt; Any Div
+     * @param position The position in the array
+     * @param newFace The new face to add
+     * @return The input div
+     */
+    @Override
+    public &lt;T extends Div&gt; T addFace(int position, T newFace, ComponentHierarchyBase title)
+    {
+<span class="nc" id="L209">        getChildren().add(position,newFace);</span>
+<span class="nc" id="L210">        title.addClass(&quot;tile-title&quot;);</span>
+<span class="nc" id="L211">        newFace.add(title);</span>
+<span class="nc" id="L212">        return newFace;</span>
+    }
+    
+    /**
+     * Adds a new tile face
+     * @param &lt;T&gt; Any Div
+     * @param newFace The new face to add
+     * @param title
+     * @param position
+     * @return The input div
+     */
+    @Override
+    public &lt;T extends Div&gt; T addFace(int position, T newFace, String title)
+    {
+<span class="nc" id="L226">        getChildren().add(position,newFace);</span>
+<span class="nc" id="L227">        Span titleDiv = new Span();</span>
+<span class="nc" id="L228">        titleDiv.addClass(&quot;tile-title&quot;);</span>
+<span class="nc" id="L229">        titleDiv.add(title);</span>
+<span class="nc" id="L230">        newFace.add(titleDiv);</span>
+<span class="nc" id="L231">        return newFace;</span>
+    }
+    
+    /**
+     * Removes the face from the collection
+     * @param &lt;T&gt; The face to remove
+     * @param oldFace The old face
+     */
+    @Override
+    public&lt;T extends Div&gt;  void removeFace(T oldFace)
+    {
+<span class="nc" id="L242">        getChildren().remove(oldFace);</span>
+<span class="nc" id="L243">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

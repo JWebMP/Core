@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Log.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.logger</a> &gt; <span class="el_source">Log.java</span></div><h1>Log.java</h1><pre class="source lang-java linenums">package za.co.mmagon.logger;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = &quot;&quot;, propOrder =
+{
+    &quot;logEntry&quot;
+})
+@XmlRootElement(name = &quot;Log&quot;)
+<span class="nc" id="L17">public class Log</span>
+{
+
+    @XmlElement(name = &quot;LogEntry&quot;)
+    protected List&lt;LogEntry&gt; logEntry;
+
+    /**
+     * Gets the value of the logEntry property.
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a &lt;CODE&gt;set&lt;/CODE&gt; method for the logEntry property.
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * For example, to add a new item, do as follows:
+     * &lt;pre&gt;
+     *    getLogEntry().add(newItem);
+     * &lt;/pre&gt;
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * Objects of the following type(s) are allowed in the list
+     * {@link LogEntry }
+     * &lt;p&gt;
+     * &lt;p&gt;
+     */
+    public List&lt;LogEntry&gt; getLogEntry()
+    {
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        if (logEntry == null)</span>
+        {
+<span class="nc" id="L49">            logEntry = new ArrayList&lt;LogEntry&gt;();</span>
+        }
+<span class="nc" id="L51">        return this.logEntry;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

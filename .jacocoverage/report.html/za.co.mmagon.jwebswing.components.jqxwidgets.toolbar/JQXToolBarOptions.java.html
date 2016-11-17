@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQXToolBarOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqxwidgets.toolbar</a> &gt; <span class="el_source">JQXToolBarOptions.java</span></div><h1>JQXToolBarOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqxwidgets.toolbar;
+
+import za.co.mmagon.jwebswing.components.jqxwidgets.JQXDefaultJavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptFunction;
+
+/**
+ * All the options for the tooltip library
+ * &lt;p&gt;
+ * @author GedMarc
+ * @since Mar 4, 2015
+ * @version 1.0
+ * &lt;p&gt;
+ * &lt;p&gt;
+ */
+<span class="nc" id="L31">public class JQXToolBarOptions extends JQXDefaultJavaScriptPart</span>
+
+{
+
+    private Boolean disabled;// 	Boolean 	false
+    private JavascriptFunction initTools;// 	function 	null
+    private Integer minimizeWidth;// 	Number/String 	200
+    private Integer minWidth;// 	Number/String 	null
+    private Integer maxWidth;// 	Number/String 	null
+    private Boolean rtl;// 	Boolean 	false
+    private JQXToolbarTools tools;// 	String 	''
+
+    public Boolean getDisabled()
+    {
+<span class="nc" id="L45">        return disabled;</span>
+    }
+
+    public void setDisabled(Boolean disabled)
+    {
+<span class="nc" id="L50">        this.disabled = disabled;</span>
+<span class="nc" id="L51">    }</span>
+
+    public JavascriptFunction getInitTools()
+    {
+<span class="nc" id="L55">        return initTools;</span>
+    }
+
+    public void setInitTools(JavascriptFunction initTools)
+    {
+<span class="nc" id="L60">        this.initTools = initTools;</span>
+<span class="nc" id="L61">    }</span>
+
+    public Integer getMinimizeWidth()
+    {
+<span class="nc" id="L65">        return minimizeWidth;</span>
+    }
+
+    public void setMinimizeWidth(Integer minimizeWidth)
+    {
+<span class="nc" id="L70">        this.minimizeWidth = minimizeWidth;</span>
+<span class="nc" id="L71">    }</span>
+
+    public Integer getMinWidth()
+    {
+<span class="nc" id="L75">        return minWidth;</span>
+    }
+
+    public void setMinWidth(Integer minWidth)
+    {
+<span class="nc" id="L80">        this.minWidth = minWidth;</span>
+<span class="nc" id="L81">    }</span>
+
+    public Integer getMaxWidth()
+    {
+<span class="nc" id="L85">        return maxWidth;</span>
+    }
+
+    public void setMaxWidth(Integer maxWidth)
+    {
+<span class="nc" id="L90">        this.maxWidth = maxWidth;</span>
+<span class="nc" id="L91">    }</span>
+
+    public Boolean getRtl()
+    {
+<span class="nc" id="L95">        return rtl;</span>
+    }
+
+    public void setRtl(Boolean rtl)
+    {
+<span class="nc" id="L100">        this.rtl = rtl;</span>
+<span class="nc" id="L101">    }</span>
+
+    public JQXToolbarTools getTools()
+    {
+<span class="nc" id="L105">        return tools;</span>
+    }
+
+    public void setTools(JQXToolbarTools tools)
+    {
+<span class="nc" id="L110">        this.tools = tools;</span>
+<span class="nc" id="L111">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

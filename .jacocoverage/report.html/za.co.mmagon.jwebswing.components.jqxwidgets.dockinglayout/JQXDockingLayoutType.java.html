@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQXDockingLayoutType.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqxwidgets.dockinglayout</a> &gt; <span class="el_source">JQXDockingLayoutType.java</span></div><h1>JQXDockingLayoutType.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqxwidgets.dockinglayout;
+
+/**
+ * This Class
+ *
+ * @author GedMarc
+ * @since 14 Dec 2015
+ */
+<span class="nc" id="L25">public enum JQXDockingLayoutType</span>
+{
+    /**
+     * A container for other groups. It has no visual features. The root item is always of this type.
+     */
+<span class="nc" id="L30">    layoutGroup,</span>
+    /**
+     * A group that contains layoutPanels. It is represented by a jqxWindow-like panel with a bottom-aligned jqxRibbon inside.
+     */
+<span class="nc" id="L34">    tabbedGroup,</span>
+    /**
+     * A group that contains documentPanels. It is represented by a top-aligned jqxRibbon.
+     */
+<span class="nc" id="L38">    documentGroup,</span>
+    /**
+     * A group that contains layoutPanels
+     * &lt;p&gt;
+     * It is represented by a jqxRibbon with mode: &quot;popup&quot;.
+     * Each ribbon item has a jqxWindow-like panel in its content. This group has to be either the first or the
+     * last child item of its parent layoutGroup.
+     */
+<span class="nc" id="L46">    autoHideGroup,</span>
+    /**
+     * A panel that can be inserted in a tabbedGroup or autoHideGroup. When it is in a tabbedGroup it is represented by a ribbon item and in an autoHideGroup - by a jqxWindow-like panel inside a
+     * ribbon item.
+     */
+<span class="nc" id="L51">    layoutPanel,</span>
+    /**
+     * A panel that can be inserted in a documentGroup. It is represented by a ribbon item.
+     */
+<span class="nc" id="L55">    documentPanel,</span>
+    /**
+     * A floating group that can contain a tabbedGroup or a layoutPanel. It is represented by a jqxWindow. Initial floatGroups have to be defined after the root layoutGroup in the layout array.
+     */
+<span class="nc" id="L59">    floatGroup,;</span>
+
+    private JQXDockingLayoutType()
+<span class="nc" id="L62">    {</span>
+<span class="nc" id="L63">    }</span>
+
+    @Override
+    public String toString()
+    {
+<span class="nc" id="L68">        return super.toString();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

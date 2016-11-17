@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQUIColourPickerFeature.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqueryui.colourpicker</a> &gt; <span class="el_source">JQUIColourPickerFeature.java</span></div><h1>JQUIColourPickerFeature.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.components.jqueryui.colourpicker;
+
+import za.co.mmagon.jwebswing.Feature;
+import za.co.mmagon.jwebswing.components.pools.jqspectrum.JQSpectrumColourPickerReferencePool;
+
+/**
+ * An implementation of the Spectrum Colour Picker tool
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * http://bgrins.github.io/spectrum/#why
+ * &lt;p&gt;
+ * @author MMagon
+ * @since 25 Jun 2013
+ * @version 1.0
+ */
+public class JQUIColourPickerFeature extends Feature&lt;JQUIColourPickerOptions, JQUIColourPickerFeature&gt;
+{
+
+    private static final long serialVersionUID = 1L;
+    private JQUIColourPickerOptions colourOptions;
+    private final JQUIColourPicker picker;
+
+    /**
+     * Constructs a new instance of the JW Colour Picker ComponentFeatureBase
+     */
+    public JQUIColourPickerFeature(JQUIColourPicker picker)
+    {
+<span class="nc" id="L28">        super(&quot;JWColourPickerFeature&quot;);</span>
+<span class="nc" id="L29">        this.picker = picker;</span>
+<span class="nc" id="L30">        getJavascriptReferences().add(JQSpectrumColourPickerReferencePool.SpectrumColourPicker.getJavaScriptReference());</span>
+<span class="nc" id="L31">        getCssReferences().add(JQSpectrumColourPickerReferencePool.SpectrumColourPicker.getCssReference());</span>
+
+<span class="nc" id="L33">    }</span>
+
+    @Override
+    public void assignFunctionsToComponent()
+    {
+<span class="nc" id="L38">        String s = picker.getJQueryID() + &quot;spectrum(&quot; + getOptions() + &quot;);&quot; + getNewLine();</span>
+<span class="nc" id="L39">        addQuery(s);</span>
+<span class="nc" id="L40">    }</span>
+
+    /**
+     * Returns the options associated with the Spectrum Colour Picker
+     * &lt;p&gt;
+     * @return
+     */
+    @Override
+    public JQUIColourPickerOptions getOptions()
+    {
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        if (this.colourOptions == null)</span>
+        {
+<span class="nc" id="L52">            colourOptions = new JQUIColourPickerOptions();</span>
+        }
+<span class="nc" id="L54">        return colourOptions;</span>
+    }
+
+    /**
+     * Returns the JQUIColourPicker associated with this feature
+     * &lt;p&gt;
+     * @return
+     */
+    public JQUIColourPicker getPicker()
+    {
+<span class="nc" id="L64">        return picker;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

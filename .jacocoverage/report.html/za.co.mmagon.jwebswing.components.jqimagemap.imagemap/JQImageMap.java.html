@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQImageMap.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqimagemap.imagemap</a> &gt; <span class="el_source">JQImageMap.java</span></div><h1>JQImageMap.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.components.jqimagemap.imagemap;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.Feature;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.base.html.Area;
+import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.base.html.Image;
+import za.co.mmagon.jwebswing.base.html.Map;
+import za.co.mmagon.jwebswing.base.html.Span;
+import za.co.mmagon.jwebswing.base.html.attributes.AreaAttributes;
+import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
+import za.co.mmagon.jwebswing.base.html.attributes.ImageAttributes;
+import za.co.mmagon.jwebswing.base.html.attributes.ImageMapAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.ImageMapChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.ImageMapFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.jqueryui.position.JQUIPositionFeature;
+import za.co.mmagon.jwebswing.components.jqueryui.position.Position;
+import za.co.mmagon.jwebswing.components.jqueryui.position.PositionLocationHorizontal;
+import za.co.mmagon.jwebswing.components.jqueryui.position.PositionLocationVertical;
+import za.co.mmagon.jwebswing.features.gradients.JWGradientsFeature;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.displays.Positions;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ * The image map component
+ *
+ * @author mmagon
+ * @since 2013/01/14
+ * @version 0.1
+ */
+@CSS(Position = Positions.Relative)
+public class JQImageMap extends Component&lt;ImageMapChildren, ImageMapAttributes, ImageMapFeatures, GlobalEvents, Component&gt; implements BodyChildren
+{
+
+    private Div labelsDiv;
+    private Div legendDiv;
+    private Map map;
+    private Image image;
+    private int imageXSize;
+    private int imageYSize;
+    private int displayXSize;
+    private int displayYSize;
+    private Div labelHeadDiv;
+
+    /**
+     * The default interactive feature
+     */
+<span class="nc" id="L55">    private JQMapInteractiveFeature defaultProperties = new JQMapInteractiveFeature(this);</span>
+    /**
+     * The default interactive feature
+     */
+<span class="nc" id="L59">    private final JQImageHeatMapFeature heatMap = new JQImageHeatMapFeature(this, 1, 1000000);</span>
+
+<span class="nc" id="L61">    private final JWGradientsFeature gradientFeature = new JWGradientsFeature(this, this.heatMap.getColourMin(), this.heatMap.getColourMax(), &quot;vertical&quot;);</span>
+
+<span class="nc" id="L63">    private final JQMapLegendFeature legendFeature = new JQMapLegendFeature(this, gradientFeature);</span>
+
+    /**
+     * The map URL
+     */
+    private String mapImageUrl;
+    /**
+     * Sets whether the image map should apply a heat map This attaches a heat map feature
+     */
+    private boolean heatmap;
+    /**
+     * Shows whether the map is interactive Allows for highlighting
+     */
+    private boolean interactive;
+    /**
+     * Shows whether the map is labeled This puts a div at the center of each polygon
+     */
+    private boolean labeled;
+    /**
+     * Sets whether to display a legend or not
+     */
+    private boolean legend;
+
+    private boolean valueDisplayed;
+    
+<span class="nc" id="L88">    private boolean ratioConfigured = false;</span>
+
+    /**
+     * Constructs a new Image Map
+     *
+     * @param mapImageUrl
+     */
+    public JQImageMap(String mapImageUrl)
+    {
+<span class="nc" id="L97">        this(mapImageUrl, false, false, false);</span>
+<span class="nc" id="L98">        this.labelHeadDiv = new Div();</span>
+<span class="nc" id="L99">    }</span>
+
+    /**
+     * Constructs an ImageMap from the given parameters with the testing sizes
+     *
+     * @param mapImageUrl
+     * @param heatmap
+     * @param interactive
+     * @param labeled
+     */
+    public JQImageMap(String mapImageUrl, boolean heatmap, boolean interactive, boolean labeled)
+    {
+<span class="nc" id="L111">        this(mapImageUrl, heatmap, interactive, labeled, 0, 0, 0, 0);</span>
+<span class="nc" id="L112">        this.labelHeadDiv = new Div();</span>
+<span class="nc" id="L113">    }</span>
+
+    /**
+     *
+     * @param mapImageUrl
+     * @param heatmap
+     * @param interactive
+     * @param labeled
+     * @param imageXSize The original Image size
+     * @param imageYSize The original Image size
+     * @param displayXSize The new image x size
+     * @param displayYSize the new image y size
+     */
+    public JQImageMap(String mapImageUrl, boolean heatmap, boolean interactive, boolean labeled, int imageXSize, int imageYSize, int displayXSize, int displayYSize)
+    {
+<span class="nc" id="L128">        super(&quot;div&quot;, ComponentTypes.Div, false);</span>
+<span class="nc" id="L129">        this.labelHeadDiv = new Div();</span>
+<span class="nc" id="L130">        this.imageXSize = imageXSize;</span>
+<span class="nc" id="L131">        getCss().setWidth(imageXSize);</span>
+<span class="nc" id="L132">        getCss().setHeight(imageYSize);</span>
+<span class="nc" id="L133">        this.imageYSize = imageYSize;</span>
+<span class="nc" id="L134">        this.displayYSize = displayYSize;</span>
+<span class="nc" id="L135">        this.displayXSize = displayXSize;</span>
+<span class="nc" id="L136">        this.mapImageUrl = mapImageUrl;</span>
+<span class="nc" id="L137">        this.heatmap = heatmap;</span>
+<span class="nc" id="L138">        this.interactive = interactive;</span>
+<span class="nc" id="L139">        this.labeled = labeled;</span>
+
+<span class="nc" id="L141">        this.map = new Map();</span>
+<span class="nc" id="L142">        this.image = new Image(this.mapImageUrl);</span>
+<span class="nc" id="L143">        defaultProperties.setDefaultProperties(true);</span>
+<span class="nc" id="L144">        image.addAttribute(ImageAttributes.UseMap, &quot;#&quot; + this.map.getID());</span>
+<span class="nc" id="L145">        add(image);</span>
+<span class="nc" id="L146">        add(map);</span>
+<span class="nc" id="L147">    }</span>
+
+    /**
+     * Adds a specified area to the image map
+     *
+     * @param areaName The name of the area
+     * @param polygonCoordinates The co-ordinates for the area
+     * @return True or false if added public Area addAreaToMap(String areaName, String polygonCoordinates) { Area a = new Area(ImageMapAreaShapes.Poly, polygonCoordinates);
+     * a.addAttribute(GlobalAttributes.Name, areaName); this.map.add(a); return a; }
+     */
+    public Area addAreaToMap(String areaName, String polygonCoordinates)
+    {
+<span class="nc" id="L159">        Area a = new Area(ImageMapAreaShapes.Poly, polygonCoordinates);</span>
+<span class="nc" id="L160">        a.addAttribute(GlobalAttributes.Name, areaName);</span>
+<span class="nc" id="L161">        this.map.add(a);</span>
+<span class="nc" id="L162">        return a;</span>
+    }
+
+    /**
+     * Adds a specified area to the image map
+     *
+     * @param area The area to add
+     * @return Always True
+     */
+    public boolean addAreaToMap(Area area)
+    {
+<span class="nc" id="L173">        this.map.add(area);</span>
+<span class="nc" id="L174">        return true;</span>
+    }
+
+    public Area add(Area area)
+    {
+<span class="nc" id="L179">        addAreaToMap(area);</span>
+<span class="nc" id="L180">        return area;</span>
+    }
+    
+    private void renderResize()
+    {
+<span class="nc bnc" id="L185" title="All 2 branches missed.">        if (displayXSize != 0)</span>
+        {
+<span class="nc" id="L187">            image.addAttribute(ImageAttributes.Width, displayXSize + &quot;px&quot;);</span>
+<span class="nc" id="L188">            image.addAttribute(ImageAttributes.Height, displayYSize + &quot;px&quot;);</span>
+
+<span class="nc" id="L190">            int ratioXDifference = (int) (new Double(displayXSize) / new Double(imageXSize));</span>
+<span class="nc" id="L191">            int ratioYDifference = (int) (new Double(displayYSize) / new Double(imageYSize));</span>
+
+            int[] xArray;
+            int[] yArray;
+<span class="nc bnc" id="L195" title="All 6 branches missed.">            if (!(ratioXDifference == 1 &amp;&amp; ratioYDifference == 1) &amp;&amp; !ratioConfigured)</span>
+            {
+<span class="nc" id="L197">                ratioConfigured = true;</span>
+<span class="nc bnc" id="L198" title="All 2 branches missed.">                for (Iterator&lt;ComponentHierarchyBase&gt; it = this.map.getChildren().iterator(); it.hasNext();)</span>
+                {
+<span class="nc" id="L200">                    Area area = (Area) it.next();</span>
+<span class="nc" id="L201">                    int[][] allPoints = area.getCoordinatesArray();</span>
+<span class="nc" id="L202">                    xArray = new int[allPoints.length];</span>
+<span class="nc" id="L203">                    yArray = new int[allPoints.length];</span>
+<span class="nc" id="L204">                    int xTotal = 0;</span>
+<span class="nc" id="L205">                    int yTotal = 0;</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">                    for (int i = 0; i &lt; allPoints.length; i++)</span>
+                    {
+<span class="nc" id="L208">                        int[] is = allPoints[i];</span>
+<span class="nc" id="L209">                        xArray[i] = (int) (is[0] * ratioXDifference);</span>
+<span class="nc" id="L210">                        xTotal += xArray[i];</span>
+<span class="nc" id="L211">                        yArray[i] = (int) (is[1] * ratioYDifference);</span>
+<span class="nc" id="L212">                        yTotal += yArray[i];</span>
+                    }
+
+<span class="nc" id="L215">                    String coords = &quot;&quot;;</span>
+<span class="nc bnc" id="L216" title="All 2 branches missed.">                    for (int i = 0; i &lt; xArray.length; i++)</span>
+                    {
+<span class="nc" id="L218">                        int j = xArray[i];</span>
+<span class="nc" id="L219">                        int k = yArray[i];</span>
+<span class="nc" id="L220">                        coords += j + &quot;,&quot; + k + &quot;,&quot;;</span>
+                    }
+<span class="nc" id="L222">                    coords = coords.substring(0, (coords.length() - 1));</span>
+<span class="nc" id="L223">                    area.setCoordinates(coords);</span>
+<span class="nc" id="L224">                }</span>
+            }
+        }
+<span class="nc" id="L227">    }</span>
+
+    @Override
+    public void preConfigure()
+    {
+<span class="nc bnc" id="L232" title="All 2 branches missed.">        if (isInteractive())</span>
+        {
+<span class="nc" id="L234">            addFeature(defaultProperties);</span>
+        }
+
+<span class="nc bnc" id="L237" title="All 2 branches missed.">        if (isHeatmap())</span>
+        {
+<span class="nc" id="L239">            addFeature(defaultProperties);</span>
+<span class="nc" id="L240">            addFeature(heatMap);</span>
+<span class="nc bnc" id="L241" title="All 2 branches missed.">            if (isLegend())</span>
+            {
+<span class="nc" id="L243">                gradientFeature.setFromColour(this.heatMap.getColourMin());</span>
+<span class="nc" id="L244">                gradientFeature.setToColour(this.heatMap.getColourMax());</span>
+<span class="nc" id="L245">                gradientFeature.setDirection(&quot;vertical&quot;);</span>
+<span class="nc" id="L246">                addFeature(legendFeature);</span>
+<span class="nc" id="L247">                addFeature(gradientFeature);</span>
+<span class="nc bnc" id="L248" title="All 2 branches missed.">                if (!getChildren().contains(legendFeature.getLayoutDiv()))</span>
+                {
+<span class="nc" id="L250">                    getChildren().add(getChildren().size(), legendFeature.getLayoutDiv());</span>
+                }
+            }
+
+<span class="nc" id="L254">            double totalValue = 0.0;</span>
+<span class="nc" id="L255">            ArrayList&lt;Double&gt; values = new ArrayList();</span>
+<span class="nc bnc" id="L256" title="All 2 branches missed.">            for (Iterator&lt;ComponentHierarchyBase&gt; it = this.map.getChildren().iterator(); it.hasNext();)</span>
+            {
+<span class="nc" id="L258">                Area area = (Area) it.next();</span>
+<span class="nc" id="L259">                totalValue += area.getValue();</span>
+<span class="nc" id="L260">                values.add(area.getValue());</span>
+<span class="nc" id="L261">            }</span>
+<span class="nc" id="L262">            heatMap.setValues(values);</span>
+<span class="nc bnc" id="L263" title="All 2 branches missed.">            for (Iterator&lt;ComponentHierarchyBase&gt; it = this.map.getChildren().iterator(); it.hasNext();)</span>
+            {
+<span class="nc" id="L265">                Area area = (Area) it.next();</span>
+<span class="nc" id="L266">                area.getInteractiveProperties().addProperty(JQMapInteractiveFeature.InteractiveFeatureProperties.overlayColorPermanent, heatMap.getColourForValue(area.getValue()));</span>
+<span class="nc" id="L267">            }</span>
+        }
+
+<span class="nc bnc" id="L270" title="All 4 branches missed.">        if (isLabeled() || isValueDisplayed())</span>
+        {
+<span class="nc bnc" id="L272" title="All 2 branches missed.">            if (!(getChildren().contains(labelHeadDiv)))</span>
+            {
+<span class="nc" id="L274">                ArrayList&lt;ComponentHierarchyBase&gt; alreadyAdded = new ArrayList();</span>
+<span class="nc bnc" id="L275" title="All 2 branches missed.">                for (Iterator&lt;ComponentHierarchyBase&gt; it = this.map.getChildren().iterator(); it.hasNext();)</span>
+                {
+<span class="nc" id="L277">                    Area area = (Area) it.next();</span>
+<span class="nc bnc" id="L278" title="All 2 branches missed.">                    if (alreadyAdded.contains(area))</span>
+                    {
+<span class="nc" id="L280">                        continue;</span>
+                    }
+<span class="nc" id="L282">                    alreadyAdded.add(area);</span>
+<span class="nc" id="L283">                    Span areaLableDiv = new Span();</span>
+<span class="nc" id="L284">                    areaLableDiv.getCss().setPosition(Positions.Absolute);</span>
+<span class="nc" id="L285">                    areaLableDiv.setText(&quot;&quot;);</span>
+<span class="nc" id="L286">                    areaLableDiv.addAttribute(GlobalAttributes.Style, &quot;color:#000000 !important&quot;);</span>
+<span class="nc bnc" id="L287" title="All 2 branches missed.">                    if (isLabeled())</span>
+                    {
+<span class="nc" id="L289">                        areaLableDiv.setText(area.getAttribute(GlobalAttributes.Name));</span>
+                    }
+<span class="nc bnc" id="L291" title="All 2 branches missed.">                    if (isValueDisplayed())</span>
+                    {
+<span class="nc" id="L293">                        areaLableDiv.setText(areaLableDiv.getText(0) + &quot;&lt;br&gt;&quot; + area.getPrettyValue());</span>
+                    }
+
+                    class Binder extends Feature&lt;JavaScriptPart, Binder&gt;
+                    {
+
+                        Span label;
+                        Area area;
+
+                        public Binder(Span label, Area area)
+<span class="nc" id="L303">                        {</span>
+<span class="nc" id="L304">                            super(&quot;Image Map Label Binder&quot;);</span>
+<span class="nc" id="L305">                            this.label = label;</span>
+<span class="nc" id="L306">                            this.area = area;</span>
+<span class="nc" id="L307">                        }</span>
+
+                        @Override
+                        public void assignFunctionsToComponent()
+                        {
+
+<span class="nc" id="L313">                            addQuery(&quot;$('#&quot; + label.getID() + &quot;').bind('click', function(event) {$('#&quot; + area.getID() + &quot;').click();});&quot;);</span>
+<span class="nc" id="L314">                            addQuery(&quot;$('#&quot; + label.getID() + &quot;').bind('hover', function(event) {$('#&quot; + area.getID() + &quot;').hover();});&quot;);</span>
+<span class="nc" id="L315">                            addQuery(&quot;$('#&quot; + label.getID() + &quot;').bind('mouseover', function(event) {$('#&quot; + area.getID() + &quot;').mouseover();});&quot;);</span>
+<span class="nc" id="L316">                            addQuery(&quot;$('#&quot; + label.getID() + &quot;').bind('mouseout', function(event) {$('#&quot; + area.getID() + &quot;').mouseout();});&quot;);</span>
+<span class="nc" id="L317">                        }</span>
+                    }
+
+<span class="nc" id="L320">                    areaLableDiv.addAttribute(GlobalAttributes.Style, &quot;position:absolute&quot;);</span>
+<span class="nc" id="L321">                    areaLableDiv.addFeature(new Binder(areaLableDiv, area));</span>
+                    //int[] center = PolygonUtils.getCenterPointOfPolygon(area.getCoordinates());
+                    //areaLableDiv.addAttribute(GlobalAttributes.Style, &quot;position:absolute;top:&quot; + center[0] + &quot;;left:&quot;+ center[1]);
+<span class="nc" id="L324">                    areaLableDiv.addFeature(new JQUIPositionFeature(areaLableDiv, new Position(PositionLocationHorizontal.center, PositionLocationVertical.center, PositionLocationHorizontal.center, PositionLocationVertical.center, area)));</span>
+<span class="nc" id="L325">                    area.add(areaLableDiv);</span>
+                    //add(areaLableDiv);
+<span class="nc" id="L327">                }</span>
+                //add(labelHeadDiv);
+            }
+        }
+
+<span class="nc bnc" id="L332" title="All 2 branches missed.">        for (Iterator&lt;ComponentHierarchyBase&gt; it = this.map.getChildren().iterator(); it.hasNext();)</span>
+        {
+<span class="nc" id="L334">            Area area = (Area) it.next();</span>
+<span class="nc" id="L335">            area.addAttribute(AreaAttributes.Data_MapHilight, &quot;{&quot; + area.getInteractiveProperties().getProperties(true) + &quot;}&quot;);</span>
+<span class="nc" id="L336">        }</span>
+        //setPosition(Positions.Absolute);
+<span class="nc" id="L338">        super.preConfigure();</span>
+<span class="nc" id="L339">    }</span>
+
+    /**
+     * Returns the default properties
+     *
+     * @return
+     */
+    public JQMapInteractiveFeature getDefaultProperties()
+    {
+<span class="nc" id="L348">        return defaultProperties;</span>
+    }
+
+    /**
+     * Sets the default properties
+     *
+     * @param defaultProperties
+     */
+    public void setDefaultProperties(JQMapInteractiveFeature defaultProperties)
+    {
+<span class="nc" id="L358">        this.defaultProperties = defaultProperties;</span>
+<span class="nc" id="L359">    }</span>
+
+    /**
+     * Return the current map object
+     *
+     * @return
+     */
+    public Map getMap()
+    {
+<span class="nc" id="L368">        return map;</span>
+    }
+
+    /**
+     * Sets the current map object
+     *
+     * @param map
+     */
+    public void setMap(Map map)
+    {
+<span class="nc" id="L378">        this.map = map;</span>
+<span class="nc" id="L379">    }</span>
+
+    /**
+     * Returns the associated image
+     *
+     * @return
+     */
+    public Image getImage()
+    {
+<span class="nc" id="L388">        return image;</span>
+    }
+
+    /**
+     * Sets the associated image
+     *
+     * @param image
+     */
+    public void setImage(Image image)
+    {
+<span class="nc" id="L398">        this.image = image;</span>
+<span class="nc" id="L399">    }</span>
+
+    /**
+     * Returns the Map Image URL
+     *
+     * @return
+     */
+    public String getMapImageUrl()
+    {
+<span class="nc" id="L408">        return mapImageUrl;</span>
+    }
+
+    /**
+     * Sets the map image url
+     *
+     * @param mapImageUrl
+     */
+    public void setMapImageUrl(String mapImageUrl)
+    {
+<span class="nc" id="L418">        this.mapImageUrl = mapImageUrl;</span>
+<span class="nc" id="L419">    }</span>
+
+    /**
+     * If this map is a heat map
+     *
+     * @return
+     */
+    public boolean isHeatmap()
+    {
+<span class="nc" id="L428">        return heatmap;</span>
+    }
+
+    /**
+     * If this map is a heatmap
+     *
+     * @param heatmap
+     */
+    public void setHeatmap(boolean heatmap)
+    {
+<span class="nc" id="L438">        this.heatmap = heatmap;</span>
+<span class="nc" id="L439">    }</span>
+
+    /**
+     * If this map is interactive
+     *
+     * @return
+     */
+    public boolean isInteractive()
+    {
+<span class="nc" id="L448">        return interactive;</span>
+    }
+
+    /**
+     * If this map has a legend
+     *
+     * @return
+     */
+    public boolean isLegend()
+    {
+<span class="nc" id="L458">        return legend;</span>
+    }
+
+    /**
+     * If this map has a legend
+     *
+     * @param legend
+     */
+    public void setLegend(boolean legend)
+    {
+<span class="nc" id="L468">        this.legend = legend;</span>
+<span class="nc" id="L469">    }</span>
+
+    /**
+     * If this map is interactive
+     *
+     * @param interactive
+     */
+    public void setInteractive(boolean interactive)
+    {
+<span class="nc" id="L478">        this.interactive = interactive;</span>
+<span class="nc bnc" id="L479" title="All 2 branches missed.">        if (isInteractive())</span>
+        {
+<span class="nc" id="L481">            addFeature(defaultProperties);</span>
+        }
+        else
+        {
+<span class="nc" id="L485">            removeFeature(defaultProperties);</span>
+        }
+<span class="nc" id="L487">    }</span>
+
+    /**
+     * Image x size
+     *
+     * @return
+     */
+    public int getImageXSize()
+    {
+<span class="nc" id="L496">        return imageXSize;</span>
+    }
+
+    /**
+     * Image x size
+     *
+     * @param imageXSize
+     */
+    public void setImageXSize(int imageXSize)
+    {
+<span class="nc" id="L506">        this.imageXSize = imageXSize;</span>
+<span class="nc" id="L507">    }</span>
+
+    /**
+     * Image Y size
+     *
+     * @return
+     */
+    public int getImageYSize()
+    {
+<span class="nc" id="L516">        return imageYSize;</span>
+    }
+
+    /**
+     * Is value displayed
+     *
+     * @return
+     */
+    public boolean isValueDisplayed()
+    {
+<span class="nc" id="L526">        return valueDisplayed;</span>
+    }
+
+    /**
+     * Is value displayed
+     *
+     * @param valueDisplayed
+     */
+    public void setValueDisplayed(boolean valueDisplayed)
+    {
+<span class="nc" id="L536">        this.valueDisplayed = valueDisplayed;</span>
+<span class="nc" id="L537">    }</span>
+
+    /**
+     * Set image y size
+     *
+     * @param imageYSize
+     */
+    public void setImageYSize(int imageYSize)
+    {
+<span class="nc" id="L546">        this.imageYSize = imageYSize;</span>
+<span class="nc" id="L547">    }</span>
+
+    /**
+     * Display X Size
+     *
+     * @return
+     */
+    public int getDisplayXSize()
+    {
+<span class="nc" id="L556">        return displayXSize;</span>
+    }
+
+    /**
+     * Display X size
+     *
+     * @param displayXSize
+     */
+    public void setDisplayXSize(int displayXSize)
+    {
+<span class="nc" id="L566">        this.displayXSize = displayXSize;</span>
+<span class="nc" id="L567">    }</span>
+
+    /**
+     * Display Y size
+     *
+     * @return
+     */
+    public int getDisplayYSize()
+    {
+<span class="nc" id="L576">        return displayYSize;</span>
+    }
+
+    /**
+     * Display Y size
+     *
+     * @param displayYSize
+     */
+    public void setDisplayYSize(int displayYSize)
+    {
+<span class="nc" id="L586">        this.displayYSize = displayYSize;</span>
+<span class="nc" id="L587">    }</span>
+
+    /**
+     * Set is labeled
+     *
+     * @return
+     */
+    public boolean isLabeled()
+    {
+<span class="nc" id="L596">        return labeled;</span>
+    }
+
+    /**
+     * Set is labeled
+     *
+     * @param labeled
+     */
+    public void setLabeled(boolean labeled)
+    {
+<span class="nc" id="L606">        this.labeled = labeled;</span>
+<span class="nc" id="L607">    }</span>
+
+    /**
+     * Return the heat map options
+     *
+     * @return
+     */
+    public JQImageHeatMapFeature getHeatMap()
+    {
+<span class="nc" id="L616">        return heatMap;</span>
+    }
+
+    /**
+     * Available image area shapes
+     */
+<span class="pc" id="L622">    public enum ImageMapAreaShapes</span>
+    {
+<span class="fc" id="L624">        Default,</span>
+<span class="fc" id="L625">        Rect,</span>
+<span class="fc" id="L626">        Circle,</span>
+<span class="fc" id="L627">        Poly;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

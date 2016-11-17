@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQPlotLegendRendererEnhancedOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqplot.options.legends</a> &gt; <span class="el_source">JQPlotLegendRendererEnhancedOptions.java</span></div><h1>JQPlotLegendRendererEnhancedOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqplot.options.legends;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import za.co.mmagon.jwebswing.components.jqplot.JQPlotGraph;
+import za.co.mmagon.jwebswing.components.jqplot.parts.interfaces.JQPlotLegendRenderer;
+import za.co.mmagon.jwebswing.components.jqplot.references.JQPlotJavascriptReferencePool;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ * @author GedMarc
+ * @since 1 Mar 2016
+ */
+public class JQPlotLegendRendererEnhancedOptions extends JavaScriptPart implements JQPlotLegendRenderer
+{
+
+    @JsonIgnore
+    private JQPlotGraph linkedGraph;
+
+    /**
+     * The Default Axis Label Renderer Options
+     *
+     * @param linkedGraph
+     */
+    public JQPlotLegendRendererEnhancedOptions(JQPlotGraph linkedGraph)
+<span class="nc" id="L43">    {</span>
+<span class="nc" id="L44">        this.linkedGraph = linkedGraph;</span>
+<span class="nc" id="L45">        linkedGraph.getJavascriptReferences().add(JQPlotJavascriptReferencePool.EnhancedLegenedRenderer.getReference());</span>
+<span class="nc" id="L46">    }</span>
+
+    @JsonProperty(&quot;renderer&quot;)
+    @JsonRawValue
+    @JsonIgnore
+    @Override
+    public String getRenderer()
+    {
+<span class="nc" id="L54">        return &quot;$.jqplot.EnhancedLegendRenderer&quot;;</span>
+    }
+
+    /**
+     * Gets the linked graph
+     *
+     * @return
+     */
+    public JQPlotGraph getLinkedGraph()
+    {
+<span class="nc" id="L64">        return linkedGraph;</span>
+    }
+
+    /**
+     * Sets the linked graph
+     *
+     * @param linkedGraph
+     */
+    public void setLinkedGraph(JQPlotGraph linkedGraph)
+    {
+<span class="nc" id="L74">        this.linkedGraph = linkedGraph;</span>
+<span class="nc" id="L75">    }</span>
+    /**
+     * Maximum number of rows in the legend.
+     */
+    private Integer numberRows;
+    /**
+     * Maximum number of columns in the legend.
+     */
+    private Integer numberColumns;
+    /**
+     * false to not enable series on/off toggling on the legend.
+     */
+    private Boolean seriesToggle;
+    /**
+     * True to replot the chart after toggling series on/off.
+     */
+    private Boolean seriesToggleReplot;
+    /**
+     * true to toggle series with a show/hide method only and not allow fading in/out.
+     */
+    private Boolean disableIEFading;
+
+    /**
+     * Maximum number of rows in the legend.
+     *
+     * @return
+     */
+    public Integer getNumberRows()
+    {
+<span class="nc" id="L104">        return numberRows;</span>
+    }
+
+    /**
+     * Maximum number of rows in the legend.
+     *
+     * @param numberRows
+     */
+    public void setNumberRows(Integer numberRows)
+    {
+<span class="nc" id="L114">        this.numberRows = numberRows;</span>
+<span class="nc" id="L115">    }</span>
+
+    /**
+     * Maximum number of columns in the legend.
+     *
+     * @return
+     */
+    public Integer getNumberColumns()
+    {
+<span class="nc" id="L124">        return numberColumns;</span>
+    }
+
+    /**
+     * Maximum number of columns in the legend.
+     *
+     * @param numberColumns
+     */
+    public void setNumberColumns(Integer numberColumns)
+    {
+<span class="nc" id="L134">        this.numberColumns = numberColumns;</span>
+<span class="nc" id="L135">    }</span>
+
+    /**
+     * false to not enable series on/off toggling on the legend.
+     *
+     * @return
+     */
+    public Boolean getSeriesToggle()
+    {
+<span class="nc" id="L144">        return seriesToggle;</span>
+    }
+
+    /**
+     * false to not enable series on/off toggling on the legend.
+     *
+     * @param seriesToggle
+     */
+    public void setSeriesToggle(Boolean seriesToggle)
+    {
+<span class="nc" id="L154">        this.seriesToggle = seriesToggle;</span>
+<span class="nc" id="L155">    }</span>
+
+    /**
+     * True to replot the chart after toggling series on/off.
+     *
+     * @return
+     */
+    public Boolean getSeriesToggleReplot()
+    {
+<span class="nc" id="L164">        return seriesToggleReplot;</span>
+    }
+
+    /**
+     * True to replot the chart after toggling series on/off.
+     *
+     * @param seriesToggleReplot
+     */
+    public void setSeriesToggleReplot(Boolean seriesToggleReplot)
+    {
+<span class="nc" id="L174">        this.seriesToggleReplot = seriesToggleReplot;</span>
+<span class="nc" id="L175">    }</span>
+
+    /**
+     * true to toggle series with a show/hide method only and not allow fading in/out.
+     *
+     * @return
+     */
+    public Boolean getDisableIEFading()
+    {
+<span class="nc" id="L184">        return disableIEFading;</span>
+    }
+
+    /**
+     * true to toggle series with a show/hide method only and not allow fading in/out.
+     *
+     * @param disableIEFading
+     */
+    public void setDisableIEFading(Boolean disableIEFading)
+    {
+<span class="nc" id="L194">        this.disableIEFading = disableIEFading;</span>
+<span class="nc" id="L195">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQXDefaultJavaScriptPart.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqxwidgets</a> &gt; <span class="el_source">JQXDefaultJavaScriptPart.java</span></div><h1>JQXDefaultJavaScriptPart.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 MXM3727
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqxwidgets;
+
+import za.co.mmagon.jwebswing.components.jqxwidgets.themes.JQXWidgetThemes;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ *
+ * @author MXM3727
+ */
+<span class="fc" id="L27">public class JQXDefaultJavaScriptPart extends JavaScriptPart</span>
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * The theme of the component
+     */
+    private String theme;
+    /**
+     * The width of the component
+     */
+    private String width;
+    /**
+     * The height of the component
+     */
+    private String height;
+
+    /**
+     * Sets the theme for JQX
+     *
+     * @return
+     */
+    public String getTheme()
+    {
+<span class="nc" id="L52">        return theme;</span>
+    }
+
+    /**
+     * Sets the theme name for the JQX Library
+     *
+     * @param theme
+     */
+    public void setTheme(String theme)
+    {
+<span class="fc" id="L62">        this.theme = theme;</span>
+<span class="fc" id="L63">    }</span>
+
+    /**
+     * Sets the theme for the JQX Library
+     *
+     * @param theme
+     */
+    public void setTheme(JQXWidgetThemes theme)
+    {
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if (theme != null)</span>
+        {
+<span class="fc" id="L74">            this.theme = theme.toString();</span>
+        }
+<span class="fc" id="L76">    }</span>
+
+    /**
+     * Returns the width of the component
+     *
+     * @return
+     */
+    public String getWidth()
+    {
+<span class="nc" id="L85">        return width;</span>
+    }
+
+    /**
+     * Sets the width of the component
+     *
+     * @param width
+     */
+    public void setWidth(Integer width)
+    {
+<span class="fc" id="L95">        this.width = width.toString();</span>
+<span class="fc" id="L96">    }</span>
+
+    /**
+     * Sets the width of the component
+     *
+     * @param width
+     */
+    public void setWidth(MeasurementCSSImpl width)
+    {
+<span class="fc" id="L105">        this.width = width.toString(false);</span>
+<span class="fc" id="L106">    }</span>
+
+    /**
+     * Gets the height of the component
+     *
+     * @return
+     */
+    public String getHeight()
+    {
+<span class="nc" id="L115">        return height;</span>
+    }
+
+    /**
+     * Sets the height of the component
+     *
+     * @param height
+     */
+    public void setHeight(Integer height)
+    {
+<span class="fc" id="L125">        this.height = height.toString();</span>
+<span class="fc" id="L126">    }</span>
+
+    /**
+     * Sets the height of the component
+     *
+     * @param height
+     */
+    public void setHeight(MeasurementCSSImpl height)
+    {
+<span class="fc" id="L135">        this.height = height.toString(false);</span>
+<span class="fc" id="L136">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

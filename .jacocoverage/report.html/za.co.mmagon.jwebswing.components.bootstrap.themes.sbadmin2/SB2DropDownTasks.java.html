@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SB2DropDownTasks.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2</a> &gt; <span class="el_source">SB2DropDownTasks.java</span></div><h1>SB2DropDownTasks.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import za.co.mmagon.jwebswing.base.html.Bold;
+import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.base.html.Link;
+import za.co.mmagon.jwebswing.base.html.ListItem;
+import za.co.mmagon.jwebswing.base.html.Paragraph;
+import za.co.mmagon.jwebswing.base.html.Span;
+import za.co.mmagon.jwebswing.components.bootstrap.progressbar.BSProgressBar;
+import za.co.mmagon.jwebswing.components.bootstrap.progressbar.bar.BSProgressBarThemes;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ * A shortcut class to building drop down message types
+ *
+ * @author GedMarc
+ * @since Oct 4, 2016
+ * @version 1.0
+ *
+ */
+public class SB2DropDownTasks extends SB2DropDown
+{
+
+    private static final long serialVersionUID = 1L;
+
+    private ArrayList&lt;SB2DropDownTask&gt; messages;
+
+    @Override
+    public void preConfigure()
+    {
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        if (!isConfigured())</span>
+        {
+<span class="nc" id="L52">            messages.stream().map((message)</span>
+                    -&gt; 
+                    {
+<span class="nc" id="L55">                        ListItem li = new ListItem();</span>
+<span class="nc" id="L56">                        Link link = new Link(&quot;#&quot;);</span>
+<span class="nc" id="L57">                        Div container = new Div();</span>
+<span class="nc" id="L58">                        Paragraph topSection = new Paragraph();</span>
+<span class="nc" id="L59">                        Span span = new Span();</span>
+<span class="nc" id="L60">                        span.addClass(&quot;pull-right&quot;);</span>
+<span class="nc" id="L61">                        span.addClass(&quot;text-muted&quot;);</span>
+<span class="nc" id="L62">                        span.setText(message.getPercentage() + &quot;% Complete&quot;);</span>
+                        
+<span class="nc" id="L64">                        topSection.add(new Bold(message.getName()));</span>
+<span class="nc" id="L65">                        topSection.add(span);</span>
+                        
+<span class="nc" id="L67">                        BSProgressBar progressBar = new BSProgressBar(true);</span>
+<span class="nc" id="L68">                        progressBar.getProgressBar().setMin(0);</span>
+<span class="nc" id="L69">                        progressBar.getProgressBar().setMax(100);</span>
+<span class="nc" id="L70">                        progressBar.getProgressBar().setValue(message.getPercentage());</span>
+<span class="nc" id="L71">                        progressBar.getProgressBar().setLabel(&quot;&quot; + message.getPercentage() + &quot; % Complete&quot;);</span>
+<span class="nc" id="L72">                        progressBar.setActive(true);</span>
+<span class="nc" id="L73">                        progressBar.getProgressBar().setTheme(BSProgressBarThemes.valueOf(message.getData()));</span>
+                        //progressBar.add(message.getMessage());
+                        
+<span class="nc" id="L76">                        container.add(topSection);</span>
+<span class="nc" id="L77">                        container.add(progressBar);</span>
+<span class="nc" id="L78">                        li.add(link);</span>
+<span class="nc" id="L79">                        link.add(container);</span>
+                        
+<span class="nc" id="L81">                        return li;</span>
+<span class="nc" id="L82">            }).forEach((li)</span>
+                    -&gt; 
+                    {
+<span class="nc" id="L85">                        getDropDownContents().add(li);</span>
+<span class="nc" id="L86">                        addDivider();</span>
+<span class="nc" id="L87">            });</span>
+        }
+<span class="nc" id="L89">        super.preConfigure();</span>
+<span class="nc" id="L90">    }</span>
+
+    /**
+     * Construct a new sb admin 2 dropdown formatted as messages
+     */
+    public SB2DropDownTasks()
+    {
+<span class="nc" id="L97">        this(null);</span>
+<span class="nc" id="L98">    }</span>
+
+    /**
+     * Construct a new sb admin 2 dropdown formatted as messages
+     *
+     * @param messages
+     */
+    public SB2DropDownTasks(ArrayList&lt;SB2DropDownTask&gt; messages)
+<span class="nc" id="L106">    {</span>
+<span class="nc" id="L107">        this.messages = messages;</span>
+<span class="nc" id="L108">        getDropDownContents().addClass(SB2ThemeClasses.DropDown_Tasks);</span>
+<span class="nc" id="L109">    }</span>
+
+    /**
+     * Returns the current messages
+     *
+     * @return
+     */
+    public ArrayList&lt;SB2DropDownTask&gt; getMessages()
+    {
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        if (messages == null)</span>
+        {
+<span class="nc" id="L120">            messages = new ArrayList&lt;&gt;();</span>
+        }
+<span class="nc" id="L122">        return messages;</span>
+    }
+
+    /**
+     * Sets the current messages array list
+     *
+     * @param messages
+     */
+    public void setMessages(ArrayList&lt;SB2DropDownTask&gt; messages)
+    {
+<span class="nc" id="L132">        this.messages = messages;</span>
+<span class="nc" id="L133">    }</span>
+
+    /**
+     * Read from a URL
+     * 
+     * @param content
+     * @return
+     * @throws IOException
+     */
+    public static SB2DropDownTasks fromUrl(URL content) throws IOException
+    {
+<span class="nc" id="L144">        ArrayList list2 = JavaScriptPart.FromToList(content, SB2DropDownTask[].class);</span>
+<span class="nc" id="L145">        SB2DropDownTasks messages = new SB2DropDownTasks(list2);</span>
+<span class="nc" id="L146">        messages.preConfigure();</span>
+<span class="nc" id="L147">        return messages;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

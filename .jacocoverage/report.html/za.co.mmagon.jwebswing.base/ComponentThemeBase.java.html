@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ComponentThemeBase.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base</a> &gt; <span class="el_source">ComponentThemeBase.java</span></div><h1>ComponentThemeBase.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 ged_m
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.base;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import java.util.ArrayList;
+import java.util.List;
+import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.interfaces.IComponentThemeBase;
+import za.co.mmagon.jwebswing.base.references.CSSReference; 
+import za.co.mmagon.jwebswing.base.references.JavascriptReference;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemeBlocks;
+import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemes;
+import za.co.mmagon.jwebswing.components.jqxwidgets.themes.JQXWidgetThemes;
+import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
+
+/**
+ * A Theme-Able Component.
+ * Only requirement is a tag, keeping it separate for the many different ways that other developers have done their themes
+ *
+ * @author GedMarc
+ * @param &lt;A&gt; Set of attributes
+ * @param &lt;F&gt; Any features attached
+ * @param &lt;E&gt; Any events
+ * @param &lt;J&gt; This class
+ * @since 23 Apr 2016
+ */
+public class ComponentThemeBase&lt;A extends Enum &amp; AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentBase&gt;
+        extends ComponentHTMLAngularBase&lt;A, F, E, J&gt; implements IComponentThemeBase&lt;J&gt;
+{
+
+    private static final long serialVersionUID = 1L;
+ 
+    /**
+     * The associated theme
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private ArrayList&lt;Theme&gt; themes;
+
+    /**
+     * Constructs a theme controller for a component
+     *
+     * @param componentType
+     */
+    public ComponentThemeBase(ComponentTypes componentType)
+    {
+<span class="fc" id="L64">        super(componentType);</span>
+<span class="fc" id="L65">    }</span>
+
+    /**
+     * Returns a Theme Base interface of this component
+     *
+     * @return
+     */
+    public IComponentThemeBase asThemeBase()
+    {
+<span class="nc" id="L74">        return (ComponentThemeBase) this;</span>
+    }
+
+    /**
+     * Adds in the JavaScript References for the Features
+     *
+     * @return
+     */
+    @Override
+    public List&lt;JavascriptReference&gt; getJavascriptReferencesAll()
+    {
+<span class="fc" id="L85">        List&lt;JavascriptReference&gt; allJs = super.getJavascriptReferencesAll();</span>
+<span class="fc" id="L86">        getThemes().stream().forEach((Theme feature)</span>
+                -&gt;
+                {
+<span class="pc bnc" id="L89" title="All 2 branches missed.">                    Theme.class.cast(feature).getJavascriptReferences().stream().filter((js) -&gt; (!allJs.contains(js))).forEach((js)</span>
+                            -&gt;
+                            {
+<span class="nc" id="L92">                                allJs.add(js);</span>
+<span class="nc" id="L93">                    });</span>
+<span class="fc" id="L94">        });</span>
+<span class="fc" id="L95">        return allJs;</span>
+    }
+
+    /**
+     * Adds in the JavaScript References for the Features
+     *
+     * @return
+     */
+    @Override
+    public List&lt;CSSReference&gt; getCssReferencesAll()
+    {
+<span class="fc" id="L106">        List&lt;CSSReference&gt; allCss = super.getCssReferencesAll();</span>
+<span class="fc" id="L107">        getThemes().stream().forEach((Theme feature)</span>
+                -&gt;
+                {
+<span class="fc bfc" id="L110" title="All 2 branches covered.">                    Theme.class.cast(feature).getCssReferences().stream().filter((css) -&gt; (!allCss.contains(css))).forEach((css)</span>
+                            -&gt;
+                            {
+<span class="fc" id="L113">                                allCss.add(css);</span>
+<span class="fc" id="L114">                    });</span>
+<span class="fc" id="L115">        });</span>
+<span class="fc" id="L116">        return allCss;</span>
+    }
+
+    /**
+     * Set the theme applied to this component
+     * &lt;p&gt;
+     * @param theme The JQuery UI theme to apply to the component
+     */
+    @Override
+    public J addTheme(JQUIThemes theme)
+    {
+<span class="fc" id="L127">        addTheme(theme.getTheme());</span>
+<span class="fc" id="L128">        return (J) this;</span>
+    }
+    
+    /**
+     * Set the theme applied to this component
+     * &lt;p&gt;
+     * @param theme The JQuery UI theme to apply to the component
+     */
+    @Override 
+    public J addTheme(JQXWidgetThemes theme)
+    {
+<span class="nc" id="L139">        addTheme(theme.getTheme());</span>
+<span class="nc" id="L140">        return (J) this;</span>
+    }
+
+    /**
+     * Set the theme applied to this component
+     * &lt;p&gt;
+     * @param theme The JQuery UI theme to apply to the component
+     */
+    @Override
+    public J addTheme(Theme theme)
+    {
+<span class="pc bpc" id="L151" title="1 of 2 branches missed.">        if (theme != null)</span>
+        {
+<span class="pc bpc" id="L153" title="1 of 2 branches missed.">            if (!getThemes().contains(theme))</span>
+            {
+<span class="fc" id="L155">                getThemes().add(theme);</span>
+<span class="fc" id="L156">                addClass(theme.getClassName());</span>
+            }
+        }
+<span class="fc" id="L159">        return (J) this;</span>
+    }
+    
+    /**
+     * Adds a class name to the class list
+     * &lt;p&gt;
+     * @param blockName The class name to add
+     * &lt;p&gt;
+     * @return True if it was added, false if it already existed
+     */
+    @Override
+    public boolean addClass(JQUIThemeBlocks blockName)
+    {
+<span class="fc" id="L172">        String className = blockName.toString();</span>
+<span class="pc bpc" id="L173" title="1 of 2 branches missed.">        if (!getClasses().contains(className))</span>
+        {
+<span class="fc" id="L175">            getClasses().add(className);</span>
+<span class="fc" id="L176">            return true;</span>
+        }
+        else
+        {
+<span class="nc" id="L180">            return false;</span>
+        }
+    }
+
+    /**
+     * Returns the parents theme or the applied theme
+     * &lt;p&gt;
+     * @return The theme
+     */
+    @Override
+    public List&lt;Theme&gt; getThemes()
+    {
+<span class="fc bfc" id="L192" title="All 2 branches covered.">        if (this.themes == null)</span>
+        {
+<span class="fc" id="L194">            this.themes = new ArrayList&lt;&gt;();</span>
+        }
+<span class="fc" id="L196">        return this.themes;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

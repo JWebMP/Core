@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Address.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">Address.java</span></div><h1>Address.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html;
+
+import java.io.Serializable;
+import za.co.mmagon.LoggerFactory;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.AddressChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+
+/**
+ * &lt;p&gt;
+ * Definition and Usage&lt;p&gt;
+ * &lt;p&gt;
+ * The &amp;gt;address&amp;lt; tag defines the contact information for the author/owner of a document or an article.&lt;p&gt;
+ * &lt;p&gt;
+ * If the &amp;gt;address&amp;lt; element is inside the &amp;gt;body&amp;lt; element, it represents contact information for the document.&lt;p&gt;
+ * &lt;p&gt;
+ * If the &amp;gt;address&amp;lt; element is inside an &amp;gt;article&amp;lt; element, it represents contact information for that article.&lt;p&gt;
+ * &lt;p&gt;
+ * The text in the &amp;gt;address&amp;lt; element usually renders in italic. Most browsers will add a line break before and after the address element.&lt;p&gt;
+ * Browser Support Element &amp;gt;address&amp;lt; Yes Yes Yes Yes&lt;p&gt;
+ * Yes
+ *
+ * Tips and Notes
+ *
+ * Tip: The &amp;gt;address&amp;lt; tag should NOT be used to describe a postal address, unless it is a part of the contact information.
+ *
+ * Tip: The &amp;gt;address&amp;lt; element will typically be included along with other information in a &amp;gt;footer&amp;lt; element. Differences Between HTML 4.01 and HTML5
+ *
+ * HTML 4.01 does not support the &amp;gt;article&amp;lt; tag, so in HTML 4.01 the &amp;gt;address&amp;lt; tag always defines the contact information of the document's author/owner. Global Attributes
+ *
+ * The &amp;gt;address&amp;lt; tag also supports the Global Attributes in HTML. Event Attributes
+ *
+ * The &amp;gt;address&amp;lt; tag also supports the Event Attributes in HTML.
+ *
+ * @since
+ * @version
+ * @author MMagon
+ *
+ *
+ */
+public class Address extends Component&lt;AddressChildren, NoAttributes, GlobalFeatures, GlobalEvents, Address&gt; implements NoNewLineBeforeClosingTag, NoNewLineForRawText, Serializable
+{
+
+    /**
+     * Logger for the Component
+     */
+<span class="fc" id="L52">    private static final org.apache.log4j.Logger log = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;Address&quot;);</span>
+    /**
+     * Serial Version for all Components and their compatibility
+     */
+    private static final long serialVersionUID = 1l;
+
+    /**
+     * Constructs a new address, usually displayed in italic
+     *
+     * @param address
+     */
+    public Address(String address)
+    {
+<span class="fc" id="L65">        super(ComponentTypes.Address.getComponentTag(), ComponentTypes.Address);</span>
+<span class="fc" id="L66">        setText(address);</span>
+<span class="fc" id="L67">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

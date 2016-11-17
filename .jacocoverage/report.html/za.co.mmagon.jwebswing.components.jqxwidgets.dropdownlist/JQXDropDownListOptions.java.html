@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQXDropDownListOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqxwidgets.dropdownlist</a> &gt; <span class="el_source">JQXDropDownListOptions.java</span></div><h1>JQXDropDownListOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqxwidgets.dropdownlist;
+
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import za.co.mmagon.jwebswing.components.jqxwidgets.JQXDefaultJavaScriptPart;
+import za.co.mmagon.jwebswing.components.jqxwidgets.JQXHorizontalAlignments;
+import za.co.mmagon.jwebswing.components.jqxwidgets.JQXSearchModes;
+import za.co.mmagon.jwebswing.components.jqxwidgets.dataadapter.JQXDataAdapter;
+import za.co.mmagon.jwebswing.htmlbuilder.effects.EasingEffects;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptFunction;
+
+/**
+ * All the options for the Drop Down List
+ * &lt;p&gt;
+ * @author GedMarc
+ * @since Mar 4, 2015
+ * @version 1.0
+ * &lt;p&gt;
+ * &lt;p&gt;
+ */
+public class JQXDropDownListOptions extends JQXDefaultJavaScriptPart
+{
+
+    private static final long serialVersionUID = 1L;
+
+    private Boolean autoOpen;// Boolean 	false
+    private Boolean autoDropDownHeight;//  Boolean 	false
+    private EasingEffects animationType;//  String 'slide'
+    private Boolean checkboxes;//  Boolean 	false
+    private Integer closeDelay;//  Number 	400
+    private Boolean disabled;//  Boolean 	false
+    private String displayMember;//  String 	&quot;&quot;
+    private JQXHorizontalAlignments dropDownHorizontalAlignment;//  String 'left'
+    private Integer dropDownHeight;//  Number 	200
+    private Integer number;//  	200
+    private Boolean enableSelection;//  Boolean 	true
+    private Boolean enableBrowserBoundsDetection;//  Boolean 	false
+    private Boolean enableHover;//  Boolean 	true
+    private Boolean filterable;//  Boolean 	false
+    private Integer filterHeight;//  Number 	27
+    private String filterDelay;//  Number 	100
+    private String filterPlaceHolder;//  String 	&quot;Looking for&quot;
+    private Boolean incrementalSearch;//  Boolean 	true
+    private Integer incrementalSearchDelay;//  Number 	700
+    private Integer itemHeight;//  Number 	-1
+    private Integer openDelay;//  Number 	350
+    private String placeHolder;//  String 	&quot;Please Choose:&quot;
+    private Integer popupZIndex;//  Number 	20000
+    private Boolean rtl;//  Boolean 	false
+    private JavascriptFunction renderer;// Function 	null
+    private JavascriptFunction selectionRenderer;// Function 	null
+    private JQXSearchModes searchMode;// String 	startswith
+    private Integer scrollBarSize;//  	Number 	17
+    @JsonRawValue
+    private JQXDataAdapter source;// Array 	null
+    private Integer selectedIndex;//  Number 	-1
+    private String valueMember;//  String
+
+    public JQXDropDownListOptions()
+<span class="nc" id="L75">    {</span>
+
+<span class="nc" id="L77">    }</span>
+
+    public Boolean getAutoOpen()
+    {
+<span class="nc" id="L81">        return autoOpen;</span>
+    }
+
+    public void setAutoOpen(Boolean autoOpen)
+    {
+<span class="nc" id="L86">        this.autoOpen = autoOpen;</span>
+<span class="nc" id="L87">    }</span>
+
+    public Boolean getAutoDropDownHeight()
+    {
+<span class="nc" id="L91">        return autoDropDownHeight;</span>
+    }
+
+    public void setAutoDropDownHeight(Boolean autoDropDownHeight)
+    {
+<span class="nc" id="L96">        this.autoDropDownHeight = autoDropDownHeight;</span>
+<span class="nc" id="L97">    }</span>
+
+    public EasingEffects getAnimationType()
+    {
+<span class="nc" id="L101">        return animationType;</span>
+    }
+
+    public void setAnimationType(EasingEffects animationType)
+    {
+<span class="nc" id="L106">        this.animationType = animationType;</span>
+<span class="nc" id="L107">    }</span>
+
+    public Boolean getCheckboxes()
+    {
+<span class="nc" id="L111">        return checkboxes;</span>
+    }
+
+    public void setCheckboxes(Boolean checkboxes)
+    {
+<span class="nc" id="L116">        this.checkboxes = checkboxes;</span>
+<span class="nc" id="L117">    }</span>
+
+    public Integer getCloseDelay()
+    {
+<span class="nc" id="L121">        return closeDelay;</span>
+    }
+
+    public void setCloseDelay(Integer closeDelay)
+    {
+<span class="nc" id="L126">        this.closeDelay = closeDelay;</span>
+<span class="nc" id="L127">    }</span>
+
+    public Boolean getDisabled()
+    {
+<span class="nc" id="L131">        return disabled;</span>
+    }
+
+    public void setDisabled(Boolean disabled)
+    {
+<span class="nc" id="L136">        this.disabled = disabled;</span>
+<span class="nc" id="L137">    }</span>
+
+    public String getDisplayMember()
+    {
+<span class="nc" id="L141">        return displayMember;</span>
+    }
+
+    public void setDisplayMember(String displayMember)
+    {
+<span class="nc" id="L146">        this.displayMember = displayMember;</span>
+<span class="nc" id="L147">    }</span>
+
+    public JQXHorizontalAlignments getDropDownHorizontalAlignment()
+    {
+<span class="nc" id="L151">        return dropDownHorizontalAlignment;</span>
+    }
+
+    public void setDropDownHorizontalAlignment(JQXHorizontalAlignments dropDownHorizontalAlignment)
+    {
+<span class="nc" id="L156">        this.dropDownHorizontalAlignment = dropDownHorizontalAlignment;</span>
+<span class="nc" id="L157">    }</span>
+
+    public Integer getDropDownHeight()
+    {
+<span class="nc" id="L161">        return dropDownHeight;</span>
+    }
+
+    public void setDropDownHeight(Integer dropDownHeight)
+    {
+<span class="nc" id="L166">        this.dropDownHeight = dropDownHeight;</span>
+<span class="nc" id="L167">    }</span>
+
+    public Integer getNumber()
+    {
+<span class="nc" id="L171">        return number;</span>
+    }
+
+    public void setNumber(Integer number)
+    {
+<span class="nc" id="L176">        this.number = number;</span>
+<span class="nc" id="L177">    }</span>
+
+    public Boolean getEnableSelection()
+    {
+<span class="nc" id="L181">        return enableSelection;</span>
+    }
+
+    public void setEnableSelection(Boolean enableSelection)
+    {
+<span class="nc" id="L186">        this.enableSelection = enableSelection;</span>
+<span class="nc" id="L187">    }</span>
+
+    public Boolean getEnableBrowserBoundsDetection()
+    {
+<span class="nc" id="L191">        return enableBrowserBoundsDetection;</span>
+    }
+
+    public void setEnableBrowserBoundsDetection(Boolean enableBrowserBoundsDetection)
+    {
+<span class="nc" id="L196">        this.enableBrowserBoundsDetection = enableBrowserBoundsDetection;</span>
+<span class="nc" id="L197">    }</span>
+
+    public Boolean getEnableHover()
+    {
+<span class="nc" id="L201">        return enableHover;</span>
+    }
+
+    public void setEnableHover(Boolean enableHover)
+    {
+<span class="nc" id="L206">        this.enableHover = enableHover;</span>
+<span class="nc" id="L207">    }</span>
+
+    public Boolean getFilterable()
+    {
+<span class="nc" id="L211">        return filterable;</span>
+    }
+
+    public void setFilterable(Boolean filterable)
+    {
+<span class="nc" id="L216">        this.filterable = filterable;</span>
+<span class="nc" id="L217">    }</span>
+
+    public Integer getFilterHeight()
+    {
+<span class="nc" id="L221">        return filterHeight;</span>
+    }
+
+    public void setFilterHeight(Integer filterHeight)
+    {
+<span class="nc" id="L226">        this.filterHeight = filterHeight;</span>
+<span class="nc" id="L227">    }</span>
+
+    public String getFilterDelay()
+    {
+<span class="nc" id="L231">        return filterDelay;</span>
+    }
+
+    public void setFilterDelay(String filterDelay)
+    {
+<span class="nc" id="L236">        this.filterDelay = filterDelay;</span>
+<span class="nc" id="L237">    }</span>
+
+    public String getFilterPlaceHolder()
+    {
+<span class="nc" id="L241">        return filterPlaceHolder;</span>
+    }
+
+    public void setFilterPlaceHolder(String filterPlaceHolder)
+    {
+<span class="nc" id="L246">        this.filterPlaceHolder = filterPlaceHolder;</span>
+<span class="nc" id="L247">    }</span>
+
+    public Boolean getIncrementalSearch()
+    {
+<span class="nc" id="L251">        return incrementalSearch;</span>
+    }
+
+    public void setIncrementalSearch(Boolean incrementalSearch)
+    {
+<span class="nc" id="L256">        this.incrementalSearch = incrementalSearch;</span>
+<span class="nc" id="L257">    }</span>
+
+    public Integer getIncrementalSearchDelay()
+    {
+<span class="nc" id="L261">        return incrementalSearchDelay;</span>
+    }
+
+    public void setIncrementalSearchDelay(Integer incrementalSearchDelay)
+    {
+<span class="nc" id="L266">        this.incrementalSearchDelay = incrementalSearchDelay;</span>
+<span class="nc" id="L267">    }</span>
+
+    public Integer getItemHeight()
+    {
+<span class="nc" id="L271">        return itemHeight;</span>
+    }
+
+    public void setItemHeight(Integer itemHeight)
+    {
+<span class="nc" id="L276">        this.itemHeight = itemHeight;</span>
+<span class="nc" id="L277">    }</span>
+
+    public Integer getOpenDelay()
+    {
+<span class="nc" id="L281">        return openDelay;</span>
+    }
+
+    public void setOpenDelay(Integer openDelay)
+    {
+<span class="nc" id="L286">        this.openDelay = openDelay;</span>
+<span class="nc" id="L287">    }</span>
+
+    public String getPlaceHolder()
+    {
+<span class="nc" id="L291">        return placeHolder;</span>
+    }
+
+    public void setPlaceHolder(String placeHolder)
+    {
+<span class="nc" id="L296">        this.placeHolder = placeHolder;</span>
+<span class="nc" id="L297">    }</span>
+
+    public Integer getPopupZIndex()
+    {
+<span class="nc" id="L301">        return popupZIndex;</span>
+    }
+
+    public void setPopupZIndex(Integer popupZIndex)
+    {
+<span class="nc" id="L306">        this.popupZIndex = popupZIndex;</span>
+<span class="nc" id="L307">    }</span>
+
+    public Boolean getRtl()
+    {
+<span class="nc" id="L311">        return rtl;</span>
+    }
+
+    public void setRtl(Boolean rtl)
+    {
+<span class="nc" id="L316">        this.rtl = rtl;</span>
+<span class="nc" id="L317">    }</span>
+
+    public JavascriptFunction getRenderer()
+    {
+<span class="nc" id="L321">        return renderer;</span>
+    }
+
+    public void setRenderer(JavascriptFunction renderer)
+    {
+<span class="nc" id="L326">        this.renderer = renderer;</span>
+<span class="nc" id="L327">    }</span>
+
+    public JavascriptFunction getSelectionRenderer()
+    {
+<span class="nc" id="L331">        return selectionRenderer;</span>
+    }
+
+    public void setSelectionRenderer(JavascriptFunction selectionRenderer)
+    {
+<span class="nc" id="L336">        this.selectionRenderer = selectionRenderer;</span>
+<span class="nc" id="L337">    }</span>
+
+    public JQXSearchModes getSearchMode()
+    {
+<span class="nc" id="L341">        return searchMode;</span>
+    }
+
+    public void setSearchMode(JQXSearchModes searchMode)
+    {
+<span class="nc" id="L346">        this.searchMode = searchMode;</span>
+<span class="nc" id="L347">    }</span>
+
+    public Integer getScrollBarSize()
+    {
+<span class="nc" id="L351">        return scrollBarSize;</span>
+    }
+
+    public void setScrollBarSize(Integer scrollBarSize)
+    {
+<span class="nc" id="L356">        this.scrollBarSize = scrollBarSize;</span>
+<span class="nc" id="L357">    }</span>
+
+    public JQXDataAdapter getSource()
+    {
+<span class="nc" id="L361">        return source;</span>
+    }
+
+    public void setSource(JQXDataAdapter source)
+    {
+<span class="nc" id="L366">        this.source = source;</span>
+<span class="nc" id="L367">    }</span>
+
+    public Integer getSelectedIndex()
+    {
+<span class="nc" id="L371">        return selectedIndex;</span>
+    }
+
+    public void setSelectedIndex(Integer selectedIndex)
+    {
+<span class="nc" id="L376">        this.selectedIndex = selectedIndex;</span>
+<span class="nc" id="L377">    }</span>
+
+    public String getValueMember()
+    {
+<span class="nc" id="L381">        return valueMember;</span>
+    }
+
+    public void setValueMember(String valueMember)
+    {
+<span class="nc" id="L386">        this.valueMember = valueMember;</span>
+<span class="nc" id="L387">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

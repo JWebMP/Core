@@ -1,0 +1,1582 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQLayoutDefaultOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jquerylayout.layout</a> &gt; <span class="el_source">JQLayoutDefaultOptions.java</span></div><h1>JQLayoutDefaultOptions.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.components.jquerylayout.layout;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.components.bootstrap.BootstrapSize;
+import za.co.mmagon.jwebswing.htmlbuilder.css.displays.Cursors;
+import za.co.mmagon.jwebswing.htmlbuilder.effects.EasingEffects;
+import za.co.mmagon.jwebswing.htmlbuilder.effects.JWAnimationEffectsPart;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
+
+/**
+ * Users the JavaScript part rather
+ *
+ * @since 2014 07 28
+ * @version 1.0
+ * @author MMagon
+ *
+ *
+ */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class JQLayoutDefaultOptions extends JavaScriptPart
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Constructs a new Layout Options object
+     * &lt;p&gt;
+     */
+    public JQLayoutDefaultOptions()
+<span class="fc" id="L35">    {</span>
+<span class="fc" id="L36">    }</span>
+    
+    /**
+     * If the layout is responsive or not
+     */
+    private Boolean responsive;
+    /**
+     * When the layout should be responsive
+     */
+    private BootstrapSize responsiveWhen;
+    
+    
+    /**
+     * When open, pane can be resized
+     */
+    private Boolean resizable;
+    /**
+     * Pane can open and close
+     */
+    private Boolean closable;
+    /**
+     * When closed; pane can 'slide' open over other panes - closes on mouse-out
+     */
+    private Boolean slidable;
+    /**
+     * Show pane resizing or show outline
+     */
+    private Boolean livePaneResizing;
+    /**
+     * Enable animation on Pane
+     */
+    private Boolean animatePaneSizing;
+    /**
+     * Sets to show the overflow for the panel or not
+     */
+    private Boolean showOverflowOnHover;
+    /**
+     * Scrolls to a bookmark This option handles of bookmarks that are passed on the URL of the page: http://www.site.com/page.html#myBookmark
+     */
+    private Boolean scrollToBookmarkOnLoad;
+
+    //Element Selectors Strings
+    private JQLayoutDiv paneSelector;
+    private JQLayoutDiv contentSelector;
+    private JQLayoutDiv contentIgnoreSelector;
+
+    //Auto-generated Classnames
+    private String paneClass;
+    private String resizerClass;
+    private String togglerClass;
+    private String buttonClass;
+
+    //Pane Size &amp; Spacing
+    private Integer size;
+    private Integer minSize;
+    private Integer maxSize;
+    private Integer spacing_closed;
+    private Integer spacing_open;
+
+    //Resizer-bar Formatting
+    private Cursors resizerCursor;
+    private Double resizerDragOpacity;
+    private Cursors sliderCursor;
+    private Boolean maskIframesOnResize;
+    private String slideTrigger_open;
+    private String slideTrigger_close;
+
+    //Toggler-button Formatting
+    private Integer togglerLength_open;
+    private Integer togglerLength_closed;
+    private Boolean hideTogglerOnSlide;
+    private String togglerAlign_open;
+    private String togglerAlign_closed;
+    private String togglerContent_open;
+    private String togglerContent_closed;
+
+    //Pane Open/Close Hotkeys
+    private Boolean enableCursorHotkey;
+    private CustomHotkeyModifier customHotkeyModifier;
+    private Character customHotkey;
+
+    //Pane Animation Effects
+    private EasingEffects fxName;
+    private EasingEffects fxName_open;
+    private EasingEffects fxName_close;
+    private Integer fxSpeed;
+    private Integer fxSpeed_open;
+    private Integer fxSpeed_close;
+    private JWAnimationEffectsPart fxSettings;
+    private JWAnimationEffectsPart fxSettings_open;
+    private JWAnimationEffectsPart fxSettings_close;
+
+    //Layout State Initialization
+    private Boolean initClosed;
+    private Boolean initHidden;
+
+    //Custom entries for all the addons
+    //Panel override entry
+    @JsonIgnore
+    private JQLayoutDiv layoutDiv;
+    @JsonRawValue(value = true)
+    @JsonProperty(value = &quot;onresizeall_end&quot;)
+    private String onResize;
+
+    public String getOnResize()
+    {
+<span class="nc" id="L142">        return onResize;</span>
+    }
+
+    public void setOnResize(String onResize)
+    {
+<span class="nc" id="L147">        this.onResize = onResize;</span>
+<span class="nc" id="L148">    }</span>
+
+    /**
+     * When open, pane can be resized
+     *
+     * @return
+     */
+    public Boolean isResizable()
+    {
+<span class="fc" id="L157">        return resizable;</span>
+    }
+
+    /**
+     * When open, pane can be resized
+     *
+     * @param resizable
+     */
+    public void setResizable(Boolean resizable)
+    {
+<span class="nc" id="L167">        this.resizable = resizable;</span>
+<span class="nc" id="L168">    }</span>
+
+    /**
+     * Pane can open and close
+     *
+     * @return
+     */
+    public Boolean isClosable()
+    {
+<span class="fc" id="L177">        return closable;</span>
+    }
+
+    /**
+     * Pane can open and close
+     *
+     * @param closable
+     */
+    public void setClosable(Boolean closable)
+    {
+<span class="fc" id="L187">        this.closable = closable;</span>
+<span class="fc" id="L188">    }</span>
+
+    /**
+     * When closed; pane can 'slide' open over other panes - closes on mouse-out
+     *
+     * @return
+     */
+    public Boolean isSlidable()
+    {
+<span class="fc" id="L197">        return slidable;</span>
+    }
+
+    /**
+     * When closed; pane can 'slide' open over other panes - closes on mouse-out
+     *
+     * @param slidable
+     */
+    public void setSlidable(Boolean slidable)
+    {
+<span class="nc" id="L207">        this.slidable = slidable;</span>
+<span class="nc" id="L208">    }</span>
+
+    /**
+     * Show pane resizing or show outline
+     *
+     * @return
+     */
+    public Boolean isLivePaneResizing()
+    {
+<span class="fc" id="L217">        return livePaneResizing;</span>
+    }
+
+    /**
+     * Show pane resizing or show outline
+     *
+     * @param livePaneResizing
+     */
+    public void setLivePaneResizing(Boolean livePaneResizing)
+    {
+<span class="nc" id="L227">        this.livePaneResizing = livePaneResizing;</span>
+<span class="nc" id="L228">    }</span>
+
+    /**
+     * Enable animation on Pane
+     *
+     * @return
+     */
+    public Boolean isAnimatePaneSizing()
+    {
+<span class="fc" id="L237">        return animatePaneSizing;</span>
+    }
+
+    /**
+     * Enable animation on Pane
+     *
+     * @param animatePaneSizing
+     */
+    public void setAnimatePaneSizing(Boolean animatePaneSizing)
+    {
+<span class="nc" id="L247">        this.animatePaneSizing = animatePaneSizing;</span>
+<span class="nc" id="L248">    }</span>
+
+    /**
+     * Scrolls to a bookmark This option handles of bookmarks that are passed on the URL of the page: http://www.site.com/page.html#myBookmark
+     *
+     * @return
+     */
+    public Boolean isShowOverflowOnHover()
+    {
+<span class="fc" id="L257">        return showOverflowOnHover;</span>
+    }
+
+    /**
+     * Scrolls to a bookmark This option handles of bookmarks that are passed on the URL of the page: http://www.site.com/page.html#myBookmark
+     * &lt;p&gt;
+     * @param showOverflowOnHover
+     */
+    public void setShowOverflowOnHover(Boolean showOverflowOnHover)
+    {
+<span class="nc" id="L267">        this.showOverflowOnHover = showOverflowOnHover;</span>
+<span class="nc" id="L268">    }</span>
+
+    /**
+     * Scrolls to a bookmark This option handles of bookmarks that are passed on the URL of the page: http://www.site.com/page.html#myBookmark
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean isScrollToBookmarkOnLoad()
+    {
+<span class="fc" id="L277">        return scrollToBookmarkOnLoad;</span>
+    }
+
+    /**
+     * Scrolls to a bookmark This option handles of bookmarks that are passed on the URL of the page: http://www.site.com/page.html#myBookmark
+     * &lt;p&gt;
+     * @param scrollToBookmarkOnLoad
+     */
+    public void setScrollToBookmarkOnLoad(Boolean scrollToBookmarkOnLoad)
+    {
+<span class="nc" id="L287">        this.scrollToBookmarkOnLoad = scrollToBookmarkOnLoad;</span>
+<span class="nc" id="L288">    }</span>
+
+    /**
+     * paneSelector = &quot;.ui-layout-PANE&quot; (any valid jQuery selector string)
+     * &lt;p&gt;
+     * MUST set individually for EACH PANE
+     * &lt;p&gt;
+     * Default values are: &quot;.ui-layout-north&quot;, &quot;.ui-layout-west&quot;, etc. Any valid jQuery selector string can be used - classNames, IDs, etc.
+     * &lt;p&gt;
+     * To allow for 'nesting' of layouts, there are rules for how pane-elements are related to the layout-container. More flexibility was added in version 1.1.2 to handle panes are nested inside a
+     * 'form' or other element.
+     * &lt;p&gt;
+     * Rules for the relationship between a pane and its container:
+     * &lt;p&gt;
+     * When an 'ID' is specified for paneSelector, the pane-element only needs to be a descendant of the container – it does NOT have to be a 'child'.
+     * &lt;p&gt;
+     * When a 'class-name' is specified for paneSelector, the pane-element must be EITHER: a child of the container, or... a child of a form-element that is a child of the container (must be the
+     * 'first form' inside the container)
+     * &lt;p&gt;
+     * @return
+     */
+    public JQLayoutDiv getPaneSelector()
+    {
+<span class="nc" id="L311">        return paneSelector;</span>
+    }
+
+    /**
+     * paneSelector = &quot;.ui-layout-PANE&quot; (any valid jQuery selector string)
+     * &lt;p&gt;
+     * MUST set individually for EACH PANE
+     * &lt;p&gt;
+     * Default values are: &quot;.ui-layout-north&quot;, &quot;.ui-layout-west&quot;, etc. Any valid jQuery selector string can be used - classNames, IDs, etc.
+     * &lt;p&gt;
+     * To allow for 'nesting' of layouts, there are rules for how pane-elements are related to the layout-container. More flexibility was added in version 1.1.2 to handle panes are nested inside a
+     * 'form' or other element.
+     * &lt;p&gt;
+     * Rules for the relationship between a pane and its container:
+     * &lt;p&gt;
+     * When an 'ID' is specified for paneSelector, the pane-element only needs to be a descendant of the container – it does NOT have to be a 'child'.
+     * &lt;p&gt;
+     * When a 'class-name' is specified for paneSelector, the pane-element must be EITHER: a child of the container, or... a child of a form-element that is a child of the container (must be the
+     * 'first form' inside the container)
+     * &lt;p&gt;
+     * @param paneSelector
+     */
+    public void setPaneSelector(JQLayoutDiv paneSelector)
+    {
+<span class="nc" id="L335">        this.paneSelector = paneSelector;</span>
+<span class="nc" id="L336">    }</span>
+
+    /**
+     * contentSelector = &quot;.ui-layout-content&quot; (any valid jQuery selector string)
+     * &lt;p&gt;
+     * MUST be a 'child' of one of the panes
+     * &lt;p&gt;
+     * Selector string for INNER div/element. This div will auto-size so only it scrolls, and not the entire pane.
+     * &lt;p&gt;
+     * Same class-name could be used for divs inside all panes.
+     * &lt;p&gt;
+     * SEE Content-Scrolling below for more information.
+     * &lt;p&gt;
+     * @return
+     */
+    public JQLayoutDiv getContentSelector()
+    {
+<span class="nc" id="L353">        return contentSelector;</span>
+    }
+
+    /**
+     * contentSelector = &quot;.ui-layout-content&quot; (any valid jQuery selector string)
+     * &lt;p&gt;
+     * MUST be a 'child' of one of the panes
+     * &lt;p&gt;
+     * Selector string for INNER div/element. This div will auto-size so only it scrolls, and not the entire pane.
+     * &lt;p&gt;
+     * Same class-name could be used for divs inside all panes.
+     * &lt;p&gt;
+     * SEE Content-Scrolling below for more information.
+     * &lt;p&gt;
+     * @param contentSelector
+     */
+    public void setContentSelector(JQLayoutDiv contentSelector)
+    {
+<span class="nc" id="L371">        this.contentSelector = contentSelector;</span>
+<span class="nc" id="L372">    }</span>
+
+    /**
+     * contentIgnoreSelector = &quot;ui-layout-ignore&quot; (any valid jQuery selector string)
+     * &lt;p&gt;
+     * Selector string for INNER divs/elements. These elements will be 'ignored' when calculations are done to auto-size the content element. This may be necessary if there are elements inside the
+     * pane that are absolutely-positioned and intended to 'overlay' other elements.
+     * &lt;p&gt;
+     * Same class-name could be used for elements inside all panes
+     * &lt;p&gt;
+     * @return
+     */
+    public JQLayoutDiv getContentIgnoreSelector()
+    {
+<span class="nc" id="L386">        return contentIgnoreSelector;</span>
+    }
+
+    /**
+     * contentIgnoreSelector = &quot;ui-layout-ignore&quot; (any valid jQuery selector string)
+     * &lt;p&gt;
+     * Selector string for INNER divs/elements. These elements will be 'ignored' when calculations are done to auto-size the content element. This may be necessary if there are elements inside the
+     * pane that are absolutely-positioned and intended to 'overlay' other elements.
+     * &lt;p&gt;
+     * Same class-name could be used for elements inside all panes
+     * &lt;p&gt;
+     * @param contentIgnoreSelector
+     */
+    public void setContentIgnoreSelector(JQLayoutDiv contentIgnoreSelector)
+    {
+<span class="nc" id="L401">        this.contentIgnoreSelector = contentIgnoreSelector;</span>
+<span class="nc" id="L402">    }</span>
+
+    /**
+     * paneClass = &quot;ui-layout-pane&quot; (any valid className)
+     * &lt;p&gt;
+     * Used for auto-generated classNames for each 'layout pane':
+     * &lt;p&gt;
+     * // default classes applied to the 'west pane'. class=&quot;ui-layout-pane ui-layout-pane-west ui-layout-pane-open ui-layout-pane-west-open&quot;
+     * &lt;p&gt;
+     * The last two classes change when the pane is closed:
+     * &lt;p&gt;
+     * class=&quot;... ui-layout-pane-closed ui-layout-pane-west-closed&quot;
+     * &lt;p&gt;
+     *
+     * @return
+     */
+    public String getPaneClass()
+    {
+<span class="nc" id="L420">        return paneClass;</span>
+    }
+
+    /**
+     * paneClass = &quot;ui-layout-pane&quot; (any valid className)
+     * &lt;p&gt;
+     * Used for auto-generated classNames for each 'layout pane':
+     * &lt;p&gt;
+     * // default classes applied to the 'west pane' class=&quot;ui-layout-pane ui-layout-pane-west ui-layout-pane-open ui-layout-pane-west-open&quot;
+     * &lt;p&gt;
+     * The last two classes change when the pane is closed:
+     * &lt;p&gt;
+     * class=&quot;... ui-layout-pane-closed ui-layout-pane-west-closed&quot;
+     *
+     *
+     * @param paneClass
+     */
+    public void setPaneClass(String paneClass)
+    {
+<span class="nc" id="L439">        this.paneClass = paneClass;</span>
+<span class="nc" id="L440">    }</span>
+
+    /**
+     * resizerClass = &quot;ui-layout-resizer&quot; (any valid className)
+     * &lt;p&gt;
+     * Used for auto-generated classNames for each 'resizer-bar':
+     * &lt;p&gt;
+     * class=&quot;ui-layout-resizer ui-layout-resizer-west ui-layout-resizer-open ui-layout-resizer-west-open&quot;
+     * &lt;p&gt;
+     * The last two classes change when the pane is closed:
+     * &lt;p&gt;
+     * class=&quot;... ui-layout-resizer-closed ui-layout-resizer-west-closed&quot;
+     * &lt;p&gt;
+     * If the pane was 'slid open', 2 additional classes are generated:
+     * &lt;p&gt;
+     * class=&quot;... ui-layout-resizer-sliding ui-layout-resizer-west-sliding&quot;
+     * &lt;p&gt;
+     * When a pane is 'resized', the 'real resizer-bar' gets 2 additional classes:
+     * &lt;p&gt;
+     * class=&quot;... ui-layout-resizer-drag ui-layout-resizer-west-drag&quot;
+     * &lt;p&gt;
+     * The 'cloned resizer-bar' – which is actually 'dragged' – gets 2 different styles:
+     * &lt;p&gt;
+     * class=&quot;... ui-layout-resizer-dragging ui-layout-resizer-west-dragging&quot;
+     * &lt;p&gt;
+     * @return
+     */
+    public String getResizerClass()
+    {
+<span class="nc" id="L469">        return resizerClass;</span>
+    }
+
+    /**
+     * resizerClass = &quot;ui-layout-resizer&quot; (any valid className)
+     * &lt;p&gt;
+     * Used for auto-generated classNames for each 'resizer-bar':
+     * &lt;p&gt;
+     * class=&quot;ui-layout-resizer ui-layout-resizer-west ui-layout-resizer-open ui-layout-resizer-west-open&quot;
+     * &lt;p&gt;
+     * The last two classes change when the pane is closed:
+     * &lt;p&gt;
+     * class=&quot;... ui-layout-resizer-closed ui-layout-resizer-west-closed&quot;
+     * &lt;p&gt;
+     * If the pane was 'slid open', 2 additional classes are generated:
+     * &lt;p&gt;
+     * class=&quot;... ui-layout-resizer-sliding ui-layout-resizer-west-sliding&quot;
+     * &lt;p&gt;
+     * When a pane is 'resized', the 'real resizer-bar' gets 2 additional classes:
+     * &lt;p&gt;
+     * class=&quot;... ui-layout-resizer-drag ui-layout-resizer-west-drag&quot;
+     * &lt;p&gt;
+     * The 'cloned resizer-bar' – which is actually 'dragged' – gets 2 different styles:
+     * &lt;p&gt;
+     * class=&quot;... ui-layout-resizer-dragging ui-layout-resizer-west-dragging&quot;
+     *
+     * @param resizerClass
+     */
+    public void setResizerClass(String resizerClass)
+    {
+<span class="nc" id="L499">        this.resizerClass = resizerClass;</span>
+<span class="nc" id="L500">    }</span>
+
+    /**
+     * togglerClass = &quot;ui-layout-toggler&quot; (any valid className)
+     * &lt;p&gt;
+     * Used for auto-generated classNames for each 'toggler-button':
+     * &lt;p&gt;
+     * class=&quot;ui-layout-toggler ui-layout-toggler-open ui-layout-toggler-west ui-layout-toggler-west-open&quot;
+     * &lt;p&gt;
+     * The last two classes change when the pane is closed:
+     * &lt;p&gt;
+     * class=&quot;... ui-layout-toggler-closed ui-layout-toggler-west-closed&quot;
+     * &lt;p&gt;
+     * The toggler is 'inside' the resizer, so can also be accessed using those classes:
+     * &lt;p&gt;
+     * CSS Rule - hide toggler while resizing .ui-layout-resizer-drag ui-layout-toggler { display: none; }
+     *
+     *
+     * @return
+     */
+    public String getTogglerClass()
+    {
+<span class="nc" id="L522">        return togglerClass;</span>
+    }
+
+    /**
+     * togglerClass = &quot;ui-layout-toggler&quot; (any valid className)
+     * &lt;p&gt;
+     * Used for auto-generated classNames for each 'toggler-button':
+     * &lt;p&gt;
+     * class=&quot;ui-layout-toggler ui-layout-toggler-open ui-layout-toggler-west ui-layout-toggler-west-open&quot;
+     * &lt;p&gt;
+     * The last two classes change when the pane is closed:
+     * &lt;p&gt;
+     * class=&quot;... ui-layout-toggler-closed ui-layout-toggler-west-closed&quot;
+     * &lt;p&gt;
+     * The toggler is 'inside' the resizer, so can also be accessed using those classes:
+     * &lt;p&gt;
+     * /* CSS Rule - hide toggler while resizing .ui-layout-resizer-drag ui-layout-toggler { display: none; }
+     *
+     * @param togglerClass
+     */
+    public void setTogglerClass(String togglerClass)
+    {
+<span class="nc" id="L544">        this.togglerClass = togglerClass;</span>
+<span class="nc" id="L545">    }</span>
+
+    /**
+     * buttonClass = &quot;ui-layout-button&quot; (any valid className)
+     * &lt;p&gt;
+     * This is used as a prefix when generating classNames for 'custom buttons'. (Do not confuse with normal 'toggler-buttons')
+     * &lt;p&gt;
+     * FIRST, the 'type' (action) of the button is appended:
+     * &lt;p&gt;
+     * ui-layout-button-toggle ui-layout-button-open ui-layout-button-close ui-layout-button-pin
+     * &lt;p&gt;
+     * THEN, the 'pane name' of the button is appended, like:
+     * &lt;p&gt;
+     * ui-layout-button-toggle-west ui-layout-button-open-south
+     * &lt;p&gt;
+     * Here are the generated styles for a custom 'close-button' for the 'west-pane':
+     * &lt;p&gt;
+     * class=&quot;ui-layout-button-close ui-layout-button-close-west&quot;
+     * &lt;p&gt;
+     * Pin-buttons have additional classes added for 'pin-up' and 'pin-down' states:
+     * &lt;p&gt;
+     * class=&quot;ui-layout-button-pin ui-layout-button-pin-west ui-layout-button-pin-up ui-layout-button-pin-west-up&quot;
+     * &lt;p&gt;
+     * The last two classes change when the pane is 'pinned' (open):
+     * &lt;p&gt;
+     * class=&quot;... ui-layout-button-pin-down ui-layout-button-pin-west-down&quot;
+     *
+     * @return
+     */
+    public String getButtonClass()
+    {
+<span class="nc" id="L576">        return buttonClass;</span>
+    }
+
+    /**
+     * buttonClass = &quot;ui-layout-button&quot; (any valid className)
+     * &lt;p&gt;
+     * This is used as a prefix when generating classNames for 'custom buttons'. (Do not confuse with normal 'toggler-buttons')
+     * &lt;p&gt;
+     * FIRST, the 'type' (action) of the button is appended:
+     * &lt;p&gt;
+     * ui-layout-button-toggle ui-layout-button-open ui-layout-button-close ui-layout-button-pin
+     * &lt;p&gt;
+     * THEN, the 'pane name' of the button is appended, like:
+     * &lt;p&gt;
+     * ui-layout-button-toggle-west ui-layout-button-open-south
+     * &lt;p&gt;
+     * Here are the generated styles for a custom 'close-button' for the 'west-pane':
+     * &lt;p&gt;
+     * class=&quot;ui-layout-button-close ui-layout-button-close-west&quot;
+     * &lt;p&gt;
+     * Pin-buttons have additional classes added for 'pin-up' and 'pin-down' states:
+     * &lt;p&gt;
+     * class=&quot;ui-layout-button-pin ui-layout-button-pin-west ui-layout-button-pin-up ui-layout-button-pin-west-up&quot;
+     * &lt;p&gt;
+     * The last two classes change when the pane is 'pinned' (open):
+     * &lt;p&gt;
+     * class=&quot;... ui-layout-button-pin-down ui-layout-button-pin-west-down&quot;
+     *
+     * @param buttonClass
+     */
+    public void setButtonClass(String buttonClass)
+    {
+<span class="nc" id="L608">        this.buttonClass = buttonClass;</span>
+<span class="nc" id="L609">    }</span>
+
+    /**
+     * size = &quot;auto&quot; (N/S) &quot;200&quot; (E/W) (&quot;auto&quot; or integer - pixels)
+     * &lt;p&gt;
+     * Specifies the initial size of the panes - 'height' for north south panes - 'width' for east and west. If &quot;auto&quot;, then pane will size to fit its content - most useful for north/south panes (to
+     * auto-fit your banner or toolbar), but also works for east/west panes.
+     * &lt;p&gt;
+     * You normally will want different sizes for the panes, but a 'default size' can be set
+     *
+     * @return
+     */
+    public Integer getSize()
+    {
+<span class="nc" id="L623">        return size;</span>
+    }
+
+    /**
+     * size = &quot;auto&quot; (N/S) &quot;200&quot; (E/W) (&quot;auto&quot; or integer - pixels)
+     * &lt;p&gt;
+     * Specifies the initial size of the panes - 'height' for north south panes - 'width' for east and west. If &quot;auto&quot;, then pane will size to fit its content - most useful for north/south panes (to
+     * auto-fit your banner or toolbar), but also works for east/west panes.
+     * &lt;p&gt;
+     * You normally will want different sizes for the panes, but a 'default size' can be set
+     *
+     * @param size
+     */
+    public void setSize(Integer size)
+    {
+<span class="nc" id="L638">        this.size = size;</span>
+<span class="nc" id="L639">    }</span>
+
+    /**
+     * minSize = 50 (integer - pixels)
+     * &lt;p&gt;
+     * Minimum-size limit when resizing a pane (0 = as small as pane can go)
+     *
+     * @return
+     */
+    public Integer getMinSize()
+    {
+<span class="nc" id="L650">        return minSize;</span>
+    }
+
+    /**
+     * minSize = 50 (integer - pixels)
+     * &lt;p&gt;
+     * Minimum-size limit when resizing a pane (0 = as small as pane can go)
+     *
+     * @param minSize
+     */
+    public void setMinSize(Integer minSize)
+    {
+<span class="nc" id="L662">        this.minSize = minSize;</span>
+<span class="nc" id="L663">    }</span>
+
+    /**
+     * Maximum-size limit when resizing a pane (0 = as large as pane can go)
+     *
+     * @return
+     */
+    public Integer getMaxSize()
+    {
+<span class="nc" id="L672">        return maxSize;</span>
+    }
+
+    /**
+     * Maximum-size limit when resizing a pane (0 = as large as pane can go)
+     *
+     * @param maxSize
+     */
+    public void setMaxSize(Integer maxSize)
+    {
+<span class="nc" id="L682">        this.maxSize = maxSize;</span>
+<span class="nc" id="L683">    }</span>
+
+    /**
+     * Spacing between pane and adjacent pane - when pane is 'open' or 'closed' default 6
+     *
+     * @return
+     */
+    public Integer getSpacing_closed()
+    {
+<span class="nc" id="L692">        return spacing_closed;</span>
+    }
+
+    /**
+     * Spacing between pane and adjacent pane - when pane is 'open' or 'closed' default 6
+     *
+     * @param spacing_closed
+     */
+    public void setSpacing_closed(Integer spacing_closed)
+    {
+<span class="nc" id="L702">        this.spacing_closed = spacing_closed;</span>
+<span class="nc" id="L703">    }</span>
+
+    /**
+     * Spacing between pane and adjacent pane - when pane is 'open' or 'closed'
+     *
+     * @return
+     */
+    public Integer getSpacing_open()
+    {
+<span class="nc" id="L712">        return spacing_open;</span>
+    }
+
+    /**
+     * Spacing between pane and adjacent pane - when pane is 'open' or 'closed'
+     *
+     * @param spacing_open
+     */
+    public void setSpacing_open(Integer spacing_open)
+    {
+<span class="nc" id="L722">        this.spacing_open = spacing_open;</span>
+<span class="nc" id="L723">    }</span>
+
+    /**
+     * resizerCursor = &quot;resizer-p&quot; (any valid CSS cursor)
+     * &lt;p&gt;
+     * MUST set individually for EACH PANE Default values are: &quot;resize-n&quot;, &quot;resize-w&quot;, etc.
+     * &lt;p&gt;
+     * This is the cursor when the mouse is over the 'resizer-bar'. However, if the mouse is over the 'toggler-button' inside the resizer bar, then the cursor is a 'pointer' - ie, the togglerCursor
+     * instead of the resizerCursor.
+     *
+     * @return
+     */
+    public Cursors getResizerCursor()
+    {
+<span class="nc" id="L737">        return resizerCursor;</span>
+    }
+
+    /**
+     * resizerCursor = &quot;resizer-p&quot; (any valid CSS cursor)
+     * &lt;p&gt;
+     * MUST set individually for EACH PANE Default values are: &quot;resize-n&quot;, &quot;resize-w&quot;, etc.
+     * &lt;p&gt;
+     * This is the cursor when the mouse is over the 'resizer-bar'. However, if the mouse is over the 'toggler-button' inside the resizer bar, then the cursor is a 'pointer' - ie, the togglerCursor
+     * instead of the resizerCursor.
+     *
+     * @param resizerCursor
+     */
+    public void setResizerCursor(Cursors resizerCursor)
+    {
+<span class="nc" id="L752">        this.resizerCursor = resizerCursor;</span>
+<span class="nc" id="L753">    }</span>
+
+    /**
+     * resizerDragOpacity = 1 (decimal value between 0 and 1)
+     * &lt;p&gt;
+     * Opacity of resizer bar when 'dragging' to resize a pane.
+     * &lt;p&gt;
+     * This value is passed to the ui.draggable widget
+     * &lt;p&gt;
+     * Leave this set to '1' if you want to use CSS to control opacity. Otherwise you must use !important to override the specified opacity.
+     *
+     * @return
+     */
+    public Double getResizerDragOpacity()
+    {
+<span class="nc" id="L768">        return resizerDragOpacity;</span>
+    }
+
+    /**
+     * resizerDragOpacity = 1 (decimal value between 0 and 1)
+     * &lt;p&gt;
+     * Opacity of resizer bar when 'dragging' to resize a pane.
+     * &lt;p&gt;
+     * This value is passed to the ui.draggable widget
+     * &lt;p&gt;
+     * Leave this set to '1' if you want to use CSS to control opacity. Otherwise you must use !important to override the specified opacity.
+     *
+     * @param resizerDragOpacity
+     */
+    public void setResizerDragOpacity(Double resizerDragOpacity)
+    {
+<span class="nc" id="L784">        this.resizerDragOpacity = resizerDragOpacity;</span>
+<span class="nc" id="L785">    }</span>
+
+    /**
+     * sliderCursor = &quot;pointer&quot; (any valid CSS cursor)
+     * &lt;p&gt;
+     * Cursor when resizer-bar will trigger 'sliding open' - ie, when pane is 'closed'
+     *
+     * @return
+     */
+    public Cursors getSliderCursor()
+    {
+<span class="nc" id="L796">        return sliderCursor;</span>
+    }
+
+    /**
+     * sliderCursor = &quot;pointer&quot; (any valid CSS cursor)
+     * &lt;p&gt;
+     * Cursor when resizer-bar will trigger 'sliding open' - ie, when pane is 'closed'
+     *
+     * @param sliderCursor
+     */
+    public void setSliderCursor(Cursors sliderCursor)
+    {
+<span class="nc" id="L808">        this.sliderCursor = sliderCursor;</span>
+<span class="nc" id="L809">    }</span>
+
+    /**
+     * maskIframesOnResize = true (true, false, jQuery Selector string)
+     * &lt;p&gt;
+     * When enabled, layout will 'mask' iframes on the page when the resizer-bar is 'dragged' to resize a pane. This solved problems related to dragging an element over an iframe.
+     * &lt;p&gt;
+     * If desired, you can mask only specific iframes and/or only when specific panes are resized
+     *
+     * @return
+     */
+    public Boolean isMaskIframesOnResize()
+    {
+<span class="fc" id="L822">        return maskIframesOnResize;</span>
+    }
+
+    /**
+     * maskIframesOnResize = true (true, false, jQuery Selector string)
+     * &lt;p&gt;
+     * When enabled, layout will 'mask' iframes on the page when the resizer-bar is 'dragged' to resize a pane. This solved problems related to dragging an element over an iframe.
+     * &lt;p&gt;
+     * If desired, you can mask only specific iframes and/or only when specific panes are resized
+     *
+     * @param maskIframesOnResize
+     */
+    public void setMaskIframesOnResize(Boolean maskIframesOnResize)
+    {
+<span class="nc" id="L836">        this.maskIframesOnResize = maskIframesOnResize;</span>
+<span class="nc" id="L837">    }</span>
+
+    /**
+     * slideTrigger_open = &quot;click&quot; (&quot;click&quot;, &quot;dblclick&quot;, &quot;mouseover&quot;}
+     *
+     * @return
+     */
+    public String getSlideTrigger_open()
+    {
+<span class="nc" id="L846">        return slideTrigger_open;</span>
+    }
+
+    /**
+     * slideTrigger_open = &quot;click&quot; (&quot;click&quot;, &quot;dblclick&quot;, &quot;mouseover&quot;
+     *
+     * @param slideTrigger_open
+     */
+    public void setSlideTrigger_open(String slideTrigger_open)
+    {
+<span class="nc" id="L856">        this.slideTrigger_open = slideTrigger_open;</span>
+<span class="nc" id="L857">    }</span>
+
+    /**
+     * slideTrigger_close = &quot;mouseout&quot; (&quot;click&quot;, &quot;mouseout&quot;)
+     * &lt;p&gt;
+     * Trigger events to 'slide open' and 'slide closed' a pane
+     *
+     * @return
+     */
+    public String getSlideTrigger_close()
+    {
+<span class="nc" id="L868">        return slideTrigger_close;</span>
+    }
+
+    /**
+     * slideTrigger_close = &quot;mouseout&quot; (&quot;click&quot;, &quot;mouseout&quot;)
+     * &lt;p&gt;
+     * Trigger events to 'slide open' and 'slide closed' a pane
+     *
+     * @param slideTrigger_close
+     */
+    public void setSlideTrigger_close(String slideTrigger_close)
+    {
+<span class="nc" id="L880">        this.slideTrigger_close = slideTrigger_close;</span>
+<span class="nc" id="L881">    }</span>
+
+    /**
+     * togglerLength_closed = 50 (integer - pixels)
+     * &lt;p&gt;
+     * Length of toggler-button when pane is 'open' or 'closed'.
+     * &lt;p&gt;
+     * Length means 'width' for north/south togglers, and 'height' for east/west togglers.
+     * &lt;p&gt;
+     * &quot;100%&quot; OR -1 means 'full height/width of resizer bar' - 0 means 'hidden'
+     *
+     * @return
+     */
+    public Integer getTogglerLength_open()
+    {
+<span class="nc" id="L896">        return togglerLength_open;</span>
+    }
+
+    /**
+     *  /**
+     * togglerLength_closed = 50 (integer - pixels)
+     * &lt;p&gt;
+     * Length of toggler-button when pane is 'open' or 'closed'.
+     * &lt;p&gt;
+     * Length means 'width' for north/south togglers, and 'height' for east/west togglers.
+     * &lt;p&gt;
+     * &quot;100%&quot; OR -1 means 'full height/width of resizer bar' - 0 means 'hidden'
+     *
+     * @param togglerLength_open
+     */
+    public void setTogglerLength_open(Integer togglerLength_open)
+    {
+<span class="nc" id="L913">        this.togglerLength_open = togglerLength_open;</span>
+<span class="nc" id="L914">    }</span>
+
+    /**
+     * togglerLength_closed = 50 (integer - pixels)
+     * &lt;p&gt;
+     * Length of toggler-button when pane is 'open' or 'closed'.
+     * &lt;p&gt;
+     * Length means 'width' for north/south togglers, and 'height' for east/west togglers.
+     * &lt;p&gt;
+     * &quot;100%&quot; OR -1 means 'full height/width of resizer bar' - 0 means 'hidden'
+     *
+     * @return
+     */
+    public Integer getTogglerLength_closed()
+    {
+<span class="nc" id="L929">        return togglerLength_closed;</span>
+    }
+
+    /**
+     * togglerLength_closed = 50 (integer - pixels)
+     * &lt;p&gt;
+     * Length of toggler-button when pane is 'open' or 'closed'.
+     * &lt;p&gt;
+     * Length means 'width' for north/south togglers, and 'height' for east/west togglers.
+     * &lt;p&gt;
+     * &quot;100%&quot; OR -1 means 'full height/width of resizer bar' - 0 means 'hidden'
+     *
+     * @param togglerLength_closed
+     */
+    public void setTogglerLength_closed(Integer togglerLength_closed)
+    {
+<span class="nc" id="L945">        this.togglerLength_closed = togglerLength_closed;</span>
+<span class="nc" id="L946">    }</span>
+
+    /**
+     * hideTogglerOnSlide = false (true, false)
+     * &lt;p&gt;
+     * If true, the toggler-button is hidden when a pane is 'slid-open'. This makes sense because the user only needs to 'mouse-off' to close the pane.
+     * &lt;p&gt;
+     * You could set this 'false' and use CSS to do the same thing:
+     *
+     * @return
+     */
+    public Boolean isHideTogglerOnSlide()
+    {
+<span class="fc" id="L959">        return hideTogglerOnSlide;</span>
+    }
+
+    /**
+     * hideTogglerOnSlide = false (true, false)
+     * &lt;p&gt;
+     * If true, the toggler-button is hidden when a pane is 'slid-open'. This makes sense because the user only needs to 'mouse-off' to close the pane.
+     * &lt;p&gt;
+     * You could set this 'false' and use CSS to do the same thing:
+     *
+     * @param hideTogglerOnSlide
+     */
+    public void setHideTogglerOnSlide(Boolean hideTogglerOnSlide)
+    {
+<span class="nc" id="L973">        this.hideTogglerOnSlide = hideTogglerOnSlide;</span>
+<span class="nc" id="L974">    }</span>
+
+    /**
+     * togglerAlign_open = &quot;center&quot; (position-keyword or integer - pixels) togglerAlign_closed = &quot;center&quot; (position-keyword or integer - pixels)
+     * &lt;p&gt;
+     * Alignment of toggler button inside the resizer-bar when pane is 'open' or 'closed'.
+     * &lt;p&gt;
+     * A positive integer means a pixel offset from top or left
+     * &lt;p&gt;
+     * A negative integer means a pixel offset from bottom or right
+     * &lt;p&gt;
+     * Position-Keywords: &quot;left&quot;, &quot;center&quot;, &quot;right&quot;, &quot;top&quot;, &quot;middle&quot;, &quot;bottom&quot;
+     *
+     * @return
+     */
+    public String getTogglerAlign_open()
+    {
+<span class="nc" id="L991">        return togglerAlign_open;</span>
+    }
+
+    /**
+     * togglerAlign_open = &quot;center&quot; (position-keyword or integer - pixels) togglerAlign_closed = &quot;center&quot; (position-keyword or integer - pixels)
+     * &lt;p&gt;
+     * Alignment of toggler button inside the resizer-bar when pane is 'open' or 'closed'.
+     * &lt;p&gt;
+     * A positive integer means a pixel offset from top or left
+     * &lt;p&gt;
+     * A negative integer means a pixel offset from bottom or right
+     * &lt;p&gt;
+     * Position-Keywords: &quot;left&quot;, &quot;center&quot;, &quot;right&quot;, &quot;top&quot;, &quot;middle&quot;, &quot;bottom&quot;
+     *
+     * @param togglerAlign_open
+     */
+    public void setTogglerAlign_open(String togglerAlign_open)
+    {
+<span class="nc" id="L1009">        this.togglerAlign_open = togglerAlign_open;</span>
+<span class="nc" id="L1010">    }</span>
+
+    /**
+     * togglerAlign_open = &quot;center&quot; (position-keyword or integer - pixels) togglerAlign_closed = &quot;center&quot; (position-keyword or integer - pixels)
+     * &lt;p&gt;
+     * Alignment of toggler button inside the resizer-bar when pane is 'open' or 'closed'.
+     * &lt;p&gt;
+     * A positive integer means a pixel offset from top or left
+     * &lt;p&gt;
+     * A negative integer means a pixel offset from bottom or right
+     * &lt;p&gt;
+     * Position-Keywords: &quot;left&quot;, &quot;center&quot;, &quot;right&quot;, &quot;top&quot;, &quot;middle&quot;, &quot;bottom&quot;
+     *
+     * @return
+     */
+    public String getTogglerAlign_closed()
+    {
+<span class="nc" id="L1027">        return togglerAlign_closed;</span>
+    }
+
+    /**
+     * togglerAlign_open = &quot;center&quot; (position-keyword or integer - pixels) togglerAlign_closed = &quot;center&quot; (position-keyword or integer - pixels)
+     * &lt;p&gt;
+     * Alignment of toggler button inside the resizer-bar when pane is 'open' or 'closed'.
+     * &lt;p&gt;
+     * A positive integer means a pixel offset from top or left
+     * &lt;p&gt;
+     * A negative integer means a pixel offset from bottom or right
+     * &lt;p&gt;
+     * Position-Keywords: &quot;left&quot;, &quot;center&quot;, &quot;right&quot;, &quot;top&quot;, &quot;middle&quot;, &quot;bottom&quot;
+     *
+     * @param togglerAlign_closed
+     */
+    public void setTogglerAlign_closed(String togglerAlign_closed)
+    {
+<span class="nc" id="L1045">        this.togglerAlign_closed = togglerAlign_closed;</span>
+<span class="nc" id="L1046">    }</span>
+
+    public String getTogglerContent_open()
+    {
+<span class="nc" id="L1050">        return togglerContent_open;</span>
+    }
+
+    /**
+     * togglerContent_open = &quot;&quot; (text or HTML) togglerContent_closed = &quot;&quot; (text or HTML)
+     * &lt;p&gt;
+     * Usually a background-image is set in CSS to customize a toggler-button. However, you can also put text inside a toggler by using these options. The text is wrapped in a SPAN, which is then
+     * added inside the toggler DIV. The SPAN classes identify them as either 'open' or 'closed' content:
+     *
+     * @param togglerContent_open
+     */
+    public void setTogglerContent_open(Component togglerContent_open)
+    {
+<span class="nc" id="L1063">        this.togglerContent_open = togglerContent_open.toString(true);</span>
+<span class="nc" id="L1064">    }</span>
+
+    /**
+     * togglerContent_open = &quot;&quot; (text or HTML) togglerContent_closed = &quot;&quot; (text or HTML)
+     * &lt;p&gt;
+     * Usually a background-image is set in CSS to customize a toggler-button. However, you can also put text inside a toggler by using these options. The text is wrapped in a SPAN, which is then
+     * added inside the toggler DIV. The SPAN classes identify them as either 'open' or 'closed' content:
+     *
+     * @return
+     */
+    public String getTogglerContent_closed()
+    {
+<span class="nc" id="L1076">        return togglerContent_closed;</span>
+    }
+
+    /**
+     * togglerContent_open = &quot;&quot; (text or HTML) togglerContent_closed = &quot;&quot; (text or HTML)
+     * &lt;p&gt;
+     * Usually a background-image is set in CSS to customize a toggler-button. However, you can also put text inside a toggler by using these options. The text is wrapped in a SPAN, which is then
+     * added inside the toggler DIV. The SPAN classes identify them as either 'open' or 'closed' content:
+     *
+     * @param togglerContent_closed
+     */
+    public void setTogglerContent_closed(Component togglerContent_closed)
+    {
+<span class="nc" id="L1089">        this.togglerContent_closed = togglerContent_closed.toString(true);</span>
+<span class="nc" id="L1090">    }</span>
+
+    /**
+     * enableCursorHotkey = true (true, false)
+     * &lt;p&gt;
+     * If 'true', then 'cursor hotkeys' are enabled. Can be set per-pane if desired.
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * These default hotkeys cannot be changed - only enabled or disabled.
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * The cursor/arrow key must be pressed in combination with CTRL -or- SHIFT
+     * &lt;p&gt;
+     * Toggle North-pane: CTRL+Up or SHIFT+Up Toggle South-pane: CTRL+Down or SHIFT+Down Toggle West-pane: CTRL+Left or SHIFT+Left Toggle East-pane: CTRL+Right or SHIFT+Right * The SHIFT+ARROW
+     * combinations are ignored if pressed while the cursor is in a form field, allowing users to 'select text' — eg: SHIFT+Right in a TEXTAREA
+     *
+     * @return
+     */
+    public Boolean isEnableCursorHotkey()
+    {
+<span class="fc" id="L1110">        return enableCursorHotkey;</span>
+    }
+
+    /**
+     * enableCursorHotkey = true (true, false)
+     * &lt;p&gt;
+     * If 'true', then 'cursor hotkeys' are enabled. Can be set per-pane if desired.
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * These default hotkeys cannot be changed - only enabled or disabled.
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * The cursor/arrow key must be pressed in combination with CTRL -or- SHIFT
+     * &lt;p&gt;
+     * Toggle North-pane: CTRL+Up or SHIFT+Up Toggle South-pane: CTRL+Down or SHIFT+Down Toggle West-pane: CTRL+Left or SHIFT+Left Toggle East-pane: CTRL+Right or SHIFT+Right * The SHIFT+ARROW
+     * combinations are ignored if pressed while the cursor is in a form field, allowing users to 'select text' — eg: SHIFT+Right in a TEXTAREA
+     *
+     * @param enableCursorHotkey
+     */
+    public void setEnableCursorHotkey(Boolean enableCursorHotkey)
+    {
+<span class="nc" id="L1131">        this.enableCursorHotkey = enableCursorHotkey;</span>
+<span class="nc" id="L1132">    }</span>
+
+    /**
+     * customHotkeyModifier = &quot;SHIFT&quot; (&quot;CTRL&quot;, &quot;SHIFT&quot;, &quot;CTRL+SHIFT&quot;)
+     * &lt;p&gt;
+     * Custom hotkeys must be pressed in combination with either the CTRL or SHIFT key - or both together. Use this option to choose which modifier-key(s) to use with the customHotKey.
+     * &lt;p&gt;
+     * If this option is missing or invalid, &quot;CTRL+SHIFT&quot; is assumed.
+     * &lt;p&gt;
+     * NOTE: The ALT key cannot be used because it is not detected by some browsers.
+     *
+     * @return
+     */
+    public CustomHotkeyModifier getCustomHotkeyModifier()
+    {
+<span class="nc" id="L1147">        return customHotkeyModifier;</span>
+    }
+
+    /**
+     * customHotkeyModifier = &quot;SHIFT&quot; (&quot;CTRL&quot;, &quot;SHIFT&quot;, &quot;CTRL+SHIFT&quot;)
+     * &lt;p&gt;
+     * Custom hotkeys must be pressed in combination with either the CTRL or SHIFT key - or both together. Use this option to choose which modifier-key(s) to use with the customHotKey.
+     * &lt;p&gt;
+     * If this option is missing or invalid, &quot;CTRL+SHIFT&quot; is assumed.
+     * &lt;p&gt;
+     * NOTE: The ALT key cannot be used because it is not detected by some browsers.
+     *
+     * @param customHotkeyModifier
+     */
+    public void setCustomHotkeyModifier(CustomHotkeyModifier customHotkeyModifier)
+    {
+<span class="nc" id="L1163">        this.customHotkeyModifier = customHotkeyModifier;</span>
+<span class="nc" id="L1164">    }</span>
+
+    /**
+     * customHotkey = &quot;&quot; (alphanumeric character OR a charCode)
+     * &lt;p&gt;
+     * MUST set individually for EACH PANE
+     * &lt;p&gt;
+     * If a hotkey is specified, it is automatically enabled. It does not matter whether 'cursor hotkeys' are also enabled – those are separate.
+     * &lt;p&gt;
+     * You can specify any of the following values:
+     * &lt;p&gt;
+     * letter from A to Z number from 0 to 9 Javascript charCode value for the key
+     * &lt;p&gt;
+     * The customHotkeys option must be set separately for each pane, but the customHotkeyModifier option can be set once, as the 'default' for all panes.
+     *
+     * @return
+     */
+    public Character getCustomHotkey()
+    {
+<span class="nc" id="L1183">        return customHotkey;</span>
+    }
+
+    /**
+     * customHotkey = &quot;&quot; (alphanumeric character OR a charCode)
+     * &lt;p&gt;
+     * MUST set individually for EACH PANE
+     * &lt;p&gt;
+     * If a hotkey is specified, it is automatically enabled. It does not matter whether 'cursor hotkeys' are also enabled – those are separate.
+     * &lt;p&gt;
+     * You can specify any of the following values:
+     * &lt;p&gt;
+     * letter from A to Z number from 0 to 9 Javascript charCode value for the key
+     * &lt;p&gt;
+     * The customHotkeys option must be set separately for each pane, but the customHotkeyModifier option can be set once, as the 'default' for all panes.
+     *
+     * @param customHotkey
+     */
+    public void setCustomHotkey(Character customHotkey)
+    {
+<span class="nc" id="L1203">        this.customHotkey = customHotkey;</span>
+<span class="nc" id="L1204">    }</span>
+
+    /**
+     * fxName = &quot;slide&quot; (&quot;none&quot;, &quot;slide&quot;, &quot;drop&quot;, &quot;scale&quot;, customer effect name)
+     * &lt;p&gt;
+     * Animation effect for open/close. Choose a preset effect OR can specify a custom fxName as long as you also specify fxSettings
+     *
+     * @return
+     */
+    public EasingEffects getFxName()
+    {
+<span class="nc" id="L1215">        return fxName;</span>
+    }
+
+    /**
+     * fxName = &quot;slide&quot; (&quot;none&quot;, &quot;slide&quot;, &quot;drop&quot;, &quot;scale&quot;, customer effect name)
+     * &lt;p&gt;
+     * Animation effect for open/close. Choose a preset effect OR can specify a custom fxName as long as you also specify fxSettings
+     *
+     * @param fxName
+     */
+    public void setFxName(EasingEffects fxName)
+    {
+<span class="nc" id="L1227">        this.fxName = fxName;</span>
+<span class="nc" id="L1228">    }</span>
+
+    /**
+     * fxName = &quot;slide&quot; (&quot;none&quot;, &quot;slide&quot;, &quot;drop&quot;, &quot;scale&quot;, customer effect name)
+     * &lt;p&gt;
+     * Animation effect for open/close. Choose a preset effect OR can specify a custom fxName as long as you also specify fxSettings
+     *
+     * @return
+     */
+    public EasingEffects getFxName_open()
+    {
+<span class="nc" id="L1239">        return fxName_open;</span>
+    }
+
+    /**
+     * fxName = &quot;slide&quot; (&quot;none&quot;, &quot;slide&quot;, &quot;drop&quot;, &quot;scale&quot;, customer effect name)
+     * &lt;p&gt;
+     * Animation effect for open/close. Choose a preset effect OR can specify a custom fxName as long as you also specify fxSettings
+     *
+     * @param fxName_open
+     */
+    public void setFxName_open(EasingEffects fxName_open)
+    {
+<span class="nc" id="L1251">        this.fxName_open = fxName_open;</span>
+<span class="nc" id="L1252">    }</span>
+
+    /**
+     * fxName = &quot;slide&quot; (&quot;none&quot;, &quot;slide&quot;, &quot;drop&quot;, &quot;scale&quot;, customer effect name)
+     * &lt;p&gt;
+     * Animation effect for open/close. Choose a preset effect OR can specify a custom fxName as long as you also specify fxSettings s
+     *
+     * @return
+     */
+    public EasingEffects getFxName_close()
+    {
+<span class="nc" id="L1263">        return fxName_close;</span>
+    }
+
+    /**
+     * fxName = &quot;slide&quot; (&quot;none&quot;, &quot;slide&quot;, &quot;drop&quot;, &quot;scale&quot;, customer effect name)
+     * &lt;p&gt;
+     * Animation effect for open/close. Choose a preset effect OR can specify a custom fxName as long as you also specify fxSettings
+     *
+     * @param fxName_close
+     */
+    public void setFxName_close(EasingEffects fxName_close)
+    {
+<span class="nc" id="L1275">        this.fxName_close = fxName_close;</span>
+<span class="nc" id="L1276">    }</span>
+
+    /**
+     * fxSpeed = integer - ms
+     * &lt;p&gt;
+     * Speed of animations – standard jQuery keyword like 'fast', or a millisecond value.
+     *
+     * @return
+     */
+    public Integer getFxSpeed()
+    {
+<span class="nc" id="L1287">        return fxSpeed;</span>
+    }
+
+    /**
+     * fxSpeed = &quot;normal&quot; (&quot;fast&quot;, &quot;normal&quot;, &quot;slow&quot;, integer - ms)
+     * &lt;p&gt;
+     * Speed of animations – standard jQuery keyword like 'fast', or a millisecond value.
+     *
+     * @param fxSpeed
+     */
+    public void setFxSpeed(Integer fxSpeed)
+    {
+<span class="nc" id="L1299">        this.fxSpeed = fxSpeed;</span>
+<span class="nc" id="L1300">    }</span>
+
+    /**
+     * fxSpeed = &quot;normal&quot; (&quot;fast&quot;, &quot;normal&quot;, &quot;slow&quot;, integer - ms)
+     * &lt;p&gt;
+     * Speed of animations – standard jQuery keyword like 'fast', or a millisecond value.
+     *
+     * @return
+     */
+    public Integer getFxSpeed_open()
+    {
+<span class="nc" id="L1311">        return fxSpeed_open;</span>
+    }
+
+    /**
+     * fxSpeed = &quot;normal&quot; (&quot;fast&quot;, &quot;normal&quot;, &quot;slow&quot;, integer - ms)
+     * &lt;p&gt;
+     * Speed of animations – standard jQuery keyword like 'fast', or a millisecond value.
+     *
+     * @param fxSpeed_open
+     */
+    public void setFxSpeed_open(Integer fxSpeed_open)
+    {
+<span class="nc" id="L1323">        this.fxSpeed_open = fxSpeed_open;</span>
+<span class="nc" id="L1324">    }</span>
+
+    /**
+     * fxSpeed = &quot;normal&quot; (&quot;fast&quot;, &quot;normal&quot;, &quot;slow&quot;, integer - ms)
+     * &lt;p&gt;
+     * Speed of animations – standard jQuery keyword like 'fast', or a millisecond value.
+     *
+     * @return
+     */
+    public Integer getFxSpeed_close()
+    {
+<span class="nc" id="L1335">        return fxSpeed_close;</span>
+    }
+
+    /**
+     * fxSpeed = &quot;normal&quot; (&quot;fast&quot;, &quot;normal&quot;, &quot;slow&quot;, integer - ms)
+     * &lt;p&gt;
+     * Speed of animations – standard jQuery keyword like 'fast', or a millisecond value.
+     *
+     * @param fxSpeed_close
+     */
+    public void setFxSpeed_close(Integer fxSpeed_close)
+    {
+<span class="nc" id="L1347">        this.fxSpeed_close = fxSpeed_close;</span>
+<span class="nc" id="L1348">    }</span>
+
+    /**
+     * fxSettings = {} (Hash containing fx-settings)
+     * &lt;p&gt;
+     * You can customize the default animation settings by passing new settings, like:
+     * &lt;p&gt;
+     * $(&quot;body&quot;).layout({ fxName: &quot;slide&quot; , fxSettings: { duration: 500, easing: &quot;bounceInOut&quot; } });
+     *
+     * @return
+     */
+    public JWAnimationEffectsPart getFxSettings()
+    {
+<span class="nc" id="L1361">        return fxSettings;</span>
+    }
+
+    /**
+     * fxSettings = {} (Hash containing fx-settings)
+     * &lt;p&gt;
+     * You can customize the default animation settings by passing new settings, like:
+     * &lt;p&gt;
+     * $(&quot;body&quot;).layout({ fxName: &quot;slide&quot; , fxSettings: { duration: 500, easing: &quot;bounceInOut&quot; } });
+     *
+     * @param fxSettings
+     */
+    public void setFxSettings(JWAnimationEffectsPart fxSettings)
+    {
+<span class="nc" id="L1375">        this.fxSettings = fxSettings;</span>
+<span class="nc" id="L1376">    }</span>
+
+    /**
+     * fxSettings = {} (Hash containing fx-settings)
+     * &lt;p&gt;
+     * You can customize the default animation settings by passing new settings, like:
+     * &lt;p&gt;
+     * $(&quot;body&quot;).layout({ fxName: &quot;slide&quot; , fxSettings: { duration: 500, easing: &quot;bounceInOut&quot; } });
+     *
+     * @return
+     */
+    public JWAnimationEffectsPart getFxSettings_open()
+    {
+<span class="nc" id="L1389">        return fxSettings_open;</span>
+    }
+
+    /**
+     * fxSettings = {} (Hash containing fx-settings)
+     * &lt;p&gt;
+     * You can customize the default animation settings by passing new settings, like:
+     * &lt;p&gt;
+     * $(&quot;body&quot;).layout({ fxName: &quot;slide&quot; , fxSettings: { duration: 500, easing: &quot;bounceInOut&quot; } });
+     *
+     * @param fxSettings_open
+     */
+    public void setFxSettings_open(JWAnimationEffectsPart fxSettings_open)
+    {
+<span class="nc" id="L1403">        this.fxSettings_open = fxSettings_open;</span>
+<span class="nc" id="L1404">    }</span>
+
+    /**
+     * fxSettings = {} (Hash containing fx-settings)
+     * &lt;p&gt;
+     * You can customize the default animation settings by passing new settings, like:
+     * &lt;p&gt;
+     * $(&quot;body&quot;).layout({ fxName: &quot;slide&quot; , fxSettings: { duration: 500, easing: &quot;bounceInOut&quot; } });
+     *
+     * @return
+     */
+    public JWAnimationEffectsPart getFxSettings_close()
+    {
+<span class="nc" id="L1417">        return fxSettings_close;</span>
+    }
+
+    /**
+     * fxSettings = {} (Hash containing fx-settings)
+     * &lt;p&gt;
+     * You can customize the default animation settings by passing new settings, like:
+     * &lt;p&gt;
+     * $(&quot;body&quot;).layout({ fxName: &quot;slide&quot; , fxSettings: { duration: 500, easing: &quot;bounceInOut&quot; } });
+     *
+     * @param fxSettings_close
+     */
+    public void setFxSettings_close(JWAnimationEffectsPart fxSettings_close)
+    {
+<span class="nc" id="L1431">        this.fxSettings_close = fxSettings_close;</span>
+<span class="nc" id="L1432">    }</span>
+
+    /**
+     * initClosed = false (true, false)
+     * &lt;p&gt;
+     * If 'true', then pane is 'closed' when layout is created
+     *
+     * @return
+     */
+    public Boolean isInitClosed()
+    {
+<span class="fc" id="L1443">        return initClosed;</span>
+    }
+
+    /**
+     * initClosed = false (true, false)
+     * &lt;p&gt;
+     * If 'true', then pane is 'closed' when layout is created
+     *
+     * @param initClosed
+     */
+    public void setInitClosed(Boolean initClosed)
+    {
+<span class="nc" id="L1455">        this.initClosed = initClosed;</span>
+<span class="nc" id="L1456">    }</span>
+
+    /**
+     * initHidden = false (true, false)
+     * &lt;p&gt;
+     * If 'true', then pane is 'hidden' when layout is created - no resizer or spacing is visible, as if the pane does not exist!
+     *
+     * @return
+     */
+    public Boolean isInitHidden()
+    {
+<span class="fc" id="L1467">        return initHidden;</span>
+    }
+
+    /**
+     * initHidden = false (true, false)
+     * &lt;p&gt;
+     * If 'true', then pane is 'hidden' when layout is created - no resizer or spacing is visible, as if the pane does not exist!
+     *
+     * @param initHidden
+     */
+    public void setInitHidden(Boolean initHidden)
+    {
+<span class="nc" id="L1479">        this.initHidden = initHidden;</span>
+<span class="nc" id="L1480">    }</span>
+
+    /**
+     * Gets the Layout Div for which these options belong
+     *
+     * @return
+     */
+    public final JQLayoutDiv getLayoutDiv()
+    {
+<span class="nc" id="L1489">        return layoutDiv;</span>
+    }
+
+    /**
+     * Sets the Layout Div for which these options belong
+     *
+     * @param layoutDiv
+     */
+    public final void setLayoutDiv(JQLayoutDiv layoutDiv)
+    {
+<span class="nc" id="L1499">        this.layoutDiv = layoutDiv;</span>
+<span class="nc" id="L1500">    }</span>
+
+    /**
+     * Specifies HotKey Entries specific to the layout
+     */
+<span class="pc" id="L1505">    public enum CustomHotkeyModifier</span>
+    {
+
+        /**
+         * Control Key
+         */
+<span class="fc" id="L1511">        CNTRL,</span>
+        /**
+         * Shift Key
+         */
+<span class="fc" id="L1515">        SHIFT,</span>
+        /**
+         * Control and Shift Key
+         */
+<span class="fc" id="L1519">        CNTRL_SHIFT;</span>
+
+        /**
+         * Returns the name of the enumerator replacing all underscores with +
+         *
+         * @return
+         */
+        @Override
+        public String toString()
+        {
+<span class="nc" id="L1529">            return name().replaceAll(&quot;_&quot;, &quot;+&quot;);</span>
+        }
+    }
+
+    /**
+     * If the layout is responsive
+     * @return 
+     */
+    public Boolean getResponsive()
+    {
+<span class="nc bnc" id="L1539" title="All 2 branches missed.">        if(responsive == null)</span>
+<span class="nc" id="L1540">            return false;</span>
+<span class="nc" id="L1541">        return responsive;</span>
+    }
+
+    /**
+     * If the layout is responsive
+     * @param responsive 
+     */
+    public void setResponsive(Boolean responsive)
+    {
+<span class="nc" id="L1550">        this.responsive = responsive;</span>
+<span class="nc" id="L1551">    }</span>
+
+    /**
+     * From when should the layout be responsive
+     * @return 
+     */
+    public BootstrapSize getResponsiveWhen()
+    {
+<span class="nc bnc" id="L1559" title="All 2 branches missed.">        if(responsiveWhen == null)</span>
+<span class="nc" id="L1560">            return BootstrapSize.Medium;</span>
+<span class="nc" id="L1561">        return responsiveWhen;</span>
+    }
+
+    /**
+     * Sets when the layout should be responsive
+     * @param responsiveWhen 
+     */
+    public void setResponsiveWhen(BootstrapSize responsiveWhen)
+    {
+<span class="nc" id="L1570">        this.responsiveWhen = responsiveWhen;</span>
+<span class="nc" id="L1571">    }</span>
+    
+    
+
+    @Override
+    public JavascriptPartType getJavascriptType()
+    {
+<span class="nc" id="L1578">        return JavascriptPartType.Javascript;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

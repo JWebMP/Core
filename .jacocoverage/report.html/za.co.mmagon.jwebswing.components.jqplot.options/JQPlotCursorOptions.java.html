@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQPlotCursorOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqplot.options</a> &gt; <span class="el_source">JQPlotCursorOptions.java</span></div><h1>JQPlotCursorOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2014 mmagon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqplot.options;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import java.util.ArrayList;
+import za.co.mmagon.jwebswing.components.jqplot.JQPlotGraph;
+import za.co.mmagon.jwebswing.components.jqplot.parts.interfaces.JQPlotRendererDefault;
+import za.co.mmagon.jwebswing.components.jqplot.references.JQPlotJavascriptReferencePool;
+import za.co.mmagon.jwebswing.generics.XYObject;
+import za.co.mmagon.jwebswing.htmlbuilder.css.displays.Cursors;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ * The Cursor Plugin for the JQuery Plot Library
+ *
+ * @author mmagon
+ * @since 2014/07/09
+ */
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class JQPlotCursorOptions extends JavaScriptPart implements JQPlotRendererDefault
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * CSS spec for cursor style
+     */
+    private Cursors style;
+    /**
+     * Whether to show the cursor or not.
+     */
+    private Boolean show;
+    /**
+     * Show tooltip or not
+     */
+    private Boolean showTooltip;
+    /**
+     * Tooltip follows the mouse, it is not at a fixed location.
+     */
+    private Boolean followMouse;
+    /**
+     * Where to position tooltip.
+     */
+    private String tooltipLocation;
+    /**
+     * Pixel offset of tooltip from the grid boudaries or cursor center.
+     */
+    private Integer tooltipOffset;
+    /**
+     * show the grid pixel coordinates of the mouse.
+     */
+    private Boolean showTooltipGridPosition;
+    /**
+     * show the unit (data) coordinates of the mouse.
+     */
+    private Boolean showTooltipUnitPosition;
+    /**
+     * Used with showVerticalLine to show intersecting data points in the tooltip.
+     */
+    private Boolean showTooltipDataPosition;
+    /**
+     * sprintf format string for the tooltip.
+     */
+    private String tooltipFormatString;
+    /**
+     * Use the x and y axes formatters to format the text in the tooltip.
+     */
+    private Boolean useAxesFormatters;
+
+    /**
+     * Show position for the specified axes&lt;p&gt;
+     * This is an array like [[‘xaxis’, ‘yaxis’], [‘xaxis’, ‘y2axis’]] Default is to compute automatically for all visible axes.
+     */
+    private ArrayList&lt;XYObject&gt; tooltipAxisGroups;
+    /**
+     * Enable plot zooming.
+     */
+    private Boolean zoom;
+    /**
+     * Will expand zoom range to provide more rounded tick values.
+     */
+    private Boolean looseZoom;
+    /**
+     * Will reset plot zoom if single click on plot without drag.
+     */
+    private Boolean clickReset;
+    /**
+     * Will reset plot zoom if double click on plot without drag.
+     */
+    private Boolean dblClickReset;
+    /**
+     * draw a vertical line across the plot which follows the cursor.
+     */
+    private Boolean showVerticalLine;
+    /**
+     * draw a horizontal line across the plot which follows the cursor.
+     */
+    private Boolean showHorizontalLine;
+    /**
+     * ‘none’, ‘x’ or ‘y’
+     */
+    private String constrainZoomTo;
+    /**
+     * pixel distance from data point or marker to consider cursor lines intersecting with point.
+     */
+    private Integer intersectionThreshold;
+    /**
+     * Replace the plot legend with an enhanced legend displaying intersection information.
+     */
+    private Boolean showCursorLegend;
+    /**
+     * Format string used in the cursor legend.
+     */
+    private String cursorLegendFormatString;
+    /**
+     * True to limit actual zoom area to edges of grid, even when zooming outside of plot area.
+     */
+    private Boolean constrainOutsideZoom;
+    /**
+     * True will keep updating the tooltip when zooming of the grid.
+     */
+    private Boolean showTooltipOutsideZoom;
+
+    @JsonIgnore
+    private JQPlotGraph linkedGraph;
+
+    /**
+     * Constructs a new instance of the cursor object
+     *
+     * @param linkedGraph
+     */
+    public JQPlotCursorOptions(JQPlotGraph linkedGraph)
+<span class="nc" id="L149">    {</span>
+<span class="nc" id="L150">        this.linkedGraph = linkedGraph;</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">        if (linkedGraph != null)</span>
+        {
+<span class="nc" id="L153">            this.linkedGraph.getJavascriptReferences().add(JQPlotJavascriptReferencePool.CursorRenderer.getReference());</span>
+        }
+<span class="nc" id="L155">    }</span>
+
+    /**
+     * Gets the linked graph
+     *
+     * @return
+     */
+    public JQPlotGraph getLinkedGraph()
+    {
+<span class="nc" id="L164">        return linkedGraph;</span>
+    }
+
+    /**
+     * Set the linked graph and adds the reference
+     *
+     * @param linkedGraph
+     */
+    public void setLinkedGraph(JQPlotGraph linkedGraph)
+    {
+<span class="nc bnc" id="L174" title="All 2 branches missed.">        if (this.linkedGraph != null)</span>
+        {
+<span class="nc" id="L176">            this.linkedGraph.getJavascriptReferences().remove(JQPlotJavascriptReferencePool.CursorRenderer.getReference());</span>
+        }
+<span class="nc" id="L178">        this.linkedGraph = linkedGraph;</span>
+<span class="nc" id="L179">        this.linkedGraph.getJavascriptReferences().add(JQPlotJavascriptReferencePool.CursorRenderer.getReference());</span>
+<span class="nc" id="L180">    }</span>
+
+    /**
+     * CSS spec for cursor style
+     *
+     * @return
+     */
+    public Cursors getStyle()
+    {
+<span class="nc" id="L189">        return style;</span>
+    }
+
+    /**
+     * CSS spec for cursor style
+     *
+     * @param style
+     */
+    public void setStyle(Cursors style)
+    {
+<span class="nc" id="L199">        this.style = style;</span>
+<span class="nc" id="L200">    }</span>
+
+    /**
+     * Whether to show the cursor or not.
+     *
+     * @return
+     */
+    public Boolean isShow()
+    {
+<span class="nc" id="L209">        return show;</span>
+    }
+
+    /**
+     * Whether to show the cursor or not.
+     *
+     * @param show
+     */
+    public void setShow(Boolean show)
+    {
+<span class="nc" id="L219">        this.show = show;</span>
+<span class="nc" id="L220">    }</span>
+
+    /**
+     * Show tooltip or not
+     *
+     * @return
+     */
+    public Boolean isShowTooltip()
+    {
+<span class="nc" id="L229">        return showTooltip;</span>
+    }
+
+    /**
+     * Show tooltip or not
+     *
+     * @param showTooltip
+     */
+    public void setShowTooltip(Boolean showTooltip)
+    {
+<span class="nc" id="L239">        this.showTooltip = showTooltip;</span>
+<span class="nc" id="L240">    }</span>
+
+    /**
+     * Tooltip follows the mouse, it is not at a fixed location.
+     *
+     * @return
+     */
+    public Boolean isFollowMouse()
+    {
+<span class="nc" id="L249">        return followMouse;</span>
+    }
+
+    /**
+     * Tooltip follows the mouse, it is not at a fixed location.
+     *
+     * @param followMouse
+     */
+    public void setFollowMouse(Boolean followMouse)
+    {
+<span class="nc" id="L259">        this.followMouse = followMouse;</span>
+<span class="nc" id="L260">    }</span>
+
+    /**
+     * Where to position tooltip. 'n' etc
+     *
+     * @return
+     */
+    public String getTooltipLocation()
+    {
+<span class="nc" id="L269">        return tooltipLocation;</span>
+    }
+
+    /**
+     * Where to position tooltip.
+     *
+     * @param tooltipLocation
+     */
+    public void setTooltipLocation(String tooltipLocation)
+    {
+<span class="nc" id="L279">        this.tooltipLocation = tooltipLocation;</span>
+<span class="nc" id="L280">    }</span>
+
+    /**
+     * Pixel offset of tooltip from the grid boundaries or cursor center.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getTooltipOffset()
+    {
+<span class="nc" id="L289">        return tooltipOffset;</span>
+    }
+
+    /**
+     * Pixel offset of tooltip from the grid boundaries or cursor center.
+     * &lt;p&gt;
+     * @param tooltipOffset
+     */
+    public void setTooltipOffset(Integer tooltipOffset)
+    {
+<span class="nc" id="L299">        this.tooltipOffset = tooltipOffset;</span>
+<span class="nc" id="L300">    }</span>
+
+    /**
+     * show the grid pixel coordinates of the mouse.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean isShowTooltipGridPosition()
+    {
+<span class="nc" id="L309">        return showTooltipGridPosition;</span>
+    }
+
+    /**
+     * show the grid pixel coordinates of the mouse.
+     * &lt;p&gt;
+     * @param showTooltipGridPosition
+     */
+    public void setShowTooltipGridPosition(Boolean showTooltipGridPosition)
+    {
+<span class="nc" id="L319">        this.showTooltipGridPosition = showTooltipGridPosition;</span>
+<span class="nc" id="L320">    }</span>
+
+    /**
+     * show the unit (data) coordinates of the mouse.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean isShowTooltipUnitPosition()
+    {
+<span class="nc" id="L329">        return showTooltipUnitPosition;</span>
+    }
+
+    /**
+     * show the unit (data) coordinates of the mouse.
+     * &lt;p&gt;
+     * @param showTooltipUnitPosition
+     */
+    public void setShowTooltipUnitPosition(Boolean showTooltipUnitPosition)
+    {
+<span class="nc" id="L339">        this.showTooltipUnitPosition = showTooltipUnitPosition;</span>
+<span class="nc" id="L340">    }</span>
+
+    /**
+     * Used with showVerticalLine to show intersecting data points in the tooltip.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean isShowTooltipDataPosition()
+    {
+<span class="nc" id="L349">        return showTooltipDataPosition;</span>
+    }
+
+    /**
+     * Used with showVerticalLine to show intersecting data points in the tooltip.
+     * &lt;p&gt;
+     * @param showTooltipDataPosition
+     */
+    public void setShowTooltipDataPosition(Boolean showTooltipDataPosition)
+    {
+<span class="nc" id="L359">        this.showTooltipDataPosition = showTooltipDataPosition;</span>
+<span class="nc" id="L360">    }</span>
+
+    /**
+     * sprintf format string for the tooltip.
+     * &lt;p&gt;
+     * @return
+     */
+    public String getTooltipFormatString()
+    {
+<span class="nc" id="L369">        return tooltipFormatString;</span>
+    }
+
+    /**
+     * sprintf format string for the tooltip.
+     * &lt;p&gt;
+     * @param tooltipFormatString
+     */
+    public void setTooltipFormatString(String tooltipFormatString)
+    {
+<span class="nc" id="L379">        this.tooltipFormatString = tooltipFormatString;</span>
+<span class="nc" id="L380">    }</span>
+
+    /**
+     * Use the x and y axes formatters to format the text in the tooltip.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getUseAxesFormatters()
+    {
+<span class="nc" id="L389">        return useAxesFormatters;</span>
+    }
+
+    /**
+     * Use the x and y axes formatters to format the text in the tooltip.
+     * &lt;p&gt;
+     * @param useAxesFormatters
+     */
+    public void setUseAxesFormatters(Boolean useAxesFormatters)
+    {
+<span class="nc" id="L399">        this.useAxesFormatters = useAxesFormatters;</span>
+<span class="nc" id="L400">    }</span>
+
+    /**
+     * Enable plot zooming.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean isZoom()
+    {
+<span class="nc" id="L409">        return zoom;</span>
+    }
+
+    /**
+     * Enable plot zooming.
+     * &lt;p&gt;
+     * @param zoom
+     */
+    public void setZoom(Boolean zoom)
+    {
+<span class="nc" id="L419">        this.zoom = zoom;</span>
+<span class="nc" id="L420">    }</span>
+
+    /**
+     * Will expand zoom range to provide more rounded tick values.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean isLooseZoom()
+    {
+<span class="nc" id="L429">        return looseZoom;</span>
+    }
+
+    /**
+     * Will expand zoom range to provide more rounded tick values.
+     * &lt;p&gt;
+     * @param looseZoom
+     */
+    public void setLooseZoom(Boolean looseZoom)
+    {
+<span class="nc" id="L439">        this.looseZoom = looseZoom;</span>
+<span class="nc" id="L440">    }</span>
+
+    /**
+     * Will reset plot zoom if single click on plot without drag.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean isClickReset()
+    {
+<span class="nc" id="L449">        return clickReset;</span>
+    }
+
+    /**
+     * Will reset plot zoom if single click on plot without drag.
+     * &lt;p&gt;
+     * @param clickReset
+     */
+    public void setClickReset(Boolean clickReset)
+    {
+<span class="nc" id="L459">        this.clickReset = clickReset;</span>
+<span class="nc" id="L460">    }</span>
+
+    /**
+     * Will reset plot zoom if double click on plot without drag.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean isDblClickReset()
+    {
+<span class="nc" id="L469">        return dblClickReset;</span>
+    }
+
+    /**
+     * Will reset plot zoom if double click on plot without drag.
+     * &lt;p&gt;
+     * @param dblClickReset
+     */
+    public void setDblClickReset(Boolean dblClickReset)
+    {
+<span class="nc" id="L479">        this.dblClickReset = dblClickReset;</span>
+<span class="nc" id="L480">    }</span>
+
+    /**
+     * draw a vertical line across the plot which follows the cursor.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean isShowVerticalLine()
+    {
+<span class="nc" id="L489">        return showVerticalLine;</span>
+    }
+
+    /**
+     * draw a vertical line across the plot which follows the cursor.
+     * &lt;p&gt;
+     * @param showVerticalLine
+     */
+    public void setShowVerticalLine(Boolean showVerticalLine)
+    {
+<span class="nc" id="L499">        this.showVerticalLine = showVerticalLine;</span>
+<span class="nc" id="L500">    }</span>
+
+    /**
+     * draw a horizontal line across the plot which follows the cursor.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean isShowHorizontalLine()
+    {
+<span class="nc" id="L509">        return showHorizontalLine;</span>
+    }
+
+    /**
+     * draw a horizontal line across the plot which follows the cursor.
+     * &lt;p&gt;
+     * @param showHorizontalLine
+     */
+    public void setShowHorizontalLine(Boolean showHorizontalLine)
+    {
+<span class="nc" id="L519">        this.showHorizontalLine = showHorizontalLine;</span>
+<span class="nc" id="L520">    }</span>
+
+    /**
+     * ‘none’, ‘x’ or ‘y’
+     * &lt;p&gt;
+     * @return
+     */
+    public String getConstrainZoomTo()
+    {
+<span class="nc" id="L529">        return constrainZoomTo;</span>
+    }
+
+    /**
+     * ‘none’, ‘x’ or ‘y’
+     * &lt;p&gt;
+     * @param constrainZoomTo
+     */
+    public void setConstrainZoomTo(String constrainZoomTo)
+    {
+<span class="nc" id="L539">        this.constrainZoomTo = constrainZoomTo;</span>
+<span class="nc" id="L540">    }</span>
+
+    /**
+     * pixel distance from data point or marker to consider cursor lines intersecting with point.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getIntersectionThreshold()
+    {
+<span class="nc" id="L549">        return intersectionThreshold;</span>
+    }
+
+    /**
+     * pixel distance from data point or marker to consider cursor lines intersecting with point.
+     * &lt;p&gt;
+     * @param intersectionThreshold
+     */
+    public void setIntersectionThreshold(Integer intersectionThreshold)
+    {
+<span class="nc" id="L559">        this.intersectionThreshold = intersectionThreshold;</span>
+<span class="nc" id="L560">    }</span>
+
+    /**
+     * Replace the plot legend with an enhanced legend displaying intersection information.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean isShowCursorLegend()
+    {
+<span class="nc" id="L569">        return showCursorLegend;</span>
+    }
+
+    /**
+     * Replace the plot legend with an enhanced legend displaying intersection information.
+     * &lt;p&gt;
+     * @param showCursorLegend
+     */
+    public void setShowCursorLegend(Boolean showCursorLegend)
+    {
+<span class="nc" id="L579">        this.showCursorLegend = showCursorLegend;</span>
+<span class="nc" id="L580">    }</span>
+
+    /**
+     * Format string used in the cursor legend.
+     * &lt;p&gt;
+     * @return
+     */
+    public String getCursorLegendFormatString()
+    {
+<span class="nc" id="L589">        return cursorLegendFormatString;</span>
+    }
+
+    /**
+     * Format string used in the cursor legend.
+     * &lt;p&gt;
+     * @param cursorLegendFormatString
+     */
+    public void setCursorLegendFormatString(String cursorLegendFormatString)
+    {
+<span class="nc" id="L599">        this.cursorLegendFormatString = cursorLegendFormatString;</span>
+<span class="nc" id="L600">    }</span>
+
+    /**
+     * True to limit actual zoom area to edges of grid, even when zooming outside of plot area.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean isConstrainOutsideZoom()
+    {
+<span class="nc" id="L609">        return constrainOutsideZoom;</span>
+    }
+
+    /**
+     * True to limit actual zoom area to edges of grid, even when zooming outside of plot area.
+     * &lt;p&gt;
+     * @param constrainOutsideZoom
+     */
+    public void setConstrainOutsideZoom(Boolean constrainOutsideZoom)
+    {
+<span class="nc" id="L619">        this.constrainOutsideZoom = constrainOutsideZoom;</span>
+<span class="nc" id="L620">    }</span>
+
+    /**
+     * True will keep updating the tooltip when zooming of the grid.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean isShowTooltipOutsideZoom()
+    {
+<span class="nc" id="L629">        return showTooltipOutsideZoom;</span>
+    }
+
+    /**
+     * True will keep updating the tooltip when zooming of the grid.
+     * &lt;p&gt;
+     * @param showTooltipOutsideZoom
+     */
+    public void setShowTooltipOutsideZoom(Boolean showTooltipOutsideZoom)
+    {
+<span class="nc" id="L639">        this.showTooltipOutsideZoom = showTooltipOutsideZoom;</span>
+<span class="nc" id="L640">    }</span>
+
+    @Override
+    public String getRenderer()
+    {
+<span class="nc" id="L645">        return &quot;$.jqplot.Cursor&quot;;</span>
+    }
+
+    /**
+     * Show position for the specified axes&lt;p&gt;
+     * This is an array like [[‘xaxis’, ‘yaxis’], [‘xaxis’, ‘y2axis’]] Default is to compute automatically for all visible axes.
+     *
+     * @return
+     */
+    public ArrayList&lt;XYObject&gt; getTooltipAxisGroups()
+    {
+<span class="nc bnc" id="L656" title="All 2 branches missed.">        if (tooltipAxisGroups == null)</span>
+        {
+<span class="nc" id="L658">            tooltipAxisGroups = new ArrayList&lt;&gt;();</span>
+        }
+<span class="nc" id="L660">        return tooltipAxisGroups;</span>
+    }
+
+    /**
+     * Show position for the specified axes&lt;p&gt;
+     * This is an array like [[‘xaxis’, ‘yaxis’], [‘xaxis’, ‘y2axis’]] Default is to compute automatically for all visible axes.
+     *
+     * @param tooltipAxisGroups
+     */
+    public void setTooltipAxisGroups(ArrayList&lt;XYObject&gt; tooltipAxisGroups)
+    {
+<span class="nc" id="L671">        this.tooltipAxisGroups = tooltipAxisGroups;</span>
+<span class="nc" id="L672">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

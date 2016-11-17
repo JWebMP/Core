@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQUIAccordionOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqueryui.accordion</a> &gt; <span class="el_source">JQUIAccordionOptions.java</span></div><h1>JQUIAccordionOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqueryui.accordion;
+
+import za.co.mmagon.jwebswing.base.html.attributes.HeaderTypes;
+import za.co.mmagon.jwebswing.htmlbuilder.effects.JWAnimationEffectsPart;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.mouseevents.MouseEventType;
+
+/**
+ * Specifies all the accordion tabs
+ *
+ * @author GedMarc
+ * @since Mar 8, 2015
+ * @version 1.0
+ * &lt;p&gt;
+ *
+ */
+public class JQUIAccordionOptions extends JavaScriptPart
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Which panel index is currently open.
+     */
+    private Integer active;
+    /**
+     * The animation to be used
+     */
+    private JWAnimationEffectsPart animate;
+    /**
+     * Whether all the sections can be closed at once. Allows collapsing the active section.
+     */
+    private Boolean collapsible;
+    /**
+     * Whether or not the accordion is disabled
+     */
+    private Boolean disabled;
+    /**
+     * The event that accordion headers will react to in order to activate the associated panel. Multiple events can be specified, separated by a space.
+     */
+    private MouseEventType event;
+    /**
+     * The header type that denotes a header
+     */
+    private HeaderTypes header;
+    /**
+     * The type of height handling to apply
+     */
+    private JQUIAccordionHeightStyle heightStyle;
+    /**
+     * The closed and open icon style
+     */
+    private JQUIAccordionIconOptions icons;
+
+    /**
+     * Constructs a new instance of the available JQuery UI Accordion Options
+     */
+    public JQUIAccordionOptions()
+<span class="fc" id="L75">    {</span>
+<span class="fc" id="L76">    }</span>
+
+    /**
+     * Returns the panel that is active
+     *
+     * @return
+     */
+    public Integer getActive()
+    {
+<span class="nc" id="L85">        return active;</span>
+    }
+
+    /**
+     * Sets the panel that is active
+     *
+     * @param active
+     */
+    public void setActive(Integer active)
+    {
+<span class="fc" id="L95">        this.active = active;</span>
+<span class="fc" id="L96">    }</span>
+
+    /**
+     * Gets and Sets the Animate
+     *
+     * @return
+     */
+    public JWAnimationEffectsPart getAnimate()
+    {
+<span class="fc bfc" id="L105" title="All 2 branches covered.">        if (animate == null)</span>
+        {
+<span class="fc" id="L107">            animate = new JWAnimationEffectsPart();</span>
+        }
+<span class="fc" id="L109">        return animate;</span>
+    }
+
+    /**
+     * Sets the animation
+     *
+     * @param animate
+     */
+    public void setAnimate(JWAnimationEffectsPart animate)
+    {
+<span class="nc" id="L119">        this.animate = animate;</span>
+<span class="nc" id="L120">    }</span>
+
+    /**
+     * Returns Whether all the sections can be closed at once. Allows collapsing the active section.
+     *
+     * @return
+     */
+    public Boolean getCollapsible()
+    {
+<span class="nc" id="L129">        return collapsible;</span>
+    }
+
+    /**
+     * Sets Whether all the sections can be closed at once. Allows collapsing the active section.
+     *
+     * @param collapsible
+     */
+    public void setCollapsible(Boolean collapsible)
+    {
+<span class="fc" id="L139">        this.collapsible = collapsible;</span>
+<span class="fc" id="L140">    }</span>
+
+    /**
+     * Gets the disabled flag for the accordion
+     *
+     * @return
+     */
+    public Boolean getDisabled()
+    {
+<span class="nc" id="L149">        return disabled;</span>
+    }
+
+    /**
+     * Sets the disabled flag for the accordion
+     *
+     * @param disabled
+     */
+    public void setDisabled(Boolean disabled)
+    {
+<span class="nc" id="L159">        this.disabled = disabled;</span>
+<span class="nc" id="L160">    }</span>
+
+    /**
+     * Gets all the events that will trigger the accordion
+     *
+     * @return
+     */
+    public MouseEventType getEvent()
+    {
+<span class="nc" id="L169">        return event;</span>
+    }
+
+    /**
+     * Sets the event that will trigger the accordion
+     *
+     * @param event
+     */
+    public void setEvent(MouseEventType event)
+    {
+<span class="fc" id="L179">        this.event = event;</span>
+<span class="fc" id="L180">    }</span>
+
+    /**
+     * Gets the header type that marks a group
+     *
+     * @return
+     */
+    public HeaderTypes getHeader()
+    {
+<span class="nc" id="L189">        return header;</span>
+    }
+
+    /**
+     * Sets the header type to be used as a group
+     *
+     * @param header
+     */
+    public void setHeader(HeaderTypes header)
+    {
+<span class="fc" id="L199">        this.header = header;</span>
+<span class="fc" id="L200">    }</span>
+
+    /**
+     * Gets the height style
+     *
+     * @return
+     */
+    public JQUIAccordionHeightStyle getHeightStyle()
+    {
+<span class="nc" id="L209">        return heightStyle;</span>
+    }
+
+    /**
+     * Sets the height style
+     *
+     * @param heightStyle
+     */
+    public void setHeightStyle(JQUIAccordionHeightStyle heightStyle)
+    {
+<span class="fc" id="L219">        this.heightStyle = heightStyle;</span>
+<span class="fc" id="L220">    }</span>
+
+    /**
+     * Gets the Icon Options
+     *
+     * @return
+     */
+    public JQUIAccordionIconOptions getIcons()
+    {
+<span class="fc bfc" id="L229" title="All 2 branches covered.">        if (icons == null)</span>
+        {
+<span class="fc" id="L231">            icons = new JQUIAccordionIconOptions();</span>
+        }
+<span class="fc" id="L233">        return icons;</span>
+    }
+
+    /**
+     * Sets the icon options
+     *
+     * @param icons
+     */
+    public void setIcons(JQUIAccordionIconOptions icons)
+    {
+<span class="nc" id="L243">        this.icons = icons;</span>
+<span class="nc" id="L244">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

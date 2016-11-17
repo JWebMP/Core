@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TableHeader.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">TableHeader.java</span></div><h1>TableHeader.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html;
+
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.TableChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.TableRowChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemeBlocks;
+
+/**
+ * Browser Support
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * Internet Explorer Firefox Opera Google Chrome Safari&lt;p&gt;
+ * &lt;p&gt;
+ * The th tag is supported in all major browsers.
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * Definition and Usage&lt;p&gt;
+ * &lt;p&gt;
+ * The th tag defines a header cell in an HTML table.&lt;p&gt;
+ * &lt;p&gt;
+ * An HTML table has two kinds of cells:
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * Header cells - contains header information (created with the th element) Standard cells - contains data (created with the td element)
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * The text in th elements are bold and centered by default.&lt;p&gt;
+ * &lt;p&gt;
+ * The text in td elements are regular and left-aligned by default.
+ * &lt;p&gt;
+ * Tips and Notes&lt;p&gt;
+ * &lt;p&gt;
+ * Tip: Use the colspan and rowspan attribute to let the content span over multiple columns or rows! Differences Between HTML 4.01 and HTML5&lt;p&gt;
+ * &lt;p&gt;
+ * Some HTML 4.01 attributes are not supported in HTML5.&lt;p&gt;
+ *
+ * @author MMagon
+ * @since Forever
+ * @version 1.0
+ */
+public class TableHeader extends Component&lt;Component, NoAttributes, GlobalFeatures, GlobalEvents, TableHeader&gt;
+        implements TableChildren&lt;NoAttributes&gt;, TableRowChildren&lt;NoAttributes&gt;, NoNewLineBeforeClosingTag, NoNewLineForRawText
+{
+
+    /**
+     * Constructs an empty Table Header
+     */
+    public TableHeader()
+    {
+<span class="nc" id="L56">        this(null);</span>
+<span class="nc" id="L57">    }</span>
+
+    /**
+     * Constructs a new header with the given text
+     *
+     * @param headerText
+     */
+    public TableHeader(String headerText)
+    {
+<span class="fc" id="L66">        super(ComponentTypes.TableHeader);</span>
+<span class="fc" id="L67">        setText(headerText);</span>
+        /*
+         *
+         */
+<span class="fc" id="L71">    }</span>
+
+    /**
+     * *
+     * Adds the theming classes to the header
+     */
+    public void addTheming()
+    {
+<span class="nc" id="L79">        addClass(JQUIThemeBlocks.UI_Widget_Header);</span>
+<span class="nc" id="L80">        addClass(JQUIThemeBlocks.UI_State_Hover);</span>
+<span class="nc" id="L81">        addClass(JQUIThemeBlocks.UI_Priority_Primary);</span>
+<span class="nc" id="L82">    }</span>
+
+    /**
+     * Removes the default theming classes from the header
+     */
+    public void removeTheming()
+    {
+        /*
+         * removeClass(JQUIThemeBlocks.UI_Widget_Header);
+         * removeClass(JQUIThemeBlocks.UI_State_Hover);
+         * removeClass(JQUIThemeBlocks.UI_Priority_Primary);
+         */
+<span class="nc" id="L94">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

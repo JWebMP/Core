@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQXLoaderOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqxwidgets.loader</a> &gt; <span class="el_source">JQXLoaderOptions.java</span></div><h1>JQXLoaderOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqxwidgets.loader;
+
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.htmlbuilder.css.text.VerticalAlignments;
+import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
+
+/**
+ * All the options for the Loader
+ * &lt;p&gt;
+ * @author GedMarc
+ * @since Mar 4, 2015
+ * @version 1.0
+ * &lt;p&gt;
+ * &lt;p&gt;
+ */
+public class JQXLoaderOptions extends JavaScriptPart
+{
+
+    private Boolean autoOpen;
+    private Integer height;
+    private Integer width;
+    private String html;
+    private Boolean isModal;
+    private VerticalAlignments imagePosition;
+    private Boolean rtl;
+    private String text;
+    private VerticalAlignments textPosition;
+    private String theme;
+
+    public JQXLoaderOptions()
+<span class="nc" id="L49">    {</span>
+
+<span class="nc" id="L51">    }</span>
+
+    @Override
+    public JavascriptPartType getJavascriptType()
+    {
+<span class="nc" id="L56">        return JavascriptPartType.Javascript;</span>
+    }
+
+    public Boolean getAutoOpen()
+    {
+<span class="nc" id="L61">        return autoOpen;</span>
+    }
+
+    public void setAutoOpen(Boolean autoOpen)
+    {
+<span class="nc" id="L66">        this.autoOpen = autoOpen;</span>
+<span class="nc" id="L67">    }</span>
+
+    public Integer getHeight()
+    {
+<span class="nc" id="L71">        return height;</span>
+    }
+
+    public void setHeight(Integer height)
+    {
+<span class="nc" id="L76">        this.height = height;</span>
+<span class="nc" id="L77">    }</span>
+
+    public Integer getWidth()
+    {
+<span class="nc" id="L81">        return width;</span>
+    }
+
+    public void setWidth(Integer width)
+    {
+<span class="nc" id="L86">        this.width = width;</span>
+<span class="nc" id="L87">    }</span>
+
+    public String getHtml()
+    {
+<span class="nc" id="L91">        return html;</span>
+    }
+
+    public void setHtml(Component html)
+    {
+<span class="nc" id="L96">        html.setTiny(true);</span>
+<span class="nc" id="L97">        this.html = html.toString(true);</span>
+<span class="nc" id="L98">    }</span>
+
+    public Boolean getIsModal()
+    {
+<span class="nc" id="L102">        return isModal;</span>
+    }
+
+    public void setIsModal(Boolean isModal)
+    {
+<span class="nc" id="L107">        this.isModal = isModal;</span>
+<span class="nc" id="L108">    }</span>
+
+    public VerticalAlignments getImagePosition()
+    {
+<span class="nc" id="L112">        return imagePosition;</span>
+    }
+
+    public void setImagePosition(VerticalAlignments imagePosition)
+    {
+<span class="nc" id="L117">        this.imagePosition = imagePosition;</span>
+<span class="nc" id="L118">    }</span>
+
+    public Boolean getRtl()
+    {
+<span class="nc" id="L122">        return rtl;</span>
+    }
+
+    public void setRtl(Boolean rtl)
+    {
+<span class="nc" id="L127">        this.rtl = rtl;</span>
+<span class="nc" id="L128">    }</span>
+
+    public String getText()
+    {
+<span class="nc" id="L132">        return text;</span>
+    }
+
+    public void setText(String text)
+    {
+<span class="nc" id="L137">        this.text = text;</span>
+<span class="nc" id="L138">    }</span>
+
+    public VerticalAlignments getTextPosition()
+    {
+<span class="nc" id="L142">        return textPosition;</span>
+    }
+
+    public void setTextPosition(VerticalAlignments textPosition)
+    {
+<span class="nc" id="L147">        this.textPosition = textPosition;</span>
+<span class="nc" id="L148">    }</span>
+
+    public String getTheme()
+    {
+<span class="nc" id="L152">        return theme;</span>
+    }
+
+    public void setTheme(Theme theme)
+    {
+<span class="nc" id="L157">        this.theme = theme.getClassName();</span>
+<span class="nc" id="L158">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

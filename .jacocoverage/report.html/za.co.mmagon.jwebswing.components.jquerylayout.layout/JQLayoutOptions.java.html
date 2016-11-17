@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQLayoutOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jquerylayout.layout</a> &gt; <span class="el_source">JQLayoutOptions.java</span></div><h1>JQLayoutOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jquerylayout.layout;
+
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ *
+ * @author Marc Magon
+ * @since 29 Aug 2015
+ * @version 1.0
+ */
+public class JQLayoutOptions extends JavaScriptPart
+{
+
+    private static final long serialVersionUID = 1L;
+
+    private String name;
+    private JQLayoutDefaultOptions defaults;
+    private JQLayoutDefaultOptions west;
+    private JQLayoutDefaultOptions north;
+    private JQLayoutDefaultOptions east;
+    private JQLayoutDefaultOptions south;
+    private JQLayoutDefaultOptions center;
+
+    /**
+     * A blank options canvas
+     */
+    public JQLayoutOptions()
+<span class="nc" id="L44">    {</span>
+
+<span class="nc" id="L46">    }</span>
+
+    /**
+     * Gets the name of this layout
+     * &lt;p&gt;
+     * @return
+     */
+    public String getName()
+    {
+<span class="nc" id="L55">        return name;</span>
+    }
+
+    /**
+     * Sets the name of this layout
+     * &lt;p&gt;
+     * @param name
+     */
+    public void setName(String name)
+    {
+<span class="nc" id="L65">        this.name = name;</span>
+<span class="nc" id="L66">    }</span>
+
+    /**
+     * Returns the default options for each layout
+     * &lt;p&gt;
+     * @return
+     */
+    public JQLayoutDefaultOptions getDefaults()
+    {
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        if (defaults == null)</span>
+        {
+<span class="nc" id="L77">            defaults = new JQLayoutDefaultOptions();</span>
+        }
+<span class="nc" id="L79">        defaults.setOnResize(&quot;$.layout.callbacks.resizeJQuery&quot;);</span>
+<span class="nc" id="L80">        return defaults;</span>
+    }
+
+    /**
+     * Returns the west options pane
+     * &lt;p&gt;
+     * @return
+     */
+    public JQLayoutDefaultOptions getWest()
+    {
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        if (west == null)</span>
+        {
+<span class="nc" id="L92">            west = new JQLayoutDefaultOptions();</span>
+        }
+<span class="nc" id="L94">        getDefaults().setOnResize(&quot;$.layout.callbacks.resizeJQuery&quot;);</span>
+<span class="nc" id="L95">        return west;</span>
+    }
+
+    /**
+     * Sets the west option pane
+     * &lt;p&gt;
+     * @param west
+     */
+    public void setWest(JQLayoutDefaultOptions west)
+    {
+<span class="nc" id="L105">        this.west = west;</span>
+<span class="nc" id="L106">    }</span>
+
+    /**
+     * Returns the north options pane
+     * &lt;p&gt;
+     * @return
+     */
+    public JQLayoutDefaultOptions getNorth()
+    {
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        if (north == null)</span>
+        {
+<span class="nc" id="L117">            north = new JQLayoutDefaultOptions();</span>
+        }
+<span class="nc" id="L119">        getDefaults().setOnResize(&quot;$.layout.callbacks.resizeJQuery&quot;);</span>
+<span class="nc" id="L120">        return north;</span>
+    }
+
+    /**
+     * Sets the north options
+     * &lt;p&gt;
+     * @param north
+     */
+    public void setNorth(JQLayoutDefaultOptions north)
+    {
+<span class="nc" id="L130">        this.north = north;</span>
+<span class="nc" id="L131">    }</span>
+
+    /**
+     * Returning the east
+     * &lt;p&gt;
+     * @return
+     */
+    public JQLayoutDefaultOptions getEast()
+    {
+<span class="nc bnc" id="L140" title="All 2 branches missed.">        if (east == null)</span>
+        {
+<span class="nc" id="L142">            east = new JQLayoutDefaultOptions();</span>
+        }
+<span class="nc" id="L144">        getDefaults().setOnResize(&quot;$.layout.callbacks.resizeJQuery&quot;);</span>
+<span class="nc" id="L145">        return east;</span>
+    }
+
+    /**
+     * Sets the east
+     * &lt;p&gt;
+     * @param east
+     */
+    public void setEast(JQLayoutDefaultOptions east)
+    {
+<span class="nc" id="L155">        this.east = east;</span>
+<span class="nc" id="L156">    }</span>
+
+    /**
+     * Returns the south
+     * &lt;p&gt;
+     * @return
+     */
+    public JQLayoutDefaultOptions getSouth()
+    {
+<span class="nc bnc" id="L165" title="All 2 branches missed.">        if (south == null)</span>
+        {
+<span class="nc" id="L167">            south = new JQLayoutDefaultOptions();</span>
+        }
+<span class="nc" id="L169">        getDefaults().setOnResize(&quot;$.layout.callbacks.resizeJQuery&quot;);</span>
+<span class="nc" id="L170">        return south;</span>
+    }
+
+    /**
+     * Sets the south
+     * &lt;p&gt;
+     * @param south
+     */
+    public void setSouth(JQLayoutDefaultOptions south)
+    {
+<span class="nc" id="L180">        this.south = south;</span>
+<span class="nc" id="L181">    }</span>
+
+    /**
+     * Returns the center
+     * &lt;p&gt;
+     * @return
+     */
+    public JQLayoutDefaultOptions getCenter()
+    {
+<span class="nc bnc" id="L190" title="All 2 branches missed.">        if (center == null)</span>
+        {
+<span class="nc" id="L192">            center = new JQLayoutDefaultOptions();</span>
+        }
+<span class="nc" id="L194">        getDefaults().setOnResize(&quot;$.layout.callbacks.resizeJQuery&quot;);</span>
+<span class="nc" id="L195">        return center;</span>
+    }
+
+    /**
+     * Sets the center
+     * &lt;p&gt;
+     * @param center
+     */
+    public void setCenter(JQLayoutDefaultOptions center)
+    {
+<span class="nc" id="L205">        this.center = center;</span>
+<span class="nc" id="L206">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

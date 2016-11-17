@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQPlotAxisLabelRendererOptionsCanvasLabels.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqplot.options.axis</a> &gt; <span class="el_source">JQPlotAxisLabelRendererOptionsCanvasLabels.java</span></div><h1>JQPlotAxisLabelRendererOptionsCanvasLabels.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jqplot.options.axis;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import za.co.mmagon.jwebswing.components.jqplot.JQPlotGraph;
+import za.co.mmagon.jwebswing.components.jqplot.parts.interfaces.JQPlotAxisLabelRenderer;
+import za.co.mmagon.jwebswing.components.jqplot.references.JQPlotJavascriptReferencePool;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourHex;
+import za.co.mmagon.jwebswing.htmlbuilder.css.fonts.FontFamilies;
+import za.co.mmagon.jwebswing.htmlbuilder.css.fonts.FontWeights;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ *
+ * @author GedMarc
+ * @since 29 Feb 2016
+ */
+public class JQPlotAxisLabelRendererOptionsCanvasLabels extends JavaScriptPart implements JQPlotAxisLabelRenderer
+{
+
+    @JsonIgnore
+    private JQPlotGraph linkedGraph;
+
+    /**
+     * The Default Axis Label Renderer Options
+     *
+     * @param linkedGraph
+     */
+    public JQPlotAxisLabelRendererOptionsCanvasLabels(JQPlotGraph linkedGraph)
+<span class="nc" id="L47">    {</span>
+<span class="nc" id="L48">        this.linkedGraph = linkedGraph;</span>
+<span class="nc" id="L49">        linkedGraph.getJavascriptReferences().add(JQPlotJavascriptReferencePool.CanvasAxisLabelRenderer.getReference());</span>
+<span class="nc" id="L50">        linkedGraph.getJavascriptReferences().add(JQPlotJavascriptReferencePool.CanvasTextRenderer.getReference());</span>
+<span class="nc" id="L51">    }</span>
+
+    @JsonProperty(&quot;renderer&quot;)
+    @JsonRawValue
+    @Override
+    public String getRenderer()
+    {
+<span class="nc" id="L58">        return &quot;$.jqplot.CanvasAxisLabelRenderer&quot;;</span>
+    }
+
+    /**
+     * Gets the linked graph
+     *
+     * @return
+     */
+    public JQPlotGraph getLinkedGraph()
+    {
+<span class="nc" id="L68">        return linkedGraph;</span>
+    }
+
+    /**
+     * Sets the linked graph
+     *
+     * @param linkedGraph
+     */
+    public void setLinkedGraph(JQPlotGraph linkedGraph)
+    {
+<span class="nc" id="L78">        this.linkedGraph = linkedGraph;</span>
+<span class="nc" id="L79">    }</span>
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * angle of text, measured clockwise from x axis.
+     */
+    private Integer angle;
+    /**
+     * Whether or not to show the tick (mark and label).
+     */
+    private Boolean show;
+    /**
+     * Whether or not to show the label.
+     */
+    private Boolean showLabel;
+    /**
+     * label for the axis.
+     */
+    private String label;
+    /**
+     * CSS spec for the font-family css attribute.
+     */
+    private FontFamilies fontFamily;
+    /**
+     * CSS spec for font size.
+     */
+    private Integer fontSize;
+    /**
+     * The font weight
+     */
+    private FontWeights fontWeight;
+    /**
+     * Multiplier to condense or expand font width.
+     */
+    private Integer fontStretch;
+    /**
+     * CSS spec for the color attribute.
+     */
+    private ColourHex textColor;
+    /**
+     * true to turn on native canvas font support in Mozilla 3.5+ and Safari 4+.
+     */
+    private Boolean enableFontSupport;
+    /**
+     * Point to pixel scaling factor, used for computing height of bounding box around a label.
+     * The labels text renderer has a default setting of 1.4, which should be suitable for most fonts. Leave as null to use default.
+     * If tops of letters appear clipped, increase this.
+     * If bounding box seems too big, decrease.
+     * This is an issue only with the native font renderering capabilities of Mozilla 3.5 and Safari 4 since they do not provide a method to determine the font height.
+     */
+    private Double pt2px;
+
+    /**
+     * angle of text, measured clockwise from x axis.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getAngle()
+    {
+<span class="nc" id="L139">        return angle;</span>
+    }
+
+    /**
+     * angle of text, measured clockwise from x axis.
+     * &lt;p&gt;
+     * @param angle
+     */
+    public void setAngle(Integer angle)
+    {
+<span class="nc" id="L149">        this.angle = angle;</span>
+<span class="nc" id="L150">    }</span>
+
+    /**
+     * to show or not
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getShow()
+    {
+<span class="nc" id="L159">        return show;</span>
+    }
+
+    /**
+     * whether or not to show the label render
+     * &lt;p&gt;
+     * @param show
+     */
+    public void setShow(Boolean show)
+    {
+<span class="nc" id="L169">        this.show = show;</span>
+<span class="nc" id="L170">    }</span>
+
+    /**
+     * Whether or not to show a label
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getShowLabel()
+    {
+<span class="nc" id="L179">        return showLabel;</span>
+    }
+
+    /**
+     * Whether or not to show a label
+     * &lt;p&gt;
+     * @param showLabel
+     */
+    public void setShowLabel(Boolean showLabel)
+    {
+<span class="nc" id="L189">        this.showLabel = showLabel;</span>
+<span class="nc" id="L190">    }</span>
+
+    /**
+     * Gets the label to be shown
+     * &lt;p&gt;
+     * @return
+     */
+    public String getLabel()
+    {
+<span class="nc" id="L199">        return label;</span>
+    }
+
+    /**
+     * Sets the label to be shown
+     * &lt;p&gt;
+     * @param label
+     */
+    public void setLabel(String label)
+    {
+<span class="nc" id="L209">        this.label = label;</span>
+<span class="nc" id="L210">    }</span>
+
+    /**
+     * Gets the font family for the label
+     * &lt;p&gt;
+     * @return
+     */
+    public FontFamilies getFontFamily()
+    {
+<span class="nc" id="L219">        return fontFamily;</span>
+    }
+
+    /**
+     * Sets the font family for the label
+     * &lt;p&gt;
+     * @param fontFamily
+     */
+    public void setFontFamily(FontFamilies fontFamily)
+    {
+<span class="nc" id="L229">        this.fontFamily = fontFamily;</span>
+<span class="nc" id="L230">    }</span>
+
+    /**
+     * Gets the current font size
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getFontSize()
+    {
+<span class="nc" id="L239">        return fontSize;</span>
+    }
+
+    /**
+     * Sets the current font size
+     * &lt;p&gt;
+     * @param fontSize
+     */
+    public void setFontSize(Integer fontSize)
+    {
+<span class="nc" id="L249">        this.fontSize = fontSize;</span>
+<span class="nc" id="L250">    }</span>
+
+    /**
+     * Gets the current font weight
+     * &lt;p&gt;
+     * @return
+     */
+    public FontWeights getFontWeight()
+    {
+<span class="nc" id="L259">        return fontWeight;</span>
+    }
+
+    /**
+     * Sets the current font weight
+     * &lt;p&gt;
+     * @param fontWeight
+     */
+    public void setFontWeight(FontWeights fontWeight)
+    {
+<span class="nc" id="L269">        this.fontWeight = fontWeight;</span>
+<span class="nc" id="L270">    }</span>
+
+    /**
+     * Multiplier to condense or expand font width.
+     * &lt;p&gt;
+     * @return
+     */
+    public Integer getFontStretch()
+    {
+<span class="nc" id="L279">        return fontStretch;</span>
+    }
+
+    /**
+     * Multiplier to condense or expand font width.
+     * &lt;p&gt;
+     * @param fontStretch
+     */
+    public void setFontStretch(Integer fontStretch)
+    {
+<span class="nc" id="L289">        this.fontStretch = fontStretch;</span>
+<span class="nc" id="L290">    }</span>
+
+    /**
+     * Gets the current text colour
+     * &lt;p&gt;
+     * @return
+     */
+    public ColourHex getTextColor()
+    {
+<span class="nc" id="L299">        return textColor;</span>
+    }
+
+    /**
+     * Sets the current text colour
+     * &lt;p&gt;
+     * @param textColor
+     */
+    public void setTextColor(ColourHex textColor)
+    {
+<span class="nc" id="L309">        this.textColor = textColor;</span>
+<span class="nc" id="L310">    }</span>
+
+    /**
+     * true to turn on native canvas font support in Mozilla 3.5+ and Safari 4+.
+     * &lt;p&gt;
+     * @return
+     */
+    public Boolean getEnableFontSupport()
+    {
+<span class="nc" id="L319">        return enableFontSupport;</span>
+    }
+
+    /**
+     * true to turn on native canvas font support in Mozilla 3.5+ and Safari 4+.
+     * &lt;p&gt;
+     * @param enableFontSupport
+     */
+    public void setEnableFontSupport(Boolean enableFontSupport)
+    {
+<span class="nc" id="L329">        this.enableFontSupport = enableFontSupport;</span>
+<span class="nc" id="L330">    }</span>
+
+    /**
+     * Point to pixel scaling factor, used for computing height of bounding box around a label.
+     * The labels text renderer has a default setting of 1.4, which should be suitable for most fonts. Leave as null to use default.
+     * If tops of letters appear clipped, increase this.
+     * If bounding box seems too big, decrease.
+     * This is an issue only with the native font renderering capabilities of Mozilla 3.5 and Safari 4 since they do not provide a method to determine the font height.
+     * &lt;p&gt;
+     * @return
+     */
+    public Double getPt2px()
+    {
+<span class="nc" id="L343">        return pt2px;</span>
+    }
+
+    /**
+     * Point to pixel scaling factor, used for computing height of bounding box around a label.
+     * The labels text renderer has a default setting of 1.4, which should be suitable for most fonts. Leave as null to use default.
+     * If tops of letters appear clipped, increase this.
+     * If bounding box seems too big, decrease.
+     * This is an issue only with the native font renderering capabilities of Mozilla 3.5 and Safari 4 since they do not provide a method to determine the font height.
+     * &lt;p&gt;
+     * @param pt2px
+     */
+    public void setPt2px(Double pt2px)
+    {
+<span class="nc" id="L357">        this.pt2px = pt2px;</span>
+<span class="nc" id="L358">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

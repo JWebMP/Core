@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQMapInteractiveFeature.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jqimagemap.imagemap</a> &gt; <span class="el_source">JQMapInteractiveFeature.java</span></div><h1>JQMapInteractiveFeature.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.components.jqimagemap.imagemap;
+
+import java.util.HashMap;
+import java.util.Map;
+import za.co.mmagon.jwebswing.Feature;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.ImageMapFeatures;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ * @since @version @author MMagon
+ *
+ *
+ */
+public class JQMapInteractiveFeature extends Feature&lt;JavaScriptPart, JQMapInteractiveFeature&gt; implements ImageMapFeatures
+{
+
+    private JQImageMap map;
+    private boolean defaultProperties;
+<span class="nc" id="L19">    private HashMap&lt;InteractiveFeatureProperties, Object&gt; appliedProperties = new HashMap();</span>
+
+    /**
+     * Constructs a new Interactive feature for a map, or its area
+     *
+     * @param map
+     */
+    public JQMapInteractiveFeature(JQImageMap map)
+    {
+<span class="nc" id="L28">        super(&quot;JWMapInteractiveFeature&quot;);</span>
+<span class="nc" id="L29">        this.map = map;</span>
+<span class="nc" id="L30">        getJavascriptReferences().add(new JQHilightReference());</span>
+<span class="nc" id="L31">    }</span>
+
+    public HashMap&lt;InteractiveFeatureProperties, Object&gt; getAppliedProperties()
+    {
+<span class="nc" id="L35">        return appliedProperties;</span>
+    }
+
+    public void setAppliedProperties(HashMap&lt;InteractiveFeatureProperties, Object&gt; appliedProperties)
+    {
+<span class="nc" id="L40">        this.appliedProperties = appliedProperties;</span>
+<span class="nc" id="L41">    }</span>
+
+    @Override
+    public void assignFunctionsToComponent()
+    {
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        if (this.map != null)</span>
+        {
+            //arr.add(&quot;$(function() {$('#&quot; + map.getImage().getID() + &quot;').mapPrep()});;&quot;);
+<span class="nc" id="L49">            addQuery(&quot;$(function() {$('#&quot; + map.getImage().getID() + &quot;').maphilight({&quot; + getProperties(false) + &quot;});&quot;</span>
+                    + &quot;});&quot;);
+        }
+
+<span class="nc" id="L53">    }</span>
+
+    /**
+     * Sets whether this is a default properties render inside the constructor
+     *
+     * @return Whether or not this is the default properties
+     */
+    public boolean isDefaultProperties()
+    {
+<span class="nc" id="L62">        return defaultProperties;</span>
+    }
+
+    /**
+     * Sets if this is to be rendered as the default image map properties
+     *
+     * @param defaultProperties Whether or not this is the default properties
+     */
+    public void setDefaultProperties(boolean defaultProperties)
+    {
+<span class="nc" id="L72">        this.defaultProperties = defaultProperties;</span>
+<span class="nc" id="L73">    }</span>
+
+    /**
+     * Returns all the map highlight properties associated with this interactive feature
+     *
+     * @param inline Set to true for attribute format
+     * @return The required property line
+     */
+    public String getProperties(boolean inline)
+    {
+<span class="nc" id="L83">        String propertySB = &quot;&quot;;</span>
+<span class="nc" id="L84">        int current = 0;</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">        for (Map.Entry&lt;InteractiveFeatureProperties, Object&gt; entry : appliedProperties.entrySet())</span>
+        {
+<span class="nc" id="L87">            InteractiveFeatureProperties interactiveFeatureProperties = entry.getKey();</span>
+<span class="nc" id="L88">            Object object = entry.getValue();</span>
+<span class="nc" id="L89">            current++;</span>
+
+<span class="nc bnc" id="L91" title="All 2 branches missed.">            if (object.toString().equalsIgnoreCase(interactiveFeatureProperties.defaultValue.toString()))</span>
+            {
+<span class="nc" id="L93">                continue;</span>
+            }
+            //System.out.println(&quot;in [&quot; + interactiveFeatureProperties.getClassType().getSimpleName() + &quot;]&quot;);
+
+<span class="nc bnc" id="L97" title="All 4 branches missed.">            propertySB += (inline ? &quot;\&quot;&quot; : &quot;&quot;) + interactiveFeatureProperties.name() + (inline ? &quot;\&quot;&quot; : &quot;&quot;) + &quot;:&quot;;</span>
+<span class="nc" id="L98">            String bleh = interactiveFeatureProperties.getClassType().getSimpleName();</span>
+<span class="nc bnc" id="L99" title="All 4 branches missed.">            if (bleh.equals(&quot;Double&quot;) || bleh.equals(&quot;Boolean&quot;))</span>
+            {
+<span class="nc bnc" id="L101" title="All 4 branches missed.">                propertySB += (inline ? &quot;\&quot;&quot; : &quot;&quot;) + object + (inline ? &quot;\&quot;&quot; : &quot;&quot;);</span>
+            }
+            else
+            {
+<span class="nc" id="L105">                propertySB += &quot;\&quot;&quot; + object + &quot;\&quot;&quot;;</span>
+            }
+            /*
+             * switch (interactiveFeatureProperties.getClassType().getSimpleName())
+             * {
+             * case &quot;Double&quot;:
+             * case &quot;Boolean&quot;:
+             * {
+             * propertySB += (inline ? &quot;\&quot;&quot; : &quot;&quot;) + object + (inline ? &quot;\&quot;&quot; : &quot;&quot;);
+             * break;
+             * }
+             * case &quot;String&quot;:
+             * {
+             * propertySB += &quot;\&quot;&quot;+ object + &quot;\&quot;&quot;;
+             * break;
+             * }
+             * default:
+             * {
+             *
+             * }
+             * }
+             */
+<span class="nc bnc" id="L127" title="All 2 branches missed.">            if (current != appliedProperties.size())</span>
+            {
+<span class="nc" id="L129">                propertySB += &quot;,&quot;;</span>
+            }
+<span class="nc" id="L131">        }</span>
+<span class="nc" id="L132">        return propertySB;</span>
+    }
+
+    public String getProperty(InteractiveFeatureProperties property)
+    {
+<span class="nc" id="L137">        return appliedProperties.get(property).toString();</span>
+    }
+
+    /**
+     * Adds a property to this part of the image map
+     *
+     * @param property The property to add
+     * @param value    The value to assign
+     */
+    public void addProperty(InteractiveFeatureProperties property, String value)
+    {
+<span class="nc" id="L148">        appliedProperties.put(property, value);</span>
+<span class="nc" id="L149">    }</span>
+
+    public static void main(String... args)
+    {
+<span class="nc" id="L153">        JQMapInteractiveFeature in = new JQMapInteractiveFeature(null);</span>
+<span class="nc" id="L154">        in.addProperty(InteractiveFeatureProperties.fill, &quot;true&quot;);</span>
+<span class="nc" id="L155">        in.addProperty(InteractiveFeatureProperties.overlayColorPermanent, &quot;004d36&quot;);</span>
+<span class="nc" id="L156">        in.addProperty(InteractiveFeatureProperties.overlayColorOpacity, &quot;0.4&quot;);</span>
+<span class="nc" id="L157">        System.out.println(in.getProperties(true));</span>
+<span class="nc" id="L158">        System.out.println(in.getProperties(false));</span>
+<span class="nc" id="L159">    }</span>
+
+<span class="nc" id="L161">    public enum InteractiveFeatureProperties</span>
+    {
+        /**
+         * Whether to fill the shape
+         */
+<span class="nc" id="L166">        fill(Boolean.class, Boolean.TRUE),</span>
+        /**
+         * The color to fill the shape with
+         */
+<span class="nc" id="L170">        fillColor(String.class, &quot;000000&quot;),</span>
+        /**
+         * The opacity of the fill (0 = fully transparent, 1 = fully opaque)
+         */
+<span class="nc" id="L174">        fillOpacity(Double.class, 0.2),</span>
+        /**
+         * Whether to outline the shape
+         */
+<span class="nc" id="L178">        stroke(Boolean.class, Boolean.TRUE),</span>
+        /**
+         * The color of the outline
+         */
+<span class="nc" id="L182">        strokeColor(String.class, &quot;ff0000&quot;),</span>
+        /**
+         * The opacity of the outline (0 = fully transparent, 1 = fully opaque)
+         */
+<span class="nc" id="L186">        strokeOpacity(Double.class, 0.2),</span>
+        /**
+         * The thickness of the outline
+         */
+<span class="nc" id="L190">        strokeWidth(Double.class, 0.4),</span>
+        /**
+         * Whether to fade in the shapes on mouseover
+         */
+<span class="nc" id="L194">        fade(Boolean.class, Boolean.TRUE),</span>
+        /**
+         * Whether to always show the hilighted areas
+         */
+<span class="nc" id="L198">        alwaysOn(Boolean.class, Boolean.FALSE),</span>
+        /**
+         * Whether to never show the hilighted areas (This only makes sense to use as per-area metadata, of course.)
+         */
+<span class="nc" id="L202">        neverOn(Boolean.class, Boolean.FALSE),</span>
+        /**
+         * The name of an attribute to group areas by If this is present then all areas in the map which have the same attribute value as the hovered area will hilight as well
+         */
+<span class="nc" id="L206">        groupBy(String.class, &quot;&quot;),</span>
+        /**
+         * If true, applies the class on the img to the wrapper div maphilight created. If a string, that string is used as a class on the wrapper div.
+         */
+<span class="nc" id="L210">        wrapClass(Boolean.class, Boolean.FALSE),</span>
+        /**
+         * Whether to apply a shadow to the shape. (Only works with canvas-supporting browsers. So, everything but IE below version 9.)
+         */
+<span class="nc" id="L214">        shadow(Boolean.class, Boolean.FALSE),</span>
+        /**
+         * Where to position the shadow. Can be 'outside', 'inside', or 'both'.
+         */
+<span class="nc" id="L218">        shadowPosition(Double.class, 0.4),</span>
+        /**
+         * What to use to cast the shadow. Can be 'stroke' or 'fill'. If false, choose a value based on the shadow position. (Generally it looks better if it's being cast from a fill when it's outside
+         * the shape, and from a stroke when it's inside the shape.)
+         */
+<span class="nc" id="L223">        shadowFrom(String.class, &quot;fill&quot;),</span>
+        /**
+         * Horizontal offset of the shadow from the shape.
+         */
+<span class="nc" id="L227">        shadowX(Double.class, 0.4),</span>
+        /**
+         * Vertical offset of the shadow from the shape.
+         */
+<span class="nc" id="L231">        shadowY(Double.class, 0.4),</span>
+        /**
+         * Size of the shadow.
+         */
+<span class="nc" id="L235">        shadowRadius(Double.class, 0.4),</span>
+        /**
+         * Color of the shadow.
+         */
+<span class="nc" id="L239">        shadowColor(String.class, &quot;000000&quot;),</span>
+        /**
+         * Opacity of the shadow.
+         */
+<span class="nc" id="L243">        shadowOpacity(Double.class, 0.1),</span>
+        /**
+         * The default colour to overlay with - Heat map uses this
+         */
+<span class="nc" id="L247">        overlayColorPermanent(String.class, &quot;transparent&quot;),</span>
+        /**
+         * The opacity for the permanent colour
+         */
+<span class="nc" id="L251">        overlayColorOpacity(Double.class, 1),</span>
+        /**
+         * A valid reference ID
+         */
+<span class="nc" id="L255">        boneId(String.class, &quot;No Bone ID&quot;),</span>
+        /**
+         * Available attribute association ID
+         */
+<span class="nc" id="L259">        attName(String.class, &quot;Holder 1&quot;),</span>
+        /**
+         * Available attribute association ID
+         */
+<span class="nc" id="L263">        attName2(String.class, &quot;Holder 2&quot;);</span>
+
+        private Class classType;
+        private Object defaultValue;
+
+        InteractiveFeatureProperties(Class classType, Object defaultValue)
+<span class="nc" id="L269">        {</span>
+<span class="nc" id="L270">            this.classType = classType;</span>
+<span class="nc" id="L271">            this.defaultValue = defaultValue;</span>
+<span class="nc" id="L272">        }</span>
+
+        public Class getClassType()
+        {
+<span class="nc" id="L276">            return classType;</span>
+        }
+
+        public void setClassType(Class classType)
+        {
+<span class="nc" id="L281">            this.classType = classType;</span>
+<span class="nc" id="L282">        }</span>
+
+        public Object getDefaultValue()
+        {
+<span class="nc" id="L286">            return defaultValue;</span>
+        }
+
+        public void setDefaultValue(Object defaultValue)
+        {
+<span class="nc" id="L291">            this.defaultValue = defaultValue;</span>
+<span class="nc" id="L292">        }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
