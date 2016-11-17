@@ -1132,9 +1132,9 @@ public class CSSImpl extends JavaScriptPart implements CSS
      *
      * @param OverflowY
      */
-    public void setOverflowY(Overflows Overflow_Y)
+    public void setOverflowY(Overflows OverflowY)
     {
-        this.Overflow_Y = Overflow_Y;
+        this.Overflow_Y = OverflowY;
     }
 
     /**
@@ -2020,6 +2020,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
 
     /**
      * Sets the outline Color
+     * @param Outline_Color
      */
     public void setOutlineColor(ColourCSS Outline_Color)
     {
