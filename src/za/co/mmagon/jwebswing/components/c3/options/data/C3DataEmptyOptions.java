@@ -16,12 +16,14 @@
  */
 package za.co.mmagon.jwebswing.components.c3.options.data;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
+
 /**
  *
  * @author GedMarc
  * @since 09 Mar 2016
  */
-public class C3DataEmptyOptions
+public class C3DataEmptyOptions extends JavaScriptPart
 {
 
     public C3DataEmptyOptions()

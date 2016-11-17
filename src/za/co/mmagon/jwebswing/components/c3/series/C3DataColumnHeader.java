@@ -16,7 +16,9 @@
  */
 package za.co.mmagon.jwebswing.components.c3.series;
 
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.*;
+import java.io.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
 
 /**
  * Denotes a column header for C3 Data Objects
@@ -24,9 +26,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * @author GedMarc
  * @since 09 Mar 2016
  */
-public class C3DataColumnHeader
+public class C3DataColumnHeader extends JavaScriptPart implements Serializable
 {
-
+    private static final long serialVersionUID = 1L;
     private String name;
 
     /**
@@ -41,6 +43,7 @@ public class C3DataColumnHeader
 
     /**
      * Return the currently assigned name.
+     * @return 
      */
     public String getName()
     {

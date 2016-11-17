@@ -16,18 +16,19 @@
  */
 package za.co.mmagon.jwebswing.components.c3.options.data;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.ArrayList;
-import za.co.mmagon.jwebswing.components.c3.series.C3DataColumnHeader;
+import com.fasterxml.jackson.annotation.*;
+import java.util.*;
+import za.co.mmagon.jwebswing.components.c3.series.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
 
 /**
  * An extended ArrayList which will always have the first value as a column header
  *
  * @author GedMarc
+ * @param <D> Any JavascriptPart
  * @since 09 Mar 2016
  */
-public class C3ColumnData<D extends Object> extends ArrayList<D>
+public class C3ColumnData<D extends JavaScriptPart> extends ArrayList<D>
 {
 
     private static final long serialVersionUID = 1L;
@@ -52,9 +53,9 @@ public class C3ColumnData<D extends Object> extends ArrayList<D>
     @JsonValue
     public String getJSON()
     {
-        remove((D) columnHeader);
-        add(0, (D) columnHeader);
-        return super.toString();
+        remove((D) getColumnHeader());
+        add(0, (D) getColumnHeader());
+        return JavaScriptPart.objectAsString(this);
     }
 
     /**

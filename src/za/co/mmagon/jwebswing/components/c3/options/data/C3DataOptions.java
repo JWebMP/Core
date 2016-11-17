@@ -16,15 +16,12 @@
  */
 package za.co.mmagon.jwebswing.components.c3.options.data;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.ArrayList;
-import java.util.HashMap;
-import za.co.mmagon.jwebswing.components.c3.options.C3DataSelectionOptions;
-import za.co.mmagon.jwebswing.components.c3.options.C3RegionOptions;
-import za.co.mmagon.jwebswing.components.c3.series.C3DataColumnHeader;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourHex;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptFunction;
+import com.fasterxml.jackson.annotation.*;
+import java.util.*;
+import za.co.mmagon.jwebswing.components.c3.options.*;
+import za.co.mmagon.jwebswing.components.c3.series.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
 
 /**
  * Represents a C3 Graphing Data Structure
@@ -60,7 +57,7 @@ public class C3DataOptions extends JavaScriptPart
     private JavascriptFunction color;
     private HashMap<C3DataColumnHeader, ColourHex> colors;
     private ArrayList<C3DataColumnHeader> hide;
-    private C3DataEmptyOptions empty;//empty.label.text
+    private C3DataEmptyOptions empty;
     private C3DataSelectionOptions selection;
 
     @JsonIgnore
@@ -75,6 +72,7 @@ public class C3DataOptions extends JavaScriptPart
      */
     public C3DataOptions()
     {
+        //No options are required
     }
 
     /**

@@ -1,7 +1,7 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.measurement;
 
-import za.co.mmagon.jwebswing.base.client.CSSVersions;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
 
 /**
  *
@@ -53,6 +53,11 @@ public enum MeasurementTypes implements CSSEnumeration<MeasurementTypes>
         return htmlAnnotation;
     }
 
+    /**
+     * Returns a measurement type from the annotation
+     * @param annotation
+     * @return 
+     */
     public static MeasurementTypes getFromAnnotation(String annotation)
     {
         for (MeasurementTypes measurementTypes : values())

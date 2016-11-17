@@ -16,16 +16,14 @@
  */
 package za.co.mmagon.jwebswing.base.servlets;
 
-import com.google.inject.Singleton;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
-import za.co.mmagon.jwebswing.Page;
+import com.google.inject.*;
+import java.io.*;
+import java.util.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import org.apache.log4j.*;
+import za.co.mmagon.*;
+import za.co.mmagon.jwebswing.*;
 
 /**
  * This Servlet supplies all the JavaScript for a given HTML Page
@@ -76,7 +74,13 @@ public class JavaScriptServlet extends JWDefaultServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        try
+        {
         super.doGet(request, response);
         processRequest(request, response);
+        }catch(IOException | ServletException e)
+        {
+            log.fatal("JavascriptServlet", e);
+        }
     }
 }

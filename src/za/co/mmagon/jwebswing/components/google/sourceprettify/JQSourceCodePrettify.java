@@ -1,16 +1,11 @@
 package za.co.mmagon.jwebswing.components.google.sourceprettify;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import za.co.mmagon.LoggerFactory;
-import za.co.mmagon.jwebswing.base.html.PreFormattedText;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.references.CSSReference;
+import java.io.*;
+import java.util.logging.*;
+import za.co.mmagon.*;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.references.*;
 
 /**
  *
@@ -51,7 +46,7 @@ public class JQSourceCodePrettify extends PreFormattedText implements GlobalChil
     protected StringBuilder renderBeforeTag()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append(getNewLine()).append(getCurrentTabIndentString()).append("<?prettify lang=").append(getSourceCodeLanguage().name().toLowerCase()).append(" linenums=true?>").append(getNewLine());
+        sb.append(getCurrentTabIndentString()).append("<?prettify lang=").append(getSourceCodeLanguage().name().toLowerCase()).append(" linenums=true?>").append(getNewLine());
         return sb;
     }
 

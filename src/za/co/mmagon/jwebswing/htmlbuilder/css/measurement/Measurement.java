@@ -9,54 +9,79 @@ package za.co.mmagon.jwebswing.htmlbuilder.css.measurement;
 public final class Measurement
 {
 
-    //Measurement;
-    private String outputMeasurement;
-    private String measurementValue;
+    /**
+     * The output measurement
+     */
+    private StringBuilder outputMeasurement;
+    /**
+     * The value to be displayed
+     */
+    private StringBuilder measurementValue;
+    /**
+     * The measurement type
+     */
     private MeasurementTypes measurementType;
 
+    /**
+     * A measurement of any text that is readable using isDigit()
+     *
+     * @param fullValue
+     */
     public Measurement(String fullValue)
     {
-        String number = "";
-        String afterType = "";
+        StringBuilder number = new StringBuilder("");
+        StringBuilder afterType = new StringBuilder("");
         for (int i = 0; i < fullValue.toCharArray().length; i++)
         {
-            Character Char = fullValue.toCharArray()[i];
-            if (Character.isDigit(Char))
+            Character character = fullValue.toCharArray()[i];
+            if (Character.isDigit(character))
             {
-                number += Char;
+                number.append(character);
             }
             else
             {
-                afterType += Char;
+                afterType.append(character);
             }
         }
 
-        MeasurementTypes measureType = MeasurementTypes.getFromAnnotation(afterType);
+        MeasurementTypes measureType = MeasurementTypes.getFromAnnotation(afterType.toString());
         if (measureType == null)
         {
-            throw new RuntimeException("Not a Measurement Type");
+            throw new NullPointerException("Not a Measurement Type");
         }
 
         this.measurementValue = number;
         this.measurementType = measureType;
     }
 
+    /**
+     * Constructs a measurement with a given value and type
+     * @param value
+     * @param measurementType 
+     */
     public Measurement(String value, MeasurementTypes measurementType)
     {
-        this.measurementValue = value;
+        this.measurementValue = new StringBuilder(value);
         this.measurementType = measurementType;
 
     }
 
-    public String getOutputMeasurement()
+    /**
+     * Renders the output measurement
+     * @return 
+     */
+    public StringBuilder getOutputMeasurement()
     {
-        outputMeasurement = measurementType.isRequiresQuotes() ? "\"" + measurementValue + measurementType.getHtmlAnnotation() + "\"" : measurementValue + measurementType.getHtmlAnnotation();
+        outputMeasurement = new StringBuilder(
+                measurementType.isRequiresQuotes()
+                ? "\"" + measurementValue + measurementType.getHtmlAnnotation() + "\""
+                : measurementValue + measurementType.getHtmlAnnotation());
         return outputMeasurement;
     }
 
     @Override
     public String toString()
     {
-        return getOutputMeasurement();
+        return getOutputMeasurement().toString();
     }
 }

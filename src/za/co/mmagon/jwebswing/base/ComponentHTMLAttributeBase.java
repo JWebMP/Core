@@ -210,7 +210,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
         {
             attrib.add(attr);
         });
-        attrib.sort(EnumerationUtils.EnumNameSorter);
+        attrib.sort(EnumerationUtils.enumNameSorter);
         if (!attrib.isEmpty())
         {
             sb.append(" ");

@@ -16,14 +16,11 @@
  */
 package za.co.mmagon.jwebswing.components;
 
-import com.fasterxml.jackson.annotation.JsonRawValue;
-import com.fasterxml.jackson.annotation.JsonValue;
-import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import com.fasterxml.jackson.annotation.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
 
 /**
  * This Class is a data adapter
@@ -34,9 +31,10 @@ import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
  * @param <F> The given features
  * @param <E> The given events
  * @param <J> This component
+ *
  * @since 01 Jan 2016
  */
-public class DataAdapter<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component> 
+public class DataAdapter<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component>
         extends Div<C, A, F, E, J>
 {
 
@@ -89,12 +87,11 @@ public class DataAdapter<C extends GlobalChildren, A extends Enum & AttributeDef
      */
     public final void setLinkedComponent(Component linkedComponent)
     {
-        linkedComponent.removeVariable(getDAID());
+        this.linkedComponent.removeVariable(getDAID());
         this.linkedComponent = linkedComponent;
         if (linkedComponent != null)
         {
             setDataAdapterID("da" + linkedComponent.getID());
-            //linkedComponent.getDataAdapter().add(this);
             linkedComponent.addVariable(getDAID());
         }
     }

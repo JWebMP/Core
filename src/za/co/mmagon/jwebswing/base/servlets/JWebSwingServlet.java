@@ -1,26 +1,19 @@
 package za.co.mmagon.jwebswing.base.servlets;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
-import java.util.HashMap;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import net.sf.uadetector.ReadableUserAgent;
-import net.sf.uadetector.UserAgentStringParser;
-import net.sf.uadetector.service.UADetectorServiceFactory;
-import org.apache.log4j.AppenderSkeleton;
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
-import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
-import za.co.mmagon.jwebswing.base.client.Browsers;
-import za.co.mmagon.jwebswing.base.html.Body;
-import za.co.mmagon.jwebswing.utilities.TextUtilities;
+import com.google.inject.*;
+import java.io.*;
+import java.util.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import net.sf.uadetector.*;
+import net.sf.uadetector.service.*;
+import org.apache.log4j.*;
+import za.co.mmagon.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.ajax.exceptions.*;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.utilities.*;
 
 /**
  * The base Servlet for the JWebSwing environment. Constructs each page on call
@@ -78,6 +71,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
      * Reads the variables into the HTTP session
      *
      * @param request
+     *
      * @throws MissingComponentException
      */
     private void readRequestVariables(HttpServletRequest request) throws MissingComponentException
@@ -131,6 +125,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
      *
      * @param request
      * @param response
+     *
      * @throws IOException
      */
     private void sendPage(HttpServletRequest request, HttpServletResponse response) throws IOException
@@ -172,10 +167,11 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
     /**
      * Processes requests for the WebSwing Servlet.
      *
-     * @param request The Default Servlet request
+     * @param request  The Default Servlet request
      * @param response The Default Servlet response
+     *
      * @throws ServletException if a Servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
@@ -269,6 +265,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
      * In the event of any error return this page.
      *
      * @param t The exception thrown
+     *
      * @return The rendered HTML.
      */
     protected Page getErrorPageHtml(Exception t)
@@ -288,6 +285,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
      * In the event of any error return this page.
      *
      * @param t The exception thrown
+     *
      * @return The rendered HTML.
      */
     protected Page getErrorPageHtml(Error t)
@@ -307,6 +305,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
      * Return the Mobile Page HTML
      *
      * @param session
+     *
      * @return
      */
     protected StringBuilder getPageMobileHTML(HttpSession session)
@@ -331,6 +330,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
      * The initial page for this Servlet
      *
      * @param sessionId The session to return the current page
+     *
      * @return A Page for the Servlet
      */
     public abstract Page getNewPage(String sessionId);
@@ -338,19 +338,27 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request Servlet request
+     * @param request  Servlet request
      * @param response Servlet response
+     *
      * @throws ServletException if a Servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        super.doGet(request, response);
-        if (request.getHeader("Content-Type") == null || request.getHeader("Content-Type").isEmpty())
+        try
         {
-            processRequest(request, response);
+            super.doGet(request, response);
+            if (request.getHeader("Content-Type") == null || request.getHeader("Content-Type").isEmpty())
+            {
+                processRequest(request, response);
+            }
+        }
+        catch (IOException | ServletException ex)
+        {
+            LOG.fatal("SwingServlet", ex);
         }
     }
 
@@ -358,6 +366,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
      * Returns a session's JWebSwing's Servlet
      *
      * @param sessionID The session ID
+     *
      * @return The session Servlet
      */
     public static final JWebSwingServlet getSessionServlet(String sessionID)
@@ -393,6 +402,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
      * Returns the current page being displayed with this Servlet
      *
      * @param session
+     *
      * @return
      */
     @Inject

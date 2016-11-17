@@ -16,8 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jquerylayout.layout;
 
-import java.util.HashMap;
-import za.co.mmagon.jwebswing.base.html.interfaces.LayoutHandler;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 
 /**
  * A Clean Interface for the JQLayout Component
@@ -78,13 +77,6 @@ public interface IJQLayout extends LayoutHandler
      * @return
      */
     JQLayoutOptions getOptions();
-
-    /**
-     * Sets all the layout panes
-     *
-     * @param panes
-     */
-    void setPanes(HashMap<JQLayoutArea, JQLayoutDiv> panes);
 
     /**
      * Returns the south pane

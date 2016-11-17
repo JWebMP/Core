@@ -1,14 +1,14 @@
 package za.co.mmagon.jwebswing.components.jquerylayout.layout;
 
-import java.util.HashMap;
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
-import za.co.mmagon.jwebswing.Feature;
-import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
-import za.co.mmagon.jwebswing.base.exceptions.NullComponentException;
-import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
-import za.co.mmagon.jwebswing.components.pools.jqueryui.JQUIReferencePool;
-import za.co.mmagon.jwebswing.components.pools.jquerylayout.JQLayoutReferencePool;
+import java.util.*;
+import org.apache.log4j.*;
+import za.co.mmagon.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.*;
+import za.co.mmagon.jwebswing.base.exceptions.*;
+import za.co.mmagon.jwebswing.base.html.attributes.*;
+import za.co.mmagon.jwebswing.components.pools.jquerylayout.*;
+import za.co.mmagon.jwebswing.components.pools.jqueryui.*;
 
 /**
  * This class is essentially the Border Layout. Each child div controls it's own settings, access via getRegionLayoutDiv()
@@ -20,7 +20,7 @@ import za.co.mmagon.jwebswing.components.pools.jquerylayout.JQLayoutReferencePoo
 public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQLayout
 {
 
-    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("JWLayout");
+    private static final Logger log = LoggerFactory.getInstance().makeNewLoggerInstance("JWLayout");
     private static final long serialVersionUID = 1L;
 
     /**
@@ -55,7 +55,7 @@ public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQL
     {
         super("JQLayout");
         this.component = component;
-
+        this.component.addFeature(this);
         if (component == null)
         {
             throw new NullComponentException("Cannot use a null object inside of a layout feature");
@@ -318,7 +318,6 @@ public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQL
      *
      * @param panes
      */
-    @Override
     public void setPanes(HashMap<JQLayoutArea, JQLayoutDiv> panes)
     {
         this.panes = panes;

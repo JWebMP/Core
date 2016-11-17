@@ -16,46 +16,25 @@
  */
 package za.co.mmagon.jwebswing;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import com.fasterxml.jackson.annotation.*;
+import java.io.*;
+import java.nio.file.*;
+import java.util.*;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.http.HttpSession;
-import net.sf.uadetector.DeviceCategory;
-import net.sf.uadetector.OperatingSystem;
-import net.sf.uadetector.ReadableUserAgent;
-import net.sf.uadetector.UserAgent;
-import net.sf.uadetector.UserAgentFamily;
-import net.sf.uadetector.UserAgentType;
-import net.sf.uadetector.VersionNumber;
-import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
-import za.co.mmagon.jwebswing.base.angular.AngularFeature;
-import za.co.mmagon.jwebswing.base.client.InternetExplorerCompatibilityMode;
-import za.co.mmagon.jwebswing.base.html.Base;
-import za.co.mmagon.jwebswing.base.html.CSSLink;
-import za.co.mmagon.jwebswing.base.html.Comment;
-import za.co.mmagon.jwebswing.base.html.DocumentType;
-import za.co.mmagon.jwebswing.base.html.Html;
-import za.co.mmagon.jwebswing.base.html.Meta;
-import za.co.mmagon.jwebswing.base.html.Script;
-import za.co.mmagon.jwebswing.base.html.Style;
-import za.co.mmagon.jwebswing.base.html.Title;
-import za.co.mmagon.jwebswing.base.html.attributes.CSSLinkAttributes;
-import za.co.mmagon.jwebswing.base.html.attributes.MetaAttributes;
-import za.co.mmagon.jwebswing.base.html.attributes.ScriptAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
-import za.co.mmagon.jwebswing.base.interfaces.IPage;
-import za.co.mmagon.jwebswing.base.references.CSSReference;
-import za.co.mmagon.jwebswing.base.references.JavascriptReference;
-import za.co.mmagon.jwebswing.base.servlets.JWebSwingServlet;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
-import za.co.mmagon.jwebswing.generics.WebReference;
+import java.util.logging.*;
+import javax.servlet.http.*;
+import net.sf.uadetector.*;
+import za.co.mmagon.jwebswing.base.*;
+import za.co.mmagon.jwebswing.base.angular.*;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.base.html.attributes.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
+import za.co.mmagon.jwebswing.base.interfaces.*;
+import za.co.mmagon.jwebswing.base.references.*;
+import za.co.mmagon.jwebswing.base.servlets.*;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
+import za.co.mmagon.jwebswing.generics.*;
 
 /**
  * Top level of any HTML page. Has only two children, head and body. Sometimes scripts are added right at the end but we try to avoid that as much as possible.
@@ -209,6 +188,10 @@ public class Page extends Html implements IPage
     @Override
     public void preConfigure()
     {
+        if(!isInitialized())
+        {
+            init();
+        }
         if (!isConfigured())
         {
             getBody().preConfigure();
@@ -228,7 +211,6 @@ public class Page extends Html implements IPage
             });
 
             ArrayList<ComponentHierarchyBase> requirements = new ArrayList<>();
-            //render CSS only
             for (RequirementsPriority priority : RequirementsPriority.values())
             {
                 getPriorityRequirements(priority, requirements, true, false).stream().forEach((comp) ->
@@ -236,8 +218,6 @@ public class Page extends Html implements IPage
                     getHead().getChildren().add(comp);
                 });
             }
-
-            //Add the CSS Styles
             getHead().add((HeadChildren) getCssStyle());
             buildComponentHierarchy();
         }
