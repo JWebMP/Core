@@ -1132,9 +1132,9 @@ public class CSSImpl extends JavaScriptPart implements CSS
      *
      * @param OverflowY
      */
-    public void setOverflowY(Overflows Overflow_Y)
+    public void setOverflowY(Overflows OverflowY)
     {
-<span class="nc" id="L1137">        this.Overflow_Y = Overflow_Y;</span>
+<span class="nc" id="L1137">        this.Overflow_Y = OverflowY;</span>
 <span class="nc" id="L1138">    }</span>
 
     /**
@@ -2020,11 +2020,12 @@ public class CSSImpl extends JavaScriptPart implements CSS
 
     /**
      * Sets the outline Color
+     * @param Outline_Color
      */
     public void setOutlineColor(ColourCSS Outline_Color)
     {
-<span class="nc" id="L2026">        this.Outline_Color = Outline_Color;</span>
-<span class="nc" id="L2027">    }</span>
+<span class="nc" id="L2027">        this.Outline_Color = Outline_Color;</span>
+<span class="nc" id="L2028">    }</span>
 
     /**
      * Sets the outline Color
@@ -2032,8 +2033,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setOutlineColor$(ColourNames Outline_Color$)
     {
-<span class="nc" id="L2035">        this.Outline_Color$ = Outline_Color$;</span>
-<span class="nc" id="L2036">    }</span>
+<span class="nc" id="L2036">        this.Outline_Color$ = Outline_Color$;</span>
+<span class="nc" id="L2037">    }</span>
 
     /**
      * Sets the Outline Style
@@ -2042,8 +2043,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setOutline_Style(BorderStyles Outline_Style)
     {
-<span class="nc" id="L2045">        this.Outline_Style = Outline_Style;</span>
-<span class="nc" id="L2046">    }</span>
+<span class="nc" id="L2046">        this.Outline_Style = Outline_Style;</span>
+<span class="nc" id="L2047">    }</span>
 
     /**
      * Sets the outline width
@@ -2051,8 +2052,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setOutlineWidth(MeasurementCSS Outline_Width)
     {
-<span class="nc" id="L2054">        this.Outline_Width = Outline_Width;</span>
-<span class="nc" id="L2055">    }</span>
+<span class="nc" id="L2055">        this.Outline_Width = Outline_Width;</span>
+<span class="nc" id="L2056">    }</span>
 
     /**
      * Sets the outline offset
@@ -2060,8 +2061,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setOutline_Offset(MeasurementCSS Outline_Offset)
     {
-<span class="nc" id="L2063">        this.Outline_Offset = Outline_Offset;</span>
-<span class="nc" id="L2064">    }</span>
+<span class="nc" id="L2064">        this.Outline_Offset = Outline_Offset;</span>
+<span class="nc" id="L2065">    }</span>
 
     public Padding Padding;
     public MeasurementCSS Padding_Right;
@@ -2081,7 +2082,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public MeasurementCSS Padding_Right()
     {
-<span class="fc" id="L2084">        return Padding_Right;</span>
+<span class="fc" id="L2085">        return Padding_Right;</span>
     }
 
     /**
@@ -2092,7 +2093,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public PaddingSetting Padding_Right$()
     {
-<span class="fc" id="L2095">        return Padding_Right$;</span>
+<span class="fc" id="L2096">        return Padding_Right$;</span>
     }
 
     /**
@@ -2103,7 +2104,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public MeasurementCSS Padding_Left()
     {
-<span class="fc" id="L2106">        return Padding_Left;</span>
+<span class="fc" id="L2107">        return Padding_Left;</span>
     }
 
     /**
@@ -2114,7 +2115,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public PaddingSetting Padding_Left$()
     {
-<span class="fc" id="L2117">        return Padding_Left$;</span>
+<span class="fc" id="L2118">        return Padding_Left$;</span>
     }
 
     /**
@@ -2125,7 +2126,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public MeasurementCSS Padding_Top()
     {
-<span class="fc" id="L2128">        return Padding_Top;</span>
+<span class="fc" id="L2129">        return Padding_Top;</span>
     }
 
     /**
@@ -2136,8 +2137,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setPaddingRight(MeasurementCSS Padding_Right)
     {
-<span class="nc" id="L2139">        this.Padding_Right = Padding_Right;</span>
-<span class="nc" id="L2140">    }</span>
+<span class="nc" id="L2140">        this.Padding_Right = Padding_Right;</span>
+<span class="nc" id="L2141">    }</span>
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
@@ -2147,8 +2148,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setPaddingRight$(PaddingSetting Padding_Right$)
     {
-<span class="nc" id="L2150">        this.Padding_Right$ = Padding_Right$;</span>
-<span class="nc" id="L2151">    }</span>
+<span class="nc" id="L2151">        this.Padding_Right$ = Padding_Right$;</span>
+<span class="nc" id="L2152">    }</span>
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
@@ -2158,8 +2159,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setPaddingLeft(MeasurementCSS Padding_Left)
     {
-<span class="nc" id="L2161">        this.Padding_Left = Padding_Left;</span>
-<span class="nc" id="L2162">    }</span>
+<span class="nc" id="L2162">        this.Padding_Left = Padding_Left;</span>
+<span class="nc" id="L2163">    }</span>
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
@@ -2169,8 +2170,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setPaddingLeft$(PaddingSetting Padding_Left$)
     {
-<span class="nc" id="L2172">        this.Padding_Left$ = Padding_Left$;</span>
-<span class="nc" id="L2173">    }</span>
+<span class="nc" id="L2173">        this.Padding_Left$ = Padding_Left$;</span>
+<span class="nc" id="L2174">    }</span>
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
@@ -2180,8 +2181,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setPaddingTop(MeasurementCSS Padding_Top)
     {
-<span class="nc" id="L2183">        this.Padding_Top = Padding_Top;</span>
-<span class="nc" id="L2184">    }</span>
+<span class="nc" id="L2184">        this.Padding_Top = Padding_Top;</span>
+<span class="nc" id="L2185">    }</span>
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
@@ -2191,7 +2192,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public PaddingSetting Padding_Top$()
     {
-<span class="fc" id="L2194">        return Padding_Top$;</span>
+<span class="fc" id="L2195">        return Padding_Top$;</span>
     }
 
     /**
@@ -2202,7 +2203,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public MeasurementCSS Padding_Bottom()
     {
-<span class="fc" id="L2205">        return Padding_Bottom;</span>
+<span class="fc" id="L2206">        return Padding_Bottom;</span>
     }
 
     /**
@@ -2213,7 +2214,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public PaddingSetting Padding_Bottom$()
     {
-<span class="fc" id="L2216">        return Padding_Bottom$;</span>
+<span class="fc" id="L2217">        return Padding_Bottom$;</span>
     }
 
     /**
@@ -2223,8 +2224,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setPaddingTop$(PaddingSetting Padding_Top$)
     {
-<span class="nc" id="L2226">        this.Padding_Top$ = Padding_Top$;</span>
-<span class="nc" id="L2227">    }</span>
+<span class="nc" id="L2227">        this.Padding_Top$ = Padding_Top$;</span>
+<span class="nc" id="L2228">    }</span>
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
@@ -2233,8 +2234,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setPaddingBottom(MeasurementCSS Padding_Bottom)
     {
-<span class="nc" id="L2236">        this.Padding_Bottom = Padding_Bottom;</span>
-<span class="nc" id="L2237">    }</span>
+<span class="nc" id="L2237">        this.Padding_Bottom = Padding_Bottom;</span>
+<span class="nc" id="L2238">    }</span>
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
@@ -2243,8 +2244,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setPaddingBottom$(PaddingSetting Padding_Bottom$)
     {
-<span class="nc" id="L2246">        this.Padding_Bottom$ = Padding_Bottom$;</span>
-<span class="nc" id="L2247">    }</span>
+<span class="nc" id="L2247">        this.Padding_Bottom$ = Padding_Bottom$;</span>
+<span class="nc" id="L2248">    }</span>
 
     /**
      * Shorthand for Padding
@@ -2254,7 +2255,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public za.co.mmagon.jwebswing.htmlbuilder.css.padding.Padding Padding()
     {
-<span class="fc" id="L2257">        return Padding;</span>
+<span class="fc" id="L2258">        return Padding;</span>
     }
 
     /**
@@ -2308,8 +2309,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setPadding(za.co.mmagon.jwebswing.htmlbuilder.css.padding.Padding Padding)
     {
-<span class="nc" id="L2311">        this.Padding = Padding;</span>
-<span class="nc" id="L2312">    }</span>
+<span class="nc" id="L2312">        this.Padding = Padding;</span>
+<span class="nc" id="L2313">    }</span>
 
     public TableBorderCollapse Border_Collapse;
     public TableCaptionSides Table_Caption_Side;
@@ -2323,7 +2324,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public TableBorderCollapse Border_Collapse()
     {
-<span class="fc" id="L2326">        return Border_Collapse;</span>
+<span class="fc" id="L2327">        return Border_Collapse;</span>
     }
 
     /**
@@ -2334,7 +2335,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public TableCaptionSides Table_Caption_Side()
     {
-<span class="fc" id="L2337">        return Table_Caption_Side;</span>
+<span class="fc" id="L2338">        return Table_Caption_Side;</span>
     }
 
     /**
@@ -2345,7 +2346,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public MeasurementCSS Border_Spacing()
     {
-<span class="fc" id="L2348">        return Border_Spacing;</span>
+<span class="fc" id="L2349">        return Border_Spacing;</span>
     }
 
     /**
@@ -2355,8 +2356,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setBorderCollapse(TableBorderCollapse Border_Collapse)
     {
-<span class="nc" id="L2358">        this.Border_Collapse = Border_Collapse;</span>
-<span class="nc" id="L2359">    }</span>
+<span class="nc" id="L2359">        this.Border_Collapse = Border_Collapse;</span>
+<span class="nc" id="L2360">    }</span>
 
     /**
      * Sets which side the caption must be on
@@ -2365,8 +2366,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setTableCaptionSide(TableCaptionSides Table_Caption_Side)
     {
-<span class="nc" id="L2368">        this.Table_Caption_Side = Table_Caption_Side;</span>
-<span class="nc" id="L2369">    }</span>
+<span class="nc" id="L2369">        this.Table_Caption_Side = Table_Caption_Side;</span>
+<span class="nc" id="L2370">    }</span>
 
     /**
      * Specifies whether or not table borders should be collapsed
@@ -2375,8 +2376,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setBorderSpacing(MeasurementCSS Border_Spacing)
     {
-<span class="nc" id="L2378">        this.Border_Spacing = Border_Spacing;</span>
-<span class="nc" id="L2379">    }</span>
+<span class="nc" id="L2379">        this.Border_Spacing = Border_Spacing;</span>
+<span class="nc" id="L2380">    }</span>
 
     public ColourCSS Color;
     public ColourNames Color$;
@@ -2400,7 +2401,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public ColourCSS Color()
     {
-<span class="fc" id="L2403">        return Color;</span>
+<span class="fc" id="L2404">        return Color;</span>
     }
 
     /**
@@ -2411,7 +2412,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public ColourNames Color$()
     {
-<span class="fc" id="L2414">        return Color$;</span>
+<span class="fc" id="L2415">        return Color$;</span>
     }
 
     /**
@@ -2422,7 +2423,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public TextDirections Direction()
     {
-<span class="fc" id="L2425">        return Direction;</span>
+<span class="fc" id="L2426">        return Direction;</span>
     }
 
     /**
@@ -2433,7 +2434,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public MeasurementCSS Letter_Spacing()
     {
-<span class="fc" id="L2436">        return Letter_Spacing;</span>
+<span class="fc" id="L2437">        return Letter_Spacing;</span>
     }
 
     /**
@@ -2444,7 +2445,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public MeasurementCSS Line_Height()
     {
-<span class="fc" id="L2447">        return Line_Height;</span>
+<span class="fc" id="L2448">        return Line_Height;</span>
     }
 
     /**
@@ -2455,7 +2456,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public TextAlignments Text_Align()
     {
-<span class="fc" id="L2458">        return Text_Align;</span>
+<span class="fc" id="L2459">        return Text_Align;</span>
     }
 
     /**
@@ -2466,7 +2467,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public TextDecorations Text_Decoration()
     {
-<span class="fc" id="L2469">        return Text_Decoration;</span>
+<span class="fc" id="L2470">        return Text_Decoration;</span>
     }
 
     /**
@@ -2477,7 +2478,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public MeasurementCSS Text_Indent()
     {
-<span class="fc" id="L2480">        return Text_Indent;</span>
+<span class="fc" id="L2481">        return Text_Indent;</span>
     }
 
     /**
@@ -2488,7 +2489,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public TextTransforms Text_Transform()
     {
-<span class="fc" id="L2491">        return Text_Transform;</span>
+<span class="fc" id="L2492">        return Text_Transform;</span>
     }
 
     /**
@@ -2501,7 +2502,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public UnicodeBidis Unicode_Bidi()
     {
-<span class="fc" id="L2504">        return Unicode_Bidi;</span>
+<span class="fc" id="L2505">        return Unicode_Bidi;</span>
     }
 
     /**
@@ -2512,7 +2513,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public VerticalAlignments Vertical_Align()
     {
-<span class="fc" id="L2515">        return Vertical_Align;</span>
+<span class="fc" id="L2516">        return Vertical_Align;</span>
     }
 
     /**
@@ -2523,7 +2524,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public WhiteSpacing White_Space()
     {
-<span class="fc" id="L2526">        return White_Space;</span>
+<span class="fc" id="L2527">        return White_Space;</span>
     }
 
     /**
@@ -2534,7 +2535,7 @@ public class CSSImpl extends JavaScriptPart implements CSS
     @Override
     public MeasurementCSS Word_Spacing()
     {
-<span class="fc" id="L2537">        return Word_Spacing;</span>
+<span class="fc" id="L2538">        return Word_Spacing;</span>
     }
 
     /**
@@ -2544,8 +2545,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setColor(ColourCSS Color)
     {
-<span class="nc" id="L2547">        this.Color = Color;</span>
-<span class="nc" id="L2548">    }</span>
+<span class="nc" id="L2548">        this.Color = Color;</span>
+<span class="nc" id="L2549">    }</span>
 
     /**
      * Sets the colour
@@ -2554,8 +2555,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setColor$(ColourNames Color$)
     {
-<span class="nc" id="L2557">        this.Color$ = Color$;</span>
-<span class="nc" id="L2558">    }</span>
+<span class="nc" id="L2558">        this.Color$ = Color$;</span>
+<span class="nc" id="L2559">    }</span>
 
     /**
      * Sets the direction
@@ -2564,8 +2565,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setDirection(TextDirections Direction)
     {
-<span class="nc" id="L2567">        this.Direction = Direction;</span>
-<span class="nc" id="L2568">    }</span>
+<span class="nc" id="L2568">        this.Direction = Direction;</span>
+<span class="nc" id="L2569">    }</span>
 
     /**
      * Set the letter spacing
@@ -2574,8 +2575,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setLetterSpacing(MeasurementCSS Letter_Spacing)
     {
-<span class="nc" id="L2577">        this.Letter_Spacing = Letter_Spacing;</span>
-<span class="nc" id="L2578">    }</span>
+<span class="nc" id="L2578">        this.Letter_Spacing = Letter_Spacing;</span>
+<span class="nc" id="L2579">    }</span>
 
     /**
      * Line Height
@@ -2584,8 +2585,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setLineHeight(MeasurementCSS Line_Height)
     {
-<span class="nc" id="L2587">        this.Line_Height = Line_Height;</span>
-<span class="nc" id="L2588">    }</span>
+<span class="nc" id="L2588">        this.Line_Height = Line_Height;</span>
+<span class="nc" id="L2589">    }</span>
 
     /**
      * Text Alignment
@@ -2594,8 +2595,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setTextAlign(TextAlignments Text_Align)
     {
-<span class="nc" id="L2597">        this.Text_Align = Text_Align;</span>
-<span class="nc" id="L2598">    }</span>
+<span class="nc" id="L2598">        this.Text_Align = Text_Align;</span>
+<span class="nc" id="L2599">    }</span>
 
     /**
      * Sets the Text Decoration
@@ -2604,8 +2605,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setTextDecoration(TextDecorations Text_Decoration)
     {
-<span class="nc" id="L2607">        this.Text_Decoration = Text_Decoration;</span>
-<span class="nc" id="L2608">    }</span>
+<span class="nc" id="L2608">        this.Text_Decoration = Text_Decoration;</span>
+<span class="nc" id="L2609">    }</span>
 
     /**
      * Sets the text indentation
@@ -2614,8 +2615,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setTextIndent(MeasurementCSS Text_Indent)
     {
-<span class="nc" id="L2617">        this.Text_Indent = Text_Indent;</span>
-<span class="nc" id="L2618">    }</span>
+<span class="nc" id="L2618">        this.Text_Indent = Text_Indent;</span>
+<span class="nc" id="L2619">    }</span>
 
     /**
      * Sets the Text Transforms
@@ -2624,8 +2625,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setTextTransform(TextTransforms Text_Transform)
     {
-<span class="nc" id="L2627">        this.Text_Transform = Text_Transform;</span>
-<span class="nc" id="L2628">    }</span>
+<span class="nc" id="L2628">        this.Text_Transform = Text_Transform;</span>
+<span class="nc" id="L2629">    }</span>
 
     /**
      * Used together with the direction property to set or return whether the text should be overridden to support multiple languages in the same document
@@ -2634,8 +2635,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setUnicodeBidi(UnicodeBidis Unicode_Bidi)
     {
-<span class="nc" id="L2637">        this.Unicode_Bidi = Unicode_Bidi;</span>
-<span class="nc" id="L2638">    }</span>
+<span class="nc" id="L2638">        this.Unicode_Bidi = Unicode_Bidi;</span>
+<span class="nc" id="L2639">    }</span>
 
     /**
      * Sets the vertical alignment
@@ -2644,8 +2645,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setVerticalAlign(VerticalAlignments Vertical_Align)
     {
-<span class="nc" id="L2647">        this.Vertical_Align = Vertical_Align;</span>
-<span class="nc" id="L2648">    }</span>
+<span class="nc" id="L2648">        this.Vertical_Align = Vertical_Align;</span>
+<span class="nc" id="L2649">    }</span>
 
     /**
      * Sets the white space
@@ -2654,8 +2655,8 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setWhiteSpace(WhiteSpacing White_Space)
     {
-<span class="nc" id="L2657">        this.White_Space = White_Space;</span>
-<span class="nc" id="L2658">    }</span>
+<span class="nc" id="L2658">        this.White_Space = White_Space;</span>
+<span class="nc" id="L2659">    }</span>
 
     /**
      * Sets the word spacing
@@ -2664,13 +2665,13 @@ public class CSSImpl extends JavaScriptPart implements CSS
      */
     public void setWordSpacing(MeasurementCSS Word_Spacing)
     {
-<span class="nc" id="L2667">        this.Word_Spacing = Word_Spacing;</span>
-<span class="nc" id="L2668">    }</span>
+<span class="nc" id="L2668">        this.Word_Spacing = Word_Spacing;</span>
+<span class="nc" id="L2669">    }</span>
 
     @Override
     public Class&lt;? extends Annotation&gt; annotationType()
     {
-<span class="nc" id="L2673">        return CSS.class;</span>
+<span class="nc" id="L2674">        return CSS.class;</span>
     }
     
 }

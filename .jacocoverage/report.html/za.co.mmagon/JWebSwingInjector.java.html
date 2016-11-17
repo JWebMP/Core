@@ -21,7 +21,7 @@ import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
 import org.apache.log4j.Logger;
-import za.co.mmagon.jwebswing.base.servlets.AjaxReceiver;
+import za.co.mmagon.jwebswing.base.servlets.AjaxReceiverServlet;
 import za.co.mmagon.jwebswing.base.servlets.AngularDataServlet;
 import za.co.mmagon.jwebswing.base.servlets.AngularServlet;
 import za.co.mmagon.jwebswing.base.servlets.CSSServlet;
@@ -114,7 +114,7 @@ public class JWebSwingInjector extends GuiceServletContextListener
                 {
 <span class="nc" id="L115">                    LOG.trace(&quot;Configuring Servlets For Injection&quot;);</span>
 <span class="nc" id="L116">                    serve(&quot;/js*&quot;).with(JavaScriptServlet.class);</span>
-<span class="nc" id="L117">                    serve(&quot;/ajax*&quot;).with(AjaxReceiver.class);</span>
+<span class="nc" id="L117">                    serve(&quot;/ajax*&quot;).with(AjaxReceiverServlet.class);</span>
 <span class="nc" id="L118">                    serve(&quot;/css*&quot;).with(CSSServlet.class);</span>
 <span class="nc" id="L119">                    serve(&quot;/ad*&quot;).with(AngularDataServlet.class);</span>
 <span class="nc" id="L120">                    serve(&quot;/as*&quot;).with(AngularServlet.class);</span>

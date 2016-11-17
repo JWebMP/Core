@@ -18,7 +18,7 @@ package za.co.mmagon;
 
 import com.google.inject.servlet.ServletModule;
 import org.apache.log4j.Logger;
-import za.co.mmagon.jwebswing.base.servlets.AjaxReceiver;
+import za.co.mmagon.jwebswing.base.servlets.AjaxReceiverServlet;
 import za.co.mmagon.jwebswing.base.servlets.AngularDataServlet;
 import za.co.mmagon.jwebswing.base.servlets.AngularServlet;
 import za.co.mmagon.jwebswing.base.servlets.CSSServlet;
@@ -67,7 +67,7 @@ public class GuiceInjectionFilter extends ServletModule
 
 <span class="nc" id="L68">        LOG.trace(&quot;Configuring Servlets For Injection&quot;);</span>
 <span class="nc" id="L69">        serve(&quot;/js/*&quot;).with(JavaScriptServlet.class);</span>
-<span class="nc" id="L70">        serve(&quot;/ajax/*&quot;).with(AjaxReceiver.class);</span>
+<span class="nc" id="L70">        serve(&quot;/ajax/*&quot;).with(AjaxReceiverServlet.class);</span>
 <span class="nc" id="L71">        serve(&quot;/css/*&quot;).with(CSSServlet.class);</span>
 <span class="nc" id="L72">        serve(&quot;/ad/*&quot;).with(AngularDataServlet.class);</span>
 <span class="nc" id="L73">        serve(&quot;/as/*&quot;).with(AngularServlet.class);</span>
