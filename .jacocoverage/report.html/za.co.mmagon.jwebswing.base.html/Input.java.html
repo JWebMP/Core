@@ -29,8 +29,8 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqueryUI.autocomplete.JQUIAutoCompleteChildren;
-import za.co.mmagon.jwebswing.components.jqueryUI.spinner.JQUISpinnerChildren;
+import za.co.mmagon.jwebswing.components.jqueryui.autocomplete.JQUIAutoCompleteChildren;
+import za.co.mmagon.jwebswing.components.jqueryui.spinner.JQUISpinnerChildren;
 
 /**
  *

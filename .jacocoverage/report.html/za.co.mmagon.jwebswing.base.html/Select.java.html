@@ -23,7 +23,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.SelectChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqueryUI.selectmenu.JQUISelectMenuChildren;
+import za.co.mmagon.jwebswing.components.jqueryui.selectmenu.JQUISelectMenuChildren;
 
 /**
  *

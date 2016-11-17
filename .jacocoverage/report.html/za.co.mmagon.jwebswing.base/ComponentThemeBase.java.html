@@ -26,9 +26,9 @@ import za.co.mmagon.jwebswing.base.interfaces.IComponentThemeBase;
 import za.co.mmagon.jwebswing.base.references.CSSReference; 
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqueryUI.themes.JQUIThemeBlocks;
-import za.co.mmagon.jwebswing.components.jqueryUI.themes.JQUIThemes;
-import za.co.mmagon.jwebswing.components.jqxWidgets.themes.JQXWidgetThemes;
+import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemeBlocks;
+import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemes;
+import za.co.mmagon.jwebswing.components.jqxwidgets.themes.JQXWidgetThemes;
 import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
 
 /**

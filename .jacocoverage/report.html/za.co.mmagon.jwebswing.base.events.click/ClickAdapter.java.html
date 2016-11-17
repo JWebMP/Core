@@ -10,10 +10,10 @@ import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.BodyEvents;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.ParagraphEvents;
-import za.co.mmagon.jwebswing.components.jqueryUI.button.JQUIButtonEvents;
-import za.co.mmagon.jwebswing.components.jqxWidgets.buttongroup.JQXButtonGroupEvents;
-import za.co.mmagon.jwebswing.components.jqxWidgets.buttons.JQXButtonEvents;
-import za.co.mmagon.jwebswing.components.jqxWidgets.radiobutton.JQXRadioButtonEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.button.JQUIButtonEvents;
+import za.co.mmagon.jwebswing.components.jqxwidgets.buttongroup.JQXButtonGroupEvents;
+import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.JQXButtonEvents;
+import za.co.mmagon.jwebswing.components.jqxwidgets.radiobutton.JQXRadioButtonEvents;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 
 /**

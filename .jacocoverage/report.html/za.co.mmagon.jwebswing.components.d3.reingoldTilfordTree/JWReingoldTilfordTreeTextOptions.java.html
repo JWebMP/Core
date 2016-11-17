@@ -16,9 +16,9 @@
  */
 package za.co.mmagon.jwebswing.components.d3.reingoldTilfordTree;
 
-import javafx.scene.text.FontWeight;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourHex;
 import za.co.mmagon.jwebswing.htmlbuilder.css.fonts.FontFamilies;
+import za.co.mmagon.jwebswing.htmlbuilder.css.fonts.FontWeights;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
@@ -34,7 +34,7 @@ public class JWReingoldTilfordTreeTextOptions extends JavaScriptPart
     private static final long serialVersionUID = 1L;
     private MeasurementCSSImpl fontSize;
     private FontFamilies fontName;
-    private FontWeight fontWeight;
+    private FontWeights fontWeight;
     private String fontColour;
     private Double fillOpacity;
     private Integer marginLeft;
@@ -68,12 +68,12 @@ public class JWReingoldTilfordTreeTextOptions extends JavaScriptPart
 <span class="nc" id="L68">        this.fontName = fontName;</span>
 <span class="nc" id="L69">    }</span>
 
-    public FontWeight getFontWeight()
+    public FontWeights getFontWeight()
     {
 <span class="nc" id="L73">        return fontWeight;</span>
     }
 
-    public void setFontWeight(FontWeight fontWeight)
+    public void setFontWeight(FontWeights fontWeight)
     {
 <span class="nc" id="L78">        this.fontWeight = fontWeight;</span>
 <span class="nc" id="L79">    }</span>
