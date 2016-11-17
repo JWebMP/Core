@@ -14,39 +14,51 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package za.co.mmagon.jwebswing.base.servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
+import za.co.mmagon.LoggerFactory;
 
 /**
  * Provides the data for a specific component
- * 
+ *
  * @author GedMarc
  * @since Nov 15, 2016
  * @version 1.0
- * 
+ *
  */
 public class DataServlet extends JWDefaultServlet
 {
 
-    public DataServlet ()
+    /**
+     * The Servlet base logger
+     */
+    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("DataServlet");
+
+    public DataServlet()
     {
-        
+
     }
-    
+
     public void processRequest(HttpServletRequest req, HttpServletResponse resp)
     {
-        
+
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        super.doGet(req, resp);
-        
+        try
+        {
+            super.doGet(req, resp);
+        }
+        catch (Exception e)
+        {
+            LOG.fatal("do get error", e);
+        }
     }
 }

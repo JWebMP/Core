@@ -34,7 +34,7 @@ public class UpdatePair extends za.co.mmagon.jwebswing.generics.Pair<String, Com
     /**
      * The current user agent of the render
      */
-    private ReadableUserAgent userAgent;
+    private transient ReadableUserAgent userAgent;
 
     /**
      * Load an Update WebReference

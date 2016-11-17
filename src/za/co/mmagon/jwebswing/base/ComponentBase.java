@@ -89,7 +89,7 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
      * A set of properties for this component
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private Map<String,Object> properties;
+    private HashMap<String,Object> properties;
 
     /**
      * Constructs a new Component Shell
@@ -356,7 +356,7 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
      * @param properties 
      */
     @Override
-    public J setProperties(Map<String, Object> properties) {
+    public J setProperties(HashMap<String, Object> properties) {
         this.properties = properties;
         return (J)this;
     }

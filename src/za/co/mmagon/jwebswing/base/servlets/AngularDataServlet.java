@@ -143,8 +143,14 @@ public class AngularDataServlet extends JWDefaultServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        try
+        {
         super.doPost(request, response);
         processRequest(request, response);
+        }catch(Exception e)
+        {
+            LOG.fatal("Angular Data Servlet Do Post", e);
+        }
     }
 
 }

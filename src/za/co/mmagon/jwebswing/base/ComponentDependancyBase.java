@@ -125,7 +125,7 @@ public class ComponentDependancyBase<J extends ComponentBase> extends ComponentB
         ArrayList<JavascriptReference> arr = new ArrayList<>();
         getJavascriptReferencesAll().stream()
                 .filter((css) -> (css.getPriority().equals(priority)))
-                .filter((css) -> (!arr.contains(css)))
+                .filter((JavascriptReference css) -> (!arr.contains(css)))
                 .forEach((css)
                         ->
                         {
@@ -157,7 +157,8 @@ public class ComponentDependancyBase<J extends ComponentBase> extends ComponentB
         ArrayList<CSSReference> arr = new ArrayList<>();
         getCssReferencesAll().stream()
                 .filter((css) -> (css != null))
-                .filter((css) -> (css.getPriority().equals(priority))).filter((css) -> (!arr.contains(css)))
+                .filter((css) -> (css.getPriority().equals(priority)))
+                .filter((CSSReference css) -> (!arr.contains(css)))
                 .forEach((css)
                         ->
                         {

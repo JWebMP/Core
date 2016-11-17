@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.IOException;
+import java.io.Serializable;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
@@ -48,7 +49,7 @@ public class AngularJsonVariable extends JavaScriptPart<AngularJsonVariable>
     /**
      * The actual variable object
      */
-    private Object variable;
+    private Serializable variable;
     /**
      * The owner id of this DTO
      */
@@ -155,7 +156,7 @@ public class AngularJsonVariable extends JavaScriptPart<AngularJsonVariable>
      * Sets the variable if any is applied
      * @param variable 
      */
-    public void setVariable(Object variable)
+    public void setVariable(Serializable variable)
     {
         this.variable = variable;
     }

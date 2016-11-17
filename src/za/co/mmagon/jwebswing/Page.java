@@ -145,7 +145,7 @@ public class Page extends Html implements IPage
      * The current user agent of the render
      */
     @JsonIgnore
-    private ReadableUserAgent userAgent;
+    private transient ReadableUserAgent userAgent;
     /**
      * The Servlet attached to this page
      */
@@ -155,7 +155,7 @@ public class Page extends Html implements IPage
      * The session of this page
      */
     @JsonIgnore
-    private HttpSession session;
+    private transient HttpSession session;
 
     /**
      * The angular feature
@@ -166,10 +166,6 @@ public class Page extends Html implements IPage
      * Cache for all the associated components throughout the life-cycle of the application
      */
     private HashMap<String, ComponentHierarchyBase> componentCache;
-    /**
-     * Is JQX Data Adapter attached
-     */
-    private boolean jqxDataAdapter;
 
     /**
      * Renders all the children to a string builder
@@ -365,30 +361,6 @@ public class Page extends Html implements IPage
     private ArrayList<Script> getJavaScript()
     {
         ArrayList<Script> allScripts = new ArrayList<>();
-
-        if (isJqxDataAdapter())
-        {
-            if (isDynamicRender())
-            {
-                Script dynamicScript = new Script();
-                dynamicScript.addAttribute(ScriptAttributes.Type, "application/javascript");
-                dynamicScript.addAttribute(ScriptAttributes.Src, "da");
-                //dynamicScript.setTiny(true);
-                //dynamicScript.setText("$.ajax({cache:false,async:false,dataType:'script',url:'da?do=body'}).fail(function(){window.location.reload(); });");
-                allScripts.add(dynamicScript);
-            }
-            else
-            {
-                StringBuilder js = getAngular().renderTemplateScripts("jwangular");// getBody().renderJavascriptAll();
-                if (!js.toString().trim().isEmpty())
-                {
-                    Script s = new Script();
-                    s.addAttribute(ScriptAttributes.Type, "application/javascript");
-                    s.setText(js);
-                    allScripts.add(s);
-                }
-            }
-        }
         
         if (isAngularEnabled())
         {
@@ -1301,25 +1273,4 @@ public class Page extends Html implements IPage
         }
         return angular;
     }
-
-    /**
-     * Sets if this page must render the JQX data adapter JavaScript
-     *
-     * @return
-     */
-    public boolean isJqxDataAdapter()
-    {
-        return jqxDataAdapter;
-    }
-
-    /**
-     * Sets if this page must render the JQX data adapter JavaScript
-     *
-     * @param jqxDataAdapter
-     */
-    public void setJqxDataAdapter(boolean jqxDataAdapter)
-    {
-        this.jqxDataAdapter = jqxDataAdapter;
-    }
-
 }

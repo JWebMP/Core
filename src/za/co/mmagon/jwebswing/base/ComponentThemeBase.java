@@ -52,7 +52,7 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
      * The associated theme
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private List<Theme> themes;
+    private ArrayList<Theme> themes;
 
     /**
      * Constructs a theme controller for a component

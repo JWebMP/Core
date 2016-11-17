@@ -1,7 +1,7 @@
 package za.co.mmagon.jwebswing.components.jqueryui.colourpicker;
 
 import za.co.mmagon.jwebswing.Feature;
-import za.co.mmagon.jwebswing.components.pools.jqSpectrum.JQSpectrumColourPickerReferencePool;
+import za.co.mmagon.jwebswing.components.pools.jqspectrum.JQSpectrumColourPickerReferencePool;
 
 /**
  * An implementation of the Spectrum Colour Picker tool

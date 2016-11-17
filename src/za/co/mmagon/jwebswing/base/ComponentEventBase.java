@@ -65,7 +65,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
     /**
      * A list of all events
      */
-    private List<E> events;
+    private ArrayList<E> events;
 
     /**
      * The actual event type

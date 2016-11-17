@@ -17,6 +17,7 @@
 package za.co.mmagon.jwebswing.base.interfaces;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 import za.co.mmagon.jwebswing.base.ComponentBase;
 
@@ -124,7 +125,7 @@ public interface IComponentBase<J extends ComponentBase> extends Cloneable, Seri
      * @param properties
      * @return 
      */
-    J setProperties(Map<String, Object> properties);
+    J setProperties(HashMap<String, Object> properties);
 
     /**
      * Sets this components Raw Text

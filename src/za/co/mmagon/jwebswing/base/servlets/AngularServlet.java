@@ -67,7 +67,7 @@ public class AngularServlet extends JWDefaultServlet
             LOG.trace("[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + output.toString().length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
         }
     }
-    
+
     /**
      * Post handler
      *
@@ -79,10 +79,17 @@ public class AngularServlet extends JWDefaultServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        super.doGet(request, response);
-        processRequest(request, response);
+        try
+        {
+            super.doGet(request, response);
+            processRequest(request, response);
+        }
+        catch (Exception e)
+        {
+            LOG.fatal("Do Post Error", e);
+        }
     }
-    
+
     /**
      * Post handler
      *
@@ -94,7 +101,14 @@ public class AngularServlet extends JWDefaultServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        super.doGet(request, response);
-        processRequest(request, response);
+        try
+        {
+            super.doGet(request, response);
+            processRequest(request, response);
+        }
+        catch (Exception e)
+        {
+            LOG.fatal("Angualr Do Get Error", e);
+        }
     }
 }

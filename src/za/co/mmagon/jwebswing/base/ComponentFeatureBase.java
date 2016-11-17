@@ -60,7 +60,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
      * The features of this component
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private List<F> features;
+    private ArrayList<F> features;
     /**
      * The list of queries in this feature
      */

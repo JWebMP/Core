@@ -36,7 +36,7 @@ import za.co.mmagon.jwebswing.Page;
 public class CSSServlet extends JWDefaultServlet
 {
 
-    private static final Logger log = LoggerFactory.getInstance().makeNewLoggerInstance("CSSServlet");
+    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("CSSServlet"); 
     private static final long serialVersionUID = 1L;
 
     /**
@@ -61,7 +61,7 @@ public class CSSServlet extends JWDefaultServlet
             response.setContentType("text/css");
             out.println(scripts);
             Date dataTransferDate = new Date();
-            log.trace("[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + scripts.length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
+            LOG.trace("[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + scripts.length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
         }
     }
 
@@ -77,7 +77,14 @@ public class CSSServlet extends JWDefaultServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        super.doPost(request, response); //Checks for the page existance
-        processRequest(request, response);
+        try
+        {
+            super.doPost(request, response); //Checks for the page existance
+            processRequest(request, response);
+        }
+        catch (Exception e)
+        {
+            LOG.fatal("Do Post in CSS Servlet", e);
+        }
     }
 }
