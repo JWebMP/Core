@@ -1,4 +1,4 @@
-package za.co.mmagon.jwebswing.htmlbuilder.css;
+package za.co.mmagon.jwebswing.htmlbuilder.css.image;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;

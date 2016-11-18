@@ -16,13 +16,9 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.padding;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import java.lang.annotation.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * The CSS margin properties are used to generate space around elements.
@@ -48,7 +44,7 @@ public @interface PaddingCSS
      *
      * @return
      */
-    public Padding Padding();
+    public Padding Padding() default @Padding;
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.

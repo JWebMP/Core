@@ -17,7 +17,7 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.margins;
 
 import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.MarginSetting;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.MarginSetting;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
 
 /**

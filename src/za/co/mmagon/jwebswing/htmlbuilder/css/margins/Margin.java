@@ -21,7 +21,7 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import za.co.mmagon.jwebswing.htmlbuilder.css.MarginSetting;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.MarginSetting;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
 

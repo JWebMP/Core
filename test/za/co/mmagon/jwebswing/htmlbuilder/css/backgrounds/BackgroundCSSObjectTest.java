@@ -17,7 +17,7 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds;
 
 import org.junit.Test;
-import za.co.mmagon.jwebswing.htmlbuilder.css.ImageCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.image.ImageCSS;
 
 /**
  *

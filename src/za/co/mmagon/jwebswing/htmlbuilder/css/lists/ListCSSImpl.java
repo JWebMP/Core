@@ -17,7 +17,7 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.lists;
 
 import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.ImageCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.image.ImageCSS;
 
 /**
  * In HTML, there are two main types of lists:

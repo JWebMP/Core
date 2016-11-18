@@ -16,12 +16,13 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds;
 
-import za.co.mmagon.jwebswing.htmlbuilder.css.ImageCSS;
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.Repeats;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import java.lang.annotation.*;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.image.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  *
@@ -30,19 +31,31 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
  */
 public class BackgroundCSSImpl implements BackgroundCSS
 {
-
+    @CSSDetail(cssName = "background-attachment",cssVersion = CSSVersions.CSS21,jsName = "backgroundAttachment")
     private BackgroundAttachments Background_Attachment;
-    private ColourCSS Background_Color;
+    @CSSDetail(cssName = "background-color",cssVersion = CSSVersions.CSS21,jsName = "backgroundColor")
+    private ColourCSS BackgroundColor;
+    @CSSDetail(cssName = "background-color",cssVersion = CSSVersions.CSS21,jsName = "backgroundColor")
     private ColourNames Background_Color$;
+    @CSSDetail(cssName = "background-image",cssVersion = CSSVersions.CSS21,jsName = "backgroundImage")
     private ImageCSS Background_Image;
+    @CSSDetail(cssName = "background-image",cssVersion = CSSVersions.CSS21,jsName = "backgroundImage")
     private ImageCSS[] Background_Image$;
+    @CSSDetail(cssName = "background-position",cssVersion = CSSVersions.CSS21,jsName = "backgroundPosition")
     private BackgroundPositions Background_Position;
+    @CSSDetail(cssName = "background-repeat",cssVersion = CSSVersions.CSS21,jsName = "backgroundRepeat")
     private Repeats Background_Repeat;
+    @CSSDetail(cssName = "background-blendmode",cssVersion = CSSVersions.CSS21,jsName = "backgroundBlendmode")
     private BackgroundBlendMode Background_BlendMode;
+    @CSSDetail(cssName = "background-clip",cssVersion = CSSVersions.CSS21,jsName = "backgroundClip")
     private BackgroundClip Background_Clip;
+    @CSSDetail(cssName = "background-attachment",cssVersion = CSSVersions.CSS21,jsName = "backgroundAttachment")
     private BackgroundOrigins Background_Origin;
+    @CSSDetail(cssName = "background-attachment",cssVersion = CSSVersions.CSS21,jsName = "backgroundAttachment")
     private BackgroundSizes Background_Size$;
+    @CSSDetail(cssName = "background-attachment",cssVersion = CSSVersions.CSS21,jsName = "backgroundAttachment")
     private MeasurementCSS[] Background_Size;
+    @CSSDetail(cssName = "background-attachment",cssVersion = CSSVersions.CSS21,jsName = "backgroundAttachment")
     private Background Background;
 
     /**
@@ -51,9 +64,9 @@ public class BackgroundCSSImpl implements BackgroundCSS
      * @return
      */
     @Override
-    public ColourCSS Background_Color()
+    public ColourCSS BackgroundColor()
     {
-        return Background_Color;
+        return BackgroundColor;
     }
 
     /**
@@ -192,11 +205,11 @@ public class BackgroundCSSImpl implements BackgroundCSS
     /**
      * Specifies the background color of an element
      *
-     * @param Background_Color
+     * @param BackgroundColor
      */
-    public void setBackground_Color(ColourCSS Background_Color)
+    public void setBackgroundColor(ColourCSS BackgroundColor)
     {
-        this.Background_Color = Background_Color;
+        this.BackgroundColor = BackgroundColor;
     }
 
     /**

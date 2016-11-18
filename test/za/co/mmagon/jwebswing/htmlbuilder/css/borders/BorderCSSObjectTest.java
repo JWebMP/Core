@@ -20,7 +20,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.H1;
-import za.co.mmagon.jwebswing.htmlbuilder.css.BorderStyles;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
 import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSComposer;

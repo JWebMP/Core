@@ -17,7 +17,7 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.outline;
 
 import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.BorderStyles;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;

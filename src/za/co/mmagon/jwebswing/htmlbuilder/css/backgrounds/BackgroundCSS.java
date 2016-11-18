@@ -16,17 +16,12 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import za.co.mmagon.jwebswing.htmlbuilder.css.ImageCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.Repeats;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import java.lang.annotation.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.image.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * The CSS background properties are used to define the background effects for elements.
@@ -50,13 +45,15 @@ public @interface BackgroundCSS
 
     /**
      * Sets whether a background image is fixed or scrolls with the rest of the page
+     * @return 
      */
     public BackgroundAttachments Background_Attachment() default BackgroundAttachments.Unset;
 
     /**
      * Sets the background color of an element
+     * @return 
      */
-    public ColourCSS Background_Color() default @ColourCSS;
+    public ColourCSS BackgroundColor() default @ColourCSS;
 
     /**
      * Sets the background color to a colour name
@@ -67,11 +64,13 @@ public @interface BackgroundCSS
 
     /**
      * Specifies one or more background images for an element
+     * @return 
      */
     public ImageCSS Background_Image() default @ImageCSS;
 
     /**
      * Specifies one or more background images for an element
+     * @return 
      */
     public ImageCSS[] Background_Image$() default
     {
@@ -79,11 +78,13 @@ public @interface BackgroundCSS
 
     /**
      * Specifies the position of a background image
+     * @return 
      */
     public BackgroundPositions Background_Position() default BackgroundPositions.Unset;
 
     /**
      * Sets how a background image will be repeated
+     * @return 
      */
     public Repeats Background_Repeat() default Repeats.Unset;
 

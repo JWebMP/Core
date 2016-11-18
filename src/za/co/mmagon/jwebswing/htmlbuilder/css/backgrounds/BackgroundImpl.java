@@ -16,10 +16,10 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds;
 
-import za.co.mmagon.jwebswing.htmlbuilder.css.ImageCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.image.ImageCSS;
 import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSSShortHand;
-import za.co.mmagon.jwebswing.htmlbuilder.css.Repeats;
+import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.CSSShortHand;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.Repeats;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;

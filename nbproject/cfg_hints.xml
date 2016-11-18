@@ -10,5 +10,8 @@
             <attribute name="maxLength" value="35"/>
             <attribute name="enabled" value="false"/>
         </node>
+        <node name="AnnotationAsSuperInterface">
+            <attribute name="enabled" value="false"/>
+        </node>
     </tool>
 </configuration>

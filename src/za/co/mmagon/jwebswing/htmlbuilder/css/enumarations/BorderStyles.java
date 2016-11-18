@@ -1,6 +1,7 @@
-package za.co.mmagon.jwebswing.htmlbuilder.css;
+package za.co.mmagon.jwebswing.htmlbuilder.css.enumarations;
 
 import za.co.mmagon.jwebswing.base.client.CSSVersions;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
 
 /**
  * Definition and Usage

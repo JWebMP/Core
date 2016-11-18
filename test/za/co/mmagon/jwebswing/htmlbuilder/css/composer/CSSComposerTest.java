@@ -21,7 +21,7 @@ import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.html.Body;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.H1;
-import za.co.mmagon.jwebswing.htmlbuilder.css.BorderStyles;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
 import za.co.mmagon.jwebswing.htmlbuilder.css.CSS;
 import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.BackgroundBlendMode;
 import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.BackgroundClip;

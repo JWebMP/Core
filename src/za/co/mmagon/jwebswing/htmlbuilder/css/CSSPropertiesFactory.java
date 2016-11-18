@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css;
 
+import za.co.mmagon.jwebswing.htmlbuilder.css.image.ImageCSS;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.lang.annotation.Annotation;

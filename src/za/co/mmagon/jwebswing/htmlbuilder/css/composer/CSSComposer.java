@@ -1,16 +1,12 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
-import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
-import za.co.mmagon.jwebswing.base.ComponentStyleBase;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSSImpl;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSSPropertiesFactory;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
+import java.lang.reflect.*;
+import java.util.*;
+import org.apache.log4j.*;
+import za.co.mmagon.*;
+import za.co.mmagon.jwebswing.base.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
 
 /**
  * This class specifically build CSS according to a JWebSwing component
@@ -88,10 +84,7 @@ public class CSSComposer
                 o.addClass(declaredCssBlocks.getIdOfBlock());
             }
             return declaredCssBlocks;
-        }).forEachOrdered(declaredCssBlocks ->
-        {
-            blockMaster.addBlock(declaredCssBlocks);
-        });
+        }).forEachOrdered(blockMaster::addBlock);
         for (Field field : o.getClass().getDeclaredFields())
         {
             try

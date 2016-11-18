@@ -1,17 +1,17 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import za.co.mmagon.LoggerFactory;
+import java.lang.annotation.*;
+import java.lang.reflect.*;
+import java.util.*;
+import za.co.mmagon.*;
 
 /**
- *
+ * Converts an annotation to it's Impl class (In the same folder?)
  * @author Marc Magon
+ * @param <A> The annotation
+ * @param <O> The destination Impl class
  */
-public class CSSAnnotationToClass<A extends Annotation>
+public class CSSAnnotationToClass<A extends Annotation,O extends Object>
 {
 
     private static final org.apache.log4j.Logger log = LoggerFactory.getInstance().makeNewLoggerInstance("CSSAnnotationHandler");
@@ -50,7 +50,7 @@ public class CSSAnnotationToClass<A extends Annotation>
                     Annotation anno = (Annotation) getValue;
                     String returnType = anno.annotationType().getSimpleName();
                     String returnTypeImpl = "za.co.mmagon.jwebswing.htmlbuilder.css.accessors." + returnType + "Impl";
-                    Class clazz = null;
+                    Class clazz;
                     clazz = Class.forName(returnTypeImpl);
                     Method setMethod = classToCopyTo.getClass().getDeclaredMethod(setName, clazz);
                     //System.out.println("Method is : " + setMethod + " - With Object - " + getValue.getClass().getSimpleName());
