@@ -15,29 +15,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package za.co.mmagon.jwebswing.htmlbuilder.css;
+package za.co.mmagon.jwebswing.htmlbuilder.css.colours;
 
 /**
  *
  * @author GedMarc
- * @since Oct 17, 2016
+ * @since Nov 19, 2016
  * @version 1.0
  * 
  */
-public class TestEnumNull 
+public class ColourHexImpl extends ColourHex
 {
-    static TestEnum tt = null;
-    public TestEnumNull ()
+
+    public ColourHexImpl ()
     {
-        
+        super("");
     }
-    public static void main(String[] args)
+
+    public ColourHexImpl(String thisHex)
     {
-        System.out.println(tt);
+        super(thisHex);
+    }
+
+    public ColourHexImpl(ColourNames colourName)
+    {
+        super(colourName);
     }
     
-    public enum TestEnum
-    {
-        A,B
-    }
+    
 }

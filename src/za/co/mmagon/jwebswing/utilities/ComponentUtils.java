@@ -16,15 +16,11 @@
  */
 package za.co.mmagon.jwebswing.utilities;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import za.co.mmagon.jwebswing.CSSComponent;
-import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementTypes;
+import java.util.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.heightwidth.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.margins.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * This Class
@@ -60,9 +56,10 @@ public class ComponentUtils
     }
 
     /**
-     * Converts a hashmap to a 2d array for JSON Reading
+     * Converts a HashMap to a 2d array for JSON Reading
      *
      * @param map
+     *
      * @return an array that can be read in JSON as an array
      */
     public static synchronized Object[][] HashMapToArray(HashMap map)
@@ -119,7 +116,7 @@ public class ComponentUtils
 
     }
 
-    @CSS(Margin_Bottom = @MeasurementCSS(value = 0), Margin_Top = @MeasurementCSS(0), Margin_Left = @MeasurementCSS(0), Margin_Right = @MeasurementCSS(0))
+    @MarginsCSS(MarginTop = @MeasurementCSS(0), MarginLeft = @MeasurementCSS(0), MarginRight = @MeasurementCSS(0))
     public static class NoMarginsPadding extends CSSComponent
     {
 
@@ -134,7 +131,7 @@ public class ComponentUtils
         }
     }
 
-    @CSS(Width = @MeasurementCSS(value = 100, MeasurementType = MeasurementTypes.Percent))
+    @HeightWidthCSS(Width = @MeasurementCSS(value = 100, MeasurementType = MeasurementTypes.Percent))
     public static class WidthHundredPercent extends CSSComponent
     {
 
@@ -150,7 +147,7 @@ public class ComponentUtils
 
     }
 
-    @CSS(Width = @MeasurementCSS(value = 50, MeasurementType = MeasurementTypes.Percent))
+    @HeightWidthCSS(Width = @MeasurementCSS(value = 50, MeasurementType = MeasurementTypes.Percent))
     public static class WidthFiftyPercent extends CSSComponent
     {
 
@@ -166,7 +163,7 @@ public class ComponentUtils
 
     }
 
-    @CSS(Width = @MeasurementCSS(value = 100, MeasurementType = MeasurementTypes.Percent),
+    @HeightWidthCSS(Width = @MeasurementCSS(value = 100, MeasurementType = MeasurementTypes.Percent),
             Height = @MeasurementCSS(value = 100, MeasurementType = MeasurementTypes.Percent))
     public static class FullScreenCSSClass extends CSSComponent
     {

@@ -16,17 +16,15 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css;
 
-import java.lang.reflect.Field;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.junit.Test;
-import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.BackgroundCSSObjectTest;
-import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSBlock;
-import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSBlockIdentifier;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
+import java.lang.reflect.*;
+import java.util.*;
+import java.util.logging.*;
+import org.junit.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.composer.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
 
-/** 
+/**
  *
  * @author GedMarc
  */
@@ -47,10 +45,10 @@ public class CSSPropertiesFactoryTest
     public void testGetCSSPropertiesClass()
     {
         CSSPropertiesFactory factory = new CSSPropertiesFactory();
-        Map<String, Object> strings = factory.getCSS(cssObject);
-        for (Map.Entry<String, Object> entry : strings.entrySet())
+        Map<StringBuilder, Object> strings = factory.getCSS(cssObject);
+        for (Map.Entry<StringBuilder, Object> entry : strings.entrySet())
         {
-            String key = entry.getKey();
+            StringBuilder key = entry.getKey();
             Object value = entry.getValue();
             System.out.println("key - " + key + " [] " + value);
         }
@@ -64,10 +62,10 @@ public class CSSPropertiesFactoryTest
             }
 
             Field fHello = cssObject.getClass().getDeclaredField("hello");
-            Map<String, Object> strings2 = factory.getCSS(fHello, cssObject);
-            for (Map.Entry<String, Object> entry : strings2.entrySet())
+            Map<StringBuilder, Object> strings2 = factory.getCSS(fHello, cssObject);
+            for (Map.Entry<StringBuilder, Object> entry : strings2.entrySet())
             {
-                String key = entry.getKey();
+                StringBuilder key = entry.getKey();
                 Object value = entry.getValue();
                 System.out.println("key - " + key + " [] " + value);
             }

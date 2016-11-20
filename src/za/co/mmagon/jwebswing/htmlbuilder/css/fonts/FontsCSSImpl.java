@@ -1,7 +1,9 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.fonts;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * The CSS font properties define the font family, boldness, size, and the style of a text.
@@ -10,35 +12,32 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
  *
  * @author Marc Magon
  */
-public class FontsCSSImpl implements FontsCSS
+public class FontsCSSImpl extends CSSImplementationAdapter<FontsCSS, FontsCSSImpl> implements CSSImplementationClass<FontsCSS, FontsCSSImpl>
 {
 
-    private FontFamilies Font_Family;
-    private MeasurementCSSImpl Font_Size;
-    private FontStyles Font_Style;
-    private FontVariants Font_Variant;
-    private FontWeights Font_Weight;
-    private Integer Font_Weight$;
+    private static final long serialVersionUID = 1L;
+
+    @CSSDetail(cssName = "font-family", cssVersion = CSSVersions.CSS21)
+    private FontFamilies fontFamily;
+    @CSSDetail(cssName = "font-size", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl fontSize;
+    @CSSDetail(cssName = "font-style", cssVersion = CSSVersions.CSS21)
+    private FontStyles fontStyle;
+    @CSSDetail(cssName = "font-variant", cssVersion = CSSVersions.CSS21)
+    private FontVariants fontVariant;
+    @CSSDetail(cssName = "font-weight", cssVersion = CSSVersions.CSS21)
+    private FontWeights fontWeight;
+    @CSSDetail(cssName = "font-weight", cssVersion = CSSVersions.CSS21)
+    private Integer fontWeight$;
 
     /**
      * Returns the font family assigned
      *
      * @return
      */
-    @Override
-    public FontFamilies Font_Family()
+    public FontFamilies getFontFamily()
     {
-        return Font_Family;
-    }
-
-    /**
-     * Sets the font family assigned
-     *
-     * @param Font_Family
-     */
-    public void setFont_Family(FontFamilies Font_Family)
-    {
-        this.Font_Family = Font_Family;
+        return fontFamily;
     }
 
     /**
@@ -46,20 +45,9 @@ public class FontsCSSImpl implements FontsCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSSImpl Font_Size()
+    public MeasurementCSSImpl getFontSize()
     {
-        return Font_Size;
-    }
-
-    /**
-     * sets the font size
-     *
-     * @param Font_Size
-     */
-    public void setFont_Size(MeasurementCSSImpl Font_Size)
-    {
-        this.Font_Size = Font_Size;
+        return fontSize;
     }
 
     /**
@@ -67,20 +55,9 @@ public class FontsCSSImpl implements FontsCSS
      *
      * @return
      */
-    @Override
-    public FontStyles Font_Style()
+    public FontStyles getFontStyle()
     {
-        return Font_Style;
-    }
-
-    /**
-     * Set the font style
-     *
-     * @param Font_Style
-     */
-    public void setFont_Style(FontStyles Font_Style)
-    {
-        this.Font_Style = Font_Style;
+        return fontStyle;
     }
 
     /**
@@ -88,20 +65,9 @@ public class FontsCSSImpl implements FontsCSS
      *
      * @return
      */
-    @Override
-    public FontVariants Font_Variant()
+    public FontVariants getFontVariant()
     {
-        return Font_Variant;
-    }
-
-    /**
-     * Sets the applicable font variant
-     *
-     * @param Font_Variant
-     */
-    public void setFont_Variant(FontVariants Font_Variant)
-    {
-        this.Font_Variant = Font_Variant;
+        return fontVariant;
     }
 
     /**
@@ -109,26 +75,9 @@ public class FontsCSSImpl implements FontsCSS
      *
      * @return
      */
-    @Override
-    public FontWeights Font_Weight()
+    public FontWeights getFontWeight()
     {
-        return Font_Weight;
-    }
-
-    /**
-     * Sets the font weight
-     *
-     * @param Font_Weight
-     */
-    public void setFont_Weight(FontWeights Font_Weight)
-    {
-        this.Font_Weight = Font_Weight;
-    }
-
-    @Override
-    public Class<? extends Annotation> annotationType()
-    {
-        return FontsCSS.class;
+        return fontWeight;
     }
 
     /**
@@ -136,20 +85,69 @@ public class FontsCSSImpl implements FontsCSS
      *
      * @return
      */
-    @Override
-    public int Font_Weight$()
+    public int getFontWeight$()
     {
-        return Font_Weight$;
+        return fontWeight$;
+    }
+
+    /**
+     * Sets the font family
+     *
+     * @param fontFamily
+     */
+    public void setFontFamily(FontFamilies fontFamily)
+    {
+        this.fontFamily = fontFamily;
+    }
+
+    /**
+     * Sets the font size
+     *
+     * @param fontSize
+     */
+    public void setFontSize(MeasurementCSSImpl fontSize)
+    {
+        this.fontSize = fontSize;
+    }
+
+    /**
+     * Sets the font style
+     *
+     * @param fontStyle
+     */
+    public void setFontStyle(FontStyles fontStyle)
+    {
+        this.fontStyle = fontStyle;
+    }
+
+    /**
+     * Sets the font variant
+     *
+     * @param fontVariant
+     */
+    public void setFontVariant(FontVariants fontVariant)
+    {
+        this.fontVariant = fontVariant;
     }
 
     /**
      * Sets the font weight
      *
-     * @param Font_Weight$
+     * @param fontWeight
      */
-    public void setFont_Weight$(Integer Font_Weight$)
+    public void setFontWeight(FontWeights fontWeight)
     {
-        this.Font_Weight$ = Font_Weight$;
+        this.fontWeight = fontWeight;
+    }
+
+    /**
+     * Sets the font weight
+     *
+     * @param fontWeight$
+     */
+    public void setFontWeight$(Integer fontWeight$)
+    {
+        this.fontWeight$ = fontWeight$;
     }
 
 }

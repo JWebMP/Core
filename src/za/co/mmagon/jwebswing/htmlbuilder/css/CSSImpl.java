@@ -1,8 +1,7 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css;
 
-import java.lang.annotation.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.Annotations.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.animatable.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.borders.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
@@ -16,7 +15,6 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.outline.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.padding.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.tables.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.text.*;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
 
 /**
  * This class is an object implementation of the CSS Annotations
@@ -24,25 +22,67 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
  * @author Marc Magon
  * @since 2012/10/01
  */
-public class CSSImpl extends JavaScriptPart implements CSS
+public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements CSSImplementationClass<CSS, CSSImpl>
 {
+
     private static final long serialVersionUID = 1L;
-    
-    public CSSAnimatable animatable;
-    public BackgroundCSS background;
-    public BorderCSS border;
-    public CustomCSS custom;
-    public ColourCSS colour;
-    public DisplayCSS display;
-    public FontsCSS fonts;
-    public HeightWidthCSS dimensions;
-    public ListCSS list;
-    public MarginsCSS margins;
-    public OutlineCSS outline;
-    public PaddingCSS padding;
-    public TableCSS tables;
-    public TextCSS text;
-    
+    /**
+     * The animation CSS
+     */
+    private AnimateCSS animatable;
+    /**
+     * The getBackground css
+     */
+    private BackgroundCSSImpl background;
+    /**
+     * The getBorder CSS
+     */
+    private BorderCSSImpl border;
+    /**
+     * The Custom cc
+     */
+    private CustomCSSImpl custom;
+    /**
+     * The Colour CSS
+     */
+    private ColourCSSImpl colour;
+    /**
+     * The getDisplay CSS
+     */
+    private DisplayCSSImpl display;
+    /**
+     * The fonts CSS
+     */
+    private FontsCSSImpl fonts;
+    /**
+     * The getDimensions CSS
+     */
+    private HeightWidthCSSImpl dimensions;
+    /**
+     * getList Style CSS
+     */
+    private ListCSSImpl list;
+    /**
+     * getMargin CSS
+     */
+    private MarginsCSSImpl margins;
+    /**
+     * getOutline CSS
+     */
+    private OutlineCSSImpl outline;
+    /**
+     * getPadding CSS
+     */
+    private PaddingCSSImpl padding;
+    /**
+     * getTable CSS
+     */
+    private TableCSSImpl tables;
+    /**
+     * Text CSS
+     */
+    private TextCSSImpl text;
+
     /**
      * Construct a new instance
      */
@@ -51,135 +91,330 @@ public class CSSImpl extends JavaScriptPart implements CSS
         //No need to configure anything on startup
     }
 
-    @Override
-    public CSSAnimatable animatable()
+    /**
+     * Returns the animatable object
+     *
+     * @return
+     */
+    public AnimateCSS getAnimatable()
     {
         return animatable;
     }
 
-    @Override
-    public CustomCSS custom()
+    /**
+     * Gets the custom css
+     *
+     * @return
+     */
+    public CustomCSSImpl getCustom()
     {
-        if(custom == null)
+        if (custom == null)
+        {
             custom = new CustomCSSImpl();
+        }
         return custom;
     }
 
-    @Override
-    public BackgroundCSS background()
+    /**
+     * Gets the background css
+     *
+     * @return
+     */
+    public BackgroundCSSImpl getBackground()
     {
-        if(background == null)
+        if (background == null)
+        {
             background = new BackgroundCSSImpl();
+        }
         return background;
     }
 
-    @Override
-    public BorderCSS border()
+    /**
+     * Gets the border
+     *
+     * @return
+     */
+    public BorderCSSImpl getBorder()
     {
-        if(border == null)
+        if (border == null)
+        {
             border = new BorderCSSImpl();
+        }
         return border;
     }
 
-    @Override
-    public ColourCSS colour()
+    /**
+     * Gets the colour
+     *
+     * @return
+     */
+    public ColourCSSImpl getColour()
     {
-        if(colour == null)
+        if (colour == null)
+        {
             colour = new ColourCSSImpl();
+        }
         return colour;
     }
 
-    @Override
-    public DisplayCSS display()
+    /**
+     * Returns the display
+     *
+     * @return
+     */
+    public DisplayCSSImpl getDisplay()
     {
-        if(display == null)
+        if (display == null)
         {
             display = new DisplayCSSImpl();
         }
         return display;
     }
 
-    @Override
-    public FontsCSS font()
+    /**
+     *
+     * @return
+     */
+    public FontsCSSImpl getFont()
     {
-        if(fonts == null)
+        if (fonts == null)
+        {
             fonts = new FontsCSSImpl();
+        }
         return fonts;
     }
 
-    @Override
-    public HeightWidthCSS dimensions()
+    public HeightWidthCSSImpl getDimensions()
     {
-        if(dimensions == null)
+        if (dimensions == null)
+        {
             dimensions = new HeightWidthCSSImpl();
+        }
         return dimensions;
     }
 
     /**
-     * @return 
+     * Returns the list
+     *
+     * @return
      */
-    @Override
-    public ListCSS list()
+    public ListCSSImpl getList()
     {
-        if(list == null)
+        if (list == null)
+        {
             list = new ListCSSImpl();
+        }
         return list;
     }
 
-    @Override
-    public MarginsCSS margins()
+    /**
+     * Returns the margins
+     *
+     * @return
+     */
+    public MarginsCSSImpl getMargins()
     {
-        if(margins == null)
+        if (margins == null)
         {
             margins = new MarginsCSSImpl();
         }
         return margins;
     }
 
-    @Override
-    public OutlineCSS outline()
+    /**
+     * Returns the outline
+     *
+     * @return
+     */
+    public OutlineCSSImpl getOutline()
     {
-        if(outline == null)
+        if (outline == null)
+        {
             outline = new OutlineCSSImpl();
+        }
         return outline;
     }
 
     /**
-     * 
-     * @return 
+     * Returns the padding
+     *
+     * @return
      */
-    @Override
-    public PaddingCSS padding()
+    public PaddingCSSImpl getPadding()
     {
-        if(padding == null)
+        if (padding == null)
+        {
             padding = new PaddingCSSImpl();
+        }
         return padding;
     }
 
-    
-    @Override
-    public TableCSS table()
+    /**
+     * Returns the table
+     *
+     * @return
+     */
+    public TableCSSImpl getTable()
     {
-        if(tables == null)
+        if (tables == null)
+        {
             tables = new TableCSSImpl();
+        }
         return tables;
     }
 
-    
-    @Override
-    public TextCSS text()
+    /**
+     * Returns the text
+     *
+     * @return
+     */
+    public TextCSSImpl getText()
     {
-        if(text == null)
+        if (text == null)
+        {
             text = new TextCSSImpl();
+        }
         return text;
     }
 
-    @Override
-    public Class<? extends Annotation> annotationType()
+    /**
+     * Sets animatable object
+     *
+     * @param animatable
+     */
+    public void setAnimatable(AnimateCSS animatable)
     {
-        return CSS.class;
+        this.animatable = animatable;
     }
 
-    
-    
+    /**
+     * Sets the background object
+     *
+     * @param background
+     */
+    public void setBackground(BackgroundCSSImpl background)
+    {
+        this.background = background;
+    }
+
+    /**
+     * Sets the border object
+     *
+     * @param border
+     */
+    public void setBorder(BorderCSSImpl border)
+    {
+        this.border = border;
+    }
+
+    /**
+     * Sets the custom object
+     *
+     * @param custom
+     */
+    public void setCustom(CustomCSSImpl custom)
+    {
+        this.custom = custom;
+    }
+
+    /**
+     * Sets the colour object
+     *
+     * @param colour
+     */
+    public void setColour(ColourCSSImpl colour)
+    {
+        this.colour = colour;
+    }
+
+    /**
+     * Sets the display object
+     *
+     * @param display
+     */
+    public void setDisplay(DisplayCSSImpl display)
+    {
+        this.display = display;
+    }
+
+    /**
+     * Sets the fonts object
+     *
+     * @param fonts
+     */
+    public void setFonts(FontsCSSImpl fonts)
+    {
+        this.fonts = fonts;
+    }
+
+    /**
+     * Sets the dimensions object
+     *
+     * @param dimensions
+     */
+    public void setDimensions(HeightWidthCSSImpl dimensions)
+    {
+        this.dimensions = dimensions;
+    }
+
+    /**
+     * Sets the list object
+     *
+     * @param list
+     */
+    public void setList(ListCSSImpl list)
+    {
+        this.list = list;
+    }
+
+    /**
+     * Sets the margins object
+     *
+     * @param margins
+     */
+    public void setMargins(MarginsCSSImpl margins)
+    {
+        this.margins = margins;
+    }
+
+    /**
+     * Sets the outline object
+     *
+     * @param outline
+     */
+    public void setOutline(OutlineCSSImpl outline)
+    {
+        this.outline = outline;
+    }
+
+    /**
+     * Sets the padding object
+     *
+     * @param padding
+     */
+    public void setPadding(PaddingCSSImpl padding)
+    {
+        this.padding = padding;
+    }
+
+    /**
+     * Sets the tables object
+     *
+     * @param tables
+     */
+    public void setTables(TableCSSImpl tables)
+    {
+        this.tables = tables;
+    }
+
+    /**
+     * Sets the text object
+     *
+     * @param text
+     */
+    public void setText(TextCSSImpl text)
+    {
+        this.text = text;
+    }
+
 }

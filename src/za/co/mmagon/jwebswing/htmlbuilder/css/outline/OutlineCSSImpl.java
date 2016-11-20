@@ -16,11 +16,12 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.outline;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * An outline is a line drawn around an element - outside the border. This can be use to make an element "stand out".
@@ -30,23 +31,34 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class OutlineCSSImpl implements OutlineCSS
+public class OutlineCSSImpl extends CSSImplementationAdapter<OutlineCSS, OutlineCSSImpl> implements CSSImplementationClass<OutlineCSS, OutlineCSSImpl>
 {
+
+    private static final long serialVersionUID = 1L;
+
+    @CSSDetail(cssName = "outline-color", cssVersion = CSSVersions.CSS21)
+    private ColourCSSImpl outlineColor;
+    @CSSDetail(cssName = "outline-color", cssVersion = CSSVersions.CSS21)
+    private ColourNames outlineColor$;
+    @CSSDetail(cssName = "outline-style", cssVersion = CSSVersions.CSS21)
+    private BorderStyles outlineStyle;
+    @CSSDetail(cssName = "outline-width", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl outlineWidth;
+    @CSSDetail(cssName = "outline-offset", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl outlineOffset;
 
     public OutlineCSSImpl()
     {
     }
 
-    private ColourCSS Outline_Color;
-    private ColourNames Outline_Color$;
-    private BorderStyles Outline_Style;
-    private MeasurementCSS Outline_Width;
-    private MeasurementCSS Outline_Offset;
-
-    @Override
-    public Class<? extends Annotation> annotationType()
+    /**
+     * Sets the color of an outline
+     *
+     * @return
+     */
+    public ColourCSSImpl getOutlineColor()
     {
-        return OutlineCSS.class;
+        return outlineColor;
     }
 
     /**
@@ -54,21 +66,9 @@ public class OutlineCSSImpl implements OutlineCSS
      *
      * @return
      */
-    @Override
-    public ColourCSS Outline_Color()
+    public ColourNames getOutlineColor$()
     {
-        return Outline_Color;
-    }
-
-    /**
-     * Sets the color of an outline
-     *
-     * @return
-     */
-    @Override
-    public ColourNames Outline_Color$()
-    {
-        return Outline_Color$;
+        return outlineColor$;
     }
 
     /**
@@ -76,10 +76,9 @@ public class OutlineCSSImpl implements OutlineCSS
      *
      * @return
      */
-    @Override
-    public BorderStyles Outline_Style()
+    public BorderStyles getOutlineStyle()
     {
-        return Outline_Style;
+        return outlineStyle;
     }
 
     /**
@@ -87,10 +86,9 @@ public class OutlineCSSImpl implements OutlineCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Outline_Width()
+    public MeasurementCSSImpl getOutlineWidth()
     {
-        return Outline_Width;
+        return outlineWidth;
     }
 
     /**
@@ -98,52 +96,59 @@ public class OutlineCSSImpl implements OutlineCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Outline_Offset()
+    public MeasurementCSSImpl getOutlineOffset()
     {
-        return Outline_Offset;
+        return outlineOffset;
     }
 
     /**
      * Sets the outline Color
+     *
+     * @param outlineColor
      */
-    public void setOutline_Color(ColourCSS Outline_Color)
+    public void setOutlineColor(ColourCSSImpl outlineColor)
     {
-        this.Outline_Color = Outline_Color;
+        this.outlineColor = outlineColor;
     }
 
     /**
      * Sets the outline Color
+     *
+     * @param outlineColor$
      */
-    public void setOutline_Color$(ColourNames Outline_Color$)
+    public void setOutlineColor$(ColourNames outlineColor$)
     {
-        this.Outline_Color$ = Outline_Color$;
+        this.outlineColor$ = outlineColor$;
     }
 
     /**
      * Sets the Outline Style
      *
-     * @param Outline_Style
+     * @param outlineStyle
      */
-    public void setOutline_Style(BorderStyles Outline_Style)
+    public void setOutlineStyle(BorderStyles outlineStyle)
     {
-        this.Outline_Style = Outline_Style;
+        this.outlineStyle = outlineStyle;
     }
 
     /**
      * Sets the outline width
+     *
+     * @param outlineWidth
      */
-    public void setOutline_Width(MeasurementCSS Outline_Width)
+    public void setOutlineWidth(MeasurementCSSImpl outlineWidth)
     {
-        this.Outline_Width = Outline_Width;
+        this.outlineWidth = outlineWidth;
     }
 
     /**
      * Sets the outline offset
+     *
+     * @param outlineOffset
      */
-    public void setOutline_Offset(MeasurementCSS Outline_Offset)
+    public void setOutlineOffset(MeasurementCSSImpl outlineOffset)
     {
-        this.Outline_Offset = Outline_Offset;
+        this.outlineOffset = outlineOffset;
     }
 
 }

@@ -10,7 +10,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
  *
  * @author Marc Magon
  */
-public enum Float implements CSSEnumeration<Float>
+public enum Floats implements CSSEnumeration<Floats>
 {
     /**
      * The element floats to the left
@@ -54,7 +54,7 @@ public enum Float implements CSSEnumeration<Float>
     }
 
     @Override
-    public Float getDefault()
+    public Floats getDefault()
     {
         return Unset;
     }

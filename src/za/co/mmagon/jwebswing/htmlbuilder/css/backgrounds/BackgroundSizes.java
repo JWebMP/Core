@@ -18,7 +18,7 @@ package za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds;
 
 import za.co.mmagon.jwebswing.base.client.CSSVersions;
 import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
-import za.co.mmagon.jwebswing.htmlbuilder.css.animatable.CSSAnimatable;
+import za.co.mmagon.jwebswing.htmlbuilder.css.animatable.AnimateCSS;
 
 /**
  * Definition and Usage
@@ -41,7 +41,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.animatable.CSSAnimatable;
  * @author GedMarc
  * @since 17 Jan 2016
  */
-@CSSAnimatable
+@AnimateCSS
 public enum BackgroundSizes implements CSSEnumeration<BackgroundSizes>
 {
     /**

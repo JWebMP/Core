@@ -1,88 +1,109 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.measurement;
 
-import com.fasterxml.jackson.annotation.JsonRawValue;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.io.Serializable;
-import java.lang.annotation.Annotation;
+import com.fasterxml.jackson.annotation.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
 
 /**
+ * Any basic measurement
  *
  * @author Marc Magon
  */
-public class MeasurementCSSImpl implements MeasurementCSS, Serializable
+public class MeasurementCSSImpl extends CSSImplementationAdapter<MeasurementCSS, MeasurementCSSImpl>
+        implements CSSImplementationClass<MeasurementCSS, MeasurementCSSImpl>
 {
+
+    private static final long serialVersionUID = 1L;
 
     private double value;
     private MeasurementTypes MeasurementType;
-    public static final MeasurementCSSImpl hundredPercent = new MeasurementCSSImpl(100, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl ninetyNinePoint8Percent = new MeasurementCSSImpl(99.8, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl ninetyNinePercent = new MeasurementCSSImpl(99, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl ninetyEightPercent = new MeasurementCSSImpl(98, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl ninetySevenPercent = new MeasurementCSSImpl(97, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl ninetySixPercent = new MeasurementCSSImpl(96, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl ninetyFivePercent = new MeasurementCSSImpl(95, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl ninetyFourPercent = new MeasurementCSSImpl(94, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl ninetyThreePercent = new MeasurementCSSImpl(93, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl ninetyTwoPercent = new MeasurementCSSImpl(92, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl ninetyOnePercent = new MeasurementCSSImpl(91, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl ninetyPercent = new MeasurementCSSImpl(90, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl eightySevenPercent = new MeasurementCSSImpl(87, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl eightySixPercent = new MeasurementCSSImpl(86, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl eightyFivePercent = new MeasurementCSSImpl(85, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl eightyPercent = new MeasurementCSSImpl(80, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl seventyPercent = new MeasurementCSSImpl(70, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl fiftyPercent = new MeasurementCSSImpl(50, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl twentyPercent = new MeasurementCSSImpl(20, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl tenPercent = new MeasurementCSSImpl(10, MeasurementTypes.Percent);
-    public static final MeasurementCSSImpl zero = new MeasurementCSSImpl(0, MeasurementTypes.Pixels);
 
+    /**
+     * Constructs an empty measurement
+     */
     public MeasurementCSSImpl()
     {
+        //nothing required
     }
 
-    public MeasurementCSSImpl(MeasurementCSS measurementCSS)
-    {
-
-    }
-
+    /**
+     * Constructs with the given value and/or measurement type
+     *
+     * @param value
+     * @param measurementType
+     */
     public MeasurementCSSImpl(double value, MeasurementTypes measurementType)
     {
         this.value = value;
         MeasurementType = measurementType;
     }
 
+    /**
+     * Constructs with the given value in pixels
+     *
+     * @param value
+     */
     public MeasurementCSSImpl(double value)
     {
         this(value, MeasurementTypes.Pixels);
     }
 
+    /**
+     * Constructs with the given value and measurement type
+     *
+     * @param value
+     * @param measurementType
+     */
     public MeasurementCSSImpl(int value, MeasurementTypes measurementType)
     {
         this.value = value;
         MeasurementType = measurementType;
     }
 
+    /**
+     * Constructs with the given value as pixels
+     *
+     * @param value
+     */
     public MeasurementCSSImpl(int value)
     {
         this(value, MeasurementTypes.Pixels);
     }
 
+    /**
+     * Sets the value
+     *
+     * @param value
+     */
     public void setvalue(int value)
     {
         this.value = value;
     }
 
+    /**
+     * Sets the measurement type
+     *
+     * @param measurementType
+     */
     public void setMeasurementType(MeasurementTypes measurementType)
     {
         MeasurementType = measurementType;
     }
 
-    @Override
+    /**
+     * Returns the double value
+     *
+     * @return
+     */
     public double value()
     {
         return value;
     }
 
+    /**
+     * Returns the measurement formatted
+     *
+     * @return
+     */
     @JsonValue(true)
     @JsonRawValue
     @Override
@@ -115,6 +136,13 @@ public class MeasurementCSSImpl implements MeasurementCSS, Serializable
 
     }
 
+    /**
+     * Returns the measure formatted in quotes
+     *
+     * @param renderQuotes
+     *
+     * @return
+     */
     public String toString(boolean renderQuotes)
     {
         if (renderQuotes)
@@ -127,16 +155,13 @@ public class MeasurementCSSImpl implements MeasurementCSS, Serializable
         }
     }
 
-    @Override
+    /**
+     * Returns the measurement type
+     *
+     * @return
+     */
     public MeasurementTypes MeasurementType()
     {
         return MeasurementType;
     }
-
-    @Override
-    public Class<? extends Annotation> annotationType()
-    {
-        return MeasurementCSS.class;
-    }
-
 }

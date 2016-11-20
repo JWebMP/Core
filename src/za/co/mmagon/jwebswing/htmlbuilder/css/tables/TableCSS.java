@@ -16,13 +16,9 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.tables;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import java.lang.annotation.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * The look of an HTML table can be greatly improved with CSS:
@@ -42,21 +38,22 @@ public @interface TableCSS
 
     /**
      * Specifies whether or not table borders should be collapsed
+     * @return 
      */
-    public TableBorderCollapse Border_Collapse() default TableBorderCollapse.Unset;
+    public TableBorderCollapse BorderCollapse() default TableBorderCollapse.Unset;
 
     /**
      * Sets where the caption will appear
      *
      * @return
      */
-    public TableCaptionSides Table_Caption_Side() default TableCaptionSides.Unset;
+    public TableCaptionSides TableCaptionSide() default TableCaptionSides.Unset;
 
     /**
      * Sets the border spacing for the table
      *
      * @return
      */
-    public MeasurementCSS Border_Spacing() default @MeasurementCSS;
+    public MeasurementCSS BorderSpacing() default @MeasurementCSS;
 
 }

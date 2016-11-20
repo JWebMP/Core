@@ -45,24 +45,22 @@
             <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/dynamicsourcecode/DynamicSourceCode.java</file>
         </group>
         <group name="JWebSwing">
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/servlets/AjaxReceiverServlet.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/angular/AngularAttributes.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/servlets/DataServlet.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/ComponentDependancyBase.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jqimagemap/imagemap/JQHilightReference.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/CSSImpl.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/Page.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/ComponentThemeBase.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/servlets/JWDefaultServlet.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/servlets/AngularServlet.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jquerylayout/layout/JQLayout.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/interfaces/IComponentBase.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jquerylayout/layout/JQLayoutDiv.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jqplot/parts/JWGraphAxisTypes.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jqmetro/metro/JQMetroAttributes.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/ComponentBase.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/ComponentEventBase.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/servlets/CSSServlet.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderBottomCSS.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderImpl.java</file>
+            <file>jar:file:/C:/AESoft/Programs/JWebSwing/lib/junit_4/junit-4.10-sources.jar!/org/junit/internal/runners/model/ReflectiveCallable.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderLeftCSSImpl.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderCSS.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderLeftCSS.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderCSSImpl.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderRightCSS.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/CSSPropertiesFactory.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderTopCSSImpl.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/Border.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/backgrounds/BackgroundImpl.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderTopCSS.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderRightCSSImpl.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderBottomCSSImpl.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/backgrounds/BackgroundCSSImpl.java</file>
         </group>
     </open-files>
 </project-private>

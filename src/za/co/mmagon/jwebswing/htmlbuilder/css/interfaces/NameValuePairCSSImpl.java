@@ -1,58 +1,58 @@
-
 package za.co.mmagon.jwebswing.htmlbuilder.css.interfaces;
 
-import java.lang.annotation.Annotation;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
 
 /**
+ * A default name value pair
  *
  * @author ANGELFIRE
  */
-public class NameValuePairCSSImpl implements NameValuePairCSS {
+public class NameValuePairCSSImpl extends CSSImplementationAdapter<NameValuePairCSS, NameValuePairCSSImpl>
+        implements CSSImplementationClass<NameValuePairCSS, NameValuePairCSSImpl>
+{
+
+    private static final long serialVersionUID = 1L;
+
     private String name;
     private String value;
-    
-    
-    @Override
-    public String name()
-    {
-        return name;
-    }
 
-    @Override
-    public String value()
-    {
-        return value();
-    }
-
+    /**
+     * The name of this pair
+     *
+     * @return
+     */
     public String getName()
     {
         return name;
     }
 
+    /**
+     * Sets the name of the name value pair
+     *
+     * @param name
+     */
     public void setName(String name)
     {
         this.name = name;
     }
 
-    public String getvalue()
+    /**
+     * Gets the name of this value pair
+     *
+     * @return
+     */
+    public String getValue()
     {
         return value;
     }
 
-    public void setvalue(String value)
+    /**
+     * Sets the value of this value pair
+     *
+     * @param value
+     */
+    public void setValue(String value)
     {
         this.value = value;
     }
-
-    @Override
-    public Class<? extends Annotation> annotationType()
-    {
-        return NameValuePairCSS.class;
-    }
-
 }

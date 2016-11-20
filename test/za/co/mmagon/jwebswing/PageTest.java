@@ -17,18 +17,14 @@
 package za.co.mmagon.jwebswing;
 
 import static org.junit.Assert.assertEquals;
-import org.junit.Test;
-import za.co.mmagon.BaseTestClass;
-import za.co.mmagon.jwebswing.base.client.Browsers;
-import za.co.mmagon.jwebswing.base.client.InternetExplorerCompatibilityMode;
-import za.co.mmagon.jwebswing.base.html.Base;
-import za.co.mmagon.jwebswing.base.html.Body;
-import za.co.mmagon.jwebswing.base.html.Comment;
-import za.co.mmagon.jwebswing.base.html.H1;
-import za.co.mmagon.jwebswing.base.html.attributes.BaseAttributes;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.DevelopmentEnvironments;
-import za.co.mmagon.jwebswing.generics.WebReference;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
+import org.junit.*;
+import za.co.mmagon.*;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.base.html.attributes.*;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
+import za.co.mmagon.jwebswing.generics.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
 
 /**
  *
@@ -55,7 +51,7 @@ public class PageTest extends BaseTestClass
     {
         Page p = getPage();
         p.getBody().add(new Comment("Meh"));
-        p.getBody().getCss().setBackgroundColor$(ColourNames.DarkGoldenRod);
+        p.getBody().getCss().getBackground().setBackgroundColor$(ColourNames.DarkGoldenRod);
         System.out.println(p.toString(true));
 
         assertEquals("<!DOCTYPE html>\n"
@@ -74,10 +70,10 @@ public class PageTest extends BaseTestClass
     {
         Page p = getPage();
         p.getBody().add(new Comment("Meh"));
-        p.getBody().getCss().setBackgroundColor$(ColourNames.DarkGoldenRod);
+        p.getBody().getCss().getBackground().setBackgroundColor$(ColourNames.DarkGoldenRod);
         H1 child = new H1("child");
         child.setID("child");
-        child.getCss().setBackgroundColor$(ColourNames.AntiqueWhite);
+        child.getCss().getBackground().setBackgroundColor$(ColourNames.AntiqueWhite);
         p.getBody().add(child);
 
         System.out.println(p.getCssStyle());

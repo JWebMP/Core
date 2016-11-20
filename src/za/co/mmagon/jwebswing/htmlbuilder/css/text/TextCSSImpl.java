@@ -16,47 +16,66 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.text;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
+ * All default text properties
  *
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class TextCSSImpl implements TextCSS
+public class TextCSSImpl extends CSSImplementationAdapter<TextCSS, TextCSSImpl> implements CSSImplementationClass<TextCSS, TextCSSImpl>
 {
 
+    private static final long serialVersionUID = 1L;
+    @CSSDetail(cssName = "color", cssVersion = CSSVersions.CSS21)
+    private ColourCSSImpl color;
+    @CSSDetail(cssName = "color", cssVersion = CSSVersions.CSS21)
+    private ColourNames color$;
+    @CSSDetail(cssName = "direction", cssVersion = CSSVersions.CSS21)
+    private TextDirections direction;
+    @CSSDetail(cssName = "letter-spacing", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl letterSpacing;
+    @CSSDetail(cssName = "line-height", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl lineHeight;
+    @CSSDetail(cssName = "text-align", cssVersion = CSSVersions.CSS21)
+    private TextAlignments textAlign;
+    @CSSDetail(cssName = "text-decoration", cssVersion = CSSVersions.CSS21)
+    private TextDecorations textDecoration;
+    @CSSDetail(cssName = "text-indent", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl textIndent;
+    @CSSDetail(cssName = "text-transform", cssVersion = CSSVersions.CSS21)
+    private TextTransforms textTransform;
+    @CSSDetail(cssName = "unicode-bidi", cssVersion = CSSVersions.CSS21)
+    private UnicodeBidis unicodeBidi;
+    @CSSDetail(cssName = "vertical-align", cssVersion = CSSVersions.CSS21)
+    private VerticalAlignments verticalAlign;
+    @CSSDetail(cssName = "white-space", cssVersion = CSSVersions.CSS21)
+    private WhiteSpacing whiteSpace;
+    @CSSDetail(cssName = "word-spacing", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl wordSpacing;
+
+    /**
+     * Constructs a new instance of text css
+     */
     public TextCSSImpl()
     {
+        //Nothing needed here
     }
 
+    /**
+     * Returns nothing
+     *
+     * @return
+     */
     @Override
     public String toString()
     {
         return "";
-    }
-
-    private ColourCSS Color;
-    private ColourNames Color$;
-    private TextDirections Direction;
-    private MeasurementCSS Letter_Spacing;
-    private MeasurementCSS Line_Height;
-    private TextAlignments Text_Align;
-    private TextDecorations Text_Decoration;
-    private MeasurementCSS Text_Indent;
-    private TextTransforms Text_Transform;
-    private UnicodeBidis Unicode_Bidi;
-    private VerticalAlignments Vertical_Align;
-    private WhiteSpacing White_Space;
-    private MeasurementCSS Word_Spacing;
-
-    @Override
-    public Class<? extends Annotation> annotationType()
-    {
-        return TextCSS.class;
     }
 
     /**
@@ -64,10 +83,9 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public ColourCSS Color()
+    public ColourCSSImpl getColour()
     {
-        return Color;
+        return color;
     }
 
     /**
@@ -75,21 +93,19 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public ColourNames Color$()
+    public ColourNames getColour$()
     {
-        return Color$;
+        return color$;
     }
 
     /**
-     * Sets the Text Direction
+     * Sets the Text getDirection
      *
      * @return
      */
-    @Override
-    public TextDirections Direction()
+    public TextDirections getDirection()
     {
-        return Direction;
+        return direction;
     }
 
     /**
@@ -97,10 +113,9 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Letter_Spacing()
+    public MeasurementCSSImpl getLetterSpacing()
     {
-        return Letter_Spacing;
+        return letterSpacing;
     }
 
     /**
@@ -108,10 +123,9 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Line_Height()
+    public MeasurementCSSImpl getLineHeight()
     {
-        return Line_Height;
+        return lineHeight;
     }
 
     /**
@@ -119,21 +133,19 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public TextAlignments Text_Align()
+    public TextAlignments getTextAlign()
     {
-        return Text_Align;
+        return textAlign;
     }
 
     /**
-     * Sets the Text Direction
+     * Sets the Text getDirection
      *
      * @return
      */
-    @Override
-    public TextDecorations Text_Decoration()
+    public TextDecorations getTextDecoration()
     {
-        return Text_Decoration;
+        return textDecoration;
     }
 
     /**
@@ -141,10 +153,9 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Text_Indent()
+    public MeasurementCSSImpl getTextIndent()
     {
-        return Text_Indent;
+        return textIndent;
     }
 
     /**
@@ -152,10 +163,9 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public TextTransforms Text_Transform()
+    public TextTransforms getTextTransform()
     {
-        return Text_Transform;
+        return textTransform;
     }
 
     /**
@@ -163,10 +173,9 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public UnicodeBidis Unicode_Bidi()
+    public UnicodeBidis getUnicodeBidi()
     {
-        return Unicode_Bidi;
+        return unicodeBidi;
     }
 
     /**
@@ -174,10 +183,9 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public VerticalAlignments Vertical_Align()
+    public VerticalAlignments getVerticalAlign()
     {
-        return Vertical_Align;
+        return verticalAlign;
     }
 
     /**
@@ -185,10 +193,9 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public WhiteSpacing White_Space()
+    public WhiteSpacing getWhiteSpace()
     {
-        return White_Space;
+        return whiteSpace;
     }
 
     /**
@@ -196,10 +203,9 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Word_Spacing()
+    public MeasurementCSSImpl getWordSpacing()
     {
-        return Word_Spacing;
+        return wordSpacing;
     }
 
     /**
@@ -207,9 +213,9 @@ public class TextCSSImpl implements TextCSS
      *
      * @param Color
      */
-    public void setColor(ColourCSS Color)
+    public void setColor(ColourCSSImpl Color)
     {
-        this.Color = Color;
+        this.color = Color;
     }
 
     /**
@@ -219,7 +225,7 @@ public class TextCSSImpl implements TextCSS
      */
     public void setColor$(ColourNames Color$)
     {
-        this.Color$ = Color$;
+        this.color$ = Color$;
     }
 
     /**
@@ -229,107 +235,107 @@ public class TextCSSImpl implements TextCSS
      */
     public void setDirection(TextDirections Direction)
     {
-        this.Direction = Direction;
+        this.direction = Direction;
     }
 
     /**
      * Set the letter spacing
      *
-     * @param Letter_Spacing
+     * @param letterSpacing
      */
-    public void setLetter_Spacing(MeasurementCSS Letter_Spacing)
+    public void setLetterSpacing(MeasurementCSSImpl letterSpacing)
     {
-        this.Letter_Spacing = Letter_Spacing;
+        this.letterSpacing = letterSpacing;
     }
 
     /**
      * Line Height
      *
-     * @param Line_Height
+     * @param lineHeight
      */
-    public void setLine_Height(MeasurementCSS Line_Height)
+    public void setLineHeight(MeasurementCSSImpl lineHeight)
     {
-        this.Line_Height = Line_Height;
+        this.lineHeight = lineHeight;
     }
 
     /**
      * Text Alignment
      *
-     * @param Text_Align
+     * @param textAlign
      */
-    public void setText_Align(TextAlignments Text_Align)
+    public void setTextAlign(TextAlignments textAlign)
     {
-        this.Text_Align = Text_Align;
+        this.textAlign = textAlign;
     }
 
     /**
      * Sets the Text Decoration
      *
-     * @param Text_Decoration
+     * @param textDecoration
      */
-    public void setText_Decoration(TextDecorations Text_Decoration)
+    public void setTextDecoration(TextDecorations textDecoration)
     {
-        this.Text_Decoration = Text_Decoration;
+        this.textDecoration = textDecoration;
     }
 
     /**
      * Sets the text indentation
      *
-     * @param Text_Indent
+     * @param textIndent
      */
-    public void setText_Indent(MeasurementCSS Text_Indent)
+    public void setTextIndent(MeasurementCSSImpl textIndent)
     {
-        this.Text_Indent = Text_Indent;
+        this.textIndent = textIndent;
     }
 
     /**
      * Sets the Text Transforms
      *
-     * @param Text_Transform
+     * @param textTransform
      */
-    public void setText_Transform(TextTransforms Text_Transform)
+    public void setTextTransform(TextTransforms textTransform)
     {
-        this.Text_Transform = Text_Transform;
+        this.textTransform = textTransform;
     }
 
     /**
      * Used together with the direction property to set or return whether the text should be overridden to support multiple languages in the same document
      *
-     * @param Unicode_Bidi
+     * @param unicodeBidi
      */
-    public void setUnicode_Bidi(UnicodeBidis Unicode_Bidi)
+    public void setUnicodeBidi(UnicodeBidis unicodeBidi)
     {
-        this.Unicode_Bidi = Unicode_Bidi;
+        this.unicodeBidi = unicodeBidi;
     }
 
     /**
      * Sets the vertical alignment
      *
-     * @param Vertical_Align
+     * @param verticalAlign
      */
-    public void setVertical_Align(VerticalAlignments Vertical_Align)
+    public void setVerticalAlign(VerticalAlignments verticalAlign)
     {
-        this.Vertical_Align = Vertical_Align;
+        this.verticalAlign = verticalAlign;
     }
 
     /**
      * Sets the white space
      *
-     * @param White_Space
+     * @param whiteSpace
      */
-    public void setWhite_Space(WhiteSpacing White_Space)
+    public void setWhiteSpace(WhiteSpacing whiteSpace)
     {
-        this.White_Space = White_Space;
+        this.whiteSpace = whiteSpace;
     }
 
     /**
      * Sets the word spacing
      *
-     * @param Word_Spacing
+     * @param wordSpacing
      */
-    public void setWord_Spacing(MeasurementCSS Word_Spacing)
+    public void setWordSpacing(MeasurementCSSImpl wordSpacing)
     {
-        this.Word_Spacing = Word_Spacing;
+        this.wordSpacing = wordSpacing;
     }
 
 }

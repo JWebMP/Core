@@ -16,23 +16,36 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.image;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.lang.annotation.Annotation;
+import com.fasterxml.jackson.annotation.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
 
 /**
+ * Any default image
  *
  * @author GedMarc
  * @since 17 Jan 2016
  */
-public class ImageCSSImpl implements ImageCSS
+public class ImageCSSImpl extends CSSImplementationAdapter<ImageCSS, ImageCSSImpl>
+        implements CSSImplementationClass<ImageCSS, ImageCSSImpl>
+
 {
+
+    private static final long serialVersionUID = 1L;
 
     private String value;
 
+    /**
+     * Constructs a new instance of the image CSS
+     */
     public ImageCSSImpl()
     {
     }
 
+    /**
+     * Constructs a new image with the given URL
+     *
+     * @param url
+     */
     public ImageCSSImpl(String url)
     {
         this.value = url;
@@ -52,15 +65,14 @@ public class ImageCSSImpl implements ImageCSS
         }
     }
 
-    @Override
+    /**
+     * Returns the raw value
+     *
+     * @return
+     */
     public String value()
     {
         return value;
     }
 
-    @Override
-    public Class<? extends Annotation> annotationType()
-    {
-        return ImageCSS.class;
-    }
 }

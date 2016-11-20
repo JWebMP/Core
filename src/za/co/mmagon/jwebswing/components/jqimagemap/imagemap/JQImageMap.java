@@ -1,32 +1,18 @@
 package za.co.mmagon.jwebswing.components.jqimagemap.imagemap;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.Feature;
-import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
-import za.co.mmagon.jwebswing.base.html.Area;
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.Image;
+import java.util.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.*;
 import za.co.mmagon.jwebswing.base.html.Map;
-import za.co.mmagon.jwebswing.base.html.Span;
-import za.co.mmagon.jwebswing.base.html.attributes.AreaAttributes;
-import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
-import za.co.mmagon.jwebswing.base.html.attributes.ImageAttributes;
-import za.co.mmagon.jwebswing.base.html.attributes.ImageMapAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.ImageMapChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.ImageMapFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqueryui.position.JQUIPositionFeature;
-import za.co.mmagon.jwebswing.components.jqueryui.position.Position;
-import za.co.mmagon.jwebswing.components.jqueryui.position.PositionLocationHorizontal;
-import za.co.mmagon.jwebswing.components.jqueryui.position.PositionLocationVertical;
-import za.co.mmagon.jwebswing.features.gradients.JWGradientsFeature;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.displays.Positions;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.base.html.attributes.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
+import za.co.mmagon.jwebswing.components.jqueryui.position.*;
+import za.co.mmagon.jwebswing.features.gradients.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.displays.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
 
 /**
  * The image map component
@@ -35,7 +21,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  * @since 2013/01/14
  * @version 0.1
  */
-@CSS(Position = Positions.Relative)
+@DisplayCSS(Position = Positions.Relative)
 public class JQImageMap extends Component<ImageMapChildren, ImageMapAttributes, ImageMapFeatures, GlobalEvents, Component> implements BodyChildren
 {
 
@@ -84,7 +70,7 @@ public class JQImageMap extends Component<ImageMapChildren, ImageMapAttributes, 
     private boolean legend;
 
     private boolean valueDisplayed;
-    
+
     private boolean ratioConfigured = false;
 
     /**
@@ -118,8 +104,8 @@ public class JQImageMap extends Component<ImageMapChildren, ImageMapAttributes, 
      * @param heatmap
      * @param interactive
      * @param labeled
-     * @param imageXSize The original Image size
-     * @param imageYSize The original Image size
+     * @param imageXSize   The original Image size
+     * @param imageYSize   The original Image size
      * @param displayXSize The new image x size
      * @param displayYSize the new image y size
      */
@@ -128,8 +114,6 @@ public class JQImageMap extends Component<ImageMapChildren, ImageMapAttributes, 
         super("div", ComponentTypes.Div, false);
         this.labelHeadDiv = new Div();
         this.imageXSize = imageXSize;
-        getCss().setWidth(imageXSize);
-        getCss().setHeight(imageYSize);
         this.imageYSize = imageYSize;
         this.displayYSize = displayYSize;
         this.displayXSize = displayXSize;
@@ -149,10 +133,11 @@ public class JQImageMap extends Component<ImageMapChildren, ImageMapAttributes, 
     /**
      * Adds a specified area to the image map
      *
-     * @param areaName The name of the area
+     * @param areaName           The name of the area
      * @param polygonCoordinates The co-ordinates for the area
+     *
      * @return True or false if added public Area addAreaToMap(String areaName, String polygonCoordinates) { Area a = new Area(ImageMapAreaShapes.Poly, polygonCoordinates);
-     * a.addAttribute(GlobalAttributes.Name, areaName); this.map.add(a); return a; }
+     *         a.addAttribute(GlobalAttributes.Name, areaName); this.map.add(a); return a; }
      */
     public Area addAreaToMap(String areaName, String polygonCoordinates)
     {
@@ -166,6 +151,7 @@ public class JQImageMap extends Component<ImageMapChildren, ImageMapAttributes, 
      * Adds a specified area to the image map
      *
      * @param area The area to add
+     *
      * @return Always True
      */
     public boolean addAreaToMap(Area area)
@@ -179,7 +165,7 @@ public class JQImageMap extends Component<ImageMapChildren, ImageMapAttributes, 
         addAreaToMap(area);
         return area;
     }
-    
+
     private void renderResize()
     {
         if (displayXSize != 0)
@@ -281,7 +267,7 @@ public class JQImageMap extends Component<ImageMapChildren, ImageMapAttributes, 
                     }
                     alreadyAdded.add(area);
                     Span areaLableDiv = new Span();
-                    areaLableDiv.getCss().setPosition(Positions.Absolute);
+                    //areaLableDiv.getCss().getDisplay().setPosition(Positions.Absolute);
                     areaLableDiv.setText("");
                     areaLableDiv.addAttribute(GlobalAttributes.Style, "color:#000000 !important");
                     if (isLabeled())
@@ -295,6 +281,8 @@ public class JQImageMap extends Component<ImageMapChildren, ImageMapAttributes, 
 
                     class Binder extends Feature<JavaScriptPart, Binder>
                     {
+
+                        private static final long serialVersionUID = 1L;
 
                         Span label;
                         Area area;
@@ -547,7 +535,7 @@ public class JQImageMap extends Component<ImageMapChildren, ImageMapAttributes, 
     }
 
     /**
-     * Display X Size
+     * getDisplay X Size
      *
      * @return
      */
@@ -557,7 +545,7 @@ public class JQImageMap extends Component<ImageMapChildren, ImageMapAttributes, 
     }
 
     /**
-     * Display X size
+     * getDisplay X size
      *
      * @param displayXSize
      */
@@ -567,7 +555,7 @@ public class JQImageMap extends Component<ImageMapChildren, ImageMapAttributes, 
     }
 
     /**
-     * Display Y size
+     * getDisplay Y size
      *
      * @return
      */
@@ -577,7 +565,7 @@ public class JQImageMap extends Component<ImageMapChildren, ImageMapAttributes, 
     }
 
     /**
-     * Display Y size
+     * getDisplay Y size
      *
      * @param displayYSize
      */

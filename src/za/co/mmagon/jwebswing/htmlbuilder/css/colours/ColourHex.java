@@ -1,7 +1,7 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.colours;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-import za.co.mmagon.jwebswing.base.client.CSSVersions;
+import com.fasterxml.jackson.annotation.*;
+import za.co.mmagon.jwebswing.base.client.*;
 
 /**
  *
@@ -9,7 +9,6 @@ import za.co.mmagon.jwebswing.base.client.CSSVersions;
  */
 public class ColourHex implements CssColour<ColourHex>
 {
-
     private String thisHex;
 
     public ColourHex(String thisHex)
@@ -30,6 +29,23 @@ public class ColourHex implements CssColour<ColourHex>
     }
 
     @Override
+    public CSSVersions getCSSVersion()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String getJavascriptSyntax()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void setThisHex(String thisHex)
+    {
+        this.thisHex = thisHex;
+    }
+
+    @Override
     public String getValue()
     {
         return thisHex;
@@ -47,17 +63,4 @@ public class ColourHex implements CssColour<ColourHex>
     {
         return thisHex;
     }
-
-    @Override
-    public String getJavascriptSyntax()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public CSSVersions getCSSVersion()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

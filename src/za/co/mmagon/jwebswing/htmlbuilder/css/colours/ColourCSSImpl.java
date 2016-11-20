@@ -1,14 +1,18 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.colours;
 
-import java.io.Serializable;
-import java.lang.annotation.Annotation;
+import com.fasterxml.jackson.annotation.*;
+import java.io.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
 
 /**
  * Defines a Colour by anything
+ *
  * @author Marc Magon
  */
-public class ColourCSSImpl implements ColourCSS, Serializable
+public class ColourCSSImpl extends CSSImplementationAdapter<ColourCSS, ColourCSSImpl>
+        implements Serializable, CSSImplementationClass<ColourCSS, ColourCSSImpl>
 {
+
     /**
      * Version 1
      */
@@ -18,45 +22,49 @@ public class ColourCSSImpl implements ColourCSS, Serializable
      */
     private String value;
 
+    /**
+     * Constructs a new Colour CSS
+     */
     public ColourCSSImpl()
     {
+        //No need for anything here
     }
 
     /**
      * Constructs a new colour with a value
-     * @param value 
+     *
+     * @param value
      */
     public ColourCSSImpl(String value)
     {
         this.value = value;
     }
 
-    @Override
-    public Class<? extends Annotation> annotationType()
-    {
-        return ColourCSS.class;
-    }
-
+    @JsonValue
     /**
      * Returns the actual value
-     * @return 
+     *
+     * @return
      */
-    @Override
     public String value()
     {
         return value;
     }
+
     /**
      * Sets the actual value
-     * @param value 
+     *
+     * @param value
      */
     public void setValue(String value)
     {
         this.value = value;
     }
+
     /**
      * Returns the value of this colour
-     * @return 
+     *
+     * @return
      */
     @Override
     public String toString()

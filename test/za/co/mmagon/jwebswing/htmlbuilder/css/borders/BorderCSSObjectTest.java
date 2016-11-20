@@ -30,12 +30,12 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSComposer;
  * @author GedMarc
  * @since 17 Jan 2016
  */
-@BorderCSS(Border_Bottom_Color = @ColourCSS("colourTop"), Border_Left_Style = BorderStyles.Double,
-        Border = @Border(Border = @BorderLeftCSS(Border_Left_Color = @ColourCSS("really deep colour"))))
+@BorderCSS(BorderBottomColor = @ColourCSS("colourTop"), BorderLeftStyle = BorderStyles.Double,
+        Border = @Border(Border = @BorderLeftCSS(BorderLeftColor = @ColourCSS("really deep colour"))))
 public class BorderCSSObjectTest extends Div
 {
 
-    @BorderCSS(Border_Bottom_Color$ = ColourNames.AntiqueWhite, Border = @Border())
+    @BorderCSS(BorderBottomColor$ = ColourNames.AntiqueWhite, Border = @Border())
     private H1 hello;
 
     public BorderCSSObjectTest()

@@ -45,7 +45,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
         })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
-public @interface CSSAnimatable
+public @interface AnimateCSS
 {
 
 }

@@ -16,16 +16,11 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import java.lang.annotation.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  *
@@ -53,27 +48,27 @@ public @interface BorderBottomCSS
      *
      * @return
      */
-    public ColourCSS Border_Bottom_Color() default @ColourCSS;
+    public ColourCSS BorderBottomColor() default @ColourCSS;
 
     /**
      * Sets the color of the bottom border
      *
      * @return
      */
-    public ColourNames Border_Bottom_Color$() default ColourNames.Unset;
+    public ColourNames BorderBottomColor$() default ColourNames.Unset;
 
     /**
      * Sets the Style of the bottom border
      *
      * @return
      */
-    public BorderStyles Border_Bottom_Style() default BorderStyles.Unset;
+    public BorderStyles BorderBottomStyle() default BorderStyles.Unset;
 
     /**
      * Sets the width of the bottom border
      *
      * @return
      */
-    public MeasurementCSS Border_Bottom_Width() default @MeasurementCSS;
+    public MeasurementCSS BorderBottomWidth() default @MeasurementCSS;
 
 }

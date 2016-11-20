@@ -16,11 +16,12 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * CSS Border Properties
@@ -30,8 +31,19 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class BorderTopCSSImpl implements BorderTopCSS
+public class BorderTopCSSImpl extends CSSImplementationAdapter<BorderTopCSS, BorderTopCSSImpl> implements CSSImplementationClass<BorderTopCSS, BorderTopCSSImpl>
 {
+
+    private static final long serialVersionUID = 1L;
+
+    @CSSDetail(cssName = "border-top-color", cssVersion = CSSVersions.CSS21)
+    private ColourCSSImpl borderTopColor;
+    @CSSDetail(cssName = "border-top-color", cssVersion = CSSVersions.CSS21)
+    private ColourNames borderTopColor$;
+    @CSSDetail(cssName = "border-top-style", cssVersion = CSSVersions.CSS21)
+    private BorderStyles borderTopStyle;
+    @CSSDetail(cssName = "border-top-width", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl borderTopWidth;
 
     public BorderTopCSSImpl()
     {
@@ -41,24 +53,13 @@ public class BorderTopCSSImpl implements BorderTopCSS
     public String toString()
     {
         String out = "";
-        out += Border_Top_Width + " ";
-        out += Border_Top_Style + " ";
-        out += Border_Top_Color + " ";
-        out += Border_Top_Color$ + " ";
+        out += borderTopWidth + " ";
+        out += borderTopStyle + " ";
+        out += borderTopColor + " ";
+        out += borderTopColor$ + " ";
         out = out.replaceAll("null", "");
         out = out.trim();
         return out;
-    }
-
-    private ColourCSS Border_Top_Color;
-    private ColourNames Border_Top_Color$;
-    private BorderStyles Border_Top_Style;
-    private MeasurementCSS Border_Top_Width;
-
-    @Override
-    public Class<? extends Annotation> annotationType()
-    {
-        return BorderCSS.class;
     }
 
     /**
@@ -66,10 +67,9 @@ public class BorderTopCSSImpl implements BorderTopCSS
      *
      * @return
      */
-    @Override
-    public ColourCSS Border_Top_Color()
+    public ColourCSSImpl getBorderTopColor()
     {
-        return Border_Top_Color;
+        return borderTopColor;
     }
 
     /**
@@ -77,10 +77,9 @@ public class BorderTopCSSImpl implements BorderTopCSS
      *
      * @return
      */
-    @Override
-    public ColourNames Border_Top_Color$()
+    public ColourNames getBorderTopColor$()
     {
-        return Border_Top_Color$;
+        return borderTopColor$;
     }
 
     /**
@@ -88,10 +87,9 @@ public class BorderTopCSSImpl implements BorderTopCSS
      *
      * @return
      */
-    @Override
-    public BorderStyles Border_Top_Style()
+    public BorderStyles getBorderTopStyle()
     {
-        return Border_Top_Style;
+        return borderTopStyle;
     }
 
     /**
@@ -99,50 +97,49 @@ public class BorderTopCSSImpl implements BorderTopCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Border_Top_Width()
+    public MeasurementCSSImpl getBorderTopWidth()
     {
-        return Border_Top_Width;
+        return borderTopWidth;
     }
 
     /**
      * Sets the top colour for the border
      *
-     * @param Border_Top_Color
+     * @param borderTopColor
      */
-    public void setBorder_Top_Color(ColourCSS Border_Top_Color)
+    public void setBorderTopColor(ColourCSSImpl borderTopColor)
     {
-        this.Border_Top_Color = Border_Top_Color;
+        this.borderTopColor = borderTopColor;
     }
 
     /**
      * Sets the top colour for the border
      *
-     * @param Border_Top_Color$
+     * @param borderTopColor$
      */
-    public void setBorder_Top_Color$(ColourNames Border_Top_Color$)
+    public void setBorderTopColor$(ColourNames borderTopColor$)
     {
-        this.Border_Top_Color$ = Border_Top_Color$;
+        this.borderTopColor$ = borderTopColor$;
     }
 
     /**
      * Sets the top style for the border
      *
-     * @param Border_Top_Style
+     * @param borderTopStyle
      */
-    public void setBorder_Top_Style(BorderStyles Border_Top_Style)
+    public void setBorderTopStyle(BorderStyles borderTopStyle)
     {
-        this.Border_Top_Style = Border_Top_Style;
+        this.borderTopStyle = borderTopStyle;
     }
 
     /**
      * Sets the top width for the border
      *
-     * @param Border_Top_Width
+     * @param borderTopWidth
      */
-    public void setBorder_Top_Width(MeasurementCSS Border_Top_Width)
+    public void setBorderTopWidth(MeasurementCSSImpl borderTopWidth)
     {
-        this.Border_Top_Width = Border_Top_Width;
+        this.borderTopWidth = borderTopWidth;
     }
 
 }

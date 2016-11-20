@@ -1,26 +1,17 @@
 package za.co.mmagon.jwebswing.components.dynamicsourcecode;
 
-import java.util.HashMap;
-import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.ListItem;
-import za.co.mmagon.jwebswing.base.html.Option;
-import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
-import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.attributes.OptionAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
-import za.co.mmagon.jwebswing.components.google.sourceprettify.JQSourceCodePrettify;
-import za.co.mmagon.jwebswing.components.google.sourceprettify.SourceCodePrettifyThemes;
-import za.co.mmagon.jwebswing.components.jqxwidgets.dropdownlist.JQXDropDownListSelectMenu;
-import za.co.mmagon.jwebswing.components.jqxwidgets.panel.JQXPanel;
-import za.co.mmagon.jwebswing.components.jqxwidgets.panel.JQXPanelFeature;
-import za.co.mmagon.jwebswing.components.jqxwidgets.panel.JQXPanelSizeModes;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.displays.Overflows;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
-import za.co.mmagon.jwebswing.htmlbuilder.css.text.TextAlignments;
+import java.util.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.base.html.attributes.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
+import za.co.mmagon.jwebswing.components.google.sourceprettify.*;
+import za.co.mmagon.jwebswing.components.jqxwidgets.dropdownlist.*;
+import za.co.mmagon.jwebswing.components.jqxwidgets.panel.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.displays.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.text.*;
 
 /**
  *
@@ -32,41 +23,36 @@ public class DynamicSourceCodeScreen extends Div<GlobalChildren, NoAttributes, G
 
     private static final long serialVersionUID = 1L;
     private final HashMap<String, Class> screensToGenerate = new HashMap<>();
-    @CSS(Text_Align = TextAlignments.Center)
+    @TextCSS(TextAlign = TextAlignments.Center)
     private final JQXPanel buttonPanel = new JQXPanel();
     private final JQSourceCodePrettify sourceDisplay = new JQSourceCodePrettify();
-    
-    
-    
 
     JQXPanelFeature feat = new JQXPanelFeature(sourceDisplay);
 
     public DynamicSourceCodeScreen()
     {
         setID("sourceScreen");
-        getCss().setWidth(MeasurementCSSImpl.hundredPercent);
-        getCss().setHeight(MeasurementCSSImpl.hundredPercent);
-        getCss().setOverflow(Overflows.Hidden);
+        getCss().getDimensions().setWidth(MeasurementPercentages.hundredPercent);
+        getCss().getDimensions().setHeight(MeasurementPercentages.hundredPercent);
+        getCss().getDisplay().setOverflow(Overflows.Hidden);
         buttonPanel.setID("actualSource");
         buttonPanel.getOptions().setHeight(60);
-        buttonPanel.getCss().setHeight(60);
-        buttonPanel.getOptions().setWidth(MeasurementCSSImpl.hundredPercent);
-        buttonPanel.getCss().setMarginTop(new MeasurementCSSImpl(2));
+        buttonPanel.getCss().getDimensions().setHeight(60);
+        buttonPanel.getOptions().setWidth(MeasurementPercentages.hundredPercent);
+        buttonPanel.getCss().getMargins().setMarginTop(new MeasurementCSSImpl(2));
         buttonPanel.addClass("sourceCodeButton");
 
         sourceDisplay.setID("sourceCode");
         sourceDisplay.setSourceCodePrettifyTheme(SourceCodePrettifyThemes.Sons_Of_Obsidian);
         addFeature(new DynamicSourceCodeFeature(this));
 
-        sourceDisplay.getCss().setHeight(MeasurementCSSImpl.hundredPercent);
+        sourceDisplay.getCss().getDimensions().setHeight(MeasurementPercentages.hundredPercent);
+        sourceDisplay.getCss().getDisplay().setOverflow(Overflows.Scroll);
+        sourceDisplay.addFeature(feat);
 
-        sourceDisplay.getCss().setOverflow(Overflows.Scroll);
-
-        //sourceDisplay.addFeature(feat);
-        //displayPanel.getOptions().setAutoUpdate(true);
         feat.getOptions().setSizeMode(JQXPanelSizeModes.fixed);
-        feat.getOptions().setWidth(MeasurementCSSImpl.hundredPercent);
-        feat.getOptions().setHeight(MeasurementCSSImpl.ninetyThreePercent);
+        feat.getOptions().setWidth(MeasurementPercentages.hundredPercent);
+        feat.getOptions().setHeight(MeasurementPercentages.ninetyThreePercent);
 
         za.co.mmagon.jwebswing.utilities.ComponentUtils.removeAllMargins(sourceDisplay);
 

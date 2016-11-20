@@ -16,17 +16,12 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import za.co.mmagon.jwebswing.htmlbuilder.css.image.ImageCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.Repeats;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import java.lang.annotation.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.image.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  *
@@ -45,64 +40,76 @@ public @interface Background
 
     /**
      * Sets the background color of an element
+     *
+     * @return
      */
-    public ColourCSS Background_Color() default @ColourCSS;
+    public ColourCSS BackgroundColor() default @ColourCSS;
 
     /**
      * Sets the background color to a colour name
      *
      * @return
      */
-    public ColourNames Background_Color$() default ColourNames.Unset;
+    public ColourNames BackgroundColor$() default ColourNames.Unset;
 
     /**
      * Specifies one or more background images for an element
+     *
+     * @return
      */
-    public ImageCSS Background_Image() default @ImageCSS;
+    public ImageCSS BackgroundImage() default @ImageCSS;
 
     /**
      * Specifies one or more background images for an element
+     *
+     * @return
      */
-    public ImageCSS[] Background_Image$() default
+    public ImageCSS[] BackgroundImage$() default 
     {
     };
 
     /**
      * Specifies the position of a background image
+     *
+     * @return
      */
-    public BackgroundPositions Background_Position() default BackgroundPositions.Unset;
+    public BackgroundPositions BackgroundPosition() default BackgroundPositions.Unset;
 
     /**
      * The background-size property specifies the size of the background images.
      *
      * @return
      */
-    public MeasurementCSS[] Background_Size() default
+    public MeasurementCSS[] BackgroundSize() default 
     {
     };
 
     /**
      * Sets how a background image will be repeated
+     *
+     * @return
      */
-    public Repeats Background_Repeat() default Repeats.Unset;
+    public Repeats BackgroundRepeat() default Repeats.Unset;
 
     /**
      * The background-origin property specifies where the background image is positioned.
      *
      * @return
      */
-    public BackgroundOrigins Background_Origin() default BackgroundOrigins.Unset;
+    public BackgroundOrigins BackgroundOrigin() default BackgroundOrigins.Unset;
 
     /**
      * The background-clip property specifies the painting area of the background.
      *
      * @return
      */
-    public BackgroundClip Background_Clip() default BackgroundClip.Unset;
+    public BackgroundClip BackgroundClip() default BackgroundClip.Unset;
 
     /**
      * Sets whether a background image is fixed or scrolls with the rest of the page
+     *
+     * @return
      */
-    public BackgroundAttachments Background_Attachment() default BackgroundAttachments.Unset;
+    public BackgroundAttachments BackgroundAttachment() default BackgroundAttachments.Unset;
 
 }

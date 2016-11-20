@@ -16,31 +16,37 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.text;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
+ * Defines text shadows
  *
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class TextShadowsCSSImpl implements TextShadows
+public class TextShadowsCSSImpl extends CSSImplementationAdapter<TextShadows, TextShadowsCSSImpl> implements CSSImplementationClass<TextShadows, TextShadowsCSSImpl>
 {
 
+    private static final long serialVersionUID = 1L;
+
+    @CSSDetail(cssName = "h-shadow", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl hShadow;
+    @CSSDetail(cssName = "v-shadow", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl vShadow;
+    @CSSDetail(cssName = "blur-radius", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl blurRadius;
+    @CSSDetail(cssName = "color", cssVersion = CSSVersions.CSS21)
+    private ColourCSSImpl color;
+
+    /**
+     * Constructs a new text shadow instance
+     */
     public TextShadowsCSSImpl()
     {
-    }
-
-    private MeasurementCSS H_Shadow;
-    private MeasurementCSS V_Shadow;
-    private MeasurementCSS Blur_Radius;
-    private ColourCSS Color;
-
-    @Override
-    public Class<? extends Annotation> annotationType()
-    {
-        return TextShadows.class;
     }
 
     /**
@@ -48,10 +54,9 @@ public class TextShadowsCSSImpl implements TextShadows
      *
      * @return
      */
-    @Override
-    public MeasurementCSS H_Shadow()
+    public MeasurementCSSImpl getHShadow()
     {
-        return H_Shadow;
+        return hShadow;
     }
 
     /**
@@ -59,10 +64,9 @@ public class TextShadowsCSSImpl implements TextShadows
      *
      * @return
      */
-    @Override
-    public MeasurementCSS V_Shadow()
+    public MeasurementCSSImpl getVShadow()
     {
-        return V_Shadow;
+        return vShadow;
     }
 
     /**
@@ -70,10 +74,9 @@ public class TextShadowsCSSImpl implements TextShadows
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Blur_Radius()
+    public MeasurementCSSImpl getBlurRadius()
     {
-        return Blur_Radius;
+        return blurRadius;
     }
 
     /**
@@ -81,38 +84,39 @@ public class TextShadowsCSSImpl implements TextShadows
      *
      * @return
      */
-    @Override
-    public ColourCSS Color()
+    public ColourCSSImpl getColour()
     {
-        return Color;
+        return color;
     }
 
     /**
      * Required. The position of the horizontal shadow. Negative values are allowed
      * <p>
+     * @param hShadow
      */
-    public void setH_Shadow(MeasurementCSS H_Shadow)
+    public void sethShadow(MeasurementCSSImpl hShadow)
     {
-        this.H_Shadow = H_Shadow;
+        this.hShadow = hShadow;
     }
 
     /**
      * Required. The position of the vertical shadow. Negative values are allowed
      * <p>
+     * @param vShadow
      */
-    public void setV_Shadow(MeasurementCSS V_Shadow)
+    public void setvShadow(MeasurementCSSImpl vShadow)
     {
-        this.V_Shadow = V_Shadow;
+        this.vShadow = vShadow;
     }
 
     /**
      * Sets the blur radius Default is 0
      *
-     * @param Blur_Radius
+     * @param blurRadius
      */
-    public void setBlur_Radius(MeasurementCSS Blur_Radius)
+    public void setBlurRadius(MeasurementCSSImpl blurRadius)
     {
-        this.Blur_Radius = Blur_Radius;
+        this.blurRadius = blurRadius;
     }
 
     /**
@@ -120,9 +124,9 @@ public class TextShadowsCSSImpl implements TextShadows
      *
      * @param Color
      */
-    public void setColor(ColourCSS Color)
+    public void setColour(ColourCSSImpl Color)
     {
-        this.Color = Color;
+        this.color = Color;
     }
 
 }

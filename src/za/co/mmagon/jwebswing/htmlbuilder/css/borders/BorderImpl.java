@@ -16,24 +16,29 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 
-import java.lang.annotation.Annotation;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
 
 /**
+ * A default border
  *
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class BorderImpl implements Border
+public class BorderImpl extends CSSImplementationAdapter<Border, BorderImpl> implements CSSImplementationClass<Border, BorderImpl>
 {
 
-    private BorderLeftCSS Border;
+    private static final long serialVersionUID = 1L;
+    @CSSDetail(cssName = "border-bottom-color", cssVersion = CSSVersions.CSS21)
+    private BorderLeftCSSImpl border;
 
     @Override
     public String toString()
     {
-        if (Border != null)
+        if (border != null)
         {
-            return Border.toString();
+            return border.toString();
         }
         else
         {
@@ -41,16 +46,24 @@ public class BorderImpl implements Border
         }
     }
 
-    @Override
-    public BorderLeftCSS Border()
+    /**
+     * Returns the border
+     *
+     * @return
+     */
+    public BorderLeftCSSImpl getBorder()
     {
-        return Border;
+        return border;
     }
 
-    @Override
-    public Class<? extends Annotation> annotationType()
+    /**
+     * Sets the border
+     *
+     * @param Border
+     */
+    public void setBorder(BorderLeftCSSImpl Border)
     {
-        return Border.class;
+        this.border = Border;
     }
 
 }

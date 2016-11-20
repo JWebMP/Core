@@ -16,11 +16,11 @@
  */
 package za.co.mmagon.jwebswing.components.jqPlot;
 
-import org.junit.Test;
-import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.Orientation;
-import za.co.mmagon.jwebswing.components.jqplot.graphs.JQPlotBarGraph;
-import za.co.mmagon.jwebswing.components.jqplot.graphs.display.JQPlotBar;
+import org.junit.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
+import za.co.mmagon.jwebswing.components.jqplot.graphs.*;
+import za.co.mmagon.jwebswing.components.jqplot.graphs.display.*;
 
 /**
  *
@@ -52,7 +52,7 @@ public class JQPlotGraphTest
         JQPlotBarGraph graph = getNewGraph();
         graph.getOptions().getTitle().setText("1D Bar Graph");
         graph.getOptions().getTitle().setShow(true);
-        graph.getCss().setWidth(260);
+        graph.getCss().getDimensions().setWidth(260);
 
         graph.getOptions().setAnimate(Boolean.TRUE);
         graph.addBar(new JQPlotBar("Cat 1", 12.0));
@@ -76,7 +76,7 @@ public class JQPlotGraphTest
 
         JQPlotBarGraph graph = getNewGraph();
         graph.getOptions().setAnimate(Boolean.TRUE);
-        graph.getCss().setWidth(460);
+        graph.getCss().getDimensions().setWidth(460);
 
         graph.addBar(new JQPlotBar("Cat 1", 12.0));
         graph.addBar(new JQPlotBar("Cat 1", 94.0));

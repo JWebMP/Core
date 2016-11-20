@@ -45,21 +45,21 @@ public @interface TextShadows
      *
      * @return
      */
-    public MeasurementCSS H_Shadow();
+    public MeasurementCSS HShadow();
 
     /**
      * Required. The position of the vertical shadow. Negative values are allowed
      *
      * @return
      */
-    public MeasurementCSS V_Shadow();
+    public MeasurementCSS VShadow();
 
     /**
      * Optional. The blur radius. Default value is 0
      *
      * @return
      */
-    public MeasurementCSS Blur_Radius() default @MeasurementCSS;
+    public MeasurementCSS BlurRadius() default @MeasurementCSS;
 
     /**
      * Optional. The color of the shadow. Look at CSS Color Values for a complete list of possible color values

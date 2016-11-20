@@ -53,27 +53,27 @@ public @interface BorderRightCSS
      *
      * @return
      */
-    public ColourCSS Border_Right_Color() default @ColourCSS;
+    public ColourCSS BorderRightColor() default @ColourCSS;
 
     /**
      * Sets the color of the right border
      *
      * @return
      */
-    public ColourNames Border_Right_Color$() default ColourNames.Unset;
+    public ColourNames BorderRightColor$() default ColourNames.Unset;
 
     /**
      * Sets the style of the right border
      *
      * @return
      */
-    public BorderStyles Border_Right_Style() default BorderStyles.Unset;
+    public BorderStyles BorderRightStyle() default BorderStyles.Unset;
 
     /**
      * Sets the style of the right border
      *
      * @return
      */
-    public MeasurementCSS Border_Right_Width() default @MeasurementCSS;
+    public MeasurementCSS BorderRightWidth() default @MeasurementCSS;
 
 }

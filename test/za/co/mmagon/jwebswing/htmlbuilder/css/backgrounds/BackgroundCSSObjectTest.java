@@ -16,25 +16,26 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds;
 
-import org.junit.Test;
-import za.co.mmagon.jwebswing.htmlbuilder.css.image.ImageCSS;
+import org.junit.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.image.*;
 
 /**
  *
  * @author GedMarc
  * @since 17 Jan 2016
  */
-@BackgroundCSS(Background_Image$ =
+@BackgroundCSS(BackgroundImage$ =
 {
-    @ImageCSS("url 1"),
+    @ImageCSS("url 1")
+    ,
     @ImageCSS("url 2")
-}, Background_Image
+}, BackgroundImage
         = @ImageCSS("image specified"),
-        Background_Attachment = BackgroundAttachments.Inherit)
+        BackgroundAttachment = BackgroundAttachments.Inherit)
 public class BackgroundCSSObjectTest
 {
 
-    @BackgroundCSS(Background_Image = @ImageCSS(value = "Inner Field Annotation Render"))
+    @BackgroundCSS(BackgroundImage = @ImageCSS(value = "Inner Field Annotation Render"))
     private String hello;
 
     public BackgroundCSSObjectTest()

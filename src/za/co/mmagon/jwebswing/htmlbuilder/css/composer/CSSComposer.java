@@ -72,19 +72,17 @@ public class CSSComposer
     public final boolean addComponent(ComponentStyleBase o)
     {
         CSSBlock annotatedCssBlocks = propertiesFactory.getCSSBlock(o.getID(), CSSTypes.None, propertiesFactory.getCSS(o), CSSBlockIdentifier.Id);
-        blockMaster.addBlock(annotatedCssBlocks);
+        getBlockMaster().addBlock(annotatedCssBlocks);
+        
+        
         Map<CSSTypes, CSSImpl> css = o.getCssTypeHashMap();
         css.entrySet().stream().map(entry ->
         {
             CSSTypes key = entry.getKey();
             CSSImpl value = entry.getValue();
-            CSSBlock declaredCssBlocks = propertiesFactory.getCSSBlock(value.getCssName(), key, propertiesFactory.getCSS(value), value.getBlockIdentifier());
-            if (value.getBlockIdentifier().equals(CSSBlockIdentifier.Class))
-            {
-                o.addClass(declaredCssBlocks.getIdOfBlock());
-            }
+            CSSBlock declaredCssBlocks = propertiesFactory.getCSSBlock(key.getCssName(), key, propertiesFactory.getCSS(value),CSSBlockIdentifier.Class);
             return declaredCssBlocks;
-        }).forEachOrdered(blockMaster::addBlock);
+        }).forEachOrdered(getBlockMaster()::addBlock);
         for (Field field : o.getClass().getDeclaredFields())
         {
             try
@@ -161,7 +159,7 @@ public class CSSComposer
     public String toString()
     {
         StringBuilder cssScript = new StringBuilder();
-        List<CSSBlock> allCurrentBlocks = blockMaster.getAllCSSBlocks();
+        List<CSSBlock> allCurrentBlocks = getBlockMaster().getAllCSSBlocks();
         allCurrentBlocks.stream().forEach((block)
                 ->
         {

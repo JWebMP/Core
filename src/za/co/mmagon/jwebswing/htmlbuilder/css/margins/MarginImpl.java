@@ -16,9 +16,11 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.margins;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.MarginSetting;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * To shorten the code, it is possible to specify all the margin properties in one property.
@@ -26,8 +28,27 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class MarginImpl implements Margin
+public class MarginImpl extends CSSImplementationAdapter<Margin, MarginImpl> implements CSSImplementationClass<Margin, MarginImpl>
 {
+
+    private static final long serialVersionUID = 1L;
+
+    @CSSDetail(cssName = "margin-right", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl marginRight;
+    @CSSDetail(cssName = "margin-right", cssVersion = CSSVersions.CSS21)
+    private MarginSetting marginRight$;
+    @CSSDetail(cssName = "margin-left", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl marginLeft;
+    @CSSDetail(cssName = "margin-left", cssVersion = CSSVersions.CSS21)
+    private MarginSetting marginLeft$;
+    @CSSDetail(cssName = "margin-top", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl marginTop;
+    @CSSDetail(cssName = "margin-top", cssVersion = CSSVersions.CSS21)
+    private MarginSetting marginTop$;
+    @CSSDetail(cssName = "margin-bottom", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl marginBottom;
+    @CSSDetail(cssName = "margin-bottom", cssVersion = CSSVersions.CSS21)
+    private MarginSetting marginBottom$;
 
     public MarginImpl()
     {
@@ -37,37 +58,27 @@ public class MarginImpl implements Margin
     public String toString()
     {
         String out = "";
-        out += Margin_Top + " ";
-        out += Margin_Top$ + " ";
-        out += Margin_Right + " ";
-        out += Margin_Right$ + " ";
-        out += Margin_Bottom + " ";
-        out += Margin_Bottom$ + " ";
-        out += Margin_Left + " ";
-        out += Margin_Left$ + " ";
+        out += marginTop + " ";
+        out += marginTop$ + " ";
+        out += marginRight + " ";
+        out += marginRight$ + " ";
+        out += marginBottom + " ";
+        out += marginBottom$ + " ";
+        out += marginLeft + " ";
+        out += marginLeft$ + " ";
         out = out.replaceAll("null", "");
         out = out.trim();
         return out;
     }
 
-    private MeasurementCSS Margin_Right;
-    private MarginSetting Margin_Right$;
-    private MeasurementCSS Margin_Left;
-    private MarginSetting Margin_Left$;
-    private MeasurementCSS Margin_Top;
-    private MarginSetting Margin_Top$;
-    private MeasurementCSS Margin_Bottom;
-    private MarginSetting Margin_Bottom$;
-
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Margin_Right()
+    public MeasurementCSSImpl getMarginRight()
     {
-        return Margin_Right;
+        return marginRight;
     }
 
     /**
@@ -75,10 +86,9 @@ public class MarginImpl implements Margin
      *
      * @return
      */
-    @Override
-    public MarginSetting Margin_Right$()
+    public MarginSetting getMarginRight$()
     {
-        return Margin_Right$;
+        return marginRight$;
     }
 
     /**
@@ -86,10 +96,9 @@ public class MarginImpl implements Margin
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Margin_Left()
+    public MeasurementCSSImpl getMarginLeft()
     {
-        return Margin_Left;
+        return marginLeft;
     }
 
     /**
@@ -97,10 +106,9 @@ public class MarginImpl implements Margin
      *
      * @return
      */
-    @Override
-    public MarginSetting Margin_Left$()
+    public MarginSetting getMarginLeft$()
     {
-        return Margin_Left$;
+        return marginLeft$;
     }
 
     /**
@@ -108,55 +116,59 @@ public class MarginImpl implements Margin
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Margin_Top()
+    public MeasurementCSSImpl getMarginTop()
     {
-        return Margin_Top;
+        return marginTop;
     }
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      * <p>
+     * @param marginRight
      */
-    public void setMargin_Right(MeasurementCSS Margin_Right)
+    public void setMarginRight(MeasurementCSSImpl marginRight)
     {
-        this.Margin_Right = Margin_Right;
+        this.marginRight = marginRight;
     }
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      * <p>
+     * @param marginRight$
      */
-    public void setMargin_Right$(MarginSetting Margin_Right$)
+    public void setMarginRight$(MarginSetting marginRight$)
     {
-        this.Margin_Right$ = Margin_Right$;
+        this.marginRight$ = marginRight$;
     }
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      * <p>
+     * @param marginLeft
      */
-    public void setMargin_Left(MeasurementCSS Margin_Left)
+    public void setMarginLeft(MeasurementCSSImpl marginLeft)
     {
-        this.Margin_Left = Margin_Left;
+        this.marginLeft = marginLeft;
     }
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      * <p>
+     * @param marginLeft$
      */
-    public void setMargin_Left$(MarginSetting Margin_Left$)
+    public void setMarginLeft$(MarginSetting marginLeft$)
     {
-        this.Margin_Left$ = Margin_Left$;
+        this.marginLeft$ = marginLeft$;
     }
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      * <p>
+     * @param marginTop
      */
-    public void setMargin_Top(MeasurementCSS Margin_Top)
+    public void setMarginTop(MeasurementCSSImpl marginTop)
     {
-        this.Margin_Top = Margin_Top;
+        this.marginTop = marginTop;
     }
 
     /**
@@ -164,10 +176,9 @@ public class MarginImpl implements Margin
      *
      * @return
      */
-    @Override
-    public MarginSetting Margin_Top$()
+    public MarginSetting getMarginTop$()
     {
-        return Margin_Top$;
+        return marginTop$;
     }
 
     /**
@@ -175,10 +186,9 @@ public class MarginImpl implements Margin
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Margin_Bottom()
+    public MeasurementCSSImpl getMarginBottom()
     {
-        return Margin_Bottom;
+        return marginBottom;
     }
 
     /**
@@ -186,45 +196,38 @@ public class MarginImpl implements Margin
      *
      * @return
      */
-    @Override
-    public MarginSetting Margin_Bottom$()
+    public MarginSetting getMarginBottom$()
     {
-        return Margin_Bottom$;
+        return marginBottom$;
     }
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
-     * @param Margin_Top$
+     * @param marginTop$
      */
-    public void setMargin_Top$(MarginSetting Margin_Top$)
+    public void setMarginTop$(MarginSetting marginTop$)
     {
-        this.Margin_Top$ = Margin_Top$;
+        this.marginTop$ = marginTop$;
     }
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
-     * @param Margin_Bottom
+     * @param marginBottom
      */
-    public void setMargin_Bottom(MeasurementCSS Margin_Bottom)
+    public void setMarginBottom(MeasurementCSSImpl marginBottom)
     {
-        this.Margin_Bottom = Margin_Bottom;
+        this.marginBottom = marginBottom;
     }
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
-     * @param Margin_Bottom$
+     * @param marginBottom$
      */
-    public void setMargin_Bottom$(MarginSetting Margin_Bottom$)
+    public void setMarginBottom$(MarginSetting marginBottom$)
     {
-        this.Margin_Bottom$ = Margin_Bottom$;
-    }
-
-    @Override
-    public Class<? extends Annotation> annotationType()
-    {
-        return Margin.class;
+        this.marginBottom$ = marginBottom$;
     }
 }

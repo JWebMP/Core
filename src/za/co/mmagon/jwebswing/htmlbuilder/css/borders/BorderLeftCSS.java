@@ -53,27 +53,27 @@ public @interface BorderLeftCSS
      *
      * @return
      */
-    public ColourCSS Border_Left_Color() default @ColourCSS;
+    public ColourCSS BorderLeftColor() default @ColourCSS;
 
     /**
      * Sets the colour of the left border
      *
      * @return
      */
-    public ColourNames Border_Left_Color$() default ColourNames.Unset;
+    public ColourNames BorderLeftColor$() default ColourNames.Unset;
 
     /**
      * Sets the style of the left border
      *
      * @return
      */
-    public BorderStyles Border_Left_Style() default BorderStyles.Unset;
+    public BorderStyles BorderLeftStyle() default BorderStyles.Unset;
 
     /**
      * Sets the width of the left border
      *
      * @return
      */
-    public MeasurementCSS Border_Left_Width() default @MeasurementCSS;
+    public MeasurementCSS BorderLeftWidth() default @MeasurementCSS;
 
 }

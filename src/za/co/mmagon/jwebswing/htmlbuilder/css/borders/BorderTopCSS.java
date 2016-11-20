@@ -53,26 +53,26 @@ public @interface BorderTopCSS
      *
      * @return
      */
-    public ColourCSS Border_Top_Color() default @ColourCSS;
+    public ColourCSS BorderTopColor() default @ColourCSS;
 
     /**
      * Sets the color of the top border
      *
      * @return
      */
-    public ColourNames Border_Top_Color$() default ColourNames.Unset;
+    public ColourNames BorderTopColor$() default ColourNames.Unset;
 
     /**
      * Sets the style of the top border
      *
      * @return
      */
-    public BorderStyles Border_Top_Style() default BorderStyles.Unset;
+    public BorderStyles BorderTopStyle() default BorderStyles.Unset;
 
     /**
      * Sets the width of the top border
      *
      * @return
      */
-    public MeasurementCSS Border_Top_Width() default @MeasurementCSS;
+    public MeasurementCSS BorderTopWidth() default @MeasurementCSS;
 }

@@ -23,8 +23,7 @@ import za.co.mmagon.jwebswing.base.html.List;
 import za.co.mmagon.jwebswing.base.html.ListItem;
 import za.co.mmagon.jwebswing.base.html.attributes.ButtonAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.LinkAttributes;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.lists.ListStyleType;
+import za.co.mmagon.jwebswing.htmlbuilder.css.lists.*;
 
 /**
  * A drop down list item for the top nav bar. Comes out as an icon
@@ -34,12 +33,12 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.lists.ListStyleType;
  * @version 1.0
  *
  */
-@CSS(List_Style_Type = ListStyleType.none)
+@ListCSS(ListStyleType = ListStyleType.none)
 public class SB2DropDown extends ListItem
 {
 
     private static final long serialVersionUID = 1L;
-    
+
     private Component dropDownComponent;
     private List dropDownContents;
 
@@ -56,7 +55,7 @@ public class SB2DropDown extends ListItem
      */
     public Component getDropDownComponent()
     {
-        if(dropDownComponent == null)
+        if (dropDownComponent == null)
         {
             setDropDownComponent(new Link("#"));
         }
@@ -79,7 +78,7 @@ public class SB2DropDown extends ListItem
             dropDownComponent.addAttribute(LinkAttributes.Data_Toggle, "dropdown");
             if (dropDownContents != null)
             {
-               // dropDownComponent.addAttribute(LinkAttributes.Data_Target, dropDownContents.getID(true));
+                // dropDownComponent.addAttribute(LinkAttributes.Data_Target, dropDownContents.getID(true));
             }
         }
     }
@@ -100,14 +99,15 @@ public class SB2DropDown extends ListItem
             getDropDownComponent().addAttribute(ButtonAttributes.Data_Toggle, "dropdown");
             if (getDropDownContents() != null)
             {
-              //  dropDownComponent.addAttribute(ButtonAttributes.Data_Target, dropDownContents.getID(true));
+                //  dropDownComponent.addAttribute(ButtonAttributes.Data_Target, dropDownContents.getID(true));
             }
         }
     }
-    
+
     /**
      * Adds a menu divider
-     * @return 
+     *
+     * @return
      */
     public ListItem addDivider()
     {
@@ -124,7 +124,7 @@ public class SB2DropDown extends ListItem
      */
     public List getDropDownContents()
     {
-        if(dropDownContents == null)
+        if (dropDownContents == null)
         {
             setDropDownContents(new List(false));
         }
@@ -146,7 +146,7 @@ public class SB2DropDown extends ListItem
             this.dropDownContents.addClass(SB2ThemeClasses.DropDown_Menu);
             if (dropDownComponent != null)
             {
-               //  dropDownComponent.addAttribute(LinkAttributes.Data_Target, dropDownContents.getID(true));
+                //  dropDownComponent.addAttribute(LinkAttributes.Data_Target, dropDownContents.getID(true));
             }
         }
     }

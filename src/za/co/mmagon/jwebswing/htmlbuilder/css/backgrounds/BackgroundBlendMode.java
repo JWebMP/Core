@@ -23,17 +23,17 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
  * Definition and Usage
  * <p>
  * <p>
- * The background-blend-mode property defines the blending mode of each background layer (color and/or image).
- * <p>
- * Default value: normal
- * <p>
+ The background-blend-mode property defines the blending mode of each background layer (Color and/or image).
+ <p>
+ Default value: Normal
+ <p>
  * Inherited: no
  * <p>
  * Animatable: no. Read about animatable
  * <p>
  * Version: CSS3
  * <p>
- * JavaScript syntax: object.style.backgroundBlendMode="screen"
+ JavaScript syntax: object.style.backgroundBlendMode="Screen"
  *
  * @author GedMarc
  * @since 17 Jan 2016
@@ -41,45 +41,45 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
 public enum BackgroundBlendMode implements CSSEnumeration<BackgroundBlendMode>
 {
     /**
-     * This is default. Sets the blending mode to normal
+     * This is default. Sets the blending mode to Normal
      */
-    normal,
+    Normal,
     /**
-     * Sets the blending mode to multiply
+     * Sets the blending mode to Multiply
      */
-    multiply,
+    Multiply,
     /**
-     * Sets the blending mode to screen
+     * Sets the blending mode to Screen
      */
-    screen,
+    Screen,
     /**
-     * Sets the blending mode to overlay
+     * Sets the blending mode to Overlay
      */
-    overlay,
+    Overlay,
     /**
-     * Sets the blending mode to darken
+     * Sets the blending mode to Darken
      */
-    darken,
+    Darken,
     /**
-     * Sets the blending mode to lighten
+     * Sets the blending mode to Lighten
      */
-    lighten,
+    Lighten,
     /**
-     * Sets the blending mode to color-dodge
+     * Sets the blending mode to Color-dodge
      */
-    color_dodge,
+    Color_Dodge,
     /**
-     * Sets the blending mode to saturation
+     * Sets the blending mode to Saturation
      */
-    saturation,
+    Saturation,
     /**
-     * Sets the blending mode to color
+     * Sets the blending mode to Color
      */
-    color,
+    Color,
     /**
-     * Sets the blending mode to luminosity
+     * Sets the blending mode to Luminosity
      */
-    luminosity,
+    Luminosity,
     /**
      * Sets this field as not set
      */

@@ -1,11 +1,7 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.image;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
+import java.lang.annotation.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
 
 /**
  * A list of URL's for a background Image

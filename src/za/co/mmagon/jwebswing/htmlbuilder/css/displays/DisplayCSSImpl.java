@@ -16,8 +16,10 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.displays;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * The display property is the most important CSS property for controlling layout.
@@ -25,53 +27,54 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class DisplayCSSImpl implements DisplayCSS
+public class DisplayCSSImpl extends CSSImplementationAdapter<DisplayCSS, DisplayCSSImpl> implements CSSImplementationClass<DisplayCSS, DisplayCSSImpl>
 {
+
+    private static final long serialVersionUID = 1L;
+
+    @CSSDetail(cssName = "display", cssVersion = CSSVersions.CSS21)
+    private Displays display;
+    @CSSDetail(cssName = "cursor", cssVersion = CSSVersions.CSS21)
+    private Cursors oursor;
+    @CSSDetail(cssName = "overflow", cssVersion = CSSVersions.CSS21)
+    private Overflows overflow;
+    @CSSDetail(cssName = "overflow-x", cssVersion = CSSVersions.CSS21)
+    private Overflows overflowX;
+    @CSSDetail(cssName = "overflow-y", cssVersion = CSSVersions.CSS21)
+    private Overflows overflowY;
+    @CSSDetail(cssName = "position", cssVersion = CSSVersions.CSS21)
+    private Positions position;
+    @CSSDetail(cssName = "float", cssVersion = CSSVersions.CSS21)
+    private Floats floatProperty;
+    @CSSDetail(cssName = "z-index", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl zIndex;
+    @CSSDetail(cssName = "bottom", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl bottom;
+    @CSSDetail(cssName = "left", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl left;
+    @CSSDetail(cssName = "displayright", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl right;
+    @CSSDetail(cssName = "top", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl top;
 
     public DisplayCSSImpl()
     {
     }
 
-    public Displays Display;
-    public Cursors Cursor;
-    public Overflows Overflow;
-    public Overflows Overflow_X;
-    public Overflows Overflow_Y;
-    public Positions Position;
-    public za.co.mmagon.jwebswing.htmlbuilder.css.displays.Float Float;
-    public MeasurementCSS Z_Index;
-    public MeasurementCSS Bottom;
-    public MeasurementCSS Left;
-    public MeasurementCSS Right;
-    public MeasurementCSS Top;
-
-    @Override
-    public Class<? extends Annotation> annotationType()
-    {
-        return DisplayCSS.class;
-    }
-
     /**
-     * Sets the Display Format
-     * The display Property
+     * Sets the display Format The display Property
      * <p>
      * The display property specifies if/how an element is displayed.
      * <p>
-     * Every HTML element has a default display value depending on what type of element it is. The default display value for most elements is block or inline.
-     * Block-level Elements
+     * Every HTML element has a default display value depending on what type of element it is. The default display value for most elements is block or inline. Block-level Elements
      * <p>
-     * A block-level element always starts on a new line and takes up the full width available (stretches out to the left and right as far as it can).
-     * The &lt;div&gt; element is a block-level element.
+     * A block-level element always starts on a new line and takes up the full width available (stretches out to the left and right as far as it can). The &lt;div&gt; element is a block-level element.
      * <p>
      * Examples of block-level elements:
      * <p>
-     * &lt;div&gt;
-     * &lt;h1&gt; - &lt;h6&gt;
+     * &lt;div&gt; &lt;h1&gt; - &lt;h6&gt;
      * <p>
-     * &lt;form&gt;
-     * &lt;header&gt;
-     * &lt;footer&gt;
-     * &lt;section&gt;
+     * &lt;form&gt; &lt;header&gt; &lt;footer&gt; &lt;section&gt;
      * <p>
      * Inline Elements
      * <p>
@@ -81,16 +84,13 @@ public class DisplayCSSImpl implements DisplayCSS
      * <p>
      * Examples of inline elements:
      * <p>
-     * &lt;span&gt;
-     * &lt;a&gt;
-     * &lt;img&gt;
+     * &lt;span&gt; &lt;a&gt; &lt;img&gt;
      *
      * @return
      */
-    @Override
-    public Displays Display()
+    public Displays getDisplay()
     {
-        return Display;
+        return display;
     }
 
     /**
@@ -98,10 +98,9 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public Cursors Cursor()
+    public Cursors getCursor()
     {
-        return Cursor;
+        return oursor;
     }
 
     /**
@@ -109,21 +108,19 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public Overflows Overflow()
+    public Overflows getOverflow()
     {
-        return Overflow;
+        return overflow;
     }
 
     /**
-     * Sets the Horizontal Overflow
+     * Sets the Horizontal getOverflow
      *
      * @return
      */
-    @Override
-    public Overflows Overflow_X()
+    public Overflows getOverflowX()
     {
-        return Overflow_X;
+        return overflowX;
     }
 
     /**
@@ -131,10 +128,9 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public Overflows Overflow_Y()
+    public Overflows getOverflowY()
     {
-        return Overflow_Y;
+        return overflowY;
     }
 
     /**
@@ -142,10 +138,9 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public Positions Position()
+    public Positions getPosition()
     {
-        return Position;
+        return position;
     }
 
     /**
@@ -153,10 +148,9 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public za.co.mmagon.jwebswing.htmlbuilder.css.displays.Float Float()
+    public Floats getFloat()
     {
-        return Float;
+        return floatProperty;
     }
 
     /**
@@ -164,10 +158,9 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Z_Index()
+    public MeasurementCSSImpl getZIndex()
     {
-        return Z_Index;
+        return zIndex;
     }
 
     /**
@@ -175,10 +168,9 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Bottom()
+    public MeasurementCSSImpl getBottom()
     {
-        return Bottom;
+        return bottom;
     }
 
     /**
@@ -186,10 +178,9 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Left()
+    public MeasurementCSSImpl getLeft()
     {
-        return Left;
+        return left;
     }
 
     /**
@@ -197,10 +188,9 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Right()
+    public MeasurementCSSImpl getRight()
     {
-        return Right;
+        return right;
     }
 
     /**
@@ -208,161 +198,129 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Top()
+    public MeasurementCSSImpl getTop()
     {
-        return Top;
+        return top;
     }
 
     /**
-     * Sets the Display Format
-     * The display Property
-     * <p>
-     * The display property specifies if/how an element is displayed.
-     * <p>
-     * Every HTML element has a default display value depending on what type of element it is. The default display value for most elements is block or inline.
-     * Block-level Elements
-     * <p>
-     * A block-level element always starts on a new line and takes up the full width available (stretches out to the left and right as far as it can).
-     * The &lt;div&gt; element is a block-level element.
-     * <p>
-     * Examples of block-level elements:
-     * <p>
-     * &lt;div&gt;
-     * &lt;h1&gt; - &lt;h6&gt;
-     * <p>
-     * &lt;form&gt;
-     * &lt;header&gt;
-     * &lt;footer&gt;
-     * &lt;section&gt;
-     * <p>
-     * Inline Elements
-     * <p>
-     * An inline element does not start on a new line and only takes up as much width as necessary.
-     * <p>
-     * This is an inline &lt;span&gt; element inside a paragraph.
-     * <p>
-     * Examples of inline elements:
-     * <p>
-     * &lt;span&gt;
-     * &lt;a&gt;
-     * &lt;img&gt;
+     * Sets the display
      *
-     * @param Display
+     * @param display
      */
-    public void setDisplay(Displays Display)
+    public void setDisplay(Displays display)
     {
-        this.Display = Display;
+        this.display = display;
     }
 
     /**
-     * Sets the mouse cursor
+     * Sets the cursor
      *
-     * @param Cursor
+     * @param oursor
      */
-    public void setCursor(Cursors Cursor)
+    public void setOursor(Cursors oursor)
     {
-        this.Cursor = Cursor;
+        this.oursor = oursor;
     }
 
     /**
      * Sets the overflow
      *
-     * @param Overflow
+     * @param overflow
      */
-    public void setOverflow(Overflows Overflow)
+    public void setOverflow(Overflows overflow)
     {
-        this.Overflow = Overflow;
+        this.overflow = overflow;
     }
 
     /**
-     * Sets the horizontal overflow
+     * Sets the overflow x
      *
-     * @param Overflow_X
+     * @param overflowX
      */
-    public void setOverflow_X(Overflows Overflow_X)
+    public void setOverflowX(Overflows overflowX)
     {
-        this.Overflow_X = Overflow_X;
+        this.overflowX = overflowX;
     }
 
     /**
-     * Sets the vertical overflow
+     * Sets the overflow y
      *
-     * @param Overflow_Y
+     * @param overflowY
      */
-    public void setOverflow_Y(Overflows Overflow_Y)
+    public void setOverflowY(Overflows overflowY)
     {
-        this.Overflow_Y = Overflow_Y;
+        this.overflowY = overflowY;
     }
 
     /**
-     * Sets the display position
+     * Sets the position
      *
-     * @param Position
+     * @param position
      */
-    public void setPosition(Positions Position)
+    public void setPosition(Positions position)
     {
-        this.Position = Position;
+        this.position = position;
     }
 
     /**
-     * Sets the flow to be applied
+     * Sets the float
      *
-     * @param Float
+     * @param floatProperty
      */
-    public void setFloat(za.co.mmagon.jwebswing.htmlbuilder.css.displays.Float Float)
+    public void setFloat(Floats floatProperty)
     {
-        this.Float = Float;
+        this.floatProperty = floatProperty;
     }
 
     /**
-     * Sets the Z-Index
+     * Sets the z index
      *
-     * @param Z_Index
+     * @param zIndex
      */
-    public void setZ_Index(MeasurementCSS Z_Index)
+    public void setzIndex(MeasurementCSSImpl zIndex)
     {
-        this.Z_Index = Z_Index;
+        this.zIndex = zIndex;
     }
 
     /**
-     * Sets the bottom margin edge for a positioned box
+     * Sets the bottom
      *
-     * @param Bottom
+     * @param bottom
      */
-    public void setBottom(MeasurementCSS Bottom)
+    public void setBottom(MeasurementCSSImpl bottom)
     {
-        this.Bottom = Bottom;
+        this.bottom = bottom;
     }
 
     /**
-     * Sets the bottom margin edge for a positioned box
+     * Sets the left
      *
-     * @param Left
+     * @param left
      */
-    public void setLeft(MeasurementCSS Left)
+    public void setLeft(MeasurementCSSImpl left)
     {
-        this.Left = Left;
+        this.left = left;
     }
 
     /**
-     * Sets the bottom margin edge for a positioned box
+     * Sets the right
      *
-     * @param Right
+     * @param right
      */
-    public void setRight(MeasurementCSS Right)
+    public void setRight(MeasurementCSSImpl right)
     {
-        this.Right = Right;
+        this.right = right;
     }
 
     /**
-     * Sets the bottom margin edge for a positioned box
+     * Sets the top
      *
-     * @param Top
+     * @param top
      */
-    public void setTop(MeasurementCSS Top)
+    public void setTop(MeasurementCSSImpl top)
     {
-        this.Top = Top;
+        this.top = top;
     }
 
 }

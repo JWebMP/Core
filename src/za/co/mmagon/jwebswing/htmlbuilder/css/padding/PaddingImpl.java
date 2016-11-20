@@ -16,8 +16,10 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.padding;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * To shorten the code, it is possible to specify all the margin properties in one property.
@@ -25,48 +27,61 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class PaddingImpl implements Padding
+public class PaddingImpl extends CSSImplementationAdapter<Padding, PaddingImpl> implements CSSImplementationClass<Padding, PaddingImpl>
 {
 
+    private static final long serialVersionUID = 1L;
+
+    @CSSDetail(cssName = "padding-right", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl paddingRight;
+    @CSSDetail(cssName = "padding-right", cssVersion = CSSVersions.CSS21)
+    private PaddingSetting paddingRight$;
+    @CSSDetail(cssName = "padding-left", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl paddingLeft;
+    @CSSDetail(cssName = "padding-left", cssVersion = CSSVersions.CSS21)
+    private PaddingSetting paddingLeft$;
+    @CSSDetail(cssName = "padding-top", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl paddingTop;
+    @CSSDetail(cssName = "padding-top", cssVersion = CSSVersions.CSS21)
+    private PaddingSetting paddingTop$;
+    @CSSDetail(cssName = "padding-bottom", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl paddingBottom;
+    @CSSDetail(cssName = "padding-bottom", cssVersion = CSSVersions.CSS21)
+    private PaddingSetting paddingBottom$;
+
+    /**
+     * Constructs a new padding object
+     */
     public PaddingImpl()
     {
+        //nothing needed
     }
 
     @Override
     public String toString()
     {
         String out = "";
-        out += Padding_Top + " ";
-        out += Padding_Top$ + " ";
-        out += Padding_Right + " ";
-        out += Padding_Right$ + " ";
-        out += Padding_Bottom + " ";
-        out += Padding_Bottom$ + " ";
-        out += Padding_Left + " ";
-        out += Padding_Left$ + " ";
+        out += paddingTop + " ";
+        out += paddingTop$ + " ";
+        out += paddingRight + " ";
+        out += paddingRight$ + " ";
+        out += paddingBottom + " ";
+        out += paddingBottom$ + " ";
+        out += paddingLeft + " ";
+        out += paddingLeft$ + " ";
         out = out.replaceAll("null", "");
         out = out.trim();
         return out;
     }
 
-    private MeasurementCSS Padding_Right;
-    private PaddingSetting Padding_Right$;
-    private MeasurementCSS Padding_Left;
-    private PaddingSetting Padding_Left$;
-    private MeasurementCSS Padding_Top;
-    private PaddingSetting Padding_Top$;
-    private MeasurementCSS Padding_Bottom;
-    private PaddingSetting Padding_Bottom$;
-
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Padding_Right()
+    public MeasurementCSSImpl getPaddingRight()
     {
-        return Padding_Right;
+        return paddingRight;
     }
 
     /**
@@ -74,10 +89,9 @@ public class PaddingImpl implements Padding
      *
      * @return
      */
-    @Override
-    public PaddingSetting Padding_Right$()
+    public PaddingSetting getPaddingRight$()
     {
-        return Padding_Right$;
+        return paddingRight$;
     }
 
     /**
@@ -85,10 +99,9 @@ public class PaddingImpl implements Padding
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Padding_Left()
+    public MeasurementCSSImpl getPaddingLeft()
     {
-        return Padding_Left;
+        return paddingLeft;
     }
 
     /**
@@ -96,10 +109,9 @@ public class PaddingImpl implements Padding
      *
      * @return
      */
-    @Override
-    public PaddingSetting Padding_Left$()
+    public PaddingSetting getPaddingLeft$()
     {
-        return Padding_Left$;
+        return paddingLeft$;
     }
 
     /**
@@ -107,57 +119,61 @@ public class PaddingImpl implements Padding
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Padding_Top()
+    public MeasurementCSSImpl getPaddingTop()
     {
-        return Padding_Top;
+        return paddingTop;
     }
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      * <p>
+     * @param paddingRight
      */
-    public void setPadding_Right(MeasurementCSS Padding_Right)
+    public void setPaddingRight(MeasurementCSSImpl paddingRight)
     {
-        this.Padding_Right = Padding_Right;
+        this.paddingRight = paddingRight;
     }
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      * <p>
+     * @param paddingRight$
      */
-    public void setPadding_Right$(PaddingSetting Padding_Right$)
+    public void setPaddingRight$(PaddingSetting paddingRight$)
     {
-        this.Padding_Right$ = Padding_Right$;
+        this.paddingRight$ = paddingRight$;
     }
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      * <p>
      * <p>
+     * @param paddingLeft
      */
-    public void setPadding_Left(MeasurementCSS Padding_Left)
+    public void setPaddingLeft(MeasurementCSSImpl paddingLeft)
     {
-        this.Padding_Left = Padding_Left;
+        this.paddingLeft = paddingLeft;
     }
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      * <p>
      * <p>
+     * @param paddingLeft$
      */
-    public void setPadding_Left$(PaddingSetting Padding_Left$)
+    public void setPaddingLeft$(PaddingSetting paddingLeft$)
     {
-        this.Padding_Left$ = Padding_Left$;
+        this.paddingLeft$ = paddingLeft$;
     }
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      * <p>
+     * @param paddingTop
      */
-    public void setPadding_Top(MeasurementCSS Padding_Top)
+    public void setPaddingTop(MeasurementCSSImpl paddingTop)
     {
-        this.Padding_Top = Padding_Top;
+        this.paddingTop = paddingTop;
     }
 
     /**
@@ -165,10 +181,9 @@ public class PaddingImpl implements Padding
      *
      * @return
      */
-    @Override
-    public PaddingSetting Padding_Top$()
+    public PaddingSetting getPaddingTop$()
     {
-        return Padding_Top$;
+        return paddingTop$;
     }
 
     /**
@@ -176,10 +191,9 @@ public class PaddingImpl implements Padding
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Padding_Bottom()
+    public MeasurementCSSImpl getPaddingBottom()
     {
-        return Padding_Bottom;
+        return paddingBottom;
     }
 
     /**
@@ -187,45 +201,38 @@ public class PaddingImpl implements Padding
      *
      * @return
      */
-    @Override
-    public PaddingSetting Padding_Bottom$()
+    public PaddingSetting getPaddingBottom$()
     {
-        return Padding_Bottom$;
+        return paddingBottom$;
     }
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
-     * @param Padding_Top$
+     * @param paddingTop$
      */
-    public void setPadding_Top$(PaddingSetting Padding_Top$)
+    public void setPaddingTop$(PaddingSetting paddingTop$)
     {
-        this.Padding_Top$ = Padding_Top$;
+        this.paddingTop$ = paddingTop$;
     }
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
-     * @param Padding_Bottom
+     * @param paddingBottom
      */
-    public void setPadding_Bottom(MeasurementCSS Padding_Bottom)
+    public void setPaddingBottom(MeasurementCSSImpl paddingBottom)
     {
-        this.Padding_Bottom = Padding_Bottom;
+        this.paddingBottom = paddingBottom;
     }
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
-     * @param Padding_Bottom$
+     * @param paddingBottom$
      */
-    public void setPadding_Bottom$(PaddingSetting Padding_Bottom$)
+    public void setPaddingBottom$(PaddingSetting paddingBottom$)
     {
-        this.Padding_Bottom$ = Padding_Bottom$;
-    }
-
-    @Override
-    public Class<? extends Annotation> annotationType()
-    {
-        return Padding.class;
+        this.paddingBottom$ = paddingBottom$;
     }
 }

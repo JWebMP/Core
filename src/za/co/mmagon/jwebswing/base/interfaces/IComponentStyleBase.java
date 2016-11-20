@@ -17,10 +17,10 @@
 
 package za.co.mmagon.jwebswing.base.interfaces;
 
-import java.util.HashMap;
-import za.co.mmagon.jwebswing.base.ComponentBase;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSSImpl;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
+import java.util.*;
+import za.co.mmagon.jwebswing.base.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
 
 /**
  *
@@ -37,7 +37,7 @@ public interface IComponentStyleBase<J extends ComponentBase>
      *
      * @param cssItem
      */
-    void addCSSEntry(CSSImpl cssItem);
+    void addCSSEntry(CSSTypes type,CSSImpl cssItem);
 
     /**
      * Gets the active CSS

@@ -1,13 +1,9 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.fonts;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSSPropertiesFactory;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import java.lang.annotation.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * The CSS font properties define the font family, boldness, size, and the style of a text.
@@ -32,30 +28,35 @@ public @interface FontsCSS
      *
      * @return
      */
-    public FontFamilies Font_Family() default FontFamilies.Unset;
+    public FontFamilies FontFamily() default FontFamilies.Unset;
 
     /**
      * Specifies the font size of text
+     * @return 
      */
-    public MeasurementCSS Font_Size() default @MeasurementCSS;
+    public MeasurementCSS FontSize() default @MeasurementCSS;
 
     /**
      * The font-style property specifies the font style for a text.
+     * @return 
      */
-    public FontStyles Font_Style() default FontStyles.Unset;
+    public FontStyles FontStyle() default FontStyles.Unset;
 
     /**
      * The font-variant property specifies whether or not a text should be displayed in a small-caps font.
+     * @return 
      */
-    public FontVariants Font_Variant() default FontVariants.Unset;
+    public FontVariants FontVariant() default FontVariants.Unset;
 
     /**
      * Specifies the weight of a font
+     * @return 
      */
-    public FontWeights Font_Weight() default FontWeights.Unset;
+    public FontWeights FontWeight() default FontWeights.Unset;
 
     /**
      * Specifies the weight of a font
+     * @return 
      */
-    public int Font_Weight$() default CSSPropertiesFactory.DefaultIntValue;
+    public int FontWeight$() default CSSPropertiesFactory.DefaultIntValue;
 }

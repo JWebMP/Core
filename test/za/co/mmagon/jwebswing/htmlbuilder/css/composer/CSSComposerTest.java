@@ -16,17 +16,13 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
-import org.junit.Test;
-import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.html.Body;
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.H1;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.BackgroundBlendMode;
-import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.BackgroundClip;
-import za.co.mmagon.jwebswing.htmlbuilder.css.borders.BorderCSSObjectTest;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
+import org.junit.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.borders.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
 
 /**
  *
@@ -43,13 +39,13 @@ public class CSSComposerTest
     public void testInnerComposer()
     {
         Div d = new Div();
-        d.getCss().setBackgroundColor$(ColourNames.DarkGoldenRod);
-        d.getCss().setBorderBottomStyle(BorderStyles.Dotted);
-        d.getCss().setHeight(400);
+        d.getCss().getBackground().setBackgroundColor$(ColourNames.DarkGoldenRod);
+        d.getCss().getBorder().setBorderBottomStyle(BorderStyles.Dotted);
+        d.getCss().getDimensions().setHeight(400);
         d.setID("d");
         Div d2 = new Div();
         d2.setID("d2");
-        d2.getCss().setHeight(400);
+        d2.getCss().getDimensions().setHeight(400);
         //test block merging
         Div dClone = (Div) d.cloneComponent();
         dClone.setID("cloned");
@@ -66,7 +62,7 @@ public class CSSComposerTest
         System.out.println(comp.toString());
 
         //TODO Cloned object css
-        // Assert.assertEquals("#cloned,#cloned2,#d {background-color:darkgoldenrod;border-bottom-style:dotted;height:400px;}#d2 {height:400px;}"
+        // Assert.assertEquals("#cloned,#cloned2,#d {background-Color:darkgoldenrod;border-bottom-style:dotted;height:400px;}#d2 {height:400px;}"
         //         + "", comp.toString());
     }
 
@@ -85,8 +81,8 @@ public class CSSComposerTest
     public void testInnerClass()
     {
         InnerClass d = new InnerClass();
-        d.getCss().setBackgroundColor$(ColourNames.DarkGoldenRod);
-        d.getCss().setBackgroundClip(BackgroundClip.content_box);
+        d.getCss().getBackground().setBackgroundColor$(ColourNames.DarkGoldenRod);
+        d.getCss().getBackground().setBackgroundClip(BackgroundClip.content_box);
         BorderCSSObjectTest borderClassObject = new BorderCSSObjectTest();
         CSSComposer comp = new CSSComposer();
         comp.addComponent(d);
@@ -110,7 +106,7 @@ public class CSSComposerTest
         System.out.println(comp.toString());
     }
 
-    @CSS(Background_BlendMode = BackgroundBlendMode.lighten)
+    @BackgroundCSS(BackgroundBlendMode = BackgroundBlendMode.Lighten)
     public class InnerClass extends Div
     {
 
@@ -118,7 +114,7 @@ public class CSSComposerTest
 
         public InnerClass()
         {
-            comp.getCss().setBackgroundColor$(ColourNames.White);
+            comp.getCss().getBackground().setBackgroundColor$(ColourNames.White);
         }
     }
 }

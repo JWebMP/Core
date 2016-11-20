@@ -53,55 +53,55 @@ public @interface MarginsCSS
      *
      * @return
      */
-    public MeasurementCSS Margin_Right() default @MeasurementCSS;
+    public MeasurementCSS MarginRight() default @MeasurementCSS;
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
      * @return
      */
-    public MarginSetting Margin_Right$() default MarginSetting.Unset;
+    public MarginSetting MarginRight$() default MarginSetting.Unset;
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
      * @return
      */
-    public MeasurementCSS Margin_Left() default @MeasurementCSS;
+    public MeasurementCSS MarginLeft() default @MeasurementCSS;
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
      * @return
      */
-    public MarginSetting Margin_Left$() default MarginSetting.Unset;
+    public MarginSetting MarginLeft$() default MarginSetting.Unset;
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
      * @return
      */
-    public MeasurementCSS Margin_Top() default @MeasurementCSS;
+    public MeasurementCSS MarginTop() default @MeasurementCSS;
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
      * @return
      */
-    public MarginSetting Margin_Top$() default MarginSetting.Unset;
+    public MarginSetting MarginTop$() default MarginSetting.Unset;
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
      * @return
      */
-    public MeasurementCSS Margin_Bottom() default @MeasurementCSS;
+    public MeasurementCSS MarginBottom() default @MeasurementCSS;
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
      * @return
      */
-    public MarginSetting Margin_Bottom$() default MarginSetting.Unset;
+    public MarginSetting MarginBottom$() default MarginSetting.Unset;
 
 }

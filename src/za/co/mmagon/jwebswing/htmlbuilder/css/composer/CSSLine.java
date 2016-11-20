@@ -1,8 +1,7 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
-import java.io.Serializable;
-import java.util.Comparator;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 /**
  * This denotes a line for the CSS, for the composer.
@@ -44,6 +43,7 @@ public class CSSLine implements Serializable, Comparable<CSSLine>, Comparator<CS
      * Converts method name to CSS name
      *
      * @param methodName The method name
+     *
      * @return Cleaned name
      */
     private String cleanMethodNameToCSSName(String methodName)
@@ -115,19 +115,18 @@ public class CSSLine implements Serializable, Comparable<CSSLine>, Comparator<CS
      */
     public String getValue()
     {
-        return value.replace("_", "-");
+        return value.replace("_", "-").replaceAll(" ;", ";");
     }
 
     /**
-     * Sets what the value of this property is.
-     * Cleans out any quotations from the value in case
+     * Sets what the value of this property is. Cleans out any quotations from the value in case
      *
      * @param value The new value of the property
      */
     public final void setValue(String value)
     {
         String valueUse;
-        if(value == null)
+        if (value == null)
         {
             valueUse = "";
         }
@@ -147,6 +146,7 @@ public class CSSLine implements Serializable, Comparable<CSSLine>, Comparator<CS
      * Returns true if the input object's property and value matches this one
      *
      * @param obj
+     *
      * @return
      */
     @Override
@@ -174,8 +174,10 @@ public class CSSLine implements Serializable, Comparable<CSSLine>, Comparator<CS
 
     /**
      * The property value pair of this line return The property value pair of this line in quotations. It filters out value into CSS readable
+     *
      * @param renderQuotations
-     * @return 
+     *
+     * @return
      */
     public String toString(boolean renderQuotations)
     {
@@ -193,6 +195,7 @@ public class CSSLine implements Serializable, Comparable<CSSLine>, Comparator<CS
      * Compares this class with another. Sorts by property, then by value
      *
      * @param o The CSS line to compare to
+     *
      * @return -1 for DESC, 0 for equal, 1 for ASC
      */
     @Override
@@ -210,6 +213,7 @@ public class CSSLine implements Serializable, Comparable<CSSLine>, Comparator<CS
      *
      * @param o1 The CSS line to compare from
      * * @param o2 The CSS line to compare to
+     *
      * @return -1 for DESC, 0 for equal, 1 for ASC
      */
     @Override

@@ -45,54 +45,54 @@ public @interface Padding
      *
      * @return
      */
-    public MeasurementCSS Padding_Right() default @MeasurementCSS;
+    public MeasurementCSS PaddingRight() default @MeasurementCSS;
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
      * @return
      */
-    public PaddingSetting Padding_Right$() default PaddingSetting.Unset;
+    public PaddingSetting PaddingRight$() default PaddingSetting.Unset;
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
      * @return
      */
-    public MeasurementCSS Padding_Left() default @MeasurementCSS;
+    public MeasurementCSS PaddingLeft() default @MeasurementCSS;
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
      * @return
      */
-    public PaddingSetting Padding_Left$() default PaddingSetting.Unset;
+    public PaddingSetting PaddingLeft$() default PaddingSetting.Unset;
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
      * @return
      */
-    public MeasurementCSS Padding_Top() default @MeasurementCSS;
+    public MeasurementCSS PaddingTop() default @MeasurementCSS;
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
      * @return
      */
-    public PaddingSetting Padding_Top$() default PaddingSetting.Unset;
+    public PaddingSetting PaddingTop$() default PaddingSetting.Unset;
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
      * @return
      */
-    public MeasurementCSS Padding_Bottom() default @MeasurementCSS;
+    public MeasurementCSS PaddingBottom() default @MeasurementCSS;
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
      * @return
      */
-    public PaddingSetting Padding_Bottom$() default PaddingSetting.Unset;
+    public PaddingSetting PaddingBottom$() default PaddingSetting.Unset;
 }

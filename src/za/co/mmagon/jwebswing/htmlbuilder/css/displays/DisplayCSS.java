@@ -16,13 +16,9 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.displays;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import java.lang.annotation.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * The display property is the most important CSS property for controlling layout.
@@ -97,14 +93,14 @@ public @interface DisplayCSS
      *
      * @return
      */
-    public Overflows Overflow_X() default Overflows.Unset;
+    public Overflows OverflowX() default Overflows.Unset;
 
     /**
      * Sets the Overflow for Vertical
      *
      * @return
      */
-    public Overflows Overflow_Y() default Overflows.Unset;
+    public Overflows OverflowY() default Overflows.Unset;
 
     /**
      * Sets the Position to apply
@@ -118,14 +114,14 @@ public @interface DisplayCSS
      *
      * @return
      */
-    public za.co.mmagon.jwebswing.htmlbuilder.css.displays.Float Float() default za.co.mmagon.jwebswing.htmlbuilder.css.displays.Float.Unset;
+    public za.co.mmagon.jwebswing.htmlbuilder.css.displays.Floats FloatProperty() default za.co.mmagon.jwebswing.htmlbuilder.css.displays.Floats.Unset;
 
     /**
      * Sets the Z-Index of the component
      *
      * @return
      */
-    public MeasurementCSS Z_Index() default @MeasurementCSS;
+    public MeasurementCSS ZIndex() default @MeasurementCSS;
 
     /**
      * Sets the bottom margin edge for a positioned box

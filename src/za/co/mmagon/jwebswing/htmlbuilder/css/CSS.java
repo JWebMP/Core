@@ -18,9 +18,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.tables.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.text.*;
 
 /**
- * This class holds CSS Enumerations that are global across all HTML elements
- * One day when they implement extends for Enums and @interfaces I suppose,
- * Then we can do proper generic, till then, just bare with it I guess
+ * This class holds CSS Enumerations that are global across all HTML elements One day when they implement extends for Enums and @interfaces I suppose, Then we can do proper generic, till then, just
+ * bare with it I guess
  * <p>
  * Based on w3 schools
  * <p>
@@ -35,74 +34,102 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.text.*;
 @CSSAnnotationType
 public @interface CSS
 {
+
     /**
      * Animation CSS properties (CSS3)
-     * @return 
+     *
+     * @return
      */
-    public CSSAnimatable animatable() default @CSSAnimatable;
+    public AnimateCSS Animatable() default @AnimateCSS;
+
     /**
-     * Specify any custom css you want
-     * @return 
+     * Specify any Custom css you want
+     *
+     * @return
      */
-    public CustomCSS custom() default @CustomCSS;
+    public CustomCSS Custom() default @CustomCSS;
+
     /**
      * Background Properties
-     * @return 
+     *
+     * @return
      */
-    public BackgroundCSS background() default @BackgroundCSS;
+    public BackgroundCSS Background() default @BackgroundCSS;
+
     /**
      * Border properties
-     * @return 
+     *
+     * @return
      */
-    public BorderCSS border() default @BorderCSS;
+    public BorderCSS Border() default @BorderCSS;
+
     /**
      * Colour properties
-     * @return 
+     *
+     * @return
      */
-    public ColourCSS colour() default @ColourCSS;
+    public ColourCSS Colour() default @ColourCSS;
+
     /**
      * Display properties
-     * @return 
+     *
+     * @return
      */
-    public DisplayCSS display() default @DisplayCSS;
+    public DisplayCSS Display() default @DisplayCSS;
+
     /**
      * Font properties
-     * @return 
+     *
+     * @return
      */
-    public FontsCSS font() default @FontsCSS;
+    public FontsCSS Font() default @FontsCSS;
+
     /**
      * Dimension Properties
-     * @return 
+     *
+     * @return
      */
-    public HeightWidthCSS dimensions() default @HeightWidthCSS;
+    public HeightWidthCSS Dimensions() default @HeightWidthCSS;
+
     /**
      * List Properties
-     * @return 
+     *
+     * @return
      */
-    public ListCSS list() default @ListCSS;
+    public ListCSS List() default @ListCSS;
+
     /**
      * Margin Properties
-     * @return 
+     *
+     * @return
      */
-    public MarginsCSS margins() default @MarginsCSS;
+    public MarginsCSS Margins() default @MarginsCSS;
+
     /**
      * Outline Properties
-     * @return 
+     *
+     * @return
      */
-    public OutlineCSS outline() default @OutlineCSS;
+    public OutlineCSS Outline() default @OutlineCSS;
+
     /**
      * Padding Properties
-     * @return 
+     *
+     * @return
      */
-    public PaddingCSS padding() default @PaddingCSS;
+    public PaddingCSS Padding() default @PaddingCSS;
+
     /**
      * Table Properties
-     * @return 
+     *
+     * @return
      */
-    public TableCSS table() default @TableCSS;
+    public TableCSS Table() default @TableCSS;
+
     /**
      * Text Properties
-     * @return 
+     *
+     * @return
      */
-    public TextCSS text() default @TextCSS;
+    public TextCSS Text() default @TextCSS;
 }

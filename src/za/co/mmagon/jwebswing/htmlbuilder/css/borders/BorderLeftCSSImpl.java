@@ -16,11 +16,12 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * CSS Border Properties
@@ -30,8 +31,19 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class BorderLeftCSSImpl implements BorderLeftCSS
+public class BorderLeftCSSImpl extends CSSImplementationAdapter<BorderLeftCSS, BorderLeftCSSImpl> implements CSSImplementationClass<BorderLeftCSS, BorderLeftCSSImpl>
 {
+
+    private static final long serialVersionUID = 1L;
+
+    @CSSDetail(cssName = "border-left-color", cssVersion = CSSVersions.CSS21)
+    private ColourCSSImpl borderLeftColor;
+    @CSSDetail(cssName = "border-left-color", cssVersion = CSSVersions.CSS21)
+    private ColourNames borderLeftColor$;
+    @CSSDetail(cssName = "border-left-style", cssVersion = CSSVersions.CSS21)
+    private BorderStyles borderLeftStyle;
+    @CSSDetail(cssName = "border-left-width", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl borderLeftWidth;
 
     public BorderLeftCSSImpl()
     {
@@ -41,24 +53,13 @@ public class BorderLeftCSSImpl implements BorderLeftCSS
     public String toString()
     {
         String out = "";
-        out += Border_Left_Width + " ";
-        out += Border_Left_Style + " ";
-        out += Border_Left_Color + " ";
-        out += Border_Left_Color$ + " ";
+        out += borderLeftWidth + " ";
+        out += borderLeftStyle + " ";
+        out += borderLeftColor + " ";
+        out += borderLeftColor$ + " ";
         out = out.replaceAll("null", "");
         out = out.trim();
         return out;
-    }
-
-    private ColourCSS Border_Left_Color;
-    private ColourNames Border_Left_Color$;
-    private BorderStyles Border_Left_Style;
-    private MeasurementCSS Border_Left_Width;
-
-    @Override
-    public Class<? extends Annotation> annotationType()
-    {
-        return BorderCSS.class;
     }
 
     /**
@@ -66,10 +67,9 @@ public class BorderLeftCSSImpl implements BorderLeftCSS
      *
      * @return
      */
-    @Override
-    public ColourCSS Border_Left_Color()
+    public ColourCSSImpl getBorderLeftColor()
     {
-        return Border_Left_Color;
+        return borderLeftColor;
     }
 
     /**
@@ -77,10 +77,9 @@ public class BorderLeftCSSImpl implements BorderLeftCSS
      *
      * @return
      */
-    @Override
-    public ColourNames Border_Left_Color$()
+    public ColourNames getBorderLeftColor$()
     {
-        return Border_Left_Color$;
+        return borderLeftColor$;
     }
 
     /**
@@ -88,10 +87,9 @@ public class BorderLeftCSSImpl implements BorderLeftCSS
      *
      * @return
      */
-    @Override
-    public BorderStyles Border_Left_Style()
+    public BorderStyles getBorderLeftStyle()
     {
-        return Border_Left_Style;
+        return borderLeftStyle;
     }
 
     /**
@@ -99,50 +97,49 @@ public class BorderLeftCSSImpl implements BorderLeftCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Border_Left_Width()
+    public MeasurementCSSImpl getBorderLeftWidth()
     {
-        return Border_Left_Width;
+        return borderLeftWidth;
     }
 
     /**
-     * Sets the colour of the left border
+     * Sets the border width
      *
-     * @param Border_Left_Color
+     * @param borderLeftColor
      */
-    public void setBorder_Left_Color(ColourCSS Border_Left_Color)
+    public void setBorderLeftColor(ColourCSSImpl borderLeftColor)
     {
-        this.Border_Left_Color = Border_Left_Color;
+        this.borderLeftColor = borderLeftColor;
     }
 
     /**
-     * Sets the colour of the left border
+     * Sets the border colour
      *
-     * @param Border_Left_Color$
+     * @param borderLeftColor$
      */
-    public void setBorder_Left_Color$(ColourNames Border_Left_Color$)
+    public void setBorderLeftColor$(ColourNames borderLeftColor$)
     {
-        this.Border_Left_Color$ = Border_Left_Color$;
+        this.borderLeftColor$ = borderLeftColor$;
     }
 
     /**
-     * Sets the style of the left border
+     * Sets the border style
      *
-     * @param Border_Left_Style
+     * @param borderLeftStyle
      */
-    public void setBorder_Left_Style(BorderStyles Border_Left_Style)
+    public void setBorderLeftStyle(BorderStyles borderLeftStyle)
     {
-        this.Border_Left_Style = Border_Left_Style;
+        this.borderLeftStyle = borderLeftStyle;
     }
 
     /**
-     * Sets the width of the left border
+     * Sets the border width
      *
-     * @param Border_Left_Width
+     * @param borderLeftWidth
      */
-    public void setBorder_Left_Width(MeasurementCSS Border_Left_Width)
+    public void setBorderLeftWidth(MeasurementCSSImpl borderLeftWidth)
     {
-        this.Border_Left_Width = Border_Left_Width;
+        this.borderLeftWidth = borderLeftWidth;
     }
 
 }

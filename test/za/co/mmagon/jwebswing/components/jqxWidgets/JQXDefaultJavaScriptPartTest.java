@@ -16,14 +16,12 @@
  */
 package za.co.mmagon.jwebswing.components.jqxWidgets;
 
+import org.junit.*;
+import za.co.mmagon.*;
+import za.co.mmagon.jwebswing.*;
 import za.co.mmagon.jwebswing.components.jqxwidgets.JQXDefaultJavaScriptPart;
-import org.junit.Assert;
-import org.junit.Test;
-import za.co.mmagon.BaseTestClass;
-import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.components.jqxwidgets.themes.JQXWidgetThemes;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementTypes;
+import za.co.mmagon.jwebswing.components.jqxwidgets.themes.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  *
@@ -47,8 +45,8 @@ public class JQXDefaultJavaScriptPartTest extends BaseTestClass
         derp.setTheme("theme");
         System.out.println(derp.toString());
         Assert.assertEquals(derp.toString(), "{\n"
-                            + "  theme : \"theme\"\n"
-                            + "}");
+                + "  theme : \"theme\"\n"
+                + "}");
     }
 
     /**
@@ -62,8 +60,8 @@ public class JQXDefaultJavaScriptPartTest extends BaseTestClass
         derp.setTheme("theme");
         System.out.println(derp.toString());
         Assert.assertEquals(derp.toString(), "{\n"
-                            + "  theme : \"theme\"\n"
-                            + "}");
+                + "  theme : \"theme\"\n"
+                + "}");
     }
 
     /**
@@ -77,8 +75,8 @@ public class JQXDefaultJavaScriptPartTest extends BaseTestClass
         derp.setTheme(JQXWidgetThemes.Black);
         System.out.println(derp.toString());
         Assert.assertEquals(derp.toString(), "{\n"
-                            + "  theme : \"black\"\n"
-                            + "}");
+                + "  theme : \"black\"\n"
+                + "}");
     }
 
     /**
@@ -92,8 +90,8 @@ public class JQXDefaultJavaScriptPartTest extends BaseTestClass
         derp.setWidth(4090);
         System.out.println(derp.toString());
         Assert.assertEquals(derp.toString(), "{\n"
-                            + "  width : \"4090\"\n"
-                            + "}");
+                + "  width : \"4090\"\n"
+                + "}");
     }
 
     /**
@@ -107,8 +105,8 @@ public class JQXDefaultJavaScriptPartTest extends BaseTestClass
         derp.setWidth(4090);
         System.out.println(derp.toString());
         Assert.assertEquals(derp.toString(), "{\n"
-                            + "  width : \"4090\"\n"
-                            + "}");
+                + "  width : \"4090\"\n"
+                + "}");
     }
 
     /**
@@ -119,11 +117,11 @@ public class JQXDefaultJavaScriptPartTest extends BaseTestClass
     {
         Page p = getInstance();
         JQXDefaultJavaScriptPart derp = new JQXDefaultJavaScriptPart();
-        derp.setWidth(MeasurementCSSImpl.eightyPercent);
+        derp.setWidth(MeasurementPercentages.eightyPercent);
         System.out.println(derp.toString());
         Assert.assertEquals(derp.toString(), "{\n"
-                            + "  width : \"80.0%\"\n"
-                            + "}");
+                + "  width : \"80.0%\"\n"
+                + "}");
     }
 
     /**
@@ -137,8 +135,8 @@ public class JQXDefaultJavaScriptPartTest extends BaseTestClass
         derp.setHeight(4090);
         System.out.println(derp.toString());
         Assert.assertEquals(derp.toString(), "{\n"
-                            + "  height : \"4090\"\n"
-                            + "}");
+                + "  height : \"4090\"\n"
+                + "}");
     }
 
     /**
@@ -152,8 +150,8 @@ public class JQXDefaultJavaScriptPartTest extends BaseTestClass
         derp.setHeight(4090);
         System.out.println(derp.toString());
         Assert.assertEquals(derp.toString(), "{\n"
-                            + "  height : \"4090\"\n"
-                            + "}");
+                + "  height : \"4090\"\n"
+                + "}");
     }
 
     /**
@@ -167,8 +165,8 @@ public class JQXDefaultJavaScriptPartTest extends BaseTestClass
         derp.setHeight(new MeasurementCSSImpl(5, MeasurementTypes.EM));
         System.out.println(derp.toString());
         Assert.assertEquals(derp.toString(), "{\n"
-                            + "  height : \"5.0em\"\n"
-                            + "}");
+                + "  height : \"5.0em\"\n"
+                + "}");
     }
 
 }

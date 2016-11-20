@@ -1,14 +1,15 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.themes;
 
-import java.util.EnumSet;
+import java.util.*;
 
 /**
  * All the class names to work with JQuery UI Themes
+ *
  * @author MMagon
  * @since 21 Jul 2013
  * @version 1.0
  */
-public enum JQUI_ThemeBlockNames 
+public enum JQUI_ThemeBlockNames
 {
     /**
      * Specifies the container must adopt the widget
@@ -34,8 +35,6 @@ public enum JQUI_ThemeBlockNames
      * Footer
      */
     UI_Widget_Input,
-    
-    
     /**
      * Disabled State
      */
@@ -44,8 +43,6 @@ public enum JQUI_ThemeBlockNames
      * Enabled State
      */
     UI_State_Enabled,
-    
-    
     /**
      * Hover State
      */
@@ -70,8 +67,6 @@ public enum JQUI_ThemeBlockNames
      * Link State
      */
     UI_State_Link,
-    
-    
     /**
      * State Default
      */
@@ -84,11 +79,9 @@ public enum JQUI_ThemeBlockNames
      * State Error
      */
     UI_State_Error,
-    
     /**
      * Priorities
      */
-    
     /**
      * Primary Priority
      */
@@ -97,8 +90,6 @@ public enum JQUI_ThemeBlockNames
      * Secondary Priority
      */
     UI_Priority_Secondary,
-    
-    
     /**
      * The Layout Component Content
      */
@@ -123,7 +114,6 @@ public enum JQUI_ThemeBlockNames
      * The Layout Component Content
      */
     UI_Layout_West,
-    
     /**
      * Apply corners to all
      */
@@ -144,38 +134,38 @@ public enum JQUI_ThemeBlockNames
      * Corners on the bottom
      */
     UI_Corner_Bottom;
-    
-    
+
     /**
      * Enabled or Disabled States
      */
     protected static final EnumSet<JQUI_ThemeBlockNames> ThemeStates = EnumSet.of(UI_State_Enabled, UI_State_Disabled);
-    
+
     /**
      * Priorities
-     **/
+     *
+     */
     protected static final EnumSet<JQUI_ThemeBlockNames> ThemePriorities = EnumSet.of(UI_Priority_Primary, UI_Priority_Secondary);
-    
+
     /**
      * Link Types
      */
-    protected static final EnumSet<JQUI_ThemeBlockNames> ThemeLinks = EnumSet.of(UI_State_Active, UI_State_Hover,UI_State_Link,UI_State_Visited);
-    
+    protected static final EnumSet<JQUI_ThemeBlockNames> ThemeLinks = EnumSet.of(UI_State_Active, UI_State_Hover, UI_State_Link, UI_State_Visited);
+
     /**
      * Theme Status (Error,Highlight,Default)
      */
-    protected static final EnumSet<JQUI_ThemeBlockNames> ThemeStatus = EnumSet.of(UI_State_Error,UI_State_Highlight,UI_State_Default);
-    
+    protected static final EnumSet<JQUI_ThemeBlockNames> ThemeStatus = EnumSet.of(UI_State_Error, UI_State_Highlight, UI_State_Default);
+
     /**
      * Layout Specific (North, East, West, South, Center, Content)
      */
-    protected static final EnumSet<JQUI_ThemeBlockNames> ThemeLayout = EnumSet.of(UI_Layout_Center,UI_Layout_Content,UI_Layout_East,UI_Layout_North,UI_Layout_South, UI_Layout_West);
-    
+    protected static final EnumSet<JQUI_ThemeBlockNames> ThemeLayout = EnumSet.of(UI_Layout_Center, UI_Layout_Content, UI_Layout_East, UI_Layout_North, UI_Layout_South, UI_Layout_West);
+
     /**
      * Radius Settings
      */
-    protected static final EnumSet<JQUI_ThemeBlockNames> ThemeCorners = EnumSet.of(UI_Corner_All,UI_Corner_Top,UI_Corner_Left,UI_Corner_Right,UI_Corner_Bottom);
-    
+    protected static final EnumSet<JQUI_ThemeBlockNames> ThemeCorners = EnumSet.of(UI_Corner_All, UI_Corner_Top, UI_Corner_Left, UI_Corner_Right, UI_Corner_Bottom);
+
     @Override
     public String toString()
     {

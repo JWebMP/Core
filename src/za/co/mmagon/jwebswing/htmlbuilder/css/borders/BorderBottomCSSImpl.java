@@ -16,11 +16,12 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * CSS Border Properties
@@ -30,8 +31,18 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class BorderBottomCSSImpl implements BorderBottomCSS
+public class BorderBottomCSSImpl extends CSSImplementationAdapter<BorderBottomCSS, BorderBottomCSSImpl> implements CSSImplementationClass<BorderBottomCSS, BorderBottomCSSImpl>
 {
+
+    private static final long serialVersionUID = 1L;
+    @CSSDetail(cssName = "border-bottom-color", cssVersion = CSSVersions.CSS21)
+    private ColourCSSImpl borderBottomColor;
+    @CSSDetail(cssName = "border-bottom-color", cssVersion = CSSVersions.CSS21)
+    private ColourNames borderBottomColor$;
+    @CSSDetail(cssName = "border-bottom-style", cssVersion = CSSVersions.CSS21)
+    private BorderStyles borderBottomStyle;
+    @CSSDetail(cssName = "border-bottom-width", cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl borderBottomWidth;
 
     public BorderBottomCSSImpl()
     {
@@ -41,24 +52,13 @@ public class BorderBottomCSSImpl implements BorderBottomCSS
     public String toString()
     {
         String out = "";
-        out += Border_Bottom_Width + " ";
-        out += Border_Bottom_Style + " ";
-        out += Border_Bottom_Color + " ";
-        out += Border_Bottom_Color$ + " ";
+        out += borderBottomWidth + " ";
+        out += borderBottomStyle + " ";
+        out += borderBottomColor + " ";
+        out += borderBottomColor$ + " ";
         out = out.replaceAll("null", "");
         out = out.trim();
         return out;
-    }
-
-    private ColourCSS Border_Bottom_Color;
-    private ColourNames Border_Bottom_Color$;
-    private BorderStyles Border_Bottom_Style;
-    private MeasurementCSS Border_Bottom_Width;
-
-    @Override
-    public Class<? extends Annotation> annotationType()
-    {
-        return BorderCSS.class;
     }
 
     /**
@@ -66,10 +66,9 @@ public class BorderBottomCSSImpl implements BorderBottomCSS
      *
      * @return
      */
-    @Override
-    public ColourCSS Border_Bottom_Color()
+    public ColourCSSImpl getBorderBottomColor()
     {
-        return Border_Bottom_Color;
+        return borderBottomColor;
     }
 
     /**
@@ -77,10 +76,9 @@ public class BorderBottomCSSImpl implements BorderBottomCSS
      *
      * @return
      */
-    @Override
-    public ColourNames Border_Bottom_Color$()
+    public ColourNames getBorderBottomColor$()
     {
-        return Border_Bottom_Color$;
+        return borderBottomColor$;
     }
 
     /**
@@ -88,10 +86,9 @@ public class BorderBottomCSSImpl implements BorderBottomCSS
      *
      * @return
      */
-    @Override
-    public BorderStyles Border_Bottom_Style()
+    public BorderStyles getBorderBottomStyle()
     {
-        return Border_Bottom_Style;
+        return borderBottomStyle;
     }
 
     /**
@@ -99,50 +96,49 @@ public class BorderBottomCSSImpl implements BorderBottomCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Border_Bottom_Width()
+    public MeasurementCSSImpl getBorderBottomWidth()
     {
-        return Border_Bottom_Width;
+        return borderBottomWidth;
     }
 
     /**
      * Sets the border bottom color
      *
-     * @param Border_Bottom_Color
+     * @param borderBottomColor
      */
-    public void setBorder_Bottom_Color(ColourCSS Border_Bottom_Color)
+    public void setBorderBottomColor(ColourCSSImpl borderBottomColor)
     {
-        this.Border_Bottom_Color = Border_Bottom_Color;
+        this.borderBottomColor = borderBottomColor;
     }
 
     /**
      * Sets the border bottom color
      *
-     * @param Border_Bottom_Color$
+     * @param borderBottomColor$
      */
-    public void setBorder_Bottom_Color$(ColourNames Border_Bottom_Color$)
+    public void setBorderBottomColor$(ColourNames borderBottomColor$)
     {
-        this.Border_Bottom_Color$ = Border_Bottom_Color$;
+        this.borderBottomColor$ = borderBottomColor$;
     }
 
     /**
      * Sets the style of the bottom border
      *
-     * @param Border_Bottom_Style
+     * @param borderBottomStyle
      */
-    public void setBorder_Bottom_Style(BorderStyles Border_Bottom_Style)
+    public void setBorderBottomStyle(BorderStyles borderBottomStyle)
     {
-        this.Border_Bottom_Style = Border_Bottom_Style;
+        this.borderBottomStyle = borderBottomStyle;
     }
 
     /**
      * Sets the width of the bottom border
      *
-     * @param Border_Bottom_Width
+     * @param borderBottomWidth
      */
-    public void setBorder_Bottom_Width(MeasurementCSS Border_Bottom_Width)
+    public void setBorderBottomWidth(MeasurementCSSImpl borderBottomWidth)
     {
-        this.Border_Bottom_Width = Border_Bottom_Width;
+        this.borderBottomWidth = borderBottomWidth;
     }
 
 }

@@ -1,42 +1,38 @@
-
 package za.co.mmagon.jwebswing.htmlbuilder.css.interfaces;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.Annotations.CustomCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.Annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationAdapter;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationClass;
 
 /**
+ * Any custom css record you want
  *
  * @author ANGELFIRE
  */
-public class CustomCSSImpl implements CustomCSS{
+public class CustomCSSImpl extends CSSImplementationAdapter<CustomCSS, CustomCSSImpl> implements CSSImplementationClass<CustomCSS, CustomCSSImpl>
+{
+
+    private static final long serialVersionUID = 1L;
+
     private NameValuePairCSSImpl[] valuePair;
-    
-    
-    @Override
+
+    /**
+     * A Name Value Pair for CSS Properties
+     *
+     * @return
+     */
     public NameValuePairCSSImpl[] value()
     {
         return valuePair;
     }
 
-    public NameValuePairCSSImpl[] getValuePair()
-    {
-        return valuePair;
-    }
-
-    public void setvalue(NameValuePairCSSImpl[] valuePair)
-    {
-        this.valuePair = valuePair;
-    }
-    
+    /**
+     * Sets the name value pair
+     *
+     * @param valuePair
+     */
     public void setvalue(NameValuePairCSS[] valuePair)
     {
         this.valuePair = (NameValuePairCSSImpl[]) valuePair;
     }
-
-    @Override
-    public Class<? extends Annotation> annotationType()
-    {
-        return CustomCSS.class;
-    }
-
 }

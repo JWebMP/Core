@@ -16,16 +16,11 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import java.lang.annotation.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  *
@@ -60,138 +55,138 @@ public @interface BorderCSS
      *
      * @return
      */
-    public BorderBottomCSS Border_Bottom() default @BorderBottomCSS;
+    public BorderBottomCSS BorderBottom() default @BorderBottomCSS;
 
     /**
      * The border-top shorthand property sets all the top border properties in one declaration.
      *
      * @return
      */
-    public BorderBottomCSS Border_Left() default @BorderBottomCSS;
+    public BorderBottomCSS BorderLeft() default @BorderBottomCSS;
 
     /**
      * The border-top shorthand property sets all the top border properties in one declaration.
      *
      * @return
      */
-    public BorderBottomCSS Border_Right() default @BorderBottomCSS;
+    public BorderBottomCSS BorderRight() default @BorderBottomCSS;
 
     /**
      * The border-top shorthand property sets all the top border properties in one declaration.
      *
      * @return
      */
-    public BorderBottomCSS Border_Top() default @BorderBottomCSS;
+    public BorderBottomCSS BorderTop() default @BorderBottomCSS;
 
     /**
      * Sets the color of the bottom border
      *
      * @return
      */
-    public ColourCSS Border_Bottom_Color() default @ColourCSS;
+    public ColourCSS BorderBottomColor() default @ColourCSS;
 
     /**
      * Sets the color of the bottom border
      *
      * @return
      */
-    public ColourNames Border_Bottom_Color$() default ColourNames.Unset;
+    public ColourNames BorderBottomColor$() default ColourNames.Unset;
 
     /**
      * Sets the Style of the bottom border
      *
      * @return
      */
-    public BorderStyles Border_Bottom_Style() default BorderStyles.Unset;
+    public BorderStyles BorderBottomStyle() default BorderStyles.Unset;
 
     /**
      * Sets the width of the bottom border
      *
      * @return
      */
-    public MeasurementCSS Border_Bottom_Width() default @MeasurementCSS;
+    public MeasurementCSS BorderBottomWidth() default @MeasurementCSS;
 
     /**
      * Sets the colour of the left border
      *
      * @return
      */
-    public ColourCSS Border_Left_Color() default @ColourCSS;
+    public ColourCSS BorderLeftColor() default @ColourCSS;
 
     /**
      * Sets the colour of the left border
      *
      * @return
      */
-    public ColourNames Border_Left_Color$() default ColourNames.Unset;
+    public ColourNames BorderLeftColor$() default ColourNames.Unset;
 
     /**
      * Sets the style of the left border
      *
      * @return
      */
-    public BorderStyles Border_Left_Style() default BorderStyles.Unset;
+    public BorderStyles BorderLeftStyle() default BorderStyles.Unset;
 
     /**
      * Sets the width of the left border
      *
      * @return
      */
-    public MeasurementCSS Border_Left_Width() default @MeasurementCSS;
+    public MeasurementCSS BorderLeftWidth() default @MeasurementCSS;
 
     /**
      * Sets the color of the right border
      *
      * @return
      */
-    public ColourCSS Border_Right_Color() default @ColourCSS;
+    public ColourCSS BorderRightColor() default @ColourCSS;
 
     /**
      * Sets the color of the right border
      *
      * @return
      */
-    public ColourNames Border_Right_Color$() default ColourNames.Unset;
+    public ColourNames BorderRightColor$() default ColourNames.Unset;
 
     /**
      * Sets the style of the right border
      *
      * @return
      */
-    public BorderStyles Border_Right_Style() default BorderStyles.Unset;
+    public BorderStyles BorderRightStyle() default BorderStyles.Unset;
 
     /**
      * Sets the style of the right border
      *
      * @return
      */
-    public MeasurementCSS Border_Right_Width() default @MeasurementCSS;
+    public MeasurementCSS BorderRightWidth() default @MeasurementCSS;
 
     /**
      * Sets the color of the top border
      *
      * @return
      */
-    public ColourCSS Border_Top_Color() default @ColourCSS;
+    public ColourCSS BorderTopColor() default @ColourCSS;
 
     /**
      * Sets the color of the top border
      *
      * @return
      */
-    public ColourNames Border_Top_Color$() default ColourNames.Unset;
+    public ColourNames BorderTopColor$() default ColourNames.Unset;
 
     /**
      * Sets the style of the top border
      *
      * @return
      */
-    public BorderStyles Border_Top_Style() default BorderStyles.Unset;
+    public BorderStyles BorderTopStyle() default BorderStyles.Unset;
 
     /**
      * Sets the width of the top border
      *
      * @return
      */
-    public MeasurementCSS Border_Top_Width() default @MeasurementCSS;
+    public MeasurementCSS BorderTopWidth() default @MeasurementCSS;
 }

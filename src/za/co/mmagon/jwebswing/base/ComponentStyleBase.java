@@ -16,23 +16,25 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import java.util.HashMap;
-import java.util.Map;
-import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
-import za.co.mmagon.jwebswing.base.interfaces.IComponentStyleBase;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSSImpl;
-import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSBlockIdentifier;
-import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSComposer;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
+import com.fasterxml.jackson.annotation.*;
+import java.util.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
+import za.co.mmagon.jwebswing.base.interfaces.*;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.composer.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
 
 /**
  * The CSS Portion of the Component.
  *
  * @author GedMarc
+ * @param <C> All allowed children
+ * @param <A> All attributes for this component
+ * @param <F> All features allowed for this component
+ * @param <E> All events allowed for this component
+ * @param <J> Always this class
  * @since 24 Apr 2016
  */
 public class ComponentStyleBase<C, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentBase>
@@ -117,7 +119,7 @@ public class ComponentStyleBase<C, A extends Enum & AttributeDefinitions, F exte
     {
         if (css == null)
         {
-            css = new CSSImpl(getID(), CSSTypes.None, CSSBlockIdentifier.Id);
+            css = new CSSImpl();
             getCssTypeHashMap().put(CSSTypes.None, css);
         }
         return css;
@@ -206,8 +208,8 @@ public class ComponentStyleBase<C, A extends Enum & AttributeDefinitions, F exte
     {
         if (hoverCss == null)
         {
-            hoverCss = new CSSImpl(getID(), CSSTypes.Hover, CSSBlockIdentifier.Id);
-            getCssTypeHashMap().put(hoverCss.getCssObjectType(), hoverCss);
+            hoverCss = new CSSImpl();
+            getCssTypeHashMap().put(CSSTypes.Hover, hoverCss);
         }
         return hoverCss;
     }
@@ -234,7 +236,7 @@ public class ComponentStyleBase<C, A extends Enum & AttributeDefinitions, F exte
     {
         if (activeCss == null)
         {
-            activeCss = new CSSImpl(getID(), CSSTypes.Active, CSSBlockIdentifier.Id);
+            activeCss = new CSSImpl();
             getCssTypeHashMap().put(CSSTypes.Active, activeCss);
         }
         return activeCss;
@@ -261,8 +263,8 @@ public class ComponentStyleBase<C, A extends Enum & AttributeDefinitions, F exte
     {
         if (linkCss == null)
         {
-            linkCss = new CSSImpl(getID(), CSSTypes.Link, CSSBlockIdentifier.Id);
-            getCssTypeHashMap().put(linkCss.getCssObjectType(), linkCss);
+            linkCss = new CSSImpl();
+            getCssTypeHashMap().put(CSSTypes.Link, linkCss);
         }
         return linkCss;
     }
@@ -288,8 +290,8 @@ public class ComponentStyleBase<C, A extends Enum & AttributeDefinitions, F exte
     {
         if (visitedCss == null)
         {
-            visitedCss = new CSSImpl(getID(), CSSTypes.Visited, CSSBlockIdentifier.Id);
-            getCssTypeHashMap().put(visitedCss.getCssObjectType(), visitedCss);
+            visitedCss = new CSSImpl();
+            getCssTypeHashMap().put(CSSTypes.Visited, visitedCss);
         }
         return visitedCss;
     }
@@ -308,12 +310,13 @@ public class ComponentStyleBase<C, A extends Enum & AttributeDefinitions, F exte
     /**
      * Adds a CSS object to the component with the given type
      *
+     * @param type
      * @param cssItem
      */
     @Override
-    public void addCSSEntry(CSSImpl cssItem)
+    public void addCSSEntry(CSSTypes type, CSSImpl cssItem)
     {
-        getCssTypeHashMap().put(cssItem.getCssObjectType(), cssItem);
+        getCssTypeHashMap().put(type, cssItem);
     }
 
     /**
@@ -337,12 +340,14 @@ public class ComponentStyleBase<C, A extends Enum & AttributeDefinitions, F exte
     public J setID(String id)
     {
         J me = super.setID(id);
-        for (Map.Entry<CSSTypes, CSSImpl> entry : getCssTypeHashMap().entrySet())
+        getCssTypeHashMap().entrySet().stream().map((entry) ->
         {
             CSSTypes key = entry.getKey();
+            return entry;
+        }).forEachOrdered((entry) ->
+        {
             CSSImpl value = entry.getValue();
-            value.setCssName(me.getID());
-        }
+        });
         return me;
     }
 

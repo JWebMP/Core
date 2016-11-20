@@ -16,13 +16,9 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.lists;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import za.co.mmagon.jwebswing.htmlbuilder.css.image.ImageCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
+import java.lang.annotation.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.image.*;
 
 /**
  * In HTML, there are two main types of lists:
@@ -52,16 +48,19 @@ public @interface ListCSS
 
     /**
      * Specifies an image as the list-item marker
+     * @return 
      */
-    public ImageCSS List_Style_Image() default @ImageCSS;
+    public ImageCSS ListStyleImage() default @ImageCSS;
 
     /**
      * Specifies if the list-item markers should appear inside or outside the content flow
+     * @return 
      */
-    public ListStylePosition List_Style_Position() default ListStylePosition.Unset;
+    public ListStylePosition ListStylePosition() default ListStylePosition.Unset;
 
     /**
      * Specifies the type of list-item marker
+     * @return 
      */
-    public ListStyleType List_Style_Type() default ListStyleType.Unset;
+    public ListStyleType ListStyleType() default ListStyleType.Unset;
 }

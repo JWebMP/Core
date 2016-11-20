@@ -50,33 +50,33 @@ public @interface OutlineCSS
      *
      * @return
      */
-    public ColourCSS Outline_Color() default @ColourCSS;
+    public ColourCSS OutlineColor() default @ColourCSS;
 
     /**
      * Sets the color of an outline
      *
      * @return
      */
-    public ColourNames Outline_Color$() default ColourNames.Unset;
+    public ColourNames OutlineColor$() default ColourNames.Unset;
 
     /**
      * Sets the style of an outline
      *
      * @return
      */
-    public BorderStyles Outline_Style() default BorderStyles.Unset;
+    public BorderStyles OutlineStyle() default BorderStyles.Unset;
 
     /**
      * Sets the width of an outline
      *
      * @return
      */
-    public MeasurementCSS Outline_Width() default @MeasurementCSS;
+    public MeasurementCSS OutlineWidth() default @MeasurementCSS;
 
     /**
      * Specifies the space between an outline and the edge or border of an element
      *
      * @return
      */
-    public MeasurementCSS Outline_Offset() default @MeasurementCSS;
+    public MeasurementCSS OutlineOffset() default @MeasurementCSS;
 }

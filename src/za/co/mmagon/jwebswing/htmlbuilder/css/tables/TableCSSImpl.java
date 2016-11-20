@@ -16,8 +16,10 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.tables;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * The look of an HTML table can be greatly improved with CSS:
@@ -25,20 +27,22 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class TableCSSImpl implements TableCSS
+public class TableCSSImpl extends CSSImplementationAdapter<TableCSS, TableCSSImpl> implements CSSImplementationClass<TableCSS, TableCSSImpl>
 {
 
+    private static final long serialVersionUID = 1L;
+    @CSSDetail(cssName = "border-collapse", cssVersion = CSSVersions.CSS21)
+    public TableBorderCollapse borderCollapse;
+    @CSSDetail(cssName = "table-caption-side", cssVersion = CSSVersions.CSS21)
+    public TableCaptionSides tableCaptionSide;
+    @CSSDetail(cssName = "border-spacing", cssVersion = CSSVersions.CSS21)
+    public MeasurementCSSImpl borderSpacing;
+
+    /**
+     * Constructs a new Table CSS class
+     */
     public TableCSSImpl()
     {
-    }
-    public TableBorderCollapse Border_Collapse;
-    public TableCaptionSides Table_Caption_Side;
-    public MeasurementCSS Border_Spacing;
-
-    @Override
-    public Class<? extends Annotation> annotationType()
-    {
-        return TableCSS.class;
     }
 
     /**
@@ -46,10 +50,9 @@ public class TableCSSImpl implements TableCSS
      *
      * @return
      */
-    @Override
-    public TableBorderCollapse Border_Collapse()
+    public TableBorderCollapse getBorderCollapse()
     {
-        return Border_Collapse;
+        return borderCollapse;
     }
 
     /**
@@ -57,10 +60,9 @@ public class TableCSSImpl implements TableCSS
      *
      * @return
      */
-    @Override
-    public TableCaptionSides Table_Caption_Side()
+    public TableCaptionSides getTableCaptionSide()
     {
-        return Table_Caption_Side;
+        return tableCaptionSide;
     }
 
     /**
@@ -68,40 +70,39 @@ public class TableCSSImpl implements TableCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Border_Spacing()
+    public MeasurementCSSImpl getBorderSpacing()
     {
-        return Border_Spacing;
+        return borderSpacing;
     }
 
     /**
      * Specifies whether or not table borders should be collapsed
      *
-     * @param Border_Collapse
+     * @param borderCollapse
      */
-    public void setBorder_Collapse(TableBorderCollapse Border_Collapse)
+    public void setBorderCollapse(TableBorderCollapse borderCollapse)
     {
-        this.Border_Collapse = Border_Collapse;
+        this.borderCollapse = borderCollapse;
     }
 
     /**
      * Sets which side the caption must be on
      *
-     * @param Table_Caption_Side
+     * @param tableCaptionSide
      */
-    public void setTable_Caption_Side(TableCaptionSides Table_Caption_Side)
+    public void setTableCaptionSide(TableCaptionSides tableCaptionSide)
     {
-        this.Table_Caption_Side = Table_Caption_Side;
+        this.tableCaptionSide = tableCaptionSide;
     }
 
     /**
      * Specifies whether or not table borders should be collapsed
      *
-     * @param Border_Spacing
+     * @param borderSpacing
      */
-    public void setBorder_Spacing(MeasurementCSS Border_Spacing)
+    public void setBorderSpacing(MeasurementCSSImpl borderSpacing)
     {
-        this.Border_Spacing = Border_Spacing;
+        this.borderSpacing = borderSpacing;
     }
 
 }

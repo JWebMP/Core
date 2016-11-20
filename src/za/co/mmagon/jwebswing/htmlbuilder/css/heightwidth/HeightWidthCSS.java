@@ -131,7 +131,7 @@ public @interface HeightWidthCSS
      *
      * @return
      */
-    public MeasurementCSS Min_Height() default @MeasurementCSS;
+    public MeasurementCSS MinHeight() default @MeasurementCSS;
 
     /**
      * Definition and Usage
@@ -150,7 +150,7 @@ public @interface HeightWidthCSS
      *
      * @return
      */
-    public MeasurementCSS Max_Height() default @MeasurementCSS;
+    public MeasurementCSS MaxHeight() default @MeasurementCSS;
 
     /**
      * Definition and Usage
@@ -169,7 +169,7 @@ public @interface HeightWidthCSS
      *
      * @return
      */
-    public MeasurementCSS Min_Width() default @MeasurementCSS;
+    public MeasurementCSS MinWidth() default @MeasurementCSS;
 
     /**
      * Definition and Usage
@@ -188,5 +188,5 @@ public @interface HeightWidthCSS
      *
      * @return
      */
-    public MeasurementCSS Max_Width() default @MeasurementCSS;
+    public MeasurementCSS MaxWidth() default @MeasurementCSS;
 }
