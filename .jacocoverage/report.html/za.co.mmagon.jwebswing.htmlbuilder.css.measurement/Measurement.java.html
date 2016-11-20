@@ -9,55 +9,80 @@
 public final class Measurement
 {
 
-    //Measurement;
-    private String outputMeasurement;
-    private String measurementValue;
+    /**
+     * The output measurement
+     */
+    private StringBuilder outputMeasurement;
+    /**
+     * The value to be displayed
+     */
+    private StringBuilder measurementValue;
+    /**
+     * The measurement type
+     */
     private MeasurementTypes measurementType;
 
+    /**
+     * A measurement of any text that is readable using isDigit()
+     *
+     * @param fullValue
+     */
     public Measurement(String fullValue)
-<span class="nc" id="L18">    {</span>
-<span class="nc" id="L19">        String number = &quot;&quot;;</span>
-<span class="nc" id="L20">        String afterType = &quot;&quot;;</span>
-<span class="nc bnc" id="L21" title="All 2 branches missed.">        for (int i = 0; i &lt; fullValue.toCharArray().length; i++)</span>
+<span class="nc" id="L31">    {</span>
+<span class="nc" id="L32">        StringBuilder number = new StringBuilder(&quot;&quot;);</span>
+<span class="nc" id="L33">        StringBuilder afterType = new StringBuilder(&quot;&quot;);</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        for (int i = 0; i &lt; fullValue.toCharArray().length; i++)</span>
         {
-<span class="nc" id="L23">            Character Char = fullValue.toCharArray()[i];</span>
-<span class="nc bnc" id="L24" title="All 2 branches missed.">            if (Character.isDigit(Char))</span>
+<span class="nc" id="L36">            Character character = fullValue.toCharArray()[i];</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">            if (Character.isDigit(character))</span>
             {
-<span class="nc" id="L26">                number += Char;</span>
+<span class="nc" id="L39">                number.append(character);</span>
             }
             else
             {
-<span class="nc" id="L30">                afterType += Char;</span>
+<span class="nc" id="L43">                afterType.append(character);</span>
             }
         }
 
-<span class="nc" id="L34">        MeasurementTypes measureType = MeasurementTypes.getFromAnnotation(afterType);</span>
-<span class="nc bnc" id="L35" title="All 2 branches missed.">        if (measureType == null)</span>
+<span class="nc" id="L47">        MeasurementTypes measureType = MeasurementTypes.getFromAnnotation(afterType.toString());</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        if (measureType == null)</span>
         {
-<span class="nc" id="L37">            throw new RuntimeException(&quot;Not a Measurement Type&quot;);</span>
+<span class="nc" id="L50">            throw new NullPointerException(&quot;Not a Measurement Type&quot;);</span>
         }
 
-<span class="nc" id="L40">        this.measurementValue = number;</span>
-<span class="nc" id="L41">        this.measurementType = measureType;</span>
-<span class="nc" id="L42">    }</span>
+<span class="nc" id="L53">        this.measurementValue = number;</span>
+<span class="nc" id="L54">        this.measurementType = measureType;</span>
+<span class="nc" id="L55">    }</span>
 
+    /**
+     * Constructs a measurement with a given value and type
+     * @param value
+     * @param measurementType 
+     */
     public Measurement(String value, MeasurementTypes measurementType)
-<span class="nc" id="L45">    {</span>
-<span class="nc" id="L46">        this.measurementValue = value;</span>
-<span class="nc" id="L47">        this.measurementType = measurementType;</span>
+<span class="nc" id="L63">    {</span>
+<span class="nc" id="L64">        this.measurementValue = new StringBuilder(value);</span>
+<span class="nc" id="L65">        this.measurementType = measurementType;</span>
 
-<span class="nc" id="L49">    }</span>
+<span class="nc" id="L67">    }</span>
 
-    public String getOutputMeasurement()
+    /**
+     * Renders the output measurement
+     * @return 
+     */
+    public StringBuilder getOutputMeasurement()
     {
-<span class="nc bnc" id="L53" title="All 2 branches missed.">        outputMeasurement = measurementType.isRequiresQuotes() ? &quot;\&quot;&quot; + measurementValue + measurementType.getHtmlAnnotation() + &quot;\&quot;&quot; : measurementValue + measurementType.getHtmlAnnotation();</span>
-<span class="nc" id="L54">        return outputMeasurement;</span>
+<span class="nc" id="L75">        outputMeasurement = new StringBuilder(</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">                measurementType.isRequiresQuotes()</span>
+<span class="nc" id="L77">                ? &quot;\&quot;&quot; + measurementValue + measurementType.getHtmlAnnotation() + &quot;\&quot;&quot;</span>
+<span class="nc" id="L78">                : measurementValue + measurementType.getHtmlAnnotation());</span>
+<span class="nc" id="L79">        return outputMeasurement;</span>
     }
 
     @Override
     public String toString()
     {
-<span class="nc" id="L60">        return getOutputMeasurement();</span>
+<span class="nc" id="L85">        return getOutputMeasurement().toString();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

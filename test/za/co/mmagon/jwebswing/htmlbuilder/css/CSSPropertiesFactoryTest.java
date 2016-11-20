@@ -39,7 +39,7 @@ public class CSSPropertiesFactoryTest
     }
 
     /**
-     * Test of getCSSPropertiesClass method, of class CSSPropertiesFactory.
+     * Test of getCSSProperties method, of class CSSPropertiesFactory.
      */
     @Test
     public void testGetCSSPropertiesClass()

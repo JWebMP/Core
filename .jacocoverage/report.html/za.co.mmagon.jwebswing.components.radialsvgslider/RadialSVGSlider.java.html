@@ -21,9 +21,7 @@ import za.co.mmagon.jwebswing.base.html.H2;
 import za.co.mmagon.jwebswing.base.html.Link;
 import za.co.mmagon.jwebswing.base.html.Paragraph;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.lists.ListStyleType;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.lists.*;
 
 /**
  * An implementation of the Radial SVG Slider.
@@ -34,49 +32,52 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
  * @since 29 Aug 2015
  * @version 1.0
  */
-
 public class RadialSVGSlider extends Div&lt;RadialSVGSliderChildren, RadialSVGSliderAttributes, RadialSVGSliderFeatures, RadialSVGSliderEvents, RadialSVGSlider&gt;
 {
 
     private static final long serialVersionUID = 1L;
     private RadialSVGSliderFeature feature;
 
-    @CSS(List_Style_Type = ListStyleType.none,Padding_Left = @MeasurementCSS(0))
+    @ListCSS(ListStyleType = ListStyleType.none)
     private RadialSVGSliderList radialSliderList;
 
     public RadialSVGSlider()
-<span class="fc" id="L48">    {</span>
-<span class="fc" id="L49">        addFeature(getFeature());</span>
-<span class="fc" id="L50">        addClass(&quot;cd-radial-slider-wrapper&quot;);</span>
-<span class="fc" id="L51">        addAttribute(GlobalAttributes.Style, &quot;margin-top: 0px;margin-bottom: 0px;&quot;);</span>
-<span class="fc" id="L52">    }</span>
-    
+<span class="fc" id="L45">    {</span>
+<span class="fc" id="L46">        addFeature(getFeature());</span>
+<span class="fc" id="L47">        addClass(&quot;cd-radial-slider-wrapper&quot;);</span>
+<span class="fc" id="L48">        addAttribute(GlobalAttributes.Style, &quot;margin-top: 0px;margin-bottom: 0px;&quot;);</span>
+<span class="fc" id="L49">    }</span>
+
     /**
      * Adds a face to this
+     *
      * @param content The content div to add
-     * @return 
+     *
+     * @return
      */
     public RadialSVGSliderListItem addFace(Div content)
     {
-<span class="fc" id="L61">        return addFace(content, &quot;&quot;);</span>
+<span class="fc" id="L60">        return addFace(content, &quot;&quot;);</span>
     }
-    
+
     /**
      * Adds a face to this
-     * @param content The content div to add
+     *
+     * @param content       The content div to add
      * @param backgroundUrl The background image URL to apply
-     * @return 
+     *
+     * @return
      */
-    public RadialSVGSliderListItem addFace(Div content,String backgroundUrl)
+    public RadialSVGSliderListItem addFace(Div content, String backgroundUrl)
     {
-<span class="fc" id="L72">        RadialSVGSliderListItem li = new RadialSVGSliderListItem();</span>
-<span class="fc" id="L73">        li.setContent(content);</span>
-<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if(backgroundUrl != null)</span>
+<span class="fc" id="L73">        RadialSVGSliderListItem li = new RadialSVGSliderListItem();</span>
+<span class="fc" id="L74">        li.setContent(content);</span>
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">        if (backgroundUrl != null)</span>
         {
-<span class="fc" id="L76">            li.setFaceBackgroundImageUrl(backgroundUrl);</span>
+<span class="fc" id="L77">            li.setFaceBackgroundImageUrl(backgroundUrl);</span>
         }
-<span class="fc" id="L78">        getRadialSliderList().add(li);</span>
-<span class="fc" id="L79">        return li;</span>
+<span class="fc" id="L79">        getRadialSliderList().add(li);</span>
+<span class="fc" id="L80">        return li;</span>
     }
 
     /**
@@ -86,11 +87,11 @@ public class RadialSVGSlider extends Div&lt;RadialSVGSliderChildren, RadialSVGSl
      */
     public RadialSVGSliderList getRadialSliderList()
     {
-<span class="fc bfc" id="L89" title="All 2 branches covered.">        if (radialSliderList == null)</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">        if (radialSliderList == null)</span>
         {
-<span class="fc" id="L91">            setRadialSliderList(new RadialSVGSliderList());</span>
+<span class="fc" id="L92">            setRadialSliderList(new RadialSVGSliderList());</span>
         }
-<span class="fc" id="L93">        return radialSliderList;</span>
+<span class="fc" id="L94">        return radialSliderList;</span>
     }
 
     /**
@@ -100,20 +101,20 @@ public class RadialSVGSlider extends Div&lt;RadialSVGSliderChildren, RadialSVGSl
      */
     public void setRadialSliderList(RadialSVGSliderList radialSliderList)
     {
-<span class="fc" id="L103">        remove(this.radialSliderList);</span>
-<span class="fc" id="L104">        this.radialSliderList = radialSliderList;</span>
-<span class="pc bpc" id="L105" title="1 of 2 branches missed.">        if (this.radialSliderList != null)</span>
+<span class="fc" id="L104">        remove(this.radialSliderList);</span>
+<span class="fc" id="L105">        this.radialSliderList = radialSliderList;</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">        if (this.radialSliderList != null)</span>
         {
-<span class="fc" id="L107">            this.radialSliderList.addClass(&quot;cd-radial-slider&quot;);</span>
-<span class="fc" id="L108">            this.radialSliderList.addAttribute(RadialSVGSliderListAttributes.Radius1, 60);</span>
-<span class="fc" id="L109">            this.radialSliderList.addAttribute(RadialSVGSliderListAttributes.Radius2, 1364);</span>
-<span class="fc" id="L110">            this.radialSliderList.addAttribute(RadialSVGSliderListAttributes.CenterX1, 110);</span>
-<span class="fc" id="L111">            this.radialSliderList.addAttribute(RadialSVGSliderListAttributes.CenterX2, 1290);</span>
-<span class="fc" id="L112">            this.radialSliderList.addAttribute(GlobalAttributes.Style, &quot;margin-top: 0px;margin-bottom: 0px;&quot;);</span>
-<span class="fc" id="L113">            add(this.radialSliderList);</span>
+<span class="fc" id="L108">            this.radialSliderList.addClass(&quot;cd-radial-slider&quot;);</span>
+<span class="fc" id="L109">            this.radialSliderList.addAttribute(RadialSVGSliderListAttributes.Radius1, 60);</span>
+<span class="fc" id="L110">            this.radialSliderList.addAttribute(RadialSVGSliderListAttributes.Radius2, 1364);</span>
+<span class="fc" id="L111">            this.radialSliderList.addAttribute(RadialSVGSliderListAttributes.CenterX1, 110);</span>
+<span class="fc" id="L112">            this.radialSliderList.addAttribute(RadialSVGSliderListAttributes.CenterX2, 1290);</span>
+<span class="fc" id="L113">            this.radialSliderList.addAttribute(GlobalAttributes.Style, &quot;margin-top: 0px;margin-bottom: 0px;&quot;);</span>
+<span class="fc" id="L114">            add(this.radialSliderList);</span>
         }
-<span class="fc" id="L115">    }</span>
-    
+<span class="fc" id="L116">    }</span>
+
     /**
      * Renders the default stuff that doesn't need to be built
      *
@@ -122,25 +123,25 @@ public class RadialSVGSlider extends Div&lt;RadialSVGSliderChildren, RadialSVGSl
     @Override
     protected StringBuilder renderAfterChildren()
     {
-<span class="fc" id="L125">        return new StringBuilder(getNewLine() + getNewLine() </span>
-<span class="fc" id="L126">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;&lt;ul class=\&quot;cd-radial-slider-navigation\&quot; style=\&quot;list-style-type:none;\&quot;&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L127">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; +  &quot;&lt;li&gt;&lt;a href=\&quot;#0\&quot; class=\&quot;next\&quot;&gt;Next&lt;/a&gt;&lt;/li&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L128">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; +  &quot;&lt;li&gt;&lt;a href=\&quot;#0\&quot; class=\&quot;prev\&quot;&gt;Prev&lt;/a&gt;&lt;/li&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L129">                + getCurrentTabIndentString() + &quot;\t&quot; +  &quot;&lt;/ul&gt; &lt;!-- .cd-radial-slider-navigation --&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L130">                + getCurrentTabIndentString() + &quot;\t&quot; +  &quot;&quot; + getNewLine()</span>
-<span class="fc" id="L131">                + getCurrentTabIndentString() + &quot;\t&quot; +  &quot;&lt;div class=\&quot;cd-round-mask\&quot;&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L132">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; +  &quot;&lt;svg viewBox=\&quot;0 0 1400 800\&quot;&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L133">                + getCurrentTabIndentString() + &quot;\t&quot; +  &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;defs&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L134">                + getCurrentTabIndentString() + &quot;\t&quot; +  &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;mask id=\&quot;cd-left-mask\&quot; height='800px' width=\&quot;1400px\&quot; x=\&quot;0\&quot; y=\&quot;0\&quot; maskUnits=\&quot;userSpaceOnUse\&quot;&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L135">                + getCurrentTabIndentString() + &quot;\t&quot; +  &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;path fill=\&quot;white\&quot; d=\&quot;M0,0v800h1400V0H0z M110,460c-33.137,0-60-26.863-60-60s26.863-60,60-60s60,26.863,60,60S143.137,460,110,460z\&quot;/&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L136">                + getCurrentTabIndentString() + &quot;\t&quot; +  &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;/mask&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L137">                + getCurrentTabIndentString() + &quot;\t&quot; +  &quot;&quot; + getNewLine()</span>
-<span class="fc" id="L138">                + getCurrentTabIndentString() + &quot;\t&quot; +  &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;mask id=\&quot;cd-right-mask\&quot; height='800px' width=\&quot;1400px\&quot; x=\&quot;0\&quot; y=\&quot;0\&quot; maskUnits=\&quot;userSpaceOnUse\&quot;&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L139">                + getCurrentTabIndentString() + &quot;\t&quot; +  &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;path fill=\&quot;white\&quot; d=\&quot;M0,0v800h1400V0H0z M1290,460c-33.137,0-60-26.863-60-60s26.863-60,60-60s60,26.863,60,60S1323.137,460,1290,460z\&quot;/&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L140">                + getCurrentTabIndentString() + &quot;\t&quot; +  &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;/mask&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L141">                + getCurrentTabIndentString() + &quot;\t&quot; +  &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;/defs&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L142">                + getCurrentTabIndentString() + &quot;\t&quot; +  &quot;\t&quot; + &quot;&lt;/svg&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L143">                + getCurrentTabIndentString() + &quot;\t&quot; +  &quot;&lt;/div&gt;&quot;);</span>
+<span class="fc" id="L126">        return new StringBuilder(getNewLine() + getNewLine()</span>
+<span class="fc" id="L127">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;&lt;ul class=\&quot;cd-radial-slider-navigation\&quot; style=\&quot;list-style-type:none;\&quot;&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L128">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;li&gt;&lt;a href=\&quot;#0\&quot; class=\&quot;next\&quot;&gt;Next&lt;/a&gt;&lt;/li&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L129">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;li&gt;&lt;a href=\&quot;#0\&quot; class=\&quot;prev\&quot;&gt;Prev&lt;/a&gt;&lt;/li&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L130">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;&lt;/ul&gt; &lt;!-- .cd-radial-slider-navigation --&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L131">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;&quot; + getNewLine()</span>
+<span class="fc" id="L132">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;&lt;div class=\&quot;cd-round-mask\&quot;&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L133">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;svg viewBox=\&quot;0 0 1400 800\&quot;&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L134">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;defs&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L135">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;mask id=\&quot;cd-left-mask\&quot; height='800px' width=\&quot;1400px\&quot; x=\&quot;0\&quot; y=\&quot;0\&quot; maskUnits=\&quot;userSpaceOnUse\&quot;&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L136">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;path fill=\&quot;white\&quot; d=\&quot;M0,0v800h1400V0H0z M110,460c-33.137,0-60-26.863-60-60s26.863-60,60-60s60,26.863,60,60S143.137,460,110,460z\&quot;/&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L137">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;/mask&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L138">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;&quot; + getNewLine()</span>
+<span class="fc" id="L139">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;mask id=\&quot;cd-right-mask\&quot; height='800px' width=\&quot;1400px\&quot; x=\&quot;0\&quot; y=\&quot;0\&quot; maskUnits=\&quot;userSpaceOnUse\&quot;&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L140">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;path fill=\&quot;white\&quot; d=\&quot;M0,0v800h1400V0H0z M1290,460c-33.137,0-60-26.863-60-60s26.863-60,60-60s60,26.863,60,60S1323.137,460,1290,460z\&quot;/&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L141">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;/mask&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L142">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;/defs&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L143">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;/svg&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L144">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;&lt;/div&gt;&quot;);</span>
     }
 
     /**
@@ -149,60 +150,60 @@ public class RadialSVGSlider extends Div&lt;RadialSVGSliderChildren, RadialSVGSl
     @Override
     public void preConfigure()
     {
-<span class="pc bpc" id="L152" title="1 of 2 branches missed.">        if(!isConfigured())</span>
+<span class="pc bpc" id="L153" title="1 of 2 branches missed.">        if (!isConfigured())</span>
         {
-<span class="fc" id="L154">            int size = getRadialSliderList().getChildren().size();</span>
-<span class="fc bfc" id="L155" title="All 2 branches covered.">            if(size &gt; 0)</span>
+<span class="fc" id="L155">            int size = getRadialSliderList().getChildren().size();</span>
+<span class="fc bfc" id="L156" title="All 2 branches covered.">            if (size &gt; 0)</span>
             {
-<span class="fc" id="L157">                getRadialSliderList().getChildren().get(0).addClass(&quot;visible&quot;);</span>
+<span class="fc" id="L158">                getRadialSliderList().getChildren().get(0).addClass(&quot;visible&quot;);</span>
             }
-<span class="fc bfc" id="L159" title="All 2 branches covered.">            if(size &gt; 1)</span>
+<span class="fc bfc" id="L160" title="All 2 branches covered.">            if (size &gt; 1)</span>
             {
-<span class="fc" id="L161">                getRadialSliderList().getChildren().get(1).addClass(&quot;next-slide&quot;);</span>
-<span class="fc" id="L162">                getRadialSliderList().getChildren().get(size - 1).addClass(&quot;prev-slide&quot;);</span>
+<span class="fc" id="L162">                getRadialSliderList().getChildren().get(1).addClass(&quot;next-slide&quot;);</span>
+<span class="fc" id="L163">                getRadialSliderList().getChildren().get(size - 1).addClass(&quot;prev-slide&quot;);</span>
             }
         }
-<span class="fc" id="L165">        super.preConfigure();</span>
-<span class="fc" id="L166">    }</span>
-    
-    
+<span class="fc" id="L166">        super.preConfigure();</span>
+<span class="fc" id="L167">    }</span>
 
     public final RadialSVGSliderFeature getFeature()
     {
-<span class="pc bpc" id="L172" title="1 of 2 branches missed.">        if (feature == null)</span>
+<span class="pc bpc" id="L171" title="1 of 2 branches missed.">        if (feature == null)</span>
         {
-<span class="fc" id="L174">            feature = new RadialSVGSliderFeature(this);</span>
+<span class="fc" id="L173">            feature = new RadialSVGSliderFeature(this);</span>
         }
-<span class="fc" id="L176">        return feature;</span>
+<span class="fc" id="L175">        return feature;</span>
     }
 
     @Override
     public RadialSVGSliderOptions getOptions()
     {
-<span class="nc" id="L182">        return getFeature().getOptions();</span>
+<span class="nc" id="L181">        return getFeature().getOptions();</span>
     }
-    
+
     /**
      * Creates a default slide
-     * @param headerText The header text of the slide
+     *
+     * @param headerText  The header text of the slide
      * @param defaultText The default text of the slide
-     * @param linkUrl The link for the main button
-     * @param linkText the text for the link
-     * @return 
+     * @param linkUrl     The link for the main button
+     * @param linkText    the text for the link
+     *
+     * @return
      */
-    public static Div createDefaultSlide(String headerText, String defaultText,String linkUrl, String linkText)
+    public static Div createDefaultSlide(String headerText, String defaultText, String linkUrl, String linkText)
     {
-<span class="nc" id="L195">        Div d = new Div();</span>
-<span class="nc" id="L196">        H2 hText = new H2(headerText);</span>
-<span class="nc" id="L197">        Paragraph p = new Paragraph(defaultText);</span>
-<span class="nc" id="L198">        Link newLink = new Link(linkUrl);</span>
-<span class="nc" id="L199">        newLink.addClass(&quot;cd-btn&quot;);</span>
-<span class="nc" id="L200">        newLink.setText(linkText);</span>
-         
-<span class="nc" id="L202">        d.add(hText);</span>
-<span class="nc" id="L203">        d.add(p);</span>
-<span class="nc" id="L204">        d.add(newLink);</span>
-<span class="nc" id="L205">        return d;</span>
+<span class="nc" id="L196">        Div d = new Div();</span>
+<span class="nc" id="L197">        H2 hText = new H2(headerText);</span>
+<span class="nc" id="L198">        Paragraph p = new Paragraph(defaultText);</span>
+<span class="nc" id="L199">        Link newLink = new Link(linkUrl);</span>
+<span class="nc" id="L200">        newLink.addClass(&quot;cd-btn&quot;);</span>
+<span class="nc" id="L201">        newLink.setText(linkText);</span>
+
+<span class="nc" id="L203">        d.add(hText);</span>
+<span class="nc" id="L204">        d.add(p);</span>
+<span class="nc" id="L205">        d.add(newLink);</span>
+<span class="nc" id="L206">        return d;</span>
     }
 
 }

@@ -1,143 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MeasurementCSSImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.htmlbuilder.css.measurement</a> &gt; <span class="el_source">MeasurementCSSImpl.java</span></div><h1>MeasurementCSSImpl.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.htmlbuilder.css.measurement;
 
-import com.fasterxml.jackson.annotation.JsonRawValue;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.io.Serializable;
-import java.lang.annotation.Annotation;
+import com.fasterxml.jackson.annotation.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
 
 /**
+ * Any basic measurement
  *
  * @author Marc Magon
  */
-public class MeasurementCSSImpl implements MeasurementCSS, Serializable
+public class MeasurementCSSImpl extends CSSImplementationAdapter&lt;MeasurementCSS, MeasurementCSSImpl&gt;
+        implements CSSImplementationClass&lt;MeasurementCSS, MeasurementCSSImpl&gt;
 {
 
+    private static final long serialVersionUID = 1L;
+
+    @CSSDetail
     private double value;
     private MeasurementTypes MeasurementType;
-<span class="fc" id="L17">    public static final MeasurementCSSImpl hundredPercent = new MeasurementCSSImpl(100, MeasurementTypes.Percent);</span>
-<span class="fc" id="L18">    public static final MeasurementCSSImpl ninetyNinePoint8Percent = new MeasurementCSSImpl(99.8, MeasurementTypes.Percent);</span>
-<span class="fc" id="L19">    public static final MeasurementCSSImpl ninetyNinePercent = new MeasurementCSSImpl(99, MeasurementTypes.Percent);</span>
-<span class="fc" id="L20">    public static final MeasurementCSSImpl ninetyEightPercent = new MeasurementCSSImpl(98, MeasurementTypes.Percent);</span>
-<span class="fc" id="L21">    public static final MeasurementCSSImpl ninetySevenPercent = new MeasurementCSSImpl(97, MeasurementTypes.Percent);</span>
-<span class="fc" id="L22">    public static final MeasurementCSSImpl ninetySixPercent = new MeasurementCSSImpl(96, MeasurementTypes.Percent);</span>
-<span class="fc" id="L23">    public static final MeasurementCSSImpl ninetyFivePercent = new MeasurementCSSImpl(95, MeasurementTypes.Percent);</span>
-<span class="fc" id="L24">    public static final MeasurementCSSImpl ninetyFourPercent = new MeasurementCSSImpl(94, MeasurementTypes.Percent);</span>
-<span class="fc" id="L25">    public static final MeasurementCSSImpl ninetyThreePercent = new MeasurementCSSImpl(93, MeasurementTypes.Percent);</span>
-<span class="fc" id="L26">    public static final MeasurementCSSImpl ninetyTwoPercent = new MeasurementCSSImpl(92, MeasurementTypes.Percent);</span>
-<span class="fc" id="L27">    public static final MeasurementCSSImpl ninetyOnePercent = new MeasurementCSSImpl(91, MeasurementTypes.Percent);</span>
-<span class="fc" id="L28">    public static final MeasurementCSSImpl ninetyPercent = new MeasurementCSSImpl(90, MeasurementTypes.Percent);</span>
-<span class="fc" id="L29">    public static final MeasurementCSSImpl eightySevenPercent = new MeasurementCSSImpl(87, MeasurementTypes.Percent);</span>
-<span class="fc" id="L30">    public static final MeasurementCSSImpl eightySixPercent = new MeasurementCSSImpl(86, MeasurementTypes.Percent);</span>
-<span class="fc" id="L31">    public static final MeasurementCSSImpl eightyFivePercent = new MeasurementCSSImpl(85, MeasurementTypes.Percent);</span>
-<span class="fc" id="L32">    public static final MeasurementCSSImpl eightyPercent = new MeasurementCSSImpl(80, MeasurementTypes.Percent);</span>
-<span class="fc" id="L33">    public static final MeasurementCSSImpl seventyPercent = new MeasurementCSSImpl(70, MeasurementTypes.Percent);</span>
-<span class="fc" id="L34">    public static final MeasurementCSSImpl fiftyPercent = new MeasurementCSSImpl(50, MeasurementTypes.Percent);</span>
-<span class="fc" id="L35">    public static final MeasurementCSSImpl twentyPercent = new MeasurementCSSImpl(20, MeasurementTypes.Percent);</span>
-<span class="fc" id="L36">    public static final MeasurementCSSImpl tenPercent = new MeasurementCSSImpl(10, MeasurementTypes.Percent);</span>
-<span class="fc" id="L37">    public static final MeasurementCSSImpl zero = new MeasurementCSSImpl(0, MeasurementTypes.Pixels);</span>
 
+    /**
+     * Constructs an empty measurement
+     */
     public MeasurementCSSImpl()
-<span class="nc" id="L40">    {</span>
-<span class="nc" id="L41">    }</span>
+<span class="nc" id="L26">    {</span>
+        //nothing required
+<span class="nc" id="L28">    }</span>
 
-    public MeasurementCSSImpl(MeasurementCSS measurementCSS)
-<span class="nc" id="L44">    {</span>
-
-<span class="nc" id="L46">    }</span>
-
+    /**
+     * Constructs with the given value and/or measurement type
+     *
+     * @param value
+     * @param measurementType
+     */
     public MeasurementCSSImpl(double value, MeasurementTypes measurementType)
-<span class="fc" id="L49">    {</span>
-<span class="fc" id="L50">        this.value = value;</span>
-<span class="fc" id="L51">        MeasurementType = measurementType;</span>
-<span class="fc" id="L52">    }</span>
+<span class="fc" id="L37">    {</span>
+<span class="fc" id="L38">        this.value = value;</span>
+<span class="fc" id="L39">        MeasurementType = measurementType;</span>
+<span class="fc" id="L40">    }</span>
 
+    /**
+     * Constructs with the given value in pixels
+     *
+     * @param value
+     */
     public MeasurementCSSImpl(double value)
     {
-<span class="nc" id="L56">        this(value, MeasurementTypes.Pixels);</span>
-<span class="nc" id="L57">    }</span>
+<span class="nc" id="L49">        this(value, MeasurementTypes.Pixels);</span>
+<span class="nc" id="L50">    }</span>
 
+    /**
+     * Constructs with the given value and measurement type
+     *
+     * @param value
+     * @param measurementType
+     */
     public MeasurementCSSImpl(int value, MeasurementTypes measurementType)
-<span class="fc" id="L60">    {</span>
-<span class="fc" id="L61">        this.value = value;</span>
-<span class="fc" id="L62">        MeasurementType = measurementType;</span>
-<span class="fc" id="L63">    }</span>
+<span class="fc" id="L59">    {</span>
+<span class="fc" id="L60">        this.value = value;</span>
+<span class="fc" id="L61">        MeasurementType = measurementType;</span>
+<span class="fc" id="L62">    }</span>
 
+    /**
+     * Constructs with the given value as pixels
+     *
+     * @param value
+     */
     public MeasurementCSSImpl(int value)
     {
-<span class="nc" id="L67">        this(value, MeasurementTypes.Pixels);</span>
-<span class="nc" id="L68">    }</span>
+<span class="fc" id="L71">        this(value, MeasurementTypes.Pixels);</span>
+<span class="fc" id="L72">    }</span>
 
+    /**
+     * Sets the value
+     *
+     * @param value
+     */
     public void setvalue(int value)
     {
-<span class="nc" id="L72">        this.value = value;</span>
-<span class="nc" id="L73">    }</span>
+<span class="nc" id="L81">        this.value = value;</span>
+<span class="nc" id="L82">    }</span>
 
+    /**
+     * Sets the measurement type
+     *
+     * @param measurementType
+     */
     public void setMeasurementType(MeasurementTypes measurementType)
     {
-<span class="nc" id="L77">        MeasurementType = measurementType;</span>
-<span class="nc" id="L78">    }</span>
+<span class="nc" id="L91">        MeasurementType = measurementType;</span>
+<span class="nc" id="L92">    }</span>
 
-    @Override
+    /**
+     * Returns the double value
+     *
+     * @return
+     */
     public double value()
     {
-<span class="fc" id="L83">        return value;</span>
+<span class="nc" id="L101">        return value;</span>
     }
 
+    /**
+     * Returns the measurement formatted
+     *
+     * @return
+     */
     @JsonValue(true)
     @JsonRawValue
     @Override
     public String toString()
     {
-<span class="pc bpc" id="L91" title="1 of 2 branches missed.">        if (MeasurementType == null)</span>
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">        if (MeasurementType == null)</span>
         {
-<span class="nc" id="L93">            return &quot;&quot;;</span>
+<span class="nc" id="L116">            return &quot;&quot;;</span>
         }
-<span class="pc bpc" id="L95" title="1 of 2 branches missed.">        if (Double.class.cast(value).toString().endsWith(&quot;.0&quot;)) //format as an integer</span>
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">        if (Double.class.cast(value).toString().endsWith(&quot;.0&quot;)) //format as an integer</span>
         {
-<span class="fc" id="L97">            Integer valInt = Double.class.cast(value).intValue();</span>
-<span class="pc bpc" id="L98" title="1 of 2 branches missed.">            if (MeasurementType.isRequiresQuotes())</span>
+<span class="fc" id="L120">            Integer valInt = Double.class.cast(value).intValue();</span>
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">            if (MeasurementType.isRequiresQuotes())</span>
             {
-<span class="fc" id="L100">                return &quot;'&quot; + valInt + &quot;&quot; + MeasurementType.getHtmlAnnotation() + &quot;'&quot;;</span>
+<span class="fc" id="L123">                return &quot;'&quot; + valInt + &quot;&quot; + MeasurementType.getHtmlAnnotation() + &quot;'&quot;;</span>
             }
             else
             {
-<span class="nc" id="L104">                return valInt + &quot;&quot; + MeasurementType.getHtmlAnnotation();</span>
+<span class="nc" id="L127">                return valInt + &quot;&quot; + MeasurementType.getHtmlAnnotation();</span>
             }
         }
-<span class="nc bnc" id="L107" title="All 2 branches missed.">        else if (MeasurementType.isRequiresQuotes())</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">        else if (MeasurementType.isRequiresQuotes())</span>
         {
-<span class="nc" id="L109">            return &quot;'&quot; + value + &quot;&quot; + MeasurementType.getHtmlAnnotation() + &quot;'&quot;;</span>
+<span class="nc" id="L132">            return &quot;'&quot; + value + &quot;&quot; + MeasurementType.getHtmlAnnotation() + &quot;'&quot;;</span>
         }
         else
         {
-<span class="nc" id="L113">            return value + &quot;&quot; + MeasurementType.getHtmlAnnotation();</span>
+<span class="nc" id="L136">            return value + &quot;&quot; + MeasurementType.getHtmlAnnotation();</span>
         }
 
     }
 
+    /**
+     * Returns the measure formatted in quotes
+     *
+     * @param renderQuotes
+     *
+     * @return
+     */
     public String toString(boolean renderQuotes)
     {
-<span class="pc bpc" id="L120" title="1 of 2 branches missed.">        if (renderQuotes)</span>
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">        if (renderQuotes)</span>
         {
-<span class="nc" id="L122">            return &quot;'&quot; + value + &quot;&quot; + MeasurementType.getHtmlAnnotation() + &quot;'&quot;;</span>
+<span class="nc" id="L152">            return &quot;'&quot; + value + &quot;&quot; + MeasurementType.getHtmlAnnotation() + &quot;'&quot;;</span>
         }
         else
         {
-<span class="fc" id="L126">            return value + &quot;&quot; + MeasurementType.getHtmlAnnotation();</span>
+<span class="fc" id="L156">            return value + &quot;&quot; + MeasurementType.getHtmlAnnotation();</span>
         }
     }
 
-    @Override
+    /**
+     * Returns the measurement type
+     *
+     * @return
+     */
     public MeasurementTypes MeasurementType()
     {
-<span class="fc" id="L133">        return MeasurementType;</span>
+<span class="nc" id="L167">        return MeasurementType;</span>
     }
-
-    @Override
-    public Class&lt;? extends Annotation&gt; annotationType()
-    {
-<span class="nc" id="L139">        return MeasurementCSS.class;</span>
-    }
-
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -16,47 +16,66 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.text;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
+ * All default text properties
  *
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class TextCSSImpl implements TextCSS
+public class TextCSSImpl extends CSSImplementationAdapter&lt;TextCSS, TextCSSImpl&gt; implements CSSImplementationClass&lt;TextCSS, TextCSSImpl&gt;
 {
 
-    public TextCSSImpl()
-<span class="nc" id="L33">    {</span>
-<span class="nc" id="L34">    }</span>
+    private static final long serialVersionUID = 1L;
+    @CSSDetail(cssName = &quot;color&quot;, cssVersion = CSSVersions.CSS21)
+    private ColourCSSImpl color;
+    @CSSDetail(cssName = &quot;color&quot;, cssVersion = CSSVersions.CSS21)
+    private ColourNames color$;
+    @CSSDetail(cssName = &quot;direction&quot;, cssVersion = CSSVersions.CSS21)
+    private TextDirections direction;
+    @CSSDetail(cssName = &quot;letter-spacing&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl letterSpacing;
+    @CSSDetail(cssName = &quot;line-height&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl lineHeight;
+    @CSSDetail(cssName = &quot;text-align&quot;, cssVersion = CSSVersions.CSS21)
+    private TextAlignments textAlign;
+    @CSSDetail(cssName = &quot;text-decoration&quot;, cssVersion = CSSVersions.CSS21)
+    private TextDecorations textDecoration;
+    @CSSDetail(cssName = &quot;text-indent&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl textIndent;
+    @CSSDetail(cssName = &quot;text-transform&quot;, cssVersion = CSSVersions.CSS21)
+    private TextTransforms textTransform;
+    @CSSDetail(cssName = &quot;unicode-bidi&quot;, cssVersion = CSSVersions.CSS21)
+    private UnicodeBidis unicodeBidi;
+    @CSSDetail(cssName = &quot;vertical-align&quot;, cssVersion = CSSVersions.CSS21)
+    private VerticalAlignments verticalAlign;
+    @CSSDetail(cssName = &quot;white-space&quot;, cssVersion = CSSVersions.CSS21)
+    private WhiteSpacing whiteSpace;
+    @CSSDetail(cssName = &quot;word-spacing&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl wordSpacing;
 
+    /**
+     * Constructs a new instance of text css
+     */
+    public TextCSSImpl()
+<span class="fc" id="L66">    {</span>
+        //Nothing needed here
+<span class="fc" id="L68">    }</span>
+
+    /**
+     * Returns nothing
+     *
+     * @return
+     */
     @Override
     public String toString()
     {
-<span class="nc" id="L39">        return &quot;&quot;;</span>
-    }
-
-    private ColourCSS Color;
-    private ColourNames Color$;
-    private TextDirections Direction;
-    private MeasurementCSS Letter_Spacing;
-    private MeasurementCSS Line_Height;
-    private TextAlignments Text_Align;
-    private TextDecorations Text_Decoration;
-    private MeasurementCSS Text_Indent;
-    private TextTransforms Text_Transform;
-    private UnicodeBidis Unicode_Bidi;
-    private VerticalAlignments Vertical_Align;
-    private WhiteSpacing White_Space;
-    private MeasurementCSS Word_Spacing;
-
-    @Override
-    public Class&lt;? extends Annotation&gt; annotationType()
-    {
-<span class="nc" id="L59">        return TextCSS.class;</span>
+<span class="nc" id="L78">        return &quot;&quot;;</span>
     }
 
     /**
@@ -64,10 +83,9 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public ColourCSS Color()
+    public ColourCSSImpl getColour()
     {
-<span class="nc" id="L70">        return Color;</span>
+<span class="nc" id="L88">        return color;</span>
     }
 
     /**
@@ -75,21 +93,19 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public ColourNames Color$()
+    public ColourNames getColour$()
     {
-<span class="nc" id="L81">        return Color$;</span>
+<span class="nc" id="L98">        return color$;</span>
     }
 
     /**
-     * Sets the Text Direction
+     * Sets the Text getDirection
      *
      * @return
      */
-    @Override
-    public TextDirections Direction()
+    public TextDirections getDirection()
     {
-<span class="nc" id="L92">        return Direction;</span>
+<span class="nc" id="L108">        return direction;</span>
     }
 
     /**
@@ -97,10 +113,9 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Letter_Spacing()
+    public MeasurementCSSImpl getLetterSpacing()
     {
-<span class="nc" id="L103">        return Letter_Spacing;</span>
+<span class="nc" id="L118">        return letterSpacing;</span>
     }
 
     /**
@@ -108,10 +123,9 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Line_Height()
+    public MeasurementCSSImpl getLineHeight()
     {
-<span class="nc" id="L114">        return Line_Height;</span>
+<span class="nc" id="L128">        return lineHeight;</span>
     }
 
     /**
@@ -119,21 +133,19 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public TextAlignments Text_Align()
+    public TextAlignments getTextAlign()
     {
-<span class="nc" id="L125">        return Text_Align;</span>
+<span class="nc" id="L138">        return textAlign;</span>
     }
 
     /**
-     * Sets the Text Direction
+     * Sets the Text getDirection
      *
      * @return
      */
-    @Override
-    public TextDecorations Text_Decoration()
+    public TextDecorations getTextDecoration()
     {
-<span class="nc" id="L136">        return Text_Decoration;</span>
+<span class="nc" id="L148">        return textDecoration;</span>
     }
 
     /**
@@ -141,10 +153,9 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Text_Indent()
+    public MeasurementCSSImpl getTextIndent()
     {
-<span class="nc" id="L147">        return Text_Indent;</span>
+<span class="nc" id="L158">        return textIndent;</span>
     }
 
     /**
@@ -152,10 +163,9 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public TextTransforms Text_Transform()
+    public TextTransforms getTextTransform()
     {
-<span class="nc" id="L158">        return Text_Transform;</span>
+<span class="nc" id="L168">        return textTransform;</span>
     }
 
     /**
@@ -163,10 +173,9 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public UnicodeBidis Unicode_Bidi()
+    public UnicodeBidis getUnicodeBidi()
     {
-<span class="nc" id="L169">        return Unicode_Bidi;</span>
+<span class="nc" id="L178">        return unicodeBidi;</span>
     }
 
     /**
@@ -174,10 +183,9 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public VerticalAlignments Vertical_Align()
+    public VerticalAlignments getVerticalAlign()
     {
-<span class="nc" id="L180">        return Vertical_Align;</span>
+<span class="nc" id="L188">        return verticalAlign;</span>
     }
 
     /**
@@ -185,10 +193,9 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public WhiteSpacing White_Space()
+    public WhiteSpacing getWhiteSpace()
     {
-<span class="nc" id="L191">        return White_Space;</span>
+<span class="nc" id="L198">        return whiteSpace;</span>
     }
 
     /**
@@ -196,10 +203,9 @@ public class TextCSSImpl implements TextCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Word_Spacing()
+    public MeasurementCSSImpl getWordSpacing()
     {
-<span class="nc" id="L202">        return Word_Spacing;</span>
+<span class="nc" id="L208">        return wordSpacing;</span>
     }
 
     /**
@@ -207,10 +213,10 @@ public class TextCSSImpl implements TextCSS
      *
      * @param Color
      */
-    public void setColor(ColourCSS Color)
+    public void setColor(ColourCSSImpl Color)
     {
-<span class="nc" id="L212">        this.Color = Color;</span>
-<span class="nc" id="L213">    }</span>
+<span class="fc" id="L218">        this.color = Color;</span>
+<span class="fc" id="L219">    }</span>
 
     /**
      * Sets the colour
@@ -219,8 +225,8 @@ public class TextCSSImpl implements TextCSS
      */
     public void setColor$(ColourNames Color$)
     {
-<span class="nc" id="L222">        this.Color$ = Color$;</span>
-<span class="nc" id="L223">    }</span>
+<span class="nc" id="L228">        this.color$ = Color$;</span>
+<span class="nc" id="L229">    }</span>
 
     /**
      * Sets the direction
@@ -229,108 +235,108 @@ public class TextCSSImpl implements TextCSS
      */
     public void setDirection(TextDirections Direction)
     {
-<span class="nc" id="L232">        this.Direction = Direction;</span>
-<span class="nc" id="L233">    }</span>
+<span class="nc" id="L238">        this.direction = Direction;</span>
+<span class="nc" id="L239">    }</span>
 
     /**
      * Set the letter spacing
      *
-     * @param Letter_Spacing
+     * @param letterSpacing
      */
-    public void setLetter_Spacing(MeasurementCSS Letter_Spacing)
+    public void setLetterSpacing(MeasurementCSSImpl letterSpacing)
     {
-<span class="nc" id="L242">        this.Letter_Spacing = Letter_Spacing;</span>
-<span class="nc" id="L243">    }</span>
+<span class="nc" id="L248">        this.letterSpacing = letterSpacing;</span>
+<span class="nc" id="L249">    }</span>
 
     /**
      * Line Height
      *
-     * @param Line_Height
+     * @param lineHeight
      */
-    public void setLine_Height(MeasurementCSS Line_Height)
+    public void setLineHeight(MeasurementCSSImpl lineHeight)
     {
-<span class="nc" id="L252">        this.Line_Height = Line_Height;</span>
-<span class="nc" id="L253">    }</span>
+<span class="nc" id="L258">        this.lineHeight = lineHeight;</span>
+<span class="nc" id="L259">    }</span>
 
     /**
      * Text Alignment
      *
-     * @param Text_Align
+     * @param textAlign
      */
-    public void setText_Align(TextAlignments Text_Align)
+    public void setTextAlign(TextAlignments textAlign)
     {
-<span class="nc" id="L262">        this.Text_Align = Text_Align;</span>
-<span class="nc" id="L263">    }</span>
+<span class="fc" id="L268">        this.textAlign = textAlign;</span>
+<span class="fc" id="L269">    }</span>
 
     /**
      * Sets the Text Decoration
      *
-     * @param Text_Decoration
+     * @param textDecoration
      */
-    public void setText_Decoration(TextDecorations Text_Decoration)
+    public void setTextDecoration(TextDecorations textDecoration)
     {
-<span class="nc" id="L272">        this.Text_Decoration = Text_Decoration;</span>
-<span class="nc" id="L273">    }</span>
+<span class="nc" id="L278">        this.textDecoration = textDecoration;</span>
+<span class="nc" id="L279">    }</span>
 
     /**
      * Sets the text indentation
      *
-     * @param Text_Indent
+     * @param textIndent
      */
-    public void setText_Indent(MeasurementCSS Text_Indent)
+    public void setTextIndent(MeasurementCSSImpl textIndent)
     {
-<span class="nc" id="L282">        this.Text_Indent = Text_Indent;</span>
-<span class="nc" id="L283">    }</span>
+<span class="nc" id="L288">        this.textIndent = textIndent;</span>
+<span class="nc" id="L289">    }</span>
 
     /**
      * Sets the Text Transforms
      *
-     * @param Text_Transform
+     * @param textTransform
      */
-    public void setText_Transform(TextTransforms Text_Transform)
+    public void setTextTransform(TextTransforms textTransform)
     {
-<span class="nc" id="L292">        this.Text_Transform = Text_Transform;</span>
-<span class="nc" id="L293">    }</span>
+<span class="nc" id="L298">        this.textTransform = textTransform;</span>
+<span class="nc" id="L299">    }</span>
 
     /**
      * Used together with the direction property to set or return whether the text should be overridden to support multiple languages in the same document
      *
-     * @param Unicode_Bidi
+     * @param unicodeBidi
      */
-    public void setUnicode_Bidi(UnicodeBidis Unicode_Bidi)
+    public void setUnicodeBidi(UnicodeBidis unicodeBidi)
     {
-<span class="nc" id="L302">        this.Unicode_Bidi = Unicode_Bidi;</span>
-<span class="nc" id="L303">    }</span>
+<span class="nc" id="L308">        this.unicodeBidi = unicodeBidi;</span>
+<span class="nc" id="L309">    }</span>
 
     /**
      * Sets the vertical alignment
      *
-     * @param Vertical_Align
+     * @param verticalAlign
      */
-    public void setVertical_Align(VerticalAlignments Vertical_Align)
+    public void setVerticalAlign(VerticalAlignments verticalAlign)
     {
-<span class="nc" id="L312">        this.Vertical_Align = Vertical_Align;</span>
-<span class="nc" id="L313">    }</span>
+<span class="nc" id="L318">        this.verticalAlign = verticalAlign;</span>
+<span class="nc" id="L319">    }</span>
 
     /**
      * Sets the white space
      *
-     * @param White_Space
+     * @param whiteSpace
      */
-    public void setWhite_Space(WhiteSpacing White_Space)
+    public void setWhiteSpace(WhiteSpacing whiteSpace)
     {
-<span class="nc" id="L322">        this.White_Space = White_Space;</span>
-<span class="nc" id="L323">    }</span>
+<span class="nc" id="L328">        this.whiteSpace = whiteSpace;</span>
+<span class="nc" id="L329">    }</span>
 
     /**
      * Sets the word spacing
      *
-     * @param Word_Spacing
+     * @param wordSpacing
      */
-    public void setWord_Spacing(MeasurementCSS Word_Spacing)
+    public void setWordSpacing(MeasurementCSSImpl wordSpacing)
     {
-<span class="nc" id="L332">        this.Word_Spacing = Word_Spacing;</span>
-<span class="nc" id="L333">    }</span>
+<span class="nc" id="L338">        this.wordSpacing = wordSpacing;</span>
+<span class="nc" id="L339">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

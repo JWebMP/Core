@@ -1,7 +1,7 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.padding;
 
-import za.co.mmagon.jwebswing.base.client.CSSVersions;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
 
 /**
  *
@@ -51,4 +51,11 @@ public enum PaddingSetting implements CSSEnumeration<PaddingSetting>
     {
         return CSSVersions.CSS3;
     }
+
+    @Override
+    public String toString()
+    {
+        return name().toLowerCase();
+    }
+
 }

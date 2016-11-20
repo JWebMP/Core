@@ -16,8 +16,10 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.padding;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * To shorten the code, it is possible to specify all the margin properties in one property.
@@ -25,48 +27,51 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class PaddingImpl implements Padding
+public class PaddingImpl extends CSSImplementationAdapter&lt;Padding, PaddingImpl&gt; implements CSSImplementationClass&lt;Padding, PaddingImpl&gt;
 {
 
+    private static final long serialVersionUID = 1L;
+
+    @CSSDetail(cssName = &quot;padding-right&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl paddingRight;
+    @CSSDetail(cssName = &quot;padding-right&quot;, cssVersion = CSSVersions.CSS21)
+    private PaddingSetting paddingRight$;
+    @CSSDetail(cssName = &quot;padding-left&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl paddingLeft;
+    @CSSDetail(cssName = &quot;padding-left&quot;, cssVersion = CSSVersions.CSS21)
+    private PaddingSetting paddingLeft$;
+    @CSSDetail(cssName = &quot;padding-top&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl paddingTop;
+    @CSSDetail(cssName = &quot;padding-top&quot;, cssVersion = CSSVersions.CSS21)
+    private PaddingSetting paddingTop$;
+    @CSSDetail(cssName = &quot;padding-bottom&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl paddingBottom;
+    @CSSDetail(cssName = &quot;padding-bottom&quot;, cssVersion = CSSVersions.CSS21)
+    private PaddingSetting paddingBottom$;
+
+    /**
+     * Constructs a new padding object
+     */
     public PaddingImpl()
-<span class="fc" id="L32">    {</span>
-<span class="fc" id="L33">    }</span>
+<span class="fc" id="L56">    {</span>
+        //nothing needed
+<span class="fc" id="L58">    }</span>
 
     @Override
     public String toString()
     {
-<span class="fc" id="L38">        String out = &quot;&quot;;</span>
-<span class="fc" id="L39">        out += Padding_Top + &quot; &quot;;</span>
-<span class="fc" id="L40">        out += Padding_Top$ + &quot; &quot;;</span>
-<span class="fc" id="L41">        out += Padding_Right + &quot; &quot;;</span>
-<span class="fc" id="L42">        out += Padding_Right$ + &quot; &quot;;</span>
-<span class="fc" id="L43">        out += Padding_Bottom + &quot; &quot;;</span>
-<span class="fc" id="L44">        out += Padding_Bottom$ + &quot; &quot;;</span>
-<span class="fc" id="L45">        out += Padding_Left + &quot; &quot;;</span>
-<span class="fc" id="L46">        out += Padding_Left$ + &quot; &quot;;</span>
-<span class="fc" id="L47">        out = out.replaceAll(&quot;null&quot;, &quot;&quot;);</span>
-<span class="fc" id="L48">        out = out.trim();</span>
-<span class="fc" id="L49">        return out;</span>
-    }
-
-    private MeasurementCSS Padding_Right;
-    private PaddingSetting Padding_Right$;
-    private MeasurementCSS Padding_Left;
-    private PaddingSetting Padding_Left$;
-    private MeasurementCSS Padding_Top;
-    private PaddingSetting Padding_Top$;
-    private MeasurementCSS Padding_Bottom;
-    private PaddingSetting Padding_Bottom$;
-
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @return
-     */
-    @Override
-    public MeasurementCSS Padding_Right()
-    {
-<span class="nc" id="L69">        return Padding_Right;</span>
+<span class="nc" id="L63">        String out = &quot;&quot;;</span>
+<span class="nc" id="L64">        out += paddingTop + &quot; &quot;;</span>
+<span class="nc" id="L65">        out += paddingTop$ + &quot; &quot;;</span>
+<span class="nc" id="L66">        out += paddingRight + &quot; &quot;;</span>
+<span class="nc" id="L67">        out += paddingRight$ + &quot; &quot;;</span>
+<span class="nc" id="L68">        out += paddingBottom + &quot; &quot;;</span>
+<span class="nc" id="L69">        out += paddingBottom$ + &quot; &quot;;</span>
+<span class="nc" id="L70">        out += paddingLeft + &quot; &quot;;</span>
+<span class="nc" id="L71">        out += paddingLeft$ + &quot; &quot;;</span>
+<span class="nc" id="L72">        out = out.replaceAll(&quot;null&quot;, &quot;&quot;);</span>
+<span class="nc" id="L73">        out = out.trim();</span>
+<span class="nc" id="L74">        return out;</span>
     }
 
     /**
@@ -74,10 +79,9 @@ public class PaddingImpl implements Padding
      *
      * @return
      */
-    @Override
-    public PaddingSetting Padding_Right$()
+    public MeasurementCSSImpl getPaddingRight()
     {
-<span class="nc" id="L80">        return Padding_Right$;</span>
+<span class="nc" id="L84">        return paddingRight;</span>
     }
 
     /**
@@ -85,10 +89,9 @@ public class PaddingImpl implements Padding
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Padding_Left()
+    public PaddingSetting getPaddingRight$()
     {
-<span class="nc" id="L91">        return Padding_Left;</span>
+<span class="nc" id="L94">        return paddingRight$;</span>
     }
 
     /**
@@ -96,10 +99,9 @@ public class PaddingImpl implements Padding
      *
      * @return
      */
-    @Override
-    public PaddingSetting Padding_Left$()
+    public MeasurementCSSImpl getPaddingLeft()
     {
-<span class="nc" id="L102">        return Padding_Left$;</span>
+<span class="nc" id="L104">        return paddingLeft;</span>
     }
 
     /**
@@ -107,79 +109,81 @@ public class PaddingImpl implements Padding
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Padding_Top()
+    public PaddingSetting getPaddingLeft$()
     {
-<span class="nc" id="L113">        return Padding_Top;</span>
+<span class="nc" id="L114">        return paddingLeft$;</span>
+    }
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     *
+     * @return
+     */
+    public MeasurementCSSImpl getPaddingTop()
+    {
+<span class="nc" id="L124">        return paddingTop;</span>
     }
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      * &lt;p&gt;
+     * @param paddingRight
      */
-    public void setPadding_Right(MeasurementCSS Padding_Right)
+    public void setPaddingRight(MeasurementCSSImpl paddingRight)
     {
-<span class="nc" id="L122">        this.Padding_Right = Padding_Right;</span>
-<span class="nc" id="L123">    }</span>
+<span class="nc" id="L134">        this.paddingRight = paddingRight;</span>
+<span class="nc" id="L135">    }</span>
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      * &lt;p&gt;
+     * @param paddingRight$
      */
-    public void setPadding_Right$(PaddingSetting Padding_Right$)
+    public void setPaddingRight$(PaddingSetting paddingRight$)
     {
-<span class="nc" id="L131">        this.Padding_Right$ = Padding_Right$;</span>
-<span class="nc" id="L132">    }</span>
-
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     * &lt;p&gt;
-     * &lt;p&gt;
-     */
-    public void setPadding_Left(MeasurementCSS Padding_Left)
-    {
-<span class="nc" id="L141">        this.Padding_Left = Padding_Left;</span>
-<span class="nc" id="L142">    }</span>
+<span class="nc" id="L144">        this.paddingRight$ = paddingRight$;</span>
+<span class="nc" id="L145">    }</span>
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      * &lt;p&gt;
      * &lt;p&gt;
+     * @param paddingLeft
      */
-    public void setPadding_Left$(PaddingSetting Padding_Left$)
+    public void setPaddingLeft(MeasurementCSSImpl paddingLeft)
     {
-<span class="nc" id="L151">        this.Padding_Left$ = Padding_Left$;</span>
-<span class="nc" id="L152">    }</span>
+<span class="nc" id="L155">        this.paddingLeft = paddingLeft;</span>
+<span class="nc" id="L156">    }</span>
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      * &lt;p&gt;
+     * &lt;p&gt;
+     * @param paddingLeft$
      */
-    public void setPadding_Top(MeasurementCSS Padding_Top)
+    public void setPaddingLeft$(PaddingSetting paddingLeft$)
     {
-<span class="nc" id="L160">        this.Padding_Top = Padding_Top;</span>
-<span class="nc" id="L161">    }</span>
+<span class="nc" id="L166">        this.paddingLeft$ = paddingLeft$;</span>
+<span class="nc" id="L167">    }</span>
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @return
+     * &lt;p&gt;
+     * @param paddingTop
      */
-    @Override
-    public PaddingSetting Padding_Top$()
+    public void setPaddingTop(MeasurementCSSImpl paddingTop)
     {
-<span class="nc" id="L171">        return Padding_Top$;</span>
-    }
+<span class="nc" id="L176">        this.paddingTop = paddingTop;</span>
+<span class="nc" id="L177">    }</span>
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Padding_Bottom()
+    public PaddingSetting getPaddingTop$()
     {
-<span class="nc" id="L182">        return Padding_Bottom;</span>
+<span class="nc" id="L186">        return paddingTop$;</span>
     }
 
     /**
@@ -187,46 +191,49 @@ public class PaddingImpl implements Padding
      *
      * @return
      */
-    @Override
-    public PaddingSetting Padding_Bottom$()
+    public MeasurementCSSImpl getPaddingBottom()
     {
-<span class="nc" id="L193">        return Padding_Bottom$;</span>
+<span class="nc" id="L196">        return paddingBottom;</span>
     }
 
     /**
      * The CSS margin properties set the size of the white space OUTSIDE the border.
      *
-     * @param Padding_Top$
+     * @return
      */
-    public void setPadding_Top$(PaddingSetting Padding_Top$)
+    public PaddingSetting getPaddingBottom$()
     {
-<span class="nc" id="L203">        this.Padding_Top$ = Padding_Top$;</span>
-<span class="nc" id="L204">    }</span>
-
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @param Padding_Bottom
-     */
-    public void setPadding_Bottom(MeasurementCSS Padding_Bottom)
-    {
-<span class="nc" id="L213">        this.Padding_Bottom = Padding_Bottom;</span>
-<span class="nc" id="L214">    }</span>
-
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @param Padding_Bottom$
-     */
-    public void setPadding_Bottom$(PaddingSetting Padding_Bottom$)
-    {
-<span class="nc" id="L223">        this.Padding_Bottom$ = Padding_Bottom$;</span>
-<span class="nc" id="L224">    }</span>
-
-    @Override
-    public Class&lt;? extends Annotation&gt; annotationType()
-    {
-<span class="nc" id="L229">        return Padding.class;</span>
+<span class="nc" id="L206">        return paddingBottom$;</span>
     }
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     *
+     * @param paddingTop$
+     */
+    public void setPaddingTop$(PaddingSetting paddingTop$)
+    {
+<span class="nc" id="L216">        this.paddingTop$ = paddingTop$;</span>
+<span class="nc" id="L217">    }</span>
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     *
+     * @param paddingBottom
+     */
+    public void setPaddingBottom(MeasurementCSSImpl paddingBottom)
+    {
+<span class="nc" id="L226">        this.paddingBottom = paddingBottom;</span>
+<span class="nc" id="L227">    }</span>
+
+    /**
+     * The CSS margin properties set the size of the white space OUTSIDE the border.
+     *
+     * @param paddingBottom$
+     */
+    public void setPaddingBottom$(PaddingSetting paddingBottom$)
+    {
+<span class="nc" id="L236">        this.paddingBottom$ = paddingBottom$;</span>
+<span class="nc" id="L237">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

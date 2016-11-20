@@ -16,42 +16,55 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 
-import java.lang.annotation.Annotation;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
 
 /**
+ * A default border
  *
  * @author GedMarc
  * @since 18 Jan 2016
  */
-<span class="fc" id="L26">public class BorderImpl implements Border</span>
+<span class="fc" id="L29">public class BorderImpl extends CSSImplementationAdapter&lt;Border, BorderImpl&gt; implements CSSImplementationClass&lt;Border, BorderImpl&gt;</span>
 {
 
-    private BorderLeftCSS Border;
+    private static final long serialVersionUID = 1L;
+    @CSSDetail(cssName = &quot;border-bottom-color&quot;, cssVersion = CSSVersions.CSS21)
+    private BorderLeftCSSImpl border;
 
     @Override
     public String toString()
     {
-<span class="pc bpc" id="L34" title="1 of 2 branches missed.">        if (Border != null)</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if (border != null)</span>
         {
-<span class="fc" id="L36">            return Border.toString();</span>
+<span class="nc" id="L41">            return border.toString();</span>
         }
         else
         {
-<span class="nc" id="L40">            return &quot;&quot;;</span>
+<span class="nc" id="L45">            return &quot;&quot;;</span>
         }
     }
 
-    @Override
-    public BorderLeftCSS Border()
+    /**
+     * Returns the border
+     *
+     * @return
+     */
+    public BorderLeftCSSImpl getBorder()
     {
-<span class="nc" id="L47">        return Border;</span>
+<span class="nc" id="L56">        return border;</span>
     }
 
-    @Override
-    public Class&lt;? extends Annotation&gt; annotationType()
+    /**
+     * Sets the border
+     *
+     * @param Border
+     */
+    public void setBorder(BorderLeftCSSImpl Border)
     {
-<span class="nc" id="L53">        return Border.class;</span>
-    }
+<span class="nc" id="L66">        this.border = Border;</span>
+<span class="nc" id="L67">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

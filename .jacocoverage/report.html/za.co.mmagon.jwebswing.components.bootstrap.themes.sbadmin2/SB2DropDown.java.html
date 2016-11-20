@@ -23,8 +23,7 @@ import za.co.mmagon.jwebswing.base.html.List;
 import za.co.mmagon.jwebswing.base.html.ListItem;
 import za.co.mmagon.jwebswing.base.html.attributes.ButtonAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.LinkAttributes;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.lists.ListStyleType;
+import za.co.mmagon.jwebswing.htmlbuilder.css.lists.*;
 
 /**
  * A drop down list item for the top nav bar. Comes out as an icon
@@ -34,20 +33,20 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.lists.ListStyleType;
  * @version 1.0
  *
  */
-@CSS(List_Style_Type = ListStyleType.none)
+@ListCSS(ListStyleType = ListStyleType.none)
 public class SB2DropDown extends ListItem
 {
 
     private static final long serialVersionUID = 1L;
-    
+
     private Component dropDownComponent;
     private List dropDownContents;
 
     public SB2DropDown()
     {
-<span class="nc" id="L48">        super();</span>
-<span class="nc" id="L49">        addClass(SB2ThemeClasses.DropDown);</span>
-<span class="nc" id="L50">    }</span>
+<span class="nc" id="L47">        super();</span>
+<span class="nc" id="L48">        addClass(SB2ThemeClasses.DropDown);</span>
+<span class="nc" id="L49">    }</span>
 
     /**
      * Returns the drop down component
@@ -56,11 +55,11 @@ public class SB2DropDown extends ListItem
      */
     public Component getDropDownComponent()
     {
-<span class="nc bnc" id="L59" title="All 2 branches missed.">        if(dropDownComponent == null)</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        if (dropDownComponent == null)</span>
         {
-<span class="nc" id="L61">            setDropDownComponent(new Link(&quot;#&quot;));</span>
+<span class="nc" id="L60">            setDropDownComponent(new Link(&quot;#&quot;));</span>
         }
-<span class="nc" id="L63">        return dropDownComponent;</span>
+<span class="nc" id="L62">        return dropDownComponent;</span>
     }
 
     /**
@@ -70,19 +69,19 @@ public class SB2DropDown extends ListItem
      */
     public void setDropDownComponent(Link dropDownComponent)
     {
-<span class="nc" id="L73">        getChildren().remove(this.dropDownComponent);</span>
-<span class="nc" id="L74">        this.dropDownComponent = dropDownComponent;</span>
-<span class="nc bnc" id="L75" title="All 2 branches missed.">        if (this.dropDownComponent != null)</span>
+<span class="nc" id="L72">        getChildren().remove(this.dropDownComponent);</span>
+<span class="nc" id="L73">        this.dropDownComponent = dropDownComponent;</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (this.dropDownComponent != null)</span>
         {
-<span class="nc" id="L77">            getChildren().add(this.dropDownComponent);</span>
-<span class="nc" id="L78">            dropDownComponent.addClass(SB2ThemeClasses.DropDown_Toggle);</span>
-<span class="nc" id="L79">            dropDownComponent.addAttribute(LinkAttributes.Data_Toggle, &quot;dropdown&quot;);</span>
-<span class="nc bnc" id="L80" title="All 2 branches missed.">            if (dropDownContents != null)</span>
+<span class="nc" id="L76">            getChildren().add(this.dropDownComponent);</span>
+<span class="nc" id="L77">            dropDownComponent.addClass(SB2ThemeClasses.DropDown_Toggle);</span>
+<span class="nc" id="L78">            dropDownComponent.addAttribute(LinkAttributes.Data_Toggle, &quot;dropdown&quot;);</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">            if (dropDownContents != null)</span>
             {
-               // dropDownComponent.addAttribute(LinkAttributes.Data_Target, dropDownContents.getID(true));
+                // dropDownComponent.addAttribute(LinkAttributes.Data_Target, dropDownContents.getID(true));
             }
         }
-<span class="nc" id="L85">    }</span>
+<span class="nc" id="L84">    }</span>
 
     /**
      * Sets the drop down component
@@ -91,23 +90,24 @@ public class SB2DropDown extends ListItem
      */
     public void setDropDownComponent(Button dropDownComponent)
     {
-<span class="nc" id="L94">        getChildren().remove(this.dropDownComponent);</span>
-<span class="nc" id="L95">        this.dropDownComponent = dropDownComponent;</span>
-<span class="nc bnc" id="L96" title="All 2 branches missed.">        if (this.dropDownComponent != null)</span>
+<span class="nc" id="L93">        getChildren().remove(this.dropDownComponent);</span>
+<span class="nc" id="L94">        this.dropDownComponent = dropDownComponent;</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        if (this.dropDownComponent != null)</span>
         {
-<span class="nc" id="L98">            getChildren().add(this.getDropDownComponent());</span>
-<span class="nc" id="L99">            getDropDownComponent().addClass(SB2ThemeClasses.DropDown_Toggle);</span>
-<span class="nc" id="L100">            getDropDownComponent().addAttribute(ButtonAttributes.Data_Toggle, &quot;dropdown&quot;);</span>
-<span class="nc bnc" id="L101" title="All 2 branches missed.">            if (getDropDownContents() != null)</span>
+<span class="nc" id="L97">            getChildren().add(this.getDropDownComponent());</span>
+<span class="nc" id="L98">            getDropDownComponent().addClass(SB2ThemeClasses.DropDown_Toggle);</span>
+<span class="nc" id="L99">            getDropDownComponent().addAttribute(ButtonAttributes.Data_Toggle, &quot;dropdown&quot;);</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">            if (getDropDownContents() != null)</span>
             {
-              //  dropDownComponent.addAttribute(ButtonAttributes.Data_Target, dropDownContents.getID(true));
+                //  dropDownComponent.addAttribute(ButtonAttributes.Data_Target, dropDownContents.getID(true));
             }
         }
-<span class="nc" id="L106">    }</span>
-    
+<span class="nc" id="L105">    }</span>
+
     /**
      * Adds a menu divider
-     * @return 
+     *
+     * @return
      */
     public ListItem addDivider()
     {
@@ -124,7 +124,7 @@ public class SB2DropDown extends ListItem
      */
     public List getDropDownContents()
     {
-<span class="nc bnc" id="L127" title="All 2 branches missed.">        if(dropDownContents == null)</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">        if (dropDownContents == null)</span>
         {
 <span class="nc" id="L129">            setDropDownContents(new List(false));</span>
         }
@@ -146,7 +146,7 @@ public class SB2DropDown extends ListItem
 <span class="nc" id="L146">            this.dropDownContents.addClass(SB2ThemeClasses.DropDown_Menu);</span>
 <span class="nc bnc" id="L147" title="All 2 branches missed.">            if (dropDownComponent != null)</span>
             {
-               //  dropDownComponent.addAttribute(LinkAttributes.Data_Target, dropDownContents.getID(true));
+                //  dropDownComponent.addAttribute(LinkAttributes.Data_Target, dropDownContents.getID(true));
             }
         }
 <span class="nc" id="L152">    }</span>

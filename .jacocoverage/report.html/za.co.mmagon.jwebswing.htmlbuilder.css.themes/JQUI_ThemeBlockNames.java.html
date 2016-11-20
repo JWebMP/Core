@@ -1,185 +1,175 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JQUI_ThemeBlockNames.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.htmlbuilder.css.themes</a> &gt; <span class="el_source">JQUI_ThemeBlockNames.java</span></div><h1>JQUI_ThemeBlockNames.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.htmlbuilder.css.themes;
 
-import java.util.EnumSet;
+import java.util.*;
 
 /**
  * All the class names to work with JQuery UI Themes
+ *
  * @author MMagon
  * @since 21 Jul 2013
  * @version 1.0
  */
-<span class="nc" id="L11">public enum JQUI_ThemeBlockNames </span>
+<span class="nc" id="L12">public enum JQUI_ThemeBlockNames</span>
 {
     /**
      * Specifies the container must adopt the widget
      */
-<span class="nc" id="L16">    UI_Widget,</span>
+<span class="nc" id="L17">    UI_Widget,</span>
     /**
      * Container
      */
-<span class="nc" id="L20">    UI_Widget_Content,</span>
+<span class="nc" id="L21">    UI_Widget_Content,</span>
     /**
      * Header
      */
-<span class="nc" id="L24">    UI_Widget_Header,</span>
+<span class="nc" id="L25">    UI_Widget_Header,</span>
     /**
      * Footer
      */
-<span class="nc" id="L28">    UI_Widget_Footer,</span>
+<span class="nc" id="L29">    UI_Widget_Footer,</span>
     /**
      * Widget Shadow
      */
-<span class="nc" id="L32">    UI_Widget_Shadow,</span>
+<span class="nc" id="L33">    UI_Widget_Shadow,</span>
     /**
      * Footer
      */
-<span class="nc" id="L36">    UI_Widget_Input,</span>
-    
-    
+<span class="nc" id="L37">    UI_Widget_Input,</span>
     /**
      * Disabled State
      */
-<span class="nc" id="L42">    UI_State_Disabled,</span>
+<span class="nc" id="L41">    UI_State_Disabled,</span>
     /**
      * Enabled State
      */
-<span class="nc" id="L46">    UI_State_Enabled,</span>
-    
-    
+<span class="nc" id="L45">    UI_State_Enabled,</span>
     /**
      * Hover State
      */
-<span class="nc" id="L52">    UI_State_Hover,</span>
+<span class="nc" id="L49">    UI_State_Hover,</span>
     /**
      * On Focus
      */
-<span class="nc" id="L56">    UI_State_Focus,</span>
+<span class="nc" id="L53">    UI_State_Focus,</span>
     /**
      * On Blur
      */
-<span class="nc" id="L60">    UI_State_Blur,</span>
+<span class="nc" id="L57">    UI_State_Blur,</span>
     /**
      * Active State
      */
-<span class="nc" id="L64">    UI_State_Active,</span>
+<span class="nc" id="L61">    UI_State_Active,</span>
     /**
      * Visited State
      */
-<span class="nc" id="L68">    UI_State_Visited,</span>
+<span class="nc" id="L65">    UI_State_Visited,</span>
     /**
      * Link State
      */
-<span class="nc" id="L72">    UI_State_Link,</span>
-    
-    
+<span class="nc" id="L69">    UI_State_Link,</span>
     /**
      * State Default
      */
-<span class="nc" id="L78">    UI_State_Default,</span>
+<span class="nc" id="L73">    UI_State_Default,</span>
     /**
      * State Highlighted
      */
-<span class="nc" id="L82">    UI_State_Highlight,</span>
+<span class="nc" id="L77">    UI_State_Highlight,</span>
     /**
      * State Error
      */
-<span class="nc" id="L86">    UI_State_Error,</span>
-    
+<span class="nc" id="L81">    UI_State_Error,</span>
     /**
      * Priorities
      */
-    
     /**
      * Primary Priority
      */
-<span class="nc" id="L95">    UI_Priority_Primary,</span>
+<span class="nc" id="L88">    UI_Priority_Primary,</span>
     /**
      * Secondary Priority
      */
-<span class="nc" id="L99">    UI_Priority_Secondary,</span>
-    
-    
+<span class="nc" id="L92">    UI_Priority_Secondary,</span>
     /**
      * The Layout Component Content
      */
-<span class="nc" id="L105">    UI_Layout_Content,</span>
+<span class="nc" id="L96">    UI_Layout_Content,</span>
     /**
      * The Layout Component Content
      */
-<span class="nc" id="L109">    UI_Layout_North,</span>
+<span class="nc" id="L100">    UI_Layout_North,</span>
     /**
      * The Layout Component Content
      */
-<span class="nc" id="L113">    UI_Layout_South,</span>
+<span class="nc" id="L104">    UI_Layout_South,</span>
     /**
      * The Layout Component Content
      */
-<span class="nc" id="L117">    UI_Layout_East,</span>
+<span class="nc" id="L108">    UI_Layout_East,</span>
     /**
      * The Layout Component Content
      */
-<span class="nc" id="L121">    UI_Layout_Center,</span>
+<span class="nc" id="L112">    UI_Layout_Center,</span>
     /**
      * The Layout Component Content
      */
-<span class="nc" id="L125">    UI_Layout_West,</span>
-    
+<span class="nc" id="L116">    UI_Layout_West,</span>
     /**
      * Apply corners to all
      */
-<span class="nc" id="L130">    UI_Corner_All,</span>
+<span class="nc" id="L120">    UI_Corner_All,</span>
     /**
      * Corners on the Top
      */
-<span class="nc" id="L134">    UI_Corner_Top,</span>
+<span class="nc" id="L124">    UI_Corner_Top,</span>
     /**
      * Corners on the left
      */
-<span class="nc" id="L138">    UI_Corner_Left,</span>
+<span class="nc" id="L128">    UI_Corner_Left,</span>
     /**
      * Corners on the right
      */
-<span class="nc" id="L142">    UI_Corner_Right,</span>
+<span class="nc" id="L132">    UI_Corner_Right,</span>
     /**
      * Corners on the bottom
      */
-<span class="nc" id="L146">    UI_Corner_Bottom;</span>
-    
-    
+<span class="nc" id="L136">    UI_Corner_Bottom;</span>
+
     /**
      * Enabled or Disabled States
      */
-<span class="nc" id="L152">    protected static final EnumSet&lt;JQUI_ThemeBlockNames&gt; ThemeStates = EnumSet.of(UI_State_Enabled, UI_State_Disabled);</span>
-    
+<span class="nc" id="L141">    protected static final EnumSet&lt;JQUI_ThemeBlockNames&gt; ThemeStates = EnumSet.of(UI_State_Enabled, UI_State_Disabled);</span>
+
     /**
      * Priorities
-     **/
-<span class="nc" id="L157">    protected static final EnumSet&lt;JQUI_ThemeBlockNames&gt; ThemePriorities = EnumSet.of(UI_Priority_Primary, UI_Priority_Secondary);</span>
-    
+     *
+     */
+<span class="nc" id="L147">    protected static final EnumSet&lt;JQUI_ThemeBlockNames&gt; ThemePriorities = EnumSet.of(UI_Priority_Primary, UI_Priority_Secondary);</span>
+
     /**
      * Link Types
      */
-<span class="nc" id="L162">    protected static final EnumSet&lt;JQUI_ThemeBlockNames&gt; ThemeLinks = EnumSet.of(UI_State_Active, UI_State_Hover,UI_State_Link,UI_State_Visited);</span>
-    
+<span class="nc" id="L152">    protected static final EnumSet&lt;JQUI_ThemeBlockNames&gt; ThemeLinks = EnumSet.of(UI_State_Active, UI_State_Hover, UI_State_Link, UI_State_Visited);</span>
+
     /**
      * Theme Status (Error,Highlight,Default)
      */
-<span class="nc" id="L167">    protected static final EnumSet&lt;JQUI_ThemeBlockNames&gt; ThemeStatus = EnumSet.of(UI_State_Error,UI_State_Highlight,UI_State_Default);</span>
-    
+<span class="nc" id="L157">    protected static final EnumSet&lt;JQUI_ThemeBlockNames&gt; ThemeStatus = EnumSet.of(UI_State_Error, UI_State_Highlight, UI_State_Default);</span>
+
     /**
      * Layout Specific (North, East, West, South, Center, Content)
      */
-<span class="nc" id="L172">    protected static final EnumSet&lt;JQUI_ThemeBlockNames&gt; ThemeLayout = EnumSet.of(UI_Layout_Center,UI_Layout_Content,UI_Layout_East,UI_Layout_North,UI_Layout_South, UI_Layout_West);</span>
-    
+<span class="nc" id="L162">    protected static final EnumSet&lt;JQUI_ThemeBlockNames&gt; ThemeLayout = EnumSet.of(UI_Layout_Center, UI_Layout_Content, UI_Layout_East, UI_Layout_North, UI_Layout_South, UI_Layout_West);</span>
+
     /**
      * Radius Settings
      */
-<span class="nc" id="L177">    protected static final EnumSet&lt;JQUI_ThemeBlockNames&gt; ThemeCorners = EnumSet.of(UI_Corner_All,UI_Corner_Top,UI_Corner_Left,UI_Corner_Right,UI_Corner_Bottom);</span>
-    
+<span class="nc" id="L167">    protected static final EnumSet&lt;JQUI_ThemeBlockNames&gt; ThemeCorners = EnumSet.of(UI_Corner_All, UI_Corner_Top, UI_Corner_Left, UI_Corner_Right, UI_Corner_Bottom);</span>
+
     @Override
     public String toString()
     {
-<span class="nc" id="L182">        return name().toLowerCase().replace(&quot;_&quot;, &quot;-&quot;);</span>
+<span class="nc" id="L172">        return name().toLowerCase().replace(&quot;_&quot;, &quot;-&quot;);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

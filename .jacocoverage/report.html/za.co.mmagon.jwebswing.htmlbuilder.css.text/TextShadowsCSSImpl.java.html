@@ -16,42 +16,47 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.text;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
+ * Defines text shadows
  *
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class TextShadowsCSSImpl implements TextShadows
+public class TextShadowsCSSImpl extends CSSImplementationAdapter&lt;TextShadows, TextShadowsCSSImpl&gt; implements CSSImplementationClass&lt;TextShadows, TextShadowsCSSImpl&gt;
 {
 
+    private static final long serialVersionUID = 1L;
+
+    @CSSDetail(cssName = &quot;h-shadow&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl hShadow;
+    @CSSDetail(cssName = &quot;v-shadow&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl vShadow;
+    @CSSDetail(cssName = &quot;blur-radius&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl blurRadius;
+    @CSSDetail(cssName = &quot;color&quot;, cssVersion = CSSVersions.CSS21)
+    private ColourCSSImpl color;
+
+    /**
+     * Constructs a new text shadow instance
+     */
     public TextShadowsCSSImpl()
-<span class="nc" id="L32">    {</span>
-<span class="nc" id="L33">    }</span>
-
-    private MeasurementCSS H_Shadow;
-    private MeasurementCSS V_Shadow;
-    private MeasurementCSS Blur_Radius;
-    private ColourCSS Color;
-
-    @Override
-    public Class&lt;? extends Annotation&gt; annotationType()
-    {
-<span class="nc" id="L43">        return TextShadows.class;</span>
-    }
+<span class="nc" id="L49">    {</span>
+<span class="nc" id="L50">    }</span>
 
     /**
      * Required. The position of the horizontal shadow. Negative values are allowed
      *
      * @return
      */
-    @Override
-    public MeasurementCSS H_Shadow()
+    public MeasurementCSSImpl getHShadow()
     {
-<span class="nc" id="L54">        return H_Shadow;</span>
+<span class="nc" id="L59">        return hShadow;</span>
     }
 
     /**
@@ -59,10 +64,9 @@ public class TextShadowsCSSImpl implements TextShadows
      *
      * @return
      */
-    @Override
-    public MeasurementCSS V_Shadow()
+    public MeasurementCSSImpl getVShadow()
     {
-<span class="nc" id="L65">        return V_Shadow;</span>
+<span class="nc" id="L69">        return vShadow;</span>
     }
 
     /**
@@ -70,10 +74,9 @@ public class TextShadowsCSSImpl implements TextShadows
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Blur_Radius()
+    public MeasurementCSSImpl getBlurRadius()
     {
-<span class="nc" id="L76">        return Blur_Radius;</span>
+<span class="nc" id="L79">        return blurRadius;</span>
     }
 
     /**
@@ -81,49 +84,50 @@ public class TextShadowsCSSImpl implements TextShadows
      *
      * @return
      */
-    @Override
-    public ColourCSS Color()
+    public ColourCSSImpl getColour()
     {
-<span class="nc" id="L87">        return Color;</span>
+<span class="nc" id="L89">        return color;</span>
     }
 
     /**
      * Required. The position of the horizontal shadow. Negative values are allowed
      * &lt;p&gt;
+     * @param hShadow
      */
-    public void setH_Shadow(MeasurementCSS H_Shadow)
+    public void sethShadow(MeasurementCSSImpl hShadow)
     {
-<span class="nc" id="L96">        this.H_Shadow = H_Shadow;</span>
-<span class="nc" id="L97">    }</span>
+<span class="nc" id="L99">        this.hShadow = hShadow;</span>
+<span class="nc" id="L100">    }</span>
 
     /**
      * Required. The position of the vertical shadow. Negative values are allowed
      * &lt;p&gt;
+     * @param vShadow
      */
-    public void setV_Shadow(MeasurementCSS V_Shadow)
+    public void setvShadow(MeasurementCSSImpl vShadow)
     {
-<span class="nc" id="L105">        this.V_Shadow = V_Shadow;</span>
-<span class="nc" id="L106">    }</span>
+<span class="nc" id="L109">        this.vShadow = vShadow;</span>
+<span class="nc" id="L110">    }</span>
 
     /**
      * Sets the blur radius Default is 0
      *
-     * @param Blur_Radius
+     * @param blurRadius
      */
-    public void setBlur_Radius(MeasurementCSS Blur_Radius)
+    public void setBlurRadius(MeasurementCSSImpl blurRadius)
     {
-<span class="nc" id="L115">        this.Blur_Radius = Blur_Radius;</span>
-<span class="nc" id="L116">    }</span>
+<span class="nc" id="L119">        this.blurRadius = blurRadius;</span>
+<span class="nc" id="L120">    }</span>
 
     /**
      * Set the colour
      *
      * @param Color
      */
-    public void setColor(ColourCSS Color)
+    public void setColour(ColourCSSImpl Color)
     {
-<span class="nc" id="L125">        this.Color = Color;</span>
-<span class="nc" id="L126">    }</span>
+<span class="nc" id="L129">        this.color = Color;</span>
+<span class="nc" id="L130">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

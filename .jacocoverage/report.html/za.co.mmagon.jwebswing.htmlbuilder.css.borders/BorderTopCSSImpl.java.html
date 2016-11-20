@@ -16,11 +16,12 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.BorderStyles;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * CSS Border Properties
@@ -30,35 +31,35 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class BorderTopCSSImpl implements BorderTopCSS
+public class BorderTopCSSImpl extends CSSImplementationAdapter&lt;BorderTopCSS, BorderTopCSSImpl&gt; implements CSSImplementationClass&lt;BorderTopCSS, BorderTopCSSImpl&gt;
 {
 
+    private static final long serialVersionUID = 1L;
+
+    @CSSDetail(cssName = &quot;border-top-color&quot;, cssVersion = CSSVersions.CSS21)
+    private ColourCSSImpl borderTopColor;
+    @CSSDetail(cssName = &quot;border-top-color&quot;, cssVersion = CSSVersions.CSS21)
+    private ColourNames borderTopColor$;
+    @CSSDetail(cssName = &quot;border-top-style&quot;, cssVersion = CSSVersions.CSS21)
+    private BorderStyles borderTopStyle;
+    @CSSDetail(cssName = &quot;border-top-width&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl borderTopWidth;
+
     public BorderTopCSSImpl()
-<span class="nc" id="L37">    {</span>
-<span class="nc" id="L38">    }</span>
+<span class="nc" id="L49">    {</span>
+<span class="nc" id="L50">    }</span>
 
     @Override
     public String toString()
     {
-<span class="nc" id="L43">        String out = &quot;&quot;;</span>
-<span class="nc" id="L44">        out += Border_Top_Width + &quot; &quot;;</span>
-<span class="nc" id="L45">        out += Border_Top_Style + &quot; &quot;;</span>
-<span class="nc" id="L46">        out += Border_Top_Color + &quot; &quot;;</span>
-<span class="nc" id="L47">        out += Border_Top_Color$ + &quot; &quot;;</span>
-<span class="nc" id="L48">        out = out.replaceAll(&quot;null&quot;, &quot;&quot;);</span>
-<span class="nc" id="L49">        out = out.trim();</span>
-<span class="nc" id="L50">        return out;</span>
-    }
-
-    private ColourCSS Border_Top_Color;
-    private ColourNames Border_Top_Color$;
-    private BorderStyles Border_Top_Style;
-    private MeasurementCSS Border_Top_Width;
-
-    @Override
-    public Class&lt;? extends Annotation&gt; annotationType()
-    {
-<span class="nc" id="L61">        return BorderCSS.class;</span>
+<span class="nc" id="L55">        String out = &quot;&quot;;</span>
+<span class="nc" id="L56">        out += borderTopWidth + &quot; &quot;;</span>
+<span class="nc" id="L57">        out += borderTopStyle + &quot; &quot;;</span>
+<span class="nc" id="L58">        out += borderTopColor + &quot; &quot;;</span>
+<span class="nc" id="L59">        out += borderTopColor$ + &quot; &quot;;</span>
+<span class="nc" id="L60">        out = out.replaceAll(&quot;null&quot;, &quot;&quot;);</span>
+<span class="nc" id="L61">        out = out.trim();</span>
+<span class="nc" id="L62">        return out;</span>
     }
 
     /**
@@ -66,10 +67,9 @@ public class BorderTopCSSImpl implements BorderTopCSS
      *
      * @return
      */
-    @Override
-    public ColourCSS Border_Top_Color()
+    public ColourCSSImpl getBorderTopColor()
     {
-<span class="nc" id="L72">        return Border_Top_Color;</span>
+<span class="nc" id="L72">        return borderTopColor;</span>
     }
 
     /**
@@ -77,10 +77,9 @@ public class BorderTopCSSImpl implements BorderTopCSS
      *
      * @return
      */
-    @Override
-    public ColourNames Border_Top_Color$()
+    public ColourNames getBorderTopColor$()
     {
-<span class="nc" id="L83">        return Border_Top_Color$;</span>
+<span class="nc" id="L82">        return borderTopColor$;</span>
     }
 
     /**
@@ -88,10 +87,9 @@ public class BorderTopCSSImpl implements BorderTopCSS
      *
      * @return
      */
-    @Override
-    public BorderStyles Border_Top_Style()
+    public BorderStyles getBorderTopStyle()
     {
-<span class="nc" id="L94">        return Border_Top_Style;</span>
+<span class="nc" id="L92">        return borderTopStyle;</span>
     }
 
     /**
@@ -99,51 +97,50 @@ public class BorderTopCSSImpl implements BorderTopCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Border_Top_Width()
+    public MeasurementCSSImpl getBorderTopWidth()
     {
-<span class="nc" id="L105">        return Border_Top_Width;</span>
+<span class="nc" id="L102">        return borderTopWidth;</span>
     }
 
     /**
      * Sets the top colour for the border
      *
-     * @param Border_Top_Color
+     * @param borderTopColor
      */
-    public void setBorder_Top_Color(ColourCSS Border_Top_Color)
+    public void setBorderTopColor(ColourCSSImpl borderTopColor)
     {
-<span class="nc" id="L115">        this.Border_Top_Color = Border_Top_Color;</span>
-<span class="nc" id="L116">    }</span>
+<span class="nc" id="L112">        this.borderTopColor = borderTopColor;</span>
+<span class="nc" id="L113">    }</span>
 
     /**
      * Sets the top colour for the border
      *
-     * @param Border_Top_Color$
+     * @param borderTopColor$
      */
-    public void setBorder_Top_Color$(ColourNames Border_Top_Color$)
+    public void setBorderTopColor$(ColourNames borderTopColor$)
     {
-<span class="nc" id="L125">        this.Border_Top_Color$ = Border_Top_Color$;</span>
-<span class="nc" id="L126">    }</span>
+<span class="nc" id="L122">        this.borderTopColor$ = borderTopColor$;</span>
+<span class="nc" id="L123">    }</span>
 
     /**
      * Sets the top style for the border
      *
-     * @param Border_Top_Style
+     * @param borderTopStyle
      */
-    public void setBorder_Top_Style(BorderStyles Border_Top_Style)
+    public void setBorderTopStyle(BorderStyles borderTopStyle)
     {
-<span class="nc" id="L135">        this.Border_Top_Style = Border_Top_Style;</span>
-<span class="nc" id="L136">    }</span>
+<span class="nc" id="L132">        this.borderTopStyle = borderTopStyle;</span>
+<span class="nc" id="L133">    }</span>
 
     /**
      * Sets the top width for the border
      *
-     * @param Border_Top_Width
+     * @param borderTopWidth
      */
-    public void setBorder_Top_Width(MeasurementCSS Border_Top_Width)
+    public void setBorderTopWidth(MeasurementCSSImpl borderTopWidth)
     {
-<span class="nc" id="L145">        this.Border_Top_Width = Border_Top_Width;</span>
-<span class="nc" id="L146">    }</span>
+<span class="nc" id="L142">        this.borderTopWidth = borderTopWidth;</span>
+<span class="nc" id="L143">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

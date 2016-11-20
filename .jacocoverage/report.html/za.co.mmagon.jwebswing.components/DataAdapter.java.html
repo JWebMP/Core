@@ -16,14 +16,11 @@
  */
 package za.co.mmagon.jwebswing.components;
 
-import com.fasterxml.jackson.annotation.JsonRawValue;
-import com.fasterxml.jackson.annotation.JsonValue;
-import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import com.fasterxml.jackson.annotation.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
 
 /**
  * This Class is a data adapter
@@ -34,9 +31,10 @@ import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
  * @param &lt;F&gt; The given features
  * @param &lt;E&gt; The given events
  * @param &lt;J&gt; This component
+ *
  * @since 01 Jan 2016
  */
-public class DataAdapter&lt;C extends GlobalChildren, A extends Enum &amp; AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component&gt; 
+public class DataAdapter&lt;C extends GlobalChildren, A extends Enum &amp; AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component&gt;
         extends Div&lt;C, A, F, E, J&gt;
 {
 
@@ -50,26 +48,26 @@ public class DataAdapter&lt;C extends GlobalChildren, A extends Enum &amp; Attri
      * @param linkedComponent
      */
     public DataAdapter(Component linkedComponent)
-<span class="fc" id="L53">    {</span>
+<span class="fc" id="L51">    {</span>
         //this.linkedComponent = linkedComponent;
-<span class="fc" id="L55">        setLinkedComponent(linkedComponent);</span>
-<span class="fc" id="L56">    }</span>
+<span class="nc" id="L53">        setLinkedComponent(linkedComponent);</span>
+<span class="nc" id="L54">    }</span>
 
     public String getDataAdapterID()
     {
-<span class="nc" id="L60">        return dataAdapterID;</span>
+<span class="nc" id="L58">        return dataAdapterID;</span>
     }
 
     public final void setDataAdapterID(String dataAdapterID)
     {
-<span class="fc" id="L65">        this.dataAdapterID = dataAdapterID;</span>
-<span class="fc" id="L66">    }</span>
+<span class="nc" id="L63">        this.dataAdapterID = dataAdapterID;</span>
+<span class="nc" id="L64">    }</span>
 
     @JsonRawValue
     @JsonValue
     public String getDAID()
     {
-<span class="fc" id="L72">        return dataAdapterID;</span>
+<span class="fc" id="L70">        return dataAdapterID;</span>
     }
 
     /**
@@ -79,7 +77,7 @@ public class DataAdapter&lt;C extends GlobalChildren, A extends Enum &amp; Attri
      */
     public Component getLinkedComponent()
     {
-<span class="nc" id="L82">        return linkedComponent;</span>
+<span class="nc" id="L80">        return linkedComponent;</span>
     }
 
     /**
@@ -89,15 +87,14 @@ public class DataAdapter&lt;C extends GlobalChildren, A extends Enum &amp; Attri
      */
     public final void setLinkedComponent(Component linkedComponent)
     {
-<span class="fc" id="L92">        linkedComponent.removeVariable(getDAID());</span>
-<span class="fc" id="L93">        this.linkedComponent = linkedComponent;</span>
-<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        if (linkedComponent != null)</span>
+<span class="nc" id="L90">        this.linkedComponent.removeVariable(getDAID());</span>
+<span class="nc" id="L91">        this.linkedComponent = linkedComponent;</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        if (linkedComponent != null)</span>
         {
-<span class="fc" id="L96">            setDataAdapterID(&quot;da&quot; + linkedComponent.getID());</span>
-            //linkedComponent.getDataAdapter().add(this);
-<span class="fc" id="L98">            linkedComponent.addVariable(getDAID());</span>
+<span class="nc" id="L94">            setDataAdapterID(&quot;da&quot; + linkedComponent.getID());</span>
+<span class="nc" id="L95">            linkedComponent.addVariable(getDAID());</span>
         }
-<span class="fc" id="L100">    }</span>
+<span class="nc" id="L97">    }</span>
 
     /**
      * Returns only this data adapters ID for the JSON rendering
@@ -107,7 +104,7 @@ public class DataAdapter&lt;C extends GlobalChildren, A extends Enum &amp; Attri
     @Override
     public String toString()
     {
-<span class="nc" id="L110">        return getDAID();</span>
+<span class="nc" id="L107">        return getDAID();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -32,11 +32,11 @@ public class TableCSSImpl extends CSSImplementationAdapter<TableCSS, TableCSSImp
 
     private static final long serialVersionUID = 1L;
     @CSSDetail(cssName = "border-collapse", cssVersion = CSSVersions.CSS21)
-    public TableBorderCollapse borderCollapse;
+    private TableBorderCollapse borderCollapse;
     @CSSDetail(cssName = "table-caption-side", cssVersion = CSSVersions.CSS21)
-    public TableCaptionSides tableCaptionSide;
+    private TableCaptionSides tableCaptionSide;
     @CSSDetail(cssName = "border-spacing", cssVersion = CSSVersions.CSS21)
-    public MeasurementCSSImpl borderSpacing;
+    private MeasurementCSSImpl borderSpacing;
 
     /**
      * Constructs a new Table CSS class

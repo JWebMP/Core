@@ -16,69 +16,85 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.BorderStyles;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
- * CSS Border Properties
+ * CSS getBorder Properties
  * &lt;p&gt;
  * The CSS border properties allow you to specify the style, width, and color of an element's border.
  * &lt;p&gt;
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class BorderCSSImpl implements BorderCSS
+public class BorderCSSImpl extends CSSImplementationAdapter&lt;BorderCSS, BorderCSSImpl&gt; implements CSSImplementationClass&lt;BorderCSS, BorderCSSImpl&gt;
 {
 
+    @CSSDetail(cssName = &quot;border-bottom-color&quot;, cssVersion = CSSVersions.CSS21)
+    private ColourCSSImpl borderBottomColor;
+    @CSSDetail(cssName = &quot;border-bottom-color&quot;, cssVersion = CSSVersions.CSS21)
+    private ColourNames borderBottomColor$;
+    @CSSDetail(cssName = &quot;border-bottom-style&quot;, cssVersion = CSSVersions.CSS21)
+    private BorderStyles borderBottomStyle;
+    @CSSDetail(cssName = &quot;border-bottom-width&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl borderBottomWidth;
+    @CSSDetail(cssName = &quot;border-left-color&quot;, cssVersion = CSSVersions.CSS21)
+    private ColourCSSImpl borderLeftColor;
+    @CSSDetail(cssName = &quot;border-left-color&quot;, cssVersion = CSSVersions.CSS21)
+    private ColourNames borderLeftColor$;
+    @CSSDetail(cssName = &quot;border-left-Style&quot;, cssVersion = CSSVersions.CSS21)
+    private BorderStyles borderLeftStyle;
+    @CSSDetail(cssName = &quot;border-left-width&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl borderLeftWidth;
+    @CSSDetail(cssName = &quot;border-right-color&quot;, cssVersion = CSSVersions.CSS21)
+    private ColourCSSImpl borderRightColor;
+    @CSSDetail(cssName = &quot;border-right-color&quot;, cssVersion = CSSVersions.CSS21)
+    private ColourNames borderRightColor$;
+    @CSSDetail(cssName = &quot;border-right-style&quot;, cssVersion = CSSVersions.CSS21)
+    private BorderStyles borderRightStyle;
+    @CSSDetail(cssName = &quot;border-right-width&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl borderRightWidth;
+    @CSSDetail(cssName = &quot;border-top-color&quot;, cssVersion = CSSVersions.CSS21)
+    private ColourCSSImpl borderTopColor;
+    @CSSDetail(cssName = &quot;border-top-color&quot;, cssVersion = CSSVersions.CSS21)
+    private ColourNames borderTopColor$;
+    @CSSDetail(cssName = &quot;border-top-style&quot;, cssVersion = CSSVersions.CSS21)
+    private BorderStyles borderTopStyle;
+    @CSSDetail(cssName = &quot;border-top-width&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl borderTopWidth;
+
+    @CSSDetail(cssName = &quot;border&quot;, cssVersion = CSSVersions.CSS21)
+    private Border border;
+    private BorderBottomCSS borderBottom;
+    @CSSDetail(cssName = &quot;border-left&quot;, cssVersion = CSSVersions.CSS21)
+    private BorderBottomCSS borderLeft;
+    @CSSDetail(cssName = &quot;border-right&quot;, cssVersion = CSSVersions.CSS21)
+    private BorderBottomCSS borderRight;
+    @CSSDetail(cssName = &quot;border-top&quot;, cssVersion = CSSVersions.CSS21)
+    private BorderBottomCSS borderTop;
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * A default border
+     */
     public BorderCSSImpl()
-<span class="nc" id="L37">    {</span>
-<span class="nc" id="L38">    }</span>
-
-    private ColourCSS Border_Bottom_Color;
-    private ColourNames Border_Bottom_Color$;
-    private BorderStyles Border_Bottom_Style;
-    private MeasurementCSS Border_Bottom_Width;
-    private ColourCSS Border_Left_Color;
-    private ColourNames Border_Left_Color$;
-    private BorderStyles Border_Left_Style;
-    private MeasurementCSS Border_Left_Width;
-    private ColourCSS Border_Right_Color;
-    private ColourNames Border_Right_Color$;
-    private BorderStyles Border_Right_Style;
-    private MeasurementCSS Border_Right_Width;
-    private ColourCSS Border_Top_Color;
-    private ColourNames Border_Top_Color$;
-    private BorderStyles Border_Top_Style;
-    private MeasurementCSS Border_Top_Width;
-
-    private za.co.mmagon.jwebswing.htmlbuilder.css.borders.Border Border;
-
-    private BorderBottomCSS Border_Bottom;
-
-    private BorderBottomCSS Border_Left;
-
-    private BorderBottomCSS Border_Right;
-
-    private BorderBottomCSS Border_Top;
-
-    @Override
-    public Class&lt;? extends Annotation&gt; annotationType()
-    {
-<span class="nc" id="L70">        return BorderCSS.class;</span>
-    }
+<span class="fc" id="L86">    {</span>
+        //Nothing needed to be done
+<span class="fc" id="L88">    }</span>
 
     /**
      * Sets the color of the bottom border
      *
      * @return
      */
-    @Override
-    public ColourCSS Border_Bottom_Color()
+    public ColourCSSImpl getBorderBottomColor()
     {
-<span class="nc" id="L81">        return Border_Bottom_Color;</span>
+<span class="nc" id="L97">        return borderBottomColor;</span>
     }
 
     /**
@@ -86,10 +102,9 @@ public class BorderCSSImpl implements BorderCSS
      *
      * @return
      */
-    @Override
-    public ColourNames Border_Bottom_Color$()
+    public ColourNames getBorderBottomColor$()
     {
-<span class="nc" id="L92">        return Border_Bottom_Color$;</span>
+<span class="nc" id="L107">        return borderBottomColor$;</span>
     }
 
     /**
@@ -97,10 +112,9 @@ public class BorderCSSImpl implements BorderCSS
      *
      * @return
      */
-    @Override
-    public BorderStyles Border_Bottom_Style()
+    public BorderStyles getBorderBottomStyle()
     {
-<span class="nc" id="L103">        return Border_Bottom_Style;</span>
+<span class="nc" id="L117">        return borderBottomStyle;</span>
     }
 
     /**
@@ -108,10 +122,9 @@ public class BorderCSSImpl implements BorderCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Border_Bottom_Width()
+    public MeasurementCSSImpl getBorderBottomWidth()
     {
-<span class="nc" id="L114">        return Border_Bottom_Width;</span>
+<span class="nc" id="L127">        return borderBottomWidth;</span>
     }
 
     /**
@@ -119,10 +132,9 @@ public class BorderCSSImpl implements BorderCSS
      *
      * @return
      */
-    @Override
-    public ColourCSS Border_Left_Color()
+    public ColourCSSImpl getBorderLeftColor()
     {
-<span class="nc" id="L125">        return Border_Left_Color;</span>
+<span class="nc" id="L137">        return borderLeftColor;</span>
     }
 
     /**
@@ -130,10 +142,9 @@ public class BorderCSSImpl implements BorderCSS
      *
      * @return
      */
-    @Override
-    public ColourNames Border_Left_Color$()
+    public ColourNames getBorderLeftColor$()
     {
-<span class="nc" id="L136">        return Border_Left_Color$;</span>
+<span class="nc" id="L147">        return borderLeftColor$;</span>
     }
 
     /**
@@ -141,10 +152,9 @@ public class BorderCSSImpl implements BorderCSS
      *
      * @return
      */
-    @Override
-    public BorderStyles Border_Left_Style()
+    public BorderStyles getBorderLeftStyle()
     {
-<span class="nc" id="L147">        return Border_Left_Style;</span>
+<span class="nc" id="L157">        return borderLeftStyle;</span>
     }
 
     /**
@@ -152,10 +162,9 @@ public class BorderCSSImpl implements BorderCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Border_Left_Width()
+    public MeasurementCSSImpl getBorderLeftWidth()
     {
-<span class="nc" id="L158">        return Border_Left_Width;</span>
+<span class="nc" id="L167">        return borderLeftWidth;</span>
     }
 
     /**
@@ -163,10 +172,9 @@ public class BorderCSSImpl implements BorderCSS
      *
      * @return
      */
-    @Override
-    public ColourCSS Border_Right_Color()
+    public ColourCSSImpl getBorderRightColor()
     {
-<span class="nc" id="L169">        return Border_Right_Color;</span>
+<span class="nc" id="L177">        return borderRightColor;</span>
     }
 
     /**
@@ -174,10 +182,9 @@ public class BorderCSSImpl implements BorderCSS
      *
      * @return
      */
-    @Override
-    public ColourNames Border_Right_Color$()
+    public ColourNames getBorderRightColor$()
     {
-<span class="nc" id="L180">        return Border_Right_Color$;</span>
+<span class="nc" id="L187">        return borderRightColor$;</span>
     }
 
     /**
@@ -185,10 +192,9 @@ public class BorderCSSImpl implements BorderCSS
      *
      * @return
      */
-    @Override
-    public BorderStyles Border_Right_Style()
+    public BorderStyles getBorderRightStyle()
     {
-<span class="nc" id="L191">        return Border_Right_Style;</span>
+<span class="nc" id="L197">        return borderRightStyle;</span>
     }
 
     /**
@@ -196,10 +202,9 @@ public class BorderCSSImpl implements BorderCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Border_Right_Width()
+    public MeasurementCSSImpl getBorderRightWidth()
     {
-<span class="nc" id="L202">        return Border_Right_Width;</span>
+<span class="nc" id="L207">        return borderRightWidth;</span>
     }
 
     /**
@@ -207,10 +212,9 @@ public class BorderCSSImpl implements BorderCSS
      *
      * @return
      */
-    @Override
-    public ColourCSS Border_Top_Color()
+    public ColourCSSImpl getBorderTopColor()
     {
-<span class="nc" id="L213">        return Border_Top_Color;</span>
+<span class="nc" id="L217">        return borderTopColor;</span>
     }
 
     /**
@@ -218,10 +222,9 @@ public class BorderCSSImpl implements BorderCSS
      *
      * @return
      */
-    @Override
-    public ColourNames Border_Top_Color$()
+    public ColourNames getBorderTopColor$()
     {
-<span class="nc" id="L224">        return Border_Top_Color$;</span>
+<span class="nc" id="L227">        return borderTopColor$;</span>
     }
 
     /**
@@ -229,10 +232,9 @@ public class BorderCSSImpl implements BorderCSS
      *
      * @return
      */
-    @Override
-    public BorderStyles Border_Top_Style()
+    public BorderStyles getBorderTopStyle()
     {
-<span class="nc" id="L235">        return Border_Top_Style;</span>
+<span class="nc" id="L237">        return borderTopStyle;</span>
     }
 
     /**
@@ -240,181 +242,19 @@ public class BorderCSSImpl implements BorderCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Border_Top_Width()
+    public MeasurementCSSImpl getBorderTopWidth()
     {
-<span class="nc" id="L246">        return Border_Top_Width;</span>
+<span class="nc" id="L247">        return borderTopWidth;</span>
     }
-
-    /**
-     * Sets the border bottom color
-     *
-     * @param Border_Bottom_Color
-     */
-    public void setBorder_Bottom_Color(ColourCSS Border_Bottom_Color)
-    {
-<span class="nc" id="L256">        this.Border_Bottom_Color = Border_Bottom_Color;</span>
-<span class="nc" id="L257">    }</span>
-
-    /**
-     * Sets the border bottom color
-     *
-     * @param Border_Bottom_Color$
-     */
-    public void setBorder_Bottom_Color$(ColourNames Border_Bottom_Color$)
-    {
-<span class="nc" id="L266">        this.Border_Bottom_Color$ = Border_Bottom_Color$;</span>
-<span class="nc" id="L267">    }</span>
-
-    /**
-     * Sets the style of the bottom border
-     *
-     * @param Border_Bottom_Style
-     */
-    public void setBorder_Bottom_Style(BorderStyles Border_Bottom_Style)
-    {
-<span class="nc" id="L276">        this.Border_Bottom_Style = Border_Bottom_Style;</span>
-<span class="nc" id="L277">    }</span>
-
-    /**
-     * Sets the width of the bottom border
-     *
-     * @param Border_Bottom_Width
-     */
-    public void setBorder_Bottom_Width(MeasurementCSS Border_Bottom_Width)
-    {
-<span class="nc" id="L286">        this.Border_Bottom_Width = Border_Bottom_Width;</span>
-<span class="nc" id="L287">    }</span>
-
-    /**
-     * Sets the colour of the left border
-     *
-     * @param Border_Left_Color
-     */
-    public void setBorder_Left_Color(ColourCSS Border_Left_Color)
-    {
-<span class="nc" id="L296">        this.Border_Left_Color = Border_Left_Color;</span>
-<span class="nc" id="L297">    }</span>
-
-    /**
-     * Sets the colour of the left border
-     *
-     * @param Border_Left_Color$
-     */
-    public void setBorder_Left_Color$(ColourNames Border_Left_Color$)
-    {
-<span class="nc" id="L306">        this.Border_Left_Color$ = Border_Left_Color$;</span>
-<span class="nc" id="L307">    }</span>
-
-    /**
-     * Sets the style of the left border
-     *
-     * @param Border_Left_Style
-     */
-    public void setBorder_Left_Style(BorderStyles Border_Left_Style)
-    {
-<span class="nc" id="L316">        this.Border_Left_Style = Border_Left_Style;</span>
-<span class="nc" id="L317">    }</span>
-
-    /**
-     * Sets the width of the left border
-     *
-     * @param Border_Left_Width
-     */
-    public void setBorder_Left_Width(MeasurementCSS Border_Left_Width)
-    {
-<span class="nc" id="L326">        this.Border_Left_Width = Border_Left_Width;</span>
-<span class="nc" id="L327">    }</span>
-
-    /**
-     * Sets the colour of the right border
-     *
-     * @param Border_Right_Color
-     */
-    public void setBorder_Right_Color(ColourCSS Border_Right_Color)
-    {
-<span class="nc" id="L336">        this.Border_Right_Color = Border_Right_Color;</span>
-<span class="nc" id="L337">    }</span>
-
-    /**
-     * Sets the colour of the right border
-     *
-     * @param Border_Right_Color$
-     */
-    public void setBorder_Right_Color$(ColourNames Border_Right_Color$)
-    {
-<span class="nc" id="L346">        this.Border_Right_Color$ = Border_Right_Color$;</span>
-<span class="nc" id="L347">    }</span>
-
-    /**
-     * Sets the style of the right border
-     *
-     * @param Border_Right_Style
-     */
-    public void setBorder_Right_Style(BorderStyles Border_Right_Style)
-    {
-<span class="nc" id="L356">        this.Border_Right_Style = Border_Right_Style;</span>
-<span class="nc" id="L357">    }</span>
-
-    /**
-     * Sets the width of the right border
-     *
-     * @param Border_Right_Width
-     */
-    public void setBorder_Right_Width(MeasurementCSS Border_Right_Width)
-    {
-<span class="nc" id="L366">        this.Border_Right_Width = Border_Right_Width;</span>
-<span class="nc" id="L367">    }</span>
-
-    /**
-     * Sets the top colour for the border
-     *
-     * @param Border_Top_Color
-     */
-    public void setBorder_Top_Color(ColourCSS Border_Top_Color)
-    {
-<span class="nc" id="L376">        this.Border_Top_Color = Border_Top_Color;</span>
-<span class="nc" id="L377">    }</span>
-
-    /**
-     * Sets the top colour for the border
-     *
-     * @param Border_Top_Color$
-     */
-    public void setBorder_Top_Color$(ColourNames Border_Top_Color$)
-    {
-<span class="nc" id="L386">        this.Border_Top_Color$ = Border_Top_Color$;</span>
-<span class="nc" id="L387">    }</span>
-
-    /**
-     * Sets the top style for the border
-     *
-     * @param Border_Top_Style
-     */
-    public void setBorder_Top_Style(BorderStyles Border_Top_Style)
-    {
-<span class="nc" id="L396">        this.Border_Top_Style = Border_Top_Style;</span>
-<span class="nc" id="L397">    }</span>
-
-    /**
-     * Sets the top width for the border
-     *
-     * @param Border_Top_Width
-     */
-    public void setBorder_Top_Width(MeasurementCSS Border_Top_Width)
-    {
-<span class="nc" id="L406">        this.Border_Top_Width = Border_Top_Width;</span>
-<span class="nc" id="L407">    }</span>
 
     /**
      * Provides a short hand for setting all border at once
      *
      * @return
      */
-    @Override
-    public za.co.mmagon.jwebswing.htmlbuilder.css.borders.Border Border()
+    public Border getBorder()
     {
-<span class="nc" id="L417">        return Border;</span>
+<span class="nc" id="L257">        return border;</span>
     }
 
     /**
@@ -422,10 +262,9 @@ public class BorderCSSImpl implements BorderCSS
      *
      * @return
      */
-    @Override
-    public BorderBottomCSS Border_Bottom()
+    public BorderBottomCSS getBorderBottom()
     {
-<span class="nc" id="L428">        return Border_Bottom;</span>
+<span class="nc" id="L267">        return borderBottom;</span>
     }
 
     /**
@@ -433,10 +272,9 @@ public class BorderCSSImpl implements BorderCSS
      *
      * @return
      */
-    @Override
-    public BorderBottomCSS Border_Left()
+    public BorderBottomCSS getBorderLeft()
     {
-<span class="nc" id="L439">        return Border_Left;</span>
+<span class="nc" id="L277">        return borderLeft;</span>
     }
 
     /**
@@ -444,10 +282,9 @@ public class BorderCSSImpl implements BorderCSS
      *
      * @return
      */
-    @Override
-    public BorderBottomCSS Border_Right()
+    public BorderBottomCSS getBorderRight()
     {
-<span class="nc" id="L450">        return Border_Right;</span>
+<span class="nc" id="L287">        return borderRight;</span>
     }
 
     /**
@@ -455,11 +292,220 @@ public class BorderCSSImpl implements BorderCSS
      *
      * @return
      */
-    @Override
-    public BorderBottomCSS Border_Top()
+    public BorderBottomCSS getBorderTop()
     {
-<span class="nc" id="L461">        return Border_Top;</span>
+<span class="nc" id="L297">        return borderTop;</span>
     }
+
+    /**
+     * Sets the border bottom colour
+     *
+     * @param borderBottomColor
+     */
+    public void setBorderBottomColor(ColourCSSImpl borderBottomColor)
+    {
+<span class="nc" id="L307">        this.borderBottomColor = borderBottomColor;</span>
+<span class="nc" id="L308">    }</span>
+
+    /**
+     * Sets the border bottom colour
+     *
+     * @param borderBottomColor$
+     */
+    public void setBorderBottomColor$(ColourNames borderBottomColor$)
+    {
+<span class="fc" id="L317">        this.borderBottomColor$ = borderBottomColor$;</span>
+<span class="fc" id="L318">    }</span>
+
+    /**
+     * Sets the border bottom style
+     *
+     * @param borderBottomStyle
+     */
+    public void setBorderBottomStyle(BorderStyles borderBottomStyle)
+    {
+<span class="fc" id="L327">        this.borderBottomStyle = borderBottomStyle;</span>
+<span class="fc" id="L328">    }</span>
+
+    /**
+     * Sets the border bottom style
+     *
+     * @param borderBottomWidth
+     */
+    public void setBorderBottomWidth(MeasurementCSSImpl borderBottomWidth)
+    {
+<span class="nc" id="L337">        this.borderBottomWidth = borderBottomWidth;</span>
+<span class="nc" id="L338">    }</span>
+
+    /**
+     * Sets the border left colour
+     *
+     * @param borderLeftColor
+     */
+    public void setBorderLeftColor(ColourCSSImpl borderLeftColor)
+    {
+<span class="nc" id="L347">        this.borderLeftColor = borderLeftColor;</span>
+<span class="nc" id="L348">    }</span>
+
+    /**
+     * Sets the border left colour
+     *
+     * @param borderLeftColor$
+     */
+    public void setBorderLeftColor$(ColourNames borderLeftColor$)
+    {
+<span class="nc" id="L357">        this.borderLeftColor$ = borderLeftColor$;</span>
+<span class="nc" id="L358">    }</span>
+
+    /**
+     * Sets the border left colour
+     *
+     * @param borderLeftStyle
+     */
+    public void setBorderLeftStyle(BorderStyles borderLeftStyle)
+    {
+<span class="nc" id="L367">        this.borderLeftStyle = borderLeftStyle;</span>
+<span class="nc" id="L368">    }</span>
+
+    /**
+     * Sets the border left width
+     *
+     * @param borderLeftWidth
+     */
+    public void setBorderLeftWidth(MeasurementCSSImpl borderLeftWidth)
+    {
+<span class="nc" id="L377">        this.borderLeftWidth = borderLeftWidth;</span>
+<span class="nc" id="L378">    }</span>
+
+    /**
+     * Sets the border right colour
+     *
+     * @param borderRightColor
+     */
+    public void setBorderRightColor(ColourCSSImpl borderRightColor)
+    {
+<span class="nc" id="L387">        this.borderRightColor = borderRightColor;</span>
+<span class="nc" id="L388">    }</span>
+
+    /**
+     * Sets the border right colour
+     *
+     * @param borderRightColor$
+     */
+    public void setBorderRightColor$(ColourNames borderRightColor$)
+    {
+<span class="nc" id="L397">        this.borderRightColor$ = borderRightColor$;</span>
+<span class="nc" id="L398">    }</span>
+
+    /**
+     * Sets the border right style
+     *
+     * @param borderRightStyle
+     */
+    public void setBorderRightStyle(BorderStyles borderRightStyle)
+    {
+<span class="nc" id="L407">        this.borderRightStyle = borderRightStyle;</span>
+<span class="nc" id="L408">    }</span>
+
+    /**
+     * Sets the border right width
+     *
+     * @param borderRightWidth
+     */
+    public void setBorderRightWidth(MeasurementCSSImpl borderRightWidth)
+    {
+<span class="nc" id="L417">        this.borderRightWidth = borderRightWidth;</span>
+<span class="nc" id="L418">    }</span>
+
+    /**
+     * Sets the border top colour
+     *
+     * @param borderTopColor
+     */
+    public void setBorderTopColor(ColourCSSImpl borderTopColor)
+    {
+<span class="nc" id="L427">        this.borderTopColor = borderTopColor;</span>
+<span class="nc" id="L428">    }</span>
+
+    /**
+     * Sets the border top colour
+     *
+     * @param borderTopColor$
+     */
+    public void setBorderTopColor$(ColourNames borderTopColor$)
+    {
+<span class="nc" id="L437">        this.borderTopColor$ = borderTopColor$;</span>
+<span class="nc" id="L438">    }</span>
+
+    /**
+     * Sets the border top style
+     *
+     * @param borderTopStyle
+     */
+    public void setBorderTopStyle(BorderStyles borderTopStyle)
+    {
+<span class="nc" id="L447">        this.borderTopStyle = borderTopStyle;</span>
+<span class="nc" id="L448">    }</span>
+
+    /**
+     * Sets the border width
+     *
+     * @param borderTopWidth
+     */
+    public void setBorderTopWidth(MeasurementCSSImpl borderTopWidth)
+    {
+<span class="nc" id="L457">        this.borderTopWidth = borderTopWidth;</span>
+<span class="nc" id="L458">    }</span>
+
+    /**
+     * Sets the border
+     *
+     * @param border
+     */
+    public void setBorder(Border border)
+    {
+<span class="nc" id="L467">        this.border = border;</span>
+<span class="nc" id="L468">    }</span>
+
+    /**
+     * Sets the border bottom
+     *
+     * @param borderBottom
+     */
+    public void setBorderBottom(BorderBottomCSS borderBottom)
+    {
+<span class="nc" id="L477">        this.borderBottom = borderBottom;</span>
+<span class="nc" id="L478">    }</span>
+
+    /**
+     * Sets the border left
+     *
+     * @param borderLeft
+     */
+    public void setBorderLeft(BorderBottomCSS borderLeft)
+    {
+<span class="nc" id="L487">        this.borderLeft = borderLeft;</span>
+<span class="nc" id="L488">    }</span>
+
+    /**
+     * Sets the border right
+     *
+     * @param borderRight
+     */
+    public void setBorderRight(BorderBottomCSS borderRight)
+    {
+<span class="nc" id="L497">        this.borderRight = borderRight;</span>
+<span class="nc" id="L498">    }</span>
+
+    /**
+     * Sets the border top
+     *
+     * @param borderTop
+     */
+    public void setBorderTop(BorderBottomCSS borderTop)
+    {
+<span class="nc" id="L507">        this.borderTop = borderTop;</span>
+<span class="nc" id="L508">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

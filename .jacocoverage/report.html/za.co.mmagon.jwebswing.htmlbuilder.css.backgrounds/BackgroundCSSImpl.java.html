@@ -16,44 +16,60 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds;
 
-import za.co.mmagon.jwebswing.htmlbuilder.css.ImageCSS;
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.Repeats;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.image.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
+ * An updated getBackground CSS Implementation object with the fields
  *
  * @author GedMarc
  * @since 17 Jan 2016
  */
-<span class="nc" id="L31">public class BackgroundCSSImpl implements BackgroundCSS</span>
+<span class="fc" id="L33">public class BackgroundCSSImpl extends CSSImplementationAdapter&lt;BackgroundCSS, BackgroundCSSImpl&gt; implements CSSImplementationClass&lt;BackgroundCSS, BackgroundCSSImpl&gt;</span>
 {
 
-    private BackgroundAttachments Background_Attachment;
-    private ColourCSS Background_Color;
-    private ColourNames Background_Color$;
-    private ImageCSS Background_Image;
-    private ImageCSS[] Background_Image$;
-    private BackgroundPositions Background_Position;
-    private Repeats Background_Repeat;
-    private BackgroundBlendMode Background_BlendMode;
-    private BackgroundClip Background_Clip;
-    private BackgroundOrigins Background_Origin;
-    private BackgroundSizes Background_Size$;
-    private MeasurementCSS[] Background_Size;
-    private Background Background;
+    private static final long serialVersionUID = 1L;
+
+    @CSSDetail(cssName = &quot;background-attachment&quot;, cssVersion = CSSVersions.CSS21, jsName = &quot;backgroundAttachment&quot;)
+    private BackgroundAttachments backgroundAttachment;
+    @CSSDetail(cssName = &quot;background-color&quot;, cssVersion = CSSVersions.CSS21, jsName = &quot;backgroundColor&quot;)
+    private ColourCSSImpl backgroundColor;
+    @CSSDetail(cssName = &quot;background-color&quot;, cssVersion = CSSVersions.CSS21, jsName = &quot;backgroundColor&quot;)
+    private ColourNames backgroundColor$;
+    @CSSDetail(cssName = &quot;background-image&quot;, cssVersion = CSSVersions.CSS21, jsName = &quot;backgroundImage&quot;)
+    private ImageCSSImpl backgroundImage;
+    @CSSDetail(cssName = &quot;background-image&quot;, cssVersion = CSSVersions.CSS21, jsName = &quot;backgroundImage&quot;)
+    private ImageCSSImpl[] backgroundImage$;
+    @CSSDetail(cssName = &quot;background-position&quot;, cssVersion = CSSVersions.CSS21, jsName = &quot;backgroundPosition&quot;)
+    private BackgroundPositions backgroundPosition;
+    @CSSDetail(cssName = &quot;background-repeat&quot;, cssVersion = CSSVersions.CSS21, jsName = &quot;backgroundRepeat&quot;)
+    private Repeats backgroundRepeat;
+    @CSSDetail(cssName = &quot;background-blendmode&quot;, cssVersion = CSSVersions.CSS21, jsName = &quot;backgroundBlendmode&quot;)
+    private BackgroundBlendMode backgroundBlendMode;
+    @CSSDetail(cssName = &quot;background-clip&quot;, cssVersion = CSSVersions.CSS21, jsName = &quot;backgroundClip&quot;)
+    private BackgroundClip backgroundClip;
+    @CSSDetail(cssName = &quot;background-origins&quot;, cssVersion = CSSVersions.CSS21, jsName = &quot;backgroundOrigins&quot;)
+    private BackgroundOrigins backgroundOrigin;
+    @CSSDetail(cssName = &quot;background-size&quot;, cssVersion = CSSVersions.CSS21, jsName = &quot;backgroundSize&quot;)
+    private BackgroundSizes backgroundSize$;
+    @CSSDetail(cssName = &quot;background-size&quot;, cssVersion = CSSVersions.CSS21, jsName = &quot;backgroundSize&quot;)
+    private MeasurementCSSImpl[] backgroundSize;
+    @CSSDetail(cssName = &quot;background&quot;, cssVersion = CSSVersions.CSS21, jsName = &quot;background&quot;)
+    private BackgroundImpl background;
 
     /**
      * Specifies the background color of an element
      *
      * @return
      */
-    @Override
-    public ColourCSS Background_Color()
+    public ColourCSSImpl getBackgroundColor()
     {
-<span class="nc" id="L56">        return Background_Color;</span>
+<span class="nc" id="L72">        return backgroundColor;</span>
     }
 
     /**
@@ -61,10 +77,9 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
      *
      * @return
      */
-    @Override
-    public ColourNames Background_Color$()
+    public ColourNames getBackgroundColor$()
     {
-<span class="nc" id="L67">        return Background_Color$;</span>
+<span class="nc" id="L82">        return backgroundColor$;</span>
     }
 
     /**
@@ -72,10 +87,9 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
      *
      * @return
      */
-    @Override
-    public ImageCSS Background_Image()
+    public ImageCSSImpl getBackgroundImage()
     {
-<span class="nc" id="L78">        return Background_Image;</span>
+<span class="nc" id="L92">        return backgroundImage;</span>
     }
 
     /**
@@ -83,10 +97,9 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
      *
      * @return
      */
-    @Override
-    public BackgroundPositions Background_Position()
+    public BackgroundPositions getBackgroundPosition()
     {
-<span class="nc" id="L89">        return Background_Position;</span>
+<span class="nc" id="L102">        return backgroundPosition;</span>
     }
 
     /**
@@ -94,10 +107,9 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
      *
      * @return
      */
-    @Override
-    public Repeats Background_Repeat()
+    public Repeats getBackgroundRepeat()
     {
-<span class="nc" id="L100">        return Background_Repeat;</span>
+<span class="nc" id="L112">        return backgroundRepeat;</span>
     }
 
     /**
@@ -105,10 +117,9 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
      *
      * @return
      */
-    @Override
-    public BackgroundBlendMode Background_BlendMode()
+    public BackgroundBlendMode getBackgroundBlendMode()
     {
-<span class="nc" id="L111">        return Background_BlendMode;</span>
+<span class="nc" id="L122">        return backgroundBlendMode;</span>
     }
 
     /**
@@ -116,10 +127,9 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
      *
      * @return
      */
-    @Override
-    public BackgroundClip Background_Clip()
+    public BackgroundClip getBackgroundClip()
     {
-<span class="nc" id="L122">        return Background_Clip;</span>
+<span class="nc" id="L132">        return backgroundClip;</span>
     }
 
     /**
@@ -127,10 +137,9 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
      *
      * @return
      */
-    @Override
-    public BackgroundOrigins Background_Origin()
+    public BackgroundOrigins getBackgroundOrigin()
     {
-<span class="nc" id="L133">        return Background_Origin;</span>
+<span class="nc" id="L142">        return backgroundOrigin;</span>
     }
 
     /**
@@ -138,10 +147,9 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
      *
      * @return
      */
-    @Override
-    public MeasurementCSS[] Background_Size()
+    public MeasurementCSSImpl[] getBackgroundSize()
     {
-<span class="nc" id="L144">        return Background_Size;</span>
+<span class="nc" id="L152">        return backgroundSize;</span>
     }
 
     /**
@@ -149,16 +157,9 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
      *
      * @return
      */
-    @Override
-    public BackgroundSizes Background_Size$()
+    public BackgroundSizes getBackgroundSize$()
     {
-<span class="nc" id="L155">        return Background_Size$;</span>
-    }
-
-    @Override
-    public Class&lt;? extends Annotation&gt; annotationType()
-    {
-<span class="nc" id="L161">        return BackgroundCSS.class;</span>
+<span class="nc" id="L162">        return backgroundSize$;</span>
     }
 
     /**
@@ -166,158 +167,157 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
      *
      * @return
      */
-    @Override
-    public ImageCSS[] Background_Image$()
+    public ImageCSSImpl[] getBackgroundImage$()
     {
-<span class="nc" id="L172">        return Background_Image$;</span>
+<span class="nc" id="L172">        return backgroundImage$;</span>
     }
 
     /**
      * Sets whether a background image is fixed or scrolls with the rest of the page
      */
-    @Override
-    public BackgroundAttachments Background_Attachment()
+    public BackgroundAttachments getBackgroundAttachment()
     {
-<span class="nc" id="L181">        return Background_Attachment;</span>
+<span class="nc" id="L180">        return backgroundAttachment;</span>
     }
 
     /**
-     * Sets whether a background image is fixed or scrolls with the rest of the page
-     */
-    public void setBackground_Attachment(BackgroundAttachments Background_Attachment)
-    {
-<span class="nc" id="L189">        this.Background_Attachment = Background_Attachment;</span>
-<span class="nc" id="L190">    }</span>
-
-    /**
-     * Specifies the background color of an element
-     *
-     * @param Background_Color
-     */
-    public void setBackground_Color(ColourCSS Background_Color)
-    {
-<span class="nc" id="L199">        this.Background_Color = Background_Color;</span>
-<span class="nc" id="L200">    }</span>
-
-    /**
-     * Specifies the background color of an element
-     *
-     * @param Background_Color$
-     */
-    public void setBackground_Color$(ColourNames Background_Color$)
-    {
-<span class="nc" id="L209">        this.Background_Color$ = Background_Color$;</span>
-<span class="nc" id="L210">    }</span>
-
-    /**
-     * Specifies one or more background images for an element
-     *
-     * @param Background_Image
-     */
-    public void setBackground_Image(ImageCSS Background_Image)
-    {
-<span class="nc" id="L219">        this.Background_Image = Background_Image;</span>
-<span class="nc" id="L220">    }</span>
-
-    /**
-     * Specifies one or more background images for an element
-     *
-     * @param Background_Image$
-     */
-    public void setBackground_Image$(ImageCSS[] Background_Image$)
-    {
-<span class="nc" id="L229">        this.Background_Image$ = Background_Image$;</span>
-<span class="nc" id="L230">    }</span>
-
-    /**
-     * Specifies the position of a background image
-     *
-     * @param Background_Position
-     */
-    public void setBackground_Position(BackgroundPositions Background_Position)
-    {
-<span class="nc" id="L239">        this.Background_Position = Background_Position;</span>
-<span class="nc" id="L240">    }</span>
-
-    /**
-     * Sets how a background image will be repeated
-     *
-     * @param Background_Repeat
-     */
-    public void setBackground_Repeat(Repeats Background_Repeat)
-    {
-<span class="nc" id="L249">        this.Background_Repeat = Background_Repeat;</span>
-<span class="nc" id="L250">    }</span>
-
-    /**
-     * Specifies the blending mode of each background layer (color/image)
-     *
-     * @param Background_BlendMode
-     */
-    public void setBackground_BlendMode(BackgroundBlendMode Background_BlendMode)
-    {
-<span class="nc" id="L259">        this.Background_BlendMode = Background_BlendMode;</span>
-<span class="nc" id="L260">    }</span>
-
-    /**
-     * Specifies the painting area of the background
-     *
-     * @param Background_Clip
-     */
-    public void setBackground_Clip(BackgroundClip Background_Clip)
-    {
-<span class="nc" id="L269">        this.Background_Clip = Background_Clip;</span>
-<span class="nc" id="L270">    }</span>
-
-    /**
-     * Specifies where the background image(s) is/are positioned
-     *
-     * @param Background_Origin
-     */
-    public void setBackground_Origin(BackgroundOrigins Background_Origin)
-    {
-<span class="nc" id="L279">        this.Background_Origin = Background_Origin;</span>
-<span class="nc" id="L280">    }</span>
-
-    /**
-     * Specifies the size of the background image(s)
-     *
-     * @param Background_Size$
-     */
-    public void setBackground_Size$(BackgroundSizes Background_Size$)
-    {
-<span class="nc" id="L289">        this.Background_Size$ = Background_Size$;</span>
-<span class="nc" id="L290">    }</span>
-
-    /**
-     * Specifies the size of the background image(s)
-     *
-     * @param Background_Size
-     */
-    public void setBackground_Size(MeasurementCSS[] Background_Size)
-    {
-<span class="nc" id="L299">        this.Background_Size = Background_Size;</span>
-<span class="nc" id="L300">    }</span>
-
-    /**
-     * Set different background properties in one declaration
+     * The background
      *
      * @return
      */
-    @Override
-    public za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.Background Background()
+    public BackgroundImpl getBackground()
     {
-<span class="nc" id="L310">        return Background;</span>
+<span class="nc" id="L190">        return background;</span>
     }
 
     /**
-     * Set different background properties in one declaration
+     * Sets the background attachment
      *
-     * @param Background
+     * @param backgroundAttachment
      */
-    public void setBackground(za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.Background Background)
+    public void setBackgroundAttachment(BackgroundAttachments backgroundAttachment)
     {
-<span class="nc" id="L320">        this.Background = Background;</span>
+<span class="nc" id="L200">        this.backgroundAttachment = backgroundAttachment;</span>
+<span class="nc" id="L201">    }</span>
+
+    /**
+     * Sets the background colour
+     *
+     * @param backgroundColor
+     */
+    public void setBackgroundColor(ColourCSSImpl backgroundColor)
+    {
+<span class="nc" id="L210">        this.backgroundColor = backgroundColor;</span>
+<span class="nc" id="L211">    }</span>
+
+    /**
+     * Sets the background colour
+     *
+     * @param backgroundColor$
+     */
+    public void setBackgroundColor$(ColourNames backgroundColor$)
+    {
+<span class="fc" id="L220">        this.backgroundColor$ = backgroundColor$;</span>
+<span class="fc" id="L221">    }</span>
+
+    /**
+     * Sets the background image
+     *
+     * @param backgroundImage
+     */
+    public void setBackgroundImage(ImageCSSImpl backgroundImage)
+    {
+<span class="nc" id="L230">        this.backgroundImage = backgroundImage;</span>
+<span class="nc" id="L231">    }</span>
+
+    /**
+     * Sets the background images
+     *
+     * @param backgroundImage$
+     */
+    public void setBackgroundImage$(ImageCSSImpl[] backgroundImage$)
+    {
+<span class="nc" id="L240">        this.backgroundImage$ = backgroundImage$;</span>
+<span class="nc" id="L241">    }</span>
+
+    /**
+     * Gets the background position
+     *
+     * @param backgroundPosition
+     */
+    public void setBackgroundPosition(BackgroundPositions backgroundPosition)
+    {
+<span class="nc" id="L250">        this.backgroundPosition = backgroundPosition;</span>
+<span class="nc" id="L251">    }</span>
+
+    /**
+     * Sets the background repeat
+     *
+     * @param backgroundRepeat
+     */
+    public void setBackgroundRepeat(Repeats backgroundRepeat)
+    {
+<span class="nc" id="L260">        this.backgroundRepeat = backgroundRepeat;</span>
+<span class="nc" id="L261">    }</span>
+
+    /**
+     * Sets the background blend mode
+     *
+     * @param backgroundBlendMode
+     */
+    public void setBackgroundBlendMode(za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.BackgroundBlendMode backgroundBlendMode)
+    {
+<span class="nc" id="L270">        this.backgroundBlendMode = backgroundBlendMode;</span>
+<span class="nc" id="L271">    }</span>
+
+    /**
+     * Sets the background clip
+     *
+     * @param backgroundClip
+     */
+    public void setBackgroundClip(za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.BackgroundClip backgroundClip)
+    {
+<span class="fc" id="L280">        this.backgroundClip = backgroundClip;</span>
+<span class="fc" id="L281">    }</span>
+
+    /**
+     * Sets the background origin
+     *
+     * @param backgroundOrigin
+     */
+    public void setBackgroundOrigin(BackgroundOrigins backgroundOrigin)
+    {
+<span class="nc" id="L290">        this.backgroundOrigin = backgroundOrigin;</span>
+<span class="nc" id="L291">    }</span>
+
+    /**
+     * Sets the background size
+     *
+     * @param backgroundSize$
+     */
+    public void setBackgroundSize$(BackgroundSizes backgroundSize$)
+    {
+<span class="nc" id="L300">        this.backgroundSize$ = backgroundSize$;</span>
+<span class="nc" id="L301">    }</span>
+
+    /**
+     * Sets the background size
+     *
+     * @param backgroundSize
+     */
+    public void setBackgroundSize(MeasurementCSSImpl[] backgroundSize)
+    {
+<span class="nc" id="L310">        this.backgroundSize = backgroundSize;</span>
+<span class="nc" id="L311">    }</span>
+
+    /**
+     * Sets the background
+     *
+     * @param background
+     */
+    public void setBackground(BackgroundImpl background)
+    {
+<span class="nc" id="L320">        this.background = background;</span>
 <span class="nc" id="L321">    }</span>
 
 }

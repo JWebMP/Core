@@ -16,8 +16,10 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.displays;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * The display property is the most important CSS property for controlling layout.
@@ -25,53 +27,54 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class DisplayCSSImpl implements DisplayCSS
+public class DisplayCSSImpl extends CSSImplementationAdapter&lt;DisplayCSS, DisplayCSSImpl&gt; implements CSSImplementationClass&lt;DisplayCSS, DisplayCSSImpl&gt;
 {
 
+    private static final long serialVersionUID = 1L;
+
+    @CSSDetail(cssName = &quot;display&quot;, cssVersion = CSSVersions.CSS21)
+    private Displays display;
+    @CSSDetail(cssName = &quot;cursor&quot;, cssVersion = CSSVersions.CSS21)
+    private Cursors oursor;
+    @CSSDetail(cssName = &quot;overflow&quot;, cssVersion = CSSVersions.CSS21)
+    private Overflows overflow;
+    @CSSDetail(cssName = &quot;overflow-x&quot;, cssVersion = CSSVersions.CSS21)
+    private Overflows overflowX;
+    @CSSDetail(cssName = &quot;overflow-y&quot;, cssVersion = CSSVersions.CSS21)
+    private Overflows overflowY;
+    @CSSDetail(cssName = &quot;position&quot;, cssVersion = CSSVersions.CSS21)
+    private Positions position;
+    @CSSDetail(cssName = &quot;float&quot;, cssVersion = CSSVersions.CSS21)
+    private Floats floatProperty;
+    @CSSDetail(cssName = &quot;z-index&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl zIndex;
+    @CSSDetail(cssName = &quot;bottom&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl bottom;
+    @CSSDetail(cssName = &quot;left&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl left;
+    @CSSDetail(cssName = &quot;displayright&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl right;
+    @CSSDetail(cssName = &quot;top&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl top;
+
     public DisplayCSSImpl()
-<span class="nc" id="L32">    {</span>
-<span class="nc" id="L33">    }</span>
-
-    public Displays Display;
-    public Cursors Cursor;
-    public Overflows Overflow;
-    public Overflows Overflow_X;
-    public Overflows Overflow_Y;
-    public Positions Position;
-    public za.co.mmagon.jwebswing.htmlbuilder.css.displays.Float Float;
-    public MeasurementCSS Z_Index;
-    public MeasurementCSS Bottom;
-    public MeasurementCSS Left;
-    public MeasurementCSS Right;
-    public MeasurementCSS Top;
-
-    @Override
-    public Class&lt;? extends Annotation&gt; annotationType()
-    {
-<span class="nc" id="L51">        return DisplayCSS.class;</span>
-    }
+<span class="fc" id="L61">    {</span>
+<span class="fc" id="L62">    }</span>
 
     /**
-     * Sets the Display Format
-     * The display Property
+     * Sets the display Format The display Property
      * &lt;p&gt;
      * The display property specifies if/how an element is displayed.
      * &lt;p&gt;
-     * Every HTML element has a default display value depending on what type of element it is. The default display value for most elements is block or inline.
-     * Block-level Elements
+     * Every HTML element has a default display value depending on what type of element it is. The default display value for most elements is block or inline. Block-level Elements
      * &lt;p&gt;
-     * A block-level element always starts on a new line and takes up the full width available (stretches out to the left and right as far as it can).
-     * The &amp;lt;div&amp;gt; element is a block-level element.
+     * A block-level element always starts on a new line and takes up the full width available (stretches out to the left and right as far as it can). The &amp;lt;div&amp;gt; element is a block-level element.
      * &lt;p&gt;
      * Examples of block-level elements:
      * &lt;p&gt;
-     * &amp;lt;div&amp;gt;
-     * &amp;lt;h1&amp;gt; - &amp;lt;h6&amp;gt;
+     * &amp;lt;div&amp;gt; &amp;lt;h1&amp;gt; - &amp;lt;h6&amp;gt;
      * &lt;p&gt;
-     * &amp;lt;form&amp;gt;
-     * &amp;lt;header&amp;gt;
-     * &amp;lt;footer&amp;gt;
-     * &amp;lt;section&amp;gt;
+     * &amp;lt;form&amp;gt; &amp;lt;header&amp;gt; &amp;lt;footer&amp;gt; &amp;lt;section&amp;gt;
      * &lt;p&gt;
      * Inline Elements
      * &lt;p&gt;
@@ -81,16 +84,13 @@ public class DisplayCSSImpl implements DisplayCSS
      * &lt;p&gt;
      * Examples of inline elements:
      * &lt;p&gt;
-     * &amp;lt;span&amp;gt;
-     * &amp;lt;a&amp;gt;
-     * &amp;lt;img&amp;gt;
+     * &amp;lt;span&amp;gt; &amp;lt;a&amp;gt; &amp;lt;img&amp;gt;
      *
      * @return
      */
-    @Override
-    public Displays Display()
+    public Displays getDisplay()
     {
-<span class="nc" id="L93">        return Display;</span>
+<span class="nc" id="L93">        return display;</span>
     }
 
     /**
@@ -98,10 +98,9 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public Cursors Cursor()
+    public Cursors getCursor()
     {
-<span class="nc" id="L104">        return Cursor;</span>
+<span class="nc" id="L103">        return oursor;</span>
     }
 
     /**
@@ -109,21 +108,19 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public Overflows Overflow()
+    public Overflows getOverflow()
     {
-<span class="nc" id="L115">        return Overflow;</span>
+<span class="nc" id="L113">        return overflow;</span>
     }
 
     /**
-     * Sets the Horizontal Overflow
+     * Sets the Horizontal getOverflow
      *
      * @return
      */
-    @Override
-    public Overflows Overflow_X()
+    public Overflows getOverflowX()
     {
-<span class="nc" id="L126">        return Overflow_X;</span>
+<span class="nc" id="L123">        return overflowX;</span>
     }
 
     /**
@@ -131,10 +128,9 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public Overflows Overflow_Y()
+    public Overflows getOverflowY()
     {
-<span class="nc" id="L137">        return Overflow_Y;</span>
+<span class="nc" id="L133">        return overflowY;</span>
     }
 
     /**
@@ -142,10 +138,9 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public Positions Position()
+    public Positions getPosition()
     {
-<span class="nc" id="L148">        return Position;</span>
+<span class="nc" id="L143">        return position;</span>
     }
 
     /**
@@ -153,10 +148,9 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public za.co.mmagon.jwebswing.htmlbuilder.css.displays.Float Float()
+    public Floats getFloat()
     {
-<span class="nc" id="L159">        return Float;</span>
+<span class="nc" id="L153">        return floatProperty;</span>
     }
 
     /**
@@ -164,10 +158,9 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Z_Index()
+    public MeasurementCSSImpl getZIndex()
     {
-<span class="nc" id="L170">        return Z_Index;</span>
+<span class="nc" id="L163">        return zIndex;</span>
     }
 
     /**
@@ -175,10 +168,9 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Bottom()
+    public MeasurementCSSImpl getBottom()
     {
-<span class="nc" id="L181">        return Bottom;</span>
+<span class="nc" id="L173">        return bottom;</span>
     }
 
     /**
@@ -186,10 +178,9 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Left()
+    public MeasurementCSSImpl getLeft()
     {
-<span class="nc" id="L192">        return Left;</span>
+<span class="nc" id="L183">        return left;</span>
     }
 
     /**
@@ -197,10 +188,9 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Right()
+    public MeasurementCSSImpl getRight()
     {
-<span class="nc" id="L203">        return Right;</span>
+<span class="nc" id="L193">        return right;</span>
     }
 
     /**
@@ -208,162 +198,130 @@ public class DisplayCSSImpl implements DisplayCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Top()
+    public MeasurementCSSImpl getTop()
     {
-<span class="nc" id="L214">        return Top;</span>
+<span class="nc" id="L203">        return top;</span>
     }
 
     /**
-     * Sets the Display Format
-     * The display Property
-     * &lt;p&gt;
-     * The display property specifies if/how an element is displayed.
-     * &lt;p&gt;
-     * Every HTML element has a default display value depending on what type of element it is. The default display value for most elements is block or inline.
-     * Block-level Elements
-     * &lt;p&gt;
-     * A block-level element always starts on a new line and takes up the full width available (stretches out to the left and right as far as it can).
-     * The &amp;lt;div&amp;gt; element is a block-level element.
-     * &lt;p&gt;
-     * Examples of block-level elements:
-     * &lt;p&gt;
-     * &amp;lt;div&amp;gt;
-     * &amp;lt;h1&amp;gt; - &amp;lt;h6&amp;gt;
-     * &lt;p&gt;
-     * &amp;lt;form&amp;gt;
-     * &amp;lt;header&amp;gt;
-     * &amp;lt;footer&amp;gt;
-     * &amp;lt;section&amp;gt;
-     * &lt;p&gt;
-     * Inline Elements
-     * &lt;p&gt;
-     * An inline element does not start on a new line and only takes up as much width as necessary.
-     * &lt;p&gt;
-     * This is an inline &amp;lt;span&amp;gt; element inside a paragraph.
-     * &lt;p&gt;
-     * Examples of inline elements:
-     * &lt;p&gt;
-     * &amp;lt;span&amp;gt;
-     * &amp;lt;a&amp;gt;
-     * &amp;lt;img&amp;gt;
+     * Sets the display
      *
-     * @param Display
+     * @param display
      */
-    public void setDisplay(Displays Display)
+    public void setDisplay(Displays display)
     {
-<span class="nc" id="L255">        this.Display = Display;</span>
-<span class="nc" id="L256">    }</span>
+<span class="fc" id="L213">        this.display = display;</span>
+<span class="fc" id="L214">    }</span>
 
     /**
-     * Sets the mouse cursor
+     * Sets the cursor
      *
-     * @param Cursor
+     * @param oursor
      */
-    public void setCursor(Cursors Cursor)
+    public void setOursor(Cursors oursor)
     {
-<span class="nc" id="L265">        this.Cursor = Cursor;</span>
-<span class="nc" id="L266">    }</span>
+<span class="nc" id="L223">        this.oursor = oursor;</span>
+<span class="nc" id="L224">    }</span>
 
     /**
      * Sets the overflow
      *
-     * @param Overflow
+     * @param overflow
      */
-    public void setOverflow(Overflows Overflow)
+    public void setOverflow(Overflows overflow)
     {
-<span class="nc" id="L275">        this.Overflow = Overflow;</span>
-<span class="nc" id="L276">    }</span>
+<span class="nc" id="L233">        this.overflow = overflow;</span>
+<span class="nc" id="L234">    }</span>
 
     /**
-     * Sets the horizontal overflow
+     * Sets the overflow x
      *
-     * @param Overflow_X
+     * @param overflowX
      */
-    public void setOverflow_X(Overflows Overflow_X)
+    public void setOverflowX(Overflows overflowX)
     {
-<span class="nc" id="L285">        this.Overflow_X = Overflow_X;</span>
-<span class="nc" id="L286">    }</span>
+<span class="nc" id="L243">        this.overflowX = overflowX;</span>
+<span class="nc" id="L244">    }</span>
 
     /**
-     * Sets the vertical overflow
+     * Sets the overflow y
      *
-     * @param Overflow_Y
+     * @param overflowY
      */
-    public void setOverflow_Y(Overflows Overflow_Y)
+    public void setOverflowY(Overflows overflowY)
     {
-<span class="nc" id="L295">        this.Overflow_Y = Overflow_Y;</span>
-<span class="nc" id="L296">    }</span>
+<span class="nc" id="L253">        this.overflowY = overflowY;</span>
+<span class="nc" id="L254">    }</span>
 
     /**
-     * Sets the display position
+     * Sets the position
      *
-     * @param Position
+     * @param position
      */
-    public void setPosition(Positions Position)
+    public void setPosition(Positions position)
     {
-<span class="nc" id="L305">        this.Position = Position;</span>
-<span class="nc" id="L306">    }</span>
+<span class="nc" id="L263">        this.position = position;</span>
+<span class="nc" id="L264">    }</span>
 
     /**
-     * Sets the flow to be applied
+     * Sets the float
      *
-     * @param Float
+     * @param floatProperty
      */
-    public void setFloat(za.co.mmagon.jwebswing.htmlbuilder.css.displays.Float Float)
+    public void setFloat(Floats floatProperty)
     {
-<span class="nc" id="L315">        this.Float = Float;</span>
-<span class="nc" id="L316">    }</span>
+<span class="nc" id="L273">        this.floatProperty = floatProperty;</span>
+<span class="nc" id="L274">    }</span>
 
     /**
-     * Sets the Z-Index
+     * Sets the z index
      *
-     * @param Z_Index
+     * @param zIndex
      */
-    public void setZ_Index(MeasurementCSS Z_Index)
+    public void setzIndex(MeasurementCSSImpl zIndex)
     {
-<span class="nc" id="L325">        this.Z_Index = Z_Index;</span>
-<span class="nc" id="L326">    }</span>
+<span class="nc" id="L283">        this.zIndex = zIndex;</span>
+<span class="nc" id="L284">    }</span>
 
     /**
-     * Sets the bottom margin edge for a positioned box
+     * Sets the bottom
      *
-     * @param Bottom
+     * @param bottom
      */
-    public void setBottom(MeasurementCSS Bottom)
+    public void setBottom(MeasurementCSSImpl bottom)
     {
-<span class="nc" id="L335">        this.Bottom = Bottom;</span>
-<span class="nc" id="L336">    }</span>
+<span class="nc" id="L293">        this.bottom = bottom;</span>
+<span class="nc" id="L294">    }</span>
 
     /**
-     * Sets the bottom margin edge for a positioned box
+     * Sets the left
      *
-     * @param Left
+     * @param left
      */
-    public void setLeft(MeasurementCSS Left)
+    public void setLeft(MeasurementCSSImpl left)
     {
-<span class="nc" id="L345">        this.Left = Left;</span>
-<span class="nc" id="L346">    }</span>
+<span class="nc" id="L303">        this.left = left;</span>
+<span class="nc" id="L304">    }</span>
 
     /**
-     * Sets the bottom margin edge for a positioned box
+     * Sets the right
      *
-     * @param Right
+     * @param right
      */
-    public void setRight(MeasurementCSS Right)
+    public void setRight(MeasurementCSSImpl right)
     {
-<span class="nc" id="L355">        this.Right = Right;</span>
-<span class="nc" id="L356">    }</span>
+<span class="nc" id="L313">        this.right = right;</span>
+<span class="nc" id="L314">    }</span>
 
     /**
-     * Sets the bottom margin edge for a positioned box
+     * Sets the top
      *
-     * @param Top
+     * @param top
      */
-    public void setTop(MeasurementCSS Top)
+    public void setTop(MeasurementCSSImpl top)
     {
-<span class="nc" id="L365">        this.Top = Top;</span>
-<span class="nc" id="L366">    }</span>
+<span class="nc" id="L323">        this.top = top;</span>
+<span class="nc" id="L324">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

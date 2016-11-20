@@ -10,7 +10,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
  * @author Marc Magon
  */
 public class ColourCSSImpl extends CSSImplementationAdapter<ColourCSS, ColourCSSImpl>
-        implements Serializable, CSSImplementationClass<ColourCSS, ColourCSSImpl>
+        implements Serializable, CSSImplementationValue
 {
 
     /**

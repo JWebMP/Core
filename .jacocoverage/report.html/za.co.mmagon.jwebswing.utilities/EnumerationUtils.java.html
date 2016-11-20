@@ -16,7 +16,7 @@
  */
 package za.co.mmagon.jwebswing.utilities;
 
-import java.util.Comparator;
+import java.util.*;
 
 /**
  * Utilities for Enumerations
@@ -26,20 +26,27 @@ import java.util.Comparator;
  */
 public class EnumerationUtils
 {
+<span class="fc" id="L29">    public static final EnumerationNameSorter enumNameSorter = new EnumerationNameSorter();</span>
+    
+    /**
+     * Instance only construction
+     */
+    private EnumerationUtils()
+<span class="nc" id="L35">    {</span>
+        //No construction
+<span class="nc" id="L37">    }</span>
 
-    public EnumerationUtils()
-<span class="nc" id="L31">    {</span>
-<span class="nc" id="L32">    }</span>
-
-<span class="fc" id="L34">    public static EnumerationNameSorter EnumNameSorter = new EnumerationNameSorter();</span>
-
-<span class="fc" id="L36">    static class EnumerationNameSorter implements Comparator&lt;Enum&gt;</span>
+    
+    /**
+     * A sorter for an enumeration name by name
+     */
+<span class="fc" id="L43">    public static class EnumerationNameSorter implements Comparator&lt;Enum&gt;</span>
     {
 
         @Override
         public int compare(Enum o1, Enum o2)
         {
-<span class="fc" id="L42">            return o1.name().compareTo(o2.name());</span>
+<span class="fc" id="L49">            return o1.name().compareTo(o2.name());</span>
         }
 
     }

@@ -4,7 +4,6 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.animatable.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.borders.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.displays.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.fonts.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.heightwidth.*;
@@ -42,10 +41,6 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
      * The Custom cc
      */
     private CustomCSSImpl custom;
-    /**
-     * The Colour CSS
-     */
-    private ColourCSSImpl colour;
     /**
      * The getDisplay CSS
      */
@@ -141,20 +136,6 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
             border = new BorderCSSImpl();
         }
         return border;
-    }
-
-    /**
-     * Gets the colour
-     *
-     * @return
-     */
-    public ColourCSSImpl getColour()
-    {
-        if (colour == null)
-        {
-            colour = new ColourCSSImpl();
-        }
-        return colour;
     }
 
     /**
@@ -315,16 +296,6 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
     public void setCustom(CustomCSSImpl custom)
     {
         this.custom = custom;
-    }
-
-    /**
-     * Sets the colour object
-     *
-     * @param colour
-     */
-    public void setColour(ColourCSSImpl colour)
-    {
-        this.colour = colour;
     }
 
     /**

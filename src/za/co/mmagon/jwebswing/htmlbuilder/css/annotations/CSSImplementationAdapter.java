@@ -71,7 +71,7 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
         try
         {
 
-            Map<StringBuilder, Object> fieldMapping = getPropertyFactory().processAnnotation(annotation);
+            Map<StringBuilder, Object> fieldMapping = getPropertyFactory().getCSS(annotation);
             newInstance = (T) getPropertyFactory().getImplementationObject(annotation, fieldMapping);
             return newInstance;
         }

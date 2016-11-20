@@ -127,7 +127,7 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
     public String toString()
     {
 <span class="fc" id="L129">        String s = null;</span>
-<span class="pc bpc" id="L130" title="2 of 4 branches missed.">        switch (getJavascriptType())</span>
+<span class="pc bpc" id="L130" title="3 of 4 branches missed.">        switch (getJavascriptType())</span>
         {
             case Javascript:
             {
@@ -149,12 +149,12 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
             {
                 try
                 {
-<span class="fc" id="L152">                    s = jsonObjectMapper.writeValueAsString(this);</span>
+<span class="nc" id="L152">                    s = jsonObjectMapper.writeValueAsString(this);</span>
                 }
 <span class="nc" id="L154">                catch (JsonProcessingException ex)</span>
                 {
 <span class="nc" id="L156">                    LOG.fatal(&quot;Error Writing as JSON Data!&quot;, ex);</span>
-<span class="fc" id="L157">                }</span>
+<span class="nc" id="L157">                }</span>
 <span class="nc" id="L158">                break;</span>
             }
             case Function:

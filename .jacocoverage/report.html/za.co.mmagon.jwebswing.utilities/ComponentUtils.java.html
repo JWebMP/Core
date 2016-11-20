@@ -16,15 +16,11 @@
  */
 package za.co.mmagon.jwebswing.utilities;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import za.co.mmagon.jwebswing.CSSComponent;
-import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementTypes;
+import java.util.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.heightwidth.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.margins.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * This Class
@@ -37,136 +33,137 @@ public class ComponentUtils
 
     public static synchronized Component removeAllMargins(Component c)
     {
-<span class="nc" id="L40">        c.addClass(CSSClassList.NoMargings.cssClass);</span>
-<span class="nc" id="L41">        return c;</span>
+<span class="nc" id="L36">        c.addClass(CSSClassList.NoMargings.cssClass);</span>
+<span class="nc" id="L37">        return c;</span>
     }
 
     public static synchronized Component setWidth100Percent(Component c)
     {
-<span class="nc" id="L46">        c.addClass(CSSClassList.Width100Percent.cssClass);</span>
-<span class="nc" id="L47">        return c;</span>
+<span class="nc" id="L42">        c.addClass(CSSClassList.Width100Percent.cssClass);</span>
+<span class="nc" id="L43">        return c;</span>
     }
 
     public static synchronized Component setWidth50Percent(Component c)
     {
-<span class="nc" id="L52">        c.addClass(CSSClassList.Width50Percent.cssClass);</span>
-<span class="nc" id="L53">        return c;</span>
+<span class="nc" id="L48">        c.addClass(CSSClassList.Width50Percent.cssClass);</span>
+<span class="nc" id="L49">        return c;</span>
     }
 
     public static synchronized Component setFullScreen(Component c)
     {
-<span class="nc" id="L58">        c.addClass(CSSClassList.FullScreen.cssClass);</span>
-<span class="nc" id="L59">        return c;</span>
+<span class="nc" id="L54">        c.addClass(CSSClassList.FullScreen.cssClass);</span>
+<span class="nc" id="L55">        return c;</span>
     }
 
     /**
-     * Converts a hashmap to a 2d array for JSON Reading
+     * Converts a HashMap to a 2d array for JSON Reading
      *
      * @param map
+     *
      * @return an array that can be read in JSON as an array
      */
     public static synchronized Object[][] HashMapToArray(HashMap map)
     {
-<span class="nc" id="L70">        Object[][] map2D = new Object[map.size()][2];</span>
-<span class="nc" id="L71">        Set entries = map.entrySet();</span>
-<span class="nc" id="L72">        Iterator entriesIterator = entries.iterator();</span>
-<span class="nc" id="L73">        int i = 0;</span>
-<span class="nc bnc" id="L74" title="All 2 branches missed.">        while (entriesIterator.hasNext())</span>
+<span class="nc" id="L67">        Object[][] map2D = new Object[map.size()][2];</span>
+<span class="nc" id="L68">        Set entries = map.entrySet();</span>
+<span class="nc" id="L69">        Iterator entriesIterator = entries.iterator();</span>
+<span class="nc" id="L70">        int i = 0;</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        while (entriesIterator.hasNext())</span>
         {
 
-<span class="nc" id="L77">            Map.Entry mapping = (Map.Entry) entriesIterator.next();</span>
-<span class="nc" id="L78">            map2D[i][0] = mapping.getKey();</span>
-<span class="nc" id="L79">            map2D[i][1] = mapping.getValue();</span>
-<span class="nc" id="L80">            i++;</span>
-<span class="nc" id="L81">        }</span>
+<span class="nc" id="L74">            Map.Entry mapping = (Map.Entry) entriesIterator.next();</span>
+<span class="nc" id="L75">            map2D[i][0] = mapping.getKey();</span>
+<span class="nc" id="L76">            map2D[i][1] = mapping.getValue();</span>
+<span class="nc" id="L77">            i++;</span>
+<span class="nc" id="L78">        }</span>
 
-<span class="nc" id="L83">        return map2D;</span>
+<span class="nc" id="L80">        return map2D;</span>
     }
 
     public ComponentUtils()
-<span class="nc" id="L87">    {</span>
-<span class="nc" id="L88">    }</span>
+<span class="nc" id="L84">    {</span>
+<span class="nc" id="L85">    }</span>
 
     @Override
     public String toString()
     {
-<span class="nc" id="L93">        return super.toString();</span>
+<span class="nc" id="L90">        return super.toString();</span>
     }
 
-<span class="nc" id="L96">    public enum CSSClassList</span>
+<span class="nc" id="L93">    public enum CSSClassList</span>
     {
-<span class="nc" id="L98">        NoMargings(new NoMarginsPadding()),</span>
-<span class="nc" id="L99">        Width50Percent(new WidthFiftyPercent()),</span>
-<span class="nc" id="L100">        Width100Percent(new WidthHundredPercent()),</span>
-<span class="nc" id="L101">        FullScreen(new FullScreenCSSClass());</span>
+<span class="nc" id="L95">        NoMargings(new NoMarginsPadding()),</span>
+<span class="nc" id="L96">        Width50Percent(new WidthFiftyPercent()),</span>
+<span class="nc" id="L97">        Width100Percent(new WidthHundredPercent()),</span>
+<span class="nc" id="L98">        FullScreen(new FullScreenCSSClass());</span>
 
         private CSSComponent cssClass;
 
         private CSSClassList(CSSComponent comp)
-<span class="nc" id="L106">        {</span>
-<span class="nc" id="L107">            this.cssClass = comp;</span>
-<span class="nc" id="L108">        }</span>
+<span class="nc" id="L103">        {</span>
+<span class="nc" id="L104">            this.cssClass = comp;</span>
+<span class="nc" id="L105">        }</span>
 
         public CSSComponent getCssClass()
         {
-<span class="nc" id="L112">            return cssClass;</span>
+<span class="nc" id="L109">            return cssClass;</span>
         }
 
         public void setCssClass(CSSComponent cssClass)
         {
-<span class="nc" id="L117">            this.cssClass = cssClass;</span>
-<span class="nc" id="L118">        }</span>
+<span class="nc" id="L114">            this.cssClass = cssClass;</span>
+<span class="nc" id="L115">        }</span>
 
     }
 
-    @CSS(Margin_Bottom = @MeasurementCSS(value = 0), Margin_Top = @MeasurementCSS(0), Margin_Left = @MeasurementCSS(0), Margin_Right = @MeasurementCSS(0))
+    @MarginsCSS(MarginTop = @MeasurementCSS(0), MarginLeft = @MeasurementCSS(0), MarginRight = @MeasurementCSS(0))
     public static class NoMarginsPadding extends CSSComponent
     {
 
         public NoMarginsPadding()
         {
-<span class="nc" id="L128">            super(&quot;noMargins&quot;);</span>
-<span class="nc" id="L129">        }</span>
+<span class="nc" id="L125">            super(&quot;noMargins&quot;);</span>
+<span class="nc" id="L126">        }</span>
 
         public String getString()
         {
-<span class="nc" id="L133">            return &quot;noMargins&quot;;</span>
+<span class="nc" id="L130">            return &quot;noMargins&quot;;</span>
         }
     }
 
-    @CSS(Width = @MeasurementCSS(value = 100, MeasurementType = MeasurementTypes.Percent))
+    @HeightWidthCSS(Width = @MeasurementCSS(value = 100, MeasurementType = MeasurementTypes.Percent))
     public static class WidthHundredPercent extends CSSComponent
     {
 
         public WidthHundredPercent()
         {
-<span class="nc" id="L143">            super(&quot;width100percent&quot;);</span>
-<span class="nc" id="L144">        }</span>
+<span class="nc" id="L140">            super(&quot;width100percent&quot;);</span>
+<span class="nc" id="L141">        }</span>
 
         public String getCSSClassName()
         {
-<span class="nc" id="L148">            return &quot;width100percent&quot;;</span>
+<span class="nc" id="L145">            return &quot;width100percent&quot;;</span>
         }
 
     }
 
-    @CSS(Width = @MeasurementCSS(value = 50, MeasurementType = MeasurementTypes.Percent))
+    @HeightWidthCSS(Width = @MeasurementCSS(value = 50, MeasurementType = MeasurementTypes.Percent))
     public static class WidthFiftyPercent extends CSSComponent
     {
 
         public WidthFiftyPercent()
         {
-<span class="nc" id="L159">            super(&quot;width50percent&quot;);</span>
-<span class="nc" id="L160">        }</span>
+<span class="nc" id="L156">            super(&quot;width50percent&quot;);</span>
+<span class="nc" id="L157">        }</span>
 
         public String getCSSClassName()
         {
-<span class="nc" id="L164">            return &quot;width50percent&quot;;</span>
+<span class="nc" id="L161">            return &quot;width50percent&quot;;</span>
         }
 
     }
 
-    @CSS(Width = @MeasurementCSS(value = 100, MeasurementType = MeasurementTypes.Percent),
+    @HeightWidthCSS(Width = @MeasurementCSS(value = 100, MeasurementType = MeasurementTypes.Percent),
             Height = @MeasurementCSS(value = 100, MeasurementType = MeasurementTypes.Percent))
     public static class FullScreenCSSClass extends CSSComponent
     {
@@ -175,12 +172,12 @@ public class ComponentUtils
 
         public FullScreenCSSClass()
         {
-<span class="nc" id="L178">            super(&quot;fullscreen&quot;);</span>
-<span class="nc" id="L179">        }</span>
+<span class="nc" id="L175">            super(&quot;fullscreen&quot;);</span>
+<span class="nc" id="L176">        }</span>
 
         public String getCSSClassName()
         {
-<span class="nc" id="L183">            return &quot;fullscreen&quot;;</span>
+<span class="nc" id="L180">            return &quot;fullscreen&quot;;</span>
         }
     }
 }

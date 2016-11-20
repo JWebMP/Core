@@ -1,6 +1,7 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.measurement;
 
 import com.fasterxml.jackson.annotation.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
 
 /**
@@ -9,11 +10,12 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
  * @author Marc Magon
  */
 public class MeasurementCSSImpl extends CSSImplementationAdapter<MeasurementCSS, MeasurementCSSImpl>
-        implements CSSImplementationClass<MeasurementCSS, MeasurementCSSImpl>
+        implements CSSImplementationValue, CSSImplementationClass<MeasurementCSS, MeasurementCSSImpl>
 {
 
     private static final long serialVersionUID = 1L;
 
+    @CSSDetail
     private double value;
     private MeasurementTypes MeasurementType;
 

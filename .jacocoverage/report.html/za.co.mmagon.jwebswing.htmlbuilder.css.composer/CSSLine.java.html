@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CSSLine.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.htmlbuilder.css.composer</a> &gt; <span class="el_source">CSSLine.java</span></div><h1>CSSLine.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
-import java.io.Serializable;
-import java.util.Comparator;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 /**
  * This denotes a line for the CSS, for the composer.
@@ -26,24 +25,25 @@ public class CSSLine implements Serializable, Comparable&lt;CSSLine&gt;, Compara
      * @param value    The value to assign
      */
     public CSSLine(String property, String value)
-<span class="fc" id="L29">    {</span>
+<span class="fc" id="L28">    {</span>
         String propertyUse;
-<span class="pc bpc" id="L31" title="1 of 2 branches missed.">        if (property == null)</span>
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">        if (property == null)</span>
         {
-<span class="nc" id="L33">            propertyUse = &quot;&quot;;</span>
+<span class="nc" id="L32">            propertyUse = &quot;&quot;;</span>
         }
         else
         {
-<span class="fc" id="L37">            propertyUse = property;</span>
+<span class="fc" id="L36">            propertyUse = property;</span>
         }
-<span class="fc" id="L39">        setProperty(propertyUse);</span>
-<span class="fc" id="L40">        setValue(value);</span>
-<span class="fc" id="L41">    }</span>
+<span class="fc" id="L38">        setProperty(propertyUse);</span>
+<span class="fc" id="L39">        setValue(value);</span>
+<span class="fc" id="L40">    }</span>
 
     /**
      * Converts method name to CSS name
      *
      * @param methodName The method name
+     *
      * @return Cleaned name
      */
     private String cleanMethodNameToCSSName(String methodName)
@@ -115,38 +115,38 @@ public class CSSLine implements Serializable, Comparable&lt;CSSLine&gt;, Compara
      */
     public String getValue()
     {
-<span class="fc" id="L118">        return value.replace(&quot;_&quot;, &quot;-&quot;);</span>
+<span class="fc" id="L118">        return value.replace(&quot;_&quot;, &quot;-&quot;).replaceAll(&quot; ;&quot;, &quot;;&quot;);</span>
     }
 
     /**
-     * Sets what the value of this property is.
-     * Cleans out any quotations from the value in case
+     * Sets what the value of this property is. Cleans out any quotations from the value in case
      *
      * @param value The new value of the property
      */
     public final void setValue(String value)
     {
         String valueUse;
-<span class="pc bpc" id="L130" title="1 of 2 branches missed.">        if(value == null)</span>
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">        if (value == null)</span>
         {
-<span class="nc" id="L132">            valueUse = &quot;&quot;;</span>
+<span class="nc" id="L131">            valueUse = &quot;&quot;;</span>
         }
         else
         {
-<span class="fc" id="L136">            valueUse = value;</span>
+<span class="fc" id="L135">            valueUse = value;</span>
         }
-<span class="pc bpc" id="L138" title="1 of 2 branches missed.">        if (!valueUse.isEmpty())</span>
+<span class="pc bpc" id="L137" title="1 of 2 branches missed.">        if (!valueUse.isEmpty())</span>
         {
-<span class="fc" id="L140">            valueUse = valueUse.replace(&quot;'&quot;, &quot;&quot;);</span>
-<span class="fc" id="L141">            valueUse = valueUse.replace(&quot;\&quot;&quot;, &quot;&quot;);</span>
+<span class="fc" id="L139">            valueUse = valueUse.replace(&quot;'&quot;, &quot;&quot;);</span>
+<span class="fc" id="L140">            valueUse = valueUse.replace(&quot;\&quot;&quot;, &quot;&quot;);</span>
         }
-<span class="fc" id="L143">        this.value = valueUse;</span>
-<span class="fc" id="L144">    }</span>
+<span class="fc" id="L142">        this.value = valueUse;</span>
+<span class="fc" id="L143">    }</span>
 
     /**
      * Returns true if the input object's property and value matches this one
      *
      * @param obj
+     *
      * @return
      */
     @Override
@@ -174,18 +174,20 @@ public class CSSLine implements Serializable, Comparable&lt;CSSLine&gt;, Compara
 
     /**
      * The property value pair of this line return The property value pair of this line in quotations. It filters out value into CSS readable
+     *
      * @param renderQuotations
-     * @return 
+     *
+     * @return
      */
     public String toString(boolean renderQuotations)
     {
-<span class="pc bpc" id="L182" title="1 of 2 branches missed.">        if (renderQuotations)</span>
+<span class="pc bpc" id="L184" title="1 of 2 branches missed.">        if (renderQuotations)</span>
         {
-<span class="nc" id="L184">            return &quot;'&quot; + getProperty() + &quot;:&quot; + getValue() + &quot;'&quot;;</span>
+<span class="nc" id="L186">            return &quot;'&quot; + getProperty() + &quot;:&quot; + getValue() + &quot;'&quot;;</span>
         }
         else
         {
-<span class="fc" id="L188">            return getProperty() + &quot;:&quot; + getValue();</span>
+<span class="fc" id="L190">            return getProperty() + &quot;:&quot; + getValue();</span>
         }
     }
 
@@ -193,16 +195,17 @@ public class CSSLine implements Serializable, Comparable&lt;CSSLine&gt;, Compara
      * Compares this class with another. Sorts by property, then by value
      *
      * @param o The CSS line to compare to
+     *
      * @return -1 for DESC, 0 for equal, 1 for ASC
      */
     @Override
     public int compareTo(CSSLine o)
     {
-<span class="nc bnc" id="L201" title="All 2 branches missed.">        if (o.property.compareTo(property) == 0)</span>
+<span class="nc bnc" id="L204" title="All 2 branches missed.">        if (o.property.compareTo(property) == 0)</span>
         {
-<span class="nc" id="L203">            return o.value.compareTo(value);</span>
+<span class="nc" id="L206">            return o.value.compareTo(value);</span>
         }
-<span class="nc" id="L205">        return o.property.compareTo(property);</span>
+<span class="nc" id="L208">        return o.property.compareTo(property);</span>
     }
 
     /**
@@ -210,16 +213,17 @@ public class CSSLine implements Serializable, Comparable&lt;CSSLine&gt;, Compara
      *
      * @param o1 The CSS line to compare from
      * * @param o2 The CSS line to compare to
+     *
      * @return -1 for DESC, 0 for equal, 1 for ASC
      */
     @Override
     public int compare(CSSLine o1, CSSLine o2)
     {
-<span class="nc bnc" id="L218" title="All 2 branches missed.">        if (o1.property.compareTo(o2.property) == 0)</span>
+<span class="nc bnc" id="L222" title="All 2 branches missed.">        if (o1.property.compareTo(o2.property) == 0)</span>
         {
-<span class="nc" id="L220">            return o1.value.compareTo(o2.value);</span>
+<span class="nc" id="L224">            return o1.value.compareTo(o2.value);</span>
         }
-<span class="nc" id="L222">        return o1.property.compareTo(o2.property);</span>
+<span class="nc" id="L226">        return o1.property.compareTo(o2.property);</span>
     }
 
 }

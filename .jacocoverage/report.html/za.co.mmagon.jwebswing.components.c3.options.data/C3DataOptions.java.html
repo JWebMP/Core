@@ -16,15 +16,12 @@
  */
 package za.co.mmagon.jwebswing.components.c3.options.data;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.ArrayList;
-import java.util.HashMap;
-import za.co.mmagon.jwebswing.components.c3.options.C3DataSelectionOptions;
-import za.co.mmagon.jwebswing.components.c3.options.C3RegionOptions;
-import za.co.mmagon.jwebswing.components.c3.series.C3DataColumnHeader;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourHex;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptFunction;
+import com.fasterxml.jackson.annotation.*;
+import java.util.*;
+import za.co.mmagon.jwebswing.components.c3.options.*;
+import za.co.mmagon.jwebswing.components.c3.series.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
 
 /**
  * Represents a C3 Graphing Data Structure
@@ -60,7 +57,7 @@ public class C3DataOptions extends JavaScriptPart
     private JavascriptFunction color;
     private HashMap&lt;C3DataColumnHeader, ColourHex&gt; colors;
     private ArrayList&lt;C3DataColumnHeader&gt; hide;
-    private C3DataEmptyOptions empty;//empty.label.text
+    private C3DataEmptyOptions empty;
     private C3DataSelectionOptions selection;
 
     @JsonIgnore
@@ -74,8 +71,9 @@ public class C3DataOptions extends JavaScriptPart
      * Constructs a new Data Options Object
      */
     public C3DataOptions()
-<span class="nc" id="L77">    {</span>
-<span class="nc" id="L78">    }</span>
+<span class="nc" id="L74">    {</span>
+        //No options are required
+<span class="nc" id="L76">    }</span>
 
     /**
      * Constructs a new instance of data options with the column headers set
@@ -83,9 +81,9 @@ public class C3DataOptions extends JavaScriptPart
      * @param columnHeaders
      */
     public C3DataOptions(ArrayList&lt;C3DataColumnHeader&gt; columnHeaders)
-<span class="nc" id="L86">    {</span>
-<span class="nc" id="L87">        this.columnHeaders = columnHeaders;</span>
-<span class="nc" id="L88">    }</span>
+<span class="nc" id="L84">    {</span>
+<span class="nc" id="L85">        this.columnHeaders = columnHeaders;</span>
+<span class="nc" id="L86">    }</span>
 
     /**
      * Returns the current column headers array
@@ -94,11 +92,11 @@ public class C3DataOptions extends JavaScriptPart
      */
     public ArrayList&lt;C3DataColumnHeader&gt; getColumnHeaders()
     {
-<span class="nc bnc" id="L97" title="All 2 branches missed.">        if (columnHeaders == null)</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        if (columnHeaders == null)</span>
         {
-<span class="nc" id="L99">            columnHeaders = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L97">            columnHeaders = new ArrayList&lt;&gt;();</span>
         }
-<span class="nc" id="L101">        return columnHeaders;</span>
+<span class="nc" id="L99">        return columnHeaders;</span>
     }
 
     /**
@@ -108,8 +106,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setColumnHeaders(ArrayList&lt;C3DataColumnHeader&gt; columnHeaders)
     {
-<span class="nc" id="L111">        this.columnHeaders = columnHeaders;</span>
-<span class="nc" id="L112">    }</span>
+<span class="nc" id="L109">        this.columnHeaders = columnHeaders;</span>
+<span class="nc" id="L110">    }</span>
 
     /**
      * Returns if the data should be delivered by row
@@ -118,7 +116,7 @@ public class C3DataOptions extends JavaScriptPart
      */
     public boolean isRenderByRow()
     {
-<span class="nc" id="L121">        return renderByRow;</span>
+<span class="nc" id="L119">        return renderByRow;</span>
     }
 
     /**
@@ -128,8 +126,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setRenderByRow(boolean renderByRow)
     {
-<span class="nc" id="L131">        this.renderByRow = renderByRow;</span>
-<span class="nc" id="L132">    }</span>
+<span class="nc" id="L129">        this.renderByRow = renderByRow;</span>
+<span class="nc" id="L130">    }</span>
 
     /**
      * Gets if the data should be delivered by column
@@ -138,7 +136,7 @@ public class C3DataOptions extends JavaScriptPart
      */
     public boolean isRenderByColumn()
     {
-<span class="nc" id="L141">        return renderByColumn;</span>
+<span class="nc" id="L139">        return renderByColumn;</span>
     }
 
     /**
@@ -148,8 +146,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setRenderByColumn(boolean renderByColumn)
     {
-<span class="nc" id="L151">        this.renderByColumn = renderByColumn;</span>
-<span class="nc" id="L152">    }</span>
+<span class="nc" id="L149">        this.renderByColumn = renderByColumn;</span>
+<span class="nc" id="L150">    }</span>
 
     /**
      * *************************************************************************************************
@@ -163,7 +161,7 @@ public class C3DataOptions extends JavaScriptPart
      */
     public String getUrl()
     {
-<span class="nc" id="L166">        return url;</span>
+<span class="nc" id="L164">        return url;</span>
     }
 
     /**
@@ -173,15 +171,15 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setUrl(String url)
     {
-<span class="nc" id="L176">        this.url = url;</span>
-<span class="nc" id="L177">    }</span>
+<span class="nc" id="L174">        this.url = url;</span>
+<span class="nc" id="L175">    }</span>
 
     /**
      * Parse a JSON object for data. See also data.keys.
      */
     public JavaScriptPart getJson()
     {
-<span class="nc" id="L184">        return json;</span>
+<span class="nc" id="L182">        return json;</span>
     }
 
     /**
@@ -191,8 +189,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setJson(JavaScriptPart json)
     {
-<span class="nc" id="L194">        this.json = json;</span>
-<span class="nc" id="L195">    }</span>
+<span class="nc" id="L192">        this.json = json;</span>
+<span class="nc" id="L193">    }</span>
 
     /**
      * Load data from a multidimensional array, with the first element containing the data names, the following containing related data in that order.
@@ -201,11 +199,11 @@ public class C3DataOptions extends JavaScriptPart
      */
     public C3RowData getRows()
     {
-<span class="nc bnc" id="L204" title="All 2 branches missed.">        if (rows == null)</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">        if (rows == null)</span>
         {
-<span class="nc" id="L206">            rows = new C3RowData();</span>
+<span class="nc" id="L204">            rows = new C3RowData();</span>
         }
-<span class="nc" id="L208">        return rows;</span>
+<span class="nc" id="L206">        return rows;</span>
     }
 
     /**
@@ -215,8 +213,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setRows(C3RowData rows)
     {
-<span class="nc" id="L218">        this.rows = rows;</span>
-<span class="nc" id="L219">    }</span>
+<span class="nc" id="L216">        this.rows = rows;</span>
+<span class="nc" id="L217">    }</span>
 
     /**
      * Load data from a multidimensional array, with each element containing an array consisting of a datum name and associated data values.
@@ -225,11 +223,11 @@ public class C3DataOptions extends JavaScriptPart
      */
     public C3ColumnData getColumns()
     {
-<span class="nc bnc" id="L228" title="All 2 branches missed.">        if (columns == null)</span>
+<span class="nc bnc" id="L226" title="All 2 branches missed.">        if (columns == null)</span>
         {
-<span class="nc" id="L230">            columns = new C3ColumnData(new C3DataColumnHeader(&quot;Header&quot;));</span>
+<span class="nc" id="L228">            columns = new C3ColumnData(new C3DataColumnHeader(&quot;Header&quot;));</span>
         }
-<span class="nc" id="L232">        return columns;</span>
+<span class="nc" id="L230">        return columns;</span>
     }
 
     /**
@@ -239,8 +237,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setColumns(C3ColumnData columns)
     {
-<span class="nc" id="L242">        this.columns = columns;</span>
-<span class="nc" id="L243">    }</span>
+<span class="nc" id="L240">        this.columns = columns;</span>
+<span class="nc" id="L241">    }</span>
 
     /**
      * Used if loading JSON via data.url:
@@ -249,7 +247,7 @@ public class C3DataOptions extends JavaScriptPart
      */
     public String getMimeType()
     {
-<span class="nc" id="L252">        return mimeType;</span>
+<span class="nc" id="L250">        return mimeType;</span>
     }
 
     /**
@@ -259,8 +257,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setMimeType(String mimeType)
     {
-<span class="nc" id="L262">        this.mimeType = mimeType;</span>
-<span class="nc" id="L263">    }</span>
+<span class="nc" id="L260">        this.mimeType = mimeType;</span>
+<span class="nc" id="L261">    }</span>
 
     /**
      * Choose which JSON object keys correspond to desired data.
@@ -269,11 +267,11 @@ public class C3DataOptions extends JavaScriptPart
      */
     public ArrayList&lt;String&gt; getKeys()
     {
-<span class="nc bnc" id="L272" title="All 2 branches missed.">        if (keys == null)</span>
+<span class="nc bnc" id="L270" title="All 2 branches missed.">        if (keys == null)</span>
         {
-<span class="nc" id="L274">            keys = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L272">            keys = new ArrayList&lt;&gt;();</span>
         }
-<span class="nc" id="L276">        return keys;</span>
+<span class="nc" id="L274">        return keys;</span>
     }
 
     /**
@@ -283,8 +281,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setKeys(ArrayList&lt;String&gt; keys)
     {
-<span class="nc" id="L286">        this.keys = keys;</span>
-<span class="nc" id="L287">    }</span>
+<span class="nc" id="L284">        this.keys = keys;</span>
+<span class="nc" id="L285">    }</span>
 
     /**
      * Specify the key of x values in the data.
@@ -296,7 +294,7 @@ public class C3DataOptions extends JavaScriptPart
      */
     public C3DataColumnHeader getX()
     {
-<span class="nc" id="L299">        return x;</span>
+<span class="nc" id="L297">        return x;</span>
     }
 
     /**
@@ -309,8 +307,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setX(C3DataColumnHeader x)
     {
-<span class="nc" id="L312">        this.x = x;</span>
-<span class="nc" id="L313">    }</span>
+<span class="nc" id="L310">        this.x = x;</span>
+<span class="nc" id="L311">    }</span>
 
     /**
      * Specify the keys of the x values for each data.
@@ -321,11 +319,11 @@ public class C3DataOptions extends JavaScriptPart
      */
     public HashMap&lt;C3DataColumnHeader, C3DataXAxis&gt; getXs()
     {
-<span class="nc bnc" id="L324" title="All 2 branches missed.">        if (xs == null)</span>
+<span class="nc bnc" id="L322" title="All 2 branches missed.">        if (xs == null)</span>
         {
-<span class="nc" id="L326">            xs = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L324">            xs = new HashMap&lt;&gt;();</span>
         }
-<span class="nc" id="L328">        return xs;</span>
+<span class="nc" id="L326">        return xs;</span>
     }
 
     /**
@@ -337,8 +335,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setXs(HashMap&lt;C3DataColumnHeader, C3DataXAxis&gt; xs)
     {
-<span class="nc" id="L340">        this.xs = xs;</span>
-<span class="nc" id="L341">    }</span>
+<span class="nc" id="L338">        this.xs = xs;</span>
+<span class="nc" id="L339">    }</span>
 
     /**
      * Set a format to parse string specifed as x.
@@ -347,7 +345,7 @@ public class C3DataOptions extends JavaScriptPart
      */
     public String getxFormat()
     {
-<span class="nc" id="L350">        return xFormat;</span>
+<span class="nc" id="L348">        return xFormat;</span>
     }
 
     /**
@@ -357,8 +355,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setxFormat(String xFormat)
     {
-<span class="nc" id="L360">        this.xFormat = xFormat;</span>
-<span class="nc" id="L361">    }</span>
+<span class="nc" id="L358">        this.xFormat = xFormat;</span>
+<span class="nc" id="L359">    }</span>
 
     /**
      * not yet
@@ -368,7 +366,7 @@ public class C3DataOptions extends JavaScriptPart
      */
     public String getxLocaltime()
     {
-<span class="nc" id="L371">        return xLocaltime;</span>
+<span class="nc" id="L369">        return xLocaltime;</span>
     }
 
     /**
@@ -379,8 +377,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setxLocaltime(String xLocaltime)
     {
-<span class="nc" id="L382">        this.xLocaltime = xLocaltime;</span>
-<span class="nc" id="L383">    }</span>
+<span class="nc" id="L380">        this.xLocaltime = xLocaltime;</span>
+<span class="nc" id="L381">    }</span>
 
     /**
      * not yet
@@ -390,7 +388,7 @@ public class C3DataOptions extends JavaScriptPart
      */
     public String getxSort()
     {
-<span class="nc" id="L393">        return xSort;</span>
+<span class="nc" id="L391">        return xSort;</span>
     }
 
     /**
@@ -401,8 +399,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setxSort(String xSort)
     {
-<span class="nc" id="L404">        this.xSort = xSort;</span>
-<span class="nc" id="L405">    }</span>
+<span class="nc" id="L402">        this.xSort = xSort;</span>
+<span class="nc" id="L403">    }</span>
 
     /**
      * Set custom data name.
@@ -411,11 +409,11 @@ public class C3DataOptions extends JavaScriptPart
      */
     public HashMap&lt;C3DataColumnHeader, String&gt; getNames()
     {
-<span class="nc bnc" id="L414" title="All 2 branches missed.">        if (names == null)</span>
+<span class="nc bnc" id="L412" title="All 2 branches missed.">        if (names == null)</span>
         {
-<span class="nc" id="L416">            names = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L414">            names = new HashMap&lt;&gt;();</span>
         }
-<span class="nc" id="L418">        return names;</span>
+<span class="nc" id="L416">        return names;</span>
     }
 
     /**
@@ -425,8 +423,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setNames(HashMap&lt;C3DataColumnHeader, String&gt; names)
     {
-<span class="nc" id="L428">        this.names = names;</span>
-<span class="nc" id="L429">    }</span>
+<span class="nc" id="L426">        this.names = names;</span>
+<span class="nc" id="L427">    }</span>
 
     /**
      * Set custom data class.
@@ -437,11 +435,11 @@ public class C3DataOptions extends JavaScriptPart
      */
     public HashMap&lt;C3DataColumnHeader, String&gt; getClasses()
     {
-<span class="nc bnc" id="L440" title="All 2 branches missed.">        if (classes == null)</span>
+<span class="nc bnc" id="L438" title="All 2 branches missed.">        if (classes == null)</span>
         {
-<span class="nc" id="L442">            classes = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L440">            classes = new HashMap&lt;&gt;();</span>
         }
-<span class="nc" id="L444">        return classes;</span>
+<span class="nc" id="L442">        return classes;</span>
     }
 
     /**
@@ -453,8 +451,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setClasses(HashMap&lt;C3DataColumnHeader, String&gt; classes)
     {
-<span class="nc" id="L456">        this.classes = classes;</span>
-<span class="nc" id="L457">    }</span>
+<span class="nc" id="L454">        this.classes = classes;</span>
+<span class="nc" id="L455">    }</span>
 
     /**
      * Sets the columns that are grouped together for the stacked effect
@@ -463,11 +461,11 @@ public class C3DataOptions extends JavaScriptPart
      */
     public ArrayList&lt;ArrayList&lt;C3DataColumnHeader&gt;&gt; getGroups()
     {
-<span class="nc bnc" id="L466" title="All 2 branches missed.">        if (groups == null)</span>
+<span class="nc bnc" id="L464" title="All 2 branches missed.">        if (groups == null)</span>
         {
-<span class="nc" id="L468">            groups = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L466">            groups = new ArrayList&lt;&gt;();</span>
         }
-<span class="nc" id="L470">        return groups;</span>
+<span class="nc" id="L468">        return groups;</span>
     }
 
     /**
@@ -477,8 +475,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setGroups(ArrayList&lt;ArrayList&lt;C3DataColumnHeader&gt;&gt; groups)
     {
-<span class="nc" id="L480">        this.groups = groups;</span>
-<span class="nc" id="L481">    }</span>
+<span class="nc" id="L478">        this.groups = groups;</span>
+<span class="nc" id="L479">    }</span>
 
     /**
      * Set y axis the data related to. y and y2 can be used.
@@ -487,11 +485,11 @@ public class C3DataOptions extends JavaScriptPart
      */
     public HashMap&lt;C3DataColumnHeader, C3DataAxesOptions&gt; getAxes()
     {
-<span class="nc bnc" id="L490" title="All 2 branches missed.">        if (axes == null)</span>
+<span class="nc bnc" id="L488" title="All 2 branches missed.">        if (axes == null)</span>
         {
-<span class="nc" id="L492">            axes = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L490">            axes = new HashMap&lt;&gt;();</span>
         }
-<span class="nc" id="L494">        return axes;</span>
+<span class="nc" id="L492">        return axes;</span>
     }
 
     /**
@@ -501,8 +499,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setAxes(HashMap&lt;C3DataColumnHeader, C3DataAxesOptions&gt; axes)
     {
-<span class="nc" id="L504">        this.axes = axes;</span>
-<span class="nc" id="L505">    }</span>
+<span class="nc" id="L502">        this.axes = axes;</span>
+<span class="nc" id="L503">    }</span>
 
     /**
      * Set chart type at once.
@@ -513,7 +511,7 @@ public class C3DataOptions extends JavaScriptPart
      */
     public C3GraphTypeOptions getType()
     {
-<span class="nc" id="L516">        return type;</span>
+<span class="nc" id="L514">        return type;</span>
     }
 
     /**
@@ -525,8 +523,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setType(C3GraphTypeOptions type)
     {
-<span class="nc" id="L528">        this.type = type;</span>
-<span class="nc" id="L529">    }</span>
+<span class="nc" id="L526">        this.type = type;</span>
+<span class="nc" id="L527">    }</span>
 
     /**
      * Set chart type for each data.
@@ -537,11 +535,11 @@ public class C3DataOptions extends JavaScriptPart
      */
     public HashMap&lt;C3DataColumnHeader, C3GraphTypeOptions&gt; getTypes()
     {
-<span class="nc bnc" id="L540" title="All 2 branches missed.">        if (types == null)</span>
+<span class="nc bnc" id="L538" title="All 2 branches missed.">        if (types == null)</span>
         {
-<span class="nc" id="L542">            types = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L540">            types = new HashMap&lt;&gt;();</span>
         }
-<span class="nc" id="L544">        return types;</span>
+<span class="nc" id="L542">        return types;</span>
     }
 
     /**
@@ -553,8 +551,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setTypes(HashMap&lt;C3DataColumnHeader, C3GraphTypeOptions&gt; types)
     {
-<span class="nc" id="L556">        this.types = types;</span>
-<span class="nc" id="L557">    }</span>
+<span class="nc" id="L554">        this.types = types;</span>
+<span class="nc" id="L555">    }</span>
 
     /**
      * Show labels on each data points.
@@ -563,7 +561,7 @@ public class C3DataOptions extends JavaScriptPart
      */
     public Boolean getLabels()
     {
-<span class="nc" id="L566">        return labels;</span>
+<span class="nc" id="L564">        return labels;</span>
     }
 
     /**
@@ -573,8 +571,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setLabels(Boolean labels)
     {
-<span class="nc" id="L576">        this.labels = labels;</span>
-<span class="nc" id="L577">    }</span>
+<span class="nc" id="L574">        this.labels = labels;</span>
+<span class="nc" id="L575">    }</span>
 
     /**
      * Define the order of the data.
@@ -586,7 +584,7 @@ public class C3DataOptions extends JavaScriptPart
      */
     public C3DataOrderOptions getOrder()
     {
-<span class="nc" id="L589">        return order;</span>
+<span class="nc" id="L587">        return order;</span>
     }
 
     /**
@@ -599,8 +597,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setOrder(C3DataOrderOptions order)
     {
-<span class="nc" id="L602">        this.order = order;</span>
-<span class="nc" id="L603">    }</span>
+<span class="nc" id="L600">        this.order = order;</span>
+<span class="nc" id="L601">    }</span>
 
     /**
      * Define regions for each data.
@@ -615,7 +613,7 @@ public class C3DataOptions extends JavaScriptPart
      */
     public HashMap&lt;C3DataColumnHeader, C3RegionOptions&gt; getRegions()
     {
-<span class="nc" id="L618">        return regions;</span>
+<span class="nc" id="L616">        return regions;</span>
     }
 
     /**
@@ -631,8 +629,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setRegions(HashMap&lt;C3DataColumnHeader, C3RegionOptions&gt; regions)
     {
-<span class="nc" id="L634">        this.regions = regions;</span>
-<span class="nc" id="L635">    }</span>
+<span class="nc" id="L632">        this.regions = regions;</span>
+<span class="nc" id="L633">    }</span>
 
     /**
      * Set color converter function.
@@ -644,7 +642,7 @@ public class C3DataOptions extends JavaScriptPart
      */
     public JavascriptFunction getColor()
     {
-<span class="nc" id="L647">        return color;</span>
+<span class="nc" id="L645">        return color;</span>
     }
 
     /**
@@ -657,8 +655,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setColor(JavascriptFunction color)
     {
-<span class="nc" id="L660">        this.color = color;</span>
-<span class="nc" id="L661">    }</span>
+<span class="nc" id="L658">        this.color = color;</span>
+<span class="nc" id="L659">    }</span>
 
     /**
      * Set color for each data.
@@ -667,11 +665,11 @@ public class C3DataOptions extends JavaScriptPart
      */
     public HashMap&lt;C3DataColumnHeader, ColourHex&gt; getColors()
     {
-<span class="nc bnc" id="L670" title="All 2 branches missed.">        if (colors == null)</span>
+<span class="nc bnc" id="L668" title="All 2 branches missed.">        if (colors == null)</span>
         {
-<span class="nc" id="L672">            colors = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L670">            colors = new HashMap&lt;&gt;();</span>
         }
-<span class="nc" id="L674">        return colors;</span>
+<span class="nc" id="L672">        return colors;</span>
     }
 
     /**
@@ -681,8 +679,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setColors(HashMap&lt;C3DataColumnHeader, ColourHex&gt; colors)
     {
-<span class="nc" id="L684">        this.colors = colors;</span>
-<span class="nc" id="L685">    }</span>
+<span class="nc" id="L682">        this.colors = colors;</span>
+<span class="nc" id="L683">    }</span>
 
     /**
      * Hide each data when the chart appears.
@@ -691,11 +689,11 @@ public class C3DataOptions extends JavaScriptPart
      */
     public ArrayList&lt;C3DataColumnHeader&gt; getHide()
     {
-<span class="nc bnc" id="L694" title="All 2 branches missed.">        if (hide == null)</span>
+<span class="nc bnc" id="L692" title="All 2 branches missed.">        if (hide == null)</span>
         {
-<span class="nc" id="L696">            hide = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L694">            hide = new ArrayList&lt;&gt;();</span>
         }
-<span class="nc" id="L698">        return hide;</span>
+<span class="nc" id="L696">        return hide;</span>
     }
 
     /**
@@ -705,8 +703,8 @@ public class C3DataOptions extends JavaScriptPart
      */
     public void setHide(ArrayList&lt;C3DataColumnHeader&gt; hide)
     {
-<span class="nc" id="L708">        this.hide = hide;</span>
-<span class="nc" id="L709">    }</span>
+<span class="nc" id="L706">        this.hide = hide;</span>
+<span class="nc" id="L707">    }</span>
 
     /**
      *
@@ -714,23 +712,23 @@ public class C3DataOptions extends JavaScriptPart
      */
     public C3DataEmptyOptions getEmpty()
     {
-<span class="nc" id="L717">        return empty;</span>
+<span class="nc" id="L715">        return empty;</span>
     }
 
     public void setEmpty(C3DataEmptyOptions empty)
     {
-<span class="nc" id="L722">        this.empty = empty;</span>
-<span class="nc" id="L723">    }</span>
+<span class="nc" id="L720">        this.empty = empty;</span>
+<span class="nc" id="L721">    }</span>
 
     public C3DataSelectionOptions getSelection()
     {
-<span class="nc" id="L727">        return selection;</span>
+<span class="nc" id="L725">        return selection;</span>
     }
 
     public void setSelection(C3DataSelectionOptions selection)
     {
-<span class="nc" id="L732">        this.selection = selection;</span>
-<span class="nc" id="L733">    }</span>
+<span class="nc" id="L730">        this.selection = selection;</span>
+<span class="nc" id="L731">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

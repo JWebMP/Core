@@ -16,8 +16,10 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.tables;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * The look of an HTML table can be greatly improved with CSS:
@@ -25,31 +27,32 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class TableCSSImpl implements TableCSS
+public class TableCSSImpl extends CSSImplementationAdapter&lt;TableCSS, TableCSSImpl&gt; implements CSSImplementationClass&lt;TableCSS, TableCSSImpl&gt;
 {
 
-    public TableCSSImpl()
-<span class="nc" id="L32">    {</span>
-<span class="nc" id="L33">    }</span>
-    public TableBorderCollapse Border_Collapse;
-    public TableCaptionSides Table_Caption_Side;
-    public MeasurementCSS Border_Spacing;
+    private static final long serialVersionUID = 1L;
+    @CSSDetail(cssName = &quot;border-collapse&quot;, cssVersion = CSSVersions.CSS21)
+    private TableBorderCollapse borderCollapse;
+    @CSSDetail(cssName = &quot;table-caption-side&quot;, cssVersion = CSSVersions.CSS21)
+    private TableCaptionSides tableCaptionSide;
+    @CSSDetail(cssName = &quot;border-spacing&quot;, cssVersion = CSSVersions.CSS21)
+    private MeasurementCSSImpl borderSpacing;
 
-    @Override
-    public Class&lt;? extends Annotation&gt; annotationType()
-    {
-<span class="nc" id="L41">        return TableCSS.class;</span>
-    }
+    /**
+     * Constructs a new Table CSS class
+     */
+    public TableCSSImpl()
+<span class="fc" id="L45">    {</span>
+<span class="fc" id="L46">    }</span>
 
     /**
      * Specifies whether or not table borders should be collapsed
      *
      * @return
      */
-    @Override
-    public TableBorderCollapse Border_Collapse()
+    public TableBorderCollapse getBorderCollapse()
     {
-<span class="nc" id="L52">        return Border_Collapse;</span>
+<span class="nc" id="L55">        return borderCollapse;</span>
     }
 
     /**
@@ -57,10 +60,9 @@ public class TableCSSImpl implements TableCSS
      *
      * @return
      */
-    @Override
-    public TableCaptionSides Table_Caption_Side()
+    public TableCaptionSides getTableCaptionSide()
     {
-<span class="nc" id="L63">        return Table_Caption_Side;</span>
+<span class="nc" id="L65">        return tableCaptionSide;</span>
     }
 
     /**
@@ -68,41 +70,40 @@ public class TableCSSImpl implements TableCSS
      *
      * @return
      */
-    @Override
-    public MeasurementCSS Border_Spacing()
+    public MeasurementCSSImpl getBorderSpacing()
     {
-<span class="nc" id="L74">        return Border_Spacing;</span>
+<span class="nc" id="L75">        return borderSpacing;</span>
     }
 
     /**
      * Specifies whether or not table borders should be collapsed
      *
-     * @param Border_Collapse
+     * @param borderCollapse
      */
-    public void setBorder_Collapse(TableBorderCollapse Border_Collapse)
+    public void setBorderCollapse(TableBorderCollapse borderCollapse)
     {
-<span class="nc" id="L84">        this.Border_Collapse = Border_Collapse;</span>
-<span class="nc" id="L85">    }</span>
+<span class="nc" id="L85">        this.borderCollapse = borderCollapse;</span>
+<span class="nc" id="L86">    }</span>
 
     /**
      * Sets which side the caption must be on
      *
-     * @param Table_Caption_Side
+     * @param tableCaptionSide
      */
-    public void setTable_Caption_Side(TableCaptionSides Table_Caption_Side)
+    public void setTableCaptionSide(TableCaptionSides tableCaptionSide)
     {
-<span class="nc" id="L94">        this.Table_Caption_Side = Table_Caption_Side;</span>
-<span class="nc" id="L95">    }</span>
+<span class="fc" id="L95">        this.tableCaptionSide = tableCaptionSide;</span>
+<span class="fc" id="L96">    }</span>
 
     /**
      * Specifies whether or not table borders should be collapsed
      *
-     * @param Border_Spacing
+     * @param borderSpacing
      */
-    public void setBorder_Spacing(MeasurementCSS Border_Spacing)
+    public void setBorderSpacing(MeasurementCSSImpl borderSpacing)
     {
-<span class="nc" id="L104">        this.Border_Spacing = Border_Spacing;</span>
-<span class="nc" id="L105">    }</span>
+<span class="nc" id="L105">        this.borderSpacing = borderSpacing;</span>
+<span class="nc" id="L106">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

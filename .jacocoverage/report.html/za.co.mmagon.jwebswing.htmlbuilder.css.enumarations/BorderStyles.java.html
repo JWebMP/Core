@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BorderStyles.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.htmlbuilder.css.enumarations</a> &gt; <span class="el_source">BorderStyles.java</span></div><h1>BorderStyles.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.htmlbuilder.css.enumarations;
+
+import za.co.mmagon.jwebswing.base.client.CSSVersions;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
+
+/**
+ * Definition and Usage
+ * &lt;p&gt;
+ * The border-bottom-style property sets the style of an element's bottom border.
+ * Default value: not specified
+ * Inherited: no
+ * Version: CSS1
+ * JavaScript syntax: object.style.borderBottomStyle=&quot;dotted&quot;
+ * &lt;p&gt;
+ * @author Marc Magon
+ */
+<span class="pc" id="L17">public enum BorderStyles implements CSSEnumeration&lt;BorderStyles&gt;</span>
+{
+
+    /**
+     * Specifies no border
+     */
+<span class="fc" id="L23">    None,</span>
+    /**
+     * Specifies a dotted border
+     */
+<span class="fc" id="L27">    Dotted,</span>
+    /**
+     * Specifies a dashed border
+     */
+<span class="fc" id="L31">    Dashed,</span>
+    /**
+     * Specifies a solid border
+     */
+<span class="fc" id="L35">    Solid,</span>
+    /**
+     * Specifies a double border
+     */
+<span class="fc" id="L39">    Double,</span>
+    /**
+     * Specifies a 3d groove border
+     */
+<span class="fc" id="L43">    Groove,</span>
+    /**
+     * Specifies a 3D ridged border. The effect depends on the border-color value
+     */
+<span class="fc" id="L47">    Ridge,</span>
+    /**
+     * Specifies a 3D inset border. The effect depends on the border-color value
+     */
+<span class="fc" id="L51">    Inset,</span>
+    /**
+     * Specifies a 3D outset border. The effect depends on the border-color value
+     */
+<span class="fc" id="L55">    Outset,</span>
+<span class="fc" id="L56">    Unset;</span>
+
+    @Override
+    public String getValue()
+    {
+<span class="nc" id="L61">        return name();</span>
+    }
+
+    @Override
+    public BorderStyles getDefault()
+    {
+<span class="fc" id="L67">        return Unset;</span>
+    }
+
+    @Override
+    public String toString()
+    {
+<span class="fc" id="L73">        return super.toString().toLowerCase();</span>
+    }
+
+    @Override
+    public String getJavascriptSyntax()
+    {
+<span class="nc" id="L79">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+    }
+
+    @Override
+    public CSSVersions getCSSVersion()
+    {
+<span class="nc" id="L85">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

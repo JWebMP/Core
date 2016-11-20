@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MeasurementTypes.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.htmlbuilder.css.measurement</a> &gt; <span class="el_source">MeasurementTypes.java</span></div><h1>MeasurementTypes.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.htmlbuilder.css.measurement;
 
-import za.co.mmagon.jwebswing.base.client.CSSVersions;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
 
 /**
  *
@@ -9,84 +9,134 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
  */
 <span class="pc" id="L10">public enum MeasurementTypes implements CSSEnumeration&lt;MeasurementTypes&gt;</span>
 {
-
-<span class="fc" id="L13">    Percent(true, &quot;%&quot;),</span>
-<span class="fc" id="L14">    Inch(true, &quot;in&quot;),</span>
-<span class="fc" id="L15">    Centimeter(true, &quot;cm&quot;),</span>
-<span class="fc" id="L16">    Millimeter(true, &quot;mm&quot;),</span>
-<span class="fc" id="L17">    Points(true, &quot;pt&quot;),</span>
     /**
-     * 1em is equal to the current font size. 2em means 2 times the size of the current font.
-     * E.g., if an element is displayed with a font of 12 pt, then '2em' is 24 pt.
-     * The 'em' is a very useful unit in CSS, since it can adapt automatically to the font that the reader uses
+     * Any basic percentage
      */
-<span class="fc" id="L23">    EM(true, &quot;em&quot;),</span>
+<span class="fc" id="L15">    Percent(true, &quot;%&quot;),</span>
+    /**
+     * Inches
+     */
+<span class="fc" id="L19">    Inch(true, &quot;in&quot;),</span>
+    /**
+     * Centimeter
+     */
+<span class="fc" id="L23">    Centimeter(true, &quot;cm&quot;),</span>
+    /**
+     * Millimeter
+     */
+<span class="fc" id="L27">    Millimeter(true, &quot;mm&quot;),</span>
+    /**
+     * Points
+     */
+<span class="fc" id="L31">    Points(true, &quot;pt&quot;),</span>
+    /**
+     * 1em is equal to the current font size. 2em means 2 times the size of the current font. E.g., if an element is displayed with a font of 12 pt, then '2em' is 24 pt. The 'em' is a very useful unit
+     * in CSS, since it can adapt automatically to the font that the reader uses
+     */
+<span class="fc" id="L36">    EM(true, &quot;em&quot;),</span>
     /**
      * one ex is the x-height of a font (x-height is usually about half the font-size)
      */
-<span class="fc" id="L27">    EX(true, &quot;ex&quot;),</span>
-<span class="fc" id="L28">    Pica(true, &quot;pi&quot;),</span>
-<span class="fc" id="L29">    Pixels(true, &quot;px&quot;),</span>
-<span class="fc" id="L30">    None(false, &quot;&quot;);</span>
+<span class="fc" id="L40">    EX(true, &quot;ex&quot;),</span>
+    /**
+     * Pica's
+     */
+<span class="fc" id="L44">    Pica(true, &quot;pi&quot;),</span>
+    /**
+     * Pixels the default
+     */
+<span class="fc" id="L48">    Pixels(true, &quot;px&quot;),</span>
+    /**
+     * If the value requires quotes
+     */
+<span class="fc" id="L52">    None(false, &quot;&quot;);</span>
     private final boolean requiresQuotes;
+    /**
+     * Any annotations
+     */
     private final String htmlAnnotation;
 
-    @Override
-    public String toString()
-    {
-<span class="nc" id="L37">        return getHtmlAnnotation();</span>
-    }
-
+    /**
+     * Any basic measurement type
+     *
+     * @param requiresQuotes
+     * @param htmlAnnotation
+     */
     private MeasurementTypes(boolean requiresQuotes, String htmlAnnotation)
-<span class="fc" id="L41">    {</span>
-<span class="fc" id="L42">        this.requiresQuotes = requiresQuotes;</span>
-<span class="fc" id="L43">        this.htmlAnnotation = htmlAnnotation;</span>
-<span class="fc" id="L44">    }</span>
+<span class="fc" id="L66">    {</span>
+<span class="fc" id="L67">        this.requiresQuotes = requiresQuotes;</span>
+<span class="fc" id="L68">        this.htmlAnnotation = htmlAnnotation;</span>
+<span class="fc" id="L69">    }</span>
 
     public boolean isRequiresQuotes()
     {
-<span class="fc" id="L48">        return requiresQuotes;</span>
+<span class="fc" id="L73">        return requiresQuotes;</span>
     }
 
     public String getHtmlAnnotation()
     {
-<span class="fc" id="L53">        return htmlAnnotation;</span>
+<span class="fc" id="L78">        return htmlAnnotation;</span>
     }
 
+    /**
+     * Returns a measurement type from the annotation
+     *
+     * @param annotation
+     *
+     * @return
+     */
     public static MeasurementTypes getFromAnnotation(String annotation)
     {
-<span class="nc bnc" id="L58" title="All 2 branches missed.">        for (MeasurementTypes measurementTypes : values())</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        for (MeasurementTypes measurementTypes : values())</span>
         {
-<span class="nc bnc" id="L60" title="All 2 branches missed.">            if (measurementTypes.getHtmlAnnotation().equalsIgnoreCase(annotation))</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">            if (measurementTypes.getHtmlAnnotation().equalsIgnoreCase(annotation))</span>
             {
-<span class="nc" id="L62">                return measurementTypes;</span>
+<span class="nc" id="L94">                return measurementTypes;</span>
             }
         }
-<span class="nc" id="L65">        return null;</span>
+<span class="nc" id="L97">        return null;</span>
     }
 
+    /**
+     * Returns the formatted value
+     * @return 
+     */
     @Override
     public String getValue()
     {
-<span class="nc" id="L71">        return getHtmlAnnotation();</span>
+<span class="nc" id="L107">        return getHtmlAnnotation();</span>
     }
 
+    /**
+     * Returns the default annotation of None
+     * @return 
+     */
     @Override
     public MeasurementTypes getDefault()
     {
-<span class="nc" id="L77">        return None;</span>
+<span class="nc" id="L117">        return None;</span>
     }
 
     @Override
     public String getJavascriptSyntax()
     {
-<span class="nc" id="L83">        return &quot;&quot;;</span>
+<span class="nc" id="L123">        return &quot;&quot;;</span>
     }
 
     @Override
     public CSSVersions getCSSVersion()
     {
-<span class="nc" id="L89">        return null;</span>
+<span class="nc" id="L129">        return null;</span>
+    }
+
+    /**
+     * Returns the final HTML annotation
+     * @return 
+     */
+    @Override
+    public String toString()
+    {
+<span class="nc" id="L139">        return getHtmlAnnotation();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

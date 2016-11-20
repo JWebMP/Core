@@ -16,51 +16,51 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.lists;
 
-import java.lang.annotation.Annotation;
-import za.co.mmagon.jwebswing.htmlbuilder.css.ImageCSS;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.image.*;
 
 /**
  * In HTML, there are two main types of lists:
  * &lt;p&gt;
- * unordered lists (ul) - the list items are marked with bullets
- * ordered lists (ol) - the list items are marked with numbers or letters
+ * unordered lists (ul) - the list items are marked with bullets ordered lists (ol) - the list items are marked with numbers or letters
  * &lt;p&gt;
  * The CSS list properties allow you to:
  * &lt;p&gt;
- * Set different list item markers for ordered lists
- * Set different list item markers for unordered lists
- * Set an image as the list item marker
- * Add background colors to lists and list items
+ * Set different list item markers for ordered lists Set different list item markers for unordered lists Set an image as the list item marker Add background colors to lists and list items
  *
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class ListCSSImpl implements ListCSS
+public class ListCSSImpl extends CSSImplementationAdapter&lt;ListCSS, ListCSSImpl&gt; implements CSSImplementationClass&lt;ListCSS, ListCSSImpl&gt;
 {
 
+    private static final long serialVersionUID = 1L;
+
+    @CSSDetail(cssName = &quot;list-style-image&quot;, cssVersion = CSSVersions.CSS21)
+    private ImageCSSImpl listStyleImage;
+    @CSSDetail(cssName = &quot;list-style-position&quot;, cssVersion = CSSVersions.CSS21)
+    private ListStylePosition listStylePosition;
+    @CSSDetail(cssName = &quot;list-style-type&quot;, cssVersion = CSSVersions.CSS21)
+    private ListStyleType listStyleType;
+
+    /**
+     * Construct a new List
+     */
     public ListCSSImpl()
-<span class="nc" id="L42">    {</span>
-<span class="nc" id="L43">    }</span>
-
-    private ImageCSS List_Style_Image;
-    private ListStylePosition List_Style_Position;
-    private ListStyleType List_Style_Type;
-
-    @Override
-    public Class&lt;? extends Annotation&gt; annotationType()
-    {
-<span class="nc" id="L52">        return ListCSS.class;</span>
-    }
+<span class="fc" id="L52">    {</span>
+        //Nothing needed
+<span class="fc" id="L54">    }</span>
 
     /**
      * Returns the Image associated with the list style item
      *
      * @return
      */
-    @Override
-    public ImageCSS List_Style_Image()
+    public ImageCSSImpl getListStyleImage()
     {
-<span class="nc" id="L63">        return List_Style_Image;</span>
+<span class="nc" id="L63">        return listStyleImage;</span>
     }
 
     /**
@@ -68,10 +68,9 @@ public class ListCSSImpl implements ListCSS
      *
      * @return
      */
-    @Override
-    public ListStylePosition List_Style_Position()
+    public ListStylePosition getListStylePosition()
     {
-<span class="nc" id="L74">        return List_Style_Position;</span>
+<span class="nc" id="L73">        return listStylePosition;</span>
     }
 
     /**
@@ -79,10 +78,40 @@ public class ListCSSImpl implements ListCSS
      *
      * @return
      */
-    @Override
-    public ListStyleType List_Style_Type()
+    public ListStyleType getListStyleType()
     {
-<span class="nc" id="L85">        return List_Style_Type;</span>
+<span class="nc" id="L83">        return listStyleType;</span>
     }
+
+    /**
+     * Sets the list style image
+     *
+     * @param listStyleImage
+     */
+    public void setListStyleImage(ImageCSSImpl listStyleImage)
+    {
+<span class="nc" id="L93">        this.listStyleImage = listStyleImage;</span>
+<span class="nc" id="L94">    }</span>
+
+    /**
+     * Sets the list style position
+     *
+     * @param listStylePosition
+     */
+    public void setListStylePosition(za.co.mmagon.jwebswing.htmlbuilder.css.lists.ListStylePosition listStylePosition)
+    {
+<span class="fc" id="L103">        this.listStylePosition = listStylePosition;</span>
+<span class="fc" id="L104">    }</span>
+
+    /**
+     * Sets the list style type
+     *
+     * @param listStyleType
+     */
+    public void setListStyleType(za.co.mmagon.jwebswing.htmlbuilder.css.lists.ListStyleType listStyleType)
+    {
+<span class="fc" id="L113">        this.listStyleType = listStyleType;</span>
+<span class="fc" id="L114">    }</span>
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
