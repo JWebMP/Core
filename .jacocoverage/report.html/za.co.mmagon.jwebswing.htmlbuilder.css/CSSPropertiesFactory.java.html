@@ -25,6 +25,7 @@ import java.util.*;
 import java.util.logging.*;
 import za.co.mmagon.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.composer.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.image.*;
@@ -38,7 +39,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
  *
  * @since 17 Jan 2016
  */
-<span class="fc" id="L41">public class CSSPropertiesFactory&lt;A extends Annotation&gt; implements Serializable</span>
+<span class="fc" id="L42">public class CSSPropertiesFactory&lt;A extends Annotation&gt; implements Serializable</span>
 {
 
     @JsonIgnore
@@ -46,12 +47,12 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
     /**
      * The default logger
      */
-<span class="fc" id="L49">    private static final org.apache.log4j.Logger log = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;CSS Factory&quot;);</span>
+<span class="fc" id="L50">    private static final org.apache.log4j.Logger log = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;CSS Factory&quot;);</span>
 
     /**
      * List of methods to always ignore
      */
-<span class="fc" id="L54">    private static final ArrayList&lt;String&gt; IgnoreMethods = new ArrayList(Arrays.asList(new String[]</span>
+<span class="fc" id="L55">    private static final ArrayList&lt;String&gt; IgnoreMethods = new ArrayList(Arrays.asList(new String[]</span>
     {
         &quot;equals&quot;, &quot;toString&quot;, &quot;hashCode&quot;, &quot;annotationType&quot;
     }));
@@ -65,19 +66,19 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
      *
      * @return
      */
-    protected Map&lt;StringBuilder, Object&gt; getCSSProperties(List&lt;Annotation&gt; classAnnotations)
+    public Map&lt;StringBuilder, Object&gt; getCSSProperties(List&lt;Annotation&gt; classAnnotations)
     {
-<span class="fc" id="L70">        Map&lt;StringBuilder, Object&gt; implementedProperties = new HashMap&lt;&gt;();</span>
-<span class="fc" id="L71">        final Map&lt;StringBuilder, Object&gt; implementedProperties2 = new HashMap&lt;&gt;();</span>
-<span class="fc" id="L72">        classAnnotations.stream().forEach(classAnnotation -&gt;</span>
+<span class="fc" id="L71">        Map&lt;StringBuilder, Object&gt; implementedProperties = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L72">        final Map&lt;StringBuilder, Object&gt; implementedProperties2 = new HashMap&lt;&gt;();</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        classAnnotations.stream().filter(a -&gt; a != null).forEach(classAnnotation -&gt;</span>
         {
-<span class="fc" id="L74">            HashMap&lt;StringBuilder, Object&gt; cssProperties = new HashMap&lt;&gt;();</span>
-<span class="fc" id="L75">            cssProperties.putAll(processAnnotation(classAnnotation));</span>
-<span class="fc" id="L76">            Object anotImplObject = getImplementationObject((Annotation) classAnnotation, cssProperties);</span>
-<span class="fc" id="L77">            Map mmm = processImplementationObjectFields((CSSImplementationClass) anotImplObject, implementedProperties);</span>
-<span class="fc" id="L78">            implementedProperties2.putAll(mmm);</span>
-<span class="fc" id="L79">        });</span>
-<span class="fc" id="L80">        return implementedProperties2;</span>
+<span class="fc" id="L75">            HashMap&lt;StringBuilder, Object&gt; cssProperties = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L76">            cssProperties.putAll(processAnnotation(classAnnotation));</span>
+<span class="fc" id="L77">            Object anotImplObject = getImplementationObject((Annotation) classAnnotation, cssProperties);</span>
+<span class="fc" id="L78">            Map mmm = processImplementationObjectFields((CSSImplementationClass) anotImplObject, implementedProperties);</span>
+<span class="fc" id="L79">            implementedProperties2.putAll(mmm);</span>
+<span class="fc" id="L80">        });</span>
+<span class="fc" id="L81">        return implementedProperties2;</span>
     }
 
     /**
@@ -87,10 +88,10 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
      *
      * @return
      */
-    protected Map&lt;StringBuilder, Object&gt; getCSSProperties(CSSImplementationClass classAnnotations)
+    public Map&lt;StringBuilder, Object&gt; getCSSProperties(CSSImplementationClass classAnnotations)
     {
-<span class="fc" id="L92">        Map impObject = processImplementationObjectFields(classAnnotations, new HashMap&lt;&gt;());</span>
-<span class="fc" id="L93">        return impObject;</span>
+<span class="fc" id="L93">        Map impObject = processImplementationObjectFields(classAnnotations, new HashMap&lt;&gt;());</span>
+<span class="fc" id="L94">        return impObject;</span>
     }
 
     /**
@@ -100,28 +101,28 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
      *
      * @return
      */
-    protected Map&lt;StringBuilder, Object&gt; getCSSProperties(CSSImpl classImpl)
+    public Map&lt;StringBuilder, Object&gt; getCSSProperties(CSSImpl classImpl)
     {
-<span class="fc" id="L105">        Map&lt;StringBuilder, Object&gt; m = new HashMap&lt;&gt;();</span>
-<span class="fc" id="L106">        Field[] fields = classImpl.getClass().getDeclaredFields();</span>
-<span class="pc bpc" id="L107" title="1 of 2 branches missed.">        for (Field field : fields)</span>
+<span class="fc" id="L106">        Map&lt;StringBuilder, Object&gt; m = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L107">        Field[] fields = classImpl.getClass().getDeclaredFields();</span>
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">        for (Field field : fields)</span>
         {
-<span class="fc bfc" id="L109" title="All 2 branches covered.">            if (field.getModifiers() == 26)</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">            if (field.getModifiers() == 26)</span>
             {
-<span class="fc" id="L111">                continue;</span>
+<span class="fc" id="L112">                continue;</span>
             }
-<span class="fc" id="L113">            field.setAccessible(true);</span>
+<span class="fc" id="L114">            field.setAccessible(true);</span>
             try
             {
-<span class="fc" id="L116">                CSSImplementationClass object = (CSSImplementationClass) field.get(classImpl);</span>
-<span class="fc" id="L117">                m.putAll(getCSSProperties(object));</span>
+<span class="fc" id="L117">                CSSImplementationClass object = (CSSImplementationClass) field.get(classImpl);</span>
+<span class="fc" id="L118">                m.putAll(getCSSProperties(object));</span>
             }
-<span class="nc" id="L119">            catch (IllegalArgumentException | IllegalAccessException ex)</span>
+<span class="nc" id="L120">            catch (IllegalArgumentException | IllegalAccessException ex)</span>
             {
-<span class="nc" id="L121">                Logger.getLogger(CSSPropertiesFactory.class.getName()).log(Level.SEVERE, null, ex);</span>
-<span class="fc" id="L122">            }</span>
+<span class="nc" id="L122">                Logger.getLogger(CSSPropertiesFactory.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="fc" id="L123">            }</span>
         }
-<span class="nc" id="L124">        return m;</span>
+<span class="nc" id="L125">        return m;</span>
     }
 
     /**
@@ -134,14 +135,20 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
      */
     public &lt;T extends Object&gt; Map&lt;StringBuilder, Object&gt; getCSS(T objectIn)
     {
-<span class="pc bpc" id="L137" title="1 of 2 branches missed.">        if (objectIn == null)</span>
+<span class="pc bpc" id="L138" title="1 of 2 branches missed.">        if (objectIn == null)</span>
         {
-<span class="nc" id="L139">            log.error(&quot;[Action]-[Null Object Retrieved];&quot;);</span>
-<span class="nc" id="L140">            return null;</span>
+<span class="nc" id="L140">            log.error(&quot;[Action]-[Null Object Retrieved];&quot;);</span>
+<span class="nc" id="L141">            return null;</span>
         }
-<span class="fc" id="L142">        List&lt;Annotation&gt; classAnnotations = getAllAppliedCSSAnnotations(objectIn);</span>
-<span class="fc" id="L143">        Map&lt;StringBuilder, Object&gt; cssPropertyMap = getCSSProperties(classAnnotations);</span>
-<span class="fc" id="L144">        return cssPropertyMap;</span>
+<span class="fc bfc" id="L143" title="All 2 branches covered.">        if (objectIn instanceof CSSImpl)</span>
+        {
+<span class="nc" id="L145">            Map&lt;StringBuilder, Object&gt; map = getCSSProperties((CSSImpl) objectIn);</span>
+<span class="nc" id="L146">            return map;</span>
+        }
+
+<span class="fc" id="L149">        List&lt;Annotation&gt; classAnnotations = getAllAppliedCSSAnnotations(objectIn);</span>
+<span class="fc" id="L150">        Map&lt;StringBuilder, Object&gt; cssPropertyMap = getCSSProperties(classAnnotations);</span>
+<span class="fc" id="L151">        return cssPropertyMap;</span>
     }
 
     /**
@@ -155,15 +162,15 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
      */
     public &lt;T extends Object&gt; Map&lt;StringBuilder, Object&gt; getCSS(T objectIn, Annotation[] classAnnotations)
     {
-<span class="nc bnc" id="L158" title="All 2 branches missed.">        if (objectIn == null)</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">        if (objectIn == null)</span>
         {
-<span class="nc" id="L160">            log.error(&quot;[Action]-[Null Object Retrieved];&quot;);</span>
-<span class="nc" id="L161">            return null;</span>
+<span class="nc" id="L167">            log.error(&quot;[Action]-[Null Object Retrieved];&quot;);</span>
+<span class="nc" id="L168">            return null;</span>
         }
-<span class="nc" id="L163">        List&lt;Annotation&gt; anos = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L164">        anos.addAll(Arrays.asList(classAnnotations));</span>
-<span class="nc" id="L165">        Map&lt;StringBuilder, Object&gt; cssPropertyMap = getCSSProperties(anos);</span>
-<span class="nc" id="L166">        return cssPropertyMap;</span>
+<span class="nc" id="L170">        List&lt;Annotation&gt; anos = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L171">        anos.addAll(Arrays.asList(classAnnotations));</span>
+<span class="nc" id="L172">        Map&lt;StringBuilder, Object&gt; cssPropertyMap = getCSSProperties(anos);</span>
+<span class="nc" id="L173">        return cssPropertyMap;</span>
     }
 
     /**
@@ -176,30 +183,30 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
      */
     public Map&lt;StringBuilder, Object&gt; getCSS(Field fieldIn, Object objectIn)
     {
-<span class="pc bpc" id="L179" title="1 of 2 branches missed.">        if (fieldIn == null)</span>
+<span class="pc bpc" id="L186" title="1 of 2 branches missed.">        if (fieldIn == null)</span>
         {
-<span class="nc" id="L181">            log.error(&quot;[Action]-[Null Field Retrieved];&quot;);</span>
-<span class="nc" id="L182">            return new HashMap&lt;&gt;();</span>
+<span class="nc" id="L188">            log.error(&quot;[Action]-[Null Field Retrieved];&quot;);</span>
+<span class="nc" id="L189">            return new HashMap&lt;&gt;();</span>
         }
-<span class="fc" id="L184">        fieldIn.setAccessible(true);</span>
+<span class="fc" id="L191">        fieldIn.setAccessible(true);</span>
         try
         {
-<span class="pc bpc" id="L187" title="1 of 2 branches missed.">            if (fieldIn.get(objectIn) == null)</span>
+<span class="pc bpc" id="L194" title="1 of 2 branches missed.">            if (fieldIn.get(objectIn) == null)</span>
             {
-<span class="nc" id="L189">                log.error(&quot;[Action]-[Null Field Retrieved];&quot;);</span>
-<span class="nc" id="L190">                return new HashMap&lt;&gt;();</span>
+<span class="nc" id="L196">                log.error(&quot;[Action]-[Null Field Retrieved];&quot;);</span>
+<span class="nc" id="L197">                return new HashMap&lt;&gt;();</span>
             }
         }
-<span class="nc" id="L193">        catch (IllegalArgumentException | IllegalAccessException ex)</span>
+<span class="nc" id="L200">        catch (IllegalArgumentException | IllegalAccessException ex)</span>
         {
-<span class="nc" id="L195">            log.error(&quot;[Action]-[Cant Get Field &quot; + ex.getMessage() + &quot;];&quot;);</span>
-<span class="nc" id="L196">            return new HashMap&lt;&gt;();</span>
-<span class="fc" id="L197">        }</span>
+<span class="nc" id="L202">            log.error(&quot;[Action]-[Cant Get Field &quot; + ex.getMessage() + &quot;];&quot;);</span>
+<span class="nc" id="L203">            return new HashMap&lt;&gt;();</span>
+<span class="fc" id="L204">        }</span>
 
-<span class="fc" id="L199">        List&lt;Annotation&gt; classAnnotations = getAllAppliedCSSAnnotations(fieldIn);</span>
-<span class="fc" id="L200">        Map&lt;StringBuilder, Object&gt; cssPropertyMap = getCSSProperties(classAnnotations);</span>
+<span class="fc" id="L206">        List&lt;Annotation&gt; classAnnotations = getAllAppliedCSSAnnotations(fieldIn);</span>
+<span class="fc" id="L207">        Map&lt;StringBuilder, Object&gt; cssPropertyMap = getCSSProperties(classAnnotations);</span>
 
-<span class="fc" id="L202">        return cssPropertyMap;</span>
+<span class="fc" id="L209">        return cssPropertyMap;</span>
     }
 
     /**
@@ -214,64 +221,64 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
      */
     public CSSBlock getCSSBlock(String identifier, CSSTypes blockType, Map&lt;StringBuilder, Object&gt; propertiesMap, CSSBlockIdentifier blockIdentifier)
     {
-<span class="fc" id="L217">        CSSBlock newCSSBlock = new CSSBlock();</span>
-<span class="fc" id="L218">        newCSSBlock.setBlockType(blockType);</span>
-<span class="fc" id="L219">        newCSSBlock.setIdOfBlock(identifier);</span>
-<span class="fc" id="L220">        newCSSBlock.setBlockIdentifer(blockIdentifier);</span>
-<span class="fc" id="L221">        newCSSBlock.getCssLines().setRenderBraces(true);</span>
-<span class="fc" id="L222">        propertiesMap.entrySet().forEach((entry) -&gt;</span>
+<span class="fc" id="L224">        CSSBlock newCSSBlock = new CSSBlock();</span>
+<span class="fc" id="L225">        newCSSBlock.setBlockType(blockType);</span>
+<span class="fc" id="L226">        newCSSBlock.setIdOfBlock(identifier);</span>
+<span class="fc" id="L227">        newCSSBlock.setBlockIdentifer(blockIdentifier);</span>
+<span class="fc" id="L228">        newCSSBlock.getCssLines().setRenderBraces(true);</span>
+<span class="fc" id="L229">        propertiesMap.entrySet().forEach((entry) -&gt;</span>
         {
-<span class="fc" id="L224">            StringBuilder key = entry.getKey();</span>
-<span class="fc" id="L225">            Object value = entry.getValue();</span>
+<span class="fc" id="L231">            StringBuilder key = entry.getKey();</span>
+<span class="fc" id="L232">            Object value = entry.getValue();</span>
 
-<span class="fc" id="L227">            StringBuilder cssKey = new StringBuilder();</span>
-<span class="fc bfc" id="L228" title="All 2 branches covered.">            if (value.getClass().isArray())</span>
+<span class="fc" id="L234">            StringBuilder cssKey = new StringBuilder();</span>
+<span class="fc bfc" id="L235" title="All 2 branches covered.">            if (value.getClass().isArray())</span>
             {
-<span class="fc" id="L230">                Object[] valueArr = (Object[]) value;</span>
-<span class="fc" id="L231">                String valueString = &quot;&quot;;</span>
-<span class="fc bfc" id="L232" title="All 2 branches covered.">                for (int i = 0; i &lt; valueArr.length; i++)</span>
+<span class="fc" id="L237">                Object[] valueArr = (Object[]) value;</span>
+<span class="fc" id="L238">                String valueString = &quot;&quot;;</span>
+<span class="fc bfc" id="L239" title="All 2 branches covered.">                for (int i = 0; i &lt; valueArr.length; i++)</span>
                 {
-<span class="fc" id="L234">                    Object object = valueArr[i];</span>
+<span class="fc" id="L241">                    Object object = valueArr[i];</span>
                     Object implementedObject;
-<span class="fc bfc" id="L236" title="All 2 branches covered.">                    if (object != null)</span>
+<span class="fc bfc" id="L243" title="All 2 branches covered.">                    if (object != null)</span>
                     {
-<span class="pc bpc" id="L238" title="1 of 2 branches missed.">                        if (object.getClass().isAnnotation())</span>
+<span class="pc bpc" id="L245" title="1 of 2 branches missed.">                        if (object.getClass().isAnnotation())</span>
                         {
-<span class="nc" id="L240">                            Annotation annotatedObject = (Annotation) object;</span>
+<span class="nc" id="L247">                            Annotation annotatedObject = (Annotation) object;</span>
                             //Field names
-<span class="nc" id="L242">                            Map&lt;StringBuilder, Object&gt; innerPropertiesMap = processAnnotation(annotatedObject);</span>
-<span class="nc" id="L243">                            implementedObject = getImplementationObject(annotatedObject, innerPropertiesMap);</span>
-<span class="nc" id="L244">                        }</span>
+<span class="nc" id="L249">                            Map&lt;StringBuilder, Object&gt; innerPropertiesMap = processAnnotation(annotatedObject);</span>
+<span class="nc" id="L250">                            implementedObject = getImplementationObject(annotatedObject, innerPropertiesMap);</span>
+<span class="nc" id="L251">                        }</span>
                         else
                         {
-<span class="fc" id="L247">                            implementedObject = object;</span>
+<span class="fc" id="L254">                            implementedObject = object;</span>
                         }
 
-<span class="fc" id="L250">                        valueArr[i] = implementedObject;</span>
-<span class="pc bpc" id="L251" title="1 of 2 branches missed.">                        if (object instanceof ImageCSS) //special treatment for image arrays for some reason</span>
+<span class="fc" id="L257">                        valueArr[i] = implementedObject;</span>
+<span class="pc bpc" id="L258" title="1 of 2 branches missed.">                        if (object instanceof ImageCSS) //special treatment for image arrays for some reason</span>
                         {
-<span class="nc" id="L253">                            valueString += implementedObject.toString() + &quot;,&quot;;</span>
+<span class="nc" id="L260">                            valueString += implementedObject.toString() + &quot;,&quot;;</span>
                         }
                         else
                         {
-<span class="fc" id="L257">                            valueString += implementedObject.toString() + &quot; &quot;;</span>
+<span class="fc" id="L264">                            valueString += implementedObject.toString() + &quot; &quot;;</span>
                         }
                     }
                 }
 
-<span class="pc bpc" id="L262" title="2 of 4 branches missed.">                if (!valueString.isEmpty() &amp;&amp; valueString.contains(&quot;,&quot;))</span>
+<span class="pc bpc" id="L269" title="2 of 4 branches missed.">                if (!valueString.isEmpty() &amp;&amp; valueString.contains(&quot;,&quot;))</span>
                 {
-<span class="nc" id="L264">                    valueString = valueString.substring(0, valueString.lastIndexOf(&quot;,&quot;)).trim();</span>
+<span class="nc" id="L271">                    valueString = valueString.substring(0, valueString.lastIndexOf(&quot;,&quot;)).trim();</span>
                 }
-<span class="fc" id="L266">                newCSSBlock.add(new CSSLine(key.toString(), valueString));</span>
-<span class="fc" id="L267">            }</span>
+<span class="fc" id="L273">                newCSSBlock.add(new CSSLine(key.toString(), valueString));</span>
+<span class="fc" id="L274">            }</span>
             else
             {
 
-<span class="fc" id="L271">                newCSSBlock.add(new CSSLine(key.toString(), value.toString()));</span>
+<span class="fc" id="L278">                newCSSBlock.add(new CSSLine(key.toString(), value.toString()));</span>
             }
-<span class="fc" id="L273">        });</span>
-<span class="fc" id="L274">        return newCSSBlock;</span>
+<span class="fc" id="L280">        });</span>
+<span class="fc" id="L281">        return newCSSBlock;</span>
     }
 
     /**
@@ -282,29 +289,34 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
      *
      * @return
      */
-    private Map&lt;StringBuilder, Object&gt; processImplementationObjectFields(CSSImplementationClass impClass, Map&lt;StringBuilder, Object&gt; currentReturnList)
-
+    public Map&lt;StringBuilder, Object&gt; processImplementationObjectFields(CSSImplementationClass impClass, Map&lt;StringBuilder, Object&gt; currentReturnList)
     {
-<span class="fc bfc" id="L288" title="All 2 branches covered.">        if (impClass == null)</span>
+<span class="fc bfc" id="L294" title="All 2 branches covered.">        if (impClass == null)</span>
         {
-<span class="fc" id="L290">            return currentReturnList;</span>
+<span class="fc" id="L296">            return currentReturnList;</span>
         }
 
-<span class="fc" id="L293">        Field[] allFields = impClass.getClass().getDeclaredFields();</span>
-<span class="fc" id="L294">        List&lt;Field&gt; fields = Arrays.asList(allFields);</span>
-<span class="fc" id="L295">        fields.forEach(field -&gt;</span>
+<span class="fc" id="L299">        Field[] allFields = impClass.getClass().getDeclaredFields();</span>
+<span class="fc" id="L300">        List&lt;Field&gt; fields = Arrays.asList(allFields);</span>
+<span class="fc" id="L301">        fields.forEach(field -&gt;</span>
         {
             try
             {
-<span class="fc" id="L299">                currentReturnList.putAll(getPairFromField(field, impClass));</span>
+<span class="fc" id="L305">                Map&lt;StringBuilder, Object&gt; map = getPairFromField(field, impClass);</span>
+<span class="fc" id="L306">                map.entrySet().forEach((entry) -&gt;</span>
+                {
+<span class="fc" id="L308">                    StringBuilder key = entry.getKey();</span>
+<span class="fc" id="L309">                    Object value = entry.getValue();</span>
+<span class="fc" id="L310">                    currentReturnList.put(key, value);</span>
+<span class="fc" id="L311">                });</span>
             }
-<span class="nc" id="L301">            catch (IllegalArgumentException | IllegalAccessException ex)</span>
+<span class="nc" id="L313">            catch (IllegalArgumentException | IllegalAccessException ex)</span>
             {
-<span class="nc" id="L303">                log.trace(&quot;Unable to read pair from field due to permission&quot;, ex);</span>
-<span class="fc" id="L304">            }</span>
-<span class="fc" id="L305">        });</span>
+<span class="nc" id="L315">                log.trace(&quot;Unable to read pair from field due to permission&quot;, ex);</span>
+<span class="fc" id="L316">            }</span>
+<span class="fc" id="L317">        });</span>
 
-<span class="fc" id="L307">        return currentReturnList;</span>
+<span class="fc" id="L319">        return currentReturnList;</span>
     }
 
     /**
@@ -314,32 +326,32 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
      *
      * @return
      */
-    private Map&lt;StringBuilder, Object&gt; processAnnotation(Annotation annotation)
+    public Map&lt;StringBuilder, Object&gt; processAnnotation(Annotation annotation)
     {
-<span class="fc" id="L319">        Map&lt;StringBuilder, Object&gt; output = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L331">        Map&lt;StringBuilder, Object&gt; output = new HashMap&lt;&gt;();</span>
 
-<span class="pc bpc" id="L321" title="1 of 2 branches missed.">        if (annotation == null)</span>
+<span class="pc bpc" id="L333" title="1 of 2 branches missed.">        if (annotation == null)</span>
         {
-<span class="nc" id="L323">            return output;</span>
+<span class="nc" id="L335">            return output;</span>
         }
-<span class="fc" id="L325">        Method[] methods = annotation.getClass().getDeclaredMethods();</span>
-<span class="fc bfc" id="L326" title="All 2 branches covered.">        for (Method method : methods)</span>
+<span class="fc" id="L337">        Method[] methods = annotation.getClass().getDeclaredMethods();</span>
+<span class="fc bfc" id="L338" title="All 2 branches covered.">        for (Method method : methods)</span>
         {
-<span class="fc bfc" id="L328" title="All 2 branches covered.">            if (IgnoreMethods.contains(method.getName()))</span>
+<span class="fc bfc" id="L340" title="All 2 branches covered.">            if (IgnoreMethods.contains(method.getName()))</span>
             {
-<span class="fc" id="L330">                continue;</span>
+<span class="fc" id="L342">                continue;</span>
             }
             try
             {
-<span class="fc" id="L334">                output.putAll(getPairFromAnnotationMethod(method, annotation));</span>
+<span class="fc" id="L346">                output.putAll(getPairFromAnnotationMethod(method, annotation));</span>
             }
-<span class="nc" id="L336">            catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex)</span>
+<span class="nc" id="L348">            catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex)</span>
             {
-<span class="nc" id="L338">                log.error(&quot;[Value Generation]-[&quot; + ex.getMessage() + &quot;];[Method]-[&quot; + method.getName() + &quot;];&quot;, ex);</span>
-<span class="fc" id="L339">            }</span>
+<span class="nc" id="L350">                log.error(&quot;[Value Generation]-[&quot; + ex.getMessage() + &quot;];[Method]-[&quot; + method.getName() + &quot;];&quot;, ex);</span>
+<span class="fc" id="L351">            }</span>
         }
 
-<span class="fc" id="L342">        return output;</span>
+<span class="fc" id="L354">        return output;</span>
     }
 
     /**
@@ -350,80 +362,72 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
     private Map&lt;StringBuilder, Object&gt; getPairFromAnnotationMethod(Method method, Annotation annotationObject)
             throws IllegalAccessException, IllegalArgumentException, InvocationTargetException
     {
-<span class="fc" id="L353">        Map&lt;StringBuilder, Object&gt; rawValues = new HashMap&lt;&gt;();</span>
-<span class="pc bpc" id="L354" title="2 of 4 branches missed.">        if (method == null || annotationObject == null)</span>
+<span class="fc" id="L365">        Map&lt;StringBuilder, Object&gt; rawValues = new HashMap&lt;&gt;();</span>
+<span class="pc bpc" id="L366" title="2 of 4 branches missed.">        if (method == null || annotationObject == null)</span>
         {
-<span class="nc" id="L356">            return rawValues;</span>
+<span class="nc" id="L368">            return rawValues;</span>
         }
         try
         {
-<span class="pc bpc" id="L360" title="1 of 2 branches missed.">            if (method.getAnnotation(JsonIgnore.class) != null)</span>
+<span class="pc bpc" id="L372" title="1 of 2 branches missed.">            if (method.getAnnotation(JsonIgnore.class) != null)</span>
             {
-<span class="nc" id="L362">                return rawValues;</span>
+<span class="nc" id="L374">                return rawValues;</span>
             }
         }
-<span class="nc" id="L365">        catch (NullPointerException npe)</span>
+<span class="nc" id="L377">        catch (NullPointerException npe)</span>
         {
             //correct
-<span class="fc" id="L368">        }</span>
-<span class="pc bpc" id="L369" title="2 of 4 branches missed.">        if (method.getName().startsWith(&quot;set&quot;) || method.getName().startsWith(&quot;get&quot;))</span>
+<span class="fc" id="L380">        }</span>
+<span class="pc bpc" id="L381" title="2 of 4 branches missed.">        if (method.getName().startsWith(&quot;set&quot;) || method.getName().startsWith(&quot;get&quot;))</span>
         {
-<span class="nc" id="L371">            return rawValues;</span>
+<span class="nc" id="L383">            return rawValues;</span>
         }
 
         try
         {
-<span class="fc" id="L376">            Object returnedObject = method.invoke(annotationObject, (Object[]) null);</span>
-<span class="pc bpc" id="L377" title="1 of 2 branches missed.">            if (returnedObject == null)</span>
+<span class="fc" id="L388">            Object returnedObject = method.invoke(annotationObject, (Object[]) null);</span>
+<span class="pc bpc" id="L389" title="1 of 2 branches missed.">            if (returnedObject == null)</span>
             {
-<span class="nc" id="L379">                return rawValues;</span>
+<span class="nc" id="L391">                return rawValues;</span>
             }
-<span class="fc bfc" id="L381" title="All 2 branches covered.">            if (returnedObject instanceof CSSEnumeration)</span>
+<span class="fc bfc" id="L393" title="All 2 branches covered.">            if (returnedObject instanceof CSSEnumeration)</span>
             {
-<span class="fc" id="L383">                CSSEnumeration enu = (CSSEnumeration) returnedObject;</span>
-<span class="fc bfc" id="L384" title="All 2 branches covered.">                if (enu.equals(enu.getDefault()))</span>
+<span class="fc" id="L395">                CSSEnumeration enu = (CSSEnumeration) returnedObject;</span>
+<span class="fc bfc" id="L396" title="All 2 branches covered.">                if (enu.equals(enu.getDefault()))</span>
                 {
-<span class="fc" id="L386">                    return rawValues;</span>
+<span class="fc" id="L398">                    return rawValues;</span>
                 }
             }
-<span class="fc bfc" id="L389" title="All 2 branches covered.">            if (returnedObject.getClass().isArray())</span>
+<span class="fc bfc" id="L401" title="All 2 branches covered.">            if (returnedObject.getClass().isArray())</span>
             {
-<span class="fc" id="L391">                Object[] objArr = (Object[]) returnedObject;</span>
-<span class="fc bfc" id="L392" title="All 2 branches covered.">                if (objArr.length == 0)</span>
+<span class="fc" id="L403">                Object[] objArr = (Object[]) returnedObject;</span>
+<span class="fc bfc" id="L404" title="All 2 branches covered.">                if (objArr.length == 0)</span>
                 {
-<span class="fc" id="L394">                    return rawValues;</span>
+<span class="fc" id="L406">                    return rawValues;</span>
                 }
             }
-<span class="fc bfc" id="L397" title="All 2 branches covered.">            if (returnedObject instanceof MeasurementCSS)</span>
+<span class="fc bfc" id="L409" title="All 2 branches covered.">            if (returnedObject instanceof MeasurementCSS)</span>
             {
-<span class="fc" id="L399">                MeasurementCSS m = (MeasurementCSS) returnedObject;</span>
-<span class="pc bpc" id="L400" title="2 of 4 branches missed.">                if (m.MeasurementType().equals(MeasurementTypes.Pixels) &amp;&amp; m.value() == CSSPropertiesFactory.DefaultIntValue)</span>
+<span class="fc" id="L411">                MeasurementCSS m = (MeasurementCSS) returnedObject;</span>
+<span class="pc bpc" id="L412" title="2 of 4 branches missed.">                if (m.MeasurementType().equals(MeasurementTypes.Pixels) &amp;&amp; m.value() == CSSPropertiesFactory.DefaultIntValue)</span>
                 {
-<span class="fc" id="L402">                    return rawValues;</span>
+<span class="fc" id="L414">                    return rawValues;</span>
                 }
             }
-<span class="pc bpc" id="L405" title="1 of 2 branches missed.">            if (returnedObject instanceof Integer)</span>
+<span class="pc bpc" id="L417" title="1 of 2 branches missed.">            if (returnedObject instanceof Integer)</span>
             {
-<span class="nc bnc" id="L407" title="All 2 branches missed.">                if (returnedObject.equals(CSSPropertiesFactory.DefaultIntValue))</span>
+<span class="nc bnc" id="L419" title="All 2 branches missed.">                if (returnedObject.equals(CSSPropertiesFactory.DefaultIntValue))</span>
                 {
-<span class="nc" id="L409">                    return rawValues;</span>
+<span class="nc" id="L421">                    return rawValues;</span>
                 }
             }
-<span class="fc" id="L412">            rawValues.put(new StringBuilder(method.getName()), returnedObject);</span>
+<span class="fc" id="L424">            rawValues.put(new StringBuilder(method.getName()), returnedObject);</span>
         }
-<span class="nc" id="L414">        catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)</span>
+<span class="nc" id="L426">        catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)</span>
         {
-<span class="nc" id="L416">            String s = e.getLocalizedMessage();</span>
-<span class="nc bnc" id="L417" title="All 2 branches missed.">            if (s == null)</span>
-            {
-                //expected to not run
-            }
-            else
-            {
-<span class="nc" id="L423">                log.trace(&quot;Field Skipped [&quot; + method.getName() + &quot;] - [&quot; + e.getLocalizedMessage() + &quot;]&quot;, e);</span>
-            }
-<span class="fc" id="L425">        }</span>
-<span class="fc" id="L426">        return rawValues;</span>
+<span class="nc" id="L428">            log.trace(&quot;Field Skipped [&quot; + method.getName() + &quot;] - [&quot; + e.getLocalizedMessage() + &quot;]&quot;, e);</span>
+<span class="fc" id="L429">        }</span>
+<span class="fc" id="L430">        return rawValues;</span>
     }
 
     /**
@@ -431,81 +435,90 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
      *
      * @return
      */
-    private Map&lt;StringBuilder, Object&gt; getPairFromField(Field field, CSSImplementationClass cssImplementationClass) throws IllegalArgumentException, IllegalAccessException
+    private Map&lt;StringBuilder, Object&gt; getPairFromField(Field field, CSSImplementationClass cssImplementationClass)
+            throws IllegalArgumentException, IllegalAccessException
     {
-<span class="fc" id="L436">        Map&lt;StringBuilder, Object&gt; rawValues = new HashMap&lt;&gt;();</span>
-<span class="fc bfc" id="L437" title="All 2 branches covered.">        if (field.getModifiers() == 26) //static</span>
+<span class="fc" id="L441">        Map&lt;StringBuilder, Object&gt; rawValues = new HashMap&lt;&gt;();</span>
+<span class="fc bfc" id="L442" title="All 2 branches covered.">        if (field.getModifiers() == 26) //static</span>
         {
-<span class="fc" id="L439">            return rawValues;</span>
+<span class="fc" id="L444">            return rawValues;</span>
         }
 
-<span class="pc bpc" id="L442" title="1 of 2 branches missed.">        if (field.getAnnotation(JsonIgnore.class) != null)</span>
+<span class="pc bpc" id="L447" title="1 of 2 branches missed.">        if (field.getAnnotation(JsonIgnore.class) != null)</span>
         {
-<span class="nc" id="L444">            return rawValues;</span>
+<span class="nc" id="L449">            return rawValues;</span>
         }
 
-<span class="fc" id="L447">        field.setAccessible(true);</span>
-<span class="fc" id="L448">        Object returnedObject = field.get(cssImplementationClass);</span>
-<span class="fc bfc" id="L449" title="All 2 branches covered.">        if (returnedObject == null)</span>
+<span class="fc" id="L452">        field.setAccessible(true);</span>
+<span class="fc" id="L453">        Object returnedObject = field.get(cssImplementationClass);</span>
+<span class="fc bfc" id="L454" title="All 2 branches covered.">        if (returnedObject == null)</span>
         {
-<span class="fc" id="L451">            return rawValues;</span>
+<span class="fc" id="L456">            return rawValues;</span>
         }
 
-<span class="fc" id="L454">        String cssKey = field.getName();</span>
-<span class="fc bfc" id="L455" title="All 2 branches covered.">        if (returnedObject instanceof CSSImplementationClass)</span>
-        {
-<span class="fc" id="L457">            Map m = getCSS(returnedObject);</span>
-<span class="fc" id="L458">            rawValues.putAll(m);</span>
-<span class="fc" id="L459">            return rawValues;</span>
-        }
+        String cssKey;
 
-<span class="fc" id="L462">        CSSDetail cssDetails = field.getAnnotation(CSSDetail.class);</span>
-<span class="fc bfc" id="L463" title="All 2 branches covered.">        cssKey = cssDetails == null ? field.getName() : cssDetails.cssName();</span>
-<span class="fc bfc" id="L464" title="All 2 branches covered.">        if (cssDetails == null)</span>
-        {
-<span class="fc" id="L466">            return rawValues;</span>
-        }
+<span class="fc" id="L461">        CSSDetail cssDetails = field.getAnnotation(CSSDetail.class);</span>
+<span class="fc bfc" id="L462" title="All 2 branches covered.">        cssKey = cssDetails == null ? field.getName() : cssDetails.cssName();</span>
 
-<span class="fc bfc" id="L469" title="All 2 branches covered.">        if (returnedObject instanceof CSSEnumeration)</span>
+<span class="fc bfc" id="L464" title="All 2 branches covered.">        if (returnedObject instanceof ColourCSSImpl)</span>
         {
-<span class="fc" id="L471">            CSSEnumeration enu = (CSSEnumeration) returnedObject;</span>
-<span class="pc bpc" id="L472" title="1 of 2 branches missed.">            if (enu.equals(enu.getDefault()))</span>
+<span class="pc bpc" id="L466" title="1 of 2 branches missed.">            if (!returnedObject.toString().isEmpty())</span>
             {
-<span class="nc" id="L474">                return rawValues;</span>
+<span class="fc" id="L468">                rawValues.put(new StringBuilder(cssKey), returnedObject);</span>
             }
+<span class="fc" id="L470">            return rawValues;</span>
         }
 
-<span class="fc bfc" id="L478" title="All 2 branches covered.">        if (returnedObject.getClass().isArray())</span>
+<span class="fc bfc" id="L473" title="All 2 branches covered.">        if (cssDetails == null)</span>
         {
-<span class="fc" id="L480">            Object[] objArr = (Object[]) returnedObject;</span>
-<span class="pc bpc" id="L481" title="1 of 2 branches missed.">            if (objArr.length == 0)</span>
-            {
-<span class="nc" id="L483">                return rawValues;</span>
-            }
+<span class="fc" id="L475">            return rawValues;</span>
         }
+<span class="fc bfc" id="L477" title="All 2 branches covered.">        else if (returnedObject instanceof CSSEnumeration)</span>
+        {
+<span class="fc" id="L479">            CSSEnumeration enu = (CSSEnumeration) returnedObject;</span>
+<span class="pc bpc" id="L480" title="1 of 2 branches missed.">            if (enu.equals(enu.getDefault()))</span>
+            {
+<span class="nc" id="L482">                return rawValues;</span>
+            }
+<span class="fc" id="L484">        }</span>
+<span class="fc bfc" id="L485" title="All 2 branches covered.">        else if (returnedObject.getClass().isArray())</span>
+        {
+<span class="fc" id="L487">            Object[] objArr = (Object[]) returnedObject;</span>
+<span class="pc bpc" id="L488" title="1 of 2 branches missed.">            if (objArr.length == 0)</span>
+            {
+<span class="nc" id="L490">                return rawValues;</span>
+            }
+<span class="fc" id="L492">        }</span>
 
-<span class="pc bpc" id="L487" title="1 of 2 branches missed.">        if (returnedObject instanceof MeasurementCSS)</span>
+<span class="fc bfc" id="L494" title="All 2 branches covered.">        else if (returnedObject instanceof MeasurementCSSImpl)</span>
         {
-<span class="nc" id="L489">            MeasurementCSS m = (MeasurementCSS) returnedObject;</span>
-<span class="nc bnc" id="L490" title="All 4 branches missed.">            if (m.MeasurementType().equals(MeasurementTypes.Pixels) &amp;&amp; m.value() == CSSPropertiesFactory.DefaultIntValue)</span>
-            {
-<span class="nc" id="L492">                return rawValues;</span>
-            }
-        }
-<span class="pc bpc" id="L495" title="1 of 2 branches missed.">        if (returnedObject instanceof Integer)</span>
-        {
-<span class="nc bnc" id="L497" title="All 2 branches missed.">            if (returnedObject.equals(CSSPropertiesFactory.DefaultIntValue))</span>
+<span class="fc" id="L496">            MeasurementCSSImpl m = (MeasurementCSSImpl) returnedObject;</span>
+<span class="pc bpc" id="L497" title="2 of 4 branches missed.">            if (m.MeasurementType().equals(MeasurementTypes.Pixels) &amp;&amp; m.value() == CSSPropertiesFactory.DefaultIntValue)</span>
             {
 <span class="nc" id="L499">                return rawValues;</span>
             }
-        }
-
-<span class="pc bpc" id="L503" title="1 of 2 branches missed.">        if (!returnedObject.toString().isEmpty())</span>
-
+<span class="fc" id="L501">        }</span>
+<span class="pc bpc" id="L502" title="1 of 2 branches missed.">        else if (returnedObject instanceof Integer)</span>
         {
-<span class="fc" id="L506">            rawValues.put(new StringBuilder(cssKey), returnedObject);</span>
+<span class="nc bnc" id="L504" title="All 2 branches missed.">            if (returnedObject.equals(CSSPropertiesFactory.DefaultIntValue))</span>
+            {
+<span class="nc" id="L506">                return rawValues;</span>
+            }
         }
-<span class="fc" id="L508">        return rawValues;</span>
+
+<span class="fc bfc" id="L510" title="All 4 branches covered.">        if (returnedObject instanceof CSSImplementationClass &amp;&amp; !(returnedObject instanceof CSSImplementationValue))</span>
+        {
+<span class="fc" id="L512">            Map m = getCSS(returnedObject);</span>
+<span class="fc" id="L513">            rawValues.putAll(m);</span>
+<span class="fc" id="L514">            return rawValues;</span>
+        }
+
+<span class="pc bpc" id="L517" title="1 of 2 branches missed.">        if (!returnedObject.toString().isEmpty())</span>
+        {
+<span class="fc" id="L519">            rawValues.put(new StringBuilder(cssKey), returnedObject);</span>
+        }
+<span class="fc" id="L521">        return rawValues;</span>
     }
 
     /**
@@ -519,98 +532,119 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
      */
     public &lt;T extends Object&gt; Object getImplementationObject(Annotation cssAnnotation, Map&lt;StringBuilder, Object&gt; fieldMapping)
     {
-<span class="fc" id="L522">        Object newInstance = null;</span>
-<span class="fc" id="L523">        String implementationClass = cssAnnotation.annotationType().toString().replaceAll(&quot;interface &quot;, &quot;&quot;) + &quot;Impl&quot;;</span>
+<span class="fc" id="L535">        Object newInstance = null;</span>
+<span class="fc" id="L536">        String implementationClass = cssAnnotation.annotationType().toString().replaceAll(&quot;interface &quot;, &quot;&quot;) + &quot;Impl&quot;;</span>
         try
         {
-<span class="fc" id="L526">            newInstance = Class.forName(implementationClass).newInstance();</span>
-<span class="fc bfc" id="L527" title="All 2 branches covered.">            for (Map.Entry&lt;StringBuilder, Object&gt; entry : fieldMapping.entrySet())</span>
+<span class="fc" id="L539">            newInstance = Class.forName(implementationClass).newInstance();</span>
+<span class="fc bfc" id="L540" title="All 2 branches covered.">            for (Map.Entry&lt;StringBuilder, Object&gt; entry : fieldMapping.entrySet())</span>
             {
-<span class="fc" id="L529">                StringBuilder field = entry.getKey();</span>
-<span class="fc" id="L530">                Object fieldObject = entry.getValue();</span>
-<span class="fc" id="L531">                Character ch = field.charAt(0);</span>
-<span class="fc" id="L532">                field = field.replace(0, 1, ch.toString().toLowerCase());</span>
-<span class="fc" id="L533">                Field f = newInstance.getClass().getDeclaredField(field.toString());</span>
-<span class="fc" id="L534">                f.setAccessible(true);</span>
-<span class="fc bfc" id="L535" title="All 2 branches covered.">                if (fieldObject instanceof CSSEnumeration)</span>
+<span class="fc" id="L542">                StringBuilder field = entry.getKey();</span>
+<span class="fc" id="L543">                Object fieldObject = entry.getValue();</span>
+<span class="fc" id="L544">                Character ch = field.charAt(0);</span>
+<span class="fc" id="L545">                field = field.replace(0, 1, ch.toString().toLowerCase());</span>
+<span class="fc" id="L546">                Field f = newInstance.getClass().getDeclaredField(field.toString());</span>
+<span class="fc" id="L547">                f.setAccessible(true);</span>
+<span class="fc bfc" id="L548" title="All 2 branches covered.">                if (fieldObject instanceof CSSEnumeration)</span>
                 {
-<span class="fc" id="L537">                    f.set(newInstance, fieldObject);</span>
-                }
-<span class="fc bfc" id="L539" title="All 2 branches covered.">                else if (fieldObject instanceof Annotation)</span>
-                {
-<span class="fc" id="L541">                    Annotation innerAnnotation = (Annotation) fieldObject;</span>
-<span class="fc" id="L542">                    Map&lt;StringBuilder, Object&gt; innerFieldMapping = processAnnotation(innerAnnotation);</span>
-<span class="fc" id="L543">                    Object innerImplementationObject = getImplementationObject(innerAnnotation, innerFieldMapping);</span>
-                    try
+<span class="fc" id="L550">                    CSSEnumeration enume = (CSSEnumeration) fieldObject;</span>
+<span class="pc bpc" id="L551" title="1 of 2 branches missed.">                    if (enume.getDefault() != fieldObject)</span>
                     {
-<span class="fc" id="L546">                        f.set(newInstance, innerImplementationObject);</span>
+<span class="fc" id="L553">                        f.set(newInstance, fieldObject);</span>
                     }
-<span class="fc" id="L548">                    catch (IllegalAccessException | IllegalArgumentException ae)</span>
-                    {
-<span class="fc" id="L550">                        log.error(&quot;[Instantiation]-[Failed &quot; + implementationClass + &quot;]-on-[&quot; + newInstance.getClass() + &quot;]&quot;, ae);</span>
-<span class="fc" id="L551">                    }</span>
-<span class="fc" id="L552">                }</span>
-<span class="pc bpc" id="L553" title="1 of 2 branches missed.">                else if (fieldObject instanceof Integer)</span>
+<span class="fc" id="L555">                }</span>
+<span class="pc bpc" id="L556" title="1 of 2 branches missed.">                else if (fieldObject instanceof Integer)</span>
                 {
-<span class="nc bnc" id="L555" title="All 2 branches missed.">                    if (Integer.class.cast(fieldObject) == DefaultIntValue) //don't run for default value integers</span>
+<span class="nc bnc" id="L558" title="All 2 branches missed.">                    if (Integer.class.cast(fieldObject) == DefaultIntValue) //don't run for default value integers</span>
                     {
-<span class="nc" id="L557">                        continue;</span>
+<span class="nc" id="L560">                        continue;</span>
                     }
-<span class="nc" id="L559">                    f.set(newInstance, fieldObject);</span>
+<span class="nc" id="L562">                    f.set(newInstance, fieldObject);</span>
                 }
-<span class="pc bpc" id="L561" title="1 of 2 branches missed.">                else if (fieldObject.getClass().isPrimitive())</span>
+<span class="pc bpc" id="L564" title="1 of 2 branches missed.">                else if (fieldObject.getClass().isPrimitive())</span>
                 {
-<span class="nc" id="L563">                    f.set(newInstance, fieldObject);</span>
+<span class="nc" id="L566">                    f.set(newInstance, fieldObject);</span>
                 }
-<span class="pc bpc" id="L565" title="4 of 10 branches missed.">                else if (fieldObject instanceof String || fieldObject instanceof Long || fieldObject instanceof Double || fieldObject instanceof Boolean || fieldObject instanceof BigDecimal)</span>
+<span class="pc bpc" id="L568" title="5 of 12 branches missed.">                else if (fieldObject instanceof String || fieldObject instanceof Long</span>
+                        || fieldObject instanceof Double || fieldObject instanceof Boolean
+                        || fieldObject instanceof BigDecimal || fieldObject instanceof ColourCSSImpl)
                 {
-<span class="fc" id="L567">                    f.set(newInstance, fieldObject);</span>
-                }
-<span class="pc bpc" id="L569" title="1 of 2 branches missed.">                else if (fieldObject.getClass().isArray())</span>
-                {
-<span class="fc" id="L571">                    Object[] arrayObject = (Object[]) fieldObject;</span>
-<span class="pc bpc" id="L572" title="1 of 2 branches missed.">                    if (arrayObject.length &gt; 0)</span>
+<span class="fc bfc" id="L572" title="All 2 branches covered.">                    if (!fieldObject.toString().isEmpty())</span>
                     {
-<span class="fc" id="L574">                        Object o = arrayObject[0];</span>
-<span class="fc" id="L575">                        Annotation ao = (Annotation) o;</span>
-<span class="fc" id="L576">                        Class aoType = ao.annotationType();</span>
-<span class="fc" id="L577">                        String aoTypeImpl = aoType.getCanonicalName() + &quot;Impl&quot;;</span>
-<span class="fc" id="L578">                        Class aoTypeImplClass = Class.forName(aoTypeImpl);</span>
-<span class="fc" id="L579">                        Object newOut = Array.newInstance(aoTypeImplClass, arrayObject.length + 1);</span>
-<span class="fc bfc" id="L580" title="All 2 branches covered.">                        for (int i = 0; i &lt; arrayObject.length; i++)</span>
+<span class="fc" id="L574">                        f.set(newInstance, fieldObject);</span>
+                    }
+                }
+<span class="fc bfc" id="L577" title="All 2 branches covered.">                else if (fieldObject.getClass().isArray())</span>
+                {
+<span class="fc" id="L579">                    Object[] arrayObject = (Object[]) fieldObject;</span>
+<span class="pc bpc" id="L580" title="1 of 2 branches missed.">                    if (arrayObject.length &gt; 0)</span>
+                    {
+<span class="fc" id="L582">                        Object o = arrayObject[0];</span>
+<span class="fc" id="L583">                        Annotation ao = (Annotation) o;</span>
+<span class="fc" id="L584">                        Class aoType = ao.annotationType();</span>
+<span class="fc" id="L585">                        String aoTypeImpl = aoType.getCanonicalName() + &quot;Impl&quot;;</span>
+<span class="fc" id="L586">                        Class aoTypeImplClass = Class.forName(aoTypeImpl);</span>
+<span class="fc" id="L587">                        Object newOut = Array.newInstance(aoTypeImplClass, arrayObject.length + 1);</span>
+<span class="fc bfc" id="L588" title="All 2 branches covered.">                        for (int i = 0; i &lt; arrayObject.length; i++)</span>
                         {
-<span class="fc" id="L582">                            Object object = arrayObject[i];</span>
-<span class="fc" id="L583">                            Annotation innerAnnotation = (Annotation) object;</span>
-<span class="fc" id="L584">                            Map&lt;StringBuilder, Object&gt; innerFieldMapping = processAnnotation(innerAnnotation);</span>
-<span class="fc" id="L585">                            CSSImplementationClass innerImplementationObject = (CSSImplementationClass) getImplementationObject(innerAnnotation, innerFieldMapping);</span>
-<span class="fc" id="L586">                            Array.set(newOut, i, innerImplementationObject);</span>
+<span class="fc" id="L590">                            Object object = arrayObject[i];</span>
+<span class="fc" id="L591">                            Annotation innerAnnotation = (Annotation) object;</span>
+<span class="fc" id="L592">                            Map&lt;StringBuilder, Object&gt; innerFieldMapping = processAnnotation(innerAnnotation);</span>
+<span class="fc" id="L593">                            CSSImplementationClass innerImplementationObject = (CSSImplementationClass) getImplementationObject(innerAnnotation, innerFieldMapping);</span>
+<span class="pc bpc" id="L594" title="1 of 2 branches missed.">                            if (!innerImplementationObject.toString().isEmpty())</span>
+                            {
+<span class="fc" id="L596">                                Array.set(newOut, i, innerImplementationObject);</span>
+                            }
                         }
-<span class="fc" id="L588">                        f.set(newInstance, newOut);</span>
+<span class="fc" id="L599">                        f.set(newInstance, newOut);</span>
                     }
-<span class="fc" id="L590">                }</span>
+<span class="fc" id="L601">                }</span>
+<span class="pc bpc" id="L602" title="1 of 2 branches missed.">                else if (fieldObject instanceof Annotation)</span>
+                {
+<span class="fc" id="L604">                    Annotation innerAnnotation = (Annotation) fieldObject;</span>
+<span class="fc" id="L605">                    Map&lt;StringBuilder, Object&gt; innerFieldMapping = processAnnotation(innerAnnotation);</span>
+<span class="pc bpc" id="L606" title="1 of 2 branches missed.">                    if (innerAnnotation != null)</span>
+                    {
+<span class="fc" id="L608">                        Object innerImplementationObject = getImplementationObject(innerAnnotation, innerFieldMapping);</span>
+                        try
+                        {
+<span class="pc bpc" id="L611" title="1 of 2 branches missed.">                            if (innerImplementationObject != null)</span>
+                            {
+<span class="fc bfc" id="L613" title="All 2 branches covered.">                                if (!innerImplementationObject.toString().isEmpty())</span>
+                                {
+<span class="fc" id="L615">                                    f.set(newInstance, innerImplementationObject);</span>
+                                }
+                            }
+                        }
+<span class="nc" id="L619">                        catch (IllegalAccessException | IllegalArgumentException ae)</span>
+                        {
+<span class="nc" id="L621">                            log.error(&quot;[Instantiation]-[Failed &quot; + implementationClass + &quot;]-on-[&quot; + newInstance.getClass() + &quot;]&quot;, ae);</span>
+<span class="fc" id="L622">                        }</span>
+                    }
+<span class="fc" id="L624">                }</span>
                 else
                 {
-<span class="nc" id="L593">                    f.set(newInstance, fieldObject);</span>
+<span class="nc" id="L627">                    f.set(newInstance, fieldObject);</span>
                 }
-<span class="fc" id="L595">            }</span>
+<span class="fc" id="L629">            }</span>
         }
-<span class="fc" id="L597">        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException ex)</span>
+<span class="nc" id="L631">        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException ex)</span>
         {
-<span class="fc" id="L599">            log.error(&quot;[Instantiation]-[Failed &quot; + implementationClass + &quot;]&quot;, ex);</span>
+<span class="nc" id="L633">            log.error(&quot;[Instantiation]-[Failed &quot; + implementationClass + &quot;]&quot;, ex);</span>
         }
-<span class="fc" id="L601">        catch (NoSuchFieldException | SecurityException ex)</span>
+<span class="nc" id="L635">        catch (NoSuchFieldException | SecurityException ex)</span>
         {
-<span class="pc bpc" id="L603" title="1 of 2 branches missed.">            if (newInstance != null)</span>
+<span class="nc bnc" id="L637" title="All 2 branches missed.">            if (newInstance != null)</span>
             {
-<span class="fc" id="L605">                log.error(&quot;[Field Populator]-[Failed];[Object]-[&quot; + newInstance.getClass().getCanonicalName() + &quot;]&quot;, ex);</span>
+<span class="nc" id="L639">                log.error(&quot;[Field Populator]-[Failed];[Object]-[&quot; + newInstance.getClass().getCanonicalName() + &quot;]&quot;, ex);</span>
             }
             else
             {
-<span class="nc" id="L609">                log.error(&quot;[Field Populator]-[Failed];[Object]-[&quot; + newInstance + &quot;]&quot;, ex);</span>
+<span class="nc" id="L643">                log.error(&quot;[Field Populator]-[Failed];[Object]-[&quot; + newInstance + &quot;]&quot;, ex);</span>
             }
-<span class="fc" id="L611">        }</span>
+<span class="pc" id="L645">        }</span>
 
-<span class="fc" id="L613">        return newInstance;</span>
+<span class="fc" id="L647">        return newInstance;</span>
     }
 
     /**
@@ -624,17 +658,16 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
      */
     protected &lt;A extends Annotation, T extends Object&gt; ArrayList&lt;A&gt; getAllAppliedCSSAnnotations(T cssObjectIn)
     {
-<span class="fc" id="L627">        Class clazz = cssObjectIn.getClass();</span>
-<span class="fc" id="L628">        ArrayList&lt;A&gt; annotations = new ArrayList();</span>
-<span class="fc" id="L629">        Annotation[] annos = clazz.getAnnotations();</span>
-<span class="fc bfc" id="L630" title="All 2 branches covered.">        for (Annotation annotation : annos)</span>
-        {
-<span class="pc bpc" id="L632" title="1 of 2 branches missed.">            if (annotation.annotationType().isAnnotationPresent(CSSAnnotationType.class))</span>
-            {
-<span class="fc" id="L634">                annotations.add((A) annotation);</span>
-            }
-        }
-<span class="fc" id="L637">        return annotations;</span>
+<span class="fc" id="L661">        Class clazz = cssObjectIn.getClass();</span>
+<span class="fc" id="L662">        ArrayList&lt;A&gt; annotations = new ArrayList();</span>
+<span class="fc" id="L663">        ArrayList&lt;A&gt; arrayList = new ArrayList&lt;&gt;((Collection&lt;? extends A&gt;) Arrays.asList(clazz.getAnnotations()));</span>
+<span class="fc" id="L664">        arrayList.stream()</span>
+<span class="fc" id="L665">                .filter(annotation -&gt; (annotation.annotationType().isAnnotationPresent(CSSAnnotationType.class)))</span>
+<span class="fc" id="L666">                .forEachOrdered(annotation -&gt;</span>
+                {
+<span class="fc" id="L668">                    annotations.add((A) annotation);</span>
+<span class="fc" id="L669">                });</span>
+<span class="fc" id="L670">        return annotations;</span>
     }
 
     /**
@@ -647,16 +680,14 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
      */
     protected &lt;A extends Annotation&gt; List&lt;A&gt; getAllAppliedCSSAnnotations(Field field)
     {
-<span class="fc" id="L650">        List&lt;A&gt; annotations = new ArrayList();</span>
-<span class="fc" id="L651">        Annotation[] annos = field.getAnnotations();</span>
-<span class="fc bfc" id="L652" title="All 2 branches covered.">        for (Annotation annotation : annos)</span>
-        {
-<span class="pc bpc" id="L654" title="1 of 2 branches missed.">            if (annotation.annotationType().isAnnotationPresent(CSSAnnotationType.class))</span>
-            {
-<span class="fc" id="L656">                annotations.add((A) annotation);</span>
-            }
-        }
-<span class="fc" id="L659">        return annotations;</span>
+<span class="fc" id="L683">        List&lt;A&gt; annotations = new ArrayList();</span>
+<span class="fc" id="L684">        ArrayList&lt;A&gt; arrayList = new ArrayList&lt;&gt;((Collection&lt;? extends A&gt;) Arrays.asList(field.getAnnotations()));</span>
+<span class="fc" id="L685">        arrayList.stream().filter(annotation -&gt; (annotation.annotationType().isAnnotationPresent(CSSAnnotationType.class)))</span>
+<span class="fc" id="L686">                .forEachOrdered((annotation) -&gt;</span>
+                {
+<span class="fc" id="L688">                    annotations.add((A) annotation);</span>
+<span class="fc" id="L689">                });</span>
+<span class="fc" id="L690">        return annotations;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

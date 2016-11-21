@@ -10,7 +10,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
  * @author Marc Magon
  */
 public class MeasurementCSSImpl extends CSSImplementationAdapter&lt;MeasurementCSS, MeasurementCSSImpl&gt;
-        implements CSSImplementationClass&lt;MeasurementCSS, MeasurementCSSImpl&gt;
+        implements CSSImplementationValue, CSSImplementationClass&lt;MeasurementCSS, MeasurementCSSImpl&gt;
 {
 
     private static final long serialVersionUID = 1L;
@@ -98,7 +98,7 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter&lt;MeasurementC
      */
     public double value()
     {
-<span class="nc" id="L101">        return value;</span>
+<span class="fc" id="L101">        return value;</span>
     }
 
     /**
@@ -164,7 +164,7 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter&lt;MeasurementC
      */
     public MeasurementTypes MeasurementType()
     {
-<span class="nc" id="L167">        return MeasurementType;</span>
+<span class="fc" id="L167">        return MeasurementType;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

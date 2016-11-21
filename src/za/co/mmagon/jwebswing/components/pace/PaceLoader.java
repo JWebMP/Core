@@ -16,11 +16,11 @@
  */
 package za.co.mmagon.jwebswing.components.pace;
 
-import za.co.mmagon.jwebswing.Feature;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyFeatures;
-import za.co.mmagon.jwebswing.base.servlets.interfaces.Loader;
-import za.co.mmagon.jwebswing.components.pace.preloadedThemes.PaceTheme;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
+import za.co.mmagon.jwebswing.base.servlets.interfaces.*;
+import za.co.mmagon.jwebswing.components.pace.preloadedThemes.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
 
 /**
  * An implementation of the jsTree project.
@@ -43,6 +43,7 @@ public class PaceLoader extends Feature<JavaScriptPart, PaceLoader> implements L
     {
         super("PaceLoader");
         addJavaScriptReference(PaceLoaderReferencePool.PaceLoader.getJavaScriptReference());
+        addJavaScriptReference(PaceLoaderReferencePool.PaceLoaderDisableWebSockets.getJavaScriptReference());
         addCssReference(theme.getCSSReference());
     }
 

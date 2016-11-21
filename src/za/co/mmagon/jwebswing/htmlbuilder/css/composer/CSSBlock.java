@@ -1,11 +1,10 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
-import za.co.mmagon.jwebswing.utilities.TextUtilities;
+import java.util.*;
+import org.apache.log4j.*;
+import za.co.mmagon.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
+import za.co.mmagon.jwebswing.utilities.*;
 
 /**
  * A Block of CSS
@@ -32,9 +31,17 @@ public class CSSBlock
      */
     public CSSBlock(String blockID)
     {
+        if (blockID == null)
+        {
+            throw new UnsupportedOperationException("Block id is null");
+        }
         if (blockID.contains(" "))
         {
             throw new UnsupportedOperationException("Cannot create an id with a space in it");
+        }
+        if (blockID.isEmpty())
+        {
+            throw new UnsupportedOperationException("Cannot create a block with no id");
         }
         this.idOfBlock = blockID;
         cssLines = new CSSLines();
@@ -96,6 +103,7 @@ public class CSSBlock
      * Adds a property value pair to the Lines group. If it already exists, just returns it
      *
      * @param line Input Line to add to the lines collection
+     *
      * @return The input Line
      */
     public CSSLine add(CSSLine line)
@@ -121,6 +129,7 @@ public class CSSBlock
      * Removes a line from the list
      *
      * @param line The line to be removed
+     *
      * @return True if it could be removed
      */
     public boolean remove(CSSLine line)
@@ -151,6 +160,7 @@ public class CSSBlock
      * Returns a generated block ID to apply on top of this CSS
      *
      * @param block The linked block
+     *
      * @return
      */
     private String generateBlockID(CSSBlock block)
@@ -162,6 +172,7 @@ public class CSSBlock
      * Returns a generated block ID to apply on top of this CSS
      *
      * @param block The linked block
+     *
      * @return
      */
     private String generateBlockID(CSSBlock block, int tabCount)
@@ -239,6 +250,7 @@ public class CSSBlock
      * Returns a generated block ID to apply on top of this CSS
      *
      * @param block The linked block
+     *
      * @return
      */
     public String addBlockID(String block)
@@ -309,6 +321,7 @@ public class CSSBlock
      * Adds a block ID into this blocks generated String
      *
      * @param linkedBlock The block to test if it's contents match, if so, then it is added
+     *
      * @return True if the block can be added to this one
      */
     public boolean addLinkedBlock(CSSBlock linkedBlock)
@@ -341,6 +354,7 @@ public class CSSBlock
      * Compares the body string to each other
      *
      * @param o The CSS Block to compare
+     *
      * @return True or false if they same
      */
     @Override
@@ -362,14 +376,8 @@ public class CSSBlock
                 return false;
             }
             /*
-             * if (block.getCssLines().equals(getCssLines()) && block.idOfBlock.equals(idOfBlock) && block.blockType == this.blockType && block.blockIdentifer == this.blockIdentifer)
-             * {
-             * return true;
-             * }
-             * else
-             * {
-             * return false;
-             * }
+             * if (block.getCssLines().equals(getCssLines()) && block.idOfBlock.equals(idOfBlock) && block.blockType == this.blockType && block.blockIdentifer == this.blockIdentifer) { return true; }
+             * else { return false; }
              */
         }
     }

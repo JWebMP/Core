@@ -68,14 +68,14 @@ public class BorderCSSImpl extends CSSImplementationAdapter<BorderCSS, BorderCSS
     private MeasurementCSSImpl borderTopWidth;
 
     @CSSDetail(cssName = "border", cssVersion = CSSVersions.CSS21)
-    private Border border;
-    private BorderBottomCSS borderBottom;
+    private BorderImpl border;
+    private BorderBottomCSSImpl borderBottom;
     @CSSDetail(cssName = "border-left", cssVersion = CSSVersions.CSS21)
-    private BorderBottomCSS borderLeft;
+    private BorderBottomCSSImpl borderLeft;
     @CSSDetail(cssName = "border-right", cssVersion = CSSVersions.CSS21)
-    private BorderBottomCSS borderRight;
+    private BorderBottomCSSImpl borderRight;
     @CSSDetail(cssName = "border-top", cssVersion = CSSVersions.CSS21)
-    private BorderBottomCSS borderTop;
+    private BorderBottomCSSImpl borderTop;
 
     private static final long serialVersionUID = 1L;
 
@@ -252,7 +252,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter<BorderCSS, BorderCSS
      *
      * @return
      */
-    public Border getBorder()
+    public BorderImpl getBorder()
     {
         return border;
     }
@@ -262,7 +262,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter<BorderCSS, BorderCSS
      *
      * @return
      */
-    public BorderBottomCSS getBorderBottom()
+    public BorderBottomCSSImpl getBorderBottom()
     {
         return borderBottom;
     }
@@ -272,7 +272,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter<BorderCSS, BorderCSS
      *
      * @return
      */
-    public BorderBottomCSS getBorderLeft()
+    public BorderBottomCSSImpl getBorderLeft()
     {
         return borderLeft;
     }
@@ -282,7 +282,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter<BorderCSS, BorderCSS
      *
      * @return
      */
-    public BorderBottomCSS getBorderRight()
+    public BorderBottomCSSImpl getBorderRight()
     {
         return borderRight;
     }
@@ -292,7 +292,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter<BorderCSS, BorderCSS
      *
      * @return
      */
-    public BorderBottomCSS getBorderTop()
+    public BorderBottomCSSImpl getBorderTop()
     {
         return borderTop;
     }
@@ -462,7 +462,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter<BorderCSS, BorderCSS
      *
      * @param border
      */
-    public void setBorder(Border border)
+    public void setBorder(BorderImpl border)
     {
         this.border = border;
     }
@@ -472,7 +472,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter<BorderCSS, BorderCSS
      *
      * @param borderBottom
      */
-    public void setBorderBottom(BorderBottomCSS borderBottom)
+    public void setBorderBottom(BorderBottomCSSImpl borderBottom)
     {
         this.borderBottom = borderBottom;
     }
@@ -482,7 +482,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter<BorderCSS, BorderCSS
      *
      * @param borderLeft
      */
-    public void setBorderLeft(BorderBottomCSS borderLeft)
+    public void setBorderLeft(BorderBottomCSSImpl borderLeft)
     {
         this.borderLeft = borderLeft;
     }
@@ -492,7 +492,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter<BorderCSS, BorderCSS
      *
      * @param borderRight
      */
-    public void setBorderRight(BorderBottomCSS borderRight)
+    public void setBorderRight(BorderBottomCSSImpl borderRight)
     {
         this.borderRight = borderRight;
     }
@@ -502,7 +502,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter<BorderCSS, BorderCSS
      *
      * @param borderTop
      */
-    public void setBorderTop(BorderBottomCSS borderTop)
+    public void setBorderTop(BorderBottomCSSImpl borderTop)
     {
         this.borderTop = borderTop;
     }

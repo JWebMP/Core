@@ -1,12 +1,10 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css;
 
 import java.lang.annotation.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.Annotations.CustomCSS;
 import za.co.mmagon.jwebswing.htmlbuilder.css.animatable.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
 import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.borders.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.displays.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.fonts.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.heightwidth.*;
@@ -43,13 +41,6 @@ public @interface CSS
     public AnimateCSS Animatable() default @AnimateCSS;
 
     /**
-     * Specify any Custom css you want
-     *
-     * @return
-     */
-    public CustomCSS Custom() default @CustomCSS;
-
-    /**
      * Background Properties
      *
      * @return
@@ -62,13 +53,6 @@ public @interface CSS
      * @return
      */
     public BorderCSS Border() default @BorderCSS;
-
-    /**
-     * Colour properties
-     *
-     * @return
-     */
-    public ColourCSS Colour() default @ColourCSS;
 
     /**
      * Display properties

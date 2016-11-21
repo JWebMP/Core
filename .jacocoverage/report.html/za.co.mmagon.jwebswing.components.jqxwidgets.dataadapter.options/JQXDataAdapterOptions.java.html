@@ -63,9 +63,9 @@ public class JQXDataAdapterOptions&lt;A extends JQXDataAdapterSourceData&gt; ext
     private String contentType;// 	String 	&quot;application/x-www-form-urlencoded&quot;
 
     public JQXDataAdapterOptions()
-<span class="nc" id="L66">    {</span>
+<span class="fc" id="L66">    {</span>
 
-<span class="nc" id="L68">    }</span>
+<span class="fc" id="L68">    }</span>
 
     /**
      * Gets the column delimeter string
@@ -118,7 +118,7 @@ public class JQXDataAdapterOptions&lt;A extends JQXDataAdapterSourceData&gt; ext
      */
     public A getData()
     {
-<span class="nc" id="L121">        return data;</span>
+<span class="fc" id="L121">        return data;</span>
     }
 
     /**
@@ -128,8 +128,8 @@ public class JQXDataAdapterOptions&lt;A extends JQXDataAdapterSourceData&gt; ext
      */
     public void setData(A data)
     {
-<span class="nc" id="L131">        this.data = data;</span>
-<span class="nc" id="L132">    }</span>
+<span class="fc" id="L131">        this.data = data;</span>
+<span class="fc" id="L132">    }</span>
 
     /**
      * Returns the local data object
@@ -149,15 +149,15 @@ public class JQXDataAdapterOptions&lt;A extends JQXDataAdapterSourceData&gt; ext
      */
     public void setLocaldata(A localdata, JQXDataAdapter adapter)
     {
-<span class="nc" id="L152">        this.localdata = localdata;</span>
-<span class="nc bnc" id="L153" title="All 2 branches missed.">        if (localdata != null)</span>
+<span class="fc" id="L152">        this.localdata = localdata;</span>
+<span class="pc bpc" id="L153" title="1 of 2 branches missed.">        if (localdata != null)</span>
         {
-<span class="nc" id="L155">            setUrl(&quot;da?do=&quot; + adapter.getDAID());</span>
-<span class="nc" id="L156">            setAsync(true);</span>
-<span class="nc" id="L157">            setAutoBind(true);</span>
-<span class="nc" id="L158">            setDatatype(JQXDataAdapterSourceType.JSON);</span>
+<span class="fc" id="L155">            setUrl(&quot;da?do=&quot; + adapter.getDAID());</span>
+<span class="fc" id="L156">            setAsync(true);</span>
+<span class="fc" id="L157">            setAutoBind(true);</span>
+<span class="fc" id="L158">            setDatatype(JQXDataAdapterSourceType.JSON);</span>
         }
-<span class="nc" id="L160">    }</span>
+<span class="fc" id="L160">    }</span>
 
     /**
      * Gets the data type associated
@@ -176,8 +176,8 @@ public class JQXDataAdapterOptions&lt;A extends JQXDataAdapterSourceData&gt; ext
      */
     public void setDatatype(JQXDataAdapterSourceType datatype)
     {
-<span class="nc" id="L179">        this.datatype = datatype;</span>
-<span class="nc" id="L180">    }</span>
+<span class="fc" id="L179">        this.datatype = datatype;</span>
+<span class="fc" id="L180">    }</span>
 
     public String getType()
     {
@@ -246,8 +246,8 @@ public class JQXDataAdapterOptions&lt;A extends JQXDataAdapterSourceData&gt; ext
 
     public void setUrl(String url)
     {
-<span class="nc" id="L249">        this.url = url;</span>
-<span class="nc" id="L250">    }</span>
+<span class="fc" id="L249">        this.url = url;</span>
+<span class="fc" id="L250">    }</span>
 
     public Boolean getAsync()
     {
@@ -256,8 +256,8 @@ public class JQXDataAdapterOptions&lt;A extends JQXDataAdapterSourceData&gt; ext
 
     public void setAsync(Boolean async)
     {
-<span class="nc" id="L259">        this.async = async;</span>
-<span class="nc" id="L260">    }</span>
+<span class="fc" id="L259">        this.async = async;</span>
+<span class="fc" id="L260">    }</span>
 
     public Boolean getAutoBind()
     {
@@ -266,8 +266,8 @@ public class JQXDataAdapterOptions&lt;A extends JQXDataAdapterSourceData&gt; ext
 
     public void setAutoBind(Boolean autoBind)
     {
-<span class="nc" id="L269">        this.autoBind = autoBind;</span>
-<span class="nc" id="L270">    }</span>
+<span class="fc" id="L269">        this.autoBind = autoBind;</span>
+<span class="fc" id="L270">    }</span>
 
     public String getContentType()
     {

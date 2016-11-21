@@ -1,17 +1,12 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.colours;
 
-import za.co.mmagon.jwebswing.base.client.CSSVersions;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.*;
 
 /**
  * Standard HTML Colours Based on the list referenced at http://www.w3schools.com/HTML/html_colornames.asp
  * <p>
- * Definition and Usage
- * The color property specifies the color of text.
- * Default value: not specified
- * Inherited: yes
- * Version: CSS1
- * JavaScript syntax: object.style.color="#FF0000"
+ * Definition and Usage The color property specifies the color of text. Default value: not specified Inherited: yes Version: CSS1 JavaScript syntax: object.style.color="#FF0000"
  *
  * @author Marc Magon
  */
@@ -192,12 +187,12 @@ public enum ColourNames implements CSSEnumeration<ColourNames>
     @Override
     public String getJavascriptSyntax()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
     public CSSVersions getCSSVersion()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 }

@@ -22,43 +22,48 @@ package za.co.mmagon.jwebswing.base.servlets.enumarations;
  * @author GedMarc
  * @since 16 Apr 2016
  */
-<span class="pc" id="L25">public enum RequirementsPriority</span>
+<span class="pc" id="L25">public enum RequirementsPriority implements Comparable&lt;RequirementsPriority&gt;</span>
 {
+    /**
+     * Loads it at the top (in the head)
+     */
+<span class="fc" id="L30">    Top_Shelf,</span>
     /**
      * Run in First Group
      */
-<span class="fc" id="L30">    First,</span>
+<span class="fc" id="L34">    First,</span>
     /**
      * Run in Second Group
      */
-<span class="fc" id="L34">    Second,</span>
+<span class="fc" id="L38">    Second,</span>
     /**
      * Run in Third Group
      */
-<span class="fc" id="L38">    Third,</span>
+<span class="fc" id="L42">    Third,</span>
     /**
      * Run in Fourth Group
      */
-<span class="fc" id="L42">    Fourth,</span>
+<span class="fc" id="L46">    Fourth,</span>
     /**
      * Run in Fifth Group
      */
-<span class="fc" id="L46">    Fifth,</span>
+<span class="fc" id="L50">    Fifth,</span>
     /**
      * Somewhere in the middle, sorted, but who cares
      */
-<span class="fc" id="L50">    DontCare,</span>
+<span class="fc" id="L54">    DontCare,</span>
     /**
      * Somewhere after the don't care section
      */
-<span class="fc" id="L54">    Last,</span>
+<span class="fc" id="L58">    Last,</span>
     /**
      * The very last section. Usually at the end of the page
      */
-<span class="fc" id="L58">    VeryLast;</span>
+<span class="fc" id="L62">    VeryLast;</span>
 
     private RequirementsPriority()
-<span class="fc" id="L61">    {</span>
-<span class="fc" id="L62">    }</span>
+<span class="fc" id="L65">    {</span>
+<span class="fc" id="L66">    }</span>
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

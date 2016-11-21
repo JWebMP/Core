@@ -36,7 +36,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter&lt;PaddingCSS, Padd
     private static final long serialVersionUID = 1L;
 
     @CSSDetail(cssName = &quot;padding&quot;, cssVersion = CSSVersions.CSS21)
-    private Padding padding;
+    private PaddingImpl padding;
     @CSSDetail(cssName = &quot;padding-right&quot;, cssVersion = CSSVersions.CSS21)
     private MeasurementCSSImpl paddingRight;
     @CSSDetail(cssName = &quot;padding-right&quot;, cssVersion = CSSVersions.CSS21)
@@ -232,7 +232,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter&lt;PaddingCSS, Padd
      *
      * @return
      */
-    public Padding getPadding()
+    public PaddingImpl getPadding()
     {
 <span class="nc" id="L237">        return padding;</span>
     }
@@ -286,7 +286,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter&lt;PaddingCSS, Padd
      *
      * @param Padding
      */
-    public void setPadding(za.co.mmagon.jwebswing.htmlbuilder.css.padding.Padding Padding)
+    public void setPadding(PaddingImpl Padding)
     {
 <span class="nc" id="L291">        this.padding = Padding;</span>
 <span class="nc" id="L292">    }</span>

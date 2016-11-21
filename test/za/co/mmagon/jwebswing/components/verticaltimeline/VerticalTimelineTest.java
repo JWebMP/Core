@@ -16,14 +16,11 @@
  */
 package za.co.mmagon.jwebswing.components.verticaltimeline;
 
-import org.junit.Assert;
-import org.junit.Test;
-import za.co.mmagon.BaseTestClass;
-import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.html.H2;
-import za.co.mmagon.jwebswing.base.html.Span;
-import za.co.mmagon.jwebswing.components.fontawesome.FontAwesome;
-import za.co.mmagon.jwebswing.components.fontawesome.FontAwesomeIcons;
+import org.junit.*;
+import za.co.mmagon.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.components.fontawesome.*;
 
 /**
  *
@@ -41,7 +38,7 @@ public class VerticalTimelineTest extends BaseTestClass
     {
         VerticalTimeline vt = getMe();
         System.out.println(vt.toString(true));
-        Assert.assertEquals("<section class=\"verticalTimeline\" id=\"id\"></section>", vt.toString(true));
+        Assert.assertEquals("<section class=\"verticalTimeline cd-container\" id=\"id\"></section>", vt.toString(true));
     }
 
     @Test
@@ -65,7 +62,7 @@ public class VerticalTimelineTest extends BaseTestClass
         vt.add(vtb);
 
         System.out.println(vt.toString(true));
-        Assert.assertEquals("<section class=\"verticalTimeline\" id=\"id\">\n"
+        Assert.assertEquals("<section class=\"verticalTimeline cd-container\" id=\"id\">\n"
                 + "	<div class=\"cd-timeline-block\" id=\"vtbId\">\n"
                 + "		<div class=\"cd-timeline-img\" id=\"vtbImageID\">\n"
                 + "			<i class=\"fa fa-cog\"></i>\n"
@@ -112,23 +109,13 @@ public class VerticalTimelineTest extends BaseTestClass
                 + "		<meta charset=\"utf-16\">\n"
                 + "		<meta content=\"IE=Edge\" http-equiv=\"X-UA-Compatible\">\n"
                 + "		<meta content=\"width=device-width, initial-scale=1\" name=\"viewport\">\n"
-                + "		<!-- Priority [First] Values -->\n"
                 + "		<link href=\"bower_components/font-awesome/css/font-awesome.css\" rel=\"stylesheet\" type=\"text/css\">\n"
-                + "		<script src=\"bower_components/jwebswing-moderniz/modernizr.js\" type=\"text/javascript\"></script>\n"  //looking for this
-                + "		<script src=\"bower_components/jquery-3/dist/jquery.js\" type=\"text/javascript\"></script>\n"
-                + "		<!-- Priority [Third] Values -->\n"
-                + "		<link href=\"bower_components/bootstrap/dist/css/bootstrap.css\" rel=\"stylesheet\" type=\"text/css\">\n"  //looking for this
-                + "		<script src=\"bower_components/bootstrap/dist/js/bootstrap.js\" type=\"text/javascript\"></script>\n"  //looking for this
-                + "		<!-- Priority [Fourth] Values -->\n"
+                + "		<link href=\"bower_components/bootstrap/dist/css/bootstrap.css\" rel=\"stylesheet\" type=\"text/css\">\n"
                 + "		<link href=\"bower_components/bootstrap3-dialog/dist/css/bootstrap-dialog.css\" rel=\"stylesheet\" type=\"text/css\">\n"
-                + "		<script src=\"bower_components/bootstrap3-dialog/dist/js/bootstrap-dialog.js\" type=\"text/javascript\"></script>\n"
-                + "		<!-- Priority [DontCare] Values -->\n"
-                + "		<link href=\"bower_components/vertical-timeline-jwebswing/css/style.css\" rel=\"stylesheet\" type=\"text/css\">\n" //looking for this
-                + "		<script src=\"bower_components/jquery-migrate/jquery-migrate.js\" type=\"text/javascript\"></script>\n"  //looking for this
-                + "		<script src=\"bower_components/vertical-timeline-jwebswing/js/main.js\" type=\"text/javascript\"></script>\n"  //looking for this
+                + "		<link href=\"bower_components/vertical-timeline-jwebswing/css/style.css\" rel=\"stylesheet\" type=\"text/css\">\n"
                 + "	</head>\n"
                 + "	<body id=\"body\">\n"
-                + "		<section class=\"verticalTimeline\" id=\"id\">\n"
+                + "		<section class=\"verticalTimeline cd-container\" id=\"id\">\n"
                 + "			<div class=\"cd-timeline-block\" id=\"vtbId\">\n"
                 + "				<div class=\"cd-timeline-img\" id=\"vtbImageID\">\n"
                 + "					<i class=\"fa fa-cog\"></i>\n"
@@ -141,6 +128,12 @@ public class VerticalTimelineTest extends BaseTestClass
                 + "				</div>\n"
                 + "			</div>\n"
                 + "		</section>\n"
+                + "		<script src=\"bower_components/jwebswing-moderniz/modernizr.js\" type=\"text/javascript\"></script>\n"
+                + "		<script src=\"bower_components/jquery-3/dist/jquery.js\" type=\"text/javascript\"></script>\n"
+                + "		<script src=\"bower_components/jquery-migrate/jquery-migrate.js\" type=\"text/javascript\"></script>\n"
+                + "		<script src=\"bower_components/bootstrap/dist/js/bootstrap.js\" type=\"text/javascript\"></script>\n"
+                + "		<script src=\"bower_components/bootstrap3-dialog/dist/js/bootstrap-dialog.js\" type=\"text/javascript\"></script>\n"
+                + "		<script src=\"bower_components/vertical-timeline-jwebswing/js/main.js\" type=\"text/javascript\"></script>\n"
                 + "	</body>\n"
                 + "</html>", p.toString(true));
 

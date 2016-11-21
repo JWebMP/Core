@@ -7,6 +7,7 @@ import za.co.mmagon.*;
 import za.co.mmagon.jwebswing.base.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
+import za.co.mmagon.jwebswing.utilities.*;
 
 /**
  * This class specifically build CSS according to a JWebSwing component
@@ -46,15 +47,17 @@ public class CSSComposer
         {
             List<ComponentHierarchyBase> comp = o.getChildrenHierarchy();
             ArrayList<ComponentStyleBase> compti = new ArrayList<>();
-            comp.forEach(co ->
+            comp.stream().filter(a -> a != null).forEach(co ->
             {
-                if (co.getClass().isAssignableFrom(ComponentHierarchyBase.class))
+                if (ComponentStyleBase.class.isAssignableFrom(co.getClass()))
                 {
-                    ComponentStyleBase b = ComponentStyleBase.class.cast(co);
-                    compti.add((ComponentStyleBase) co);
+                    ComponentStyleBase chb = ComponentStyleBase.class.cast(co);
+                    if (!compti.contains(chb))
+                    {
+                        compti.add(chb);
+                    }
                 }
             });
-
             compti.stream().forEach(this::addComponent);
         }
         else
@@ -67,46 +70,44 @@ public class CSSComposer
      * Add a component to this object to render for
      *
      * @param o The component to render CSS for as well as this object
+     *
      * @return True or False
      */
     public final boolean addComponent(ComponentStyleBase o)
     {
-        CSSBlock annotatedCssBlocks = propertiesFactory.getCSSBlock(o.getID(), CSSTypes.None, propertiesFactory.getCSS(o), CSSBlockIdentifier.Id);
-        getBlockMaster().addBlock(annotatedCssBlocks);
-        
-        
+        CSSBlock annotatedCssBlocks = propertiesFactory.getCSSBlock(o.getID(), CSSTypes.None, propertiesFactory.getCSS(o), CSSBlockIdentifier.Class);
+        String output = annotatedCssBlocks.getCssLines().toString().replace("{", "").replace("}", "");
+        if (!output.isEmpty())
+        {
+            System.out.println(annotatedCssBlocks.getCssLines().toString().replace("{", "").replace("}", ""));
+            o.addClass(annotatedCssBlocks.getIdOfBlock());
+            getBlockMaster().addBlock(annotatedCssBlocks);
+        }
+
         Map<CSSTypes, CSSImpl> css = o.getCssTypeHashMap();
         css.entrySet().stream().map(entry ->
         {
             CSSTypes key = entry.getKey();
             CSSImpl value = entry.getValue();
-            CSSBlock declaredCssBlocks = propertiesFactory.getCSSBlock(key.getCssName(), key, propertiesFactory.getCSS(value),CSSBlockIdentifier.Class);
+            CSSBlock declaredCssBlocks = propertiesFactory.getCSSBlock(o.getID() + key.getCssName(), key, propertiesFactory.getCSS(value), CSSBlockIdentifier.Id);
             return declaredCssBlocks;
         }).forEachOrdered(getBlockMaster()::addBlock);
-        for (Field field : o.getClass().getDeclaredFields())
+
+        ArrayList<Field> fields = new ArrayList<>(Arrays.asList(o.getClass().getDeclaredFields()));
+        fields.stream().filter(a -> ComponentUtils.fieldGet(a, o) != null).forEach((Field field) ->
         {
-            try
+            field.setAccessible(true);
+            Object fieldObject = ComponentUtils.fieldGet(field, o);
+            if (fieldObject instanceof ComponentStyleBase)
             {
-                field.setAccessible(true);
-                Object fieldObject = field.get(o);
-                if (fieldObject == null)
-                {
-                    continue;
-                }
-                if ((fieldObject) instanceof ComponentStyleBase)
-                {
-                    ComponentStyleBase c = (ComponentStyleBase) fieldObject;
-                    CSSBlock newFieldBlock = propertiesFactory.getCSSBlock(c.getID(), CSSTypes.None, propertiesFactory.getCSS(field, o), CSSBlockIdentifier.Id);
-                    newFieldBlock.setBlockIdentifer(CSSBlockIdentifier.Id);
-                    blockMaster.addBlock(newFieldBlock);
-                }
+                ComponentStyleBase c = (ComponentStyleBase) fieldObject;
+                CSSBlock newFieldBlock = propertiesFactory.getCSSBlock(c.getID(), CSSTypes.None, propertiesFactory.getCSS(field, o), CSSBlockIdentifier.Id);
+                newFieldBlock.setBlockIdentifer(CSSBlockIdentifier.Id);
+                blockMaster.addBlock(newFieldBlock);
             }
-            catch (IllegalArgumentException | IllegalAccessException ex)
-            {
-                log.trace(ex);
-            }
-        }
+        });
         return true;
+
     }
 
     /**
@@ -150,8 +151,7 @@ public class CSSComposer
     }
 
     /**
-     * Output the CSS Blocks rendered.
-     * Updates all block pretty print value to the page instance Tiny HTML
+     * Output the CSS Blocks rendered. Updates all block pretty print value to the page instance Tiny HTML
      *
      * @return
      */
@@ -160,7 +160,7 @@ public class CSSComposer
     {
         StringBuilder cssScript = new StringBuilder();
         List<CSSBlock> allCurrentBlocks = getBlockMaster().getAllCSSBlocks();
-        allCurrentBlocks.stream().forEach((block)
+        allCurrentBlocks.stream().forEach(block
                 ->
         {
             String script = block.toString();

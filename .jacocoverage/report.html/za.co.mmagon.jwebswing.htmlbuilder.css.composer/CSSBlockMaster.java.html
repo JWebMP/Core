@@ -16,7 +16,7 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  *
@@ -67,49 +67,52 @@ public class CSSBlockMaster
      * Adds a block to the CSS Composer
      *
      * @param block
+     *
      * @return
      */
     public ArrayList&lt;CSSBlock&gt; addBlock(ArrayList&lt;CSSBlock&gt; block)
     {
-<span class="nc" id="L74">        block.stream().forEach((cssBlock)</span>
+<span class="nc" id="L75">        block.stream().forEach((cssBlock)</span>
                 -&gt;
-                {
-<span class="nc" id="L77">                    addBlock(cssBlock);</span>
-<span class="nc" id="L78">        });</span>
-<span class="nc" id="L79">        return block;</span>
+        {
+<span class="nc" id="L78">            addBlock(cssBlock);</span>
+<span class="nc" id="L79">        });</span>
+<span class="nc" id="L80">        return block;</span>
     }
 
     /**
      * Returns any duplicate blocks
      *
      * @param blockToCompare The block to compare against
+     *
      * @return The block with the same lines
      */
     protected CSSBlock checkBlocksForDuplicateLines(CSSBlock blockToCompare)
     {
-<span class="fc bfc" id="L90" title="All 2 branches covered.">        for (CSSBlock cssBlock : allBlocks)</span>
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">        for (CSSBlock cssBlock : allBlocks)</span>
         {
-<span class="fc" id="L92">            String mylines = cssBlock.getCssLines().toString();</span>
-<span class="fc" id="L93">            String compareToLines = blockToCompare.getCssLines().toString();</span>
+<span class="nc" id="L94">            String mylines = cssBlock.getCssLines().toString();</span>
+<span class="nc" id="L95">            String compareToLines = blockToCompare.getCssLines().toString();</span>
             //System.out.println(&quot;my lines : &quot; + mylines);
             //System.out.println(&quot;compare lines : &quot; + compareToLines);
-<span class="pc bpc" id="L96" title="1 of 2 branches missed.">            if (blockToCompare.getCssLines().toString().equalsIgnoreCase(cssBlock.getCssLines().toString()))</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">            if (blockToCompare.getCssLines().toString().equalsIgnoreCase(cssBlock.getCssLines().toString()))</span>
             {
-<span class="nc" id="L98">                return cssBlock;</span>
+<span class="nc" id="L100">                return cssBlock;</span>
             }
-<span class="fc" id="L100">        }</span>
-<span class="fc" id="L101">        return null;</span>
+<span class="nc" id="L102">        }</span>
+<span class="fc" id="L103">        return null;</span>
     }
 
     /**
      * Checks if the ID of a block is loaded for this composer
      *
      * @param block The block to check
+     *
      * @return True if the ID is already complete
      */
     protected boolean idAlreadyLoaded(CSSBlock block)
     {
-<span class="nc" id="L112">        return allBlocks.stream().anyMatch((cssBlock) -&gt; (block.getIdOfBlock().equalsIgnoreCase(cssBlock.getIdOfBlock())));</span>
+<span class="nc" id="L115">        return allBlocks.stream().anyMatch((cssBlock) -&gt; (block.getIdOfBlock().equalsIgnoreCase(cssBlock.getIdOfBlock())));</span>
     }
 
     /**
@@ -119,30 +122,31 @@ public class CSSBlockMaster
      */
     public ArrayList&lt;CSSBlock&gt; getAllCSSBlocks()
     {
-<span class="fc" id="L122">        return allBlocks;</span>
+<span class="fc" id="L125">        return allBlocks;</span>
     }
 
     /**
      * Returns the generated CSS as small as possible
      *
      * @param ajax Placeholder - will always render as inline
+     *
      * @return The generated CSS
      */
     public String toString(boolean ajax)
     {
-<span class="nc" id="L133">        StringBuilder cssBlocksSB = new StringBuilder();</span>
-<span class="nc" id="L134">        (getAllCSSBlocks()).stream().forEach((cSSBlock)</span>
+<span class="nc" id="L137">        StringBuilder cssBlocksSB = new StringBuilder();</span>
+<span class="nc" id="L138">        (getAllCSSBlocks()).stream().forEach(cSSBlock</span>
                 -&gt;
-                {
-<span class="nc" id="L137">                    CSSBlockIdentifier oldIdent = cSSBlock.getBlockIdentifer();</span>
-<span class="nc" id="L138">                    cSSBlock.setBlockIdentifer(CSSBlockIdentifier.Inline);</span>
-<span class="nc bnc" id="L139" title="All 2 branches missed.">                    if (!cSSBlock.toString().isEmpty())</span>
-                    {
-<span class="nc bnc" id="L141" title="All 2 branches missed.">                        cssBlocksSB.append(cSSBlock).append(cSSBlock.getBlockIdentifer() == CSSBlockIdentifier.Inline ? &quot;&quot; : &quot;\n&quot;);</span>
-                    }
-<span class="nc" id="L143">                    cSSBlock.setBlockIdentifer(oldIdent);</span>
-<span class="nc" id="L144">        });</span>
-<span class="nc" id="L145">        return cssBlocksSB.toString();</span>
+        {
+<span class="nc" id="L141">            CSSBlockIdentifier oldIdent = cSSBlock.getBlockIdentifer();</span>
+<span class="nc" id="L142">            cSSBlock.setBlockIdentifer(CSSBlockIdentifier.Inline);</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">            if (!cSSBlock.toString().isEmpty())</span>
+            {
+<span class="nc bnc" id="L145" title="All 2 branches missed.">                cssBlocksSB.append(cSSBlock).append(cSSBlock.getBlockIdentifer() == CSSBlockIdentifier.Inline ? &quot;&quot; : &quot;\n&quot;);</span>
+            }
+<span class="nc" id="L147">            cSSBlock.setBlockIdentifer(oldIdent);</span>
+<span class="nc" id="L148">        });</span>
+<span class="nc" id="L149">        return cssBlocksSB.toString();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

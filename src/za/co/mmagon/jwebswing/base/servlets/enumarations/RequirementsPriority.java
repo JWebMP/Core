@@ -22,8 +22,12 @@ package za.co.mmagon.jwebswing.base.servlets.enumarations;
  * @author GedMarc
  * @since 16 Apr 2016
  */
-public enum RequirementsPriority
+public enum RequirementsPriority implements Comparable<RequirementsPriority>
 {
+    /**
+     * Loads it at the top (in the head)
+     */
+    Top_Shelf,
     /**
      * Run in First Group
      */
@@ -60,4 +64,5 @@ public enum RequirementsPriority
     private RequirementsPriority()
     {
     }
+
 }

@@ -1,0 +1,629 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ModernizrBrowserDto.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.modernizr</a> &gt; <span class="el_source">ModernizrBrowserDto.java</span></div><h1>ModernizrBrowserDto.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.modernizr;
+
+import com.fasterxml.jackson.annotation.*;
+
+/**
+ *
+ * @author GedMarc
+ * @since Nov 21, 2016
+ * @version 1.0
+ *
+ */
+public class ModernizrBrowserDto
+{
+
+    private Boolean htmlimports;
+    private Boolean applicationcache;
+    private Boolean blobconstructor;
+    @JsonProperty(value = &quot;blob-constructor&quot;)
+    private Boolean blob_constructor;
+    private Boolean cookies;
+    private Boolean cors;
+    private Boolean customprotocolhandler;
+    private Boolean customevent;
+    private Boolean dataview;
+    private Boolean eventlistener;
+    private Boolean geolocation;
+    private Boolean history;
+    private Boolean ie8compat;
+    private Boolean json;
+    private Boolean notification;
+    private Boolean postmessage;
+    private Boolean queryselector;
+    private Boolean serviceworker;
+    private Boolean svg;
+    private Boolean templatestrings;
+    private Boolean typedarrays;
+    private Boolean websockets;
+    private Boolean xdomainrequest;
+    private Boolean webaudio;
+    private Boolean cssescape;
+    private Boolean supports;
+    private Boolean target;
+    private Boolean mutationobserver;
+
+    /**
+     * Abstract constructor
+     */
+    public ModernizrBrowserDto()
+<span class="nc" id="L65">    {</span>
+
+<span class="nc" id="L67">    }</span>
+
+    /**
+     * Tests for HTML Imports
+     *
+     * @return
+     */
+    public Boolean isHtmlimports()
+    {
+<span class="nc" id="L76">        return htmlimports;</span>
+    }
+
+    /**
+     * Tests for HTML Imports
+     *
+     * @param htmlimports
+     */
+    protected void setHtmlimports(Boolean htmlimports)
+    {
+<span class="nc" id="L86">        this.htmlimports = htmlimports;</span>
+<span class="nc" id="L87">    }</span>
+
+    /**
+     * Is Application Cache
+     *
+     * @return
+     */
+    public Boolean isApplicationcache()
+    {
+<span class="nc" id="L96">        return applicationcache;</span>
+    }
+
+    /**
+     * Sets Application Cache
+     *
+     * @param applicationcache
+     */
+    protected void setApplicationcache(Boolean applicationcache)
+    {
+<span class="nc" id="L106">        this.applicationcache = applicationcache;</span>
+<span class="nc" id="L107">    }</span>
+
+    /**
+     * Test result for Blob constructor
+     *
+     * @return
+     */
+    public Boolean isBlobconstructor()
+    {
+<span class="nc" id="L116">        return blobconstructor;</span>
+    }
+
+    /**
+     * Test result for Blob Constructor
+     *
+     * @param blobconstructor
+     */
+    protected void setBlobconstructor(Boolean blobconstructor)
+    {
+<span class="nc" id="L126">        this.blobconstructor = blobconstructor;</span>
+<span class="nc" id="L127">    }</span>
+
+    /**
+     * Test result for Blob Constructor
+     *
+     * @return
+     */
+    public Boolean isBlobConstructor()
+    {
+<span class="nc" id="L136">        return blob_constructor;</span>
+    }
+
+    /**
+     * Test result for Blob Constructor
+     *
+     * @param blob_constructor
+     */
+    protected void setBlobConstructor(Boolean blob_constructor)
+    {
+<span class="nc" id="L146">        this.blob_constructor = blob_constructor;</span>
+<span class="nc" id="L147">    }</span>
+
+    /**
+     * Test result for cookies available
+     *
+     * @return
+     */
+    public Boolean isCookies()
+    {
+<span class="nc" id="L156">        return cookies;</span>
+    }
+
+    /**
+     * Test result for if cookies available
+     *
+     * @param cookies
+     */
+    protected void setCookies(Boolean cookies)
+    {
+<span class="nc" id="L166">        this.cookies = cookies;</span>
+<span class="nc" id="L167">    }</span>
+
+    /**
+     * Is Cors Enabled
+     *
+     * @return
+     */
+    public Boolean isCors()
+    {
+<span class="nc" id="L176">        return cors;</span>
+    }
+
+    /**
+     * Is Cors enabled
+     *
+     * @param cors
+     */
+    protected void setCors(Boolean cors)
+    {
+<span class="nc" id="L186">        this.cors = cors;</span>
+<span class="nc" id="L187">    }</span>
+
+    /**
+     * Is custom protocol handler enabled
+     *
+     * @return
+     */
+    public Boolean isCustomprotocolhandler()
+    {
+<span class="nc" id="L196">        return customprotocolhandler;</span>
+    }
+
+    /**
+     * Is custom protocol handler enabled
+     *
+     * @param customprotocolhandler
+     */
+    protected void setCustomprotocolhandler(Boolean customprotocolhandler)
+    {
+<span class="nc" id="L206">        this.customprotocolhandler = customprotocolhandler;</span>
+<span class="nc" id="L207">    }</span>
+
+    /**
+     * Is custom event handler enabled
+     *
+     * @return
+     */
+    public Boolean isCustomevent()
+    {
+<span class="nc" id="L216">        return customevent;</span>
+    }
+
+    /**
+     * Is custom event handler enabled
+     *
+     * @param customevent
+     */
+    protected void setCustomevent(Boolean customevent)
+    {
+<span class="nc" id="L226">        this.customevent = customevent;</span>
+<span class="nc" id="L227">    }</span>
+
+    /**
+     * Is data view enabled
+     *
+     * @return
+     */
+    public Boolean isDataview()
+    {
+<span class="nc" id="L236">        return dataview;</span>
+    }
+
+    /**
+     * Is data view enabled
+     *
+     * @param dataview
+     */
+    protected void setDataview(Boolean dataview)
+    {
+<span class="nc" id="L246">        this.dataview = dataview;</span>
+<span class="nc" id="L247">    }</span>
+
+    /**
+     * Is event listener enabled
+     *
+     * @return
+     */
+    public Boolean isEventlistener()
+    {
+<span class="nc" id="L256">        return eventlistener;</span>
+    }
+
+    /**
+     * Is event listener enabled
+     *
+     * @param eventlistener
+     */
+    protected void setEventlistener(Boolean eventlistener)
+    {
+<span class="nc" id="L266">        this.eventlistener = eventlistener;</span>
+<span class="nc" id="L267">    }</span>
+
+    /**
+     * Is Geo location enabled
+     *
+     * @return
+     */
+    public Boolean isGeolocation()
+    {
+<span class="nc" id="L276">        return geolocation;</span>
+    }
+
+    /**
+     * Is Geo location enabled
+     *
+     * @param geolocation
+     */
+    protected void setGeolocation(Boolean geolocation)
+    {
+<span class="nc" id="L286">        this.geolocation = geolocation;</span>
+<span class="nc" id="L287">    }</span>
+
+    /**
+     * Is history enabled
+     *
+     * @return
+     */
+    public Boolean isHistory()
+    {
+<span class="nc" id="L296">        return history;</span>
+    }
+
+    /**
+     * Is history enabled
+     *
+     * @param history
+     */
+    protected void setHistory(Boolean history)
+    {
+<span class="nc" id="L306">        this.history = history;</span>
+<span class="nc" id="L307">    }</span>
+
+    /**
+     * Is ie 8 compatible mode
+     *
+     * @return
+     */
+    public Boolean isIe8compat()
+    {
+<span class="nc" id="L316">        return ie8compat;</span>
+    }
+
+    /**
+     * Is ie 8 compatible mode
+     *
+     * @param ie8compat
+     */
+    protected void setIe8compat(Boolean ie8compat)
+    {
+<span class="nc" id="L326">        this.ie8compat = ie8compat;</span>
+<span class="nc" id="L327">    }</span>
+
+    /**
+     * Is JSON enabled
+     *
+     * @return
+     */
+    public Boolean isJson()
+    {
+<span class="nc" id="L336">        return json;</span>
+    }
+
+    /**
+     * Sets if JSon is enabled
+     *
+     * @param json
+     */
+    protected void setJson(Boolean json)
+    {
+<span class="nc" id="L346">        this.json = json;</span>
+<span class="nc" id="L347">    }</span>
+
+    /**
+     * Are notifications enabled
+     *
+     * @return
+     */
+    public Boolean isNotification()
+    {
+<span class="nc" id="L356">        return notification;</span>
+    }
+
+    /**
+     * Are notifications enabled
+     *
+     * @param notification
+     */
+    protected void setNotification(Boolean notification)
+    {
+<span class="nc" id="L366">        this.notification = notification;</span>
+<span class="nc" id="L367">    }</span>
+
+    /**
+     * Is post message
+     *
+     * @return
+     */
+    public Boolean isPostmessage()
+    {
+<span class="nc" id="L376">        return postmessage;</span>
+    }
+
+    /**
+     * Is post message
+     *
+     * @param postmessage
+     */
+    protected void setPostmessage(Boolean postmessage)
+    {
+<span class="nc" id="L386">        this.postmessage = postmessage;</span>
+<span class="nc" id="L387">    }</span>
+
+    /**
+     * Is Query Selector
+     *
+     * @return
+     */
+    public Boolean isQueryselector()
+    {
+<span class="nc" id="L396">        return queryselector;</span>
+    }
+
+    /**
+     * Sets query selector
+     *
+     * @param queryselector
+     */
+    protected void setQueryselector(Boolean queryselector)
+    {
+<span class="nc" id="L406">        this.queryselector = queryselector;</span>
+<span class="nc" id="L407">    }</span>
+
+    /**
+     * Are service workers allowed
+     *
+     * @return
+     */
+    public Boolean isServiceworker()
+    {
+<span class="nc" id="L416">        return serviceworker;</span>
+    }
+
+    /**
+     * Are service workers allowed
+     *
+     * @param serviceworker
+     */
+    protected void setServiceworker(Boolean serviceworker)
+    {
+<span class="nc" id="L426">        this.serviceworker = serviceworker;</span>
+<span class="nc" id="L427">    }</span>
+
+    /**
+     * Is SVG Allowed
+     *
+     * @return
+     */
+    public Boolean isSvg()
+    {
+<span class="nc" id="L436">        return svg;</span>
+    }
+
+    /**
+     * Is SVG Allowed
+     *
+     * @param svg
+     */
+    protected void setSvg(Boolean svg)
+    {
+<span class="nc" id="L446">        this.svg = svg;</span>
+<span class="nc" id="L447">    }</span>
+
+    /**
+     * Is template strings allowed
+     *
+     * @return
+     */
+    public Boolean isTemplatestrings()
+    {
+<span class="nc" id="L456">        return templatestrings;</span>
+    }
+
+    /**
+     * Is template strings allowed
+     *
+     * @param templatestrings
+     */
+    protected void setTemplatestrings(Boolean templatestrings)
+    {
+<span class="nc" id="L466">        this.templatestrings = templatestrings;</span>
+<span class="nc" id="L467">    }</span>
+
+    /**
+     * Is typed arrays allowed
+     *
+     * @return
+     */
+    public Boolean isTypedarrays()
+    {
+<span class="nc" id="L476">        return typedarrays;</span>
+    }
+
+    /**
+     * Is typed arrays allowed
+     *
+     * @param typedarrays
+     */
+    protected void setTypedarrays(Boolean typedarrays)
+    {
+<span class="nc" id="L486">        this.typedarrays = typedarrays;</span>
+<span class="nc" id="L487">    }</span>
+
+    /**
+     * Is web sockets allowed
+     *
+     * @return
+     */
+    public Boolean isWebsockets()
+    {
+<span class="nc" id="L496">        return websockets;</span>
+    }
+
+    /**
+     * Is web sockets allowed
+     *
+     * @param websockets
+     */
+    protected void setWebsockets(Boolean websockets)
+    {
+<span class="nc" id="L506">        this.websockets = websockets;</span>
+<span class="nc" id="L507">    }</span>
+
+    /**
+     * Is XDomain Request Allowed
+     *
+     * @return
+     */
+    public Boolean isXdomainrequest()
+    {
+<span class="nc" id="L516">        return xdomainrequest;</span>
+    }
+
+    /**
+     * Is XDomain Request Allowed
+     *
+     * @param xdomainrequest
+     */
+    protected void setXdomainrequest(Boolean xdomainrequest)
+    {
+<span class="nc" id="L526">        this.xdomainrequest = xdomainrequest;</span>
+<span class="nc" id="L527">    }</span>
+
+    /**
+     * Is Web Audio Allowed
+     *
+     * @return
+     */
+    public Boolean isWebaudio()
+    {
+<span class="nc" id="L536">        return webaudio;</span>
+    }
+
+    /**
+     * Is Web Audio Allowed
+     *
+     * @param webaudio
+     */
+    protected void setWebaudio(Boolean webaudio)
+    {
+<span class="nc" id="L546">        this.webaudio = webaudio;</span>
+<span class="nc" id="L547">    }</span>
+
+    /**
+     * Is CSS Escape allowed
+     *
+     * @return
+     */
+    public Boolean isCssescape()
+    {
+<span class="nc" id="L556">        return cssescape;</span>
+    }
+
+    /**
+     * Is CSS Escape Allowed
+     *
+     * @param cssescape
+     */
+    protected void setCssescape(Boolean cssescape)
+    {
+<span class="nc" id="L566">        this.cssescape = cssescape;</span>
+<span class="nc" id="L567">    }</span>
+
+    /**
+     * Is supports allowed
+     *
+     * @return
+     */
+    public Boolean isSupports()
+    {
+<span class="nc" id="L576">        return supports;</span>
+    }
+
+    /**
+     * Is supports allowed
+     *
+     * @param supports
+     */
+    protected void setSupports(Boolean supports)
+    {
+<span class="nc" id="L586">        this.supports = supports;</span>
+<span class="nc" id="L587">    }</span>
+
+    /**
+     * Is target allowed
+     *
+     * @return
+     */
+    public Boolean isTarget()
+    {
+<span class="nc" id="L596">        return target;</span>
+    }
+
+    /**
+     * Sets target
+     *
+     * @param target
+     */
+    protected void setTarget(Boolean target)
+    {
+<span class="nc" id="L606">        this.target = target;</span>
+<span class="nc" id="L607">    }</span>
+
+    /**
+     * Is Mutation Observer allowed
+     *
+     * @return
+     */
+    public Boolean isMutationobserver()
+    {
+<span class="nc" id="L616">        return mutationobserver;</span>
+    }
+
+    /**
+     * Is mutation observer allowed
+     *
+     * @param mutationobserver
+     */
+    protected void setMutationobserver(Boolean mutationobserver)
+    {
+<span class="nc" id="L626">        this.mutationobserver = mutationobserver;</span>
+<span class="nc" id="L627">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

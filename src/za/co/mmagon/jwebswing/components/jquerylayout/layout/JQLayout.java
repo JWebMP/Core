@@ -75,7 +75,7 @@ public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQL
     {
         if (!isInitialized())
         {
-            panes.entrySet().stream().map((entry) ->
+            getPanes().entrySet().stream().map((entry) ->
             {
                 JQLayoutArea key = entry.getKey();
                 return entry;
@@ -116,19 +116,18 @@ public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQL
     @Override
     public void assignFunctionsToComponent()
     {
-        StringBuilder sb = new StringBuilder("var lay_" + 
-                getComponent().getID() + 
-                " = " + 
-                getComponent().getJQueryID() + 
-                "layout(" + getNewLine());
+        StringBuilder sb = new StringBuilder("var lay_"
+                + getComponent().getID()
+                + " = "
+                + getComponent().getJQueryID()
+                + "layout(" + getNewLine());
         sb.append(getOptions());
         sb.append(");");
         addQuery(sb.toString());
     }
 
     /**
-     * Sets the variable ID.
-     * Adds 'lay_' in front and takes all hyphens (-) into underscores (_)
+     * Sets the variable ID. Adds 'lay_' in front and takes all hyphens (-) into underscores (_)
      *
      * @param variableID
      */
@@ -327,6 +326,7 @@ public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQL
      * Returns the Layout Div for the pane
      *
      * @param paneArea
+     *
      * @return
      */
     public JQLayoutDiv getPane(JQLayoutArea paneArea)

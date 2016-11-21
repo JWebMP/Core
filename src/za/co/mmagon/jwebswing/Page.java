@@ -37,7 +37,11 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
 import za.co.mmagon.jwebswing.generics.*;
 
 /**
- * Top level of any HTML page. Has only two children, head and body. Sometimes scripts are added right at the end but we try to avoid that as much as possible.
+ * Top level of any HTML page.
+ * <p>
+ * Has only two children, head and body.
+ * <p>
+ * Sometimes scripts are added right at the end but we try to avoid that as much as possible.
  *
  * @author GedMarc
  * @since 24 Apr 2016
@@ -86,7 +90,7 @@ public class Page extends Html implements IPage
     /**
      * Page Author
      */
-    private Meta KeywordsMeta;
+    private Meta keywordsMeta;
     /**
      * Page Author
      */
@@ -147,6 +151,56 @@ public class Page extends Html implements IPage
     private HashMap<String, ComponentHierarchyBase> componentCache;
 
     /**
+     * Populates all my components. Excludes this page
+     */
+    /**
+     * @param title             Sets the title of the page
+     * @param compatibilityMode Sets the Internet explorer mode to work on
+     * @param base              Sets the base tag for the page. Convenience Parameter
+     */
+    public Page(Title title, InternetExplorerCompatibilityMode compatibilityMode, Base base)
+    {
+        setTitle(title);
+        setCompatibilityMode(compatibilityMode);
+        setBase(base);
+        setID("jwPage");
+        //setGenerator("JWebSwing - https://sourceforge.net/projects/jwebswing/");
+    }
+
+    /**
+     * @param title             Sets the title of the page
+     * @param compatibilityMode Sets the Internet explorer mode to work on
+     */
+    public Page(Title title, InternetExplorerCompatibilityMode compatibilityMode)
+    {
+        this(title, compatibilityMode, null);
+    }
+
+    /**
+     * @param title Sets the title of the page
+     */
+    public Page(Title title)
+    {
+        this(title, null, null);
+    }
+
+    /**
+     * @param title Sets the title of the page
+     */
+    public Page(String title)
+    {
+        this(new Title(title), null, null);
+    }
+
+    /**
+     * Constructs an empty page object
+     */
+    public Page()
+    {
+        this(null, null, null);
+    }
+
+    /**
      * Renders all the children to a string builder
      *
      * @return
@@ -175,20 +229,20 @@ public class Page extends Html implements IPage
     @Override
     public void init()
     {
-        if(!isInitialized())
+        if (!isInitialized())
         {
             getBody().init();
         }
         super.init();
     }
-    
+
     /**
      * Configures the page and all its components
      */
     @Override
     public void preConfigure()
     {
-        if(!isInitialized())
+        if (!isInitialized())
         {
             init();
         }
@@ -204,13 +258,15 @@ public class Page extends Html implements IPage
             addScriptsToBody();
 
             ArrayList<Script> allScripts = getJavaScript();
-            allScripts.stream().filter((script) -> (script != null)).forEach((script)
-                    ->
+            allScripts.stream().filter(script -> (script != null)).forEach(getBody()::add);
+
+            getTopShelfScripts().forEach(next ->
             {
-                getBody().add(script);
+                getHead().add((HeadChildren) next);
             });
 
             ArrayList<ComponentHierarchyBase> requirements = new ArrayList<>();
+
             for (RequirementsPriority priority : RequirementsPriority.values())
             {
                 getPriorityRequirements(priority, requirements, true, false).stream().forEach((comp) ->
@@ -219,12 +275,13 @@ public class Page extends Html implements IPage
                 });
             }
             getHead().add((HeadChildren) getCssStyle());
+
             buildComponentHierarchy();
         }
         super.preConfigure();
     }
 
-    /** 
+    /**
      * Returns the component with only it's methods
      *
      * @return
@@ -275,7 +332,7 @@ public class Page extends Html implements IPage
      * Builds up or adds components to the page
      *
      * @param startingPoint The starting component to update with
-     * @param addToMap The map to add to
+     * @param addToMap      The map to add to
      */
     public void buildComponentHierarchy(ComponentHierarchyBase startingPoint, HashMap<String, ComponentHierarchyBase> addToMap)
     {
@@ -314,23 +371,37 @@ public class Page extends Html implements IPage
      */
     public ComponentHierarchyBase getCssStyle()
     {
-        if (isDynamicRender())
+        StringBuilder css = getBody().renderCss(0);
+        if (!css.toString().isEmpty())
         {
-            CSSLink renderedCSS = new CSSLink("css");
-            return renderedCSS;
-        }
-        else
-        {
-            //Add CSS
-            StringBuilder css = getBody().renderCss(0);
-            if (css.length() > 0)
+            if (isDynamicRender())
             {
-                Style style = new Style();
-                style.setText(css);
-                return style;
+                CSSLink renderedCSS = new CSSLink("css");
+                return renderedCSS;
+            }
+            else
+            {
+                if (css.length() > 0)
+                {
+                    Style style = new Style();
+                    style.setText(css);
+                    return style;
+                }
             }
         }
         return null;
+    }
+
+    /**
+     * Returns the top shelf script and css references
+     *
+     * @return
+     */
+    private ArrayList<ComponentHierarchyBase> getTopShelfScripts()
+    {
+        ArrayList<ComponentHierarchyBase> arr;
+        arr = getPriorityRequirements(RequirementsPriority.Top_Shelf, new ArrayList<ComponentHierarchyBase>(), true, true);
+        return arr;
     }
 
     /**
@@ -341,7 +412,7 @@ public class Page extends Html implements IPage
     private ArrayList<Script> getJavaScript()
     {
         ArrayList<Script> allScripts = new ArrayList<>();
-        
+
         if (isAngularEnabled())
         {
             if (isDynamicRender())
@@ -368,7 +439,7 @@ public class Page extends Html implements IPage
         if (isDynamicRender())
         {
             StringBuilder js = getBody().renderJavascriptAll();
-            if (!js.toString().trim().isEmpty())
+            // if (!js.toString().trim().isEmpty())
             {
                 Script dynamicScript = new Script();
                 dynamicScript.addAttribute(ScriptAttributes.Type, "application/javascript");
@@ -390,7 +461,6 @@ public class Page extends Html implements IPage
             }
         }
 
-        
         return allScripts;
     }
 
@@ -413,7 +483,7 @@ public class Page extends Html implements IPage
         getHead().add(this.applicationNameMeta);
         getHead().add(this.generatorMeta);
         getHead().add(descriptionMeta);
-        getHead().add(this.KeywordsMeta);
+        getHead().add(this.keywordsMeta);
         getHead().add(this.favIconLink);
 
         getHead().getChildren().stream().forEach((headObject)
@@ -452,28 +522,31 @@ public class Page extends Html implements IPage
     {
         ArrayList<ComponentHierarchyBase> requirements = new ArrayList<>();
 
+        ArrayList<RequirementsPriority> arrs = new ArrayList<>(Arrays.asList(RequirementsPriority.values()));
         //render JS only
-        for (RequirementsPriority priority : RequirementsPriority.values())
+        arrs.stream().filter(a -> a != RequirementsPriority.Top_Shelf).map(priority ->
         {
             if (!getPriorityRequirements(priority, requirements, true, false).isEmpty())
             {
-                getBody().add(new Comment("Priority [" + priority + "] Values"));
+                //getBody().add(new Comment("Priority [" + priority + "] Values"));
             }
-
-            getPriorityRequirements(priority, requirements, false, true).stream().forEach((comp)
+            return priority;
+        }).forEachOrdered(priority ->
+        {
+            getPriorityRequirements(priority, requirements, false, true).stream().forEach(comp
                     ->
             {
                 getBody().add(comp);
             });
-        }
+        });
     }
 
     /**
      * Adds all the stuff for a given priority
      *
-     * @param css CSS
-     * @param input the hierarchy to read from
-     * @param priority the priority
+     * @param css        CSS
+     * @param input      the hierarchy to read from
+     * @param priority   the priority
      * @param javascript to return JavaScript or not
      */
     private ArrayList<ComponentHierarchyBase> getPriorityRequirements(RequirementsPriority priority, ArrayList<ComponentHierarchyBase> input, boolean css, boolean javascript)
@@ -481,19 +554,17 @@ public class Page extends Html implements IPage
         ArrayList<ComponentHierarchyBase> requirements = new ArrayList<>();
         if (css)
         {
-            getAllCssLinks(priority).stream().filter((cssLink) -> (!input.contains(cssLink) && !requirements.contains(cssLink))).forEach((cssLink)
+            getAllCssLinks(priority).stream().filter(cssLink -> (!input.contains(cssLink) && !requirements.contains(cssLink))).forEach(cssLink
                     ->
             {
-                //cssLink.setTiny(true);
                 requirements.add(cssLink);
             });
         }
         if (javascript)
         {
-            getAllScripts(priority).stream().filter((script) -> (!input.contains(script) && !requirements.contains(script))).forEach((script)
+            getAllScripts(priority).stream().filter(script -> (!input.contains(script) && !requirements.contains(script))).forEach(script
                     ->
             {
-                //script.setTiny(true);
                 requirements.add(script);
             });
         }
@@ -505,6 +576,7 @@ public class Page extends Html implements IPage
      * Gets all the links for all the bodies components
      *
      * @param priority
+     *
      * @return
      */
     private List<CSSLink> getAllCssLinks(RequirementsPriority priority)
@@ -512,11 +584,7 @@ public class Page extends Html implements IPage
         List<CSSReference> allReferences = getBody().getCssReferencesAll(priority);
         allReferences.sort(WebReference.getDummyReference());
         ArrayList<CSSLink> allLinks = new ArrayList<>();
-        allReferences.stream().map((ref) -> new CSSLink(ref)).forEach((link)
-                ->
-        {
-            allLinks.add(link);
-        });
+        allReferences.stream().map(ref -> new CSSLink(ref)).forEach(allLinks::add);
         return allLinks;
     }
 
@@ -524,6 +592,7 @@ public class Page extends Html implements IPage
      * Gets all the scripts for all the body components
      *
      * @param priority
+     *
      * @return
      */
     private List<Script> getAllScripts(RequirementsPriority priority)
@@ -531,7 +600,7 @@ public class Page extends Html implements IPage
         List<JavascriptReference> allJavascripts = getBody().getJavascriptReferencesAll(priority);
         allJavascripts.sort(WebReference.getDummyReference());
         ArrayList<Script> allScripts = new ArrayList<>();
-        allJavascripts.stream().map((js) -> new Script(js)).forEach((s)
+        allJavascripts.stream().map(js -> new Script(js)).forEach(s
                 ->
         {
             s.setNewLineForClosingTag(false);
@@ -795,7 +864,7 @@ public class Page extends Html implements IPage
     @Override
     public final Meta getKeywords()
     {
-        return KeywordsMeta;
+        return keywordsMeta;
     }
 
     /**
@@ -806,13 +875,13 @@ public class Page extends Html implements IPage
     @Override
     public final void setKeywords(String Keywords)
     {
-        if (KeywordsMeta == null)
+        if (keywordsMeta == null)
         {
-            KeywordsMeta = new Meta(Meta.MetadataFields.Keywords, Keywords);
+            keywordsMeta = new Meta(Meta.MetadataFields.Keywords, Keywords);
         }
         else
         {
-            KeywordsMeta.addAttribute(MetaAttributes.Content, Keywords);
+            keywordsMeta.addAttribute(MetaAttributes.Content, Keywords);
         }
     }
 
@@ -842,6 +911,7 @@ public class Page extends Html implements IPage
      * Returns the Application Name of the page
      *
      * @param dummyInt Serves no function
+     *
      * @return String The actual used compatibility mode
      */
     @Override
@@ -1139,56 +1209,6 @@ public class Page extends Html implements IPage
     }
 
     /**
-     * Populates all my components. Excludes this page
-     */
-    /**
-     * @param title Sets the title of the page
-     * @param compatibilityMode Sets the Internet explorer mode to work on
-     * @param base Sets the base tag for the page. Convenience Parameter
-     */
-    public Page(Title title, InternetExplorerCompatibilityMode compatibilityMode, Base base)
-    {
-        setTitle(title);
-        setCompatibilityMode(compatibilityMode);
-        setBase(base);
-        setID("jwPage");
-        //setGenerator("JWebSwing - https://sourceforge.net/projects/jwebswing/");
-    }
-
-    /**
-     * @param title Sets the title of the page
-     * @param compatibilityMode Sets the Internet explorer mode to work on
-     */
-    public Page(Title title, InternetExplorerCompatibilityMode compatibilityMode)
-    {
-        this(title, compatibilityMode, null);
-    }
-
-    /**
-     * @param title Sets the title of the page
-     */
-    public Page(Title title)
-    {
-        this(title, null, null);
-    }
-
-    /**
-     * @param title Sets the title of the page
-     */
-    public Page(String title)
-    {
-        this(new Title(title), null, null);
-    }
-
-    /**
-     * Constructs an empty page object
-     */
-    public Page()
-    {
-        this(null, null, null);
-    }
-
-    /**
      * Returns the document type that will be rendered with this HTML page real-time
      * <p>
      * @return Document Type
@@ -1203,6 +1223,7 @@ public class Page extends Html implements IPage
      * Sets all component in the head and body to tiny
      *
      * @param tiny
+     *
      * @return
      */
     @Override
@@ -1229,6 +1250,7 @@ public class Page extends Html implements IPage
      * Adds a variable into angular
      *
      * @param variableName
+     *
      * @return
      */
     @Override

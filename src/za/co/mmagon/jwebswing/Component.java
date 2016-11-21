@@ -25,7 +25,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.interfaces.ICssStructure;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSS;
 
 /**
  * The base class for all HTML generation, Everything must extend a component
@@ -41,8 +40,6 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.CSS;
  * @since 2009/10/01
  * @version 1.0
  */
-@CSS()
-
 public class Component<C, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component>
         extends ComponentHTMLBootstrapBase<C, A, F, E, J> implements ICssStructure<C>
 {
@@ -50,13 +47,12 @@ public class Component<C, A extends Enum & AttributeDefinitions, F extends Globa
     /**
      * Logger for the Component
      */
-    @JsonIgnore 
+    @JsonIgnore
     private static final org.apache.log4j.Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("Component");
     /**
      * Serial Version for all Components and their compatibility
      *
-     * @version 2
-     * Version 2 - Updated CSS Library and References
+     * @version 2 Version 2 - Updated CSS Library and References
      */
     @JsonIgnore
     private static final long serialVersionUID = 2l;
@@ -66,7 +62,7 @@ public class Component<C, A extends Enum & AttributeDefinitions, F extends Globa
      * <p>
      * @param tagName     The tag to apply
      * @param myComponent The HTML component rendering for
-     */ 
+     */
     public Component(String tagName, ComponentTypes myComponent)
     {
         this(tagName, myComponent, false);
@@ -83,12 +79,10 @@ public class Component<C, A extends Enum & AttributeDefinitions, F extends Globa
     }
 
     /**
-     * Constructs a component with the tag name, it's associated base HTML
-     * component, and whether it closes in line or not
+     * Constructs a component with the tag name, it's associated base HTML component, and whether it closes in line or not
      * <p>
      * @param tagName        The tag name to apply
-     * @param myComponent    The component enumeration applied with this
-     *                       component
+     * @param myComponent    The component enumeration applied with this component
      * @param inlineTagClose Whether or not to close the tag InLine or not
      */
     public Component(String tagName, ComponentTypes myComponent, boolean inlineTagClose)
@@ -111,9 +105,10 @@ public class Component<C, A extends Enum & AttributeDefinitions, F extends Globa
         add((C) p);
         return (C) p;
     }
-    
+
     /**
      * Returns this component with all the shortcuts for CSS
+     *
      * @return The CSS Set of a component
      */
     public ICssStructure asCSS()

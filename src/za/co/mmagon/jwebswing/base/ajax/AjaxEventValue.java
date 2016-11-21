@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.ajax;
 
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.*;
 
 /**
  * An angular event that is returned
@@ -25,7 +25,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTy
  * @author GedMarc
  * @since 27 Apr 2016
  */
-public class AjaxEventValue extends JavaScriptPart<AjaxEventValue>
+public class AjaxEventValue extends JavaScriptPart
 {
 
     private static final long serialVersionUID = 1L;

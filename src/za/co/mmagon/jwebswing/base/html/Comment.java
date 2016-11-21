@@ -1,20 +1,23 @@
 package za.co.mmagon.jwebswing.base.html;
 
-import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
-import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.HtmlChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.ImageMapChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.utilities.TextUtilities;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.html.attributes.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
+import za.co.mmagon.jwebswing.utilities.*;
 
-public class Comment extends ComponentHierarchyBase<NoChildren, NoAttributes, NoFeatures, NoEvents, Comment>
+/**
+ * Defines a basic comment line
+ *
+ * @author GedMarc
+ */
+public class Comment extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, Comment>
         implements HtmlChildren, HeadChildren, ImageMapChildren, BodyChildren
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Adds the specified comment in a comment block for HTML

@@ -25,7 +25,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.interfaces.ICssStructure;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.htmlbuilder.css.CSS;
 
 /**
  * The base class for all HTML generation, Everything must extend a component
@@ -41,8 +40,6 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.CSS;
  * @since 2009/10/01
  * @version 1.0
  */
-@CSS()
-
 public class Component&lt;C, A extends Enum &amp; AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component&gt;
         extends ComponentHTMLBootstrapBase&lt;C, A, F, E, J&gt; implements ICssStructure&lt;C&gt;
 {
@@ -50,13 +47,12 @@ public class Component&lt;C, A extends Enum &amp; AttributeDefinitions, F extend
     /**
      * Logger for the Component
      */
-    @JsonIgnore 
-<span class="fc" id="L54">    private static final org.apache.log4j.Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;Component&quot;);</span>
+    @JsonIgnore
+<span class="fc" id="L51">    private static final org.apache.log4j.Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;Component&quot;);</span>
     /**
      * Serial Version for all Components and their compatibility
      *
-     * @version 2
-     * Version 2 - Updated CSS Library and References
+     * @version 2 Version 2 - Updated CSS Library and References
      */
     @JsonIgnore
     private static final long serialVersionUID = 2l;
@@ -66,11 +62,11 @@ public class Component&lt;C, A extends Enum &amp; AttributeDefinitions, F extend
      * &lt;p&gt;
      * @param tagName     The tag to apply
      * @param myComponent The HTML component rendering for
-     */ 
+     */
     public Component(String tagName, ComponentTypes myComponent)
     {
-<span class="fc" id="L72">        this(tagName, myComponent, false);</span>
-<span class="fc" id="L73">    }</span>
+<span class="fc" id="L68">        this(tagName, myComponent, false);</span>
+<span class="fc" id="L69">    }</span>
 
     /**
      * Construct a new Component with a custom tag
@@ -79,22 +75,20 @@ public class Component&lt;C, A extends Enum &amp; AttributeDefinitions, F extend
      */
     public Component(ComponentTypes myComponent)
     {
-<span class="fc" id="L82">        this(myComponent.getComponentTag(), myComponent, false);</span>
-<span class="fc" id="L83">    }</span>
+<span class="fc" id="L78">        this(myComponent.getComponentTag(), myComponent, false);</span>
+<span class="fc" id="L79">    }</span>
 
     /**
-     * Constructs a component with the tag name, it's associated base HTML
-     * component, and whether it closes in line or not
+     * Constructs a component with the tag name, it's associated base HTML component, and whether it closes in line or not
      * &lt;p&gt;
      * @param tagName        The tag name to apply
-     * @param myComponent    The component enumeration applied with this
-     *                       component
+     * @param myComponent    The component enumeration applied with this component
      * @param inlineTagClose Whether or not to close the tag InLine or not
      */
     public Component(String tagName, ComponentTypes myComponent, boolean inlineTagClose)
     {
-<span class="fc" id="L96">        super(myComponent);</span>
-<span class="fc" id="L97">    }</span>
+<span class="fc" id="L90">        super(myComponent);</span>
+<span class="fc" id="L91">    }</span>
 
     /**
      * Adds a paragraph component with the attached text
@@ -106,19 +100,20 @@ public class Component&lt;C, A extends Enum &amp; AttributeDefinitions, F extend
     @Override
     public C add(String textToAdd)
     {
-<span class="fc" id="L109">        Paragraph p = new Paragraph();</span>
-<span class="fc" id="L110">        p.setText(textToAdd);</span>
-<span class="fc" id="L111">        add((C) p);</span>
-<span class="fc" id="L112">        return (C) p;</span>
+<span class="fc" id="L103">        Paragraph p = new Paragraph();</span>
+<span class="fc" id="L104">        p.setText(textToAdd);</span>
+<span class="fc" id="L105">        add((C) p);</span>
+<span class="fc" id="L106">        return (C) p;</span>
     }
-    
+
     /**
      * Returns this component with all the shortcuts for CSS
+     *
      * @return The CSS Set of a component
      */
     public ICssStructure asCSS()
     {
-<span class="nc" id="L121">        return ICssStructure.class.cast(this);</span>
+<span class="nc" id="L116">        return ICssStructure.class.cast(this);</span>
     }
 
 }

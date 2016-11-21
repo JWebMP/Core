@@ -7,7 +7,6 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.borders.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.displays.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.fonts.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.heightwidth.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.lists.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.margins.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.outline.*;
@@ -38,17 +37,13 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
      */
     private BorderCSSImpl border;
     /**
-     * The Custom cc
-     */
-    private CustomCSSImpl custom;
-    /**
      * The getDisplay CSS
      */
     private DisplayCSSImpl display;
     /**
-     * The fonts CSS
+     * The font CSS
      */
-    private FontsCSSImpl fonts;
+    private FontsCSSImpl font;
     /**
      * The getDimensions CSS
      */
@@ -72,7 +67,7 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
     /**
      * getTable CSS
      */
-    private TableCSSImpl tables;
+    private TableCSSImpl table;
     /**
      * Text CSS
      */
@@ -94,20 +89,6 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
     public AnimateCSS getAnimatable()
     {
         return animatable;
-    }
-
-    /**
-     * Gets the custom css
-     *
-     * @return
-     */
-    public CustomCSSImpl getCustom()
-    {
-        if (custom == null)
-        {
-            custom = new CustomCSSImpl();
-        }
-        return custom;
     }
 
     /**
@@ -158,11 +139,11 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
      */
     public FontsCSSImpl getFont()
     {
-        if (fonts == null)
+        if (font == null)
         {
-            fonts = new FontsCSSImpl();
+            font = new FontsCSSImpl();
         }
-        return fonts;
+        return font;
     }
 
     public HeightWidthCSSImpl getDimensions()
@@ -237,11 +218,11 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
      */
     public TableCSSImpl getTable()
     {
-        if (tables == null)
+        if (table == null)
         {
-            tables = new TableCSSImpl();
+            table = new TableCSSImpl();
         }
-        return tables;
+        return table;
     }
 
     /**
@@ -289,16 +270,6 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
     }
 
     /**
-     * Sets the custom object
-     *
-     * @param custom
-     */
-    public void setCustom(CustomCSSImpl custom)
-    {
-        this.custom = custom;
-    }
-
-    /**
      * Sets the display object
      *
      * @param display
@@ -309,13 +280,13 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
     }
 
     /**
-     * Sets the fonts object
+     * Sets the font object
      *
-     * @param fonts
+     * @param font
      */
-    public void setFonts(FontsCSSImpl fonts)
+    public void setFont(FontsCSSImpl font)
     {
-        this.fonts = fonts;
+        this.font = font;
     }
 
     /**
@@ -369,13 +340,13 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
     }
 
     /**
-     * Sets the tables object
+     * Sets the table object
      *
-     * @param tables
+     * @param table
      */
-    public void setTables(TableCSSImpl tables)
+    public void setTable(TableCSSImpl table)
     {
-        this.tables = tables;
+        this.table = table;
     }
 
     /**

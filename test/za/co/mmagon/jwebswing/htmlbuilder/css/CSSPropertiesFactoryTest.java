@@ -21,6 +21,7 @@ import java.util.*;
 import java.util.logging.*;
 import org.junit.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.composer.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
 
@@ -91,6 +92,21 @@ public class CSSPropertiesFactoryTest
         Map<String, Object> strings = factory.getCSS(cssObject);
         CSSBlock newBlock = factory.getCSSBlock("NewBlock", CSSTypes.None, strings, CSSBlockIdentifier.Id);
         System.out.println(newBlock);
+    }
+
+    /**
+     * Test of getCSSPropertiesFields method, of class CSSPropertiesFactory.
+     */
+    @Test
+    public void testCSSEnums()
+    {
+        CSSPropertiesFactory factory = new CSSPropertiesFactory();
+
+        BackgroundCSSImpl back = new BackgroundCSSImpl();
+        back.setBackgroundColor$(ColourNames.DarkGoldenRod);
+
+        Map s = factory.getCSS(back);
+        System.out.println(s);
     }
 
     /**

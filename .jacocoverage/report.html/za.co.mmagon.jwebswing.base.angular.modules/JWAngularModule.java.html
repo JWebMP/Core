@@ -45,30 +45,30 @@ public class JWAngularModule extends AngularModuleBase
     {
 <span class="fc" id="L46">        String returnable = &quot;var &quot; + this.getAngular().getAppName() + &quot; = angular.module(&quot;;</span>
 <span class="fc" id="L47">        returnable += &quot;'&quot; + this.getAngular().getAppName() + &quot;'&quot;;</span>
-<span class="pc bpc" id="L48" title="1 of 2 branches missed.">        returnable += getAngular().getModules().isEmpty() ? &quot;,&quot; : &quot;,&quot;;</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        returnable += getAngular().getModules().isEmpty() ? &quot;,&quot; : &quot;,&quot;;</span>
         //returnable += getAngular().getComponent().getNewLine();
         
 <span class="fc" id="L51">        ArrayList&lt;String&gt; moduleNames = new ArrayList&lt;&gt;();</span>
 <span class="fc" id="L52">        getAngular().getModules().stream().forEach((module) -&gt;</span>
         {
-<span class="nc" id="L54">            String name = module.getReferenceName();</span>
-<span class="nc bnc" id="L55" title="All 2 branches missed.">            if (!moduleNames.contains(name))</span>
+<span class="fc" id="L54">            String name = module.getReferenceName();</span>
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">            if (!moduleNames.contains(name))</span>
             {
-<span class="nc" id="L57">                moduleNames.add(module.getReferenceName());</span>
+<span class="fc" id="L57">                moduleNames.add(module.getReferenceName());</span>
             }
-<span class="nc" id="L59">        });</span>
+<span class="fc" id="L59">        });</span>
         
         //if(!getAngular().getModules().isEmpty())
         {
 <span class="fc" id="L63">            StringBuilder nameRenders = new StringBuilder();</span>
-<span class="pc bpc" id="L64" title="1 of 2 branches missed.">            for(String name : moduleNames)</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">            for(String name : moduleNames)</span>
             {
-<span class="nc" id="L66">                nameRenders.append(&quot;'&quot;).append(name).append(&quot;',&quot;);</span>
-<span class="nc" id="L67">            }</span>
+<span class="fc" id="L66">                nameRenders.append(&quot;'&quot;).append(name).append(&quot;',&quot;);</span>
+<span class="fc" id="L67">            }</span>
             
-<span class="pc bpc" id="L69" title="1 of 2 branches missed.">            if(nameRenders.indexOf(&quot;,&quot;) != -1)</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">            if(nameRenders.indexOf(&quot;,&quot;) != -1)</span>
             {
-<span class="nc" id="L71">                nameRenders = nameRenders.deleteCharAt(nameRenders.lastIndexOf(&quot;,&quot;));</span>
+<span class="fc" id="L71">                nameRenders = nameRenders.deleteCharAt(nameRenders.lastIndexOf(&quot;,&quot;));</span>
             }
 <span class="fc" id="L73">            nameRenders.insert(0, &quot;[&quot;);</span>
 <span class="fc" id="L74">            nameRenders.append(&quot;]&quot;);</span>

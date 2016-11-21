@@ -16,14 +16,11 @@
  */
 package za.co.mmagon.jwebswing.components.jquery.bootstrap.themes;
 
-import za.co.mmagon.jwebswing.components.bootstrap.themes.SB2Theme;
-import org.junit.Assert;
-import org.junit.Test;
-import za.co.mmagon.BaseTestClass;
-import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.html.Body;
-import za.co.mmagon.jwebswing.base.html.Comment;
-import za.co.mmagon.jwebswing.base.html.Paragraph;
+import org.junit.*;
+import za.co.mmagon.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.components.bootstrap.themes.*;
 
 /**
  *
@@ -49,7 +46,6 @@ public class SBAdmin2ThemeTest extends BaseTestClass
         Assert.assertEquals("<!DOCTYPE html>\n"
                 + "<html>\n"
                 + "	<head>\n"
-                + "		<!-- Priority [Third] Values -->\n"
                 + "		<link href=\"bower_components/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css\" rel=\"stylesheet\" type=\"text/css\">\n"
                 + "		<link href=\"bower_components/bootstrap-social/bootstrap-social.css\" rel=\"stylesheet\" type=\"text/css\">\n"
                 + "	</head>\n"
@@ -75,7 +71,6 @@ public class SBAdmin2ThemeTest extends BaseTestClass
         Assert.assertEquals("<!DOCTYPE html>\n"
                 + "<html>\n"
                 + "	<head>\n"
-                + "		<!-- Priority [Third] Values -->\n"
                 + "		<link href=\"bower_components/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css\" rel=\"stylesheet\" type=\"text/css\">\n"
                 + "		<link href=\"bower_components/bootstrap-social/bootstrap-social.css\" rel=\"stylesheet\" type=\"text/css\">\n"
                 + "	</head>\n"

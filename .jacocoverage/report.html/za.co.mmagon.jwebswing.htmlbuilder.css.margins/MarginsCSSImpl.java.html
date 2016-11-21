@@ -37,7 +37,7 @@ public class MarginsCSSImpl extends CSSImplementationAdapter&lt;MarginsCSS, Marg
     private static final long serialVersionUID = 1L;
 
     @CSSDetail(cssName = &quot;margin&quot;, cssVersion = CSSVersions.CSS21)
-    private Margin margin;
+    private MarginImpl margin;
     @CSSDetail(cssName = &quot;margin-right&quot;, cssVersion = CSSVersions.CSS21)
     private MeasurementCSSImpl marginRight;
     @CSSDetail(cssName = &quot;margin-right&quot;, cssVersion = CSSVersions.CSS21)
@@ -228,7 +228,7 @@ public class MarginsCSSImpl extends CSSImplementationAdapter&lt;MarginsCSS, Marg
      *
      * @return
      */
-    public Margin getMargin()
+    public MarginImpl getMargin()
     {
 <span class="nc" id="L233">        return margin;</span>
     }
@@ -282,7 +282,7 @@ public class MarginsCSSImpl extends CSSImplementationAdapter&lt;MarginsCSS, Marg
      *
      * @param Margin
      */
-    public void setMargin(za.co.mmagon.jwebswing.htmlbuilder.css.margins.Margin Margin)
+    public void setMargin(MarginImpl Margin)
     {
 <span class="nc" id="L287">        this.margin = Margin;</span>
 <span class="nc" id="L288">    }</span>

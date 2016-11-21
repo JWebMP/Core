@@ -42,7 +42,7 @@ public class BSRow extends Div<GlobalChildren, NoAttributes, GlobalFeatures, Glo
     public static BSRow WrapComponent(ComponentHierarchyBase component)
     {
         BSRow bs = new BSRow();
-        bs.Wrap(component);
+        bs.wrap(component);
         return bs;
     }
     

@@ -87,7 +87,10 @@ public class DataAdapter<C extends GlobalChildren, A extends Enum & AttributeDef
      */
     public final void setLinkedComponent(Component linkedComponent)
     {
-        this.linkedComponent.removeVariable(getDAID());
+        if (this.linkedComponent != null)
+        {
+            this.linkedComponent.removeVariable(getDAID());
+        }
         this.linkedComponent = linkedComponent;
         if (linkedComponent != null)
         {

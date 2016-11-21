@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ModernizrInputDto.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.modernizr</a> &gt; <span class="el_source">ModernizrInputDto.java</span></div><h1>ModernizrInputDto.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.modernizr;
+
+/**
+ * The input section
+ *
+ * @author GedMarc
+ * @since Nov 21, 2016
+ * @version 1.0
+ *
+ */
+public class ModernizrInputDto
+{
+
+    private Boolean autocomplete;
+    private Boolean autofocus;
+    private Boolean list;
+    private Boolean placeholder;
+    private Boolean max;
+    private Boolean min;
+    private Boolean multiple;
+    private Boolean pattern;
+    private Boolean required;
+    private Boolean step;
+
+    /**
+     * Constructs a new input dto
+     */
+    public ModernizrInputDto()
+<span class="nc" id="L45">    {</span>
+        //Nothing needed
+<span class="nc" id="L47">    }</span>
+
+    /**
+     * Returns if autocomplete is available
+     *
+     * @return
+     */
+    public Boolean getAutocomplete()
+    {
+<span class="nc" id="L56">        return autocomplete;</span>
+    }
+
+    /**
+     * Sets if auto complete is available
+     *
+     * @param autocomplete
+     */
+    public void setAutocomplete(Boolean autocomplete)
+    {
+<span class="nc" id="L66">        this.autocomplete = autocomplete;</span>
+<span class="nc" id="L67">    }</span>
+
+    /**
+     * Gets if auto focus is available
+     *
+     * @return
+     */
+    public Boolean getAutofocus()
+    {
+<span class="nc" id="L76">        return autofocus;</span>
+    }
+
+    /**
+     * Sets if auto focus is available
+     *
+     * @param autofocus
+     */
+    public void setAutofocus(Boolean autofocus)
+    {
+<span class="nc" id="L86">        this.autofocus = autofocus;</span>
+<span class="nc" id="L87">    }</span>
+
+    /**
+     * Gets if list is available
+     *
+     * @return
+     */
+    public Boolean getList()
+    {
+<span class="nc" id="L96">        return list;</span>
+    }
+
+    /**
+     * Sets if list is available
+     *
+     * @param list
+     */
+    public void setList(Boolean list)
+    {
+<span class="nc" id="L106">        this.list = list;</span>
+<span class="nc" id="L107">    }</span>
+
+    /**
+     * Gets if place holder is available
+     *
+     * @return
+     */
+    public Boolean getPlaceholder()
+    {
+<span class="nc" id="L116">        return placeholder;</span>
+    }
+
+    /**
+     * Sets if place holder is available
+     *
+     * @param placeholder
+     */
+    public void setPlaceholder(Boolean placeholder)
+    {
+<span class="nc" id="L126">        this.placeholder = placeholder;</span>
+<span class="nc" id="L127">    }</span>
+
+    /**
+     * Gets if max is available
+     *
+     * @return
+     */
+    public Boolean getMax()
+    {
+<span class="nc" id="L136">        return max;</span>
+    }
+
+    /**
+     * Sets if max is available
+     *
+     * @param max
+     */
+    public void setMax(Boolean max)
+    {
+<span class="nc" id="L146">        this.max = max;</span>
+<span class="nc" id="L147">    }</span>
+
+    /**
+     * Gets the min
+     *
+     * @return
+     */
+    public Boolean getMin()
+    {
+<span class="nc" id="L156">        return min;</span>
+    }
+
+    /**
+     * Sets min
+     *
+     * @param min
+     */
+    public void setMin(Boolean min)
+    {
+<span class="nc" id="L166">        this.min = min;</span>
+<span class="nc" id="L167">    }</span>
+
+    /**
+     * Gets multiple
+     *
+     * @return
+     */
+    public Boolean getMultiple()
+    {
+<span class="nc" id="L176">        return multiple;</span>
+    }
+
+    /**
+     * Sets multiple
+     *
+     * @param multiple
+     */
+    public void setMultiple(Boolean multiple)
+    {
+<span class="nc" id="L186">        this.multiple = multiple;</span>
+<span class="nc" id="L187">    }</span>
+
+    /**
+     * Gets the pattern
+     *
+     * @return
+     */
+    public Boolean getPattern()
+    {
+<span class="nc" id="L196">        return pattern;</span>
+    }
+
+    /**
+     * Sets the pattern
+     *
+     * @param pattern
+     */
+    public void setPattern(Boolean pattern)
+    {
+<span class="nc" id="L206">        this.pattern = pattern;</span>
+<span class="nc" id="L207">    }</span>
+
+    /**
+     * Gets required
+     *
+     * @return
+     */
+    public Boolean getRequired()
+    {
+<span class="nc" id="L216">        return required;</span>
+    }
+
+    /**
+     * Sets required
+     *
+     * @param required
+     */
+    public void setRequired(Boolean required)
+    {
+<span class="nc" id="L226">        this.required = required;</span>
+<span class="nc" id="L227">    }</span>
+
+    /**
+     * Gets step
+     *
+     * @return
+     */
+    public Boolean getStep()
+    {
+<span class="nc" id="L236">        return step;</span>
+    }
+
+    /**
+     * Set step
+     *
+     * @param step
+     */
+    public void setStep(Boolean step)
+    {
+<span class="nc" id="L246">        this.step = step;</span>
+<span class="nc" id="L247">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

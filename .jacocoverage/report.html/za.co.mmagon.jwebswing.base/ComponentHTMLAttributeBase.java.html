@@ -462,14 +462,14 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
     @Override
     public boolean addClass(String className)
     {
-<span class="pc bpc" id="L465" title="1 of 2 branches missed.">        if (!getClasses().contains(className))</span>
+<span class="fc bfc" id="L465" title="All 2 branches covered.">        if (!getClasses().contains(className))</span>
         {
 <span class="fc" id="L467">            getClasses().add(className);</span>
 <span class="fc" id="L468">            return true;</span>
         }
         else
         {
-<span class="nc" id="L472">            return false;</span>
+<span class="fc" id="L472">            return false;</span>
         }
     }
 

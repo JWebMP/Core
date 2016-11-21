@@ -16,22 +16,24 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import org.junit.Assert;
-import org.junit.Test;
-import za.co.mmagon.BaseTestClass;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import org.junit.*;
+import za.co.mmagon.*;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
 
 /**
  *
  * @author ged_m
  */
-public class ComponentBaseTest extends BaseTestClass {
+public class ComponentBaseTest extends BaseTestClass
+{
 
-    public ComponentBaseTest() {
+    public ComponentBaseTest()
+    {
     }
 
     @Test
-    public void testShell() {
+    public void testShell()
+    {
         ComponentBase shell = new ComponentBase(ComponentTypes.Abbreviation);
         shell.setID("ID");
         System.out.println(shell);
@@ -39,12 +41,14 @@ public class ComponentBaseTest extends BaseTestClass {
                 + "  \"id\" : \"ID\",\n"
                 + "  \"componentType\" : \"abbreviation\",\n"
                 + "  \"tiny\" : false,\n"
-                + "  \"configured\" : true\n"
+                + "  \"configured\" : true,\n"
+                + "  \"initialized\" : true\n"
                 + "}", shell.toString());
     }
 
     @Test
-    public void testShellRawText() {
+    public void testShellRawText()
+    {
         ComponentBase shell = new ComponentBase(ComponentTypes.Abbreviation);
         shell.setID("ID");
         shell.setText("This is raw text");
@@ -54,12 +58,14 @@ public class ComponentBaseTest extends BaseTestClass {
                 + "  \"componentType\" : \"abbreviation\",\n"
                 + "  \"text\" : \"This is raw text\",\n"
                 + "  \"tiny\" : false,\n"
-                + "  \"configured\" : true\n"
+                + "  \"configured\" : true,\n"
+                + "  \"initialized\" : true\n"
                 + "}", shell.toString());
     }
 
     @Test
-    public void testShellTiny() {
+    public void testShellTiny()
+    {
         ComponentBase shell = new ComponentBase(ComponentTypes.Abbreviation);
         shell.setTiny(true);
         shell.setID("ID");
@@ -68,12 +74,14 @@ public class ComponentBaseTest extends BaseTestClass {
                 + "  \"id\" : \"ID\",\n"
                 + "  \"componentType\" : \"abbreviation\",\n"
                 + "  \"tiny\" : true,\n"
-                + "  \"configured\" : true\n"
+                + "  \"configured\" : true,\n"
+                + "  \"initialized\" : true\n"
                 + "}", shell.toString());
     }
 
     @Test
-    public void testClone() {
+    public void testClone()
+    {
         ComponentBase shell = new ComponentBase(ComponentTypes.Abbreviation);
         shell.setID("shell");
         ComponentBase shell2 = shell.cloneComponent();
@@ -84,20 +92,23 @@ public class ComponentBaseTest extends BaseTestClass {
                 + "  \"id\" : \"shell\",\n"
                 + "  \"componentType\" : \"abbreviation\",\n"
                 + "  \"tiny\" : false,\n"
-                + "  \"configured\" : true\n"
+                + "  \"configured\" : true,\n"
+                + "  \"initialized\" : true\n"
                 + "}";
         String shell2Expected = "{\n"
                 + "  \"id\" : \"shell2\",\n"
                 + "  \"componentType\" : \"abbreviation\",\n"
                 + "  \"tiny\" : false,\n"
-                + "  \"configured\" : true\n"
+                + "  \"configured\" : true,\n"
+                + "  \"initialized\" : true\n"
                 + "}";
         Assert.assertEquals(shell.toString(), shellExpected);
         Assert.assertEquals(shell2.toString(), shell2Expected);
     }
 
     @Test
-    public void testProperties() {
+    public void testProperties()
+    {
         ComponentBase shell = new ComponentBase(ComponentTypes.Abbreviation);
         shell.setID("shell");
         shell.getProperties().put("Property1", "Value 1");
@@ -108,6 +119,7 @@ public class ComponentBaseTest extends BaseTestClass {
                 + "  \"componentType\" : \"abbreviation\",\n"
                 + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
+                + "  \"initialized\" : true,\n"
                 + "  \"properties\" : {\n"
                 + "    \"Property1\" : \"Value 1\"\n"
                 + "  }\n"

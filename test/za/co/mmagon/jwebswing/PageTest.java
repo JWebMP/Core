@@ -76,7 +76,7 @@ public class PageTest extends BaseTestClass
         child.getCss().getBackground().setBackgroundColor$(ColourNames.AntiqueWhite);
         p.getBody().add(child);
 
-        System.out.println(p.getCssStyle());
+        //System.out.println(p.getCssStyle());
         System.out.println(p.toString(true));
 
         assertEquals("<!DOCTYPE html>\n"
@@ -179,9 +179,8 @@ public class PageTest extends BaseTestClass
         String expResult = "<!DOCTYPE html>\n"
                 + "<html>\n"
                 + "	<head>\n"
-                + "		<!-- Priority [First] Values -->\n"
-                + "		<link href=\"bower_components/PACE/themes/red/pace-theme-flash.css\" rel=\"stylesheet\" type=\"text/css\">\n"
                 + "		<script src=\"bower_components/PACE/pace.js\" type=\"text/javascript\"></script>\n"
+                + "		<link href=\"bower_components/PACE/themes/red/pace-theme-flash.css\" rel=\"stylesheet\" type=\"text/css\">\n"
                 + "	</head>\n"
                 + "</html>";
         assertEquals(expResult, result);
@@ -198,8 +197,7 @@ public class PageTest extends BaseTestClass
         instance.setTiny(true);
         instance.setRunningEnvironment(DevelopmentEnvironments.Production);
         System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html><html><head><link href=\"bower_components/PACE/themes/red/pace-theme-flash.css\" rel=\"stylesheet\" type=\"text/css\"><script src=\"bower_components/PACE/pace.js\" type=\"text/javascript\"></script></head></html>";
-
+        String expResult = "<!DOCTYPE html><html><head><script src=\"bower_components/PACE/pace.js\" type=\"text/javascript\"></script><link href=\"bower_components/PACE/themes/red/pace-theme-flash.css\" rel=\"stylesheet\" type=\"text/css\"></head></html>";
         assertEquals(expResult, result);
     }
 
@@ -217,9 +215,8 @@ public class PageTest extends BaseTestClass
         String expResult = "<!DOCTYPE html>\n"
                 + "<html>\n"
                 + "	<head>\n"
-                + "		<!-- Priority [First] Values -->\n"
-                + "		<link href=\"https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/red/pace-theme-flash.css\" rel=\"stylesheet\" type=\"text/css\">\n"
                 + "		<script src=\"https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js\" type=\"text/javascript\"></script>\n"
+                + "		<link href=\"https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/red/pace-theme-flash.css\" rel=\"stylesheet\" type=\"text/css\">\n"
                 + "	</head>\n"
                 + "</html>";
         assertEquals(expResult, result);
@@ -236,7 +233,7 @@ public class PageTest extends BaseTestClass
         instance.setTiny(true);
         instance.setRunningEnvironment(DevelopmentEnvironments.Production);
         System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html><html><head><link href=\"https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/red/pace-theme-flash.css\" rel=\"stylesheet\" type=\"text/css\"><script src=\"https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js\" type=\"text/javascript\"></script></head></html>";
+        String expResult = "<!DOCTYPE html><html><head><script src=\"https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js\" type=\"text/javascript\"></script><link href=\"https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/red/pace-theme-flash.css\" rel=\"stylesheet\" type=\"text/css\"></head></html>";
         assertEquals(expResult, result);
     }
 

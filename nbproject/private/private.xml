@@ -45,22 +45,29 @@
             <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/dynamicsourcecode/DynamicSourceCode.java</file>
         </group>
         <group name="JWebSwing">
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderBottomCSS.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderImpl.java</file>
-            <file>jar:file:/C:/AESoft/Programs/JWebSwing/lib/junit_4/junit-4.10-sources.jar!/org/junit/internal/runners/model/ReflectiveCallable.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderLeftCSSImpl.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderCSS.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderLeftCSS.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderCSSImpl.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderRightCSS.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/base/angular/modules/AngularModuleBaseTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/components/jquery/bootstrap/themes/SBAdmin2ThemeTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/ComponentStyleBase.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/base/html/HtmlTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/composer/CSSComposer.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/PageTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/components/jqxWidgets/dataadapter/JQXDataAdapterTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/components/verticaltimeline/VerticalTimelineTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderCSSObjectTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/Page.java</file>
             <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/CSSPropertiesFactory.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderTopCSSImpl.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/Border.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/backgrounds/BackgroundImpl.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderTopCSS.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderRightCSSImpl.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderBottomCSSImpl.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/backgrounds/BackgroundCSSImpl.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/components/jqueryLayout/layout/JQLayoutTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/htmlbuilder/css/CSSImplTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/base/html/BodyTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jquerylayout/layout/JQLayout.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/base/ComponentHTMLBaseTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/ComponentHierarchyBase.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/base/ComponentEventBaseTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/htmlbuilder/css/backgrounds/BackgroundCSSTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/htmlbuilder/css/CSSPropertiesFactoryTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/htmlbuilder/css/borders/BorderCSSTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/servlets/CSSServlet.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/base/ComponentDependancyBaseTest.java</file>
         </group>
     </open-files>
 </project-private>

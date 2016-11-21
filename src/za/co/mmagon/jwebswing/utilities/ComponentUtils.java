@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.utilities;
 
+import java.lang.reflect.*;
 import java.util.*;
 import za.co.mmagon.jwebswing.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.heightwidth.*;
@@ -31,25 +32,57 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 public class ComponentUtils
 {
 
-    public static synchronized Component removeAllMargins(Component c)
+    public ComponentUtils()
+    {
+    }
+
+    /**
+     * Adds a class that removes all margins
+     *
+     * @param c
+     *
+     * @return
+     */
+    public static Component removeAllMargins(Component c)
     {
         c.addClass(CSSClassList.NoMargings.cssClass);
         return c;
     }
 
-    public static synchronized Component setWidth100Percent(Component c)
+    /**
+     * Adds a class that sets the width to 100%
+     *
+     * @param c
+     *
+     * @return
+     */
+    public static Component setWidth100Percent(Component c)
     {
         c.addClass(CSSClassList.Width100Percent.cssClass);
         return c;
     }
 
-    public static synchronized Component setWidth50Percent(Component c)
+    /**
+     * Sets the width to 50%
+     *
+     * @param c
+     *
+     * @return
+     */
+    public static Component setWidth50Percent(Component c)
     {
         c.addClass(CSSClassList.Width50Percent.cssClass);
         return c;
     }
 
-    public static synchronized Component setFullScreen(Component c)
+    /**
+     * Sets the screen full screen
+     *
+     * @param c
+     *
+     * @return
+     */
+    public static Component setFullScreen(Component c)
     {
         c.addClass(CSSClassList.FullScreen.cssClass);
         return c;
@@ -62,7 +95,7 @@ public class ComponentUtils
      *
      * @return an array that can be read in JSON as an array
      */
-    public static synchronized Object[][] HashMapToArray(HashMap map)
+    public static Object[][] HashMapToArray(HashMap map)
     {
         Object[][] map2D = new Object[map.size()][2];
         Set entries = map.entrySet();
@@ -80,16 +113,15 @@ public class ComponentUtils
         return map2D;
     }
 
-    public ComponentUtils()
-    {
-    }
-
     @Override
     public String toString()
     {
         return super.toString();
     }
 
+    /**
+     * The generated class list for singleton's
+     */
     public enum CSSClassList
     {
         NoMargings(new NoMarginsPadding()),
@@ -116,9 +148,14 @@ public class ComponentUtils
 
     }
 
+    /**
+     * Margin Padding to 0
+     */
     @MarginsCSS(MarginTop = @MeasurementCSS(0), MarginLeft = @MeasurementCSS(0), MarginRight = @MeasurementCSS(0))
     public static class NoMarginsPadding extends CSSComponent
     {
+
+        private static final long serialVersionUID = 1L;
 
         public NoMarginsPadding()
         {
@@ -131,9 +168,14 @@ public class ComponentUtils
         }
     }
 
+    /**
+     * Sets width to 100%
+     */
     @HeightWidthCSS(Width = @MeasurementCSS(value = 100, MeasurementType = MeasurementTypes.Percent))
     public static class WidthHundredPercent extends CSSComponent
     {
+
+        private static final long serialVersionUID = 1L;
 
         public WidthHundredPercent()
         {
@@ -147,9 +189,14 @@ public class ComponentUtils
 
     }
 
+    /**
+     * Sets height to 100%
+     */
     @HeightWidthCSS(Width = @MeasurementCSS(value = 50, MeasurementType = MeasurementTypes.Percent))
     public static class WidthFiftyPercent extends CSSComponent
     {
+
+        private static final long serialVersionUID = 1L;
 
         public WidthFiftyPercent()
         {
@@ -163,6 +210,9 @@ public class ComponentUtils
 
     }
 
+    /**
+     * Sets the full screen
+     */
     @HeightWidthCSS(Width = @MeasurementCSS(value = 100, MeasurementType = MeasurementTypes.Percent),
             Height = @MeasurementCSS(value = 100, MeasurementType = MeasurementTypes.Percent))
     public static class FullScreenCSSClass extends CSSComponent
@@ -178,6 +228,26 @@ public class ComponentUtils
         public String getCSSClassName()
         {
             return "fullscreen";
+        }
+    }
+
+    /**
+     * Returns null or the field object
+     *
+     * @param f The field
+     * @param o The objects
+     *
+     * @return
+     */
+    public static Object fieldGet(Field f, Object o)
+    {
+        try
+        {
+            return f.get(o);
+        }
+        catch (IllegalArgumentException | IllegalAccessException ex)
+        {
+            return null;
         }
     }
 }

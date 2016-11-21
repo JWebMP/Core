@@ -16,12 +16,11 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import org.junit.Assert;
-import org.junit.Test;
-import za.co.mmagon.BaseTestClass;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.pools.jquery.JQueryReferencePool;
-import za.co.mmagon.jwebswing.components.pools.jqueryui.JQueryUIReferencePool;
+import org.junit.*;
+import za.co.mmagon.*;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
+import za.co.mmagon.jwebswing.components.pools.jquery.*;
+import za.co.mmagon.jwebswing.components.pools.jqueryui.*;
 
 /**
  *
@@ -47,6 +46,7 @@ public class ComponentDependancyBaseTest extends BaseTestClass
                 + "  \"componentType\" : \"abbreviation\",\n"
                 + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
+                + "  \"initialized\" : true,\n"
                 + "  \"cssReferences\" : [ {\n"
                 + "    \"name\" : \"JWAccordionCSSRef\",\n"
                 + "    \"version\" : 1.114,\n"
@@ -75,6 +75,7 @@ public class ComponentDependancyBaseTest extends BaseTestClass
                 + "  \"componentType\" : \"abbreviation\",\n"
                 + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
+                + "  \"initialized\" : true,\n"
                 + "  \"javascriptReferences\" : [ {\n"
                 + "    \"name\" : \"JQuery\",\n"
                 + "    \"version\" : 2.24,\n"
@@ -86,6 +87,7 @@ public class ComponentDependancyBaseTest extends BaseTestClass
                 + "  \"componentType\" : \"abbreviation\",\n"
                 + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
+                + "  \"initialized\" : true,\n"
                 + "  \"javascriptReferences\" : [ {\n"
                 + "    \"name\" : \"JQuery\",\n"
                 + "    \"version\" : 2.24,\n"

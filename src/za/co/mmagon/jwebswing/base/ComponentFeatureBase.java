@@ -16,21 +16,14 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
-import za.co.mmagon.LoggerFactory;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.interfaces.IComponentFeatureBase; 
-import za.co.mmagon.jwebswing.base.references.CSSReference;
-import za.co.mmagon.jwebswing.base.references.JavascriptReference;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import com.fasterxml.jackson.annotation.*;
+import java.util.*;
+import za.co.mmagon.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.interfaces.*;
+import za.co.mmagon.jwebswing.base.references.*;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
 
 /**
  * Allows a component to have features and events
@@ -40,7 +33,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  *
  * @since 23 Apr 2016
  */
-public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentBase> extends ComponentDependancyBase<J> 
+public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentBase> extends ComponentDependancyBase<J>
         implements IComponentFeatureBase<F, J>
 {
 
@@ -92,7 +85,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
      * The assigned priority for the given application
      */
     private RequirementsPriority priority;
-    
+
     /**
      * Specifies if this components JavaScript is rendered somewhere else
      */
@@ -149,15 +142,15 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
     {
         if (!isConfigured())
         {
-            getFeatures().stream().forEach((feature)
-                    -> 
-                    {
-                        ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
-                        if (!cfb.isConfigured())
-                        {
-                            cfb.preConfigure();
-                            cfb.assignFunctionsToComponent();
-                        }
+            getFeatures().stream().forEach(feature
+                    ->
+            {
+                ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
+                if (cfb != null && !cfb.isConfigured())
+                {
+                    cfb.preConfigure();
+                    cfb.assignFunctionsToComponent();
+                }
             });
         }
         super.preConfigure();
@@ -169,22 +162,20 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
     @Override
     public void init()
     {
-        if(!isInitialized())
+        if (!isInitialized())
         {
-            getFeatures().stream().forEach((feature)
-                    -> 
-                    {
-                        ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
-                        if (!cfb.isConfigured())
-                        {
-                            cfb.init();
-                        }
+            getFeatures().stream().forEach(feature
+                    ->
+            {
+                ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
+                if (cfb != null && !cfb.isConfigured())
+                {
+                    cfb.init();
+                }
             });
         }
         super.init();
     }
-    
-    
 
     /**
      * Adds in the JavaScript References for the Features
@@ -195,18 +186,18 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
     public List<JavascriptReference> getJavascriptReferencesAll()
     {
         List<JavascriptReference> allJs = super.getJavascriptReferencesAll();
-        getFeatures().stream().forEach((feature)
-                -> 
+        getFeatures().stream().forEach(feature
+                ->
+        {
+            ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
+            for (Iterator<JavascriptReference> it = cfb.getJavascriptReferencesAll().iterator(); it.hasNext();)
+            {
+                JavascriptReference js = it.next();
+                if (!allJs.contains(js))
                 {
-                    ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
-                    for (Iterator<JavascriptReference> it = cfb.getJavascriptReferencesAll().iterator(); it.hasNext();)
-                    {
-                        JavascriptReference js = it.next();
-                        if (!allJs.contains(js))
-                        {
-                            allJs.add(js);
-                        }
-                    }
+                    allJs.add(js);
+                }
+            }
         });
         return allJs;
     }
@@ -221,17 +212,17 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
     {
         List<CSSReference> allCss = super.getCssReferencesAll();
         getFeatures().stream().forEach((feature)
-                -> 
+                ->
+        {
+            ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
+            for (Iterator<CSSReference> it = cfb.getCssReferencesAll().iterator(); it.hasNext();)
+            {
+                CSSReference css = it.next();
+                if (!allCss.contains(css))
                 {
-                    ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
-                    for (Iterator<CSSReference> it = cfb.getCssReferencesAll().iterator(); it.hasNext();)
-                    {
-                        CSSReference css = it.next();
-                        if (!allCss.contains(css))
-                        {
-                            allCss.add(css);
-                        }
-                    }
+                    allCss.add(css);
+                }
+            }
         });
         return allCss;
     }
@@ -250,15 +241,15 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
         }
         StringBuilder sb = new StringBuilder();
         ArrayList<String> allQueries = new ArrayList<>();
-        getQueriesAll().stream().filter(a-> a != null).forEach((query)
-                -> 
-                {
-                    if (!allQueries.contains(query.toString()))
-                    {
-                        allQueries.add(query.toString());
-                    }
+        getQueriesAll().stream().filter(a -> a != null).forEach(query
+                ->
+        {
+            if (!allQueries.contains(query.toString()))
+            {
+                allQueries.add(query.toString());
+            }
         });
-        allQueries.stream().forEach((query) ->
+        allQueries.stream().forEach(query ->
         {
             sb.append(query);
         });
@@ -325,7 +316,8 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
      * Sets the name of the feature
      *
      * @param name Sets the name of the feature
-     * @return 
+     *
+     * @return
      */
     public J setName(String name)
     {
@@ -390,7 +382,8 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
      * Gets the sort order for this feature Default 10000
      *
      * @param sortOrder
-     * @return 
+     *
+     * @return
      */
     public final J setSortOrder(int sortOrder)
     {
@@ -403,7 +396,8 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
      *
      * @param feature
      * @param position
-     * @return 
+     *
+     * @return
      */
     @Override
     public J addFeature(ComponentFeatureBase feature, int position)
@@ -423,7 +417,8 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
      * Adds a feature to the collection
      *
      * @param feature
-     * @return 
+     *
+     * @return
      */
     @Override
     public J addFeature(ComponentFeatureBase feature)
@@ -504,7 +499,8 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
      * Sets all features beneath to tiny
      *
      * @param tiny
-     * @return 
+     *
+     * @return
      */
     @Override
     public J setTiny(boolean tiny)
@@ -561,7 +557,8 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
 
     /**
      * Returns if the JavaScript for this component is rendered elsewhere
-     * @return 
+     *
+     * @return
      */
     public boolean isJavascriptRenderedElsewhere()
     {
@@ -570,7 +567,8 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
 
     /**
      * Returns if the JavaScript for this component is rendered elsewhere
-     * @param javascriptRenderedElsewhere 
+     *
+     * @param javascriptRenderedElsewhere
      */
     public void setJavascriptRenderedElsewhere(boolean javascriptRenderedElsewhere)
     {

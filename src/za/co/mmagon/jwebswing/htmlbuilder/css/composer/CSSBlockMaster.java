@@ -16,7 +16,7 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  *
@@ -67,14 +67,15 @@ public class CSSBlockMaster
      * Adds a block to the CSS Composer
      *
      * @param block
+     *
      * @return
      */
     public ArrayList<CSSBlock> addBlock(ArrayList<CSSBlock> block)
     {
         block.stream().forEach((cssBlock)
                 ->
-                {
-                    addBlock(cssBlock);
+        {
+            addBlock(cssBlock);
         });
         return block;
     }
@@ -83,6 +84,7 @@ public class CSSBlockMaster
      * Returns any duplicate blocks
      *
      * @param blockToCompare The block to compare against
+     *
      * @return The block with the same lines
      */
     protected CSSBlock checkBlocksForDuplicateLines(CSSBlock blockToCompare)
@@ -105,6 +107,7 @@ public class CSSBlockMaster
      * Checks if the ID of a block is loaded for this composer
      *
      * @param block The block to check
+     *
      * @return True if the ID is already complete
      */
     protected boolean idAlreadyLoaded(CSSBlock block)
@@ -126,21 +129,22 @@ public class CSSBlockMaster
      * Returns the generated CSS as small as possible
      *
      * @param ajax Placeholder - will always render as inline
+     *
      * @return The generated CSS
      */
     public String toString(boolean ajax)
     {
         StringBuilder cssBlocksSB = new StringBuilder();
-        (getAllCSSBlocks()).stream().forEach((cSSBlock)
+        (getAllCSSBlocks()).stream().forEach(cSSBlock
                 ->
-                {
-                    CSSBlockIdentifier oldIdent = cSSBlock.getBlockIdentifer();
-                    cSSBlock.setBlockIdentifer(CSSBlockIdentifier.Inline);
-                    if (!cSSBlock.toString().isEmpty())
-                    {
-                        cssBlocksSB.append(cSSBlock).append(cSSBlock.getBlockIdentifer() == CSSBlockIdentifier.Inline ? "" : "\n");
-                    }
-                    cSSBlock.setBlockIdentifer(oldIdent);
+        {
+            CSSBlockIdentifier oldIdent = cSSBlock.getBlockIdentifer();
+            cSSBlock.setBlockIdentifer(CSSBlockIdentifier.Inline);
+            if (!cSSBlock.toString().isEmpty())
+            {
+                cssBlocksSB.append(cSSBlock).append(cSSBlock.getBlockIdentifer() == CSSBlockIdentifier.Inline ? "" : "\n");
+            }
+            cSSBlock.setBlockIdentifer(oldIdent);
         });
         return cssBlocksSB.toString();
     }

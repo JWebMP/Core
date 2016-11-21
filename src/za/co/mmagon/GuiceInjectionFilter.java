@@ -16,13 +16,7 @@
  */
 package za.co.mmagon;
 
-import com.google.inject.servlet.ServletModule;
-import org.apache.log4j.Logger;
-import za.co.mmagon.jwebswing.base.servlets.AjaxReceiverServlet;
-import za.co.mmagon.jwebswing.base.servlets.AngularDataServlet;
-import za.co.mmagon.jwebswing.base.servlets.AngularServlet;
-import za.co.mmagon.jwebswing.base.servlets.CSSServlet;
-import za.co.mmagon.jwebswing.base.servlets.JavaScriptServlet;
+import com.google.inject.servlet.*;
 
 /**
  *
@@ -34,13 +28,6 @@ import za.co.mmagon.jwebswing.base.servlets.JavaScriptServlet;
 public class GuiceInjectionFilter extends ServletModule
 {
 
-    /**
-     * The logger for the swing Servlet
-     */
-    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("GuiceFilter");
-    private static boolean gzip = true;
-    private static boolean cacheAll = true;
-
     public GuiceInjectionFilter()
     {
 
@@ -49,68 +36,7 @@ public class GuiceInjectionFilter extends ServletModule
     @Override
     protected void configureServlets()
     {
-        if (gzip)
-        {
-            LOG.trace("Enabling GZIP");
-            filter("/*").through(GZipServletFilter.class);
-        }
-        else
-        {
 
-        }
-
-        if (cacheAll)
-        {
-            LOG.trace("Enabling Cache");
-            filter("/*").through(CacheControlFilter.class);
-        }
-
-        LOG.trace("Configuring Servlets For Injection");
-        serve("/js/*").with(JavaScriptServlet.class);
-        serve("/ajax/*").with(AjaxReceiverServlet.class);
-        serve("/css/*").with(CSSServlet.class);
-        serve("/ad/*").with(AngularDataServlet.class);
-        serve("/as/*").with(AngularServlet.class);
-    }
-
-    /**
-     * If the context is set to GZIP
-     *
-     * @return
-     */
-    public static boolean isGzip()
-    {
-        return gzip;
-    }
-
-    /**
-     * Set if the content must be GZIP
-     *
-     * @param gzip
-     */
-    public static void setGzip(boolean gzip)
-    {
-        GuiceInjectionFilter.gzip = gzip;
-    }
-
-    /**
-     * Sets if must cache all
-     *
-     * @return
-     */
-    public static boolean isCacheAll()
-    {
-        return cacheAll;
-    }
-
-    /**
-     * Sets cache all
-     *
-     * @param cacheAll
-     */
-    public static void setCacheAll(boolean cacheAll)
-    {
-        GuiceInjectionFilter.cacheAll = cacheAll;
     }
 
 }

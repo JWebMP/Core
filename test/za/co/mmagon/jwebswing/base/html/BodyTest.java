@@ -17,10 +17,10 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import static org.junit.Assert.assertEquals;
-import org.junit.Test;
-import za.co.mmagon.BaseTestClass;
-import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.generics.WebReference;
+import org.junit.*;
+import za.co.mmagon.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.generics.*;
 
 /**
  *
@@ -63,9 +63,8 @@ public class BodyTest extends BaseTestClass
         assertEquals("<!DOCTYPE html>\n"
                 + "<html>\n"
                 + "	<head>\n"
-                + "		<!-- Priority [First] Values -->\n"
-                + "		<link href=\"bower_components/PACE/themes/red/pace-theme-flash.css\" rel=\"stylesheet\" type=\"text/css\">\n"
                 + "		<script src=\"bower_components/PACE/pace.js\" type=\"text/javascript\"></script>\n"
+                + "		<link href=\"bower_components/PACE/themes/red/pace-theme-flash.css\" rel=\"stylesheet\" type=\"text/css\">\n"
                 + "	</head>\n"
                 + "	<body id=\"body\">\n"
                 + "		<!-- asdf -->\n"
@@ -83,14 +82,10 @@ public class BodyTest extends BaseTestClass
         System.out.println(p.toString(true));
         assertEquals("<!DOCTYPE html>\n"
                 + "<html>\n"
-                + "	<head>\n"
-                + "		<!-- Priority [First] Values -->\n"
-                + "		<script src=\"bower_components/jquery-3/dist/jquery.js\" type=\"text/javascript\"></script>\n"
-                + "		<!-- Priority [DontCare] Values -->\n"
-                + "		<script src=\"bower_components/jquery-migrate/jquery-migrate.js\" type=\"text/javascript\"></script>\n"
-                + "	</head>\n"
                 + "	<body id=\"body\">\n"
                 + "		<!-- meh -->\n"
+                + "		<script src=\"bower_components/jquery-3/dist/jquery.js\" type=\"text/javascript\"></script>\n"
+                + "		<script src=\"bower_components/jquery-migrate/jquery-migrate.js\" type=\"text/javascript\"></script>\n"
                 + "	</body>\n"
                 + "</html>", p.toString(true).toString());
     }
@@ -105,14 +100,10 @@ public class BodyTest extends BaseTestClass
         System.out.println(p.toString(true));
         assertEquals("<!DOCTYPE html>\n"
                 + "<html>\n"
-                + "	<head>\n"
-                + "		<!-- Priority [First] Values -->\n"
-                + "		<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js\" type=\"text/javascript\"></script>\n"
-                + "		<!-- Priority [DontCare] Values -->\n"
-                + "		<script src=\"http://code.jquery.com/jquery-migrate-1.4.1.js\" type=\"text/javascript\"></script>\n"
-                + "	</head>\n"
                 + "	<body id=\"body\">\n"
                 + "		<!-- meh -->\n"
+                + "		<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js\" type=\"text/javascript\"></script>\n"
+                + "		<script src=\"http://code.jquery.com/jquery-migrate-1.4.1.js\" type=\"text/javascript\"></script>\n"
                 + "	</body>\n"
                 + "</html>", p.toString(true).toString());
     }
@@ -127,14 +118,12 @@ public class BodyTest extends BaseTestClass
         assertEquals("<!DOCTYPE html>\n"
                 + "<html>\n"
                 + "	<head>\n"
-                + "		<!-- Priority [First] Values -->\n"
-                + "		<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js\" type=\"text/javascript\"></script>\n"
-                + "		<!-- Priority [Third] Values -->\n"
                 + "		<link href=\"https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css\" rel=\"stylesheet\" type=\"text/css\">\n"
-                + "		<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.js\" type=\"text/javascript\"></script>\n"
-                + "		<!-- Priority [DontCare] Values -->\n"
-                + "		<script src=\"http://code.jquery.com/jquery-migrate-1.4.1.js\" type=\"text/javascript\"></script>\n"
                 + "	</head>\n"
+                + "	<body id=\"body\">\n"
+                + "		<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js\" type=\"text/javascript\"></script>\n"
+                + "		<script src=\"http://code.jquery.com/jquery-migrate-1.4.1.js\" type=\"text/javascript\"></script>\n"
+                + "		<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.js\" type=\"text/javascript\"></script></body>\n"
                 + "</html>", p.toString(true).toString());
     }
 
@@ -154,17 +143,14 @@ public class BodyTest extends BaseTestClass
                 + "		<meta content=\"IE=Edge\" http-equiv=\"X-UA-Compatible\">\n"
                 + "		<meta content=\"width=device-width, initial-scale=1\" name=\"viewport\">\n"
                 + "		<title>title</title>\n"
-                + "		<!-- Priority [First] Values -->\n"
-                + "		<script src=\"bower_components/jquery-3/dist/jquery.js\" type=\"text/javascript\"></script>\n"
-                + "		<!-- Priority [Third] Values -->\n"
                 + "		<link href=\"bower_components/bootstrap/dist/css/bootstrap.css\" rel=\"stylesheet\" type=\"text/css\">\n"
-                + "		<script src=\"bower_components/bootstrap/dist/js/bootstrap.js\" type=\"text/javascript\"></script>\n"
-                + "		<!-- Priority [Fourth] Values -->\n"
                 + "		<link href=\"bower_components/bootstrap3-dialog/dist/css/bootstrap-dialog.css\" rel=\"stylesheet\" type=\"text/css\">\n"
-                + "		<script src=\"bower_components/bootstrap3-dialog/dist/js/bootstrap-dialog.js\" type=\"text/javascript\"></script>\n"
-                + "		<!-- Priority [DontCare] Values -->\n"
-                + "		<script src=\"bower_components/jquery-migrate/jquery-migrate.js\" type=\"text/javascript\"></script>\n"
                 + "	</head>\n"
+                + "	<body id=\"body\">\n"
+                + "		<script src=\"bower_components/jquery-3/dist/jquery.js\" type=\"text/javascript\"></script>\n"
+                + "		<script src=\"bower_components/jquery-migrate/jquery-migrate.js\" type=\"text/javascript\"></script>\n"
+                + "		<script src=\"bower_components/bootstrap/dist/js/bootstrap.js\" type=\"text/javascript\"></script>\n"
+                + "		<script src=\"bower_components/bootstrap3-dialog/dist/js/bootstrap-dialog.js\" type=\"text/javascript\"></script></body>\n"
                 + "</html>", p.toString(true));
     }
 

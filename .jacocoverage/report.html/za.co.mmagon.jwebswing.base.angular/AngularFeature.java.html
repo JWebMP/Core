@@ -533,10 +533,10 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
     public StringBuilder renderTemplateScripts(String template)
     {
 <span class="fc" id="L535">        configureTemplateVariables();</span>
-<span class="pc bpc" id="L536" title="3 of 4 branches missed.">        if (TemplateScripts.containsKey(template) &amp;&amp; TemplateScripts.get(template) != null)</span>
+<span class="pc bpc" id="L536" title="1 of 4 branches missed.">        if (TemplateScripts.containsKey(template) &amp;&amp; TemplateScripts.get(template) != null)</span>
         {
-<span class="nc" id="L538">            StringBuilder output = processTemplate(template, getTemplateScripts().get(template).toString());</span>
-<span class="nc" id="L539">            return output;</span>
+<span class="fc" id="L538">            StringBuilder output = processTemplate(template, getTemplateScripts().get(template).toString());</span>
+<span class="fc" id="L539">            return output;</span>
         }
 
 <span class="fc" id="L542">        return new StringBuilder();</span>
@@ -549,7 +549,7 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public Map&lt;String, StringBuilder&gt; getTemplateScripts()
     {
-<span class="nc" id="L552">        return TemplateScripts;</span>
+<span class="fc" id="L552">        return TemplateScripts;</span>
     }
 
     /**

@@ -16,25 +16,15 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import za.co.mmagon.jwebswing.CSSComponent;
-import za.co.mmagon.jwebswing.Event;
-import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
-import za.co.mmagon.jwebswing.base.interfaces.IComponentHierarchyBase;
-import za.co.mmagon.jwebswing.base.references.CSSReference;
-import za.co.mmagon.jwebswing.base.references.JavascriptReference;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import com.fasterxml.jackson.annotation.*;
+import java.util.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
+import za.co.mmagon.jwebswing.base.interfaces.*;
+import za.co.mmagon.jwebswing.base.references.*;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
 
 /**
  * Provides the Hierarchy for any component. Manages children and parent relationships
@@ -45,6 +35,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  * @param <F> All features allowed for this component
  * @param <E> All events allowed for this component
  * @param <J> Always this class
+ *
  * @since 24 Apr 2016
  */
 public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentBase>
@@ -144,6 +135,7 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
      * Returns null sets the text
      *
      * @param text
+     *
      * @return
      */
     @Override
@@ -153,6 +145,9 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
         return null;
     }
 
+    /**
+     * Initialize all children
+     */
     @Override
     public void init()
     {
@@ -186,7 +181,7 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
                     ->
             {
                 ComponentHierarchyBase cfb = feature;
-                if (!cfb.isConfigured() && cfb != null)
+                if (cfb != null && !cfb.isConfigured())
                 {
                     cfb.preConfigure();
                 }
@@ -464,6 +459,7 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
      * Finds the event in all this components and child components
      *
      * @param eventId
+     *
      * @return
      */
     @Override
@@ -518,7 +514,7 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
     {
         ArrayList<StringBuilder> reallyAllQueries = new ArrayList<>();
         List<ComponentHierarchyBase> allComponents = getChildrenHierarchy(true);
-        allComponents.stream().filter((currentComponent) -> currentComponent != null).map((component) ->
+        allComponents.stream().filter(currentComponent -> currentComponent != null).map(component ->
         {
             List<ComponentFeatureBase> features = component.getFeatures();
             features.stream().map(feature ->
@@ -535,7 +531,7 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
             });
             List<ComponentFeatureBase> events = component.getFeatures();
             return events;
-        }).map((events) ->
+        }).map(events ->
         {
             events.stream().map(event ->
             {
@@ -550,7 +546,7 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
                 reallyAllQueries.add(event.renderJavascript());
             });
             return events;
-        }).map(_item -> new ArrayList<>()).forEachOrdered((componentQueries) ->
+        }).map(_item -> new ArrayList<>()).forEachOrdered(componentQueries ->
         {
             for (Iterator<Object> it = componentQueries.iterator(); it.hasNext();)
             {
@@ -573,16 +569,11 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
         preConfigure();
         StringBuilder sb = new StringBuilder();
         ArrayList<String> allScripts = new ArrayList<>();
-
-        for (Iterator it = getQueriesAll().iterator(); it.hasNext();)
+        ArrayList<StringBuilder> queries = (ArrayList<StringBuilder>) getQueriesAll();
+        queries.stream().filter(a -> allScripts.contains(a.toString())).forEach(a ->
         {
-            String script = it.next().toString();
-            if (!allScripts.contains(script))
-            {
-                allScripts.add(script);
-            }
-        }
-
+            allScripts.add(a.toString());
+        });
         allScripts.stream().forEach(sb.append(getNewLine())::append);
         return sb;
     }
@@ -591,6 +582,7 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
      * Overrides this and all below components to set tiny false
      *
      * @param tiny
+     *
      * @return super.tiny
      */
     @Override
@@ -608,6 +600,7 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
      * Adds the given CSS Class Name with the given references
      * <p>
      * @param classComponent
+     *
      * @return
      */
     @Override
@@ -713,6 +706,7 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
      * Returns the HTML with the specified tab count
      *
      * @param tabCount
+     *
      * @return Indented HTML
      */
     @Override
@@ -725,12 +719,13 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
     /**
      * Takes an instance and wraps around the component
      * <p>
-     * e.g. BSRow.Wrap(div) = iv class="row"myComponent//div
+     * e.g. BSRow.wrap(div) = iv class="row"myComponent//div
      *
      * @param component
+     *
      * @return
      */
-    public J Wrap(ComponentHierarchyBase component)
+    public J wrap(ComponentHierarchyBase component)
     {
         ComponentHierarchyBase existingParent = component.getParent();
         if (component.getParent() != null)

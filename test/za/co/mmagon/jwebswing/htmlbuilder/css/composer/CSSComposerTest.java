@@ -98,11 +98,14 @@ public class CSSComposerTest
         Body b = new Body(p);
         InnerClass ic;
         b.add(ic = new InnerClass());
-        //ComponentUtils.removeAllMargins(ic);
-        // ComponentUtils.setWidth50Percent(ic);
         CSSComposer comp = new CSSComposer();
         comp.addComponent(b, true);
-        //comp.addComponent(borderClassObject);
+        System.out.println(comp.toString());
+
+        BackgroundCSSImpl back = new BackgroundCSSImpl();
+        back.setBackgroundColor$(ColourNames.DarkGoldenRod);
+
+        comp.addComponent(ic);
         System.out.println(comp.toString());
     }
 

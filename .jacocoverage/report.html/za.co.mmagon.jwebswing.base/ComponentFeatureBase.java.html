@@ -16,21 +16,14 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
-import za.co.mmagon.LoggerFactory;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.interfaces.IComponentFeatureBase; 
-import za.co.mmagon.jwebswing.base.references.CSSReference;
-import za.co.mmagon.jwebswing.base.references.JavascriptReference;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import com.fasterxml.jackson.annotation.*;
+import java.util.*;
+import za.co.mmagon.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.interfaces.*;
+import za.co.mmagon.jwebswing.base.references.*;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
 
 /**
  * Allows a component to have features and events
@@ -40,7 +33,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  *
  * @since 23 Apr 2016
  */
-public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends ComponentBase&gt; extends ComponentDependancyBase&lt;J&gt; 
+public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends ComponentBase&gt; extends ComponentDependancyBase&lt;J&gt;
         implements IComponentFeatureBase&lt;F, J&gt;
 {
 
@@ -48,7 +41,7 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
      * Logger for the Component
      */
     @JsonIgnore
-<span class="fc" id="L51">    private static final org.apache.log4j.Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;Component&quot;);</span>
+<span class="fc" id="L44">    private static final org.apache.log4j.Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;Component&quot;);</span>
     /**
      * Serial Version for all Components and their compatibility
      *
@@ -69,7 +62,7 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
     /**
      * The sort order for this feature
      */
-<span class="pc" id="L72">    private int sortOrder = 1000;</span>
+<span class="pc" id="L65">    private int sortOrder = 1000;</span>
     /**
      * The variables associated with this feature
      */
@@ -92,7 +85,7 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
      * The assigned priority for the given application
      */
     private RequirementsPriority priority;
-    
+
     /**
      * Specifies if this components JavaScript is rendered somewhere else
      */
@@ -105,10 +98,10 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
      */
     public ComponentFeatureBase(String name)
     {
-<span class="nc" id="L108">        super(ComponentTypes.Feature);</span>
-<span class="nc" id="L109">        this.name = name;</span>
-<span class="nc" id="L110">        variables = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L111">    }</span>
+<span class="nc" id="L101">        super(ComponentTypes.Feature);</span>
+<span class="nc" id="L102">        this.name = name;</span>
+<span class="nc" id="L103">        variables = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L104">    }</span>
 
     /**
      * Constructs a new component that can have features
@@ -117,8 +110,8 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
      */
     public ComponentFeatureBase(ComponentTypes componentType)
     {
-<span class="fc" id="L120">        super(componentType);</span>
-<span class="fc" id="L121">    }</span>
+<span class="fc" id="L113">        super(componentType);</span>
+<span class="fc" id="L114">    }</span>
 
     /**
      * Returns an Attribute Base interface of this component
@@ -127,7 +120,7 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
      */
     public IComponentFeatureBase asFeatureBase()
     {
-<span class="nc" id="L130">        return (ComponentFeatureBase) this;</span>
+<span class="nc" id="L123">        return (ComponentFeatureBase) this;</span>
     }
 
     /**
@@ -137,31 +130,31 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
      */
     protected List&lt;F&gt; getFeatures()
     {
-<span class="fc bfc" id="L140" title="All 2 branches covered.">        if (features == null)</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">        if (features == null)</span>
         {
-<span class="fc" id="L142">            features = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L135">            features = new ArrayList&lt;&gt;();</span>
         }
-<span class="fc" id="L144">        return features;</span>
+<span class="fc" id="L137">        return features;</span>
     }
 
     @Override
     public void preConfigure()
     {
-<span class="fc bfc" id="L150" title="All 2 branches covered.">        if (!isConfigured())</span>
+<span class="fc bfc" id="L143" title="All 2 branches covered.">        if (!isConfigured())</span>
         {
-<span class="fc" id="L152">            getFeatures().stream().forEach((feature)</span>
-                    -&gt; 
-                    {
-<span class="fc" id="L155">                        ComponentFeatureBase cfb = (ComponentFeatureBase) feature;</span>
-<span class="pc bpc" id="L156" title="1 of 2 branches missed.">                        if (!cfb.isConfigured())</span>
-                        {
-<span class="fc" id="L158">                            cfb.preConfigure();</span>
-<span class="fc" id="L159">                            cfb.assignFunctionsToComponent();</span>
-                        }
-<span class="fc" id="L161">            });</span>
+<span class="fc" id="L145">            getFeatures().stream().forEach(feature</span>
+                    -&gt;
+            {
+<span class="fc" id="L148">                ComponentFeatureBase cfb = (ComponentFeatureBase) feature;</span>
+<span class="pc bpc" id="L149" title="2 of 4 branches missed.">                if (cfb != null &amp;&amp; !cfb.isConfigured())</span>
+                {
+<span class="fc" id="L151">                    cfb.preConfigure();</span>
+<span class="fc" id="L152">                    cfb.assignFunctionsToComponent();</span>
+                }
+<span class="fc" id="L154">            });</span>
         }
-<span class="fc" id="L163">        super.preConfigure();</span>
-<span class="fc" id="L164">    }</span>
+<span class="fc" id="L156">        super.preConfigure();</span>
+<span class="fc" id="L157">    }</span>
 
     /**
      * Initialize all the features
@@ -169,22 +162,20 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
     @Override
     public void init()
     {
-<span class="fc bfc" id="L172" title="All 2 branches covered.">        if(!isInitialized())</span>
+<span class="fc bfc" id="L165" title="All 2 branches covered.">        if (!isInitialized())</span>
         {
-<span class="fc" id="L174">            getFeatures().stream().forEach((feature)</span>
-                    -&gt; 
-                    {
-<span class="fc" id="L177">                        ComponentFeatureBase cfb = (ComponentFeatureBase) feature;</span>
-<span class="pc bpc" id="L178" title="1 of 2 branches missed.">                        if (!cfb.isConfigured())</span>
-                        {
-<span class="fc" id="L180">                            cfb.init();</span>
-                        }
-<span class="fc" id="L182">            });</span>
+<span class="fc" id="L167">            getFeatures().stream().forEach(feature</span>
+                    -&gt;
+            {
+<span class="fc" id="L170">                ComponentFeatureBase cfb = (ComponentFeatureBase) feature;</span>
+<span class="pc bpc" id="L171" title="2 of 4 branches missed.">                if (cfb != null &amp;&amp; !cfb.isConfigured())</span>
+                {
+<span class="fc" id="L173">                    cfb.init();</span>
+                }
+<span class="fc" id="L175">            });</span>
         }
-<span class="fc" id="L184">        super.init();</span>
-<span class="fc" id="L185">    }</span>
-    
-    
+<span class="fc" id="L177">        super.init();</span>
+<span class="fc" id="L178">    }</span>
 
     /**
      * Adds in the JavaScript References for the Features
@@ -194,21 +185,21 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
     @Override
     public List&lt;JavascriptReference&gt; getJavascriptReferencesAll()
     {
-<span class="fc" id="L197">        List&lt;JavascriptReference&gt; allJs = super.getJavascriptReferencesAll();</span>
-<span class="fc" id="L198">        getFeatures().stream().forEach((feature)</span>
-                -&gt; 
+<span class="fc" id="L188">        List&lt;JavascriptReference&gt; allJs = super.getJavascriptReferencesAll();</span>
+<span class="fc" id="L189">        getFeatures().stream().forEach(feature</span>
+                -&gt;
+        {
+<span class="fc" id="L192">            ComponentFeatureBase cfb = (ComponentFeatureBase) feature;</span>
+<span class="fc bfc" id="L193" title="All 2 branches covered.">            for (Iterator&lt;JavascriptReference&gt; it = cfb.getJavascriptReferencesAll().iterator(); it.hasNext();)</span>
+            {
+<span class="fc" id="L195">                JavascriptReference js = it.next();</span>
+<span class="fc bfc" id="L196" title="All 2 branches covered.">                if (!allJs.contains(js))</span>
                 {
-<span class="fc" id="L201">                    ComponentFeatureBase cfb = (ComponentFeatureBase) feature;</span>
-<span class="fc bfc" id="L202" title="All 2 branches covered.">                    for (Iterator&lt;JavascriptReference&gt; it = cfb.getJavascriptReferencesAll().iterator(); it.hasNext();)</span>
-                    {
-<span class="fc" id="L204">                        JavascriptReference js = it.next();</span>
-<span class="fc bfc" id="L205" title="All 2 branches covered.">                        if (!allJs.contains(js))</span>
-                        {
-<span class="fc" id="L207">                            allJs.add(js);</span>
-                        }
-<span class="fc" id="L209">                    }</span>
-<span class="fc" id="L210">        });</span>
-<span class="fc" id="L211">        return allJs;</span>
+<span class="fc" id="L198">                    allJs.add(js);</span>
+                }
+<span class="fc" id="L200">            }</span>
+<span class="fc" id="L201">        });</span>
+<span class="fc" id="L202">        return allJs;</span>
     }
 
     /**
@@ -219,21 +210,21 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
     @Override
     public List&lt;CSSReference&gt; getCssReferencesAll()
     {
-<span class="fc" id="L222">        List&lt;CSSReference&gt; allCss = super.getCssReferencesAll();</span>
-<span class="fc" id="L223">        getFeatures().stream().forEach((feature)</span>
-                -&gt; 
+<span class="fc" id="L213">        List&lt;CSSReference&gt; allCss = super.getCssReferencesAll();</span>
+<span class="fc" id="L214">        getFeatures().stream().forEach((feature)</span>
+                -&gt;
+        {
+<span class="fc" id="L217">            ComponentFeatureBase cfb = (ComponentFeatureBase) feature;</span>
+<span class="fc bfc" id="L218" title="All 2 branches covered.">            for (Iterator&lt;CSSReference&gt; it = cfb.getCssReferencesAll().iterator(); it.hasNext();)</span>
+            {
+<span class="fc" id="L220">                CSSReference css = it.next();</span>
+<span class="fc bfc" id="L221" title="All 2 branches covered.">                if (!allCss.contains(css))</span>
                 {
-<span class="fc" id="L226">                    ComponentFeatureBase cfb = (ComponentFeatureBase) feature;</span>
-<span class="fc bfc" id="L227" title="All 2 branches covered.">                    for (Iterator&lt;CSSReference&gt; it = cfb.getCssReferencesAll().iterator(); it.hasNext();)</span>
-                    {
-<span class="fc" id="L229">                        CSSReference css = it.next();</span>
-<span class="fc bfc" id="L230" title="All 2 branches covered.">                        if (!allCss.contains(css))</span>
-                        {
-<span class="fc" id="L232">                            allCss.add(css);</span>
-                        }
-<span class="fc" id="L234">                    }</span>
-<span class="fc" id="L235">        });</span>
-<span class="fc" id="L236">        return allCss;</span>
+<span class="fc" id="L223">                    allCss.add(css);</span>
+                }
+<span class="fc" id="L225">            }</span>
+<span class="fc" id="L226">        });</span>
+<span class="fc" id="L227">        return allCss;</span>
     }
 
     /**
@@ -244,25 +235,25 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
     @Override
     public StringBuilder renderJavascript()
     {
-<span class="fc bfc" id="L247" title="All 2 branches covered.">        if (!isConfigured())</span>
+<span class="fc bfc" id="L238" title="All 2 branches covered.">        if (!isConfigured())</span>
         {
-<span class="fc" id="L249">            preConfigure();</span>
+<span class="fc" id="L240">            preConfigure();</span>
         }
-<span class="fc" id="L251">        StringBuilder sb = new StringBuilder();</span>
-<span class="fc" id="L252">        ArrayList&lt;String&gt; allQueries = new ArrayList&lt;&gt;();</span>
-<span class="pc bpc" id="L253" title="1 of 2 branches missed.">        getQueriesAll().stream().filter(a-&gt; a != null).forEach((query)</span>
-                -&gt; 
-                {
-<span class="fc bfc" id="L256" title="All 2 branches covered.">                    if (!allQueries.contains(query.toString()))</span>
-                    {
-<span class="fc" id="L258">                        allQueries.add(query.toString());</span>
-                    }
-<span class="fc" id="L260">        });</span>
-<span class="fc" id="L261">        allQueries.stream().forEach((query) -&gt;</span>
+<span class="fc" id="L242">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L243">        ArrayList&lt;String&gt; allQueries = new ArrayList&lt;&gt;();</span>
+<span class="pc bpc" id="L244" title="1 of 2 branches missed.">        getQueriesAll().stream().filter(a -&gt; a != null).forEach(query</span>
+                -&gt;
         {
-<span class="fc" id="L263">            sb.append(query);</span>
-<span class="fc" id="L264">        });</span>
-<span class="fc" id="L265">        return sb;</span>
+<span class="fc bfc" id="L247" title="All 2 branches covered.">            if (!allQueries.contains(query.toString()))</span>
+            {
+<span class="fc" id="L249">                allQueries.add(query.toString());</span>
+            }
+<span class="fc" id="L251">        });</span>
+<span class="fc" id="L252">        allQueries.stream().forEach(query -&gt;</span>
+        {
+<span class="fc" id="L254">            sb.append(query);</span>
+<span class="fc" id="L255">        });</span>
+<span class="fc" id="L256">        return sb;</span>
     }
 
     /**
@@ -274,11 +265,11 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     protected List&lt;StringBuilder&gt; getQueries()
     {
-<span class="fc bfc" id="L277" title="All 2 branches covered.">        if (queries == null)</span>
+<span class="fc bfc" id="L268" title="All 2 branches covered.">        if (queries == null)</span>
         {
-<span class="fc" id="L279">            queries = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L270">            queries = new ArrayList&lt;&gt;();</span>
         }
-<span class="fc" id="L281">        return queries;</span>
+<span class="fc" id="L272">        return queries;</span>
     }
 
     /**
@@ -289,7 +280,7 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
     @Override
     public List&lt;StringBuilder&gt; getQueriesAll()
     {
-<span class="fc" id="L292">        return getQueries();</span>
+<span class="fc" id="L283">        return getQueries();</span>
     }
 
     /**
@@ -300,7 +291,7 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
     @Override
     public boolean scriptAvailable()
     {
-<span class="nc bnc" id="L303" title="All 2 branches missed.">        return !getQueries().isEmpty();</span>
+<span class="nc bnc" id="L294" title="All 2 branches missed.">        return !getQueries().isEmpty();</span>
     }
 
     /**
@@ -308,7 +299,7 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
      */
     protected void assignFunctionsToComponent()
     {
-<span class="fc" id="L311">    }</span>
+<span class="fc" id="L302">    }</span>
 
     /**
      * Returns the name of this feature
@@ -318,61 +309,62 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
     @Override
     public String getName()
     {
-<span class="nc" id="L321">        return name;</span>
+<span class="nc" id="L312">        return name;</span>
     }
 
     /**
      * Sets the name of the feature
      *
      * @param name Sets the name of the feature
-     * @return 
+     *
+     * @return
      */
     public J setName(String name)
     {
-<span class="fc" id="L332">        this.name = name;</span>
-<span class="fc" id="L333">        return (J) this;</span>
+<span class="fc" id="L324">        this.name = name;</span>
+<span class="fc" id="L325">        return (J) this;</span>
     }
 
     @Override
     public boolean equals(Object obj)
     {
-<span class="fc bfc" id="L339" title="All 2 branches covered.">        if (this == obj)</span>
+<span class="fc bfc" id="L331" title="All 2 branches covered.">        if (this == obj)</span>
         {
-<span class="fc" id="L341">            return true;</span>
+<span class="fc" id="L333">            return true;</span>
         }
-<span class="pc bpc" id="L343" title="1 of 2 branches missed.">        if (obj == null)</span>
+<span class="pc bpc" id="L335" title="1 of 2 branches missed.">        if (obj == null)</span>
         {
-<span class="nc" id="L345">            return false;</span>
+<span class="nc" id="L337">            return false;</span>
         }
-<span class="fc bfc" id="L347" title="All 2 branches covered.">        if (getClass() != obj.getClass())</span>
+<span class="fc bfc" id="L339" title="All 2 branches covered.">        if (getClass() != obj.getClass())</span>
         {
-<span class="fc" id="L349">            return false;</span>
+<span class="fc" id="L341">            return false;</span>
         }
-<span class="fc" id="L351">        final ComponentFeatureBase&lt;?, ?&gt; other = (ComponentFeatureBase&lt;?, ?&gt;) obj;</span>
-<span class="pc bpc" id="L352" title="1 of 2 branches missed.">        if (this.sortOrder != other.sortOrder)</span>
+<span class="fc" id="L343">        final ComponentFeatureBase&lt;?, ?&gt; other = (ComponentFeatureBase&lt;?, ?&gt;) obj;</span>
+<span class="pc bpc" id="L344" title="1 of 2 branches missed.">        if (this.sortOrder != other.sortOrder)</span>
+        {
+<span class="nc" id="L346">            return false;</span>
+        }
+<span class="pc bpc" id="L348" title="1 of 2 branches missed.">        if (!Objects.equals(this.name, other.name))</span>
+        {
+<span class="nc" id="L350">            return false;</span>
+        }
+<span class="pc bpc" id="L352" title="1 of 2 branches missed.">        if (!Objects.equals(this.features, other.features))</span>
         {
 <span class="nc" id="L354">            return false;</span>
         }
-<span class="pc bpc" id="L356" title="1 of 2 branches missed.">        if (!Objects.equals(this.name, other.name))</span>
-        {
-<span class="nc" id="L358">            return false;</span>
-        }
-<span class="pc bpc" id="L360" title="1 of 2 branches missed.">        if (!Objects.equals(this.features, other.features))</span>
-        {
-<span class="nc" id="L362">            return false;</span>
-        }
-<span class="fc" id="L364">        return Objects.equals(this.queries, other.queries);</span>
+<span class="fc" id="L356">        return Objects.equals(this.queries, other.queries);</span>
     }
 
     @Override
     public int hashCode()
     {
-<span class="fc" id="L370">        int hash = 7;</span>
-<span class="fc" id="L371">        hash = 97 * hash + Objects.hashCode(this.features);</span>
-<span class="fc" id="L372">        hash = 97 * hash + Objects.hashCode(this.queries);</span>
-<span class="fc" id="L373">        hash = 97 * hash + this.sortOrder;</span>
-<span class="fc" id="L374">        hash = 97 * hash + Objects.hashCode(this.name);</span>
-<span class="fc" id="L375">        return hash;</span>
+<span class="fc" id="L362">        int hash = 7;</span>
+<span class="fc" id="L363">        hash = 97 * hash + Objects.hashCode(this.features);</span>
+<span class="fc" id="L364">        hash = 97 * hash + Objects.hashCode(this.queries);</span>
+<span class="fc" id="L365">        hash = 97 * hash + this.sortOrder;</span>
+<span class="fc" id="L366">        hash = 97 * hash + Objects.hashCode(this.name);</span>
+<span class="fc" id="L367">        return hash;</span>
     }
 
     /**
@@ -383,19 +375,20 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
     @Override
     public Integer getSortOrder()
     {
-<span class="nc" id="L386">        return sortOrder;</span>
+<span class="nc" id="L378">        return sortOrder;</span>
     }
 
     /**
      * Gets the sort order for this feature Default 10000
      *
      * @param sortOrder
-     * @return 
+     *
+     * @return
      */
     public final J setSortOrder(int sortOrder)
     {
-<span class="nc" id="L397">        this.sortOrder = sortOrder;</span>
-<span class="nc" id="L398">        return (J) this;</span>
+<span class="nc" id="L390">        this.sortOrder = sortOrder;</span>
+<span class="nc" id="L391">        return (J) this;</span>
     }
 
     /**
@@ -403,40 +396,42 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
      *
      * @param feature
      * @param position
-     * @return 
+     *
+     * @return
      */
     @Override
     public J addFeature(ComponentFeatureBase feature, int position)
     {
-<span class="nc bnc" id="L411" title="All 2 branches missed.">        if (!feature.getComponentType().equals(ComponentTypes.Feature))</span>
+<span class="nc bnc" id="L405" title="All 2 branches missed.">        if (!feature.getComponentType().equals(ComponentTypes.Feature))</span>
         {
-<span class="nc" id="L413">            LOG.warn(&quot;Tried to add a non-feature to the feature collection&quot;);</span>
+<span class="nc" id="L407">            LOG.warn(&quot;Tried to add a non-feature to the feature collection&quot;);</span>
         }
-<span class="nc bnc" id="L415" title="All 2 branches missed.">        else if (!getFeatures().contains((F) feature))</span>
+<span class="nc bnc" id="L409" title="All 2 branches missed.">        else if (!getFeatures().contains((F) feature))</span>
         {
-<span class="nc" id="L417">            getFeatures().add(position, (F) feature);</span>
+<span class="nc" id="L411">            getFeatures().add(position, (F) feature);</span>
         }
-<span class="nc" id="L419">        return (J) this;</span>
+<span class="nc" id="L413">        return (J) this;</span>
     }
 
     /**
      * Adds a feature to the collection
      *
      * @param feature
-     * @return 
+     *
+     * @return
      */
     @Override
     public J addFeature(ComponentFeatureBase feature)
     {
-<span class="pc bpc" id="L431" title="1 of 2 branches missed.">        if (!feature.getComponentType().equals(ComponentTypes.Feature))</span>
+<span class="pc bpc" id="L426" title="1 of 2 branches missed.">        if (!feature.getComponentType().equals(ComponentTypes.Feature))</span>
         {
-<span class="nc" id="L433">            LOG.warn(&quot;Tried to add a non-feature to the feature collection&quot;);</span>
+<span class="nc" id="L428">            LOG.warn(&quot;Tried to add a non-feature to the feature collection&quot;);</span>
         }
-<span class="pc bpc" id="L435" title="1 of 2 branches missed.">        else if (!getFeatures().contains((F) feature))</span>
+<span class="pc bpc" id="L430" title="1 of 2 branches missed.">        else if (!getFeatures().contains((F) feature))</span>
         {
-<span class="fc" id="L437">            getFeatures().add((F) feature);</span>
+<span class="fc" id="L432">            getFeatures().add((F) feature);</span>
         }
-<span class="fc" id="L439">        return (J) this;</span>
+<span class="fc" id="L434">        return (J) this;</span>
     }
 
     /**
@@ -449,7 +444,7 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
     @Override
     public boolean removeFeature(F feature)
     {
-<span class="fc" id="L452">        return getFeatures().remove(feature);</span>
+<span class="fc" id="L447">        return getFeatures().remove(feature);</span>
     }
 
     /**
@@ -460,8 +455,8 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
     @Override
     public void addVariable(String variable)
     {
-<span class="fc" id="L463">        getVariables().add(variable);</span>
-<span class="fc" id="L464">    }</span>
+<span class="fc" id="L458">        getVariables().add(variable);</span>
+<span class="fc" id="L459">    }</span>
 
     /**
      * Removes a variable from the collection
@@ -471,8 +466,8 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
     @Override
     public void removeVariable(String variable)
     {
-<span class="nc" id="L474">        getVariables().remove(variable);</span>
-<span class="nc" id="L475">    }</span>
+<span class="nc" id="L469">        getVariables().remove(variable);</span>
+<span class="nc" id="L470">    }</span>
 
     /**
      * Returns the list of variables
@@ -482,11 +477,11 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
     @Override
     public List&lt;String&gt; getVariables()
     {
-<span class="fc bfc" id="L485" title="All 2 branches covered.">        if (variables == null)</span>
+<span class="fc bfc" id="L480" title="All 2 branches covered.">        if (variables == null)</span>
         {
-<span class="fc" id="L487">            variables = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L482">            variables = new ArrayList&lt;&gt;();</span>
         }
-<span class="fc" id="L489">        return variables;</span>
+<span class="fc" id="L484">        return variables;</span>
     }
 
     /**
@@ -497,24 +492,25 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
     @Override
     public JavaScriptPart getOptions()
     {
-<span class="nc" id="L500">        return null;</span>
+<span class="nc" id="L495">        return null;</span>
     }
 
     /**
      * Sets all features beneath to tiny
      *
      * @param tiny
-     * @return 
+     *
+     * @return
      */
     @Override
     public J setTiny(boolean tiny)
     {
-<span class="fc bfc" id="L512" title="All 2 branches covered.">        for (Iterator&lt;F&gt; iterator = getFeatures().iterator(); iterator.hasNext();)</span>
+<span class="fc bfc" id="L508" title="All 2 branches covered.">        for (Iterator&lt;F&gt; iterator = getFeatures().iterator(); iterator.hasNext();)</span>
         {
-<span class="fc" id="L514">            ComponentFeatureBase next = (ComponentFeatureBase) iterator.next();</span>
-<span class="fc" id="L515">            next.setTiny(tiny);</span>
-<span class="fc" id="L516">        }</span>
-<span class="fc" id="L517">        return super.setTiny(tiny);</span>
+<span class="fc" id="L510">            ComponentFeatureBase next = (ComponentFeatureBase) iterator.next();</span>
+<span class="fc" id="L511">            next.setTiny(tiny);</span>
+<span class="fc" id="L512">        }</span>
+<span class="fc" id="L513">        return super.setTiny(tiny);</span>
     }
 
     /**
@@ -525,7 +521,7 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
     @Override
     public boolean isRenderAfterLoad()
     {
-<span class="fc" id="L528">        return renderAfterLoad;</span>
+<span class="fc" id="L524">        return renderAfterLoad;</span>
     }
 
     /**
@@ -535,8 +531,8 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
      */
     public void setRenderAfterLoad(boolean renderAfterLoad)
     {
-<span class="fc" id="L538">        this.renderAfterLoad = renderAfterLoad;</span>
-<span class="fc" id="L539">    }</span>
+<span class="fc" id="L534">        this.renderAfterLoad = renderAfterLoad;</span>
+<span class="fc" id="L535">    }</span>
 
     /**
      * Gets the render priority of this feature
@@ -546,7 +542,7 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
     @Override
     public RequirementsPriority getPriority()
     {
-<span class="nc" id="L549">        return priority;</span>
+<span class="nc" id="L545">        return priority;</span>
     }
 
     /**
@@ -556,26 +552,28 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
      */
     public void setPriority(RequirementsPriority priority)
     {
-<span class="nc" id="L559">        this.priority = priority;</span>
-<span class="nc" id="L560">    }</span>
+<span class="nc" id="L555">        this.priority = priority;</span>
+<span class="nc" id="L556">    }</span>
 
     /**
      * Returns if the JavaScript for this component is rendered elsewhere
-     * @return 
+     *
+     * @return
      */
     public boolean isJavascriptRenderedElsewhere()
     {
-<span class="fc" id="L568">        return javascriptRenderedElsewhere;</span>
+<span class="fc" id="L565">        return javascriptRenderedElsewhere;</span>
     }
 
     /**
      * Returns if the JavaScript for this component is rendered elsewhere
-     * @param javascriptRenderedElsewhere 
+     *
+     * @param javascriptRenderedElsewhere
      */
     public void setJavascriptRenderedElsewhere(boolean javascriptRenderedElsewhere)
     {
-<span class="fc" id="L577">        this.javascriptRenderedElsewhere = javascriptRenderedElsewhere;</span>
-<span class="fc" id="L578">    }</span>
+<span class="fc" id="L575">        this.javascriptRenderedElsewhere = javascriptRenderedElsewhere;</span>
+<span class="fc" id="L576">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

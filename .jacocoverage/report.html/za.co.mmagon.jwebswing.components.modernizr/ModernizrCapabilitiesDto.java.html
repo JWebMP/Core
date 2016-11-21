@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ModernizrCapabilitiesDto.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.modernizr</a> &gt; <span class="el_source">ModernizrCapabilitiesDto.java</span></div><h1>ModernizrCapabilitiesDto.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.modernizr;
+
+import com.fasterxml.jackson.annotation.*;
+
+/**
+ *
+ * @author GedMarc
+ * @since Nov 21, 2016
+ * @version 1.0
+ *
+ */
+public class ModernizrCapabilitiesDto extends ModernizrBrowserDto
+{
+
+    private Boolean fileinput;
+    private Boolean ambientlight;
+    private Boolean hashchange;
+    private Boolean inputsearchevent;
+    private Boolean csscalc;
+    private Boolean cubicbezierrange;
+    private Boolean cssgradients;
+    private Boolean opacity;
+    private Boolean csspositionsticky;
+    private Boolean createelementattrs;
+    @JsonProperty(value = &quot;createelement-attrs&quot;)
+    private Boolean createelement_attrs;
+    private Boolean dataset;
+    private Boolean csschunit;
+    private Boolean cssexunit;
+    private Boolean microdata;
+    private Boolean bdi;
+    private Boolean datalistelem;
+    private Boolean hsla;
+    private Boolean flash;
+    private Boolean hiddenscroll;
+    private Boolean mathml;
+    private Boolean touchevents;
+    private Boolean unicoderange;
+    private Boolean unicode;
+    private Boolean checked;
+    private Boolean displaytable;
+    @JsonProperty(value = &quot;display-table&quot;)
+    private Boolean display_table;
+    private Boolean fontface;
+    private Boolean generatedcontent;
+    private Boolean hairline;
+    private Boolean cssinvalid;
+    private Boolean lastchild;
+    private Boolean nthchild;
+    private Boolean cssscrollbar;
+    private Boolean siblinggeneral;
+    private Boolean subpixelfont;
+    private Boolean cssvalid;
+    private Boolean cssvhunit;
+
+    public ModernizrCapabilitiesDto()
+<span class="nc" id="L73">    {</span>
+
+<span class="nc" id="L75">    }</span>
+
+    /**
+     * Is file input allowed
+     *
+     * @return
+     */
+    public Boolean isFileinput()
+    {
+<span class="nc" id="L84">        return fileinput;</span>
+    }
+
+    /**
+     * Is file input allowed
+     *
+     * @param fileinput
+     */
+    protected void setFileinput(Boolean fileinput)
+    {
+<span class="nc" id="L94">        this.fileinput = fileinput;</span>
+<span class="nc" id="L95">    }</span>
+
+    /**
+     * Is ambient light allowed
+     *
+     * @return
+     */
+    public Boolean isAmbientlight()
+    {
+<span class="nc" id="L104">        return ambientlight;</span>
+    }
+
+    /**
+     * Is ambient light allowed
+     *
+     * @param ambientlight
+     */
+    protected void setAmbientlight(Boolean ambientlight)
+    {
+<span class="nc" id="L114">        this.ambientlight = ambientlight;</span>
+<span class="nc" id="L115">    }</span>
+
+    /**
+     * Is hash changing allowed
+     *
+     * @return
+     */
+    public Boolean isHashchange()
+    {
+<span class="nc" id="L124">        return hashchange;</span>
+    }
+
+    /**
+     * Is hash changing allowed
+     *
+     * @param hashchange
+     */
+    protected void setHashchange(Boolean hashchange)
+    {
+<span class="nc" id="L134">        this.hashchange = hashchange;</span>
+<span class="nc" id="L135">    }</span>
+
+    /**
+     * Is input search event allowed
+     *
+     * @return
+     */
+    public Boolean isInputsearchevent()
+    {
+<span class="nc" id="L144">        return inputsearchevent;</span>
+    }
+
+    /**
+     * Is Input search event allowed
+     *
+     * @param inputsearchevent
+     */
+    protected void setInputsearchevent(Boolean inputsearchevent)
+    {
+<span class="nc" id="L154">        this.inputsearchevent = inputsearchevent;</span>
+<span class="nc" id="L155">    }</span>
+
+    /**
+     * Is CSS calc enabled
+     *
+     * @return
+     */
+    public Boolean isCsscalc()
+    {
+<span class="nc" id="L164">        return csscalc;</span>
+    }
+
+    /**
+     * Is CSS Calc enabled
+     *
+     * @param csscalc
+     */
+    protected void setCsscalc(Boolean csscalc)
+    {
+<span class="nc" id="L174">        this.csscalc = csscalc;</span>
+<span class="nc" id="L175">    }</span>
+
+    /**
+     * Is Cubic Bezier Enabled
+     *
+     * @return
+     */
+    public Boolean isCubicbezierrange()
+    {
+<span class="nc" id="L184">        return cubicbezierrange;</span>
+    }
+
+    /**
+     * Sets if cubic bezier is enabled
+     *
+     * @param cubicbezierrange
+     */
+    protected void setCubicbezierrange(Boolean cubicbezierrange)
+    {
+<span class="nc" id="L194">        this.cubicbezierrange = cubicbezierrange;</span>
+<span class="nc" id="L195">    }</span>
+
+    /**
+     * Is CSS Gradients enabled
+     *
+     * @return
+     */
+    public Boolean isCssgradients()
+    {
+<span class="nc" id="L204">        return cssgradients;</span>
+    }
+
+    /**
+     * Is CSS Gradients enabled
+     *
+     * @param cssgradients
+     */
+    protected void setCssgradients(Boolean cssgradients)
+    {
+<span class="nc" id="L214">        this.cssgradients = cssgradients;</span>
+<span class="nc" id="L215">    }</span>
+
+    /**
+     * Is opacity enabled
+     *
+     * @return
+     */
+    public Boolean isOpacity()
+    {
+<span class="nc" id="L224">        return opacity;</span>
+    }
+
+    /**
+     * Is opacity enabled
+     *
+     * @param opacity
+     */
+    protected void setOpacity(Boolean opacity)
+    {
+<span class="nc" id="L234">        this.opacity = opacity;</span>
+<span class="nc" id="L235">    }</span>
+
+    /**
+     * Is CSS Position Sticky enabled
+     *
+     * @return
+     */
+    public Boolean isCsspositionsticky()
+    {
+<span class="nc" id="L244">        return csspositionsticky;</span>
+    }
+
+    /**
+     * Sets if CSS Position is sticky
+     *
+     * @param csspositionsticky
+     */
+    protected void setCsspositionsticky(Boolean csspositionsticky)
+    {
+<span class="nc" id="L254">        this.csspositionsticky = csspositionsticky;</span>
+<span class="nc" id="L255">    }</span>
+
+    /**
+     * Is Create element attributes allowed
+     *
+     * @return
+     */
+    public Boolean isCreateelementattrs()
+    {
+<span class="nc" id="L264">        return createelementattrs;</span>
+    }
+
+    /**
+     * Is create element attributes allowed
+     *
+     * @param createelementattrs
+     */
+    protected void setCreateelementattrs(Boolean createelementattrs)
+    {
+<span class="nc" id="L274">        this.createelementattrs = createelementattrs;</span>
+<span class="nc" id="L275">    }</span>
+
+    /**
+     * Sets if create elements attr's are allowed
+     *
+     * @return
+     */
+    public Boolean isCreateelementAttrs()
+    {
+<span class="nc" id="L284">        return createelement_attrs;</span>
+    }
+
+    /**
+     * Sets if create element attrs are allowed
+     *
+     * @param createelement_attrs
+     */
+    protected void setCreateelementAttrs(Boolean createelement_attrs)
+    {
+<span class="nc" id="L294">        this.createelement_attrs = createelement_attrs;</span>
+<span class="nc" id="L295">    }</span>
+
+    /**
+     * If datasets are allowed
+     *
+     * @return
+     */
+    public Boolean isDataset()
+    {
+<span class="nc" id="L304">        return dataset;</span>
+    }
+
+    /**
+     * If datasets are allowed
+     *
+     * @param dataset
+     */
+    protected void setDataset(Boolean dataset)
+    {
+<span class="nc" id="L314">        this.dataset = dataset;</span>
+<span class="nc" id="L315">    }</span>
+
+    /**
+     * If CSS CH Units are allowed
+     *
+     * @return
+     */
+    public Boolean isCsschunit()
+    {
+<span class="nc" id="L324">        return csschunit;</span>
+    }
+
+    /**
+     * If CSS CH Units are allowed
+     *
+     * @param csschunit
+     */
+    protected void setCsschunit(Boolean csschunit)
+    {
+<span class="nc" id="L334">        this.csschunit = csschunit;</span>
+<span class="nc" id="L335">    }</span>
+
+    /**
+     * If CSS EX Units are allowed
+     *
+     * @return
+     */
+    public Boolean isCssexunit()
+    {
+<span class="nc" id="L344">        return cssexunit;</span>
+    }
+
+    /**
+     * If CSS Ex Units are allowed
+     *
+     * @param cssexunit
+     */
+    protected void setCssexunit(Boolean cssexunit)
+    {
+<span class="nc" id="L354">        this.cssexunit = cssexunit;</span>
+<span class="nc" id="L355">    }</span>
+
+    /**
+     * Is micro data allowed
+     *
+     * @return
+     */
+    public Boolean isMicrodata()
+    {
+<span class="nc" id="L364">        return microdata;</span>
+    }
+
+    /**
+     * Sets if micro data is allowed
+     *
+     * @param microdata
+     */
+    protected void setMicrodata(Boolean microdata)
+    {
+<span class="nc" id="L374">        this.microdata = microdata;</span>
+<span class="nc" id="L375">    }</span>
+
+    /**
+     * Is BDI Allowed
+     *
+     * @return
+     */
+    public Boolean isBdi()
+    {
+<span class="nc" id="L384">        return bdi;</span>
+    }
+
+    /**
+     * Sets if BDI Is allowed
+     *
+     * @param bdi
+     */
+    protected void setBdi(Boolean bdi)
+    {
+<span class="nc" id="L394">        this.bdi = bdi;</span>
+<span class="nc" id="L395">    }</span>
+
+    /**
+     * If Data List Elem is allowed
+     *
+     * @return
+     */
+    public Boolean isDatalistelem()
+    {
+<span class="nc" id="L404">        return datalistelem;</span>
+    }
+
+    /**
+     * If data list elem is allowed
+     *
+     * @param datalistelem
+     */
+    protected void setDatalistelem(Boolean datalistelem)
+    {
+<span class="nc" id="L414">        this.datalistelem = datalistelem;</span>
+<span class="nc" id="L415">    }</span>
+
+    /**
+     * Is HSLA Allowed
+     *
+     * @return
+     */
+    public Boolean isHsla()
+    {
+<span class="nc" id="L424">        return hsla;</span>
+    }
+
+    /**
+     * Is HSLA Allowed
+     *
+     * @param hsla
+     */
+    protected void setHsla(Boolean hsla)
+    {
+<span class="nc" id="L434">        this.hsla = hsla;</span>
+<span class="nc" id="L435">    }</span>
+
+    /**
+     * Is Flash Allowed
+     *
+     * @return
+     */
+    public Boolean isFlash()
+    {
+<span class="nc" id="L444">        return flash;</span>
+    }
+
+    /**
+     * Is flash allowed
+     *
+     * @param flash
+     */
+    protected void setFlash(Boolean flash)
+    {
+<span class="nc" id="L454">        this.flash = flash;</span>
+<span class="nc" id="L455">    }</span>
+
+    /**
+     * Is hidden scroll allowed
+     *
+     * @return
+     */
+    public Boolean isHiddenscroll()
+    {
+<span class="nc" id="L464">        return hiddenscroll;</span>
+    }
+
+    /**
+     * If hidden scroll is allowed
+     *
+     * @param hiddenscroll
+     */
+    protected void setHiddenscroll(Boolean hiddenscroll)
+    {
+<span class="nc" id="L474">        this.hiddenscroll = hiddenscroll;</span>
+<span class="nc" id="L475">    }</span>
+
+    /**
+     * Is Math allowed
+     *
+     * @return
+     */
+    public Boolean isMathml()
+    {
+<span class="nc" id="L484">        return mathml;</span>
+    }
+
+    /**
+     * Is math allowed
+     *
+     * @param mathml
+     */
+    protected void setMathml(Boolean mathml)
+    {
+<span class="nc" id="L494">        this.mathml = mathml;</span>
+<span class="nc" id="L495">    }</span>
+
+    /**
+     * Are touch events allowed
+     *
+     * @return
+     */
+    public Boolean isTouchevents()
+    {
+<span class="nc" id="L504">        return touchevents;</span>
+    }
+
+    /**
+     * are touch events allowed
+     *
+     * @param touchevents
+     */
+    protected void setTouchevents(Boolean touchevents)
+    {
+<span class="nc" id="L514">        this.touchevents = touchevents;</span>
+<span class="nc" id="L515">    }</span>
+
+    /**
+     * Is Unicode Range allowed
+     *
+     * @return
+     */
+    public Boolean isUnicoderange()
+    {
+<span class="nc" id="L524">        return unicoderange;</span>
+    }
+
+    /**
+     * Is uni-code range allowed
+     *
+     * @param unicoderange
+     */
+    protected void setUnicoderange(Boolean unicoderange)
+    {
+<span class="nc" id="L534">        this.unicoderange = unicoderange;</span>
+<span class="nc" id="L535">    }</span>
+
+    /**
+     * Is Unicode allowed
+     *
+     * @return
+     */
+    public Boolean isUnicode()
+    {
+<span class="nc" id="L544">        return unicode;</span>
+    }
+
+    /**
+     * Is Unicode allowed
+     *
+     * @param unicode
+     */
+    protected void setUnicode(Boolean unicode)
+    {
+<span class="nc" id="L554">        this.unicode = unicode;</span>
+<span class="nc" id="L555">    }</span>
+
+    /**
+     * Is checked allowed
+     *
+     * @return
+     */
+    public Boolean isChecked()
+    {
+<span class="nc" id="L564">        return checked;</span>
+    }
+
+    /**
+     * if checked allowed
+     *
+     * @param checked
+     */
+    protected void setChecked(Boolean checked)
+    {
+<span class="nc" id="L574">        this.checked = checked;</span>
+<span class="nc" id="L575">    }</span>
+
+    /**
+     * Is display tables allowed
+     *
+     * @return
+     */
+    public Boolean isDisplaytable()
+    {
+<span class="nc" id="L584">        return displaytable;</span>
+    }
+
+    /**
+     * Sets if display tables are allowed
+     *
+     * @param displaytable
+     */
+    protected void setDisplaytable(Boolean displaytable)
+    {
+<span class="nc" id="L594">        this.displaytable = displaytable;</span>
+<span class="nc" id="L595">    }</span>
+
+    /**
+     * If display table is allowed
+     *
+     * @return
+     */
+    public Boolean isDisplayTable()
+    {
+<span class="nc" id="L604">        return display_table;</span>
+    }
+
+    /**
+     * If display table is allowed
+     *
+     * @param display_table
+     */
+    protected void setDisplayTable(Boolean display_table)
+    {
+<span class="nc" id="L614">        this.display_table = display_table;</span>
+<span class="nc" id="L615">    }</span>
+
+    /**
+     * If font faces are allowed
+     *
+     * @return
+     */
+    public Boolean isFontface()
+    {
+<span class="nc" id="L624">        return fontface;</span>
+    }
+
+    /**
+     * If font faces are allowed
+     *
+     * @param fontface
+     */
+    protected void setFontface(Boolean fontface)
+    {
+<span class="nc" id="L634">        this.fontface = fontface;</span>
+<span class="nc" id="L635">    }</span>
+
+    /**
+     * Is generated content allowed
+     *
+     * @return
+     */
+    public Boolean isGeneratedcontent()
+    {
+<span class="nc" id="L644">        return generatedcontent;</span>
+    }
+
+    /**
+     * Is generated content allowed
+     *
+     * @param generatedcontent
+     */
+    protected void setGeneratedcontent(Boolean generatedcontent)
+    {
+<span class="nc" id="L654">        this.generatedcontent = generatedcontent;</span>
+<span class="nc" id="L655">    }</span>
+
+    /*
+     * Is hair line allowed
+     */
+    public Boolean isHairline()
+    {
+<span class="nc" id="L662">        return hairline;</span>
+    }
+
+    /**
+     * Is hair line allowed
+     *
+     * @param hairline
+     */
+    protected void setHairline(Boolean hairline)
+    {
+<span class="nc" id="L672">        this.hairline = hairline;</span>
+<span class="nc" id="L673">    }</span>
+
+    /**
+     * Is CSS Invalid
+     *
+     * @return
+     */
+    public Boolean isCssinvalid()
+    {
+<span class="nc" id="L682">        return cssinvalid;</span>
+    }
+
+    /**
+     * Is CSS Invalid
+     *
+     * @param cssinvalid
+     */
+    protected void setCssinvalid(Boolean cssinvalid)
+    {
+<span class="nc" id="L692">        this.cssinvalid = cssinvalid;</span>
+<span class="nc" id="L693">    }</span>
+
+    /**
+     * Is last child elements allowed
+     *
+     * @return
+     */
+    public Boolean isLastchild()
+    {
+<span class="nc" id="L702">        return lastchild;</span>
+    }
+
+    /**
+     * Sets if last child elements are allowed
+     *
+     * @param lastchild
+     */
+    protected void setLastchild(Boolean lastchild)
+    {
+<span class="nc" id="L712">        this.lastchild = lastchild;</span>
+<span class="nc" id="L713">    }</span>
+
+    /**
+     * Is number child allocations allowed
+     *
+     * @return
+     */
+    public Boolean isNthchild()
+    {
+<span class="nc" id="L722">        return nthchild;</span>
+    }
+
+    /**
+     * Is number child allocations allowed
+     *
+     * @param nthchild
+     */
+    protected void setNthchild(Boolean nthchild)
+    {
+<span class="nc" id="L732">        this.nthchild = nthchild;</span>
+<span class="nc" id="L733">    }</span>
+
+    /**
+     * Is a CSS scroll bar allowed
+     *
+     * @return
+     */
+    public Boolean isCssscrollbar()
+    {
+<span class="nc" id="L742">        return cssscrollbar;</span>
+    }
+
+    /**
+     * Is the CSS Scroll bar allowed
+     *
+     * @param cssscrollbar
+     */
+    protected void setCssscrollbar(Boolean cssscrollbar)
+    {
+<span class="nc" id="L752">        this.cssscrollbar = cssscrollbar;</span>
+<span class="nc" id="L753">    }</span>
+
+    /**
+     * Is sibling general CSS allowed
+     *
+     * @return
+     */
+    public Boolean isSiblinggeneral()
+    {
+<span class="nc" id="L762">        return siblinggeneral;</span>
+    }
+
+    /**
+     * Is sibling general allowed
+     *
+     * @param siblinggeneral
+     */
+    protected void setSiblinggeneral(Boolean siblinggeneral)
+    {
+<span class="nc" id="L772">        this.siblinggeneral = siblinggeneral;</span>
+<span class="nc" id="L773">    }</span>
+
+    /**
+     * Is Sub Pixel Font allowed
+     *
+     * @return
+     */
+    public Boolean isSubpixelfont()
+    {
+<span class="nc" id="L782">        return subpixelfont;</span>
+    }
+
+    /**
+     * Is Subpixel font allowed
+     *
+     * @param subpixelfont
+     */
+    protected void setSubpixelfont(Boolean subpixelfont)
+    {
+<span class="nc" id="L792">        this.subpixelfont = subpixelfont;</span>
+<span class="nc" id="L793">    }</span>
+
+    /**
+     * Is CSS Valid allowed
+     *
+     * @return
+     */
+    public Boolean isCssvalid()
+    {
+<span class="nc" id="L802">        return cssvalid;</span>
+    }
+
+    /**
+     * Is CSS Valid allowed
+     *
+     * @param cssvalid
+     */
+    protected void setCssvalid(Boolean cssvalid)
+    {
+<span class="nc" id="L812">        this.cssvalid = cssvalid;</span>
+<span class="nc" id="L813">    }</span>
+
+    /**
+     * Is vh units allowed
+     *
+     * @return
+     */
+    public Boolean isCssvhunit()
+    {
+<span class="nc" id="L822">        return cssvhunit;</span>
+    }
+
+    /**
+     * Is vh units allowed
+     *
+     * @param cssvhunit
+     */
+    protected void setCssvhunit(Boolean cssvhunit)
+    {
+<span class="nc" id="L832">        this.cssvhunit = cssvhunit;</span>
+<span class="nc" id="L833">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

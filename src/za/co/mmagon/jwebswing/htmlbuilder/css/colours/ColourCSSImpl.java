@@ -10,7 +10,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
  * @author Marc Magon
  */
 public class ColourCSSImpl extends CSSImplementationAdapter<ColourCSS, ColourCSSImpl>
-        implements Serializable, CSSImplementationValue
+        implements Serializable, CSSImplementationValue, CSSImplementationClass<ColourCSS, ColourCSSImpl>
 {
 
     /**
@@ -69,7 +69,7 @@ public class ColourCSSImpl extends CSSImplementationAdapter<ColourCSS, ColourCSS
     @Override
     public String toString()
     {
-        return value;
+        return value == null ? "" : value;
     }
 
 }

@@ -16,16 +16,14 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import org.junit.Assert;
-import org.junit.Test;
-import za.co.mmagon.jwebswing.Event;
-import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
-import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
-import za.co.mmagon.jwebswing.base.events.click.ClickAdapter;
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.interfaces.ComponentHTMLBase;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.pools.jquery.JQueryReferencePool;
+import org.junit.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.ajax.*;
+import za.co.mmagon.jwebswing.base.events.click.*;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.base.interfaces.*;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
+import za.co.mmagon.jwebswing.components.pools.jquery.*;
 
 /**
  *
@@ -46,18 +44,19 @@ public class ComponentHTMLBaseTest
         tag.setID("testTag");
         //System.out.println(tag.toString());
         System.out.println(tag.toString(4));
-        Assert.assertEquals("				<area id=\"testTag\"/>", tag.toString(4).toString());
+        Assert.assertEquals("				<area id=\"testTag\">\n"
+                + "				</area>", tag.toString(4).toString());
     }
 
     @Test
     public void testInlineClosingTagTiny()
     {
         ComponentHTMLBase tag = new ComponentHTMLAttributeBase(ComponentTypes.Area);
-       // tag.setInlineClosingTag(true);
+        // tag.setInlineClosingTag(true);
         tag.setTiny(true);
         tag.setID("testTag");
         System.out.println(tag.toString(4));
-        Assert.assertEquals("<area id=\"testTag\"/>", tag.toString(4).toString());
+        Assert.assertEquals("<area id=\"testTag\"></area>", tag.toString(4).toString());
     }
 
     @Test
@@ -127,6 +126,7 @@ public class ComponentHTMLBaseTest
                 + "  \"componentType\" : \"abbreviation\",\n"
                 + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
+                + "  \"initialized\" : true,\n"
                 + "  \"javascriptReferences\" : [ {\n"
                 + "    \"name\" : \"JQuery\",\n"
                 + "    \"version\" : 2.24,\n"
@@ -134,14 +134,18 @@ public class ComponentHTMLBaseTest
                 + "  } ],\n"
                 + "  \"sortOrder\" : 1000,\n"
                 + "  \"renderAfterLoad\" : false,\n"
+                + "  \"javascriptRenderedElsewhere\" : false,\n"
                 + "  \"events\" : [ {\n"
                 + "    \"id\" : \"clickEvent\",\n"
                 + "    \"componentType\" : \"event\",\n"
                 + "    \"tiny\" : false,\n"
                 + "    \"configured\" : true,\n"
+                + "    \"initialized\" : true,\n"
                 + "    \"sortOrder\" : 1000,\n"
+                + "    \"variables\" : [ ],\n"
                 + "    \"name\" : \"click\",\n"
                 + "    \"renderAfterLoad\" : false,\n"
+                + "    \"javascriptRenderedElsewhere\" : false,\n"
                 + "    \"touched\" : false,\n"
                 + "    \"eventType\" : \"click\"\n"
                 + "  } ],\n"
@@ -152,6 +156,7 @@ public class ComponentHTMLBaseTest
                 + "  \"componentType\" : \"abbreviation\",\n"
                 + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
+                + "  \"initialized\" : true,\n"
                 + "  \"javascriptReferences\" : [ {\n"
                 + "    \"name\" : \"JQuery\",\n"
                 + "    \"version\" : 2.24,\n"
@@ -159,14 +164,18 @@ public class ComponentHTMLBaseTest
                 + "  } ],\n"
                 + "  \"sortOrder\" : 1000,\n"
                 + "  \"renderAfterLoad\" : false,\n"
+                + "  \"javascriptRenderedElsewhere\" : false,\n"
                 + "  \"events\" : [ {\n"
                 + "    \"id\" : \"clickEvent\",\n"
                 + "    \"componentType\" : \"event\",\n"
                 + "    \"tiny\" : false,\n"
                 + "    \"configured\" : true,\n"
+                + "    \"initialized\" : true,\n"
                 + "    \"sortOrder\" : 1000,\n"
+                + "    \"variables\" : [ ],\n"
                 + "    \"name\" : \"click\",\n"
                 + "    \"renderAfterLoad\" : false,\n"
+                + "    \"javascriptRenderedElsewhere\" : false,\n"
                 + "    \"touched\" : false,\n"
                 + "    \"eventType\" : \"click\"\n"
                 + "  } ],\n"

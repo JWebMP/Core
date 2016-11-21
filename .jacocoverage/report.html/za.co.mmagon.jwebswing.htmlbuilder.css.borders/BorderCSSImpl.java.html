@@ -68,14 +68,14 @@ public class BorderCSSImpl extends CSSImplementationAdapter&lt;BorderCSS, Border
     private MeasurementCSSImpl borderTopWidth;
 
     @CSSDetail(cssName = &quot;border&quot;, cssVersion = CSSVersions.CSS21)
-    private Border border;
-    private BorderBottomCSS borderBottom;
+    private BorderImpl border;
+    private BorderBottomCSSImpl borderBottom;
     @CSSDetail(cssName = &quot;border-left&quot;, cssVersion = CSSVersions.CSS21)
-    private BorderBottomCSS borderLeft;
+    private BorderBottomCSSImpl borderLeft;
     @CSSDetail(cssName = &quot;border-right&quot;, cssVersion = CSSVersions.CSS21)
-    private BorderBottomCSS borderRight;
+    private BorderBottomCSSImpl borderRight;
     @CSSDetail(cssName = &quot;border-top&quot;, cssVersion = CSSVersions.CSS21)
-    private BorderBottomCSS borderTop;
+    private BorderBottomCSSImpl borderTop;
 
     private static final long serialVersionUID = 1L;
 
@@ -252,7 +252,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter&lt;BorderCSS, Border
      *
      * @return
      */
-    public Border getBorder()
+    public BorderImpl getBorder()
     {
 <span class="nc" id="L257">        return border;</span>
     }
@@ -262,7 +262,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter&lt;BorderCSS, Border
      *
      * @return
      */
-    public BorderBottomCSS getBorderBottom()
+    public BorderBottomCSSImpl getBorderBottom()
     {
 <span class="nc" id="L267">        return borderBottom;</span>
     }
@@ -272,7 +272,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter&lt;BorderCSS, Border
      *
      * @return
      */
-    public BorderBottomCSS getBorderLeft()
+    public BorderBottomCSSImpl getBorderLeft()
     {
 <span class="nc" id="L277">        return borderLeft;</span>
     }
@@ -282,7 +282,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter&lt;BorderCSS, Border
      *
      * @return
      */
-    public BorderBottomCSS getBorderRight()
+    public BorderBottomCSSImpl getBorderRight()
     {
 <span class="nc" id="L287">        return borderRight;</span>
     }
@@ -292,7 +292,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter&lt;BorderCSS, Border
      *
      * @return
      */
-    public BorderBottomCSS getBorderTop()
+    public BorderBottomCSSImpl getBorderTop()
     {
 <span class="nc" id="L297">        return borderTop;</span>
     }
@@ -462,7 +462,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter&lt;BorderCSS, Border
      *
      * @param border
      */
-    public void setBorder(Border border)
+    public void setBorder(BorderImpl border)
     {
 <span class="nc" id="L467">        this.border = border;</span>
 <span class="nc" id="L468">    }</span>
@@ -472,7 +472,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter&lt;BorderCSS, Border
      *
      * @param borderBottom
      */
-    public void setBorderBottom(BorderBottomCSS borderBottom)
+    public void setBorderBottom(BorderBottomCSSImpl borderBottom)
     {
 <span class="nc" id="L477">        this.borderBottom = borderBottom;</span>
 <span class="nc" id="L478">    }</span>
@@ -482,7 +482,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter&lt;BorderCSS, Border
      *
      * @param borderLeft
      */
-    public void setBorderLeft(BorderBottomCSS borderLeft)
+    public void setBorderLeft(BorderBottomCSSImpl borderLeft)
     {
 <span class="nc" id="L487">        this.borderLeft = borderLeft;</span>
 <span class="nc" id="L488">    }</span>
@@ -492,7 +492,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter&lt;BorderCSS, Border
      *
      * @param borderRight
      */
-    public void setBorderRight(BorderBottomCSS borderRight)
+    public void setBorderRight(BorderBottomCSSImpl borderRight)
     {
 <span class="nc" id="L497">        this.borderRight = borderRight;</span>
 <span class="nc" id="L498">    }</span>
@@ -502,7 +502,7 @@ public class BorderCSSImpl extends CSSImplementationAdapter&lt;BorderCSS, Border
      *
      * @param borderTop
      */
-    public void setBorderTop(BorderBottomCSS borderTop)
+    public void setBorderTop(BorderBottomCSSImpl borderTop)
     {
 <span class="nc" id="L507">        this.borderTop = borderTop;</span>
 <span class="nc" id="L508">    }</span>

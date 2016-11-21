@@ -16,20 +16,15 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import za.co.mmagon.LoggerFactory;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
-import za.co.mmagon.jwebswing.base.interfaces.IComponentEventBase;
-import za.co.mmagon.jwebswing.base.references.CSSReference;
-import za.co.mmagon.jwebswing.base.references.JavascriptReference;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+import com.fasterxml.jackson.annotation.*;
+import java.util.*;
+import za.co.mmagon.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
+import za.co.mmagon.jwebswing.base.interfaces.*;
+import za.co.mmagon.jwebswing.base.references.*;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.*;
 
 /**
  * Enables Events in the Component Tree Hierarchy
@@ -37,7 +32,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTy
  * @author GedMarc
  * @param <F> The Features TYpe
  * @param <E> The Events Type
- * @param <J> This Type 
+ * @param <J> This Type
+ *
  * @since 23 Apr 2013
  * @version 2.0
  */
@@ -91,7 +87,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
     /**
      * Constructs a new event type for component type
      *
-     * @param eventType The Event Type being applied
+     * @param eventType     The Event Type being applied
      * @param componentType The component type of this component
      */
     public ComponentEventBase(EventTypes eventType, ComponentTypes componentType)
@@ -169,16 +165,20 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
     @Override
     public void preConfigure()
     {
+        if (!isInitialized())
+        {
+            init();
+        }
         if (!isConfigured())
         {
             getEvents().stream().forEach(event
-                    -> 
-                    {
-                        if (!ComponentEventBase.class.cast(event).isConfigured())
-                        {
-                            ComponentEventBase.class.cast(event).preConfigure();
-                            assignFunctionsToComponent();
-                        }
+                    ->
+            {
+                if (!ComponentEventBase.class.cast(event).isConfigured())
+                {
+                    ComponentEventBase.class.cast(event).preConfigure();
+                    assignFunctionsToComponent();
+                }
             });
         }
         super.preConfigure();
@@ -195,16 +195,16 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
     {
         List<JavascriptReference> allJs = super.getJavascriptReferencesAll();
         getEvents().stream().forEach(feature
-                -> 
+                ->
+        {
+            for (Iterator<JavascriptReference> it = ComponentEventBase.class.cast(feature).getJavascriptReferencesAll().iterator(); it.hasNext();)
+            {
+                JavascriptReference js = it.next();
+                if (!allJs.contains(js))
                 {
-                    for (Iterator<JavascriptReference> it = ComponentEventBase.class.cast(feature).getJavascriptReferencesAll().iterator(); it.hasNext();)
-                    {
-                        JavascriptReference js = it.next();
-                        if (!allJs.contains(js))
-                        {
-                            allJs.add(js);
-                        }
-                    }
+                    allJs.add(js);
+                }
+            }
         });
         return allJs;
     }
@@ -219,16 +219,16 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
     {
         List<CSSReference> allCss = super.getCssReferencesAll();
         getEvents().stream().forEach((E feature)
-                -> 
+                ->
+        {
+            for (Iterator<CSSReference> it = ComponentEventBase.class.cast(feature).getCssReferencesAll().iterator(); it.hasNext();)
+            {
+                CSSReference css = it.next();
+                if (!allCss.contains(css))
                 {
-                    for (Iterator<CSSReference> it = ComponentEventBase.class.cast(feature).getCssReferencesAll().iterator(); it.hasNext();)
-                    {
-                        CSSReference css = it.next();
-                        if (!allCss.contains(css))
-                        {
-                            allCss.add(css);
-                        }
-                    }
+                    allCss.add(css);
+                }
+            }
         });
         return allCss;
     }
@@ -278,7 +278,8 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
      * Mark this component as needing refresh to the Ajax Controller
      * <p>
      * @param touched Whether or not to update on next ajax call
-     * @return 
+     *
+     * @return
      */
     @Override
     public J setTouched(boolean touched)
@@ -291,6 +292,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
      * Returns all the events associated with the given type
      *
      * @param eventType
+     *
      * @return
      */
     @Override
@@ -307,38 +309,44 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
         }
         return output;
     }
-    
+
     /**
      * Returns an event with the given Id
+     *
      * @param eventId
-     * @return 
+     *
+     * @return
      */
     public ComponentEventBase getEvent(String eventId)
     {
         for (Iterator<E> iterator = getEvents().iterator(); iterator.hasNext();)
         {
-            ComponentEventBase next = (ComponentEventBase)iterator.next();
-            if(next.getID().equals(eventId))
+            ComponentEventBase next = (ComponentEventBase) iterator.next();
+            if (next.getID().equals(eventId))
+            {
                 return next;
+            }
         }
         return null;
     }
 
     /**
      * Sets this component and all its children components tiny
+     *
      * @param tiny
-     * @return 
+     *
+     * @return
      */
     @Override
     public J setTiny(boolean tiny)
     {
-        
+
         for (Iterator<E> iterator = getEvents().iterator(); iterator.hasNext();)
         {
             ComponentEventBase next = (ComponentEventBase) iterator.next();
             next.setTiny(tiny);
         }
-        return (J)super.setTiny(tiny);
+        return (J) super.setTiny(tiny);
     }
 
     /**

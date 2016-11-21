@@ -75,22 +75,22 @@ public class JQLayout extends Feature&lt;JQLayoutOptions, JQLayout&gt; implement
     {
 <span class="pc bpc" id="L76" title="1 of 2 branches missed.">        if (!isInitialized())</span>
         {
-<span class="nc" id="L78">            panes.entrySet().stream().map((entry) -&gt;</span>
+<span class="fc" id="L78">            getPanes().entrySet().stream().map((entry) -&gt;</span>
             {
 <span class="nc" id="L80">                JQLayoutArea key = entry.getKey();</span>
 <span class="nc" id="L81">                return entry;</span>
-<span class="nc" id="L82">            }).map((entry) -&gt; entry.getValue()).map((value) -&gt;</span>
+<span class="pc" id="L82">            }).map((entry) -&gt; entry.getValue()).map((value) -&gt;</span>
             {
 <span class="nc" id="L84">                value.init();</span>
 <span class="nc" id="L85">                return value;</span>
-<span class="nc" id="L86">            }).forEachOrdered((value) -&gt;</span>
+<span class="fc" id="L86">            }).forEachOrdered((value) -&gt;</span>
             {
 <span class="nc" id="L88">                getComponent().add(value);</span>
 <span class="nc" id="L89">            });</span>
         }
 
-<span class="nc" id="L92">        super.init();</span>
-<span class="nc" id="L93">    }</span>
+<span class="fc" id="L92">        super.init();</span>
+<span class="fc" id="L93">    }</span>
 
     /**
      * Configures the feature
@@ -98,17 +98,17 @@ public class JQLayout extends Feature&lt;JQLayoutOptions, JQLayout&gt; implement
     @Override
     public void preConfigure()
     {
-<span class="nc bnc" id="L101" title="All 2 branches missed.">        if (!isInitialized())</span>
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">        if (!isInitialized())</span>
         {
 <span class="nc" id="L103">            init();</span>
         }
-<span class="nc bnc" id="L105" title="All 2 branches missed.">        if (!isConfigured())</span>
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">        if (!isConfigured())</span>
         {
-<span class="nc" id="L107">            getComponent().getPage().setjQueryEnabled(true);</span>
-<span class="nc" id="L108">            getComponent().getPage().setjQueryUIEnabled(true);</span>
+<span class="fc" id="L107">            getComponent().getPage().setjQueryEnabled(true);</span>
+<span class="fc" id="L108">            getComponent().getPage().setjQueryUIEnabled(true);</span>
         }
-<span class="nc" id="L110">        super.preConfigure();</span>
-<span class="nc" id="L111">    }</span>
+<span class="fc" id="L110">        super.preConfigure();</span>
+<span class="fc" id="L111">    }</span>
 
     /**
      * Write the layout options
@@ -116,28 +116,27 @@ public class JQLayout extends Feature&lt;JQLayoutOptions, JQLayout&gt; implement
     @Override
     public void assignFunctionsToComponent()
     {
-<span class="nc" id="L119">        StringBuilder sb = new StringBuilder(&quot;var lay_&quot; + </span>
-<span class="nc" id="L120">                getComponent().getID() + </span>
-                &quot; = &quot; + 
-<span class="nc" id="L122">                getComponent().getJQueryID() + </span>
-<span class="nc" id="L123">                &quot;layout(&quot; + getNewLine());</span>
-<span class="nc" id="L124">        sb.append(getOptions());</span>
-<span class="nc" id="L125">        sb.append(&quot;);&quot;);</span>
-<span class="nc" id="L126">        addQuery(sb.toString());</span>
-<span class="nc" id="L127">    }</span>
+<span class="fc" id="L119">        StringBuilder sb = new StringBuilder(&quot;var lay_&quot;</span>
+<span class="fc" id="L120">                + getComponent().getID()</span>
+                + &quot; = &quot;
+<span class="fc" id="L122">                + getComponent().getJQueryID()</span>
+<span class="fc" id="L123">                + &quot;layout(&quot; + getNewLine());</span>
+<span class="fc" id="L124">        sb.append(getOptions());</span>
+<span class="fc" id="L125">        sb.append(&quot;);&quot;);</span>
+<span class="fc" id="L126">        addQuery(sb.toString());</span>
+<span class="fc" id="L127">    }</span>
 
     /**
-     * Sets the variable ID.
-     * Adds 'lay_' in front and takes all hyphens (-) into underscores (_)
+     * Sets the variable ID. Adds 'lay_' in front and takes all hyphens (-) into underscores (_)
      *
      * @param variableID
      */
     @Override
     public final void setVariableID(String variableID)
     {
-<span class="fc" id="L138">        this.variableID = &quot;lay_&quot; + variableID.replace('-', '_');</span>
-<span class="fc" id="L139">        getComponent().addVariable(this.variableID);</span>
-<span class="fc" id="L140">    }</span>
+<span class="fc" id="L137">        this.variableID = &quot;lay_&quot; + variableID.replace('-', '_');</span>
+<span class="fc" id="L138">        getComponent().addVariable(this.variableID);</span>
+<span class="fc" id="L139">    }</span>
 
     /**
      * Returns the variable ID
@@ -147,7 +146,7 @@ public class JQLayout extends Feature&lt;JQLayoutOptions, JQLayout&gt; implement
     @Override
     public String getVariableID()
     {
-<span class="nc" id="L150">        return variableID;</span>
+<span class="nc" id="L149">        return variableID;</span>
     }
 
     /**
@@ -158,12 +157,12 @@ public class JQLayout extends Feature&lt;JQLayoutOptions, JQLayout&gt; implement
     @Override
     public JQLayoutOptions getOptions()
     {
-<span class="nc bnc" id="L161" title="All 2 branches missed.">        if (options == null)</span>
+<span class="pc bpc" id="L160" title="1 of 2 branches missed.">        if (options == null)</span>
         {
-<span class="nc" id="L163">            options = new JQLayoutOptions();</span>
+<span class="fc" id="L162">            options = new JQLayoutOptions();</span>
         }
 
-<span class="nc" id="L166">        return options;</span>
+<span class="fc" id="L165">        return options;</span>
     }
 
     /**
@@ -174,11 +173,11 @@ public class JQLayout extends Feature&lt;JQLayoutOptions, JQLayout&gt; implement
     @Override
     public JQLayoutDiv getCenter()
     {
-<span class="nc bnc" id="L177" title="All 2 branches missed.">        if (getPane(JQLayoutArea.Center) == null)</span>
+<span class="nc bnc" id="L176" title="All 2 branches missed.">        if (getPane(JQLayoutArea.Center) == null)</span>
         {
-<span class="nc" id="L179">            getPanes().put(JQLayoutArea.Center, new JQLayoutDiv(this, JQLayoutArea.Center, null));</span>
+<span class="nc" id="L178">            getPanes().put(JQLayoutArea.Center, new JQLayoutDiv(this, JQLayoutArea.Center, null));</span>
         }
-<span class="nc" id="L181">        return getPanes().get(JQLayoutArea.Center);</span>
+<span class="nc" id="L180">        return getPanes().get(JQLayoutArea.Center);</span>
     }
 
     /**
@@ -189,8 +188,8 @@ public class JQLayout extends Feature&lt;JQLayoutOptions, JQLayout&gt; implement
     @Override
     public void setCenter(JQLayoutDiv centerDiv)
     {
-<span class="nc" id="L192">        getPanes().put(JQLayoutArea.Center, centerDiv);</span>
-<span class="nc" id="L193">    }</span>
+<span class="nc" id="L191">        getPanes().put(JQLayoutArea.Center, centerDiv);</span>
+<span class="nc" id="L192">    }</span>
 
     /**
      * Returns the center pane
@@ -200,11 +199,11 @@ public class JQLayout extends Feature&lt;JQLayoutOptions, JQLayout&gt; implement
     @Override
     public JQLayoutDiv getNorth()
     {
-<span class="nc bnc" id="L203" title="All 2 branches missed.">        if (getPane(JQLayoutArea.North) == null)</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">        if (getPane(JQLayoutArea.North) == null)</span>
         {
-<span class="nc" id="L205">            getPanes().put(JQLayoutArea.North, new JQLayoutDiv(this, JQLayoutArea.North, null));</span>
+<span class="nc" id="L204">            getPanes().put(JQLayoutArea.North, new JQLayoutDiv(this, JQLayoutArea.North, null));</span>
         }
-<span class="nc" id="L207">        return getPanes().get(JQLayoutArea.North);</span>
+<span class="nc" id="L206">        return getPanes().get(JQLayoutArea.North);</span>
     }
 
     /**
@@ -215,8 +214,8 @@ public class JQLayout extends Feature&lt;JQLayoutOptions, JQLayout&gt; implement
     @Override
     public void setNorth(JQLayoutDiv centerDiv)
     {
-<span class="nc" id="L218">        getPanes().put(JQLayoutArea.North, centerDiv);</span>
-<span class="nc" id="L219">    }</span>
+<span class="nc" id="L217">        getPanes().put(JQLayoutArea.North, centerDiv);</span>
+<span class="nc" id="L218">    }</span>
 
     /**
      * Returns the south pane
@@ -226,12 +225,12 @@ public class JQLayout extends Feature&lt;JQLayoutOptions, JQLayout&gt; implement
     @Override
     public JQLayoutDiv getSouth()
     {
-<span class="nc bnc" id="L229" title="All 2 branches missed.">        if (getPane(JQLayoutArea.South) == null)</span>
+<span class="nc bnc" id="L228" title="All 2 branches missed.">        if (getPane(JQLayoutArea.South) == null)</span>
         {
-<span class="nc" id="L231">            getPanes().put(JQLayoutArea.South, new JQLayoutDiv(this, JQLayoutArea.South, null));</span>
+<span class="nc" id="L230">            getPanes().put(JQLayoutArea.South, new JQLayoutDiv(this, JQLayoutArea.South, null));</span>
         }
 
-<span class="nc" id="L234">        return getPanes().get(JQLayoutArea.South);</span>
+<span class="nc" id="L233">        return getPanes().get(JQLayoutArea.South);</span>
     }
 
     /**
@@ -242,8 +241,8 @@ public class JQLayout extends Feature&lt;JQLayoutOptions, JQLayout&gt; implement
     @Override
     public void setSouth(JQLayoutDiv southDiv)
     {
-<span class="nc" id="L245">        getPanes().put(JQLayoutArea.Center, southDiv);</span>
-<span class="nc" id="L246">    }</span>
+<span class="nc" id="L244">        getPanes().put(JQLayoutArea.Center, southDiv);</span>
+<span class="nc" id="L245">    }</span>
 
     /**
      * Returns the center pane
@@ -253,12 +252,12 @@ public class JQLayout extends Feature&lt;JQLayoutOptions, JQLayout&gt; implement
     @Override
     public JQLayoutDiv getWest()
     {
-<span class="nc bnc" id="L256" title="All 2 branches missed.">        if (getPane(JQLayoutArea.West) == null)</span>
+<span class="nc bnc" id="L255" title="All 2 branches missed.">        if (getPane(JQLayoutArea.West) == null)</span>
         {
-<span class="nc" id="L258">            getPanes().put(JQLayoutArea.West, new JQLayoutDiv(this, JQLayoutArea.West, null));</span>
+<span class="nc" id="L257">            getPanes().put(JQLayoutArea.West, new JQLayoutDiv(this, JQLayoutArea.West, null));</span>
         }
 
-<span class="nc" id="L261">        return getPanes().get(JQLayoutArea.West);</span>
+<span class="nc" id="L260">        return getPanes().get(JQLayoutArea.West);</span>
     }
 
     /**
@@ -269,8 +268,8 @@ public class JQLayout extends Feature&lt;JQLayoutOptions, JQLayout&gt; implement
     @Override
     public void setWest(JQLayoutDiv westDiv)
     {
-<span class="nc" id="L272">        getPanes().put(JQLayoutArea.West, westDiv);</span>
-<span class="nc" id="L273">    }</span>
+<span class="nc" id="L271">        getPanes().put(JQLayoutArea.West, westDiv);</span>
+<span class="nc" id="L272">    }</span>
 
     /**
      * Returns the center pane
@@ -280,12 +279,12 @@ public class JQLayout extends Feature&lt;JQLayoutOptions, JQLayout&gt; implement
     @Override
     public JQLayoutDiv getEast()
     {
-<span class="nc bnc" id="L283" title="All 2 branches missed.">        if (getPane(JQLayoutArea.East) == null)</span>
+<span class="nc bnc" id="L282" title="All 2 branches missed.">        if (getPane(JQLayoutArea.East) == null)</span>
         {
-<span class="nc" id="L285">            getPanes().put(JQLayoutArea.East, new JQLayoutDiv(this, JQLayoutArea.East, null));</span>
+<span class="nc" id="L284">            getPanes().put(JQLayoutArea.East, new JQLayoutDiv(this, JQLayoutArea.East, null));</span>
         }
 
-<span class="nc" id="L288">        return getPanes().get(JQLayoutArea.East);</span>
+<span class="nc" id="L287">        return getPanes().get(JQLayoutArea.East);</span>
     }
 
     /**
@@ -296,8 +295,8 @@ public class JQLayout extends Feature&lt;JQLayoutOptions, JQLayout&gt; implement
     @Override
     public void setEast(JQLayoutDiv eastDiv)
     {
-<span class="nc" id="L299">        getPanes().put(JQLayoutArea.East, eastDiv);</span>
-<span class="nc" id="L300">    }</span>
+<span class="nc" id="L298">        getPanes().put(JQLayoutArea.East, eastDiv);</span>
+<span class="nc" id="L299">    }</span>
 
     /**
      * Returns all the layouts panes
@@ -306,11 +305,11 @@ public class JQLayout extends Feature&lt;JQLayoutOptions, JQLayout&gt; implement
      */
     public HashMap&lt;JQLayoutArea, JQLayoutDiv&gt; getPanes()
     {
-<span class="nc bnc" id="L309" title="All 2 branches missed.">        if (panes == null)</span>
+<span class="pc bpc" id="L308" title="1 of 2 branches missed.">        if (panes == null)</span>
         {
-<span class="nc" id="L311">            panes = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L310">            panes = new HashMap&lt;&gt;();</span>
         }
-<span class="nc" id="L313">        return panes;</span>
+<span class="fc" id="L312">        return panes;</span>
     }
 
     /**
@@ -320,13 +319,14 @@ public class JQLayout extends Feature&lt;JQLayoutOptions, JQLayout&gt; implement
      */
     public void setPanes(HashMap&lt;JQLayoutArea, JQLayoutDiv&gt; panes)
     {
-<span class="nc" id="L323">        this.panes = panes;</span>
-<span class="nc" id="L324">    }</span>
+<span class="nc" id="L322">        this.panes = panes;</span>
+<span class="nc" id="L323">    }</span>
 
     /**
      * Returns the Layout Div for the pane
      *
      * @param paneArea
+     *
      * @return
      */
     public JQLayoutDiv getPane(JQLayoutArea paneArea)

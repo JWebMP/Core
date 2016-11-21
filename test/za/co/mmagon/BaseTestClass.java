@@ -16,14 +16,12 @@
  */
 package za.co.mmagon;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import za.co.mmagon.jwebswing.Feature;
-import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.html.Body;
-import za.co.mmagon.jwebswing.components.jqxwidgets.dataadapter.JQXDataAdapter;
-import za.co.mmagon.jwebswing.components.pace.preloadedThemes.PaceTheme;
-import za.co.mmagon.jwebswing.components.pace.PaceLoaderReferencePool;
+import java.io.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.components.jqxwidgets.dataadapter.*;
+import za.co.mmagon.jwebswing.components.pace.*;
+import za.co.mmagon.jwebswing.components.pace.preloadedThemes.*;
 
 /**
  * This Class
@@ -50,6 +48,7 @@ public class BaseTestClass
         Body body = new Body(page);
         page.setID("Page");
         body.setID("Body");
+        page.setDynamicRender(false);
         return page;
     }
 
@@ -66,16 +65,10 @@ public class BaseTestClass
     public JQXDataAdapter getDataAdapter()
     {
         /*
-         * DataAdapterNameValuePair colourNamesAdapter = new DataAdapterNameValuePair();
-         * colourNamesAdapter.setDataAdapterID("colourNames");
-         * colourNamesAdapter.getOptions().setLocaldata(new JQXDropDownListNameValuePair(), colourNamesAdapter);
-         * for (int j = 0; j < ColourNames.values().length; j++)
-         * {
-         * ColourNames value1 = ColourNames.values()[j];
-         * ArrayList<JQXDropDownListNameValuePair.JQXDropDownListData> data = colourNamesAdapter.getOptions().getLocaldata().getValues();
-         * data.add(new JQXDropDownListNameValuePair.JQXDropDownListData(TextUtilities.cleanAttributeName(value1.toString()), value1.name()));
-         * }
-         * return colourNamesAdapter;
+         * DataAdapterNameValuePair colourNamesAdapter = new DataAdapterNameValuePair(); colourNamesAdapter.setDataAdapterID("colourNames"); colourNamesAdapter.getOptions().setLocaldata(new
+         * JQXDropDownListNameValuePair(), colourNamesAdapter); for (int j = 0; j < ColourNames.values().length; j++) { ColourNames value1 = ColourNames.values()[j];
+         * ArrayList<JQXDropDownListNameValuePair.JQXDropDownListData> data = colourNamesAdapter.getOptions().getLocaldata().getValues(); data.add(new
+         * JQXDropDownListNameValuePair.JQXDropDownListData(TextUtilities.cleanAttributeName(value1.toString()), value1.name())); } return colourNamesAdapter;
          */
         return null;
     }
@@ -111,19 +104,8 @@ public class BaseTestClass
     }
 
     /*
-     * public ComponentEventBase getEvent()
-     * {
-     * ComponentEventBase e = new Event(EventTypes.activate, EventTypes.activate)
-     * {
-     * @Override
-     * public void fireEvent(AjaxCallObject ajaxObject, String calledFrom, AjaxReceiver ajaxReceiver)
-     * {
-     * throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-     * }
-     * };
-     * e.setID("testEvent");
-     * e.addQuery("This is the event query");
-     * return e;
-     * }
+     * public ComponentEventBase getEvent() { ComponentEventBase e = new Event(EventTypes.activate, EventTypes.activate) { @Override public void fireEvent(AjaxCallObject ajaxObject, String calledFrom,
+     * AjaxReceiver ajaxReceiver) { throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates. } }; e.setID("testEvent");
+     * e.addQuery("This is the event query"); return e; }
      */
 }

@@ -66,11 +66,11 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
      *
      * @return
      */
-    protected Map<StringBuilder, Object> getCSSProperties(List<Annotation> classAnnotations)
+    public Map<StringBuilder, Object> getCSSProperties(List<Annotation> classAnnotations)
     {
         Map<StringBuilder, Object> implementedProperties = new HashMap<>();
         final Map<StringBuilder, Object> implementedProperties2 = new HashMap<>();
-        classAnnotations.stream().forEach(classAnnotation ->
+        classAnnotations.stream().filter(a -> a != null).forEach(classAnnotation ->
         {
             HashMap<StringBuilder, Object> cssProperties = new HashMap<>();
             cssProperties.putAll(processAnnotation(classAnnotation));
@@ -88,10 +88,9 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
      *
      * @return
      */
-    protected Map<StringBuilder, Object> getCSSProperties(CSSImplementationClass classAnnotations)
+    public Map<StringBuilder, Object> getCSSProperties(CSSImplementationClass classAnnotations)
     {
         Map impObject = processImplementationObjectFields(classAnnotations, new HashMap<>());
-
         return impObject;
     }
 
@@ -102,7 +101,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
      *
      * @return
      */
-    protected Map<StringBuilder, Object> getCSSProperties(CSSImpl classImpl)
+    public Map<StringBuilder, Object> getCSSProperties(CSSImpl classImpl)
     {
         Map<StringBuilder, Object> m = new HashMap<>();
         Field[] fields = classImpl.getClass().getDeclaredFields();
@@ -141,6 +140,12 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
             log.error("[Action]-[Null Object Retrieved];");
             return null;
         }
+        if (objectIn instanceof CSSImpl)
+        {
+            Map<StringBuilder, Object> map = getCSSProperties((CSSImpl) objectIn);
+            return map;
+        }
+
         List<Annotation> classAnnotations = getAllAppliedCSSAnnotations(objectIn);
         Map<StringBuilder, Object> cssPropertyMap = getCSSProperties(classAnnotations);
         return cssPropertyMap;
@@ -284,8 +289,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
      *
      * @return
      */
-    private Map<StringBuilder, Object> processImplementationObjectFields(CSSImplementationClass impClass, Map<StringBuilder, Object> currentReturnList)
-
+    public Map<StringBuilder, Object> processImplementationObjectFields(CSSImplementationClass impClass, Map<StringBuilder, Object> currentReturnList)
     {
         if (impClass == null)
         {
@@ -299,13 +303,12 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
             try
             {
                 Map<StringBuilder, Object> map = getPairFromField(field, impClass);
-                for (Map.Entry<StringBuilder, Object> entry : map.entrySet())
+                map.entrySet().forEach((entry) ->
                 {
                     StringBuilder key = entry.getKey();
                     Object value = entry.getValue();
                     currentReturnList.put(key, value);
-                }
-                //currentReturnList.putAll(getPairFromField(field, impClass));
+                });
             }
             catch (IllegalArgumentException | IllegalAccessException ex)
             {
@@ -323,7 +326,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
      *
      * @return
      */
-    private Map<StringBuilder, Object> processAnnotation(Annotation annotation)
+    public Map<StringBuilder, Object> processAnnotation(Annotation annotation)
     {
         Map<StringBuilder, Object> output = new HashMap<>();
 
@@ -422,15 +425,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
         }
         catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
         {
-            String s = e.getLocalizedMessage();
-            if (s == null)
-            {
-                //expected to not run
-            }
-            else
-            {
-                log.trace("Field Skipped [" + method.getName() + "] - [" + e.getLocalizedMessage() + "]", e);
-            }
+            log.trace("Field Skipped [" + method.getName() + "] - [" + e.getLocalizedMessage() + "]", e);
         }
         return rawValues;
     }
@@ -468,7 +463,10 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
 
         if (returnedObject instanceof ColourCSSImpl)
         {
-            rawValues.put(new StringBuilder(cssKey), returnedObject);
+            if (!returnedObject.toString().isEmpty())
+            {
+                rawValues.put(new StringBuilder(cssKey), returnedObject);
+            }
             return rawValues;
         }
 
@@ -476,7 +474,6 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
         {
             return rawValues;
         }
-
         else if (returnedObject instanceof CSSEnumeration)
         {
             CSSEnumeration enu = (CSSEnumeration) returnedObject;
@@ -550,7 +547,11 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
                 f.setAccessible(true);
                 if (fieldObject instanceof CSSEnumeration)
                 {
-                    f.set(newInstance, fieldObject);
+                    CSSEnumeration enume = (CSSEnumeration) fieldObject;
+                    if (enume.getDefault() != fieldObject)
+                    {
+                        f.set(newInstance, fieldObject);
+                    }
                 }
                 else if (fieldObject instanceof Integer)
                 {
@@ -568,7 +569,10 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
                         || fieldObject instanceof Double || fieldObject instanceof Boolean
                         || fieldObject instanceof BigDecimal || fieldObject instanceof ColourCSSImpl)
                 {
-                    f.set(newInstance, fieldObject);
+                    if (!fieldObject.toString().isEmpty())
+                    {
+                        f.set(newInstance, fieldObject);
+                    }
                 }
                 else if (fieldObject.getClass().isArray())
                 {
@@ -587,7 +591,10 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
                             Annotation innerAnnotation = (Annotation) object;
                             Map<StringBuilder, Object> innerFieldMapping = processAnnotation(innerAnnotation);
                             CSSImplementationClass innerImplementationObject = (CSSImplementationClass) getImplementationObject(innerAnnotation, innerFieldMapping);
-                            Array.set(newOut, i, innerImplementationObject);
+                            if (!innerImplementationObject.toString().isEmpty())
+                            {
+                                Array.set(newOut, i, innerImplementationObject);
+                            }
                         }
                         f.set(newInstance, newOut);
                     }
@@ -596,14 +603,23 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
                 {
                     Annotation innerAnnotation = (Annotation) fieldObject;
                     Map<StringBuilder, Object> innerFieldMapping = processAnnotation(innerAnnotation);
-                    Object innerImplementationObject = getImplementationObject(innerAnnotation, innerFieldMapping);
-                    try
+                    if (innerAnnotation != null)
                     {
-                        f.set(newInstance, innerImplementationObject);
-                    }
-                    catch (IllegalAccessException | IllegalArgumentException ae)
-                    {
-                        log.error("[Instantiation]-[Failed " + implementationClass + "]-on-[" + newInstance.getClass() + "]", ae);
+                        Object innerImplementationObject = getImplementationObject(innerAnnotation, innerFieldMapping);
+                        try
+                        {
+                            if (innerImplementationObject != null)
+                            {
+                                if (!innerImplementationObject.toString().isEmpty())
+                                {
+                                    f.set(newInstance, innerImplementationObject);
+                                }
+                            }
+                        }
+                        catch (IllegalAccessException | IllegalArgumentException ae)
+                        {
+                            log.error("[Instantiation]-[Failed " + implementationClass + "]-on-[" + newInstance.getClass() + "]", ae);
+                        }
                     }
                 }
                 else
@@ -644,14 +660,13 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
     {
         Class clazz = cssObjectIn.getClass();
         ArrayList<A> annotations = new ArrayList();
-        Annotation[] annos = clazz.getAnnotations();
-        for (Annotation annotation : annos)
-        {
-            if (annotation.annotationType().isAnnotationPresent(CSSAnnotationType.class))
-            {
-                annotations.add((A) annotation);
-            }
-        }
+        ArrayList<A> arrayList = new ArrayList<>((Collection<? extends A>) Arrays.asList(clazz.getAnnotations()));
+        arrayList.stream()
+                .filter(annotation -> (annotation.annotationType().isAnnotationPresent(CSSAnnotationType.class)))
+                .forEachOrdered(annotation ->
+                {
+                    annotations.add((A) annotation);
+                });
         return annotations;
     }
 
@@ -666,14 +681,12 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
     protected <A extends Annotation> List<A> getAllAppliedCSSAnnotations(Field field)
     {
         List<A> annotations = new ArrayList();
-        Annotation[] annos = field.getAnnotations();
-        for (Annotation annotation : annos)
-        {
-            if (annotation.annotationType().isAnnotationPresent(CSSAnnotationType.class))
-            {
-                annotations.add((A) annotation);
-            }
-        }
+        ArrayList<A> arrayList = new ArrayList<>((Collection<? extends A>) Arrays.asList(field.getAnnotations()));
+        arrayList.stream().filter(annotation -> (annotation.annotationType().isAnnotationPresent(CSSAnnotationType.class)))
+                .forEachOrdered((annotation) ->
+                {
+                    annotations.add((A) annotation);
+                });
         return annotations;
     }
 }

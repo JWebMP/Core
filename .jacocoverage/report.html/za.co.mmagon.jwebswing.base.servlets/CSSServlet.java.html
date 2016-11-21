@@ -34,7 +34,7 @@ import za.co.mmagon.jwebswing.*;
 <span class="nc" id="L34">public class CSSServlet extends JWDefaultServlet</span>
 {
 
-<span class="nc" id="L37">    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;CSSServlet&quot;); </span>
+<span class="nc" id="L37">    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;CSSServlet&quot;);</span>
     private static final long serialVersionUID = 1L;
 
     /**
@@ -42,32 +42,36 @@ import za.co.mmagon.jwebswing.*;
      *
      * @param request  Servlet request
      * @param response Servlet response
+     *
      * @throws ServletException if a Servlet-specific error occurs
      * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-<span class="nc" id="L51">        Date startDate = new Date();</span>
-<span class="nc" id="L52">        StringBuilder scripts = new StringBuilder();</span>
-<span class="nc" id="L53">        Page page = (Page) request.getSession().getAttribute(&quot;jwpage&quot;);</span>
-<span class="nc" id="L54">        StringBuilder css = page.getBody().renderCss(0);</span>
-<span class="nc" id="L55">        scripts.append(css);</span>
-<span class="nc" id="L56">        Date endDate = new Date();</span>
-<span class="nc" id="L57">        try (PrintWriter out = response.getWriter())</span>
+<span class="nc" id="L52">        Date startDate = new Date();</span>
+<span class="nc" id="L53">        StringBuilder scripts = new StringBuilder();</span>
+
+<span class="nc" id="L55">        Page page = (Page) request.getSession().getAttribute(&quot;jwpage&quot;);</span>
+<span class="nc" id="L56">        StringBuilder css = page.getBody().renderCss(0);</span>
+<span class="nc" id="L57">        scripts.append(css);</span>
+
+<span class="nc" id="L59">        Date endDate = new Date();</span>
+<span class="nc" id="L60">        try (PrintWriter out = response.getWriter())</span>
         {
-<span class="nc" id="L59">            response.setContentType(&quot;text/css&quot;);</span>
-<span class="nc" id="L60">            out.println(scripts);</span>
-<span class="nc" id="L61">            Date dataTransferDate = new Date();</span>
-<span class="nc" id="L62">            LOG.trace(&quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Render Time]-[&quot; + (endDate.getTime() - startDate.getTime()) + &quot;];[Data Size]-[&quot; + scripts.length() + &quot;];[Transer Time]=[&quot; + (dataTransferDate.getTime() - startDate.getTime()) + &quot;]&quot;);</span>
-<span class="nc bnc" id="L63" title="All 8 branches missed.">        }</span>
-<span class="nc" id="L64">    }</span>
+<span class="nc" id="L62">            response.setContentType(&quot;text/css&quot;);</span>
+<span class="nc" id="L63">            out.println(scripts);</span>
+<span class="nc" id="L64">            Date dataTransferDate = new Date();</span>
+<span class="nc" id="L65">            LOG.trace(&quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Render Time]-[&quot; + (endDate.getTime() - startDate.getTime()) + &quot;];[Data Size]-[&quot; + scripts.length() + &quot;];[Transer Time]=[&quot; + (dataTransferDate.getTime() - startDate.getTime()) + &quot;]&quot;);</span>
+<span class="nc bnc" id="L66" title="All 8 branches missed.">        }</span>
+<span class="nc" id="L67">    }</span>
 
     /**
      * Handles the HTTP &lt;code&gt;GET&lt;/code&gt; method.
      *
      * @param request  Servlet request
      * @param response Servlet response
+     *
      * @throws ServletException if a Servlet-specific error occurs
      * @throws IOException      if an I/O error occurs
      */
@@ -77,13 +81,13 @@ import za.co.mmagon.jwebswing.*;
     {
         try
         {
-<span class="nc" id="L80">            super.doPost(request, response); //Checks for the page existance</span>
-<span class="nc" id="L81">            processRequest(request, response);</span>
+<span class="nc" id="L84">            super.doPost(request, response); //Checks for the page existance</span>
+<span class="nc" id="L85">            processRequest(request, response);</span>
         }
-<span class="nc" id="L83">        catch (IOException | ServletException e)</span>
+<span class="nc" id="L87">        catch (IOException | ServletException e)</span>
         {
-<span class="nc" id="L85">            LOG.fatal(&quot;Do Post in CSS Servlet&quot;, e);</span>
-<span class="nc" id="L86">        }</span>
-<span class="nc" id="L87">    }</span>
+<span class="nc" id="L89">            LOG.fatal(&quot;Do Post in CSS Servlet&quot;, e);</span>
+<span class="nc" id="L90">        }</span>
+<span class="nc" id="L91">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

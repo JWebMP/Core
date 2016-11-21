@@ -16,10 +16,9 @@
  */
 package za.co.mmagon.jwebswing.components.pace;
 
-import za.co.mmagon.jwebswing.base.references.CSSReference;
-import za.co.mmagon.jwebswing.base.references.JavascriptReference;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
-import za.co.mmagon.jwebswing.base.servlets.interfaces.ReferencePool;
+import za.co.mmagon.jwebswing.base.references.*;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
+import za.co.mmagon.jwebswing.base.servlets.interfaces.*;
 
 /**
  *
@@ -33,7 +32,8 @@ public enum PaceLoaderReferencePool implements ReferencePool
     /**
      * Put Pace Loader First
      */
-    PaceLoader(new JavascriptReference("PACE", 1.02, "bower_components/PACE/pace.js", "https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js", 0), -1);
+    PaceLoader(new JavascriptReference("PACE", 1.02, "bower_components/PACE/pace.js", "https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js", 0), -1),
+    PaceLoaderDisableWebSockets(new JavascriptReference("PACE_DisableWebSockets", 1.02, "javascript/pace_ws_disable.js", "javascript/pace_ws_disable.js", 1), 0);
 
     private JavascriptReference javaScriptReference;
 
@@ -41,7 +41,7 @@ public enum PaceLoaderReferencePool implements ReferencePool
     {
         this.javaScriptReference = javaScriptReference;
         this.javaScriptReference.setSortOrder(sortOrder);
-        javaScriptReference.setPriority(RequirementsPriority.First);
+        javaScriptReference.setPriority(RequirementsPriority.Top_Shelf);
     }
 
     @Override

@@ -16,16 +16,14 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import org.junit.Assert;
-import org.junit.Test;
-import za.co.mmagon.BaseTestClass;
-import za.co.mmagon.jwebswing.Event;
-import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
-import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
-import za.co.mmagon.jwebswing.base.events.click.ClickAdapter;
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.pools.jquery.JQueryReferencePool;
+import org.junit.*;
+import za.co.mmagon.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.ajax.*;
+import za.co.mmagon.jwebswing.base.events.click.*;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
+import za.co.mmagon.jwebswing.components.pools.jquery.*;
 
 /**
  * Enables the Events System in the Component Hierarchy Tree
@@ -72,6 +70,7 @@ public class ComponentEventBaseTest extends BaseTestClass
                 + "  \"componentType\" : \"abbreviation\",\n"
                 + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
+                + "  \"initialized\" : true,\n"
                 + "  \"javascriptReferences\" : [ {\n"
                 + "    \"name\" : \"JQuery\",\n"
                 + "    \"version\" : 2.24,\n"
@@ -79,14 +78,18 @@ public class ComponentEventBaseTest extends BaseTestClass
                 + "  } ],\n"
                 + "  \"sortOrder\" : 1000,\n"
                 + "  \"renderAfterLoad\" : false,\n"
+                + "  \"javascriptRenderedElsewhere\" : false,\n"
                 + "  \"events\" : [ {\n"
                 + "    \"id\" : \"clickEvent\",\n"
                 + "    \"componentType\" : \"event\",\n"
                 + "    \"tiny\" : false,\n"
                 + "    \"configured\" : true,\n"
+                + "    \"initialized\" : true,\n"
                 + "    \"sortOrder\" : 1000,\n"
+                + "    \"variables\" : [ ],\n"
                 + "    \"name\" : \"click\",\n"
                 + "    \"renderAfterLoad\" : false,\n"
+                + "    \"javascriptRenderedElsewhere\" : false,\n"
                 + "    \"touched\" : false,\n"
                 + "    \"eventType\" : \"click\"\n"
                 + "  } ],\n"
@@ -97,6 +100,7 @@ public class ComponentEventBaseTest extends BaseTestClass
                 + "  \"componentType\" : \"abbreviation\",\n"
                 + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
+                + "  \"initialized\" : true,\n"
                 + "  \"javascriptReferences\" : [ {\n"
                 + "    \"name\" : \"JQuery\",\n"
                 + "    \"version\" : 2.24,\n"
@@ -104,19 +108,24 @@ public class ComponentEventBaseTest extends BaseTestClass
                 + "  } ],\n"
                 + "  \"sortOrder\" : 1000,\n"
                 + "  \"renderAfterLoad\" : false,\n"
+                + "  \"javascriptRenderedElsewhere\" : false,\n"
                 + "  \"events\" : [ {\n"
                 + "    \"id\" : \"clickEvent\",\n"
                 + "    \"componentType\" : \"event\",\n"
                 + "    \"tiny\" : false,\n"
                 + "    \"configured\" : true,\n"
+                + "    \"initialized\" : true,\n"
                 + "    \"sortOrder\" : 1000,\n"
+                + "    \"variables\" : [ ],\n"
                 + "    \"name\" : \"click\",\n"
                 + "    \"renderAfterLoad\" : false,\n"
+                + "    \"javascriptRenderedElsewhere\" : false,\n"
                 + "    \"touched\" : false,\n"
                 + "    \"eventType\" : \"click\"\n"
                 + "  } ],\n"
                 + "  \"touched\" : false\n"
-                + "}";
+                + "}"
+                + "";
         Assert.assertEquals(shell.toString(), shellExpected);
         Assert.assertEquals(shell2.toString(), shell2Expected);
     }

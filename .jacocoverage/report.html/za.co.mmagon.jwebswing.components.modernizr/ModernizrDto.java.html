@@ -16,7 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.modernizr;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 
 /**
  * The Modernizr Information returned in DTO Format
@@ -25,126 +25,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @since Nov 9, 2016
  *
  */
-public class ModernizrDto
+public class ModernizrDto extends ModernizrJSDto
 {
 
-    private Boolean htmlimports;
-    private Boolean applicationcache;
-    private Boolean blobconstructor;
-    @JsonProperty(value = &quot;blob-constructor&quot;)
-    private Boolean blob_constructor;
-    private Boolean cookies;
-    private Boolean cors;
-    private Boolean customprotocolhandler;
-    private Boolean customevent;
-    private Boolean dataview;
-    private Boolean eventlistener;
-    private Boolean geolocation;
-    private Boolean history;
-    private Boolean ie8compat;
-    private Boolean json;
-    private Boolean notification;
-    private Boolean postmessage;
-    private Boolean queryselector;
-    private Boolean serviceworker;
-    private Boolean svg;
-    private Boolean templatestrings;
-    private Boolean typedarrays;
-    private Boolean websockets;
-    private Boolean xdomainrequest;
-    private Boolean webaudio;
-    private Boolean cssescape;
-    private Boolean supports;
-    private Boolean target;
-    private Boolean mutationobserver;
-    private Boolean es5array;
-    private Boolean es5object;
-    private Boolean es5function;
-    private Boolean es5string;
-    private Boolean strictmode;
-    private Boolean es6array;
-    private Boolean es5undefined;
-    private Boolean generators;
-    private Boolean es6number;
-    private Boolean es6object;
-    private Boolean es6string;
-    private Boolean devicemotion;
-    private Boolean deviceorientation;
-    private Boolean filereader;
-    private Boolean contains;
-    private Boolean contextmenu;
-    private Boolean cssall;
-    private Boolean willchange;
-    private Boolean classlist;
-    private Boolean documentfragment;
-    private Boolean audio;
-    private Boolean canvas;
-    private Boolean canvastext;
-    private Boolean contenteditable;
-    private Boolean emoji;
-    private Boolean olreversed;
-    private Boolean userdata;
-    private Boolean video;
-    private Boolean vml;
-    private Boolean webanimations;
-    private Boolean webgl;
-    private Boolean adownload;
-    private Boolean audioloop;
-    private Boolean canvasblending;
-    private Boolean todataurljpeg;
-    private Boolean todataurlpng;
-    private Boolean todataurlwebp;
-    private Boolean canvaswinding;
-    private Boolean bgpositionshorthand;
-    private Boolean multiplebgs;
-    private Boolean csspointerevents;
-    private Boolean regions;
-    private Boolean cssremunit;
-    private Boolean rgba;
-    private Boolean preserve3d;
-    private Boolean progressbar;
-    private Boolean meter;
-    private Boolean time;
-    private Boolean fileinput;
-    private Boolean ambientlight;
-    private Boolean hashchange;
-    private Boolean inputsearchevent;
-    private Boolean csscalc;
-    private Boolean cubicbezierrange;
-    private Boolean cssgradients;
-    private Boolean opacity;
-    private Boolean csspositionsticky;
-    private Boolean createelementattrs;
-    @JsonProperty(value = &quot;createelement-attrs&quot;)
-    private Boolean createelement_attrs;
-    private Boolean dataset;
-    private Boolean csschunit;
-    private Boolean cssexunit;
-    private Boolean microdata;
-    private Boolean bdi;
-    private Boolean datalistelem;
-    private Boolean hsla;
-    private Boolean flash;
-    private Boolean hiddenscroll;
-    private Boolean mathml;
-    private Boolean touchevents;
-    private Boolean unicoderange;
-    private Boolean unicode;
-    private Boolean checked;
-    private Boolean displaytable;
-    @JsonProperty(value = &quot;display-table&quot;)
-    private Boolean display_table;
-    private Boolean fontface;
-    private Boolean generatedcontent;
-    private Boolean hairline;
-    private Boolean cssinvalid;
-    private Boolean lastchild;
-    private Boolean nthchild;
-    private Boolean cssscrollbar;
-    private Boolean siblinggeneral;
-    private Boolean subpixelfont;
-    private Boolean cssvalid;
-    private Boolean cssvhunit;
+    private ModernizrInputDto input;
+    private ModernizrInputTypesDto inputtypes;
+
     private Boolean cssvmaxunit;
     private Boolean cssvminunit;
     private Boolean cssvwunit;
@@ -318,2287 +204,49 @@ public class ModernizrDto
      * A new instance of modernizr
      */
     public ModernizrDto()
-<span class="nc" id="L321">    {</span>
+<span class="nc" id="L207">    {</span>
 
-<span class="nc" id="L323">    }</span>
+<span class="nc" id="L209">    }</span>
 
     /**
-     * Tests for HTML Imports
+     * Returns the input portion
      *
      * @return
      */
-    public Boolean isHtmlimports()
+    public ModernizrInputDto getInput()
     {
-<span class="nc" id="L332">        return htmlimports;</span>
+<span class="nc" id="L218">        return input;</span>
     }
 
     /**
-     * Tests for HTML Imports
+     * Sets the input portion
      *
-     * @param htmlimports
+     * @param input
      */
-    protected void setHtmlimports(Boolean htmlimports)
+    public void setInput(ModernizrInputDto input)
     {
-<span class="nc" id="L342">        this.htmlimports = htmlimports;</span>
-<span class="nc" id="L343">    }</span>
+<span class="nc" id="L228">        this.input = input;</span>
+<span class="nc" id="L229">    }</span>
 
     /**
-     * Is Application Cache
+     * Gets the input types
      *
      * @return
      */
-    public Boolean isApplicationcache()
+    public ModernizrInputTypesDto getInputtypes()
     {
-<span class="nc" id="L352">        return applicationcache;</span>
+<span class="nc" id="L238">        return inputtypes;</span>
     }
 
     /**
-     * Sets Application Cache
+     * Sets the input types
      *
-     * @param applicationcache
+     * @param inputtypes
      */
-    protected void setApplicationcache(Boolean applicationcache)
+    public void setInputtypes(ModernizrInputTypesDto inputtypes)
     {
-<span class="nc" id="L362">        this.applicationcache = applicationcache;</span>
-<span class="nc" id="L363">    }</span>
-
-    /**
-     * Test result for Blob constructor
-     *
-     * @return
-     */
-    public Boolean isBlobconstructor()
-    {
-<span class="nc" id="L372">        return blobconstructor;</span>
-    }
-
-    /**
-     * Test result for Blob Constructor
-     *
-     * @param blobconstructor
-     */
-    protected void setBlobconstructor(Boolean blobconstructor)
-    {
-<span class="nc" id="L382">        this.blobconstructor = blobconstructor;</span>
-<span class="nc" id="L383">    }</span>
-
-    /**
-     * Test result for Blob Constructor
-     *
-     * @return
-     */
-    public Boolean isBlobConstructor()
-    {
-<span class="nc" id="L392">        return blob_constructor;</span>
-    }
-
-    /**
-     * Test result for Blob Constructor
-     *
-     * @param blob_constructor
-     */
-    protected void setBlobConstructor(Boolean blob_constructor)
-    {
-<span class="nc" id="L402">        this.blob_constructor = blob_constructor;</span>
-<span class="nc" id="L403">    }</span>
-
-    /**
-     * Test result for cookies available
-     *
-     * @return
-     */
-    public Boolean isCookies()
-    {
-<span class="nc" id="L412">        return cookies;</span>
-    }
-
-    /**
-     * Test result for if cookies available
-     *
-     * @param cookies
-     */
-    protected void setCookies(Boolean cookies)
-    {
-<span class="nc" id="L422">        this.cookies = cookies;</span>
-<span class="nc" id="L423">    }</span>
-
-    /**
-     * Is Cors Enabled
-     *
-     * @return
-     */
-    public Boolean isCors()
-    {
-<span class="nc" id="L432">        return cors;</span>
-    }
-
-    /**
-     * Is Cors enabled
-     *
-     * @param cors
-     */
-    protected void setCors(Boolean cors)
-    {
-<span class="nc" id="L442">        this.cors = cors;</span>
-<span class="nc" id="L443">    }</span>
-
-    /**
-     * Is custom protocol handler enabled
-     *
-     * @return
-     */
-    public Boolean isCustomprotocolhandler()
-    {
-<span class="nc" id="L452">        return customprotocolhandler;</span>
-    }
-
-    /**
-     * Is custom protocol handler enabled
-     *
-     * @param customprotocolhandler
-     */
-    protected void setCustomprotocolhandler(Boolean customprotocolhandler)
-    {
-<span class="nc" id="L462">        this.customprotocolhandler = customprotocolhandler;</span>
-<span class="nc" id="L463">    }</span>
-
-    /**
-     * Is custom event handler enabled
-     *
-     * @return
-     */
-    public Boolean isCustomevent()
-    {
-<span class="nc" id="L472">        return customevent;</span>
-    }
-
-    /**
-     * Is custom event handler enabled
-     *
-     * @param customevent
-     */
-    protected void setCustomevent(Boolean customevent)
-    {
-<span class="nc" id="L482">        this.customevent = customevent;</span>
-<span class="nc" id="L483">    }</span>
-
-    /**
-     * Is data view enabled
-     *
-     * @return
-     */
-    public Boolean isDataview()
-    {
-<span class="nc" id="L492">        return dataview;</span>
-    }
-
-    /**
-     * Is data view enabled
-     *
-     * @param dataview
-     */
-    protected void setDataview(Boolean dataview)
-    {
-<span class="nc" id="L502">        this.dataview = dataview;</span>
-<span class="nc" id="L503">    }</span>
-
-    /**
-     * Is event listener enabled
-     *
-     * @return
-     */
-    public Boolean isEventlistener()
-    {
-<span class="nc" id="L512">        return eventlistener;</span>
-    }
-
-    /**
-     * Is event listener enabled
-     *
-     * @param eventlistener
-     */
-    protected void setEventlistener(Boolean eventlistener)
-    {
-<span class="nc" id="L522">        this.eventlistener = eventlistener;</span>
-<span class="nc" id="L523">    }</span>
-
-    /**
-     * Is Geo location enabled
-     *
-     * @return
-     */
-    public Boolean isGeolocation()
-    {
-<span class="nc" id="L532">        return geolocation;</span>
-    }
-
-    /**
-     * Is Geo location enabled
-     *
-     * @param geolocation
-     */
-    protected void setGeolocation(Boolean geolocation)
-    {
-<span class="nc" id="L542">        this.geolocation = geolocation;</span>
-<span class="nc" id="L543">    }</span>
-
-    /**
-     * Is history enabled
-     *
-     * @return
-     */
-    public Boolean isHistory()
-    {
-<span class="nc" id="L552">        return history;</span>
-    }
-
-    /**
-     * Is history enabled
-     *
-     * @param history
-     */
-    protected void setHistory(Boolean history)
-    {
-<span class="nc" id="L562">        this.history = history;</span>
-<span class="nc" id="L563">    }</span>
-
-    /**
-     * Is ie 8 compatible mode
-     *
-     * @return
-     */
-    public Boolean isIe8compat()
-    {
-<span class="nc" id="L572">        return ie8compat;</span>
-    }
-
-    /**
-     * Is ie 8 compatible mode
-     *
-     * @param ie8compat
-     */
-    protected void setIe8compat(Boolean ie8compat)
-    {
-<span class="nc" id="L582">        this.ie8compat = ie8compat;</span>
-<span class="nc" id="L583">    }</span>
-
-    /**
-     * Is JSON enabled
-     *
-     * @return
-     */
-    public Boolean isJson()
-    {
-<span class="nc" id="L592">        return json;</span>
-    }
-
-    /**
-     * Sets if JSon is enabled
-     *
-     * @param json
-     */
-    protected void setJson(Boolean json)
-    {
-<span class="nc" id="L602">        this.json = json;</span>
-<span class="nc" id="L603">    }</span>
-
-    /**
-     * Are notifications enabled
-     *
-     * @return
-     */
-    public Boolean isNotification()
-    {
-<span class="nc" id="L612">        return notification;</span>
-    }
-
-    /**
-     * Are notifications enabled
-     *
-     * @param notification
-     */
-    protected void setNotification(Boolean notification)
-    {
-<span class="nc" id="L622">        this.notification = notification;</span>
-<span class="nc" id="L623">    }</span>
-
-    /**
-     * Is post message
-     *
-     * @return
-     */
-    public Boolean isPostmessage()
-    {
-<span class="nc" id="L632">        return postmessage;</span>
-    }
-
-    /**
-     * Is post message
-     *
-     * @param postmessage
-     */
-    protected void setPostmessage(Boolean postmessage)
-    {
-<span class="nc" id="L642">        this.postmessage = postmessage;</span>
-<span class="nc" id="L643">    }</span>
-
-    /**
-     * Is Query Selector
-     *
-     * @return
-     */
-    public Boolean isQueryselector()
-    {
-<span class="nc" id="L652">        return queryselector;</span>
-    }
-
-    /**
-     * Sets query selector
-     *
-     * @param queryselector
-     */
-    protected void setQueryselector(Boolean queryselector)
-    {
-<span class="nc" id="L662">        this.queryselector = queryselector;</span>
-<span class="nc" id="L663">    }</span>
-
-    /**
-     * Are service workers allowed
-     *
-     * @return
-     */
-    public Boolean isServiceworker()
-    {
-<span class="nc" id="L672">        return serviceworker;</span>
-    }
-
-    /**
-     * Are service workers allowed
-     *
-     * @param serviceworker
-     */
-    protected void setServiceworker(Boolean serviceworker)
-    {
-<span class="nc" id="L682">        this.serviceworker = serviceworker;</span>
-<span class="nc" id="L683">    }</span>
-
-    /**
-     * Is SVG Allowed
-     *
-     * @return
-     */
-    public Boolean isSvg()
-    {
-<span class="nc" id="L692">        return svg;</span>
-    }
-
-    /**
-     * Is SVG Allowed
-     *
-     * @param svg
-     */
-    protected void setSvg(Boolean svg)
-    {
-<span class="nc" id="L702">        this.svg = svg;</span>
-<span class="nc" id="L703">    }</span>
-
-    /**
-     * Is template strings allowed
-     *
-     * @return
-     */
-    public Boolean isTemplatestrings()
-    {
-<span class="nc" id="L712">        return templatestrings;</span>
-    }
-
-    /**
-     * Is template strings allowed
-     *
-     * @param templatestrings
-     */
-    protected void setTemplatestrings(Boolean templatestrings)
-    {
-<span class="nc" id="L722">        this.templatestrings = templatestrings;</span>
-<span class="nc" id="L723">    }</span>
-
-    /**
-     * Is typed arrays allowed
-     *
-     * @return
-     */
-    public Boolean isTypedarrays()
-    {
-<span class="nc" id="L732">        return typedarrays;</span>
-    }
-
-    /**
-     * Is typed arrays allowed
-     *
-     * @param typedarrays
-     */
-    protected void setTypedarrays(Boolean typedarrays)
-    {
-<span class="nc" id="L742">        this.typedarrays = typedarrays;</span>
-<span class="nc" id="L743">    }</span>
-
-    /**
-     * Is web sockets allowed
-     *
-     * @return
-     */
-    public Boolean isWebsockets()
-    {
-<span class="nc" id="L752">        return websockets;</span>
-    }
-
-    /**
-     * Is web sockets allowed
-     *
-     * @param websockets
-     */
-    protected void setWebsockets(Boolean websockets)
-    {
-<span class="nc" id="L762">        this.websockets = websockets;</span>
-<span class="nc" id="L763">    }</span>
-
-    /**
-     * Is XDomain Request Allowed
-     *
-     * @return
-     */
-    public Boolean isXdomainrequest()
-    {
-<span class="nc" id="L772">        return xdomainrequest;</span>
-    }
-
-    /**
-     * Is XDomain Request Allowed
-     *
-     * @param xdomainrequest
-     */
-    protected void setXdomainrequest(Boolean xdomainrequest)
-    {
-<span class="nc" id="L782">        this.xdomainrequest = xdomainrequest;</span>
-<span class="nc" id="L783">    }</span>
-
-    /**
-     * Is Web Audio Allowed
-     *
-     * @return
-     */
-    public Boolean isWebaudio()
-    {
-<span class="nc" id="L792">        return webaudio;</span>
-    }
-
-    /**
-     * Is Web Audio Allowed
-     *
-     * @param webaudio
-     */
-    protected void setWebaudio(Boolean webaudio)
-    {
-<span class="nc" id="L802">        this.webaudio = webaudio;</span>
-<span class="nc" id="L803">    }</span>
-
-    /**
-     * Is CSS Escape allowed
-     *
-     * @return
-     */
-    public Boolean isCssescape()
-    {
-<span class="nc" id="L812">        return cssescape;</span>
-    }
-
-    /**
-     * Is CSS Escape Allowed
-     *
-     * @param cssescape
-     */
-    protected void setCssescape(Boolean cssescape)
-    {
-<span class="nc" id="L822">        this.cssescape = cssescape;</span>
-<span class="nc" id="L823">    }</span>
-
-    /**
-     * Is supports allowed
-     *
-     * @return
-     */
-    public Boolean isSupports()
-    {
-<span class="nc" id="L832">        return supports;</span>
-    }
-
-    /**
-     * Is supports allowed
-     *
-     * @param supports
-     */
-    protected void setSupports(Boolean supports)
-    {
-<span class="nc" id="L842">        this.supports = supports;</span>
-<span class="nc" id="L843">    }</span>
-
-    /**
-     * Is target allowed
-     *
-     * @return
-     */
-    public Boolean isTarget()
-    {
-<span class="nc" id="L852">        return target;</span>
-    }
-
-    /**
-     * Sets target
-     *
-     * @param target
-     */
-    protected void setTarget(Boolean target)
-    {
-<span class="nc" id="L862">        this.target = target;</span>
-<span class="nc" id="L863">    }</span>
-
-    /**
-     * Is Mutation Observer allowed
-     *
-     * @return
-     */
-    public Boolean isMutationobserver()
-    {
-<span class="nc" id="L872">        return mutationobserver;</span>
-    }
-
-    /**
-     * Is mutation observer allowed
-     *
-     * @param mutationobserver
-     */
-    protected void setMutationobserver(Boolean mutationobserver)
-    {
-<span class="nc" id="L882">        this.mutationobserver = mutationobserver;</span>
-<span class="nc" id="L883">    }</span>
-
-    /**
-     * Is ES 5 enabled
-     *
-     * @return
-     */
-    public Boolean isEs5array()
-    {
-<span class="nc" id="L892">        return es5array;</span>
-    }
-
-    /**
-     * Sets if es5 is enabled
-     *
-     * @param es5array
-     */
-    protected void setEs5array(Boolean es5array)
-    {
-<span class="nc" id="L902">        this.es5array = es5array;</span>
-<span class="nc" id="L903">    }</span>
-
-    /**
-     * Is ES 5 objects allowed
-     *
-     * @return
-     */
-    public Boolean isEs5object()
-    {
-<span class="nc" id="L912">        return es5object;</span>
-    }
-
-    /**
-     * Sets if ES 5 objects are allowed
-     *
-     * @param es5object
-     */
-    protected void setEs5object(Boolean es5object)
-    {
-<span class="nc" id="L922">        this.es5object = es5object;</span>
-<span class="nc" id="L923">    }</span>
-
-    /**
-     * Is ES 5 Functioning
-     *
-     * @return
-     */
-    public Boolean isEs5function()
-    {
-<span class="nc" id="L932">        return es5function;</span>
-    }
-
-    /**
-     * Sets if ES 5 is functioning
-     *
-     * @param es5function
-     */
-    protected void setEs5function(Boolean es5function)
-    {
-<span class="nc" id="L942">        this.es5function = es5function;</span>
-<span class="nc" id="L943">    }</span>
-
-    /**
-     * Is ES 5 string
-     *
-     * @return
-     */
-    public Boolean isEs5string()
-    {
-<span class="nc" id="L952">        return es5string;</span>
-    }
-
-    /**
-     * Sets if ES 5 is a string
-     *
-     * @param es5string
-     */
-    protected void setEs5string(Boolean es5string)
-    {
-<span class="nc" id="L962">        this.es5string = es5string;</span>
-<span class="nc" id="L963">    }</span>
-
-    /**
-     * Is in strict mode
-     *
-     * @return
-     */
-    public Boolean isStrictmode()
-    {
-<span class="nc" id="L972">        return strictmode;</span>
-    }
-
-    /**
-     * Sets strict mode
-     *
-     * @param strictmode
-     */
-    protected void setStrictmode(Boolean strictmode)
-    {
-<span class="nc" id="L982">        this.strictmode = strictmode;</span>
-<span class="nc" id="L983">    }</span>
-
-    /**
-     * Is es 6 arrays enabled
-     *
-     * @return
-     */
-    public Boolean isEs6array()
-    {
-<span class="nc" id="L992">        return es6array;</span>
-    }
-
-    /**
-     * Is ES 6 enabled
-     *
-     * @param es6array
-     */
-    protected void setEs6array(Boolean es6array)
-    {
-<span class="nc" id="L1002">        this.es6array = es6array;</span>
-<span class="nc" id="L1003">    }</span>
-
-    /**
-     * Is ES 5 undefined
-     *
-     * @return
-     */
-    public Boolean isEs5undefined()
-    {
-<span class="nc" id="L1012">        return es5undefined;</span>
-    }
-
-    /**
-     * Is ES 5 undefined
-     *
-     * @param es5undefined
-     */
-    protected void setEs5undefined(Boolean es5undefined)
-    {
-<span class="nc" id="L1022">        this.es5undefined = es5undefined;</span>
-<span class="nc" id="L1023">    }</span>
-
-    /**
-     * Does support generators
-     *
-     * @return
-     */
-    public Boolean isGenerators()
-    {
-<span class="nc" id="L1032">        return generators;</span>
-    }
-
-    /**
-     * Does support generators
-     *
-     * @param generators
-     */
-    protected void setGenerators(Boolean generators)
-    {
-<span class="nc" id="L1042">        this.generators = generators;</span>
-<span class="nc" id="L1043">    }</span>
-
-    /**
-     * Is ES 6 number
-     *
-     * @return
-     */
-    public Boolean isEs6number()
-    {
-<span class="nc" id="L1052">        return es6number;</span>
-    }
-
-    /**
-     * Is ES 6 number
-     *
-     * @param es6number
-     */
-    protected void setEs6number(Boolean es6number)
-    {
-<span class="nc" id="L1062">        this.es6number = es6number;</span>
-<span class="nc" id="L1063">    }</span>
-
-    /**
-     * Is ES 6 object
-     *
-     * @return
-     */
-    public Boolean isEs6object()
-    {
-<span class="nc" id="L1072">        return es6object;</span>
-    }
-
-    /**
-     * Is ES 6 Object
-     *
-     * @param es6object
-     */
-    protected void setEs6object(Boolean es6object)
-    {
-<span class="nc" id="L1082">        this.es6object = es6object;</span>
-<span class="nc" id="L1083">    }</span>
-
-    /**
-     * Is ES 6 String
-     *
-     * @return
-     */
-    public Boolean isEs6string()
-    {
-<span class="nc" id="L1092">        return es6string;</span>
-    }
-
-    /**
-     * Sets ES 6 String
-     *
-     * @param es6string
-     */
-    protected void setEs6string(Boolean es6string)
-    {
-<span class="nc" id="L1102">        this.es6string = es6string;</span>
-<span class="nc" id="L1103">    }</span>
-
-    /**
-     * Is device motion reading enabled
-     *
-     * @return
-     */
-    public Boolean isDevicemotion()
-    {
-<span class="nc" id="L1112">        return devicemotion;</span>
-    }
-
-    /**
-     * Sets device motion
-     *
-     * @param devicemotion
-     */
-    protected void setDevicemotion(Boolean devicemotion)
-    {
-<span class="nc" id="L1122">        this.devicemotion = devicemotion;</span>
-<span class="nc" id="L1123">    }</span>
-
-    /**
-     * Is device Orientation
-     *
-     * @return
-     */
-    public Boolean isDeviceorientation()
-    {
-<span class="nc" id="L1132">        return deviceorientation;</span>
-    }
-
-    /**
-     * Sets device orientation
-     *
-     * @param deviceorientation
-     */
-    protected void setDeviceorientation(Boolean deviceorientation)
-    {
-<span class="nc" id="L1142">        this.deviceorientation = deviceorientation;</span>
-<span class="nc" id="L1143">    }</span>
-
-    /**
-     * Is File Reader
-     *
-     * @return
-     */
-    public Boolean isFilereader()
-    {
-<span class="nc" id="L1152">        return filereader;</span>
-    }
-
-    /**
-     * Is File Reader
-     *
-     * @param filereader
-     */
-    protected void setFilereader(Boolean filereader)
-    {
-<span class="nc" id="L1162">        this.filereader = filereader;</span>
-<span class="nc" id="L1163">    }</span>
-
-    /**
-     * Is Contains Enabled
-     *
-     * @return
-     */
-    public Boolean isContains()
-    {
-<span class="nc" id="L1172">        return contains;</span>
-    }
-
-    /**
-     * Is Contains enabled
-     *
-     * @param contains
-     */
-    protected void setContains(Boolean contains)
-    {
-<span class="nc" id="L1182">        this.contains = contains;</span>
-<span class="nc" id="L1183">    }</span>
-
-    /**
-     * Is Context Menu
-     *
-     * @return
-     */
-    public Boolean isContextmenu()
-    {
-<span class="nc" id="L1192">        return contextmenu;</span>
-    }
-
-    /**
-     * Is Context Menu
-     *
-     * @param contextmenu
-     */
-    protected void setContextmenu(Boolean contextmenu)
-    {
-<span class="nc" id="L1202">        this.contextmenu = contextmenu;</span>
-<span class="nc" id="L1203">    }</span>
-
-    /**
-     * Is CSS All allowed
-     *
-     * @return
-     */
-    public Boolean isCssall()
-    {
-<span class="nc" id="L1212">        return cssall;</span>
-    }
-
-    /**
-     * Is CSS All allowed
-     *
-     * @param cssall
-     */
-    protected void setCssall(Boolean cssall)
-    {
-<span class="nc" id="L1222">        this.cssall = cssall;</span>
-<span class="nc" id="L1223">    }</span>
-
-    /**
-     * Is will change allowed
-     *
-     * @return
-     */
-    public Boolean isWillchange()
-    {
-<span class="nc" id="L1232">        return willchange;</span>
-    }
-
-    /**
-     * Is will change allowed
-     *
-     * @param willchange
-     */
-    protected void setWillchange(Boolean willchange)
-    {
-<span class="nc" id="L1242">        this.willchange = willchange;</span>
-<span class="nc" id="L1243">    }</span>
-
-    /**
-     * Is class list allowed
-     *
-     * @return
-     */
-    public Boolean isClasslist()
-    {
-<span class="nc" id="L1252">        return classlist;</span>
-    }
-
-    /**
-     * Is class list enabled
-     *
-     * @param classlist
-     */
-    protected void setClasslist(Boolean classlist)
-    {
-<span class="nc" id="L1262">        this.classlist = classlist;</span>
-<span class="nc" id="L1263">    }</span>
-
-    /**
-     * Is document fragment allowed
-     *
-     * @return
-     */
-    public Boolean isDocumentfragment()
-    {
-<span class="nc" id="L1272">        return documentfragment;</span>
-    }
-
-    /**
-     * Sets document fragment
-     *
-     * @param documentfragment
-     */
-    protected void setDocumentfragment(Boolean documentfragment)
-    {
-<span class="nc" id="L1282">        this.documentfragment = documentfragment;</span>
-<span class="nc" id="L1283">    }</span>
-
-    /**
-     * Is audio allowed
-     *
-     * @return
-     */
-    public Boolean isAudio()
-    {
-<span class="nc" id="L1292">        return audio;</span>
-    }
-
-    /**
-     * Set audio
-     *
-     * @param audio
-     */
-    protected void setAudio(Boolean audio)
-    {
-<span class="nc" id="L1302">        this.audio = audio;</span>
-<span class="nc" id="L1303">    }</span>
-
-    /**
-     * Is canvas
-     *
-     * @return
-     */
-    public Boolean isCanvas()
-    {
-<span class="nc" id="L1312">        return canvas;</span>
-    }
-
-    /**
-     * Sets canvas allowed or not
-     *
-     * @param canvas
-     */
-    protected void setCanvas(Boolean canvas)
-    {
-<span class="nc" id="L1322">        this.canvas = canvas;</span>
-<span class="nc" id="L1323">    }</span>
-
-    /**
-     * Sets if canvas text is allowed
-     *
-     * @return
-     */
-    public Boolean isCanvastext()
-    {
-<span class="nc" id="L1332">        return canvastext;</span>
-    }
-
-    /**
-     * Sets canvas text
-     *
-     * @param canvastext
-     */
-    protected void setCanvastext(Boolean canvastext)
-    {
-<span class="nc" id="L1342">        this.canvastext = canvastext;</span>
-<span class="nc" id="L1343">    }</span>
-
-    /**
-     * Is content editable
-     *
-     * @return
-     */
-    public Boolean isContenteditable()
-    {
-<span class="nc" id="L1352">        return contenteditable;</span>
-    }
-
-    /**
-     * Is content editable
-     *
-     * @param contenteditable
-     */
-    protected void setContenteditable(Boolean contenteditable)
-    {
-<span class="nc" id="L1362">        this.contenteditable = contenteditable;</span>
-<span class="nc" id="L1363">    }</span>
-
-    /**
-     * Can use emoji's
-     *
-     * @return
-     */
-    public Boolean isEmoji()
-    {
-<span class="nc" id="L1372">        return emoji;</span>
-    }
-
-    /**
-     * Sets can use emoji's
-     *
-     * @param emoji
-     */
-    protected void setEmoji(Boolean emoji)
-    {
-<span class="nc" id="L1382">        this.emoji = emoji;</span>
-<span class="nc" id="L1383">    }</span>
-
-    /**
-     * Sets OL Reversed
-     *
-     * @return
-     */
-    public Boolean isOlreversed()
-    {
-<span class="nc" id="L1392">        return olreversed;</span>
-    }
-
-    /**
-     * Sets OL Reversed
-     *
-     * @param olreversed
-     */
-    protected void setOlreversed(Boolean olreversed)
-    {
-<span class="nc" id="L1402">        this.olreversed = olreversed;</span>
-<span class="nc" id="L1403">    }</span>
-
-    /**
-     * Return the user data enabled
-     *
-     * @return
-     */
-    public Boolean isUserdata()
-    {
-<span class="nc" id="L1412">        return userdata;</span>
-    }
-
-    /**
-     * Sets User Data as enabled
-     *
-     * @param userdata
-     */
-    protected void setUserdata(Boolean userdata)
-    {
-<span class="nc" id="L1422">        this.userdata = userdata;</span>
-<span class="nc" id="L1423">    }</span>
-
-    /**
-     * Returns if video is enabled
-     *
-     * @return
-     */
-    public Boolean isVideo()
-    {
-<span class="nc" id="L1432">        return video;</span>
-    }
-
-    /**
-     * Sets if video is enabled
-     *
-     * @param video
-     */
-    protected void setVideo(Boolean video)
-    {
-<span class="nc" id="L1442">        this.video = video;</span>
-<span class="nc" id="L1443">    }</span>
-
-    /**
-     * Is VML
-     *
-     * @return
-     */
-    public Boolean isVml()
-    {
-<span class="nc" id="L1452">        return vml;</span>
-    }
-
-    /**
-     * Is VML
-     *
-     * @param vml
-     */
-    protected void setVml(Boolean vml)
-    {
-<span class="nc" id="L1462">        this.vml = vml;</span>
-<span class="nc" id="L1463">    }</span>
-
-    /**
-     * If animations are allowed
-     *
-     * @return
-     */
-    public Boolean isWebanimations()
-    {
-<span class="nc" id="L1472">        return webanimations;</span>
-    }
-
-    /**
-     * If web animations are allowed
-     *
-     * @param webanimations
-     */
-    protected void setWebanimations(Boolean webanimations)
-    {
-<span class="nc" id="L1482">        this.webanimations = webanimations;</span>
-<span class="nc" id="L1483">    }</span>
-
-    /**
-     * Is Web GL allowed
-     *
-     * @return
-     */
-    public Boolean isWebgl()
-    {
-<span class="nc" id="L1492">        return webgl;</span>
-    }
-
-    /**
-     * If web gl is allowed
-     *
-     * @param webgl
-     */
-    protected void setWebgl(Boolean webgl)
-    {
-<span class="nc" id="L1502">        this.webgl = webgl;</span>
-<span class="nc" id="L1503">    }</span>
-
-    /**
-     * Is a download allowed
-     *
-     * @return
-     */
-    public Boolean isAdownload()
-    {
-<span class="nc" id="L1512">        return adownload;</span>
-    }
-
-    /**
-     * Is a download allowed
-     *
-     * @param adownload
-     */
-    protected void setAdownload(Boolean adownload)
-    {
-<span class="nc" id="L1522">        this.adownload = adownload;</span>
-<span class="nc" id="L1523">    }</span>
-
-    /**
-     * Is audio loop allowed
-     *
-     * @return
-     */
-    public Boolean isAudioloop()
-    {
-<span class="nc" id="L1532">        return audioloop;</span>
-    }
-
-    /**
-     * Sets if audio loop is allowed
-     *
-     * @param audioloop
-     */
-    protected void setAudioloop(Boolean audioloop)
-    {
-<span class="nc" id="L1542">        this.audioloop = audioloop;</span>
-<span class="nc" id="L1543">    }</span>
-
-    /**
-     * Is canvas blending allowed
-     *
-     * @return
-     */
-    public Boolean isCanvasblending()
-    {
-<span class="nc" id="L1552">        return canvasblending;</span>
-    }
-
-    /**
-     * If canvas blending is allowed
-     *
-     * @param canvasblending
-     */
-    protected void setCanvasblending(Boolean canvasblending)
-    {
-<span class="nc" id="L1562">        this.canvasblending = canvasblending;</span>
-<span class="nc" id="L1563">    }</span>
-
-    /**
-     * If data jpegs are allowed
-     *
-     * @return
-     */
-    public Boolean isTodataurljpeg()
-    {
-<span class="nc" id="L1572">        return todataurljpeg;</span>
-    }
-
-    /**
-     * If data jpegs are allowed
-     *
-     * @param todataurljpeg
-     */
-    protected void setTodataurljpeg(Boolean todataurljpeg)
-    {
-<span class="nc" id="L1582">        this.todataurljpeg = todataurljpeg;</span>
-<span class="nc" id="L1583">    }</span>
-
-    /**
-     * If data png's are allowed
-     *
-     * @return
-     */
-    public Boolean isTodataurlpng()
-    {
-<span class="nc" id="L1592">        return todataurlpng;</span>
-    }
-
-    /**
-     * If data png's are allowed
-     *
-     * @param todataurlpng
-     */
-    protected void setTodataurlpng(Boolean todataurlpng)
-    {
-<span class="nc" id="L1602">        this.todataurlpng = todataurlpng;</span>
-<span class="nc" id="L1603">    }</span>
-
-    /**
-     * If to data url web p is allowed
-     *
-     * @return
-     */
-    public Boolean isTodataurlwebp()
-    {
-<span class="nc" id="L1612">        return todataurlwebp;</span>
-    }
-
-    /**
-     * If data URL web p is allowed
-     *
-     * @param todataurlwebp
-     */
-    protected void setTodataurlwebp(Boolean todataurlwebp)
-    {
-<span class="nc" id="L1622">        this.todataurlwebp = todataurlwebp;</span>
-<span class="nc" id="L1623">    }</span>
-
-    /**
-     * If canvas winding is allowed
-     *
-     * @return
-     */
-    public Boolean isCanvaswinding()
-    {
-<span class="nc" id="L1632">        return canvaswinding;</span>
-    }
-
-    /**
-     * If canvas winding is allowed
-     *
-     * @param canvaswinding
-     */
-    protected void setCanvaswinding(Boolean canvaswinding)
-    {
-<span class="nc" id="L1642">        this.canvaswinding = canvaswinding;</span>
-<span class="nc" id="L1643">    }</span>
-
-    /**
-     * Is bg position shorthand allowed
-     *
-     * @return
-     */
-    public Boolean isBgpositionshorthand()
-    {
-<span class="nc" id="L1652">        return bgpositionshorthand;</span>
-    }
-
-    /**
-     * Is bg position shorthand allowed
-     *
-     * @param bgpositionshorthand
-     */
-    protected void setBgpositionshorthand(Boolean bgpositionshorthand)
-    {
-<span class="nc" id="L1662">        this.bgpositionshorthand = bgpositionshorthand;</span>
-<span class="nc" id="L1663">    }</span>
-
-    /**
-     * Is multiple background allowed
-     *
-     * @return
-     */
-    public Boolean isMultiplebgs()
-    {
-<span class="nc" id="L1672">        return multiplebgs;</span>
-    }
-
-    /**
-     * Is multiple backgrounds allowed
-     *
-     * @param multiplebgs
-     */
-    protected void setMultiplebgs(Boolean multiplebgs)
-    {
-<span class="nc" id="L1682">        this.multiplebgs = multiplebgs;</span>
-<span class="nc" id="L1683">    }</span>
-
-    /**
-     * Is CSS Pointer Events allowed
-     *
-     * @return
-     */
-    public Boolean isCsspointerevents()
-    {
-<span class="nc" id="L1692">        return csspointerevents;</span>
-    }
-
-    /**
-     * Is CSS Pointer Events Allowed
-     *
-     * @param csspointerevents
-     */
-    protected void setCsspointerevents(Boolean csspointerevents)
-    {
-<span class="nc" id="L1702">        this.csspointerevents = csspointerevents;</span>
-<span class="nc" id="L1703">    }</span>
-
-    /**
-     * Are regions allowed
-     *
-     * @return
-     */
-    public Boolean isRegions()
-    {
-<span class="nc" id="L1712">        return regions;</span>
-    }
-
-    /**
-     * Are regions allowed
-     *
-     * @param regions
-     */
-    protected void setRegions(Boolean regions)
-    {
-<span class="nc" id="L1722">        this.regions = regions;</span>
-<span class="nc" id="L1723">    }</span>
-
-    /**
-     * Is CSS rem Unit allowed
-     *
-     * @return
-     */
-    public Boolean isCssremunit()
-    {
-<span class="nc" id="L1732">        return cssremunit;</span>
-    }
-
-    /**
-     * Is CSS Rem Units Allowed
-     *
-     * @param cssremunit
-     */
-    protected void setCssremunit(Boolean cssremunit)
-    {
-<span class="nc" id="L1742">        this.cssremunit = cssremunit;</span>
-<span class="nc" id="L1743">    }</span>
-
-    /**
-     * Are RGBA Values allowed
-     *
-     * @return
-     */
-    public Boolean isRgba()
-    {
-<span class="nc" id="L1752">        return rgba;</span>
-    }
-
-    /**
-     * Are RGBA values allowed
-     *
-     * @param rgba
-     */
-    protected void setRgba(Boolean rgba)
-    {
-<span class="nc" id="L1762">        this.rgba = rgba;</span>
-<span class="nc" id="L1763">    }</span>
-
-    /**
-     * Is preserve 3D enabled
-     *
-     * @return
-     */
-    public Boolean isPreserve3d()
-    {
-<span class="nc" id="L1772">        return preserve3d;</span>
-    }
-
-    /**
-     * Is preserve 3d enabled
-     *
-     * @param preserve3d
-     */
-    protected void setPreserve3d(Boolean preserve3d)
-    {
-<span class="nc" id="L1782">        this.preserve3d = preserve3d;</span>
-<span class="nc" id="L1783">    }</span>
-
-    /**
-     * Is progress bar allowed
-     *
-     * @return
-     */
-    public Boolean isProgressbar()
-    {
-<span class="nc" id="L1792">        return progressbar;</span>
-    }
-
-    /**
-     * Is progress bar allowed
-     *
-     * @param progressbar
-     */
-    protected void setProgressbar(Boolean progressbar)
-    {
-<span class="nc" id="L1802">        this.progressbar = progressbar;</span>
-<span class="nc" id="L1803">    }</span>
-
-    /**
-     * Is meter allowed
-     *
-     * @return
-     */
-    public Boolean isMeter()
-    {
-<span class="nc" id="L1812">        return meter;</span>
-    }
-
-    /**
-     * Is meter allowed
-     *
-     * @param meter
-     */
-    protected void setMeter(Boolean meter)
-    {
-<span class="nc" id="L1822">        this.meter = meter;</span>
-<span class="nc" id="L1823">    }</span>
-
-    /**
-     * Is time allowed
-     *
-     * @return
-     */
-    public Boolean isTime()
-    {
-<span class="nc" id="L1832">        return time;</span>
-    }
-
-    /**
-     * Is time allowed
-     *
-     * @param time
-     */
-    protected void setTime(Boolean time)
-    {
-<span class="nc" id="L1842">        this.time = time;</span>
-<span class="nc" id="L1843">    }</span>
-
-    /**
-     * Is file input allowed
-     *
-     * @return
-     */
-    public Boolean isFileinput()
-    {
-<span class="nc" id="L1852">        return fileinput;</span>
-    }
-
-    /**
-     * Is file input allowed
-     *
-     * @param fileinput
-     */
-    protected void setFileinput(Boolean fileinput)
-    {
-<span class="nc" id="L1862">        this.fileinput = fileinput;</span>
-<span class="nc" id="L1863">    }</span>
-
-    /**
-     * Is ambient light allowed
-     *
-     * @return
-     */
-    public Boolean isAmbientlight()
-    {
-<span class="nc" id="L1872">        return ambientlight;</span>
-    }
-
-    /**
-     * Is ambient light allowed
-     *
-     * @param ambientlight
-     */
-    protected void setAmbientlight(Boolean ambientlight)
-    {
-<span class="nc" id="L1882">        this.ambientlight = ambientlight;</span>
-<span class="nc" id="L1883">    }</span>
-
-    /**
-     * Is hash changing allowed
-     *
-     * @return
-     */
-    public Boolean isHashchange()
-    {
-<span class="nc" id="L1892">        return hashchange;</span>
-    }
-
-    /**
-     * Is hash changing allowed
-     *
-     * @param hashchange
-     */
-    protected void setHashchange(Boolean hashchange)
-    {
-<span class="nc" id="L1902">        this.hashchange = hashchange;</span>
-<span class="nc" id="L1903">    }</span>
-
-    /**
-     * Is input search event allowed
-     *
-     * @return
-     */
-    public Boolean isInputsearchevent()
-    {
-<span class="nc" id="L1912">        return inputsearchevent;</span>
-    }
-
-    /**
-     * Is Input search event allowed
-     *
-     * @param inputsearchevent
-     */
-    protected void setInputsearchevent(Boolean inputsearchevent)
-    {
-<span class="nc" id="L1922">        this.inputsearchevent = inputsearchevent;</span>
-<span class="nc" id="L1923">    }</span>
-
-    /**
-     * Is CSS calc enabled
-     *
-     * @return
-     */
-    public Boolean isCsscalc()
-    {
-<span class="nc" id="L1932">        return csscalc;</span>
-    }
-
-    /**
-     * Is CSS Calc enabled
-     *
-     * @param csscalc
-     */
-    protected void setCsscalc(Boolean csscalc)
-    {
-<span class="nc" id="L1942">        this.csscalc = csscalc;</span>
-<span class="nc" id="L1943">    }</span>
-
-    /**
-     * Is Cubic Bezier Enabled
-     *
-     * @return
-     */
-    public Boolean isCubicbezierrange()
-    {
-<span class="nc" id="L1952">        return cubicbezierrange;</span>
-    }
-
-    /**
-     * Sets if cubic bezier is enabled
-     *
-     * @param cubicbezierrange
-     */
-    protected void setCubicbezierrange(Boolean cubicbezierrange)
-    {
-<span class="nc" id="L1962">        this.cubicbezierrange = cubicbezierrange;</span>
-<span class="nc" id="L1963">    }</span>
-
-    /**
-     * Is CSS Gradients enabled
-     *
-     * @return
-     */
-    public Boolean isCssgradients()
-    {
-<span class="nc" id="L1972">        return cssgradients;</span>
-    }
-
-    /**
-     * Is CSS Gradients enabled
-     *
-     * @param cssgradients
-     */
-    protected void setCssgradients(Boolean cssgradients)
-    {
-<span class="nc" id="L1982">        this.cssgradients = cssgradients;</span>
-<span class="nc" id="L1983">    }</span>
-
-    /**
-     * Is opacity enabled
-     *
-     * @return
-     */
-    public Boolean isOpacity()
-    {
-<span class="nc" id="L1992">        return opacity;</span>
-    }
-
-    /**
-     * Is opacity enabled
-     *
-     * @param opacity
-     */
-    protected void setOpacity(Boolean opacity)
-    {
-<span class="nc" id="L2002">        this.opacity = opacity;</span>
-<span class="nc" id="L2003">    }</span>
-
-    /**
-     * Is CSS Position Sticky enabled
-     *
-     * @return
-     */
-    public Boolean isCsspositionsticky()
-    {
-<span class="nc" id="L2012">        return csspositionsticky;</span>
-    }
-
-    /**
-     * Sets if CSS Position is sticky
-     *
-     * @param csspositionsticky
-     */
-    protected void setCsspositionsticky(Boolean csspositionsticky)
-    {
-<span class="nc" id="L2022">        this.csspositionsticky = csspositionsticky;</span>
-<span class="nc" id="L2023">    }</span>
-
-    /**
-     * Is Create element attributes allowed
-     *
-     * @return
-     */
-    public Boolean isCreateelementattrs()
-    {
-<span class="nc" id="L2032">        return createelementattrs;</span>
-    }
-
-    /**
-     * Is create element attributes allowed
-     *
-     * @param createelementattrs
-     */
-    protected void setCreateelementattrs(Boolean createelementattrs)
-    {
-<span class="nc" id="L2042">        this.createelementattrs = createelementattrs;</span>
-<span class="nc" id="L2043">    }</span>
-
-    /**
-     * Sets if create elements attr's are allowed
-     *
-     * @return
-     */
-    public Boolean isCreateelementAttrs()
-    {
-<span class="nc" id="L2052">        return createelement_attrs;</span>
-    }
-
-    /**
-     * Sets if create element attrs are allowed
-     *
-     * @param createelement_attrs
-     */
-    protected void setCreateelementAttrs(Boolean createelement_attrs)
-    {
-<span class="nc" id="L2062">        this.createelement_attrs = createelement_attrs;</span>
-<span class="nc" id="L2063">    }</span>
-
-    /**
-     * If datasets are allowed
-     *
-     * @return
-     */
-    public Boolean isDataset()
-    {
-<span class="nc" id="L2072">        return dataset;</span>
-    }
-
-    /**
-     * If datasets are allowed
-     *
-     * @param dataset
-     */
-    protected void setDataset(Boolean dataset)
-    {
-<span class="nc" id="L2082">        this.dataset = dataset;</span>
-<span class="nc" id="L2083">    }</span>
-
-    /**
-     * If CSS CH Units are allowed
-     *
-     * @return
-     */
-    public Boolean isCsschunit()
-    {
-<span class="nc" id="L2092">        return csschunit;</span>
-    }
-
-    /**
-     * If CSS CH Units are allowed
-     *
-     * @param csschunit
-     */
-    protected void setCsschunit(Boolean csschunit)
-    {
-<span class="nc" id="L2102">        this.csschunit = csschunit;</span>
-<span class="nc" id="L2103">    }</span>
-
-    /**
-     * If CSS EX Units are allowed
-     *
-     * @return
-     */
-    public Boolean isCssexunit()
-    {
-<span class="nc" id="L2112">        return cssexunit;</span>
-    }
-
-    /**
-     * If CSS Ex Units are allowed
-     *
-     * @param cssexunit
-     */
-    protected void setCssexunit(Boolean cssexunit)
-    {
-<span class="nc" id="L2122">        this.cssexunit = cssexunit;</span>
-<span class="nc" id="L2123">    }</span>
-
-    /**
-     * Is micro data allowed
-     *
-     * @return
-     */
-    public Boolean isMicrodata()
-    {
-<span class="nc" id="L2132">        return microdata;</span>
-    }
-
-    /**
-     * Sets if micro data is allowed
-     *
-     * @param microdata
-     */
-    protected void setMicrodata(Boolean microdata)
-    {
-<span class="nc" id="L2142">        this.microdata = microdata;</span>
-<span class="nc" id="L2143">    }</span>
-
-    /**
-     * Is BDI Allowed
-     *
-     * @return
-     */
-    public Boolean isBdi()
-    {
-<span class="nc" id="L2152">        return bdi;</span>
-    }
-
-    /**
-     * Sets if BDI Is allowed
-     *
-     * @param bdi
-     */
-    protected void setBdi(Boolean bdi)
-    {
-<span class="nc" id="L2162">        this.bdi = bdi;</span>
-<span class="nc" id="L2163">    }</span>
-
-    /**
-     * If Data List Elem is allowed
-     *
-     * @return
-     */
-    public Boolean isDatalistelem()
-    {
-<span class="nc" id="L2172">        return datalistelem;</span>
-    }
-
-    /**
-     * If data list elem is allowed
-     *
-     * @param datalistelem
-     */
-    protected void setDatalistelem(Boolean datalistelem)
-    {
-<span class="nc" id="L2182">        this.datalistelem = datalistelem;</span>
-<span class="nc" id="L2183">    }</span>
-
-    /**
-     * Is HSLA Allowed
-     *
-     * @return
-     */
-    public Boolean isHsla()
-    {
-<span class="nc" id="L2192">        return hsla;</span>
-    }
-
-    /**
-     * Is HSLA Allowed
-     *
-     * @param hsla
-     */
-    protected void setHsla(Boolean hsla)
-    {
-<span class="nc" id="L2202">        this.hsla = hsla;</span>
-<span class="nc" id="L2203">    }</span>
-
-    /**
-     * Is Flash Allowed
-     *
-     * @return
-     */
-    public Boolean isFlash()
-    {
-<span class="nc" id="L2212">        return flash;</span>
-    }
-
-    /**
-     * Is flash allowed
-     *
-     * @param flash
-     */
-    protected void setFlash(Boolean flash)
-    {
-<span class="nc" id="L2222">        this.flash = flash;</span>
-<span class="nc" id="L2223">    }</span>
-
-    /**
-     * Is hidden scroll allowed
-     *
-     * @return
-     */
-    public Boolean isHiddenscroll()
-    {
-<span class="nc" id="L2232">        return hiddenscroll;</span>
-    }
-
-    /**
-     * If hidden scroll is allowed
-     *
-     * @param hiddenscroll
-     */
-    protected void setHiddenscroll(Boolean hiddenscroll)
-    {
-<span class="nc" id="L2242">        this.hiddenscroll = hiddenscroll;</span>
-<span class="nc" id="L2243">    }</span>
-
-    /**
-     * Is Math allowed
-     *
-     * @return
-     */
-    public Boolean isMathml()
-    {
-<span class="nc" id="L2252">        return mathml;</span>
-    }
-
-    /**
-     * Is math allowed
-     *
-     * @param mathml
-     */
-    protected void setMathml(Boolean mathml)
-    {
-<span class="nc" id="L2262">        this.mathml = mathml;</span>
-<span class="nc" id="L2263">    }</span>
-
-    /**
-     * Are touch events allowed
-     *
-     * @return
-     */
-    public Boolean isTouchevents()
-    {
-<span class="nc" id="L2272">        return touchevents;</span>
-    }
-
-    /**
-     * are touch events allowed
-     *
-     * @param touchevents
-     */
-    protected void setTouchevents(Boolean touchevents)
-    {
-<span class="nc" id="L2282">        this.touchevents = touchevents;</span>
-<span class="nc" id="L2283">    }</span>
-
-    /**
-     * Is Unicode Range allowed
-     *
-     * @return
-     */
-    public Boolean isUnicoderange()
-    {
-<span class="nc" id="L2292">        return unicoderange;</span>
-    }
-
-    /**
-     * Is uni-code range allowed
-     *
-     * @param unicoderange
-     */
-    protected void setUnicoderange(Boolean unicoderange)
-    {
-<span class="nc" id="L2302">        this.unicoderange = unicoderange;</span>
-<span class="nc" id="L2303">    }</span>
-
-    /**
-     * Is Unicode allowed
-     *
-     * @return
-     */
-    public Boolean isUnicode()
-    {
-<span class="nc" id="L2312">        return unicode;</span>
-    }
-
-    /**
-     * Is Unicode allowed
-     *
-     * @param unicode
-     */
-    protected void setUnicode(Boolean unicode)
-    {
-<span class="nc" id="L2322">        this.unicode = unicode;</span>
-<span class="nc" id="L2323">    }</span>
-
-    /**
-     * Is checked allowed
-     *
-     * @return
-     */
-    public Boolean isChecked()
-    {
-<span class="nc" id="L2332">        return checked;</span>
-    }
-
-    /**
-     * if checked allowed
-     *
-     * @param checked
-     */
-    protected void setChecked(Boolean checked)
-    {
-<span class="nc" id="L2342">        this.checked = checked;</span>
-<span class="nc" id="L2343">    }</span>
-
-    /**
-     * Is display tables allowed
-     *
-     * @return
-     */
-    public Boolean isDisplaytable()
-    {
-<span class="nc" id="L2352">        return displaytable;</span>
-    }
-
-    /**
-     * Sets if display tables are allowed
-     *
-     * @param displaytable
-     */
-    protected void setDisplaytable(Boolean displaytable)
-    {
-<span class="nc" id="L2362">        this.displaytable = displaytable;</span>
-<span class="nc" id="L2363">    }</span>
-
-    /**
-     * If display table is allowed
-     *
-     * @return
-     */
-    public Boolean isDisplayTable()
-    {
-<span class="nc" id="L2372">        return display_table;</span>
-    }
-
-    /**
-     * If display table is allowed
-     *
-     * @param display_table
-     */
-    protected void setDisplayTable(Boolean display_table)
-    {
-<span class="nc" id="L2382">        this.display_table = display_table;</span>
-<span class="nc" id="L2383">    }</span>
-
-    /**
-     * If font faces are allowed
-     *
-     * @return
-     */
-    public Boolean isFontface()
-    {
-<span class="nc" id="L2392">        return fontface;</span>
-    }
-
-    /**
-     * If font faces are allowed
-     *
-     * @param fontface
-     */
-    protected void setFontface(Boolean fontface)
-    {
-<span class="nc" id="L2402">        this.fontface = fontface;</span>
-<span class="nc" id="L2403">    }</span>
-
-    /**
-     * Is generated content allowed
-     *
-     * @return
-     */
-    public Boolean isGeneratedcontent()
-    {
-<span class="nc" id="L2412">        return generatedcontent;</span>
-    }
-
-    /**
-     * Is generated content allowed
-     *
-     * @param generatedcontent
-     */
-    protected void setGeneratedcontent(Boolean generatedcontent)
-    {
-<span class="nc" id="L2422">        this.generatedcontent = generatedcontent;</span>
-<span class="nc" id="L2423">    }</span>
-
-    /*
-    Is hair line allowed
-     */
-    public Boolean isHairline()
-    {
-<span class="nc" id="L2430">        return hairline;</span>
-    }
-
-    /**
-     * Is hair line allowed
-     *
-     * @param hairline
-     */
-    protected void setHairline(Boolean hairline)
-    {
-<span class="nc" id="L2440">        this.hairline = hairline;</span>
-<span class="nc" id="L2441">    }</span>
-
-    /**
-     * Is CSS Invalid
-     *
-     * @return
-     */
-    public Boolean isCssinvalid()
-    {
-<span class="nc" id="L2450">        return cssinvalid;</span>
-    }
-
-    /**
-     * Is CSS Invalid
-     *
-     * @param cssinvalid
-     */
-    protected void setCssinvalid(Boolean cssinvalid)
-    {
-<span class="nc" id="L2460">        this.cssinvalid = cssinvalid;</span>
-<span class="nc" id="L2461">    }</span>
-
-    /**
-     * Is last child elements allowed
-     *
-     * @return
-     */
-    public Boolean isLastchild()
-    {
-<span class="nc" id="L2470">        return lastchild;</span>
-    }
-
-    /**
-     * Sets if last child elements are allowed
-     *
-     * @param lastchild
-     */
-    protected void setLastchild(Boolean lastchild)
-    {
-<span class="nc" id="L2480">        this.lastchild = lastchild;</span>
-<span class="nc" id="L2481">    }</span>
-
-    /**
-     * Is number child allocations allowed
-     *
-     * @return
-     */
-    public Boolean isNthchild()
-    {
-<span class="nc" id="L2490">        return nthchild;</span>
-    }
-
-    /**
-     * Is number child allocations allowed
-     *
-     * @param nthchild
-     */
-    protected void setNthchild(Boolean nthchild)
-    {
-<span class="nc" id="L2500">        this.nthchild = nthchild;</span>
-<span class="nc" id="L2501">    }</span>
-
-    /**
-     * Is a CSS scroll bar allowed
-     *
-     * @return
-     */
-    public Boolean isCssscrollbar()
-    {
-<span class="nc" id="L2510">        return cssscrollbar;</span>
-    }
-
-    /**
-     * Is the CSS Scroll bar allowed
-     *
-     * @param cssscrollbar
-     */
-    protected void setCssscrollbar(Boolean cssscrollbar)
-    {
-<span class="nc" id="L2520">        this.cssscrollbar = cssscrollbar;</span>
-<span class="nc" id="L2521">    }</span>
-
-    /**
-     * Is sibling general CSS allowed
-     *
-     * @return
-     */
-    public Boolean isSiblinggeneral()
-    {
-<span class="nc" id="L2530">        return siblinggeneral;</span>
-    }
-
-    /**
-     * Is sibling general allowed
-     *
-     * @param siblinggeneral
-     */
-    protected void setSiblinggeneral(Boolean siblinggeneral)
-    {
-<span class="nc" id="L2540">        this.siblinggeneral = siblinggeneral;</span>
-<span class="nc" id="L2541">    }</span>
-
-    /**
-     * Is Sub Pixel Font allowed
-     *
-     * @return
-     */
-    public Boolean isSubpixelfont()
-    {
-<span class="nc" id="L2550">        return subpixelfont;</span>
-    }
-
-    /**
-     * Is Subpixel font allowed
-     *
-     * @param subpixelfont
-     */
-    protected void setSubpixelfont(Boolean subpixelfont)
-    {
-<span class="nc" id="L2560">        this.subpixelfont = subpixelfont;</span>
-<span class="nc" id="L2561">    }</span>
-
-    /**
-     * Is CSS Valid allowed
-     *
-     * @return
-     */
-    public Boolean isCssvalid()
-    {
-<span class="nc" id="L2570">        return cssvalid;</span>
-    }
-
-    /**
-     * Is CSS Valid allowed
-     *
-     * @param cssvalid
-     */
-    protected void setCssvalid(Boolean cssvalid)
-    {
-<span class="nc" id="L2580">        this.cssvalid = cssvalid;</span>
-<span class="nc" id="L2581">    }</span>
-
-    /**
-     * Is vh units allowed
-     *
-     * @return
-     */
-    public Boolean isCssvhunit()
-    {
-<span class="nc" id="L2590">        return cssvhunit;</span>
-    }
-
-    /**
-     * Is vh units allowed
-     *
-     * @param cssvhunit
-     */
-    protected void setCssvhunit(Boolean cssvhunit)
-    {
-<span class="nc" id="L2600">        this.cssvhunit = cssvhunit;</span>
-<span class="nc" id="L2601">    }</span>
+<span class="nc" id="L248">        this.inputtypes = inputtypes;</span>
+<span class="nc" id="L249">    }</span>
 
     /**
      * Is CSS VMax Unit Allowed
@@ -2607,7 +255,7 @@ public class ModernizrDto
      */
     public Boolean isCssvmaxunit()
     {
-<span class="nc" id="L2610">        return cssvmaxunit;</span>
+<span class="nc" id="L258">        return cssvmaxunit;</span>
     }
 
     /**
@@ -2617,8 +265,8 @@ public class ModernizrDto
      */
     protected void setCssvmaxunit(Boolean cssvmaxunit)
     {
-<span class="nc" id="L2620">        this.cssvmaxunit = cssvmaxunit;</span>
-<span class="nc" id="L2621">    }</span>
+<span class="nc" id="L268">        this.cssvmaxunit = cssvmaxunit;</span>
+<span class="nc" id="L269">    }</span>
 
     /**
      * Is CSS VMin unit allowed
@@ -2627,7 +275,7 @@ public class ModernizrDto
      */
     public Boolean isCssvminunit()
     {
-<span class="nc" id="L2630">        return cssvminunit;</span>
+<span class="nc" id="L278">        return cssvminunit;</span>
     }
 
     /**
@@ -2637,8 +285,8 @@ public class ModernizrDto
      */
     protected void setCssvminunit(Boolean cssvminunit)
     {
-<span class="nc" id="L2640">        this.cssvminunit = cssvminunit;</span>
-<span class="nc" id="L2641">    }</span>
+<span class="nc" id="L288">        this.cssvminunit = cssvminunit;</span>
+<span class="nc" id="L289">    }</span>
 
     /**
      * Is CSS VW Units allowed
@@ -2647,7 +295,7 @@ public class ModernizrDto
      */
     public Boolean isCssvwunit()
     {
-<span class="nc" id="L2650">        return cssvwunit;</span>
+<span class="nc" id="L298">        return cssvwunit;</span>
     }
 
     /**
@@ -2657,8 +305,8 @@ public class ModernizrDto
      */
     protected void setCssvwunit(Boolean cssvwunit)
     {
-<span class="nc" id="L2660">        this.cssvwunit = cssvwunit;</span>
-<span class="nc" id="L2661">    }</span>
+<span class="nc" id="L308">        this.cssvwunit = cssvwunit;</span>
+<span class="nc" id="L309">    }</span>
 
     /**
      * Is Details allowed
@@ -2667,7 +315,7 @@ public class ModernizrDto
      */
     public Boolean isDetails()
     {
-<span class="nc" id="L2670">        return details;</span>
+<span class="nc" id="L318">        return details;</span>
     }
 
     /**
@@ -2677,8 +325,8 @@ public class ModernizrDto
      */
     protected void setDetails(Boolean details)
     {
-<span class="nc" id="L2680">        this.details = details;</span>
-<span class="nc" id="L2681">    }</span>
+<span class="nc" id="L328">        this.details = details;</span>
+<span class="nc" id="L329">    }</span>
 
     /**
      * Is media queries allowed
@@ -2687,7 +335,7 @@ public class ModernizrDto
      */
     public Boolean isMediaqueries()
     {
-<span class="nc" id="L2690">        return mediaqueries;</span>
+<span class="nc" id="L338">        return mediaqueries;</span>
     }
 
     /**
@@ -2697,8 +345,8 @@ public class ModernizrDto
      */
     protected void setMediaqueries(Boolean mediaqueries)
     {
-<span class="nc" id="L2700">        this.mediaqueries = mediaqueries;</span>
-<span class="nc" id="L2701">    }</span>
+<span class="nc" id="L348">        this.mediaqueries = mediaqueries;</span>
+<span class="nc" id="L349">    }</span>
 
     /**
      * is pointer events allowed
@@ -2707,7 +355,7 @@ public class ModernizrDto
      */
     public Boolean isPointerevents()
     {
-<span class="nc" id="L2710">        return pointerevents;</span>
+<span class="nc" id="L358">        return pointerevents;</span>
     }
 
     /**
@@ -2717,8 +365,8 @@ public class ModernizrDto
      */
     protected void setPointerevents(Boolean pointerevents)
     {
-<span class="nc" id="L2720">        this.pointerevents = pointerevents;</span>
-<span class="nc" id="L2721">    }</span>
+<span class="nc" id="L368">        this.pointerevents = pointerevents;</span>
+<span class="nc" id="L369">    }</span>
 
     /**
      * Is file input directory allowed
@@ -2727,7 +375,7 @@ public class ModernizrDto
      */
     public Boolean isFileinputdirectory()
     {
-<span class="nc" id="L2730">        return fileinputdirectory;</span>
+<span class="nc" id="L378">        return fileinputdirectory;</span>
     }
 
     /**
@@ -2737,8 +385,8 @@ public class ModernizrDto
      */
     protected void setFileinputdirectory(Boolean fileinputdirectory)
     {
-<span class="nc" id="L2740">        this.fileinputdirectory = fileinputdirectory;</span>
-<span class="nc" id="L2741">    }</span>
+<span class="nc" id="L388">        this.fileinputdirectory = fileinputdirectory;</span>
+<span class="nc" id="L389">    }</span>
 
     /**
      * Is text shadows allowed
@@ -2747,7 +395,7 @@ public class ModernizrDto
      */
     public Boolean isTextshadow()
     {
-<span class="nc" id="L2750">        return textshadow;</span>
+<span class="nc" id="L398">        return textshadow;</span>
     }
 
     /**
@@ -2757,8 +405,8 @@ public class ModernizrDto
      */
     protected void setTextshadow(Boolean textshadow)
     {
-<span class="nc" id="L2760">        this.textshadow = textshadow;</span>
-<span class="nc" id="L2761">    }</span>
+<span class="nc" id="L408">        this.textshadow = textshadow;</span>
+<span class="nc" id="L409">    }</span>
 
     /**
      * Is the Battery API allowed
@@ -2767,7 +415,7 @@ public class ModernizrDto
      */
     public Boolean isBatteryapi()
     {
-<span class="nc" id="L2770">        return batteryapi;</span>
+<span class="nc" id="L418">        return batteryapi;</span>
     }
 
     /**
@@ -2777,8 +425,8 @@ public class ModernizrDto
      */
     protected void setBatteryapi(Boolean batteryapi)
     {
-<span class="nc" id="L2780">        this.batteryapi = batteryapi;</span>
-<span class="nc" id="L2781">    }</span>
+<span class="nc" id="L428">        this.batteryapi = batteryapi;</span>
+<span class="nc" id="L429">    }</span>
 
     /**
      * Is the battery API allowed
@@ -2787,7 +435,7 @@ public class ModernizrDto
      */
     public Boolean isBatteryApi()
     {
-<span class="nc" id="L2790">        return battery_api;</span>
+<span class="nc" id="L438">        return battery_api;</span>
     }
 
     /**
@@ -2797,8 +445,8 @@ public class ModernizrDto
      */
     protected void setBatteryApi(Boolean battery_api)
     {
-<span class="nc" id="L2800">        this.battery_api = battery_api;</span>
-<span class="nc" id="L2801">    }</span>
+<span class="nc" id="L448">        this.battery_api = battery_api;</span>
+<span class="nc" id="L449">    }</span>
 
     /**
      * Is the crypto library allowed
@@ -2807,7 +455,7 @@ public class ModernizrDto
      */
     public Boolean isCrypto()
     {
-<span class="nc" id="L2810">        return crypto;</span>
+<span class="nc" id="L458">        return crypto;</span>
     }
 
     /**
@@ -2817,8 +465,8 @@ public class ModernizrDto
      */
     protected void setCrypto(Boolean crypto)
     {
-<span class="nc" id="L2820">        this.crypto = crypto;</span>
-<span class="nc" id="L2821">    }</span>
+<span class="nc" id="L468">        this.crypto = crypto;</span>
+<span class="nc" id="L469">    }</span>
 
     /**
      * Is the dart library allowed
@@ -2827,7 +475,7 @@ public class ModernizrDto
      */
     public Boolean isDart()
     {
-<span class="nc" id="L2830">        return dart;</span>
+<span class="nc" id="L478">        return dart;</span>
     }
 
     /**
@@ -2837,8 +485,8 @@ public class ModernizrDto
      */
     protected void setDart(Boolean dart)
     {
-<span class="nc" id="L2840">        this.dart = dart;</span>
-<span class="nc" id="L2841">    }</span>
+<span class="nc" id="L488">        this.dart = dart;</span>
+<span class="nc" id="L489">    }</span>
 
     /**
      * Is force touch enabled
@@ -2847,7 +495,7 @@ public class ModernizrDto
      */
     public Boolean isForcetouch()
     {
-<span class="nc" id="L2850">        return forcetouch;</span>
+<span class="nc" id="L498">        return forcetouch;</span>
     }
 
     /**
@@ -2857,8 +505,8 @@ public class ModernizrDto
      */
     protected void setForcetouch(Boolean forcetouch)
     {
-<span class="nc" id="L2860">        this.forcetouch = forcetouch;</span>
-<span class="nc" id="L2861">    }</span>
+<span class="nc" id="L508">        this.forcetouch = forcetouch;</span>
+<span class="nc" id="L509">    }</span>
 
     /**
      * Is full screen enabled
@@ -2867,7 +515,7 @@ public class ModernizrDto
      */
     public Boolean isFullscreen()
     {
-<span class="nc" id="L2870">        return fullscreen;</span>
+<span class="nc" id="L518">        return fullscreen;</span>
     }
 
     /**
@@ -2877,8 +525,8 @@ public class ModernizrDto
      */
     protected void setFullscreen(Boolean fullscreen)
     {
-<span class="nc" id="L2880">        this.fullscreen = fullscreen;</span>
-<span class="nc" id="L2881">    }</span>
+<span class="nc" id="L528">        this.fullscreen = fullscreen;</span>
+<span class="nc" id="L529">    }</span>
 
     /**
      * Are game pads enabled
@@ -2887,7 +535,7 @@ public class ModernizrDto
      */
     public Boolean isGamepads()
     {
-<span class="nc" id="L2890">        return gamepads;</span>
+<span class="nc" id="L538">        return gamepads;</span>
     }
 
     /**
@@ -2897,8 +545,8 @@ public class ModernizrDto
      */
     protected void setGamepads(Boolean gamepads)
     {
-<span class="nc" id="L2900">        this.gamepads = gamepads;</span>
-<span class="nc" id="L2901">    }</span>
+<span class="nc" id="L548">        this.gamepads = gamepads;</span>
+<span class="nc" id="L549">    }</span>
 
     /**
      * Is Indexed DB Available
@@ -2907,7 +555,7 @@ public class ModernizrDto
      */
     public Boolean isIndexeddb()
     {
-<span class="nc" id="L2910">        return indexeddb;</span>
+<span class="nc" id="L558">        return indexeddb;</span>
     }
 
     /**
@@ -2917,8 +565,8 @@ public class ModernizrDto
      */
     protected void setIndexeddb(Boolean indexeddb)
     {
-<span class="nc" id="L2920">        this.indexeddb = indexeddb;</span>
-<span class="nc" id="L2921">    }</span>
+<span class="nc" id="L568">        this.indexeddb = indexeddb;</span>
+<span class="nc" id="L569">    }</span>
 
     /**
      * Is intl available
@@ -2927,7 +575,7 @@ public class ModernizrDto
      */
     public Boolean isIntl()
     {
-<span class="nc" id="L2930">        return intl;</span>
+<span class="nc" id="L578">        return intl;</span>
     }
 
     /**
@@ -2937,8 +585,8 @@ public class ModernizrDto
      */
     protected void setIntl(Boolean intl)
     {
-<span class="nc" id="L2940">        this.intl = intl;</span>
-<span class="nc" id="L2941">    }</span>
+<span class="nc" id="L588">        this.intl = intl;</span>
+<span class="nc" id="L589">    }</span>
 
     /**
      * Is page visibility available
@@ -2947,7 +595,7 @@ public class ModernizrDto
      */
     public Boolean isPagevisibility()
     {
-<span class="nc" id="L2950">        return pagevisibility;</span>
+<span class="nc" id="L598">        return pagevisibility;</span>
     }
 
     /**
@@ -2957,8 +605,8 @@ public class ModernizrDto
      */
     protected void setPagevisibility(Boolean pagevisibility)
     {
-<span class="nc" id="L2960">        this.pagevisibility = pagevisibility;</span>
-<span class="nc" id="L2961">    }</span>
+<span class="nc" id="L608">        this.pagevisibility = pagevisibility;</span>
+<span class="nc" id="L609">    }</span>
 
     /**
      * Is performance available
@@ -2967,7 +615,7 @@ public class ModernizrDto
      */
     public Boolean isPerformance()
     {
-<span class="nc" id="L2970">        return performance;</span>
+<span class="nc" id="L618">        return performance;</span>
     }
 
     /**
@@ -2977,8 +625,8 @@ public class ModernizrDto
      */
     protected void setPerformance(Boolean performance)
     {
-<span class="nc" id="L2980">        this.performance = performance;</span>
-<span class="nc" id="L2981">    }</span>
+<span class="nc" id="L628">        this.performance = performance;</span>
+<span class="nc" id="L629">    }</span>
 
     /**
      * Is pointer lock available
@@ -2987,7 +635,7 @@ public class ModernizrDto
      */
     public Boolean isPointerlock()
     {
-<span class="nc" id="L2990">        return pointerlock;</span>
+<span class="nc" id="L638">        return pointerlock;</span>
     }
 
     /**
@@ -2997,8 +645,8 @@ public class ModernizrDto
      */
     protected void setPointerlock(Boolean pointerlock)
     {
-<span class="nc" id="L3000">        this.pointerlock = pointerlock;</span>
-<span class="nc" id="L3001">    }</span>
+<span class="nc" id="L648">        this.pointerlock = pointerlock;</span>
+<span class="nc" id="L649">    }</span>
 
     /**
      * Is Quota Management enabled
@@ -3007,7 +655,7 @@ public class ModernizrDto
      */
     public Boolean isQuotamanagement()
     {
-<span class="nc" id="L3010">        return quotamanagement;</span>
+<span class="nc" id="L658">        return quotamanagement;</span>
     }
 
     /**
@@ -3017,8 +665,8 @@ public class ModernizrDto
      */
     protected void setQuotamanagement(Boolean quotamanagement)
     {
-<span class="nc" id="L3020">        this.quotamanagement = quotamanagement;</span>
-<span class="nc" id="L3021">    }</span>
+<span class="nc" id="L668">        this.quotamanagement = quotamanagement;</span>
+<span class="nc" id="L669">    }</span>
 
     /**
      * Is request animation frame enabled
@@ -3027,7 +675,7 @@ public class ModernizrDto
      */
     public Boolean isRequestanimationframe()
     {
-<span class="nc" id="L3030">        return requestanimationframe;</span>
+<span class="nc" id="L678">        return requestanimationframe;</span>
     }
 
     /**
@@ -3037,8 +685,8 @@ public class ModernizrDto
      */
     protected void setRequestanimationframe(Boolean requestanimationframe)
     {
-<span class="nc" id="L3040">        this.requestanimationframe = requestanimationframe;</span>
-<span class="nc" id="L3041">    }</span>
+<span class="nc" id="L688">        this.requestanimationframe = requestanimationframe;</span>
+<span class="nc" id="L689">    }</span>
 
     /**
      * Is RAF enabled
@@ -3047,7 +695,7 @@ public class ModernizrDto
      */
     public Boolean isRaf()
     {
-<span class="nc" id="L3050">        return raf;</span>
+<span class="nc" id="L698">        return raf;</span>
     }
 
     /**
@@ -3057,8 +705,8 @@ public class ModernizrDto
      */
     protected void setRaf(Boolean raf)
     {
-<span class="nc" id="L3060">        this.raf = raf;</span>
-<span class="nc" id="L3061">    }</span>
+<span class="nc" id="L708">        this.raf = raf;</span>
+<span class="nc" id="L709">    }</span>
 
     /**
      * Is vibrate enabled
@@ -3067,7 +715,7 @@ public class ModernizrDto
      */
     public Boolean isVibrate()
     {
-<span class="nc" id="L3070">        return vibrate;</span>
+<span class="nc" id="L718">        return vibrate;</span>
     }
 
     /**
@@ -3077,8 +725,8 @@ public class ModernizrDto
      */
     protected void setVibrate(Boolean vibrate)
     {
-<span class="nc" id="L3080">        this.vibrate = vibrate;</span>
-<span class="nc" id="L3081">    }</span>
+<span class="nc" id="L728">        this.vibrate = vibrate;</span>
+<span class="nc" id="L729">    }</span>
 
     /**
      * Is web Intents
@@ -3087,7 +735,7 @@ public class ModernizrDto
      */
     public Boolean isWebintents()
     {
-<span class="nc" id="L3090">        return webintents;</span>
+<span class="nc" id="L738">        return webintents;</span>
     }
 
     /**
@@ -3097,8 +745,8 @@ public class ModernizrDto
      */
     protected void setWebintents(Boolean webintents)
     {
-<span class="nc" id="L3100">        this.webintents = webintents;</span>
-<span class="nc" id="L3101">    }</span>
+<span class="nc" id="L748">        this.webintents = webintents;</span>
+<span class="nc" id="L749">    }</span>
 
     /**
      * Is low battery
@@ -3107,7 +755,7 @@ public class ModernizrDto
      */
     public Boolean isLowbattery()
     {
-<span class="nc" id="L3110">        return lowbattery;</span>
+<span class="nc" id="L758">        return lowbattery;</span>
     }
 
     /**
@@ -3117,8 +765,8 @@ public class ModernizrDto
      */
     protected void setLowbattery(Boolean lowbattery)
     {
-<span class="nc" id="L3120">        this.lowbattery = lowbattery;</span>
-<span class="nc" id="L3121">    }</span>
+<span class="nc" id="L768">        this.lowbattery = lowbattery;</span>
+<span class="nc" id="L769">    }</span>
 
     /**
      * Are random values allowed
@@ -3127,7 +775,7 @@ public class ModernizrDto
      */
     public Boolean isGetrandomvalues()
     {
-<span class="nc" id="L3130">        return getrandomvalues;</span>
+<span class="nc" id="L778">        return getrandomvalues;</span>
     }
 
     /**
@@ -3137,8 +785,8 @@ public class ModernizrDto
      */
     protected void setGetrandomvalues(Boolean getrandomvalues)
     {
-<span class="nc" id="L3140">        this.getrandomvalues = getrandomvalues;</span>
-<span class="nc" id="L3141">    }</span>
+<span class="nc" id="L788">        this.getrandomvalues = getrandomvalues;</span>
+<span class="nc" id="L789">    }</span>
 
     /**
      * Is background blend mode allowed
@@ -3147,7 +795,7 @@ public class ModernizrDto
      */
     public Boolean isBackgroundblendmode()
     {
-<span class="nc" id="L3150">        return backgroundblendmode;</span>
+<span class="nc" id="L798">        return backgroundblendmode;</span>
     }
 
     /**
@@ -3157,8 +805,8 @@ public class ModernizrDto
      */
     protected void setBackgroundblendmode(Boolean backgroundblendmode)
     {
-<span class="nc" id="L3160">        this.backgroundblendmode = backgroundblendmode;</span>
-<span class="nc" id="L3161">    }</span>
+<span class="nc" id="L808">        this.backgroundblendmode = backgroundblendmode;</span>
+<span class="nc" id="L809">    }</span>
 
     /**
      * Is object fit allowed
@@ -3167,7 +815,7 @@ public class ModernizrDto
      */
     public Boolean isObjectfit()
     {
-<span class="nc" id="L3170">        return objectfit;</span>
+<span class="nc" id="L818">        return objectfit;</span>
     }
 
     /**
@@ -3177,8 +825,8 @@ public class ModernizrDto
      */
     protected void setObjectfit(Boolean objectfit)
     {
-<span class="nc" id="L3180">        this.objectfit = objectfit;</span>
-<span class="nc" id="L3181">    }</span>
+<span class="nc" id="L828">        this.objectfit = objectfit;</span>
+<span class="nc" id="L829">    }</span>
 
     /**
      * Is object fit allowed
@@ -3187,7 +835,7 @@ public class ModernizrDto
      */
     public Boolean isObjectFit()
     {
-<span class="nc" id="L3190">        return object_fit;</span>
+<span class="nc" id="L838">        return object_fit;</span>
     }
 
     /**
@@ -3197,8 +845,8 @@ public class ModernizrDto
      */
     protected void setObjectFit(Boolean object_fit)
     {
-<span class="nc" id="L3200">        this.object_fit = object_fit;</span>
-<span class="nc" id="L3201">    }</span>
+<span class="nc" id="L848">        this.object_fit = object_fit;</span>
+<span class="nc" id="L849">    }</span>
 
     /**
      * Is wrap flow allowed
@@ -3207,7 +855,7 @@ public class ModernizrDto
      */
     public Boolean isWrapflow()
     {
-<span class="nc" id="L3210">        return wrapflow;</span>
+<span class="nc" id="L858">        return wrapflow;</span>
     }
 
     /**
@@ -3217,8 +865,8 @@ public class ModernizrDto
      */
     protected void setWrapflow(Boolean wrapflow)
     {
-<span class="nc" id="L3220">        this.wrapflow = wrapflow;</span>
-<span class="nc" id="L3221">    }</span>
+<span class="nc" id="L868">        this.wrapflow = wrapflow;</span>
+<span class="nc" id="L869">    }</span>
 
     /**
      * Is file system allowed
@@ -3227,7 +875,7 @@ public class ModernizrDto
      */
     public Boolean isFilesystem()
     {
-<span class="nc" id="L3230">        return filesystem;</span>
+<span class="nc" id="L878">        return filesystem;</span>
     }
 
     /**
@@ -3237,8 +885,8 @@ public class ModernizrDto
      */
     protected void setFilesystem(Boolean filesystem)
     {
-<span class="nc" id="L3240">        this.filesystem = filesystem;</span>
-<span class="nc" id="L3241">    }</span>
+<span class="nc" id="L888">        this.filesystem = filesystem;</span>
+<span class="nc" id="L889">    }</span>
 
     /**
      * Is ligatures allowed
@@ -3247,7 +895,7 @@ public class ModernizrDto
      */
     public Boolean isLigatures()
     {
-<span class="nc" id="L3250">        return ligatures;</span>
+<span class="nc" id="L898">        return ligatures;</span>
     }
 
     /**
@@ -3257,8 +905,8 @@ public class ModernizrDto
      */
     protected void setLigatures(Boolean ligatures)
     {
-<span class="nc" id="L3260">        this.ligatures = ligatures;</span>
-<span class="nc" id="L3261">    }</span>
+<span class="nc" id="L908">        this.ligatures = ligatures;</span>
+<span class="nc" id="L909">    }</span>
 
     /**
      * Is CSS Animations allowed
@@ -3267,7 +915,7 @@ public class ModernizrDto
      */
     public Boolean isCssanimations()
     {
-<span class="nc" id="L3270">        return cssanimations;</span>
+<span class="nc" id="L918">        return cssanimations;</span>
     }
 
     /**
@@ -3277,8 +925,8 @@ public class ModernizrDto
      */
     protected void setCssanimations(Boolean cssanimations)
     {
-<span class="nc" id="L3280">        this.cssanimations = cssanimations;</span>
-<span class="nc" id="L3281">    }</span>
+<span class="nc" id="L928">        this.cssanimations = cssanimations;</span>
+<span class="nc" id="L929">    }</span>
 
     /**
      * Is psuedo animations allowed
@@ -3287,7 +935,7 @@ public class ModernizrDto
      */
     public Boolean isCsspseudoanimations()
     {
-<span class="nc" id="L3290">        return csspseudoanimations;</span>
+<span class="nc" id="L938">        return csspseudoanimations;</span>
     }
 
     /**
@@ -3297,8 +945,8 @@ public class ModernizrDto
      */
     protected void setCsspseudoanimations(Boolean csspseudoanimations)
     {
-<span class="nc" id="L3300">        this.csspseudoanimations = csspseudoanimations;</span>
-<span class="nc" id="L3301">    }</span>
+<span class="nc" id="L948">        this.csspseudoanimations = csspseudoanimations;</span>
+<span class="nc" id="L949">    }</span>
 
     /**
      * Is appearance calls allowed
@@ -3307,7 +955,7 @@ public class ModernizrDto
      */
     public Boolean isAppearance()
     {
-<span class="nc" id="L3310">        return appearance;</span>
+<span class="nc" id="L958">        return appearance;</span>
     }
 
     /**
@@ -3317,8 +965,8 @@ public class ModernizrDto
      */
     protected void setAppearance(Boolean appearance)
     {
-<span class="nc" id="L3320">        this.appearance = appearance;</span>
-<span class="nc" id="L3321">    }</span>
+<span class="nc" id="L968">        this.appearance = appearance;</span>
+<span class="nc" id="L969">    }</span>
 
     /**
      * Are backdrop filters allowed
@@ -3327,7 +975,7 @@ public class ModernizrDto
      */
     public Boolean isBackdropfilter()
     {
-<span class="nc" id="L3330">        return backdropfilter;</span>
+<span class="nc" id="L978">        return backdropfilter;</span>
     }
 
     /**
@@ -3337,8 +985,8 @@ public class ModernizrDto
      */
     protected void setBackdropfilter(Boolean backdropfilter)
     {
-<span class="nc" id="L3340">        this.backdropfilter = backdropfilter;</span>
-<span class="nc" id="L3341">    }</span>
+<span class="nc" id="L988">        this.backdropfilter = backdropfilter;</span>
+<span class="nc" id="L989">    }</span>
 
     /**
      * Is background clip text allowed
@@ -3347,7 +995,7 @@ public class ModernizrDto
      */
     public Boolean isBackgroundcliptext()
     {
-<span class="nc" id="L3350">        return backgroundcliptext;</span>
+<span class="nc" id="L998">        return backgroundcliptext;</span>
     }
 
     /**
@@ -3357,8 +1005,8 @@ public class ModernizrDto
      */
     protected void setBackgroundcliptext(Boolean backgroundcliptext)
     {
-<span class="nc" id="L3360">        this.backgroundcliptext = backgroundcliptext;</span>
-<span class="nc" id="L3361">    }</span>
+<span class="nc" id="L1008">        this.backgroundcliptext = backgroundcliptext;</span>
+<span class="nc" id="L1009">    }</span>
 
     /**
      * Is bg position xy allowed
@@ -3367,7 +1015,7 @@ public class ModernizrDto
      */
     public Boolean isBgpositionxy()
     {
-<span class="nc" id="L3370">        return bgpositionxy;</span>
+<span class="nc" id="L1018">        return bgpositionxy;</span>
     }
 
     /**
@@ -3377,8 +1025,8 @@ public class ModernizrDto
      */
     protected void setBgpositionxy(Boolean bgpositionxy)
     {
-<span class="nc" id="L3380">        this.bgpositionxy = bgpositionxy;</span>
-<span class="nc" id="L3381">    }</span>
+<span class="nc" id="L1028">        this.bgpositionxy = bgpositionxy;</span>
+<span class="nc" id="L1029">    }</span>
 
     /**
      * Is bg reapeat round allowed
@@ -3387,7 +1035,7 @@ public class ModernizrDto
      */
     public Boolean isBgrepeatround()
     {
-<span class="nc" id="L3390">        return bgrepeatround;</span>
+<span class="nc" id="L1038">        return bgrepeatround;</span>
     }
 
     /**
@@ -3397,8 +1045,8 @@ public class ModernizrDto
      */
     protected void setBgrepeatround(Boolean bgrepeatround)
     {
-<span class="nc" id="L3400">        this.bgrepeatround = bgrepeatround;</span>
-<span class="nc" id="L3401">    }</span>
+<span class="nc" id="L1048">        this.bgrepeatround = bgrepeatround;</span>
+<span class="nc" id="L1049">    }</span>
 
     /**
      * If bg repeat space allowed
@@ -3407,7 +1055,7 @@ public class ModernizrDto
      */
     public Boolean isBgrepeatspace()
     {
-<span class="nc" id="L3410">        return bgrepeatspace;</span>
+<span class="nc" id="L1058">        return bgrepeatspace;</span>
     }
 
     /**
@@ -3417,8 +1065,8 @@ public class ModernizrDto
      */
     protected void setBgrepeatspace(Boolean bgrepeatspace)
     {
-<span class="nc" id="L3420">        this.bgrepeatspace = bgrepeatspace;</span>
-<span class="nc" id="L3421">    }</span>
+<span class="nc" id="L1068">        this.bgrepeatspace = bgrepeatspace;</span>
+<span class="nc" id="L1069">    }</span>
 
     /**
      * Is background size allowed
@@ -3427,7 +1075,7 @@ public class ModernizrDto
      */
     public Boolean isBackgroundsize()
     {
-<span class="nc" id="L3430">        return backgroundsize;</span>
+<span class="nc" id="L1078">        return backgroundsize;</span>
     }
 
     /**
@@ -3437,8 +1085,8 @@ public class ModernizrDto
      */
     protected void setBackgroundsize(Boolean backgroundsize)
     {
-<span class="nc" id="L3440">        this.backgroundsize = backgroundsize;</span>
-<span class="nc" id="L3441">    }</span>
+<span class="nc" id="L1088">        this.backgroundsize = backgroundsize;</span>
+<span class="nc" id="L1089">    }</span>
 
     /**
      * Is bg cover allowed
@@ -3447,7 +1095,7 @@ public class ModernizrDto
      */
     public Boolean isBgsizecover()
     {
-<span class="nc" id="L3450">        return bgsizecover;</span>
+<span class="nc" id="L1098">        return bgsizecover;</span>
     }
 
     /**
@@ -3457,8 +1105,8 @@ public class ModernizrDto
      */
     protected void setBgsizecover(Boolean bgsizecover)
     {
-<span class="nc" id="L3460">        this.bgsizecover = bgsizecover;</span>
-<span class="nc" id="L3461">    }</span>
+<span class="nc" id="L1108">        this.bgsizecover = bgsizecover;</span>
+<span class="nc" id="L1109">    }</span>
 
     /**
      * Is border image allowed
@@ -3467,7 +1115,7 @@ public class ModernizrDto
      */
     public Boolean isBorderimage()
     {
-<span class="nc" id="L3470">        return borderimage;</span>
+<span class="nc" id="L1118">        return borderimage;</span>
     }
 
     /**
@@ -3477,8 +1125,8 @@ public class ModernizrDto
      */
     protected void setBorderimage(Boolean borderimage)
     {
-<span class="nc" id="L3480">        this.borderimage = borderimage;</span>
-<span class="nc" id="L3481">    }</span>
+<span class="nc" id="L1128">        this.borderimage = borderimage;</span>
+<span class="nc" id="L1129">    }</span>
 
     /**
      * Is border radius allowed
@@ -3487,7 +1135,7 @@ public class ModernizrDto
      */
     public Boolean isBorderradius()
     {
-<span class="nc" id="L3490">        return borderradius;</span>
+<span class="nc" id="L1138">        return borderradius;</span>
     }
 
     /**
@@ -3497,8 +1145,8 @@ public class ModernizrDto
      */
     protected void setBorderradius(Boolean borderradius)
     {
-<span class="nc" id="L3500">        this.borderradius = borderradius;</span>
-<span class="nc" id="L3501">    }</span>
+<span class="nc" id="L1148">        this.borderradius = borderradius;</span>
+<span class="nc" id="L1149">    }</span>
 
     /**
      * Is box shadow allowed
@@ -3507,7 +1155,7 @@ public class ModernizrDto
      */
     public Boolean isBoxshadow()
     {
-<span class="nc" id="L3510">        return boxshadow;</span>
+<span class="nc" id="L1158">        return boxshadow;</span>
     }
 
     /**
@@ -3517,8 +1165,8 @@ public class ModernizrDto
      */
     protected void setBoxshadow(Boolean boxshadow)
     {
-<span class="nc" id="L3520">        this.boxshadow = boxshadow;</span>
-<span class="nc" id="L3521">    }</span>
+<span class="nc" id="L1168">        this.boxshadow = boxshadow;</span>
+<span class="nc" id="L1169">    }</span>
 
     /**
      * Is box sizing allowed
@@ -3527,7 +1175,7 @@ public class ModernizrDto
      */
     public Boolean isBoxsizing()
     {
-<span class="nc" id="L3530">        return boxsizing;</span>
+<span class="nc" id="L1178">        return boxsizing;</span>
     }
 
     /**
@@ -3537,8 +1185,8 @@ public class ModernizrDto
      */
     protected void setBoxsizing(Boolean boxsizing)
     {
-<span class="nc" id="L3540">        this.boxsizing = boxsizing;</span>
-<span class="nc" id="L3541">    }</span>
+<span class="nc" id="L1188">        this.boxsizing = boxsizing;</span>
+<span class="nc" id="L1189">    }</span>
 
     /**
      * Is CSS Columns allowed
@@ -3547,7 +1195,7 @@ public class ModernizrDto
      */
     public Boolean isCsscolumns()
     {
-<span class="nc" id="L3550">        return csscolumns;</span>
+<span class="nc" id="L1198">        return csscolumns;</span>
     }
 
     /**
@@ -3557,8 +1205,8 @@ public class ModernizrDto
      */
     protected void setCsscolumns(Boolean csscolumns)
     {
-<span class="nc" id="L3560">        this.csscolumns = csscolumns;</span>
-<span class="nc" id="L3561">    }</span>
+<span class="nc" id="L1208">        this.csscolumns = csscolumns;</span>
+<span class="nc" id="L1209">    }</span>
 
     /**
      * Get display run in
@@ -3567,7 +1215,7 @@ public class ModernizrDto
      */
     public Boolean isDisplayrunin()
     {
-<span class="nc" id="L3570">        return displayrunin;</span>
+<span class="nc" id="L1218">        return displayrunin;</span>
     }
 
     /**
@@ -3577,8 +1225,8 @@ public class ModernizrDto
      */
     protected void setDisplayrunin(Boolean displayrunin)
     {
-<span class="nc" id="L3580">        this.displayrunin = displayrunin;</span>
-<span class="nc" id="L3581">    }</span>
+<span class="nc" id="L1228">        this.displayrunin = displayrunin;</span>
+<span class="nc" id="L1229">    }</span>
 
     /**
      * Display run in
@@ -3587,7 +1235,7 @@ public class ModernizrDto
      */
     public Boolean isDisplayRunin()
     {
-<span class="nc" id="L3590">        return display_runin;</span>
+<span class="nc" id="L1238">        return display_runin;</span>
     }
 
     /**
@@ -3597,8 +1245,8 @@ public class ModernizrDto
      */
     protected void setDisplayRunin(Boolean display_runin)
     {
-<span class="nc" id="L3600">        this.display_runin = display_runin;</span>
-<span class="nc" id="L3601">    }</span>
+<span class="nc" id="L1248">        this.display_runin = display_runin;</span>
+<span class="nc" id="L1249">    }</span>
 
     /**
      * Are ellipsis allowed
@@ -3607,7 +1255,7 @@ public class ModernizrDto
      */
     public Boolean isEllipsis()
     {
-<span class="nc" id="L3610">        return ellipsis;</span>
+<span class="nc" id="L1258">        return ellipsis;</span>
     }
 
     /**
@@ -3617,8 +1265,8 @@ public class ModernizrDto
      */
     protected void setEllipsis(Boolean ellipsis)
     {
-<span class="nc" id="L3620">        this.ellipsis = ellipsis;</span>
-<span class="nc" id="L3621">    }</span>
+<span class="nc" id="L1268">        this.ellipsis = ellipsis;</span>
+<span class="nc" id="L1269">    }</span>
 
     /**
      * Are CSS Filters allowed
@@ -3627,7 +1275,7 @@ public class ModernizrDto
      */
     public Boolean isCssfilters()
     {
-<span class="nc" id="L3630">        return cssfilters;</span>
+<span class="nc" id="L1278">        return cssfilters;</span>
     }
 
     /**
@@ -3637,8 +1285,8 @@ public class ModernizrDto
      */
     protected void setCssfilters(Boolean cssfilters)
     {
-<span class="nc" id="L3640">        this.cssfilters = cssfilters;</span>
-<span class="nc" id="L3641">    }</span>
+<span class="nc" id="L1288">        this.cssfilters = cssfilters;</span>
+<span class="nc" id="L1289">    }</span>
 
     /**
      * Is flex box allowed
@@ -3647,7 +1295,7 @@ public class ModernizrDto
      */
     public Boolean isFlexbox()
     {
-<span class="nc" id="L3650">        return flexbox;</span>
+<span class="nc" id="L1298">        return flexbox;</span>
     }
 
     /**
@@ -3657,8 +1305,8 @@ public class ModernizrDto
      */
     protected void setFlexbox(Boolean flexbox)
     {
-<span class="nc" id="L3660">        this.flexbox = flexbox;</span>
-<span class="nc" id="L3661">    }</span>
+<span class="nc" id="L1308">        this.flexbox = flexbox;</span>
+<span class="nc" id="L1309">    }</span>
 
     /**
      * Is flex box legacy allowed
@@ -3667,7 +1315,7 @@ public class ModernizrDto
      */
     public Boolean isFlexboxlegacy()
     {
-<span class="nc" id="L3670">        return flexboxlegacy;</span>
+<span class="nc" id="L1318">        return flexboxlegacy;</span>
     }
 
     /**
@@ -3677,8 +1325,8 @@ public class ModernizrDto
      */
     protected void setFlexboxlegacy(Boolean flexboxlegacy)
     {
-<span class="nc" id="L3680">        this.flexboxlegacy = flexboxlegacy;</span>
-<span class="nc" id="L3681">    }</span>
+<span class="nc" id="L1328">        this.flexboxlegacy = flexboxlegacy;</span>
+<span class="nc" id="L1329">    }</span>
 
     /**
      * Is flex box tweener allowed
@@ -3687,7 +1335,7 @@ public class ModernizrDto
      */
     public Boolean isFlexboxtweener()
     {
-<span class="nc" id="L3690">        return flexboxtweener;</span>
+<span class="nc" id="L1338">        return flexboxtweener;</span>
     }
 
     /**
@@ -3697,8 +1345,8 @@ public class ModernizrDto
      */
     protected void setFlexboxtweener(Boolean flexboxtweener)
     {
-<span class="nc" id="L3700">        this.flexboxtweener = flexboxtweener;</span>
-<span class="nc" id="L3701">    }</span>
+<span class="nc" id="L1348">        this.flexboxtweener = flexboxtweener;</span>
+<span class="nc" id="L1349">    }</span>
 
     /**
      * Is flex wrap allowed
@@ -3707,7 +1355,7 @@ public class ModernizrDto
      */
     public Boolean isFlexwrap()
     {
-<span class="nc" id="L3710">        return flexwrap;</span>
+<span class="nc" id="L1358">        return flexwrap;</span>
     }
 
     /**
@@ -3717,8 +1365,8 @@ public class ModernizrDto
      */
     protected void setFlexwrap(Boolean flexwrap)
     {
-<span class="nc" id="L3720">        this.flexwrap = flexwrap;</span>
-<span class="nc" id="L3721">    }</span>
+<span class="nc" id="L1368">        this.flexwrap = flexwrap;</span>
+<span class="nc" id="L1369">    }</span>
 
     /**
      * Is CSS Mask enabled
@@ -3727,7 +1375,7 @@ public class ModernizrDto
      */
     public Boolean isCssmask()
     {
-<span class="nc" id="L3730">        return cssmask;</span>
+<span class="nc" id="L1378">        return cssmask;</span>
     }
 
     /**
@@ -3737,8 +1385,8 @@ public class ModernizrDto
      */
     protected void setCssmask(Boolean cssmask)
     {
-<span class="nc" id="L3740">        this.cssmask = cssmask;</span>
-<span class="nc" id="L3741">    }</span>
+<span class="nc" id="L1388">        this.cssmask = cssmask;</span>
+<span class="nc" id="L1389">    }</span>
 
     /**
      * Is overflow scrolling allowed
@@ -3747,7 +1395,7 @@ public class ModernizrDto
      */
     public Boolean isOverflowscrolling()
     {
-<span class="nc" id="L3750">        return overflowscrolling;</span>
+<span class="nc" id="L1398">        return overflowscrolling;</span>
     }
 
     /**
@@ -3757,8 +1405,8 @@ public class ModernizrDto
      */
     protected void setOverflowscrolling(Boolean overflowscrolling)
     {
-<span class="nc" id="L3760">        this.overflowscrolling = overflowscrolling;</span>
-<span class="nc" id="L3761">    }</span>
+<span class="nc" id="L1408">        this.overflowscrolling = overflowscrolling;</span>
+<span class="nc" id="L1409">    }</span>
 
     /**
      * Is CSS Reflections allowed
@@ -3767,7 +1415,7 @@ public class ModernizrDto
      */
     public Boolean isCssreflections()
     {
-<span class="nc" id="L3770">        return cssreflections;</span>
+<span class="nc" id="L1418">        return cssreflections;</span>
     }
 
     /**
@@ -3777,8 +1425,8 @@ public class ModernizrDto
      */
     protected void setCssreflections(Boolean cssreflections)
     {
-<span class="nc" id="L3780">        this.cssreflections = cssreflections;</span>
-<span class="nc" id="L3781">    }</span>
+<span class="nc" id="L1428">        this.cssreflections = cssreflections;</span>
+<span class="nc" id="L1429">    }</span>
 
     /**
      * Is CSS Resize Allowed
@@ -3787,7 +1435,7 @@ public class ModernizrDto
      */
     public Boolean isCssresize()
     {
-<span class="nc" id="L3790">        return cssresize;</span>
+<span class="nc" id="L1438">        return cssresize;</span>
     }
 
     /**
@@ -3797,8 +1445,8 @@ public class ModernizrDto
      */
     protected void setCssresize(Boolean cssresize)
     {
-<span class="nc" id="L3800">        this.cssresize = cssresize;</span>
-<span class="nc" id="L3801">    }</span>
+<span class="nc" id="L1448">        this.cssresize = cssresize;</span>
+<span class="nc" id="L1449">    }</span>
 
     /**
      * Is scroll snap points allowed
@@ -3807,7 +1455,7 @@ public class ModernizrDto
      */
     public Boolean isScrollsnappoints()
     {
-<span class="nc" id="L3810">        return scrollsnappoints;</span>
+<span class="nc" id="L1458">        return scrollsnappoints;</span>
     }
 
     /**
@@ -3817,8 +1465,8 @@ public class ModernizrDto
      */
     protected void setScrollsnappoints(Boolean scrollsnappoints)
     {
-<span class="nc" id="L3820">        this.scrollsnappoints = scrollsnappoints;</span>
-<span class="nc" id="L3821">    }</span>
+<span class="nc" id="L1468">        this.scrollsnappoints = scrollsnappoints;</span>
+<span class="nc" id="L1469">    }</span>
 
     /**
      * Is shapes allowed?
@@ -3827,7 +1475,7 @@ public class ModernizrDto
      */
     public Boolean isShapes()
     {
-<span class="nc" id="L3830">        return shapes;</span>
+<span class="nc" id="L1478">        return shapes;</span>
     }
 
     /**
@@ -3837,8 +1485,8 @@ public class ModernizrDto
      */
     protected void setShapes(Boolean shapes)
     {
-<span class="nc" id="L3840">        this.shapes = shapes;</span>
-<span class="nc" id="L3841">    }</span>
+<span class="nc" id="L1488">        this.shapes = shapes;</span>
+<span class="nc" id="L1489">    }</span>
 
     /**
      * Is text align last allowed
@@ -3847,7 +1495,7 @@ public class ModernizrDto
      */
     public Boolean isTextalignlast()
     {
-<span class="nc" id="L3850">        return textalignlast;</span>
+<span class="nc" id="L1498">        return textalignlast;</span>
     }
 
     /**
@@ -3857,8 +1505,8 @@ public class ModernizrDto
      */
     protected void setTextalignlast(Boolean textalignlast)
     {
-<span class="nc" id="L3860">        this.textalignlast = textalignlast;</span>
-<span class="nc" id="L3861">    }</span>
+<span class="nc" id="L1508">        this.textalignlast = textalignlast;</span>
+<span class="nc" id="L1509">    }</span>
 
     /**
      * Is CSS Transforms allowed
@@ -3867,7 +1515,7 @@ public class ModernizrDto
      */
     public Boolean isCsstransforms()
     {
-<span class="nc" id="L3870">        return csstransforms;</span>
+<span class="nc" id="L1518">        return csstransforms;</span>
     }
 
     /**
@@ -3877,8 +1525,8 @@ public class ModernizrDto
      */
     protected void setCsstransforms(Boolean csstransforms)
     {
-<span class="nc" id="L3880">        this.csstransforms = csstransforms;</span>
-<span class="nc" id="L3881">    }</span>
+<span class="nc" id="L1528">        this.csstransforms = csstransforms;</span>
+<span class="nc" id="L1529">    }</span>
 
     /**
      * Is CSS Transforms 3d allowed
@@ -3887,7 +1535,7 @@ public class ModernizrDto
      */
     public Boolean isCsstransforms3d()
     {
-<span class="nc" id="L3890">        return csstransforms3d;</span>
+<span class="nc" id="L1538">        return csstransforms3d;</span>
     }
 
     /**
@@ -3897,8 +1545,8 @@ public class ModernizrDto
      */
     protected void setCsstransforms3d(Boolean csstransforms3d)
     {
-<span class="nc" id="L3900">        this.csstransforms3d = csstransforms3d;</span>
-<span class="nc" id="L3901">    }</span>
+<span class="nc" id="L1548">        this.csstransforms3d = csstransforms3d;</span>
+<span class="nc" id="L1549">    }</span>
 
     /**
      * Is CSS Transitions allowed
@@ -3907,7 +1555,7 @@ public class ModernizrDto
      */
     public Boolean isCsstransitions()
     {
-<span class="nc" id="L3910">        return csstransitions;</span>
+<span class="nc" id="L1558">        return csstransitions;</span>
     }
 
     /**
@@ -3917,8 +1565,8 @@ public class ModernizrDto
      */
     protected void setCsstransitions(Boolean csstransitions)
     {
-<span class="nc" id="L3920">        this.csstransitions = csstransitions;</span>
-<span class="nc" id="L3921">    }</span>
+<span class="nc" id="L1568">        this.csstransitions = csstransitions;</span>
+<span class="nc" id="L1569">    }</span>
 
     /**
      * Are pseudo transitions allowed
@@ -3927,7 +1575,7 @@ public class ModernizrDto
      */
     public Boolean isCsspseudotransitions()
     {
-<span class="nc" id="L3930">        return csspseudotransitions;</span>
+<span class="nc" id="L1578">        return csspseudotransitions;</span>
     }
 
     /**
@@ -3937,8 +1585,8 @@ public class ModernizrDto
      */
     protected void setCsspseudotransitions(Boolean csspseudotransitions)
     {
-<span class="nc" id="L3940">        this.csspseudotransitions = csspseudotransitions;</span>
-<span class="nc" id="L3941">    }</span>
+<span class="nc" id="L1588">        this.csspseudotransitions = csspseudotransitions;</span>
+<span class="nc" id="L1589">    }</span>
 
     /**
      * Is user selections allowed
@@ -3947,7 +1595,7 @@ public class ModernizrDto
      */
     public Boolean isUserselect()
     {
-<span class="nc" id="L3950">        return userselect;</span>
+<span class="nc" id="L1598">        return userselect;</span>
     }
 
     /**
@@ -3957,8 +1605,8 @@ public class ModernizrDto
      */
     protected void setUserselect(Boolean userselect)
     {
-<span class="nc" id="L3960">        this.userselect = userselect;</span>
-<span class="nc" id="L3961">    }</span>
+<span class="nc" id="L1608">        this.userselect = userselect;</span>
+<span class="nc" id="L1609">    }</span>
 
     /**
      * Is output elements allowed
@@ -3967,7 +1615,7 @@ public class ModernizrDto
      */
     public Boolean isOutputelem()
     {
-<span class="nc" id="L3970">        return outputelem;</span>
+<span class="nc" id="L1618">        return outputelem;</span>
     }
 
     /**
@@ -3977,8 +1625,8 @@ public class ModernizrDto
      */
     protected void setOutputelem(Boolean outputelem)
     {
-<span class="nc" id="L3980">        this.outputelem = outputelem;</span>
-<span class="nc" id="L3981">    }</span>
+<span class="nc" id="L1628">        this.outputelem = outputelem;</span>
+<span class="nc" id="L1629">    }</span>
 
     /**
      * Is picture allowed
@@ -3987,7 +1635,7 @@ public class ModernizrDto
      */
     public Boolean isPicture()
     {
-<span class="nc" id="L3990">        return picture;</span>
+<span class="nc" id="L1638">        return picture;</span>
     }
 
     /**
@@ -3997,8 +1645,8 @@ public class ModernizrDto
      */
     protected void setPicture(Boolean picture)
     {
-<span class="nc" id="L4000">        this.picture = picture;</span>
-<span class="nc" id="L4001">    }</span>
+<span class="nc" id="L1648">        this.picture = picture;</span>
+<span class="nc" id="L1649">    }</span>
 
     /**
      * Is ruby allowed
@@ -4007,7 +1655,7 @@ public class ModernizrDto
      */
     public Boolean isRuby()
     {
-<span class="nc" id="L4010">        return ruby;</span>
+<span class="nc" id="L1658">        return ruby;</span>
     }
 
     /**
@@ -4017,8 +1665,8 @@ public class ModernizrDto
      */
     protected void setRuby(Boolean ruby)
     {
-<span class="nc" id="L4020">        this.ruby = ruby;</span>
-<span class="nc" id="L4021">    }</span>
+<span class="nc" id="L1668">        this.ruby = ruby;</span>
+<span class="nc" id="L1669">    }</span>
 
     /**
      * Is template allowed
@@ -4027,7 +1675,7 @@ public class ModernizrDto
      */
     public Boolean isTemplate()
     {
-<span class="nc" id="L4030">        return template;</span>
+<span class="nc" id="L1678">        return template;</span>
     }
 
     /**
@@ -4037,8 +1685,8 @@ public class ModernizrDto
      */
     protected void setTemplate(Boolean template)
     {
-<span class="nc" id="L4040">        this.template = template;</span>
-<span class="nc" id="L4041">    }</span>
+<span class="nc" id="L1688">        this.template = template;</span>
+<span class="nc" id="L1689">    }</span>
 
     /**
      * Is text track api enabled
@@ -4047,7 +1695,7 @@ public class ModernizrDto
      */
     public Boolean isTexttrackapi()
     {
-<span class="nc" id="L4050">        return texttrackapi;</span>
+<span class="nc" id="L1698">        return texttrackapi;</span>
     }
 
     /**
@@ -4057,8 +1705,8 @@ public class ModernizrDto
      */
     protected void setTexttrackapi(Boolean texttrackapi)
     {
-<span class="nc" id="L4060">        this.texttrackapi = texttrackapi;</span>
-<span class="nc" id="L4061">    }</span>
+<span class="nc" id="L1708">        this.texttrackapi = texttrackapi;</span>
+<span class="nc" id="L1709">    }</span>
 
     /**
      * Is track enabled
@@ -4067,7 +1715,7 @@ public class ModernizrDto
      */
     public Boolean isTrack()
     {
-<span class="nc" id="L4070">        return track;</span>
+<span class="nc" id="L1718">        return track;</span>
     }
 
     /**
@@ -4077,8 +1725,8 @@ public class ModernizrDto
      */
     protected void setTrack(Boolean track)
     {
-<span class="nc" id="L4080">        this.track = track;</span>
-<span class="nc" id="L4081">    }</span>
+<span class="nc" id="L1728">        this.track = track;</span>
+<span class="nc" id="L1729">    }</span>
 
     /**
      * Is unknown elements enabled
@@ -4087,7 +1735,7 @@ public class ModernizrDto
      */
     public Boolean isUnknownelements()
     {
-<span class="nc" id="L4090">        return unknownelements;</span>
+<span class="nc" id="L1738">        return unknownelements;</span>
     }
 
     /**
@@ -4097,8 +1745,8 @@ public class ModernizrDto
      */
     protected void setUnknownelements(Boolean unknownelements)
     {
-<span class="nc" id="L4100">        this.unknownelements = unknownelements;</span>
-<span class="nc" id="L4101">    }</span>
+<span class="nc" id="L1748">        this.unknownelements = unknownelements;</span>
+<span class="nc" id="L1749">    }</span>
 
     /**
      * Is es 5 dates enabled
@@ -4107,7 +1755,7 @@ public class ModernizrDto
      */
     public Boolean isEs5date()
     {
-<span class="nc" id="L4110">        return es5date;</span>
+<span class="nc" id="L1758">        return es5date;</span>
     }
 
     /**
@@ -4117,8 +1765,8 @@ public class ModernizrDto
      */
     protected void setEs5date(Boolean es5date)
     {
-<span class="nc" id="L4120">        this.es5date = es5date;</span>
-<span class="nc" id="L4121">    }</span>
+<span class="nc" id="L1768">        this.es5date = es5date;</span>
+<span class="nc" id="L1769">    }</span>
 
     /**
      * Is es 5 syntax enabled
@@ -4127,7 +1775,7 @@ public class ModernizrDto
      */
     public Boolean isEs5syntax()
     {
-<span class="nc" id="L4130">        return es5syntax;</span>
+<span class="nc" id="L1778">        return es5syntax;</span>
     }
 
     /**
@@ -4137,8 +1785,8 @@ public class ModernizrDto
      */
     protected void setEs5syntax(Boolean es5syntax)
     {
-<span class="nc" id="L4140">        this.es5syntax = es5syntax;</span>
-<span class="nc" id="L4141">    }</span>
+<span class="nc" id="L1788">        this.es5syntax = es5syntax;</span>
+<span class="nc" id="L1789">    }</span>
 
     /**
      * Is es 5 enabled
@@ -4147,7 +1795,7 @@ public class ModernizrDto
      */
     public Boolean isEs5()
     {
-<span class="nc" id="L4150">        return es5;</span>
+<span class="nc" id="L1798">        return es5;</span>
     }
 
     /**
@@ -4157,8 +1805,8 @@ public class ModernizrDto
      */
     protected void setEs5(Boolean es5)
     {
-<span class="nc" id="L4160">        this.es5 = es5;</span>
-<span class="nc" id="L4161">    }</span>
+<span class="nc" id="L1808">        this.es5 = es5;</span>
+<span class="nc" id="L1809">    }</span>
 
     /**
      * ES 6 collections allowed
@@ -4167,7 +1815,7 @@ public class ModernizrDto
      */
     public Boolean isEs6collections()
     {
-<span class="nc" id="L4170">        return es6collections;</span>
+<span class="nc" id="L1818">        return es6collections;</span>
     }
 
     /**
@@ -4177,8 +1825,8 @@ public class ModernizrDto
      */
     protected void setEs6collections(Boolean es6collections)
     {
-<span class="nc" id="L4180">        this.es6collections = es6collections;</span>
-<span class="nc" id="L4181">    }</span>
+<span class="nc" id="L1828">        this.es6collections = es6collections;</span>
+<span class="nc" id="L1829">    }</span>
 
     /**
      * Is ES 6 math allowed
@@ -4187,7 +1835,7 @@ public class ModernizrDto
      */
     public Boolean isEs6math()
     {
-<span class="nc" id="L4190">        return es6math;</span>
+<span class="nc" id="L1838">        return es6math;</span>
     }
 
     /**
@@ -4197,8 +1845,8 @@ public class ModernizrDto
      */
     protected void setEs6math(Boolean es6math)
     {
-<span class="nc" id="L4200">        this.es6math = es6math;</span>
-<span class="nc" id="L4201">    }</span>
+<span class="nc" id="L1848">        this.es6math = es6math;</span>
+<span class="nc" id="L1849">    }</span>
 
     /**
      * Are promises allowed
@@ -4207,7 +1855,7 @@ public class ModernizrDto
      */
     public Boolean isPromises()
     {
-<span class="nc" id="L4210">        return promises;</span>
+<span class="nc" id="L1858">        return promises;</span>
     }
 
     /**
@@ -4217,8 +1865,8 @@ public class ModernizrDto
      */
     protected void setPromises(Boolean promises)
     {
-<span class="nc" id="L4220">        this.promises = promises;</span>
-<span class="nc" id="L4221">    }</span>
+<span class="nc" id="L1868">        this.promises = promises;</span>
+<span class="nc" id="L1869">    }</span>
 
     /**
      * Is on Input allowed
@@ -4227,7 +1875,7 @@ public class ModernizrDto
      */
     public Boolean isOninput()
     {
-<span class="nc" id="L4230">        return oninput;</span>
+<span class="nc" id="L1878">        return oninput;</span>
     }
 
     /**
@@ -4237,8 +1885,8 @@ public class ModernizrDto
      */
     protected void setOninput(Boolean oninput)
     {
-<span class="nc" id="L4240">        this.oninput = oninput;</span>
-<span class="nc" id="L4241">    }</span>
+<span class="nc" id="L1888">        this.oninput = oninput;</span>
+<span class="nc" id="L1889">    }</span>
 
     /**
      * Is capture allowed
@@ -4247,7 +1895,7 @@ public class ModernizrDto
      */
     public Boolean isCapture()
     {
-<span class="nc" id="L4250">        return capture;</span>
+<span class="nc" id="L1898">        return capture;</span>
     }
 
     /**
@@ -4257,8 +1905,8 @@ public class ModernizrDto
      */
     protected void setCapture(Boolean capture)
     {
-<span class="nc" id="L4260">        this.capture = capture;</span>
-<span class="nc" id="L4261">    }</span>
+<span class="nc" id="L1908">        this.capture = capture;</span>
+<span class="nc" id="L1909">    }</span>
 
     /**
      * Is form attribute allowed
@@ -4267,7 +1915,7 @@ public class ModernizrDto
      */
     public Boolean isFormattribute()
     {
-<span class="nc" id="L4270">        return formattribute;</span>
+<span class="nc" id="L1918">        return formattribute;</span>
     }
 
     /**
@@ -4277,8 +1925,8 @@ public class ModernizrDto
      */
     protected void setFormattribute(Boolean formattribute)
     {
-<span class="nc" id="L4280">        this.formattribute = formattribute;</span>
-<span class="nc" id="L4281">    }</span>
+<span class="nc" id="L1928">        this.formattribute = formattribute;</span>
+<span class="nc" id="L1929">    }</span>
 
     /**
      * Is place holder allowed
@@ -4287,7 +1935,7 @@ public class ModernizrDto
      */
     public Boolean isPlaceholder()
     {
-<span class="nc" id="L4290">        return placeholder;</span>
+<span class="nc" id="L1938">        return placeholder;</span>
     }
 
     /**
@@ -4297,8 +1945,8 @@ public class ModernizrDto
      */
     protected void setPlaceholder(Boolean placeholder)
     {
-<span class="nc" id="L4300">        this.placeholder = placeholder;</span>
-<span class="nc" id="L4301">    }</span>
+<span class="nc" id="L1948">        this.placeholder = placeholder;</span>
+<span class="nc" id="L1949">    }</span>
 
     /**
      * Is request auto complete allowed
@@ -4307,7 +1955,7 @@ public class ModernizrDto
      */
     public Boolean isRequestautocomplete()
     {
-<span class="nc" id="L4310">        return requestautocomplete;</span>
+<span class="nc" id="L1958">        return requestautocomplete;</span>
     }
 
     /**
@@ -4317,8 +1965,8 @@ public class ModernizrDto
      */
     protected void setRequestautocomplete(Boolean requestautocomplete)
     {
-<span class="nc" id="L4320">        this.requestautocomplete = requestautocomplete;</span>
-<span class="nc" id="L4321">    }</span>
+<span class="nc" id="L1968">        this.requestautocomplete = requestautocomplete;</span>
+<span class="nc" id="L1969">    }</span>
 
     /**
      * Is form validation allowed
@@ -4327,7 +1975,7 @@ public class ModernizrDto
      */
     public Boolean isFormvalidation()
     {
-<span class="nc" id="L4330">        return formvalidation;</span>
+<span class="nc" id="L1978">        return formvalidation;</span>
     }
 
     /**
@@ -4337,8 +1985,8 @@ public class ModernizrDto
      */
     protected void setFormvalidation(Boolean formvalidation)
     {
-<span class="nc" id="L4340">        this.formvalidation = formvalidation;</span>
-<span class="nc" id="L4341">    }</span>
+<span class="nc" id="L1988">        this.formvalidation = formvalidation;</span>
+<span class="nc" id="L1989">    }</span>
 
     /**
      * Is localized number allowed
@@ -4347,7 +1995,7 @@ public class ModernizrDto
      */
     public Boolean isLocalizednumber()
     {
-<span class="nc" id="L4350">        return localizednumber;</span>
+<span class="nc" id="L1998">        return localizednumber;</span>
     }
 
     /**
@@ -4357,8 +2005,8 @@ public class ModernizrDto
      */
     protected void setLocalizednumber(Boolean localizednumber)
     {
-<span class="nc" id="L4360">        this.localizednumber = localizednumber;</span>
-<span class="nc" id="L4361">    }</span>
+<span class="nc" id="L2008">        this.localizednumber = localizednumber;</span>
+<span class="nc" id="L2009">    }</span>
 
     /**
      * Is sandbox allowed
@@ -4367,7 +2015,7 @@ public class ModernizrDto
      */
     public Boolean isSandbox()
     {
-<span class="nc" id="L4370">        return sandbox;</span>
+<span class="nc" id="L2018">        return sandbox;</span>
     }
 
     /**
@@ -4377,8 +2025,8 @@ public class ModernizrDto
      */
     protected void setSandbox(Boolean sandbox)
     {
-<span class="nc" id="L4380">        this.sandbox = sandbox;</span>
-<span class="nc" id="L4381">    }</span>
+<span class="nc" id="L2028">        this.sandbox = sandbox;</span>
+<span class="nc" id="L2029">    }</span>
 
     /**
      * Is seamless allowed
@@ -4387,7 +2035,7 @@ public class ModernizrDto
      */
     public Boolean isSeamless()
     {
-<span class="nc" id="L4390">        return seamless;</span>
+<span class="nc" id="L2038">        return seamless;</span>
     }
 
     /**
@@ -4397,8 +2045,8 @@ public class ModernizrDto
      */
     protected void setSeamless(Boolean seamless)
     {
-<span class="nc" id="L4400">        this.seamless = seamless;</span>
-<span class="nc" id="L4401">    }</span>
+<span class="nc" id="L2048">        this.seamless = seamless;</span>
+<span class="nc" id="L2049">    }</span>
 
     /**
      * Is src doc allowed
@@ -4407,7 +2055,7 @@ public class ModernizrDto
      */
     public Boolean isSrcdoc()
     {
-<span class="nc" id="L4410">        return srcdoc;</span>
+<span class="nc" id="L2058">        return srcdoc;</span>
     }
 
     /**
@@ -4417,8 +2065,8 @@ public class ModernizrDto
      */
     protected void setSrcdoc(Boolean srcdoc)
     {
-<span class="nc" id="L4420">        this.srcdoc = srcdoc;</span>
-<span class="nc" id="L4421">    }</span>
+<span class="nc" id="L2068">        this.srcdoc = srcdoc;</span>
+<span class="nc" id="L2069">    }</span>
 
     /**
      * Is image cross origin allowed
@@ -4427,7 +2075,7 @@ public class ModernizrDto
      */
     public Boolean isImgcrossorigin()
     {
-<span class="nc" id="L4430">        return imgcrossorigin;</span>
+<span class="nc" id="L2078">        return imgcrossorigin;</span>
     }
 
     /**
@@ -4437,8 +2085,8 @@ public class ModernizrDto
      */
     protected void setImgcrossorigin(Boolean imgcrossorigin)
     {
-<span class="nc" id="L4440">        this.imgcrossorigin = imgcrossorigin;</span>
-<span class="nc" id="L4441">    }</span>
+<span class="nc" id="L2088">        this.imgcrossorigin = imgcrossorigin;</span>
+<span class="nc" id="L2089">    }</span>
 
     /**
      * Are sizes allowed
@@ -4447,7 +2095,7 @@ public class ModernizrDto
      */
     public Boolean isSizes()
     {
-<span class="nc" id="L4450">        return sizes;</span>
+<span class="nc" id="L2098">        return sizes;</span>
     }
 
     /**
@@ -4457,8 +2105,8 @@ public class ModernizrDto
      */
     protected void setSizes(Boolean sizes)
     {
-<span class="nc" id="L4460">        this.sizes = sizes;</span>
-<span class="nc" id="L4461">    }</span>
+<span class="nc" id="L2108">        this.sizes = sizes;</span>
+<span class="nc" id="L2109">    }</span>
 
     /**
      * Is src set allowed
@@ -4467,7 +2115,7 @@ public class ModernizrDto
      */
     public Boolean isSrcset()
     {
-<span class="nc" id="L4470">        return srcset;</span>
+<span class="nc" id="L2118">        return srcset;</span>
     }
 
     /**
@@ -4477,8 +2125,8 @@ public class ModernizrDto
      */
     protected void setSrcset(Boolean srcset)
     {
-<span class="nc" id="L4480">        this.srcset = srcset;</span>
-<span class="nc" id="L4481">    }</span>
+<span class="nc" id="L2128">        this.srcset = srcset;</span>
+<span class="nc" id="L2129">    }</span>
 
     /**
      * Is Input Form Actions allowed
@@ -4487,7 +2135,7 @@ public class ModernizrDto
      */
     public Boolean isInputformaction()
     {
-<span class="nc" id="L4490">        return inputformaction;</span>
+<span class="nc" id="L2138">        return inputformaction;</span>
     }
 
     /**
@@ -4497,8 +2145,8 @@ public class ModernizrDto
      */
     protected void setInputformaction(Boolean inputformaction)
     {
-<span class="nc" id="L4500">        this.inputformaction = inputformaction;</span>
-<span class="nc" id="L4501">    }</span>
+<span class="nc" id="L2148">        this.inputformaction = inputformaction;</span>
+<span class="nc" id="L2149">    }</span>
 
     /**
      * Is input form action allowed
@@ -4507,7 +2155,7 @@ public class ModernizrDto
      */
     public Boolean isInputFormaction()
     {
-<span class="nc" id="L4510">        return input_formaction;</span>
+<span class="nc" id="L2158">        return input_formaction;</span>
     }
 
     /**
@@ -4517,8 +2165,8 @@ public class ModernizrDto
      */
     protected void setInputFormaction(Boolean input_formaction)
     {
-<span class="nc" id="L4520">        this.input_formaction = input_formaction;</span>
-<span class="nc" id="L4521">    }</span>
+<span class="nc" id="L2168">        this.input_formaction = input_formaction;</span>
+<span class="nc" id="L2169">    }</span>
 
     /**
      * Is form enc types allowed
@@ -4527,7 +2175,7 @@ public class ModernizrDto
      */
     public Boolean isInputformenctype()
     {
-<span class="nc" id="L4530">        return inputformenctype;</span>
+<span class="nc" id="L2178">        return inputformenctype;</span>
     }
 
     /**
@@ -4537,8 +2185,8 @@ public class ModernizrDto
      */
     protected void setInputformenctype(Boolean inputformenctype)
     {
-<span class="nc" id="L4540">        this.inputformenctype = inputformenctype;</span>
-<span class="nc" id="L4541">    }</span>
+<span class="nc" id="L2188">        this.inputformenctype = inputformenctype;</span>
+<span class="nc" id="L2189">    }</span>
 
     /**
      * Is input form enc type allowed
@@ -4547,7 +2195,7 @@ public class ModernizrDto
      */
     public Boolean isInpuFormEnctype()
     {
-<span class="nc" id="L4550">        return input_formenctype;</span>
+<span class="nc" id="L2198">        return input_formenctype;</span>
     }
 
     /**
@@ -4557,8 +2205,8 @@ public class ModernizrDto
      */
     protected void setInputFormEnctype(Boolean input_formenctype)
     {
-<span class="nc" id="L4560">        this.input_formenctype = input_formenctype;</span>
-<span class="nc" id="L4561">    }</span>
+<span class="nc" id="L2208">        this.input_formenctype = input_formenctype;</span>
+<span class="nc" id="L2209">    }</span>
 
     /**
      * Is input form method allowed
@@ -4567,7 +2215,7 @@ public class ModernizrDto
      */
     public Boolean isInputformmethod()
     {
-<span class="nc" id="L4570">        return inputformmethod;</span>
+<span class="nc" id="L2218">        return inputformmethod;</span>
     }
 
     /**
@@ -4577,8 +2225,8 @@ public class ModernizrDto
      */
     protected void setInputformmethod(Boolean inputformmethod)
     {
-<span class="nc" id="L4580">        this.inputformmethod = inputformmethod;</span>
-<span class="nc" id="L4581">    }</span>
+<span class="nc" id="L2228">        this.inputformmethod = inputformmethod;</span>
+<span class="nc" id="L2229">    }</span>
 
     /**
      * Is input form target allowed
@@ -4587,7 +2235,7 @@ public class ModernizrDto
      */
     public Boolean isInputformtarget()
     {
-<span class="nc" id="L4590">        return inputformtarget;</span>
+<span class="nc" id="L2238">        return inputformtarget;</span>
     }
 
     /**
@@ -4597,8 +2245,8 @@ public class ModernizrDto
      */
     protected void setInputformtarget(Boolean inputformtarget)
     {
-<span class="nc" id="L4600">        this.inputformtarget = inputformtarget;</span>
-<span class="nc" id="L4601">    }</span>
+<span class="nc" id="L2248">        this.inputformtarget = inputformtarget;</span>
+<span class="nc" id="L2249">    }</span>
 
     /**
      * Is input form target allowed
@@ -4607,7 +2255,7 @@ public class ModernizrDto
      */
     public Boolean isInputFormtarget()
     {
-<span class="nc" id="L4610">        return input_formtarget;</span>
+<span class="nc" id="L2258">        return input_formtarget;</span>
     }
 
     /**
@@ -4617,8 +2265,8 @@ public class ModernizrDto
      */
     protected void setInputFormtarget(Boolean input_formtarget)
     {
-<span class="nc" id="L4620">        this.input_formtarget = input_formtarget;</span>
-<span class="nc" id="L4621">    }</span>
+<span class="nc" id="L2268">        this.input_formtarget = input_formtarget;</span>
+<span class="nc" id="L2269">    }</span>
 
     /**
      * Is beacon allowed
@@ -4627,7 +2275,7 @@ public class ModernizrDto
      */
     public Boolean isBeacon()
     {
-<span class="nc" id="L4630">        return beacon;</span>
+<span class="nc" id="L2278">        return beacon;</span>
     }
 
     /**
@@ -4637,8 +2285,8 @@ public class ModernizrDto
      */
     protected void setBeacon(Boolean beacon)
     {
-<span class="nc" id="L4640">        this.beacon = beacon;</span>
-<span class="nc" id="L4641">    }</span>
+<span class="nc" id="L2288">        this.beacon = beacon;</span>
+<span class="nc" id="L2289">    }</span>
 
     /**
      * Is on low bandwidth
@@ -4647,7 +2295,7 @@ public class ModernizrDto
      */
     public Boolean isLowbandwidth()
     {
-<span class="nc" id="L4650">        return lowbandwidth;</span>
+<span class="nc" id="L2298">        return lowbandwidth;</span>
     }
 
     /**
@@ -4657,8 +2305,8 @@ public class ModernizrDto
      */
     protected void setLowbandwidth(Boolean lowbandwidth)
     {
-<span class="nc" id="L4660">        this.lowbandwidth = lowbandwidth;</span>
-<span class="nc" id="L4661">    }</span>
+<span class="nc" id="L2308">        this.lowbandwidth = lowbandwidth;</span>
+<span class="nc" id="L2309">    }</span>
 
     /**
      * Is event source allowed
@@ -4667,7 +2315,7 @@ public class ModernizrDto
      */
     public Boolean isEventsource()
     {
-<span class="nc" id="L4670">        return eventsource;</span>
+<span class="nc" id="L2318">        return eventsource;</span>
     }
 
     /**
@@ -4677,8 +2325,8 @@ public class ModernizrDto
      */
     protected void setEventsource(Boolean eventsource)
     {
-<span class="nc" id="L4680">        this.eventsource = eventsource;</span>
-<span class="nc" id="L4681">    }</span>
+<span class="nc" id="L2328">        this.eventsource = eventsource;</span>
+<span class="nc" id="L2329">    }</span>
 
     /**
      * Is fetch allowed
@@ -4687,7 +2335,7 @@ public class ModernizrDto
      */
     public Boolean isFetch()
     {
-<span class="nc" id="L4690">        return fetch;</span>
+<span class="nc" id="L2338">        return fetch;</span>
     }
 
     /**
@@ -4697,8 +2345,8 @@ public class ModernizrDto
      */
     protected void setFetch(Boolean fetch)
     {
-<span class="nc" id="L4700">        this.fetch = fetch;</span>
-<span class="nc" id="L4701">    }</span>
+<span class="nc" id="L2348">        this.fetch = fetch;</span>
+<span class="nc" id="L2349">    }</span>
 
     /**
      * Is XHR allowed
@@ -4707,7 +2355,7 @@ public class ModernizrDto
      */
     public Boolean isXhrresponsetype()
     {
-<span class="nc" id="L4710">        return xhrresponsetype;</span>
+<span class="nc" id="L2358">        return xhrresponsetype;</span>
     }
 
     /**
@@ -4717,8 +2365,8 @@ public class ModernizrDto
      */
     protected void setXhrresponsetype(Boolean xhrresponsetype)
     {
-<span class="nc" id="L4720">        this.xhrresponsetype = xhrresponsetype;</span>
-<span class="nc" id="L4721">    }</span>
+<span class="nc" id="L2368">        this.xhrresponsetype = xhrresponsetype;</span>
+<span class="nc" id="L2369">    }</span>
 
     /**
      * Is XHR 2 allowed
@@ -4727,7 +2375,7 @@ public class ModernizrDto
      */
     public Boolean isXhr2()
     {
-<span class="nc" id="L4730">        return xhr2;</span>
+<span class="nc" id="L2378">        return xhr2;</span>
     }
 
     /**
@@ -4737,8 +2385,8 @@ public class ModernizrDto
      */
     protected void setXhr2(Boolean xhr2)
     {
-<span class="nc" id="L4740">        this.xhr2 = xhr2;</span>
-<span class="nc" id="L4741">    }</span>
+<span class="nc" id="L2388">        this.xhr2 = xhr2;</span>
+<span class="nc" id="L2389">    }</span>
 
     /**
      * Is script async allowed
@@ -4747,7 +2395,7 @@ public class ModernizrDto
      */
     public Boolean isScriptasync()
     {
-<span class="nc" id="L4750">        return scriptasync;</span>
+<span class="nc" id="L2398">        return scriptasync;</span>
     }
 
     /**
@@ -4757,8 +2405,8 @@ public class ModernizrDto
      */
     protected void setScriptasync(Boolean scriptasync)
     {
-<span class="nc" id="L4760">        this.scriptasync = scriptasync;</span>
-<span class="nc" id="L4761">    }</span>
+<span class="nc" id="L2408">        this.scriptasync = scriptasync;</span>
+<span class="nc" id="L2409">    }</span>
 
     /**
      * Is script defer allowed
@@ -4767,7 +2415,7 @@ public class ModernizrDto
      */
     public Boolean isScriptdefer()
     {
-<span class="nc" id="L4770">        return scriptdefer;</span>
+<span class="nc" id="L2418">        return scriptdefer;</span>
     }
 
     /**
@@ -4777,8 +2425,8 @@ public class ModernizrDto
      */
     protected void setScriptdefer(Boolean scriptdefer)
     {
-<span class="nc" id="L4780">        this.scriptdefer = scriptdefer;</span>
-<span class="nc" id="L4781">    }</span>
+<span class="nc" id="L2428">        this.scriptdefer = scriptdefer;</span>
+<span class="nc" id="L2429">    }</span>
 
     /**
      * Is speech recognition allowed
@@ -4787,7 +2435,7 @@ public class ModernizrDto
      */
     public Boolean isSpeechrecognition()
     {
-<span class="nc" id="L4790">        return speechrecognition;</span>
+<span class="nc" id="L2438">        return speechrecognition;</span>
     }
 
     /**
@@ -4797,8 +2445,8 @@ public class ModernizrDto
      */
     protected void setSpeechrecognition(Boolean speechrecognition)
     {
-<span class="nc" id="L4800">        this.speechrecognition = speechrecognition;</span>
-<span class="nc" id="L4801">    }</span>
+<span class="nc" id="L2448">        this.speechrecognition = speechrecognition;</span>
+<span class="nc" id="L2449">    }</span>
 
     /**
      * Is speech synthesis allowed
@@ -4807,7 +2455,7 @@ public class ModernizrDto
      */
     public Boolean isSpeechsynthesis()
     {
-<span class="nc" id="L4810">        return speechsynthesis;</span>
+<span class="nc" id="L2458">        return speechsynthesis;</span>
     }
 
     /**
@@ -4817,8 +2465,8 @@ public class ModernizrDto
      */
     protected void setSpeechsynthesis(Boolean speechsynthesis)
     {
-<span class="nc" id="L4820">        this.speechsynthesis = speechsynthesis;</span>
-<span class="nc" id="L4821">    }</span>
+<span class="nc" id="L2468">        this.speechsynthesis = speechsynthesis;</span>
+<span class="nc" id="L2469">    }</span>
 
     /**
      * Is local storage allowed
@@ -4827,7 +2475,7 @@ public class ModernizrDto
      */
     public Boolean isLocalstorage()
     {
-<span class="nc" id="L4830">        return localstorage;</span>
+<span class="nc" id="L2478">        return localstorage;</span>
     }
 
     /**
@@ -4837,8 +2485,8 @@ public class ModernizrDto
      */
     protected void setLocalstorage(Boolean localstorage)
     {
-<span class="nc" id="L4840">        this.localstorage = localstorage;</span>
-<span class="nc" id="L4841">    }</span>
+<span class="nc" id="L2488">        this.localstorage = localstorage;</span>
+<span class="nc" id="L2489">    }</span>
 
     /**
      * Is session storage allowed
@@ -4847,7 +2495,7 @@ public class ModernizrDto
      */
     public Boolean isSessionstorage()
     {
-<span class="nc" id="L4850">        return sessionstorage;</span>
+<span class="nc" id="L2498">        return sessionstorage;</span>
     }
 
     /**
@@ -4857,8 +2505,8 @@ public class ModernizrDto
      */
     protected void setSessionstorage(Boolean sessionstorage)
     {
-<span class="nc" id="L4860">        this.sessionstorage = sessionstorage;</span>
-<span class="nc" id="L4861">    }</span>
+<span class="nc" id="L2508">        this.sessionstorage = sessionstorage;</span>
+<span class="nc" id="L2509">    }</span>
 
     /**
      * Is web sql database allowed
@@ -4867,7 +2515,7 @@ public class ModernizrDto
      */
     public Boolean isWebsqldatabase()
     {
-<span class="nc" id="L4870">        return websqldatabase;</span>
+<span class="nc" id="L2518">        return websqldatabase;</span>
     }
 
     /**
@@ -4877,8 +2525,8 @@ public class ModernizrDto
      */
     protected void setWebsqldatabase(Boolean websqldatabase)
     {
-<span class="nc" id="L4880">        this.websqldatabase = websqldatabase;</span>
-<span class="nc" id="L4881">    }</span>
+<span class="nc" id="L2528">        this.websqldatabase = websqldatabase;</span>
+<span class="nc" id="L2529">    }</span>
 
     /**
      * Is style scoped
@@ -4887,7 +2535,7 @@ public class ModernizrDto
      */
     public Boolean isStylescoped()
     {
-<span class="nc" id="L4890">        return stylescoped;</span>
+<span class="nc" id="L2538">        return stylescoped;</span>
     }
 
     /**
@@ -4897,8 +2545,8 @@ public class ModernizrDto
      */
     protected void setStylescoped(Boolean stylescoped)
     {
-<span class="nc" id="L4900">        this.stylescoped = stylescoped;</span>
-<span class="nc" id="L4901">    }</span>
+<span class="nc" id="L2548">        this.stylescoped = stylescoped;</span>
+<span class="nc" id="L2549">    }</span>
 
     /**
      * Is SVG as image allowed
@@ -4907,7 +2555,7 @@ public class ModernizrDto
      */
     public Boolean isSvgasimg()
     {
-<span class="nc" id="L4910">        return svgasimg;</span>
+<span class="nc" id="L2558">        return svgasimg;</span>
     }
 
     /**
@@ -4917,8 +2565,8 @@ public class ModernizrDto
      */
     protected void setSvgasimg(Boolean svgasimg)
     {
-<span class="nc" id="L4920">        this.svgasimg = svgasimg;</span>
-<span class="nc" id="L4921">    }</span>
+<span class="nc" id="L2568">        this.svgasimg = svgasimg;</span>
+<span class="nc" id="L2569">    }</span>
 
     /**
      * are svg filters allowed
@@ -4927,7 +2575,7 @@ public class ModernizrDto
      */
     public Boolean isSvgfilters()
     {
-<span class="nc" id="L4930">        return svgfilters;</span>
+<span class="nc" id="L2578">        return svgfilters;</span>
     }
 
     /**
@@ -4937,8 +2585,8 @@ public class ModernizrDto
      */
     protected void setSvgfilters(Boolean svgfilters)
     {
-<span class="nc" id="L4940">        this.svgfilters = svgfilters;</span>
-<span class="nc" id="L4941">    }</span>
+<span class="nc" id="L2588">        this.svgfilters = svgfilters;</span>
+<span class="nc" id="L2589">    }</span>
 
     /**
      * Is in line SVG allowed
@@ -4947,7 +2595,7 @@ public class ModernizrDto
      */
     public Boolean isInlinesvg()
     {
-<span class="nc" id="L4950">        return inlinesvg;</span>
+<span class="nc" id="L2598">        return inlinesvg;</span>
     }
 
     /**
@@ -4957,8 +2605,8 @@ public class ModernizrDto
      */
     protected void setInlinesvg(Boolean inlinesvg)
     {
-<span class="nc" id="L4960">        this.inlinesvg = inlinesvg;</span>
-<span class="nc" id="L4961">    }</span>
+<span class="nc" id="L2608">        this.inlinesvg = inlinesvg;</span>
+<span class="nc" id="L2609">    }</span>
 
     /**
      * Is text area max allowed
@@ -4967,7 +2615,7 @@ public class ModernizrDto
      */
     public Boolean isTextareamaxlength()
     {
-<span class="nc" id="L4970">        return textareamaxlength;</span>
+<span class="nc" id="L2618">        return textareamaxlength;</span>
     }
 
     /**
@@ -4977,8 +2625,8 @@ public class ModernizrDto
      */
     protected void setTextareamaxlength(Boolean textareamaxlength)
     {
-<span class="nc" id="L4980">        this.textareamaxlength = textareamaxlength;</span>
-<span class="nc" id="L4981">    }</span>
+<span class="nc" id="L2628">        this.textareamaxlength = textareamaxlength;</span>
+<span class="nc" id="L2629">    }</span>
 
     /**
      * Are blob url's allowed
@@ -4987,7 +2635,7 @@ public class ModernizrDto
      */
     public Boolean isBloburls()
     {
-<span class="nc" id="L4990">        return bloburls;</span>
+<span class="nc" id="L2638">        return bloburls;</span>
     }
 
     /**
@@ -4997,8 +2645,8 @@ public class ModernizrDto
      */
     protected void setBloburls(Boolean bloburls)
     {
-<span class="nc" id="L5000">        this.bloburls = bloburls;</span>
-<span class="nc" id="L5001">    }</span>
+<span class="nc" id="L2648">        this.bloburls = bloburls;</span>
+<span class="nc" id="L2649">    }</span>
 
     /**
      * Are URL Parsers allowed
@@ -5007,7 +2655,7 @@ public class ModernizrDto
      */
     public Boolean isUrlparser()
     {
-<span class="nc" id="L5010">        return urlparser;</span>
+<span class="nc" id="L2658">        return urlparser;</span>
     }
 
     /**
@@ -5017,8 +2665,8 @@ public class ModernizrDto
      */
     protected void setUrlparser(Boolean urlparser)
     {
-<span class="nc" id="L5020">        this.urlparser = urlparser;</span>
-<span class="nc" id="L5021">    }</span>
+<span class="nc" id="L2668">        this.urlparser = urlparser;</span>
+<span class="nc" id="L2669">    }</span>
 
     /**
      * Are video loops allowed
@@ -5027,7 +2675,7 @@ public class ModernizrDto
      */
     public Boolean isVideoloop()
     {
-<span class="nc" id="L5030">        return videoloop;</span>
+<span class="nc" id="L2678">        return videoloop;</span>
     }
 
     /**
@@ -5037,8 +2685,8 @@ public class ModernizrDto
      */
     protected void setVideoloop(Boolean videoloop)
     {
-<span class="nc" id="L5040">        this.videoloop = videoloop;</span>
-<span class="nc" id="L5041">    }</span>
+<span class="nc" id="L2688">        this.videoloop = videoloop;</span>
+<span class="nc" id="L2689">    }</span>
 
     /**
      * Is Web GL Extentions allowed
@@ -5047,7 +2695,7 @@ public class ModernizrDto
      */
     public Boolean isWebglextensions()
     {
-<span class="nc" id="L5050">        return webglextensions;</span>
+<span class="nc" id="L2698">        return webglextensions;</span>
     }
 
     /**
@@ -5057,8 +2705,8 @@ public class ModernizrDto
      */
     protected void setWebglextensions(Boolean webglextensions)
     {
-<span class="nc" id="L5060">        this.webglextensions = webglextensions;</span>
-<span class="nc" id="L5061">    }</span>
+<span class="nc" id="L2708">        this.webglextensions = webglextensions;</span>
+<span class="nc" id="L2709">    }</span>
 
     /**
      * Is Video preload allowed
@@ -5067,7 +2715,7 @@ public class ModernizrDto
      */
     public Boolean isVideopreload()
     {
-<span class="nc" id="L5070">        return videopreload;</span>
+<span class="nc" id="L2718">        return videopreload;</span>
     }
 
     /**
@@ -5077,8 +2725,8 @@ public class ModernizrDto
      */
     protected void setVideopreload(Boolean videopreload)
     {
-<span class="nc" id="L5080">        this.videopreload = videopreload;</span>
-<span class="nc" id="L5081">    }</span>
+<span class="nc" id="L2728">        this.videopreload = videopreload;</span>
+<span class="nc" id="L2729">    }</span>
 
     /**
      * Is get user media allowed
@@ -5087,7 +2735,7 @@ public class ModernizrDto
      */
     public Boolean isGetusermedia()
     {
-<span class="nc" id="L5090">        return getusermedia;</span>
+<span class="nc" id="L2738">        return getusermedia;</span>
     }
 
     /**
@@ -5097,8 +2745,8 @@ public class ModernizrDto
      */
     protected void setGetusermedia(Boolean getusermedia)
     {
-<span class="nc" id="L5100">        this.getusermedia = getusermedia;</span>
-<span class="nc" id="L5101">    }</span>
+<span class="nc" id="L2748">        this.getusermedia = getusermedia;</span>
+<span class="nc" id="L2749">    }</span>
 
     /**
      * Are peer connections allowed
@@ -5107,7 +2755,7 @@ public class ModernizrDto
      */
     public Boolean isPeerconnection()
     {
-<span class="nc" id="L5110">        return peerconnection;</span>
+<span class="nc" id="L2758">        return peerconnection;</span>
     }
 
     /**
@@ -5117,8 +2765,8 @@ public class ModernizrDto
      */
     protected void setPeerconnection(Boolean peerconnection)
     {
-<span class="nc" id="L5120">        this.peerconnection = peerconnection;</span>
-<span class="nc" id="L5121">    }</span>
+<span class="nc" id="L2768">        this.peerconnection = peerconnection;</span>
+<span class="nc" id="L2769">    }</span>
 
     /**
      * Are data channels allowed
@@ -5127,7 +2775,7 @@ public class ModernizrDto
      */
     public Boolean isDatachannel()
     {
-<span class="nc" id="L5130">        return datachannel;</span>
+<span class="nc" id="L2778">        return datachannel;</span>
     }
 
     /**
@@ -5137,8 +2785,8 @@ public class ModernizrDto
      */
     protected void setDatachannel(Boolean datachannel)
     {
-<span class="nc" id="L5140">        this.datachannel = datachannel;</span>
-<span class="nc" id="L5141">    }</span>
+<span class="nc" id="L2788">        this.datachannel = datachannel;</span>
+<span class="nc" id="L2789">    }</span>
 
     /**
      * Are binary web sockets allowed
@@ -5147,7 +2795,7 @@ public class ModernizrDto
      */
     public Boolean isWebsocketsbinary()
     {
-<span class="nc" id="L5150">        return websocketsbinary;</span>
+<span class="nc" id="L2798">        return websocketsbinary;</span>
     }
 
     /**
@@ -5157,8 +2805,8 @@ public class ModernizrDto
      */
     protected void setWebsocketsbinary(Boolean websocketsbinary)
     {
-<span class="nc" id="L5160">        this.websocketsbinary = websocketsbinary;</span>
-<span class="nc" id="L5161">    }</span>
+<span class="nc" id="L2808">        this.websocketsbinary = websocketsbinary;</span>
+<span class="nc" id="L2809">    }</span>
 
     /**
      * Is atabbtoa allowed
@@ -5167,7 +2815,7 @@ public class ModernizrDto
      */
     public Boolean isAtobbtoa()
     {
-<span class="nc" id="L5170">        return atobbtoa;</span>
+<span class="nc" id="L2818">        return atobbtoa;</span>
     }
 
     /**
@@ -5177,8 +2825,8 @@ public class ModernizrDto
      */
     protected void setAtobbtoa(Boolean atobbtoa)
     {
-<span class="nc" id="L5180">        this.atobbtoa = atobbtoa;</span>
-<span class="nc" id="L5181">    }</span>
+<span class="nc" id="L2828">        this.atobbtoa = atobbtoa;</span>
+<span class="nc" id="L2829">    }</span>
 
     /**
      * Is Atob BTOA allowed
@@ -5187,7 +2835,7 @@ public class ModernizrDto
      */
     public Boolean isAtobBtoa()
     {
-<span class="nc" id="L5190">        return atob_btoa;</span>
+<span class="nc" id="L2838">        return atob_btoa;</span>
     }
 
     /**
@@ -5197,8 +2845,8 @@ public class ModernizrDto
      */
     protected void setAtobBtoa(Boolean atob_btoa)
     {
-<span class="nc" id="L5200">        this.atob_btoa = atob_btoa;</span>
-<span class="nc" id="L5201">    }</span>
+<span class="nc" id="L2848">        this.atob_btoa = atob_btoa;</span>
+<span class="nc" id="L2849">    }</span>
 
     /**
      * Is frames allowed
@@ -5207,7 +2855,7 @@ public class ModernizrDto
      */
     public Boolean isFramed()
     {
-<span class="nc" id="L5210">        return framed;</span>
+<span class="nc" id="L2858">        return framed;</span>
     }
 
     /**
@@ -5217,8 +2865,8 @@ public class ModernizrDto
      */
     protected void setFramed(Boolean framed)
     {
-<span class="nc" id="L5220">        this.framed = framed;</span>
-<span class="nc" id="L5221">    }</span>
+<span class="nc" id="L2868">        this.framed = framed;</span>
+<span class="nc" id="L2869">    }</span>
 
     /**
      * Is match media allowed
@@ -5227,7 +2875,7 @@ public class ModernizrDto
      */
     public Boolean isMatchmedia()
     {
-<span class="nc" id="L5230">        return matchmedia;</span>
+<span class="nc" id="L2878">        return matchmedia;</span>
     }
 
     /**
@@ -5237,8 +2885,8 @@ public class ModernizrDto
      */
     protected void setMatchmedia(Boolean matchmedia)
     {
-<span class="nc" id="L5240">        this.matchmedia = matchmedia;</span>
-<span class="nc" id="L5241">    }</span>
+<span class="nc" id="L2888">        this.matchmedia = matchmedia;</span>
+<span class="nc" id="L2889">    }</span>
 
     /**
      * Are shared workers allowed
@@ -5247,7 +2895,7 @@ public class ModernizrDto
      */
     public Boolean isSharedworkers()
     {
-<span class="nc" id="L5250">        return sharedworkers;</span>
+<span class="nc" id="L2898">        return sharedworkers;</span>
     }
 
     /**
@@ -5257,8 +2905,8 @@ public class ModernizrDto
      */
     protected void setSharedworkers(Boolean sharedworkers)
     {
-<span class="nc" id="L5260">        this.sharedworkers = sharedworkers;</span>
-<span class="nc" id="L5261">    }</span>
+<span class="nc" id="L2908">        this.sharedworkers = sharedworkers;</span>
+<span class="nc" id="L2909">    }</span>
 
     /**
      * Is web workers allowed
@@ -5267,7 +2915,7 @@ public class ModernizrDto
      */
     public Boolean isWebworkers()
     {
-<span class="nc" id="L5270">        return webworkers;</span>
+<span class="nc" id="L2918">        return webworkers;</span>
     }
 
     /**
@@ -5277,8 +2925,8 @@ public class ModernizrDto
      */
     protected void setWebworkers(Boolean webworkers)
     {
-<span class="nc" id="L5280">        this.webworkers = webworkers;</span>
-<span class="nc" id="L5281">    }</span>
+<span class="nc" id="L2928">        this.webworkers = webworkers;</span>
+<span class="nc" id="L2929">    }</span>
 
     /**
      * Are transferables allowed
@@ -5287,7 +2935,7 @@ public class ModernizrDto
      */
     public Boolean isTransferables()
     {
-<span class="nc" id="L5290">        return transferables;</span>
+<span class="nc" id="L2938">        return transferables;</span>
     }
 
     /**
@@ -5297,8 +2945,8 @@ public class ModernizrDto
      */
     protected void setTransferables(Boolean transferables)
     {
-<span class="nc" id="L5300">        this.transferables = transferables;</span>
-<span class="nc" id="L5301">    }</span>
+<span class="nc" id="L2948">        this.transferables = transferables;</span>
+<span class="nc" id="L2949">    }</span>
 
     /**
      * Is XHR Response type array buffer allowed
@@ -5307,7 +2955,7 @@ public class ModernizrDto
      */
     public Boolean isXhrresponsetypearraybuffer()
     {
-<span class="nc" id="L5310">        return xhrresponsetypearraybuffer;</span>
+<span class="nc" id="L2958">        return xhrresponsetypearraybuffer;</span>
     }
 
     /**
@@ -5317,8 +2965,8 @@ public class ModernizrDto
      */
     protected void setXhrresponsetypearraybuffer(Boolean xhrresponsetypearraybuffer)
     {
-<span class="nc" id="L5320">        this.xhrresponsetypearraybuffer = xhrresponsetypearraybuffer;</span>
-<span class="nc" id="L5321">    }</span>
+<span class="nc" id="L2968">        this.xhrresponsetypearraybuffer = xhrresponsetypearraybuffer;</span>
+<span class="nc" id="L2969">    }</span>
 
     /**
      * Is Is XHR Response type array blob allowed
@@ -5327,7 +2975,7 @@ public class ModernizrDto
      */
     public Boolean isXhrresponsetypeblob()
     {
-<span class="nc" id="L5330">        return xhrresponsetypeblob;</span>
+<span class="nc" id="L2978">        return xhrresponsetypeblob;</span>
     }
 
     /**
@@ -5337,8 +2985,8 @@ public class ModernizrDto
      */
     protected void setXhrresponsetypeblob(Boolean xhrresponsetypeblob)
     {
-<span class="nc" id="L5340">        this.xhrresponsetypeblob = xhrresponsetypeblob;</span>
-<span class="nc" id="L5341">    }</span>
+<span class="nc" id="L2988">        this.xhrresponsetypeblob = xhrresponsetypeblob;</span>
+<span class="nc" id="L2989">    }</span>
 
     /**
      * Is XHR Reponse Document sets allowed
@@ -5347,7 +2995,7 @@ public class ModernizrDto
      */
     public Boolean isXhrresponsetypedocument()
     {
-<span class="nc" id="L5350">        return xhrresponsetypedocument;</span>
+<span class="nc" id="L2998">        return xhrresponsetypedocument;</span>
     }
 
     /**
@@ -5357,8 +3005,8 @@ public class ModernizrDto
      */
     protected void setXhrresponsetypedocument(Boolean xhrresponsetypedocument)
     {
-<span class="nc" id="L5360">        this.xhrresponsetypedocument = xhrresponsetypedocument;</span>
-<span class="nc" id="L5361">    }</span>
+<span class="nc" id="L3008">        this.xhrresponsetypedocument = xhrresponsetypedocument;</span>
+<span class="nc" id="L3009">    }</span>
 
     /**
      * Is XHR Json allowed
@@ -5367,7 +3015,7 @@ public class ModernizrDto
      */
     public Boolean isXhrresponsetypejson()
     {
-<span class="nc" id="L5370">        return xhrresponsetypejson;</span>
+<span class="nc" id="L3018">        return xhrresponsetypejson;</span>
     }
 
     /**
@@ -5377,8 +3025,8 @@ public class ModernizrDto
      */
     protected void setXhrresponsetypejson(Boolean xhrresponsetypejson)
     {
-<span class="nc" id="L5380">        this.xhrresponsetypejson = xhrresponsetypejson;</span>
-<span class="nc" id="L5381">    }</span>
+<span class="nc" id="L3028">        this.xhrresponsetypejson = xhrresponsetypejson;</span>
+<span class="nc" id="L3029">    }</span>
 
     /**
      * Is XHR Respones Type Text Allowed
@@ -5387,7 +3035,7 @@ public class ModernizrDto
      */
     public Boolean isXhrresponsetypetext()
     {
-<span class="nc" id="L5390">        return xhrresponsetypetext;</span>
+<span class="nc" id="L3038">        return xhrresponsetypetext;</span>
     }
 
     /**
@@ -5397,8 +3045,8 @@ public class ModernizrDto
      */
     protected void setXhrresponsetypetext(Boolean xhrresponsetypetext)
     {
-<span class="nc" id="L5400">        this.xhrresponsetypetext = xhrresponsetypetext;</span>
-<span class="nc" id="L5401">    }</span>
+<span class="nc" id="L3048">        this.xhrresponsetypetext = xhrresponsetypetext;</span>
+<span class="nc" id="L3049">    }</span>
 
     /**
      * Are SVG Clip Paths Allowed
@@ -5407,7 +3055,7 @@ public class ModernizrDto
      */
     public Boolean isSvgclippaths()
     {
-<span class="nc" id="L5410">        return svgclippaths;</span>
+<span class="nc" id="L3058">        return svgclippaths;</span>
     }
 
     /**
@@ -5417,8 +3065,8 @@ public class ModernizrDto
      */
     protected void setSvgclippaths(Boolean svgclippaths)
     {
-<span class="nc" id="L5420">        this.svgclippaths = svgclippaths;</span>
-<span class="nc" id="L5421">    }</span>
+<span class="nc" id="L3068">        this.svgclippaths = svgclippaths;</span>
+<span class="nc" id="L3069">    }</span>
 
     /**
      * Is SVG Foreign Objects Allowed
@@ -5427,7 +3075,7 @@ public class ModernizrDto
      */
     public Boolean isSvgforeignobject()
     {
-<span class="nc" id="L5430">        return svgforeignobject;</span>
+<span class="nc" id="L3078">        return svgforeignobject;</span>
     }
 
     /**
@@ -5437,8 +3085,8 @@ public class ModernizrDto
      */
     protected void setSvgforeignobject(Boolean svgforeignobject)
     {
-<span class="nc" id="L5440">        this.svgforeignobject = svgforeignobject;</span>
-<span class="nc" id="L5441">    }</span>
+<span class="nc" id="L3088">        this.svgforeignobject = svgforeignobject;</span>
+<span class="nc" id="L3089">    }</span>
 
     /**
      * Is smil allowed
@@ -5447,7 +3095,7 @@ public class ModernizrDto
      */
     public Boolean isSmil()
     {
-<span class="nc" id="L5450">        return smil;</span>
+<span class="nc" id="L3098">        return smil;</span>
     }
 
     /**
@@ -5457,8 +3105,8 @@ public class ModernizrDto
      */
     protected void setSmil(Boolean smil)
     {
-<span class="nc" id="L5460">        this.smil = smil;</span>
-<span class="nc" id="L5461">    }</span>
+<span class="nc" id="L3108">        this.smil = smil;</span>
+<span class="nc" id="L3109">    }</span>
 
     /**
      * Is proximity allowed
@@ -5467,7 +3115,7 @@ public class ModernizrDto
      */
     public Boolean isProximity()
     {
-<span class="nc" id="L5470">        return proximity;</span>
+<span class="nc" id="L3118">        return proximity;</span>
     }
 
     /**
@@ -5477,8 +3125,8 @@ public class ModernizrDto
      */
     protected void setProximity(Boolean proximity)
     {
-<span class="nc" id="L5480">        this.proximity = proximity;</span>
-<span class="nc" id="L5481">    }</span>
+<span class="nc" id="L3128">        this.proximity = proximity;</span>
+<span class="nc" id="L3129">    }</span>
 
     /**
      * Are CSS Hyphens allowed
@@ -5487,7 +3135,7 @@ public class ModernizrDto
      */
     public Boolean isCsshyphens()
     {
-<span class="nc" id="L5490">        return csshyphens;</span>
+<span class="nc" id="L3138">        return csshyphens;</span>
     }
 
     /**
@@ -5497,8 +3145,8 @@ public class ModernizrDto
      */
     protected void setCsshyphens(Boolean csshyphens)
     {
-<span class="nc" id="L5500">        this.csshyphens = csshyphens;</span>
-<span class="nc" id="L5501">    }</span>
+<span class="nc" id="L3148">        this.csshyphens = csshyphens;</span>
+<span class="nc" id="L3149">    }</span>
 
     /**
      * Are soft hyphens allowed
@@ -5507,7 +3155,7 @@ public class ModernizrDto
      */
     public Boolean isSofthyphens()
     {
-<span class="nc" id="L5510">        return softhyphens;</span>
+<span class="nc" id="L3158">        return softhyphens;</span>
     }
 
     /**
@@ -5517,8 +3165,8 @@ public class ModernizrDto
      */
     protected void setSofthyphens(Boolean softhyphens)
     {
-<span class="nc" id="L5520">        this.softhyphens = softhyphens;</span>
-<span class="nc" id="L5521">    }</span>
+<span class="nc" id="L3168">        this.softhyphens = softhyphens;</span>
+<span class="nc" id="L3169">    }</span>
 
     /**
      * Are soft hyphens findable
@@ -5527,7 +3175,7 @@ public class ModernizrDto
      */
     public Boolean isSofthyphensfind()
     {
-<span class="nc" id="L5530">        return softhyphensfind;</span>
+<span class="nc" id="L3178">        return softhyphensfind;</span>
     }
 
     /**
@@ -5537,8 +3185,8 @@ public class ModernizrDto
      */
     protected void setSofthyphensfind(Boolean softhyphensfind)
     {
-<span class="nc" id="L5540">        this.softhyphensfind = softhyphensfind;</span>
-<span class="nc" id="L5541">    }</span>
+<span class="nc" id="L3188">        this.softhyphensfind = softhyphensfind;</span>
+<span class="nc" id="L3189">    }</span>
 
     /**
      * Are blob workers enabled
@@ -5547,7 +3195,7 @@ public class ModernizrDto
      */
     public Boolean isBlobworkers()
     {
-<span class="nc" id="L5550">        return blobworkers;</span>
+<span class="nc" id="L3198">        return blobworkers;</span>
     }
 
     /**
@@ -5557,8 +3205,8 @@ public class ModernizrDto
      */
     protected void setBlobworkers(Boolean blobworkers)
     {
-<span class="nc" id="L5560">        this.blobworkers = blobworkers;</span>
-<span class="nc" id="L5561">    }</span>
+<span class="nc" id="L3208">        this.blobworkers = blobworkers;</span>
+<span class="nc" id="L3209">    }</span>
 
     /**
      * Are data workers enabled
@@ -5567,7 +3215,7 @@ public class ModernizrDto
      */
     public Boolean isDataworkers()
     {
-<span class="nc" id="L5570">        return dataworkers;</span>
+<span class="nc" id="L3218">        return dataworkers;</span>
     }
 
     /**
@@ -5577,8 +3225,8 @@ public class ModernizrDto
      */
     protected void setDataworkers(Boolean dataworkers)
     {
-<span class="nc" id="L5580">        this.dataworkers = dataworkers;</span>
-<span class="nc" id="L5581">    }</span>
+<span class="nc" id="L3228">        this.dataworkers = dataworkers;</span>
+<span class="nc" id="L3229">    }</span>
 
     /**
      * Is jpeg 2000 enabled
@@ -5587,7 +3235,7 @@ public class ModernizrDto
      */
     public Boolean isJpeg2000()
     {
-<span class="nc" id="L5590">        return jpeg2000;</span>
+<span class="nc" id="L3238">        return jpeg2000;</span>
     }
 
     /**
@@ -5597,8 +3245,8 @@ public class ModernizrDto
      */
     protected void setJpeg2000(Boolean jpeg2000)
     {
-<span class="nc" id="L5600">        this.jpeg2000 = jpeg2000;</span>
-<span class="nc" id="L5601">    }</span>
+<span class="nc" id="L3248">        this.jpeg2000 = jpeg2000;</span>
+<span class="nc" id="L3249">    }</span>
 
     /**
      * Is jpeg xr enabled
@@ -5607,7 +3255,7 @@ public class ModernizrDto
      */
     public Boolean isJpegxr()
     {
-<span class="nc" id="L5610">        return jpegxr;</span>
+<span class="nc" id="L3258">        return jpegxr;</span>
     }
 
     /**
@@ -5617,8 +3265,8 @@ public class ModernizrDto
      */
     protected void setJpegxr(Boolean jpegxr)
     {
-<span class="nc" id="L5620">        this.jpegxr = jpegxr;</span>
-<span class="nc" id="L5621">    }</span>
+<span class="nc" id="L3268">        this.jpegxr = jpegxr;</span>
+<span class="nc" id="L3269">    }</span>
 
     /**
      * Is web alpha enabled
@@ -5627,7 +3275,7 @@ public class ModernizrDto
      */
     public Boolean isWebpalpha()
     {
-<span class="nc" id="L5630">        return webpalpha;</span>
+<span class="nc" id="L3278">        return webpalpha;</span>
     }
 
     /**
@@ -5637,8 +3285,8 @@ public class ModernizrDto
      */
     protected void setWebpalpha(Boolean webpalpha)
     {
-<span class="nc" id="L5640">        this.webpalpha = webpalpha;</span>
-<span class="nc" id="L5641">    }</span>
+<span class="nc" id="L3288">        this.webpalpha = webpalpha;</span>
+<span class="nc" id="L3289">    }</span>
 
     /**
      * Is web animation enabled
@@ -5647,7 +3295,7 @@ public class ModernizrDto
      */
     public Boolean isWebpanimation()
     {
-<span class="nc" id="L5650">        return webpanimation;</span>
+<span class="nc" id="L3298">        return webpanimation;</span>
     }
 
     /**
@@ -5657,8 +3305,8 @@ public class ModernizrDto
      */
     protected void setWebpanimation(Boolean webpanimation)
     {
-<span class="nc" id="L5660">        this.webpanimation = webpanimation;</span>
-<span class="nc" id="L5661">    }</span>
+<span class="nc" id="L3308">        this.webpanimation = webpanimation;</span>
+<span class="nc" id="L3309">    }</span>
 
     /**
      * Is web p lossless enabled
@@ -5667,7 +3315,7 @@ public class ModernizrDto
      */
     public Boolean isWebplossless()
     {
-<span class="nc" id="L5670">        return webplossless;</span>
+<span class="nc" id="L3318">        return webplossless;</span>
     }
 
     /**
@@ -5677,8 +3325,8 @@ public class ModernizrDto
      */
     protected void setWebplossless(Boolean webplossless)
     {
-<span class="nc" id="L5680">        this.webplossless = webplossless;</span>
-<span class="nc" id="L5681">    }</span>
+<span class="nc" id="L3328">        this.webplossless = webplossless;</span>
+<span class="nc" id="L3329">    }</span>
 
     /**
      * Is web p
@@ -5687,7 +3335,7 @@ public class ModernizrDto
      */
     public Boolean isWebp()
     {
-<span class="nc" id="L5690">        return webp;</span>
+<span class="nc" id="L3338">        return webp;</span>
     }
 
     /**
@@ -5697,8 +3345,8 @@ public class ModernizrDto
      */
     protected void setWebp(Boolean webp)
     {
-<span class="nc" id="L5700">        this.webp = webp;</span>
-<span class="nc" id="L5701">    }</span>
+<span class="nc" id="L3348">        this.webp = webp;</span>
+<span class="nc" id="L3349">    }</span>
 
     /**
      * Is exif orientationn enabled
@@ -5707,7 +3355,7 @@ public class ModernizrDto
      */
     public Boolean isExiforientation()
     {
-<span class="nc" id="L5710">        return exiforientation;</span>
+<span class="nc" id="L3358">        return exiforientation;</span>
     }
 
     /**
@@ -5717,8 +3365,8 @@ public class ModernizrDto
      */
     protected void setExiforientation(Boolean exiforientation)
     {
-<span class="nc" id="L5720">        this.exiforientation = exiforientation;</span>
-<span class="nc" id="L5721">    }</span>
+<span class="nc" id="L3368">        this.exiforientation = exiforientation;</span>
+<span class="nc" id="L3369">    }</span>
 
     /**
      * Is a png enabled
@@ -5727,7 +3375,7 @@ public class ModernizrDto
      */
     public Boolean isApng()
     {
-<span class="nc" id="L5730">        return apng;</span>
+<span class="nc" id="L3378">        return apng;</span>
     }
 
     /**
@@ -5737,8 +3385,8 @@ public class ModernizrDto
      */
     protected void setApng(Boolean apng)
     {
-<span class="nc" id="L5740">        this.apng = apng;</span>
-<span class="nc" id="L5741">    }</span>
+<span class="nc" id="L3388">        this.apng = apng;</span>
+<span class="nc" id="L3389">    }</span>
 
     /**
      * Is audio preload enabled
@@ -5747,7 +3395,7 @@ public class ModernizrDto
      */
     public Boolean isAudiopreload()
     {
-<span class="nc" id="L5750">        return audiopreload;</span>
+<span class="nc" id="L3398">        return audiopreload;</span>
     }
 
     /**
@@ -5757,8 +3405,8 @@ public class ModernizrDto
      */
     protected void setAudiopreload(Boolean audiopreload)
     {
-<span class="nc" id="L5760">        this.audiopreload = audiopreload;</span>
-<span class="nc" id="L5761">    }</span>
+<span class="nc" id="L3408">        this.audiopreload = audiopreload;</span>
+<span class="nc" id="L3409">    }</span>
 
     /**
      * Is video auto play enabled
@@ -5767,7 +3415,7 @@ public class ModernizrDto
      */
     public Boolean isVideoautoplay()
     {
-<span class="nc" id="L5770">        return videoautoplay;</span>
+<span class="nc" id="L3418">        return videoautoplay;</span>
     }
 
     /**
@@ -5777,8 +3425,8 @@ public class ModernizrDto
      */
     protected void setVideoautoplay(Boolean videoautoplay)
     {
-<span class="nc" id="L5780">        this.videoautoplay = videoautoplay;</span>
-<span class="nc" id="L5781">    }</span>
+<span class="nc" id="L3428">        this.videoautoplay = videoautoplay;</span>
+<span class="nc" id="L3429">    }</span>
 
     /**
      * Is data URI enabled
@@ -5787,7 +3435,7 @@ public class ModernizrDto
      */
     public Boolean isDatauri()
     {
-<span class="nc" id="L5790">        return datauri;</span>
+<span class="nc" id="L3438">        return datauri;</span>
     }
 
     /**
@@ -5797,8 +3445,8 @@ public class ModernizrDto
      */
     protected void setDatauri(Boolean datauri)
     {
-<span class="nc" id="L5800">        this.datauri = datauri;</span>
-<span class="nc" id="L5801">    }</span>
+<span class="nc" id="L3448">        this.datauri = datauri;</span>
+<span class="nc" id="L3449">    }</span>
 
     /**
      * Is indexed blob enabled
@@ -5807,7 +3455,7 @@ public class ModernizrDto
      */
     public Boolean isIndexeddbblob()
     {
-<span class="nc" id="L5810">        return indexeddbblob;</span>
+<span class="nc" id="L3458">        return indexeddbblob;</span>
     }
 
     /**
@@ -5817,7 +3465,7 @@ public class ModernizrDto
      */
     protected void setIndexeddbblob(Boolean indexeddbblob)
     {
-<span class="nc" id="L5820">        this.indexeddbblob = indexeddbblob;</span>
-<span class="nc" id="L5821">    }</span>
+<span class="nc" id="L3468">        this.indexeddbblob = indexeddbblob;</span>
+<span class="nc" id="L3469">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

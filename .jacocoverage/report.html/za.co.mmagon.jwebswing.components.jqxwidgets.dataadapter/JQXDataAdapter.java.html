@@ -47,13 +47,13 @@ public class JQXDataAdapter&lt;A extends JQXDataAdapterSourceData&gt;
      */
     public JQXDataAdapter(Component component)
     {
-<span class="nc" id="L50">        super(component);</span>
-<span class="nc" id="L51">        addFeature(getFeature());</span>
-<span class="nc bnc" id="L52" title="All 2 branches missed.">        if (component != null)</span>
+<span class="fc" id="L50">        super(component);</span>
+<span class="fc" id="L51">        addFeature(getFeature());</span>
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">        if (component != null)</span>
         {
-<span class="nc" id="L54">            component.getJavascriptReferences().add(JQXReferencePool.Data.getJavaScriptReference());</span>
+<span class="fc" id="L54">            component.getJavascriptReferences().add(JQXReferencePool.Data.getJavaScriptReference());</span>
         }
-<span class="nc" id="L56">    }</span>
+<span class="fc" id="L56">    }</span>
     
     /**
      * Returns a cleaner version of me
@@ -61,7 +61,7 @@ public class JQXDataAdapter&lt;A extends JQXDataAdapterSourceData&gt;
      */
     public IJQXDataAdapter asMe()
     {
-<span class="nc" id="L64">        return this;</span>
+<span class="fc" id="L64">        return this;</span>
     }
 
     /**
@@ -71,11 +71,11 @@ public class JQXDataAdapter&lt;A extends JQXDataAdapterSourceData&gt;
     @Override
     public final JQXDataAdapterFeature getFeature()
     {
-<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (feature == null)</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        if (feature == null)</span>
         {
-<span class="nc" id="L76">            feature = new JQXDataAdapterFeature(this);</span>
+<span class="fc" id="L76">            feature = new JQXDataAdapterFeature(this);</span>
         }
-<span class="nc" id="L78">        return feature;</span>
+<span class="fc" id="L78">        return feature;</span>
     }
 
     /**
@@ -85,7 +85,7 @@ public class JQXDataAdapter&lt;A extends JQXDataAdapterSourceData&gt;
     @Override
     public JQXDataAdapterOptions&lt;A&gt; getOptions()
     {
-<span class="nc" id="L88">        return getFeature().getOptions();</span>
+<span class="fc" id="L88">        return getFeature().getOptions();</span>
     }
 
     /**
@@ -114,7 +114,7 @@ public class JQXDataAdapter&lt;A extends JQXDataAdapterSourceData&gt;
     @Override
     protected StringBuilder renderHTML(int tabCount)
     {
-<span class="nc" id="L117">        return new StringBuilder();</span>
+<span class="fc" id="L117">        return new StringBuilder();</span>
     }
     
 }

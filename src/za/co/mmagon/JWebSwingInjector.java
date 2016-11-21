@@ -16,16 +16,10 @@
  */
 package za.co.mmagon;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.servlet.GuiceServletContextListener;
-import com.google.inject.servlet.ServletModule;
-import org.apache.log4j.Logger;
-import za.co.mmagon.jwebswing.base.servlets.AjaxReceiverServlet;
-import za.co.mmagon.jwebswing.base.servlets.AngularDataServlet;
-import za.co.mmagon.jwebswing.base.servlets.AngularServlet;
-import za.co.mmagon.jwebswing.base.servlets.CSSServlet;
-import za.co.mmagon.jwebswing.base.servlets.JavaScriptServlet;
+import com.google.inject.*;
+import com.google.inject.servlet.*;
+import org.apache.log4j.*;
+import za.co.mmagon.jwebswing.base.servlets.*;
 
 /**
  * Allows injection of the session, request and response

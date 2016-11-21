@@ -34,7 +34,7 @@ import za.co.mmagon.jwebswing.*;
 public class CSSServlet extends JWDefaultServlet
 {
 
-    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("CSSServlet"); 
+    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("CSSServlet");
     private static final long serialVersionUID = 1L;
 
     /**
@@ -42,6 +42,7 @@ public class CSSServlet extends JWDefaultServlet
      *
      * @param request  Servlet request
      * @param response Servlet response
+     *
      * @throws ServletException if a Servlet-specific error occurs
      * @throws IOException      if an I/O error occurs
      */
@@ -50,9 +51,11 @@ public class CSSServlet extends JWDefaultServlet
     {
         Date startDate = new Date();
         StringBuilder scripts = new StringBuilder();
+
         Page page = (Page) request.getSession().getAttribute("jwpage");
         StringBuilder css = page.getBody().renderCss(0);
         scripts.append(css);
+
         Date endDate = new Date();
         try (PrintWriter out = response.getWriter())
         {
@@ -68,6 +71,7 @@ public class CSSServlet extends JWDefaultServlet
      *
      * @param request  Servlet request
      * @param response Servlet response
+     *
      * @throws ServletException if a Servlet-specific error occurs
      * @throws IOException      if an I/O error occurs
      */
