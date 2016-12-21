@@ -16,9 +16,11 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import org.junit.*;
-import za.co.mmagon.*;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
+import org.junit.Assert;
+import org.junit.Test;
+import za.co.mmagon.BaseTestClass;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 
 /**
  *

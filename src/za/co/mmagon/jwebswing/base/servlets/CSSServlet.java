@@ -16,13 +16,13 @@
  */
 package za.co.mmagon.jwebswing.base.servlets;
 
+import za.co.mmagon.logger.LogFactory;
 import com.google.inject.*;
 import java.io.*;
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import org.apache.log4j.*;
-import za.co.mmagon.*;
+import java.util.logging.*;
 import za.co.mmagon.jwebswing.*;
 
 /**
@@ -34,7 +34,7 @@ import za.co.mmagon.jwebswing.*;
 public class CSSServlet extends JWDefaultServlet
 {
 
-    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("CSSServlet");
+    private static final Logger LOG = LogFactory.getInstance().getLogger("CSSServlet");
     private static final long serialVersionUID = 1L;
 
     /**
@@ -62,7 +62,7 @@ public class CSSServlet extends JWDefaultServlet
             response.setContentType("text/css");
             out.println(scripts);
             Date dataTransferDate = new Date();
-            LOG.trace("[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + scripts.length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
+            LOG.log(Level.FINE,"[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + scripts.length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
         }
     }
 
@@ -86,7 +86,7 @@ public class CSSServlet extends JWDefaultServlet
         }
         catch (IOException | ServletException e)
         {
-            LOG.fatal("Do Post in CSS Servlet", e);
+            LOG.log(Level.SEVERE, "Do Post in CSS Servlet", e);
         }
     }
 }

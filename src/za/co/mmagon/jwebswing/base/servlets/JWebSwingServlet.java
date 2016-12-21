@@ -1,19 +1,26 @@
 package za.co.mmagon.jwebswing.base.servlets;
 
-import com.google.inject.*;
-import java.io.*;
-import java.util.*;
-import javax.servlet.*;
+import com.armineasy.injection.GuiceContext;
+import com.google.inject.Provides;
+import com.google.inject.Singleton;
+import com.google.inject.name.Named;
+import com.google.inject.servlet.RequestScoped;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletException;
 import javax.servlet.http.*;
-import net.sf.uadetector.*;
-import net.sf.uadetector.service.*;
-import org.apache.log4j.*;
-import za.co.mmagon.*;
-import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.base.ajax.exceptions.*;
-import za.co.mmagon.jwebswing.base.client.*;
-import za.co.mmagon.jwebswing.base.html.*;
-import za.co.mmagon.jwebswing.utilities.*;
+import net.sf.uadetector.ReadableUserAgent;
+import net.sf.uadetector.UserAgentStringParser;
+import net.sf.uadetector.service.UADetectorServiceFactory;
+import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
+import za.co.mmagon.jwebswing.base.client.Browsers;
+import za.co.mmagon.jwebswing.base.html.Body;
+import za.co.mmagon.jwebswing.utilities.TextUtilities;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * The base Servlet for the JWebSwing environment. Constructs each page on call
@@ -29,11 +36,11 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
     /**
      * The logger for the swing Servlet
      */
-    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("JWebSwingServlet");
+    private static final Logger LOG = LogFactory.getInstance().getLogger("JWebSwingServlet");
     /**
      * The logger for the session handler Servlet
      */
-    private static final Logger SESSION_LOG = LoggerFactory.getInstance().makeNewLoggerInstance("SessionHandler");
+    private static final Logger SESSION_LOG = LogFactory.getInstance().getLogger("SessionHandler");
 
     /**
      * Version 1
@@ -41,14 +48,11 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
     private static final long serialVersionUID = 1L;
 
     /**
-     * All the current sessions and their pages. Static for direct reference
-     */
-    private static HashMap<String, JWebSwingServlet> sessionPages;
-
-    /**
      * The User Agent Parser
      */
     private static final UserAgentStringParser userAgentParser = UADetectorServiceFactory.getResourceModuleParser();
+
+    private static GuiceContext injectionContext;
 
     /**
      * Constructs a new JWebSwing Servlet that is not session aware
@@ -57,14 +61,13 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
     {
     }
 
-    /**
-     * Returns the number of sessions
-     *
-     * @return
-     */
-    public int getNumberOfSessions()
+    public static GuiceContext getInjectionContext()
     {
-        return getSessionPages().size();
+        if (injectionContext == null)
+        {
+            injectionContext = new GuiceContext();
+        }
+        return injectionContext;
     }
 
     /**
@@ -76,7 +79,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
      */
     private void readRequestVariables(HttpServletRequest request) throws MissingComponentException
     {
-        Page currentPage = getNewPage(request.getSession().getId());
+        Page currentPage = getPage();
         request.getSession().setAttribute("jwpage", currentPage);
         if (currentPage == null)
         {
@@ -85,8 +88,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
         getCurrentPage(request.getSession()).setServlet(this);
         if (request.getSession().isNew())
         {
-            getSessionPages().put(request.getSession().getId(), this);
-            SESSION_LOG.trace("[SessionID]-[" + request.getSession().getId() + "];[Name]-[User Login];[Action]-[Session Added];" + "[Session Count]-[" + getNumberOfSessions() + "]");
+            SESSION_LOG.log(Level.FINE, "[SessionID]-[{0}];[Name]-[User Login];[Action]-[Session Added];", request.getSession().getId());
         }
     }
 
@@ -112,11 +114,17 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
         getCurrentPage(request.getSession()).setBrowser(b);
         if (agent.getVersionNumber().getMajor() == null || agent.getVersionNumber().getMajor().isEmpty())
         {
-            LOG.trace("[SessionID]-[" + request.getSession().getId() + "];" + "[Browser]-[" + b.getBrowserGroup().toString() + "];[Version]-[" + b.getBrowserVersion() + "];[Operating System]-[" + agent.getOperatingSystem().getName() + "];[Device Category]-[" + agent.getDeviceCategory().getCategory() + "];[Device]-[" + agent.getDeviceCategory().getName() + "];" + "[CSS]-[" + b.getCapableCSSVersion() + "];[HTML]-[" + b.getHtmlVersion() + "];");
+            LOG.log(Level.FINE, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}];[Operating System]-[{3}];[Device Category]-[{4}];[Device]-[{5}];[CSS]-[{6}];[HTML]-[{7}];", new Object[]
+            {
+                request.getSession().getId(), b.getBrowserGroup().toString(), b.getBrowserVersion(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()
+            });
         }
         else
         {
-            LOG.trace("[SessionID]-[" + request.getSession().getId() + "];" + "[Browser]-[" + agent.getName() + "];[Version]-[" + agent.getVersionNumber().getMajor() + "." + agent.getVersionNumber().getMinor() + "];[Operating System]-[" + agent.getOperatingSystem().getName() + "];[Device Category]-[" + agent.getDeviceCategory().getCategory() + "];[Device]-[" + agent.getDeviceCategory().getName() + "];" + "[CSS]-[" + b.getCapableCSSVersion() + "];[HTML]-[" + b.getHtmlVersion() + "];");
+            LOG.log(Level.FINE, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}.{3}];[Operating System]-[{4}];[Device Category]-[{5}];[Device]-[{6}];[CSS]-[{7}];[HTML]-[{8}];", new Object[]
+            {
+                request.getSession().getId(), agent.getName(), agent.getVersionNumber().getMajor(), agent.getVersionNumber().getMinor(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()
+            });
         }
     }
 
@@ -141,11 +149,14 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
             out = response.getWriter();
             out.println(sb);
             Date dataTransferDate = new Date();
-            LOG.trace("[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + sb.length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - transferStart.getTime()) + "]");
+            LOG.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
+            {
+                request.getSession().getId(), endDate.getTime() - startDate.getTime(), sb.length(), dataTransferDate.getTime() - transferStart.getTime()
+            });
         }
         catch (IOException ex)
         {
-            LOG.fatal("[Network]-[Connection Dead]", ex);
+            LOG.log(Level.SEVERE, "[Network]-[Connection Dead]", ex);
             throw ex;
         }
         finally
@@ -159,7 +170,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
             }
             catch (Exception e)
             {
-                LOG.error(e);
+                LOG.log(Level.SEVERE, "Can't send page", e);
             }
         }
     }
@@ -184,7 +195,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
         }
         catch (MissingComponentException mce)
         {
-            LOG.fatal("No Page For Servlet", mce);
+            LOG.log(Level.SEVERE, "No Page For Servlet", mce);
             Page p = new Page();
             p.getBody().add("No Page or Body Configured for the JWebSwingServlet. [getPage()] returned nothing");
             response.getWriter().write(p.toString(true));
@@ -192,7 +203,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
         catch (IOException | NumberFormatException ex)
         {
 
-            LOG.fatal("Couldn't Render Page in Servlet. Fatal Error.", ex);
+            LOG.log(Level.SEVERE, "Couldn't Render Page in Servlet. Fatal Error.", ex);
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = null;
             try
@@ -202,7 +213,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
             }
             catch (IOException ex1)
             {
-                LOG.fatal("Unable to generate page html to return!", ex1);
+                LOG.log(Level.SEVERE, "Unable to generate page html to return!", ex1);
             }
             finally
             {
@@ -215,11 +226,11 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
                 }
                 catch (Exception e)
                 {
-                    LOG.fatal(e);
+                    LOG.log(Level.SEVERE, null, e);
                 }
             }
         }
-        catch (Exception t)
+        catch (Error | Exception t)
         {
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = null;
@@ -230,7 +241,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
             }
             catch (IOException ex1)
             {
-                LOG.fatal("Unable to generate page html to return!", ex1);
+                LOG.log(Level.SEVERE, "Unable to generate page html to return!", ex1);
             }
             finally
             {
@@ -243,7 +254,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
                 }
                 catch (Exception e)
                 {
-                    LOG.fatal(e);
+                    LOG.log(Level.SEVERE, null, e);
                 }
             }
         }
@@ -268,13 +279,13 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
      *
      * @return The rendered HTML.
      */
-    protected Page getErrorPageHtml(Exception t)
+    protected Page getErrorPageHtml(Throwable t)
     {
         Page p = new Page();
-        p.setTitle("Exception occured in application");
-        p.setAuthor("Marc Magon");
-        p.setDescription("JWebSwing Error Generated Page");
-        p.setGenerator("JWebSwing - https://sourceforge.net/projects/jwebswing/");
+        p.getPageFields().setTitle("Exception occured in application");
+        p.getPageFields().setAuthor("Marc Magon");
+        p.getPageFields().setDescription("JWebSwing Error Generated Page");
+        p.getPageFields().setGenerator("JWebSwing - https://sourceforge.net/projects/jwebswing/");
         Body b = new Body(p);
         b.add("The following error was encountered during render<br/><hr/>");
         b.add(TextUtilities.stackTraceToString(t));
@@ -288,13 +299,16 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
      *
      * @return The rendered HTML.
      */
+    @Provides
+    @Named("ErrorPage")
+    @RequestScoped
     protected Page getErrorPageHtml(Error t)
     {
         Page p = new Page();
-        p.setTitle("ERROR : Error occured in application");
-        p.setAuthor("Marc Magon");
-        p.setDescription("JWebSwing Error Generated Page");
-        p.setGenerator("JWebSwing - https://sourceforge.net/projects/jwebswing/");
+        p.getPageFields().setTitle("ERROR : Error occured in application");
+        p.getPageFields().setAuthor("Marc Magon");
+        p.getPageFields().setDescription("JWebSwing Error Generated Page");
+        p.getPageFields().setGenerator("JWebSwing - https://sourceforge.net/projects/jwebswing/");
         Body b = new Body(p);
         b.add("The following error was encountered during render<br/><hr/>");
         b.add(TextUtilities.stackTraceToString(t));
@@ -308,32 +322,34 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
      *
      * @return
      */
+    @Provides
+    @Named("MobilePage")
+    @RequestScoped
     protected StringBuilder getPageMobileHTML(HttpSession session)
     {
-        LOG.trace("Started Rendering Mobile HTML");
+        LOG.log(Level.FINE, "Started Rendering Mobile HTML");
         StringBuilder html;
         html = new StringBuilder(getCurrentPage(session).toString(true));
         return html;
     }
 
     /**
-     * Return a custom log appender. Is appended on application start
-     *
-     * @return The type required to operate.
-     */
-    public AppenderSkeleton getLogAppender()
-    {
-        return null;
-    }
-
-    /**
      * The initial page for this Servlet
-     *
-     * @param sessionId The session to return the current page
      *
      * @return A Page for the Servlet
      */
-    public abstract Page getNewPage(String sessionId);
+    @Provides
+    @RequestScoped
+    public abstract Page getPage();
+
+    /**
+     * Returns the URL associated with this Servlet
+     *
+     * @return
+     */
+    @Provides
+    @Named("URLPath")
+    public abstract String getUrl();
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -358,34 +374,8 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
         }
         catch (IOException | ServletException ex)
         {
-            LOG.fatal("SwingServlet", ex);
+            LOG.log(Level.SEVERE, "SwingServlet", ex);
         }
-    }
-
-    /**
-     * Returns a session's JWebSwing's Servlet
-     *
-     * @param sessionID The session ID
-     *
-     * @return The session Servlet
-     */
-    public static final JWebSwingServlet getSessionServlet(String sessionID)
-    {
-        return getSessionPages().get(sessionID);
-    }
-
-    /**
-     * Receives all Session Pages
-     *
-     * @return
-     */
-    public static HashMap<String, JWebSwingServlet> getSessionPages()
-    {
-        if (sessionPages == null)
-        {
-            sessionPages = new HashMap<>();
-        }
-        return sessionPages;
     }
 
     /**
@@ -405,22 +395,8 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
      *
      * @return
      */
-    @Inject
     public Page getCurrentPage(HttpSession session)
     {
         return (Page) session.getAttribute("jwpage");
-    }
-
-    @Override
-    public void init() throws ServletException
-    {
-        AppenderSkeleton as = getLogAppender();
-        if (as != null)
-        {
-            LoggerFactory.getInstance().addLogAppender(getLogAppender());
-            LOG.trace("[Log Appender]-[" + getLogAppender().getClass().getSimpleName() + " Added]");
-        }
-        LOG.trace("[JWebSwingServlet]-[Constructed];");
-        super.init();
     }
 }

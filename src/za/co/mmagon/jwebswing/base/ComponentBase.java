@@ -16,19 +16,16 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import za.co.mmagon.LoggerFactory;
+import com.fasterxml.jackson.annotation.*;
+import java.util.*;
+import java.util.logging.Level;
 import za.co.mmagon.jwebswing.base.interfaces.IComponentBase;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.utilities.GUIDGenerator;
+import za.co.mmagon.logger.LogFactory;
 
-/** 
+/**
  * Defines the raw necessities for a component to exist
  *
  * @param <J> Component output for cloning. Always make it this class to make life easy
@@ -45,12 +42,11 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
      * Logger for the Component
      */
     @JsonIgnore
-    protected static org.apache.log4j.Logger logShell;
-    /** 
-     * Serial Version for all Components and their compatibility 
+    protected static java.util.logging.Logger logShell;
+    /**
+     * Serial Version for all Components and their compatibility
      *
-     * @version 2
-     * Version 2 - Updated CSS Library and References
+     * @version 2 Version 2 - Updated CSS Library and References
      */
     @JsonIgnore
     private static final long serialVersionUID = 1l;
@@ -61,14 +57,12 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
     private String id;
 
     /**
-     * The enumeration component type associated with this class to escape the
-     * use of "instance of" statements. performance thing
+     * The enumeration component type associated with this class to escape the use of "instance of" statements. performance thing
      */
     private ComponentTypes componentType;
 
     /**
-     * Any raw text that should be built into this component. Rendered before
-     * children
+     * Any raw text that should be built into this component. Rendered before children
      */
     private String text;
 
@@ -84,20 +78,21 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
      * Initialized flag
      */
     private boolean initialized;
-    
+
     /**
      * A set of properties for this component
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private HashMap<String,Object> properties;
+    private HashMap<String, Object> properties;
 
     /**
      * Constructs a new Component Shell
+     *
      * @param componentType
      */
     public ComponentBase(ComponentTypes componentType)
     {
-        logShell = LoggerFactory.getInstance().makeNewLoggerInstance("Shell");
+        logShell = LogFactory.getInstance().getLogger("Shell");
         this.id = GUIDGenerator.generateGuid();
         this.componentType = componentType;
     }
@@ -137,8 +132,7 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
     }
 
     /**
-     * Returns the component rendering for JQuery string Requires the rendering
-     * for component is set
+     * Returns the component rendering for JQuery string Requires the rendering for component is set
      * <p>
      * @return $('#x').
      */
@@ -171,8 +165,7 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
     }
 
     /**
-     * Sets this components enumeration. Currently little more than an easy to
-     * compare Enum
+     * Sets this components enumeration. Currently little more than an easy to compare Enum
      * <p>
      * @param componentType The component to mimic
      */
@@ -182,8 +175,7 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
     }
 
     /**
-     * Appends the text used as raw text outside the tags to the incoming
-     * StringBuilder
+     * Appends the text used as raw text outside the tags to the incoming StringBuilder
      * <p>
      * @param sb The StringBuilder to append to
      * <p>
@@ -205,8 +197,7 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
     /**
      * returns a new StringSuilder of the raw text with the specific tab counts
      * <p>
-     * @param tabCounts
-     *                  <p>
+     * @param tabCounts <p>
      * @return
      */
     @Override
@@ -226,7 +217,7 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
     public J setText(String text)
     {
         this.text = text;
-        return (J)this;
+        return (J) this;
     }
 
     /**
@@ -238,7 +229,7 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
     public J setText(StringBuilder text)
     {
         this.text = text.toString();
-        return (J)this;
+        return (J) this;
     }
 
     /**
@@ -257,14 +248,13 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
         }
         catch (CloneNotSupportedException ex)
         {
-            logShell.error("Cloning Error in Shell", ex);
+            logShell.log(Level.SEVERE, "Cloning Error in Shell", ex);
         }
         return component;
     }
 
     /**
-     * Specifies whether or not to render this component in a Production/QA
-     * fashion
+     * Specifies whether or not to render this component in a Production/QA fashion
      * <p>
      * @return If this component will render in production mode
      */
@@ -277,14 +267,13 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
     /**
      * If this component will render as tiny HTML. Global override value
      * <p>
-     * @param tiny Set if this component must render as tiny HTML. Does not
-     *             affect CSS or JavaScript rendering
+     * @param tiny Set if this component must render as tiny HTML. Does not affect CSS or JavaScript rendering
      */
     @Override
     public J setTiny(boolean tiny)
     {
         this.tiny = tiny;
-        return (J)this;
+        return (J) this;
     }
 
     /**
@@ -306,10 +295,7 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
     }
 
     /**
-     * Run-Once on creation
-     * Executes a piece of code before running any rendering.
-     * Call super after your changes
-     * Marks the component as configured
+     * Run-Once on creation Executes a piece of code before running any rendering. Call super after your changes Marks the component as configured
      */
     @Override
     public void preConfigure()
@@ -337,33 +323,40 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
     public J setConfigured(boolean configured)
     {
         this.configured = configured;
-        return (J)this;
+        return (J) this;
     }
 
     /**
      * Returns a map of user defined properties for this component
-     * @return 
+     *
+     * @return
      */
     @Override
-    public Map<String, Object> getProperties() {
-        if(properties == null)
+    public Map<String, Object> getProperties()
+    {
+        if (properties == null)
+        {
             properties = new HashMap<>();
+        }
         return properties;
-    } 
+    }
 
     /**
      * Sets this components user defined properties
-     * @param properties 
+     *
+     * @param properties
      */
     @Override
-    public J setProperties(HashMap<String, Object> properties) {
+    public J setProperties(HashMap<String, Object> properties)
+    {
         this.properties = properties;
-        return (J)this;
+        return (J) this;
     }
 
     /**
      * Default HashCode over-ride
-     * @return 
+     *
+     * @return
      */
     @Override
     public int hashCode()
@@ -377,7 +370,9 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
 
     /**
      * Default equals for a component
+     *
      * @param obj The incoming object
+     *
      * @return True if the ID, Type and Text are the same
      */
     @Override
@@ -406,9 +401,6 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
         }
         return this.componentType == other.componentType;
     }
-    
-    
-    
 
     /**
      * Renders the component as a JSON Object
@@ -425,21 +417,20 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
         }
         return JavaScriptPart.objectAsString(this);
     }
-    
-    
+
     /**
-     * Runs before anything
-     * Can be used as constructor intializations.
+     * Runs before anything Can be used as constructor intializations.
      */
     public void init()
     {
-        
+
         setInitialized(true);
     }
 
     /**
      * If this component has been initialized
-     * @return 
+     *
+     * @return
      */
     public boolean isInitialized()
     {
@@ -448,7 +439,8 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
 
     /**
      * If this component has been initialized
-     * @param initialized 
+     *
+     * @param initialized
      */
     public void setInitialized(boolean initialized)
     {

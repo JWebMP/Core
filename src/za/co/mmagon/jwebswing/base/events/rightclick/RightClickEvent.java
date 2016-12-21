@@ -1,17 +1,14 @@
 package za.co.mmagon.jwebswing.base.events.rightclick;
 
-import za.co.mmagon.LoggerFactory;
-import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.Event;
-import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
-import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
-import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.BodyEvents;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.ParagraphEvents;
-import za.co.mmagon.jwebswing.components.jqueryui.button.JQUIButtonEvents;
-import za.co.mmagon.jwebswing.components.jqxwidgets.radiobutton.JQXRadioButtonEvents;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+import za.co.mmagon.logger.LogFactory;
+import java.util.logging.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.ajax.*;
+import za.co.mmagon.jwebswing.base.angular.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
+import za.co.mmagon.jwebswing.components.jqueryui.button.*;
+import za.co.mmagon.jwebswing.components.jqxwidgets.radiobutton.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.*;
 
 /**
  * Handles all on right click events. Over-ride methods.
@@ -24,7 +21,7 @@ public abstract class RightClickEvent extends Event implements ParagraphEvents, 
     /**
      * Logger for the Component
      */
-    private static final org.apache.log4j.Logger log = LoggerFactory.getInstance().makeNewLoggerInstance("RightClickEvent");
+    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("RightClickEvent");
     private static final long serialVersionUID = 1L;
     private RightClickDirective rightClickDirective;
 
@@ -44,8 +41,8 @@ public abstract class RightClickEvent extends Event implements ParagraphEvents, 
     {
         if (!isConfigured())
         {
-            getComponent().getPage().setjQueryEnabled(true);
-            getComponent().getPage().setAngularEnabled(true);
+            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            getComponent().getPage().getOptions().setAngularEnabled(true);
             getComponent().getPage().getAngular().addDirective(getRightClickDirective());
             component.addAttribute(AngularAttributes.ngRightClick, "perform($event," + renderVariables() + ");");
         }
@@ -93,7 +90,7 @@ public abstract class RightClickEvent extends Event implements ParagraphEvents, 
         }
         catch (Exception e)
         {
-            log.error("Error In Firing Event", e);
+            log.log(Level.SEVERE,"Error In Firing Event", e);
         }
     }
 

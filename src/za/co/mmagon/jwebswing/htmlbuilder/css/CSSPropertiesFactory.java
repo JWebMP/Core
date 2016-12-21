@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css;
 
+import za.co.mmagon.logger.LogFactory;
 import com.fasterxml.jackson.annotation.*;
 import java.io.*;
 import java.lang.annotation.*;
@@ -23,7 +24,7 @@ import java.lang.reflect.*;
 import java.math.*;
 import java.util.*;
 import java.util.logging.*;
-import za.co.mmagon.*;
+import java.util.logging.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.composer.*;
@@ -47,7 +48,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
     /**
      * The default logger
      */
-    private static final org.apache.log4j.Logger log = LoggerFactory.getInstance().makeNewLoggerInstance("CSS Factory");
+    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("CSS Factory");
 
     /**
      * List of methods to always ignore
@@ -137,7 +138,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
     {
         if (objectIn == null)
         {
-            log.error("[Action]-[Null Object Retrieved];");
+            log.log(Level.SEVERE,"[Action]-[Null Object Retrieved];");
             return null;
         }
         if (objectIn instanceof CSSImpl)
@@ -164,7 +165,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
     {
         if (objectIn == null)
         {
-            log.error("[Action]-[Null Object Retrieved];");
+            log.log(Level.SEVERE,"[Action]-[Null Object Retrieved];");
             return null;
         }
         List<Annotation> anos = new ArrayList<>();
@@ -185,7 +186,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
     {
         if (fieldIn == null)
         {
-            log.error("[Action]-[Null Field Retrieved];");
+            log.log(Level.SEVERE,"[Action]-[Null Field Retrieved];");
             return new HashMap<>();
         }
         fieldIn.setAccessible(true);
@@ -193,13 +194,13 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
         {
             if (fieldIn.get(objectIn) == null)
             {
-                log.error("[Action]-[Null Field Retrieved];");
+                log.log(Level.SEVERE,"[Action]-[Null Field Retrieved];");
                 return new HashMap<>();
             }
         }
         catch (IllegalArgumentException | IllegalAccessException ex)
         {
-            log.error("[Action]-[Cant Get Field " + ex.getMessage() + "];");
+            log.log(Level.SEVERE,"[Action]-[Cant Get Field " + ex.getMessage() + "];");
             return new HashMap<>();
         }
 
@@ -226,7 +227,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
         newCSSBlock.setIdOfBlock(identifier);
         newCSSBlock.setBlockIdentifer(blockIdentifier);
         newCSSBlock.getCssLines().setRenderBraces(true);
-        propertiesMap.entrySet().forEach((entry) ->
+        propertiesMap.entrySet().forEach(entry ->
         {
             StringBuilder key = entry.getKey();
             Object value = entry.getValue();
@@ -312,7 +313,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
             }
             catch (IllegalArgumentException | IllegalAccessException ex)
             {
-                log.trace("Unable to read pair from field due to permission", ex);
+                log.log(Level.FINE,"Unable to read pair from field due to permission", ex);
             }
         });
 
@@ -347,7 +348,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
             }
             catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex)
             {
-                log.error("[Value Generation]-[" + ex.getMessage() + "];[Method]-[" + method.getName() + "];", ex);
+                log.log(Level.SEVERE,"[Value Generation]-[" + ex.getMessage() + "];[Method]-[" + method.getName() + "];", ex);
             }
         }
 
@@ -425,7 +426,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
         }
         catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
         {
-            log.trace("Field Skipped [" + method.getName() + "] - [" + e.getLocalizedMessage() + "]", e);
+            log.log(Level.FINE,"Field Skipped [" + method.getName() + "] - [" + e.getLocalizedMessage() + "]", e);
         }
         return rawValues;
     }
@@ -545,6 +546,11 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
                 field = field.replace(0, 1, ch.toString().toLowerCase());
                 Field f = newInstance.getClass().getDeclaredField(field.toString());
                 f.setAccessible(true);
+                if (fieldObject == null)
+                {
+                    continue;
+                }
+
                 if (fieldObject instanceof CSSEnumeration)
                 {
                     CSSEnumeration enume = (CSSEnumeration) fieldObject;
@@ -603,23 +609,20 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
                 {
                     Annotation innerAnnotation = (Annotation) fieldObject;
                     Map<StringBuilder, Object> innerFieldMapping = processAnnotation(innerAnnotation);
-                    if (innerAnnotation != null)
+                    Object innerImplementationObject = getImplementationObject(innerAnnotation, innerFieldMapping);
+                    try
                     {
-                        Object innerImplementationObject = getImplementationObject(innerAnnotation, innerFieldMapping);
-                        try
+                        if (innerImplementationObject != null)
                         {
-                            if (innerImplementationObject != null)
+                            if (!innerImplementationObject.toString().isEmpty())
                             {
-                                if (!innerImplementationObject.toString().isEmpty())
-                                {
-                                    f.set(newInstance, innerImplementationObject);
-                                }
+                                f.set(newInstance, innerImplementationObject);
                             }
                         }
-                        catch (IllegalAccessException | IllegalArgumentException ae)
-                        {
-                            log.error("[Instantiation]-[Failed " + implementationClass + "]-on-[" + newInstance.getClass() + "]", ae);
-                        }
+                    }
+                    catch (IllegalAccessException | IllegalArgumentException ae)
+                    {
+                        log.log(Level.SEVERE,"[Instantiation]-[Failed " + implementationClass + "]-on-[" + newInstance.getClass() + "]", ae);
                     }
                 }
                 else
@@ -630,17 +633,17 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
         }
         catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException ex)
         {
-            log.error("[Instantiation]-[Failed " + implementationClass + "]", ex);
+            log.log(Level.SEVERE,"[Instantiation]-[Failed " + implementationClass + "]", ex);
         }
         catch (NoSuchFieldException | SecurityException ex)
         {
             if (newInstance != null)
             {
-                log.error("[Field Populator]-[Failed];[Object]-[" + newInstance.getClass().getCanonicalName() + "]", ex);
+                log.log(Level.SEVERE,"[Field Populator]-[Failed];[Object]-[" + newInstance.getClass().getCanonicalName() + "]", ex);
             }
             else
             {
-                log.error("[Field Populator]-[Failed];[Object]-[" + newInstance + "]", ex);
+                log.log(Level.SEVERE,"[Field Populator]-[Failed];[Object]-[" + newInstance + "]", ex);
             }
         }
 

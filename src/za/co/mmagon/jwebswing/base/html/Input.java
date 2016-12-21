@@ -16,21 +16,19 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
+import java.util.logging.Level;
+import java.util.logging.*;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
-import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.components.jqueryui.autocomplete.JQUIAutoCompleteChildren;
 import za.co.mmagon.jwebswing.components.jqueryui.spinner.JQUISpinnerChildren;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  *
@@ -76,7 +74,7 @@ public class Input<A extends Enum & AttributeDefinitions> extends Component<NoCh
         implements NoClosingTag, GlobalChildren, ParagraphChildren, JQUISpinnerChildren, JQUIAutoCompleteChildren
 {
 
-    private static final Logger log = LoggerFactory.getInstance().makeNewLoggerInstance("Input");
+    private static final Logger log = LogFactory.getInstance().getLogger("Input");
     private static final long serialVersionUID = 1L;
 
     /**
@@ -147,7 +145,7 @@ public class Input<A extends Enum & AttributeDefinitions> extends Component<NoCh
         }
         catch (Exception e)
         {
-            log.trace("Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.",e);
+            log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
         }
     }
 }

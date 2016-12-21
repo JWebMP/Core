@@ -16,11 +16,12 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.annotations;
 
+import za.co.mmagon.logger.LogFactory;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.*;
 import java.lang.annotation.*;
 import java.util.*;
-import za.co.mmagon.*;
+import java.util.logging.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.*;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
 
@@ -43,7 +44,7 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
     /**
      * The default adapter
      */
-    private static final org.apache.log4j.Logger log = LoggerFactory.getInstance().makeNewLoggerInstance("CSSImpAdapter");
+    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("CSSImpAdapter");
     /**
      * The properties factory
      */
@@ -79,11 +80,11 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
         {
             if (newInstance != null)
             {
-                log.error("[Field Populator]-[Failed];[Object]-[" + newInstance.getClass().getCanonicalName() + "]", ex);
+                log.log(Level.SEVERE,"[Field Populator]-[Failed];[Object]-[" + newInstance.getClass().getCanonicalName() + "]", ex);
             }
             else
             {
-                log.error("[Field Populator]-[Failed];[Object]-[" + newInstance + "]", ex);
+                log.log(Level.SEVERE,"[Field Populator]-[Failed];[Object]-[" + newInstance + "]", ex);
             }
         }
         return null;
@@ -122,7 +123,7 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
         }
         catch (JsonProcessingException e)
         {
-            log.fatal("Error in IMPL Object", e);
+            log.log(Level.SEVERE, "Error in IMPL Object", e);
             return "";
         }
     }

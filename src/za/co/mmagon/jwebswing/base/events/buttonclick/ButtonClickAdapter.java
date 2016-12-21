@@ -1,13 +1,11 @@
 package za.co.mmagon.jwebswing.base.events.buttonclick;
 
-import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.Event;
-import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
-import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
-import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
-import za.co.mmagon.jwebswing.components.jqueryui.selectable.JQUISelectableEvents;
-import za.co.mmagon.jwebswing.components.jqxwidgets.buttongroup.JQXButtonGroupEvents;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.ajax.*;
+import za.co.mmagon.jwebswing.base.angular.*;
+import za.co.mmagon.jwebswing.components.jqueryui.selectable.*;
+import za.co.mmagon.jwebswing.components.jqxwidgets.buttongroup.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.*;
 
 /**
  * This event is triggered when a button is clicked.
@@ -36,8 +34,8 @@ public abstract class ButtonClickAdapter extends Event
     {
         if (!isConfigured())
         {
-            getComponent().getPage().setjQueryEnabled(true);
-            getComponent().getPage().setAngularEnabled(true);
+            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            getComponent().getPage().getOptions().setAngularEnabled(true);
             getComponent().getPage().getAngular().addDirective(getDirective());
             component.addAttribute(AngularAttributes.ngButtonClick, "perform($event," + renderVariables() + ");");
         }
@@ -66,7 +64,8 @@ public abstract class ButtonClickAdapter extends Event
 
     /**
      * Returns this directive
-     * @return 
+     *
+     * @return
      */
     public ButtonClickDirective getDirective()
     {
@@ -79,7 +78,8 @@ public abstract class ButtonClickAdapter extends Event
 
     /**
      * Sets this directive
-     * @param directive 
+     *
+     * @param directive
      */
     public void setDirective(ButtonClickDirective directive)
     {

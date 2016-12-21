@@ -16,11 +16,14 @@
  */
 package za.co.mmagon.jwebswing.components.verticaltimeline;
 
-import org.junit.*;
-import za.co.mmagon.*;
-import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.base.html.*;
-import za.co.mmagon.jwebswing.components.fontawesome.*;
+import org.junit.Assert;
+import org.junit.Test;
+import za.co.mmagon.BaseTestClass;
+import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.base.html.H2;
+import za.co.mmagon.jwebswing.base.html.Span;
+import za.co.mmagon.jwebswing.components.fontawesome.FontAwesome;
+import za.co.mmagon.jwebswing.components.fontawesome.FontAwesomeIcons;
 
 /**
  *

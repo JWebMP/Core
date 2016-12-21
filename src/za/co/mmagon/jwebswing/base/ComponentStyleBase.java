@@ -16,15 +16,16 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import com.fasterxml.jackson.annotation.*;
-import java.util.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
-import za.co.mmagon.jwebswing.base.interfaces.*;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.composer.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import java.util.HashMap;
+import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.interfaces.IComponentStyleBase;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSComposer;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
 
 /**
  * The CSS Portion of the Component.
@@ -35,6 +36,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
  * @param <F> All features allowed for this component
  * @param <E> All events allowed for this component
  * @param <J> Always this class
+ *
  * @since 24 Apr 2016
  */
 public class ComponentStyleBase<C, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentBase>
@@ -137,8 +139,7 @@ public class ComponentStyleBase<C, A extends Enum & AttributeDefinitions, F exte
     }
 
     /**
-     * Renders the component CSS at the specified tab count with the
-     * &lt;style&gt; tag
+     * Renders the component CSS at the specified tab count with the &lt;style&gt; tag
      * <p>
      * @param tabCount Tab indentation for the SQL
      * <p>
@@ -151,29 +152,30 @@ public class ComponentStyleBase<C, A extends Enum & AttributeDefinitions, F exte
     }
 
     /**
-     * Renders the component CSS at the specified tab count with the
-     * &lt;style&gt; tag This includes everything from this classes CSS, to the
-     * CSS for each field. It will also populate the lower level
+     * Renders the component CSS at the specified tab count with the &lt;style&gt; tag This includes everything from this classes CSS, to the CSS for each field. It will also populate the lower level
      * child CSS for fields in this class
      * <p>
      * @param tabCount           Tab indentation for the SQL
-     * @param renderOpening      Whether or not to render the opening XML tag
-     *                           for a CSS style
-     * @param renderInQuotations Sets whether to render the CSS Fields in
-     *                           Quotations
-     * @param isAjaxCall         Sets whether the CSS is being called from an
-     *                           AJAX call
+     * @param renderOpening      Whether or not to render the opening XML tag for a CSS style
+     * @param renderInQuotations Sets whether to render the CSS Fields in Quotations
+     * @param isAjaxCall         Sets whether the CSS is being called from an AJAX call
      * <p>
      * @return The Component CSS
      */
     @Override
     public StringBuilder renderCss(int tabCount, boolean renderOpening, boolean renderInQuotations, boolean isAjaxCall)
     {
+        if (!isInitialized())
+        {
+            init();
+        }
+        if (!isConfigured())
+        {
+            preConfigure();
+        }
         CSSComposer comp = new CSSComposer();
         comp.addComponent(this, true);
-        StringBuilder sb = new StringBuilder();
-        sb.append(comp.toString());
-        return sb;
+        return new StringBuilder(comp.toString());
     }
 
     /**
@@ -334,6 +336,7 @@ public class ComponentStyleBase<C, A extends Enum & AttributeDefinitions, F exte
      * Updates the ID of all the CSS Objects
      *
      * @param id The ID to update with
+     *
      * @return Me
      */
     @Override

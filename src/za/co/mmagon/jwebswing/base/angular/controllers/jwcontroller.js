@@ -12,7 +12,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
             $scope.Modernizr = Modernizr;
         }
 
-        var toGo = 'ad?o=body';
+        var toGo = 'jwad?o=body';
         $.ajax({
             type: "GET",
             url: toGo,
@@ -82,7 +82,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
         article.eventType = $event.type;
         article.eventTypeFrom = $event.type;
         article.datetime = getdate;
-        article.value = JSON.stringify(eventStuff);
+        article.value = eventStuff;
         article.eventId = eventId;
 
         article.variableData = [];
@@ -109,7 +109,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
 
         $.ajax({
             type: "POST",
-            url: "ajax",
+            url: "jwajax",
             data: JSON.stringify(article),
             dataType: "json",
             contentType: 'application/json',

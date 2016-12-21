@@ -1,14 +1,13 @@
 package za.co.mmagon.jwebswing.components.jquerylayout.layout;
 
-import java.util.*;
-import org.apache.log4j.*;
-import za.co.mmagon.*;
-import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.base.*;
-import za.co.mmagon.jwebswing.base.exceptions.*;
-import za.co.mmagon.jwebswing.base.html.attributes.*;
-import za.co.mmagon.jwebswing.components.pools.jquerylayout.*;
-import za.co.mmagon.jwebswing.components.pools.jqueryui.*;
+import java.util.logging.*;
+import za.co.mmagon.jwebswing.Feature;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
+import za.co.mmagon.jwebswing.components.pools.jquerylayout.JQLayoutReferencePool;
+import za.co.mmagon.jwebswing.components.pools.jqueryui.JQUIReferencePool;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * This class is essentially the Border Layout. Each child div controls it's own settings, access via getRegionLayoutDiv()
@@ -20,13 +19,9 @@ import za.co.mmagon.jwebswing.components.pools.jqueryui.*;
 public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQLayout
 {
 
-    private static final Logger log = LoggerFactory.getInstance().makeNewLoggerInstance("JWLayout");
+    private static final Logger log = LogFactory.getInstance().getLogger("JWLayout");
     private static final long serialVersionUID = 1L;
 
-    /**
-     * All the currently loaded panes
-     */
-    private HashMap<JQLayoutArea, JQLayoutDiv> panes;
     /**
      * The variable associated with this layout
      */
@@ -35,6 +30,12 @@ public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQL
      * The set of options
      */
     private JQLayoutOptions options;
+
+    private JQLayoutDiv center;
+    private JQLayoutDiv north;
+    private JQLayoutDiv east;
+    private JQLayoutDiv west;
+    private JQLayoutDiv south;
 
     /**
      * Returns a clean version of this components options
@@ -54,13 +55,8 @@ public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQL
     public JQLayout(ComponentHierarchyBase component)
     {
         super("JQLayout");
-        this.component = component;
-        this.component.addFeature(this);
-        if (component == null)
-        {
-            throw new NullComponentException("Cannot use a null object inside of a layout feature");
-        }
-
+        setComponent(component);
+        getComponent().addFeature(this);
         getJavascriptReferences().add(JQUIReferencePool.Core.getJavaScriptReference());
         getJavascriptReferences().add(JQLayoutReferencePool.JQueryLayout.getJavaScriptReference());
         getJavascriptReferences().add(JQLayoutReferencePool.JQueryLayoutResizer.getJavaScriptReference());
@@ -68,28 +64,7 @@ public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQL
         getCssReferences().add(JQLayoutReferencePool.JQueryLayout.getCssReference());
         setVariableID(component.getID());
         getComponent().addAttribute(GlobalAttributes.JWType, "layout");
-    }
-
-    @Override
-    public void init()
-    {
-        if (!isInitialized())
-        {
-            getPanes().entrySet().stream().map((entry) ->
-            {
-                JQLayoutArea key = entry.getKey();
-                return entry;
-            }).map((entry) -> entry.getValue()).map((value) ->
-            {
-                value.init();
-                return value;
-            }).forEachOrdered((value) ->
-            {
-                getComponent().add(value);
-            });
-        }
-
-        super.init();
+        getCenter();
     }
 
     /**
@@ -104,8 +79,8 @@ public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQL
         }
         if (!isConfigured())
         {
-            getComponent().getPage().setjQueryEnabled(true);
-            getComponent().getPage().setjQueryUIEnabled(true);
+            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            getComponent().getPage().getOptions().setjQueryUIEnabled(true);
         }
         super.preConfigure();
     }
@@ -173,11 +148,11 @@ public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQL
     @Override
     public JQLayoutDiv getCenter()
     {
-        if (getPane(JQLayoutArea.Center) == null)
+        if (this.center == null)
         {
-            getPanes().put(JQLayoutArea.Center, new JQLayoutDiv(this, JQLayoutArea.Center, null));
+            setCenter(new JQLayoutDiv(this, JQLayoutArea.Center, new Div()));
         }
-        return getPanes().get(JQLayoutArea.Center);
+        return this.center;
     }
 
     /**
@@ -188,7 +163,12 @@ public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQL
     @Override
     public void setCenter(JQLayoutDiv centerDiv)
     {
-        getPanes().put(JQLayoutArea.Center, centerDiv);
+        getComponent().remove(this.center);
+        this.center = centerDiv;
+        if (this.center != null)
+        {
+            getComponent().add(this.center);
+        }
     }
 
     /**
@@ -199,11 +179,11 @@ public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQL
     @Override
     public JQLayoutDiv getNorth()
     {
-        if (getPane(JQLayoutArea.North) == null)
+        if (this.north == null)
         {
-            getPanes().put(JQLayoutArea.North, new JQLayoutDiv(this, JQLayoutArea.North, null));
+            setNorth(new JQLayoutDiv(this, JQLayoutArea.North, new Div()));
         }
-        return getPanes().get(JQLayoutArea.North);
+        return this.north;
     }
 
     /**
@@ -214,7 +194,12 @@ public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQL
     @Override
     public void setNorth(JQLayoutDiv centerDiv)
     {
-        getPanes().put(JQLayoutArea.North, centerDiv);
+        getComponent().remove(this.north);
+        this.north = centerDiv;
+        if (this.north != null)
+        {
+            getComponent().add(this.north);
+        }
     }
 
     /**
@@ -225,12 +210,11 @@ public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQL
     @Override
     public JQLayoutDiv getSouth()
     {
-        if (getPane(JQLayoutArea.South) == null)
+        if (this.south == null)
         {
-            getPanes().put(JQLayoutArea.South, new JQLayoutDiv(this, JQLayoutArea.South, null));
+            setSouth(new JQLayoutDiv(this, JQLayoutArea.South, new Div()));
         }
-
-        return getPanes().get(JQLayoutArea.South);
+        return this.south;
     }
 
     /**
@@ -241,7 +225,12 @@ public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQL
     @Override
     public void setSouth(JQLayoutDiv southDiv)
     {
-        getPanes().put(JQLayoutArea.Center, southDiv);
+        getComponent().remove(this.south);
+        this.south = southDiv;
+        if (this.south != null)
+        {
+            getComponent().add(this.south);
+        }
     }
 
     /**
@@ -252,12 +241,11 @@ public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQL
     @Override
     public JQLayoutDiv getWest()
     {
-        if (getPane(JQLayoutArea.West) == null)
+        if (this.west == null)
         {
-            getPanes().put(JQLayoutArea.West, new JQLayoutDiv(this, JQLayoutArea.West, null));
+            setWest(new JQLayoutDiv(this, JQLayoutArea.West, new Div()));
         }
-
-        return getPanes().get(JQLayoutArea.West);
+        return this.west;
     }
 
     /**
@@ -268,7 +256,12 @@ public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQL
     @Override
     public void setWest(JQLayoutDiv westDiv)
     {
-        getPanes().put(JQLayoutArea.West, westDiv);
+        getComponent().remove(this.west);
+        this.west = westDiv;
+        if (this.west != null)
+        {
+            getComponent().add(this.west);
+        }
     }
 
     /**
@@ -279,12 +272,11 @@ public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQL
     @Override
     public JQLayoutDiv getEast()
     {
-        if (getPane(JQLayoutArea.East) == null)
+        if (this.east == null)
         {
-            getPanes().put(JQLayoutArea.East, new JQLayoutDiv(this, JQLayoutArea.East, null));
+            setEast(new JQLayoutDiv(this, JQLayoutArea.East, new Div()));
         }
-
-        return getPanes().get(JQLayoutArea.East);
+        return this.east;
     }
 
     /**
@@ -295,42 +287,11 @@ public class JQLayout extends Feature<JQLayoutOptions, JQLayout> implements IJQL
     @Override
     public void setEast(JQLayoutDiv eastDiv)
     {
-        getPanes().put(JQLayoutArea.East, eastDiv);
-    }
-
-    /**
-     * Returns all the layouts panes
-     *
-     * @return
-     */
-    public HashMap<JQLayoutArea, JQLayoutDiv> getPanes()
-    {
-        if (panes == null)
+        getComponent().remove(this.east);
+        this.east = eastDiv;
+        if (this.east != null)
         {
-            panes = new HashMap<>();
+            getComponent().add(this.east);
         }
-        return panes;
-    }
-
-    /**
-     * Sets all the layout panes
-     *
-     * @param panes
-     */
-    public void setPanes(HashMap<JQLayoutArea, JQLayoutDiv> panes)
-    {
-        this.panes = panes;
-    }
-
-    /**
-     * Returns the Layout Div for the pane
-     *
-     * @param paneArea
-     *
-     * @return
-     */
-    public JQLayoutDiv getPane(JQLayoutArea paneArea)
-    {
-        return getPanes().get(paneArea);
     }
 }

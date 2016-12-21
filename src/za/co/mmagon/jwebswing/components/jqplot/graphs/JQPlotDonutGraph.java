@@ -23,8 +23,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonRawValue;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
+import java.util.logging.*;
+import za.co.mmagon.logger.LogFactory;
 import za.co.mmagon.jwebswing.components.jqplot.JQPlotGraph;
 import za.co.mmagon.jwebswing.components.jqplot.graphs.display.JQPlotDonutGroup;
 import za.co.mmagon.jwebswing.components.jqplot.graphs.display.JQPlotPieSlice;
@@ -45,7 +45,7 @@ public class JQPlotDonutGraph extends JQPlotGraph<JQPlotOptions>
     /**
      * The logger for the swing Servlet
      */
-    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("JQPlotDonutGraph");
+    private static final Logger LOG = LogFactory.getInstance().getLogger("JQPlotDonutGraph");
 
     private static final long serialVersionUID = 1L;
 

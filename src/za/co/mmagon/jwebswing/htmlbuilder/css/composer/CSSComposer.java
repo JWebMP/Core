@@ -1,13 +1,15 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
 import java.util.*;
-import org.apache.log4j.*;
-import za.co.mmagon.*;
-import za.co.mmagon.jwebswing.base.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
-import za.co.mmagon.jwebswing.utilities.*;
+import java.util.logging.*;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.base.ComponentStyleBase;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSPropertiesFactory;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
+import za.co.mmagon.jwebswing.utilities.ComponentUtils;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * This class specifically build CSS according to a JWebSwing component
@@ -19,7 +21,7 @@ import za.co.mmagon.jwebswing.utilities.*;
 public class CSSComposer
 {
 
-    protected static Logger log = LoggerFactory.getInstance().makeNewLoggerInstance("CSSComposer");
+    protected static Logger log = LogFactory.getInstance().getLogger("CSSComposer");
     private CSSBlockMaster blockMaster;
     private CSSPropertiesFactory propertiesFactory;
 
@@ -40,12 +42,15 @@ public class CSSComposer
      *
      * @param o
      * @param includeChildren
+     *
+     * @return
      */
-    public void addComponent(ComponentStyleBase o, boolean includeChildren)
+    public List<CSSBlock> addComponent(ComponentStyleBase o, boolean includeChildren)
     {
+        ArrayList<CSSBlock> list = new ArrayList<>();
         if (includeChildren)
         {
-            List<ComponentHierarchyBase> comp = o.getChildrenHierarchy();
+            List<ComponentHierarchyBase> comp = o.getChildrenHierarchy(true);
             ArrayList<ComponentStyleBase> compti = new ArrayList<>();
             comp.stream().filter(a -> a != null).forEach(co ->
             {
@@ -58,12 +63,30 @@ public class CSSComposer
                     }
                 }
             });
-            compti.stream().forEach(this::addComponent);
+            compti.stream().forEach(a ->
+            {
+                addComponent(a, list).stream().forEach(a2 ->
+                {
+                    if (!list.contains(a2))
+                    {
+                        list.add(a2);
+                    }
+                });
+
+            });
         }
         else
         {
-            addComponent(o);
+            addComponent(o, list);
         }
+
+        list.forEach(getBlockMaster()::addBlock);
+        return list;
+    }
+
+    public final ArrayList<CSSBlock> addComponent(ComponentStyleBase o)
+    {
+        return addComponent(o, new ArrayList());
     }
 
     /**
@@ -73,40 +96,50 @@ public class CSSComposer
      *
      * @return True or False
      */
-    public final boolean addComponent(ComponentStyleBase o)
+    public final ArrayList<CSSBlock> addComponent(ComponentStyleBase o, ArrayList<CSSBlock> componentBlocks)
     {
-        CSSBlock annotatedCssBlocks = propertiesFactory.getCSSBlock(o.getID(), CSSTypes.None, propertiesFactory.getCSS(o), CSSBlockIdentifier.Class);
+        CSSBlock annotatedCssBlocks = getPropertiesFactory().getCSSBlock(o.getID(), CSSTypes.None, getPropertiesFactory().getCSS(o), CSSBlockIdentifier.Class);
         String output = annotatedCssBlocks.getCssLines().toString().replace("{", "").replace("}", "");
         if (!output.isEmpty())
         {
-            System.out.println(annotatedCssBlocks.getCssLines().toString().replace("{", "").replace("}", ""));
             o.addClass(annotatedCssBlocks.getIdOfBlock());
-            getBlockMaster().addBlock(annotatedCssBlocks);
+            if (!componentBlocks.contains(annotatedCssBlocks))
+            {
+                componentBlocks.add(annotatedCssBlocks);
+            }
         }
-
         Map<CSSTypes, CSSImpl> css = o.getCssTypeHashMap();
         css.entrySet().stream().map(entry ->
         {
             CSSTypes key = entry.getKey();
             CSSImpl value = entry.getValue();
-            CSSBlock declaredCssBlocks = propertiesFactory.getCSSBlock(o.getID() + key.getCssName(), key, propertiesFactory.getCSS(value), CSSBlockIdentifier.Id);
+            CSSBlock declaredCssBlocks = getPropertiesFactory().getCSSBlock(o.getID() + key.getCssName(), key, getPropertiesFactory().getCSS(value), CSSBlockIdentifier.Id);
             return declaredCssBlocks;
-        }).forEachOrdered(getBlockMaster()::addBlock);
+        }).forEachOrdered(e ->
+        {
+            if (!componentBlocks.contains(e))
+            {
+                componentBlocks.add(e);
+            }
+        });
 
         ArrayList<Field> fields = new ArrayList<>(Arrays.asList(o.getClass().getDeclaredFields()));
         fields.stream().filter(a -> ComponentUtils.fieldGet(a, o) != null).forEach((Field field) ->
         {
             field.setAccessible(true);
             Object fieldObject = ComponentUtils.fieldGet(field, o);
-            if (fieldObject instanceof ComponentStyleBase)
+            if (ComponentStyleBase.class.isAssignableFrom(fieldObject.getClass()))
             {
                 ComponentStyleBase c = (ComponentStyleBase) fieldObject;
-                CSSBlock newFieldBlock = propertiesFactory.getCSSBlock(c.getID(), CSSTypes.None, propertiesFactory.getCSS(field, o), CSSBlockIdentifier.Id);
+                CSSBlock newFieldBlock = getPropertiesFactory().getCSSBlock(c.getID(), CSSTypes.None, getPropertiesFactory().getCSS(field, o), CSSBlockIdentifier.Id);
                 newFieldBlock.setBlockIdentifer(CSSBlockIdentifier.Id);
-                blockMaster.addBlock(newFieldBlock);
+                componentBlocks.add(newFieldBlock);
             }
         });
-        return true;
+
+        componentBlocks.forEach(getBlockMaster()::addBlock);
+
+        return componentBlocks;
 
     }
 
@@ -117,6 +150,10 @@ public class CSSComposer
      */
     public CSSBlockMaster getBlockMaster()
     {
+        if (blockMaster == null)
+        {
+            this.blockMaster = new CSSBlockMaster();
+        }
         return blockMaster;
     }
 
@@ -137,6 +174,10 @@ public class CSSComposer
      */
     public CSSPropertiesFactory getPropertiesFactory()
     {
+        if (propertiesFactory == null)
+        {
+            propertiesFactory = new CSSPropertiesFactory();
+        }
         return propertiesFactory;
     }
 
@@ -158,17 +199,6 @@ public class CSSComposer
     @Override
     public String toString()
     {
-        StringBuilder cssScript = new StringBuilder();
-        List<CSSBlock> allCurrentBlocks = getBlockMaster().getAllCSSBlocks();
-        allCurrentBlocks.stream().forEach(block
-                ->
-        {
-            String script = block.toString();
-            if (!(script == null || script.trim().isEmpty()))
-            {
-                cssScript.append(block);
-            }
-        });
-        return cssScript.toString();
+        return getBlockMaster().toString();
     }
 }

@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
+import java.util.logging.*;
+import za.co.mmagon.logger.LogFactory;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.Orientation;
 import za.co.mmagon.jwebswing.components.jqplot.JQPlotGraph;
 import za.co.mmagon.jwebswing.components.jqplot.graphs.display.JQPlotBar;
@@ -44,7 +44,7 @@ public class JQPlotBarGraph extends JQPlotGraph<JQPlotSeriesBarOptions>
     /**
      * The logger for the swing Servlet
      */
-    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("JQPlotBarGraph");
+    private static final Logger LOG = LogFactory.getInstance().getLogger("JQPlotBarGraph");
     /**
      * Version 1
      */
@@ -345,7 +345,7 @@ public class JQPlotBarGraph extends JQPlotGraph<JQPlotSeriesBarOptions>
                             }
                             catch (Exception e)
                             {
-                                LOG.warn("Unable to generate data",e);
+                                LOG.log(Level.WARNING,"Unable to generate data",e);
                                 valuesPerRow[j] = "";
                             }
                             break;

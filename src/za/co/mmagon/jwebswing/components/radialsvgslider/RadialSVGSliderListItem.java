@@ -16,12 +16,8 @@
  */
 package za.co.mmagon.jwebswing.components.radialsvgslider;
 
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.H2;
-import za.co.mmagon.jwebswing.base.html.Link;
-import za.co.mmagon.jwebswing.base.html.ListItem;
-import za.co.mmagon.jwebswing.base.html.Paragraph;
-import za.co.mmagon.jwebswing.utilities.GUIDGenerator;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.utilities.*;
 
 /**
  * A default SVG slider list item(face) that renders
@@ -40,8 +36,8 @@ public class RadialSVGSliderListItem extends ListItem
      */
     private String faceBackgroundImageUrl = "bower_components/radial-svg-slider-jwebswing/img/img-1.jpg";
     private String clipPathUniqueID;
-    private String circleUniqueID; 
-    
+    private String circleUniqueID;
+
     /**
      * The content container
      */
@@ -56,7 +52,7 @@ public class RadialSVGSliderListItem extends ListItem
     private Div content;
 
     /**
-     * Constructs a new face (list item) for the Radial SVG Slider 
+     * Constructs a new face (list item) for the Radial SVG Slider
      */
     public RadialSVGSliderListItem()
     {
@@ -67,26 +63,27 @@ public class RadialSVGSliderListItem extends ListItem
     @Override
     public void preConfigure()
     {
-        if(!isConfigured())
+        if (!isConfigured())
         {
-            if(getChildren().isEmpty())
+            if (getChildren().isEmpty())
             {
-               getContent(); //force the build of the wrapper
+                getContent(); //force the build of the wrapper
             }
-            getPage().setjQueryEnabled(true);
+            getPage().getOptions().setjQueryEnabled(true);
         }
-        
+
         super.preConfigure();
     }
-  
+
     /**
-     * Generates the SVG syntax for the face 
-     * @return 
+     * Generates the SVG syntax for the face
+     *
+     * @return
      */
     @Override
     protected StringBuilder renderBeforeChildren()
     {
-        return new StringBuilder(getNewLine() 
+        return new StringBuilder(getNewLine()
                 + getCurrentTabIndentString() + "\t" + "<div class=\"svg-wrapper\">" + getNewLine()
                 + getCurrentTabIndentString() + "\t" + "\t" + "<svg viewBox=\"0 0 1400 800\">" + getNewLine()
                 + getCurrentTabIndentString() + "\t" + "\t" + "\t" + "<title>Animated SVG</title>" + getNewLine()
@@ -123,11 +120,12 @@ public class RadialSVGSliderListItem extends ListItem
 
     /**
      * Returns the contentContainer div. Never Null
-     * @return 
+     *
+     * @return
      */
     protected Div getContentContainer()
     {
-        if(contentContainer == null)
+        if (contentContainer == null)
         {
             setContentContainer(new Div());
         }
@@ -136,12 +134,13 @@ public class RadialSVGSliderListItem extends ListItem
 
     /**
      * Sets the contentContainer Div
-     * @param contentContainer 
+     *
+     * @param contentContainer
      */
     protected void setContentContainer(Div contentContainer)
     {
         this.contentContainer = contentContainer;
-        if(this.contentContainer != null)
+        if (this.contentContainer != null)
         {
             this.contentContainer.addClass("cd-radial-slider-content");
             add(contentContainer);
@@ -150,11 +149,12 @@ public class RadialSVGSliderListItem extends ListItem
 
     /**
      * Returns the contentContainer wrapper
-     * @return 
+     *
+     * @return
      */
     protected Div getContentWrapper()
     {
-        if(contentWrapper == null)
+        if (contentWrapper == null)
         {
             setContentWrapper(new Div());
         }
@@ -163,12 +163,13 @@ public class RadialSVGSliderListItem extends ListItem
 
     /**
      * Sets the contentContainer wrapper
-     * @param contentWrapper 
+     *
+     * @param contentWrapper
      */
     protected void setContentWrapper(Div contentWrapper)
     {
         this.contentWrapper = contentWrapper;
-        if(this.contentWrapper != null)
+        if (this.contentWrapper != null)
         {
             this.contentWrapper.addClass("wrapper");
             getContentContainer().add(this.contentWrapper);
@@ -177,11 +178,12 @@ public class RadialSVGSliderListItem extends ListItem
 
     /**
      * Returns the content. Never null
-     * @return 
+     *
+     * @return
      */
     public Div getContent()
     {
-        if(this.content == null)
+        if (this.content == null)
         {
             setContent(new Div());
         }
@@ -190,26 +192,29 @@ public class RadialSVGSliderListItem extends ListItem
 
     /**
      * Sets the content.
-     * @param content 
+     *
+     * @param content
      */
     public void setContent(Div content)
     {
         this.content = content;
-        if(this.content != null)
+        if (this.content != null)
         {
             getContentWrapper().add(this.content);
         }
     }
-    
+
     /**
      * Creates a default slide
-     * @param headerText The header text of the slide
+     *
+     * @param headerText  The header text of the slide
      * @param defaultText The default text of the slide
-     * @param linkUrl The link for the main button
-     * @param linkText the text for the link
-     * @return 
+     * @param linkUrl     The link for the main button
+     * @param linkText    the text for the link
+     *
+     * @return
      */
-    public static Div createDefaultSlide(String headerText, String defaultText,String linkUrl, String linkText)
+    public static Div createDefaultSlide(String headerText, String defaultText, String linkUrl, String linkText)
     {
         Div d = new Div();
         H2 hText = new H2(headerText);
@@ -217,7 +222,7 @@ public class RadialSVGSliderListItem extends ListItem
         Link newLink = new Link(linkUrl);
         newLink.addClass("cd-btn");
         newLink.setText(linkText);
-        
+
         d.add(hText);
         d.add(p);
         d.add(newLink);
@@ -226,7 +231,8 @@ public class RadialSVGSliderListItem extends ListItem
 
     /**
      * Returns the current id given to the clip path element
-     * @return 
+     *
+     * @return
      */
     public String getClipPathUniqueID()
     {
@@ -235,7 +241,8 @@ public class RadialSVGSliderListItem extends ListItem
 
     /**
      * Sets the unique id given to the clip path element
-     * @param clipPathUniqueID 
+     *
+     * @param clipPathUniqueID
      */
     public void setClipPathUniqueID(String clipPathUniqueID)
     {
@@ -244,7 +251,8 @@ public class RadialSVGSliderListItem extends ListItem
 
     /**
      * Gets the unique id assigned to the circles
-     * @return 
+     *
+     * @return
      */
     public String getCircleUniqueID()
     {
@@ -253,11 +261,12 @@ public class RadialSVGSliderListItem extends ListItem
 
     /**
      * Sets the assigned numbers to the circles
-     * @param circleUniqueID 
+     *
+     * @param circleUniqueID
      */
     public void setCircleUniqueID(String circleUniqueID)
     {
         this.circleUniqueID = circleUniqueID;
     }
-    
+
 }

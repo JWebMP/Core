@@ -16,13 +16,13 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
-import org.junit.*;
-import za.co.mmagon.jwebswing.*;
+import org.junit.Test;
+import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.borders.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.borders.BorderCSSObjectTest;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
 
 /**
  *

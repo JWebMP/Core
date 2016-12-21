@@ -16,11 +16,11 @@
  */
 package za.co.mmagon.jwebswing.components.verticaltimeline;
 
-import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.base.html.*;
 
 /**
  * An implementation of the Responsive Vertical Timeline - https://codyhouse.co/gem/vertical-timeline/
- *
+ * <p>
  * <p>
  * @author Marc Magon
  * @since 24 October 2016
@@ -39,20 +39,22 @@ public class VerticalTimeline extends Div<VerticalTimelineChildren, VerticalTime
         addClass("verticalTimeline");
         addClass("cd-container");
     }
-    
+
     /**
      * Adds a time line block to this vertical time line
-     * @param block 
+     *
+     * @param block
      */
     @Override
     public void add(VerticalTimelineBlock block)
     {
         super.add(block);
     }
-    
+
     /**
      * Returns the vertical time line with only the fields relevant
-     * @return 
+     *
+     * @return
      */
     public IVerticalTimeline asVerticalTimeline()
     {
@@ -67,7 +69,6 @@ public class VerticalTimeline extends Div<VerticalTimelineChildren, VerticalTime
         }
         return feature;
     }
-    
 
     @Override
     public VerticalTimelineOptions getOptions()
@@ -80,8 +81,8 @@ public class VerticalTimeline extends Div<VerticalTimelineChildren, VerticalTime
     {
         if (!isConfigured())
         {
-            getPage().setModernizrEnabled(true);
-            getPage().setBootstrapEnabled(true);
+            getPage().getOptions().setModernizrEnabled(true);
+            getPage().getOptions().setBootstrapEnabled(true);
         }
         super.preConfigure();
     }

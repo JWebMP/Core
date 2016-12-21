@@ -1,34 +1,26 @@
 package za.co.mmagon.jwebswing.base.html;
 
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
-import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.ComponentFeatureBase;
-import za.co.mmagon.jwebswing.base.angular.AngularReferencePool;
-import za.co.mmagon.jwebswing.base.client.BrowserGroups;
-import za.co.mmagon.jwebswing.base.client.Browsers;
-import za.co.mmagon.jwebswing.base.html.attributes.BodyAttributes;
-import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
-import za.co.mmagon.jwebswing.base.html.attributes.MetaAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.ContainerType;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.LayoutHandler;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.HtmlChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.PageChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
-import za.co.mmagon.jwebswing.base.references.JavascriptReference;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
-import za.co.mmagon.jwebswing.base.servlets.interfaces.Loader;
-import za.co.mmagon.jwebswing.components.bootstrap.BootstrapReferencePool;
-import za.co.mmagon.jwebswing.components.bootstrap.dialog.BootstrapDialogFeature;
-import za.co.mmagon.jwebswing.components.modernizr.ModernizrFeature;
-import za.co.mmagon.jwebswing.components.pace.PaceLoader;
-import za.co.mmagon.jwebswing.components.pace.preloadedThemes.PaceTheme;
-import za.co.mmagon.jwebswing.components.pools.jquery.JQueryReferencePool;
-import za.co.mmagon.jwebswing.components.pools.jqueryui.JQueryUIReferencePool;
+import za.co.mmagon.logger.LogFactory;
+import java.util.logging.*;
+import java.util.logging.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.*;
+import za.co.mmagon.jwebswing.base.angular.*;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.base.html.attributes.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
+import za.co.mmagon.jwebswing.base.references.*;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
+import za.co.mmagon.jwebswing.base.servlets.interfaces.*;
+import za.co.mmagon.jwebswing.components.bootstrap.*;
+import za.co.mmagon.jwebswing.components.bootstrap.dialog.*;
+import za.co.mmagon.jwebswing.components.modernizr.*;
+import za.co.mmagon.jwebswing.components.pace.*;
+import za.co.mmagon.jwebswing.components.pace.preloadedThemes.*;
+import za.co.mmagon.jwebswing.components.pools.jquery.*;
+import za.co.mmagon.jwebswing.components.pools.jqueryui.*;
 
 /**
  * Browser Support<p>
@@ -54,6 +46,7 @@ import za.co.mmagon.jwebswing.components.pools.jqueryui.JQueryUIReferencePool;
  * <p>
  * @param <L> A loader type
  * @param <F> Features Base
+ *
  * @since 2013/11/20
  * @author Marc Magon
  * @version 1.0
@@ -63,7 +56,7 @@ public class Body<L extends ComponentFeatureBase & Loader & GlobalChildren, F ex
         implements PageChildren, HtmlChildren, LayoutHandler, ContainerType, IBody<L>
 {
 
-    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("BODY");
+    private static final Logger LOG = LogFactory.getInstance().getLogger("BODY");
 
     private static final long serialVersionUID = 1L;
 
@@ -94,30 +87,30 @@ public class Body<L extends ComponentFeatureBase & Loader & GlobalChildren, F ex
 
     /**
      * Returns the component in its smallest form
-     * @return 
+     *
+     * @return
      */
     public IBody asMe()
     {
         return this;
     }
-    
+
     /**
      * Will configure for Angular 1
      */
     @Override
     public void configureAngular()
     {
-        if (getPage().isAngularEnabled())
+        if (getPage().getOptions().isAngularEnabled())
         {
-            getPage().setPaceEnabled(true);
-            configurePace();
-            getPage().setjQueryEnabled(true);
+            //getPage().getOptions().setPaceEnabled(true);
+            //configurePace();
+            getPage().getOptions().setjQueryEnabled(true);
             configureJQuery();
-            getPage().setBootstrapEnabled(true);
-            configureBootstrap();
+            //getPage().getOptions().setBootstrapEnabled(true);
+            //configureBootstrap();
 
             getJavascriptReferences().add(AngularReferencePool.Angular1.getJavaScriptReference());
-
         }
     }
 
@@ -125,8 +118,7 @@ public class Body<L extends ComponentFeatureBase & Loader & GlobalChildren, F ex
      *
      * The 3 meta tags *must* come first in the head; any other head content must come *after* these tags
      * <p>
-     * HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
-     * WARNING: Respond.js doesn't work if you view the page via file://
+     * HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries WARNING: Respond.js doesn't work if you view the page via file://
      */
     @Override
     public void configureBootstrap()
@@ -139,7 +131,7 @@ public class Body<L extends ComponentFeatureBase & Loader & GlobalChildren, F ex
         {
             setBootstrapConfigured(true);
         }
-        getPage().setjQueryEnabled(true);
+        getPage().getOptions().setjQueryEnabled(true);
         configureJQuery();
 
         Meta charMeta = new Meta();
@@ -165,7 +157,7 @@ public class Body<L extends ComponentFeatureBase & Loader & GlobalChildren, F ex
         getPage().getHead().add(compatMeta);
         getPage().getHead().add(viewportMeta);
 
-        if (getPage().isBootstrapEnabled())
+        if (getPage().getOptions().isBootstrapEnabled())
         {
             if (isBootstrap4())
             {
@@ -193,10 +185,10 @@ public class Body<L extends ComponentFeatureBase & Loader & GlobalChildren, F ex
     @Override
     public void configureJQueryUI()
     {
-        getPage().setjQueryEnabled(true);
+        getPage().getOptions().setjQueryEnabled(true);
         configureJQuery();
 
-        if (getPage().isjQueryUIEnabled())
+        if (getPage().getOptions().isjQueryUIEnabled())
         {
             addJavaScriptReference(JQueryUIReferencePool.Core.getJavaScriptReference());
             addCssReference(JQueryUIReferencePool.Core.getCssReference());
@@ -215,7 +207,7 @@ public class Body<L extends ComponentFeatureBase & Loader & GlobalChildren, F ex
     public void configurePace()
     {
 
-        if (getPage().isPaceEnabled())
+        if (getPage().getOptions().isPaceEnabled())
         {
             removeFeature((F) getLoader());
             pace = new PaceLoader(PaceTheme.Flash);
@@ -226,26 +218,27 @@ public class Body<L extends ComponentFeatureBase & Loader & GlobalChildren, F ex
 
     /**
      * Configures pace for use
+     *
      * @param pace
      */
     @Override
     public void configurePace(PaceLoader pace)
     {
 
-        if (getPage().isPaceEnabled())
+        if (getPage().getOptions().isPaceEnabled())
         {
             removeFeature((F) getLoader());
             setLoader((L) pace);
             addFeature(getLoader());
         }
     }
-    
+
     @Override
     public void configureModernizr()
     {
-        if(getPage().isModernizrEnabled())
+        if (getPage().getOptions().isModernizrEnabled())
         {
-            addFeature( new ModernizrFeature(this));
+            addFeature(new ModernizrFeature(this));
         }
     }
 
@@ -256,7 +249,7 @@ public class Body<L extends ComponentFeatureBase & Loader & GlobalChildren, F ex
     {
         if (getPage() != null)
         {
-            if (getPage().isjQueryEnabled())
+            if (getPage().getOptions().isjQueryEnabled())
             {
                 if (getPage().getBrowser() != null)
                 {
@@ -300,13 +293,7 @@ public class Body<L extends ComponentFeatureBase & Loader & GlobalChildren, F ex
     }
 
     /*
-     * @Override
-     * public void preConfigure()
-     * {
-     * super.preConfigure();
-     * configurePace();
-     * configureJQuery();
-     * }
+     * @Override public void preConfigure() { super.preConfigure(); configurePace(); configureJQuery(); }
      */
     @Override
     protected StringBuilder renderHTML(int tabCount)

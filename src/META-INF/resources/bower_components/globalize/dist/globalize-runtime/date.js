@@ -1,5 +1,5 @@
 /**
- * Globalize Runtime v1.1.2
+ * Globalize Runtime v1.2.1
  *
  * http://github.com/jquery/globalize
  *
@@ -7,10 +7,10 @@
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2016-11-08T12:09Z
+ * Date: 2016-12-14T18:34Z
  */
 /*!
- * Globalize Runtime v1.1.2 2016-11-08T12:09Z Released under the MIT license
+ * Globalize Runtime v1.2.1 2016-12-14T18:34Z Released under the MIT license
  * http://git.io/TrdQbw
  */
 (function( root, factory ) {
@@ -39,6 +39,7 @@
 
 var createErrorUnsupportedFeature = Globalize._createErrorUnsupportedFeature,
 	regexpEscape = Globalize._regexpEscape,
+	removeLiteralQuotes = Globalize._removeLiteralQuotes,
 	runtimeKey = Globalize._runtimeKey,
 	stringPad = Globalize._stringPad,
 	validateParameterPresence = Globalize._validateParameterPresence,
@@ -440,11 +441,7 @@ var dateFormat = function( date, numberFormatters, properties ) {
 
 			// ' literals.
 			case "'":
-				current = current.replace( /''/, "'" );
-				if ( length > 2 ) {
-					current = current.slice( 1, -1 );
-				}
-				ret = current;
+				ret = removeLiteralQuotes( current );
 				break;
 
 			// Anything else is considered a literal, including [ ,:/.@#], chinese, japonese, and
@@ -1199,11 +1196,7 @@ var dateTokenizer = function( value, numberParser, properties ) {
 
 			case "'":
 				token.type = "literal";
-				current = current.replace( /''/, "'" );
-				if ( length > 2 ) {
-					current = current.slice( 1, -1 );
-				}
-				tokenRe = new RegExp( regexpEscape( current ) );
+				tokenRe = new RegExp( regexpEscape( removeLiteralQuotes( current ) ) );
 				break;
 
 			default:

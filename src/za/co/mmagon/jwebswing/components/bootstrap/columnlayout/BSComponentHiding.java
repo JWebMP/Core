@@ -41,7 +41,11 @@ public enum BSComponentHiding implements IBSColumnOptions
     /**
      * Hide this component when large
      */
-    Hidden_LG
+    Hidden_LG,
+    /**
+     * Hide when XL
+     */
+    Hidden_XL
     ;
     
     private BSComponentHiding ()

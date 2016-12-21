@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
+import java.util.logging.*;
+import za.co.mmagon.logger.LogFactory;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.TableColumnAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
@@ -49,7 +49,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 public class TableColumn extends Component<NoChildren, TableColumnAttributes, GlobalFeatures, GlobalEvents, TableColumn> implements TableColumnGroupChildren
 {
 
-    private static final Logger log = LoggerFactory.getInstance().makeNewLoggerInstance("TableColumn");
+    private static final Logger log = LogFactory.getInstance().getLogger("TableColumn");
 
     /**
      * Constructs a new table column
@@ -79,7 +79,7 @@ public class TableColumn extends Component<NoChildren, TableColumnAttributes, Gl
         }
         catch (Exception e)
         {
-            log.trace("Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.",e);
+            log.log(Level.FINE,"Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.",e);
         }
     }
 

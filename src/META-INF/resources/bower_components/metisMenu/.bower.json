@@ -33,12 +33,15 @@
   "dependencies": {
     "jquery": "~2.2.3"
   },
-  "version": "2.5.2",
-  "_release": "2.5.2",
+  "devDependencies": {
+    "normalize-css": "normalize.css#^5.0.0"
+  },
+  "version": "2.6.1",
+  "_release": "2.6.1",
   "_resolution": {
     "type": "version",
-    "tag": "v2.5.2",
-    "commit": "ba21a8ea77bcecf8d23ec156ae8b2c0ae82167ba"
+    "tag": "v2.6.1",
+    "commit": "662528114386eb025f3992e41a90c75699bb5926"
   },
   "_source": "https://github.com/onokumus/metisMenu.git",
   "_target": "^2.5.2",

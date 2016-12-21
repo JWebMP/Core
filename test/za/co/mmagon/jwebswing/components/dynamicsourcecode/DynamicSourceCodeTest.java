@@ -5,10 +5,10 @@
  */
 package za.co.mmagon.jwebswing.components.dynamicsourcecode;
 
-import org.junit.Test;
-import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.components.google.sourceprettify.SourceCodePrettifyThemes;
+import org.junit.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.components.google.sourceprettify.*;
 
 /**
  *
@@ -16,7 +16,7 @@ import za.co.mmagon.jwebswing.components.google.sourceprettify.SourceCodePrettif
  */
 public class DynamicSourceCodeTest
 {
-    
+
     public DynamicSourceCodeTest()
     {
     }
@@ -25,18 +25,18 @@ public class DynamicSourceCodeTest
     public void testDefaultOutput()
     {
         Page p = new Page();
-        p.setDynamicRender(false);
+        p.getOptions().setDynamicRender(false);
         DynamicSourceCode dsc = new DynamicSourceCode();
         p.getBody().add(dsc);
-        
+
         Div themeChange = new Div();
         dsc.addThemeChanger(themeChange, SourceCodePrettifyThemes.Desert);
         p.getBody().add(themeChange);
-        
+
         Div srcChange = new Div();
         dsc.addSourceChanger(srcChange, DynamicSourceCode.class);
         p.getBody().add(srcChange);
-        
+
         System.out.println(p.toString(true));
     }
 }

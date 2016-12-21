@@ -17,14 +17,15 @@
 package za.co.mmagon.jwebswing;
 
 import static org.junit.Assert.assertEquals;
-import org.junit.*;
-import za.co.mmagon.*;
-import za.co.mmagon.jwebswing.base.client.*;
+import org.junit.Test;
+import za.co.mmagon.BaseTestClass;
+import za.co.mmagon.jwebswing.base.client.Browsers;
+import za.co.mmagon.jwebswing.base.client.InternetExplorerCompatibilityMode;
 import za.co.mmagon.jwebswing.base.html.*;
-import za.co.mmagon.jwebswing.base.html.attributes.*;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
-import za.co.mmagon.jwebswing.generics.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.base.html.attributes.BaseAttributes;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.DevelopmentEnvironments;
+import za.co.mmagon.jwebswing.generics.WebReference;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
 
 /**
  *
@@ -75,10 +76,10 @@ public class PageTest extends BaseTestClass
         child.setID("child");
         child.getCss().getBackground().setBackgroundColor$(ColourNames.AntiqueWhite);
         p.getBody().add(child);
-
-        //System.out.println(p.getCssStyle());
         System.out.println(p.toString(true));
 
+        // System.out.println(p.getBody().renderCss(0));
+        // System.out.println(child.renderCss(0));
         assertEquals("<!DOCTYPE html>\n"
                 + "<html>\n"
                 + "	<head>\n"
@@ -172,7 +173,7 @@ public class PageTest extends BaseTestClass
         WebReference.setIsLocal(true);
         String result;
         instance = getPage();
-        instance.setPaceEnabled(true);
+        instance.getOptions().setPaceEnabled(true);
         instance.setTiny(false);
         instance.setRunningEnvironment(DevelopmentEnvironments.Development);
         System.out.println(result = instance.toString(true));
@@ -193,7 +194,7 @@ public class PageTest extends BaseTestClass
         WebReference.setIsLocal(true);
         String result;
         instance = getPage();
-        instance.setPaceEnabled(true);
+        instance.getOptions().setPaceEnabled(true);
         instance.setTiny(true);
         instance.setRunningEnvironment(DevelopmentEnvironments.Production);
         System.out.println(result = instance.toString(true));
@@ -208,7 +209,7 @@ public class PageTest extends BaseTestClass
         WebReference.setIsLocal(false);
         String result;
         instance = getPage();
-        instance.setPaceEnabled(true);
+        instance.getOptions().setPaceEnabled(true);
         instance.setTiny(false);
         instance.setRunningEnvironment(DevelopmentEnvironments.Development);
         System.out.println(result = instance.toString(true));
@@ -229,7 +230,7 @@ public class PageTest extends BaseTestClass
         WebReference.setIsLocal(false);
         String result;
         instance = getPage();
-        instance.setPaceEnabled(true);
+        instance.getOptions().setPaceEnabled(true);
         instance.setTiny(true);
         instance.setRunningEnvironment(DevelopmentEnvironments.Production);
         System.out.println(result = instance.toString(true));
@@ -243,7 +244,7 @@ public class PageTest extends BaseTestClass
         String result;
         instance = getPage();
         instance.setRunningEnvironment(DevelopmentEnvironments.Development);
-        instance.setAuthor("Marc Magon");
+        instance.getPageFields().setAuthor("Marc Magon");
         System.out.println(result = instance.toString(true));
         String expResult = "<!DOCTYPE html>\n"
                 + "<html>\n"
@@ -261,7 +262,7 @@ public class PageTest extends BaseTestClass
         instance = getPage();
         instance.setTiny(true);
         instance.setRunningEnvironment(DevelopmentEnvironments.Production);
-        instance.setAuthor("Marc Magon");
+        instance.getPageFields().setAuthor("Marc Magon");
         System.out.println(result = instance.toString(true));
         String expResult = "<!DOCTYPE html><html><head><meta content=\"Marc Magon\" name=\"author\"></head></html>";
         assertEquals(expResult, result);
@@ -274,7 +275,7 @@ public class PageTest extends BaseTestClass
         instance = getPage();
         instance.setTiny(false);
         instance.setRunningEnvironment(DevelopmentEnvironments.Development);
-        instance.setDescription("This is my page description... It can be very very long");
+        instance.getPageFields().setDescription("This is my page description... It can be very very long");
         System.out.println(result = instance.toString(true));
         String expResult = "<!DOCTYPE html>\n"
                 + "<html>\n"
@@ -292,7 +293,7 @@ public class PageTest extends BaseTestClass
         instance = getPage();
         instance.setTiny(true);
         instance.setRunningEnvironment(DevelopmentEnvironments.Production);
-        instance.setDescription("This is my page description... It can be very very long");
+        instance.getPageFields().setDescription("This is my page description... It can be very very long");
         System.out.println(result = instance.toString(true));
         String expResult = "<!DOCTYPE html><html><head><meta content=\"This is my page description... It can be very very long\" name=\"description\"></head></html>";
         assertEquals(expResult, result);
@@ -304,7 +305,7 @@ public class PageTest extends BaseTestClass
         String result;
         instance = getPage();
         instance.setRunningEnvironment(DevelopmentEnvironments.Development);
-        instance.setGenerator("This is my page description... It can be very very long");
+        instance.getPageFields().setGenerator("This is my page description... It can be very very long");
         System.out.println(result = instance.toString(true));
         String expResult = "<!DOCTYPE html>\n"
                 + "<html>\n"
@@ -322,7 +323,7 @@ public class PageTest extends BaseTestClass
         instance = getPage();
         instance.setTiny(true);
         instance.setRunningEnvironment(DevelopmentEnvironments.Production);
-        instance.setGenerator("This is my page description... It can be very very long");
+        instance.getPageFields().setGenerator("This is my page description... It can be very very long");
         System.out.println(result = instance.toString(true));
         String expResult = "<!DOCTYPE html><html><head><meta content=\"This is my page description... It can be very very long\" name=\"generator\"></head></html>";
         assertEquals(expResult, result);
@@ -334,7 +335,7 @@ public class PageTest extends BaseTestClass
         String result;
         instance = getPage();
         instance.setRunningEnvironment(DevelopmentEnvironments.Development);
-        instance.setKeywords("This is my page description... It can be very very long");
+        instance.getPageFields().setKeywords("This is my page description... It can be very very long");
         System.out.println(result = instance.toString(true));
         String expResult = "<!DOCTYPE html>\n"
                 + "<html>\n"
@@ -352,7 +353,7 @@ public class PageTest extends BaseTestClass
         instance = getPage();
         instance.setTiny(true);
         instance.setRunningEnvironment(DevelopmentEnvironments.Production);
-        instance.setKeywords("This is my page description... It can be very very long");
+        instance.getPageFields().setKeywords("This is my page description... It can be very very long");
         System.out.println(result = instance.toString(true));
         String expResult = "<!DOCTYPE html><html><head><meta content=\"This is my page description... It can be very very long\" name=\"keywords\"></head></html>";
         assertEquals(expResult, result);
@@ -366,7 +367,7 @@ public class PageTest extends BaseTestClass
         instance.setBrowser(Browsers.InternetExplorer10);
         Base b = new Base();
         b.addAttribute(BaseAttributes.Target, "The Base Target");
-        instance.setBase(b);
+        instance.getPageFields().setBase(b);
         instance.setTiny(false);
         instance.setRunningEnvironment(DevelopmentEnvironments.Development);
         System.out.println(result = instance.toString(true));
@@ -384,7 +385,7 @@ public class PageTest extends BaseTestClass
     {
         String result;
         instance = getPage();
-        instance.setBase(new Base());
+        instance.getPageFields().setBase(new Base());
         instance.setTiny(true);
         instance.setRunningEnvironment(DevelopmentEnvironments.Production);
         System.out.println(result = instance.toString(true));
@@ -396,16 +397,16 @@ public class PageTest extends BaseTestClass
     public void testAll()
     {
         instance = getPage();
-        instance.setTitle("This is my title");
+        instance.getPageFields().setTitle("This is my title");
         final Body body = instance.getBody();
         final Base base = new Base();
         base.addAttribute(BaseAttributes.Target, "Base Target");
-        instance.setBase(base);
-        instance.setAuthor("Author Marc Magon");
-        instance.setDescription("Page Description");
-        instance.setApplicationNameMeta("Application Name");
-        instance.setGenerator("Generator");
-        instance.setCompatibilityMode(InternetExplorerCompatibilityMode.IE10);
+        instance.getPageFields().setBase(base);
+        instance.getPageFields().setAuthor("Author Marc Magon");
+        instance.getPageFields().setDescription("Page Description");
+        instance.getPageFields().setApplicationNameMeta("Application Name");
+        instance.getPageFields().setGenerator("Generator");
+        instance.getPageFields().setCompatibilityMode(InternetExplorerCompatibilityMode.IE10);
         instance.setRunningEnvironment(DevelopmentEnvironments.Development);
         String result;
         body.setID(null);
@@ -429,17 +430,17 @@ public class PageTest extends BaseTestClass
     public void testAllTiny()
     {
         instance = getPage();
-        instance.setTitle("This is my title");
+        instance.getPageFields().setTitle("This is my title");
         instance.setTiny(true);
         final Body body = instance.getBody();
         final Base base = new Base();
         base.addAttribute(BaseAttributes.Target, "Base Target");
-        instance.setBase(base);
-        instance.setAuthor("Author Marc Magon");
-        instance.setDescription("Page Description");
-        instance.setApplicationNameMeta("Application Name");
-        instance.setGenerator("Generator");
-        instance.setCompatibilityMode(InternetExplorerCompatibilityMode.IE10);
+        instance.getPageFields().setBase(base);
+        instance.getPageFields().setAuthor("Author Marc Magon");
+        instance.getPageFields().setDescription("Page Description");
+        instance.getPageFields().setApplicationNameMeta("Application Name");
+        instance.getPageFields().setGenerator("Generator");
+        instance.getPageFields().setCompatibilityMode(InternetExplorerCompatibilityMode.IE10);
         instance.setRunningEnvironment(DevelopmentEnvironments.Production);
         String result;
         System.out.println(result = instance.toString(true));

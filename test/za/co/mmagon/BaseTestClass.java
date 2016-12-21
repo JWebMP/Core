@@ -16,12 +16,13 @@
  */
 package za.co.mmagon;
 
-import java.io.*;
-import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.base.html.*;
-import za.co.mmagon.jwebswing.components.jqxwidgets.dataadapter.*;
-import za.co.mmagon.jwebswing.components.pace.*;
-import za.co.mmagon.jwebswing.components.pace.preloadedThemes.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import za.co.mmagon.jwebswing.Feature;
+import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.base.html.Body;
+import za.co.mmagon.jwebswing.components.pace.PaceLoaderReferencePool;
+import za.co.mmagon.jwebswing.components.pace.preloadedThemes.PaceTheme;
 
 /**
  * This Class
@@ -34,6 +35,7 @@ public class BaseTestClass
 
     public BaseTestClass()
     {
+
     }
 
     public Page getInstance()
@@ -48,7 +50,7 @@ public class BaseTestClass
         Body body = new Body(page);
         page.setID("Page");
         body.setID("Body");
-        page.setDynamicRender(false);
+        page.getOptions().setDynamicRender(false);
         return page;
     }
 
@@ -60,17 +62,6 @@ public class BaseTestClass
     public Page getPage()
     {
         return resetInstance();
-    }
-
-    public JQXDataAdapter getDataAdapter()
-    {
-        /*
-         * DataAdapterNameValuePair colourNamesAdapter = new DataAdapterNameValuePair(); colourNamesAdapter.setDataAdapterID("colourNames"); colourNamesAdapter.getOptions().setLocaldata(new
-         * JQXDropDownListNameValuePair(), colourNamesAdapter); for (int j = 0; j < ColourNames.values().length; j++) { ColourNames value1 = ColourNames.values()[j];
-         * ArrayList<JQXDropDownListNameValuePair.JQXDropDownListData> data = colourNamesAdapter.getOptions().getLocaldata().getValues(); data.add(new
-         * JQXDropDownListNameValuePair.JQXDropDownListData(TextUtilities.cleanAttributeName(value1.toString()), value1.name())); } return colourNamesAdapter;
-         */
-        return null;
     }
 
     protected void writeValuesToFile(String expected, String rendered)

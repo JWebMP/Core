@@ -1,10 +1,10 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
 import java.util.*;
-import org.apache.log4j.*;
-import za.co.mmagon.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
-import za.co.mmagon.jwebswing.utilities.*;
+import java.util.logging.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
+import za.co.mmagon.jwebswing.utilities.TextUtilities;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * A Block of CSS
@@ -16,7 +16,7 @@ import za.co.mmagon.jwebswing.utilities.*;
 public class CSSBlock
 {
 
-    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("CSSBlock");
+    private static final Logger LOG = LogFactory.getInstance().getLogger("CSSBlock");
     private ArrayList<String> linkedBlocks = new ArrayList();
     private CSSLines cssLines;
     private CSSTypes blockType;
@@ -85,9 +85,12 @@ public class CSSBlock
 
     /**
      *
-     * @param blockType      The block type, active or changed
-     * @param blockIdentifer The block identifier
-     * @param idOfBlock      the id of whatever to put this onto
+     * @param blockType        The block type, active or changed
+     * @param blockIdentifer   The block identifier
+     * @param idOfBlock        the id of whatever to put this onto
+     * @param prettyPrint      Pretty print or not
+     * @param renderBraces     render braces or not
+     * @param renderQuotations render quotations or not
      */
     public CSSBlock(CSSTypes blockType, CSSBlockIdentifier blockIdentifer, String idOfBlock, boolean prettyPrint, boolean renderBraces, boolean renderQuotations)
     {
@@ -270,21 +273,26 @@ public class CSSBlock
     private String generateBlockIDS(int tabCount)
     {
         StringBuilder sb = new StringBuilder();
-        for (String cssBlock : linkedBlocks)
+        getLinkedBlocks().stream().map(cssBlock ->
         {
             sb.append(cssBlock);
+            return cssBlock;
+        }).map(_item ->
+        {
             sb.append(",");
-            if (cssLines.isPrettyPrint())
-            {
-                sb.append(TextUtilities.getTabString(tabCount - 1));
-            }
-        }
+            return _item;
+        }).filter(_item -> (cssLines.isPrettyPrint())).forEachOrdered(_item ->
+        {
+            sb.append(TextUtilities.getTabString(tabCount - 1));
+        });
         sb.append(generateBlockID(this));
         return sb.toString();
     }
 
     /**
      * This blocks CSS according to how it is configured with Set tabs
+     *
+     * @param tabCount
      *
      * @return This blocks CSS according to how it is configured with Set tabs
      */
@@ -350,49 +358,47 @@ public class CSSBlock
         this.idOfBlock = idOfBlock;
     }
 
-    /**
-     * Compares the body string to each other
-     *
-     * @param o The CSS Block to compare
-     *
-     * @return True or false if they same
-     */
-    @Override
-    public boolean equals(Object o)
-    {
-        if (!(o instanceof CSSBlock))
-        {
-            return false;
-        }
-        else
-        {
-            CSSBlock block = (CSSBlock) o;
-            if (this.toString().equals(block.toString()))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-            /*
-             * if (block.getCssLines().equals(getCssLines()) && block.idOfBlock.equals(idOfBlock) && block.blockType == this.blockType && block.blockIdentifer == this.blockIdentifer) { return true; }
-             * else { return false; }
-             */
-        }
-    }
-
-    /**
-     * Returns a custom HashCode for ArrayList compare ability
-     *
-     * @return Custom hash
-     */
     @Override
     public int hashCode()
     {
         int hash = 7;
-        hash = 53 * hash;
+        hash = 41 * hash + Objects.hashCode(this.blockIdentifer);
+        hash = 41 * hash + Objects.hashCode(this.idOfBlock);
         return hash;
+    }
+
+    /**
+     * Compares the body string to each other
+     *
+     * @param obj The CSS Block to compare
+     *
+     * @return True or false if they same
+     */
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+        {
+            return true;
+        }
+        if (obj == null)
+        {
+            return false;
+        }
+        if (getClass() != obj.getClass())
+        {
+            return false;
+        }
+        final CSSBlock other = (CSSBlock) obj;
+        if (!Objects.equals(this.idOfBlock, other.idOfBlock))
+        {
+            return false;
+        }
+        if (this.blockIdentifer != other.blockIdentifer)
+        {
+            return false;
+        }
+        return true;
     }
 
     /**

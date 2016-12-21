@@ -19,18 +19,11 @@ package za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2.chat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.Image;
-import za.co.mmagon.jwebswing.base.html.ListItem;
-import za.co.mmagon.jwebswing.base.html.SmallText;
-import za.co.mmagon.jwebswing.base.html.Span;
-import za.co.mmagon.jwebswing.base.html.Strong;
+import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.fontawesome.FontAwesome;
-import za.co.mmagon.jwebswing.components.fontawesome.FontAwesomeIcons;
-import za.co.mmagon.jwebswing.components.fontawesome.FontAwesomeProperties;
 import za.co.mmagon.jwebswing.components.bootstrap.BootstrapClasses;
 import za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2.SB2ThemeClasses;
+import za.co.mmagon.jwebswing.components.fontawesome.*;
 import za.co.mmagon.jwebswing.components.moment.Moment;
 
 /**
@@ -120,7 +113,7 @@ public class SB2ChatRightMessage extends ListItem implements ISB2ChatMessage
     {
         if(this.messageImage == null)
         {
-            setMessageImage(new Image("http://placehold.it/50/55C1E7/fff"));
+            setMessageImage(new Image(""));
         }
         return messageImage;
     }

@@ -1,12 +1,11 @@
 package za.co.mmagon.jwebswing.base.html;
 
-import com.sun.javafx.scene.NodeHelper;
+import za.co.mmagon.logger.LogFactory;
+import java.util.logging.*;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.attributes.LinkAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
@@ -44,10 +43,10 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author Marc Magon
  */
 public class Link extends Component<ComponentHierarchyBase, LinkAttributes, GlobalFeatures, GlobalEvents, Link>
-        implements BodyChildren, NoNewLineForRawText,ListItemChildren
+        implements BodyChildren, NoNewLineForRawText, ListItemChildren
 {
 
-    private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("ALink");
+    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("ALink");
     private static final long serialVersionUID = 1L;
 
     private String directToAddress;
@@ -71,7 +70,7 @@ public class Link extends Component<ComponentHierarchyBase, LinkAttributes, Glob
         this(directToAddress, null);
         if (directToAddress == null || directToAddress.isEmpty())
         {
-            log.trace("Invalid Link Address.");
+            log.log(Level.FINE,"Invalid Link Address.");
         }
     }
 
@@ -91,7 +90,7 @@ public class Link extends Component<ComponentHierarchyBase, LinkAttributes, Glob
      * <p>
      * @param directToAddress The address to redirect to
      * @param targetFrameName The frame to redirect
-     * @param text Includes raw text in the link
+     * @param text            Includes raw text in the link
      */
     public Link(String directToAddress, String targetFrameName, String text)
     {
@@ -114,7 +113,7 @@ public class Link extends Component<ComponentHierarchyBase, LinkAttributes, Glob
      * <p>
      * @param directToAddress The address to redirect to
      * @param targetFrameName The frame to redirect
-     * @param component Includes raw text in the link
+     * @param component       Includes raw text in the link
      */
     public Link(String directToAddress, String targetFrameName, ComponentHierarchyBase component)
     {
@@ -187,6 +186,7 @@ public class Link extends Component<ComponentHierarchyBase, LinkAttributes, Glob
      * A valid equals
      * <p>
      * @param obj Anything
+     *
      * @return True only if the attributes specified are identical
      */
     @Override

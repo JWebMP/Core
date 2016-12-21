@@ -16,25 +16,23 @@
  */
 package za.co.mmagon.jwebswing;
 
-import java.util.ArrayList;
-import za.co.mmagon.jwebswing.base.ComponentEventBase;
-import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
-import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
-import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
-import za.co.mmagon.jwebswing.base.exceptions.NullComponentException;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+import java.util.*;
+import za.co.mmagon.jwebswing.base.*;
+import za.co.mmagon.jwebswing.base.ajax.*;
+import za.co.mmagon.jwebswing.base.exceptions.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.*;
 
 /**
- * Container Class for Events.
- * Splits from the component hierarchy
+ * Container Class for Events. Splits from the component hierarchy
  *
  * @author GedMarc
  * @param <A> Ajax Event type object back
  * @param <J> This class
+ *
  * @since 23 Apr 2016
  */
 public class Event<A extends JavaScriptPart, J extends Event>
@@ -53,7 +51,7 @@ public class Event<A extends JavaScriptPart, J extends Event>
     {
         this(eventTypes.name(), eventTypes);
         setComponent(component);
-        component.getPage().setAngularEnabled(true);
+        component.getPage().getOptions().setAngularEnabled(true);
     }
 
     /**
@@ -65,14 +63,14 @@ public class Event<A extends JavaScriptPart, J extends Event>
     {
         getVariables().add(returnVariable);
     }
-    
+
     /**
      * Adds a variable to return on the call
      *
-     * @param returnVariable The name of the variable to return
+     * @param returnVariable  The name of the variable to return
      * @param owningComponent The component to assign this variable to
      */
-    public void registerReturnVariableName(String returnVariable,String owningComponent)
+    public void registerReturnVariableName(String returnVariable, String owningComponent)
     {
         getVariables().add(returnVariable);
     }
@@ -104,10 +102,10 @@ public class Event<A extends JavaScriptPart, J extends Event>
             s2 = s;
         }
         s2.append("]");
-        
+
         //append Event ID
         s2.append(",'").append(getID()).append("'");
-        
+
         return s2.toString();
     }
 
@@ -201,6 +199,7 @@ public class Event<A extends JavaScriptPart, J extends Event>
      * Adds a query to builder
      *
      * @param query
+     *
      * @return Adds a query to the window
      */
     public J addQuery(StringBuilder query)
@@ -216,6 +215,7 @@ public class Event<A extends JavaScriptPart, J extends Event>
      * Adds a query to builder
      *
      * @param query
+     *
      * @return
      */
     public J addQuery(String query)

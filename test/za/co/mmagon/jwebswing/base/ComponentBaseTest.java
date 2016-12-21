@@ -17,7 +17,7 @@
 package za.co.mmagon.jwebswing.base;
 
 import org.junit.*;
-import za.co.mmagon.*;
+import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
 
 /**

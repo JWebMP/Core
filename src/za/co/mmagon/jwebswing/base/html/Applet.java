@@ -1,6 +1,6 @@
 package za.co.mmagon.jwebswing.base.html;
 
-import za.co.mmagon.LoggerFactory;
+import za.co.mmagon.logger.LogFactory;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.AppletAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
@@ -21,7 +21,7 @@ public class Applet extends Component<NoChildren, AppletAttributes, GlobalFeatur
     /**
      * Logger for the Component
      */
-    private static final org.apache.log4j.Logger log = LoggerFactory.getInstance().makeNewLoggerInstance("Applet");
+    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Applet");
     /**
      * Serial Version for all Components and their compatibility
      */

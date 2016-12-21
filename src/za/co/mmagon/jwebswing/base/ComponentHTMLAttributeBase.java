@@ -18,22 +18,16 @@ package za.co.mmagon.jwebswing.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import za.co.mmagon.LoggerFactory;
+import java.util.*;
+import java.util.logging.Level;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoClassAttribute;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.interfaces.ComponentHTMLBase;
 import za.co.mmagon.jwebswing.base.interfaces.IComponentHTMLAttributeBase;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.utilities.EnumerationUtils;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Denotes a component that has a tag. By default these can add events, features, variables etc
@@ -56,13 +50,13 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
      * @version 2 Version 2 - Updated CSS Library and References
      */
     @JsonIgnore
-    private static final long serialVersionUID = 1l; 
+    private static final long serialVersionUID = 1l;
 
     /**
      * Logger for the Component
      */
     @JsonIgnore
-    private static final org.apache.log4j.Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("ComponentAttributes");
+    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("ComponentAttributes");
 
     /**
      * The SORTED global attribute collection of this component
@@ -268,7 +262,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
         }
         catch (NumberFormatException | NullPointerException nfe)
         {
-            LOG.trace("Invalid Global Attribute Reference [" + getClass().getSimpleName() + "] - [" + attribute + "]. Ignoring.",nfe);
+            LOG.log(Level.FINE, "Invalid Global Attribute Reference [" + getClass().getSimpleName() + "] - [" + attribute + "]. Ignoring.", nfe);
             return null;
         }
     }
@@ -296,6 +290,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
      * <p>
      * @param attribute The GlobalAttribute to set the attribute to
      * @param value     The value of the attribute
+     *
      * @return
      */
     @Override
@@ -311,7 +306,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
         }
         else
         {
-            LOG.trace("Invalid Global Attribute value added [" + getClass().getSimpleName() + "] - [" + attribute + "] - [" + value + "]. Ignoring. Possible duplicate all components run..");
+            LOG.log(Level.FINE,"Invalid Global Attribute value added [" + getClass().getSimpleName() + "] - [" + attribute + "] - [" + value + "]. Ignoring. Possible duplicate all components run..");
         }
         return (J) this;
     }
@@ -321,6 +316,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
      * <p>
      * @param attribute The GlobalAttribute to set the attribute to
      * @param value     The value of the attribute
+     *
      * @return
      */
     @Override
@@ -332,7 +328,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
         }
         else
         {
-            LOG.trace("Invalid Local Attribute value added [" + getClass().getSimpleName() + "] - [" + attribute + "] - [" + value + "]. Ignoring. Possible duplicate all components run..");
+            LOG.log(Level.FINE,"Invalid Local Attribute value added [" + getClass().getSimpleName() + "] - [" + attribute + "] - [" + value + "]. Ignoring. Possible duplicate all components run..");
         }
         return (J) this;
     }
@@ -342,6 +338,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
      * <p>
      * @param attribute The GlobalAttribute to set the attribute to
      * @param value     The value of the attribute
+     *
      * @return
      */
     @Override
@@ -356,6 +353,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
      * <p>
      * @param attribute The valid Local Attribute to add
      * @param value     The value of the attribute
+     *
      * @return
      */
     @Override
@@ -425,6 +423,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
      * Sets if this component should render an ID attribute
      * <p>
      * @param renderIDAttibute
+     *
      * @return
      */
     protected J setRenderIDAttibute(boolean renderIDAttibute)
@@ -536,6 +535,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
      * Sets the ID and adds the attribute to the global set
      *
      * @param id
+     *
      * @return
      */
     @Override

@@ -16,11 +16,12 @@
  */
 package za.co.mmagon.jwebswing.components.jquery.bootstrap.themes;
 
-import org.junit.*;
-import za.co.mmagon.*;
-import za.co.mmagon.jwebswing.*;
+import org.junit.Assert;
+import org.junit.Test;
+import za.co.mmagon.BaseTestClass;
+import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.html.*;
-import za.co.mmagon.jwebswing.components.bootstrap.themes.*;
+import za.co.mmagon.jwebswing.components.bootstrap.themes.SB2Theme;
 
 /**
  *

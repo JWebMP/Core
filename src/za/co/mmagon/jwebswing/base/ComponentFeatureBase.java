@@ -16,9 +16,10 @@
  */
 package za.co.mmagon.jwebswing.base;
 
+import za.co.mmagon.logger.LogFactory;
 import com.fasterxml.jackson.annotation.*;
 import java.util.*;
-import za.co.mmagon.*;
+import java.util.logging.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.interfaces.*;
 import za.co.mmagon.jwebswing.base.references.*;
@@ -41,7 +42,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
      * Logger for the Component
      */
     @JsonIgnore
-    private static final org.apache.log4j.Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("Component");
+    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("Component");
     /**
      * Serial Version for all Components and their compatibility
      *
@@ -404,7 +405,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
     {
         if (!feature.getComponentType().equals(ComponentTypes.Feature))
         {
-            LOG.warn("Tried to add a non-feature to the feature collection");
+            LOG.log(Level.WARNING,"Tried to add a non-feature to the feature collection");
         }
         else if (!getFeatures().contains((F) feature))
         {
@@ -425,7 +426,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
     {
         if (!feature.getComponentType().equals(ComponentTypes.Feature))
         {
-            LOG.warn("Tried to add a non-feature to the feature collection");
+            LOG.log(Level.WARNING,"Tried to add a non-feature to the feature collection");
         }
         else if (!getFeatures().contains((F) feature))
         {

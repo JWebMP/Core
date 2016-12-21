@@ -18,12 +18,9 @@ package za.co.mmagon.jwebswing.base.servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
+import javax.servlet.http.*;
+import java.util.logging.*;
+import za.co.mmagon.logger.LogFactory;
 import za.co.mmagon.jwebswing.Page;
 
 /**
@@ -40,7 +37,7 @@ public class JWDefaultServlet extends HttpServlet
     /**
      * The Servlet base logger
      */
-    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("ServletBase");
+    private static final Logger LOG = LogFactory.getInstance().getLogger("ServletBase");
     /**
      * Version 1
      */
@@ -55,7 +52,8 @@ public class JWDefaultServlet extends HttpServlet
      * Validates the session
      *
      * @param checkPageExists If the main page has to be hit first
-     * @param request The physical request
+     * @param request         The physical request
+     *
      * @throws javax.servlet.ServletException When any security check fails
      */
     public void validate(Boolean checkPageExists, HttpServletRequest request)
@@ -76,7 +74,7 @@ public class JWDefaultServlet extends HttpServlet
 
         if (sessionID == null)
         {
-            LOG.error("Session Doesn't Exist", new ServletException("There is no session for a data pull"));
+            LOG.log(Level.SEVERE,"Session Doesn't Exist", new ServletException("There is no session for a data pull"));
             throw new ServletException("There is no session for a data pull");
         }
         Page servlet = (Page) request.getSession().getAttribute("jwpage");
@@ -85,13 +83,13 @@ public class JWDefaultServlet extends HttpServlet
             if (servlet == null)
             {
                 ServletException se = new ServletException("There is no Servlet Loaded for the entry. The web site has not been visited");
-                LOG.error("Main Servlet Doesn't Exist", se);
+                LOG.log(Level.SEVERE,"Main Servlet Doesn't Exist", se);
                 throw se;
             }
             Page page = (Page) request.getSession().getAttribute("jwpage");
             if (page == null)
             {
-                LOG.error("No Page", new ServletException("No Page Currently Loaded"));
+                LOG.log(Level.SEVERE,"No Page", new ServletException("No Page Currently Loaded"));
                 throw new ServletException("No Page Currently Loaded");
             }
         }
@@ -102,6 +100,7 @@ public class JWDefaultServlet extends HttpServlet
      *
      * @param req
      * @param resp
+     *
      * @throws ServletException
      * @throws IOException
      */
@@ -114,7 +113,7 @@ public class JWDefaultServlet extends HttpServlet
         }
         catch (ServletException e)
         {
-            LOG.error("Unable to Do Get", e);
+            LOG.log(Level.SEVERE,"Unable to Do Get", e);
         }
     }
 
@@ -123,6 +122,7 @@ public class JWDefaultServlet extends HttpServlet
      *
      * @param req
      * @param resp
+     *
      * @throws ServletException
      * @throws IOException
      */
@@ -135,7 +135,8 @@ public class JWDefaultServlet extends HttpServlet
         }
         catch (ServletException e)
         {
-            LOG.error("Unable to Do Post", e);
+            LOG.log(Level.SEVERE,"Security Exception in Validation", e);
+            throw e;
         }
     }
 }

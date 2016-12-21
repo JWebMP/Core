@@ -18,7 +18,7 @@ package za.co.mmagon.jwebswing.htmlbuilder.css;
 
 import java.util.*;
 import org.junit.*;
-import za.co.mmagon.*;
+import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.composer.*;

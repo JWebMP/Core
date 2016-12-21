@@ -16,25 +16,23 @@
  */
 package za.co.mmagon.jwebswing;
 
-import com.fasterxml.jackson.annotation.*;
-import java.io.*;
-import java.nio.file.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.*;
 import java.util.List;
-import java.util.logging.*;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpSession;
 import net.sf.uadetector.*;
-import za.co.mmagon.jwebswing.base.*;
-import za.co.mmagon.jwebswing.base.angular.*;
-import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.base.angular.AngularFeature;
+import za.co.mmagon.jwebswing.base.client.InternetExplorerCompatibilityMode;
 import za.co.mmagon.jwebswing.base.html.*;
-import za.co.mmagon.jwebswing.base.html.attributes.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
-import za.co.mmagon.jwebswing.base.interfaces.*;
-import za.co.mmagon.jwebswing.base.references.*;
-import za.co.mmagon.jwebswing.base.servlets.*;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
-import za.co.mmagon.jwebswing.generics.*;
+import za.co.mmagon.jwebswing.base.html.attributes.ScriptAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
+import za.co.mmagon.jwebswing.base.references.CSSReference;
+import za.co.mmagon.jwebswing.base.references.JavascriptReference;
+import za.co.mmagon.jwebswing.base.servlets.JWebSwingServlet;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
+import za.co.mmagon.jwebswing.base.servlets.interfaces.IPage;
+import za.co.mmagon.jwebswing.generics.WebReference;
 
 /**
  * Top level of any HTML page.
@@ -53,76 +51,14 @@ public class Page extends Html implements IPage
 {
 
     private static final long serialVersionUID = 1L;
-
     /**
-     * Whether or not to render pace loader
+     * The options available
      */
-    private boolean paceEnabled = true;
+    private PageOptions options;
     /**
-     * Whether or not to render jQuery
+     * The fields available
      */
-    private boolean jQueryEnabled;
-    /**
-     * Whether or not to render jQuery UI
-     */
-    private boolean jQueryUIEnabled;
-    /**
-     * Whether or not to render angular
-     */
-    private boolean angularEnabled;
-    /**
-     * Whether or not to render bootstrap
-     */
-    private boolean bootstrapEnabled;
-    /**
-     * Whether or not to dynamic render the requirements
-     */
-    private boolean dynamicRender = true;
-    /**
-     * Whether or not modernizr is enabled
-     */
-    private boolean modernizrEnabled;
-
-    /**
-     * Page Author
-     */
-    private Meta author;
-    /**
-     * Page Author
-     */
-    private Meta keywordsMeta;
-    /**
-     * Page Author
-     */
-    private Meta applicationNameMeta;
-    /**
-     * Page Author
-     */
-    private Meta descriptionMeta;
-    /**
-     * Page Author
-     */
-    private Meta generatorMeta;
-    /**
-     * Page HTTP Meta
-     */
-    private Meta httpEquivMeta;
-    /**
-     * Page Author
-     */
-    private Meta cacheControl;
-    /**
-     * The link for the Site icon
-     */
-    private CSSLink favIconLink;
-    /**
-     * The title of this page
-     */
-    private Title title;
-    /**
-     * The base of this page
-     */
-    private Base base;
+    private PageFields fields;
 
     /**
      * The current user agent of the render
@@ -133,7 +69,7 @@ public class Page extends Html implements IPage
      * The Servlet attached to this page
      */
     @JsonIgnore
-    private JWebSwingServlet servlet;
+    private transient JWebSwingServlet servlet;
     /**
      * The session of this page
      */
@@ -148,7 +84,7 @@ public class Page extends Html implements IPage
     /**
      * Cache for all the associated components throughout the life-cycle of the application
      */
-    private HashMap<String, ComponentHierarchyBase> componentCache;
+    private transient HashMap<String, ComponentHierarchyBase> componentCache;
 
     /**
      * Populates all my components. Excludes this page
@@ -160,9 +96,9 @@ public class Page extends Html implements IPage
      */
     public Page(Title title, InternetExplorerCompatibilityMode compatibilityMode, Base base)
     {
-        setTitle(title);
-        setCompatibilityMode(compatibilityMode);
-        setBase(base);
+        getPageFields().setTitle(title);
+        getPageFields().setCompatibilityMode(compatibilityMode);
+        getPageFields().setBase(base);
         setID("jwPage");
         //setGenerator("JWebSwing - https://sourceforge.net/projects/jwebswing/");
     }
@@ -248,6 +184,7 @@ public class Page extends Html implements IPage
         }
         if (!isConfigured())
         {
+            getBody().init();
             getBody().preConfigure();
             getAngular().preConfigure();
 
@@ -257,7 +194,8 @@ public class Page extends Html implements IPage
 
             addScriptsToBody();
 
-            ArrayList<Script> allScripts = getJavaScript();
+            List<Script> allScripts = getDynamicScripts();
+
             allScripts.stream().filter(script -> (script != null)).forEach(getBody()::add);
 
             getTopShelfScripts().forEach(next ->
@@ -297,7 +235,7 @@ public class Page extends Html implements IPage
      * @return
      */
     @Override
-    public HashMap<String, ComponentHierarchyBase> getComponentCache()
+    public java.util.Map<String, ComponentHierarchyBase> getComponentCache()
     {
         if (componentCache == null)
         {
@@ -311,11 +249,10 @@ public class Page extends Html implements IPage
      *
      * @return
      */
-    public ArrayList<ComponentHierarchyBase> getAllComponents()
+    @Override
+    public List<ComponentHierarchyBase> getAllComponents()
     {
-        ArrayList<ComponentHierarchyBase> b = new ArrayList<>();
-        b.addAll(this.componentCache.values());
-        return b;
+        return (List<ComponentHierarchyBase>) getComponentCache().values();
     }
 
     /**
@@ -334,15 +271,15 @@ public class Page extends Html implements IPage
      * @param startingPoint The starting component to update with
      * @param addToMap      The map to add to
      */
-    public void buildComponentHierarchy(ComponentHierarchyBase startingPoint, HashMap<String, ComponentHierarchyBase> addToMap)
+    public void buildComponentHierarchy(ComponentHierarchyBase startingPoint, java.util.Map<String, ComponentHierarchyBase> addToMap)
     {
-        startingPoint.getChildren().stream().filter((child) -> !(child == null)).map((child)
+        startingPoint.getChildren().stream().filter(child -> !(child == null)).map(child
                 ->
         {
             ComponentHierarchyBase c = (ComponentHierarchyBase) child;
             addToMap.put(c.getID(), c);
             return child;
-        }).forEach((child)
+        }).forEach(child
                 ->
         {
             ComponentHierarchyBase c = (ComponentHierarchyBase) child;
@@ -358,7 +295,6 @@ public class Page extends Html implements IPage
      *
      * @param componentCache
      */
-    @Override
     public void setComponentCache(HashMap<String, ComponentHierarchyBase> componentCache)
     {
         this.componentCache = componentCache;
@@ -374,9 +310,9 @@ public class Page extends Html implements IPage
         StringBuilder css = getBody().renderCss(0);
         if (!css.toString().isEmpty())
         {
-            if (isDynamicRender())
+            if (getOptions().isDynamicRender())
             {
-                CSSLink renderedCSS = new CSSLink("css");
+                CSSLink renderedCSS = new CSSLink("jwcss");
                 return renderedCSS;
             }
             else
@@ -397,29 +333,29 @@ public class Page extends Html implements IPage
      *
      * @return
      */
-    private ArrayList<ComponentHierarchyBase> getTopShelfScripts()
+    private List<ComponentHierarchyBase> getTopShelfScripts()
     {
-        ArrayList<ComponentHierarchyBase> arr;
-        arr = getPriorityRequirements(RequirementsPriority.Top_Shelf, new ArrayList<ComponentHierarchyBase>(), true, true);
+        List<ComponentHierarchyBase> arr;
+        arr = getPriorityRequirements(RequirementsPriority.Top_Shelf, new ArrayList<>(), true, true);
         return arr;
     }
 
     /**
      * Returns the script reference
      *
-     * @return
+     * @return ArrayList of type script
      */
-    private ArrayList<Script> getJavaScript()
+    private List<Script> getDynamicScripts()
     {
         ArrayList<Script> allScripts = new ArrayList<>();
 
-        if (isAngularEnabled())
+        if (getOptions().isAngularEnabled())
         {
-            if (isDynamicRender())
+            if (getOptions().isDynamicRender())
             {
                 Script dynamicScript = new Script();
                 dynamicScript.addAttribute(ScriptAttributes.Type, "application/javascript");
-                dynamicScript.addAttribute(ScriptAttributes.Src, "as");
+                dynamicScript.addAttribute(ScriptAttributes.Src, "jwas");
                 //dynamicScript.setTiny(true);
                 //dynamicScript.setText("$.ajax({cache:false,async:false,dataType:'script',url:'as'}).fail(function(){alert('session lost'); });");
                 allScripts.add(dynamicScript);
@@ -436,14 +372,15 @@ public class Page extends Html implements IPage
                 }
             }
         }
-        if (isDynamicRender())
+
+        if (getOptions().isDynamicRender())
         {
-            StringBuilder js = getBody().renderJavascriptAll();
-            // if (!js.toString().trim().isEmpty())
+            StringBuilder js = renderJavascript();
+            if (!js.toString().trim().isEmpty())
             {
                 Script dynamicScript = new Script();
                 dynamicScript.addAttribute(ScriptAttributes.Type, "application/javascript");
-                dynamicScript.addAttribute(ScriptAttributes.Src, "js");
+                dynamicScript.addAttribute(ScriptAttributes.Src, "jwjs");
                 //dynamicScript.setTiny(true);
                 //dynamicScript.setText("$.ajax({cache:false,dataType:'script',url:'js'}).fail(function(){alert('session lost'); });");
                 allScripts.add(dynamicScript);
@@ -451,7 +388,7 @@ public class Page extends Html implements IPage
         }
         else
         {
-            StringBuilder js = getBody().renderJavascriptAll();
+            StringBuilder js = renderJavascript();
             if (!js.toString().trim().isEmpty())
             {
                 Script s = new Script();
@@ -469,26 +406,27 @@ public class Page extends Html implements IPage
      */
     private void configurePageHeader()
     {
-        if (title != null)
+        if (getPageFields().getTitle() != null)
         {
-            getHead().add(title);
+            getHead().add(getPageFields().getTitle());
         }
-        if (base != null)
+        if (getPageFields().getBase() != null)
         {
-            getHead().add(this.base);
+            getHead().add(getPageFields().getBase());
         }
-        getHead().add(this.httpEquivMeta);
-        getHead().add(cacheControl);
-        getHead().add(author);
-        getHead().add(this.applicationNameMeta);
-        getHead().add(this.generatorMeta);
-        getHead().add(descriptionMeta);
-        getHead().add(this.keywordsMeta);
-        getHead().add(this.favIconLink);
+        getHead().add(getPageFields().getHttpEquivMeta());
+        getHead().add(getPageFields().getCacheControl());
+        getHead().add(getPageFields().getAuthor());
+        getHead().add(getPageFields().getApplicationName());
+        getHead().add(getPageFields().getGenerator());
+        getHead().add(getPageFields().getDescription());
+        getHead().add(getPageFields().getKeywords());
+        getHead().add(getPageFields().getFavIconLink());
 
         getHead().getChildren().stream().forEach((headObject)
                 ->
         {
+            headObject.init();
             headObject.preConfigure();
         });
     }
@@ -520,9 +458,9 @@ public class Page extends Html implements IPage
 
     private void addScriptsToBody()
     {
-        ArrayList<ComponentHierarchyBase> requirements = new ArrayList<>();
+        List<ComponentHierarchyBase> requirements = new ArrayList<>();
 
-        ArrayList<RequirementsPriority> arrs = new ArrayList<>(Arrays.asList(RequirementsPriority.values()));
+        List<RequirementsPriority> arrs = new ArrayList<>(Arrays.asList(RequirementsPriority.values()));
         //render JS only
         arrs.stream().filter(a -> a != RequirementsPriority.Top_Shelf).map(priority ->
         {
@@ -549,9 +487,9 @@ public class Page extends Html implements IPage
      * @param priority   the priority
      * @param javascript to return JavaScript or not
      */
-    private ArrayList<ComponentHierarchyBase> getPriorityRequirements(RequirementsPriority priority, ArrayList<ComponentHierarchyBase> input, boolean css, boolean javascript)
+    private List<ComponentHierarchyBase> getPriorityRequirements(RequirementsPriority priority, List<ComponentHierarchyBase> input, boolean css, boolean javascript)
     {
-        ArrayList<ComponentHierarchyBase> requirements = new ArrayList<>();
+        List<ComponentHierarchyBase> requirements = new ArrayList<>();
         if (css)
         {
             getAllCssLinks(priority).stream().filter(cssLink -> (!input.contains(cssLink) && !requirements.contains(cssLink))).forEach(cssLink
@@ -630,498 +568,10 @@ public class Page extends Html implements IPage
     }
 
     /**
-     * Whether or not to render the JQuery requirements
-     *
-     * @return
-     */
-    @Override
-    public boolean isjQueryEnabled()
-    {
-        return jQueryEnabled;
-    }
-
-    /**
-     * Whether or not to render the JQuery Requirements
-     *
-     * @param jQueryEnabled
-     */
-    @Override
-    public void setjQueryEnabled(boolean jQueryEnabled)
-    {
-        this.jQueryEnabled = jQueryEnabled;
-        if (this.jQueryEnabled)
-        {
-            getBody().configureJQuery();
-        }
-    }
-
-    /**
-     * Whether or not to render the JQuery UI Requirements
-     *
-     * @return
-     */
-    @Override
-    public boolean isjQueryUIEnabled()
-    {
-        return jQueryUIEnabled;
-    }
-
-    /**
-     * Whether or not to render the JQuery UI Requirements
-     *
-     * @param jQueryUIEnabled
-     */
-    @Override
-    public void setjQueryUIEnabled(boolean jQueryUIEnabled)
-    {
-        this.jQueryUIEnabled = jQueryUIEnabled;
-        if (jQueryUIEnabled)
-        {
-            setjQueryEnabled(true);
-            getBody().configureJQueryUI();
-        }
-    }
-
-    /**
-     * whether or not to render angular
-     *
-     * @return
-     */
-    @Override
-    public boolean isAngularEnabled()
-    {
-        return angularEnabled;
-    }
-
-    /**
-     * Whether or not to render angular
-     *
-     * @param angularEnabled
-     */
-    @Override
-    public void setAngularEnabled(boolean angularEnabled)
-    {
-        this.angularEnabled = angularEnabled;
-        if (angularEnabled)
-        {
-            setjQueryEnabled(true);
-            getBody().configureAngular();
-        }
-    }
-
-    /**
-     * Whether or not to render bootstrap
-     *
-     * @return
-     */
-    @Override
-    public boolean isBootstrapEnabled()
-    {
-        return bootstrapEnabled;
-    }
-
-    /**
-     * Whether or not to render bootstrap
-     *
-     * @param bootstrapEnabled
-     */
-    @Override
-    public void setBootstrapEnabled(boolean bootstrapEnabled)
-    {
-        this.bootstrapEnabled = bootstrapEnabled;
-        if (bootstrapEnabled)
-        {
-            getBody().configureBootstrap();
-        }
-    }
-
-    /**
-     * Returns if pace should be set as the default render
-     *
-     * @return
-     */
-    @Override
-    public boolean isPaceEnabled()
-    {
-        return paceEnabled;
-    }
-
-    /**
-     * Sets if pace should be rendered s the default loader
-     *
-     * @param paceEnabled
-     */
-    @Override
-    public void setPaceEnabled(boolean paceEnabled)
-    {
-        this.paceEnabled = paceEnabled;
-        getBody().configurePace();
-    }
-
-    /**
-     * Sets the author of this page
-     *
-     * @param author The author of this page
-     */
-    @Override
-    public final void setAuthor(String author)
-    {
-        this.author = new Meta(Meta.MetadataFields.Author, author);
-    }
-
-    /**
-     * Sets the description of this page
-     *
-     * @param description The description of the page
-     */
-    @Override
-    public final void setDescription(String description)
-    {
-        if (descriptionMeta == null)
-        {
-            descriptionMeta = new Meta(Meta.MetadataFields.Description, description);
-        }
-        else
-        {
-            descriptionMeta.addAttribute(MetaAttributes.Content, description);
-        }
-    }
-
-    /**
-     * Returns the description of the page
-     *
-     * @return Meta The meta tag
-     */
-    @Override
-    public final Meta getDescription()
-    {
-        return descriptionMeta;
-    }
-
-    /**
-     * Returns the Application Name of the page
-     *
-     * @return Meta The meta tag
-     */
-    @Override
-    public final Meta getApplicationName()
-    {
-        return applicationNameMeta;
-    }
-
-    /**
-     * Sets the Application Name of this page
-     *
-     * @param applicationName The Application Name of the page
-     */
-    @Override
-    public final void setApplicationNameMeta(String applicationName)
-    {
-        if (applicationNameMeta == null)
-        {
-            applicationNameMeta = new Meta(Meta.MetadataFields.Application_Name, applicationName);
-        }
-        else
-        {
-            applicationNameMeta.addAttribute(MetaAttributes.Content, applicationName);
-        }
-    }
-
-    /**
-     * Returns the Application Name of the page
-     *
-     * @return Meta The meta tag
-     */
-    @Override
-    public final Meta getGenerator()
-    {
-        return generatorMeta;
-    }
-
-    /**
-     * Sets the Generator of this page
-     *
-     * @param Generator The Generator of the page
-     */
-    @Override
-    public final void setGenerator(String Generator)
-    {
-        if (generatorMeta == null)
-        {
-            generatorMeta = new Meta(Meta.MetadataFields.Generator, Generator);
-        }
-        else
-        {
-            generatorMeta.addAttribute(MetaAttributes.Content, Generator);
-        }
-    }
-
-    /**
-     * Returns the Application Name of the page
-     *
-     * @return Meta The meta tag
-     */
-    @Override
-    public final Meta getKeywords()
-    {
-        return keywordsMeta;
-    }
-
-    /**
-     * Sets the Keywords of this page
-     *
-     * @param Keywords The Keywords of the page
-     */
-    @Override
-    public final void setKeywords(String Keywords)
-    {
-        if (keywordsMeta == null)
-        {
-            keywordsMeta = new Meta(Meta.MetadataFields.Keywords, Keywords);
-        }
-        else
-        {
-            keywordsMeta.addAttribute(MetaAttributes.Content, Keywords);
-        }
-    }
-
-    /**
-     * Removes Title from the Header
-     *
-     * @return Remove
-     */
-    @Override
-    public final boolean removeTitle()
-    {
-        return getHead().getChildren().remove(getTitle());
-    }
-
-    /**
-     * Returns the Application Name of the page
-     *
-     * @return Meta The meta tag
-     */
-    @Override
-    public final Meta getCompatibilityMode()
-    {
-        return httpEquivMeta;
-    }
-
-    /**
-     * Returns the Application Name of the page
-     *
-     * @param dummyInt Serves no function
-     *
-     * @return String The actual used compatibility mode
-     */
-    @Override
-    public final String getCompatibilityMode(int dummyInt)
-    {
-        return httpEquivMeta.getAttribute(MetaAttributes.Http_Equiv);
-    }
-
-    /**
-     * Sets the Application Name of this page Null removes compatibility specification
-     *
-     * @param httpEquiv The Application Name of the page
-     */
-    @Override
-    public final void setCompatibilityMode(InternetExplorerCompatibilityMode httpEquiv)
-    {
-        if (httpEquivMeta != null && httpEquiv != null)
-        {
-            httpEquivMeta.addAttribute(MetaAttributes.Content, httpEquiv.getValue());
-        }
-        else if (httpEquiv != null)
-        {
-            httpEquivMeta = new Meta(Meta.MetadataFields.http_equiv, httpEquiv.getValue());
-        }
-        else
-        {
-            httpEquivMeta = null;
-        }
-    }
-
-    /**
-     * Is Modernizr Enabled
-     *
-     * @return
-     */
-    @Override
-    public boolean isModernizrEnabled()
-    {
-        return modernizrEnabled;
-    }
-
-    /**
-     * Sets if Modernizr is enabled
-     *
-     * @param modernizrEnabled
-     */
-    @Override
-    public void setModernizrEnabled(boolean modernizrEnabled)
-    {
-        this.modernizrEnabled = modernizrEnabled;
-        getBody().configureModernizr();
-    }
-
-    /**
-     * Sets the Icon in the browser address bar
-     *
-     * @param favIconURL The path to the icon
-     */
-    @Override
-    public void setFavIcon(String favIconURL)
-    {
-        favIconLink.addAttribute(CSSLinkAttributes.Rel, "icon");
-        String favType = favIconURL.substring(favIconURL.lastIndexOf("."));
-        String mimeType = "";
-        try
-        {
-
-            mimeType = Files.probeContentType(new File(favIconURL).toPath());
-        }
-        catch (IOException ex)
-        {
-            Logger.getLogger(Page.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //@TODO define the image type from url
-        favIconLink.addAttribute(CSSLinkAttributes.Type, mimeType);
-        favIconLink.addAttribute(CSSLinkAttributes.HRef, favIconURL);
-    }
-
-    /**
-     * Sets the Cache Control.
-     * <p>
-     * <p>
-     * <p>
-     * HTTP 1.1. Allowed values = PUBLIC | PRIVATE | NO-CACHE | NO-STORE.<p>
-     * <p>
-     * Public - may be cached in public shared caches.<p>
-     * Private - may only be cached in private cache.<p>
-     * No-Cache - may not be cached.<p>
-     * No-Store - may be cached but not archived.<p>
-     * <p>
-     * The directive CACHE-CONTROL:NO-CACHE indicates cached information should not be used and instead requests should be forwarded to the origin server. This directive has the same semantics as
-     * the<p>
-     * PRAGMA:NO-CACHE.<p>
-     * <p>
-     * Clients SHOULD include both PRAGMA: NO-CACHE and CACHE-CONTROL: NO-CACHE when a no-cache request is sent to a server not known to be HTTP/1.1 compliant. Also see EXPIRES.<p>
-     * <p>
-     * Note: It may be better to specify cache commands in HTTP than in META statements, where they can influence more than the browser, but proxies and other intermediaries that may cache<p>
-     * information.
-     *
-     * @param enable
-     */
-    @Override
-    public void setCacheControl(boolean enable)
-    {
-        if (enable)
-        {
-            cacheControl = new Meta("cache-control");
-            cacheControl.addAttribute(MetaAttributes.Content, "public");
-        }
-        else
-        {
-            cacheControl = null;
-        }
-    }
-
-    /**
-     * Returns the Cache Control Meta Object
-     *
-     * @return
-     */
-    @Override
-    public Meta getCacheControl()
-    {
-        return cacheControl;
-    }
-
-    /**
-     * Returns the Application Name of the page
-     *
-     * @return Meta The meta tag
-     */
-    @Override
-    public final Base getBase()
-    {
-        return this.base;
-    }
-
-    /**
-     * Returns the Application Name of the page
-     *
-     * @return Meta The meta tag
-     */
-    @Override
-    public final Title getTitle()
-    {
-        return this.title;
-    }
-
-    /**
-     * Sets the Title of this page
-     *
-     * @param Title The Title of the page
-     */
-    @Override
-    public final void setTitle(Title Title)
-    {
-        this.title = Title;
-        if (title != null)
-        {
-            title.setPage(this);
-        }
-    }
-
-    /**
-     * Sets the Title of this page
-     *
-     * @param Title The Title of the page
-     */
-    @Override
-    public final void setTitle(String Title)
-    {
-        this.title = new Title(Title);
-        if (title != null)
-        {
-            title.setPage(this);
-        }
-    }
-
-    /**
-     * Sets the Base of this page
-     *
-     * @param base The Base of the page
-     */
-    @Override
-    public final void setBase(Base base)
-    {
-        this.base = base;
-        if (base != null)
-        {
-            base.setPage(this);
-        }
-    }
-
-    /**
-     * Removes Base from the Header
-     *
-     * @return Remove
-     */
-    @Override
-    public final boolean removeBase()
-    {
-        return getHead().getChildren().remove(getBase());
-    }
-
-    /**
      * Returns a readable user agent, or null if just a basic render
      *
      * @return
      */
-    @Override
     public ReadableUserAgent getUserAgent()
     {
         if (userAgent == null)
@@ -1136,10 +586,39 @@ public class Page extends Html implements IPage
      *
      * @param userAgent
      */
-    @Override
     public void setUserAgent(ReadableUserAgent userAgent)
     {
         this.userAgent = userAgent;
+    }
+
+    /**
+     * Returns all the dynamic options for a page
+     *
+     * @return
+     */
+    @Override
+    public final PageOptions getOptions()
+    {
+        if (options == null)
+        {
+            options = new PageOptions(this);
+        }
+        return options;
+    }
+
+    /**
+     * Returns the fields available for entry on this page
+     *
+     * @return
+     */
+    @Override
+    public final PageFields getPageFields()
+    {
+        if (fields == null)
+        {
+            fields = new PageFields(this);
+        }
+        return fields;
     }
 
     /**
@@ -1147,7 +626,6 @@ public class Page extends Html implements IPage
      *
      * @return HTTPSession or NULL
      */
-    @Override
     public final HttpSession getSession()
     {
         return session;
@@ -1158,7 +636,6 @@ public class Page extends Html implements IPage
      *
      * @param session HttpSession or null
      */
-    @Override
     public final void setSession(HttpSession session)
     {
         this.session = session;
@@ -1169,7 +646,6 @@ public class Page extends Html implements IPage
      *
      * @return The JWebSwingServlet
      */
-    @Override
     public JWebSwingServlet getServlet()
     {
         return servlet;
@@ -1180,32 +656,9 @@ public class Page extends Html implements IPage
      *
      * @param servlet The Servlet to set
      */
-    @Override
     public void setServlet(JWebSwingServlet servlet)
     {
         this.servlet = servlet;
-    }
-
-    /**
-     * Whether or not to dynamic render the requirements
-     *
-     * @return
-     */
-    @Override
-    public boolean isDynamicRender()
-    {
-        return dynamicRender;
-    }
-
-    /**
-     * Whether or not to dynamic render the requirements
-     *
-     * @param dynamicRender
-     */
-    @Override
-    public void setDynamicRender(boolean dynamicRender)
-    {
-        this.dynamicRender = dynamicRender;
     }
 
     /**

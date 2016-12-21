@@ -16,7 +16,8 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -26,11 +27,11 @@ import java.util.*;
 public class CSSBlockMaster
 {
 
-    private final ArrayList<CSSBlock> allBlocks;
+    private List<CSSBlock> allBlocks;
 
     public CSSBlockMaster()
     {
-        this.allBlocks = new ArrayList<>();
+
     }
 
     /**
@@ -49,7 +50,7 @@ public class CSSBlockMaster
     public void addBlock(CSSBlock block)
     {
         CSSBlock dupLines;
-        if (!allBlocks.contains(block))
+        if (!getAllCSSBlocks().contains(block))
         {
 
             if ((dupLines = checkBlocksForDuplicateLines(block)) != null)
@@ -58,7 +59,7 @@ public class CSSBlockMaster
             }
             else
             {
-                allBlocks.add(block);
+                getAllCSSBlocks().add(block);
             }
         }
     }
@@ -70,9 +71,9 @@ public class CSSBlockMaster
      *
      * @return
      */
-    public ArrayList<CSSBlock> addBlock(ArrayList<CSSBlock> block)
+    public List<CSSBlock> addBlock(List<CSSBlock> block)
     {
-        block.stream().forEach((cssBlock)
+        block.stream().forEach(cssBlock
                 ->
         {
             addBlock(cssBlock);
@@ -89,13 +90,10 @@ public class CSSBlockMaster
      */
     protected CSSBlock checkBlocksForDuplicateLines(CSSBlock blockToCompare)
     {
-        for (CSSBlock cssBlock : allBlocks)
+        List<CSSBlock> bl = getAllCSSBlocks();
+        for (CSSBlock cssBlock : bl)
         {
-            String mylines = cssBlock.getCssLines().toString();
-            String compareToLines = blockToCompare.getCssLines().toString();
-            //System.out.println("my lines : " + mylines);
-            //System.out.println("compare lines : " + compareToLines);
-            if (blockToCompare.getCssLines().toString().equalsIgnoreCase(cssBlock.getCssLines().toString()))
+            if (blockToCompare.equals(cssBlock))
             {
                 return cssBlock;
             }
@@ -112,7 +110,7 @@ public class CSSBlockMaster
      */
     protected boolean idAlreadyLoaded(CSSBlock block)
     {
-        return allBlocks.stream().anyMatch((cssBlock) -> (block.getIdOfBlock().equalsIgnoreCase(cssBlock.getIdOfBlock())));
+        return getAllCSSBlocks().stream().anyMatch(cssBlock -> (block.getIdOfBlock().equalsIgnoreCase(cssBlock.getIdOfBlock())));
     }
 
     /**
@@ -120,22 +118,46 @@ public class CSSBlockMaster
      *
      * @return
      */
-    public ArrayList<CSSBlock> getAllCSSBlocks()
+    public List<CSSBlock> getAllCSSBlocks()
     {
+        if (allBlocks == null)
+        {
+            allBlocks = new ArrayList<>();
+        }
         return allBlocks;
     }
 
     /**
      * Returns the generated CSS as small as possible
      *
-     * @param ajax Placeholder - will always render as inline
+     * @return The generated CSS
+     */
+    @Override
+    public String toString()
+    {
+        StringBuilder cssBlocksSB = new StringBuilder();
+        getAllCSSBlocks().stream().forEach(cSSBlock
+                ->
+        {
+            if (!cSSBlock.toString().isEmpty())
+            {
+                cssBlocksSB.append(cSSBlock);//.append(cSSBlock.getBlockIdentifer() == CSSBlockIdentifier.Inline ? "" : "\n");
+            }
+        });
+        return cssBlocksSB.toString();
+    }
+
+    /**
+     * Returns the generated CSS as small as possible
+     *
+     * @param ajax Placeholder - will always render as in-line
      *
      * @return The generated CSS
      */
     public String toString(boolean ajax)
     {
         StringBuilder cssBlocksSB = new StringBuilder();
-        (getAllCSSBlocks()).stream().forEach(cSSBlock
+        getAllCSSBlocks().stream().forEach(cSSBlock
                 ->
         {
             CSSBlockIdentifier oldIdent = cSSBlock.getBlockIdentifer();

@@ -7,28 +7,20 @@ package za.co.mmagon.jwebswing.utilities.dualquickpivot;
 
 /**
  * ****************************************************************************
- * Compilation: javac QuickDualPivot.java
- * Execution: java QuickDualPivot &lt; input.txt
- * Dependencies: StdOut.java StdIn.java
- * Data files: http://algs4.cs.princeton.edu/23quicksort/tiny.txt
+ * Compilation: javac QuickDualPivot.java Execution: java QuickDualPivot &lt; input.txt Dependencies: StdOut.java StdIn.java Data files: http://algs4.cs.princeton.edu/23quicksort/tiny.txt
  * http://algs4.cs.princeton.edu/23quicksort/words3.txt
  * <p>
- * Sorts a sequence of strings from standard input using dual-pivot
- * quicksort.
+ * Sorts a sequence of strings from standard input using dual-pivot quicksort.
  * <p>
  * [Warning: not thoroughly tested.]
  * <p>
- * % more tiny.txt
- * S O R T E X A M P L E
+ * % more tiny.txt S O R T E X A M P L E
  * <p>
- * % java QuickDualPivot &lt; tiny.txt
- * A E E L M O P R S T X [ one string per line ]
+ * % java QuickDualPivot &lt; tiny.txt A E E L M O P R S T X [ one string per line ]
  * <p>
- * % more words3.txt
- * bed bug dad yes zoo ... all bad yet
+ * % more words3.txt bed bug dad yes zoo ... all bad yet
  * <p>
- * % java QuickDualPivot &lt; words3.txt
- * all bad bed bug dad ... yes yet zoo [ one string per line ]
+ * % java QuickDualPivot &lt; words3.txt all bad bed bug dad ... yes yet zoo [ one string per line ]
  * <p>
  *****************************************************************************
  */
@@ -38,7 +30,7 @@ public class QuickDualPivot
     // quicksort the array a[] using dual-pivot quicksort
     public static void sort(Comparable[] a)
     {
-        StdRandom.shuffle(a);
+        //StdRandom.shuffle(a);
         sort(a, 0, a.length - 1);
         assert isSorted(a);
     }
@@ -90,8 +82,7 @@ public class QuickDualPivot
 
     /**
      * *************************************************************************
-     * Helper sorting functions.
-     **************************************************************************
+     * Helper sorting functions. *************************************************************************
      */
     // is v < w ?
     private static boolean less(Comparable v, Comparable w)
@@ -109,8 +100,7 @@ public class QuickDualPivot
 
     /**
      * *************************************************************************
-     * Check if array is sorted - useful for debugging.
-     **************************************************************************
+     * Check if array is sorted - useful for debugging. *************************************************************************
      */
     private static boolean isSorted(Comparable[] a)
     {
@@ -141,9 +131,9 @@ public class QuickDualPivot
     // Read strings from standard input, sort them, and print.
     public static void main(String[] args)
     {
-        String[] a = StdIn.readAllStrings();
-        QuickDualPivot.sort(a);
-        show(a);
+        //String[] a = ;// StdIn.readAllStrings();
+        QuickDualPivot.sort(args);
+        show(args);
     }
 
 }

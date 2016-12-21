@@ -1,14 +1,11 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.Annotations;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.NameValuePairCSS;
+import java.lang.annotation.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.*;
 
 /**
  * Defines any name value pair of a CSS
+ *
  * @author mmagon
  */
 @za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType
@@ -20,5 +17,6 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.NameValuePairCSS;
 @Inherited
 public @interface CustomCSS
 {
+
     public NameValuePairCSS[] value() default @NameValuePairCSS;
 }

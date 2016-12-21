@@ -16,16 +16,10 @@
  */
 package za.co.mmagon.jwebswing.base.angular;
 
-import java.io.BufferedInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
+import java.util.logging.Level;
 import java.util.regex.Matcher;
-import za.co.mmagon.LoggerFactory;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.Feature;
 import za.co.mmagon.jwebswing.base.angular.controllers.AngularControllerBase;
@@ -37,6 +31,8 @@ import za.co.mmagon.jwebswing.base.exceptions.NullComponentException;
 import za.co.mmagon.jwebswing.base.html.Comment;
 import za.co.mmagon.jwebswing.base.html.interfaces.HTMLFeatures;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.utilities.TextUtilities;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * The Angular 1 Feature Implementation
@@ -48,11 +44,11 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 {
 
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * The logger for angular
      */
-    private static final org.apache.log4j.Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("AngularFeature");
+    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("AngularFeature");
     /**
      * All registered templates
      */
@@ -96,6 +92,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      * All the angular variables
      */
     private List<String> angularVariables;
+
     /**
      * Adds on the Angular ComponentFeatureBase to the application to allow full data binding
      *
@@ -105,14 +102,13 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
     {
         this(component, "jwApp", "jwController");
     }
-    
 
     /**
      * Adds on the Angular ComponentFeatureBase to the application to allow full data binding
      *
-     * @param component The component to associate with
+     * @param component       The component to associate with
      * @param applicationName The name of the application
-     * @param controllerName The name of the controller
+     * @param controllerName  The name of the controller
      */
     public AngularFeature(Component component, String applicationName, String controllerName)
     {
@@ -123,7 +119,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
         }
         setComponent(component);
         setJavascriptRenderedElsewhere(true);
-        
+
         modules = new ArrayList<>();
         directives = new ArrayList<>();
         controllers = new ArrayList<>();
@@ -145,7 +141,6 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
         setRenderAfterLoad(false);
     }
 
-
     /**
      * Compile the template
      */
@@ -154,7 +149,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
     {
         if (!isConfigured())
         {
-            if (getComponent().getPage().isAngularEnabled())
+            if (getComponent().getPage().getOptions().isAngularEnabled())
             {
                 getComponent().addAttribute(AngularAttributes.ngApp, getAppName() + "");
                 getComponent().addAttribute(AngularAttributes.ngController, controllerName);
@@ -169,6 +164,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      * Convenience method for adding a directive
      *
      * @param directive
+     *
      * @return This
      */
     public AngularFeature addDirective(AngularDirectiveBase directive)
@@ -184,6 +180,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      * Convenience method for adding a directive
      *
      * @param directive
+     *
      * @return This
      */
     public AngularFeature removeDirective(AngularDirectiveBase directive)
@@ -196,6 +193,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      * Convenience method for adding a module
      *
      * @param module
+     *
      * @return This
      */
     public AngularFeature addModule(AngularModuleBase module)
@@ -211,6 +209,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      * Convenience method for adding a module
      *
      * @param module
+     *
      * @return This
      */
     public AngularFeature removeModule(AngularModuleBase module)
@@ -223,6 +222,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      * Convenience method for adding a directive
      *
      * @param controllers
+     *
      * @return This
      */
     public AngularFeature addDirective(AngularControllerBase controllers)
@@ -239,6 +239,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      * Convenience method for adding a directive
      *
      * @param controller
+     *
      * @return This
      */
     public AngularFeature removeDirective(AngularControllerBase controller)
@@ -248,14 +249,10 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
     }
 
     /**
-     * JW_APP_NAME - the angular module application name
-     * JW_DIRECTIVES - the angular directives
-     * JW_MODULES the modules generates
-     * JW_APP_CONTROLLER the physical controller name
-     * JW_CONTROLLERS - the controllers render part
+     * JW_APP_NAME - the angular module application name JW_DIRECTIVES - the angular directives JW_MODULES the modules generates JW_APP_CONTROLLER the physical controller name JW_CONTROLLERS - the
+     * controllers render part
      * <p>
-     * Configures the base template variables.
-     * Override the method to add your own (keep call to super)
+     * Configures the base template variables. Override the method to add your own (keep call to super)
      */
     public void configureTemplateVariables()
     {
@@ -272,6 +269,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      *
      * @param templateName The name of the template being processed
      * @param template     The physical string to process
+     *
      * @return
      */
     public StringBuilder processTemplate(String templateName, String template)
@@ -287,8 +285,8 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
             }
             catch (IllegalArgumentException iae)
             {
-                LOG.debug("[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[" + templateVariable + "];[Script]-[" + templateScript + "]");
-                LOG.error(iae);
+                LOG.config("[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[" + templateVariable + "];[Script]-[" + templateScript + "]");
+                LOG.severe(TextUtilities.stackTraceToString(iae));
             }
         }
         TemplateScripts.put(templateName, new StringBuilder(templateOutput));
@@ -298,13 +296,11 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
     /**
      * Replaces all instances of the following
      * <p>
-     * %%APP%% - the angular module application name
-     * %%DIRECTIVES%% - the angular directives
-     * %%MODULES%% the modules generates
-     * %%CONTROLLER%% the modules generates
+     * %%APP%% - the angular module application name %%DIRECTIVES%% - the angular directives %%MODULES%% the modules generates %%CONTROLLER%% the modules generates
      *
      * @param referenceClass The class to find where the file is at
      * @param templateName   the template to use
+     *
      * @return the name
      */
     public StringBuilder compileTemplate(Class referenceClass, String templateName)
@@ -316,13 +312,11 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
     /**
      * Replaces all instances of the following
      * <p>
-     * %%APP%% - the angular module application name
-     * %%DIRECTIVES%% - the angular directives
-     * %%MODULES%% the modules generates
-     * %%CONTROLLER%% the modules generates
+     * %%APP%% - the angular module application name %%DIRECTIVES%% - the angular directives %%MODULES%% the modules generates %%CONTROLLER%% the modules generates
      *
      * @param templateName The template name
      * @param template     the template to build
+     *
      * @return the name
      */
     public StringBuilder compileTemplate(String templateName, String template)
@@ -377,6 +371,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      *
      * @param referenceClass The class to reference to locate the file
      * @param templateName   The file without .min.js or .js attached to it
+     *
      * @return The string for the file
      */
     public StringBuilder getFileTemplate(Class referenceClass, String templateName)
@@ -397,7 +392,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
                     templateFileName += ".js";
                 }
                 byte[] fileContents;
-                try (InputStream is = referenceClass.getResourceAsStream(templateFileName); 
+                try (InputStream is = referenceClass.getResourceAsStream(templateFileName);
                         BufferedInputStream bis = new BufferedInputStream(is))
                 {
                     fileContents = new byte[bis.available()];
@@ -408,11 +403,11 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
             }
             catch (FileNotFoundException ex)
             {
-                LOG.error("[Error]-[unable to find template file];[TemplateFile]-[" + templateName + "];[TemplatePath]-[" + referenceClass.getResource(templateName).getPath() + "]", ex);
+                LOG.log(Level.SEVERE, "[Error]-[unable to find template file];[TemplateFile]-[" + templateName + "];[TemplatePath]-[" + referenceClass.getResource(templateName).getPath() + "]", ex);
             }
             catch (IOException ex)
             {
-                LOG.error("Unable to read file contents jwangular template File", ex);
+                LOG.log(Level.SEVERE, "Unable to read file contents jwangular template File", ex);
             }
         }
         return TemplateScripts.get(templateName);
@@ -506,6 +501,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      * Gets the text string for the template script
      *
      * @param templateName
+     *
      * @return
      */
     public StringBuilder getTemplateScript(String templateName)
@@ -528,6 +524,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      * Get the map of all the template scripts
      *
      * @param template
+     *
      * @return A final HashMap
      */
     public StringBuilder renderTemplateScripts(String template)
@@ -616,6 +613,6 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
     public StringBuilder renderJavascript()
     {
         return new StringBuilder();
-        //return renderTemplateScripts("jwangular"); 
+        //return renderTemplateScripts("jwangular");
     }
 }

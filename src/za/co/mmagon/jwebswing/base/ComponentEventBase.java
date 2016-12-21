@@ -18,13 +18,15 @@ package za.co.mmagon.jwebswing.base;
 
 import com.fasterxml.jackson.annotation.*;
 import java.util.*;
-import za.co.mmagon.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
-import za.co.mmagon.jwebswing.base.interfaces.*;
-import za.co.mmagon.jwebswing.base.references.*;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.*;
+import java.util.logging.Level;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.interfaces.IComponentEventBase;
+import za.co.mmagon.jwebswing.base.references.CSSReference;
+import za.co.mmagon.jwebswing.base.references.JavascriptReference;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Enables Events in the Component Tree Hierarchy
@@ -45,7 +47,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
      * Logger for the Component
      */
     @JsonIgnore
-    private static final org.apache.log4j.Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("Component");
+    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("Component");
     /**
      * Serial Version for all Components and their compatibility
      *
@@ -131,7 +133,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
     {
         if (!ComponentEventBase.class.cast(event).getComponentType().equals(ComponentTypes.Event))
         {
-            LOG.warn("Tried to add a non event to the event collection");
+            LOG.log(Level.WARNING, "Tried to add a non event to the event collection");
         }
         else if (!getEvents().contains(event))
         {
@@ -139,7 +141,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
         }
         if (this instanceof ComponentHierarchyBase)
         {
-            ComponentHierarchyBase.class.cast(this).getPage().setAngularEnabled(true);
+            ComponentHierarchyBase.class.cast(this).getPage().getOptions().setAngularEnabled(true);
         }
         return (J) this;
     }

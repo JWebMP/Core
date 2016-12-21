@@ -1,6 +1,6 @@
 package za.co.mmagon.jwebswing.base.html;
 
-import za.co.mmagon.LoggerFactory;
+import za.co.mmagon.logger.LogFactory;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
@@ -49,7 +49,7 @@ public class Aside extends Component<NoChildren, NoAttributes, GlobalFeatures, G
     /**
      * Logger for the Component
      */
-    private static final org.apache.log4j.Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("Aside");
+    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("Aside");
     /**
      * Serial Version for all Components and their compatibility
      */

@@ -16,13 +16,14 @@
  */
 package za.co.mmagon.jwebswing.base.servlets;
 
+import za.co.mmagon.logger.LogFactory;
 import com.google.inject.*;
 import java.io.*;
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import org.apache.log4j.*;
-import za.co.mmagon.*;
+import java.util.logging.*;
+import java.util.logging.*;
 import za.co.mmagon.jwebswing.*;
 
 /**
@@ -34,7 +35,7 @@ import za.co.mmagon.jwebswing.*;
 public class JavaScriptServlet extends JWDefaultServlet
 {
 
-    private static final Logger log = LoggerFactory.getInstance().makeNewLoggerInstance("JavaScriptServlet");
+    private static final Logger log = LogFactory.getInstance().getLogger("JavaScriptServlet");
     private static final long serialVersionUID = 1L;
 
     /**
@@ -58,7 +59,7 @@ public class JavaScriptServlet extends JWDefaultServlet
             response.setContentType("application/javascript");
             out.println(scripts);
             Date dataTransferDate = new Date();
-            log.trace("[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + scripts.length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
+            log.log(Level.FINE,"[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + scripts.length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
         }
     }
 
@@ -80,7 +81,7 @@ public class JavaScriptServlet extends JWDefaultServlet
         processRequest(request, response);
         }catch(IOException | ServletException e)
         {
-            log.fatal("JavascriptServlet", e);
+            log.log(Level.SEVERE, "JavascriptServlet", e);
         }
     }
 }

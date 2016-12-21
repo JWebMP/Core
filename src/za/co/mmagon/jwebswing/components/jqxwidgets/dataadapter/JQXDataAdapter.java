@@ -18,7 +18,7 @@ package za.co.mmagon.jwebswing.components.jqxwidgets.dataadapter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.components.DataAdapter;
 import za.co.mmagon.jwebswing.components.jqxwidgets.dataadapter.options.JQXDataAdapterOptions;
@@ -100,7 +100,7 @@ public class JQXDataAdapter<A extends JQXDataAdapterSourceData>
         {
             //if (dataPacket == null)
             //{
-            //    log.error("No Data Packet", new ServletException("There Is No Data Packet To Send"));
+            //    log.log(Level.SEVERE,"No Data Packet", new ServletException("There Is No Data Packet To Send"));
             //}
             return new StringBuilder(JavaScriptPart.getJsonObjectMapper().writeValueAsString(dataPacket));
         }

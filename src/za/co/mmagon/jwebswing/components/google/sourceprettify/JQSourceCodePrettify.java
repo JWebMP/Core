@@ -1,8 +1,9 @@
 package za.co.mmagon.jwebswing.components.google.sourceprettify;
 
+import za.co.mmagon.logger.LogFactory;
 import java.io.*;
 import java.util.logging.*;
-import za.co.mmagon.*;
+import java.util.logging.*;
 import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.references.*;
@@ -20,7 +21,7 @@ import za.co.mmagon.jwebswing.base.references.*;
 public class JQSourceCodePrettify extends PreFormattedText implements GlobalChildren
 {
 
-    private static final org.apache.log4j.Logger log = LoggerFactory.getInstance().makeNewLoggerInstance("SourceCodePrettify");
+    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("SourceCodePrettify");
     private static final String rootSource = "c:/";
     private static final long serialVersionUID = 1L;
 
@@ -145,11 +146,11 @@ public class JQSourceCodePrettify extends PreFormattedText implements GlobalChil
         }
         catch (FileNotFoundException ex)
         {
-            log.error("File Not Found ", ex);
+            log.log(Level.SEVERE,"File Not Found ", ex);
         }
         catch (IOException ex)
         {
-            log.error("IO Error reading file", ex);
+            log.log(Level.SEVERE,"IO Error reading file", ex);
         }
 
         return sb;

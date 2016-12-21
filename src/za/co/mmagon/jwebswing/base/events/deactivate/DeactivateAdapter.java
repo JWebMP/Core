@@ -1,27 +1,26 @@
 package za.co.mmagon.jwebswing.base.events.deactivate;
 
-import za.co.mmagon.LoggerFactory;
-import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.Event;
-import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
-import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
-import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+import za.co.mmagon.logger.LogFactory;
+import java.util.logging.*;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.ajax.*;
+import za.co.mmagon.jwebswing.base.angular.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.*;
 
 /**
  * Handles all events. Over-ride methods.
  *
  * @author Marc Magon
  */
-public abstract class DeactivateAdapter extends Event 
+public abstract class DeactivateAdapter extends Event
         implements GlobalEvents
 {
 
     /**
      * Logger for the Component
      */
-    private static final org.apache.log4j.Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("DeactivateEvent");
+    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("DeactivateEvent");
     private static final long serialVersionUID = 1L;
     private DeactivateDirective directive;
 
@@ -44,8 +43,8 @@ public abstract class DeactivateAdapter extends Event
     {
         if (!isConfigured())
         {
-            getComponent().getPage().setjQueryEnabled(true);
-            getComponent().getPage().setAngularEnabled(true);
+            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            getComponent().getPage().getOptions().setAngularEnabled(true);
             getComponent().getPage().getAngular().addDirective(getDirective());
             component.addAttribute(AngularAttributes.ngRightClick, "perform($event," + renderVariables() + ");");
         }
@@ -84,7 +83,6 @@ public abstract class DeactivateAdapter extends Event
      */
     public abstract void onDeactivate(AjaxCall call, AjaxResponse response);
 
-    
     @Override
     public void fireEvent(AjaxCall call, AjaxResponse response)
     {
@@ -94,7 +92,7 @@ public abstract class DeactivateAdapter extends Event
         }
         catch (Exception e)
         {
-            LOG.error("Error In Firing Event", e);
+            LOG.log(Level.SEVERE,"Error In Firing Event", e);
         }
     }
 

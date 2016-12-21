@@ -1,17 +1,14 @@
 package za.co.mmagon.jwebswing.base.html;
 
-import za.co.mmagon.LoggerFactory;
+import java.util.logging.Level;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.BaseAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoClassAttribute;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoClosingBracket;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * The Base Component
@@ -49,7 +46,7 @@ public class Base extends Component<NoChildren, BaseAttributes, NoFeatures, NoEv
     /**
      * Logger for the Component
      */
-    private static final org.apache.log4j.Logger log = LoggerFactory.getInstance().makeNewLoggerInstance("Base");
+    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Base");
     /**
      * Serial Version for all Components and their compatibility
      */
@@ -83,7 +80,7 @@ public class Base extends Component<NoChildren, BaseAttributes, NoFeatures, NoEv
         }
         catch (Exception e)
         {
-            log.trace("Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.",e);
+            log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
         }
     }
 

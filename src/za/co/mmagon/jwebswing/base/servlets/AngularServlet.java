@@ -23,8 +23,8 @@ import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
+import java.util.logging.*;
+import za.co.mmagon.logger.LogFactory;
 import za.co.mmagon.jwebswing.Page;
 
 /**
@@ -35,7 +35,7 @@ import za.co.mmagon.jwebswing.Page;
 public class AngularServlet extends JWDefaultServlet
 {
 
-    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("AngularServlet");
+    private static final Logger LOG = LogFactory.getInstance().getLogger("AngularServlet");
     private static final long serialVersionUID = 1L;
 
     /**
@@ -52,7 +52,7 @@ public class AngularServlet extends JWDefaultServlet
         Page page = (Page) request.getSession().getAttribute("jwpage");
         if (page == null)
         {
-            LOG.error("No Page", new ServletException("No Page Currently Loaded"));
+            LOG.log(Level.SEVERE,"No Page", new ServletException("No Page Currently Loaded"));
             throw new ServletException("No Page Currently Loaded");
         }
         Date startDate = new Date();
@@ -64,7 +64,7 @@ public class AngularServlet extends JWDefaultServlet
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(output.toString());
             Date dataTransferDate = new Date();
-            LOG.trace("[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + output.toString().length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
+            LOG.log(Level.FINE,"[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + output.toString().length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
         }
     }
 
@@ -86,7 +86,7 @@ public class AngularServlet extends JWDefaultServlet
         }
         catch (Exception e)
         {
-            LOG.fatal("Do Post Error", e);
+            LOG.log(Level.SEVERE, "Do Post Error", e);
         }
     }
 
@@ -108,7 +108,7 @@ public class AngularServlet extends JWDefaultServlet
         }
         catch (Exception e)
         {
-            LOG.fatal("Angualr Do Get Error", e);
+            LOG.log(Level.SEVERE, "Angualr Do Get Error", e);
         }
     }
 }

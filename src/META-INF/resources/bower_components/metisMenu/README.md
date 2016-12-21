@@ -1,4 +1,4 @@
-# metisMenu
+# metismenu
 [![NPM version](https://badge.fury.io/js/metismenu.svg)](http://badge.fury.io/js/metismenu)
 [![Bower version](https://badge.fury.io/bo/metisMenu.svg)](http://badge.fury.io/bo/metisMenu)
 [![PHP version](https://badge.fury.io/ph/onokumus%2Fmetismenu.svg)](http://badge.fury.io/ph/onokumus%2Fmetismenu)
@@ -15,6 +15,7 @@
   * [Stopping list opening on certain elements](#stopping-list-opening-on-certain-elements)
 - [Options](#options)
     + [toggle](#toggle)
+    + [dispose](#dispose)
     + [activeClass](#activeclass)
     + [collapseClass](#collapseclass)
     + [collapseInClass](#collapseinclass)
@@ -67,41 +68,41 @@ $ tsd install metismenu
 
 ## Usage
 
-1. Include metisMenu StyleSheet
+1. Include metismenu StyleSheet
 
   ```html
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.5.2/metisMenu.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.6.1/metisMenu.min.css">
   ```
       OR
 
   ```html
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.metisMenu/2.5.2/metisMenu.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.metismenu/2.6.1/metisMenu.min.css">
   ```
 
 2. Include jQuery
 
   ```html
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   ```
       OR
   ```html
-  <script src="//cdn.jsdelivr.net/jquery/2.2.1/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/jquery/2.2.4/jquery.min.js"></script>
   ```
 
 3. Include metisMenu plugin's code
 
   ```html
-  <script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.5.2/metisMenu.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.6.1/metisMenu.min.js"></script>
   ```
       OR
   ```html
-  <script src="//cdn.jsdelivr.net/jquery.metisMenu/2.5.2/metisMenu.min.js"></script>
+  <script src="//cdn.jsdelivr.net/jquery.metismenu/2.6.1/metisMenu.min.js"></script>
   ```
 
-4. Add class `metisMenu` to unordered list
+4. Add class `metismenu` to unordered list
 
   ```html
-  <ul class="metisMenu" id="menu">
+  <ul class="metismenu" id="menu">
 
   </ul>
   ```
@@ -110,7 +111,7 @@ $ tsd install metismenu
   > Be sure to add `aria-expanded` to the element `a` and the following `ul`. This attribute explicitly defines the current state of the collapsible element to screen readers and similar assistive technologies. If the collapsible element is closed by default, it should have a value of `aria-expanded="false"`. If you've set the collapsible element's parent `li` element to be open by default using the `active` class, set `aria-expanded="true"` on the control instead. The plugin will automatically toggle this attribute based on whether or not the collapsible element has been opened or closed.
 
   ```html
-  <ul class="metisMenu" id="menu">
+  <ul class="metismenu" id="menu">
     <li class="active">
       <a href="#" aria-expanded="true">Menu 1</a>
       <ul aria-expanded="true">
@@ -126,8 +127,27 @@ $ tsd install metismenu
     ...
     </ul>
   ```
+6. Arrow Options
+> add `has-arrow` class to `a` element
+```html
+<ul class="metismenu" id="menu">
+  <li class="active">
+    <a class="has-arrow" href="#" aria-expanded="true">Menu 1</a>
+    <ul aria-expanded="true">
+    ...
+    </ul>
+  </li>
+  <li>
+    <a class="has-arrow" href="#" aria-expanded="false">Menu 2</a>
+    <ul aria-expanded="false">
+    ...
+    </ul>
+  </li>
+  ...
+  </ul>
+```
 
-6. Call the plugin:
+7. Call the plugin:
 
     ```javascript
     $("#menu").metisMenu();
@@ -152,6 +172,16 @@ For auto collapse support.
  $("#menu").metisMenu({
    toggle: false
  });
+```
+
+#### dispose
+Type: `String`
+Default: `null`
+
+For stop and destroy metisMenu.
+
+```javascript
+ $("#menu").metisMenu('dispose');
 ```
 
 #### activeClass
@@ -205,6 +235,7 @@ For double tap support.
    doubleTapToGo: true
  });
 ```
+> The doubleTapToGo option will be deprecated in the next release.
 
 #### preventDefault
 Type: `Boolean`
@@ -242,6 +273,8 @@ Contains a simple HTML file to demonstrate metisMenu plugin.
 ## Release History
 |**DATE**      |**VERSION**   |**CHANGES**|
 |--------------|--------------|-----------|
+|2016-12-06    |v2.6.1        |fix require.js|
+|2016-11-29    |v2.6.0        |dispose support|
 |2016-05-06    |v2.5.2        |fix Menu failed to remove collapsing class|
 |2016-05-06    |v2.5.1        |fixed bootstrap conflict|
 |2016-03-31    |v2.5.0        |Event support|
@@ -271,12 +304,9 @@ Contains a simple HTML file to demonstrate metisMenu plugin.
 
 ## License
 Copyright © 2016, [Osman Nuri Okumuş](https://github.com/onokumus).ş
-Released under the [MIT license](https://github.com/onokumus/metismenu/blob/master/LICENSE).
+Released under the [MIT license](LICENSE).
 
 ***
 
-[:coffee: Buy Me A Coffee](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XDRMNLWZFXTUJ)
+_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.2.0, on December 06, 2016._
 
-***
-
-_This file was generated by [verb](https://github.com/verbose/verb), v0.9.0, on May 06, 2016._

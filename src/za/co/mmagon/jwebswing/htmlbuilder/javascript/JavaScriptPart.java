@@ -16,37 +16,24 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.javascript;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
+import java.io.*;
 import java.lang.reflect.ParameterizedType;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
+import java.util.*;
+import java.util.logging.*;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Defines a section of a JavaScript part e.g. Position
  * <p>
  * @author mmagon
  * @param <J> Always this class reference
+ *
  * @since 2014/07/09
  */
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
@@ -54,7 +41,7 @@ import za.co.mmagon.LoggerFactory;
 public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
 {
 
-    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("JavaScriptPart");
+    private static final Logger LOG = LogFactory.getInstance().getLogger("JavaScriptPart");
     /**
      * Version 2
      */
@@ -77,16 +64,6 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
      */
     static
     {
-        /*
-         * if (!Page.getInstance().isTiny())
-         * //if (Page.getRunningEnvironment() == DevelopmentEnvironments.Development)
-         * {
-         * javascriptObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-         * jsonObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-         * functionObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-         * }
-         */
-
         javascriptObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         jsonObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         functionObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -98,15 +75,8 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
         jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
         functionObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
     }
-    /**
-     * Determines how to render the key
-     */
-    @JsonIgnore(true)
-    private final static String regexKey = "(\n  )\"([^\"\\\\]*(?:\\\\.[^\"\\\\]*)*)\"\\s*(:)";
-    @JsonIgnore(true)
-    private final static String regexKeyValue = "\"(\\$\\.[^\"\\\\]*(?:\\\\.[^\"\\\\]*)*)\"";
-    
-    @JsonProperty(value="$jwid")
+
+    @JsonProperty(value = "$jwid")
     private String ownerId;
 
     public JavaScriptPart()
@@ -137,11 +107,11 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
                 }
                 catch (com.fasterxml.jackson.databind.JsonMappingException mapException)
                 {
-                    LOG.trace("JSON Mapping Exception!", mapException);
+                    LOG.log(Level.FINE,"JSON Mapping Exception!", mapException);
                 }
                 catch (JsonProcessingException ex)
                 {
-                    LOG.fatal("Error Writing as Javascript!", ex);
+                    LOG.log(Level.SEVERE, "Error Writing as Javascript!", ex);
                 }
                 break;
             }
@@ -153,7 +123,7 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
                 }
                 catch (JsonProcessingException ex)
                 {
-                    LOG.fatal("Error Writing as JSON Data!", ex);
+                    LOG.log(Level.SEVERE, "Error Writing as JSON Data!", ex);
                 }
                 break;
             }
@@ -165,7 +135,7 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
                 }
                 catch (JsonProcessingException ex)
                 {
-                    LOG.fatal("Error Writing as Javascript Function!", ex);
+                    LOG.log(Level.SEVERE, "Error Writing as Javascript Function!", ex);
                 }
                 break;
             }
@@ -177,7 +147,7 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
                 }
                 catch (JsonProcessingException ex)
                 {
-                    LOG.fatal("Error Writing as Default!", ex);
+                    LOG.log(Level.SEVERE, "Error Writing as Default!", ex);
                 }
                 break;
             }
@@ -241,8 +211,10 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
 
     /**
      * Returns the object presented as a JSON strong
+     *
      * @param o
-     * @return 
+     *
+     * @return
      */
     public static String objectAsString(Object o)
     {
@@ -252,20 +224,20 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
         }
         catch (JsonProcessingException ex)
         {
-            LOG.error("Unable to Serialize as JSON", ex);
+            LOG.log(Level.SEVERE,"Unable to Serialize as JSON", ex);
             return "";
         }
         catch (Exception ex)
         {
-            LOG.error("Unable to Serialize as JSON", ex);
+            LOG.log(Level.SEVERE,"Unable to Serialize as JSON", ex);
             return "";
         }
     }
-    
+
     @JsonCreator
     public J factory(String jsonString)
     {
-        Class changeTo = ((Class)((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
+        Class changeTo = ((Class) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
         J pc = null;
         try
         {
@@ -273,30 +245,31 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
         }
         catch (JsonParseException e)
         {
-            LOG.error("JSON Parse Exception in creating Part",e);
+            LOG.log(Level.SEVERE,"JSON Parse Exception in creating Part", e);
         }
         catch (JsonMappingException e)
         {
-            LOG.error("JSON Mapping Exception in creating Part",e);
+            LOG.log(Level.SEVERE,"JSON Mapping Exception in creating Part", e);
         }
         catch (IOException e)
         {
-            LOG.error("IO Exception in creating Part",e);
+            LOG.log(Level.SEVERE,"IO Exception in creating Part", e);
         }
         return pc;
     }
-    
-    
+
     /**
      * Read direct from the stream
      *
      * @param <T>
-     * @param file the stream
+     * @param file  the stream
      * @param clazz
+     *
      * @return
+     *
      * @throws IOException
      */
-    public static<T> T From(InputStream file,Class<T> clazz) throws IOException
+    public static <T> T From(InputStream file, Class<T> clazz) throws IOException
     {
         T out = jsonObjectMapper.readValue(file, clazz);
         return out;
@@ -308,10 +281,12 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
      * @param <T>
      * @param file
      * @param clazz
+     *
      * @return
+     *
      * @throws IOException
      */
-    public static<T> T From(File file,Class<T> clazz) throws IOException
+    public static <T> T From(File file, Class<T> clazz) throws IOException
     {
         T out = jsonObjectMapper.readValue(file, clazz);
         return out;
@@ -323,10 +298,12 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
      * @param <T>
      * @param file
      * @param clazz
+     *
      * @return
+     *
      * @throws IOException
      */
-    public static<T> T From(Reader file,Class<T> clazz) throws IOException
+    public static <T> T From(Reader file, Class<T> clazz) throws IOException
     {
         T out = jsonObjectMapper.readValue(file, clazz);
         return out;
@@ -338,44 +315,50 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
      * @param <T>
      * @param content
      * @param clazz
+     *
      * @return
+     *
      * @throws IOException
      */
-    public static<T> T From(String content,Class<T> clazz) throws IOException
+    public static <T> T From(String content, Class<T> clazz) throws IOException
     {
         T out = jsonObjectMapper.readValue(content, clazz);
         return out;
     }
-    
+
     /**
      * Read from a URL
-     * 
+     *
      * @param <T>
      * @param content
      * @param clazz
+     *
      * @return
+     *
      * @throws IOException
      */
-    public static<T> T From(URL content,Class<T> clazz) throws IOException
+    public static <T> T From(URL content, Class<T> clazz) throws IOException
     {
         T out = jsonObjectMapper.readValue(content, clazz);
         return out;
     }
-    
+
     /**
      * Read direct from the stream
      *
      * @param <T>
-     * @param file the stream
+     * @param file  the stream
      * @param clazz
+     *
      * @return
+     *
      * @throws IOException
      */
-    public static<T> List<T> FromToList(InputStream file,Class<T> clazz) throws IOException
+    public static <T> List<T> FromToList(InputStream file, Class<T> clazz) throws IOException
     {
         T list = jsonObjectMapper.readValue(file, clazz);
         ArrayList<T> lists = new ArrayList<>();
-        lists.addAll(Arrays.asList((T[])list));
+        lists.addAll(Arrays.asList((T[]) list));
         return lists;
     }
 
@@ -385,14 +368,16 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
      * @param <T>
      * @param file
      * @param clazz
+     *
      * @return
+     *
      * @throws IOException
      */
-    public static<T> List<T> FromToList(File file,Class<T> clazz) throws IOException
+    public static <T> List<T> FromToList(File file, Class<T> clazz) throws IOException
     {
         T list = jsonObjectMapper.readValue(file, clazz);
         ArrayList<T> lists = new ArrayList<>();
-        lists.addAll(Arrays.asList((T[])list));
+        lists.addAll(Arrays.asList((T[]) list));
         return lists;
     }
 
@@ -402,14 +387,16 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
      * @param <T>
      * @param file
      * @param clazz
+     *
      * @return
+     *
      * @throws IOException
      */
-    public static<T> List<T> FromToList(Reader file,Class<T> clazz) throws IOException
+    public static <T> List<T> FromToList(Reader file, Class<T> clazz) throws IOException
     {
         T list = jsonObjectMapper.readValue(file, clazz);
         ArrayList<T> lists = new ArrayList<>();
-        lists.addAll(Arrays.asList((T[])list));
+        lists.addAll(Arrays.asList((T[]) list));
         return lists;
     }
 
@@ -419,37 +406,42 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
      * @param <T>
      * @param content
      * @param clazz
+     *
      * @return
+     *
      * @throws IOException
      */
-    public static<T> List<T> FromToList(String content,Class<T> clazz) throws IOException
+    public static <T> List<T> FromToList(String content, Class<T> clazz) throws IOException
     {
         T list = jsonObjectMapper.readValue(content, clazz);
         ArrayList<T> lists = new ArrayList<>();
-        lists.addAll(Arrays.asList((T[])list));
+        lists.addAll(Arrays.asList((T[]) list));
         return lists;
     }
-    
+
     /**
      * Read from a URL
-     * 
+     *
      * @param <T>
      * @param content
      * @param clazz
+     *
      * @return
+     *
      * @throws IOException
      */
-    public static<T> ArrayList<T> FromToList(URL content,Class<T> clazz) throws IOException
+    public static <T> ArrayList<T> FromToList(URL content, Class<T> clazz) throws IOException
     {
         T list = jsonObjectMapper.readValue(content, clazz);
         ArrayList<T> lists = new ArrayList<>();
-        lists.addAll(Arrays.asList((T[])list));
+        lists.addAll(Arrays.asList((T[]) list));
         return lists;
     }
 
     /**
      * Sets the JW ID to send if necessary
-     * @return 
+     *
+     * @return
      */
     public String getOwnerId()
     {
@@ -458,12 +450,12 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
 
     /**
      * Sets the JW ID to send if necessary
-     * @param ownerId 
+     *
+     * @param ownerId
      */
     public void setOwnerId(String ownerId)
     {
         this.ownerId = ownerId;
     }
 
-    
 }

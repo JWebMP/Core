@@ -43,7 +43,7 @@ public class PaceLoader extends Feature<JavaScriptPart, PaceLoader> implements L
     {
         super("PaceLoader");
         addJavaScriptReference(PaceLoaderReferencePool.PaceLoader.getJavaScriptReference());
-        addJavaScriptReference(PaceLoaderReferencePool.PaceLoaderDisableWebSockets.getJavaScriptReference());
+        //addJavaScriptReference(PaceLoaderReferencePool.PaceLoaderDisableWebSockets.getJavaScriptReference());
         addCssReference(theme.getCSSReference());
     }
 

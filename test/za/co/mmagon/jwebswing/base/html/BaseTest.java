@@ -23,7 +23,7 @@ public class BaseTest extends BaseTestClass
     {
         Page page = getPage();
         Base instance = new Base();
-        page.setBase(instance);
+        page.getPageFields().setBase(instance);
         instance.addAttribute(BaseAttributes.Target, "Target Frame");
         instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
         instance.setTiny(true);
@@ -38,7 +38,7 @@ public class BaseTest extends BaseTestClass
     {
         Page page = getPage();
         Base instance = new Base();
-        page.setBase(instance);
+        page.getPageFields().setBase(instance);
         instance.addAttribute(BaseAttributes.Target, "Target Frame");
         instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
         /**
@@ -56,7 +56,7 @@ public class BaseTest extends BaseTestClass
     {
         Page page = getPage();
         Base instance = new Base();
-        page.setBase(instance);
+        page.getPageFields().setBase(instance);
         instance.addAttribute(BaseAttributes.Target, "Target Frame");
         instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
         /**
@@ -74,7 +74,7 @@ public class BaseTest extends BaseTestClass
     {
         Page page = getPage();
         Base instance = new Base();
-        page.setBase(instance);
+        page.getPageFields().setBase(instance);
         instance.addAttribute(BaseAttributes.Target, "Target Frame");
         instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
         System.out.println(instance.toString(true));

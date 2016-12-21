@@ -16,11 +16,13 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import org.junit.*;
-import za.co.mmagon.*;
-import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.base.html.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import org.junit.Assert;
+import org.junit.Test;
+import za.co.mmagon.BaseTestClass;
+import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.base.html.Body;
+import za.co.mmagon.jwebswing.base.html.Comment;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
 
 /**
  *

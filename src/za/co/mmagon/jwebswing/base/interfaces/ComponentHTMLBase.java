@@ -17,17 +17,14 @@
 package za.co.mmagon.jwebswing.base.interfaces;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import za.co.mmagon.LoggerFactory;
 import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.ComponentEventBase;
 import za.co.mmagon.jwebswing.base.html.Comment;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.utilities.TextUtilities;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Denotes a component that has a tag. By default these can add events, features, variables etc
@@ -58,7 +55,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
      * Logger for the Component
      */
     @JsonIgnore
-    private static final org.apache.log4j.Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("ComponentTag");
+    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("ComponentTag");
     /**
      * Serial Version for all Components and their compatibility
      *
@@ -143,8 +140,9 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
             return null;
         }
         setCurrentTabIndents(tabCount);
-        StringBuilder sb = new StringBuilder();
-
+        
+        StringBuffer sb = new StringBuffer();
+        
         StringBuilder beforeTag = renderBeforeTag();
         if (beforeTag != null && beforeTag.length() > 0)
         {
@@ -156,7 +154,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 
         if (isInlineClosingTag())
         {
-            return sb;
+            return new StringBuilder(sb);
         }
 
         StringBuilder rawText = getText(0);
@@ -180,7 +178,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
             sb.append(afterTag);
         }
 
-        return sb;
+        return new StringBuilder(sb.toString());
     }
 
     /**

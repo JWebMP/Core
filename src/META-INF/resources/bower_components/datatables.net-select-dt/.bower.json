@@ -35,12 +35,12 @@
   ],
   "homepage": "https://datatables.net",
   "license": "MIT",
-  "version": "1.2.0",
-  "_release": "1.2.0",
+  "version": "1.2.1",
+  "_release": "1.2.1",
   "_resolution": {
     "type": "version",
-    "tag": "1.2.0",
-    "commit": "22e0596569ae4b3979f7863638d1d406cb5691d3"
+    "tag": "1.2.1",
+    "commit": "c720f851df4112c960cff28e675dd73ab60d37a4"
   },
   "_source": "https://github.com/DataTables/Dist-DataTables-Select-DataTables.git",
   "_target": "^1.2.0",

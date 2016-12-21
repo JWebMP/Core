@@ -1,5 +1,5 @@
 /**
- * Globalize Runtime v1.1.2
+ * Globalize Runtime v1.2.1
  *
  * http://github.com/jquery/globalize
  *
@@ -7,10 +7,10 @@
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2016-11-08T12:09Z
+ * Date: 2016-12-14T18:34Z
  */
 /*!
- * Globalize Runtime v1.1.2 2016-11-08T12:09Z Released under the MIT license
+ * Globalize Runtime v1.2.1 2016-12-14T18:34Z Released under the MIT license
  * http://git.io/TrdQbw
  */
 (function( root, factory ) {

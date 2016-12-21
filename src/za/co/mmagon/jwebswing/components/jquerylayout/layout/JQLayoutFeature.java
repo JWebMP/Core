@@ -1,8 +1,8 @@
 package za.co.mmagon.jwebswing.components.jquerylayout.layout;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
+import java.util.logging.*;
+import za.co.mmagon.logger.LogFactory;
 import za.co.mmagon.jwebswing.Feature;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.components.pools.jqueryui.JQUIReferencePool;
@@ -17,7 +17,7 @@ import za.co.mmagon.jwebswing.components.pools.jquerylayout.JQLayoutReferencePoo
 public class JQLayoutFeature extends Feature<JQLayoutOptions, JQLayoutFeature>
 {
 
-    private static final Logger log = LoggerFactory.getInstance().makeNewLoggerInstance("JWLayout Feature");
+    private static final Logger log = LogFactory.getInstance().getLogger("JWLayout Feature");
     private static final long serialVersionUID = 1L;
     private String layoutID;
     private String variableID;

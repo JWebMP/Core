@@ -6,7 +6,7 @@
     "type": "commit",
     "commit": "fadf2b312a05040436451c64bbfaf4814bc62c56"
   },
-  "_source": "git://github.com/jquery/jquery-ui.git",
+  "_source": "https://github.com/jquery/jquery-ui.git",
   "_target": "fadf2b312a05040436451c64bbfaf4814bc62c56",
   "_originalSource": "jquery/jquery-ui"
 }

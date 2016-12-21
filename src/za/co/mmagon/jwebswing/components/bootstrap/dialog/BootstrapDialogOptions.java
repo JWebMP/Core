@@ -1,29 +1,24 @@
 /*
- Copyright (C) 2015 GedMarc
+ * Copyright (C) 2015 GedMarc
  *
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package za.co.mmagon.jwebswing.components.bootstrap.dialog;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
-import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
+import com.fasterxml.jackson.annotation.*;
+import za.co.mmagon.jwebswing.base.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
 
 /**
  * All the options for the tooltip library
@@ -36,6 +31,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
  */
 public class BootstrapDialogOptions extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     private BootstrapDialogTypes type;// BootstrapDialogType.TYPE_PRIMARY,
     private BootstrapDialogSizes size;//: BootstrapDialog.SIZE_NORMAL,
@@ -58,19 +55,17 @@ public class BootstrapDialogOptions extends JavaScriptPart
     private String data;
     private Boolean autoDestroy;
 
+    /**
+     * Default constructor
+     */
     public BootstrapDialogOptions()
     {
 
     }
 
     /**
-     * Give your dialog a specific look,
-     * BootstrapDialog.TYPE_DEFAULT or type-default
-     * BootstrapDialog.TYPE_INFO or type-info
-     * BootstrapDialog.TYPE_PRIMARY or type-primary (default)
-     * BootstrapDialog.TYPE_SUCCESS or type-success
-     * BootstrapDialog.TYPE_WARNING or type-warning
-     * BootstrapDialog.TYPE_DANGER or type-danger
+     * Give your dialog a specific look, BootstrapDialog.TYPE_DEFAULT or type-default BootstrapDialog.TYPE_INFO or type-info BootstrapDialog.TYPE_PRIMARY or type-primary (default)
+     * BootstrapDialog.TYPE_SUCCESS or type-success BootstrapDialog.TYPE_WARNING or type-warning BootstrapDialog.TYPE_DANGER or type-danger
      *
      * @return
      */
@@ -80,13 +75,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
     }
 
     /**
-     * Give your dialog a specific look,
-     * BootstrapDialog.TYPE_DEFAULT or type-default
-     * BootstrapDialog.TYPE_INFO or type-info
-     * BootstrapDialog.TYPE_PRIMARY or type-primary (default)
-     * BootstrapDialog.TYPE_SUCCESS or type-success
-     * BootstrapDialog.TYPE_WARNING or type-warning
-     * BootstrapDialog.TYPE_DANGER or type-danger
+     * Give your dialog a specific look, BootstrapDialog.TYPE_DEFAULT or type-default BootstrapDialog.TYPE_INFO or type-info BootstrapDialog.TYPE_PRIMARY or type-primary (default)
+     * BootstrapDialog.TYPE_SUCCESS or type-success BootstrapDialog.TYPE_WARNING or type-warning BootstrapDialog.TYPE_DANGER or type-danger
      *
      * @param type
      */
@@ -96,9 +86,7 @@ public class BootstrapDialogOptions extends JavaScriptPart
     }
 
     /**
-     * BootstrapDialog.SIZE_NORMAL or size-normal (default)
-     * BootstrapDialog.SIZE_WIDE or size-wide
-     * BootstrapDialog.SIZE_LARGE or size-large
+     * BootstrapDialog.SIZE_NORMAL or size-normal (default) BootstrapDialog.SIZE_WIDE or size-wide BootstrapDialog.SIZE_LARGE or size-large
      *
      * @return
      */
@@ -108,9 +96,7 @@ public class BootstrapDialogOptions extends JavaScriptPart
     }
 
     /**
-     * BootstrapDialog.SIZE_NORMAL or size-normal (default)
-     * BootstrapDialog.SIZE_WIDE or size-wide
-     * BootstrapDialog.SIZE_LARGE or size-large
+     * BootstrapDialog.SIZE_NORMAL or size-normal (default) BootstrapDialog.SIZE_WIDE or size-wide BootstrapDialog.SIZE_LARGE or size-large
      *
      * @param size
      */
@@ -214,9 +200,7 @@ public class BootstrapDialogOptions extends JavaScriptPart
     /**
      * When set to true, you can close the dialog by:
      * <p>
-     * Clicking the close icon in dialog header.
-     * Clicking outside the dialog.
-     * ESC key.
+     * Clicking the close icon in dialog header. Clicking outside the dialog. ESC key.
      *
      * @return
      */
@@ -228,9 +212,7 @@ public class BootstrapDialogOptions extends JavaScriptPart
     /**
      * When set to true, you can close the dialog by:
      * <p>
-     * Clicking the close icon in dialog header.
-     * Clicking outside the dialog.
-     * ESC key.
+     * Clicking the close icon in dialog header. Clicking outside the dialog. ESC key.
      *
      * @param closable
      */
@@ -241,7 +223,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Whether or not to close by the backdrop
-     * @return 
+     *
+     * @return
      */
     public Boolean getCloseByBackdrop()
     {
@@ -250,7 +233,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Sets to close by the backdrop or not
-     * @param closeByBackdrop 
+     *
+     * @param closeByBackdrop
      */
     public void setCloseByBackdrop(Boolean closeByBackdrop)
     {
@@ -259,7 +243,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Sets to close by keyboard press
-     * @return 
+     *
+     * @return
      */
     public Boolean getCloseByKeyboard()
     {
@@ -268,7 +253,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Sets close by keyboard
-     * @param closeByKeyboard 
+     *
+     * @param closeByKeyboard
      */
     public void setCloseByKeyboard(Boolean closeByKeyboard)
     {
@@ -277,7 +263,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Sets the close icon
-     * @return 
+     *
+     * @return
      */
     public String getCloseIcon()
     {
@@ -286,7 +273,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Sets the close icon
-     * @param closeIcon 
+     *
+     * @param closeIcon
      */
     public void setCloseIcon(String closeIcon)
     {
@@ -295,7 +283,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Sets the spin icon
-     * @return 
+     *
+     * @return
      */
     public String getSpinicon()
     {
@@ -304,7 +293,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Sets the spin icon
-     * @param spinicon 
+     *
+     * @param spinicon
      */
     public void setSpinicon(String spinicon)
     {
@@ -313,7 +303,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Whether or not to auto destroy the dialog
-     * @return 
+     *
+     * @return
      */
     public Boolean getAutodestroy()
     {
@@ -322,7 +313,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Whether or not to auto destroy
-     * @param autodestroy 
+     *
+     * @param autodestroy
      */
     public void setAutodestroy(Boolean autodestroy)
     {
@@ -331,7 +323,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Sets if the dialog is drag-able
-     * @return 
+     *
+     * @return
      */
     public Boolean getDraggable()
     {
@@ -340,7 +333,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Sets if the dialog is drag-able
-     * @param draggable 
+     *
+     * @param draggable
      */
     public void setDraggable(Boolean draggable)
     {
@@ -349,7 +343,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Sets if the dialog must animate
-     * @return 
+     *
+     * @return
      */
     public Boolean getAnimate()
     {
@@ -358,7 +353,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Sets if the dialog must animate
-     * @param animate 
+     *
+     * @param animate
      */
     public void setAnimate(Boolean animate)
     {
@@ -367,7 +363,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Sets the aria description
-     * @return 
+     *
+     * @return
      */
     public String getDescription()
     {
@@ -376,7 +373,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Sets the dialog description or aria description
-     * @param description 
+     *
+     * @param description
      */
     public void setDescription(String description)
     {
@@ -385,7 +383,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Gets the tab index
-     * @return 
+     *
+     * @return
      */
     public Integer getTabindex()
     {
@@ -394,7 +393,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Sets the tab index
-     * @param tabindex 
+     *
+     * @param tabindex
      */
     public void setTabindex(Integer tabindex)
     {
@@ -403,7 +403,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Sets any data being passed into the dialog
-     * @return 
+     *
+     * @return
      */
     public String getData()
     {
@@ -412,7 +413,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Sets any data being passed into the dialog
-     * @param data 
+     *
+     * @param data
      */
     public void setData(String data)
     {
@@ -421,7 +423,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Gets auto destroy
-     * @return 
+     *
+     * @return
      */
     public Boolean getAutoDestroy()
     {
@@ -430,7 +433,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Sets auto destroy
-     * @param autoDestroy 
+     *
+     * @param autoDestroy
      */
     public void setAutoDestroy(Boolean autoDestroy)
     {

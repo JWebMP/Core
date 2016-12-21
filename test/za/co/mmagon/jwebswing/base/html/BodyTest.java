@@ -17,10 +17,10 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import static org.junit.Assert.assertEquals;
-import org.junit.*;
-import za.co.mmagon.*;
-import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.generics.*;
+import org.junit.Test;
+import za.co.mmagon.BaseTestClass;
+import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.generics.WebReference;
 
 /**
  *
@@ -55,7 +55,7 @@ public class BodyTest extends BaseTestClass
     public void testLoader()
     {
         resetBody();
-        p.setPaceEnabled(true);
+        p.getOptions().setPaceEnabled(true);
         b.add(new Comment("asdf"));
         WebReference.setIsLocal(true);
         //b.addFeature(new PaceLoader(PaceTheme.Bounce));
@@ -76,7 +76,7 @@ public class BodyTest extends BaseTestClass
     public void testSetGenerateJQuery()
     {
         resetBody();
-        p.setjQueryEnabled(true);
+        p.getOptions().setjQueryEnabled(true);
         b.add(new Comment("meh"));
         WebReference.setIsLocal(true);
         System.out.println(p.toString(true));
@@ -94,7 +94,7 @@ public class BodyTest extends BaseTestClass
     public void testSetGenerateJQueryRemote()
     {
         resetBody();
-        p.setjQueryEnabled(true);
+        p.getOptions().setjQueryEnabled(true);
         b.add(new Comment("meh"));
         WebReference.setIsLocal(false);
         System.out.println(p.toString(true));
@@ -112,7 +112,7 @@ public class BodyTest extends BaseTestClass
     public void testSetGenerateUI()
     {
         resetBody();
-        p.setjQueryUIEnabled(true);
+        p.getOptions().setjQueryUIEnabled(true);
         WebReference.setIsLocal(false);
         System.out.println(p.toString(true));
         assertEquals("<!DOCTYPE html>\n"
@@ -132,8 +132,8 @@ public class BodyTest extends BaseTestClass
     {
         Page p = getPage();
         p.setTiny(false);
-        p.setBootstrapEnabled(true);
-        p.setTitle("title");
+        p.getOptions().setBootstrapEnabled(true);
+        p.getPageFields().setTitle("title");
         System.out.println(p.toString(true));
 
         assertEquals("<!DOCTYPE html>\n"
@@ -158,7 +158,7 @@ public class BodyTest extends BaseTestClass
     public void testAngular()
     {
         Page p = getPage();
-        p.setAngularEnabled(true);
+        p.getOptions().setAngularEnabled(true);
         p.getBody().add(new Comment("meh"));
         //p.getBody().preConfigure();
         System.out.println(p.toString());

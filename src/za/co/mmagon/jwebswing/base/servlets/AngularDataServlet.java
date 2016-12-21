@@ -25,8 +25,8 @@ import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
+import java.util.logging.*;
+import za.co.mmagon.logger.LogFactory;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
@@ -46,7 +46,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTy
 public class AngularDataServlet extends JWDefaultServlet
 {
 
-    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("AngularDataServlet");
+    private static final Logger LOG = LogFactory.getInstance().getLogger("AngularDataServlet");
     private static final long serialVersionUID = 1L;
 
     /**
@@ -69,7 +69,7 @@ public class AngularDataServlet extends JWDefaultServlet
         ajaxCall.setEventType(EventTypes.data);
         if (componentId == null || componentId.isEmpty())
         {
-            LOG.trace("[SessionID]-[" + request.getSession().getId() + "];" + "[Security]-[Component ID Incorrect]");
+            LOG.log(Level.FINE,"[SessionID]-[" + request.getSession().getId() + "];" + "[Security]-[Component ID Incorrect]");
         }
 
         Page page = (Page) request.getAttribute("jwpage");
@@ -77,7 +77,7 @@ public class AngularDataServlet extends JWDefaultServlet
         ajaxCall.setComponent(triggerComponent);
         if (triggerComponent == null)
         {
-            LOG.error("[SessionID]-[" + request.getSession().getId() + "];" + "[Security]-[Invalid Component Specified]");
+            LOG.log(Level.SEVERE,"[SessionID]-[" + request.getSession().getId() + "];" + "[Security]-[Invalid Component Specified]");
             throw new ServletException("Component could not be found to process any events.");
         }
         HashMap<String, JavaScriptPart> angs = ajaxCall.getComponent().getAngularObjectsAll();
@@ -128,7 +128,7 @@ public class AngularDataServlet extends JWDefaultServlet
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(respJson.toString());
             Date dataTransferDate = new Date();
-            LOG.trace("[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + respJson.toString().length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
+            LOG.log(Level.FINE,"[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + respJson.toString().length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
         }
     }
 
@@ -149,7 +149,7 @@ public class AngularDataServlet extends JWDefaultServlet
         processRequest(request, response);
         }catch(Exception e)
         {
-            LOG.fatal("Angular Data Servlet Do Post", e);
+            LOG.log(Level.SEVERE, "Angular Data Servlet Do Post", e);
         }
     }
 

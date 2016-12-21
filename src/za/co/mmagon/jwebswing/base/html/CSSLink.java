@@ -1,18 +1,17 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
+import java.util.logging.Level;
+import java.util.logging.*;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.CSSLinkAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * The Header CSSLink Component
@@ -48,7 +47,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 public class CSSLink extends Component<NoChildren, CSSLinkAttributes, NoFeatures, NoEvents, Component> implements NoIDTag, NoClosingTag, HeadChildren
 {
 
-    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("<link>");
+    private static final Logger LOG = LogFactory.getInstance().getLogger("<link>");
     private static final long serialVersionUID = 1L;
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private boolean themeLink;
@@ -102,15 +101,12 @@ public class CSSLink extends Component<NoChildren, CSSLinkAttributes, NoFeatures
         }
         catch (Exception e)
         {
-            LOG.warn("Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.",e);
+            LOG.log(Level.WARNING, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
         }
 
         //add theme class name
         /*
-         * if (isThemeLink())
-         * {
-         * addClass(Theme.themeClassIdentifier);
-         * }
+         * if (isThemeLink()) { addClass(Theme.themeClassIdentifier); }
          */
         //add theme class name
         if (isPrettifyTheme())
@@ -122,8 +118,7 @@ public class CSSLink extends Component<NoChildren, CSSLinkAttributes, NoFeatures
     /**
      * Is a valid equals clause
      * <p>
-     * @param obj
-     *            <p>
+     * @param obj <p>
      * @return
      */
     @Override
@@ -172,8 +167,7 @@ public class CSSLink extends Component<NoChildren, CSSLinkAttributes, NoFeatures
     }
 
     /**
-     * Gets the prettify theme
-     * TODO remove this
+     * Gets the prettify theme TODO remove this
      *
      * @deprecated
      * @return
@@ -188,8 +182,7 @@ public class CSSLink extends Component<NoChildren, CSSLinkAttributes, NoFeatures
     }
 
     /**
-     * Sets the prettify theme if required
-     * TODO remove this
+     * Sets the prettify theme if required TODO remove this
      *
      * @deprecated
      *

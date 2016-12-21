@@ -3,8 +3,8 @@ package za.co.mmagon.jwebswing.base.html;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.StringTokenizer;
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
+import java.util.logging.Level;
+import java.util.logging.*;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.attributes.AreaAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
@@ -15,6 +15,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.components.jqimagemap.imagemap.JQImageMap;
 import za.co.mmagon.jwebswing.components.jqimagemap.imagemap.JQMapInteractiveFeature;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Browser Support<p>
@@ -46,7 +47,7 @@ public class Area extends ComponentHierarchyBase<AreaChildren, AreaAttributes, G
         implements MapChildren, Serializable
 {
 
-    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("Area");
+    private static final Logger LOG = LogFactory.getInstance().getLogger("Area");
     /**
      * Serial Version for all Components and their compatibility
      */
@@ -151,6 +152,7 @@ public class Area extends ComponentHierarchyBase<AreaChildren, AreaAttributes, G
      * Splits the co-ordinates into an array
      *
      * @param coordinates The Co-ordinate string
+     *
      * @return The integer array of all the points
      */
     public static synchronized int[][] getArrayFromStringCoordinates(String coordinates)
@@ -171,7 +173,7 @@ public class Area extends ComponentHierarchyBase<AreaChildren, AreaAttributes, G
             }
             catch (NullPointerException npe)
             {
-                LOG.warn("Area format incorrect",npe);
+                LOG.log(Level.WARNING, "Area format incorrect", npe);
             }
         }
         return coords;

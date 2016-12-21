@@ -17,11 +17,18 @@
 package za.co.mmagon.jwebswing.base.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
+import java.util.logging.*;
+import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
+import za.co.mmagon.jwebswing.base.servlets.interfaces.IDataComponent;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Provides the data for a specific component
@@ -37,16 +44,42 @@ public class DataServlet extends JWDefaultServlet
     /**
      * The Servlet base logger
      */
-    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance("DataServlet");
+    private static final Logger log = LogFactory.getInstance().getLogger("DataServlet");
+    private static final long serialVersionUID = 1L;
 
     public DataServlet()
     {
 
     }
 
-    public void processRequest(HttpServletRequest req, HttpServletResponse resp)
+    public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, MissingComponentException
     {
+        Date startDate = new Date();
+        StringBuilder responseString = new StringBuilder();
 
+        Page page = (Page) request.getSession().getAttribute("jwpage");
+        ComponentHierarchyBase hb = page.getComponentCache().get(request.getParameter("component"));
+        if (hb == null)
+        {
+            throw new MissingComponentException("Unable to find the specified component : " + request.getParameter("component"));
+        }
+        StringBuilder output = new StringBuilder();
+        if (IDataComponent.class.isAssignableFrom(hb.getClass()))
+        {
+            IDataComponent dc = (IDataComponent) hb;
+            output.append(JavaScriptPart.objectAsString(dc.getData()));
+        }
+        responseString.append(output);
+
+        Date endDate = new Date();
+        try (PrintWriter out = response.getWriter())
+        {
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            out.println(responseString);
+            Date dataTransferDate = new Date();
+            log.log(Level.FINE,"[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + responseString.length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
+        }
     }
 
     @Override
@@ -54,11 +87,20 @@ public class DataServlet extends JWDefaultServlet
     {
         try
         {
-            super.doGet(req, resp);
+            validate(true, req);
+            processRequest(req, resp);
+        }
+        catch (MissingComponentException e)
+        {
+            log.log(Level.SEVERE, "Unable to find the component", e);
+        }
+        catch (IOException | ServletException e)
+        {
+            log.log(Level.SEVERE, "Unable to deliver data", e);
         }
         catch (Exception e)
         {
-            LOG.fatal("do get error", e);
+            log.log(Level.SEVERE, "Unable to deliver data", e);
         }
     }
 }

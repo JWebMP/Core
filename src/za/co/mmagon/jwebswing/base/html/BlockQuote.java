@@ -18,6 +18,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.BlockQuoteAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
@@ -53,8 +54,10 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * @author GedMarc
  */
-public class BlockQuote extends Component<ParagraphChildren, BlockQuoteAttributes, GlobalFeatures, GlobalEvents, BlockQuote>
+public class BlockQuote extends Component<ParagraphChildren, BlockQuoteAttributes, GlobalFeatures, GlobalEvents, BlockQuote> implements GlobalChildren
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new Block Quote Item
@@ -63,5 +66,19 @@ public class BlockQuote extends Component<ParagraphChildren, BlockQuoteAttribute
     {
         super(ComponentTypes.BlockQuotes);
     }
+    
+    public BlockQuote(String text)
+    {
+        this();
+        setText(text);
+    }
 
+    public BlockQuote(String text, String footer)
+    {
+        this();
+        add(text);
+        Div d = new Div();
+        d.setTag("footer");
+        d.setText(footer);
+    }
 }

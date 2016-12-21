@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2016 GedMarc
  *
@@ -75,7 +76,7 @@ public class AngularFeatureTest extends BaseTestClass
     {
         Page p = getPage();
         Body b = p.getBody();
-        p.setAngularEnabled(true);
+        p.getOptions().setAngularEnabled(true);
         System.out.println(p.toString(true));
     }
 }

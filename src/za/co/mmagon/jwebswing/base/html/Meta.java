@@ -1,19 +1,16 @@
 package za.co.mmagon.jwebswing.base.html;
 
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
+import java.util.logging.Level;
+import java.util.logging.*;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.attributes.MetaAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoClassAttribute;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * The Meta Component.
@@ -48,7 +45,7 @@ public class Meta extends ComponentHierarchyBase<NoChildren, MetaAttributes, NoF
         implements NoIDTag, NoClosingTag, HeadChildren, NoClassAttribute, NoNewLineBeforeClosingTag
 {
 
-    private static Logger logger = LoggerFactory.getInstance().makeNewLoggerInstance("<META>");
+    private static Logger logger = LogFactory.getInstance().getLogger("<META>");
 
     /**
      * Constructs an empty Meta tag
@@ -139,7 +136,7 @@ public class Meta extends ComponentHierarchyBase<NoChildren, MetaAttributes, NoF
         }
         catch (Exception e)
         {
-            logger.trace("Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.",e);
+            logger.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
         }
     }
 

@@ -1,17 +1,16 @@
 package za.co.mmagon.jwebswing.base.html;
 
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
+import java.util.logging.Level;
+import java.util.logging.*;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.attributes.ScriptAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoClassAttribute;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * The Base Component<p>
@@ -63,7 +62,7 @@ public class Script extends ComponentHierarchyBase<NoChildren, ScriptAttributes,
         implements NoIDTag, HeadChildren, NoClassAttribute
 {
 
-    private static final Logger logger = LoggerFactory.getInstance().makeNewLoggerInstance("<SCRIPT>");
+    private static final Logger logger = LogFactory.getInstance().getLogger("<SCRIPT>");
     private static final long serialVersionUID = 1L;
     private JavascriptReference reference;
 
@@ -181,7 +180,7 @@ public class Script extends ComponentHierarchyBase<NoChildren, ScriptAttributes,
             }
             catch (Exception e)
             {
-                logger.trace("Unable to determine whether XHTML or HTML. Skipping CDATA Implementation",e);
+                logger.log(Level.FINE, "Unable to determine whether XHTML or HTML. Skipping CDATA Implementation", e);
             }
         }
     }

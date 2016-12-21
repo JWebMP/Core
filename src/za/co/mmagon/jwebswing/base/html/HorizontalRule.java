@@ -16,15 +16,14 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import za.co.mmagon.LoggerFactory;
+import java.util.logging.Level;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoClassAttribute;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Definition and Usage
@@ -54,7 +53,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 public class HorizontalRule extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, HorizontalRule> implements NoIDTag, NoClassAttribute
 {
 
-    private static final org.apache.log4j.Logger log = LoggerFactory.getInstance().makeNewLoggerInstance("HR");
+    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("HR");
     private static final HorizontalRule hr = new HorizontalRule();
 
     private HorizontalRule()
@@ -109,7 +108,7 @@ public class HorizontalRule extends Component<NoChildren, NoAttributes, NoFeatur
         }
         catch (Exception e)
         {
-            log.trace("Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.",e);
+            log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
         }
     }
 
