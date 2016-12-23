@@ -14,28 +14,33 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package za.co.mmagon.jwebswing.components.jstree.options.functions;
 
-package za.co.mmagon.jwebswing.components.jstree.themes;
-
-import za.co.mmagon.jwebswing.base.references.CSSReference;
-import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptLiteralFunction;
 
 /**
  *
  * @author GedMarc
- * @since Aug 27, 2016
+ * @since 22 Dec 2016
  * @version 1.0
- * 
+ *
  */
-public class JSTreeDefaultDarkTheme extends Theme implements JSTreeTheme
+public class JSTreeCoreDataFunction extends JavascriptLiteralFunction
 {
 
     private static final long serialVersionUID = 1L;
 
-    public JSTreeDefaultDarkTheme ()
+    public JSTreeCoreDataFunction()
     {
-        super("JSTreeDefaulDarkTheme", "");
-        getCssReferences().add(new CSSReference("JSTreeDefaultDarkTheme", 3.32, "bower_components/jstree/dist/themes/default-dark/style.css"));
-        
+        getFunctionArugments().add("node");
+        getFunctionArugments().add("donefunction");
+    }
+
+    @Override
+    public StringBuilder getLiteralFunction()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("return node;");
+        return sb;
     }
 }

@@ -27,8 +27,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
  */
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class FunctionPart extends JavascriptLiteralFunction
+public abstract class FunctionPart extends JavascriptLiteralFunction
 {
+
+    private static final long serialVersionUID = 1L;
 
     public FunctionPart()
     {

@@ -25,11 +25,19 @@ public class MomentFeature extends Feature<MomentOptions, MomentFeature> impleme
     public MomentFeature(Component forComponent)
     {
         super("MomentJS");
+        forComponent.getPage().getAngular().addModule(new MomentAngularModule(forComponent.getPage()));
         setComponent(forComponent);
         getJavascriptReferences().add(MomentReferencePool.MomentReference.getJavaScriptReference());
         getJavascriptReferences().add(MomentReferencePool.MomentAngularReference.getJavaScriptReference());
     }
 
+    @Override
+    public void preConfigure()
+    {
+        super.preConfigure(); 
+    }
+
+    
     /**
      * No Options
      * <p>

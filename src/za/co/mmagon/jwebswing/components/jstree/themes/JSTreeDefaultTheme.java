@@ -30,6 +30,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
 public class JSTreeDefaultTheme extends Theme implements JSTreeTheme
 {
 
+    private static final long serialVersionUID = 1L;
+
     public JSTreeDefaultTheme ()
     {
         super("JSTreeDefaulTheme", "");

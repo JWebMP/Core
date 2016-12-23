@@ -25,7 +25,8 @@ import java.io.*;
 import java.lang.reflect.ParameterizedType;
 import java.net.URL;
 import java.util.*;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -59,6 +60,7 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
      */
     private static final ObjectMapper functionObjectMapper = new ObjectMapper();
 
+    
     /*
      * Pretty print config
      */

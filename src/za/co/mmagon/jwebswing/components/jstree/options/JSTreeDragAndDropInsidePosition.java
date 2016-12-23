@@ -14,28 +14,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-package za.co.mmagon.jwebswing.components.jstree.themes;
-
-import za.co.mmagon.jwebswing.base.references.CSSReference;
-import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
+package za.co.mmagon.jwebswing.components.jstree.options;
 
 /**
  *
  * @author GedMarc
- * @since Aug 27, 2016
+ * @since 23 Dec 2016
  * @version 1.0
- * 
+ *
  */
-public class JSTreeDefaultDarkTheme extends Theme implements JSTreeTheme
+public enum JSTreeDragAndDropInsidePosition
 {
+    First,
+    Last;
 
-    private static final long serialVersionUID = 1L;
-
-    public JSTreeDefaultDarkTheme ()
+    @Override
+    public String toString()
     {
-        super("JSTreeDefaulDarkTheme", "");
-        getCssReferences().add(new CSSReference("JSTreeDefaultDarkTheme", 3.32, "bower_components/jstree/dist/themes/default-dark/style.css"));
-        
+        return name().toLowerCase();
     }
 }

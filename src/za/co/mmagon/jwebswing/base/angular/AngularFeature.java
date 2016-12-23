@@ -82,11 +82,11 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
     /**
      * The name of this angular application
      */
-    private String appName = "jwApp";
+    private static String appName = "jwApp";
     /**
      * The name of the default controller for this application (rendered last)
      */
-    private String controllerName = "jwController";
+    private static String controllerName = "jwController";
 
     /**
      * All the angular variables
@@ -100,7 +100,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      */
     public AngularFeature(Component component)
     {
-        this(component, "jwApp", "jwController");
+        this(component, appName, controllerName);
     }
 
     /**
@@ -156,8 +156,8 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
                 getComponent().add(new Comment("Angular Application"));
                 compileTemplate(AngularFeature.class, "jwangular");
             }
-            setConfigured(true);
         }
+        super.preConfigure();
     }
 
     /**

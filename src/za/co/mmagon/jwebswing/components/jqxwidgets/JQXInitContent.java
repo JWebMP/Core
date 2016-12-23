@@ -31,10 +31,11 @@ public class JQXInitContent extends JavascriptLiteralFunction
 {
 
     private static final long serialVersionUID = 1L;
+    private StringBuilder function;
 
     public JQXInitContent(JQXRibbon ribbon)
     {
-        setFunctionArugments("index");
+        getFunctionArugments().add("index");
         StringBuilder indexInits = new StringBuilder();
         String ifString = "if (index == ";
         String ifStart2 = ") {";
@@ -54,21 +55,22 @@ public class JQXInitContent extends JavascriptLiteralFunction
             {
                 Component.class.cast(child).setJavascriptRenderedElsewhere(true);
             });
-            
+
         });
-        
+
         //indexInits.append("resizeLayouts();");
         indexInits.append("$(window).resize();");
-        setLiteralFunction(indexInits);
+        function = indexInits;
     }
 
     /**
-     * Configures a function to run the Init content 
-     * @param navBar 
+     * Configures a function to run the Init content
+     *
+     * @param navBar
      */
     public JQXInitContent(JQXNavigationBar navBar)
     {
-        setFunctionArugments("index");
+        getFunctionArugments().add("index");
         StringBuilder indexInits = new StringBuilder();
         String ifString = "if (index == ";
         String ifStart2 = ") {";
@@ -88,13 +90,19 @@ public class JQXInitContent extends JavascriptLiteralFunction
                 Component.class.cast(child).setJavascriptRenderedElsewhere(true);
             });
         });
-        setLiteralFunction(indexInits);
+        function = indexInits;
+    }
+
+    @Override
+    public StringBuilder getLiteralFunction()
+    {
+        return function;
     }
 
     @Override
     public String toString()
     {
-        return super.toString();
+        return function.toString();
     }
 
 }

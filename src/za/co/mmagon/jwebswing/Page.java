@@ -21,6 +21,7 @@ import java.util.*;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import net.sf.uadetector.*;
+import za.co.mmagon.JWebSwingSiteBinder;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.client.InternetExplorerCompatibilityMode;
@@ -312,7 +313,7 @@ public class Page extends Html implements IPage
         {
             if (getOptions().isDynamicRender())
             {
-                CSSLink renderedCSS = new CSSLink("jwcss");
+                CSSLink renderedCSS = new CSSLink(JWebSwingSiteBinder.CSSLocation.replaceAll("/", ""));
                 return renderedCSS;
             }
             else
@@ -355,7 +356,7 @@ public class Page extends Html implements IPage
             {
                 Script dynamicScript = new Script();
                 dynamicScript.addAttribute(ScriptAttributes.Type, "application/javascript");
-                dynamicScript.addAttribute(ScriptAttributes.Src, "jwas");
+                dynamicScript.addAttribute(ScriptAttributes.Src,  JWebSwingSiteBinder.AngularScriptLocation.replaceAll("/", ""));
                 //dynamicScript.setTiny(true);
                 //dynamicScript.setText("$.ajax({cache:false,async:false,dataType:'script',url:'as'}).fail(function(){alert('session lost'); });");
                 allScripts.add(dynamicScript);
@@ -380,7 +381,7 @@ public class Page extends Html implements IPage
             {
                 Script dynamicScript = new Script();
                 dynamicScript.addAttribute(ScriptAttributes.Type, "application/javascript");
-                dynamicScript.addAttribute(ScriptAttributes.Src, "jwjs");
+                dynamicScript.addAttribute(ScriptAttributes.Src, JWebSwingSiteBinder.JavaScriptLocation.replaceAll("/", ""));
                 //dynamicScript.setTiny(true);
                 //dynamicScript.setText("$.ajax({cache:false,dataType:'script',url:'js'}).fail(function(){alert('session lost'); });");
                 allScripts.add(dynamicScript);

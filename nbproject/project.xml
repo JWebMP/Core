@@ -46,9 +46,13 @@
             <word>apps</word>
             <word>autocomplete</word>
             <word>Bezier</word>
+            <word>checkbox</word>
+            <word>checkboxes</word>
             <word>clickable</word>
             <word>colour</word>
             <word>Colours</word>
+            <word>config</word>
+            <word>contextmenu</word>
             <word>css</word>
             <word>Div's</word>
             <word>Draggable</word>
@@ -63,6 +67,7 @@
             <word>Highlighter</word>
             <word>img</word>
             <word>intializations</word>
+            <word>jstree</word>
             <word>modernizr</word>
             <word>nav</word>
             <word>Obsidion</word>
@@ -70,6 +75,8 @@
             <word>optimising</word>
             <word>Pica's</word>
             <word>plugin</word>
+            <word>plugin's</word>
+            <word>plugins</word>
             <word>Reingold</word>
             <word>renderer's</word>
             <word>Renderering</word>
@@ -78,12 +85,14 @@
             <word>servlets</word>
             <word>sortables</word>
             <word>sprintf</word>
+            <word>submenu</word>
             <word>textarea</word>
             <word>Theming</word>
             <word>Tilford</word>
             <word>Timeline</word>
             <word>tooltip</word>
             <word>Ummm</word>
+            <word>url</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

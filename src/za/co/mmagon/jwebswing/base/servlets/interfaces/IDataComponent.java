@@ -17,6 +17,8 @@
 
 package za.co.mmagon.jwebswing.base.servlets.interfaces;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
 /**
  * Marks a component as one with Data that is available as either AJAX or direct
  * @author GedMarc
@@ -24,11 +26,13 @@ package za.co.mmagon.jwebswing.base.servlets.interfaces;
  * @since Nov 9, 2016
  * 
  */
-public interface IDataComponent<J> 
+public interface IDataComponent<J extends JavaScriptPart> 
 {
     /**
      * Returns the data object associated with this component
      * @return 
      */
     J getData();
+    
+    boolean isAjax();
 }

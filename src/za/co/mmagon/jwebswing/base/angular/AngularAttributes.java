@@ -121,7 +121,9 @@ public enum AngularAttributes implements AttributeDefinitions
     ngUnselected("ng-un-selected"),
     ngUpdate("ng-update"),
     
+    //Event more customs
     
+    ngJSTreeOnChanged("ng-jstree-onchanged")
     ;
 
     private String attributeName;

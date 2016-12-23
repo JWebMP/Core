@@ -14,28 +14,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package za.co.mmagon.jwebswing.components.jstree.options.functions;
 
-package za.co.mmagon.jwebswing.components.jstree.themes;
-
-import za.co.mmagon.jwebswing.base.references.CSSReference;
-import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  *
  * @author GedMarc
- * @since Aug 27, 2016
- * @version 1.0
- * 
  */
-public class JSTreeDefaultDarkTheme extends Theme implements JSTreeTheme
+public class JSTreeCheckCallbackFunctionTest
 {
 
-    private static final long serialVersionUID = 1L;
-
-    public JSTreeDefaultDarkTheme ()
+    public JSTreeCheckCallbackFunctionTest()
     {
-        super("JSTreeDefaulDarkTheme", "");
-        getCssReferences().add(new CSSReference("JSTreeDefaultDarkTheme", 3.32, "bower_components/jstree/dist/themes/default-dark/style.css"));
-        
     }
+
+    @Test
+    public void testFunctionRender()
+    {
+        JSTreeCheckCallbackFunction f = new JSTreeCheckCallbackFunction();
+        f.setCopy(true);
+        System.out.println(f);
+        Assert.assertEquals("function (operation, node, node_parent, node_position, more) {if(operation === 'copy_node') return true;return false;}",
+                 f.toString());
+    }
+
 }

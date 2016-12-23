@@ -1,7 +1,5 @@
 package za.co.mmagon.jwebswing.components.jstree;
 
-import za.co.mmagon.jwebswing.components.newcomponents.*;
-import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.Feature;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 
@@ -17,7 +15,6 @@ public class JSTreeFeature extends Feature<JSTreeOptions, JSTreeFeature> impleme
 
     private static final long serialVersionUID = 1L;
 
-    private final Component forComponent;
     private JSTreeOptions options;
 
     /**
@@ -25,11 +22,11 @@ public class JSTreeFeature extends Feature<JSTreeOptions, JSTreeFeature> impleme
      * <p>
      * @param forComponent
      */
-    public JSTreeFeature(Component forComponent)
+    public JSTreeFeature(JSTree forComponent)
     {
         super("JSTreeFeature");
-        this.forComponent = forComponent;
-        // getJavascriptReferences().add(JQXReferencePool.Core.getJavaScriptReference());
+        setComponent(component);
+        getJavascriptReferences().add(JSTreeReferencePool.JSTreeJavascript.getJavaScriptReference());
         // getCssReferences().add(JQXReferencePool.Core.getCssReference());
     }
 
@@ -43,7 +40,7 @@ public class JSTreeFeature extends Feature<JSTreeOptions, JSTreeFeature> impleme
     {
         if (options == null)
         {
-            options = new JSTreeOptions();
+            options = new JSTreeOptions((JSTree) getComponent());
         }
         return options;
     }
@@ -51,7 +48,7 @@ public class JSTreeFeature extends Feature<JSTreeOptions, JSTreeFeature> impleme
     @Override
     public void assignFunctionsToComponent()
     {
-        String requiredString = forComponent.getJQueryID() + "blank(";
+        String requiredString = getComponent().getJQueryID() + "jstree(";
         requiredString += getOptions().toString();
         requiredString += ");" + getNewLine();
         addQuery(requiredString);

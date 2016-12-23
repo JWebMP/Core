@@ -286,7 +286,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
         p.getPageFields().setAuthor("Marc Magon");
         p.getPageFields().setDescription("JWebSwing Error Generated Page");
         p.getPageFields().setGenerator("JWebSwing - https://sourceforge.net/projects/jwebswing/");
-        Body b = new Body(p);
+        Body b = p.getBody();
         b.add("The following error was encountered during render<br/><hr/>");
         b.add(TextUtilities.stackTraceToString(t));
         return p;
@@ -309,7 +309,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
         p.getPageFields().setAuthor("Marc Magon");
         p.getPageFields().setDescription("JWebSwing Error Generated Page");
         p.getPageFields().setGenerator("JWebSwing - https://sourceforge.net/projects/jwebswing/");
-        Body b = new Body(p);
+        Body b = p.getBody();
         b.add("The following error was encountered during render<br/><hr/>");
         b.add(TextUtilities.stackTraceToString(t));
         return p;

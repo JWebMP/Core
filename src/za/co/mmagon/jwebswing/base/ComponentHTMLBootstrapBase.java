@@ -182,7 +182,7 @@ public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions
      * @return
      */
     @Override
-    public boolean addClass(BootstrapGlyphicons blockName)
+    public boolean addClass(Glyphicons blockName)
     {
         getPage().getOptions().setBootstrapEnabled(true);
         String className = blockName.toString();

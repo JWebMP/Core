@@ -16,6 +16,8 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.javascript;
 
+import java.util.ArrayList;
+import java.util.List;
 import za.co.mmagon.jwebswing.Component;
 
 /**
@@ -24,7 +26,7 @@ import za.co.mmagon.jwebswing.Component;
  * @author GedMarc
  * @since 30 Dec 2015
  */
-public class JavascriptLiteralFunction extends JavascriptFunction
+public abstract class JavascriptLiteralFunction extends JavascriptFunction
 {
 
     private static final long serialVersionUID = 1L;
@@ -36,7 +38,7 @@ public class JavascriptLiteralFunction extends JavascriptFunction
     /**
      * the middle rendered string
      */
-    private StringBuilder literalFunction;
+    //private StringBuilder literalFunction;
     /**
      * The closing string '}'
      */
@@ -44,15 +46,13 @@ public class JavascriptLiteralFunction extends JavascriptFunction
     /**
      * Any arguments to be passed into the function
      */
-    private String functionArugments;
+    private List<String> functionArugments;
 
     /**
      * An actual function
      */
     public JavascriptLiteralFunction()
     {
-        literalFunction = new StringBuilder();
-        functionArugments = "";
 
     }
 
@@ -66,7 +66,7 @@ public class JavascriptLiteralFunction extends JavascriptFunction
     {
         StringBuilder sb = new StringBuilder();
         sb.append(c.renderJavascriptAll());
-        literalFunction.append(sb);
+        getLiteralFunction().append(sb);
     }
 
     /**
@@ -84,20 +84,7 @@ public class JavascriptLiteralFunction extends JavascriptFunction
      *
      * @return
      */
-    public StringBuilder getLiteralFunction()
-    {
-        return literalFunction;
-    }
-
-    /**
-     * Sets the literal function
-     *
-     * @param literalFunction
-     */
-    public final void setLiteralFunction(StringBuilder literalFunction)
-    {
-        this.literalFunction = literalFunction;
-    }
+    public abstract StringBuilder getLiteralFunction();
 
     /**
      * Returns this functions output string
@@ -135,8 +122,12 @@ public class JavascriptLiteralFunction extends JavascriptFunction
      *
      * @return
      */
-    public String getFunctionArugments()
+    public final List<String> getFunctionArugments()
     {
+        if (functionArugments == null)
+        {
+            functionArugments = new ArrayList<>();
+        }
         return functionArugments;
     }
 
@@ -145,7 +136,7 @@ public class JavascriptLiteralFunction extends JavascriptFunction
      *
      * @param functionArugments
      */
-    public final void setFunctionArugments(String functionArugments)
+    public final void setFunctionArugments(List<String> functionArugments)
     {
         this.functionArugments = functionArugments;
     }
@@ -159,9 +150,9 @@ public class JavascriptLiteralFunction extends JavascriptFunction
     public String renderFunction()
     {
         StringBuilder returnable = new StringBuilder();
-        literalFunctionStartingString = new StringBuilder("function (" + functionArugments + ") {");
+        literalFunctionStartingString = new StringBuilder("function (" + functionArugments.toString().replace("[", "").replace("]", "") + ") {");
         returnable.append(literalFunctionStartingString);
-        returnable.append(literalFunction);
+        returnable.append(getLiteralFunction());
         returnable.append(literalFunctionEndingString);
         return returnable.toString();
     }

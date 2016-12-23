@@ -44,14 +44,16 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
     public static String JavaScriptLocation = "/jwjs";
     public static String AjaxScriptLocation = "/jwajax";
     public static String CSSLocation = "/jwcss";
-    public static String AngularDataLocation = "/jwad";
-    public static String AngualrScriptLocation = "/jwas";
+    public static final String AngularDataLocation = "/jwad";
+    public static String AngularScriptLocation = "/jwas";
+
+    public static String DataLocation = "/jwdata";
 
     private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("JWebSwingSiteBinder");
 
     public JWebSwingSiteBinder()
     {
-        
+
     }
 
     @Override
@@ -86,15 +88,22 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
 
         module.serveRegex$("(" + JavaScriptLocation + ")" + QueryParametersRegex).with(JavaScriptServlet.class);
         log.log(Level.CONFIG, "Serving JavaScripts at " + JavaScriptLocation);
+        
         module.serveRegex$("(" + AjaxScriptLocation + ")" + QueryParametersRegex).with(AjaxReceiverServlet.class);
         log.log(Level.CONFIG, "Serving Ajax at " + AjaxScriptLocation);
+        
         module.serveRegex$("(" + CSSLocation + ")" + QueryParametersRegex).with(CSSServlet.class);
         log.log(Level.CONFIG, "Serving CSS at " + CSSLocation);
+        
         module.serveRegex$("(" + AngularDataLocation + ")" + QueryParametersRegex).with(AngularDataServlet.class);
         log.log(Level.CONFIG, "Serving Angular Data at " + AngularDataLocation);
-        module.serveRegex$("(" + AngualrScriptLocation + ")" + QueryParametersRegex).with(AngularServlet.class);
-        log.log(Level.CONFIG, "Serving Angular JavaScript at " + AngualrScriptLocation);
-
+        
+        module.serveRegex$("(" + AngularScriptLocation + ")" + QueryParametersRegex).with(AngularServlet.class);
+        log.log(Level.CONFIG, "Serving Angular JavaScript at " + AngularScriptLocation);
+        
+        module.serveRegex$("(" + DataLocation + ")" + QueryParametersRegex).with(AngularServlet.class);
+        log.log(Level.CONFIG, "Serving Data at " + DataLocation);
+        
         log.log(Level.CONFIG, "Finished with configuring URL's");
 
     }

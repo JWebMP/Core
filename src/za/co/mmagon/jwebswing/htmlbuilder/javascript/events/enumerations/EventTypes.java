@@ -260,7 +260,8 @@ public enum EventTypes implements Comparable<EventTypes>
      * Internal.
      */
     data(null, null),
-    checked(CheckedAdapter.class,null);
+    checked(CheckedAdapter.class,null),
+    custom(null,null);
 
     private final Class classType;
     private final Class ajaxOptionsReturn;

@@ -14,28 +14,34 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package za.co.mmagon.jwebswing.components.jstree;
 
-package za.co.mmagon.jwebswing.components.jstree.themes;
-
-import za.co.mmagon.jwebswing.base.references.CSSReference;
-import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import java.util.List;
+import za.co.mmagon.jwebswing.components.jstree.options.JSTreeNode;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
  *
  * @author GedMarc
- * @since Aug 27, 2016
+ * @since 22 Dec 2016
  * @version 1.0
- * 
+ *
  */
-public class JSTreeDefaultDarkTheme extends Theme implements JSTreeTheme
+@JsonTypeInfo(include = As.WRAPPER_ARRAY, use = Id.NONE)
+public class JSTreeData extends JavaScriptPart
 {
 
     private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private List<JSTreeNode> nodes;
 
-    public JSTreeDefaultDarkTheme ()
+    public JSTreeData()
     {
-        super("JSTreeDefaulDarkTheme", "");
-        getCssReferences().add(new CSSReference("JSTreeDefaultDarkTheme", 3.32, "bower_components/jstree/dist/themes/default-dark/style.css"));
-        
+
     }
 }

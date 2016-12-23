@@ -16,8 +16,10 @@
  */
 package za.co.mmagon.jwebswing.components.jstree;
 
-import za.co.mmagon.jwebswing.components.newcomponents.*;
 import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.base.servlets.interfaces.IDataComponent;
+import za.co.mmagon.jwebswing.components.jstree.themes.JSTreeTheme;
+import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
 
 /**
  * An implementation of the jsTree project.
@@ -26,15 +28,27 @@ import za.co.mmagon.jwebswing.base.html.Div;
  * @since 29 Aug 2015
  * @version 1.0
  */
-public class JSTree extends Div<JSTreeChildren, JSTreeAttributes, JSTreeFeatures, JSTreeEvents, JSTree>
+public class JSTree extends Div<JSTreeChildren, JSTreeAttributes, JSTreeFeatures, JSTreeEvents, JSTree> implements IDataComponent<JSTreeData>
 {
 
     private static final long serialVersionUID = 1L;
     private JSTreeFeature feature;
+    private JSTreeData data;
 
     public JSTree()
     {
         addFeature(getFeature());
+    }
+
+    @Override
+    public JSTreeData getData()
+    {
+        return data;
+    }
+
+    public void setData(JSTreeData data)
+    {
+        this.data = data;
     }
 
     public final JSTreeFeature getFeature()
@@ -52,4 +66,25 @@ public class JSTree extends Div<JSTreeChildren, JSTreeAttributes, JSTreeFeatures
         return getFeature().getOptions();
     }
 
+    /**
+     * Sets if this data must come from the Ajax data server or be rendered in line
+     *
+     * @return
+     */
+    @Override
+    public boolean isAjax()
+    {
+        return true;
+    }
+
+    /**
+     * Set the tree theme
+     *
+     * @param <J>
+     * @param theme
+     */
+    public <J extends Theme & JSTreeTheme> void setTheme(J theme)
+    {
+        theme.getCssReferences().forEach(this::addCssReference);
+    }
 }

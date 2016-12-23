@@ -15,27 +15,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package za.co.mmagon.jwebswing.components.jstree.themes;
+package za.co.mmagon.jwebswing.components.jquerylayout.layout;
 
-import za.co.mmagon.jwebswing.base.references.CSSReference;
-import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 
 /**
- *
+ * Another name for the JQuery UI Layout
  * @author GedMarc
- * @since Aug 27, 2016
+ * @since 22 Dec 2016
  * @version 1.0
  * 
  */
-public class JSTreeDefaultDarkTheme extends Theme implements JSTreeTheme
+public class BorderLayout extends JQLayout
 {
 
     private static final long serialVersionUID = 1L;
-
-    public JSTreeDefaultDarkTheme ()
+    /**
+     * Sets a component as a border layout container
+     * @param component 
+     */
+    public BorderLayout (ComponentHierarchyBase component)
     {
-        super("JSTreeDefaulDarkTheme", "");
-        getCssReferences().add(new CSSReference("JSTreeDefaultDarkTheme", 3.32, "bower_components/jstree/dist/themes/default-dark/style.css"));
-        
+        super(component);
     }
 }

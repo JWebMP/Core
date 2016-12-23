@@ -2,7 +2,6 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.logger.LogFactory;
 import java.util.logging.*;
-import java.util.logging.*;
 import za.co.mmagon.jwebswing.*;
 import za.co.mmagon.jwebswing.base.*;
 import za.co.mmagon.jwebswing.base.angular.*;
@@ -93,6 +92,11 @@ public class Body<L extends ComponentFeatureBase & Loader & GlobalChildren, F ex
     public IBody asMe()
     {
         return this;
+    }
+    
+    public void setLayout(LayoutHandler layout)
+    {
+        
     }
 
     /**

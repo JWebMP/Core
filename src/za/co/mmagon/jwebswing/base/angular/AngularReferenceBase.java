@@ -180,4 +180,11 @@ public abstract class AngularReferenceBase extends JavascriptLiteralFunction imp
         return o1.sortOrder.compareTo(o2.sortOrder);
     }
 
+    @Override
+    public StringBuilder getLiteralFunction()
+    {
+        return new StringBuilder();
+    }
+
+    
 }

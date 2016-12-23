@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * @author GedMarc
  * @since 20 Apr 2016
  */
-public enum BootstrapGlyphicons
+public enum Glyphicons
 {
 
     glyphicon$glyphicon_asterisk,
@@ -284,7 +284,7 @@ public enum BootstrapGlyphicons
     glyphicon$glyphicon_menu_down,
     glyphicon$glyphicon_menu_up;
 
-    private BootstrapGlyphicons()
+    private Glyphicons()
     {
     }
 
@@ -292,7 +292,7 @@ public enum BootstrapGlyphicons
     @Override
     public String toString()
     {
-        return name().toLowerCase().replaceAll("$", " ").replaceAll("_", "-");
+        return "glyphicon " +  name().toLowerCase().replaceAll("$", " ").replaceAll("_", "-");
     }
 
 }

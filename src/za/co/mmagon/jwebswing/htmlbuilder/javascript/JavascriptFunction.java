@@ -28,6 +28,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public abstract class JavascriptFunction extends JavaScriptPart
 {
 
+    private static final long serialVersionUID = 1L;
+
     public JavascriptFunction()
     {
     }
@@ -44,20 +46,6 @@ public abstract class JavascriptFunction extends JavaScriptPart
     @Override
     public String toString()
     {
-        return "function(){};";
-    }
-
-    public static void main(String[] args)
-    {
-        JavascriptFunction jf = new JavascriptFunction()
-        {
-            @Override
-            public String renderFunction()
-            {
-                return "Blank Function";
-            }
-
-        };
-        System.out.println(jf.toString());
+        return renderFunction();
     }
 }

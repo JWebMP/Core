@@ -16,11 +16,11 @@
  */
 package za.co.mmagon.jwebswing.components.pace;
 
-import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
-import za.co.mmagon.jwebswing.base.servlets.interfaces.*;
-import za.co.mmagon.jwebswing.components.pace.preloadedThemes.*;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
+import za.co.mmagon.jwebswing.Feature;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyFeatures;
+import za.co.mmagon.jwebswing.base.servlets.interfaces.Loader;
+import za.co.mmagon.jwebswing.components.pace.preloadedThemes.PaceTheme;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
  * An implementation of the jsTree project.
@@ -33,7 +33,7 @@ public class PaceLoader extends Feature<JavaScriptPart, PaceLoader> implements L
 {
 
     private static final long serialVersionUID = 1L;
-
+    private PaceTheme theme;
     /**
      * Creates a Pace Loader with a theme
      *
@@ -42,13 +42,27 @@ public class PaceLoader extends Feature<JavaScriptPart, PaceLoader> implements L
     public PaceLoader(PaceTheme theme)
     {
         super("PaceLoader");
+        this.theme = theme;
         addJavaScriptReference(PaceLoaderReferencePool.PaceLoader.getJavaScriptReference());
-        //addJavaScriptReference(PaceLoaderReferencePool.PaceLoaderDisableWebSockets.getJavaScriptReference());
-        addCssReference(theme.getCSSReference());
     }
 
     public void setTheme(PaceTheme theme)
     {
-        getCssReferences().add(theme.getCSSReference());
+        this.theme = theme;
+    }
+
+    public PaceTheme getTheme()
+    {
+        return theme;
+    }
+
+    @Override
+    public void preConfigure()
+    {
+        if(!isConfigured())
+        {
+            addCssReference(theme.getCSSReference());
+        }
+        super.preConfigure(); 
     }
 }

@@ -17,7 +17,7 @@
 package za.co.mmagon.jwebswing.base.interfaces;
 
 import za.co.mmagon.jwebswing.components.bootstrap.BootstrapClasses;
-import za.co.mmagon.jwebswing.components.bootstrap.BootstrapGlyphicons;
+import za.co.mmagon.jwebswing.components.bootstrap.Glyphicons;
 import za.co.mmagon.jwebswing.components.bootstrap.columnlayout.BSColumnWidths;
 import za.co.mmagon.jwebswing.components.bootstrap.columnlayout.BSComponentHiding;
 import za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2.SB2ThemeClasses;
@@ -69,5 +69,5 @@ public interface IComponentHTMLBootstrapBase
      * @param blockName
      * @return 
      */
-    boolean addClass(BootstrapGlyphicons blockName);
+    boolean addClass(Glyphicons blockName);
 }
