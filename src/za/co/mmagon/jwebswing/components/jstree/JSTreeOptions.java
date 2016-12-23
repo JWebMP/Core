@@ -541,7 +541,7 @@ public class JSTreeOptions extends JavaScriptPart
             setUnique(new JSTreeUniqueOptions());
         }
         return unique;
-    }
+    } 
 
     /**
      * Enforces that no nodes with the same name can coexist as siblings.

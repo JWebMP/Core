@@ -16,15 +16,13 @@
  */
 package za.co.mmagon;
 
+import com.armineasy.injection.GuiceContext;
 import com.armineasy.injection.abstractions.GuiceSiteInjectorModule;
 import com.armineasy.injection.annotations.GuiceSiteModule;
 import com.armineasy.injection.interfaces.GuiceSiteBinder;
 import java.util.*;
 import java.util.logging.Level;
 import org.reflections.Reflections;
-import org.reflections.scanners.*;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
 import za.co.mmagon.jwebswing.base.servlets.*;
 import za.co.mmagon.logger.LogFactory;
 
@@ -61,14 +59,7 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
     {
         log.log(Level.CONFIG, "Configuring Servlet URL's");
 
-        List<ClassLoader> classLoadersList = new LinkedList<>();
-        classLoadersList.add(ClasspathHelper.contextClassLoader());
-        classLoadersList.add(ClasspathHelper.staticClassLoader());
-        Reflections reflections = new Reflections(new ConfigurationBuilder()
-                .setScanners(new SubTypesScanner(false /*
-                 * don't exclude Object.class
-                 */), new ResourcesScanner(), new TypeAnnotationsScanner())
-                .setUrls(ClasspathHelper.forClassLoader(classLoadersList.toArray(new ClassLoader[0]))));
+        Reflections reflections = GuiceContext.reflect();
 
         Set<Class<? extends JWebSwingServlet>> siteBinders = reflections.getSubTypesOf(JWebSwingServlet.class);
         for (Iterator<Class<? extends JWebSwingServlet>> iterator = siteBinders.iterator(); iterator.hasNext();)
@@ -88,22 +79,22 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
 
         module.serveRegex$("(" + JavaScriptLocation + ")" + QueryParametersRegex).with(JavaScriptServlet.class);
         log.log(Level.CONFIG, "Serving JavaScripts at " + JavaScriptLocation);
-        
+
         module.serveRegex$("(" + AjaxScriptLocation + ")" + QueryParametersRegex).with(AjaxReceiverServlet.class);
         log.log(Level.CONFIG, "Serving Ajax at " + AjaxScriptLocation);
-        
+
         module.serveRegex$("(" + CSSLocation + ")" + QueryParametersRegex).with(CSSServlet.class);
         log.log(Level.CONFIG, "Serving CSS at " + CSSLocation);
-        
+
         module.serveRegex$("(" + AngularDataLocation + ")" + QueryParametersRegex).with(AngularDataServlet.class);
         log.log(Level.CONFIG, "Serving Angular Data at " + AngularDataLocation);
-        
+
         module.serveRegex$("(" + AngularScriptLocation + ")" + QueryParametersRegex).with(AngularServlet.class);
         log.log(Level.CONFIG, "Serving Angular JavaScript at " + AngularScriptLocation);
-        
+
         module.serveRegex$("(" + DataLocation + ")" + QueryParametersRegex).with(AngularServlet.class);
         log.log(Level.CONFIG, "Serving Data at " + DataLocation);
-        
+
         log.log(Level.CONFIG, "Finished with configuring URL's");
 
     }
