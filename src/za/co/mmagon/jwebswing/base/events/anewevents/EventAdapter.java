@@ -1,7 +1,7 @@
 package za.co.mmagon.jwebswing.base.events.anewevents;
 
 import java.util.logging.Level;
-import java.util.logging.*;
+import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.Event;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
@@ -48,7 +48,7 @@ public abstract class EventAdapter extends Event
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
             getComponent().getPage().getOptions().setAngularEnabled(true);
-            getComponent().getPage().getAngular().addDirective(getDirective());
+            getComponent().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngRightClick, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();

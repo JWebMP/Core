@@ -34,7 +34,7 @@ import za.co.mmagon.jwebswing.base.events.resize.ResizeAdapter;
 import za.co.mmagon.jwebswing.base.events.resizestart.ResizeStartAdapter;
 import za.co.mmagon.jwebswing.base.events.resizestop.ResizeStopAdapter;
 import za.co.mmagon.jwebswing.base.events.response.Responsedapter;
-import za.co.mmagon.jwebswing.base.events.rightclick.RightClickEvent;
+import za.co.mmagon.jwebswing.base.events.rightclick.RightClickAdapter;
 import za.co.mmagon.jwebswing.base.events.search.SearchAdapter;
 import za.co.mmagon.jwebswing.base.events.selected.SelectedAdapter;
 import za.co.mmagon.jwebswing.base.events.selecting.SelectingAdapter;
@@ -79,7 +79,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.commandEvent.Perform
     /**
      * Registers a Right Click event
      */
-<span class="fc" id="L82">    contextmenu(RightClickEvent.class, null),</span>
+<span class="fc" id="L82">    contextmenu(RightClickAdapter.class, null),</span>
     /*
      * Registers a normal click event
      */
@@ -260,7 +260,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.commandEvent.Perform
      * Internal.
      */
 <span class="fc" id="L262">    data(null, null),</span>
-<span class="fc" id="L263">    checked(CheckedAdapter.class,null);</span>
+<span class="fc" id="L263">    checked(CheckedAdapter.class,null),</span>
+<span class="fc" id="L264">    custom(null,null);</span>
 
     private final Class classType;
     private final Class ajaxOptionsReturn;
@@ -272,10 +273,10 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.commandEvent.Perform
      * @param groupedType
      */
     private EventTypes(Class classType, Class groupedType)
-<span class="fc" id="L275">    {</span>
-<span class="fc" id="L276">        this.classType = classType;</span>
-<span class="fc" id="L277">        this.ajaxOptionsReturn = groupedType;</span>
-<span class="fc" id="L278">    }</span>
+<span class="fc" id="L276">    {</span>
+<span class="fc" id="L277">        this.classType = classType;</span>
+<span class="fc" id="L278">        this.ajaxOptionsReturn = groupedType;</span>
+<span class="fc" id="L279">    }</span>
 
     /**
      * Get the class type that this AJAX event type is matched to
@@ -284,7 +285,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.commandEvent.Perform
      */
     public Class getClassType()
     {
-<span class="nc" id="L287">        return classType;</span>
+<span class="nc" id="L288">        return classType;</span>
     }
 
     /**
@@ -294,14 +295,14 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.commandEvent.Perform
      */
     public Class getAjaxOptionsReturn()
     {
-<span class="nc" id="L297">        return ajaxOptionsReturn;</span>
+<span class="nc" id="L298">        return ajaxOptionsReturn;</span>
     }
 
     @Override
     @JsonValue
     public String toString()
     {
-<span class="fc" id="L304">        return name().toString();</span>
+<span class="fc" id="L305">        return name().toString();</span>
     }
 
 }

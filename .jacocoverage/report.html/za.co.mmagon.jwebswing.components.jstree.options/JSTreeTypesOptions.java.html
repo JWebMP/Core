@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JSTreeTypesOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jstree.options</a> &gt; <span class="el_source">JSTreeTypesOptions.java</span></div><h1>JSTreeTypesOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jstree.options;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
+import java.util.List;
+import za.co.mmagon.jwebswing.components.bootstrap.Glyphicons;
+import za.co.mmagon.jwebswing.components.fontawesome.FontAwesomeIcons;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ * This plugin makes it possible to add predefined types for groups of nodes, which means to easily control nesting rules and icon for each group.
+ * &lt;p&gt;
+ * To set a node's type you can use set_type or supply a type property with the node's data.
+ * &lt;p&gt;
+ * There are two predefined types:
+ * &lt;p&gt;
+ * # - represents the root of the tree, for example max_children would control the maximum number of root nodes.
+ * &lt;p&gt;
+ * default - represents the default node - any settings here
+ * &lt;p&gt;
+ * will be applied to all nodes that do not have a type specified.
+ *
+ * @author GedMarc
+ * @since 23 Dec 2016
+ * @version 1.0
+ *
+ */
+public class JSTreeTypesOptions extends JavaScriptPart
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * a string - can be a path to an icon or a className, if using an image that is in the current directory use a ./ prefix, otherwise it will be detected as a class. Omit to use the default icon
+     * from your theme.
+     */
+    private String icon;
+
+    /**
+     * the maximum number of immediate children this node type can have. Do not specify or set to -1 for unlimited.
+     */
+    @JsonProperty(value = &quot;max_children&quot;)
+    private Integer maxChildren;
+    /**
+     * the maximum number of nesting this node type can have. A value of 1 would mean that the node can have children, but no grandchildren. Do not specify or set to -1 for unlimited.
+     */
+    @JsonProperty(value = &quot;max_depth&quot;)
+    private Integer maxDepth;
+    /**
+     * an array of node type strings, that nodes of this type can have as children. Do not specify or set to -1 for no limits.
+     */
+    @JsonProperty(value = &quot;valid_children&quot;)
+    private List&lt;String&gt; validChildren;
+
+    /**
+     * an object of values which will be used to add HTML attributes on the resulting LI DOM node (merged with the node's own data)
+     */
+    @JsonProperty(&quot;li_atr&quot;)
+    private String listItemAttributes;
+    /**
+     * an object of values which will be used to add HTML attributes on the resulting A DOM node (merged with the node's own data)
+     */
+    @JsonProperty(&quot;a_attr&quot;)
+    private String linkAttributes;
+
+    public JSTreeTypesOptions()
+<span class="nc" id="L83">    {</span>
+
+<span class="nc" id="L85">    }</span>
+
+    /**
+     * a string - can be a path to an icon or a className, if using an image that is in the current directory use a ./ prefix, otherwise it will be detected as a class. Omit to use the default icon
+     * from your theme.
+     *
+     * @return
+     */
+    public String getIcon()
+    {
+<span class="nc" id="L95">        return icon;</span>
+    }
+
+    /**
+     * a string - can be a path to an icon or a className, if using an image that is in the current directory use a ./ prefix, otherwise it will be detected as a class. Omit to use the default icon
+     * from your theme.
+     *
+     * @param icon
+     */
+    public void setIcon(String icon)
+    {
+<span class="nc" id="L106">        this.icon = icon;</span>
+<span class="nc" id="L107">    }</span>
+
+    /**
+     * a string - can be a path to an icon or a className, if using an image that is in the current directory use a ./ prefix, otherwise it will be detected as a class. Omit to use the default icon
+     * from your theme.
+     *
+     * @param icon
+     */
+    public void setIcon(FontAwesomeIcons icon)
+    {
+<span class="nc" id="L117">        this.icon = icon.toString();</span>
+<span class="nc" id="L118">    }</span>
+
+    /**
+     * a string - can be a path to an icon or a className, if using an image that is in the current directory use a ./ prefix, otherwise it will be detected as a class. Omit to use the default icon
+     * from your theme.
+     *
+     * @param icon
+     */
+    public void setIcon(Glyphicons icon)
+    {
+<span class="nc" id="L128">        this.icon = icon.toString();</span>
+<span class="nc" id="L129">    }</span>
+
+    /**
+     * the maximum number of immediate children this node type can have. Do not specify or set to -1 for unlimited.
+     *
+     * @return
+     */
+    public Integer getMaxChildren()
+    {
+<span class="nc" id="L138">        return maxChildren;</span>
+    }
+
+    /**
+     * the maximum number of immediate children this node type can have. Do not specify or set to -1 for unlimited.
+     *
+     * @param maxChildren
+     */
+    public void setMaxChildren(Integer maxChildren)
+    {
+<span class="nc" id="L148">        this.maxChildren = maxChildren;</span>
+<span class="nc" id="L149">    }</span>
+
+    /**
+     * the maximum number of nesting this node type can have. A value of 1 would mean that the node can have children, but no grandchildren. Do not specify or set to -1 for unlimited.
+     *
+     * @return
+     */
+    public Integer getMaxDepth()
+    {
+<span class="nc" id="L158">        return maxDepth;</span>
+    }
+
+    /**
+     * the maximum number of nesting this node type can have. A value of 1 would mean that the node can have children, but no grandchildren. Do not specify or set to -1 for unlimited.
+     *
+     * @param maxDepth
+     */
+    public void setMaxDepth(Integer maxDepth)
+    {
+<span class="nc" id="L168">        this.maxDepth = maxDepth;</span>
+<span class="nc" id="L169">    }</span>
+
+    /**
+     * an array of node type strings, that nodes of this type can have as children. Do not specify or set to -1 for no limits.
+     *
+     * @return
+     */
+    public List&lt;String&gt; getValidChildren()
+    {
+<span class="nc bnc" id="L178" title="All 2 branches missed.">        if (validChildren == null)</span>
+        {
+<span class="nc" id="L180">            validChildren = new ArrayList&lt;&gt;();</span>
+        }
+<span class="nc" id="L182">        return validChildren;</span>
+    }
+
+    /**
+     * an array of node type strings, that nodes of this type can have as children. Do not specify or set to -1 for no limits.
+     *
+     * @param validChildren
+     */
+    public void setValidChildren(List&lt;String&gt; validChildren)
+    {
+<span class="nc" id="L192">        this.validChildren = validChildren;</span>
+<span class="nc" id="L193">    }</span>
+
+    /**
+     * an object of values which will be used to add HTML attributes on the resulting LI DOM node (merged with the node's own data)
+     *
+     * @return
+     */
+    public String getListItemAttributes()
+    {
+<span class="nc" id="L202">        return listItemAttributes;</span>
+    }
+
+    /**
+     * an object of values which will be used to add HTML attributes on the resulting LI DOM node (merged with the node's own data)
+     *
+     * @param listItemAttributes
+     */
+    public void setListItemAttributes(String listItemAttributes)
+    {
+<span class="nc" id="L212">        this.listItemAttributes = listItemAttributes;</span>
+<span class="nc" id="L213">    }</span>
+
+    /**
+     * an object of values which will be used to add HTML attributes on the resulting A DOM node (merged with the node's own data)
+     *
+     * @return
+     */
+    public String getLinkAttributes()
+    {
+<span class="nc" id="L222">        return linkAttributes;</span>
+    }
+
+    /**
+     * an object of values which will be used to add HTML attributes on the resulting A DOM node (merged with the node's own data)
+     *
+     * @param linkAttributes
+     */
+    public void setLinkAttributes(String linkAttributes)
+    {
+<span class="nc" id="L232">        this.linkAttributes = linkAttributes;</span>
+<span class="nc" id="L233">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

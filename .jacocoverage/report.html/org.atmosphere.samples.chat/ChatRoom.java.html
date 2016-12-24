@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ChatRoom.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">org.atmosphere.samples.chat</a> &gt; <span class="el_source">ChatRoom.java</span></div><h1>ChatRoom.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2015 Async-IO.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+package org.atmosphere.samples.chat;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.concurrent.ConcurrentHashMap;
+import javax.inject.Inject;
+import org.atmosphere.config.service.*;
+import org.atmosphere.cpr.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Simple annotated class that demonstrate the power of Atmosphere. This class supports all transports, support message length guarantee, heart beat, message cache thanks to the
+ * {@link ManagedService}.
+ */
+@ManagedService(path = &quot;/chat/{room: [a-zA-Z][a-zA-Z_0-9]*}&quot;)
+<span class="nc" id="L33">public class ChatRoom</span>
+{
+
+<span class="nc" id="L36">    private final Logger logger = LoggerFactory.getLogger(ChatRoom.class);</span>
+
+<span class="nc" id="L38">    private final ConcurrentHashMap&lt;String, String&gt; users = new ConcurrentHashMap&lt;String, String&gt;();</span>
+
+    private final static String CHAT = &quot;/chat/&quot;;
+
+    @PathParam(&quot;room&quot;)
+    private String chatroomName;
+
+    @Inject
+    private BroadcasterFactory factory;
+
+    @Inject
+    private AtmosphereResourceFactory resourceFactory;
+
+    @Inject
+    private MetaBroadcaster metaBroadcaster;
+
+    /**
+     * Invoked when the connection as been fully established and suspended, e.g ready for receiving messages.
+     *
+     * @param r
+     */
+    @Ready(encoders =
+    {
+        JacksonEncoder.class
+    })
+    @DeliverTo(DeliverTo.DELIVER_TO.ALL)
+    public ChatProtocol onReady(final AtmosphereResource r)
+    {
+<span class="nc" id="L66">        logger.info(&quot;Browser {} connected in room {}&quot;, r.uuid(), chatroomName);</span>
+<span class="nc" id="L67">        return new ChatProtocol(users.keySet(), getRooms(factory.lookupAll()));</span>
+    }
+
+    private static Collection&lt;String&gt; getRooms(Collection&lt;Broadcaster&gt; broadcasters)
+    {
+<span class="nc" id="L72">        Collection&lt;String&gt; result = new ArrayList&lt;String&gt;();</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        for (Broadcaster broadcaster : broadcasters)</span>
+        {
+<span class="nc bnc" id="L75" title="All 2 branches missed.">            if (!(&quot;/*&quot;.equals(broadcaster.getID())))</span>
+            {
+                // if no room is specified, use ''
+<span class="nc" id="L78">                String[] p = broadcaster.getID().split(&quot;/&quot;);</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">                result.add(p.length &gt; 2 ? p[2] : &quot;&quot;);</span>
+            }
+<span class="nc" id="L81">        };</span>
+<span class="nc" id="L82">        return result;</span>
+    }
+
+    /**
+     * Invoked when the client disconnect or when an unexpected closing of the underlying connection happens.
+     *
+     * @param event
+     */
+    @Disconnect
+    public void onDisconnect(AtmosphereResourceEvent event)
+    {
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        if (event.isCancelled())</span>
+        {
+            // We didn't get notified, so we remove the user.
+<span class="nc" id="L96">            users.values().remove(event.getResource().uuid());</span>
+<span class="nc" id="L97">            logger.info(&quot;Browser {} unexpectedly disconnected&quot;, event.getResource().uuid());</span>
+        }
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        else if (event.isClosedByClient())</span>
+        {
+<span class="nc" id="L101">            logger.info(&quot;Browser {} closed the connection&quot;, event.getResource().uuid());</span>
+        }
+<span class="nc" id="L103">    }</span>
+
+    /**
+     * Simple annotated class that demonstrate how {@link org.atmosphere.config.managed.Encoder} and {@link org.atmosphere.config.managed.Decoder}
+     * can be used.
+     *
+     * @param message an instance of {@link ChatProtocol }
+     *
+     * @return
+     *
+     * @throws IOException
+     */
+    @Message(encoders =
+    {
+        JacksonEncoder.class
+    }, decoders =
+    {
+        ProtocolDecoder.class
+    })
+    public ChatProtocol onMessage(ChatProtocol message) throws IOException
+    {
+
+<span class="nc bnc" id="L125" title="All 2 branches missed.">        if (message.getMessage().contains(&quot;disconnecting&quot;))</span>
+        {
+<span class="nc" id="L127">            String author = message.getAuthor();</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">            if (author != null)</span>
+            {
+<span class="nc" id="L130">                users.remove(author);</span>
+            }
+            else
+            {
+<span class="nc" id="L134">                author = &quot;&quot;;</span>
+            }
+<span class="nc" id="L136">            return new ChatProtocol(author, &quot; disconnected from room &quot; + chatroomName, users.keySet(), getRooms(factory.lookupAll()));</span>
+        }
+
+<span class="nc bnc" id="L139" title="All 2 branches missed.">        if (!users.containsKey(message.getAuthor()))</span>
+        {
+<span class="nc" id="L141">            users.put(message.getAuthor(), message.getUuid());</span>
+<span class="nc" id="L142">            return new ChatProtocol(message.getAuthor(), &quot; entered room &quot; + chatroomName, users.keySet(), getRooms(factory.lookupAll()));</span>
+        }
+
+<span class="nc" id="L145">        message.setUsers(users.keySet());</span>
+<span class="nc" id="L146">        logger.info(&quot;{} just send {}&quot;, message.getAuthor(), message.getMessage());</span>
+<span class="nc" id="L147">        return new ChatProtocol(message.getAuthor(), message.getMessage(), users.keySet(), getRooms(factory.lookupAll()));</span>
+    }
+
+    @Message(decoders =
+    {
+        UserDecoder.class
+    })
+    public void onPrivateMessage(UserMessage user) throws IOException
+    {
+<span class="nc" id="L156">        String userUUID = users.get(user.getUser());</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">        if (userUUID != null)</span>
+        {
+            // Retrieve the original AtmosphereResource
+<span class="nc" id="L160">            AtmosphereResource r = resourceFactory.find(userUUID);</span>
+
+<span class="nc bnc" id="L162" title="All 2 branches missed.">            if (r != null)</span>
+            {
+<span class="nc" id="L164">                ChatProtocol m = new ChatProtocol(user.getUser(), &quot; sent you a private message: &quot; + user.getMessage().split(&quot;:&quot;)[1], users.keySet(), getRooms(factory.lookupAll()));</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">                if (!user.getUser().equalsIgnoreCase(&quot;all&quot;))</span>
+                {
+<span class="nc" id="L167">                    factory.lookup(CHAT + chatroomName).broadcast(m, r);</span>
+                }
+            }
+<span class="nc" id="L170">        }</span>
+        else
+        {
+<span class="nc" id="L173">            ChatProtocol m = new ChatProtocol(user.getUser(), &quot; sent a message to all chatroom: &quot; + user.getMessage().split(&quot;:&quot;)[1], users.keySet(), getRooms(factory.lookupAll()));</span>
+<span class="nc" id="L174">            metaBroadcaster.broadcastTo(&quot;/*&quot;, m);</span>
+        }
+<span class="nc" id="L176">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

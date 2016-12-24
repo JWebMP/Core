@@ -36,9 +36,9 @@ public abstract class ButtonClickAdapter extends Event
     {
 <span class="nc bnc" id="L37" title="All 2 branches missed.">        if (!isConfigured())</span>
         {
-<span class="nc" id="L39">            getComponent().getPage().setjQueryEnabled(true);</span>
-<span class="nc" id="L40">            getComponent().getPage().setAngularEnabled(true);</span>
-<span class="nc" id="L41">            getComponent().getPage().getAngular().addDirective(getDirective());</span>
+<span class="nc" id="L39">            getComponent().getPage().getOptions().setjQueryEnabled(true);</span>
+<span class="nc" id="L40">            getComponent().getPage().getOptions().setAngularEnabled(true);</span>
+<span class="nc" id="L41">            getComponent().getAngularDirectives().add(getDirective());</span>
 <span class="nc" id="L42">            component.addAttribute(AngularAttributes.ngButtonClick, &quot;perform($event,&quot; + renderVariables() + &quot;);&quot;);</span>
         }
 <span class="nc" id="L44">        super.preConfigure();</span>
@@ -66,25 +66,27 @@ public abstract class ButtonClickAdapter extends Event
 
     /**
      * Returns this directive
-     * @return 
+     *
+     * @return
      */
     public ButtonClickDirective getDirective()
     {
-<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (directive == null)</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (directive == null)</span>
         {
-<span class="nc" id="L75">            setDirective(new ButtonClickDirective(getComponent().getPage().getAngular()));</span>
+<span class="nc" id="L76">            setDirective(new ButtonClickDirective(getComponent().getPage().getAngular()));</span>
         }
-<span class="nc" id="L77">        return directive;</span>
+<span class="nc" id="L78">        return directive;</span>
     }
 
     /**
      * Sets this directive
-     * @param directive 
+     *
+     * @param directive
      */
     public void setDirective(ButtonClickDirective directive)
     {
-<span class="nc" id="L86">        this.directive = directive;</span>
-<span class="nc" id="L87">    }</span>
+<span class="nc" id="L88">        this.directive = directive;</span>
+<span class="nc" id="L89">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

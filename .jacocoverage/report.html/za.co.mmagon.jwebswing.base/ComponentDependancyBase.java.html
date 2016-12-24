@@ -158,7 +158,7 @@ public class ComponentDependancyBase&lt;J extends ComponentBase&gt; extends Comp
 <span class="fc" id="L158">        getCssReferencesAll().stream()</span>
 <span class="fc bfc" id="L159" title="All 2 branches covered.">                .filter((css) -&gt; (css != null))</span>
 <span class="fc" id="L160">                .filter((css) -&gt; (css.getPriority().equals(priority)))</span>
-<span class="pc bpc" id="L161" title="1 of 2 branches missed.">                .filter((CSSReference css) -&gt; (!arr.contains(css)))</span>
+<span class="fc bfc" id="L161" title="All 2 branches covered.">                .filter((CSSReference css) -&gt; (!arr.contains(css)))</span>
 <span class="fc" id="L162">                .forEach((css)</span>
                         -&gt;
                         {
@@ -177,7 +177,7 @@ public class ComponentDependancyBase&lt;J extends ComponentBase&gt; extends Comp
     @Override
     public J addCssReference(CSSReference cssReference)
     {
-<span class="fc bfc" id="L180" title="All 2 branches covered.">        if (!getCssReferences().contains(cssReference))</span>
+<span class="pc bpc" id="L180" title="1 of 2 branches missed.">        if (!getCssReferences().contains(cssReference))</span>
         {
 <span class="fc" id="L182">            getCssReferences().add(cssReference);</span>
         }

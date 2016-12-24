@@ -14,25 +14,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package za.co.mmagon.jwebswing.base.servlets.interfaces;
 
+import java.util.Map;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
  * Marks a component as one with Data that is available as either AJAX or direct
+ *
  * @author GedMarc
  * @param <J> The data DTO class
+ *
  * @since Nov 9, 2016
- * 
+ *
  */
-public interface IDataComponent<J extends JavaScriptPart> 
+public interface IDataComponent<J extends JavaScriptPart>
 {
+
     /**
-     * Returns the data object associated with this component
-     * @return 
+     * Returns the data object associated with this component.
+     * Gets called from a separate Servlet in Asynchronous format. Sometimes the fields are set
+     *
+     *
+     * @param params The request parameters received
+     * @return
      */
-    J getData();
-    
-    boolean isAjax();
+    J getData(Map<String, String[]> params);
 }

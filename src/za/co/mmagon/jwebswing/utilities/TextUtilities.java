@@ -1,8 +1,6 @@
 package za.co.mmagon.jwebswing.utilities;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.io.*;
 import java.util.StringTokenizer;
 
 /**
@@ -27,7 +25,7 @@ public class TextUtilities
         buildString = buildString.replace('_', '-');
         buildString = buildString.replace('-', ' ').trim();
         StringTokenizer st = new StringTokenizer(buildString);
-        String outputString = "";
+        StringBuilder outputString = new StringBuilder();
         while (st.hasMoreElements())
         {
             StringBuilder newSb = new StringBuilder(st.nextToken());
@@ -38,7 +36,7 @@ public class TextUtilities
             //newSb.deleteCharAt(0);
             newSb.append(firstChar);
             newSb.append(restOfIt);
-            outputString += newSb + " ";
+            outputString.append(newSb).append(" ");
         }
 
         return new StringBuilder(outputString);
@@ -119,7 +117,7 @@ public class TextUtilities
     public static final synchronized StringBuilder initCap(StringBuilder s)
     {
         StringTokenizer st = new StringTokenizer(s.toString());
-        String buildString = "";
+        StringBuilder buildString = new StringBuilder();
         while (st.hasMoreElements())
         {
             StringBuilder newSb = new StringBuilder(st.nextToken());
@@ -127,7 +125,7 @@ public class TextUtilities
             firstChar = firstChar.toString().toUpperCase().charAt(0);
             newSb.deleteCharAt(0);
             newSb.insert(0, firstChar);
-            buildString += newSb + " ";
+            buildString.append(newSb).append(" ");
         }
         return new StringBuilder(buildString);
     }

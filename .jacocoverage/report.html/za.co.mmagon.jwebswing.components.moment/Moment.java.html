@@ -18,9 +18,7 @@ package za.co.mmagon.jwebswing.components.moment;
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -50,9 +48,9 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      * Constructs an empty moment component
      */
     public Moment()
-<span class="nc" id="L53">    {</span>
-        
-<span class="nc" id="L55">    }</span>
+<span class="nc" id="L51">    {</span>
+
+<span class="nc" id="L53">    }</span>
 
     /**
      * Constructs a new moment with the given date and tag type
@@ -62,9 +60,9 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public Moment(Date assignedDate, ComponentTypes myComponent)
     {
-<span class="fc" id="L65">        super(myComponent);</span>
-<span class="fc" id="L66">        this.assignedDate = assignedDate;</span>
-<span class="fc" id="L67">    }</span>
+<span class="fc" id="L63">        super(myComponent);</span>
+<span class="fc" id="L64">        this.assignedDate = assignedDate;</span>
+<span class="fc" id="L65">    }</span>
 
     /**
      * Constructs a new moment with the given angular variable name
@@ -74,9 +72,9 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public Moment(String variableName, ComponentTypes myComponent)
     {
-<span class="nc" id="L77">        super(myComponent);</span>
-<span class="nc" id="L78">        this.variableName = variableName;</span>
-<span class="nc" id="L79">    }</span>
+<span class="nc" id="L75">        super(myComponent);</span>
+<span class="nc" id="L76">        this.variableName = variableName;</span>
+<span class="nc" id="L77">    }</span>
 
     /**
      * Constructs a new DIV with the given date
@@ -84,9 +82,9 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      * @param assignedDate The date to use
      */
     public Moment(Date assignedDate)
-<span class="nc" id="L87">    {</span>
-<span class="nc" id="L88">        this.assignedDate = assignedDate;</span>
-<span class="nc" id="L89">    }</span>
+<span class="nc" id="L85">    {</span>
+<span class="nc" id="L86">        this.assignedDate = assignedDate;</span>
+<span class="nc" id="L87">    }</span>
 
     /**
      * Constructs a new DIV with the given angular variable
@@ -94,9 +92,9 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      * @param variableName the new angular variable
      */
     public Moment(String variableName)
-<span class="nc" id="L97">    {</span>
-<span class="nc" id="L98">        this.variableName = variableName;</span>
-<span class="nc" id="L99">    }</span>
+<span class="nc" id="L95">    {</span>
+<span class="nc" id="L96">        this.variableName = variableName;</span>
+<span class="nc" id="L97">    }</span>
 
     /**
      * Returns the given feature
@@ -105,11 +103,11 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public final MomentFeature getFeature()
     {
-<span class="nc bnc" id="L108" title="All 2 branches missed.">        if (feature == null)</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">        if (feature == null)</span>
         {
-<span class="nc" id="L110">            feature = new MomentFeature(this);</span>
+<span class="nc" id="L108">            feature = new MomentFeature(this);</span>
         }
-<span class="nc" id="L112">        return feature;</span>
+<span class="nc" id="L110">        return feature;</span>
     }
 
     /**
@@ -120,7 +118,7 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
     @Override
     public MomentOptions getOptions()
     {
-<span class="nc" id="L123">        return getFeature().getOptions();</span>
+<span class="nc" id="L121">        return getFeature().getOptions();</span>
     }
 
     /**
@@ -130,7 +128,7 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public Date getAssignedDate()
     {
-<span class="nc" id="L133">        return assignedDate;</span>
+<span class="nc" id="L131">        return assignedDate;</span>
     }
 
     /**
@@ -140,8 +138,8 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public void setAssignedDate(Date assignedDate)
     {
-<span class="nc" id="L143">        this.assignedDate = assignedDate;</span>
-<span class="nc" id="L144">    }</span>
+<span class="nc" id="L141">        this.assignedDate = assignedDate;</span>
+<span class="nc" id="L142">    }</span>
 
     /**
      * Returns the assigned variable name
@@ -150,7 +148,7 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public String getVariableName()
     {
-<span class="nc" id="L153">        return variableName;</span>
+<span class="nc" id="L151">        return variableName;</span>
     }
 
     /**
@@ -160,8 +158,8 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public void setVariableName(String variableName)
     {
-<span class="nc" id="L163">        this.variableName = variableName;</span>
-<span class="nc" id="L164">    }</span>
+<span class="nc" id="L161">        this.variableName = variableName;</span>
+<span class="nc" id="L162">    }</span>
 
     /**
      * Return the HashMap of filters applied to this moment
@@ -170,11 +168,11 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public Map&lt;MomentFilters, String&gt; getAppliedFilters()
     {
-<span class="fc bfc" id="L173" title="All 2 branches covered.">        if (appliedFilters == null)</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">        if (appliedFilters == null)</span>
         {
-<span class="fc" id="L175">            appliedFilters = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L173">            appliedFilters = new HashMap&lt;&gt;();</span>
         }
-<span class="fc" id="L177">        return appliedFilters;</span>
+<span class="fc" id="L175">        return appliedFilters;</span>
     }
 
     /**
@@ -184,23 +182,23 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public void setAppliedFilters(HashMap&lt;MomentFilters, String&gt; appliedFilters)
     {
-<span class="nc" id="L187">        this.appliedFilters = appliedFilters;</span>
-<span class="nc" id="L188">    }</span>
+<span class="nc" id="L185">        this.appliedFilters = appliedFilters;</span>
+<span class="nc" id="L186">    }</span>
 
     @Override
     public void preConfigure()
     {
-<span class="pc bpc" id="L193" title="1 of 2 branches missed.">        if (!isConfigured())</span>
+<span class="pc bpc" id="L191" title="1 of 2 branches missed.">        if (!isConfigured())</span>
         {
-<span class="fc bfc" id="L195" title="All 2 branches covered.">            if (angularModule == null)</span>
+<span class="fc bfc" id="L193" title="All 2 branches covered.">            if (angularModule == null)</span>
             {
-<span class="fc" id="L197">                angularModule = new MomentAngularModule(getPage());</span>
+<span class="fc" id="L195">                angularModule = new MomentAngularModule(getPage());</span>
             }
-<span class="fc" id="L199">            getPage().getAngular().addModule(angularModule);</span>
-<span class="fc" id="L200">            addAttribute(MomentAttributes.am_time_ago, buildAttributeString());</span>
+<span class="fc" id="L197">            getAngularModules().add(angularModule);</span>
+<span class="fc" id="L198">            addAttribute(MomentAttributes.am_time_ago, buildAttributeString());</span>
         }
-<span class="fc" id="L202">        super.preConfigure();</span>
-<span class="fc" id="L203">    }</span>
+<span class="fc" id="L200">        super.preConfigure();</span>
+<span class="fc" id="L201">    }</span>
 
     /**
      * Builds the list of given filters
@@ -209,44 +207,46 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     private String buildAttributeString()
     {
-<span class="fc" id="L212">        StringBuilder sb = new StringBuilder();</span>
-<span class="pc bpc" id="L213" title="1 of 2 branches missed.">        if (variableName != null)</span>
+<span class="fc" id="L210">        StringBuilder sb = new StringBuilder();</span>
+<span class="pc bpc" id="L211" title="1 of 2 branches missed.">        if (variableName != null)</span>
         {
-<span class="nc" id="L215">            sb.append(variableName);</span>
+<span class="nc" id="L213">            sb.append(variableName);</span>
         }
-<span class="fc bfc" id="L217" title="All 2 branches covered.">        else if (assignedDate != null)</span>
+<span class="fc bfc" id="L215" title="All 2 branches covered.">        else if (assignedDate != null)</span>
         {
-<span class="fc" id="L219">            sb.append(&quot;'&quot;).append(DateFormatter.format(assignedDate)).append(&quot;'&quot;);</span>
-<span class="fc" id="L220">            getAppliedFilters().put(MomentFilters.amParse, &quot;YYYY-MM-DD HH:mm:ss&quot;);</span>
+<span class="fc" id="L217">            sb.append(&quot;'&quot;).append(DateFormatter.format(assignedDate)).append(&quot;'&quot;);</span>
+<span class="fc" id="L218">            getAppliedFilters().put(MomentFilters.amParse, &quot;YYYY-MM-DD HH:mm:ss&quot;);</span>
         }
-<span class="fc bfc" id="L222" title="All 2 branches covered.">        if (!getAppliedFilters().isEmpty())</span>
+<span class="fc bfc" id="L220" title="All 2 branches covered.">        if (!getAppliedFilters().isEmpty())</span>
         {
-<span class="fc" id="L224">            getAppliedFilters().entrySet().stream().forEach((entry)</span>
-                    -&gt; 
-                    {
-<span class="fc" id="L227">                        MomentFilters key = entry.getKey();</span>
-<span class="fc" id="L228">                        String value = entry.getValue();</span>
-<span class="pc bpc" id="L229" title="1 of 2 branches missed.">                        if (value != null)</span>
-                        {
-<span class="fc" id="L231">                            sb.append(&quot; | &quot;).append(key).append(&quot; : '&quot;).append(value).append(&quot;'&quot;);</span>
-                        }
-                        else
-                        {
-<span class="nc" id="L235">                            sb.append(&quot; | &quot;).append(key);</span>
-                        }
-<span class="fc" id="L237">            });</span>
+<span class="fc" id="L222">            getAppliedFilters().entrySet().stream().forEach((entry)</span>
+                    -&gt;
+            {
+<span class="fc" id="L225">                MomentFilters key = entry.getKey();</span>
+<span class="fc" id="L226">                String value = entry.getValue();</span>
+<span class="pc bpc" id="L227" title="1 of 2 branches missed.">                if (value != null)</span>
+                {
+<span class="fc" id="L229">                    sb.append(&quot; | &quot;).append(key).append(&quot; : '&quot;).append(value).append(&quot;'&quot;);</span>
+                }
+                else
+                {
+<span class="nc" id="L233">                    sb.append(&quot; | &quot;).append(key);</span>
+                }
+<span class="fc" id="L235">            });</span>
         }
-<span class="fc" id="L239">        return sb.toString();</span>
+<span class="fc" id="L237">        return sb.toString();</span>
     }
 
     /**
      * The default date formatter which is parsed
      */
-<span class="fc" id="L245">    private static final SimpleDateFormat DateFormatter = (SimpleDateFormat) SimpleDateFormat.getInstance();// new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+<span class="fc" id="L243">    private static final SimpleDateFormat DateFormatter = (SimpleDateFormat) SimpleDateFormat.getInstance();// new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+
     static
     {
-<span class="fc" id="L248">        DateFormatter.applyPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+<span class="fc" id="L247">        DateFormatter.applyPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
     }
+
     /**
      * Parses a custom-formatted date into a moment object that can be used with the am-time-ago directive and the other filters. For example, the following code will accept dates that are formatted
      * like &quot;2015.04.25 22:00:15':

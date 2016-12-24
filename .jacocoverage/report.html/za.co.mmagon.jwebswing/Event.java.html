@@ -16,25 +16,23 @@
  */
 package za.co.mmagon.jwebswing;
 
-import java.util.ArrayList;
-import za.co.mmagon.jwebswing.base.ComponentEventBase;
-import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
-import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
-import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
-import za.co.mmagon.jwebswing.base.exceptions.NullComponentException;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+import java.util.*;
+import za.co.mmagon.jwebswing.base.*;
+import za.co.mmagon.jwebswing.base.ajax.*;
+import za.co.mmagon.jwebswing.base.exceptions.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.*;
 
 /**
- * Container Class for Events.
- * Splits from the component hierarchy
+ * Container Class for Events. Splits from the component hierarchy
  *
  * @author GedMarc
  * @param &lt;A&gt; Ajax Event type object back
  * @param &lt;J&gt; This class
+ *
  * @since 23 Apr 2016
  */
 public class Event&lt;A extends JavaScriptPart, J extends Event&gt;
@@ -51,10 +49,10 @@ public class Event&lt;A extends JavaScriptPart, J extends Event&gt;
      */
     public Event(EventTypes eventTypes, ComponentHierarchyBase component)
     {
-<span class="fc" id="L54">        this(eventTypes.name(), eventTypes);</span>
-<span class="fc" id="L55">        setComponent(component);</span>
-<span class="fc" id="L56">        component.getPage().setAngularEnabled(true);</span>
-<span class="fc" id="L57">    }</span>
+<span class="fc" id="L52">        this(eventTypes.name(), eventTypes);</span>
+<span class="fc" id="L53">        setComponent(component);</span>
+<span class="fc" id="L54">        component.getPage().getOptions().setAngularEnabled(true);</span>
+<span class="fc" id="L55">    }</span>
 
     /**
      * Adds a variable to return on the call
@@ -63,19 +61,19 @@ public class Event&lt;A extends JavaScriptPart, J extends Event&gt;
      */
     public void registerReturnVariableName(String returnVariable)
     {
-<span class="nc" id="L66">        getVariables().add(returnVariable);</span>
-<span class="nc" id="L67">    }</span>
-    
+<span class="nc" id="L64">        getVariables().add(returnVariable);</span>
+<span class="nc" id="L65">    }</span>
+
     /**
      * Adds a variable to return on the call
      *
-     * @param returnVariable The name of the variable to return
+     * @param returnVariable  The name of the variable to return
      * @param owningComponent The component to assign this variable to
      */
-    public void registerReturnVariableName(String returnVariable,String owningComponent)
+    public void registerReturnVariableName(String returnVariable, String owningComponent)
     {
-<span class="nc" id="L77">        getVariables().add(returnVariable);</span>
-<span class="nc" id="L78">    }</span>
+<span class="nc" id="L75">        getVariables().add(returnVariable);</span>
+<span class="nc" id="L76">    }</span>
 
     /**
      * The variables to return
@@ -89,26 +87,26 @@ public class Event&lt;A extends JavaScriptPart, J extends Event&gt;
      */
     public String renderVariables()
     {
-<span class="fc" id="L92">        final StringBuilder s = new StringBuilder(&quot;[&quot;);</span>
-<span class="fc" id="L93">        getVariables().stream().forEach((event) -&gt;</span>
+<span class="fc" id="L90">        final StringBuilder s = new StringBuilder(&quot;[&quot;);</span>
+<span class="fc" id="L91">        getVariables().stream().forEach((event) -&gt;</span>
         {
-<span class="nc" id="L95">            s.append(&quot;'&quot;).append(event).append(&quot;'&quot;).append(&quot;,&quot;);</span>
-<span class="nc" id="L96">        });</span>
+<span class="nc" id="L93">            s.append(&quot;'&quot;).append(event).append(&quot;'&quot;).append(&quot;,&quot;);</span>
+<span class="nc" id="L94">        });</span>
         StringBuilder s2;
-<span class="pc bpc" id="L98" title="1 of 2 branches missed.">        if (s.indexOf(&quot;,&quot;) &gt; 0)</span>
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">        if (s.indexOf(&quot;,&quot;) &gt; 0)</span>
         {
-<span class="nc" id="L100">            s2 = s.deleteCharAt(s.lastIndexOf(&quot;,&quot;));</span>
+<span class="nc" id="L98">            s2 = s.deleteCharAt(s.lastIndexOf(&quot;,&quot;));</span>
         }
         else
         {
-<span class="fc" id="L104">            s2 = s;</span>
+<span class="fc" id="L102">            s2 = s;</span>
         }
-<span class="fc" id="L106">        s2.append(&quot;]&quot;);</span>
-        
+<span class="fc" id="L104">        s2.append(&quot;]&quot;);</span>
+
         //append Event ID
-<span class="fc" id="L109">        s2.append(&quot;,'&quot;).append(getID()).append(&quot;'&quot;);</span>
-        
-<span class="fc" id="L111">        return s2.toString();</span>
+<span class="fc" id="L107">        s2.append(&quot;,'&quot;).append(getID()).append(&quot;'&quot;);</span>
+
+<span class="fc" id="L109">        return s2.toString();</span>
     }
 
     /**
@@ -119,11 +117,11 @@ public class Event&lt;A extends JavaScriptPart, J extends Event&gt;
     @Override
     public ArrayList&lt;String&gt; getVariables()
     {
-<span class="pc bpc" id="L122" title="1 of 2 branches missed.">        if (variables == null)</span>
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">        if (variables == null)</span>
         {
-<span class="fc" id="L124">            variables = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L122">            variables = new ArrayList&lt;&gt;();</span>
         }
-<span class="fc" id="L126">        return variables;</span>
+<span class="fc" id="L124">        return variables;</span>
     }
 
     /**
@@ -133,8 +131,8 @@ public class Event&lt;A extends JavaScriptPart, J extends Event&gt;
      */
     public void setVariables(ArrayList&lt;String&gt; variables)
     {
-<span class="nc" id="L136">        this.variables = variables;</span>
-<span class="nc" id="L137">    }</span>
+<span class="nc" id="L134">        this.variables = variables;</span>
+<span class="nc" id="L135">    }</span>
 
     /**
      * Constructs an event with the given name
@@ -144,8 +142,8 @@ public class Event&lt;A extends JavaScriptPart, J extends Event&gt;
      */
     public Event(String name, EventTypes eventType)
     {
-<span class="fc" id="L147">        this(name, eventType, null);</span>
-<span class="fc" id="L148">    }</span>
+<span class="fc" id="L145">        this(name, eventType, null);</span>
+<span class="fc" id="L146">    }</span>
 
     /**
      * Constructs an event with the given name
@@ -156,11 +154,11 @@ public class Event&lt;A extends JavaScriptPart, J extends Event&gt;
      */
     public Event(String name, EventTypes eventType, ComponentHierarchyBase component)
     {
-<span class="fc" id="L159">        super(ComponentTypes.Event);</span>
-<span class="fc" id="L160">        setName(name);</span>
-<span class="fc" id="L161">        this.component = component;</span>
-<span class="fc" id="L162">        setEventType(eventType);</span>
-<span class="fc" id="L163">    }</span>
+<span class="fc" id="L157">        super(ComponentTypes.Event);</span>
+<span class="fc" id="L158">        setName(name);</span>
+<span class="fc" id="L159">        this.component = component;</span>
+<span class="fc" id="L160">        setEventType(eventType);</span>
+<span class="fc" id="L161">    }</span>
 
     /**
      * The method that is fired on call
@@ -171,7 +169,7 @@ public class Event&lt;A extends JavaScriptPart, J extends Event&gt;
     public void fireEvent(AjaxCall call, AjaxResponse response)
     {
 
-<span class="nc" id="L174">    }</span>
+<span class="nc" id="L172">    }</span>
 
     /**
      * Returns the linked component if required
@@ -180,7 +178,7 @@ public class Event&lt;A extends JavaScriptPart, J extends Event&gt;
      */
     public ComponentHierarchyBase getComponent()
     {
-<span class="fc" id="L183">        return component;</span>
+<span class="fc" id="L181">        return component;</span>
     }
 
     /**
@@ -190,32 +188,34 @@ public class Event&lt;A extends JavaScriptPart, J extends Event&gt;
      */
     public void setComponent(ComponentHierarchyBase component)
     {
-<span class="pc bpc" id="L193" title="1 of 2 branches missed.">        if (component == null)</span>
+<span class="pc bpc" id="L191" title="1 of 2 branches missed.">        if (component == null)</span>
         {
-<span class="nc" id="L195">            throw new NullComponentException(&quot;Components set for events cannot be null&quot;);</span>
+<span class="nc" id="L193">            throw new NullComponentException(&quot;Components set for events cannot be null&quot;);</span>
         }
-<span class="fc" id="L197">        this.component = component;</span>
-<span class="fc" id="L198">    }</span>
+<span class="fc" id="L195">        this.component = component;</span>
+<span class="fc" id="L196">    }</span>
 
     /**
      * Adds a query to builder
      *
      * @param query
+     *
      * @return Adds a query to the window
      */
     public J addQuery(StringBuilder query)
     {
-<span class="nc bnc" id="L208" title="All 2 branches missed.">        if (!getQueries().contains(query))</span>
+<span class="nc bnc" id="L207" title="All 2 branches missed.">        if (!getQueries().contains(query))</span>
         {
-<span class="nc" id="L210">            getQueries().add(query);</span>
+<span class="nc" id="L209">            getQueries().add(query);</span>
         }
-<span class="nc" id="L212">        return (J) this;</span>
+<span class="nc" id="L211">        return (J) this;</span>
     }
 
     /**
      * Adds a query to builder
      *
      * @param query
+     *
      * @return
      */
     public J addQuery(String query)

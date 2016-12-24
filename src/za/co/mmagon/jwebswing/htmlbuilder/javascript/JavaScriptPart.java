@@ -73,7 +73,9 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
         javascriptObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
         jsonObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
         jsonObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
-        javascriptObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, false);
+        
+        
+        javascriptObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
         jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
         functionObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
     }
@@ -145,7 +147,7 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
             {
                 try
                 {
-                    s = javascriptObjectMapper.writeValueAsString(this);
+                    s = jsonObjectMapper.writeValueAsString(this);
                 }
                 catch (JsonProcessingException ex)
                 {

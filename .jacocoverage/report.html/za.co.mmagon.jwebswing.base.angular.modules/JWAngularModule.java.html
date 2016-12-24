@@ -14,9 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
-package za.co.mmagon.jwebswing.base.angular.modules; 
+package za.co.mmagon.jwebswing.base.angular.modules;
 
 import java.util.ArrayList;
+import java.util.List;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 
 /**
@@ -31,9 +32,9 @@ public class JWAngularModule extends AngularModuleBase
 
     public JWAngularModule(AngularFeature angularFeature)
     {
-<span class="fc" id="L34">        super(&quot;jwApp&quot;, angularFeature);</span>
-<span class="fc" id="L35">        setSortOrder(9999999); //always last</span>
-<span class="fc" id="L36">    }</span>
+<span class="fc" id="L35">        super(&quot;jwApp&quot;, angularFeature);</span>
+<span class="fc" id="L36">        setSortOrder(9999999); //always last</span>
+<span class="fc" id="L37">    }</span>
 
     /**
      * Overwrite the render function
@@ -43,13 +44,12 @@ public class JWAngularModule extends AngularModuleBase
     @Override
     public String renderFunction()
     {
-<span class="fc" id="L46">        String returnable = &quot;var &quot; + this.getAngular().getAppName() + &quot; = angular.module(&quot;;</span>
-<span class="fc" id="L47">        returnable += &quot;'&quot; + this.getAngular().getAppName() + &quot;'&quot;;</span>
-<span class="fc bfc" id="L48" title="All 2 branches covered.">        returnable += getAngular().getModules().isEmpty() ? &quot;,&quot; : &quot;,&quot;;</span>
-        //returnable += getAngular().getComponent().getNewLine();
-        
-<span class="fc" id="L51">        ArrayList&lt;String&gt; moduleNames = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L52">        getAngular().getModules().stream().forEach((module) -&gt;</span>
+<span class="fc" id="L47">        String returnable = &quot;var &quot; + this.getAngular().getAppName() + &quot; = angular.module(&quot;;</span>
+<span class="fc" id="L48">        returnable += &quot;'&quot; + this.getAngular().getAppName() + &quot;',&quot;;</span>
+
+<span class="fc" id="L50">        ArrayList&lt;String&gt; moduleNames = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L51">        List&lt;AngularModuleBase&gt; modules = super.getAngular().getComponent().getPage().getBody().getAngularModulesAll();</span>
+<span class="fc" id="L52">        modules.stream().forEach(module -&gt;</span>
         {
 <span class="fc" id="L54">            String name = module.getReferenceName();</span>
 <span class="pc bpc" id="L55" title="1 of 2 branches missed.">            if (!moduleNames.contains(name))</span>
@@ -57,26 +57,23 @@ public class JWAngularModule extends AngularModuleBase
 <span class="fc" id="L57">                moduleNames.add(module.getReferenceName());</span>
             }
 <span class="fc" id="L59">        });</span>
-        
-        //if(!getAngular().getModules().isEmpty())
+
+<span class="fc" id="L61">        StringBuilder nameRenders = new StringBuilder();</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        for (String name : moduleNames)</span>
         {
-<span class="fc" id="L63">            StringBuilder nameRenders = new StringBuilder();</span>
-<span class="fc bfc" id="L64" title="All 2 branches covered.">            for(String name : moduleNames)</span>
-            {
-<span class="fc" id="L66">                nameRenders.append(&quot;'&quot;).append(name).append(&quot;',&quot;);</span>
-<span class="fc" id="L67">            }</span>
-            
-<span class="fc bfc" id="L69" title="All 2 branches covered.">            if(nameRenders.indexOf(&quot;,&quot;) != -1)</span>
-            {
-<span class="fc" id="L71">                nameRenders = nameRenders.deleteCharAt(nameRenders.lastIndexOf(&quot;,&quot;));</span>
-            }
-<span class="fc" id="L73">            nameRenders.insert(0, &quot;[&quot;);</span>
-<span class="fc" id="L74">            nameRenders.append(&quot;]&quot;);</span>
-<span class="fc" id="L75">            returnable += nameRenders;</span>
+<span class="fc" id="L64">            nameRenders.append(&quot;'&quot;).append(name).append(&quot;',&quot;);</span>
+<span class="fc" id="L65">        }</span>
+
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (nameRenders.indexOf(&quot;,&quot;) != -1)</span>
+        {
+<span class="fc" id="L69">            nameRenders = nameRenders.deleteCharAt(nameRenders.lastIndexOf(&quot;,&quot;));</span>
         }
-        
-<span class="fc" id="L78">        returnable += &quot;);&quot;;</span>
-<span class="fc" id="L79">        return returnable;</span>
+<span class="fc" id="L71">        nameRenders.insert(0, &quot;[&quot;);</span>
+<span class="fc" id="L72">        nameRenders.append(&quot;]&quot;);</span>
+<span class="fc" id="L73">        returnable += nameRenders;</span>
+
+<span class="fc" id="L75">        returnable += &quot;);&quot;;</span>
+<span class="fc" id="L76">        return returnable;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

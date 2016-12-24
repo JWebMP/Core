@@ -1,12 +1,14 @@
 package za.co.mmagon.jwebswing.base.events.unselected;
 
+import java.util.logging.Level;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.Event;
+import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
+import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
+import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
-import java.util.logging.*;
-import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.base.ajax.*;
-import za.co.mmagon.jwebswing.base.angular.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.*;
 
 /**
  * Handles all events. Over-ride methods.
@@ -22,7 +24,7 @@ public abstract class UnselectedtAdapter extends Event
      */
     private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("UnselectedEvent");
     private static final long serialVersionUID = 1L;
-    private EventDirective directive;
+    private UnselectedDirective directive;
 
     /**
      * Performs a click
@@ -45,7 +47,7 @@ public abstract class UnselectedtAdapter extends Event
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
             getComponent().getPage().getOptions().setAngularEnabled(true);
-            getComponent().getPage().getAngular().addDirective(getDirective());
+            getComponent().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngUnselected, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
@@ -56,11 +58,11 @@ public abstract class UnselectedtAdapter extends Event
      *
      * @return
      */
-    public EventDirective getDirective()
+    public UnselectedDirective getDirective()
     {
         if (directive == null)
         {
-            directive = new EventDirective(getComponent().getPage().getAngular());
+            directive = new UnselectedDirective(getComponent().getPage().getAngular());
         }
         return directive;
     }
@@ -70,7 +72,7 @@ public abstract class UnselectedtAdapter extends Event
      *
      * @param directive
      */
-    public void setDirective(EventDirective directive)
+    public void setDirective(UnselectedDirective directive)
     {
         this.directive = directive;
     }

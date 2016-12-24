@@ -16,12 +16,8 @@
  */
 package za.co.mmagon.jwebswing.components.radialsvgslider;
 
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.H2;
-import za.co.mmagon.jwebswing.base.html.Link;
-import za.co.mmagon.jwebswing.base.html.ListItem;
-import za.co.mmagon.jwebswing.base.html.Paragraph;
-import za.co.mmagon.jwebswing.utilities.GUIDGenerator;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.utilities.*;
 
 /**
  * A default SVG slider list item(face) that renders
@@ -38,10 +34,10 @@ public class RadialSVGSliderListItem extends ListItem
     /**
      * The background image URL to use
      */
-<span class="fc" id="L41">    private String faceBackgroundImageUrl = &quot;bower_components/radial-svg-slider-jwebswing/img/img-1.jpg&quot;;</span>
+<span class="fc" id="L37">    private String faceBackgroundImageUrl = &quot;bower_components/radial-svg-slider-jwebswing/img/img-1.jpg&quot;;</span>
     private String clipPathUniqueID;
-    private String circleUniqueID; 
-    
+    private String circleUniqueID;
+
     /**
      * The content container
      */
@@ -56,49 +52,50 @@ public class RadialSVGSliderListItem extends ListItem
     private Div content;
 
     /**
-     * Constructs a new face (list item) for the Radial SVG Slider 
+     * Constructs a new face (list item) for the Radial SVG Slider
      */
     public RadialSVGSliderListItem()
-<span class="fc" id="L62">    {</span>
-<span class="fc" id="L63">        clipPathUniqueID = GUIDGenerator.generateGuid();</span>
-<span class="fc" id="L64">        circleUniqueID = GUIDGenerator.generateGuid();</span>
-<span class="fc" id="L65">    }</span>
+<span class="fc" id="L58">    {</span>
+<span class="fc" id="L59">        clipPathUniqueID = GUIDGenerator.generateGuid();</span>
+<span class="fc" id="L60">        circleUniqueID = GUIDGenerator.generateGuid();</span>
+<span class="fc" id="L61">    }</span>
 
     @Override
     public void preConfigure()
     {
-<span class="pc bpc" id="L70" title="1 of 2 branches missed.">        if(!isConfigured())</span>
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">        if (!isConfigured())</span>
         {
-<span class="pc bpc" id="L72" title="1 of 2 branches missed.">            if(getChildren().isEmpty())</span>
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">            if (getChildren().isEmpty())</span>
             {
-<span class="nc" id="L74">               getContent(); //force the build of the wrapper</span>
+<span class="nc" id="L70">                getContent(); //force the build of the wrapper</span>
             }
-<span class="fc" id="L76">            getPage().setjQueryEnabled(true);</span>
+<span class="fc" id="L72">            getPage().getOptions().setjQueryEnabled(true);</span>
         }
-        
-<span class="fc" id="L79">        super.preConfigure();</span>
-<span class="fc" id="L80">    }</span>
-  
+
+<span class="fc" id="L75">        super.preConfigure();</span>
+<span class="fc" id="L76">    }</span>
+
     /**
-     * Generates the SVG syntax for the face 
-     * @return 
+     * Generates the SVG syntax for the face
+     *
+     * @return
      */
     @Override
     protected StringBuilder renderBeforeChildren()
     {
-<span class="fc" id="L89">        return new StringBuilder(getNewLine() </span>
-<span class="fc" id="L90">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;&lt;div class=\&quot;svg-wrapper\&quot;&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L91">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;svg viewBox=\&quot;0 0 1400 800\&quot;&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L92">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;title&gt;Animated SVG&lt;/title&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L93">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;defs&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L94">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;clipPath id=\&quot;&quot; + clipPathUniqueID + &quot;\&quot;&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L95">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;circle id=\&quot;&quot; + circleUniqueID + &quot;\&quot; cx=\&quot;110\&quot; cy=\&quot;400\&quot; r=\&quot;1364\&quot;/&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L96">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;/clipPath&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L97">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;/defs&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L98">                + getCurrentTabIndentString() + &quot;&quot; + getNewLine()</span>
-<span class="fc" id="L99">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;image height='800px' width=\&quot;1400px\&quot; clip-path=\&quot;url(#&quot; + clipPathUniqueID + &quot;)\&quot; xlink:href=\&quot;&quot; + getFaceBackgroundImageUrl() + &quot;\&quot;&gt;&lt;/image&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L100">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;/svg&gt;&quot; + getNewLine()</span>
-<span class="fc" id="L101">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;&lt;/div&gt;&quot; + getNewLine());</span>
+<span class="fc" id="L86">        return new StringBuilder(getNewLine()</span>
+<span class="fc" id="L87">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;&lt;div class=\&quot;svg-wrapper\&quot;&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L88">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;svg viewBox=\&quot;0 0 1400 800\&quot;&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L89">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;title&gt;Animated SVG&lt;/title&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L90">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;defs&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L91">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;clipPath id=\&quot;&quot; + clipPathUniqueID + &quot;\&quot;&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L92">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;circle id=\&quot;&quot; + circleUniqueID + &quot;\&quot; cx=\&quot;110\&quot; cy=\&quot;400\&quot; r=\&quot;1364\&quot;/&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L93">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;/clipPath&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L94">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;/defs&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L95">                + getCurrentTabIndentString() + &quot;&quot; + getNewLine()</span>
+<span class="fc" id="L96">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;image height='800px' width=\&quot;1400px\&quot; clip-path=\&quot;url(#&quot; + clipPathUniqueID + &quot;)\&quot; xlink:href=\&quot;&quot; + getFaceBackgroundImageUrl() + &quot;\&quot;&gt;&lt;/image&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L97">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;\t&quot; + &quot;&lt;/svg&gt;&quot; + getNewLine()</span>
+<span class="fc" id="L98">                + getCurrentTabIndentString() + &quot;\t&quot; + &quot;&lt;/div&gt;&quot; + getNewLine());</span>
     }
 
     /**
@@ -108,7 +105,7 @@ public class RadialSVGSliderListItem extends ListItem
      */
     public String getFaceBackgroundImageUrl()
     {
-<span class="fc" id="L111">        return faceBackgroundImageUrl;</span>
+<span class="fc" id="L108">        return faceBackgroundImageUrl;</span>
     }
 
     /**
@@ -118,43 +115,46 @@ public class RadialSVGSliderListItem extends ListItem
      */
     public void setFaceBackgroundImageUrl(String faceBackgroundImageUrl)
     {
-<span class="fc" id="L121">        this.faceBackgroundImageUrl = faceBackgroundImageUrl;</span>
-<span class="fc" id="L122">    }</span>
+<span class="fc" id="L118">        this.faceBackgroundImageUrl = faceBackgroundImageUrl;</span>
+<span class="fc" id="L119">    }</span>
 
     /**
      * Returns the contentContainer div. Never Null
-     * @return 
+     *
+     * @return
      */
     protected Div getContentContainer()
     {
-<span class="pc bpc" id="L130" title="1 of 2 branches missed.">        if(contentContainer == null)</span>
+<span class="pc bpc" id="L128" title="1 of 2 branches missed.">        if (contentContainer == null)</span>
         {
-<span class="fc" id="L132">            setContentContainer(new Div());</span>
+<span class="fc" id="L130">            setContentContainer(new Div());</span>
         }
-<span class="fc" id="L134">        return contentContainer;</span>
+<span class="fc" id="L132">        return contentContainer;</span>
     }
 
     /**
      * Sets the contentContainer Div
-     * @param contentContainer 
+     *
+     * @param contentContainer
      */
     protected void setContentContainer(Div contentContainer)
     {
-<span class="fc" id="L143">        this.contentContainer = contentContainer;</span>
-<span class="pc bpc" id="L144" title="1 of 2 branches missed.">        if(this.contentContainer != null)</span>
+<span class="fc" id="L142">        this.contentContainer = contentContainer;</span>
+<span class="pc bpc" id="L143" title="1 of 2 branches missed.">        if (this.contentContainer != null)</span>
         {
-<span class="fc" id="L146">            this.contentContainer.addClass(&quot;cd-radial-slider-content&quot;);</span>
-<span class="fc" id="L147">            add(contentContainer);</span>
+<span class="fc" id="L145">            this.contentContainer.addClass(&quot;cd-radial-slider-content&quot;);</span>
+<span class="fc" id="L146">            add(contentContainer);</span>
         }
-<span class="fc" id="L149">    }</span>
+<span class="fc" id="L148">    }</span>
 
     /**
      * Returns the contentContainer wrapper
-     * @return 
+     *
+     * @return
      */
     protected Div getContentWrapper()
     {
-<span class="pc bpc" id="L157" title="1 of 2 branches missed.">        if(contentWrapper == null)</span>
+<span class="pc bpc" id="L157" title="1 of 2 branches missed.">        if (contentWrapper == null)</span>
         {
 <span class="fc" id="L159">            setContentWrapper(new Div());</span>
         }
@@ -163,102 +163,111 @@ public class RadialSVGSliderListItem extends ListItem
 
     /**
      * Sets the contentContainer wrapper
-     * @param contentWrapper 
+     *
+     * @param contentWrapper
      */
     protected void setContentWrapper(Div contentWrapper)
     {
-<span class="fc" id="L170">        this.contentWrapper = contentWrapper;</span>
-<span class="pc bpc" id="L171" title="1 of 2 branches missed.">        if(this.contentWrapper != null)</span>
+<span class="fc" id="L171">        this.contentWrapper = contentWrapper;</span>
+<span class="pc bpc" id="L172" title="1 of 2 branches missed.">        if (this.contentWrapper != null)</span>
         {
-<span class="fc" id="L173">            this.contentWrapper.addClass(&quot;wrapper&quot;);</span>
-<span class="fc" id="L174">            getContentContainer().add(this.contentWrapper);</span>
+<span class="fc" id="L174">            this.contentWrapper.addClass(&quot;wrapper&quot;);</span>
+<span class="fc" id="L175">            getContentContainer().add(this.contentWrapper);</span>
         }
-<span class="fc" id="L176">    }</span>
+<span class="fc" id="L177">    }</span>
 
     /**
      * Returns the content. Never null
-     * @return 
+     *
+     * @return
      */
     public Div getContent()
     {
-<span class="nc bnc" id="L184" title="All 2 branches missed.">        if(this.content == null)</span>
+<span class="nc bnc" id="L186" title="All 2 branches missed.">        if (this.content == null)</span>
         {
-<span class="nc" id="L186">            setContent(new Div());</span>
+<span class="nc" id="L188">            setContent(new Div());</span>
         }
-<span class="nc" id="L188">        return content;</span>
+<span class="nc" id="L190">        return content;</span>
     }
 
     /**
      * Sets the content.
-     * @param content 
+     *
+     * @param content
      */
     public void setContent(Div content)
     {
-<span class="fc" id="L197">        this.content = content;</span>
-<span class="pc bpc" id="L198" title="1 of 2 branches missed.">        if(this.content != null)</span>
+<span class="fc" id="L200">        this.content = content;</span>
+<span class="pc bpc" id="L201" title="1 of 2 branches missed.">        if (this.content != null)</span>
         {
-<span class="fc" id="L200">            getContentWrapper().add(this.content);</span>
+<span class="fc" id="L203">            getContentWrapper().add(this.content);</span>
         }
-<span class="fc" id="L202">    }</span>
-    
+<span class="fc" id="L205">    }</span>
+
     /**
      * Creates a default slide
-     * @param headerText The header text of the slide
+     *
+     * @param headerText  The header text of the slide
      * @param defaultText The default text of the slide
-     * @param linkUrl The link for the main button
-     * @param linkText the text for the link
-     * @return 
+     * @param linkUrl     The link for the main button
+     * @param linkText    the text for the link
+     *
+     * @return
      */
-    public static Div createDefaultSlide(String headerText, String defaultText,String linkUrl, String linkText)
+    public static Div createDefaultSlide(String headerText, String defaultText, String linkUrl, String linkText)
     {
-<span class="fc" id="L214">        Div d = new Div();</span>
-<span class="fc" id="L215">        H2 hText = new H2(headerText);</span>
-<span class="fc" id="L216">        Paragraph p = new Paragraph(defaultText);</span>
-<span class="fc" id="L217">        Link newLink = new Link(linkUrl);</span>
-<span class="fc" id="L218">        newLink.addClass(&quot;cd-btn&quot;);</span>
-<span class="fc" id="L219">        newLink.setText(linkText);</span>
-        
-<span class="fc" id="L221">        d.add(hText);</span>
-<span class="fc" id="L222">        d.add(p);</span>
-<span class="fc" id="L223">        d.add(newLink);</span>
-<span class="fc" id="L224">        return d;</span>
+<span class="fc" id="L219">        Div d = new Div();</span>
+<span class="fc" id="L220">        H2 hText = new H2(headerText);</span>
+<span class="fc" id="L221">        Paragraph p = new Paragraph(defaultText);</span>
+<span class="fc" id="L222">        Link newLink = new Link(linkUrl);</span>
+<span class="fc" id="L223">        newLink.addClass(&quot;cd-btn&quot;);</span>
+<span class="fc" id="L224">        newLink.setText(linkText);</span>
+
+<span class="fc" id="L226">        d.add(hText);</span>
+<span class="fc" id="L227">        d.add(p);</span>
+<span class="fc" id="L228">        d.add(newLink);</span>
+<span class="fc" id="L229">        return d;</span>
     }
 
     /**
      * Returns the current id given to the clip path element
-     * @return 
+     *
+     * @return
      */
     public String getClipPathUniqueID()
     {
-<span class="nc" id="L233">        return clipPathUniqueID;</span>
+<span class="nc" id="L239">        return clipPathUniqueID;</span>
     }
 
     /**
      * Sets the unique id given to the clip path element
-     * @param clipPathUniqueID 
+     *
+     * @param clipPathUniqueID
      */
     public void setClipPathUniqueID(String clipPathUniqueID)
     {
-<span class="nc" id="L242">        this.clipPathUniqueID = clipPathUniqueID;</span>
-<span class="nc" id="L243">    }</span>
+<span class="nc" id="L249">        this.clipPathUniqueID = clipPathUniqueID;</span>
+<span class="nc" id="L250">    }</span>
 
     /**
      * Gets the unique id assigned to the circles
-     * @return 
+     *
+     * @return
      */
     public String getCircleUniqueID()
     {
-<span class="nc" id="L251">        return circleUniqueID;</span>
+<span class="nc" id="L259">        return circleUniqueID;</span>
     }
 
     /**
      * Sets the assigned numbers to the circles
-     * @param circleUniqueID 
+     *
+     * @param circleUniqueID
      */
     public void setCircleUniqueID(String circleUniqueID)
     {
-<span class="nc" id="L260">        this.circleUniqueID = circleUniqueID;</span>
-<span class="nc" id="L261">    }</span>
-    
+<span class="nc" id="L269">        this.circleUniqueID = circleUniqueID;</span>
+<span class="nc" id="L270">    }</span>
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

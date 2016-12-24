@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
+import java.util.logging.*;
+import za.co.mmagon.logger.LogFactory;
 import za.co.mmagon.jwebswing.base.html.interfaces.NamedPair;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 
@@ -287,7 +287,7 @@ public class WebReference implements NamedPair&lt;String, String&gt;, Serializab
 <span class="fc" id="L287">        this.remoteReference = remoteReference;</span>
 <span class="fc" id="L288">    }</span>
 
-<span class="fc" id="L290">    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;Web Reference&quot;);</span>
+<span class="fc" id="L290">    private static final Logger LOG = LogFactory.getInstance().getLogger(&quot;Web Reference&quot;);</span>
 
     /**
      * Sets whether or not to use &quot;min.js&quot; or use a folder for the min directory

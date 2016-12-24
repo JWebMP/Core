@@ -64,7 +64,7 @@ public class AngularFeatureTest extends BaseTestClass
         Page p = getPage();
         Body b = p.getBody();
         p.addAngularVariable("Variable1");
-        b.getPage().getAngular().getDirectives().add(new RightClickDirective(b.getPage().getAngular()));
+        b.getPage().getBody().getAngularDirectives().add(new RightClickDirective(b.getPage().getAngular()));
         //System.out.println(p);
         //System.out.println(p.toString(true));
         //System.out.println(b.toString(true));

@@ -35,7 +35,7 @@ public class MomentAngularModule extends AngularModuleBase
     public MomentAngularModule (Page page)
     {
         super("angularMoment", page.getAngular());
-        page.getAngular().addModule(this);
+        page.getBody().getAngularModules().add(this);
         this.moduleFeature = page.getAngular();
         page.getBody().getJavascriptReferences().add(MomentReferencePool.MomentReference.getJavaScriptReference());
         page.getBody().getJavascriptReferences().add(MomentReferencePool.MomentAngularReference.getJavaScriptReference());

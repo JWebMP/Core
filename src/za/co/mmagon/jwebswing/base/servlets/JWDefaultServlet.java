@@ -16,12 +16,14 @@
  */
 package za.co.mmagon.jwebswing.base.servlets;
 
+import com.google.inject.Singleton;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
-import java.util.logging.*;
-import za.co.mmagon.logger.LogFactory;
 import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Provides default methods for authentication authorization etc
@@ -31,6 +33,7 @@ import za.co.mmagon.jwebswing.Page;
  * @version 1.0
  *
  */
+@Singleton
 public class JWDefaultServlet extends HttpServlet
 {
 
@@ -74,7 +77,7 @@ public class JWDefaultServlet extends HttpServlet
 
         if (sessionID == null)
         {
-            LOG.log(Level.SEVERE,"Session Doesn't Exist", new ServletException("There is no session for a data pull"));
+            LOG.log(Level.SEVERE, "Session Doesn't Exist", new ServletException("There is no session for a data pull"));
             throw new ServletException("There is no session for a data pull");
         }
         Page servlet = (Page) request.getSession().getAttribute("jwpage");
@@ -83,13 +86,13 @@ public class JWDefaultServlet extends HttpServlet
             if (servlet == null)
             {
                 ServletException se = new ServletException("There is no Servlet Loaded for the entry. The web site has not been visited");
-                LOG.log(Level.SEVERE,"Main Servlet Doesn't Exist", se);
+                LOG.log(Level.SEVERE, "Main Servlet Doesn't Exist", se);
                 throw se;
             }
             Page page = (Page) request.getSession().getAttribute("jwpage");
             if (page == null)
             {
-                LOG.log(Level.SEVERE,"No Page", new ServletException("No Page Currently Loaded"));
+                LOG.log(Level.SEVERE, "No Page", new ServletException("No Page Currently Loaded"));
                 throw new ServletException("No Page Currently Loaded");
             }
         }
@@ -113,7 +116,7 @@ public class JWDefaultServlet extends HttpServlet
         }
         catch (ServletException e)
         {
-            LOG.log(Level.SEVERE,"Unable to Do Get", e);
+            LOG.log(Level.SEVERE, "Unable to Do Get", e);
         }
     }
 
@@ -135,8 +138,10 @@ public class JWDefaultServlet extends HttpServlet
         }
         catch (ServletException e)
         {
-            LOG.log(Level.SEVERE,"Security Exception in Validation", e);
+            LOG.log(Level.SEVERE, "Security Exception in Validation", e);
             throw e;
         }
     }
+
+
 }

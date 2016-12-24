@@ -16,19 +16,16 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import za.co.mmagon.LoggerFactory;
+import com.fasterxml.jackson.annotation.*;
+import java.util.*;
+import java.util.logging.Level;
 import za.co.mmagon.jwebswing.base.interfaces.IComponentBase;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.utilities.GUIDGenerator;
+import za.co.mmagon.logger.LogFactory;
 
-/** 
+/**
  * Defines the raw necessities for a component to exist
  *
  * @param &lt;J&gt; Component output for cloning. Always make it this class to make life easy
@@ -45,12 +42,11 @@ public class ComponentBase&lt;J extends ComponentBase&gt; implements IComponentB
      * Logger for the Component
      */
     @JsonIgnore
-    protected static org.apache.log4j.Logger logShell;
-    /** 
-     * Serial Version for all Components and their compatibility 
+    protected static java.util.logging.Logger logShell;
+    /**
+     * Serial Version for all Components and their compatibility
      *
-     * @version 2
-     * Version 2 - Updated CSS Library and References
+     * @version 2 Version 2 - Updated CSS Library and References
      */
     @JsonIgnore
     private static final long serialVersionUID = 1l;
@@ -61,14 +57,12 @@ public class ComponentBase&lt;J extends ComponentBase&gt; implements IComponentB
     private String id;
 
     /**
-     * The enumeration component type associated with this class to escape the
-     * use of &quot;instance of&quot; statements. performance thing
+     * The enumeration component type associated with this class to escape the use of &quot;instance of&quot; statements. performance thing
      */
     private ComponentTypes componentType;
 
     /**
-     * Any raw text that should be built into this component. Rendered before
-     * children
+     * Any raw text that should be built into this component. Rendered before children
      */
     private String text;
 
@@ -84,23 +78,24 @@ public class ComponentBase&lt;J extends ComponentBase&gt; implements IComponentB
      * Initialized flag
      */
     private boolean initialized;
-    
+
     /**
      * A set of properties for this component
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private HashMap&lt;String,Object&gt; properties;
+    private HashMap&lt;String, Object&gt; properties;
 
     /**
      * Constructs a new Component Shell
+     *
      * @param componentType
      */
     public ComponentBase(ComponentTypes componentType)
-<span class="fc" id="L99">    {</span>
-<span class="fc" id="L100">        logShell = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;Shell&quot;);</span>
-<span class="fc" id="L101">        this.id = GUIDGenerator.generateGuid();</span>
-<span class="fc" id="L102">        this.componentType = componentType;</span>
-<span class="fc" id="L103">    }</span>
+<span class="fc" id="L94">    {</span>
+<span class="fc" id="L95">        logShell = LogFactory.getInstance().getLogger(&quot;Shell&quot;);</span>
+<span class="fc" id="L96">        this.id = GUIDGenerator.generateGuid();</span>
+<span class="fc" id="L97">        this.componentType = componentType;</span>
+<span class="fc" id="L98">    }</span>
 
     /**
      * Returns an Attribute Base interface of this component
@@ -109,7 +104,7 @@ public class ComponentBase&lt;J extends ComponentBase&gt; implements IComponentB
      */
     public IComponentBase asBase()
     {
-<span class="nc" id="L112">        return (ComponentBase) this;</span>
+<span class="nc" id="L107">        return (ComponentBase) this;</span>
     }
 
     /**
@@ -120,7 +115,7 @@ public class ComponentBase&lt;J extends ComponentBase&gt; implements IComponentB
     @Override
     public String getID()
     {
-<span class="fc" id="L123">        return this.id;</span>
+<span class="fc" id="L118">        return this.id;</span>
     }
 
     /**
@@ -133,19 +128,18 @@ public class ComponentBase&lt;J extends ComponentBase&gt; implements IComponentB
     @Override
     public String getID(boolean jQueryHolder)
     {
-<span class="fc" id="L136">        return &quot;#&quot; + this.id;</span>
+<span class="fc" id="L131">        return &quot;#&quot; + this.id;</span>
     }
 
     /**
-     * Returns the component rendering for JQuery string Requires the rendering
-     * for component is set
+     * Returns the component rendering for JQuery string Requires the rendering for component is set
      * &lt;p&gt;
      * @return $('#x').
      */
     @Override
     public String getJQueryID()
     {
-<span class="fc" id="L148">        return &quot;$(\'&quot; + getID(true) + &quot;\').&quot;;</span>
+<span class="fc" id="L142">        return &quot;$(\'&quot; + getID(true) + &quot;\').&quot;;</span>
     }
 
     /**
@@ -156,8 +150,8 @@ public class ComponentBase&lt;J extends ComponentBase&gt; implements IComponentB
     @Override
     public J setID(String id)
     {
-<span class="fc" id="L159">        this.id = id;</span>
-<span class="fc" id="L160">        return (J) this;</span>
+<span class="fc" id="L153">        this.id = id;</span>
+<span class="fc" id="L154">        return (J) this;</span>
     }
 
     /**
@@ -167,23 +161,21 @@ public class ComponentBase&lt;J extends ComponentBase&gt; implements IComponentB
      */
     protected ComponentTypes getComponentType()
     {
-<span class="fc" id="L170">        return componentType;</span>
+<span class="fc" id="L164">        return componentType;</span>
     }
 
     /**
-     * Sets this components enumeration. Currently little more than an easy to
-     * compare Enum
+     * Sets this components enumeration. Currently little more than an easy to compare Enum
      * &lt;p&gt;
      * @param componentType The component to mimic
      */
     protected void setComponentType(ComponentTypes componentType)
     {
-<span class="fc" id="L181">        this.componentType = componentType;</span>
-<span class="fc" id="L182">    }</span>
+<span class="fc" id="L174">        this.componentType = componentType;</span>
+<span class="fc" id="L175">    }</span>
 
     /**
-     * Appends the text used as raw text outside the tags to the incoming
-     * StringBuilder
+     * Appends the text used as raw text outside the tags to the incoming StringBuilder
      * &lt;p&gt;
      * @param sb The StringBuilder to append to
      * &lt;p&gt;
@@ -191,30 +183,29 @@ public class ComponentBase&lt;J extends ComponentBase&gt; implements IComponentB
      */
     protected StringBuilder getText(StringBuilder sb)
     {
-<span class="fc bfc" id="L194" title="All 2 branches covered.">        if (text == null)</span>
+<span class="fc bfc" id="L186" title="All 2 branches covered.">        if (text == null)</span>
         {
-<span class="fc" id="L196">            return new StringBuilder();</span>
+<span class="fc" id="L188">            return new StringBuilder();</span>
         }
         else
         {
-<span class="fc" id="L200">            sb.append(text);</span>
-<span class="fc" id="L201">            return sb;</span>
+<span class="fc" id="L192">            sb.append(text);</span>
+<span class="fc" id="L193">            return sb;</span>
         }
     }
 
     /**
      * returns a new StringSuilder of the raw text with the specific tab counts
      * &lt;p&gt;
-     * @param tabCounts
-     *                  &lt;p&gt;
+     * @param tabCounts &lt;p&gt;
      * @return
      */
     @Override
     public StringBuilder getText(int tabCounts)
     {
-<span class="fc" id="L215">        StringBuilder sb = new StringBuilder();</span>
-<span class="fc" id="L216">        getText(sb);</span>
-<span class="fc" id="L217">        return sb;</span>
+<span class="fc" id="L206">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L207">        getText(sb);</span>
+<span class="fc" id="L208">        return sb;</span>
     }
 
     /**
@@ -225,8 +216,8 @@ public class ComponentBase&lt;J extends ComponentBase&gt; implements IComponentB
     @Override
     public J setText(String text)
     {
-<span class="fc" id="L228">        this.text = text;</span>
-<span class="fc" id="L229">        return (J)this;</span>
+<span class="fc" id="L219">        this.text = text;</span>
+<span class="fc" id="L220">        return (J) this;</span>
     }
 
     /**
@@ -237,8 +228,8 @@ public class ComponentBase&lt;J extends ComponentBase&gt; implements IComponentB
     @Override
     public J setText(StringBuilder text)
     {
-<span class="fc" id="L240">        this.text = text.toString();</span>
-<span class="fc" id="L241">        return (J)this;</span>
+<span class="fc" id="L231">        this.text = text.toString();</span>
+<span class="fc" id="L232">        return (J) this;</span>
     }
 
     /**
@@ -249,42 +240,40 @@ public class ComponentBase&lt;J extends ComponentBase&gt; implements IComponentB
     @Override
     public J cloneComponent()
     {
-<span class="fc" id="L252">        J component = null;</span>
+<span class="fc" id="L243">        J component = null;</span>
         try
         {
-<span class="fc" id="L255">            component = (J) this.clone();</span>
-<span class="fc" id="L256">            component.setID(GUIDGenerator.generateGuid());</span>
+<span class="fc" id="L246">            component = (J) this.clone();</span>
+<span class="fc" id="L247">            component.setID(GUIDGenerator.generateGuid());</span>
         }
-<span class="nc" id="L258">        catch (CloneNotSupportedException ex)</span>
+<span class="nc" id="L249">        catch (CloneNotSupportedException ex)</span>
         {
-<span class="nc" id="L260">            logShell.error(&quot;Cloning Error in Shell&quot;, ex);</span>
-<span class="fc" id="L261">        }</span>
-<span class="fc" id="L262">        return component;</span>
+<span class="nc" id="L251">            logShell.log(Level.SEVERE, &quot;Cloning Error in Shell&quot;, ex);</span>
+<span class="fc" id="L252">        }</span>
+<span class="fc" id="L253">        return component;</span>
     }
 
     /**
-     * Specifies whether or not to render this component in a Production/QA
-     * fashion
+     * Specifies whether or not to render this component in a Production/QA fashion
      * &lt;p&gt;
      * @return If this component will render in production mode
      */
     @Override
     public boolean isTiny()
     {
-<span class="fc" id="L274">        return this.tiny;</span>
+<span class="fc" id="L264">        return this.tiny;</span>
     }
 
     /**
      * If this component will render as tiny HTML. Global override value
      * &lt;p&gt;
-     * @param tiny Set if this component must render as tiny HTML. Does not
-     *             affect CSS or JavaScript rendering
+     * @param tiny Set if this component must render as tiny HTML. Does not affect CSS or JavaScript rendering
      */
     @Override
     public J setTiny(boolean tiny)
     {
-<span class="fc" id="L286">        this.tiny = tiny;</span>
-<span class="fc" id="L287">        return (J)this;</span>
+<span class="fc" id="L275">        this.tiny = tiny;</span>
+<span class="fc" id="L276">        return (J) this;</span>
     }
 
     /**
@@ -295,27 +284,24 @@ public class ComponentBase&lt;J extends ComponentBase&gt; implements IComponentB
     @Override
     public String getNewLine()
     {
-<span class="fc bfc" id="L298" title="All 2 branches covered.">        if (!isTiny())</span>
+<span class="fc bfc" id="L287" title="All 2 branches covered.">        if (!isTiny())</span>
         {
-<span class="fc" id="L300">            return &quot;\n&quot;;</span>
+<span class="fc" id="L289">            return &quot;\n&quot;;</span>
         }
         else
         {
-<span class="fc" id="L304">            return &quot;&quot;;</span>
+<span class="fc" id="L293">            return &quot;&quot;;</span>
         }
     }
 
     /**
-     * Run-Once on creation
-     * Executes a piece of code before running any rendering.
-     * Call super after your changes
-     * Marks the component as configured
+     * Run-Once on creation Executes a piece of code before running any rendering. Call super after your changes Marks the component as configured
      */
     @Override
     public void preConfigure()
     {
-<span class="fc" id="L317">        setConfigured(true);</span>
-<span class="fc" id="L318">    }</span>
+<span class="fc" id="L303">        setConfigured(true);</span>
+<span class="fc" id="L304">    }</span>
 
     /**
      * If this component is already configured
@@ -325,7 +311,7 @@ public class ComponentBase&lt;J extends ComponentBase&gt; implements IComponentB
     @Override
     public boolean isConfigured()
     {
-<span class="fc" id="L328">        return configured;</span>
+<span class="fc" id="L314">        return configured;</span>
     }
 
     /**
@@ -336,79 +322,85 @@ public class ComponentBase&lt;J extends ComponentBase&gt; implements IComponentB
     @Override
     public J setConfigured(boolean configured)
     {
-<span class="fc" id="L339">        this.configured = configured;</span>
-<span class="fc" id="L340">        return (J)this;</span>
+<span class="fc" id="L325">        this.configured = configured;</span>
+<span class="fc" id="L326">        return (J) this;</span>
     }
 
     /**
      * Returns a map of user defined properties for this component
-     * @return 
+     *
+     * @return
      */
     @Override
-    public Map&lt;String, Object&gt; getProperties() {
-<span class="pc bpc" id="L349" title="1 of 2 branches missed.">        if(properties == null)</span>
-<span class="fc" id="L350">            properties = new HashMap&lt;&gt;();</span>
-<span class="fc" id="L351">        return properties;</span>
-    } 
+    public Map&lt;String, Object&gt; getProperties()
+    {
+<span class="pc bpc" id="L337" title="1 of 2 branches missed.">        if (properties == null)</span>
+        {
+<span class="fc" id="L339">            properties = new HashMap&lt;&gt;();</span>
+        }
+<span class="fc" id="L341">        return properties;</span>
+    }
 
     /**
      * Sets this components user defined properties
-     * @param properties 
+     *
+     * @param properties
      */
     @Override
-    public J setProperties(HashMap&lt;String, Object&gt; properties) {
-<span class="nc" id="L360">        this.properties = properties;</span>
-<span class="nc" id="L361">        return (J)this;</span>
+    public J setProperties(HashMap&lt;String, Object&gt; properties)
+    {
+<span class="nc" id="L352">        this.properties = properties;</span>
+<span class="nc" id="L353">        return (J) this;</span>
     }
 
     /**
      * Default HashCode over-ride
-     * @return 
+     *
+     * @return
      */
     @Override
     public int hashCode()
     {
-<span class="nc" id="L371">        int hash = 7;</span>
-<span class="nc" id="L372">        hash = 23 * hash + Objects.hashCode(this.id);</span>
-<span class="nc" id="L373">        hash = 23 * hash + Objects.hashCode(this.componentType);</span>
-<span class="nc" id="L374">        hash = 23 * hash + Objects.hashCode(this.text);</span>
-<span class="nc" id="L375">        return hash;</span>
+<span class="nc" id="L364">        int hash = 7;</span>
+<span class="nc" id="L365">        hash = 23 * hash + Objects.hashCode(this.id);</span>
+<span class="nc" id="L366">        hash = 23 * hash + Objects.hashCode(this.componentType);</span>
+<span class="nc" id="L367">        hash = 23 * hash + Objects.hashCode(this.text);</span>
+<span class="nc" id="L368">        return hash;</span>
     }
 
     /**
      * Default equals for a component
+     *
      * @param obj The incoming object
+     *
      * @return True if the ID, Type and Text are the same
      */
     @Override
     public boolean equals(Object obj)
     {
-<span class="nc bnc" id="L386" title="All 2 branches missed.">        if (this == obj)</span>
+<span class="nc bnc" id="L381" title="All 2 branches missed.">        if (this == obj)</span>
         {
-<span class="nc" id="L388">            return true;</span>
+<span class="nc" id="L383">            return true;</span>
         }
-<span class="nc bnc" id="L390" title="All 2 branches missed.">        if (obj == null)</span>
+<span class="nc bnc" id="L385" title="All 2 branches missed.">        if (obj == null)</span>
         {
-<span class="nc" id="L392">            return false;</span>
+<span class="nc" id="L387">            return false;</span>
         }
-<span class="nc bnc" id="L394" title="All 2 branches missed.">        if (getClass() != obj.getClass())</span>
+<span class="nc bnc" id="L389" title="All 2 branches missed.">        if (getClass() != obj.getClass())</span>
+        {
+<span class="nc" id="L391">            return false;</span>
+        }
+<span class="nc" id="L393">        final ComponentBase&lt;?&gt; other = (ComponentBase&lt;?&gt;) obj;</span>
+<span class="nc bnc" id="L394" title="All 2 branches missed.">        if (!Objects.equals(this.id, other.id))</span>
         {
 <span class="nc" id="L396">            return false;</span>
         }
-<span class="nc" id="L398">        final ComponentBase&lt;?&gt; other = (ComponentBase&lt;?&gt;) obj;</span>
-<span class="nc bnc" id="L399" title="All 2 branches missed.">        if (!Objects.equals(this.id, other.id))</span>
+<span class="nc bnc" id="L398" title="All 2 branches missed.">        if (!Objects.equals(this.text, other.text))</span>
         {
-<span class="nc" id="L401">            return false;</span>
+<span class="nc" id="L400">            return false;</span>
         }
-<span class="nc bnc" id="L403" title="All 2 branches missed.">        if (!Objects.equals(this.text, other.text))</span>
-        {
-<span class="nc" id="L405">            return false;</span>
-        }
-<span class="nc bnc" id="L407" title="All 2 branches missed.">        return this.componentType == other.componentType;</span>
+<span class="nc bnc" id="L402" title="All 2 branches missed.">        return this.componentType == other.componentType;</span>
     }
-    
-    
-    
 
     /**
      * Renders the component as a JSON Object
@@ -418,41 +410,41 @@ public class ComponentBase&lt;J extends ComponentBase&gt; implements IComponentB
     @Override
     public String toString()
     {
-<span class="fc bfc" id="L421" title="All 2 branches covered.">        if (!isConfigured())</span>
+<span class="fc bfc" id="L413" title="All 2 branches covered.">        if (!isConfigured())</span>
         {
-<span class="fc" id="L423">            init();</span>
-<span class="fc" id="L424">            preConfigure();</span>
+<span class="fc" id="L415">            init();</span>
+<span class="fc" id="L416">            preConfigure();</span>
         }
-<span class="fc" id="L426">        return JavaScriptPart.objectAsString(this);</span>
+<span class="fc" id="L418">        return JavaScriptPart.objectAsString(this);</span>
     }
-    
-    
+
     /**
-     * Runs before anything
-     * Can be used as constructor intializations.
+     * Runs before anything Can be used as constructor intializations.
      */
     public void init()
     {
-        
-<span class="fc" id="L437">        setInitialized(true);</span>
-<span class="fc" id="L438">    }</span>
+
+<span class="fc" id="L427">        setInitialized(true);</span>
+<span class="fc" id="L428">    }</span>
 
     /**
      * If this component has been initialized
-     * @return 
+     *
+     * @return
      */
     public boolean isInitialized()
     {
-<span class="fc" id="L446">        return initialized;</span>
+<span class="fc" id="L437">        return initialized;</span>
     }
 
     /**
      * If this component has been initialized
-     * @param initialized 
+     *
+     * @param initialized
      */
     public void setInitialized(boolean initialized)
     {
-<span class="fc" id="L455">        this.initialized = initialized;</span>
-<span class="fc" id="L456">    }</span>
+<span class="fc" id="L447">        this.initialized = initialized;</span>
+<span class="fc" id="L448">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

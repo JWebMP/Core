@@ -16,7 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.verticaltimeline;
 
-import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.base.html.Div;
 
 /**
  * An implementation of the Responsive Vertical Timeline - https://codyhouse.co/gem/vertical-timeline/
@@ -81,7 +81,7 @@ public class VerticalTimeline extends Div<VerticalTimelineChildren, VerticalTime
     {
         if (!isConfigured())
         {
-            getPage().getOptions().setModernizrEnabled(true);
+            //getPage().getOptions().setModernizrEnabled(true);
             getPage().getOptions().setBootstrapEnabled(true);
         }
         super.preConfigure();

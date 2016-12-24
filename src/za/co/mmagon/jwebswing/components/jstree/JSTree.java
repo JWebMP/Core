@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jstree;
 
+import java.util.Map;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.servlets.interfaces.IDataComponent;
 import za.co.mmagon.jwebswing.components.jstree.themes.JSTreeTheme;
@@ -41,9 +42,26 @@ public class JSTree extends Div<JSTreeChildren, JSTreeAttributes, JSTreeFeatures
     }
 
     @Override
-    public JSTreeData getData()
+    public void preConfigure()
     {
-        return data;
+        getPage().getOptions().setjQueryEnabled(true);
+        super.preConfigure();
+    }
+
+    @Override
+    public JSTreeData getData(Map<String, String[]> params)
+    {
+        String[] ids = params.get("id");
+        String id = ids[0];
+        if (id.equalsIgnoreCase("#"))
+        {
+            return data;
+        }
+        else
+        {
+            return data.findNode(id).getChildNodes();
+            //go through the nodes looking for the next id item
+        }
     }
 
     public void setData(JSTreeData data)
@@ -64,17 +82,6 @@ public class JSTree extends Div<JSTreeChildren, JSTreeAttributes, JSTreeFeatures
     public JSTreeOptions getOptions()
     {
         return getFeature().getOptions();
-    }
-
-    /**
-     * Sets if this data must come from the Ajax data server or be rendered in line
-     *
-     * @return
-     */
-    @Override
-    public boolean isAjax()
-    {
-        return true;
     }
 
     /**

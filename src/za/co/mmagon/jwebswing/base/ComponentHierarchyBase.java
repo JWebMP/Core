@@ -19,12 +19,16 @@ package za.co.mmagon.jwebswing.base;
 import com.fasterxml.jackson.annotation.*;
 import java.util.*;
 import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.base.angular.controllers.AngularControllerBase;
+import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
+import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
-import za.co.mmagon.jwebswing.base.interfaces.*;
-import za.co.mmagon.jwebswing.base.references.*;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.interfaces.IComponentHierarchyBase;
+import za.co.mmagon.jwebswing.base.references.CSSReference;
+import za.co.mmagon.jwebswing.base.references.JavascriptReference;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
  * Provides the Hierarchy for any component. Manages children and parent relationships
@@ -257,7 +261,7 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
     @Override
     public List<ComponentHierarchyBase> getChildrenHierarchy(List<ComponentHierarchyBase> componentsToAddTo)
     {
-        getChildren().stream().filter((child) -> !(child == null)).map(child
+        getChildren().stream().filter(child -> !(child == null)).map(child
                 ->
         {
             if (!componentsToAddTo.contains(child))
@@ -432,6 +436,29 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
     }
 
     /**
+     * Returns a complete list of events
+     *
+     * @return
+     */
+    public List<Feature> getFeaturesAll()
+    {
+        ArrayList<Feature> allFeatures = new ArrayList<>();
+        getChildrenHierarchy().stream().filter(a -> a != null).forEach(child
+                ->
+        {
+            for (Iterator<Feature> iterator1 = child.getFeatures().iterator(); iterator1.hasNext();)
+            {
+                Feature event = iterator1.next();
+                if (event != null)
+                {
+                    allFeatures.add(event);
+                }
+            }
+        });
+        return allFeatures;
+    }
+
+    /**
      * Adds in the JavaScript References for all the children
      *
      * @return
@@ -489,7 +516,7 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
     public List<String> getVariablesAll()
     {
         ArrayList<String> allVariables = new ArrayList<>();
-        getChildrenHierarchy().stream().filter(a -> a != null).forEach((child)
+        getChildrenHierarchy().stream().filter(a -> a != null).forEach(child
                 ->
         {
             for (Iterator it = child.getVariables().iterator(); it.hasNext();)
@@ -514,9 +541,9 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
     {
         ArrayList<StringBuilder> reallyAllQueries = new ArrayList<>();
         List<ComponentHierarchyBase> allComponents = getChildrenHierarchy(true);
-        allComponents.stream().filter(currentComponent -> currentComponent != null).map(component ->
+        allComponents.stream().filter(currentComponent -> currentComponent != null).map(componentQuery ->
         {
-            List<ComponentFeatureBase> features = component.getFeatures();
+            List<ComponentFeatureBase> features = componentQuery.getFeatures();
             features.stream().map(feature ->
             {
                 if (!feature.isConfigured())
@@ -529,7 +556,7 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
             {
                 reallyAllQueries.add(feature.renderJavascript());
             });
-            List<ComponentFeatureBase> events = component.getFeatures();
+            List<ComponentFeatureBase> events = componentQuery.getFeatures();
             return events;
         }).map(events ->
         {
@@ -663,7 +690,7 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
      */
     protected boolean containsClass(Class classType)
     {
-        return getChildren().stream().anyMatch((child) -> (child.getClass().equals(classType)));
+        return getChildren().stream().anyMatch(child -> (child.getClass().equals(classType)));
     }
 
     /**
@@ -672,15 +699,93 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
      * @return
      */
     @Override
-    public HashMap<String, JavaScriptPart> getAngularObjectsAll()
+    public Map<String, JavaScriptPart> getAngularObjectsAll()
     {
-        HashMap<String, JavaScriptPart> map = getAngularObjects();
-        getChildrenHierarchy(true).stream().map((child) -> child.getAngularObjects()).forEach((ang)
+        Map<String, JavaScriptPart> map = getAngularObjects();
+        getChildrenHierarchy(true).stream().map(child -> child.getAngularObjects()).forEach(ang
                 ->
         {
             map.putAll(ang);
         });
         return map;
+    }
+
+    /**
+     * Returns all the angular modules required from all the components, features and events.
+     *
+     * @return
+     */
+    public List<AngularModuleBase> getAngularModulesAll()
+    {
+        List<AngularModuleBase> modules = getAngularModules();
+        getChildrenHierarchy(true).stream().map(child -> child.getAngularModules()).forEach(ang
+                ->
+        {
+            for (Iterator iterator = ang.iterator(); iterator.hasNext();)
+            {
+                AngularModuleBase next = (AngularModuleBase) iterator.next();
+                if (next != null)
+                {
+                    if (!modules.contains(next))
+                    {
+                        modules.add(next);
+                    }
+                }
+            }
+        });
+        return modules;
+    }
+
+    /**
+     * Returns all the angular modules required from all the components, features and events.
+     *
+     * @return
+     */
+    public List<AngularDirectiveBase> getAngularDirectivesAll()
+    {
+        List<AngularDirectiveBase> modules = getAngularDirectives();
+        getChildrenHierarchy(true).stream().map(child -> child.getAngularDirectives()).forEach(ang
+                ->
+        {
+            for (Iterator iterator = ang.iterator(); iterator.hasNext();)
+            {
+                AngularDirectiveBase next = (AngularDirectiveBase) iterator.next();
+                if (next != null)
+                {
+                    if (!modules.contains(next))
+                    {
+                        modules.add(next);
+                    }
+                }
+            }
+        });
+        return modules;
+    }
+
+    /**
+     * Returns all the angular modules required from all the components, features and events.
+     *
+     * @return
+     */
+    public List<AngularControllerBase> getAngularControllersAll()
+    {
+        List<AngularControllerBase> modules = getAngularControllers();
+        getChildrenHierarchy(true).stream().map(child -> child.getAngularControllers()).forEach(ang
+                ->
+        {
+            for (Iterator iterator = ang.iterator(); iterator.hasNext();)
+            {
+                AngularControllerBase next = (AngularControllerBase) iterator.next();
+                if (next != null)
+                {
+                    if (!modules.contains(next))
+                    {
+                        modules.add(next);
+                    }
+                }
+            }
+        });
+        return modules;
     }
 
     /**
@@ -691,7 +796,7 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
     @Override
     public String toString()
     {
-        getChildren().stream().forEach((next)
+        getChildren().stream().forEach(next
                 ->
         {
             if (!next.isConfigured())

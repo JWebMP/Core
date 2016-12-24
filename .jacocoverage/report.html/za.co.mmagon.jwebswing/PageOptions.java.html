@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PageOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing</a> &gt; <span class="el_source">PageOptions.java</span></div><h1>PageOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing;
+
+import com.fasterxml.jackson.annotation.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
+
+/**
+ * A list of page options available to the page
+ *
+ * @author GedMarc
+ * @since Nov 21, 2016
+ *
+ */
+public class PageOptions extends JavaScriptPart
+{
+
+    private static final long serialVersionUID = 1L;
+    @JsonIgnore
+    private final Page page;
+
+    /**
+     * Whether or not to render pace loader
+     */
+<span class="fc" id="L39">    private boolean paceEnabled = true;</span>
+    /**
+     * Whether or not to render jQuery
+     */
+    private boolean jQueryEnabled;
+    /**
+     * Whether or not to render jQuery UI
+     */
+    private boolean jQueryUIEnabled;
+    /**
+     * Whether or not to render angular
+     */
+    private boolean angularEnabled;
+    /**
+     * Whether or not to render bootstrap
+     */
+    private boolean bootstrapEnabled;
+    /**
+     * Whether or not to dynamic render the requirements
+     */
+<span class="fc" id="L59">    private boolean dynamicRender = true;</span>
+    /**
+     * Whether or not modernizr is enabled
+     */
+    private boolean modernizrEnabled;
+
+    /**
+     * Construct directly with the page
+     *
+     * @param page
+     */
+    protected PageOptions(Page page)
+<span class="fc" id="L71">    {</span>
+<span class="fc" id="L72">        this.page = page;</span>
+<span class="fc" id="L73">    }</span>
+
+    /**
+     * Whether or not to render the JQuery requirements
+     *
+     * @return
+     */
+    public boolean isjQueryEnabled()
+    {
+<span class="fc" id="L82">        return jQueryEnabled;</span>
+    }
+
+    /**
+     * Whether or not to render the JQuery Requirements
+     *
+     * @param jQueryEnabled
+     */
+    public void setjQueryEnabled(boolean jQueryEnabled)
+    {
+<span class="fc" id="L92">        this.jQueryEnabled = jQueryEnabled;</span>
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">        if (this.jQueryEnabled)</span>
+        {
+<span class="fc" id="L95">            page.getBody().configureJQuery();</span>
+        }
+<span class="fc" id="L97">    }</span>
+
+    /**
+     * Whether or not to render the JQuery UI Requirements
+     *
+     * @return
+     */
+    public boolean isjQueryUIEnabled()
+    {
+<span class="fc" id="L106">        return jQueryUIEnabled;</span>
+    }
+
+    /**
+     * Whether or not to render the JQuery UI Requirements
+     *
+     * @param jQueryUIEnabled
+     */
+    public void setjQueryUIEnabled(boolean jQueryUIEnabled)
+    {
+<span class="fc" id="L116">        this.jQueryUIEnabled = jQueryUIEnabled;</span>
+<span class="pc bpc" id="L117" title="1 of 2 branches missed.">        if (jQueryUIEnabled)</span>
+        {
+<span class="fc" id="L119">            setjQueryEnabled(true);</span>
+<span class="fc" id="L120">            page.getBody().configureJQueryUI();</span>
+        }
+<span class="fc" id="L122">    }</span>
+
+    /**
+     * whether or not to render angular
+     *
+     * @return
+     */
+    public boolean isAngularEnabled()
+    {
+<span class="fc" id="L131">        return angularEnabled;</span>
+    }
+
+    /**
+     * Whether or not to render angular
+     *
+     * @param angularEnabled
+     */
+    public void setAngularEnabled(boolean angularEnabled)
+    {
+<span class="fc" id="L141">        this.angularEnabled = angularEnabled;</span>
+<span class="pc bpc" id="L142" title="1 of 2 branches missed.">        if (angularEnabled)</span>
+        {
+<span class="fc" id="L144">            setjQueryEnabled(true);</span>
+<span class="fc" id="L145">            page.getBody().configureAngular();</span>
+        }
+<span class="fc" id="L147">    }</span>
+
+    /**
+     * Whether or not to render bootstrap
+     *
+     * @return
+     */
+    public boolean isBootstrapEnabled()
+    {
+<span class="fc" id="L156">        return bootstrapEnabled;</span>
+    }
+
+    /**
+     * Whether or not to render bootstrap
+     *
+     * @param bootstrapEnabled
+     */
+    public void setBootstrapEnabled(boolean bootstrapEnabled)
+    {
+<span class="fc" id="L166">        this.bootstrapEnabled = bootstrapEnabled;</span>
+<span class="pc bpc" id="L167" title="1 of 2 branches missed.">        if (bootstrapEnabled)</span>
+        {
+<span class="fc" id="L169">            page.getBody().configureBootstrap();</span>
+        }
+<span class="fc" id="L171">    }</span>
+
+    /**
+     * Returns if pace should be set as the default render
+     *
+     * @return
+     */
+    public boolean isPaceEnabled()
+    {
+<span class="fc" id="L180">        return paceEnabled;</span>
+    }
+
+    /**
+     * Sets if pace should be rendered s the default loader
+     *
+     * @param paceEnabled
+     */
+    public void setPaceEnabled(boolean paceEnabled)
+    {
+<span class="fc" id="L190">        this.paceEnabled = paceEnabled;</span>
+<span class="fc" id="L191">        page.getBody().configurePace();</span>
+<span class="fc" id="L192">    }</span>
+
+    /**
+     * Is Modernizr Enabled
+     *
+     * @return
+     */
+    public boolean isModernizrEnabled()
+    {
+<span class="fc" id="L201">        return modernizrEnabled;</span>
+    }
+
+    /**
+     * Sets if Modernizr is enabled
+     *
+     * @param modernizrEnabled
+     */
+    public void setModernizrEnabled(boolean modernizrEnabled)
+    {
+<span class="fc" id="L211">        this.modernizrEnabled = modernizrEnabled;</span>
+<span class="fc" id="L212">        page.getBody().configureModernizr();</span>
+<span class="fc" id="L213">    }</span>
+
+    /**
+     * Whether or not to dynamic render the requirements
+     *
+     * @return
+     */
+    public boolean isDynamicRender()
+    {
+<span class="fc" id="L222">        return dynamicRender;</span>
+    }
+
+    /**
+     * Whether or not to dynamic render the requirements
+     *
+     * @param dynamicRender
+     */
+    public void setDynamicRender(boolean dynamicRender)
+    {
+<span class="fc" id="L232">        this.dynamicRender = dynamicRender;</span>
+<span class="fc" id="L233">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

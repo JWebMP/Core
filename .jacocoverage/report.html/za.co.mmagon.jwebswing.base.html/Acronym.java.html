@@ -1,46 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Acronym.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">Acronym.java</span></div><h1>Acronym.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html;
 
 import java.io.Serializable;
-import za.co.mmagon.LoggerFactory;
+import java.util.logging.Level;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.client.HTMLVersions;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.HtmlChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Definition and Usage&lt;p&gt;
  * &lt;p&gt;
- * The &amp;lt;acronym&amp;gt; tag is not supported in HTML5. Use the &amp;lt;abbr&amp;gt; tag
- * instead.&lt;p&gt;
+ * The &amp;lt;acronym&amp;gt; tag is not supported in HTML5. Use the &amp;lt;abbr&amp;gt; tag instead.&lt;p&gt;
  * &lt;p&gt;
  * The &amp;lt;acronym&amp;gt; tag defines an acronym.&lt;p&gt;
  * &lt;p&gt;
- * An acronym can be spoken as if it were a word, example NATO, NASA, ASAP,
- * GUI.&lt;p&gt;
+ * An acronym can be spoken as if it were a word, example NATO, NASA, ASAP, GUI.&lt;p&gt;
  * &lt;p&gt;
- * By marking up acronyms you can give useful information to browsers, spell
- * checkers, translation systems and search-engine indexers. Browser Support
- * Element&lt;p&gt;
+ * By marking up acronyms you can give useful information to browsers, spell checkers, translation systems and search-engine indexers. Browser Support Element&lt;p&gt;
  * &amp;lt;acronym&amp;gt; All Browsers&lt;p&gt;
  * &lt;p&gt;
  * Tips and Notes&lt;p&gt;
  * &lt;p&gt;
- * Tip: The title attribute can be used to show the full version of the acronym
- * when you mouse over it. Differences Between HTML 4.01 and HTML5&lt;p&gt;
+ * Tip: The title attribute can be used to show the full version of the acronym when you mouse over it. Differences Between HTML 4.01 and HTML5&lt;p&gt;
  * &lt;p&gt;
  * The &amp;lt;acronym&amp;gt; tag is not supported in HTML5.&lt;p&gt;
  * &lt;p&gt;
- * The &amp;lt;acronym&amp;gt; tag is not supported in HTML5.
- * Use the &amp;lt;abbr&amp;gt; tag
- * instead.&lt;p&gt;
+ * The &amp;lt;acronym&amp;gt; tag is not supported in HTML5. Use the &amp;lt;abbr&amp;gt; tag instead.&lt;p&gt;
  *
  * @since 2014 09 22
  * @version 1.0
@@ -56,7 +45,7 @@ public class Acronym extends Component&lt;NoChildren, NoAttributes, NoFeatures, 
     /**
      * Logger for the Component
      */
-<span class="fc" id="L59">    private static final org.apache.log4j.Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;Acronym&quot;);</span>
+<span class="fc" id="L48">    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger(&quot;Acronym&quot;);</span>
     /**
      * Serial Version for all Components and their compatibility
      */
@@ -69,31 +58,30 @@ public class Acronym extends Component&lt;NoChildren, NoAttributes, NoFeatures, 
      */
     public Acronym(String text)
     {
-<span class="fc" id="L72">        super(ComponentTypes.Acronym.getComponentTag(), ComponentTypes.Acronym);</span>
-<span class="fc" id="L73">        setText(text);</span>
-<span class="fc" id="L74">    }</span>
+<span class="fc" id="L61">        super(ComponentTypes.Acronym.getComponentTag(), ComponentTypes.Acronym);</span>
+<span class="fc" id="L62">        setText(text);</span>
+<span class="fc" id="L63">    }</span>
 
     /**
      * Differences Between HTML and HTML 5
      * &lt;p&gt;
-     * The &amp;gt;acronym&amp;lt; tag is not supported in HTML5. Use the &amp;gt;abbr&amp;lt;
-     * tag instead.
+     * The &amp;gt;acronym&amp;lt; tag is not supported in HTML5. Use the &amp;gt;abbr&amp;lt; tag instead.
      */
     @Override
     public void preConfigure()
     {
-<span class="fc" id="L85">        super.preConfigure();</span>
+<span class="fc" id="L73">        super.preConfigure();</span>
         try
         {
-<span class="fc bfc" id="L88" title="All 2 branches covered.">            if (getPage().getBrowser().getHtmlVersion() == HTMLVersions.HTML5)</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">            if (getPage().getBrowser().getHtmlVersion() == HTMLVersions.HTML5)</span>
             {
-<span class="fc" id="L90">                setTag(&quot;abbr&quot;);</span>
+<span class="fc" id="L78">                setTag(&quot;abbr&quot;);</span>
             }
         }
-<span class="nc" id="L93">        catch (Exception e)</span>
+<span class="nc" id="L81">        catch (Exception e)</span>
         {
-<span class="nc" id="L95">            LOG.trace(&quot;Unable to determine whether HTML or HTML5. Document type not set?&quot;,e);</span>
-<span class="fc" id="L96">        }</span>
-<span class="fc" id="L97">    }</span>
+<span class="nc" id="L83">            LOG.log(Level.FINE, &quot;Unable to determine whether HTML or HTML5. Document type not set?&quot;, e);</span>
+<span class="fc" id="L84">        }</span>
+<span class="fc" id="L85">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

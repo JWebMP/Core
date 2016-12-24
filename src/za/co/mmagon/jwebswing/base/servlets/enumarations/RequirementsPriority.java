@@ -57,9 +57,13 @@ public enum RequirementsPriority implements Comparable<RequirementsPriority>
      */
     Last,
     /**
-     * The very last section. Usually at the end of the page
+     * The very last section. Usually at the end of the page, before or at the scripts section of body
      */
-    VeryLast;
+    VeryLast,
+    /**
+     * After all the dynamic scripts, just before body close tag
+     */
+    StoneLast;
 
     private RequirementsPriority()
     {

@@ -16,33 +16,33 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import za.co.mmagon.LoggerFactory;
+import java.util.logging.Level;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.ParameterAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.ObjectTagChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Definition and Usage&lt;p&gt;
- *&lt;p&gt;
+ * &lt;p&gt;
  * The &amp;gt;param&amp;lt; tag is used to define parameters for plugins embedded with an &amp;gt;object&amp;lt; element.&lt;p&gt;
- *&lt;p&gt;
+ * &lt;p&gt;
  * Tip: HTML 5 also includes two new elements for playing audio or video: The &amp;gt;audio&amp;lt; and &amp;gt;video&amp;lt; tags. Browser Support&lt;p&gt;
- *&lt;p&gt;
+ * &lt;p&gt;
  * The &amp;gt;param&amp;lt; tag is supported in all major browsers. However, the file format defined in &amp;gt;object&amp;lt; may not be supported in all browsers. Element &amp;gt;param&amp;lt; Yes Yes Yes Yes Yes&lt;p&gt;
  * Differences Between HTML 4.01 and HTML5&lt;p&gt;
- *&lt;p&gt;
+ * &lt;p&gt;
  * The &quot;type&quot; and &quot;valuetype&quot; attributes are not supported in HTML5. Differences Between HTML and XHTML&lt;p&gt;
- *&lt;p&gt;
+ * &lt;p&gt;
  * In HTML the &amp;gt;param&amp;lt; tag has no end tag.&lt;p&gt;
- *&lt;p&gt;
- * In XHTML the &amp;gt;param&amp;lt; tag must be properly closed, like this &amp;gt;param /&amp;lt;.&lt;p&gt;
- *&lt;p&gt;
+ * &lt;p&gt;
+ * In XHTML the &amp;gt;param&amp;lt; tag must be properly closed, like this &amp;gt;param /&amp;lt;
+ * .&lt;p&gt;
+ * &lt;p&gt;
  * @author GedMarc
  * @since Mar 1, 2015
  * @version 1.0
@@ -55,7 +55,7 @@ public class Parameter extends Component&lt;NoChildren, ParameterAttributes, Glo
     /**
      * Logger for the Component
      */
-<span class="fc" id="L58">    private static final org.apache.log4j.Logger log = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;Parameter&quot;);</span>
+<span class="fc" id="L58">    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger(&quot;Parameter&quot;);</span>
     /**
      * Serial Version for all Components and their compatibility
      */
@@ -71,9 +71,9 @@ public class Parameter extends Component&lt;NoChildren, ParameterAttributes, Glo
 
     /**
      * Differences Between HTML and XHTML
-     *
+     * &lt;p&gt;
      * In HTML the base tag has no end tag.
-     *
+     * &lt;p&gt;
      * In XHTML the base tag must be properly closed.
      */
     @Override
@@ -89,7 +89,7 @@ public class Parameter extends Component&lt;NoChildren, ParameterAttributes, Glo
         }
 <span class="nc" id="L90">        catch (Exception e)</span>
         {
-<span class="nc" id="L92">            log.trace(&quot;Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.&quot;,e);</span>
+<span class="nc" id="L92">            log.log(Level.FINE, &quot;Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.&quot;, e);</span>
 <span class="fc" id="L93">        }</span>
 <span class="fc" id="L94">    }</span>
 }

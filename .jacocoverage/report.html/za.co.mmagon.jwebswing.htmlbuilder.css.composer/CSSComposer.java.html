@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CSSComposer.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.htmlbuilder.css.composer</a> &gt; <span class="el_source">CSSComposer.java</span></div><h1>CSSComposer.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
 import java.util.*;
-import org.apache.log4j.*;
-import za.co.mmagon.*;
-import za.co.mmagon.jwebswing.base.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
-import za.co.mmagon.jwebswing.utilities.*;
+import java.util.logging.*;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.base.ComponentStyleBase;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSPropertiesFactory;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
+import za.co.mmagon.jwebswing.utilities.ComponentUtils;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * This class specifically build CSS according to a JWebSwing component
@@ -19,7 +21,7 @@ import za.co.mmagon.jwebswing.utilities.*;
 public class CSSComposer
 {
 
-<span class="fc" id="L22">    protected static Logger log = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;CSSComposer&quot;);</span>
+<span class="fc" id="L24">    protected static Logger log = LogFactory.getInstance().getLogger(&quot;CSSComposer&quot;);</span>
     private CSSBlockMaster blockMaster;
     private CSSPropertiesFactory propertiesFactory;
 
@@ -30,41 +32,62 @@ public class CSSComposer
      */
     public CSSComposer()
     {
-<span class="fc" id="L33">        super();</span>
-<span class="fc" id="L34">        this.blockMaster = new CSSBlockMaster();</span>
-<span class="fc" id="L35">        this.propertiesFactory = new CSSPropertiesFactory();</span>
-<span class="fc" id="L36">    }</span>
+<span class="fc" id="L35">        super();</span>
+<span class="fc" id="L36">        this.blockMaster = new CSSBlockMaster();</span>
+<span class="fc" id="L37">        this.propertiesFactory = new CSSPropertiesFactory();</span>
+<span class="fc" id="L38">    }</span>
 
     /**
      * Adds a component to be registered with the block master
      *
      * @param o
      * @param includeChildren
+     *
+     * @return
      */
-    public void addComponent(ComponentStyleBase o, boolean includeChildren)
+    public List&lt;CSSBlock&gt; addComponent(ComponentStyleBase o, boolean includeChildren)
     {
-<span class="pc bpc" id="L46" title="1 of 2 branches missed.">        if (includeChildren)</span>
+<span class="fc" id="L50">        ArrayList&lt;CSSBlock&gt; list = new ArrayList&lt;&gt;();</span>
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        if (includeChildren)</span>
         {
-<span class="fc" id="L48">            List&lt;ComponentHierarchyBase&gt; comp = o.getChildrenHierarchy();</span>
-<span class="fc" id="L49">            ArrayList&lt;ComponentStyleBase&gt; compti = new ArrayList&lt;&gt;();</span>
-<span class="pc bpc" id="L50" title="1 of 2 branches missed.">            comp.stream().filter(a -&gt; a != null).forEach(co -&gt;</span>
+<span class="fc" id="L53">            List&lt;ComponentHierarchyBase&gt; comp = o.getChildrenHierarchy(true);</span>
+<span class="fc" id="L54">            ArrayList&lt;ComponentStyleBase&gt; compti = new ArrayList&lt;&gt;();</span>
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">            comp.stream().filter(a -&gt; a != null).forEach(co -&gt;</span>
             {
-<span class="fc bfc" id="L52" title="All 2 branches covered.">                if (ComponentStyleBase.class.isAssignableFrom(co.getClass()))</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">                if (ComponentStyleBase.class.isAssignableFrom(co.getClass()))</span>
                 {
-<span class="fc" id="L54">                    ComponentStyleBase chb = ComponentStyleBase.class.cast(co);</span>
-<span class="pc bpc" id="L55" title="1 of 2 branches missed.">                    if (!compti.contains(chb))</span>
+<span class="fc" id="L59">                    ComponentStyleBase chb = ComponentStyleBase.class.cast(co);</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">                    if (!compti.contains(chb))</span>
                     {
-<span class="fc" id="L57">                        compti.add(chb);</span>
+<span class="fc" id="L62">                        compti.add(chb);</span>
                     }
                 }
-<span class="fc" id="L60">            });</span>
-<span class="fc" id="L61">            compti.stream().forEach(this::addComponent);</span>
-<span class="fc" id="L62">        }</span>
+<span class="fc" id="L65">            });</span>
+<span class="fc" id="L66">            compti.stream().forEach(a -&gt;</span>
+            {
+<span class="fc" id="L68">                addComponent(a, list).stream().forEach(a2 -&gt;</span>
+                {
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">                    if (!list.contains(a2))</span>
+                    {
+<span class="nc" id="L72">                        list.add(a2);</span>
+                    }
+<span class="fc" id="L74">                });</span>
+
+<span class="fc" id="L76">            });</span>
+<span class="fc" id="L77">        }</span>
         else
         {
-<span class="nc" id="L65">            addComponent(o);</span>
+<span class="nc" id="L80">            addComponent(o, list);</span>
         }
-<span class="fc" id="L67">    }</span>
+
+<span class="fc" id="L83">        list.forEach(getBlockMaster()::addBlock);</span>
+<span class="fc" id="L84">        return list;</span>
+    }
+
+    public final ArrayList&lt;CSSBlock&gt; addComponent(ComponentStyleBase o)
+    {
+<span class="fc" id="L89">        return addComponent(o, new ArrayList());</span>
+    }
 
     /**
      * Add a component to this object to render for
@@ -73,40 +96,50 @@ public class CSSComposer
      *
      * @return True or False
      */
-    public final boolean addComponent(ComponentStyleBase o)
+    public final ArrayList&lt;CSSBlock&gt; addComponent(ComponentStyleBase o, ArrayList&lt;CSSBlock&gt; componentBlocks)
     {
-<span class="fc" id="L78">        CSSBlock annotatedCssBlocks = propertiesFactory.getCSSBlock(o.getID(), CSSTypes.None, propertiesFactory.getCSS(o), CSSBlockIdentifier.Class);</span>
-<span class="fc" id="L79">        String output = annotatedCssBlocks.getCssLines().toString().replace(&quot;{&quot;, &quot;&quot;).replace(&quot;}&quot;, &quot;&quot;);</span>
-<span class="fc bfc" id="L80" title="All 2 branches covered.">        if (!output.isEmpty())</span>
+<span class="fc" id="L101">        CSSBlock annotatedCssBlocks = getPropertiesFactory().getCSSBlock(o.getID(), CSSTypes.None, getPropertiesFactory().getCSS(o), CSSBlockIdentifier.Class);</span>
+<span class="fc" id="L102">        String output = annotatedCssBlocks.getCssLines().toString().replace(&quot;{&quot;, &quot;&quot;).replace(&quot;}&quot;, &quot;&quot;);</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        if (!output.isEmpty())</span>
         {
-<span class="fc" id="L82">            System.out.println(annotatedCssBlocks.getCssLines().toString().replace(&quot;{&quot;, &quot;&quot;).replace(&quot;}&quot;, &quot;&quot;));</span>
-<span class="fc" id="L83">            o.addClass(annotatedCssBlocks.getIdOfBlock());</span>
-<span class="fc" id="L84">            getBlockMaster().addBlock(annotatedCssBlocks);</span>
-        }
-
-<span class="fc" id="L87">        Map&lt;CSSTypes, CSSImpl&gt; css = o.getCssTypeHashMap();</span>
-<span class="fc" id="L88">        css.entrySet().stream().map(entry -&gt;</span>
-        {
-<span class="fc" id="L90">            CSSTypes key = entry.getKey();</span>
-<span class="fc" id="L91">            CSSImpl value = entry.getValue();</span>
-<span class="nc" id="L92">            CSSBlock declaredCssBlocks = propertiesFactory.getCSSBlock(o.getID() + key.getCssName(), key, propertiesFactory.getCSS(value), CSSBlockIdentifier.Id);</span>
-<span class="nc" id="L93">            return declaredCssBlocks;</span>
-<span class="fc" id="L94">        }).forEachOrdered(getBlockMaster()::addBlock);</span>
-
-<span class="fc" id="L96">        ArrayList&lt;Field&gt; fields = new ArrayList&lt;&gt;(Arrays.asList(o.getClass().getDeclaredFields()));</span>
-<span class="pc bpc" id="L97" title="1 of 2 branches missed.">        fields.stream().filter(a -&gt; ComponentUtils.fieldGet(a, o) != null).forEach((Field field) -&gt;</span>
-        {
-<span class="nc" id="L99">            field.setAccessible(true);</span>
-<span class="nc" id="L100">            Object fieldObject = ComponentUtils.fieldGet(field, o);</span>
-<span class="nc bnc" id="L101" title="All 2 branches missed.">            if (fieldObject instanceof ComponentStyleBase)</span>
+<span class="fc" id="L105">            o.addClass(annotatedCssBlocks.getIdOfBlock());</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">            if (!componentBlocks.contains(annotatedCssBlocks))</span>
             {
-<span class="nc" id="L103">                ComponentStyleBase c = (ComponentStyleBase) fieldObject;</span>
-<span class="nc" id="L104">                CSSBlock newFieldBlock = propertiesFactory.getCSSBlock(c.getID(), CSSTypes.None, propertiesFactory.getCSS(field, o), CSSBlockIdentifier.Id);</span>
-<span class="nc" id="L105">                newFieldBlock.setBlockIdentifer(CSSBlockIdentifier.Id);</span>
-<span class="nc" id="L106">                blockMaster.addBlock(newFieldBlock);</span>
+<span class="fc" id="L108">                componentBlocks.add(annotatedCssBlocks);</span>
             }
-<span class="nc" id="L108">        });</span>
-<span class="fc" id="L109">        return true;</span>
+        }
+<span class="fc" id="L111">        Map&lt;CSSTypes, CSSImpl&gt; css = o.getCssTypeHashMap();</span>
+<span class="fc" id="L112">        css.entrySet().stream().map(entry -&gt;</span>
+        {
+<span class="fc" id="L114">            CSSTypes key = entry.getKey();</span>
+<span class="fc" id="L115">            CSSImpl value = entry.getValue();</span>
+<span class="nc" id="L116">            CSSBlock declaredCssBlocks = getPropertiesFactory().getCSSBlock(o.getID() + key.getCssName(), key, getPropertiesFactory().getCSS(value), CSSBlockIdentifier.Id);</span>
+<span class="nc" id="L117">            return declaredCssBlocks;</span>
+<span class="fc" id="L118">        }).forEachOrdered(e -&gt;</span>
+        {
+<span class="nc bnc" id="L120" title="All 2 branches missed.">            if (!componentBlocks.contains(e))</span>
+            {
+<span class="nc" id="L122">                componentBlocks.add(e);</span>
+            }
+<span class="nc" id="L124">        });</span>
+
+<span class="fc" id="L126">        ArrayList&lt;Field&gt; fields = new ArrayList&lt;&gt;(Arrays.asList(o.getClass().getDeclaredFields()));</span>
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">        fields.stream().filter(a -&gt; ComponentUtils.fieldGet(a, o) != null).forEach((Field field) -&gt;</span>
+        {
+<span class="nc" id="L129">            field.setAccessible(true);</span>
+<span class="nc" id="L130">            Object fieldObject = ComponentUtils.fieldGet(field, o);</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">            if (ComponentStyleBase.class.isAssignableFrom(fieldObject.getClass()))</span>
+            {
+<span class="nc" id="L133">                ComponentStyleBase c = (ComponentStyleBase) fieldObject;</span>
+<span class="nc" id="L134">                CSSBlock newFieldBlock = getPropertiesFactory().getCSSBlock(c.getID(), CSSTypes.None, getPropertiesFactory().getCSS(field, o), CSSBlockIdentifier.Id);</span>
+<span class="nc" id="L135">                newFieldBlock.setBlockIdentifer(CSSBlockIdentifier.Id);</span>
+<span class="nc" id="L136">                componentBlocks.add(newFieldBlock);</span>
+            }
+<span class="nc" id="L138">        });</span>
+
+<span class="fc" id="L140">        componentBlocks.forEach(getBlockMaster()::addBlock);</span>
+
+<span class="fc" id="L142">        return componentBlocks;</span>
 
     }
 
@@ -117,7 +150,11 @@ public class CSSComposer
      */
     public CSSBlockMaster getBlockMaster()
     {
-<span class="fc" id="L120">        return blockMaster;</span>
+<span class="pc bpc" id="L153" title="1 of 2 branches missed.">        if (blockMaster == null)</span>
+        {
+<span class="nc" id="L155">            this.blockMaster = new CSSBlockMaster();</span>
+        }
+<span class="fc" id="L157">        return blockMaster;</span>
     }
 
     /**
@@ -127,8 +164,8 @@ public class CSSComposer
      */
     public void setBlockMaster(CSSBlockMaster blockMaster)
     {
-<span class="nc" id="L130">        this.blockMaster = blockMaster;</span>
-<span class="nc" id="L131">    }</span>
+<span class="nc" id="L167">        this.blockMaster = blockMaster;</span>
+<span class="nc" id="L168">    }</span>
 
     /**
      * Properties factory builder
@@ -137,7 +174,11 @@ public class CSSComposer
      */
     public CSSPropertiesFactory getPropertiesFactory()
     {
-<span class="nc" id="L140">        return propertiesFactory;</span>
+<span class="pc bpc" id="L177" title="1 of 2 branches missed.">        if (propertiesFactory == null)</span>
+        {
+<span class="nc" id="L179">            propertiesFactory = new CSSPropertiesFactory();</span>
+        }
+<span class="fc" id="L181">        return propertiesFactory;</span>
     }
 
     /**
@@ -147,8 +188,8 @@ public class CSSComposer
      */
     public void setPropertiesFactory(CSSPropertiesFactory propertiesFactory)
     {
-<span class="nc" id="L150">        this.propertiesFactory = propertiesFactory;</span>
-<span class="nc" id="L151">    }</span>
+<span class="nc" id="L191">        this.propertiesFactory = propertiesFactory;</span>
+<span class="nc" id="L192">    }</span>
 
     /**
      * Output the CSS Blocks rendered. Updates all block pretty print value to the page instance Tiny HTML
@@ -158,18 +199,7 @@ public class CSSComposer
     @Override
     public String toString()
     {
-<span class="fc" id="L161">        StringBuilder cssScript = new StringBuilder();</span>
-<span class="fc" id="L162">        List&lt;CSSBlock&gt; allCurrentBlocks = getBlockMaster().getAllCSSBlocks();</span>
-<span class="fc" id="L163">        allCurrentBlocks.stream().forEach(block</span>
-                -&gt;
-        {
-<span class="fc" id="L166">            String script = block.toString();</span>
-<span class="pc bpc" id="L167" title="2 of 4 branches missed.">            if (!(script == null || script.trim().isEmpty()))</span>
-            {
-<span class="fc" id="L169">                cssScript.append(block);</span>
-            }
-<span class="fc" id="L171">        });</span>
-<span class="fc" id="L172">        return cssScript.toString();</span>
+<span class="fc" id="L202">        return getBlockMaster().toString();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

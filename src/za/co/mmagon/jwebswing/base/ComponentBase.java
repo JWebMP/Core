@@ -446,4 +446,15 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
     {
         this.initialized = initialized;
     }
+
+    /**
+     * For JSON Reconstruction
+     *
+     * @return
+     */
+    @JsonProperty("componentClass")
+    protected String getComponentClass()
+    {
+        return getClass().getCanonicalName();
+    }
 }

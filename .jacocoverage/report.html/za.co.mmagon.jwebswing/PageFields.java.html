@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PageFields.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing</a> &gt; <span class="el_source">PageFields.java</span></div><h1>PageFields.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing;
+
+import com.fasterxml.jackson.annotation.*;
+import java.io.*;
+import java.nio.file.*;
+import java.util.logging.*;
+import za.co.mmagon.jwebswing.base.client.*;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.base.html.attributes.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
+
+/**
+ * A separated list of page fields Can be used as options
+ *
+ * @author GedMarc
+ * @since Nov 21, 2016
+ *
+ */
+public class PageFields extends JavaScriptPart
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Page Author
+     */
+    private Meta author;
+    /**
+     * Page Author
+     */
+    private Meta keywordsMeta;
+    /**
+     * Page Author
+     */
+    private Meta applicationNameMeta;
+    /**
+     * Page Author
+     */
+    private Meta descriptionMeta;
+    /**
+     * Page Author
+     */
+    private Meta generatorMeta;
+    /**
+     * Page HTTP Meta
+     */
+    private Meta httpEquivMeta;
+    /**
+     * Page Author
+     */
+    private Meta cacheControl;
+    /**
+     * The link for the Site icon
+     */
+    private CSSLink favIconLink;
+    /**
+     * The title of this page
+     */
+    private Title title;
+    /**
+     * The base of this page
+     */
+    private Base base;
+    /**
+     * The back reference to the page
+     */
+    @JsonIgnore
+    private final Page page;
+
+    /**
+     * Constructor for page fields
+     *
+     * @param page
+     */
+    protected PageFields(Page page)
+<span class="fc" id="L92">    {</span>
+<span class="fc" id="L93">        this.page = page;</span>
+<span class="fc" id="L94">    }</span>
+
+    /**
+     * Sets the author of this page
+     *
+     * @param author The author of this page
+     */
+    public final void setAuthor(String author)
+    {
+<span class="fc" id="L103">        this.author = new Meta(Meta.MetadataFields.Author, author);</span>
+<span class="fc" id="L104">    }</span>
+
+    /**
+     * Sets the description of this page
+     *
+     * @param description The description of the page
+     */
+    public final void setDescription(String description)
+    {
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">        if (descriptionMeta == null)</span>
+        {
+<span class="fc" id="L115">            descriptionMeta = new Meta(Meta.MetadataFields.Description, description);</span>
+        }
+        else
+        {
+<span class="nc" id="L119">            descriptionMeta.addAttribute(MetaAttributes.Content, description);</span>
+        }
+<span class="fc" id="L121">    }</span>
+
+    /**
+     * Returns the description of the page
+     *
+     * @return Meta The meta tag
+     */
+    public final Meta getDescription()
+    {
+<span class="fc" id="L130">        return descriptionMeta;</span>
+    }
+
+    /**
+     * Returns the Application Name of the page
+     *
+     * @return Meta The meta tag
+     */
+    public final Meta getApplicationName()
+    {
+<span class="fc" id="L140">        return applicationNameMeta;</span>
+    }
+
+    /**
+     * Sets the Application Name of this page
+     *
+     * @param applicationName The Application Name of the page
+     */
+    public final void setApplicationNameMeta(String applicationName)
+    {
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">        if (applicationNameMeta == null)</span>
+        {
+<span class="fc" id="L152">            applicationNameMeta = new Meta(Meta.MetadataFields.Application_Name, applicationName);</span>
+        }
+        else
+        {
+<span class="nc" id="L156">            applicationNameMeta.addAttribute(MetaAttributes.Content, applicationName);</span>
+        }
+<span class="fc" id="L158">    }</span>
+
+    /**
+     * Returns the Application Name of the page
+     *
+     * @return Meta The meta tag
+     */
+    public final Meta getGenerator()
+    {
+<span class="fc" id="L167">        return generatorMeta;</span>
+    }
+
+    /**
+     * Sets the Generator of this page
+     *
+     * @param Generator The Generator of the page
+     */
+    public final void setGenerator(String Generator)
+    {
+<span class="pc bpc" id="L177" title="1 of 2 branches missed.">        if (generatorMeta == null)</span>
+        {
+<span class="fc" id="L179">            generatorMeta = new Meta(Meta.MetadataFields.Generator, Generator);</span>
+        }
+        else
+        {
+<span class="nc" id="L183">            generatorMeta.addAttribute(MetaAttributes.Content, Generator);</span>
+        }
+<span class="fc" id="L185">    }</span>
+
+    /**
+     * Returns the Application Name of the page
+     *
+     * @return Meta The meta tag
+     */
+    public final Meta getKeywords()
+    {
+<span class="fc" id="L194">        return keywordsMeta;</span>
+    }
+
+    /**
+     * Sets the Keywords of this page
+     *
+     * @param Keywords The Keywords of the page
+     */
+    public final void setKeywords(String Keywords)
+    {
+<span class="pc bpc" id="L204" title="1 of 2 branches missed.">        if (keywordsMeta == null)</span>
+        {
+<span class="fc" id="L206">            keywordsMeta = new Meta(Meta.MetadataFields.Keywords, Keywords);</span>
+        }
+        else
+        {
+<span class="nc" id="L210">            keywordsMeta.addAttribute(MetaAttributes.Content, Keywords);</span>
+        }
+<span class="fc" id="L212">    }</span>
+
+    /**
+     * Removes Title from the Header
+     *
+     * @return Remove
+     */
+    public final boolean removeTitle()
+    {
+<span class="nc" id="L221">        return page.getHead().getChildren().remove(getTitle());</span>
+    }
+
+    /**
+     * Returns the Application Name of the page
+     *
+     * @return Meta The meta tag
+     */
+    public final Meta getCompatibilityMode()
+    {
+<span class="nc" id="L231">        return httpEquivMeta;</span>
+    }
+
+    /**
+     * Returns the Application Name of the page
+     *
+     * @param dummyInt Serves no function
+     *
+     * @return String The actual used compatibility mode
+     */
+    public final String getCompatibilityMode(int dummyInt)
+    {
+<span class="nc" id="L243">        return httpEquivMeta.getAttribute(MetaAttributes.Http_Equiv);</span>
+    }
+
+    /**
+     * Sets the Application Name of this page Null removes compatibility specification
+     *
+     * @param httpEquiv The Application Name of the page
+     */
+    public final void setCompatibilityMode(InternetExplorerCompatibilityMode httpEquiv)
+    {
+<span class="pc bpc" id="L253" title="3 of 4 branches missed.">        if (httpEquivMeta != null &amp;&amp; httpEquiv != null)</span>
+        {
+<span class="nc" id="L255">            httpEquivMeta.addAttribute(MetaAttributes.Content, httpEquiv.getValue());</span>
+        }
+<span class="fc bfc" id="L257" title="All 2 branches covered.">        else if (httpEquiv != null)</span>
+        {
+<span class="fc" id="L259">            httpEquivMeta = new Meta(Meta.MetadataFields.http_equiv, httpEquiv.getValue());</span>
+        }
+        else
+        {
+<span class="fc" id="L263">            httpEquivMeta = null;</span>
+        }
+<span class="fc" id="L265">    }</span>
+
+    /**
+     * Sets the Icon in the browser address bar
+     *
+     * @param favIconURL The path to the icon
+     */
+    public void setFavIcon(String favIconURL)
+    {
+<span class="nc" id="L274">        favIconLink.addAttribute(CSSLinkAttributes.Rel, &quot;icon&quot;);</span>
+<span class="nc" id="L275">        String favType = favIconURL.substring(favIconURL.lastIndexOf(&quot;.&quot;));</span>
+<span class="nc" id="L276">        String mimeType = &quot;&quot;;</span>
+        try
+        {
+
+<span class="nc" id="L280">            mimeType = Files.probeContentType(new File(favIconURL).toPath());</span>
+        }
+<span class="nc" id="L282">        catch (IOException ex)</span>
+        {
+<span class="nc" id="L284">            Logger.getLogger(Page.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L285">        }</span>
+        //@TODO define the image type from url
+<span class="nc" id="L287">        favIconLink.addAttribute(CSSLinkAttributes.Type, mimeType);</span>
+<span class="nc" id="L288">        favIconLink.addAttribute(CSSLinkAttributes.HRef, favIconURL);</span>
+<span class="nc" id="L289">    }</span>
+
+    /**
+     * Returns the author
+     *
+     * @return
+     */
+    public Meta getAuthor()
+    {
+<span class="fc" id="L298">        return author;</span>
+    }
+
+    /**
+     * Returns the fav icon link
+     *
+     * @return
+     */
+    public CSSLink getFavIconLink()
+    {
+<span class="fc" id="L308">        return favIconLink;</span>
+    }
+
+    /**
+     * Returns the http-equiv meta tag
+     *
+     * @return
+     */
+    public Meta getHttpEquivMeta()
+    {
+<span class="fc" id="L318">        return httpEquivMeta;</span>
+    }
+
+    /**
+     * Sets the Cache Control.
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * HTTP 1.1. Allowed values = PUBLIC | PRIVATE | NO-CACHE | NO-STORE.&lt;p&gt;
+     * &lt;p&gt;
+     * Public - may be cached in public shared caches.&lt;p&gt;
+     * Private - may only be cached in private cache.&lt;p&gt;
+     * No-Cache - may not be cached.&lt;p&gt;
+     * No-Store - may be cached but not archived.&lt;p&gt;
+     * &lt;p&gt;
+     * The directive CACHE-CONTROL:NO-CACHE indicates cached information should not be used and instead requests should be forwarded to the origin server. This directive has the same semantics as
+     * the&lt;p&gt;
+     * PRAGMA:NO-CACHE.&lt;p&gt;
+     * &lt;p&gt;
+     * Clients SHOULD include both PRAGMA: NO-CACHE and CACHE-CONTROL: NO-CACHE when a no-cache request is sent to a server not known to be HTTP/1.1 compliant. Also see EXPIRES.&lt;p&gt;
+     * &lt;p&gt;
+     * Note: It may be better to specify cache commands in HTTP than in META statements, where they can influence more than the browser, but proxies and other intermediaries that may cache&lt;p&gt;
+     * information.
+     *
+     * @param enable
+     */
+    public void setCacheControl(boolean enable)
+    {
+<span class="nc bnc" id="L346" title="All 2 branches missed.">        if (enable)</span>
+        {
+<span class="nc" id="L348">            cacheControl = new Meta(&quot;cache-control&quot;);</span>
+<span class="nc" id="L349">            cacheControl.addAttribute(MetaAttributes.Content, &quot;public&quot;);</span>
+        }
+        else
+        {
+<span class="nc" id="L353">            cacheControl = null;</span>
+        }
+<span class="nc" id="L355">    }</span>
+
+    /**
+     * Returns the Cache Control Meta Object
+     *
+     * @return
+     */
+    public Meta getCacheControl()
+    {
+<span class="fc" id="L364">        return cacheControl;</span>
+    }
+
+    /**
+     * Returns the Application Name of the page
+     *
+     * @return Meta The meta tag
+     */
+    public final Base getBase()
+    {
+<span class="fc" id="L374">        return this.base;</span>
+    }
+
+    /**
+     * Returns the Application Name of the page
+     *
+     * @return Meta The meta tag
+     */
+    public final Title getTitle()
+    {
+<span class="fc" id="L384">        return this.title;</span>
+    }
+
+    /**
+     * Sets the Title of this page
+     *
+     * @param Title The Title of the page
+     */
+    public final void setTitle(Title Title)
+    {
+<span class="fc" id="L394">        this.title = Title;</span>
+<span class="pc bpc" id="L395" title="1 of 2 branches missed.">        if (title != null)</span>
+        {
+<span class="nc" id="L397">            title.setPage(page);</span>
+        }
+<span class="fc" id="L399">    }</span>
+
+    /**
+     * Sets the Title of this page
+     *
+     * @param Title The Title of the page
+     */
+    public final void setTitle(String Title)
+    {
+<span class="fc" id="L408">        this.title = new Title(Title);</span>
+<span class="pc bpc" id="L409" title="1 of 2 branches missed.">        if (title != null)</span>
+        {
+<span class="fc" id="L411">            title.setPage(page);</span>
+        }
+<span class="fc" id="L413">    }</span>
+
+    /**
+     * Sets the Base of this page
+     *
+     * @param base The Base of the page
+     */
+    public final void setBase(Base base)
+    {
+<span class="fc" id="L422">        this.base = base;</span>
+<span class="fc bfc" id="L423" title="All 2 branches covered.">        if (base != null)</span>
+        {
+<span class="fc" id="L425">            base.setPage(page);</span>
+        }
+<span class="fc" id="L427">    }</span>
+
+    /**
+     * Removes Base from the Header
+     *
+     * @return Remove
+     */
+    public final boolean removeBase()
+    {
+<span class="nc" id="L436">        return page.getHead().getChildren().remove(getBase());</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

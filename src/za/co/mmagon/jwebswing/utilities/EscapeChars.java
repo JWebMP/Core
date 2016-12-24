@@ -1,33 +1,27 @@
 package za.co.mmagon.jwebswing.utilities;
 
-import java.io.*;
-import java.net.*;
-import java.text.*;
-import java.util.regex.*;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.text.CharacterIterator;
+import java.text.StringCharacterIterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Convenience methods for escaping special characters related to HTML, XML, and regular expressions.
  * <p>
- * &lt;P&gt;To keep you safe by default, WEB4J goes to some effort to escape characters in your data when appropriate, such that you &lt;em&gt;usually&lt;/em&gt; don't need to think too much about
- * escaping special characters. Thus, you shouldn't need to &lt;em&gt;directly&lt;/em&gt; use the services of this class very often.
  * <p>
- * &lt;P&gt;&lt;span class='highlight'&gt;For Model Objects containing free form user input, it is highly recommended that you use {@link SafeText}, not &lt;tt&gt;String&lt;/tt&gt;&lt;/span&gt;. Free
- * form user input is open to malicious use, such as &lt;a href='http://www.owasp.org/index.php/Cross_Site_Scripting'&gt;Cross Site Scripting&lt;/a&gt; attacks. Using &lt;tt&gt;SafeText&lt;/tt&gt;
- * will protect you from such attacks, by always escaping special characters automatically in its &lt;tt&gt;toString()&lt;/tt&gt; method.
- * <p>
- * &lt;P&gt;The following WEB4J classes will automatically escape special characters for you, when needed : &lt;ul&gt; &lt;li&gt;the {@link SafeText} class, used as a building block class for your
- * application's Model Objects, for modeling all free form user input &lt;li&gt;the {@link Populate} tag used with forms &lt;li&gt;the {@link Report} class used for creating quick reports
- * &lt;li&gt;the {@link Text}, {@link TextFlow}, and {@link Tooltips} custom tags used for translation &lt;/ul&gt;
  */
 public final class EscapeChars
 {
+
     private static final Pattern SCRIPT = Pattern.compile(
             "<SCRIPT>", Pattern.CASE_INSENSITIVE
     );
     private static final Pattern SCRIPT_END = Pattern.compile(
             "</SCRIPT>", Pattern.CASE_INSENSITIVE
     );
-    
+
     /**
      * Static only
      */
@@ -431,8 +425,6 @@ public final class EscapeChars
         result = matcher.replaceAll("&gt;/SCRIPT&lt;");
         return result;
     }
-
-    
 
     /**
      * Adds padding to string builder

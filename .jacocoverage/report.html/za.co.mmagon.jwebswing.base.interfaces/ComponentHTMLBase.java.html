@@ -17,17 +17,14 @@
 package za.co.mmagon.jwebswing.base.interfaces;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import za.co.mmagon.LoggerFactory;
 import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.ComponentEventBase;
 import za.co.mmagon.jwebswing.base.html.Comment;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.utilities.TextUtilities;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Denotes a component that has a tag. By default these can add events, features, variables etc
@@ -50,15 +47,15 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
      */
     public ComponentHTMLBase(ComponentTypes componentType)
     {
-<span class="fc" id="L53">        super(componentType);</span>
-<span class="fc" id="L54">        setTag(componentType.getComponentTag());</span>
-<span class="fc" id="L55">    }</span>
+<span class="fc" id="L50">        super(componentType);</span>
+<span class="fc" id="L51">        setTag(componentType.getComponentTag());</span>
+<span class="fc" id="L52">    }</span>
 
     /**
      * Logger for the Component
      */
     @JsonIgnore
-<span class="fc" id="L61">    private static final org.apache.log4j.Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;ComponentTag&quot;);</span>
+<span class="fc" id="L58">    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger(&quot;ComponentTag&quot;);</span>
     /**
      * Serial Version for all Components and their compatibility
      *
@@ -75,12 +72,12 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
     /**
      * Specifies to render a closing tag or not
      */
-<span class="fc" id="L78">    @JsonIgnore</span>
+<span class="fc" id="L75">    @JsonIgnore</span>
     private boolean inlineClosingTag = false;
     /**
      * Specifies if this component should render a closing tag
      */
-<span class="fc" id="L83">    @JsonIgnore</span>
+<span class="fc" id="L80">    @JsonIgnore</span>
     private boolean closingTag = true;
     /**
      * Specifies if there must be a new line before the raw text entry
@@ -90,7 +87,7 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
     /**
      * Specifies if there should be a new line for the closing tag
      */
-<span class="fc" id="L93">    @JsonIgnore</span>
+<span class="fc" id="L90">    @JsonIgnore</span>
     private boolean newLineForClosingTag = true;
 
     /**
@@ -111,7 +108,7 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
      */
     public IComponentHTMLBase asTagBase()
     {
-<span class="nc" id="L114">        return (ComponentHTMLBase) this;</span>
+<span class="nc" id="L111">        return (ComponentHTMLBase) this;</span>
     }
 
     /**
@@ -138,49 +135,50 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
      */
     protected StringBuilder renderHTML(int tabCount)
     {
-<span class="pc bpc" id="L141" title="3 of 4 branches missed.">        if (this instanceof Comment &amp;&amp; isTiny())</span>
+<span class="pc bpc" id="L138" title="3 of 4 branches missed.">        if (this instanceof Comment &amp;&amp; isTiny())</span>
         {
-<span class="nc" id="L143">            return null;</span>
+<span class="nc" id="L140">            return null;</span>
         }
-<span class="fc" id="L145">        setCurrentTabIndents(tabCount);</span>
-<span class="fc" id="L146">        StringBuilder sb = new StringBuilder();</span>
-
-<span class="fc" id="L148">        StringBuilder beforeTag = renderBeforeTag();</span>
-<span class="pc bpc" id="L149" title="1 of 4 branches missed.">        if (beforeTag != null &amp;&amp; beforeTag.length() &gt; 0)</span>
+<span class="fc" id="L142">        setCurrentTabIndents(tabCount);</span>
+        
+<span class="fc" id="L144">        StringBuilder sb = new StringBuilder();</span>
+        
+<span class="fc" id="L146">        StringBuilder beforeTag = renderBeforeTag();</span>
+<span class="pc bpc" id="L147" title="1 of 4 branches missed.">        if (beforeTag != null &amp;&amp; beforeTag.length() &gt; 0)</span>
         {
-<span class="fc" id="L151">            sb.append(beforeTag);</span>
-        }
-
-<span class="fc" id="L154">        StringBuilder openingTag = renderOpeningTag();</span>
-<span class="fc" id="L155">        sb.append(openingTag);</span>
-
-<span class="fc bfc" id="L157" title="All 2 branches covered.">        if (isInlineClosingTag())</span>
-        {
-<span class="fc" id="L159">            return sb;</span>
+<span class="fc" id="L149">            sb.append(beforeTag);</span>
         }
 
-<span class="fc" id="L162">        StringBuilder rawText = getText(0);</span>
-<span class="pc bpc" id="L163" title="1 of 4 branches missed.">        if (rawText != null &amp;&amp; rawText.length() &gt; 0)</span>
+<span class="fc" id="L152">        StringBuilder openingTag = renderOpeningTag();</span>
+<span class="fc" id="L153">        sb.append(openingTag);</span>
+
+<span class="fc bfc" id="L155" title="All 2 branches covered.">        if (isInlineClosingTag())</span>
         {
-<span class="fc" id="L165">            sb.append(rawText);</span>
+<span class="fc" id="L157">            return new StringBuilder(sb);</span>
         }
 
-<span class="fc" id="L168">        StringBuilder childrenRender = renderChildren();</span>
-<span class="fc bfc" id="L169" title="All 4 branches covered.">        if (childrenRender != null &amp;&amp; childrenRender.length() &gt; 0)</span>
+<span class="fc" id="L160">        StringBuilder rawText = getText(0);</span>
+<span class="pc bpc" id="L161" title="1 of 4 branches missed.">        if (rawText != null &amp;&amp; rawText.length() &gt; 0)</span>
         {
-<span class="fc" id="L171">            sb.append(childrenRender);</span>
+<span class="fc" id="L163">            sb.append(rawText);</span>
         }
 
-<span class="fc" id="L174">        StringBuilder closingTagString = renderClosingTag();</span>
-<span class="fc" id="L175">        sb.append(closingTagString);</span>
-
-<span class="fc" id="L177">        StringBuilder afterTag = renderAfterTag();</span>
-<span class="pc bpc" id="L178" title="3 of 4 branches missed.">        if (afterTag != null &amp;&amp; afterTag.length() &gt; 0)</span>
+<span class="fc" id="L166">        StringBuilder childrenRender = renderChildren();</span>
+<span class="fc bfc" id="L167" title="All 4 branches covered.">        if (childrenRender != null &amp;&amp; childrenRender.length() &gt; 0)</span>
         {
-<span class="nc" id="L180">            sb.append(afterTag);</span>
+<span class="fc" id="L169">            sb.append(childrenRender);</span>
         }
 
-<span class="fc" id="L183">        return sb;</span>
+<span class="fc" id="L172">        StringBuilder closingTagString = renderClosingTag();</span>
+<span class="fc" id="L173">        sb.append(closingTagString);</span>
+
+<span class="fc" id="L175">        StringBuilder afterTag = renderAfterTag();</span>
+<span class="pc bpc" id="L176" title="3 of 4 branches missed.">        if (afterTag != null &amp;&amp; afterTag.length() &gt; 0)</span>
+        {
+<span class="nc" id="L178">            sb.append(afterTag);</span>
+        }
+
+<span class="fc" id="L181">        return new StringBuilder(sb.toString());</span>
     }
 
     /**
@@ -191,7 +189,7 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
      */
     protected StringBuilder renderChildren()
     {
-<span class="fc" id="L194">        return null;</span>
+<span class="fc" id="L192">        return null;</span>
     }
 
     /**
@@ -202,7 +200,7 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
     @Override
     public final String getTag()
     {
-<span class="fc" id="L205">        return tag;</span>
+<span class="fc" id="L203">        return tag;</span>
     }
 
     /**
@@ -213,8 +211,8 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
     @Override
     public J setTag(String tag)
     {
-<span class="fc" id="L216">        this.tag = tag;</span>
-<span class="fc" id="L217">        return (J) this;</span>
+<span class="fc" id="L214">        this.tag = tag;</span>
+<span class="fc" id="L215">        return (J) this;</span>
     }
 
     /**
@@ -227,24 +225,24 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
      */
     private StringBuilder renderOpeningTag()
     {
-<span class="fc" id="L230">        StringBuilder sb = new StringBuilder();</span>
-<span class="fc bfc" id="L231" title="All 2 branches covered.">        if (!isTiny())</span>
+<span class="fc" id="L228">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc bfc" id="L229" title="All 2 branches covered.">        if (!isTiny())</span>
         {
-<span class="fc" id="L233">            sb.append(getCurrentTabIndentString());</span>
+<span class="fc" id="L231">            sb.append(getCurrentTabIndentString());</span>
         }
-<span class="fc" id="L235">        sb.append(&quot;&lt;&quot;);</span>
-<span class="fc" id="L236">        sb.append(getTag());//.append(&quot; &quot;);</span>
+<span class="fc" id="L233">        sb.append(&quot;&lt;&quot;);</span>
+<span class="fc" id="L234">        sb.append(getTag());//.append(&quot; &quot;);</span>
 
         //Append this tags attributes
-<span class="fc" id="L239">        renderAttributes(sb);</span>
+<span class="fc" id="L237">        renderAttributes(sb);</span>
         //sb.trimToSize();
 
-<span class="fc bfc" id="L242" title="All 2 branches covered.">        if (isInlineClosingTag())</span>
+<span class="fc bfc" id="L240" title="All 2 branches covered.">        if (isInlineClosingTag())</span>
         {
-<span class="fc" id="L244">            sb.append(&quot;/&quot;);</span>
+<span class="fc" id="L242">            sb.append(&quot;/&quot;);</span>
         }
-<span class="fc" id="L246">        sb.append(&quot;&gt;&quot;);</span>
-<span class="fc" id="L247">        return sb;</span>
+<span class="fc" id="L244">        sb.append(&quot;&gt;&quot;);</span>
+<span class="fc" id="L245">        return sb;</span>
     }
 
     /**
@@ -255,7 +253,7 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
      */
     protected StringBuilder renderAttributes(StringBuilder sb)
     {
-<span class="fc" id="L258">        return sb;</span>
+<span class="fc" id="L256">        return sb;</span>
     }
 
     /**
@@ -266,24 +264,24 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
      */
     private StringBuilder renderClosingTag()
     {
-<span class="fc" id="L269">        StringBuilder sb = new StringBuilder();</span>
-<span class="pc bpc" id="L270" title="1 of 4 branches missed.">        if (isInlineClosingTag() || !isClosingTag())</span>
+<span class="fc" id="L267">        StringBuilder sb = new StringBuilder();</span>
+<span class="pc bpc" id="L268" title="1 of 4 branches missed.">        if (isInlineClosingTag() || !isClosingTag())</span>
         {
-<span class="fc" id="L272">            return sb;</span>
+<span class="fc" id="L270">            return sb;</span>
         }
-<span class="fc bfc" id="L274" title="All 2 branches covered.">        if (!isTiny())</span>
+<span class="fc bfc" id="L272" title="All 2 branches covered.">        if (!isTiny())</span>
         {
 
-<span class="fc bfc" id="L277" title="All 2 branches covered.">            if (isNewLineForClosingTag())</span>
+<span class="fc bfc" id="L275" title="All 2 branches covered.">            if (isNewLineForClosingTag())</span>
             {
-<span class="fc" id="L279">                sb.append(getNewLine());</span>
-<span class="fc" id="L280">                sb.append(getCurrentTabIndentString());</span>
+<span class="fc" id="L277">                sb.append(getNewLine());</span>
+<span class="fc" id="L278">                sb.append(getCurrentTabIndentString());</span>
             }
         }
-<span class="fc" id="L283">        sb.append(&quot;&lt;/&quot;);</span>
-<span class="fc" id="L284">        sb.append(getTag());</span>
-<span class="fc" id="L285">        sb.append(&quot;&gt;&quot;);</span>
-<span class="fc" id="L286">        return sb;</span>
+<span class="fc" id="L281">        sb.append(&quot;&lt;/&quot;);</span>
+<span class="fc" id="L282">        sb.append(getTag());</span>
+<span class="fc" id="L283">        sb.append(&quot;&gt;&quot;);</span>
+<span class="fc" id="L284">        return sb;</span>
     }
 
     /**
@@ -295,11 +293,11 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
     @Override
     protected StringBuilder getText(StringBuilder sb)
     {
-<span class="pc bpc" id="L298" title="1 of 2 branches missed.">        if (isInlineClosingTag())</span>
+<span class="pc bpc" id="L296" title="1 of 2 branches missed.">        if (isInlineClosingTag())</span>
         {
-<span class="nc" id="L300">            return sb;</span>
+<span class="nc" id="L298">            return sb;</span>
         }
-<span class="fc" id="L302">        return super.getText(sb);</span>
+<span class="fc" id="L300">        return super.getText(sb);</span>
     }
 
     /**
@@ -310,7 +308,7 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
      */
     protected boolean isInlineClosingTag()
     {
-<span class="fc" id="L313">        return inlineClosingTag;</span>
+<span class="fc" id="L311">        return inlineClosingTag;</span>
     }
 
     /**
@@ -322,8 +320,8 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
      */
     protected J setInlineClosingTag(boolean inlineClosingTag)
     {
-<span class="fc" id="L325">        this.inlineClosingTag = inlineClosingTag;</span>
-<span class="fc" id="L326">        return (J) this;</span>
+<span class="fc" id="L323">        this.inlineClosingTag = inlineClosingTag;</span>
+<span class="fc" id="L324">        return (J) this;</span>
     }
 
     /**
@@ -334,12 +332,12 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
     @Override
     public boolean isClosingTag()
     {
-<span class="fc bfc" id="L337" title="All 2 branches covered.">        if (this instanceof NoClosingTag)</span>
+<span class="fc bfc" id="L335" title="All 2 branches covered.">        if (this instanceof NoClosingTag)</span>
         {
-<span class="fc" id="L339">            return false;</span>
+<span class="fc" id="L337">            return false;</span>
         }
 
-<span class="fc" id="L342">        return this.closingTag;</span>
+<span class="fc" id="L340">        return this.closingTag;</span>
     }
 
     /**
@@ -350,8 +348,8 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
     @Override
     public J setClosingTag(boolean noCloseTag)
     {
-<span class="nc" id="L353">        this.closingTag = noCloseTag;</span>
-<span class="nc" id="L354">        return (J) this;</span>
+<span class="nc" id="L351">        this.closingTag = noCloseTag;</span>
+<span class="nc" id="L352">        return (J) this;</span>
     }
 
     /**
@@ -362,12 +360,12 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
     @Override
     public boolean isNewLineForRawText()
     {
-<span class="nc bnc" id="L365" title="All 2 branches missed.">        if ((this instanceof NoNewLineForRawText))</span>
+<span class="nc bnc" id="L363" title="All 2 branches missed.">        if ((this instanceof NoNewLineForRawText))</span>
         {
-<span class="nc" id="L367">            return true;</span>
+<span class="nc" id="L365">            return true;</span>
         }
 
-<span class="nc" id="L370">        return newLineForRawText;</span>
+<span class="nc" id="L368">        return newLineForRawText;</span>
     }
 
     /**
@@ -378,8 +376,8 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
     @Override
     public J setNewLineForRawText(boolean newLineForRawText)
     {
-<span class="fc" id="L381">        this.newLineForRawText = newLineForRawText;</span>
-<span class="fc" id="L382">        return (J) this;</span>
+<span class="fc" id="L379">        this.newLineForRawText = newLineForRawText;</span>
+<span class="fc" id="L380">        return (J) this;</span>
     }
 
     /**
@@ -389,8 +387,8 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
      */
     protected StringBuilder getCurrentTabIndentString()
     {
-<span class="fc" id="L392">        currentTabIndentString = TextUtilities.getTabString(getCurrentTabIndents());</span>
-<span class="fc" id="L393">        return currentTabIndentString;</span>
+<span class="fc" id="L390">        currentTabIndentString = TextUtilities.getTabString(getCurrentTabIndents());</span>
+<span class="fc" id="L391">        return currentTabIndentString;</span>
     }
 
     /**
@@ -400,7 +398,7 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
      */
     protected int getCurrentTabIndents()
     {
-<span class="fc" id="L403">        return currentTabIndents;</span>
+<span class="fc" id="L401">        return currentTabIndents;</span>
     }
 
     /**
@@ -411,8 +409,8 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
     @Override
     public J setCurrentTabIndents(int currentTabIndents)
     {
-<span class="fc" id="L414">        this.currentTabIndents = currentTabIndents;</span>
-<span class="fc" id="L415">        return (J) this;</span>
+<span class="fc" id="L412">        this.currentTabIndents = currentTabIndents;</span>
+<span class="fc" id="L413">        return (J) this;</span>
     }
 
     /**
@@ -423,7 +421,7 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
      */
     protected StringBuilder renderBeforeTag()
     {
-<span class="fc" id="L426">        return null;</span>
+<span class="fc" id="L424">        return null;</span>
     }
 
     /**
@@ -434,7 +432,7 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
      */
     protected StringBuilder renderAfterTag()
     {
-<span class="fc" id="L437">        return null;</span>
+<span class="fc" id="L435">        return null;</span>
     }
 
     /**
@@ -447,7 +445,7 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
     @Override
     public String toString(boolean outputHtml)
     {
-<span class="fc" id="L450">        return toString(0);</span>
+<span class="fc" id="L448">        return toString(0);</span>
     }
 
     /**
@@ -459,13 +457,13 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
     @Override
     public String toString(Integer tabCount)
     {
-<span class="fc bfc" id="L462" title="All 2 branches covered.">        if (!isConfigured())</span>
+<span class="fc bfc" id="L460" title="All 2 branches covered.">        if (!isConfigured())</span>
         {
-<span class="fc" id="L464">            preConfigure();</span>
+<span class="fc" id="L462">            preConfigure();</span>
         }
-<span class="fc" id="L466">        StringBuilder html = new StringBuilder();</span>
-<span class="fc" id="L467">        html.append(renderHTML(tabCount));</span>
-<span class="fc" id="L468">        return html.toString();</span>
+<span class="fc" id="L464">        StringBuilder html = new StringBuilder();</span>
+<span class="fc" id="L465">        html.append(renderHTML(tabCount));</span>
+<span class="fc" id="L466">        return html.toString();</span>
     }
 
     /**
@@ -477,17 +475,17 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
     @Override
     public boolean isNewLineForClosingTag()
     {
-<span class="fc bfc" id="L480" title="All 2 branches covered.">        if (!newLineForClosingTag)</span>
+<span class="fc bfc" id="L478" title="All 2 branches covered.">        if (!newLineForClosingTag)</span>
         {
-<span class="fc" id="L482">            return newLineForClosingTag;</span>
+<span class="fc" id="L480">            return newLineForClosingTag;</span>
         }
 
-<span class="fc bfc" id="L485" title="All 2 branches covered.">        if (this instanceof NoNewLineBeforeClosingTag)</span>
+<span class="fc bfc" id="L483" title="All 2 branches covered.">        if (this instanceof NoNewLineBeforeClosingTag)</span>
         {
-<span class="fc" id="L487">            return false;</span>
+<span class="fc" id="L485">            return false;</span>
         }
 
-<span class="fc" id="L490">        return newLineForClosingTag;</span>
+<span class="fc" id="L488">        return newLineForClosingTag;</span>
     }
 
     /**
@@ -499,19 +497,19 @@ public abstract class ComponentHTMLBase&lt;F extends GlobalFeatures, E extends G
     @Override
     public void setNewLineForClosingTag(boolean newLineForClosingTag)
     {
-<span class="fc" id="L502">        this.newLineForClosingTag = newLineForClosingTag;</span>
-<span class="fc" id="L503">    }</span>
+<span class="fc" id="L500">        this.newLineForClosingTag = newLineForClosingTag;</span>
+<span class="fc" id="L501">    }</span>
 
     @Override
     public void preConfigure()
     {
-<span class="fc bfc" id="L508" title="All 2 branches covered.">        if(!isInitialized())</span>
+<span class="fc bfc" id="L506" title="All 2 branches covered.">        if(!isInitialized())</span>
         {
-<span class="fc" id="L510">            init();</span>
+<span class="fc" id="L508">            init();</span>
         }
-<span class="fc" id="L512">        super.preConfigure();</span>
+<span class="fc" id="L510">        super.preConfigure();</span>
         
-<span class="fc" id="L514">    }</span>
+<span class="fc" id="L512">    }</span>
     
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -47,8 +47,8 @@ public abstract class JSTreeOnChangedPluginAdapter extends Event
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
             getComponent().getPage().getOptions().setAngularEnabled(true);
-            getComponent().getPage().getAngular().addDirective(getDirective());
-            component.addAttribute(AngularAttributes.ngActivate, "perform($event," + renderVariables() + ");");
+            getComponent().getAngularDirectives().add(getDirective());
+            component.addAttribute(AngularAttributes.ngJSTreeOnChanged, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

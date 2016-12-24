@@ -16,21 +16,19 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
+import java.util.logging.Level;
+import java.util.logging.*;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
-import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.components.jqueryui.autocomplete.JQUIAutoCompleteChildren;
 import za.co.mmagon.jwebswing.components.jqueryui.spinner.JQUISpinnerChildren;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  *
@@ -76,7 +74,7 @@ public class Input&lt;A extends Enum &amp; AttributeDefinitions&gt; extends Comp
         implements NoClosingTag, GlobalChildren, ParagraphChildren, JQUISpinnerChildren, JQUIAutoCompleteChildren
 {
 
-<span class="fc" id="L79">    private static final Logger log = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;Input&quot;);</span>
+<span class="fc" id="L77">    private static final Logger log = LogFactory.getInstance().getLogger(&quot;Input&quot;);</span>
     private static final long serialVersionUID = 1L;
 
     /**
@@ -86,8 +84,8 @@ public class Input&lt;A extends Enum &amp; AttributeDefinitions&gt; extends Comp
 
     public Input()
     {
-<span class="nc" id="L89">        this(null);</span>
-<span class="nc" id="L90">    }</span>
+<span class="nc" id="L87">        this(null);</span>
+<span class="nc" id="L88">    }</span>
 
     /**
      * Construct a new instance of the input type field
@@ -96,16 +94,16 @@ public class Input&lt;A extends Enum &amp; AttributeDefinitions&gt; extends Comp
      */
     public Input(InputTypes inputType)
     {
-<span class="fc" id="L99">        super(ComponentTypes.Input);</span>
+<span class="fc" id="L97">        super(ComponentTypes.Input);</span>
 
-<span class="pc bpc" id="L101" title="1 of 2 branches missed.">        if (inputType != null)</span>
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">        if (inputType != null)</span>
 
         {
-<span class="fc" id="L104">            this.inputType = inputType;</span>
-<span class="fc" id="L105">            addAttribute(GlobalAttributes.Type, getInputType().name().toLowerCase());</span>
+<span class="fc" id="L102">            this.inputType = inputType;</span>
+<span class="fc" id="L103">            addAttribute(GlobalAttributes.Type, getInputType().name().toLowerCase());</span>
         }
 
-<span class="fc" id="L108">    }</span>
+<span class="fc" id="L106">    }</span>
 
     /**
      * Returns the input type of the input field
@@ -114,7 +112,7 @@ public class Input&lt;A extends Enum &amp; AttributeDefinitions&gt; extends Comp
      */
     public final InputTypes getInputType()
     {
-<span class="fc" id="L117">        return inputType;</span>
+<span class="fc" id="L115">        return inputType;</span>
     }
 
     /**
@@ -124,8 +122,8 @@ public class Input&lt;A extends Enum &amp; AttributeDefinitions&gt; extends Comp
      */
     public void setInputType(InputTypes inputType)
     {
-<span class="nc" id="L127">        this.inputType = inputType;</span>
-<span class="nc" id="L128">    }</span>
+<span class="nc" id="L125">        this.inputType = inputType;</span>
+<span class="nc" id="L126">    }</span>
 
     /**
      * Differences Between HTML and XHTML
@@ -137,18 +135,18 @@ public class Input&lt;A extends Enum &amp; AttributeDefinitions&gt; extends Comp
     @Override
     public void preConfigure()
     {
-<span class="fc" id="L140">        super.preConfigure();</span>
+<span class="fc" id="L138">        super.preConfigure();</span>
         try
         {
-<span class="pc bpc" id="L143" title="1 of 2 branches missed.">            if (getPage().getHtmlVersion().name().startsWith(&quot;X&quot;))</span>
+<span class="pc bpc" id="L141" title="1 of 2 branches missed.">            if (getPage().getHtmlVersion().name().startsWith(&quot;X&quot;))</span>
             {
-<span class="nc" id="L145">                setInlineClosingTag(true);</span>
+<span class="nc" id="L143">                setInlineClosingTag(true);</span>
             }
         }
-<span class="nc" id="L148">        catch (Exception e)</span>
+<span class="nc" id="L146">        catch (Exception e)</span>
         {
-<span class="nc" id="L150">            log.trace(&quot;Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.&quot;,e);</span>
-<span class="fc" id="L151">        }</span>
-<span class="fc" id="L152">    }</span>
+<span class="nc" id="L148">            log.log(Level.FINE, &quot;Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.&quot;, e);</span>
+<span class="fc" id="L149">        }</span>
+<span class="fc" id="L150">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

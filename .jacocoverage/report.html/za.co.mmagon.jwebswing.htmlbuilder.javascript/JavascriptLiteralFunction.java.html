@@ -16,6 +16,8 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.javascript;
 
+import java.util.ArrayList;
+import java.util.List;
 import za.co.mmagon.jwebswing.Component;
 
 /**
@@ -24,7 +26,7 @@ import za.co.mmagon.jwebswing.Component;
  * @author GedMarc
  * @since 30 Dec 2015
  */
-public class JavascriptLiteralFunction extends JavascriptFunction
+public abstract class JavascriptLiteralFunction extends JavascriptFunction
 {
 
     private static final long serialVersionUID = 1L;
@@ -36,23 +38,21 @@ public class JavascriptLiteralFunction extends JavascriptFunction
     /**
      * the middle rendered string
      */
-    private StringBuilder literalFunction;
+    //private StringBuilder literalFunction;
     /**
      * The closing string '}'
      */
-<span class="fc" id="L43">    private final StringBuilder literalFunctionEndingString = new StringBuilder(&quot;}&quot;);</span>
+<span class="fc" id="L45">    private final StringBuilder literalFunctionEndingString = new StringBuilder(&quot;}&quot;);</span>
     /**
      * Any arguments to be passed into the function
      */
-    private String functionArugments;
+    private List&lt;String&gt; functionArugments;
 
     /**
      * An actual function
      */
     public JavascriptLiteralFunction()
-<span class="fc" id="L53">    {</span>
-<span class="fc" id="L54">        literalFunction = new StringBuilder();</span>
-<span class="fc" id="L55">        functionArugments = &quot;&quot;;</span>
+<span class="fc" id="L55">    {</span>
 
 <span class="fc" id="L57">    }</span>
 
@@ -66,7 +66,7 @@ public class JavascriptLiteralFunction extends JavascriptFunction
     {
 <span class="nc" id="L67">        StringBuilder sb = new StringBuilder();</span>
 <span class="nc" id="L68">        sb.append(c.renderJavascriptAll());</span>
-<span class="nc" id="L69">        literalFunction.append(sb);</span>
+<span class="nc" id="L69">        getLiteralFunction().append(sb);</span>
 <span class="nc" id="L70">    }</span>
 
     /**
@@ -84,20 +84,7 @@ public class JavascriptLiteralFunction extends JavascriptFunction
      *
      * @return
      */
-    public StringBuilder getLiteralFunction()
-    {
-<span class="nc" id="L89">        return literalFunction;</span>
-    }
-
-    /**
-     * Sets the literal function
-     *
-     * @param literalFunction
-     */
-    public final void setLiteralFunction(StringBuilder literalFunction)
-    {
-<span class="nc" id="L99">        this.literalFunction = literalFunction;</span>
-<span class="nc" id="L100">    }</span>
+    public abstract StringBuilder getLiteralFunction();
 
     /**
      * Returns this functions output string
@@ -107,7 +94,7 @@ public class JavascriptLiteralFunction extends JavascriptFunction
     @Override
     public String toString()
     {
-<span class="fc" id="L110">        return renderFunction();</span>
+<span class="fc" id="L97">        return renderFunction();</span>
     }
 
     /**
@@ -117,7 +104,7 @@ public class JavascriptLiteralFunction extends JavascriptFunction
      */
     public StringBuilder getLiteralFunctionStartingString()
     {
-<span class="nc" id="L120">        return literalFunctionStartingString;</span>
+<span class="nc" id="L107">        return literalFunctionStartingString;</span>
     }
 
     /**
@@ -127,17 +114,21 @@ public class JavascriptLiteralFunction extends JavascriptFunction
      */
     public void setLiteralFunctionStartingString(StringBuilder literalFunctionStartingString)
     {
-<span class="nc" id="L130">        this.literalFunctionStartingString = literalFunctionStartingString;</span>
-<span class="nc" id="L131">    }</span>
+<span class="nc" id="L117">        this.literalFunctionStartingString = literalFunctionStartingString;</span>
+<span class="nc" id="L118">    }</span>
 
     /**
      * Gets any functional argument that may be required
      *
      * @return
      */
-    public String getFunctionArugments()
+    public final List&lt;String&gt; getFunctionArugments()
     {
-<span class="nc" id="L140">        return functionArugments;</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">        if (functionArugments == null)</span>
+        {
+<span class="fc" id="L129">            functionArugments = new ArrayList&lt;&gt;();</span>
+        }
+<span class="fc" id="L131">        return functionArugments;</span>
     }
 
     /**
@@ -145,10 +136,10 @@ public class JavascriptLiteralFunction extends JavascriptFunction
      *
      * @param functionArugments
      */
-    public final void setFunctionArugments(String functionArugments)
+    public final void setFunctionArugments(List&lt;String&gt; functionArugments)
     {
-<span class="nc" id="L150">        this.functionArugments = functionArugments;</span>
-<span class="nc" id="L151">    }</span>
+<span class="nc" id="L141">        this.functionArugments = functionArugments;</span>
+<span class="nc" id="L142">    }</span>
 
     /**
      * Renders this function (calls to string)
@@ -158,12 +149,12 @@ public class JavascriptLiteralFunction extends JavascriptFunction
     @Override
     public String renderFunction()
     {
-<span class="nc" id="L161">        StringBuilder returnable = new StringBuilder();</span>
-<span class="nc" id="L162">        literalFunctionStartingString = new StringBuilder(&quot;function (&quot; + functionArugments + &quot;) {&quot;);</span>
-<span class="nc" id="L163">        returnable.append(literalFunctionStartingString);</span>
-<span class="nc" id="L164">        returnable.append(literalFunction);</span>
-<span class="nc" id="L165">        returnable.append(literalFunctionEndingString);</span>
-<span class="nc" id="L166">        return returnable.toString();</span>
+<span class="fc" id="L152">        StringBuilder returnable = new StringBuilder();</span>
+<span class="fc" id="L153">        literalFunctionStartingString = new StringBuilder(&quot;function (&quot; + functionArugments.toString().replace(&quot;[&quot;, &quot;&quot;).replace(&quot;]&quot;, &quot;&quot;) + &quot;) {&quot;);</span>
+<span class="fc" id="L154">        returnable.append(literalFunctionStartingString);</span>
+<span class="fc" id="L155">        returnable.append(getLiteralFunction());</span>
+<span class="fc" id="L156">        returnable.append(literalFunctionEndingString);</span>
+<span class="fc" id="L157">        return returnable.toString();</span>
     }
 
 }

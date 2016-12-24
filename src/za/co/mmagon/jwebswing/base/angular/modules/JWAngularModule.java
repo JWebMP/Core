@@ -14,9 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.base.angular.modules; 
+package za.co.mmagon.jwebswing.base.angular.modules;
 
 import java.util.ArrayList;
+import java.util.List;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 
 /**
@@ -44,12 +45,11 @@ public class JWAngularModule extends AngularModuleBase
     public String renderFunction()
     {
         String returnable = "var " + this.getAngular().getAppName() + " = angular.module(";
-        returnable += "'" + this.getAngular().getAppName() + "'";
-        returnable += getAngular().getModules().isEmpty() ? "," : ",";
-        //returnable += getAngular().getComponent().getNewLine();
-        
+        returnable += "'" + this.getAngular().getAppName() + "',";
+
         ArrayList<String> moduleNames = new ArrayList<>();
-        getAngular().getModules().stream().forEach((module) ->
+        List<AngularModuleBase> modules = super.getAngular().getComponent().getPage().getBody().getAngularModulesAll();
+        modules.stream().forEach(module ->
         {
             String name = module.getReferenceName();
             if (!moduleNames.contains(name))
@@ -57,24 +57,21 @@ public class JWAngularModule extends AngularModuleBase
                 moduleNames.add(module.getReferenceName());
             }
         });
-        
-        //if(!getAngular().getModules().isEmpty())
+
+        StringBuilder nameRenders = new StringBuilder();
+        for (String name : moduleNames)
         {
-            StringBuilder nameRenders = new StringBuilder();
-            for(String name : moduleNames)
-            {
-                nameRenders.append("'").append(name).append("',");
-            }
-            
-            if(nameRenders.indexOf(",") != -1)
-            {
-                nameRenders = nameRenders.deleteCharAt(nameRenders.lastIndexOf(","));
-            }
-            nameRenders.insert(0, "[");
-            nameRenders.append("]");
-            returnable += nameRenders;
+            nameRenders.append("'").append(name).append("',");
         }
-        
+
+        if (nameRenders.indexOf(",") != -1)
+        {
+            nameRenders = nameRenders.deleteCharAt(nameRenders.lastIndexOf(","));
+        }
+        nameRenders.insert(0, "[");
+        nameRenders.append("]");
+        returnable += nameRenders;
+
         returnable += ");";
         return returnable;
     }

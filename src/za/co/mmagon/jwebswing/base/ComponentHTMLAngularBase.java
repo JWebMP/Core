@@ -17,8 +17,11 @@
 package za.co.mmagon.jwebswing.base;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import java.util.HashMap;
+import java.util.*;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
+import za.co.mmagon.jwebswing.base.angular.controllers.AngularControllerBase;
+import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
+import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
@@ -43,10 +46,32 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * All the angular attributes for this component
+     */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private HashMap<AngularAttributes, String> attributesAngular;
+    private Map<AngularAttributes, String> attributesAngular;
+    /**
+     * All the angular DTO objects for this component
+     */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private HashMap<String, JavaScriptPart> angularObjects;
+    private Map<String, JavaScriptPart> angularObjects;
+
+    /**
+     * All the angular modules for this component
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<AngularModuleBase> angularModules;
+    /**
+     * All of the angular directives for this component
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<AngularDirectiveBase> angularDirectives;
+    /**
+     * All of the angular directives for this component
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<AngularControllerBase> angularControllers;
 
     /**
      * Constructs a new component with the angular features enabled
@@ -73,6 +98,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
      *
      * @param attribute
      * @param value
+     *
      * @return
      */
     @Override
@@ -86,6 +112,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
      * Gets an angular attribute
      *
      * @param attribute
+     *
      * @return
      */
     @Override
@@ -99,7 +126,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
      *
      * @return
      */
-    private HashMap<AngularAttributes, String> getAttributesAngular()
+    private Map<AngularAttributes, String> getAttributesAngular()
     {
         if (attributesAngular == null)
         {
@@ -113,6 +140,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
      *
      * @param name       The variable name to use
      * @param dataObject The data object to map
+     *
      * @return This for chain setting
      */
     @Override
@@ -129,6 +157,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
      * @param <T>       The type to return
      * @param name      The name of the DTO to map
      * @param classType The class type
+     *
      * @return Null if not available
      */
     @Override
@@ -144,7 +173,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
      * @return
      */
     @Override
-    public HashMap<String, JavaScriptPart> getAngularObjects()
+    public Map<String, JavaScriptPart> getAngularObjects()
     {
         if (angularObjects == null)
         {
@@ -159,37 +188,108 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
      * @return
      */
     @Override
-    public HashMap<Enum, String> getAttributesAll()
+    public Map<Enum, String> getAttributesAll()
     {
         HashMap<Enum, String> allAttributes = (HashMap<Enum, String>) super.getAttributesAll();
         getAttributesAngular().entrySet().stream().filter(a -> a != null).forEach((entry)
-                -> 
-                {
-                    AngularAttributes key = entry.getKey();
-                    String value = entry.getValue();
-                    allAttributes.put(key, value);
+                ->
+        {
+            AngularAttributes key = entry.getKey();
+            String value = entry.getValue();
+            allAttributes.put(key, value);
         });
         return allAttributes;
     }
 
     /**
-     * Binds this component to an angular variable.
-     * If it is an input is it bound directly, otherwise the text is set to what the variable contains
-     * 
+     * Binds this component to an angular variable. If it is an input is it bound directly, otherwise the text is set to what the variable contains
+     * <p>
      * Over-ride this to apply more functionality such as calendar binding
-     * @param variableName 
+     *
+     * @param variableName
      */
     public void bind(String variableName)
     {
         addAttribute(AngularAttributes.ngBind, variableName);
     }
-    
+
     /**
      * Instructs Angular to not show items that are bound until after the digest sequence
      */
     public void cloak()
     {
-        addAttribute(AngularAttributes.ngCloak,null);
+        addAttribute(AngularAttributes.ngCloak, null);
     }
 
+    /**
+     * Gets a list of angular modules
+     *
+     * @return
+     */
+    public List<AngularModuleBase> getAngularModules()
+    {
+        if (angularModules == null)
+        {
+            setAngularModules(new ArrayList<>());
+        }
+        return angularModules;
+    }
+
+    /**
+     * Sets the angular modules
+     *
+     * @param angularModules
+     */
+    public void setAngularModules(List<AngularModuleBase> angularModules)
+    {
+        this.angularModules = angularModules;
+    }
+
+    /**
+     * Gets the list of angular directives
+     *
+     * @return
+     */
+    public List<AngularDirectiveBase> getAngularDirectives()
+    {
+        if (angularDirectives == null)
+        {
+            setAngularDirectives(new ArrayList<>());
+        }
+        return angularDirectives;
+    }
+
+    /**
+     * Sets the list of angular directives.
+     *
+     * @param angularDirectives
+     */
+    public void setAngularDirectives(List<AngularDirectiveBase> angularDirectives)
+    {
+        this.angularDirectives = angularDirectives;
+    }
+
+    /**
+     * Returns a list of all the angular controllers for this component
+     *
+     * @return
+     */
+    public List<AngularControllerBase> getAngularControllers()
+    {
+        if (angularControllers == null)
+        {
+            setAngularControllers(new ArrayList<>());
+        }
+        return angularControllers;
+    }
+
+    /**
+     * Sets the list of angular controllers for this component
+     *
+     * @param angularControllers
+     */
+    public void setAngularControllers(List<AngularControllerBase> angularControllers)
+    {
+        this.angularControllers = angularControllers;
+    }
 }

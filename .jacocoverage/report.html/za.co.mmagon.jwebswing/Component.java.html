@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import za.co.mmagon.LoggerFactory;
 import za.co.mmagon.jwebswing.base.ComponentHTMLBootstrapBase;
 import za.co.mmagon.jwebswing.base.html.Paragraph;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
@@ -25,6 +24,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.interfaces.ICssStructure;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * The base class for all HTML generation, Everything must extend a component
@@ -48,7 +48,7 @@ public class Component&lt;C, A extends Enum &amp; AttributeDefinitions, F extend
      * Logger for the Component
      */
     @JsonIgnore
-<span class="fc" id="L51">    private static final org.apache.log4j.Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;Component&quot;);</span>
+<span class="fc" id="L51">    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger(&quot;Component&quot;);</span>
     /**
      * Serial Version for all Components and their compatibility
      *

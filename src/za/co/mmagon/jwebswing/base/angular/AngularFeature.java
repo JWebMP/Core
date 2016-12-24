@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.base.angular;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.*;
 import java.util.*;
 import java.util.logging.Level;
@@ -52,32 +53,22 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
     /**
      * All registered templates
      */
+    @JsonIgnore
     private final Map<String, StringBuilder> TemplateScripts = new HashMap<>();
     /**
      * All registered variables
      */
+    @JsonIgnore
     private final Map<String, StringBuilder> TemplateVariables = new HashMap<>();
-
-    /**
-     * Final collection of all the modules
-     */
-    private final List<AngularModuleBase> modules;
-    /**
-     * Final collection of all the directives
-     */
-    private final List<AngularDirectiveBase> directives;
-    /**
-     * Final collection of all the controllers
-     */
-    private final List<AngularControllerBase> controllers;
-
     /**
      * The application module
      */
+    @JsonIgnore
     private final JWAngularModule jwAngularApp;
     /**
      * The controller module
      */
+    @JsonIgnore
     private final JWAngularController jwAngularController;
     /**
      * The name of this angular application
@@ -120,15 +111,8 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
         setComponent(component);
         setJavascriptRenderedElsewhere(true);
 
-        modules = new ArrayList<>();
-        directives = new ArrayList<>();
-        controllers = new ArrayList<>();
-
         jwAngularApp = new JWAngularModule(this);
         jwAngularController = new JWAngularController(this);
-
-        controllers.add(getJwAngularController());
-
         if (applicationName != null && !applicationName.isEmpty())
         {
             setAppName(applicationName);
@@ -137,7 +121,6 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
         {
             setControllerName(controllerName);
         }
-
         setRenderAfterLoad(false);
     }
 
@@ -158,94 +141,6 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
             }
         }
         super.preConfigure();
-    }
-
-    /**
-     * Convenience method for adding a directive
-     *
-     * @param directive
-     *
-     * @return This
-     */
-    public AngularFeature addDirective(AngularDirectiveBase directive)
-    {
-        if (!getDirectives().contains(directive))
-        {
-            getDirectives().add(directive);
-        }
-        return this;
-    }
-
-    /**
-     * Convenience method for adding a directive
-     *
-     * @param directive
-     *
-     * @return This
-     */
-    public AngularFeature removeDirective(AngularDirectiveBase directive)
-    {
-        getDirectives().remove(directive);
-        return this;
-    }
-
-    /**
-     * Convenience method for adding a module
-     *
-     * @param module
-     *
-     * @return This
-     */
-    public AngularFeature addModule(AngularModuleBase module)
-    {
-        if (!getModules().contains(module))
-        {
-            getModules().add(module);
-        }
-        return this;
-    }
-
-    /**
-     * Convenience method for adding a module
-     *
-     * @param module
-     *
-     * @return This
-     */
-    public AngularFeature removeModule(AngularModuleBase module)
-    {
-        getModules().remove(module);
-        return this;
-    }
-
-    /**
-     * Convenience method for adding a directive
-     *
-     * @param controllers
-     *
-     * @return This
-     */
-    public AngularFeature addDirective(AngularControllerBase controllers)
-    {
-        if (!getControllers().contains(controllers))
-        {
-            getControllers().add(controllers);
-        }
-
-        return this;
-    }
-
-    /**
-     * Convenience method for adding a directive
-     *
-     * @param controller
-     *
-     * @return This
-     */
-    public AngularFeature removeDirective(AngularControllerBase controller)
-    {
-        getControllers().remove(controller);
-        return this;
     }
 
     /**
@@ -332,7 +227,9 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
     public StringBuilder compileDirectives()
     {
         StringBuilder output = new StringBuilder();
-        getDirectives().stream().forEach(directive ->
+        List<AngularDirectiveBase> angulars = new ArrayList<>();
+        angulars.addAll(getComponent().getPage().getBody().getAngularDirectivesAll());
+        angulars.stream().forEach(directive ->
         {
             output.append(compileTemplate(directive.getReferenceName(), directive.renderFunction()));
         });
@@ -347,7 +244,10 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
     public StringBuilder compileControllers()
     {
         StringBuilder output = new StringBuilder();
-        getControllers().stream().forEach(controller ->
+        List<AngularControllerBase> angulars = new ArrayList<>();
+        angulars.add(jwAngularController);
+        angulars.addAll(getComponent().getPage().getBody().getAngularControllersAll());
+        angulars.stream().forEach(controller ->
         {
             output.append(compileTemplate(controller.getReferenceName(), controller.renderFunction()));
         });
@@ -355,14 +255,20 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
     }
 
     /**
-     * compiles modules for all the present children
+     * compiles the global JW Angular Module, where the separate modules get listed inside of JWAngularModule
      *
      * @return
      */
     public StringBuilder compileModules()
     {
         StringBuilder output = new StringBuilder();
-        output.append(compileTemplate(getJwAngularApp().getReferenceName(), getJwAngularApp().renderFunction()));
+        List<AngularModuleBase> angulars = new ArrayList<>();
+        angulars.add(jwAngularApp);
+        //angulars.addAll(getComponent().getPage().getBody().getAngularModulesAll());
+        angulars.stream().forEach(module ->
+        {
+            output.append(compileTemplate(module.getReferenceName(), module.renderFunction()));
+        });
         return output;
     }
 
@@ -439,7 +345,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      */
     public final void setAppName(String appName)
     {
-        this.appName = appName;
+        AngularFeature.appName = appName;
 
     }
 
@@ -460,7 +366,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      */
     public final void setControllerName(String controllerName)
     {
-        this.controllerName = controllerName;
+        AngularFeature.controllerName = controllerName;
     }
 
     /**
@@ -570,36 +476,6 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
     }
 
     /**
-     * Returns a final ArrayList of directives for this angular application
-     *
-     * @return
-     */
-    public List<AngularDirectiveBase> getDirectives()
-    {
-        return directives;
-    }
-
-    /**
-     * Returns a final ArrayList of directives for the angular application
-     *
-     * @return
-     */
-    public List<AngularModuleBase> getModules()
-    {
-        return modules;
-    }
-
-    /**
-     * Returns the final controllers list for the angular application
-     *
-     * @return
-     */
-    public List<AngularControllerBase> getControllers()
-    {
-        return controllers;
-    }
-
-    /**
      * Get the JW Angular Controller associated for this application
      *
      * @return
@@ -615,4 +491,5 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
         return new StringBuilder();
         //return renderTemplateScripts("jwangular");
     }
+
 }

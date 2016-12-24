@@ -16,15 +16,20 @@
  */
 package za.co.mmagon.jwebswing.components.jstree;
 
-import za.co.mmagon.jwebswing.components.newcomponents.*;
+import com.armineasy.injection.GuiceContext;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.*;
+import za.co.mmagon.jwebswing.components.jstree.options.*;
+import za.co.mmagon.jwebswing.components.jstree.plugins.JSTreePlugins;
+import za.co.mmagon.jwebswing.components.jstree.plugins.onchangedevent.JSTreeOnChangedPluginAdapter;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
 /**
- * All the options for the tooltip library
+ * Holds all jstree related functions and variables, including the actual class and methods to create, access and manipulate instances.
  * &lt;p&gt;
  * @author GedMarc
- * @since Mar 4, 2015
+ * @since Dec 22, 2016
  * @version 1.0
  * &lt;p&gt;
  * &lt;p&gt;
@@ -32,16 +37,551 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 public class JSTreeOptions extends JavaScriptPart
 {
 
-    public JSTreeOptions()
-<span class="nc" id="L36">    {</span>
- 
-<span class="nc" id="L38">   }</span>
+    private static final long serialVersionUID = 1L;
 
-    @Override
-    public JavascriptPartType getJavascriptType()
+    /**
+     * holds all the default options used when creating new instances
+     */
+    private JSTreeDefaultOptions defaults;
+    /**
+     * stores all loaded jstree plugins (used internally)
+     */
+    private List&lt;JSTreePlugins&gt; plugins;
+    /**
+     * specifies the jstree version in use
+     *
+     * @deprecated rather not
+     */
+    @Deprecated()
+    private String version;
+
+    /**
+     * This plugin adds additional information about selection changes. Once included in the plugins config option, each changed.jstree event data will contain a new property named changed, which will
+     * give information about selected and deselected nodes since the last changed.jstree event
+     */
+    @JsonIgnore
+    private boolean extendedChangeDetails;
+
+    /**
+     * This plugin renders checkbox icons in front of each node, making multiple selection much easier.
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * It also supports tri-state behavior, meaning that if a node has a few of its children checked it will be rendered as undetermined, and state will be propagated up. You can also fine tune the
+     * cascading options with the cascade config option.
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * Keep in mind when cascading checkbox will check even disabled nodes.
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * Undetermined state is automatically calculated, but if you are using AJAX and loading on demand and want to render a node as undetermined pass &quot;undetermined&quot; : true in its state.
+     */
+    private JSTreeCheckboxOptions checkbox;
+
+    /**
+     * This plugin makes it possible to right click nodes and shows a list of configurable actions in a menu.
+     */
+    @JsonProperty(&quot;contextmenu&quot;)
+    private JSTreeContextMenuOptions contextMenu;
+    /**
+     * This plugin makes it possible to drag and drop tree nodes and rearrange the tree.
+     */
+    @JsonProperty(&quot;dnd&quot;)
+    private JSTreeDragAndDropOptions dragAndDrop;
+    /**
+     * This plugin makes it possible to load nodes in a single request (used with lazy loading).
+     */
+    @JsonProperty(&quot;massload&quot;)
+    private JSTreeAjaxConfigOptions massLoad;
+    /**
+     * This plugin adds the possibility to search for items in the tree and even to show only matching nodes.
+     */
+    private JSTreeSearchOptions search;
+
+    /**
+     * This plugin automatically arranges all sibling nodes according to a comparison config option function, which defaults to alphabetical order.
+     */
+    @JsonIgnore
+    private boolean sort;
+    /**
+     * This plugin saves all opened and selected nodes in the user's browser, so when returning to the same tree the previous state will be restored.
+     */
+    private JSTreeStateOptions state;
+    /**
+     * This plugin makes it possible to add predefined types for groups of nodes, which means to easily control nesting rules and icon for each group.
+     */
+    private Map&lt;String, JSTreeTypesOptions&gt; types;
+
+    /**
+     * Enforces that no nodes with the same name can coexist as siblings. This plugin has no options, it just prevents renaming and moving nodes to a parent, which already contains a node with the
+     * same name.
+     */
+    private JSTreeUniqueOptions unique;
+
+    /**
+     *
+     */
+    @JsonIgnore
+    private boolean wholeRowSelection;
+
+    /**
+     * A reference back to the tree
+     */
+    @JsonIgnore
+    private JSTree tree;
+
+    public JSTreeOptions(JSTree tree)
+<span class="nc" id="L133">    {</span>
+<span class="nc" id="L134">        this.tree = tree;</span>
+<span class="nc" id="L135">    }</span>
+
+    /**
+     * holds all the default options used when creating new instances
+     *
+     * @return
+     */
+    public JSTreeDefaultOptions getDefaults()
     {
-<span class="nc" id="L43">        return JavascriptPartType.Javascript;</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">        if (defaults == null)</span>
+        {
+<span class="nc" id="L146">            defaults = GuiceContext.Injector().getInstance(JSTreeDefaultOptions.class);</span>
+        }
+<span class="nc" id="L148">        return defaults;</span>
     }
+
+    /**
+     * holds all the default options used when creating new instances
+     *
+     * @param defaults
+     */
+    public void setDefaults(JSTreeDefaultOptions defaults)
+    {
+<span class="nc" id="L158">        this.defaults = defaults;</span>
+<span class="nc" id="L159">    }</span>
+
+    /**
+     * stores all loaded jstree plugins (used internally)
+     *
+     * @return
+     */
+    public List&lt;JSTreePlugins&gt; getPlugins()
+    {
+<span class="nc bnc" id="L168" title="All 2 branches missed.">        if (plugins == null)</span>
+        {
+<span class="nc" id="L170">            plugins = new ArrayList&lt;&gt;();</span>
+        }
+<span class="nc" id="L172">        return plugins;</span>
+    }
+
+    /**
+     * stores all loaded jstree plugins (used internally)
+     *
+     * @param plugins
+     */
+    public void setPlugins(List&lt;JSTreePlugins&gt; plugins)
+    {
+<span class="nc" id="L182">        this.plugins = plugins;</span>
+<span class="nc" id="L183">    }</span>
+
+    /**
+     * specifies the jstree version in use
+     *
+     * @deprecated rather not
+     * @return
+     */
+    public String getVersion()
+    {
+<span class="nc" id="L193">        return version;</span>
+    }
+
+    /**
+     * specifies the jstree version in use
+     *
+     * @deprecated rather not
+     * @param version
+     */
+    public void setVersion(String version)
+    {
+<span class="nc" id="L204">        this.version = version;</span>
+<span class="nc" id="L205">    }</span>
+
+    /**
+     * This plugin adds additional information about selection changes. Once included in the plugins config option, each changed.jstree event data will contain a new property named changed, which will
+     * give information about selected and deselected nodes since the last changed.jstree event
+     *
+     * @return
+     */
+    public boolean isExtendedChangeDetails()
+    {
+<span class="nc" id="L215">        return extendedChangeDetails;</span>
+    }
+
+    /**
+     * This plugin adds additional information about selection changes. Once included in the plugins config option, each changed.jstree event data will contain a new property named changed, which will
+     * give information about selected and deselected nodes since the last changed.jstree event
+     *
+     * @param extendedChangeDetails if on or off
+     * @param event                 The event needed if enabled
+     */
+    public void setExtendedChangeDetails(boolean extendedChangeDetails, JSTreeOnChangedPluginAdapter event)
+    {
+<span class="nc" id="L227">        this.extendedChangeDetails = extendedChangeDetails;</span>
+<span class="nc bnc" id="L228" title="All 2 branches missed.">        if (this.extendedChangeDetails)</span>
+        {
+<span class="nc" id="L230">            tree.addEvent(event);</span>
+<span class="nc" id="L231">            getPlugins().add(JSTreePlugins.Changed);</span>
+        }
+        else
+        {
+<span class="nc" id="L235">            getPlugins().remove(JSTreePlugins.Changed);</span>
+        }
+<span class="nc" id="L237">    }</span>
+
+    /**
+     * A reference back to the tree
+     *
+     * @return
+     */
+    public JSTree getTree()
+    {
+<span class="nc" id="L246">        return tree;</span>
+    }
+
+    /**
+     * A reference back to the tree
+     *
+     * @param tree
+     */
+    public void setTree(JSTree tree)
+    {
+<span class="nc" id="L256">        this.tree = tree;</span>
+<span class="nc" id="L257">    }</span>
+
+    /**
+     * This plugin renders checkbox icons in front of each node, making multiple selection much easier.
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * It also supports tri-state behavior, meaning that if a node has a few of its children checked it will be rendered as undetermined, and state will be propagated up. You can also fine tune the
+     * cascading options with the cascade config option.
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * Keep in mind when cascading checkbox will check even disabled nodes.
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * Undetermined state is automatically calculated, but if you are using AJAX and loading on demand and want to render a node as undetermined pass &quot;undetermined&quot; : true in its state.
+     *
+     * @return
+     */
+    public JSTreeCheckboxOptions getCheckbox()
+    {
+<span class="nc bnc" id="L276" title="All 2 branches missed.">        if (checkbox == null)</span>
+        {
+<span class="nc" id="L278">            checkbox = new JSTreeCheckboxOptions();</span>
+<span class="nc" id="L279">            getPlugins().add(JSTreePlugins.Checkbox);</span>
+        }
+<span class="nc" id="L281">        return checkbox;</span>
+    }
+
+    /**
+     * This plugin renders checkbox icons in front of each node, making multiple selection much easier.
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * It also supports tri-state behavior, meaning that if a node has a few of its children checked it will be rendered as undetermined, and state will be propagated up. You can also fine tune the
+     * cascading options with the cascade config option.
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * Keep in mind when cascading checkbox will check even disabled nodes.
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * Undetermined state is automatically calculated, but if you are using AJAX and loading on demand and want to render a node as undetermined pass &quot;undetermined&quot; : true in its state.
+     *
+     * @param checkbox
+     */
+    public void setCheckbox(JSTreeCheckboxOptions checkbox)
+    {
+<span class="nc bnc" id="L301" title="All 2 branches missed.">        if (checkbox != null)</span>
+        {
+<span class="nc" id="L303">            getPlugins().add(JSTreePlugins.Checkbox);</span>
+        }
+<span class="nc" id="L305">        this.checkbox = checkbox;</span>
+<span class="nc" id="L306">    }</span>
+
+    /**
+     * This plugin makes it possible to right click nodes and shows a list of configurable actions in a menu.
+     *
+     * @return never null
+     */
+    public JSTreeContextMenuOptions getContextMenu()
+    {
+<span class="nc bnc" id="L315" title="All 2 branches missed.">        if (contextMenu == null)</span>
+        {
+<span class="nc" id="L317">            contextMenu = new JSTreeContextMenuOptions();</span>
+<span class="nc" id="L318">            getPlugins().add(JSTreePlugins.ContextMenu);</span>
+        }
+<span class="nc" id="L320">        return contextMenu;</span>
+    }
+
+    /**
+     * This plugin makes it possible to right click nodes and shows a list of configurable actions in a menu.
+     *
+     * @param contextMenu
+     */
+    public void setContextMenu(JSTreeContextMenuOptions contextMenu)
+    {
+<span class="nc bnc" id="L330" title="All 2 branches missed.">        if (contextMenu != null)</span>
+        {
+<span class="nc" id="L332">            getPlugins().add(JSTreePlugins.ContextMenu);</span>
+        }
+<span class="nc" id="L334">        this.contextMenu = contextMenu;</span>
+<span class="nc" id="L335">    }</span>
+
+    /**
+     * This plugin makes it possible to drag and drop tree nodes and rearrange the tree.
+     *
+     * @return
+     */
+    public JSTreeDragAndDropOptions getDragAndDrop()
+    {
+<span class="nc bnc" id="L344" title="All 2 branches missed.">        if (dragAndDrop == null)</span>
+        {
+<span class="nc" id="L346">            dragAndDrop = new JSTreeDragAndDropOptions();</span>
+<span class="nc" id="L347">            getPlugins().add(JSTreePlugins.DnD);</span>
+        }
+<span class="nc" id="L349">        return dragAndDrop;</span>
+    }
+
+    /**
+     * This plugin makes it possible to drag and drop tree nodes and rearrange the tree.
+     *
+     * @param dragAndDrop
+     */
+    public void setDragAndDrop(JSTreeDragAndDropOptions dragAndDrop)
+    {
+<span class="nc" id="L359">        this.dragAndDrop = dragAndDrop;</span>
+<span class="nc bnc" id="L360" title="All 2 branches missed.">        if (dragAndDrop != null)</span>
+        {
+<span class="nc" id="L362">            getPlugins().add(JSTreePlugins.DnD);</span>
+        }
+<span class="nc" id="L364">    }</span>
+
+    /**
+     * This plugin makes it possible to load nodes in a single request (used with lazy loading).
+     *
+     * @return
+     */
+    public JSTreeAjaxConfigOptions getMassLoad()
+    {
+<span class="nc bnc" id="L373" title="All 2 branches missed.">        if (massLoad == null)</span>
+        {
+<span class="nc" id="L375">            massLoad = new JSTreeAjaxConfigOptions();</span>
+<span class="nc" id="L376">            getPlugins().add(JSTreePlugins.Massload);</span>
+<span class="nc" id="L377">            getPlugins().add(JSTreePlugins.State);</span>
+        }
+<span class="nc" id="L379">        return massLoad;</span>
+    }
+
+    /**
+     * This plugin makes it possible to load nodes in a single request (used with lazy loading).
+     *
+     * @param massLoad
+     */
+    public void setMassLoad(JSTreeAjaxConfigOptions massLoad)
+    {
+<span class="nc" id="L389">        this.massLoad = massLoad;</span>
+<span class="nc bnc" id="L390" title="All 2 branches missed.">        if (massLoad != null)</span>
+        {
+<span class="nc" id="L392">            getPlugins().add(JSTreePlugins.Massload);</span>
+<span class="nc" id="L393">            getPlugins().add(JSTreePlugins.State);</span>
+        }
+<span class="nc" id="L395">    }</span>
+
+    /**
+     * This plugin adds the possibility to search for items in the tree and even to show only matching nodes.
+     *
+     * @return
+     */
+    public JSTreeSearchOptions getSearch()
+    {
+<span class="nc bnc" id="L404" title="All 2 branches missed.">        if (search == null)</span>
+        {
+<span class="nc" id="L406">            setSearch(new JSTreeSearchOptions());</span>
+        }
+<span class="nc" id="L408">        return search;</span>
+    }
+
+    /**
+     * This plugin adds the possibility to search for items in the tree and even to show only matching nodes.
+     *
+     * @param search
+     */
+    public void setSearch(JSTreeSearchOptions search)
+    {
+<span class="nc" id="L418">        this.search = search;</span>
+<span class="nc bnc" id="L419" title="All 2 branches missed.">        if (search != null)</span>
+        {
+<span class="nc" id="L421">            getPlugins().add(JSTreePlugins.Search);</span>
+        }
+<span class="nc" id="L423">    }</span>
+
+    /**
+     * This plugin automatically arranges all sibling nodes according to a comparison config option function, which defaults to alphabetical order.
+     *
+     * @return
+     */
+    public boolean isSort()
+    {
+<span class="nc" id="L432">        return sort;</span>
+    }
+
+    /**
+     * This plugin automatically arranges all sibling nodes according to a comparison config option function, which defaults to alphabetical order.
+     *
+     * @param sort
+     */
+    public void setSort(boolean sort)
+    {
+<span class="nc" id="L442">        this.sort = sort;</span>
+<span class="nc bnc" id="L443" title="All 2 branches missed.">        if (sort)</span>
+        {
+<span class="nc" id="L445">            getPlugins().add(JSTreePlugins.Sort);</span>
+        }
+<span class="nc" id="L447">    }</span>
+
+    /**
+     * This plugin saves all opened and selected nodes in the user's browser, so when returning to the same tree the previous state will be restored.
+     *
+     * @return
+     */
+    public JSTreeStateOptions getState()
+    {
+<span class="nc bnc" id="L456" title="All 2 branches missed.">        if (state == null)</span>
+        {
+<span class="nc" id="L458">            setState(new JSTreeStateOptions());</span>
+        }
+<span class="nc" id="L460">        return state;</span>
+    }
+
+    /**
+     * This plugin saves all opened and selected nodes in the user's browser, so when returning to the same tree the previous state will be restored.
+     *
+     * @param state
+     */
+    public void setState(JSTreeStateOptions state)
+    {
+<span class="nc" id="L470">        this.state = state;</span>
+<span class="nc bnc" id="L471" title="All 2 branches missed.">        if (state != null)</span>
+        {
+<span class="nc" id="L473">            getPlugins().add(JSTreePlugins.State);</span>
+        }
+<span class="nc" id="L475">    }</span>
+
+    /**
+     * This plugin makes it possible to add predefined types for groups of nodes, which means to easily control nesting rules and icon for each group.
+     *
+     * @return
+     */
+    public Map&lt;String, JSTreeTypesOptions&gt; getTypes()
+    {
+<span class="nc bnc" id="L484" title="All 2 branches missed.">        if (types == null)</span>
+        {
+<span class="nc" id="L486">            types = new TreeMap&lt;&gt;();</span>
+<span class="nc" id="L487">            getPlugins().add(JSTreePlugins.Types);</span>
+        }
+<span class="nc" id="L489">        return types;</span>
+    }
+
+    /**
+     * This plugin makes it possible to add predefined types for groups of nodes, which means to easily control nesting rules and icon for each group.
+     *
+     * @param types
+     */
+    public void setTypes(Map&lt;String, JSTreeTypesOptions&gt; types)
+    {
+<span class="nc" id="L499">        this.types = types;</span>
+<span class="nc bnc" id="L500" title="All 2 branches missed.">        if (types != null)</span>
+        {
+<span class="nc" id="L502">            getPlugins().add(JSTreePlugins.Types);</span>
+        }
+<span class="nc" id="L504">    }</span>
+
+    /**
+     * # represents the root of the tree, for example max_children would control the maximum number of root nodes.
+     *
+     * @return
+     */
+    public JSTreeTypesOptions addRootType()
+    {
+<span class="nc" id="L513">        JSTreeTypesOptions type = new JSTreeTypesOptions();</span>
+<span class="nc" id="L514">        getTypes().put(&quot;#&quot;, type);</span>
+<span class="nc" id="L515">        return type;</span>
+    }
+
+    /**
+     * default represents the default node - any settings here will be applied to all nodes that do not have a type specified.
+     *
+     * @return
+     */
+    public JSTreeTypesOptions addDefaultNodeType()
+    {
+<span class="nc" id="L525">        JSTreeTypesOptions type = new JSTreeTypesOptions();</span>
+<span class="nc" id="L526">        getTypes().put(&quot;default&quot;, type);</span>
+<span class="nc" id="L527">        return type;</span>
+    }
+
+    /**
+     * Enforces that no nodes with the same name can coexist as siblings.
+     * &lt;p&gt;
+     * This plugin has no options, it just prevents renaming and moving nodes to a parent, which already contains a node with the same name.
+     *
+     * @return not null, calling enables
+     */
+    public JSTreeUniqueOptions getUnique()
+    {
+<span class="nc bnc" id="L539" title="All 2 branches missed.">        if (unique == null)</span>
+        {
+<span class="nc" id="L541">            setUnique(new JSTreeUniqueOptions());</span>
+        }
+<span class="nc" id="L543">        return unique;</span>
+    } 
+
+    /**
+     * Enforces that no nodes with the same name can coexist as siblings.
+     * &lt;p&gt;
+     * This plugin has no options, it just prevents renaming and moving nodes to a parent, which already contains a node with the same name.
+     *
+     * @param unique
+     */
+    public void setUnique(JSTreeUniqueOptions unique)
+    {
+<span class="nc" id="L555">        this.unique = unique;</span>
+<span class="nc bnc" id="L556" title="All 2 branches missed.">        if (unique != null)</span>
+        {
+<span class="nc" id="L558">            getPlugins().add(JSTreePlugins.Unique);</span>
+        }
+<span class="nc" id="L560">    }</span>
+
+    /**
+     * Makes each node appear block level which makes selection easier. May cause slow down for large trees in old browsers.
+     *
+     * @return
+     */
+    public boolean isWholeRowSelection()
+    {
+<span class="nc" id="L569">        return wholeRowSelection;</span>
+    }
+
+    /**
+     * Makes each node appear block level which makes selection easier. May cause slow down for large trees in old browsers.
+     *
+     * @param wholeRowSelection
+     */
+    public void setWholeRowSelection(boolean wholeRowSelection)
+    {
+<span class="nc" id="L579">        this.wholeRowSelection = wholeRowSelection;</span>
+<span class="nc bnc" id="L580" title="All 2 branches missed.">        if (wholeRowSelection)</span>
+        {
+<span class="nc" id="L582">            getPlugins().add(JSTreePlugins.WholeRow);</span>
+        }
+<span class="nc" id="L584">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

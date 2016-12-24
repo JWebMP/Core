@@ -75,11 +75,11 @@ public class JQLayoutDiv extends Div&lt;JWLayoutDivChildren, NoAttributes, Globa
      * @param contentDiv The content div. Never null please
      */
     public JQLayoutDiv(JQLayout layout, JQLayoutArea area, Div contentDiv)
-<span class="nc" id="L78">    {</span>
-<span class="nc" id="L79">        setLayout(layout);</span>
-<span class="nc" id="L80">        setContentDiv(contentDiv);</span>
-<span class="nc" id="L81">        setArea(area);</span>
-<span class="nc" id="L82">    }</span>
+<span class="fc" id="L78">    {</span>
+<span class="fc" id="L79">        setLayout(layout);</span>
+<span class="fc" id="L80">        setContentDiv(contentDiv);</span>
+<span class="fc" id="L81">        setArea(area);</span>
+<span class="fc" id="L82">    }</span>
 
     /**
      * Sets the content div of this layout
@@ -88,14 +88,14 @@ public class JQLayoutDiv extends Div&lt;JWLayoutDivChildren, NoAttributes, Globa
      */
     public final void setContentDiv(Div contentDiv)
     {
-<span class="nc" id="L91">        getChildren().remove(this.contentDiv);</span>
-<span class="nc" id="L92">        this.contentDiv = contentDiv;</span>
-<span class="nc bnc" id="L93" title="All 2 branches missed.">        if (this.contentDiv != null)</span>
+<span class="fc" id="L91">        getChildren().remove(this.contentDiv);</span>
+<span class="fc" id="L92">        this.contentDiv = contentDiv;</span>
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">        if (this.contentDiv != null)</span>
         {
-<span class="nc" id="L95">            this.contentDiv.addClass(&quot;ui-layout-content&quot;);</span>
-<span class="nc" id="L96">            getChildren().add(this.contentDiv);</span>
+<span class="fc" id="L95">            this.contentDiv.addClass(&quot;ui-layout-content&quot;);</span>
+<span class="fc" id="L96">            getChildren().add(this.contentDiv);</span>
         }
-<span class="nc" id="L98">    }</span>
+<span class="fc" id="L98">    }</span>
 
     /**
      * Adds the Div as a header and applies the class Widget Header
@@ -309,16 +309,16 @@ public class JQLayoutDiv extends Div&lt;JWLayoutDivChildren, NoAttributes, Globa
     @Override
     public final void setArea(JQLayoutArea area)
     {
-<span class="nc bnc" id="L312" title="All 2 branches missed.">        if (area != null)</span>
+<span class="pc bpc" id="L312" title="1 of 2 branches missed.">        if (area != null)</span>
         {
-<span class="nc" id="L314">            removeClass(area.getAreaClass().toString());</span>
+<span class="fc" id="L314">            removeClass(area.getAreaClass().toString());</span>
         }
-<span class="nc" id="L316">        this.area = area;</span>
-<span class="nc bnc" id="L317" title="All 2 branches missed.">        if (this.area != null)</span>
+<span class="fc" id="L316">        this.area = area;</span>
+<span class="pc bpc" id="L317" title="1 of 2 branches missed.">        if (this.area != null)</span>
         {
-<span class="nc" id="L319">            addClass(this.area.getAreaClass());</span>
+<span class="fc" id="L319">            addClass(this.area.getAreaClass());</span>
         }
-<span class="nc" id="L321">    }</span>
+<span class="fc" id="L321">    }</span>
 
     /**
      * Returns the current content div
@@ -354,8 +354,8 @@ public class JQLayoutDiv extends Div&lt;JWLayoutDivChildren, NoAttributes, Globa
     @Override
     public final void setLayout(JQLayout layout)
     {
-<span class="nc" id="L357">        this.layout = layout;</span>
-<span class="nc" id="L358">    }</span>
+<span class="fc" id="L357">        this.layout = layout;</span>
+<span class="fc" id="L358">    }</span>
 
     /**
      * Sets the footer collection

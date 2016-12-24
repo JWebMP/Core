@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.components.jstree.options;
 
-import com.armineasy.injection.GuiceContext;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 import java.util.TreeMap;
@@ -82,7 +81,7 @@ public class JSTreeCoreOptions extends JavaScriptPart
     {
         if (data == null)
         {
-            data = GuiceContext.Injector().getInstance(JSTreeAjaxConfigOptions.class);
+            data = new JSTreeAjaxConfigOptions();
         }
         return data;
     }

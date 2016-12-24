@@ -34,7 +34,7 @@ import za.co.mmagon.jwebswing.base.events.resize.ResizeAdapter;
 import za.co.mmagon.jwebswing.base.events.resizestart.ResizeStartAdapter;
 import za.co.mmagon.jwebswing.base.events.resizestop.ResizeStopAdapter;
 import za.co.mmagon.jwebswing.base.events.response.Responsedapter;
-import za.co.mmagon.jwebswing.base.events.rightclick.RightClickEvent;
+import za.co.mmagon.jwebswing.base.events.rightclick.RightClickAdapter;
 import za.co.mmagon.jwebswing.base.events.search.SearchAdapter;
 import za.co.mmagon.jwebswing.base.events.selected.SelectedAdapter;
 import za.co.mmagon.jwebswing.base.events.selecting.SelectingAdapter;
@@ -79,7 +79,7 @@ public enum EventTypes implements Comparable<EventTypes>
     /**
      * Registers a Right Click event
      */
-    contextmenu(RightClickEvent.class, null),
+    contextmenu(RightClickAdapter.class, null),
     /*
      * Registers a normal click event
      */

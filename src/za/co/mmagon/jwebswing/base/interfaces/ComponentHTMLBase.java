@@ -141,7 +141,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
         }
         setCurrentTabIndents(tabCount);
         
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         
         StringBuilder beforeTag = renderBeforeTag();
         if (beforeTag != null && beforeTag.length() > 0)

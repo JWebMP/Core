@@ -52,22 +52,11 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
      */
     private static final UserAgentStringParser userAgentParser = UADetectorServiceFactory.getResourceModuleParser();
 
-    private static GuiceContext injectionContext;
-
     /**
      * Constructs a new JWebSwing Servlet that is not session aware
      */
     public JWebSwingServlet()
     {
-    }
-
-    public static GuiceContext getInjectionContext()
-    {
-        if (injectionContext == null)
-        {
-            injectionContext = new GuiceContext();
-        }
-        return injectionContext;
     }
 
     /**
@@ -80,16 +69,22 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
     private void readRequestVariables(HttpServletRequest request) throws MissingComponentException
     {
         Page currentPage = getPage();
-        request.getSession().setAttribute("jwpage", currentPage);
+        HttpSession session = GuiceContext.Injector().getInstance(HttpSession.class);
+        session.setAttribute("jwpage", currentPage);
         if (currentPage == null)
         {
             throw new MissingComponentException("[No Page]-[getPage() returning null in servlet class]");
         }
-        getCurrentPage(request.getSession()).setServlet(this);
         if (request.getSession().isNew())
         {
             SESSION_LOG.log(Level.FINE, "[SessionID]-[{0}];[Name]-[User Login];[Action]-[Session Added];", request.getSession().getId());
         }
+    }
+
+    @Provides
+    protected Page getPageInjection()
+    {
+        return getPage();
     }
 
     /**
@@ -101,7 +96,8 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
     {
         String headerInformation = request.getHeader("User-Agent");
         ReadableUserAgent agent = userAgentParser.parse(headerInformation);
-        getCurrentPage(request.getSession()).setUserAgent(agent);
+        HttpSession session = GuiceContext.Injector().getInstance(HttpSession.class);
+        getPage().setUserAgent(agent);
         Browsers b;
         if (agent.getVersionNumber().getMajor().isEmpty() && agent.getVersionNumber().getMinor().isEmpty())
         {
@@ -111,7 +107,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
         {
             b = Browsers.getBrowserFromNameAndVersion(agent.getName(), Double.parseDouble(agent.getVersionNumber().getMajor() + "." + agent.getVersionNumber().getMinor()));
         }
-        getCurrentPage(request.getSession()).setBrowser(b);
+        getPage().setBrowser(b);
         if (agent.getVersionNumber().getMajor() == null || agent.getVersionNumber().getMajor().isEmpty())
         {
             LOG.log(Level.FINE, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}];[Operating System]-[{3}];[Device Category]-[{4}];[Device]-[{5}];[CSS]-[{6}];[HTML]-[{7}];", new Object[]
@@ -268,7 +264,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
     private StringBuilder getPageHTML(HttpSession session)
     {
         StringBuilder html;
-        html = new StringBuilder(getCurrentPage(session).toString(true));
+        html = new StringBuilder(getPage().toString(true));
         return html;
     }
 
@@ -329,7 +325,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
     {
         LOG.log(Level.FINE, "Started Rendering Mobile HTML");
         StringBuilder html;
-        html = new StringBuilder(getCurrentPage(session).toString(true));
+        html = new StringBuilder(getPage().toString(true));
         return html;
     }
 
@@ -386,17 +382,5 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
     public boolean isUserLoggedIn()
     {
         return true;
-    }
-
-    /**
-     * Returns the current page being displayed with this Servlet
-     *
-     * @param session
-     *
-     * @return
-     */
-    public Page getCurrentPage(HttpSession session)
-    {
-        return (Page) session.getAttribute("jwpage");
     }
 }

@@ -15,13 +15,15 @@
  */
 package org.atmosphere.samples.chat;
 
-import java.io.*;
-import java.util.*;
-import java.util.concurrent.*;
-import javax.inject.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.concurrent.ConcurrentHashMap;
+import javax.inject.Inject;
 import org.atmosphere.config.service.*;
 import org.atmosphere.cpr.*;
-import org.slf4j.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Simple annotated class that demonstrate the power of Atmosphere. This class supports all transports, support message length guarantee, heart beat, message cache thanks to the
@@ -101,7 +103,7 @@ public class ChatRoom
     }
 
     /**
-     * Simple annotated class that demonstrate how {@link org.atmosphere.config.managed.Encoder} and {@link org.atmosphere.config.managed.Decoder
+     * Simple annotated class that demonstrate how {@link org.atmosphere.config.managed.Encoder} and {@link org.atmosphere.config.managed.Decoder}
      * can be used.
      *
      * @param message an instance of {@link ChatProtocol }

@@ -32,10 +32,7 @@ public class JSTreeDefaultOptions extends JavaScriptPart
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * holds all jstree related functions and variables, including the actual class and methods to create, access and manipulate instances.
-     */
-    private JSTreeCoreOptions core;
+    
     /**
      * configure which plugins will be active on an instance. Should be an array of strings, where each element is a plugin name. The default is
      */
@@ -70,24 +67,6 @@ public class JSTreeDefaultOptions extends JavaScriptPart
         this.plugins = plugins;
     }
 
-    /**
-     * holds all jstree related functions and variables, including the actual class and methods to create, access and manipulate instances.
-     *
-     * @return
-     */
-    public JSTreeCoreOptions getCore()
-    {
-        return core;
-    }
-
-    /**
-     * holds all jstree related functions and variables, including the actual class and methods to create, access and manipulate instances.
-     *
-     * @param core
-     */
-    public void setCore(JSTreeCoreOptions core)
-    {
-        this.core = core;
-    }
+    
 
 }

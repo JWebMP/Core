@@ -5,7 +5,7 @@
  */
 package za.co.mmagon.jwebswing.utilities;
 
-import java.io.*;
+import java.io.Serializable;
 
 /**
  * Just default strings
@@ -24,7 +24,7 @@ public class StringConstants implements Serializable
      */
     public static final String times = "&times;";
     /**
-     * The &nbsp string
+     * The &nbsp; string
      */
     public static final String tab = "&nbsp;";
     /**
@@ -32,7 +32,7 @@ public class StringConstants implements Serializable
      */
     public static final String shortLatin = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...";
     /**
-     * Default Medium text for latin
+     * Default Medium text for Latin
      */
     public static final String mediumLatin = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero laboriosam dolor perspiciatis omnis exercitationem. Beatae, officia pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas suscipit facere rem dicta, debitis...";
 

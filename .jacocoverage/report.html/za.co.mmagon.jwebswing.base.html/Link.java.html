@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Link.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">Link.java</span></div><h1>Link.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html;
 
-import com.sun.javafx.scene.NodeHelper;
+import za.co.mmagon.logger.LogFactory;
+import java.util.logging.*;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.attributes.LinkAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
@@ -44,10 +43,10 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author Marc Magon
  */
 public class Link extends Component&lt;ComponentHierarchyBase, LinkAttributes, GlobalFeatures, GlobalEvents, Link&gt;
-        implements BodyChildren, NoNewLineForRawText,ListItemChildren
+        implements BodyChildren, NoNewLineForRawText, ListItemChildren
 {
 
-<span class="fc" id="L50">    private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(&quot;ALink&quot;);</span>
+<span class="fc" id="L49">    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger(&quot;ALink&quot;);</span>
     private static final long serialVersionUID = 1L;
 
     private String directToAddress;
@@ -58,8 +57,8 @@ public class Link extends Component&lt;ComponentHierarchyBase, LinkAttributes, G
      */
     public Link()
     {
-<span class="fc" id="L61">        super(&quot;a&quot;, ComponentTypes.Link);</span>
-<span class="fc" id="L62">    }</span>
+<span class="fc" id="L60">        super(&quot;a&quot;, ComponentTypes.Link);</span>
+<span class="fc" id="L61">    }</span>
 
     /**
      * Creates a link directly to the address in the current window
@@ -68,12 +67,12 @@ public class Link extends Component&lt;ComponentHierarchyBase, LinkAttributes, G
      */
     public Link(String directToAddress)
     {
-<span class="fc" id="L71">        this(directToAddress, null);</span>
-<span class="pc bpc" id="L72" title="1 of 4 branches missed.">        if (directToAddress == null || directToAddress.isEmpty())</span>
+<span class="fc" id="L70">        this(directToAddress, null);</span>
+<span class="pc bpc" id="L71" title="1 of 4 branches missed.">        if (directToAddress == null || directToAddress.isEmpty())</span>
         {
-<span class="fc" id="L74">            log.trace(&quot;Invalid Link Address.&quot;);</span>
+<span class="fc" id="L73">            log.log(Level.FINE,&quot;Invalid Link Address.&quot;);</span>
         }
-<span class="fc" id="L76">    }</span>
+<span class="fc" id="L75">    }</span>
 
     /**
      * Creates a link directly to the address in the specified target frame
@@ -83,54 +82,54 @@ public class Link extends Component&lt;ComponentHierarchyBase, LinkAttributes, G
      */
     public Link(String directToAddress, String targetFrameName)
     {
-<span class="fc" id="L86">        this(directToAddress, targetFrameName, (String) null);</span>
-<span class="fc" id="L87">    }</span>
+<span class="fc" id="L85">        this(directToAddress, targetFrameName, (String) null);</span>
+<span class="fc" id="L86">    }</span>
 
     /**
      * Creates a link directly to the address in the specified target frame
      * &lt;p&gt;
      * @param directToAddress The address to redirect to
      * @param targetFrameName The frame to redirect
-     * @param text Includes raw text in the link
+     * @param text            Includes raw text in the link
      */
     public Link(String directToAddress, String targetFrameName, String text)
     {
-<span class="fc" id="L98">        super(&quot;a&quot;, ComponentTypes.Link);</span>
-<span class="fc" id="L99">        this.directToAddress = directToAddress;</span>
-<span class="fc" id="L100">        this.targetFrameName = targetFrameName;</span>
-<span class="pc bpc" id="L101" title="1 of 2 branches missed.">        if (directToAddress != null)</span>
+<span class="fc" id="L97">        super(&quot;a&quot;, ComponentTypes.Link);</span>
+<span class="fc" id="L98">        this.directToAddress = directToAddress;</span>
+<span class="fc" id="L99">        this.targetFrameName = targetFrameName;</span>
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">        if (directToAddress != null)</span>
         {
-<span class="fc" id="L103">            addAttribute(LinkAttributes.HRef, directToAddress);</span>
+<span class="fc" id="L102">            addAttribute(LinkAttributes.HRef, directToAddress);</span>
         }
-<span class="fc bfc" id="L105" title="All 2 branches covered.">        if (targetFrameName != null)</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">        if (targetFrameName != null)</span>
         {
-<span class="fc" id="L107">            addAttribute(LinkAttributes.Target, targetFrameName);</span>
+<span class="fc" id="L106">            addAttribute(LinkAttributes.Target, targetFrameName);</span>
         }
-<span class="fc" id="L109">        setText(text);</span>
-<span class="fc" id="L110">    }</span>
+<span class="fc" id="L108">        setText(text);</span>
+<span class="fc" id="L109">    }</span>
 
     /**
      * Creates a link directly to the address in the specified target frame
      * &lt;p&gt;
      * @param directToAddress The address to redirect to
      * @param targetFrameName The frame to redirect
-     * @param component Includes raw text in the link
+     * @param component       Includes raw text in the link
      */
     public Link(String directToAddress, String targetFrameName, ComponentHierarchyBase component)
     {
-<span class="nc" id="L121">        super(&quot;a&quot;, ComponentTypes.Link);</span>
-<span class="nc" id="L122">        this.directToAddress = directToAddress;</span>
-<span class="nc" id="L123">        this.targetFrameName = targetFrameName;</span>
-<span class="nc bnc" id="L124" title="All 2 branches missed.">        if (directToAddress != null)</span>
+<span class="nc" id="L120">        super(&quot;a&quot;, ComponentTypes.Link);</span>
+<span class="nc" id="L121">        this.directToAddress = directToAddress;</span>
+<span class="nc" id="L122">        this.targetFrameName = targetFrameName;</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">        if (directToAddress != null)</span>
         {
-<span class="nc" id="L126">            addAttribute(LinkAttributes.HRef, directToAddress);</span>
+<span class="nc" id="L125">            addAttribute(LinkAttributes.HRef, directToAddress);</span>
         }
-<span class="nc bnc" id="L128" title="All 2 branches missed.">        if (targetFrameName != null)</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">        if (targetFrameName != null)</span>
         {
-<span class="nc" id="L130">            addAttribute(LinkAttributes.Target, targetFrameName);</span>
+<span class="nc" id="L129">            addAttribute(LinkAttributes.Target, targetFrameName);</span>
         }
-<span class="nc" id="L132">        add(component);</span>
-<span class="nc" id="L133">    }</span>
+<span class="nc" id="L131">        add(component);</span>
+<span class="nc" id="L132">    }</span>
 
     /**
      * Returns the direct to address
@@ -139,7 +138,7 @@ public class Link extends Component&lt;ComponentHierarchyBase, LinkAttributes, G
      */
     public String getDirectToAddress()
     {
-<span class="nc" id="L142">        return directToAddress;</span>
+<span class="nc" id="L141">        return directToAddress;</span>
     }
 
     /**
@@ -149,9 +148,9 @@ public class Link extends Component&lt;ComponentHierarchyBase, LinkAttributes, G
      */
     public void setDirectToAddress(String directToAddress)
     {
-<span class="nc" id="L152">        this.directToAddress = directToAddress;</span>
-<span class="nc" id="L153">        addAttribute(LinkAttributes.HRef, directToAddress);</span>
-<span class="nc" id="L154">    }</span>
+<span class="nc" id="L151">        this.directToAddress = directToAddress;</span>
+<span class="nc" id="L152">        addAttribute(LinkAttributes.HRef, directToAddress);</span>
+<span class="nc" id="L153">    }</span>
 
     /**
      * Returns the current target frame name
@@ -160,7 +159,7 @@ public class Link extends Component&lt;ComponentHierarchyBase, LinkAttributes, G
      */
     public String getTargetFrameName()
     {
-<span class="nc" id="L163">        return targetFrameName;</span>
+<span class="nc" id="L162">        return targetFrameName;</span>
     }
 
     /**
@@ -170,23 +169,24 @@ public class Link extends Component&lt;ComponentHierarchyBase, LinkAttributes, G
      */
     public void setTargetFrameName(String targetFrameName)
     {
-<span class="nc" id="L173">        this.targetFrameName = targetFrameName;</span>
-<span class="nc" id="L174">        addAttribute(LinkAttributes.Target, targetFrameName);</span>
-<span class="nc" id="L175">    }</span>
+<span class="nc" id="L172">        this.targetFrameName = targetFrameName;</span>
+<span class="nc" id="L173">        addAttribute(LinkAttributes.Target, targetFrameName);</span>
+<span class="nc" id="L174">    }</span>
 
     @Override
     public int hashCode()
     {
-<span class="nc" id="L180">        int hash = 7;</span>
-<span class="nc bnc" id="L181" title="All 2 branches missed.">        hash = 53 * hash + (this.directToAddress != null ? this.directToAddress.hashCode() : 0);</span>
-<span class="nc bnc" id="L182" title="All 2 branches missed.">        hash = 53 * hash + (this.targetFrameName != null ? this.targetFrameName.hashCode() : 0);</span>
-<span class="nc" id="L183">        return hash;</span>
+<span class="nc" id="L179">        int hash = 7;</span>
+<span class="nc bnc" id="L180" title="All 2 branches missed.">        hash = 53 * hash + (this.directToAddress != null ? this.directToAddress.hashCode() : 0);</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">        hash = 53 * hash + (this.targetFrameName != null ? this.targetFrameName.hashCode() : 0);</span>
+<span class="nc" id="L182">        return hash;</span>
     }
 
     /**
      * A valid equals
      * &lt;p&gt;
      * @param obj Anything
+     *
      * @return True only if the attributes specified are identical
      */
     @Override

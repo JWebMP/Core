@@ -19,14 +19,12 @@ package za.co.mmagon.jwebswing.base.servlets;
 import com.google.inject.Singleton;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.logging.*;
-import za.co.mmagon.logger.LogFactory;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
@@ -34,10 +32,10 @@ import za.co.mmagon.jwebswing.base.ajax.AngularJsonVariable;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+import za.co.mmagon.logger.LogFactory;
 
 /**
- * Handles angular data binding calls, registers variables for access.
- * Can handle population, use event binding for call back.
+ * Handles angular data binding calls, registers variables for access. Can handle population, use event binding for call back.
  *
  * @author GedMarc
  * @since 20160607
@@ -54,6 +52,7 @@ public class AngularDataServlet extends JWDefaultServlet
      *
      * @param request  Servlet request
      * @param response Servlet response
+     *
      * @throws ServletException if a Servlet-specific error occurs
      * @throws IOException      if an I/O error occurs
      */
@@ -69,7 +68,7 @@ public class AngularDataServlet extends JWDefaultServlet
         ajaxCall.setEventType(EventTypes.data);
         if (componentId == null || componentId.isEmpty())
         {
-            LOG.log(Level.FINE,"[SessionID]-[" + request.getSession().getId() + "];" + "[Security]-[Component ID Incorrect]");
+            LOG.log(Level.FINE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Security]-[Component ID Incorrect]");
         }
 
         Page page = (Page) request.getAttribute("jwpage");
@@ -77,10 +76,10 @@ public class AngularDataServlet extends JWDefaultServlet
         ajaxCall.setComponent(triggerComponent);
         if (triggerComponent == null)
         {
-            LOG.log(Level.SEVERE,"[SessionID]-[" + request.getSession().getId() + "];" + "[Security]-[Invalid Component Specified]");
+            LOG.log(Level.SEVERE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Security]-[Invalid Component Specified]");
             throw new ServletException("Component could not be found to process any events.");
         }
-        HashMap<String, JavaScriptPart> angs = ajaxCall.getComponent().getAngularObjectsAll();
+        Map<String, JavaScriptPart> angs = ajaxCall.getComponent().getAngularObjectsAll();
         ArrayList<AngularJsonVariable> returnables = new ArrayList<>();
         angs.entrySet().stream().forEach((entry)
                 ->
@@ -128,7 +127,7 @@ public class AngularDataServlet extends JWDefaultServlet
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(respJson.toString());
             Date dataTransferDate = new Date();
-            LOG.log(Level.FINE,"[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + respJson.toString().length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
+            LOG.log(Level.FINE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + respJson.toString().length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
         }
     }
 
@@ -137,6 +136,7 @@ public class AngularDataServlet extends JWDefaultServlet
      *
      * @param request
      * @param response
+     *
      * @throws ServletException
      * @throws IOException
      */
@@ -145,9 +145,10 @@ public class AngularDataServlet extends JWDefaultServlet
     {
         try
         {
-        super.doPost(request, response);
-        processRequest(request, response);
-        }catch(Exception e)
+            super.doPost(request, response);
+            processRequest(request, response);
+        }
+        catch (Exception e)
         {
             LOG.log(Level.SEVERE, "Angular Data Servlet Do Post", e);
         }

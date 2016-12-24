@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JSTreeCoreOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.jstree.options</a> &gt; <span class="el_source">JSTreeCoreOptions.java</span></div><h1>JSTreeCoreOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.jstree.options;
+
+import com.armineasy.injection.GuiceContext;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Map;
+import java.util.TreeMap;
+import za.co.mmagon.jwebswing.components.jstree.options.functions.JSTreeCheckCallbackFunction;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+/**
+ *
+ * @author GedMarc
+ * @since 22 Dec 2016
+ * @version 1.0
+ *
+ */
+public class JSTreeCoreOptions extends JavaScriptPart
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * If left as false the HTML inside the jstree container element is used to populate the tree (that should be an unordered list with list items). You can also pass in a HTML string or a JSON array
+     * here. It is possible to pass in a standard jQuery-like AJAX config and jstree will automatically determine if the response is JSON or HTML and use that to populate the tree. In addition to the
+     * standard jQuery ajax options here you can suppy functions for data and url, the functions will be run in the current instance's scope and a param will be passed indicating which node is being
+     * loaded, the return value of those functions will be used. The last option is to specify a function, that function will receive the node being loaded as argument and a second param which is a
+     * function which should be called with the result.
+     */
+    private JSTreeAjaxConfigOptions data;
+    /**
+     * configure the various strings used throughout the tree You can use an object where the key is the string you need to replace and the value is your replacement. Another option is to specify a
+     * function which will be called with an argument of the needed string and should return the replacement. If left as false no replacement is made.
+     */
+    private Map&lt;String, String&gt; strings;
+    /**
+     * determines what happens when a user tries to modify the structure of the tree
+     * &lt;p&gt;
+     * If left as false all operations like create, rename, delete, move or copy are prevented. You can set this to true to allow all interactions or use a function to have better control.
+     */
+    @JsonProperty(&quot;check_callback&quot;)
+    private JSTreeCheckCallbackFunction checkCallback;
+    /**
+     * the open / close animation duration in milliseconds - set this to false to disable the animation (default is 200)
+     */
+    private Integer animation;
+    /**
+     * a boolean indicating if multiple nodes can be selected
+     */
+    private Boolean multiple;
+
+    public JSTreeCoreOptions()
+<span class="nc" id="L68">    {</span>
+
+<span class="nc" id="L70">    }</span>
+
+    /**
+     * If left as false the HTML inside the jstree container element is used to populate the tree (that should be an unordered list with list items). You can also pass in a HTML string or a JSON array
+     * here. It is possible to pass in a standard jQuery-like AJAX config and jstree will automatically determine if the response is JSON or HTML and use that to populate the tree. In addition to the
+     * standard jQuery ajax options here you can suppy functions for data and url, the functions will be run in the current instance's scope and a param will be passed indicating which node is being
+     * loaded, the return value of those functions will be used. The last option is to specify a function, that function will receive the node being loaded as argument and a second param which is a
+     * function which should be called with the result.
+     *
+     * @return
+     */
+    public JSTreeAjaxConfigOptions getData()
+    {
+<span class="nc bnc" id="L83" title="All 2 branches missed.">        if (data == null)</span>
+        {
+<span class="nc" id="L85">            data = GuiceContext.Injector().getInstance(JSTreeAjaxConfigOptions.class);</span>
+        }
+<span class="nc" id="L87">        return data;</span>
+    }
+
+    /**
+     * If left as false the HTML inside the jstree container element is used to populate the tree (that should be an unordered list with list items). You can also pass in a HTML string or a JSON array
+     * here. It is possible to pass in a standard jQuery-like AJAX config and jstree will automatically determine if the response is JSON or HTML and use that to populate the tree. In addition to the
+     * standard jQuery ajax options here you can suppy functions for data and url, the functions will be run in the current instance's scope and a param will be passed indicating which node is being
+     * loaded, the return value of those functions will be used. The last option is to specify a function, that function will receive the node being loaded as argument and a second param which is a
+     * function which should be called with the result.
+     *
+     * @param data
+     */
+    public void setData(JSTreeAjaxConfigOptions data)
+    {
+<span class="nc" id="L101">        this.data = data;</span>
+<span class="nc" id="L102">    }</span>
+
+    /**
+     * configure the various strings used throughout the tree You can use an object where the key is the string you need to replace and the value is your replacement. Another option is to specify a
+     * function which will be called with an argument of the needed string and should return the replacement. If left as false no replacement is made.
+     *
+     * @return
+     */
+    public Map&lt;String, String&gt; getStrings()
+    {
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        if (strings == null)</span>
+        {
+<span class="nc" id="L114">            strings = new TreeMap&lt;&gt;();</span>
+        }
+<span class="nc" id="L116">        return strings;</span>
+    }
+
+    /**
+     * configure the various strings used throughout the tree You can use an object where the key is the string you need to replace and the value is your replacement. Another option is to specify a
+     * function which will be called with an argument of the needed string and should return the replacement. If left as false no replacement is made.
+     *
+     * @param strings
+     */
+    public void setStrings(Map&lt;String, String&gt; strings)
+    {
+<span class="nc" id="L127">        this.strings = strings;</span>
+<span class="nc" id="L128">    }</span>
+
+    /**
+     * determines what happens when a user tries to modify the structure of the tree
+     * &lt;p&gt;
+     * If left as false all operations like create, rename, delete, move or copy are prevented. You can set this to true to allow all interactions or use a function to have better control.
+     *
+     * @return
+     */
+    public JSTreeCheckCallbackFunction getCheckCallback()
+    {
+<span class="nc bnc" id="L139" title="All 2 branches missed.">        if (checkCallback == null)</span>
+        {
+<span class="nc" id="L141">            checkCallback = new JSTreeCheckCallbackFunction();</span>
+        }
+<span class="nc" id="L143">        return checkCallback;</span>
+    }
+
+    /**
+     * determines what happens when a user tries to modify the structure of the tree
+     * &lt;p&gt;
+     * If left as false all operations like create, rename, delete, move or copy are prevented. You can set this to true to allow all interactions or use a function to have better control.
+     *
+     * @param checkCallback
+     */
+    public void setCheckCallback(JSTreeCheckCallbackFunction checkCallback)
+    {
+<span class="nc" id="L155">        this.checkCallback = checkCallback;</span>
+<span class="nc" id="L156">    }</span>
+
+    /**
+     * the open / close animation duration in milliseconds - set this to false to disable the animation (default is 200)
+     *
+     * @return
+     */
+    public Integer getAnimation()
+    {
+<span class="nc" id="L165">        return animation;</span>
+    }
+
+    /**
+     * the open / close animation duration in milliseconds - set this to false to disable the animation (default is 200)
+     *
+     * @param animation
+     */
+    public void setAnimation(Integer animation)
+    {
+<span class="nc" id="L175">        this.animation = animation;</span>
+<span class="nc" id="L176">    }</span>
+
+    /**
+     * a boolean indicating if multiple nodes can be selected
+     *
+     * @return
+     */
+    public Boolean getMultiple()
+    {
+<span class="nc" id="L185">        return multiple;</span>
+    }
+
+    /**
+     * a boolean indicating if multiple nodes can be selected
+     *
+     * @param multiple
+     */
+    public void setMultiple(Boolean multiple)
+    {
+<span class="nc" id="L195">        this.multiple = multiple;</span>
+<span class="nc" id="L196">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

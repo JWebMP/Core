@@ -50,7 +50,7 @@ public enum JSTreePlugins
      */
     ContextMenu,
     /**
-     * Drag & drop plugin
+     * Drag and drop plugin
      * <p>
      * This plugin makes it possible to drag and drop tree nodes and rearrange the tree.
      * <p>

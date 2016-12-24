@@ -16,18 +16,21 @@
  */
 package za.co.mmagon.jwebswing.base.servlets;
 
+import com.armineasy.injection.GuiceContext;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.inject.Singleton;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.logging.*;
+import javax.servlet.http.*;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
 import za.co.mmagon.jwebswing.base.servlets.interfaces.IDataComponent;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -38,6 +41,7 @@ import za.co.mmagon.logger.LogFactory;
  * @version 1.0
  *
  */
+@Singleton
 public class DataServlet extends JWDefaultServlet
 {
 
@@ -52,55 +56,84 @@ public class DataServlet extends JWDefaultServlet
 
     }
 
+    /**
+     * The Object Mapper for rendering the JSON with Jackson
+     */
+    private static final ObjectMapper jsonObjectMapper = new ObjectMapper();
+
+    static
+    {
+        jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
+    }
+
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, MissingComponentException
     {
         Date startDate = new Date();
         StringBuilder responseString = new StringBuilder();
-
-        Page page = (Page) request.getSession().getAttribute("jwpage");
-        ComponentHierarchyBase hb = page.getComponentCache().get(request.getParameter("component"));
+        HttpSession session = GuiceContext.Injector().getInstance(HttpSession.class);
+        log.log(Level.INFO, "[SessionID]-[" + session.getId() + "];");
+        Page page = (Page) session.getAttribute("jwpage");
+        String componentID = request.getParameter("component");
+        ComponentHierarchyBase hb = page.getComponentCache().get(componentID);
         if (hb == null)
         {
             throw new MissingComponentException("Unable to find the specified component : " + request.getParameter("component"));
         }
         StringBuilder output = new StringBuilder();
+
+        String searchString = (String) request.getSession().getAttribute("search");
+        Integer totalCount = (Integer) request.getSession().getAttribute("count");
+        String lastItemID = (String) request.getSession().getAttribute("lastID");
+
         if (IDataComponent.class.isAssignableFrom(hb.getClass()))
         {
             IDataComponent dc = (IDataComponent) hb;
-            output.append(JavaScriptPart.objectAsString(dc.getData()));
+            String outputJson = jsonObjectMapper
+                    .configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true)
+                    .writeValueAsString(
+                            dc.getData(request.getParameterMap())
+                    );
+            output.append(outputJson).toString();
         }
+
         responseString.append(output);
 
         Date endDate = new Date();
         try (PrintWriter out = response.getWriter())
         {
-            response.setContentType("application/json");
+            response.setContentType("application/json;charset=UTF-8");
             response.setCharacterEncoding("UTF-8");
             out.println(responseString);
             Date dataTransferDate = new Date();
-            log.log(Level.FINE,"[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + responseString.length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
+            log.log(Level.FINE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + responseString.length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
         }
     }
 
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request  Servlet request
+     * @param response Servlet response
+     *
+     * @throws ServletException if a Servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs
+     */
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
     {
         try
         {
-            validate(true, req);
-            processRequest(req, resp);
-        }
-        catch (MissingComponentException e)
-        {
-            log.log(Level.SEVERE, "Unable to find the component", e);
+            super.doGet(request, response); //Checks for the page existance
+            processRequest(request, response);
         }
         catch (IOException | ServletException e)
         {
-            log.log(Level.SEVERE, "Unable to deliver data", e);
+            log.log(Level.SEVERE, "Do Post in CSS Servlet", e);
         }
-        catch (Exception e)
+        catch (MissingComponentException ex)
         {
-            log.log(Level.SEVERE, "Unable to deliver data", e);
+            Logger.getLogger(DataServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

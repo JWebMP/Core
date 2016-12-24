@@ -7,144 +7,134 @@ package za.co.mmagon.jwebswing.utilities.dualquickpivot;
 
 /**
  * ****************************************************************************
- * Compilation: javac QuickDualPivot.java
- * Execution: java QuickDualPivot &amp;lt; input.txt
- * Dependencies: StdOut.java StdIn.java
- * Data files: http://algs4.cs.princeton.edu/23quicksort/tiny.txt
+ * Compilation: javac QuickDualPivot.java Execution: java QuickDualPivot &amp;lt; input.txt Dependencies: StdOut.java StdIn.java Data files: http://algs4.cs.princeton.edu/23quicksort/tiny.txt
  * http://algs4.cs.princeton.edu/23quicksort/words3.txt
  * &lt;p&gt;
- * Sorts a sequence of strings from standard input using dual-pivot
- * quicksort.
+ * Sorts a sequence of strings from standard input using dual-pivot quicksort.
  * &lt;p&gt;
  * [Warning: not thoroughly tested.]
  * &lt;p&gt;
- * % more tiny.txt
- * S O R T E X A M P L E
+ * % more tiny.txt S O R T E X A M P L E
  * &lt;p&gt;
- * % java QuickDualPivot &amp;lt; tiny.txt
- * A E E L M O P R S T X [ one string per line ]
+ * % java QuickDualPivot &amp;lt; tiny.txt A E E L M O P R S T X [ one string per line ]
  * &lt;p&gt;
- * % more words3.txt
- * bed bug dad yes zoo ... all bad yet
+ * % more words3.txt bed bug dad yes zoo ... all bad yet
  * &lt;p&gt;
- * % java QuickDualPivot &amp;lt; words3.txt
- * all bad bed bug dad ... yes yet zoo [ one string per line ]
+ * % java QuickDualPivot &amp;lt; words3.txt all bad bed bug dad ... yes yet zoo [ one string per line ]
  * &lt;p&gt;
  *****************************************************************************
  */
-<span class="nc bnc" id="L35" title="All 2 branches missed.">public class QuickDualPivot</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">public class QuickDualPivot</span>
 {
 
     // quicksort the array a[] using dual-pivot quicksort
     public static void sort(Comparable[] a)
     {
-<span class="nc" id="L41">        StdRandom.shuffle(a);</span>
-<span class="nc" id="L42">        sort(a, 0, a.length - 1);</span>
-<span class="nc bnc" id="L43" title="All 4 branches missed.">        assert isSorted(a);</span>
-<span class="nc" id="L44">    }</span>
+        //StdRandom.shuffle(a);
+<span class="nc" id="L34">        sort(a, 0, a.length - 1);</span>
+<span class="nc bnc" id="L35" title="All 4 branches missed.">        assert isSorted(a);</span>
+<span class="nc" id="L36">    }</span>
 
     // quicksort the subarray a[lo .. hi] using dual-pivot quicksort
     private static void sort(Comparable[] a, int lo, int hi)
     {
-<span class="nc bnc" id="L49" title="All 2 branches missed.">        if (hi &lt;= lo)</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (hi &lt;= lo)</span>
         {
-<span class="nc" id="L51">            return;</span>
+<span class="nc" id="L43">            return;</span>
         }
 
         // make sure a[lo] &lt;= a[hi]
-<span class="nc bnc" id="L55" title="All 2 branches missed.">        if (less(a[hi], a[lo]))</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        if (less(a[hi], a[lo]))</span>
         {
-<span class="nc" id="L57">            exch(a, lo, hi);</span>
+<span class="nc" id="L49">            exch(a, lo, hi);</span>
         }
 
-<span class="nc" id="L60">        int lt = lo + 1, gt = hi - 1;</span>
-<span class="nc" id="L61">        int i = lo + 1;</span>
-<span class="nc bnc" id="L62" title="All 2 branches missed.">        while (i &lt;= gt)</span>
+<span class="nc" id="L52">        int lt = lo + 1, gt = hi - 1;</span>
+<span class="nc" id="L53">        int i = lo + 1;</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        while (i &lt;= gt)</span>
         {
-<span class="nc bnc" id="L64" title="All 2 branches missed.">            if (less(a[i], a[lo]))</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">            if (less(a[i], a[lo]))</span>
             {
-<span class="nc" id="L66">                exch(a, lt++, i++);</span>
+<span class="nc" id="L58">                exch(a, lt++, i++);</span>
             }
-<span class="nc bnc" id="L68" title="All 2 branches missed.">            else if (less(a[hi], a[i]))</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">            else if (less(a[hi], a[i]))</span>
             {
-<span class="nc" id="L70">                exch(a, i, gt--);</span>
+<span class="nc" id="L62">                exch(a, i, gt--);</span>
             }
             else
             {
-<span class="nc" id="L74">                i++;</span>
+<span class="nc" id="L66">                i++;</span>
             }
         }
-<span class="nc" id="L77">        exch(a, lo, --lt);</span>
-<span class="nc" id="L78">        exch(a, hi, ++gt);</span>
+<span class="nc" id="L69">        exch(a, lo, --lt);</span>
+<span class="nc" id="L70">        exch(a, hi, ++gt);</span>
 
         // recursively sort three subarrays
-<span class="nc" id="L81">        sort(a, lo, lt - 1);</span>
-<span class="nc bnc" id="L82" title="All 2 branches missed.">        if (less(a[lt], a[gt]))</span>
+<span class="nc" id="L73">        sort(a, lo, lt - 1);</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (less(a[lt], a[gt]))</span>
         {
-<span class="nc" id="L84">            sort(a, lt + 1, gt - 1);</span>
+<span class="nc" id="L76">            sort(a, lt + 1, gt - 1);</span>
         }
-<span class="nc" id="L86">        sort(a, gt + 1, hi);</span>
+<span class="nc" id="L78">        sort(a, gt + 1, hi);</span>
 
-<span class="nc bnc" id="L88" title="All 4 branches missed.">        assert isSorted(a, lo, hi);</span>
-<span class="nc" id="L89">    }</span>
+<span class="nc bnc" id="L80" title="All 4 branches missed.">        assert isSorted(a, lo, hi);</span>
+<span class="nc" id="L81">    }</span>
 
     /**
      * *************************************************************************
-     * Helper sorting functions.
-     **************************************************************************
+     * Helper sorting functions. *************************************************************************
      */
     // is v &lt; w ?
     private static boolean less(Comparable v, Comparable w)
     {
-<span class="nc bnc" id="L99" title="All 2 branches missed.">        return v.compareTo(w) &lt; 0;</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        return v.compareTo(w) &lt; 0;</span>
     }
 
     // exchange a[i] and a[j]
     private static void exch(Object[] a, int i, int j)
     {
-<span class="nc" id="L105">        Object swap = a[i];</span>
-<span class="nc" id="L106">        a[i] = a[j];</span>
-<span class="nc" id="L107">        a[j] = swap;</span>
-<span class="nc" id="L108">    }</span>
+<span class="nc" id="L96">        Object swap = a[i];</span>
+<span class="nc" id="L97">        a[i] = a[j];</span>
+<span class="nc" id="L98">        a[j] = swap;</span>
+<span class="nc" id="L99">    }</span>
 
     /**
      * *************************************************************************
-     * Check if array is sorted - useful for debugging.
-     **************************************************************************
+     * Check if array is sorted - useful for debugging. *************************************************************************
      */
     private static boolean isSorted(Comparable[] a)
     {
-<span class="nc" id="L117">        return isSorted(a, 0, a.length - 1);</span>
+<span class="nc" id="L107">        return isSorted(a, 0, a.length - 1);</span>
     }
 
     private static boolean isSorted(Comparable[] a, int lo, int hi)
     {
-<span class="nc bnc" id="L122" title="All 2 branches missed.">        for (int i = lo + 1; i &lt;= hi; i++)</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        for (int i = lo + 1; i &lt;= hi; i++)</span>
         {
-<span class="nc bnc" id="L124" title="All 2 branches missed.">            if (less(a[i], a[i - 1]))</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">            if (less(a[i], a[i - 1]))</span>
             {
-<span class="nc" id="L126">                return false;</span>
+<span class="nc" id="L116">                return false;</span>
             }
         }
-<span class="nc" id="L129">        return true;</span>
+<span class="nc" id="L119">        return true;</span>
     }
 
     // print array to standard output
     private static void show(Comparable[] a)
     {
-<span class="nc bnc" id="L135" title="All 2 branches missed.">        for (int i = 0; i &lt; a.length; i++)</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">        for (int i = 0; i &lt; a.length; i++)</span>
         {
-<span class="nc" id="L137">            System.out.println(a[i]);</span>
+<span class="nc" id="L127">            System.out.println(a[i]);</span>
         }
-<span class="nc" id="L139">    }</span>
+<span class="nc" id="L129">    }</span>
 
     // Read strings from standard input, sort them, and print.
     public static void main(String[] args)
     {
-<span class="nc" id="L144">        String[] a = StdIn.readAllStrings();</span>
-<span class="nc" id="L145">        QuickDualPivot.sort(a);</span>
-<span class="nc" id="L146">        show(a);</span>
-<span class="nc" id="L147">    }</span>
+        //String[] a = ;// StdIn.readAllStrings();
+<span class="nc" id="L135">        QuickDualPivot.sort(args);</span>
+<span class="nc" id="L136">        show(args);</span>
+<span class="nc" id="L137">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -18,6 +18,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.BlockQuoteAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
@@ -53,16 +54,32 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * &lt;p&gt;
  * @author GedMarc
  */
-public class BlockQuote extends Component&lt;ParagraphChildren, BlockQuoteAttributes, GlobalFeatures, GlobalEvents, BlockQuote&gt;
+public class BlockQuote extends Component&lt;ParagraphChildren, BlockQuoteAttributes, GlobalFeatures, GlobalEvents, BlockQuote&gt; implements GlobalChildren
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new Block Quote Item
      */
     public BlockQuote()
     {
-<span class="fc" id="L64">        super(ComponentTypes.BlockQuotes);</span>
-<span class="fc" id="L65">    }</span>
+<span class="fc" id="L67">        super(ComponentTypes.BlockQuotes);</span>
+<span class="fc" id="L68">    }</span>
+    
+    public BlockQuote(String text)
+    {
+<span class="nc" id="L72">        this();</span>
+<span class="nc" id="L73">        setText(text);</span>
+<span class="nc" id="L74">    }</span>
 
+    public BlockQuote(String text, String footer)
+    {
+<span class="nc" id="L78">        this();</span>
+<span class="nc" id="L79">        add(text);</span>
+<span class="nc" id="L80">        Div d = new Div();</span>
+<span class="nc" id="L81">        d.setTag(&quot;footer&quot;);</span>
+<span class="nc" id="L82">        d.setText(footer);</span>
+<span class="nc" id="L83">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

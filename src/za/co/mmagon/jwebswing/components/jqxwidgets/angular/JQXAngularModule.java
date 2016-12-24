@@ -16,9 +16,9 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets.angular;
 
-import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.base.angular.modules.*;
-import za.co.mmagon.jwebswing.components.pools.jqxwidgets.*;
+import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
+import za.co.mmagon.jwebswing.components.pools.jqxwidgets.JQXReferencePool;
 
 /**
  * The integration between AngularJS and jQWidgets is implemented through a plug-in which we called jqxAngular. This plug-in includes AngularJS directives for all widgets.
@@ -36,7 +36,7 @@ public class JQXAngularModule extends AngularModuleBase
     public JQXAngularModule(Page page)
     {
         super("jqwidgets", page.getAngular());
-        page.getAngular().addModule(this);
+        page.getBody().getAngularModules().add(this);
         page.getOptions().setAngularEnabled(true);
         page.getBody().getJavascriptReferences().add(JQXReferencePool.Core.getJavaScriptReference());
         page.getBody().getJavascriptReferences().add(JQXReferencePool.AngularJS.getJavaScriptReference());

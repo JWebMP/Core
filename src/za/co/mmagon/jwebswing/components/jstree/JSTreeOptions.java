@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.components.jstree;
 
-import com.armineasy.injection.GuiceContext;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.*;
@@ -43,6 +42,13 @@ public class JSTreeOptions extends JavaScriptPart
      * holds all the default options used when creating new instances
      */
     private JSTreeDefaultOptions defaults;
+    /**
+     * holds all jstree related functions and variables, including the actual class and methods to create, access and manipulate instances.
+     */
+    private JSTreeCoreOptions core;
+    
+    
+    
     /**
      * stores all loaded jstree plugins (used internally)
      */
@@ -143,7 +149,7 @@ public class JSTreeOptions extends JavaScriptPart
     {
         if (defaults == null)
         {
-            defaults = GuiceContext.Injector().getInstance(JSTreeDefaultOptions.class);
+            defaults = new JSTreeDefaultOptions();
         }
         return defaults;
     }
@@ -581,6 +587,30 @@ public class JSTreeOptions extends JavaScriptPart
         {
             getPlugins().add(JSTreePlugins.WholeRow);
         }
+    }
+    
+    /**
+     * holds all jstree related functions and variables, including the actual class and methods to create, access and manipulate instances.
+     *
+     * @return
+     */
+    public JSTreeCoreOptions getCore()
+    {
+        if (core == null)
+        {
+            core = new JSTreeCoreOptions();
+        }
+        return core;
+    }
+
+    /**
+     * holds all jstree related functions and variables, including the actual class and methods to create, access and manipulate instances.
+     *
+     * @param core
+     */
+    public void setCore(JSTreeCoreOptions core)
+    {
+        this.core = core;
     }
 
 }

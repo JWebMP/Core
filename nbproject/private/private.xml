@@ -50,10 +50,14 @@
         <group name="JWebSwing"/>
         <group name="Activity Master">
             <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jstree/JSTree.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/components/jstree/JSTreeTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/servlets/DataServlet.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/moment/Moment.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jstree/JSTreeFeature.java</file>
             <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jstree/JSTreeOptions.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/JWebSwingSiteBinder.java</file>
             <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jstree/JSTreeData.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/html/Body.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/moment/MomentFeature.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/moment/MomentAngularModule.java</file>
         </group>
     </open-files>
 </project-private>

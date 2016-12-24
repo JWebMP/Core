@@ -21,8 +21,7 @@ import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
 import za.co.mmagon.jwebswing.components.pools.jqxwidgets.JQXReferencePool;
 
 /**
- * The integration between AngularJS and jQWidgets is implemented through a plug-in which we called jqxAngular. 
- * This plug-in includes AngularJS directives for all widgets.
+ * The integration between AngularJS and jQWidgets is implemented through a plug-in which we called jqxAngular. This plug-in includes AngularJS directives for all widgets.
  *
  * @author GedMarc
  * @since Nov 6, 2016
@@ -36,18 +35,18 @@ public class JQXAngularModule extends AngularModuleBase
 
     public JQXAngularModule(Page page)
     {
-<span class="fc" id="L39">        super(&quot;jqwidgets&quot;, page.getAngular());</span>
-<span class="fc" id="L40">        page.getAngular().addModule(this);</span>
-<span class="fc" id="L41">        page.setAngularEnabled(true);</span>
-<span class="fc" id="L42">        page.getBody().getJavascriptReferences().add(JQXReferencePool.Core.getJavaScriptReference());</span>
-<span class="fc" id="L43">        page.getBody().getJavascriptReferences().add(JQXReferencePool.AngularJS.getJavaScriptReference());</span>
-        
-<span class="fc" id="L45">    }</span>
+<span class="fc" id="L38">        super(&quot;jqwidgets&quot;, page.getAngular());</span>
+<span class="fc" id="L39">        page.getBody().getAngularModules().add(this);</span>
+<span class="fc" id="L40">        page.getOptions().setAngularEnabled(true);</span>
+<span class="fc" id="L41">        page.getBody().getJavascriptReferences().add(JQXReferencePool.Core.getJavaScriptReference());</span>
+<span class="fc" id="L42">        page.getBody().getJavascriptReferences().add(JQXReferencePool.AngularJS.getJavaScriptReference());</span>
+
+<span class="fc" id="L44">    }</span>
 
     @Override
     public String renderFunction()
     {
-<span class="nc" id="L50">        return &quot;&quot;;</span>
+<span class="nc" id="L49">        return &quot;&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

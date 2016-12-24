@@ -18,17 +18,24 @@ public class MomentFeature extends Feature&lt;MomentOptions, MomentFeature&gt; i
     private MomentOptions options;
 
     /**
-     * Constructs a feature for 
+     * Constructs a feature for
      * &lt;p&gt;
      * @param forComponent
      */
     public MomentFeature(Component forComponent)
     {
 <span class="nc" id="L27">        super(&quot;MomentJS&quot;);</span>
-<span class="nc" id="L28">        setComponent(forComponent);</span>
-<span class="nc" id="L29">        getJavascriptReferences().add(MomentReferencePool.MomentReference.getJavaScriptReference());</span>
-<span class="nc" id="L30">        getJavascriptReferences().add(MomentReferencePool.MomentAngularReference.getJavaScriptReference());</span>
-<span class="nc" id="L31">    }</span>
+<span class="nc" id="L28">        forComponent.getAngularModules().add(new MomentAngularModule(forComponent.getPage()));</span>
+<span class="nc" id="L29">        setComponent(forComponent);</span>
+<span class="nc" id="L30">        getJavascriptReferences().add(MomentReferencePool.MomentReference.getJavaScriptReference());</span>
+<span class="nc" id="L31">        getJavascriptReferences().add(MomentReferencePool.MomentAngularReference.getJavaScriptReference());</span>
+<span class="nc" id="L32">    }</span>
+
+    @Override
+    public void preConfigure()
+    {
+<span class="nc" id="L37">        super.preConfigure();</span>
+<span class="nc" id="L38">    }</span>
 
     /**
      * No Options
@@ -38,16 +45,16 @@ public class MomentFeature extends Feature&lt;MomentOptions, MomentFeature&gt; i
     @Override
     public MomentOptions getOptions()
     {
-<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (options == null)</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        if (options == null)</span>
         {
-<span class="nc" id="L43">            options = new MomentOptions();</span>
+<span class="nc" id="L50">            options = new MomentOptions();</span>
         }
-<span class="nc" id="L45">        return options;</span>
+<span class="nc" id="L52">        return options;</span>
     }
 
     @Override
     public void assignFunctionsToComponent()
     {
-<span class="nc" id="L51">    }</span>
+<span class="nc" id="L58">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -29,7 +29,7 @@ import za.co.mmagon.jwebswing.base.servlets.interfaces.ReferencePool;
  */
 public enum ModernizrReferencePool implements ReferencePool
 {
-    ModernizrReference(new JavascriptReference("Modernizr", 1.0, "bower_components/jwebswing-moderniz/modernizr.js",-2),null)
+    ModernizrReference(new JavascriptReference("Modernizr", 1.0, "bower_components/jwebswing-moderniz/modernizr.js",10),null)
     ;
     private ModernizrReferencePool()
     {

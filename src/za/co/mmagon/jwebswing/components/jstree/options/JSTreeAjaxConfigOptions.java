@@ -37,10 +37,25 @@ public class JSTreeAjaxConfigOptions extends JavaScriptPart
      */
     private String url;
     /**
-     * In addition to the standard jQuery ajax options here you can suppy functions for data and url, the functions will be run in the current instance's scope and a param will be passed indicating
-     * which node is being loaded, the return value of those functions will be used.
+     * Data to be sent to the server. It is converted to a query string, if not already a string. It's appended to the url for GET-requests. See processData option to prevent this automatic
+     * processing. Object must be Key/Value pairs. If value is an Array, jQuery serializes multiple values with same key based on the value of the traditional setting (described below).
      */
     private JSTreeCoreDataFunction data;
+    /**
+     * If set to false, it will force requested pages not to be cached by the browser. Note: Setting cache to false will only work correctly with HEAD and GET requests. It works by appending
+     * "_={timestamp}" to the GET parameters. The parameter is not needed for other types of requests, except in IE8 when a POST is made to a URL that has already been requested by a GET.
+     */
+    private Boolean cache;
+    /**
+     * The type of data that you're expecting back from the server. If none is specified, jQuery will try to infer it based on the MIME type of the response (an XML MIME type will yield XML, in 1.4
+     * JSON will yield a JavaScript object, in 1.4 script will execute the script, and anything else will be returned as a string). The available types (and the result passed as the first argument to
+     * your success callback) are:
+     */
+    private String dataType;
+    /**
+     * 
+     */
+    private String type;
 
     public JSTreeAjaxConfigOptions()
     {
@@ -72,8 +87,8 @@ public class JSTreeAjaxConfigOptions extends JavaScriptPart
     }
 
     /**
-     * In addition to the standard jQuery ajax options here you can suppy functions for data and url, the functions will be run in the current instance's scope and a param will be passed indicating
-     * which node is being loaded, the return value of those functions will be used.
+     * Data to be sent to the server. It is converted to a query string, if not already a string. It's appended to the url for GET-requests. See processData option to prevent this automatic
+     * processing. Object must be Key/Value pairs. If value is an Array, jQuery serializes multiple values with same key based on the value of the traditional setting (described below).
      *
      * @return
      */
@@ -83,14 +98,60 @@ public class JSTreeAjaxConfigOptions extends JavaScriptPart
     }
 
     /**
-     * In addition to the standard jQuery ajax options here you can suppy functions for data and url, the functions will be run in the current instance's scope and a param will be passed indicating
-     * which node is being loaded, the return value of those functions will be used.
+     * Data to be sent to the server. It is converted to a query string, if not already a string. It's appended to the url for GET-requests. See processData option to prevent this automatic
+     * processing. Object must be Key/Value pairs. If value is an Array, jQuery serializes multiple values with same key based on the value of the traditional setting (described below).
      *
      * @param data
      */
     public void setData(JSTreeCoreDataFunction data)
     {
         this.data = data;
+    }
+
+    /**
+     * If set to false, it will force requested pages not to be cached by the browser. Note: Setting cache to false will only work correctly with HEAD and GET requests. It works by appending
+     * "_={timestamp}" to the GET parameters. The parameter is not needed for other types of requests, except in IE8 when a POST is made to a URL that has already been requested by a GET.
+     *
+     * @return
+     */
+    public Boolean getCache()
+    {
+        return cache;
+    }
+
+    /**
+     * If set to false, it will force requested pages not to be cached by the browser. Note: Setting cache to false will only work correctly with HEAD and GET requests. It works by appending
+     * "_={timestamp}" to the GET parameters. The parameter is not needed for other types of requests, except in IE8 when a POST is made to a URL that has already been requested by a GET.
+     *
+     * @param cache
+     */
+    public void setCache(Boolean cache)
+    {
+        this.cache = cache;
+    }
+
+    /**
+     * The type of data that you're expecting back from the server. If none is specified, jQuery will try to infer it based on the MIME type of the response (an XML MIME type will yield XML, in 1.4
+     * JSON will yield a JavaScript object, in 1.4 script will execute the script, and anything else will be returned as a string). The available types (and the result passed as the first argument to
+     * your success callback) are:
+     *
+     * @return
+     */
+    public String getDataType()
+    {
+        return dataType;
+    }
+
+    /**
+     * The type of data that you're expecting back from the server. If none is specified, jQuery will try to infer it based on the MIME type of the response (an XML MIME type will yield XML, in 1.4
+     * JSON will yield a JavaScript object, in 1.4 script will execute the script, and anything else will be returned as a string). The available types (and the result passed as the first argument to
+     * your success callback) are:
+     *
+     * @param dataType
+     */
+    public void setDataType(String dataType)
+    {
+        this.dataType = dataType;
     }
 
 }

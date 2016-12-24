@@ -28,9 +28,11 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public abstract class JavascriptFunction extends JavaScriptPart
 {
 
+    private static final long serialVersionUID = 1L;
+
     public JavascriptFunction()
-<span class="fc" id="L32">    {</span>
-<span class="fc" id="L33">    }</span>
+<span class="fc" id="L34">    {</span>
+<span class="fc" id="L35">    }</span>
 
     /**
      * Render the full function including function(){};
@@ -44,21 +46,7 @@ public abstract class JavascriptFunction extends JavaScriptPart
     @Override
     public String toString()
     {
-<span class="nc" id="L47">        return &quot;function(){};&quot;;</span>
+<span class="nc" id="L49">        return renderFunction();</span>
     }
-
-    public static void main(String[] args)
-    {
-<span class="nc" id="L52">        JavascriptFunction jf = new JavascriptFunction()</span>
-<span class="nc" id="L53">        {</span>
-            @Override
-            public String renderFunction()
-            {
-<span class="nc" id="L57">                return &quot;Blank Function&quot;;</span>
-            }
-
-        };
-<span class="nc" id="L61">        System.out.println(jf.toString());</span>
-<span class="nc" id="L62">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

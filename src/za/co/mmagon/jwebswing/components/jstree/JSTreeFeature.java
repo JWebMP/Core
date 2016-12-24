@@ -25,13 +25,13 @@ public class JSTreeFeature extends Feature<JSTreeOptions, JSTreeFeature> impleme
     public JSTreeFeature(JSTree forComponent)
     {
         super("JSTreeFeature");
-        setComponent(component);
+        setComponent(forComponent);
         getJavascriptReferences().add(JSTreeReferencePool.JSTreeJavascript.getJavaScriptReference());
         // getCssReferences().add(JQXReferencePool.Core.getCssReference());
     }
 
     /**
-     * Returns all the tooltip options
+     * Returns all the Tree options
      * <p>
      * @return
      */

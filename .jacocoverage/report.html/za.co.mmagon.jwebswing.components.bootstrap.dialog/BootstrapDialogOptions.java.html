@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BootstrapDialogOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.bootstrap.dialog</a> &gt; <span class="el_source">BootstrapDialogOptions.java</span></div><h1>BootstrapDialogOptions.java</h1><pre class="source lang-java linenums">/*
- Copyright (C) 2015 GedMarc
+ * Copyright (C) 2015 GedMarc
  *
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
 package za.co.mmagon.jwebswing.components.bootstrap.dialog;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
-import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
+import com.fasterxml.jackson.annotation.*;
+import za.co.mmagon.jwebswing.base.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
 
 /**
  * All the options for the tooltip library
@@ -36,6 +31,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
  */
 public class BootstrapDialogOptions extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     private BootstrapDialogTypes type;// BootstrapDialogType.TYPE_PRIMARY,
     private BootstrapDialogSizes size;//: BootstrapDialog.SIZE_NORMAL,
@@ -58,66 +55,55 @@ public class BootstrapDialogOptions extends JavaScriptPart
     private String data;
     private Boolean autoDestroy;
 
+    /**
+     * Default constructor
+     */
     public BootstrapDialogOptions()
 <span class="fc" id="L62">    {</span>
 
 <span class="fc" id="L64">    }</span>
 
     /**
-     * Give your dialog a specific look,
-     * BootstrapDialog.TYPE_DEFAULT or type-default
-     * BootstrapDialog.TYPE_INFO or type-info
-     * BootstrapDialog.TYPE_PRIMARY or type-primary (default)
-     * BootstrapDialog.TYPE_SUCCESS or type-success
-     * BootstrapDialog.TYPE_WARNING or type-warning
-     * BootstrapDialog.TYPE_DANGER or type-danger
+     * Give your dialog a specific look, BootstrapDialog.TYPE_DEFAULT or type-default BootstrapDialog.TYPE_INFO or type-info BootstrapDialog.TYPE_PRIMARY or type-primary (default)
+     * BootstrapDialog.TYPE_SUCCESS or type-success BootstrapDialog.TYPE_WARNING or type-warning BootstrapDialog.TYPE_DANGER or type-danger
      *
      * @return
      */
     public BootstrapDialogTypes getType()
     {
-<span class="nc" id="L79">        return type;</span>
+<span class="nc" id="L74">        return type;</span>
     }
 
     /**
-     * Give your dialog a specific look,
-     * BootstrapDialog.TYPE_DEFAULT or type-default
-     * BootstrapDialog.TYPE_INFO or type-info
-     * BootstrapDialog.TYPE_PRIMARY or type-primary (default)
-     * BootstrapDialog.TYPE_SUCCESS or type-success
-     * BootstrapDialog.TYPE_WARNING or type-warning
-     * BootstrapDialog.TYPE_DANGER or type-danger
+     * Give your dialog a specific look, BootstrapDialog.TYPE_DEFAULT or type-default BootstrapDialog.TYPE_INFO or type-info BootstrapDialog.TYPE_PRIMARY or type-primary (default)
+     * BootstrapDialog.TYPE_SUCCESS or type-success BootstrapDialog.TYPE_WARNING or type-warning BootstrapDialog.TYPE_DANGER or type-danger
      *
      * @param type
      */
     public void setType(BootstrapDialogTypes type)
     {
-<span class="nc" id="L95">        this.type = type;</span>
-<span class="nc" id="L96">    }</span>
+<span class="nc" id="L85">        this.type = type;</span>
+<span class="nc" id="L86">    }</span>
 
     /**
-     * BootstrapDialog.SIZE_NORMAL or size-normal (default)
-     * BootstrapDialog.SIZE_WIDE or size-wide
-     * BootstrapDialog.SIZE_LARGE or size-large
+     * BootstrapDialog.SIZE_NORMAL or size-normal (default) BootstrapDialog.SIZE_WIDE or size-wide BootstrapDialog.SIZE_LARGE or size-large
      *
      * @return
      */
     public BootstrapDialogSizes getSize()
     {
-<span class="nc" id="L107">        return size;</span>
+<span class="nc" id="L95">        return size;</span>
     }
 
     /**
-     * BootstrapDialog.SIZE_NORMAL or size-normal (default)
-     * BootstrapDialog.SIZE_WIDE or size-wide
-     * BootstrapDialog.SIZE_LARGE or size-large
+     * BootstrapDialog.SIZE_NORMAL or size-normal (default) BootstrapDialog.SIZE_WIDE or size-wide BootstrapDialog.SIZE_LARGE or size-large
      *
      * @param size
      */
     public void setSize(BootstrapDialogSizes size)
     {
-<span class="nc" id="L119">        this.size = size;</span>
-<span class="nc" id="L120">    }</span>
+<span class="nc" id="L105">        this.size = size;</span>
+<span class="nc" id="L106">    }</span>
 
     /**
      * Additional CSS classes that will be added to your dialog.
@@ -126,7 +112,7 @@ public class BootstrapDialogOptions extends JavaScriptPart
      */
     public String getCssClass()
     {
-<span class="nc" id="L129">        return cssClass;</span>
+<span class="nc" id="L115">        return cssClass;</span>
     }
 
     /**
@@ -136,8 +122,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
      */
     public void setCssClass(String cssClass)
     {
-<span class="nc" id="L139">        this.cssClass = cssClass;</span>
-<span class="nc" id="L140">    }</span>
+<span class="nc" id="L125">        this.cssClass = cssClass;</span>
+<span class="nc" id="L126">    }</span>
 
     /**
      * Components HTML
@@ -146,13 +132,13 @@ public class BootstrapDialogOptions extends JavaScriptPart
      */
     public ComponentHierarchyBase getTitle()
     {
-<span class="nc" id="L149">        return title;</span>
+<span class="nc" id="L135">        return title;</span>
     }
 
     @JsonProperty(&quot;title&quot;)
     private String getTitleHTML()
     {
-<span class="pc bpc" id="L155" title="1 of 2 branches missed.">        return this.title == null ? &quot;&quot; : this.title.toString(true);</span>
+<span class="pc bpc" id="L141" title="1 of 2 branches missed.">        return this.title == null ? &quot;&quot; : this.title.toString(true);</span>
     }
 
     /**
@@ -162,8 +148,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
      */
     public void setTitle(ComponentHierarchyBase title)
     {
-<span class="nc" id="L165">        this.title = title;</span>
-<span class="nc" id="L166">    }</span>
+<span class="nc" id="L151">        this.title = title;</span>
+<span class="nc" id="L152">    }</span>
 
     /**
      * Gets the message component
@@ -172,13 +158,13 @@ public class BootstrapDialogOptions extends JavaScriptPart
      */
     public ComponentHierarchyBase getMessage()
     {
-<span class="nc" id="L175">        return message;</span>
+<span class="nc" id="L161">        return message;</span>
     }
 
     @JsonProperty(&quot;message&quot;)
     private String getMessageHTML()
     {
-<span class="pc bpc" id="L181" title="1 of 2 branches missed.">        return this.message == null ? &quot;&quot; : this.message.toString(true);</span>
+<span class="pc bpc" id="L167" title="1 of 2 branches missed.">        return this.message == null ? &quot;&quot; : this.message.toString(true);</span>
     }
 
     /**
@@ -188,8 +174,8 @@ public class BootstrapDialogOptions extends JavaScriptPart
      */
     public void setMessage(ComponentHierarchyBase message)
     {
-<span class="nc" id="L191">        this.message = message;</span>
-<span class="nc" id="L192">    }</span>
+<span class="nc" id="L177">        this.message = message;</span>
+<span class="nc" id="L178">    }</span>
 
     /**
      * Automatically convert line breaking character to &amp;lt;br /&amp;gt; if it's set to true, everything keeps original if it's false.
@@ -198,7 +184,7 @@ public class BootstrapDialogOptions extends JavaScriptPart
      */
     public Boolean getNl2br()
     {
-<span class="nc" id="L201">        return nl2br;</span>
+<span class="nc" id="L187">        return nl2br;</span>
     }
 
     /**
@@ -208,193 +194,207 @@ public class BootstrapDialogOptions extends JavaScriptPart
      */
     public void setNl2br(Boolean nl2br)
     {
-<span class="nc" id="L211">        this.nl2br = nl2br;</span>
-<span class="nc" id="L212">    }</span>
+<span class="nc" id="L197">        this.nl2br = nl2br;</span>
+<span class="nc" id="L198">    }</span>
 
     /**
      * When set to true, you can close the dialog by:
      * &lt;p&gt;
-     * Clicking the close icon in dialog header.
-     * Clicking outside the dialog.
-     * ESC key.
+     * Clicking the close icon in dialog header. Clicking outside the dialog. ESC key.
      *
      * @return
      */
     public Boolean getClosable()
     {
-<span class="nc" id="L225">        return closable;</span>
+<span class="nc" id="L209">        return closable;</span>
     }
 
     /**
      * When set to true, you can close the dialog by:
      * &lt;p&gt;
-     * Clicking the close icon in dialog header.
-     * Clicking outside the dialog.
-     * ESC key.
+     * Clicking the close icon in dialog header. Clicking outside the dialog. ESC key.
      *
      * @param closable
      */
     public void setClosable(Boolean closable)
     {
-<span class="nc" id="L239">        this.closable = closable;</span>
-<span class="nc" id="L240">    }</span>
+<span class="nc" id="L221">        this.closable = closable;</span>
+<span class="nc" id="L222">    }</span>
 
     /**
      * Whether or not to close by the backdrop
-     * @return 
+     *
+     * @return
      */
     public Boolean getCloseByBackdrop()
     {
-<span class="nc" id="L248">        return closeByBackdrop;</span>
+<span class="nc" id="L231">        return closeByBackdrop;</span>
     }
 
     /**
      * Sets to close by the backdrop or not
-     * @param closeByBackdrop 
+     *
+     * @param closeByBackdrop
      */
     public void setCloseByBackdrop(Boolean closeByBackdrop)
     {
-<span class="nc" id="L257">        this.closeByBackdrop = closeByBackdrop;</span>
-<span class="nc" id="L258">    }</span>
+<span class="nc" id="L241">        this.closeByBackdrop = closeByBackdrop;</span>
+<span class="nc" id="L242">    }</span>
 
     /**
      * Sets to close by keyboard press
-     * @return 
+     *
+     * @return
      */
     public Boolean getCloseByKeyboard()
     {
-<span class="nc" id="L266">        return closeByKeyboard;</span>
+<span class="nc" id="L251">        return closeByKeyboard;</span>
     }
 
     /**
      * Sets close by keyboard
-     * @param closeByKeyboard 
+     *
+     * @param closeByKeyboard
      */
     public void setCloseByKeyboard(Boolean closeByKeyboard)
     {
-<span class="nc" id="L275">        this.closeByKeyboard = closeByKeyboard;</span>
-<span class="nc" id="L276">    }</span>
+<span class="nc" id="L261">        this.closeByKeyboard = closeByKeyboard;</span>
+<span class="nc" id="L262">    }</span>
 
     /**
      * Sets the close icon
-     * @return 
+     *
+     * @return
      */
     public String getCloseIcon()
     {
-<span class="nc" id="L284">        return closeIcon;</span>
+<span class="nc" id="L271">        return closeIcon;</span>
     }
 
     /**
      * Sets the close icon
-     * @param closeIcon 
+     *
+     * @param closeIcon
      */
     public void setCloseIcon(String closeIcon)
     {
-<span class="nc" id="L293">        this.closeIcon = closeIcon;</span>
-<span class="nc" id="L294">    }</span>
+<span class="nc" id="L281">        this.closeIcon = closeIcon;</span>
+<span class="nc" id="L282">    }</span>
 
     /**
      * Sets the spin icon
-     * @return 
+     *
+     * @return
      */
     public String getSpinicon()
     {
-<span class="nc" id="L302">        return spinicon;</span>
+<span class="nc" id="L291">        return spinicon;</span>
     }
 
     /**
      * Sets the spin icon
-     * @param spinicon 
+     *
+     * @param spinicon
      */
     public void setSpinicon(String spinicon)
     {
-<span class="nc" id="L311">        this.spinicon = spinicon;</span>
-<span class="nc" id="L312">    }</span>
+<span class="nc" id="L301">        this.spinicon = spinicon;</span>
+<span class="nc" id="L302">    }</span>
 
     /**
      * Whether or not to auto destroy the dialog
-     * @return 
+     *
+     * @return
      */
     public Boolean getAutodestroy()
     {
-<span class="nc" id="L320">        return autodestroy;</span>
+<span class="nc" id="L311">        return autodestroy;</span>
     }
 
     /**
      * Whether or not to auto destroy
-     * @param autodestroy 
+     *
+     * @param autodestroy
      */
     public void setAutodestroy(Boolean autodestroy)
     {
-<span class="nc" id="L329">        this.autodestroy = autodestroy;</span>
-<span class="nc" id="L330">    }</span>
+<span class="nc" id="L321">        this.autodestroy = autodestroy;</span>
+<span class="nc" id="L322">    }</span>
 
     /**
      * Sets if the dialog is drag-able
-     * @return 
+     *
+     * @return
      */
     public Boolean getDraggable()
     {
-<span class="nc" id="L338">        return draggable;</span>
+<span class="nc" id="L331">        return draggable;</span>
     }
 
     /**
      * Sets if the dialog is drag-able
-     * @param draggable 
+     *
+     * @param draggable
      */
     public void setDraggable(Boolean draggable)
     {
-<span class="nc" id="L347">        this.draggable = draggable;</span>
-<span class="nc" id="L348">    }</span>
+<span class="nc" id="L341">        this.draggable = draggable;</span>
+<span class="nc" id="L342">    }</span>
 
     /**
      * Sets if the dialog must animate
-     * @return 
+     *
+     * @return
      */
     public Boolean getAnimate()
     {
-<span class="nc" id="L356">        return animate;</span>
+<span class="nc" id="L351">        return animate;</span>
     }
 
     /**
      * Sets if the dialog must animate
-     * @param animate 
+     *
+     * @param animate
      */
     public void setAnimate(Boolean animate)
     {
-<span class="nc" id="L365">        this.animate = animate;</span>
-<span class="nc" id="L366">    }</span>
+<span class="nc" id="L361">        this.animate = animate;</span>
+<span class="nc" id="L362">    }</span>
 
     /**
      * Sets the aria description
-     * @return 
+     *
+     * @return
      */
     public String getDescription()
     {
-<span class="nc" id="L374">        return description;</span>
+<span class="nc" id="L371">        return description;</span>
     }
 
     /**
      * Sets the dialog description or aria description
-     * @param description 
+     *
+     * @param description
      */
     public void setDescription(String description)
     {
-<span class="nc" id="L383">        this.description = description;</span>
-<span class="nc" id="L384">    }</span>
+<span class="nc" id="L381">        this.description = description;</span>
+<span class="nc" id="L382">    }</span>
 
     /**
      * Gets the tab index
-     * @return 
+     *
+     * @return
      */
     public Integer getTabindex()
     {
-<span class="nc" id="L392">        return tabindex;</span>
+<span class="nc" id="L391">        return tabindex;</span>
     }
 
     /**
      * Sets the tab index
-     * @param tabindex 
+     *
+     * @param tabindex
      */
     public void setTabindex(Integer tabindex)
     {
@@ -403,44 +403,48 @@ public class BootstrapDialogOptions extends JavaScriptPart
 
     /**
      * Sets any data being passed into the dialog
-     * @return 
+     *
+     * @return
      */
     public String getData()
     {
-<span class="nc" id="L410">        return data;</span>
+<span class="nc" id="L411">        return data;</span>
     }
 
     /**
      * Sets any data being passed into the dialog
-     * @param data 
+     *
+     * @param data
      */
     public void setData(String data)
     {
-<span class="nc" id="L419">        this.data = data;</span>
-<span class="nc" id="L420">    }</span>
+<span class="nc" id="L421">        this.data = data;</span>
+<span class="nc" id="L422">    }</span>
 
     /**
      * Gets auto destroy
-     * @return 
+     *
+     * @return
      */
     public Boolean getAutoDestroy()
     {
-<span class="nc" id="L428">        return autoDestroy;</span>
+<span class="nc" id="L431">        return autoDestroy;</span>
     }
 
     /**
      * Sets auto destroy
-     * @param autoDestroy 
+     *
+     * @param autoDestroy
      */
     public void setAutoDestroy(Boolean autoDestroy)
     {
-<span class="nc" id="L437">        this.autoDestroy = autoDestroy;</span>
-<span class="nc" id="L438">    }</span>
+<span class="nc" id="L441">        this.autoDestroy = autoDestroy;</span>
+<span class="nc" id="L442">    }</span>
 
     @Override
     public JavascriptPartType getJavascriptType()
     {
-<span class="fc" id="L443">        return JavascriptPartType.Javascript;</span>
+<span class="fc" id="L447">        return JavascriptPartType.Javascript;</span>
     }
 
 }

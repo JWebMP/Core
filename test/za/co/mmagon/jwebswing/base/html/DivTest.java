@@ -24,7 +24,7 @@ import org.junit.Test;
  */
 public class DivTest
 {
-    
+
     public DivTest()
     {
     }
@@ -46,6 +46,8 @@ public class DivTest
     @Test
     public void testSetLayout()
     {
+        Div d = new Div();
+        System.out.println(d.toString(true));
     }
 
     /**
@@ -55,5 +57,5 @@ public class DivTest
     public void testSetRawText()
     {
     }
-    
+
 }

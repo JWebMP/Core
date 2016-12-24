@@ -18,13 +18,15 @@ package za.co.mmagon.jwebswing.base;
 
 import com.fasterxml.jackson.annotation.*;
 import java.util.*;
-import za.co.mmagon.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
-import za.co.mmagon.jwebswing.base.interfaces.*;
-import za.co.mmagon.jwebswing.base.references.*;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.*;
+import java.util.logging.Level;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.interfaces.IComponentEventBase;
+import za.co.mmagon.jwebswing.base.references.CSSReference;
+import za.co.mmagon.jwebswing.base.references.JavascriptReference;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Enables Events in the Component Tree Hierarchy
@@ -45,7 +47,7 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
      * Logger for the Component
      */
     @JsonIgnore
-<span class="fc" id="L48">    private static final org.apache.log4j.Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;Component&quot;);</span>
+<span class="fc" id="L50">    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger(&quot;Component&quot;);</span>
     /**
      * Serial Version for all Components and their compatibility
      *
@@ -72,7 +74,7 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
     /**
      * Sets if this component should be sent on the next call back
      */
-<span class="fc" id="L75">    private boolean touched = false;</span>
+<span class="fc" id="L77">    private boolean touched = false;</span>
 
     /**
      * Constructs a new event for the given component type
@@ -81,8 +83,8 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
      */
     public ComponentEventBase(ComponentTypes componentType)
     {
-<span class="fc" id="L84">        this(EventTypes.undefined, componentType);</span>
-<span class="fc" id="L85">    }</span>
+<span class="fc" id="L86">        this(EventTypes.undefined, componentType);</span>
+<span class="fc" id="L87">    }</span>
 
     /**
      * Constructs a new event type for component type
@@ -92,9 +94,9 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
      */
     public ComponentEventBase(EventTypes eventType, ComponentTypes componentType)
     {
-<span class="fc" id="L95">        super(componentType);</span>
-<span class="fc" id="L96">        this.eventType = eventType;</span>
-<span class="fc" id="L97">    }</span>
+<span class="fc" id="L97">        super(componentType);</span>
+<span class="fc" id="L98">        this.eventType = eventType;</span>
+<span class="fc" id="L99">    }</span>
 
     /**
      * Returns an Attribute Base interface of this component
@@ -103,7 +105,7 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
      */
     public IComponentEventBase asEventBase()
     {
-<span class="nc" id="L106">        return (ComponentEventBase) this;</span>
+<span class="nc" id="L108">        return (ComponentEventBase) this;</span>
     }
 
     /**
@@ -114,11 +116,11 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
     @Override
     public List&lt;E&gt; getEvents()
     {
-<span class="fc bfc" id="L117" title="All 2 branches covered.">        if (events == null)</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">        if (events == null)</span>
         {
-<span class="fc" id="L119">            events = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L121">            events = new ArrayList&lt;&gt;();</span>
         }
-<span class="fc" id="L121">        return events;</span>
+<span class="fc" id="L123">        return events;</span>
     }
 
     /**
@@ -129,19 +131,19 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
     @Override
     public J addEvent(E event)
     {
-<span class="pc bpc" id="L132" title="1 of 2 branches missed.">        if (!ComponentEventBase.class.cast(event).getComponentType().equals(ComponentTypes.Event))</span>
+<span class="pc bpc" id="L134" title="1 of 2 branches missed.">        if (!ComponentEventBase.class.cast(event).getComponentType().equals(ComponentTypes.Event))</span>
         {
-<span class="nc" id="L134">            LOG.warn(&quot;Tried to add a non event to the event collection&quot;);</span>
+<span class="nc" id="L136">            LOG.log(Level.WARNING, &quot;Tried to add a non event to the event collection&quot;);</span>
         }
-<span class="pc bpc" id="L136" title="1 of 2 branches missed.">        else if (!getEvents().contains(event))</span>
+<span class="pc bpc" id="L138" title="1 of 2 branches missed.">        else if (!getEvents().contains(event))</span>
         {
-<span class="fc" id="L138">            getEvents().add(event);</span>
+<span class="fc" id="L140">            getEvents().add(event);</span>
         }
-<span class="pc bpc" id="L140" title="1 of 2 branches missed.">        if (this instanceof ComponentHierarchyBase)</span>
+<span class="pc bpc" id="L142" title="1 of 2 branches missed.">        if (this instanceof ComponentHierarchyBase)</span>
         {
-<span class="nc" id="L142">            ComponentHierarchyBase.class.cast(this).getPage().setAngularEnabled(true);</span>
+<span class="nc" id="L144">            ComponentHierarchyBase.class.cast(this).getPage().getOptions().setAngularEnabled(true);</span>
         }
-<span class="fc" id="L144">        return (J) this;</span>
+<span class="fc" id="L146">        return (J) this;</span>
     }
 
     /**
@@ -155,8 +157,8 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
     @Override
     public J removeEvent(E event)
     {
-<span class="nc" id="L158">        getEvents().remove(event);</span>
-<span class="nc" id="L159">        return (J) this;</span>
+<span class="nc" id="L160">        getEvents().remove(event);</span>
+<span class="nc" id="L161">        return (J) this;</span>
     }
 
     /**
@@ -165,25 +167,25 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
     @Override
     public void preConfigure()
     {
-<span class="fc bfc" id="L168" title="All 2 branches covered.">        if (!isInitialized())</span>
+<span class="fc bfc" id="L170" title="All 2 branches covered.">        if (!isInitialized())</span>
         {
-<span class="fc" id="L170">            init();</span>
+<span class="fc" id="L172">            init();</span>
         }
-<span class="fc bfc" id="L172" title="All 2 branches covered.">        if (!isConfigured())</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">        if (!isConfigured())</span>
         {
-<span class="fc" id="L174">            getEvents().stream().forEach(event</span>
+<span class="fc" id="L176">            getEvents().stream().forEach(event</span>
                     -&gt;
             {
-<span class="fc bfc" id="L177" title="All 2 branches covered.">                if (!ComponentEventBase.class.cast(event).isConfigured())</span>
+<span class="fc bfc" id="L179" title="All 2 branches covered.">                if (!ComponentEventBase.class.cast(event).isConfigured())</span>
                 {
-<span class="fc" id="L179">                    ComponentEventBase.class.cast(event).preConfigure();</span>
-<span class="fc" id="L180">                    assignFunctionsToComponent();</span>
+<span class="fc" id="L181">                    ComponentEventBase.class.cast(event).preConfigure();</span>
+<span class="fc" id="L182">                    assignFunctionsToComponent();</span>
                 }
-<span class="fc" id="L182">            });</span>
+<span class="fc" id="L184">            });</span>
         }
-<span class="fc" id="L184">        super.preConfigure();</span>
+<span class="fc" id="L186">        super.preConfigure();</span>
 
-<span class="fc" id="L186">    }</span>
+<span class="fc" id="L188">    }</span>
 
     /**
      * Adds in the JavaScript References for the Features
@@ -193,20 +195,20 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
     @Override
     public List&lt;JavascriptReference&gt; getJavascriptReferencesAll()
     {
-<span class="fc" id="L196">        List&lt;JavascriptReference&gt; allJs = super.getJavascriptReferencesAll();</span>
-<span class="fc" id="L197">        getEvents().stream().forEach(feature</span>
+<span class="fc" id="L198">        List&lt;JavascriptReference&gt; allJs = super.getJavascriptReferencesAll();</span>
+<span class="fc" id="L199">        getEvents().stream().forEach(feature</span>
                 -&gt;
         {
-<span class="nc bnc" id="L200" title="All 2 branches missed.">            for (Iterator&lt;JavascriptReference&gt; it = ComponentEventBase.class.cast(feature).getJavascriptReferencesAll().iterator(); it.hasNext();)</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">            for (Iterator&lt;JavascriptReference&gt; it = ComponentEventBase.class.cast(feature).getJavascriptReferencesAll().iterator(); it.hasNext();)</span>
             {
-<span class="nc" id="L202">                JavascriptReference js = it.next();</span>
-<span class="nc bnc" id="L203" title="All 2 branches missed.">                if (!allJs.contains(js))</span>
+<span class="nc" id="L204">                JavascriptReference js = it.next();</span>
+<span class="nc bnc" id="L205" title="All 2 branches missed.">                if (!allJs.contains(js))</span>
                 {
-<span class="nc" id="L205">                    allJs.add(js);</span>
+<span class="nc" id="L207">                    allJs.add(js);</span>
                 }
-<span class="nc" id="L207">            }</span>
-<span class="nc" id="L208">        });</span>
-<span class="fc" id="L209">        return allJs;</span>
+<span class="nc" id="L209">            }</span>
+<span class="nc" id="L210">        });</span>
+<span class="fc" id="L211">        return allJs;</span>
     }
 
     /**
@@ -217,20 +219,20 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
     @Override
     public List&lt;CSSReference&gt; getCssReferencesAll()
     {
-<span class="fc" id="L220">        List&lt;CSSReference&gt; allCss = super.getCssReferencesAll();</span>
-<span class="fc" id="L221">        getEvents().stream().forEach((E feature)</span>
+<span class="fc" id="L222">        List&lt;CSSReference&gt; allCss = super.getCssReferencesAll();</span>
+<span class="fc" id="L223">        getEvents().stream().forEach((E feature)</span>
                 -&gt;
         {
-<span class="nc bnc" id="L224" title="All 2 branches missed.">            for (Iterator&lt;CSSReference&gt; it = ComponentEventBase.class.cast(feature).getCssReferencesAll().iterator(); it.hasNext();)</span>
+<span class="nc bnc" id="L226" title="All 2 branches missed.">            for (Iterator&lt;CSSReference&gt; it = ComponentEventBase.class.cast(feature).getCssReferencesAll().iterator(); it.hasNext();)</span>
             {
-<span class="nc" id="L226">                CSSReference css = it.next();</span>
-<span class="nc bnc" id="L227" title="All 2 branches missed.">                if (!allCss.contains(css))</span>
+<span class="nc" id="L228">                CSSReference css = it.next();</span>
+<span class="nc bnc" id="L229" title="All 2 branches missed.">                if (!allCss.contains(css))</span>
                 {
-<span class="nc" id="L229">                    allCss.add(css);</span>
+<span class="nc" id="L231">                    allCss.add(css);</span>
                 }
-<span class="nc" id="L231">            }</span>
-<span class="nc" id="L232">        });</span>
-<span class="fc" id="L233">        return allCss;</span>
+<span class="nc" id="L233">            }</span>
+<span class="nc" id="L234">        });</span>
+<span class="fc" id="L235">        return allCss;</span>
     }
 
     /**
@@ -241,7 +243,7 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
     @Override
     public List&lt;StringBuilder&gt; getQueriesAll()
     {
-<span class="nc" id="L244">        return super.getQueriesAll();</span>
+<span class="nc" id="L246">        return super.getQueriesAll();</span>
     }
 
     /**
@@ -253,13 +255,13 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
     @Override
     public EventTypes getEventTypes()
     {
-<span class="fc bfc" id="L256" title="All 2 branches covered.">        if (this.eventType == EventTypes.undefined)</span>
+<span class="fc bfc" id="L258" title="All 2 branches covered.">        if (this.eventType == EventTypes.undefined)</span>
         {
-<span class="fc" id="L258">            return null;</span>
+<span class="fc" id="L260">            return null;</span>
         }
         else
         {
-<span class="fc" id="L262">            return this.eventType;</span>
+<span class="fc" id="L264">            return this.eventType;</span>
         }
     }
 
@@ -271,7 +273,7 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
     @Override
     public boolean isTouched()
     {
-<span class="fc" id="L274">        return touched;</span>
+<span class="fc" id="L276">        return touched;</span>
     }
 
     /**
@@ -284,8 +286,8 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
     @Override
     public J setTouched(boolean touched)
     {
-<span class="nc" id="L287">        this.touched = touched;</span>
-<span class="nc" id="L288">        return (J) this;</span>
+<span class="nc" id="L289">        this.touched = touched;</span>
+<span class="nc" id="L290">        return (J) this;</span>
     }
 
     /**
@@ -298,16 +300,16 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
     @Override
     public ArrayList&lt;ComponentEventBase&gt; getEventsFor(EventTypes eventType)
     {
-<span class="nc" id="L301">        ArrayList&lt;ComponentEventBase&gt; output = new ArrayList&lt;&gt;();</span>
-<span class="nc bnc" id="L302" title="All 2 branches missed.">        for (Iterator&lt;E&gt; iterator = getEvents().iterator(); iterator.hasNext();)</span>
+<span class="nc" id="L303">        ArrayList&lt;ComponentEventBase&gt; output = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L304" title="All 2 branches missed.">        for (Iterator&lt;E&gt; iterator = getEvents().iterator(); iterator.hasNext();)</span>
         {
-<span class="nc" id="L304">            ComponentEventBase next = (ComponentEventBase) iterator.next();</span>
-<span class="nc bnc" id="L305" title="All 2 branches missed.">            if (next.getEventTypes().equals(eventType))</span>
+<span class="nc" id="L306">            ComponentEventBase next = (ComponentEventBase) iterator.next();</span>
+<span class="nc bnc" id="L307" title="All 2 branches missed.">            if (next.getEventTypes().equals(eventType))</span>
             {
-<span class="nc" id="L307">                output.add(next);</span>
+<span class="nc" id="L309">                output.add(next);</span>
             }
-<span class="nc" id="L309">        }</span>
-<span class="nc" id="L310">        return output;</span>
+<span class="nc" id="L311">        }</span>
+<span class="nc" id="L312">        return output;</span>
     }
 
     /**
@@ -319,15 +321,15 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
      */
     public ComponentEventBase getEvent(String eventId)
     {
-<span class="nc bnc" id="L322" title="All 2 branches missed.">        for (Iterator&lt;E&gt; iterator = getEvents().iterator(); iterator.hasNext();)</span>
+<span class="nc bnc" id="L324" title="All 2 branches missed.">        for (Iterator&lt;E&gt; iterator = getEvents().iterator(); iterator.hasNext();)</span>
         {
-<span class="nc" id="L324">            ComponentEventBase next = (ComponentEventBase) iterator.next();</span>
-<span class="nc bnc" id="L325" title="All 2 branches missed.">            if (next.getID().equals(eventId))</span>
+<span class="nc" id="L326">            ComponentEventBase next = (ComponentEventBase) iterator.next();</span>
+<span class="nc bnc" id="L327" title="All 2 branches missed.">            if (next.getID().equals(eventId))</span>
             {
-<span class="nc" id="L327">                return next;</span>
+<span class="nc" id="L329">                return next;</span>
             }
-<span class="nc" id="L329">        }</span>
-<span class="nc" id="L330">        return null;</span>
+<span class="nc" id="L331">        }</span>
+<span class="nc" id="L332">        return null;</span>
     }
 
     /**
@@ -341,12 +343,12 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
     public J setTiny(boolean tiny)
     {
 
-<span class="pc bpc" id="L344" title="1 of 2 branches missed.">        for (Iterator&lt;E&gt; iterator = getEvents().iterator(); iterator.hasNext();)</span>
+<span class="pc bpc" id="L346" title="1 of 2 branches missed.">        for (Iterator&lt;E&gt; iterator = getEvents().iterator(); iterator.hasNext();)</span>
         {
-<span class="nc" id="L346">            ComponentEventBase next = (ComponentEventBase) iterator.next();</span>
-<span class="nc" id="L347">            next.setTiny(tiny);</span>
-<span class="nc" id="L348">        }</span>
-<span class="fc" id="L349">        return (J) super.setTiny(tiny);</span>
+<span class="nc" id="L348">            ComponentEventBase next = (ComponentEventBase) iterator.next();</span>
+<span class="nc" id="L349">            next.setTiny(tiny);</span>
+<span class="nc" id="L350">        }</span>
+<span class="fc" id="L351">        return (J) super.setTiny(tiny);</span>
     }
 
     /**
@@ -357,8 +359,8 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
     @Override
     public void setEventType(EventTypes eventType)
     {
-<span class="fc" id="L360">        this.eventType = eventType;</span>
-<span class="fc" id="L361">    }</span>
+<span class="fc" id="L362">        this.eventType = eventType;</span>
+<span class="fc" id="L363">    }</span>
 
     /**
      * Clones the component and all its events
@@ -368,12 +370,12 @@ public class ComponentEventBase&lt;F extends GlobalFeatures, E extends GlobalEve
     @Override
     public J cloneComponent()
     {
-<span class="fc" id="L371">        ComponentEventBase cloned = (ComponentEventBase) super.cloneComponent();</span>
+<span class="fc" id="L373">        ComponentEventBase cloned = (ComponentEventBase) super.cloneComponent();</span>
 
-<span class="fc" id="L373">        cloned.events = new ArrayList();</span>
-<span class="fc" id="L374">        cloned.events.addAll(getEvents());</span>
+<span class="fc" id="L375">        cloned.events = new ArrayList();</span>
+<span class="fc" id="L376">        cloned.events.addAll(getEvents());</span>
 
-<span class="fc" id="L376">        return (J) cloned;</span>
+<span class="fc" id="L378">        return (J) cloned;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

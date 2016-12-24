@@ -32,39 +32,40 @@ import za.co.mmagon.jwebswing.base.servlets.interfaces.*;
     /**
      * Put Pace Loader First
      */
-<span class="fc" id="L35">    PaceLoader(new JavascriptReference(&quot;PACE&quot;, 1.02, &quot;bower_components/PACE/pace.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js&quot;, 0), -1);</span>
+<span class="fc" id="L35">    PaceLoader(new JavascriptReference(&quot;PACE&quot;, 1.02, &quot;bower_components/PACE/pace.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js&quot;, 0), -1),</span>
+<span class="fc" id="L36">    PaceLoaderDisableWebSockets(new JavascriptReference(&quot;PACE_DisableWebSockets&quot;, 1.02, &quot;javascript/pace_ws_disable.js&quot;, &quot;javascript/pace_ws_disable.js&quot;, 1), 0);</span>
 
     private JavascriptReference javaScriptReference;
 
     private PaceLoaderReferencePool(JavascriptReference javaScriptReference, int sortOrder)
-<span class="fc" id="L40">    {</span>
-<span class="fc" id="L41">        this.javaScriptReference = javaScriptReference;</span>
-<span class="fc" id="L42">        this.javaScriptReference.setSortOrder(sortOrder);</span>
-<span class="fc" id="L43">        javaScriptReference.setPriority(RequirementsPriority.Top_Shelf);</span>
-<span class="fc" id="L44">    }</span>
+<span class="fc" id="L41">    {</span>
+<span class="fc" id="L42">        this.javaScriptReference = javaScriptReference;</span>
+<span class="fc" id="L43">        this.javaScriptReference.setSortOrder(sortOrder);</span>
+<span class="fc" id="L44">        javaScriptReference.setPriority(RequirementsPriority.Top_Shelf);</span>
+<span class="fc" id="L45">    }</span>
 
     @Override
     public JavascriptReference getJavaScriptReference()
     {
-<span class="fc" id="L49">        return javaScriptReference;</span>
+<span class="fc" id="L50">        return javaScriptReference;</span>
     }
 
     @Override
     public void setJavaScriptReference(JavascriptReference javaScriptReference)
     {
-<span class="nc" id="L55">        this.javaScriptReference = javaScriptReference;</span>
-<span class="nc" id="L56">    }</span>
+<span class="nc" id="L56">        this.javaScriptReference = javaScriptReference;</span>
+<span class="nc" id="L57">    }</span>
 
     @Override
     public CSSReference getCssReference()
     {
-<span class="nc" id="L61">        return null;</span>
+<span class="nc" id="L62">        return null;</span>
     }
 
     @Override
     public void setCssReference(CSSReference cssReference)
     {
 
-<span class="nc" id="L68">    }</span>
+<span class="nc" id="L69">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

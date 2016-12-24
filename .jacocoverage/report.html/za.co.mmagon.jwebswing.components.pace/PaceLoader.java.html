@@ -33,7 +33,7 @@ public class PaceLoader extends Feature&lt;JavaScriptPart, PaceLoader&gt; implem
 {
 
     private static final long serialVersionUID = 1L;
-
+    private PaceTheme theme;
     /**
      * Creates a Pace Loader with a theme
      *
@@ -42,13 +42,28 @@ public class PaceLoader extends Feature&lt;JavaScriptPart, PaceLoader&gt; implem
     public PaceLoader(PaceTheme theme)
     {
 <span class="fc" id="L44">        super(&quot;PaceLoader&quot;);</span>
-<span class="fc" id="L45">        addJavaScriptReference(PaceLoaderReferencePool.PaceLoader.getJavaScriptReference());</span>
-<span class="fc" id="L46">        addCssReference(theme.getCSSReference());</span>
+<span class="fc" id="L45">        this.theme = theme;</span>
+<span class="fc" id="L46">        addJavaScriptReference(PaceLoaderReferencePool.PaceLoader.getJavaScriptReference());</span>
 <span class="fc" id="L47">    }</span>
 
     public void setTheme(PaceTheme theme)
     {
-<span class="nc" id="L51">        getCssReferences().add(theme.getCSSReference());</span>
+<span class="nc" id="L51">        this.theme = theme;</span>
 <span class="nc" id="L52">    }</span>
+
+    public PaceTheme getTheme()
+    {
+<span class="nc" id="L56">        return theme;</span>
+    }
+
+    @Override
+    public void preConfigure()
+    {
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if(!isConfigured())</span>
+        {
+<span class="fc" id="L64">            addCssReference(theme.getCSSReference());</span>
+        }
+<span class="fc" id="L66">        super.preConfigure(); </span>
+<span class="fc" id="L67">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

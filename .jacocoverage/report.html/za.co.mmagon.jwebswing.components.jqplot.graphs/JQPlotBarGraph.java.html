@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.log4j.Logger;
-import za.co.mmagon.LoggerFactory;
+import java.util.logging.*;
+import za.co.mmagon.logger.LogFactory;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.Orientation;
 import za.co.mmagon.jwebswing.components.jqplot.JQPlotGraph;
 import za.co.mmagon.jwebswing.components.jqplot.graphs.display.JQPlotBar;
@@ -44,7 +44,7 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
     /**
      * The logger for the swing Servlet
      */
-<span class="fc" id="L47">    private static final Logger LOG = LoggerFactory.getInstance().makeNewLoggerInstance(&quot;JQPlotBarGraph&quot;);</span>
+<span class="fc" id="L47">    private static final Logger LOG = LogFactory.getInstance().getLogger(&quot;JQPlotBarGraph&quot;);</span>
     /**
      * Version 1
      */
@@ -345,7 +345,7 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
                             }
 <span class="nc" id="L346">                            catch (Exception e)</span>
                             {
-<span class="nc" id="L348">                                LOG.warn(&quot;Unable to generate data&quot;,e);</span>
+<span class="nc" id="L348">                                LOG.log(Level.WARNING,&quot;Unable to generate data&quot;,e);</span>
 <span class="nc" id="L349">                                valuesPerRow[j] = &quot;&quot;;</span>
 <span class="fc" id="L350">                            }</span>
 <span class="nc" id="L351">                            break;</span>

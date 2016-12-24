@@ -18,9 +18,9 @@ package za.co.mmagon;
 
 import com.armineasy.injection.GuiceContext;
 import com.armineasy.injection.abstractions.GuiceSiteInjectorModule;
-import com.armineasy.injection.annotations.GuiceSiteModule;
 import com.armineasy.injection.interfaces.GuiceSiteBinder;
-import java.util.*;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.logging.Level;
 import org.reflections.Reflections;
 import za.co.mmagon.jwebswing.base.servlets.*;
@@ -33,25 +33,27 @@ import za.co.mmagon.logger.LogFactory;
  * @version 1.0
  *
  */
-@GuiceSiteModule
 public class JWebSwingSiteBinder extends GuiceSiteBinder
 {
 
-    public static String QueryParametersRegex = "(\\?.*)?";
+    private static String QueryParametersRegex = "(\\?.*)?";
 
-    public static String JavaScriptLocation = "/jwjs";
-    public static String AjaxScriptLocation = "/jwajax";
-    public static String CSSLocation = "/jwcss";
-    public static final String AngularDataLocation = "/jwad";
-    public static String AngularScriptLocation = "/jwas";
+    private static String JavaScriptLocation = "/jwjs";
+    private static String AjaxScriptLocation = "/jwajax";
+    private static String CSSLocation = "/jwcss";
+    private static final String AngularDataLocation = "/jwad";
+    private static String AngularScriptLocation = "/jwas";
 
-    public static String DataLocation = "/jwdata";
+    private static String DataLocation = "/jwdata";
 
     private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("JWebSwingSiteBinder");
 
+    /**
+     * Constructs a new instance, mostly for injection
+     */
     public JWebSwingSiteBinder()
     {
-
+        //Nothing needed to be done
     }
 
     @Override
@@ -92,10 +94,130 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
         module.serveRegex$("(" + AngularScriptLocation + ")" + QueryParametersRegex).with(AngularServlet.class);
         log.log(Level.CONFIG, "Serving Angular JavaScript at " + AngularScriptLocation);
 
-        module.serveRegex$("(" + DataLocation + ")" + QueryParametersRegex).with(AngularServlet.class);
+        module.serveRegex$("(" + DataLocation + ")" + QueryParametersRegex).with(DataServlet.class);
         log.log(Level.CONFIG, "Serving Data at " + DataLocation);
 
         log.log(Level.CONFIG, "Finished with configuring URL's");
-
     }
+
+    /**
+     * Returns the query parameters
+     *
+     * @return
+     */
+    public static String getQueryParametersRegex()
+    {
+        return QueryParametersRegex;
+    }
+
+    /**
+     * Sets the query parameter regex, but the current one works fine. just in case
+     *
+     * @param QueryParametersRegex
+     */
+    public static void setQueryParametersRegex(String QueryParametersRegex)
+    {
+        JWebSwingSiteBinder.QueryParametersRegex = QueryParametersRegex;
+    }
+
+    /**
+     * gets the location of the JavaScript Servlet
+     *
+     * @return
+     */
+    public static String getJavaScriptLocation()
+    {
+        return JavaScriptLocation;
+    }
+
+    /**
+     * Sets the current java script location
+     *
+     * @param JavaScriptLocation
+     */
+    public static void setJavaScriptLocation(String JavaScriptLocation)
+    {
+        JWebSwingSiteBinder.JavaScriptLocation = JavaScriptLocation;
+    }
+
+    /**
+     * Gets the current Ajax location
+     *
+     * @return
+     */
+    public static String getAjaxScriptLocation()
+    {
+        return AjaxScriptLocation;
+    }
+
+    /**
+     * Sets the current Ajax location
+     *
+     * @param AjaxScriptLocation
+     */
+    public static void setAjaxScriptLocation(String AjaxScriptLocation)
+    {
+        JWebSwingSiteBinder.AjaxScriptLocation = AjaxScriptLocation;
+    }
+
+    /**
+     * Gets the CSS Location
+     *
+     * @return
+     */
+    public static String getCSSLocation()
+    {
+        return CSSLocation;
+    }
+
+    /**
+     * Sets the CSS Location
+     *
+     * @param CSSLocation
+     */
+    public static void setCSSLocation(String CSSLocation)
+    {
+        JWebSwingSiteBinder.CSSLocation = CSSLocation;
+    }
+
+    /**
+     * Gets the angular script location
+     *
+     * @return
+     */
+    public static String getAngularScriptLocation()
+    {
+        return AngularScriptLocation;
+    }
+
+    /**
+     * Sets the angular script location
+     *
+     * @param AngularScriptLocation
+     */
+    public static void setAngularScriptLocation(String AngularScriptLocation)
+    {
+        JWebSwingSiteBinder.AngularScriptLocation = AngularScriptLocation;
+    }
+
+    /**
+     * Gets the data location
+     *
+     * @return
+     */
+    public static String getDataLocation()
+    {
+        return DataLocation;
+    }
+
+    /**
+     * Sets the data location
+     *
+     * @param DataLocation
+     */
+    public static void setDataLocation(String DataLocation)
+    {
+        JWebSwingSiteBinder.DataLocation = DataLocation;
+    }
+
 }

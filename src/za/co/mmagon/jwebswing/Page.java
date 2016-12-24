@@ -19,7 +19,6 @@ package za.co.mmagon.jwebswing;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.*;
 import java.util.List;
-import javax.servlet.http.HttpSession;
 import net.sf.uadetector.*;
 import za.co.mmagon.JWebSwingSiteBinder;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
@@ -30,7 +29,6 @@ import za.co.mmagon.jwebswing.base.html.attributes.ScriptAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
-import za.co.mmagon.jwebswing.base.servlets.JWebSwingServlet;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 import za.co.mmagon.jwebswing.base.servlets.interfaces.IPage;
 import za.co.mmagon.jwebswing.generics.WebReference;
@@ -66,16 +64,6 @@ public class Page extends Html implements IPage
      */
     @JsonIgnore
     private transient ReadableUserAgent userAgent;
-    /**
-     * The Servlet attached to this page
-     */
-    @JsonIgnore
-    private transient JWebSwingServlet servlet;
-    /**
-     * The session of this page
-     */
-    @JsonIgnore
-    private transient HttpSession session;
 
     /**
      * The angular feature
@@ -152,6 +140,7 @@ public class Page extends Html implements IPage
         {
             bodyOutput = new StringBuilder(getBody().toString(1));
         }
+        
         if (!isHeadEmpty())
         {
             pageOutput.append(getNewLine()).append(getCurrentTabIndentString()).append(getHead().toString(1));
@@ -313,7 +302,7 @@ public class Page extends Html implements IPage
         {
             if (getOptions().isDynamicRender())
             {
-                CSSLink renderedCSS = new CSSLink(JWebSwingSiteBinder.CSSLocation.replaceAll("/", ""));
+                CSSLink renderedCSS = new CSSLink(JWebSwingSiteBinder.getCSSLocation().replaceAll("/", ""));
                 return renderedCSS;
             }
             else
@@ -356,7 +345,7 @@ public class Page extends Html implements IPage
             {
                 Script dynamicScript = new Script();
                 dynamicScript.addAttribute(ScriptAttributes.Type, "application/javascript");
-                dynamicScript.addAttribute(ScriptAttributes.Src,  JWebSwingSiteBinder.AngularScriptLocation.replaceAll("/", ""));
+                dynamicScript.addAttribute(ScriptAttributes.Src,  JWebSwingSiteBinder.getAngularScriptLocation().replaceAll("/", ""));
                 //dynamicScript.setTiny(true);
                 //dynamicScript.setText("$.ajax({cache:false,async:false,dataType:'script',url:'as'}).fail(function(){alert('session lost'); });");
                 allScripts.add(dynamicScript);
@@ -381,7 +370,7 @@ public class Page extends Html implements IPage
             {
                 Script dynamicScript = new Script();
                 dynamicScript.addAttribute(ScriptAttributes.Type, "application/javascript");
-                dynamicScript.addAttribute(ScriptAttributes.Src, JWebSwingSiteBinder.JavaScriptLocation.replaceAll("/", ""));
+                dynamicScript.addAttribute(ScriptAttributes.Src, JWebSwingSiteBinder.getJavaScriptLocation().replaceAll("/", ""));
                 //dynamicScript.setTiny(true);
                 //dynamicScript.setText("$.ajax({cache:false,dataType:'script',url:'js'}).fail(function(){alert('session lost'); });");
                 allScripts.add(dynamicScript);
@@ -620,46 +609,6 @@ public class Page extends Html implements IPage
             fields = new PageFields(this);
         }
         return fields;
-    }
-
-    /**
-     * Returns the attached session if available
-     *
-     * @return HTTPSession or NULL
-     */
-    public final HttpSession getSession()
-    {
-        return session;
-    }
-
-    /**
-     * Sets this pages session
-     *
-     * @param session HttpSession or null
-     */
-    public final void setSession(HttpSession session)
-    {
-        this.session = session;
-    }
-
-    /**
-     * Returns the Servlet processing requests
-     *
-     * @return The JWebSwingServlet
-     */
-    public JWebSwingServlet getServlet()
-    {
-        return servlet;
-    }
-
-    /**
-     * Sets the Servlet to a new Servlet
-     *
-     * @param servlet The Servlet to set
-     */
-    public void setServlet(JWebSwingServlet servlet)
-    {
-        this.servlet = servlet;
     }
 
     /**

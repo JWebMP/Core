@@ -20,12 +20,13 @@ import com.google.inject.Singleton;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.logging.*;
-import za.co.mmagon.logger.LogFactory;
 import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  *
@@ -43,6 +44,7 @@ public class AngularServlet extends JWDefaultServlet
      *
      * @param request  Servlet request
      * @param response Servlet response
+     *
      * @throws ServletException if a Servlet-specific error occurs
      * @throws IOException      if an I/O error occurs
      */
@@ -52,10 +54,11 @@ public class AngularServlet extends JWDefaultServlet
         Page page = (Page) request.getSession().getAttribute("jwpage");
         if (page == null)
         {
-            LOG.log(Level.SEVERE,"No Page", new ServletException("No Page Currently Loaded"));
+            LOG.log(Level.SEVERE, "No Page", new ServletException("No Page Currently Loaded"));
             throw new ServletException("No Page Currently Loaded");
         }
         Date startDate = new Date();
+        //StringBuilder compiled = page.getAngular().compileTemplate(AngularFeature.class, "jwangular");
         StringBuilder output = page.getAngular().renderTemplateScripts("jwangular");
         Date endDate = new Date();
         try (PrintWriter out = response.getWriter())
@@ -64,7 +67,7 @@ public class AngularServlet extends JWDefaultServlet
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(output.toString());
             Date dataTransferDate = new Date();
-            LOG.log(Level.FINE,"[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + output.toString().length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
+            LOG.log(Level.FINE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + output.toString().length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
         }
     }
 
@@ -73,6 +76,7 @@ public class AngularServlet extends JWDefaultServlet
      *
      * @param request
      * @param response
+     *
      * @throws ServletException
      * @throws IOException
      */
@@ -95,6 +99,7 @@ public class AngularServlet extends JWDefaultServlet
      *
      * @param request
      * @param response
+     *
      * @throws ServletException
      * @throws IOException
      */

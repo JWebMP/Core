@@ -9,29 +9,29 @@ import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemeBlocks;
  * @since 16 Jul 2013
  * @version 1.0
  */
-<span class="nc" id="L12">public enum JQLayoutArea</span>
+<span class="pc" id="L12">public enum JQLayoutArea</span>
 {
     /**
      * The bottom pane
      * Known issue with IOS 5 and a floating pane. Global issue, blame IOS
      */
-<span class="nc" id="L18">    South(JQUIThemeBlocks.UI_Layout_South),</span>
+<span class="fc" id="L18">    South(JQUIThemeBlocks.UI_Layout_South),</span>
     /**
      * The north pane
      */
-<span class="nc" id="L22">    North(JQUIThemeBlocks.UI_Layout_North),</span>
+<span class="fc" id="L22">    North(JQUIThemeBlocks.UI_Layout_North),</span>
     /**
      * The east pane
      */
-<span class="nc" id="L26">    East(JQUIThemeBlocks.UI_Layout_East),</span>
+<span class="fc" id="L26">    East(JQUIThemeBlocks.UI_Layout_East),</span>
     /**
      * The west pane
      */
-<span class="nc" id="L30">    West(JQUIThemeBlocks.UI_Layout_West),</span>
+<span class="fc" id="L30">    West(JQUIThemeBlocks.UI_Layout_West),</span>
     /**
      * The center pane
      */
-<span class="nc" id="L34">    Center(JQUIThemeBlocks.UI_Layout_Center);</span>
+<span class="fc" id="L34">    Center(JQUIThemeBlocks.UI_Layout_Center);</span>
 
     /**
      * The area class
@@ -44,9 +44,9 @@ import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemeBlocks;
      * @param areaClass
      */
     private JQLayoutArea(JQUIThemeBlocks areaClass)
-<span class="nc" id="L47">    {</span>
-<span class="nc" id="L48">        this.areaClass = areaClass;</span>
-<span class="nc" id="L49">    }</span>
+<span class="fc" id="L47">    {</span>
+<span class="fc" id="L48">        this.areaClass = areaClass;</span>
+<span class="fc" id="L49">    }</span>
 
     /**
      * Sets the class
@@ -65,7 +65,7 @@ import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemeBlocks;
      */
     public JQUIThemeBlocks getAreaClass()
     {
-<span class="nc" id="L68">        return areaClass;</span>
+<span class="fc" id="L68">        return areaClass;</span>
     }
 
     /**
@@ -76,7 +76,7 @@ import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemeBlocks;
     @Override
     public String toString()
     {
-<span class="nc" id="L79">        return name().toString().toLowerCase();</span>
+<span class="fc" id="L79">        return name().toString().toLowerCase();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

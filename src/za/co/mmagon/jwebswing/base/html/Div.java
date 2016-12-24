@@ -17,19 +17,12 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
-import za.co.mmagon.jwebswing.base.html.interfaces.ContainerType;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.LayoutHandler;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.AreaChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.ImageMapChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqmetro.metro.interfaces.JQMetroTileChildren;
 import za.co.mmagon.jwebswing.components.bootstrap.modal.BSModalChildren;
+import za.co.mmagon.jwebswing.components.jqmetro.metro.interfaces.JQMetroTileChildren;
 import za.co.mmagon.jwebswing.components.jquerylayout.layout.interfaces.JWLayoutChildren;
 import za.co.mmagon.jwebswing.components.jquerylayout.layout.interfaces.JWLayoutDivChildren;
 import za.co.mmagon.jwebswing.components.jqueryui.accordion.JQUIAccordionChildren;
@@ -72,7 +65,8 @@ import za.co.mmagon.jwebswing.components.jqxwidgets.ribbon.JQXRibbonChildren;
  * @param <E> The allowed events
  * @param <J> The Clonable object
  */
-public class Div<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component> extends Component<C, A, F, E, J>
+public class Div<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component> 
+        extends Component<C, A, F, E, J>
         implements JWLayoutChildren, BodyChildren, ImageMapChildren, AreaChildren, LayoutHandler, JWLayoutDivChildren,
         JQUITabsChildren, JQUIAccordionChildren, ContainerType, JQUIDialogChildren, JQXRibbonChildren, JQUIRadioButtonGroupChildren,
         JQXNavigationBarChildren, JQXDropDownListChildren, JQXLayoutChildren, JQXNotificationChildren,JQMetroTileChildren,ListItemChildren,

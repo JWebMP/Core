@@ -27,9 +27,9 @@ import za.co.mmagon.jwebswing.base.servlets.interfaces.ReferencePool;
  * @author GedMarc
  * @since 20 Apr 2016
  */
-<span class="nc" id="L30">public enum JSTreeReferencePool implements ReferencePool</span>
+<span class="pc" id="L30">public enum JSTreeReferencePool implements ReferencePool</span>
 {
-<span class="nc" id="L32">    JSTreeJavascript(new JavascriptReference(&quot;JSTree&quot;, 3.32, &quot;bower_components/jstree/dist/jstree.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js&quot;, 10),</span>
+<span class="fc" id="L32">    JSTreeJavascript(new JavascriptReference(&quot;JSTree&quot;, 3.32, &quot;bower_components/jstree/dist/jstree.js&quot;, &quot;https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js&quot;, 10),</span>
    null)
     ;
     private JSTreeReferencePool()
@@ -40,15 +40,15 @@ import za.co.mmagon.jwebswing.base.servlets.interfaces.ReferencePool;
     private CSSReference cssReference;
 
     private JSTreeReferencePool(JavascriptReference javaScriptReference, CSSReference cssReference)
-<span class="nc" id="L43">    {</span>
-<span class="nc" id="L44">        this.javaScriptReference = javaScriptReference;</span>
-<span class="nc" id="L45">        this.cssReference = cssReference;</span>
-<span class="nc" id="L46">    }</span>
+<span class="fc" id="L43">    {</span>
+<span class="fc" id="L44">        this.javaScriptReference = javaScriptReference;</span>
+<span class="fc" id="L45">        this.cssReference = cssReference;</span>
+<span class="fc" id="L46">    }</span>
 
     @Override
     public JavascriptReference getJavaScriptReference()
     {
-<span class="nc" id="L51">        return javaScriptReference;</span>
+<span class="fc" id="L51">        return javaScriptReference;</span>
     }
 
     @Override

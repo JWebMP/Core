@@ -1,11 +1,13 @@
 package za.co.mmagon.jwebswing.base.events.buttonclick;
 
-import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.base.ajax.*;
-import za.co.mmagon.jwebswing.base.angular.*;
-import za.co.mmagon.jwebswing.components.jqueryui.selectable.*;
-import za.co.mmagon.jwebswing.components.jqxwidgets.buttongroup.*;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.*;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.Event;
+import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
+import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
+import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
+import za.co.mmagon.jwebswing.components.jqueryui.selectable.JQUISelectableEvents;
+import za.co.mmagon.jwebswing.components.jqxwidgets.buttongroup.JQXButtonGroupEvents;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 
 /**
  * This event is triggered when a button is clicked.
@@ -36,7 +38,7 @@ public abstract class ButtonClickAdapter extends Event
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
             getComponent().getPage().getOptions().setAngularEnabled(true);
-            getComponent().getPage().getAngular().addDirective(getDirective());
+            getComponent().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngButtonClick, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();

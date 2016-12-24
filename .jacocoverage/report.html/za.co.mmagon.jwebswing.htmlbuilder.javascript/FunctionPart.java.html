@@ -27,12 +27,14 @@ import com.fasterxml.jackson.annotation.JsonInclude;
  */
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class FunctionPart extends JavascriptLiteralFunction
+public abstract class FunctionPart extends JavascriptLiteralFunction
 {
 
+    private static final long serialVersionUID = 1L;
+
     public FunctionPart()
-<span class="nc" id="L34">    {</span>
-<span class="nc" id="L35">    }</span>
+<span class="nc" id="L36">    {</span>
+<span class="nc" id="L37">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -16,15 +16,16 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import com.fasterxml.jackson.annotation.*;
-import java.util.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
-import za.co.mmagon.jwebswing.base.interfaces.*;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.composer.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import java.util.HashMap;
+import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.interfaces.IComponentStyleBase;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSComposer;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
 
 /**
  * The CSS Portion of the Component.
@@ -35,6 +36,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
  * @param &lt;F&gt; All features allowed for this component
  * @param &lt;E&gt; All events allowed for this component
  * @param &lt;J&gt; Always this class
+ *
  * @since 24 Apr 2016
  */
 public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentBase&gt;
@@ -81,8 +83,8 @@ public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions,
      */
     public ComponentStyleBase(ComponentTypes componentType)
     {
-<span class="fc" id="L84">        super(componentType);</span>
-<span class="fc" id="L85">    }</span>
+<span class="fc" id="L86">        super(componentType);</span>
+<span class="fc" id="L87">    }</span>
 
     /**
      * Returns a ComponentStyleBase component of this
@@ -91,7 +93,7 @@ public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions,
      */
     public IComponentStyleBase asStyleBase()
     {
-<span class="nc" id="L94">        return (ComponentStyleBase) this;</span>
+<span class="nc" id="L96">        return (ComponentStyleBase) this;</span>
     }
 
     /**
@@ -102,11 +104,11 @@ public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions,
     @Override
     public HashMap&lt;CSSTypes, CSSImpl&gt; getCssTypeHashMap()
     {
-<span class="fc bfc" id="L105" title="All 2 branches covered.">        if (cssTypeHashMap == null)</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">        if (cssTypeHashMap == null)</span>
         {
-<span class="fc" id="L107">            cssTypeHashMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L109">            cssTypeHashMap = new HashMap&lt;&gt;();</span>
         }
-<span class="fc" id="L109">        return cssTypeHashMap;</span>
+<span class="fc" id="L111">        return cssTypeHashMap;</span>
     }
 
     /**
@@ -117,12 +119,12 @@ public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions,
     @Override
     public CSSImpl getCss()
     {
-<span class="fc bfc" id="L120" title="All 2 branches covered.">        if (css == null)</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">        if (css == null)</span>
         {
-<span class="fc" id="L122">            css = new CSSImpl();</span>
-<span class="fc" id="L123">            getCssTypeHashMap().put(CSSTypes.None, css);</span>
+<span class="fc" id="L124">            css = new CSSImpl();</span>
+<span class="fc" id="L125">            getCssTypeHashMap().put(CSSTypes.None, css);</span>
         }
-<span class="fc" id="L125">        return css;</span>
+<span class="fc" id="L127">        return css;</span>
     }
 
     /**
@@ -133,12 +135,11 @@ public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions,
     @Override
     public void setCss(CSSImpl css)
     {
-<span class="nc" id="L136">        this.css = css;</span>
-<span class="nc" id="L137">    }</span>
+<span class="nc" id="L138">        this.css = css;</span>
+<span class="nc" id="L139">    }</span>
 
     /**
-     * Renders the component CSS at the specified tab count with the
-     * &amp;lt;style&amp;gt; tag
+     * Renders the component CSS at the specified tab count with the &amp;lt;style&amp;gt; tag
      * &lt;p&gt;
      * @param tabCount Tab indentation for the SQL
      * &lt;p&gt;
@@ -147,33 +148,34 @@ public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions,
     @Override
     public StringBuilder renderCss(int tabCount)
     {
-<span class="fc" id="L150">        return renderCss(tabCount, true, false, false);</span>
+<span class="fc" id="L151">        return renderCss(tabCount, true, false, false);</span>
     }
 
     /**
-     * Renders the component CSS at the specified tab count with the
-     * &amp;lt;style&amp;gt; tag This includes everything from this classes CSS, to the
-     * CSS for each field. It will also populate the lower level
+     * Renders the component CSS at the specified tab count with the &amp;lt;style&amp;gt; tag This includes everything from this classes CSS, to the CSS for each field. It will also populate the lower level
      * child CSS for fields in this class
      * &lt;p&gt;
      * @param tabCount           Tab indentation for the SQL
-     * @param renderOpening      Whether or not to render the opening XML tag
-     *                           for a CSS style
-     * @param renderInQuotations Sets whether to render the CSS Fields in
-     *                           Quotations
-     * @param isAjaxCall         Sets whether the CSS is being called from an
-     *                           AJAX call
+     * @param renderOpening      Whether or not to render the opening XML tag for a CSS style
+     * @param renderInQuotations Sets whether to render the CSS Fields in Quotations
+     * @param isAjaxCall         Sets whether the CSS is being called from an AJAX call
      * &lt;p&gt;
      * @return The Component CSS
      */
     @Override
     public StringBuilder renderCss(int tabCount, boolean renderOpening, boolean renderInQuotations, boolean isAjaxCall)
     {
-<span class="fc" id="L172">        CSSComposer comp = new CSSComposer();</span>
-<span class="fc" id="L173">        comp.addComponent(this, true);</span>
-<span class="fc" id="L174">        StringBuilder sb = new StringBuilder();</span>
-<span class="fc" id="L175">        sb.append(comp.toString());</span>
-<span class="fc" id="L176">        return sb;</span>
+<span class="pc bpc" id="L168" title="1 of 2 branches missed.">        if (!isInitialized())</span>
+        {
+<span class="nc" id="L170">            init();</span>
+        }
+<span class="pc bpc" id="L172" title="1 of 2 branches missed.">        if (!isConfigured())</span>
+        {
+<span class="nc" id="L174">            preConfigure();</span>
+        }
+<span class="fc" id="L176">        CSSComposer comp = new CSSComposer();</span>
+<span class="fc" id="L177">        comp.addComponent(this, true);</span>
+<span class="fc" id="L178">        return new StringBuilder(comp.toString());</span>
     }
 
     /**
@@ -184,7 +186,7 @@ public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions,
     @Override
     public String getCssName()
     {
-<span class="nc" id="L187">        return cssName;</span>
+<span class="nc" id="L189">        return cssName;</span>
     }
 
     /**
@@ -195,8 +197,8 @@ public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions,
     @Override
     public void setCssName(String cssName)
     {
-<span class="nc" id="L198">        this.cssName = cssName;</span>
-<span class="nc" id="L199">    }</span>
+<span class="nc" id="L200">        this.cssName = cssName;</span>
+<span class="nc" id="L201">    }</span>
 
     /**
      * Gets the hover format CSS
@@ -206,12 +208,12 @@ public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions,
     @Override
     public CSSImpl getHoverCss()
     {
-<span class="nc bnc" id="L209" title="All 2 branches missed.">        if (hoverCss == null)</span>
+<span class="nc bnc" id="L211" title="All 2 branches missed.">        if (hoverCss == null)</span>
         {
-<span class="nc" id="L211">            hoverCss = new CSSImpl();</span>
-<span class="nc" id="L212">            getCssTypeHashMap().put(CSSTypes.Hover, hoverCss);</span>
+<span class="nc" id="L213">            hoverCss = new CSSImpl();</span>
+<span class="nc" id="L214">            getCssTypeHashMap().put(CSSTypes.Hover, hoverCss);</span>
         }
-<span class="nc" id="L214">        return hoverCss;</span>
+<span class="nc" id="L216">        return hoverCss;</span>
     }
 
     /**
@@ -223,8 +225,8 @@ public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions,
     public void setHoverCss(CSSImpl hoverCss)
     {
 
-<span class="nc" id="L226">        this.hoverCss = hoverCss;</span>
-<span class="nc" id="L227">    }</span>
+<span class="nc" id="L228">        this.hoverCss = hoverCss;</span>
+<span class="nc" id="L229">    }</span>
 
     /**
      * Gets the active CSS
@@ -234,12 +236,12 @@ public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions,
     @Override
     public CSSImpl getActiveCss()
     {
-<span class="nc bnc" id="L237" title="All 2 branches missed.">        if (activeCss == null)</span>
+<span class="nc bnc" id="L239" title="All 2 branches missed.">        if (activeCss == null)</span>
         {
-<span class="nc" id="L239">            activeCss = new CSSImpl();</span>
-<span class="nc" id="L240">            getCssTypeHashMap().put(CSSTypes.Active, activeCss);</span>
+<span class="nc" id="L241">            activeCss = new CSSImpl();</span>
+<span class="nc" id="L242">            getCssTypeHashMap().put(CSSTypes.Active, activeCss);</span>
         }
-<span class="nc" id="L242">        return activeCss;</span>
+<span class="nc" id="L244">        return activeCss;</span>
     }
 
     /**
@@ -250,8 +252,8 @@ public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions,
     @Override
     public void setActiveCss(CSSImpl activeCss)
     {
-<span class="nc" id="L253">        this.activeCss = activeCss;</span>
-<span class="nc" id="L254">    }</span>
+<span class="nc" id="L255">        this.activeCss = activeCss;</span>
+<span class="nc" id="L256">    }</span>
 
     /**
      * Gets the link CSS
@@ -261,12 +263,12 @@ public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions,
     @Override
     public CSSImpl getLinkCss()
     {
-<span class="nc bnc" id="L264" title="All 2 branches missed.">        if (linkCss == null)</span>
+<span class="nc bnc" id="L266" title="All 2 branches missed.">        if (linkCss == null)</span>
         {
-<span class="nc" id="L266">            linkCss = new CSSImpl();</span>
-<span class="nc" id="L267">            getCssTypeHashMap().put(CSSTypes.Link, linkCss);</span>
+<span class="nc" id="L268">            linkCss = new CSSImpl();</span>
+<span class="nc" id="L269">            getCssTypeHashMap().put(CSSTypes.Link, linkCss);</span>
         }
-<span class="nc" id="L269">        return linkCss;</span>
+<span class="nc" id="L271">        return linkCss;</span>
     }
 
     /**
@@ -277,8 +279,8 @@ public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions,
     @Override
     public void setLinkCss(CSSImpl linkCss)
     {
-<span class="nc" id="L280">        this.linkCss = linkCss;</span>
-<span class="nc" id="L281">    }</span>
+<span class="nc" id="L282">        this.linkCss = linkCss;</span>
+<span class="nc" id="L283">    }</span>
 
     /**
      * Gets the Visited CSS
@@ -288,12 +290,12 @@ public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions,
     @Override
     public CSSImpl getVisitedCss()
     {
-<span class="nc bnc" id="L291" title="All 2 branches missed.">        if (visitedCss == null)</span>
+<span class="nc bnc" id="L293" title="All 2 branches missed.">        if (visitedCss == null)</span>
         {
-<span class="nc" id="L293">            visitedCss = new CSSImpl();</span>
-<span class="nc" id="L294">            getCssTypeHashMap().put(CSSTypes.Visited, visitedCss);</span>
+<span class="nc" id="L295">            visitedCss = new CSSImpl();</span>
+<span class="nc" id="L296">            getCssTypeHashMap().put(CSSTypes.Visited, visitedCss);</span>
         }
-<span class="nc" id="L296">        return visitedCss;</span>
+<span class="nc" id="L298">        return visitedCss;</span>
     }
 
     /**
@@ -304,8 +306,8 @@ public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions,
     @Override
     public void setVisitedCss(CSSImpl visitedCss)
     {
-<span class="nc" id="L307">        this.visitedCss = visitedCss;</span>
-<span class="nc" id="L308">    }</span>
+<span class="nc" id="L309">        this.visitedCss = visitedCss;</span>
+<span class="nc" id="L310">    }</span>
 
     /**
      * Adds a CSS object to the component with the given type
@@ -316,8 +318,8 @@ public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions,
     @Override
     public void addCSSEntry(CSSTypes type, CSSImpl cssItem)
     {
-<span class="nc" id="L319">        getCssTypeHashMap().put(type, cssItem);</span>
-<span class="nc" id="L320">    }</span>
+<span class="nc" id="L321">        getCssTypeHashMap().put(type, cssItem);</span>
+<span class="nc" id="L322">    }</span>
 
     /**
      * Removes a CSS item for the component
@@ -327,28 +329,29 @@ public class ComponentStyleBase&lt;C, A extends Enum &amp; AttributeDefinitions,
     @Override
     public void removeCSSEntry(CSSTypes cssType)
     {
-<span class="nc" id="L330">        getCssTypeHashMap().remove(cssType);</span>
-<span class="nc" id="L331">    }</span>
+<span class="nc" id="L332">        getCssTypeHashMap().remove(cssType);</span>
+<span class="nc" id="L333">    }</span>
 
     /**
      * Updates the ID of all the CSS Objects
      *
      * @param id The ID to update with
+     *
      * @return Me
      */
     @Override
     public J setID(String id)
     {
-<span class="fc" id="L342">        J me = super.setID(id);</span>
-<span class="fc" id="L343">        getCssTypeHashMap().entrySet().stream().map((entry) -&gt;</span>
+<span class="fc" id="L345">        J me = super.setID(id);</span>
+<span class="fc" id="L346">        getCssTypeHashMap().entrySet().stream().map((entry) -&gt;</span>
         {
-<span class="fc" id="L345">            CSSTypes key = entry.getKey();</span>
-<span class="fc" id="L346">            return entry;</span>
-<span class="fc" id="L347">        }).forEachOrdered((entry) -&gt;</span>
+<span class="fc" id="L348">            CSSTypes key = entry.getKey();</span>
+<span class="fc" id="L349">            return entry;</span>
+<span class="fc" id="L350">        }).forEachOrdered((entry) -&gt;</span>
         {
-<span class="fc" id="L349">            CSSImpl value = entry.getValue();</span>
-<span class="fc" id="L350">        });</span>
-<span class="fc" id="L351">        return me;</span>
+<span class="fc" id="L352">            CSSImpl value = entry.getValue();</span>
+<span class="fc" id="L353">        });</span>
+<span class="fc" id="L354">        return me;</span>
     }
 
 }

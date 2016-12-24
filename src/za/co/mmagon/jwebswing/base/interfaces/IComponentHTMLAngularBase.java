@@ -17,7 +17,7 @@
 
 package za.co.mmagon.jwebswing.base.interfaces;
 
-import java.util.HashMap;
+import java.util.Map;
 import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
@@ -55,7 +55,7 @@ public interface IComponentHTMLAngularBase<J extends ComponentBase>
      *
      * @return
      */
-    HashMap<String, JavaScriptPart> getAngularObjects();
+    Map<String, JavaScriptPart> getAngularObjects();
 
     /**
      * Gets an angular attribute
@@ -70,12 +70,14 @@ public interface IComponentHTMLAngularBase<J extends ComponentBase>
      *
      * @return
      */
-    HashMap<Enum, String> getAttributesAll();
+    Map<Enum, String> getAttributesAll();
 
     /**
      * Returns the DTO currently mapped
      *
+     * @param <T> JavascriptPart
      * @param name The name of the DTO to map
+     * @param classType The class type
      * @return Null if not available
      */
      <T extends JavaScriptPart> T getDto(String name, Class<T> classType);

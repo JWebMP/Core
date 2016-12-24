@@ -131,7 +131,6 @@ public class VerticalTimelineTest extends BaseTestClass
                 + "				</div>\n"
                 + "			</div>\n"
                 + "		</section>\n"
-                + "		<script src=\"bower_components/jwebswing-moderniz/modernizr.js\" type=\"text/javascript\"></script>\n"
                 + "		<script src=\"bower_components/jquery-3/dist/jquery.js\" type=\"text/javascript\"></script>\n"
                 + "		<script src=\"bower_components/jquery-migrate/jquery-migrate.js\" type=\"text/javascript\"></script>\n"
                 + "		<script src=\"bower_components/bootstrap/dist/js/bootstrap.js\" type=\"text/javascript\"></script>\n"

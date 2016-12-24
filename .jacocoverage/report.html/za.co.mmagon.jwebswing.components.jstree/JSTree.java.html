@@ -16,8 +16,10 @@
  */
 package za.co.mmagon.jwebswing.components.jstree;
 
-import za.co.mmagon.jwebswing.components.newcomponents.*;
 import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.base.servlets.interfaces.IDataComponent;
+import za.co.mmagon.jwebswing.components.jstree.themes.JSTreeTheme;
+import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
 
 /**
  * An implementation of the jsTree project.
@@ -26,31 +28,69 @@ import za.co.mmagon.jwebswing.base.html.Div;
  * @since 29 Aug 2015
  * @version 1.0
  */
-public class JSTree extends Div&lt;JSTreeChildren, JSTreeAttributes, JSTreeFeatures, JSTreeEvents, JSTree&gt;
+public class JSTree extends Div&lt;JSTreeChildren, JSTreeAttributes, JSTreeFeatures, JSTreeEvents, JSTree&gt; implements IDataComponent&lt;JSTreeData&gt;
 {
 
     private static final long serialVersionUID = 1L;
     private JSTreeFeature feature;
+    private JSTreeData data;
 
     public JSTree()
-<span class="nc" id="L36">    {</span>
-<span class="nc" id="L37">        addFeature(getFeature());</span>
-<span class="nc" id="L38">    }</span>
+<span class="fc" id="L39">    {</span>
+<span class="fc" id="L40">    }</span>
+
+    @Override
+    public void preConfigure()
+    {
+<span class="fc" id="L45">        addFeature(getFeature());</span>
+<span class="fc" id="L46">    }</span>
+
+    @Override
+    public JSTreeData getData()
+    {
+<span class="nc" id="L51">        return data;</span>
+    }
+
+    public void setData(JSTreeData data)
+    {
+<span class="nc" id="L56">        this.data = data;</span>
+<span class="nc" id="L57">    }</span>
 
     public final JSTreeFeature getFeature()
     {
-<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (feature == null)</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        if (feature == null)</span>
         {
-<span class="nc" id="L44">            feature = new JSTreeFeature(this);</span>
+<span class="fc" id="L63">            feature = new JSTreeFeature(this);</span>
         }
-<span class="nc" id="L46">        return feature;</span>
+<span class="fc" id="L65">        return feature;</span>
     }
 
     @Override
     public JSTreeOptions getOptions()
     {
-<span class="nc" id="L52">        return getFeature().getOptions();</span>
+<span class="nc" id="L71">        return getFeature().getOptions();</span>
     }
 
+    /**
+     * Sets if this data must come from the Ajax data server or be rendered in line
+     *
+     * @return
+     */
+    @Override
+    public boolean isAjax()
+    {
+<span class="fc" id="L82">        return true;</span>
+    }
+
+    /**
+     * Set the tree theme
+     *
+     * @param &lt;J&gt;
+     * @param theme
+     */
+    public &lt;J extends Theme &amp; JSTreeTheme&gt; void setTheme(J theme)
+    {
+<span class="nc" id="L93">        theme.getCssReferences().forEach(this::addCssReference);</span>
+<span class="nc" id="L94">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

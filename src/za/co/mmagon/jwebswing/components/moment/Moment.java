@@ -18,9 +18,7 @@ package za.co.mmagon.jwebswing.components.moment;
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -51,7 +49,7 @@ public class Moment extends Div<MomentChildren, MomentAttributes, MomentFeatures
      */
     public Moment()
     {
-        
+
     }
 
     /**
@@ -122,6 +120,7 @@ public class Moment extends Div<MomentChildren, MomentAttributes, MomentFeatures
     {
         return getFeature().getOptions();
     }
+    
 
     /**
      * Returns the assigned date
@@ -192,12 +191,14 @@ public class Moment extends Div<MomentChildren, MomentAttributes, MomentFeatures
     {
         if (!isConfigured())
         {
+            addFeature(getFeature());
             if (angularModule == null)
             {
                 angularModule = new MomentAngularModule(getPage());
             }
-            getPage().getAngular().addModule(angularModule);
+            getAngularModules().add(angularModule);
             addAttribute(MomentAttributes.am_time_ago, buildAttributeString());
+            getPage().getOptions().setAngularEnabled(true);
         }
         super.preConfigure();
     }
@@ -222,18 +223,18 @@ public class Moment extends Div<MomentChildren, MomentAttributes, MomentFeatures
         if (!getAppliedFilters().isEmpty())
         {
             getAppliedFilters().entrySet().stream().forEach((entry)
-                    -> 
-                    {
-                        MomentFilters key = entry.getKey();
-                        String value = entry.getValue();
-                        if (value != null)
-                        {
-                            sb.append(" | ").append(key).append(" : '").append(value).append("'");
-                        }
-                        else
-                        {
-                            sb.append(" | ").append(key);
-                        }
+                    ->
+            {
+                MomentFilters key = entry.getKey();
+                String value = entry.getValue();
+                if (value != null)
+                {
+                    sb.append(" | ").append(key).append(" : '").append(value).append("'");
+                }
+                else
+                {
+                    sb.append(" | ").append(key);
+                }
             });
         }
         return sb.toString();
@@ -243,10 +244,12 @@ public class Moment extends Div<MomentChildren, MomentAttributes, MomentFeatures
      * The default date formatter which is parsed
      */
     private static final SimpleDateFormat DateFormatter = (SimpleDateFormat) SimpleDateFormat.getInstance();// new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     static
     {
         DateFormatter.applyPattern("yyyy-MM-dd HH:mm:ss");
     }
+
     /**
      * Parses a custom-formatted date into a moment object that can be used with the am-time-ago directive and the other filters. For example, the following code will accept dates that are formatted
      * like "2015.04.25 22:00:15':
@@ -413,7 +416,5 @@ public class Moment extends Div<MomentChildren, MomentAttributes, MomentFeatures
         {
             return name().toLowerCase();
         }
-
     }
-
 }
