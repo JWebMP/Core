@@ -16,15 +16,18 @@
  */
 package za.co.mmagon.jwebswing;
 
-import java.util.*;
-import za.co.mmagon.jwebswing.base.*;
-import za.co.mmagon.jwebswing.base.ajax.*;
-import za.co.mmagon.jwebswing.base.exceptions.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.*;
+import java.util.ArrayList;
+import java.util.List;
+import za.co.mmagon.jwebswing.base.ComponentEventBase;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
+import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
+import za.co.mmagon.jwebswing.base.exceptions.NullComponentException;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 
 /**
  * Container Class for Events. Splits from the component hierarchy
@@ -42,6 +45,16 @@ public class Event<A extends JavaScriptPart, J extends Event>
     private static final long serialVersionUID = 1L;
 
     /**
+     * The variables to return
+     */
+    private List<String> variables;
+
+    /**
+     * A list of all queries to execute on ajax response
+     */
+    private List<Event> onDemandQueries;
+
+    /**
      * Creates an event with the given component and type
      *
      * @param eventTypes
@@ -52,6 +65,63 @@ public class Event<A extends JavaScriptPart, J extends Event>
         this(eventTypes.name(), eventTypes);
         setComponent(component);
         component.getPage().getOptions().setAngularEnabled(true);
+    }
+
+    /**
+     * Creates an event with the given component and type
+     *
+     * @param component
+     */
+    public Event(ComponentHierarchyBase component)
+    {
+        this(EventTypes.undefined, component);
+    }
+
+    /**
+     * Constructs an event with the given name
+     *
+     * @param name
+     * @param eventType
+     */
+    public Event(String name, EventTypes eventType)
+    {
+        this(name, eventType, null);
+    }
+
+    /**
+     * Constructs an event with the given name
+     *
+     * @param name
+     */
+    public Event(String name)
+    {
+        this(name, EventTypes.undefined);
+    }
+
+    /**
+     * Constructs an event with the given name
+     *
+     * @param name      The name of this event
+     * @param eventType The event type of this event
+     * @param component The component type of this event
+     */
+    public Event(String name, EventTypes eventType, ComponentHierarchyBase component)
+    {
+        super(ComponentTypes.Event);
+        setName(name);
+        this.component = component;
+        setEventType(eventType);
+    }
+
+    /**
+     * Constructs an event with the given name
+     *
+     * @param name      The name of this event
+     * @param component The component type of this event
+     */
+    public Event(String name, ComponentHierarchyBase component)
+    {
+        this(name, EventTypes.undefined, component);
     }
 
     /**
@@ -76,16 +146,11 @@ public class Event<A extends JavaScriptPart, J extends Event>
     }
 
     /**
-     * The variables to return
-     */
-    private ArrayList<String> variables;
-
-    /**
      * Render the variable return array
      *
      * @return
      */
-    public String renderVariables()
+    protected String renderVariables()
     {
         final StringBuilder s = new StringBuilder("[");
         getVariables().stream().forEach((event) ->
@@ -115,7 +180,7 @@ public class Event<A extends JavaScriptPart, J extends Event>
      * @return
      */
     @Override
-    public ArrayList<String> getVariables()
+    public List<String> getVariables()
     {
         if (variables == null)
         {
@@ -129,35 +194,9 @@ public class Event<A extends JavaScriptPart, J extends Event>
      *
      * @param variables
      */
-    public void setVariables(ArrayList<String> variables)
+    public void setVariables(List<String> variables)
     {
         this.variables = variables;
-    }
-
-    /**
-     * Constructs an event with the given name
-     *
-     * @param name
-     * @param eventType
-     */
-    public Event(String name, EventTypes eventType)
-    {
-        this(name, eventType, null);
-    }
-
-    /**
-     * Constructs an event with the given name
-     *
-     * @param name      The name of this event
-     * @param eventType The event type of this event
-     * @param component The component type of this event
-     */
-    public Event(String name, EventTypes eventType, ComponentHierarchyBase component)
-    {
-        super(ComponentTypes.Event);
-        setName(name);
-        this.component = component;
-        setEventType(eventType);
     }
 
     /**
@@ -186,7 +225,7 @@ public class Event<A extends JavaScriptPart, J extends Event>
      *
      * @param component
      */
-    public void setComponent(ComponentHierarchyBase component)
+    public final void setComponent(ComponentHierarchyBase component)
     {
         if (component == null)
         {
@@ -227,4 +266,52 @@ public class Event<A extends JavaScriptPart, J extends Event>
         }
         return (J) this;
     }
+
+    /**
+     * Adds an on demand event to be performed after ajax response
+     *
+     * @param event
+     *
+     * @return
+     */
+    public J addOnDemandEvent(Event event)
+    {
+        getOnDemandQueries().add(event);
+        return (J) this;
+    }
+
+    /**
+     * Return all the queries to execute on ajax response
+     *
+     * @return
+     */
+    public List<Event> getOnDemandQueries()
+    {
+        if (onDemandQueries == null)
+        {
+            onDemandQueries = new ArrayList<>();
+        }
+        return onDemandQueries;
+    }
+
+    /**
+     * Returns all queries that are executed on ajax response
+     *
+     * @param onDemandQueries
+     */
+    public void setOnDemandQueries(List<Event> onDemandQueries)
+    {
+        this.onDemandQueries = onDemandQueries;
+    }
+
+    @Override
+    public void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            assignFunctionsToComponent();
+        }
+        super.preConfigure();
+    }
+
 }

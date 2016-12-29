@@ -38,20 +38,20 @@ public class JSTreeFeature extends Feature&lt;JSTreeOptions, JSTreeFeature&gt; i
     @Override
     public JSTreeOptions getOptions()
     {
-<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (options == null)</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (options == null)</span>
         {
-<span class="nc" id="L43">            options = new JSTreeOptions((JSTree) getComponent());</span>
+<span class="fc" id="L43">            options = new JSTreeOptions((JSTree) getComponent());</span>
         }
-<span class="nc" id="L45">        return options;</span>
+<span class="fc" id="L45">        return options;</span>
     }
 
     @Override
     public void assignFunctionsToComponent()
     {
-<span class="nc" id="L51">        String requiredString = getComponent().getJQueryID() + &quot;jstree(&quot;;</span>
-<span class="nc" id="L52">        requiredString += getOptions().toString();</span>
-<span class="nc" id="L53">        requiredString += &quot;);&quot; + getNewLine();</span>
-<span class="nc" id="L54">        addQuery(requiredString);</span>
-<span class="nc" id="L55">    }</span>
+<span class="fc" id="L51">        String requiredString = getComponent().getJQueryID() + &quot;jstree(&quot;;</span>
+<span class="fc" id="L52">        requiredString += getOptions().toString();</span>
+<span class="fc" id="L53">        requiredString += &quot;);&quot; + getNewLine();</span>
+<span class="fc" id="L54">        addQuery(requiredString);</span>
+<span class="fc" id="L55">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

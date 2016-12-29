@@ -17,8 +17,12 @@
 package za.co.mmagon.jwebswing.components.jstree;
 
 import java.util.Map;
+import za.co.mmagon.JWebSwingSiteBinder;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.servlets.interfaces.IDataComponent;
+import za.co.mmagon.jwebswing.components.jstree.events.JSTreeRefreshEvent;
+import za.co.mmagon.jwebswing.components.jstree.options.functions.JSTreeCoreDataFunction;
+import za.co.mmagon.jwebswing.components.jstree.themes.JSTreeDefaultTheme;
 import za.co.mmagon.jwebswing.components.jstree.themes.JSTreeTheme;
 import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
 
@@ -45,12 +49,15 @@ public class JSTree extends Div<JSTreeChildren, JSTreeAttributes, JSTreeFeatures
     public void preConfigure()
     {
         getPage().getOptions().setjQueryEnabled(true);
+        getOptions().getCore().getData().setUrl(JWebSwingSiteBinder.getDataLocation().replace("/", "") + "?component=" + getID());
+        getOptions().getCore().getData().setData(new JSTreeCoreDataFunction());
         super.preConfigure();
     }
 
     @Override
     public JSTreeData getData(Map<String, String[]> params)
     {
+        onGetData(params);
         String[] ids = params.get("id");
         String id = ids[0];
         if (id.equalsIgnoreCase("#"))
@@ -62,6 +69,16 @@ public class JSTree extends Div<JSTreeChildren, JSTreeAttributes, JSTreeFeatures
             return data.findNode(id).getChildNodes();
             //go through the nodes looking for the next id item
         }
+    }
+
+    /**
+     * Execute something before get data is called
+     *
+     * @param params
+     */
+    protected void onGetData(Map<String, String[]> params)
+    {
+
     }
 
     public void setData(JSTreeData data)
@@ -93,5 +110,19 @@ public class JSTree extends Div<JSTreeChildren, JSTreeAttributes, JSTreeFeatures
     public <J extends Theme & JSTreeTheme> void setTheme(J theme)
     {
         theme.getCssReferences().forEach(this::addCssReference);
+        if (!JSTreeDefaultTheme.class.isAssignableFrom(theme.getClass()))
+        {
+            getOptions().getCore().getThemes().setName(theme.getName());
+        }
+    }
+
+    /**
+     * Returns a new event that refreshes the tree
+     *
+     * @return
+     */
+    public JSTreeRefreshEvent getRefreshEvent()
+    {
+        return new JSTreeRefreshEvent(this);
     }
 }

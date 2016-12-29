@@ -40,6 +40,8 @@ public class Paragraph extends Component<ParagraphChildren, ParagraphAttributes,
         implements BodyChildren, NoNewLineForRawText, ParagraphChildren, DetailsChildren, JQUITabsChildren
 {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Constructs a blank paragraph
      */
@@ -58,4 +60,24 @@ public class Paragraph extends Component<ParagraphChildren, ParagraphAttributes,
         super("p", ComponentTypes.Paragraph);
         setText(text);
     }
+
+    /**
+     * Don't use the bind attribute, append in curly braces
+     *
+     * @param variableName
+     */
+    @Override
+    public void bind(String variableName)
+    {
+
+        if (variableName.contains("{{"))
+        {
+            setText(getText(0) + variableName);
+        }
+        else
+        {
+            setText(getText(0) + "{{" + variableName + "}}");
+        }
+    }
+
 }

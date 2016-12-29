@@ -63,6 +63,26 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     private Boolean multiple;
 
+    /**
+     * theme configuration object
+     */
+    private JSTreeThemeOptions themes;
+    /**
+     * if left as true web workers will be used to parse incoming JSON data where possible, so that the UI will not be blocked by large requests. Workers are however about 30% slower. Defaults to true
+     */
+    private Boolean worker;
+    /**
+     * Force node text to plain text (and escape HTML). Defaults to false
+     */
+    @JsonProperty("force_text")
+    private Boolean forceText;
+
+    /**
+     * Should the node should be toggled if the text is double clicked . Defaults to true
+     */
+    @JsonProperty("dblclick_toggle")
+    private Boolean doubleClickToggle;
+
     public JSTreeCoreOptions()
     {
 
@@ -192,6 +212,90 @@ public class JSTreeCoreOptions extends JavaScriptPart
     public void setMultiple(Boolean multiple)
     {
         this.multiple = multiple;
+    }
+
+    /**
+     * theme configuration object
+     *
+     * @return
+     */
+    public JSTreeThemeOptions getThemes()
+    {
+        if (themes == null)
+        {
+            themes = new JSTreeThemeOptions();
+        }
+        return themes;
+    }
+
+    /**
+     * theme configuration object
+     *
+     * @param themes
+     */
+    public void setThemes(JSTreeThemeOptions themes)
+    {
+        this.themes = themes;
+    }
+
+    /**
+     * if left as true web workers will be used to parse incoming JSON data where possible, so that the UI will not be blocked by large requests. Workers are however about 30% slower. Defaults to true
+     *
+     * @return
+     */
+    public Boolean getWorker()
+    {
+        return worker;
+    }
+
+    /**
+     * if left as true web workers will be used to parse incoming JSON data where possible, so that the UI will not be blocked by large requests. Workers are however about 30% slower. Defaults to true
+     *
+     * @param worker
+     */
+    public void setWorker(Boolean worker)
+    {
+        this.worker = worker;
+    }
+
+    /**
+     * Force node text to plain text (and escape HTML). Defaults to false
+     *
+     * @return
+     */
+    public Boolean getForceText()
+    {
+        return forceText;
+    }
+
+    /**
+     * Force node text to plain text (and escape HTML). Defaults to false
+     *
+     * @param forceText
+     */
+    public void setForceText(Boolean forceText)
+    {
+        this.forceText = forceText;
+    }
+
+    /**
+     * Should the node should be toggled if the text is double clicked . Defaults to true
+     *
+     * @return
+     */
+    public Boolean getDoubleClickToggle()
+    {
+        return doubleClickToggle;
+    }
+
+    /**
+     * Should the node should be toggled if the text is double clicked . Defaults to true
+     *
+     * @param doubleClickToggle
+     */
+    public void setDoubleClickToggle(Boolean doubleClickToggle)
+    {
+        this.doubleClickToggle = doubleClickToggle;
     }
 
 }

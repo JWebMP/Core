@@ -64,14 +64,14 @@ public class AjaxReceiverServlet extends JWDefaultServlet
             AjaxCall ajaxCall = JavaScriptPart.From(request.getInputStream(), AjaxCall.class);
             if (ajaxCall.getComponentId() == null)
             {
-                LOG.log(Level.SEVERE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Security]-[Component ID Not Found]");
+                LOG.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Component ID Not Found]", request.getSession().getId());
                 throw new InvalidRequestException("There is no Component ID in this call.");
             }
 
             String componentId = ajaxCall.getComponentId();
             if (componentId == null || componentId.isEmpty())
             {
-                LOG.log(Level.FINE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Security]-[Component ID Incorrect]");
+                LOG.log(Level.FINE, "[SessionID]-[{0}];[Security]-[Component ID Incorrect]", request.getSession().getId());
                 throw new InvalidRequestException("Component ID Was Incorrect.");
             }
 
@@ -85,20 +85,20 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 
             if (triggerComponent == null)
             {
-                LOG.log(Level.SEVERE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Security]-[Invalid Component Specified]");
+                LOG.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Invalid Component Specified]", request.getSession().getId());
                 throw new MissingComponentException("Component could not be found to process any events.");
             }
 
             Date datetime = ajaxCall.getDatetime();
             if (datetime == null)
             {
-                LOG.log(Level.FINE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Security]-[Date Time Incorrect]");
+                LOG.log(Level.FINE, "[SessionID]-[{0}];[Security]-[Date Time Incorrect]", request.getSession().getId());
                 throw new InvalidRequestException("Invalid Date Time Value");
             }
             EventTypes eventType = ajaxCall.getEventType();
             if (eventType == null)
             {
-                LOG.log(Level.FINE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Security]-[Event Type Incorrect]");
+                LOG.log(Level.FINE, "[SessionID]-[{0}];[Security]-[Event Type Incorrect]", request.getSession().getId());
                 throw new InvalidRequestException("Invalid Event Type");
             }
             _eventType = eventType.toString();
@@ -106,7 +106,7 @@ public class AjaxReceiverServlet extends JWDefaultServlet
             EventTypes eventTypeFrom = ajaxCall.getEventTypeFrom();
             if (eventTypeFrom == null)
             {
-                LOG.log(Level.FINE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Security]-[Event From Incorrect]");
+                LOG.log(Level.FINE, "[SessionID]-[{0}];[Security]-[Event From Incorrect]", request.getSession().getId());
                 throw new InvalidRequestException("Invalid Event Type From");
             }
 
@@ -114,7 +114,7 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 
             if (value == null)
             {
-                LOG.log(Level.FINE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Security]-[Value Is Missing]");
+                LOG.log(Level.FINE, "[SessionID]-[{0}];[Security]-[Value Is Missing]", request.getSession().getId());
                 throw new InvalidRequestException("Invalid Event Value");
             }
 
@@ -125,8 +125,9 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 
             for (Iterator<ComponentEventBase> iterator = events.iterator(); iterator.hasNext();)
             {
-                Event next = (Event) iterator.next();
-                next.fireEvent(ajaxCall, ajaxResponse);
+                Event event = (Event) iterator.next();
+                event.fireEvent(ajaxCall, ajaxResponse);
+                ajaxResponse.addComponent(event);
             }
 
             fireTime = ajaxCallObjectCreated.getTime() - new Date().getTime();
@@ -201,9 +202,10 @@ public class AjaxReceiverServlet extends JWDefaultServlet
                 response.getWriter().write(output);
                 //LOG.log(Level.FINE,"[Ajax Reply]-[" + output + "]");
                 long transferTime = new Date().getTime() - dataTransferDate.getTime();
-                LOG.config("[SessionID]-[" + request.getSession().getId() + "];[EventType]-[" + _eventType + "];[Render Time]-[" + renderTime + "];"
-                        + "[Data Size]-[" + output.length() + "];[Transer Time]-[" + (transferTime) + "];"
-                        + "[Fire Time]-[" + fireTime + "]");
+                LOG.log(Level.CONFIG, "[SessionID]-[{0}];[EventType]-[{1}];[Render Time]-[{2}];[Data Size]-[{3}];[Transer Time]-[{4}];[Fire Time]-[{5}]", new Object[]
+                {
+                    request.getSession().getId(), _eventType, renderTime, output.length(), transferTime, fireTime
+                });
             }
             catch (IOException io)
             {
@@ -231,7 +233,7 @@ public class AjaxReceiverServlet extends JWDefaultServlet
             super.doPost(request, response);
             processRequest(request, response);
         }
-        catch (Exception e)
+        catch (IOException | ServletException e)
         {
             LOG.log(Level.SEVERE, "Error in post", e);
         }

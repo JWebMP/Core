@@ -329,9 +329,9 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
     @Override
     public boolean equals(Object obj)
     {
-<span class="fc bfc" id="L332" title="All 2 branches covered.">        if (this == obj)</span>
+<span class="pc bpc" id="L332" title="1 of 2 branches missed.">        if (this == obj)</span>
         {
-<span class="fc" id="L334">            return true;</span>
+<span class="nc" id="L334">            return true;</span>
         }
 <span class="pc bpc" id="L336" title="1 of 2 branches missed.">        if (obj == null)</span>
         {
@@ -428,7 +428,7 @@ public class ComponentFeatureBase&lt;F extends GlobalFeatures, J extends Compone
         {
 <span class="nc" id="L429">            LOG.log(Level.WARNING,&quot;Tried to add a non-feature to the feature collection&quot;);</span>
         }
-<span class="fc bfc" id="L431" title="All 2 branches covered.">        else if (!getFeatures().contains((F) feature))</span>
+<span class="pc bpc" id="L431" title="1 of 2 branches missed.">        else if (!getFeatures().contains((F) feature))</span>
         {
 <span class="fc" id="L433">            getFeatures().add((F) feature);</span>
         }

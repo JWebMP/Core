@@ -5,9 +5,7 @@ import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.base.html.Area;
 import za.co.mmagon.jwebswing.components.jqimagemap.imagemap.JQImageMap;
-import za.co.mmagon.jwebswing.components.jqueryui.position.Position;
-import za.co.mmagon.jwebswing.components.jqueryui.position.PositionLocationHorizontal;
-import za.co.mmagon.jwebswing.components.jqueryui.position.PositionLocationVertical;
+import za.co.mmagon.jwebswing.components.jqueryui.position.*;
 
 /**
  *
@@ -32,11 +30,11 @@ public class PositionTest extends BaseTestClass
         Position instance = new Position(PositionLocationHorizontal.left, PositionLocationVertical.top, PositionLocationHorizontal.left, PositionLocationVertical.top, area);
         System.out.println(instance.toString());
         String expResult = "{\n"
-                + "  myX : \"left\",\n"
-                + "  myY : \"top\",\n"
-                + "  atX : \"left\",\n"
-                + "  atY : \"top\",\n"
-                + "  of : \"#of\"\n"
+                + "  \"myX\" : \"left\",\n"
+                + "  \"myY\" : \"top\",\n"
+                + "  \"atX\" : \"left\",\n"
+                + "  \"atY\" : \"top\",\n"
+                + "  \"of\" : \"#of\"\n"
                 + "}"
                 + "";
         String result = instance.toString();

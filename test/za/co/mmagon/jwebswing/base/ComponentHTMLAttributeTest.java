@@ -16,13 +16,15 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import org.junit.*;
-import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.base.ajax.*;
-import za.co.mmagon.jwebswing.base.events.click.*;
-import za.co.mmagon.jwebswing.base.html.*;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
-import za.co.mmagon.jwebswing.components.pools.jquery.*;
+import org.junit.Assert;
+import org.junit.Test;
+import za.co.mmagon.jwebswing.Event;
+import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
+import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
+import za.co.mmagon.jwebswing.base.events.click.ClickAdapter;
+import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.pools.jquery.JQueryReferencePool;
 
 /**
  *
@@ -113,7 +115,8 @@ public class ComponentHTMLAttributeTest
                 + "  \"tag\" : \"abbr\",\n"
                 + "  \"attributesGlobal\" : {\n"
                 + "    \"id\" : \"shell\"\n"
-                + "  }\n"
+                + "  },\n"
+                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentHTMLAttributeBase\"\n"
                 + "}";
         String shell2Expected = "{\n"
                 + "  \"id\" : \"shell2\",\n"
@@ -147,7 +150,8 @@ public class ComponentHTMLAttributeTest
                 + "  \"tag\" : \"abbr\",\n"
                 + "  \"attributesGlobal\" : {\n"
                 + "    \"id\" : \"shell2\"\n"
-                + "  }\n"
+                + "  },\n"
+                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentHTMLAttributeBase\"\n"
                 + "}";
         Assert.assertEquals(shell.toString(), shellExpected);
         Assert.assertEquals(shell2.toString(), shell2Expected);

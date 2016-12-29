@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.components.jstree;
 
-import com.armineasy.injection.GuiceContext;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.*;
@@ -43,6 +42,13 @@ public class JSTreeOptions extends JavaScriptPart
      * holds all the default options used when creating new instances
      */
     private JSTreeDefaultOptions defaults;
+    /**
+     * holds all jstree related functions and variables, including the actual class and methods to create, access and manipulate instances.
+     */
+    private JSTreeCoreOptions core;
+    
+    
+    
     /**
      * stores all loaded jstree plugins (used internally)
      */
@@ -130,9 +136,9 @@ public class JSTreeOptions extends JavaScriptPart
     private JSTree tree;
 
     public JSTreeOptions(JSTree tree)
-<span class="nc" id="L133">    {</span>
-<span class="nc" id="L134">        this.tree = tree;</span>
-<span class="nc" id="L135">    }</span>
+<span class="fc" id="L139">    {</span>
+<span class="fc" id="L140">        this.tree = tree;</span>
+<span class="fc" id="L141">    }</span>
 
     /**
      * holds all the default options used when creating new instances
@@ -141,11 +147,11 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public JSTreeDefaultOptions getDefaults()
     {
-<span class="nc bnc" id="L144" title="All 2 branches missed.">        if (defaults == null)</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">        if (defaults == null)</span>
         {
-<span class="nc" id="L146">            defaults = GuiceContext.Injector().getInstance(JSTreeDefaultOptions.class);</span>
+<span class="nc" id="L152">            defaults = new JSTreeDefaultOptions();</span>
         }
-<span class="nc" id="L148">        return defaults;</span>
+<span class="nc" id="L154">        return defaults;</span>
     }
 
     /**
@@ -155,8 +161,8 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public void setDefaults(JSTreeDefaultOptions defaults)
     {
-<span class="nc" id="L158">        this.defaults = defaults;</span>
-<span class="nc" id="L159">    }</span>
+<span class="nc" id="L164">        this.defaults = defaults;</span>
+<span class="nc" id="L165">    }</span>
 
     /**
      * stores all loaded jstree plugins (used internally)
@@ -165,11 +171,11 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public List&lt;JSTreePlugins&gt; getPlugins()
     {
-<span class="nc bnc" id="L168" title="All 2 branches missed.">        if (plugins == null)</span>
+<span class="nc bnc" id="L174" title="All 2 branches missed.">        if (plugins == null)</span>
         {
-<span class="nc" id="L170">            plugins = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L176">            plugins = new ArrayList&lt;&gt;();</span>
         }
-<span class="nc" id="L172">        return plugins;</span>
+<span class="nc" id="L178">        return plugins;</span>
     }
 
     /**
@@ -179,8 +185,8 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public void setPlugins(List&lt;JSTreePlugins&gt; plugins)
     {
-<span class="nc" id="L182">        this.plugins = plugins;</span>
-<span class="nc" id="L183">    }</span>
+<span class="nc" id="L188">        this.plugins = plugins;</span>
+<span class="nc" id="L189">    }</span>
 
     /**
      * specifies the jstree version in use
@@ -190,7 +196,7 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public String getVersion()
     {
-<span class="nc" id="L193">        return version;</span>
+<span class="nc" id="L199">        return version;</span>
     }
 
     /**
@@ -201,8 +207,8 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public void setVersion(String version)
     {
-<span class="nc" id="L204">        this.version = version;</span>
-<span class="nc" id="L205">    }</span>
+<span class="nc" id="L210">        this.version = version;</span>
+<span class="nc" id="L211">    }</span>
 
     /**
      * This plugin adds additional information about selection changes. Once included in the plugins config option, each changed.jstree event data will contain a new property named changed, which will
@@ -212,7 +218,7 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public boolean isExtendedChangeDetails()
     {
-<span class="nc" id="L215">        return extendedChangeDetails;</span>
+<span class="nc" id="L221">        return extendedChangeDetails;</span>
     }
 
     /**
@@ -224,17 +230,17 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public void setExtendedChangeDetails(boolean extendedChangeDetails, JSTreeOnChangedPluginAdapter event)
     {
-<span class="nc" id="L227">        this.extendedChangeDetails = extendedChangeDetails;</span>
-<span class="nc bnc" id="L228" title="All 2 branches missed.">        if (this.extendedChangeDetails)</span>
+<span class="nc" id="L233">        this.extendedChangeDetails = extendedChangeDetails;</span>
+<span class="nc bnc" id="L234" title="All 2 branches missed.">        if (this.extendedChangeDetails)</span>
         {
-<span class="nc" id="L230">            tree.addEvent(event);</span>
-<span class="nc" id="L231">            getPlugins().add(JSTreePlugins.Changed);</span>
+<span class="nc" id="L236">            tree.addEvent(event);</span>
+<span class="nc" id="L237">            getPlugins().add(JSTreePlugins.Changed);</span>
         }
         else
         {
-<span class="nc" id="L235">            getPlugins().remove(JSTreePlugins.Changed);</span>
+<span class="nc" id="L241">            getPlugins().remove(JSTreePlugins.Changed);</span>
         }
-<span class="nc" id="L237">    }</span>
+<span class="nc" id="L243">    }</span>
 
     /**
      * A reference back to the tree
@@ -243,7 +249,7 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public JSTree getTree()
     {
-<span class="nc" id="L246">        return tree;</span>
+<span class="nc" id="L252">        return tree;</span>
     }
 
     /**
@@ -253,8 +259,8 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public void setTree(JSTree tree)
     {
-<span class="nc" id="L256">        this.tree = tree;</span>
-<span class="nc" id="L257">    }</span>
+<span class="nc" id="L262">        this.tree = tree;</span>
+<span class="nc" id="L263">    }</span>
 
     /**
      * This plugin renders checkbox icons in front of each node, making multiple selection much easier.
@@ -273,12 +279,12 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public JSTreeCheckboxOptions getCheckbox()
     {
-<span class="nc bnc" id="L276" title="All 2 branches missed.">        if (checkbox == null)</span>
+<span class="nc bnc" id="L282" title="All 2 branches missed.">        if (checkbox == null)</span>
         {
-<span class="nc" id="L278">            checkbox = new JSTreeCheckboxOptions();</span>
-<span class="nc" id="L279">            getPlugins().add(JSTreePlugins.Checkbox);</span>
+<span class="nc" id="L284">            checkbox = new JSTreeCheckboxOptions();</span>
+<span class="nc" id="L285">            getPlugins().add(JSTreePlugins.Checkbox);</span>
         }
-<span class="nc" id="L281">        return checkbox;</span>
+<span class="nc" id="L287">        return checkbox;</span>
     }
 
     /**
@@ -298,12 +304,12 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public void setCheckbox(JSTreeCheckboxOptions checkbox)
     {
-<span class="nc bnc" id="L301" title="All 2 branches missed.">        if (checkbox != null)</span>
+<span class="nc bnc" id="L307" title="All 2 branches missed.">        if (checkbox != null)</span>
         {
-<span class="nc" id="L303">            getPlugins().add(JSTreePlugins.Checkbox);</span>
+<span class="nc" id="L309">            getPlugins().add(JSTreePlugins.Checkbox);</span>
         }
-<span class="nc" id="L305">        this.checkbox = checkbox;</span>
-<span class="nc" id="L306">    }</span>
+<span class="nc" id="L311">        this.checkbox = checkbox;</span>
+<span class="nc" id="L312">    }</span>
 
     /**
      * This plugin makes it possible to right click nodes and shows a list of configurable actions in a menu.
@@ -312,12 +318,12 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public JSTreeContextMenuOptions getContextMenu()
     {
-<span class="nc bnc" id="L315" title="All 2 branches missed.">        if (contextMenu == null)</span>
+<span class="nc bnc" id="L321" title="All 2 branches missed.">        if (contextMenu == null)</span>
         {
-<span class="nc" id="L317">            contextMenu = new JSTreeContextMenuOptions();</span>
-<span class="nc" id="L318">            getPlugins().add(JSTreePlugins.ContextMenu);</span>
+<span class="nc" id="L323">            contextMenu = new JSTreeContextMenuOptions();</span>
+<span class="nc" id="L324">            getPlugins().add(JSTreePlugins.ContextMenu);</span>
         }
-<span class="nc" id="L320">        return contextMenu;</span>
+<span class="nc" id="L326">        return contextMenu;</span>
     }
 
     /**
@@ -327,12 +333,12 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public void setContextMenu(JSTreeContextMenuOptions contextMenu)
     {
-<span class="nc bnc" id="L330" title="All 2 branches missed.">        if (contextMenu != null)</span>
+<span class="nc bnc" id="L336" title="All 2 branches missed.">        if (contextMenu != null)</span>
         {
-<span class="nc" id="L332">            getPlugins().add(JSTreePlugins.ContextMenu);</span>
+<span class="nc" id="L338">            getPlugins().add(JSTreePlugins.ContextMenu);</span>
         }
-<span class="nc" id="L334">        this.contextMenu = contextMenu;</span>
-<span class="nc" id="L335">    }</span>
+<span class="nc" id="L340">        this.contextMenu = contextMenu;</span>
+<span class="nc" id="L341">    }</span>
 
     /**
      * This plugin makes it possible to drag and drop tree nodes and rearrange the tree.
@@ -341,12 +347,12 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public JSTreeDragAndDropOptions getDragAndDrop()
     {
-<span class="nc bnc" id="L344" title="All 2 branches missed.">        if (dragAndDrop == null)</span>
+<span class="nc bnc" id="L350" title="All 2 branches missed.">        if (dragAndDrop == null)</span>
         {
-<span class="nc" id="L346">            dragAndDrop = new JSTreeDragAndDropOptions();</span>
-<span class="nc" id="L347">            getPlugins().add(JSTreePlugins.DnD);</span>
+<span class="nc" id="L352">            dragAndDrop = new JSTreeDragAndDropOptions();</span>
+<span class="nc" id="L353">            getPlugins().add(JSTreePlugins.DnD);</span>
         }
-<span class="nc" id="L349">        return dragAndDrop;</span>
+<span class="nc" id="L355">        return dragAndDrop;</span>
     }
 
     /**
@@ -356,12 +362,12 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public void setDragAndDrop(JSTreeDragAndDropOptions dragAndDrop)
     {
-<span class="nc" id="L359">        this.dragAndDrop = dragAndDrop;</span>
-<span class="nc bnc" id="L360" title="All 2 branches missed.">        if (dragAndDrop != null)</span>
+<span class="nc" id="L365">        this.dragAndDrop = dragAndDrop;</span>
+<span class="nc bnc" id="L366" title="All 2 branches missed.">        if (dragAndDrop != null)</span>
         {
-<span class="nc" id="L362">            getPlugins().add(JSTreePlugins.DnD);</span>
+<span class="nc" id="L368">            getPlugins().add(JSTreePlugins.DnD);</span>
         }
-<span class="nc" id="L364">    }</span>
+<span class="nc" id="L370">    }</span>
 
     /**
      * This plugin makes it possible to load nodes in a single request (used with lazy loading).
@@ -370,13 +376,13 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public JSTreeAjaxConfigOptions getMassLoad()
     {
-<span class="nc bnc" id="L373" title="All 2 branches missed.">        if (massLoad == null)</span>
+<span class="nc bnc" id="L379" title="All 2 branches missed.">        if (massLoad == null)</span>
         {
-<span class="nc" id="L375">            massLoad = new JSTreeAjaxConfigOptions();</span>
-<span class="nc" id="L376">            getPlugins().add(JSTreePlugins.Massload);</span>
-<span class="nc" id="L377">            getPlugins().add(JSTreePlugins.State);</span>
+<span class="nc" id="L381">            massLoad = new JSTreeAjaxConfigOptions();</span>
+<span class="nc" id="L382">            getPlugins().add(JSTreePlugins.Massload);</span>
+<span class="nc" id="L383">            getPlugins().add(JSTreePlugins.State);</span>
         }
-<span class="nc" id="L379">        return massLoad;</span>
+<span class="nc" id="L385">        return massLoad;</span>
     }
 
     /**
@@ -386,13 +392,13 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public void setMassLoad(JSTreeAjaxConfigOptions massLoad)
     {
-<span class="nc" id="L389">        this.massLoad = massLoad;</span>
-<span class="nc bnc" id="L390" title="All 2 branches missed.">        if (massLoad != null)</span>
+<span class="nc" id="L395">        this.massLoad = massLoad;</span>
+<span class="nc bnc" id="L396" title="All 2 branches missed.">        if (massLoad != null)</span>
         {
-<span class="nc" id="L392">            getPlugins().add(JSTreePlugins.Massload);</span>
-<span class="nc" id="L393">            getPlugins().add(JSTreePlugins.State);</span>
+<span class="nc" id="L398">            getPlugins().add(JSTreePlugins.Massload);</span>
+<span class="nc" id="L399">            getPlugins().add(JSTreePlugins.State);</span>
         }
-<span class="nc" id="L395">    }</span>
+<span class="nc" id="L401">    }</span>
 
     /**
      * This plugin adds the possibility to search for items in the tree and even to show only matching nodes.
@@ -401,11 +407,11 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public JSTreeSearchOptions getSearch()
     {
-<span class="nc bnc" id="L404" title="All 2 branches missed.">        if (search == null)</span>
+<span class="nc bnc" id="L410" title="All 2 branches missed.">        if (search == null)</span>
         {
-<span class="nc" id="L406">            setSearch(new JSTreeSearchOptions());</span>
+<span class="nc" id="L412">            setSearch(new JSTreeSearchOptions());</span>
         }
-<span class="nc" id="L408">        return search;</span>
+<span class="nc" id="L414">        return search;</span>
     }
 
     /**
@@ -415,12 +421,12 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public void setSearch(JSTreeSearchOptions search)
     {
-<span class="nc" id="L418">        this.search = search;</span>
-<span class="nc bnc" id="L419" title="All 2 branches missed.">        if (search != null)</span>
+<span class="nc" id="L424">        this.search = search;</span>
+<span class="nc bnc" id="L425" title="All 2 branches missed.">        if (search != null)</span>
         {
-<span class="nc" id="L421">            getPlugins().add(JSTreePlugins.Search);</span>
+<span class="nc" id="L427">            getPlugins().add(JSTreePlugins.Search);</span>
         }
-<span class="nc" id="L423">    }</span>
+<span class="nc" id="L429">    }</span>
 
     /**
      * This plugin automatically arranges all sibling nodes according to a comparison config option function, which defaults to alphabetical order.
@@ -429,7 +435,7 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public boolean isSort()
     {
-<span class="nc" id="L432">        return sort;</span>
+<span class="nc" id="L438">        return sort;</span>
     }
 
     /**
@@ -439,12 +445,12 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public void setSort(boolean sort)
     {
-<span class="nc" id="L442">        this.sort = sort;</span>
-<span class="nc bnc" id="L443" title="All 2 branches missed.">        if (sort)</span>
+<span class="nc" id="L448">        this.sort = sort;</span>
+<span class="nc bnc" id="L449" title="All 2 branches missed.">        if (sort)</span>
         {
-<span class="nc" id="L445">            getPlugins().add(JSTreePlugins.Sort);</span>
+<span class="nc" id="L451">            getPlugins().add(JSTreePlugins.Sort);</span>
         }
-<span class="nc" id="L447">    }</span>
+<span class="nc" id="L453">    }</span>
 
     /**
      * This plugin saves all opened and selected nodes in the user's browser, so when returning to the same tree the previous state will be restored.
@@ -453,11 +459,11 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public JSTreeStateOptions getState()
     {
-<span class="nc bnc" id="L456" title="All 2 branches missed.">        if (state == null)</span>
+<span class="nc bnc" id="L462" title="All 2 branches missed.">        if (state == null)</span>
         {
-<span class="nc" id="L458">            setState(new JSTreeStateOptions());</span>
+<span class="nc" id="L464">            setState(new JSTreeStateOptions());</span>
         }
-<span class="nc" id="L460">        return state;</span>
+<span class="nc" id="L466">        return state;</span>
     }
 
     /**
@@ -467,12 +473,12 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public void setState(JSTreeStateOptions state)
     {
-<span class="nc" id="L470">        this.state = state;</span>
-<span class="nc bnc" id="L471" title="All 2 branches missed.">        if (state != null)</span>
+<span class="nc" id="L476">        this.state = state;</span>
+<span class="nc bnc" id="L477" title="All 2 branches missed.">        if (state != null)</span>
         {
-<span class="nc" id="L473">            getPlugins().add(JSTreePlugins.State);</span>
+<span class="nc" id="L479">            getPlugins().add(JSTreePlugins.State);</span>
         }
-<span class="nc" id="L475">    }</span>
+<span class="nc" id="L481">    }</span>
 
     /**
      * This plugin makes it possible to add predefined types for groups of nodes, which means to easily control nesting rules and icon for each group.
@@ -481,12 +487,12 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public Map&lt;String, JSTreeTypesOptions&gt; getTypes()
     {
-<span class="nc bnc" id="L484" title="All 2 branches missed.">        if (types == null)</span>
+<span class="nc bnc" id="L490" title="All 2 branches missed.">        if (types == null)</span>
         {
-<span class="nc" id="L486">            types = new TreeMap&lt;&gt;();</span>
-<span class="nc" id="L487">            getPlugins().add(JSTreePlugins.Types);</span>
+<span class="nc" id="L492">            types = new TreeMap&lt;&gt;();</span>
+<span class="nc" id="L493">            getPlugins().add(JSTreePlugins.Types);</span>
         }
-<span class="nc" id="L489">        return types;</span>
+<span class="nc" id="L495">        return types;</span>
     }
 
     /**
@@ -496,12 +502,12 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public void setTypes(Map&lt;String, JSTreeTypesOptions&gt; types)
     {
-<span class="nc" id="L499">        this.types = types;</span>
-<span class="nc bnc" id="L500" title="All 2 branches missed.">        if (types != null)</span>
+<span class="nc" id="L505">        this.types = types;</span>
+<span class="nc bnc" id="L506" title="All 2 branches missed.">        if (types != null)</span>
         {
-<span class="nc" id="L502">            getPlugins().add(JSTreePlugins.Types);</span>
+<span class="nc" id="L508">            getPlugins().add(JSTreePlugins.Types);</span>
         }
-<span class="nc" id="L504">    }</span>
+<span class="nc" id="L510">    }</span>
 
     /**
      * # represents the root of the tree, for example max_children would control the maximum number of root nodes.
@@ -510,9 +516,9 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public JSTreeTypesOptions addRootType()
     {
-<span class="nc" id="L513">        JSTreeTypesOptions type = new JSTreeTypesOptions();</span>
-<span class="nc" id="L514">        getTypes().put(&quot;#&quot;, type);</span>
-<span class="nc" id="L515">        return type;</span>
+<span class="nc" id="L519">        JSTreeTypesOptions type = new JSTreeTypesOptions();</span>
+<span class="nc" id="L520">        getTypes().put(&quot;#&quot;, type);</span>
+<span class="nc" id="L521">        return type;</span>
     }
 
     /**
@@ -522,9 +528,9 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public JSTreeTypesOptions addDefaultNodeType()
     {
-<span class="nc" id="L525">        JSTreeTypesOptions type = new JSTreeTypesOptions();</span>
-<span class="nc" id="L526">        getTypes().put(&quot;default&quot;, type);</span>
-<span class="nc" id="L527">        return type;</span>
+<span class="nc" id="L531">        JSTreeTypesOptions type = new JSTreeTypesOptions();</span>
+<span class="nc" id="L532">        getTypes().put(&quot;default&quot;, type);</span>
+<span class="nc" id="L533">        return type;</span>
     }
 
     /**
@@ -536,11 +542,11 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public JSTreeUniqueOptions getUnique()
     {
-<span class="nc bnc" id="L539" title="All 2 branches missed.">        if (unique == null)</span>
+<span class="nc bnc" id="L545" title="All 2 branches missed.">        if (unique == null)</span>
         {
-<span class="nc" id="L541">            setUnique(new JSTreeUniqueOptions());</span>
+<span class="nc" id="L547">            setUnique(new JSTreeUniqueOptions());</span>
         }
-<span class="nc" id="L543">        return unique;</span>
+<span class="nc" id="L549">        return unique;</span>
     } 
 
     /**
@@ -552,12 +558,12 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public void setUnique(JSTreeUniqueOptions unique)
     {
-<span class="nc" id="L555">        this.unique = unique;</span>
-<span class="nc bnc" id="L556" title="All 2 branches missed.">        if (unique != null)</span>
+<span class="nc" id="L561">        this.unique = unique;</span>
+<span class="nc bnc" id="L562" title="All 2 branches missed.">        if (unique != null)</span>
         {
-<span class="nc" id="L558">            getPlugins().add(JSTreePlugins.Unique);</span>
+<span class="nc" id="L564">            getPlugins().add(JSTreePlugins.Unique);</span>
         }
-<span class="nc" id="L560">    }</span>
+<span class="nc" id="L566">    }</span>
 
     /**
      * Makes each node appear block level which makes selection easier. May cause slow down for large trees in old browsers.
@@ -566,7 +572,7 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public boolean isWholeRowSelection()
     {
-<span class="nc" id="L569">        return wholeRowSelection;</span>
+<span class="nc" id="L575">        return wholeRowSelection;</span>
     }
 
     /**
@@ -576,12 +582,36 @@ public class JSTreeOptions extends JavaScriptPart
      */
     public void setWholeRowSelection(boolean wholeRowSelection)
     {
-<span class="nc" id="L579">        this.wholeRowSelection = wholeRowSelection;</span>
-<span class="nc bnc" id="L580" title="All 2 branches missed.">        if (wholeRowSelection)</span>
+<span class="nc" id="L585">        this.wholeRowSelection = wholeRowSelection;</span>
+<span class="nc bnc" id="L586" title="All 2 branches missed.">        if (wholeRowSelection)</span>
         {
-<span class="nc" id="L582">            getPlugins().add(JSTreePlugins.WholeRow);</span>
+<span class="nc" id="L588">            getPlugins().add(JSTreePlugins.WholeRow);</span>
         }
-<span class="nc" id="L584">    }</span>
+<span class="nc" id="L590">    }</span>
+    
+    /**
+     * holds all jstree related functions and variables, including the actual class and methods to create, access and manipulate instances.
+     *
+     * @return
+     */
+    public JSTreeCoreOptions getCore()
+    {
+<span class="fc bfc" id="L599" title="All 2 branches covered.">        if (core == null)</span>
+        {
+<span class="fc" id="L601">            core = new JSTreeCoreOptions();</span>
+        }
+<span class="fc" id="L603">        return core;</span>
+    }
+
+    /**
+     * holds all jstree related functions and variables, including the actual class and methods to create, access and manipulate instances.
+     *
+     * @param core
+     */
+    public void setCore(JSTreeCoreOptions core)
+    {
+<span class="nc" id="L613">        this.core = core;</span>
+<span class="nc" id="L614">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

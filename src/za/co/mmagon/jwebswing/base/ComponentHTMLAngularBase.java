@@ -43,8 +43,11 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentBase>
         extends ComponentHTMLAttributeBase<A, F, E, J> implements IComponentHTMLAngularBase<J>
 {
-
     private static final long serialVersionUID = 1L;
+    /**
+     * specifies if angular should be loaded or not
+     */
+    private boolean loadAngular;
 
     /**
      * All the angular attributes for this component
@@ -131,6 +134,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
         if (attributesAngular == null)
         {
             attributesAngular = new HashMap<>();
+            setLoadAngular(true);
         }
         return attributesAngular;
     }
@@ -178,6 +182,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
         if (angularObjects == null)
         {
             angularObjects = new HashMap<>();
+            setLoadAngular(true);
         }
         return angularObjects;
     }
@@ -211,6 +216,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
     public void bind(String variableName)
     {
         addAttribute(AngularAttributes.ngBind, variableName);
+        setLoadAngular(true);
     }
 
     /**
@@ -219,6 +225,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
     public void cloak()
     {
         addAttribute(AngularAttributes.ngCloak, null);
+        setLoadAngular(true);
     }
 
     /**
@@ -231,6 +238,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
         if (angularModules == null)
         {
             setAngularModules(new ArrayList<>());
+            setLoadAngular(true);
         }
         return angularModules;
     }
@@ -255,6 +263,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
         if (angularDirectives == null)
         {
             setAngularDirectives(new ArrayList<>());
+            setLoadAngular(true);
         }
         return angularDirectives;
     }
@@ -279,6 +288,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
         if (angularControllers == null)
         {
             setAngularControllers(new ArrayList<>());
+            setLoadAngular(true);
         }
         return angularControllers;
     }
@@ -291,5 +301,29 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
     public void setAngularControllers(List<AngularControllerBase> angularControllers)
     {
         this.angularControllers = angularControllers;
+    }
+
+    /**
+     * If angular should be loaded
+     * @return 
+     */
+    protected boolean isLoadAngular()
+    {
+        return loadAngular;
+    }
+
+    /**
+     * Sets if angular must be loaded
+     * @param loadAngular 
+     */
+    protected void setLoadAngular(boolean loadAngular)
+    {
+        this.loadAngular = loadAngular;
+    }
+
+    @Override
+    public void preConfigure()
+    {
+        super.preConfigure(); 
     }
 }

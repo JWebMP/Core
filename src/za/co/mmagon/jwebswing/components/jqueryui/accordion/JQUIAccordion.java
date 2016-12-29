@@ -3,9 +3,7 @@ package za.co.mmagon.jwebswing.components.jqueryui.accordion;
 import java.util.ArrayList;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.HeaderText;
-import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
-import za.co.mmagon.jwebswing.base.html.attributes.HeaderTypes;
-import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
+import za.co.mmagon.jwebswing.base.html.attributes.*;
 
 /**
  * Displays collapsible content panels for presenting information in a limited amount of space.
@@ -21,7 +19,8 @@ import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
  * @author Marc Magon
  * @since 2013/01/15
  */
-public class JQUIAccordion extends Div<JQUIAccordionChildren, NoAttributes, JQUIAccordionFeatures, JQUIAccordionEvents, JQUIAccordion> implements JQUIAccordionChildren
+public class JQUIAccordion extends Div<JQUIAccordionChildren, NoAttributes, JQUIAccordionFeatures, JQUIAccordionEvents, JQUIAccordion> 
+        implements JQUIAccordionChildren
 {
 
     private static final long serialVersionUID = 1L;

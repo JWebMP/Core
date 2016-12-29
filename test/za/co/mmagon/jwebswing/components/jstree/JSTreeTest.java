@@ -62,8 +62,8 @@ public class JSTreeTest extends BaseTestClass
         Page p = getInstance();
         JSTree tree = new JSTree();
         tree.setID("id");
-        JSTreeData data = new JSTreeData(tree);
-        JSTreeNode node = new JSTreeNode(tree,"id", "text");
+        JSTreeData data = new JSTreeData();
+        JSTreeNode node = new JSTreeNode("id", "text");
         data.getNodes().add(node);
        /* Assert.assertEquals("[{\n"
                 + "  id : \"id\",\n"

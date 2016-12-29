@@ -87,13 +87,15 @@ public class AngularJsonVariable extends JavaScriptPart<AngularJsonVariable>
         this.variableName = variableName;
         this.variable = variableObject;
     }
-    
+
     /**
      * Gets the DTO Form of this object
      *
      * @param <T>       The type this object actually is
      * @param classType The class type to return
+     *
      * @return The DTO direct from the call
+     *
      * @throws IOException
      */
     public <T extends JavaScriptPart> T getDto(Class<T> classType) throws IOException
@@ -145,7 +147,8 @@ public class AngularJsonVariable extends JavaScriptPart<AngularJsonVariable>
 
     /**
      * Returns the variable if any is applied
-     * @return 
+     *
+     * @return
      */
     public Object getVariable()
     {
@@ -154,7 +157,8 @@ public class AngularJsonVariable extends JavaScriptPart<AngularJsonVariable>
 
     /**
      * Sets the variable if any is applied
-     * @param variable 
+     *
+     * @param variable
      */
     public void setVariable(Serializable variable)
     {
@@ -163,8 +167,10 @@ public class AngularJsonVariable extends JavaScriptPart<AngularJsonVariable>
 
     /**
      * Sets the owning component ID
-     * @return 
+     *
+     * @return
      */
+    @Override
     public String getOwnerId()
     {
         return ownerId;
@@ -172,12 +178,25 @@ public class AngularJsonVariable extends JavaScriptPart<AngularJsonVariable>
 
     /**
      * Gets the owning component ID
-     * @param ownerId 
+     *
+     * @param ownerId
      */
+    @Override
     public void setOwnerId(String ownerId)
     {
         this.ownerId = ownerId;
     }
- 
-    
+
+    /**
+     * Returns the variable object in the format requested
+     * @param <T> Generic type of JavaScript part
+     * @param classType
+     * @return
+     * @throws IOException 
+     */
+    public <T> T getVariable(Class<T> classType) throws IOException
+    {
+        return JavaScriptPart.From(getVariableText(), classType);
+    }
+
 }

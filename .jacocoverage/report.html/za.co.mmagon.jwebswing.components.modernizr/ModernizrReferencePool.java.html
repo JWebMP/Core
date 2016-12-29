@@ -27,9 +27,9 @@ import za.co.mmagon.jwebswing.base.servlets.interfaces.ReferencePool;
  * @author GedMarc
  * @since 20 Apr 2016
  */
-<span class="pc" id="L30">public enum ModernizrReferencePool implements ReferencePool</span>
+<span class="nc" id="L30">public enum ModernizrReferencePool implements ReferencePool</span>
 {
-<span class="fc" id="L32">    ModernizrReference(new JavascriptReference(&quot;Modernizr&quot;, 1.0, &quot;bower_components/jwebswing-moderniz/modernizr.js&quot;,10),null)</span>
+<span class="nc" id="L32">    ModernizrReference(new JavascriptReference(&quot;Modernizr&quot;, 1.0, &quot;bower_components/jwebswing-moderniz/modernizr.js&quot;,10),null)</span>
     ;
     private ModernizrReferencePool()
 <span class="nc" id="L35">    {</span>
@@ -39,17 +39,17 @@ import za.co.mmagon.jwebswing.base.servlets.interfaces.ReferencePool;
     private CSSReference cssReference;
 
     private ModernizrReferencePool(JavascriptReference javaScriptReference, CSSReference cssReference)
-<span class="fc" id="L42">    {</span>
-<span class="fc" id="L43">        this.javaScriptReference = javaScriptReference;</span>
-<span class="fc" id="L44">        this.javaScriptReference.setPriority(RequirementsPriority.First);</span>
+<span class="nc" id="L42">    {</span>
+<span class="nc" id="L43">        this.javaScriptReference = javaScriptReference;</span>
+<span class="nc" id="L44">        this.javaScriptReference.setPriority(RequirementsPriority.First);</span>
         
-<span class="fc" id="L46">        this.cssReference = cssReference;</span>
-<span class="fc" id="L47">    }</span>
+<span class="nc" id="L46">        this.cssReference = cssReference;</span>
+<span class="nc" id="L47">    }</span>
 
     @Override
     public JavascriptReference getJavaScriptReference()
     {
-<span class="fc" id="L52">        return javaScriptReference;</span>
+<span class="nc" id="L52">        return javaScriptReference;</span>
     }
 
     @Override

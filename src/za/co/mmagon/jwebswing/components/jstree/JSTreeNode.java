@@ -45,33 +45,39 @@ public class JSTreeNode extends JavaScriptPart
      */
     @JsonProperty("type")
     private String typeName;
+
     /**
      * All the child nodes, json ignored for ajax called rendering
      */
     @JsonIgnore
     private JSTreeData childNodes;
-    /**
-     * A back reference for the tree
-     */
-    @JsonIgnore
-    private JSTree tree;
 
-    public JSTreeNode(JSTree tree)
+    public JSTreeNode()
     {
-        this.tree = tree;
     }
 
-    public JSTreeNode(JSTree tree, String id, String text, String typeName)
+    /**
+     * Builds a tree node with the given information
+     *
+     * @param id       The ID of the node (don't use default or '#')
+     * @param text     The text for the node
+     * @param typeName The type of the node if specified
+     */
+    public JSTreeNode(String id, String text, String typeName)
     {
-        this(tree);
         this.id = id;
         this.text = text;
         this.typeName = typeName;
     }
 
-    public JSTreeNode(JSTree tree, String id, String text)
+    /**
+     * Constructs a new tree node
+     *
+     * @param id   The id of the tree (don't use default or '#')
+     * @param text The text for the tree
+     */
+    public JSTreeNode(String id, String text)
     {
-        this(tree);
         this.id = id;
         this.text = text;
     }
@@ -145,7 +151,7 @@ public class JSTreeNode extends JavaScriptPart
     {
         if (childNodes == null)
         {
-            setChildNodes(new JSTreeData(tree));
+            setChildNodes(new JSTreeData());
         }
         return childNodes;
     }

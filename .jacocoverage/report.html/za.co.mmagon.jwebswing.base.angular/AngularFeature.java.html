@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.base.angular;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.*;
 import java.util.*;
 import java.util.logging.Level;
@@ -48,31 +49,35 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
     /**
      * The logger for angular
      */
-<span class="fc" id="L51">    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger(&quot;AngularFeature&quot;);</span>
+<span class="fc" id="L52">    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger(&quot;AngularFeature&quot;);</span>
     /**
      * All registered templates
      */
-<span class="fc" id="L55">    private final Map&lt;String, StringBuilder&gt; TemplateScripts = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L56">    @JsonIgnore</span>
+    private final Map&lt;String, StringBuilder&gt; TemplateScripts = new HashMap&lt;&gt;();
     /**
      * All registered variables
      */
-<span class="fc" id="L59">    private final Map&lt;String, StringBuilder&gt; TemplateVariables = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L61">    @JsonIgnore</span>
+    private final Map&lt;String, StringBuilder&gt; TemplateVariables = new HashMap&lt;&gt;();
     /**
      * The application module
      */
+    @JsonIgnore
     private final JWAngularModule jwAngularApp;
     /**
      * The controller module
      */
+    @JsonIgnore
     private final JWAngularController jwAngularController;
     /**
      * The name of this angular application
      */
-<span class="fc" id="L71">    private static String appName = &quot;jwApp&quot;;</span>
+<span class="fc" id="L76">    private static String appName = &quot;jwApp&quot;;</span>
     /**
      * The name of the default controller for this application (rendered last)
      */
-<span class="fc" id="L75">    private static String controllerName = &quot;jwController&quot;;</span>
+<span class="fc" id="L80">    private static String controllerName = &quot;jwController&quot;;</span>
 
     /**
      * All the angular variables
@@ -86,8 +91,8 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public AngularFeature(Component component)
     {
-<span class="fc" id="L89">        this(component, appName, controllerName);</span>
-<span class="fc" id="L90">    }</span>
+<span class="fc" id="L94">        this(component, appName, controllerName);</span>
+<span class="fc" id="L95">    }</span>
 
     /**
      * Adds on the Angular ComponentFeatureBase to the application to allow full data binding
@@ -98,27 +103,26 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public AngularFeature(Component component, String applicationName, String controllerName)
     {
-<span class="fc" id="L101">        super(&quot;AngularFeature&quot;);</span>
-<span class="pc bpc" id="L102" title="1 of 2 branches missed.">        if (component == null)</span>
+<span class="fc" id="L106">        super(&quot;AngularFeature&quot;);</span>
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">        if (component == null)</span>
         {
-<span class="nc" id="L104">            throw new NullComponentException(&quot;An Angular Application must always be tied with a parent component.&quot;);</span>
+<span class="nc" id="L109">            throw new NullComponentException(&quot;An Angular Application must always be tied with a parent component.&quot;);</span>
         }
-<span class="fc" id="L106">        setComponent(component);</span>
-<span class="fc" id="L107">        setJavascriptRenderedElsewhere(true);</span>
+<span class="fc" id="L111">        setComponent(component);</span>
+<span class="fc" id="L112">        setJavascriptRenderedElsewhere(true);</span>
 
-<span class="fc" id="L109">        jwAngularApp = new JWAngularModule(this);</span>
-<span class="fc" id="L110">        jwAngularController = new JWAngularController(this);</span>
-<span class="pc bpc" id="L111" title="2 of 4 branches missed.">        if (applicationName != null &amp;&amp; !applicationName.isEmpty())</span>
+<span class="fc" id="L114">        jwAngularApp = new JWAngularModule(this);</span>
+<span class="fc" id="L115">        jwAngularController = new JWAngularController(this);</span>
+<span class="pc bpc" id="L116" title="2 of 4 branches missed.">        if (applicationName != null &amp;&amp; !applicationName.isEmpty())</span>
         {
-<span class="fc" id="L113">            setAppName(applicationName);</span>
+<span class="fc" id="L118">            setAppName(applicationName);</span>
         }
-<span class="pc bpc" id="L115" title="2 of 4 branches missed.">        if (controllerName != null &amp;&amp; !controllerName.isEmpty())</span>
+<span class="pc bpc" id="L120" title="2 of 4 branches missed.">        if (controllerName != null &amp;&amp; !controllerName.isEmpty())</span>
         {
-<span class="fc" id="L117">            setControllerName(controllerName);</span>
+<span class="fc" id="L122">            setControllerName(controllerName);</span>
         }
-
-<span class="fc" id="L120">        setRenderAfterLoad(false);</span>
-<span class="fc" id="L121">    }</span>
+<span class="fc" id="L124">        setRenderAfterLoad(false);</span>
+<span class="fc" id="L125">    }</span>
 
     /**
      * Compile the template
@@ -126,18 +130,18 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
     @Override
     public void preConfigure()
     {
-<span class="fc bfc" id="L129" title="All 2 branches covered.">        if (!isConfigured())</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">        if (!isConfigured())</span>
         {
-<span class="fc bfc" id="L131" title="All 2 branches covered.">            if (getComponent().getPage().getOptions().isAngularEnabled())</span>
+<span class="fc bfc" id="L135" title="All 2 branches covered.">            if (getComponent().getPage().getOptions().isAngularEnabled())</span>
             {
-<span class="fc" id="L133">                getComponent().addAttribute(AngularAttributes.ngApp, getAppName() + &quot;&quot;);</span>
-<span class="fc" id="L134">                getComponent().addAttribute(AngularAttributes.ngController, controllerName);</span>
-<span class="fc" id="L135">                getComponent().add(new Comment(&quot;Angular Application&quot;));</span>
-<span class="fc" id="L136">                compileTemplate(AngularFeature.class, &quot;jwangular&quot;);</span>
+<span class="fc" id="L137">                getComponent().addAttribute(AngularAttributes.ngApp, getAppName() + &quot;&quot;);</span>
+<span class="fc" id="L138">                getComponent().addAttribute(AngularAttributes.ngController, controllerName);</span>
+<span class="fc" id="L139">                getComponent().add(new Comment(&quot;Angular Application&quot;));</span>
+<span class="fc" id="L140">                compileTemplate(AngularFeature.class, &quot;jwangular&quot;);</span>
             }
         }
-<span class="fc" id="L139">        super.preConfigure();</span>
-<span class="fc" id="L140">    }</span>
+<span class="fc" id="L143">        super.preConfigure();</span>
+<span class="fc" id="L144">    }</span>
 
     /**
      * JW_APP_NAME - the angular module application name JW_DIRECTIVES - the angular directives JW_MODULES the modules generates JW_APP_CONTROLLER the physical controller name JW_CONTROLLERS - the
@@ -147,13 +151,13 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public void configureTemplateVariables()
     {
-<span class="fc" id="L150">        TemplateVariables.put(&quot;JW_APP_NAME&quot;, new StringBuilder(getAppName() + &quot;&quot;));</span>
-<span class="fc" id="L151">        TemplateVariables.put(&quot;JW_MODULES&quot;, new StringBuilder(compileModules() + &quot;&quot;));</span>
-<span class="fc" id="L152">        TemplateVariables.put(&quot;JW_DIRECTIVES&quot;, new StringBuilder(compileDirectives() + &quot;&quot;));</span>
+<span class="fc" id="L154">        TemplateVariables.put(&quot;JW_APP_NAME&quot;, new StringBuilder(getAppName() + &quot;&quot;));</span>
+<span class="fc" id="L155">        TemplateVariables.put(&quot;JW_MODULES&quot;, new StringBuilder(compileModules() + &quot;&quot;));</span>
+<span class="fc" id="L156">        TemplateVariables.put(&quot;JW_DIRECTIVES&quot;, new StringBuilder(compileDirectives() + &quot;&quot;));</span>
 
-<span class="fc" id="L154">        TemplateVariables.put(&quot;JW_APP_CONTROLLER&quot;, new StringBuilder(getControllerName() + &quot;&quot;));</span>
-<span class="fc" id="L155">        TemplateVariables.put(&quot;JW_CONTROLLERS&quot;, new StringBuilder(compileControllers() + &quot;&quot;));</span>
-<span class="fc" id="L156">    }</span>
+<span class="fc" id="L158">        TemplateVariables.put(&quot;JW_APP_CONTROLLER&quot;, new StringBuilder(getControllerName() + &quot;&quot;));</span>
+<span class="fc" id="L159">        TemplateVariables.put(&quot;JW_CONTROLLERS&quot;, new StringBuilder(compileControllers() + &quot;&quot;));</span>
+<span class="fc" id="L160">    }</span>
 
     /**
      * Replaces all instances of the following
@@ -165,23 +169,23 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public StringBuilder processTemplate(String templateName, String template)
     {
-<span class="fc" id="L168">        String templateOutput = template;</span>
-<span class="fc bfc" id="L169" title="All 2 branches covered.">        for (String templateVariable : getTemplateVariables().keySet())</span>
+<span class="fc" id="L172">        String templateOutput = template;</span>
+<span class="fc bfc" id="L173" title="All 2 branches covered.">        for (String templateVariable : getTemplateVariables().keySet())</span>
         {
-<span class="fc" id="L171">            String templateScript = Matcher.quoteReplacement(getTemplateVariables().get(templateVariable).toString());</span>
-<span class="fc" id="L172">            String templateNameClean = templateVariable;</span>
+<span class="fc" id="L175">            String templateScript = Matcher.quoteReplacement(getTemplateVariables().get(templateVariable).toString());</span>
+<span class="fc" id="L176">            String templateNameClean = templateVariable;</span>
             try
             {
-<span class="fc" id="L175">                templateOutput = templateOutput.replaceAll(&quot;&quot; + templateNameClean + &quot;&quot;, templateScript);</span>
+<span class="fc" id="L179">                templateOutput = templateOutput.replaceAll(&quot;&quot; + templateNameClean + &quot;&quot;, templateScript);</span>
             }
-<span class="nc" id="L177">            catch (IllegalArgumentException iae)</span>
+<span class="nc" id="L181">            catch (IllegalArgumentException iae)</span>
             {
-<span class="nc" id="L179">                LOG.config(&quot;[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[&quot; + templateVariable + &quot;];[Script]-[&quot; + templateScript + &quot;]&quot;);</span>
-<span class="nc" id="L180">                LOG.severe(TextUtilities.stackTraceToString(iae));</span>
-<span class="fc" id="L181">            }</span>
-<span class="fc" id="L182">        }</span>
-<span class="fc" id="L183">        TemplateScripts.put(templateName, new StringBuilder(templateOutput));</span>
-<span class="fc" id="L184">        return TemplateScripts.get(templateName);</span>
+<span class="nc" id="L183">                LOG.config(&quot;[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[&quot; + templateVariable + &quot;];[Script]-[&quot; + templateScript + &quot;]&quot;);</span>
+<span class="nc" id="L184">                LOG.severe(TextUtilities.stackTraceToString(iae));</span>
+<span class="fc" id="L185">            }</span>
+<span class="fc" id="L186">        }</span>
+<span class="fc" id="L187">        TemplateScripts.put(templateName, new StringBuilder(templateOutput));</span>
+<span class="fc" id="L188">        return TemplateScripts.get(templateName);</span>
     }
 
     /**
@@ -196,8 +200,8 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public StringBuilder compileTemplate(Class referenceClass, String templateName)
     {
-<span class="fc" id="L199">        String template = getFileTemplate(referenceClass, templateName).toString();</span>
-<span class="fc" id="L200">        return processTemplate(templateName, template);</span>
+<span class="fc" id="L203">        String template = getFileTemplate(referenceClass, templateName).toString();</span>
+<span class="fc" id="L204">        return processTemplate(templateName, template);</span>
     }
 
     /**
@@ -212,7 +216,7 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public StringBuilder compileTemplate(String templateName, String template)
     {
-<span class="fc" id="L215">        return processTemplate(templateName, template);</span>
+<span class="fc" id="L219">        return processTemplate(templateName, template);</span>
     }
 
     /**
@@ -222,14 +226,14 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public StringBuilder compileDirectives()
     {
-<span class="fc" id="L225">        StringBuilder output = new StringBuilder();</span>
-<span class="fc" id="L226">        List&lt;AngularDirectiveBase&gt; angulars = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L227">        angulars.addAll(getComponent().getPage().getBody().getAngularDirectivesAll());</span>
-<span class="fc" id="L228">        angulars.stream().forEach(directive -&gt;</span>
+<span class="fc" id="L229">        StringBuilder output = new StringBuilder();</span>
+<span class="fc" id="L230">        List&lt;AngularDirectiveBase&gt; angulars = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L231">        angulars.addAll(getComponent().getPage().getBody().getAngularDirectivesAll());</span>
+<span class="fc" id="L232">        angulars.stream().forEach(directive -&gt;</span>
         {
-<span class="fc" id="L230">            output.append(compileTemplate(directive.getReferenceName(), directive.renderFunction()));</span>
-<span class="fc" id="L231">        });</span>
-<span class="fc" id="L232">        return output;</span>
+<span class="fc" id="L234">            output.append(compileTemplate(directive.getReferenceName(), directive.renderFunction()));</span>
+<span class="fc" id="L235">        });</span>
+<span class="fc" id="L236">        return output;</span>
     }
 
     /**
@@ -239,15 +243,15 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public StringBuilder compileControllers()
     {
-<span class="fc" id="L242">        StringBuilder output = new StringBuilder();</span>
-<span class="fc" id="L243">        List&lt;AngularControllerBase&gt; angulars = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L244">        angulars.add(jwAngularController);</span>
-<span class="fc" id="L245">        angulars.addAll(getComponent().getPage().getBody().getAngularControllersAll());</span>
-<span class="fc" id="L246">        angulars.stream().forEach(controller -&gt;</span>
+<span class="fc" id="L246">        StringBuilder output = new StringBuilder();</span>
+<span class="fc" id="L247">        List&lt;AngularControllerBase&gt; angulars = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L248">        angulars.add(jwAngularController);</span>
+<span class="fc" id="L249">        angulars.addAll(getComponent().getPage().getBody().getAngularControllersAll());</span>
+<span class="fc" id="L250">        angulars.stream().forEach(controller -&gt;</span>
         {
-<span class="fc" id="L248">            output.append(compileTemplate(controller.getReferenceName(), controller.renderFunction()));</span>
-<span class="fc" id="L249">        });</span>
-<span class="fc" id="L250">        return output;</span>
+<span class="fc" id="L252">            output.append(compileTemplate(controller.getReferenceName(), controller.renderFunction()));</span>
+<span class="fc" id="L253">        });</span>
+<span class="fc" id="L254">        return output;</span>
     }
 
     /**
@@ -257,15 +261,15 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public StringBuilder compileModules()
     {
-<span class="fc" id="L260">        StringBuilder output = new StringBuilder();</span>
-<span class="fc" id="L261">        List&lt;AngularModuleBase&gt; angulars = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L262">        angulars.add(jwAngularApp);</span>
+<span class="fc" id="L264">        StringBuilder output = new StringBuilder();</span>
+<span class="fc" id="L265">        List&lt;AngularModuleBase&gt; angulars = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L266">        angulars.add(jwAngularApp);</span>
         //angulars.addAll(getComponent().getPage().getBody().getAngularModulesAll());
-<span class="fc" id="L264">        angulars.stream().forEach(module -&gt;</span>
+<span class="fc" id="L268">        angulars.stream().forEach(module -&gt;</span>
         {
-<span class="fc" id="L266">            output.append(compileTemplate(module.getReferenceName(), module.renderFunction()));</span>
-<span class="fc" id="L267">        });</span>
-<span class="fc" id="L268">        return output;</span>
+<span class="fc" id="L270">            output.append(compileTemplate(module.getReferenceName(), module.renderFunction()));</span>
+<span class="fc" id="L271">        });</span>
+<span class="fc" id="L272">        return output;</span>
     }
 
     /**
@@ -278,41 +282,41 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public StringBuilder getFileTemplate(Class referenceClass, String templateName)
     {
-<span class="fc" id="L281">        StringBuilder template = TemplateScripts.get(templateName);</span>
-<span class="fc bfc" id="L282" title="All 2 branches covered.">        if (template == null)</span>
+<span class="fc" id="L285">        StringBuilder template = TemplateScripts.get(templateName);</span>
+<span class="pc bpc" id="L286" title="1 of 2 branches missed.">        if (template == null)</span>
         {
             try
             {
-<span class="fc" id="L286">                String templateFileName = templateName;</span>
+<span class="fc" id="L290">                String templateFileName = templateName;</span>
 
-<span class="pc bpc" id="L288" title="1 of 2 branches missed.">                if (this.component.isTiny())</span>
+<span class="pc bpc" id="L292" title="1 of 2 branches missed.">                if (this.component.isTiny())</span>
                 {
-<span class="nc" id="L290">                    templateFileName += &quot;.min.js&quot;;</span>
+<span class="nc" id="L294">                    templateFileName += &quot;.min.js&quot;;</span>
                 }
                 else
                 {
-<span class="fc" id="L294">                    templateFileName += &quot;.js&quot;;</span>
+<span class="fc" id="L298">                    templateFileName += &quot;.js&quot;;</span>
                 }
                 byte[] fileContents;
-<span class="pc" id="L297">                try (InputStream is = referenceClass.getResourceAsStream(templateFileName);</span>
-<span class="fc" id="L298">                        BufferedInputStream bis = new BufferedInputStream(is))</span>
+<span class="pc" id="L301">                try (InputStream is = referenceClass.getResourceAsStream(templateFileName);</span>
+<span class="fc" id="L302">                        BufferedInputStream bis = new BufferedInputStream(is))</span>
                 {
-<span class="fc" id="L300">                    fileContents = new byte[bis.available()];</span>
-<span class="fc" id="L301">                    bis.read(fileContents, 0, bis.available());</span>
-<span class="pc bpc" id="L302" title="12 of 16 branches missed.">                }</span>
-<span class="fc" id="L303">                String contents = new String(fileContents);</span>
-<span class="fc" id="L304">                setTemplateScript(templateName, new StringBuilder(contents));</span>
+<span class="fc" id="L304">                    fileContents = new byte[bis.available()];</span>
+<span class="fc" id="L305">                    bis.read(fileContents, 0, bis.available());</span>
+<span class="pc bpc" id="L306" title="12 of 16 branches missed.">                }</span>
+<span class="fc" id="L307">                String contents = new String(fileContents);</span>
+<span class="fc" id="L308">                setTemplateScript(templateName, new StringBuilder(contents));</span>
             }
-<span class="nc" id="L306">            catch (FileNotFoundException ex)</span>
+<span class="nc" id="L310">            catch (FileNotFoundException ex)</span>
             {
-<span class="nc" id="L308">                LOG.log(Level.SEVERE, &quot;[Error]-[unable to find template file];[TemplateFile]-[&quot; + templateName + &quot;];[TemplatePath]-[&quot; + referenceClass.getResource(templateName).getPath() + &quot;]&quot;, ex);</span>
+<span class="nc" id="L312">                LOG.log(Level.SEVERE, &quot;[Error]-[unable to find template file];[TemplateFile]-[&quot; + templateName + &quot;];[TemplatePath]-[&quot; + referenceClass.getResource(templateName).getPath() + &quot;]&quot;, ex);</span>
             }
-<span class="nc" id="L310">            catch (IOException ex)</span>
+<span class="nc" id="L314">            catch (IOException ex)</span>
             {
-<span class="nc" id="L312">                LOG.log(Level.SEVERE, &quot;Unable to read file contents jwangular template File&quot;, ex);</span>
-<span class="pc" id="L313">            }</span>
+<span class="nc" id="L316">                LOG.log(Level.SEVERE, &quot;Unable to read file contents jwangular template File&quot;, ex);</span>
+<span class="pc" id="L317">            }</span>
         }
-<span class="fc" id="L315">        return TemplateScripts.get(templateName);</span>
+<span class="fc" id="L319">        return TemplateScripts.get(templateName);</span>
     }
 
     /**
@@ -322,7 +326,7 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
     public void assignFunctionsToComponent()
     {
         //Do Nothing Force Overide
-<span class="fc" id="L325">    }</span>
+<span class="fc" id="L329">    }</span>
 
     /**
      * Returns the application name associated
@@ -331,7 +335,7 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public String getAppName()
     {
-<span class="fc" id="L334">        return appName;</span>
+<span class="fc" id="L338">        return appName;</span>
     }
 
     /**
@@ -341,9 +345,9 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public final void setAppName(String appName)
     {
-<span class="fc" id="L344">        AngularFeature.appName = appName;</span>
+<span class="fc" id="L348">        AngularFeature.appName = appName;</span>
 
-<span class="fc" id="L346">    }</span>
+<span class="fc" id="L350">    }</span>
 
     /**
      * Gets the controller name for this controller
@@ -352,7 +356,7 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public String getControllerName()
     {
-<span class="fc" id="L355">        return controllerName;</span>
+<span class="fc" id="L359">        return controllerName;</span>
     }
 
     /**
@@ -362,8 +366,8 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public final void setControllerName(String controllerName)
     {
-<span class="fc" id="L365">        AngularFeature.controllerName = controllerName;</span>
-<span class="fc" id="L366">    }</span>
+<span class="fc" id="L369">        AngularFeature.controllerName = controllerName;</span>
+<span class="fc" id="L370">    }</span>
 
     /**
      * Returns the list of angular variables
@@ -372,11 +376,11 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public List&lt;String&gt; getAngularVariables()
     {
-<span class="pc bpc" id="L375" title="1 of 2 branches missed.">        if (angularVariables == null)</span>
+<span class="pc bpc" id="L379" title="1 of 2 branches missed.">        if (angularVariables == null)</span>
         {
-<span class="fc" id="L377">            angularVariables = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L381">            angularVariables = new ArrayList&lt;&gt;();</span>
         }
-<span class="fc" id="L379">        return angularVariables;</span>
+<span class="fc" id="L383">        return angularVariables;</span>
     }
 
     /**
@@ -386,8 +390,8 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public void setAngularVariables(List&lt;String&gt; angularVariables)
     {
-<span class="nc" id="L389">        this.angularVariables = angularVariables;</span>
-<span class="nc" id="L390">    }</span>
+<span class="nc" id="L393">        this.angularVariables = angularVariables;</span>
+<span class="nc" id="L394">    }</span>
 
     /**
      * Sets this body
@@ -396,8 +400,8 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public final void setComponent(Component body)
     {
-<span class="fc" id="L399">        this.component = body;</span>
-<span class="fc" id="L400">    }</span>
+<span class="fc" id="L403">        this.component = body;</span>
+<span class="fc" id="L404">    }</span>
 
     /**
      * Gets the text string for the template script
@@ -408,7 +412,7 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public StringBuilder getTemplateScript(String templateName)
     {
-<span class="fc" id="L411">        return TemplateScripts.get(templateName);</span>
+<span class="fc" id="L415">        return TemplateScripts.get(templateName);</span>
     }
 
     /**
@@ -419,8 +423,8 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public void setTemplateScript(String templateName, StringBuilder templateScript)
     {
-<span class="fc" id="L422">        TemplateScripts.put(templateName, templateScript);</span>
-<span class="fc" id="L423">    }</span>
+<span class="fc" id="L426">        TemplateScripts.put(templateName, templateScript);</span>
+<span class="fc" id="L427">    }</span>
 
     /**
      * Get the map of all the template scripts
@@ -431,14 +435,14 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public StringBuilder renderTemplateScripts(String template)
     {
-<span class="fc" id="L434">        configureTemplateVariables();</span>
-<span class="pc bpc" id="L435" title="1 of 4 branches missed.">        if (TemplateScripts.containsKey(template) &amp;&amp; TemplateScripts.get(template) != null)</span>
+<span class="fc" id="L438">        configureTemplateVariables();</span>
+<span class="pc bpc" id="L439" title="1 of 4 branches missed.">        if (TemplateScripts.containsKey(template) &amp;&amp; TemplateScripts.get(template) != null)</span>
         {
-<span class="fc" id="L437">            StringBuilder output = processTemplate(template, getTemplateScripts().get(template).toString());</span>
-<span class="fc" id="L438">            return output;</span>
+<span class="fc" id="L441">            StringBuilder output = processTemplate(template, getTemplateScripts().get(template).toString());</span>
+<span class="fc" id="L442">            return output;</span>
         }
 
-<span class="fc" id="L441">        return new StringBuilder();</span>
+<span class="fc" id="L445">        return new StringBuilder();</span>
     }
 
     /**
@@ -448,7 +452,7 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public Map&lt;String, StringBuilder&gt; getTemplateScripts()
     {
-<span class="fc" id="L451">        return TemplateScripts;</span>
+<span class="fc" id="L455">        return TemplateScripts;</span>
     }
 
     /**
@@ -458,7 +462,7 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public Map&lt;String, StringBuilder&gt; getTemplateVariables()
     {
-<span class="fc" id="L461">        return TemplateVariables;</span>
+<span class="fc" id="L465">        return TemplateVariables;</span>
     }
 
     /**
@@ -468,7 +472,7 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public final JWAngularModule getJwAngularApp()
     {
-<span class="nc" id="L471">        return jwAngularApp;</span>
+<span class="nc" id="L475">        return jwAngularApp;</span>
     }
 
     /**
@@ -478,13 +482,13 @@ public class AngularFeature extends Feature&lt;JavaScriptPart, AngularFeature&gt
      */
     public final JWAngularController getJwAngularController()
     {
-<span class="nc" id="L481">        return jwAngularController;</span>
+<span class="nc" id="L485">        return jwAngularController;</span>
     }
 
     @Override
     public StringBuilder renderJavascript()
     {
-<span class="fc" id="L487">        return new StringBuilder();</span>
+<span class="fc" id="L491">        return new StringBuilder();</span>
         //return renderTemplateScripts(&quot;jwangular&quot;);
     }
 

@@ -16,21 +16,21 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css;
 
-import za.co.mmagon.logger.LogFactory;
-import com.fasterxml.jackson.annotation.*;
-import java.io.*;
-import java.lang.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
-import java.math.*;
+import java.math.BigDecimal;
 import java.util.*;
-import java.util.logging.*;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSSImpl;
 import za.co.mmagon.jwebswing.htmlbuilder.css.composer.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.image.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
+import za.co.mmagon.jwebswing.htmlbuilder.css.image.ImageCSS;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Generates the necessary artifacts for CSS Production
@@ -115,8 +115,15 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
             field.setAccessible(true);
             try
             {
-                CSSImplementationClass object = (CSSImplementationClass) field.get(classImpl);
-                m.putAll(getCSSProperties(object));
+                Object obj = field.get(classImpl);
+                if (obj == null)
+                {
+                    continue;
+                }
+                if (CSSImplementationClass.class.isAssignableFrom(obj.getClass()))
+                {;
+                    m.putAll(getCSSProperties(CSSImplementationClass.class.cast(obj)));
+                }
             }
             catch (IllegalArgumentException | IllegalAccessException ex)
             {
@@ -138,7 +145,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
     {
         if (objectIn == null)
         {
-            log.log(Level.SEVERE,"[Action]-[Null Object Retrieved];");
+            log.log(Level.SEVERE, "[Action]-[Null Object Retrieved];");
             return null;
         }
         if (objectIn instanceof CSSImpl)
@@ -165,7 +172,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
     {
         if (objectIn == null)
         {
-            log.log(Level.SEVERE,"[Action]-[Null Object Retrieved];");
+            log.log(Level.SEVERE, "[Action]-[Null Object Retrieved];");
             return null;
         }
         List<Annotation> anos = new ArrayList<>();
@@ -186,7 +193,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
     {
         if (fieldIn == null)
         {
-            log.log(Level.SEVERE,"[Action]-[Null Field Retrieved];");
+            log.log(Level.SEVERE, "[Action]-[Null Field Retrieved];");
             return new HashMap<>();
         }
         fieldIn.setAccessible(true);
@@ -194,13 +201,13 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
         {
             if (fieldIn.get(objectIn) == null)
             {
-                log.log(Level.SEVERE,"[Action]-[Null Field Retrieved];");
+                log.log(Level.SEVERE, "[Action]-[Null Field Retrieved];");
                 return new HashMap<>();
             }
         }
         catch (IllegalArgumentException | IllegalAccessException ex)
         {
-            log.log(Level.SEVERE,"[Action]-[Cant Get Field " + ex.getMessage() + "];");
+            log.log(Level.SEVERE, "[Action]-[Cant Get Field " + ex.getMessage() + "];");
             return new HashMap<>();
         }
 
@@ -313,7 +320,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
             }
             catch (IllegalArgumentException | IllegalAccessException ex)
             {
-                log.log(Level.FINE,"Unable to read pair from field due to permission", ex);
+                log.log(Level.FINE, "Unable to read pair from field due to permission", ex);
             }
         });
 
@@ -348,7 +355,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
             }
             catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex)
             {
-                log.log(Level.SEVERE,"[Value Generation]-[" + ex.getMessage() + "];[Method]-[" + method.getName() + "];", ex);
+                log.log(Level.SEVERE, "[Value Generation]-[" + ex.getMessage() + "];[Method]-[" + method.getName() + "];", ex);
             }
         }
 
@@ -426,7 +433,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
         }
         catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
         {
-            log.log(Level.FINE,"Field Skipped [" + method.getName() + "] - [" + e.getLocalizedMessage() + "]", e);
+            log.log(Level.FINE, "Field Skipped [" + method.getName() + "] - [" + e.getLocalizedMessage() + "]", e);
         }
         return rawValues;
     }
@@ -598,7 +605,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
                             Map<StringBuilder, Object> innerFieldMapping = processAnnotation(innerAnnotation);
                             CSSImplementationClass innerImplementationObject = (CSSImplementationClass) getImplementationObject(innerAnnotation, innerFieldMapping);
                             if (!innerImplementationObject.toString().isEmpty())
-                            {
+                            { 
                                 Array.set(newOut, i, innerImplementationObject);
                             }
                         }
@@ -622,7 +629,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
                     }
                     catch (IllegalAccessException | IllegalArgumentException ae)
                     {
-                        log.log(Level.SEVERE,"[Instantiation]-[Failed " + implementationClass + "]-on-[" + newInstance.getClass() + "]", ae);
+                        log.log(Level.SEVERE, "[Instantiation]-[Failed " + implementationClass + "]-on-[" + newInstance.getClass() + "]", ae);
                     }
                 }
                 else
@@ -633,17 +640,17 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
         }
         catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException ex)
         {
-            log.log(Level.SEVERE,"[Instantiation]-[Failed " + implementationClass + "]", ex);
+            log.log(Level.SEVERE, "[Instantiation]-[Failed " + implementationClass + "]", ex);
         }
         catch (NoSuchFieldException | SecurityException ex)
         {
             if (newInstance != null)
             {
-                log.log(Level.SEVERE,"[Field Populator]-[Failed];[Object]-[" + newInstance.getClass().getCanonicalName() + "]", ex);
+                log.log(Level.SEVERE, "[Field Populator]-[Failed];[Object]-[" + newInstance.getClass().getCanonicalName() + "]", ex);
             }
             else
             {
-                log.log(Level.SEVERE,"[Field Populator]-[Failed];[Object]-[" + newInstance + "]", ex);
+                log.log(Level.SEVERE, "[Field Populator]-[Failed];[Object]-[" + newInstance + "]", ex);
             }
         }
 

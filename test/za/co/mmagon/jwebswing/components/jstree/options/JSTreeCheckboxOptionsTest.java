@@ -37,7 +37,7 @@ public class JSTreeCheckboxOptionsTest
         options.setVisible(true);
         System.out.println(options);
         Assert.assertEquals("{\n"
-                + "  visible : true\n"
+                + "  \"visible\" : true\n"
                 + "}"
                 + "", options.toString());
     }
@@ -49,7 +49,7 @@ public class JSTreeCheckboxOptionsTest
         options.setThreeState(true);
         System.out.println(options);
         Assert.assertEquals("{\n"
-                + "  three_state : true\n"
+                + "  \"three_state\" : true\n"
                 + "}", options.toString());
     }
 
@@ -60,7 +60,7 @@ public class JSTreeCheckboxOptionsTest
         options.setWholeNode(true);
         System.out.println(options);
         Assert.assertEquals("{\n"
-                + "  whole_node : true\n"
+                + "  \"whole_node\" : true\n"
                 + "}", options.toString());
     }
 
@@ -71,7 +71,7 @@ public class JSTreeCheckboxOptionsTest
         options.setKeepSelectedStyle(true);
         System.out.println(options);
         Assert.assertEquals("{\n"
-                + "  keep_selected_style : true\n"
+                + "  \"keep_selected_style\" : true\n"
                 + "}", options.toString());
     }
 
@@ -82,7 +82,7 @@ public class JSTreeCheckboxOptionsTest
         options.setCascade(true);
         System.out.println(options);
         Assert.assertEquals("{\n"
-                + "  cascade : true\n"
+                + "  \"cascade\" : true\n"
                 + "}", options.toString());
     }
 
@@ -93,7 +93,7 @@ public class JSTreeCheckboxOptionsTest
         options.setTieSelection(true);
         System.out.println(options);
         Assert.assertEquals("{\n"
-                + "  tie_selection : true\n"
+                + "  \"tie_selection\" : true\n"
                 + "}", options.toString());
     }
 

@@ -32,20 +32,23 @@ public class AjaxResponseReaction
     /**
      * The title of the reaction
      */
+    @JsonProperty("reactionTitle")
     private String reactionTitle;
     /**
      * The message of the reaction
      */
-    private String reactionMessage;
+    @JsonProperty("reactionMessage")
+    private String reactionData;
     /**
      * The actual reaction
      */
-    private ReactionType reactionType = ReactionType.DialogDisplay;
+    @JsonProperty("reactionType")
+    private ReactionType reactionType;
     /*
      * The level type of the reaction
      */
     @JsonProperty("type")
-    private AjaxResponseType responseType = AjaxResponseType.Info;
+    private AjaxResponseType responseType;
 
     /**
      * Action timeout for request
@@ -57,42 +60,81 @@ public class AjaxResponseReaction
      */
     public AjaxResponseReaction()
     {
+        this(null);
+    }
+
+    /**
+     * Constructs a reaction with the given message as a dialog
+     *
+     * @param reactionData
+     */
+    public AjaxResponseReaction(String reactionData)
+    {
+        this(null, reactionData);
     }
 
     /**
      * Constructs a reaction with the given message
      *
-     * @param reactionMessage
+     * @param reactionData
+     * @param reactionType
      */
-    public AjaxResponseReaction(String reactionMessage)
+    public AjaxResponseReaction(String reactionData, ReactionType reactionType)
     {
-        this.reactionMessage = reactionMessage;
+        this(null, reactionData, reactionType);
     }
 
     /**
      * Constructs a reaction with the given parameters
      *
      * @param reactionTitle
-     * @param reactionMessage
+     * @param reactionData
      * @param reactionType
      */
-    public AjaxResponseReaction(String reactionTitle, String reactionMessage, ReactionType reactionType)
+    public AjaxResponseReaction(String reactionTitle, String reactionData, ReactionType reactionType)
     {
-        this.reactionTitle = reactionTitle;
-        this.reactionMessage = reactionMessage;
-        this.reactionType = reactionType;
+        this(reactionTitle, reactionData, reactionType, null);
+    }
+
+    /**
+     * Constructs a reaction with the given parameters
+     *
+     * @param reactionTitle The title if necessary
+     * @param reactionData  The data if necessary (usually is)
+     * @param reactionType  The specific reaction type (dialog, redirect etc)
+     * @param responseType  The specific response type (info, danger, warning etc)
+     */
+    @SuppressWarnings("")
+    public AjaxResponseReaction(String reactionTitle, String reactionData, ReactionType reactionType, AjaxResponseType responseType)
+    {
+        setReactionTitle(reactionTitle);
+        setReactionData(reactionData);
+        setReactionType(reactionType);
+        setResponseType(responseType);
+    }
+
+    /**
+     * Constructs a redirection response after the specific seconds
+     *
+     * @param reactionData  The URL to point to
+     * @param actionTimeout After how long to do it in milliseconds
+     */
+    @SuppressWarnings("")
+    public AjaxResponseReaction(String reactionData, int actionTimeout)
+    {
+        this(null, reactionData, ReactionType.RedirectUrl, null);
+        setActionTimeout(actionTimeout);
     }
 
     /**
      * Constructs a reaction with the given title and message
      *
      * @param reactionTitle
-     * @param reactionMessage
+     * @param reactionData
      */
-    public AjaxResponseReaction(String reactionTitle, String reactionMessage)
+    public AjaxResponseReaction(String reactionTitle, String reactionData)
     {
-        this.reactionTitle = reactionTitle;
-        this.reactionMessage = reactionMessage;
+        this(reactionTitle, reactionData, null);
     }
 
     /**
@@ -120,20 +162,20 @@ public class AjaxResponseReaction
      *
      * @return
      */
-    public String getReactionMessage()
+    public String getReactionData()
     {
-        return reactionMessage;
+        return reactionData;
     }
 
     /**
      * *
      * Sets the given reaction message
      *
-     * @param reactionMessage
+     * @param reactionData
      */
-    public void setReactionMessage(String reactionMessage)
+    public void setReactionData(String reactionData)
     {
-        this.reactionMessage = reactionMessage;
+        this.reactionData = reactionData;
     }
 
     /**
@@ -153,7 +195,7 @@ public class AjaxResponseReaction
      */
     public void setReactionType(ReactionType reactionType)
     {
-        this.reactionType = reactionType;
+        this.reactionType = reactionType == null ? ReactionType.DialogDisplay : reactionType;
     }
 
     /**
@@ -173,7 +215,7 @@ public class AjaxResponseReaction
      */
     public void setResponseType(AjaxResponseType responseType)
     {
-        this.responseType = responseType;
+        this.responseType = responseType == null ? AjaxResponseType.Info : responseType;
     }
 
     /**

@@ -113,15 +113,15 @@ public class CSSComposer
         {
 <span class="fc" id="L114">            CSSTypes key = entry.getKey();</span>
 <span class="fc" id="L115">            CSSImpl value = entry.getValue();</span>
-<span class="nc" id="L116">            CSSBlock declaredCssBlocks = getPropertiesFactory().getCSSBlock(o.getID() + key.getCssName(), key, getPropertiesFactory().getCSS(value), CSSBlockIdentifier.Id);</span>
-<span class="nc" id="L117">            return declaredCssBlocks;</span>
+<span class="fc" id="L116">            CSSBlock declaredCssBlocks = getPropertiesFactory().getCSSBlock(o.getID() + key.getCssName(), key, getPropertiesFactory().getCSS(value), CSSBlockIdentifier.Id);</span>
+<span class="fc" id="L117">            return declaredCssBlocks;</span>
 <span class="fc" id="L118">        }).forEachOrdered(e -&gt;</span>
         {
-<span class="nc bnc" id="L120" title="All 2 branches missed.">            if (!componentBlocks.contains(e))</span>
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">            if (!componentBlocks.contains(e))</span>
             {
-<span class="nc" id="L122">                componentBlocks.add(e);</span>
+<span class="fc" id="L122">                componentBlocks.add(e);</span>
             }
-<span class="nc" id="L124">        });</span>
+<span class="fc" id="L124">        });</span>
 
 <span class="fc" id="L126">        ArrayList&lt;Field&gt; fields = new ArrayList&lt;&gt;(Arrays.asList(o.getClass().getDeclaredFields()));</span>
 <span class="pc bpc" id="L127" title="1 of 2 branches missed.">        fields.stream().filter(a -&gt; ComponentUtils.fieldGet(a, o) != null).forEach((Field field) -&gt;</span>

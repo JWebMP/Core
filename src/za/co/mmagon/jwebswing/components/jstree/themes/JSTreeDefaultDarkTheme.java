@@ -34,8 +34,7 @@ public class JSTreeDefaultDarkTheme extends Theme implements JSTreeTheme
 
     public JSTreeDefaultDarkTheme ()
     {
-        super("JSTreeDefaulDarkTheme", "");
+        super("default-dark", "");
         getCssReferences().add(new CSSReference("JSTreeDefaultDarkTheme", 3.32, "bower_components/jstree/dist/themes/default-dark/style.css"));
-        
     }
 }

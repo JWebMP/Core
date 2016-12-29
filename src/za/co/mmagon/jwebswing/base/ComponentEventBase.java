@@ -319,6 +319,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
      *
      * @return
      */
+    @Override
     public ComponentEventBase getEvent(String eventId)
     {
         for (Iterator<E> iterator = getEvents().iterator(); iterator.hasNext();)
@@ -371,10 +372,8 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
     public J cloneComponent()
     {
         ComponentEventBase cloned = (ComponentEventBase) super.cloneComponent();
-
         cloned.events = new ArrayList();
         cloned.events.addAll(getEvents());
-
         return (J) cloned;
     }
 }

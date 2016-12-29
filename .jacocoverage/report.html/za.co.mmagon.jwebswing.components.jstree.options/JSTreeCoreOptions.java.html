@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.components.jstree.options;
 
-import com.armineasy.injection.GuiceContext;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 import java.util.TreeMap;
@@ -65,9 +64,9 @@ public class JSTreeCoreOptions extends JavaScriptPart
     private Boolean multiple;
 
     public JSTreeCoreOptions()
-<span class="nc" id="L68">    {</span>
+<span class="fc" id="L67">    {</span>
 
-<span class="nc" id="L70">    }</span>
+<span class="fc" id="L69">    }</span>
 
     /**
      * If left as false the HTML inside the jstree container element is used to populate the tree (that should be an unordered list with list items). You can also pass in a HTML string or a JSON array
@@ -80,11 +79,11 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public JSTreeAjaxConfigOptions getData()
     {
-<span class="nc bnc" id="L83" title="All 2 branches missed.">        if (data == null)</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        if (data == null)</span>
         {
-<span class="nc" id="L85">            data = GuiceContext.Injector().getInstance(JSTreeAjaxConfigOptions.class);</span>
+<span class="fc" id="L84">            data = new JSTreeAjaxConfigOptions();</span>
         }
-<span class="nc" id="L87">        return data;</span>
+<span class="fc" id="L86">        return data;</span>
     }
 
     /**
@@ -98,8 +97,8 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public void setData(JSTreeAjaxConfigOptions data)
     {
-<span class="nc" id="L101">        this.data = data;</span>
-<span class="nc" id="L102">    }</span>
+<span class="nc" id="L100">        this.data = data;</span>
+<span class="nc" id="L101">    }</span>
 
     /**
      * configure the various strings used throughout the tree You can use an object where the key is the string you need to replace and the value is your replacement. Another option is to specify a
@@ -109,11 +108,11 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public Map&lt;String, String&gt; getStrings()
     {
-<span class="nc bnc" id="L112" title="All 2 branches missed.">        if (strings == null)</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        if (strings == null)</span>
         {
-<span class="nc" id="L114">            strings = new TreeMap&lt;&gt;();</span>
+<span class="nc" id="L113">            strings = new TreeMap&lt;&gt;();</span>
         }
-<span class="nc" id="L116">        return strings;</span>
+<span class="nc" id="L115">        return strings;</span>
     }
 
     /**
@@ -124,8 +123,8 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public void setStrings(Map&lt;String, String&gt; strings)
     {
-<span class="nc" id="L127">        this.strings = strings;</span>
-<span class="nc" id="L128">    }</span>
+<span class="nc" id="L126">        this.strings = strings;</span>
+<span class="nc" id="L127">    }</span>
 
     /**
      * determines what happens when a user tries to modify the structure of the tree
@@ -136,11 +135,11 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public JSTreeCheckCallbackFunction getCheckCallback()
     {
-<span class="nc bnc" id="L139" title="All 2 branches missed.">        if (checkCallback == null)</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">        if (checkCallback == null)</span>
         {
-<span class="nc" id="L141">            checkCallback = new JSTreeCheckCallbackFunction();</span>
+<span class="nc" id="L140">            checkCallback = new JSTreeCheckCallbackFunction();</span>
         }
-<span class="nc" id="L143">        return checkCallback;</span>
+<span class="nc" id="L142">        return checkCallback;</span>
     }
 
     /**
@@ -152,8 +151,8 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public void setCheckCallback(JSTreeCheckCallbackFunction checkCallback)
     {
-<span class="nc" id="L155">        this.checkCallback = checkCallback;</span>
-<span class="nc" id="L156">    }</span>
+<span class="nc" id="L154">        this.checkCallback = checkCallback;</span>
+<span class="nc" id="L155">    }</span>
 
     /**
      * the open / close animation duration in milliseconds - set this to false to disable the animation (default is 200)
@@ -162,7 +161,7 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public Integer getAnimation()
     {
-<span class="nc" id="L165">        return animation;</span>
+<span class="nc" id="L164">        return animation;</span>
     }
 
     /**
@@ -172,8 +171,8 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public void setAnimation(Integer animation)
     {
-<span class="nc" id="L175">        this.animation = animation;</span>
-<span class="nc" id="L176">    }</span>
+<span class="nc" id="L174">        this.animation = animation;</span>
+<span class="nc" id="L175">    }</span>
 
     /**
      * a boolean indicating if multiple nodes can be selected
@@ -182,7 +181,7 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public Boolean getMultiple()
     {
-<span class="nc" id="L185">        return multiple;</span>
+<span class="nc" id="L184">        return multiple;</span>
     }
 
     /**
@@ -192,8 +191,8 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public void setMultiple(Boolean multiple)
     {
-<span class="nc" id="L195">        this.multiple = multiple;</span>
-<span class="nc" id="L196">    }</span>
+<span class="nc" id="L194">        this.multiple = multiple;</span>
+<span class="nc" id="L195">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

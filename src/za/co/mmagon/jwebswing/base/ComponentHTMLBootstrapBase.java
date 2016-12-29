@@ -16,13 +16,16 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
-import za.co.mmagon.jwebswing.base.interfaces.*;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
-import za.co.mmagon.jwebswing.components.bootstrap.*;
-import za.co.mmagon.jwebswing.components.bootstrap.columnlayout.*;
-import za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.interfaces.IComponentHTMLBootstrapBase;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.bootstrap.BootstrapClasses;
+import za.co.mmagon.jwebswing.components.bootstrap.Glyphicons;
+import za.co.mmagon.jwebswing.components.bootstrap.columnlayout.BSColumnWidths;
+import za.co.mmagon.jwebswing.components.bootstrap.columnlayout.BSComponentHiding;
+import za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2.SB2ThemeClasses;
 
 /**
  * A convenience class for accessing all the bootstrap methods
@@ -41,8 +44,12 @@ import za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2.*;
 public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentStyleBase>
         extends ComponentStyleBase<C, A, F, E, J> implements IComponentHTMLBootstrapBase
 {
-
     private static final long serialVersionUID = 1L;
+    
+    /**
+     * Determines if bootstrap is required on this component
+     */
+    private boolean bootstrapRequired;
 
     public ComponentHTMLBootstrapBase(ComponentTypes componentType)
     {
@@ -69,7 +76,7 @@ public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions
     @Override
     public boolean addClass(BootstrapClasses blockName)
     {
-        getPage().getOptions().setBootstrapEnabled(true);
+        setBootstrapRequired(true);
         String className = blockName.toString();
         if (!getClasses().contains(className))
         {
@@ -92,7 +99,7 @@ public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions
     @Override
     public boolean addClass(SB2ThemeClasses blockName)
     {
-        getPage().getOptions().setBootstrapEnabled(true);
+        setBootstrapRequired(true);
         String className = blockName.toString();
         if (!getClasses().contains(className))
         {
@@ -115,7 +122,7 @@ public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions
      */
     public boolean addClass(int position, SB2ThemeClasses blockName)
     {
-        getPage().getOptions().setBootstrapEnabled(true);
+        setBootstrapRequired(true);
         String className = blockName.toString();
         if (!getClasses().contains(className))
         {
@@ -138,7 +145,7 @@ public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions
     @Override
     public boolean addClass(BSColumnWidths blockName)
     {
-        getPage().getOptions().setBootstrapEnabled(true);
+        setBootstrapRequired(true);
         String className = blockName.toString();
         if (!getClasses().contains(className))
         {
@@ -161,7 +168,7 @@ public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions
     @Override
     public boolean addClass(BSComponentHiding blockName)
     {
-        getPage().getOptions().setBootstrapEnabled(true);
+        setBootstrapRequired(true);
         String className = blockName.toString();
         if (!getClasses().contains(className))
         {
@@ -184,7 +191,7 @@ public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions
     @Override
     public boolean addClass(Glyphicons blockName)
     {
-        getPage().getOptions().setBootstrapEnabled(true);
+        setBootstrapRequired(true);
         String className = blockName.toString();
         if (!getClasses().contains(className))
         {
@@ -196,4 +203,24 @@ public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions
             return false;
         }
     }
+
+    /**
+     * If this component requires bootstrap or not
+     * @return 
+     */
+    public boolean isBootstrapRequired()
+    {
+        return bootstrapRequired;
+    }
+
+    /**
+     * Sets if bootstrap is required or not on this component
+     * @param bootstrapRequired 
+     */
+    public void setBootstrapRequired(boolean bootstrapRequired)
+    {
+        this.bootstrapRequired = bootstrapRequired;
+    }
+    
+    
 }

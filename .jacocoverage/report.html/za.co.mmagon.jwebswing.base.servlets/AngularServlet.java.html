@@ -26,7 +26,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -34,10 +33,10 @@ import za.co.mmagon.logger.LogFactory;
  * @author GedMarc
  */
 @Singleton
-<span class="nc" id="L37">public class AngularServlet extends JWDefaultServlet</span>
+<span class="nc" id="L36">public class AngularServlet extends JWDefaultServlet</span>
 {
 
-<span class="nc" id="L40">    private static final Logger LOG = LogFactory.getInstance().getLogger(&quot;AngularServlet&quot;);</span>
+<span class="nc" id="L39">    private static final Logger LOG = LogFactory.getInstance().getLogger(&quot;AngularServlet&quot;);</span>
     private static final long serialVersionUID = 1L;
 
     /**
@@ -52,25 +51,25 @@ import za.co.mmagon.logger.LogFactory;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-<span class="nc" id="L55">        Page page = (Page) request.getSession().getAttribute(&quot;jwpage&quot;);</span>
-<span class="nc bnc" id="L56" title="All 2 branches missed.">        if (page == null)</span>
+<span class="nc" id="L54">        Page page = (Page) request.getSession().getAttribute(&quot;jwpage&quot;);</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        if (page == null)</span>
         {
-<span class="nc" id="L58">            LOG.log(Level.SEVERE, &quot;No Page&quot;, new ServletException(&quot;No Page Currently Loaded&quot;));</span>
-<span class="nc" id="L59">            throw new ServletException(&quot;No Page Currently Loaded&quot;);</span>
+<span class="nc" id="L57">            LOG.log(Level.SEVERE, &quot;No Page&quot;, new ServletException(&quot;No Page Currently Loaded&quot;));</span>
+<span class="nc" id="L58">            throw new ServletException(&quot;No Page Currently Loaded&quot;);</span>
         }
-<span class="nc" id="L61">        Date startDate = new Date();</span>
-<span class="nc" id="L62">        StringBuilder compiled = page.getAngular().compileTemplate(AngularFeature.class, &quot;jwangular&quot;);</span>
-<span class="nc" id="L63">        StringBuilder output = page.getAngular().renderTemplateScripts(&quot;jwangular&quot;);</span>
-<span class="nc" id="L64">        Date endDate = new Date();</span>
-<span class="nc" id="L65">        try (PrintWriter out = response.getWriter())</span>
+<span class="nc" id="L60">        Date startDate = new Date();</span>
+        //StringBuilder compiled = page.getAngular().compileTemplate(AngularFeature.class, &quot;jwangular&quot;);
+<span class="nc" id="L62">        StringBuilder output = page.getAngular().renderTemplateScripts(&quot;jwangular&quot;);</span>
+<span class="nc" id="L63">        Date endDate = new Date();</span>
+<span class="nc" id="L64">        try (PrintWriter out = response.getWriter())</span>
         {
-<span class="nc" id="L67">            response.setContentType(&quot;application/javascript;charset=UTF-8&quot;);</span>
-<span class="nc" id="L68">            response.setCharacterEncoding(&quot;UTF-8&quot;);</span>
-<span class="nc" id="L69">            response.getWriter().write(output.toString());</span>
-<span class="nc" id="L70">            Date dataTransferDate = new Date();</span>
-<span class="nc" id="L71">            LOG.log(Level.FINE, &quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Render Time]-[&quot; + (endDate.getTime() - startDate.getTime()) + &quot;];[Data Size]-[&quot; + output.toString().length() + &quot;];[Transer Time]=[&quot; + (dataTransferDate.getTime() - startDate.getTime()) + &quot;]&quot;);</span>
-<span class="nc bnc" id="L72" title="All 8 branches missed.">        }</span>
-<span class="nc" id="L73">    }</span>
+<span class="nc" id="L66">            response.setContentType(&quot;application/javascript;charset=UTF-8&quot;);</span>
+<span class="nc" id="L67">            response.setCharacterEncoding(&quot;UTF-8&quot;);</span>
+<span class="nc" id="L68">            response.getWriter().write(output.toString());</span>
+<span class="nc" id="L69">            Date dataTransferDate = new Date();</span>
+<span class="nc" id="L70">            LOG.log(Level.FINE, &quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Render Time]-[&quot; + (endDate.getTime() - startDate.getTime()) + &quot;];[Data Size]-[&quot; + output.toString().length() + &quot;];[Transer Time]=[&quot; + (dataTransferDate.getTime() - startDate.getTime()) + &quot;]&quot;);</span>
+<span class="nc bnc" id="L71" title="All 8 branches missed.">        }</span>
+<span class="nc" id="L72">    }</span>
 
     /**
      * Post handler
@@ -86,14 +85,14 @@ import za.co.mmagon.logger.LogFactory;
     {
         try
         {
-<span class="nc" id="L89">            super.doGet(request, response);</span>
-<span class="nc" id="L90">            processRequest(request, response);</span>
+<span class="nc" id="L88">            super.doGet(request, response);</span>
+<span class="nc" id="L89">            processRequest(request, response);</span>
         }
-<span class="nc" id="L92">        catch (Exception e)</span>
+<span class="nc" id="L91">        catch (Exception e)</span>
         {
-<span class="nc" id="L94">            LOG.log(Level.SEVERE, &quot;Do Post Error&quot;, e);</span>
-<span class="nc" id="L95">        }</span>
-<span class="nc" id="L96">    }</span>
+<span class="nc" id="L93">            LOG.log(Level.SEVERE, &quot;Do Post Error&quot;, e);</span>
+<span class="nc" id="L94">        }</span>
+<span class="nc" id="L95">    }</span>
 
     /**
      * Post handler
@@ -109,13 +108,13 @@ import za.co.mmagon.logger.LogFactory;
     {
         try
         {
-<span class="nc" id="L112">            super.doGet(request, response);</span>
-<span class="nc" id="L113">            processRequest(request, response);</span>
+<span class="nc" id="L111">            super.doGet(request, response);</span>
+<span class="nc" id="L112">            processRequest(request, response);</span>
         }
-<span class="nc" id="L115">        catch (Exception e)</span>
+<span class="nc" id="L114">        catch (Exception e)</span>
         {
-<span class="nc" id="L117">            LOG.log(Level.SEVERE, &quot;Angualr Do Get Error&quot;, e);</span>
-<span class="nc" id="L118">        }</span>
-<span class="nc" id="L119">    }</span>
+<span class="nc" id="L116">            LOG.log(Level.SEVERE, &quot;Angualr Do Get Error&quot;, e);</span>
+<span class="nc" id="L117">        }</span>
+<span class="nc" id="L118">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

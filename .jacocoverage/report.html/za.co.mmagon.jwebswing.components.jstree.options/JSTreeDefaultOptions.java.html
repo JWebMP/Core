@@ -32,19 +32,16 @@ public class JSTreeDefaultOptions extends JavaScriptPart
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * holds all jstree related functions and variables, including the actual class and methods to create, access and manipulate instances.
-     */
-    private JSTreeCoreOptions core;
+    
     /**
      * configure which plugins will be active on an instance. Should be an array of strings, where each element is a plugin name. The default is
      */
     private List&lt;String&gt; plugins;
 
     public JSTreeDefaultOptions()
-<span class="nc" id="L45">    {</span>
+<span class="nc" id="L42">    {</span>
 
-<span class="nc" id="L47">    }</span>
+<span class="nc" id="L44">    }</span>
 
     /**
      * configure which plugins will be active on an instance. Should be an array of strings, where each element is a plugin name. The default is
@@ -53,11 +50,11 @@ public class JSTreeDefaultOptions extends JavaScriptPart
      */
     public List&lt;String&gt; getPlugins()
     {
-<span class="nc bnc" id="L56" title="All 2 branches missed.">        if (plugins == null)</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if (plugins == null)</span>
         {
-<span class="nc" id="L58">            plugins = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L55">            plugins = new ArrayList&lt;&gt;();</span>
         }
-<span class="nc" id="L60">        return plugins;</span>
+<span class="nc" id="L57">        return plugins;</span>
     }
 
     /**
@@ -67,28 +64,10 @@ public class JSTreeDefaultOptions extends JavaScriptPart
      */
     public void setPlugins(List&lt;String&gt; plugins)
     {
-<span class="nc" id="L70">        this.plugins = plugins;</span>
-<span class="nc" id="L71">    }</span>
+<span class="nc" id="L67">        this.plugins = plugins;</span>
+<span class="nc" id="L68">    }</span>
 
-    /**
-     * holds all jstree related functions and variables, including the actual class and methods to create, access and manipulate instances.
-     *
-     * @return
-     */
-    public JSTreeCoreOptions getCore()
-    {
-<span class="nc" id="L80">        return core;</span>
-    }
-
-    /**
-     * holds all jstree related functions and variables, including the actual class and methods to create, access and manipulate instances.
-     *
-     * @param core
-     */
-    public void setCore(JSTreeCoreOptions core)
-    {
-<span class="nc" id="L90">        this.core = core;</span>
-<span class="nc" id="L91">    }</span>
+    
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

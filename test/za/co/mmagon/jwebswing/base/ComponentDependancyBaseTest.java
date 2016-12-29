@@ -57,7 +57,8 @@ public class ComponentDependancyBaseTest extends BaseTestClass
                 + "    \"name\" : \"JWAccordionJS\",\n"
                 + "    \"version\" : 1.114,\n"
                 + "    \"reference\" : \"bower_components/jquery-ui/jquery-ui.js\"\n"
-                + "  } ]\n"
+                + "  } ],\n"
+                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentDependancyBase\"\n"
                 + "}", cd.toString());
     }
 
@@ -81,7 +82,8 @@ public class ComponentDependancyBaseTest extends BaseTestClass
                 + "    \"name\" : \"JQuery\",\n"
                 + "    \"version\" : 2.24,\n"
                 + "    \"reference\" : \"bower_components/jquery/dist/jquery.js\"\n"
-                + "  } ]\n"
+                + "  } ],\n"
+                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentDependancyBase\"\n"
                 + "}";
         String shell2Expected = "{\n"
                 + "  \"id\" : \"shell2\",\n"
@@ -93,7 +95,8 @@ public class ComponentDependancyBaseTest extends BaseTestClass
                 + "    \"name\" : \"JQuery\",\n"
                 + "    \"version\" : 2.24,\n"
                 + "    \"reference\" : \"bower_components/jquery/dist/jquery.js\"\n"
-                + "  } ]\n"
+                + "  } ],\n"
+                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentDependancyBase\"\n"
                 + "}";
         Assert.assertEquals(shell.toString(), shellExpected);
         Assert.assertEquals(shell2.toString(), shell2Expected);

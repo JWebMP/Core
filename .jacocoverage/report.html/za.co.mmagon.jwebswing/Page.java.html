@@ -19,7 +19,6 @@ package za.co.mmagon.jwebswing;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.*;
 import java.util.List;
-import javax.servlet.http.HttpSession;
 import net.sf.uadetector.*;
 import za.co.mmagon.JWebSwingSiteBinder;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
@@ -30,7 +29,6 @@ import za.co.mmagon.jwebswing.base.html.attributes.ScriptAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
-import za.co.mmagon.jwebswing.base.servlets.JWebSwingServlet;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 import za.co.mmagon.jwebswing.base.servlets.interfaces.IPage;
 import za.co.mmagon.jwebswing.generics.WebReference;
@@ -66,16 +64,6 @@ public class Page extends Html implements IPage
      */
     @JsonIgnore
     private transient ReadableUserAgent userAgent;
-    /**
-     * The Servlet attached to this page
-     */
-    @JsonIgnore
-    private transient JWebSwingServlet servlet;
-    /**
-     * The session of this page
-     */
-    @JsonIgnore
-    private transient HttpSession session;
 
     /**
      * The angular feature
@@ -96,13 +84,13 @@ public class Page extends Html implements IPage
      * @param base              Sets the base tag for the page. Convenience Parameter
      */
     public Page(Title title, InternetExplorerCompatibilityMode compatibilityMode, Base base)
-<span class="fc" id="L99">    {</span>
-<span class="fc" id="L100">        getPageFields().setTitle(title);</span>
-<span class="fc" id="L101">        getPageFields().setCompatibilityMode(compatibilityMode);</span>
-<span class="fc" id="L102">        getPageFields().setBase(base);</span>
-<span class="fc" id="L103">        setID(&quot;jwPage&quot;);</span>
+<span class="fc" id="L87">    {</span>
+<span class="fc" id="L88">        getPageFields().setTitle(title);</span>
+<span class="fc" id="L89">        getPageFields().setCompatibilityMode(compatibilityMode);</span>
+<span class="fc" id="L90">        getPageFields().setBase(base);</span>
+<span class="fc" id="L91">        setID(&quot;jwPage&quot;);</span>
         //setGenerator(&quot;JWebSwing - https://sourceforge.net/projects/jwebswing/&quot;);
-<span class="fc" id="L105">    }</span>
+<span class="fc" id="L93">    }</span>
 
     /**
      * @param title             Sets the title of the page
@@ -110,32 +98,32 @@ public class Page extends Html implements IPage
      */
     public Page(Title title, InternetExplorerCompatibilityMode compatibilityMode)
     {
-<span class="nc" id="L113">        this(title, compatibilityMode, null);</span>
-<span class="nc" id="L114">    }</span>
+<span class="nc" id="L101">        this(title, compatibilityMode, null);</span>
+<span class="nc" id="L102">    }</span>
 
     /**
      * @param title Sets the title of the page
      */
     public Page(Title title)
     {
-<span class="nc" id="L121">        this(title, null, null);</span>
-<span class="nc" id="L122">    }</span>
+<span class="nc" id="L109">        this(title, null, null);</span>
+<span class="nc" id="L110">    }</span>
 
     /**
      * @param title Sets the title of the page
      */
     public Page(String title)
     {
-<span class="nc" id="L129">        this(new Title(title), null, null);</span>
-<span class="nc" id="L130">    }</span>
+<span class="nc" id="L117">        this(new Title(title), null, null);</span>
+<span class="nc" id="L118">    }</span>
 
     /**
      * Constructs an empty page object
      */
     public Page()
     {
-<span class="fc" id="L137">        this(null, null, null);</span>
-<span class="fc" id="L138">    }</span>
+<span class="fc" id="L125">        this(null, null, null);</span>
+<span class="fc" id="L126">    }</span>
 
     /**
      * Renders all the children to a string builder
@@ -145,34 +133,34 @@ public class Page extends Html implements IPage
     @Override
     protected StringBuilder renderChildren()
     {
-<span class="fc" id="L148">        StringBuilder pageOutput = new StringBuilder();</span>
-<span class="fc" id="L149">        StringBuilder bodyOutput = null;</span>
+<span class="fc" id="L136">        StringBuilder pageOutput = new StringBuilder();</span>
+<span class="fc" id="L137">        StringBuilder bodyOutput = null;</span>
 
-<span class="fc bfc" id="L151" title="All 2 branches covered.">        if (!isBodyEmpty())</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">        if (!isBodyEmpty())</span>
         {
-<span class="fc" id="L153">            bodyOutput = new StringBuilder(getBody().toString(1));</span>
+<span class="fc" id="L141">            bodyOutput = new StringBuilder(getBody().toString(1));</span>
         }
         
-<span class="fc bfc" id="L156" title="All 2 branches covered.">        if (!isHeadEmpty())</span>
+<span class="fc bfc" id="L144" title="All 2 branches covered.">        if (!isHeadEmpty())</span>
         {
-<span class="fc" id="L158">            pageOutput.append(getNewLine()).append(getCurrentTabIndentString()).append(getHead().toString(1));</span>
+<span class="fc" id="L146">            pageOutput.append(getNewLine()).append(getCurrentTabIndentString()).append(getHead().toString(1));</span>
         }
-<span class="fc bfc" id="L160" title="All 2 branches covered.">        if (bodyOutput != null)</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">        if (bodyOutput != null)</span>
         {
-<span class="fc" id="L162">            pageOutput.append(getNewLine()).append(getCurrentTabIndentString()).append(bodyOutput);</span>
+<span class="fc" id="L150">            pageOutput.append(getNewLine()).append(getCurrentTabIndentString()).append(bodyOutput);</span>
         }
-<span class="fc" id="L164">        return pageOutput;</span>
+<span class="fc" id="L152">        return pageOutput;</span>
     }
 
     @Override
     public void init()
     {
-<span class="pc bpc" id="L170" title="1 of 2 branches missed.">        if (!isInitialized())</span>
+<span class="pc bpc" id="L158" title="1 of 2 branches missed.">        if (!isInitialized())</span>
         {
-<span class="fc" id="L172">            getBody().init();</span>
+<span class="fc" id="L160">            getBody().init();</span>
         }
-<span class="fc" id="L174">        super.init();</span>
-<span class="fc" id="L175">    }</span>
+<span class="fc" id="L162">        super.init();</span>
+<span class="fc" id="L163">    }</span>
 
     /**
      * Configures the page and all its components
@@ -180,46 +168,46 @@ public class Page extends Html implements IPage
     @Override
     public void preConfigure()
     {
-<span class="fc bfc" id="L183" title="All 2 branches covered.">        if (!isInitialized())</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">        if (!isInitialized())</span>
         {
-<span class="fc" id="L185">            init();</span>
+<span class="fc" id="L173">            init();</span>
         }
-<span class="pc bpc" id="L187" title="1 of 2 branches missed.">        if (!isConfigured())</span>
+<span class="pc bpc" id="L175" title="1 of 2 branches missed.">        if (!isConfigured())</span>
         {
-<span class="fc" id="L189">            getBody().init();</span>
-<span class="fc" id="L190">            getBody().preConfigure();</span>
-<span class="fc" id="L191">            getAngular().preConfigure();</span>
+<span class="fc" id="L177">            getBody().init();</span>
+<span class="fc" id="L178">            getBody().preConfigure();</span>
+<span class="fc" id="L179">            getAngular().preConfigure();</span>
 
-<span class="fc" id="L193">            configurePageHeader();</span>
+<span class="fc" id="L181">            configurePageHeader();</span>
 
-<span class="fc" id="L195">            addVariablesScriptToPage();</span>
+<span class="fc" id="L183">            addVariablesScriptToPage();</span>
 
-<span class="fc" id="L197">            addScriptsToBody();</span>
+<span class="fc" id="L185">            addScriptsToBody();</span>
 
-<span class="fc" id="L199">            List&lt;Script&gt; allScripts = getDynamicScripts();</span>
+<span class="fc" id="L187">            List&lt;Script&gt; allScripts = getDynamicScripts();</span>
 
-<span class="pc bpc" id="L201" title="1 of 2 branches missed.">            allScripts.stream().filter(script -&gt; (script != null)).forEach(getBody()::add);</span>
+<span class="pc bpc" id="L189" title="1 of 2 branches missed.">            allScripts.stream().filter(script -&gt; (script != null)).forEach(getBody()::add);</span>
 
-<span class="fc" id="L203">            getTopShelfScripts().forEach(next -&gt;</span>
+<span class="fc" id="L191">            getTopShelfScripts().forEach(next -&gt;</span>
             {
-<span class="fc" id="L205">                getHead().add((HeadChildren) next);</span>
-<span class="fc" id="L206">            });</span>
+<span class="fc" id="L193">                getHead().add((HeadChildren) next);</span>
+<span class="fc" id="L194">            });</span>
 
-<span class="fc" id="L208">            ArrayList&lt;ComponentHierarchyBase&gt; requirements = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L196">            ArrayList&lt;ComponentHierarchyBase&gt; requirements = new ArrayList&lt;&gt;();</span>
 
-<span class="fc bfc" id="L210" title="All 2 branches covered.">            for (RequirementsPriority priority : RequirementsPriority.values())</span>
+<span class="fc bfc" id="L198" title="All 2 branches covered.">            for (RequirementsPriority priority : RequirementsPriority.values())</span>
             {
-<span class="fc" id="L212">                getPriorityRequirements(priority, requirements, true, false).stream().forEach((comp) -&gt;</span>
+<span class="fc" id="L200">                getPriorityRequirements(priority, requirements, true, false).stream().forEach((comp) -&gt;</span>
                 {
-<span class="fc" id="L214">                    getHead().getChildren().add(comp);</span>
-<span class="fc" id="L215">                });</span>
+<span class="fc" id="L202">                    getHead().getChildren().add(comp);</span>
+<span class="fc" id="L203">                });</span>
             }
-<span class="fc" id="L217">            getHead().add((HeadChildren) getCssStyle());</span>
+<span class="fc" id="L205">            getHead().add((HeadChildren) getCssStyle());</span>
 
-<span class="fc" id="L219">            buildComponentHierarchy();</span>
+<span class="fc" id="L207">            buildComponentHierarchy();</span>
         }
-<span class="fc" id="L221">        super.preConfigure();</span>
-<span class="fc" id="L222">    }</span>
+<span class="fc" id="L209">        super.preConfigure();</span>
+<span class="fc" id="L210">    }</span>
 
     /**
      * Returns the component with only it's methods
@@ -228,7 +216,7 @@ public class Page extends Html implements IPage
      */
     public IPage asMe()
     {
-<span class="nc" id="L231">        return this;</span>
+<span class="nc" id="L219">        return this;</span>
     }
 
     /**
@@ -239,11 +227,11 @@ public class Page extends Html implements IPage
     @Override
     public java.util.Map&lt;String, ComponentHierarchyBase&gt; getComponentCache()
     {
-<span class="fc bfc" id="L242" title="All 2 branches covered.">        if (componentCache == null)</span>
+<span class="fc bfc" id="L230" title="All 2 branches covered.">        if (componentCache == null)</span>
         {
-<span class="fc" id="L244">            componentCache = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L232">            componentCache = new HashMap&lt;&gt;();</span>
         }
-<span class="fc" id="L246">        return componentCache;</span>
+<span class="fc" id="L234">        return componentCache;</span>
     }
 
     /**
@@ -254,7 +242,7 @@ public class Page extends Html implements IPage
     @Override
     public List&lt;ComponentHierarchyBase&gt; getAllComponents()
     {
-<span class="nc" id="L257">        return (List&lt;ComponentHierarchyBase&gt;) getComponentCache().values();</span>
+<span class="nc" id="L245">        return (List&lt;ComponentHierarchyBase&gt;) getComponentCache().values();</span>
     }
 
     /**
@@ -263,9 +251,9 @@ public class Page extends Html implements IPage
     public void buildComponentHierarchy()
     {
         //getComponentCache().clear();
-<span class="fc" id="L266">        getComponentCache().put(getBody().getID(), getBody());</span>
-<span class="fc" id="L267">        buildComponentHierarchy(getBody(), getComponentCache());</span>
-<span class="fc" id="L268">    }</span>
+<span class="fc" id="L254">        getComponentCache().put(getBody().getID(), getBody());</span>
+<span class="fc" id="L255">        buildComponentHierarchy(getBody(), getComponentCache());</span>
+<span class="fc" id="L256">    }</span>
 
     /**
      * Builds up or adds components to the page
@@ -275,22 +263,22 @@ public class Page extends Html implements IPage
      */
     public void buildComponentHierarchy(ComponentHierarchyBase startingPoint, java.util.Map&lt;String, ComponentHierarchyBase&gt; addToMap)
     {
-<span class="pc bpc" id="L278" title="1 of 2 branches missed.">        startingPoint.getChildren().stream().filter(child -&gt; !(child == null)).map(child</span>
+<span class="pc bpc" id="L266" title="1 of 2 branches missed.">        startingPoint.getChildren().stream().filter(child -&gt; !(child == null)).map(child</span>
                 -&gt;
         {
-<span class="fc" id="L281">            ComponentHierarchyBase c = (ComponentHierarchyBase) child;</span>
-<span class="fc" id="L282">            addToMap.put(c.getID(), c);</span>
-<span class="fc" id="L283">            return child;</span>
-<span class="fc" id="L284">        }).forEach(child</span>
+<span class="fc" id="L269">            ComponentHierarchyBase c = (ComponentHierarchyBase) child;</span>
+<span class="fc" id="L270">            addToMap.put(c.getID(), c);</span>
+<span class="fc" id="L271">            return child;</span>
+<span class="fc" id="L272">        }).forEach(child</span>
                 -&gt;
         {
-<span class="fc" id="L287">            ComponentHierarchyBase c = (ComponentHierarchyBase) child;</span>
-<span class="pc bpc" id="L288" title="1 of 2 branches missed.">            if (child != null)</span>
+<span class="fc" id="L275">            ComponentHierarchyBase c = (ComponentHierarchyBase) child;</span>
+<span class="pc bpc" id="L276" title="1 of 2 branches missed.">            if (child != null)</span>
             {
-<span class="fc" id="L290">                buildComponentHierarchy(c, addToMap);</span>
+<span class="fc" id="L278">                buildComponentHierarchy(c, addToMap);</span>
             }
-<span class="fc" id="L292">        });</span>
-<span class="fc" id="L293">    }</span>
+<span class="fc" id="L280">        });</span>
+<span class="fc" id="L281">    }</span>
 
     /**
      * Sets the current component cache
@@ -299,8 +287,8 @@ public class Page extends Html implements IPage
      */
     public void setComponentCache(HashMap&lt;String, ComponentHierarchyBase&gt; componentCache)
     {
-<span class="nc" id="L302">        this.componentCache = componentCache;</span>
-<span class="nc" id="L303">    }</span>
+<span class="nc" id="L290">        this.componentCache = componentCache;</span>
+<span class="nc" id="L291">    }</span>
 
     /**
      * Returns the style object. If dynamic rendering is enabled it will point to the Servlet.
@@ -309,25 +297,25 @@ public class Page extends Html implements IPage
      */
     public ComponentHierarchyBase getCssStyle()
     {
-<span class="fc" id="L312">        StringBuilder css = getBody().renderCss(0);</span>
-<span class="pc bpc" id="L313" title="1 of 2 branches missed.">        if (!css.toString().isEmpty())</span>
+<span class="fc" id="L300">        StringBuilder css = getBody().renderCss(0);</span>
+<span class="fc bfc" id="L301" title="All 2 branches covered.">        if (!css.toString().isEmpty())</span>
         {
-<span class="nc bnc" id="L315" title="All 2 branches missed.">            if (getOptions().isDynamicRender())</span>
+<span class="fc bfc" id="L303" title="All 2 branches covered.">            if (getOptions().isDynamicRender())</span>
             {
-<span class="nc" id="L317">                CSSLink renderedCSS = new CSSLink(JWebSwingSiteBinder.CSSLocation.replaceAll(&quot;/&quot;, &quot;&quot;));</span>
-<span class="nc" id="L318">                return renderedCSS;</span>
+<span class="fc" id="L305">                CSSLink renderedCSS = new CSSLink(JWebSwingSiteBinder.getCSSLocation().replaceAll(&quot;/&quot;, &quot;&quot;));</span>
+<span class="fc" id="L306">                return renderedCSS;</span>
             }
             else
             {
-<span class="nc bnc" id="L322" title="All 2 branches missed.">                if (css.length() &gt; 0)</span>
+<span class="pc bpc" id="L310" title="1 of 2 branches missed.">                if (css.length() &gt; 0)</span>
                 {
-<span class="nc" id="L324">                    Style style = new Style();</span>
-<span class="nc" id="L325">                    style.setText(css);</span>
-<span class="nc" id="L326">                    return style;</span>
+<span class="fc" id="L312">                    Style style = new Style();</span>
+<span class="fc" id="L313">                    style.setText(css);</span>
+<span class="fc" id="L314">                    return style;</span>
                 }
             }
         }
-<span class="fc" id="L330">        return null;</span>
+<span class="fc" id="L318">        return null;</span>
     }
 
     /**
@@ -338,8 +326,8 @@ public class Page extends Html implements IPage
     private List&lt;ComponentHierarchyBase&gt; getTopShelfScripts()
     {
         List&lt;ComponentHierarchyBase&gt; arr;
-<span class="fc" id="L341">        arr = getPriorityRequirements(RequirementsPriority.Top_Shelf, new ArrayList&lt;&gt;(), true, true);</span>
-<span class="fc" id="L342">        return arr;</span>
+<span class="fc" id="L329">        arr = getPriorityRequirements(RequirementsPriority.Top_Shelf, new ArrayList&lt;&gt;(), true, true);</span>
+<span class="fc" id="L330">        return arr;</span>
     }
 
     /**
@@ -349,58 +337,58 @@ public class Page extends Html implements IPage
      */
     private List&lt;Script&gt; getDynamicScripts()
     {
-<span class="fc" id="L352">        ArrayList&lt;Script&gt; allScripts = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L340">        ArrayList&lt;Script&gt; allScripts = new ArrayList&lt;&gt;();</span>
 
-<span class="fc bfc" id="L354" title="All 2 branches covered.">        if (getOptions().isAngularEnabled())</span>
+<span class="fc bfc" id="L342" title="All 2 branches covered.">        if (getOptions().isAngularEnabled())</span>
         {
-<span class="pc bpc" id="L356" title="1 of 2 branches missed.">            if (getOptions().isDynamicRender())</span>
+<span class="pc bpc" id="L344" title="1 of 2 branches missed.">            if (getOptions().isDynamicRender())</span>
             {
-<span class="nc" id="L358">                Script dynamicScript = new Script();</span>
-<span class="nc" id="L359">                dynamicScript.addAttribute(ScriptAttributes.Type, &quot;application/javascript&quot;);</span>
-<span class="nc" id="L360">                dynamicScript.addAttribute(ScriptAttributes.Src,  JWebSwingSiteBinder.AngularScriptLocation.replaceAll(&quot;/&quot;, &quot;&quot;));</span>
+<span class="nc" id="L346">                Script dynamicScript = new Script();</span>
+<span class="nc" id="L347">                dynamicScript.addAttribute(ScriptAttributes.Type, &quot;application/javascript&quot;);</span>
+<span class="nc" id="L348">                dynamicScript.addAttribute(ScriptAttributes.Src,  JWebSwingSiteBinder.getAngularScriptLocation().replaceAll(&quot;/&quot;, &quot;&quot;));</span>
                 //dynamicScript.setTiny(true);
                 //dynamicScript.setText(&quot;$.ajax({cache:false,async:false,dataType:'script',url:'as'}).fail(function(){alert('session lost'); });&quot;);
-<span class="nc" id="L363">                allScripts.add(dynamicScript);</span>
-<span class="nc" id="L364">            }</span>
+<span class="nc" id="L351">                allScripts.add(dynamicScript);</span>
+<span class="nc" id="L352">            }</span>
             else
             {
-<span class="fc" id="L367">                StringBuilder js = getAngular().renderTemplateScripts(&quot;jwangular&quot;);// getBody().renderJavascriptAll();</span>
-<span class="pc bpc" id="L368" title="1 of 2 branches missed.">                if (!js.toString().trim().isEmpty())</span>
+<span class="fc" id="L355">                StringBuilder js = getAngular().renderTemplateScripts(&quot;jwangular&quot;);// getBody().renderJavascriptAll();</span>
+<span class="pc bpc" id="L356" title="1 of 2 branches missed.">                if (!js.toString().trim().isEmpty())</span>
                 {
-<span class="fc" id="L370">                    Script s = new Script();</span>
-<span class="fc" id="L371">                    s.addAttribute(ScriptAttributes.Type, &quot;application/javascript&quot;);</span>
-<span class="fc" id="L372">                    s.setText(js);</span>
-<span class="fc" id="L373">                    allScripts.add(s);</span>
+<span class="fc" id="L358">                    Script s = new Script();</span>
+<span class="fc" id="L359">                    s.addAttribute(ScriptAttributes.Type, &quot;application/javascript&quot;);</span>
+<span class="fc" id="L360">                    s.setText(js);</span>
+<span class="fc" id="L361">                    allScripts.add(s);</span>
                 }
             }
         }
 
-<span class="fc bfc" id="L378" title="All 2 branches covered.">        if (getOptions().isDynamicRender())</span>
+<span class="fc bfc" id="L366" title="All 2 branches covered.">        if (getOptions().isDynamicRender())</span>
         {
-<span class="fc" id="L380">            StringBuilder js = renderJavascript();</span>
-<span class="fc bfc" id="L381" title="All 2 branches covered.">            if (!js.toString().trim().isEmpty())</span>
+<span class="fc" id="L368">            StringBuilder js = renderJavascript();</span>
+<span class="fc bfc" id="L369" title="All 2 branches covered.">            if (!js.toString().trim().isEmpty())</span>
             {
-<span class="fc" id="L383">                Script dynamicScript = new Script();</span>
-<span class="fc" id="L384">                dynamicScript.addAttribute(ScriptAttributes.Type, &quot;application/javascript&quot;);</span>
-<span class="fc" id="L385">                dynamicScript.addAttribute(ScriptAttributes.Src, JWebSwingSiteBinder.JavaScriptLocation.replaceAll(&quot;/&quot;, &quot;&quot;));</span>
+<span class="fc" id="L371">                Script dynamicScript = new Script();</span>
+<span class="fc" id="L372">                dynamicScript.addAttribute(ScriptAttributes.Type, &quot;application/javascript&quot;);</span>
+<span class="fc" id="L373">                dynamicScript.addAttribute(ScriptAttributes.Src, JWebSwingSiteBinder.getJavaScriptLocation().replaceAll(&quot;/&quot;, &quot;&quot;));</span>
                 //dynamicScript.setTiny(true);
                 //dynamicScript.setText(&quot;$.ajax({cache:false,dataType:'script',url:'js'}).fail(function(){alert('session lost'); });&quot;);
-<span class="fc" id="L388">                allScripts.add(dynamicScript);</span>
+<span class="fc" id="L376">                allScripts.add(dynamicScript);</span>
             }
-<span class="fc" id="L390">        }</span>
+<span class="fc" id="L378">        }</span>
         else
         {
-<span class="fc" id="L393">            StringBuilder js = renderJavascript();</span>
-<span class="fc bfc" id="L394" title="All 2 branches covered.">            if (!js.toString().trim().isEmpty())</span>
+<span class="fc" id="L381">            StringBuilder js = renderJavascript();</span>
+<span class="fc bfc" id="L382" title="All 2 branches covered.">            if (!js.toString().trim().isEmpty())</span>
             {
-<span class="fc" id="L396">                Script s = new Script();</span>
-<span class="fc" id="L397">                s.addAttribute(ScriptAttributes.Type, &quot;application/javascript&quot;);</span>
-<span class="fc" id="L398">                s.setText(js);</span>
-<span class="fc" id="L399">                allScripts.add(s);</span>
+<span class="fc" id="L384">                Script s = new Script();</span>
+<span class="fc" id="L385">                s.addAttribute(ScriptAttributes.Type, &quot;application/javascript&quot;);</span>
+<span class="fc" id="L386">                s.setText(js);</span>
+<span class="fc" id="L387">                allScripts.add(s);</span>
             }
         }
 
-<span class="fc" id="L403">        return allScripts;</span>
+<span class="fc" id="L391">        return allScripts;</span>
     }
 
     /**
@@ -408,78 +396,78 @@ public class Page extends Html implements IPage
      */
     private void configurePageHeader()
     {
-<span class="fc bfc" id="L411" title="All 2 branches covered.">        if (getPageFields().getTitle() != null)</span>
+<span class="fc bfc" id="L399" title="All 2 branches covered.">        if (getPageFields().getTitle() != null)</span>
         {
-<span class="fc" id="L413">            getHead().add(getPageFields().getTitle());</span>
+<span class="fc" id="L401">            getHead().add(getPageFields().getTitle());</span>
         }
-<span class="fc bfc" id="L415" title="All 2 branches covered.">        if (getPageFields().getBase() != null)</span>
+<span class="fc bfc" id="L403" title="All 2 branches covered.">        if (getPageFields().getBase() != null)</span>
         {
-<span class="fc" id="L417">            getHead().add(getPageFields().getBase());</span>
+<span class="fc" id="L405">            getHead().add(getPageFields().getBase());</span>
         }
-<span class="fc" id="L419">        getHead().add(getPageFields().getHttpEquivMeta());</span>
-<span class="fc" id="L420">        getHead().add(getPageFields().getCacheControl());</span>
-<span class="fc" id="L421">        getHead().add(getPageFields().getAuthor());</span>
-<span class="fc" id="L422">        getHead().add(getPageFields().getApplicationName());</span>
-<span class="fc" id="L423">        getHead().add(getPageFields().getGenerator());</span>
-<span class="fc" id="L424">        getHead().add(getPageFields().getDescription());</span>
-<span class="fc" id="L425">        getHead().add(getPageFields().getKeywords());</span>
-<span class="fc" id="L426">        getHead().add(getPageFields().getFavIconLink());</span>
+<span class="fc" id="L407">        getHead().add(getPageFields().getHttpEquivMeta());</span>
+<span class="fc" id="L408">        getHead().add(getPageFields().getCacheControl());</span>
+<span class="fc" id="L409">        getHead().add(getPageFields().getAuthor());</span>
+<span class="fc" id="L410">        getHead().add(getPageFields().getApplicationName());</span>
+<span class="fc" id="L411">        getHead().add(getPageFields().getGenerator());</span>
+<span class="fc" id="L412">        getHead().add(getPageFields().getDescription());</span>
+<span class="fc" id="L413">        getHead().add(getPageFields().getKeywords());</span>
+<span class="fc" id="L414">        getHead().add(getPageFields().getFavIconLink());</span>
 
-<span class="fc" id="L428">        getHead().getChildren().stream().forEach((headObject)</span>
+<span class="fc" id="L416">        getHead().getChildren().stream().forEach((headObject)</span>
                 -&gt;
         {
-<span class="fc" id="L431">            headObject.init();</span>
-<span class="fc" id="L432">            headObject.preConfigure();</span>
-<span class="fc" id="L433">        });</span>
-<span class="fc" id="L434">    }</span>
+<span class="fc" id="L419">            headObject.init();</span>
+<span class="fc" id="L420">            headObject.preConfigure();</span>
+<span class="fc" id="L421">        });</span>
+<span class="fc" id="L422">    }</span>
 
     /**
      * Adds the variables in the application to the collection
      */
     private void addVariablesScriptToPage()
     {
-<span class="fc" id="L441">        StringBuilder variablesScriptBuilder = new StringBuilder();</span>
-<span class="fc bfc" id="L442" title="All 2 branches covered.">        for (Iterator it = getBody().getVariablesAll().iterator(); it.hasNext();)</span>
+<span class="fc" id="L429">        StringBuilder variablesScriptBuilder = new StringBuilder();</span>
+<span class="fc bfc" id="L430" title="All 2 branches covered.">        for (Iterator it = getBody().getVariablesAll().iterator(); it.hasNext();)</span>
         {
-<span class="fc" id="L444">            String var = (String) it.next();</span>
-<span class="fc" id="L445">            variablesScriptBuilder.append(&quot;var &quot;).append(var).append(&quot;;&quot;);</span>
-<span class="fc" id="L446">        }</span>
-<span class="fc bfc" id="L447" title="All 2 branches covered.">        if (variablesScriptBuilder.length() &gt; 0)</span>
+<span class="fc" id="L432">            String var = (String) it.next();</span>
+<span class="fc" id="L433">            variablesScriptBuilder.append(&quot;var &quot;).append(var).append(&quot;;&quot;);</span>
+<span class="fc" id="L434">        }</span>
+<span class="fc bfc" id="L435" title="All 2 branches covered.">        if (variablesScriptBuilder.length() &gt; 0)</span>
         {
-<span class="fc" id="L449">            Script variablesScript = new Script();</span>
-<span class="fc" id="L450">            variablesScript.setID(&quot;variables&quot;);</span>
-<span class="fc" id="L451">            variablesScript.setNewLineForRawText(true);</span>
-<span class="fc" id="L452">            variablesScript.addAttribute(ScriptAttributes.Type, &quot;text/javascript&quot;);</span>
-<span class="fc" id="L453">            variablesScript.setText(variablesScriptBuilder.toString());</span>
-<span class="pc bpc" id="L454" title="1 of 2 branches missed.">            if (!getHead().getChildren().contains(variablesScript))</span>
+<span class="fc" id="L437">            Script variablesScript = new Script();</span>
+<span class="fc" id="L438">            variablesScript.setID(&quot;variables&quot;);</span>
+<span class="fc" id="L439">            variablesScript.setNewLineForRawText(true);</span>
+<span class="fc" id="L440">            variablesScript.addAttribute(ScriptAttributes.Type, &quot;text/javascript&quot;);</span>
+<span class="fc" id="L441">            variablesScript.setText(variablesScriptBuilder.toString());</span>
+<span class="pc bpc" id="L442" title="1 of 2 branches missed.">            if (!getHead().getChildren().contains(variablesScript))</span>
             {
-<span class="fc" id="L456">                getHead().add(variablesScript);</span>
+<span class="fc" id="L444">                getHead().add(variablesScript);</span>
             }
         }
-<span class="fc" id="L459">    }</span>
+<span class="fc" id="L447">    }</span>
 
     private void addScriptsToBody()
     {
-<span class="fc" id="L463">        List&lt;ComponentHierarchyBase&gt; requirements = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L451">        List&lt;ComponentHierarchyBase&gt; requirements = new ArrayList&lt;&gt;();</span>
 
-<span class="fc" id="L465">        List&lt;RequirementsPriority&gt; arrs = new ArrayList&lt;&gt;(Arrays.asList(RequirementsPriority.values()));</span>
+<span class="fc" id="L453">        List&lt;RequirementsPriority&gt; arrs = new ArrayList&lt;&gt;(Arrays.asList(RequirementsPriority.values()));</span>
         //render JS only
-<span class="fc bfc" id="L467" title="All 2 branches covered.">        arrs.stream().filter(a -&gt; a != RequirementsPriority.Top_Shelf).map(priority -&gt;</span>
+<span class="fc bfc" id="L455" title="All 2 branches covered.">        arrs.stream().filter(a -&gt; a != RequirementsPriority.Top_Shelf).map(priority -&gt;</span>
         {
-<span class="fc bfc" id="L469" title="All 2 branches covered.">            if (!getPriorityRequirements(priority, requirements, true, false).isEmpty())</span>
+<span class="fc bfc" id="L457" title="All 2 branches covered.">            if (!getPriorityRequirements(priority, requirements, true, false).isEmpty())</span>
             {
                 //getBody().add(new Comment(&quot;Priority [&quot; + priority + &quot;] Values&quot;));
             }
-<span class="fc" id="L473">            return priority;</span>
-<span class="fc" id="L474">        }).forEachOrdered(priority -&gt;</span>
+<span class="fc" id="L461">            return priority;</span>
+<span class="fc" id="L462">        }).forEachOrdered(priority -&gt;</span>
         {
-<span class="fc" id="L476">            getPriorityRequirements(priority, requirements, false, true).stream().forEach(comp</span>
+<span class="fc" id="L464">            getPriorityRequirements(priority, requirements, false, true).stream().forEach(comp</span>
                     -&gt;
             {
-<span class="fc" id="L479">                getBody().add(comp);</span>
-<span class="fc" id="L480">            });</span>
-<span class="fc" id="L481">        });</span>
-<span class="fc" id="L482">    }</span>
+<span class="fc" id="L467">                getBody().add(comp);</span>
+<span class="fc" id="L468">            });</span>
+<span class="fc" id="L469">        });</span>
+<span class="fc" id="L470">    }</span>
 
     /**
      * Adds all the stuff for a given priority
@@ -491,25 +479,25 @@ public class Page extends Html implements IPage
      */
     private List&lt;ComponentHierarchyBase&gt; getPriorityRequirements(RequirementsPriority priority, List&lt;ComponentHierarchyBase&gt; input, boolean css, boolean javascript)
     {
-<span class="fc" id="L494">        List&lt;ComponentHierarchyBase&gt; requirements = new ArrayList&lt;&gt;();</span>
-<span class="fc bfc" id="L495" title="All 2 branches covered.">        if (css)</span>
+<span class="fc" id="L482">        List&lt;ComponentHierarchyBase&gt; requirements = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L483" title="All 2 branches covered.">        if (css)</span>
         {
-<span class="pc bpc" id="L497" title="2 of 4 branches missed.">            getAllCssLinks(priority).stream().filter(cssLink -&gt; (!input.contains(cssLink) &amp;&amp; !requirements.contains(cssLink))).forEach(cssLink</span>
+<span class="pc bpc" id="L485" title="2 of 4 branches missed.">            getAllCssLinks(priority).stream().filter(cssLink -&gt; (!input.contains(cssLink) &amp;&amp; !requirements.contains(cssLink))).forEach(cssLink</span>
                     -&gt;
             {
-<span class="fc" id="L500">                requirements.add(cssLink);</span>
-<span class="fc" id="L501">            });</span>
+<span class="fc" id="L488">                requirements.add(cssLink);</span>
+<span class="fc" id="L489">            });</span>
         }
-<span class="fc bfc" id="L503" title="All 2 branches covered.">        if (javascript)</span>
+<span class="fc bfc" id="L491" title="All 2 branches covered.">        if (javascript)</span>
         {
-<span class="pc bpc" id="L505" title="2 of 4 branches missed.">            getAllScripts(priority).stream().filter(script -&gt; (!input.contains(script) &amp;&amp; !requirements.contains(script))).forEach(script</span>
+<span class="pc bpc" id="L493" title="2 of 4 branches missed.">            getAllScripts(priority).stream().filter(script -&gt; (!input.contains(script) &amp;&amp; !requirements.contains(script))).forEach(script</span>
                     -&gt;
             {
-<span class="fc" id="L508">                requirements.add(script);</span>
-<span class="fc" id="L509">            });</span>
+<span class="fc" id="L496">                requirements.add(script);</span>
+<span class="fc" id="L497">            });</span>
         }
 
-<span class="fc" id="L512">        return requirements;</span>
+<span class="fc" id="L500">        return requirements;</span>
     }
 
     /**
@@ -521,11 +509,11 @@ public class Page extends Html implements IPage
      */
     private List&lt;CSSLink&gt; getAllCssLinks(RequirementsPriority priority)
     {
-<span class="fc" id="L524">        List&lt;CSSReference&gt; allReferences = getBody().getCssReferencesAll(priority);</span>
-<span class="fc" id="L525">        allReferences.sort(WebReference.getDummyReference());</span>
-<span class="fc" id="L526">        ArrayList&lt;CSSLink&gt; allLinks = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L527">        allReferences.stream().map(ref -&gt; new CSSLink(ref)).forEach(allLinks::add);</span>
-<span class="fc" id="L528">        return allLinks;</span>
+<span class="fc" id="L512">        List&lt;CSSReference&gt; allReferences = getBody().getCssReferencesAll(priority);</span>
+<span class="fc" id="L513">        allReferences.sort(WebReference.getDummyReference());</span>
+<span class="fc" id="L514">        ArrayList&lt;CSSLink&gt; allLinks = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L515">        allReferences.stream().map(ref -&gt; new CSSLink(ref)).forEach(allLinks::add);</span>
+<span class="fc" id="L516">        return allLinks;</span>
     }
 
     /**
@@ -537,16 +525,16 @@ public class Page extends Html implements IPage
      */
     private List&lt;Script&gt; getAllScripts(RequirementsPriority priority)
     {
-<span class="fc" id="L540">        List&lt;JavascriptReference&gt; allJavascripts = getBody().getJavascriptReferencesAll(priority);</span>
-<span class="fc" id="L541">        allJavascripts.sort(WebReference.getDummyReference());</span>
-<span class="fc" id="L542">        ArrayList&lt;Script&gt; allScripts = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L543">        allJavascripts.stream().map(js -&gt; new Script(js)).forEach(s</span>
+<span class="fc" id="L528">        List&lt;JavascriptReference&gt; allJavascripts = getBody().getJavascriptReferencesAll(priority);</span>
+<span class="fc" id="L529">        allJavascripts.sort(WebReference.getDummyReference());</span>
+<span class="fc" id="L530">        ArrayList&lt;Script&gt; allScripts = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L531">        allJavascripts.stream().map(js -&gt; new Script(js)).forEach(s</span>
                 -&gt;
         {
-<span class="fc" id="L546">            s.setNewLineForClosingTag(false);</span>
-<span class="fc" id="L547">            allScripts.add(s);</span>
-<span class="fc" id="L548">        });</span>
-<span class="fc" id="L549">        return allScripts;</span>
+<span class="fc" id="L534">            s.setNewLineForClosingTag(false);</span>
+<span class="fc" id="L535">            allScripts.add(s);</span>
+<span class="fc" id="L536">        });</span>
+<span class="fc" id="L537">        return allScripts;</span>
     }
 
     /**
@@ -556,7 +544,7 @@ public class Page extends Html implements IPage
      */
     private boolean isHeadEmpty()
     {
-<span class="fc" id="L559">        return getHead().getChildren().isEmpty();</span>
+<span class="fc" id="L547">        return getHead().getChildren().isEmpty();</span>
     }
 
     /**
@@ -566,7 +554,7 @@ public class Page extends Html implements IPage
      */
     private boolean isBodyEmpty()
     {
-<span class="fc" id="L569">        return getBody().getChildren().isEmpty();</span>
+<span class="fc" id="L557">        return getBody().getChildren().isEmpty();</span>
     }
 
     /**
@@ -576,11 +564,11 @@ public class Page extends Html implements IPage
      */
     public ReadableUserAgent getUserAgent()
     {
-<span class="nc bnc" id="L579" title="All 2 branches missed.">        if (userAgent == null)</span>
+<span class="nc bnc" id="L567" title="All 2 branches missed.">        if (userAgent == null)</span>
         {
-<span class="nc" id="L581">            userAgent = new UserAgent(DeviceCategory.EMPTY, UserAgentFamily.FIREFOX, &quot;&quot;, &quot;&quot;, OperatingSystem.EMPTY, &quot;&quot;, &quot;&quot;, UserAgentType.BROWSER, &quot;&quot;, &quot;&quot;, VersionNumber.UNKNOWN);</span>
+<span class="nc" id="L569">            userAgent = new UserAgent(DeviceCategory.EMPTY, UserAgentFamily.FIREFOX, &quot;&quot;, &quot;&quot;, OperatingSystem.EMPTY, &quot;&quot;, &quot;&quot;, UserAgentType.BROWSER, &quot;&quot;, &quot;&quot;, VersionNumber.UNKNOWN);</span>
         }
-<span class="nc" id="L583">        return userAgent;</span>
+<span class="nc" id="L571">        return userAgent;</span>
     }
 
     /**
@@ -590,8 +578,8 @@ public class Page extends Html implements IPage
      */
     public void setUserAgent(ReadableUserAgent userAgent)
     {
-<span class="nc" id="L593">        this.userAgent = userAgent;</span>
-<span class="nc" id="L594">    }</span>
+<span class="nc" id="L581">        this.userAgent = userAgent;</span>
+<span class="nc" id="L582">    }</span>
 
     /**
      * Returns all the dynamic options for a page
@@ -601,11 +589,11 @@ public class Page extends Html implements IPage
     @Override
     public final PageOptions getOptions()
     {
-<span class="fc bfc" id="L604" title="All 2 branches covered.">        if (options == null)</span>
+<span class="fc bfc" id="L592" title="All 2 branches covered.">        if (options == null)</span>
         {
-<span class="fc" id="L606">            options = new PageOptions(this);</span>
+<span class="fc" id="L594">            options = new PageOptions(this);</span>
         }
-<span class="fc" id="L608">        return options;</span>
+<span class="fc" id="L596">        return options;</span>
     }
 
     /**
@@ -616,52 +604,12 @@ public class Page extends Html implements IPage
     @Override
     public final PageFields getPageFields()
     {
-<span class="fc bfc" id="L619" title="All 2 branches covered.">        if (fields == null)</span>
+<span class="fc bfc" id="L607" title="All 2 branches covered.">        if (fields == null)</span>
         {
-<span class="fc" id="L621">            fields = new PageFields(this);</span>
+<span class="fc" id="L609">            fields = new PageFields(this);</span>
         }
-<span class="fc" id="L623">        return fields;</span>
+<span class="fc" id="L611">        return fields;</span>
     }
-
-    /**
-     * Returns the attached session if available
-     *
-     * @return HTTPSession or NULL
-     */
-    public final HttpSession getSession()
-    {
-<span class="nc" id="L633">        return session;</span>
-    }
-
-    /**
-     * Sets this pages session
-     *
-     * @param session HttpSession or null
-     */
-    public final void setSession(HttpSession session)
-    {
-<span class="nc" id="L643">        this.session = session;</span>
-<span class="nc" id="L644">    }</span>
-
-    /**
-     * Returns the Servlet processing requests
-     *
-     * @return The JWebSwingServlet
-     */
-    public JWebSwingServlet getServlet()
-    {
-<span class="nc" id="L653">        return servlet;</span>
-    }
-
-    /**
-     * Sets the Servlet to a new Servlet
-     *
-     * @param servlet The Servlet to set
-     */
-    public void setServlet(JWebSwingServlet servlet)
-    {
-<span class="nc" id="L663">        this.servlet = servlet;</span>
-<span class="nc" id="L664">    }</span>
 
     /**
      * Returns the document type that will be rendered with this HTML page real-time
@@ -671,7 +619,7 @@ public class Page extends Html implements IPage
     @Override
     public DocumentType getDocumentType()
     {
-<span class="nc" id="L674">        return new DocumentType(getBrowser().getHtmlVersion());</span>
+<span class="nc" id="L622">        return new DocumentType(getBrowser().getHtmlVersion());</span>
     }
 
     /**
@@ -684,10 +632,10 @@ public class Page extends Html implements IPage
     @Override
     public Page setTiny(boolean tiny)
     {
-<span class="fc" id="L687">        super.setTiny(tiny);</span>
-<span class="fc" id="L688">        getHead().setTiny(tiny);</span>
-<span class="fc" id="L689">        getBody().setTiny(tiny);</span>
-<span class="fc" id="L690">        return this;</span>
+<span class="fc" id="L635">        super.setTiny(tiny);</span>
+<span class="fc" id="L636">        getHead().setTiny(tiny);</span>
+<span class="fc" id="L637">        getBody().setTiny(tiny);</span>
+<span class="fc" id="L638">        return this;</span>
     }
 
     /**
@@ -698,7 +646,7 @@ public class Page extends Html implements IPage
     @Override
     public StringBuilder renderJavascript()
     {
-<span class="fc" id="L701">        return getBody().renderJavascript();</span>
+<span class="fc" id="L649">        return getBody().renderJavascript();</span>
     }
 
     /**
@@ -711,8 +659,8 @@ public class Page extends Html implements IPage
     @Override
     public Page addAngularVariable(String variableName)
     {
-<span class="fc" id="L714">        getAngular().getAngularVariables().add(variableName);</span>
-<span class="fc" id="L715">        return this;</span>
+<span class="fc" id="L662">        getAngular().getAngularVariables().add(variableName);</span>
+<span class="fc" id="L663">        return this;</span>
     }
 
     /**
@@ -723,12 +671,12 @@ public class Page extends Html implements IPage
     @Override
     public AngularFeature getAngular()
     {
-<span class="fc bfc" id="L726" title="All 2 branches covered.">        if (angular == null)</span>
+<span class="fc bfc" id="L674" title="All 2 branches covered.">        if (angular == null)</span>
         {
-<span class="fc" id="L728">            angular = new AngularFeature(getBody());</span>
-<span class="fc" id="L729">            getBody().addFeature(angular);</span>
+<span class="fc" id="L676">            angular = new AngularFeature(getBody());</span>
+<span class="fc" id="L677">            getBody().addFeature(angular);</span>
         }
-<span class="fc" id="L731">        return angular;</span>
+<span class="fc" id="L679">        return angular;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

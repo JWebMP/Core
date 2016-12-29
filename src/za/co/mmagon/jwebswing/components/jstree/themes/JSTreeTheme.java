@@ -22,5 +22,11 @@ package za.co.mmagon.jwebswing.components.jstree.themes;
  */
 public interface JSTreeTheme
 {
-    
+
+    /**
+     * Returns the name to be used in the settings
+     *
+     * @return
+     */
+    public String getName();
 }

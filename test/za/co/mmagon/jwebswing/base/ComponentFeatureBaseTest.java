@@ -70,7 +70,8 @@ public class ComponentFeatureBaseTest extends BaseTestClass
                 + "  } ],\n"
                 + "  \"sortOrder\" : 1000,\n"
                 + "  \"renderAfterLoad\" : false,\n"
-                + "  \"javascriptRenderedElsewhere\" : false\n"
+                + "  \"javascriptRenderedElsewhere\" : false,\n"
+                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentFeatureBase\"\n"
                 + "}", cfb.toString());
     }
 

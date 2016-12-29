@@ -37,15 +37,30 @@ public class JSTreeAjaxConfigOptions extends JavaScriptPart
      */
     private String url;
     /**
-     * In addition to the standard jQuery ajax options here you can suppy functions for data and url, the functions will be run in the current instance's scope and a param will be passed indicating
-     * which node is being loaded, the return value of those functions will be used.
+     * Data to be sent to the server. It is converted to a query string, if not already a string. It's appended to the url for GET-requests. See processData option to prevent this automatic
+     * processing. Object must be Key/Value pairs. If value is an Array, jQuery serializes multiple values with same key based on the value of the traditional setting (described below).
      */
     private JSTreeCoreDataFunction data;
+    /**
+     * If set to false, it will force requested pages not to be cached by the browser. Note: Setting cache to false will only work correctly with HEAD and GET requests. It works by appending
+     * &quot;_={timestamp}&quot; to the GET parameters. The parameter is not needed for other types of requests, except in IE8 when a POST is made to a URL that has already been requested by a GET.
+     */
+    private Boolean cache;
+    /**
+     * The type of data that you're expecting back from the server. If none is specified, jQuery will try to infer it based on the MIME type of the response (an XML MIME type will yield XML, in 1.4
+     * JSON will yield a JavaScript object, in 1.4 script will execute the script, and anything else will be returned as a string). The available types (and the result passed as the first argument to
+     * your success callback) are:
+     */
+    private String dataType;
+    /**
+     * 
+     */
+    private String type;
 
     public JSTreeAjaxConfigOptions()
-<span class="nc" id="L46">    {</span>
+<span class="fc" id="L61">    {</span>
 
-<span class="nc" id="L48">    }</span>
+<span class="fc" id="L63">    }</span>
 
     /**
      * The Ajax url to retrieve data from.
@@ -56,7 +71,7 @@ public class JSTreeAjaxConfigOptions extends JavaScriptPart
      */
     public String getUrl()
     {
-<span class="nc" id="L59">        return url;</span>
+<span class="nc" id="L74">        return url;</span>
     }
 
     /**
@@ -68,30 +83,76 @@ public class JSTreeAjaxConfigOptions extends JavaScriptPart
      */
     public void setUrl(String url)
     {
-<span class="nc" id="L71">        this.url = url;</span>
-<span class="nc" id="L72">    }</span>
+<span class="fc" id="L86">        this.url = url;</span>
+<span class="fc" id="L87">    }</span>
 
     /**
-     * In addition to the standard jQuery ajax options here you can suppy functions for data and url, the functions will be run in the current instance's scope and a param will be passed indicating
-     * which node is being loaded, the return value of those functions will be used.
+     * Data to be sent to the server. It is converted to a query string, if not already a string. It's appended to the url for GET-requests. See processData option to prevent this automatic
+     * processing. Object must be Key/Value pairs. If value is an Array, jQuery serializes multiple values with same key based on the value of the traditional setting (described below).
      *
      * @return
      */
     public JSTreeCoreDataFunction getData()
     {
-<span class="nc" id="L82">        return data;</span>
+<span class="nc" id="L97">        return data;</span>
     }
 
     /**
-     * In addition to the standard jQuery ajax options here you can suppy functions for data and url, the functions will be run in the current instance's scope and a param will be passed indicating
-     * which node is being loaded, the return value of those functions will be used.
+     * Data to be sent to the server. It is converted to a query string, if not already a string. It's appended to the url for GET-requests. See processData option to prevent this automatic
+     * processing. Object must be Key/Value pairs. If value is an Array, jQuery serializes multiple values with same key based on the value of the traditional setting (described below).
      *
      * @param data
      */
     public void setData(JSTreeCoreDataFunction data)
     {
-<span class="nc" id="L93">        this.data = data;</span>
-<span class="nc" id="L94">    }</span>
+<span class="fc" id="L108">        this.data = data;</span>
+<span class="fc" id="L109">    }</span>
+
+    /**
+     * If set to false, it will force requested pages not to be cached by the browser. Note: Setting cache to false will only work correctly with HEAD and GET requests. It works by appending
+     * &quot;_={timestamp}&quot; to the GET parameters. The parameter is not needed for other types of requests, except in IE8 when a POST is made to a URL that has already been requested by a GET.
+     *
+     * @return
+     */
+    public Boolean getCache()
+    {
+<span class="nc" id="L119">        return cache;</span>
+    }
+
+    /**
+     * If set to false, it will force requested pages not to be cached by the browser. Note: Setting cache to false will only work correctly with HEAD and GET requests. It works by appending
+     * &quot;_={timestamp}&quot; to the GET parameters. The parameter is not needed for other types of requests, except in IE8 when a POST is made to a URL that has already been requested by a GET.
+     *
+     * @param cache
+     */
+    public void setCache(Boolean cache)
+    {
+<span class="nc" id="L130">        this.cache = cache;</span>
+<span class="nc" id="L131">    }</span>
+
+    /**
+     * The type of data that you're expecting back from the server. If none is specified, jQuery will try to infer it based on the MIME type of the response (an XML MIME type will yield XML, in 1.4
+     * JSON will yield a JavaScript object, in 1.4 script will execute the script, and anything else will be returned as a string). The available types (and the result passed as the first argument to
+     * your success callback) are:
+     *
+     * @return
+     */
+    public String getDataType()
+    {
+<span class="nc" id="L142">        return dataType;</span>
+    }
+
+    /**
+     * The type of data that you're expecting back from the server. If none is specified, jQuery will try to infer it based on the MIME type of the response (an XML MIME type will yield XML, in 1.4
+     * JSON will yield a JavaScript object, in 1.4 script will execute the script, and anything else will be returned as a string). The available types (and the result passed as the first argument to
+     * your success callback) are:
+     *
+     * @param dataType
+     */
+    public void setDataType(String dataType)
+    {
+<span class="nc" id="L154">        this.dataType = dataType;</span>
+<span class="nc" id="L155">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,15 +1,23 @@
+/* global JW_APP_NAME, BootstrapDialog */
 
 JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, $timeout) {
 
+    var self = this;
     /**
      * Loads up the initial variables into angular
      * @returns {undefined}
      */
     $scope._init = function ()
     {
-        if (Modernizr)
+        try
         {
-            $scope.Modernizr = Modernizr;
+            if (window.Modernizr)
+            {
+                $scope.Modernizr = window.Modernizr;
+            }
+        } catch (e)
+        {
+            console.warn("moderniz not enabled");
         }
 
         var toGo = 'jwad?o=body';
@@ -70,8 +78,8 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
      * @returns {undefined}
      */
     $scope.perform = function ($event, dataVariables, eventId) {
-        if (Pace)
-            Pace.start();
+        if (window.Pace)
+            window.Pace.start();
         //alert('doing stuff');
         var eventStuff = $scope.getEventObject($event);
         //alert(JSON.stringify($event));
@@ -121,8 +129,14 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
             },
             success: function (result, status, xhr) {
                 $scope.processResponse(result, status, xhr);
-                if (Pace)
-                    Pace.stop();
+                try
+                {
+                    if (window.Pace)
+                        window.Pace.stop();
+                } catch (e)
+                {
+
+                }
             },
             fail: function (xhr, textStatus, errorThrown) {
                 var err = eval("(" + xhr.responseText + ")");
@@ -137,13 +151,17 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
                             }
                         }]
                 });
-                if (Pace)
-                    Pace.stop();
+                try
+                {
+                    if (window.Pace)
+                        window.Pace.stop();
+                } catch (e)
+                {
+
+                }
                 //alert('Ooops this is never supposed to happen! How did it get through the servlet?\n' + textStatus);
             }
         });
-        //if (Pace)
-        //    Pace.stop();
     };
 
     /**
@@ -271,7 +289,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
             } else if (type === 'RedirectHome')
             {
                 setTimeout('location.reload();', timeout);
-            } 
+            }
         });
     };
 
@@ -352,7 +370,3 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
         return newEvent;
     };
 }); //end of controller
-
-
-
-

@@ -125,7 +125,7 @@ public class ComponentDependancyBase&lt;J extends ComponentBase&gt; extends Comp
 <span class="fc" id="L125">        ArrayList&lt;JavascriptReference&gt; arr = new ArrayList&lt;&gt;();</span>
 <span class="fc" id="L126">        getJavascriptReferencesAll().stream()</span>
 <span class="fc" id="L127">                .filter((css) -&gt; (css.getPriority().equals(priority)))</span>
-<span class="pc bpc" id="L128" title="1 of 2 branches missed.">                .filter((JavascriptReference css) -&gt; (!arr.contains(css)))</span>
+<span class="fc bfc" id="L128" title="All 2 branches covered.">                .filter((JavascriptReference css) -&gt; (!arr.contains(css)))</span>
 <span class="fc" id="L129">                .forEach((css)</span>
                         -&gt;
                         {

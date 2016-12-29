@@ -157,6 +157,7 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
     {
         if (!isInitialized())
         {
+
             ArrayList<ComponentHierarchyBase> clonedBase = (ArrayList<ComponentHierarchyBase>) getChildren();
             clonedBase.stream().filter(a -> a != null).forEach(comp
                     ->
@@ -178,9 +179,15 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
 
         if (!isConfigured())
         {
+            if (getClass().isAssignableFrom(ComponentHTMLBootstrapBase.class))
+            {
+                if (ComponentHTMLBootstrapBase.class.cast(this).isBootstrapRequired())
+                {
+                    getPage().getOptions().setBootstrapEnabled(true);
+                }
+            }
             ArrayList<ComponentHierarchyBase> clonedBase = (ArrayList<ComponentHierarchyBase>) getChildren();
             clonedBase = (ArrayList<ComponentHierarchyBase>) clonedBase.clone();
-
             clonedBase.stream().filter(a -> a != null).forEach(feature
                     ->
             {
@@ -188,6 +195,7 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
                 if (cfb != null && !cfb.isConfigured())
                 {
                     cfb.preConfigure();
+                    cfb.getPage().getOptions().setAngularEnabled(true);
                 }
             });
 

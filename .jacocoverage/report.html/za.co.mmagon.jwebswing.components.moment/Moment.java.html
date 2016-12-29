@@ -82,9 +82,9 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      * @param assignedDate The date to use
      */
     public Moment(Date assignedDate)
-<span class="nc" id="L85">    {</span>
-<span class="nc" id="L86">        this.assignedDate = assignedDate;</span>
-<span class="nc" id="L87">    }</span>
+<span class="fc" id="L85">    {</span>
+<span class="fc" id="L86">        this.assignedDate = assignedDate;</span>
+<span class="fc" id="L87">    }</span>
 
     /**
      * Constructs a new DIV with the given angular variable
@@ -103,11 +103,11 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public final MomentFeature getFeature()
     {
-<span class="nc bnc" id="L106" title="All 2 branches missed.">        if (feature == null)</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">        if (feature == null)</span>
         {
-<span class="nc" id="L108">            feature = new MomentFeature(this);</span>
+<span class="fc" id="L108">            feature = new MomentFeature(this);</span>
         }
-<span class="nc" id="L110">        return feature;</span>
+<span class="fc" id="L110">        return feature;</span>
     }
 
     /**
@@ -120,6 +120,7 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
     {
 <span class="nc" id="L121">        return getFeature().getOptions();</span>
     }
+    
 
     /**
      * Returns the assigned date
@@ -128,7 +129,7 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public Date getAssignedDate()
     {
-<span class="nc" id="L131">        return assignedDate;</span>
+<span class="nc" id="L132">        return assignedDate;</span>
     }
 
     /**
@@ -138,8 +139,8 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public void setAssignedDate(Date assignedDate)
     {
-<span class="nc" id="L141">        this.assignedDate = assignedDate;</span>
-<span class="nc" id="L142">    }</span>
+<span class="nc" id="L142">        this.assignedDate = assignedDate;</span>
+<span class="nc" id="L143">    }</span>
 
     /**
      * Returns the assigned variable name
@@ -148,7 +149,7 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public String getVariableName()
     {
-<span class="nc" id="L151">        return variableName;</span>
+<span class="nc" id="L152">        return variableName;</span>
     }
 
     /**
@@ -158,8 +159,8 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public void setVariableName(String variableName)
     {
-<span class="nc" id="L161">        this.variableName = variableName;</span>
-<span class="nc" id="L162">    }</span>
+<span class="nc" id="L162">        this.variableName = variableName;</span>
+<span class="nc" id="L163">    }</span>
 
     /**
      * Return the HashMap of filters applied to this moment
@@ -168,11 +169,11 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public Map&lt;MomentFilters, String&gt; getAppliedFilters()
     {
-<span class="fc bfc" id="L171" title="All 2 branches covered.">        if (appliedFilters == null)</span>
+<span class="fc bfc" id="L172" title="All 2 branches covered.">        if (appliedFilters == null)</span>
         {
-<span class="fc" id="L173">            appliedFilters = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L174">            appliedFilters = new HashMap&lt;&gt;();</span>
         }
-<span class="fc" id="L175">        return appliedFilters;</span>
+<span class="fc" id="L176">        return appliedFilters;</span>
     }
 
     /**
@@ -182,23 +183,25 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public void setAppliedFilters(HashMap&lt;MomentFilters, String&gt; appliedFilters)
     {
-<span class="nc" id="L185">        this.appliedFilters = appliedFilters;</span>
-<span class="nc" id="L186">    }</span>
+<span class="nc" id="L186">        this.appliedFilters = appliedFilters;</span>
+<span class="nc" id="L187">    }</span>
 
     @Override
     public void preConfigure()
     {
-<span class="pc bpc" id="L191" title="1 of 2 branches missed.">        if (!isConfigured())</span>
+<span class="pc bpc" id="L192" title="1 of 2 branches missed.">        if (!isConfigured())</span>
         {
-<span class="fc bfc" id="L193" title="All 2 branches covered.">            if (angularModule == null)</span>
+<span class="fc" id="L194">            addFeature(getFeature());</span>
+<span class="fc bfc" id="L195" title="All 2 branches covered.">            if (angularModule == null)</span>
             {
-<span class="fc" id="L195">                angularModule = new MomentAngularModule(getPage());</span>
+<span class="fc" id="L197">                angularModule = new MomentAngularModule(getPage());</span>
             }
-<span class="fc" id="L197">            getAngularModules().add(angularModule);</span>
-<span class="fc" id="L198">            addAttribute(MomentAttributes.am_time_ago, buildAttributeString());</span>
+<span class="fc" id="L199">            getAngularModules().add(angularModule);</span>
+<span class="fc" id="L200">            addAttribute(MomentAttributes.am_time_ago, buildAttributeString());</span>
+<span class="fc" id="L201">            getPage().getOptions().setAngularEnabled(true);</span>
         }
-<span class="fc" id="L200">        super.preConfigure();</span>
-<span class="fc" id="L201">    }</span>
+<span class="fc" id="L203">        super.preConfigure();</span>
+<span class="fc" id="L204">    }</span>
 
     /**
      * Builds the list of given filters
@@ -207,44 +210,44 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     private String buildAttributeString()
     {
-<span class="fc" id="L210">        StringBuilder sb = new StringBuilder();</span>
-<span class="pc bpc" id="L211" title="1 of 2 branches missed.">        if (variableName != null)</span>
+<span class="fc" id="L213">        StringBuilder sb = new StringBuilder();</span>
+<span class="pc bpc" id="L214" title="1 of 2 branches missed.">        if (variableName != null)</span>
         {
-<span class="nc" id="L213">            sb.append(variableName);</span>
+<span class="nc" id="L216">            sb.append(variableName);</span>
         }
-<span class="fc bfc" id="L215" title="All 2 branches covered.">        else if (assignedDate != null)</span>
+<span class="fc bfc" id="L218" title="All 2 branches covered.">        else if (assignedDate != null)</span>
         {
-<span class="fc" id="L217">            sb.append(&quot;'&quot;).append(DateFormatter.format(assignedDate)).append(&quot;'&quot;);</span>
-<span class="fc" id="L218">            getAppliedFilters().put(MomentFilters.amParse, &quot;YYYY-MM-DD HH:mm:ss&quot;);</span>
+<span class="fc" id="L220">            sb.append(&quot;'&quot;).append(DateFormatter.format(assignedDate)).append(&quot;'&quot;);</span>
+<span class="fc" id="L221">            getAppliedFilters().put(MomentFilters.amParse, &quot;YYYY-MM-DD HH:mm:ss&quot;);</span>
         }
-<span class="fc bfc" id="L220" title="All 2 branches covered.">        if (!getAppliedFilters().isEmpty())</span>
+<span class="fc bfc" id="L223" title="All 2 branches covered.">        if (!getAppliedFilters().isEmpty())</span>
         {
-<span class="fc" id="L222">            getAppliedFilters().entrySet().stream().forEach((entry)</span>
+<span class="fc" id="L225">            getAppliedFilters().entrySet().stream().forEach((entry)</span>
                     -&gt;
             {
-<span class="fc" id="L225">                MomentFilters key = entry.getKey();</span>
-<span class="fc" id="L226">                String value = entry.getValue();</span>
-<span class="pc bpc" id="L227" title="1 of 2 branches missed.">                if (value != null)</span>
+<span class="fc" id="L228">                MomentFilters key = entry.getKey();</span>
+<span class="fc" id="L229">                String value = entry.getValue();</span>
+<span class="pc bpc" id="L230" title="1 of 2 branches missed.">                if (value != null)</span>
                 {
-<span class="fc" id="L229">                    sb.append(&quot; | &quot;).append(key).append(&quot; : '&quot;).append(value).append(&quot;'&quot;);</span>
+<span class="fc" id="L232">                    sb.append(&quot; | &quot;).append(key).append(&quot; : '&quot;).append(value).append(&quot;'&quot;);</span>
                 }
                 else
                 {
-<span class="nc" id="L233">                    sb.append(&quot; | &quot;).append(key);</span>
+<span class="nc" id="L236">                    sb.append(&quot; | &quot;).append(key);</span>
                 }
-<span class="fc" id="L235">            });</span>
+<span class="fc" id="L238">            });</span>
         }
-<span class="fc" id="L237">        return sb.toString();</span>
+<span class="fc" id="L240">        return sb.toString();</span>
     }
 
     /**
      * The default date formatter which is parsed
      */
-<span class="fc" id="L243">    private static final SimpleDateFormat DateFormatter = (SimpleDateFormat) SimpleDateFormat.getInstance();// new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+<span class="fc" id="L246">    private static final SimpleDateFormat DateFormatter = (SimpleDateFormat) SimpleDateFormat.getInstance();// new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
 
     static
     {
-<span class="fc" id="L247">        DateFormatter.applyPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+<span class="fc" id="L250">        DateFormatter.applyPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
     }
 
     /**
@@ -259,8 +262,8 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public void AddParseFilter(String parseSyntax)
     {
-<span class="nc" id="L262">        getAppliedFilters().put(MomentFilters.amParse, parseSyntax);</span>
-<span class="nc" id="L263">    }</span>
+<span class="nc" id="L265">        getAppliedFilters().put(MomentFilters.amParse, parseSyntax);</span>
+<span class="nc" id="L266">    }</span>
 
     /**
      * Converts a unix-timestamp (seconds since 1/1/1970) into a moment object. Example:
@@ -269,8 +272,8 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public void AddFromUnixFilter()
     {
-<span class="nc" id="L272">        getAppliedFilters().put(MomentFilters.amFromUnix, null);</span>
-<span class="nc" id="L273">    }</span>
+<span class="nc" id="L275">        getAppliedFilters().put(MomentFilters.amFromUnix, null);</span>
+<span class="nc" id="L276">    }</span>
 
     /**
      * Create / switch the current moment object into UTC mode. For example, given a date object in message.date, the following code will display the time in UTC instead of the local timezone:
@@ -279,17 +282,17 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public void AddUtc()
     {
-<span class="nc" id="L282">        getAppliedFilters().put(MomentFilters.amUtc, null);</span>
-<span class="nc" id="L283">    }</span>
+<span class="nc" id="L285">        getAppliedFilters().put(MomentFilters.amUtc, null);</span>
+<span class="nc" id="L286">    }</span>
 
-<span class="fc" id="L285">    private static final NumberFormat nf = NumberFormat.getInstance();</span>
+<span class="fc" id="L288">    private static final NumberFormat nf = NumberFormat.getInstance();</span>
 
     static
     {
-<span class="fc" id="L289">        nf.setGroupingUsed(false);</span>
-<span class="fc" id="L290">        nf.setMaximumFractionDigits(2);</span>
-<span class="fc" id="L291">        nf.setMinimumIntegerDigits(2);</span>
-<span class="fc" id="L292">    }</span>
+<span class="fc" id="L292">        nf.setGroupingUsed(false);</span>
+<span class="fc" id="L293">        nf.setMaximumFractionDigits(2);</span>
+<span class="fc" id="L294">        nf.setMinimumIntegerDigits(2);</span>
+<span class="fc" id="L295">    }</span>
 
     /**
      * Uses the given U offset when displaying a date. For example, the following code will display the date with a UTC + 3 hours time offset:
@@ -300,9 +303,9 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public void AddUtcOffsetFilter(double timeToChange)
     {
-<span class="nc" id="L303">        String timeSet = &quot;+&quot; + nf.format(timeToChange).replace(&quot;.&quot;, &quot;&quot;);</span>
-<span class="nc" id="L304">        getAppliedFilters().put(MomentFilters.amUtcOffset, timeSet);</span>
-<span class="nc" id="L305">    }</span>
+<span class="nc" id="L306">        String timeSet = &quot;+&quot; + nf.format(timeToChange).replace(&quot;.&quot;, &quot;&quot;);</span>
+<span class="nc" id="L307">        getAppliedFilters().put(MomentFilters.amUtcOffset, timeSet);</span>
+<span class="nc" id="L308">    }</span>
 
     /**
      * Changes the given moment object to be in the local timezone. Usually used in conjunction with amUtc / amTimezone for timezone conversion. For example, the following will convert the given UTC
@@ -312,8 +315,8 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public void AddLocalFilter()
     {
-<span class="nc" id="L315">        getAppliedFilters().put(MomentFilters.amLocal, null);</span>
-<span class="nc" id="L316">    }</span>
+<span class="nc" id="L318">        getAppliedFilters().put(MomentFilters.amLocal, null);</span>
+<span class="nc" id="L319">    }</span>
 
     /**
      * TODO this guy needs to get done https://github.com/urish/angular-moment
@@ -321,7 +324,7 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
     public void AddTimezoneFilter()
     {
 
-<span class="nc" id="L324">    }</span>
+<span class="nc" id="L327">    }</span>
 
     /**
      * Format dates using moment.js format() method. Example:
@@ -334,8 +337,8 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public void AddDateFormatFilter(String dateformat)
     {
-<span class="nc" id="L337">        getAppliedFilters().put(MomentFilters.amDateeFormat, dateformat);</span>
-<span class="nc" id="L338">    }</span>
+<span class="nc" id="L340">        getAppliedFilters().put(MomentFilters.amDateeFormat, dateformat);</span>
+<span class="nc" id="L341">    }</span>
 
     /**
      * Format dates using moment.js calendar() method. Example:
@@ -346,16 +349,16 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public void AddCalendarFilter()
     {
-<span class="nc" id="L349">        getAppliedFilters().put(MomentFilters.amCalendar, &quot;referenceTime:formats&quot;);</span>
-<span class="nc" id="L350">    }</span>
+<span class="nc" id="L352">        getAppliedFilters().put(MomentFilters.amCalendar, &quot;referenceTime:formats&quot;);</span>
+<span class="nc" id="L353">    }</span>
 
     /**
      * TODO this guy... ;/ https://github.com/urish/angular-moment
      */
     public void AddDifferenceFilter()
     {
-<span class="nc" id="L357">        getAppliedFilters().put(MomentFilters.amDifference, &quot;referenceTime:formats&quot;);</span>
-<span class="nc" id="L358">    }</span>
+<span class="nc" id="L360">        getAppliedFilters().put(MomentFilters.amDifference, &quot;referenceTime:formats&quot;);</span>
+<span class="nc" id="L361">    }</span>
 
     /**
      * Formats a duration (such as 5 days) in a human readable format. See Moment.JS documentation for a list of supported duration formats, and humanize() documentation for explanation about the
@@ -371,8 +374,8 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public void AddDurationFilter(DurationFilters duration)
     {
-<span class="nc" id="L374">        getAppliedFilters().put(MomentFilters.amDurationFormat, duration.toString());</span>
-<span class="nc" id="L375">    }</span>
+<span class="nc" id="L377">        getAppliedFilters().put(MomentFilters.amDurationFormat, duration.toString());</span>
+<span class="nc" id="L378">    }</span>
 
     /**
      * Subtract values (hours, minutes, seconds ...) from a specified date.
@@ -382,8 +385,8 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public void AddSubtractionFilter(int amount, DurationFilters part)
     {
-<span class="nc" id="L385">        getAppliedFilters().put(MomentFilters.amSubtract, &quot;&quot; + amount + &quot;' : '&quot; + part.toString() + &quot;&quot;);</span>
-<span class="nc" id="L386">    }</span>
+<span class="nc" id="L388">        getAppliedFilters().put(MomentFilters.amSubtract, &quot;&quot; + amount + &quot;' : '&quot; + part.toString() + &quot;&quot;);</span>
+<span class="nc" id="L389">    }</span>
 
     /**
      * Adds values (hours, minutes, seconds ...) from a specified date.
@@ -393,28 +396,26 @@ public class Moment extends Div&lt;MomentChildren, MomentAttributes, MomentFeatu
      */
     public void AddAdditionFilter(int amount, DurationFilters part)
     {
-<span class="nc" id="L396">        getAppliedFilters().put(MomentFilters.amAdd, &quot;&quot; + amount + &quot;' : '&quot; + part.toString() + &quot;&quot;);</span>
-<span class="nc" id="L397">    }</span>
+<span class="nc" id="L399">        getAppliedFilters().put(MomentFilters.amAdd, &quot;&quot; + amount + &quot;' : '&quot; + part.toString() + &quot;&quot;);</span>
+<span class="nc" id="L400">    }</span>
 
     /**
      * The available descernable parts
      */
-<span class="nc" id="L402">    public enum DurationFilters</span>
+<span class="nc" id="L405">    public enum DurationFilters</span>
     {
-<span class="nc" id="L404">        Years,</span>
-<span class="nc" id="L405">        Hours,</span>
-<span class="nc" id="L406">        Minutes,</span>
-<span class="nc" id="L407">        Days,</span>
-<span class="nc" id="L408">        Months,</span>
-<span class="nc" id="L409">        Seconds;</span>
+<span class="nc" id="L407">        Years,</span>
+<span class="nc" id="L408">        Hours,</span>
+<span class="nc" id="L409">        Minutes,</span>
+<span class="nc" id="L410">        Days,</span>
+<span class="nc" id="L411">        Months,</span>
+<span class="nc" id="L412">        Seconds;</span>
 
         @Override
         public String toString()
         {
-<span class="nc" id="L414">            return name().toLowerCase();</span>
+<span class="nc" id="L417">            return name().toLowerCase();</span>
         }
-
     }
-
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -16,9 +16,10 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
 /**
  *
@@ -42,7 +43,8 @@ public class ComponentBaseTest extends BaseTestClass
                 + "  \"componentType\" : \"abbreviation\",\n"
                 + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
-                + "  \"initialized\" : true\n"
+                + "  \"initialized\" : true,\n"
+                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
                 + "}", shell.toString());
     }
 
@@ -59,7 +61,8 @@ public class ComponentBaseTest extends BaseTestClass
                 + "  \"text\" : \"This is raw text\",\n"
                 + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
-                + "  \"initialized\" : true\n"
+                + "  \"initialized\" : true,\n"
+                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
                 + "}", shell.toString());
     }
 
@@ -75,7 +78,8 @@ public class ComponentBaseTest extends BaseTestClass
                 + "  \"componentType\" : \"abbreviation\",\n"
                 + "  \"tiny\" : true,\n"
                 + "  \"configured\" : true,\n"
-                + "  \"initialized\" : true\n"
+                + "  \"initialized\" : true,\n"
+                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
                 + "}", shell.toString());
     }
 
@@ -93,14 +97,16 @@ public class ComponentBaseTest extends BaseTestClass
                 + "  \"componentType\" : \"abbreviation\",\n"
                 + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
-                + "  \"initialized\" : true\n"
+                + "  \"initialized\" : true,\n"
+                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
                 + "}";
         String shell2Expected = "{\n"
                 + "  \"id\" : \"shell2\",\n"
                 + "  \"componentType\" : \"abbreviation\",\n"
                 + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
-                + "  \"initialized\" : true\n"
+                + "  \"initialized\" : true,\n"
+                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
                 + "}";
         Assert.assertEquals(shell.toString(), shellExpected);
         Assert.assertEquals(shell2.toString(), shell2Expected);
@@ -122,7 +128,8 @@ public class ComponentBaseTest extends BaseTestClass
                 + "  \"initialized\" : true,\n"
                 + "  \"properties\" : {\n"
                 + "    \"Property1\" : \"Value 1\"\n"
-                + "  }\n"
+                + "  },\n"
+                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
                 + "}";
 
         Assert.assertEquals(shell.toString(), shellExpected);

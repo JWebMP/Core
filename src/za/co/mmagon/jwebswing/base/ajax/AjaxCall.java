@@ -16,12 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.ajax;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import com.fasterxml.jackson.annotation.*;
+import java.util.*;
 import javax.servlet.ServletException;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
@@ -38,7 +34,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTy
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class AjaxCall extends JavaScriptPart
-{   
+{
+
     private static final long serialVersionUID = 1L;
     /**
      * The component ID that was sent back
@@ -93,6 +90,7 @@ public class AjaxCall extends JavaScriptPart
      * @param eventTypeFrom The ComponentEventBase Type From
      * @param value         The Value
      * @param page          The Page
+     *
      * @throws ServletException In Case anything is funky
      */
     public AjaxCall(String componentId, Date datetime, String eventType, String eventTypeFrom, AjaxEventValue value, Page page) throws ServletException
@@ -249,8 +247,28 @@ public class AjaxCall extends JavaScriptPart
     }
 
     /**
+     * Returns the variable with the given name in the array or null
+     *
+     * @param name The name of the variable as designated
+     *
+     * @return
+     */
+    public AngularJsonVariable getVariable(String name)
+    {
+        for (AngularJsonVariable next : getVariableData())
+        {
+            if (next.getVariableName().equals(name))
+            {
+                return next;
+            }
+        }
+        return null;
+    }
+
+    /**
      * The event ID
-     * @return 
+     *
+     * @return
      */
     public String getEventId()
     {
@@ -259,12 +277,12 @@ public class AjaxCall extends JavaScriptPart
 
     /**
      * The Event ID
-     * @param eventId 
+     *
+     * @param eventId
      */
     public void setEventId(String eventId)
     {
         this.eventId = eventId;
     }
 
-    
 }

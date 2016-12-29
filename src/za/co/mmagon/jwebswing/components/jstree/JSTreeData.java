@@ -16,10 +16,10 @@
  */
 package za.co.mmagon.jwebswing.components.jstree;
 
-import com.fasterxml.jackson.annotation.*;
-import java.util.*;
-import za.co.mmagon.JWebSwingSiteBinder;
-import za.co.mmagon.jwebswing.components.jstree.options.functions.JSTreeCoreDataFunction;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.ArrayList;
+import java.util.List;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
@@ -39,30 +39,14 @@ public class JSTreeData extends JavaScriptPart
      */
 
     private List<JSTreeNode> nodes;
-    /**
-     * The actual tree
-     */
-    @JsonIgnore
-    private JSTree tree;
 
     /**
      * Constructs a new instance of tree data
      *
-     * @param tree
-     *
      * @throws RuntimeException If tree is null
      */
-    public JSTreeData(JSTree tree)
+    public JSTreeData()
     {
-        this.tree = tree;
-        if (tree == null)
-        {
-            throw new RuntimeException("Missing the tree for the JSTreeData");
-        }
-        tree.getOptions().getCore().getData().setUrl(JWebSwingSiteBinder.getDataLocation().replace("/", "") + "?component=" + tree.getID());
-        tree.getOptions().getCore().getData().setData(new JSTreeCoreDataFunction());
-        //tree.getOptions().getCore().getData().setCache(false);
-        //tree.getOptions().getCore().getData().setDataType("json");
     }
 
     /**
@@ -91,26 +75,6 @@ public class JSTreeData extends JavaScriptPart
         this.nodes = nodes;
     }
 
-    /**
-     * Returns the tree associated with this
-     *
-     * @return
-     */
-    public JSTree getTree()
-    {
-        return tree;
-    }
-
-    /**
-     * Sets the tree associated with this (but rather do it at construction, you never know)
-     *
-     * @param tree
-     */
-    public void setTree(JSTree tree)
-    {
-        this.tree = tree;
-    }
-
     @Override
     public JavascriptPartType getJavascriptType()
     {
@@ -127,9 +91,8 @@ public class JSTreeData extends JavaScriptPart
     private JSTreeNode findNode(List<JSTreeNode> nodes, String id)
     {
         JSTreeNode found;
-        for (Iterator<JSTreeNode> iterator = nodes.iterator(); iterator.hasNext();)
+        for (JSTreeNode next : nodes)
         {
-            JSTreeNode next = iterator.next();
             if (next.getId().equals(id))
             {
                 return next;

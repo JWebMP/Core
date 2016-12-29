@@ -36,6 +36,5 @@ public class JSTreeDefaultTheme extends Theme implements JSTreeTheme
     {
         super("JSTreeDefaulTheme", "");
         getCssReferences().add(new CSSReference("JSTreeDefaultTheme", 3.32, "bower_components/jstree/dist/themes/default/style.css"));
-        
     }
 }

@@ -95,7 +95,8 @@ public class ComponentEventBaseTest extends BaseTestClass
                 + "    \"touched\" : false,\n"
                 + "    \"eventType\" : \"click\"\n"
                 + "  } ],\n"
-                + "  \"touched\" : false\n"
+                + "  \"touched\" : false,\n"
+                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentEventBase\"\n"
                 + "}";
         String shell2Expected = "{\n"
                 + "  \"id\" : \"shell2\",\n"
@@ -125,8 +126,10 @@ public class ComponentEventBaseTest extends BaseTestClass
                 + "    \"touched\" : false,\n"
                 + "    \"eventType\" : \"click\"\n"
                 + "  } ],\n"
-                + "  \"touched\" : false\n"
+                + "  \"touched\" : false,\n"
+                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentEventBase\"\n"
                 + "}"
+                + ""
                 + "";
         Assert.assertEquals(shell.toString(), shellExpected);
         Assert.assertEquals(shell2.toString(), shell2Expected);

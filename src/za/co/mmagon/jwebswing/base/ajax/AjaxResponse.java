@@ -16,13 +16,11 @@
  */
 package za.co.mmagon.jwebswing.base.ajax;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import java.util.ArrayList;
 import java.util.Iterator;
-import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
-import za.co.mmagon.jwebswing.base.ComponentStyleBase;
+import za.co.mmagon.jwebswing.Event;
+import za.co.mmagon.jwebswing.base.*;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
@@ -60,7 +58,7 @@ public class AjaxResponse extends JavaScriptPart
      * All components that must be updated
      */
     @JsonIgnore
-    private ArrayList<ComponentHierarchyBase> components;
+    private ArrayList<ComponentBase> components;
 
     /**
      * Format as JSON
@@ -72,10 +70,11 @@ public class AjaxResponse extends JavaScriptPart
     {
         return JavascriptPartType.JSON;
     }
-    
+
     /**
      * Adds a DTO to the response call
-     * @param name The name of the variable
+     *
+     * @param name   The name of the variable
      * @param object The DTO to pass through
      */
     public void addDto(String name, JavaScriptPart object)
@@ -83,10 +82,11 @@ public class AjaxResponse extends JavaScriptPart
         AngularJsonVariable variable = new AngularJsonVariable(name, object);
         getAngularVariables().add(variable);
     }
-    
+
     /**
      * Adds a DTO to the response call
-     * @param name The name of the variable
+     *
+     * @param name   The name of the variable
      * @param object The DTO to pass through
      */
     public void addDto(String name, String object)
@@ -106,8 +106,7 @@ public class AjaxResponse extends JavaScriptPart
     }
 
     /**
-     * If the server action was a success,
-     * default is no
+     * If the server action was a success, default is no
      *
      * @param success
      */
@@ -122,6 +121,16 @@ public class AjaxResponse extends JavaScriptPart
      * @param component
      */
     public void addComponent(ComponentHierarchyBase component)
+    {
+        getComponents().add(component);
+    }
+    
+    /**
+     * Adds a component to be returned to the client
+     *
+     * @param component
+     */
+    public void addComponent(ComponentBase component)
     {
         getComponents().add(component);
     }
@@ -143,13 +152,16 @@ public class AjaxResponse extends JavaScriptPart
      */
     @JsonProperty("cssLinks")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private ArrayList<String> getAllCssReferences()
+    protected ArrayList<String> getAllCssReferences()
     {
         ArrayList<String> output = new ArrayList<>();
-        getComponents().stream().forEach((next)
+        getComponents().stream().forEach(next
                 ->
-                {
-                    output.addAll(getCssReferences(next));
+        {
+            if (ComponentDependancyBase.class.isAssignableFrom(next.getClass()))
+            {
+                output.addAll(getCssReferences((ComponentDependancyBase) next));
+            }
         });
         return output;
     }
@@ -161,36 +173,56 @@ public class AjaxResponse extends JavaScriptPart
      */
     @JsonProperty("jsReferences")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private ArrayList<String> getAllJsReferences()
+    protected ArrayList<String> getAllJsReferences()
     {
         ArrayList<String> output = new ArrayList<>();
-        getComponents().stream().forEach((next)
+        getComponents().stream().forEach(next
                 ->
-                {
-                    output.addAll(getJsReferences(next));
+        {
+            if (ComponentDependancyBase.class.isAssignableFrom(next.getClass()))
+            {
+                output.addAll(getJsReferences((ComponentDependancyBase) next));
+            }
         });
         return output;
     }
 
     /**
-     * Gets all the JavaScript
+     * Gets all the JavaScript and inserts it into the JSON response
      *
      * @return
      */
     @JsonProperty("jsScripts")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private ArrayList<String> getAllJsScripts()
+    protected ArrayList<String> getAllJsScripts()
     {
         ArrayList<String> output = new ArrayList<>();
-        //output.add("//not empty scripts return");
-        getComponents().stream().forEach((next)
+        getComponents().stream().forEach(next
                 ->
+        {
+            if (ComponentHierarchyBase.class.isAssignableFrom(next.getClass()))
+            {
+                getJsRenders((ComponentHierarchyBase) next).stream().filter(next1 -> (next1 != null && !next1.isEmpty())).forEach(next1
+                        ->
                 {
-                    getJsRenders(next).stream().filter((next1) -> (next1 != null && !next1.isEmpty())).forEach((next1)
-                            ->
-                            {
-                                output.add(next1);
-                    });
+                    output.add(next1);
+                });
+            }
+
+            //Load on demand scripts
+            if (Event.class.isAssignableFrom(next.getClass()))
+            {
+                for (Iterator iterator = Event.class.cast(next).getOnDemandQueries().iterator(); iterator.hasNext();)
+                {
+                    Event next1 = (Event) iterator.next();
+                    next1.preConfigure();
+                    for (Iterator iterator1 = next1.getQueriesAll().iterator(); iterator1.hasNext();)
+                    {
+                        StringBuilder query = (StringBuilder) iterator1.next();
+                        output.add(query.toString());
+                    }
+                }
+            }
         });
         return output;
     }
@@ -202,13 +234,13 @@ public class AjaxResponse extends JavaScriptPart
      */
     @JsonProperty("css")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private String getAllCss()
+    protected String getAllCss()
     {
         StringBuilder sb = new StringBuilder();
-        getComponents().stream().filter((next) -> (next instanceof ComponentStyleBase)).forEach((next)
+        getComponents().stream().filter(next -> (next instanceof ComponentStyleBase)).forEach(next
                 ->
-                {
-                    sb.append(getCssRenders(ComponentStyleBase.class.cast(next)));
+        {
+            sb.append(getCssRenders(ComponentStyleBase.class.cast(next)));
         });
         return sb.toString();
     }
@@ -217,9 +249,10 @@ public class AjaxResponse extends JavaScriptPart
      * Returns all the CSS references for all the components
      *
      * @param component
+     *
      * @return
      */
-    private ArrayList<String> getCssReferences(ComponentHierarchyBase component)
+    protected ArrayList<String> getCssReferences(ComponentDependancyBase component)
     {
         ArrayList<String> cssRender = new ArrayList<>();
         for (Iterator iterator = component.getCssReferencesAll().iterator(); iterator.hasNext();)
@@ -237,9 +270,10 @@ public class AjaxResponse extends JavaScriptPart
      * Gets all JavaScript references for a component and it's children
      *
      * @param component
+     *
      * @return
      */
-    private ArrayList<String> getJsReferences(ComponentHierarchyBase component)
+    protected ArrayList<String> getJsReferences(ComponentDependancyBase component)
     {
         ArrayList<String> cssRender = new ArrayList<>();
         for (Iterator iterator = component.getJavascriptReferencesAll().iterator(); iterator.hasNext();)
@@ -257,6 +291,7 @@ public class AjaxResponse extends JavaScriptPart
      * Gets all the CSS renders for a component and its children
      *
      * @param component
+     *
      * @return
      */
     private StringBuilder getCssRenders(ComponentStyleBase component)
@@ -270,13 +305,14 @@ public class AjaxResponse extends JavaScriptPart
      * Gets all the JavaScript to render for a component and its children
      *
      * @param component
+     *
      * @return
      */
     private ArrayList<String> getJsRenders(ComponentHierarchyBase component)
     {
-        ArrayList<String> cssRender = new ArrayList<>();
-        cssRender.add(component.renderJavascriptAll().toString());
-        return cssRender;
+        ArrayList<String> jsRenders = new ArrayList<>();
+        jsRenders.add(component.renderJavascriptAll().toString());
+        return jsRenders;
     }
 
     /**
@@ -298,7 +334,7 @@ public class AjaxResponse extends JavaScriptPart
      *
      * @return
      */
-    private ArrayList<ComponentHierarchyBase> getComponents()
+    private ArrayList<ComponentBase> getComponents()
     {
         if (components == null)
         {
@@ -314,14 +350,14 @@ public class AjaxResponse extends JavaScriptPart
      */
     @JsonProperty("components")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private ArrayList<ComponentUpdates> getUpdates()
+    protected ArrayList<ComponentUpdates> getUpdates()
     {
         ArrayList<ComponentUpdates> updates = new ArrayList<>();
-        getComponents().stream().map((comp) -> new ComponentUpdates(comp)).forEach((cu)
-                ->
+        getComponents().stream().filter(next -> (ComponentHierarchyBase.class.isAssignableFrom(next.getClass())))
+                .forEachOrdered(next ->
                 {
-                    updates.add(cu);
-        });
+                    updates.add(new ComponentUpdates((ComponentHierarchyBase) next));
+                });
         return updates;
     }
 
@@ -347,6 +383,18 @@ public class AjaxResponse extends JavaScriptPart
     public void setAngularVariables(ArrayList<AngularJsonVariable> angularVariables)
     {
         this.angularVariables = angularVariables;
+    }
+
+    /**
+     * Removes the registered variable from the client. Use to clean up memory or assigned variables on the client
+     *
+     * @param variable
+     */
+    public void clearVariable(AngularJsonVariable variable)
+    {
+        variable.setVariableText(null);
+        variable.setVariable(null);
+        getAngularVariables().add(variable);
     }
 
     /**

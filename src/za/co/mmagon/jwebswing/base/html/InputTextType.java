@@ -28,6 +28,8 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphCh
 public class InputTextType extends Input<InputTextAttributes> implements ParagraphChildren,FormChildren
 {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Constructs a search type input field
      */

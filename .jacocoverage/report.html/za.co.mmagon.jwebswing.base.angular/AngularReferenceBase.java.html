@@ -147,24 +147,24 @@ public abstract class AngularReferenceBase extends JavascriptLiteralFunction imp
     @Override
     public boolean equals(Object obj)
     {
-<span class="pc bpc" id="L150" title="1 of 2 branches missed.">        if (this == obj)</span>
+<span class="fc bfc" id="L150" title="All 2 branches covered.">        if (this == obj)</span>
         {
 <span class="fc" id="L152">            return true;</span>
         }
-<span class="nc bnc" id="L154" title="All 2 branches missed.">        if (obj == null)</span>
+<span class="pc bpc" id="L154" title="1 of 2 branches missed.">        if (obj == null)</span>
         {
 <span class="nc" id="L156">            return false;</span>
         }
-<span class="nc bnc" id="L158" title="All 2 branches missed.">        if (getClass() != obj.getClass())</span>
+<span class="pc bpc" id="L158" title="1 of 2 branches missed.">        if (getClass() != obj.getClass())</span>
         {
 <span class="nc" id="L160">            return false;</span>
         }
-<span class="nc" id="L162">        final AngularReferenceBase other = (AngularReferenceBase) obj;</span>
-<span class="nc bnc" id="L163" title="All 2 branches missed.">        if (!Objects.equals(this.referenceName, other.referenceName))</span>
+<span class="fc" id="L162">        final AngularReferenceBase other = (AngularReferenceBase) obj;</span>
+<span class="pc bpc" id="L163" title="1 of 2 branches missed.">        if (!Objects.equals(this.referenceName, other.referenceName))</span>
         {
 <span class="nc" id="L165">            return false;</span>
         }
-<span class="nc" id="L167">        return Objects.equals(this.sortOrder, other.sortOrder);</span>
+<span class="fc" id="L167">        return Objects.equals(this.sortOrder, other.sortOrder);</span>
     }
 
     /**

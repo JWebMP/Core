@@ -17,19 +17,12 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
-import za.co.mmagon.jwebswing.base.html.interfaces.ContainerType;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.LayoutHandler;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.AreaChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.ImageMapChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqmetro.metro.interfaces.JQMetroTileChildren;
 import za.co.mmagon.jwebswing.components.bootstrap.modal.BSModalChildren;
+import za.co.mmagon.jwebswing.components.jqmetro.metro.interfaces.JQMetroTileChildren;
 import za.co.mmagon.jwebswing.components.jquerylayout.layout.interfaces.JWLayoutChildren;
 import za.co.mmagon.jwebswing.components.jquerylayout.layout.interfaces.JWLayoutDivChildren;
 import za.co.mmagon.jwebswing.components.jqueryui.accordion.JQUIAccordionChildren;
@@ -72,7 +65,8 @@ import za.co.mmagon.jwebswing.components.jqxwidgets.ribbon.JQXRibbonChildren;
  * @param &lt;E&gt; The allowed events
  * @param &lt;J&gt; The Clonable object
  */
-public class Div&lt;C extends GlobalChildren, A extends Enum &amp; AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component&gt; extends Component&lt;C, A, F, E, J&gt;
+public class Div&lt;C extends GlobalChildren, A extends Enum &amp; AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component&gt; 
+        extends Component&lt;C, A, F, E, J&gt;
         implements JWLayoutChildren, BodyChildren, ImageMapChildren, AreaChildren, LayoutHandler, JWLayoutDivChildren,
         JQUITabsChildren, JQUIAccordionChildren, ContainerType, JQUIDialogChildren, JQXRibbonChildren, JQUIRadioButtonGroupChildren,
         JQXNavigationBarChildren, JQXDropDownListChildren, JQXLayoutChildren, JQXNotificationChildren,JQMetroTileChildren,ListItemChildren,
@@ -86,8 +80,8 @@ public class Div&lt;C extends GlobalChildren, A extends Enum &amp; AttributeDefi
      */
     public Div()
     {
-<span class="fc" id="L89">        super(ComponentTypes.Div);</span>
-<span class="fc" id="L90">    }</span>
+<span class="fc" id="L83">        super(ComponentTypes.Div);</span>
+<span class="fc" id="L84">    }</span>
 
     /**
      * Use a different tag for this div
@@ -96,8 +90,8 @@ public class Div&lt;C extends GlobalChildren, A extends Enum &amp; AttributeDefi
      */
     public Div(ComponentTypes myComponent)
     {
-<span class="fc" id="L99">        super(myComponent);</span>
-<span class="fc" id="L100">    }</span>
+<span class="fc" id="L93">        super(myComponent);</span>
+<span class="fc" id="L94">    }</span>
     
     /**
      * Div with in-line text
@@ -105,8 +99,8 @@ public class Div&lt;C extends GlobalChildren, A extends Enum &amp; AttributeDefi
      */
     public Div(String text)
     {
-<span class="nc" id="L108">        super(ComponentTypes.Div);</span>
-<span class="nc" id="L109">        setText(text);</span>
-<span class="nc" id="L110">    }</span>
+<span class="nc" id="L102">        super(ComponentTypes.Div);</span>
+<span class="nc" id="L103">        setText(text);</span>
+<span class="nc" id="L104">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

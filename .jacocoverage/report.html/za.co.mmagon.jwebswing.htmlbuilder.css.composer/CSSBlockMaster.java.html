@@ -91,13 +91,13 @@ public class CSSBlockMaster
     protected CSSBlock checkBlocksForDuplicateLines(CSSBlock blockToCompare)
     {
 <span class="fc" id="L93">        List&lt;CSSBlock&gt; bl = getAllCSSBlocks();</span>
-<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        for (CSSBlock cssBlock : bl)</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        for (CSSBlock cssBlock : bl)</span>
         {
-<span class="nc bnc" id="L96" title="All 2 branches missed.">            if (blockToCompare.equals(cssBlock))</span>
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">            if (blockToCompare.equals(cssBlock))</span>
             {
 <span class="nc" id="L98">                return cssBlock;</span>
             }
-<span class="nc" id="L100">        }</span>
+<span class="fc" id="L100">        }</span>
 <span class="fc" id="L101">        return null;</span>
     }
 

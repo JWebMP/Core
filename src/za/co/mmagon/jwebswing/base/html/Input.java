@@ -17,8 +17,9 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import java.util.logging.Level;
-import java.util.logging.*;
+import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
@@ -147,5 +148,15 @@ public class Input<A extends Enum & AttributeDefinitions> extends Component<NoCh
         {
             log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
         }
+    }
+
+    /**
+     * Push to model instead of bind
+     * @param variableName 
+     */
+    @Override
+    public void bind(String variableName)
+    {
+        addAttribute(AngularAttributes.ngModel, variableName);
     }
 }
