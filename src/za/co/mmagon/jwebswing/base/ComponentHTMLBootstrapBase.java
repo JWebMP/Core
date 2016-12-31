@@ -16,15 +16,15 @@
  */
 package za.co.mmagon.jwebswing.base;
 
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentWidthOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.IBSComponentOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentResponsiveOptions;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.interfaces.IComponentHTMLBootstrapBase;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.bootstrap.BootstrapClasses;
 import za.co.mmagon.jwebswing.components.bootstrap.Glyphicons;
-import za.co.mmagon.jwebswing.components.bootstrap.columnlayout.BSColumnWidths;
-import za.co.mmagon.jwebswing.components.bootstrap.columnlayout.BSComponentHiding;
 import za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2.SB2ThemeClasses;
 
 /**
@@ -74,9 +74,9 @@ public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions
      * @return True if it was added, false if it already existed
      */
     @Override
-    public boolean addClass(BootstrapClasses blockName)
+    public boolean addClass(IBSComponentOptions blockName)
     {
-        setBootstrapRequired(true);
+        setBootstrapRequired(true); 
         String className = blockName.toString();
         if (!getClasses().contains(className))
         {
@@ -96,7 +96,7 @@ public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions
      * <p>
      * @return True if it was added, false if it already existed
      */
-    @Override
+    @Override 
     public boolean addClass(SB2ThemeClasses blockName)
     {
         setBootstrapRequired(true);
@@ -143,7 +143,7 @@ public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions
      * @return
      */
     @Override
-    public boolean addClass(BSColumnWidths blockName)
+    public boolean addClass(BSComponentWidthOptions blockName)
     {
         setBootstrapRequired(true);
         String className = blockName.toString();
@@ -166,7 +166,7 @@ public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions
      * @return
      */
     @Override
-    public boolean addClass(BSComponentHiding blockName)
+    public boolean addClass(BSComponentResponsiveOptions blockName)
     {
         setBootstrapRequired(true);
         String className = blockName.toString();

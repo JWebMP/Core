@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 GedMarc
+ * Copyright (C) 2015 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,16 +14,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.components.bootstrap.columnlayout;
+package za.co.mmagon.jwebswing.components.bootstrap.media;
+
+import za.co.mmagon.jwebswing.components.newcomponents.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 
 /**
  *
- * @author GedMarc
- * @since 2016/10/10
+ * @author Marc Magon
+ * @since 07 Aug 2015
+ * @version 1.0
  */
-public interface IBSColumnOptions
+public interface BSMediaEvents extends GlobalEvents
 {
-    @Override
-    public String toString();
-    public String name();
+
 }

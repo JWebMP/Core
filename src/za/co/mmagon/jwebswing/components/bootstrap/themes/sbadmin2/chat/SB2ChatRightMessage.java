@@ -21,7 +21,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.bootstrap.BootstrapClasses;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentClearfixOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentColours;
 import za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2.SB2ThemeClasses;
 import za.co.mmagon.jwebswing.components.fontawesome.*;
 import za.co.mmagon.jwebswing.components.moment.Moment;
@@ -53,8 +55,8 @@ public class SB2ChatRightMessage extends ListItem implements ISB2ChatMessage
      */
     public SB2ChatRightMessage ()
     {
-        addClass(BootstrapClasses.Right);
-        addClass(BootstrapClasses.Clearfix);
+        addClass(BSComponentDefaultOptions.Right);
+        addClass(BSComponentClearfixOptions.Clearfix);
     }
 
     @Override
@@ -63,18 +65,18 @@ public class SB2ChatRightMessage extends ListItem implements ISB2ChatMessage
         if(!isConfigured())
         {
             getMessageImageSpan().add(getMessageImage());
-            getMessageImageSpan().addClass(BootstrapClasses.Pull_Right);
+            getMessageImageSpan().addClass(BSComponentDefaultOptions.Pull_Right);
             add(getMessageImageSpan());
             
             Strong headerStrong = new Strong(headerText);
-            headerStrong.addClass(BootstrapClasses.Primary_Font);
-            headerStrong.addClass(BootstrapClasses.Pull_Right);
+            headerStrong.addClass(BSComponentDefaultOptions.Primary_Font);
+            headerStrong.addClass(BSComponentDefaultOptions.Pull_Right);
             
              
             SmallText st = new SmallText();
             Moment m = new Moment(messageDate,ComponentTypes.Span);
-            //st.addClass(BootstrapClasses.Pull_Left);
-            st.addClass(BootstrapClasses.Text_Muted);
+            //st.addClass(BSComponentDefaultOptions.Pull_Left);
+            st.addClass(BSComponentColours.Text_Muted);
             FontAwesome clockIcon = FontAwesome.icon(FontAwesomeIcons.clock_o, FontAwesomeProperties.fw);
             
             st.add(clockIcon);
@@ -127,7 +129,7 @@ public class SB2ChatRightMessage extends ListItem implements ISB2ChatMessage
         this.messageImage = messageImage;
         if(this.messageImage != null)
         {
-            this.messageImage.addClass(BootstrapClasses.Img_Circle);
+            this.messageImage.addClass(BSComponentDefaultOptions.Img_Circle);
         }
     }
 
@@ -154,7 +156,7 @@ public class SB2ChatRightMessage extends ListItem implements ISB2ChatMessage
         if(this.messageImageSpan != null)
         {
             this.messageImageSpan.addClass(SB2ThemeClasses.Chat_Img);
-            this.messageImageSpan.addClass(BootstrapClasses.Pull_Right);
+            this.messageImageSpan.addClass(BSComponentDefaultOptions.Pull_Right);
         }
     }
     
@@ -235,7 +237,7 @@ public class SB2ChatRightMessage extends ListItem implements ISB2ChatMessage
         if(this.chatBody != null)
         {
             this.chatBody.addClass(SB2ThemeClasses.Chat_Body);
-            this.chatBody.addClass(BootstrapClasses.Clearfix);
+            this.chatBody.addClass(BSComponentClearfixOptions.Clearfix);
         }
     }
     /**

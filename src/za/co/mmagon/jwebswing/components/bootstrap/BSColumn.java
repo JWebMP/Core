@@ -14,34 +14,48 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package za.co.mmagon.jwebswing.components.bootstrap;
 
 import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.components.bootstrap.columnlayout.IBSColumnOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.IBSComponentOptions;
 
 /**
  * Shortcut for writing column Div's and spans for bootstrap
+ *
  * @author GedMarc
  * @since Oct 10, 2016
  * @version 1.0
- * 
+ *
  */
 public class BSColumn extends Div
 {
 
     private static final long serialVersionUID = 1L;
 
-    public BSColumn (IBSColumnOptions...columnOptions)
+    /**
+     * Supply a list of column options for this div
+     *
+     * @param columnOptions
+     */
+    public BSColumn(IBSComponentOptions... columnOptions)
     {
-        if(columnOptions != null)
-        for (IBSColumnOptions columnOption : columnOptions)
+        if (columnOptions != null)
         {
-            addClass(columnOption.toString());
+            for (IBSComponentOptions columnOption : columnOptions)
+            {
+                addClass(columnOption.toString());
+            }
         }
     }
-    
-    public static BSColumn newInstance(IBSColumnOptions...columnOptions)
+
+    /**
+     * Constructs a new instance with the given column options
+     *
+     * @param columnOptions
+     *
+     * @return
+     */
+    public static BSColumn newInstance(IBSComponentOptions... columnOptions)
     {
         return new BSColumn(columnOptions);
     }

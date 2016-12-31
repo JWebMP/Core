@@ -49,11 +49,7 @@
         </group>
         <group name="JWebSwing"/>
         <group name="Activity Master">
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jstree/themes/JSTreeDefaultTheme.java</file>
             <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jstree/JSTree.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/ajax/AjaxResponseReaction.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jstree/themes/JSTreeDefaultDarkTheme.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jstree/options/JSTreeThemeOptions.java</file>
         </group>
     </open-files>
 </project-private>

@@ -140,7 +140,7 @@ public class Page extends Html implements IPage
         {
             bodyOutput = new StringBuilder(getBody().toString(1));
         }
-        
+
         if (!isHeadEmpty())
         {
             pageOutput.append(getNewLine()).append(getCurrentTabIndentString()).append(getHead().toString(1));
@@ -176,6 +176,7 @@ public class Page extends Html implements IPage
         {
             getBody().init();
             getBody().preConfigure();
+ 
             getAngular().preConfigure();
 
             configurePageHeader();
@@ -345,7 +346,7 @@ public class Page extends Html implements IPage
             {
                 Script dynamicScript = new Script();
                 dynamicScript.addAttribute(ScriptAttributes.Type, "application/javascript");
-                dynamicScript.addAttribute(ScriptAttributes.Src,  JWebSwingSiteBinder.getAngularScriptLocation().replaceAll("/", ""));
+                dynamicScript.addAttribute(ScriptAttributes.Src, JWebSwingSiteBinder.getAngularScriptLocation().replaceAll("/", ""));
                 //dynamicScript.setTiny(true);
                 //dynamicScript.setText("$.ajax({cache:false,async:false,dataType:'script',url:'as'}).fail(function(){alert('session lost'); });");
                 allScripts.add(dynamicScript);

@@ -19,13 +19,10 @@ package za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.Italic;
-import za.co.mmagon.jwebswing.base.html.Link;
-import za.co.mmagon.jwebswing.base.html.ListItem;
-import za.co.mmagon.jwebswing.base.html.Span;
+import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.bootstrap.BootstrapClasses;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentColours;
 import za.co.mmagon.jwebswing.components.moment.Moment;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
@@ -53,8 +50,10 @@ public class SB2DropDownAlerts extends SB2DropDown
             {
                 ListItem li = new ListItem();
                 Link link = new Link("#");
-                Italic i = new Italic(){
+                Italic i = new Italic()
+                {
                     private static final long serialVersionUID = 1L;
+
                     @Override
                     protected StringBuilder renderAfterTag()
                     {
@@ -68,25 +67,25 @@ public class SB2DropDownAlerts extends SB2DropDown
                 Span span = new Span();
                 span.addClass("pull-right");
                 span.addClass("text-muted");
-                
+
                 topSection.add(i);
                 Moment date = new Moment(message.getDate(), ComponentTypes.Span);
-                
-                date.addClass(BootstrapClasses.Pull_Right);
-                date.addClass(BootstrapClasses.Text_Muted);
+
+                date.addClass(BSComponentDefaultOptions.Pull_Right);
+                date.addClass(BSComponentColours.Text_Muted);
                 topSection.add(date);
-                
+
                 topSection.add(span);
-                
+
                 li.add(link);
                 link.add(topSection);
-                
+
                 return li;
             }).forEach((li)
-                    -> 
-                    {
-                        getDropDownContents().add(li);
-                        addDivider();
+                    ->
+            {
+                getDropDownContents().add(li);
+                addDivider();
             });
         }
         super.preConfigure();
@@ -137,9 +136,11 @@ public class SB2DropDownAlerts extends SB2DropDown
 
     /**
      * Read from a URL
-     * 
+     *
      * @param content
+     *
      * @return
+     *
      * @throws IOException
      */
     public static SB2DropDownAlerts fromUrl(URL content) throws IOException

@@ -16,10 +16,10 @@
  */
 package za.co.mmagon.jwebswing.base.interfaces;
 
-import za.co.mmagon.jwebswing.components.bootstrap.BootstrapClasses;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentWidthOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.IBSComponentOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentResponsiveOptions;
 import za.co.mmagon.jwebswing.components.bootstrap.Glyphicons;
-import za.co.mmagon.jwebswing.components.bootstrap.columnlayout.BSColumnWidths;
-import za.co.mmagon.jwebswing.components.bootstrap.columnlayout.BSComponentHiding;
 import za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2.SB2ThemeClasses;
 
 /**
@@ -39,7 +39,7 @@ public interface IComponentHTMLBootstrapBase
      * <p>
      * @return True if it was added, false if it already existed
      */
-    boolean addClass(BootstrapClasses blockName);
+    boolean addClass(IBSComponentOptions blockName);
 
     /**
      * Adds a class name to the class list
@@ -55,14 +55,14 @@ public interface IComponentHTMLBootstrapBase
      * @param blockName
      * @return
      */
-    boolean addClass(BSColumnWidths blockName);
+    boolean addClass(BSComponentWidthOptions blockName);
 
     /**
      * Adds the specified column width settings to the class
      * @param blockName
      * @return
      */
-    boolean addClass(BSComponentHiding blockName);
+    boolean addClass(BSComponentResponsiveOptions blockName);
     
     /**
      * Adds the specified column width settings to the class

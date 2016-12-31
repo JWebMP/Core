@@ -16,7 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jquery.bootstrap;
 
-import za.co.mmagon.jwebswing.components.bootstrap.BootstrapClasses;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
 import org.junit.Test;
 
 /**
@@ -33,7 +33,7 @@ public class BootstrapClassesTest
     @Test
     public void testClassesRender()
     {
-        System.out.println(BootstrapClasses.Nav$Nav_Pills);
+        System.out.println(BSComponentDefaultOptions.Nav$Nav_Pills);
     }
 
 }

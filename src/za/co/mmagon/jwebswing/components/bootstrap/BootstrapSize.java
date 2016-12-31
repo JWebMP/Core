@@ -14,32 +14,48 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package za.co.mmagon.jwebswing.components.bootstrap;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * A Size setting
+ *
  * @author GedMarc
  * @since Oct 30, 2016
  * @version 1.0
- * 
+ *
  */
-public enum BootstrapSize 
+public enum BootstrapSize
 {
-    ExtraLarge("lg",1140),
-    Large("lg",992),
-    Medium("md",768),
-    Small("sm",576),
-    XSmall("xs",0)
-    ;
+    /**
+     *
+     * Extra large devices (large desktops, 1200px and up)
+     */
+    ExtraLarge("lg", 1200),
+    /**
+     * Large devices (desktops, 992px and up)
+     */
+    Large("lg", 992),
+    /**
+     * Medium devices (tablets, 768px and up)
+     */
+    Medium("md", 768),
+    /**
+     * Small devices (landscape phones, 544px and up)
+     */
+    Small("sm", 544),
+    /**
+     * Starting at the bottom
+     */
+    XSmall("xs", 0);
+
     private String name;
     private Integer size;
-    
-    private BootstrapSize ()
+
+    private BootstrapSize()
     {
-        
+
     }
 
     private BootstrapSize(String name)
@@ -52,7 +68,7 @@ public enum BootstrapSize
         this.name = name;
         this.size = size;
     }
-    
+
     @JsonValue
     public String getName()
     {
@@ -66,7 +82,8 @@ public enum BootstrapSize
 
     /**
      * The actual pixel size setting
-     * @return 
+     *
+     * @return
      */
     public Integer getSize()
     {
@@ -75,12 +92,17 @@ public enum BootstrapSize
 
     /**
      * The actual pixel size setting
-     * @param size 
+     *
+     * @param size
      */
     public void setSize(Integer size)
     {
         this.size = size;
     }
-    
-    
+
+    @Override
+    public String toString()
+    {
+        return getName();
+    }
 }

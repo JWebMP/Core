@@ -1,7 +1,6 @@
 package za.co.mmagon.jwebswing.base.html;
 
-import za.co.mmagon.logger.LogFactory;
-import java.util.logging.*;
+import java.util.logging.Level;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.attributes.LinkAttributes;
@@ -11,6 +10,8 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.bootstrap.media.BSMediaChildren;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Browser Support<p>
@@ -43,7 +44,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author Marc Magon
  */
 public class Link extends Component<ComponentHierarchyBase, LinkAttributes, GlobalFeatures, GlobalEvents, Link>
-        implements BodyChildren, NoNewLineForRawText, ListItemChildren
+        implements BodyChildren, NoNewLineForRawText, ListItemChildren,BSMediaChildren
 {
 
     private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("ALink");

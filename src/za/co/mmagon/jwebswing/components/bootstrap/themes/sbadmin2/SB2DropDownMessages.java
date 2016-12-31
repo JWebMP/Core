@@ -19,12 +19,10 @@ package za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import za.co.mmagon.jwebswing.base.html.Bold;
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.Link;
-import za.co.mmagon.jwebswing.base.html.ListItem;
+import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.bootstrap.BootstrapClasses;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentColours;
 import za.co.mmagon.jwebswing.components.moment.Moment;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
@@ -56,8 +54,8 @@ public class SB2DropDownMessages extends SB2DropDown
                         Div topSection = new Div();
                         Moment date = new Moment(message.getDate(), ComponentTypes.Span);
                         
-                        date.addClass(BootstrapClasses.Pull_Right);
-                        date.addClass(BootstrapClasses.Text_Muted);
+                        date.addClass(BSComponentDefaultOptions.Pull_Right);
+                        date.addClass(BSComponentColours.Text_Muted);
                         topSection.add(new Bold(message.getName()));
                         topSection.add(date);
                         

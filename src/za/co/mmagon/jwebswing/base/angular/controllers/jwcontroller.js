@@ -84,6 +84,11 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
         var eventStuff = $scope.getEventObject($event);
         //alert(JSON.stringify($event));
         var element = $event.currentTarget.id;
+        //disable the element on perform (it has already happened wait for server response / show loader on item etc)
+        var el$ = $('#' + element);
+        //el$.
+        
+        
         var getdate = new Date();
         var article = new Object();
         article.componentId = element;

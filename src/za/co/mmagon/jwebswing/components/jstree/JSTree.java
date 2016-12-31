@@ -37,14 +37,22 @@ public class JSTree extends Div<JSTreeChildren, JSTreeAttributes, JSTreeFeatures
 {
 
     private static final long serialVersionUID = 1L;
+    
     private JSTreeFeature feature;
+    
     private JSTreeData data;
-
+    
+    /**
+     * Constructs a new instance of the JS Tree
+     */
     public JSTree()
     {
         addFeature(getFeature());
     }
 
+    /**
+     * Adds the AJAX mode
+     */
     @Override
     public void preConfigure()
     {
@@ -54,6 +62,11 @@ public class JSTree extends Div<JSTreeChildren, JSTreeAttributes, JSTreeFeatures
         super.preConfigure();
     }
 
+    /**
+     * Returns the data, and any parameters if supplied
+     * @param params
+     * @return 
+     */
     @Override
     public JSTreeData getData(Map<String, String[]> params)
     {

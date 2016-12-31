@@ -46,7 +46,15 @@ public enum GlobalAttributes implements AttributeDefinitions
     /**
      * Generic Value Mapping
      */
-    Value;
+    Value,
+    /**
+     * Screen Reader Labels
+     */
+    Aria_Label,
+    /**
+     * Screen Reader Invisible
+     */
+    Aria_Hidden;
 
     private GlobalAttributes()
     {

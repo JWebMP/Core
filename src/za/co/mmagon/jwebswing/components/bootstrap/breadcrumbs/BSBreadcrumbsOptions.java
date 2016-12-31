@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 GedMarc
+ * Copyright (C) 2015 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,38 +14,35 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package za.co.mmagon.jwebswing.components.bootstrap.breadcrumbs;
 
-package za.co.mmagon.jwebswing.components.bootstrap.columnlayout;
+import za.co.mmagon.jwebswing.components.newcomponents.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
 /**
- *
+ * All the options for the tooltip library
+ * <p>
  * @author GedMarc
- * @since Oct 11, 2016
+ * @since Mar 4, 2015
  * @version 1.0
- * 
+ * <p>
+ * <p>
  */
-public enum BSContainerType 
+public class BSBreadcrumbsOptions extends JavaScriptPart
 {
-    /**
-     * fixed-width
-     */
-    Container,
-    /**
-     * full width
-     * Default is this
-     */
-    Container_Fluid
-;
-    private BSContainerType ()
+
+    private static final long serialVersionUID = 1L;
+
+    public BSBreadcrumbsOptions()
     {
-        
+
     }
 
     @Override
-    public String toString()
+    public JavascriptPartType getJavascriptType()
     {
-        return name().toLowerCase().replace('_', '-');
+        return JavascriptPartType.Javascript;
     }
-    
-    
+
 }

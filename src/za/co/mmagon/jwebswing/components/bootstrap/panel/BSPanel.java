@@ -24,7 +24,7 @@ import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.Link;
 import za.co.mmagon.jwebswing.base.html.attributes.ButtonAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.components.bootstrap.BootstrapClasses;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
 
 /**
  * An implementation of the bootstrap panel layout.
@@ -272,8 +272,8 @@ public class BSPanel extends Div<GlobalChildren, BSPanelAttributes, BSPanelFeatu
         this.panelHeaderButtonBar = panelHeaderButtonBar;
         if (panelHeaderButtonBar != null)
         {
-            panelHeaderButtonBar.addClass(BootstrapClasses.Btn_Group);
-            panelHeaderButtonBar.addClass(BootstrapClasses.Pull_Right);
+            panelHeaderButtonBar.addClass(BSComponentDefaultOptions.Btn_Group);
+            panelHeaderButtonBar.addClass(BSComponentDefaultOptions.Pull_Right);
             getPanelHeader().add(panelHeaderButtonBar);
         }
     }

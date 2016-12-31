@@ -23,7 +23,7 @@ import za.co.mmagon.jwebswing.components.fontawesome.FontAwesome;
 import za.co.mmagon.jwebswing.components.fontawesome.FontAwesomeIcons;
 import za.co.mmagon.jwebswing.components.fontawesome.FontAwesomeProperties;
 import za.co.mmagon.jwebswing.components.bootstrap.BSRow;
-import za.co.mmagon.jwebswing.components.bootstrap.BootstrapClasses;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
 import za.co.mmagon.jwebswing.components.bootstrap.panel.BSPanel;
 import za.co.mmagon.jwebswing.components.bootstrap.panel.BSPanelThemes;
 
@@ -112,7 +112,7 @@ public class SB2LargeTile extends Div
             panel.getPanelHeader().add(headerRow);
             
             rightSide.add(getDescription());
-            rightSide.addClass(BootstrapClasses.Text_Right);
+            rightSide.addClass(BSComponentDefaultOptions.Text_Right);
             
             headerRow.add(rightSide);
 

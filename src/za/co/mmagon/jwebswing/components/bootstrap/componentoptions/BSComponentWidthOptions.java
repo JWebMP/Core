@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package za.co.mmagon.jwebswing.components.bootstrap.columnlayout;
+package za.co.mmagon.jwebswing.components.bootstrap.componentoptions;
 
 /**
  * A list of all the column width settings from bootstrap
@@ -24,7 +24,7 @@ package za.co.mmagon.jwebswing.components.bootstrap.columnlayout;
  * @version 1.0
  * 
  */
-public enum BSColumnWidths implements IBSColumnOptions
+public enum BSComponentWidthOptions implements IBSComponentOptions
 {
     /**
      * From size XS the size should be 1
@@ -223,7 +223,7 @@ public enum BSColumnWidths implements IBSColumnOptions
     col_lg_12,
 
     ;
-    private BSColumnWidths ()
+    private BSComponentWidthOptions ()
     {
         
     }

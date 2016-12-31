@@ -14,51 +14,36 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package za.co.mmagon.jwebswing.components.bootstrap.alerts;
 
-package za.co.mmagon.jwebswing.components.bootstrap.columnlayout;
-
-import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 
 /**
- * The default container (or fluid) for bootstrap
+ * Alerts
+ * <p>
+ * Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.
+ *
  * @author GedMarc
- * @since Oct 11, 2016
+ * @since 31 Dec 2016
  * @version 1.0
- * 
+ *
  */
-public class BSContainer extends Div<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, Component>
+public class BSAlert extends Div<GlobalChildren, BSAlertAttributes, GlobalFeatures, GlobalEvents, BSAlert>
 {
+
     private static final long serialVersionUID = 1L;
 
     /**
-     * Constructs as a container-fluid full page)
+     * Alerts
+     * <p>
+     * Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.
      */
-    public BSContainer()
+    public BSAlert()
     {
-        this(BSContainerType.Container_Fluid);
+        addAttribute(BSAlertAttributes.Role, "alert");
+        addClass(BSComponentAlertOptions.Alert);
     }
-    
-    /**
-     * Constructs a new container
-     * @param type 
-     */
-    public BSContainer (BSContainerType type)
-    {
-        addClass(type.toString());
-    }   
-    /**
-     * Returns a new instance
-     * @param type The type of container.
-     * @return 
-     */
-    public static BSContainer newInstance(BSContainerType type)
-    {
-        return new BSContainer(type);
-    }
-    
 }

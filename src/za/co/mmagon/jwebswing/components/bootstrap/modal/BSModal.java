@@ -19,7 +19,8 @@ package za.co.mmagon.jwebswing.components.bootstrap.modal;
 import za.co.mmagon.jwebswing.base.html.Button;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.attributes.ButtonAttributes;
-import za.co.mmagon.jwebswing.components.bootstrap.BootstrapClasses;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentCloseIconOptions;
 
 /**
  * An implementation of the bootstrap modal
@@ -43,8 +44,8 @@ public class BSModal extends Div<BSModalChildren, BSModalAttributes, BSModalFeat
     public BSModal()
     {
         addFeature(getFeature());
-        addClass(BootstrapClasses.Modal);
-        addClass(BootstrapClasses.Fade);
+        addClass(BSComponentDefaultOptions.Modal);
+        addClass(BSComponentDefaultOptions.Fade);
         addAttribute(BSModalAttributes.Role, "dialog");
     }
     
@@ -122,7 +123,7 @@ public class BSModal extends Div<BSModalChildren, BSModalAttributes, BSModalFeat
         this.modalContent = modalContent;
         if(this.modalContent != null)
         {
-            this.modalContent.addClass(BootstrapClasses.Modal_Content);
+            this.modalContent.addClass(BSComponentDefaultOptions.Modal_Content);
             getModalDialog().add(this.modalContent);
         }
     }
@@ -153,7 +154,7 @@ public class BSModal extends Div<BSModalChildren, BSModalAttributes, BSModalFeat
         if(this.modalHeader != null)
         {
             getModalContent().add(0,this.modalHeader);
-            this.modalHeader.addClass(BootstrapClasses.Modal_Header);
+            this.modalHeader.addClass(BSComponentDefaultOptions.Modal_Header);
         }
     }
 
@@ -182,7 +183,7 @@ public class BSModal extends Div<BSModalChildren, BSModalAttributes, BSModalFeat
         this.modalBody = modalBody;
         if(this.modalBody != null)
         {
-            this.modalBody.addClass(BootstrapClasses.Modal_Body);
+            this.modalBody.addClass(BSComponentDefaultOptions.Modal_Body);
             getModalContent().add(this.modalBody);
         }
     }
@@ -213,7 +214,7 @@ public class BSModal extends Div<BSModalChildren, BSModalAttributes, BSModalFeat
         if(this.modalFooter != null)
         {
             getModalContent().add(this.modalFooter);
-            this.modalFooter.addClass(BootstrapClasses.Modal_Footer);
+            this.modalFooter.addClass(BSComponentDefaultOptions.Modal_Footer);
         }
     }
 
@@ -235,7 +236,7 @@ public class BSModal extends Div<BSModalChildren, BSModalAttributes, BSModalFeat
     @Override
     public void addDismissButton(Button button)
     {
-        button.addClass(BootstrapClasses.Close);
+        button.addClass(BSComponentCloseIconOptions.Close);
         button.addAttribute(ButtonAttributes.Data_Dismiss, "modal");
     }
     

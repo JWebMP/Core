@@ -14,50 +14,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-package za.co.mmagon.jwebswing.components.bootstrap.columnlayout;
+package za.co.mmagon.jwebswing.components.bootstrap.componentoptions;
 
 /**
+ * Clearfix
+ * <p>
+ * Easily clear floats by adding .clearfix to the parent element. Utilizes the micro clearfix as popularized by Nicolas Gallagher. Can also be used as a mixin.
  *
  * @author GedMarc
- * @since Oct 10, 2016
+ * @since 31 Dec 2016
  * @version 1.0
- * 
+ *
  */
-public enum BSComponentHiding implements IBSColumnOptions
+public enum BSComponentClearfixOptions implements IBSComponentOptions
 {
-    /**
-     * Hide this component when small only
-     */
-    Hidden_SM,
-    /**
-     * Hide this component extra small only
-     */
-    Hidden_XS,
-    /**
-     * Hide this component when medium
-     */
-    Hidden_MD,
-    /**
-     * Hide this component when large
-     */
-    Hidden_LG,
-    /**
-     * Hide when XL
-     */
-    Hidden_XL
-    ;
-    
-    private BSComponentHiding ()
-    {
-        
-    }
+    Clearfix;
 
     @Override
     public String toString()
     {
-        return name().toLowerCase().replace('_', '-');
+        return name().toLowerCase();
     }
-    
-    
 }

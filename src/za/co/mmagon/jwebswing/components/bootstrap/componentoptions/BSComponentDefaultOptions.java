@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
-package za.co.mmagon.jwebswing.components.bootstrap;
+package za.co.mmagon.jwebswing.components.bootstrap.componentoptions;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -23,8 +23,16 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * @author GedMarc
  * @since 20 Apr 2016
  */
-public enum BootstrapClasses
+public enum BSComponentDefaultOptions implements IBSComponentOptions
 {
+    /**
+     * Only do it when coming in (or hiding?)
+     */
+    In,
+    /**
+     * Only do it when going out (or showing
+     */
+    Out,
     /**
      * The primary font
      */
@@ -90,13 +98,16 @@ public enum BootstrapClasses
      */
     Initialism,
     /**
+     * The .invisible class can be used to toggle only the visibility of an element, meaning its display is not modified and the element can still affect the flow of the document. Displays the item as
+     */
+    Invisible,
+    /**
      * Indicates a blockquote with right_aligned content
      */
     Blockquote_reverse,
     /**
      * Removes the default list_style and left margin on list items (works on both &lt;ul&gt; and &lt;ol&gt;) This class only applies to immediate children list items (to remove the default list_style
-     * from any
-     * nested lists, apply this class to any nested lists as well)
+     * from any nested lists, apply this class to any nested lists as well)
      */
     List_Unstyled,
     /*
@@ -172,50 +183,6 @@ public enum BootstrapClasses
      */
     Form_Horizontal,
     /**
-     * Text styled with class "text_muted"
-     */
-    Text_Muted,
-    /**
-     * Text styled with class "text_primary"
-     */
-    Text_Primary,
-    /**
-     * Text styled with class "text_success"
-     */
-    Text_Success,
-    /**
-     * Text styled with class "text_info"
-     */
-    Text_Info,
-    /**
-     * Text styled with class "text_warning"
-     */
-    Text_Warning,
-    /**
-     * Text styled with class "text_danger"
-     */
-    Text_Danger,
-    /**
-     * Table cell is styled with class "bg_primary"
-     */
-    Bg_Primary,
-    /**
-     * Table cell is styled with class "bg_success"
-     */
-    Bg_Success,
-    /**
-     * Table cell is styled with class "bg_info"
-     */
-    Bg_Info,
-    /**
-     * Table cell is styled with class "bg_warning"
-     */
-    Bg_Warning,
-    /**
-     * Table cell is styled with class "bg_danger"
-     */
-    Bg_Danger,
-    /**
      * Floats an element to the left
      */
     Pull_Left,
@@ -228,10 +195,6 @@ public enum BootstrapClasses
      */
     Center_Block,
     /**
-     * Clears floats
-     */
-    Clearfix,
-    /**
      * Forces an element to be shown
      */
     Show,
@@ -240,21 +203,9 @@ public enum BootstrapClasses
      */
     Hidden,
     /**
-     * Hides an element to all devices except screen readers
-     */
-    Sr_Only,
-    /**
-     * Combine with sr_only to show the element again when it is focused (eg by a keyboard_only user)
-     */
-    Sr_Only_Focusable,
-    /**
      * Helps replace an element's text content with a background image
      */
     Text_Hide,
-    /**
-     * Indicates a close icon
-     */
-    Close,
     /**
      * *
      * Indicates dropdown functionality (will reverse automatically in dropup menus)
@@ -363,11 +314,6 @@ public enum BootstrapClasses
     Tab_Pane,
     /**
      * *
-     * Makes a breadcrumb
-     */
-    Breadcrumb,
-    /**
-     * *
      * Provides simple pagination links (Previous/Next)
      */
     Pager,
@@ -428,7 +374,6 @@ public enum BootstrapClasses
      * Huge Text
      */
     Huge,
-    
     /**
      * Represents a Modal
      */
@@ -452,9 +397,7 @@ public enum BootstrapClasses
     /**
      * The footer of the modal
      */
-    Modal_Footer,
-    
-    ;
+    Modal_Footer,;
 
     @JsonValue
     @Override

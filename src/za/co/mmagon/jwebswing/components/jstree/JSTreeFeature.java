@@ -12,7 +12,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
  */
 public class JSTreeFeature extends Feature<JSTreeOptions, JSTreeFeature> implements JSTreeFeatures, GlobalFeatures
 {
-
     private static final long serialVersionUID = 1L;
 
     private JSTreeOptions options;

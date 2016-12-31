@@ -14,10 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package za.co.mmagon.jwebswing.components.bootstrap;
 
-import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
@@ -25,25 +23,27 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 
 /**
+ * Rows are horizontal groups of columns that ensure your columns are lined up properly.
+ * <p>
+ * Content should be placed within columns, and only columns may be immediate children of rows.
  *
  * @author GedMarc
  * @since Oct 7, 2016
  * @version 1.0
- * 
+ *
  */
 public class BSRow extends Div<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, BSRow>
 {
 
-    public BSRow ()
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Rows are horizontal groups of columns that ensure your columns are lined up properly.
+     * <p>
+     * Content should be placed within columns, and only columns may be immediate children of rows.
+     */
+    public BSRow()
     {
         addClass("row");
     }
-    
-    public static BSRow WrapComponent(ComponentHierarchyBase component)
-    {
-        BSRow bs = new BSRow();
-        bs.wrap(component);
-        return bs;
-    }
-    
 }
