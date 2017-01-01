@@ -64,7 +64,9 @@ public enum BSComponentAlertOptions implements IBSComponentOptions
      * <p>
      * Add a dismiss button and the .alert-dismissible class, which adds extra padding to the right of the alert and positions the .close button.
      * <p>
-     * On the dismiss button, add the data-dismiss="alert" attribute, which triggers the JavaScript functionality. Be sure to use the <button> element with it for proper behavior across all devices.
+     * On the dismiss button, add the data-dismiss="alert" attribute, which triggers the JavaScript functionality.
+     * <p>
+     * Be sure to use the button element with it for proper behavior across all devices.
      * <p>
      * To animate alerts when dismissing them, be sure to add the .fade and .in classes.
      * <p>

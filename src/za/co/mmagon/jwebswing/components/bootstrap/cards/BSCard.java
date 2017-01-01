@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.bootstrap.cards;
 
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.*;
 
 /**
@@ -35,13 +36,6 @@ public class BSCard extends Div<BSCardChildren, BSCardAttributes, BSCardFeatures
     private static final long serialVersionUID = 1L;
     private BSCardFeature feature;
 
-    private HeaderText header;
-    private HeaderText headerSubTitle;
-
-    private Image cardImage;
-    private Div cardBlock;
-    private List itemLists;
-
     /**
      * Cards
      * <p>
@@ -51,6 +45,21 @@ public class BSCard extends Div<BSCardChildren, BSCardAttributes, BSCardFeatures
      */
     public BSCard()
     {
+        addClass(BSComponentCardOptions.Card);
+    }
+
+    /**
+     * Cards
+     * <p>
+     * A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content, contextual background colors, and powerful display options.
+     * <p>
+     * If you’re familiar with Bootstrap 3, cards replace our old panels, wells, and thumbnails. Similar functionality to those components is available as modifier classes for cards.
+     *
+     * @param text
+     */
+    public BSCard(String text)
+    {
+        super(text);
         addClass(BSComponentCardOptions.Card);
     }
 
@@ -110,7 +119,32 @@ public class BSCard extends Div<BSCardChildren, BSCardAttributes, BSCardFeatures
         }
         else if (HeaderText.class.isAssignableFrom(newChild.getClass()))
         {
-            HeaderText.class.cast(newChild).addClass(BSComponentCardOptions.Card_Title);
+            boolean isSubtitle = false;
+            for (ComponentHierarchyBase componentHierarchyBase : getChildren())
+            {
+                if (HeaderText.class.isAssignableFrom(componentHierarchyBase.getClass()))
+                {
+                    isSubtitle = true;
+                }
+            }
+            if (isSubtitle)
+            {
+                HeaderText.class.cast(newChild).addClass(BSComponentCardOptions.Card_Subtitle);
+                return super.add(1, newChild);
+            }
+            else
+            {
+                HeaderText.class.cast(newChild).addClass(BSComponentCardOptions.Card_Title);
+                return super.add(0, newChild);
+            }
+        }
+        else if (Image.class.isAssignableFrom(newChild.getClass()))
+        {
+            Image.class.cast(newChild).addClass(BSComponentCardOptions.Card_Img_Top);
+        }
+        else if (Link.class.isAssignableFrom(newChild.getClass()))
+        {
+            Link.class.cast(newChild).addClass(BSComponentCardOptions.Card_Link);
         }
         return super.add(newChild);
     }

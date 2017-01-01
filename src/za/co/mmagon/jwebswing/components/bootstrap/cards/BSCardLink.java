@@ -37,7 +37,7 @@ public class BSCardLink extends Link
      */
     public BSCardLink()
     {
-
+        addClass(BSComponentCardOptions.Card_Link);
     }
 
     /**
@@ -48,6 +48,7 @@ public class BSCardLink extends Link
     public BSCardLink(String directToAddress)
     {
         super(directToAddress);
+        addClass(BSComponentCardOptions.Card_Link);
     }
 
     /**
@@ -59,6 +60,7 @@ public class BSCardLink extends Link
     public BSCardLink(String directToAddress, String targetFrameName)
     {
         super(directToAddress, targetFrameName);
+        addClass(BSComponentCardOptions.Card_Link);
     }
 
     /**
@@ -71,6 +73,7 @@ public class BSCardLink extends Link
     public BSCardLink(String directToAddress, String targetFrameName, String text)
     {
         super(directToAddress, targetFrameName, text);
+        addClass(BSComponentCardOptions.Card_Link);
     }
 
     /**
@@ -83,6 +86,7 @@ public class BSCardLink extends Link
     public BSCardLink(String directToAddress, String targetFrameName, ComponentHierarchyBase component)
     {
         super(directToAddress, targetFrameName, component);
+        addClass(BSComponentCardOptions.Card_Link);
     }
 
 }

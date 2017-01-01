@@ -167,7 +167,7 @@ public class BSButton extends Div<BSButtonChildren, BSButtonAttributes, BSButton
      * <p>
      * Link functionality caveat
      * <p>
-     * The .disabled class uses pointer-events: none to try to disable the link functionality of <a>s, but that CSS property is not yet standardized. In addition, even in browsers that do support
+     * The .disabled class uses pointer-events: none to try to disable the link functionality of as, but that CSS property is not yet standardized. In addition, even in browsers that do support
      * pointer-events: none, keyboard navigation remains unaffected, meaning that sighted keyboard users and users of assistive technologies will still be able to activate these links. So to be safe,
      * add a tabindex="-1" attribute on these links (to prevent them from receiving keyboard focus) and use custom JavaScript to disable their functionality.
      *

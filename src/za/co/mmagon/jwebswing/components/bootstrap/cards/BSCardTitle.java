@@ -31,7 +31,7 @@ import za.co.mmagon.jwebswing.base.html.attributes.HeaderTypes;
  * @version 1.0
  *
  */
-public class BSCardSubtitle extends HeaderText
+public class BSCardTitle extends HeaderText
 {
 
     private static final long serialVersionUID = 1L;
@@ -43,7 +43,7 @@ public class BSCardSubtitle extends HeaderText
      * <p>
      * The multiple content types can be easily combined to create the card you need. See below for an example.
      */
-    public BSCardSubtitle()
+    public BSCardTitle()
     {
         this(null, null);
     }
@@ -58,10 +58,10 @@ public class BSCardSubtitle extends HeaderText
      * @param headerType
      * @param text
      */
-    public BSCardSubtitle(HeaderTypes headerType, String text)
+    public BSCardTitle(HeaderTypes headerType, String text)
     {
         super(headerType, text);
-        addClass(BSComponentCardOptions.Card_Subtitle);
+        addClass(BSComponentCardOptions.Card_Title);
     }
 
 }
