@@ -26,7 +26,7 @@ package za.co.mmagon.jwebswing.components.bootstrap.componentoptions;
  * @version 1.0
  *
  */
-public enum BSComponentColours implements IBSComponentOptions
+public enum BSComponentColoursOptions implements IBSComponentOptions
 {
     /**
      * Text styled with class "text_muted"

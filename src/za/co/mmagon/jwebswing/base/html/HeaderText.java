@@ -20,14 +20,10 @@ import java.util.Objects;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.HeaderTypes;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.HeaderGroupChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.components.bootstrap.cards.BSCardChildren;
 import za.co.mmagon.jwebswing.components.jqueryui.accordion.JQUIAccordionChildren;
 
 /**
@@ -63,8 +59,13 @@ import za.co.mmagon.jwebswing.components.jqueryui.accordion.JQUIAccordionChildre
  * @author Marc Magon
  * @since forever
  */
-public class HeaderText extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, HeaderText> implements BodyChildren, HeaderGroupChildren, GlobalChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, JQUIAccordionChildren
+public class HeaderText extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, HeaderText> 
+        implements BodyChildren, HeaderGroupChildren, GlobalChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, JQUIAccordionChildren,
+        BSCardChildren
+        
 {
+
+    private static final long serialVersionUID = 1L;
 
     private HeaderTypes headerType;
 

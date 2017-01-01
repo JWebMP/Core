@@ -855,4 +855,23 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
         getChildren().add(component);
         return (J) this;
     }
+
+    /**
+     * Ensure if there are children that new lines must be rendered
+     *
+     * @return
+     */
+    @Override
+    public boolean isNewLineForClosingTag()
+    {
+        if (hasChildren() && !isTiny())
+        {
+            return true;
+        }
+        else
+        {
+            return super.isNewLineForClosingTag();
+        }
+    }
+
 }

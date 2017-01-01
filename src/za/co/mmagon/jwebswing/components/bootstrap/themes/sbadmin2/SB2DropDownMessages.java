@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
-import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentColours;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentColoursOptions;
 import za.co.mmagon.jwebswing.components.moment.Moment;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
@@ -55,7 +55,7 @@ public class SB2DropDownMessages extends SB2DropDown
                         Moment date = new Moment(message.getDate(), ComponentTypes.Span);
                         
                         date.addClass(BSComponentDefaultOptions.Pull_Right);
-                        date.addClass(BSComponentColours.Text_Muted);
+                        date.addClass(BSComponentColoursOptions.Text_Muted);
                         topSection.add(new Bold(message.getName()));
                         topSection.add(date);
                         

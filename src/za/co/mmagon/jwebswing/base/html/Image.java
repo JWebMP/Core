@@ -18,14 +18,11 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.ImageAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.FigureChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.ImageMapChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.bootstrap.cards.BSCardChildren;
 
 /**
  * Browser Support<p>
@@ -55,8 +52,10 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author Marc Magon
  */
 public class Image extends Component<NoChildren, ImageAttributes, GlobalFeatures, GlobalEvents, Image>
-        implements ImageMapChildren, FigureChildren, GlobalChildren, ListItemChildren
+        implements ImageMapChildren, FigureChildren, GlobalChildren, ListItemChildren, BSCardChildren
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Construct a new Image

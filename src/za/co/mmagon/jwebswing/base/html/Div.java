@@ -21,6 +21,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.bootstrap.cards.BSCardChildren;
 import za.co.mmagon.jwebswing.components.bootstrap.media.BSMediaChildren;
 import za.co.mmagon.jwebswing.components.bootstrap.modal.BSModalChildren;
 import za.co.mmagon.jwebswing.components.jqmetro.metro.interfaces.JQMetroTileChildren;
@@ -66,12 +67,12 @@ import za.co.mmagon.jwebswing.components.jqxwidgets.ribbon.JQXRibbonChildren;
  * @param <E> The allowed events
  * @param <J> The Clonable object
  */
-public class Div<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component> 
+public class Div<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component>
         extends Component<C, A, F, E, J>
         implements JWLayoutChildren, BodyChildren, ImageMapChildren, AreaChildren, LayoutHandler, JWLayoutDivChildren,
         JQUITabsChildren, JQUIAccordionChildren, ContainerType, JQUIDialogChildren, JQXRibbonChildren, JQUIRadioButtonGroupChildren,
-        JQXNavigationBarChildren, JQXDropDownListChildren, JQXLayoutChildren, JQXNotificationChildren,JQMetroTileChildren,ListItemChildren,
-        BSModalChildren,BSMediaChildren
+        JQXNavigationBarChildren, JQXDropDownListChildren, JQXLayoutChildren, JQXNotificationChildren, JQMetroTileChildren, ListItemChildren,
+        BSModalChildren, BSMediaChildren, BSCardChildren
 {
 
     private static final long serialVersionUID = 1L;
@@ -93,10 +94,11 @@ public class Div<C extends GlobalChildren, A extends Enum & AttributeDefinitions
     {
         super(myComponent);
     }
-    
+
     /**
      * Div with in-line text
-     * @param text 
+     *
+     * @param text
      */
     public Div(String text)
     {

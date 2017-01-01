@@ -118,54 +118,7 @@ public enum BSComponentDefaultOptions implements IBSComponentOptions
      * Lines up the terms and descriptions in the &lt;dl&gt; element side_by_side Starts off like default &lt;dl&gt;s, but when the browser window expands, it will line up side_by_side
      */
     Dl_Horizontal,
-    /**
-     * Adds basic styling to any button
-     */
-    Btn,
-    /**
-     * Indicates a default/standard button
-     */
-    Btn_Default,
-    /**
-     * Provides extra visual weight and identifies the primary action in a set of buttons
-     */
-    Btn_Primary,
-    /**
-     * Indicates a successful or positive action
-     */
-    Btn_Success,
-    /**
-     * Contextual button for informational alert messages
-     */
-    Btn_Info,
-    /**
-     * Indicates caution should be taken with this action
-     */
-    Btn_Warning,
-    /**
-     * Indicates a dangerous or potentially negative action
-     */
-    Btn_Danger,
-    /**
-     * Makes a button look like a link (will still have button behavior)
-     */
-    Btn_Link,
-    /**
-     * Makes a large button
-     */
-    Btn_Lg,
-    /**
-     * Makes a small button
-     */
-    Btn_Sm,
-    /**
-     * Makes an extra small button
-     */
-    Btn_Xs,
-    /**
-     * Makes a block_level button (spans the full width of the parent element)
-     */
-    Btn_Block,
+    
     /**
      * Makes the button appear pressed
      */

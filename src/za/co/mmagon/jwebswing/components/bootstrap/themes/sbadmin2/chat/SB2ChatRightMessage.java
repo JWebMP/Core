@@ -23,7 +23,7 @@ import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
 import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentClearfixOptions;
-import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentColours;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentColoursOptions;
 import za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2.SB2ThemeClasses;
 import za.co.mmagon.jwebswing.components.fontawesome.*;
 import za.co.mmagon.jwebswing.components.moment.Moment;
@@ -76,7 +76,7 @@ public class SB2ChatRightMessage extends ListItem implements ISB2ChatMessage
             SmallText st = new SmallText();
             Moment m = new Moment(messageDate,ComponentTypes.Span);
             //st.addClass(BSComponentDefaultOptions.Pull_Left);
-            st.addClass(BSComponentColours.Text_Muted);
+            st.addClass(BSComponentColoursOptions.Text_Muted);
             FontAwesome clockIcon = FontAwesome.icon(FontAwesomeIcons.clock_o, FontAwesomeProperties.fw);
             
             st.add(clockIcon);

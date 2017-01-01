@@ -9,6 +9,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.DetailsChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.bootstrap.cards.BSCardChildren;
 import za.co.mmagon.jwebswing.components.jqueryui.tabs.JQUITabsChildren;
 
 /**
@@ -37,7 +38,7 @@ import za.co.mmagon.jwebswing.components.jqueryui.tabs.JQUITabsChildren;
  * @version 1.0
  */
 public class Paragraph extends Component<ParagraphChildren, ParagraphAttributes, GlobalFeatures, GlobalEvents, Paragraph>
-        implements BodyChildren, NoNewLineForRawText, ParagraphChildren, DetailsChildren, JQUITabsChildren
+        implements BodyChildren, NoNewLineForRawText, ParagraphChildren, DetailsChildren, JQUITabsChildren,BSCardChildren
 {
 
     private static final long serialVersionUID = 1L;

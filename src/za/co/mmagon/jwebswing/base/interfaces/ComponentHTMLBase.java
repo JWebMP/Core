@@ -40,11 +40,12 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
         extends ComponentEventBase<F, E, J> implements IComponentHTMLBase<J>
 {
 
-    /** 
+    /**
      * Construct a new component that will render a tag
      *
      * @param componentType
      */
+    @SuppressWarnings("")
     public ComponentHTMLBase(ComponentTypes componentType)
     {
         super(componentType);
@@ -59,8 +60,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     /**
      * Serial Version for all Components and their compatibility
      *
-     * @version 2
-     * Version 2 - Updated CSS Library and References
+     * @version 2 Version 2 - Updated CSS Library and References
      */
     @JsonIgnore
     private static final long serialVersionUID = 1l;
@@ -112,8 +112,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     }
 
     /**
-     * Builds up the HTML for this component and all it's children - Does not perform Pre Configure or Pre Render
-     * Use GetHTML() to perform a pre configure and render
+     * Builds up the HTML for this component and all it's children - Does not perform Pre Configure or Pre Render Use GetHTML() to perform a pre configure and render
      * <p>
      * Executes the following methods in order
      * <p>
@@ -140,9 +139,9 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
             return null;
         }
         setCurrentTabIndents(tabCount);
-        
+
         StringBuilder sb = new StringBuilder();
-        
+
         StringBuilder beforeTag = renderBeforeTag();
         if (beforeTag != null && beforeTag.length() > 0)
         {
@@ -182,8 +181,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     }
 
     /**
-     * Placeholder for children rendering.
-     * The component tag base object will never render any children, it only renders this tag
+     * Placeholder for children rendering. The component tag base object will never render any children, it only renders this tag
      *
      * @return
      */
@@ -249,7 +247,8 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
      * Method for the attribute handling, Empty in the HTML base
      *
      * @param sb The string builder to append attributes to
-     * @return 
+     *
+     * @return
      */
     protected StringBuilder renderAttributes(StringBuilder sb)
     {
@@ -271,7 +270,6 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
         }
         if (!isTiny())
         {
-
             if (isNewLineForClosingTag())
             {
                 sb.append(getNewLine());
@@ -288,6 +286,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
      * Only returns in-line text if the tag is not closed in line
      *
      * @param sb
+     *
      * @return
      */
     @Override
@@ -301,8 +300,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     }
 
     /**
-     * Whether or not to close this tag as /. Also sets whether to display the
-     * closing tag as separate
+     * Whether or not to close this tag as /. Also sets whether to display the closing tag as separate
      * <p>
      * @return True if must close on the same line
      */
@@ -314,9 +312,9 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     /**
      * Sets Whether or not to close this tag as /
      * <p>
-     * @param inlineClosingTag Sets whether to close this tag and disable the
-     *                         usage of children for this tag
-     * @return 
+     * @param inlineClosingTag Sets whether to close this tag and disable the usage of children for this tag
+     *
+     * @return
      */
     protected J setInlineClosingTag(boolean inlineClosingTag)
     {
@@ -416,8 +414,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     /**
      * Renders String content before this tag is rendered
      * <p>
-     * @return Custom HTML String to be inserted directly before this components
-     *         tag
+     * @return Custom HTML String to be inserted directly before this components tag
      */
     protected StringBuilder renderBeforeTag()
     {
@@ -427,8 +424,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     /**
      * Renders String content after this tag is rendered
      * <p>
-     * @return Custom HTML String to be inserted directly after this components
-     *         tag
+     * @return Custom HTML String to be inserted directly after this components tag
      */
     protected StringBuilder renderAfterTag()
     {
@@ -452,6 +448,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
      * Returns this components HTML after configuration and pre-rendering
      *
      * @param tabCount The number of tabs to indent by
+     *
      * @return
      */
     @Override
@@ -467,8 +464,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     }
 
     /**
-     * If a new line for the closing tag is required.
-     * Also sets new line for raw text to false
+     * If a new line for the closing tag is required. Also sets new line for raw text to false
      *
      * @return
      */
@@ -489,8 +485,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     }
 
     /**
-     * If a new line for the closing tag is required.
-     * Also sets new line for raw text to false
+     * If a new line for the closing tag is required. Also sets new line for raw text to false
      *
      * @param newLineForClosingTag
      */
@@ -503,12 +498,12 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     @Override
     public void preConfigure()
     {
-        if(!isInitialized())
+        if (!isInitialized())
         {
             init();
         }
         super.preConfigure();
-        
+
     }
-    
+
 }

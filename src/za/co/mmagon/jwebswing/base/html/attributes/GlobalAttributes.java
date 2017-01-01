@@ -54,7 +54,15 @@ public enum GlobalAttributes implements AttributeDefinitions
     /**
      * Screen Reader Invisible
      */
-    Aria_Hidden;
+    Aria_Hidden,
+    /**
+     * Screen Reader to show pressed or not
+     */
+    Aria_Pressed,
+    /**
+     * Screen Reader to show disabled 
+     */
+    Aria_Disabled;
 
     private GlobalAttributes()
     {
