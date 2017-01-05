@@ -17,7 +17,8 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter<MeasurementCSS,
 
     @CSSDetail
     private double value;
-    private MeasurementTypes MeasurementType;
+
+    private MeasurementTypes measurementType;
 
     /**
      * Constructs an empty measurement
@@ -36,7 +37,7 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter<MeasurementCSS,
     public MeasurementCSSImpl(double value, MeasurementTypes measurementType)
     {
         this.value = value;
-        MeasurementType = measurementType;
+        this.measurementType = measurementType;
     }
 
     /**
@@ -58,7 +59,7 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter<MeasurementCSS,
     public MeasurementCSSImpl(int value, MeasurementTypes measurementType)
     {
         this.value = value;
-        MeasurementType = measurementType;
+        this.measurementType = measurementType;
     }
 
     /**
@@ -88,7 +89,7 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter<MeasurementCSS,
      */
     public void setMeasurementType(MeasurementTypes measurementType)
     {
-        MeasurementType = measurementType;
+        this.measurementType = measurementType;
     }
 
     /**
@@ -111,29 +112,29 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter<MeasurementCSS,
     @Override
     public String toString()
     {
-        if (MeasurementType == null)
-        {
-            return "";
+        /*
+         * if (measurementType == null) { return "";
         }
+         */
         if (Double.class.cast(value).toString().endsWith(".0")) //format as an integer
         {
             Integer valInt = Double.class.cast(value).intValue();
-            if (MeasurementType.isRequiresQuotes())
+            if (MeasurementType().isRequiresQuotes())
             {
-                return "'" + valInt + "" + MeasurementType.getHtmlAnnotation() + "'";
+                return "'" + valInt + "" + MeasurementType().getHtmlAnnotation() + "'";
             }
             else
             {
-                return valInt + "" + MeasurementType.getHtmlAnnotation();
+                return valInt + "" + MeasurementType().getHtmlAnnotation();
             }
         }
-        else if (MeasurementType.isRequiresQuotes())
+        else if (MeasurementType().isRequiresQuotes())
         {
-            return "'" + value + "" + MeasurementType.getHtmlAnnotation() + "'";
+            return "'" + value + "" + MeasurementType().getHtmlAnnotation() + "'";
         }
         else
         {
-            return value + "" + MeasurementType.getHtmlAnnotation();
+            return value + "" + MeasurementType().getHtmlAnnotation();
         }
 
     }
@@ -149,11 +150,11 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter<MeasurementCSS,
     {
         if (renderQuotes)
         {
-            return "'" + value + "" + MeasurementType.getHtmlAnnotation() + "'";
+            return "'" + value + "" + MeasurementType() == null ? "" : MeasurementType().getHtmlAnnotation() + "'";
         }
         else
         {
-            return value + "" + MeasurementType.getHtmlAnnotation();
+            return value + "" + MeasurementType() == null ? "" : MeasurementType().getHtmlAnnotation();
         }
     }
 
@@ -164,6 +165,11 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter<MeasurementCSS,
      */
     public MeasurementTypes MeasurementType()
     {
-        return MeasurementType;
+        if (measurementType == null)
+        {
+            measurementType = MeasurementTypes.Pixels;
+        }
+
+        return measurementType;
     }
 }

@@ -502,7 +502,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
         else if (returnedObject instanceof MeasurementCSSImpl)
         {
             MeasurementCSSImpl m = (MeasurementCSSImpl) returnedObject;
-            if (m.MeasurementType().equals(MeasurementTypes.Pixels) && m.value() == CSSPropertiesFactory.DefaultIntValue)
+            if (m.MeasurementType() == null || m.MeasurementType().equals(MeasurementTypes.Pixels) && m.value() == CSSPropertiesFactory.DefaultIntValue)
             {
                 return rawValues;
             }
@@ -605,7 +605,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
                             Map<StringBuilder, Object> innerFieldMapping = processAnnotation(innerAnnotation);
                             CSSImplementationClass innerImplementationObject = (CSSImplementationClass) getImplementationObject(innerAnnotation, innerFieldMapping);
                             if (!innerImplementationObject.toString().isEmpty())
-                            { 
+                            {
                                 Array.set(newOut, i, innerImplementationObject);
                             }
                         }
