@@ -19,6 +19,7 @@ package za.co.mmagon.jwebswing.base;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
@@ -26,6 +27,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.interfaces.ComponentHTMLBase;
 import za.co.mmagon.jwebswing.base.interfaces.IComponentHTMLAttributeBase;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.generics.Pair;
 import za.co.mmagon.jwebswing.utilities.EnumerationUtils;
 import za.co.mmagon.logger.LogFactory;
 
@@ -197,25 +199,45 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
         {
             getAttributesGlobal().put(GlobalAttributes.Class, sbClasses.toString());
         }
-        Map<Enum, String> allAttributes = getAttributesAll();
-        ArrayList<Enum> attrib = new ArrayList<>();
-        allAttributes.keySet().stream().forEach(attr
-                ->
+
+        Map<Pair<String, Boolean>, String> attributeMap = new TreeMap<>();
+
+        Map<Enum, String> allDefinedAttributes = getAttributesAll();
+
+        for (Entry<Enum, String> entry : allDefinedAttributes.entrySet())
         {
-            attrib.add(attr);
-        });
-        attrib.sort(EnumerationUtils.enumNameSorter);
-        if (!attrib.isEmpty())
+            Enum key = entry.getKey();
+            String value = entry.getValue();
+            if (AttributeDefinitions.class.isAssignableFrom(key.getClass()))
+            {
+                AttributeDefinitions ad = AttributeDefinitions.class.cast(key);
+                Pair p = new Pair(key.toString(), ad.isKeyword());
+
+                attributeMap.put(p, value);
+            }
+        }
+
+        for (Entry<String, String> entry : getAttributesCustom().entrySet())
+        {
+            String key = entry.getKey();
+            String value = entry.getValue();
+
+            Pair p = new Pair(key, (value == null || value.isEmpty()));
+            attributeMap.put(p, value);
+        }
+
+        if (!attributeMap.isEmpty())
         {
             sb.append(" ");
         }
-        attrib.stream().forEach((attribute)
-                ->
+
+        for (Entry<Pair<String, Boolean>, String> entry : attributeMap.entrySet())
         {
-            String value = allAttributes.get(attribute);
-            boolean isKey = AttributeDefinitions.class.cast(attribute).isKeyword();
-            sb.append(attribute.toString().toLowerCase());
-            if (!isKey)
+            Pair<String, Boolean> key = entry.getKey();
+            String value = entry.getValue();
+
+            sb.append(key.getLeft().toLowerCase());
+            if (!key.getRight())
             {
                 sb.append("=\"").append(value).append("\" ");
             }
@@ -223,11 +245,12 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
             {
                 sb.append(" ");
             }
-        });
-        if (!attrib.isEmpty())
+        }
+        if (!attributeMap.isEmpty())
         {
             sb.deleteCharAt(sb.lastIndexOf(" "));
         }
+
         return sb;
     }
 
@@ -306,7 +329,10 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
         }
         else
         {
-            LOG.log(Level.FINE,"Invalid Global Attribute value added [" + getClass().getSimpleName() + "] - [" + attribute + "] - [" + value + "]. Ignoring. Possible duplicate all components run..");
+            LOG.log(Level.FINE, "Invalid Global Attribute value added [{0}] - [{1}] - [{2}]. Ignoring. Possible duplicate all components run..", new Object[]
+            {
+                getClass().getSimpleName(), attribute, value
+            });
         }
         return (J) this;
     }
@@ -328,7 +354,10 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
         }
         else
         {
-            LOG.log(Level.FINE,"Invalid Local Attribute value added [" + getClass().getSimpleName() + "] - [" + attribute + "] - [" + value + "]. Ignoring. Possible duplicate all components run..");
+            LOG.log(Level.FINE, "Invalid Local Attribute value added [{0}] - [{1}] - [{2}]. Ignoring. Possible duplicate all components run..", new Object[]
+            {
+                getClass().getSimpleName(), attribute, value
+            });
         }
         return (J) this;
     }
@@ -360,6 +389,20 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     public final J addAttribute(A attribute, Boolean value)
     {
         getAttributes().put(attribute, value.toString());
+        return (J) this;
+    }
+
+    /**
+     * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
+     * <p>
+     * @param attribute The valid Local Attribute to add
+     * @param value     The value of the attribute
+     *
+     * @return
+     */
+    public final J addAttribute(String attribute, String value)
+    {
+        getAttributesCustom().put(attribute, value);
         return (J) this;
     }
 

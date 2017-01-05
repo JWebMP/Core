@@ -19,16 +19,17 @@ package za.co.mmagon.jwebswing.components.jstree;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.components.jstree.options.JSTreeNodeStateOptions;
+import za.co.mmagon.jwebswing.components.jstree.options.JSTreeTypesOptions;
 
 /**
- *
+ * A Tree Node
  * @author GedMarc
  * @since 22 Dec 2016
  * @version 1.0
  *
  */
-public class JSTreeNode extends JavaScriptPart
+public class JSTreeNode extends JSTreeTypesOptions
 {
 
     private static final long serialVersionUID = 1L;
@@ -41,6 +42,12 @@ public class JSTreeNode extends JavaScriptPart
      */
     private String text;
     /**
+     * You can set the state on a node using the state property.
+     * <p>
+     * Use any combination of the following: opened, selected, disabled.
+     */
+    private JSTreeNodeStateOptions state;
+    /**
      * The type for the node
      */
     @JsonProperty("type")
@@ -52,6 +59,9 @@ public class JSTreeNode extends JavaScriptPart
     @JsonIgnore
     private JSTreeData childNodes;
 
+    /**
+     * Constructs an empty tree node
+     */
     public JSTreeNode()
     {
     }
@@ -67,6 +77,36 @@ public class JSTreeNode extends JavaScriptPart
     {
         this.id = id;
         this.text = text;
+        this.typeName = typeName;
+    }
+
+    /**
+     * Builds a tree node with the given information
+     *
+     * @param id
+     * @param text
+     * @param state
+     */
+    public JSTreeNode(String id, String text, JSTreeNodeStateOptions state)
+    {
+        this.id = id;
+        this.text = text;
+        this.state = state;
+    }
+
+    /**
+     * Builds a tree node with the given information
+     *
+     * @param id
+     * @param text
+     * @param state
+     * @param typeName
+     */
+    public JSTreeNode(String id, String text, JSTreeNodeStateOptions state, String typeName)
+    {
+        this.id = id;
+        this.text = text;
+        this.state = state;
         this.typeName = typeName;
     }
 
@@ -96,10 +136,14 @@ public class JSTreeNode extends JavaScriptPart
      * The ID of the node
      *
      * @param id
+     *
+     * @return
      */
-    public void setId(String id)
+    public JSTreeNode setId(String id)
     {
         this.id = id;
+        return this;
+
     }
 
     /**
@@ -116,10 +160,14 @@ public class JSTreeNode extends JavaScriptPart
      * The text to display for the node
      *
      * @param text
+     *
+     * @return
      */
-    public void setText(String text)
+    public JSTreeNode setText(String text)
     {
         this.text = text;
+        return this;
+
     }
 
     /**
@@ -136,10 +184,13 @@ public class JSTreeNode extends JavaScriptPart
      * The type name associated with the node
      *
      * @param typeName
+     *
+     * @return
      */
-    public void setTypeName(String typeName)
+    public JSTreeNode setTypeName(String typeName)
     {
         this.typeName = typeName;
+        return this;
     }
 
     /**
@@ -160,10 +211,13 @@ public class JSTreeNode extends JavaScriptPart
      * Sets the list of child nodes
      *
      * @param childNodes
+     *
+     * @return
      */
-    public void setChildNodes(JSTreeData childNodes)
+    public JSTreeNode setChildNodes(JSTreeData childNodes)
     {
         this.childNodes = childNodes;
+        return this;
     }
 
     /**
@@ -175,6 +229,37 @@ public class JSTreeNode extends JavaScriptPart
     public boolean hasChildren()
     {
         return !getChildNodes().getNodes().isEmpty();
+    }
+
+    /**
+     * You can set the state on a node using the state property.
+     * <p>
+     * Use any combination of the following: opened, selected, disabled.
+     *
+     * @return
+     */
+    public JSTreeNodeStateOptions getState()
+    {
+        if (this.state == null)
+        {
+            setState(new JSTreeNodeStateOptions());
+        }
+        return state;
+    }
+
+    /**
+     * You can set the state on a node using the state property.
+     * <p>
+     * Use any combination of the following: opened, selected, disabled.
+     *
+     * @param state
+     *
+     * @return
+     */
+    public JSTreeNode setState(JSTreeNodeStateOptions state)
+    {
+        this.state = state;
+        return this;
     }
 
     @Override

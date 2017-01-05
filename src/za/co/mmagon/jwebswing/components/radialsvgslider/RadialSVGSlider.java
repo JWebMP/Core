@@ -22,6 +22,8 @@ import za.co.mmagon.jwebswing.base.html.Link;
 import za.co.mmagon.jwebswing.base.html.Paragraph;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.htmlbuilder.css.lists.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.padding.PaddingCSS;
 
 /**
  * An implementation of the Radial SVG Slider.
@@ -32,6 +34,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.lists.*;
  * @since 29 Aug 2015
  * @version 1.0
  */
+
 public class RadialSVGSlider extends Div<RadialSVGSliderChildren, RadialSVGSliderAttributes, RadialSVGSliderFeatures, RadialSVGSliderEvents, RadialSVGSlider>
 {
 
@@ -39,6 +42,7 @@ public class RadialSVGSlider extends Div<RadialSVGSliderChildren, RadialSVGSlide
     private RadialSVGSliderFeature feature;
 
     @ListCSS(ListStyleType = ListStyleType.none)
+    
     private RadialSVGSliderList radialSliderList;
 
     public RadialSVGSlider()
@@ -110,7 +114,7 @@ public class RadialSVGSlider extends Div<RadialSVGSliderChildren, RadialSVGSlide
             this.radialSliderList.addAttribute(RadialSVGSliderListAttributes.Radius2, 1364);
             this.radialSliderList.addAttribute(RadialSVGSliderListAttributes.CenterX1, 110);
             this.radialSliderList.addAttribute(RadialSVGSliderListAttributes.CenterX2, 1290);
-            this.radialSliderList.addAttribute(GlobalAttributes.Style, "margin-top: 0px;margin-bottom: 0px;");
+            this.radialSliderList.addAttribute(GlobalAttributes.Style, "margin-top: 0px;margin-bottom: 0px;padding-left:0");
             add(this.radialSliderList);
         }
     }

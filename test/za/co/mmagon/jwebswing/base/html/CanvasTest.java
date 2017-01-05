@@ -45,7 +45,7 @@ public class CanvasTest extends BaseTestClass
         c.addAttribute(CanvasAttributes.Height, "200px");
         c.addAttribute(CanvasAttributes.Width, "200px");
         System.out.println(c.toString(true));
-        Assert.assertEquals("<canvas height=\"200px\" id=\"Canvas\" width=\"200px\"></canvas>", c.toString(true).toString());
+        Assert.assertEquals("<canvas height=\"200px\" width=\"200px\" id=\"Canvas\"></canvas>", c.toString(true).toString());
     }
 
 }

@@ -38,7 +38,7 @@ public class DataListTest
         o.setID("id");
         System.out.println(dl.toString(true));
         Assert.assertEquals("<datalist id=\"browsers\">\n"
-                + "	<option id=\"id\" label=\"option 1\" value=\"option 1\">option 1</option>\n"
+                + "	<option label=\"option 1\" value=\"option 1\" id=\"id\">option 1</option>\n"
                 + "</datalist>", dl.toString(true).toString());
     }
 

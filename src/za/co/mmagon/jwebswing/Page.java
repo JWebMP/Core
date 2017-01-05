@@ -73,8 +73,9 @@ public class Page extends Html implements IPage
     /**
      * Cache for all the associated components throughout the life-cycle of the application
      */
-    private transient HashMap<String, ComponentHierarchyBase> componentCache;
+    private transient java.util.Map<String, ComponentHierarchyBase> componentCache;
 
+    
     /**
      * Populates all my components. Excludes this page
      */

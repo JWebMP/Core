@@ -22,6 +22,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.components.bootstrap.cards.BSCardChildren;
+import za.co.mmagon.jwebswing.components.bootstrap.carousel.BSCarouselChildren;
 import za.co.mmagon.jwebswing.components.bootstrap.media.BSMediaChildren;
 import za.co.mmagon.jwebswing.components.bootstrap.modal.BSModalChildren;
 import za.co.mmagon.jwebswing.components.jqmetro.metro.interfaces.JQMetroTileChildren;
@@ -72,7 +73,7 @@ public class Div<C extends GlobalChildren, A extends Enum & AttributeDefinitions
         implements JWLayoutChildren, BodyChildren, ImageMapChildren, AreaChildren, LayoutHandler, JWLayoutDivChildren,
         JQUITabsChildren, JQUIAccordionChildren, ContainerType, JQUIDialogChildren, JQXRibbonChildren, JQUIRadioButtonGroupChildren,
         JQXNavigationBarChildren, JQXDropDownListChildren, JQXLayoutChildren, JQXNotificationChildren, JQMetroTileChildren, ListItemChildren,
-        BSModalChildren, BSMediaChildren, BSCardChildren
+        BSModalChildren, BSMediaChildren, BSCardChildren,BSCarouselChildren
 {
 
     private static final long serialVersionUID = 1L;

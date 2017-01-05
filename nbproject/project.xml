@@ -71,6 +71,7 @@
             <word>img</word>
             <word>inline</word>
             <word>intializations</word>
+            <word>javascript</word>
             <word>js</word>
             <word>json</word>
             <word>jstree</word>
@@ -89,6 +90,7 @@
             <word>sb</word>
             <word>Servlet</word>
             <word>servlets</word>
+            <word>slideshow</word>
             <word>sortables</word>
             <word>sprintf</word>
             <word>submenu</word>
@@ -99,6 +101,7 @@
             <word>tooltip</word>
             <word>Ummm</word>
             <word>url</word>
+            <word>webpage</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

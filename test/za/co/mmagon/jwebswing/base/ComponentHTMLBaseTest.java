@@ -21,7 +21,7 @@ import org.junit.Test;
 import za.co.mmagon.jwebswing.Event;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
-import za.co.mmagon.jwebswing.base.events.click.ClickAdapter;
+import za.co.mmagon.jwebswing.events.click.ClickAdapter;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.interfaces.ComponentHTMLBase;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;

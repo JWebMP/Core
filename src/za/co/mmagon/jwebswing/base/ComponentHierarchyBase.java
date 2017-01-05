@@ -179,7 +179,7 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
 
         if (!isConfigured())
         {
-            if (getClass().isAssignableFrom(ComponentHTMLBootstrapBase.class))
+            if (ComponentHTMLBootstrapBase.class.isAssignableFrom(getClass()))
             {
                 if (ComponentHTMLBootstrapBase.class.cast(this).isBootstrapRequired())
                 {

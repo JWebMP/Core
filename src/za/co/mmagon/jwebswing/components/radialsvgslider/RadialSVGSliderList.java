@@ -19,6 +19,8 @@ package za.co.mmagon.jwebswing.components.radialsvgslider;
 
 import za.co.mmagon.jwebswing.base.html.List;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.ListChildren;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.padding.PaddingCSS;
 
 /**
  * The data attributes for the radial
@@ -28,6 +30,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.ListChildren;
  * @version 1.0
  * 
  */
+@PaddingCSS(PaddingLeft = @MeasurementCSS(0))
 public class RadialSVGSliderList extends List<ListChildren, RadialSVGSliderListAttributes, RadialSVGSliderList> implements RadialSVGSliderChildren
 {
 

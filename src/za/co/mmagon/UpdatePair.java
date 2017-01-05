@@ -47,21 +47,41 @@ public class UpdatePair extends za.co.mmagon.jwebswing.generics.Pair<String, Com
         super(componentID, componentToUpdateWith);
     }
 
+    /**
+     * Returns the assigned user agent
+     *
+     * @return
+     */
     public ReadableUserAgent getUserAgent()
     {
         return userAgent;
     }
 
+    /**
+     * Sets the assigned user agent
+     *
+     * @param userAgent
+     */
     public void setUserAgent(ReadableUserAgent userAgent)
     {
         this.userAgent = userAgent;
     }
 
+    /**
+     * Gets the current assigned browser
+     *
+     * @return
+     */
     public Browsers getBrowser()
     {
         return browser;
     }
 
+    /**
+     * Sets the current assigned browser
+     *
+     * @param browser
+     */
     public void setBrowser(Browsers browser)
     {
         this.browser = browser;

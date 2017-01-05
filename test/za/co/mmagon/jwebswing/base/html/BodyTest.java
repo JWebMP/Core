@@ -115,7 +115,7 @@ public class BodyTest extends BaseTestClass
         p.getOptions().setjQueryUIEnabled(true);
         WebReference.setIsLocal(false);
         System.out.println(p.toString(true));
-        assertEquals("<!DOCTYPE html>\n"
+        assertEquals("<<!DOCTYPE html>\n"
                 + "<html>\n"
                 + "	<head>\n"
                 + "		<link href=\"https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css\" rel=\"stylesheet\" type=\"text/css\">\n"
@@ -123,7 +123,8 @@ public class BodyTest extends BaseTestClass
                 + "	<body id=\"body\">\n"
                 + "		<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js\" type=\"text/javascript\"></script>\n"
                 + "		<script src=\"http://code.jquery.com/jquery-migrate-1.4.1.js\" type=\"text/javascript\"></script>\n"
-                + "		<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.js\" type=\"text/javascript\"></script></body>\n"
+                + "		<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.js\" type=\"text/javascript\"></script>\n"
+                + "	</body>\n"
                 + "</html>", p.toString(true).toString());
     }
 
@@ -150,7 +151,8 @@ public class BodyTest extends BaseTestClass
                 + "		<script src=\"bower_components/jquery-3/dist/jquery.js\" type=\"text/javascript\"></script>\n"
                 + "		<script src=\"bower_components/jquery-migrate/jquery-migrate.js\" type=\"text/javascript\"></script>\n"
                 + "		<script src=\"bower_components/bootstrap/dist/js/bootstrap.js\" type=\"text/javascript\"></script>\n"
-                + "		<script src=\"bower_components/bootstrap3-dialog/dist/js/bootstrap-dialog.js\" type=\"text/javascript\"></script></body>\n"
+                + "		<script src=\"bower_components/bootstrap3-dialog/dist/js/bootstrap-dialog.js\" type=\"text/javascript\"></script>\n"
+                + "	</body>\n"
                 + "</html>", p.toString(true));
     }
 

@@ -85,6 +85,15 @@ public class JSTreeTypesOptions extends JavaScriptPart
     }
 
     /**
+     * Sets the icon 
+     * @param icon 
+     */
+    public JSTreeTypesOptions(String icon)
+    {
+        this.icon = icon;
+    }
+    
+    /**
      * a string - can be a path to an icon or a className, if using an image that is in the current directory use a ./ prefix, otherwise it will be detected as a class. Omit to use the default icon
      * from your theme.
      *

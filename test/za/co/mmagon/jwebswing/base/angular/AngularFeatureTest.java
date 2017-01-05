@@ -20,7 +20,7 @@ package za.co.mmagon.jwebswing.base.angular;
 import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.events.rightclick.RightClickDirective;
+import za.co.mmagon.jwebswing.events.rightclick.RightClickDirective;
 import za.co.mmagon.jwebswing.base.html.Body;
 
 /**

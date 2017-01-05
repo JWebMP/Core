@@ -36,7 +36,7 @@ public class EmbedTest
         Embed e = new Embed("Source", "Media Type");
         e.setID("id");
         System.out.println(e.toString(true));
-        Assert.assertEquals("<embed id=\"id\" src=\"Source\" type=\"Media Type\">", e.toString(true));
+        Assert.assertEquals("<embed src=\"Source\" type=\"Media Type\" id=\"id\">", e.toString(true));
     }
 
 }
