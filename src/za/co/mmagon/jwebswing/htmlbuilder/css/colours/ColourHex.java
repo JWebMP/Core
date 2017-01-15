@@ -1,14 +1,17 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.colours;
 
-import com.fasterxml.jackson.annotation.*;
-import za.co.mmagon.jwebswing.base.client.*;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.io.Serializable;
+import za.co.mmagon.jwebswing.base.client.CSSVersions;
 
 /**
  *
  * @author Marc Magon
  */
-public class ColourHex implements CssColour<ColourHex>
+public class ColourHex implements CssColour<ColourHex>, Serializable
 {
+
+    private static final long serialVersionUID = 1L;
     private String thisHex;
 
     public ColourHex(String thisHex)

@@ -36,8 +36,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
 
     private static final long serialVersionUID = 1L;
     /**
-     * tick mark on the axis.
-     * One of ‘inside’, ‘outside’, ‘cross’, ‘’ or null.
+     * tick mark on the axis. One of ‘inside’, ‘outside’, ‘cross’, ‘’ or null.
      */
     private String mark;
     /**
@@ -69,8 +68,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     private Boolean showLabel;
     /**
-     * A class of a formatter for the tick text.
-     * $.jqplot.DefaultTickFormatter
+     * A class of a formatter for the tick text. $.jqplot.DefaultTickFormatter
      * <p>
      * A class of a formatter for the tick text. sprintf by default.
      */
@@ -107,7 +105,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
     private String labelPosition;
 
     @JsonIgnore
-    private JQPlotGraph linkedGraph;
+    private final JQPlotGraph linkedGraph;
 
     /**
      * Constructs a new tick options canvas
@@ -122,8 +120,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
     }
 
     /**
-     * tick mark on the axis.
-     * One of ‘inside’, ‘outside’, ‘cross’, ‘’ or null.
+     * tick mark on the axis. One of ‘inside’, ‘outside’, ‘cross’, ‘’ or null.
      * <p>
      * @return
      */
@@ -133,8 +130,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
     }
 
     /**
-     * tick mark on the axis.
-     * One of ‘inside’, ‘outside’, ‘cross’, ‘’ or null.
+     * tick mark on the axis. One of ‘inside’, ‘outside’, ‘cross’, ‘’ or null.
      * <p>
      * @param mark
      */

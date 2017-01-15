@@ -57,7 +57,6 @@ public class CordovaServlet extends JWDefaultServlet
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        Date startDate = new Date();
         try
         {
             Page p = GuiceContext.Injector().getInstance(Page.class);
@@ -65,13 +64,13 @@ public class CordovaServlet extends JWDefaultServlet
             {
                 throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
             }
-            
+
             JavascriptReference cordovaReference = new JavascriptReference("CordovaDefaultJavascript", 1.0, "cordova.js");
-            
+
             p.getPageFields().setBase((Base) new Base().addAttribute(BaseAttributes.HRef, request.getRequestURL().toString().replaceAll("jwcordova", "")));
             p.getBody().getJavascriptReferences().add(cordovaReference);
             p.getOptions().setScriptsInHead(true);
-            
+
             p.toString(true);//render
 
             AjaxResponse ajaxResponse = new AjaxResponse();
@@ -88,7 +87,6 @@ public class CordovaServlet extends JWDefaultServlet
             response.setHeader("Access-Control-Allow-Methods", "GET, POST");
             response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
             response.getWriter().write(output);
-            long transferTime = new Date().getTime() - dataTransferDate.getTime();
         }
         catch (MissingComponentException e)
         {

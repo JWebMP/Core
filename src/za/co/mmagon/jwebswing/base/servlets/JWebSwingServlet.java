@@ -93,7 +93,6 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
     {
         String headerInformation = request.getHeader("User-Agent");
         ReadableUserAgent agent = userAgentParser.parse(headerInformation);
-        HttpSession session = GuiceContext.Injector().getInstance(HttpSession.class);
         getPage().setUserAgent(agent);
         Browsers b;
         if (agent.getVersionNumber().getMajor().isEmpty() && agent.getVersionNumber().getMinor().isEmpty())

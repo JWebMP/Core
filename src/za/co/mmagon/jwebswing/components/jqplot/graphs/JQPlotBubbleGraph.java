@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.components.jqplot.graphs;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import za.co.mmagon.jwebswing.components.jqplot.JQPlotGraph;
 import za.co.mmagon.jwebswing.components.jqplot.graphs.display.JQPlotBubble;
 import za.co.mmagon.jwebswing.components.jqplot.options.JQPlotOptions;
@@ -32,6 +31,8 @@ import za.co.mmagon.jwebswing.components.jqplot.options.series.JQPlotSeriesBubbl
  */
 public class JQPlotBubbleGraph extends JQPlotGraph<JQPlotOptions>
 {
+
+    private static final long serialVersionUID = 1L;
 
     private ArrayList<JQPlotBubble> bubbles;
     private JQPlotSeriesBubbleOptions bubbleOptions;
@@ -50,7 +51,7 @@ public class JQPlotBubbleGraph extends JQPlotGraph<JQPlotOptions>
      *
      * @return
      */
-    public JQPlotSeriesBubbleOptions getBubbleOptions()
+    public final JQPlotSeriesBubbleOptions getBubbleOptions()
     {
         if (bubbleOptions == null)
         {
@@ -94,13 +95,14 @@ public class JQPlotBubbleGraph extends JQPlotGraph<JQPlotOptions>
     }
 
     /**
-     * Adds a bubble into the collection with a specified label
-     * Labels can be components as well, this will set the HTML escape off
+     * Adds a bubble into the collection with a specified label Labels can be components as well, this will set the HTML escape off
      * <p>
      * @param x      The X Location
      * @param y      The Y Location
      * @param radius The Radius of the Bubble
      * @param label  The Label of the Bubble
+     *
+     * @return
      */
     public JQPlotBubble addBubble(double x, double y, int radius, String label)
     {
@@ -119,9 +121,8 @@ public class JQPlotBubbleGraph extends JQPlotGraph<JQPlotOptions>
     {
         StringBuilder sb = new StringBuilder("[[");
 
-        for (Iterator<JQPlotBubble> iterator = getBubbles().iterator(); iterator.hasNext();)
+        for (JQPlotBubble next : getBubbles())
         {
-            JQPlotBubble next = iterator.next();
             sb.append(next).append(",");
         }
 

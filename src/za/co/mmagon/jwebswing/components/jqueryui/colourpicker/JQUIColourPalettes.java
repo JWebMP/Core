@@ -16,13 +16,17 @@
  */
 package za.co.mmagon.jwebswing.components.jqueryui.colourpicker;
 
+import java.io.Serializable;
+
 /**
  *
  * @author GedMarc
  * @since 02 May 2015
  */
-public class JQUIColourPalettes
+public class JQUIColourPalettes implements Serializable
 {
+
+    private static final long serialVersionUID = 1L;
 
     private JQUIColourPalette[] palettes;
 

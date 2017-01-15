@@ -79,6 +79,7 @@ public class JQPlotBarWaterFallGraph extends JQPlotBarGraph
      * @param barValue  The actual bar value
      *
      */
+    @Override
     public void addBar(String xAxisName, String BarName, Double barValue)
     {
         JQPlotBar bar = new JQPlotBar(xAxisName, BarName, barValue);
@@ -95,6 +96,7 @@ public class JQPlotBarWaterFallGraph extends JQPlotBarGraph
      * @param barValue      The actual bar value
      *
      */
+    @Override
     public void addBar(String xAxisName, Double startingPoint, Double barValue)
     {
         JQPlotBar bar = new JQPlotBar(xAxisName, startingPoint, barValue);
@@ -112,6 +114,7 @@ public class JQPlotBarWaterFallGraph extends JQPlotBarGraph
      * @param barValue      The actual bar value
      *
      */
+    @Override
     public void addBar(String xAxisName, String BarName, Double startingPoint, Double barValue)
     {
         JQPlotBar bar = new JQPlotBar(xAxisName, BarName, startingPoint, barValue);
@@ -140,6 +143,7 @@ public class JQPlotBarWaterFallGraph extends JQPlotBarGraph
      * <p>
      * @param bar The bar to add to the bar group 0
      */
+    @Override
     public void addBar(JQPlotBar bar)
     {
         List<JQPlotBar> bars = getBarGroup(bar.getxAxisValue());

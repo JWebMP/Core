@@ -52,4 +52,30 @@ public class BSButtonFeature extends Feature<BSButtonOptions, BSButtonFeature> i
         requiredString += ");" + getNewLine();
         addQuery(requiredString);
     }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+        {
+            return true;
+        }
+        if (obj == null)
+        {
+            return false;
+        }
+        if (getClass() != obj.getClass())
+        {
+            return false;
+        }
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 79 * hash + (this.getID().hashCode());
+        return hash;
+    }
 }

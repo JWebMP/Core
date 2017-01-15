@@ -16,14 +16,12 @@
  */
 package za.co.mmagon.jwebswing.base.servlets;
 
-import com.armineasy.injection.GuiceContext;
 import com.google.inject.Singleton;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
-import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -63,16 +61,6 @@ public class JWDefaultServlet extends HttpServlet
     public void validate(Boolean checkPageExists, HttpServletRequest request)
             throws ServletException
     {
-        boolean checkPage;
-        if (checkPageExists == null)
-        {
-            checkPage = true;
-        }
-        else
-        {
-            checkPage = checkPageExists;
-        }
-
         HttpSession session = request.getSession();
         String sessionID = session.getId();
 
@@ -81,7 +69,6 @@ public class JWDefaultServlet extends HttpServlet
             LOG.log(Level.SEVERE, "Session Doesn't Exist", new ServletException("There is no session for a data pull"));
             throw new ServletException("There is no session for a data pull");
         }
-        Page page = GuiceContext.Injector().getInstance(Page.class);
     }
 
     /**
@@ -128,6 +115,5 @@ public class JWDefaultServlet extends HttpServlet
             throw e;
         }
     }
-
 
 }

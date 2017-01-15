@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.components.bootstrap.modal;
 
-import za.co.mmagon.jwebswing.components.newcomponents.*;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.base.servlets.interfaces.ReferencePool;

@@ -16,12 +16,9 @@
  */
 package za.co.mmagon.jwebswing.components.jqplot.graphs;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.*;
-import za.co.mmagon.logger.LogFactory;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.Orientation;
 import za.co.mmagon.jwebswing.components.jqplot.JQPlotGraph;
 import za.co.mmagon.jwebswing.components.jqplot.graphs.display.JQPlotBar;
@@ -30,6 +27,7 @@ import za.co.mmagon.jwebswing.components.jqplot.options.axis.JQPlotAxisOptions;
 import za.co.mmagon.jwebswing.components.jqplot.options.series.JQPlotSeriesBarOptions;
 import za.co.mmagon.jwebswing.components.jqplot.references.JQPlotJavascriptReferencePool;
 import za.co.mmagon.jwebswing.generics.CompassPoints;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Constructs a new JQPlotBar Graph default series display
@@ -62,7 +60,7 @@ public class JQPlotBarGraph extends JQPlotGraph<JQPlotSeriesBarOptions>
     /**
      * Each of the separate bar groups to be applied
      */
-    private Map<String, List<JQPlotBar>> barGroups;
+    private HashMap<String, List<JQPlotBar>> barGroups;
 
     /**
      * Vertical or Horizontal
@@ -74,7 +72,13 @@ public class JQPlotBarGraph extends JQPlotGraph<JQPlotSeriesBarOptions>
      */
     protected JQPlotSeriesBarOptions barGraphOptions = null;
 
+    /**
+     * If the graph is rendered as a cluster
+     */
     private boolean clustered;
+    /**
+     * If the graph is rendering as a waterfall
+     */
     private boolean waterfall;
 
     /**
@@ -93,8 +97,8 @@ public class JQPlotBarGraph extends JQPlotGraph<JQPlotSeriesBarOptions>
      * Adds a new bar for cluster graphs for each bar value to have a series name
      * <p>
      * @param xAxisName The tick or category value
-     * @param BarName The yAxis Value
-     * @param barValue The actual bar value
+     * @param BarName   The yAxis Value
+     * @param barValue  The actual bar value
      *
      */
     public void addBar(String xAxisName, String BarName, Double barValue)
@@ -108,9 +112,9 @@ public class JQPlotBarGraph extends JQPlotGraph<JQPlotSeriesBarOptions>
     /**
      * Adds a new bar and category to the 0 bar group number for waterfall standard graphs
      * <p>
-     * @param xAxisName The tick or category value
+     * @param xAxisName     The tick or category value
      * @param startingPoint The starting point for a bar
-     * @param barValue The actual bar value
+     * @param barValue      The actual bar value
      *
      */
     public void addBar(String xAxisName, Double startingPoint, Double barValue)
@@ -124,10 +128,10 @@ public class JQPlotBarGraph extends JQPlotGraph<JQPlotSeriesBarOptions>
     /**
      * Adds a new bar and category to the 0 bar group number for waterfall clustered graphs
      * <p>
-     * @param xAxisName The tick or category value
-     * @param BarName The yAxis Value
+     * @param xAxisName     The tick or category value
+     * @param BarName       The yAxis Value
      * @param startingPoint The starting point for a bar
-     * @param barValue The actual bar value
+     * @param barValue      The actual bar value
      *
      */
     public void addBar(String xAxisName, String BarName, Double startingPoint, Double barValue)
@@ -142,7 +146,7 @@ public class JQPlotBarGraph extends JQPlotGraph<JQPlotSeriesBarOptions>
      * Adds a new bar and category to the 0 bar group number
      * <p>
      * @param XAxisValue The tick or category value
-     * @param dataValue The yAxis Value
+     * @param dataValue  The yAxis Value
      */
     public void addBar(String XAxisValue, double dataValue)
     {
@@ -165,6 +169,7 @@ public class JQPlotBarGraph extends JQPlotGraph<JQPlotSeriesBarOptions>
      * Returns the bar group associated with the category. If no group is found a new one is created
      *
      * @param xAxisValue
+     *
      * @return
      */
     protected List<JQPlotBar> getBarGroup(String xAxisValue)
@@ -259,6 +264,7 @@ public class JQPlotBarGraph extends JQPlotGraph<JQPlotSeriesBarOptions>
      * Renders each bar in a list
      *
      * @param value
+     *
      * @return
      */
     protected StringBuilder renderBarArrayList(List<JQPlotBar> value)
@@ -345,7 +351,7 @@ public class JQPlotBarGraph extends JQPlotGraph<JQPlotSeriesBarOptions>
                             }
                             catch (Exception e)
                             {
-                                LOG.log(Level.WARNING,"Unable to generate data",e);
+                                LOG.log(Level.WARNING, "Unable to generate data", e);
                                 valuesPerRow[j] = "";
                             }
                             break;

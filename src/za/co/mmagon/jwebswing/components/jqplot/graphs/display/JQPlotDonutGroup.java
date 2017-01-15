@@ -31,7 +31,7 @@ public class JQPlotDonutGroup extends JavaScriptPart
 
     private static final long serialVersionUID = 1L;
 
-    private List<List<JQPlotPieSlice>> donutGroup;
+    private ArrayList<List<JQPlotPieSlice>> donutGroup;
 
     public JQPlotDonutGroup()
     {
@@ -69,7 +69,7 @@ public class JQPlotDonutGroup extends JavaScriptPart
      *
      * @param donutGroup
      */
-    public void setDonutGroup(List<List<JQPlotPieSlice>> donutGroup)
+    public void setDonutGroup(ArrayList<List<JQPlotPieSlice>> donutGroup)
     {
         this.donutGroup = donutGroup;
     }

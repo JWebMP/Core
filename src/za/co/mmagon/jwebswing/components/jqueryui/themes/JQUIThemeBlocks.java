@@ -142,7 +142,7 @@ public enum JQUIThemeBlocks
 
     /**
      * Priorities
-     *
+     * <p>
      */
     protected static final EnumSet<JQUIThemeBlocks> ThemePriorities = EnumSet.of(UI_Priority_Primary, UI_Priority_Secondary);
 
@@ -164,7 +164,7 @@ public enum JQUIThemeBlocks
     /**
      * Radius Settings
      */
-    public static final EnumSet<JQUIThemeBlocks> ThemeCorners = EnumSet.of(UI_Corner_All, UI_Corner_Top, UI_Corner_Left, UI_Corner_Right, UI_Corner_Bottom);
+    protected static final EnumSet<JQUIThemeBlocks> ThemeCorners = EnumSet.of(UI_Corner_All, UI_Corner_Top, UI_Corner_Left, UI_Corner_Right, UI_Corner_Bottom);
 
     @Override
     public String toString()

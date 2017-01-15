@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.components.bootstrap.accordion;
 
-import za.co.mmagon.jwebswing.components.newcomponents.*;
 import za.co.mmagon.jwebswing.base.html.Div;
 
 /**
@@ -52,4 +51,29 @@ public class BSAccordion extends Div<BSAccordionChildren, BSAccordionAttributes,
         return getFeature().getOptions();
     }
 
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+        {
+            return true;
+        }
+        if (obj == null)
+        {
+            return false;
+        }
+        if (getClass() != obj.getClass())
+        {
+            return false;
+        }
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 79 * hash + (this.getID().hashCode());
+        return hash;
+    }
 }

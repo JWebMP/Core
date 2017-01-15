@@ -275,7 +275,6 @@ public class PageFields extends JavaScriptPart
     public void setFavIcon(String favIconURL)
     {
         favIconLink.addAttribute(CSSLinkAttributes.Rel, "icon");
-        String favType = favIconURL.substring(favIconURL.lastIndexOf("."));
         String mimeType = "";
         try
         {

@@ -79,8 +79,7 @@ public class JQUIColourPickerOptions extends JavaScriptPart
     private Boolean showPaletteOnly;
     /**
      * Spectrum can show a button to toggle the colorpicker next to the palette. This way, the user can choose from a limited number of colors in the palette, but still be able to pick a color that's
-     * not in the palette.
-     * The default value for togglePaletteOnly is FALSE. Set it to TRUE to enable the Toggle button.
+     * not in the palette. The default value for togglePaletteOnly is FALSE. Set it to TRUE to enable the Toggle button.
      * <p>
      * You can also change the text on the Toggle Button with the options togglePaletteMoreText (default is "more") and togglePaletteLessText (default is "less").
      */
@@ -339,8 +338,7 @@ public class JQUIColourPickerOptions extends JavaScriptPart
 
     /**
      * Spectrum can show a button to toggle the colorpicker next to the palette. This way, the user can choose from a limited number of colors in the palette, but still be able to pick a color that's
-     * not in the palette.
-     * The default value for togglePaletteOnly is FALSE. Set it to TRUE to enable the Toggle button.
+     * not in the palette. The default value for togglePaletteOnly is FALSE. Set it to TRUE to enable the Toggle button.
      * <p>
      * You can also change the text on the Toggle Button with the options togglePaletteMoreText (default is "more") and togglePaletteLessText (default is "less").
      * <p>
@@ -353,8 +351,7 @@ public class JQUIColourPickerOptions extends JavaScriptPart
 
     /**
      * Spectrum can show a button to toggle the colorpicker next to the palette. This way, the user can choose from a limited number of colors in the palette, but still be able to pick a color that's
-     * not in the palette.
-     * The default value for togglePaletteOnly is FALSE. Set it to TRUE to enable the Toggle button.
+     * not in the palette. The default value for togglePaletteOnly is FALSE. Set it to TRUE to enable the Toggle button.
      * <p>
      * You can also change the text on the Toggle Button with the options togglePaletteMoreText (default is "more") and togglePaletteLessText (default is "less").
      * <p>

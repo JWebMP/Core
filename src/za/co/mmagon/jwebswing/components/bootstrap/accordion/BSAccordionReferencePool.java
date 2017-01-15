@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.components.bootstrap.accordion;
 
-import za.co.mmagon.jwebswing.components.newcomponents.*;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.base.servlets.interfaces.ReferencePool;
@@ -67,4 +66,5 @@ public enum BSAccordionReferencePool implements ReferencePool
     {
         this.cssReference = cssReference;
     }
+
 }

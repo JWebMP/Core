@@ -20,9 +20,7 @@ import java.util.ArrayList;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.client.BrowserGroups;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.DisplayObjectType;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -35,6 +33,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  * This class incorporates the JQPlot library from http://www.jqplot.com
  *
  * @author mmagon
+ * @param <O>
+ *
  * @since 2014/07/08
  * @version 3.0
  * <p>
@@ -44,7 +44,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  *
  *
  */
-public abstract class JQPlotGraph<O extends JavaScriptPart> 
+public abstract class JQPlotGraph<O extends JavaScriptPart>
         extends Component<NoChildren, NoAttributes, JQPlotGraphFeatures, JQPlotGraphEvents, JQPlotGraph>
         implements GlobalChildren, DisplayObjectType, NoNewLineBeforeClosingTag, JQUITabsChildren
 {
@@ -92,8 +92,7 @@ public abstract class JQPlotGraph<O extends JavaScriptPart>
     protected abstract StringBuilder getDataPointRender();
 
     /**
-     * Gets the feature for the graph.
-     * Please don't ever return a null. JQPlotGraphFeature is also fine
+     * Gets the feature for the graph. Please don't ever return a null. JQPlotGraphFeature is also fine
      * <p>
      * @return
      */
