@@ -67,17 +67,24 @@
             <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/html/Body.java</file>
         </group>
         <group name="JWebSwing">
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/CSSComponent.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/bootstrap/carousel/BSCarouselCaption.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/UpdatePair.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/components/bootstrap/carousel/BSCarouselTest.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/bootstrap/carousel/BSComponentCarouselOptions.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/html/Link.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/servlets/CordovaServlet.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/PageOptions.java</file>
             <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/JWebSwingSiteBinder.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/bootstrap/carousel/BSCarousel.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/servlets/JavaScriptServlet.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/Component.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/bootstrap/carousel/BSCarouselIndicators.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/angular/AngularFeature.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/pools/jquery/JQueryReferencePool.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/ComponentEventBase.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/ComponentDependancyBase.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/Page.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/servlets/SiteLoaderJavascript.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/PageTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/servlets/siteloader.js</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/servlets/JWebSwingServlet.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/base/html/BodyTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/generics/DynamicLoadingPage.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/ComponentBase.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/angular/Angular2Feature.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/PageFields.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/jar-resources/META-INF/resources/bower_components/bootstrap/less/carousel.less</file>
         </group>
     </open-files>
 </project-private>

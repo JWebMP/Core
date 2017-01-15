@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.events.dragstart;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
@@ -48,7 +49,7 @@ public class DragStartDirective extends AngularDirectiveBase
     @Override
     public String renderFunction()
     {
-        return getAngular().getFileTemplate(DragStartDirective.class, "DragStartS").toString();
+        return FileTemplates.getFileTemplate(DragStartDirective.class, "DragStartS").toString();
     }
 
 }

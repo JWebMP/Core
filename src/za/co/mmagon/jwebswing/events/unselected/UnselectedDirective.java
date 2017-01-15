@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.events.unselected;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
@@ -48,7 +49,7 @@ public class UnselectedDirective extends AngularDirectiveBase
     @Override
     public String renderFunction()
     {
-        return getAngular().getFileTemplate(UnselectedDirective.class, "Event").toString();
+        return FileTemplates.getFileTemplate(UnselectedDirective.class, "Event").toString();
     }
 
 }

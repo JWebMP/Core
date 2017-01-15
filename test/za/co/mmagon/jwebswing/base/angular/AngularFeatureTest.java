@@ -19,9 +19,10 @@ package za.co.mmagon.jwebswing.base.angular;
 
 import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.events.rightclick.RightClickDirective;
 import za.co.mmagon.jwebswing.base.html.Body;
+import za.co.mmagon.jwebswing.events.rightclick.RightClickDirective;
 
 /**
  *
@@ -43,7 +44,8 @@ public class AngularFeatureTest extends BaseTestClass
         //System.out.println(p);
         //System.out.println(p.toString(true));
         //System.out.println(b.toString(true));
-        System.out.println(p.getAngular().renderTemplateScripts("jwangular"));
+        p.getAngular().configureTemplateVariables();
+        System.out.println(FileTemplates.renderTemplateScripts("jwangular"));
     }
 
     @Test
@@ -55,7 +57,8 @@ public class AngularFeatureTest extends BaseTestClass
         //System.out.println(p);
         //System.out.println(p.toString(true));
         //System.out.println(b.toString(true));
-        System.out.println(p.getAngular().getTemplateScript("jwangular"));
+        p.getAngular().configureTemplateVariables();
+        System.out.println(FileTemplates.getTemplateScript("jwangular"));
     }
 
     @Test
@@ -68,7 +71,8 @@ public class AngularFeatureTest extends BaseTestClass
         //System.out.println(p);
         //System.out.println(p.toString(true));
         //System.out.println(b.toString(true));
-        System.out.println(p.getAngular().renderTemplateScripts("jwangular"));
+        p.getAngular().configureTemplateVariables();
+        System.out.println(FileTemplates.renderTemplateScripts("jwangular"));
     }
 
     @Test
@@ -77,6 +81,7 @@ public class AngularFeatureTest extends BaseTestClass
         Page p = getPage();
         Body b = p.getBody();
         p.getOptions().setAngularEnabled(true);
+        p.getAngular().configureTemplateVariables();
         System.out.println(p.toString(true));
     }
 }

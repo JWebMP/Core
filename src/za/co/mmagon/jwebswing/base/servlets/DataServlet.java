@@ -17,6 +17,7 @@
 package za.co.mmagon.jwebswing.base.servlets;
 
 import com.armineasy.injection.GuiceContext;
+import com.armineasy.injection.filters.CorsAllowedFilter;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Singleton;
@@ -71,8 +72,16 @@ public class DataServlet extends JWDefaultServlet
         Date startDate = new Date();
         StringBuilder responseString = new StringBuilder();
         HttpSession session = GuiceContext.Injector().getInstance(HttpSession.class);
+
         log.log(Level.INFO, "[SessionID]-[" + session.getId() + "];");
-        Page page = (Page) session.getAttribute("jwpage");
+        
+        Page page = GuiceContext.Injector().getInstance(Page.class);
+        
+        if (page == null)
+        {
+            throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
+        }
+        
         String componentID = request.getParameter("component");
         ComponentHierarchyBase hb = page.getComponentCache().get(componentID);
         if (hb == null)
@@ -103,6 +112,12 @@ public class DataServlet extends JWDefaultServlet
         {
             response.setContentType("application/json;charset=UTF-8");
             response.setCharacterEncoding("UTF-8");
+
+            response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);
+            response.setHeader("Access-Control-Allow-Credentials", "true");
+            response.setHeader("Access-Control-Allow-Methods", "GET, POST");
+            response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+
             out.println(responseString);
             Date dataTransferDate = new Date();
             log.log(Level.FINE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + responseString.length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");

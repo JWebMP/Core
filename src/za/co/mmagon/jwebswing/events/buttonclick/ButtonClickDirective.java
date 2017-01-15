@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.events.buttonclick;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
@@ -48,7 +49,7 @@ public class ButtonClickDirective extends AngularDirectiveBase
     @Override
     public String renderFunction()
     {
-        return getAngular().getFileTemplate(ButtonClickDirective.class, "ButtonClick").toString();
+        return FileTemplates.getFileTemplate(ButtonClickDirective.class, "ButtonClick").toString();
     }
 
 }

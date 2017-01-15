@@ -7,6 +7,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.components.bootstrap.cards.BSCardChildren;
+import za.co.mmagon.jwebswing.components.bootstrap.dropdown.BSDropDownChildren;
 
 /**
  * Definition and Usage &gt;p&lt;
@@ -32,7 +33,7 @@ import za.co.mmagon.jwebswing.components.bootstrap.cards.BSCardChildren;
  * @since 2014/12/20
  */
 public class Button extends Component<GlobalChildren, ButtonAttributes, GlobalFeatures, GlobalEvents, Button>
-        implements GlobalChildren, BSCardChildren
+        implements GlobalChildren, BSCardChildren, BSDropDownChildren
 {
 
     private static final long serialVersionUID = 1L;

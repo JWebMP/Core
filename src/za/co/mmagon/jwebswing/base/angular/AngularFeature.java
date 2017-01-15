@@ -17,10 +17,9 @@
 package za.co.mmagon.jwebswing.base.angular;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.io.*;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.regex.Matcher;
+import java.util.ArrayList;
+import java.util.List;
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.Feature;
 import za.co.mmagon.jwebswing.base.angular.controllers.AngularControllerBase;
@@ -32,7 +31,6 @@ import za.co.mmagon.jwebswing.base.exceptions.NullComponentException;
 import za.co.mmagon.jwebswing.base.html.Comment;
 import za.co.mmagon.jwebswing.base.html.interfaces.HTMLFeatures;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.utilities.TextUtilities;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -50,16 +48,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      * The logger for angular
      */
     private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("AngularFeature");
-    /**
-     * All registered templates
-     */
-    @JsonIgnore
-    private final Map<String, StringBuilder> TemplateScripts = new HashMap<>();
-    /**
-     * All registered variables
-     */
-    @JsonIgnore
-    private final Map<String, StringBuilder> TemplateVariables = new HashMap<>();
+
     /**
      * The application module
      */
@@ -137,7 +126,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
                 getComponent().addAttribute(AngularAttributes.ngApp, getAppName() + "");
                 getComponent().addAttribute(AngularAttributes.ngController, controllerName);
                 getComponent().add(new Comment("Angular Application"));
-                compileTemplate(AngularFeature.class, "jwangular");
+
             }
         }
         super.preConfigure();
@@ -151,72 +140,15 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      */
     public void configureTemplateVariables()
     {
-        TemplateVariables.put("JW_APP_NAME", new StringBuilder(getAppName() + ""));
-        TemplateVariables.put("JW_MODULES", new StringBuilder(compileModules() + ""));
-        TemplateVariables.put("JW_DIRECTIVES", new StringBuilder(compileDirectives() + ""));
-
-        TemplateVariables.put("JW_APP_CONTROLLER", new StringBuilder(getControllerName() + ""));
-        TemplateVariables.put("JW_CONTROLLERS", new StringBuilder(compileControllers() + ""));
-    }
-
-    /**
-     * Replaces all instances of the following
-     *
-     * @param templateName The name of the template being processed
-     * @param template     The physical string to process
-     *
-     * @return
-     */
-    public StringBuilder processTemplate(String templateName, String template)
-    {
-        String templateOutput = template;
-        for (String templateVariable : getTemplateVariables().keySet())
+        if (FileTemplates.getTemplateScript("jwangular") == null)
         {
-            String templateScript = Matcher.quoteReplacement(getTemplateVariables().get(templateVariable).toString());
-            String templateNameClean = templateVariable;
-            try
-            {
-                templateOutput = templateOutput.replaceAll("" + templateNameClean + "", templateScript);
-            }
-            catch (IllegalArgumentException iae)
-            {
-                LOG.config("[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[" + templateVariable + "];[Script]-[" + templateScript + "]");
-                LOG.severe(TextUtilities.stackTraceToString(iae));
-            }
+            FileTemplates.getTemplateVariables().put("JW_APP_NAME", new StringBuilder(getAppName() + ""));
+            FileTemplates.getTemplateVariables().put("JW_MODULES", new StringBuilder(compileModules() + ""));
+            FileTemplates.getTemplateVariables().put("JW_DIRECTIVES", new StringBuilder(compileDirectives() + ""));
+            FileTemplates.getTemplateVariables().put("JW_APP_CONTROLLER", new StringBuilder(getControllerName() + ""));
+            FileTemplates.getTemplateVariables().put("JW_CONTROLLERS", new StringBuilder(compileControllers() + ""));
+            FileTemplates.getTemplateVariables().put("jwangular", FileTemplates.compileTemplate(AngularFeature.class, "jwangular"));
         }
-        TemplateScripts.put(templateName, new StringBuilder(templateOutput));
-        return TemplateScripts.get(templateName);
-    }
-
-    /**
-     * Replaces all instances of the following
-     * <p>
-     * %%APP%% - the angular module application name %%DIRECTIVES%% - the angular directives %%MODULES%% the modules generates %%CONTROLLER%% the modules generates
-     *
-     * @param referenceClass The class to find where the file is at
-     * @param templateName   the template to use
-     *
-     * @return the name
-     */
-    public StringBuilder compileTemplate(Class referenceClass, String templateName)
-    {
-        String template = getFileTemplate(referenceClass, templateName).toString();
-        return processTemplate(templateName, template);
-    }
-
-    /**
-     * Replaces all instances of the following
-     * <p>
-     * %%APP%% - the angular module application name %%DIRECTIVES%% - the angular directives %%MODULES%% the modules generates %%CONTROLLER%% the modules generates
-     *
-     * @param templateName The template name
-     * @param template     the template to build
-     *
-     * @return the name
-     */
-    public StringBuilder compileTemplate(String templateName, String template)
-    {
-        return processTemplate(templateName, template);
     }
 
     /**
@@ -231,7 +163,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
         angulars.addAll(getComponent().getPage().getBody().getAngularDirectivesAll());
         angulars.stream().forEach(directive ->
         {
-            output.append(compileTemplate(directive.getReferenceName(), directive.renderFunction()));
+            output.append(FileTemplates.compileTemplate(directive.getReferenceName(), directive.renderFunction()));
         });
         return output;
     }
@@ -249,7 +181,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
         angulars.addAll(getComponent().getPage().getBody().getAngularControllersAll());
         angulars.stream().forEach(controller ->
         {
-            output.append(compileTemplate(controller.getReferenceName(), controller.renderFunction()));
+            output.append(FileTemplates.compileTemplate(controller.getReferenceName(), controller.renderFunction()));
         });
         return output;
     }
@@ -267,56 +199,9 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
         //angulars.addAll(getComponent().getPage().getBody().getAngularModulesAll());
         angulars.stream().forEach(module ->
         {
-            output.append(compileTemplate(module.getReferenceName(), module.renderFunction()));
+            output.append(FileTemplates.compileTemplate(module.getReferenceName(), module.renderFunction()));
         });
         return output;
-    }
-
-    /**
-     * Returns the template as a string
-     *
-     * @param referenceClass The class to reference to locate the file
-     * @param templateName   The file without .min.js or .js attached to it
-     *
-     * @return The string for the file
-     */
-    public StringBuilder getFileTemplate(Class referenceClass, String templateName)
-    {
-        StringBuilder template = TemplateScripts.get(templateName);
-        if (template == null)
-        {
-            try
-            {
-                String templateFileName = templateName;
-
-                if (this.component.isTiny())
-                {
-                    templateFileName += ".min.js";
-                }
-                else
-                {
-                    templateFileName += ".js";
-                }
-                byte[] fileContents;
-                try (InputStream is = referenceClass.getResourceAsStream(templateFileName);
-                        BufferedInputStream bis = new BufferedInputStream(is))
-                {
-                    fileContents = new byte[bis.available()];
-                    bis.read(fileContents, 0, bis.available());
-                }
-                String contents = new String(fileContents);
-                setTemplateScript(templateName, new StringBuilder(contents));
-            }
-            catch (FileNotFoundException ex)
-            {
-                LOG.log(Level.SEVERE, "[Error]-[unable to find template file];[TemplateFile]-[" + templateName + "];[TemplatePath]-[" + referenceClass.getResource(templateName).getPath() + "]", ex);
-            }
-            catch (IOException ex)
-            {
-                LOG.log(Level.SEVERE, "Unable to read file contents jwangular template File", ex);
-            }
-        }
-        return TemplateScripts.get(templateName);
     }
 
     /**
@@ -333,7 +218,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      *
      * @return
      */
-    public String getAppName()
+    public static String getAppName()
     {
         return appName;
     }
@@ -354,7 +239,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      *
      * @return
      */
-    public String getControllerName()
+    public static String getControllerName()
     {
         return controllerName;
     }
@@ -401,68 +286,6 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
     public final void setComponent(Component body)
     {
         this.component = body;
-    }
-
-    /**
-     * Gets the text string for the template script
-     *
-     * @param templateName
-     *
-     * @return
-     */
-    public StringBuilder getTemplateScript(String templateName)
-    {
-        return TemplateScripts.get(templateName);
-    }
-
-    /**
-     * Sets the template script
-     *
-     * @param templateName
-     * @param templateScript
-     */
-    public void setTemplateScript(String templateName, StringBuilder templateScript)
-    {
-        TemplateScripts.put(templateName, templateScript);
-    }
-
-    /**
-     * Get the map of all the template scripts
-     *
-     * @param template
-     *
-     * @return A final HashMap
-     */
-    public StringBuilder renderTemplateScripts(String template)
-    {
-        configureTemplateVariables();
-        if (TemplateScripts.containsKey(template) && TemplateScripts.get(template) != null)
-        {
-            StringBuilder output = processTemplate(template, getTemplateScripts().get(template).toString());
-            return output;
-        }
-
-        return new StringBuilder();
-    }
-
-    /**
-     * Get the map of all the template scripts
-     *
-     * @return A final HashMap
-     */
-    public Map<String, StringBuilder> getTemplateScripts()
-    {
-        return TemplateScripts;
-    }
-
-    /**
-     * Returns all the compiles replacement template strings with their values to be replaced
-     *
-     * @return
-     */
-    public Map<String, StringBuilder> getTemplateVariables()
-    {
-        return TemplateVariables;
     }
 
     /**

@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.events.load;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
@@ -48,7 +49,7 @@ public class LoadDirective extends AngularDirectiveBase
     @Override
     public String renderFunction()
     {
-        return getAngular().getFileTemplate(LoadDirective.class, "Load").toString();
+        return FileTemplates.getFileTemplate(LoadDirective.class, "Load").toString();
     }
 
 }

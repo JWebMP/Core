@@ -14,10 +14,10 @@ public enum JQueryReferencePool
 
     JQuery(new JQueryReference()),
     JQueryV2(new JQueryReferenceV2()),
-    JQueryV3(new JavascriptReference("Jquery3", 3.1, "bower_components/jquery-3/dist/jquery.js", "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js", 0,RequirementsPriority.First)),
+    JQueryV3(new JavascriptReference("Jquery3", 3.1, "bower_components/jquery-3/dist/jquery.js", "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js", 0,RequirementsPriority.First).setCordovaRequired(true)),
     AjaxEnabler(new JQueryAjaxEnablerReference()),
     JQueryAtmospherePush(new AtmosphereReference()),
-    JQueryMigrate(new JQueryMigrateReference()),
+    JQueryMigrate(new JQueryMigrateReference().setCordovaRequired(true)),
     JQXWidgetFixes(new JavascriptReference("JQXWidgetFix", 1.0, "javascript/jwebswing/jqxfixes.js", 8));
 
     /*

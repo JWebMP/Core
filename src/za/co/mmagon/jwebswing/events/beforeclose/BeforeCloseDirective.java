@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.events.beforeclose;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
@@ -48,7 +49,7 @@ public class BeforeCloseDirective extends AngularDirectiveBase
     @Override
     public String renderFunction()
     {
-        return getAngular().getFileTemplate(BeforeCloseDirective.class, "BeforeClose").toString();
+        return FileTemplates.getFileTemplate(BeforeCloseDirective.class, "BeforeClose").toString();
     }
 
 }

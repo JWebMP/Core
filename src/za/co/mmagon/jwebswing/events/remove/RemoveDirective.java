@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.events.remove;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
@@ -48,7 +49,7 @@ public class RemoveDirective extends AngularDirectiveBase
     @Override
     public String renderFunction()
     {
-        return getAngular().getFileTemplate(RemoveDirective.class, "Remove").toString();
+        return FileTemplates.getFileTemplate(RemoveDirective.class, "Remove").toString();
     }
 
 }

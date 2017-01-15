@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.events.stop;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
@@ -48,7 +49,7 @@ public class StopDirective extends AngularDirectiveBase
     @Override
     public String renderFunction()
     {
-        return getAngular().getFileTemplate(StopDirective.class, "Stop").toString();
+        return FileTemplates.getFileTemplate(StopDirective.class, "Stop").toString();
     }
 
 }

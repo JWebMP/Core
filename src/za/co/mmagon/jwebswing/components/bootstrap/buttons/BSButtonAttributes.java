@@ -44,6 +44,10 @@ public enum BSButtonAttributes implements AttributeDefinitions
      * <p>
      */
     Disabled(true),
+    /**
+     * if it toggles something
+     */
+    Data_Toggle,
     Visibility;
 
     private BSButtonAttributes()

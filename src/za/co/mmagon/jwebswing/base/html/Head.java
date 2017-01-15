@@ -3,9 +3,7 @@ package za.co.mmagon.jwebswing.base.html;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoClassAttribute;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HtmlChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
@@ -64,7 +62,5 @@ public class Head extends ComponentHierarchyBase<HeadChildren, NoAttributes, NoF
     public Head()
     {
         super(ComponentTypes.Head);
-        setRenderIDAttibute(false);
     }
-
 }

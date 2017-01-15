@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.events.resizestop;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
@@ -48,7 +49,7 @@ public class ResizeStopDirective extends AngularDirectiveBase
     @Override
     public String renderFunction()
     {
-        return getAngular().getFileTemplate(ResizeStopDirective.class, "ResizeStop").toString();
+        return FileTemplates.getFileTemplate(ResizeStopDirective.class, "ResizeStop").toString();
     }
 
 }

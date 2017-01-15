@@ -42,7 +42,8 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
      * Logger for the Component
      */
     @JsonIgnore
-    protected static java.util.logging.Logger logShell;
+    protected static final java.util.logging.Logger logShell = LogFactory.getLog("ComponentBase");
+
     /**
      * Serial Version for all Components and their compatibility
      *
@@ -78,7 +79,10 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
      * Initialized flag
      */
     private boolean initialized;
-
+    /**
+     * Sets if this component should be sent on the next call back
+     */
+    private boolean touched = false;
     /**
      * A set of properties for this component
      */
@@ -92,7 +96,6 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
      */
     public ComponentBase(ComponentTypes componentType)
     {
-        logShell = LogFactory.getInstance().getLogger("Shell");
         this.id = GUIDGenerator.generateGuid();
         this.componentType = componentType;
     }
@@ -168,10 +171,13 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
      * Sets this components enumeration. Currently little more than an easy to compare Enum
      * <p>
      * @param componentType The component to mimic
+     *
+     * @return
      */
-    protected void setComponentType(ComponentTypes componentType)
+    protected J setComponentType(ComponentTypes componentType)
     {
         this.componentType = componentType;
+        return (J) this;
     }
 
     /**
@@ -441,10 +447,38 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
      * If this component has been initialized
      *
      * @param initialized
+     *
+     * @return
      */
-    public void setInitialized(boolean initialized)
+    public J setInitialized(boolean initialized)
     {
         this.initialized = initialized;
+        return (J) this;
+    }
+
+    /**
+     * Returns if this component is needing refresh on next Ajax call
+     * <p>
+     * @return true if going to be touched
+     */
+    @Override
+    public boolean isTouched()
+    {
+        return touched;
+    }
+
+    /**
+     * Mark this component as needing refresh to the Ajax Controller
+     * <p>
+     * @param touched Whether or not to update on next ajax call
+     *
+     * @return
+     */
+    @Override
+    public J setTouched(boolean touched)
+    {
+        this.touched = touched;
+        return (J) this;
     }
 
     /**

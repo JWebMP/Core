@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.events.sort;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
@@ -48,7 +49,7 @@ public class SortDirective extends AngularDirectiveBase
     @Override
     public String renderFunction()
     {
-        return getAngular().getFileTemplate(SortDirective.class, "Sort").toString();
+        return FileTemplates.getFileTemplate(SortDirective.class, "Sort").toString();
     }
 
 }

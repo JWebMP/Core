@@ -13,8 +13,10 @@ import za.co.mmagon.jwebswing.generics.WebReference;
  *
  *
  */
-public class JavascriptReference extends WebReference
+public class JavascriptReference extends WebReference<JavascriptReference>
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      *
@@ -44,7 +46,9 @@ public class JavascriptReference extends WebReference
      * @param name           The name of the reference
      * @param version        The version of the reference
      * @param localReference The local reference
+     * @param priority
      */
+    @SuppressWarnings("")
     public JavascriptReference(String name, Double version, String localReference, RequirementsPriority priority)
     {
         super(name, version, localReference, localReference);
@@ -58,13 +62,7 @@ public class JavascriptReference extends WebReference
      * @param localReference The local reference
      * @param sortOrder      Default Sort Order
      * <p>
-     * 0 - Root (JQuery)
-     * 5 - Core
-     * 10 - Core Accompanied
-     * 15 - Stand Alone Components
-     * 20 - Complex Components
-     * 500k - Default
-     * 600k - Atmosphere Reserved
+     * 0 - Root (JQuery) 5 - Core 10 - Core Accompanied 15 - Stand Alone Components 20 - Complex Components 500k - Default 600k - Atmosphere Reserved
      *
      */
     public JavascriptReference(String name, Double version, String localReference, Integer sortOrder)
@@ -81,13 +79,7 @@ public class JavascriptReference extends WebReference
      * @param remoteReference The remote reference
      * @param sortOrder       Default Sort Order
      * <p>
-     * 0 - Root (JQuery)
-     * 5 - Core
-     * 10 - Core Accompanied
-     * 15 - Stand Alone Components
-     * 20 - Complex Components
-     * 500k - Default
-     * 600k - Atmosphere Reserved
+     * 0 - Root (JQuery) 5 - Core 10 - Core Accompanied 15 - Stand Alone Components 20 - Complex Components 500k - Default 600k - Atmosphere Reserved
      *
      */
     public JavascriptReference(String name, Double version, String localReference, String remoteReference, Integer sortOrder)
@@ -95,24 +87,21 @@ public class JavascriptReference extends WebReference
         super(name, version, localReference, remoteReference);
         setSortOrder(sortOrder);
     }
-    
+
     /**
+     * <p>
+     * 0 - Root (JQuery) 5 - Core 10 - Core Accompanied 15 - Stand Alone Components 20 - Complex Components 500k - Default 600k - Atmosphere Reserved
      *
      * @param name            The name of the reference
      * @param version         The version of the reference
      * @param localReference  The local reference
      * @param remoteReference The remote reference
      * @param sortOrder       Default Sort Order
-     * <p>
-     * 0 - Root (JQuery)
-     * 5 - Core
-     * 10 - Core Accompanied
-     * 15 - Stand Alone Components
-     * 20 - Complex Components
-     * 500k - Default
-     * 600k - Atmosphere Reserved
+     *
+     * @param priority
      *
      */
+    @SuppressWarnings("")
     public JavascriptReference(String name, Double version, String localReference, String remoteReference, Integer sortOrder, RequirementsPriority priority)
     {
         super(name, version, localReference, remoteReference);

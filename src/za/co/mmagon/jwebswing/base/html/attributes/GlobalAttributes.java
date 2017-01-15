@@ -23,8 +23,7 @@ public enum GlobalAttributes implements AttributeDefinitions
      */
     Title(),
     /**
-     * Specifies the name of an anchor
-     * Not Supported in HTML5 use global attribute ID instead, but it is used everywhere by everything else. Just not by the HTML engine. and forms have to have them
+     * Specifies the name of an anchor Not Supported in HTML5 use global attribute ID instead, but it is used everywhere by everything else. Just not by the HTML engine. and forms have to have them
      */
     Name(),
     /**
@@ -60,9 +59,21 @@ public enum GlobalAttributes implements AttributeDefinitions
      */
     Aria_Pressed,
     /**
-     * Screen Reader to show disabled 
+     * Screen Reader to show disabled
      */
-    Aria_Disabled;
+    Aria_Disabled,
+    /**
+     * Expanded on screen reader mode
+     */
+    Aria_Expanded,
+    /**
+     * Screen reader has popup
+     */
+    Aria_HasPopup,
+    /**
+     * Screen Reader labelled by
+     */
+    Aria_LabelledBy;
 
     private GlobalAttributes()
     {

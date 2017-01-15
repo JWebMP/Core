@@ -32,7 +32,7 @@ public abstract class EventAdapter extends Event
      *
      * @param component The component this click is going to be acting on
      */
-    public EventAdapter(Component component)
+    public EventAdapter(Component component) 
     {
         super(EventTypes.contextmenu, component);
 

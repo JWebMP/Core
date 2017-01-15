@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.events.receive;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
@@ -48,7 +49,7 @@ public class ReceiveDirective extends AngularDirectiveBase
     @Override
     public String renderFunction()
     {
-        return getAngular().getFileTemplate(ReceiveDirective.class, "Receive").toString();
+        return FileTemplates.getFileTemplate(ReceiveDirective.class, "Receive").toString();
     }
 
 }

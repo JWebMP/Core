@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jstree.plugins.onchangedevent;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
@@ -48,7 +49,7 @@ public class JSTreeOnChangedPluginDirective extends AngularDirectiveBase
     @Override
     public String renderFunction()
     {
-        return getAngular().getFileTemplate(JSTreeOnChangedPluginDirective.class, "JSTreeOnChangedPlugin").toString();
+        return FileTemplates.getFileTemplate(JSTreeOnChangedPluginDirective.class, "JSTreeOnChangedPlugin").toString();
     }
 
 }

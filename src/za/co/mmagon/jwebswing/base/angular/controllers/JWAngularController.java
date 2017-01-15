@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.base.angular.controllers;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 
 /**
@@ -48,7 +49,7 @@ public class JWAngularController extends AngularControllerBase
     @Override
     public String renderFunction()
     {
-        return getAngular().getFileTemplate(AngularControllerBase.class, "jwcontroller").toString();
+        return FileTemplates.getFileTemplate(AngularControllerBase.class, "jwcontroller").toString();
     }
 
 }

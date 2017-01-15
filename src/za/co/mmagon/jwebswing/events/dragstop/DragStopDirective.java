@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.events.dragstop;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
@@ -48,7 +49,7 @@ public class DragStopDirective extends AngularDirectiveBase
     @Override
     public String renderFunction()
     {
-        return getAngular().getFileTemplate(DragStopDirective.class, "DragStop").toString();
+        return FileTemplates.getFileTemplate(DragStopDirective.class, "DragStop").toString();
     }
 
 }

@@ -12,7 +12,7 @@ import za.co.mmagon.jwebswing.generics.WebReference;
  *
  *
  */
-public class CSSReference extends WebReference
+public class CSSReference extends WebReference<CSSReference>
 {
 
     private static final long serialVersionUID = 1L;

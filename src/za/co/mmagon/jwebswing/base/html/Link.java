@@ -45,7 +45,7 @@ import za.co.mmagon.logger.LogFactory;
  * @author Marc Magon
  */
 public class Link extends Component<ComponentHierarchyBase, LinkAttributes, GlobalFeatures, GlobalEvents, Link>
-        implements BodyChildren, NoNewLineForRawText, ListItemChildren,BSMediaChildren,BSCarouselChildren
+        implements BodyChildren, NoNewLineForRawText, ListItemChildren, BSMediaChildren, BSCarouselChildren
 {
 
     private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("ALink");
@@ -72,7 +72,7 @@ public class Link extends Component<ComponentHierarchyBase, LinkAttributes, Glob
         this(directToAddress, null);
         if (directToAddress == null || directToAddress.isEmpty())
         {
-            log.log(Level.FINE,"Invalid Link Address.");
+            log.log(Level.FINE, "Invalid Link Address.");
         }
     }
 

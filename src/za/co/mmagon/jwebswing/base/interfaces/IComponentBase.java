@@ -23,11 +23,14 @@ import za.co.mmagon.jwebswing.base.ComponentBase;
 
 /**
  * Neater way of accessing the component methods
+ *
  * @author GedMarc
  * @param <J> Always this component
+ *
  * @since 2016/09/26
  */
-public interface IComponentBase<J extends ComponentBase> extends Cloneable, Serializable {
+public interface IComponentBase<J extends ComponentBase> extends Cloneable, Serializable
+{
 
     /**
      * Clones this component and assigns a new ID
@@ -53,8 +56,7 @@ public interface IComponentBase<J extends ComponentBase> extends Cloneable, Seri
     String getID(boolean jQueryHolder);
 
     /**
-     * Returns the component rendering for JQuery string Requires the rendering
-     * for component is set
+     * Returns the component rendering for JQuery string Requires the rendering for component is set
      * <p>
      * @return $('#x').
      */
@@ -69,6 +71,7 @@ public interface IComponentBase<J extends ComponentBase> extends Cloneable, Seri
 
     /**
      * Returns a map of user defined properties for this component
+     *
      * @return
      */
     Map<String, Object> getProperties();
@@ -76,8 +79,7 @@ public interface IComponentBase<J extends ComponentBase> extends Cloneable, Seri
     /**
      * returns a new StringSuilder of the raw text with the specific tab counts
      * <p>
-     * @param tabCounts
-     *                  <p>
+     * @param tabCounts <p>
      * @return
      */
     StringBuilder getText(int tabCounts);
@@ -90,17 +92,14 @@ public interface IComponentBase<J extends ComponentBase> extends Cloneable, Seri
     boolean isConfigured();
 
     /**
-     * Specifies whether or not to render this component in a Production/QA
-     * fashion
+     * Specifies whether or not to render this component in a Production/QA fashion
      * <p>
      * @return If this component will render in production mode
      */
     boolean isTiny();
 
     /**
-     * Run-Once on creation
-     * Executes a piece of code before running any rendering.
-     * Marks the component as configured
+     * Run-Once on creation Executes a piece of code before running any rendering. Marks the component as configured
      */
     void preConfigure();
 
@@ -108,7 +107,8 @@ public interface IComponentBase<J extends ComponentBase> extends Cloneable, Seri
      * If this component is already configured
      *
      * @param configured
-     * @return 
+     *
+     * @return
      */
     J setConfigured(boolean configured);
 
@@ -116,14 +116,17 @@ public interface IComponentBase<J extends ComponentBase> extends Cloneable, Seri
      * Sets the ID of this component
      * <p>
      * @param id The ID
-     * @return 
+     *
+     * @return
      */
     J setID(String id);
 
     /**
      * Sets this components user defined properties
+     *
      * @param properties
-     * @return 
+     *
+     * @return
      */
     J setProperties(HashMap<String, Object> properties);
 
@@ -131,7 +134,8 @@ public interface IComponentBase<J extends ComponentBase> extends Cloneable, Seri
      * Sets this components Raw Text
      * <p>
      * @param text The text to display as Raw Text
-     * @return 
+     *
+     * @return
      */
     J setText(String text);
 
@@ -139,17 +143,34 @@ public interface IComponentBase<J extends ComponentBase> extends Cloneable, Seri
      * Sets this components Raw Text
      * <p>
      * @param text The text to display as Raw Text
-     * @return 
+     *
+     * @return
      */
     J setText(StringBuilder text);
 
     /**
      * If this component will render as tiny HTML. Global override value
      * <p>
-     * @param tiny Set if this component must render as tiny HTML. Does not
-     *             affect CSS or JavaScript rendering
-     * @return 
+     * @param tiny Set if this component must render as tiny HTML. Does not affect CSS or JavaScript rendering
+     *
+     * @return
      */
     J setTiny(boolean tiny);
-    
+
+    /**
+     * Returns if this component is needing refresh on next Ajax call
+     * <p>
+     * @return true if going to be touched
+     */
+    boolean isTouched();
+
+    /**
+     * Mark this component as needing refresh to the Ajax Controller
+     * <p>
+     * @param touched Whether or not to update on next ajax call
+     *
+     * @return
+     */
+    J setTouched(boolean touched);
+
 }

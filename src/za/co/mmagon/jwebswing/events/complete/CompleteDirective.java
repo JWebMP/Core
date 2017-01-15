@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.events.complete;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
@@ -48,7 +49,7 @@ public class CompleteDirective extends AngularDirectiveBase
     @Override
     public String renderFunction()
     {
-        return getAngular().getFileTemplate(CompleteDirective.class, "Complete").toString();
+        return FileTemplates.getFileTemplate(CompleteDirective.class, "Complete").toString();
     }
 
 }

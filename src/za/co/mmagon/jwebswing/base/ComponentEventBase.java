@@ -72,11 +72,6 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
     private EventTypes eventType;
 
     /**
-     * Sets if this component should be sent on the next call back
-     */
-    private boolean touched = false;
-
-    /**
      * Constructs a new event for the given component type
      *
      * @param componentType
@@ -266,31 +261,6 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
     }
 
     /**
-     * Returns if this component is needing refresh on next Ajax call
-     * <p>
-     * @return true if going to be touched
-     */
-    @Override
-    public boolean isTouched()
-    {
-        return touched;
-    }
-
-    /**
-     * Mark this component as needing refresh to the Ajax Controller
-     * <p>
-     * @param touched Whether or not to update on next ajax call
-     *
-     * @return
-     */
-    @Override
-    public J setTouched(boolean touched)
-    {
-        this.touched = touched;
-        return (J) this;
-    }
-
-    /**
      * Returns all the events associated with the given type
      *
      * @param eventType
@@ -356,11 +326,14 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
      * Sets the event type of an event
      *
      * @param eventType
+     *
+     * @return
      */
     @Override
-    public void setEventType(EventTypes eventType)
+    public J setEventType(EventTypes eventType)
     {
         this.eventType = eventType;
+        return (J) this;
     }
 
     /**

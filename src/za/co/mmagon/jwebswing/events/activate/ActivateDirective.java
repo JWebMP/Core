@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.events.activate;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
@@ -48,7 +49,7 @@ public class ActivateDirective extends AngularDirectiveBase
     @Override
     public String renderFunction()
     {
-        return getAngular().getFileTemplate(ActivateDirective.class, "Activate").toString();
+        return FileTemplates.getFileTemplate(ActivateDirective.class, "Activate").toString();
     }
 
 }

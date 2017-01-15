@@ -20,6 +20,7 @@ import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.components.bootstrap.buttons.groups.BSButtonGroupChildren;
 import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.dropdown.BSDropDownChildren;
 
 /**
  * Buttons
@@ -31,7 +32,7 @@ import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentD
  * @version 1.0
  */
 public class BSButton extends Div<BSButtonChildren, BSButtonAttributes, BSButtonFeatures, BSButtonEvents, BSButton>
-        implements BSButtonGroupChildren
+        implements BSButtonGroupChildren, BSDropDownChildren
 {
 
     private static final long serialVersionUID = 1L;
@@ -44,6 +45,8 @@ public class BSButton extends Div<BSButtonChildren, BSButtonAttributes, BSButton
     {
         addFeature(getFeature());
         addClass(BSComponentButtonOptions.Btn);
+        setTag("button");
+        addAttribute(GlobalAttributes.Type, "button");
     }
 
     /**

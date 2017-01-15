@@ -65,7 +65,7 @@ public abstract class Activatedapter extends Event
             directive = new ActivateDirective(getComponent().getPage().getAngular());
         }
         return directive;
-    }
+    } 
 
     /**
      * Sets the right click angular event

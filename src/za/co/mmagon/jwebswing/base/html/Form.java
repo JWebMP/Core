@@ -12,19 +12,27 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;form&gt; tag is used to create an HTML form for user input.<p>
  * <p>
- * The &lt;form&gt; element can contain one or more of the following form elements:<p>
+ * The &lt;form&gt; element can contain one or more of the following form elements:
  * <p>
- * &lt;input&gt;<p>
- * &lt;textarea&gt;<p>
- * &lt;button&gt;<p>
- * &lt;select&gt;<p>
- * &lt;option&gt;<p>
- * &lt;optgroup&gt;<p>
- * &lt;fieldset&gt;<p>
- * &lt;label&gt;<p>
  * <p>
- * Browser Support Element
- * &lt;form&gt; Yes Yes Yes Yes Yes
+ * &lt;input&gt;
+ * <p>
+ * &lt;textarea&gt;
+ * <p>
+ * &lt;button&gt;
+ * <p>
+ * &lt;select&gt;
+ * <p>
+ * &lt;option&gt;
+ * <p>
+ * &lt;optgroup&gt;
+ * <p>
+ * &lt;fieldset&gt;
+ * <p>
+ * &lt;label&gt;
+ * <p>
+ * <p>
+ * Browser Support Element &lt;form&gt; Yes Yes Yes Yes Yes
  * <p>
  * Differences Between HTML 4.01 and HTML5
  * <p>
@@ -37,6 +45,8 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  */
 public class Form extends Component<FormChildren, FormAttributes, GlobalFeatures, GlobalEvents, Form>
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new form
@@ -61,6 +71,9 @@ public class Form extends Component<FormChildren, FormAttributes, GlobalFeatures
             sb.append(label.toString(true));
             return sb;
         }
-        else return super.renderBeforeTag();
+        else
+        {
+            return super.renderBeforeTag();
+        }
     }
 }

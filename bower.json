@@ -63,7 +63,7 @@
     "startbootstrap-sb-admin-2": "git://github.com/BlackrockDigital/startbootstrap-sb-admin-2.git",
     "jquery-ui-latest-jwebswing": "git://git.code.sf.net/p/jwebswing/jquery-ui-layout-jw",
     "PACE": "pace#*",
-    "jquery-easing": "*",
+    "jquery-easing": "https://github.com/gdsmith/jquery.easing.git",
     "jqplot-jwebswing": "^1.0.9",
     "jqd3": "*",
     "spectrum": "^1.8.0",
@@ -88,7 +88,12 @@
     "vertical-timeline-jwebswing": "*",
     "radial-svg-slider-jwebswing": "*",
     "Snap.svg": "^0.4.1",
-    "jquery-migrate": "^3.0.0"
+    "jquery-migrate": "^3.0.0",
+    "Ionicons": "ionicons#^2.0.1",
+    "waypoints": "^4.0.1",
+    "counterup": "https://github.com/bfintal/Counter-Up.git",
+    "owl.carousel": "^2.2.0",
+    "magnific-popup": "^1.1.0"
   },
   "resolutions": {
     "font-awesome": "^4.7.0",

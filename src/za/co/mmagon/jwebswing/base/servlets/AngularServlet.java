@@ -16,6 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.servlets;
 
+import com.armineasy.injection.GuiceContext;
+import com.armineasy.injection.filters.CorsAllowedFilter;
 import com.google.inject.Singleton;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,6 +27,7 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.logger.LogFactory;
 
@@ -51,23 +54,29 @@ public class AngularServlet extends JWDefaultServlet
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        Page page = (Page) request.getSession().getAttribute("jwpage");
-        if (page == null)
-        {
-            LOG.log(Level.SEVERE, "No Page", new ServletException("No Page Currently Loaded"));
-            throw new ServletException("No Page Currently Loaded");
-        }
+        Page page = GuiceContext.Injector().getInstance(Page.class);
+
         Date startDate = new Date();
         //StringBuilder compiled = page.getAngular().compileTemplate(AngularFeature.class, "jwangular");
-        StringBuilder output = page.getAngular().renderTemplateScripts("jwangular");
+        page.getAngular().configureTemplateVariables();
+        StringBuilder output = FileTemplates.renderTemplateScripts("jwangular");
         Date endDate = new Date();
         try (PrintWriter out = response.getWriter())
         {
             response.setContentType("application/javascript;charset=UTF-8");
             response.setCharacterEncoding("UTF-8");
+
+            response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);
+            response.setHeader("Access-Control-Allow-Credentials", "true");
+            response.setHeader("Access-Control-Allow-Methods", "GET, POST");
+            response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+
             response.getWriter().write(output.toString());
             Date dataTransferDate = new Date();
-            LOG.log(Level.FINE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + output.toString().length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
+            LOG.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
+            {
+                request.getSession().getId(), endDate.getTime() - startDate.getTime(), output.toString().length(), dataTransferDate.getTime() - startDate.getTime()
+            });
         }
     }
 
@@ -88,7 +97,7 @@ public class AngularServlet extends JWDefaultServlet
             super.doGet(request, response);
             processRequest(request, response);
         }
-        catch (Exception e)
+        catch (IOException | ServletException e)
         {
             LOG.log(Level.SEVERE, "Do Post Error", e);
         }
@@ -111,7 +120,7 @@ public class AngularServlet extends JWDefaultServlet
             super.doGet(request, response);
             processRequest(request, response);
         }
-        catch (Exception e)
+        catch (IOException | ServletException e)
         {
             LOG.log(Level.SEVERE, "Angualr Do Get Error", e);
         }

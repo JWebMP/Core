@@ -32,6 +32,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
  *
  * @author GedMarc
  * @param <J>
+ *
  * @since 23 Apr 2016
  */
 public class ComponentDependancyBase<J extends ComponentBase> extends ComponentBase<J> implements IComponentDependancyBase<J>
@@ -101,8 +102,7 @@ public class ComponentDependancyBase<J extends ComponentBase> extends ComponentB
     }
 
     /**
-     * Return all the CSS References associated with this component.
-     * Override and add the references required for the functionality
+     * Return all the CSS References associated with this component. Override and add the references required for the functionality
      *
      * @return
      */
@@ -113,10 +113,10 @@ public class ComponentDependancyBase<J extends ComponentBase> extends ComponentB
     }
 
     /**
-     * Returns all the CSS references with the given priority
-     * Override and add the references required for the functionality
+     * Returns all the CSS references with the given priority Override and add the references required for the functionality
      *
      * @param priority The priority of the references to retrieve
+     *
      * @return A new array list of all the requested for references
      */
     @Override
@@ -124,12 +124,12 @@ public class ComponentDependancyBase<J extends ComponentBase> extends ComponentB
     {
         ArrayList<JavascriptReference> arr = new ArrayList<>();
         getJavascriptReferencesAll().stream()
-                .filter((css) -> (css.getPriority().equals(priority)))
+                .filter(css -> (css.getPriority().equals(priority)))
                 .filter((JavascriptReference css) -> (!arr.contains(css)))
-                .forEach((css)
+                .forEach(css
                         ->
-                        {
-                            arr.add(css);
+                {
+                    arr.add(css);
                 });
         return arr;
     }
@@ -149,6 +149,7 @@ public class ComponentDependancyBase<J extends ComponentBase> extends ComponentB
      * Returns all the CSS references with the given priority
      *
      * @param priority The priority of the references to retrieve
+     *
      * @return A new array list of all the requested for references
      */
     @Override
@@ -156,13 +157,13 @@ public class ComponentDependancyBase<J extends ComponentBase> extends ComponentB
     {
         ArrayList<CSSReference> arr = new ArrayList<>();
         getCssReferencesAll().stream()
-                .filter((css) -> (css != null))
-                .filter((css) -> (css.getPriority().equals(priority)))
+                .filter(css -> (css != null))
+                .filter(css -> (css.getPriority().equals(priority)))
                 .filter((CSSReference css) -> (!arr.contains(css)))
-                .forEach((css)
+                .forEach(css
                         ->
-                        {
-                            arr.add(css);
+                {
+                    arr.add(css);
                 });
 
         return arr;
@@ -172,6 +173,7 @@ public class ComponentDependancyBase<J extends ComponentBase> extends ComponentB
      * Adds a CSS Reference to the collection
      *
      * @param cssReference
+     *
      * @return This Class
      */
     @Override
@@ -188,6 +190,7 @@ public class ComponentDependancyBase<J extends ComponentBase> extends ComponentB
      * Adds a JavaScript Reference to the collection
      *
      * @param jsReference
+     *
      * @return This Class
      */
     @Override
@@ -204,6 +207,7 @@ public class ComponentDependancyBase<J extends ComponentBase> extends ComponentB
      * Removes the CSS Reference from the Component
      *
      * @param cssReference
+     *
      * @return This Class
      */
     @Override
@@ -217,6 +221,7 @@ public class ComponentDependancyBase<J extends ComponentBase> extends ComponentB
      * Removes the CSS Reference from the Component
      *
      * @param jsReference
+     *
      * @return This Class
      */
     @Override
@@ -234,7 +239,8 @@ public class ComponentDependancyBase<J extends ComponentBase> extends ComponentB
 
     /**
      * Clones this component with all the CSS and JavaScript references
-     * @return 
+     *
+     * @return
      */
     @Override
     public J cloneComponent()

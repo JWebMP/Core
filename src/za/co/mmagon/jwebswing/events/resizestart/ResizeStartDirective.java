@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.events.resizestart;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
@@ -48,7 +49,7 @@ public class ResizeStartDirective extends AngularDirectiveBase
     @Override
     public String renderFunction()
     {
-        return getAngular().getFileTemplate(ResizeStartDirective.class, "ResizeStart").toString();
+        return FileTemplates.getFileTemplate(ResizeStartDirective.class, "ResizeStart").toString();
     }
 
 }

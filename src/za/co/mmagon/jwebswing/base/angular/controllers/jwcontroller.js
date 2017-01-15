@@ -37,7 +37,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
                 $scope.loadData(result);
             },
             fail: function (xhr, textStatus, errorThrown) {
-                var err = eval("(" + xhr.responseText + ")");
+                var err = eval("(" + xhr.responseText + ")"); 
                 BootstrapDialog.show({
                     title: "Server Error",
                     message: "An error was encountered during the initial phase between the server and the client.<br>" + textStatus + "<br>" + err,

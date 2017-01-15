@@ -1,5 +1,5 @@
 /**
- * Globalize v1.2.1
+ * Globalize v1.2.2
  *
  * http://github.com/jquery/globalize
  *
@@ -7,10 +7,10 @@
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2016-12-14T18:34Z
+ * Date: 2016-12-31T15:52Z
  */
 /*!
- * Globalize v1.2.1 2016-12-14T18:34Z Released under the MIT license
+ * Globalize v1.2.2 2016-12-31T15:52Z Released under the MIT license
  * http://git.io/TrdQbw
  */
 (function( root, factory ) {
@@ -1035,7 +1035,10 @@ var numberParse = function( value, properties ) {
 	function tokenizeNParse( _value, grammar ) {
 		return grammar.some(function( statement ) {
 			var value = _value;
-			statement.every(function( type ) {
+
+			// The whole grammar statement should be used (i.e., .every() return true) and value be
+			// entirely consumed (i.e., !value.length).
+			return statement.every(function( type ) {
 				if ( value.match( tokenizer[ type ] ) === null ) {
 					return false;
 				}
@@ -1043,11 +1046,7 @@ var numberParse = function( value, properties ) {
 				// Consume and parse it.
 				value = value.replace( tokenizer[ type ], parse( type ) );
 				return true;
-			});
-
-			// Note: .every() return value above is ignored, because what counts in the end is
-			// whether value is entirely consumed.
-			return !value.length;
+			}) && !value.length;
 		});
 	}
 
@@ -1238,7 +1237,7 @@ var numberParseProperties = function( pattern, cldr, options ) {
 	//
 	// digits_w_1_grouping_separators =  regexp(\d{1,3}(,\d{3})+)
 	//
-	// digits_w_2_grouping_separators =  regexp(\d{1,2}((,\d{2})*(,\d{3}))?)
+	// digits_w_2_grouping_separators =  regexp(\d{1,2}((,\d{2})*(,\d{3})))
 
 	// Integer part
 	numberTokenizer = digitsRe + "+";
@@ -1248,7 +1247,7 @@ var numberParseProperties = function( pattern, cldr, options ) {
 		if ( secondaryGroupingSize ) {
 			aux = digitsRe + "{1," + secondaryGroupingSize + "}((" + groupingSeparatorRe +
 				digitsRe + "{" + secondaryGroupingSize + "})*(" + groupingSeparatorRe +
-				digitsRe + "{" + primaryGroupingSize + "}))?";
+				digitsRe + "{" + primaryGroupingSize + "}))";
 		} else {
 			aux = digitsRe + "{1," + primaryGroupingSize + "}(" + groupingSeparatorRe +
 				digitsRe + "{" + primaryGroupingSize + "})+";

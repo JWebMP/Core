@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.events.beforestop;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
@@ -48,7 +49,7 @@ public class BeforeStopDirective extends AngularDirectiveBase
     @Override
     public String renderFunction()
     {
-        return getAngular().getFileTemplate(BeforeStopDirective.class, "BeforeStop").toString();
+        return FileTemplates.getFileTemplate(BeforeStopDirective.class, "BeforeStop").toString();
     }
 
 }

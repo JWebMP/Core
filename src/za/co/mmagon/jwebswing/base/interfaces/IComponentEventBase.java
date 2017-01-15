@@ -14,14 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package za.co.mmagon.jwebswing.base.interfaces;
 
 /**
  *
  * @author GedMarc
  * @since $(date)
- * 
+ *
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
@@ -37,17 +36,19 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTy
  * @author GedMarc
  * @param <E> This event type
  * @param <J> Clone type
+ *
  * @since $(date)
  *
  */
-public interface IComponentEventBase<E extends GlobalEvents, J extends ComponentBase> 
+public interface IComponentEventBase<E extends GlobalEvents, J extends ComponentBase>
 {
 
     /**
      * Adds an event to this object
      * <p>
      * @param event The Event to add
-     * @return 
+     *
+     * @return
      */
     J addEvent(E event);
 
@@ -69,8 +70,7 @@ public interface IComponentEventBase<E extends GlobalEvents, J extends Component
     /**
      * Gets all registered events
      * <p>
-     * @return A Hash Map containing the event type and the events associated
-     *         with it
+     * @return A Hash Map containing the event type and the events associated with it
      */
     List<E> getEvents();
 
@@ -78,6 +78,7 @@ public interface IComponentEventBase<E extends GlobalEvents, J extends Component
      * Returns all the events associated with the given type
      *
      * @param eventType
+     *
      * @return
      */
     List<ComponentEventBase> getEventsFor(EventTypes eventType);
@@ -91,20 +92,13 @@ public interface IComponentEventBase<E extends GlobalEvents, J extends Component
 
     /**
      * In case need to put extra logic here
+     *
      * @return
      */
     List<StringBuilder> getQueriesAll();
 
     /**
-     * Returns if this component is needing refresh on next Ajax call
-     * <p>
-     * @return true if going to be touched
-     */
-    boolean isTouched();
-
-    /**
-     * Events are types of feature that have server side support. These are
-     * referenced using the Ajax Receiver.
+     * Events are types of feature that have server side support. These are referenced using the Ajax Receiver.
      * <p>
      * @param event The event to be removed
      * <p>
@@ -118,27 +112,23 @@ public interface IComponentEventBase<E extends GlobalEvents, J extends Component
      *
      * @param eventType
      */
-    void setEventType(EventTypes eventType);
+    J setEventType(EventTypes eventType);
 
     /**
      * Sets all the events to tiny
-     * @param tiny 
-     * @return  
+     *
+     * @param tiny
+     *
+     * @return
      */
     J setTiny(boolean tiny);
 
     /**
-     * Mark this component as needing refresh to the Ajax Controller
-     * <p>
-     * @param touched Whether or not to update on next ajax call
-     * @return 
-     */
-    J setTouched(boolean touched);
-
-    /**
      * Returns an event with the given Id
+     *
      * @param eventId
-     * @return 
+     *
+     * @return
      */
     ComponentEventBase getEvent(String eventId);
 }

@@ -73,7 +73,7 @@ public class Div<C extends GlobalChildren, A extends Enum & AttributeDefinitions
         implements JWLayoutChildren, BodyChildren, ImageMapChildren, AreaChildren, LayoutHandler, JWLayoutDivChildren,
         JQUITabsChildren, JQUIAccordionChildren, ContainerType, JQUIDialogChildren, JQXRibbonChildren, JQUIRadioButtonGroupChildren,
         JQXNavigationBarChildren, JQXDropDownListChildren, JQXLayoutChildren, JQXNotificationChildren, JQMetroTileChildren, ListItemChildren,
-        BSModalChildren, BSMediaChildren, BSCardChildren,BSCarouselChildren
+        BSModalChildren, BSMediaChildren, BSCardChildren, BSCarouselChildren
 {
 
     private static final long serialVersionUID = 1L;

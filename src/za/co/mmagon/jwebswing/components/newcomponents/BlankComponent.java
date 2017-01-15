@@ -22,7 +22,7 @@ import za.co.mmagon.jwebswing.base.html.Div;
  * An implementation of the jsTree project.
  * <p>
  * @author Marc Magon
- * @since 29 Aug 2015
+ * @since 13 Jan 2017
  * @version 1.0
  */
 public class BlankComponent extends Div<BlankComponentChildren, BlankComponentAttributes, BlankComponentFeatures, BlankComponentEvents, BlankComponent>

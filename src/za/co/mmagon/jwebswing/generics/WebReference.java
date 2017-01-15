@@ -5,13 +5,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.logging.*;
-import za.co.mmagon.logger.LogFactory;
+import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.base.html.interfaces.NamedPair;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Denotes a specific Web Reference, either remotely or locally
+ *
+ * @param <T> The type implementation
  *
  * @since Forever
  * @version 2.0
@@ -19,25 +21,53 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
  *
  * 2.0 Added Sorting
  */
-public class WebReference implements NamedPair<String, String>, Serializable, Comparator<WebReference>
+public class WebReference<T extends WebReference> implements NamedPair<String, String>, Serializable, Comparator<WebReference>
 {
 
     private static final long serialVersionUID = 1L;
+    /**
+     * The left side
+     */
     @JsonIgnore
     private String left;
     @JsonIgnore
+    /**
+     * The right side
+     */
     private String right;
+    /**
+     * If this must reference with the left side only
+     */
     @JsonIgnore
     private boolean leftOnly = true;
-    private static boolean isLocal = true;
+    /**
+     * If the reference is local
+     */
+    private boolean isLocal = true;
+    /**
+     * The ridiculous sort order
+     */
     @JsonIgnore
     private Integer sortOrder = 500000;
+    /**
+     * To use min at the end or not
+     */
     @JsonIgnore
     private static boolean useMinAtEndOfExtension = false;
+    /**
+     * The default priority
+     */
     @JsonIgnore
     private RequirementsPriority priority = RequirementsPriority.DontCare;
+    /**
+     * If the client can minify at the remote source
+     */
     @JsonIgnore
     private boolean canMinifyAtRemote = true;
+    /**
+     * If this reference is a cordova reference, e.g. does it render in the dynamic site loader
+     */
+    private boolean cordovaRequired = false;
 
     /**
      * The name of the reference
@@ -101,22 +131,28 @@ public class WebReference implements NamedPair<String, String>, Serializable, Co
      * Sets the local reference
      *
      * @param left
+     *
+     * @return
      */
-    public void setLeft(String left)
+    public T setLeft(String left)
     {
         this.left = left;
         this.localReference = left;
+        return (T) this;
     }
 
     /**
      * Sets the remote reference
      *
      * @param right
+     *
+     * @return
      */
-    public void setRight(String right)
+    public T setRight(String right)
     {
         this.right = right;
         this.remoteReference = right;
+        return (T) this;
     }
 
     /**
@@ -178,10 +214,13 @@ public class WebReference implements NamedPair<String, String>, Serializable, Co
      * Sets if this pair should validate on the left pair only
      *
      * @param leftOnly
+     *
+     * @return
      */
-    public void setLeftOnly(boolean leftOnly)
+    public T setLeftOnly(boolean leftOnly)
     {
         this.leftOnly = leftOnly;
+        return (T) this;
     }
 
     /**
@@ -190,7 +229,7 @@ public class WebReference implements NamedPair<String, String>, Serializable, Co
      * @return
      */
     @JsonProperty("local")
-    public static boolean isIsLocal()
+    public boolean isIsLocal()
     {
         return isLocal;
     }
@@ -199,10 +238,13 @@ public class WebReference implements NamedPair<String, String>, Serializable, Co
      * Sets whether this reference should be local or remote
      *
      * @param isLocal
+     *
+     * @return
      */
-    public static void setIsLocal(boolean isLocal)
+    public T setIsLocal(boolean isLocal)
     {
-        WebReference.isLocal = isLocal;
+        this.isLocal = isLocal;
+        return (T) this;
     }
 
     /**
@@ -219,10 +261,13 @@ public class WebReference implements NamedPair<String, String>, Serializable, Co
      * Sets the name of this reference
      *
      * @param name
+     *
+     * @return
      */
-    public void setName(String name)
+    public T setName(String name)
     {
         this.name = name;
+        return (T) this;
     }
 
     /**
@@ -239,10 +284,13 @@ public class WebReference implements NamedPair<String, String>, Serializable, Co
      * Sets the double version of this reference
      *
      * @param version
+     *
+     * @return
      */
-    public void setVersion(Double version)
+    public T setVersion(Double version)
     {
         this.version = version;
+        return (T) this;
     }
 
     /**
@@ -259,11 +307,14 @@ public class WebReference implements NamedPair<String, String>, Serializable, Co
      * Sets the physical local reference
      *
      * @param localReference
+     *
+     * @return
      */
-    public void setLocalReference(String localReference)
+    public T setLocalReference(String localReference)
     {
         setLeft(localReference);
         this.localReference = localReference;
+        return (T) this;
     }
 
     /**
@@ -280,11 +331,14 @@ public class WebReference implements NamedPair<String, String>, Serializable, Co
      * Sets the remote physical reference
      *
      * @param remoteReference
+     *
+     * @return
      */
-    public void setRemoteReference(String remoteReference)
+    public T setRemoteReference(String remoteReference)
     {
         setRight(remoteReference);
         this.remoteReference = remoteReference;
+        return (T) this;
     }
 
     private static final Logger LOG = LogFactory.getInstance().getLogger("Web Reference");
@@ -314,6 +368,7 @@ public class WebReference implements NamedPair<String, String>, Serializable, Co
      *
      * @param o1
      * @param o2
+     *
      * @return
      */
     @Override
@@ -325,13 +380,7 @@ public class WebReference implements NamedPair<String, String>, Serializable, Co
     /**
      * Default Sort Order
      * <p>
-     * 0 - Root (JQuery)
-     * 5 - Core
-     * 10 - Core Accompanied
-     * 15 - Stand Alone Components
-     * 20 - Complex Components
-     * 500k - Default
-     * 600k - Atmosphere Reserved
+     * 0 - Root (JQuery) 5 - Core 10 - Core Accompanied 15 - Stand Alone Components 20 - Complex Components 500k - Default 600k - Atmosphere Reserved
      *
      * @return
      */
@@ -343,25 +392,23 @@ public class WebReference implements NamedPair<String, String>, Serializable, Co
     /**
      * Default Sort Order
      * <p>
-     * 0 - Root (JQuery)
-     * 5 - Core
-     * 10 - Core Accompanied
-     * 15 - Stand Alone Components
-     * 20 - Complex Components
-     * 500k - Default
-     * 600k - Atmosphere Reserved
+     * 0 - Root (JQuery) 5 - Core 10 - Core Accompanied 15 - Stand Alone Components 20 - Complex Components 500k - Default 600k - Atmosphere Reserved
      * <p>
+     * @param sortOrder
+     *
+     * @return
      */
-    public final void setSortOrder(Integer sortOrder)
+    public final T setSortOrder(Integer sortOrder)
     {
         this.sortOrder = sortOrder;
-        //return;
+        return (T) this;
     }
 
     /**
      * Sorts an Array List of References
      *
      * @param arrayList
+     *
      * @return
      */
     public static ArrayList<? extends WebReference> sort(ArrayList<? extends WebReference> arrayList)
@@ -394,10 +441,13 @@ public class WebReference implements NamedPair<String, String>, Serializable, Co
      * Sets the priority of the reference
      *
      * @param priority
+     *
+     * @return
      */
-    public void setPriority(RequirementsPriority priority)
+    public T setPriority(RequirementsPriority priority)
     {
         this.priority = priority;
+        return (T) this;
     }
 
     /**
@@ -414,10 +464,36 @@ public class WebReference implements NamedPair<String, String>, Serializable, Co
      * Specifies if the remote has a min file
      *
      * @param canMinifyAtRemote
+     *
+     * @return
      */
-    public void setCanMinifyAtRemote(boolean canMinifyAtRemote)
+    public T setCanMinifyAtRemote(boolean canMinifyAtRemote)
     {
         this.canMinifyAtRemote = canMinifyAtRemote;
+        return (T) this;
+    }
+
+    /**
+     * If this reference is a cordova reference, e.g. does it render in the dynamic site loader
+     *
+     * @return
+     */
+    public boolean isCordovaRequired()
+    {
+        return cordovaRequired;
+    }
+
+    /**
+     * If this reference is a cordova reference, e.g. does it render in the dynamic site loader
+     *
+     * @param cordovaRequired
+     *
+     * @return
+     */
+    public T setCordovaRequired(boolean cordovaRequired)
+    {
+        this.cordovaRequired = cordovaRequired;
+        return (T) this;
     }
 
     /**

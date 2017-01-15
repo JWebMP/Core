@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.base.servlets;
 
+import com.armineasy.injection.filters.CorsAllowedFilter;
 import com.google.inject.Singleton;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -124,7 +125,12 @@ public class AngularDataServlet extends JWDefaultServlet
         try (PrintWriter out = response.getWriter())
         {
             response.setContentType("application/json;charset=UTF-8");
-            response.setCharacterEncoding("UTF-8");
+            
+            response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);
+            response.setHeader("Access-Control-Allow-Credentials", "true");
+            response.setHeader("Access-Control-Allow-Methods", "GET, POST");
+            response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+            
             response.getWriter().write(respJson.toString());
             Date dataTransferDate = new Date();
             LOG.log(Level.FINE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + respJson.toString().length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");

@@ -16,15 +16,20 @@
  */
 package za.co.mmagon.jwebswing.base.servlets;
 
+import com.armineasy.injection.GuiceContext;
+import com.armineasy.injection.filters.CorsAllowedFilter;
+import com.google.inject.Singleton;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
 import za.co.mmagon.logger.LogFactory;
-import com.google.inject.*;
-import java.io.*;
-import java.util.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.util.logging.*;
-import java.util.logging.*;
-import za.co.mmagon.jwebswing.*;
 
 /**
  * This Servlet supplies all the JavaScript for a given HTML Page
@@ -47,16 +52,27 @@ public class JavaScriptServlet extends JWDefaultServlet
      * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+            throws ServletException, IOException, MissingComponentException
     {
-        response.setContentType("text/html");
+        response.setContentType("text/javascript");
         Date startDate = new Date();
-        Page page = (Page) request.getSession().getAttribute("jwpage");
+        Page page = GuiceContext.Injector().getInstance(Page.class);
+        
+        if (page == null)
+        {
+            throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
+        }
         StringBuilder scripts = page.renderJavascript();
         Date endDate = new Date();
         try (PrintWriter out = response.getWriter())
         {
             response.setContentType("application/javascript");
+            
+            response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);
+            response.setHeader("Access-Control-Allow-Credentials", "true");
+            response.setHeader("Access-Control-Allow-Methods", "GET, POST");
+            response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+            
             out.println(scripts);
             Date dataTransferDate = new Date();
             log.log(Level.FINE,"[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + scripts.length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
@@ -82,6 +98,36 @@ public class JavaScriptServlet extends JWDefaultServlet
         }catch(IOException | ServletException e)
         {
             log.log(Level.SEVERE, "JavascriptServlet", e);
+        }
+        catch (MissingComponentException ex)
+        {
+            Logger.getLogger(JavaScriptServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request  Servlet request
+     * @param response Servlet response
+     * @throws ServletException if a Servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException
+    {
+        try
+        {
+        super.doGet(request, response);
+        processRequest(request, response);
+        }catch(IOException | ServletException e)
+        {
+            log.log(Level.SEVERE, "JavascriptServlet", e);
+        }
+        catch (MissingComponentException ex)
+        {
+            Logger.getLogger(JavaScriptServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

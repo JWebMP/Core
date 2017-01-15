@@ -1,8 +1,7 @@
 package za.co.mmagon.jwebswing.base.servlets;
 
 import com.armineasy.injection.GuiceContext;
-import com.google.inject.Provides;
-import com.google.inject.Singleton;
+import com.google.inject.*;
 import com.google.inject.name.Named;
 import com.google.inject.servlet.RequestScoped;
 import java.io.IOException;
@@ -18,7 +17,11 @@ import net.sf.uadetector.service.UADetectorServiceFactory;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
 import za.co.mmagon.jwebswing.base.client.Browsers;
+import za.co.mmagon.jwebswing.base.html.Base;
 import za.co.mmagon.jwebswing.base.html.Body;
+import za.co.mmagon.jwebswing.base.html.attributes.*;
+import za.co.mmagon.jwebswing.base.references.JavascriptReference;
+import za.co.mmagon.jwebswing.generics.DynamicLoadingPage;
 import za.co.mmagon.jwebswing.utilities.TextUtilities;
 import za.co.mmagon.logger.LogFactory;
 
@@ -30,7 +33,7 @@ import za.co.mmagon.logger.LogFactory;
  * @since 2012/10/09
  */
 @Singleton
-public abstract class JWebSwingServlet extends JWDefaultServlet
+public abstract class JWebSwingServlet extends JWDefaultServlet implements Provider<Page>
 {
 
     /**
@@ -81,12 +84,6 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
         }
     }
 
-    @Provides
-    protected Page getPageInjection()
-    {
-        return getPage();
-    }
-
     /**
      * Reads the user agent header into the browser object and places it for the page to render
      *
@@ -110,14 +107,14 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
         getPage().setBrowser(b);
         if (agent.getVersionNumber().getMajor() == null || agent.getVersionNumber().getMajor().isEmpty())
         {
-            LOG.log(Level.FINE, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}];[Operating System]-[{3}];[Device Category]-[{4}];[Device]-[{5}];[CSS]-[{6}];[HTML]-[{7}];", new Object[]
+            LOG.log(Level.INFO, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}];[Operating System]-[{3}];[Device Category]-[{4}];[Device]-[{5}];[CSS]-[{6}];[HTML]-[{7}];", new Object[]
             {
                 request.getSession().getId(), b.getBrowserGroup().toString(), b.getBrowserVersion(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()
             });
         }
         else
         {
-            LOG.log(Level.FINE, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}.{3}];[Operating System]-[{4}];[Device Category]-[{5}];[Device]-[{6}];[CSS]-[{7}];[HTML]-[{8}];", new Object[]
+            LOG.log(Level.INFO, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}.{3}];[Operating System]-[{4}];[Device Category]-[{5}];[Device]-[{6}];[CSS]-[{7}];[HTML]-[{8}];", new Object[]
             {
                 request.getSession().getId(), agent.getName(), agent.getVersionNumber().getMajor(), agent.getVersionNumber().getMinor(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()
             });
@@ -139,16 +136,75 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
         try
         {
             Date startDate = new Date();
-            StringBuilder sb = getPageHTML(request.getSession());
+            StringBuilder output = new StringBuilder();
+
+            Page page = getPage();
+
+            if (page.getOptions().isLocalStorage())
+            {
+                DynamicLoadingPage p = GuiceContext.Injector().getInstance(DynamicLoadingPage.class);
+                if (!p.isRequirementsConfigured())
+                {
+                    p.setPage(page);
+                }
+
+                if (page.getOptions().isGoogleMapsJSApi())
+                {
+                    p.getBody().addJavaScriptReference(new JavascriptReference("Google Maps API Reference", 1.0, "https://maps.googleapis.com/maps/api/js?key=" + page.getOptions().getGoogleMapsJSApi()).setCordovaRequired(true));
+                }
+                if (page.getPageFields().getTitle() != null)
+                {
+                    p.getPageFields().setTitle(page.getPageFields().getTitle().getTitle());
+                }
+                if (page.getPageFields().getAuthor() != null)
+                {
+                    p.getPageFields().setAuthor(page.getPageFields().getAuthor().getAttribute(MetaAttributes.Content));
+                }
+                if (page.getPageFields().getApplicationName() != null)
+                {
+                    p.getPageFields().setApplicationNameMeta(page.getPageFields().getApplicationName().getAttribute(MetaAttributes.Content));
+                }
+                if (page.getPageFields().getCacheControl() != null)
+                {
+                    p.getPageFields().setCacheControl(page.getPageFields().getCacheControl().getAttribute(MetaAttributes.Content, Boolean.FALSE));
+                }
+                if (page.getPageFields().getFavIconLink() != null)
+                {
+                    p.getPageFields().setFavIcon(page.getPageFields().getFavIconLink().getAttribute(CSSLinkAttributes.HRef));
+                }
+                p.getPageFields().setGenerator("JWebSwing");
+                if (page.getPageFields().getKeywords() != null)
+                {
+                    p.getPageFields().setKeywords(page.getPageFields().getKeywords().getAttribute(MetaAttributes.Content));
+                }
+                Base base = new Base();
+                base.addAttribute(BaseAttributes.HRef, request.getRequestURL().toString());
+                p.getPageFields().setBase(base);
+                output.append(p.toString(true));
+            }
+            else
+            {
+                if (page.getOptions().isGoogleMapsJSApi())
+                {
+                    page.getBody().addJavaScriptReference(new JavascriptReference("Google Maps API Reference", 1.0, "https://maps.googleapis.com/maps/api/js?key=" + page.getOptions().getGoogleMapsJSApi()));
+                }
+                output = getPageHTML(request.getSession());
+            }
+
             Date endDate = new Date();
             Date transferStart = new Date();
             out = response.getWriter();
-            out.println(sb);
+            out.println(output);
             Date dataTransferDate = new Date();
             LOG.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
             {
-                request.getSession().getId(), endDate.getTime() - startDate.getTime(), sb.length(), dataTransferDate.getTime() - transferStart.getTime()
+                request.getSession().getId(), endDate.getTime() - startDate.getTime(), output.length(), dataTransferDate.getTime() - transferStart.getTime()
             });
+            //pre render page for next call
+            if (page.getOptions().isLocalStorage())
+            {
+                page.toString(true);
+            }
         }
         catch (IOException ex)
         {
@@ -339,6 +395,17 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
     public abstract Page getPage();
 
     /**
+     * Returns the get page method
+     *
+     * @return
+     */
+    @Override
+    public Page get()
+    {
+        return getPage();
+    }
+
+    /**
      * Returns the URL associated with this Servlet
      *
      * @return
@@ -381,6 +448,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet
      */
     public boolean isUserLoggedIn()
     {
-        return true;
+        return false;
     }
+
 }

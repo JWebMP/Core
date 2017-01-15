@@ -1,5 +1,7 @@
 package za.co.mmagon.jwebswing.base.servlets;
 
+import com.armineasy.injection.GuiceContext;
+import com.armineasy.injection.filters.CorsAllowedFilter;
 import com.google.inject.Singleton;
 import java.io.IOException;
 import java.util.*;
@@ -75,7 +77,12 @@ public class AjaxReceiverServlet extends JWDefaultServlet
                 throw new InvalidRequestException("Component ID Was Incorrect.");
             }
 
-            Page page = (Page) request.getSession().getAttribute("jwpage");
+            Page page = GuiceContext.Injector().getInstance(Page.class);
+
+            if (page == null)
+            {
+                throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
+            }
 
             ComponentHierarchyBase triggerComponent;
             page.buildComponentHierarchy();
@@ -199,6 +206,12 @@ public class AjaxReceiverServlet extends JWDefaultServlet
                 Date dataTransferDate = new Date();
                 response.setContentType("application/json;charset=UTF-8");
                 response.setCharacterEncoding("UTF-8");
+
+                response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);
+                response.setHeader("Access-Control-Allow-Credentials", "true");
+                response.setHeader("Access-Control-Allow-Methods", "GET, POST");
+                response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+
                 response.getWriter().write(output);
                 //LOG.log(Level.FINE,"[Ajax Reply]-[" + output + "]");
                 long transferTime = new Date().getTime() - dataTransferDate.getTime();
@@ -210,7 +223,6 @@ public class AjaxReceiverServlet extends JWDefaultServlet
             catch (IOException io)
             {
                 LOG.log(Level.SEVERE, "Unable to send response to client", io);
-                LOG.log(Level.SEVERE, "");
             }
         }
     }

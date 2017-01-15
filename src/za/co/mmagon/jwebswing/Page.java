@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.*;
 import java.util.List;
 import net.sf.uadetector.*;
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.JWebSwingSiteBinder;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
@@ -58,6 +59,7 @@ public class Page extends Html implements IPage
      * The fields available
      */
     private PageFields fields;
+    
 
     /**
      * The current user agent of the render
@@ -75,7 +77,6 @@ public class Page extends Html implements IPage
      */
     private transient java.util.Map<String, ComponentHierarchyBase> componentCache;
 
-    
     /**
      * Populates all my components. Excludes this page
      */
@@ -177,18 +178,23 @@ public class Page extends Html implements IPage
         {
             getBody().init();
             getBody().preConfigure();
- 
+
             getAngular().preConfigure();
 
             configurePageHeader();
 
             addVariablesScriptToPage();
 
-            addScriptsToBody();
+            if (!getOptions().isScriptsInHead())
+            {
+                addScriptsTo(getBody());
+            }
 
-            List<Script> allScripts = getDynamicScripts();
-
-            allScripts.stream().filter(script -> (script != null)).forEach(getBody()::add);
+            if (!getOptions().isScriptsInHead())
+            {
+                List<Script> allScripts = getDynamicScripts();
+                allScripts.stream().filter(script -> (script != null)).forEach(getBody()::add);
+            }
 
             getTopShelfScripts().forEach(next ->
             {
@@ -354,7 +360,8 @@ public class Page extends Html implements IPage
             }
             else
             {
-                StringBuilder js = getAngular().renderTemplateScripts("jwangular");// getBody().renderJavascriptAll();
+                getAngular().configureTemplateVariables();
+                StringBuilder js = FileTemplates.renderTemplateScripts("jwangular");
                 if (!js.toString().trim().isEmpty())
                 {
                     Script s = new Script();
@@ -415,6 +422,17 @@ public class Page extends Html implements IPage
         getHead().add(getPageFields().getKeywords());
         getHead().add(getPageFields().getFavIconLink());
 
+        if (getOptions().isScriptsInHead())
+        {
+            addScriptsTo(getHead());
+        }
+
+        if (getOptions().isScriptsInHead())
+        {
+            List<Script> allScripts = getDynamicScripts();
+            allScripts.stream().filter(script -> (script != null)).forEach(getHead()::add);
+        }
+
         getHead().getChildren().stream().forEach((headObject)
                 ->
         {
@@ -448,7 +466,7 @@ public class Page extends Html implements IPage
         }
     }
 
-    private void addScriptsToBody()
+    private void addScriptsTo(ComponentHierarchyBase component)
     {
         List<ComponentHierarchyBase> requirements = new ArrayList<>();
 
@@ -466,7 +484,7 @@ public class Page extends Html implements IPage
             getPriorityRequirements(priority, requirements, false, true).stream().forEach(comp
                     ->
             {
-                getBody().add(comp);
+                component.add(comp);
             });
         });
     }

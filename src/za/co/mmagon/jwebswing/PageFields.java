@@ -16,14 +16,17 @@
  */
 package za.co.mmagon.jwebswing;
 
-import com.fasterxml.jackson.annotation.*;
-import java.io.*;
-import java.nio.file.*;
-import java.util.logging.*;
-import za.co.mmagon.jwebswing.base.client.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import za.co.mmagon.jwebswing.base.client.InternetExplorerCompatibilityMode;
 import za.co.mmagon.jwebswing.base.html.*;
-import za.co.mmagon.jwebswing.base.html.attributes.*;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
+import za.co.mmagon.jwebswing.base.html.attributes.CSSLinkAttributes;
+import za.co.mmagon.jwebswing.base.html.attributes.MetaAttributes;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
  * A separated list of page fields Can be used as options

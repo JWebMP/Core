@@ -21,12 +21,12 @@
     "requirejs-text": "2.0.10"
   },
   "homepage": "https://github.com/jquery/globalize",
-  "version": "1.2.1",
-  "_release": "1.2.1",
+  "version": "1.2.2",
+  "_release": "1.2.2",
   "_resolution": {
     "type": "version",
-    "tag": "1.2.1",
-    "commit": "83d4a3294eb0adaebe6773b11ad1bf961ebe868d"
+    "tag": "1.2.2",
+    "commit": "6dc98c56153d9afba4ebf7fc89b5d2f385bf3518"
   },
   "_source": "https://github.com/jquery/globalize.git",
   "_target": "^1.1.1",

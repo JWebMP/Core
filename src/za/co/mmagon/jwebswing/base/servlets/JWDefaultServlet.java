@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.base.servlets;
 
+import com.armineasy.injection.GuiceContext;
 import com.google.inject.Singleton;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -80,22 +81,7 @@ public class JWDefaultServlet extends HttpServlet
             LOG.log(Level.SEVERE, "Session Doesn't Exist", new ServletException("There is no session for a data pull"));
             throw new ServletException("There is no session for a data pull");
         }
-        Page servlet = (Page) request.getSession().getAttribute("jwpage");
-        if (checkPage)
-        {
-            if (servlet == null)
-            {
-                ServletException se = new ServletException("There is no Servlet Loaded for the entry. The web site has not been visited");
-                LOG.log(Level.SEVERE, "Main Servlet Doesn't Exist", se);
-                throw se;
-            }
-            Page page = (Page) request.getSession().getAttribute("jwpage");
-            if (page == null)
-            {
-                LOG.log(Level.SEVERE, "No Page", new ServletException("No Page Currently Loaded"));
-                throw new ServletException("No Page Currently Loaded");
-            }
-        }
+        Page page = GuiceContext.Injector().getInstance(Page.class);
     }
 
     /**

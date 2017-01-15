@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.events.search;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
@@ -48,7 +49,7 @@ public class SearchDirective extends AngularDirectiveBase
     @Override
     public String renderFunction()
     {
-        return getAngular().getFileTemplate(SearchDirective.class, "Search").toString();
+        return FileTemplates.getFileTemplate(SearchDirective.class, "Search").toString();
     }
 
 }

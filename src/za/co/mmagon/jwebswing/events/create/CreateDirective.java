@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.events.create;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
@@ -48,7 +49,7 @@ public class CreateDirective extends AngularDirectiveBase
     @Override
     public String renderFunction()
     {
-        return getAngular().getFileTemplate(CreateDirective.class, "Create").toString();
+        return FileTemplates.getFileTemplate(CreateDirective.class, "Create").toString();
     }
 
 }
