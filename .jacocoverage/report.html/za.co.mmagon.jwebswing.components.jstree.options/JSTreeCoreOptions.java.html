@@ -63,10 +63,30 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     private Boolean multiple;
 
-    public JSTreeCoreOptions()
-<span class="fc" id="L67">    {</span>
+    /**
+     * theme configuration object
+     */
+    private JSTreeThemeOptions themes;
+    /**
+     * if left as true web workers will be used to parse incoming JSON data where possible, so that the UI will not be blocked by large requests. Workers are however about 30% slower. Defaults to true
+     */
+    private Boolean worker;
+    /**
+     * Force node text to plain text (and escape HTML). Defaults to false
+     */
+    @JsonProperty(&quot;force_text&quot;)
+    private Boolean forceText;
 
-<span class="fc" id="L69">    }</span>
+    /**
+     * Should the node should be toggled if the text is double clicked . Defaults to true
+     */
+    @JsonProperty(&quot;dblclick_toggle&quot;)
+    private Boolean doubleClickToggle;
+
+    public JSTreeCoreOptions()
+<span class="fc" id="L87">    {</span>
+
+<span class="fc" id="L89">    }</span>
 
     /**
      * If left as false the HTML inside the jstree container element is used to populate the tree (that should be an unordered list with list items). You can also pass in a HTML string or a JSON array
@@ -79,11 +99,11 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public JSTreeAjaxConfigOptions getData()
     {
-<span class="fc bfc" id="L82" title="All 2 branches covered.">        if (data == null)</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        if (data == null)</span>
         {
-<span class="fc" id="L84">            data = new JSTreeAjaxConfigOptions();</span>
+<span class="fc" id="L104">            data = new JSTreeAjaxConfigOptions();</span>
         }
-<span class="fc" id="L86">        return data;</span>
+<span class="fc" id="L106">        return data;</span>
     }
 
     /**
@@ -97,8 +117,8 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public void setData(JSTreeAjaxConfigOptions data)
     {
-<span class="nc" id="L100">        this.data = data;</span>
-<span class="nc" id="L101">    }</span>
+<span class="nc" id="L120">        this.data = data;</span>
+<span class="nc" id="L121">    }</span>
 
     /**
      * configure the various strings used throughout the tree You can use an object where the key is the string you need to replace and the value is your replacement. Another option is to specify a
@@ -108,11 +128,11 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public Map&lt;String, String&gt; getStrings()
     {
-<span class="nc bnc" id="L111" title="All 2 branches missed.">        if (strings == null)</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">        if (strings == null)</span>
         {
-<span class="nc" id="L113">            strings = new TreeMap&lt;&gt;();</span>
+<span class="nc" id="L133">            strings = new TreeMap&lt;&gt;();</span>
         }
-<span class="nc" id="L115">        return strings;</span>
+<span class="nc" id="L135">        return strings;</span>
     }
 
     /**
@@ -123,8 +143,8 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public void setStrings(Map&lt;String, String&gt; strings)
     {
-<span class="nc" id="L126">        this.strings = strings;</span>
-<span class="nc" id="L127">    }</span>
+<span class="nc" id="L146">        this.strings = strings;</span>
+<span class="nc" id="L147">    }</span>
 
     /**
      * determines what happens when a user tries to modify the structure of the tree
@@ -135,11 +155,11 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public JSTreeCheckCallbackFunction getCheckCallback()
     {
-<span class="nc bnc" id="L138" title="All 2 branches missed.">        if (checkCallback == null)</span>
+<span class="nc bnc" id="L158" title="All 2 branches missed.">        if (checkCallback == null)</span>
         {
-<span class="nc" id="L140">            checkCallback = new JSTreeCheckCallbackFunction();</span>
+<span class="nc" id="L160">            checkCallback = new JSTreeCheckCallbackFunction();</span>
         }
-<span class="nc" id="L142">        return checkCallback;</span>
+<span class="nc" id="L162">        return checkCallback;</span>
     }
 
     /**
@@ -151,8 +171,8 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public void setCheckCallback(JSTreeCheckCallbackFunction checkCallback)
     {
-<span class="nc" id="L154">        this.checkCallback = checkCallback;</span>
-<span class="nc" id="L155">    }</span>
+<span class="nc" id="L174">        this.checkCallback = checkCallback;</span>
+<span class="nc" id="L175">    }</span>
 
     /**
      * the open / close animation duration in milliseconds - set this to false to disable the animation (default is 200)
@@ -161,7 +181,7 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public Integer getAnimation()
     {
-<span class="nc" id="L164">        return animation;</span>
+<span class="nc" id="L184">        return animation;</span>
     }
 
     /**
@@ -171,8 +191,8 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public void setAnimation(Integer animation)
     {
-<span class="nc" id="L174">        this.animation = animation;</span>
-<span class="nc" id="L175">    }</span>
+<span class="nc" id="L194">        this.animation = animation;</span>
+<span class="nc" id="L195">    }</span>
 
     /**
      * a boolean indicating if multiple nodes can be selected
@@ -181,7 +201,7 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public Boolean getMultiple()
     {
-<span class="nc" id="L184">        return multiple;</span>
+<span class="nc" id="L204">        return multiple;</span>
     }
 
     /**
@@ -191,8 +211,92 @@ public class JSTreeCoreOptions extends JavaScriptPart
      */
     public void setMultiple(Boolean multiple)
     {
-<span class="nc" id="L194">        this.multiple = multiple;</span>
-<span class="nc" id="L195">    }</span>
+<span class="nc" id="L214">        this.multiple = multiple;</span>
+<span class="nc" id="L215">    }</span>
+
+    /**
+     * theme configuration object
+     *
+     * @return
+     */
+    public JSTreeThemeOptions getThemes()
+    {
+<span class="pc bpc" id="L224" title="1 of 2 branches missed.">        if (themes == null)</span>
+        {
+<span class="fc" id="L226">            themes = new JSTreeThemeOptions();</span>
+        }
+<span class="fc" id="L228">        return themes;</span>
+    }
+
+    /**
+     * theme configuration object
+     *
+     * @param themes
+     */
+    public void setThemes(JSTreeThemeOptions themes)
+    {
+<span class="nc" id="L238">        this.themes = themes;</span>
+<span class="nc" id="L239">    }</span>
+
+    /**
+     * if left as true web workers will be used to parse incoming JSON data where possible, so that the UI will not be blocked by large requests. Workers are however about 30% slower. Defaults to true
+     *
+     * @return
+     */
+    public Boolean getWorker()
+    {
+<span class="nc" id="L248">        return worker;</span>
+    }
+
+    /**
+     * if left as true web workers will be used to parse incoming JSON data where possible, so that the UI will not be blocked by large requests. Workers are however about 30% slower. Defaults to true
+     *
+     * @param worker
+     */
+    public void setWorker(Boolean worker)
+    {
+<span class="nc" id="L258">        this.worker = worker;</span>
+<span class="nc" id="L259">    }</span>
+
+    /**
+     * Force node text to plain text (and escape HTML). Defaults to false
+     *
+     * @return
+     */
+    public Boolean getForceText()
+    {
+<span class="nc" id="L268">        return forceText;</span>
+    }
+
+    /**
+     * Force node text to plain text (and escape HTML). Defaults to false
+     *
+     * @param forceText
+     */
+    public void setForceText(Boolean forceText)
+    {
+<span class="nc" id="L278">        this.forceText = forceText;</span>
+<span class="nc" id="L279">    }</span>
+
+    /**
+     * Should the node should be toggled if the text is double clicked . Defaults to true
+     *
+     * @return
+     */
+    public Boolean getDoubleClickToggle()
+    {
+<span class="nc" id="L288">        return doubleClickToggle;</span>
+    }
+
+    /**
+     * Should the node should be toggled if the text is double clicked . Defaults to true
+     *
+     * @param doubleClickToggle
+     */
+    public void setDoubleClickToggle(Boolean doubleClickToggle)
+    {
+<span class="nc" id="L298">        this.doubleClickToggle = doubleClickToggle;</span>
+<span class="nc" id="L299">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -53,7 +53,7 @@ public class BSButtonToolbarTest extends BaseTestClass
 
         Assert.assertEquals("<div aria_label=\"Button Toolbar\" class=\"btn-toolbar\" id=\"toolbar\" role=\"toolbar\">\n"
                 + "	<div aria_label=\"Button Group\" class=\"btn-group\" id=\"group\" role=\"group\">\n"
-                + "		<div class=\"btn btn-success\" id=\"button\"></div>\n"
+                + "		<button class=\"btn btn-success\" id=\"button\" type=\"button\"></button>\n"
                 + "	</div>\n"
                 + "</div>", bbt.toString(true));
 
@@ -80,7 +80,7 @@ public class BSButtonToolbarTest extends BaseTestClass
 
         Assert.assertEquals("<div aria_label=\"Button Toolbar\" class=\"btn-toolbar\" id=\"toolbar\" role=\"toolbar\">\n"
                 + "	<div aria_label=\"Button Group\" class=\"btn-group btn-group-lg\" id=\"group\" role=\"group\">\n"
-                + "		<div class=\"btn btn-warning\" id=\"button\"></div>\n"
+                + "		<button class=\"btn btn-warning\" id=\"button\" type=\"button\"></button>\n"
                 + "	</div>\n"
                 + "</div>", bbt.toString(true));
     }
@@ -106,7 +106,7 @@ public class BSButtonToolbarTest extends BaseTestClass
 
         Assert.assertEquals("<div aria_label=\"Button Toolbar\" class=\"btn-toolbar\" id=\"toolbar\" role=\"toolbar\">\n"
                 + "	<div aria_label=\"Button Group\" class=\"btn-group-vertical btn-group-sm\" id=\"group\" role=\"group\">\n"
-                + "		<div class=\"btn btn-outline-info\" id=\"button\"></div>\n"
+                + "		<button class=\"btn btn-outline-info\" id=\"button\" type=\"button\"></button>\n"
                 + "	</div>\n"
                 + "</div>", bbt.toString(true));
     }

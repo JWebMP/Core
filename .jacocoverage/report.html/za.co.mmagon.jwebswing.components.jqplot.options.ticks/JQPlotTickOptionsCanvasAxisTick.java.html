@@ -36,8 +36,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
 
     private static final long serialVersionUID = 1L;
     /**
-     * tick mark on the axis.
-     * One of ‘inside’, ‘outside’, ‘cross’, ‘’ or null.
+     * tick mark on the axis. One of ‘inside’, ‘outside’, ‘cross’, ‘’ or null.
      */
     private String mark;
     /**
@@ -69,8 +68,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     private Boolean showLabel;
     /**
-     * A class of a formatter for the tick text.
-     * $.jqplot.DefaultTickFormatter
+     * A class of a formatter for the tick text. $.jqplot.DefaultTickFormatter
      * &lt;p&gt;
      * A class of a formatter for the tick text. sprintf by default.
      */
@@ -107,7 +105,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
     private String labelPosition;
 
     @JsonIgnore
-    private JQPlotGraph linkedGraph;
+    private final JQPlotGraph linkedGraph;
 
     /**
      * Constructs a new tick options canvas
@@ -115,33 +113,31 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      * @param linkedGraph
      */
     public JQPlotTickOptionsCanvasAxisTick(JQPlotGraph linkedGraph)
-<span class="nc" id="L118">    {</span>
-<span class="nc" id="L119">        this.linkedGraph = linkedGraph;</span>
-<span class="nc" id="L120">        linkedGraph.getJavascriptReferences().add(JQPlotJavascriptReferencePool.CanvasAxisTickRenderer.getReference());</span>
-<span class="nc" id="L121">        linkedGraph.getJavascriptReferences().add(JQPlotJavascriptReferencePool.CanvasTextRenderer.getReference());</span>
-<span class="nc" id="L122">    }</span>
+<span class="nc" id="L116">    {</span>
+<span class="nc" id="L117">        this.linkedGraph = linkedGraph;</span>
+<span class="nc" id="L118">        linkedGraph.getJavascriptReferences().add(JQPlotJavascriptReferencePool.CanvasAxisTickRenderer.getReference());</span>
+<span class="nc" id="L119">        linkedGraph.getJavascriptReferences().add(JQPlotJavascriptReferencePool.CanvasTextRenderer.getReference());</span>
+<span class="nc" id="L120">    }</span>
 
     /**
-     * tick mark on the axis.
-     * One of ‘inside’, ‘outside’, ‘cross’, ‘’ or null.
+     * tick mark on the axis. One of ‘inside’, ‘outside’, ‘cross’, ‘’ or null.
      * &lt;p&gt;
      * @return
      */
     public String getMark()
     {
-<span class="nc" id="L132">        return mark;</span>
+<span class="nc" id="L129">        return mark;</span>
     }
 
     /**
-     * tick mark on the axis.
-     * One of ‘inside’, ‘outside’, ‘cross’, ‘’ or null.
+     * tick mark on the axis. One of ‘inside’, ‘outside’, ‘cross’, ‘’ or null.
      * &lt;p&gt;
      * @param mark
      */
     public void setMark(String mark)
     {
-<span class="nc" id="L143">        this.mark = mark;</span>
-<span class="nc" id="L144">    }</span>
+<span class="nc" id="L139">        this.mark = mark;</span>
+<span class="nc" id="L140">    }</span>
 
     /**
      * Show the mark or not
@@ -150,7 +146,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public Boolean getShowMark()
     {
-<span class="nc" id="L153">        return showMark;</span>
+<span class="nc" id="L149">        return showMark;</span>
     }
 
     /**
@@ -160,8 +156,8 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public void setShowMark(Boolean showMark)
     {
-<span class="nc" id="L163">        this.showMark = showMark;</span>
-<span class="nc" id="L164">    }</span>
+<span class="nc" id="L159">        this.showMark = showMark;</span>
+<span class="nc" id="L160">    }</span>
 
     /**
      * Whether to show the grid line
@@ -170,7 +166,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public Boolean getShowGridline()
     {
-<span class="nc" id="L173">        return showGridline;</span>
+<span class="nc" id="L169">        return showGridline;</span>
     }
 
     /**
@@ -180,8 +176,8 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public void setShowGridline(Boolean showGridline)
     {
-<span class="nc" id="L183">        this.showGridline = showGridline;</span>
-<span class="nc" id="L184">    }</span>
+<span class="nc" id="L179">        this.showGridline = showGridline;</span>
+<span class="nc" id="L180">    }</span>
 
     /**
      * The angle of the text
@@ -190,7 +186,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public Integer getAngle()
     {
-<span class="nc" id="L193">        return angle;</span>
+<span class="nc" id="L189">        return angle;</span>
     }
 
     /**
@@ -200,8 +196,8 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public void setAngle(Integer angle)
     {
-<span class="nc" id="L203">        this.angle = angle;</span>
-<span class="nc" id="L204">    }</span>
+<span class="nc" id="L199">        this.angle = angle;</span>
+<span class="nc" id="L200">    }</span>
 
     /**
      * Display minor ticks or not
@@ -210,7 +206,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public Boolean getIsMinorTick()
     {
-<span class="nc" id="L213">        return isMinorTick;</span>
+<span class="nc" id="L209">        return isMinorTick;</span>
     }
 
     /**
@@ -220,8 +216,8 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public void setIsMinorTick(Boolean isMinorTick)
     {
-<span class="nc" id="L223">        this.isMinorTick = isMinorTick;</span>
-<span class="nc" id="L224">    }</span>
+<span class="nc" id="L219">        this.isMinorTick = isMinorTick;</span>
+<span class="nc" id="L220">    }</span>
 
     /**
      * Gets the mark size
@@ -230,7 +226,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public Boolean getMarkSize()
     {
-<span class="nc" id="L233">        return markSize;</span>
+<span class="nc" id="L229">        return markSize;</span>
     }
 
     /**
@@ -240,8 +236,8 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public void setMarkSize(Boolean markSize)
     {
-<span class="nc" id="L243">        this.markSize = markSize;</span>
-<span class="nc" id="L244">    }</span>
+<span class="nc" id="L239">        this.markSize = markSize;</span>
+<span class="nc" id="L240">    }</span>
 
     /**
      * Whether or not to show the ticks
@@ -250,7 +246,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public Boolean getShow()
     {
-<span class="nc" id="L253">        return show;</span>
+<span class="nc" id="L249">        return show;</span>
     }
 
     /**
@@ -260,8 +256,8 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public void setShow(Boolean show)
     {
-<span class="nc" id="L263">        this.show = show;</span>
-<span class="nc" id="L264">    }</span>
+<span class="nc" id="L259">        this.show = show;</span>
+<span class="nc" id="L260">    }</span>
 
     /**
      * Whether or not to show the label
@@ -270,7 +266,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public Boolean getShowLabel()
     {
-<span class="nc" id="L273">        return showLabel;</span>
+<span class="nc" id="L269">        return showLabel;</span>
     }
 
     /**
@@ -280,8 +276,8 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public void setShowLabel(Boolean showLabel)
     {
-<span class="nc" id="L283">        this.showLabel = showLabel;</span>
-<span class="nc" id="L284">    }</span>
+<span class="nc" id="L279">        this.showLabel = showLabel;</span>
+<span class="nc" id="L280">    }</span>
 
     /**
      * Get a sprintf formatter
@@ -290,7 +286,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public String getFormatter()
     {
-<span class="nc" id="L293">        return formatter;</span>
+<span class="nc" id="L289">        return formatter;</span>
     }
 
     /**
@@ -300,8 +296,8 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public void setFormatter(String formatter)
     {
-<span class="nc" id="L303">        this.formatter = formatter;</span>
-<span class="nc" id="L304">    }</span>
+<span class="nc" id="L299">        this.formatter = formatter;</span>
+<span class="nc" id="L300">    }</span>
 
     /**
      * Text to display before the value
@@ -310,7 +306,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public String getPrefix()
     {
-<span class="nc" id="L313">        return prefix;</span>
+<span class="nc" id="L309">        return prefix;</span>
     }
 
     /**
@@ -320,8 +316,8 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public void setPrefix(String prefix)
     {
-<span class="nc" id="L323">        this.prefix = prefix;</span>
-<span class="nc" id="L324">    }</span>
+<span class="nc" id="L319">        this.prefix = prefix;</span>
+<span class="nc" id="L320">    }</span>
 
     /**
      * The string to pass to the formatter
@@ -330,7 +326,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public String getFormatString()
     {
-<span class="nc" id="L333">        return formatString;</span>
+<span class="nc" id="L329">        return formatString;</span>
     }
 
     /**
@@ -340,8 +336,8 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public void setFormatString(String formatString)
     {
-<span class="nc" id="L343">        this.formatString = formatString;</span>
-<span class="nc" id="L344">    }</span>
+<span class="nc" id="L339">        this.formatString = formatString;</span>
+<span class="nc" id="L340">    }</span>
 
     /**
      * The CSS Font Family
@@ -350,7 +346,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public FontFamilies getFontFamily()
     {
-<span class="nc" id="L353">        return fontFamily;</span>
+<span class="nc" id="L349">        return fontFamily;</span>
     }
 
     /**
@@ -360,8 +356,8 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public void setFontFamily(FontFamilies fontFamily)
     {
-<span class="nc" id="L363">        this.fontFamily = fontFamily;</span>
-<span class="nc" id="L364">    }</span>
+<span class="nc" id="L359">        this.fontFamily = fontFamily;</span>
+<span class="nc" id="L360">    }</span>
 
     /**
      * The font size setting
@@ -370,7 +366,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public Integer getFontSize()
     {
-<span class="nc" id="L373">        return fontSize;</span>
+<span class="nc" id="L369">        return fontSize;</span>
     }
 
     /**
@@ -380,8 +376,8 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public void setFontSize(Integer fontSize)
     {
-<span class="nc" id="L383">        this.fontSize = fontSize;</span>
-<span class="nc" id="L384">    }</span>
+<span class="nc" id="L379">        this.fontSize = fontSize;</span>
+<span class="nc" id="L380">    }</span>
 
     /**
      * The text colour
@@ -390,7 +386,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public ColourHex getTextColor()
     {
-<span class="nc" id="L393">        return textColor;</span>
+<span class="nc" id="L389">        return textColor;</span>
     }
 
     /**
@@ -400,8 +396,8 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public void setTextColor(ColourHex textColor)
     {
-<span class="nc" id="L403">        this.textColor = textColor;</span>
-<span class="nc" id="L404">    }</span>
+<span class="nc" id="L399">        this.textColor = textColor;</span>
+<span class="nc" id="L400">    }</span>
 
     /**
      * Escape html characters in the axis label or not
@@ -410,7 +406,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public Boolean getEscapeHTML()
     {
-<span class="nc" id="L413">        return escapeHTML;</span>
+<span class="nc" id="L409">        return escapeHTML;</span>
     }
 
     /**
@@ -420,8 +416,8 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public void setEscapeHTML(Boolean escapeHTML)
     {
-<span class="nc" id="L423">        this.escapeHTML = escapeHTML;</span>
-<span class="nc" id="L424">    }</span>
+<span class="nc" id="L419">        this.escapeHTML = escapeHTML;</span>
+<span class="nc" id="L420">    }</span>
 
     /**
      * ‘auto’, ‘start’, ‘middle’ or ‘end’.
@@ -430,7 +426,7 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public String getLabelPosition()
     {
-<span class="nc" id="L433">        return labelPosition;</span>
+<span class="nc" id="L429">        return labelPosition;</span>
     }
 
     /**
@@ -440,14 +436,14 @@ public class JQPlotTickOptionsCanvasAxisTick extends JavaScriptPart implements J
      */
     public void setLabelPosition(String labelPosition)
     {
-<span class="nc" id="L443">        this.labelPosition = labelPosition;</span>
-<span class="nc" id="L444">    }</span>
+<span class="nc" id="L439">        this.labelPosition = labelPosition;</span>
+<span class="nc" id="L440">    }</span>
 
     @Override
     @JsonRawValue
     public String getRenderer()
     {
-<span class="nc" id="L450">        return &quot;$.jqplot.CanvasAxisTickRenderer&quot;;</span>
+<span class="nc" id="L446">        return &quot;$.jqplot.CanvasAxisTickRenderer&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -6,6 +6,8 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.bootstrap.cards.BSCardChildren;
+import za.co.mmagon.jwebswing.components.bootstrap.dropdown.BSDropDownChildren;
 
 /**
  * Definition and Usage &amp;gt;p&amp;lt;
@@ -13,31 +15,25 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * The &amp;gt;button&amp;lt; tag defines a clickable button. &amp;gt;p&amp;lt;
  * &lt;p&gt;
  * Inside a &amp;gt;button&amp;lt; element you can put content, like text or images.&lt;p&gt;
- * This is the difference between
- * this element and buttons created with the &amp;gt;input&amp;lt; element. &amp;gt;p&amp;lt;
+ * This is the difference between this element and buttons created with the &amp;gt;input&amp;lt; element. &amp;gt;p&amp;lt;
  * &lt;p&gt;
  * Tip: Always specify the type attribute for a &amp;gt;button&amp;lt; element.&lt;p&gt;
- * Different browsers use different default types for
- * the &amp;gt;button&amp;lt; element. Browser Support
+ * Different browsers use different default types for the &amp;gt;button&amp;lt; element. Browser Support
  * &lt;p&gt;
  * Element &amp;gt;button&amp;lt; Yes Yes Yes Yes Yes &amp;gt;p&amp;lt;
  * &lt;p&gt;
  * Tips and Notes &amp;gt;p&amp;lt;
  * &lt;p&gt;
- * Note: If you use the &amp;gt;button&amp;lt; element in an HTML form, different
- * browsers may submit different values.
+ * Note: If you use the &amp;gt;button&amp;lt; element in an HTML form, different browsers may submit different values.
  * &lt;p&gt;
  * Use &amp;gt;input&amp;lt; to create buttons in an HTML form.&lt;p&gt;
- * Differences Between HTML 4.01 and HTML5 &amp;gt;p&amp;lt; HTML5 has the following new
- * attributes: autofocus, form,
- * formaction, formenctype, formmethod, formnovalidate, and formtarget.
- * &amp;gt;p&amp;lt;
+ * Differences Between HTML 4.01 and HTML5 &amp;gt;p&amp;lt; HTML5 has the following new attributes: autofocus, form, formaction, formenctype, formmethod, formnovalidate, and formtarget. &amp;gt;p&amp;lt;
  * &lt;p&gt;
  * @author Marc Magon
  * @since 2014/12/20
  */
 public class Button extends Component&lt;GlobalChildren, ButtonAttributes, GlobalFeatures, GlobalEvents, Button&gt;
-        implements GlobalChildren
+        implements GlobalChildren, BSCardChildren, BSDropDownChildren
 {
 
     private static final long serialVersionUID = 1L;
@@ -47,8 +43,8 @@ public class Button extends Component&lt;GlobalChildren, ButtonAttributes, Globa
      */
     public Button()
     {
-<span class="fc" id="L50">        this(&quot;&quot;);</span>
-<span class="fc" id="L51">    }</span>
+<span class="fc" id="L46">        this(&quot;&quot;);</span>
+<span class="fc" id="L47">    }</span>
 
     /**
      * Constructs a new button object with the given text
@@ -57,8 +53,8 @@ public class Button extends Component&lt;GlobalChildren, ButtonAttributes, Globa
      */
     public Button(String text)
     {
-<span class="fc" id="L60">        super(ComponentTypes.Button);</span>
-<span class="fc" id="L61">        setText(text);</span>
-<span class="fc" id="L62">    }</span>
+<span class="fc" id="L56">        super(ComponentTypes.Button);</span>
+<span class="fc" id="L57">        setText(text);</span>
+<span class="fc" id="L58">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

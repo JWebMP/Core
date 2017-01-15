@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BSComponentColoursOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.bootstrap.componentoptions</a> &gt; <span class="el_source">BSComponentColoursOptions.java</span></div><h1>BSComponentColoursOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.bootstrap.componentoptions;
+
+/**
+ * Colors
+ * &lt;p&gt;
+ * Convey meaning through color with a handful of emphasis utility classes. These may also be applied to links and will darken on hover just like our default link styles.
+ *
+ * @author GedMarc
+ * @since 31 Dec 2016
+ * @version 1.0
+ *
+ */
+<span class="pc" id="L29">public enum BSComponentColoursOptions implements IBSComponentOptions</span>
+{
+    /**
+     * Text styled with class &quot;text_muted&quot;
+     */
+<span class="fc" id="L34">    Text_Muted,</span>
+    /**
+     * Text styled with class &quot;text_primary&quot;
+     */
+<span class="fc" id="L38">    Text_Primary,</span>
+    /**
+     * Text styled with class &quot;text_success&quot;
+     */
+<span class="fc" id="L42">    Text_Success,</span>
+    /**
+     * Text styled with class &quot;text_info&quot;
+     */
+<span class="fc" id="L46">    Text_Info,</span>
+    /**
+     * Text styled with class &quot;text_warning&quot;
+     */
+<span class="fc" id="L50">    Text_Warning,</span>
+    /**
+     * Text styled with class &quot;text_danger&quot;
+     */
+<span class="fc" id="L54">    Text_Danger,</span>
+    /**
+     * Text marked as white
+     */
+<span class="fc" id="L58">    Text_White,</span>
+    /**
+     * with class &quot;background primary&quot;
+     */
+<span class="fc" id="L62">    Bg_Primary,</span>
+    /**
+     * styled with class &quot;background _success&quot;
+     */
+<span class="fc" id="L66">    Bg_Success,</span>
+    /**
+     * with class &quot;background _info&quot;
+     */
+<span class="fc" id="L70">    Bg_Info,</span>
+    /**
+     * with class &quot;background _warning&quot;
+     */
+<span class="fc" id="L74">    Bg_Warning,</span>
+    /**
+     * styled with class &quot;background _danger&quot;
+     */
+<span class="fc" id="L78">    Bg_Danger,</span>
+    /**
+     * Reverses the colours, useful with text white
+     */
+<span class="fc" id="L82">    Bg_Inverse,</span>
+    /**
+     * Displays a more faded background
+     */
+<span class="fc" id="L86">    Bg_Faded,</span>
+    /**
+     * Hides colours on screen readers Using color to add meaning only provides a visual indication, which will not be conveyed to users of assistive technologies – such as screen readers. Ensure that
+     * information denoted by the color is either obvious from the content itself (e.g. the visible text), or is included through alternative means, such as additional text hidden with the .sr-only
+     * class.
+     */
+<span class="fc" id="L92">    Sr_Only,</span>
+    /**
+     * Combine with sr_only to show the element again when it is focused (eg by a keyboard_only user)
+     */
+<span class="fc" id="L96">    Sr_Only_Focusable,;</span>
+
+    @Override
+    public String toString()
+    {
+<span class="fc" id="L101">        return name().toLowerCase().replace('_', '-');</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -20,9 +20,7 @@ import java.util.ArrayList;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.client.BrowserGroups;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.DisplayObjectType;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -35,6 +33,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  * This class incorporates the JQPlot library from http://www.jqplot.com
  *
  * @author mmagon
+ * @param &lt;O&gt;
+ *
  * @since 2014/07/08
  * @version 3.0
  * &lt;p&gt;
@@ -44,7 +44,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  *
  *
  */
-public abstract class JQPlotGraph&lt;O extends JavaScriptPart&gt; 
+public abstract class JQPlotGraph&lt;O extends JavaScriptPart&gt;
         extends Component&lt;NoChildren, NoAttributes, JQPlotGraphFeatures, JQPlotGraphEvents, JQPlotGraph&gt;
         implements GlobalChildren, DisplayObjectType, NoNewLineBeforeClosingTag, JQUITabsChildren
 {
@@ -92,18 +92,17 @@ public abstract class JQPlotGraph&lt;O extends JavaScriptPart&gt;
     protected abstract StringBuilder getDataPointRender();
 
     /**
-     * Gets the feature for the graph.
-     * Please don't ever return a null. JQPlotGraphFeature is also fine
+     * Gets the feature for the graph. Please don't ever return a null. JQPlotGraphFeature is also fine
      * &lt;p&gt;
      * @return
      */
     public JQPlotGraphFeature getFeature()
     {
-<span class="pc bpc" id="L102" title="1 of 2 branches missed.">        if (feature == null)</span>
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">        if (feature == null)</span>
         {
-<span class="fc" id="L104">            feature = new JQPlotGraphFeature(this);</span>
+<span class="fc" id="L103">            feature = new JQPlotGraphFeature(this);</span>
         }
-<span class="fc" id="L106">        return feature;</span>
+<span class="fc" id="L105">        return feature;</span>
     }
 
     private JQPlotGraphFeature feature;
@@ -116,11 +115,11 @@ public abstract class JQPlotGraph&lt;O extends JavaScriptPart&gt;
      */
     public JQPlotOptions&lt;O&gt; getOptions()
     {
-<span class="fc bfc" id="L119" title="All 2 branches covered.">        if (options == null)</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">        if (options == null)</span>
         {
-<span class="fc" id="L121">            options = new JQPlotOptions&lt;&gt;(this);</span>
+<span class="fc" id="L120">            options = new JQPlotOptions&lt;&gt;(this);</span>
         }
-<span class="fc" id="L123">        return options;</span>
+<span class="fc" id="L122">        return options;</span>
     }
 
     /**
@@ -130,8 +129,8 @@ public abstract class JQPlotGraph&lt;O extends JavaScriptPart&gt;
      */
     public void setFeature(JQPlotGraphFeature feature)
     {
-<span class="nc" id="L133">        this.feature = feature;</span>
-<span class="nc" id="L134">    }</span>
+<span class="nc" id="L132">        this.feature = feature;</span>
+<span class="nc" id="L133">    }</span>
 
     /**
      * Sets the options for this graph
@@ -140,8 +139,8 @@ public abstract class JQPlotGraph&lt;O extends JavaScriptPart&gt;
      */
     public void setOptions(JQPlotOptions&lt;O&gt; options)
     {
-<span class="nc" id="L143">        this.options = options;</span>
-<span class="nc" id="L144">    }</span>
+<span class="nc" id="L142">        this.options = options;</span>
+<span class="nc" id="L143">    }</span>
 
     /**
      * Returns the JavaScriptReferences
@@ -150,8 +149,8 @@ public abstract class JQPlotGraph&lt;O extends JavaScriptPart&gt;
      */
     public ArrayList&lt;JavascriptReference&gt; getJavascriptReference()
     {
-<span class="nc" id="L153">        ArrayList&lt;JavascriptReference&gt; arrs = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L154">        return arrs;</span>
+<span class="nc" id="L152">        ArrayList&lt;JavascriptReference&gt; arrs = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L153">        return arrs;</span>
     }
 
 }

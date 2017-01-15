@@ -13,8 +13,10 @@ import za.co.mmagon.jwebswing.generics.WebReference;
  *
  *
  */
-public class JavascriptReference extends WebReference
+public class JavascriptReference extends WebReference&lt;JavascriptReference&gt;
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      *
@@ -25,8 +27,8 @@ public class JavascriptReference extends WebReference
      */
     public JavascriptReference(String name, Double version, String localReference, String remoteReference)
     {
-<span class="fc" id="L28">        super(name, version, localReference, remoteReference);</span>
-<span class="fc" id="L29">    }</span>
+<span class="fc" id="L30">        super(name, version, localReference, remoteReference);</span>
+<span class="fc" id="L31">    }</span>
 
     /**
      *
@@ -36,20 +38,22 @@ public class JavascriptReference extends WebReference
      */
     public JavascriptReference(String name, Double version, String localReference)
     {
-<span class="fc" id="L39">        super(name, version, localReference, localReference);</span>
-<span class="fc" id="L40">    }</span>
+<span class="fc" id="L41">        super(name, version, localReference, localReference);</span>
+<span class="fc" id="L42">    }</span>
 
     /**
      *
      * @param name           The name of the reference
      * @param version        The version of the reference
      * @param localReference The local reference
+     * @param priority
      */
+    @SuppressWarnings(&quot;&quot;)
     public JavascriptReference(String name, Double version, String localReference, RequirementsPriority priority)
     {
-<span class="nc" id="L50">        super(name, version, localReference, localReference);</span>
-<span class="nc" id="L51">        setPriority(priority);</span>
-<span class="nc" id="L52">    }</span>
+<span class="nc" id="L54">        super(name, version, localReference, localReference);</span>
+<span class="nc" id="L55">        setPriority(priority);</span>
+<span class="nc" id="L56">    }</span>
 
     /**
      *
@@ -58,20 +62,14 @@ public class JavascriptReference extends WebReference
      * @param localReference The local reference
      * @param sortOrder      Default Sort Order
      * &lt;p&gt;
-     * 0 - Root (JQuery)
-     * 5 - Core
-     * 10 - Core Accompanied
-     * 15 - Stand Alone Components
-     * 20 - Complex Components
-     * 500k - Default
-     * 600k - Atmosphere Reserved
+     * 0 - Root (JQuery) 5 - Core 10 - Core Accompanied 15 - Stand Alone Components 20 - Complex Components 500k - Default 600k - Atmosphere Reserved
      *
      */
     public JavascriptReference(String name, Double version, String localReference, Integer sortOrder)
     {
-<span class="fc" id="L72">        super(name, version, localReference, localReference);</span>
-<span class="fc" id="L73">        setSortOrder(sortOrder);</span>
-<span class="fc" id="L74">    }</span>
+<span class="fc" id="L70">        super(name, version, localReference, localReference);</span>
+<span class="fc" id="L71">        setSortOrder(sortOrder);</span>
+<span class="fc" id="L72">    }</span>
 
     /**
      *
@@ -81,68 +79,59 @@ public class JavascriptReference extends WebReference
      * @param remoteReference The remote reference
      * @param sortOrder       Default Sort Order
      * &lt;p&gt;
-     * 0 - Root (JQuery)
-     * 5 - Core
-     * 10 - Core Accompanied
-     * 15 - Stand Alone Components
-     * 20 - Complex Components
-     * 500k - Default
-     * 600k - Atmosphere Reserved
+     * 0 - Root (JQuery) 5 - Core 10 - Core Accompanied 15 - Stand Alone Components 20 - Complex Components 500k - Default 600k - Atmosphere Reserved
      *
      */
     public JavascriptReference(String name, Double version, String localReference, String remoteReference, Integer sortOrder)
     {
-<span class="fc" id="L95">        super(name, version, localReference, remoteReference);</span>
-<span class="fc" id="L96">        setSortOrder(sortOrder);</span>
-<span class="fc" id="L97">    }</span>
-    
+<span class="fc" id="L87">        super(name, version, localReference, remoteReference);</span>
+<span class="fc" id="L88">        setSortOrder(sortOrder);</span>
+<span class="fc" id="L89">    }</span>
+
     /**
+     * &lt;p&gt;
+     * 0 - Root (JQuery) 5 - Core 10 - Core Accompanied 15 - Stand Alone Components 20 - Complex Components 500k - Default 600k - Atmosphere Reserved
      *
      * @param name            The name of the reference
      * @param version         The version of the reference
      * @param localReference  The local reference
      * @param remoteReference The remote reference
      * @param sortOrder       Default Sort Order
-     * &lt;p&gt;
-     * 0 - Root (JQuery)
-     * 5 - Core
-     * 10 - Core Accompanied
-     * 15 - Stand Alone Components
-     * 20 - Complex Components
-     * 500k - Default
-     * 600k - Atmosphere Reserved
+     *
+     * @param priority
      *
      */
+    @SuppressWarnings(&quot;&quot;)
     public JavascriptReference(String name, Double version, String localReference, String remoteReference, Integer sortOrder, RequirementsPriority priority)
     {
-<span class="fc" id="L118">        super(name, version, localReference, remoteReference);</span>
-<span class="fc" id="L119">        setSortOrder(sortOrder);</span>
-<span class="fc" id="L120">        setPriority(priority);</span>
-<span class="fc" id="L121">    }</span>
+<span class="fc" id="L107">        super(name, version, localReference, remoteReference);</span>
+<span class="fc" id="L108">        setSortOrder(sortOrder);</span>
+<span class="fc" id="L109">        setPriority(priority);</span>
+<span class="fc" id="L110">    }</span>
 
     @Override
     public boolean equals(Object o)
     {
-<span class="pc bpc" id="L126" title="1 of 2 branches missed.">        if (o instanceof JavascriptReference)</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">        if (o instanceof JavascriptReference)</span>
         {
-<span class="fc bfc" id="L128" title="All 2 branches covered.">            if (o.toString().equals(toString()))</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">            if (o.toString().equals(toString()))</span>
             {
-<span class="fc" id="L130">                return true;</span>
+<span class="fc" id="L119">                return true;</span>
             }
 
-<span class="fc" id="L133">            return getName().equalsIgnoreCase(JavascriptReference.class.cast(o).getName());</span>
+<span class="fc" id="L122">            return getName().equalsIgnoreCase(JavascriptReference.class.cast(o).getName());</span>
         }
         else
         {
-<span class="nc" id="L137">            return false;</span>
+<span class="nc" id="L126">            return false;</span>
         }
     }
 
     @Override
     public int hashCode()
     {
-<span class="nc" id="L144">        int hash = 3;</span>
-<span class="nc" id="L145">        return hash;</span>
+<span class="nc" id="L133">        int hash = 3;</span>
+<span class="nc" id="L134">        return hash;</span>
     }
 
 }

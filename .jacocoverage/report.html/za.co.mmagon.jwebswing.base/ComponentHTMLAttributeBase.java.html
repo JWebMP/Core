@@ -19,6 +19,7 @@ package za.co.mmagon.jwebswing.base;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
@@ -26,6 +27,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.interfaces.ComponentHTMLBase;
 import za.co.mmagon.jwebswing.base.interfaces.IComponentHTMLAttributeBase;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.generics.Pair;
 import za.co.mmagon.jwebswing.utilities.EnumerationUtils;
 import za.co.mmagon.logger.LogFactory;
 
@@ -56,7 +58,7 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
      * Logger for the Component
      */
     @JsonIgnore
-<span class="fc" id="L59">    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger(&quot;ComponentAttributes&quot;);</span>
+<span class="fc" id="L61">    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger(&quot;ComponentAttributes&quot;);</span>
 
     /**
      * The SORTED global attribute collection of this component
@@ -82,7 +84,7 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
     /**
      * Specifies if this component should render an ID attribute
      */
-<span class="fc" id="L85">    @JsonIgnore</span>
+<span class="fc" id="L87">    @JsonIgnore</span>
     private boolean renderIDAttibute = true;
 
     /**
@@ -92,8 +94,8 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
      */
     public ComponentHTMLAttributeBase(ComponentTypes componentType)
     {
-<span class="fc" id="L95">        super(componentType);</span>
-<span class="fc" id="L96">    }</span>
+<span class="fc" id="L97">        super(componentType);</span>
+<span class="fc" id="L98">    }</span>
 
     /**
      * Returns an Attribute Base interface of this component
@@ -102,7 +104,7 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
      */
     public IComponentHTMLAttributeBase asAttributeBase()
     {
-<span class="nc" id="L105">        return (ComponentHTMLAttributeBase) this;</span>
+<span class="nc" id="L107">        return (ComponentHTMLAttributeBase) this;</span>
     }
 
     /**
@@ -112,11 +114,11 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
      */
     protected Map&lt;GlobalAttributes, String&gt; getAttributesGlobal()
     {
-<span class="fc bfc" id="L115" title="All 2 branches covered.">        if (attributesGlobal == null)</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        if (attributesGlobal == null)</span>
         {
-<span class="fc" id="L117">            attributesGlobal = new TreeMap&lt;&gt;();</span>
+<span class="fc" id="L119">            attributesGlobal = new TreeMap&lt;&gt;();</span>
         }
-<span class="fc" id="L119">        return attributesGlobal;</span>
+<span class="fc" id="L121">        return attributesGlobal;</span>
     }
 
     /**
@@ -126,11 +128,11 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
      */
     protected Map&lt;A, String&gt; getAttributes()
     {
-<span class="fc bfc" id="L129" title="All 2 branches covered.">        if (attributesLocal == null)</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">        if (attributesLocal == null)</span>
         {
-<span class="fc" id="L131">            attributesLocal = new TreeMap&lt;&gt;();</span>
+<span class="fc" id="L133">            attributesLocal = new TreeMap&lt;&gt;();</span>
         }
-<span class="fc" id="L133">        return attributesLocal;</span>
+<span class="fc" id="L135">        return attributesLocal;</span>
     }
 
     /**
@@ -140,11 +142,11 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
      */
     protected Map&lt;String, String&gt; getAttributesCustom()
     {
-<span class="nc bnc" id="L143" title="All 2 branches missed.">        if (attributesCustom == null)</span>
+<span class="fc bfc" id="L145" title="All 2 branches covered.">        if (attributesCustom == null)</span>
         {
-<span class="nc" id="L145">            attributesCustom = new TreeMap&lt;&gt;();</span>
+<span class="fc" id="L147">            attributesCustom = new TreeMap&lt;&gt;();</span>
         }
-<span class="nc" id="L147">        return attributesCustom;</span>
+<span class="fc" id="L149">        return attributesCustom;</span>
     }
 
     /**
@@ -153,19 +155,19 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
     @Override
     public void preConfigure()
     {
-<span class="fc bfc" id="L156" title="All 2 branches covered.">        if (!isConfigured())</span>
+<span class="fc bfc" id="L158" title="All 2 branches covered.">        if (!isConfigured())</span>
         {
-<span class="fc bfc" id="L158" title="All 2 branches covered.">            if (isRenderIDAttibute())</span>
+<span class="fc bfc" id="L160" title="All 2 branches covered.">            if (isRenderIDAttibute())</span>
             {
-<span class="fc" id="L160">                addAttribute(GlobalAttributes.ID, getID());</span>
+<span class="fc" id="L162">                addAttribute(GlobalAttributes.ID, getID());</span>
             }
             else
             {
-<span class="fc" id="L164">                getAttributesGlobal().remove(GlobalAttributes.ID);</span>
+<span class="fc" id="L166">                getAttributesGlobal().remove(GlobalAttributes.ID);</span>
             }
         }
-<span class="fc" id="L167">        super.preConfigure();</span>
-<span class="fc" id="L168">    }</span>
+<span class="fc" id="L169">        super.preConfigure();</span>
+<span class="fc" id="L170">    }</span>
 
     /**
      * Returns a complete collection of attributes
@@ -175,12 +177,12 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
     @Override
     public Map&lt;Enum, String&gt; getAttributesAll()
     {
-<span class="fc" id="L178">        HashMap&lt;Enum, String&gt; allAttributes = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L180">        HashMap&lt;Enum, String&gt; allAttributes = new HashMap&lt;&gt;();</span>
 
-<span class="fc" id="L180">        allAttributes.putAll(getAttributesGlobal());</span>
-<span class="fc" id="L181">        allAttributes.putAll(getAttributes());</span>
+<span class="fc" id="L182">        allAttributes.putAll(getAttributesGlobal());</span>
+<span class="fc" id="L183">        allAttributes.putAll(getAttributes());</span>
 
-<span class="fc" id="L183">        return allAttributes;</span>
+<span class="fc" id="L185">        return allAttributes;</span>
     }
 
     /**
@@ -192,43 +194,64 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
     @Override
     protected StringBuilder renderAttributes(StringBuilder sb)
     {
-<span class="fc" id="L195">        StringBuilder sbClasses = renderClasses();</span>
-<span class="pc bpc" id="L196" title="1 of 4 branches missed.">        if (sbClasses.length() &gt; 0 &amp;&amp; !(this instanceof NoClassAttribute))</span>
+<span class="fc" id="L197">        StringBuilder sbClasses = renderClasses();</span>
+<span class="pc bpc" id="L198" title="1 of 4 branches missed.">        if (sbClasses.length() &gt; 0 &amp;&amp; !(this instanceof NoClassAttribute))</span>
         {
-<span class="fc" id="L198">            getAttributesGlobal().put(GlobalAttributes.Class, sbClasses.toString());</span>
+<span class="fc" id="L200">            getAttributesGlobal().put(GlobalAttributes.Class, sbClasses.toString());</span>
         }
-<span class="fc" id="L200">        Map&lt;Enum, String&gt; allAttributes = getAttributesAll();</span>
-<span class="fc" id="L201">        ArrayList&lt;Enum&gt; attrib = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L202">        allAttributes.keySet().stream().forEach(attr</span>
-                -&gt;
+
+<span class="fc" id="L203">        Map&lt;Pair&lt;String, Boolean&gt;, String&gt; attributeMap = new TreeMap&lt;&gt;();</span>
+
+<span class="fc" id="L205">        Map&lt;Enum, String&gt; allDefinedAttributes = getAttributesAll();</span>
+
+<span class="fc bfc" id="L207" title="All 2 branches covered.">        for (Entry&lt;Enum, String&gt; entry : allDefinedAttributes.entrySet())</span>
         {
-<span class="fc" id="L205">            attrib.add(attr);</span>
-<span class="fc" id="L206">        });</span>
-<span class="fc" id="L207">        attrib.sort(EnumerationUtils.enumNameSorter);</span>
-<span class="fc bfc" id="L208" title="All 2 branches covered.">        if (!attrib.isEmpty())</span>
-        {
-<span class="fc" id="L210">            sb.append(&quot; &quot;);</span>
-        }
-<span class="fc" id="L212">        attrib.stream().forEach((attribute)</span>
-                -&gt;
-        {
-<span class="fc" id="L215">            String value = allAttributes.get(attribute);</span>
-<span class="fc" id="L216">            boolean isKey = AttributeDefinitions.class.cast(attribute).isKeyword();</span>
-<span class="fc" id="L217">            sb.append(attribute.toString().toLowerCase());</span>
-<span class="pc bpc" id="L218" title="1 of 2 branches missed.">            if (!isKey)</span>
+<span class="fc" id="L209">            Enum key = entry.getKey();</span>
+<span class="fc" id="L210">            String value = entry.getValue();</span>
+<span class="pc bpc" id="L211" title="1 of 2 branches missed.">            if (AttributeDefinitions.class.isAssignableFrom(key.getClass()))</span>
             {
-<span class="fc" id="L220">                sb.append(&quot;=\&quot;&quot;).append(value).append(&quot;\&quot; &quot;);</span>
+<span class="fc" id="L213">                AttributeDefinitions ad = AttributeDefinitions.class.cast(key);</span>
+<span class="fc" id="L214">                Pair p = new Pair(key.toString(), ad.isKeyword());</span>
+
+<span class="fc" id="L216">                attributeMap.put(p, value);</span>
+            }
+<span class="fc" id="L218">        }</span>
+
+<span class="fc bfc" id="L220" title="All 2 branches covered.">        for (Entry&lt;String, String&gt; entry : getAttributesCustom().entrySet())</span>
+        {
+<span class="fc" id="L222">            String key = entry.getKey();</span>
+<span class="fc" id="L223">            String value = entry.getValue();</span>
+
+<span class="pc bpc" id="L225" title="2 of 4 branches missed.">            Pair p = new Pair(key, (value == null || value.isEmpty()));</span>
+<span class="fc" id="L226">            attributeMap.put(p, value);</span>
+<span class="fc" id="L227">        }</span>
+
+<span class="fc bfc" id="L229" title="All 2 branches covered.">        if (!attributeMap.isEmpty())</span>
+        {
+<span class="fc" id="L231">            sb.append(&quot; &quot;);</span>
+        }
+
+<span class="fc bfc" id="L234" title="All 2 branches covered.">        for (Entry&lt;Pair&lt;String, Boolean&gt;, String&gt; entry : attributeMap.entrySet())</span>
+        {
+<span class="fc" id="L236">            Pair&lt;String, Boolean&gt; key = entry.getKey();</span>
+<span class="fc" id="L237">            String value = entry.getValue();</span>
+
+<span class="fc" id="L239">            sb.append(key.getLeft().toLowerCase());</span>
+<span class="pc bpc" id="L240" title="1 of 2 branches missed.">            if (!key.getRight())</span>
+            {
+<span class="fc" id="L242">                sb.append(&quot;=\&quot;&quot;).append(value).append(&quot;\&quot; &quot;);</span>
             }
             else
             {
-<span class="nc" id="L224">                sb.append(&quot; &quot;);</span>
+<span class="nc" id="L246">                sb.append(&quot; &quot;);</span>
             }
-<span class="fc" id="L226">        });</span>
-<span class="fc bfc" id="L227" title="All 2 branches covered.">        if (!attrib.isEmpty())</span>
+<span class="fc" id="L248">        }</span>
+<span class="fc bfc" id="L249" title="All 2 branches covered.">        if (!attributeMap.isEmpty())</span>
         {
-<span class="fc" id="L229">            sb.deleteCharAt(sb.lastIndexOf(&quot; &quot;));</span>
+<span class="fc" id="L251">            sb.deleteCharAt(sb.lastIndexOf(&quot; &quot;));</span>
         }
-<span class="fc" id="L231">        return sb;</span>
+
+<span class="fc" id="L254">        return sb;</span>
     }
 
     /**
@@ -242,7 +265,7 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
     @Override
     public final Boolean getAttribute(GlobalAttributes attribute, Boolean bop)
     {
-<span class="nc" id="L245">        return Boolean.parseBoolean(getAttributesGlobal().get(attribute));</span>
+<span class="nc" id="L268">        return Boolean.parseBoolean(getAttributesGlobal().get(attribute));</span>
     }
 
     /**
@@ -258,12 +281,12 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
     {
         try
         {
-<span class="nc" id="L261">            return Integer.parseInt(getAttributesGlobal().get(attribute));</span>
+<span class="nc" id="L284">            return Integer.parseInt(getAttributesGlobal().get(attribute));</span>
         }
-<span class="nc" id="L263">        catch (NumberFormatException | NullPointerException nfe)</span>
+<span class="nc" id="L286">        catch (NumberFormatException | NullPointerException nfe)</span>
         {
-<span class="nc" id="L265">            LOG.log(Level.FINE, &quot;Invalid Global Attribute Reference [&quot; + getClass().getSimpleName() + &quot;] - [&quot; + attribute + &quot;]. Ignoring.&quot;, nfe);</span>
-<span class="nc" id="L266">            return null;</span>
+<span class="nc" id="L288">            LOG.log(Level.FINE, &quot;Invalid Global Attribute Reference [&quot; + getClass().getSimpleName() + &quot;] - [&quot; + attribute + &quot;]. Ignoring.&quot;, nfe);</span>
+<span class="nc" id="L289">            return null;</span>
         }
     }
 
@@ -277,12 +300,12 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
     @Override
     public final String getAttribute(GlobalAttributes attribute)
     {
-<span class="nc bnc" id="L280" title="All 2 branches missed.">        if (getAttributesGlobal().get(attribute) == null)</span>
+<span class="nc bnc" id="L303" title="All 2 branches missed.">        if (getAttributesGlobal().get(attribute) == null)</span>
         {
-<span class="nc" id="L282">            getAttributesGlobal().put(attribute, &quot;&quot;);</span>
+<span class="nc" id="L305">            getAttributesGlobal().put(attribute, &quot;&quot;);</span>
         }
 
-<span class="nc" id="L285">        return getAttributesGlobal().get(attribute);</span>
+<span class="nc" id="L308">        return getAttributesGlobal().get(attribute);</span>
     }
 
     /**
@@ -296,19 +319,22 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
     @Override
     public final J addAttribute(GlobalAttributes attribute, String value)
     {
-<span class="pc bpc" id="L299" title="1 of 4 branches missed.">        if (value != null &amp;&amp; !value.isEmpty())</span>
+<span class="pc bpc" id="L322" title="1 of 4 branches missed.">        if (value != null &amp;&amp; !value.isEmpty())</span>
         {
-<span class="fc bfc" id="L301" title="All 2 branches covered.">            if (attribute == GlobalAttributes.Style)</span>
+<span class="fc bfc" id="L324" title="All 2 branches covered.">            if (attribute == GlobalAttributes.Style)</span>
             {
-<span class="fc" id="L303">                getAttributesGlobal().put(attribute, getAttributesGlobal().get(attribute) + &quot;&quot; + value);</span>
+<span class="fc" id="L326">                getAttributesGlobal().put(attribute, getAttributesGlobal().get(attribute) + &quot;&quot; + value);</span>
             }
-<span class="fc" id="L305">            getAttributesGlobal().put(attribute, value);</span>
+<span class="fc" id="L328">            getAttributesGlobal().put(attribute, value);</span>
         }
         else
         {
-<span class="fc" id="L309">            LOG.log(Level.FINE,&quot;Invalid Global Attribute value added [&quot; + getClass().getSimpleName() + &quot;] - [&quot; + attribute + &quot;] - [&quot; + value + &quot;]. Ignoring. Possible duplicate all components run..&quot;);</span>
+<span class="fc" id="L332">            LOG.log(Level.FINE, &quot;Invalid Global Attribute value added [{0}] - [{1}] - [{2}]. Ignoring. Possible duplicate all components run..&quot;, new Object[]</span>
+            {
+<span class="fc" id="L334">                getClass().getSimpleName(), attribute, value</span>
+            });
         }
-<span class="fc" id="L311">        return (J) this;</span>
+<span class="fc" id="L337">        return (J) this;</span>
     }
 
     /**
@@ -322,15 +348,18 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
     @Override
     public final J addAttribute(A attribute, String value)
     {
-<span class="pc bpc" id="L325" title="1 of 4 branches missed.">        if (value != null &amp;&amp; !value.isEmpty())</span>
+<span class="pc bpc" id="L351" title="1 of 4 branches missed.">        if (value != null &amp;&amp; !value.isEmpty())</span>
         {
-<span class="fc" id="L327">            getAttributes().put(attribute, value);</span>
+<span class="fc" id="L353">            getAttributes().put(attribute, value);</span>
         }
         else
         {
-<span class="fc" id="L331">            LOG.log(Level.FINE,&quot;Invalid Local Attribute value added [&quot; + getClass().getSimpleName() + &quot;] - [&quot; + attribute + &quot;] - [&quot; + value + &quot;]. Ignoring. Possible duplicate all components run..&quot;);</span>
+<span class="fc" id="L357">            LOG.log(Level.FINE, &quot;Invalid Local Attribute value added [{0}] - [{1}] - [{2}]. Ignoring. Possible duplicate all components run..&quot;, new Object[]</span>
+            {
+<span class="fc" id="L359">                getClass().getSimpleName(), attribute, value</span>
+            });
         }
-<span class="fc" id="L333">        return (J) this;</span>
+<span class="fc" id="L362">        return (J) this;</span>
     }
 
     /**
@@ -344,8 +373,8 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
     @Override
     public final J addAttribute(A attribute, Integer value)
     {
-<span class="fc" id="L347">        getAttributes().put(attribute, value.toString());</span>
-<span class="fc" id="L348">        return (J) this;</span>
+<span class="fc" id="L376">        getAttributes().put(attribute, value.toString());</span>
+<span class="fc" id="L377">        return (J) this;</span>
     }
 
     /**
@@ -359,8 +388,22 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
     @Override
     public final J addAttribute(A attribute, Boolean value)
     {
-<span class="fc" id="L362">        getAttributes().put(attribute, value.toString());</span>
-<span class="fc" id="L363">        return (J) this;</span>
+<span class="fc" id="L391">        getAttributes().put(attribute, value.toString());</span>
+<span class="fc" id="L392">        return (J) this;</span>
+    }
+
+    /**
+     * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
+     * &lt;p&gt;
+     * @param attribute The valid Local Attribute to add
+     * @param value     The value of the attribute
+     *
+     * @return
+     */
+    public final J addAttribute(String attribute, String value)
+    {
+<span class="fc" id="L405">        getAttributesCustom().put(attribute, value);</span>
+<span class="fc" id="L406">        return (J) this;</span>
     }
 
     /**
@@ -373,12 +416,12 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
     @Override
     public String getAttribute(A attributeValue)
     {
-<span class="fc" id="L376">        String s = getAttributes().get(attributeValue);</span>
-<span class="fc bfc" id="L377" title="All 2 branches covered.">        if (s == null)</span>
+<span class="fc" id="L419">        String s = getAttributes().get(attributeValue);</span>
+<span class="fc bfc" id="L420" title="All 2 branches covered.">        if (s == null)</span>
         {
-<span class="fc" id="L379">            s = &quot;&quot;;</span>
+<span class="fc" id="L422">            s = &quot;&quot;;</span>
         }
-<span class="fc" id="L381">        return s;</span>
+<span class="fc" id="L424">        return s;</span>
     }
 
     /**
@@ -392,12 +435,12 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
     @Override
     public Integer getAttribute(A attributeValue, Integer uselessInt)
     {
-<span class="nc" id="L395">        String s = getAttributes().get(attributeValue);</span>
-<span class="nc bnc" id="L396" title="All 2 branches missed.">        if (s == null)</span>
+<span class="nc" id="L438">        String s = getAttributes().get(attributeValue);</span>
+<span class="nc bnc" id="L439" title="All 2 branches missed.">        if (s == null)</span>
         {
-<span class="nc" id="L398">            s = &quot;0&quot;;</span>
+<span class="nc" id="L441">            s = &quot;0&quot;;</span>
         }
-<span class="nc" id="L400">        return new Integer(s);</span>
+<span class="nc" id="L443">        return new Integer(s);</span>
     }
 
     /**
@@ -411,12 +454,12 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
     @Override
     public Boolean getAttribute(A attributeValue, Boolean uselessInt)
     {
-<span class="nc" id="L414">        String s = getAttributes().get(attributeValue);</span>
-<span class="nc bnc" id="L415" title="All 2 branches missed.">        if (s == null)</span>
+<span class="nc" id="L457">        String s = getAttributes().get(attributeValue);</span>
+<span class="nc bnc" id="L458" title="All 2 branches missed.">        if (s == null)</span>
         {
-<span class="nc" id="L417">            s = &quot;false&quot;;</span>
+<span class="nc" id="L460">            s = &quot;false&quot;;</span>
         }
-<span class="nc" id="L419">        return Boolean.valueOf(s);</span>
+<span class="nc" id="L462">        return Boolean.valueOf(s);</span>
     }
 
     /**
@@ -428,12 +471,12 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
      */
     protected J setRenderIDAttibute(boolean renderIDAttibute)
     {
-<span class="fc" id="L431">        this.renderIDAttibute = renderIDAttibute;</span>
-<span class="pc bpc" id="L432" title="1 of 2 branches missed.">        if (!renderIDAttibute)</span>
+<span class="fc" id="L474">        this.renderIDAttibute = renderIDAttibute;</span>
+<span class="pc bpc" id="L475" title="1 of 2 branches missed.">        if (!renderIDAttibute)</span>
         {
-<span class="fc" id="L434">            getAttributesGlobal().remove(GlobalAttributes.ID);</span>
+<span class="fc" id="L477">            getAttributesGlobal().remove(GlobalAttributes.ID);</span>
         }
-<span class="fc" id="L436">        return (J) this;</span>
+<span class="fc" id="L479">        return (J) this;</span>
     }
 
     /**
@@ -444,11 +487,11 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
     @Override
     public List&lt;String&gt; getClasses()
     {
-<span class="fc bfc" id="L447" title="All 2 branches covered.">        if (classes == null)</span>
+<span class="fc bfc" id="L490" title="All 2 branches covered.">        if (classes == null)</span>
         {
-<span class="fc" id="L449">            classes = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L492">            classes = new ArrayList&lt;&gt;();</span>
         }
-<span class="fc" id="L451">        return classes;</span>
+<span class="fc" id="L494">        return classes;</span>
     }
 
     /**
@@ -461,14 +504,14 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
     @Override
     public boolean addClass(String className)
     {
-<span class="fc bfc" id="L464" title="All 2 branches covered.">        if (!getClasses().contains(className))</span>
+<span class="fc bfc" id="L507" title="All 2 branches covered.">        if (!getClasses().contains(className))</span>
         {
-<span class="fc" id="L466">            getClasses().add(className);</span>
-<span class="fc" id="L467">            return true;</span>
+<span class="fc" id="L509">            getClasses().add(className);</span>
+<span class="fc" id="L510">            return true;</span>
         }
         else
         {
-<span class="fc" id="L471">            return false;</span>
+<span class="fc" id="L514">            return false;</span>
         }
     }
 
@@ -482,14 +525,14 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
     @Override
     public boolean removeClass(String className)
     {
-<span class="fc bfc" id="L485" title="All 2 branches covered.">        if (getClasses().contains(className))</span>
+<span class="fc bfc" id="L528" title="All 2 branches covered.">        if (getClasses().contains(className))</span>
         {
-<span class="fc" id="L487">            getClasses().remove(className);</span>
-<span class="fc" id="L488">            return true;</span>
+<span class="fc" id="L530">            getClasses().remove(className);</span>
+<span class="fc" id="L531">            return true;</span>
         }
         else
         {
-<span class="fc" id="L492">            return false;</span>
+<span class="fc" id="L535">            return false;</span>
         }
     }
 
@@ -500,13 +543,13 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
      */
     protected boolean isRenderIDAttibute()
     {
-<span class="fc bfc" id="L503" title="All 4 branches covered.">        if (!renderIDAttibute || (this instanceof NoIDTag))</span>
+<span class="fc bfc" id="L546" title="All 4 branches covered.">        if (!renderIDAttibute || (this instanceof NoIDTag))</span>
         {
-<span class="fc" id="L505">            return false;</span>
+<span class="fc" id="L548">            return false;</span>
         }
         else
         {
-<span class="fc" id="L509">            return renderIDAttibute;</span>
+<span class="fc" id="L552">            return renderIDAttibute;</span>
         }
     }
 
@@ -517,18 +560,18 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
      */
     private StringBuilder renderClasses()
     {
-<span class="fc" id="L520">        StringBuilder sb = new StringBuilder();</span>
-<span class="fc" id="L521">        getClasses().stream().forEach(clazz</span>
+<span class="fc" id="L563">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L564">        getClasses().stream().forEach(clazz</span>
                 -&gt;
         {
-<span class="fc" id="L524">            sb.append(clazz).append(&quot; &quot;);</span>
-<span class="fc" id="L525">        });</span>
-<span class="fc bfc" id="L526" title="All 2 branches covered.">        if (sb.length() &gt; 0)</span>
+<span class="fc" id="L567">            sb.append(clazz).append(&quot; &quot;);</span>
+<span class="fc" id="L568">        });</span>
+<span class="fc bfc" id="L569" title="All 2 branches covered.">        if (sb.length() &gt; 0)</span>
         {
-<span class="fc" id="L528">            sb.deleteCharAt(sb.length() - 1);</span>
+<span class="fc" id="L571">            sb.deleteCharAt(sb.length() - 1);</span>
         }
 
-<span class="fc" id="L531">        return sb;</span>
+<span class="fc" id="L574">        return sb;</span>
     }
 
     /**
@@ -541,21 +584,21 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
     @Override
     public J setID(String id)
     {
-<span class="fc" id="L544">        getAttributesGlobal().put(GlobalAttributes.ID, id);</span>
-<span class="fc" id="L545">        return super.setID(id);</span>
+<span class="fc" id="L587">        getAttributesGlobal().put(GlobalAttributes.ID, id);</span>
+<span class="fc" id="L588">        return super.setID(id);</span>
     }
 
     @Override
     public J cloneComponent()
     {
-<span class="fc" id="L551">        ComponentHTMLAttributeBase cloned = (ComponentHTMLAttributeBase) super.cloneComponent();</span>
+<span class="fc" id="L594">        ComponentHTMLAttributeBase cloned = (ComponentHTMLAttributeBase) super.cloneComponent();</span>
 
-<span class="fc" id="L553">        cloned.attributesGlobal = new TreeMap();</span>
-<span class="fc" id="L554">        cloned.attributesLocal = new TreeMap();</span>
-<span class="fc" id="L555">        cloned.attributesGlobal.putAll(getAttributesGlobal());</span>
-<span class="fc" id="L556">        cloned.attributesLocal.putAll(getAttributes());</span>
+<span class="fc" id="L596">        cloned.attributesGlobal = new TreeMap();</span>
+<span class="fc" id="L597">        cloned.attributesLocal = new TreeMap();</span>
+<span class="fc" id="L598">        cloned.attributesGlobal.putAll(getAttributesGlobal());</span>
+<span class="fc" id="L599">        cloned.attributesLocal.putAll(getAttributes());</span>
 
-<span class="fc" id="L558">        return (J) cloned;</span>
+<span class="fc" id="L601">        return (J) cloned;</span>
     }
 
 }

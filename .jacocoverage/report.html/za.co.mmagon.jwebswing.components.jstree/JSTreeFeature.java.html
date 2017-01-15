@@ -12,7 +12,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
  */
 public class JSTreeFeature extends Feature&lt;JSTreeOptions, JSTreeFeature&gt; implements JSTreeFeatures, GlobalFeatures
 {
-
     private static final long serialVersionUID = 1L;
 
     private JSTreeOptions options;
@@ -24,11 +23,11 @@ public class JSTreeFeature extends Feature&lt;JSTreeOptions, JSTreeFeature&gt; i
      */
     public JSTreeFeature(JSTree forComponent)
     {
-<span class="fc" id="L27">        super(&quot;JSTreeFeature&quot;);</span>
-<span class="fc" id="L28">        setComponent(forComponent);</span>
-<span class="fc" id="L29">        getJavascriptReferences().add(JSTreeReferencePool.JSTreeJavascript.getJavaScriptReference());</span>
+<span class="fc" id="L26">        super(&quot;JSTreeFeature&quot;);</span>
+<span class="fc" id="L27">        setComponent(forComponent);</span>
+<span class="fc" id="L28">        getJavascriptReferences().add(JSTreeReferencePool.JSTreeJavascript.getJavaScriptReference());</span>
         // getCssReferences().add(JQXReferencePool.Core.getCssReference());
-<span class="fc" id="L31">    }</span>
+<span class="fc" id="L30">    }</span>
 
     /**
      * Returns all the Tree options
@@ -38,20 +37,20 @@ public class JSTreeFeature extends Feature&lt;JSTreeOptions, JSTreeFeature&gt; i
     @Override
     public JSTreeOptions getOptions()
     {
-<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (options == null)</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (options == null)</span>
         {
-<span class="fc" id="L43">            options = new JSTreeOptions((JSTree) getComponent());</span>
+<span class="fc" id="L42">            options = new JSTreeOptions((JSTree) getComponent());</span>
         }
-<span class="fc" id="L45">        return options;</span>
+<span class="fc" id="L44">        return options;</span>
     }
 
     @Override
     public void assignFunctionsToComponent()
     {
-<span class="fc" id="L51">        String requiredString = getComponent().getJQueryID() + &quot;jstree(&quot;;</span>
-<span class="fc" id="L52">        requiredString += getOptions().toString();</span>
-<span class="fc" id="L53">        requiredString += &quot;);&quot; + getNewLine();</span>
-<span class="fc" id="L54">        addQuery(requiredString);</span>
-<span class="fc" id="L55">    }</span>
+<span class="fc" id="L50">        String requiredString = getComponent().getJQueryID() + &quot;jstree(&quot;;</span>
+<span class="fc" id="L51">        requiredString += getOptions().toString();</span>
+<span class="fc" id="L52">        requiredString += &quot;);&quot; + getNewLine();</span>
+<span class="fc" id="L53">        addQuery(requiredString);</span>
+<span class="fc" id="L54">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

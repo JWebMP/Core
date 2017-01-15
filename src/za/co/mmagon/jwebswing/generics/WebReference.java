@@ -30,10 +30,10 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
      */
     @JsonIgnore
     private String left;
-    @JsonIgnore
     /**
      * The right side
      */
+    @JsonIgnore
     private String right;
     /**
      * If this must reference with the left side only
@@ -43,7 +43,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
     /**
      * If the reference is local
      */
-    private boolean isLocal = true;
+    private static boolean isLocal = true;
     /**
      * The ridiculous sort order
      */
@@ -68,7 +68,6 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
      * If this reference is a cordova reference, e.g. does it render in the dynamic site loader
      */
     private boolean cordovaRequired = false;
-
     /**
      * The name of the reference
      */
@@ -229,7 +228,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
      * @return
      */
     @JsonProperty("local")
-    public boolean isIsLocal()
+    public static boolean isIsLocal()
     {
         return isLocal;
     }
@@ -241,10 +240,9 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
      *
      * @return
      */
-    public T setIsLocal(boolean isLocal)
+    public static void setIsLocal(boolean isLocal)
     {
-        this.isLocal = isLocal;
-        return (T) this;
+        WebReference.isLocal = isLocal;
     }
 
     /**

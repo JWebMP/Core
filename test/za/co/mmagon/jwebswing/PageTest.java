@@ -206,6 +206,7 @@ public class PageTest extends BaseTestClass
     @Test
     public void testDefaultWithPaceLoaderRemoteReference()
     {
+        WebReference.setIsLocal(false);
         String result;
         instance = getPage();
         instance.getOptions().setPaceEnabled(true);

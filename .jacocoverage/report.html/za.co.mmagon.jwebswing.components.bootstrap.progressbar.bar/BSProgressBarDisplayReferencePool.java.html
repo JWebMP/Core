@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.components.bootstrap.progressbar.bar;
 
-import za.co.mmagon.jwebswing.components.newcomponents.*;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.base.servlets.interfaces.ReferencePool;
@@ -27,45 +26,45 @@ import za.co.mmagon.jwebswing.base.servlets.interfaces.ReferencePool;
  * @author GedMarc
  * @since 20 Apr 2016
  */
-<span class="nc" id="L30">public enum BSProgressBarDisplayReferencePool implements ReferencePool</span>
+<span class="nc" id="L29">public enum BSProgressBarDisplayReferencePool implements ReferencePool</span>
 {
 
     ;
     private BSProgressBarDisplayReferencePool()
-<span class="nc" id="L35">    {</span>
-<span class="nc" id="L36">    }</span>
+<span class="nc" id="L34">    {</span>
+<span class="nc" id="L35">    }</span>
 
     private JavascriptReference javaScriptReference;
     private CSSReference cssReference;
 
     private BSProgressBarDisplayReferencePool(JavascriptReference javaScriptReference, CSSReference cssReference)
-<span class="nc" id="L42">    {</span>
-<span class="nc" id="L43">        this.javaScriptReference = javaScriptReference;</span>
-<span class="nc" id="L44">        this.cssReference = cssReference;</span>
-<span class="nc" id="L45">    }</span>
+<span class="nc" id="L41">    {</span>
+<span class="nc" id="L42">        this.javaScriptReference = javaScriptReference;</span>
+<span class="nc" id="L43">        this.cssReference = cssReference;</span>
+<span class="nc" id="L44">    }</span>
 
     @Override
     public JavascriptReference getJavaScriptReference()
     {
-<span class="nc" id="L50">        return javaScriptReference;</span>
+<span class="nc" id="L49">        return javaScriptReference;</span>
     }
 
     @Override
     public void setJavaScriptReference(JavascriptReference javaScriptReference)
     {
-<span class="nc" id="L56">        this.javaScriptReference = javaScriptReference;</span>
-<span class="nc" id="L57">    }</span>
+<span class="nc" id="L55">        this.javaScriptReference = javaScriptReference;</span>
+<span class="nc" id="L56">    }</span>
 
     @Override
     public CSSReference getCssReference()
     {
-<span class="nc" id="L62">        return cssReference;</span>
+<span class="nc" id="L61">        return cssReference;</span>
     }
 
     @Override
     public void setCssReference(CSSReference cssReference)
     {
-<span class="nc" id="L68">        this.cssReference = cssReference;</span>
-<span class="nc" id="L69">    }</span>
+<span class="nc" id="L67">        this.cssReference = cssReference;</span>
+<span class="nc" id="L68">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

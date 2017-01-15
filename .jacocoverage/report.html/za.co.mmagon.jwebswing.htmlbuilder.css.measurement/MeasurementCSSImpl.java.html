@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MeasurementCSSImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.htmlbuilder.css.measurement</a> &gt; <span class="el_source">MeasurementCSSImpl.java</span></div><h1>MeasurementCSSImpl.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.htmlbuilder.css.measurement;
 
-import com.fasterxml.jackson.annotation.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import com.fasterxml.jackson.annotation.JsonValue;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSDetail;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
 
 /**
@@ -17,15 +18,16 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter&lt;MeasurementC
 
     @CSSDetail
     private double value;
-    private MeasurementTypes MeasurementType;
+
+    private MeasurementTypes measurementType;
 
     /**
      * Constructs an empty measurement
      */
     public MeasurementCSSImpl()
-<span class="nc" id="L26">    {</span>
+<span class="fc" id="L28">    {</span>
         //nothing required
-<span class="nc" id="L28">    }</span>
+<span class="fc" id="L30">    }</span>
 
     /**
      * Constructs with the given value and/or measurement type
@@ -34,10 +36,10 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter&lt;MeasurementC
      * @param measurementType
      */
     public MeasurementCSSImpl(double value, MeasurementTypes measurementType)
-<span class="fc" id="L37">    {</span>
-<span class="fc" id="L38">        this.value = value;</span>
-<span class="fc" id="L39">        MeasurementType = measurementType;</span>
-<span class="fc" id="L40">    }</span>
+<span class="fc" id="L39">    {</span>
+<span class="fc" id="L40">        this.value = value;</span>
+<span class="fc" id="L41">        this.measurementType = measurementType;</span>
+<span class="fc" id="L42">    }</span>
 
     /**
      * Constructs with the given value in pixels
@@ -46,8 +48,8 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter&lt;MeasurementC
      */
     public MeasurementCSSImpl(double value)
     {
-<span class="nc" id="L49">        this(value, MeasurementTypes.Pixels);</span>
-<span class="nc" id="L50">    }</span>
+<span class="nc" id="L51">        this(value, MeasurementTypes.Pixels);</span>
+<span class="nc" id="L52">    }</span>
 
     /**
      * Constructs with the given value and measurement type
@@ -56,10 +58,10 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter&lt;MeasurementC
      * @param measurementType
      */
     public MeasurementCSSImpl(int value, MeasurementTypes measurementType)
-<span class="fc" id="L59">    {</span>
-<span class="fc" id="L60">        this.value = value;</span>
-<span class="fc" id="L61">        MeasurementType = measurementType;</span>
-<span class="fc" id="L62">    }</span>
+<span class="fc" id="L61">    {</span>
+<span class="fc" id="L62">        this.value = value;</span>
+<span class="fc" id="L63">        this.measurementType = measurementType;</span>
+<span class="fc" id="L64">    }</span>
 
     /**
      * Constructs with the given value as pixels
@@ -68,8 +70,8 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter&lt;MeasurementC
      */
     public MeasurementCSSImpl(int value)
     {
-<span class="fc" id="L71">        this(value, MeasurementTypes.Pixels);</span>
-<span class="fc" id="L72">    }</span>
+<span class="fc" id="L73">        this(value, MeasurementTypes.Pixels);</span>
+<span class="fc" id="L74">    }</span>
 
     /**
      * Sets the value
@@ -78,8 +80,8 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter&lt;MeasurementC
      */
     public void setvalue(int value)
     {
-<span class="nc" id="L81">        this.value = value;</span>
-<span class="nc" id="L82">    }</span>
+<span class="nc" id="L83">        this.value = value;</span>
+<span class="nc" id="L84">    }</span>
 
     /**
      * Sets the measurement type
@@ -88,8 +90,8 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter&lt;MeasurementC
      */
     public void setMeasurementType(MeasurementTypes measurementType)
     {
-<span class="nc" id="L91">        MeasurementType = measurementType;</span>
-<span class="nc" id="L92">    }</span>
+<span class="nc" id="L93">        this.measurementType = measurementType;</span>
+<span class="nc" id="L94">    }</span>
 
     /**
      * Returns the double value
@@ -98,7 +100,7 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter&lt;MeasurementC
      */
     public double value()
     {
-<span class="fc" id="L101">        return value;</span>
+<span class="fc" id="L103">        return value;</span>
     }
 
     /**
@@ -111,29 +113,28 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter&lt;MeasurementC
     @Override
     public String toString()
     {
-<span class="pc bpc" id="L114" title="1 of 2 branches missed.">        if (MeasurementType == null)</span>
+        /*
+         * if (measurementType == null) { return &quot;&quot;; }
+         */
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">        if (Double.class.cast(value).toString().endsWith(&quot;.0&quot;)) //format as an integer</span>
         {
-<span class="nc" id="L116">            return &quot;&quot;;</span>
-        }
-<span class="pc bpc" id="L118" title="1 of 2 branches missed.">        if (Double.class.cast(value).toString().endsWith(&quot;.0&quot;)) //format as an integer</span>
-        {
-<span class="fc" id="L120">            Integer valInt = Double.class.cast(value).intValue();</span>
-<span class="pc bpc" id="L121" title="1 of 2 branches missed.">            if (MeasurementType.isRequiresQuotes())</span>
+<span class="fc" id="L121">            Integer valInt = Double.class.cast(value).intValue();</span>
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">            if (MeasurementType().isRequiresQuotes())</span>
             {
-<span class="fc" id="L123">                return &quot;'&quot; + valInt + &quot;&quot; + MeasurementType.getHtmlAnnotation() + &quot;'&quot;;</span>
+<span class="fc" id="L124">                return &quot;'&quot; + valInt + &quot;&quot; + MeasurementType().getHtmlAnnotation() + &quot;'&quot;;</span>
             }
             else
             {
-<span class="nc" id="L127">                return valInt + &quot;&quot; + MeasurementType.getHtmlAnnotation();</span>
+<span class="nc" id="L128">                return valInt + &quot;&quot; + MeasurementType().getHtmlAnnotation();</span>
             }
         }
-<span class="nc bnc" id="L130" title="All 2 branches missed.">        else if (MeasurementType.isRequiresQuotes())</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">        else if (MeasurementType().isRequiresQuotes())</span>
         {
-<span class="nc" id="L132">            return &quot;'&quot; + value + &quot;&quot; + MeasurementType.getHtmlAnnotation() + &quot;'&quot;;</span>
+<span class="nc" id="L133">            return &quot;'&quot; + value + &quot;&quot; + MeasurementType().getHtmlAnnotation() + &quot;'&quot;;</span>
         }
         else
         {
-<span class="nc" id="L136">            return value + &quot;&quot; + MeasurementType.getHtmlAnnotation();</span>
+<span class="nc" id="L137">            return value + &quot;&quot; + MeasurementType().getHtmlAnnotation();</span>
         }
 
     }
@@ -147,14 +148,12 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter&lt;MeasurementC
      */
     public String toString(boolean renderQuotes)
     {
-<span class="pc bpc" id="L150" title="1 of 2 branches missed.">        if (renderQuotes)</span>
-        {
-<span class="nc" id="L152">            return &quot;'&quot; + value + &quot;&quot; + MeasurementType.getHtmlAnnotation() + &quot;'&quot;;</span>
+<span class="fc" id="L151">        return toString().replace(&quot;\'&quot;, &quot;&quot;);</span>
+        /*
+         * if (renderQuotes) { return &quot;'&quot; + value + &quot;&quot; + MeasurementType() == null ? &quot;&quot; : MeasurementType().getHtmlAnnotation() + &quot;'&quot;; } else { return value + &quot;&quot; + MeasurementType() == null ? &quot;&quot; :
+         * MeasurementType().getHtmlAnnotation();
         }
-        else
-        {
-<span class="fc" id="L156">            return value + &quot;&quot; + MeasurementType.getHtmlAnnotation();</span>
-        }
+         */
     }
 
     /**
@@ -164,7 +163,12 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter&lt;MeasurementC
      */
     public MeasurementTypes MeasurementType()
     {
-<span class="fc" id="L167">        return MeasurementType;</span>
+<span class="pc bpc" id="L166" title="1 of 2 branches missed.">        if (measurementType == null)</span>
+        {
+<span class="nc" id="L168">            measurementType = MeasurementTypes.Pixels;</span>
+        }
+
+<span class="fc" id="L171">        return measurementType;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

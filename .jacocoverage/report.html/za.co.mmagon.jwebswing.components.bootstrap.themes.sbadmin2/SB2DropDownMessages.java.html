@@ -19,12 +19,10 @@ package za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import za.co.mmagon.jwebswing.base.html.Bold;
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.Link;
-import za.co.mmagon.jwebswing.base.html.ListItem;
+import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.bootstrap.BootstrapClasses;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentColoursOptions;
 import za.co.mmagon.jwebswing.components.moment.Moment;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
@@ -46,43 +44,43 @@ public class SB2DropDownMessages extends SB2DropDown
     @Override
     public void preConfigure()
     {
-<span class="nc bnc" id="L49" title="All 2 branches missed.">        if (!isConfigured())</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        if (!isConfigured())</span>
         {
-<span class="nc" id="L51">            messages.stream().map((message)</span>
+<span class="nc" id="L49">            messages.stream().map((message)</span>
                     -&gt; 
                     {
-<span class="nc" id="L54">                        ListItem li = new ListItem();</span>
-<span class="nc" id="L55">                        Link link = new Link(&quot;#&quot;);</span>
-<span class="nc" id="L56">                        Div topSection = new Div();</span>
-<span class="nc" id="L57">                        Moment date = new Moment(message.getDate(), ComponentTypes.Span);</span>
+<span class="nc" id="L52">                        ListItem li = new ListItem();</span>
+<span class="nc" id="L53">                        Link link = new Link(&quot;#&quot;);</span>
+<span class="nc" id="L54">                        Div topSection = new Div();</span>
+<span class="nc" id="L55">                        Moment date = new Moment(message.getDate(), ComponentTypes.Span);</span>
                         
-<span class="nc" id="L59">                        date.addClass(BootstrapClasses.Pull_Right);</span>
-<span class="nc" id="L60">                        date.addClass(BootstrapClasses.Text_Muted);</span>
-<span class="nc" id="L61">                        topSection.add(new Bold(message.getName()));</span>
-<span class="nc" id="L62">                        topSection.add(date);</span>
+<span class="nc" id="L57">                        date.addClass(BSComponentDefaultOptions.Pull_Right);</span>
+<span class="nc" id="L58">                        date.addClass(BSComponentColoursOptions.Text_Muted);</span>
+<span class="nc" id="L59">                        topSection.add(new Bold(message.getName()));</span>
+<span class="nc" id="L60">                        topSection.add(date);</span>
                         
-<span class="nc" id="L64">                        Div messageSection = new Div();</span>
-<span class="nc" id="L65">                        messageSection.add(message.getMessage());</span>
-<span class="nc" id="L66">                        li.add(link);</span>
-<span class="nc" id="L67">                        link.add(topSection);</span>
-<span class="nc" id="L68">                        link.add(messageSection);</span>
-<span class="nc" id="L69">                        return li;</span>
-<span class="nc" id="L70">            }).forEach((li)</span>
+<span class="nc" id="L62">                        Div messageSection = new Div();</span>
+<span class="nc" id="L63">                        messageSection.add(message.getMessage());</span>
+<span class="nc" id="L64">                        li.add(link);</span>
+<span class="nc" id="L65">                        link.add(topSection);</span>
+<span class="nc" id="L66">                        link.add(messageSection);</span>
+<span class="nc" id="L67">                        return li;</span>
+<span class="nc" id="L68">            }).forEach((li)</span>
                     -&gt; 
                     {
-<span class="nc" id="L73">                        getDropDownContents().add(li);</span>
-<span class="nc" id="L74">            });</span>
+<span class="nc" id="L71">                        getDropDownContents().add(li);</span>
+<span class="nc" id="L72">            });</span>
         }
-<span class="nc" id="L76">        super.preConfigure();</span>
-<span class="nc" id="L77">    }</span>
+<span class="nc" id="L74">        super.preConfigure();</span>
+<span class="nc" id="L75">    }</span>
 
     /**
      * Construct a new sb admin 2 dropdown formatted as messages
      */
     public SB2DropDownMessages()
     {
-<span class="nc" id="L84">        this(null);</span>
-<span class="nc" id="L85">    }</span>
+<span class="nc" id="L82">        this(null);</span>
+<span class="nc" id="L83">    }</span>
 
     /**
      * Construct a new sb admin 2 dropdown formatted as messages
@@ -90,10 +88,10 @@ public class SB2DropDownMessages extends SB2DropDown
      * @param messages
      */
     public SB2DropDownMessages(ArrayList&lt;SB2DropDownMessage&gt; messages)
-<span class="nc" id="L93">    {</span>
-<span class="nc" id="L94">        this.messages = messages;</span>
-<span class="nc" id="L95">        getDropDownContents().addClass(SB2ThemeClasses.DropDown_Messages);</span>
-<span class="nc" id="L96">    }</span>
+<span class="nc" id="L91">    {</span>
+<span class="nc" id="L92">        this.messages = messages;</span>
+<span class="nc" id="L93">        getDropDownContents().addClass(SB2ThemeClasses.DropDown_Messages);</span>
+<span class="nc" id="L94">    }</span>
 
     /**
      * Returns the current messages
@@ -102,11 +100,11 @@ public class SB2DropDownMessages extends SB2DropDown
      */
     public ArrayList&lt;SB2DropDownMessage&gt; getMessages()
     {
-<span class="nc bnc" id="L105" title="All 2 branches missed.">        if (messages == null)</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">        if (messages == null)</span>
         {
-<span class="nc" id="L107">            messages = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L105">            messages = new ArrayList&lt;&gt;();</span>
         }
-<span class="nc" id="L109">        return messages;</span>
+<span class="nc" id="L107">        return messages;</span>
     }
 
     /**
@@ -116,8 +114,8 @@ public class SB2DropDownMessages extends SB2DropDown
      */
     public void setMessages(ArrayList&lt;SB2DropDownMessage&gt; messages)
     {
-<span class="nc" id="L119">        this.messages = messages;</span>
-<span class="nc" id="L120">    }</span>
+<span class="nc" id="L117">        this.messages = messages;</span>
+<span class="nc" id="L118">    }</span>
 
     /**
      * Read from a URL
@@ -128,10 +126,10 @@ public class SB2DropDownMessages extends SB2DropDown
      */
     public static SB2DropDownMessages fromUrl(URL content) throws IOException
     {
-<span class="nc" id="L131">        ArrayList list2 = JavaScriptPart.FromToList(content, SB2DropDownMessage[].class);</span>
-<span class="nc" id="L132">        SB2DropDownMessages messages = new SB2DropDownMessages(list2);</span>
-<span class="nc" id="L133">        messages.preConfigure();</span>
-<span class="nc" id="L134">        return messages;</span>
+<span class="nc" id="L129">        ArrayList list2 = JavaScriptPart.FromToList(content, SB2DropDownMessage[].class);</span>
+<span class="nc" id="L130">        SB2DropDownMessages messages = new SB2DropDownMessages(list2);</span>
+<span class="nc" id="L131">        messages.preConfigure();</span>
+<span class="nc" id="L132">        return messages;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

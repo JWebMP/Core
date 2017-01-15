@@ -14,36 +14,50 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
-
 package za.co.mmagon.jwebswing.components.bootstrap;
 
 import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.components.bootstrap.columnlayout.IBSColumnOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.IBSComponentOptions;
 
 /**
  * Shortcut for writing column Div's and spans for bootstrap
+ *
  * @author GedMarc
  * @since Oct 10, 2016
  * @version 1.0
- * 
+ *
  */
 public class BSColumn extends Div
 {
 
     private static final long serialVersionUID = 1L;
 
-    public BSColumn (IBSColumnOptions...columnOptions)
-<span class="nc" id="L36">    {</span>
-<span class="nc bnc" id="L37" title="All 2 branches missed.">        if(columnOptions != null)</span>
-<span class="nc bnc" id="L38" title="All 2 branches missed.">        for (IBSColumnOptions columnOption : columnOptions)</span>
+    /**
+     * Supply a list of column options for this div
+     *
+     * @param columnOptions
+     */
+    public BSColumn(IBSComponentOptions... columnOptions)
+<span class="fc" id="L41">    {</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        if (columnOptions != null)</span>
         {
-<span class="nc" id="L40">            addClass(columnOption.toString());</span>
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">            for (IBSComponentOptions columnOption : columnOptions)</span>
+            {
+<span class="nc" id="L46">                addClass(columnOption.toString());</span>
+            }
         }
-<span class="nc" id="L42">    }</span>
-    
-    public static BSColumn newInstance(IBSColumnOptions...columnOptions)
+<span class="fc" id="L49">    }</span>
+
+    /**
+     * Constructs a new instance with the given column options
+     *
+     * @param columnOptions
+     *
+     * @return
+     */
+    public static BSColumn newInstance(IBSComponentOptions... columnOptions)
     {
-<span class="nc" id="L46">        return new BSColumn(columnOptions);</span>
+<span class="fc" id="L60">        return new BSColumn(columnOptions);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

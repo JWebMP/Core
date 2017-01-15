@@ -115,7 +115,7 @@ public class BodyTest extends BaseTestClass
         p.getOptions().setjQueryUIEnabled(true);
         WebReference.setIsLocal(false);
         System.out.println(p.toString(true));
-        assertEquals("<<!DOCTYPE html>\n"
+        assertEquals("<!DOCTYPE html>\n"
                 + "<html>\n"
                 + "	<head>\n"
                 + "		<link href=\"https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css\" rel=\"stylesheet\" type=\"text/css\">\n"

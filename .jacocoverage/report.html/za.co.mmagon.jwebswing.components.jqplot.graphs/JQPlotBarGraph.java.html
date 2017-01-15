@@ -16,12 +16,9 @@
  */
 package za.co.mmagon.jwebswing.components.jqplot.graphs;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.*;
-import za.co.mmagon.logger.LogFactory;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.Orientation;
 import za.co.mmagon.jwebswing.components.jqplot.JQPlotGraph;
 import za.co.mmagon.jwebswing.components.jqplot.graphs.display.JQPlotBar;
@@ -30,6 +27,7 @@ import za.co.mmagon.jwebswing.components.jqplot.options.axis.JQPlotAxisOptions;
 import za.co.mmagon.jwebswing.components.jqplot.options.series.JQPlotSeriesBarOptions;
 import za.co.mmagon.jwebswing.components.jqplot.references.JQPlotJavascriptReferencePool;
 import za.co.mmagon.jwebswing.generics.CompassPoints;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Constructs a new JQPlotBar Graph default series display
@@ -44,7 +42,7 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
     /**
      * The logger for the swing Servlet
      */
-<span class="fc" id="L47">    private static final Logger LOG = LogFactory.getInstance().getLogger(&quot;JQPlotBarGraph&quot;);</span>
+<span class="fc" id="L45">    private static final Logger LOG = LogFactory.getInstance().getLogger(&quot;JQPlotBarGraph&quot;);</span>
     /**
      * Version 1
      */
@@ -52,7 +50,7 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
     /**
      * How many dimensions
      */
-<span class="fc" id="L55">    private boolean TwoD = false;</span>
+<span class="fc" id="L53">    private boolean TwoD = false;</span>
 
     /**
      * The category or tick values
@@ -62,7 +60,7 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
     /**
      * Each of the separate bar groups to be applied
      */
-    private Map&lt;String, List&lt;JQPlotBar&gt;&gt; barGroups;
+    private HashMap&lt;String, List&lt;JQPlotBar&gt;&gt; barGroups;
 
     /**
      * Vertical or Horizontal
@@ -72,9 +70,15 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
     /**
      * The bar graph options
      */
-<span class="fc" id="L75">    protected JQPlotSeriesBarOptions barGraphOptions = null;</span>
+<span class="fc" id="L73">    protected JQPlotSeriesBarOptions barGraphOptions = null;</span>
 
+    /**
+     * If the graph is rendered as a cluster
+     */
     private boolean clustered;
+    /**
+     * If the graph is rendering as a waterfall
+     */
     private boolean waterfall;
 
     /**
@@ -83,72 +87,72 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
      * @param orientation Vertical or Horizontal. Configures where to apply the Tick Renderer. Don't ever make this null
      */
     public JQPlotBarGraph(Orientation orientation)
-<span class="fc" id="L86">    {</span>
-<span class="fc" id="L87">        setOrientation(orientation);</span>
-<span class="fc" id="L88">        getJavascriptReferences().add(JQPlotJavascriptReferencePool.BarRenderer.getReference());</span>
-<span class="fc" id="L89">        getOptions().getSeriesDefaults().setRendererOptions(getBarGraphOptions());</span>
-<span class="fc" id="L90">    }</span>
+<span class="fc" id="L90">    {</span>
+<span class="fc" id="L91">        setOrientation(orientation);</span>
+<span class="fc" id="L92">        getJavascriptReferences().add(JQPlotJavascriptReferencePool.BarRenderer.getReference());</span>
+<span class="fc" id="L93">        getOptions().getSeriesDefaults().setRendererOptions(getBarGraphOptions());</span>
+<span class="fc" id="L94">    }</span>
 
     /**
      * Adds a new bar for cluster graphs for each bar value to have a series name
      * &lt;p&gt;
      * @param xAxisName The tick or category value
-     * @param BarName The yAxis Value
-     * @param barValue The actual bar value
+     * @param BarName   The yAxis Value
+     * @param barValue  The actual bar value
      *
      */
     public void addBar(String xAxisName, String BarName, Double barValue)
     {
-<span class="nc" id="L102">        JQPlotBar bar = new JQPlotBar(xAxisName, BarName, barValue);</span>
-<span class="nc" id="L103">        setClustered(true);</span>
-<span class="nc" id="L104">        bar.setClustered(true);</span>
-<span class="nc" id="L105">        addBar(bar);</span>
-<span class="nc" id="L106">    }</span>
+<span class="nc" id="L106">        JQPlotBar bar = new JQPlotBar(xAxisName, BarName, barValue);</span>
+<span class="nc" id="L107">        setClustered(true);</span>
+<span class="nc" id="L108">        bar.setClustered(true);</span>
+<span class="nc" id="L109">        addBar(bar);</span>
+<span class="nc" id="L110">    }</span>
 
     /**
      * Adds a new bar and category to the 0 bar group number for waterfall standard graphs
      * &lt;p&gt;
-     * @param xAxisName The tick or category value
+     * @param xAxisName     The tick or category value
      * @param startingPoint The starting point for a bar
-     * @param barValue The actual bar value
+     * @param barValue      The actual bar value
      *
      */
     public void addBar(String xAxisName, Double startingPoint, Double barValue)
     {
-<span class="nc" id="L118">        JQPlotBar bar = new JQPlotBar(xAxisName, startingPoint, barValue);</span>
-<span class="nc" id="L119">        getBarGraphOptions().setWaterfall(true);</span>
-<span class="nc" id="L120">        setWaterfall(true);</span>
-<span class="nc" id="L121">        addBar(bar);</span>
-<span class="nc" id="L122">    }</span>
+<span class="nc" id="L122">        JQPlotBar bar = new JQPlotBar(xAxisName, startingPoint, barValue);</span>
+<span class="nc" id="L123">        getBarGraphOptions().setWaterfall(true);</span>
+<span class="nc" id="L124">        setWaterfall(true);</span>
+<span class="nc" id="L125">        addBar(bar);</span>
+<span class="nc" id="L126">    }</span>
 
     /**
      * Adds a new bar and category to the 0 bar group number for waterfall clustered graphs
      * &lt;p&gt;
-     * @param xAxisName The tick or category value
-     * @param BarName The yAxis Value
+     * @param xAxisName     The tick or category value
+     * @param BarName       The yAxis Value
      * @param startingPoint The starting point for a bar
-     * @param barValue The actual bar value
+     * @param barValue      The actual bar value
      *
      */
     public void addBar(String xAxisName, String BarName, Double startingPoint, Double barValue)
     {
-<span class="nc" id="L135">        JQPlotBar bar = new JQPlotBar(xAxisName, BarName, startingPoint, barValue);</span>
-<span class="nc" id="L136">        getBarGraphOptions().setWaterfall(true);</span>
-<span class="nc" id="L137">        setWaterfall(true);</span>
-<span class="nc" id="L138">        addBar(bar);</span>
-<span class="nc" id="L139">    }</span>
+<span class="nc" id="L139">        JQPlotBar bar = new JQPlotBar(xAxisName, BarName, startingPoint, barValue);</span>
+<span class="nc" id="L140">        getBarGraphOptions().setWaterfall(true);</span>
+<span class="nc" id="L141">        setWaterfall(true);</span>
+<span class="nc" id="L142">        addBar(bar);</span>
+<span class="nc" id="L143">    }</span>
 
     /**
      * Adds a new bar and category to the 0 bar group number
      * &lt;p&gt;
      * @param XAxisValue The tick or category value
-     * @param dataValue The yAxis Value
+     * @param dataValue  The yAxis Value
      */
     public void addBar(String XAxisValue, double dataValue)
     {
-<span class="fc" id="L149">        JQPlotBar bar = new JQPlotBar(XAxisValue, dataValue);</span>
-<span class="fc" id="L150">        addBar(bar);</span>
-<span class="fc" id="L151">    }</span>
+<span class="fc" id="L153">        JQPlotBar bar = new JQPlotBar(XAxisValue, dataValue);</span>
+<span class="fc" id="L154">        addBar(bar);</span>
+<span class="fc" id="L155">    }</span>
 
     /**
      * Adds a new bar and x Axis to the 0 bar group
@@ -157,25 +161,26 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
      */
     public void addBar(JQPlotBar bar)
     {
-<span class="fc" id="L160">        List&lt;JQPlotBar&gt; bars = getBarGroup(bar.getxAxisValue());</span>
-<span class="fc" id="L161">        bars.add(bar);</span>
-<span class="fc" id="L162">    }</span>
+<span class="fc" id="L164">        List&lt;JQPlotBar&gt; bars = getBarGroup(bar.getxAxisValue());</span>
+<span class="fc" id="L165">        bars.add(bar);</span>
+<span class="fc" id="L166">    }</span>
 
     /**
      * Returns the bar group associated with the category. If no group is found a new one is created
      *
      * @param xAxisValue
+     *
      * @return
      */
     protected List&lt;JQPlotBar&gt; getBarGroup(String xAxisValue)
     {
-<span class="fc bfc" id="L172" title="All 2 branches covered.">        if (!getBarGroups().containsKey(xAxisValue))</span>
+<span class="fc bfc" id="L177" title="All 2 branches covered.">        if (!getBarGroups().containsKey(xAxisValue))</span>
         {
-<span class="fc" id="L174">            getBarGroups().put(xAxisValue, new ArrayList&lt;&gt;());</span>
+<span class="fc" id="L179">            getBarGroups().put(xAxisValue, new ArrayList&lt;&gt;());</span>
         }
-<span class="fc" id="L176">        List&lt;JQPlotBar&gt; bars = getBarGroups().get(xAxisValue);</span>
+<span class="fc" id="L181">        List&lt;JQPlotBar&gt; bars = getBarGroups().get(xAxisValue);</span>
 
-<span class="fc" id="L178">        return bars;</span>
+<span class="fc" id="L183">        return bars;</span>
     }
 
     /**
@@ -185,17 +190,17 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
      */
     public Integer getNumberOfClusterBars()
     {
-<span class="fc" id="L188">        int clusterBars = 0;</span>
-<span class="fc bfc" id="L189" title="All 2 branches covered.">        for (Map.Entry&lt;String, List&lt;JQPlotBar&gt;&gt; entry : getBarGroups().entrySet())</span>
+<span class="fc" id="L193">        int clusterBars = 0;</span>
+<span class="fc bfc" id="L194" title="All 2 branches covered.">        for (Map.Entry&lt;String, List&lt;JQPlotBar&gt;&gt; entry : getBarGroups().entrySet())</span>
         {
-<span class="fc" id="L191">            String key = entry.getKey();</span>
-<span class="fc" id="L192">            List&lt;JQPlotBar&gt; value = entry.getValue();</span>
-<span class="fc bfc" id="L193" title="All 2 branches covered.">            if (value.size() &gt; clusterBars)</span>
+<span class="fc" id="L196">            String key = entry.getKey();</span>
+<span class="fc" id="L197">            List&lt;JQPlotBar&gt; value = entry.getValue();</span>
+<span class="fc bfc" id="L198" title="All 2 branches covered.">            if (value.size() &gt; clusterBars)</span>
             {
-<span class="fc" id="L195">                clusterBars = value.size();</span>
+<span class="fc" id="L200">                clusterBars = value.size();</span>
             }
-<span class="fc" id="L197">        }</span>
-<span class="fc" id="L198">        return clusterBars;</span>
+<span class="fc" id="L202">        }</span>
+<span class="fc" id="L203">        return clusterBars;</span>
     }
 
     /**
@@ -205,7 +210,7 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
      */
     public Integer getNumberOfBarGroups()
     {
-<span class="fc" id="L208">        return getBarGroups().size();</span>
+<span class="fc" id="L213">        return getBarGroups().size();</span>
     }
 
     /**
@@ -214,58 +219,59 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
     @Override
     public void preConfigure()
     {
-<span class="fc" id="L217">        super.preConfigure();</span>
-<span class="pc bpc" id="L218" title="2 of 3 branches missed.">        switch (orientation)</span>
+<span class="fc" id="L222">        super.preConfigure();</span>
+<span class="pc bpc" id="L223" title="2 of 3 branches missed.">        switch (orientation)</span>
         {
             case HORIZONTAL:
             {
-<span class="nc" id="L222">                JQPlotAxisOptions axis = getOptions().getAxes().getyAxis();</span>
-<span class="nc" id="L223">                axis.setRendererOptions(new JQPlotAxisLabelRendererOptionsCategoryLabels(this));</span>
-<span class="nc" id="L224">                axis.setTicks(getCategoryTickValues());</span>
-<span class="nc" id="L225">                break;</span>
+<span class="nc" id="L227">                JQPlotAxisOptions axis = getOptions().getAxes().getyAxis();</span>
+<span class="nc" id="L228">                axis.setRendererOptions(new JQPlotAxisLabelRendererOptionsCategoryLabels(this));</span>
+<span class="nc" id="L229">                axis.setTicks(getCategoryTickValues());</span>
+<span class="nc" id="L230">                break;</span>
             }
             case VERTICAL:
             {
-<span class="fc" id="L229">                JQPlotAxisOptions axis = getOptions().getAxes().getxAxis();</span>
-<span class="fc" id="L230">                axis.setRendererOptions(new JQPlotAxisLabelRendererOptionsCategoryLabels(this));</span>
-<span class="fc" id="L231">                axis.setTicks(getCategoryTickValues());</span>
-<span class="fc" id="L232">                break;</span>
+<span class="fc" id="L234">                JQPlotAxisOptions axis = getOptions().getAxes().getxAxis();</span>
+<span class="fc" id="L235">                axis.setRendererOptions(new JQPlotAxisLabelRendererOptionsCategoryLabels(this));</span>
+<span class="fc" id="L236">                axis.setTicks(getCategoryTickValues());</span>
+<span class="fc" id="L237">                break;</span>
             }
             default:
             {
-<span class="nc" id="L236">                JQPlotAxisOptions axis = getOptions().getAxes().getxAxis();</span>
-<span class="nc" id="L237">                axis.setRendererOptions(new JQPlotAxisLabelRendererOptionsCategoryLabels(this));</span>
-<span class="nc" id="L238">                axis.setTicks(getCategoryTickValues());</span>
+<span class="nc" id="L241">                JQPlotAxisOptions axis = getOptions().getAxes().getxAxis();</span>
+<span class="nc" id="L242">                axis.setRendererOptions(new JQPlotAxisLabelRendererOptionsCategoryLabels(this));</span>
+<span class="nc" id="L243">                axis.setTicks(getCategoryTickValues());</span>
             }
         }
 
-<span class="fc" id="L242">        getBarGroups().entrySet().stream().map(entry -&gt;</span>
+<span class="fc" id="L247">        getBarGroups().entrySet().stream().map(entry -&gt;</span>
         {
-<span class="fc" id="L244">            String key = entry.getKey();</span>
-<span class="fc" id="L245">            return entry;</span>
-<span class="fc" id="L246">        }).map(entry -&gt; entry.getValue()).forEachOrdered(value -&gt;</span>
+<span class="fc" id="L249">            String key = entry.getKey();</span>
+<span class="fc" id="L250">            return entry;</span>
+<span class="fc" id="L251">        }).map(entry -&gt; entry.getValue()).forEachOrdered(value -&gt;</span>
         {
-<span class="fc" id="L248">            value.stream().filter(next -&gt;</span>
+<span class="fc" id="L253">            value.stream().filter(next -&gt;</span>
             {
-<span class="pc bpc" id="L250" title="1 of 2 branches missed.">                return next.getyValue() != null;</span>
-<span class="pc bpc" id="L251" title="1 of 2 branches missed.">            }).filter(next -&gt; (next.getyValue() &lt; 0)).map(_item -&gt; (JQPlotSeriesBarOptions) getOptions().getSeriesDefaults().getRendererOptions()).forEachOrdered((barOptions) -&gt;</span>
+<span class="pc bpc" id="L255" title="1 of 2 branches missed.">                return next.getyValue() != null;</span>
+<span class="pc bpc" id="L256" title="1 of 2 branches missed.">            }).filter(next -&gt; (next.getyValue() &lt; 0)).map(_item -&gt; (JQPlotSeriesBarOptions) getOptions().getSeriesDefaults().getRendererOptions()).forEachOrdered((barOptions) -&gt;</span>
             {
-<span class="nc" id="L253">                barOptions.setFillToZero(true);</span>
-<span class="nc" id="L254">            });</span>
-<span class="fc" id="L255">        });</span>
-<span class="fc" id="L256">    }</span>
+<span class="nc" id="L258">                barOptions.setFillToZero(true);</span>
+<span class="nc" id="L259">            });</span>
+<span class="fc" id="L260">        });</span>
+<span class="fc" id="L261">    }</span>
 
     /**
      * Renders each bar in a list
      *
      * @param value
+     *
      * @return
      */
     protected StringBuilder renderBarArrayList(List&lt;JQPlotBar&gt; value)
     {
-<span class="fc" id="L266">        StringBuilder sb = new StringBuilder();</span>
-<span class="fc" id="L267">        value.forEach(sb::append);</span>
-<span class="fc" id="L268">        return sb;</span>
+<span class="fc" id="L272">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L273">        value.forEach(sb::append);</span>
+<span class="fc" id="L274">        return sb;</span>
     }
 
     /**
@@ -276,111 +282,111 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
     @Override
     protected StringBuilder getDataPointRender()
     {
-<span class="fc" id="L279">        StringBuilder sb = new StringBuilder();</span>
-<span class="fc" id="L280">        sb.append(&quot;[&quot;);</span>
+<span class="fc" id="L285">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L286">        sb.append(&quot;[&quot;);</span>
 
-<span class="fc" id="L282">        int clusterBarCount = getNumberOfClusterBars();</span>
-<span class="fc" id="L283">        int categoryCount = getNumberOfBarGroups();</span>
+<span class="fc" id="L288">        int clusterBarCount = getNumberOfClusterBars();</span>
+<span class="fc" id="L289">        int categoryCount = getNumberOfBarGroups();</span>
 
-<span class="fc bfc" id="L285" title="All 2 branches covered.">        if (clusterBarCount &gt; 1)</span>
+<span class="fc bfc" id="L291" title="All 2 branches covered.">        if (clusterBarCount &gt; 1)</span>
         {
-<span class="fc" id="L287">            setTwoD(true);</span>
+<span class="fc" id="L293">            setTwoD(true);</span>
         }
 
-<span class="fc bfc" id="L290" title="All 2 branches covered.">        if (!isTwoD())</span>
+<span class="fc bfc" id="L296" title="All 2 branches covered.">        if (!isTwoD())</span>
         {
-<span class="fc" id="L292">            sb.append(&quot;[&quot;);</span>
-<span class="fc bfc" id="L293" title="All 2 branches covered.">            for (Map.Entry&lt;String, List&lt;JQPlotBar&gt;&gt; entrySet : getBarGroups().entrySet())</span>
+<span class="fc" id="L298">            sb.append(&quot;[&quot;);</span>
+<span class="fc bfc" id="L299" title="All 2 branches covered.">            for (Map.Entry&lt;String, List&lt;JQPlotBar&gt;&gt; entrySet : getBarGroups().entrySet())</span>
             {
-<span class="fc" id="L295">                String key = entrySet.getKey();</span>
-<span class="fc" id="L296">                List&lt;JQPlotBar&gt; value = entrySet.getValue();</span>
-<span class="fc" id="L297">                sb.append(renderBarArrayList(value));</span>
-<span class="fc" id="L298">            }</span>
-<span class="fc bfc" id="L299" title="All 2 branches covered.">            if (sb.indexOf(&quot;,&quot;) &gt; -1)</span>
+<span class="fc" id="L301">                String key = entrySet.getKey();</span>
+<span class="fc" id="L302">                List&lt;JQPlotBar&gt; value = entrySet.getValue();</span>
+<span class="fc" id="L303">                sb.append(renderBarArrayList(value));</span>
+<span class="fc" id="L304">            }</span>
+<span class="fc bfc" id="L305" title="All 2 branches covered.">            if (sb.indexOf(&quot;,&quot;) &gt; -1)</span>
             {
-<span class="fc" id="L301">                sb = sb.deleteCharAt(sb.lastIndexOf(&quot;,&quot;));</span>
+<span class="fc" id="L307">                sb = sb.deleteCharAt(sb.lastIndexOf(&quot;,&quot;));</span>
             }
-<span class="fc" id="L303">            sb.append(&quot;]&quot;);</span>
+<span class="fc" id="L309">            sb.append(&quot;]&quot;);</span>
         }
         else
         {
-<span class="fc" id="L307">            Object[] rows = new Object[clusterBarCount];</span>
+<span class="fc" id="L313">            Object[] rows = new Object[clusterBarCount];</span>
             Object[] valuesPerRow;//
 
             //The expected number of bars per category, aka number of arrays to build
-<span class="fc bfc" id="L311" title="All 2 branches covered.">            for (int i = 0; i &lt; clusterBarCount; i++)</span>
+<span class="fc bfc" id="L317" title="All 2 branches covered.">            for (int i = 0; i &lt; clusterBarCount; i++)</span>
             {
-<span class="fc" id="L313">                rows[i] = valuesPerRow = new Object[categoryCount];</span>
+<span class="fc" id="L319">                rows[i] = valuesPerRow = new Object[categoryCount];</span>
 
                 //Get the int i number bar number per category;
-<span class="fc bfc" id="L316" title="All 2 branches covered.">                for (int j = 0; j &lt; categoryCount; j++)</span>
+<span class="fc bfc" id="L322" title="All 2 branches covered.">                for (int j = 0; j &lt; categoryCount; j++)</span>
                 {
-<span class="fc" id="L318">                    int mapPosition = 0;</span>
-<span class="pc bpc" id="L319" title="1 of 2 branches missed.">                    for (Map.Entry&lt;String, List&lt;JQPlotBar&gt;&gt; entry : getBarGroups().entrySet())</span>
+<span class="fc" id="L324">                    int mapPosition = 0;</span>
+<span class="pc bpc" id="L325" title="1 of 2 branches missed.">                    for (Map.Entry&lt;String, List&lt;JQPlotBar&gt;&gt; entry : getBarGroups().entrySet())</span>
                     {
-<span class="fc" id="L321">                        String key = entry.getKey();</span>
-<span class="fc" id="L322">                        List&lt;JQPlotBar&gt; value = entry.getValue();</span>
+<span class="fc" id="L327">                        String key = entry.getKey();</span>
+<span class="fc" id="L328">                        List&lt;JQPlotBar&gt; value = entry.getValue();</span>
 
-<span class="pc bpc" id="L324" title="1 of 2 branches missed.">                        if (i &gt;= value.size())</span>
+<span class="pc bpc" id="L330" title="1 of 2 branches missed.">                        if (i &gt;= value.size())</span>
                         {
-<span class="nc" id="L326">                            break;</span>
+<span class="nc" id="L332">                            break;</span>
                         }
 
-<span class="fc bfc" id="L329" title="All 2 branches covered.">                        if (mapPosition == j)</span>
+<span class="fc bfc" id="L335" title="All 2 branches covered.">                        if (mapPosition == j)</span>
                         {
                             try
                             {
-<span class="fc" id="L333">                                JQPlotBar o = value.get(i);</span>
-<span class="pc bpc" id="L334" title="1 of 2 branches missed.">                                if (o != null)</span>
+<span class="fc" id="L339">                                JQPlotBar o = value.get(i);</span>
+<span class="pc bpc" id="L340" title="1 of 2 branches missed.">                                if (o != null)</span>
                                 {
-<span class="pc bpc" id="L336" title="1 of 2 branches missed.">                                    if (o.getyValue() == null)</span>
+<span class="pc bpc" id="L342" title="1 of 2 branches missed.">                                    if (o.getyValue() == null)</span>
                                     {
-<span class="nc" id="L338">                                        valuesPerRow[j] = 0;</span>
+<span class="nc" id="L344">                                        valuesPerRow[j] = 0;</span>
                                     }
                                     else
                                     {
-<span class="fc" id="L342">                                        valuesPerRow[j] = o.getyValue();</span>
+<span class="fc" id="L348">                                        valuesPerRow[j] = o.getyValue();</span>
                                     }
                                 }
                             }
-<span class="nc" id="L346">                            catch (Exception e)</span>
+<span class="nc" id="L352">                            catch (Exception e)</span>
                             {
-<span class="nc" id="L348">                                LOG.log(Level.WARNING,&quot;Unable to generate data&quot;,e);</span>
-<span class="nc" id="L349">                                valuesPerRow[j] = &quot;&quot;;</span>
-<span class="fc" id="L350">                            }</span>
-<span class="nc" id="L351">                            break;</span>
+<span class="nc" id="L354">                                LOG.log(Level.WARNING, &quot;Unable to generate data&quot;, e);</span>
+<span class="nc" id="L355">                                valuesPerRow[j] = &quot;&quot;;</span>
+<span class="fc" id="L356">                            }</span>
+<span class="nc" id="L357">                            break;</span>
                         }
-<span class="fc" id="L353">                        mapPosition++;</span>
-<span class="fc" id="L354">                    }</span>
+<span class="fc" id="L359">                        mapPosition++;</span>
+<span class="fc" id="L360">                    }</span>
                 }
 
             }
             //Load values from Array
-<span class="fc bfc" id="L359" title="All 2 branches covered.">            for (Object row1 : rows)</span>
+<span class="fc bfc" id="L365" title="All 2 branches covered.">            for (Object row1 : rows)</span>
             {
-<span class="fc" id="L361">                Object[] row = (Object[]) row1;</span>
-<span class="fc" id="L362">                sb.append(&quot;[&quot;);</span>
-<span class="fc bfc" id="L363" title="All 2 branches covered.">                for (Object value : row)</span>
+<span class="fc" id="L367">                Object[] row = (Object[]) row1;</span>
+<span class="fc" id="L368">                sb.append(&quot;[&quot;);</span>
+<span class="fc bfc" id="L369" title="All 2 branches covered.">                for (Object value : row)</span>
                 {
-<span class="pc bpc" id="L365" title="1 of 2 branches missed.">                    if (value == null)</span>
+<span class="pc bpc" id="L371" title="1 of 2 branches missed.">                    if (value == null)</span>
                     {
-<span class="nc" id="L367">                        value = 0;</span>
+<span class="nc" id="L373">                        value = 0;</span>
                     }
-<span class="fc" id="L369">                    sb.append(value).append(&quot;,&quot;);</span>
+<span class="fc" id="L375">                    sb.append(value).append(&quot;,&quot;);</span>
                 }
-<span class="pc bpc" id="L371" title="1 of 2 branches missed.">                if (sb.indexOf(&quot;,&quot;) &gt; -1)</span>
+<span class="pc bpc" id="L377" title="1 of 2 branches missed.">                if (sb.indexOf(&quot;,&quot;) &gt; -1)</span>
                 {
-<span class="fc" id="L373">                    sb = sb.deleteCharAt(sb.lastIndexOf(&quot;,&quot;));</span>
+<span class="fc" id="L379">                    sb = sb.deleteCharAt(sb.lastIndexOf(&quot;,&quot;));</span>
                 }
-<span class="fc" id="L375">                sb.append(&quot;],&quot;);</span>
+<span class="fc" id="L381">                sb.append(&quot;],&quot;);</span>
             }
-<span class="pc bpc" id="L377" title="1 of 2 branches missed.">            if (sb.indexOf(&quot;],&quot;) &gt; -1)</span>
+<span class="pc bpc" id="L383" title="1 of 2 branches missed.">            if (sb.indexOf(&quot;],&quot;) &gt; -1)</span>
             {
-<span class="fc" id="L379">                sb = sb.deleteCharAt(sb.lastIndexOf(&quot;,&quot;));</span>
+<span class="fc" id="L385">                sb = sb.deleteCharAt(sb.lastIndexOf(&quot;,&quot;));</span>
             }
         }
-<span class="fc" id="L382">        sb.append(&quot;]&quot;);</span>
-<span class="fc" id="L383">        return sb;</span>
+<span class="fc" id="L388">        sb.append(&quot;]&quot;);</span>
+<span class="fc" id="L389">        return sb;</span>
     }
 
     /**
@@ -390,7 +396,7 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
      */
     public boolean isTwoD()
     {
-<span class="fc" id="L393">        return TwoD;</span>
+<span class="fc" id="L399">        return TwoD;</span>
     }
 
     /**
@@ -400,8 +406,8 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
      */
     public void setTwoD(boolean TwoD)
     {
-<span class="fc" id="L403">        this.TwoD = TwoD;</span>
-<span class="fc" id="L404">    }</span>
+<span class="fc" id="L409">        this.TwoD = TwoD;</span>
+<span class="fc" id="L410">    }</span>
 
     /**
      * Returns the current tick values array
@@ -410,21 +416,21 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
      */
     public List&lt;String&gt; getCategoryTickValues()
     {
-<span class="fc bfc" id="L413" title="All 2 branches covered.">        if (categoryTickValues == null)</span>
+<span class="fc bfc" id="L419" title="All 2 branches covered.">        if (categoryTickValues == null)</span>
         {
-<span class="fc" id="L415">            categoryTickValues = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L421">            categoryTickValues = new ArrayList&lt;&gt;();</span>
         }
 
-<span class="fc" id="L418">        getBarGroups().entrySet().forEach((entry) -&gt;</span>
+<span class="fc" id="L424">        getBarGroups().entrySet().forEach((entry) -&gt;</span>
         {
-<span class="fc" id="L420">            String key = entry.getKey();</span>
-<span class="fc" id="L421">            List&lt;JQPlotBar&gt; value = entry.getValue();</span>
-<span class="pc bpc" id="L422" title="1 of 2 branches missed.">            if (!categoryTickValues.contains(key))</span>
+<span class="fc" id="L426">            String key = entry.getKey();</span>
+<span class="fc" id="L427">            List&lt;JQPlotBar&gt; value = entry.getValue();</span>
+<span class="pc bpc" id="L428" title="1 of 2 branches missed.">            if (!categoryTickValues.contains(key))</span>
             {
-<span class="fc" id="L424">                categoryTickValues.add(key);</span>
+<span class="fc" id="L430">                categoryTickValues.add(key);</span>
             }
-<span class="fc" id="L426">        });</span>
-<span class="fc" id="L427">        return categoryTickValues;</span>
+<span class="fc" id="L432">        });</span>
+<span class="fc" id="L433">        return categoryTickValues;</span>
     }
 
     /**
@@ -435,11 +441,11 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
      */
     public Map&lt;String, List&lt;JQPlotBar&gt;&gt; getBarGroups()
     {
-<span class="fc bfc" id="L438" title="All 2 branches covered.">        if (barGroups == null)</span>
+<span class="fc bfc" id="L444" title="All 2 branches covered.">        if (barGroups == null)</span>
         {
-<span class="fc" id="L440">            barGroups = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L446">            barGroups = new LinkedHashMap&lt;&gt;();</span>
         }
-<span class="fc" id="L442">        return barGroups;</span>
+<span class="fc" id="L448">        return barGroups;</span>
     }
 
     /**
@@ -449,7 +455,7 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
      */
     public Orientation getOrientation()
     {
-<span class="nc" id="L452">        return orientation;</span>
+<span class="nc" id="L458">        return orientation;</span>
     }
 
     /**
@@ -459,40 +465,40 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
      */
     public final void setOrientation(Orientation orientation)
     {
-<span class="fc" id="L462">        this.orientation = orientation;</span>
-<span class="pc bpc" id="L463" title="1 of 2 branches missed.">        switch (orientation)</span>
+<span class="fc" id="L468">        this.orientation = orientation;</span>
+<span class="pc bpc" id="L469" title="1 of 2 branches missed.">        switch (orientation)</span>
         {
             case HORIZONTAL:
             {
-<span class="nc" id="L467">                JQPlotAxisOptions axis = getOptions().getAxes().getyAxis();</span>
-<span class="nc" id="L468">                axis.setRendererOptions(new JQPlotAxisLabelRendererOptionsCategoryLabels(this));</span>
-<span class="nc" id="L469">                axis.setTicks(getCategoryTickValues());</span>
+<span class="nc" id="L473">                JQPlotAxisOptions axis = getOptions().getAxes().getyAxis();</span>
+<span class="nc" id="L474">                axis.setRendererOptions(new JQPlotAxisLabelRendererOptionsCategoryLabels(this));</span>
+<span class="nc" id="L475">                axis.setTicks(getCategoryTickValues());</span>
 
-<span class="nc" id="L471">                getSeriesDefaultBarOptions().setBarDirection(Orientation.HORIZONTAL);</span>
-<span class="nc bnc" id="L472" title="All 2 branches missed.">                if (!(getOptions().getSeriesDefaults().getPointLabels().getShow() != null))</span>
+<span class="nc" id="L477">                getSeriesDefaultBarOptions().setBarDirection(Orientation.HORIZONTAL);</span>
+<span class="nc bnc" id="L478" title="All 2 branches missed.">                if (!(getOptions().getSeriesDefaults().getPointLabels().getShow() != null))</span>
                 {
-<span class="nc" id="L474">                    getOptions().getSeriesDefaults().getPointLabels().setLocation(CompassPoints.E);</span>
-<span class="nc" id="L475">                    getOptions().getSeriesDefaults().getPointLabels().setEdgeTolerance(-15);</span>
-<span class="nc" id="L476">                    getOptions().getSeriesDefaults().setShadowAngle(135);</span>
+<span class="nc" id="L480">                    getOptions().getSeriesDefaults().getPointLabels().setLocation(CompassPoints.E);</span>
+<span class="nc" id="L481">                    getOptions().getSeriesDefaults().getPointLabels().setEdgeTolerance(-15);</span>
+<span class="nc" id="L482">                    getOptions().getSeriesDefaults().setShadowAngle(135);</span>
 
                 }
 
-<span class="nc" id="L480">                getOptions().getAxes().setxAxis(null);</span>
+<span class="nc" id="L486">                getOptions().getAxes().setxAxis(null);</span>
 
-<span class="nc" id="L482">                break;</span>
+<span class="nc" id="L488">                break;</span>
             }
             case VERTICAL:
             default:
             {
-<span class="fc" id="L487">                JQPlotAxisOptions axis = getOptions().getAxes().getxAxis();</span>
-<span class="fc" id="L488">                axis.setRendererOptions(new JQPlotAxisLabelRendererOptionsCategoryLabels(this));</span>
-<span class="fc" id="L489">                axis.setTicks(getCategoryTickValues());</span>
+<span class="fc" id="L493">                JQPlotAxisOptions axis = getOptions().getAxes().getxAxis();</span>
+<span class="fc" id="L494">                axis.setRendererOptions(new JQPlotAxisLabelRendererOptionsCategoryLabels(this));</span>
+<span class="fc" id="L495">                axis.setTicks(getCategoryTickValues());</span>
 
-<span class="fc" id="L491">                getOptions().getAxes().setyAxis(null);</span>
-<span class="fc" id="L492">                break;</span>
+<span class="fc" id="L497">                getOptions().getAxes().setyAxis(null);</span>
+<span class="fc" id="L498">                break;</span>
             }
         }
-<span class="fc" id="L495">    }</span>
+<span class="fc" id="L501">    }</span>
 
     /**
      * Sets the default bar options if null for series default
@@ -501,12 +507,12 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
      */
     public JQPlotSeriesBarOptions getSeriesDefaultBarOptions()
     {
-<span class="nc bnc" id="L504" title="All 2 branches missed.">        if (getOptions().getSeriesDefaults().getRendererOptions() == null)</span>
+<span class="nc bnc" id="L510" title="All 2 branches missed.">        if (getOptions().getSeriesDefaults().getRendererOptions() == null)</span>
         {
-<span class="nc" id="L506">            getOptions().getSeriesDefaults().setRendererOptions(getBarGraphOptions());</span>
+<span class="nc" id="L512">            getOptions().getSeriesDefaults().setRendererOptions(getBarGraphOptions());</span>
         }
 
-<span class="nc" id="L509">        return (JQPlotSeriesBarOptions) getOptions().getSeriesDefaults().getRendererOptions();</span>
+<span class="nc" id="L515">        return (JQPlotSeriesBarOptions) getOptions().getSeriesDefaults().getRendererOptions();</span>
     }
 
     /**
@@ -516,7 +522,7 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
      */
     public boolean isWaterfall()
     {
-<span class="nc" id="L519">        return waterfall;</span>
+<span class="nc" id="L525">        return waterfall;</span>
     }
 
     /**
@@ -526,8 +532,8 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
      */
     public void setWaterfall(boolean waterfall)
     {
-<span class="nc" id="L529">        this.waterfall = waterfall;</span>
-<span class="nc" id="L530">    }</span>
+<span class="nc" id="L535">        this.waterfall = waterfall;</span>
+<span class="nc" id="L536">    }</span>
 
     /**
      * gets if this is a clustered bar
@@ -536,7 +542,7 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
      */
     public boolean isClustered()
     {
-<span class="nc" id="L539">        return clustered;</span>
+<span class="nc" id="L545">        return clustered;</span>
     }
 
     /**
@@ -546,8 +552,8 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
      */
     public void setClustered(boolean clustered)
     {
-<span class="nc" id="L549">        this.clustered = clustered;</span>
-<span class="nc" id="L550">    }</span>
+<span class="nc" id="L555">        this.clustered = clustered;</span>
+<span class="nc" id="L556">    }</span>
 
     /**
      * Returns a new instance of the Bar Graph Options
@@ -556,11 +562,11 @@ public class JQPlotBarGraph extends JQPlotGraph&lt;JQPlotSeriesBarOptions&gt;
      */
     public final JQPlotSeriesBarOptions getBarGraphOptions()
     {
-<span class="pc bpc" id="L559" title="1 of 2 branches missed.">        if (barGraphOptions == null)</span>
+<span class="pc bpc" id="L565" title="1 of 2 branches missed.">        if (barGraphOptions == null)</span>
         {
-<span class="fc" id="L561">            barGraphOptions = new JQPlotSeriesBarOptions(this);</span>
+<span class="fc" id="L567">            barGraphOptions = new JQPlotSeriesBarOptions(this);</span>
         }
-<span class="fc" id="L563">        return barGraphOptions;</span>
+<span class="fc" id="L569">        return barGraphOptions;</span>
     }
 
 }

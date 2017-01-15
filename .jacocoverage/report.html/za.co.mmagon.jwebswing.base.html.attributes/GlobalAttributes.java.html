@@ -23,34 +23,61 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
      */
 <span class="fc" id="L24">    Title(),</span>
     /**
-     * Specifies the name of an anchor
-     * Not Supported in HTML5 use global attribute ID instead, but it is used everywhere by everything else. Just not by the HTML engine. and forms have to have them
+     * Specifies the name of an anchor Not Supported in HTML5 use global attribute ID instead, but it is used everywhere by everything else. Just not by the HTML engine. and forms have to have them
      */
-<span class="fc" id="L29">    Name(),</span>
+<span class="fc" id="L28">    Name(),</span>
     /**
      * Specifies one or more class-names for an element (refers to a class in a style sheet)
      */
-<span class="fc" id="L33">    Class(),</span>
+<span class="fc" id="L32">    Class(),</span>
     /**
      * Specifies a JWType handler for an element
      */
-<span class="fc" id="L37">    JWType(),</span>
+<span class="fc" id="L36">    JWType(),</span>
     /**
      * Specifies a type
      */
-<span class="fc" id="L41">    Type(),</span>
+<span class="fc" id="L40">    Type(),</span>
     /**
      * The JW Event Mappings
      */
-<span class="fc" id="L45">    Events(),</span>
+<span class="fc" id="L44">    Events(),</span>
     /**
      * Generic Value Mapping
      */
-<span class="fc" id="L49">    Value;</span>
+<span class="fc" id="L48">    Value,</span>
+    /**
+     * Screen Reader Labels
+     */
+<span class="fc" id="L52">    Aria_Label,</span>
+    /**
+     * Screen Reader Invisible
+     */
+<span class="fc" id="L56">    Aria_Hidden,</span>
+    /**
+     * Screen Reader to show pressed or not
+     */
+<span class="fc" id="L60">    Aria_Pressed,</span>
+    /**
+     * Screen Reader to show disabled
+     */
+<span class="fc" id="L64">    Aria_Disabled,</span>
+    /**
+     * Expanded on screen reader mode
+     */
+<span class="fc" id="L68">    Aria_Expanded,</span>
+    /**
+     * Screen reader has popup
+     */
+<span class="fc" id="L72">    Aria_HasPopup,</span>
+    /**
+     * Screen Reader labelled by
+     */
+<span class="fc" id="L76">    Aria_LabelledBy;</span>
 
     private GlobalAttributes()
-<span class="fc" id="L52">    {</span>
-<span class="fc" id="L53">    }</span>
+<span class="fc" id="L79">    {</span>
+<span class="fc" id="L80">    }</span>
 
     /**
      * Returns the lowercase
@@ -60,13 +87,13 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
     @Override
     public String toString()
     {
-<span class="fc" id="L63">        return name().toLowerCase();</span>
+<span class="fc" id="L90">        return name().toLowerCase();</span>
     }
 
     @Override
     public boolean isKeyword()
     {
-<span class="fc" id="L69">        return false;</span>
+<span class="fc" id="L96">        return false;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

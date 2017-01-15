@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jstree.plugins.onchangedevent;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
@@ -37,8 +38,8 @@ public class JSTreeOnChangedPluginDirective extends AngularDirectiveBase
      */
     public JSTreeOnChangedPluginDirective(AngularFeature angular)
     {
-<span class="nc" id="L40">        super(&quot;ngActivate&quot;, angular);</span>
-<span class="nc" id="L41">    }</span>
+<span class="nc" id="L41">        super(&quot;ngActivate&quot;, angular);</span>
+<span class="nc" id="L42">    }</span>
 
     /**
      * Renders the right click directive from the JavaScript file
@@ -48,7 +49,7 @@ public class JSTreeOnChangedPluginDirective extends AngularDirectiveBase
     @Override
     public String renderFunction()
     {
-<span class="nc" id="L51">        return getAngular().getFileTemplate(JSTreeOnChangedPluginDirective.class, &quot;JSTreeOnChangedPlugin&quot;).toString();</span>
+<span class="nc" id="L52">        return FileTemplates.getFileTemplate(JSTreeOnChangedPluginDirective.class, &quot;JSTreeOnChangedPlugin&quot;).toString();</span>
     }
 
 }

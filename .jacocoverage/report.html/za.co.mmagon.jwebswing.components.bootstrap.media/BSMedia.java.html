@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BSMedia.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.bootstrap.media</a> &gt; <span class="el_source">BSMedia.java</span></div><h1>BSMedia.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.bootstrap.media;
+
+import za.co.mmagon.jwebswing.base.ComponentHTMLBootstrapBase;
+import za.co.mmagon.jwebswing.base.html.*;
+
+/**
+ * Media object
+ * &lt;p&gt;
+ * The media object is an abstract element used as the basis for building more complex and repetitive components (like blog comments, Tweets, etc).
+ * &lt;p&gt;
+ * Included is support for left and right aligned content, content alignment options, nesting, and more.
+ *
+ * @author Marc Magon
+ * @since 29 Aug 2015
+ * @version 1.0
+ */
+public class BSMedia extends Div&lt;BSMediaChildren, BSMediaAttributes, BSMediaFeatures, BSMediaEvents, BSMedia&gt; implements IBSMedia
+{
+
+    private static final long serialVersionUID = 1L;
+    /**
+     * The feature of the media object
+     */
+    private BSMediaFeature feature;
+    /**
+     * The link for the media object
+     */
+    private Link mediaLink;
+    /**
+     * The body for the media object
+     */
+    private Div mediaBody;
+    /**
+     * The header for the media object
+     */
+    private HeaderText mediaHeader;
+    /**
+     * The media object being displayed (usually image or something)
+     */
+    private ComponentHTMLBootstrapBase mediaComponent;
+
+    /**
+     * The media object is an abstract element used as the basis for building more complex and repetitive components (like blog comments, Tweets, etc).
+     * &lt;p&gt;
+     * Included is support for left and right aligned content, content alignment options, nesting, and more.
+     */
+    public BSMedia()
+<span class="fc" id="L64">    {</span>
+<span class="fc" id="L65">        addFeature(getFeature());</span>
+<span class="fc" id="L66">        addClass(BSComponentMediaOptions.Media);</span>
+<span class="fc" id="L67">    }</span>
+
+    /**
+     * Cleaner interface for the BS Media object
+     *
+     * @return
+     */
+    public IBSMedia asMe()
+    {
+<span class="nc" id="L76">        return this;</span>
+    }
+
+    @Override
+    public void init()
+    {
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">        if (!isInitialized())</span>
+        {
+<span class="fc" id="L84">            getPage().getOptions().setBootstrapEnabled(true);</span>
+        }
+<span class="fc" id="L86">        super.init();</span>
+<span class="fc" id="L87">    }</span>
+
+    /**
+     * Returns the feature associated (doesn't do anything for media)
+     *
+     * @return
+     */
+    public final BSMediaFeature getFeature()
+    {
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">        if (feature == null)</span>
+        {
+<span class="fc" id="L98">            feature = new BSMediaFeature(this);</span>
+        }
+<span class="fc" id="L100">        return feature;</span>
+    }
+
+    /**
+     * Doesn't do anything
+     *
+     * @return
+     */
+    @Override
+    public BSMediaOptions getOptions()
+    {
+<span class="nc" id="L111">        return getFeature().getOptions();</span>
+    }
+
+    /**
+     * Returns the associated media link, never null
+     *
+     * @return
+     */
+    @Override
+    public Link getMediaLink()
+    {
+<span class="fc bfc" id="L122" title="All 2 branches covered.">        if (mediaLink == null)</span>
+        {
+<span class="fc" id="L124">            setMediaLink(new Link(&quot;#&quot;), true);</span>
+        }
+<span class="fc" id="L126">        return mediaLink;</span>
+    }
+
+    /**
+     * Sets the media link, and moves the media object into the new link if necessary
+     *
+     * @param mediaLink
+     * @param left
+     *
+     * @return
+     */
+    @Override
+    public BSMedia setMediaLink(Link mediaLink, boolean left)
+    {
+<span class="pc bpc" id="L140" title="1 of 2 branches missed.">        if (this.mediaLink != null)</span>
+        {
+<span class="nc" id="L142">            mediaLink.add(getMediaComponent());</span>
+<span class="nc" id="L143">            remove(this.mediaLink);</span>
+<span class="nc" id="L144">            this.mediaLink = null;</span>
+        }
+<span class="fc" id="L146">        this.mediaLink = mediaLink;</span>
+<span class="pc bpc" id="L147" title="1 of 2 branches missed.">        if (this.mediaLink != null)</span>
+        {
+<span class="pc bpc" id="L149" title="1 of 2 branches missed.">            if (left)</span>
+            {
+<span class="fc" id="L151">                this.mediaLink.addClass(BSComponentMediaOptions.Media_Left);</span>
+            }
+            else
+            {
+<span class="nc" id="L155">                this.mediaLink.addClass(BSComponentMediaOptions.Media_Right);</span>
+            }
+<span class="fc" id="L157">            add(0, this.mediaLink);</span>
+        }
+<span class="fc" id="L159">        return this;</span>
+    }
+
+    /**
+     * Returns the body portion of this media object
+     *
+     * @return
+     */
+    @Override
+    public Div getMediaBody()
+    {
+<span class="fc bfc" id="L170" title="All 2 branches covered.">        if (mediaBody == null)</span>
+        {
+<span class="fc" id="L172">            setMediaBody(new Div());</span>
+        }
+<span class="fc" id="L174">        return mediaBody;</span>
+    }
+
+    /**
+     * Sets the media body and adds it to this object
+     *
+     * @param mediaBody
+     *
+     * @return
+     */
+    @Override
+    public BSMedia setMediaBody(Div mediaBody)
+    {
+<span class="pc bpc" id="L187" title="1 of 2 branches missed.">        if (this.mediaBody != null)</span>
+        {
+<span class="nc" id="L189">            remove(this.mediaBody);</span>
+<span class="nc" id="L190">            this.mediaBody = null;</span>
+        }
+<span class="fc" id="L192">        this.mediaBody = mediaBody;</span>
+<span class="pc bpc" id="L193" title="1 of 2 branches missed.">        if (this.mediaBody != null)</span>
+        {
+<span class="fc" id="L195">            this.mediaBody.addClass(BSComponentMediaOptions.Media_Body);</span>
+        }
+<span class="fc" id="L197">        add(mediaBody);</span>
+<span class="fc" id="L198">        return this;</span>
+    }
+
+    /**
+     * Returns a new H4 header
+     *
+     * @return
+     */
+    @Override
+    public HeaderText getMediaHeader()
+    {
+<span class="pc bpc" id="L209" title="1 of 2 branches missed.">        if (this.mediaHeader == null)</span>
+        {
+<span class="fc" id="L211">            setMediaHeader(new H4(&quot;&quot;));</span>
+        }
+<span class="fc" id="L213">        return mediaHeader;</span>
+    }
+
+    /**
+     * Sets the header to the required object
+     *
+     * @param mediaHeader
+     *
+     * @return
+     */
+    @Override
+    public BSMedia setMediaHeader(HeaderText mediaHeader)
+    {
+<span class="pc bpc" id="L226" title="1 of 2 branches missed.">        if (this.mediaHeader != null)</span>
+        {
+<span class="nc" id="L228">            getMediaBody().remove(this.mediaHeader);</span>
+<span class="nc" id="L229">            this.mediaHeader = null;</span>
+        }
+<span class="fc" id="L231">        this.mediaHeader = mediaHeader;</span>
+<span class="pc bpc" id="L232" title="1 of 2 branches missed.">        if (this.mediaHeader != null)</span>
+        {
+<span class="fc" id="L234">            this.mediaHeader.addClass(BSComponentMediaOptions.Media_Heading);</span>
+<span class="fc" id="L235">            getMediaBody().add(0, this.mediaHeader);</span>
+        }
+<span class="fc" id="L237">        return this;</span>
+    }
+
+    /**
+     * Returns the component displayed inside the link that is used for display
+     *
+     * @return
+     */
+    @Override
+    public ComponentHTMLBootstrapBase getMediaComponent()
+    {
+<span class="pc bpc" id="L248" title="1 of 2 branches missed.">        if (this.mediaComponent == null)</span>
+        {
+<span class="fc" id="L250">            setMediaComponent(new Div());</span>
+        }
+<span class="fc" id="L252">        return mediaComponent;</span>
+    }
+
+    /**
+     * Sets the component displayed to the left or right (set that in the link)
+     *
+     * @param mediaComponent
+     *
+     * @return
+     */
+    @Override
+    public BSMedia setMediaComponent(ComponentHTMLBootstrapBase mediaComponent)
+    {
+<span class="pc bpc" id="L265" title="1 of 2 branches missed.">        if (this.mediaComponent != null)</span>
+        {
+<span class="nc" id="L267">            getMediaLink().remove(this.mediaComponent);</span>
+<span class="nc" id="L268">            this.mediaComponent = null;</span>
+        }
+<span class="fc" id="L270">        this.mediaComponent = mediaComponent;</span>
+<span class="pc bpc" id="L271" title="1 of 2 branches missed.">        if (this.mediaComponent != null)</span>
+        {
+<span class="fc" id="L273">            this.mediaComponent.addClass(BSComponentMediaOptions.Media_Object);</span>
+<span class="fc" id="L274">            getMediaLink().add(this.mediaComponent);</span>
+        }
+<span class="fc" id="L276">        return this;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

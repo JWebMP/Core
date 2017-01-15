@@ -21,10 +21,10 @@ import org.junit.Test;
 import za.co.mmagon.jwebswing.Event;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
-import za.co.mmagon.jwebswing.events.click.ClickAdapter;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.components.pools.jquery.JQueryReferencePool;
+import za.co.mmagon.jwebswing.events.click.ClickAdapter;
 
 /**
  *
@@ -89,7 +89,9 @@ public class ComponentHTMLAttributeTest
                 + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
                 + "  \"initialized\" : true,\n"
+                + "  \"touched\" : false,\n"
                 + "  \"javascriptReferences\" : [ {\n"
+                + "    \"cordovaRequired\" : false,\n"
                 + "    \"name\" : \"JQuery\",\n"
                 + "    \"version\" : 2.24,\n"
                 + "    \"reference\" : \"bower_components/jquery/dist/jquery.js\"\n"
@@ -103,15 +105,14 @@ public class ComponentHTMLAttributeTest
                 + "    \"tiny\" : false,\n"
                 + "    \"configured\" : true,\n"
                 + "    \"initialized\" : true,\n"
+                + "    \"touched\" : false,\n"
                 + "    \"sortOrder\" : 1000,\n"
                 + "    \"variables\" : [ ],\n"
                 + "    \"name\" : \"click\",\n"
                 + "    \"renderAfterLoad\" : false,\n"
                 + "    \"javascriptRenderedElsewhere\" : false,\n"
-                + "    \"touched\" : false,\n"
                 + "    \"eventType\" : \"click\"\n"
                 + "  } ],\n"
-                + "  \"touched\" : false,\n"
                 + "  \"tag\" : \"abbr\",\n"
                 + "  \"attributesGlobal\" : {\n"
                 + "    \"id\" : \"shell\"\n"
@@ -124,7 +125,9 @@ public class ComponentHTMLAttributeTest
                 + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
                 + "  \"initialized\" : true,\n"
+                + "  \"touched\" : false,\n"
                 + "  \"javascriptReferences\" : [ {\n"
+                + "    \"cordovaRequired\" : false,\n"
                 + "    \"name\" : \"JQuery\",\n"
                 + "    \"version\" : 2.24,\n"
                 + "    \"reference\" : \"bower_components/jquery/dist/jquery.js\"\n"
@@ -138,15 +141,14 @@ public class ComponentHTMLAttributeTest
                 + "    \"tiny\" : false,\n"
                 + "    \"configured\" : true,\n"
                 + "    \"initialized\" : true,\n"
+                + "    \"touched\" : false,\n"
                 + "    \"sortOrder\" : 1000,\n"
                 + "    \"variables\" : [ ],\n"
                 + "    \"name\" : \"click\",\n"
                 + "    \"renderAfterLoad\" : false,\n"
                 + "    \"javascriptRenderedElsewhere\" : false,\n"
-                + "    \"touched\" : false,\n"
                 + "    \"eventType\" : \"click\"\n"
                 + "  } ],\n"
-                + "  \"touched\" : false,\n"
                 + "  \"tag\" : \"abbr\",\n"
                 + "  \"attributesGlobal\" : {\n"
                 + "    \"id\" : \"shell2\"\n"

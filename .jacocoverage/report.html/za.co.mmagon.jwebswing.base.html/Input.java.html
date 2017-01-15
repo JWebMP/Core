@@ -17,8 +17,9 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import java.util.logging.Level;
-import java.util.logging.*;
+import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
@@ -74,7 +75,7 @@ public class Input&lt;A extends Enum &amp; AttributeDefinitions&gt; extends Comp
         implements NoClosingTag, GlobalChildren, ParagraphChildren, JQUISpinnerChildren, JQUIAutoCompleteChildren
 {
 
-<span class="fc" id="L77">    private static final Logger log = LogFactory.getInstance().getLogger(&quot;Input&quot;);</span>
+<span class="fc" id="L78">    private static final Logger log = LogFactory.getInstance().getLogger(&quot;Input&quot;);</span>
     private static final long serialVersionUID = 1L;
 
     /**
@@ -84,8 +85,8 @@ public class Input&lt;A extends Enum &amp; AttributeDefinitions&gt; extends Comp
 
     public Input()
     {
-<span class="nc" id="L87">        this(null);</span>
-<span class="nc" id="L88">    }</span>
+<span class="nc" id="L88">        this(null);</span>
+<span class="nc" id="L89">    }</span>
 
     /**
      * Construct a new instance of the input type field
@@ -94,16 +95,16 @@ public class Input&lt;A extends Enum &amp; AttributeDefinitions&gt; extends Comp
      */
     public Input(InputTypes inputType)
     {
-<span class="fc" id="L97">        super(ComponentTypes.Input);</span>
+<span class="fc" id="L98">        super(ComponentTypes.Input);</span>
 
-<span class="pc bpc" id="L99" title="1 of 2 branches missed.">        if (inputType != null)</span>
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">        if (inputType != null)</span>
 
         {
-<span class="fc" id="L102">            this.inputType = inputType;</span>
-<span class="fc" id="L103">            addAttribute(GlobalAttributes.Type, getInputType().name().toLowerCase());</span>
+<span class="fc" id="L103">            this.inputType = inputType;</span>
+<span class="fc" id="L104">            addAttribute(GlobalAttributes.Type, getInputType().name().toLowerCase());</span>
         }
 
-<span class="fc" id="L106">    }</span>
+<span class="fc" id="L107">    }</span>
 
     /**
      * Returns the input type of the input field
@@ -112,7 +113,7 @@ public class Input&lt;A extends Enum &amp; AttributeDefinitions&gt; extends Comp
      */
     public final InputTypes getInputType()
     {
-<span class="fc" id="L115">        return inputType;</span>
+<span class="fc" id="L116">        return inputType;</span>
     }
 
     /**
@@ -122,8 +123,8 @@ public class Input&lt;A extends Enum &amp; AttributeDefinitions&gt; extends Comp
      */
     public void setInputType(InputTypes inputType)
     {
-<span class="nc" id="L125">        this.inputType = inputType;</span>
-<span class="nc" id="L126">    }</span>
+<span class="nc" id="L126">        this.inputType = inputType;</span>
+<span class="nc" id="L127">    }</span>
 
     /**
      * Differences Between HTML and XHTML
@@ -135,18 +136,28 @@ public class Input&lt;A extends Enum &amp; AttributeDefinitions&gt; extends Comp
     @Override
     public void preConfigure()
     {
-<span class="fc" id="L138">        super.preConfigure();</span>
+<span class="fc" id="L139">        super.preConfigure();</span>
         try
         {
-<span class="pc bpc" id="L141" title="1 of 2 branches missed.">            if (getPage().getHtmlVersion().name().startsWith(&quot;X&quot;))</span>
+<span class="pc bpc" id="L142" title="1 of 2 branches missed.">            if (getPage().getHtmlVersion().name().startsWith(&quot;X&quot;))</span>
             {
-<span class="nc" id="L143">                setInlineClosingTag(true);</span>
+<span class="nc" id="L144">                setInlineClosingTag(true);</span>
             }
         }
-<span class="nc" id="L146">        catch (Exception e)</span>
+<span class="nc" id="L147">        catch (Exception e)</span>
         {
-<span class="nc" id="L148">            log.log(Level.FINE, &quot;Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.&quot;, e);</span>
-<span class="fc" id="L149">        }</span>
-<span class="fc" id="L150">    }</span>
+<span class="nc" id="L149">            log.log(Level.FINE, &quot;Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.&quot;, e);</span>
+<span class="fc" id="L150">        }</span>
+<span class="fc" id="L151">    }</span>
+
+    /**
+     * Push to model instead of bind
+     * @param variableName 
+     */
+    @Override
+    public void bind(String variableName)
+    {
+<span class="nc" id="L160">        addAttribute(AngularAttributes.ngModel, variableName);</span>
+<span class="nc" id="L161">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

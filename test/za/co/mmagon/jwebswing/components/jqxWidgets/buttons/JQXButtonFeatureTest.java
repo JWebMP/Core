@@ -16,10 +16,10 @@
  */
 package za.co.mmagon.jwebswing.components.jqxWidgets.buttons;
 
-import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.JQXButtonTemplates;
-import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.JQXButton;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.JQXButton;
+import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.JQXButtonTemplates;
 import za.co.mmagon.jwebswing.components.jqxwidgets.themes.JQXWidgetThemes;
 
 /**
@@ -52,10 +52,10 @@ public class JQXButtonFeatureTest
         but.getFeature().getOptions().setToggled(true);
         but.getFeature().getOptions().setTemplate(JQXButtonTemplates.Default);
         System.out.println(but.renderJavascript());
-       // System.out.println(but.renderJavascript());
+        // System.out.println(but.renderJavascript());
         assertEquals("$('#id').jqxButton({\n"
-                + "  template : \"default\",\n"
-                + "  toggled : true\n"
+                + "  \"template\" : \"default\",\n"
+                + "  \"toggled\" : true\n"
                 + "});\n", but.renderJavascript().toString());
 
     }
@@ -67,11 +67,11 @@ public class JQXButtonFeatureTest
         but.setID("id");
         but.getOptions().setToggled(true);
         but.getOptions().setTemplate(JQXButtonTemplates.Default);
-     //   System.out.println(but.renderJavascript());
+        //   System.out.println(but.renderJavascript());
         System.out.println(but.renderJavascript());
         assertEquals("$('#id').jqxButton({\n"
-                + "  template : \"default\",\n"
-                + "  toggled : true\n"
+                + "  \"template\" : \"default\",\n"
+                + "  \"toggled\" : true\n"
                 + "});\n", but.renderJavascript().toString());
     }
 
@@ -81,10 +81,10 @@ public class JQXButtonFeatureTest
         JQXButton but = new JQXButton();
         but.setID("id");
         but.getOptions().setTheme(JQXWidgetThemes.Fresh);
-       // System.out.println(but.renderJavascript());
+        // System.out.println(but.renderJavascript());
         System.out.println(but.renderJavascript());
         assertEquals("$('#id').jqxButton({\n"
-                + "  theme : \"fresh\"\n"
+                + "  \"theme\" : \"fresh\"\n"
                 + "});\n"
                 + "", but.renderJavascript().toString());
     }
@@ -96,10 +96,10 @@ public class JQXButtonFeatureTest
         but.setID("id");
         but.getOptions().setTheme(JQXWidgetThemes.Fresh);
         but.toString(true);
-    //    System.out.println(but.renderJavascript());
+        //    System.out.println(but.renderJavascript());
         System.out.println(but.renderJavascript());
         assertEquals("$('#id').jqxButton({\n"
-                + "  theme : \"fresh\"\n"
+                + "  \"theme\" : \"fresh\"\n"
                 + "});\n"
                 + "", but.renderJavascript().toString());
     }

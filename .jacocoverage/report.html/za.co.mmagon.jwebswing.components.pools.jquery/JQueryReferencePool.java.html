@@ -14,10 +14,10 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 
 <span class="fc" id="L15">    JQuery(new JQueryReference()),</span>
 <span class="fc" id="L16">    JQueryV2(new JQueryReferenceV2()),</span>
-<span class="fc" id="L17">    JQueryV3(new JavascriptReference(&quot;Jquery3&quot;, 3.1, &quot;bower_components/jquery-3/dist/jquery.js&quot;, &quot;https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js&quot;, 0,RequirementsPriority.First)),</span>
+<span class="fc" id="L17">    JQueryV3(new JavascriptReference(&quot;Jquery3&quot;, 3.1, &quot;bower_components/jquery-3/dist/jquery.js&quot;, &quot;https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js&quot;, 0,RequirementsPriority.First).setCordovaRequired(true)),</span>
 <span class="fc" id="L18">    AjaxEnabler(new JQueryAjaxEnablerReference()),</span>
 <span class="fc" id="L19">    JQueryAtmospherePush(new AtmosphereReference()),</span>
-<span class="fc" id="L20">    JQueryMigrate(new JQueryMigrateReference()),</span>
+<span class="fc" id="L20">    JQueryMigrate(new JQueryMigrateReference().setCordovaRequired(true)),</span>
 <span class="fc" id="L21">    JQXWidgetFixes(new JavascriptReference(&quot;JQXWidgetFix&quot;, 1.0, &quot;javascript/jwebswing/jqxfixes.js&quot;, 8));</span>
 
     /*

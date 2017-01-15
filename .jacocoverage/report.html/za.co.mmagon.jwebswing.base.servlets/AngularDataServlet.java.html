@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.base.servlets;
 
+import com.armineasy.injection.filters.CorsAllowedFilter;
 import com.google.inject.Singleton;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,10 +42,10 @@ import za.co.mmagon.logger.LogFactory;
  * @since 20160607
  */
 @Singleton
-<span class="nc" id="L44">public class AngularDataServlet extends JWDefaultServlet</span>
+<span class="nc" id="L45">public class AngularDataServlet extends JWDefaultServlet</span>
 {
 
-<span class="nc" id="L47">    private static final Logger LOG = LogFactory.getInstance().getLogger(&quot;AngularDataServlet&quot;);</span>
+<span class="nc" id="L48">    private static final Logger LOG = LogFactory.getInstance().getLogger(&quot;AngularDataServlet&quot;);</span>
     private static final long serialVersionUID = 1L;
 
     /**
@@ -59,77 +60,82 @@ import za.co.mmagon.logger.LogFactory;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-<span class="nc" id="L62">        String componentId = request.getParameter(&quot;o&quot;);</span>
-<span class="nc" id="L63">        Date startDate = new Date();</span>
+<span class="nc" id="L63">        String componentId = request.getParameter(&quot;o&quot;);</span>
+<span class="nc" id="L64">        Date startDate = new Date();</span>
 
-<span class="nc" id="L65">        AjaxCall ajaxCall = new AjaxCall();</span>
-<span class="nc" id="L66">        ajaxCall.setComponentId(componentId);</span>
-<span class="nc" id="L67">        ajaxCall.setDatetime(new Date());</span>
-<span class="nc" id="L68">        ajaxCall.setEventType(EventTypes.data);</span>
-<span class="nc bnc" id="L69" title="All 4 branches missed.">        if (componentId == null || componentId.isEmpty())</span>
+<span class="nc" id="L66">        AjaxCall ajaxCall = new AjaxCall();</span>
+<span class="nc" id="L67">        ajaxCall.setComponentId(componentId);</span>
+<span class="nc" id="L68">        ajaxCall.setDatetime(new Date());</span>
+<span class="nc" id="L69">        ajaxCall.setEventType(EventTypes.data);</span>
+<span class="nc bnc" id="L70" title="All 4 branches missed.">        if (componentId == null || componentId.isEmpty())</span>
         {
-<span class="nc" id="L71">            LOG.log(Level.FINE, &quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Security]-[Component ID Incorrect]&quot;);</span>
+<span class="nc" id="L72">            LOG.log(Level.FINE, &quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Security]-[Component ID Incorrect]&quot;);</span>
         }
 
-<span class="nc" id="L74">        Page page = (Page) request.getAttribute(&quot;jwpage&quot;);</span>
-<span class="nc" id="L75">        ComponentHierarchyBase triggerComponent = page.getComponentCache().get(componentId);</span>
-<span class="nc" id="L76">        ajaxCall.setComponent(triggerComponent);</span>
-<span class="nc bnc" id="L77" title="All 2 branches missed.">        if (triggerComponent == null)</span>
+<span class="nc" id="L75">        Page page = (Page) request.getAttribute(&quot;jwpage&quot;);</span>
+<span class="nc" id="L76">        ComponentHierarchyBase triggerComponent = page.getComponentCache().get(componentId);</span>
+<span class="nc" id="L77">        ajaxCall.setComponent(triggerComponent);</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        if (triggerComponent == null)</span>
         {
-<span class="nc" id="L79">            LOG.log(Level.SEVERE, &quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Security]-[Invalid Component Specified]&quot;);</span>
-<span class="nc" id="L80">            throw new ServletException(&quot;Component could not be found to process any events.&quot;);</span>
+<span class="nc" id="L80">            LOG.log(Level.SEVERE, &quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Security]-[Invalid Component Specified]&quot;);</span>
+<span class="nc" id="L81">            throw new ServletException(&quot;Component could not be found to process any events.&quot;);</span>
         }
-<span class="nc" id="L82">        Map&lt;String, JavaScriptPart&gt; angs = ajaxCall.getComponent().getAngularObjectsAll();</span>
-<span class="nc" id="L83">        ArrayList&lt;AngularJsonVariable&gt; returnables = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L84">        angs.entrySet().stream().forEach((entry)</span>
+<span class="nc" id="L83">        Map&lt;String, JavaScriptPart&gt; angs = ajaxCall.getComponent().getAngularObjectsAll();</span>
+<span class="nc" id="L84">        ArrayList&lt;AngularJsonVariable&gt; returnables = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L85">        angs.entrySet().stream().forEach((entry)</span>
                 -&gt;
         {
-<span class="nc" id="L87">            String key = entry.getKey();</span>
-<span class="nc" id="L88">            JavaScriptPart value = entry.getValue();</span>
-<span class="nc" id="L89">            returnables.add(new AngularJsonVariable(key, value));</span>
-<span class="nc" id="L90">        });</span>
+<span class="nc" id="L88">            String key = entry.getKey();</span>
+<span class="nc" id="L89">            JavaScriptPart value = entry.getValue();</span>
+<span class="nc" id="L90">            returnables.add(new AngularJsonVariable(key, value));</span>
+<span class="nc" id="L91">        });</span>
 
-<span class="nc" id="L92">        JavaScriptPart respJson = new JavaScriptPart()</span>
-<span class="nc" id="L93">        {</span>
+<span class="nc" id="L93">        JavaScriptPart respJson = new JavaScriptPart()</span>
+<span class="nc" id="L94">        {</span>
             ArrayList&lt;AngularJsonVariable&gt; variables;
 
             public ArrayList&lt;AngularJsonVariable&gt; getVariables()
             {
-<span class="nc bnc" id="L98" title="All 2 branches missed.">                if (variables == null)</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">                if (variables == null)</span>
                 {
-<span class="nc" id="L100">                    variables = returnables;</span>
+<span class="nc" id="L101">                    variables = returnables;</span>
                 }
-<span class="nc" id="L102">                return variables;</span>
+<span class="nc" id="L103">                return variables;</span>
             }
 
             public void setVariables(ArrayList&lt;AngularJsonVariable&gt; variables)
             {
-<span class="nc" id="L107">                this.variables = variables;</span>
-<span class="nc" id="L108">            }</span>
+<span class="nc" id="L108">                this.variables = variables;</span>
+<span class="nc" id="L109">            }</span>
 
             @Override
             public JavascriptPartType getJavascriptType()
             {
-<span class="nc" id="L113">                return JavascriptPartType.JSON;</span>
+<span class="nc" id="L114">                return JavascriptPartType.JSON;</span>
             }
 
             @Override
             public String toString()
             {
-<span class="nc" id="L119">                getVariables();</span>
-<span class="nc" id="L120">                return super.toString();</span>
+<span class="nc" id="L120">                getVariables();</span>
+<span class="nc" id="L121">                return super.toString();</span>
             }
         };
-<span class="nc" id="L123">        Date endDate = new Date();</span>
-<span class="nc" id="L124">        try (PrintWriter out = response.getWriter())</span>
+<span class="nc" id="L124">        Date endDate = new Date();</span>
+<span class="nc" id="L125">        try (PrintWriter out = response.getWriter())</span>
         {
-<span class="nc" id="L126">            response.setContentType(&quot;application/json;charset=UTF-8&quot;);</span>
-<span class="nc" id="L127">            response.setCharacterEncoding(&quot;UTF-8&quot;);</span>
-<span class="nc" id="L128">            response.getWriter().write(respJson.toString());</span>
-<span class="nc" id="L129">            Date dataTransferDate = new Date();</span>
-<span class="nc" id="L130">            LOG.log(Level.FINE, &quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Render Time]-[&quot; + (endDate.getTime() - startDate.getTime()) + &quot;];[Data Size]-[&quot; + respJson.toString().length() + &quot;];[Transer Time]=[&quot; + (dataTransferDate.getTime() - startDate.getTime()) + &quot;]&quot;);</span>
-<span class="nc bnc" id="L131" title="All 8 branches missed.">        }</span>
-<span class="nc" id="L132">    }</span>
+<span class="nc" id="L127">            response.setContentType(&quot;application/json;charset=UTF-8&quot;);</span>
+            
+<span class="nc" id="L129">            response.setHeader(&quot;Access-Control-Allow-Origin&quot;, CorsAllowedFilter.allowedLocations);</span>
+<span class="nc" id="L130">            response.setHeader(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);</span>
+<span class="nc" id="L131">            response.setHeader(&quot;Access-Control-Allow-Methods&quot;, &quot;GET, POST&quot;);</span>
+<span class="nc" id="L132">            response.setHeader(&quot;Access-Control-Allow-Headers&quot;, &quot;Content-Type, Accept&quot;);</span>
+            
+<span class="nc" id="L134">            response.getWriter().write(respJson.toString());</span>
+<span class="nc" id="L135">            Date dataTransferDate = new Date();</span>
+<span class="nc" id="L136">            LOG.log(Level.FINE, &quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Render Time]-[&quot; + (endDate.getTime() - startDate.getTime()) + &quot;];[Data Size]-[&quot; + respJson.toString().length() + &quot;];[Transer Time]=[&quot; + (dataTransferDate.getTime() - startDate.getTime()) + &quot;]&quot;);</span>
+<span class="nc bnc" id="L137" title="All 8 branches missed.">        }</span>
+<span class="nc" id="L138">    }</span>
 
     /**
      * Validates and sends the post
@@ -145,14 +151,14 @@ import za.co.mmagon.logger.LogFactory;
     {
         try
         {
-<span class="nc" id="L148">            super.doPost(request, response);</span>
-<span class="nc" id="L149">            processRequest(request, response);</span>
+<span class="nc" id="L154">            super.doPost(request, response);</span>
+<span class="nc" id="L155">            processRequest(request, response);</span>
         }
-<span class="nc" id="L151">        catch (Exception e)</span>
+<span class="nc" id="L157">        catch (Exception e)</span>
         {
-<span class="nc" id="L153">            LOG.log(Level.SEVERE, &quot;Angular Data Servlet Do Post&quot;, e);</span>
-<span class="nc" id="L154">        }</span>
-<span class="nc" id="L155">    }</span>
+<span class="nc" id="L159">            LOG.log(Level.SEVERE, &quot;Angular Data Servlet Do Post&quot;, e);</span>
+<span class="nc" id="L160">        }</span>
+<span class="nc" id="L161">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

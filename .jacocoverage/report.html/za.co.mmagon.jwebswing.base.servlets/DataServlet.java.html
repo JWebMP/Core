@@ -17,6 +17,7 @@
 package za.co.mmagon.jwebswing.base.servlets;
 
 import com.armineasy.injection.GuiceContext;
+import com.armineasy.injection.filters.CorsAllowedFilter;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Singleton;
@@ -48,66 +49,80 @@ public class DataServlet extends JWDefaultServlet
     /**
      * The Servlet base logger
      */
-<span class="nc" id="L51">    private static final Logger log = LogFactory.getInstance().getLogger(&quot;DataServlet&quot;);</span>
+<span class="nc" id="L52">    private static final Logger log = LogFactory.getInstance().getLogger(&quot;DataServlet&quot;);</span>
     private static final long serialVersionUID = 1L;
 
     public DataServlet()
-<span class="nc" id="L55">    {</span>
+<span class="nc" id="L56">    {</span>
 
-<span class="nc" id="L57">    }</span>
+<span class="nc" id="L58">    }</span>
 
     /**
      * The Object Mapper for rendering the JSON with Jackson
      */
-<span class="nc" id="L62">    private static final ObjectMapper jsonObjectMapper = new ObjectMapper();</span>
+<span class="nc" id="L63">    private static final ObjectMapper jsonObjectMapper = new ObjectMapper();</span>
 
     static
     {
-<span class="nc" id="L66">        jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);</span>
-<span class="nc" id="L67">    }</span>
+<span class="nc" id="L67">        jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);</span>
+<span class="nc" id="L68">    }</span>
 
     public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, MissingComponentException
     {
-<span class="nc" id="L71">        Date startDate = new Date();</span>
-<span class="nc" id="L72">        StringBuilder responseString = new StringBuilder();</span>
-<span class="nc" id="L73">        HttpSession session = GuiceContext.Injector().getInstance(HttpSession.class);</span>
-<span class="nc" id="L74">        log.log(Level.INFO, &quot;[SessionID]-[&quot; + session.getId() + &quot;];&quot;);</span>
-<span class="nc" id="L75">        Page page = (Page) session.getAttribute(&quot;jwpage&quot;);</span>
-<span class="nc" id="L76">        String componentID = request.getParameter(&quot;component&quot;);</span>
-<span class="nc" id="L77">        ComponentHierarchyBase hb = page.getComponentCache().get(componentID);</span>
-<span class="nc bnc" id="L78" title="All 2 branches missed.">        if (hb == null)</span>
+<span class="nc" id="L72">        Date startDate = new Date();</span>
+<span class="nc" id="L73">        StringBuilder responseString = new StringBuilder();</span>
+<span class="nc" id="L74">        HttpSession session = GuiceContext.Injector().getInstance(HttpSession.class);</span>
+
+<span class="nc" id="L76">        log.log(Level.INFO, &quot;[SessionID]-[&quot; + session.getId() + &quot;];&quot;);</span>
+        
+<span class="nc" id="L78">        Page page = GuiceContext.Injector().getInstance(Page.class);</span>
+        
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if (page == null)</span>
         {
-<span class="nc" id="L80">            throw new MissingComponentException(&quot;Unable to find the specified component : &quot; + request.getParameter(&quot;component&quot;));</span>
+<span class="nc" id="L82">            throw new MissingComponentException(&quot;Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods &quot;);</span>
         }
-<span class="nc" id="L82">        StringBuilder output = new StringBuilder();</span>
-
-<span class="nc" id="L84">        String searchString = (String) request.getSession().getAttribute(&quot;search&quot;);</span>
-<span class="nc" id="L85">        Integer totalCount = (Integer) request.getSession().getAttribute(&quot;count&quot;);</span>
-<span class="nc" id="L86">        String lastItemID = (String) request.getSession().getAttribute(&quot;lastID&quot;);</span>
-
-<span class="nc bnc" id="L88" title="All 2 branches missed.">        if (IDataComponent.class.isAssignableFrom(hb.getClass()))</span>
+        
+<span class="nc" id="L85">        String componentID = request.getParameter(&quot;component&quot;);</span>
+<span class="nc" id="L86">        ComponentHierarchyBase hb = page.getComponentCache().get(componentID);</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        if (hb == null)</span>
         {
-<span class="nc" id="L90">            IDataComponent dc = (IDataComponent) hb;</span>
-<span class="nc" id="L91">            String outputJson = jsonObjectMapper</span>
-<span class="nc" id="L92">                    .configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true)</span>
-<span class="nc" id="L93">                    .writeValueAsString(</span>
-<span class="nc" id="L94">                            dc.getData(request.getParameterMap())</span>
+<span class="nc" id="L89">            throw new MissingComponentException(&quot;Unable to find the specified component : &quot; + request.getParameter(&quot;component&quot;));</span>
+        }
+<span class="nc" id="L91">        StringBuilder output = new StringBuilder();</span>
+
+<span class="nc" id="L93">        String searchString = (String) request.getSession().getAttribute(&quot;search&quot;);</span>
+<span class="nc" id="L94">        Integer totalCount = (Integer) request.getSession().getAttribute(&quot;count&quot;);</span>
+<span class="nc" id="L95">        String lastItemID = (String) request.getSession().getAttribute(&quot;lastID&quot;);</span>
+
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        if (IDataComponent.class.isAssignableFrom(hb.getClass()))</span>
+        {
+<span class="nc" id="L99">            IDataComponent dc = (IDataComponent) hb;</span>
+<span class="nc" id="L100">            String outputJson = jsonObjectMapper</span>
+<span class="nc" id="L101">                    .configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true)</span>
+<span class="nc" id="L102">                    .writeValueAsString(</span>
+<span class="nc" id="L103">                            dc.getData(request.getParameterMap())</span>
                     );
-<span class="nc" id="L96">            output.append(outputJson).toString();</span>
+<span class="nc" id="L105">            output.append(outputJson).toString();</span>
         }
 
-<span class="nc" id="L99">        responseString.append(output);</span>
+<span class="nc" id="L108">        responseString.append(output);</span>
 
-<span class="nc" id="L101">        Date endDate = new Date();</span>
-<span class="nc" id="L102">        try (PrintWriter out = response.getWriter())</span>
+<span class="nc" id="L110">        Date endDate = new Date();</span>
+<span class="nc" id="L111">        try (PrintWriter out = response.getWriter())</span>
         {
-<span class="nc" id="L104">            response.setContentType(&quot;application/json;charset=UTF-8&quot;);</span>
-<span class="nc" id="L105">            response.setCharacterEncoding(&quot;UTF-8&quot;);</span>
-<span class="nc" id="L106">            out.println(responseString);</span>
-<span class="nc" id="L107">            Date dataTransferDate = new Date();</span>
-<span class="nc" id="L108">            log.log(Level.FINE, &quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Render Time]-[&quot; + (endDate.getTime() - startDate.getTime()) + &quot;];[Data Size]-[&quot; + responseString.length() + &quot;];[Transer Time]=[&quot; + (dataTransferDate.getTime() - startDate.getTime()) + &quot;]&quot;);</span>
-<span class="nc bnc" id="L109" title="All 8 branches missed.">        }</span>
-<span class="nc" id="L110">    }</span>
+<span class="nc" id="L113">            response.setContentType(&quot;application/json;charset=UTF-8&quot;);</span>
+<span class="nc" id="L114">            response.setCharacterEncoding(&quot;UTF-8&quot;);</span>
+
+<span class="nc" id="L116">            response.setHeader(&quot;Access-Control-Allow-Origin&quot;, CorsAllowedFilter.allowedLocations);</span>
+<span class="nc" id="L117">            response.setHeader(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);</span>
+<span class="nc" id="L118">            response.setHeader(&quot;Access-Control-Allow-Methods&quot;, &quot;GET, POST&quot;);</span>
+<span class="nc" id="L119">            response.setHeader(&quot;Access-Control-Allow-Headers&quot;, &quot;Content-Type, Accept&quot;);</span>
+
+<span class="nc" id="L121">            out.println(responseString);</span>
+<span class="nc" id="L122">            Date dataTransferDate = new Date();</span>
+<span class="nc" id="L123">            log.log(Level.FINE, &quot;[SessionID]-[&quot; + request.getSession().getId() + &quot;];&quot; + &quot;[Render Time]-[&quot; + (endDate.getTime() - startDate.getTime()) + &quot;];[Data Size]-[&quot; + responseString.length() + &quot;];[Transer Time]=[&quot; + (dataTransferDate.getTime() - startDate.getTime()) + &quot;]&quot;);</span>
+<span class="nc bnc" id="L124" title="All 8 branches missed.">        }</span>
+<span class="nc" id="L125">    }</span>
 
     /**
      * Handles the HTTP &lt;code&gt;GET&lt;/code&gt; method.
@@ -124,17 +139,17 @@ public class DataServlet extends JWDefaultServlet
     {
         try
         {
-<span class="nc" id="L127">            super.doGet(request, response); //Checks for the page existance</span>
-<span class="nc" id="L128">            processRequest(request, response);</span>
+<span class="nc" id="L142">            super.doGet(request, response); //Checks for the page existance</span>
+<span class="nc" id="L143">            processRequest(request, response);</span>
         }
-<span class="nc" id="L130">        catch (IOException | ServletException e)</span>
+<span class="nc" id="L145">        catch (IOException | ServletException e)</span>
         {
-<span class="nc" id="L132">            log.log(Level.SEVERE, &quot;Do Post in CSS Servlet&quot;, e);</span>
+<span class="nc" id="L147">            log.log(Level.SEVERE, &quot;Do Post in CSS Servlet&quot;, e);</span>
         }
-<span class="nc" id="L134">        catch (MissingComponentException ex)</span>
+<span class="nc" id="L149">        catch (MissingComponentException ex)</span>
         {
-<span class="nc" id="L136">            Logger.getLogger(DataServlet.class.getName()).log(Level.SEVERE, null, ex);</span>
-<span class="nc" id="L137">        }</span>
-<span class="nc" id="L138">    }</span>
+<span class="nc" id="L151">            Logger.getLogger(DataServlet.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L152">        }</span>
+<span class="nc" id="L153">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

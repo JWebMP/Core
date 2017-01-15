@@ -16,10 +16,10 @@
  */
 package za.co.mmagon.jwebswing.components.jqueryUI.combobox;
 
-import za.co.mmagon.jwebswing.components.jqueryui.combobox.JQUIComboBox;
 import org.junit.Assert;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.base.html.Option;
+import za.co.mmagon.jwebswing.components.jqueryui.combobox.JQUIComboBox;
 
 /**
  *
@@ -42,9 +42,8 @@ public class JQUIComboBoxTest
         combo.add(o);
         System.out.println(combo.toString(true));
 
-        String expected = ""
-                + "<select id=\"combo\">\n"
-                + "	<option id=\"o\" label=\"option\" value=\"option\">option</option>\n"
+        String expected = "<select id=\"combo\">\n"
+                + "	<option label=\"option\" value=\"option\" id=\"o\">option</option>\n"
                 + "</select>";
         String result = combo.toString(true).toString();
 

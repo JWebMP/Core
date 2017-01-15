@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BSCarousel.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.bootstrap.carousel</a> &gt; <span class="el_source">BSCarousel.java</span></div><h1>BSCarousel.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.bootstrap.carousel;
+
+import java.util.ArrayList;
+import java.util.List;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
+
+/**
+ * Carousel
+ * &lt;p&gt;
+ * A slideshow component for cycling through elements—images or slides of text—like a carousel.
+ * &lt;p&gt;
+ * In browsers where the Page Visibility API is supported, the carousel will avoid sliding when the webpage is not visible to the user (such as when the browser tab is inactive, the browser window is
+ * minimized, etc.). Nested carousels are not supported.
+ * &lt;p&gt;
+ * @author Marc Magon
+ * @since 01 Jan 2017
+ * @version 1.0
+ */
+public class BSCarousel extends Div&lt;BSCarouselChildren, BSCarouselAttributes, BSCarouselFeatures, BSCarouselEvents, BSCarousel&gt;
+{
+
+    private static final long serialVersionUID = 1L;
+    private BSCarouselFeature feature;
+
+    /**
+     * Determines the active slide
+     */
+    private int activeSlide;
+    /**
+     * The list of slides that gets rendered
+     */
+    private List&lt;BSCarouselItem&gt; slides;
+    /**
+     * The actual carousel slides displaying div
+     */
+    private Div carouselSlides;
+
+    /**
+     * The previous link
+     */
+    private Link previousLink;
+    /**
+     * The next link
+     */
+    private Link nextLink;
+
+    /**
+     * Carousel
+     * &lt;p&gt;
+     * A slideshow component for cycling through elements—images or slides of text—like a carousel.
+     * &lt;p&gt;
+     * In browsers where the Page Visibility API is supported, the carousel will avoid sliding when the webpage is not visible to the user (such as when the browser tab is inactive, the browser window
+     * is minimized, etc.). Nested carousels are not supported.
+     */
+    public BSCarousel()
+<span class="fc" id="L74">    {</span>
+<span class="fc" id="L75">        addFeature(getFeature());</span>
+<span class="fc" id="L76">    }</span>
+
+    /**
+     * Returns the java script feature associated
+     *
+     * @return
+     */
+    public final BSCarouselFeature getFeature()
+    {
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">        if (feature == null)</span>
+        {
+<span class="fc" id="L87">            feature = new BSCarouselFeature(this);</span>
+        }
+<span class="fc" id="L89">        return feature;</span>
+    }
+
+    /**
+     * Returns any javascript options available
+     *
+     * @return
+     */
+    @Override
+    public BSCarouselOptions getOptions()
+    {
+<span class="nc" id="L100">        return getFeature().getOptions();</span>
+    }
+
+    /**
+     * The active slide
+     *
+     * @return
+     */
+    public int getActiveSlide()
+    {
+<span class="fc" id="L110">        return activeSlide;</span>
+    }
+
+    /**
+     * Sets the active slide
+     *
+     * @param activeSlide
+     *
+     * @return
+     */
+    public BSCarousel setActiveSlide(int activeSlide)
+    {
+<span class="nc" id="L122">        this.activeSlide = activeSlide;</span>
+<span class="nc" id="L123">        return this;</span>
+    }
+
+    /**
+     * Returns the list of slides currently associated
+     *
+     * @return
+     */
+    public List&lt;BSCarouselItem&gt; getSlides()
+    {
+<span class="fc bfc" id="L133" title="All 2 branches covered.">        if (slides == null)</span>
+        {
+<span class="fc" id="L135">            setSlides(new ArrayList&lt;&gt;());</span>
+        }
+<span class="fc" id="L137">        return slides;</span>
+    }
+
+    /**
+     * Sets the list of slides currently associated
+     *
+     * @param slides
+     *
+     * @return
+     */
+    public BSCarousel setSlides(List&lt;BSCarouselItem&gt; slides)
+    {
+<span class="fc" id="L149">        this.slides = slides;</span>
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">        if (slides != null)</span>
+        {
+
+        }
+<span class="fc" id="L154">        return this;</span>
+    }
+
+    /**
+     * Returns the carousel slides
+     *
+     * @return
+     */
+    public Div getCarouselSlides()
+    {
+<span class="pc bpc" id="L164" title="1 of 2 branches missed.">        if (carouselSlides == null)</span>
+        {
+<span class="fc" id="L166">            setCarouselSlides(new Div());</span>
+        }
+<span class="fc" id="L168">        return carouselSlides;</span>
+    }
+
+    /**
+     * Sets the carousel slides
+     *
+     * @param carouselSlides
+     */
+    public void setCarouselSlides(Div carouselSlides)
+    {
+<span class="fc" id="L178">        this.carouselSlides = carouselSlides;</span>
+<span class="fc" id="L179">        carouselSlides.addClass(BSComponentCarouselOptions.Carousel_Inner);</span>
+<span class="fc" id="L180">        carouselSlides.addAttribute(&quot;role&quot;, &quot;listbox&quot;);</span>
+<span class="fc" id="L181">    }</span>
+
+    /**
+     * Returns the previous link
+     *
+     * @return
+     */
+    public Link getPreviousLink()
+    {
+<span class="pc bpc" id="L190" title="1 of 2 branches missed.">        if (previousLink == null)</span>
+        {
+<span class="fc" id="L192">            setPreviousLink(new BSCarouselControl(this, true));</span>
+        }
+<span class="fc" id="L194">        return previousLink;</span>
+    }
+
+    /**
+     * Set's the previous link
+     *
+     * @param previousLink
+     */
+    public void setPreviousLink(Link previousLink)
+    {
+<span class="fc" id="L204">        getChildren().remove(this.previousLink);</span>
+<span class="fc" id="L205">        this.previousLink = previousLink;</span>
+<span class="pc bpc" id="L206" title="1 of 2 branches missed.">        if (this.previousLink != null)</span>
+        {
+            
+<span class="fc" id="L209">            previousLink.addClass(&quot;left&quot;);</span>
+<span class="fc" id="L210">            previousLink.addClass(BSComponentCarouselOptions.Carousel_Control);</span>
+            
+<span class="fc" id="L212">            previousLink.addAttribute(&quot;role&quot;,&quot;button&quot;);</span>
+<span class="fc" id="L213">            previousLink.addAttribute(&quot;data-slide&quot;,&quot;prev&quot;);</span>
+            
+<span class="fc" id="L215">            Span iconSpan = new Span();</span>
+<span class="fc" id="L216">            iconSpan.addAttribute(GlobalAttributes.Aria_Hidden, &quot;true&quot;);</span>
+<span class="fc" id="L217">            iconSpan.addClass(&quot;icon-next&quot;);</span>
+
+<span class="fc" id="L219">            Span readerFriendly = new Span(&quot;Previous&quot;);</span>
+<span class="fc" id="L220">            readerFriendly.addClass(&quot;sr-only&quot;);</span>
+
+<span class="fc" id="L222">            previousLink.add(iconSpan);</span>
+<span class="fc" id="L223">            previousLink.add(readerFriendly);</span>
+        }
+<span class="fc" id="L225">    }</span>
+
+    /**
+     * Returns the next link
+     *
+     * @return
+     */
+    public Link getNextLink()
+    {
+<span class="pc bpc" id="L234" title="1 of 2 branches missed.">        if (nextLink == null)</span>
+        {
+<span class="fc" id="L236">            setNextLink(new BSCarouselControl(this, false));</span>
+        }
+<span class="fc" id="L238">        return nextLink;</span>
+    }
+
+    /**
+     * Sets the next link
+     *
+     * @param nextLink
+     */
+    public void setNextLink(Link nextLink)
+    {
+<span class="fc" id="L248">        getChildren().remove(this.nextLink);</span>
+<span class="fc" id="L249">        this.nextLink = nextLink;</span>
+<span class="pc bpc" id="L250" title="1 of 2 branches missed.">        if (this.nextLink != null)</span>
+        {
+<span class="fc" id="L252">            nextLink.addClass(&quot;right&quot;);</span>
+<span class="fc" id="L253">            nextLink.addClass(BSComponentCarouselOptions.Carousel_Control);</span>
+            
+<span class="fc" id="L255">            nextLink.addAttribute(&quot;role&quot;,&quot;button&quot;);</span>
+<span class="fc" id="L256">            nextLink.addAttribute(&quot;data-slide&quot;,&quot;next&quot;);</span>
+            
+<span class="fc" id="L258">            Span iconSpan = new Span();</span>
+<span class="fc" id="L259">            iconSpan.addAttribute(GlobalAttributes.Aria_Hidden, &quot;true&quot;);</span>
+<span class="fc" id="L260">            iconSpan.addClass(&quot;icon-next&quot;);</span>
+
+<span class="fc" id="L262">            Span readerFriendly = new Span(&quot;Next&quot;);</span>
+<span class="fc" id="L263">            readerFriendly.addClass(&quot;sr-only&quot;);</span>
+
+<span class="fc" id="L265">            nextLink.add(iconSpan);</span>
+<span class="fc" id="L266">            nextLink.add(readerFriendly);</span>
+        }
+<span class="fc" id="L268">    }</span>
+
+    @Override
+    public void init()
+    {
+<span class="pc bpc" id="L273" title="1 of 2 branches missed.">        if (!isInitialized())</span>
+        {
+<span class="fc" id="L275">            BSCarouselIndicators indications = new BSCarouselIndicators(this);</span>
+<span class="fc" id="L276">            indications.init();</span>
+<span class="fc" id="L277">            add(indications);</span>
+<span class="fc" id="L278">            add(getCarouselSlides());</span>
+
+            BSCarouselItem activeItem;
+            try
+            {
+<span class="fc" id="L283">                activeItem = getSlides().get(getActiveSlide());</span>
+            }
+<span class="nc" id="L285">            catch (IndexOutOfBoundsException e)</span>
+            {
+<span class="nc bnc" id="L287" title="All 2 branches missed.">                if (getSlides().size() &gt; 0)</span>
+                {
+<span class="nc" id="L289">                    activeItem = getSlides().get(0);</span>
+                }
+                else
+                {
+<span class="nc" id="L293">                    return;</span>
+                }
+<span class="fc" id="L295">            }</span>
+<span class="fc" id="L296">            activeItem.addClass(BSComponentDefaultOptions.Active);</span>
+
+<span class="fc" id="L298">            add(getPreviousLink());</span>
+<span class="fc" id="L299">            add(getNextLink());</span>
+
+        }
+<span class="fc" id="L302">        super.init();</span>
+<span class="fc" id="L303">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>FileTemplates.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon</a> &gt; <span class="el_source">FileTemplates.java</span></div><h1>FileTemplates.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2017 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.regex.Matcher;
+import za.co.mmagon.jwebswing.utilities.TextUtilities;
+import za.co.mmagon.logger.LogFactory;
+
+/**
+ * Contains a cached set of file templates usually per page
+ *
+ * @author GedMarc
+ * @since A long time ago in a galaxy far away
+ */
+<span class="nc" id="L34">public class FileTemplates implements Serializable</span>
+{
+
+<span class="fc" id="L37">    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger(&quot;FileTemplates&quot;);</span>
+    /**
+     * All registered templates
+     */
+    @JsonIgnore
+<span class="fc" id="L42">    private static final Map&lt;String, StringBuilder&gt; TemplateScripts = new HashMap&lt;&gt;();</span>
+    /**
+     * All registered variables
+     */
+    @JsonIgnore
+<span class="fc" id="L47">    private static final Map&lt;String, StringBuilder&gt; TemplateVariables = new HashMap&lt;&gt;();</span>
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Returns all the template variables currently loaded into memory
+     *
+     * @return
+     */
+    public static Map&lt;String, StringBuilder&gt; getTemplateVariables()
+    {
+<span class="fc" id="L57">        return TemplateVariables;</span>
+    }
+
+    /**
+     * Sets all the template scripts currently loaded in memory
+     *
+     * @return
+     */
+    public static Map&lt;String, StringBuilder&gt; getTemplateScripts()
+    {
+<span class="fc" id="L67">        return TemplateScripts;</span>
+    }
+
+    /**
+     * Gets the text string for the template script
+     *
+     * @param templateName
+     *
+     * @return
+     */
+    public static StringBuilder getTemplateScript(String templateName)
+    {
+<span class="fc" id="L79">        return TemplateScripts.get(templateName);</span>
+    }
+
+    /**
+     * Sets the template script
+     *
+     * @param templateName
+     * @param templateScript
+     */
+    public static void setTemplateScript(String templateName, StringBuilder templateScript)
+    {
+<span class="fc" id="L90">        TemplateScripts.put(templateName, templateScript);</span>
+<span class="fc" id="L91">    }</span>
+
+    /**
+     * Get the map of all the template scripts
+     *
+     * @param template
+     *
+     * @return A final HashMap
+     */
+    public static StringBuilder renderTemplateScripts(String template)
+    {
+<span class="pc bpc" id="L102" title="2 of 4 branches missed.">        if (TemplateScripts.containsKey(template) &amp;&amp; TemplateScripts.get(template) != null)</span>
+        {
+<span class="fc" id="L104">            StringBuilder output = processTemplate(template, getTemplateScripts().get(template).toString());</span>
+<span class="fc" id="L105">            return output;</span>
+        }
+
+<span class="nc" id="L108">        return new StringBuilder();</span>
+    }
+
+    /**
+     * Returns the template as a string
+     *
+     * @param referenceClass The class to reference to locate the file
+     * @param templateName   The file without .min.js or .js attached to it
+     *
+     * @return The string for the file
+     */
+    public static StringBuilder getFileTemplate(Class referenceClass, String templateName)
+    {
+<span class="fc" id="L121">        StringBuilder template = TemplateScripts.get(templateName);</span>
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">        if (template == null)</span>
+        {
+            try
+            {
+<span class="fc" id="L126">                String templateFileName = templateName;</span>
+<span class="fc" id="L127">                templateFileName += &quot;.js&quot;;</span>
+                /*
+                 * if (this.component.isTiny()) { templateFileName += &quot;.min.js&quot;; } else { templateFileName += &quot;.js&quot;; }
+                 */
+                byte[] fileContents;
+<span class="fc" id="L132">                InputStream is = referenceClass.getResourceAsStream(templateFileName);</span>
+               // BufferedInputStream bis = new BufferedInputStream(is);
+<span class="fc" id="L134">                fileContents = new byte[is.available()];</span>
+<span class="fc" id="L135">                is.read(fileContents, 0, is.available());</span>
+<span class="fc" id="L136">                is.close();</span>
+<span class="fc" id="L137">                String contents = new String(fileContents);</span>
+<span class="fc" id="L138">                setTemplateScript(templateName, new StringBuilder(contents));</span>
+            }
+<span class="nc" id="L140">            catch (FileNotFoundException ex)</span>
+            {
+<span class="nc" id="L142">                LOG.log(Level.SEVERE, &quot;[Error]-[unable to find template file];[TemplateFile]-[&quot; + templateName + &quot;];[TemplatePath]-[&quot; + referenceClass.getResource(templateName).getPath() + &quot;]&quot;, ex);</span>
+            }
+<span class="nc" id="L144">            catch (IOException ex)</span>
+            {
+<span class="nc" id="L146">                LOG.log(Level.SEVERE, &quot;Unable to read file contents jwangular template File&quot;, ex);</span>
+<span class="pc" id="L147">            }</span>
+        }
+<span class="fc" id="L149">        return TemplateScripts.get(templateName);</span>
+    }
+
+    /**
+     * Replaces all instances of the following
+     * &lt;p&gt;
+     * %%APP%% - the angular module application name %%DIRECTIVES%% - the angular directives %%MODULES%% the modules generates %%CONTROLLER%% the modules generates
+     *
+     * @param templateName The template name
+     * @param template     the template to build
+     *
+     * @return the name
+     */
+    public static StringBuilder compileTemplate(String templateName, String template)
+    {
+<span class="fc" id="L164">        return processTemplate(templateName, template);</span>
+    }
+
+    /**
+     * Replaces all instances of the following
+     *
+     * @param templateName The name of the template being processed
+     * @param template     The physical string to process
+     *
+     * @return
+     */
+    public static StringBuilder processTemplate(String templateName, String template)
+    {
+<span class="fc" id="L177">        String templateOutput = template;</span>
+<span class="fc bfc" id="L178" title="All 2 branches covered.">        for (String templateVariable : getTemplateVariables().keySet())</span>
+        {
+<span class="fc" id="L180">            String templateScript = Matcher.quoteReplacement(getTemplateVariables().get(templateVariable).toString());</span>
+<span class="fc" id="L181">            String templateNameClean = templateVariable;</span>
+            try
+            {
+<span class="fc" id="L184">                templateOutput = templateOutput.replaceAll(&quot;&quot; + templateNameClean + &quot;&quot;, templateScript);</span>
+            }
+<span class="nc" id="L186">            catch (IllegalArgumentException iae)</span>
+            {
+<span class="nc" id="L188">                LOG.log(Level.CONFIG, &quot;[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[{0}];[Script]-[{1}]&quot;, new Object[]</span>
+                {
+                    templateVariable, templateScript
+                });
+<span class="nc" id="L192">                LOG.severe(TextUtilities.stackTraceToString(iae));</span>
+<span class="fc" id="L193">            }</span>
+<span class="fc" id="L194">        }</span>
+<span class="fc" id="L195">        TemplateScripts.put(templateName, new StringBuilder(templateOutput));</span>
+<span class="fc" id="L196">        return TemplateScripts.get(templateName);</span>
+    }
+
+    /**
+     * Replaces all instances of the following
+     * &lt;p&gt;
+     * %%APP%% - the angular module application name %%DIRECTIVES%% - the angular directives %%MODULES%% the modules generates %%CONTROLLER%% the modules generates
+     *
+     * @param referenceClass The class to find where the file is at
+     * @param templateName   the template to use
+     *
+     * @return the name
+     */
+    public static StringBuilder compileTemplate(Class referenceClass, String templateName)
+    {
+<span class="fc" id="L211">        String template = getFileTemplate(referenceClass, templateName).toString();</span>
+<span class="fc" id="L212">        return processTemplate(templateName, template);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

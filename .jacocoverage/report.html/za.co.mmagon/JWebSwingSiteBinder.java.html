@@ -18,12 +18,15 @@ package za.co.mmagon;
 
 import com.armineasy.injection.GuiceContext;
 import com.armineasy.injection.abstractions.GuiceSiteInjectorModule;
+import com.armineasy.injection.filters.GZipServletFilter;
 import com.armineasy.injection.interfaces.GuiceSiteBinder;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
 import org.reflections.Reflections;
+import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.servlets.*;
+import za.co.mmagon.jwebswing.generics.DynamicLoadingPage;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -36,69 +39,85 @@ import za.co.mmagon.logger.LogFactory;
 public class JWebSwingSiteBinder extends GuiceSiteBinder
 {
 
-<span class="fc" id="L39">    private static String QueryParametersRegex = &quot;(\\?.*)?&quot;;</span>
+<span class="fc" id="L42">    private static String QueryParametersRegex = &quot;(\\?.*)?&quot;;</span>
 
-<span class="fc" id="L41">    private static String JavaScriptLocation = &quot;/jwjs&quot;;</span>
-<span class="fc" id="L42">    private static String AjaxScriptLocation = &quot;/jwajax&quot;;</span>
-<span class="fc" id="L43">    private static String CSSLocation = &quot;/jwcss&quot;;</span>
+<span class="fc" id="L44">    private static String JavaScriptLocation = &quot;/jwjs&quot;;</span>
+<span class="fc" id="L45">    private static String AjaxScriptLocation = &quot;/jwajax&quot;;</span>
+<span class="fc" id="L46">    private static String CSSLocation = &quot;/jwcss&quot;;</span>
     private static final String AngularDataLocation = &quot;/jwad&quot;;
-<span class="fc" id="L45">    private static String AngularScriptLocation = &quot;/jwas&quot;;</span>
+    private static final String SiteLoaderJSLocation = &quot;/jwsiteloader&quot;;
+<span class="fc" id="L49">    private static String AngularScriptLocation = &quot;/jwas&quot;;</span>
+    private static final String CordovaLocation = &quot;/jwcordova&quot;;
 
-<span class="fc" id="L47">    private static String DataLocation = &quot;/jwdata&quot;;</span>
+<span class="fc" id="L52">    private static String DataLocation = &quot;/jwdata&quot;;</span>
 
-<span class="fc" id="L49">    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger(&quot;JWebSwingSiteBinder&quot;);</span>
+<span class="fc" id="L54">    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger(&quot;JWebSwingSiteBinder&quot;);</span>
 
     /**
      * Constructs a new instance, mostly for injection
      */
     public JWebSwingSiteBinder()
-<span class="nc" id="L55">    {</span>
+<span class="nc" id="L60">    {</span>
         //Nothing needed to be done
-<span class="nc" id="L57">    }</span>
+<span class="nc" id="L62">    }</span>
 
     @Override
     public void onBind(GuiceSiteInjectorModule module)
     {
-<span class="nc" id="L62">        log.log(Level.CONFIG, &quot;Configuring Servlet URL's&quot;);</span>
+<span class="nc" id="L67">        module.filterRegex$(&quot;/*&quot;).through(new GZipServletFilter());</span>
 
-<span class="nc" id="L64">        Reflections reflections = GuiceContext.reflect();</span>
+<span class="nc" id="L69">        module.bind(DynamicLoadingPage.class).asEagerSingleton();</span>
 
-<span class="nc" id="L66">        Set&lt;Class&lt;? extends JWebSwingServlet&gt;&gt; siteBinders = reflections.getSubTypesOf(JWebSwingServlet.class);</span>
-<span class="nc bnc" id="L67" title="All 2 branches missed.">        for (Iterator&lt;Class&lt;? extends JWebSwingServlet&gt;&gt; iterator = siteBinders.iterator(); iterator.hasNext();)</span>
+<span class="nc" id="L71">        log.log(Level.CONFIG, &quot;Configuring Servlet URL's&quot;);</span>
+<span class="nc" id="L72">        Reflections reflections = GuiceContext.reflect();</span>
+<span class="nc" id="L73">        Set&lt;Class&lt;? extends JWebSwingServlet&gt;&gt; siteBinders = reflections.getSubTypesOf(JWebSwingServlet.class);</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        for (Iterator&lt;Class&lt;? extends JWebSwingServlet&gt;&gt; iterator = siteBinders.iterator(); iterator.hasNext();)</span>
         {
             try
             {
-<span class="nc" id="L71">                Class&lt;? extends JWebSwingServlet&gt; jwebSwingSite = iterator.next();</span>
-<span class="nc" id="L72">                JWebSwingServlet servlet = jwebSwingSite.newInstance();</span>
-<span class="nc" id="L73">                module.serveRegex$(&quot;(&quot; + servlet.getUrl() + &quot;)&quot; + QueryParametersRegex).with(jwebSwingSite);</span>
-<span class="nc" id="L74">                log.log(Level.CONFIG, &quot;Serving &quot; + jwebSwingSite.getSimpleName() + &quot; at &quot; + servlet.getUrl());</span>
+<span class="nc" id="L78">                Class&lt;? extends JWebSwingServlet&gt; jwebSwingSite = iterator.next();</span>
+<span class="nc" id="L79">                JWebSwingServlet servlet = jwebSwingSite.newInstance();</span>
+<span class="nc" id="L80">                module.serveRegex$(&quot;(&quot; + servlet.getUrl() + &quot;)&quot; + QueryParametersRegex).with(jwebSwingSite);</span>
+<span class="nc" id="L81">                module.bind(Page.class).toProvider(servlet);</span>
+<span class="nc" id="L82">                log.log(Level.CONFIG, &quot;Serving {0} at {1}&quot;, new Object[]</span>
+                {
+<span class="nc" id="L84">                    jwebSwingSite.getSimpleName(), servlet.getUrl()</span>
+                });
             }
-<span class="nc" id="L76">            catch (InstantiationException | IllegalAccessException ex)</span>
+<span class="nc" id="L87">            catch (InstantiationException | IllegalAccessException ex)</span>
             {
-<span class="nc" id="L78">                log.log(Level.SEVERE, null, ex);</span>
-<span class="nc" id="L79">            }</span>
+<span class="nc" id="L89">                log.log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L90">            }</span>
+
+            break;
         }
 
-<span class="nc" id="L82">        module.serveRegex$(&quot;(&quot; + JavaScriptLocation + &quot;)&quot; + QueryParametersRegex).with(JavaScriptServlet.class);</span>
-<span class="nc" id="L83">        log.log(Level.CONFIG, &quot;Serving JavaScripts at &quot; + JavaScriptLocation);</span>
+<span class="nc" id="L95">        module.serveRegex$(&quot;(&quot; + JavaScriptLocation + &quot;)&quot; + QueryParametersRegex).with(JavaScriptServlet.class);</span>
+<span class="nc" id="L96">        log.log(Level.CONFIG, &quot;Serving JavaScripts at {0}&quot;, JavaScriptLocation);</span>
 
-<span class="nc" id="L85">        module.serveRegex$(&quot;(&quot; + AjaxScriptLocation + &quot;)&quot; + QueryParametersRegex).with(AjaxReceiverServlet.class);</span>
-<span class="nc" id="L86">        log.log(Level.CONFIG, &quot;Serving Ajax at &quot; + AjaxScriptLocation);</span>
+<span class="nc" id="L98">        module.serveRegex$(&quot;(&quot; + AjaxScriptLocation + &quot;)&quot; + QueryParametersRegex).with(AjaxReceiverServlet.class);</span>
+<span class="nc" id="L99">        log.log(Level.CONFIG, &quot;Serving Ajax at {0}&quot;, AjaxScriptLocation);</span>
 
-<span class="nc" id="L88">        module.serveRegex$(&quot;(&quot; + CSSLocation + &quot;)&quot; + QueryParametersRegex).with(CSSServlet.class);</span>
-<span class="nc" id="L89">        log.log(Level.CONFIG, &quot;Serving CSS at &quot; + CSSLocation);</span>
+<span class="nc" id="L101">        module.serveRegex$(&quot;(&quot; + CSSLocation + &quot;)&quot; + QueryParametersRegex).with(CSSServlet.class);</span>
+<span class="nc" id="L102">        log.log(Level.CONFIG, &quot;Serving CSS at {0}&quot;, CSSLocation);</span>
 
-<span class="nc" id="L91">        module.serveRegex$(&quot;(&quot; + AngularDataLocation + &quot;)&quot; + QueryParametersRegex).with(AngularDataServlet.class);</span>
-<span class="nc" id="L92">        log.log(Level.CONFIG, &quot;Serving Angular Data at &quot; + AngularDataLocation);</span>
+<span class="nc" id="L104">        module.serveRegex$(&quot;(&quot; + AngularDataLocation + &quot;)&quot; + QueryParametersRegex).with(AngularDataServlet.class);</span>
+<span class="nc" id="L105">        log.log(Level.CONFIG, &quot;Serving Angular Data at &quot; + AngularDataLocation);</span>
 
-<span class="nc" id="L94">        module.serveRegex$(&quot;(&quot; + AngularScriptLocation + &quot;)&quot; + QueryParametersRegex).with(AngularServlet.class);</span>
-<span class="nc" id="L95">        log.log(Level.CONFIG, &quot;Serving Angular JavaScript at &quot; + AngularScriptLocation);</span>
+<span class="nc" id="L107">        module.serveRegex$(&quot;(&quot; + AngularScriptLocation + &quot;)&quot; + QueryParametersRegex).with(AngularServlet.class);</span>
+<span class="nc" id="L108">        log.log(Level.CONFIG, &quot;Serving Angular JavaScript at {0}&quot;, AngularScriptLocation);</span>
 
-<span class="nc" id="L97">        module.serveRegex$(&quot;(&quot; + DataLocation + &quot;)&quot; + QueryParametersRegex).with(DataServlet.class);</span>
-<span class="nc" id="L98">        log.log(Level.CONFIG, &quot;Serving Data at &quot; + DataLocation);</span>
+<span class="nc" id="L110">        module.serveRegex$(&quot;(&quot; + DataLocation + &quot;)&quot; + QueryParametersRegex).with(DataServlet.class);</span>
+<span class="nc" id="L111">        log.log(Level.CONFIG, &quot;Serving Data at {0}&quot;, DataLocation);</span>
 
-<span class="nc" id="L100">        log.log(Level.CONFIG, &quot;Finished with configuring URL's&quot;);</span>
-<span class="nc" id="L101">    }</span>
+<span class="nc" id="L113">        module.serveRegex$(&quot;(&quot; + SiteLoaderJSLocation + &quot;)&quot; + QueryParametersRegex).with(SiteLoaderJavascript.class);</span>
+<span class="nc" id="L114">        log.log(Level.CONFIG, &quot;Serving Site Loader Javscript at {0}&quot;, SiteLoaderJSLocation);</span>
+
+<span class="nc" id="L116">        module.serveRegex$(&quot;(&quot; + CordovaLocation + &quot;)&quot; + QueryParametersRegex).with(CordovaServlet.class);</span>
+<span class="nc" id="L117">        log.log(Level.CONFIG, &quot;Serving Cordova at {0}&quot;, CordovaLocation);</span>
+
+<span class="nc" id="L119">        log.log(Level.CONFIG, &quot;Finished with configuring URL's&quot;);</span>
+<span class="nc" id="L120">    }</span>
 
     /**
      * Returns the query parameters
@@ -107,7 +126,7 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
      */
     public static String getQueryParametersRegex()
     {
-<span class="nc" id="L110">        return QueryParametersRegex;</span>
+<span class="nc" id="L129">        return QueryParametersRegex;</span>
     }
 
     /**
@@ -117,8 +136,8 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
      */
     public static void setQueryParametersRegex(String QueryParametersRegex)
     {
-<span class="nc" id="L120">        JWebSwingSiteBinder.QueryParametersRegex = QueryParametersRegex;</span>
-<span class="nc" id="L121">    }</span>
+<span class="nc" id="L139">        JWebSwingSiteBinder.QueryParametersRegex = QueryParametersRegex;</span>
+<span class="nc" id="L140">    }</span>
 
     /**
      * gets the location of the JavaScript Servlet
@@ -127,7 +146,7 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
      */
     public static String getJavaScriptLocation()
     {
-<span class="fc" id="L130">        return JavaScriptLocation;</span>
+<span class="fc" id="L149">        return JavaScriptLocation;</span>
     }
 
     /**
@@ -137,8 +156,8 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
      */
     public static void setJavaScriptLocation(String JavaScriptLocation)
     {
-<span class="nc" id="L140">        JWebSwingSiteBinder.JavaScriptLocation = JavaScriptLocation;</span>
-<span class="nc" id="L141">    }</span>
+<span class="nc" id="L159">        JWebSwingSiteBinder.JavaScriptLocation = JavaScriptLocation;</span>
+<span class="nc" id="L160">    }</span>
 
     /**
      * Gets the current Ajax location
@@ -147,7 +166,7 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
      */
     public static String getAjaxScriptLocation()
     {
-<span class="nc" id="L150">        return AjaxScriptLocation;</span>
+<span class="nc" id="L169">        return AjaxScriptLocation;</span>
     }
 
     /**
@@ -157,8 +176,8 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
      */
     public static void setAjaxScriptLocation(String AjaxScriptLocation)
     {
-<span class="nc" id="L160">        JWebSwingSiteBinder.AjaxScriptLocation = AjaxScriptLocation;</span>
-<span class="nc" id="L161">    }</span>
+<span class="nc" id="L179">        JWebSwingSiteBinder.AjaxScriptLocation = AjaxScriptLocation;</span>
+<span class="nc" id="L180">    }</span>
 
     /**
      * Gets the CSS Location
@@ -167,7 +186,7 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
      */
     public static String getCSSLocation()
     {
-<span class="fc" id="L170">        return CSSLocation;</span>
+<span class="fc" id="L189">        return CSSLocation;</span>
     }
 
     /**
@@ -177,8 +196,8 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
      */
     public static void setCSSLocation(String CSSLocation)
     {
-<span class="nc" id="L180">        JWebSwingSiteBinder.CSSLocation = CSSLocation;</span>
-<span class="nc" id="L181">    }</span>
+<span class="nc" id="L199">        JWebSwingSiteBinder.CSSLocation = CSSLocation;</span>
+<span class="nc" id="L200">    }</span>
 
     /**
      * Gets the angular script location
@@ -187,7 +206,7 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
      */
     public static String getAngularScriptLocation()
     {
-<span class="nc" id="L190">        return AngularScriptLocation;</span>
+<span class="nc" id="L209">        return AngularScriptLocation;</span>
     }
 
     /**
@@ -197,8 +216,8 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
      */
     public static void setAngularScriptLocation(String AngularScriptLocation)
     {
-<span class="nc" id="L200">        JWebSwingSiteBinder.AngularScriptLocation = AngularScriptLocation;</span>
-<span class="nc" id="L201">    }</span>
+<span class="nc" id="L219">        JWebSwingSiteBinder.AngularScriptLocation = AngularScriptLocation;</span>
+<span class="nc" id="L220">    }</span>
 
     /**
      * Gets the data location
@@ -207,7 +226,7 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
      */
     public static String getDataLocation()
     {
-<span class="fc" id="L210">        return DataLocation;</span>
+<span class="fc" id="L229">        return DataLocation;</span>
     }
 
     /**
@@ -217,8 +236,38 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
      */
     public static void setDataLocation(String DataLocation)
     {
-<span class="nc" id="L220">        JWebSwingSiteBinder.DataLocation = DataLocation;</span>
-<span class="nc" id="L221">    }</span>
+<span class="nc" id="L239">        JWebSwingSiteBinder.DataLocation = DataLocation;</span>
+<span class="nc" id="L240">    }</span>
+
+    /**
+     * Returns the angular data location
+     *
+     * @return
+     */
+    public static String getAngularDataLocation()
+    {
+<span class="nc" id="L249">        return AngularDataLocation;</span>
+    }
+
+    /**
+     * Sets the site loader JS location
+     *
+     * @return
+     */
+    public static String getSiteLoaderJSLocation()
+    {
+<span class="nc" id="L259">        return SiteLoaderJSLocation;</span>
+    }
+
+    /**
+     * Gets the cordova location
+     *
+     * @return
+     */
+    public static String getCordovaLocation()
+    {
+<span class="nc" id="L269">        return CordovaLocation;</span>
+    }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

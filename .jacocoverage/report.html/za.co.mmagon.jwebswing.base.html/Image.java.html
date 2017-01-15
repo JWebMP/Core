@@ -18,14 +18,11 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.ImageAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.FigureChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.ImageMapChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.bootstrap.cards.BSCardChildren;
 
 /**
  * Browser Support&lt;p&gt;
@@ -55,8 +52,10 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author Marc Magon
  */
 public class Image extends Component&lt;NoChildren, ImageAttributes, GlobalFeatures, GlobalEvents, Image&gt;
-        implements ImageMapChildren, FigureChildren, GlobalChildren, ListItemChildren
+        implements ImageMapChildren, FigureChildren, GlobalChildren, ListItemChildren, BSCardChildren
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Construct a new Image
@@ -65,27 +64,27 @@ public class Image extends Component&lt;NoChildren, ImageAttributes, GlobalFeatu
      */
     public Image(String image)
     {
-<span class="fc" id="L68">        super(ComponentTypes.Image);</span>
-<span class="fc" id="L69">        setInlineClosingTag(true);</span>
-<span class="fc" id="L70">        addAttribute(ImageAttributes.Src, image);</span>
-<span class="fc" id="L71">    }</span>
+<span class="fc" id="L67">        super(ComponentTypes.Image);</span>
+<span class="fc" id="L68">        setInlineClosingTag(true);</span>
+<span class="fc" id="L69">        addAttribute(ImageAttributes.Src, image);</span>
+<span class="fc" id="L70">    }</span>
 
     @Override
     public boolean equals(Object obj)
     {
-<span class="nc bnc" id="L76" title="All 2 branches missed.">        if (!(obj instanceof Image))</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        if (!(obj instanceof Image))</span>
         {
-<span class="nc" id="L78">            return false;</span>
+<span class="nc" id="L77">            return false;</span>
         }
 
-<span class="nc" id="L81">        return getAttribute(ImageAttributes.Src).equals(Image.class.cast(obj).getAttribute(ImageAttributes.Src));</span>
+<span class="nc" id="L80">        return getAttribute(ImageAttributes.Src).equals(Image.class.cast(obj).getAttribute(ImageAttributes.Src));</span>
     }
 
     @Override
     public int hashCode()
     {
-<span class="nc" id="L87">        int hash = 7;</span>
-<span class="nc" id="L88">        return hash;</span>
+<span class="nc" id="L86">        int hash = 7;</span>
+<span class="nc" id="L87">        return hash;</span>
     }
 
 }

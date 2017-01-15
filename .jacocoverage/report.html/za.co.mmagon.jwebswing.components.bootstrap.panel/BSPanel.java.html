@@ -24,7 +24,7 @@ import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.Link;
 import za.co.mmagon.jwebswing.base.html.attributes.ButtonAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.components.bootstrap.BootstrapClasses;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
 
 /**
  * An implementation of the bootstrap panel layout.
@@ -272,8 +272,8 @@ public class BSPanel extends Div&lt;GlobalChildren, BSPanelAttributes, BSPanelFe
 <span class="nc" id="L272">        this.panelHeaderButtonBar = panelHeaderButtonBar;</span>
 <span class="nc bnc" id="L273" title="All 2 branches missed.">        if (panelHeaderButtonBar != null)</span>
         {
-<span class="nc" id="L275">            panelHeaderButtonBar.addClass(BootstrapClasses.Btn_Group);</span>
-<span class="nc" id="L276">            panelHeaderButtonBar.addClass(BootstrapClasses.Pull_Right);</span>
+<span class="nc" id="L275">            panelHeaderButtonBar.addClass(BSComponentDefaultOptions.Btn_Group);</span>
+<span class="nc" id="L276">            panelHeaderButtonBar.addClass(BSComponentDefaultOptions.Pull_Right);</span>
 <span class="nc" id="L277">            getPanelHeader().add(panelHeaderButtonBar);</span>
         }
 <span class="nc" id="L279">    }</span>

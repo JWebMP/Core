@@ -19,7 +19,7 @@ package za.co.mmagon.jwebswing.components.jqxwidgets.tree;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
-import za.co.mmagon.jwebswing.base.events.select.SelectAdapter;
+import za.co.mmagon.jwebswing.events.select.SelectAdapter;
 
 /**
  * Highlights the select event with the objects return values

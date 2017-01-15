@@ -16,13 +16,11 @@
  */
 package za.co.mmagon.jwebswing.base.ajax;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import java.util.ArrayList;
 import java.util.Iterator;
-import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
-import za.co.mmagon.jwebswing.base.ComponentStyleBase;
+import za.co.mmagon.jwebswing.Event;
+import za.co.mmagon.jwebswing.base.*;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
@@ -34,7 +32,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
  * @author GedMarc
  * @since 27 Apr 2016
  */
-<span class="nc" id="L37">public class AjaxResponse extends JavaScriptPart</span>
+<span class="nc" id="L35">public class AjaxResponse extends JavaScriptPart</span>
 {
 
     private static final long serialVersionUID = 1L;
@@ -42,7 +40,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
     /**
      * Whether or not the response is a success or not
      */
-<span class="nc" id="L45">    @JsonProperty(&quot;success&quot;)</span>
+<span class="nc" id="L43">    @JsonProperty(&quot;success&quot;)</span>
     private boolean success = true;
     /**
      * All angular variable updates to be performed
@@ -60,7 +58,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      * All components that must be updated
      */
     @JsonIgnore
-    private ArrayList&lt;ComponentHierarchyBase&gt; components;
+    private ArrayList&lt;ComponentBase&gt; components;
 
     /**
      * Format as JSON
@@ -70,23 +68,25 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
     @Override
     public JavascriptPartType getJavascriptType()
     {
-<span class="nc" id="L73">        return JavascriptPartType.JSON;</span>
+<span class="nc" id="L71">        return JavascriptPartType.JSON;</span>
     }
-    
+
     /**
      * Adds a DTO to the response call
-     * @param name The name of the variable
+     *
+     * @param name   The name of the variable
      * @param object The DTO to pass through
      */
     public void addDto(String name, JavaScriptPart object)
     {
-<span class="nc" id="L83">        AngularJsonVariable variable = new AngularJsonVariable(name, object);</span>
-<span class="nc" id="L84">        getAngularVariables().add(variable);</span>
-<span class="nc" id="L85">    }</span>
-    
+<span class="nc" id="L82">        AngularJsonVariable variable = new AngularJsonVariable(name, object);</span>
+<span class="nc" id="L83">        getAngularVariables().add(variable);</span>
+<span class="nc" id="L84">    }</span>
+
     /**
      * Adds a DTO to the response call
-     * @param name The name of the variable
+     *
+     * @param name   The name of the variable
      * @param object The DTO to pass through
      */
     public void addDto(String name, String object)
@@ -106,15 +106,14 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
     }
 
     /**
-     * If the server action was a success,
-     * default is no
+     * If the server action was a success, default is no
      *
      * @param success
      */
     public void setSuccess(boolean success)
     {
-<span class="nc" id="L116">        this.success = success;</span>
-<span class="nc" id="L117">    }</span>
+<span class="nc" id="L115">        this.success = success;</span>
+<span class="nc" id="L116">    }</span>
 
     /**
      * Adds a component to be returned to the client
@@ -123,8 +122,18 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void addComponent(ComponentHierarchyBase component)
     {
-<span class="nc" id="L126">        getComponents().add(component);</span>
-<span class="nc" id="L127">    }</span>
+<span class="nc" id="L125">        getComponents().add(component);</span>
+<span class="nc" id="L126">    }</span>
+    
+    /**
+     * Adds a component to be returned to the client
+     *
+     * @param component
+     */
+    public void addComponent(ComponentBase component)
+    {
+<span class="nc" id="L135">        getComponents().add(component);</span>
+<span class="nc" id="L136">    }</span>
 
     /**
      * Adds a client reaction to be performed
@@ -133,8 +142,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void addReaction(AjaxResponseReaction reaction)
     {
-<span class="nc" id="L136">        getReactions().add(reaction);</span>
-<span class="nc" id="L137">    }</span>
+<span class="nc" id="L145">        getReactions().add(reaction);</span>
+<span class="nc" id="L146">    }</span>
 
     /**
      * Gets all the CSS References
@@ -143,15 +152,18 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     @JsonProperty(&quot;cssLinks&quot;)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private ArrayList&lt;String&gt; getAllCssReferences()
+    protected ArrayList&lt;String&gt; getAllCssReferences()
     {
-<span class="nc" id="L148">        ArrayList&lt;String&gt; output = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L149">        getComponents().stream().forEach((next)</span>
+<span class="nc" id="L157">        ArrayList&lt;String&gt; output = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L158">        getComponents().stream().forEach(next</span>
                 -&gt;
-                {
-<span class="nc" id="L152">                    output.addAll(getCssReferences(next));</span>
-<span class="nc" id="L153">        });</span>
-<span class="nc" id="L154">        return output;</span>
+        {
+<span class="nc bnc" id="L161" title="All 2 branches missed.">            if (ComponentDependancyBase.class.isAssignableFrom(next.getClass()))</span>
+            {
+<span class="nc" id="L163">                output.addAll(getCssReferences((ComponentDependancyBase) next));</span>
+            }
+<span class="nc" id="L165">        });</span>
+<span class="nc" id="L166">        return output;</span>
     }
 
     /**
@@ -161,38 +173,58 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     @JsonProperty(&quot;jsReferences&quot;)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private ArrayList&lt;String&gt; getAllJsReferences()
+    protected ArrayList&lt;String&gt; getAllJsReferences()
     {
-<span class="nc" id="L166">        ArrayList&lt;String&gt; output = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L167">        getComponents().stream().forEach((next)</span>
+<span class="nc" id="L178">        ArrayList&lt;String&gt; output = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L179">        getComponents().stream().forEach(next</span>
                 -&gt;
-                {
-<span class="nc" id="L170">                    output.addAll(getJsReferences(next));</span>
-<span class="nc" id="L171">        });</span>
-<span class="nc" id="L172">        return output;</span>
+        {
+<span class="nc bnc" id="L182" title="All 2 branches missed.">            if (ComponentDependancyBase.class.isAssignableFrom(next.getClass()))</span>
+            {
+<span class="nc" id="L184">                output.addAll(getJsReferences((ComponentDependancyBase) next));</span>
+            }
+<span class="nc" id="L186">        });</span>
+<span class="nc" id="L187">        return output;</span>
     }
 
     /**
-     * Gets all the JavaScript
+     * Gets all the JavaScript and inserts it into the JSON response
      *
      * @return
      */
     @JsonProperty(&quot;jsScripts&quot;)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private ArrayList&lt;String&gt; getAllJsScripts()
+    protected ArrayList&lt;String&gt; getAllJsScripts()
     {
-<span class="nc" id="L184">        ArrayList&lt;String&gt; output = new ArrayList&lt;&gt;();</span>
-        //output.add(&quot;//not empty scripts return&quot;);
-<span class="nc" id="L186">        getComponents().stream().forEach((next)</span>
+<span class="nc" id="L199">        ArrayList&lt;String&gt; output = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L200">        getComponents().stream().forEach(next</span>
                 -&gt;
+        {
+<span class="nc bnc" id="L203" title="All 2 branches missed.">            if (ComponentHierarchyBase.class.isAssignableFrom(next.getClass()))</span>
+            {
+<span class="nc bnc" id="L205" title="All 4 branches missed.">                getJsRenders((ComponentHierarchyBase) next).stream().filter(next1 -&gt; (next1 != null &amp;&amp; !next1.isEmpty())).forEach(next1</span>
+                        -&gt;
                 {
-<span class="nc bnc" id="L189" title="All 4 branches missed.">                    getJsRenders(next).stream().filter((next1) -&gt; (next1 != null &amp;&amp; !next1.isEmpty())).forEach((next1)</span>
-                            -&gt;
-                            {
-<span class="nc" id="L192">                                output.add(next1);</span>
-<span class="nc" id="L193">                    });</span>
-<span class="nc" id="L194">        });</span>
-<span class="nc" id="L195">        return output;</span>
+<span class="nc" id="L208">                    output.add(next1);</span>
+<span class="nc" id="L209">                });</span>
+            }
+
+            //Load on demand scripts
+<span class="nc bnc" id="L213" title="All 2 branches missed.">            if (Event.class.isAssignableFrom(next.getClass()))</span>
+            {
+<span class="nc bnc" id="L215" title="All 2 branches missed.">                for (Iterator iterator = Event.class.cast(next).getOnDemandQueries().iterator(); iterator.hasNext();)</span>
+                {
+<span class="nc" id="L217">                    Event next1 = (Event) iterator.next();</span>
+<span class="nc" id="L218">                    next1.preConfigure();</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">                    for (Iterator iterator1 = next1.getQueriesAll().iterator(); iterator1.hasNext();)</span>
+                    {
+<span class="nc" id="L221">                        StringBuilder query = (StringBuilder) iterator1.next();</span>
+<span class="nc" id="L222">                        output.add(query.toString());</span>
+<span class="nc" id="L223">                    }</span>
+<span class="nc" id="L224">                }</span>
+            }
+<span class="nc" id="L226">        });</span>
+<span class="nc" id="L227">        return output;</span>
     }
 
     /**
@@ -202,81 +234,85 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     @JsonProperty(&quot;css&quot;)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private String getAllCss()
+    protected String getAllCss()
     {
-<span class="nc" id="L207">        StringBuilder sb = new StringBuilder();</span>
-<span class="nc" id="L208">        getComponents().stream().filter((next) -&gt; (next instanceof ComponentStyleBase)).forEach((next)</span>
+<span class="nc" id="L239">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L240">        getComponents().stream().filter(next -&gt; (next instanceof ComponentStyleBase)).forEach(next</span>
                 -&gt;
-                {
-<span class="nc" id="L211">                    sb.append(getCssRenders(ComponentStyleBase.class.cast(next)));</span>
-<span class="nc" id="L212">        });</span>
-<span class="nc" id="L213">        return sb.toString();</span>
+        {
+<span class="nc" id="L243">            sb.append(getCssRenders(ComponentStyleBase.class.cast(next)));</span>
+<span class="nc" id="L244">        });</span>
+<span class="nc" id="L245">        return sb.toString();</span>
     }
 
     /**
      * Returns all the CSS references for all the components
      *
      * @param component
+     *
      * @return
      */
-    private ArrayList&lt;String&gt; getCssReferences(ComponentHierarchyBase component)
+    protected ArrayList&lt;String&gt; getCssReferences(ComponentDependancyBase component)
     {
-<span class="nc" id="L224">        ArrayList&lt;String&gt; cssRender = new ArrayList&lt;&gt;();</span>
-<span class="nc bnc" id="L225" title="All 2 branches missed.">        for (Iterator iterator = component.getCssReferencesAll().iterator(); iterator.hasNext();)</span>
+<span class="nc" id="L257">        ArrayList&lt;String&gt; cssRender = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L258" title="All 2 branches missed.">        for (Iterator iterator = component.getCssReferencesAll().iterator(); iterator.hasNext();)</span>
         {
-<span class="nc" id="L227">            CSSReference next = (CSSReference) iterator.next();</span>
-<span class="nc bnc" id="L228" title="All 2 branches missed.">            if (!cssRender.contains(next.toString()))</span>
+<span class="nc" id="L260">            CSSReference next = (CSSReference) iterator.next();</span>
+<span class="nc bnc" id="L261" title="All 2 branches missed.">            if (!cssRender.contains(next.toString()))</span>
             {
-<span class="nc" id="L230">                cssRender.add(next.toString());</span>
+<span class="nc" id="L263">                cssRender.add(next.toString());</span>
             }
-<span class="nc" id="L232">        }</span>
-<span class="nc" id="L233">        return cssRender;</span>
+<span class="nc" id="L265">        }</span>
+<span class="nc" id="L266">        return cssRender;</span>
     }
 
     /**
      * Gets all JavaScript references for a component and it's children
      *
      * @param component
+     *
      * @return
      */
-    private ArrayList&lt;String&gt; getJsReferences(ComponentHierarchyBase component)
+    protected ArrayList&lt;String&gt; getJsReferences(ComponentDependancyBase component)
     {
-<span class="nc" id="L244">        ArrayList&lt;String&gt; cssRender = new ArrayList&lt;&gt;();</span>
-<span class="nc bnc" id="L245" title="All 2 branches missed.">        for (Iterator iterator = component.getJavascriptReferencesAll().iterator(); iterator.hasNext();)</span>
+<span class="nc" id="L278">        ArrayList&lt;String&gt; cssRender = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L279" title="All 2 branches missed.">        for (Iterator iterator = component.getJavascriptReferencesAll().iterator(); iterator.hasNext();)</span>
         {
-<span class="nc" id="L247">            JavascriptReference next = (JavascriptReference) iterator.next();</span>
-<span class="nc bnc" id="L248" title="All 2 branches missed.">            if (!cssRender.contains(next.toString()))</span>
+<span class="nc" id="L281">            JavascriptReference next = (JavascriptReference) iterator.next();</span>
+<span class="nc bnc" id="L282" title="All 2 branches missed.">            if (!cssRender.contains(next.toString()))</span>
             {
-<span class="nc" id="L250">                cssRender.add(next.toString());</span>
+<span class="nc" id="L284">                cssRender.add(next.toString());</span>
             }
-<span class="nc" id="L252">        }</span>
-<span class="nc" id="L253">        return cssRender;</span>
+<span class="nc" id="L286">        }</span>
+<span class="nc" id="L287">        return cssRender;</span>
     }
 
     /**
      * Gets all the CSS renders for a component and its children
      *
      * @param component
+     *
      * @return
      */
     private StringBuilder getCssRenders(ComponentStyleBase component)
     {
-<span class="nc" id="L264">        StringBuilder cssRender = new StringBuilder();</span>
-<span class="nc" id="L265">        cssRender.append(component.renderCss(0).toString());</span>
-<span class="nc" id="L266">        return cssRender;</span>
+<span class="nc" id="L299">        StringBuilder cssRender = new StringBuilder();</span>
+<span class="nc" id="L300">        cssRender.append(component.renderCss(0).toString());</span>
+<span class="nc" id="L301">        return cssRender;</span>
     }
 
     /**
      * Gets all the JavaScript to render for a component and its children
      *
      * @param component
+     *
      * @return
      */
     private ArrayList&lt;String&gt; getJsRenders(ComponentHierarchyBase component)
     {
-<span class="nc" id="L277">        ArrayList&lt;String&gt; cssRender = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L278">        cssRender.add(component.renderJavascriptAll().toString());</span>
-<span class="nc" id="L279">        return cssRender;</span>
+<span class="nc" id="L313">        ArrayList&lt;String&gt; jsRenders = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L314">        jsRenders.add(component.renderJavascriptAll().toString());</span>
+<span class="nc" id="L315">        return jsRenders;</span>
     }
 
     /**
@@ -286,11 +322,11 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     private ArrayList&lt;AjaxResponseReaction&gt; getReactions()
     {
-<span class="nc bnc" id="L289" title="All 2 branches missed.">        if (reactions == null)</span>
+<span class="nc bnc" id="L325" title="All 2 branches missed.">        if (reactions == null)</span>
         {
-<span class="nc" id="L291">            reactions = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L327">            reactions = new ArrayList&lt;&gt;();</span>
         }
-<span class="nc" id="L293">        return reactions;</span>
+<span class="nc" id="L329">        return reactions;</span>
     }
 
     /**
@@ -298,13 +334,13 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      *
      * @return
      */
-    private ArrayList&lt;ComponentHierarchyBase&gt; getComponents()
+    private ArrayList&lt;ComponentBase&gt; getComponents()
     {
-<span class="nc bnc" id="L303" title="All 2 branches missed.">        if (components == null)</span>
+<span class="nc bnc" id="L339" title="All 2 branches missed.">        if (components == null)</span>
         {
-<span class="nc" id="L305">            components = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L341">            components = new ArrayList&lt;&gt;();</span>
         }
-<span class="nc" id="L307">        return components;</span>
+<span class="nc" id="L343">        return components;</span>
     }
 
     /**
@@ -314,15 +350,15 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     @JsonProperty(&quot;components&quot;)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private ArrayList&lt;ComponentUpdates&gt; getUpdates()
+    protected ArrayList&lt;ComponentUpdates&gt; getUpdates()
     {
-<span class="nc" id="L319">        ArrayList&lt;ComponentUpdates&gt; updates = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L320">        getComponents().stream().map((comp) -&gt; new ComponentUpdates(comp)).forEach((cu)</span>
-                -&gt;
+<span class="nc" id="L355">        ArrayList&lt;ComponentUpdates&gt; updates = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L356">        getComponents().stream().filter(next -&gt; (ComponentHierarchyBase.class.isAssignableFrom(next.getClass())))</span>
+<span class="nc" id="L357">                .forEachOrdered(next -&gt;</span>
                 {
-<span class="nc" id="L323">                    updates.add(cu);</span>
-<span class="nc" id="L324">        });</span>
-<span class="nc" id="L325">        return updates;</span>
+<span class="nc" id="L359">                    updates.add(new ComponentUpdates((ComponentHierarchyBase) next));</span>
+<span class="nc" id="L360">                });</span>
+<span class="nc" id="L361">        return updates;</span>
     }
 
     /**
@@ -332,11 +368,11 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public ArrayList&lt;AngularJsonVariable&gt; getAngularVariables()
     {
-<span class="nc bnc" id="L335" title="All 2 branches missed.">        if (angularVariables == null)</span>
+<span class="nc bnc" id="L371" title="All 2 branches missed.">        if (angularVariables == null)</span>
         {
-<span class="nc" id="L337">            angularVariables = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L373">            angularVariables = new ArrayList&lt;&gt;();</span>
         }
-<span class="nc" id="L339">        return angularVariables;</span>
+<span class="nc" id="L375">        return angularVariables;</span>
     }
 
     /**
@@ -346,8 +382,20 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setAngularVariables(ArrayList&lt;AngularJsonVariable&gt; angularVariables)
     {
-<span class="nc" id="L349">        this.angularVariables = angularVariables;</span>
-<span class="nc" id="L350">    }</span>
+<span class="nc" id="L385">        this.angularVariables = angularVariables;</span>
+<span class="nc" id="L386">    }</span>
+
+    /**
+     * Removes the registered variable from the client. Use to clean up memory or assigned variables on the client
+     *
+     * @param variable
+     */
+    public void clearVariable(AngularJsonVariable variable)
+    {
+<span class="nc" id="L395">        variable.setVariableText(null);</span>
+<span class="nc" id="L396">        variable.setVariable(null);</span>
+<span class="nc" id="L397">        getAngularVariables().add(variable);</span>
+<span class="nc" id="L398">    }</span>
 
     /**
      * A JSON Class for component updates
@@ -368,11 +416,11 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
          * @param component
          */
         public ComponentUpdates(ComponentHierarchyBase component)
-<span class="nc" id="L371">        {</span>
-<span class="nc" id="L372">            component.setTiny(true);</span>
-<span class="nc" id="L373">            this.html = component.toString(true);</span>
-<span class="nc" id="L374">            this.replaceID = component.getID();</span>
-<span class="nc" id="L375">        }</span>
+<span class="nc" id="L419">        {</span>
+<span class="nc" id="L420">            component.setTiny(true);</span>
+<span class="nc" id="L421">            this.html = component.toString(true);</span>
+<span class="nc" id="L422">            this.replaceID = component.getID();</span>
+<span class="nc" id="L423">        }</span>
 
         /**
          * Returns the HTML of the component
@@ -381,7 +429,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
          */
         public String getHtml()
         {
-<span class="nc" id="L384">            return html;</span>
+<span class="nc" id="L432">            return html;</span>
         }
 
         /**
@@ -391,7 +439,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
          */
         public String getReplaceID()
         {
-<span class="nc" id="L394">            return replaceID;</span>
+<span class="nc" id="L442">            return replaceID;</span>
         }
     }
 }

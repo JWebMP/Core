@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BSCardLink.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.bootstrap.cards</a> &gt; <span class="el_source">BSCardLink.java</span></div><h1>BSCardLink.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2017 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.bootstrap.cards;
+
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.base.html.Link;
+
+/**
+ * In the same way, links are added and placed next to each other by adding .card-link to an a tag.
+ *
+ * @author GedMarc
+ * @since 01 Jan 2017
+ * @version 1.0
+ *
+ */
+public class BSCardLink extends Link
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * In the same way, links are added and placed next to each other by adding .card-link to a &amp;lt;a&amp;gt; tag.
+     */
+    public BSCardLink()
+<span class="nc" id="L39">    {</span>
+<span class="nc" id="L40">        addClass(BSComponentCardOptions.Card_Link);</span>
+<span class="nc" id="L41">    }</span>
+
+    /**
+     * In the same way, links are added and placed next to each other by adding .card-link to a &amp;lt;a&amp;gt; tag.
+     *
+     * @param directToAddress
+     */
+    public BSCardLink(String directToAddress)
+    {
+<span class="nc" id="L50">        super(directToAddress);</span>
+<span class="nc" id="L51">        addClass(BSComponentCardOptions.Card_Link);</span>
+<span class="nc" id="L52">    }</span>
+
+    /**
+     * In the same way, links are added and placed next to each other by adding .card-link to a &amp;lt;a&amp;gt; tag.
+     *
+     * @param directToAddress
+     * @param targetFrameName
+     */
+    public BSCardLink(String directToAddress, String targetFrameName)
+    {
+<span class="nc" id="L62">        super(directToAddress, targetFrameName);</span>
+<span class="nc" id="L63">        addClass(BSComponentCardOptions.Card_Link);</span>
+<span class="nc" id="L64">    }</span>
+
+    /**
+     * In the same way, links are added and placed next to each other by adding .card-link to a &amp;lt;a&amp;gt; tag.
+     *
+     * @param directToAddress
+     * @param targetFrameName
+     * @param text
+     */
+    public BSCardLink(String directToAddress, String targetFrameName, String text)
+    {
+<span class="nc" id="L75">        super(directToAddress, targetFrameName, text);</span>
+<span class="nc" id="L76">        addClass(BSComponentCardOptions.Card_Link);</span>
+<span class="nc" id="L77">    }</span>
+
+    /**
+     * In the same way, links are added and placed next to each other by adding .card-link to a &amp;lt;a&amp;gt; tag.
+     *
+     * @param directToAddress
+     * @param targetFrameName
+     * @param component
+     */
+    public BSCardLink(String directToAddress, String targetFrameName, ComponentHierarchyBase component)
+    {
+<span class="nc" id="L88">        super(directToAddress, targetFrameName, component);</span>
+<span class="nc" id="L89">        addClass(BSComponentCardOptions.Card_Link);</span>
+<span class="nc" id="L90">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -16,12 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.ajax;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import com.fasterxml.jackson.annotation.*;
+import java.util.*;
 import javax.servlet.ServletException;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
@@ -38,7 +34,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTy
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class AjaxCall extends JavaScriptPart
-{   
+{
+
     private static final long serialVersionUID = 1L;
     /**
      * The component ID that was sent back
@@ -80,9 +77,9 @@ public class AjaxCall extends JavaScriptPart
      * JSon Jackson Constructor
      */
     public AjaxCall()
-<span class="nc" id="L83">    {</span>
+<span class="nc" id="L80">    {</span>
         //set nothing
-<span class="nc" id="L85">    }</span>
+<span class="nc" id="L82">    }</span>
 
     /**
      * Creates a valid AJAX call object that can be processed
@@ -93,16 +90,17 @@ public class AjaxCall extends JavaScriptPart
      * @param eventTypeFrom The ComponentEventBase Type From
      * @param value         The Value
      * @param page          The Page
+     *
      * @throws ServletException In Case anything is funky
      */
     public AjaxCall(String componentId, Date datetime, String eventType, String eventTypeFrom, AjaxEventValue value, Page page) throws ServletException
-<span class="nc" id="L99">    {</span>
-<span class="nc" id="L100">        this.componentId = componentId;</span>
-<span class="nc" id="L101">        this.datetime = datetime;</span>
-<span class="nc" id="L102">        this.value = value;</span>
-<span class="nc" id="L103">        this.eventType = EventTypes.valueOf(eventType);</span>
-<span class="nc" id="L104">        this.eventTypeFrom = EventTypes.valueOf(eventTypeFrom);</span>
-<span class="nc" id="L105">    }</span>
+<span class="nc" id="L97">    {</span>
+<span class="nc" id="L98">        this.componentId = componentId;</span>
+<span class="nc" id="L99">        this.datetime = datetime;</span>
+<span class="nc" id="L100">        this.value = value;</span>
+<span class="nc" id="L101">        this.eventType = EventTypes.valueOf(eventType);</span>
+<span class="nc" id="L102">        this.eventTypeFrom = EventTypes.valueOf(eventTypeFrom);</span>
+<span class="nc" id="L103">    }</span>
 
     /**
      * Returns this component ID
@@ -111,7 +109,7 @@ public class AjaxCall extends JavaScriptPart
      */
     public final String getComponentId()
     {
-<span class="nc" id="L114">        return componentId;</span>
+<span class="nc" id="L112">        return componentId;</span>
     }
 
     /**
@@ -121,8 +119,8 @@ public class AjaxCall extends JavaScriptPart
      */
     public void setComponentId(String componentId)
     {
-<span class="nc" id="L124">        this.componentId = componentId;</span>
-<span class="nc" id="L125">    }</span>
+<span class="nc" id="L122">        this.componentId = componentId;</span>
+<span class="nc" id="L123">    }</span>
 
     /**
      * Returns this date time of this call
@@ -131,7 +129,7 @@ public class AjaxCall extends JavaScriptPart
      */
     public Date getDatetime()
     {
-<span class="nc" id="L134">        return datetime;</span>
+<span class="nc" id="L132">        return datetime;</span>
     }
 
     /**
@@ -141,8 +139,8 @@ public class AjaxCall extends JavaScriptPart
      */
     public void setDatetime(Date datetime)
     {
-<span class="nc" id="L144">        this.datetime = datetime;</span>
-<span class="nc" id="L145">    }</span>
+<span class="nc" id="L142">        this.datetime = datetime;</span>
+<span class="nc" id="L143">    }</span>
 
     /**
      * Gets event type
@@ -151,7 +149,7 @@ public class AjaxCall extends JavaScriptPart
      */
     public EventTypes getEventType()
     {
-<span class="nc" id="L154">        return eventType;</span>
+<span class="nc" id="L152">        return eventType;</span>
     }
 
     /**
@@ -161,8 +159,8 @@ public class AjaxCall extends JavaScriptPart
      */
     public void setEventType(EventTypes eventType)
     {
-<span class="nc" id="L164">        this.eventType = eventType;</span>
-<span class="nc" id="L165">    }</span>
+<span class="nc" id="L162">        this.eventType = eventType;</span>
+<span class="nc" id="L163">    }</span>
 
     /**
      * Returns this calls event type from
@@ -171,7 +169,7 @@ public class AjaxCall extends JavaScriptPart
      */
     public EventTypes getEventTypeFrom()
     {
-<span class="nc" id="L174">        return eventTypeFrom;</span>
+<span class="nc" id="L172">        return eventTypeFrom;</span>
     }
 
     /**
@@ -181,8 +179,8 @@ public class AjaxCall extends JavaScriptPart
      */
     public void setEventTypeFrom(EventTypes eventTypeFrom)
     {
-<span class="nc" id="L184">        this.eventTypeFrom = eventTypeFrom;</span>
-<span class="nc" id="L185">    }</span>
+<span class="nc" id="L182">        this.eventTypeFrom = eventTypeFrom;</span>
+<span class="nc" id="L183">    }</span>
 
     /**
      * Returns this calls value
@@ -191,7 +189,7 @@ public class AjaxCall extends JavaScriptPart
      */
     public AjaxEventValue getValue()
     {
-<span class="nc" id="L194">        return value;</span>
+<span class="nc" id="L192">        return value;</span>
     }
 
     /**
@@ -201,8 +199,8 @@ public class AjaxCall extends JavaScriptPart
      */
     public void setValue(AjaxEventValue value)
     {
-<span class="nc" id="L204">        this.value = value;</span>
-<span class="nc" id="L205">    }</span>
+<span class="nc" id="L202">        this.value = value;</span>
+<span class="nc" id="L203">    }</span>
 
     /**
      * Returns this calls component
@@ -211,7 +209,7 @@ public class AjaxCall extends JavaScriptPart
      */
     public ComponentHierarchyBase getComponent()
     {
-<span class="nc" id="L214">        return component;</span>
+<span class="nc" id="L212">        return component;</span>
     }
 
     /**
@@ -221,8 +219,8 @@ public class AjaxCall extends JavaScriptPart
      */
     public void setComponent(ComponentHierarchyBase component)
     {
-<span class="nc" id="L224">        this.component = component;</span>
-<span class="nc" id="L225">    }</span>
+<span class="nc" id="L222">        this.component = component;</span>
+<span class="nc" id="L223">    }</span>
 
     /**
      * Returns JSON strings of inbound variables
@@ -231,11 +229,11 @@ public class AjaxCall extends JavaScriptPart
      */
     public List&lt;AngularJsonVariable&gt; getVariableData()
     {
-<span class="nc bnc" id="L234" title="All 2 branches missed.">        if (variableData == null)</span>
+<span class="nc bnc" id="L232" title="All 2 branches missed.">        if (variableData == null)</span>
         {
-<span class="nc" id="L236">            variableData = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L234">            variableData = new ArrayList&lt;&gt;();</span>
         }
-<span class="nc" id="L238">        return variableData;</span>
+<span class="nc" id="L236">        return variableData;</span>
     }
 
     /**
@@ -245,27 +243,47 @@ public class AjaxCall extends JavaScriptPart
      */
     public void setVariableData(List&lt;AngularJsonVariable&gt; variableData)
     {
-<span class="nc" id="L248">        this.variableData = variableData;</span>
-<span class="nc" id="L249">    }</span>
+<span class="nc" id="L246">        this.variableData = variableData;</span>
+<span class="nc" id="L247">    }</span>
+
+    /**
+     * Returns the variable with the given name in the array or null
+     *
+     * @param name The name of the variable as designated
+     *
+     * @return
+     */
+    public AngularJsonVariable getVariable(String name)
+    {
+<span class="nc bnc" id="L258" title="All 2 branches missed.">        for (AngularJsonVariable next : getVariableData())</span>
+        {
+<span class="nc bnc" id="L260" title="All 2 branches missed.">            if (next.getVariableName().equals(name))</span>
+            {
+<span class="nc" id="L262">                return next;</span>
+            }
+<span class="nc" id="L264">        }</span>
+<span class="nc" id="L265">        return null;</span>
+    }
 
     /**
      * The event ID
-     * @return 
+     *
+     * @return
      */
     public String getEventId()
     {
-<span class="nc" id="L257">        return eventId;</span>
+<span class="nc" id="L275">        return eventId;</span>
     }
 
     /**
      * The Event ID
-     * @param eventId 
+     *
+     * @param eventId
      */
     public void setEventId(String eventId)
     {
-<span class="nc" id="L266">        this.eventId = eventId;</span>
-<span class="nc" id="L267">    }</span>
+<span class="nc" id="L285">        this.eventId = eventId;</span>
+<span class="nc" id="L286">    }</span>
 
-    
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -16,9 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqplot.options.axis;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRawValue;
+import com.fasterxml.jackson.annotation.*;
 import za.co.mmagon.jwebswing.components.jqplot.JQPlotGraph;
 import za.co.mmagon.jwebswing.components.jqplot.parts.interfaces.JQPlotAxisLabelRenderer;
 import za.co.mmagon.jwebswing.components.jqplot.parts.interfaces.JQPlotTickRenderer;
@@ -33,6 +31,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 public class JQPlotAxisLabelRendererOptionsCategoryLabels&lt;O extends JavaScriptPart &amp; JQPlotTickRenderer&gt; extends JavaScriptPart
         implements JQPlotAxisLabelRenderer
 {
+
+    private static final long serialVersionUID = 1L;
 
     @JsonIgnore
     private JQPlotGraph linkedGraph;

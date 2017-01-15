@@ -12,19 +12,27 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * &lt;p&gt;
  * The &amp;lt;form&amp;gt; tag is used to create an HTML form for user input.&lt;p&gt;
  * &lt;p&gt;
- * The &amp;lt;form&amp;gt; element can contain one or more of the following form elements:&lt;p&gt;
+ * The &amp;lt;form&amp;gt; element can contain one or more of the following form elements:
  * &lt;p&gt;
- * &amp;lt;input&amp;gt;&lt;p&gt;
- * &amp;lt;textarea&amp;gt;&lt;p&gt;
- * &amp;lt;button&amp;gt;&lt;p&gt;
- * &amp;lt;select&amp;gt;&lt;p&gt;
- * &amp;lt;option&amp;gt;&lt;p&gt;
- * &amp;lt;optgroup&amp;gt;&lt;p&gt;
- * &amp;lt;fieldset&amp;gt;&lt;p&gt;
- * &amp;lt;label&amp;gt;&lt;p&gt;
  * &lt;p&gt;
- * Browser Support Element
- * &amp;lt;form&amp;gt; Yes Yes Yes Yes Yes
+ * &amp;lt;input&amp;gt;
+ * &lt;p&gt;
+ * &amp;lt;textarea&amp;gt;
+ * &lt;p&gt;
+ * &amp;lt;button&amp;gt;
+ * &lt;p&gt;
+ * &amp;lt;select&amp;gt;
+ * &lt;p&gt;
+ * &amp;lt;option&amp;gt;
+ * &lt;p&gt;
+ * &amp;lt;optgroup&amp;gt;
+ * &lt;p&gt;
+ * &amp;lt;fieldset&amp;gt;
+ * &lt;p&gt;
+ * &amp;lt;label&amp;gt;
+ * &lt;p&gt;
+ * &lt;p&gt;
+ * Browser Support Element &amp;lt;form&amp;gt; Yes Yes Yes Yes Yes
  * &lt;p&gt;
  * Differences Between HTML 4.01 and HTML5
  * &lt;p&gt;
@@ -38,13 +46,15 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 public class Form extends Component&lt;FormChildren, FormAttributes, GlobalFeatures, GlobalEvents, Form&gt;
 {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Constructs a new form
      */
     public Form()
     {
-<span class="fc" id="L46">        super(ComponentTypes.Form);</span>
-<span class="fc" id="L47">    }</span>
+<span class="fc" id="L56">        super(ComponentTypes.Form);</span>
+<span class="fc" id="L57">    }</span>
 
     /**
      * The label of this form
@@ -54,14 +64,17 @@ public class Form extends Component&lt;FormChildren, FormAttributes, GlobalFeatu
     @Override
     protected StringBuilder renderBeforeTag()
     {
-<span class="pc bpc" id="L57" title="1 of 2 branches missed.">        if (label != null)</span>
+<span class="pc bpc" id="L67" title="1 of 2 branches missed.">        if (label != null)</span>
         {
-<span class="nc" id="L59">            StringBuilder sb = new StringBuilder();</span>
-<span class="nc" id="L60">            sb.append(super.renderBeforeTag());</span>
-<span class="nc" id="L61">            sb.append(label.toString(true));</span>
-<span class="nc" id="L62">            return sb;</span>
+<span class="nc" id="L69">            StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L70">            sb.append(super.renderBeforeTag());</span>
+<span class="nc" id="L71">            sb.append(label.toString(true));</span>
+<span class="nc" id="L72">            return sb;</span>
         }
-<span class="fc" id="L64">        else return super.renderBeforeTag();</span>
+        else
+        {
+<span class="fc" id="L76">            return super.renderBeforeTag();</span>
+        }
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

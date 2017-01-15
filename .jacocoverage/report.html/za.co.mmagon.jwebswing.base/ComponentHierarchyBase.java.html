@@ -157,51 +157,65 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     {
 <span class="fc bfc" id="L158" title="All 2 branches covered.">        if (!isInitialized())</span>
         {
-<span class="fc" id="L160">            ArrayList&lt;ComponentHierarchyBase&gt; clonedBase = (ArrayList&lt;ComponentHierarchyBase&gt;) getChildren();</span>
-<span class="pc bpc" id="L161" title="1 of 2 branches missed.">            clonedBase.stream().filter(a -&gt; a != null).forEach(comp</span>
+
+<span class="fc" id="L161">            ArrayList&lt;ComponentHierarchyBase&gt; clonedBase = (ArrayList&lt;ComponentHierarchyBase&gt;) getChildren();</span>
+<span class="pc bpc" id="L162" title="1 of 2 branches missed.">            clonedBase.stream().filter(a -&gt; a != null).forEach(comp</span>
                     -&gt;
             {
-<span class="fc" id="L164">                ComponentHierarchyBase cfb = comp;</span>
-<span class="fc" id="L165">                cfb.init();</span>
-<span class="fc" id="L166">            });</span>
+<span class="fc" id="L165">                ComponentHierarchyBase cfb = comp;</span>
+<span class="fc" id="L166">                cfb.init();</span>
+<span class="fc" id="L167">            });</span>
         }
-<span class="fc" id="L168">        super.init();</span>
-<span class="fc" id="L169">    }</span>
+<span class="fc" id="L169">        super.init();</span>
+<span class="fc" id="L170">    }</span>
 
     @Override
     public void preConfigure()
     {
-<span class="fc bfc" id="L174" title="All 2 branches covered.">        if (!isInitialized())</span>
+<span class="fc bfc" id="L175" title="All 2 branches covered.">        if (!isInitialized())</span>
         {
-<span class="fc" id="L176">            init();</span>
+<span class="fc" id="L177">            init();</span>
         }
 
-<span class="fc bfc" id="L179" title="All 2 branches covered.">        if (!isConfigured())</span>
+<span class="fc bfc" id="L180" title="All 2 branches covered.">        if (!isConfigured())</span>
         {
-<span class="fc" id="L181">            ArrayList&lt;ComponentHierarchyBase&gt; clonedBase = (ArrayList&lt;ComponentHierarchyBase&gt;) getChildren();</span>
-<span class="fc" id="L182">            clonedBase = (ArrayList&lt;ComponentHierarchyBase&gt;) clonedBase.clone();</span>
-
-<span class="pc bpc" id="L184" title="1 of 2 branches missed.">            clonedBase.stream().filter(a -&gt; a != null).forEach(feature</span>
+<span class="fc bfc" id="L182" title="All 2 branches covered.">            if (ComponentHTMLBootstrapBase.class.isAssignableFrom(getClass()))</span>
+            {
+<span class="fc bfc" id="L184" title="All 2 branches covered.">                if (ComponentHTMLBootstrapBase.class.cast(this).isBootstrapRequired())</span>
+                {
+<span class="fc" id="L186">                    getPage().getOptions().setBootstrapEnabled(true);</span>
+                }
+            }
+<span class="fc" id="L189">            ArrayList&lt;ComponentHierarchyBase&gt; clonedBase = (ArrayList&lt;ComponentHierarchyBase&gt;) getChildren();</span>
+<span class="fc" id="L190">            clonedBase = (ArrayList&lt;ComponentHierarchyBase&gt;) clonedBase.clone();</span>
+<span class="pc bpc" id="L191" title="1 of 2 branches missed.">            clonedBase.stream().filter(a -&gt; a != null).forEach(feature</span>
                     -&gt;
             {
-<span class="fc" id="L187">                ComponentHierarchyBase cfb = feature;</span>
-<span class="pc bpc" id="L188" title="1 of 4 branches missed.">                if (cfb != null &amp;&amp; !cfb.isConfigured())</span>
+<span class="fc" id="L194">                ComponentHierarchyBase cfb = feature;</span>
+<span class="pc bpc" id="L195" title="1 of 4 branches missed.">                if (cfb != null &amp;&amp; !cfb.isConfigured())</span>
                 {
-<span class="fc" id="L190">                    cfb.preConfigure();</span>
+<span class="fc" id="L197">                    cfb.preConfigure();</span>
+<span class="pc bpc" id="L198" title="1 of 2 branches missed.">                    if (getClass().isAssignableFrom(ComponentHTMLAngularBase.class))</span>
+                    {
+<span class="nc bnc" id="L200" title="All 2 branches missed.">                        if (ComponentHTMLAngularBase.class.cast(this).isLoadAngular())</span>
+                        {
+<span class="nc" id="L202">                            cfb.getPage().getOptions().setAngularEnabled(true);</span>
+                        }
+                    }
                 }
-<span class="fc" id="L192">            });</span>
+<span class="fc" id="L206">            });</span>
 
-<span class="fc bfc" id="L194" title="All 2 branches covered.">            if (hasChildren())</span>
+<span class="fc bfc" id="L208" title="All 2 branches covered.">            if (hasChildren())</span>
             {
-<span class="fc" id="L196">                setNewLineForClosingTag(true);</span>
+<span class="fc" id="L210">                setNewLineForClosingTag(true);</span>
             }
             else
             {
-<span class="fc" id="L200">                setNewLineForClosingTag(false);</span>
+<span class="fc" id="L214">                setNewLineForClosingTag(false);</span>
             }
         }
-<span class="fc" id="L203">        super.preConfigure();</span>
-<span class="fc" id="L204">    }</span>
+<span class="fc" id="L217">        super.preConfigure();</span>
+<span class="fc" id="L218">    }</span>
 
     /**
      * Returns the children ArrayList of type Component
@@ -211,11 +225,11 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public final List&lt;ComponentHierarchyBase&gt; getChildren()
     {
-<span class="fc bfc" id="L214" title="All 2 branches covered.">        if (children == null)</span>
+<span class="fc bfc" id="L228" title="All 2 branches covered.">        if (children == null)</span>
         {
-<span class="fc" id="L216">            children = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L230">            children = new ArrayList&lt;&gt;();</span>
         }
-<span class="fc" id="L218">        return children;</span>
+<span class="fc" id="L232">        return children;</span>
     }
 
     /**
@@ -226,7 +240,7 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public List&lt;ComponentHierarchyBase&gt; getChildrenHierarchy()
     {
-<span class="fc" id="L229">        return getChildrenHierarchy(true);</span>
+<span class="fc" id="L243">        return getChildrenHierarchy(true);</span>
     }
 
     /**
@@ -239,14 +253,14 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public List&lt;ComponentHierarchyBase&gt; getChildrenHierarchy(boolean trues)
     {
-<span class="fc" id="L242">        ArrayList&lt;ComponentHierarchyBase&gt; components = new ArrayList();</span>
-<span class="pc bpc" id="L243" title="1 of 2 branches missed.">        if (trues)</span>
+<span class="fc" id="L256">        ArrayList&lt;ComponentHierarchyBase&gt; components = new ArrayList();</span>
+<span class="pc bpc" id="L257" title="1 of 2 branches missed.">        if (trues)</span>
         {
-<span class="fc" id="L245">            components.add(this);</span>
+<span class="fc" id="L259">            components.add(this);</span>
         }
-<span class="fc" id="L247">        getChildrenHierarchy(components);</span>
+<span class="fc" id="L261">        getChildrenHierarchy(components);</span>
 
-<span class="fc" id="L249">        return components;</span>
+<span class="fc" id="L263">        return components;</span>
     }
 
     /**
@@ -261,23 +275,23 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public List&lt;ComponentHierarchyBase&gt; getChildrenHierarchy(List&lt;ComponentHierarchyBase&gt; componentsToAddTo)
     {
-<span class="pc bpc" id="L264" title="1 of 2 branches missed.">        getChildren().stream().filter(child -&gt; !(child == null)).map(child</span>
+<span class="pc bpc" id="L278" title="1 of 2 branches missed.">        getChildren().stream().filter(child -&gt; !(child == null)).map(child</span>
                 -&gt;
         {
-<span class="fc bfc" id="L267" title="All 2 branches covered.">            if (!componentsToAddTo.contains(child))</span>
+<span class="fc bfc" id="L281" title="All 2 branches covered.">            if (!componentsToAddTo.contains(child))</span>
             {
-<span class="fc" id="L269">                componentsToAddTo.add(child);</span>
+<span class="fc" id="L283">                componentsToAddTo.add(child);</span>
             }
-<span class="fc" id="L271">            return child;</span>
-<span class="fc" id="L272">        }).forEach(child</span>
+<span class="fc" id="L285">            return child;</span>
+<span class="fc" id="L286">        }).forEach(child</span>
                 -&gt;
         {
-<span class="pc bpc" id="L275" title="1 of 2 branches missed.">            if (child != null)</span>
+<span class="pc bpc" id="L289" title="1 of 2 branches missed.">            if (child != null)</span>
             {
-<span class="fc" id="L277">                child.getChildrenHierarchy(componentsToAddTo);</span>
+<span class="fc" id="L291">                child.getChildrenHierarchy(componentsToAddTo);</span>
             }
-<span class="fc" id="L279">        });</span>
-<span class="fc" id="L280">        return componentsToAddTo;</span>
+<span class="fc" id="L293">        });</span>
+<span class="fc" id="L294">        return componentsToAddTo;</span>
     }
 
     /**
@@ -288,21 +302,21 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     protected StringBuilder renderChildren()
     {
-<span class="fc" id="L291">        StringBuilder sb = new StringBuilder();</span>
-<span class="fc bfc" id="L292" title="All 2 branches covered.">        if (renderBeforeChildren() != null)</span>
+<span class="fc" id="L305">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc bfc" id="L306" title="All 2 branches covered.">        if (renderBeforeChildren() != null)</span>
         {
-<span class="fc" id="L294">            sb.append(renderBeforeChildren());</span>
+<span class="fc" id="L308">            sb.append(renderBeforeChildren());</span>
         }
-<span class="pc bpc" id="L296" title="1 of 2 branches missed.">        getChildren().stream().filter(a -&gt; a != null).forEach(child</span>
+<span class="pc bpc" id="L310" title="1 of 2 branches missed.">        getChildren().stream().filter(a -&gt; a != null).forEach(child</span>
                 -&gt;
         {
-<span class="fc bfc" id="L299" title="All 2 branches covered.">            sb.append(getNewLine()).append(child.toString(isTiny() ? 0 : getCurrentTabIndents() + 1));</span>
-<span class="fc" id="L300">        });</span>
-<span class="fc bfc" id="L301" title="All 2 branches covered.">        if (renderAfterChildren() != null)</span>
+<span class="fc bfc" id="L313" title="All 2 branches covered.">            sb.append(getNewLine()).append(child.toString(isTiny() ? 0 : getCurrentTabIndents() + 1));</span>
+<span class="fc" id="L314">        });</span>
+<span class="fc bfc" id="L315" title="All 2 branches covered.">        if (renderAfterChildren() != null)</span>
         {
-<span class="fc" id="L303">            sb.append(renderAfterChildren());</span>
+<span class="fc" id="L317">            sb.append(renderAfterChildren());</span>
         }
-<span class="fc" id="L305">        return sb;</span>
+<span class="fc" id="L319">        return sb;</span>
     }
 
     /**
@@ -313,14 +327,14 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public J setPage(Page page)
     {
-<span class="fc" id="L316">        this.page = page;</span>
-<span class="pc bpc" id="L317" title="1 of 2 branches missed.">        getChildren().stream().filter(a -&gt; a != null).forEach(child</span>
+<span class="fc" id="L330">        this.page = page;</span>
+<span class="pc bpc" id="L331" title="1 of 2 branches missed.">        getChildren().stream().filter(a -&gt; a != null).forEach(child</span>
                 -&gt;
         {
 
-<span class="fc" id="L321">            child.setPage(page);</span>
-<span class="fc" id="L322">        });</span>
-<span class="fc" id="L323">        return (J) this;</span>
+<span class="fc" id="L335">            child.setPage(page);</span>
+<span class="fc" id="L336">        });</span>
+<span class="fc" id="L337">        return (J) this;</span>
     }
 
     /**
@@ -331,11 +345,11 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public Page getPage()
     {
-<span class="fc bfc" id="L334" title="All 2 branches covered.">        if (page == null)</span>
+<span class="fc bfc" id="L348" title="All 2 branches covered.">        if (page == null)</span>
         {
-<span class="fc" id="L336">            setPage(new Page());</span>
+<span class="fc" id="L350">            setPage(new Page());</span>
         }
-<span class="fc" id="L338">        return page;</span>
+<span class="fc" id="L352">        return page;</span>
     }
 
     /**
@@ -346,7 +360,7 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public ComponentHierarchyBase getParent()
     {
-<span class="fc" id="L349">        return parent;</span>
+<span class="fc" id="L363">        return parent;</span>
     }
 
     /**
@@ -357,11 +371,11 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @JsonProperty(&quot;parent&quot;)
     private String getParentJSON()
     {
-<span class="fc bfc" id="L360" title="All 2 branches covered.">        if (getParent() != null)</span>
+<span class="fc bfc" id="L374" title="All 2 branches covered.">        if (getParent() != null)</span>
         {
-<span class="fc" id="L362">            return getParent().getID();</span>
+<span class="fc" id="L376">            return getParent().getID();</span>
         }
-<span class="fc" id="L364">        return null;</span>
+<span class="fc" id="L378">        return null;</span>
     }
 
     /**
@@ -372,8 +386,8 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public J setParent(ComponentHierarchyBase parent)
     {
-<span class="fc" id="L375">        this.parent = parent;</span>
-<span class="fc" id="L376">        return (J) this;</span>
+<span class="fc" id="L389">        this.parent = parent;</span>
+<span class="fc" id="L390">        return (J) this;</span>
     }
 
     /**
@@ -384,7 +398,7 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public boolean hasChildren()
     {
-<span class="fc bfc" id="L387" title="All 2 branches covered.">        return !getChildren().isEmpty();</span>
+<span class="fc bfc" id="L401" title="All 2 branches covered.">        return !getChildren().isEmpty();</span>
     }
 
     /**
@@ -395,20 +409,20 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public List&lt;JavascriptReference&gt; getJavascriptReferencesAll()
     {
-<span class="fc" id="L398">        List&lt;JavascriptReference&gt; allJs = super.getJavascriptReferencesAll();</span>
-<span class="pc bpc" id="L399" title="1 of 2 branches missed.">        getChildren().stream().filter(a -&gt; a != null).forEach(child</span>
+<span class="fc" id="L412">        List&lt;JavascriptReference&gt; allJs = super.getJavascriptReferencesAll();</span>
+<span class="pc bpc" id="L413" title="1 of 2 branches missed.">        getChildren().stream().filter(a -&gt; a != null).forEach(child</span>
                 -&gt;
         {
-<span class="fc bfc" id="L402" title="All 2 branches covered.">            for (Iterator&lt;JavascriptReference&gt; iterator1 = child.getJavascriptReferencesAll().iterator(); iterator1.hasNext();)</span>
+<span class="fc bfc" id="L416" title="All 2 branches covered.">            for (Iterator&lt;JavascriptReference&gt; iterator1 = child.getJavascriptReferencesAll().iterator(); iterator1.hasNext();)</span>
             {
-<span class="fc" id="L404">                JavascriptReference jScript = iterator1.next();</span>
-<span class="fc bfc" id="L405" title="All 2 branches covered.">                if (!allJs.contains(jScript))</span>
+<span class="fc" id="L418">                JavascriptReference jScript = iterator1.next();</span>
+<span class="fc bfc" id="L419" title="All 2 branches covered.">                if (!allJs.contains(jScript))</span>
                 {
-<span class="fc" id="L407">                    allJs.add(jScript);</span>
+<span class="fc" id="L421">                    allJs.add(jScript);</span>
                 }
-<span class="fc" id="L409">            }</span>
-<span class="fc" id="L410">        });</span>
-<span class="fc" id="L411">        return allJs;</span>
+<span class="fc" id="L423">            }</span>
+<span class="fc" id="L424">        });</span>
+<span class="fc" id="L425">        return allJs;</span>
     }
 
     /**
@@ -419,20 +433,20 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public List&lt;Event&gt; getEventsAll()
     {
-<span class="nc" id="L422">        ArrayList&lt;Event&gt; allEvents = new ArrayList&lt;&gt;();</span>
-<span class="nc bnc" id="L423" title="All 2 branches missed.">        getChildrenHierarchy().stream().filter(a -&gt; a != null).forEach(child</span>
+<span class="nc" id="L436">        ArrayList&lt;Event&gt; allEvents = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L437" title="All 2 branches missed.">        getChildrenHierarchy().stream().filter(a -&gt; a != null).forEach(child</span>
                 -&gt;
         {
-<span class="nc bnc" id="L426" title="All 2 branches missed.">            for (Iterator&lt;Event&gt; iterator1 = child.getEvents().iterator(); iterator1.hasNext();)</span>
+<span class="nc bnc" id="L440" title="All 2 branches missed.">            for (Iterator&lt;Event&gt; iterator1 = child.getEvents().iterator(); iterator1.hasNext();)</span>
             {
-<span class="nc" id="L428">                Event event = iterator1.next();</span>
-<span class="nc bnc" id="L429" title="All 2 branches missed.">                if (event != null)</span>
+<span class="nc" id="L442">                Event event = iterator1.next();</span>
+<span class="nc bnc" id="L443" title="All 2 branches missed.">                if (event != null)</span>
                 {
-<span class="nc" id="L431">                    allEvents.add(event);</span>
+<span class="nc" id="L445">                    allEvents.add(event);</span>
                 }
-<span class="nc" id="L433">            }</span>
-<span class="nc" id="L434">        });</span>
-<span class="nc" id="L435">        return allEvents;</span>
+<span class="nc" id="L447">            }</span>
+<span class="nc" id="L448">        });</span>
+<span class="nc" id="L449">        return allEvents;</span>
     }
 
     /**
@@ -442,20 +456,20 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
      */
     public List&lt;Feature&gt; getFeaturesAll()
     {
-<span class="nc" id="L445">        ArrayList&lt;Feature&gt; allFeatures = new ArrayList&lt;&gt;();</span>
-<span class="nc bnc" id="L446" title="All 2 branches missed.">        getChildrenHierarchy().stream().filter(a -&gt; a != null).forEach(child</span>
+<span class="nc" id="L459">        ArrayList&lt;Feature&gt; allFeatures = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L460" title="All 2 branches missed.">        getChildrenHierarchy().stream().filter(a -&gt; a != null).forEach(child</span>
                 -&gt;
         {
-<span class="nc bnc" id="L449" title="All 2 branches missed.">            for (Iterator&lt;Feature&gt; iterator1 = child.getFeatures().iterator(); iterator1.hasNext();)</span>
+<span class="nc bnc" id="L463" title="All 2 branches missed.">            for (Iterator&lt;Feature&gt; iterator1 = child.getFeatures().iterator(); iterator1.hasNext();)</span>
             {
-<span class="nc" id="L451">                Feature event = iterator1.next();</span>
-<span class="nc bnc" id="L452" title="All 2 branches missed.">                if (event != null)</span>
+<span class="nc" id="L465">                Feature event = iterator1.next();</span>
+<span class="nc bnc" id="L466" title="All 2 branches missed.">                if (event != null)</span>
                 {
-<span class="nc" id="L454">                    allFeatures.add(event);</span>
+<span class="nc" id="L468">                    allFeatures.add(event);</span>
                 }
-<span class="nc" id="L456">            }</span>
-<span class="nc" id="L457">        });</span>
-<span class="nc" id="L458">        return allFeatures;</span>
+<span class="nc" id="L470">            }</span>
+<span class="nc" id="L471">        });</span>
+<span class="nc" id="L472">        return allFeatures;</span>
     }
 
     /**
@@ -466,20 +480,20 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public List&lt;CSSReference&gt; getCssReferencesAll()
     {
-<span class="fc" id="L469">        List&lt;CSSReference&gt; allCss = super.getCssReferencesAll();</span>
-<span class="pc bpc" id="L470" title="1 of 2 branches missed.">        getChildren().stream().filter(a -&gt; a != null).forEach(child</span>
+<span class="fc" id="L483">        List&lt;CSSReference&gt; allCss = super.getCssReferencesAll();</span>
+<span class="pc bpc" id="L484" title="1 of 2 branches missed.">        getChildren().stream().filter(a -&gt; a != null).forEach(child</span>
                 -&gt;
         {
-<span class="fc bfc" id="L473" title="All 2 branches covered.">            for (Iterator&lt;CSSReference&gt; iterator1 = child.getCssReferencesAll().iterator(); iterator1.hasNext();)</span>
+<span class="fc bfc" id="L487" title="All 2 branches covered.">            for (Iterator&lt;CSSReference&gt; iterator1 = child.getCssReferencesAll().iterator(); iterator1.hasNext();)</span>
             {
-<span class="fc" id="L475">                CSSReference jScript = iterator1.next();</span>
-<span class="fc bfc" id="L476" title="All 2 branches covered.">                if (!allCss.contains(jScript))</span>
+<span class="fc" id="L489">                CSSReference jScript = iterator1.next();</span>
+<span class="fc bfc" id="L490" title="All 2 branches covered.">                if (!allCss.contains(jScript))</span>
                 {
-<span class="fc" id="L478">                    allCss.add(jScript);</span>
+<span class="fc" id="L492">                    allCss.add(jScript);</span>
                 }
-<span class="fc" id="L480">            }</span>
-<span class="fc" id="L481">        });</span>
-<span class="fc" id="L482">        return allCss;</span>
+<span class="fc" id="L494">            }</span>
+<span class="fc" id="L495">        });</span>
+<span class="fc" id="L496">        return allCss;</span>
     }
 
     /**
@@ -492,18 +506,18 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public ComponentEventBase getEvent(String eventId)
     {
-<span class="nc bnc" id="L495" title="All 2 branches missed.">        for (ComponentHierarchyBase child : getChildren())</span>
+<span class="nc bnc" id="L509" title="All 2 branches missed.">        for (ComponentHierarchyBase child : getChildren())</span>
         {
-<span class="nc bnc" id="L497" title="All 2 branches missed.">            for (Iterator&lt;ComponentEventBase&gt; iterator1 = child.getEventsAll().iterator(); iterator1.hasNext();)</span>
+<span class="nc bnc" id="L511" title="All 2 branches missed.">            for (Iterator&lt;ComponentEventBase&gt; iterator1 = child.getEventsAll().iterator(); iterator1.hasNext();)</span>
             {
-<span class="nc" id="L499">                ComponentEventBase jScript = iterator1.next();</span>
-<span class="nc bnc" id="L500" title="All 2 branches missed.">                if (jScript.getID().equals(eventId))</span>
+<span class="nc" id="L513">                ComponentEventBase jScript = iterator1.next();</span>
+<span class="nc bnc" id="L514" title="All 2 branches missed.">                if (jScript.getID().equals(eventId))</span>
                 {
-<span class="nc" id="L502">                    return jScript;</span>
+<span class="nc" id="L516">                    return jScript;</span>
                 }
-<span class="nc" id="L504">            }</span>
-<span class="nc" id="L505">        }</span>
-<span class="nc" id="L506">        return null;</span>
+<span class="nc" id="L518">            }</span>
+<span class="nc" id="L519">        }</span>
+<span class="nc" id="L520">        return null;</span>
     }
 
     /**
@@ -515,20 +529,20 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public List&lt;String&gt; getVariablesAll()
     {
-<span class="fc" id="L518">        ArrayList&lt;String&gt; allVariables = new ArrayList&lt;&gt;();</span>
-<span class="pc bpc" id="L519" title="1 of 2 branches missed.">        getChildrenHierarchy().stream().filter(a -&gt; a != null).forEach(child</span>
+<span class="fc" id="L532">        ArrayList&lt;String&gt; allVariables = new ArrayList&lt;&gt;();</span>
+<span class="pc bpc" id="L533" title="1 of 2 branches missed.">        getChildrenHierarchy().stream().filter(a -&gt; a != null).forEach(child</span>
                 -&gt;
         {
-<span class="fc bfc" id="L522" title="All 2 branches covered.">            for (Iterator it = child.getVariables().iterator(); it.hasNext();)</span>
+<span class="fc bfc" id="L536" title="All 2 branches covered.">            for (Iterator it = child.getVariables().iterator(); it.hasNext();)</span>
             {
-<span class="fc" id="L524">                String variable = (String) it.next();</span>
-<span class="pc bpc" id="L525" title="1 of 2 branches missed.">                if (!allVariables.contains(variable))</span>
+<span class="fc" id="L538">                String variable = (String) it.next();</span>
+<span class="pc bpc" id="L539" title="1 of 2 branches missed.">                if (!allVariables.contains(variable))</span>
                 {
-<span class="fc" id="L527">                    allVariables.add(variable);</span>
+<span class="fc" id="L541">                    allVariables.add(variable);</span>
                 }
-<span class="fc" id="L529">            }</span>
-<span class="fc" id="L530">        });</span>
-<span class="fc" id="L531">        return allVariables;</span>
+<span class="fc" id="L543">            }</span>
+<span class="fc" id="L544">        });</span>
+<span class="fc" id="L545">        return allVariables;</span>
     }
 
     /**
@@ -539,49 +553,49 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public List&lt;StringBuilder&gt; getQueriesAll()
     {
-<span class="fc" id="L542">        ArrayList&lt;StringBuilder&gt; reallyAllQueries = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L543">        List&lt;ComponentHierarchyBase&gt; allComponents = getChildrenHierarchy(true);</span>
-<span class="pc bpc" id="L544" title="1 of 2 branches missed.">        allComponents.stream().filter(currentComponent -&gt; currentComponent != null).map(componentQuery -&gt;</span>
+<span class="fc" id="L556">        ArrayList&lt;StringBuilder&gt; reallyAllQueries = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L557">        List&lt;ComponentHierarchyBase&gt; allComponents = getChildrenHierarchy(true);</span>
+<span class="pc bpc" id="L558" title="1 of 2 branches missed.">        allComponents.stream().filter(currentComponent -&gt; currentComponent != null).map(componentQuery -&gt;</span>
         {
-<span class="fc" id="L546">            List&lt;ComponentFeatureBase&gt; features = componentQuery.getFeatures();</span>
-<span class="fc" id="L547">            features.stream().map(feature -&gt;</span>
+<span class="fc" id="L560">            List&lt;ComponentFeatureBase&gt; features = componentQuery.getFeatures();</span>
+<span class="fc" id="L561">            features.stream().map(feature -&gt;</span>
             {
-<span class="pc bpc" id="L549" title="1 of 2 branches missed.">                if (!feature.isConfigured())</span>
+<span class="pc bpc" id="L563" title="1 of 2 branches missed.">                if (!feature.isConfigured())</span>
                 {
-<span class="nc" id="L551">                    feature.preConfigure();</span>
-<span class="nc" id="L552">                    feature.setConfigured(true);</span>
+<span class="nc" id="L565">                    feature.preConfigure();</span>
+<span class="nc" id="L566">                    feature.setConfigured(true);</span>
                 }
-<span class="fc" id="L554">                return feature;</span>
-<span class="fc" id="L555">            }).forEachOrdered(feature -&gt;</span>
+<span class="fc" id="L568">                return feature;</span>
+<span class="fc" id="L569">            }).forEachOrdered(feature -&gt;</span>
             {
-<span class="fc" id="L557">                reallyAllQueries.add(feature.renderJavascript());</span>
-<span class="fc" id="L558">            });</span>
-<span class="fc" id="L559">            List&lt;ComponentFeatureBase&gt; events = componentQuery.getFeatures();</span>
-<span class="fc" id="L560">            return events;</span>
-<span class="fc" id="L561">        }).map(events -&gt;</span>
+<span class="fc" id="L571">                reallyAllQueries.add(feature.renderJavascript());</span>
+<span class="fc" id="L572">            });</span>
+<span class="fc" id="L573">            List&lt;ComponentFeatureBase&gt; events = componentQuery.getFeatures();</span>
+<span class="fc" id="L574">            return events;</span>
+<span class="fc" id="L575">        }).map(events -&gt;</span>
         {
-<span class="fc" id="L563">            events.stream().map(event -&gt;</span>
+<span class="fc" id="L577">            events.stream().map(event -&gt;</span>
             {
-<span class="pc bpc" id="L565" title="1 of 2 branches missed.">                if (!event.isConfigured())</span>
+<span class="pc bpc" id="L579" title="1 of 2 branches missed.">                if (!event.isConfigured())</span>
                 {
-<span class="nc" id="L567">                    event.preConfigure();</span>
-<span class="nc" id="L568">                    event.setConfigured(true);</span>
+<span class="nc" id="L581">                    event.preConfigure();</span>
+<span class="nc" id="L582">                    event.setConfigured(true);</span>
                 }
-<span class="fc" id="L570">                return event;</span>
-<span class="fc" id="L571">            }).forEachOrdered(event -&gt;</span>
+<span class="fc" id="L584">                return event;</span>
+<span class="fc" id="L585">            }).forEachOrdered(event -&gt;</span>
             {
-<span class="fc" id="L573">                reallyAllQueries.add(event.renderJavascript());</span>
-<span class="fc" id="L574">            });</span>
-<span class="fc" id="L575">            return events;</span>
-<span class="fc" id="L576">        }).map(_item -&gt; new ArrayList&lt;&gt;()).forEachOrdered(componentQueries -&gt;</span>
+<span class="fc" id="L587">                reallyAllQueries.add(event.renderJavascript());</span>
+<span class="fc" id="L588">            });</span>
+<span class="fc" id="L589">            return events;</span>
+<span class="fc" id="L590">        }).map(_item -&gt; new ArrayList&lt;&gt;()).forEachOrdered(componentQueries -&gt;</span>
         {
-<span class="pc bpc" id="L578" title="1 of 2 branches missed.">            for (Iterator&lt;Object&gt; it = componentQueries.iterator(); it.hasNext();)</span>
+<span class="pc bpc" id="L592" title="1 of 2 branches missed.">            for (Iterator&lt;Object&gt; it = componentQueries.iterator(); it.hasNext();)</span>
             {
-<span class="nc" id="L580">                reallyAllQueries.add((StringBuilder) it.next());</span>
+<span class="nc" id="L594">                reallyAllQueries.add((StringBuilder) it.next());</span>
             }
-<span class="fc" id="L582">        });</span>
+<span class="fc" id="L596">        });</span>
 
-<span class="fc" id="L584">        return reallyAllQueries;</span>
+<span class="fc" id="L598">        return reallyAllQueries;</span>
     }
 
     /**
@@ -593,16 +607,16 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public StringBuilder renderJavascriptAll()
     {
-<span class="fc" id="L596">        preConfigure();</span>
-<span class="fc" id="L597">        StringBuilder sb = new StringBuilder();</span>
-<span class="fc" id="L598">        ArrayList&lt;String&gt; allScripts = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L599">        ArrayList&lt;StringBuilder&gt; queries = (ArrayList&lt;StringBuilder&gt;) getQueriesAll();</span>
-<span class="fc" id="L600">        queries.stream().filter(a -&gt; allScripts.contains(a.toString())).forEach(a -&gt;</span>
+<span class="fc" id="L610">        preConfigure();</span>
+<span class="fc" id="L611">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L612">        ArrayList&lt;String&gt; allScripts = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L613">        ArrayList&lt;StringBuilder&gt; queries = (ArrayList&lt;StringBuilder&gt;) getQueriesAll();</span>
+<span class="fc" id="L614">        queries.stream().filter(a -&gt; allScripts.contains(a.toString())).forEach(a -&gt;</span>
         {
-<span class="nc" id="L602">            allScripts.add(a.toString());</span>
-<span class="nc" id="L603">        });</span>
-<span class="fc" id="L604">        allScripts.stream().forEach(sb.append(getNewLine())::append);</span>
-<span class="fc" id="L605">        return sb;</span>
+<span class="nc" id="L616">            allScripts.add(a.toString());</span>
+<span class="nc" id="L617">        });</span>
+<span class="fc" id="L618">        allScripts.stream().forEach(sb.append(getNewLine())::append);</span>
+<span class="fc" id="L619">        return sb;</span>
     }
 
     /**
@@ -615,12 +629,12 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public J setTiny(boolean tiny)
     {
-<span class="pc bpc" id="L618" title="1 of 2 branches missed.">        getChildren().stream().filter(a -&gt; a != null).forEach((child)</span>
+<span class="pc bpc" id="L632" title="1 of 2 branches missed.">        getChildren().stream().filter(a -&gt; a != null).forEach((child)</span>
                 -&gt;
         {
-<span class="fc" id="L621">            child.setTiny(tiny);</span>
-<span class="fc" id="L622">        });</span>
-<span class="fc" id="L623">        return super.setTiny(tiny);</span>
+<span class="fc" id="L635">            child.setTiny(tiny);</span>
+<span class="fc" id="L636">        });</span>
+<span class="fc" id="L637">        return super.setTiny(tiny);</span>
     }
 
     /**
@@ -633,16 +647,16 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public boolean addClass(CSSComponent classComponent)
     {
-<span class="nc" id="L636">        String className = classComponent.getID();</span>
-<span class="nc" id="L637">        getPage().getBody().add((C) classComponent);</span>
-<span class="nc bnc" id="L638" title="All 2 branches missed.">        if (!getClasses().contains(className))</span>
+<span class="nc" id="L650">        String className = classComponent.getID();</span>
+<span class="nc" id="L651">        getPage().getBody().add((C) classComponent);</span>
+<span class="nc bnc" id="L652" title="All 2 branches missed.">        if (!getClasses().contains(className))</span>
         {
-<span class="nc" id="L640">            getClasses().add(className);</span>
-<span class="nc" id="L641">            return true;</span>
+<span class="nc" id="L654">            getClasses().add(className);</span>
+<span class="nc" id="L655">            return true;</span>
         }
         else
         {
-<span class="nc" id="L645">            return false;</span>
+<span class="nc" id="L659">            return false;</span>
         }
     }
 
@@ -656,9 +670,9 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public boolean remove(C childToRemove)
     {
-<span class="fc" id="L659">        ComponentHierarchyBase comp = (ComponentHierarchyBase) childToRemove;</span>
-<span class="fc" id="L660">        getChildren().remove(comp);</span>
-<span class="fc" id="L661">        return true;</span>
+<span class="fc" id="L673">        ComponentHierarchyBase comp = (ComponentHierarchyBase) childToRemove;</span>
+<span class="fc" id="L674">        getChildren().remove(comp);</span>
+<span class="fc" id="L675">        return true;</span>
     }
 
     /**
@@ -668,7 +682,7 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
      */
     protected StringBuilder renderBeforeChildren()
     {
-<span class="fc" id="L671">        return null;</span>
+<span class="fc" id="L685">        return null;</span>
     }
 
     /**
@@ -678,7 +692,7 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
      */
     protected StringBuilder renderAfterChildren()
     {
-<span class="fc" id="L681">        return null;</span>
+<span class="fc" id="L695">        return null;</span>
     }
 
     /**
@@ -690,7 +704,7 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
      */
     protected boolean containsClass(Class classType)
     {
-<span class="nc" id="L693">        return getChildren().stream().anyMatch(child -&gt; (child.getClass().equals(classType)));</span>
+<span class="nc" id="L707">        return getChildren().stream().anyMatch(child -&gt; (child.getClass().equals(classType)));</span>
     }
 
     /**
@@ -701,13 +715,13 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public Map&lt;String, JavaScriptPart&gt; getAngularObjectsAll()
     {
-<span class="nc" id="L704">        Map&lt;String, JavaScriptPart&gt; map = getAngularObjects();</span>
-<span class="nc" id="L705">        getChildrenHierarchy(true).stream().map(child -&gt; child.getAngularObjects()).forEach(ang</span>
+<span class="nc" id="L718">        Map&lt;String, JavaScriptPart&gt; map = getAngularObjects();</span>
+<span class="nc" id="L719">        getChildrenHierarchy(true).stream().map(child -&gt; child.getAngularObjects()).forEach(ang</span>
                 -&gt;
         {
-<span class="nc" id="L708">            map.putAll(ang);</span>
-<span class="nc" id="L709">        });</span>
-<span class="nc" id="L710">        return map;</span>
+<span class="nc" id="L722">            map.putAll(ang);</span>
+<span class="nc" id="L723">        });</span>
+<span class="nc" id="L724">        return map;</span>
     }
 
     /**
@@ -717,23 +731,23 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
      */
     public List&lt;AngularModuleBase&gt; getAngularModulesAll()
     {
-<span class="fc" id="L720">        List&lt;AngularModuleBase&gt; modules = getAngularModules();</span>
-<span class="fc" id="L721">        getChildrenHierarchy(true).stream().map(child -&gt; child.getAngularModules()).forEach(ang</span>
+<span class="fc" id="L734">        List&lt;AngularModuleBase&gt; modules = getAngularModules();</span>
+<span class="fc" id="L735">        getChildrenHierarchy(true).stream().map(child -&gt; child.getAngularModules()).forEach(ang</span>
                 -&gt;
         {
-<span class="fc bfc" id="L724" title="All 2 branches covered.">            for (Iterator iterator = ang.iterator(); iterator.hasNext();)</span>
+<span class="fc bfc" id="L738" title="All 2 branches covered.">            for (Iterator iterator = ang.iterator(); iterator.hasNext();)</span>
             {
-<span class="fc" id="L726">                AngularModuleBase next = (AngularModuleBase) iterator.next();</span>
-<span class="pc bpc" id="L727" title="1 of 2 branches missed.">                if (next != null)</span>
+<span class="fc" id="L740">                AngularModuleBase next = (AngularModuleBase) iterator.next();</span>
+<span class="pc bpc" id="L741" title="1 of 2 branches missed.">                if (next != null)</span>
                 {
-<span class="pc bpc" id="L729" title="1 of 2 branches missed.">                    if (!modules.contains(next))</span>
+<span class="pc bpc" id="L743" title="1 of 2 branches missed.">                    if (!modules.contains(next))</span>
                     {
-<span class="nc" id="L731">                        modules.add(next);</span>
+<span class="nc" id="L745">                        modules.add(next);</span>
                     }
                 }
-<span class="fc" id="L734">            }</span>
-<span class="fc" id="L735">        });</span>
-<span class="fc" id="L736">        return modules;</span>
+<span class="fc" id="L748">            }</span>
+<span class="fc" id="L749">        });</span>
+<span class="fc" id="L750">        return modules;</span>
     }
 
     /**
@@ -743,23 +757,23 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
      */
     public List&lt;AngularDirectiveBase&gt; getAngularDirectivesAll()
     {
-<span class="fc" id="L746">        List&lt;AngularDirectiveBase&gt; modules = getAngularDirectives();</span>
-<span class="fc" id="L747">        getChildrenHierarchy(true).stream().map(child -&gt; child.getAngularDirectives()).forEach(ang</span>
+<span class="fc" id="L760">        List&lt;AngularDirectiveBase&gt; modules = getAngularDirectives();</span>
+<span class="fc" id="L761">        getChildrenHierarchy(true).stream().map(child -&gt; child.getAngularDirectives()).forEach(ang</span>
                 -&gt;
         {
-<span class="fc bfc" id="L750" title="All 2 branches covered.">            for (Iterator iterator = ang.iterator(); iterator.hasNext();)</span>
+<span class="pc bpc" id="L764" title="1 of 2 branches missed.">            for (Iterator iterator = ang.iterator(); iterator.hasNext();)</span>
             {
-<span class="fc" id="L752">                AngularDirectiveBase next = (AngularDirectiveBase) iterator.next();</span>
-<span class="pc bpc" id="L753" title="1 of 2 branches missed.">                if (next != null)</span>
+<span class="nc" id="L766">                AngularDirectiveBase next = (AngularDirectiveBase) iterator.next();</span>
+<span class="nc bnc" id="L767" title="All 2 branches missed.">                if (next != null)</span>
                 {
-<span class="pc bpc" id="L755" title="1 of 2 branches missed.">                    if (!modules.contains(next))</span>
+<span class="nc bnc" id="L769" title="All 2 branches missed.">                    if (!modules.contains(next))</span>
                     {
-<span class="nc" id="L757">                        modules.add(next);</span>
+<span class="nc" id="L771">                        modules.add(next);</span>
                     }
                 }
-<span class="fc" id="L760">            }</span>
-<span class="fc" id="L761">        });</span>
-<span class="fc" id="L762">        return modules;</span>
+<span class="nc" id="L774">            }</span>
+<span class="fc" id="L775">        });</span>
+<span class="fc" id="L776">        return modules;</span>
     }
 
     /**
@@ -769,23 +783,23 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
      */
     public List&lt;AngularControllerBase&gt; getAngularControllersAll()
     {
-<span class="fc" id="L772">        List&lt;AngularControllerBase&gt; modules = getAngularControllers();</span>
-<span class="fc" id="L773">        getChildrenHierarchy(true).stream().map(child -&gt; child.getAngularControllers()).forEach(ang</span>
+<span class="fc" id="L786">        List&lt;AngularControllerBase&gt; modules = getAngularControllers();</span>
+<span class="fc" id="L787">        getChildrenHierarchy(true).stream().map(child -&gt; child.getAngularControllers()).forEach(ang</span>
                 -&gt;
         {
-<span class="pc bpc" id="L776" title="1 of 2 branches missed.">            for (Iterator iterator = ang.iterator(); iterator.hasNext();)</span>
+<span class="pc bpc" id="L790" title="1 of 2 branches missed.">            for (Iterator iterator = ang.iterator(); iterator.hasNext();)</span>
             {
-<span class="nc" id="L778">                AngularControllerBase next = (AngularControllerBase) iterator.next();</span>
-<span class="nc bnc" id="L779" title="All 2 branches missed.">                if (next != null)</span>
+<span class="nc" id="L792">                AngularControllerBase next = (AngularControllerBase) iterator.next();</span>
+<span class="nc bnc" id="L793" title="All 2 branches missed.">                if (next != null)</span>
                 {
-<span class="nc bnc" id="L781" title="All 2 branches missed.">                    if (!modules.contains(next))</span>
+<span class="nc bnc" id="L795" title="All 2 branches missed.">                    if (!modules.contains(next))</span>
                     {
-<span class="nc" id="L783">                        modules.add(next);</span>
+<span class="nc" id="L797">                        modules.add(next);</span>
                     }
                 }
-<span class="nc" id="L786">            }</span>
-<span class="fc" id="L787">        });</span>
-<span class="fc" id="L788">        return modules;</span>
+<span class="nc" id="L800">            }</span>
+<span class="fc" id="L801">        });</span>
+<span class="fc" id="L802">        return modules;</span>
     }
 
     /**
@@ -796,15 +810,15 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     @Override
     public String toString()
     {
-<span class="fc" id="L799">        getChildren().stream().forEach(next</span>
+<span class="fc" id="L813">        getChildren().stream().forEach(next</span>
                 -&gt;
         {
-<span class="pc bpc" id="L802" title="1 of 2 branches missed.">            if (!next.isConfigured())</span>
+<span class="pc bpc" id="L816" title="1 of 2 branches missed.">            if (!next.isConfigured())</span>
             {
-<span class="fc" id="L804">                next.preConfigure();</span>
+<span class="fc" id="L818">                next.preConfigure();</span>
             }
-<span class="fc" id="L806">        });</span>
-<span class="fc" id="L807">        return super.toString();</span>
+<span class="fc" id="L820">        });</span>
+<span class="fc" id="L821">        return super.toString();</span>
     }
 
     /**
@@ -818,7 +832,7 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
     public String toString(Integer tabCount)
     {
 //        preConfigure();
-<span class="fc" id="L821">        return super.toString(tabCount);</span>
+<span class="fc" id="L835">        return super.toString(tabCount);</span>
     }
 
     /**
@@ -832,14 +846,33 @@ public class ComponentHierarchyBase&lt;C, A extends Enum &amp; AttributeDefiniti
      */
     public J wrap(ComponentHierarchyBase component)
     {
-<span class="nc" id="L835">        ComponentHierarchyBase existingParent = component.getParent();</span>
-<span class="nc bnc" id="L836" title="All 2 branches missed.">        if (component.getParent() != null)</span>
+<span class="nc" id="L849">        ComponentHierarchyBase existingParent = component.getParent();</span>
+<span class="nc bnc" id="L850" title="All 2 branches missed.">        if (component.getParent() != null)</span>
         {
-<span class="nc" id="L838">            existingParent.remove(component);</span>
-<span class="nc" id="L839">            existingParent.add(this);</span>
+<span class="nc" id="L852">            existingParent.remove(component);</span>
+<span class="nc" id="L853">            existingParent.add(this);</span>
         }
-<span class="nc" id="L841">        getChildren().add(component);</span>
-<span class="nc" id="L842">        return (J) this;</span>
+<span class="nc" id="L855">        getChildren().add(component);</span>
+<span class="nc" id="L856">        return (J) this;</span>
     }
+
+    /**
+     * Ensure if there are children that new lines must be rendered
+     *
+     * @return
+     */
+    @Override
+    public boolean isNewLineForClosingTag()
+    {
+<span class="pc bpc" id="L867" title="1 of 4 branches missed.">        if (hasChildren() &amp;&amp; !isTiny())</span>
+        {
+<span class="fc" id="L869">            return true;</span>
+        }
+        else
+        {
+<span class="fc" id="L873">            return super.isNewLineForClosingTag();</span>
+        }
+    }
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

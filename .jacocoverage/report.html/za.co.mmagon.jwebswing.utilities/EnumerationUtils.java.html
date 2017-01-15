@@ -26,7 +26,7 @@ import java.util.*;
  */
 public class EnumerationUtils
 {
-<span class="fc" id="L29">    public static final EnumerationNameSorter enumNameSorter = new EnumerationNameSorter();</span>
+<span class="nc" id="L29">    public static final EnumerationNameSorter enumNameSorter = new EnumerationNameSorter();</span>
     
     /**
      * Instance only construction
@@ -40,13 +40,13 @@ public class EnumerationUtils
     /**
      * A sorter for an enumeration name by name
      */
-<span class="fc" id="L43">    public static class EnumerationNameSorter implements Comparator&lt;Enum&gt;</span>
+<span class="nc" id="L43">    public static class EnumerationNameSorter implements Comparator&lt;Enum&gt;</span>
     {
 
         @Override
         public int compare(Enum o1, Enum o2)
         {
-<span class="fc" id="L49">            return o1.name().compareTo(o2.name());</span>
+<span class="nc" id="L49">            return o1.name().compareTo(o2.name());</span>
         }
 
     }

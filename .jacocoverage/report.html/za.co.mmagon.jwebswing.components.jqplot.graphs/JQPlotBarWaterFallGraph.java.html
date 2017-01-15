@@ -79,13 +79,14 @@ public class JQPlotBarWaterFallGraph extends JQPlotBarGraph
      * @param barValue  The actual bar value
      *
      */
+    @Override
     public void addBar(String xAxisName, String BarName, Double barValue)
     {
-<span class="nc" id="L84">        JQPlotBar bar = new JQPlotBar(xAxisName, BarName, barValue);</span>
-<span class="nc" id="L85">        setClustered(true);</span>
-<span class="nc" id="L86">        bar.setClustered(true);</span>
-<span class="nc" id="L87">        addBar(bar);</span>
-<span class="nc" id="L88">    }</span>
+<span class="nc" id="L85">        JQPlotBar bar = new JQPlotBar(xAxisName, BarName, barValue);</span>
+<span class="nc" id="L86">        setClustered(true);</span>
+<span class="nc" id="L87">        bar.setClustered(true);</span>
+<span class="nc" id="L88">        addBar(bar);</span>
+<span class="nc" id="L89">    }</span>
 
     /**
      * Adds a new bar and category to the 0 bar group number for waterfall standard graphs
@@ -95,13 +96,14 @@ public class JQPlotBarWaterFallGraph extends JQPlotBarGraph
      * @param barValue      The actual bar value
      *
      */
+    @Override
     public void addBar(String xAxisName, Double startingPoint, Double barValue)
     {
-<span class="nc" id="L100">        JQPlotBar bar = new JQPlotBar(xAxisName, startingPoint, barValue);</span>
-<span class="nc" id="L101">        barGraphOptions.setWaterfall(true);</span>
-<span class="nc" id="L102">        setWaterfall(true);</span>
-<span class="nc" id="L103">        addBar(bar);</span>
-<span class="nc" id="L104">    }</span>
+<span class="nc" id="L102">        JQPlotBar bar = new JQPlotBar(xAxisName, startingPoint, barValue);</span>
+<span class="nc" id="L103">        barGraphOptions.setWaterfall(true);</span>
+<span class="nc" id="L104">        setWaterfall(true);</span>
+<span class="nc" id="L105">        addBar(bar);</span>
+<span class="nc" id="L106">    }</span>
 
     /**
      * Adds a new bar and category to the 0 bar group number for waterfall clustered graphs
@@ -112,13 +114,14 @@ public class JQPlotBarWaterFallGraph extends JQPlotBarGraph
      * @param barValue      The actual bar value
      *
      */
+    @Override
     public void addBar(String xAxisName, String BarName, Double startingPoint, Double barValue)
     {
-<span class="nc" id="L117">        JQPlotBar bar = new JQPlotBar(xAxisName, BarName, startingPoint, barValue);</span>
-<span class="nc" id="L118">        barGraphOptions.setWaterfall(true);</span>
-<span class="nc" id="L119">        setWaterfall(true);</span>
-<span class="nc" id="L120">        addBar(bar);</span>
-<span class="nc" id="L121">    }</span>
+<span class="nc" id="L120">        JQPlotBar bar = new JQPlotBar(xAxisName, BarName, startingPoint, barValue);</span>
+<span class="nc" id="L121">        barGraphOptions.setWaterfall(true);</span>
+<span class="nc" id="L122">        setWaterfall(true);</span>
+<span class="nc" id="L123">        addBar(bar);</span>
+<span class="nc" id="L124">    }</span>
 
     /**
      * Adds a new bar and category to the 0 bar group number
@@ -130,26 +133,27 @@ public class JQPlotBarWaterFallGraph extends JQPlotBarGraph
      */
     public void addBar(String XAxisValue, Double dataValue)
     {
-<span class="nc" id="L133">        JQPlotBar bar = new JQPlotBar(XAxisValue, dataValue);</span>
-<span class="nc" id="L134">        bar.setWaterfall(true);</span>
-<span class="nc" id="L135">        addBar(bar);</span>
-<span class="nc" id="L136">    }</span>
+<span class="nc" id="L136">        JQPlotBar bar = new JQPlotBar(XAxisValue, dataValue);</span>
+<span class="nc" id="L137">        bar.setWaterfall(true);</span>
+<span class="nc" id="L138">        addBar(bar);</span>
+<span class="nc" id="L139">    }</span>
 
     /**
      * Adds a new bar and x Axis to the 0 bar group
      * &lt;p&gt;
      * @param bar The bar to add to the bar group 0
      */
+    @Override
     public void addBar(JQPlotBar bar)
     {
-<span class="nc" id="L145">        List&lt;JQPlotBar&gt; bars = getBarGroup(bar.getxAxisValue());</span>
-<span class="nc" id="L146">        bars.add(bar);</span>
-<span class="nc" id="L147">        bar.setWaterfall(true);</span>
-<span class="nc bnc" id="L148" title="All 2 branches missed.">        if (!getCategoryTickValues().contains(bar.getxAxisValue()))</span>
+<span class="nc" id="L149">        List&lt;JQPlotBar&gt; bars = getBarGroup(bar.getxAxisValue());</span>
+<span class="nc" id="L150">        bars.add(bar);</span>
+<span class="nc" id="L151">        bar.setWaterfall(true);</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">        if (!getCategoryTickValues().contains(bar.getxAxisValue()))</span>
         {
-<span class="nc" id="L150">            getCategoryTickValues().add(bar.getxAxisValue());</span>
+<span class="nc" id="L154">            getCategoryTickValues().add(bar.getxAxisValue());</span>
         }
-<span class="nc" id="L152">    }</span>
+<span class="nc" id="L156">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

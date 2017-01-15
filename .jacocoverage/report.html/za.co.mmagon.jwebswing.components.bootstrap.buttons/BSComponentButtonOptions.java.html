@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BSComponentButtonOptions.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.bootstrap.buttons</a> &gt; <span class="el_source">BSComponentButtonOptions.java</span></div><h1>BSComponentButtonOptions.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2017 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.bootstrap.buttons;
+
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.IBSComponentOptions;
+
+/**
+ * Buttons
+ * &lt;p&gt;
+ * Use Bootstrap’s custom button styles for actions in forms, dialogs, and more. Includes support for a handful of contextual variations, sizes, states, and more.
+ *
+ * @author GedMarc
+ * @since 01 Jan 2017
+ * @version 1.0
+ *
+ */
+<span class="pc" id="L31">public enum BSComponentButtonOptions implements IBSComponentOptions</span>
+{
+    /**
+     * Adds basic styling to any button
+     */
+<span class="fc" id="L36">    Btn,</span>
+    /**
+     * Indicates a default/standard button
+     */
+<span class="fc" id="L40">    Btn_Default,</span>
+    /**
+     * Provides extra visual weight and identifies the primary action in a set of buttons
+     */
+<span class="fc" id="L44">    Btn_Primary,</span>
+    /**
+     * Provides extra visual weight and identifies the primary action in a set of buttons
+     */
+<span class="fc" id="L48">    Btn_Secondary,</span>
+    /**
+     * Indicates a successful or positive action
+     */
+<span class="fc" id="L52">    Btn_Success,</span>
+    /**
+     * Contextual button for informational alert messages
+     */
+<span class="fc" id="L56">    Btn_Info,</span>
+    /**
+     * Indicates caution should be taken with this action
+     */
+<span class="fc" id="L60">    Btn_Warning,</span>
+    /**
+     * Indicates a dangerous or potentially negative action
+     */
+<span class="fc" id="L64">    Btn_Danger,</span>
+    /**
+     * Makes a button look like a link (will still have button behavior)
+     */
+<span class="fc" id="L68">    Btn_Link,</span>
+    /**
+     * Makes a large button
+     */
+<span class="fc" id="L72">    Btn_Lg,</span>
+    /**
+     * Makes a small button
+     */
+<span class="fc" id="L76">    Btn_Sm,</span>
+    /**
+     * Makes an extra small button
+     */
+<span class="fc" id="L80">    Btn_Xs,</span>
+    /**
+     * Makes a block_level button (spans the full width of the parent element)
+     */
+<span class="fc" id="L84">    Btn_Block,</span>
+    /**
+     * Provides extra visual weight and identifies the primary action in a set of buttons with outline button mode
+     */
+<span class="fc" id="L88">    Btn_Outline_Primary,</span>
+    /**
+     * Provides extra visual weight and identifies the primary action in a set of buttons with outline button mode
+     */
+<span class="fc" id="L92">    Btn_Outline_Secondary,</span>
+    /**
+     * Indicates a successful or positive action with outline button mode
+     */
+<span class="fc" id="L96">    Btn_Outline_Success,</span>
+    /**
+     * Contextual button for informational alert messages with outline button mode
+     */
+<span class="fc" id="L100">    Btn_Outline_Info,</span>
+    /**
+     * Indicates caution should be taken with this action with outline button mode
+     */
+<span class="fc" id="L104">    Btn_Outline_Warning,</span>
+    /**
+     * Indicates a dangerous or potentially negative action with outline button mode
+     */
+<span class="fc" id="L108">    Btn_Outline_Danger,;</span>
+
+    @Override
+    public String toString()
+    {
+<span class="fc" id="L113">        return name().toLowerCase().replace('_', '-');</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

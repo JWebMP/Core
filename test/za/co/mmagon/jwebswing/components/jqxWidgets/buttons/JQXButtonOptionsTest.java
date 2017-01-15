@@ -16,15 +16,15 @@
  */
 package za.co.mmagon.jwebswing.components.jqxWidgets.buttons;
 
-import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.JQXButtonTemplates;
-import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.JQXButtonImagesPositions;
-import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.JQXButtonOptions;
-import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.JQXButtonTextImageRelation;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.components.jqxwidgets.JQXRoundedCornerTypes;
+import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.JQXButtonImagesPositions;
+import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.JQXButtonOptions;
+import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.JQXButtonTemplates;
+import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.JQXButtonTextImageRelation;
 
 /**
  *
@@ -48,7 +48,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setDelay(500);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  delay : 500\n"
+                + "  \"delay\" : 500\n"
                 + "}", jpo.toString());
     }
 
@@ -63,7 +63,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setDelay(600);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  delay : 600\n"
+                + "  \"delay\" : 600\n"
                 + "}", jpo.toString());
     }
 
@@ -78,7 +78,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setDisabled(true);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  disabled : true\n"
+                + "  \"disabled\" : true\n"
                 + "}", jpo.toString());
     }
 
@@ -93,7 +93,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setDisabled(true);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  disabled : true\n"
+                + "  \"disabled\" : true\n"
                 + "}", jpo.toString());
     }
 
@@ -108,7 +108,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setRoundedCorners(JQXRoundedCornerTypes.Bottom);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  roundedCorners : \"jqx-rc-bottom\"\n"
+                + "  \"roundedCorners\" : \"jqx-rc-bottom\"\n"
                 + "}", jpo.toString());
     }
 
@@ -123,7 +123,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setRoundedCorners(JQXRoundedCornerTypes.Top);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  roundedCorners : \"jqx-rc-top\"\n"
+                + "  \"roundedCorners\" : \"jqx-rc-top\"\n"
                 + "}", jpo.toString());
     }
 
@@ -138,7 +138,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setRtl(true);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  rtl : true\n"
+                + "  \"rtl\" : true\n"
                 + "}", jpo.toString());
     }
 
@@ -153,7 +153,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setRtl(true);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  rtl : true\n"
+                + "  \"rtl\" : true\n"
                 + "}", jpo.toString());
     }
 
@@ -168,7 +168,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setTemplate(JQXButtonTemplates.Info);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  template : \"info\"\n"
+                + "  \"template\" : \"info\"\n"
                 + "}", jpo.toString());
     }
 
@@ -183,7 +183,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setTemplate(JQXButtonTemplates.Info);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  template : \"info\"\n"
+                + "  \"template\" : \"info\"\n"
                 + "}", jpo.toString());
     }
 
@@ -198,7 +198,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setToggled(true);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  toggled : true\n"
+                + "  \"toggled\" : true\n"
                 + "}", jpo.toString());
     }
 
@@ -213,7 +213,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setToggled(false);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  toggled : false\n"
+                + "  \"toggled\" : false\n"
                 + "}", jpo.toString());
     }
 
@@ -228,7 +228,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setImgSrc("src");
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  imgSrc : \"src\"\n"
+                + "  \"imgSrc\" : \"src\"\n"
                 + "}", jpo.toString());
     }
 
@@ -243,7 +243,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setImgSrc("src");
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  imgSrc : \"src\"\n"
+                + "  \"imgSrc\" : \"src\"\n"
                 + "}", jpo.toString());
     }
 
@@ -258,7 +258,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setImgWidth(500);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  imgWidth : 500\n"
+                + "  \"imgWidth\" : 500\n"
                 + "}", jpo.toString());
     }
 
@@ -273,7 +273,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setImgWidth(500);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  imgWidth : 500\n"
+                + "  \"imgWidth\" : 500\n"
                 + "}", jpo.toString());
     }
 
@@ -288,7 +288,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setImgHeight(500);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  imgHeight : 500\n"
+                + "  \"imgHeight\" : 500\n"
                 + "}", jpo.toString());
     }
 
@@ -303,7 +303,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setImgHeight(500);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  imgHeight : 500\n"
+                + "  \"imgHeight\" : 500\n"
                 + "}", jpo.toString());
     }
 
@@ -318,7 +318,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setImgPosition(JQXButtonImagesPositions.bottom);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  imgPosition : \"bottom\"\n"
+                + "  \"imgPosition\" : \"bottom\"\n"
                 + "}", jpo.toString());
     }
 
@@ -333,7 +333,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setImgPosition(JQXButtonImagesPositions.bottom);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  imgPosition : \"bottom\"\n"
+                + "  \"imgPosition\" : \"bottom\"\n"
                 + "}", jpo.toString());
     }
 
@@ -348,7 +348,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setTextPosition(JQXButtonImagesPositions.bottom);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  textPosition : \"bottom\"\n"
+                + "  \"textPosition\" : \"bottom\"\n"
                 + "}", jpo.toString());
     }
 
@@ -363,7 +363,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setTextPosition(JQXButtonImagesPositions.bottom);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  textPosition : \"bottom\"\n"
+                + "  \"textPosition\" : \"bottom\"\n"
                 + "}", jpo.toString());
     }
 
@@ -378,7 +378,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setTextImageRelation(JQXButtonTextImageRelation.textAboveImage);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  textImageRelation : \"textAboveImage\"\n"
+                + "  \"textImageRelation\" : \"textAboveImage\"\n"
                 + "}", jpo.toString());
     }
 
@@ -393,7 +393,7 @@ public class JQXButtonOptionsTest extends BaseTestClass
         jpo.setTextImageRelation(JQXButtonTextImageRelation.textAboveImage);
         System.out.println(jpo.toString());
         assertEquals("{\n"
-                + "  textImageRelation : \"textAboveImage\"\n"
+                + "  \"textImageRelation\" : \"textAboveImage\"\n"
                 + "}", jpo.toString());
     }
 

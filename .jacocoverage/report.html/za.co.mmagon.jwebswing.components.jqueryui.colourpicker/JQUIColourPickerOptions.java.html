@@ -79,8 +79,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
     private Boolean showPaletteOnly;
     /**
      * Spectrum can show a button to toggle the colorpicker next to the palette. This way, the user can choose from a limited number of colors in the palette, but still be able to pick a color that's
-     * not in the palette.
-     * The default value for togglePaletteOnly is FALSE. Set it to TRUE to enable the Toggle button.
+     * not in the palette. The default value for togglePaletteOnly is FALSE. Set it to TRUE to enable the Toggle button.
      * &lt;p&gt;
      * You can also change the text on the Toggle Button with the options togglePaletteMoreText (default is &quot;more&quot;) and togglePaletteLessText (default is &quot;less&quot;).
      */
@@ -168,7 +167,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public String getColor()
     {
-<span class="nc" id="L171">        return color;</span>
+<span class="nc" id="L170">        return color;</span>
     }
 
     /**
@@ -180,8 +179,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setColor(ColourNames color)
     {
-<span class="nc" id="L183">        this.color = color.getValue();</span>
-<span class="nc" id="L184">    }</span>
+<span class="nc" id="L182">        this.color = color.getValue();</span>
+<span class="nc" id="L183">    }</span>
 
     /**
      * This means that it will always show up at full size, and be positioned as an inline-block element. Look to the left for a full sized flat picker.
@@ -190,7 +189,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Boolean getFlat()
     {
-<span class="nc" id="L193">        return flat;</span>
+<span class="nc" id="L192">        return flat;</span>
     }
 
     /**
@@ -200,8 +199,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setFlat(Boolean flat)
     {
-<span class="nc" id="L203">        this.flat = flat;</span>
-<span class="nc" id="L204">    }</span>
+<span class="nc" id="L202">        this.flat = flat;</span>
+<span class="nc" id="L203">    }</span>
 
     /**
      * You can add an input to allow free form typing. The color parsing is very permissive in the allowed strings. See TinyColor for more details.
@@ -210,7 +209,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Boolean getShowInput()
     {
-<span class="nc" id="L213">        return showInput;</span>
+<span class="nc" id="L212">        return showInput;</span>
     }
 
     /**
@@ -220,8 +219,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setShowInput(Boolean showInput)
     {
-<span class="nc" id="L223">        this.showInput = showInput;</span>
-<span class="nc" id="L224">    }</span>
+<span class="nc" id="L222">        this.showInput = showInput;</span>
+<span class="nc" id="L223">    }</span>
 
     /**
      * Spectrum can show the color that was initially set when opening. This provides an easy way to click back to what was set when opened.
@@ -230,7 +229,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Boolean getShowInitial()
     {
-<span class="nc" id="L233">        return showInitial;</span>
+<span class="nc" id="L232">        return showInitial;</span>
     }
 
     /**
@@ -240,8 +239,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setShowInitial(Boolean showInitial)
     {
-<span class="nc" id="L243">        this.showInitial = showInitial;</span>
-<span class="nc" id="L244">    }</span>
+<span class="nc" id="L242">        this.showInitial = showInitial;</span>
+<span class="nc" id="L243">    }</span>
 
     /**
      * If you specify both the showInput, showInitial, and allowEmpty options, the CSS keeps things in order by wrapping the buttons to the bottom row, and shrinking the input. Note: this is all
@@ -251,7 +250,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Boolean getAllowEmpty()
     {
-<span class="nc" id="L254">        return allowEmpty;</span>
+<span class="nc" id="L253">        return allowEmpty;</span>
     }
 
     /**
@@ -262,8 +261,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setAllowEmpty(Boolean allowEmpty)
     {
-<span class="nc" id="L265">        this.allowEmpty = allowEmpty;</span>
-<span class="nc" id="L266">    }</span>
+<span class="nc" id="L264">        this.allowEmpty = allowEmpty;</span>
+<span class="nc" id="L265">    }</span>
 
     /**
      * You can allow alpha transparency selection. Check out these examples:
@@ -272,7 +271,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Boolean getShowAlpha()
     {
-<span class="nc" id="L275">        return showAlpha;</span>
+<span class="nc" id="L274">        return showAlpha;</span>
     }
 
     /**
@@ -282,18 +281,18 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setShowAlpha(Boolean showAlpha)
     {
-<span class="nc" id="L285">        this.showAlpha = showAlpha;</span>
-<span class="nc" id="L286">    }</span>
+<span class="nc" id="L284">        this.showAlpha = showAlpha;</span>
+<span class="nc" id="L285">    }</span>
 
     public String getLocalStorageKey()
     {
-<span class="nc" id="L290">        return localStorageKey;</span>
+<span class="nc" id="L289">        return localStorageKey;</span>
     }
 
     public void setLocalStorageKey(String localStorageKey)
     {
-<span class="nc" id="L295">        this.localStorageKey = localStorageKey;</span>
-<span class="nc" id="L296">    }</span>
+<span class="nc" id="L294">        this.localStorageKey = localStorageKey;</span>
+<span class="nc" id="L295">    }</span>
 
     /**
      * Spectrum can show a palette below the colorpicker to make it convenient for users to choose from frequently or recently used colors. When the colorpicker is closed, the current color will be
@@ -303,7 +302,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Boolean getShowPalette()
     {
-<span class="nc" id="L306">        return showPalette;</span>
+<span class="nc" id="L305">        return showPalette;</span>
     }
 
     /**
@@ -314,8 +313,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setShowPalette(Boolean showPalette)
     {
-<span class="nc" id="L317">        this.showPalette = showPalette;</span>
-<span class="nc" id="L318">    }</span>
+<span class="nc" id="L316">        this.showPalette = showPalette;</span>
+<span class="nc" id="L317">    }</span>
 
     /**
      * If you'd like, spectrum can show the palettes you specify, and nothing else.
@@ -324,7 +323,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Boolean getShowPaletteOnly()
     {
-<span class="nc" id="L327">        return showPaletteOnly;</span>
+<span class="nc" id="L326">        return showPaletteOnly;</span>
     }
 
     /**
@@ -334,13 +333,12 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setShowPaletteOnly(Boolean showPaletteOnly)
     {
-<span class="nc" id="L337">        this.showPaletteOnly = showPaletteOnly;</span>
-<span class="nc" id="L338">    }</span>
+<span class="nc" id="L336">        this.showPaletteOnly = showPaletteOnly;</span>
+<span class="nc" id="L337">    }</span>
 
     /**
      * Spectrum can show a button to toggle the colorpicker next to the palette. This way, the user can choose from a limited number of colors in the palette, but still be able to pick a color that's
-     * not in the palette.
-     * The default value for togglePaletteOnly is FALSE. Set it to TRUE to enable the Toggle button.
+     * not in the palette. The default value for togglePaletteOnly is FALSE. Set it to TRUE to enable the Toggle button.
      * &lt;p&gt;
      * You can also change the text on the Toggle Button with the options togglePaletteMoreText (default is &quot;more&quot;) and togglePaletteLessText (default is &quot;less&quot;).
      * &lt;p&gt;
@@ -348,13 +346,12 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Boolean getTogglePaletteOnly()
     {
-<span class="nc" id="L351">        return togglePaletteOnly;</span>
+<span class="nc" id="L349">        return togglePaletteOnly;</span>
     }
 
     /**
      * Spectrum can show a button to toggle the colorpicker next to the palette. This way, the user can choose from a limited number of colors in the palette, but still be able to pick a color that's
-     * not in the palette.
-     * The default value for togglePaletteOnly is FALSE. Set it to TRUE to enable the Toggle button.
+     * not in the palette. The default value for togglePaletteOnly is FALSE. Set it to TRUE to enable the Toggle button.
      * &lt;p&gt;
      * You can also change the text on the Toggle Button with the options togglePaletteMoreText (default is &quot;more&quot;) and togglePaletteLessText (default is &quot;less&quot;).
      * &lt;p&gt;
@@ -362,8 +359,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setTogglePaletteOnly(Boolean togglePaletteOnly)
     {
-<span class="nc" id="L365">        this.togglePaletteOnly = togglePaletteOnly;</span>
-<span class="nc" id="L366">    }</span>
+<span class="nc" id="L362">        this.togglePaletteOnly = togglePaletteOnly;</span>
+<span class="nc" id="L363">    }</span>
 
     /**
      *
@@ -376,7 +373,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Boolean getShowSelectionPalette()
     {
-<span class="nc" id="L379">        return showSelectionPalette;</span>
+<span class="nc" id="L376">        return showSelectionPalette;</span>
     }
 
     /**
@@ -390,8 +387,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setShowSelectionPalette(Boolean showSelectionPalette)
     {
-<span class="nc" id="L393">        this.showSelectionPalette = showSelectionPalette;</span>
-<span class="nc" id="L394">    }</span>
+<span class="nc" id="L390">        this.showSelectionPalette = showSelectionPalette;</span>
+<span class="nc" id="L391">    }</span>
 
     /**
      * When clicking outside of the colorpicker, you can force it to fire a change event rather than having it revert the change. This is true by default.
@@ -400,7 +397,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Boolean getClickoutFiresChange()
     {
-<span class="nc" id="L403">        return clickoutFiresChange;</span>
+<span class="nc" id="L400">        return clickoutFiresChange;</span>
     }
 
     /**
@@ -410,8 +407,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setClickoutFiresChange(Boolean clickoutFiresChange)
     {
-<span class="nc" id="L413">        this.clickoutFiresChange = clickoutFiresChange;</span>
-<span class="nc" id="L414">    }</span>
+<span class="nc" id="L410">        this.clickoutFiresChange = clickoutFiresChange;</span>
+<span class="nc" id="L411">    }</span>
 
     /**
      * You can set the button's text using cancelText and chooseText properties.
@@ -420,7 +417,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public String getCancelText()
     {
-<span class="nc" id="L423">        return cancelText;</span>
+<span class="nc" id="L420">        return cancelText;</span>
     }
 
     /**
@@ -430,8 +427,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setCancelText(String cancelText)
     {
-<span class="nc" id="L433">        this.cancelText = cancelText;</span>
-<span class="nc" id="L434">    }</span>
+<span class="nc" id="L430">        this.cancelText = cancelText;</span>
+<span class="nc" id="L431">    }</span>
 
     /**
      * You can set the button's text using cancelText and chooseText properties.
@@ -440,7 +437,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public String getChooseText()
     {
-<span class="nc" id="L443">        return chooseText;</span>
+<span class="nc" id="L440">        return chooseText;</span>
     }
 
     /**
@@ -450,8 +447,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setChooseText(String chooseText)
     {
-<span class="nc" id="L453">        this.chooseText = chooseText;</span>
-<span class="nc" id="L454">    }</span>
+<span class="nc" id="L450">        this.chooseText = chooseText;</span>
+<span class="nc" id="L451">    }</span>
 
     /**
      * You can also change the text on the Toggle Button with the options togglePaletteMoreText (default is &quot;more&quot;) and togglePaletteLessText (default is &quot;less&quot;).
@@ -460,7 +457,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public String getTogglePaletteMoreText()
     {
-<span class="nc" id="L463">        return togglePaletteMoreText;</span>
+<span class="nc" id="L460">        return togglePaletteMoreText;</span>
     }
 
     /**
@@ -470,8 +467,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setTogglePaletteMoreText(String togglePaletteMoreText)
     {
-<span class="nc" id="L473">        this.togglePaletteMoreText = togglePaletteMoreText;</span>
-<span class="nc" id="L474">    }</span>
+<span class="nc" id="L470">        this.togglePaletteMoreText = togglePaletteMoreText;</span>
+<span class="nc" id="L471">    }</span>
 
     /**
      * You can also change the text on the Toggle Button with the options togglePaletteMoreText (default is &quot;more&quot;) and togglePaletteLessText (default is &quot;less&quot;).
@@ -480,7 +477,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public String getTogglePaletteLessText()
     {
-<span class="nc" id="L483">        return togglePaletteLessText;</span>
+<span class="nc" id="L480">        return togglePaletteLessText;</span>
     }
 
     /**
@@ -490,8 +487,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setTogglePaletteLessText(String togglePaletteLessText)
     {
-<span class="nc" id="L493">        this.togglePaletteLessText = togglePaletteLessText;</span>
-<span class="nc" id="L494">    }</span>
+<span class="nc" id="L490">        this.togglePaletteLessText = togglePaletteLessText;</span>
+<span class="nc" id="L491">    }</span>
 
     /**
      * You can add an additional class name to the just the container element using the containerClassName property.
@@ -500,7 +497,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public String getContainerClassName()
     {
-<span class="nc" id="L503">        return containerClassName;</span>
+<span class="nc" id="L500">        return containerClassName;</span>
     }
 
     /**
@@ -510,8 +507,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setContainerClassName(String containerClassName)
     {
-<span class="nc" id="L513">        this.containerClassName = containerClassName;</span>
-<span class="nc" id="L514">    }</span>
+<span class="nc" id="L510">        this.containerClassName = containerClassName;</span>
+<span class="nc" id="L511">    }</span>
 
     /**
      * You can add an additional class name to just the replacer element using the replacerClassName property.
@@ -520,7 +517,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public String getReplacerClassName()
     {
-<span class="nc" id="L523">        return replacerClassName;</span>
+<span class="nc" id="L520">        return replacerClassName;</span>
     }
 
     /**
@@ -530,8 +527,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setReplacerClassName(String replacerClassName)
     {
-<span class="nc" id="L533">        this.replacerClassName = replacerClassName;</span>
-<span class="nc" id="L534">    }</span>
+<span class="nc" id="L530">        this.replacerClassName = replacerClassName;</span>
+<span class="nc" id="L531">    }</span>
 
     /**
      *
@@ -543,7 +540,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public JQUIPaletteFormats getPreferredFormat()
     {
-<span class="nc" id="L546">        return preferredFormat;</span>
+<span class="nc" id="L543">        return preferredFormat;</span>
     }
 
     /**
@@ -556,8 +553,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setPreferredFormat(JQUIPaletteFormats preferredFormat)
     {
-<span class="nc" id="L559">        this.preferredFormat = preferredFormat;</span>
-<span class="nc" id="L560">    }</span>
+<span class="nc" id="L556">        this.preferredFormat = preferredFormat;</span>
+<span class="nc" id="L557">    }</span>
 
     /**
      *
@@ -570,7 +567,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Integer getMaxSelectionSize()
     {
-<span class="nc" id="L573">        return maxSelectionSize;</span>
+<span class="nc" id="L570">        return maxSelectionSize;</span>
     }
 
     /**
@@ -584,18 +581,18 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setMaxSelectionSize(Integer maxSelectionSize)
     {
-<span class="nc" id="L587">        this.maxSelectionSize = maxSelectionSize;</span>
-<span class="nc" id="L588">    }</span>
+<span class="nc" id="L584">        this.maxSelectionSize = maxSelectionSize;</span>
+<span class="nc" id="L585">    }</span>
 
     public JQUIColourPalettes getPalette()
     {
-<span class="nc" id="L592">        return palette;</span>
+<span class="nc" id="L589">        return palette;</span>
     }
 
     public void setPalette(JQUIColourPalettes palette)
     {
-<span class="nc" id="L597">        this.palette = palette;</span>
-<span class="nc" id="L598">    }</span>
+<span class="nc" id="L594">        this.palette = palette;</span>
+<span class="nc" id="L595">    }</span>
 
     /**
      *
@@ -608,7 +605,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public JQUIColourPalette getSelectionPalette()
     {
-<span class="nc" id="L611">        return selectionPalette;</span>
+<span class="nc" id="L608">        return selectionPalette;</span>
     }
 
     /**
@@ -622,8 +619,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setSelectionPalette(JQUIColourPalette selectionPalette)
     {
-<span class="nc" id="L625">        this.selectionPalette = selectionPalette;</span>
-<span class="nc" id="L626">    }</span>
+<span class="nc" id="L622">        this.selectionPalette = selectionPalette;</span>
+<span class="nc" id="L623">    }</span>
 
     /**
      * Spectrum can be automatically disabled if you pass in the disabled flag. Additionally, if the input that you initialize spectrum on is disabled, this will be the default value. Note: you cannot
@@ -633,7 +630,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Boolean getDisabled()
     {
-<span class="nc" id="L636">        return disabled;</span>
+<span class="nc" id="L633">        return disabled;</span>
     }
 
     /**
@@ -644,15 +641,15 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setDisabled(Boolean disabled)
     {
-<span class="nc" id="L647">        this.disabled = disabled;</span>
-<span class="nc" id="L648">    }</span>
+<span class="nc" id="L644">        this.disabled = disabled;</span>
+<span class="nc" id="L645">    }</span>
 
     /**
      * You can have the colorpicker automatically hide after a palette color is selected.
      */
     public Boolean getHideAfterPaletteSelect()
     {
-<span class="nc" id="L655">        return hideAfterPaletteSelect;</span>
+<span class="nc" id="L652">        return hideAfterPaletteSelect;</span>
     }
 
     /**
@@ -660,8 +657,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setHideAfterPaletteSelect(Boolean hideAfterPaletteSelect)
     {
-<span class="nc" id="L663">        this.hideAfterPaletteSelect = hideAfterPaletteSelect;</span>
-<span class="nc" id="L664">    }</span>
+<span class="nc" id="L660">        this.hideAfterPaletteSelect = hideAfterPaletteSelect;</span>
+<span class="nc" id="L661">    }</span>
 
     /**
      * You can show or hide the buttons using the showButtons property. If there are no buttons, the behavior will be to fire the `change` event (and update the original input) when the picker is
@@ -671,7 +668,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Boolean getShowButtons()
     {
-<span class="nc" id="L674">        return showButtons;</span>
+<span class="nc" id="L671">        return showButtons;</span>
     }
 
     /**
@@ -682,13 +679,13 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setShowButtons(Boolean showButtons)
     {
-<span class="nc" id="L685">        this.showButtons = showButtons;</span>
-<span class="nc" id="L686">    }</span>
+<span class="nc" id="L682">        this.showButtons = showButtons;</span>
+<span class="nc" id="L683">    }</span>
 
     @Override
     public JavascriptPartType getJavascriptType()
     {
-<span class="nc" id="L691">        return JavascriptPartType.Javascript;</span>
+<span class="nc" id="L688">        return JavascriptPartType.Javascript;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

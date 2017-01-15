@@ -14,74 +14,96 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
-
 package za.co.mmagon.jwebswing.components.bootstrap;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * A Size setting
+ *
  * @author GedMarc
  * @since Oct 30, 2016
  * @version 1.0
- * 
+ *
  */
-<span class="nc" id="L29">public enum BootstrapSize </span>
+<span class="nc" id="L29">public enum BootstrapSize</span>
 {
-<span class="nc" id="L31">    ExtraLarge(&quot;lg&quot;,1140),</span>
-<span class="nc" id="L32">    Large(&quot;lg&quot;,992),</span>
-<span class="nc" id="L33">    Medium(&quot;md&quot;,768),</span>
-<span class="nc" id="L34">    Small(&quot;sm&quot;,576),</span>
-<span class="nc" id="L35">    XSmall(&quot;xs&quot;,0)</span>
-    ;
+    /**
+     *
+     * Extra large devices (large desktops, 1200px and up)
+     */
+<span class="nc" id="L35">    ExtraLarge(&quot;lg&quot;, 1200),</span>
+    /**
+     * Large devices (desktops, 992px and up)
+     */
+<span class="nc" id="L39">    Large(&quot;lg&quot;, 992),</span>
+    /**
+     * Medium devices (tablets, 768px and up)
+     */
+<span class="nc" id="L43">    Medium(&quot;md&quot;, 768),</span>
+    /**
+     * Small devices (landscape phones, 544px and up)
+     */
+<span class="nc" id="L47">    Small(&quot;sm&quot;, 544),</span>
+    /**
+     * Starting at the bottom
+     */
+<span class="nc" id="L51">    XSmall(&quot;xs&quot;, 0);</span>
+
     private String name;
     private Integer size;
-    
-    private BootstrapSize ()
-<span class="nc" id="L41">    {</span>
-        
-<span class="nc" id="L43">    }</span>
+
+    private BootstrapSize()
+<span class="nc" id="L57">    {</span>
+
+<span class="nc" id="L59">    }</span>
 
     private BootstrapSize(String name)
-<span class="nc" id="L46">    {</span>
-<span class="nc" id="L47">        this.name = name;</span>
-<span class="nc" id="L48">    }</span>
+<span class="nc" id="L62">    {</span>
+<span class="nc" id="L63">        this.name = name;</span>
+<span class="nc" id="L64">    }</span>
 
     private BootstrapSize(String name, Integer size)
-<span class="nc" id="L51">    {</span>
-<span class="nc" id="L52">        this.name = name;</span>
-<span class="nc" id="L53">        this.size = size;</span>
-<span class="nc" id="L54">    }</span>
-    
+<span class="nc" id="L67">    {</span>
+<span class="nc" id="L68">        this.name = name;</span>
+<span class="nc" id="L69">        this.size = size;</span>
+<span class="nc" id="L70">    }</span>
+
     @JsonValue
     public String getName()
     {
-<span class="nc" id="L59">        return name;</span>
+<span class="nc" id="L75">        return name;</span>
     }
 
     public void setName(String name)
     {
-<span class="nc" id="L64">        this.name = name;</span>
-<span class="nc" id="L65">    }</span>
+<span class="nc" id="L80">        this.name = name;</span>
+<span class="nc" id="L81">    }</span>
 
     /**
      * The actual pixel size setting
-     * @return 
+     *
+     * @return
      */
     public Integer getSize()
     {
-<span class="nc" id="L73">        return size;</span>
+<span class="nc" id="L90">        return size;</span>
     }
 
     /**
      * The actual pixel size setting
-     * @param size 
+     *
+     * @param size
      */
     public void setSize(Integer size)
     {
-<span class="nc" id="L82">        this.size = size;</span>
-<span class="nc" id="L83">    }</span>
-    
-    
+<span class="nc" id="L100">        this.size = size;</span>
+<span class="nc" id="L101">    }</span>
+
+    @Override
+    public String toString()
+    {
+<span class="nc" id="L106">        return getName();</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

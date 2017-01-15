@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BSDropDownMenu.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.bootstrap.dropdown.menu</a> &gt; <span class="el_source">BSDropDownMenu.java</span></div><h1>BSDropDownMenu.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.bootstrap.dropdown.menu;
+
+import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.components.bootstrap.dropdown.BSComponentDropDownOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.dropdown.BSDropDownChildren;
+
+/**
+ * A drop down menu for the bootstrap drop down component
+ * &lt;p&gt;
+ * @author Marc Magon
+ * @since 13 Jan 2017
+ * @version 1.0
+ */
+public class BSDropDownMenu extends Div&lt;BSDropDownMenuChildren, BSDropDownMenuAttributes, BSDropDownMenuFeatures, BSDropDownMenuEvents, BSDropDownMenu&gt;
+        implements BSDropDownChildren
+{
+
+    private static final long serialVersionUID = 1L;
+
+    private BSDropDownMenuFeature feature;
+
+    /**
+     * A new drop down menu list
+     */
+    public BSDropDownMenu()
+<span class="fc" id="L42">    {</span>
+<span class="fc" id="L43">        addClass(BSComponentDropDownOptions.Dropdown_Menu);</span>
+
+<span class="fc" id="L45">    }</span>
+
+    public final BSDropDownMenuFeature getFeature()
+    {
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        if (feature == null)</span>
+        {
+<span class="nc" id="L51">            feature = new BSDropDownMenuFeature(this);</span>
+        }
+<span class="nc" id="L53">        return feature;</span>
+    }
+
+    /**
+     * Menu alignment
+     * &lt;p&gt;
+     * By default, a dropdown menu is automatically positioned 100% from the top and along the left side of its parent. Add .dropdown-menu-right to a .dropdown-menu to right align the dropdown menu.
+     * &lt;p&gt;
+     * Heads up! Dropdowns are positioned only with CSS and may need some additional styles for exact alignment.
+     *
+     * @return
+     */
+    public BSDropDownMenu setRightAligned()
+    {
+<span class="nc" id="L67">        addClass(BSComponentDropDownOptions.Dropdown_Menu_Right);</span>
+<span class="nc" id="L68">        return this;</span>
+    }
+
+    /**
+     * Returns very little
+     *
+     * @return
+     */
+    @Override
+    public BSDropDownMenuOptions getOptions()
+    {
+<span class="nc" id="L79">        return getFeature().getOptions();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -44,6 +44,7 @@ public class ComponentBaseTest extends BaseTestClass
                 + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
                 + "  \"initialized\" : true,\n"
+                + "  \"touched\" : false,\n"
                 + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
                 + "}", shell.toString());
     }
@@ -62,6 +63,7 @@ public class ComponentBaseTest extends BaseTestClass
                 + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
                 + "  \"initialized\" : true,\n"
+                + "  \"touched\" : false,\n"
                 + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
                 + "}", shell.toString());
     }
@@ -79,6 +81,7 @@ public class ComponentBaseTest extends BaseTestClass
                 + "  \"tiny\" : true,\n"
                 + "  \"configured\" : true,\n"
                 + "  \"initialized\" : true,\n"
+                + "  \"touched\" : false,\n"
                 + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
                 + "}", shell.toString());
     }
@@ -98,6 +101,7 @@ public class ComponentBaseTest extends BaseTestClass
                 + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
                 + "  \"initialized\" : true,\n"
+                + "  \"touched\" : false,\n"
                 + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
                 + "}";
         String shell2Expected = "{\n"
@@ -106,6 +110,7 @@ public class ComponentBaseTest extends BaseTestClass
                 + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
                 + "  \"initialized\" : true,\n"
+                + "  \"touched\" : false,\n"
                 + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
                 + "}";
         Assert.assertEquals(shell.toString(), shellExpected);
@@ -126,6 +131,7 @@ public class ComponentBaseTest extends BaseTestClass
                 + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
                 + "  \"initialized\" : true,\n"
+                + "  \"touched\" : false,\n"
                 + "  \"properties\" : {\n"
                 + "    \"Property1\" : \"Value 1\"\n"
                 + "  },\n"

@@ -1,7 +1,8 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.measurement;
 
-import com.fasterxml.jackson.annotation.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.*;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import com.fasterxml.jackson.annotation.JsonValue;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSDetail;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
 
 /**
@@ -113,8 +114,7 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter<MeasurementCSS,
     public String toString()
     {
         /*
-         * if (measurementType == null) { return "";
-        }
+         * if (measurementType == null) { return ""; }
          */
         if (Double.class.cast(value).toString().endsWith(".0")) //format as an integer
         {
@@ -148,14 +148,12 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter<MeasurementCSS,
      */
     public String toString(boolean renderQuotes)
     {
-        if (renderQuotes)
-        {
-            return "'" + value + "" + MeasurementType() == null ? "" : MeasurementType().getHtmlAnnotation() + "'";
+        return toString().replace("\'", "");
+        /*
+         * if (renderQuotes) { return "'" + value + "" + MeasurementType() == null ? "" : MeasurementType().getHtmlAnnotation() + "'"; } else { return value + "" + MeasurementType() == null ? "" :
+         * MeasurementType().getHtmlAnnotation();
         }
-        else
-        {
-            return value + "" + MeasurementType() == null ? "" : MeasurementType().getHtmlAnnotation();
-        }
+         */
     }
 
     /**

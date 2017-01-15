@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.components.jqplot.graphs;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import za.co.mmagon.jwebswing.components.jqplot.JQPlotGraph;
 import za.co.mmagon.jwebswing.components.jqplot.graphs.display.JQPlotBubble;
 import za.co.mmagon.jwebswing.components.jqplot.options.JQPlotOptions;
@@ -33,6 +32,8 @@ import za.co.mmagon.jwebswing.components.jqplot.options.series.JQPlotSeriesBubbl
 public class JQPlotBubbleGraph extends JQPlotGraph&lt;JQPlotOptions&gt;
 {
 
+    private static final long serialVersionUID = 1L;
+
     private ArrayList&lt;JQPlotBubble&gt; bubbles;
     private JQPlotSeriesBubbleOptions bubbleOptions;
 
@@ -40,23 +41,23 @@ public class JQPlotBubbleGraph extends JQPlotGraph&lt;JQPlotOptions&gt;
      * Creates a new bubble graph
      */
     public JQPlotBubbleGraph()
-<span class="fc" id="L43">    {</span>
-<span class="fc" id="L44">        getOptions().getSeriesDefaults();</span>
-<span class="fc" id="L45">        getOptions().getSeriesDefaults().setRendererOptions(getBubbleOptions());</span>
-<span class="fc" id="L46">    }</span>
+<span class="fc" id="L44">    {</span>
+<span class="fc" id="L45">        getOptions().getSeriesDefaults();</span>
+<span class="fc" id="L46">        getOptions().getSeriesDefaults().setRendererOptions(getBubbleOptions());</span>
+<span class="fc" id="L47">    }</span>
 
     /**
      * Returns the bubble options instance
      *
      * @return
      */
-    public JQPlotSeriesBubbleOptions getBubbleOptions()
+    public final JQPlotSeriesBubbleOptions getBubbleOptions()
     {
-<span class="pc bpc" id="L55" title="1 of 2 branches missed.">        if (bubbleOptions == null)</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">        if (bubbleOptions == null)</span>
         {
-<span class="fc" id="L57">            bubbleOptions = new JQPlotSeriesBubbleOptions(this);</span>
+<span class="fc" id="L58">            bubbleOptions = new JQPlotSeriesBubbleOptions(this);</span>
         }
-<span class="fc" id="L59">        return bubbleOptions;</span>
+<span class="fc" id="L60">        return bubbleOptions;</span>
     }
 
     /**
@@ -66,8 +67,8 @@ public class JQPlotBubbleGraph extends JQPlotGraph&lt;JQPlotOptions&gt;
      */
     public void setBubbleOptions(JQPlotSeriesBubbleOptions bubbleOptions)
     {
-<span class="nc" id="L69">        this.bubbleOptions = bubbleOptions;</span>
-<span class="nc" id="L70">    }</span>
+<span class="nc" id="L70">        this.bubbleOptions = bubbleOptions;</span>
+<span class="nc" id="L71">    }</span>
 
     /**
      * Returns a list of all the bubbles
@@ -76,11 +77,11 @@ public class JQPlotBubbleGraph extends JQPlotGraph&lt;JQPlotOptions&gt;
      */
     public ArrayList&lt;JQPlotBubble&gt; getBubbles()
     {
-<span class="nc bnc" id="L79" title="All 2 branches missed.">        if (bubbles == null)</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if (bubbles == null)</span>
         {
-<span class="nc" id="L81">            bubbles = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L82">            bubbles = new ArrayList&lt;&gt;();</span>
         }
-<span class="nc" id="L83">        return bubbles;</span>
+<span class="nc" id="L84">        return bubbles;</span>
     }
 
     /**
@@ -90,23 +91,24 @@ public class JQPlotBubbleGraph extends JQPlotGraph&lt;JQPlotOptions&gt;
      */
     public void setBubbles(ArrayList&lt;JQPlotBubble&gt; bubbles)
     {
-<span class="nc" id="L93">        this.bubbles = bubbles;</span>
-<span class="nc" id="L94">    }</span>
+<span class="nc" id="L94">        this.bubbles = bubbles;</span>
+<span class="nc" id="L95">    }</span>
 
     /**
-     * Adds a bubble into the collection with a specified label
-     * Labels can be components as well, this will set the HTML escape off
+     * Adds a bubble into the collection with a specified label Labels can be components as well, this will set the HTML escape off
      * &lt;p&gt;
      * @param x      The X Location
      * @param y      The Y Location
      * @param radius The Radius of the Bubble
      * @param label  The Label of the Bubble
+     *
+     * @return
      */
     public JQPlotBubble addBubble(double x, double y, int radius, String label)
     {
-<span class="nc" id="L107">        JQPlotBubble bubble = new JQPlotBubble(x, y, radius, label);</span>
-<span class="nc" id="L108">        getBubbles().add(bubble);</span>
-<span class="nc" id="L109">        return bubble;</span>
+<span class="nc" id="L109">        JQPlotBubble bubble = new JQPlotBubble(x, y, radius, label);</span>
+<span class="nc" id="L110">        getBubbles().add(bubble);</span>
+<span class="nc" id="L111">        return bubble;</span>
     }
 
     /**
@@ -117,21 +119,20 @@ public class JQPlotBubbleGraph extends JQPlotGraph&lt;JQPlotOptions&gt;
     @Override
     public StringBuilder getDataPointRender()
     {
-<span class="nc" id="L120">        StringBuilder sb = new StringBuilder(&quot;[[&quot;);</span>
+<span class="nc" id="L122">        StringBuilder sb = new StringBuilder(&quot;[[&quot;);</span>
 
-<span class="nc bnc" id="L122" title="All 2 branches missed.">        for (Iterator&lt;JQPlotBubble&gt; iterator = getBubbles().iterator(); iterator.hasNext();)</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">        for (JQPlotBubble next : getBubbles())</span>
         {
-<span class="nc" id="L124">            JQPlotBubble next = iterator.next();</span>
-<span class="nc" id="L125">            sb.append(next).append(&quot;,&quot;);</span>
-<span class="nc" id="L126">        }</span>
+<span class="nc" id="L126">            sb.append(next).append(&quot;,&quot;);</span>
+<span class="nc" id="L127">        }</span>
 
-<span class="nc bnc" id="L128" title="All 2 branches missed.">        if (sb.indexOf(&quot;,&quot;) &gt; 0)</span>
+<span class="nc bnc" id="L129" title="All 2 branches missed.">        if (sb.indexOf(&quot;,&quot;) &gt; 0)</span>
         {
-<span class="nc" id="L130">            sb = sb.deleteCharAt(sb.lastIndexOf(&quot;,&quot;));</span>
+<span class="nc" id="L131">            sb = sb.deleteCharAt(sb.lastIndexOf(&quot;,&quot;));</span>
         }
 
-<span class="nc" id="L133">        sb.append(&quot;]]&quot;);</span>
-<span class="nc" id="L134">        return sb;</span>
+<span class="nc" id="L134">        sb.append(&quot;]]&quot;);</span>
+<span class="nc" id="L135">        return sb;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

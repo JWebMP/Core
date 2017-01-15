@@ -16,10 +16,10 @@
  */
 package za.co.mmagon.jwebswing.components.jstree;
 
-import com.fasterxml.jackson.annotation.*;
-import java.util.*;
-import za.co.mmagon.JWebSwingSiteBinder;
-import za.co.mmagon.jwebswing.components.jstree.options.functions.JSTreeCoreDataFunction;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.ArrayList;
+import java.util.List;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
@@ -39,31 +39,15 @@ public class JSTreeData extends JavaScriptPart
      */
 
     private List&lt;JSTreeNode&gt; nodes;
-    /**
-     * The actual tree
-     */
-    @JsonIgnore
-    private JSTree tree;
 
     /**
      * Constructs a new instance of tree data
      *
-     * @param tree
-     *
      * @throws RuntimeException If tree is null
      */
-    public JSTreeData(JSTree tree)
-<span class="fc" id="L56">    {</span>
-<span class="fc" id="L57">        this.tree = tree;</span>
-<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        if (tree == null)</span>
-        {
-<span class="nc" id="L60">            throw new RuntimeException(&quot;Missing the tree for the JSTreeData&quot;);</span>
-        }
-<span class="fc" id="L62">        tree.getOptions().getCore().getData().setUrl(JWebSwingSiteBinder.getDataLocation().replace(&quot;/&quot;, &quot;&quot;) + &quot;?component=&quot; + tree.getID());</span>
-<span class="fc" id="L63">        tree.getOptions().getCore().getData().setData(new JSTreeCoreDataFunction());</span>
-        //tree.getOptions().getCore().getData().setCache(false);
-        //tree.getOptions().getCore().getData().setDataType(&quot;json&quot;);
-<span class="fc" id="L66">    }</span>
+    public JSTreeData()
+<span class="fc" id="L49">    {</span>
+<span class="fc" id="L50">    }</span>
 
     /**
      * Returns all the nodes currently associated with this tree
@@ -74,11 +58,11 @@ public class JSTreeData extends JavaScriptPart
     @JsonValue
     public List&lt;JSTreeNode&gt; getNodes()
     {
-<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (nodes == null)</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        if (nodes == null)</span>
         {
-<span class="fc" id="L79">            setNodes(new ArrayList&lt;&gt;());</span>
+<span class="fc" id="L63">            setNodes(new ArrayList&lt;&gt;());</span>
         }
-<span class="fc" id="L81">        return nodes;</span>
+<span class="fc" id="L65">        return nodes;</span>
     }
 
     /**
@@ -88,58 +72,37 @@ public class JSTreeData extends JavaScriptPart
      */
     public void setNodes(List&lt;JSTreeNode&gt; nodes)
     {
-<span class="fc" id="L91">        this.nodes = nodes;</span>
-<span class="fc" id="L92">    }</span>
-
-    /**
-     * Returns the tree associated with this
-     *
-     * @return
-     */
-    public JSTree getTree()
-    {
-<span class="nc" id="L101">        return tree;</span>
-    }
-
-    /**
-     * Sets the tree associated with this (but rather do it at construction, you never know)
-     *
-     * @param tree
-     */
-    public void setTree(JSTree tree)
-    {
-<span class="nc" id="L111">        this.tree = tree;</span>
-<span class="nc" id="L112">    }</span>
+<span class="fc" id="L75">        this.nodes = nodes;</span>
+<span class="fc" id="L76">    }</span>
 
     @Override
     public JavascriptPartType getJavascriptType()
     {
-<span class="fc" id="L117">        return JavascriptPartType.JSON;</span>
+<span class="fc" id="L81">        return JavascriptPartType.JSON;</span>
     }
 
     public JSTreeNode findNode(String id)
     {
         JSTreeNode found;
-<span class="nc" id="L123">        found = findNode(getNodes(), id);</span>
-<span class="nc" id="L124">        return found;</span>
+<span class="nc" id="L87">        found = findNode(getNodes(), id);</span>
+<span class="nc" id="L88">        return found;</span>
     }
 
     private JSTreeNode findNode(List&lt;JSTreeNode&gt; nodes, String id)
     {
         JSTreeNode found;
-<span class="nc bnc" id="L130" title="All 2 branches missed.">        for (Iterator&lt;JSTreeNode&gt; iterator = nodes.iterator(); iterator.hasNext();)</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        for (JSTreeNode next : nodes)</span>
         {
-<span class="nc" id="L132">            JSTreeNode next = iterator.next();</span>
-<span class="nc bnc" id="L133" title="All 2 branches missed.">            if (next.getId().equals(id))</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">            if (next.getId().equals(id))</span>
             {
-<span class="nc" id="L135">                return next;</span>
+<span class="nc" id="L98">                return next;</span>
             }
-<span class="nc bnc" id="L137" title="All 2 branches missed.">            if ((found = next.getChildNodes().findNode(id)) != null)</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">            if ((found = next.getChildNodes().findNode(id)) != null)</span>
             {
-<span class="nc" id="L139">                return found;</span>
+<span class="nc" id="L102">                return found;</span>
             }
-<span class="nc" id="L141">        }</span>
-<span class="nc" id="L142">        return null;</span>
+<span class="nc" id="L104">        }</span>
+<span class="nc" id="L105">        return null;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

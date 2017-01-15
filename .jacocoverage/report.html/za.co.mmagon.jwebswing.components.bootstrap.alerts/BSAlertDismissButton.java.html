@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BSAlertDismissButton.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.bootstrap.alerts</a> &gt; <span class="el_source">BSAlertDismissButton.java</span></div><h1>BSAlertDismissButton.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2016 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.bootstrap.alerts;
+
+import za.co.mmagon.jwebswing.base.html.attributes.ButtonAttributes;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.close.BSCloseIcon;
+
+/**
+ * Dismissing
+ * &lt;p&gt;
+ * Using the alert JavaScript plugin, it’s possible to dismiss any alert inline. Here’s how:
+ * &lt;p&gt;
+ * Be sure you’ve loaded the alert plugin, or the compiled Bootstrap JavaScript.
+ * &lt;p&gt;
+ * Add a dismiss button and the .alert-dismissible class, which adds extra padding to the right of the alert and positions the .close button.
+ * &lt;p&gt;
+ * On the dismiss button, add the data-dismiss=&quot;alert&quot; attribute, which triggers the JavaScript functionality.
+ * &lt;p&gt;
+ * Be sure to use the button element with it for proper behavior across all devices.
+ * &lt;p&gt;
+ * To animate alerts when dismissing them, be sure to add the .fade and .in classes.
+ *
+ * @author GedMarc
+ * @since 31 Dec 2016
+ * @version 1.0
+ *
+ */
+public class BSAlertDismissButton extends BSCloseIcon
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Constructs and adds a dismiss button to the alert
+     *
+     * @param alert
+     * @param fade
+     */
+    @SuppressWarnings(&quot;&quot;)
+    public BSAlertDismissButton(BSAlert alert, boolean fade)
+<span class="fc" id="L56">    {</span>
+<span class="fc" id="L57">        addAttribute(ButtonAttributes.Data_Dismiss, &quot;alert&quot;);</span>
+<span class="fc" id="L58">        alert.addClass(BSComponentAlertOptions.Alert_Dismissible);</span>
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">        if (fade)</span>
+        {
+<span class="fc" id="L61">            alert.addClass(BSComponentDefaultOptions.Fade);</span>
+<span class="fc" id="L62">            alert.addClass(BSComponentDefaultOptions.In);</span>
+        }
+<span class="fc" id="L64">        alert.add(this);</span>
+<span class="fc" id="L65">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

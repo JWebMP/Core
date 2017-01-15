@@ -19,16 +19,17 @@ package za.co.mmagon.jwebswing.components.jstree;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.components.jstree.options.JSTreeNodeStateOptions;
+import za.co.mmagon.jwebswing.components.jstree.options.JSTreeTypesOptions;
 
 /**
- *
+ * A Tree Node
  * @author GedMarc
  * @since 22 Dec 2016
  * @version 1.0
  *
  */
-public class JSTreeNode extends JavaScriptPart
+public class JSTreeNode extends JSTreeTypesOptions
 {
 
     private static final long serialVersionUID = 1L;
@@ -41,43 +42,85 @@ public class JSTreeNode extends JavaScriptPart
      */
     private String text;
     /**
+     * You can set the state on a node using the state property.
+     * &lt;p&gt;
+     * Use any combination of the following: opened, selected, disabled.
+     */
+    private JSTreeNodeStateOptions state;
+    /**
      * The type for the node
      */
     @JsonProperty(&quot;type&quot;)
     private String typeName;
-    
-    
-    
+
     /**
      * All the child nodes, json ignored for ajax called rendering
      */
     @JsonIgnore
     private JSTreeData childNodes;
+
     /**
-     * A back reference for the tree
+     * Constructs an empty tree node
      */
-    @JsonIgnore
-    private JSTree tree;
+    public JSTreeNode()
+<span class="nc" id="L66">    {</span>
+<span class="nc" id="L67">    }</span>
 
-    public JSTreeNode(JSTree tree)
-<span class="fc" id="L63">    {</span>
-<span class="fc" id="L64">        this.tree = tree;</span>
-<span class="fc" id="L65">    }</span>
+    /**
+     * Builds a tree node with the given information
+     *
+     * @param id       The ID of the node (don't use default or '#')
+     * @param text     The text for the node
+     * @param typeName The type of the node if specified
+     */
+    public JSTreeNode(String id, String text, String typeName)
+<span class="nc" id="L77">    {</span>
+<span class="nc" id="L78">        this.id = id;</span>
+<span class="nc" id="L79">        this.text = text;</span>
+<span class="nc" id="L80">        this.typeName = typeName;</span>
+<span class="nc" id="L81">    }</span>
 
-    public JSTreeNode(JSTree tree, String id, String text, String typeName)
-    {
-<span class="nc" id="L69">        this(tree);</span>
-<span class="nc" id="L70">        this.id = id;</span>
-<span class="nc" id="L71">        this.text = text;</span>
-<span class="nc" id="L72">        this.typeName = typeName;</span>
-<span class="nc" id="L73">    }</span>
+    /**
+     * Builds a tree node with the given information
+     *
+     * @param id
+     * @param text
+     * @param state
+     */
+    public JSTreeNode(String id, String text, JSTreeNodeStateOptions state)
+<span class="nc" id="L91">    {</span>
+<span class="nc" id="L92">        this.id = id;</span>
+<span class="nc" id="L93">        this.text = text;</span>
+<span class="nc" id="L94">        this.state = state;</span>
+<span class="nc" id="L95">    }</span>
 
-    public JSTreeNode(JSTree tree, String id, String text)
-    {
-<span class="fc" id="L77">        this(tree);</span>
-<span class="fc" id="L78">        this.id = id;</span>
-<span class="fc" id="L79">        this.text = text;</span>
-<span class="fc" id="L80">    }</span>
+    /**
+     * Builds a tree node with the given information
+     *
+     * @param id
+     * @param text
+     * @param state
+     * @param typeName
+     */
+    public JSTreeNode(String id, String text, JSTreeNodeStateOptions state, String typeName)
+<span class="nc" id="L106">    {</span>
+<span class="nc" id="L107">        this.id = id;</span>
+<span class="nc" id="L108">        this.text = text;</span>
+<span class="nc" id="L109">        this.state = state;</span>
+<span class="nc" id="L110">        this.typeName = typeName;</span>
+<span class="nc" id="L111">    }</span>
+
+    /**
+     * Constructs a new tree node
+     *
+     * @param id   The id of the tree (don't use default or '#')
+     * @param text The text for the tree
+     */
+    public JSTreeNode(String id, String text)
+<span class="fc" id="L120">    {</span>
+<span class="fc" id="L121">        this.id = id;</span>
+<span class="fc" id="L122">        this.text = text;</span>
+<span class="fc" id="L123">    }</span>
 
     /**
      * The ID of the node
@@ -86,18 +129,22 @@ public class JSTreeNode extends JavaScriptPart
      */
     public String getId()
     {
-<span class="nc" id="L89">        return id;</span>
+<span class="nc" id="L132">        return id;</span>
     }
 
     /**
      * The ID of the node
      *
      * @param id
+     *
+     * @return
      */
-    public void setId(String id)
+    public JSTreeNode setId(String id)
     {
-<span class="nc" id="L99">        this.id = id;</span>
-<span class="nc" id="L100">    }</span>
+<span class="nc" id="L144">        this.id = id;</span>
+<span class="nc" id="L145">        return this;</span>
+
+    }
 
     /**
      * The text to display for the node
@@ -106,18 +153,22 @@ public class JSTreeNode extends JavaScriptPart
      */
     public String getText()
     {
-<span class="nc" id="L109">        return text;</span>
+<span class="nc" id="L156">        return text;</span>
     }
 
     /**
      * The text to display for the node
      *
      * @param text
+     *
+     * @return
      */
-    public void setText(String text)
+    public JSTreeNode setText(String text)
     {
-<span class="nc" id="L119">        this.text = text;</span>
-<span class="nc" id="L120">    }</span>
+<span class="nc" id="L168">        this.text = text;</span>
+<span class="nc" id="L169">        return this;</span>
+
+    }
 
     /**
      * The type name associated with the node
@@ -126,18 +177,21 @@ public class JSTreeNode extends JavaScriptPart
      */
     public String getTypeName()
     {
-<span class="nc" id="L129">        return typeName;</span>
+<span class="nc" id="L180">        return typeName;</span>
     }
 
     /**
      * The type name associated with the node
      *
      * @param typeName
+     *
+     * @return
      */
-    public void setTypeName(String typeName)
+    public JSTreeNode setTypeName(String typeName)
     {
-<span class="nc" id="L139">        this.typeName = typeName;</span>
-<span class="nc" id="L140">    }</span>
+<span class="nc" id="L192">        this.typeName = typeName;</span>
+<span class="nc" id="L193">        return this;</span>
+    }
 
     /**
      * Returns the list of child nodes
@@ -146,22 +200,25 @@ public class JSTreeNode extends JavaScriptPart
      */
     public JSTreeData getChildNodes()
     {
-<span class="pc bpc" id="L149" title="1 of 2 branches missed.">        if (childNodes == null)</span>
+<span class="fc bfc" id="L203" title="All 2 branches covered.">        if (childNodes == null)</span>
         {
-<span class="fc" id="L151">            setChildNodes(new JSTreeData(tree));</span>
+<span class="fc" id="L205">            setChildNodes(new JSTreeData());</span>
         }
-<span class="fc" id="L153">        return childNodes;</span>
+<span class="fc" id="L207">        return childNodes;</span>
     }
 
     /**
      * Sets the list of child nodes
      *
      * @param childNodes
+     *
+     * @return
      */
-    public void setChildNodes(JSTreeData childNodes)
+    public JSTreeNode setChildNodes(JSTreeData childNodes)
     {
-<span class="fc" id="L163">        this.childNodes = childNodes;</span>
-<span class="fc" id="L164">    }</span>
+<span class="fc" id="L219">        this.childNodes = childNodes;</span>
+<span class="fc" id="L220">        return this;</span>
+    }
 
     /**
      * returns the json property
@@ -171,43 +228,74 @@ public class JSTreeNode extends JavaScriptPart
     @JsonProperty(&quot;children&quot;)
     public boolean hasChildren()
     {
-<span class="pc bpc" id="L174" title="1 of 2 branches missed.">        return !getChildNodes().getNodes().isEmpty();</span>
+<span class="pc bpc" id="L231" title="1 of 2 branches missed.">        return !getChildNodes().getNodes().isEmpty();</span>
+    }
+
+    /**
+     * You can set the state on a node using the state property.
+     * &lt;p&gt;
+     * Use any combination of the following: opened, selected, disabled.
+     *
+     * @return
+     */
+    public JSTreeNodeStateOptions getState()
+    {
+<span class="nc bnc" id="L243" title="All 2 branches missed.">        if (this.state == null)</span>
+        {
+<span class="nc" id="L245">            setState(new JSTreeNodeStateOptions());</span>
+        }
+<span class="nc" id="L247">        return state;</span>
+    }
+
+    /**
+     * You can set the state on a node using the state property.
+     * &lt;p&gt;
+     * Use any combination of the following: opened, selected, disabled.
+     *
+     * @param state
+     *
+     * @return
+     */
+    public JSTreeNode setState(JSTreeNodeStateOptions state)
+    {
+<span class="nc" id="L261">        this.state = state;</span>
+<span class="nc" id="L262">        return this;</span>
     }
 
     @Override
     public int hashCode()
     {
-<span class="nc" id="L180">        int hash = 3;</span>
-<span class="nc" id="L181">        hash = 89 * hash + Objects.hashCode(this.text);</span>
-<span class="nc" id="L182">        hash = 89 * hash + Objects.hashCode(this.typeName);</span>
-<span class="nc" id="L183">        return hash;</span>
+<span class="nc" id="L268">        int hash = 3;</span>
+<span class="nc" id="L269">        hash = 89 * hash + Objects.hashCode(this.text);</span>
+<span class="nc" id="L270">        hash = 89 * hash + Objects.hashCode(this.typeName);</span>
+<span class="nc" id="L271">        return hash;</span>
     }
 
     @Override
     public boolean equals(Object obj)
     {
-<span class="nc bnc" id="L189" title="All 2 branches missed.">        if (this == obj)</span>
+<span class="nc bnc" id="L277" title="All 2 branches missed.">        if (this == obj)</span>
         {
-<span class="nc" id="L191">            return true;</span>
+<span class="nc" id="L279">            return true;</span>
         }
-<span class="nc bnc" id="L193" title="All 2 branches missed.">        if (obj == null)</span>
+<span class="nc bnc" id="L281" title="All 2 branches missed.">        if (obj == null)</span>
         {
-<span class="nc" id="L195">            return false;</span>
+<span class="nc" id="L283">            return false;</span>
         }
-<span class="nc bnc" id="L197" title="All 2 branches missed.">        if (getClass() != obj.getClass())</span>
+<span class="nc bnc" id="L285" title="All 2 branches missed.">        if (getClass() != obj.getClass())</span>
         {
-<span class="nc" id="L199">            return false;</span>
+<span class="nc" id="L287">            return false;</span>
         }
-<span class="nc" id="L201">        final JSTreeNode other = (JSTreeNode) obj;</span>
-<span class="nc bnc" id="L202" title="All 2 branches missed.">        if (!Objects.equals(this.text, other.text))</span>
+<span class="nc" id="L289">        final JSTreeNode other = (JSTreeNode) obj;</span>
+<span class="nc bnc" id="L290" title="All 2 branches missed.">        if (!Objects.equals(this.text, other.text))</span>
         {
-<span class="nc" id="L204">            return false;</span>
+<span class="nc" id="L292">            return false;</span>
         }
-<span class="nc bnc" id="L206" title="All 2 branches missed.">        if (!Objects.equals(this.typeName, other.typeName))</span>
+<span class="nc bnc" id="L294" title="All 2 branches missed.">        if (!Objects.equals(this.typeName, other.typeName))</span>
         {
-<span class="nc" id="L208">            return false;</span>
+<span class="nc" id="L296">            return false;</span>
         }
-<span class="nc" id="L210">        return true;</span>
+<span class="nc" id="L298">        return true;</span>
     }
 
 }

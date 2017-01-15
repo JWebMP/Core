@@ -17,8 +17,12 @@
 package za.co.mmagon.jwebswing.components.jstree;
 
 import java.util.Map;
+import za.co.mmagon.JWebSwingSiteBinder;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.servlets.interfaces.IDataComponent;
+import za.co.mmagon.jwebswing.components.jstree.events.JSTreeRefreshEvent;
+import za.co.mmagon.jwebswing.components.jstree.options.functions.JSTreeCoreDataFunction;
+import za.co.mmagon.jwebswing.components.jstree.themes.JSTreeDefaultTheme;
 import za.co.mmagon.jwebswing.components.jstree.themes.JSTreeTheme;
 import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
 
@@ -33,55 +37,81 @@ public class JSTree extends Div&lt;JSTreeChildren, JSTreeAttributes, JSTreeFeatu
 {
 
     private static final long serialVersionUID = 1L;
+    
     private JSTreeFeature feature;
+    
     private JSTreeData data;
-
+    
+    /**
+     * Constructs a new instance of the JS Tree
+     */
     public JSTree()
-<span class="fc" id="L40">    {</span>
-<span class="fc" id="L41">        addFeature(getFeature());</span>
-<span class="fc" id="L42">    }</span>
+<span class="fc" id="L49">    {</span>
+<span class="fc" id="L50">        addFeature(getFeature());</span>
+<span class="fc" id="L51">    }</span>
 
+    /**
+     * Adds the AJAX mode
+     */
     @Override
     public void preConfigure()
     {
-<span class="fc" id="L47">        getPage().getOptions().setjQueryEnabled(true);</span>
-<span class="fc" id="L48">        super.preConfigure();</span>
-<span class="fc" id="L49">    }</span>
+<span class="fc" id="L59">        getPage().getOptions().setjQueryEnabled(true);</span>
+<span class="fc" id="L60">        getOptions().getCore().getData().setUrl(JWebSwingSiteBinder.getDataLocation().replace(&quot;/&quot;, &quot;&quot;) + &quot;?component=&quot; + getID());</span>
+<span class="fc" id="L61">        getOptions().getCore().getData().setData(new JSTreeCoreDataFunction());</span>
+<span class="fc" id="L62">        super.preConfigure();</span>
+<span class="fc" id="L63">    }</span>
 
+    /**
+     * Returns the data, and any parameters if supplied
+     * @param params
+     * @return 
+     */
     @Override
     public JSTreeData getData(Map&lt;String, String[]&gt; params)
     {
-<span class="nc" id="L54">        String[] ids = params.get(&quot;id&quot;);</span>
-<span class="nc" id="L55">        String id = ids[0];</span>
-<span class="nc bnc" id="L56" title="All 2 branches missed.">       if (id.equalsIgnoreCase(&quot;#&quot;))</span>
+<span class="nc" id="L73">        onGetData(params);</span>
+<span class="nc" id="L74">        String[] ids = params.get(&quot;id&quot;);</span>
+<span class="nc" id="L75">        String id = ids[0];</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        if (id.equalsIgnoreCase(&quot;#&quot;))</span>
         {
-<span class="nc" id="L58">            return data;</span>
+<span class="nc" id="L78">            return data;</span>
         }
         else
         {
-<span class="nc" id="L62">            return data.findNode(id).getChildNodes();</span>
+<span class="nc" id="L82">            return data.findNode(id).getChildNodes();</span>
             //go through the nodes looking for the next id item
         }
     }
 
+    /**
+     * Execute something before get data is called
+     *
+     * @param params
+     */
+    protected void onGetData(Map&lt;String, String[]&gt; params)
+    {
+
+<span class="nc" id="L95">    }</span>
+
     public void setData(JSTreeData data)
     {
-<span class="fc" id="L69">        this.data = data;</span>
-<span class="fc" id="L70">    }</span>
+<span class="fc" id="L99">        this.data = data;</span>
+<span class="fc" id="L100">    }</span>
 
     public final JSTreeFeature getFeature()
     {
-<span class="fc bfc" id="L74" title="All 2 branches covered.">        if (feature == null)</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">        if (feature == null)</span>
         {
-<span class="fc" id="L76">            feature = new JSTreeFeature(this);</span>
+<span class="fc" id="L106">            feature = new JSTreeFeature(this);</span>
         }
-<span class="fc" id="L78">        return feature;</span>
+<span class="fc" id="L108">        return feature;</span>
     }
 
     @Override
     public JSTreeOptions getOptions()
     {
-<span class="fc" id="L84">        return getFeature().getOptions();</span>
+<span class="fc" id="L114">        return getFeature().getOptions();</span>
     }
 
     /**
@@ -92,7 +122,21 @@ public class JSTree extends Div&lt;JSTreeChildren, JSTreeAttributes, JSTreeFeatu
      */
     public &lt;J extends Theme &amp; JSTreeTheme&gt; void setTheme(J theme)
     {
-<span class="fc" id="L95">        theme.getCssReferences().forEach(this::addCssReference);</span>
-<span class="fc" id="L96">    }</span>
+<span class="fc" id="L125">        theme.getCssReferences().forEach(this::addCssReference);</span>
+<span class="pc bpc" id="L126" title="1 of 2 branches missed.">        if (!JSTreeDefaultTheme.class.isAssignableFrom(theme.getClass()))</span>
+        {
+<span class="fc" id="L128">            getOptions().getCore().getThemes().setName(theme.getName());</span>
+        }
+<span class="fc" id="L130">    }</span>
+
+    /**
+     * Returns a new event that refreshes the tree
+     *
+     * @return
+     */
+    public JSTreeRefreshEvent getRefreshEvent()
+    {
+<span class="nc" id="L139">        return new JSTreeRefreshEvent(this);</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -29,6 +29,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 class Angular2Feature extends Feature&lt;JavaScriptPart, Angular2Feature&gt;
 {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Adds on the Angular ComponentFeatureBase to the application to allow full data binding
      *
@@ -36,28 +38,25 @@ class Angular2Feature extends Feature&lt;JavaScriptPart, Angular2Feature&gt;
      */
     public Angular2Feature(Body b)
     {
-<span class="nc" id="L39">        super(&quot;Angular2Feature&quot;);</span>
+<span class="nc" id="L41">        super(&quot;Angular2Feature&quot;);</span>
         //Angular Addition
-<span class="nc" id="L41">        getJavascriptReferences().add(AngularReferencePool.Angular2RX.getJavaScriptReference());</span>
-<span class="nc" id="L42">        getJavascriptReferences().add(AngularReferencePool.Angular2Polyfills.getJavaScriptReference());</span>
-<span class="nc" id="L43">        getJavascriptReferences().add(AngularReferencePool.Angular2AllUMD.getJavaScriptReference());</span>
+<span class="nc" id="L43">        getJavascriptReferences().add(AngularReferencePool.Angular2RX.getJavaScriptReference());</span>
+<span class="nc" id="L44">        getJavascriptReferences().add(AngularReferencePool.Angular2Polyfills.getJavaScriptReference());</span>
+<span class="nc" id="L45">        getJavascriptReferences().add(AngularReferencePool.Angular2AllUMD.getJavaScriptReference());</span>
 
         /*
-         * getJavascriptReferences().add(AngularReferencePool.Angular2Polyfills.getJavaScriptReference());
-         * getJavascriptReferences().add(AngularReferencePool.Angular2RX.getJavaScriptReference());
-         * getJavascriptReferences().add(AngularReferencePool.Angular2System.getJavaScriptReference());
-         * getJavascriptReferences().add(AngularReferencePool.Angular2Typescript.getJavaScriptReference());
+         * getJavascriptReferences().add(AngularReferencePool.Angular2Polyfills.getJavaScriptReference()); getJavascriptReferences().add(AngularReferencePool.Angular2RX.getJavaScriptReference());
+         * getJavascriptReferences().add(AngularReferencePool.Angular2System.getJavaScriptReference()); getJavascriptReferences().add(AngularReferencePool.Angular2Typescript.getJavaScriptReference());
          * getJavascriptReferences().add(AngularReferencePool.AngularShimsForIE.getJavaScriptReference());
-         * getJavascriptReferences().add(AngularReferencePool.AngularSystemPolyfills.getJavaScriptReference());
-         * getJavascriptReferences().add(AngularReferencePool.ES6.getJavaScriptReference());
+         * getJavascriptReferences().add(AngularReferencePool.AngularSystemPolyfills.getJavaScriptReference()); getJavascriptReferences().add(AngularReferencePool.ES6.getJavaScriptReference());
          * getJavascriptReferences().add(AngularReferencePool.Angular2Router.getJavaScriptReference());
          */
-<span class="nc" id="L55">    }</span>
+<span class="nc" id="L54">    }</span>
 
     @Override
     public void assignFunctionsToComponent()
     {
-<span class="nc" id="L60">        String jWebApplicationSetup = &quot;(function() {\n&quot;</span>
+<span class="nc" id="L59">        String jWebApplicationSetup = &quot;(function() {\n&quot;</span>
                 + &quot;\n&quot;
                 + &quot;  var HelloApp = \n&quot;
                 + &quot;    ng.core\n&quot;
@@ -70,7 +69,7 @@ class Angular2Feature extends Feature&lt;JavaScriptPart, Angular2Feature&gt;
                 + &quot;    });\n&quot;
                 + &quot;    ng.platform.browser.bootstrap(HelloApp);\n&quot;
                 + &quot;})();&quot;;
-<span class="nc" id="L73">        addQuery(jWebApplicationSetup);</span>
-<span class="nc" id="L74">    }</span>
+<span class="nc" id="L72">        addQuery(jWebApplicationSetup);</span>
+<span class="nc" id="L73">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

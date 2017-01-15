@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BSButton.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.bootstrap.buttons</a> &gt; <span class="el_source">BSButton.java</span></div><h1>BSButton.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.bootstrap.buttons;
+
+import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
+import za.co.mmagon.jwebswing.components.bootstrap.buttons.groups.BSButtonGroupChildren;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.dropdown.BSDropDownChildren;
+
+/**
+ * Buttons
+ * &lt;p&gt;
+ * Use Bootstrap’s custom button styles for actions in forms, dialogs, and more. Includes support for a handful of contextual variations, sizes, states, and more.
+ * &lt;p&gt;
+ * @author Marc Magon
+ * @since 29 Aug 2015
+ * @version 1.0
+ */
+public class BSButton extends Div&lt;BSButtonChildren, BSButtonAttributes, BSButtonFeatures, BSButtonEvents, BSButton&gt;
+        implements BSButtonGroupChildren, BSDropDownChildren
+{
+
+    private static final long serialVersionUID = 1L;
+    private BSButtonFeature feature;
+
+    /**
+     * Constructs a new button
+     */
+    public BSButton()
+<span class="fc" id="L45">    {</span>
+<span class="fc" id="L46">        addFeature(getFeature());</span>
+<span class="fc" id="L47">        addClass(BSComponentButtonOptions.Btn);</span>
+<span class="fc" id="L48">        setTag(&quot;button&quot;);</span>
+<span class="fc" id="L49">        addAttribute(GlobalAttributes.Type, &quot;button&quot;);</span>
+<span class="fc" id="L50">    }</span>
+
+    /**
+     * Constructs a new BS Button with the given text
+     *
+     * @param text
+     */
+    public BSButton(String text)
+    {
+<span class="fc" id="L59">        this();</span>
+<span class="fc" id="L60">        setText(text);</span>
+<span class="fc" id="L61">    }</span>
+
+    /**
+     * Returns the feature associated (nothing really)
+     *
+     * @return
+     */
+    public final BSButtonFeature getFeature()
+    {
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">        if (feature == null)</span>
+        {
+<span class="fc" id="L72">            feature = new BSButtonFeature(this);</span>
+        }
+<span class="fc" id="L74">        return feature;</span>
+    }
+
+    /**
+     * Returns the options associated (nothing really here either)
+     *
+     * @return
+     */
+    @Override
+    public BSButtonOptions getOptions()
+    {
+<span class="nc" id="L85">        return getFeature().getOptions();</span>
+    }
+
+    /**
+     * Button tags
+     * &lt;p&gt;
+     * The .btn classes are designed to be used with the &amp;lt;button&amp;gt; element.
+     * &lt;p&gt;
+     * However, you can also use these classes on &amp;lt;a&amp;gt; or &amp;lt;input&amp;gt; elements (though some browsers may apply a slightly different rendering). &amp;lt;p&amp;gt; When using button classes on &amp;lt;a&amp;gt;
+     * elements that are used to trigger in-page functionality (like collapsing content), rather than linking to new pages or sections within the current page, these links should be given a
+     * role=&quot;button&quot; to appropriately convey their purpose to assistive technologies such as screen readers.
+     */
+    @Override
+    public void preConfigure()
+    {
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">        if (!isConfigured())</span>
+        {
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">            if (&quot;a&quot;.equalsIgnoreCase(getTag()))</span>
+            {
+<span class="nc" id="L104">                addAttribute(BSButtonAttributes.Role, &quot;button&quot;);</span>
+            }
+        }
+<span class="fc" id="L107">        super.preConfigure();</span>
+<span class="fc" id="L108">    }</span>
+
+    /**
+     * Sizes
+     * &lt;p&gt;
+     * Fancy larger or smaller buttons? Add .btn-lg or .btn-sm for additional sizes.
+     *
+     * @param size
+     *
+     * @return
+     */
+    public BSButton setSize(BSComponentButtonSizeOptions size)
+    {
+<span class="nc bnc" id="L121" title="All 2 branches missed.">        for (BSComponentButtonSizeOptions value : BSComponentButtonSizeOptions.values())</span>
+        {
+<span class="nc" id="L123">            removeClass(value.toString());</span>
+        }
+<span class="nc" id="L125">        addClass(size);</span>
+
+<span class="nc" id="L127">        return this;</span>
+    }
+
+    /**
+     * Buttons will appear pressed (with a darker background, darker border, and inset shadow) when active.
+     * &lt;p&gt;
+     * There’s no need to add a class to buttons as they use a pseudo-class. However, you can still force the same active appearance with .active (and include the aria-pressed=&quot;true&quot; attribute) should
+     * you need to replicate the state programmatically.
+     *
+     * @param pressed
+     *
+     * @return
+     */
+    public BSButton setPressed(boolean pressed)
+    {
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        if (pressed)</span>
+        {
+<span class="nc" id="L144">            addAttribute(GlobalAttributes.Aria_Pressed, &quot;true&quot;);</span>
+<span class="nc" id="L145">            addClass(BSComponentDefaultOptions.Active);</span>
+        }
+        else
+        {
+<span class="nc" id="L149">            getAttributesGlobal().remove(GlobalAttributes.Aria_Pressed);</span>
+<span class="nc" id="L150">            removeClass(BSComponentDefaultOptions.Active.toString());</span>
+        }
+
+<span class="nc" id="L153">        return this;</span>
+    }
+
+    /**
+     * Disabled state
+     * &lt;p&gt;
+     * Make buttons look inactive by adding the disabled boolean attribute to any button element.
+     * &lt;p&gt;
+     * Heads up! IE9 and below render disabled buttons with gray, shadowed text that we can’t override.
+     * &lt;p&gt;
+     * Disabled buttons using the a element behave a bit different:
+     * &lt;p&gt;
+     * a's don’t support the disabled attribute, so you must add the .disabled class to make it visually appear disabled. Some future-friendly styles are included to disable all pointer-events on
+     * anchor buttons. In browsers which support that property, you won’t see the disabled cursor at all. Disabled buttons should include the aria-disabled=&quot;true&quot; attribute to indicate the state of
+     * the element to assistive technologies.
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * &lt;p&gt;
+     * Link functionality caveat
+     * &lt;p&gt;
+     * The .disabled class uses pointer-events: none to try to disable the link functionality of as, but that CSS property is not yet standardized. In addition, even in browsers that do support
+     * pointer-events: none, keyboard navigation remains unaffected, meaning that sighted keyboard users and users of assistive technologies will still be able to activate these links. So to be safe,
+     * add a tabindex=&quot;-1&quot; attribute on these links (to prevent them from receiving keyboard focus) and use custom JavaScript to disable their functionality.
+     *
+     * @param disabled
+     *
+     * @return
+     */
+    public BSButton setDisabled(boolean disabled)
+    {
+<span class="nc bnc" id="L183" title="All 2 branches missed.">        if (disabled)</span>
+        {
+<span class="nc" id="L185">            addAttribute(GlobalAttributes.Aria_Disabled, &quot;true&quot;);</span>
+<span class="nc" id="L186">            addAttribute(BSButtonAttributes.Disabled, &quot;&quot;);</span>
+        }
+        else
+        {
+<span class="nc" id="L190">            getAttributesAll().remove(BSButtonAttributes.Disabled);</span>
+<span class="nc" id="L191">            getAttributesGlobal().remove(GlobalAttributes.Aria_Disabled);</span>
+        }
+
+<span class="nc" id="L194">        return this;</span>
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+<span class="nc bnc" id="L200" title="All 2 branches missed.">        if (this == obj)</span>
+        {
+<span class="nc" id="L202">            return true;</span>
+        }
+<span class="nc bnc" id="L204" title="All 2 branches missed.">        if (obj == null)</span>
+        {
+<span class="nc" id="L206">            return false;</span>
+        }
+<span class="nc bnc" id="L208" title="All 2 branches missed.">        if (getClass() != obj.getClass())</span>
+        {
+<span class="nc" id="L210">            return false;</span>
+        }
+<span class="nc" id="L212">        return super.equals(obj);</span>
+    }
+
+    @Override
+    public int hashCode()
+    {
+<span class="nc" id="L218">        int hash = 7;</span>
+<span class="nc" id="L219">        hash = 79 * hash + (this.getID().hashCode());</span>
+<span class="nc" id="L220">        return hash;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

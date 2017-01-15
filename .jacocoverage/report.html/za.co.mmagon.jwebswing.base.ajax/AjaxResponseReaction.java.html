@@ -32,20 +32,23 @@ public class AjaxResponseReaction
     /**
      * The title of the reaction
      */
+    @JsonProperty(&quot;reactionTitle&quot;)
     private String reactionTitle;
     /**
      * The message of the reaction
      */
-    private String reactionMessage;
+    @JsonProperty(&quot;reactionMessage&quot;)
+    private String reactionData;
     /**
      * The actual reaction
      */
-<span class="nc" id="L43">    private ReactionType reactionType = ReactionType.DialogDisplay;</span>
+    @JsonProperty(&quot;reactionType&quot;)
+    private ReactionType reactionType;
     /*
      * The level type of the reaction
      */
-<span class="nc" id="L47">    @JsonProperty(&quot;type&quot;)</span>
-    private AjaxResponseType responseType = AjaxResponseType.Info;
+    @JsonProperty(&quot;type&quot;)
+    private AjaxResponseType responseType;
 
     /**
      * Action timeout for request
@@ -56,44 +59,83 @@ public class AjaxResponseReaction
      * Constructs a response reaction
      */
     public AjaxResponseReaction()
-<span class="nc" id="L59">    {</span>
-<span class="nc" id="L60">    }</span>
+    {
+<span class="nc" id="L63">        this(null);</span>
+<span class="nc" id="L64">    }</span>
+
+    /**
+     * Constructs a reaction with the given message as a dialog
+     *
+     * @param reactionData
+     */
+    public AjaxResponseReaction(String reactionData)
+    {
+<span class="nc" id="L73">        this(null, reactionData);</span>
+<span class="nc" id="L74">    }</span>
 
     /**
      * Constructs a reaction with the given message
      *
-     * @param reactionMessage
+     * @param reactionData
+     * @param reactionType
      */
-    public AjaxResponseReaction(String reactionMessage)
-<span class="nc" id="L68">    {</span>
-<span class="nc" id="L69">        this.reactionMessage = reactionMessage;</span>
-<span class="nc" id="L70">    }</span>
+    public AjaxResponseReaction(String reactionData, ReactionType reactionType)
+    {
+<span class="nc" id="L84">        this(null, reactionData, reactionType);</span>
+<span class="nc" id="L85">    }</span>
 
     /**
      * Constructs a reaction with the given parameters
      *
      * @param reactionTitle
-     * @param reactionMessage
+     * @param reactionData
      * @param reactionType
      */
-    public AjaxResponseReaction(String reactionTitle, String reactionMessage, ReactionType reactionType)
-<span class="nc" id="L80">    {</span>
-<span class="nc" id="L81">        this.reactionTitle = reactionTitle;</span>
-<span class="nc" id="L82">        this.reactionMessage = reactionMessage;</span>
-<span class="nc" id="L83">        this.reactionType = reactionType;</span>
-<span class="nc" id="L84">    }</span>
+    public AjaxResponseReaction(String reactionTitle, String reactionData, ReactionType reactionType)
+    {
+<span class="nc" id="L96">        this(reactionTitle, reactionData, reactionType, null);</span>
+<span class="nc" id="L97">    }</span>
+
+    /**
+     * Constructs a reaction with the given parameters
+     *
+     * @param reactionTitle The title if necessary
+     * @param reactionData  The data if necessary (usually is)
+     * @param reactionType  The specific reaction type (dialog, redirect etc)
+     * @param responseType  The specific response type (info, danger, warning etc)
+     */
+    @SuppressWarnings(&quot;&quot;)
+    public AjaxResponseReaction(String reactionTitle, String reactionData, ReactionType reactionType, AjaxResponseType responseType)
+<span class="nc" id="L109">    {</span>
+<span class="nc" id="L110">        setReactionTitle(reactionTitle);</span>
+<span class="nc" id="L111">        setReactionData(reactionData);</span>
+<span class="nc" id="L112">        setReactionType(reactionType);</span>
+<span class="nc" id="L113">        setResponseType(responseType);</span>
+<span class="nc" id="L114">    }</span>
+
+    /**
+     * Constructs a redirection response after the specific seconds
+     *
+     * @param reactionData  The URL to point to
+     * @param actionTimeout After how long to do it in milliseconds
+     */
+    @SuppressWarnings(&quot;&quot;)
+    public AjaxResponseReaction(String reactionData, int actionTimeout)
+    {
+<span class="nc" id="L125">        this(null, reactionData, ReactionType.RedirectUrl, null);</span>
+<span class="nc" id="L126">        setActionTimeout(actionTimeout);</span>
+<span class="nc" id="L127">    }</span>
 
     /**
      * Constructs a reaction with the given title and message
      *
      * @param reactionTitle
-     * @param reactionMessage
+     * @param reactionData
      */
-    public AjaxResponseReaction(String reactionTitle, String reactionMessage)
-<span class="nc" id="L93">    {</span>
-<span class="nc" id="L94">        this.reactionTitle = reactionTitle;</span>
-<span class="nc" id="L95">        this.reactionMessage = reactionMessage;</span>
-<span class="nc" id="L96">    }</span>
+    public AjaxResponseReaction(String reactionTitle, String reactionData)
+    {
+<span class="nc" id="L137">        this(reactionTitle, reactionData, null);</span>
+<span class="nc" id="L138">    }</span>
 
     /**
      * Returns the given reaction title
@@ -102,7 +144,7 @@ public class AjaxResponseReaction
      */
     public String getReactionTitle()
     {
-<span class="nc" id="L105">        return reactionTitle;</span>
+<span class="nc" id="L147">        return reactionTitle;</span>
     }
 
     /**
@@ -112,29 +154,29 @@ public class AjaxResponseReaction
      */
     public void setReactionTitle(String reactionTitle)
     {
-<span class="nc" id="L115">        this.reactionTitle = reactionTitle;</span>
-<span class="nc" id="L116">    }</span>
+<span class="nc" id="L157">        this.reactionTitle = reactionTitle;</span>
+<span class="nc" id="L158">    }</span>
 
     /**
      * Gets the reaction message
      *
      * @return
      */
-    public String getReactionMessage()
+    public String getReactionData()
     {
-<span class="nc" id="L125">        return reactionMessage;</span>
+<span class="nc" id="L167">        return reactionData;</span>
     }
 
     /**
      * *
      * Sets the given reaction message
      *
-     * @param reactionMessage
+     * @param reactionData
      */
-    public void setReactionMessage(String reactionMessage)
+    public void setReactionData(String reactionData)
     {
-<span class="nc" id="L136">        this.reactionMessage = reactionMessage;</span>
-<span class="nc" id="L137">    }</span>
+<span class="nc" id="L178">        this.reactionData = reactionData;</span>
+<span class="nc" id="L179">    }</span>
 
     /**
      * Gets the reaction type
@@ -143,7 +185,7 @@ public class AjaxResponseReaction
      */
     public ReactionType getReactionType()
     {
-<span class="nc" id="L146">        return reactionType;</span>
+<span class="nc" id="L188">        return reactionType;</span>
     }
 
     /**
@@ -153,8 +195,8 @@ public class AjaxResponseReaction
      */
     public void setReactionType(ReactionType reactionType)
     {
-<span class="nc" id="L156">        this.reactionType = reactionType;</span>
-<span class="nc" id="L157">    }</span>
+<span class="nc bnc" id="L198" title="All 2 branches missed.">        this.reactionType = reactionType == null ? ReactionType.DialogDisplay : reactionType;</span>
+<span class="nc" id="L199">    }</span>
 
     /**
      * Gets the response type for the reaction
@@ -163,7 +205,7 @@ public class AjaxResponseReaction
      */
     public AjaxResponseType getResponseType()
     {
-<span class="nc" id="L166">        return responseType;</span>
+<span class="nc" id="L208">        return responseType;</span>
     }
 
     /**
@@ -173,8 +215,8 @@ public class AjaxResponseReaction
      */
     public void setResponseType(AjaxResponseType responseType)
     {
-<span class="nc" id="L176">        this.responseType = responseType;</span>
-<span class="nc" id="L177">    }</span>
+<span class="nc bnc" id="L218" title="All 2 branches missed.">        this.responseType = responseType == null ? AjaxResponseType.Info : responseType;</span>
+<span class="nc" id="L219">    }</span>
 
     /**
      * Apply a timeout before a navigation reaction occurs
@@ -183,7 +225,7 @@ public class AjaxResponseReaction
      */
     public int getActionTimeout()
     {
-<span class="nc" id="L186">        return actionTimeout;</span>
+<span class="nc" id="L228">        return actionTimeout;</span>
     }
 
     /**
@@ -193,8 +235,8 @@ public class AjaxResponseReaction
      */
     public void setActionTimeout(int actionTimeout)
     {
-<span class="nc" id="L196">        this.actionTimeout = actionTimeout;</span>
-<span class="nc" id="L197">    }</span>
+<span class="nc" id="L238">        this.actionTimeout = actionTimeout;</span>
+<span class="nc" id="L239">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

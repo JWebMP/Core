@@ -16,10 +16,10 @@
  */
 package za.co.mmagon.jwebswing.components.jqueryUI.autocomplete;
 
-import za.co.mmagon.jwebswing.components.jqueryui.autocomplete.JQUIAutoComplete;
 import junit.framework.Assert;
 import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
+import za.co.mmagon.jwebswing.components.jqueryui.autocomplete.JQUIAutoComplete;
 
 /**
  *
@@ -59,8 +59,8 @@ public class JQUIAutoCompleteTest extends BaseTestClass
         ac.toString(true);
         System.out.println(ac.renderJavascript().toString());
         String expected = "$('#input').autocomplete({\n"
-                + "  source : [ {\n"
-                + "    label : \"option 1\"\n"
+                + "  \"source\" : [ {\n"
+                + "    \"label\" : \"option 1\"\n"
                 + "  } ]\n"
                 + "});\n"
                 + "";
@@ -79,10 +79,10 @@ public class JQUIAutoCompleteTest extends BaseTestClass
         System.out.println(ac.renderJavascript().toString());
 
         String expected = "$('#input').autocomplete({\n"
-                + "  source : [ {\n"
-                + "    label : \"option 1\",\n"
-                + "    value : \"value1\",\n"
-                + "    category : \"category1\"\n"
+                + "  \"source\" : [ {\n"
+                + "    \"label\" : \"option 1\",\n"
+                + "    \"value\" : \"value1\",\n"
+                + "    \"category\" : \"category1\"\n"
                 + "  } ]\n"
                 + "});\n"
                 + "";

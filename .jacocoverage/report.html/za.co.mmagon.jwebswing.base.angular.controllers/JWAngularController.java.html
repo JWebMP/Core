@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.base.angular.controllers;
 
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 
 /**
@@ -36,9 +37,9 @@ public class JWAngularController extends AngularControllerBase
      */
     public JWAngularController(AngularFeature angular)
     {
-<span class="fc" id="L39">        super(&quot;jwController&quot;, angular);</span>
-<span class="fc" id="L40">        setSortOrder(Integer.MAX_VALUE);</span>
-<span class="fc" id="L41">    }</span>
+<span class="fc" id="L40">        super(&quot;jwController&quot;, angular);</span>
+<span class="fc" id="L41">        setSortOrder(Integer.MAX_VALUE);</span>
+<span class="fc" id="L42">    }</span>
 
     /**
      * Renders the right click directive from the JavaScript file
@@ -48,7 +49,7 @@ public class JWAngularController extends AngularControllerBase
     @Override
     public String renderFunction()
     {
-<span class="fc" id="L51">        return getAngular().getFileTemplate(AngularControllerBase.class, &quot;jwcontroller&quot;).toString();</span>
+<span class="fc" id="L52">        return FileTemplates.getFileTemplate(AngularControllerBase.class, &quot;jwcontroller&quot;).toString();</span>
     }
 
 }

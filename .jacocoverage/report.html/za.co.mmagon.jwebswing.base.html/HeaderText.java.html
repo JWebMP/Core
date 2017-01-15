@@ -20,14 +20,10 @@ import java.util.Objects;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.HeaderTypes;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.HeaderGroupChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.components.bootstrap.cards.BSCardChildren;
 import za.co.mmagon.jwebswing.components.jqueryui.accordion.JQUIAccordionChildren;
 
 /**
@@ -63,8 +59,13 @@ import za.co.mmagon.jwebswing.components.jqueryui.accordion.JQUIAccordionChildre
  * @author Marc Magon
  * @since forever
  */
-public class HeaderText extends Component&lt;NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, HeaderText&gt; implements BodyChildren, HeaderGroupChildren, GlobalChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, JQUIAccordionChildren
+public class HeaderText extends Component&lt;NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, HeaderText&gt; 
+        implements BodyChildren, HeaderGroupChildren, GlobalChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, JQUIAccordionChildren,
+        BSCardChildren
+        
 {
+
+    private static final long serialVersionUID = 1L;
 
     private HeaderTypes headerType;
 
@@ -73,8 +74,8 @@ public class HeaderText extends Component&lt;NoChildren, NoAttributes, GlobalFea
      */
     public HeaderText()
     {
-<span class="fc" id="L76">        this(HeaderTypes.H1, &quot;&quot;);</span>
-<span class="fc" id="L77">    }</span>
+<span class="fc" id="L77">        this(HeaderTypes.H1, &quot;&quot;);</span>
+<span class="fc" id="L78">    }</span>
 
     /**
      * Constructs a new header of specified type with the text
@@ -84,10 +85,10 @@ public class HeaderText extends Component&lt;NoChildren, NoAttributes, GlobalFea
      */
     public HeaderText(final HeaderTypes headerType, String text)
     {
-<span class="fc" id="L87">        super(headerType.name(), headerType.getLinkedComponent());</span>
-<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        setText(text == null ? &quot;&quot; : text);</span>
-<span class="fc" id="L89">        this.headerType = headerType;</span>
-<span class="fc" id="L90">    }</span>
+<span class="fc" id="L88">        super(headerType.name(), headerType.getLinkedComponent());</span>
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">        setText(text == null ? &quot;&quot; : text);</span>
+<span class="fc" id="L90">        this.headerType = headerType;</span>
+<span class="fc" id="L91">    }</span>
 
     /**
      * Returns the current header text
@@ -96,7 +97,7 @@ public class HeaderText extends Component&lt;NoChildren, NoAttributes, GlobalFea
      */
     public String getHeaderText()
     {
-<span class="nc" id="L99">        return getText(0).toString();</span>
+<span class="nc" id="L100">        return getText(0).toString();</span>
     }
 
     /**
@@ -106,8 +107,8 @@ public class HeaderText extends Component&lt;NoChildren, NoAttributes, GlobalFea
      */
     public final void setHeaderText(String headerText)
     {
-<span class="fc" id="L109">        setText(headerText);</span>
-<span class="fc" id="L110">    }</span>
+<span class="fc" id="L110">        setText(headerText);</span>
+<span class="fc" id="L111">    }</span>
 
     /**
      * Returns the current header type
@@ -116,7 +117,7 @@ public class HeaderText extends Component&lt;NoChildren, NoAttributes, GlobalFea
      */
     public HeaderTypes getHeaderType()
     {
-<span class="nc" id="L119">        return headerType;</span>
+<span class="nc" id="L120">        return headerType;</span>
     }
 
     /**
@@ -126,39 +127,39 @@ public class HeaderText extends Component&lt;NoChildren, NoAttributes, GlobalFea
      */
     public void setHeaderType(HeaderTypes headerType)
     {
-<span class="fc" id="L129">        this.headerType = headerType;</span>
-<span class="fc" id="L130">        super.setTag(headerType.name());</span>
-<span class="fc" id="L131">        super.setComponentType(headerType.getLinkedComponent());</span>
-<span class="fc" id="L132">    }</span>
+<span class="fc" id="L130">        this.headerType = headerType;</span>
+<span class="fc" id="L131">        super.setTag(headerType.name());</span>
+<span class="fc" id="L132">        super.setComponentType(headerType.getLinkedComponent());</span>
+<span class="fc" id="L133">    }</span>
 
     @Override
     public int hashCode()
     {
-<span class="nc" id="L137">        int hash = 7;</span>
-<span class="nc" id="L138">        hash = 71 * hash + Objects.hashCode(this.headerType);</span>
-<span class="nc" id="L139">        return hash;</span>
+<span class="nc" id="L138">        int hash = 7;</span>
+<span class="nc" id="L139">        hash = 71 * hash + Objects.hashCode(this.headerType);</span>
+<span class="nc" id="L140">        return hash;</span>
     }
 
     @Override
     public boolean equals(Object obj)
     {
-<span class="fc bfc" id="L145" title="All 2 branches covered.">        if (obj == null)</span>
+<span class="fc bfc" id="L146" title="All 2 branches covered.">        if (obj == null)</span>
         {
-<span class="fc" id="L147">            return false;</span>
+<span class="fc" id="L148">            return false;</span>
         }
-<span class="fc bfc" id="L149" title="All 2 branches covered.">        if (getClass() != obj.getClass())</span>
+<span class="fc bfc" id="L150" title="All 2 branches covered.">        if (getClass() != obj.getClass())</span>
         {
-<span class="fc" id="L151">            return false;</span>
+<span class="fc" id="L152">            return false;</span>
         }
-<span class="fc" id="L153">        final HeaderText other = (HeaderText) obj;</span>
-<span class="pc bpc" id="L154" title="1 of 2 branches missed.">        if ((this.headerType == other.headerType))</span>
+<span class="fc" id="L154">        final HeaderText other = (HeaderText) obj;</span>
+<span class="pc bpc" id="L155" title="1 of 2 branches missed.">        if ((this.headerType == other.headerType))</span>
         {
-<span class="pc bpc" id="L156" title="1 of 2 branches missed.">            if (this.getText(0).toString().equals(other.getText(0).toString()))</span>
+<span class="pc bpc" id="L157" title="1 of 2 branches missed.">            if (this.getText(0).toString().equals(other.getText(0).toString()))</span>
             {
-<span class="fc" id="L158">                return true;</span>
+<span class="fc" id="L159">                return true;</span>
             }
         }
-<span class="nc" id="L161">        return false;</span>
+<span class="nc" id="L162">        return false;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

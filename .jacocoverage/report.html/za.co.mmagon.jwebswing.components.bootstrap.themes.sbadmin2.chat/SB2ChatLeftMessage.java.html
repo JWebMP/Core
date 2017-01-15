@@ -21,7 +21,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.bootstrap.BootstrapClasses;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentClearfixOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentColoursOptions;
 import za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2.SB2ThemeClasses;
 import za.co.mmagon.jwebswing.components.fontawesome.*;
 import za.co.mmagon.jwebswing.components.moment.Moment;
@@ -52,42 +54,42 @@ public class SB2ChatLeftMessage extends ListItem implements ISB2ChatMessage
      * A Chat message that is left aligned
      */
     public SB2ChatLeftMessage ()
-<span class="fc" id="L55">    {</span>
-<span class="fc" id="L56">        addClass(BootstrapClasses.Left);</span>
-<span class="fc" id="L57">        addClass(BootstrapClasses.Clearfix);</span>
-<span class="fc" id="L58">    }</span>
+<span class="fc" id="L57">    {</span>
+<span class="fc" id="L58">        addClass(BSComponentDefaultOptions.Left);</span>
+<span class="fc" id="L59">        addClass(BSComponentClearfixOptions.Clearfix);</span>
+<span class="fc" id="L60">    }</span>
 
     @Override
     public void preConfigure()
     {
-<span class="pc bpc" id="L63" title="1 of 2 branches missed.">        if(!isConfigured())</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if(!isConfigured())</span>
         {
-<span class="fc" id="L65">            getMessageImageSpan().add(getMessageImage());</span>
-<span class="fc" id="L66">            add(getMessageImageSpan());</span>
+<span class="fc" id="L67">            getMessageImageSpan().add(getMessageImage());</span>
+<span class="fc" id="L68">            add(getMessageImageSpan());</span>
             
-<span class="fc" id="L68">            Strong headerStrong = new Strong(headerText);</span>
-<span class="fc" id="L69">            headerStrong.addClass(BootstrapClasses.Primary_Font);</span>
+<span class="fc" id="L70">            Strong headerStrong = new Strong(headerText);</span>
+<span class="fc" id="L71">            headerStrong.addClass(BSComponentDefaultOptions.Primary_Font);</span>
             
-<span class="fc" id="L71">            getChatBodyHeader().add(headerStrong);</span>
-<span class="fc" id="L72">            SmallText st = new SmallText();</span>
-<span class="fc" id="L73">            Moment m = new Moment(messageDate,ComponentTypes.Span);</span>
-<span class="fc" id="L74">            st.addClass(BootstrapClasses.Pull_Right);</span>
-<span class="fc" id="L75">            st.addClass(BootstrapClasses.Text_Muted);</span>
-<span class="fc" id="L76">            FontAwesome clockIcon = FontAwesome.icon(FontAwesomeIcons.clock_o, FontAwesomeProperties.fw);</span>
+<span class="fc" id="L73">            getChatBodyHeader().add(headerStrong);</span>
+<span class="fc" id="L74">            SmallText st = new SmallText();</span>
+<span class="fc" id="L75">            Moment m = new Moment(messageDate,ComponentTypes.Span);</span>
+<span class="fc" id="L76">            st.addClass(BSComponentDefaultOptions.Pull_Right);</span>
+<span class="fc" id="L77">            st.addClass(BSComponentColoursOptions.Text_Muted);</span>
+<span class="fc" id="L78">            FontAwesome clockIcon = FontAwesome.icon(FontAwesomeIcons.clock_o, FontAwesomeProperties.fw);</span>
             
-<span class="fc" id="L78">            st.add(clockIcon);</span>
-<span class="fc" id="L79">            st.add(m);</span>
+<span class="fc" id="L80">            st.add(clockIcon);</span>
+<span class="fc" id="L81">            st.add(m);</span>
             
-<span class="fc" id="L81">            getChatBodyHeader().add(st);</span>
+<span class="fc" id="L83">            getChatBodyHeader().add(st);</span>
             
             //getChatBody().add(getChatBodyHeader());
-<span class="fc" id="L84">            getChatBody().add(message);</span>
+<span class="fc" id="L86">            getChatBody().add(message);</span>
             
-<span class="fc" id="L86">            add(getChatBody());</span>
+<span class="fc" id="L88">            add(getChatBody());</span>
         }
         
-<span class="fc" id="L89">        super.preConfigure();</span>
-<span class="fc" id="L90">    }</span>
+<span class="fc" id="L91">        super.preConfigure();</span>
+<span class="fc" id="L92">    }</span>
     
     /**
      * The actual header text
@@ -108,11 +110,11 @@ public class SB2ChatLeftMessage extends ListItem implements ISB2ChatMessage
      */
     public Image getMessageImage()
     {
-<span class="pc bpc" id="L111" title="1 of 2 branches missed.">        if(this.messageImage == null)</span>
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">        if(this.messageImage == null)</span>
         {
-<span class="fc" id="L113">            setMessageImage(new Image(&quot;&quot;));</span>
+<span class="fc" id="L115">            setMessageImage(new Image(&quot;&quot;));</span>
         }
-<span class="fc" id="L115">        return messageImage;</span>
+<span class="fc" id="L117">        return messageImage;</span>
     }
 
     /**
@@ -121,12 +123,12 @@ public class SB2ChatLeftMessage extends ListItem implements ISB2ChatMessage
      */
     public void setMessageImage(Image messageImage)
     {
-<span class="fc" id="L124">        this.messageImage = messageImage;</span>
-<span class="pc bpc" id="L125" title="1 of 2 branches missed.">        if(this.messageImage != null)</span>
+<span class="fc" id="L126">        this.messageImage = messageImage;</span>
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">        if(this.messageImage != null)</span>
         {
-<span class="fc" id="L127">            this.messageImage.addClass(BootstrapClasses.Img_Circle);</span>
+<span class="fc" id="L129">            this.messageImage.addClass(BSComponentDefaultOptions.Img_Circle);</span>
         }
-<span class="fc" id="L129">    }</span>
+<span class="fc" id="L131">    }</span>
 
     /**
      * Returns the container span for the message image
@@ -134,11 +136,11 @@ public class SB2ChatLeftMessage extends ListItem implements ISB2ChatMessage
      */
     public Span getMessageImageSpan()
     {
-<span class="fc bfc" id="L137" title="All 2 branches covered.">        if(messageImageSpan == null)</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">        if(messageImageSpan == null)</span>
         {
-<span class="fc" id="L139">            setMessageImageSpan(new Span());</span>
+<span class="fc" id="L141">            setMessageImageSpan(new Span());</span>
         }
-<span class="fc" id="L141">        return messageImageSpan;</span>
+<span class="fc" id="L143">        return messageImageSpan;</span>
     }
 
     /**
@@ -147,13 +149,13 @@ public class SB2ChatLeftMessage extends ListItem implements ISB2ChatMessage
      */
     public void setMessageImageSpan(Span messageImageSpan)
     {
-<span class="fc" id="L150">        this.messageImageSpan = messageImageSpan;</span>
-<span class="pc bpc" id="L151" title="1 of 2 branches missed.">        if(this.messageImageSpan != null)</span>
+<span class="fc" id="L152">        this.messageImageSpan = messageImageSpan;</span>
+<span class="pc bpc" id="L153" title="1 of 2 branches missed.">        if(this.messageImageSpan != null)</span>
         {
-<span class="fc" id="L153">            this.messageImageSpan.addClass(SB2ThemeClasses.Chat_Img);</span>
-<span class="fc" id="L154">            this.messageImageSpan.addClass(BootstrapClasses.Pull_Left);</span>
+<span class="fc" id="L155">            this.messageImageSpan.addClass(SB2ThemeClasses.Chat_Img);</span>
+<span class="fc" id="L156">            this.messageImageSpan.addClass(BSComponentDefaultOptions.Pull_Left);</span>
         }
-<span class="fc" id="L156">    }</span>
+<span class="fc" id="L158">    }</span>
     
     /**
      * Gets the text for the header
@@ -161,7 +163,7 @@ public class SB2ChatLeftMessage extends ListItem implements ISB2ChatMessage
      */
     public String getHeaderText()
     {
-<span class="nc" id="L164">        return headerText;</span>
+<span class="nc" id="L166">        return headerText;</span>
     }
 
     /**
@@ -170,8 +172,8 @@ public class SB2ChatLeftMessage extends ListItem implements ISB2ChatMessage
      */
     public void setHeaderText(String headerText)
     {
-<span class="nc" id="L173">        this.headerText = headerText;</span>
-<span class="nc" id="L174">    }</span>
+<span class="nc" id="L175">        this.headerText = headerText;</span>
+<span class="nc" id="L176">    }</span>
 
     /**
      * Returns the assigned message ate
@@ -179,7 +181,7 @@ public class SB2ChatLeftMessage extends ListItem implements ISB2ChatMessage
      */
     public Date getMessageDate()
     {
-<span class="nc" id="L182">        return messageDate;</span>
+<span class="nc" id="L184">        return messageDate;</span>
     }
 
     /**
@@ -188,8 +190,8 @@ public class SB2ChatLeftMessage extends ListItem implements ISB2ChatMessage
      */
     public void setMessageDate(Date messageDate)
     {
-<span class="fc" id="L191">        this.messageDate = messageDate;</span>
-<span class="fc" id="L192">    }</span>
+<span class="fc" id="L193">        this.messageDate = messageDate;</span>
+<span class="fc" id="L194">    }</span>
 
     /**
      * Returns the message
@@ -197,7 +199,7 @@ public class SB2ChatLeftMessage extends ListItem implements ISB2ChatMessage
      */
     public String getMessage()
     {
-<span class="nc" id="L200">        return message;</span>
+<span class="nc" id="L202">        return message;</span>
     }
 
     /**
@@ -206,8 +208,8 @@ public class SB2ChatLeftMessage extends ListItem implements ISB2ChatMessage
      */
     public void setMessage(String message)
     {
-<span class="nc" id="L209">        this.message = message;</span>
-<span class="nc" id="L210">    }</span>
+<span class="nc" id="L211">        this.message = message;</span>
+<span class="nc" id="L212">    }</span>
 
     /**
      * Returns the given chat body
@@ -215,11 +217,11 @@ public class SB2ChatLeftMessage extends ListItem implements ISB2ChatMessage
      */
     public Div getChatBody()
     {
-<span class="fc bfc" id="L218" title="All 2 branches covered.">        if(chatBody == null)</span>
+<span class="fc bfc" id="L220" title="All 2 branches covered.">        if(chatBody == null)</span>
         {
-<span class="fc" id="L220">            setChatBody(new Div());</span>
+<span class="fc" id="L222">            setChatBody(new Div());</span>
         }
-<span class="fc" id="L222">        return chatBody;</span>
+<span class="fc" id="L224">        return chatBody;</span>
     }
 
     /**
@@ -228,24 +230,24 @@ public class SB2ChatLeftMessage extends ListItem implements ISB2ChatMessage
      */
     public void setChatBody(Div chatBody)
     {
-<span class="fc" id="L231">        this.chatBody = chatBody;</span>
-<span class="pc bpc" id="L232" title="1 of 2 branches missed.">        if(this.chatBody != null)</span>
+<span class="fc" id="L233">        this.chatBody = chatBody;</span>
+<span class="pc bpc" id="L234" title="1 of 2 branches missed.">        if(this.chatBody != null)</span>
         {
-<span class="fc" id="L234">            this.chatBody.addClass(SB2ThemeClasses.Chat_Body);</span>
-<span class="fc" id="L235">            this.chatBody.addClass(BootstrapClasses.Clearfix);</span>
+<span class="fc" id="L236">            this.chatBody.addClass(SB2ThemeClasses.Chat_Body);</span>
+<span class="fc" id="L237">            this.chatBody.addClass(BSComponentClearfixOptions.Clearfix);</span>
         }
-<span class="fc" id="L237">    }</span>
+<span class="fc" id="L239">    }</span>
     /**
      * Returns the div that contains the body header
      * @return 
      */
     public Div getChatBodyHeader()
     {
-<span class="fc bfc" id="L244" title="All 2 branches covered.">        if(chatBodyHeader == null)</span>
+<span class="fc bfc" id="L246" title="All 2 branches covered.">        if(chatBodyHeader == null)</span>
         {
-<span class="fc" id="L246">            setChatBodyHeader(new Div());</span>
+<span class="fc" id="L248">            setChatBodyHeader(new Div());</span>
         }
-<span class="fc" id="L248">        return chatBodyHeader;</span>
+<span class="fc" id="L250">        return chatBodyHeader;</span>
     }
 
     /**
@@ -254,12 +256,12 @@ public class SB2ChatLeftMessage extends ListItem implements ISB2ChatMessage
      */
     public void setChatBodyHeader(Div chatBodyHeader)
     {
-<span class="fc" id="L257">        this.chatBodyHeader = chatBodyHeader;</span>
-<span class="pc bpc" id="L258" title="1 of 2 branches missed.">        if(this.chatBodyHeader != null)</span>
+<span class="fc" id="L259">        this.chatBodyHeader = chatBodyHeader;</span>
+<span class="pc bpc" id="L260" title="1 of 2 branches missed.">        if(this.chatBodyHeader != null)</span>
         {
-<span class="fc" id="L260">            this.chatBodyHeader.addClass(&quot;header&quot;);</span>
-<span class="fc" id="L261">            getChatBody().add(this.chatBodyHeader);</span>
+<span class="fc" id="L262">            this.chatBodyHeader.addClass(&quot;header&quot;);</span>
+<span class="fc" id="L263">            getChatBody().add(this.chatBodyHeader);</span>
         }
-<span class="fc" id="L263">    }    </span>
+<span class="fc" id="L265">    }    </span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
