@@ -16,37 +16,24 @@
  */
 package za.co.mmagon.jwebswing.components.bootstrap.buttons.groups;
 
+import za.co.mmagon.jwebswing.base.references.CSSReference;
+import za.co.mmagon.jwebswing.base.references.JavascriptReference;
+import za.co.mmagon.jwebswing.base.servlets.interfaces.ReferencePool;
+
 /**
  * Default reference pool structure
  *
  * @author GedMarc
  * @since 20 Apr 2016
  */
-@Override
-        public boolean equals(Object obj)
+public enum BSButtonGroupReferencePool implements ReferencePool
+{
+
+    ;
+    private BSButtonGroupReferencePool()
     {
-        if (this == obj)
-        {
-            return true;
-        }
-        if (obj == null)
-        {
-            return false;
-        }
-        if (getClass() != obj.getClass())
-        {
-            return false;
-        }
-        return super.equals(obj);
     }
 
-    @Override
-        public int hashCode()
-    {
-        int hash = 7;
-        hash = 79 * hash + (this.getID().hashCode());
-        return hash;
-    }
     private JavascriptReference javaScriptReference;
     private CSSReference cssReference;
 
@@ -57,25 +44,25 @@ package za.co.mmagon.jwebswing.components.bootstrap.buttons.groups;
     }
 
     @Override
-        public JavascriptReference getJavaScriptReference()
+    public JavascriptReference getJavaScriptReference()
     {
         return javaScriptReference;
     }
 
     @Override
-        public void setJavaScriptReference(JavascriptReference javaScriptReference)
+    public void setJavaScriptReference(JavascriptReference javaScriptReference)
     {
         this.javaScriptReference = javaScriptReference;
     }
 
     @Override
-        public CSSReference getCssReference()
+    public CSSReference getCssReference()
     {
         return cssReference;
     }
 
     @Override
-        public void setCssReference(CSSReference cssReference)
+    public void setCssReference(CSSReference cssReference)
     {
         this.cssReference = cssReference;
     }
