@@ -16,11 +16,7 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.animatable;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
 
 /**
@@ -28,8 +24,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
  * <p>
  * Some CSS properties are animatable, meaning that they can be used in animations and transitions.
  * <p>
- * Animatable properties can change gradually from one value to another, like size, numbers, percentage and color.
- * Browser Support
+ * Animatable properties can change gradually from one value to another, like size, numbers, percentage and color. Browser Support
  * <p>
  * The numbers in the table specifies the first browser version that fully support CSS animations.
  * <p>

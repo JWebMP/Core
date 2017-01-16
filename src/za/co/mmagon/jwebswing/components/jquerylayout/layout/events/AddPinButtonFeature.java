@@ -3,10 +3,10 @@ package za.co.mmagon.jwebswing.components.jquerylayout.layout.events;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.Feature;
 import za.co.mmagon.jwebswing.components.jquerylayout.layout.JQLayoutDiv;
-import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSBlock;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
+ * Adds a pin button for the layout side to the given component
  *
  * @author MMagon
  * @since 23 Sep 2013
@@ -16,11 +16,21 @@ public class AddPinButtonFeature extends Feature<JavaScriptPart, Feature>
 {
 
     private static final long serialVersionUID = 1L;
-
+    /**
+     * The layout div to open
+     */
     private final JQLayoutDiv divToOpen;
+    /**
+     * The component to make a pin button
+     */
     private final Component pinButton;
-    private CSSBlock pinButtonCSSBlock;
 
+    /**
+     * Adds a pin button for the layout side to the given component
+     *
+     * @param layoutDiv
+     * @param pinButton
+     */
     public AddPinButtonFeature(JQLayoutDiv layoutDiv, Component pinButton)
     {
         super("JWLayoutPinButtonFeature");

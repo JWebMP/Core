@@ -22,7 +22,6 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 import java.io.*;
-import java.lang.reflect.ParameterizedType;
 import java.net.URL;
 import java.util.*;
 import java.util.logging.Level;
@@ -39,7 +38,7 @@ import za.co.mmagon.logger.LogFactory;
  */
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 @JsonInclude(Include.NON_NULL)
-public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
+public class JavaScriptPart implements Serializable
 {
 
     private static final Logger LOG = LogFactory.getInstance().getLogger("JavaScriptPart");
@@ -60,7 +59,6 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
      */
     private static final ObjectMapper functionObjectMapper = new ObjectMapper();
 
-    
     /*
      * Pretty print config
      */
@@ -73,8 +71,7 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
         javascriptObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
         jsonObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
         jsonObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
-        
-        
+
         javascriptObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
         jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
         functionObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
@@ -111,7 +108,7 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
                 }
                 catch (com.fasterxml.jackson.databind.JsonMappingException mapException)
                 {
-                    LOG.log(Level.FINE,"JSON Mapping Exception!", mapException);
+                    LOG.log(Level.FINE, "JSON Mapping Exception!", mapException);
                 }
                 catch (JsonProcessingException ex)
                 {
@@ -228,38 +225,14 @@ public class JavaScriptPart<J extends JavaScriptPart> implements Serializable
         }
         catch (JsonProcessingException ex)
         {
-            LOG.log(Level.SEVERE,"Unable to Serialize as JSON", ex);
+            LOG.log(Level.SEVERE, "Unable to Serialize as JSON", ex);
             return "";
         }
         catch (Exception ex)
         {
-            LOG.log(Level.SEVERE,"Unable to Serialize as JSON", ex);
+            LOG.log(Level.SEVERE, "Unable to Serialize as JSON", ex);
             return "";
         }
-    }
-
-    @JsonCreator
-    public J factory(String jsonString)
-    {
-        Class changeTo = ((Class) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
-        J pc = null;
-        try
-        {
-            pc = (J) getJsonObjectMapper().readValue(jsonString, changeTo);
-        }
-        catch (JsonParseException e)
-        {
-            LOG.log(Level.SEVERE,"JSON Parse Exception in creating Part", e);
-        }
-        catch (JsonMappingException e)
-        {
-            LOG.log(Level.SEVERE,"JSON Mapping Exception in creating Part", e);
-        }
-        catch (IOException e)
-        {
-            LOG.log(Level.SEVERE,"IO Exception in creating Part", e);
-        }
-        return pc;
     }
 
     /**

@@ -17,6 +17,7 @@
 package za.co.mmagon.jwebswing.components.jqxwidgets.treemap;
 
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourHex;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
  * This Class
@@ -24,8 +25,10 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourHex;
  * @author GedMarc
  * @since 25 Dec 2015
  */
-public class JQXTreeMapColorRange
+public class JQXTreeMapColorRange extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     private ColourHex color;
     private Integer min;

@@ -34,12 +34,24 @@ public class Moment extends Div<MomentChildren, MomentAttributes, MomentFeatures
 {
 
     private static final long serialVersionUID = 1L;
-
+    /**
+     * The angular module for the moment plugin
+     */
     private static MomentAngularModule angularModule;
 
-    private MomentFeature feature;
+    /**
+     * The default date formatter which is parsed
+     */
+    private final SimpleDateFormat DateFormatter;
 
+    private MomentFeature feature;
+    /**
+     * The date that this moment is using
+     */
     private Date assignedDate;
+    /**
+     * The variable name if this moment is bound
+     */
     private String variableName;
 
     private Map<MomentFilters, String> appliedFilters;
@@ -49,6 +61,8 @@ public class Moment extends Div<MomentChildren, MomentAttributes, MomentFeatures
      */
     public Moment()
     {
+        this.DateFormatter = (SimpleDateFormat) SimpleDateFormat.getInstance();
+        DateFormatter.applyPattern("yyyy-MM-dd HH:mm:ss");
 
     }
 
@@ -61,6 +75,8 @@ public class Moment extends Div<MomentChildren, MomentAttributes, MomentFeatures
     public Moment(Date assignedDate, ComponentTypes myComponent)
     {
         super(myComponent);
+        this.DateFormatter = (SimpleDateFormat) SimpleDateFormat.getInstance();
+        DateFormatter.applyPattern("yyyy-MM-dd HH:mm:ss");
         this.assignedDate = assignedDate;
     }
 
@@ -73,6 +89,8 @@ public class Moment extends Div<MomentChildren, MomentAttributes, MomentFeatures
     public Moment(String variableName, ComponentTypes myComponent)
     {
         super(myComponent);
+        this.DateFormatter = (SimpleDateFormat) SimpleDateFormat.getInstance();
+        DateFormatter.applyPattern("yyyy-MM-dd HH:mm:ss");
         this.variableName = variableName;
     }
 
@@ -83,6 +101,8 @@ public class Moment extends Div<MomentChildren, MomentAttributes, MomentFeatures
      */
     public Moment(Date assignedDate)
     {
+        this.DateFormatter = (SimpleDateFormat) SimpleDateFormat.getInstance();
+        DateFormatter.applyPattern("yyyy-MM-dd HH:mm:ss");
         this.assignedDate = assignedDate;
     }
 
@@ -93,6 +113,8 @@ public class Moment extends Div<MomentChildren, MomentAttributes, MomentFeatures
      */
     public Moment(String variableName)
     {
+        this.DateFormatter = (SimpleDateFormat) SimpleDateFormat.getInstance();
+        DateFormatter.applyPattern("yyyy-MM-dd HH:mm:ss");
         this.variableName = variableName;
     }
 
@@ -120,7 +142,6 @@ public class Moment extends Div<MomentChildren, MomentAttributes, MomentFeatures
     {
         return getFeature().getOptions();
     }
-    
 
     /**
      * Returns the assigned date
@@ -194,7 +215,8 @@ public class Moment extends Div<MomentChildren, MomentAttributes, MomentFeatures
             addFeature(getFeature());
             if (angularModule == null)
             {
-                angularModule = new MomentAngularModule(getPage());
+
+                setAngularModule(new MomentAngularModule(getPage()));
             }
             getAngularModules().add(angularModule);
             addAttribute(MomentAttributes.am_time_ago, buildAttributeString());
@@ -238,16 +260,6 @@ public class Moment extends Div<MomentChildren, MomentAttributes, MomentFeatures
             });
         }
         return sb.toString();
-    }
-
-    /**
-     * The default date formatter which is parsed
-     */
-    private static final SimpleDateFormat DateFormatter = (SimpleDateFormat) SimpleDateFormat.getInstance();// new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-    static
-    {
-        DateFormatter.applyPattern("yyyy-MM-dd HH:mm:ss");
     }
 
     /**
@@ -397,6 +409,16 @@ public class Moment extends Div<MomentChildren, MomentAttributes, MomentFeatures
     public void AddAdditionFilter(int amount, DurationFilters part)
     {
         getAppliedFilters().put(MomentFilters.amAdd, "" + amount + "' : '" + part.toString() + "");
+    }
+
+    /**
+     * Sets the angular module for moment globally
+     *
+     * @param angularModule
+     */
+    public static void setAngularModule(MomentAngularModule angularModule)
+    {
+        Moment.angularModule = angularModule;
     }
 
     /**

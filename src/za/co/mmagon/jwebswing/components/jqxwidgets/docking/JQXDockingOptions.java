@@ -31,6 +31,8 @@ import za.co.mmagon.jwebswing.components.jqxwidgets.JQXDefaultJavaScriptPart;
 public class JQXDockingOptions extends JQXDefaultJavaScriptPart
 {
 
+    private static final long serialVersionUID = 1L;
+
     private Boolean cookies;// 	Boolean 	false
     private JQXCookieOptions cookieOptions;// 	Object 	{}
     private Boolean disabled;// 	Boolean 	false

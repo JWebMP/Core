@@ -19,10 +19,7 @@ package za.co.mmagon.jwebswing.components.bootstrap.navbar;
 import za.co.mmagon.jwebswing.base.html.Div;
 
 /**
- * Navbar
- * <p>
- * The navbar is a wrapper that positions branding, navigation, and other elements in a concise header. It’s easily extensible and, thanks to our Collapse plugin, can easily integrate responsive
- * behaviors.
+ *
  * <p>
  * @author Marc Magon
  * @since 13 Jan 2017
@@ -34,11 +31,22 @@ public class BSNavBar extends Div<BSNavBarChildren, BSNavBarAttributes, BSNavBar
     private static final long serialVersionUID = 1L;
     private BSNavBarFeature feature;
 
+    /**
+     * Navbar
+     * <p>
+     * The navbar is a wrapper that positions branding, navigation, and other elements in a concise header. It’s easily extensible and, thanks to our Collapse plugin, can easily integrate responsive
+     * behaviors.
+     */
     public BSNavBar()
     {
-        addFeature(getFeature());
+        setTag("nav");
     }
 
+    /**
+     * Returns the feature
+     *
+     * @return
+     */
     public final BSNavBarFeature getFeature()
     {
         if (feature == null)

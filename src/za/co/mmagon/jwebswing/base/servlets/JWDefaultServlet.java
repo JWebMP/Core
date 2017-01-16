@@ -112,7 +112,6 @@ public class JWDefaultServlet extends HttpServlet
         catch (ServletException e)
         {
             LOG.log(Level.SEVERE, "Security Exception in Validation", e);
-            throw e;
         }
     }
 

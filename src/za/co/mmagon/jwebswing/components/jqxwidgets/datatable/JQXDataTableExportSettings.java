@@ -25,6 +25,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 public class JQXDataTableExportSettings extends JavaScriptPart
 {
 
+    private static final long serialVersionUID = 1L;
+
     private Boolean columnsHeader;
     private Boolean hiddenColumns;
     private String serverURL;

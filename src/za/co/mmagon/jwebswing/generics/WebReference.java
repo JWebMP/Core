@@ -237,8 +237,6 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
      * Sets whether this reference should be local or remote
      *
      * @param isLocal
-     *
-     * @return
      */
     public static void setIsLocal(boolean isLocal)
     {

@@ -228,7 +228,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      *
      * @param appName
      */
-    public final void setAppName(String appName)
+    public static final void setAppName(String appName)
     {
         AngularFeature.appName = appName;
 
@@ -249,7 +249,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      *
      * @param controllerName
      */
-    public final void setControllerName(String controllerName)
+    public static final void setControllerName(String controllerName)
     {
         AngularFeature.controllerName = controllerName;
     }

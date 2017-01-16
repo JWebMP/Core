@@ -131,6 +131,7 @@ public class BodyTest extends BaseTestClass
     @Test
     public void testBootstrap()
     {
+        WebReference.setIsLocal(true);
         Page p = getPage();
         p.setTiny(false);
         p.getOptions().setBootstrapEnabled(true);

@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2;
 
 import java.util.Date;
@@ -22,12 +21,13 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
  * A standard message display format from SB2 Admin Theme
+ *
  * @author GedMarc
  * @since Oct 4, 2016
  * @version 1.0
- * 
+ *
  */
-public class SB2DropDownMessage extends JavaScriptPart<SB2DropDownMessage>
+public class SB2DropDownMessage extends JavaScriptPart
 {
 
     private static final long serialVersionUID = 1L;
@@ -55,14 +55,15 @@ public class SB2DropDownMessage extends JavaScriptPart<SB2DropDownMessage>
     /**
      * Constructs a new standardized drop down message
      */
-    public SB2DropDownMessage ()
+    public SB2DropDownMessage()
     {
-        
+
     }
 
     /**
      * With just a name
-     * @param name 
+     *
+     * @param name
      */
     public SB2DropDownMessage(String name)
     {
@@ -71,9 +72,10 @@ public class SB2DropDownMessage extends JavaScriptPart<SB2DropDownMessage>
 
     /**
      * A new drop down message item
+     *
      * @param name
      * @param message
-     * @param dateFormat 
+     * @param dateFormat
      */
     public SB2DropDownMessage(String name, String message, Date dateFormat)
     {
@@ -84,7 +86,8 @@ public class SB2DropDownMessage extends JavaScriptPart<SB2DropDownMessage>
 
     /**
      * The physical Bold component (text is in getText(
-     * @return 
+     *
+     * @return
      */
     public String getName()
     {
@@ -93,7 +96,8 @@ public class SB2DropDownMessage extends JavaScriptPart<SB2DropDownMessage>
 
     /**
      * Sets the name
-     * @param name 
+     *
+     * @param name
      */
     public void setName(String name)
     {
@@ -102,7 +106,8 @@ public class SB2DropDownMessage extends JavaScriptPart<SB2DropDownMessage>
 
     /**
      * Gets the current message
-     * @return 
+     *
+     * @return
      */
     public String getMessage()
     {
@@ -111,7 +116,8 @@ public class SB2DropDownMessage extends JavaScriptPart<SB2DropDownMessage>
 
     /**
      * Sets the current message
-     * @param message 
+     *
+     * @param message
      */
     public void setMessage(String message)
     {
@@ -120,7 +126,8 @@ public class SB2DropDownMessage extends JavaScriptPart<SB2DropDownMessage>
 
     /**
      * Gets the current date
-     * @return 
+     *
+     * @return
      */
     public Date getDate()
     {
@@ -129,7 +136,8 @@ public class SB2DropDownMessage extends JavaScriptPart<SB2DropDownMessage>
 
     /**
      * Sets the current date
-     * @param date 
+     *
+     * @param date
      */
     public void setDate(Date date)
     {
@@ -138,7 +146,8 @@ public class SB2DropDownMessage extends JavaScriptPart<SB2DropDownMessage>
 
     /**
      * Any linking URL
-     * @return 
+     *
+     * @return
      */
     public String getUrl()
     {
@@ -147,7 +156,8 @@ public class SB2DropDownMessage extends JavaScriptPart<SB2DropDownMessage>
 
     /**
      * Sets the URL to go to
-     * @param url 
+     *
+     * @param url
      */
     public void setUrl(String url)
     {
@@ -156,7 +166,8 @@ public class SB2DropDownMessage extends JavaScriptPart<SB2DropDownMessage>
 
     /**
      * Any data that needs to be stored
-     * @return 
+     *
+     * @return
      */
     public String getData()
     {
@@ -165,7 +176,8 @@ public class SB2DropDownMessage extends JavaScriptPart<SB2DropDownMessage>
 
     /**
      * Any data that needs to be stored
-     * @param data 
+     *
+     * @param data
      */
     public void setData(String data)
     {

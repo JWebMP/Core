@@ -16,12 +16,16 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets.datatable;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
 /**
  *
  * @author GedMarc
  */
-public class JQXDataTableColumnGroups
+public class JQXDataTableColumnGroups extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * string property which determines the parent group's name.

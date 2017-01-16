@@ -30,7 +30,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  * @author GedMarc
  * @since 08 May 2016
  */
-public class AngularJsonVariable extends JavaScriptPart<AngularJsonVariable>
+public class AngularJsonVariable extends JavaScriptPart
 {
 
     private static final long serialVersionUID = 1L;
@@ -189,10 +189,13 @@ public class AngularJsonVariable extends JavaScriptPart<AngularJsonVariable>
 
     /**
      * Returns the variable object in the format requested
-     * @param <T> Generic type of JavaScript part
+     *
+     * @param <T>       Generic type of JavaScript part
      * @param classType
+     *
      * @return
-     * @throws IOException 
+     *
+     * @throws IOException
      */
     public <T> T getVariable(Class<T> classType) throws IOException
     {

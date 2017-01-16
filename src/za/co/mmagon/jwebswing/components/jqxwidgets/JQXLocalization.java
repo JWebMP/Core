@@ -16,11 +16,13 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
 /**
  *
  * @author GedMarc
  */
-public class JQXLocalization
+public class JQXLocalization extends JavaScriptPart
 {
 
 }

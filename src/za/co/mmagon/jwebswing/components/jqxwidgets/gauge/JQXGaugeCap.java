@@ -14,30 +14,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package za.co.mmagon.jwebswing.components.jqxwidgets.gauge;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
 /**
- * This Class 
+ * This Class
+ *
  * @author GedMarc
  * @since 15 Dec 2015
  */
-class JQXGaugeCap
+class JQXGaugeCap extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     public JQXGaugeCap()
     {
     }
 
-    
-    
     @Override
     public String toString()
     {
         return super.toString();
     }
 
-    
 }
-
-

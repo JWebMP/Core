@@ -16,9 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqplot.options.axis;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRawValue;
+import com.fasterxml.jackson.annotation.*;
 import java.util.List;
 import za.co.mmagon.jwebswing.components.jqplot.JQPlotGraph;
 import za.co.mmagon.jwebswing.components.jqplot.options.ticks.JQPlotTickOptionsAxisTick;
@@ -65,8 +63,7 @@ public class JQPlotAxisOptions<O extends JavaScriptPart & JQPlotAxisLabelRendere
      */
     private Double pad;
     /**
-     * axis range so that data points don't fall on the edges of the axis.
-     * a 1D [val1, val2, ...], or 2D [[val, label], [val, label], ...]
+     * axis range so that data points don't fall on the edges of the axis. a 1D [val1, val2, ...], or 2D [[val, label], [val, label], ...]
      */
     @JsonIgnore
     private List<String> ticks;
@@ -86,13 +83,11 @@ public class JQPlotAxisOptions<O extends JavaScriptPart & JQPlotAxisLabelRendere
 
     //private JavaScriptPart rendererOptions;
     /**
-     * whether or not to show the tick labels,
-     * Wether to show the ticks (both marks and labels) or not.
+     * whether or not to show the tick labels, Wether to show the ticks (both marks and labels) or not.
      */
     private Boolean showTicks;
     /**
-     * Whether or not to show the tick marks
-     * Wether to show the tick marks (line crossing grid) or not.
+     * Whether or not to show the tick marks Wether to show the tick marks (line crossing grid) or not.
      */
     private Boolean showTickMarks;
     /**
@@ -179,8 +174,6 @@ public class JQPlotAxisOptions<O extends JavaScriptPart & JQPlotAxisLabelRendere
     {
         this.linkedGraph = linkedGraph;
     }
-
-    
 
     /**
      * Whether or not to show the axis
@@ -303,8 +296,7 @@ public class JQPlotAxisOptions<O extends JavaScriptPart & JQPlotAxisLabelRendere
     }
 
     /**
-     * axis range so that data points don't fall on the edges of the axis.
-     * a 1D [val1, val2, ...], or 2D [[val, label], [val, label], ...]
+     * axis range so that data points don't fall on the edges of the axis. a 1D [val1, val2, ...], or 2D [[val, label], [val, label], ...]
      * <p>
      * @return
      */
@@ -315,8 +307,7 @@ public class JQPlotAxisOptions<O extends JavaScriptPart & JQPlotAxisLabelRendere
     }
 
     /**
-     * axis range so that data points don't fall on the edges of the axis.
-     * a 1D [val1, val2, ...], or 2D [[val, label], [val, label], ...]
+     * axis range so that data points don't fall on the edges of the axis. a 1D [val1, val2, ...], or 2D [[val, label], [val, label], ...]
      * <p>
      * @param ticks
      */
@@ -435,8 +426,7 @@ public class JQPlotAxisOptions<O extends JavaScriptPart & JQPlotAxisLabelRendere
     }
 
     /**
-     * Get Tick Renderer Options
-     * Default JQPlotTickOptionsAxisTick
+     * Get Tick Renderer Options Default JQPlotTickOptionsAxisTick
      *
      * @return
      */
@@ -675,9 +665,15 @@ public class JQPlotAxisOptions<O extends JavaScriptPart & JQPlotAxisLabelRendere
         return renderer;
     }
 
+    /**
+     * The physical label renderer
+     */
     @JsonRawValue
     private String labelRenderer;
 
+    /**
+     * Returns the label renderer options
+     */
     private JQPlotAxisLabelRenderer labelRendererOptions;
 
     /**
@@ -692,8 +688,7 @@ public class JQPlotAxisOptions<O extends JavaScriptPart & JQPlotAxisLabelRendere
     }
 
     /**
-     * Gets the label renderer options
-     * JQPlotAxisLabelRendererOptionsCanvasLabels by default
+     * Gets the label renderer options JQPlotAxisLabelRendererOptionsCanvasLabels by default
      *
      * @return
      */

@@ -16,13 +16,15 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets.docking;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
 /**
  * This Class list the cookie options for the docing options
  *
  * @author GedMarc
  * @since 14 Dec 2015
  */
-public class JQXCookieOptions
+public class JQXCookieOptions extends JavaScriptPart
 {
 
     private String domain;

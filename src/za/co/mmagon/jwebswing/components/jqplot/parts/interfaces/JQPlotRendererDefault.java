@@ -23,6 +23,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  * Defines default methods for JqPlot Renderering
  *
  * @author GedMarc
+ * @param <O>
+ *
  * @since 26 Feb 2016
  */
 public interface JQPlotRendererDefault<O extends JavaScriptPart & JQPlotRendererOptions> extends JQPlotRenderer

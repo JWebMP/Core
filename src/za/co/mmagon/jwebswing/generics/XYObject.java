@@ -16,9 +16,8 @@
  */
 package za.co.mmagon.jwebswing.generics;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonRawValue;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.*;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
@@ -29,10 +28,15 @@ import org.apache.commons.lang3.StringUtils;
  * @author GedMarc
  * @param <X> x Co-Ordinate Class
  * @param <Y> y Co-Ordinate class
+ *
  * @since 25 Dec 2015
  */
-public class XYObject<X extends Object, Y extends Object>
+public class XYObject<X extends Object, Y extends Object> implements Serializable
 {
+
+    private static final long serialVersionUID = 1L;
+
+    private final SimpleDateFormat outputFormat;
 
     @JsonIgnore
     private X X;
@@ -44,6 +48,7 @@ public class XYObject<X extends Object, Y extends Object>
      */
     public XYObject()
     {
+        this.outputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }
 
     /**
@@ -54,6 +59,7 @@ public class XYObject<X extends Object, Y extends Object>
      */
     public XYObject(X X, Y Y)
     {
+        this.outputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         this.X = X;
         this.Y = Y;
     }
@@ -98,8 +104,6 @@ public class XYObject<X extends Object, Y extends Object>
         this.Y = Y;
     }
 
-    private static final SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
     /**
      * An Array Representation [X,Y]
      *
@@ -119,7 +123,6 @@ public class XYObject<X extends Object, Y extends Object>
             }
             else if (getX() instanceof String)
             {
-                //System.out.println("getting normal string x");
                 return "['" + getX() + "'," + getY() + "]";
             }
         }

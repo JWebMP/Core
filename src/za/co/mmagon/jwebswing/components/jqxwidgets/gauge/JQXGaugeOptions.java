@@ -34,6 +34,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 public class JQXGaugeOptions extends JavaScriptPart
 {
 
+    private static final long serialVersionUID = 1L;
+
     private Integer animationDuration;// 	Number 	400
     private JQXGaugeBorder border;// 	Object 	{ size: '10%', style: { stroke: '#cccccc'}, visible: true, showGradient: true }
     private JQXGaugeCaption caption;// 	Object 	{ value: '', position: 'bottom', offset: [0, 0], visible: true }

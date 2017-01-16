@@ -20,8 +20,7 @@ import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
- * jqxDragDrop is a plugin which will make any DOM element draggable.
- * It can be used in combination with many widgets like jqxTree, jqxGrid, jqxListBox and etc.
+ * jqxDragDrop is a plugin which will make any DOM element draggable. It can be used in combination with many widgets like jqxTree, jqxGrid, jqxListBox and etc.
  * <p>
  * @author GedMarc
  * @since Dec 13, 2015
@@ -31,6 +30,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  */
 public class JQXDragDropOptions extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     private String appendTo;// 	String 	'parent'
     private Boolean disabled;// 	Boolean 	false

@@ -86,5 +86,11 @@
             <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/PageFields.java</file>
             <file>file:/C:/AESoft/Programs/JWebSwing/jar-resources/META-INF/resources/bower_components/bootstrap/less/carousel.less</file>
         </group>
+        <group name="ArminEasy">
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/components/jqxWidgets/JQXDefaultJavaScriptPartTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jqxwidgets/JQXDefaultJavaScriptPart.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/base/html/BodyTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/css/measurement/MeasurementCSSImpl.java</file>
+        </group>
     </open-files>
 </project-private>

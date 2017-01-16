@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets.treegrid;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptFunction;
 
 /**
@@ -24,8 +25,10 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptFunction;
  * @author GedMarc
  * @since 25 Dec 2015
  */
-public class JQXTreeGridColumns
+public class JQXTreeGridColumns extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * string property which sets the column headers text.

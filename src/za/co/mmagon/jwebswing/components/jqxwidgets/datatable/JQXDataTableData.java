@@ -16,11 +16,13 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets.datatable;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
 /**
  *
  * @author GedMarc
  */
-public class JQXDataTableData
+public class JQXDataTableData extends JavaScriptPart
 {
 
 }

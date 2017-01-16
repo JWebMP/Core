@@ -16,14 +16,18 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets.treegrid;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
 /**
  * This Class
  *
  * @author GedMarc
  * @since 25 Dec 2015
  */
-public class JQXTreeGridEditSettings
+public class JQXTreeGridEditSettings extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     private Boolean saveOnPageChange;
     private Boolean saveOnBlur;

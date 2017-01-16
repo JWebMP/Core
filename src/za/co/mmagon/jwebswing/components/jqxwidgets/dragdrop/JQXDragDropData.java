@@ -16,14 +16,18 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets.dragdrop;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
 /**
  * This Class can be used to store data inside the drag drop function
  *
  * @author GedMarc
  * @since 14 Dec 2015
  */
-public class JQXDragDropData
+public class JQXDragDropData extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     public JQXDragDropData()
     {

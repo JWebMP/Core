@@ -16,13 +16,15 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets.toolbar;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
 /**
  * This Class
  *
  * @author GedMarc
  * @since 24 Dec 2015
  */
-public class JQXToolbarTools
+public class JQXToolbarTools extends JavaScriptPart
 {
 
     public JQXToolbarTools()

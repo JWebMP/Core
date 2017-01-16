@@ -72,11 +72,13 @@ public class BSCollapse
             {
                 display.addClass("in");
             }
+
+            buttonController.addAttribute("aria-controls", display.getID());
+            buttonController.addAttribute("data-target", display.getID(true));
         }
 
         buttonController.addAttribute("data-toggle", "collapse");
         buttonController.addAttribute("aria-expanded", Boolean.toString(!hideOnStart));
-        buttonController.addAttribute("aria-controls", display.getID());
-        buttonController.addAttribute("data-target", display.getID(true));
+
     }
 }

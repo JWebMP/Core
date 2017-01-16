@@ -16,14 +16,18 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets.treegrid;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
 /**
  * This Class
  *
  * @author GedMarc
  * @since 25 Dec 2015
  */
-public class JQXTreeGridColumnGroups
+public class JQXTreeGridColumnGroups extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * string property which determines the parent group's name.

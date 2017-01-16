@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2;
 
 import java.util.Date;
@@ -22,12 +21,13 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
  * A standard message display format from SB2 Admin Theme
+ *
  * @author GedMarc
  * @since Oct 4, 2016
  * @version 1.0
- * 
+ *
  */
-public class SB2DropDownAlert extends JavaScriptPart<SB2DropDownAlert>
+public class SB2DropDownAlert extends JavaScriptPart
 {
 
     private static final long serialVersionUID = 1L;
@@ -56,14 +56,15 @@ public class SB2DropDownAlert extends JavaScriptPart<SB2DropDownAlert>
     /**
      * Constructs a new standardized drop down message
      */
-    public SB2DropDownAlert ()
+    public SB2DropDownAlert()
     {
-        
+
     }
 
     /**
      * With just a icon
-     * @param icon 
+     *
+     * @param icon
      */
     public SB2DropDownAlert(String icon)
     {
@@ -72,19 +73,21 @@ public class SB2DropDownAlert extends JavaScriptPart<SB2DropDownAlert>
 
     /**
      * A new drop down message item
+     *
      * @param icon
      * @param message
-     * @param dateFormat 
+     * @param dateFormat
      */
     public SB2DropDownAlert(String icon, String message, Date dateFormat)
     {
         this.icon = icon;
         this.message = message;
     }
-    
+
     /**
      * The physical Bold component (text is in getText(
-     * @return 
+     *
+     * @return
      */
     public String getIcon()
     {
@@ -93,7 +96,8 @@ public class SB2DropDownAlert extends JavaScriptPart<SB2DropDownAlert>
 
     /**
      * Sets the icon
-     * @param icon 
+     *
+     * @param icon
      */
     public void setIcon(String icon)
     {
@@ -102,7 +106,8 @@ public class SB2DropDownAlert extends JavaScriptPart<SB2DropDownAlert>
 
     /**
      * Gets the current message
-     * @return 
+     *
+     * @return
      */
     public String getMessage()
     {
@@ -111,7 +116,8 @@ public class SB2DropDownAlert extends JavaScriptPart<SB2DropDownAlert>
 
     /**
      * Sets the current message
-     * @param message 
+     *
+     * @param message
      */
     public void setMessage(String message)
     {
@@ -120,7 +126,8 @@ public class SB2DropDownAlert extends JavaScriptPart<SB2DropDownAlert>
 
     /**
      * Any linking URL
-     * @return 
+     *
+     * @return
      */
     public String getUrl()
     {
@@ -129,7 +136,8 @@ public class SB2DropDownAlert extends JavaScriptPart<SB2DropDownAlert>
 
     /**
      * Sets the URL to go to
-     * @param url 
+     *
+     * @param url
      */
     public void setUrl(String url)
     {
@@ -138,7 +146,8 @@ public class SB2DropDownAlert extends JavaScriptPart<SB2DropDownAlert>
 
     /**
      * Any data that needs to be stored
-     * @return 
+     *
+     * @return
      */
     public String getData()
     {
@@ -147,7 +156,8 @@ public class SB2DropDownAlert extends JavaScriptPart<SB2DropDownAlert>
 
     /**
      * Any data that needs to be stored
-     * @param data 
+     *
+     * @param data
      */
     public void setData(String data)
     {
@@ -156,7 +166,8 @@ public class SB2DropDownAlert extends JavaScriptPart<SB2DropDownAlert>
 
     /**
      * Gets the date
-     * @return 
+     *
+     * @return
      */
     public Date getDate()
     {
@@ -165,12 +176,12 @@ public class SB2DropDownAlert extends JavaScriptPart<SB2DropDownAlert>
 
     /**
      * Sets the date
-     * @param date 
+     *
+     * @param date
      */
     public void setDate(Date date)
     {
         this.date = date;
     }
-    
-    
+
 }

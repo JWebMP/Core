@@ -16,13 +16,15 @@
  */
 package za.co.mmagon.jwebswing.components.jqplot.parts.interfaces;
 
+import java.io.Serializable;
+
 /**
  * The top level of the renderer's hierarchy
  *
  * @author GedMarc
  * @since 26 Feb 2016
  */
-public interface JQPlotRenderer
+public interface JQPlotRenderer extends Serializable
 {
 
 }

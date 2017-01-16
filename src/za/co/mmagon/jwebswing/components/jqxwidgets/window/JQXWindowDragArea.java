@@ -16,14 +16,18 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets.window;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
 /**
  * This Class
  *
  * @author GedMarc
  * @since 25 Dec 2015
  */
-public class JQXWindowDragArea
+public class JQXWindowDragArea extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     private Integer x;
     private Integer y;
@@ -32,6 +36,46 @@ public class JQXWindowDragArea
 
     public JQXWindowDragArea()
     {
+    }
+
+    public Integer getX()
+    {
+        return x;
+    }
+
+    public void setX(Integer x)
+    {
+        this.x = x;
+    }
+
+    public Integer getY()
+    {
+        return y;
+    }
+
+    public void setY(Integer y)
+    {
+        this.y = y;
+    }
+
+    public Integer getHeight()
+    {
+        return height;
+    }
+
+    public void setHeight(Integer height)
+    {
+        this.height = height;
+    }
+
+    public Integer getWidth()
+    {
+        return width;
+    }
+
+    public void setWidth(Integer width)
+    {
+        this.width = width;
     }
 
     @Override

@@ -1,18 +1,19 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css;
 
-import za.co.mmagon.jwebswing.htmlbuilder.css.animatable.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.borders.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.displays.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.fonts.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.heightwidth.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.lists.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.margins.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.outline.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.padding.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.tables.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.text.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.animatable.AnimateCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationAdapter;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationClass;
+import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.BackgroundCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.borders.BorderCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.displays.DisplayCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.fonts.FontsCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.heightwidth.HeightWidthCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.lists.ListCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.margins.MarginsCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.outline.OutlineCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.padding.PaddingCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.tables.TableCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.text.TextCSSImpl;
 
 /**
  * This class is an object implementation of the CSS Annotations
@@ -27,7 +28,7 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
     /**
      * The animation CSS
      */
-    private AnimateCSS animatable;
+    private AnimateCSSImpl animatable;
     /**
      * The getBackground css
      */
@@ -86,7 +87,7 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
      *
      * @return
      */
-    public AnimateCSS getAnimatable()
+    public AnimateCSSImpl getAnimatable()
     {
         return animatable;
     }
@@ -244,7 +245,7 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
      *
      * @param animatable
      */
-    public void setAnimatable(AnimateCSS animatable)
+    public void setAnimatable(AnimateCSSImpl animatable)
     {
         this.animatable = animatable;
     }

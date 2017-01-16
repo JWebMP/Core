@@ -16,14 +16,15 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.annotations;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import java.lang.annotation.Annotation;
+import java.util.Map;
+import java.util.logging.Level;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSPropertiesFactory;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.logger.LogFactory;
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.core.*;
-import java.lang.annotation.*;
-import java.util.*;
-import java.util.logging.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.*;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
 
 /**
  *
@@ -78,14 +79,7 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
         }
         catch (Exception ex)
         {
-            if (newInstance != null)
-            {
-                log.log(Level.SEVERE,"[Field Populator]-[Failed];[Object]-[" + newInstance.getClass().getCanonicalName() + "]", ex);
-            }
-            else
-            {
-                log.log(Level.SEVERE,"[Field Populator]-[Failed];[Object]-[" + newInstance + "]", ex);
-            }
+            log.log(Level.SEVERE, "[Field Populator]-[Failed];[Object]-[" + newInstance + "]", ex);
         }
         return null;
     }

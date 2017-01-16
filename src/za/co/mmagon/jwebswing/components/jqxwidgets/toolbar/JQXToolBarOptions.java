@@ -32,6 +32,8 @@ public class JQXToolBarOptions extends JQXDefaultJavaScriptPart
 
 {
 
+    private static final long serialVersionUID = 1L;
+
     private Boolean disabled;// 	Boolean 	false
     private JavascriptFunction initTools;// 	function 	null
     private Integer minimizeWidth;// 	Number/String 	200

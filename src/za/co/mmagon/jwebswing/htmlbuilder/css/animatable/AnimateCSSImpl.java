@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,29 +14,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.components.jqxwidgets.grid;
+package za.co.mmagon.jwebswing.htmlbuilder.css.animatable;
 
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationAdapter;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationClass;
 
 /**
- * This Class
  *
  * @author GedMarc
- * @since 15 Dec 2015
+ * @since 17 Jan 2017
+ *
  */
-class JWXGridDeferredDataFields extends JavaScriptPart
+public class AnimateCSSImpl extends CSSImplementationAdapter<AnimateCSS, AnimateCSSImpl> implements CSSImplementationClass<AnimateCSS, AnimateCSSImpl>
 {
 
     private static final long serialVersionUID = 1L;
 
-    public JWXGridDeferredDataFields()
+    /**
+     * The implementation class for animate CSS
+     */
+    public AnimateCSSImpl()
     {
-    }
-
-    @Override
-    public String toString()
-    {
-        return super.toString();
+        //Nothing Needed
     }
 
 }
