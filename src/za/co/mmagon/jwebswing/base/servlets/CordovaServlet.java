@@ -19,7 +19,6 @@ package za.co.mmagon.jwebswing.base.servlets;
 import com.armineasy.injection.GuiceContext;
 import com.armineasy.injection.filters.CorsAllowedFilter;
 import java.io.IOException;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Singleton;
@@ -79,7 +78,6 @@ public class CordovaServlet extends JWDefaultServlet
 
             String output = ajaxResponse.toString();
 
-            Date dataTransferDate = new Date();
             response.setContentType("application/json;charset=UTF-8");
             response.setCharacterEncoding("UTF-8");
             response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);

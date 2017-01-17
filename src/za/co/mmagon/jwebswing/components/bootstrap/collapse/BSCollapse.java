@@ -48,12 +48,13 @@ public class BSCollapse
             {
                 display.addClass("in");
             }
+            linkController.addAttribute("aria-controls", display.getID());
+            linkController.addAttribute("data-target", display.getID(true));
         }
 
         linkController.addAttribute("data-toggle", "collapse");
         linkController.addAttribute("aria-expanded", Boolean.toString(!hideOnStart));
-        linkController.addAttribute("aria-controls", display.getID());
-        linkController.addAttribute("data-target", display.getID(true));
+
     }
 
     /**

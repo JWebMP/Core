@@ -19,8 +19,10 @@ package za.co.mmagon.jwebswing.htmlbuilder.javascript;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.core.*;
-import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
@@ -32,7 +34,6 @@ import za.co.mmagon.logger.LogFactory;
  * Defines a section of a JavaScript part e.g. Position
  * <p>
  * @author mmagon
- * @param <J> Always this class reference
  *
  * @since 2014/07/09
  */

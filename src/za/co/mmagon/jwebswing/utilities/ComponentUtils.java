@@ -16,12 +16,17 @@
  */
 package za.co.mmagon.jwebswing.utilities;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
 import java.util.*;
-import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.heightwidth.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.margins.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import za.co.mmagon.jwebswing.CSSComponent;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.htmlbuilder.css.heightwidth.HeightWidthCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.margins.MarginsCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementTypes;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * This Class
@@ -31,6 +36,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
  */
 public class ComponentUtils
 {
+
+    private static final Logger log = LogFactory.getLog("ComponentUtils");
 
     public ComponentUtils()
     {
@@ -239,7 +246,7 @@ public class ComponentUtils
      *
      * @return
      */
-    public static Object fieldGet(Field f, Object o)
+    public static synchronized Object fieldGet(Field f, Object o)
     {
         try
         {
@@ -247,6 +254,7 @@ public class ComponentUtils
         }
         catch (IllegalArgumentException | IllegalAccessException ex)
         {
+            log.log(Level.FINEST, "Field returned null, no worries", ex);
             return null;
         }
     }

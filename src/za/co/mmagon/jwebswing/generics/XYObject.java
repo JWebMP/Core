@@ -31,7 +31,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @since 25 Dec 2015
  */
-public class XYObject<X extends Object, Y extends Object> implements Serializable
+public class XYObject<X extends Serializable, Y extends Serializable> implements Serializable
 {
 
     private static final long serialVersionUID = 1L;

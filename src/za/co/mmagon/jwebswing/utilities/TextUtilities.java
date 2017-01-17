@@ -2,6 +2,9 @@ package za.co.mmagon.jwebswing.utilities;
 
 import java.io.*;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Provides default text functions
@@ -13,10 +16,14 @@ import java.util.StringTokenizer;
 public class TextUtilities
 {
 
+    private static final Logger log = LogFactory.getLog("TextUtilities");
+
     /**
      * Updates an attribute name by changing the enum to a clean format
+     *
      * @param buildStringSB
-     * @return 
+     *
+     * @return
      */
     public static final synchronized StringBuilder cleanAttributeName(StringBuilder buildStringSB)
     {
@@ -44,8 +51,10 @@ public class TextUtilities
 
     /**
      * Camel Case Replacement
+     *
      * @param hello
-     * @return 
+     *
+     * @return
      */
     public static final synchronized StringBuilder cleanCamelCaseName(String hello)
     {
@@ -54,8 +63,10 @@ public class TextUtilities
 
     /**
      * Camel Case Replacement
+     *
      * @param buildStringSB
-     * @return 
+     *
+     * @return
      */
     public static final synchronized StringBuilder cleanCamelCaseName(StringBuilder buildStringSB)
     {
@@ -91,8 +102,10 @@ public class TextUtilities
 
     /**
      * Cleans the attribute name
+     *
      * @param s
-     * @return 
+     *
+     * @return
      */
     public static final synchronized String cleanAttributeName(String s)
     {
@@ -101,8 +114,10 @@ public class TextUtilities
 
     /**
      * Does the init cap
+     *
      * @param s
-     * @return 
+     *
+     * @return
      */
     public static final synchronized String initCap(String s)
     {
@@ -111,8 +126,10 @@ public class TextUtilities
 
     /**
      * Performs an Init Cap
+     *
      * @param s
-     * @return 
+     *
+     * @return
      */
     public static final synchronized StringBuilder initCap(StringBuilder s)
     {
@@ -134,6 +151,7 @@ public class TextUtilities
      * Returns a string of tabs the length of count
      *
      * @param tabCount Number of tabs to append
+     *
      * @return The output string of tabs
      */
     public static final synchronized StringBuilder getTabString(Integer tabCount)
@@ -151,6 +169,7 @@ public class TextUtilities
      * Returns a stack trace as a string
      * <p>
      * @param e The Exception Object
+     *
      * @return The Stack Trace as a String
      */
     public static final synchronized String stackTraceToString(Throwable e)
@@ -180,6 +199,7 @@ public class TextUtilities
             }
             catch (IOException ignore)
             {
+                log.log(Level.FINEST, "Stack trace produced IO Error", ignore);
             }
         }
         return retValue;
@@ -191,6 +211,7 @@ public class TextUtilities
      * @param <T>       Return type
      * @param value     The value to pass through
      * @param enumClass The Enum class
+     *
      * @return
      */
     public static <T extends Enum<T>> T getInstance(final String value, final Class<T> enumClass)
@@ -202,6 +223,7 @@ public class TextUtilities
      * Removes the last index of a group
      *
      * @param sb
+     *
      * @return
      */
     public static StringBuilder removeLastInstanceOf(StringBuilder sb)
@@ -210,7 +232,8 @@ public class TextUtilities
         {
             if (sb.lastIndexOf(",") != -1)
             {
-                sb = sb.deleteCharAt(sb.lastIndexOf(","));
+                StringBuilder sb2 = sb.deleteCharAt(sb.lastIndexOf(","));
+                return sb2;
             }
         }
         return sb;

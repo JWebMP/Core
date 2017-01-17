@@ -16,9 +16,8 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets.grid;
 
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptFunction;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
+import java.io.Serializable;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
 
 /**
  * All the options for the JQX Grid library
@@ -131,7 +130,7 @@ public class JQXGridOptions extends JavaScriptPart
     private Boolean sortable;//  	Boolean 	false
     private Integer selectedrowindex;//  	Number 	-1
     private JQXSelectedRowIndexes selectedrowindexes;// 	Array 	[]
-    private Object source;// 	Object 	{}
+    private Serializable source;// 	Object 	{}
     private String sorttogglestates;//  	String 	2
     private Integer updatedelay;//  	Number 	0
     private Boolean virtualmode;//  	Boolean 	false
@@ -1119,12 +1118,12 @@ public class JQXGridOptions extends JavaScriptPart
         this.selectedrowindexes = selectedrowindexes;
     }
 
-    public Object getSource()
+    public Serializable getSource()
     {
         return source;
     }
 
-    public void setSource(Object source)
+    public void setSource(Serializable source)
     {
         this.source = source;
     }

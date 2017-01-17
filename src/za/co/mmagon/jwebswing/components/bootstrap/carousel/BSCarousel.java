@@ -205,13 +205,13 @@ public class BSCarousel extends Div<BSCarouselChildren, BSCarouselAttributes, BS
         this.previousLink = previousLink;
         if (this.previousLink != null)
         {
-            
+
             previousLink.addClass("left");
             previousLink.addClass(BSComponentCarouselOptions.Carousel_Control);
-            
-            previousLink.addAttribute("role","button");
-            previousLink.addAttribute("data-slide","prev");
-            
+
+            previousLink.addAttribute("role", "button");
+            previousLink.addAttribute("data-slide", "prev");
+
             Span iconSpan = new Span();
             iconSpan.addAttribute(GlobalAttributes.Aria_Hidden, "true");
             iconSpan.addClass("icon-next");
@@ -251,10 +251,10 @@ public class BSCarousel extends Div<BSCarouselChildren, BSCarouselAttributes, BS
         {
             nextLink.addClass("right");
             nextLink.addClass(BSComponentCarouselOptions.Carousel_Control);
-            
-            nextLink.addAttribute("role","button");
-            nextLink.addAttribute("data-slide","next");
-            
+
+            nextLink.addAttribute("role", "button");
+            nextLink.addAttribute("data-slide", "next");
+
             Span iconSpan = new Span();
             iconSpan.addAttribute(GlobalAttributes.Aria_Hidden, "true");
             iconSpan.addClass("icon-next");
@@ -278,22 +278,12 @@ public class BSCarousel extends Div<BSCarouselChildren, BSCarouselAttributes, BS
             add(getCarouselSlides());
 
             BSCarouselItem activeItem;
-            try
+            if (!getSlides().isEmpty())
+
             {
                 activeItem = getSlides().get(getActiveSlide());
+                activeItem.addClass(BSComponentDefaultOptions.Active);
             }
-            catch (IndexOutOfBoundsException e)
-            {
-                if (getSlides().size() > 0)
-                {
-                    activeItem = getSlides().get(0);
-                }
-                else
-                {
-                    return;
-                }
-            }
-            activeItem.addClass(BSComponentDefaultOptions.Active);
 
             add(getPreviousLink());
             add(getNextLink());

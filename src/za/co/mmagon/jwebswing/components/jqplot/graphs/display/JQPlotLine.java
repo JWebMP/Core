@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqplot.graphs.display;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import za.co.mmagon.jwebswing.generics.XYObject;
@@ -87,6 +88,7 @@ public class JQPlotLine implements JQPlotSeriesItem
      *
      * @param x The X Position
      * @param y The Y Position
+     *
      * @return
      */
     public boolean addPoint(String x, double y)
@@ -99,6 +101,7 @@ public class JQPlotLine implements JQPlotSeriesItem
      * Adds an incremental Y point to the list
      *
      * @param y
+     *
      * @return
      */
     public boolean addPoint(double y)
@@ -176,15 +179,16 @@ public class JQPlotLine implements JQPlotSeriesItem
      * Builds an array list from an object array
      *
      * @param array
+     *
      * @return
      */
-    public static ArrayList<XYObject> buildFromArray(Object... array)
+    public static ArrayList<XYObject> buildFromArray(Serializable... array)
     {
         ArrayList<XYObject> output = new ArrayList<>();
         for (int i = 0; i < array.length; i = i + 2)
         {
-            Object object = array[i];
-            Object object2 = array[i + 1];
+            Serializable object = array[i];
+            Serializable object2 = array[i + 1];
             XYObject xy = new XYObject(object, object2);
             output.add(xy);
         }
@@ -195,16 +199,17 @@ public class JQPlotLine implements JQPlotSeriesItem
      * Builds an array list from an object array
      *
      * @param array
+     *
      * @return
      */
-    public static JQPlotLine buildLineFromArray(Object[] array)
+    public static JQPlotLine buildLineFromArray(Serializable[] array)
     {
 
         ArrayList<XYObject> output = new ArrayList<>();
         for (int i = 0; i < array.length; i = i + 2)
         {
-            Object object = array[i];
-            Object object2 = array[i + 1];
+            Serializable object = array[i];
+            Serializable object2 = array[i + 1];
             XYObject xy = new XYObject(object, object2);
             output.add(xy);
         }
@@ -217,6 +222,7 @@ public class JQPlotLine implements JQPlotSeriesItem
      *
      * @param array
      * @param delimeter
+     *
      * @return
      */
     public static ArrayList<XYObject> buildFromDelimiteredSrting(String array, String delimeter)

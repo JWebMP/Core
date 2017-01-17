@@ -16,10 +16,12 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.annotations;
 
-import java.lang.annotation.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.*;
+import java.lang.annotation.Annotation;
+import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.NameValuePairCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.NameValuePairCSSImpl;
 
 /**
+ * Any custom CSS Implementation
  *
  * @author GedMarc
  * @since Nov 20, 2016
@@ -29,8 +31,11 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.*;
 public class CustomCSSImpl implements za.co.mmagon.jwebswing.htmlbuilder.css.Annotations.CustomCSS
 {
 
-    public NameValuePairCSSImpl[] value;
+    private NameValuePairCSSImpl[] value;
 
+    /**
+     * Any custom CSS implementation
+     */
     public CustomCSSImpl()
     {
 

@@ -121,7 +121,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
                     continue;
                 }
                 if (CSSImplementationClass.class.isAssignableFrom(obj.getClass()))
-                {;
+                {
                     m.putAll(getCSSProperties(CSSImplementationClass.class.cast(obj)));
                 }
             }
@@ -207,7 +207,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
         }
         catch (IllegalArgumentException | IllegalAccessException ex)
         {
-            log.log(Level.SEVERE, "[Action]-[Cant Get Field " + ex.getMessage() + "];");
+            log.log(Level.SEVERE, "[Action]-[Cant Get Field {0}];", ex.getMessage());
             return new HashMap<>();
         }
 

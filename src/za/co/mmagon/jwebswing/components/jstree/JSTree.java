@@ -37,11 +37,11 @@ public class JSTree extends Div<JSTreeChildren, JSTreeAttributes, JSTreeFeatures
 {
 
     private static final long serialVersionUID = 1L;
-    
+
     private JSTreeFeature feature;
-    
+
     private JSTreeData data;
-    
+
     /**
      * Constructs a new instance of the JS Tree
      */
@@ -64,8 +64,10 @@ public class JSTree extends Div<JSTreeChildren, JSTreeAttributes, JSTreeFeatures
 
     /**
      * Returns the data, and any parameters if supplied
+     *
      * @param params
-     * @return 
+     *
+     * @return
      */
     @Override
     public JSTreeData getData(Map<String, String[]> params)
@@ -73,7 +75,7 @@ public class JSTree extends Div<JSTreeChildren, JSTreeAttributes, JSTreeFeatures
         onGetData(params);
         String[] ids = params.get("id");
         String id = ids[0];
-        if (id.equalsIgnoreCase("#"))
+        if ("#".equalsIgnoreCase(id))
         {
             return data;
         }
