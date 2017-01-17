@@ -29,7 +29,6 @@ public class BSNavBar extends Div<BSNavBarChildren, BSNavBarAttributes, BSNavBar
 {
 
     private static final long serialVersionUID = 1L;
-    private BSNavBarFeature feature;
 
     /**
      * Navbar
@@ -42,24 +41,10 @@ public class BSNavBar extends Div<BSNavBarChildren, BSNavBarAttributes, BSNavBar
         setTag("nav");
     }
 
-    /**
-     * Returns the feature
-     *
-     * @return
-     */
-    public final BSNavBarFeature getFeature()
-    {
-        if (feature == null)
-        {
-            feature = new BSNavBarFeature(this);
-        }
-        return feature;
-    }
-
     @Override
     public BSNavBarOptions getOptions()
     {
-        return getFeature().getOptions();
+        return new BSNavBarOptions();
     }
 
 }
