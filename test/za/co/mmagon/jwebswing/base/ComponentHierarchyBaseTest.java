@@ -73,7 +73,8 @@ public class ComponentHierarchyBaseTest extends BaseTestClass
     public void testChildrenPreConfigure()
     {
         Body b = getPage().getBody();
-        Paragraph p = (Paragraph) b.add("Text");
+        Paragraph p = new Paragraph("Text");
+        b.add(p);
         b.preConfigure();
         System.out.println(p);
         //System.out.println(b.getPage().toString(true));

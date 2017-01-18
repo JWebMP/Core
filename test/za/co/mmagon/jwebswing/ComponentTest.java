@@ -41,7 +41,8 @@ public class ComponentTest extends BaseTestClass
     {
         Page p = getPage();
         Body b = p.getBody();
-        Paragraph pa = (Paragraph) b.add("String adds a paragraph");
+        Paragraph pa = new Paragraph("String adds a paragraph");
+        b.add(pa);
         pa.setID("paragraph");
         System.out.println(p.toString(true));
         Assert.assertEquals("<!DOCTYPE html>\n"
