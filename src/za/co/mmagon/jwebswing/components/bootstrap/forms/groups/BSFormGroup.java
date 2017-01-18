@@ -29,6 +29,7 @@ import za.co.mmagon.jwebswing.components.bootstrap.forms.BSForm;
 import za.co.mmagon.jwebswing.components.bootstrap.forms.BSFormChildren;
 import za.co.mmagon.jwebswing.components.bootstrap.forms.controls.BSFormSelectInput;
 import za.co.mmagon.jwebswing.components.bootstrap.forms.controls.BSInput;
+import za.co.mmagon.jwebswing.components.bootstrap.forms.groups.sets.BSFormInputGroup;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -142,6 +143,21 @@ public class BSFormGroup<T extends ComponentHTMLBootstrapBase & BSFormGroupChild
      * @param helpText
      */
     public BSFormGroup(Label label, TextArea inputComponent, String helpText)
+    {
+        this.label = label;
+        this.inputComponent = inputComponent;
+        this.helpText = new SmallText(helpText);
+        addClass(BSComponentFormGroupOptions.Form_Group);
+    }
+
+    /**
+     * Constructs a new instance
+     *
+     * @param label
+     * @param inputComponent
+     * @param helpText
+     */
+    public BSFormGroup(Label label, BSFormInputGroup inputComponent, String helpText)
     {
         this.label = label;
         this.inputComponent = inputComponent;

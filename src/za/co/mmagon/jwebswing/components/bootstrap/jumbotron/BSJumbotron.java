@@ -14,36 +14,39 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.components.bootstrap.forms.groups.sets;
+package za.co.mmagon.jwebswing.components.bootstrap.jumbotron;
 
 import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.components.bootstrap.forms.BSFormChildren;
-import za.co.mmagon.jwebswing.components.bootstrap.forms.groups.BSComponentFormGroupOptions;
 
 /**
- * An implementation of
+ * Jumbotron
+ * <p>
+ * A lightweight, flexible component that can optionally extend the entire viewport to showcase key marketing messages on your site.
  * <p>
  * @author Marc Magon
- * @since 17 Jan 2017
+ * @since 18 Jan 2017
  * @version 1.0
  */
-public class BSFormSet extends Div<BSFormSetChildren, BSFormSetAttributes, BSFormSetFeatures, BSFormSetEvents, BSFormSet>
-        implements BSFormChildren
+public class BSJumbotron extends Div<BSJumbotronChildren, BSJumbotronAttributes, BSJumbotronFeatures, BSJumbotronEvents, BSJumbotron>
 {
 
     private static final long serialVersionUID = 1L;
     /**
      * The associated feature
      */
-    private BSFormSetFeature feature;
+    private BSJumbotronFeature feature;
 
     /**
      * Constructs a new instance
+     *
+     * @param jumbotronType
      */
-    public BSFormSet()
+    public BSJumbotron(BSComponentJumbotronOptions... jumbotronType)
     {
-        setTag("fieldset");
-        addClass(BSComponentFormGroupOptions.Form_Group);
+        for (BSComponentJumbotronOptions bSComponentJumbotronOptions : jumbotronType)
+        {
+            addClass(bSComponentJumbotronOptions);
+        }
     }
 
     /**
@@ -51,11 +54,11 @@ public class BSFormSet extends Div<BSFormSetChildren, BSFormSetAttributes, BSFor
      *
      * @return
      */
-    public final BSFormSetFeature getFeature()
+    public final BSJumbotronFeature getFeature()
     {
         if (feature == null)
         {
-            feature = new BSFormSetFeature(this);
+            feature = new BSJumbotronFeature(this);
         }
         return feature;
     }
@@ -66,7 +69,7 @@ public class BSFormSet extends Div<BSFormSetChildren, BSFormSetAttributes, BSFor
      * @return
      */
     @Override
-    public BSFormSetOptions getOptions()
+    public BSJumbotronOptions getOptions()
     {
         return getFeature().getOptions();
     }

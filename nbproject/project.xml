@@ -41,6 +41,8 @@
             </reference>
         </references>
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>addon</word>
+            <word>addons</word>
             <word>admin</word>
             <word>ajax</word>
             <word>animatable</word>
@@ -76,6 +78,7 @@
             <word>js</word>
             <word>json</word>
             <word>jstree</word>
+            <word>jumbotron</word>
             <word>modernizr</word>
             <word>nav</word>
             <word>Obsidion</word>

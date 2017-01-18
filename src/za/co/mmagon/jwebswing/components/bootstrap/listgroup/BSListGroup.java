@@ -14,36 +14,39 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.components.bootstrap.forms.groups.sets;
+package za.co.mmagon.jwebswing.components.bootstrap.listgroup;
 
 import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.components.bootstrap.forms.BSFormChildren;
-import za.co.mmagon.jwebswing.components.bootstrap.forms.groups.BSComponentFormGroupOptions;
 
 /**
- * An implementation of
+ * List group
+ * <p>
+ * List groups are a flexible and powerful component for displaying a series of content. List group items can be modified and extended to support just about any content within. They can also be used
+ * as navigation with the right modifier class.
  * <p>
  * @author Marc Magon
  * @since 17 Jan 2017
  * @version 1.0
  */
-public class BSFormSet extends Div<BSFormSetChildren, BSFormSetAttributes, BSFormSetFeatures, BSFormSetEvents, BSFormSet>
-        implements BSFormChildren
+public class BSListGroup extends Div<BSListGroupChildren, BSListGroupAttributes, BSListGroupFeatures, BSListGroupEvents, BSListGroup>
 {
 
     private static final long serialVersionUID = 1L;
     /**
      * The associated feature
      */
-    private BSFormSetFeature feature;
+    private BSListGroupFeature feature;
 
     /**
-     * Constructs a new instance
+     * List group
+     * <p>
+     * List groups are a flexible and powerful component for displaying a series of content. List group items can be modified and extended to support just about any content within. They can also be
+     * used as navigation with the right modifier class.
      */
-    public BSFormSet()
+    public BSListGroup()
     {
-        setTag("fieldset");
-        addClass(BSComponentFormGroupOptions.Form_Group);
+        addFeature(getFeature());
+        setTag("ul");
     }
 
     /**
@@ -51,11 +54,11 @@ public class BSFormSet extends Div<BSFormSetChildren, BSFormSetAttributes, BSFor
      *
      * @return
      */
-    public final BSFormSetFeature getFeature()
+    public final BSListGroupFeature getFeature()
     {
         if (feature == null)
         {
-            feature = new BSFormSetFeature(this);
+            feature = new BSListGroupFeature(this);
         }
         return feature;
     }
@@ -66,7 +69,7 @@ public class BSFormSet extends Div<BSFormSetChildren, BSFormSetAttributes, BSFor
      * @return
      */
     @Override
-    public BSFormSetOptions getOptions()
+    public BSListGroupOptions getOptions()
     {
         return getFeature().getOptions();
     }

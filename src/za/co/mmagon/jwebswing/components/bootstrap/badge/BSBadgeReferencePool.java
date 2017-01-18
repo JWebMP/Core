@@ -14,8 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.components.bootstrap.forms.groups.sets;
+package za.co.mmagon.jwebswing.components.bootstrap.badge;
 
+import za.co.mmagon.jwebswing.components.newcomponents.*;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.base.servlets.interfaces.ReferencePool;
@@ -26,7 +27,7 @@ import za.co.mmagon.jwebswing.base.servlets.interfaces.ReferencePool;
  * @author GedMarc
  * @since 20 Apr 2016
  */
-public enum BSFormSetReferencePool implements ReferencePool
+public enum BSBadgeReferencePool implements ReferencePool
 {
     NoReference(null, null);
     /**
@@ -41,7 +42,7 @@ public enum BSFormSetReferencePool implements ReferencePool
     /**
      * Constructs a reference pool
      */
-    private BSFormSetReferencePool()
+    private BSBadgeReferencePool()
     {
     }
 
@@ -51,7 +52,7 @@ public enum BSFormSetReferencePool implements ReferencePool
      * @param javaScriptReference
      * @param cssReference
      */
-    private BSFormSetReferencePool(JavascriptReference javaScriptReference, CSSReference cssReference)
+    private BSBadgeReferencePool(JavascriptReference javaScriptReference, CSSReference cssReference)
     {
         this.javaScriptReference = javaScriptReference;
         this.cssReference = cssReference;

@@ -100,7 +100,7 @@ public enum BSComponentDefaultOptions implements IBSComponentOptions
     /**
      * Displays the text inside the &lt;abbr&gt; element in a slightly smaller font size
      */
-    Initialism,
+    Initialise,
     /**
      * The .invisible class can be used to toggle only the visibility of an element, meaning its display is not modified and the element can still affect the flow of the document. Displays the item as
      */

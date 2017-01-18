@@ -182,4 +182,21 @@ public class BSFormTest extends BaseTestClass
         form.add(group);
         System.out.println(form.toString(true));
     }
+
+    @Test
+    public void testInputGroups()
+    {
+        BSFormDateInput input = new BSFormDateInput();
+        input.setID("input");
+        //input.toString(true);
+
+        BSFormInputGroup inputGroup = new BSFormInputGroup(input);
+        inputGroup.getInputGroupAddons().add(new Span("@"));
+        //System.out.println(inputGroup);
+
+        BSFormGroup group = new BSFormGroup(new Label("input"), inputGroup, null);
+        group.setID("group");
+
+        System.out.println(group.toString(true));
+    }
 }
