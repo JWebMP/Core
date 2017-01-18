@@ -1,9 +1,7 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
-import za.co.mmagon.jwebswing.base.html.interfaces.DisplayObjectType;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.ListChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
@@ -45,6 +43,8 @@ public class List<C extends ListChildren, A extends Enum & AttributeDefinitions,
         JQXMenuChildren, ListItemChildren
 {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Constructs an unordered list
      */
@@ -63,18 +63,25 @@ public class List<C extends ListChildren, A extends Enum & AttributeDefinitions,
         super(orderedList ? "ol" : "ul", orderedList ? ComponentTypes.OrderedList : ComponentTypes.UnorderedList, false);
     }
 
-    @Override
-    public C add(String textToAdd)
+    /**
+     * Adds a list item to this list
+     *
+     * @param textToAdd
+     *
+     * @return
+     */
+    public ListItem addItem(String textToAdd)
     {
         ListItem li = new ListItem(textToAdd);
         add((C) li);
-        return (C) li;
+        return li;
     }
 
     /**
      * Returns a list of the specified text
      *
      * @param textToAdd
+     *
      * @return
      */
     public List addList(String textToAdd)

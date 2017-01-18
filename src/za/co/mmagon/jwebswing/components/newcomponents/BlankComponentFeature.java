@@ -27,8 +27,6 @@ public class BlankComponentFeature extends Feature<BlankComponentOptions, BlankC
     {
         super("Blank");
         setComponent(forComponent);
-        // getJavascriptReferences().add(JQXReferencePool.Core.getJavaScriptReference());
-        // getCssReferences().add(JQXReferencePool.Core.getCssReference());
     }
 
     /**

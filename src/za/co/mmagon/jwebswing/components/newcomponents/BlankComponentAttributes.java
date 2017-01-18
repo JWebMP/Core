@@ -26,30 +26,44 @@ public enum BlankComponentAttributes implements AttributeDefinitions
 {
     Visibility;
 
+    private boolean isKeyword;
+
+    /**
+     * The component attributes
+     */
     private BlankComponentAttributes()
     {
     }
 
+    /**
+     * If the attribute is loaded as a keyword only
+     *
+     * @param isKeyword
+     */
     private BlankComponentAttributes(boolean isKeyword)
     {
         this.isKeyword = isKeyword;
     }
 
-    private boolean isKeyword;
-
+    /**
+     * If the attribute is a keyword
+     *
+     * @return
+     */
     @Override
     public boolean isKeyword()
     {
         return isKeyword;
     }
-    
+
     /**
      * Returns the attribute name replacing all underscores with dashes and all dollar signs to empty
-     * @return 
+     *
+     * @return
      */
     @Override
     public String toString()
     {
-        return name().toLowerCase().replace('_','-').replace("$", "");
+        return name().toLowerCase().replace('_', '-').replace("$", "");
     }
 }

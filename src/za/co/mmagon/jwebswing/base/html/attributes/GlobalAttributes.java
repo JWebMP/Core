@@ -63,6 +63,10 @@ public enum GlobalAttributes implements AttributeDefinitions
      */
     Aria_Disabled,
     /**
+     * Screen Reader described by
+     */
+    Aria_Describedby,
+    /**
      * Expanded on screen reader mode
      */
     Aria_Expanded,

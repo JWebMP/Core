@@ -20,7 +20,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
 /**
- * All the options for the tooltip library
+ * All the options
  * <p>
  * @author GedMarc
  * @since Mar 4, 2015
@@ -33,11 +33,19 @@ public class BlankComponentOptions extends JavaScriptPart
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * The options for the component
+     */
     public BlankComponentOptions()
     {
 
     }
 
+    /**
+     * Render as javascript
+     *
+     * @return
+     */
     @Override
     public JavascriptPartType getJavascriptType()
     {

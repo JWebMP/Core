@@ -19,23 +19,34 @@ package za.co.mmagon.jwebswing.components.newcomponents;
 import za.co.mmagon.jwebswing.base.html.Div;
 
 /**
- * An implementation of the jsTree project.
+ * An implementation of
  * <p>
  * @author Marc Magon
- * @since 13 Jan 2017
+ * @since 17 Jan 2017
  * @version 1.0
  */
 public class BlankComponent extends Div<BlankComponentChildren, BlankComponentAttributes, BlankComponentFeatures, BlankComponentEvents, BlankComponent>
 {
 
     private static final long serialVersionUID = 1L;
+    /**
+     * The associated feature
+     */
     private BlankComponentFeature feature;
 
+    /**
+     * Constructs a new instance
+     */
     public BlankComponent()
     {
         addFeature(getFeature());
     }
 
+    /**
+     * Returns the feature if any is required
+     *
+     * @return
+     */
     public final BlankComponentFeature getFeature()
     {
         if (feature == null)
@@ -45,6 +56,11 @@ public class BlankComponent extends Div<BlankComponentChildren, BlankComponentAt
         return feature;
     }
 
+    /**
+     * Returns the options if any is required
+     *
+     * @return
+     */
     @Override
     public BlankComponentOptions getOptions()
     {

@@ -41,7 +41,7 @@ import za.co.mmagon.logger.LogFactory;
  * @version 1.0
  */
 public class Component<C, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component>
-        extends ComponentHTMLBootstrapBase<C, A, F, E, J> implements ICssStructure<C>
+        extends ComponentHTMLBootstrapBase<C, A, F, E, J> implements ICssStructure<J>
 {
 
     /**
@@ -98,12 +98,12 @@ public class Component<C, A extends Enum & AttributeDefinitions, F extends Globa
      * @return The new paragraph component
      */
     @Override
-    public C add(String textToAdd)
+    public J add(String textToAdd)
     {
         Paragraph p = new Paragraph();
         p.setText(textToAdd);
         add((C) p);
-        return (C) p;
+        return (J) this;
     }
 
     /**

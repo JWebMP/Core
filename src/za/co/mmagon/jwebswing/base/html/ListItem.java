@@ -39,6 +39,8 @@ public class ListItem extends Component<ListItemChildren, NoAttributes, GlobalFe
         implements ListChildren, JQUITabsChildren, NoNewLineForRawText, ListItemChildren
 {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Constructs a blank text List Item
      */
@@ -63,10 +65,10 @@ public class ListItem extends Component<ListItemChildren, NoAttributes, GlobalFe
      * Returns a list item of the specified text
      *
      * @param textToAdd
+     *
      * @return
      */
-    @Override
-    public ListItemChildren add(String textToAdd)
+    public ListItemChildren addItem(String textToAdd)
     {
         ListItem li = new ListItem(textToAdd);
         add(li);
@@ -77,6 +79,7 @@ public class ListItem extends Component<ListItemChildren, NoAttributes, GlobalFe
      * Returns a list of the specified text
      *
      * @param textToAdd
+     *
      * @return
      */
     public List addList(String textToAdd)

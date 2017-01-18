@@ -14,6 +14,8 @@ import za.co.mmagon.jwebswing.components.pools.jqueryui.JQUIReferencePool;
 public class JQUIResizableFeature extends Feature<JQUIResizableOptions, JQUIResizableFeature> implements IFeature
 {
 
+    private static final long serialVersionUID = 1L;
+
     private JQUIResizableOptions options;
 
     public JQUIResizableFeature(Component component)

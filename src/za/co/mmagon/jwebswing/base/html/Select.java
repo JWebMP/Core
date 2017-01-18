@@ -53,7 +53,8 @@ import za.co.mmagon.jwebswing.components.jqueryui.selectmenu.JQUISelectMenuChild
  * <p>
  *
  */
-public class Select extends Component<SelectChildren, NoAttributes, GlobalFeatures, GlobalEvents, Select> implements GlobalChildren, JQUISelectMenuChildren
+public class Select extends Component<SelectChildren, NoAttributes, GlobalFeatures, GlobalEvents, Select>
+        implements GlobalChildren, JQUISelectMenuChildren
 {
 
     private static final long serialVersionUID = 1L;

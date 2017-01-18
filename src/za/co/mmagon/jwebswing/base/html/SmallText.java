@@ -24,11 +24,13 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.PhraseChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.bootstrap.forms.groups.BSFormGroupChildren;
 
 /**
  * Definition and Usage<p>
  * <p>
- * The &lt;small&gt; tag defines smaller text (and other side comments).<p>
+ * The &lt;small&gt; tag defines smaller text (and other side comments)
+ * .<p>
  * <p>
  * Browser Support<p>
  * Element<p>
@@ -44,9 +46,12 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class SmallText extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, SmallText> 
-        implements ParagraphChildren, PhraseChildren
+public class SmallText extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, SmallText>
+        implements ParagraphChildren, PhraseChildren, BSFormGroupChildren
 {
+
+    private static final long serialVersionUID = 1L;
+
     /**
      * Construct a new instance of the small text
      */
@@ -54,7 +59,7 @@ public class SmallText extends Component<GlobalChildren, NoAttributes, GlobalFea
     {
         this(null);
     }
-    
+
     /**
      * Specifies some small text
      *

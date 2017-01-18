@@ -100,6 +100,10 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
      */
     @JsonIgnore
     private int currentTabIndents;
+    /**
+     * Renders the text of this component before children
+     */
+    private boolean renderTextBeforeChildren = true;
 
     /**
      * Returns a HTML Base interface of this component
@@ -140,44 +144,66 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
         }
         setCurrentTabIndents(tabCount);
 
-        StringBuilder sb = new StringBuilder();
-
+        StringBuilder tempStringBuilder = new StringBuilder();
         StringBuilder beforeTag = renderBeforeTag();
         if (beforeTag != null && beforeTag.length() > 0)
         {
-            sb.append(beforeTag);
+            tempStringBuilder.append(beforeTag);
         }
 
         StringBuilder openingTag = renderOpeningTag();
-        sb.append(openingTag);
+        tempStringBuilder.append(openingTag);
 
         if (isInlineClosingTag())
         {
-            return new StringBuilder(sb);
+            return new StringBuilder(tempStringBuilder);
         }
 
         StringBuilder rawText = getText(0);
-        if (rawText != null && rawText.length() > 0)
+
+        if (isRenderTextBeforeChildren())
         {
-            sb.append(rawText);
+            if (rawText != null && rawText.length() > 0)
+            {
+                tempStringBuilder.append(rawText);
+            }
+        }
+
+        StringBuilder beforeChildren = renderBeforeChildren();
+        if (beforeChildren != null && beforeChildren.length() > 0)
+        {
+            tempStringBuilder.append(beforeChildren);
         }
 
         StringBuilder childrenRender = renderChildren();
         if (childrenRender != null && childrenRender.length() > 0)
         {
-            sb.append(childrenRender);
+            tempStringBuilder.append(childrenRender);
+        }
+        if (!isRenderTextBeforeChildren())
+        {
+            if (rawText != null && rawText.length() > 0)
+            {
+                tempStringBuilder.append(getNewLine()).append(getCurrentTabIndentString()).append("\t").append(rawText);
+            }
+        }
+
+        StringBuilder afterChildren = renderAfterChildren();
+        if (afterChildren != null && afterChildren.length() > 0)
+        {
+            tempStringBuilder.append(afterChildren);
         }
 
         StringBuilder closingTagString = renderClosingTag();
-        sb.append(closingTagString);
+        tempStringBuilder.append(closingTagString);
 
         StringBuilder afterTag = renderAfterTag();
         if (afterTag != null && afterTag.length() > 0)
         {
-            sb.append(afterTag);
+            tempStringBuilder.append(afterTag);
         }
 
-        return new StringBuilder(sb.toString());
+        return new StringBuilder(tempStringBuilder.toString());
     }
 
     /**
@@ -229,12 +255,8 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
             sb.append(getCurrentTabIndentString());
         }
         sb.append("<");
-        sb.append(getTag());//.append(" ");
-
-        //Append this tags attributes
+        sb.append(getTag());
         renderAttributes(sb);
-        //sb.trimToSize();
-
         if (isInlineClosingTag())
         {
             sb.append("/");
@@ -422,6 +444,26 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     }
 
     /**
+     * Renders the string before the childre
+     *
+     * @return
+     */
+    protected StringBuilder renderBeforeChildren()
+    {
+        return null;
+    }
+
+    /**
+     * Renders the given string after the children
+     *
+     * @return
+     */
+    protected StringBuilder renderAfterChildren()
+    {
+        return null;
+    }
+
+    /**
      * Renders String content after this tag is rendered
      * <p>
      * @return Custom HTML String to be inserted directly after this components tag
@@ -493,6 +535,29 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     public void setNewLineForClosingTag(boolean newLineForClosingTag)
     {
         this.newLineForClosingTag = newLineForClosingTag;
+    }
+
+    /**
+     * Renders the text of this component before children
+     *
+     * @return
+     */
+    public boolean isRenderTextBeforeChildren()
+    {
+        return renderTextBeforeChildren;
+    }
+
+    /**
+     * Renders the text of this component before children or after
+     *
+     * @param renderTextBeforeChildren
+     *
+     * @return
+     */
+    public J setRenderTextBeforeChildren(boolean renderTextBeforeChildren)
+    {
+        this.renderTextBeforeChildren = renderTextBeforeChildren;
+        return (J) this;
     }
 
     @Override

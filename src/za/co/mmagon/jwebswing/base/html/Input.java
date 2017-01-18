@@ -124,6 +124,7 @@ public class Input<A extends Enum & AttributeDefinitions> extends Component<NoCh
     public void setInputType(InputTypes inputType)
     {
         this.inputType = inputType;
+        addAttribute(GlobalAttributes.Type, inputType.toString());
     }
 
     /**
@@ -152,7 +153,8 @@ public class Input<A extends Enum & AttributeDefinitions> extends Component<NoCh
 
     /**
      * Push to model instead of bind
-     * @param variableName 
+     *
+     * @param variableName
      */
     @Override
     public void bind(String variableName)

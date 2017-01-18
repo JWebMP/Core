@@ -14,14 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package za.co.mmagon.jwebswing.base.interfaces;
 
 import java.util.List;
 import java.util.Map;
-import za.co.mmagon.jwebswing.CSSComponent;
-import za.co.mmagon.jwebswing.Event;
-import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.*;
 import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
@@ -33,11 +30,13 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  * @author GedMarc
  * @param <C> All allowed children
  * @param <J> This Class
+ *
  * @since Sep 26, 2016
- * 
+ *
  */
-public interface IComponentHierarchyBase<C, J extends ComponentBase> 
+public interface IComponentHierarchyBase<C, J extends ComponentBase>
 {
+
     /**
      * Add a new child to this component
      * <p>
@@ -46,7 +45,8 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
      * <p>
      * @return The new child added
      */
-    C add(int position,C newChild);
+    J add(int position, C newChild);
+
     /**
      * Add a new child to this component
      * <p>
@@ -54,21 +54,22 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
      * <p>
      * @return The new child added
      */
-    C add(C newChild);
+    J add(C newChild);
 
     /**
-     * Returns null
-     * sets the text
+     * Returns null sets the text
      *
      * @param text
+     *
      * @return
      */
-    C add(String text);
+    J add(String text);
 
     /**
      * Adds the given CSS Class Name with the given references
      * <p>
      * @param classComponent
+     *
      * @return
      */
     boolean addClass(CSSComponent classComponent);
@@ -88,16 +89,14 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
     List<ComponentHierarchyBase> getChildren();
 
     /**
-     * Get an array list of all children and their children recursively Includes
-     * this object
+     * Get an array list of all children and their children recursively Includes this object
      * <p>
      * @return A complete array list of all children at time of call
      */
     List<ComponentHierarchyBase> getChildrenHierarchy();
 
     /**
-     * Get an array list of all children and their children recursively Excludes
-     * this object
+     * Get an array list of all children and their children recursively Excludes this object
      * <p>
      * @param trues Whether or not to include this component
      * <p>
@@ -123,6 +122,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 
     /**
      * Returns a complete list of events
+     *
      * @return
      */
     List<Event> getEventsAll();
@@ -191,6 +191,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
      * Sets the page this component belongs on.
      * <p>
      * @param page A Page
+     *
      * @return This Class
      */
     J setPage(Page page);
@@ -199,6 +200,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
      * Sets the parent of this item
      *
      * @param parent
+     *
      * @return This Class
      */
     J setParent(ComponentHierarchyBase parent);
@@ -207,6 +209,8 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
      * Overrides this and all below components to set tiny false
      *
      * @param tiny
+     *
+     * @return
      */
     J setTiny(boolean tiny);
 
@@ -222,6 +226,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
      * Returns the HTML with the specified tab count
      *
      * @param tabCount
+     *
      * @return Indented HTML
      */
     String toString(Integer tabCount);

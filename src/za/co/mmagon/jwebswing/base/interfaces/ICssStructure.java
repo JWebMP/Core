@@ -14,20 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package za.co.mmagon.jwebswing.base.interfaces;
 
 /**
  * A set of CSS attributes that the Component class exposes.
- * 
+ *
  * @author GedMarc
- * @param <C> Any applicable children
+ * @param <J> My type
+ *
  * @since Sep 26, 2016
- * 
+ *
  */
-public interface ICssStructure<C> 
+public interface ICssStructure<J>
 {
-    
+
     /**
      * Adds a paragraph component with the attached text
      * <p>
@@ -35,5 +35,5 @@ public interface ICssStructure<C>
      * <p>
      * @return The new paragraph component
      */
-    C add(String textToAdd);
+    J add(String textToAdd);
 }

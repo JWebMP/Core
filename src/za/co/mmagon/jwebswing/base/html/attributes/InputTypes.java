@@ -34,23 +34,23 @@ public enum InputTypes implements AttributeDefinitions
      */
     Checkbox,
     /**
-     * @deprecated no browser support really
+     *
      */
     Color,
     /**
-     * @deprecated no browser support really
+     *
      */
     Date,
     /**
-     * @deprecated no browser support really
+     *
      */
     Datetime,
     /**
-     * @deprecated no browser support really
+     *
      */
     Datetime_local,
     /**
-     * @deprecated no browser support really
+     *
      */
     Email,
     /**
@@ -69,12 +69,12 @@ public enum InputTypes implements AttributeDefinitions
      * The Input Month object represents an HTML input element with type="month".
      * <p>
      * Note: input elements with type="month" are not supported in Internet Explorer or Firefox.
-     *
-     * @deprecated
+     * <p>
+     * Did custom check, enabled from ie10 and up
      */
     Month,
     /**
-     * @deprecated
+     * A number input
      */
     Number,
     /**
@@ -86,7 +86,7 @@ public enum InputTypes implements AttributeDefinitions
      */
     Radio,
     /**
-     * @deprecated
+     * A range input selector
      */
     Range,
     /**
@@ -95,8 +95,7 @@ public enum InputTypes implements AttributeDefinitions
     Reset,
     /**
      * The Input Search Object is new in HTML5.
-     *
-     * @deprecated just until people get off ie 8
+     * <p>
      */
     Search,
     /**
@@ -104,7 +103,7 @@ public enum InputTypes implements AttributeDefinitions
      */
     Submit,
     /**
-     * @deprecated
+     * A telephone entry
      */
     Tel,
     /**
@@ -119,8 +118,6 @@ public enum InputTypes implements AttributeDefinitions
      * Note: input elements with type="time" are not supported in Internet Explorer or Firefox.
      * <p>
      * JWebswing excludes this for lack of support
-     *
-     * @deprecated
      */
     Time,
     /**
@@ -131,8 +128,6 @@ public enum InputTypes implements AttributeDefinitions
      * The Input URL object represents an HTML input element with type="url".
      * <p>
      * Note: input elements with type="url" are not supported in Internet Explorer 9 (and earlier versions), or Safari.
-     *
-     * @deprecated
      */
     Url,
     /**
@@ -141,12 +136,9 @@ public enum InputTypes implements AttributeDefinitions
      * The Input Week object represents an HTML input element with type="week".
      * <p>
      * Note: input elements with type="week" are not supported in Internet Explorer or Firefox.
-     *
-     * @deprecated
      */
     Week,
     /**
-     * @deprecated
      * To store values as attributes
      */
     Value;

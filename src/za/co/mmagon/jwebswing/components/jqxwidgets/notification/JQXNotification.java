@@ -53,8 +53,7 @@ public class JQXNotification extends Div<JQXNotificationChildren, JQXNotificatio
         return getFeature().getOptions();
     }
 
-    @Override
-    public Div add(String textToAdd)
+    public Div addText(String textToAdd)
     {
         Div d = new Div();
         d.setText(textToAdd);

@@ -16,17 +16,26 @@
  */
 package za.co.mmagon.jwebswing.components.bootstrap.forms.controls;
 
+import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
+
 /**
+ * A default email input for bootstrap
  *
  * @author GedMarc
  * @since 15 Jan 2017
  *
  */
-public class BSFormEmailInput
+public class BSFormEmailInput extends BSInput
 {
 
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * A default email input for bootstrap
+     */
     public BSFormEmailInput()
     {
-        //Nothing Needed
+
+        setInputType(InputTypes.Email);
     }
 }

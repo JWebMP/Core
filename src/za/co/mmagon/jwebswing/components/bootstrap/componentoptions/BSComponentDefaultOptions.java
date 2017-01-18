@@ -78,6 +78,10 @@ public enum BSComponentDefaultOptions implements IBSComponentOptions
      */
     Text_Justify,
     /**
+     * Indicates text that is muted
+     */
+    Text_Muted,
+    /**
      * Indicates no wrap text
      */
     Text_NoWrap,
@@ -118,7 +122,6 @@ public enum BSComponentDefaultOptions implements IBSComponentOptions
      * Lines up the terms and descriptions in the &lt;dl&gt; element side_by_side Starts off like default &lt;dl&gt;s, but when the browser window expands, it will line up side_by_side
      */
     Dl_Horizontal,
-    
     /**
      * Makes the button appear pressed
      */
@@ -127,14 +130,6 @@ public enum BSComponentDefaultOptions implements IBSComponentOptions
      * Makes the button disabled
      */
     Disabled,
-    /**
-     * Makes a &lt;form&gt; left_aligned with inline_block controls (This only applies to forms within viewports that are at least 768px wide)
-     */
-    Form_Inline,
-    /**
-     * Aligns labels and groups of form controls in a horizontal layout
-     */
-    Form_Horizontal,
     /**
      * Floats an element to the left
      */

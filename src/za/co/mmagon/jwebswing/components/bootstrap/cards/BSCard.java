@@ -95,10 +95,10 @@ public class BSCard extends Div<BSCardChildren, BSCardAttributes, BSCardFeatures
      *
      * @return
      */
-    @Override
-    public BSCardChildren add(String textToAdd)
+    public BSCardChildren addCardText(String textToAdd)
     {
-        Paragraph p = (Paragraph) super.add(textToAdd);
+        Paragraph p = new Paragraph(textToAdd);
+        super.add(p);
         p.addClass(BSComponentCardOptions.Card_Text);
         return p;
     }
@@ -110,8 +110,7 @@ public class BSCard extends Div<BSCardChildren, BSCardAttributes, BSCardFeatures
      *
      * @return
      */
-    @Override
-    public BSCardChildren add(BSCardChildren newChild)
+    public BSCardChildren addCardChildren(BSCardChildren newChild)
     {
         if (Div.class.isAssignableFrom(newChild.getClass()))
         {

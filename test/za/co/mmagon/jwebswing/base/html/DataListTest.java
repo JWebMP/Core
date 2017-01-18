@@ -34,7 +34,8 @@ public class DataListTest
     public void testdatalist()
     {
         DataList dl = new DataList("browsers");
-        Option o = (Option) dl.add(new Option("option 1"));
+        Option o = new Option("option 1");
+        dl.add(o);
         o.setID("id");
         System.out.println(dl.toString(true));
         Assert.assertEquals("<datalist id=\"browsers\">\n"

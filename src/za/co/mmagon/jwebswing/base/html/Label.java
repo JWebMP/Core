@@ -18,14 +18,11 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.LabelAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.bootstrap.forms.groups.BSFormGroupChildren;
 import za.co.mmagon.jwebswing.components.jqueryui.autocomplete.JQUIAutoCompleteChildren;
 import za.co.mmagon.jwebswing.components.jqueryui.checkbox.JQUICheckBoxGroupChildren;
 import za.co.mmagon.jwebswing.components.jqueryui.radiobutton.JQUIRadioButtonGroupChildren;
@@ -54,12 +51,13 @@ import za.co.mmagon.jwebswing.components.jqueryui.spinner.JQUISpinnerChildren;
  * <p>
  *
  */
-public final class Label extends Component<NoChildren, LabelAttributes, GlobalFeatures, GlobalEvents, Label>
-        implements JQUICheckBoxGroupChildren, JQUIRadioButtonGroupChildren, ParagraphChildren, JQUIAutoCompleteChildren, NoNewLineBeforeChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag, JQUISpinnerChildren
+public final class Label extends Component<GlobalChildren, LabelAttributes, GlobalFeatures, GlobalEvents, Label>
+        implements JQUICheckBoxGroupChildren, JQUIRadioButtonGroupChildren, ParagraphChildren, JQUIAutoCompleteChildren, NoNewLineBeforeChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag, JQUISpinnerChildren,
+        BSFormGroupChildren
 {
 
     private static final long serialVersionUID = 1L;
-    private Input forInputComponent;
+    private Component forInputComponent;
     private Form forFormComponent;
 
     /**
@@ -116,7 +114,7 @@ public final class Label extends Component<NoChildren, LabelAttributes, GlobalFe
      * <p>
      * @return
      */
-    public Input getForInputComponent()
+    public Component getForInputComponent()
     {
         return forInputComponent;
     }
@@ -126,7 +124,7 @@ public final class Label extends Component<NoChildren, LabelAttributes, GlobalFe
      * <p>
      * @param forInputComponent
      */
-    public void setForInputComponent(Input forInputComponent)
+    public void setForInputComponent(Component forInputComponent)
     {
         this.forInputComponent = forInputComponent;
         addAttribute(LabelAttributes.For, forInputComponent.getID());

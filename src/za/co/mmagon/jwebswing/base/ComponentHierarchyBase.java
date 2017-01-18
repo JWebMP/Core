@@ -93,11 +93,11 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
      * @return The new child added
      */
     @Override
-    public C add(int position, C newChild)
+    public J add(int position, C newChild)
     {
         if (newChild == null)
         {
-            return newChild;
+            return (J) this;
         }
         ComponentHierarchyBase comp = ComponentHierarchyBase.class.cast(newChild);
         if (comp != null)
@@ -107,7 +107,7 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
             comp.setPage(getPage());
             getChildren().add(position, comp);
         }
-        return newChild;
+        return (J) this;
     }
 
     /**
@@ -118,11 +118,11 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
      * @return The new child added
      */
     @Override
-    public C add(C newChild)
+    public J add(C newChild)
     {
         if (newChild == null)
         {
-            return newChild;
+            return (J) this;
         }
         ComponentHierarchyBase comp = ComponentHierarchyBase.class.cast(newChild);
         if (comp != null)
@@ -132,7 +132,7 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
             comp.setPage(getPage());
             getChildren().add(comp);
         }
-        return newChild;
+        return (J) this;
     }
 
     /**
@@ -143,10 +143,10 @@ public class ComponentHierarchyBase<C, A extends Enum & AttributeDefinitions, F 
      * @return
      */
     @Override
-    public C add(String text)
+    public J add(String text)
     {
         setText(text);
-        return null;
+        return (J) this;
     }
 
     /**

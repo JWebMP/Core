@@ -16,7 +16,8 @@
  */
 package za.co.mmagon.jwebswing.components.bootstrap.forms;
 
-import za.co.mmagon.jwebswing.base.html.Form;
+import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 
 /**
  * Forms
@@ -27,10 +28,13 @@ import za.co.mmagon.jwebswing.base.html.Form;
  * @since 14 Jan 2017
  * @version 1.0
  */
-public class BSForm extends Form
+public class BSForm extends Div<BSFormChildren, BSFormAttributes, BSFormFeatures, BSFormEvents, BSForm>
 {
 
     private static final long serialVersionUID = 1L;
+    /**
+     * The form feature not really used
+     */
     private BSFormFeature feature;
 
     /**
@@ -40,9 +44,14 @@ public class BSForm extends Form
      */
     public BSForm()
     {
-        //addFeature(getFeature());
+        setTag("form");
     }
 
+    /**
+     * Returns the feature
+     *
+     * @return
+     */
     public final BSFormFeature getFeature()
     {
         if (feature == null)
@@ -52,10 +61,28 @@ public class BSForm extends Form
         return feature;
     }
 
+    /**
+     * Returns the get options (nothing for this)
+     *
+     * @return
+     */
     @Override
     public BSFormOptions getOptions()
     {
         return getFeature().getOptions();
+    }
+
+    /**
+     * Pre configures the item with a name
+     */
+    @Override
+    public void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            addAttribute(GlobalAttributes.Name, getID());
+        }
+        super.preConfigure();
     }
 
 }
