@@ -16,6 +16,8 @@
  */
 package za.co.mmagon.jwebswing.components.bootstrap.componentoptions;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Vertical alignment
  * <p>
@@ -84,5 +86,13 @@ public enum BSComponentVerticalAlignmentOptions implements IBSComponentOptions
     private BSComponentVerticalAlignmentOptions()
     {
 
+    }
+
+    @JsonValue
+    @Override
+    public String toString()
+    {
+        String name = name().toLowerCase().replaceAll("\\$", " ").replaceAll("_", "-");
+        return name;
     }
 }

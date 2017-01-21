@@ -45,8 +45,8 @@ public class BSListGroup extends Div<BSListGroupChildren, BSListGroupAttributes,
      */
     public BSListGroup()
     {
-        addFeature(getFeature());
         setTag("ul");
+        addClass(BSComponentListGroupOptions.List_Group);
     }
 
     /**

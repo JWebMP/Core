@@ -28,6 +28,8 @@ public enum BSComponentBadgeOptions implements IBSComponentOptions
 {
     Badge,
     Badge_Default,
+    Badge_Primary,
+    Badge_Secondary,
     Badge_Pill;
 
     private BSComponentBadgeOptions()

@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.components.bootstrap.navbar;
 
-import za.co.mmagon.jwebswing.components.newcomponents.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 
 /**

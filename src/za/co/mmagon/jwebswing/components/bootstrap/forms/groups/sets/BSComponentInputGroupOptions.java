@@ -27,6 +27,9 @@ import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.IBSComponent
  */
 public enum BSComponentInputGroupOptions implements IBSComponentOptions
 {
+    /**
+     * Denotes an input group association
+     */
     Input_Group,
     /**
      *

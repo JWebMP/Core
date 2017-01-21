@@ -19,11 +19,13 @@ package za.co.mmagon.jwebswing.components.bootstrap.modal;
 import za.co.mmagon.jwebswing.base.html.Button;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.attributes.ButtonAttributes;
-import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
+import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentCloseIconOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
 
 /**
- * An implementation of the bootstrap modal
+ * Modal Modals are streamlined, but flexible dialog prompts powered by JavaScript. They support a number of use cases from user notification to completely custom content and feature a handful of
+ * helpful subcomponents, sizes, and more.
  * <p>
  * @author Marc Magon
  * @since 9 Nov 2016
@@ -34,24 +36,50 @@ public class BSModal extends Div<BSModalChildren, BSModalAttributes, BSModalFeat
 
     private static final long serialVersionUID = 1L;
     private BSModalFeature feature;
-    
+    /**
+     * The modal dialog
+     */
     private Div modalDialog;
+    /**
+     * The modal content
+     */
     private Div modalContent;
+    /**
+     * The header for the modal
+     */
     private Div modalHeader;
+    /**
+     * The body for the modal
+     */
     private Div modalBody;
+    /**
+     * The footer for the div
+     */
     private Div modalFooter;
 
+    /**
+     * Modal Modals are streamlined, but flexible dialog prompts powered by JavaScript. They support a number of use cases from user notification to completely custom content and feature a handful of
+     * helpful subcomponents, sizes, and more.
+     */
     public BSModal()
     {
         addFeature(getFeature());
-        addClass(BSComponentDefaultOptions.Modal);
-        addClass(BSComponentDefaultOptions.Fade);
+        addClass(BSComponentModalOptions.Modal);
         addAttribute(BSModalAttributes.Role, "dialog");
+        addAttribute(BSModalAttributes.TabIndex, "-1");
+        addAttribute(GlobalAttributes.Aria_Hidden, "true");
     }
-    
+
+    public BSModal setFade()
+    {
+        addClass(BSComponentDefaultOptions.Fade);
+        return this;
+    }
+
     /**
      * Returns this modal with only its methods
-     * @return 
+     *
+     * @return
      */
     public IBSModal asMe()
     {
@@ -76,7 +104,7 @@ public class BSModal extends Div<BSModalChildren, BSModalAttributes, BSModalFeat
     @Override
     public Div getModalDialog()
     {
-        if(modalDialog == null)
+        if (modalDialog == null)
         {
             setModalDialog(new Div());
         }
@@ -85,27 +113,31 @@ public class BSModal extends Div<BSModalChildren, BSModalAttributes, BSModalFeat
 
     /**
      * Sets the overall dialog of the modal
-     * @param modalDialog 
+     *
+     * @param modalDialog
      */
     @Override
     public void setModalDialog(Div modalDialog)
     {
         getChildren().remove(this.modalDialog);
         this.modalDialog = modalDialog;
-        if(this.modalDialog != null)
+        if (this.modalDialog != null)
         {
             add(modalDialog);
+            modalDialog.addClass(BSComponentModalOptions.Modal_Dialog);
+            modalDialog.addAttribute("role", "document");
         }
     }
 
     /**
      * Gets the modal content pane
-     * @return 
+     *
+     * @return
      */
     @Override
     public Div getModalContent()
     {
-        if(modalContent == null)
+        if (modalContent == null)
         {
             setModalContent(new Div());
         }
@@ -114,28 +146,30 @@ public class BSModal extends Div<BSModalChildren, BSModalAttributes, BSModalFeat
 
     /**
      * Sets the modal content pane
-     * @param modalContent 
+     *
+     * @param modalContent
      */
     @Override
     public void setModalContent(Div modalContent)
     {
         getModalDialog().remove(this.modalContent);
         this.modalContent = modalContent;
-        if(this.modalContent != null)
+        if (this.modalContent != null)
         {
-            this.modalContent.addClass(BSComponentDefaultOptions.Modal_Content);
+            this.modalContent.addClass(BSComponentModalOptions.Modal_Content);
             getModalDialog().add(this.modalContent);
         }
     }
 
     /**
      * Sets the modal header pane
-     * @return 
+     *
+     * @return
      */
     @Override
     public Div getModalHeader()
     {
-        if(modalHeader == null)
+        if (modalHeader == null)
         {
             setModalHeader(new Div());
         }
@@ -144,28 +178,30 @@ public class BSModal extends Div<BSModalChildren, BSModalAttributes, BSModalFeat
 
     /**
      * Sets the modal header pane
-     * @param modalHeader 
+     *
+     * @param modalHeader
      */
     @Override
     public void setModalHeader(Div modalHeader)
     {
         getModalContent().remove(modalHeader);
         this.modalHeader = modalHeader;
-        if(this.modalHeader != null)
+        if (this.modalHeader != null)
         {
-            getModalContent().add(0,this.modalHeader);
-            this.modalHeader.addClass(BSComponentDefaultOptions.Modal_Header);
+            getModalContent().add(0, this.modalHeader);
+            this.modalHeader.addClass(BSComponentModalOptions.Modal_Header);
         }
     }
 
     /**
      * Gets the modal body
-     * @return 
+     *
+     * @return
      */
     @Override
     public Div getModalBody()
     {
-        if(this.modalBody == null)
+        if (this.modalBody == null)
         {
             setModalBody(new Div());
         }
@@ -174,28 +210,30 @@ public class BSModal extends Div<BSModalChildren, BSModalAttributes, BSModalFeat
 
     /**
      * Sets the modal body
-     * @param modalBody 
+     *
+     * @param modalBody
      */
     @Override
     public void setModalBody(Div modalBody)
     {
         getModalContent().remove(this.modalBody);
         this.modalBody = modalBody;
-        if(this.modalBody != null)
+        if (this.modalBody != null)
         {
-            this.modalBody.addClass(BSComponentDefaultOptions.Modal_Body);
+            this.modalBody.addClass(BSComponentModalOptions.Modal_Body);
             getModalContent().add(this.modalBody);
         }
     }
 
     /**
      * Gets the modal footer
-     * @return 
+     *
+     * @return
      */
     @Override
     public Div getModalFooter()
     {
-        if(modalFooter == null)
+        if (modalFooter == null)
         {
             setModalFooter(new Div());
         }
@@ -204,23 +242,25 @@ public class BSModal extends Div<BSModalChildren, BSModalAttributes, BSModalFeat
 
     /**
      * Sets the modal footer
-     * @param modalFooter 
+     *
+     * @param modalFooter
      */
     @Override
     public void setModalFooter(Div modalFooter)
     {
         getModalContent().remove(this.modalFooter);
         this.modalFooter = modalFooter;
-        if(this.modalFooter != null)
+        if (this.modalFooter != null)
         {
             getModalContent().add(this.modalFooter);
-            this.modalFooter.addClass(BSComponentDefaultOptions.Modal_Footer);
+            this.modalFooter.addClass(BSComponentModalOptions.Modal_Footer);
         }
     }
 
     /**
      * Adds a button that will open up the modal
-     * @param button 
+     *
+     * @param button
      */
     @Override
     public void addOpenButton(Button button)
@@ -228,10 +268,11 @@ public class BSModal extends Div<BSModalChildren, BSModalAttributes, BSModalFeat
         button.addAttribute(ButtonAttributes.Data_Toggle, "modal");
         button.addAttribute(ButtonAttributes.Data_Target, getID(true));
     }
-    
+
     /**
      * Adds the dismiss button to the modal
-     * @param button 
+     *
+     * @param button
      */
     @Override
     public void addDismissButton(Button button)
@@ -239,16 +280,16 @@ public class BSModal extends Div<BSModalChildren, BSModalAttributes, BSModalFeat
         button.addClass(BSComponentCloseIconOptions.Close);
         button.addAttribute(ButtonAttributes.Data_Dismiss, "modal");
     }
-    
+
     /**
-     * Sets the size to render for the modal.
-     * By default medium. false sets small
-     * @param large 
+     * Sets the size to render for the modal. By default medium. false sets small
+     *
+     * @param large
      */
     @Override
     public void setModalDialogSize(boolean large)
     {
-        if(large)
+        if (large)
         {
             getModalDialog().removeClass("modal-sm");
             getModalDialog().addClass("modal-lg");

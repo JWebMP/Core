@@ -274,18 +274,6 @@ public enum BSComponentDefaultOptions implements IBSComponentOptions
      */
     Next,
     /**
-     * Provides pagination links
-     */
-    Pagination,
-    /**
-     * Used together with the pagination class to provide larger pagination links
-     */
-    Pagination_lg,
-    /*
-     * Used together with the pagination class to provide smaller pagination links
-     */
-    Pagination_sm,
-    /**
      * *
      * Indicates a default grey label
      */
@@ -311,41 +299,13 @@ public enum BSComponentDefaultOptions implements IBSComponentOptions
      */
     Label$Label_Danger,
     /**
-     * Indicates new or unread items
-     */
-    Badge,
-    /**
-     * Indicates a big box for calling extra attention to featured content or information
-     */
-    Jumbotron,
-    /**
      * Huge Text
      */
     Huge,
     /**
-     * Represents a Modal
-     */
-    Modal,
-    /**
      * Instructs to fade in
      */
-    Fade,
-    /**
-     * The content of the modal
-     */
-    Modal_Content,
-    /**
-     * The header of the modal
-     */
-    Modal_Header,
-    /**
-     * The body of the modal
-     */
-    Modal_Body,
-    /**
-     * The footer of the modal
-     */
-    Modal_Footer,;
+    Fade,;
 
     @JsonValue
     @Override

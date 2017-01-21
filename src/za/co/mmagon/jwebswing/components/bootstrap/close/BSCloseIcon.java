@@ -57,6 +57,26 @@ public class BSCloseIcon extends Button
         getCloseIcon();
     }
 
+    /**
+     * Sets the close icon as a data dismissable
+     *
+     * @param dismiss
+     *
+     * @return
+     */
+    public BSCloseIcon setDataDismiss(String dismiss)
+    {
+        addAttribute("data-dismiss", dismiss);
+        return this;
+    }
+
+    /**
+     * Sets the label to be shown on screen readers
+     *
+     * @param label
+     *
+     * @return
+     */
     public BSCloseIcon setAriaLabel(String label)
     {
         addAttribute(GlobalAttributes.Aria_Label, label);

@@ -25,7 +25,8 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 public enum BSModalAttributes implements AttributeDefinitions
 {
     Visibility,
-    Role;
+    Role,
+    TabIndex;
 
     private BSModalAttributes()
     {
@@ -43,14 +44,15 @@ public enum BSModalAttributes implements AttributeDefinitions
     {
         return isKeyword;
     }
-    
+
     /**
      * Returns the attribute name replacing all underscores with dashes and all dollar signs to empty
-     * @return 
+     *
+     * @return
      */
     @Override
     public String toString()
     {
-        return name().toLowerCase().replace('_','-').replace("$", "");
+        return name().toLowerCase().replace('_', '-').replace("$", "");
     }
 }

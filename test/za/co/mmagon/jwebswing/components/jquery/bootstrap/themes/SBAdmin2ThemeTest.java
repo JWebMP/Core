@@ -64,7 +64,8 @@ public class SBAdmin2ThemeTest extends BaseTestClass
         Page p = getPage();
         Body b = p.getBody();
         b.add(new Comment("Stuff"));
-        Paragraph pa = (Paragraph) b.add("Paragraph Here");
+        Paragraph pa = new Paragraph("Paragraph Here");
+        b.add(pa);
         pa.setID("paragraph");
         pa.addTheme(theme);
 

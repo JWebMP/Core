@@ -1,4 +1,4 @@
 /**
- * Can be copy pasted to create a complete new component hierarchy
+ * The bootstrap 4 Navbar widget - http://v4-alpha.getbootstrap.com/components/navbar/
  */
 package za.co.mmagon.jwebswing.components.bootstrap.navbar;

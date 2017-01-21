@@ -17,6 +17,7 @@
 package za.co.mmagon.jwebswing.components.bootstrap.navbar;
 
 import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.components.bootstrap.navbar.toggler.BSNavBarTogglerSizes;
 
 /**
  *
@@ -35,10 +36,33 @@ public class BSNavBar extends Div<BSNavBarChildren, BSNavBarAttributes, BSNavBar
      * <p>
      * The navbar is a wrapper that positions branding, navigation, and other elements in a concise header. It’s easily extensible and, thanks to our Collapse plugin, can easily integrate responsive
      * behaviors.
+     *
+     * @param navBarTogglerSize
+     * @param colourSchemes
      */
-    public BSNavBar()
+    public BSNavBar(BSNavBarTogglerSizes navBarTogglerSize, BSNavBarColourSchemes... colourSchemes)
     {
         setTag("nav");
+        addClass("navbar");
+        addAttribute("role", "navigation");
+        addClass(navBarTogglerSize);
+        for (BSNavBarColourSchemes colourScheme : colourSchemes)
+        {
+            addClass(colourScheme);
+        }
+    }
+
+    /**
+     * Sets this navbar's positioning
+     *
+     * @param position
+     *
+     * @return
+     */
+    public BSNavBar setPositioning(BSNavBarPositioning position)
+    {
+        addClass(position);
+        return this;
     }
 
     @Override

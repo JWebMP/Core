@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.components.bootstrap.navbar;
 
-import za.co.mmagon.jwebswing.components.newcomponents.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 
 /**
@@ -43,14 +42,15 @@ public enum BSNavBarAttributes implements AttributeDefinitions
     {
         return isKeyword;
     }
-    
+
     /**
      * Returns the attribute name replacing all underscores with dashes and all dollar signs to empty
-     * @return 
+     *
+     * @return
      */
     @Override
     public String toString()
     {
-        return name().toLowerCase().replace('_','-').replace("$", "");
+        return name().toLowerCase().replace('_', '-').replace("$", "");
     }
 }

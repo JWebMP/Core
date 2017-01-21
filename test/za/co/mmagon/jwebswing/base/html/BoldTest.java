@@ -16,7 +16,7 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
@@ -39,9 +39,6 @@ public class BoldTest
         System.out.println(b.toString(true));
         assertEquals("<b>Bold Text</b>", b.toString(true));
 
-        b.add("text").setID("b");
-        System.out.println(b.toString(true));
-        assertEquals("<b>Bold Text<p id=\"b\">text</p></b>", b.toString(true));
     }
 
 }

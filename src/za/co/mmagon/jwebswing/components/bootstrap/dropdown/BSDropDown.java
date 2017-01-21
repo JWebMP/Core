@@ -166,6 +166,7 @@ public class BSDropDown extends Div<BSDropDownChildren, BSDropDownAttributes, BS
     {
         if (!isConfigured())
         {
+            getDropdownButton().addAttribute("role", "button");
             add((BSDropDownChildren) getDropdownButton());
             add((BSDropDownChildren) getDropdownMenu());
 

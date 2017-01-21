@@ -35,20 +35,77 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Sets ot gets the bulletcharts's animationDuration.
+     */
     private Integer animationDuration;// 	Function 	null
+    /**
+     * Sets ot gets the bulletcharts's bar size.
+     */
     private Integer barSize;// 	Array 	50%
+    /**
+     * Sets ot gets the bulletcharts's description.
+     */
     private String description;// 	String 	'Description'
+    /**
+     * Disables the bullet chart.
+     */
     private Boolean disabled;// 	Boolean 	false
+    /**
+     * Sets ot gets the bulletcharts's labelsFormat. Possible values:
+     * <p>
+     * "null"
+     * <p>
+     * "d"-decimal numbers
+     * <p>
+     * "f"- floating-point numbers
+     * <p>
+     * "n"- integer numbers
+     * <p>
+     * "c" - currency numbers
+     * <p>
+     * "p"- percentage numbers
+     */
     private String labelsFormat;// 	String 	null
+    /**
+     * Sets ot gets the bulletcharts's labelsFormat. Possible values:
+     * <p>
+     * "null"
+     * <p>
+     * "d"-decimal numbers
+     * <p>
+     * "f"- floating-point numbers
+     * <p>
+     * "n"- integer numbers
+     * <p>
+     * "c" - currency numbers
+     * <p>
+     * "p"- percentage numbers
+     */
     private JavascriptFunction labelsFormatFunction;/// 	Function 	null
+    /**
+     * Sets ot gets the bulletcharts's orientation. Possible values:
+     * <p>
+     * "horizontal"
+     * <p>
+     * "vertical"
+     */
     private Orientation orientation;// 	String 	"horizontal"
+
     private JQXBulletChartPointer pointer;// 	Object 	{ value: 65, label: "Value", size: "25%", color: "" }
+
     private Boolean rtl;// 	Boolean 	false
+
     private ArrayList<JQXBulletChartRange> ranges;// 	Array 	[{ startValue: 0, endValue: 50, color: "#000000", opacity: 0.7 }, { startValue: 50, endValue: 80, color: "#000000", opacity: 0.5 }, { startValue: 80, endValue: 100, color: "#000000", opacity: 0.3}]
+
     private Boolean showTooltip;// 	Boolean 	true
+
     private JQXBulletChartTarget target;// 	Object 	{ value: 85, label: "Target", size: 4, color: "" };
+
     private JQXBulletChartTicks ticks;// 	Object 	{ position: "far", interval: 20, size: 10 }
+
     private String title;// 	String 	'Title'
+
     private JavascriptFunction tooltipFormatFunction;// 	Function 	null
 
     public JQXBulletChartOptions()
@@ -57,8 +114,7 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
     }
 
     /**
-     * Sets ot gets the bulletcharts's animationDuration.
-     * Possible values
+     * Sets ot gets the bulletcharts's animationDuration. Possible values
      * <p>
      * number
      * <p>
@@ -74,8 +130,7 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
     }
 
     /**
-     * Sets ot gets the bulletcharts's animationDuration.
-     * Possible values
+     * Sets ot gets the bulletcharts's animationDuration. Possible values
      * <p>
      * number
      * <p>
@@ -151,8 +206,7 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
     }
 
     /**
-     * Sets ot gets the bulletcharts's labelsFormat.
-     * Possible values:
+     * Sets ot gets the bulletcharts's labelsFormat. Possible values:
      * <p>
      * "null"
      * <p>
@@ -174,8 +228,7 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
     }
 
     /**
-     * Sets ot gets the bulletcharts's labelsFormat.
-     * Possible values:
+     * Sets ot gets the bulletcharts's labelsFormat. Possible values:
      * <p>
      * "null"
      * <p>
@@ -217,8 +270,7 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
     }
 
     /**
-     * Sets ot gets the bulletcharts's orientation.
-     * Possible values:
+     * Sets ot gets the bulletcharts's orientation. Possible values:
      * <p>
      * "horizontal"
      * <p>
@@ -232,8 +284,7 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
     }
 
     /**
-     * Sets ot gets the bulletcharts's orientation.
-     * Possible values:
+     * Sets ot gets the bulletcharts's orientation. Possible values:
      * <p>
      * "horizontal"
      * <p>
@@ -291,8 +342,7 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
     }
 
     /**
-     * Sets ot gets the bulletcharts's range.
-     * Possible values
+     * Sets ot gets the bulletcharts's range. Possible values
      * <p>
      * 'startValue'-the value from which the range will start
      * <p>
@@ -314,8 +364,7 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
     }
 
     /**
-     * Sets ot gets the bulletcharts's range.
-     * Possible values
+     * Sets ot gets the bulletcharts's range. Possible values
      * <p>
      * 'startValue'-the value from which the range will start
      * <p>
@@ -377,8 +426,7 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
     }
 
     /**
-     * Sets ot gets the bulletcharts's ticks.
-     * Possible values for ticks.position
+     * Sets ot gets the bulletcharts's ticks. Possible values for ticks.position
      * <p>
      * "near"- positions the ticks at the top of the ranges bar if the orientation is set to "horizontal" and at the left if the orientation is set to "vertical";
      * <p>
@@ -400,8 +448,7 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
     }
 
     /**
-     * Sets ot gets the bulletcharts's ticks.
-     * Possible values for ticks.position
+     * Sets ot gets the bulletcharts's ticks. Possible values for ticks.position
      * <p>
      * "near"- positions the ticks at the top of the ranges bar if the orientation is set to "horizontal" and at the left if the orientation is set to "vertical";
      * <p>
