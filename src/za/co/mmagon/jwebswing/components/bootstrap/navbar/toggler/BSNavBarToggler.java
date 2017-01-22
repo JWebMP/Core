@@ -41,7 +41,6 @@ public class BSNavBarToggler extends Button implements BSNavBarChildren
     /**
      * Creates 2 new accessible objects for the nav bar
      *
-     * @param navBarTogglerSize
      * @param togglerAlignment
      */
     public BSNavBarToggler(BSNavBarTogglerAlignments togglerAlignment)

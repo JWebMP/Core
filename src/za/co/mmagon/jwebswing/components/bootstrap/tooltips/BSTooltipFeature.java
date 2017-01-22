@@ -1,8 +1,10 @@
-package za.co.mmagon.jwebswing.components.bootstrap.popovers;
+package za.co.mmagon.jwebswing.components.bootstrap.tooltips;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.Feature;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.components.bootstrap.popovers.BSPopOverFeatures;
+import za.co.mmagon.jwebswing.components.bootstrap.popovers.BSPopOverOptions;
 
 /**
  * Adds on a ToolTip, String for custom text using header theme, Div for custom contents
@@ -11,7 +13,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
  * @since 2013/01/16
  * @version 1.0
  */
-public class BSPopOverFeature extends Feature<BSPopOverOptions, BSPopOverFeature> implements BSPopOverFeatures, GlobalFeatures
+public class BSTooltipFeature extends Feature<BSPopOverOptions, BSTooltipFeature> implements BSPopOverFeatures, GlobalFeatures
 {
 
     private static final long serialVersionUID = 1L;
@@ -23,7 +25,7 @@ public class BSPopOverFeature extends Feature<BSPopOverOptions, BSPopOverFeature
      * <p>
      * @param forComponent
      */
-    public BSPopOverFeature(Component forComponent)
+    public BSTooltipFeature(Component forComponent)
     {
         super("BootstrapPopoverFeature");
         setComponent(forComponent);
@@ -47,10 +49,8 @@ public class BSPopOverFeature extends Feature<BSPopOverOptions, BSPopOverFeature
     @Override
     public void assignFunctionsToComponent()
     {
-        String requiredString = getNewLine()
-                + getComponent().getJQueryID() + "$('body').popover({" + getNewLine()
-                + "selector: '[rel=bs4popover]'" + getNewLine()
-                + "});" + getNewLine();
+        String requiredString = getComponent().getJQueryID()
+                + "tooltip(" + getOptions() + ");" + getNewLine();
         addQuery(requiredString);
     }
 

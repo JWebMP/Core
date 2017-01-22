@@ -32,7 +32,7 @@ import za.co.mmagon.jwebswing.components.bootstrap.BootstrapReferencePool;
  * Popovers rely on the 3rd party library Tether for positioning. You must include tether.min.js before bootstrap.js in order for popovers to work! Popovers require the tooltip plugin as a dependency.
  * Popovers are opt-in for performance reasons, so you must initialize them yourself. Zero-length title and content values will never show a popover. Specify container: 'body' to avoid rendering
  * problems in more complex components (like our input groups, button groups, etc). Triggering popovers on hidden elements will not work. Popovers for .disabled or disabled elements must be triggered
- * on a wrapper element. When triggered from hyperlinks that span multiple lines, popovers will be centered. Use white-space: nowrap; on your <a>s to avoid this behavior.
+ * on a wrapper element. When triggered from hyperlinks that span multiple lines, popovers will be centered. Use white-space: nowrap; on your as to avoid this behavior.
  * <p>
  * <p>
  * @author Marc Magon
@@ -72,7 +72,7 @@ public class BSPopOver extends Div<BSPopOverChildren, BSPopOverAttributes, BSPop
      * Triggering popovers on hidden elements will not work. Popovers for .disabled or disabled elements must be triggered on a wrapper element. When triggered from hyperlinks that span multiple
      * lines, popovers will be centered.
      * <p>
-     * Use white-space: nowrap; on your a>s to avoid this behavior.
+     * Use white-space: nowrap; on your as to avoid this behavior.
      * <p>
      * <p>
      * @param displayedComponent Shortcut for getOptions().setContent
@@ -87,7 +87,7 @@ public class BSPopOver extends Div<BSPopOverChildren, BSPopOverAttributes, BSPop
             displayedComponent.setTiny(true);
             getOptions().setContent(displayedComponent.toString(true));
         }
-
+        setBootstrapRequired(true);
     }
 
     /**
@@ -102,6 +102,26 @@ public class BSPopOver extends Div<BSPopOverChildren, BSPopOverAttributes, BSPop
             feature = new BSPopOverFeature(this);
         }
         return feature;
+    }
+
+    @Override
+    public void init()
+    {
+        if (!isInitialized())
+        {
+            getPage().getOptions().setBootstrapEnabled(true);
+        }
+        super.init();
+    }
+
+    @Override
+    public void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            getPage().getOptions().setBootstrapEnabled(true);
+        }
+        super.preConfigure();
     }
 
     /**

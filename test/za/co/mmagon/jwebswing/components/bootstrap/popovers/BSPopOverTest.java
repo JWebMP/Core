@@ -40,6 +40,7 @@ public class BSPopOverTest extends BaseTestClass
         System.out.println(popOver.renderJavascript());
 
         Page p = getInstance();
+        //p.getOptions().setBootstrapEnabled(true);
         p.getBody().add(popOver);
 
         System.out.println(p.toString(true));

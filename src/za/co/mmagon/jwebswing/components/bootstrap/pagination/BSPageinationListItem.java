@@ -62,7 +62,7 @@ public class BSPageinationListItem extends ListItem implements ListChildren
      * <p>
      * Pagination links are customizable for different circumstances. Use .disabled for links that appear un-clickable and .active to indicate the current page.
      * <p>
-     * While the .disabled class uses pointer-events: none to try to disable the link functionality of <a>s, that CSS property is not yet standardized and doesn’t account for keyboard navigation. As
+     * While the .disabled class uses pointer-events: none to try to disable the link functionality of as, that CSS property is not yet standardized and doesn’t account for keyboard navigation. As
      * such, you should always add tabindex="-1" on disabled links and use custom JavaScript to fully disable their functionality.
      *
      * @return

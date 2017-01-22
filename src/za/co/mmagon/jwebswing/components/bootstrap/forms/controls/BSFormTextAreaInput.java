@@ -44,7 +44,7 @@ public class BSFormTextAreaInput extends TextArea
     /**
      * Constructs a new select input with multiple
      *
-     * @param multiple
+     * @param linesToShow
      */
     public BSFormTextAreaInput(int linesToShow)
     {
