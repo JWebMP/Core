@@ -15,9 +15,21 @@ import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemeBlocks;
 public class Tab
 {
 
+    /**
+     * The header for a tab
+     */
     private ListItem tabHeader;
+    /**
+     * The child component for a tab
+     */
     private JQUITabsChildren tabDisplayComponent;
 
+    /**
+     * Any tab to be displayed
+     *
+     * @param tabHeader
+     * @param tabDisplayComponent
+     */
     public Tab(ListItem tabHeader, JQUITabsChildren tabDisplayComponent)
     {
         if (tabDisplayComponent != null)
@@ -30,21 +42,41 @@ public class Tab
         Component.class.cast(tabDisplayComponent).addClass(JQUIThemeBlocks.UI_Widget_Content);
     }
 
+    /**
+     * Returns the tab header
+     *
+     * @return
+     */
     public ListItem getTabHeader()
     {
         return tabHeader;
     }
 
+    /**
+     * Sets the tab header
+     *
+     * @param tabHeader
+     */
     public void setTabHeader(ListItem tabHeader)
     {
         this.tabHeader = tabHeader;
     }
 
+    /**
+     * Returns the children of the tab
+     *
+     * @return
+     */
     public JQUITabsChildren getTabDisplayComponent()
     {
         return tabDisplayComponent;
     }
 
+    /**
+     * Sets the children of the display
+     *
+     * @param tabDisplayComponent
+     */
     public void setTabDisplayComponent(JQUITabsChildren tabDisplayComponent)
     {
         this.tabDisplayComponent = tabDisplayComponent;

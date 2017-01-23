@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BSListGroupListItem.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.bootstrap.listgroup</a> &gt; <span class="el_source">BSListGroupListItem.java</span></div><h1>BSListGroupListItem.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2017 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.bootstrap.listgroup;
+
+import za.co.mmagon.jwebswing.base.html.ListItem;
+
+/**
+ * Basic example The most basic list group is an unordered list with list items and the proper classes. Build upon it with the options that follow, or with your own CSS as needed.
+ *
+ * @author GedMarc
+ * @since 19 Jan 2017
+ *
+ */
+public class BSListGroupListItem extends ListItem implements BSListGroupChildren
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Basic example The most basic list group is an unordered list with list items and the proper classes. Build upon it with the options that follow, or with your own CSS as needed.
+     */
+    public BSListGroupListItem()
+<span class="fc" id="L37">    {</span>
+<span class="fc" id="L38">        addClass(BSComponentListGroupOptions.List_Group_Item);</span>
+<span class="fc" id="L39">    }</span>
+
+    /**
+     * Basic example The most basic list group is an unordered list with list items and the proper classes. Build upon it with the options that follow, or with your own CSS as needed.
+     *
+     * @param text
+     */
+    public BSListGroupListItem(String text)
+    {
+<span class="fc" id="L48">        super(text);</span>
+<span class="fc" id="L49">        addClass(BSComponentListGroupOptions.List_Group_Item);</span>
+<span class="fc" id="L50">    }</span>
+
+    /**
+     * Active items Add .active to a .list-group-item to indicate the current active selection.
+     *
+     * @return
+     */
+    public BSListGroupListItem setActive()
+    {
+<span class="fc" id="L59">        addClass(BSComponentListGroupOptions.Active);</span>
+<span class="fc" id="L60">        return this;</span>
+    }
+
+    /**
+     * Disabled items Add .disabled to a .list-group-item to make it appear disabled. Note that some elements with .disabled will also require custom JavaScript to fully disable their click events
+     * (e.g., links).
+     *
+     * @return
+     */
+    public BSListGroupListItem setDisabled()
+    {
+<span class="nc" id="L71">        addClass(BSComponentListGroupOptions.Disabled);</span>
+<span class="nc" id="L72">        return this;</span>
+    }
+
+    /**
+     * Contextual classes Use contextual classes to style list items with a stateful background and color.
+     *
+     * @return
+     */
+    public BSListGroupListItem setSuccess()
+    {
+<span class="fc" id="L82">        addClass(BSComponentListGroupOptions.List_Group_Item_Success);</span>
+<span class="fc" id="L83">        return this;</span>
+    }
+
+    /**
+     * Contextual classes Use contextual classes to style list items with a stateful background and color.
+     *
+     * @return
+     */
+    public BSListGroupListItem setWarning()
+    {
+<span class="fc" id="L93">        addClass(BSComponentListGroupOptions.List_Group_Item_Warning);</span>
+<span class="fc" id="L94">        return this;</span>
+    }
+
+    /**
+     * Contextual classes Use contextual classes to style list items with a stateful background and color.
+     *
+     * @return
+     */
+    public BSListGroupListItem setInfo()
+    {
+<span class="fc" id="L104">        addClass(BSComponentListGroupOptions.List_Group_Item_Info);</span>
+<span class="fc" id="L105">        return this;</span>
+    }
+
+    /**
+     * Contextual classes Use contextual classes to style list items with a stateful background and color.
+     *
+     * @return
+     */
+    public BSListGroupListItem setDanger()
+    {
+<span class="fc" id="L115">        addClass(BSComponentListGroupOptions.List_Group_Item_Danger);</span>
+<span class="fc" id="L116">        return this;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

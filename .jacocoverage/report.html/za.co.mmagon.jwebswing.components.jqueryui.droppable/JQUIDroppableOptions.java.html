@@ -31,8 +31,7 @@ public class JQUIDroppableOptions extends JavaScriptPart
 {
 
     /**
-     * Default: &quot;*&quot;
-     * Controls which draggable elements are accepted by the droppable.
+     * Default: &quot;*&quot; Controls which draggable elements are accepted by the droppable.
      */
     private String accept;
     /**
@@ -45,8 +44,7 @@ public class JQUIDroppableOptions extends JavaScriptPart
     private Boolean activeClass;
     /**
      * By default, when an element is dropped on nested droppables, each droppable will receive the element. However, by setting this option to true, any parent droppables will not receive the
-     * element.
-     * The drop event will still bubble normally, but the event.target can be checked to see which droppable received the draggable element.
+     * element. The drop event will still bubble normally, but the event.target can be checked to see which droppable received the draggable element.
      */
     private Boolean greedy;
     /**
@@ -64,10 +62,13 @@ public class JQUIDroppableOptions extends JavaScriptPart
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * The default droppable options
+     */
     public JQUIDroppableOptions()
-<span class="nc" id="L68">    {</span>
-
-<span class="nc" id="L70">    }</span>
+<span class="nc" id="L69">    {</span>
+//Nothing needed here
+<span class="nc" id="L71">    }</span>
 
     /**
      * Sets the acceptable to a specific class
@@ -78,8 +79,8 @@ public class JQUIDroppableOptions extends JavaScriptPart
      */
     public &lt;E extends Component&gt; void setAccept(E componentClass, boolean classAllocation)
     {
-<span class="nc" id="L81">        accept = &quot;.&quot; + componentClass.getClass().getSimpleName();</span>
-<span class="nc" id="L82">    }</span>
+<span class="nc" id="L82">        accept = &quot;.&quot; + componentClass.getClass().getSimpleName();</span>
+<span class="nc" id="L83">    }</span>
 
     /**
      * Sets the component that must be draggable
@@ -88,8 +89,8 @@ public class JQUIDroppableOptions extends JavaScriptPart
      */
     public void setAccept(Component component)
     {
-<span class="nc" id="L91">        this.accept = component.getID(true);</span>
-<span class="nc" id="L92">    }</span>
+<span class="nc" id="L92">        this.accept = component.getID(true);</span>
+<span class="nc" id="L93">    }</span>
 
     /**
      *
@@ -97,7 +98,7 @@ public class JQUIDroppableOptions extends JavaScriptPart
      */
     public String getAccept()
     {
-<span class="nc" id="L100">        return accept;</span>
+<span class="nc" id="L101">        return accept;</span>
     }
 
     /**
@@ -106,7 +107,7 @@ public class JQUIDroppableOptions extends JavaScriptPart
      */
     public String getActiveClassType()
     {
-<span class="nc" id="L109">        return activeClassType;</span>
+<span class="nc" id="L110">        return activeClassType;</span>
     }
 
     /**
@@ -115,8 +116,8 @@ public class JQUIDroppableOptions extends JavaScriptPart
      */
     public void setActiveClassType(JQUIThemeBlocks activeClassType)
     {
-<span class="nc" id="L118">        this.activeClassType = activeClassType.toString();</span>
-<span class="nc" id="L119">    }</span>
+<span class="nc" id="L119">        this.activeClassType = activeClassType.toString();</span>
+<span class="nc" id="L120">    }</span>
 
     /**
      *
@@ -124,8 +125,8 @@ public class JQUIDroppableOptions extends JavaScriptPart
      */
     public void setActiveClassType(String activeClassType)
     {
-<span class="nc" id="L127">        this.activeClassType = activeClassType;</span>
-<span class="nc" id="L128">    }</span>
+<span class="nc" id="L128">        this.activeClassType = activeClassType;</span>
+<span class="nc" id="L129">    }</span>
 
     /**
      *
@@ -133,7 +134,7 @@ public class JQUIDroppableOptions extends JavaScriptPart
      */
     public boolean isActiveClass()
     {
-<span class="nc" id="L136">        return activeClass;</span>
+<span class="nc" id="L137">        return activeClass;</span>
     }
 
     /**
@@ -143,8 +144,8 @@ public class JQUIDroppableOptions extends JavaScriptPart
      */
     public void setActiveClass(boolean activeClass)
     {
-<span class="nc" id="L146">        this.activeClass = activeClass;</span>
-<span class="nc" id="L147">    }</span>
+<span class="nc" id="L147">        this.activeClass = activeClass;</span>
+<span class="nc" id="L148">    }</span>
 
     /**
      *
@@ -153,7 +154,7 @@ public class JQUIDroppableOptions extends JavaScriptPart
      */
     public boolean isGreedy()
     {
-<span class="nc" id="L156">        return greedy;</span>
+<span class="nc" id="L157">        return greedy;</span>
     }
 
     /**
@@ -163,8 +164,8 @@ public class JQUIDroppableOptions extends JavaScriptPart
      */
     public void setGreedy(boolean greedy)
     {
-<span class="nc" id="L166">        this.greedy = greedy;</span>
-<span class="nc" id="L167">    }</span>
+<span class="nc" id="L167">        this.greedy = greedy;</span>
+<span class="nc" id="L168">    }</span>
 
     /**
      *
@@ -172,7 +173,7 @@ public class JQUIDroppableOptions extends JavaScriptPart
      */
     public String getHoverClass()
     {
-<span class="nc" id="L175">        return hoverClass;</span>
+<span class="nc" id="L176">        return hoverClass;</span>
     }
 
     /**
@@ -181,8 +182,8 @@ public class JQUIDroppableOptions extends JavaScriptPart
      */
     public void setHoverClass(String hoverClass)
     {
-<span class="nc" id="L184">        this.hoverClass = hoverClass;</span>
-<span class="nc" id="L185">    }</span>
+<span class="nc" id="L185">        this.hoverClass = hoverClass;</span>
+<span class="nc" id="L186">    }</span>
 
     /**
      *
@@ -190,8 +191,8 @@ public class JQUIDroppableOptions extends JavaScriptPart
      */
     public void setHoverClass(JQUIThemeBlocks hoverClass)
     {
-<span class="nc" id="L193">        this.hoverClass = hoverClass.toString();</span>
-<span class="nc" id="L194">    }</span>
+<span class="nc" id="L194">        this.hoverClass = hoverClass.toString();</span>
+<span class="nc" id="L195">    }</span>
 
     /**
      *
@@ -199,7 +200,7 @@ public class JQUIDroppableOptions extends JavaScriptPart
      */
     public String getScope()
     {
-<span class="nc" id="L202">        return scope;</span>
+<span class="nc" id="L203">        return scope;</span>
     }
 
     /**
@@ -208,8 +209,8 @@ public class JQUIDroppableOptions extends JavaScriptPart
      */
     public void setScope(String scope)
     {
-<span class="nc" id="L211">        this.scope = scope;</span>
-<span class="nc" id="L212">    }</span>
+<span class="nc" id="L212">        this.scope = scope;</span>
+<span class="nc" id="L213">    }</span>
 
     /**
      *
@@ -217,7 +218,7 @@ public class JQUIDroppableOptions extends JavaScriptPart
      */
     public JQUIDroppableTolerances getTolerance()
     {
-<span class="nc" id="L220">        return tolerance;</span>
+<span class="nc" id="L221">        return tolerance;</span>
     }
 
     /**
@@ -226,13 +227,13 @@ public class JQUIDroppableOptions extends JavaScriptPart
      */
     public void setTolerance(JQUIDroppableTolerances tolerance)
     {
-<span class="nc" id="L229">        this.tolerance = tolerance;</span>
-<span class="nc" id="L230">    }</span>
+<span class="nc" id="L230">        this.tolerance = tolerance;</span>
+<span class="nc" id="L231">    }</span>
 
     @Override
     public JavascriptPartType getJavascriptType()
     {
-<span class="nc" id="L235">        return JavascriptPartType.Javascript;</span>
+<span class="nc" id="L236">        return JavascriptPartType.Javascript;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

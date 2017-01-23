@@ -28,7 +28,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.ListChildren;
  * @version 1.0
  *
  */
-public class BSCarouselIndicators extends List<ListChildren, NoAttributes, BSCarouselIndicators> implements BSCarouselChildren
+public class BSCarouselIndicators extends List<ListChildren, NoAttributes, BSCarouselEvents, BSCarouselIndicators> implements BSCarouselChildren
 {
 
     private static final long serialVersionUID = 1L;

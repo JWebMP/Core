@@ -14,7 +14,13 @@ public class JQUITabsFeature extends Feature<JQUITabOptions, JQUITabsFeature> im
 {
 
     private static final long serialVersionUID = 1L;
+    /**
+     * The actual tab
+     */
     private final JQUITab tab;
+    /**
+     * The options for this tab
+     */
     private JQUITabOptions options;
 
     /**

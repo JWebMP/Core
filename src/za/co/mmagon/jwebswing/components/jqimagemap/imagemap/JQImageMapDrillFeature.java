@@ -66,7 +66,7 @@ public class JQImageMapDrillFeature extends Feature<JavaScriptPart, JQImageMapDr
     @Override
     public void assignFunctionsToComponent()
     {
-        Position position = new Position(PositionLocationHorizontal.left, PositionLocationVertical.center, PositionLocationHorizontal.right, PositionLocationVertical.center, sourceArea);
+        Position position = new Position(PositionLocationHorizontal.Left, PositionLocationVertical.center, PositionLocationHorizontal.Right, PositionLocationVertical.center, sourceArea);
         addQuery("$('#" + sourceArea.getID() + "').click(function(){$('#" + mapToOpen.getID() + "').show().position(" + position.toString() + ");});");
         addQuery("$('#" + sourceArea.getID() + "').blur(function(){$('#" + mapToOpen.getID() + "').hide();});");
 

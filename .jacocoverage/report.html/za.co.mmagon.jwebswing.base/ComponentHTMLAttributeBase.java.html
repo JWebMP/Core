@@ -222,7 +222,7 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
 <span class="fc" id="L222">            String key = entry.getKey();</span>
 <span class="fc" id="L223">            String value = entry.getValue();</span>
 
-<span class="pc bpc" id="L225" title="2 of 4 branches missed.">            Pair p = new Pair(key, (value == null || value.isEmpty()));</span>
+<span class="pc bpc" id="L225" title="1 of 4 branches missed.">            Pair p = new Pair(key, (value == null || value.isEmpty()));</span>
 <span class="fc" id="L226">            attributeMap.put(p, value);</span>
 <span class="fc" id="L227">        }</span>
 
@@ -237,13 +237,13 @@ public class ComponentHTMLAttributeBase&lt;A extends Enum &amp; AttributeDefinit
 <span class="fc" id="L237">            String value = entry.getValue();</span>
 
 <span class="fc" id="L239">            sb.append(key.getLeft().toLowerCase());</span>
-<span class="pc bpc" id="L240" title="1 of 2 branches missed.">            if (!key.getRight())</span>
+<span class="fc bfc" id="L240" title="All 2 branches covered.">            if (!key.getRight())</span>
             {
 <span class="fc" id="L242">                sb.append(&quot;=\&quot;&quot;).append(value).append(&quot;\&quot; &quot;);</span>
             }
             else
             {
-<span class="nc" id="L246">                sb.append(&quot; &quot;);</span>
+<span class="fc" id="L246">                sb.append(&quot; &quot;);</span>
             }
 <span class="fc" id="L248">        }</span>
 <span class="fc bfc" id="L249" title="All 2 branches covered.">        if (!attributeMap.isEmpty())</span>

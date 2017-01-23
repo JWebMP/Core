@@ -27,7 +27,7 @@ import za.co.mmagon.jwebswing.base.html.List;
  * @since 29 Aug 2015
  * @version 1.0
  */
-public class BSBreadcrumbs extends List<BSBreadcrumbsChildren, BSBreadcrumbsAttributes, BSBreadcrumbs>
+public class BSBreadcrumbs extends List<BSBreadcrumbsChildren, BSBreadcrumbsAttributes, BSBreadcrumbsEvents, BSBreadcrumbs>
 {
 
     private static final long serialVersionUID = 1L;

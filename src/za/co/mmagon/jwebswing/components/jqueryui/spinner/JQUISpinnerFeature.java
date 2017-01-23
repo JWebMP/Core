@@ -32,8 +32,13 @@ public class JQUISpinnerFeature extends Feature<JQUISpinnerOptions, JQUISpinnerF
 {
 
     private static final long serialVersionUID = 1L;
-
+    /**
+     * The component for the spinner
+     */
     private final Component selectMenu;
+    /**
+     * The options for the spinner
+     */
     private JQUISpinnerOptions options;
 
     /**

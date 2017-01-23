@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.components.jqueryui.selectmenu;
 
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
 /**
  *
@@ -27,14 +26,26 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
  * &lt;p&gt;
  *
  */
-<span class="nc" id="L30">public class JQUISelectMenuIconsOptions extends JavaScriptPart</span>
+public class JQUISelectMenuIconsOptions extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Icons to use for the button, matching an icon defined by the jQuery UI CSS Framework.&lt;p&gt;
      * button (string, default: &quot;ui-icon-triangle-1-s&quot;)
      */
     private String button;
+
+    /**
+     * Sets the button
+     *
+     * @param button
+     */
+    public JQUISelectMenuIconsOptions(String button)
+<span class="nc" id="L46">    {</span>
+<span class="nc" id="L47">        this.button = button;</span>
+<span class="nc" id="L48">    }</span>
 
     /**
      * Icons to use for the button, matching an icon defined by the jQuery UI CSS Framework.&lt;p&gt;
@@ -44,7 +55,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public String getButton()
     {
-<span class="nc" id="L47">        return button;</span>
+<span class="nc" id="L58">        return button;</span>
     }
 
     /**
@@ -55,13 +66,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setButton(String button)
     {
-<span class="nc" id="L58">        this.button = button;</span>
-<span class="nc" id="L59">    }</span>
-
-    @Override
-    public JavascriptPartType getJavascriptType()
-    {
-<span class="nc" id="L64">        return JavascriptPartType.Javascript;</span>
-    }
+<span class="nc" id="L69">        this.button = button;</span>
+<span class="nc" id="L70">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

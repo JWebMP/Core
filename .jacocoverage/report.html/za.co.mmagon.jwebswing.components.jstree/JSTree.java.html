@@ -37,11 +37,11 @@ public class JSTree extends Div&lt;JSTreeChildren, JSTreeAttributes, JSTreeFeatu
 {
 
     private static final long serialVersionUID = 1L;
-    
+
     private JSTreeFeature feature;
-    
+
     private JSTreeData data;
-    
+
     /**
      * Constructs a new instance of the JS Tree
      */
@@ -64,22 +64,24 @@ public class JSTree extends Div&lt;JSTreeChildren, JSTreeAttributes, JSTreeFeatu
 
     /**
      * Returns the data, and any parameters if supplied
+     *
      * @param params
-     * @return 
+     *
+     * @return
      */
     @Override
     public JSTreeData getData(Map&lt;String, String[]&gt; params)
     {
-<span class="nc" id="L73">        onGetData(params);</span>
-<span class="nc" id="L74">        String[] ids = params.get(&quot;id&quot;);</span>
-<span class="nc" id="L75">        String id = ids[0];</span>
-<span class="nc bnc" id="L76" title="All 2 branches missed.">        if (id.equalsIgnoreCase(&quot;#&quot;))</span>
+<span class="nc" id="L75">        onGetData(params);</span>
+<span class="nc" id="L76">        String[] ids = params.get(&quot;id&quot;);</span>
+<span class="nc" id="L77">        String id = ids[0];</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        if (&quot;#&quot;.equalsIgnoreCase(id))</span>
         {
-<span class="nc" id="L78">            return data;</span>
+<span class="nc" id="L80">            return data;</span>
         }
         else
         {
-<span class="nc" id="L82">            return data.findNode(id).getChildNodes();</span>
+<span class="nc" id="L84">            return data.findNode(id).getChildNodes();</span>
             //go through the nodes looking for the next id item
         }
     }
@@ -92,26 +94,26 @@ public class JSTree extends Div&lt;JSTreeChildren, JSTreeAttributes, JSTreeFeatu
     protected void onGetData(Map&lt;String, String[]&gt; params)
     {
 
-<span class="nc" id="L95">    }</span>
+<span class="nc" id="L97">    }</span>
 
     public void setData(JSTreeData data)
     {
-<span class="fc" id="L99">        this.data = data;</span>
-<span class="fc" id="L100">    }</span>
+<span class="fc" id="L101">        this.data = data;</span>
+<span class="fc" id="L102">    }</span>
 
     public final JSTreeFeature getFeature()
     {
-<span class="fc bfc" id="L104" title="All 2 branches covered.">        if (feature == null)</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        if (feature == null)</span>
         {
-<span class="fc" id="L106">            feature = new JSTreeFeature(this);</span>
+<span class="fc" id="L108">            feature = new JSTreeFeature(this);</span>
         }
-<span class="fc" id="L108">        return feature;</span>
+<span class="fc" id="L110">        return feature;</span>
     }
 
     @Override
     public JSTreeOptions getOptions()
     {
-<span class="fc" id="L114">        return getFeature().getOptions();</span>
+<span class="fc" id="L116">        return getFeature().getOptions();</span>
     }
 
     /**
@@ -122,12 +124,12 @@ public class JSTree extends Div&lt;JSTreeChildren, JSTreeAttributes, JSTreeFeatu
      */
     public &lt;J extends Theme &amp; JSTreeTheme&gt; void setTheme(J theme)
     {
-<span class="fc" id="L125">        theme.getCssReferences().forEach(this::addCssReference);</span>
-<span class="pc bpc" id="L126" title="1 of 2 branches missed.">        if (!JSTreeDefaultTheme.class.isAssignableFrom(theme.getClass()))</span>
+<span class="fc" id="L127">        theme.getCssReferences().forEach(this::addCssReference);</span>
+<span class="pc bpc" id="L128" title="1 of 2 branches missed.">        if (!JSTreeDefaultTheme.class.isAssignableFrom(theme.getClass()))</span>
         {
-<span class="fc" id="L128">            getOptions().getCore().getThemes().setName(theme.getName());</span>
+<span class="fc" id="L130">            getOptions().getCore().getThemes().setName(theme.getName());</span>
         }
-<span class="fc" id="L130">    }</span>
+<span class="fc" id="L132">    }</span>
 
     /**
      * Returns a new event that refreshes the tree
@@ -136,7 +138,7 @@ public class JSTree extends Div&lt;JSTreeChildren, JSTreeAttributes, JSTreeFeatu
      */
     public JSTreeRefreshEvent getRefreshEvent()
     {
-<span class="nc" id="L139">        return new JSTreeRefreshEvent(this);</span>
+<span class="nc" id="L141">        return new JSTreeRefreshEvent(this);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

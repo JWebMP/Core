@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.components.jqueryui.progressbar;
 
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
 /**
  *
@@ -30,8 +29,19 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 public class JQUIProgressBarOptions extends JavaScriptPart
 {
 
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * if is disabled
+     */
     private Boolean disabled;
+    /**
+     * the max value
+     */
     private Integer max;
+    /**
+     * The actual value
+     */
     private Integer value;
 
     /**
@@ -39,7 +49,7 @@ public class JQUIProgressBarOptions extends JavaScriptPart
      */
     public JQUIProgressBarOptions()
     {
-
+        //Nothing needed here
     }
 
     /**
@@ -102,9 +112,4 @@ public class JQUIProgressBarOptions extends JavaScriptPart
         this.value = value;
     }
 
-    @Override
-    public JavascriptPartType getJavascriptType()
-    {
-        return JavascriptPartType.Javascript;
-    }
 }

@@ -16,14 +16,18 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets.window;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
 /**
  * This Class
  *
  * @author GedMarc
  * @since 25 Dec 2015
  */
-public class JQXWindowDragArea
+public class JQXWindowDragArea extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     private Integer x;
     private Integer y;
@@ -31,13 +35,53 @@ public class JQXWindowDragArea
     private Integer width;
 
     public JQXWindowDragArea()
-<span class="nc" id="L34">    {</span>
-<span class="nc" id="L35">    }</span>
+<span class="nc" id="L38">    {</span>
+<span class="nc" id="L39">    }</span>
+
+    public Integer getX()
+    {
+<span class="nc" id="L43">        return x;</span>
+    }
+
+    public void setX(Integer x)
+    {
+<span class="nc" id="L48">        this.x = x;</span>
+<span class="nc" id="L49">    }</span>
+
+    public Integer getY()
+    {
+<span class="nc" id="L53">        return y;</span>
+    }
+
+    public void setY(Integer y)
+    {
+<span class="nc" id="L58">        this.y = y;</span>
+<span class="nc" id="L59">    }</span>
+
+    public Integer getHeight()
+    {
+<span class="nc" id="L63">        return height;</span>
+    }
+
+    public void setHeight(Integer height)
+    {
+<span class="nc" id="L68">        this.height = height;</span>
+<span class="nc" id="L69">    }</span>
+
+    public Integer getWidth()
+    {
+<span class="nc" id="L73">        return width;</span>
+    }
+
+    public void setWidth(Integer width)
+    {
+<span class="nc" id="L78">        this.width = width;</span>
+<span class="nc" id="L79">    }</span>
 
     @Override
     public String toString()
     {
-<span class="nc" id="L40">        return super.toString();</span>
+<span class="nc" id="L84">        return super.toString();</span>
     }
 
 }

@@ -63,6 +63,8 @@ public class JQUIButtonIconOptions extends JavaScriptPart
      * Sets the primary icon
      * <p>
      * @param primaryIcon CSS Class Type
+     *
+     * @return
      */
     public JQUIButtonIconOptions setPrimaryIcon(String primaryIcon)
     {
@@ -85,6 +87,8 @@ public class JQUIButtonIconOptions extends JavaScriptPart
      * Sets the secondary icon CSS Class
      * <p>
      * @param secondaryIcon
+     *
+     * @return
      */
     public JQUIButtonIconOptions setSecondaryIcon(String secondaryIcon)
     {

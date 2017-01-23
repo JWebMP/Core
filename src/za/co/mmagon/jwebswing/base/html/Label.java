@@ -57,7 +57,13 @@ public final class Label extends Component<GlobalChildren, LabelAttributes, Glob
 {
 
     private static final long serialVersionUID = 1L;
+    /**
+     * The component this is for
+     */
     private Component forInputComponent;
+    /**
+     * The form this label is for
+     */
     private Form forFormComponent;
 
     /**
@@ -82,11 +88,7 @@ public final class Label extends Component<GlobalChildren, LabelAttributes, Glob
         super(ComponentTypes.Label);
         setForInputComponent(forInputComponent);
         setLabel(label);
-        if (forInputComponent != null)
-        {
-            addAttribute(LabelAttributes.For, label);
-        }
-
+        addAttribute(LabelAttributes.For, label);
     }
 
     /**

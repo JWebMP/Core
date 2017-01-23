@@ -27,9 +27,7 @@ public class BlankComponentFeature extends Feature&lt;BlankComponentOptions, Bla
     {
 <span class="nc" id="L28">        super(&quot;Blank&quot;);</span>
 <span class="nc" id="L29">        setComponent(forComponent);</span>
-        // getJavascriptReferences().add(JQXReferencePool.Core.getJavaScriptReference());
-        // getCssReferences().add(JQXReferencePool.Core.getCssReference());
-<span class="nc" id="L32">    }</span>
+<span class="nc" id="L30">    }</span>
 
     /**
      * Returns all the tooltip options
@@ -39,46 +37,46 @@ public class BlankComponentFeature extends Feature&lt;BlankComponentOptions, Bla
     @Override
     public BlankComponentOptions getOptions()
     {
-<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (options == null)</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        if (options == null)</span>
         {
-<span class="nc" id="L44">            options = new BlankComponentOptions();</span>
+<span class="nc" id="L42">            options = new BlankComponentOptions();</span>
         }
-<span class="nc" id="L46">        return options;</span>
+<span class="nc" id="L44">        return options;</span>
     }
 
     @Override
     public void assignFunctionsToComponent()
     {
-<span class="nc" id="L52">        String requiredString = getComponent().getJQueryID() + &quot;blank(&quot;;</span>
-<span class="nc" id="L53">        requiredString += getOptions().toString();</span>
-<span class="nc" id="L54">        requiredString += &quot;);&quot; + getNewLine();</span>
-<span class="nc" id="L55">        addQuery(requiredString);</span>
-<span class="nc" id="L56">    }</span>
+<span class="nc" id="L50">        String requiredString = getComponent().getJQueryID() + &quot;blank(&quot;;</span>
+<span class="nc" id="L51">        requiredString += getOptions().toString();</span>
+<span class="nc" id="L52">        requiredString += &quot;);&quot; + getNewLine();</span>
+<span class="nc" id="L53">        addQuery(requiredString);</span>
+<span class="nc" id="L54">    }</span>
 
     @Override
     public boolean equals(Object obj)
     {
-<span class="nc bnc" id="L61" title="All 2 branches missed.">        if (this == obj)</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if (this == obj)</span>
         {
-<span class="nc" id="L63">            return true;</span>
+<span class="nc" id="L61">            return true;</span>
         }
-<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (obj == null)</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        if (obj == null)</span>
         {
-<span class="nc" id="L67">            return false;</span>
+<span class="nc" id="L65">            return false;</span>
         }
-<span class="nc bnc" id="L69" title="All 2 branches missed.">        if (getClass() != obj.getClass())</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        if (getClass() != obj.getClass())</span>
         {
-<span class="nc" id="L71">            return false;</span>
+<span class="nc" id="L69">            return false;</span>
         }
-<span class="nc" id="L73">        return super.equals(obj);</span>
+<span class="nc" id="L71">        return super.equals(obj);</span>
     }
 
     @Override
     public int hashCode()
     {
-<span class="nc" id="L79">        int hash = 7;</span>
-<span class="nc" id="L80">        hash = 79 * hash + (this.getID().hashCode());</span>
-<span class="nc" id="L81">        return hash;</span>
+<span class="nc" id="L77">        int hash = 7;</span>
+<span class="nc" id="L78">        hash = 79 * hash + (this.getID().hashCode());</span>
+<span class="nc" id="L79">        return hash;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

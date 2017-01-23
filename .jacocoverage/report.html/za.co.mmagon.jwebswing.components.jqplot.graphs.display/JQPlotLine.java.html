@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqplot.graphs.display;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import za.co.mmagon.jwebswing.generics.XYObject;
@@ -37,8 +38,8 @@ public class JQPlotLine implements JQPlotSeriesItem
      * &lt;p&gt;
      */
     public JQPlotLine()
-<span class="nc" id="L40">    {</span>
-<span class="nc" id="L41">    }</span>
+<span class="nc" id="L41">    {</span>
+<span class="nc" id="L42">    }</span>
 
     /**
      * Constructs a new plot line from an ArrayList of Co-ordinates
@@ -46,9 +47,9 @@ public class JQPlotLine implements JQPlotSeriesItem
      * @param values
      */
     public JQPlotLine(ArrayList&lt;XYObject&gt; values)
-<span class="fc" id="L49">    {</span>
-<span class="fc" id="L50">        this.values = values;</span>
-<span class="fc" id="L51">    }</span>
+<span class="fc" id="L50">    {</span>
+<span class="fc" id="L51">        this.values = values;</span>
+<span class="fc" id="L52">    }</span>
 
     /**
      * *
@@ -57,9 +58,9 @@ public class JQPlotLine implements JQPlotSeriesItem
      * @param name
      */
     private JQPlotLine(String name)
-<span class="nc" id="L60">    {</span>
-<span class="nc" id="L61">        this.name = name;</span>
-<span class="nc" id="L62">    }</span>
+<span class="nc" id="L61">    {</span>
+<span class="nc" id="L62">        this.name = name;</span>
+<span class="nc" id="L63">    }</span>
 
     /**
      * Constructs a new plot line object with the given name and Y value
@@ -68,9 +69,9 @@ public class JQPlotLine implements JQPlotSeriesItem
      * @param y
      */
     public JQPlotLine(String x, double y)
-<span class="nc" id="L71">    {</span>
-<span class="nc" id="L72">        getValues().add(new XYObject(x, y));</span>
-<span class="nc" id="L73">    }</span>
+<span class="nc" id="L72">    {</span>
+<span class="nc" id="L73">        getValues().add(new XYObject(x, y));</span>
+<span class="nc" id="L74">    }</span>
 
     /**
      * Constructs a new line plot using the given value y value with an incremental x value
@@ -78,33 +79,35 @@ public class JQPlotLine implements JQPlotSeriesItem
      * @param y
      */
     public JQPlotLine(double y)
-<span class="fc" id="L81">    {</span>
-<span class="fc" id="L82">        getValues().add(new XYObject(getValues().size(), y));</span>
-<span class="fc" id="L83">    }</span>
+<span class="fc" id="L82">    {</span>
+<span class="fc" id="L83">        getValues().add(new XYObject(getValues().size(), y));</span>
+<span class="fc" id="L84">    }</span>
 
     /**
      * Adds a point to this line
      *
      * @param x The X Position
      * @param y The Y Position
+     *
      * @return
      */
     public boolean addPoint(String x, double y)
     {
-<span class="fc" id="L94">        getValues().add(new XYObject(x, y));</span>
-<span class="fc" id="L95">        return true;</span>
+<span class="fc" id="L96">        getValues().add(new XYObject(x, y));</span>
+<span class="fc" id="L97">        return true;</span>
     }
 
     /**
      * Adds an incremental Y point to the list
      *
      * @param y
+     *
      * @return
      */
     public boolean addPoint(double y)
     {
-<span class="fc" id="L106">        getValues().add(new XYObject(getValues().size(), y));</span>
-<span class="fc" id="L107">        return true;</span>
+<span class="fc" id="L109">        getValues().add(new XYObject(getValues().size(), y));</span>
+<span class="fc" id="L110">        return true;</span>
     }
 
     /**
@@ -114,7 +117,7 @@ public class JQPlotLine implements JQPlotSeriesItem
      */
     public String getName()
     {
-<span class="nc" id="L117">        return name;</span>
+<span class="nc" id="L120">        return name;</span>
     }
 
     /**
@@ -124,8 +127,8 @@ public class JQPlotLine implements JQPlotSeriesItem
      */
     public void setName(String name)
     {
-<span class="nc" id="L127">        this.name = name;</span>
-<span class="nc" id="L128">    }</span>
+<span class="nc" id="L130">        this.name = name;</span>
+<span class="nc" id="L131">    }</span>
 
     /**
      * Gets all the values for this line
@@ -134,11 +137,11 @@ public class JQPlotLine implements JQPlotSeriesItem
      */
     public final ArrayList&lt;XYObject&gt; getValues()
     {
-<span class="fc bfc" id="L137" title="All 2 branches covered.">        if (values == null)</span>
+<span class="fc bfc" id="L140" title="All 2 branches covered.">        if (values == null)</span>
         {
-<span class="fc" id="L139">            values = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L142">            values = new ArrayList&lt;&gt;();</span>
         }
-<span class="fc" id="L141">        return values;</span>
+<span class="fc" id="L144">        return values;</span>
     }
 
     /**
@@ -148,8 +151,8 @@ public class JQPlotLine implements JQPlotSeriesItem
      */
     public void setValues(ArrayList&lt;XYObject&gt; values)
     {
-<span class="nc" id="L151">        this.values = values;</span>
-<span class="nc" id="L152">    }</span>
+<span class="nc" id="L154">        this.values = values;</span>
+<span class="nc" id="L155">    }</span>
 
     /**
      * Returns the string representation of this line
@@ -159,57 +162,59 @@ public class JQPlotLine implements JQPlotSeriesItem
     @Override
     public String toString()
     {
-<span class="fc" id="L162">        StringBuilder lineStringBuilder = new StringBuilder(&quot;[&quot;);</span>
-<span class="fc" id="L163">        ArrayList&lt;XYObject&gt; vals = getValues();</span>
+<span class="fc" id="L165">        StringBuilder lineStringBuilder = new StringBuilder(&quot;[&quot;);</span>
+<span class="fc" id="L166">        ArrayList&lt;XYObject&gt; vals = getValues();</span>
 
-<span class="fc bfc" id="L165" title="All 2 branches covered.">        for (XYObject value : vals)</span>
+<span class="fc bfc" id="L168" title="All 2 branches covered.">        for (XYObject value : vals)</span>
         {
-<span class="fc" id="L167">            String lineString = value.toString();</span>
-<span class="fc" id="L168">            lineStringBuilder.append(lineString);</span>
-<span class="fc" id="L169">        }</span>
-<span class="fc" id="L170">        lineStringBuilder.append(&quot;]&quot;);</span>
+<span class="fc" id="L170">            String lineString = value.toString();</span>
+<span class="fc" id="L171">            lineStringBuilder.append(lineString);</span>
+<span class="fc" id="L172">        }</span>
+<span class="fc" id="L173">        lineStringBuilder.append(&quot;]&quot;);</span>
 
-<span class="fc" id="L172">        return getValues().toString();</span>
+<span class="fc" id="L175">        return getValues().toString();</span>
     }
 
     /**
      * Builds an array list from an object array
      *
      * @param array
+     *
      * @return
      */
-    public static ArrayList&lt;XYObject&gt; buildFromArray(Object... array)
+    public static ArrayList&lt;XYObject&gt; buildFromArray(Serializable... array)
     {
-<span class="nc" id="L183">        ArrayList&lt;XYObject&gt; output = new ArrayList&lt;&gt;();</span>
-<span class="nc bnc" id="L184" title="All 2 branches missed.">        for (int i = 0; i &lt; array.length; i = i + 2)</span>
+<span class="nc" id="L187">        ArrayList&lt;XYObject&gt; output = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">        for (int i = 0; i &lt; array.length; i = i + 2)</span>
         {
-<span class="nc" id="L186">            Object object = array[i];</span>
-<span class="nc" id="L187">            Object object2 = array[i + 1];</span>
-<span class="nc" id="L188">            XYObject xy = new XYObject(object, object2);</span>
-<span class="nc" id="L189">            output.add(xy);</span>
+<span class="nc" id="L190">            Serializable object = array[i];</span>
+<span class="nc" id="L191">            Serializable object2 = array[i + 1];</span>
+<span class="nc" id="L192">            XYObject xy = new XYObject(object, object2);</span>
+<span class="nc" id="L193">            output.add(xy);</span>
         }
-<span class="nc" id="L191">        return output;</span>
+<span class="nc" id="L195">        return output;</span>
     }
 
     /**
      * Builds an array list from an object array
      *
      * @param array
+     *
      * @return
      */
-    public static JQPlotLine buildLineFromArray(Object[] array)
+    public static JQPlotLine buildLineFromArray(Serializable[] array)
     {
 
-<span class="nc" id="L203">        ArrayList&lt;XYObject&gt; output = new ArrayList&lt;&gt;();</span>
-<span class="nc bnc" id="L204" title="All 2 branches missed.">        for (int i = 0; i &lt; array.length; i = i + 2)</span>
+<span class="nc" id="L208">        ArrayList&lt;XYObject&gt; output = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L209" title="All 2 branches missed.">        for (int i = 0; i &lt; array.length; i = i + 2)</span>
         {
-<span class="nc" id="L206">            Object object = array[i];</span>
-<span class="nc" id="L207">            Object object2 = array[i + 1];</span>
-<span class="nc" id="L208">            XYObject xy = new XYObject(object, object2);</span>
-<span class="nc" id="L209">            output.add(xy);</span>
+<span class="nc" id="L211">            Serializable object = array[i];</span>
+<span class="nc" id="L212">            Serializable object2 = array[i + 1];</span>
+<span class="nc" id="L213">            XYObject xy = new XYObject(object, object2);</span>
+<span class="nc" id="L214">            output.add(xy);</span>
         }
 
-<span class="nc" id="L212">        return new JQPlotLine(output);</span>
+<span class="nc" id="L217">        return new JQPlotLine(output);</span>
     }
 
     /**
@@ -217,20 +222,21 @@ public class JQPlotLine implements JQPlotSeriesItem
      *
      * @param array
      * @param delimeter
+     *
      * @return
      */
     public static ArrayList&lt;XYObject&gt; buildFromDelimiteredSrting(String array, String delimeter)
     {
-<span class="fc" id="L224">        ArrayList&lt;XYObject&gt; output = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L225">        StringTokenizer st = new StringTokenizer(array, delimeter);</span>
-<span class="fc bfc" id="L226" title="All 2 branches covered.">        while (st.hasMoreElements())</span>
+<span class="fc" id="L230">        ArrayList&lt;XYObject&gt; output = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L231">        StringTokenizer st = new StringTokenizer(array, delimeter);</span>
+<span class="fc bfc" id="L232" title="All 2 branches covered.">        while (st.hasMoreElements())</span>
         {
-<span class="fc" id="L228">            XYObject xy = new XYObject();</span>
-<span class="fc" id="L229">            xy.setX(st.nextToken());</span>
-<span class="fc" id="L230">            xy.setY(st.nextToken());</span>
-<span class="fc" id="L231">            output.add(xy);</span>
-<span class="fc" id="L232">        }</span>
-<span class="fc" id="L233">        return output;</span>
+<span class="fc" id="L234">            XYObject xy = new XYObject();</span>
+<span class="fc" id="L235">            xy.setX(st.nextToken());</span>
+<span class="fc" id="L236">            xy.setY(st.nextToken());</span>
+<span class="fc" id="L237">            output.add(xy);</span>
+<span class="fc" id="L238">        }</span>
+<span class="fc" id="L239">        return output;</span>
     }
 
 }

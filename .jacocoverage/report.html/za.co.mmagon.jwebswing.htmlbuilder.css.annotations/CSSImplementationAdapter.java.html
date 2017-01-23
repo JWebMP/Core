@@ -16,14 +16,15 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.annotations;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import java.lang.annotation.Annotation;
+import java.util.Map;
+import java.util.logging.Level;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSPropertiesFactory;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.logger.LogFactory;
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.core.*;
-import java.lang.annotation.*;
-import java.util.*;
-import java.util.logging.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.*;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
 
 /**
  *
@@ -44,7 +45,7 @@ public class CSSImplementationAdapter&lt;A extends Annotation, T extends CSSImpl
     /**
      * The default adapter
      */
-<span class="fc" id="L47">    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger(&quot;CSSImpAdapter&quot;);</span>
+<span class="fc" id="L48">    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger(&quot;CSSImpAdapter&quot;);</span>
     /**
      * The properties factory
      */
@@ -54,9 +55,9 @@ public class CSSImplementationAdapter&lt;A extends Annotation, T extends CSSImpl
      * For implementing generic methods on CSS
      */
     public CSSImplementationAdapter()
-<span class="fc" id="L57">    {</span>
+<span class="fc" id="L58">    {</span>
 
-<span class="fc" id="L59">    }</span>
+<span class="fc" id="L60">    }</span>
 
     /**
      * From annotation
@@ -68,26 +69,19 @@ public class CSSImplementationAdapter&lt;A extends Annotation, T extends CSSImpl
     @Override
     public T fromAnnotation(A annotation)
     {
-<span class="nc" id="L71">        T newInstance = null;</span>
+<span class="nc" id="L72">        T newInstance = null;</span>
         try
         {
 
-<span class="nc" id="L75">            Map&lt;StringBuilder, Object&gt; fieldMapping = getPropertyFactory().getCSS(annotation);</span>
-<span class="nc" id="L76">            newInstance = (T) getPropertyFactory().getImplementationObject(annotation, fieldMapping);</span>
-<span class="nc" id="L77">            return newInstance;</span>
+<span class="nc" id="L76">            Map&lt;StringBuilder, Object&gt; fieldMapping = getPropertyFactory().getCSS(annotation);</span>
+<span class="nc" id="L77">            newInstance = (T) getPropertyFactory().getImplementationObject(annotation, fieldMapping);</span>
+<span class="nc" id="L78">            return newInstance;</span>
         }
-<span class="nc" id="L79">        catch (Exception ex)</span>
+<span class="nc" id="L80">        catch (Exception ex)</span>
         {
-<span class="nc bnc" id="L81" title="All 2 branches missed.">            if (newInstance != null)</span>
-            {
-<span class="nc" id="L83">                log.log(Level.SEVERE,&quot;[Field Populator]-[Failed];[Object]-[&quot; + newInstance.getClass().getCanonicalName() + &quot;]&quot;, ex);</span>
-            }
-            else
-            {
-<span class="nc" id="L87">                log.log(Level.SEVERE,&quot;[Field Populator]-[Failed];[Object]-[&quot; + newInstance + &quot;]&quot;, ex);</span>
-            }
+<span class="nc" id="L82">            log.log(Level.SEVERE, &quot;[Field Populator]-[Failed];[Object]-[&quot; + newInstance + &quot;]&quot;, ex);</span>
         }
-<span class="nc" id="L90">        return null;</span>
+<span class="nc" id="L84">        return null;</span>
     }
 
     /**
@@ -97,11 +91,11 @@ public class CSSImplementationAdapter&lt;A extends Annotation, T extends CSSImpl
      */
     protected CSSPropertiesFactory getPropertyFactory()
     {
-<span class="nc bnc" id="L100" title="All 2 branches missed.">        if (propertyFactory == null)</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        if (propertyFactory == null)</span>
         {
-<span class="nc" id="L102">            propertyFactory = new CSSPropertiesFactory();</span>
+<span class="nc" id="L96">            propertyFactory = new CSSPropertiesFactory();</span>
         }
-<span class="nc" id="L104">        return propertyFactory;</span>
+<span class="nc" id="L98">        return propertyFactory;</span>
     }
 
     /**
@@ -111,20 +105,20 @@ public class CSSImplementationAdapter&lt;A extends Annotation, T extends CSSImpl
      */
     protected void setPropertyFactory(CSSPropertiesFactory propertyFactory)
     {
-<span class="nc" id="L114">        this.propertyFactory = propertyFactory;</span>
-<span class="nc" id="L115">    }</span>
+<span class="nc" id="L108">        this.propertyFactory = propertyFactory;</span>
+<span class="nc" id="L109">    }</span>
 
     @Override
     public String toString()
     {
         try
         {
-<span class="fc" id="L122">            return JavaScriptPart.getJsonObjectMapper().writeValueAsString(this);</span>
+<span class="fc" id="L116">            return JavaScriptPart.getJsonObjectMapper().writeValueAsString(this);</span>
         }
-<span class="nc" id="L124">        catch (JsonProcessingException e)</span>
+<span class="nc" id="L118">        catch (JsonProcessingException e)</span>
         {
-<span class="nc" id="L126">            log.log(Level.SEVERE, &quot;Error in IMPL Object&quot;, e);</span>
-<span class="nc" id="L127">            return &quot;&quot;;</span>
+<span class="nc" id="L120">            log.log(Level.SEVERE, &quot;Error in IMPL Object&quot;, e);</span>
+<span class="nc" id="L121">            return &quot;&quot;;</span>
         }
     }
 

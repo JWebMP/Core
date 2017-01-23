@@ -32,5 +32,11 @@ public enum SortableTolerance
     /**
      * The mouse pointer overlaps the other item.
      */
-    Pointer
+    Pointer;
+
+    @Override
+    public String toString()
+    {
+        return super.toString().toLowerCase();
+    }
 }

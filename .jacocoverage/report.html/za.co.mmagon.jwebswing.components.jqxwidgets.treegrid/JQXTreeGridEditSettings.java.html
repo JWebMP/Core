@@ -16,14 +16,18 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets.treegrid;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
 /**
  * This Class
  *
  * @author GedMarc
  * @since 25 Dec 2015
  */
-public class JQXTreeGridEditSettings
+public class JQXTreeGridEditSettings extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     private Boolean saveOnPageChange;
     private Boolean saveOnBlur;
@@ -35,93 +39,93 @@ public class JQXTreeGridEditSettings
     private Boolean editOnF2;
 
     public JQXTreeGridEditSettings()
-<span class="nc" id="L38">    {</span>
-<span class="nc" id="L39">    }</span>
+<span class="nc" id="L42">    {</span>
+<span class="nc" id="L43">    }</span>
 
     public Boolean getSaveOnPageChange()
     {
-<span class="nc" id="L43">        return saveOnPageChange;</span>
+<span class="nc" id="L47">        return saveOnPageChange;</span>
     }
 
     public void setSaveOnPageChange(Boolean saveOnPageChange)
     {
-<span class="nc" id="L48">        this.saveOnPageChange = saveOnPageChange;</span>
-<span class="nc" id="L49">    }</span>
+<span class="nc" id="L52">        this.saveOnPageChange = saveOnPageChange;</span>
+<span class="nc" id="L53">    }</span>
 
     public Boolean getSaveOnBlur()
     {
-<span class="nc" id="L53">        return saveOnBlur;</span>
+<span class="nc" id="L57">        return saveOnBlur;</span>
     }
 
     public void setSaveOnBlur(Boolean saveOnBlur)
     {
-<span class="nc" id="L58">        this.saveOnBlur = saveOnBlur;</span>
-<span class="nc" id="L59">    }</span>
+<span class="nc" id="L62">        this.saveOnBlur = saveOnBlur;</span>
+<span class="nc" id="L63">    }</span>
 
     public Boolean getSaveOnSelectionChange()
     {
-<span class="nc" id="L63">        return saveOnSelectionChange;</span>
+<span class="nc" id="L67">        return saveOnSelectionChange;</span>
     }
 
     public void setSaveOnSelectionChange(Boolean saveOnSelectionChange)
     {
-<span class="nc" id="L68">        this.saveOnSelectionChange = saveOnSelectionChange;</span>
-<span class="nc" id="L69">    }</span>
+<span class="nc" id="L72">        this.saveOnSelectionChange = saveOnSelectionChange;</span>
+<span class="nc" id="L73">    }</span>
 
     public Boolean getCancelOnEsc()
     {
-<span class="nc" id="L73">        return cancelOnEsc;</span>
+<span class="nc" id="L77">        return cancelOnEsc;</span>
     }
 
     public void setCancelOnEsc(Boolean cancelOnEsc)
     {
-<span class="nc" id="L78">        this.cancelOnEsc = cancelOnEsc;</span>
-<span class="nc" id="L79">    }</span>
+<span class="nc" id="L82">        this.cancelOnEsc = cancelOnEsc;</span>
+<span class="nc" id="L83">    }</span>
 
     public Boolean getSaveOnEnter()
     {
-<span class="nc" id="L83">        return saveOnEnter;</span>
+<span class="nc" id="L87">        return saveOnEnter;</span>
     }
 
     public void setSaveOnEnter(Boolean saveOnEnter)
     {
-<span class="nc" id="L88">        this.saveOnEnter = saveOnEnter;</span>
-<span class="nc" id="L89">    }</span>
+<span class="nc" id="L92">        this.saveOnEnter = saveOnEnter;</span>
+<span class="nc" id="L93">    }</span>
 
     public Boolean getEditSingleCell()
     {
-<span class="nc" id="L93">        return editSingleCell;</span>
+<span class="nc" id="L97">        return editSingleCell;</span>
     }
 
     public void setEditSingleCell(Boolean editSingleCell)
     {
-<span class="nc" id="L98">        this.editSingleCell = editSingleCell;</span>
-<span class="nc" id="L99">    }</span>
+<span class="nc" id="L102">        this.editSingleCell = editSingleCell;</span>
+<span class="nc" id="L103">    }</span>
 
     public Boolean getEditOnDoubleClick()
     {
-<span class="nc" id="L103">        return editOnDoubleClick;</span>
+<span class="nc" id="L107">        return editOnDoubleClick;</span>
     }
 
     public void setEditOnDoubleClick(Boolean editOnDoubleClick)
     {
-<span class="nc" id="L108">        this.editOnDoubleClick = editOnDoubleClick;</span>
-<span class="nc" id="L109">    }</span>
+<span class="nc" id="L112">        this.editOnDoubleClick = editOnDoubleClick;</span>
+<span class="nc" id="L113">    }</span>
 
     public Boolean getEditOnF2()
     {
-<span class="nc" id="L113">        return editOnF2;</span>
+<span class="nc" id="L117">        return editOnF2;</span>
     }
 
     public void setEditOnF2(Boolean editOnF2)
     {
-<span class="nc" id="L118">        this.editOnF2 = editOnF2;</span>
-<span class="nc" id="L119">    }</span>
+<span class="nc" id="L122">        this.editOnF2 = editOnF2;</span>
+<span class="nc" id="L123">    }</span>
 
     @Override
     public String toString()
     {
-<span class="nc" id="L124">        return super.toString();</span>
+<span class="nc" id="L128">        return super.toString();</span>
     }
 
 }

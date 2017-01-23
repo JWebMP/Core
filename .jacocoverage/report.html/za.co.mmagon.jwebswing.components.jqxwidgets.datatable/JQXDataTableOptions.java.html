@@ -17,9 +17,7 @@
 package za.co.mmagon.jwebswing.components.jqxwidgets.datatable;
 
 import java.util.ArrayList;
-import za.co.mmagon.jwebswing.components.jqxwidgets.JQXDefaultJavaScriptPart;
-import za.co.mmagon.jwebswing.components.jqxwidgets.JQXLocalization;
-import za.co.mmagon.jwebswing.components.jqxwidgets.JQXPagerPositions;
+import za.co.mmagon.jwebswing.components.jqxwidgets.*;
 
 /**
  * All the options for the JQX Data Library library
@@ -32,6 +30,8 @@ import za.co.mmagon.jwebswing.components.jqxwidgets.JQXPagerPositions;
  */
 public class JQXDataTableOptions extends JQXDefaultJavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     private Boolean altRows;// 	Boolean 	false
     private Boolean autoRowHeight;// 	Boolean 	true

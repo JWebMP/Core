@@ -78,286 +78,241 @@ import com.fasterxml.jackson.annotation.JsonValue;
      */
 <span class="fc" id="L79">    Text_Justify,</span>
     /**
+     * Indicates text that is muted
+     */
+<span class="fc" id="L83">    Text_Muted,</span>
+    /**
      * Indicates no wrap text
      */
-<span class="fc" id="L83">    Text_NoWrap,</span>
+<span class="fc" id="L87">    Text_NoWrap,</span>
     /**
      * Indicates lowercased text: LOWERCASED TEXT
      */
-<span class="fc" id="L87">    Text_Lowercase,</span>
+<span class="fc" id="L91">    Text_Lowercase,</span>
     /**
      * Indicates uppercased text: uppercased text
      */
-<span class="fc" id="L91">    Text_Uppercase,</span>
+<span class="fc" id="L95">    Text_Uppercase,</span>
     /**
      * Indicates capitalized text: capitalized text
      */
-<span class="fc" id="L95">    Text_Capitalize,</span>
+<span class="fc" id="L99">    Text_Capitalize,</span>
     /**
      * Displays the text inside the &amp;lt;abbr&amp;gt; element in a slightly smaller font size
      */
-<span class="fc" id="L99">    Initialism,</span>
+<span class="fc" id="L103">    Initialise,</span>
     /**
      * The .invisible class can be used to toggle only the visibility of an element, meaning its display is not modified and the element can still affect the flow of the document. Displays the item as
      */
-<span class="fc" id="L103">    Invisible,</span>
+<span class="fc" id="L107">    Invisible,</span>
     /**
      * Indicates a blockquote with right_aligned content
      */
-<span class="fc" id="L107">    Blockquote_reverse,</span>
+<span class="fc" id="L111">    Blockquote_reverse,</span>
     /**
      * Removes the default list_style and left margin on list items (works on both &amp;lt;ul&amp;gt; and &amp;lt;ol&amp;gt;) This class only applies to immediate children list items (to remove the default list_style
      * from any nested lists, apply this class to any nested lists as well)
      */
-<span class="fc" id="L112">    List_Unstyled,</span>
+<span class="fc" id="L116">    List_Unstyled,</span>
     /*
      * Places all list items on a single line
      */
-<span class="fc" id="L116">    List_Inline,</span>
+<span class="fc" id="L120">    List_Inline,</span>
     /**
      * Lines up the terms and descriptions in the &amp;lt;dl&amp;gt; element side_by_side Starts off like default &amp;lt;dl&amp;gt;s, but when the browser window expands, it will line up side_by_side
      */
-<span class="fc" id="L120">    Dl_Horizontal,</span>
-    
+<span class="fc" id="L124">    Dl_Horizontal,</span>
     /**
      * Makes the button appear pressed
      */
-<span class="fc" id="L125">    Active,</span>
+<span class="fc" id="L128">    Active,</span>
     /**
      * Makes the button disabled
      */
-<span class="fc" id="L129">    Disabled,</span>
-    /**
-     * Makes a &amp;lt;form&amp;gt; left_aligned with inline_block controls (This only applies to forms within viewports that are at least 768px wide)
-     */
-<span class="fc" id="L133">    Form_Inline,</span>
-    /**
-     * Aligns labels and groups of form controls in a horizontal layout
-     */
-<span class="fc" id="L137">    Form_Horizontal,</span>
+<span class="fc" id="L132">    Disabled,</span>
     /**
      * Floats an element to the left
      */
-<span class="fc" id="L141">    Pull_Left,</span>
+<span class="fc" id="L136">    Pull_Left,</span>
     /**
      * Floats an element to the right
      */
-<span class="fc" id="L145">    Pull_Right,</span>
+<span class="fc" id="L140">    Pull_Right,</span>
     /**
      * Sets an element to display:block with margin_right:auto and margin_left:auto
      */
-<span class="fc" id="L149">    Center_Block,</span>
+<span class="fc" id="L144">    Center_Block,</span>
     /**
      * Forces an element to be shown
      */
-<span class="fc" id="L153">    Show,</span>
+<span class="fc" id="L148">    Show,</span>
     /**
      * Forces an element to be hidden
      */
-<span class="fc" id="L157">    Hidden,</span>
+<span class="fc" id="L152">    Hidden,</span>
     /**
      * Helps replace an element's text content with a background image
      */
-<span class="fc" id="L161">    Text_Hide,</span>
+<span class="fc" id="L156">    Text_Hide,</span>
     /**
      * *
      * Indicates dropdown functionality (will reverse automatically in dropup menus)
      */
-<span class="fc" id="L166">    Caret,</span>
+<span class="fc" id="L161">    Caret,</span>
     /**
      * Adds rounded corners to an image (not available in IE8)
      */
-<span class="fc" id="L170">    Img_Rounded,</span>
+<span class="fc" id="L165">    Img_Rounded,</span>
     /**
      * Shapes the image to a circle (not available in IE8)
      */
-<span class="fc" id="L174">    Img_Circle,</span>
+<span class="fc" id="L169">    Img_Circle,</span>
     /**
      * Shapes the image to a thumbnail
      */
-<span class="fc" id="L178">    Img_Thumbnail,</span>
+<span class="fc" id="L173">    Img_Thumbnail,</span>
     /**
      * Makes an image responsive (will scale nicely to the parent element)
      */
-<span class="fc" id="L182">    Img_Responsive,</span>
+<span class="fc" id="L177">    Img_Responsive,</span>
     /**
      * Adds basic styling (light padding and only horizontal dividers) to any &amp;lt;table&amp;gt;
      */
-<span class="fc" id="L186">    Table,</span>
+<span class="fc" id="L181">    Table,</span>
     /**
      * Adds zebra_striping to any table row within &amp;lt;tbody&amp;gt; (not available in IE8)
      */
-<span class="fc" id="L190">    Table_Striped,</span>
+<span class="fc" id="L185">    Table_Striped,</span>
     /**
      * Adds border on all sides of the table and cells
      */
-<span class="fc" id="L194">    Table_Bordered,</span>
+<span class="fc" id="L189">    Table_Bordered,</span>
     /**
      * Enables a hover state on table rows within a &amp;lt;tbody&amp;gt;
      */
-<span class="fc" id="L198">    Table_Hover,</span>
+<span class="fc" id="L193">    Table_Hover,</span>
     /**
      * Makes table more compact by cutting cell padding in half
      */
-<span class="fc" id="L202">    Table_Condensed,</span>
+<span class="fc" id="L197">    Table_Condensed,</span>
     /**
      * Indicates a successful or positive action
      */
-<span class="fc" id="L206">    Success,</span>
+<span class="fc" id="L201">    Success,</span>
     /**
      * Indicates a neutral informative change or action
      */
-<span class="fc" id="L210">    Info,</span>
+<span class="fc" id="L205">    Info,</span>
     /**
      * Indicates a warning that might need attention
      */
-<span class="fc" id="L214">    Warning,</span>
+<span class="fc" id="L209">    Warning,</span>
     /**
      * Indicates a dangerous or potentially negative action
      */
-<span class="fc" id="L218">    Danger,</span>
+<span class="fc" id="L213">    Danger,</span>
     /**
      * Indicates a dropdown menu
      */
-<span class="fc" id="L222">    Dropdown,</span>
+<span class="fc" id="L217">    Dropdown,</span>
     /**
      * Builds the dropdown menu
      */
-<span class="fc" id="L226">    Dropdown_Menu,</span>
+<span class="fc" id="L221">    Dropdown_Menu,</span>
     /**
      * Right_aligns a dropdown menu
      */
-<span class="fc" id="L230">    Dropdown_Menu_Right,</span>
+<span class="fc" id="L225">    Dropdown_Menu_Right,</span>
     /**
      * Adds a header inside the dropdown menu
      */
-<span class="fc" id="L234">    Dropdown_Header,</span>
+<span class="fc" id="L229">    Dropdown_Header,</span>
     /**
      * Indicates a dropup menu
      */
-<span class="fc" id="L238">    DropUp,</span>
+<span class="fc" id="L233">    DropUp,</span>
     /**
      * Separates items inside the dropdown menu with a horizontal line
      */
-<span class="fc" id="L242">    Divider,</span>
+<span class="fc" id="L237">    Divider,</span>
     /**
      * Creates navigation tabs
      */
-<span class="fc" id="L246">    Nav$Nav_Tabs,</span>
+<span class="fc" id="L241">    Nav$Nav_Tabs,</span>
     /**
      * Creates navigation pills
      */
-<span class="fc" id="L250">    Nav$Nav_Pills,</span>
+<span class="fc" id="L245">    Nav$Nav_Pills,</span>
     /**
      * *
      * Creates vertical navigation pills
      */
-<span class="fc" id="L255">    Nav$Nav_Pills$Nav_Stacked,</span>
+<span class="fc" id="L250">    Nav$Nav_Pills$Nav_Stacked,</span>
     /**
      * Makes navigation tabs/pills equal widths of their parent, at screens wider than 768px On smaller screens, the nav tabs/pills are stacked
      */
-<span class="fc" id="L259">    Nav_Justified,</span>
+<span class="fc" id="L254">    Nav_Justified,</span>
     /**
      * Together with tab_pane and data_toggle=&quot;tab&quot; (data_toggle=&quot;pill&quot; for pills), it makes the tab/pill toggable
      */
-<span class="fc" id="L263">    Tab_Content,</span>
+<span class="fc" id="L258">    Tab_Content,</span>
     /**
      * Together with tab_content and data_toggle=&quot;tab&quot; (data_toggle=&quot;pill&quot; for pills), it makes the tab/pill toggable
      */
-<span class="fc" id="L267">    Tab_Pane,</span>
+<span class="fc" id="L262">    Tab_Pane,</span>
     /**
      * *
      * Provides simple pagination links (Previous/Next)
      */
-<span class="fc" id="L272">    Pager,</span>
+<span class="fc" id="L267">    Pager,</span>
     /**
      * Aligns the pager previous button to the left
      */
-<span class="fc" id="L276">    Previous,</span>
+<span class="fc" id="L271">    Previous,</span>
     /**
      * Aligns the pager next button to the right
      */
-<span class="fc" id="L280">    Next,</span>
-    /**
-     * Provides pagination links
-     */
-<span class="fc" id="L284">    Pagination,</span>
-    /**
-     * Used together with the pagination class to provide larger pagination links
-     */
-<span class="fc" id="L288">    Pagination_lg,</span>
-    /*
-     * Used together with the pagination class to provide smaller pagination links
-     */
-<span class="fc" id="L292">    Pagination_sm,</span>
+<span class="fc" id="L275">    Next,</span>
     /**
      * *
      * Indicates a default grey label
      */
-<span class="fc" id="L297">    Label$Label_Default,</span>
+<span class="fc" id="L280">    Label$Label_Default,</span>
     /**
      * Indicates a blue label of type &quot;primary&quot;
      */
-<span class="fc" id="L301">    Label$Label_Primary,</span>
+<span class="fc" id="L284">    Label$Label_Primary,</span>
     /**
      * Indicates a green label of type &quot;success&quot;
      */
-<span class="fc" id="L305">    Label$Label_Success,</span>
+<span class="fc" id="L288">    Label$Label_Success,</span>
     /**
      * Indicates a light blue label of type &quot;info&quot;
      */
-<span class="fc" id="L309">    Label$Label_Info,</span>
+<span class="fc" id="L292">    Label$Label_Info,</span>
     /**
      * Indicates a yellow label of type &quot;warning&quot;
      */
-<span class="fc" id="L313">    Label$Label_Warning,</span>
+<span class="fc" id="L296">    Label$Label_Warning,</span>
     /**
      * Indicates a red label of type &quot;danger&quot;
      */
-<span class="fc" id="L317">    Label$Label_Danger,</span>
-    /**
-     * Indicates new or unread items
-     */
-<span class="fc" id="L321">    Badge,</span>
-    /**
-     * Indicates a big box for calling extra attention to featured content or information
-     */
-<span class="fc" id="L325">    Jumbotron,</span>
+<span class="fc" id="L300">    Label$Label_Danger,</span>
     /**
      * Huge Text
      */
-<span class="fc" id="L329">    Huge,</span>
-    /**
-     * Represents a Modal
-     */
-<span class="fc" id="L333">    Modal,</span>
+<span class="fc" id="L304">    Huge,</span>
     /**
      * Instructs to fade in
      */
-<span class="fc" id="L337">    Fade,</span>
-    /**
-     * The content of the modal
-     */
-<span class="fc" id="L341">    Modal_Content,</span>
-    /**
-     * The header of the modal
-     */
-<span class="fc" id="L345">    Modal_Header,</span>
-    /**
-     * The body of the modal
-     */
-<span class="fc" id="L349">    Modal_Body,</span>
-    /**
-     * The footer of the modal
-     */
-<span class="fc" id="L353">    Modal_Footer,;</span>
+<span class="fc" id="L308">    Fade,;</span>
 
     @JsonValue
     @Override
     public String toString()
     {
-<span class="fc" id="L359">        String name = name().toLowerCase().replaceAll(&quot;\\$&quot;, &quot; &quot;).replaceAll(&quot;_&quot;, &quot;-&quot;);</span>
-<span class="fc" id="L360">        return name;</span>
+<span class="fc" id="L314">        String name = name().toLowerCase().replaceAll(&quot;\\$&quot;, &quot; &quot;).replaceAll(&quot;_&quot;, &quot;-&quot;);</span>
+<span class="fc" id="L315">        return name;</span>
     }
 
 }

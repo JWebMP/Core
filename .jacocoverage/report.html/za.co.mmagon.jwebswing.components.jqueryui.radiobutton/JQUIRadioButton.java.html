@@ -44,35 +44,38 @@ public class JQUIRadioButton extends InputRadioType implements JQUIRadioButtonGr
 
     /**
      *
-     * @param name A group name for the radio button
+     * @param name        A group name for the radio button
+     * @param buttonGroup
      */
     public JQUIRadioButton(String name, Component buttonGroup)
-<span class="nc" id="L50">    {</span>
-<span class="nc" id="L51">        this.buttonGroup = buttonGroup;</span>
-<span class="nc" id="L52">        radioButtonLabel = new Label(name);</span>
-<span class="nc" id="L53">        radioButtonLabel.setTiny(true);</span>
-<span class="nc" id="L54">        radioButtonLabel.setForInputComponent(this);</span>
-<span class="nc" id="L55">        addAttribute(GlobalAttributes.Name, buttonGroup.getID());</span>
-<span class="nc" id="L56">    }</span>
+<span class="nc" id="L51">    {</span>
+<span class="nc" id="L52">        this.buttonGroup = buttonGroup;</span>
+<span class="nc" id="L53">        radioButtonLabel = new Label(name);</span>
+<span class="nc" id="L54">        radioButtonLabel.setTiny(true);</span>
+<span class="nc" id="L55">        radioButtonLabel.setForInputComponent(this);</span>
+<span class="nc" id="L56">        addAttribute(GlobalAttributes.Name, buttonGroup.getID());</span>
+<span class="nc" id="L57">    }</span>
 
     /**
      * Sets the name of the radio button
      * &lt;p&gt;
      * @param name
+     *
+     * @return
      */
     @Override
     public JQUIRadioButton setName(String name)
     {
-<span class="nc" id="L66">        radioButtonLabel.setLabel(name);</span>
-<span class="nc" id="L67">        return this;</span>
+<span class="nc" id="L69">        radioButtonLabel.setLabel(name);</span>
+<span class="nc" id="L70">        return this;</span>
     }
 
     @Override
     protected StringBuilder renderAfterChildren()
     {
-<span class="nc" id="L73">        StringBuilder sb = new StringBuilder();</span>
-<span class="nc" id="L74">        sb.append(radioButtonLabel.toString(true));</span>
-<span class="nc" id="L75">        return sb;</span>
+<span class="nc" id="L76">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L77">        sb.append(radioButtonLabel.toString(true));</span>
+<span class="nc" id="L78">        return sb;</span>
     }
 
 }

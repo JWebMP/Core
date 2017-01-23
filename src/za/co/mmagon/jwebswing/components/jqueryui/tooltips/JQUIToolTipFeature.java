@@ -18,8 +18,13 @@ public class JQUIToolTipFeature extends Feature<JQUITooltipOptions, JQUIToolTipF
 {
 
     private static final long serialVersionUID = 1L;
-
+    /**
+     * The component this feature is for
+     */
     private final Component forComponent;
+    /**
+     * The options for this component
+     */
     private JQUITooltipOptions options;
 
     /**

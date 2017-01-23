@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
-
 package za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2;
 
 import java.util.Date;
@@ -22,12 +21,13 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
  * A standard message display format from SB2 Admin Theme
+ *
  * @author GedMarc
  * @since Oct 4, 2016
  * @version 1.0
- * 
+ *
  */
-public class SB2DropDownAlert extends JavaScriptPart&lt;SB2DropDownAlert&gt;
+public class SB2DropDownAlert extends JavaScriptPart
 {
 
     private static final long serialVersionUID = 1L;
@@ -56,122 +56,133 @@ public class SB2DropDownAlert extends JavaScriptPart&lt;SB2DropDownAlert&gt;
     /**
      * Constructs a new standardized drop down message
      */
-    public SB2DropDownAlert ()
+    public SB2DropDownAlert()
 <span class="nc" id="L60">    {</span>
-        
+
 <span class="nc" id="L62">    }</span>
 
     /**
      * With just a icon
-     * @param icon 
+     *
+     * @param icon
      */
     public SB2DropDownAlert(String icon)
-<span class="nc" id="L69">    {</span>
-<span class="nc" id="L70">        this.icon = icon;</span>
-<span class="nc" id="L71">    }</span>
+<span class="nc" id="L70">    {</span>
+<span class="nc" id="L71">        this.icon = icon;</span>
+<span class="nc" id="L72">    }</span>
 
     /**
      * A new drop down message item
+     *
      * @param icon
      * @param message
-     * @param dateFormat 
+     * @param dateFormat
      */
     public SB2DropDownAlert(String icon, String message, Date dateFormat)
-<span class="nc" id="L80">    {</span>
-<span class="nc" id="L81">        this.icon = icon;</span>
-<span class="nc" id="L82">        this.message = message;</span>
-<span class="nc" id="L83">    }</span>
-    
+<span class="nc" id="L82">    {</span>
+<span class="nc" id="L83">        this.icon = icon;</span>
+<span class="nc" id="L84">        this.message = message;</span>
+<span class="nc" id="L85">    }</span>
+
     /**
      * The physical Bold component (text is in getText(
-     * @return 
+     *
+     * @return
      */
     public String getIcon()
     {
-<span class="nc" id="L91">        return icon;</span>
+<span class="nc" id="L94">        return icon;</span>
     }
 
     /**
      * Sets the icon
-     * @param icon 
+     *
+     * @param icon
      */
     public void setIcon(String icon)
     {
-<span class="nc" id="L100">        this.icon = icon;</span>
-<span class="nc" id="L101">    }</span>
+<span class="nc" id="L104">        this.icon = icon;</span>
+<span class="nc" id="L105">    }</span>
 
     /**
      * Gets the current message
-     * @return 
+     *
+     * @return
      */
     public String getMessage()
     {
-<span class="nc" id="L109">        return message;</span>
+<span class="nc" id="L114">        return message;</span>
     }
 
     /**
      * Sets the current message
-     * @param message 
+     *
+     * @param message
      */
     public void setMessage(String message)
     {
-<span class="nc" id="L118">        this.message = message;</span>
-<span class="nc" id="L119">    }</span>
+<span class="nc" id="L124">        this.message = message;</span>
+<span class="nc" id="L125">    }</span>
 
     /**
      * Any linking URL
-     * @return 
+     *
+     * @return
      */
     public String getUrl()
     {
-<span class="nc" id="L127">        return url;</span>
+<span class="nc" id="L134">        return url;</span>
     }
 
     /**
      * Sets the URL to go to
-     * @param url 
+     *
+     * @param url
      */
     public void setUrl(String url)
     {
-<span class="nc" id="L136">        this.url = url;</span>
-<span class="nc" id="L137">    }</span>
+<span class="nc" id="L144">        this.url = url;</span>
+<span class="nc" id="L145">    }</span>
 
     /**
      * Any data that needs to be stored
-     * @return 
+     *
+     * @return
      */
     public String getData()
     {
-<span class="nc" id="L145">        return data;</span>
+<span class="nc" id="L154">        return data;</span>
     }
 
     /**
      * Any data that needs to be stored
-     * @param data 
+     *
+     * @param data
      */
     public void setData(String data)
     {
-<span class="nc" id="L154">        this.data = data;</span>
-<span class="nc" id="L155">    }</span>
+<span class="nc" id="L164">        this.data = data;</span>
+<span class="nc" id="L165">    }</span>
 
     /**
      * Gets the date
-     * @return 
+     *
+     * @return
      */
     public Date getDate()
     {
-<span class="nc" id="L163">        return date;</span>
+<span class="nc" id="L174">        return date;</span>
     }
 
     /**
      * Sets the date
-     * @param date 
+     *
+     * @param date
      */
     public void setDate(Date date)
     {
-<span class="nc" id="L172">        this.date = date;</span>
-<span class="nc" id="L173">    }</span>
-    
-    
+<span class="nc" id="L184">        this.date = date;</span>
+<span class="nc" id="L185">    }</span>
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -19,7 +19,6 @@ package za.co.mmagon.jwebswing.components.jqueryui.selectmenu;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.components.jqueryui.position.Position;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
 /**
  *
@@ -31,6 +30,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
  */
 public class JQUISelectMenuOptions extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Which element to append the menu to. When the value is null, the parents of the select are checked for a class name of ui-front. If an element with the ui-front class name is found, the menu is
@@ -160,11 +161,5 @@ public class JQUISelectMenuOptions extends JavaScriptPart
     public void setWidth(int width)
     {
         this.width = width;
-    }
-
-    @Override
-    public JavascriptPartType getJavascriptType()
-    {
-        return JavascriptPartType.Javascript;
     }
 }

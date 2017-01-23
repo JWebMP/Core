@@ -20,7 +20,6 @@ import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.components.jqueryui.position.Position;
 import za.co.mmagon.jwebswing.htmlbuilder.effects.JWAnimationEffectsPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
 /**
  * All the options for the tooltip library
@@ -44,7 +43,7 @@ public class JQUITooltipOptions extends JavaScriptPart
     private Position position;
     /**
      * The content for the tooltip
-     */ 
+     */
     private String content;
     /**
      * If the tooltip is disabled or not
@@ -55,8 +54,7 @@ public class JQUITooltipOptions extends JavaScriptPart
      */
     private JWAnimationEffectsPart hide;
     /**
-     * The component type that makes up a tooltip.
-     * E.G. img[alt] or *[title]
+     * The component type that makes up a tooltip. E.G. img[alt] or *[title]
      */
     private String items;
     /**
@@ -74,10 +72,13 @@ public class JQUITooltipOptions extends JavaScriptPart
      */
     private Boolean track;
 
+    /**
+     * Constructs a new tooltip options
+     */
     public JQUITooltipOptions()
-<span class="nc" id="L78">    {</span>
-
-<span class="nc" id="L80">    }</span>
+<span class="nc" id="L79">    {</span>
+//nothing needed here
+<span class="nc" id="L81">    }</span>
 
     /**
      * The position of the tooltip
@@ -86,7 +87,7 @@ public class JQUITooltipOptions extends JavaScriptPart
      */
     public Position getPosition()
     {
-<span class="nc" id="L89">        return position;</span>
+<span class="nc" id="L90">        return position;</span>
     }
 
     /**
@@ -96,8 +97,8 @@ public class JQUITooltipOptions extends JavaScriptPart
      */
     public void setPosition(Position position)
     {
-<span class="nc" id="L99">        this.position = position;</span>
-<span class="nc" id="L100">    }</span>
+<span class="nc" id="L100">        this.position = position;</span>
+<span class="nc" id="L101">    }</span>
 
     /**
      * The content for the tooltip
@@ -106,7 +107,7 @@ public class JQUITooltipOptions extends JavaScriptPart
      */
     public String getContent()
     {
-<span class="nc" id="L109">        return content;</span>
+<span class="nc" id="L110">        return content;</span>
     }
 
     /**
@@ -116,9 +117,9 @@ public class JQUITooltipOptions extends JavaScriptPart
      */
     public void setContent(Div content)
     {
-<span class="nc" id="L119">        content.setTiny(true);</span>
-<span class="nc" id="L120">        this.content = content.toString(true).toString();</span>
-<span class="nc" id="L121">    }</span>
+<span class="nc" id="L120">        content.setTiny(true);</span>
+<span class="nc" id="L121">        this.content = content.toString(true).toString();</span>
+<span class="nc" id="L122">    }</span>
 
     /**
      * If the tooltip is disabled or not
@@ -127,7 +128,7 @@ public class JQUITooltipOptions extends JavaScriptPart
      */
     public Boolean getDisabled()
     {
-<span class="nc" id="L130">        return disabled;</span>
+<span class="nc" id="L131">        return disabled;</span>
     }
 
     /**
@@ -138,8 +139,8 @@ public class JQUITooltipOptions extends JavaScriptPart
      */
     public void setDisabled(Boolean disabled)
     {
-<span class="nc" id="L141">        this.disabled = disabled;</span>
-<span class="nc" id="L142">    }</span>
+<span class="nc" id="L142">        this.disabled = disabled;</span>
+<span class="nc" id="L143">    }</span>
 
     /**
      * The animation to apply on hide
@@ -148,7 +149,7 @@ public class JQUITooltipOptions extends JavaScriptPart
      */
     public JWAnimationEffectsPart getHide()
     {
-<span class="nc" id="L151">        return hide;</span>
+<span class="nc" id="L152">        return hide;</span>
     }
 
     /**
@@ -158,12 +159,11 @@ public class JQUITooltipOptions extends JavaScriptPart
      */
     public void setHide(JWAnimationEffectsPart hide)
     {
-<span class="nc" id="L161">        this.hide = hide;</span>
-<span class="nc" id="L162">    }</span>
+<span class="nc" id="L162">        this.hide = hide;</span>
+<span class="nc" id="L163">    }</span>
 
     /**
-     * The component type that makes up a tooltip.
-     * E.G. img[alt] or *[title]
+     * The component type that makes up a tooltip. E.G. img[alt] or *[title]
      * &lt;p&gt;
      * @return
      */
@@ -173,15 +173,14 @@ public class JQUITooltipOptions extends JavaScriptPart
     }
 
     /**
-     * The component type that makes up a tooltip.
-     * E.G. img[alt] or *[title]
+     * The component type that makes up a tooltip. E.G. img[alt] or *[title]
      * &lt;p&gt;
      * @param items
      */
     public void setItems(String items)
     {
-<span class="nc" id="L183">        this.items = items;</span>
-<span class="nc" id="L184">    }</span>
+<span class="nc" id="L182">        this.items = items;</span>
+<span class="nc" id="L183">    }</span>
 
     /**
      * The animation to apply on show
@@ -190,7 +189,7 @@ public class JQUITooltipOptions extends JavaScriptPart
      */
     public JWAnimationEffectsPart getShow()
     {
-<span class="nc" id="L193">        return show;</span>
+<span class="nc" id="L192">        return show;</span>
     }
 
     /**
@@ -200,8 +199,8 @@ public class JQUITooltipOptions extends JavaScriptPart
      */
     public void setShow(JWAnimationEffectsPart show)
     {
-<span class="nc" id="L203">        this.show = show;</span>
-<span class="nc" id="L204">    }</span>
+<span class="nc" id="L202">        this.show = show;</span>
+<span class="nc" id="L203">    }</span>
 
     /**
      * A class to add to the widget, can be used to display various tooltip types, like warnings or errors.
@@ -212,7 +211,7 @@ public class JQUITooltipOptions extends JavaScriptPart
      */
     public String getTooltipClass()
     {
-<span class="nc" id="L215">        return tooltipClass;</span>
+<span class="nc" id="L214">        return tooltipClass;</span>
     }
 
     /**
@@ -224,8 +223,8 @@ public class JQUITooltipOptions extends JavaScriptPart
      */
     public void setTooltipClass(String tooltipClass)
     {
-<span class="nc" id="L227">        this.tooltipClass = tooltipClass;</span>
-<span class="nc" id="L228">    }</span>
+<span class="nc" id="L226">        this.tooltipClass = tooltipClass;</span>
+<span class="nc" id="L227">    }</span>
 
     /**
      * Whether the tooltip should track (follow) the mouse.
@@ -234,7 +233,7 @@ public class JQUITooltipOptions extends JavaScriptPart
      */
     public Boolean getTrack()
     {
-<span class="nc" id="L237">        return track;</span>
+<span class="nc" id="L236">        return track;</span>
     }
 
     /**
@@ -244,13 +243,7 @@ public class JQUITooltipOptions extends JavaScriptPart
      */
     public void setTrack(Boolean track)
     {
-<span class="nc" id="L247">        this.track = track;</span>
-<span class="nc" id="L248">    }</span>
-
-    @Override
-    public JavascriptPartType getJavascriptType()
-    {
-<span class="nc" id="L253">        return JavascriptPartType.Javascript;</span>
-    }
+<span class="nc" id="L246">        this.track = track;</span>
+<span class="nc" id="L247">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -30,6 +30,8 @@ import za.co.mmagon.jwebswing.components.pools.jqueryui.JQUIReferencePool;
 public class JQUIMenuFeature extends Feature<JQUIMenuOptions, JQUIMenuFeature> implements JQUIMenuFeatures
 {
 
+    private static final long serialVersionUID = 1L;
+
     private final JQUIMenu menu;
     /**
      * The options of the menu

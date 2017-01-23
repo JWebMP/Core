@@ -16,6 +16,8 @@
  */
 package za.co.mmagon.jwebswing.components.bootstrap.componentoptions;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Vertical alignment
  * &lt;p&gt;
@@ -30,7 +32,7 @@ package za.co.mmagon.jwebswing.components.bootstrap.componentoptions;
  * @version 1.0
  *
  */
-<span class="nc" id="L33">public enum BSComponentVerticalAlignmentOptions implements IBSComponentOptions</span>
+<span class="pc" id="L35">public enum BSComponentVerticalAlignmentOptions implements IBSComponentOptions</span>
 {
     /**
      * Change the alignment of elements with the vertical-alignment utilities.
@@ -39,7 +41,7 @@ package za.co.mmagon.jwebswing.components.bootstrap.componentoptions;
      * &lt;p&gt;
      * Choose from .align-baseline, .align-top, .align-middle, .align-bottom, .align-text-bottom, and .align-text-top as needed.
      */
-<span class="nc" id="L42">    Align_BaseLine,</span>
+<span class="fc" id="L44">    Align_BaseLine,</span>
     /**
      * Change the alignment of elements with the vertical-alignment utilities.
      * &lt;p&gt;
@@ -47,7 +49,7 @@ package za.co.mmagon.jwebswing.components.bootstrap.componentoptions;
      * &lt;p&gt;
      * Choose from .align-baseline, .align-top, .align-middle, .align-bottom, .align-text-bottom, and .align-text-top as needed.
      */
-<span class="nc" id="L50">    Align_Top,</span>
+<span class="fc" id="L52">    Align_Top,</span>
     /**
      * Change the alignment of elements with the vertical-alignment utilities.
      * &lt;p&gt;
@@ -55,7 +57,7 @@ package za.co.mmagon.jwebswing.components.bootstrap.componentoptions;
      * &lt;p&gt;
      * Choose from .align-baseline, .align-top, .align-middle, .align-bottom, .align-text-bottom, and .align-text-top as needed.
      */
-<span class="nc" id="L58">    Align_Middle,</span>
+<span class="fc" id="L60">    Align_Middle,</span>
     /**
      * Change the alignment of elements with the vertical-alignment utilities.
      * &lt;p&gt;
@@ -63,7 +65,7 @@ package za.co.mmagon.jwebswing.components.bootstrap.componentoptions;
      * &lt;p&gt;
      * Choose from .align-baseline, .align-top, .align-middle, .align-bottom, .align-text-bottom, and .align-text-top as needed.
      */
-<span class="nc" id="L66">    Align_Bottom,</span>
+<span class="fc" id="L68">    Align_Bottom,</span>
     /**
      * Change the alignment of elements with the vertical-alignment utilities.
      * &lt;p&gt;
@@ -71,7 +73,7 @@ package za.co.mmagon.jwebswing.components.bootstrap.componentoptions;
      * &lt;p&gt;
      * Choose from .align-baseline, .align-top, .align-middle, .align-bottom, .align-text-bottom, and .align-text-top as needed.
      */
-<span class="nc" id="L74">    Align_Text_Top,</span>
+<span class="fc" id="L76">    Align_Text_Top,</span>
     /**
      * Change the alignment of elements with the vertical-alignment utilities.
      * &lt;p&gt;
@@ -79,11 +81,19 @@ package za.co.mmagon.jwebswing.components.bootstrap.componentoptions;
      * &lt;p&gt;
      * Choose from .align-baseline, .align-top, .align-middle, .align-bottom, .align-text-bottom, and .align-text-top as needed.
      */
-<span class="nc" id="L82">    Align_Text_Bottom;</span>
+<span class="fc" id="L84">    Align_Text_Bottom;</span>
 
     private BSComponentVerticalAlignmentOptions()
-<span class="nc" id="L85">    {</span>
+<span class="fc" id="L87">    {</span>
 
-<span class="nc" id="L87">    }</span>
+<span class="fc" id="L89">    }</span>
+
+    @JsonValue
+    @Override
+    public String toString()
+    {
+<span class="fc" id="L95">        String name = name().toLowerCase().replaceAll(&quot;\\$&quot;, &quot; &quot;).replaceAll(&quot;_&quot;, &quot;-&quot;);</span>
+<span class="fc" id="L96">        return name;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

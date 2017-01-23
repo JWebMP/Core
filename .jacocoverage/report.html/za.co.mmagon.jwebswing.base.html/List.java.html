@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>List.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">List.java</span></div><h1>List.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
-import za.co.mmagon.jwebswing.base.html.interfaces.DisplayObjectType;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.ListChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
@@ -38,20 +36,26 @@ import za.co.mmagon.jwebswing.components.jqxwidgets.ribbon.JQXRibbonChildren;
  * The &quot;compact&quot; attribute is not supported in HTML5.&lt;p&gt;
  * &lt;p&gt;
  * @author Marc Magon
+ * @param &lt;C&gt;
+ * @param &lt;A&gt;
+ * @param &lt;E&gt;
+ * @param &lt;J&gt;
  */
-public class List&lt;C extends ListChildren, A extends Enum &amp; AttributeDefinitions, J extends List&gt;
-        extends Component&lt;C, A, GlobalFeatures, GlobalEvents, J&gt;
+public class List&lt;C extends ListChildren, A extends Enum &amp; AttributeDefinitions, E extends GlobalEvents, J extends List&gt;
+        extends Component&lt;C, A, GlobalFeatures, E, J&gt;
         implements ListChildren, JQUITabsChildren, JQUISortableChildren, DisplayObjectType, JQXRibbonChildren, JQXDropDownListChildren,
         JQXMenuChildren, ListItemChildren
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs an unordered list
      */
     public List()
     {
-<span class="fc" id="L53">        this(false);</span>
-<span class="fc" id="L54">    }</span>
+<span class="fc" id="L57">        this(false);</span>
+<span class="fc" id="L58">    }</span>
 
     /**
      * Specifies if the list is ordered or unordered
@@ -60,30 +64,37 @@ public class List&lt;C extends ListChildren, A extends Enum &amp; AttributeDefin
      */
     public List(boolean orderedList)
     {
-<span class="fc bfc" id="L63" title="All 4 branches covered.">        super(orderedList ? &quot;ol&quot; : &quot;ul&quot;, orderedList ? ComponentTypes.OrderedList : ComponentTypes.UnorderedList, false);</span>
-<span class="fc" id="L64">    }</span>
+<span class="fc bfc" id="L67" title="All 4 branches covered.">        super(orderedList ? &quot;ol&quot; : &quot;ul&quot;, orderedList ? ComponentTypes.OrderedList : ComponentTypes.UnorderedList, false);</span>
+<span class="fc" id="L68">    }</span>
 
-    @Override
-    public C add(String textToAdd)
+    /**
+     * Adds a list item to this list
+     *
+     * @param textToAdd
+     *
+     * @return
+     */
+    public ListItem addItem(String textToAdd)
     {
-<span class="nc" id="L69">        ListItem li = new ListItem(textToAdd);</span>
-<span class="nc" id="L70">        add((C) li);</span>
-<span class="nc" id="L71">        return (C) li;</span>
+<span class="nc" id="L79">        ListItem li = new ListItem(textToAdd);</span>
+<span class="nc" id="L80">        add((C) li);</span>
+<span class="nc" id="L81">        return li;</span>
     }
 
     /**
      * Returns a list of the specified text
      *
      * @param textToAdd
+     *
      * @return
      */
     public List addList(String textToAdd)
     {
-<span class="nc" id="L82">        ListItem lit = new ListItem(textToAdd);</span>
-<span class="nc" id="L83">        List li = new List(false);</span>
-<span class="nc" id="L84">        lit.add(li);</span>
-<span class="nc" id="L85">        add((C) lit);</span>
-<span class="nc" id="L86">        return li;</span>
+<span class="nc" id="L93">        ListItem lit = new ListItem(textToAdd);</span>
+<span class="nc" id="L94">        List li = new List(false);</span>
+<span class="nc" id="L95">        lit.add(li);</span>
+<span class="nc" id="L96">        add((C) lit);</span>
+<span class="nc" id="L97">        return li;</span>
     }
 
 }

@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.components.jqueryui.progressbar;
 
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
 /**
  *
@@ -30,17 +29,28 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 public class JQUIProgressBarOptions extends JavaScriptPart
 {
 
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * if is disabled
+     */
     private Boolean disabled;
+    /**
+     * the max value
+     */
     private Integer max;
+    /**
+     * The actual value
+     */
     private Integer value;
 
     /**
      *
      */
     public JQUIProgressBarOptions()
-<span class="nc" id="L41">    {</span>
-
-<span class="nc" id="L43">    }</span>
+<span class="nc" id="L51">    {</span>
+        //Nothing needed here
+<span class="nc" id="L53">    }</span>
 
     /**
      * Returns if the progress bar is disabled or not
@@ -49,7 +59,7 @@ public class JQUIProgressBarOptions extends JavaScriptPart
      */
     public Boolean getDisabled()
     {
-<span class="nc" id="L52">        return disabled;</span>
+<span class="nc" id="L62">        return disabled;</span>
     }
 
     /**
@@ -59,8 +69,8 @@ public class JQUIProgressBarOptions extends JavaScriptPart
      */
     public void setDisabled(Boolean disabled)
     {
-<span class="nc" id="L62">        this.disabled = disabled;</span>
-<span class="nc" id="L63">    }</span>
+<span class="nc" id="L72">        this.disabled = disabled;</span>
+<span class="nc" id="L73">    }</span>
 
     /**
      * Gets the max
@@ -69,7 +79,7 @@ public class JQUIProgressBarOptions extends JavaScriptPart
      */
     public Integer getMax()
     {
-<span class="nc" id="L72">        return max;</span>
+<span class="nc" id="L82">        return max;</span>
     }
 
     /**
@@ -79,8 +89,8 @@ public class JQUIProgressBarOptions extends JavaScriptPart
      */
     public void setMax(Integer max)
     {
-<span class="nc" id="L82">        this.max = max;</span>
-<span class="nc" id="L83">    }</span>
+<span class="nc" id="L92">        this.max = max;</span>
+<span class="nc" id="L93">    }</span>
 
     /**
      * Gets the current value
@@ -89,7 +99,7 @@ public class JQUIProgressBarOptions extends JavaScriptPart
      */
     public Integer getValue()
     {
-<span class="nc" id="L92">        return value;</span>
+<span class="nc" id="L102">        return value;</span>
     }
 
     /**
@@ -99,13 +109,8 @@ public class JQUIProgressBarOptions extends JavaScriptPart
      */
     public void setValue(Integer value)
     {
-<span class="nc" id="L102">        this.value = value;</span>
-<span class="nc" id="L103">    }</span>
+<span class="nc" id="L112">        this.value = value;</span>
+<span class="nc" id="L113">    }</span>
 
-    @Override
-    public JavascriptPartType getJavascriptType()
-    {
-<span class="nc" id="L108">        return JavascriptPartType.Javascript;</span>
-    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

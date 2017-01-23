@@ -1,12 +1,18 @@
 package za.co.mmagon.jwebswing.events.open;
 
+import java.util.logging.Level;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.Event;
+import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
+import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
+import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.autocomplete.JQUIAutoCompleteEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.dialog.JQUIDialogEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.selectmenu.JQUISelectMenuEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.tooltips.JQUIToolTipEvents;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
-import java.util.logging.*;
-import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.base.ajax.*;
-import za.co.mmagon.jwebswing.base.angular.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.*;
 
 /**
  * Handles all events. Over-ride methods.
@@ -14,7 +20,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.*;
  * @author Marc Magon
  */
 public abstract class OpenAdapter extends Event
-        implements GlobalEvents
+        implements GlobalEvents, JQUIAutoCompleteEvents, JQUIDialogEvents, JQUISelectMenuEvents, JQUIToolTipEvents
 {
 
     /**
@@ -66,7 +72,7 @@ public abstract class OpenAdapter extends Event
         }
         catch (Exception e)
         {
-            LOG.log(Level.SEVERE,"Error In Firing Event", e);
+            LOG.log(Level.SEVERE, "Error In Firing Event", e);
         }
     }
 

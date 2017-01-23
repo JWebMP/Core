@@ -166,18 +166,19 @@ public class BSDropDown extends Div&lt;BSDropDownChildren, BSDropDownAttributes,
     {
 <span class="pc bpc" id="L167" title="1 of 2 branches missed.">        if (!isConfigured())</span>
         {
-<span class="fc" id="L169">            add((BSDropDownChildren) getDropdownButton());</span>
-<span class="fc" id="L170">            add((BSDropDownChildren) getDropdownMenu());</span>
+<span class="fc" id="L169">            getDropdownButton().addAttribute(&quot;role&quot;, &quot;button&quot;);</span>
+<span class="fc" id="L170">            add((BSDropDownChildren) getDropdownButton());</span>
+<span class="fc" id="L171">            add((BSDropDownChildren) getDropdownMenu());</span>
 
-<span class="fc" id="L172">            getDropdownMenu().addAttribute(GlobalAttributes.Aria_LabelledBy, getDropdownButton().getID());</span>
+<span class="fc" id="L173">            getDropdownMenu().addAttribute(GlobalAttributes.Aria_LabelledBy, getDropdownButton().getID());</span>
 
-<span class="pc bpc" id="L174" title="1 of 2 branches missed.">            if (Link.class.isAssignableFrom(getDropdownButton().getClass()))</span>
+<span class="pc bpc" id="L175" title="1 of 2 branches missed.">            if (Link.class.isAssignableFrom(getDropdownButton().getClass()))</span>
             {
-<span class="fc" id="L176">                addClass(BSComponentDefaultOptions.Show);</span>
+<span class="fc" id="L177">                addClass(BSComponentDefaultOptions.Show);</span>
             }
         }
-<span class="fc" id="L179">        super.preConfigure();</span>
-<span class="fc" id="L180">    }</span>
+<span class="fc" id="L180">        super.preConfigure();</span>
+<span class="fc" id="L181">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

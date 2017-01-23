@@ -7,6 +7,10 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.autocomplete.JQUIAutoCompleteEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.dialog.JQUIDialogEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.menu.JQUIMenuEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.selectmenu.JQUISelectMenuEvents;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
 
@@ -16,13 +20,13 @@ import za.co.mmagon.logger.LogFactory;
  * @author Marc Magon
  */
 public abstract class FocusAdapter extends Event
-        implements GlobalEvents
+        implements GlobalEvents, JQUIAutoCompleteEvents, JQUIDialogEvents, JQUIMenuEvents, JQUISelectMenuEvents
 {
 
     /**
      * Logger for the Component
      */
-<span class="nc" id="L25">    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger(&quot;FocusEvent&quot;);</span>
+<span class="nc" id="L29">    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger(&quot;FocusEvent&quot;);</span>
     private static final long serialVersionUID = 1L;
     private FocusDirective directive;
 
@@ -33,9 +37,9 @@ public abstract class FocusAdapter extends Event
      */
     public FocusAdapter(Component component)
     {
-<span class="nc" id="L36">        super(EventTypes.focus, component);</span>
+<span class="nc" id="L40">        super(EventTypes.focus, component);</span>
 
-<span class="nc" id="L38">    }</span>
+<span class="nc" id="L42">    }</span>
 
     /**
      * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
@@ -43,15 +47,15 @@ public abstract class FocusAdapter extends Event
     @Override
     public void preConfigure()
     {
-<span class="nc bnc" id="L46" title="All 2 branches missed.">        if (!isConfigured())</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        if (!isConfigured())</span>
         {
-<span class="nc" id="L48">            getComponent().getPage().getOptions().setjQueryEnabled(true);</span>
-<span class="nc" id="L49">            getComponent().getPage().getOptions().setAngularEnabled(true);</span>
-<span class="nc" id="L50">            getComponent().getAngularDirectives().add(getDirective());</span>
-<span class="nc" id="L51">            component.addAttribute(AngularAttributes.ngFocus, &quot;perform($event,&quot; + renderVariables() + &quot;);&quot;);</span>
+<span class="nc" id="L52">            getComponent().getPage().getOptions().setjQueryEnabled(true);</span>
+<span class="nc" id="L53">            getComponent().getPage().getOptions().setAngularEnabled(true);</span>
+<span class="nc" id="L54">            getComponent().getAngularDirectives().add(getDirective());</span>
+<span class="nc" id="L55">            component.addAttribute(AngularAttributes.ngFocus, &quot;perform($event,&quot; + renderVariables() + &quot;);&quot;);</span>
         }
-<span class="nc" id="L53">        super.preConfigure();</span>
-<span class="nc" id="L54">    }</span>
+<span class="nc" id="L57">        super.preConfigure();</span>
+<span class="nc" id="L58">    }</span>
 
     /**
      * Returns the angular directive associated with the right click event
@@ -60,11 +64,11 @@ public abstract class FocusAdapter extends Event
      */
     public FocusDirective getDirective()
     {
-<span class="nc bnc" id="L63" title="All 2 branches missed.">        if (directive == null)</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        if (directive == null)</span>
         {
-<span class="nc" id="L65">            directive = new FocusDirective(getComponent().getPage().getAngular());</span>
+<span class="nc" id="L69">            directive = new FocusDirective(getComponent().getPage().getAngular());</span>
         }
-<span class="nc" id="L67">        return directive;</span>
+<span class="nc" id="L71">        return directive;</span>
     }
 
     /**
@@ -74,8 +78,8 @@ public abstract class FocusAdapter extends Event
      */
     public void setDirective(FocusDirective directive)
     {
-<span class="nc" id="L77">        this.directive = directive;</span>
-<span class="nc" id="L78">    }</span>
+<span class="nc" id="L81">        this.directive = directive;</span>
+<span class="nc" id="L82">    }</span>
 
     /**
      * Triggers on Focus
@@ -90,13 +94,13 @@ public abstract class FocusAdapter extends Event
     {
         try
         {
-<span class="nc" id="L93">            onFocus(call, response);</span>
+<span class="nc" id="L97">            onFocus(call, response);</span>
         }
-<span class="nc" id="L95">        catch (Exception e)</span>
+<span class="nc" id="L99">        catch (Exception e)</span>
         {
-<span class="nc" id="L97">            LOG.log(Level.SEVERE,&quot;Error In Firing Event&quot;, e);</span>
-<span class="nc" id="L98">        }</span>
-<span class="nc" id="L99">    }</span>
+<span class="nc" id="L101">            LOG.log(Level.SEVERE, &quot;Error In Firing Event&quot;, e);</span>
+<span class="nc" id="L102">        }</span>
+<span class="nc" id="L103">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

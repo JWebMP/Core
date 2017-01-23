@@ -17,9 +17,9 @@
 package za.co.mmagon.jwebswing.components.jqueryui.slider;
 
 import java.util.ArrayList;
+import java.util.List;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.Orientation;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
 /**
  *
@@ -31,6 +31,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
  */
 public class JQUISliderOptions extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Determines the animation speed Whether to slide the handle smoothly when the user clicks on the slider track. Also accepts any valid animation duration.
@@ -83,7 +85,15 @@ public class JQUISliderOptions extends JavaScriptPart
     /**
      * This option can be used to specify multiple handles. If the range option is set to true, the length of values should be 2.
      */
-    private ArrayList<Integer> values;
+    private List<Integer> values;
+
+    /**
+     * Constructs new slider instances
+     */
+    public JQUISliderOptions()
+    {
+        //Nothing needed here
+    }
 
     /**
      * Whether to slide the handle smoothly when the user clicks on the slider track. Also accepts any valid animation duration.
@@ -286,7 +296,7 @@ public class JQUISliderOptions extends JavaScriptPart
      * <p>
      * @return
      */
-    public ArrayList<Integer> getValues()
+    public List<Integer> getValues()
     {
         if (values == null)
         {
@@ -300,14 +310,8 @@ public class JQUISliderOptions extends JavaScriptPart
      * <p>
      * @param values
      */
-    public void setValues(ArrayList<Integer> values)
+    public void setValues(List<Integer> values)
     {
         this.values = values;
-    }
-
-    @Override
-    public JavascriptPartType getJavascriptType()
-    {
-        return JavascriptPartType.Javascript;
     }
 }

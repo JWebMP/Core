@@ -16,14 +16,18 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets.treegrid;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
 /**
  * This Class
  *
  * @author GedMarc
  * @since 25 Dec 2015
  */
-class JQXTreeGridExportSettings
+class JQXTreeGridExportSettings extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     private Boolean columnsHeader;
     private Boolean hiddenColumns;
@@ -34,83 +38,83 @@ class JQXTreeGridExportSettings
     private String fileName;
 
     public JQXTreeGridExportSettings()
-<span class="nc" id="L37">    {</span>
-<span class="nc" id="L38">    }</span>
+<span class="nc" id="L41">    {</span>
+<span class="nc" id="L42">    }</span>
 
     public Boolean getColumnsHeader()
     {
-<span class="nc" id="L42">        return columnsHeader;</span>
+<span class="nc" id="L46">        return columnsHeader;</span>
     }
 
     public void setColumnsHeader(Boolean columnsHeader)
     {
-<span class="nc" id="L47">        this.columnsHeader = columnsHeader;</span>
-<span class="nc" id="L48">    }</span>
+<span class="nc" id="L51">        this.columnsHeader = columnsHeader;</span>
+<span class="nc" id="L52">    }</span>
 
     public Boolean getHiddenColumns()
     {
-<span class="nc" id="L52">        return hiddenColumns;</span>
+<span class="nc" id="L56">        return hiddenColumns;</span>
     }
 
     public void setHiddenColumns(Boolean hiddenColumns)
     {
-<span class="nc" id="L57">        this.hiddenColumns = hiddenColumns;</span>
-<span class="nc" id="L58">    }</span>
+<span class="nc" id="L61">        this.hiddenColumns = hiddenColumns;</span>
+<span class="nc" id="L62">    }</span>
 
     public String getServerURL()
     {
-<span class="nc" id="L62">        return serverURL;</span>
+<span class="nc" id="L66">        return serverURL;</span>
     }
 
     public void setServerURL(String serverURL)
     {
-<span class="nc" id="L67">        this.serverURL = serverURL;</span>
-<span class="nc" id="L68">    }</span>
+<span class="nc" id="L71">        this.serverURL = serverURL;</span>
+<span class="nc" id="L72">    }</span>
 
     public String getCharacterSet()
     {
-<span class="nc" id="L72">        return characterSet;</span>
+<span class="nc" id="L76">        return characterSet;</span>
     }
 
     public void setCharacterSet(String characterSet)
     {
-<span class="nc" id="L77">        this.characterSet = characterSet;</span>
-<span class="nc" id="L78">    }</span>
+<span class="nc" id="L81">        this.characterSet = characterSet;</span>
+<span class="nc" id="L82">    }</span>
 
     public Boolean getCollapsedRecords()
     {
-<span class="nc" id="L82">        return collapsedRecords;</span>
+<span class="nc" id="L86">        return collapsedRecords;</span>
     }
 
     public void setCollapsedRecords(Boolean collapsedRecords)
     {
-<span class="nc" id="L87">        this.collapsedRecords = collapsedRecords;</span>
-<span class="nc" id="L88">    }</span>
+<span class="nc" id="L91">        this.collapsedRecords = collapsedRecords;</span>
+<span class="nc" id="L92">    }</span>
 
     public Boolean getRecordsInView()
     {
-<span class="nc" id="L92">        return recordsInView;</span>
+<span class="nc" id="L96">        return recordsInView;</span>
     }
 
     public void setRecordsInView(Boolean recordsInView)
     {
-<span class="nc" id="L97">        this.recordsInView = recordsInView;</span>
-<span class="nc" id="L98">    }</span>
+<span class="nc" id="L101">        this.recordsInView = recordsInView;</span>
+<span class="nc" id="L102">    }</span>
 
     public String getFileName()
     {
-<span class="nc" id="L102">        return fileName;</span>
+<span class="nc" id="L106">        return fileName;</span>
     }
 
     public void setFileName(String fileName)
     {
-<span class="nc" id="L107">        this.fileName = fileName;</span>
-<span class="nc" id="L108">    }</span>
+<span class="nc" id="L111">        this.fileName = fileName;</span>
+<span class="nc" id="L112">    }</span>
 
     @Override
     public String toString()
     {
-<span class="nc" id="L113">        return super.toString();</span>
+<span class="nc" id="L117">        return super.toString();</span>
     }
 
 }

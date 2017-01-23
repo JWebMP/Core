@@ -35,30 +35,86 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Sets ot gets the bulletcharts's animationDuration.
+     */
     private Integer animationDuration;// 	Function 	null
+    /**
+     * Sets ot gets the bulletcharts's bar size.
+     */
     private Integer barSize;// 	Array 	50%
+    /**
+     * Sets ot gets the bulletcharts's description.
+     */
     private String description;// 	String 	'Description'
+    /**
+     * Disables the bullet chart.
+     */
     private Boolean disabled;// 	Boolean 	false
+    /**
+     * Sets ot gets the bulletcharts's labelsFormat. Possible values:
+     * &lt;p&gt;
+     * &quot;null&quot;
+     * &lt;p&gt;
+     * &quot;d&quot;-decimal numbers
+     * &lt;p&gt;
+     * &quot;f&quot;- floating-point numbers
+     * &lt;p&gt;
+     * &quot;n&quot;- integer numbers
+     * &lt;p&gt;
+     * &quot;c&quot; - currency numbers
+     * &lt;p&gt;
+     * &quot;p&quot;- percentage numbers
+     */
     private String labelsFormat;// 	String 	null
+    /**
+     * Sets ot gets the bulletcharts's labelsFormat. Possible values:
+     * &lt;p&gt;
+     * &quot;null&quot;
+     * &lt;p&gt;
+     * &quot;d&quot;-decimal numbers
+     * &lt;p&gt;
+     * &quot;f&quot;- floating-point numbers
+     * &lt;p&gt;
+     * &quot;n&quot;- integer numbers
+     * &lt;p&gt;
+     * &quot;c&quot; - currency numbers
+     * &lt;p&gt;
+     * &quot;p&quot;- percentage numbers
+     */
     private JavascriptFunction labelsFormatFunction;/// 	Function 	null
+    /**
+     * Sets ot gets the bulletcharts's orientation. Possible values:
+     * &lt;p&gt;
+     * &quot;horizontal&quot;
+     * &lt;p&gt;
+     * &quot;vertical&quot;
+     */
     private Orientation orientation;// 	String 	&quot;horizontal&quot;
+
     private JQXBulletChartPointer pointer;// 	Object 	{ value: 65, label: &quot;Value&quot;, size: &quot;25%&quot;, color: &quot;&quot; }
+
     private Boolean rtl;// 	Boolean 	false
+
     private ArrayList&lt;JQXBulletChartRange&gt; ranges;// 	Array 	[{ startValue: 0, endValue: 50, color: &quot;#000000&quot;, opacity: 0.7 }, { startValue: 50, endValue: 80, color: &quot;#000000&quot;, opacity: 0.5 }, { startValue: 80, endValue: 100, color: &quot;#000000&quot;, opacity: 0.3}]
+
     private Boolean showTooltip;// 	Boolean 	true
+
     private JQXBulletChartTarget target;// 	Object 	{ value: 85, label: &quot;Target&quot;, size: 4, color: &quot;&quot; };
+
     private JQXBulletChartTicks ticks;// 	Object 	{ position: &quot;far&quot;, interval: 20, size: 10 }
+
     private String title;// 	String 	'Title'
+
     private JavascriptFunction tooltipFormatFunction;// 	Function 	null
 
     public JQXBulletChartOptions()
-<span class="nc" id="L55">    {</span>
+<span class="nc" id="L112">    {</span>
 
-<span class="nc" id="L57">    }</span>
+<span class="nc" id="L114">    }</span>
 
     /**
-     * Sets ot gets the bulletcharts's animationDuration.
-     * Possible values
+     * Sets ot gets the bulletcharts's animationDuration. Possible values
      * &lt;p&gt;
      * number
      * &lt;p&gt;
@@ -70,12 +126,11 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public Integer getAnimationDuration()
     {
-<span class="nc" id="L73">        return animationDuration;</span>
+<span class="nc" id="L129">        return animationDuration;</span>
     }
 
     /**
-     * Sets ot gets the bulletcharts's animationDuration.
-     * Possible values
+     * Sets ot gets the bulletcharts's animationDuration. Possible values
      * &lt;p&gt;
      * number
      * &lt;p&gt;
@@ -87,8 +142,8 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public void setAnimationDuration(Integer animationDuration)
     {
-<span class="nc" id="L90">        this.animationDuration = animationDuration;</span>
-<span class="nc" id="L91">    }</span>
+<span class="nc" id="L145">        this.animationDuration = animationDuration;</span>
+<span class="nc" id="L146">    }</span>
 
     /**
      * Sets ot gets the bulletcharts's bar size.
@@ -97,7 +152,7 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public Integer getBarSize()
     {
-<span class="nc" id="L100">        return barSize;</span>
+<span class="nc" id="L155">        return barSize;</span>
     }
 
     /**
@@ -107,8 +162,8 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public void setBarSize(Integer barSize)
     {
-<span class="nc" id="L110">        this.barSize = barSize;</span>
-<span class="nc" id="L111">    }</span>
+<span class="nc" id="L165">        this.barSize = barSize;</span>
+<span class="nc" id="L166">    }</span>
 
     /**
      * Sets ot gets the bulletcharts's description.
@@ -117,7 +172,7 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public String getDescription()
     {
-<span class="nc" id="L120">        return description;</span>
+<span class="nc" id="L175">        return description;</span>
     }
 
     /**
@@ -127,8 +182,8 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public void setDescription(String description)
     {
-<span class="nc" id="L130">        this.description = description;</span>
-<span class="nc" id="L131">    }</span>
+<span class="nc" id="L185">        this.description = description;</span>
+<span class="nc" id="L186">    }</span>
 
     /**
      * Disables the bullet chart.
@@ -137,7 +192,7 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public Boolean getDisabled()
     {
-<span class="nc" id="L140">        return disabled;</span>
+<span class="nc" id="L195">        return disabled;</span>
     }
 
     /**
@@ -147,12 +202,11 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public void setDisabled(Boolean disabled)
     {
-<span class="nc" id="L150">        this.disabled = disabled;</span>
-<span class="nc" id="L151">    }</span>
+<span class="nc" id="L205">        this.disabled = disabled;</span>
+<span class="nc" id="L206">    }</span>
 
     /**
-     * Sets ot gets the bulletcharts's labelsFormat.
-     * Possible values:
+     * Sets ot gets the bulletcharts's labelsFormat. Possible values:
      * &lt;p&gt;
      * &quot;null&quot;
      * &lt;p&gt;
@@ -170,12 +224,11 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public String getLabelsFormat()
     {
-<span class="nc" id="L173">        return labelsFormat;</span>
+<span class="nc" id="L227">        return labelsFormat;</span>
     }
 
     /**
-     * Sets ot gets the bulletcharts's labelsFormat.
-     * Possible values:
+     * Sets ot gets the bulletcharts's labelsFormat. Possible values:
      * &lt;p&gt;
      * &quot;null&quot;
      * &lt;p&gt;
@@ -193,8 +246,8 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public void setLabelsFormat(String labelsFormat)
     {
-<span class="nc" id="L196">        this.labelsFormat = labelsFormat;</span>
-<span class="nc" id="L197">    }</span>
+<span class="nc" id="L249">        this.labelsFormat = labelsFormat;</span>
+<span class="nc" id="L250">    }</span>
 
     /**
      * Set the labelsFormatFunction property.
@@ -203,7 +256,7 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public JavascriptFunction getLabelsFormatFunction()
     {
-<span class="nc" id="L206">        return labelsFormatFunction;</span>
+<span class="nc" id="L259">        return labelsFormatFunction;</span>
     }
 
     /**
@@ -213,12 +266,11 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public void setLabelsFormatFunction(JavascriptFunction labelsFormatFunction)
     {
-<span class="nc" id="L216">        this.labelsFormatFunction = labelsFormatFunction;</span>
-<span class="nc" id="L217">    }</span>
+<span class="nc" id="L269">        this.labelsFormatFunction = labelsFormatFunction;</span>
+<span class="nc" id="L270">    }</span>
 
     /**
-     * Sets ot gets the bulletcharts's orientation.
-     * Possible values:
+     * Sets ot gets the bulletcharts's orientation. Possible values:
      * &lt;p&gt;
      * &quot;horizontal&quot;
      * &lt;p&gt;
@@ -228,12 +280,11 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public Orientation getOrientation()
     {
-<span class="nc" id="L231">        return orientation;</span>
+<span class="nc" id="L283">        return orientation;</span>
     }
 
     /**
-     * Sets ot gets the bulletcharts's orientation.
-     * Possible values:
+     * Sets ot gets the bulletcharts's orientation. Possible values:
      * &lt;p&gt;
      * &quot;horizontal&quot;
      * &lt;p&gt;
@@ -243,8 +294,8 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public void setOrientation(Orientation orientation)
     {
-<span class="nc" id="L246">        this.orientation = orientation;</span>
-<span class="nc" id="L247">    }</span>
+<span class="nc" id="L297">        this.orientation = orientation;</span>
+<span class="nc" id="L298">    }</span>
 
     /**
      * Sets ot gets the bulletcharts's pointer.
@@ -253,11 +304,11 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public JQXBulletChartPointer getPointer()
     {
-<span class="nc bnc" id="L256" title="All 2 branches missed.">        if (pointer == null)</span>
+<span class="nc bnc" id="L307" title="All 2 branches missed.">        if (pointer == null)</span>
         {
-<span class="nc" id="L258">            pointer = new JQXBulletChartPointer();</span>
+<span class="nc" id="L309">            pointer = new JQXBulletChartPointer();</span>
         }
-<span class="nc" id="L260">        return pointer;</span>
+<span class="nc" id="L311">        return pointer;</span>
     }
 
     /**
@@ -267,8 +318,8 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public void setPointer(JQXBulletChartPointer pointer)
     {
-<span class="nc" id="L270">        this.pointer = pointer;</span>
-<span class="nc" id="L271">    }</span>
+<span class="nc" id="L321">        this.pointer = pointer;</span>
+<span class="nc" id="L322">    }</span>
 
     /**
      * Gets or sets right to left display
@@ -277,7 +328,7 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public Boolean getRtl()
     {
-<span class="nc" id="L280">        return rtl;</span>
+<span class="nc" id="L331">        return rtl;</span>
     }
 
     /**
@@ -287,12 +338,11 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public void setRtl(Boolean rtl)
     {
-<span class="nc" id="L290">        this.rtl = rtl;</span>
-<span class="nc" id="L291">    }</span>
+<span class="nc" id="L341">        this.rtl = rtl;</span>
+<span class="nc" id="L342">    }</span>
 
     /**
-     * Sets ot gets the bulletcharts's range.
-     * Possible values
+     * Sets ot gets the bulletcharts's range. Possible values
      * &lt;p&gt;
      * 'startValue'-the value from which the range will start
      * &lt;p&gt;
@@ -306,16 +356,15 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public ArrayList&lt;JQXBulletChartRange&gt; getRanges()
     {
-<span class="nc bnc" id="L309" title="All 2 branches missed.">        if (ranges == null)</span>
+<span class="nc bnc" id="L359" title="All 2 branches missed.">        if (ranges == null)</span>
         {
-<span class="nc" id="L311">            ranges = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L361">            ranges = new ArrayList&lt;&gt;();</span>
         }
-<span class="nc" id="L313">        return ranges;</span>
+<span class="nc" id="L363">        return ranges;</span>
     }
 
     /**
-     * Sets ot gets the bulletcharts's range.
-     * Possible values
+     * Sets ot gets the bulletcharts's range. Possible values
      * &lt;p&gt;
      * 'startValue'-the value from which the range will start
      * &lt;p&gt;
@@ -329,8 +378,8 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public void setRanges(ArrayList&lt;JQXBulletChartRange&gt; ranges)
     {
-<span class="nc" id="L332">        this.ranges = ranges;</span>
-<span class="nc" id="L333">    }</span>
+<span class="nc" id="L381">        this.ranges = ranges;</span>
+<span class="nc" id="L382">    }</span>
 
     /**
      * Sets ot gets the bulletcharts's showTooltip.Requires jqxtooltip.js
@@ -339,7 +388,7 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public Boolean getShowTooltip()
     {
-<span class="nc" id="L342">        return showTooltip;</span>
+<span class="nc" id="L391">        return showTooltip;</span>
     }
 
     /**
@@ -349,8 +398,8 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public void setShowTooltip(Boolean showTooltip)
     {
-<span class="nc" id="L352">        this.showTooltip = showTooltip;</span>
-<span class="nc" id="L353">    }</span>
+<span class="nc" id="L401">        this.showTooltip = showTooltip;</span>
+<span class="nc" id="L402">    }</span>
 
     /**
      * Sets ot gets the bulletcharts's target.
@@ -359,11 +408,11 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public JQXBulletChartTarget getTarget()
     {
-<span class="nc bnc" id="L362" title="All 2 branches missed.">        if (target == null)</span>
+<span class="nc bnc" id="L411" title="All 2 branches missed.">        if (target == null)</span>
         {
-<span class="nc" id="L364">            target = new JQXBulletChartTarget();</span>
+<span class="nc" id="L413">            target = new JQXBulletChartTarget();</span>
         }
-<span class="nc" id="L366">        return target;</span>
+<span class="nc" id="L415">        return target;</span>
     }
 
     /**
@@ -373,12 +422,11 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public void setTarget(JQXBulletChartTarget target)
     {
-<span class="nc" id="L376">        this.target = target;</span>
-<span class="nc" id="L377">    }</span>
+<span class="nc" id="L425">        this.target = target;</span>
+<span class="nc" id="L426">    }</span>
 
     /**
-     * Sets ot gets the bulletcharts's ticks.
-     * Possible values for ticks.position
+     * Sets ot gets the bulletcharts's ticks. Possible values for ticks.position
      * &lt;p&gt;
      * &quot;near&quot;- positions the ticks at the top of the ranges bar if the orientation is set to &quot;horizontal&quot; and at the left if the orientation is set to &quot;vertical&quot;;
      * &lt;p&gt;
@@ -392,16 +440,15 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public JQXBulletChartTicks getTicks()
     {
-<span class="nc bnc" id="L395" title="All 2 branches missed.">        if (ticks == null)</span>
+<span class="nc bnc" id="L443" title="All 2 branches missed.">        if (ticks == null)</span>
         {
-<span class="nc" id="L397">            ticks = new JQXBulletChartTicks();</span>
+<span class="nc" id="L445">            ticks = new JQXBulletChartTicks();</span>
         }
-<span class="nc" id="L399">        return ticks;</span>
+<span class="nc" id="L447">        return ticks;</span>
     }
 
     /**
-     * Sets ot gets the bulletcharts's ticks.
-     * Possible values for ticks.position
+     * Sets ot gets the bulletcharts's ticks. Possible values for ticks.position
      * &lt;p&gt;
      * &quot;near&quot;- positions the ticks at the top of the ranges bar if the orientation is set to &quot;horizontal&quot; and at the left if the orientation is set to &quot;vertical&quot;;
      * &lt;p&gt;
@@ -415,8 +462,8 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public void setTicks(JQXBulletChartTicks ticks)
     {
-<span class="nc" id="L418">        this.ticks = ticks;</span>
-<span class="nc" id="L419">    }</span>
+<span class="nc" id="L465">        this.ticks = ticks;</span>
+<span class="nc" id="L466">    }</span>
 
     /**
      * Sets ot gets the bulletcharts's title.
@@ -425,7 +472,7 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public String getTitle()
     {
-<span class="nc" id="L428">        return title;</span>
+<span class="nc" id="L475">        return title;</span>
     }
 
     /**
@@ -435,8 +482,8 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public void setTitle(String title)
     {
-<span class="nc" id="L438">        this.title = title;</span>
-<span class="nc" id="L439">    }</span>
+<span class="nc" id="L485">        this.title = title;</span>
+<span class="nc" id="L486">    }</span>
 
     /**
      * Sets the tooltip format function
@@ -445,7 +492,7 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public JavascriptFunction getTooltipFormatFunction()
     {
-<span class="nc" id="L448">        return tooltipFormatFunction;</span>
+<span class="nc" id="L495">        return tooltipFormatFunction;</span>
     }
 
     /**
@@ -455,8 +502,8 @@ public class JQXBulletChartOptions extends JQXDefaultJavaScriptPart
      */
     public void setTooltipFormatFunction(JavascriptFunction tooltipFormatFunction)
     {
-<span class="nc" id="L458">        this.tooltipFormatFunction = tooltipFormatFunction;</span>
-<span class="nc" id="L459">    }</span>
+<span class="nc" id="L505">        this.tooltipFormatFunction = tooltipFormatFunction;</span>
+<span class="nc" id="L506">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -19,10 +19,11 @@ package za.co.mmagon.jwebswing.htmlbuilder.javascript;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.core.*;
-import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.*;
-import java.lang.reflect.ParameterizedType;
 import java.net.URL;
 import java.util.*;
 import java.util.logging.Level;
@@ -33,13 +34,12 @@ import za.co.mmagon.logger.LogFactory;
  * Defines a section of a JavaScript part e.g. Position
  * &lt;p&gt;
  * @author mmagon
- * @param &lt;J&gt; Always this class reference
  *
  * @since 2014/07/09
  */
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 @JsonInclude(Include.NON_NULL)
-public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializable
+public class JavaScriptPart implements Serializable
 {
 
 <span class="fc" id="L45">    private static final Logger LOG = LogFactory.getInstance().getLogger(&quot;JavaScriptPart&quot;);</span>
@@ -60,36 +60,34 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
      */
 <span class="fc" id="L61">    private static final ObjectMapper functionObjectMapper = new ObjectMapper();</span>
 
-    
     /*
      * Pretty print config
      */
     static
     {
-<span class="fc" id="L69">        javascriptObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);</span>
-<span class="fc" id="L70">        jsonObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);</span>
-<span class="fc" id="L71">        functionObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);</span>
+<span class="fc" id="L68">        javascriptObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);</span>
+<span class="fc" id="L69">        jsonObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);</span>
+<span class="fc" id="L70">        functionObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);</span>
 
-<span class="fc" id="L73">        javascriptObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);</span>
+<span class="fc" id="L72">        javascriptObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);</span>
+<span class="fc" id="L73">        jsonObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);</span>
 <span class="fc" id="L74">        jsonObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);</span>
-<span class="fc" id="L75">        jsonObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);</span>
-        
-        
-<span class="fc" id="L78">        javascriptObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);</span>
-<span class="fc" id="L79">        jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);</span>
-<span class="fc" id="L80">        functionObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);</span>
-<span class="fc" id="L81">    }</span>
+
+<span class="fc" id="L76">        javascriptObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);</span>
+<span class="fc" id="L77">        jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);</span>
+<span class="fc" id="L78">        functionObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);</span>
+<span class="fc" id="L79">    }</span>
 
     @JsonProperty(value = &quot;$jwid&quot;)
     private String ownerId;
 
     public JavaScriptPart()
-<span class="fc" id="L87">    {</span>
-<span class="fc" id="L88">    }</span>
+<span class="fc" id="L85">    {</span>
+<span class="fc" id="L86">    }</span>
 
     public String render()
     {
-<span class="nc" id="L92">        return toString();</span>
+<span class="nc" id="L90">        return toString();</span>
     }
 
     /**
@@ -100,77 +98,77 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
     @Override
     public String toString()
     {
-<span class="fc" id="L103">        String s = null;</span>
-<span class="pc bpc" id="L104" title="2 of 4 branches missed.">        switch (getJavascriptType())</span>
+<span class="fc" id="L101">        String s = null;</span>
+<span class="pc bpc" id="L102" title="2 of 4 branches missed.">        switch (getJavascriptType())</span>
         {
             case Javascript:
             {
                 try
                 {
-<span class="fc" id="L110">                    s = javascriptObjectMapper.writeValueAsString(this);</span>
+<span class="fc" id="L108">                    s = javascriptObjectMapper.writeValueAsString(this);</span>
                 }
-<span class="nc" id="L112">                catch (com.fasterxml.jackson.databind.JsonMappingException mapException)</span>
+<span class="nc" id="L110">                catch (com.fasterxml.jackson.databind.JsonMappingException mapException)</span>
                 {
-<span class="nc" id="L114">                    LOG.log(Level.FINE,&quot;JSON Mapping Exception!&quot;, mapException);</span>
+<span class="nc" id="L112">                    LOG.log(Level.FINE, &quot;JSON Mapping Exception!&quot;, mapException);</span>
                 }
-<span class="nc" id="L116">                catch (JsonProcessingException ex)</span>
+<span class="nc" id="L114">                catch (JsonProcessingException ex)</span>
                 {
-<span class="nc" id="L118">                    LOG.log(Level.SEVERE, &quot;Error Writing as Javascript!&quot;, ex);</span>
-<span class="pc" id="L119">                }</span>
-<span class="nc" id="L120">                break;</span>
+<span class="nc" id="L116">                    LOG.log(Level.SEVERE, &quot;Error Writing as Javascript!&quot;, ex);</span>
+<span class="pc" id="L117">                }</span>
+<span class="nc" id="L118">                break;</span>
             }
             case JSON:
             {
                 try
                 {
-<span class="fc" id="L126">                    s = jsonObjectMapper.writeValueAsString(this);</span>
+<span class="fc" id="L124">                    s = jsonObjectMapper.writeValueAsString(this);</span>
                 }
-<span class="nc" id="L128">                catch (JsonProcessingException ex)</span>
+<span class="nc" id="L126">                catch (JsonProcessingException ex)</span>
                 {
-<span class="nc" id="L130">                    LOG.log(Level.SEVERE, &quot;Error Writing as JSON Data!&quot;, ex);</span>
-<span class="fc" id="L131">                }</span>
-<span class="nc" id="L132">                break;</span>
+<span class="nc" id="L128">                    LOG.log(Level.SEVERE, &quot;Error Writing as JSON Data!&quot;, ex);</span>
+<span class="fc" id="L129">                }</span>
+<span class="nc" id="L130">                break;</span>
             }
             case Function:
             {
                 try
                 {
-<span class="nc" id="L138">                    s = javascriptObjectMapper.writeValueAsString(this);</span>
+<span class="nc" id="L136">                    s = javascriptObjectMapper.writeValueAsString(this);</span>
                 }
-<span class="nc" id="L140">                catch (JsonProcessingException ex)</span>
+<span class="nc" id="L138">                catch (JsonProcessingException ex)</span>
                 {
-<span class="nc" id="L142">                    LOG.log(Level.SEVERE, &quot;Error Writing as Javascript Function!&quot;, ex);</span>
-<span class="nc" id="L143">                }</span>
-<span class="nc" id="L144">                break;</span>
+<span class="nc" id="L140">                    LOG.log(Level.SEVERE, &quot;Error Writing as Javascript Function!&quot;, ex);</span>
+<span class="nc" id="L141">                }</span>
+<span class="nc" id="L142">                break;</span>
             }
             default:
             {
                 try
                 {
-<span class="nc" id="L150">                    s = jsonObjectMapper.writeValueAsString(this);</span>
+<span class="nc" id="L148">                    s = jsonObjectMapper.writeValueAsString(this);</span>
                 }
-<span class="nc" id="L152">                catch (JsonProcessingException ex)</span>
+<span class="nc" id="L150">                catch (JsonProcessingException ex)</span>
                 {
-<span class="nc" id="L154">                    LOG.log(Level.SEVERE, &quot;Error Writing as Default!&quot;, ex);</span>
-<span class="nc" id="L155">                }</span>
+<span class="nc" id="L152">                    LOG.log(Level.SEVERE, &quot;Error Writing as Default!&quot;, ex);</span>
+<span class="nc" id="L153">                }</span>
                 break;
             }
         }
-<span class="pc bpc" id="L159" title="1 of 2 branches missed.">        if (s != null)</span>
+<span class="pc bpc" id="L157" title="1 of 2 branches missed.">        if (s != null)</span>
         {
-<span class="fc bfc" id="L161" title="All 2 branches covered.">            if (s.equals(&quot;{ }&quot;))</span>
+<span class="fc bfc" id="L159" title="All 2 branches covered.">            if (s.equals(&quot;{ }&quot;))</span>
             {
-<span class="fc" id="L163">                return &quot;&quot;;</span>
+<span class="fc" id="L161">                return &quot;&quot;;</span>
             }
         }
         else
         {
-<span class="nc" id="L168">            return &quot;&quot;;</span>
+<span class="nc" id="L166">            return &quot;&quot;;</span>
         }
 
-<span class="fc" id="L171">        s = s.replaceAll(&quot;\r\n&quot;, &quot;\n&quot;);</span>
+<span class="fc" id="L169">        s = s.replaceAll(&quot;\r\n&quot;, &quot;\n&quot;);</span>
 
-<span class="fc" id="L173">        return s;</span>
+<span class="fc" id="L171">        return s;</span>
     }
 
     /**
@@ -180,7 +178,7 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
      */
     public JavascriptPartType getJavascriptType()
     {
-<span class="fc" id="L183">        return JavascriptPartType.Javascript;</span>
+<span class="fc" id="L181">        return JavascriptPartType.Javascript;</span>
     }
 
     /**
@@ -190,7 +188,7 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
      */
     public static ObjectMapper getJavascriptObjectMapper()
     {
-<span class="nc" id="L193">        return javascriptObjectMapper;</span>
+<span class="nc" id="L191">        return javascriptObjectMapper;</span>
     }
 
     /**
@@ -200,7 +198,7 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
      */
     public static ObjectMapper getJsonObjectMapper()
     {
-<span class="fc" id="L203">        return jsonObjectMapper;</span>
+<span class="fc" id="L201">        return jsonObjectMapper;</span>
     }
 
     /**
@@ -210,7 +208,7 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
      */
     public static ObjectMapper getFunctionObjectMapper()
     {
-<span class="nc" id="L213">        return functionObjectMapper;</span>
+<span class="nc" id="L211">        return functionObjectMapper;</span>
     }
 
     /**
@@ -224,42 +222,18 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
     {
         try
         {
-<span class="fc" id="L227">            return getJsonObjectMapper().writeValueAsString(o).replaceAll(&quot;\r\n&quot;, &quot;\n&quot;);</span>
+<span class="fc" id="L225">            return getJsonObjectMapper().writeValueAsString(o).replaceAll(&quot;\r\n&quot;, &quot;\n&quot;);</span>
         }
-<span class="nc" id="L229">        catch (JsonProcessingException ex)</span>
+<span class="nc" id="L227">        catch (JsonProcessingException ex)</span>
         {
-<span class="nc" id="L231">            LOG.log(Level.SEVERE,&quot;Unable to Serialize as JSON&quot;, ex);</span>
-<span class="nc" id="L232">            return &quot;&quot;;</span>
+<span class="nc" id="L229">            LOG.log(Level.SEVERE, &quot;Unable to Serialize as JSON&quot;, ex);</span>
+<span class="nc" id="L230">            return &quot;&quot;;</span>
         }
-<span class="nc" id="L234">        catch (Exception ex)</span>
+<span class="nc" id="L232">        catch (Exception ex)</span>
         {
-<span class="nc" id="L236">            LOG.log(Level.SEVERE,&quot;Unable to Serialize as JSON&quot;, ex);</span>
-<span class="nc" id="L237">            return &quot;&quot;;</span>
+<span class="nc" id="L234">            LOG.log(Level.SEVERE, &quot;Unable to Serialize as JSON&quot;, ex);</span>
+<span class="nc" id="L235">            return &quot;&quot;;</span>
         }
-    }
-
-    @JsonCreator
-    public J factory(String jsonString)
-    {
-<span class="nc" id="L244">        Class changeTo = ((Class) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);</span>
-<span class="nc" id="L245">        J pc = null;</span>
-        try
-        {
-<span class="nc" id="L248">            pc = (J) getJsonObjectMapper().readValue(jsonString, changeTo);</span>
-        }
-<span class="nc" id="L250">        catch (JsonParseException e)</span>
-        {
-<span class="nc" id="L252">            LOG.log(Level.SEVERE,&quot;JSON Parse Exception in creating Part&quot;, e);</span>
-        }
-<span class="nc" id="L254">        catch (JsonMappingException e)</span>
-        {
-<span class="nc" id="L256">            LOG.log(Level.SEVERE,&quot;JSON Mapping Exception in creating Part&quot;, e);</span>
-        }
-<span class="nc" id="L258">        catch (IOException e)</span>
-        {
-<span class="nc" id="L260">            LOG.log(Level.SEVERE,&quot;IO Exception in creating Part&quot;, e);</span>
-<span class="nc" id="L261">        }</span>
-<span class="nc" id="L262">        return pc;</span>
     }
 
     /**
@@ -275,8 +249,8 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
      */
     public static &lt;T&gt; T From(InputStream file, Class&lt;T&gt; clazz) throws IOException
     {
-<span class="nc" id="L278">        T out = jsonObjectMapper.readValue(file, clazz);</span>
-<span class="nc" id="L279">        return out;</span>
+<span class="nc" id="L252">        T out = jsonObjectMapper.readValue(file, clazz);</span>
+<span class="nc" id="L253">        return out;</span>
     }
 
     /**
@@ -292,8 +266,8 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
      */
     public static &lt;T&gt; T From(File file, Class&lt;T&gt; clazz) throws IOException
     {
-<span class="nc" id="L295">        T out = jsonObjectMapper.readValue(file, clazz);</span>
-<span class="nc" id="L296">        return out;</span>
+<span class="nc" id="L269">        T out = jsonObjectMapper.readValue(file, clazz);</span>
+<span class="nc" id="L270">        return out;</span>
     }
 
     /**
@@ -309,8 +283,8 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
      */
     public static &lt;T&gt; T From(Reader file, Class&lt;T&gt; clazz) throws IOException
     {
-<span class="nc" id="L312">        T out = jsonObjectMapper.readValue(file, clazz);</span>
-<span class="nc" id="L313">        return out;</span>
+<span class="nc" id="L286">        T out = jsonObjectMapper.readValue(file, clazz);</span>
+<span class="nc" id="L287">        return out;</span>
     }
 
     /**
@@ -326,8 +300,8 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
      */
     public static &lt;T&gt; T From(String content, Class&lt;T&gt; clazz) throws IOException
     {
-<span class="nc" id="L329">        T out = jsonObjectMapper.readValue(content, clazz);</span>
-<span class="nc" id="L330">        return out;</span>
+<span class="nc" id="L303">        T out = jsonObjectMapper.readValue(content, clazz);</span>
+<span class="nc" id="L304">        return out;</span>
     }
 
     /**
@@ -343,8 +317,8 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
      */
     public static &lt;T&gt; T From(URL content, Class&lt;T&gt; clazz) throws IOException
     {
-<span class="nc" id="L346">        T out = jsonObjectMapper.readValue(content, clazz);</span>
-<span class="nc" id="L347">        return out;</span>
+<span class="nc" id="L320">        T out = jsonObjectMapper.readValue(content, clazz);</span>
+<span class="nc" id="L321">        return out;</span>
     }
 
     /**
@@ -360,10 +334,10 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
      */
     public static &lt;T&gt; List&lt;T&gt; FromToList(InputStream file, Class&lt;T&gt; clazz) throws IOException
     {
-<span class="nc" id="L363">        T list = jsonObjectMapper.readValue(file, clazz);</span>
-<span class="nc" id="L364">        ArrayList&lt;T&gt; lists = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L365">        lists.addAll(Arrays.asList((T[]) list));</span>
-<span class="nc" id="L366">        return lists;</span>
+<span class="nc" id="L337">        T list = jsonObjectMapper.readValue(file, clazz);</span>
+<span class="nc" id="L338">        ArrayList&lt;T&gt; lists = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L339">        lists.addAll(Arrays.asList((T[]) list));</span>
+<span class="nc" id="L340">        return lists;</span>
     }
 
     /**
@@ -379,10 +353,10 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
      */
     public static &lt;T&gt; List&lt;T&gt; FromToList(File file, Class&lt;T&gt; clazz) throws IOException
     {
-<span class="nc" id="L382">        T list = jsonObjectMapper.readValue(file, clazz);</span>
-<span class="nc" id="L383">        ArrayList&lt;T&gt; lists = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L384">        lists.addAll(Arrays.asList((T[]) list));</span>
-<span class="nc" id="L385">        return lists;</span>
+<span class="nc" id="L356">        T list = jsonObjectMapper.readValue(file, clazz);</span>
+<span class="nc" id="L357">        ArrayList&lt;T&gt; lists = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L358">        lists.addAll(Arrays.asList((T[]) list));</span>
+<span class="nc" id="L359">        return lists;</span>
     }
 
     /**
@@ -398,10 +372,10 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
      */
     public static &lt;T&gt; List&lt;T&gt; FromToList(Reader file, Class&lt;T&gt; clazz) throws IOException
     {
-<span class="nc" id="L401">        T list = jsonObjectMapper.readValue(file, clazz);</span>
-<span class="nc" id="L402">        ArrayList&lt;T&gt; lists = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L403">        lists.addAll(Arrays.asList((T[]) list));</span>
-<span class="nc" id="L404">        return lists;</span>
+<span class="nc" id="L375">        T list = jsonObjectMapper.readValue(file, clazz);</span>
+<span class="nc" id="L376">        ArrayList&lt;T&gt; lists = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L377">        lists.addAll(Arrays.asList((T[]) list));</span>
+<span class="nc" id="L378">        return lists;</span>
     }
 
     /**
@@ -417,10 +391,10 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
      */
     public static &lt;T&gt; List&lt;T&gt; FromToList(String content, Class&lt;T&gt; clazz) throws IOException
     {
-<span class="nc" id="L420">        T list = jsonObjectMapper.readValue(content, clazz);</span>
-<span class="nc" id="L421">        ArrayList&lt;T&gt; lists = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L422">        lists.addAll(Arrays.asList((T[]) list));</span>
-<span class="nc" id="L423">        return lists;</span>
+<span class="nc" id="L394">        T list = jsonObjectMapper.readValue(content, clazz);</span>
+<span class="nc" id="L395">        ArrayList&lt;T&gt; lists = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L396">        lists.addAll(Arrays.asList((T[]) list));</span>
+<span class="nc" id="L397">        return lists;</span>
     }
 
     /**
@@ -436,10 +410,10 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
      */
     public static &lt;T&gt; ArrayList&lt;T&gt; FromToList(URL content, Class&lt;T&gt; clazz) throws IOException
     {
-<span class="nc" id="L439">        T list = jsonObjectMapper.readValue(content, clazz);</span>
-<span class="nc" id="L440">        ArrayList&lt;T&gt; lists = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L441">        lists.addAll(Arrays.asList((T[]) list));</span>
-<span class="nc" id="L442">        return lists;</span>
+<span class="nc" id="L413">        T list = jsonObjectMapper.readValue(content, clazz);</span>
+<span class="nc" id="L414">        ArrayList&lt;T&gt; lists = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L415">        lists.addAll(Arrays.asList((T[]) list));</span>
+<span class="nc" id="L416">        return lists;</span>
     }
 
     /**
@@ -449,7 +423,7 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
      */
     public String getOwnerId()
     {
-<span class="nc" id="L452">        return ownerId;</span>
+<span class="nc" id="L426">        return ownerId;</span>
     }
 
     /**
@@ -459,8 +433,8 @@ public class JavaScriptPart&lt;J extends JavaScriptPart&gt; implements Serializa
      */
     public void setOwnerId(String ownerId)
     {
-<span class="nc" id="L462">        this.ownerId = ownerId;</span>
-<span class="nc" id="L463">    }</span>
+<span class="nc" id="L436">        this.ownerId = ownerId;</span>
+<span class="nc" id="L437">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

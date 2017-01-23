@@ -61,7 +61,7 @@ public class JQImageMap extends Component<ImageMapChildren, ImageMapAttributes, 
      */
     private boolean interactive;
     /**
-     * Shows whether the map is labeled This puts a div at the center of each polygon
+     * Shows whether the map is labeled This puts a div at the Center of each polygon
      */
     private boolean labeled;
     /**
@@ -307,9 +307,9 @@ public class JQImageMap extends Component<ImageMapChildren, ImageMapAttributes, 
 
                     areaLableDiv.addAttribute(GlobalAttributes.Style, "position:absolute");
                     areaLableDiv.addFeature(new Binder(areaLableDiv, area));
-                    //int[] center = PolygonUtils.getCenterPointOfPolygon(area.getCoordinates());
-                    //areaLableDiv.addAttribute(GlobalAttributes.Style, "position:absolute;top:" + center[0] + ";left:"+ center[1]);
-                    areaLableDiv.addFeature(new JQUIPositionFeature(areaLableDiv, new Position(PositionLocationHorizontal.center, PositionLocationVertical.center, PositionLocationHorizontal.center, PositionLocationVertical.center, area)));
+                    //int[] Center = PolygonUtils.getCenterPointOfPolygon(area.getCoordinates());
+                    //areaLableDiv.addAttribute(GlobalAttributes.Style, "position:absolute;top:" + Center[0] + ";Left:"+ Center[1]);
+                    areaLableDiv.addFeature(new JQUIPositionFeature(areaLableDiv, new Position(PositionLocationHorizontal.Center, PositionLocationVertical.center, PositionLocationHorizontal.Center, PositionLocationVertical.center, area)));
                     area.add(areaLableDiv);
                     //add(areaLableDiv);
                 }

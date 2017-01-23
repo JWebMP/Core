@@ -31,7 +31,14 @@ import za.co.mmagon.jwebswing.components.pools.jqueryui.JQUIReferencePool;
 public class JQUISortableFeature extends Feature<JQUISortableOptions, JQUISortableFeature> implements JQUISortableFeatures
 {
 
+    private static final long serialVersionUID = 1L;
+    /**
+     * The sortable linked component
+     */
     private final Component selectMenu;
+    /**
+     * The options for the sortablke feature
+     */
     private JQUISortableOptions options;
 
     /**
@@ -51,7 +58,6 @@ public class JQUISortableFeature extends Feature<JQUISortableOptions, JQUISortab
 
         getJavascriptReferences().add(JQUIReferencePool.Sortable.getJavaScriptReference());
         getCssReferences().add(JQUIReferencePool.Sortable.getCssReference());
-
     }
 
     @Override

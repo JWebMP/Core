@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.components.jqueryui.spinner;
 
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
 /**
  * Icons to use for buttons, matching an icon provided by the jQuery UI CSS Framework.
@@ -34,6 +33,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
  */
 public class SpinnerIconOptions extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Icons to use for the button, matching an icon defined by the jQuery UI CSS Framework.<p>
@@ -94,11 +95,5 @@ public class SpinnerIconOptions extends JavaScriptPart
     public void setDown(String down)
     {
         this.down = down;
-    }
-
-    @Override
-    public JavascriptPartType getJavascriptType()
-    {
-        return JavascriptPartType.Javascript;
     }
 }

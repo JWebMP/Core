@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.components.jqueryui.selectmenu;
 
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
 /**
  *
@@ -30,11 +29,23 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 public class JQUISelectMenuIconsOptions extends JavaScriptPart
 {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Icons to use for the button, matching an icon defined by the jQuery UI CSS Framework.<p>
      * button (string, default: "ui-icon-triangle-1-s")
      */
     private String button;
+
+    /**
+     * Sets the button
+     *
+     * @param button
+     */
+    public JQUISelectMenuIconsOptions(String button)
+    {
+        this.button = button;
+    }
 
     /**
      * Icons to use for the button, matching an icon defined by the jQuery UI CSS Framework.<p>
@@ -56,11 +67,5 @@ public class JQUISelectMenuIconsOptions extends JavaScriptPart
     public void setButton(String button)
     {
         this.button = button;
-    }
-
-    @Override
-    public JavascriptPartType getJavascriptType()
-    {
-        return JavascriptPartType.Javascript;
     }
 }

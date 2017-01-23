@@ -7,6 +7,8 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.dialog.JQUIDialogEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.resizable.JQUIResizableEvents;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
 
@@ -16,7 +18,7 @@ import za.co.mmagon.logger.LogFactory;
  * @author Marc Magon
  */
 public abstract class ResizeAdapter extends Event
-        implements GlobalEvents
+        implements GlobalEvents, JQUIDialogEvents, JQUIResizableEvents
 {
 
     /**
@@ -94,7 +96,7 @@ public abstract class ResizeAdapter extends Event
         }
         catch (Exception e)
         {
-            LOG.log(Level.SEVERE,"Error In Firing Event", e);
+            LOG.log(Level.SEVERE, "Error In Firing Event", e);
         }
     }
 

@@ -16,10 +16,12 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.annotations;
 
-import java.lang.annotation.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.*;
+import java.lang.annotation.Annotation;
+import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.NameValuePairCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.NameValuePairCSSImpl;
 
 /**
+ * Any custom CSS Implementation
  *
  * @author GedMarc
  * @since Nov 20, 2016
@@ -29,17 +31,20 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.*;
 public class CustomCSSImpl implements za.co.mmagon.jwebswing.htmlbuilder.css.Annotations.CustomCSS
 {
 
-    public NameValuePairCSSImpl[] value;
+    private NameValuePairCSSImpl[] value;
 
+    /**
+     * Any custom CSS implementation
+     */
     public CustomCSSImpl()
-<span class="nc" id="L35">    {</span>
+<span class="nc" id="L40">    {</span>
 
-<span class="nc" id="L37">    }</span>
+<span class="nc" id="L42">    }</span>
 
     @Override
     public Class&lt;? extends Annotation&gt; annotationType()
     {
-<span class="nc" id="L42">        return za.co.mmagon.jwebswing.htmlbuilder.css.Annotations.CustomCSS.class;</span>
+<span class="nc" id="L47">        return za.co.mmagon.jwebswing.htmlbuilder.css.Annotations.CustomCSS.class;</span>
     }
 
     /**
@@ -53,7 +58,7 @@ public class CustomCSSImpl implements za.co.mmagon.jwebswing.htmlbuilder.css.Ann
     @Override
     public NameValuePairCSS[] value()
     {
-<span class="nc" id="L56">        return null;</span>
+<span class="nc" id="L61">        return null;</span>
     }
 
     /**
@@ -63,7 +68,7 @@ public class CustomCSSImpl implements za.co.mmagon.jwebswing.htmlbuilder.css.Ann
      */
     public NameValuePairCSSImpl[] getValue()
     {
-<span class="nc" id="L66">        return value;</span>
+<span class="nc" id="L71">        return value;</span>
     }
 
     /**
@@ -73,8 +78,8 @@ public class CustomCSSImpl implements za.co.mmagon.jwebswing.htmlbuilder.css.Ann
      */
     public void setValue(NameValuePairCSSImpl[] value)
     {
-<span class="nc" id="L76">        this.value = value;</span>
-<span class="nc" id="L77">    }</span>
+<span class="nc" id="L81">        this.value = value;</span>
+<span class="nc" id="L82">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

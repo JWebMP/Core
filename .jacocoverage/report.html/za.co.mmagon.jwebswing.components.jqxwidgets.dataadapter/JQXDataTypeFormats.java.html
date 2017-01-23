@@ -16,58 +16,103 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets.dataadapter;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
 /**
- * This Class
+ * The data type format options available
  *
  * @author GedMarc
  * @since 29 Dec 2015
  */
-public class JQXDataTypeFormats
+public class JQXDataTypeFormats extends JavaScriptPart
 {
 
+    private static final long serialVersionUID = 1L;
+    /**
+     * The name of the datatype
+     */
     private String name;
+    /**
+     * The type of the datatype
+     */
     private String type;
+    /**
+     * The format of the data type
+     */
     private String format;
 
+    /**
+     * The data type format options available
+     */
     public JQXDataTypeFormats()
-<span class="nc" id="L33">    {</span>
-<span class="nc" id="L34">    }</span>
+<span class="nc" id="L48">    {</span>
+<span class="nc" id="L49">    }</span>
 
     @Override
     public String toString()
     {
-<span class="nc" id="L39">        return super.toString();</span>
+<span class="nc" id="L54">        return super.toString();</span>
     }
 
+    /**
+     * The name of the data type
+     *
+     * @return
+     */
     public String getName()
     {
-<span class="nc" id="L44">        return name;</span>
+<span class="nc" id="L64">        return name;</span>
     }
 
+    /**
+     * Sets the name of the data type
+     *
+     * @param name
+     */
     public void setName(String name)
     {
-<span class="nc" id="L49">        this.name = name;</span>
-<span class="nc" id="L50">    }</span>
+<span class="nc" id="L74">        this.name = name;</span>
+<span class="nc" id="L75">    }</span>
 
+    /**
+     * Gets the type of the data type
+     *
+     * @return
+     */
     public String getType()
     {
-<span class="nc" id="L54">        return type;</span>
+<span class="nc" id="L84">        return type;</span>
     }
 
+    /**
+     * Sets the type of the data type
+     *
+     * @param type
+     */
     public void setType(String type)
     {
-<span class="nc" id="L59">        this.type = type;</span>
-<span class="nc" id="L60">    }</span>
+<span class="nc" id="L94">        this.type = type;</span>
+<span class="nc" id="L95">    }</span>
 
+    /**
+     * Returns the format for this data type
+     *
+     * @return
+     */
     public String getFormat()
     {
-<span class="nc" id="L64">        return format;</span>
+<span class="nc" id="L104">        return format;</span>
     }
 
+    /**
+     * Sets the format for this data type
+     *
+     * @param format
+     */
     public void setFormat(String format)
     {
-<span class="nc" id="L69">        this.format = format;</span>
-<span class="nc" id="L70">    }</span>
+<span class="nc" id="L114">        this.format = format;</span>
+<span class="nc" id="L115">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

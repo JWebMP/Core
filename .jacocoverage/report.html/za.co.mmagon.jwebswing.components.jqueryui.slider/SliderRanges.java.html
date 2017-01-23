@@ -14,33 +14,38 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
-
 package za.co.mmagon.jwebswing.components.jqueryui.slider;
-
 
 /**
  * The available ranges for the Slider
  *
  * @author GedMarc
  */
-<span class="nc" id="L26">public enum SliderRanges</span>
+<span class="nc" id="L24">public enum SliderRanges</span>
 {
 
     /**
      * Enables 2 fields for entry
      */
-<span class="nc" id="L32">    True,</span>
+<span class="nc" id="L30">    True,</span>
     /**
      * Sets to 1 slider entry
      */
-<span class="nc" id="L36">    False,</span>
+<span class="nc" id="L34">    False,</span>
     /**
      * Locks the minimum
      */
-<span class="nc" id="L40">    Min,</span>
+<span class="nc" id="L38">    Min,</span>
     /**
      * Locks the maximum
      */
-<span class="nc" id="L44">    Max;</span>
+<span class="nc" id="L42">    Max;</span>
+
+    @Override
+    public String toString()
+    {
+<span class="nc" id="L47">        return super.toString().toLowerCase();</span>
+    }
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

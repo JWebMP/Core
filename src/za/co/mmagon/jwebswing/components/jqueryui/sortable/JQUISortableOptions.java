@@ -25,11 +25,9 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
 /**
- * The jQuery UI Sortable plugin makes selected elements sortable by dragging
- * with the mouse.
+ * The jQuery UI Sortable plugin makes selected elements sortable by dragging with the mouse.
  * <p>
- * Note: In order to sort table rows, the tbody must be made sortable, not the
- * table.
+ * Note: In order to sort table rows, the tbody must be made sortable, not the table.
  * <p>
  * @author GedMarc
  * @since Mar 17, 2015
@@ -45,26 +43,20 @@ public class JQUISortableOptions extends JavaScriptPart
      */
     public JQUISortableOptions()
     {
-
+        //Nothing needed here
     }
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * Defines where the helper that moves with the mouse is being appended to
-     * during the drag (for example, to resolve overlap/zIndex issues).
-     * Multiple types supported:
+     * Defines where the helper that moves with the mouse is being appended to during the drag (for example, to resolve overlap/zIndex issues). Multiple types supported:
      * <p>
-     * jQuery: A jQuery object containing the element to append the helper to.
-     * Element: The element to append the helper to.
-     * Selector: A selector specifying which element to append the helper to.
-     * String: The string "parent" will cause the helper to be a sibling of the
-     * sortable item
+     * jQuery: A jQuery object containing the element to append the helper to. Element: The element to append the helper to. Selector: A selector specifying which element to append the helper to.
+     * String: The string "parent" will cause the helper to be a sibling of the sortable item
      */
     private String appendTo;
     /**
-     * If defined, the items can be dragged only horizontally or vertically.
-     * Possible values: "x", "y".
+     * If defined, the items can be dragged only horizontally or vertically. Possible values: "x", "y".
      */
     private Axis axis;
     /**
@@ -72,24 +64,17 @@ public class JQUISortableOptions extends JavaScriptPart
      */
     private ComponentTypes cancel;
     /**
-     * A selector of other sortable elements that the items from this list
-     * should be connected to.
-     * This is a one-way relationship, if you want the
-     * items to be connected in both directions, the connectWith option must be
-     * set on both sortable elements.
+     * A selector of other sortable elements that the items from this list should be connected to. This is a one-way relationship, if you want the items to be connected in both directions, the
+     * connectWith option must be set on both sortable elements.
      */
     private String connectWith;
     /**
      *
      * <p>
-     * Defines a bounding box that the sortable items are constrained to while
-     * dragging.
+     * Defines a bounding box that the sortable items are constrained to while dragging.
      * <p>
-     * Note: The element specified for containment must have a calculated width
-     * and height (though it need not be explicit). For example, if you have
-     * float: left sortable children and specify containment: "parent" be sure
-     * to have float: left on the sortable/parent container as well or it will
-     * have height: 0, causing undefined behavior.
+     * Note: The element specified for containment must have a calculated width and height (though it need not be explicit). For example, if you have float: left sortable children and specify
+     * containment: "parent" be sure to have float: left on the sortable/parent container as well or it will have height: 0, causing undefined behavior.
      * <p>
      */
     private String containment;
@@ -98,14 +83,12 @@ public class JQUISortableOptions extends JavaScriptPart
      */
     private Cursors cursor;
     /**
-     * Moves the sorting element or helper so the cursor always appears to drag
-     * from the same position. Coordinates can be given as a hash using a
-     * combination of one or two keys: { top, left, right, bottom }.
+     * Moves the sorting element or helper so the cursor always appears to drag from the same position. Coordinates can be given as a hash using a combination of one or two keys: { top, left, right,
+     * bottom }.
      */
     private Position cursorAt;
     /**
-     * Time in milliseconds to define when the sorting should start. Adding a
-     * delay helps preventing unwanted drags when clicking on an element.
+     * Time in milliseconds to define when the sorting should start. Adding a delay helps preventing unwanted drags when clicking on an element.
      */
     private Integer delay;
     /**
@@ -113,19 +96,16 @@ public class JQUISortableOptions extends JavaScriptPart
      */
     private Boolean disabled;
     /**
-     * Tolerance, in pixels, for when sorting should start. If specified,
-     * sorting will not start until after mouse is dragged beyond distance. Can
-     * be used to allow for clicks on elements within a handle.
+     * Tolerance, in pixels, for when sorting should start. If specified, sorting will not start until after mouse is dragged beyond distance. Can be used to allow for clicks on elements within a
+     * handle.
      */
     private Integer distance;
     /**
-     * If false, items from this sortable can't be dropped on an empty connect
-     * sortable (see the connectWith option.
+     * If false, items from this sortable can't be dropped on an empty connect sortable (see the connectWith option.
      */
     private Boolean dropOnEmpty;
     /**
-     * If true, forces the helper to have a size.
-     * Code examples:
+     * If true, forces the helper to have a size. Code examples:
      * <p>
      * Initialize the sortable with the forceHelperSize option specified:
      */
@@ -135,8 +115,7 @@ public class JQUISortableOptions extends JavaScriptPart
      */
     private Integer forcePlaceholderSize;
     /**
-     * Snaps the sorting element or helper to a grid, every x and y pixels.
-     * Array values: [ x, y ].
+     * Snaps the sorting element or helper to a grid, every x and y pixels. Array values: [ x, y ].
      */
     private Integer[] grid;
     /**
@@ -144,8 +123,7 @@ public class JQUISortableOptions extends JavaScriptPart
      */
     private String handle;
     /**
-     * Default: "original"
-     * Allows for a helper element to be used for dragging display.
+     * Default: "original" Allows for a helper element to be used for dragging display.
      */
     private SortableHelpers helper;
     /**
@@ -161,13 +139,9 @@ public class JQUISortableOptions extends JavaScriptPart
      */
     private String placeholder;
     /**
-     * Whether the sortable items should revert to their new positions using a
-     * smooth animation.
-     * Multiple types supported:
+     * Whether the sortable items should revert to their new positions using a smooth animation. Multiple types supported:
      * <p>
-     * Boolean: When set to true, the items will animate with the default
-     * duration.
-     * Number: The duration for the animation, in milliseconds.
+     * Boolean: When set to true, the items will animate with the default duration. Number: The duration for the animation, in milliseconds.
      * <p>
      */
     private Boolean revert;
@@ -180,37 +154,27 @@ public class JQUISortableOptions extends JavaScriptPart
      */
     private Integer scrollSensitivity;
     /**
-     * Default: 20
-     * The speed at which the window should scroll once the mouse pointer gets
-     * within the scrollSensitivity distance.
+     * Default: 20 The speed at which the window should scroll once the mouse pointer gets within the scrollSensitivity distance.
      */
     private Integer scrollSpeed;
     /**
-     * Specifies which mode to use for testing whether the item being moved is
-     * hovering over another item. Possible values:
+     * Specifies which mode to use for testing whether the item being moved is hovering over another item. Possible values:
      * <p>
-     * "intersect": The item overlaps the other item by at least 50%.
-     * "pointer": The mouse pointer overlaps the other item.
+     * "intersect": The item overlaps the other item by at least 50%. "pointer": The mouse pointer overlaps the other item.
      * <p>
      */
     private Integer tolerance;
     /**
      * <p>
-     * Z-index for element/helper while being sorted.
-     * Default: 1000
+     * Z-index for element/helper while being sorted. Default: 1000
      */
     private Integer zIndex;
 
     /**
-     * Defines where the helper that moves with the mouse is being appended to
-     * during the drag (for example, to resolve overlap/zIndex issues).
-     * Multiple types supported:
+     * Defines where the helper that moves with the mouse is being appended to during the drag (for example, to resolve overlap/zIndex issues). Multiple types supported:
      * <p>
-     * jQuery: A jQuery object containing the element to append the helper to.
-     * Element: The element to append the helper to.
-     * Selector: A selector specifying which element to append the helper to.
-     * String: The string "parent" will cause the helper to be a sibling of the
-     * sortable item
+     * jQuery: A jQuery object containing the element to append the helper to. Element: The element to append the helper to. Selector: A selector specifying which element to append the helper to.
+     * String: The string "parent" will cause the helper to be a sibling of the sortable item
      * <p>
      * @return
      */
@@ -220,15 +184,10 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * Defines where the helper that moves with the mouse is being appended to
-     * during the drag (for example, to resolve overlap/zIndex issues).
-     * Multiple types supported:
+     * Defines where the helper that moves with the mouse is being appended to during the drag (for example, to resolve overlap/zIndex issues). Multiple types supported:
      * <p>
-     * jQuery: A jQuery object containing the element to append the helper to.
-     * Element: The element to append the helper to.
-     * Selector: A selector specifying which element to append the helper to.
-     * String: The string "parent" will cause the helper to be a sibling of the
-     * sortable item
+     * jQuery: A jQuery object containing the element to append the helper to. Element: The element to append the helper to. Selector: A selector specifying which element to append the helper to.
+     * String: The string "parent" will cause the helper to be a sibling of the sortable item
      * <p>
      * @param appendTo
      */
@@ -238,8 +197,7 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * If defined, the items can be dragged only horizontally or vertically.
-     * Possible values: "x", "y".
+     * If defined, the items can be dragged only horizontally or vertically. Possible values: "x", "y".
      * <p>
      * @return
      */
@@ -249,8 +207,7 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * If defined, the items can be dragged only horizontally or vertically.
-     * Possible values: "x", "y".
+     * If defined, the items can be dragged only horizontally or vertically. Possible values: "x", "y".
      * <p>
      * @param axis
      */
@@ -280,11 +237,8 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * A selector of other sortable elements that the items from this list
-     * should be connected to.
-     * This is a one-way relationship, if you want the
-     * items to be connected in both directions, the connectWith option must be
-     * set on both sortable elements.
+     * A selector of other sortable elements that the items from this list should be connected to. This is a one-way relationship, if you want the items to be connected in both directions, the
+     * connectWith option must be set on both sortable elements.
      * <p>
      * @return
      */
@@ -294,11 +248,8 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * A selector of other sortable elements that the items from this list
-     * should be connected to.
-     * This is a one-way relationship, if you want the
-     * items to be connected in both directions, the connectWith option must be
-     * set on both sortable elements.
+     * A selector of other sortable elements that the items from this list should be connected to. This is a one-way relationship, if you want the items to be connected in both directions, the
+     * connectWith option must be set on both sortable elements.
      * <p>
      * @param connectWith
      */
@@ -310,14 +261,10 @@ public class JQUISortableOptions extends JavaScriptPart
     /**
      *
      * <p>
-     * Defines a bounding box that the sortable items are constrained to while
-     * dragging.
+     * Defines a bounding box that the sortable items are constrained to while dragging.
      * <p>
-     * Note: The element specified for containment must have a calculated width
-     * and height (though it need not be explicit). For example, if you have
-     * float: left sortable children and specify containment: "parent" be sure
-     * to have float: left on the sortable/parent container as well or it will
-     * have height: 0, causing undefined behavior.
+     * Note: The element specified for containment must have a calculated width and height (though it need not be explicit). For example, if you have float: left sortable children and specify
+     * containment: "parent" be sure to have float: left on the sortable/parent container as well or it will have height: 0, causing undefined behavior.
      * <p>
      * @return
      */
@@ -329,14 +276,10 @@ public class JQUISortableOptions extends JavaScriptPart
     /**
      *
      * <p>
-     * Defines a bounding box that the sortable items are constrained to while
-     * dragging.
+     * Defines a bounding box that the sortable items are constrained to while dragging.
      * <p>
-     * Note: The element specified for containment must have a calculated width
-     * and height (though it need not be explicit). For example, if you have
-     * float: left sortable children and specify containment: "parent" be sure
-     * to have float: left on the sortable/parent container as well or it will
-     * have height: 0, causing undefined behavior.
+     * Note: The element specified for containment must have a calculated width and height (though it need not be explicit). For example, if you have float: left sortable children and specify
+     * containment: "parent" be sure to have float: left on the sortable/parent container as well or it will have height: 0, causing undefined behavior.
      * <p>
      * @param containment
      */
@@ -366,10 +309,8 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * Moves the sorting element or helper so the cursor always appears to drag
-     * from the same position. Coordinates can be given as a hash using a
-     * combination of one or two keys: { top, left, right, bottom }.
-     * TODO Redo this implementation
+     * Moves the sorting element or helper so the cursor always appears to drag from the same position. Coordinates can be given as a hash using a combination of one or two keys: { top, left, right,
+     * bottom }. TODO Redo this implementation
      * <p>
      * @return
      */
@@ -379,10 +320,8 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * Moves the sorting element or helper so the cursor always appears to drag
-     * from the same position. Coordinates can be given as a hash using a
-     * combination of one or two keys: { top, left, right, bottom }.
-     * TODO Redo this implementation
+     * Moves the sorting element or helper so the cursor always appears to drag from the same position. Coordinates can be given as a hash using a combination of one or two keys: { top, left, right,
+     * bottom }. TODO Redo this implementation
      * <p>
      * @param cursorAt
      */
@@ -392,8 +331,7 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * Time in milliseconds to define when the sorting should start. Adding a
-     * delay helps preventing unwanted drags when clicking on an element.
+     * Time in milliseconds to define when the sorting should start. Adding a delay helps preventing unwanted drags when clicking on an element.
      * <p>
      * @return
      */
@@ -403,8 +341,7 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * Time in milliseconds to define when the sorting should start. Adding a
-     * delay helps preventing unwanted drags when clicking on an element.
+     * Time in milliseconds to define when the sorting should start. Adding a delay helps preventing unwanted drags when clicking on an element.
      * <p>
      * @param delay
      */
@@ -434,9 +371,8 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * Tolerance, in pixels, for when sorting should start. If specified,
-     * sorting will not start until after mouse is dragged beyond distance. Can
-     * be used to allow for clicks on elements within a handle.
+     * Tolerance, in pixels, for when sorting should start. If specified, sorting will not start until after mouse is dragged beyond distance. Can be used to allow for clicks on elements within a
+     * handle.
      * <p>
      * @return
      */
@@ -446,9 +382,8 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * Tolerance, in pixels, for when sorting should start. If specified,
-     * sorting will not start until after mouse is dragged beyond distance. Can
-     * be used to allow for clicks on elements within a handle.
+     * Tolerance, in pixels, for when sorting should start. If specified, sorting will not start until after mouse is dragged beyond distance. Can be used to allow for clicks on elements within a
+     * handle.
      * <p>
      * @param distance
      */
@@ -458,8 +393,7 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * If false, items from this sortable can't be dropped on an empty connect
-     * sortable (see the connectWith option.
+     * If false, items from this sortable can't be dropped on an empty connect sortable (see the connectWith option.
      * <p>
      * @return
      */
@@ -469,8 +403,7 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * If false, items from this sortable can't be dropped on an empty connect
-     * sortable (see the connectWith option.
+     * If false, items from this sortable can't be dropped on an empty connect sortable (see the connectWith option.
      * <p>
      * @param dropOnEmpty
      */
@@ -480,8 +413,7 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * If true, forces the helper to have a size.
-     * Code examples:
+     * If true, forces the helper to have a size. Code examples:
      * <p>
      * Initialize the sortable with the forceHelperSize option specified:
      * <p>
@@ -493,8 +425,7 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * If true, forces the helper to have a size.
-     * Code examples:
+     * If true, forces the helper to have a size. Code examples:
      * <p>
      * Initialize the sortable with the forceHelperSize option specified:
      * <p>
@@ -526,8 +457,7 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * Snaps the sorting element or helper to a grid, every x and y pixels.
-     * Array values: [ x, y ].
+     * Snaps the sorting element or helper to a grid, every x and y pixels. Array values: [ x, y ].
      * <p>
      * @return
      */
@@ -537,8 +467,7 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * Snaps the sorting element or helper to a grid, every x and y pixels.
-     * Array values: [ x, y ].
+     * Snaps the sorting element or helper to a grid, every x and y pixels. Array values: [ x, y ].
      * <p>
      * @param grid
      */
@@ -568,8 +497,7 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * Default: "original"
-     * Allows for a helper element to be used for dragging display.
+     * Default: "original" Allows for a helper element to be used for dragging display.
      * <p>
      * @return
      */
@@ -579,8 +507,7 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * Default: "original"
-     * Allows for a helper element to be used for dragging display.
+     * Default: "original" Allows for a helper element to be used for dragging display.
      * <p>
      * @param helper
      */
@@ -650,13 +577,9 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * Whether the sortable items should revert to their new positions using a
-     * smooth animation.
-     * Multiple types supported:
+     * Whether the sortable items should revert to their new positions using a smooth animation. Multiple types supported:
      * <p>
-     * Boolean: When set to true, the items will animate with the default
-     * duration.
-     * Number: The duration for the animation, in milliseconds.
+     * Boolean: When set to true, the items will animate with the default duration. Number: The duration for the animation, in milliseconds.
      * <p>
      * @return
      */
@@ -666,13 +589,9 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * Whether the sortable items should revert to their new positions using a
-     * smooth animation.
-     * Multiple types supported:
+     * Whether the sortable items should revert to their new positions using a smooth animation. Multiple types supported:
      * <p>
-     * Boolean: When set to true, the items will animate with the default
-     * duration.
-     * Number: The duration for the animation, in milliseconds.
+     * Boolean: When set to true, the items will animate with the default duration. Number: The duration for the animation, in milliseconds.
      * <p>
      * @param revert
      */
@@ -722,9 +641,7 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * Default: 20
-     * The speed at which the window should scroll once the mouse pointer gets
-     * within the scrollSensitivity distance.
+     * Default: 20 The speed at which the window should scroll once the mouse pointer gets within the scrollSensitivity distance.
      * <p>
      * @return
      */
@@ -734,9 +651,7 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * Default: 20
-     * The speed at which the window should scroll once the mouse pointer gets
-     * within the scrollSensitivity distance.
+     * Default: 20 The speed at which the window should scroll once the mouse pointer gets within the scrollSensitivity distance.
      * <p>
      * @param scrollSpeed
      */
@@ -746,11 +661,9 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * Specifies which mode to use for testing whether the item being moved is
-     * hovering over another item. Possible values:
+     * Specifies which mode to use for testing whether the item being moved is hovering over another item. Possible values:
      * <p>
-     * "intersect": The item overlaps the other item by at least 50%.
-     * "pointer": The mouse pointer overlaps the other item.
+     * "intersect": The item overlaps the other item by at least 50%. "pointer": The mouse pointer overlaps the other item.
      * <p>
      * @return
      */
@@ -760,11 +673,9 @@ public class JQUISortableOptions extends JavaScriptPart
     }
 
     /**
-     * Specifies which mode to use for testing whether the item being moved is
-     * hovering over another item. Possible values:
+     * Specifies which mode to use for testing whether the item being moved is hovering over another item. Possible values:
      * <p>
-     * "intersect": The item overlaps the other item by at least 50%.
-     * "pointer": The mouse pointer overlaps the other item.
+     * "intersect": The item overlaps the other item by at least 50%. "pointer": The mouse pointer overlaps the other item.
      * <p>
      * @param tolerance
      */
@@ -775,8 +686,7 @@ public class JQUISortableOptions extends JavaScriptPart
 
     /**
      * <p>
-     * Z-index for element/helper while being sorted.
-     * Default: 1000
+     * Z-index for element/helper while being sorted. Default: 1000
      * <p>
      * @return
      */
@@ -787,8 +697,7 @@ public class JQUISortableOptions extends JavaScriptPart
 
     /**
      * <p>
-     * Z-index for element/helper while being sorted.
-     * Default: 1000
+     * Z-index for element/helper while being sorted. Default: 1000
      * <p>
      * @param zIndex
      */

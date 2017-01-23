@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BSListGroupButtonItem.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.bootstrap.listgroup</a> &gt; <span class="el_source">BSListGroupButtonItem.java</span></div><h1>BSListGroupButtonItem.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2017 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.bootstrap.listgroup;
+
+/**
+ * Links and buttons Use &amp;gt;a&amp;lt;s or &amp;gt;button&amp;lt;s to create actionable list group items with hover, disabled, and active states by adding .list-group-item-action. We separate these pseudo-classes
+ * to ensure list groups made of non-interactive elements (like &amp;gt;li&amp;lt;s or &amp;gt;div&amp;lt;s) don’t provide a click or tap affordance.
+ *
+ * @author GedMarc
+ * @since 19 Jan 2017
+ *
+ */
+public class BSListGroupButtonItem extends BSListGroupListItem
+{
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Links and buttons Use &amp;gt;a&amp;lt;s or &amp;gt;button&amp;lt;s to create actionable list group items with hover, disabled, and active states by adding .list-group-item-action. We separate these
+     * pseudo-classes to ensure list groups made of non-interactive elements (like &amp;gt;li&amp;lt;s or &amp;gt;div&amp;lt;s) don’t provide a click or tap affordance.
+     */
+    public BSListGroupButtonItem()
+<span class="fc" id="L37">    {</span>
+<span class="fc" id="L38">        setTag(&quot;button&quot;);</span>
+<span class="fc" id="L39">        addAttribute(&quot;type&quot;, &quot;button&quot;);</span>
+<span class="fc" id="L40">        addClass(BSComponentListGroupOptions.List_Group_Item_Action);</span>
+<span class="fc" id="L41">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

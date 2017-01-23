@@ -53,13 +53,12 @@ public class JQXNotification extends Div&lt;JQXNotificationChildren, JQXNotifica
 <span class="nc" id="L53">        return getFeature().getOptions();</span>
     }
 
-    @Override
-    public Div add(String textToAdd)
+    public Div addText(String textToAdd)
     {
-<span class="nc" id="L59">        Div d = new Div();</span>
-<span class="nc" id="L60">        d.setText(textToAdd);</span>
-<span class="nc" id="L61">        add(d);</span>
-<span class="nc" id="L62">        return d;</span>
+<span class="nc" id="L58">        Div d = new Div();</span>
+<span class="nc" id="L59">        d.setText(textToAdd);</span>
+<span class="nc" id="L60">        add(d);</span>
+<span class="nc" id="L61">        return d;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

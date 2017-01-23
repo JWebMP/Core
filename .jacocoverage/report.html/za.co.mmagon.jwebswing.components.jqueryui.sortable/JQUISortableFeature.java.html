@@ -31,7 +31,14 @@ import za.co.mmagon.jwebswing.components.pools.jqueryui.JQUIReferencePool;
 public class JQUISortableFeature extends Feature&lt;JQUISortableOptions, JQUISortableFeature&gt; implements JQUISortableFeatures
 {
 
+    private static final long serialVersionUID = 1L;
+    /**
+     * The sortable linked component
+     */
     private final Component selectMenu;
+    /**
+     * The options for the sortablke feature
+     */
     private JQUISortableOptions options;
 
     /**
@@ -41,33 +48,32 @@ public class JQUISortableFeature extends Feature&lt;JQUISortableOptions, JQUISor
      */
     public JQUISortableFeature(Component selectMenu)
     {
-<span class="nc" id="L44">        super(&quot;JWSortableFeature&quot;);</span>
-<span class="nc" id="L45">        this.selectMenu = selectMenu;</span>
+<span class="nc" id="L51">        super(&quot;JWSortableFeature&quot;);</span>
+<span class="nc" id="L52">        this.selectMenu = selectMenu;</span>
 
-<span class="nc" id="L47">        getJavascriptReferences().add(JQUIReferencePool.Core.getJavaScriptReference());</span>
-<span class="nc" id="L48">        getJavascriptReferences().add(JQUIReferencePool.Widget.getJavaScriptReference());</span>
-<span class="nc" id="L49">        getCssReferences().add(JQUIReferencePool.Core.getCssReference());</span>
-<span class="nc" id="L50">        getCssReferences().add(JQUIReferencePool.Widget.getCssReference());</span>
+<span class="nc" id="L54">        getJavascriptReferences().add(JQUIReferencePool.Core.getJavaScriptReference());</span>
+<span class="nc" id="L55">        getJavascriptReferences().add(JQUIReferencePool.Widget.getJavaScriptReference());</span>
+<span class="nc" id="L56">        getCssReferences().add(JQUIReferencePool.Core.getCssReference());</span>
+<span class="nc" id="L57">        getCssReferences().add(JQUIReferencePool.Widget.getCssReference());</span>
 
-<span class="nc" id="L52">        getJavascriptReferences().add(JQUIReferencePool.Sortable.getJavaScriptReference());</span>
-<span class="nc" id="L53">        getCssReferences().add(JQUIReferencePool.Sortable.getCssReference());</span>
-
-<span class="nc" id="L55">    }</span>
+<span class="nc" id="L59">        getJavascriptReferences().add(JQUIReferencePool.Sortable.getJavaScriptReference());</span>
+<span class="nc" id="L60">        getCssReferences().add(JQUIReferencePool.Sortable.getCssReference());</span>
+<span class="nc" id="L61">    }</span>
 
     @Override
     public void assignFunctionsToComponent()
     {
-<span class="nc" id="L60">        addQuery(selectMenu.getJQueryID() + &quot;sortable(&quot; + getOptions() + &quot;);&quot; + getNewLine());</span>
-<span class="nc" id="L61">    }</span>
+<span class="nc" id="L66">        addQuery(selectMenu.getJQueryID() + &quot;sortable(&quot; + getOptions() + &quot;);&quot; + getNewLine());</span>
+<span class="nc" id="L67">    }</span>
 
     @Override
     public JQUISortableOptions getOptions()
     {
-<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (options == null)</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        if (options == null)</span>
         {
-<span class="nc" id="L68">            options = new JQUISortableOptions();</span>
+<span class="nc" id="L74">            options = new JQUISortableOptions();</span>
         }
-<span class="nc" id="L70">        return options;</span>
+<span class="nc" id="L76">        return options;</span>
     }
 
 }

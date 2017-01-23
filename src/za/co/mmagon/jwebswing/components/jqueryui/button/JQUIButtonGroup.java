@@ -64,6 +64,7 @@ public class JQUIButtonGroup extends Div<GlobalChildren, NoAttributes, GlobalFea
      * <p>
      * @return
      */
+    @Override
     public JQUIButtonGroupOptions getOptions()
     {
         return getGroupFeature().getOptions();

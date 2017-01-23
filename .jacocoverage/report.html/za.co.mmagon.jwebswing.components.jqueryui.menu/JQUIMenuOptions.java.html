@@ -19,7 +19,6 @@ package za.co.mmagon.jwebswing.components.jqueryui.menu;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.components.jqueryui.position.Position;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
 /**
  *
@@ -29,12 +28,25 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
  * &lt;p&gt;
  *
  */
-<span class="nc" id="L32">public class JQUIMenuOptions extends JavaScriptPart</span>
+<span class="nc" id="L31">public class JQUIMenuOptions extends JavaScriptPart</span>
 {
 
+    private static final long serialVersionUID = 1L;
+    /**
+     * If the item is disabled or not
+     */
     private Boolean disabled;
+    /**
+     * The menu icon set available
+     */
     private JQUIMenuIconSet icons;
+    /**
+     * The menus
+     */
     private String menus;
+    /**
+     * The actual position
+     */
     private Position position;
     /**
      * Customize the ARIA roles used for the menu and menu items.
@@ -53,7 +65,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Boolean getDisabled()
     {
-<span class="nc" id="L56">        return disabled;</span>
+<span class="nc" id="L68">        return disabled;</span>
     }
 
     /**
@@ -63,8 +75,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setDisabled(Boolean disabled)
     {
-<span class="nc" id="L66">        this.disabled = disabled;</span>
-<span class="nc" id="L67">    }</span>
+<span class="nc" id="L78">        this.disabled = disabled;</span>
+<span class="nc" id="L79">    }</span>
 
     /**
      * Icons to use for submenus, matching an icon provided by the jQuery UI CSS Framework.
@@ -75,7 +87,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public JQUIMenuIconSet getIcons()
     {
-<span class="nc" id="L78">        return icons;</span>
+<span class="nc" id="L90">        return icons;</span>
     }
 
     /**
@@ -87,8 +99,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setIcons(JQUIMenuIconSet icons)
     {
-<span class="nc" id="L90">        this.icons = icons;</span>
-<span class="nc" id="L91">    }</span>
+<span class="nc" id="L102">        this.icons = icons;</span>
+<span class="nc" id="L103">    }</span>
 
     /**
      * Selector for the elements that serve as the menu container, including sub-menus.
@@ -97,7 +109,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public String getMenus()
     {
-<span class="nc" id="L100">        return menus;</span>
+<span class="nc" id="L112">        return menus;</span>
     }
 
     /**
@@ -107,8 +119,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setMenus(ComponentTypes menus)
     {
-<span class="nc" id="L110">        this.menus = menus.getComponentTag();</span>
-<span class="nc" id="L111">    }</span>
+<span class="nc" id="L122">        this.menus = menus.getComponentTag();</span>
+<span class="nc" id="L123">    }</span>
 
     /**
      * &lt;p&gt;
@@ -120,7 +132,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Position getPosition()
     {
-<span class="nc" id="L123">        return position;</span>
+<span class="nc" id="L135">        return position;</span>
     }
 
     /**
@@ -133,8 +145,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setPosition(Position position)
     {
-<span class="nc" id="L136">        this.position = position;</span>
-<span class="nc" id="L137">    }</span>
+<span class="nc" id="L148">        this.position = position;</span>
+<span class="nc" id="L149">    }</span>
 
     /**
      * Customize the ARIA roles used for the menu and menu items.&lt;p&gt;
@@ -146,7 +158,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public String getRole()
     {
-<span class="nc" id="L149">        return role;</span>
+<span class="nc" id="L161">        return role;</span>
     }
 
     /**
@@ -160,13 +172,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setRole(String role)
     {
-<span class="nc" id="L163">        this.role = role;</span>
-<span class="nc" id="L164">    }</span>
-
-    @Override
-    public JavascriptPartType getJavascriptType()
-    {
-<span class="nc" id="L169">        return JavascriptPartType.Javascript;</span>
-    }
+<span class="nc" id="L175">        this.role = role;</span>
+<span class="nc" id="L176">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

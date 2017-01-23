@@ -27,7 +27,7 @@ public class PositionTest extends BaseTestClass
         System.out.println("getMyString");
         Area area = new Area(JQImageMap.ImageMapAreaShapes.Default, "0,0,0,0");
         area.setID("of");
-        Position instance = new Position(PositionLocationHorizontal.left, PositionLocationVertical.top, PositionLocationHorizontal.left, PositionLocationVertical.top, area);
+        Position instance = new Position(PositionLocationHorizontal.Left, PositionLocationVertical.top, PositionLocationHorizontal.Left, PositionLocationVertical.top, area);
         System.out.println(instance.toString());
         String expResult = "{\n"
                 + "  \"myX\" : \"left\",\n"

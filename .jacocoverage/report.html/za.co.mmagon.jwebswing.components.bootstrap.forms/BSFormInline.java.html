@@ -16,6 +16,8 @@
  */
 package za.co.mmagon.jwebswing.components.bootstrap.forms;
 
+import za.co.mmagon.jwebswing.components.bootstrap.navs.BSNavsChildren;
+
 /**
  * Inline forms
  * &lt;p&gt;
@@ -32,14 +34,14 @@ package za.co.mmagon.jwebswing.components.bootstrap.forms;
  * @since 15 Jan 2017
  *
  */
-public class BSFormInline extends BSForm
+public class BSFormInline extends BSForm implements BSNavsChildren
 {
 
     private static final long serialVersionUID = 1L;
 
     public BSFormInline()
-<span class="nc" id="L41">    {</span>
-        //Nothing Needed
-<span class="nc" id="L43">    }</span>
+<span class="fc" id="L43">    {</span>
+<span class="fc" id="L44">        addClass(&quot;form-inline&quot;);</span>
+<span class="fc" id="L45">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

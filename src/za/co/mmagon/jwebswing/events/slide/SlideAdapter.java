@@ -7,6 +7,7 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.slider.JQUISliderEvents;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
 
@@ -16,7 +17,7 @@ import za.co.mmagon.logger.LogFactory;
  * @author Marc Magon
  */
 public abstract class SlideAdapter extends Event
-        implements GlobalEvents
+        implements GlobalEvents, JQUISliderEvents
 {
 
     /**
@@ -24,6 +25,9 @@ public abstract class SlideAdapter extends Event
      */
     private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("SlideEvent");
     private static final long serialVersionUID = 1L;
+    /**
+     * The directive for this adapter
+     */
     private SlideDirective directive;
 
     /**
@@ -94,7 +98,7 @@ public abstract class SlideAdapter extends Event
         }
         catch (Exception e)
         {
-            LOG.log(Level.SEVERE,"Error In Firing Event", e);
+            LOG.log(Level.SEVERE, "Error In Firing Event", e);
         }
     }
 

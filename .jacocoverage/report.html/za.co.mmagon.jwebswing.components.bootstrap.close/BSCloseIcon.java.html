@@ -57,10 +57,30 @@ public class BSCloseIcon extends Button
 <span class="fc" id="L57">        getCloseIcon();</span>
 <span class="fc" id="L58">    }</span>
 
+    /**
+     * Sets the close icon as a data dismissable
+     *
+     * @param dismiss
+     *
+     * @return
+     */
+    public BSCloseIcon setDataDismiss(String dismiss)
+    {
+<span class="fc" id="L69">        addAttribute(&quot;data-dismiss&quot;, dismiss);</span>
+<span class="fc" id="L70">        return this;</span>
+    }
+
+    /**
+     * Sets the label to be shown on screen readers
+     *
+     * @param label
+     *
+     * @return
+     */
     public BSCloseIcon setAriaLabel(String label)
     {
-<span class="fc" id="L62">        addAttribute(GlobalAttributes.Aria_Label, label);</span>
-<span class="fc" id="L63">        return this;</span>
+<span class="fc" id="L82">        addAttribute(GlobalAttributes.Aria_Label, label);</span>
+<span class="fc" id="L83">        return this;</span>
     }
 
     /**
@@ -70,11 +90,11 @@ public class BSCloseIcon extends Button
      */
     public Span getCloseIcon()
     {
-<span class="fc bfc" id="L73" title="All 2 branches covered.">        if (this.closeIcon == null)</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        if (this.closeIcon == null)</span>
         {
-<span class="fc" id="L75">            setCloseIcon(new Span(closeIconText));</span>
+<span class="fc" id="L95">            setCloseIcon(new Span(closeIconText));</span>
         }
-<span class="fc" id="L77">        return closeIcon;</span>
+<span class="fc" id="L97">        return closeIcon;</span>
     }
 
     /**
@@ -86,18 +106,18 @@ public class BSCloseIcon extends Button
      */
     public BSCloseIcon setCloseIcon(Span closeIcon)
     {
-<span class="pc bpc" id="L89" title="1 of 2 branches missed.">        if (this.closeIcon != null)</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">        if (this.closeIcon != null)</span>
         {
-<span class="nc" id="L91">            remove(this.closeIcon);</span>
-<span class="nc" id="L92">            this.closeIcon = null;</span>
+<span class="nc" id="L111">            remove(this.closeIcon);</span>
+<span class="nc" id="L112">            this.closeIcon = null;</span>
         }
-<span class="fc" id="L94">        this.closeIcon = closeIcon;</span>
-<span class="pc bpc" id="L95" title="1 of 2 branches missed.">        if (this.closeIcon != null)</span>
+<span class="fc" id="L114">        this.closeIcon = closeIcon;</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">        if (this.closeIcon != null)</span>
         {
-<span class="fc" id="L97">            add(this.closeIcon);</span>
-<span class="fc" id="L98">            this.closeIcon.addAttribute(GlobalAttributes.Aria_Hidden, &quot;true&quot;);</span>
+<span class="fc" id="L117">            add(this.closeIcon);</span>
+<span class="fc" id="L118">            this.closeIcon.addAttribute(GlobalAttributes.Aria_Hidden, &quot;true&quot;);</span>
         }
-<span class="fc" id="L100">        return this;</span>
+<span class="fc" id="L120">        return this;</span>
     }
 
     /**
@@ -107,7 +127,7 @@ public class BSCloseIcon extends Button
      */
     public String getCloseIconText()
     {
-<span class="nc" id="L110">        return closeIconText;</span>
+<span class="nc" id="L130">        return closeIconText;</span>
     }
 
     /**
@@ -117,22 +137,22 @@ public class BSCloseIcon extends Button
      */
     public void setCloseIconText(String closeIconText)
     {
-<span class="fc" id="L120">        this.closeIconText = closeIconText;</span>
-<span class="pc bpc" id="L121" title="1 of 2 branches missed.">        if (this.closeIconText != null)</span>
+<span class="fc" id="L140">        this.closeIconText = closeIconText;</span>
+<span class="pc bpc" id="L141" title="1 of 2 branches missed.">        if (this.closeIconText != null)</span>
         {
-<span class="fc" id="L123">            getCloseIcon().setText(closeIconText);</span>
+<span class="fc" id="L143">            getCloseIcon().setText(closeIconText);</span>
         }
-<span class="fc" id="L125">    }</span>
+<span class="fc" id="L145">    }</span>
 
     @Override
     public void init()
     {
-<span class="pc bpc" id="L130" title="1 of 2 branches missed.">        if (!isInitialized())</span>
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">        if (!isInitialized())</span>
         {
-<span class="fc" id="L132">            getPage().getOptions().setBootstrapEnabled(true);</span>
+<span class="fc" id="L152">            getPage().getOptions().setBootstrapEnabled(true);</span>
         }
-<span class="fc" id="L134">        super.init();</span>
-<span class="fc" id="L135">    }</span>
+<span class="fc" id="L154">        super.init();</span>
+<span class="fc" id="L155">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

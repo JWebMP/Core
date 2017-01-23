@@ -36,7 +36,7 @@ public class BSNavBarToggler extends Button implements BSNavBarChildren
     /**
      * The specified screen reader aria label to apply when creating the div
      */
-    public static String ARIA_LABEL = "Toggle Navigation";
+    private static String ARIA_LABEL = "Toggle Navigation";
 
     /**
      * Creates 2 new accessible objects for the nav bar
@@ -80,4 +80,25 @@ public class BSNavBarToggler extends Button implements BSNavBarChildren
 
         return (T) div;
     }
+
+    /**
+     * Gets the screen reader aria label
+     *
+     * @return
+     */
+    public static String getARIA_LABEL()
+    {
+        return ARIA_LABEL;
+    }
+
+    /**
+     * sets the screen reader aria label
+     *
+     * @param ARIA_LABEL
+     */
+    public static void setARIA_LABEL(String ARIA_LABEL)
+    {
+        BSNavBarToggler.ARIA_LABEL = ARIA_LABEL;
+    }
+
 }

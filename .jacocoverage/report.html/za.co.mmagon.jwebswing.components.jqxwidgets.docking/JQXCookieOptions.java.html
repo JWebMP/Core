@@ -16,47 +16,49 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets.docking;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
 /**
  * This Class list the cookie options for the docing options
  *
  * @author GedMarc
  * @since 14 Dec 2015
  */
-public class JQXCookieOptions
+public class JQXCookieOptions extends JavaScriptPart
 {
 
     private String domain;
     private Integer expires;
 
     public JQXCookieOptions()
-<span class="nc" id="L32">    {</span>
-<span class="nc" id="L33">    }</span>
+<span class="nc" id="L34">    {</span>
+<span class="nc" id="L35">    }</span>
 
     @Override
     public String toString()
     {
-<span class="nc" id="L38">        return super.toString();</span>
+<span class="nc" id="L40">        return super.toString();</span>
     }
 
     public String getDomain()
     {
-<span class="nc" id="L43">        return domain;</span>
+<span class="nc" id="L45">        return domain;</span>
     }
 
     public void setDomain(String domain)
     {
-<span class="nc" id="L48">        this.domain = domain;</span>
-<span class="nc" id="L49">    }</span>
+<span class="nc" id="L50">        this.domain = domain;</span>
+<span class="nc" id="L51">    }</span>
 
     public Integer getExpires()
     {
-<span class="nc" id="L53">        return expires;</span>
+<span class="nc" id="L55">        return expires;</span>
     }
 
     public void setExpires(Integer expires)
     {
-<span class="nc" id="L58">        this.expires = expires;</span>
-<span class="nc" id="L59">    }</span>
+<span class="nc" id="L60">        this.expires = expires;</span>
+<span class="nc" id="L61">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

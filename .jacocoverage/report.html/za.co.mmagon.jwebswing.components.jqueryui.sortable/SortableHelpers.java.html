@@ -24,8 +24,20 @@ package za.co.mmagon.jwebswing.components.jqueryui.sortable;
  */
 <span class="nc" id="L25">public enum SortableHelpers</span>
 {
+    /**
+     * Produces a clone
+     */
+<span class="nc" id="L30">    Clone,</span>
+    /**
+     * Produces the original
+     */
+<span class="nc" id="L34">    Orginal;</span>
 
-<span class="nc" id="L28">    Clone,</span>
-<span class="nc" id="L29">    Orginal;</span>
+    @Override
+    public String toString()
+    {
+<span class="nc" id="L39">        return super.toString().toLowerCase();</span>
+    }
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

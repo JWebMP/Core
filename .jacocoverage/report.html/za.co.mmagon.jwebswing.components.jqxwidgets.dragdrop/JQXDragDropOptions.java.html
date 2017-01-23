@@ -20,8 +20,7 @@ import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
- * jqxDragDrop is a plugin which will make any DOM element draggable.
- * It can be used in combination with many widgets like jqxTree, jqxGrid, jqxListBox and etc.
+ * jqxDragDrop is a plugin which will make any DOM element draggable. It can be used in combination with many widgets like jqxTree, jqxGrid, jqxListBox and etc.
  * &lt;p&gt;
  * @author GedMarc
  * @since Dec 13, 2015
@@ -31,6 +30,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  */
 public class JQXDragDropOptions extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     private String appendTo;// 	String 	'parent'
     private Boolean disabled;// 	Boolean 	false
@@ -54,139 +55,139 @@ public class JQXDragDropOptions extends JavaScriptPart
     private JQXDragDropTolerance tolerance;// 	String 	'intersect'
 
     public JQXDragDropOptions()
-<span class="nc" id="L57">    {</span>
+<span class="nc" id="L58">    {</span>
 
-<span class="nc" id="L59">    }</span>
+<span class="nc" id="L60">    }</span>
 
     public String getAppendTo()
     {
-<span class="nc" id="L63">        return appendTo;</span>
+<span class="nc" id="L64">        return appendTo;</span>
     }
 
     public void setAppendTo(Component appendTo)
     {
-<span class="nc" id="L68">        this.appendTo = appendTo.getID(true);</span>
-<span class="nc" id="L69">    }</span>
+<span class="nc" id="L69">        this.appendTo = appendTo.getID(true);</span>
+<span class="nc" id="L70">    }</span>
 
     public Boolean getDisabled()
     {
-<span class="nc" id="L73">        return disabled;</span>
+<span class="nc" id="L74">        return disabled;</span>
     }
 
     public void setDisabled(Boolean disabled)
     {
-<span class="nc" id="L78">        this.disabled = disabled;</span>
-<span class="nc" id="L79">    }</span>
+<span class="nc" id="L79">        this.disabled = disabled;</span>
+<span class="nc" id="L80">    }</span>
 
     public Integer getDistance()
     {
-<span class="nc" id="L83">        return distance;</span>
+<span class="nc" id="L84">        return distance;</span>
     }
 
     public void setDistance(Integer distance)
     {
-<span class="nc" id="L88">        this.distance = distance;</span>
-<span class="nc" id="L89">    }</span>
+<span class="nc" id="L89">        this.distance = distance;</span>
+<span class="nc" id="L90">    }</span>
 
     public JQXDragDropData getData()
     {
-<span class="nc" id="L93">        return data;</span>
+<span class="nc" id="L94">        return data;</span>
     }
 
     public void setData(JQXDragDropData data)
     {
-<span class="nc" id="L98">        this.data = data;</span>
-<span class="nc" id="L99">    }</span>
+<span class="nc" id="L99">        this.data = data;</span>
+<span class="nc" id="L100">    }</span>
 
     public JQXDropAction getDropAction()
     {
-<span class="nc" id="L103">        return dropAction;</span>
+<span class="nc" id="L104">        return dropAction;</span>
     }
 
     public void setDropAction(JQXDropAction dropAction)
     {
-<span class="nc" id="L108">        this.dropAction = dropAction;</span>
-<span class="nc" id="L109">    }</span>
+<span class="nc" id="L109">        this.dropAction = dropAction;</span>
+<span class="nc" id="L110">    }</span>
 
     public Component getDropTarget()
     {
-<span class="nc" id="L113">        return dropTarget;</span>
+<span class="nc" id="L114">        return dropTarget;</span>
     }
 
     public void setDropTarget(Component dropTarget)
     {
-<span class="nc" id="L118">        this.dropTarget = dropTarget;</span>
-<span class="nc" id="L119">    }</span>
+<span class="nc" id="L119">        this.dropTarget = dropTarget;</span>
+<span class="nc" id="L120">    }</span>
 
     public Integer getDragZIndex()
     {
-<span class="nc" id="L123">        return dragZIndex;</span>
+<span class="nc" id="L124">        return dragZIndex;</span>
     }
 
     public void setDragZIndex(Integer dragZIndex)
     {
-<span class="nc" id="L128">        this.dragZIndex = dragZIndex;</span>
-<span class="nc" id="L129">    }</span>
+<span class="nc" id="L129">        this.dragZIndex = dragZIndex;</span>
+<span class="nc" id="L130">    }</span>
 
     public JQXDropFeedback getFeedback()
     {
-<span class="nc" id="L133">        return feedback;</span>
+<span class="nc" id="L134">        return feedback;</span>
     }
 
     public void setFeedback(JQXDropFeedback feedback)
     {
-<span class="nc" id="L138">        this.feedback = feedback;</span>
-<span class="nc" id="L139">    }</span>
+<span class="nc" id="L139">        this.feedback = feedback;</span>
+<span class="nc" id="L140">    }</span>
 
     public Double getOpacity()
     {
-<span class="nc" id="L143">        return opacity;</span>
+<span class="nc" id="L144">        return opacity;</span>
     }
 
     public void setOpacity(Double opacity)
     {
-<span class="nc" id="L148">        this.opacity = opacity;</span>
-<span class="nc" id="L149">    }</span>
+<span class="nc" id="L149">        this.opacity = opacity;</span>
+<span class="nc" id="L150">    }</span>
 
     public String getRestricter()
     {
-<span class="nc" id="L153">        return restricter;</span>
+<span class="nc" id="L154">        return restricter;</span>
     }
 
     public void setRestricter(Component restricter)
     {
-<span class="nc" id="L158">        this.restricter = restricter.getID(true);</span>
-<span class="nc" id="L159">    }</span>
+<span class="nc" id="L159">        this.restricter = restricter.getID(true);</span>
+<span class="nc" id="L160">    }</span>
 
     public Boolean getRevert()
     {
-<span class="nc" id="L163">        return revert;</span>
+<span class="nc" id="L164">        return revert;</span>
     }
 
     public void setRevert(Boolean revert)
     {
-<span class="nc" id="L168">        this.revert = revert;</span>
-<span class="nc" id="L169">    }</span>
+<span class="nc" id="L169">        this.revert = revert;</span>
+<span class="nc" id="L170">    }</span>
 
     public Integer getRevertDuration()
     {
-<span class="nc" id="L173">        return revertDuration;</span>
+<span class="nc" id="L174">        return revertDuration;</span>
     }
 
     public void setRevertDuration(Integer revertDuration)
     {
-<span class="nc" id="L178">        this.revertDuration = revertDuration;</span>
-<span class="nc" id="L179">    }</span>
+<span class="nc" id="L179">        this.revertDuration = revertDuration;</span>
+<span class="nc" id="L180">    }</span>
 
     public JQXDragDropTolerance getTolerance()
     {
-<span class="nc" id="L183">        return tolerance;</span>
+<span class="nc" id="L184">        return tolerance;</span>
     }
 
     public void setTolerance(JQXDragDropTolerance tolerance)
     {
-<span class="nc" id="L188">        this.tolerance = tolerance;</span>
-<span class="nc" id="L189">    }</span>
+<span class="nc" id="L189">        this.tolerance = tolerance;</span>
+<span class="nc" id="L190">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

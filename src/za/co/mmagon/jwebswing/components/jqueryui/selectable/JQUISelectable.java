@@ -47,6 +47,7 @@ public class JQUISelectable extends Div<JQUISelectMenuChildren, NoAttributes, JQ
      * <p>
      * @return
      */
+    @Override
     public JQUISelectableOptions getOptions()
     {
         return feature.getOptions();

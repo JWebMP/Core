@@ -16,14 +16,18 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets.treegrid;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
 /**
  * This Class
  *
  * @author GedMarc
  * @since 25 Dec 2015
  */
-public class JQXTreeGridColumnGroups
+public class JQXTreeGridColumnGroups extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * string property which determines the parent group's name.
@@ -39,43 +43,43 @@ public class JQXTreeGridColumnGroups
     private String align;
 
     public JQXTreeGridColumnGroups()
-<span class="nc" id="L42">    {</span>
-<span class="nc" id="L43">    }</span>
+<span class="nc" id="L46">    {</span>
+<span class="nc" id="L47">    }</span>
 
     public String getParentGroup()
     {
-<span class="nc" id="L47">        return parentGroup;</span>
+<span class="nc" id="L51">        return parentGroup;</span>
     }
 
     public void setParentGroup(String parentGroup)
     {
-<span class="nc" id="L52">        this.parentGroup = parentGroup;</span>
-<span class="nc" id="L53">    }</span>
+<span class="nc" id="L56">        this.parentGroup = parentGroup;</span>
+<span class="nc" id="L57">    }</span>
 
     public String getName()
     {
-<span class="nc" id="L57">        return name;</span>
+<span class="nc" id="L61">        return name;</span>
     }
 
     public void setName(String name)
     {
-<span class="nc" id="L62">        this.name = name;</span>
-<span class="nc" id="L63">    }</span>
+<span class="nc" id="L66">        this.name = name;</span>
+<span class="nc" id="L67">    }</span>
 
     public String getAlign()
     {
-<span class="nc" id="L67">        return align;</span>
+<span class="nc" id="L71">        return align;</span>
     }
 
     public void setAlign(String align)
     {
-<span class="nc" id="L72">        this.align = align;</span>
-<span class="nc" id="L73">    }</span>
+<span class="nc" id="L76">        this.align = align;</span>
+<span class="nc" id="L77">    }</span>
 
     @Override
     public String toString()
     {
-<span class="nc" id="L78">        return super.toString();</span>
+<span class="nc" id="L82">        return super.toString();</span>
     }
 
 }

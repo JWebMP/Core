@@ -39,14 +39,16 @@ public class ListItem extends Component&lt;ListItemChildren, NoAttributes, Globa
         implements ListChildren, JQUITabsChildren, NoNewLineForRawText, ListItemChildren
 {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Constructs a blank text List Item
      */
     public ListItem()
     {
-<span class="fc" id="L47">        this(&quot;&quot;);</span>
+<span class="fc" id="L49">        this(&quot;&quot;);</span>
 
-<span class="fc" id="L49">    }</span>
+<span class="fc" id="L51">    }</span>
 
     /**
      * Constructs a list item with the given text
@@ -55,37 +57,38 @@ public class ListItem extends Component&lt;ListItemChildren, NoAttributes, Globa
      */
     public ListItem(String text)
     {
-<span class="fc" id="L58">        super(ComponentTypes.ListItem);</span>
-<span class="fc" id="L59">        setText(text);</span>
-<span class="fc" id="L60">    }</span>
+<span class="fc" id="L60">        super(ComponentTypes.ListItem);</span>
+<span class="fc" id="L61">        setText(text);</span>
+<span class="fc" id="L62">    }</span>
 
     /**
      * Returns a list item of the specified text
      *
      * @param textToAdd
+     *
      * @return
      */
-    @Override
-    public ListItemChildren add(String textToAdd)
+    public ListItemChildren addItem(String textToAdd)
     {
-<span class="nc" id="L71">        ListItem li = new ListItem(textToAdd);</span>
-<span class="nc" id="L72">        add(li);</span>
-<span class="nc" id="L73">        return li;</span>
+<span class="nc" id="L73">        ListItem li = new ListItem(textToAdd);</span>
+<span class="nc" id="L74">        add(li);</span>
+<span class="nc" id="L75">        return li;</span>
     }
 
     /**
      * Returns a list of the specified text
      *
      * @param textToAdd
+     *
      * @return
      */
     public List addList(String textToAdd)
     {
-<span class="nc" id="L84">        ListItem lit = new ListItem(textToAdd);</span>
-<span class="nc" id="L85">        List li = new List(false);</span>
-<span class="nc" id="L86">        lit.add(li);</span>
-<span class="nc" id="L87">        super.add(li);</span>
-<span class="nc" id="L88">        return li;</span>
+<span class="nc" id="L87">        ListItem lit = new ListItem(textToAdd);</span>
+<span class="nc" id="L88">        List li = new List(false);</span>
+<span class="nc" id="L89">        lit.add(li);</span>
+<span class="nc" id="L90">        super.add(li);</span>
+<span class="nc" id="L91">        return li;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

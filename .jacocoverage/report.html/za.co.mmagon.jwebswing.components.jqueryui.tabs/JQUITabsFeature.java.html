@@ -14,7 +14,13 @@ public class JQUITabsFeature extends Feature&lt;JQUITabOptions, JQUITabsFeature&
 {
 
     private static final long serialVersionUID = 1L;
+    /**
+     * The actual tab
+     */
     private final JQUITab tab;
+    /**
+     * The options for this tab
+     */
     private JQUITabOptions options;
 
     /**
@@ -24,23 +30,23 @@ public class JQUITabsFeature extends Feature&lt;JQUITabOptions, JQUITabsFeature&
      */
     public JQUITabsFeature(JQUITab tab)
     {
-<span class="fc" id="L27">        super(&quot;JWTabs&quot;);</span>
-<span class="fc" id="L28">        this.tab = tab;</span>
+<span class="fc" id="L33">        super(&quot;JWTabs&quot;);</span>
+<span class="fc" id="L34">        this.tab = tab;</span>
 
-<span class="fc" id="L30">        getJavascriptReferences().add(JQUIReferencePool.Core.getJavaScriptReference());</span>
-<span class="fc" id="L31">        getJavascriptReferences().add(JQUIReferencePool.Widget.getJavaScriptReference());</span>
-<span class="fc" id="L32">        getCssReferences().add(JQUIReferencePool.Core.getCssReference());</span>
-<span class="fc" id="L33">        getCssReferences().add(JQUIReferencePool.Widget.getCssReference());</span>
+<span class="fc" id="L36">        getJavascriptReferences().add(JQUIReferencePool.Core.getJavaScriptReference());</span>
+<span class="fc" id="L37">        getJavascriptReferences().add(JQUIReferencePool.Widget.getJavaScriptReference());</span>
+<span class="fc" id="L38">        getCssReferences().add(JQUIReferencePool.Core.getCssReference());</span>
+<span class="fc" id="L39">        getCssReferences().add(JQUIReferencePool.Widget.getCssReference());</span>
 
-<span class="fc" id="L35">        getJavascriptReferences().add(JQUIReferencePool.Tabs.getJavaScriptReference());</span>
-<span class="fc" id="L36">        getCssReferences().add(JQUIReferencePool.Tabs.getCssReference());</span>
-<span class="fc" id="L37">    }</span>
+<span class="fc" id="L41">        getJavascriptReferences().add(JQUIReferencePool.Tabs.getJavaScriptReference());</span>
+<span class="fc" id="L42">        getCssReferences().add(JQUIReferencePool.Tabs.getCssReference());</span>
+<span class="fc" id="L43">    }</span>
 
     @Override
     public void assignFunctionsToComponent()
     {
-<span class="fc" id="L42">        addQuery(tab.getJQueryID() + &quot;tabs(&quot; + getOptions() + &quot;);&quot;);</span>
-<span class="fc" id="L43">    }</span>
+<span class="fc" id="L48">        addQuery(tab.getJQueryID() + &quot;tabs(&quot; + getOptions() + &quot;);&quot;);</span>
+<span class="fc" id="L49">    }</span>
 
     /**
      * Returns the options fields for the tab
@@ -50,11 +56,11 @@ public class JQUITabsFeature extends Feature&lt;JQUITabOptions, JQUITabsFeature&
     @Override
     public JQUITabOptions getOptions()
     {
-<span class="pc bpc" id="L53" title="1 of 2 branches missed.">        if (options == null)</span>
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">        if (options == null)</span>
         {
-<span class="fc" id="L55">            options = new JQUITabOptions();</span>
+<span class="fc" id="L61">            options = new JQUITabOptions();</span>
         }
-<span class="fc" id="L57">        return options;</span>
+<span class="fc" id="L63">        return options;</span>
     }
 
 }

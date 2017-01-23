@@ -34,6 +34,7 @@ public class JQUIDialog extends Div<JQUIDialogChildren, NoAttributes, JQUIDialog
      * <p>
      * @return
      */
+    @Override
     public JQUIDialogOptions getOptions()
     {
         if (options == null)

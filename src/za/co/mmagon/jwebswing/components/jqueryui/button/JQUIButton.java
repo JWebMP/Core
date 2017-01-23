@@ -2,9 +2,7 @@ package za.co.mmagon.jwebswing.components.jqueryui.button;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.ButtonAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.components.jquerylayout.layout.interfaces.JWLayoutDivChildren;
 import za.co.mmagon.jwebswing.components.jqueryui.accordion.JQUIAccordionChildren;
@@ -52,6 +50,7 @@ public class JQUIButton extends Component<JQUIButtonChildren, ButtonAttributes, 
      *
      * @return
      */
+    @Override
     public JQUIButtonOptions getOptions()
     {
         return getFeature().getOptions();

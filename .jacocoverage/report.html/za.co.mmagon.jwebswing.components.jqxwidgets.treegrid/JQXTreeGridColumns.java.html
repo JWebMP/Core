@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets.treegrid;
 
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptFunction;
 
 /**
@@ -24,8 +25,10 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptFunction;
  * @author GedMarc
  * @since 25 Dec 2015
  */
-public class JQXTreeGridColumns
+public class JQXTreeGridColumns extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * string property which sets the column headers text.
@@ -66,103 +69,103 @@ public class JQXTreeGridColumns
     private JavascriptFunction renderer;
 
     public JQXTreeGridColumns()
-<span class="nc" id="L69">    {</span>
-<span class="nc" id="L70">    }</span>
+<span class="nc" id="L72">    {</span>
+<span class="nc" id="L73">    }</span>
 
     public String getText()
     {
-<span class="nc" id="L74">        return text;</span>
+<span class="nc" id="L77">        return text;</span>
     }
 
     public void setText(String text)
     {
-<span class="nc" id="L79">        this.text = text;</span>
-<span class="nc" id="L80">    }</span>
+<span class="nc" id="L82">        this.text = text;</span>
+<span class="nc" id="L83">    }</span>
 
     public String getDataField()
     {
-<span class="nc" id="L84">        return dataField;</span>
+<span class="nc" id="L87">        return dataField;</span>
     }
 
     public void setDataField(String dataField)
     {
-<span class="nc" id="L89">        this.dataField = dataField;</span>
-<span class="nc" id="L90">    }</span>
+<span class="nc" id="L92">        this.dataField = dataField;</span>
+<span class="nc" id="L93">    }</span>
 
     public String getDisplayField()
     {
-<span class="nc" id="L94">        return displayField;</span>
+<span class="nc" id="L97">        return displayField;</span>
     }
 
     public void setDisplayField(String displayField)
     {
-<span class="nc" id="L99">        this.displayField = displayField;</span>
-<span class="nc" id="L100">    }</span>
+<span class="nc" id="L102">        this.displayField = displayField;</span>
+<span class="nc" id="L103">    }</span>
 
     public Boolean getSortable()
     {
-<span class="nc" id="L104">        return sortable;</span>
+<span class="nc" id="L107">        return sortable;</span>
     }
 
     public void setSortable(Boolean sortable)
     {
-<span class="nc" id="L109">        this.sortable = sortable;</span>
-<span class="nc" id="L110">    }</span>
+<span class="nc" id="L112">        this.sortable = sortable;</span>
+<span class="nc" id="L113">    }</span>
 
     public Boolean getFilterable()
     {
-<span class="nc" id="L114">        return filterable;</span>
+<span class="nc" id="L117">        return filterable;</span>
     }
 
     public void setFilterable(Boolean filterable)
     {
-<span class="nc" id="L119">        this.filterable = filterable;</span>
-<span class="nc" id="L120">    }</span>
+<span class="nc" id="L122">        this.filterable = filterable;</span>
+<span class="nc" id="L123">    }</span>
 
     public Boolean getHidden()
     {
-<span class="nc" id="L124">        return hidden;</span>
+<span class="nc" id="L127">        return hidden;</span>
     }
 
     public void setHidden(Boolean hidden)
     {
-<span class="nc" id="L129">        this.hidden = hidden;</span>
-<span class="nc" id="L130">    }</span>
+<span class="nc" id="L132">        this.hidden = hidden;</span>
+<span class="nc" id="L133">    }</span>
 
     public String getColumnGroup()
     {
-<span class="nc" id="L134">        return columnGroup;</span>
+<span class="nc" id="L137">        return columnGroup;</span>
     }
 
     public void setColumnGroup(String columnGroup)
     {
-<span class="nc" id="L139">        this.columnGroup = columnGroup;</span>
-<span class="nc" id="L140">    }</span>
+<span class="nc" id="L142">        this.columnGroup = columnGroup;</span>
+<span class="nc" id="L143">    }</span>
 
     public Boolean getAutoCellHeight()
     {
-<span class="nc" id="L144">        return autoCellHeight;</span>
+<span class="nc" id="L147">        return autoCellHeight;</span>
     }
 
     public void setAutoCellHeight(Boolean autoCellHeight)
     {
-<span class="nc" id="L149">        this.autoCellHeight = autoCellHeight;</span>
-<span class="nc" id="L150">    }</span>
+<span class="nc" id="L152">        this.autoCellHeight = autoCellHeight;</span>
+<span class="nc" id="L153">    }</span>
 
     public JavascriptFunction getRenderer()
     {
-<span class="nc" id="L154">        return renderer;</span>
+<span class="nc" id="L157">        return renderer;</span>
     }
 
     public void setRenderer(JavascriptFunction renderer)
     {
-<span class="nc" id="L159">        this.renderer = renderer;</span>
-<span class="nc" id="L160">    }</span>
+<span class="nc" id="L162">        this.renderer = renderer;</span>
+<span class="nc" id="L163">    }</span>
 
     @Override
     public String toString()
     {
-<span class="nc" id="L165">        return super.toString();</span>
+<span class="nc" id="L168">        return super.toString();</span>
     }
 
 }

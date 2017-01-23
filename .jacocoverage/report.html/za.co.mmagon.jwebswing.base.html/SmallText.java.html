@@ -24,11 +24,13 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.PhraseChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.bootstrap.forms.groups.BSFormGroupChildren;
 
 /**
  * Definition and Usage&lt;p&gt;
  * &lt;p&gt;
- * The &amp;lt;small&amp;gt; tag defines smaller text (and other side comments).&lt;p&gt;
+ * The &amp;lt;small&amp;gt; tag defines smaller text (and other side comments)
+ * .&lt;p&gt;
  * &lt;p&gt;
  * Browser Support&lt;p&gt;
  * Element&lt;p&gt;
@@ -44,17 +46,20 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * &lt;p&gt;
  *
  */
-public class SmallText extends Component&lt;GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, SmallText&gt; 
-        implements ParagraphChildren, PhraseChildren
+public class SmallText extends Component&lt;GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, SmallText&gt;
+        implements ParagraphChildren, PhraseChildren, BSFormGroupChildren
 {
+
+    private static final long serialVersionUID = 1L;
+
     /**
      * Construct a new instance of the small text
      */
     public SmallText()
     {
-<span class="fc" id="L55">        this(null);</span>
-<span class="fc" id="L56">    }</span>
-    
+<span class="fc" id="L60">        this(null);</span>
+<span class="fc" id="L61">    }</span>
+
     /**
      * Specifies some small text
      *
@@ -62,8 +67,8 @@ public class SmallText extends Component&lt;GlobalChildren, NoAttributes, Global
      */
     public SmallText(String text)
     {
-<span class="fc" id="L65">        super(ComponentTypes.SmallText);</span>
-<span class="fc" id="L66">        setText(text);</span>
-<span class="fc" id="L67">    }</span>
+<span class="fc" id="L70">        super(ComponentTypes.SmallText);</span>
+<span class="fc" id="L71">        setText(text);</span>
+<span class="fc" id="L72">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

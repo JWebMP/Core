@@ -16,10 +16,9 @@
  */
 package za.co.mmagon.jwebswing.components.jqueryui.tabs;
 
-import za.co.mmagon.jwebswing.htmlbuilder.effects.JWAnimationEffectsPart;
 import za.co.mmagon.jwebswing.components.jqueryui.accordion.JQUIAccordionHeightStyle;
+import za.co.mmagon.jwebswing.htmlbuilder.effects.JWAnimationEffectsPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.mouseevents.MouseEventType;
 
 /**
@@ -63,11 +62,18 @@ public class JQUITabOptions extends JavaScriptPart
     private JWAnimationEffectsPart show;
 
     /**
-     * Which panel is currently open.
-     * Multiple types supported:
+     * Construct a new instance of tab options
+     */
+    public JQUITabOptions()
+    {
+        //Nothing needed
+    }
+
+    /**
+     * Which panel is currently open. Multiple types supported:
      * <p>
-     * Boolean: Setting active to false will collapse all panels. This requires the collapsible option to be true.
-     * Integer: The zero-based index of the panel that is active (open). A negative value selects panels going backward from the last panel.
+     * Boolean: Setting active to false will collapse all panels. This requires the collapsible option to be true. Integer: The zero-based index of the panel that is active (open). A negative value
+     * selects panels going backward from the last panel.
      * <p>
      * @return
      */
@@ -77,11 +83,10 @@ public class JQUITabOptions extends JavaScriptPart
     }
 
     /**
-     * Which panel is currently open.
-     * Multiple types supported:
+     * Which panel is currently open. Multiple types supported:
      * <p>
-     * Boolean: Setting active to false will collapse all panels. This requires the collapsible option to be true.
-     * Integer: The zero-based index of the panel that is active (open). A negative value selects panels going backward from the last panel.
+     * Boolean: Setting active to false will collapse all panels. This requires the collapsible option to be true. Integer: The zero-based index of the panel that is active (open). A negative value
+     * selects panels going backward from the last panel.
      * <p>
      * @param active
      */
@@ -91,8 +96,7 @@ public class JQUITabOptions extends JavaScriptPart
     }
 
     /**
-     * When set to true, the active panel can be closed.
-     * Code examples:
+     * When set to true, the active panel can be closed. Code examples:
      * <p>
      * Initialize the tabs with the collapsible option specified:
      * <p>
@@ -104,8 +108,7 @@ public class JQUITabOptions extends JavaScriptPart
     }
 
     /**
-     * When set to true, the active panel can be closed.
-     * Code examples:
+     * When set to true, the active panel can be closed. Code examples:
      * <p>
      * Initialize the tabs with the collapsible option specified:
      * <p>
@@ -117,8 +120,7 @@ public class JQUITabOptions extends JavaScriptPart
     }
 
     /**
-     * Which tabs are disabled.
-     * Multiple types supported:
+     * Which tabs are disabled. Multiple types supported:
      * <p>
      * Boolean: Enable or disable all tabs.
      * <p>
@@ -130,8 +132,7 @@ public class JQUITabOptions extends JavaScriptPart
     }
 
     /**
-     * Which tabs are disabled.
-     * Multiple types supported:
+     * Which tabs are disabled. Multiple types supported:
      * <p>
      * Boolean: Enable or disable all tabs.
      * <p>
@@ -165,9 +166,8 @@ public class JQUITabOptions extends JavaScriptPart
     /**
      * Controls the height of the tabs widget and each panel. Possible values:
      * <p>
-     * "auto": All panels will be set to the height of the tallest panel.
-     * "fill": Expand to the available height based on the tabs' parent height.
-     * "content": Each panel will be only as tall as its content.
+     * "auto": All panels will be set to the height of the tallest panel. "fill": Expand to the available height based on the tabs' parent height. "content": Each panel will be only as tall as its
+     * content.
      * <p>
      * @return
      */
@@ -179,9 +179,8 @@ public class JQUITabOptions extends JavaScriptPart
     /**
      * Controls the height of the tabs widget and each panel. Possible values:
      * <p>
-     * "auto": All panels will be set to the height of the tallest panel.
-     * "fill": Expand to the available height based on the tabs' parent height.
-     * "content": Each panel will be only as tall as its content.
+     * "auto": All panels will be set to the height of the tallest panel. "fill": Expand to the available height based on the tabs' parent height. "content": Each panel will be only as tall as its
+     * content.
      * <p>
      * @param heightStyle
      */
@@ -228,11 +227,5 @@ public class JQUITabOptions extends JavaScriptPart
     public void setShow(JWAnimationEffectsPart show)
     {
         this.show = show;
-    }
-
-    @Override
-    public JavascriptPartType getJavascriptType()
-    {
-        return JavascriptPartType.Javascript;
     }
 }

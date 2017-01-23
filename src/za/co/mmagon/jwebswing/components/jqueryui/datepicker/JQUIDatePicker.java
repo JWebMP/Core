@@ -7,8 +7,7 @@ import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 /**
  * The DatePicker is tied to a standard form input field.
  * <p>
- * Focus on the input (click, or use the tab key) to open an interactive calendar in a small overlay.
- * Choose a date, click elsewhere on the page (blur the input), or hit the Esc key to close.
+ * Focus on the input (click, or use the tab key) to open an interactive calendar in a small overlay. Choose a date, click elsewhere on the page (blur the input), or hit the Esc key to close.
  * <p>
  * If a date is chosen, feedback is shown as the input's value.
  * <p>
@@ -50,6 +49,7 @@ public class JQUIDatePicker extends Div<JQUIDatePickerChildren, NoAttributes, JQ
      * <p>
      * @return
      */
+    @Override
     public JQUIDatePickerOptions getOptions()
     {
         return inputFeature.getOptions();

@@ -18,10 +18,12 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 <span class="nc" id="L18">public class JQUIDraggableOptions extends JavaScriptPart</span>
 {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * If set to false, will prevent the ui-draggable class from being added. This may be desired as a performance optimization when calling .draggable() on hundreds of elements.
      */
-<span class="nc" id="L24">    private Boolean addClasses = true;</span>
+<span class="nc" id="L26">    private Boolean addClasses = true;</span>
     /**
      * Which element the draggable helper should be appended to while dragging.
      */
@@ -34,7 +36,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
     /**
      * Prevents dragging from starting on specified elements. Default: &quot;input,textarea,button,select,option&quot;
      */
-<span class="nc" id="L37">    private ArrayList&lt;String&gt; cancelObjects = new ArrayList();</span>
+<span class="nc" id="L39">    private ArrayList&lt;String&gt; cancelObjects = new ArrayList();</span>
     /**
      * Allows the draggable to be dropped onto the specified sortables. If this option is used, a draggable can be dropped onto a sortable list and then becomes part of it. Note: The helper option
      * must be set to &quot;clone&quot; in order to work flawlessly.
@@ -70,7 +72,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
     private String handle;
     /**
      * Allows for a helper element to be used for dragging display.
-     *
+     * &lt;p&gt;
      * The element will be cloned and the clone will be dragged.
      */
     private Boolean helper;
@@ -93,7 +95,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
     private Boolean refreshPositions;
     /**
      * Whether the element should revert to its start position when dragging stops.
-     *
+     * &lt;p&gt;
      * Boolean: If set to true the element will always revert.
      */
     private Boolean revert;
@@ -153,7 +155,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Boolean isAddClasses()
     {
-<span class="nc" id="L156">        return addClasses;</span>
+<span class="nc" id="L158">        return addClasses;</span>
     }
 
     /**
@@ -163,8 +165,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setAddClasses(Boolean addClasses)
     {
-<span class="nc" id="L166">        this.addClasses = addClasses;</span>
-<span class="nc" id="L167">    }</span>
+<span class="nc" id="L168">        this.addClasses = addClasses;</span>
+<span class="nc" id="L169">    }</span>
 
     /**
      * Which element the draggable helper should be appended to while dragging.
@@ -173,7 +175,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public String getAppendTo()
     {
-<span class="nc" id="L176">        return appendTo;</span>
+<span class="nc" id="L178">        return appendTo;</span>
     }
 
     /**
@@ -183,8 +185,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setAppendTo(Component appendTo)
     {
-<span class="nc" id="L186">        this.appendTo = appendTo.getID(true);</span>
-<span class="nc" id="L187">    }</span>
+<span class="nc" id="L188">        this.appendTo = appendTo.getID(true);</span>
+<span class="nc" id="L189">    }</span>
 
     /**
      * Constrains dragging to either the horizontal (x) or vertical (y) axis. Possible values: &quot;x&quot;, &quot;y&quot;.
@@ -193,7 +195,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Axis getAxis()
     {
-<span class="nc" id="L196">        return axis;</span>
+<span class="nc" id="L198">        return axis;</span>
     }
 
     /**
@@ -203,8 +205,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setAxis(Axis axis)
     {
-<span class="nc" id="L206">        this.axis = axis;</span>
-<span class="nc" id="L207">    }</span>
+<span class="nc" id="L208">        this.axis = axis;</span>
+<span class="nc" id="L209">    }</span>
 
     /**
      * Prevents dragging from starting on specified elements.
@@ -213,7 +215,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public ArrayList&lt;String&gt; getCancelObjects()
     {
-<span class="nc" id="L216">        return cancelObjects;</span>
+<span class="nc" id="L218">        return cancelObjects;</span>
     }
 
     /**
@@ -224,8 +226,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
     public void setCancelObjects(ArrayList&lt;String&gt; cancelObjects)
     {
 
-<span class="nc" id="L227">        this.cancelObjects = cancelObjects;</span>
-<span class="nc" id="L228">    }</span>
+<span class="nc" id="L229">        this.cancelObjects = cancelObjects;</span>
+<span class="nc" id="L230">    }</span>
 
     /**
      * Allows the draggable to be dropped onto the specified sortables. If this option is used, a draggable can be dropped onto a sortable list and then becomes part of it. Note: The helper option
@@ -235,7 +237,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public String getConnectToSortableType()
     {
-<span class="nc" id="L238">        return connectToSortableType;</span>
+<span class="nc" id="L240">        return connectToSortableType;</span>
     }
 
     /**
@@ -246,8 +248,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setConnectToSortableType(Component connectToSortableType)
     {
-<span class="nc" id="L249">        this.connectToSortableType = connectToSortableType.getID(true);</span>
-<span class="nc" id="L250">    }</span>
+<span class="nc" id="L251">        this.connectToSortableType = connectToSortableType.getID(true);</span>
+<span class="nc" id="L252">    }</span>
 
     /**
      * Constrains dragging to within the bounds of the specified element or region.
@@ -256,7 +258,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public String getContainment()
     {
-<span class="nc" id="L259">        return containment;</span>
+<span class="nc" id="L261">        return containment;</span>
     }
 
     /**
@@ -266,8 +268,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setContainment(Component containment)
     {
-<span class="nc" id="L269">        this.containment = containment.getID(true);</span>
-<span class="nc" id="L270">    }</span>
+<span class="nc" id="L271">        this.containment = containment.getID(true);</span>
+<span class="nc" id="L272">    }</span>
 
     /**
      * The current cursor set or NULL if unset
@@ -276,7 +278,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public String getCursor()
     {
-<span class="nc" id="L279">        return cursor;</span>
+<span class="nc" id="L281">        return cursor;</span>
     }
 
     /**
@@ -286,8 +288,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setCursor(Cursors cursor)
     {
-<span class="nc" id="L289">        this.cursor = cursor.toString();</span>
-<span class="nc" id="L290">    }</span>
+<span class="nc" id="L291">        this.cursor = cursor.toString();</span>
+<span class="nc" id="L292">    }</span>
 
     /**
      * Time in milliseconds after mousedown until dragging should start. This option can be used to prevent unwanted drags when clicking on an element.
@@ -296,7 +298,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Integer getDelay()
     {
-<span class="nc" id="L299">        return delay;</span>
+<span class="nc" id="L301">        return delay;</span>
     }
 
     /**
@@ -306,8 +308,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setDelay(Integer delay)
     {
-<span class="nc" id="L309">        this.delay = delay;</span>
-<span class="nc" id="L310">    }</span>
+<span class="nc" id="L311">        this.delay = delay;</span>
+<span class="nc" id="L312">    }</span>
 
     /**
      * Returns if this draggable feature is disabled or not
@@ -316,7 +318,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Boolean isDisabled()
     {
-<span class="nc" id="L319">        return disabled;</span>
+<span class="nc" id="L321">        return disabled;</span>
     }
 
     /**
@@ -326,8 +328,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setDisabled(Boolean disabled)
     {
-<span class="nc" id="L329">        this.disabled = disabled;</span>
-<span class="nc" id="L330">    }</span>
+<span class="nc" id="L331">        this.disabled = disabled;</span>
+<span class="nc" id="L332">    }</span>
 
     /**
      * Distance in pixels after mousedown the mouse must move before dragging should start. This option can be used to prevent unwanted drags when clicking on an element.
@@ -336,7 +338,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Integer getDistance()
     {
-<span class="nc" id="L339">        return distance;</span>
+<span class="nc" id="L341">        return distance;</span>
     }
 
     /**
@@ -346,8 +348,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setDistance(Integer distance)
     {
-<span class="nc" id="L349">        this.distance = distance;</span>
-<span class="nc" id="L350">    }</span>
+<span class="nc" id="L351">        this.distance = distance;</span>
+<span class="nc" id="L352">    }</span>
 
     /**
      * Get the grid values set or null
@@ -356,7 +358,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Integer[] getGrid()
     {
-<span class="nc" id="L359">        return grid;</span>
+<span class="nc" id="L361">        return grid;</span>
     }
 
     /**
@@ -367,11 +369,11 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setGrid(Integer x, Integer y)
     {
-<span class="nc" id="L370">        this.grid = new Integer[]</span>
+<span class="nc" id="L372">        this.grid = new Integer[]</span>
         {
             x, y
         };
-<span class="nc" id="L374">    }</span>
+<span class="nc" id="L376">    }</span>
 
     /**
      * If specified, restricts dragging from starting unless the mousedown occurs on the specified element(s). Only elements that descend from the draggable element are permitted.
@@ -380,7 +382,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public String getHandle()
     {
-<span class="nc" id="L383">        return handle;</span>
+<span class="nc" id="L385">        return handle;</span>
     }
 
     /**
@@ -390,32 +392,32 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setHandle(Component handle)
     {
-<span class="nc" id="L393">        this.handle = handle.getID(true);</span>
-<span class="nc" id="L394">    }</span>
+<span class="nc" id="L395">        this.handle = handle.getID(true);</span>
+<span class="nc" id="L396">    }</span>
 
     /**
      * Allows for a helper element to be used for dragging display.
-     *
+     * &lt;p&gt;
      * The element will be cloned and the clone will be dragged.
      *
      * @return If the element must be cloned
      */
     public Boolean isHelper()
     {
-<span class="nc" id="L405">        return helper;</span>
+<span class="nc" id="L407">        return helper;</span>
     }
 
     /**
      * Allows for a helper element to be used for dragging display.
-     *
+     * &lt;p&gt;
      * The element will be cloned and the clone will be dragged.
      *
      * @param helper Set to clone the element or not
      */
     public void setHelper(Boolean helper)
     {
-<span class="nc" id="L417">        this.helper = helper;</span>
-<span class="nc" id="L418">    }</span>
+<span class="nc" id="L419">        this.helper = helper;</span>
+<span class="nc" id="L420">    }</span>
 
     /**
      *
@@ -425,7 +427,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public String getHelperComponent()
     {
-<span class="nc" id="L428">        return helperComponent;</span>
+<span class="nc" id="L430">        return helperComponent;</span>
     }
 
     /**
@@ -435,8 +437,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setHelperComponent(Component helperComponent)
     {
-<span class="nc" id="L438">        this.helperComponent = helperComponent.getID(true);</span>
-<span class="nc" id="L439">    }</span>
+<span class="nc" id="L440">        this.helperComponent = helperComponent.getID(true);</span>
+<span class="nc" id="L441">    }</span>
 
     /**
      * Prevent iframes from capturing the mousemove events during a drag. Useful in combination with the cursorAt option, or in any case where the mouse cursor may not be over the helper.
@@ -445,7 +447,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Boolean isiFrameFix()
     {
-<span class="nc" id="L448">        return iFrameFix;</span>
+<span class="nc" id="L450">        return iFrameFix;</span>
     }
 
     /**
@@ -455,8 +457,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setiFrameFix(Boolean iFrameFix)
     {
-<span class="nc" id="L458">        this.iFrameFix = iFrameFix;</span>
-<span class="nc" id="L459">    }</span>
+<span class="nc" id="L460">        this.iFrameFix = iFrameFix;</span>
+<span class="nc" id="L461">    }</span>
 
     /**
      * Opacity for the helper while being dragged.
@@ -465,7 +467,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Double getOpacity()
     {
-<span class="nc" id="L468">        return opacity;</span>
+<span class="nc" id="L470">        return opacity;</span>
     }
 
     /**
@@ -475,8 +477,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setOpacity(Double opacity)
     {
-<span class="nc" id="L478">        this.opacity = opacity;</span>
-<span class="nc" id="L479">    }</span>
+<span class="nc" id="L480">        this.opacity = opacity;</span>
+<span class="nc" id="L481">    }</span>
 
     /**
      * If set to true, all droppable positions are calculated on every mousemove. Caution: This solves issues on highly dynamic pages, but dramatically decreases performance.
@@ -485,7 +487,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Boolean isRefreshPositions()
     {
-<span class="nc" id="L488">        return refreshPositions;</span>
+<span class="nc" id="L490">        return refreshPositions;</span>
     }
 
     /**
@@ -495,15 +497,15 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setRefreshPositions(Boolean refreshPositions)
     {
-<span class="nc" id="L498">        this.refreshPositions = refreshPositions;</span>
-<span class="nc" id="L499">    }</span>
+<span class="nc" id="L500">        this.refreshPositions = refreshPositions;</span>
+<span class="nc" id="L501">    }</span>
 
     /**
      * @return Whether the element should revert to its start position when dragging stops.
      */
     public Boolean isRevert()
     {
-<span class="nc" id="L506">        return revert;</span>
+<span class="nc" id="L508">        return revert;</span>
     }
 
     /**
@@ -513,8 +515,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setRevert(Boolean revert)
     {
-<span class="nc" id="L516">        this.revert = revert;</span>
-<span class="nc" id="L517">    }</span>
+<span class="nc" id="L518">        this.revert = revert;</span>
+<span class="nc" id="L519">    }</span>
 
     /**
      *
@@ -522,7 +524,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public JQUIDraggableRevertOptions getRevertOption()
     {
-<span class="nc" id="L525">        return revertOption;</span>
+<span class="nc" id="L527">        return revertOption;</span>
     }
 
     /**
@@ -531,8 +533,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setRevertOption(JQUIDraggableRevertOptions revertOption)
     {
-<span class="nc" id="L534">        this.revertOption = revertOption;</span>
-<span class="nc" id="L535">    }</span>
+<span class="nc" id="L536">        this.revertOption = revertOption;</span>
+<span class="nc" id="L537">    }</span>
 
     /**
      *
@@ -540,7 +542,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Integer getRevertDuration()
     {
-<span class="nc" id="L543">        return revertDuration;</span>
+<span class="nc" id="L545">        return revertDuration;</span>
     }
 
     /**
@@ -549,8 +551,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setRevertDuration(Integer revertDuration)
     {
-<span class="nc" id="L552">        this.revertDuration = revertDuration;</span>
-<span class="nc" id="L553">    }</span>
+<span class="nc" id="L554">        this.revertDuration = revertDuration;</span>
+<span class="nc" id="L555">    }</span>
 
     /**
      * Used to group sets of draggable and droppable items, in addition to droppable's accept option. A draggable with the same scope value as a droppable will be accepted by the droppable.
@@ -559,7 +561,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public final String getScope()
     {
-<span class="nc" id="L562">        return scope;</span>
+<span class="nc" id="L564">        return scope;</span>
     }
 
     /**
@@ -569,8 +571,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public final void setScope(String scope)
     {
-<span class="nc" id="L572">        this.scope = scope;</span>
-<span class="nc" id="L573">    }</span>
+<span class="nc" id="L574">        this.scope = scope;</span>
+<span class="nc" id="L575">    }</span>
 
     /**
      *
@@ -578,7 +580,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Boolean isScroll()
     {
-<span class="nc" id="L581">        return scroll;</span>
+<span class="nc" id="L583">        return scroll;</span>
     }
 
     /**
@@ -587,8 +589,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setScroll(Boolean scroll)
     {
-<span class="nc" id="L590">        this.scroll = scroll;</span>
-<span class="nc" id="L591">    }</span>
+<span class="nc" id="L592">        this.scroll = scroll;</span>
+<span class="nc" id="L593">    }</span>
 
     /**
      *
@@ -596,7 +598,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Integer getScrollSensitivity()
     {
-<span class="nc" id="L599">        return scrollSensitivity;</span>
+<span class="nc" id="L601">        return scrollSensitivity;</span>
     }
 
     /**
@@ -606,8 +608,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setScrollSensitivity(Integer scrollSensitivity)
     {
-<span class="nc" id="L609">        this.scrollSensitivity = scrollSensitivity;</span>
-<span class="nc" id="L610">    }</span>
+<span class="nc" id="L611">        this.scrollSensitivity = scrollSensitivity;</span>
+<span class="nc" id="L612">    }</span>
 
     /**
      *
@@ -615,7 +617,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Integer getScrollSpeed()
     {
-<span class="nc" id="L618">        return scrollSpeed;</span>
+<span class="nc" id="L620">        return scrollSpeed;</span>
     }
 
     /**
@@ -624,8 +626,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setScrollSpeed(Integer scrollSpeed)
     {
-<span class="nc" id="L627">        this.scrollSpeed = scrollSpeed;</span>
-<span class="nc" id="L628">    }</span>
+<span class="nc" id="L629">        this.scrollSpeed = scrollSpeed;</span>
+<span class="nc" id="L630">    }</span>
 
     /**
      *
@@ -633,7 +635,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Boolean isSnap()
     {
-<span class="nc" id="L636">        return snap;</span>
+<span class="nc" id="L638">        return snap;</span>
     }
 
     /**
@@ -642,8 +644,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setSnap(Boolean snap)
     {
-<span class="nc" id="L645">        this.snap = snap;</span>
-<span class="nc" id="L646">    }</span>
+<span class="nc" id="L647">        this.snap = snap;</span>
+<span class="nc" id="L648">    }</span>
 
     /**
      *
@@ -651,7 +653,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public String getSnapComponent()
     {
-<span class="nc" id="L654">        return snapComponent;</span>
+<span class="nc" id="L656">        return snapComponent;</span>
     }
 
     /**
@@ -660,8 +662,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setSnapComponent(Component snapComponent)
     {
-<span class="nc" id="L663">        this.snapComponent = snapComponent.getID(true);</span>
-<span class="nc" id="L664">    }</span>
+<span class="nc" id="L665">        this.snapComponent = snapComponent.getID(true);</span>
+<span class="nc" id="L666">    }</span>
 
     /**
      *
@@ -669,7 +671,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public JQUIDraggableSnapModes getSnapMode()
     {
-<span class="nc" id="L672">        return snapMode;</span>
+<span class="nc" id="L674">        return snapMode;</span>
     }
 
     /**
@@ -678,8 +680,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setSnapMode(JQUIDraggableSnapModes snapMode)
     {
-<span class="nc" id="L681">        this.snapMode = snapMode;</span>
-<span class="nc" id="L682">    }</span>
+<span class="nc" id="L683">        this.snapMode = snapMode;</span>
+<span class="nc" id="L684">    }</span>
 
     /**
      *
@@ -687,7 +689,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Integer getSnapToleranceType()
     {
-<span class="nc" id="L690">        return snapTolerance;</span>
+<span class="nc" id="L692">        return snapTolerance;</span>
     }
 
     /**
@@ -696,8 +698,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setSnapToleranceType(Integer snapToleranceType)
     {
-<span class="nc" id="L699">        this.snapTolerance = snapToleranceType;</span>
-<span class="nc" id="L700">    }</span>
+<span class="nc" id="L701">        this.snapTolerance = snapToleranceType;</span>
+<span class="nc" id="L702">    }</span>
 
     /**
      *
@@ -705,7 +707,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Integer getSnapTolerance()
     {
-<span class="nc" id="L708">        return snapTolerance;</span>
+<span class="nc" id="L710">        return snapTolerance;</span>
     }
 
     /**
@@ -714,8 +716,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setSnapTolerance(Integer snapTolerance)
     {
-<span class="nc" id="L717">        this.snapTolerance = snapTolerance;</span>
-<span class="nc" id="L718">    }</span>
+<span class="nc" id="L719">        this.snapTolerance = snapTolerance;</span>
+<span class="nc" id="L720">    }</span>
 
     /**
      *
@@ -723,7 +725,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Component getStack()
     {
-<span class="nc" id="L726">        return stack;</span>
+<span class="nc" id="L728">        return stack;</span>
     }
 
     /**
@@ -732,8 +734,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setStack(Component stack)
     {
-<span class="nc" id="L735">        this.stack = stack;</span>
-<span class="nc" id="L736">    }</span>
+<span class="nc" id="L737">        this.stack = stack;</span>
+<span class="nc" id="L738">    }</span>
 
     /**
      *
@@ -741,7 +743,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public Integer getzIndex()
     {
-<span class="nc" id="L744">        return zIndex;</span>
+<span class="nc" id="L746">        return zIndex;</span>
     }
 
     /**
@@ -750,13 +752,13 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
      */
     public void setzIndex(Integer zIndex)
     {
-<span class="nc" id="L753">        this.zIndex = zIndex;</span>
-<span class="nc" id="L754">    }</span>
+<span class="nc" id="L755">        this.zIndex = zIndex;</span>
+<span class="nc" id="L756">    }</span>
 
     @Override
     public JavascriptPartType getJavascriptType()
     {
-<span class="nc" id="L759">        return JavascriptPartType.Javascript;</span>
+<span class="nc" id="L761">        return JavascriptPartType.Javascript;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

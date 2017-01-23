@@ -3,7 +3,6 @@ package za.co.mmagon.jwebswing.components.jqueryui.position;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
 /**
  * This defines the JavaScript part for JQuery UI for Position
@@ -16,18 +15,42 @@ public class Position extends JavaScriptPart
 {
 
     private static final long serialVersionUID = 1L;
-
+    /**
+     * My position of x
+     */
     private PositionLocationHorizontal myX;
+    /**
+     * My position at y
+     */
     private PositionLocationVertical myY;
+    /**
+     * Place component at x
+     */
     private PositionLocationHorizontal atX;
+    /**
+     * Place component ad y
+     */
     private PositionLocationVertical atY;
 
+    /**
+     * The component id for at
+     */
     private String at;
+    /**
+     * The component ID for my
+     */
     private String my;
+    /**
+     * The component ID for of
+     */
     private String of;
 
+    /**
+     * Blank instantiation
+     */
     public Position()
     {
+        //Nothing needed here
     }
 
     /**
@@ -142,62 +165,111 @@ public class Position extends JavaScriptPart
         return of;
     }
 
+    /**
+     * Set the component
+     *
+     * @param comp
+     */
     public void setOf(Component comp)
     {
         this.of = comp.getID(true);
     }
 
-    @Override
-    public JavascriptPartType getJavascriptType()
-    {
-        return JavascriptPartType.Javascript;
-    }
-
+    /**
+     * gets the at component string
+     *
+     * @return
+     */
     public String getAt()
     {
         return at;
     }
 
+    /**
+     * Sets the at
+     *
+     * @param at
+     */
     public void setAt(String at)
     {
         this.at = at;
     }
 
+    /**
+     * Returns the my
+     *
+     * @return
+     */
     public String getMy()
     {
         return my;
     }
 
+    /**
+     * Sets the my
+     *
+     * @param my
+     */
     public void setMy(String my)
     {
         this.my = my;
     }
 
+    /**
+     * Returns the id of the component of
+     *
+     * @return
+     */
     public String getOf()
     {
         return of;
     }
 
+    /**
+     * sets the #id of the component
+     *
+     * @param of
+     */
     public void setOf(String of)
     {
         this.of = of;
     }
 
+    /**
+     * Sets the location for position x
+     *
+     * @param myX
+     */
     public void setMyX(PositionLocationHorizontal myX)
     {
         this.myX = myX;
     }
 
+    /**
+     * Sets the location for position y
+     *
+     * @param myY
+     */
     public void setMyY(PositionLocationVertical myY)
     {
         this.myY = myY;
     }
 
+    /**
+     * Sets the position at x
+     *
+     * @param atX
+     */
     public void setAtX(PositionLocationHorizontal atX)
     {
         this.atX = atX;
     }
 
+    /**
+     * Sets the position at y
+     *
+     * @param atY
+     */
     public void setAtY(PositionLocationVertical atY)
     {
         this.atY = atY;

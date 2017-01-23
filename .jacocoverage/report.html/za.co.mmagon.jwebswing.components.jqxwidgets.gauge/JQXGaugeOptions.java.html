@@ -34,6 +34,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 public class JQXGaugeOptions extends JavaScriptPart
 {
 
+    private static final long serialVersionUID = 1L;
+
     private Integer animationDuration;// 	Number 	400
     private JQXGaugeBorder border;// 	Object 	{ size: '10%', style: { stroke: '#cccccc'}, visible: true, showGradient: true }
     private JQXGaugeCaption caption;// 	Object 	{ value: '', position: 'bottom', offset: [0, 0], visible: true }
@@ -60,255 +62,255 @@ public class JQXGaugeOptions extends JavaScriptPart
     private Integer width;// 	Number 	350
 
     public JQXGaugeOptions()
-<span class="nc" id="L63">    {</span>
+<span class="nc" id="L65">    {</span>
 
-<span class="nc" id="L65">    }</span>
+<span class="nc" id="L67">    }</span>
 
     @Override
     public JavascriptPartType getJavascriptType()
     {
-<span class="nc" id="L70">        return JavascriptPartType.Javascript;</span>
+<span class="nc" id="L72">        return JavascriptPartType.Javascript;</span>
     }
 
     public Integer getAnimationDuration()
     {
-<span class="nc" id="L75">        return animationDuration;</span>
+<span class="nc" id="L77">        return animationDuration;</span>
     }
 
     public void setAnimationDuration(Integer animationDuration)
     {
-<span class="nc" id="L80">        this.animationDuration = animationDuration;</span>
-<span class="nc" id="L81">    }</span>
+<span class="nc" id="L82">        this.animationDuration = animationDuration;</span>
+<span class="nc" id="L83">    }</span>
 
     public JQXGaugeBorder getBorder()
     {
-<span class="nc" id="L85">        return border;</span>
+<span class="nc" id="L87">        return border;</span>
     }
 
     public void setBorder(JQXGaugeBorder border)
     {
-<span class="nc" id="L90">        this.border = border;</span>
-<span class="nc" id="L91">    }</span>
+<span class="nc" id="L92">        this.border = border;</span>
+<span class="nc" id="L93">    }</span>
 
     public JQXGaugeCaption getCaption()
     {
-<span class="nc" id="L95">        return caption;</span>
+<span class="nc" id="L97">        return caption;</span>
     }
 
     public void setCaption(JQXGaugeCaption caption)
     {
-<span class="nc" id="L100">        this.caption = caption;</span>
-<span class="nc" id="L101">    }</span>
+<span class="nc" id="L102">        this.caption = caption;</span>
+<span class="nc" id="L103">    }</span>
 
     public JQXGaugeCap getCap()
     {
-<span class="nc" id="L105">        return cap;</span>
+<span class="nc" id="L107">        return cap;</span>
     }
 
     public void setCap(JQXGaugeCap cap)
     {
-<span class="nc" id="L110">        this.cap = cap;</span>
-<span class="nc" id="L111">    }</span>
+<span class="nc" id="L112">        this.cap = cap;</span>
+<span class="nc" id="L113">    }</span>
 
     public String getColorScheme()
     {
-<span class="nc" id="L115">        return colorScheme;</span>
+<span class="nc" id="L117">        return colorScheme;</span>
     }
 
     public void setColorScheme(String colorScheme)
     {
-<span class="nc" id="L120">        this.colorScheme = colorScheme;</span>
-<span class="nc" id="L121">    }</span>
+<span class="nc" id="L122">        this.colorScheme = colorScheme;</span>
+<span class="nc" id="L123">    }</span>
 
     public Boolean getDisabled()
     {
-<span class="nc" id="L125">        return disabled;</span>
+<span class="nc" id="L127">        return disabled;</span>
     }
 
     public void setDisabled(Boolean disabled)
     {
-<span class="nc" id="L130">        this.disabled = disabled;</span>
-<span class="nc" id="L131">    }</span>
+<span class="nc" id="L132">        this.disabled = disabled;</span>
+<span class="nc" id="L133">    }</span>
 
     public EasingEffects getEasing()
     {
-<span class="nc" id="L135">        return easing;</span>
+<span class="nc" id="L137">        return easing;</span>
     }
 
     public void setEasing(EasingEffects easing)
     {
-<span class="nc" id="L140">        this.easing = easing;</span>
-<span class="nc" id="L141">    }</span>
+<span class="nc" id="L142">        this.easing = easing;</span>
+<span class="nc" id="L143">    }</span>
 
     public Integer getEndAngle()
     {
-<span class="nc" id="L145">        return endAngle;</span>
+<span class="nc" id="L147">        return endAngle;</span>
     }
 
     public void setEndAngle(Integer endAngle)
     {
-<span class="nc" id="L150">        this.endAngle = endAngle;</span>
-<span class="nc" id="L151">    }</span>
+<span class="nc" id="L152">        this.endAngle = endAngle;</span>
+<span class="nc" id="L153">    }</span>
 
     public Integer getHeight()
     {
-<span class="nc" id="L155">        return height;</span>
+<span class="nc" id="L157">        return height;</span>
     }
 
     public void setHeight(Integer height)
     {
-<span class="nc" id="L160">        this.height = height;</span>
-<span class="nc" id="L161">    }</span>
+<span class="nc" id="L162">        this.height = height;</span>
+<span class="nc" id="L163">    }</span>
 
     public Boolean getInt64()
     {
-<span class="nc" id="L165">        return int64;</span>
+<span class="nc" id="L167">        return int64;</span>
     }
 
     public void setInt64(Boolean int64)
     {
-<span class="nc" id="L170">        this.int64 = int64;</span>
-<span class="nc" id="L171">    }</span>
+<span class="nc" id="L172">        this.int64 = int64;</span>
+<span class="nc" id="L173">    }</span>
 
     public JQXGaugeLabels getLabels()
     {
-<span class="nc" id="L175">        return labels;</span>
+<span class="nc" id="L177">        return labels;</span>
     }
 
     public void setLabels(JQXGaugeLabels labels)
     {
-<span class="nc" id="L180">        this.labels = labels;</span>
-<span class="nc" id="L181">    }</span>
+<span class="nc" id="L182">        this.labels = labels;</span>
+<span class="nc" id="L183">    }</span>
 
     public Integer getMin()
     {
-<span class="nc" id="L185">        return min;</span>
+<span class="nc" id="L187">        return min;</span>
     }
 
     public void setMin(Integer min)
     {
-<span class="nc" id="L190">        this.min = min;</span>
-<span class="nc" id="L191">    }</span>
+<span class="nc" id="L192">        this.min = min;</span>
+<span class="nc" id="L193">    }</span>
 
     public Integer getMax()
     {
-<span class="nc" id="L195">        return max;</span>
+<span class="nc" id="L197">        return max;</span>
     }
 
     public void setMax(Integer max)
     {
-<span class="nc" id="L200">        this.max = max;</span>
-<span class="nc" id="L201">    }</span>
+<span class="nc" id="L202">        this.max = max;</span>
+<span class="nc" id="L203">    }</span>
 
     public JQXGaugePointer getPointer()
     {
-<span class="nc" id="L205">        return pointer;</span>
+<span class="nc" id="L207">        return pointer;</span>
     }
 
     public void setPointer(JQXGaugePointer pointer)
     {
-<span class="nc" id="L210">        this.pointer = pointer;</span>
-<span class="nc" id="L211">    }</span>
+<span class="nc" id="L212">        this.pointer = pointer;</span>
+<span class="nc" id="L213">    }</span>
 
     public MeasurementCSSImpl getRadius()
     {
-<span class="nc" id="L215">        return radius;</span>
+<span class="nc" id="L217">        return radius;</span>
     }
 
     public void setRadius(MeasurementCSSImpl radius)
     {
-<span class="nc" id="L220">        this.radius = radius;</span>
-<span class="nc" id="L221">    }</span>
+<span class="nc" id="L222">        this.radius = radius;</span>
+<span class="nc" id="L223">    }</span>
 
     public ArrayList&lt;JQXGaugeRange&gt; getRanges()
     {
-<span class="nc" id="L225">        return ranges;</span>
+<span class="nc" id="L227">        return ranges;</span>
     }
 
     public void setRanges(ArrayList&lt;JQXGaugeRange&gt; ranges)
     {
-<span class="nc" id="L230">        this.ranges = ranges;</span>
-<span class="nc" id="L231">    }</span>
+<span class="nc" id="L232">        this.ranges = ranges;</span>
+<span class="nc" id="L233">    }</span>
 
     public Integer getStartAngle()
     {
-<span class="nc" id="L235">        return startAngle;</span>
+<span class="nc" id="L237">        return startAngle;</span>
     }
 
     public void setStartAngle(Integer startAngle)
     {
-<span class="nc" id="L240">        this.startAngle = startAngle;</span>
-<span class="nc" id="L241">    }</span>
+<span class="nc" id="L242">        this.startAngle = startAngle;</span>
+<span class="nc" id="L243">    }</span>
 
     public Boolean getShowRanges()
     {
-<span class="nc" id="L245">        return showRanges;</span>
+<span class="nc" id="L247">        return showRanges;</span>
     }
 
     public void setShowRanges(Boolean showRanges)
     {
-<span class="nc" id="L250">        this.showRanges = showRanges;</span>
-<span class="nc" id="L251">    }</span>
+<span class="nc" id="L252">        this.showRanges = showRanges;</span>
+<span class="nc" id="L253">    }</span>
 
     public String getStyle()
     {
-<span class="nc" id="L255">        return style;</span>
+<span class="nc" id="L257">        return style;</span>
     }
 
     public void setStyle(String style)
     {
-<span class="nc" id="L260">        this.style = style;</span>
-<span class="nc" id="L261">    }</span>
+<span class="nc" id="L262">        this.style = style;</span>
+<span class="nc" id="L263">    }</span>
 
     public JQXGaugeTick getTicksMajor()
     {
-<span class="nc" id="L265">        return ticksMajor;</span>
+<span class="nc" id="L267">        return ticksMajor;</span>
     }
 
     public void setTicksMajor(JQXGaugeTick ticksMajor)
     {
-<span class="nc" id="L270">        this.ticksMajor = ticksMajor;</span>
-<span class="nc" id="L271">    }</span>
+<span class="nc" id="L272">        this.ticksMajor = ticksMajor;</span>
+<span class="nc" id="L273">    }</span>
 
     public JQXGaugeTick getTicksMinor()
     {
-<span class="nc" id="L275">        return ticksMinor;</span>
+<span class="nc" id="L277">        return ticksMinor;</span>
     }
 
     public void setTicksMinor(JQXGaugeTick ticksMinor)
     {
-<span class="nc" id="L280">        this.ticksMinor = ticksMinor;</span>
-<span class="nc" id="L281">    }</span>
+<span class="nc" id="L282">        this.ticksMinor = ticksMinor;</span>
+<span class="nc" id="L283">    }</span>
 
     public MeasurementCSSImpl getTicksDistance()
     {
-<span class="nc" id="L285">        return ticksDistance;</span>
+<span class="nc" id="L287">        return ticksDistance;</span>
     }
 
     public void setTicksDistance(MeasurementCSSImpl ticksDistance)
     {
-<span class="nc" id="L290">        this.ticksDistance = ticksDistance;</span>
-<span class="nc" id="L291">    }</span>
+<span class="nc" id="L292">        this.ticksDistance = ticksDistance;</span>
+<span class="nc" id="L293">    }</span>
 
     public Integer getValue()
     {
-<span class="nc" id="L295">        return value;</span>
+<span class="nc" id="L297">        return value;</span>
     }
 
     public void setValue(Integer value)
     {
-<span class="nc" id="L300">        this.value = value;</span>
-<span class="nc" id="L301">    }</span>
+<span class="nc" id="L302">        this.value = value;</span>
+<span class="nc" id="L303">    }</span>
 
     public Integer getWidth()
     {
-<span class="nc" id="L305">        return width;</span>
+<span class="nc" id="L307">        return width;</span>
     }
 
     public void setWidth(Integer width)
     {
-<span class="nc" id="L310">        this.width = width;</span>
-<span class="nc" id="L311">    }</span>
+<span class="nc" id="L312">        this.width = width;</span>
+<span class="nc" id="L313">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

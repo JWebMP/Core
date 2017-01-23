@@ -32,12 +32,12 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 public class JQUISelectMenu extends Div&lt;JQUISelectMenuChildren, NoAttributes, JQUISelectMenuFeatures, JQUISelectMenuEvents, JQUISelectMenu&gt;
 {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * The select menu feature
      */
     private JQUISelectMenuFeature feature;
-
-    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new select menu
@@ -67,9 +67,10 @@ public class JQUISelectMenu extends Div&lt;JQUISelectMenuChildren, NoAttributes,
      * &lt;p&gt;
      * @return
      */
+    @Override
     public JQUISelectMenuOptions getOptions()
     {
-<span class="nc" id="L72">        return getFeature().getOptions();</span>
+<span class="nc" id="L73">        return getFeature().getOptions();</span>
     }
 
 }

@@ -30,21 +30,33 @@ import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 public class JQUISlider extends Div&lt;JQUISliderChildren, NoAttributes, JQUISliderFeatures, JQUISliderEvents, JQUISlider&gt;
 {
 
+    private static final long serialVersionUID = 1L;
+    /**
+     * The feature for this component
+     */
     private final JQUISliderFeature slider;
+    /**
+     * The options for this component
+     */
     private JQUISliderOptions options;
 
     /**
      *
      */
     public JQUISlider()
-<span class="nc" id="L40">    {</span>
-<span class="nc" id="L41">        slider = new JQUISliderFeature(this);</span>
-<span class="nc" id="L42">        addFeature(slider);</span>
-<span class="nc" id="L43">    }</span>
+<span class="nc" id="L47">    {</span>
+<span class="nc" id="L48">        slider = new JQUISliderFeature(this);</span>
+<span class="nc" id="L49">        addFeature(slider);</span>
+<span class="nc" id="L50">    }</span>
 
+    /**
+     * Returns the actual slider
+     *
+     * @return
+     */
     public JQUISliderFeature getSlider()
     {
-<span class="nc" id="L47">        return slider;</span>
+<span class="nc" id="L59">        return slider;</span>
     }
 
     /**
@@ -52,13 +64,14 @@ public class JQUISlider extends Div&lt;JQUISliderChildren, NoAttributes, JQUISli
      * &lt;p&gt;
      * @return
      */
+    @Override
     public JQUISliderOptions getOptions()
     {
-<span class="nc bnc" id="L57" title="All 2 branches missed.">        if (this.options == null)</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        if (this.options == null)</span>
         {
-<span class="nc" id="L59">            this.options = new JQUISliderOptions();</span>
+<span class="nc" id="L72">            this.options = new JQUISliderOptions();</span>
         }
-<span class="nc" id="L61">        return options;</span>
+<span class="nc" id="L74">        return options;</span>
     }
 
 }

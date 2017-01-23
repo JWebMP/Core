@@ -2,9 +2,7 @@
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.ButtonAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.components.jquerylayout.layout.interfaces.JWLayoutDivChildren;
 import za.co.mmagon.jwebswing.components.jqueryui.accordion.JQUIAccordionChildren;
@@ -32,8 +30,8 @@ public class JQUIButton extends Component&lt;JQUIButtonChildren, ButtonAttribute
      */
     public JQUIButton()
     {
-<span class="nc" id="L35">        this(null);</span>
-<span class="nc" id="L36">    }</span>
+<span class="nc" id="L33">        this(null);</span>
+<span class="nc" id="L34">    }</span>
 
     /**
      * Constructs a new Button of type button
@@ -42,19 +40,20 @@ public class JQUIButton extends Component&lt;JQUIButtonChildren, ButtonAttribute
      */
     public JQUIButton(String text)
     {
-<span class="fc" id="L45">        super(ComponentTypes.Button);</span>
-<span class="fc" id="L46">        setText(text);</span>
-<span class="fc" id="L47">        getFeature();</span>
-<span class="fc" id="L48">    }</span>
+<span class="fc" id="L43">        super(ComponentTypes.Button);</span>
+<span class="fc" id="L44">        setText(text);</span>
+<span class="fc" id="L45">        getFeature();</span>
+<span class="fc" id="L46">    }</span>
 
     /**
      * Returns the button options from the feature
      *
      * @return
      */
+    @Override
     public JQUIButtonOptions getOptions()
     {
-<span class="nc" id="L57">        return getFeature().getOptions();</span>
+<span class="nc" id="L56">        return getFeature().getOptions();</span>
     }
 
     /**
@@ -64,12 +63,12 @@ public class JQUIButton extends Component&lt;JQUIButtonChildren, ButtonAttribute
      */
     public final JQUIButtonFeature getFeature()
     {
-<span class="pc bpc" id="L67" title="1 of 2 branches missed.">        if (feature == null)</span>
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">        if (feature == null)</span>
         {
-<span class="fc" id="L69">            feature = new JQUIButtonFeature(this);</span>
-<span class="fc" id="L70">            addFeature(feature);</span>
+<span class="fc" id="L68">            feature = new JQUIButtonFeature(this);</span>
+<span class="fc" id="L69">            addFeature(feature);</span>
         }
-<span class="fc" id="L72">        return feature;</span>
+<span class="fc" id="L71">        return feature;</span>
     }
 
 }

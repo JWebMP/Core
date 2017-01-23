@@ -30,6 +30,8 @@ import za.co.mmagon.jwebswing.components.pools.jqueryui.JQUIReferencePool;
 public class JQUIProgressBarFeature extends Feature&lt;JQUIProgressBarOptions, JQUIProgressBarFeature&gt; implements JQUIProgressBarFeatures
 {
 
+    private static final long serialVersionUID = 1L;
+
     private final JQUIProgressBar progressBar;
     private JQUIProgressBarOptions options;
 
@@ -40,33 +42,33 @@ public class JQUIProgressBarFeature extends Feature&lt;JQUIProgressBarOptions, J
      */
     public JQUIProgressBarFeature(JQUIProgressBar progressBar)
     {
-<span class="nc" id="L43">        super(&quot;JWProgressBarFeature&quot;);</span>
-<span class="nc" id="L44">        this.progressBar = progressBar;</span>
+<span class="nc" id="L45">        super(&quot;JWProgressBarFeature&quot;);</span>
+<span class="nc" id="L46">        this.progressBar = progressBar;</span>
 
-<span class="nc" id="L46">        getJavascriptReferences().add(JQUIReferencePool.Core.getJavaScriptReference());</span>
-<span class="nc" id="L47">        getJavascriptReferences().add(JQUIReferencePool.Widget.getJavaScriptReference());</span>
-<span class="nc" id="L48">        getCssReferences().add(JQUIReferencePool.Core.getCssReference());</span>
-<span class="nc" id="L49">        getCssReferences().add(JQUIReferencePool.Widget.getCssReference());</span>
+<span class="nc" id="L48">        getJavascriptReferences().add(JQUIReferencePool.Core.getJavaScriptReference());</span>
+<span class="nc" id="L49">        getJavascriptReferences().add(JQUIReferencePool.Widget.getJavaScriptReference());</span>
+<span class="nc" id="L50">        getCssReferences().add(JQUIReferencePool.Core.getCssReference());</span>
+<span class="nc" id="L51">        getCssReferences().add(JQUIReferencePool.Widget.getCssReference());</span>
 
-<span class="nc" id="L51">        getJavascriptReferences().add(JQUIReferencePool.ProgressBar.getJavaScriptReference());</span>
-<span class="nc" id="L52">        getCssReferences().add(JQUIReferencePool.ProgressBar.getCssReference());</span>
+<span class="nc" id="L53">        getJavascriptReferences().add(JQUIReferencePool.ProgressBar.getJavaScriptReference());</span>
+<span class="nc" id="L54">        getCssReferences().add(JQUIReferencePool.ProgressBar.getCssReference());</span>
 
-<span class="nc" id="L54">    }</span>
+<span class="nc" id="L56">    }</span>
 
     @Override
     public void assignFunctionsToComponent()
     {
-<span class="nc" id="L59">        addQuery(progressBar.getJQueryID() + &quot;progressbar(&quot; + getOptions() + &quot;);&quot;);</span>
-<span class="nc" id="L60">    }</span>
+<span class="nc" id="L61">        addQuery(progressBar.getJQueryID() + &quot;progressbar(&quot; + getOptions() + &quot;);&quot;);</span>
+<span class="nc" id="L62">    }</span>
 
     @Override
     public JQUIProgressBarOptions getOptions()
     {
-<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (options == null)</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        if (options == null)</span>
         {
-<span class="nc" id="L67">            options = new JQUIProgressBarOptions();</span>
+<span class="nc" id="L69">            options = new JQUIProgressBarOptions();</span>
         }
-<span class="nc" id="L69">        return options;</span>
+<span class="nc" id="L71">        return options;</span>
     }
 
 }

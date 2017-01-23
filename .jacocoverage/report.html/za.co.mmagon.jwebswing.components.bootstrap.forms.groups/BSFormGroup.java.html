@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BSFormGroup.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.bootstrap.forms.groups</a> &gt; <span class="el_source">BSFormGroup.java</span></div><h1>BSFormGroup.java</h1><pre class="source lang-java linenums">/*
- * Copyright (C) 2017 GedMarc
+ * Copyright (C) 2015 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,33 +16,550 @@
  */
 package za.co.mmagon.jwebswing.components.bootstrap.forms.groups;
 
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.ComponentHTMLBootstrapBase;
+import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
+import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
+import za.co.mmagon.jwebswing.components.bootstrap.forms.BSForm;
 import za.co.mmagon.jwebswing.components.bootstrap.forms.BSFormChildren;
+import za.co.mmagon.jwebswing.components.bootstrap.forms.controls.BSFormSelectInput;
+import za.co.mmagon.jwebswing.components.bootstrap.forms.controls.BSInput;
+import za.co.mmagon.jwebswing.components.bootstrap.forms.groups.sets.BSFormInputGroup;
+import za.co.mmagon.logger.LogFactory;
 
 /**
- * Form groups
+ * An implementation of
  * &lt;p&gt;
- * The .form-group class is the easiest way to add some structure to forms.
- * &lt;p&gt;
- * Its only purpose is to provide margin-bottom around a label and control pairing. As a bonus, since it’s a class you can use it with fieldsets, divs, or nearly any other element.
+ * @author Marc Magon
+ * @param &lt;T&gt; Is a component and a valid form group child
  *
- * @author GedMarc
- * @since 14 Jan 2017
- *
+ * @since 17 Jan 2017
+ * @version 1.0
  */
-public class BSFormGroup extends Div&lt;GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, BSFormGroup&gt;
+public class BSFormGroup&lt;T extends ComponentHTMLBootstrapBase &amp; BSFormGroupChildren&gt; extends Div&lt;BSFormGroupChildren, BSFormGroupAttributes, BSFormGroupFeatures, BSFormGroupEvents, BSFormGroup&gt;
         implements BSFormChildren
 {
 
+<span class="fc" id="L48">    private static final Logger log = LogFactory.getLog(&quot;BSFormGroup&quot;);</span>
     private static final long serialVersionUID = 1L;
+    /**
+     * The class name applied to the group when there is an error
+     */
+<span class="fc" id="L53">    public static String ERROR_CLASS = &quot;has-error&quot;;</span>
+    /**
+     * The class name applied to the group when there is a warning
+     */
+<span class="fc" id="L57">    public static String WARNING_CLASS = &quot;has-warning&quot;;</span>
+    /**
+     * The class anme applied to the group when there is success
+     */
+<span class="fc" id="L61">    public static String SUCCESS_CLASS = &quot;has-success&quot;;</span>
 
-    public BSFormGroup()
-<span class="nc" id="L44">    {</span>
-        //Nothing Needed
-<span class="nc" id="L46">    }</span>
+    /**
+     * The associated feature
+     */
+    private BSFormGroupFeature feature;
+    /**
+     * The label
+     */
+    private Label label;
+    /**
+     * The label help text
+     */
+    private SmallText helpText;
+    /**
+     * The input component for the form group
+     */
+    private Component inputComponent;
+    /**
+     * If this group is shown as a row
+     */
+    private boolean asRow;
+    /**
+     * If this group is shown as inline
+     */
+    private boolean inline;
+    /**
+     * If angular validation is enabled
+     */
+    private boolean angularValidation;
+    /**
+     * The actual required message
+     */
+    private T requiredMessage;
+    /**
+     * The actual pattern message
+     */
+    private T patternMessage;
+    /**
+     * The minimum error message
+     */
+    private T minMessage;
+    /**
+     * The maximum error message
+     */
+    private T maxMessage;
+
+    /**
+     * Constructs a new instance
+     *
+     * @param label
+     * @param inputComponent
+     * @param helpText
+     */
+    public BSFormGroup(Label label, BSInput inputComponent, String helpText)
+<span class="fc" id="L116">    {</span>
+<span class="fc" id="L117">        this.label = label;</span>
+<span class="fc" id="L118">        this.inputComponent = inputComponent;</span>
+<span class="fc" id="L119">        this.helpText = new SmallText(helpText);</span>
+<span class="fc" id="L120">        addClass(BSComponentFormGroupOptions.Form_Group);</span>
+<span class="fc" id="L121">    }</span>
+
+    /**
+     * Constructs a new instance
+     *
+     * @param label
+     * @param inputComponent
+     * @param helpText
+     */
+    public BSFormGroup(Label label, BSFormSelectInput inputComponent, String helpText)
+<span class="fc" id="L131">    {</span>
+<span class="fc" id="L132">        this.label = label;</span>
+<span class="fc" id="L133">        this.inputComponent = inputComponent;</span>
+<span class="fc" id="L134">        this.helpText = new SmallText(helpText);</span>
+<span class="fc" id="L135">        addClass(BSComponentFormGroupOptions.Form_Group);</span>
+<span class="fc" id="L136">    }</span>
+
+    /**
+     * Constructs a new instance
+     *
+     * @param label
+     * @param inputComponent
+     * @param helpText
+     */
+    public BSFormGroup(Label label, TextArea inputComponent, String helpText)
+<span class="fc" id="L146">    {</span>
+<span class="fc" id="L147">        this.label = label;</span>
+<span class="fc" id="L148">        this.inputComponent = inputComponent;</span>
+<span class="fc" id="L149">        this.helpText = new SmallText(helpText);</span>
+<span class="fc" id="L150">        addClass(BSComponentFormGroupOptions.Form_Group);</span>
+<span class="fc" id="L151">    }</span>
+
+    /**
+     * Constructs a new instance
+     *
+     * @param label
+     * @param inputComponent
+     * @param helpText
+     */
+    public BSFormGroup(Label label, BSFormInputGroup inputComponent, String helpText)
+<span class="fc" id="L161">    {</span>
+<span class="fc" id="L162">        this.label = label;</span>
+<span class="fc" id="L163">        this.inputComponent = inputComponent;</span>
+<span class="fc" id="L164">        this.helpText = new SmallText(helpText);</span>
+<span class="fc" id="L165">        addClass(BSComponentFormGroupOptions.Form_Group);</span>
+<span class="fc" id="L166">    }</span>
+
+    /**
+     * Returns the feature if any is required
+     *
+     * @return
+     */
+    public final BSFormGroupFeature getFeature()
+    {
+<span class="nc bnc" id="L175" title="All 2 branches missed.">        if (feature == null)</span>
+        {
+<span class="nc" id="L177">            feature = new BSFormGroupFeature(this);</span>
+        }
+<span class="nc" id="L179">        return feature;</span>
+    }
+
+    /**
+     * Returns the options if any is required
+     *
+     * @return
+     */
+    @Override
+    public BSFormGroupOptions getOptions()
+    {
+<span class="nc" id="L190">        return getFeature().getOptions();</span>
+    }
+
+    /**
+     * Returns a label. There must always be a label
+     *
+     * @return
+     */
+    public Label getLabel()
+    {
+<span class="pc bpc" id="L200" title="1 of 2 branches missed.">        if (label == null)</span>
+        {
+<span class="nc" id="L202">            setLabel(new Label(&quot;Component Label&quot;));</span>
+<span class="nc" id="L203">            label.addClass(&quot;sr-only&quot;);</span>
+        }
+<span class="fc" id="L205">        return label;</span>
+    }
+
+    /**
+     * Sets the label to the given label
+     *
+     * @param label
+     */
+    public void setLabel(Label label)
+    {
+<span class="nc" id="L215">        this.label = label;</span>
+<span class="nc" id="L216">    }</span>
+
+    /**
+     * Return the help text
+     *
+     * @return
+     */
+    public SmallText getHelpText()
+    {
+<span class="pc bpc" id="L225" title="1 of 2 branches missed.">        if (helpText == null)</span>
+        {
+<span class="nc" id="L227">            helpText = new SmallText();</span>
+        }
+<span class="fc" id="L229">        return helpText;</span>
+    }
+
+    /**
+     * Sets the help text
+     *
+     * @param helpText
+     */
+    public void setHelpText(SmallText helpText)
+    {
+<span class="nc" id="L239">        this.helpText = helpText;</span>
+<span class="nc" id="L240">    }</span>
+
+    /**
+     * Returns the input component
+     *
+     * @return
+     */
+    public Component getInputComponent()
+    {
+<span class="pc bpc" id="L249" title="1 of 2 branches missed.">        if (inputComponent == null)</span>
+        {
+<span class="nc" id="L251">            setInputComponent(new BSInput(InputTypes.Text));</span>
+        }
+<span class="fc" id="L253">        return inputComponent;</span>
+    }
+
+    /**
+     * Sets the input component
+     *
+     * @param inputComponent
+     */
+    public void setInputComponent(BSInput inputComponent)
+    {
+<span class="nc" id="L263">        this.inputComponent = inputComponent;</span>
+<span class="nc" id="L264">    }</span>
+
+    /**
+     * Sets the input component
+     *
+     * @param inputComponent
+     */
+    public void setInputComponent(BSFormSelectInput inputComponent)
+    {
+<span class="nc" id="L273">        this.inputComponent = inputComponent;</span>
+<span class="nc" id="L274">    }</span>
+
+    /**
+     * Adds all the necessary items
+     */
+    @Override
+    public void preConfigure()
+    {
+<span class="pc bpc" id="L282" title="1 of 2 branches missed.">        if (!isConfigured())</span>
+        {
+<span class="pc bpc" id="L284" title="1 of 2 branches missed.">            if (isAsRow())</span>
+            {
+<span class="nc" id="L286">                addClass(&quot;row&quot;);</span>
+<span class="nc" id="L287">                getLabel().addClass(&quot;col-2&quot;);</span>
+<span class="nc" id="L288">                getLabel().addClass(&quot;col-form-label&quot;);</span>
+<span class="nc" id="L289">                getInputComponent().addClass(&quot;col-10&quot;);</span>
+            }
+
+<span class="fc bfc" id="L292" title="All 2 branches covered.">            if (getLabel().getParent() == null)</span>
+            {
+<span class="fc" id="L294">                getLabel().setForInputComponent(getInputComponent());</span>
+<span class="fc" id="L295">                add(getLabel());</span>
+            }
+
+<span class="fc bfc" id="L298" title="All 2 branches covered.">            if (getInputComponent().getParent() == null)</span>
+            {
+<span class="fc" id="L300">                add((BSFormGroupChildren) getInputComponent());</span>
+            }
+
+<span class="fc" id="L303">            getInputComponent().addAttribute(GlobalAttributes.Aria_Describedby, getHelpText().getID());</span>
+<span class="pc bpc" id="L304" title="1 of 2 branches missed.">            if (!isInline())</span>
+            {
+<span class="fc" id="L306">                getHelpText().addClass(BSComponentFormGroupOptions.Form_Text);</span>
+            }
+<span class="fc" id="L308">            getHelpText().addClass(BSComponentDefaultOptions.Text_Muted);</span>
+<span class="fc" id="L309">            add(getHelpText());</span>
+
+<span class="fc bfc" id="L311" title="All 2 branches covered.">            if (isAngularValidation())</span>
+            {
+<span class="fc" id="L313">                getPage().getOptions().setAngularEnabled(true);</span>
+                BSForm referencedForm;
+<span class="pc bpc" id="L315" title="1 of 2 branches missed.">                if (BSForm.class.isAssignableFrom(getParent().getClass()))</span>
+                {
+<span class="fc" id="L317">                    referencedForm = (BSForm) getParent();</span>
+                }
+<span class="nc bnc" id="L319" title="All 2 branches missed.">                else if (BSForm.class.isAssignableFrom(getParent().getParent().getClass()))</span>
+                {
+<span class="nc" id="L321">                    referencedForm = (BSForm) getParent().getParent();</span>
+                }
+                else
+                {
+<span class="nc" id="L325">                    log.log(Level.SEVERE, &quot;Unable to map angular, hierarchy doesn't seem to be built right. Expecting a BSForm as a parent or parents-parent (fieldsets)&quot;);</span>
+<span class="nc" id="L326">                    referencedForm = new BSForm();</span>
+<span class="nc" id="L327">                    referencedForm.setID(&quot;InvalidForm&quot;);</span>
+                }
+<span class="fc" id="L329">                String formName = referencedForm.getID();</span>
+<span class="fc" id="L330">                String fieldName = &quot;'&quot; + getInputComponent().getID() + &quot;'&quot;;</span>
+<span class="fc" id="L331">                addAttribute(AngularAttributes.ngClass, &quot;{'&quot; + ERROR_CLASS + &quot;':&quot; + formName + &quot;[&quot; + fieldName + &quot;].$invalid &amp;&amp; !&quot; + formName + &quot;[&quot; + fieldName + &quot;].$pristine,&quot;</span>
+                        + &quot;'&quot; + SUCCESS_CLASS + &quot;':&quot; + formName + &quot;[&quot; + fieldName + &quot;].$valid&quot;
+                        + &quot;}&quot;);
+
+<span class="pc bpc" id="L335" title="1 of 2 branches missed.">                if (getRequiredMessage() != null)</span>
+                {
+<span class="fc" id="L337">                    getRequiredMessage().addAttribute(AngularAttributes.ngShow, &quot;&quot; + formName + &quot;[&quot; + fieldName + &quot;].$error.required &amp;&amp; !&quot; + formName + &quot;[&quot; + fieldName + &quot;].$pristine&quot;);</span>
+<span class="pc bpc" id="L338" title="1 of 2 branches missed.">                    if (!isInline())</span>
+                    {
+<span class="fc" id="L340">                        getRequiredMessage().addClass(BSComponentFormGroupOptions.Form_Text);</span>
+<span class="fc" id="L341">                        getRequiredMessage().addClass(BSComponentFormGroupOptions.Form_Control_Feedback);</span>
+                    }
+<span class="fc" id="L343">                    getChildren().add(getRequiredMessage());</span>
+                }
+
+<span class="pc bpc" id="L346" title="1 of 2 branches missed.">                if (getPatternMessage() != null)</span>
+                {
+<span class="fc" id="L348">                    getPatternMessage().addAttribute(AngularAttributes.ngShow, &quot;&quot; + formName + &quot;[&quot; + fieldName + &quot;].$error.pattern &amp;&amp; !&quot; + formName + &quot;[&quot; + fieldName + &quot;].$pristine&quot;);</span>
+<span class="pc bpc" id="L349" title="1 of 2 branches missed.">                    if (!isInline())</span>
+                    {
+<span class="fc" id="L351">                        getPatternMessage().addClass(BSComponentFormGroupOptions.Form_Text);</span>
+<span class="fc" id="L352">                        getPatternMessage().addClass(BSComponentFormGroupOptions.Form_Control_Feedback);</span>
+                    }
+<span class="fc" id="L354">                    getChildren().add(getPatternMessage());</span>
+                }
+
+<span class="pc bpc" id="L357" title="1 of 2 branches missed.">                if (getMinMessage() != null)</span>
+                {
+<span class="fc" id="L359">                    getMinMessage().addAttribute(AngularAttributes.ngShow, &quot;&quot; + formName + &quot;[&quot; + fieldName + &quot;].$error.min &amp;&amp; !&quot; + formName + &quot;[&quot; + fieldName + &quot;].$pristine&quot;);</span>
+<span class="pc bpc" id="L360" title="1 of 2 branches missed.">                    if (!isInline())</span>
+                    {
+<span class="fc" id="L362">                        getMinMessage().addClass(BSComponentFormGroupOptions.Form_Text);</span>
+<span class="fc" id="L363">                        getMinMessage().addClass(BSComponentFormGroupOptions.Form_Control_Feedback);</span>
+                    }
+<span class="fc" id="L365">                    getChildren().add(getMinMessage());</span>
+                }
+
+<span class="pc bpc" id="L368" title="1 of 2 branches missed.">                if (getMaxMessage() != null)</span>
+                {
+<span class="fc" id="L370">                    getMaxMessage().addAttribute(AngularAttributes.ngShow, &quot;&quot; + formName + &quot;[&quot; + fieldName + &quot;].$error.max &amp;&amp; !&quot; + formName + &quot;[&quot; + fieldName + &quot;].$pristine&quot;);</span>
+<span class="pc bpc" id="L371" title="1 of 2 branches missed.">                    if (!isInline())</span>
+                    {
+<span class="fc" id="L373">                        getMaxMessage().addClass(BSComponentFormGroupOptions.Form_Text);</span>
+<span class="fc" id="L374">                        getMaxMessage().addClass(BSComponentFormGroupOptions.Form_Control_Feedback);</span>
+                    }
+<span class="fc" id="L376">                    getChildren().add(getMaxMessage());</span>
+                }
+            }
+        }
+<span class="fc" id="L380">        super.preConfigure();</span>
+<span class="fc" id="L381">    }</span>
+
+    /**
+     * If this form group must render as a row
+     *
+     * @return
+     */
+    public boolean isAsRow()
+    {
+<span class="fc" id="L390">        return asRow;</span>
+    }
+
+    /**
+     * If this group must render as a row
+     *
+     * @param asRow
+     */
+    public void setAsRow(boolean asRow)
+    {
+<span class="nc" id="L400">        this.asRow = asRow;</span>
+<span class="nc" id="L401">    }</span>
+
+    /**
+     * If this group must render as inline
+     *
+     * @return
+     */
+    public boolean isInline()
+    {
+<span class="fc" id="L410">        return inline;</span>
+    }
+
+    /**
+     * If this group must render as inline
+     *
+     * @param inline
+     */
+    public void setInline(boolean inline)
+    {
+<span class="nc" id="L420">        this.inline = inline;</span>
+<span class="nc" id="L421">    }</span>
+
+    /**
+     * Sets if this form group has validation attached
+     *
+     * @return
+     */
+    public boolean isAngularValidation()
+    {
+<span class="fc" id="L430">        return angularValidation;</span>
+    }
+
+    /**
+     * Sets if this form group has validation attached
+     *
+     * @param angularValidation
+     *
+     * @return
+     */
+    public BSFormGroup setAngularValidation(boolean angularValidation)
+    {
+<span class="fc" id="L442">        this.angularValidation = angularValidation;</span>
+<span class="fc" id="L443">        return this;</span>
+    }
+
+    /**
+     * Returns the component to be shown when there is a required error
+     *
+     * @return
+     */
+    public T getRequiredMessage()
+    {
+<span class="fc" id="L453">        return requiredMessage;</span>
+    }
+
+    /**
+     * Sets the component to be shown when there is a required error
+     *
+     * @param requiredMessage
+     *
+     * @return
+     */
+    public BSFormGroup setRequiredMessage(T requiredMessage)
+    {
+<span class="fc" id="L465">        this.requiredMessage = requiredMessage;</span>
+<span class="fc" id="L466">        return this;</span>
+    }
+
+    /**
+     * Sets the component to be shown when there is a pattern error
+     *
+     * @return
+     */
+    public T getPatternMessage()
+    {
+<span class="fc" id="L476">        return patternMessage;</span>
+    }
+
+    /**
+     * Sets the component to display when there is a pattern message
+     *
+     * @param patternMessage
+     *
+     * @return
+     */
+    public BSFormGroup setPatternMessage(T patternMessage)
+    {
+<span class="fc" id="L488">        this.patternMessage = patternMessage;</span>
+<span class="fc" id="L489">        return this;</span>
+    }
+
+    /**
+     * Returns the minimum reached message component
+     *
+     * @return
+     */
+    public T getMinMessage()
+    {
+<span class="fc" id="L499">        return minMessage;</span>
+    }
+
+    /**
+     * Sets the minimum reached message
+     *
+     * @param minMessage
+     *
+     * @return
+     */
+    public BSFormGroup setMinMessage(T minMessage)
+    {
+<span class="fc" id="L511">        this.minMessage = minMessage;</span>
+<span class="fc" id="L512">        return this;</span>
+    }
+
+    /**
+     * Sets the maximum reached message error
+     *
+     * @return
+     */
+    public T getMaxMessage()
+    {
+<span class="fc" id="L522">        return maxMessage;</span>
+    }
+
+    /**
+     * Sets the maximum reached message error
+     *
+     * @param maxMessage
+     *
+     * @return
+     */
+    public BSFormGroup setMaxMessage(T maxMessage)
+    {
+<span class="fc" id="L534">        this.maxMessage = maxMessage;</span>
+<span class="fc" id="L535">        return this;</span>
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+<span class="nc bnc" id="L541" title="All 2 branches missed.">        if (this == obj)</span>
+        {
+<span class="nc" id="L543">            return true;</span>
+        }
+<span class="nc bnc" id="L545" title="All 2 branches missed.">        if (obj == null)</span>
+        {
+<span class="nc" id="L547">            return false;</span>
+        }
+<span class="nc bnc" id="L549" title="All 2 branches missed.">        if (getClass() != obj.getClass())</span>
+        {
+<span class="nc" id="L551">            return false;</span>
+        }
+<span class="nc" id="L553">        return super.equals(obj);</span>
+    }
+
+    @Override
+    public int hashCode()
+    {
+<span class="nc" id="L559">        int hash = 7;</span>
+<span class="nc" id="L560">        hash = 79 * hash + (this.getID().hashCode());</span>
+<span class="nc" id="L561">        return hash;</span>
+    }
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

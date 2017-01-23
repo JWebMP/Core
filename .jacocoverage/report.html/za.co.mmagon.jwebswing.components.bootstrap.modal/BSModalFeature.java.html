@@ -25,11 +25,11 @@ public class BSModalFeature extends Feature&lt;BSModalOptions, BSModalFeature&gt
      */
     public BSModalFeature(Component forComponent)
     {
-<span class="nc" id="L28">        super(&quot;BSModalFeature&quot;);</span>
-<span class="nc" id="L29">        setComponent(forComponent);</span>
+<span class="fc" id="L28">        super(&quot;BSModalFeature&quot;);</span>
+<span class="fc" id="L29">        setComponent(forComponent);</span>
         // getJavascriptReferences().add(JQXReferencePool.Core.getJavaScriptReference());
         // getCssReferences().add(JQXReferencePool.Core.getCssReference());
-<span class="nc" id="L32">    }</span>
+<span class="fc" id="L32">    }</span>
 
     /**
      * Returns all the tooltip options
@@ -39,20 +39,20 @@ public class BSModalFeature extends Feature&lt;BSModalOptions, BSModalFeature&gt
     @Override
     public BSModalOptions getOptions()
     {
-<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (options == null)</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        if (options == null)</span>
         {
-<span class="nc" id="L44">            options = new BSModalOptions();</span>
+<span class="fc" id="L44">            options = new BSModalOptions();</span>
         }
-<span class="nc" id="L46">        return options;</span>
+<span class="fc" id="L46">        return options;</span>
     }
 
     @Override
     public void assignFunctionsToComponent()
     {
-<span class="nc" id="L52">        String requiredString = getComponent().getJQueryID() + &quot;blank(&quot;;</span>
-<span class="nc" id="L53">        requiredString += getOptions().toString();</span>
-<span class="nc" id="L54">        requiredString += &quot;);&quot; + getNewLine();</span>
+<span class="fc" id="L52">        String requiredString = getComponent().getJQueryID() + &quot;blank(&quot;;</span>
+<span class="fc" id="L53">        requiredString += getOptions().toString();</span>
+<span class="fc" id="L54">        requiredString += &quot;);&quot; + getNewLine();</span>
         //addQuery(requiredString);
-<span class="nc" id="L56">    }</span>
+<span class="fc" id="L56">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

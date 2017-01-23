@@ -14,38 +14,40 @@ import za.co.mmagon.jwebswing.components.pools.jqueryui.JQUIReferencePool;
 public class JQUIResizableFeature extends Feature&lt;JQUIResizableOptions, JQUIResizableFeature&gt; implements IFeature
 {
 
+    private static final long serialVersionUID = 1L;
+
     private JQUIResizableOptions options;
 
     public JQUIResizableFeature(Component component)
     {
-<span class="nc" id="L21">        super(&quot;JWResizableFeature&quot;);</span>
-<span class="nc" id="L22">        getJavascriptReferences().add(JQUIReferencePool.Core.getJavaScriptReference());</span>
-<span class="nc" id="L23">        getJavascriptReferences().add(JQUIReferencePool.Widget.getJavaScriptReference());</span>
-<span class="nc" id="L24">        getJavascriptReferences().add(JQUIReferencePool.Mouse.getJavaScriptReference());</span>
-<span class="nc" id="L25">        getJavascriptReferences().add(JQUIReferencePool.Resizable.getJavaScriptReference());</span>
-<span class="nc" id="L26">        getCssReferences().add(JQUIReferencePool.Core.getCssReference());</span>
-<span class="nc" id="L27">        getCssReferences().add(JQUIReferencePool.Widget.getCssReference());</span>
-<span class="nc" id="L28">        getCssReferences().add(JQUIReferencePool.Resizable.getCssReference());</span>
-<span class="nc" id="L29">        setComponent(component);</span>
-<span class="nc" id="L30">    }</span>
+<span class="nc" id="L23">        super(&quot;JWResizableFeature&quot;);</span>
+<span class="nc" id="L24">        getJavascriptReferences().add(JQUIReferencePool.Core.getJavaScriptReference());</span>
+<span class="nc" id="L25">        getJavascriptReferences().add(JQUIReferencePool.Widget.getJavaScriptReference());</span>
+<span class="nc" id="L26">        getJavascriptReferences().add(JQUIReferencePool.Mouse.getJavaScriptReference());</span>
+<span class="nc" id="L27">        getJavascriptReferences().add(JQUIReferencePool.Resizable.getJavaScriptReference());</span>
+<span class="nc" id="L28">        getCssReferences().add(JQUIReferencePool.Core.getCssReference());</span>
+<span class="nc" id="L29">        getCssReferences().add(JQUIReferencePool.Widget.getCssReference());</span>
+<span class="nc" id="L30">        getCssReferences().add(JQUIReferencePool.Resizable.getCssReference());</span>
+<span class="nc" id="L31">        setComponent(component);</span>
+<span class="nc" id="L32">    }</span>
 
     @Override
     public void assignFunctionsToComponent()
     {
-<span class="nc" id="L35">        StringBuilder resizableString = new StringBuilder(getComponent().getJQueryID() + &quot;resizable(&quot;);</span>
-<span class="nc" id="L36">        resizableString.append(getOptions().toString());</span>
-<span class="nc" id="L37">        resizableString.append(&quot;);&quot;).append(getNewLine());</span>
-<span class="nc" id="L38">        addQuery(resizableString.toString());</span>
-<span class="nc" id="L39">    }</span>
+<span class="nc" id="L37">        StringBuilder resizableString = new StringBuilder(getComponent().getJQueryID() + &quot;resizable(&quot;);</span>
+<span class="nc" id="L38">        resizableString.append(getOptions().toString());</span>
+<span class="nc" id="L39">        resizableString.append(&quot;);&quot;).append(getNewLine());</span>
+<span class="nc" id="L40">        addQuery(resizableString.toString());</span>
+<span class="nc" id="L41">    }</span>
 
     @Override
     public JQUIResizableOptions getOptions()
     {
-<span class="nc bnc" id="L44" title="All 2 branches missed.">        if (options == null)</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        if (options == null)</span>
         {
-<span class="nc" id="L46">            options = new JQUIResizableOptions();</span>
+<span class="nc" id="L48">            options = new JQUIResizableOptions();</span>
         }
-<span class="nc" id="L48">        return options;</span>
+<span class="nc" id="L50">        return options;</span>
     }
 
 }

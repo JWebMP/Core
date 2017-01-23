@@ -16,9 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqplot.options.axis;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRawValue;
+import com.fasterxml.jackson.annotation.*;
 import java.util.List;
 import za.co.mmagon.jwebswing.components.jqplot.JQPlotGraph;
 import za.co.mmagon.jwebswing.components.jqplot.options.ticks.JQPlotTickOptionsAxisTick;
@@ -65,8 +63,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     private Double pad;
     /**
-     * axis range so that data points don't fall on the edges of the axis.
-     * a 1D [val1, val2, ...], or 2D [[val, label], [val, label], ...]
+     * axis range so that data points don't fall on the edges of the axis. a 1D [val1, val2, ...], or 2D [[val, label], [val, label], ...]
      */
     @JsonIgnore
     private List&lt;String&gt; ticks;
@@ -86,13 +83,11 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
 
     //private JavaScriptPart rendererOptions;
     /**
-     * whether or not to show the tick labels,
-     * Wether to show the ticks (both marks and labels) or not.
+     * whether or not to show the tick labels, Wether to show the ticks (both marks and labels) or not.
      */
     private Boolean showTicks;
     /**
-     * Whether or not to show the tick marks
-     * Wether to show the tick marks (line crossing grid) or not.
+     * Whether or not to show the tick marks Wether to show the tick marks (line crossing grid) or not.
      */
     private Boolean showTickMarks;
     /**
@@ -156,9 +151,9 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      * @param linkedGraph
      */
     public JQPlotAxisOptions(JQPlotGraph linkedGraph)
-<span class="fc" id="L159">    {</span>
-<span class="fc" id="L160">        this.linkedGraph = linkedGraph;</span>
-<span class="fc" id="L161">    }</span>
+<span class="fc" id="L154">    {</span>
+<span class="fc" id="L155">        this.linkedGraph = linkedGraph;</span>
+<span class="fc" id="L156">    }</span>
 
     /**
      * Returns the linked graph to this options
@@ -167,7 +162,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public JQPlotGraph getLinkedGraph()
     {
-<span class="nc" id="L170">        return linkedGraph;</span>
+<span class="nc" id="L165">        return linkedGraph;</span>
     }
 
     /**
@@ -177,10 +172,8 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setLinkedGraph(JQPlotGraph linkedGraph)
     {
-<span class="nc" id="L180">        this.linkedGraph = linkedGraph;</span>
-<span class="nc" id="L181">    }</span>
-
-    
+<span class="nc" id="L175">        this.linkedGraph = linkedGraph;</span>
+<span class="nc" id="L176">    }</span>
 
     /**
      * Whether or not to show the axis
@@ -189,7 +182,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public Boolean getShow()
     {
-<span class="nc" id="L192">        return show;</span>
+<span class="nc" id="L185">        return show;</span>
     }
 
     /**
@@ -199,8 +192,8 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setShow(Boolean show)
     {
-<span class="nc" id="L202">        this.show = show;</span>
-<span class="nc" id="L203">    }</span>
+<span class="nc" id="L195">        this.show = show;</span>
+<span class="nc" id="L196">    }</span>
 
     /**
      * Whether or not to show a label
@@ -209,7 +202,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public Boolean getShowLabel()
     {
-<span class="nc" id="L212">        return showLabel;</span>
+<span class="nc" id="L205">        return showLabel;</span>
     }
 
     /**
@@ -219,8 +212,8 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setShowLabel(Boolean showLabel)
     {
-<span class="nc" id="L222">        this.showLabel = showLabel;</span>
-<span class="nc" id="L223">    }</span>
+<span class="nc" id="L215">        this.showLabel = showLabel;</span>
+<span class="nc" id="L216">    }</span>
 
     /**
      * Autoscale the axis min and max values to provide sensible tick spacing.
@@ -229,7 +222,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public Boolean getAutoscale()
     {
-<span class="nc" id="L232">        return autoscale;</span>
+<span class="nc" id="L225">        return autoscale;</span>
     }
 
     /**
@@ -239,8 +232,8 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setAutoscale(Boolean autoscale)
     {
-<span class="nc" id="L242">        this.autoscale = autoscale;</span>
-<span class="nc" id="L243">    }</span>
+<span class="nc" id="L235">        this.autoscale = autoscale;</span>
+<span class="nc" id="L236">    }</span>
 
     /**
      * minimum numerical value of the axis. Determined automatically.
@@ -249,7 +242,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public Integer getMin()
     {
-<span class="nc" id="L252">        return min;</span>
+<span class="nc" id="L245">        return min;</span>
     }
 
     /**
@@ -259,8 +252,8 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setMin(Integer min)
     {
-<span class="fc" id="L262">        this.min = min;</span>
-<span class="fc" id="L263">    }</span>
+<span class="fc" id="L255">        this.min = min;</span>
+<span class="fc" id="L256">    }</span>
 
     /**
      * maximum num vertical value of the axis. Determined automatically
@@ -269,7 +262,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public Integer getMax()
     {
-<span class="nc" id="L272">        return max;</span>
+<span class="nc" id="L265">        return max;</span>
     }
 
     /**
@@ -279,8 +272,8 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setMax(Integer max)
     {
-<span class="nc" id="L282">        this.max = max;</span>
-<span class="nc" id="L283">    }</span>
+<span class="nc" id="L275">        this.max = max;</span>
+<span class="nc" id="L276">    }</span>
 
     /**
      * a factor multiplied by the data range on the axis to give the
@@ -289,7 +282,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public Double getPad()
     {
-<span class="nc" id="L292">        return pad;</span>
+<span class="nc" id="L285">        return pad;</span>
     }
 
     /**
@@ -299,31 +292,29 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setPad(Double pad)
     {
-<span class="nc" id="L302">        this.pad = pad;</span>
-<span class="nc" id="L303">    }</span>
+<span class="nc" id="L295">        this.pad = pad;</span>
+<span class="nc" id="L296">    }</span>
 
     /**
-     * axis range so that data points don't fall on the edges of the axis.
-     * a 1D [val1, val2, ...], or 2D [[val, label], [val, label], ...]
+     * axis range so that data points don't fall on the edges of the axis. a 1D [val1, val2, ...], or 2D [[val, label], [val, label], ...]
      * &lt;p&gt;
      * @return
      */
     @JsonProperty(&quot;ticks&quot;)
     public List&lt;String&gt; getTicks()
     {
-<span class="fc" id="L314">        return ticks;</span>
+<span class="fc" id="L306">        return ticks;</span>
     }
 
     /**
-     * axis range so that data points don't fall on the edges of the axis.
-     * a 1D [val1, val2, ...], or 2D [[val, label], [val, label], ...]
+     * axis range so that data points don't fall on the edges of the axis. a 1D [val1, val2, ...], or 2D [[val, label], [val, label], ...]
      * &lt;p&gt;
      * @param ticks
      */
     public void setTicks(List&lt;String&gt; ticks)
     {
-<span class="fc" id="L325">        this.ticks = ticks;</span>
-<span class="fc" id="L326">    }</span>
+<span class="fc" id="L316">        this.ticks = ticks;</span>
+<span class="fc" id="L317">    }</span>
 
     /**
      * array of ticks to use. Computed automatically.
@@ -332,7 +323,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public Integer getNumberTicks()
     {
-<span class="nc" id="L335">        return numberTicks;</span>
+<span class="nc" id="L326">        return numberTicks;</span>
     }
 
     /**
@@ -342,8 +333,8 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setNumberTicks(Integer numberTicks)
     {
-<span class="nc" id="L345">        this.numberTicks = numberTicks;</span>
-<span class="nc" id="L346">    }</span>
+<span class="nc" id="L336">        this.numberTicks = numberTicks;</span>
+<span class="nc" id="L337">    }</span>
 
     /**
      * array of ticks to use. Computed automatically.
@@ -352,7 +343,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public Integer getTickInterval()
     {
-<span class="nc" id="L355">        return tickInterval;</span>
+<span class="nc" id="L346">        return tickInterval;</span>
     }
 
     /**
@@ -362,8 +353,8 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setTickInterval(Integer tickInterval)
     {
-<span class="nc" id="L365">        this.tickInterval = tickInterval;</span>
-<span class="nc" id="L366">    }</span>
+<span class="nc" id="L356">        this.tickInterval = tickInterval;</span>
+<span class="nc" id="L357">    }</span>
 
     /**
      * renderer to use to draw the axis,
@@ -391,7 +382,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public Boolean getShowTicks()
     {
-<span class="nc" id="L394">        return showTicks;</span>
+<span class="nc" id="L385">        return showTicks;</span>
     }
 
     /**
@@ -401,8 +392,8 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setShowTicks(Boolean showTicks)
     {
-<span class="nc" id="L404">        this.showTicks = showTicks;</span>
-<span class="nc" id="L405">    }</span>
+<span class="nc" id="L395">        this.showTicks = showTicks;</span>
+<span class="nc" id="L396">    }</span>
 
     /**
      * Whether to show the tick marks (line crossing grid) or not.
@@ -411,7 +402,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public Boolean getShowTickMarks()
     {
-<span class="nc" id="L414">        return showTickMarks;</span>
+<span class="nc" id="L405">        return showTickMarks;</span>
     }
 
     /**
@@ -421,8 +412,8 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setShowTickMarks(Boolean showTickMarks)
     {
-<span class="nc" id="L424">        this.showTickMarks = showTickMarks;</span>
-<span class="nc" id="L425">    }</span>
+<span class="nc" id="L415">        this.showTickMarks = showTickMarks;</span>
+<span class="nc" id="L416">    }</span>
 
     /**
      * A class of a rendering engine for creating the ticks labels displayed on the plot, See $.jqplot.AxisTickRenderer.
@@ -431,22 +422,21 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public String getTickRenderer()
     {
-<span class="nc" id="L434">        return tickRenderer;</span>
+<span class="nc" id="L425">        return tickRenderer;</span>
     }
 
     /**
-     * Get Tick Renderer Options
-     * Default JQPlotTickOptionsAxisTick
+     * Get Tick Renderer Options Default JQPlotTickOptionsAxisTick
      *
      * @return
      */
     public JavaScriptPart getTickRendererOptions()
     {
-<span class="pc bpc" id="L445" title="1 of 2 branches missed.">        if (tickRendererOptions == null)</span>
+<span class="pc bpc" id="L435" title="1 of 2 branches missed.">        if (tickRendererOptions == null)</span>
         {
-<span class="fc" id="L447">            tickRendererOptions = new JQPlotTickOptionsAxisTick();</span>
+<span class="fc" id="L437">            tickRendererOptions = new JQPlotTickOptionsAxisTick();</span>
         }
-<span class="fc" id="L449">        return tickRendererOptions;</span>
+<span class="fc" id="L439">        return tickRendererOptions;</span>
     }
 
     /**
@@ -457,9 +447,9 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public &lt;O extends JavaScriptPart &amp; JQPlotTickRenderer&gt; void setTickRendererOptions(O tickRendererOptions)
     {
-<span class="nc" id="L460">        this.tickRenderer = tickRendererOptions.getRenderer();</span>
-<span class="nc" id="L461">        this.tickRendererOptions = tickRendererOptions;</span>
-<span class="nc" id="L462">    }</span>
+<span class="nc" id="L450">        this.tickRenderer = tickRendererOptions.getRenderer();</span>
+<span class="nc" id="L451">        this.tickRendererOptions = tickRendererOptions;</span>
+<span class="nc" id="L452">    }</span>
 
     /**
      * Label for the axis
@@ -468,7 +458,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public String getLabel()
     {
-<span class="nc" id="L471">        return label;</span>
+<span class="nc" id="L461">        return label;</span>
     }
 
     /**
@@ -478,8 +468,8 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setLabel(String label)
     {
-<span class="nc" id="L481">        this.label = label;</span>
-<span class="nc" id="L482">    }</span>
+<span class="nc" id="L471">        this.label = label;</span>
+<span class="nc" id="L472">    }</span>
 
     /**
      * Padding to extend the range above data bounds.
@@ -488,7 +478,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public Integer getPadMax()
     {
-<span class="nc" id="L491">        return padMax;</span>
+<span class="nc" id="L481">        return padMax;</span>
     }
 
     /**
@@ -498,8 +488,8 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setPadMax(Integer padMax)
     {
-<span class="nc" id="L501">        this.padMax = padMax;</span>
-<span class="nc" id="L502">    }</span>
+<span class="nc" id="L491">        this.padMax = padMax;</span>
+<span class="nc" id="L492">    }</span>
 
     /**
      * Padding to extend the range below data bounds.
@@ -508,7 +498,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public Integer getPadMin()
     {
-<span class="nc" id="L511">        return padMin;</span>
+<span class="nc" id="L501">        return padMin;</span>
     }
 
     /**
@@ -518,8 +508,8 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setPadMin(Integer padMin)
     {
-<span class="nc" id="L521">        this.padMin = padMin;</span>
-<span class="nc" id="L522">    }</span>
+<span class="nc" id="L511">        this.padMin = padMin;</span>
+<span class="nc" id="L512">    }</span>
 
     /**
      * Whether or not to show minor ticks.
@@ -528,7 +518,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public Boolean getShowMinorTicks()
     {
-<span class="nc" id="L531">        return showMinorTicks;</span>
+<span class="nc" id="L521">        return showMinorTicks;</span>
     }
 
     /**
@@ -538,8 +528,8 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setShowMinorTicks(Boolean showMinorTicks)
     {
-<span class="nc" id="L541">        this.showMinorTicks = showMinorTicks;</span>
-<span class="nc" id="L542">    }</span>
+<span class="nc" id="L531">        this.showMinorTicks = showMinorTicks;</span>
+<span class="nc" id="L532">    }</span>
 
     /**
      * Use the color of the first series associated with this axis for the tick marks and line bordering this axis.
@@ -548,7 +538,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public Boolean getUseSeriesColor()
     {
-<span class="nc" id="L551">        return useSeriesColor;</span>
+<span class="nc" id="L541">        return useSeriesColor;</span>
     }
 
     /**
@@ -558,8 +548,8 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setUseSeriesColor(Boolean useSeriesColor)
     {
-<span class="nc" id="L561">        this.useSeriesColor = useSeriesColor;</span>
-<span class="nc" id="L562">    }</span>
+<span class="nc" id="L551">        this.useSeriesColor = useSeriesColor;</span>
+<span class="nc" id="L552">    }</span>
 
     /**
      * width of line stroked at the border of the axis.
@@ -568,7 +558,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public Integer getBorderWidth()
     {
-<span class="nc" id="L571">        return borderWidth;</span>
+<span class="nc" id="L561">        return borderWidth;</span>
     }
 
     /**
@@ -578,8 +568,8 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setBorderWidth(Integer borderWidth)
     {
-<span class="nc" id="L581">        this.borderWidth = borderWidth;</span>
-<span class="nc" id="L582">    }</span>
+<span class="nc" id="L571">        this.borderWidth = borderWidth;</span>
+<span class="nc" id="L572">    }</span>
 
     /**
      * color of the border adjacent to the axis.
@@ -588,7 +578,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public String getBorderColor()
     {
-<span class="nc" id="L591">        return borderColor;</span>
+<span class="nc" id="L581">        return borderColor;</span>
     }
 
     /**
@@ -598,8 +588,8 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setBorderColor(ColourHex borderColor)
     {
-<span class="nc" id="L601">        this.borderColor = borderColor.getValue();</span>
-<span class="nc" id="L602">    }</span>
+<span class="nc" id="L591">        this.borderColor = borderColor.getValue();</span>
+<span class="nc" id="L592">    }</span>
 
     /**
      * true to try and synchronize tick spacing across multiple axes so that ticks and grid lines line up.
@@ -608,7 +598,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public Boolean getSyncTicks()
     {
-<span class="nc" id="L611">        return syncTicks;</span>
+<span class="nc" id="L601">        return syncTicks;</span>
     }
 
     /**
@@ -618,8 +608,8 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setSyncTicks(Boolean syncTicks)
     {
-<span class="nc" id="L621">        this.syncTicks = syncTicks;</span>
-<span class="nc" id="L622">    }</span>
+<span class="nc" id="L611">        this.syncTicks = syncTicks;</span>
+<span class="nc" id="L612">    }</span>
 
     /**
      * Approximate pixel spacing between ticks on graph.
@@ -628,7 +618,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public Integer getTickSpacing()
     {
-<span class="nc" id="L631">        return tickSpacing;</span>
+<span class="nc" id="L621">        return tickSpacing;</span>
     }
 
     /**
@@ -638,8 +628,8 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setTickSpacing(Integer tickSpacing)
     {
-<span class="nc" id="L641">        this.tickSpacing = tickSpacing;</span>
-<span class="nc" id="L642">    }</span>
+<span class="nc" id="L631">        this.tickSpacing = tickSpacing;</span>
+<span class="nc" id="L632">    }</span>
 
     /**
      * Returns the assigned axis renderer options
@@ -648,7 +638,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public O getRendererOptions()
     {
-<span class="nc" id="L651">        return rendererOptions;</span>
+<span class="nc" id="L641">        return rendererOptions;</span>
     }
 
     /**
@@ -658,9 +648,9 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setRendererOptions(O rendererOptions)
     {
-<span class="fc" id="L661">        this.rendererOptions = rendererOptions;</span>
-<span class="fc" id="L662">        this.renderer = rendererOptions.getRenderer();</span>
-<span class="fc" id="L663">    }</span>
+<span class="fc" id="L651">        this.rendererOptions = rendererOptions;</span>
+<span class="fc" id="L652">        this.renderer = rendererOptions.getRenderer();</span>
+<span class="fc" id="L653">    }</span>
 
     @JsonRawValue
     private String renderer;
@@ -672,12 +662,18 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public String getRenderer()
     {
-<span class="nc" id="L675">        return renderer;</span>
+<span class="nc" id="L665">        return renderer;</span>
     }
 
+    /**
+     * The physical label renderer
+     */
     @JsonRawValue
     private String labelRenderer;
 
+    /**
+     * Returns the label renderer options
+     */
     private JQPlotAxisLabelRenderer labelRendererOptions;
 
     /**
@@ -687,23 +683,22 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public void setLabelRendererOptions(JQPlotAxisLabelRenderer labelRendererOptions)
     {
-<span class="nc" id="L690">        this.labelRendererOptions = labelRendererOptions;</span>
-<span class="nc" id="L691">        this.labelRenderer = labelRendererOptions.getRenderer();</span>
-<span class="nc" id="L692">    }</span>
+<span class="nc" id="L686">        this.labelRendererOptions = labelRendererOptions;</span>
+<span class="nc" id="L687">        this.labelRenderer = labelRendererOptions.getRenderer();</span>
+<span class="nc" id="L688">    }</span>
 
     /**
-     * Gets the label renderer options
-     * JQPlotAxisLabelRendererOptionsCanvasLabels by default
+     * Gets the label renderer options JQPlotAxisLabelRendererOptionsCanvasLabels by default
      *
      * @return
      */
     public JQPlotAxisLabelRenderer getLabelRendererOptions()
     {
-<span class="nc bnc" id="L702" title="All 2 branches missed.">        if (labelRendererOptions == null)</span>
+<span class="nc bnc" id="L697" title="All 2 branches missed.">        if (labelRendererOptions == null)</span>
         {
-<span class="nc" id="L704">            setLabelRendererOptions(new JQPlotAxisLabelRendererOptionsCanvasLabels(getLinkedGraph()));</span>
+<span class="nc" id="L699">            setLabelRendererOptions(new JQPlotAxisLabelRendererOptionsCanvasLabels(getLinkedGraph()));</span>
         }
-<span class="nc" id="L706">        return labelRendererOptions;</span>
+<span class="nc" id="L701">        return labelRendererOptions;</span>
     }
 
     /**
@@ -713,7 +708,7 @@ public class JQPlotAxisOptions&lt;O extends JavaScriptPart &amp; JQPlotAxisLabel
      */
     public String getLabelRenderer()
     {
-<span class="nc" id="L716">        return labelRenderer;</span>
+<span class="nc" id="L711">        return labelRenderer;</span>
     }
 
 }

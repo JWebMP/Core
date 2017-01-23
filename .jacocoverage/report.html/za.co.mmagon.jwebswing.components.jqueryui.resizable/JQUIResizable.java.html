@@ -31,10 +31,47 @@ public class JQUIResizable extends Div&lt;JQUIResizableChildren, NoAttributes, J
     private static final long serialVersionUID = 1L;
     private JQUIResizableFeature feature;
 
+    /**
+     * Adds the feature to the resizable
+     */
     public JQUIResizable()
-<span class="nc" id="L35">    {</span>
+<span class="nc" id="L38">    {</span>
+<span class="nc" id="L39">        addFeature(feature = new JQUIResizableFeature(this));</span>
+<span class="nc" id="L40">    }</span>
 
-<span class="nc" id="L37">    }</span>
+    /**
+     * Returns the features options
+     * &lt;p&gt;
+     * @return
+     */
+    @Override
+    public JQUIResizableOptions getOptions()
+    {
+<span class="nc" id="L50">        return feature.getOptions();</span>
+    }
 
+    /**
+     * Returns this feature
+     *
+     * @return
+     */
+    public JQUIResizableFeature getFeature()
+    {
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (feature == null)</span>
+        {
+<span class="nc" id="L62">            feature = new JQUIResizableFeature(this);</span>
+        }
+<span class="nc" id="L64">        return feature;</span>
+    }
+
+    /**
+     * Sets this feature
+     *
+     * @param feature
+     */
+    public void setFeature(JQUIResizableFeature feature)
+    {
+<span class="nc" id="L74">        this.feature = feature;</span>
+<span class="nc" id="L75">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

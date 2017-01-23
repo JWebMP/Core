@@ -30,6 +30,8 @@ import za.co.mmagon.jwebswing.components.pools.jqueryui.JQUIReferencePool;
 public class JQUIMenuFeature extends Feature&lt;JQUIMenuOptions, JQUIMenuFeature&gt; implements JQUIMenuFeatures
 {
 
+    private static final long serialVersionUID = 1L;
+
     private final JQUIMenu menu;
     /**
      * The options of the menu
@@ -42,22 +44,22 @@ public class JQUIMenuFeature extends Feature&lt;JQUIMenuOptions, JQUIMenuFeature
      */
     public JQUIMenuFeature(JQUIMenu menu)
     {
-<span class="nc" id="L45">        super(&quot;JWMenuFeature&quot;);</span>
-<span class="nc" id="L46">        this.menu = menu;</span>
-<span class="nc" id="L47">        getJavascriptReferences().add(JQUIReferencePool.Core.getJavaScriptReference());</span>
-<span class="nc" id="L48">        getJavascriptReferences().add(JQUIReferencePool.Widget.getJavaScriptReference());</span>
-<span class="nc" id="L49">        getCssReferences().add(JQUIReferencePool.Core.getCssReference());</span>
-<span class="nc" id="L50">        getCssReferences().add(JQUIReferencePool.Widget.getCssReference());</span>
+<span class="nc" id="L47">        super(&quot;JWMenuFeature&quot;);</span>
+<span class="nc" id="L48">        this.menu = menu;</span>
+<span class="nc" id="L49">        getJavascriptReferences().add(JQUIReferencePool.Core.getJavaScriptReference());</span>
+<span class="nc" id="L50">        getJavascriptReferences().add(JQUIReferencePool.Widget.getJavaScriptReference());</span>
+<span class="nc" id="L51">        getCssReferences().add(JQUIReferencePool.Core.getCssReference());</span>
+<span class="nc" id="L52">        getCssReferences().add(JQUIReferencePool.Widget.getCssReference());</span>
 
-<span class="nc" id="L52">        getJavascriptReferences().add(JQUIReferencePool.Menu.getJavaScriptReference());</span>
-<span class="nc" id="L53">        getCssReferences().add(JQUIReferencePool.Menu.getCssReference());</span>
-<span class="nc" id="L54">    }</span>
+<span class="nc" id="L54">        getJavascriptReferences().add(JQUIReferencePool.Menu.getJavaScriptReference());</span>
+<span class="nc" id="L55">        getCssReferences().add(JQUIReferencePool.Menu.getCssReference());</span>
+<span class="nc" id="L56">    }</span>
 
     @Override
     public void assignFunctionsToComponent()
     {
-<span class="nc" id="L59">        addQuery(menu.getJQueryID() + &quot;menu(&quot; + getOptions() + &quot;);&quot;);</span>
-<span class="nc" id="L60">    }</span>
+<span class="nc" id="L61">        addQuery(menu.getJQueryID() + &quot;menu(&quot; + getOptions() + &quot;);&quot;);</span>
+<span class="nc" id="L62">    }</span>
 
     /**
      * Gets the options of the menu
@@ -67,11 +69,11 @@ public class JQUIMenuFeature extends Feature&lt;JQUIMenuOptions, JQUIMenuFeature
     @Override
     public JQUIMenuOptions getOptions()
     {
-<span class="nc bnc" id="L70" title="All 2 branches missed.">        if (options == null)</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        if (options == null)</span>
         {
-<span class="nc" id="L72">            options = new JQUIMenuOptions();</span>
+<span class="nc" id="L74">            options = new JQUIMenuOptions();</span>
         }
-<span class="nc" id="L74">        return options;</span>
+<span class="nc" id="L76">        return options;</span>
     }
 
 }

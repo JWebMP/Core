@@ -19,7 +19,6 @@ package za.co.mmagon.jwebswing.components.jqueryui.spinner;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
 /**
  *
@@ -27,6 +26,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
  */
 public class JQUISpinnerOptions extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Sets the culture to use for parsing and formatting the value.<p>
@@ -82,8 +83,19 @@ public class JQUISpinnerOptions extends JavaScriptPart
      */
     @JsonIgnore
     private Double step;
+    /**
+     * If the value is an integer
+     */
     @JsonIgnore
     private boolean integer = true;
+
+    /**
+     * Construct A Spinner
+     */
+    public JQUISpinnerOptions()
+    {
+        //Nothing needed here
+    }
 
     /**
      * Sets the culture to use for parsing and formatting the value.
@@ -274,12 +286,6 @@ public class JQUISpinnerOptions extends JavaScriptPart
         this.page = page;
     }
 
-    @Override
-    public JavascriptPartType getJavascriptType()
-    {
-        return JavascriptPartType.Javascript;
-    }
-
     /**
      * Sets the incremental stepping
      *
@@ -321,8 +327,7 @@ public class JQUISpinnerOptions extends JavaScriptPart
     }
 
     /**
-     * Returns if the spinner is changing integers or doubles
-     * Default true
+     * Returns if the spinner is changing integers or doubles Default true
      *
      * @return
      */

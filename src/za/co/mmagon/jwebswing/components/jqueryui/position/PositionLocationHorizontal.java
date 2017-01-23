@@ -11,23 +11,26 @@ public enum PositionLocationHorizontal
 {
 
     /**
-     * Position to the left
+     * Position to the Left
      */
-    left,
+    Left,
     /**
      * Position to the Center
      */
-    center,
+    Center,
     /**
-     * Position to the right
+     * Position to the Right
      */
-    right,
-    left_bottom,;
+    Right,
+    /**
+     * Places at Left bottom
+     */
+    Left_Bottom,;
 
     @Override
     public String toString()
     {
-        return super.toString().replace('_', ' ');
+        return super.toString().toLowerCase().replace('_', ' ');
     }
 
 }

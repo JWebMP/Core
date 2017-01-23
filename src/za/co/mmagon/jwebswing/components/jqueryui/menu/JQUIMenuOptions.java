@@ -19,7 +19,6 @@ package za.co.mmagon.jwebswing.components.jqueryui.menu;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.components.jqueryui.position.Position;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
 /**
  *
@@ -32,9 +31,22 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 public class JQUIMenuOptions extends JavaScriptPart
 {
 
+    private static final long serialVersionUID = 1L;
+    /**
+     * If the item is disabled or not
+     */
     private Boolean disabled;
+    /**
+     * The menu icon set available
+     */
     private JQUIMenuIconSet icons;
+    /**
+     * The menus
+     */
     private String menus;
+    /**
+     * The actual position
+     */
     private Position position;
     /**
      * Customize the ARIA roles used for the menu and menu items.
@@ -161,11 +173,5 @@ public class JQUIMenuOptions extends JavaScriptPart
     public void setRole(String role)
     {
         this.role = role;
-    }
-
-    @Override
-    public JavascriptPartType getJavascriptType()
-    {
-        return JavascriptPartType.Javascript;
     }
 }

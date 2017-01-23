@@ -16,9 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqueryui.spinner;
 
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.Input;
-import za.co.mmagon.jwebswing.base.html.Label;
+import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 import za.co.mmagon.jwebswing.components.globalize.cultures.GlobalizeCultures;
 
@@ -33,10 +31,15 @@ import za.co.mmagon.jwebswing.components.globalize.cultures.GlobalizeCultures;
 public final class JQUISpinnerTime extends Div&lt;JQUISpinnerChildren, NoAttributes, JQUISpinnerFeatures, JQUISpinnerEvents, JQUISpinnerTime&gt;
 {
 
-<span class="nc" id="L36">    private String headerText = &quot;JQuery UI Spinner Demo&quot;;</span>
-
-    private Input input;
     private static final long serialVersionUID = 1L;
+    /**
+     * The default header text for the time spinner
+     */
+<span class="nc" id="L38">    private String headerText = &quot;JQuery UI Spinner Demo&quot;;</span>
+    /**
+     * The component input
+     */
+    private Input input;
 
     /**
      * The pre-child labour
@@ -53,8 +56,8 @@ public final class JQUISpinnerTime extends Div&lt;JQUISpinnerChildren, NoAttribu
      */
     public JQUISpinnerTime()
     {
-<span class="nc" id="L56">        this(null);</span>
-<span class="nc" id="L57">    }</span>
+<span class="nc" id="L59">        this(null);</span>
+<span class="nc" id="L60">    }</span>
 
     /**
      * Constructs a new spinner paragraph object
@@ -62,19 +65,19 @@ public final class JQUISpinnerTime extends Div&lt;JQUISpinnerChildren, NoAttribu
      * @param labelText THe label of the Spinner
      */
     public JQUISpinnerTime(String labelText)
-<span class="nc" id="L65">    {</span>
+<span class="nc" id="L68">    {</span>
 
-<span class="nc bnc" id="L67" title="All 2 branches missed.">        if (labelText != null)</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        if (labelText != null)</span>
         {
-<span class="nc" id="L69">            entryLabel = new Label(labelText);</span>
-<span class="nc" id="L70">            input = new Input();</span>
-<span class="nc" id="L71">            add(entryLabel);</span>
-<span class="nc" id="L72">            add(input);</span>
-<span class="nc" id="L73">            input.addFeature(getFeature());</span>
-<span class="nc" id="L74">            input.setID(getID() + &quot;_spinnerInput&quot;);</span>
-<span class="nc" id="L75">            entryLabel.setForInputComponent(input);</span>
+<span class="nc" id="L72">            entryLabel = new Label(labelText);</span>
+<span class="nc" id="L73">            input = new Input();</span>
+<span class="nc" id="L74">            add(entryLabel);</span>
+<span class="nc" id="L75">            add(input);</span>
+<span class="nc" id="L76">            input.addFeature(getFeature());</span>
+<span class="nc" id="L77">            input.setID(getID() + &quot;_spinnerInput&quot;);</span>
+<span class="nc" id="L78">            entryLabel.setForInputComponent(input);</span>
         }
-<span class="nc" id="L77">    }</span>
+<span class="nc" id="L80">    }</span>
 
     /**
      * Returns the label object with this spinner
@@ -83,7 +86,7 @@ public final class JQUISpinnerTime extends Div&lt;JQUISpinnerChildren, NoAttribu
      */
     public Label getEntryLabel()
     {
-<span class="nc" id="L86">        return entryLabel;</span>
+<span class="nc" id="L89">        return entryLabel;</span>
     }
 
     /**
@@ -93,26 +96,27 @@ public final class JQUISpinnerTime extends Div&lt;JQUISpinnerChildren, NoAttribu
      */
     public void setEntryLabel(Label entryLabel)
     {
-<span class="nc" id="L96">        this.entryLabel = entryLabel;</span>
-<span class="nc" id="L97">    }</span>
+<span class="nc" id="L99">        this.entryLabel = entryLabel;</span>
+<span class="nc" id="L100">    }</span>
 
     /**
      * Returns the options associated with this spinner
      * &lt;p&gt;
      * @return
      */
+    @Override
     public JQUISpinnerOptions getOptions()
     {
-<span class="nc" id="L106">        return feature.getOptions();</span>
+<span class="nc" id="L110">        return feature.getOptions();</span>
     }
 
     public JQUISpinnerTimeFeature getFeature()
     {
-<span class="nc bnc" id="L111" title="All 2 branches missed.">        if (feature == null)</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        if (feature == null)</span>
         {
-<span class="nc" id="L113">            feature = new JQUISpinnerTimeFeature(input);</span>
+<span class="nc" id="L117">            feature = new JQUISpinnerTimeFeature(input);</span>
         }
-<span class="nc" id="L115">        return feature;</span>
+<span class="nc" id="L119">        return feature;</span>
     }
 
     /**
@@ -122,10 +126,10 @@ public final class JQUISpinnerTime extends Div&lt;JQUISpinnerChildren, NoAttribu
      */
     public void addGlobalization(GlobalizeCultures culture)
     {
-<span class="nc" id="L125">        getFeature().getJavascriptReferences().add(culture.getJavascriptCoreReference());</span>
-<span class="nc" id="L126">        getJavascriptReferences().add(culture.getJavascriptReference());</span>
-<span class="nc" id="L127">        getOptions().setCulture(culture.toString());</span>
-<span class="nc" id="L128">    }</span>
+<span class="nc" id="L129">        getFeature().getJavascriptReferences().add(culture.getJavascriptCoreReference());</span>
+<span class="nc" id="L130">        getJavascriptReferences().add(culture.getJavascriptReference());</span>
+<span class="nc" id="L131">        getOptions().setCulture(culture.toString());</span>
+<span class="nc" id="L132">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

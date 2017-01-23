@@ -22,36 +22,38 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  *
  * @author GedMarc
  */
-<span class="nc" id="L25">public enum BSModalAttributes implements AttributeDefinitions</span>
+<span class="pc" id="L25">public enum BSModalAttributes implements AttributeDefinitions</span>
 {
-<span class="nc" id="L27">    Visibility,</span>
-<span class="nc" id="L28">    Role;</span>
+<span class="fc" id="L27">    Visibility,</span>
+<span class="fc" id="L28">    Role,</span>
+<span class="fc" id="L29">    TabIndex;</span>
 
     private BSModalAttributes()
-<span class="nc" id="L31">    {</span>
-<span class="nc" id="L32">    }</span>
+<span class="fc" id="L32">    {</span>
+<span class="fc" id="L33">    }</span>
 
     private BSModalAttributes(boolean isKeyword)
-<span class="nc" id="L35">    {</span>
-<span class="nc" id="L36">        this.isKeyword = isKeyword;</span>
-<span class="nc" id="L37">    }</span>
+<span class="nc" id="L36">    {</span>
+<span class="nc" id="L37">        this.isKeyword = isKeyword;</span>
+<span class="nc" id="L38">    }</span>
 
     private boolean isKeyword;
 
     @Override
     public boolean isKeyword()
     {
-<span class="nc" id="L44">        return isKeyword;</span>
+<span class="fc" id="L45">        return isKeyword;</span>
     }
-    
+
     /**
      * Returns the attribute name replacing all underscores with dashes and all dollar signs to empty
-     * @return 
+     *
+     * @return
      */
     @Override
     public String toString()
     {
-<span class="nc" id="L54">        return name().toLowerCase().replace('_','-').replace(&quot;$&quot;, &quot;&quot;);</span>
+<span class="fc" id="L56">        return name().toLowerCase().replace('_', '-').replace(&quot;$&quot;, &quot;&quot;);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

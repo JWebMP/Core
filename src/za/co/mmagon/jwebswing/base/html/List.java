@@ -36,9 +36,13 @@ import za.co.mmagon.jwebswing.components.jqxwidgets.ribbon.JQXRibbonChildren;
  * The "compact" attribute is not supported in HTML5.<p>
  * <p>
  * @author Marc Magon
+ * @param <C>
+ * @param <A>
+ * @param <E>
+ * @param <J>
  */
-public class List<C extends ListChildren, A extends Enum & AttributeDefinitions, J extends List>
-        extends Component<C, A, GlobalFeatures, GlobalEvents, J>
+public class List<C extends ListChildren, A extends Enum & AttributeDefinitions, E extends GlobalEvents, J extends List>
+        extends Component<C, A, GlobalFeatures, E, J>
         implements ListChildren, JQUITabsChildren, JQUISortableChildren, DisplayObjectType, JQXRibbonChildren, JQXDropDownListChildren,
         JQXMenuChildren, ListItemChildren
 {

@@ -30,7 +30,14 @@ import za.co.mmagon.jwebswing.components.pools.jqueryui.JQUIReferencePool;
 public class JQUISliderFeature extends Feature<JQUISliderOptions, JQUISliderFeature> implements JQUISliderFeatures
 {
 
+    private static final long serialVersionUID = 1L;
+    /**
+     * The actual slider for the menu
+     */
     private final JQUISlider selectMenu;
+    /**
+     * The options for the select menu
+     */
     private JQUISliderOptions options;
 
     /**
@@ -50,7 +57,6 @@ public class JQUISliderFeature extends Feature<JQUISliderOptions, JQUISliderFeat
 
         getJavascriptReferences().add(JQUIReferencePool.Slider.getJavaScriptReference());
         getCssReferences().add(JQUIReferencePool.Slider.getCssReference());
-
     }
 
     @Override

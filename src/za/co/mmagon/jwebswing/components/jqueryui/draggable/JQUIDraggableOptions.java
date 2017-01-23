@@ -18,6 +18,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 public class JQUIDraggableOptions extends JavaScriptPart
 {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * If set to false, will prevent the ui-draggable class from being added. This may be desired as a performance optimization when calling .draggable() on hundreds of elements.
      */
@@ -70,7 +72,7 @@ public class JQUIDraggableOptions extends JavaScriptPart
     private String handle;
     /**
      * Allows for a helper element to be used for dragging display.
-     *
+     * <p>
      * The element will be cloned and the clone will be dragged.
      */
     private Boolean helper;
@@ -93,7 +95,7 @@ public class JQUIDraggableOptions extends JavaScriptPart
     private Boolean refreshPositions;
     /**
      * Whether the element should revert to its start position when dragging stops.
-     *
+     * <p>
      * Boolean: If set to true the element will always revert.
      */
     private Boolean revert;
@@ -395,7 +397,7 @@ public class JQUIDraggableOptions extends JavaScriptPart
 
     /**
      * Allows for a helper element to be used for dragging display.
-     *
+     * <p>
      * The element will be cloned and the clone will be dragged.
      *
      * @return If the element must be cloned
@@ -407,7 +409,7 @@ public class JQUIDraggableOptions extends JavaScriptPart
 
     /**
      * Allows for a helper element to be used for dragging display.
-     *
+     * <p>
      * The element will be cloned and the clone will be dragged.
      *
      * @param helper Set to clone the element or not

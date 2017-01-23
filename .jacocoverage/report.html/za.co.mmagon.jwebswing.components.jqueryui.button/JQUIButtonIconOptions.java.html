@@ -63,11 +63,13 @@ public class JQUIButtonIconOptions extends JavaScriptPart
      * Sets the primary icon
      * &lt;p&gt;
      * @param primaryIcon CSS Class Type
+     *
+     * @return
      */
     public JQUIButtonIconOptions setPrimaryIcon(String primaryIcon)
     {
-<span class="nc" id="L69">        this.primaryIcon = primaryIcon;</span>
-<span class="nc" id="L70">        return this;</span>
+<span class="nc" id="L71">        this.primaryIcon = primaryIcon;</span>
+<span class="nc" id="L72">        return this;</span>
     }
 
     /**
@@ -78,24 +80,26 @@ public class JQUIButtonIconOptions extends JavaScriptPart
      */
     public String getSecondaryIcon()
     {
-<span class="nc" id="L81">        return secondaryIcon;</span>
+<span class="nc" id="L83">        return secondaryIcon;</span>
     }
 
     /**
      * Sets the secondary icon CSS Class
      * &lt;p&gt;
      * @param secondaryIcon
+     *
+     * @return
      */
     public JQUIButtonIconOptions setSecondaryIcon(String secondaryIcon)
     {
-<span class="nc" id="L91">        this.secondaryIcon = secondaryIcon;</span>
-<span class="nc" id="L92">        return this;</span>
+<span class="nc" id="L95">        this.secondaryIcon = secondaryIcon;</span>
+<span class="nc" id="L96">        return this;</span>
     }
 
     @Override
     public JavascriptPartType getJavascriptType()
     {
-<span class="nc" id="L98">        return JavascriptPartType.Javascript;</span>
+<span class="nc" id="L102">        return JavascriptPartType.Javascript;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

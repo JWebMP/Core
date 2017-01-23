@@ -32,8 +32,13 @@ public class JQUISpinnerTimeFeature extends Feature<JQUISpinnerOptions, JQUISpin
 {
 
     private static final long serialVersionUID = 1L;
-
+    /**
+     * The component for the time feature
+     */
     private final Component selectMenu;
+    /**
+     * The options for the time spinner
+     */
     private JQUISpinnerOptions options;
 
     /**

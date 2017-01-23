@@ -17,6 +17,7 @@
 package za.co.mmagon.jwebswing.components.jqxwidgets.treemap;
 
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourHex;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
  * This Class
@@ -24,51 +25,53 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourHex;
  * @author GedMarc
  * @since 25 Dec 2015
  */
-public class JQXTreeMapColorRange
+public class JQXTreeMapColorRange extends JavaScriptPart
 {
+
+    private static final long serialVersionUID = 1L;
 
     private ColourHex color;
     private Integer min;
     private Integer max;
 
     public JQXTreeMapColorRange()
-<span class="nc" id="L35">    {</span>
-<span class="nc" id="L36">    }</span>
+<span class="nc" id="L38">    {</span>
+<span class="nc" id="L39">    }</span>
 
     public ColourHex getColor()
     {
-<span class="nc" id="L40">        return color;</span>
+<span class="nc" id="L43">        return color;</span>
     }
 
     public void setColor(ColourHex color)
     {
-<span class="nc" id="L45">        this.color = color;</span>
-<span class="nc" id="L46">    }</span>
+<span class="nc" id="L48">        this.color = color;</span>
+<span class="nc" id="L49">    }</span>
 
     public Integer getMin()
     {
-<span class="nc" id="L50">        return min;</span>
+<span class="nc" id="L53">        return min;</span>
     }
 
     public void setMin(Integer min)
     {
-<span class="nc" id="L55">        this.min = min;</span>
-<span class="nc" id="L56">    }</span>
+<span class="nc" id="L58">        this.min = min;</span>
+<span class="nc" id="L59">    }</span>
 
     public Integer getMax()
     {
-<span class="nc" id="L60">        return max;</span>
+<span class="nc" id="L63">        return max;</span>
     }
 
     public void setMax(Integer max)
     {
-<span class="nc" id="L65">        this.max = max;</span>
-<span class="nc" id="L66">    }</span>
+<span class="nc" id="L68">        this.max = max;</span>
+<span class="nc" id="L69">    }</span>
 
     @Override
     public String toString()
     {
-<span class="nc" id="L71">        return super.toString();</span>
+<span class="nc" id="L74">        return super.toString();</span>
     }
 
 }

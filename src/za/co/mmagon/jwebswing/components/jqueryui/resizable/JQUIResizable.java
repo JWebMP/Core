@@ -31,9 +31,46 @@ public class JQUIResizable extends Div<JQUIResizableChildren, NoAttributes, JQUI
     private static final long serialVersionUID = 1L;
     private JQUIResizableFeature feature;
 
+    /**
+     * Adds the feature to the resizable
+     */
     public JQUIResizable()
     {
-
+        addFeature(feature = new JQUIResizableFeature(this));
     }
 
+    /**
+     * Returns the features options
+     * <p>
+     * @return
+     */
+    @Override
+    public JQUIResizableOptions getOptions()
+    {
+        return feature.getOptions();
+    }
+
+    /**
+     * Returns this feature
+     *
+     * @return
+     */
+    public JQUIResizableFeature getFeature()
+    {
+        if (feature == null)
+        {
+            feature = new JQUIResizableFeature(this);
+        }
+        return feature;
+    }
+
+    /**
+     * Sets this feature
+     *
+     * @param feature
+     */
+    public void setFeature(JQUIResizableFeature feature)
+    {
+        this.feature = feature;
+    }
 }

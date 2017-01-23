@@ -17,12 +17,10 @@
 package za.co.mmagon.jwebswing.components.bootstrap.navbar;
 
 import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.components.bootstrap.navbar.toggler.BSNavBarTogglerSizes;
 
 /**
- * Navbar
- * &lt;p&gt;
- * The navbar is a wrapper that positions branding, navigation, and other elements in a concise header. It’s easily extensible and, thanks to our Collapse plugin, can easily integrate responsive
- * behaviors.
+ *
  * &lt;p&gt;
  * @author Marc Magon
  * @since 13 Jan 2017
@@ -32,26 +30,45 @@ public class BSNavBar extends Div&lt;BSNavBarChildren, BSNavBarAttributes, BSNav
 {
 
     private static final long serialVersionUID = 1L;
-    private BSNavBarFeature feature;
 
-    public BSNavBar()
-<span class="nc" id="L38">    {</span>
-<span class="nc" id="L39">        addFeature(getFeature());</span>
-<span class="nc" id="L40">    }</span>
-
-    public final BSNavBarFeature getFeature()
-    {
-<span class="nc bnc" id="L44" title="All 2 branches missed.">        if (feature == null)</span>
+    /**
+     * Navbar
+     * &lt;p&gt;
+     * The navbar is a wrapper that positions branding, navigation, and other elements in a concise header. It’s easily extensible and, thanks to our Collapse plugin, can easily integrate responsive
+     * behaviors.
+     *
+     * @param navBarTogglerSize
+     * @param colourSchemes
+     */
+    public BSNavBar(BSNavBarTogglerSizes navBarTogglerSize, BSNavBarColourSchemes... colourSchemes)
+<span class="fc" id="L44">    {</span>
+<span class="fc" id="L45">        setTag(&quot;nav&quot;);</span>
+<span class="fc" id="L46">        addClass(&quot;navbar&quot;);</span>
+<span class="fc" id="L47">        addAttribute(&quot;role&quot;, &quot;navigation&quot;);</span>
+<span class="fc" id="L48">        addClass(navBarTogglerSize);</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        for (BSNavBarColourSchemes colourScheme : colourSchemes)</span>
         {
-<span class="nc" id="L46">            feature = new BSNavBarFeature(this);</span>
+<span class="fc" id="L51">            addClass(colourScheme);</span>
         }
-<span class="nc" id="L48">        return feature;</span>
+<span class="fc" id="L53">    }</span>
+
+    /**
+     * Sets this navbar's positioning
+     *
+     * @param position
+     *
+     * @return
+     */
+    public BSNavBar setPositioning(BSNavBarPositioning position)
+    {
+<span class="fc" id="L64">        addClass(position);</span>
+<span class="fc" id="L65">        return this;</span>
     }
 
     @Override
     public BSNavBarOptions getOptions()
     {
-<span class="nc" id="L54">        return getFeature().getOptions();</span>
+<span class="nc" id="L71">        return new BSNavBarOptions();</span>
     }
 
 }

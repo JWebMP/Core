@@ -34,23 +34,23 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
      */
 <span class="fc" id="L35">    Checkbox,</span>
     /**
-     * @deprecated no browser support really
+     *
      */
 <span class="fc" id="L39">    Color,</span>
     /**
-     * @deprecated no browser support really
+     *
      */
 <span class="fc" id="L43">    Date,</span>
     /**
-     * @deprecated no browser support really
+     *
      */
 <span class="fc" id="L47">    Datetime,</span>
     /**
-     * @deprecated no browser support really
+     *
      */
 <span class="fc" id="L51">    Datetime_local,</span>
     /**
-     * @deprecated no browser support really
+     *
      */
 <span class="fc" id="L55">    Email,</span>
     /**
@@ -69,12 +69,12 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
      * The Input Month object represents an HTML input element with type=&quot;month&quot;.
      * &lt;p&gt;
      * Note: input elements with type=&quot;month&quot; are not supported in Internet Explorer or Firefox.
-     *
-     * @deprecated
+     * &lt;p&gt;
+     * Did custom check, enabled from ie10 and up
      */
 <span class="fc" id="L75">    Month,</span>
     /**
-     * @deprecated
+     * A number input
      */
 <span class="fc" id="L79">    Number,</span>
     /**
@@ -86,7 +86,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
      */
 <span class="fc" id="L87">    Radio,</span>
     /**
-     * @deprecated
+     * A range input selector
      */
 <span class="fc" id="L91">    Range,</span>
     /**
@@ -95,22 +95,21 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 <span class="fc" id="L95">    Reset,</span>
     /**
      * The Input Search Object is new in HTML5.
-     *
-     * @deprecated just until people get off ie 8
+     * &lt;p&gt;
      */
-<span class="fc" id="L101">    Search,</span>
+<span class="fc" id="L100">    Search,</span>
     /**
      * The submit button
      */
-<span class="fc" id="L105">    Submit,</span>
+<span class="fc" id="L104">    Submit,</span>
     /**
-     * @deprecated
+     * A telephone entry
      */
-<span class="fc" id="L109">    Tel,</span>
+<span class="fc" id="L108">    Tel,</span>
     /**
      * The Input Text object represents an HTML input element with type=&quot;text&quot;.
      */
-<span class="fc" id="L113">    Text,</span>
+<span class="fc" id="L112">    Text,</span>
     /**
      * The Input Time Object is new in HTML5.
      * &lt;p&gt;
@@ -119,10 +118,8 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
      * Note: input elements with type=&quot;time&quot; are not supported in Internet Explorer or Firefox.
      * &lt;p&gt;
      * JWebswing excludes this for lack of support
-     *
-     * @deprecated
      */
-<span class="fc" id="L125">    Time,</span>
+<span class="fc" id="L122">    Time,</span>
     /**
      * Input URL Object
      * &lt;p&gt;
@@ -131,36 +128,31 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
      * The Input URL object represents an HTML input element with type=&quot;url&quot;.
      * &lt;p&gt;
      * Note: input elements with type=&quot;url&quot; are not supported in Internet Explorer 9 (and earlier versions), or Safari.
-     *
-     * @deprecated
      */
-<span class="fc" id="L137">    Url,</span>
+<span class="fc" id="L132">    Url,</span>
     /**
      * The Input Week Object is new in HTML5.
      * &lt;p&gt;
      * The Input Week object represents an HTML input element with type=&quot;week&quot;.
      * &lt;p&gt;
      * Note: input elements with type=&quot;week&quot; are not supported in Internet Explorer or Firefox.
-     *
-     * @deprecated
      */
-<span class="fc" id="L147">    Week,</span>
+<span class="fc" id="L140">    Week,</span>
     /**
-     * @deprecated
      * To store values as attributes
      */
-<span class="fc" id="L152">    Value;</span>
+<span class="fc" id="L144">    Value;</span>
 
     @Override
     public String toString()
     {
-<span class="nc" id="L157">        return name().toLowerCase().replaceAll(&quot;_&quot;, &quot;-&quot;);</span>
+<span class="fc" id="L149">        return name().toLowerCase().replaceAll(&quot;_&quot;, &quot;-&quot;);</span>
     }
 
     @Override
     public boolean isKeyword()
     {
-<span class="nc" id="L163">        return false;</span>
+<span class="nc" id="L155">        return false;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

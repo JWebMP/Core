@@ -47,24 +47,25 @@ public class JQUISelectable extends Div&lt;JQUISelectMenuChildren, NoAttributes,
      * &lt;p&gt;
      * @return
      */
+    @Override
     public JQUISelectableOptions getOptions()
     {
-<span class="nc" id="L52">        return feature.getOptions();</span>
+<span class="nc" id="L53">        return feature.getOptions();</span>
     }
 
     public JQUISelectableFeature getFeature()
     {
-<span class="nc bnc" id="L57" title="All 2 branches missed.">        if (feature == null)</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        if (feature == null)</span>
         {
-<span class="nc" id="L59">            feature = new JQUISelectableFeature(this);</span>
+<span class="nc" id="L60">            feature = new JQUISelectableFeature(this);</span>
         }
-<span class="nc" id="L61">        return feature;</span>
+<span class="nc" id="L62">        return feature;</span>
     }
 
     public void setFeature(JQUISelectableFeature feature)
     {
-<span class="nc" id="L66">        this.feature = feature;</span>
-<span class="nc" id="L67">    }</span>
+<span class="nc" id="L67">        this.feature = feature;</span>
+<span class="nc" id="L68">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

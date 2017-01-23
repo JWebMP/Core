@@ -44,7 +44,8 @@ public class JQUIRadioButton extends InputRadioType implements JQUIRadioButtonGr
 
     /**
      *
-     * @param name A group name for the radio button
+     * @param name        A group name for the radio button
+     * @param buttonGroup
      */
     public JQUIRadioButton(String name, Component buttonGroup)
     {
@@ -59,6 +60,8 @@ public class JQUIRadioButton extends InputRadioType implements JQUIRadioButtonGr
      * Sets the name of the radio button
      * <p>
      * @param name
+     *
+     * @return
      */
     @Override
     public JQUIRadioButton setName(String name)

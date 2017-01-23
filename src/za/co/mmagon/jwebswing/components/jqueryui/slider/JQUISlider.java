@@ -30,7 +30,14 @@ import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 public class JQUISlider extends Div<JQUISliderChildren, NoAttributes, JQUISliderFeatures, JQUISliderEvents, JQUISlider>
 {
 
+    private static final long serialVersionUID = 1L;
+    /**
+     * The feature for this component
+     */
     private final JQUISliderFeature slider;
+    /**
+     * The options for this component
+     */
     private JQUISliderOptions options;
 
     /**
@@ -42,6 +49,11 @@ public class JQUISlider extends Div<JQUISliderChildren, NoAttributes, JQUISlider
         addFeature(slider);
     }
 
+    /**
+     * Returns the actual slider
+     *
+     * @return
+     */
     public JQUISliderFeature getSlider()
     {
         return slider;
@@ -52,6 +64,7 @@ public class JQUISlider extends Div<JQUISliderChildren, NoAttributes, JQUISlider
      * <p>
      * @return
      */
+    @Override
     public JQUISliderOptions getOptions()
     {
         if (this.options == null)

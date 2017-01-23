@@ -16,14 +16,10 @@
  */
 package za.co.mmagon.jwebswing.components.radialsvgslider;
 
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.H2;
-import za.co.mmagon.jwebswing.base.html.Link;
-import za.co.mmagon.jwebswing.base.html.Paragraph;
+import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
-import za.co.mmagon.jwebswing.htmlbuilder.css.lists.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
-import za.co.mmagon.jwebswing.htmlbuilder.css.padding.PaddingCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.lists.ListCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.lists.ListStyleType;
 
 /**
  * An implementation of the Radial SVG Slider.
@@ -34,7 +30,6 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.padding.PaddingCSS;
  * @since 29 Aug 2015
  * @version 1.0
  */
-
 public class RadialSVGSlider extends Div<RadialSVGSliderChildren, RadialSVGSliderAttributes, RadialSVGSliderFeatures, RadialSVGSliderEvents, RadialSVGSlider>
 {
 
@@ -42,7 +37,7 @@ public class RadialSVGSlider extends Div<RadialSVGSliderChildren, RadialSVGSlide
     private RadialSVGSliderFeature feature;
 
     @ListCSS(ListStyleType = ListStyleType.none)
-    
+
     private RadialSVGSliderList radialSliderList;
 
     public RadialSVGSlider()

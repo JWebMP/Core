@@ -11,23 +11,26 @@
 {
 
     /**
-     * Position to the left
+     * Position to the Left
      */
-<span class="fc" id="L16">    left,</span>
+<span class="fc" id="L16">    Left,</span>
     /**
      * Position to the Center
      */
-<span class="fc" id="L20">    center,</span>
+<span class="fc" id="L20">    Center,</span>
     /**
-     * Position to the right
+     * Position to the Right
      */
-<span class="fc" id="L24">    right,</span>
-<span class="fc" id="L25">    left_bottom,;</span>
+<span class="fc" id="L24">    Right,</span>
+    /**
+     * Places at Left bottom
+     */
+<span class="fc" id="L28">    Left_Bottom,;</span>
 
     @Override
     public String toString()
     {
-<span class="fc" id="L30">        return super.toString().replace('_', ' ');</span>
+<span class="fc" id="L33">        return super.toString().toLowerCase().replace('_', ' ');</span>
     }
 
 }

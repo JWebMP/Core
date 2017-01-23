@@ -24,7 +24,19 @@ package za.co.mmagon.jwebswing.components.jqueryui.sortable;
  */
 public enum SortableHelpers
 {
-
+    /**
+     * Produces a clone
+     */
     Clone,
+    /**
+     * Produces the original
+     */
     Orginal;
+
+    @Override
+    public String toString()
+    {
+        return super.toString().toLowerCase();
+    }
+
 }

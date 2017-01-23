@@ -7,8 +7,7 @@ import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 /**
  * The DatePicker is tied to a standard form input field.
  * &lt;p&gt;
- * Focus on the input (click, or use the tab key) to open an interactive calendar in a small overlay.
- * Choose a date, click elsewhere on the page (blur the input), or hit the Esc key to close.
+ * Focus on the input (click, or use the tab key) to open an interactive calendar in a small overlay. Choose a date, click elsewhere on the page (blur the input), or hit the Esc key to close.
  * &lt;p&gt;
  * If a date is chosen, feedback is shown as the input's value.
  * &lt;p&gt;
@@ -28,28 +27,29 @@ public class JQUIDatePicker extends Div&lt;JQUIDatePickerChildren, NoAttributes,
      */
     public JQUIDatePicker(Date selectedDate)
     {
-<span class="nc" id="L31">        super();</span>
-<span class="nc" id="L32">        inputFeature = new JQUIDatePickerFeature(this);</span>
-<span class="nc bnc" id="L33" title="All 2 branches missed.">        if (selectedDate != null)</span>
+<span class="nc" id="L30">        super();</span>
+<span class="nc" id="L31">        inputFeature = new JQUIDatePickerFeature(this);</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">        if (selectedDate != null)</span>
         {
-<span class="nc" id="L35">            inputFeature.getOptions().setDefaultDate(selectedDate.toString());</span>
+<span class="nc" id="L34">            inputFeature.getOptions().setDefaultDate(selectedDate.toString());</span>
         }
-<span class="nc" id="L37">        addFeature(inputFeature);</span>
-<span class="nc" id="L38">    }</span>
+<span class="nc" id="L36">        addFeature(inputFeature);</span>
+<span class="nc" id="L37">    }</span>
 
     /**
      * Constructs a new date picker
      */
     public JQUIDatePicker()
     {
-<span class="nc" id="L45">        this(new Date());</span>
-<span class="nc" id="L46">    }</span>
+<span class="nc" id="L44">        this(new Date());</span>
+<span class="nc" id="L45">    }</span>
 
     /**
      * Returns the options of an item
      * &lt;p&gt;
      * @return
      */
+    @Override
     public JQUIDatePickerOptions getOptions()
     {
 <span class="nc" id="L55">        return inputFeature.getOptions();</span>

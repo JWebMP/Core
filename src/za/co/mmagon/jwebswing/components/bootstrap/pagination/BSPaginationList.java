@@ -26,7 +26,7 @@ import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
  * @since 21 Jan 2017
  *
  */
-public class BSPaginationList extends List<BSPageinationListItem, NoAttributes, BSPaginationList> implements BSPaginationChildren
+public class BSPaginationList extends List<BSPageinationListItem, NoAttributes, BSPaginationEvents, BSPaginationList> implements BSPaginationChildren
 {
 
     private static final long serialVersionUID = 1L;

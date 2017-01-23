@@ -48,13 +48,14 @@ public class BSCollapse
             {
 <span class="nc" id="L49">                display.addClass(&quot;in&quot;);</span>
             }
+<span class="nc" id="L51">            linkController.addAttribute(&quot;aria-controls&quot;, display.getID());</span>
+<span class="nc" id="L52">            linkController.addAttribute(&quot;data-target&quot;, display.getID(true));</span>
         }
 
-<span class="nc" id="L53">        linkController.addAttribute(&quot;data-toggle&quot;, &quot;collapse&quot;);</span>
-<span class="nc bnc" id="L54" title="All 2 branches missed.">        linkController.addAttribute(&quot;aria-expanded&quot;, Boolean.toString(!hideOnStart));</span>
-<span class="nc" id="L55">        linkController.addAttribute(&quot;aria-controls&quot;, display.getID());</span>
-<span class="nc" id="L56">        linkController.addAttribute(&quot;data-target&quot;, display.getID(true));</span>
-<span class="nc" id="L57">    }</span>
+<span class="nc" id="L55">        linkController.addAttribute(&quot;data-toggle&quot;, &quot;collapse&quot;);</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        linkController.addAttribute(&quot;aria-expanded&quot;, Boolean.toString(!hideOnStart));</span>
+
+<span class="nc" id="L58">    }</span>
 
     /**
      * Apply a collapse to given components
@@ -64,20 +65,22 @@ public class BSCollapse
      * @param hideOnStart
      */
     public BSCollapse(Button buttonController, Div display, boolean hideOnStart)
-<span class="nc" id="L67">    {</span>
-<span class="nc bnc" id="L68" title="All 2 branches missed.">        if (display != null)</span>
+<span class="nc" id="L68">    {</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        if (display != null)</span>
         {
-<span class="nc" id="L70">            display.addClass(&quot;collapse&quot;);</span>
-<span class="nc bnc" id="L71" title="All 2 branches missed.">            if (!hideOnStart)</span>
+<span class="nc" id="L71">            display.addClass(&quot;collapse&quot;);</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">            if (!hideOnStart)</span>
             {
-<span class="nc" id="L73">                display.addClass(&quot;in&quot;);</span>
+<span class="nc" id="L74">                display.addClass(&quot;in&quot;);</span>
             }
+
+<span class="nc" id="L77">            buttonController.addAttribute(&quot;aria-controls&quot;, display.getID());</span>
+<span class="nc" id="L78">            buttonController.addAttribute(&quot;data-target&quot;, display.getID(true));</span>
         }
 
-<span class="nc" id="L77">        buttonController.addAttribute(&quot;data-toggle&quot;, &quot;collapse&quot;);</span>
-<span class="nc bnc" id="L78" title="All 2 branches missed.">        buttonController.addAttribute(&quot;aria-expanded&quot;, Boolean.toString(!hideOnStart));</span>
-<span class="nc" id="L79">        buttonController.addAttribute(&quot;aria-controls&quot;, display.getID());</span>
-<span class="nc" id="L80">        buttonController.addAttribute(&quot;data-target&quot;, display.getID(true));</span>
-<span class="nc" id="L81">    }</span>
+<span class="nc" id="L81">        buttonController.addAttribute(&quot;data-toggle&quot;, &quot;collapse&quot;);</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        buttonController.addAttribute(&quot;aria-expanded&quot;, Boolean.toString(!hideOnStart));</span>
+
+<span class="nc" id="L84">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -61,7 +61,7 @@ public class JQImageMap extends Component&lt;ImageMapChildren, ImageMapAttribute
      */
     private boolean interactive;
     /**
-     * Shows whether the map is labeled This puts a div at the center of each polygon
+     * Shows whether the map is labeled This puts a div at the Center of each polygon
      */
     private boolean labeled;
     /**
@@ -307,9 +307,9 @@ public class JQImageMap extends Component&lt;ImageMapChildren, ImageMapAttribute
 
 <span class="nc" id="L308">                    areaLableDiv.addAttribute(GlobalAttributes.Style, &quot;position:absolute&quot;);</span>
 <span class="nc" id="L309">                    areaLableDiv.addFeature(new Binder(areaLableDiv, area));</span>
-                    //int[] center = PolygonUtils.getCenterPointOfPolygon(area.getCoordinates());
-                    //areaLableDiv.addAttribute(GlobalAttributes.Style, &quot;position:absolute;top:&quot; + center[0] + &quot;;left:&quot;+ center[1]);
-<span class="nc" id="L312">                    areaLableDiv.addFeature(new JQUIPositionFeature(areaLableDiv, new Position(PositionLocationHorizontal.center, PositionLocationVertical.center, PositionLocationHorizontal.center, PositionLocationVertical.center, area)));</span>
+                    //int[] Center = PolygonUtils.getCenterPointOfPolygon(area.getCoordinates());
+                    //areaLableDiv.addAttribute(GlobalAttributes.Style, &quot;position:absolute;top:&quot; + Center[0] + &quot;;Left:&quot;+ Center[1]);
+<span class="nc" id="L312">                    areaLableDiv.addFeature(new JQUIPositionFeature(areaLableDiv, new Position(PositionLocationHorizontal.Center, PositionLocationVertical.center, PositionLocationHorizontal.Center, PositionLocationVertical.center, area)));</span>
 <span class="nc" id="L313">                    area.add(areaLableDiv);</span>
                     //add(areaLableDiv);
 <span class="nc" id="L315">                }</span>

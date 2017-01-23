@@ -16,15 +16,13 @@
  */
 package za.co.mmagon.jwebswing.components.jqueryui.autocomplete;
 
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.Input;
-import za.co.mmagon.jwebswing.base.html.InputTextType;
-import za.co.mmagon.jwebswing.base.html.Label;
+import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.html.attributes.LabelAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemeBlocks;
 
 /**
+ * Description: Autocomplete enables users to quickly find and select from a pre-populated list of values as they type, leveraging searching and filtering.
  *
  * @author Marc Magon
  * @since 06 Aug 2015
@@ -37,20 +35,34 @@ public class JQUIAutoComplete extends Div&lt;JQUIAutoCompleteChildren, NoAttribu
      * Version 1
      */
     private static final long serialVersionUID = 1L;
+    /**
+     * The feature for the input
+     */
     private JQUIAutoCompleteFeature feature;
 
+    /**
+     * The input label for the auto complete
+     */
     private Label label;
+    /**
+     * The actual label for the input
+     */
     private Input input;
 
+    /**
+     * Description: Autocomplete enables users to quickly find and select from a pre-populated list of values as they type, leveraging searching and filtering.
+     *
+     * @param label
+     */
     public JQUIAutoComplete(String label)
-<span class="fc" id="L46">    {</span>
-<span class="fc" id="L47">        input = new InputTextType();</span>
-<span class="fc" id="L48">        this.label = new Label(label, input);</span>
-<span class="fc" id="L49">        add(this.label);</span>
-<span class="fc" id="L50">        add(input);</span>
-<span class="fc" id="L51">        addFeature(feature = new JQUIAutoCompleteFeature(input));</span>
-<span class="fc" id="L52">        addClass(JQUIThemeBlocks.UI_Widget);</span>
-<span class="fc" id="L53">    }</span>
+<span class="fc" id="L58">    {</span>
+<span class="fc" id="L59">        input = new InputTextType();</span>
+<span class="fc" id="L60">        this.label = new Label(label, input);</span>
+<span class="fc" id="L61">        add(this.label);</span>
+<span class="fc" id="L62">        add(input);</span>
+<span class="fc" id="L63">        addFeature(feature = new JQUIAutoCompleteFeature(input));</span>
+<span class="fc" id="L64">        addClass(JQUIThemeBlocks.UI_Widget);</span>
+<span class="fc" id="L65">    }</span>
 
     /**
      * Gets the label object for the auto complete
@@ -59,7 +71,7 @@ public class JQUIAutoComplete extends Div&lt;JQUIAutoCompleteChildren, NoAttribu
      */
     public Label getLabel()
     {
-<span class="fc" id="L62">        return label;</span>
+<span class="fc" id="L74">        return label;</span>
     }
 
     /**
@@ -69,9 +81,9 @@ public class JQUIAutoComplete extends Div&lt;JQUIAutoCompleteChildren, NoAttribu
      */
     public void setLabel(Label label)
     {
-<span class="nc" id="L72">        this.label = label;</span>
-<span class="nc" id="L73">        label.addAttribute(LabelAttributes.For, getInput().getID());</span>
-<span class="nc" id="L74">    }</span>
+<span class="nc" id="L84">        this.label = label;</span>
+<span class="nc" id="L85">        label.addAttribute(LabelAttributes.For, getInput().getID());</span>
+<span class="nc" id="L86">    }</span>
 
     /**
      * Gets the input object for this auto complete
@@ -80,7 +92,7 @@ public class JQUIAutoComplete extends Div&lt;JQUIAutoCompleteChildren, NoAttribu
      */
     public Input getInput()
     {
-<span class="fc" id="L83">        return input;</span>
+<span class="fc" id="L95">        return input;</span>
     }
 
     /**
@@ -90,10 +102,10 @@ public class JQUIAutoComplete extends Div&lt;JQUIAutoCompleteChildren, NoAttribu
      */
     public void setInput(Input input)
     {
-<span class="nc" id="L93">        remove(input);</span>
-<span class="nc" id="L94">        input.addFeature(feature = new JQUIAutoCompleteFeature(input));</span>
-<span class="nc" id="L95">        this.input = input;</span>
-<span class="nc" id="L96">    }</span>
+<span class="nc" id="L105">        remove(input);</span>
+<span class="nc" id="L106">        input.addFeature(feature = new JQUIAutoCompleteFeature(input));</span>
+<span class="nc" id="L107">        this.input = input;</span>
+<span class="nc" id="L108">    }</span>
 
     /**
      * Returns the feature attached to this component
@@ -102,11 +114,11 @@ public class JQUIAutoComplete extends Div&lt;JQUIAutoCompleteChildren, NoAttribu
      */
     public JQUIAutoCompleteFeature getFeature()
     {
-<span class="pc bpc" id="L105" title="1 of 2 branches missed.">        if (feature == null)</span>
+<span class="pc bpc" id="L117" title="1 of 2 branches missed.">        if (feature == null)</span>
         {
-<span class="nc" id="L107">            feature = new JQUIAutoCompleteFeature(input);</span>
+<span class="nc" id="L119">            feature = new JQUIAutoCompleteFeature(input);</span>
         }
-<span class="fc" id="L109">        return feature;</span>
+<span class="fc" id="L121">        return feature;</span>
     }
 
     /**
@@ -116,17 +128,18 @@ public class JQUIAutoComplete extends Div&lt;JQUIAutoCompleteChildren, NoAttribu
      */
     public void setFeature(JQUIAutoCompleteFeature feature)
     {
-<span class="nc" id="L119">        this.feature = feature;</span>
-<span class="nc" id="L120">    }</span>
+<span class="nc" id="L131">        this.feature = feature;</span>
+<span class="nc" id="L132">    }</span>
 
     /**
      * Returns the options supported for the auto complete
      * &lt;p&gt;
      * @return
      */
+    @Override
     public JQUIAutoCompleteOptions getOptions()
     {
-<span class="fc" id="L129">        return getFeature().getOptions();</span>
+<span class="fc" id="L142">        return getFeature().getOptions();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

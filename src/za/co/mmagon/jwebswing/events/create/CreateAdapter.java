@@ -7,6 +7,22 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.accordion.JQUIAccordionEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.autocomplete.JQUIAutoCompleteEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.button.JQUIButtonEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.dialog.JQUIDialogEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.draggable.JQUIDraggableEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.droppable.JQUIDroppableEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.menu.JQUIMenuEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.progressbar.JQUIProgressBarEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.resizable.JQUIResizableEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.selectable.JQUISelectableEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.selectmenu.JQUISelectMenuEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.slider.JQUISliderEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.sortable.JQUISortableEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.spinner.JQUISpinnerEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.tabs.JQUITabsEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.tooltips.JQUIToolTipEvents;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
 
@@ -16,7 +32,9 @@ import za.co.mmagon.logger.LogFactory;
  * @author Marc Magon
  */
 public abstract class CreateAdapter extends Event
-        implements GlobalEvents
+        implements GlobalEvents, JQUIAccordionEvents, JQUIAutoCompleteEvents, JQUIButtonEvents, JQUIDialogEvents, JQUIDraggableEvents, JQUIDroppableEvents, JQUIMenuEvents,
+        JQUIProgressBarEvents, JQUIResizableEvents, JQUISelectableEvents, JQUISelectMenuEvents, JQUISliderEvents, JQUISortableEvents, JQUISpinnerEvents,
+        JQUITabsEvents, JQUIToolTipEvents
 {
 
     /**
@@ -94,7 +112,7 @@ public abstract class CreateAdapter extends Event
         }
         catch (Exception e)
         {
-            LOG.log(Level.SEVERE,"Error In Firing Event", e);
+            LOG.log(Level.SEVERE, "Error In Firing Event", e);
         }
     }
 

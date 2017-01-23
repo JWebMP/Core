@@ -20,7 +20,6 @@ import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.components.jqueryui.position.Position;
 import za.co.mmagon.jwebswing.htmlbuilder.effects.JWAnimationEffectsPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
 /**
  * All the options for the tooltip library
@@ -44,7 +43,7 @@ public class JQUITooltipOptions extends JavaScriptPart
     private Position position;
     /**
      * The content for the tooltip
-     */ 
+     */
     private String content;
     /**
      * If the tooltip is disabled or not
@@ -55,8 +54,7 @@ public class JQUITooltipOptions extends JavaScriptPart
      */
     private JWAnimationEffectsPart hide;
     /**
-     * The component type that makes up a tooltip.
-     * E.G. img[alt] or *[title]
+     * The component type that makes up a tooltip. E.G. img[alt] or *[title]
      */
     private String items;
     /**
@@ -74,9 +72,12 @@ public class JQUITooltipOptions extends JavaScriptPart
      */
     private Boolean track;
 
+    /**
+     * Constructs a new tooltip options
+     */
     public JQUITooltipOptions()
     {
-
+//nothing needed here
     }
 
     /**
@@ -162,8 +163,7 @@ public class JQUITooltipOptions extends JavaScriptPart
     }
 
     /**
-     * The component type that makes up a tooltip.
-     * E.G. img[alt] or *[title]
+     * The component type that makes up a tooltip. E.G. img[alt] or *[title]
      * <p>
      * @return
      */
@@ -173,8 +173,7 @@ public class JQUITooltipOptions extends JavaScriptPart
     }
 
     /**
-     * The component type that makes up a tooltip.
-     * E.G. img[alt] or *[title]
+     * The component type that makes up a tooltip. E.G. img[alt] or *[title]
      * <p>
      * @param items
      */
@@ -245,11 +244,5 @@ public class JQUITooltipOptions extends JavaScriptPart
     public void setTrack(Boolean track)
     {
         this.track = track;
-    }
-
-    @Override
-    public JavascriptPartType getJavascriptType()
-    {
-        return JavascriptPartType.Javascript;
     }
 }

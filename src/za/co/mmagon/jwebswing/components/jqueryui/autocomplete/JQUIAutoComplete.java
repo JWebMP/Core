@@ -16,15 +16,13 @@
  */
 package za.co.mmagon.jwebswing.components.jqueryui.autocomplete;
 
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.Input;
-import za.co.mmagon.jwebswing.base.html.InputTextType;
-import za.co.mmagon.jwebswing.base.html.Label;
+import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.html.attributes.LabelAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemeBlocks;
 
 /**
+ * Description: Autocomplete enables users to quickly find and select from a pre-populated list of values as they type, leveraging searching and filtering.
  *
  * @author Marc Magon
  * @since 06 Aug 2015
@@ -37,11 +35,25 @@ public class JQUIAutoComplete extends Div<JQUIAutoCompleteChildren, NoAttributes
      * Version 1
      */
     private static final long serialVersionUID = 1L;
+    /**
+     * The feature for the input
+     */
     private JQUIAutoCompleteFeature feature;
 
+    /**
+     * The input label for the auto complete
+     */
     private Label label;
+    /**
+     * The actual label for the input
+     */
     private Input input;
 
+    /**
+     * Description: Autocomplete enables users to quickly find and select from a pre-populated list of values as they type, leveraging searching and filtering.
+     *
+     * @param label
+     */
     public JQUIAutoComplete(String label)
     {
         input = new InputTextType();
@@ -124,6 +136,7 @@ public class JQUIAutoComplete extends Div<JQUIAutoCompleteChildren, NoAttributes
      * <p>
      * @return
      */
+    @Override
     public JQUIAutoCompleteOptions getOptions()
     {
         return getFeature().getOptions();

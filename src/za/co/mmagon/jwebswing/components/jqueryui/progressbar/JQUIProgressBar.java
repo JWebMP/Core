@@ -31,6 +31,10 @@ import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 public class JQUIProgressBar extends Div<JQUIProgressBarChildren, NoAttributes, JQUIProgressBarFeatures, JQUIProgressBarEvents, JQUIProgressBar>
 {
 
+    private static final long serialVersionUID = 1L;
+    /**
+     * The feature for the progress bar
+     */
     private JQUIProgressBarFeature feature;
 
     /**
@@ -60,6 +64,7 @@ public class JQUIProgressBar extends Div<JQUIProgressBarChildren, NoAttributes, 
      * <p>
      * @return
      */
+    @Override
     public JQUIProgressBarOptions getOptions()
     {
         return getFeature().getOptions();

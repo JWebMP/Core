@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package za.co.mmagon.jwebswing.components.radialsvgslider;
 
 import za.co.mmagon.jwebswing.base.html.List;
@@ -24,20 +23,20 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.padding.PaddingCSS;
 
 /**
  * The data attributes for the radial
- * 
+ *
  * @author GedMarc
  * @since Oct 24, 2016
  * @version 1.0
- * 
+ *
  */
 @PaddingCSS(PaddingLeft = @MeasurementCSS(0))
-public class RadialSVGSliderList extends List<ListChildren, RadialSVGSliderListAttributes, RadialSVGSliderList> implements RadialSVGSliderChildren
+public class RadialSVGSliderList extends List<ListChildren, RadialSVGSliderListAttributes, RadialSVGSliderEvents, RadialSVGSliderList> implements RadialSVGSliderChildren
 {
 
     private static final long serialVersionUID = 1L;
 
-    public RadialSVGSliderList ()
+    public RadialSVGSliderList()
     {
-        
+
     }
 }

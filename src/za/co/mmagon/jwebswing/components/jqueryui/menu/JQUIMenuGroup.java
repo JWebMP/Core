@@ -25,7 +25,7 @@ import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
  * @since 30 Oct 2015
  * @version 1.0
  */
-public class JQUIMenuGroup extends List<JQUIMenuChildren, NoAttributes, JQUIMenuGroup> implements JQUIMenuChildren
+public class JQUIMenuGroup extends List<JQUIMenuChildren, NoAttributes, JQUIMenuEvents, JQUIMenuGroup> implements JQUIMenuChildren
 {
 
     private static final long serialVersionUID = 1L;

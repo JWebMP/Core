@@ -29,28 +29,81 @@ public class JQUIDialogOptions extends JavaScriptPart
 {
 
     private static final long serialVersionUID = 1L;
-
+    /**
+     * The component to append to
+     */
     private Component appendTo;
+    /**
+     * If the component should auto open
+     */
     private Boolean autoOpen;
     /**
      * TODO : buttons implementation
      */
     //private Component[] buttons;
+    /**
+     * if it should close on esc key
+     */
     private Boolean closeOnEscape;
+    /**
+     * the text for the close item
+     */
     private String closeText;
+    /**
+     * The class for the dialog
+     */
     private String dialogClass;
+    /**
+     * if the dialog is draggable
+     */
     private Boolean draggable;
+    /**
+     * The height of the Draggable item
+     */
     private Integer height;
+    /**
+     * If this dialog should hide
+     */
     private Boolean hide;
+    /**
+     * The maximum height for this dialog
+     */
     private Integer maxHeight;
+    /**
+     * The maximum width for this dialog
+     */
     private Integer maxWidth;
+    /**
+     * The minimum height for this dialog
+     */
     private Integer minHeight;
+    /**
+     * The minimum width for this dialog
+     */
     private Integer minWidth;
+    /**
+     * If the dialog is a modal
+     */
     private Boolean modal;
+    /**
+     * the position of the modal
+     */
     private Position position;
+    /**
+     * If the modal is resiable
+     */
     private Boolean resizable;
+    /**
+     * Show the dialog
+     */
     private Boolean show;
+    /**
+     * The title of the dialog
+     */
     private String title;
+    /**
+     * The width of the dialog
+     */
     private Integer width;
 
     /**

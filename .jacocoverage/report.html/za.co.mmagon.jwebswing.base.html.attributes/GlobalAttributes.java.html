@@ -63,21 +63,25 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
      */
 <span class="fc" id="L64">    Aria_Disabled,</span>
     /**
+     * Screen Reader described by
+     */
+<span class="fc" id="L68">    Aria_Describedby,</span>
+    /**
      * Expanded on screen reader mode
      */
-<span class="fc" id="L68">    Aria_Expanded,</span>
+<span class="fc" id="L72">    Aria_Expanded,</span>
     /**
      * Screen reader has popup
      */
-<span class="fc" id="L72">    Aria_HasPopup,</span>
+<span class="fc" id="L76">    Aria_HasPopup,</span>
     /**
      * Screen Reader labelled by
      */
-<span class="fc" id="L76">    Aria_LabelledBy;</span>
+<span class="fc" id="L80">    Aria_LabelledBy;</span>
 
     private GlobalAttributes()
-<span class="fc" id="L79">    {</span>
-<span class="fc" id="L80">    }</span>
+<span class="fc" id="L83">    {</span>
+<span class="fc" id="L84">    }</span>
 
     /**
      * Returns the lowercase
@@ -87,13 +91,13 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
     @Override
     public String toString()
     {
-<span class="fc" id="L90">        return name().toLowerCase();</span>
+<span class="fc" id="L94">        return name().toLowerCase();</span>
     }
 
     @Override
     public boolean isKeyword()
     {
-<span class="fc" id="L96">        return false;</span>
+<span class="fc" id="L100">        return false;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

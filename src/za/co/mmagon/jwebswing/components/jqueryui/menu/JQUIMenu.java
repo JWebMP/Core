@@ -33,7 +33,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.Orientation;
  * <p>
  * <p>
  */
-public class JQUIMenu extends List<JQUIMenuChildren, NoAttributes, JQUIMenu>
+public class JQUIMenu extends List<JQUIMenuChildren, NoAttributes, JQUIMenuEvents, JQUIMenu>
 {
 
     private static final long serialVersionUID = 1L;
@@ -41,15 +41,12 @@ public class JQUIMenu extends List<JQUIMenuChildren, NoAttributes, JQUIMenu>
 
     /**
      * Creates an ordered list
+     *
+     * @param orientation
      */
     public JQUIMenu(Orientation orientation)
     {
         addFeature(getFeature());
-        if (orientation != null && orientation.equals(Orientation.HORIZONTAL))
-        {
-            //getFeature().getCssReferences().add(JqWidgetsReferencePool.MenuBar.getCssReference());
-
-        }
 
     }
 
@@ -72,6 +69,7 @@ public class JQUIMenu extends List<JQUIMenuChildren, NoAttributes, JQUIMenu>
      *
      * @return
      */
+    @Override
     public JQUIMenuOptions getOptions()
     {
         return getFeature().getOptions();

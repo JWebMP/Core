@@ -30,6 +30,8 @@ import za.co.mmagon.jwebswing.components.pools.jqueryui.JQUIReferencePool;
 public class JQUIProgressBarFeature extends Feature<JQUIProgressBarOptions, JQUIProgressBarFeature> implements JQUIProgressBarFeatures
 {
 
+    private static final long serialVersionUID = 1L;
+
     private final JQUIProgressBar progressBar;
     private JQUIProgressBarOptions options;
 

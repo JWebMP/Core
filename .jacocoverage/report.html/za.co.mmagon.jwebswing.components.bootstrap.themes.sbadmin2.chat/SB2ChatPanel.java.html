@@ -14,28 +14,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
-
 package za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2.chat;
 
 import za.co.mmagon.jwebswing.base.html.List;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.components.fontawesome.FontAwesomeIcons;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.components.bootstrap.panel.BSPanelDefault;
 import za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2.SB2DropDown;
 import za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2.SB2ThemeClasses;
+import za.co.mmagon.jwebswing.components.fontawesome.FontAwesomeIcons;
 
 /**
  * The default chat panel that takes chat message types
+ *
  * @author GedMarc
  * @since Oct 9, 2016
  * @version 1.0
- * 
+ *
  */
 public class SB2ChatPanel extends BSPanelDefault
 {
 
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * The drop down menu in the header bar
      */
@@ -43,23 +44,22 @@ public class SB2ChatPanel extends BSPanelDefault
     /**
      * The list of chat messages
      */
-    private List&lt;ISB2ChatMessage,NoAttributes,List&gt; chatList;
-    
-    //private SB2ChatLeftMessage
-    
+    private List&lt;ISB2ChatMessage, NoAttributes, GlobalEvents, List&gt; chatList;
 
+    //private SB2ChatLeftMessage
     /**
      * A default sb2 chat panel
      */
     public SB2ChatPanel()
-<span class="fc" id="L55">    {</span>
-<span class="fc" id="L56">        addClass(0,SB2ThemeClasses.Chat_Panel);</span>
-<span class="fc" id="L57">    }</span>
+<span class="fc" id="L54">    {</span>
+<span class="fc" id="L55">        addClass(0, SB2ThemeClasses.Chat_Panel);</span>
+<span class="fc" id="L56">    }</span>
 
     /**
      * A default sb2 chat panel with the given settings
-     * @param icon The icon
-     * @param title  The title
+     *
+     * @param icon  The icon
+     * @param title The title
      */
     public SB2ChatPanel(FontAwesomeIcons icon, String title)
     {
@@ -68,52 +68,56 @@ public class SB2ChatPanel extends BSPanelDefault
 
     /**
      * Returns the drop down menu attached
-     * @return 
+     *
+     * @return
      */
     public SB2DropDown getDropDownMenu()
     {
-<span class="nc bnc" id="L75" title="All 2 branches missed.">        if(dropDownMenu == null)</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        if (dropDownMenu == null)</span>
         {
-<span class="nc" id="L77">            dropDownMenu = new SB2DropDown();</span>
+<span class="nc" id="L78">            dropDownMenu = new SB2DropDown();</span>
         }
-<span class="nc" id="L79">        return dropDownMenu;</span>
+<span class="nc" id="L80">        return dropDownMenu;</span>
     }
 
     /**
      * Sets the drop down menu attached
-     * @param dropDownMenu 
+     *
+     * @param dropDownMenu
      */
     public void setDropDownMenu(SB2DropDown dropDownMenu)
     {
-<span class="nc" id="L88">        this.dropDownMenu = dropDownMenu;</span>
-<span class="nc" id="L89">    }</span>
+<span class="nc" id="L90">        this.dropDownMenu = dropDownMenu;</span>
+<span class="nc" id="L91">    }</span>
 
     /**
      * Returns the list used to display the chat messages
-     * @return 
+     *
+     * @return
      */
-    public List&lt;ISB2ChatMessage,NoAttributes,List&gt; getChatList()
+    public List&lt;ISB2ChatMessage, NoAttributes, GlobalEvents, List&gt; getChatList()
     {
-<span class="pc bpc" id="L97" title="1 of 2 branches missed.">        if(chatList == null)</span>
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">        if (chatList == null)</span>
         {
-<span class="fc" id="L99">            setChatList(new List&lt;&gt;(false));</span>
+<span class="fc" id="L102">            setChatList(new List&lt;&gt;(false));</span>
         }
-<span class="fc" id="L101">        return chatList;</span>
+<span class="fc" id="L104">        return chatList;</span>
     }
 
     /**
      * Sets the list used to display the messages
-     * @param chatList 
+     *
+     * @param chatList
      */
-    public void setChatList(List&lt;ISB2ChatMessage,NoAttributes,List&gt; chatList)
+    public void setChatList(List&lt;ISB2ChatMessage, NoAttributes, GlobalEvents, List&gt; chatList)
     {
-<span class="fc" id="L110">        remove(this.chatList);</span>
-<span class="fc" id="L111">        this.chatList = chatList;</span>
-<span class="pc bpc" id="L112" title="1 of 2 branches missed.">        if(this.chatList != null)</span>
+<span class="fc" id="L114">        remove(this.chatList);</span>
+<span class="fc" id="L115">        this.chatList = chatList;</span>
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">        if (this.chatList != null)</span>
         {
-<span class="fc" id="L114">            this.chatList.addClass(SB2ThemeClasses.Chat);</span>
-<span class="fc" id="L115">            getPanelBody().add(this.chatList);</span>
+<span class="fc" id="L118">            this.chatList.addClass(SB2ThemeClasses.Chat);</span>
+<span class="fc" id="L119">            getPanelBody().add(this.chatList);</span>
         }
-<span class="fc" id="L117">    }</span>
+<span class="fc" id="L121">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

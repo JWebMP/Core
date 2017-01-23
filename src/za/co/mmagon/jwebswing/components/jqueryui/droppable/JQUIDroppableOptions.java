@@ -31,8 +31,7 @@ public class JQUIDroppableOptions extends JavaScriptPart
 {
 
     /**
-     * Default: "*"
-     * Controls which draggable elements are accepted by the droppable.
+     * Default: "*" Controls which draggable elements are accepted by the droppable.
      */
     private String accept;
     /**
@@ -45,8 +44,7 @@ public class JQUIDroppableOptions extends JavaScriptPart
     private Boolean activeClass;
     /**
      * By default, when an element is dropped on nested droppables, each droppable will receive the element. However, by setting this option to true, any parent droppables will not receive the
-     * element.
-     * The drop event will still bubble normally, but the event.target can be checked to see which droppable received the draggable element.
+     * element. The drop event will still bubble normally, but the event.target can be checked to see which droppable received the draggable element.
      */
     private Boolean greedy;
     /**
@@ -64,9 +62,12 @@ public class JQUIDroppableOptions extends JavaScriptPart
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * The default droppable options
+     */
     public JQUIDroppableOptions()
     {
-
+//Nothing needed here
     }
 
     /**

@@ -28,43 +28,77 @@ import za.co.mmagon.jwebswing.base.servlets.interfaces.ReferencePool;
  */
 <span class="nc" id="L29">public enum BlankComponentReferencePool implements ReferencePool</span>
 {
-
-    ;
-    private BlankComponentReferencePool()
-<span class="nc" id="L34">    {</span>
-<span class="nc" id="L35">    }</span>
-
+<span class="nc" id="L31">    NoReference(null, null);</span>
+    /**
+     * The actual javascript
+     */
     private JavascriptReference javaScriptReference;
+    /**
+     * The actual css reference
+     */
     private CSSReference cssReference;
 
-    private BlankComponentReferencePool(JavascriptReference javaScriptReference, CSSReference cssReference)
-<span class="nc" id="L41">    {</span>
-<span class="nc" id="L42">        this.javaScriptReference = javaScriptReference;</span>
-<span class="nc" id="L43">        this.cssReference = cssReference;</span>
-<span class="nc" id="L44">    }</span>
+    /**
+     * Constructs a reference pool
+     */
+    private BlankComponentReferencePool()
+<span class="nc" id="L45">    {</span>
+<span class="nc" id="L46">    }</span>
 
+    /**
+     * Constructs a new reference pool
+     *
+     * @param javaScriptReference
+     * @param cssReference
+     */
+    private BlankComponentReferencePool(JavascriptReference javaScriptReference, CSSReference cssReference)
+<span class="nc" id="L55">    {</span>
+<span class="nc" id="L56">        this.javaScriptReference = javaScriptReference;</span>
+<span class="nc" id="L57">        this.cssReference = cssReference;</span>
+<span class="nc" id="L58">    }</span>
+
+    /**
+     * Returns the javascript reference
+     *
+     * @return
+     */
     @Override
     public JavascriptReference getJavaScriptReference()
     {
-<span class="nc" id="L49">        return javaScriptReference;</span>
+<span class="nc" id="L68">        return javaScriptReference;</span>
     }
 
+    /**
+     * Sets the javascript reference
+     *
+     * @param javaScriptReference
+     */
     @Override
     public void setJavaScriptReference(JavascriptReference javaScriptReference)
     {
-<span class="nc" id="L55">        this.javaScriptReference = javaScriptReference;</span>
-<span class="nc" id="L56">    }</span>
+<span class="nc" id="L79">        this.javaScriptReference = javaScriptReference;</span>
+<span class="nc" id="L80">    }</span>
 
+    /**
+     * Gets the cSS reference
+     *
+     * @return
+     */
     @Override
     public CSSReference getCssReference()
     {
-<span class="nc" id="L61">        return cssReference;</span>
+<span class="nc" id="L90">        return cssReference;</span>
     }
 
+    /**
+     * Sets the CSS Reference
+     *
+     * @param cssReference
+     */
     @Override
     public void setCssReference(CSSReference cssReference)
     {
-<span class="nc" id="L67">        this.cssReference = cssReference;</span>
-<span class="nc" id="L68">    }</span>
+<span class="nc" id="L101">        this.cssReference = cssReference;</span>
+<span class="nc" id="L102">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

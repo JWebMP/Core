@@ -29,8 +29,13 @@ public class JQUISortable extends Div<JQUISortableChildren, NoAttributes, JQUISo
 {
 
     private static final long serialVersionUID = 1L;
-
+    /**
+     * The actual list
+     */
     private List list;
+    /**
+     * The sortable feature
+     */
     private JQUISortableFeature feature;
 
     /**
@@ -43,7 +48,12 @@ public class JQUISortable extends Div<JQUISortableChildren, NoAttributes, JQUISo
         list.addFeature(getFeature());
     }
 
-    public JQUISortableFeature getFeature()
+    /**
+     * Returns the feature associated with the sortable feature
+     *
+     * @return
+     */
+    public final JQUISortableFeature getFeature()
     {
         if (feature == null)
         {
@@ -52,6 +62,12 @@ public class JQUISortable extends Div<JQUISortableChildren, NoAttributes, JQUISo
         return feature;
     }
 
+    /**
+     * Returns the sortable options
+     *
+     * @return
+     */
+    @Override
     public JQUISortableOptions getOptions()
     {
         return getFeature().getOptions();

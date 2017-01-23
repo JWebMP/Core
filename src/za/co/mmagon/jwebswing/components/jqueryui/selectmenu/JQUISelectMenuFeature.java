@@ -32,13 +32,17 @@ public class JQUISelectMenuFeature extends Feature<JQUISelectMenuOptions, JQUISe
 {
 
     private static final long serialVersionUID = 1L;
-
+    /**
+     * The select menu's component
+     */
     private final Component selectMenu;
+    /**
+     * The options associated
+     */
     private JQUISelectMenuOptions options;
 
     /**
-     * Constructs a new Select Menu
-     * Add Options or Option Groups to configure
+     * Constructs a new Select Menu Add Options or Option Groups to configure
      *
      * @param selectMenu Because off css classing
      */

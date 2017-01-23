@@ -32,47 +32,51 @@ public class JQUISelectMenuFeature extends Feature&lt;JQUISelectMenuOptions, JQU
 {
 
     private static final long serialVersionUID = 1L;
-
+    /**
+     * The select menu's component
+     */
     private final Component selectMenu;
+    /**
+     * The options associated
+     */
     private JQUISelectMenuOptions options;
 
     /**
-     * Constructs a new Select Menu
-     * Add Options or Option Groups to configure
+     * Constructs a new Select Menu Add Options or Option Groups to configure
      *
      * @param selectMenu Because off css classing
      */
     public JQUISelectMenuFeature(Component selectMenu)
     {
-<span class="nc" id="L47">        super(&quot;JWSelectMenuFeature&quot;);</span>
-<span class="nc" id="L48">        this.selectMenu = selectMenu;</span>
+<span class="nc" id="L51">        super(&quot;JWSelectMenuFeature&quot;);</span>
+<span class="nc" id="L52">        this.selectMenu = selectMenu;</span>
 
-<span class="nc" id="L50">        getJavascriptReferences().add(JQUIReferencePool.Core.getJavaScriptReference());</span>
-<span class="nc" id="L51">        getJavascriptReferences().add(JQUIReferencePool.Widget.getJavaScriptReference());</span>
-<span class="nc" id="L52">        getCssReferences().add(JQUIReferencePool.Core.getCssReference());</span>
-<span class="nc" id="L53">        getCssReferences().add(JQUIReferencePool.Widget.getCssReference());</span>
+<span class="nc" id="L54">        getJavascriptReferences().add(JQUIReferencePool.Core.getJavaScriptReference());</span>
+<span class="nc" id="L55">        getJavascriptReferences().add(JQUIReferencePool.Widget.getJavaScriptReference());</span>
+<span class="nc" id="L56">        getCssReferences().add(JQUIReferencePool.Core.getCssReference());</span>
+<span class="nc" id="L57">        getCssReferences().add(JQUIReferencePool.Widget.getCssReference());</span>
 
-<span class="nc" id="L55">        getJavascriptReferences().add(JQUIReferencePool.Menu.getJavaScriptReference());</span>
-<span class="nc" id="L56">        getJavascriptReferences().add(JQUIReferencePool.SelectMenu.getJavaScriptReference());</span>
-<span class="nc" id="L57">        getJavascriptReferences().add(JQUIReferencePool.SelectMenuIcons.getJavaScriptReference());</span>
-<span class="nc" id="L58">        getCssReferences().add(JQUIReferencePool.SelectMenu.getCssReference());</span>
-<span class="nc" id="L59">        getCssReferences().add(JQUIReferencePool.Menu.getCssReference());</span>
-<span class="nc" id="L60">    }</span>
+<span class="nc" id="L59">        getJavascriptReferences().add(JQUIReferencePool.Menu.getJavaScriptReference());</span>
+<span class="nc" id="L60">        getJavascriptReferences().add(JQUIReferencePool.SelectMenu.getJavaScriptReference());</span>
+<span class="nc" id="L61">        getJavascriptReferences().add(JQUIReferencePool.SelectMenuIcons.getJavaScriptReference());</span>
+<span class="nc" id="L62">        getCssReferences().add(JQUIReferencePool.SelectMenu.getCssReference());</span>
+<span class="nc" id="L63">        getCssReferences().add(JQUIReferencePool.Menu.getCssReference());</span>
+<span class="nc" id="L64">    }</span>
 
     @Override
     public void assignFunctionsToComponent()
     {
-<span class="nc" id="L65">        addQuery(selectMenu.getJQueryID() + &quot;selectmenu(&quot; + getOptions() + &quot;);&quot; + getNewLine());</span>
-<span class="nc" id="L66">    }</span>
+<span class="nc" id="L69">        addQuery(selectMenu.getJQueryID() + &quot;selectmenu(&quot; + getOptions() + &quot;);&quot; + getNewLine());</span>
+<span class="nc" id="L70">    }</span>
 
     @Override
     public JQUISelectMenuOptions getOptions()
     {
-<span class="nc bnc" id="L71" title="All 2 branches missed.">        if (options == null)</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        if (options == null)</span>
         {
-<span class="nc" id="L73">            options = new JQUISelectMenuOptions();</span>
+<span class="nc" id="L77">            options = new JQUISelectMenuOptions();</span>
         }
-<span class="nc" id="L75">        return options;</span>
+<span class="nc" id="L79">        return options;</span>
     }
 
 }

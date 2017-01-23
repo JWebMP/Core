@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.awt.event.FocusEvent;
 import javafx.scene.input.DragEvent;
 import javax.swing.event.ChangeEvent;
-import za.co.mmagon.jwebswing.events.activate.Activatedapter;
+import za.co.mmagon.jwebswing.events.activate.ActivateAdapter;
 import za.co.mmagon.jwebswing.events.beforeactivate.BeforeActivateAdapter;
 import za.co.mmagon.jwebswing.events.beforeclose.BeforeCloseAdapter;
 import za.co.mmagon.jwebswing.events.beforeload.BeforeLoadAdapter;
@@ -33,7 +33,7 @@ import za.co.mmagon.jwebswing.events.remove.Removedapter;
 import za.co.mmagon.jwebswing.events.resize.ResizeAdapter;
 import za.co.mmagon.jwebswing.events.resizestart.ResizeStartAdapter;
 import za.co.mmagon.jwebswing.events.resizestop.ResizeStopAdapter;
-import za.co.mmagon.jwebswing.events.response.Responsedapter;
+import za.co.mmagon.jwebswing.events.response.ResponseAdapter;
 import za.co.mmagon.jwebswing.events.rightclick.RightClickAdapter;
 import za.co.mmagon.jwebswing.events.search.SearchAdapter;
 import za.co.mmagon.jwebswing.events.selected.SelectedAdapter;
@@ -160,7 +160,7 @@ public enum EventTypes implements Comparable<EventTypes>
      * If the accordion was previously collapsed, ui.oldHeader and ui.oldPanel will be empty jQuery objects.
      * If the accordion is collapsing, ui.newHeader and ui.newPanel will be empty jQuery objects.
      */
-    activate(Activatedapter.class, null),
+    activate(ActivateAdapter.class, null),
     /**
      * Triggered directly before a panel is activated. Can be canceled to prevent the panel from activating.
      * If the accordion is currently collapsed, ui.oldHeader and ui.oldPanel will be empty jQuery objects.
@@ -202,7 +202,7 @@ public enum EventTypes implements Comparable<EventTypes>
      * Useful for local manipulation of suggestion data, where a custom source option callback is not required.
      * This event is always triggered when a search completes, even if the menu will not be shown because there are no results or the Autocomplete is disabled.
      */
-    response(Responsedapter.class, null),
+    response(ResponseAdapter.class, null),
     /**
      * Triggered before a search is performed, after minLength and delay are met.
      * If canceled, then no request will be started and no items suggested.

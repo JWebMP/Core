@@ -19,7 +19,6 @@ package za.co.mmagon.jwebswing.base.servlets;
 import com.armineasy.injection.GuiceContext;
 import com.armineasy.injection.filters.CorsAllowedFilter;
 import java.io.IOException;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Singleton;
@@ -39,10 +38,10 @@ import za.co.mmagon.logger.LogFactory;
  * @author GedMarc
  */
 @Singleton
-<span class="nc" id="L42">public class CordovaServlet extends JWDefaultServlet</span>
+<span class="nc" id="L41">public class CordovaServlet extends JWDefaultServlet</span>
 {
 
-<span class="nc" id="L45">    private static final Logger LOG = LogFactory.getInstance().getLogger(&quot;CordovaServlet&quot;);</span>
+<span class="nc" id="L44">    private static final Logger LOG = LogFactory.getInstance().getLogger(&quot;CordovaServlet&quot;);</span>
     private static final long serialVersionUID = 1L;
 
     /**
@@ -59,41 +58,40 @@ import za.co.mmagon.logger.LogFactory;
     {
         try
         {
-<span class="nc" id="L62">            Page p = GuiceContext.Injector().getInstance(Page.class);</span>
-<span class="nc bnc" id="L63" title="All 2 branches missed.">            if (p == null)</span>
+<span class="nc" id="L61">            Page p = GuiceContext.Injector().getInstance(Page.class);</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">            if (p == null)</span>
             {
-<span class="nc" id="L65">                throw new MissingComponentException(&quot;Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods &quot;);</span>
+<span class="nc" id="L64">                throw new MissingComponentException(&quot;Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods &quot;);</span>
             }
 
-<span class="nc" id="L68">            JavascriptReference cordovaReference = new JavascriptReference(&quot;CordovaDefaultJavascript&quot;, 1.0, &quot;cordova.js&quot;);</span>
+<span class="nc" id="L67">            JavascriptReference cordovaReference = new JavascriptReference(&quot;CordovaDefaultJavascript&quot;, 1.0, &quot;cordova.js&quot;);</span>
 
-<span class="nc" id="L70">            p.getPageFields().setBase((Base) new Base().addAttribute(BaseAttributes.HRef, request.getRequestURL().toString().replaceAll(&quot;jwcordova&quot;, &quot;&quot;)));</span>
-<span class="nc" id="L71">            p.getBody().getJavascriptReferences().add(cordovaReference);</span>
-<span class="nc" id="L72">            p.getOptions().setScriptsInHead(true);</span>
+<span class="nc" id="L69">            p.getPageFields().setBase((Base) new Base().addAttribute(BaseAttributes.HRef, request.getRequestURL().toString().replaceAll(&quot;jwcordova&quot;, &quot;&quot;)));</span>
+<span class="nc" id="L70">            p.getBody().getJavascriptReferences().add(cordovaReference);</span>
+<span class="nc" id="L71">            p.getOptions().setScriptsInHead(true);</span>
 
-<span class="nc" id="L74">            p.toString(true);//render</span>
+<span class="nc" id="L73">            p.toString(true);//render</span>
 
-<span class="nc" id="L76">            AjaxResponse ajaxResponse = new AjaxResponse();</span>
-<span class="nc" id="L77">            ajaxResponse.addComponent(p.getHead());</span>
-<span class="nc" id="L78">            ajaxResponse.addComponent(p.getBody());</span>
+<span class="nc" id="L75">            AjaxResponse ajaxResponse = new AjaxResponse();</span>
+<span class="nc" id="L76">            ajaxResponse.addComponent(p.getHead());</span>
+<span class="nc" id="L77">            ajaxResponse.addComponent(p.getBody());</span>
 
-<span class="nc" id="L80">            String output = ajaxResponse.toString();</span>
+<span class="nc" id="L79">            String output = ajaxResponse.toString();</span>
 
-<span class="nc" id="L82">            Date dataTransferDate = new Date();</span>
-<span class="nc" id="L83">            response.setContentType(&quot;application/json;charset=UTF-8&quot;);</span>
-<span class="nc" id="L84">            response.setCharacterEncoding(&quot;UTF-8&quot;);</span>
-<span class="nc" id="L85">            response.setHeader(&quot;Access-Control-Allow-Origin&quot;, CorsAllowedFilter.allowedLocations);</span>
-<span class="nc" id="L86">            response.setHeader(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);</span>
-<span class="nc" id="L87">            response.setHeader(&quot;Access-Control-Allow-Methods&quot;, &quot;GET, POST&quot;);</span>
-<span class="nc" id="L88">            response.setHeader(&quot;Access-Control-Allow-Headers&quot;, &quot;Content-Type, Accept&quot;);</span>
-<span class="nc" id="L89">            response.getWriter().write(output);</span>
+<span class="nc" id="L81">            response.setContentType(&quot;application/json;charset=UTF-8&quot;);</span>
+<span class="nc" id="L82">            response.setCharacterEncoding(&quot;UTF-8&quot;);</span>
+<span class="nc" id="L83">            response.setHeader(&quot;Access-Control-Allow-Origin&quot;, CorsAllowedFilter.allowedLocations);</span>
+<span class="nc" id="L84">            response.setHeader(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);</span>
+<span class="nc" id="L85">            response.setHeader(&quot;Access-Control-Allow-Methods&quot;, &quot;GET, POST&quot;);</span>
+<span class="nc" id="L86">            response.setHeader(&quot;Access-Control-Allow-Headers&quot;, &quot;Content-Type, Accept&quot;);</span>
+<span class="nc" id="L87">            response.getWriter().write(output);</span>
         }
-<span class="nc" id="L91">        catch (MissingComponentException e)</span>
+<span class="nc" id="L89">        catch (MissingComponentException e)</span>
         {
-<span class="nc" id="L93">            LOG.log(Level.SEVERE, &quot;Page must exist&quot;, e);</span>
-<span class="nc" id="L94">        }</span>
+<span class="nc" id="L91">            LOG.log(Level.SEVERE, &quot;Page must exist&quot;, e);</span>
+<span class="nc" id="L92">        }</span>
 
-<span class="nc" id="L96">    }</span>
+<span class="nc" id="L94">    }</span>
 
     /**
      * Handles the HTTP &lt;code&gt;GET&lt;/code&gt; method.
@@ -110,14 +108,14 @@ import za.co.mmagon.logger.LogFactory;
     {
         try
         {
-<span class="nc" id="L113">            super.doGet(request, response); //Checks for the page existance</span>
-<span class="nc" id="L114">            processRequest(request, response);</span>
+<span class="nc" id="L111">            super.doGet(request, response); //Checks for the page existance</span>
+<span class="nc" id="L112">            processRequest(request, response);</span>
         }
-<span class="nc" id="L116">        catch (IOException | ServletException e)</span>
+<span class="nc" id="L114">        catch (IOException | ServletException e)</span>
         {
-<span class="nc" id="L118">            LOG.log(Level.SEVERE, &quot;Do Get in CSS Servlet&quot;, e);</span>
-<span class="nc" id="L119">        }</span>
-<span class="nc" id="L120">    }</span>
+<span class="nc" id="L116">            LOG.log(Level.SEVERE, &quot;Do Get in CSS Servlet&quot;, e);</span>
+<span class="nc" id="L117">        }</span>
+<span class="nc" id="L118">    }</span>
 
     /**
      * Handles the HTTP &lt;code&gt;GET&lt;/code&gt; method.
@@ -134,13 +132,13 @@ import za.co.mmagon.logger.LogFactory;
     {
         try
         {
-<span class="nc" id="L137">            super.doGet(request, response); //Checks for the page existance</span>
-<span class="nc" id="L138">            processRequest(request, response);</span>
+<span class="nc" id="L135">            super.doGet(request, response); //Checks for the page existance</span>
+<span class="nc" id="L136">            processRequest(request, response);</span>
         }
-<span class="nc" id="L140">        catch (IOException | ServletException e)</span>
+<span class="nc" id="L138">        catch (IOException | ServletException e)</span>
         {
-<span class="nc" id="L142">            LOG.log(Level.SEVERE, &quot;Do Post in CSS Servlet&quot;, e);</span>
-<span class="nc" id="L143">        }</span>
-<span class="nc" id="L144">    }</span>
+<span class="nc" id="L140">            LOG.log(Level.SEVERE, &quot;Do Post in CSS Servlet&quot;, e);</span>
+<span class="nc" id="L141">        }</span>
+<span class="nc" id="L142">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

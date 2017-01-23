@@ -31,15 +31,19 @@ import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 public class JQUIProgressBar extends Div&lt;JQUIProgressBarChildren, NoAttributes, JQUIProgressBarFeatures, JQUIProgressBarEvents, JQUIProgressBar&gt;
 {
 
+    private static final long serialVersionUID = 1L;
+    /**
+     * The feature for the progress bar
+     */
     private JQUIProgressBarFeature feature;
 
     /**
      *
      */
     public JQUIProgressBar()
-<span class="nc" id="L40">    {</span>
-<span class="nc" id="L41">        addFeature(feature = new JQUIProgressBarFeature(this));</span>
-<span class="nc" id="L42">    }</span>
+<span class="nc" id="L44">    {</span>
+<span class="nc" id="L45">        addFeature(feature = new JQUIProgressBarFeature(this));</span>
+<span class="nc" id="L46">    }</span>
 
     /**
      * Returns the feature for this progress bar
@@ -48,11 +52,11 @@ public class JQUIProgressBar extends Div&lt;JQUIProgressBarChildren, NoAttribute
      */
     public JQUIProgressBarFeature getFeature()
     {
-<span class="nc bnc" id="L51" title="All 2 branches missed.">        if (feature == null)</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        if (feature == null)</span>
         {
-<span class="nc" id="L53">            feature = new JQUIProgressBarFeature(this);</span>
+<span class="nc" id="L57">            feature = new JQUIProgressBarFeature(this);</span>
         }
-<span class="nc" id="L55">        return feature;</span>
+<span class="nc" id="L59">        return feature;</span>
     }
 
     /**
@@ -60,9 +64,10 @@ public class JQUIProgressBar extends Div&lt;JQUIProgressBarChildren, NoAttribute
      * &lt;p&gt;
      * @return
      */
+    @Override
     public JQUIProgressBarOptions getOptions()
     {
-<span class="nc" id="L65">        return getFeature().getOptions();</span>
+<span class="nc" id="L70">        return getFeature().getOptions();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

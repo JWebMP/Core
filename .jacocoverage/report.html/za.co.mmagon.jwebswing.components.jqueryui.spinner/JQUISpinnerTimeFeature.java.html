@@ -32,8 +32,13 @@ public class JQUISpinnerTimeFeature extends Feature&lt;JQUISpinnerOptions, JQUIS
 {
 
     private static final long serialVersionUID = 1L;
-
+    /**
+     * The component for the time feature
+     */
     private final Component selectMenu;
+    /**
+     * The options for the time spinner
+     */
     private JQUISpinnerOptions options;
 
     /**
@@ -43,28 +48,28 @@ public class JQUISpinnerTimeFeature extends Feature&lt;JQUISpinnerOptions, JQUIS
      */
     public JQUISpinnerTimeFeature(Component selectMenu)
     {
-<span class="nc" id="L46">        super(&quot;JWSpinnerTimeFeature&quot;);</span>
-<span class="nc" id="L47">        this.selectMenu = selectMenu;</span>
+<span class="nc" id="L51">        super(&quot;JWSpinnerTimeFeature&quot;);</span>
+<span class="nc" id="L52">        this.selectMenu = selectMenu;</span>
 
-<span class="nc" id="L49">        getJavascriptReferences().add(JQUIReferencePool.Core.getJavaScriptReference());</span>
-<span class="nc" id="L50">        getJavascriptReferences().add(JQUIReferencePool.Widget.getJavaScriptReference());</span>
-<span class="nc" id="L51">        getCssReferences().add(JQUIReferencePool.Core.getCssReference());</span>
-<span class="nc" id="L52">        getCssReferences().add(JQUIReferencePool.Widget.getCssReference());</span>
+<span class="nc" id="L54">        getJavascriptReferences().add(JQUIReferencePool.Core.getJavaScriptReference());</span>
+<span class="nc" id="L55">        getJavascriptReferences().add(JQUIReferencePool.Widget.getJavaScriptReference());</span>
+<span class="nc" id="L56">        getCssReferences().add(JQUIReferencePool.Core.getCssReference());</span>
+<span class="nc" id="L57">        getCssReferences().add(JQUIReferencePool.Widget.getCssReference());</span>
 
-<span class="nc" id="L54">        getJavascriptReferences().add(JQUIReferencePool.Button.getJavaScriptReference());</span>
-<span class="nc" id="L55">        getJavascriptReferences().add(JQUIReferencePool.Spinner.getJavaScriptReference());</span>
-<span class="nc" id="L56">        getJavascriptReferences().add(JQUIReferencePool.SpinnerTime.getJavaScriptReference());</span>
+<span class="nc" id="L59">        getJavascriptReferences().add(JQUIReferencePool.Button.getJavaScriptReference());</span>
+<span class="nc" id="L60">        getJavascriptReferences().add(JQUIReferencePool.Spinner.getJavaScriptReference());</span>
+<span class="nc" id="L61">        getJavascriptReferences().add(JQUIReferencePool.SpinnerTime.getJavaScriptReference());</span>
 
-<span class="nc" id="L58">        getCssReferences().add(JQUIReferencePool.Button.getCssReference());</span>
-<span class="nc" id="L59">        getCssReferences().add(JQUIReferencePool.Spinner.getCssReference());</span>
+<span class="nc" id="L63">        getCssReferences().add(JQUIReferencePool.Button.getCssReference());</span>
+<span class="nc" id="L64">        getCssReferences().add(JQUIReferencePool.Spinner.getCssReference());</span>
 
-<span class="nc" id="L61">    }</span>
+<span class="nc" id="L66">    }</span>
 
     @Override
     public void assignFunctionsToComponent()
     {
-<span class="nc" id="L66">        addQuery(selectMenu.getJQueryID() + &quot;timespinner(&quot; + getOptions() + &quot;);&quot; + getNewLine());</span>
-<span class="nc" id="L67">    }</span>
+<span class="nc" id="L71">        addQuery(selectMenu.getJQueryID() + &quot;timespinner(&quot; + getOptions() + &quot;);&quot; + getNewLine());</span>
+<span class="nc" id="L72">    }</span>
 
     /**
      * Returns the options associated with the Spinner Object
@@ -74,11 +79,11 @@ public class JQUISpinnerTimeFeature extends Feature&lt;JQUISpinnerOptions, JQUIS
     @Override
     public JQUISpinnerOptions getOptions()
     {
-<span class="nc bnc" id="L77" title="All 2 branches missed.">        if (options == null)</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        if (options == null)</span>
         {
-<span class="nc" id="L79">            options = new JQUISpinnerOptions();</span>
+<span class="nc" id="L84">            options = new JQUISpinnerOptions();</span>
         }
-<span class="nc" id="L81">        return options;</span>
+<span class="nc" id="L86">        return options;</span>
     }
 
 }

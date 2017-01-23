@@ -205,13 +205,13 @@ public class BSCarousel extends Div&lt;BSCarouselChildren, BSCarouselAttributes,
 <span class="fc" id="L205">        this.previousLink = previousLink;</span>
 <span class="pc bpc" id="L206" title="1 of 2 branches missed.">        if (this.previousLink != null)</span>
         {
-            
+
 <span class="fc" id="L209">            previousLink.addClass(&quot;left&quot;);</span>
 <span class="fc" id="L210">            previousLink.addClass(BSComponentCarouselOptions.Carousel_Control);</span>
-            
-<span class="fc" id="L212">            previousLink.addAttribute(&quot;role&quot;,&quot;button&quot;);</span>
-<span class="fc" id="L213">            previousLink.addAttribute(&quot;data-slide&quot;,&quot;prev&quot;);</span>
-            
+
+<span class="fc" id="L212">            previousLink.addAttribute(&quot;role&quot;, &quot;button&quot;);</span>
+<span class="fc" id="L213">            previousLink.addAttribute(&quot;data-slide&quot;, &quot;prev&quot;);</span>
+
 <span class="fc" id="L215">            Span iconSpan = new Span();</span>
 <span class="fc" id="L216">            iconSpan.addAttribute(GlobalAttributes.Aria_Hidden, &quot;true&quot;);</span>
 <span class="fc" id="L217">            iconSpan.addClass(&quot;icon-next&quot;);</span>
@@ -251,10 +251,10 @@ public class BSCarousel extends Div&lt;BSCarouselChildren, BSCarouselAttributes,
         {
 <span class="fc" id="L252">            nextLink.addClass(&quot;right&quot;);</span>
 <span class="fc" id="L253">            nextLink.addClass(BSComponentCarouselOptions.Carousel_Control);</span>
-            
-<span class="fc" id="L255">            nextLink.addAttribute(&quot;role&quot;,&quot;button&quot;);</span>
-<span class="fc" id="L256">            nextLink.addAttribute(&quot;data-slide&quot;,&quot;next&quot;);</span>
-            
+
+<span class="fc" id="L255">            nextLink.addAttribute(&quot;role&quot;, &quot;button&quot;);</span>
+<span class="fc" id="L256">            nextLink.addAttribute(&quot;data-slide&quot;, &quot;next&quot;);</span>
+
 <span class="fc" id="L258">            Span iconSpan = new Span();</span>
 <span class="fc" id="L259">            iconSpan.addAttribute(GlobalAttributes.Aria_Hidden, &quot;true&quot;);</span>
 <span class="fc" id="L260">            iconSpan.addClass(&quot;icon-next&quot;);</span>
@@ -278,28 +278,18 @@ public class BSCarousel extends Div&lt;BSCarouselChildren, BSCarouselAttributes,
 <span class="fc" id="L278">            add(getCarouselSlides());</span>
 
             BSCarouselItem activeItem;
-            try
-            {
-<span class="fc" id="L283">                activeItem = getSlides().get(getActiveSlide());</span>
-            }
-<span class="nc" id="L285">            catch (IndexOutOfBoundsException e)</span>
-            {
-<span class="nc bnc" id="L287" title="All 2 branches missed.">                if (getSlides().size() &gt; 0)</span>
-                {
-<span class="nc" id="L289">                    activeItem = getSlides().get(0);</span>
-                }
-                else
-                {
-<span class="nc" id="L293">                    return;</span>
-                }
-<span class="fc" id="L295">            }</span>
-<span class="fc" id="L296">            activeItem.addClass(BSComponentDefaultOptions.Active);</span>
+<span class="pc bpc" id="L281" title="1 of 2 branches missed.">            if (!getSlides().isEmpty())</span>
 
-<span class="fc" id="L298">            add(getPreviousLink());</span>
-<span class="fc" id="L299">            add(getNextLink());</span>
+            {
+<span class="fc" id="L284">                activeItem = getSlides().get(getActiveSlide());</span>
+<span class="fc" id="L285">                activeItem.addClass(BSComponentDefaultOptions.Active);</span>
+            }
+
+<span class="fc" id="L288">            add(getPreviousLink());</span>
+<span class="fc" id="L289">            add(getNextLink());</span>
 
         }
-<span class="fc" id="L302">        super.init();</span>
-<span class="fc" id="L303">    }</span>
+<span class="fc" id="L292">        super.init();</span>
+<span class="fc" id="L293">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

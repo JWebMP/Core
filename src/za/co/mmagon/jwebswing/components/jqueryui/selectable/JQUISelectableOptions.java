@@ -21,7 +21,6 @@ import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.interfaces.CssClass;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
 /**
  *
@@ -66,7 +65,7 @@ public class JQUISelectableOptions extends JavaScriptPart
      */
     public JQUISelectableOptions()
     {
-
+        //Nothing needed here
     }
 
     /**
@@ -160,11 +159,5 @@ public class JQUISelectableOptions extends JavaScriptPart
     public void setDistance(Integer distance)
     {
         this.distance = distance;
-    }
-
-    @Override
-    public JavascriptPartType getJavascriptType()
-    {
-        return JavascriptPartType.Javascript;
     }
 }

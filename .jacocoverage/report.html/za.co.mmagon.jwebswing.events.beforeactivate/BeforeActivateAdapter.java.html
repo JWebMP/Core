@@ -7,6 +7,8 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.accordion.JQUIAccordionEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.tabs.JQUITabsEvents;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
 
@@ -16,14 +18,17 @@ import za.co.mmagon.logger.LogFactory;
  * @author Marc Magon
  */
 public abstract class BeforeActivateAdapter extends Event
-        implements GlobalEvents
+        implements GlobalEvents, JQUIAccordionEvents, JQUITabsEvents
 {
 
     /**
      * Logger for the Component
      */
-<span class="nc" id="L25">    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger(&quot;BeforeActivateEvent&quot;);</span>
+<span class="nc" id="L27">    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger(&quot;BeforeActivateEvent&quot;);</span>
     private static final long serialVersionUID = 1L;
+    /**
+     * The directive for this adapter
+     */
     private BeforeActivateDirective directive;
 
     /**
@@ -33,9 +38,9 @@ public abstract class BeforeActivateAdapter extends Event
      */
     public BeforeActivateAdapter(Component component)
     {
-<span class="nc" id="L36">        super(EventTypes.beforeActivate, component);</span>
+<span class="nc" id="L41">        super(EventTypes.beforeActivate, component);</span>
 
-<span class="nc" id="L38">    }</span>
+<span class="nc" id="L43">    }</span>
 
     /**
      * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
@@ -43,15 +48,15 @@ public abstract class BeforeActivateAdapter extends Event
     @Override
     public void preConfigure()
     {
-<span class="nc bnc" id="L46" title="All 2 branches missed.">        if (!isConfigured())</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        if (!isConfigured())</span>
         {
-<span class="nc" id="L48">            getComponent().getPage().getOptions().setjQueryEnabled(true);</span>
-<span class="nc" id="L49">            getComponent().getPage().getOptions().setAngularEnabled(true);</span>
-<span class="nc" id="L50">            getComponent().getAngularDirectives().add(getDirective());</span>
-<span class="nc" id="L51">            component.addAttribute(AngularAttributes.ngBeforeActivate, &quot;perform($event,&quot; + renderVariables() + &quot;);&quot;);</span>
+<span class="nc" id="L53">            getComponent().getPage().getOptions().setjQueryEnabled(true);</span>
+<span class="nc" id="L54">            getComponent().getPage().getOptions().setAngularEnabled(true);</span>
+<span class="nc" id="L55">            getComponent().getAngularDirectives().add(getDirective());</span>
+<span class="nc" id="L56">            component.addAttribute(AngularAttributes.ngBeforeActivate, &quot;perform($event,&quot; + renderVariables() + &quot;);&quot;);</span>
         }
-<span class="nc" id="L53">        super.preConfigure();</span>
-<span class="nc" id="L54">    }</span>
+<span class="nc" id="L58">        super.preConfigure();</span>
+<span class="nc" id="L59">    }</span>
 
     /**
      * Returns the angular directive associated with the right click event
@@ -60,11 +65,11 @@ public abstract class BeforeActivateAdapter extends Event
      */
     public BeforeActivateDirective getDirective()
     {
-<span class="nc bnc" id="L63" title="All 2 branches missed.">        if (directive == null)</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        if (directive == null)</span>
         {
-<span class="nc" id="L65">            directive = new BeforeActivateDirective(getComponent().getPage().getAngular());</span>
+<span class="nc" id="L70">            directive = new BeforeActivateDirective(getComponent().getPage().getAngular());</span>
         }
-<span class="nc" id="L67">        return directive;</span>
+<span class="nc" id="L72">        return directive;</span>
     }
 
     /**
@@ -74,8 +79,8 @@ public abstract class BeforeActivateAdapter extends Event
      */
     public void setDirective(BeforeActivateDirective directive)
     {
-<span class="nc" id="L77">        this.directive = directive;</span>
-<span class="nc" id="L78">    }</span>
+<span class="nc" id="L82">        this.directive = directive;</span>
+<span class="nc" id="L83">    }</span>
 
     /**
      * Triggers on Click
@@ -90,13 +95,13 @@ public abstract class BeforeActivateAdapter extends Event
     {
         try
         {
-<span class="nc" id="L93">            onBeforeActivate(call, response);</span>
+<span class="nc" id="L98">            onBeforeActivate(call, response);</span>
         }
-<span class="nc" id="L95">        catch (Exception e)</span>
+<span class="nc" id="L100">        catch (Exception e)</span>
         {
-<span class="nc" id="L97">            LOG.log(Level.SEVERE, &quot;Error In Firing Event&quot;, e);</span>
-<span class="nc" id="L98">        }</span>
-<span class="nc" id="L99">    }</span>
+<span class="nc" id="L102">            LOG.log(Level.SEVERE, &quot;Error In Firing Event&quot;, e);</span>
+<span class="nc" id="L103">        }</span>
+<span class="nc" id="L104">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

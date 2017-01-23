@@ -1,8 +1,6 @@
 package za.co.mmagon.jwebswing.components.jqueryui.tabs;
 
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.List;
-import za.co.mmagon.jwebswing.base.html.ListItem;
+import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 
 /**
@@ -26,6 +24,9 @@ public class JQUITab extends Div<JQUITabsChildren, NoAttributes, JQUITabsFeature
      */
     private List unorderedList;
 
+    /**
+     * Constructs a new JQUI Tab
+     */
     public JQUITab()
     {
         super();
@@ -51,6 +52,8 @@ public class JQUITab extends Div<JQUITabsChildren, NoAttributes, JQUITabsFeature
      * Adds a tab to the collection
      * <p>
      * @param tab
+     *
+     * @return
      */
     public Tab addTab(Tab tab)
     {
@@ -69,7 +72,7 @@ public class JQUITab extends Div<JQUITabsChildren, NoAttributes, JQUITabsFeature
      *
      * @return
      */
-    public List getUnorderedList()
+    public final List getUnorderedList()
     {
         if (unorderedList == null)
         {

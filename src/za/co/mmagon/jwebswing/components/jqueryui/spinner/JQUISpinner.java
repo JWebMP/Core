@@ -16,9 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqueryui.spinner;
 
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.Input;
-import za.co.mmagon.jwebswing.base.html.Label;
+import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 import za.co.mmagon.jwebswing.components.globalize.cultures.GlobalizeCultures;
 
@@ -33,10 +31,15 @@ import za.co.mmagon.jwebswing.components.globalize.cultures.GlobalizeCultures;
 public final class JQUISpinner extends Div<JQUISpinnerChildren, NoAttributes, JQUISpinnerFeatures, JQUISpinnerEvents, JQUISpinner>
 {
 
-    private String headerText = "JQuery UI Spinner Demo";
-
-    private Input input;
     private static final long serialVersionUID = 1L;
+    /**
+     * The header text for the spinner
+     */
+    private String headerText = "JQuery UI Spinner Demo";
+    /**
+     * The actual input
+     */
+    private Input input;
 
     /**
      * The pre-child labour
@@ -101,6 +104,7 @@ public final class JQUISpinner extends Div<JQUISpinnerChildren, NoAttributes, JQ
      * <p>
      * @return
      */
+    @Override
     public JQUISpinnerOptions getOptions()
     {
         return feature.getOptions();

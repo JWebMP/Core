@@ -7,6 +7,8 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.dialog.JQUIDialogEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.draggable.JQUIDraggableEvents;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
 
@@ -16,13 +18,13 @@ import za.co.mmagon.logger.LogFactory;
  * @author Marc Magon
  */
 public abstract class DragAdapter extends Event
-        implements GlobalEvents
+        implements GlobalEvents, JQUIDialogEvents, JQUIDraggableEvents
 {
 
     /**
      * Logger for the Component
      */
-<span class="nc" id="L25">    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger(&quot;DragEvent&quot;);</span>
+<span class="nc" id="L27">    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger(&quot;DragEvent&quot;);</span>
     private static final long serialVersionUID = 1L;
     private DragDirective directive;
 
@@ -33,9 +35,9 @@ public abstract class DragAdapter extends Event
      */
     public DragAdapter(Component component)
     {
-<span class="nc" id="L36">        super(EventTypes.drag, component);</span>
+<span class="nc" id="L38">        super(EventTypes.drag, component);</span>
 
-<span class="nc" id="L38">    }</span>
+<span class="nc" id="L40">    }</span>
 
     /**
      * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
@@ -43,15 +45,15 @@ public abstract class DragAdapter extends Event
     @Override
     public void preConfigure()
     {
-<span class="nc bnc" id="L46" title="All 2 branches missed.">        if (!isConfigured())</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        if (!isConfigured())</span>
         {
-<span class="nc" id="L48">            getComponent().getPage().getOptions().setjQueryEnabled(true);</span>
-<span class="nc" id="L49">            getComponent().getPage().getOptions().setAngularEnabled(true);</span>
-<span class="nc" id="L50">            getComponent().getAngularDirectives().add(getDirective());</span>
-<span class="nc" id="L51">            component.addAttribute(AngularAttributes.ngDrag, &quot;perform($event,&quot; + renderVariables() + &quot;);&quot;);</span>
+<span class="nc" id="L50">            getComponent().getPage().getOptions().setjQueryEnabled(true);</span>
+<span class="nc" id="L51">            getComponent().getPage().getOptions().setAngularEnabled(true);</span>
+<span class="nc" id="L52">            getComponent().getAngularDirectives().add(getDirective());</span>
+<span class="nc" id="L53">            component.addAttribute(AngularAttributes.ngDrag, &quot;perform($event,&quot; + renderVariables() + &quot;);&quot;);</span>
         }
-<span class="nc" id="L53">        super.preConfigure();</span>
-<span class="nc" id="L54">    }</span>
+<span class="nc" id="L55">        super.preConfigure();</span>
+<span class="nc" id="L56">    }</span>
 
     /**
      * Returns the angular directive associated with the right click event
@@ -60,11 +62,11 @@ public abstract class DragAdapter extends Event
      */
     public DragDirective getDirective()
     {
-<span class="nc bnc" id="L63" title="All 2 branches missed.">        if (directive == null)</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (directive == null)</span>
         {
-<span class="nc" id="L65">            directive = new DragDirective(getComponent().getPage().getAngular());</span>
+<span class="nc" id="L67">            directive = new DragDirective(getComponent().getPage().getAngular());</span>
         }
-<span class="nc" id="L67">        return directive;</span>
+<span class="nc" id="L69">        return directive;</span>
     }
 
     /**
@@ -74,8 +76,8 @@ public abstract class DragAdapter extends Event
      */
     public void setDirective(DragDirective directive)
     {
-<span class="nc" id="L77">        this.directive = directive;</span>
-<span class="nc" id="L78">    }</span>
+<span class="nc" id="L79">        this.directive = directive;</span>
+<span class="nc" id="L80">    }</span>
 
     /**
      * Triggers on Click
@@ -90,13 +92,13 @@ public abstract class DragAdapter extends Event
     {
         try
         {
-<span class="nc" id="L93">            onDrag(call, response);</span>
+<span class="nc" id="L95">            onDrag(call, response);</span>
         }
-<span class="nc" id="L95">        catch (Exception e)</span>
+<span class="nc" id="L97">        catch (Exception e)</span>
         {
-<span class="nc" id="L97">            LOG.log(Level.SEVERE,&quot;Error In Firing Event&quot;, e);</span>
-<span class="nc" id="L98">        }</span>
-<span class="nc" id="L99">    }</span>
+<span class="nc" id="L99">            LOG.log(Level.SEVERE, &quot;Error In Firing Event&quot;, e);</span>
+<span class="nc" id="L100">        }</span>
+<span class="nc" id="L101">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

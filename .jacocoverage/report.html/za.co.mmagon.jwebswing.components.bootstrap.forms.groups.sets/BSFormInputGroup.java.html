@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BSFormInputGroup.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.bootstrap.forms.groups.sets</a> &gt; <span class="el_source">BSFormInputGroup.java</span></div><h1>BSFormInputGroup.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2017 GedMarc
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.components.bootstrap.forms.groups.sets;
+
+import java.util.ArrayList;
+import java.util.List;
+import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.components.bootstrap.forms.controls.BSFormSelectInput;
+import za.co.mmagon.jwebswing.components.bootstrap.forms.controls.BSInput;
+import za.co.mmagon.jwebswing.components.bootstrap.forms.groups.BSFormGroupChildren;
+
+/**
+ * Input group
+ * &lt;p&gt;
+ * Easily extend form controls by adding text, buttons, or button groups on either side of textual inputs.
+ *
+ * @author GedMarc
+ * @since 18 Jan 2017
+ *
+ */
+public class BSFormInputGroup extends Div&lt;GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, BSFormInputGroup&gt;
+        implements BSFormGroupChildren, BSFormSetChildren
+{
+
+    private static final long serialVersionUID = 1L;
+    /**
+     * The input group addons
+     */
+    private List&lt;Span&gt; inputGroupAddons;
+    /**
+     * The input group addons
+     */
+    private List&lt;Span&gt; inputGroupAddonsRight;
+
+    /**
+     * Input group
+     * &lt;p&gt;
+     * Easily extend form controls by adding text, buttons, or button groups on either side of textual input's.
+     *
+     * @param input
+     * @param size
+     */
+    public BSFormInputGroup(BSInput input, BSComponentInputGroupOptions... size)
+<span class="fc" id="L62">    {</span>
+<span class="fc" id="L63">        addClass(BSComponentInputGroupOptions.Input_Group);</span>
+<span class="fc" id="L64">        add(input);</span>
+<span class="pc bpc" id="L65" title="2 of 4 branches missed.">        if (size != null &amp;&amp; size.length &gt; 0)</span>
+        {
+<span class="nc bnc" id="L67" title="All 2 branches missed.">            for (BSComponentInputGroupOptions bSComponentInputGroupOptions : size)</span>
+            {
+<span class="nc" id="L69">                addClass(bSComponentInputGroupOptions);</span>
+            }
+        }
+<span class="fc" id="L72">    }</span>
+
+    /**
+     * Input group
+     * &lt;p&gt;
+     * Easily extend form controls by adding text, buttons, or button groups on either side of textual input's.
+     *
+     * @param input
+     * @param size
+     */
+    public BSFormInputGroup(BSFormSelectInput input, BSComponentInputGroupOptions... size)
+<span class="nc" id="L83">    {</span>
+<span class="nc" id="L84">        addClass(BSComponentInputGroupOptions.Input_Group);</span>
+<span class="nc" id="L85">        add(input);</span>
+<span class="nc bnc" id="L86" title="All 4 branches missed.">        if (size != null &amp;&amp; size.length &gt; 0)</span>
+        {
+<span class="nc bnc" id="L88" title="All 2 branches missed.">            for (BSComponentInputGroupOptions bSComponentInputGroupOptions : size)</span>
+            {
+<span class="nc" id="L90">                addClass(bSComponentInputGroupOptions);</span>
+            }
+        }
+<span class="nc" id="L93">    }</span>
+
+    /**
+     * Input group
+     * &lt;p&gt;
+     * Easily extend form controls by adding text, buttons, or button groups on either side of textual input's.
+     *
+     * @param input
+     * @param size
+     */
+    public BSFormInputGroup(TextArea input, BSComponentInputGroupOptions... size)
+<span class="nc" id="L104">    {</span>
+<span class="nc" id="L105">        addClass(BSComponentInputGroupOptions.Input_Group);</span>
+<span class="nc" id="L106">        add(input);</span>
+<span class="nc bnc" id="L107" title="All 4 branches missed.">        if (size != null &amp;&amp; size.length &gt; 0)</span>
+        {
+<span class="nc bnc" id="L109" title="All 2 branches missed.">            for (BSComponentInputGroupOptions bSComponentInputGroupOptions : size)</span>
+            {
+<span class="nc" id="L111">                addClass(bSComponentInputGroupOptions);</span>
+            }
+        }
+<span class="nc" id="L114">    }</span>
+
+    /**
+     *
+     * @return
+     */
+    public List&lt;Span&gt; getInputGroupAddons()
+    {
+<span class="fc bfc" id="L122" title="All 2 branches covered.">        if (inputGroupAddons == null)</span>
+        {
+<span class="fc" id="L124">            setInputGroupAddons(new ArrayList&lt;&gt;());</span>
+        }
+<span class="fc" id="L126">        return inputGroupAddons;</span>
+    }
+
+    /**
+     * The input group addons
+     *
+     * @param inputGroupAddons
+     *
+     * @return
+     */
+    public BSFormInputGroup setInputGroupAddons(List&lt;Span&gt; inputGroupAddons)
+    {
+<span class="fc" id="L138">        this.inputGroupAddons = inputGroupAddons;</span>
+<span class="fc" id="L139">        return this;</span>
+    }
+
+    /**
+     * Sets the input group addons to the right
+     *
+     * @return
+     */
+    public List&lt;Span&gt; getInputGroupAddonsRight()
+    {
+<span class="pc bpc" id="L149" title="1 of 2 branches missed.">        if (inputGroupAddonsRight == null)</span>
+        {
+<span class="fc" id="L151">            setInputGroupAddonsRight(new ArrayList());</span>
+        }
+<span class="fc" id="L153">        return inputGroupAddonsRight;</span>
+    }
+
+    /**
+     * Sets the input group addons to the right
+     *
+     * @param inputGroupAddonsRight
+     *
+     * @return
+     */
+    public BSFormInputGroup setInputGroupAddonsRight(List&lt;Span&gt; inputGroupAddonsRight)
+    {
+<span class="fc" id="L165">        this.inputGroupAddonsRight = inputGroupAddonsRight;</span>
+<span class="fc" id="L166">        return this;</span>
+    }
+
+    @Override
+    public void preConfigure()
+    {
+<span class="pc bpc" id="L172" title="1 of 2 branches missed.">        if (!isConfigured())</span>
+        {
+<span class="fc" id="L174">            getInputGroupAddons().forEach(inputGroupAddon -&gt;</span>
+            {
+<span class="fc" id="L176">                inputGroupAddon.addClass(BSComponentInputGroupOptions.Input_Group_Addon);</span>
+<span class="fc" id="L177">                add(0, inputGroupAddon);</span>
+<span class="fc" id="L178">            });</span>
+
+<span class="fc" id="L180">            getInputGroupAddonsRight().forEach(inputGroupAddon -&gt;</span>
+            {
+<span class="nc" id="L182">                inputGroupAddon.addClass(BSComponentInputGroupOptions.Input_Group_Addon);</span>
+<span class="nc" id="L183">                add(inputGroupAddon);</span>
+<span class="nc" id="L184">            });</span>
+        }
+<span class="fc" id="L186">        super.preConfigure();</span>
+<span class="fc" id="L187">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -7,6 +7,10 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.autocomplete.JQUIAutoCompleteEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.dialog.JQUIDialogEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.selectmenu.JQUISelectMenuEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.tooltips.JQUIToolTipEvents;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
 
@@ -16,7 +20,7 @@ import za.co.mmagon.logger.LogFactory;
  * @author Marc Magon
  */
 public abstract class CloseAdapter extends Event
-        implements GlobalEvents
+        implements GlobalEvents, JQUIAutoCompleteEvents, JQUIDialogEvents, JQUISelectMenuEvents, JQUIToolTipEvents
 {
 
     /**
@@ -34,7 +38,6 @@ public abstract class CloseAdapter extends Event
     public CloseAdapter(Component component)
     {
         super(EventTypes.contextmenu, component);
-
     }
 
     /**
@@ -94,7 +97,7 @@ public abstract class CloseAdapter extends Event
         }
         catch (Exception e)
         {
-            LOG.log(Level.SEVERE,"Error In Firing Event", e);
+            LOG.log(Level.SEVERE, "Error In Firing Event", e);
         }
     }
 

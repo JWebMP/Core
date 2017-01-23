@@ -121,7 +121,7 @@ import za.co.mmagon.logger.LogFactory;
 <span class="fc" id="L121">                    continue;</span>
                 }
 <span class="fc bfc" id="L123" title="All 2 branches covered.">                if (CSSImplementationClass.class.isAssignableFrom(obj.getClass()))</span>
-                {;
+                {
 <span class="fc" id="L125">                    m.putAll(getCSSProperties(CSSImplementationClass.class.cast(obj)));</span>
                 }
             }
@@ -207,7 +207,7 @@ import za.co.mmagon.logger.LogFactory;
         }
 <span class="nc" id="L208">        catch (IllegalArgumentException | IllegalAccessException ex)</span>
         {
-<span class="nc" id="L210">            log.log(Level.SEVERE, &quot;[Action]-[Cant Get Field &quot; + ex.getMessage() + &quot;];&quot;);</span>
+<span class="nc" id="L210">            log.log(Level.SEVERE, &quot;[Action]-[Cant Get Field {0}];&quot;, ex.getMessage());</span>
 <span class="nc" id="L211">            return new HashMap&lt;&gt;();</span>
 <span class="fc" id="L212">        }</span>
 
