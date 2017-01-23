@@ -1,5 +1,5 @@
 {
-  "pkgclss.excludelist" : [ "org.atmosphere.samples.chat" ],
+  "pkgclss.excludelist" : [ ],
   "preferences" : {
     "JaCoCoverage.Editor.EnableCodeHighlighting" : "true",
     "JaCoCoverage.Editor.EnableCodeHighlightingExtended" : "true",

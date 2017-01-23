@@ -43,7 +43,6 @@ public class JQUIResizableOptions extends JavaScriptPart
      * One or more elements to resize synchronously with the resizable element.
      */
     private String alsoSize;
-
     /**
      * Animates to the final size after resizing.
      */

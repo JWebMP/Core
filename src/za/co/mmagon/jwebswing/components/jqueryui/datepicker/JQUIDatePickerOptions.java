@@ -39,75 +39,75 @@ public class JQUIDatePickerOptions extends JavaScriptPart
      * An input element that is to be updated with the selected date from the datepicker. Use the altFormat option to change the format of the date within this field. Leave as blank for no alternate
      * field.
      */
-    public String altField;
+    private String altField;
     /**
      * The dateFormat to be used for the altField option. This allows one date format to be shown to the user for selection purposes, while a different format is actually sent behind the scenes. For a
      * full list of the possible formats see the formatDate function
      */
-    public String altFormat;
+    private String altFormat;
     /**
      * The text to display after each date field, e.g., to show the required format.
      */
-    public String appendText;
+    private String appendText;
     /**
      * Set to true to automatically resize the input field to accommodate dates in the current dateFormat.
      */
-    public Boolean autoSize;
+    private Boolean autoSize;
     /**
      * A URL of an image to use to display the datepicker when the showOn option is set to "button" or "both". If set, the buttonText option becomes the alt value and is not directly displayed
      */
-    public String buttonImage;
+    private String buttonImage;
     /**
      * Whether the button image should be rendered by itself instead of inside a button element. This option is only relevant if the buttonImage option has also been set.
      */
-    public Boolean buttonImageOnly;
+    private Boolean buttonImageOnly;
     /**
      * The text to display on the trigger button. Use in conjunction with the showOn option set to "button" or "both".
      */
-    public String buttonText;
+    private String buttonText;
     /**
      * Whether the month should be rendered as a dropdown instead of text.
      */
-    public Boolean changeMonth;
+    private Boolean changeMonth;
     /**
      * Whether the year should be rendered as a dropdown instead of text. Use the yearRange option to control which years are made available for selection.
      */
-    public Boolean changeYear;
+    private Boolean changeYear;
     /**
      * The text to display for the close link. Use the showButtonPanel option to display this button.
      */
-    public String closeText;
+    private String closeText;
     /**
      * When true, entry in the input field is constrained to those characters allowed by the current dateFormat option.
      */
-    public Boolean constrainInput;
+    private Boolean constrainInput;
     /**
      * The text to display for the current day link. Use the showButtonPanel option to display this button.
      */
-    public String currentText;
+    private String currentText;
     /**
      * The format for parsed and displayed dates. For a full list of the possible formats see the formatDate function.
      */
-    public String dateFormat;
+    private String dateFormat;
     /**
      * Default: [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ]
      * <p>
      * The list of long day names, starting from Sunday, for use as requested via the dateFormat option.
      */
-    public List<String> dayNames;
+    private List<String> dayNames;
     /**
      * Default: [ "Su", "Mo", "Tu", "We", "Th", "Fr", "Sa" ]
      * <p>
      * The list of minimised day names, starting from Sunday, for use as column headers within the datepicker.<p>
      */
-    public List<String> dayNamesMin;
+    private List<String> dayNamesMin;
     /**
      * dayNamesShortType: Array<p>
      * Default: [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ]
      * <p>
      * The list of abbreviated day names, starting from Sunday, for use as requested via the dateFormat option.<p>
      */
-    public List<String> dayNamesShort;
+    private List<String> dayNamesShort;
     /**
      * Set the date to highlight on first opening if the field is blank.<p>
      * Specify either an actual date via a Date object or as a string in the current dateFormat, or a number of days from today (e.g. +7)
@@ -124,30 +124,30 @@ public class JQUIDatePickerOptions extends JavaScriptPart
      * <p>
      * For example, "+1m +7d" represents one month and seven days from today
      */
-    public String defaultDate;
+    private String defaultDate;
     /**
      * Control the speed at which the datepicker appears, it may be a time in milliseconds or a string representing one of the three predefined speeds ("slow", "normal", "fast").
      */
-    public Integer duration;
+    private Integer duration;
     /**
      * Set the first day of the week: Sunday is 0, Monday is 1, etc.
      */
-    public Integer firstDay;
+    private Integer firstDay;
     /**
      * When true, the current day link moves to the currently selected date instead of today.
      */
-    public Boolean gotoCurrent;
+    private Boolean gotoCurrent;
     /**
      * Default: false<p>
      * Normally the previous and next links are disabled when not applicable (see the minDate and maxDate options).
      * <p>
      * You can hide them altogether by setting this attribute to true.<p>
      */
-    public Boolean hideIfNoPrevNext;
+    private Boolean hideIfNoPrevNext;
     /**
      * Whether the current language is drawn from right to left.
      */
-    public Boolean isRTL;
+    private Boolean isRTL;
     /**
      * The maximum selectable date. When set to null, there is no maximum.<p>
      * Multiple types supported:
@@ -160,7 +160,7 @@ public class JQUIDatePickerOptions extends JavaScriptPart
      * For example, "+1m +7d" represents one month and seven days from today.<p>
      * <p>
      */
-    public String maxDate;
+    private String maxDate;
     /**
      * he minimum selectable date. When set to null, there is no minimum.<p>
      * Multiple types supported:
@@ -176,40 +176,40 @@ public class JQUIDatePickerOptions extends JavaScriptPart
      * For example, "+1m +7d" represents one month and seven days from today.
      * <p>
      */
-    public String minDate;
+    private String minDate;
     /**
      * Default: [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
      * <p>
      * The list of full month names, for use as requested via the dateFormat option.<p>
      */
-    public List<String> monthNames;
+    private List<String> monthNames;
     /**
      * Default: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ]
      * <p>
      * The list of abbreviated month names, as used in the month header on each datepicker and as requested via the dateFormat option.<p>
      */
-    public List<String> monthNamesShort;
+    private List<String> monthNamesShort;
     /**
      * Default: false Whether the prevText and nextText options should be parsed as dates by the formatDate function, allowing them to display the target month names for example.
      */
-    public Boolean navigationAsDateFormat;
+    private Boolean navigationAsDateFormat;
     /**
      * The text to display for the next month link. With the standard ThemeRoller styling, this value is replaced by an icon.
      */
-    public String nextText;
+    private String nextText;
     /**
      * The number of months to show at once.
      */
-    public Integer numberOfMonths;
+    private Integer numberOfMonths;
     /**
      * The text to display for the previous month link. With the standard ThemeRoller styling, this value is replaced by an icon.
      */
-    public String prevText;
+    private String prevText;
 
     /**
      * Whether days in other months shown before or after the current month are selectable. This only applies if the showOtherMonths option is set to true.
      */
-    public Boolean selectOtherMonths;
+    private Boolean selectOtherMonths;
     /**
      * The cutoff year for determining the century for a date (used in conjunction with dateFormat 'y')
      * .<p>
@@ -225,60 +225,60 @@ public class JQUIDatePickerOptions extends JavaScriptPart
      * .<p>
      * <p>
      */
-    public Integer shortYearCutoff;
+    private Integer shortYearCutoff;
     /**
      * The name of the animation used to show and hide the datepicker.
      * <p>
      * Use "show" (the default), "slideDown", "fadeIn", any of the jQuery UI effects. Set to an empty string to disable animation.<p>
      */
-    public JWAnimationEffectsPart showAnim;
+    private JWAnimationEffectsPart showAnim;
     /**
      * Whether to display a button pane underneath the calendar.<p>
      * The button pane contains two buttons, a Today button that links to the current day, and a Done button that closes the datepicker.<p>
      * The buttons' text can be customized using the currentText and closeText options respectively.
      */
-    public Boolean showButtonPanel;
+    private Boolean showButtonPanel;
     /**
      * When displaying multiple months via the numberOfMonths option, the showCurrentAtPos option defines which position to display the current month in.
      */
-    public Integer showCurrentAtPos;
+    private Integer showCurrentAtPos;
     /**
      * Whether to show the month after the year in the header
      */
-    public Boolean showMonthAfterYear;
+    private Boolean showMonthAfterYear;
     /**
      * When the datepicker should appear.
      * <p>
      * The datepicker can appear when the field receives focus ("focus"), when a button is clicked ("button"), or when either event occurs ("both").
      */
-    public String showOn;
+    private String showOn;
     /**
      * If using one of the jQuery UI effects for the showAnim option, you can provide additional properties for that animation using this option.
      *
      * @deprecated
      */
-    public Boolean showOptions;
+    private Boolean showOptions;
     /**
      * Whether to display dates in other months (non-selectable) at the start or end of the current month.
      * <p>
      * To make these days selectable use the selectOtherMonths option.
      */
-    public Boolean showOtherMonths;
+    private Boolean showOtherMonths;
     /**
      * When true, a column is added to show the week of the year.<p>
      * The calculateWeek option determines how the week of the year is calculated.
      * <p>
      * You may also want to change the firstDay option.
      */
-    public Boolean showWeek;
+    private Boolean showWeek;
     /**
      * Set how many months to move when clicking the previous/next links.
      */
-    public Integer stepMonths;
+    private Integer stepMonths;
     /**
      * The text to display for the week of the year column heading. Default: "Wk" Use the showWeek option to display this column.
      */
-    public String weekHeader;
+    private String weekHeader;
     /**
      * The range of years displayed in the year drop-down: either relative to today's year ("-nn:+nn"),
      * <p>
@@ -289,11 +289,11 @@ public class JQUIDatePickerOptions extends JavaScriptPart
      * <p>
      * <p>
      */
-    public String yearRange;
+    private String yearRange;
     /**
      * Additional text to display after the year in the month headers.
      */
-    public String yearSuffix;
+    private String yearSuffix;
 
     /**
      * Default creating constructor
