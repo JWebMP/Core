@@ -33,6 +33,10 @@ public class BSNavs extends Div<BSNavsChildren, BSNavsAttributes, BSNavsFeatures
      * The associated feature
      */
     private BSNavsFeature feature;
+    /**
+     * Assign the navigation list
+     */
+    private BSNavList navigationList;
 
     /**
      * Navs Navigation available in Bootstrap share general markup and styles, from the base .nav class to the active and disabled states. Swap modifier classes to switch between each style.
@@ -89,6 +93,38 @@ public class BSNavs extends Div<BSNavsChildren, BSNavsAttributes, BSNavsFeatures
     public BSNavsOptions getOptions()
     {
         return getFeature().getOptions();
+    }
+
+    /**
+     * Assigns the navigation list
+     *
+     * @return
+     */
+    public BSNavList getNavigationList()
+    {
+        if (this.navigationList == null)
+        {
+            setNavigationList(new BSNavList());
+        }
+        return navigationList;
+    }
+
+    /**
+     * Sets the navigation list accordingly
+     *
+     * @param navigationList
+     */
+    public void setNavigationList(BSNavList navigationList)
+    {
+        if (this.navigationList != null)
+        {
+            getChildren().remove(this.navigationList);
+        }
+        this.navigationList = navigationList;
+        if (this.navigationList != null)
+        {
+            add(this.navigationList);
+        }
     }
 
     @Override

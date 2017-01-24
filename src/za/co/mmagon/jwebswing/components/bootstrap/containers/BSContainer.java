@@ -22,6 +22,7 @@ import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.components.bootstrap.navbar.BSNavBarChildren;
 
 /**
  * Containers
@@ -37,6 +38,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
  *
  */
 public class BSContainer extends Div<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, Component>
+        implements BSNavBarChildren
 {
 
     private static final long serialVersionUID = 1L;
@@ -73,7 +75,8 @@ public class BSContainer extends Div<GlobalChildren, NoAttributes, GlobalFeature
 
     /**
      * Sets the container type on this container
-     * @param type 
+     *
+     * @param type
      */
     public void setContainerType(BSContainerType type)
     {

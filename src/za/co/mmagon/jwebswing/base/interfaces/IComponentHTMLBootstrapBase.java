@@ -16,20 +16,21 @@
  */
 package za.co.mmagon.jwebswing.base.interfaces;
 
-import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentWidthOptions;
-import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.IBSComponentOptions;
-import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentResponsiveOptions;
 import za.co.mmagon.jwebswing.components.bootstrap.Glyphicons;
+import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.*;
 import za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2.SB2ThemeClasses;
 
 /**
  * Defines a component as bootstrap capable
+ *
  * @author GedMarc
+ * @param <J>
+ *
  * @since Oct 10, 2016
  * @version 1.0
  *
  */
-public interface IComponentHTMLBootstrapBase
+public interface IComponentHTMLBootstrapBase<J>
 {
 
     /**
@@ -39,7 +40,7 @@ public interface IComponentHTMLBootstrapBase
      * <p>
      * @return True if it was added, false if it already existed
      */
-    boolean addClass(IBSComponentOptions blockName);
+    J addClass(IBSComponentOptions blockName);
 
     /**
      * Adds a class name to the class list
@@ -48,26 +49,32 @@ public interface IComponentHTMLBootstrapBase
      * <p>
      * @return True if it was added, false if it already existed
      */
-    boolean addClass(SB2ThemeClasses blockName);
+    J addClass(SB2ThemeClasses blockName);
 
     /**
      * Adds the specified column width settings to the class
+     *
      * @param blockName
+     *
      * @return
      */
-    boolean addClass(BSComponentWidthOptions blockName);
+    J addClass(BSComponentWidthOptions blockName);
 
     /**
      * Adds the specified column width settings to the class
+     *
      * @param blockName
+     *
      * @return
      */
-    boolean addClass(BSComponentResponsiveOptions blockName);
-    
+    J addClass(BSComponentResponsiveOptions blockName);
+
     /**
      * Adds the specified column width settings to the class
+     *
      * @param blockName
-     * @return 
+     *
+     * @return
      */
-    boolean addClass(Glyphicons blockName);
+    J addClass(Glyphicons blockName);
 }

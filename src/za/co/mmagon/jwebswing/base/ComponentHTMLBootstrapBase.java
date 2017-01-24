@@ -40,7 +40,7 @@ import za.co.mmagon.jwebswing.components.bootstrap.themes.sbadmin2.SB2ThemeClass
  * @param <J> Component output for cloning. Returned on CloneComponent
  */
 public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentStyleBase>
-        extends ComponentStyleBase<C, A, F, E, J> implements IComponentHTMLBootstrapBase
+        extends ComponentStyleBase<C, A, F, E, J> implements IComponentHTMLBootstrapBase<J>
 {
 
     private static final long serialVersionUID = 1L;
@@ -73,18 +73,18 @@ public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions
      * @return True if it was added, false if it already existed
      */
     @Override
-    public boolean addClass(IBSComponentOptions blockName)
+    public J addClass(IBSComponentOptions blockName)
     {
         setBootstrapRequired(true);
         String className = blockName.toString();
         if (!getClasses().contains(className))
         {
             getClasses().add(className);
-            return true;
+            return (J) this;
         }
         else
         {
-            return false;
+            return (J) this;
         }
     }
 
@@ -96,18 +96,18 @@ public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions
      * @return True if it was added, false if it already existed
      */
     @Override
-    public boolean addClass(SB2ThemeClasses blockName)
+    public J addClass(SB2ThemeClasses blockName)
     {
         setBootstrapRequired(true);
         String className = blockName.toString();
         if (!getClasses().contains(className))
         {
             getClasses().add(className);
-            return true;
+            return (J) this;
         }
         else
         {
-            return false;
+            return (J) this;
         }
     }
 
@@ -119,18 +119,18 @@ public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions
      * <p>
      * @return True if it was added, false if it already existed
      */
-    public boolean addClass(int position, SB2ThemeClasses blockName)
+    public J addClass(int position, SB2ThemeClasses blockName)
     {
         setBootstrapRequired(true);
         String className = blockName.toString();
         if (!getClasses().contains(className))
         {
             getClasses().add(position, className);
-            return true;
+            return (J) this;
         }
         else
         {
-            return false;
+            return (J) this;
         }
     }
 
@@ -142,18 +142,18 @@ public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions
      * @return
      */
     @Override
-    public boolean addClass(BSComponentWidthOptions blockName)
+    public J addClass(BSComponentWidthOptions blockName)
     {
         setBootstrapRequired(true);
         String className = blockName.toString();
         if (!getClasses().contains(className))
         {
             getClasses().add(className);
-            return true;
+            return (J) this;
         }
         else
         {
-            return false;
+            return (J) this;
         }
     }
 
@@ -165,18 +165,18 @@ public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions
      * @return
      */
     @Override
-    public boolean addClass(BSComponentResponsiveOptions blockName)
+    public J addClass(BSComponentResponsiveOptions blockName)
     {
         setBootstrapRequired(true);
         String className = blockName.toString();
         if (!getClasses().contains(className))
         {
             getClasses().add(className);
-            return true;
+            return (J) this;
         }
         else
         {
-            return false;
+            return (J) this;
         }
     }
 
@@ -188,18 +188,18 @@ public class ComponentHTMLBootstrapBase<C, A extends Enum & AttributeDefinitions
      * @return
      */
     @Override
-    public boolean addClass(Glyphicons blockName)
+    public J addClass(Glyphicons blockName)
     {
         setBootstrapRequired(true);
         String className = blockName.toString();
         if (!getClasses().contains(className))
         {
             getClasses().add(className);
-            return true;
+            return (J) this;
         }
         else
         {
-            return false;
+            return (J) this;
         }
     }
 

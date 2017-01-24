@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package za.co.mmagon.jwebswing.base.interfaces;
 
 import java.util.List;
@@ -27,14 +26,13 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  *
  * @author GedMarc
  * @since Sep 26, 2016
- * 
+ *
  */
-public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, J extends ComponentBase> 
+public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, J extends ComponentBase>
 {
 
     /**
-     * Adds an attribute value to the attribute collection, and marks it with a
-     * GlobalAttribute Enumeration.
+     * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
      * <p>
      * @param attribute The GlobalAttribute to set the attribute to
      * @param value     The value of the attribute
@@ -42,8 +40,7 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
     J addAttribute(GlobalAttributes attribute, String value);
 
     /**
-     * Adds an attribute value to the attribute collection, and marks it with a
-     * GlobalAttribute Enumeration.
+     * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
      * <p>
      * @param attribute The GlobalAttribute to set the attribute to
      * @param value     The value of the attribute
@@ -51,8 +48,7 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
     J addAttribute(A attribute, String value);
 
     /**
-     * Adds an attribute value to the attribute collection, and marks it with a
-     * GlobalAttribute Enumeration.
+     * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
      * <p>
      * @param attribute The GlobalAttribute to set the attribute to
      * @param value     The value of the attribute
@@ -60,8 +56,7 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
     J addAttribute(A attribute, Integer value);
 
     /**
-     * Adds an attribute value to the attribute collection, and marks it with a
-     * GlobalAttribute Enumeration.
+     * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
      * <p>
      * @param attribute The valid Local Attribute to add
      * @param value     The value of the attribute
@@ -75,7 +70,7 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
      * <p>
      * @return True if it was added, false if it already existed
      */
-    boolean addClass(String className);
+    J addClass(String className);
 
     J cloneComponent();
 
@@ -85,8 +80,7 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
      * @param attribute The Global Attribute to apply
      * @param bop       Place Holder for return type boolean
      * <p>
-     * @return HashMap of Attributes with GlobalAttributes Enumeration as
-     *         Identifier
+     * @return HashMap of Attributes with GlobalAttributes Enumeration as Identifier
      */
     Boolean getAttribute(GlobalAttributes attribute, Boolean bop);
 
@@ -96,8 +90,7 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
      * @param attribute The Global Attribute to apply
      * @param bop       Place Holder for return type integer
      * <p>
-     * @return HashMap of Attributes with GlobalAttributes Enumeration as
-     *         Identifier
+     * @return HashMap of Attributes with GlobalAttributes Enumeration as Identifier
      */
     Integer getAttribute(GlobalAttributes attribute, Integer bop);
 
@@ -106,8 +99,7 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
      * <p>
      * @param attribute The Global Attribute to apply
      * <p>
-     * @return HashMap of Attributes with GlobalAttributes Enumeration as
-     *         Identifier
+     * @return HashMap of Attributes with GlobalAttributes Enumeration as Identifier
      */
     String getAttribute(GlobalAttributes attribute);
 
@@ -124,8 +116,7 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
      * Gets this list of local attribute values
      * <p>
      * @param attributeValue The Valid Local Attribute to Return
-     * @param uselessInt     A useless parameter purely to return the type
-     *                       integer
+     * @param uselessInt     A useless parameter purely to return the type integer
      * <p>
      * @return A HashMap if this components local attributes. Never null
      */
@@ -135,8 +126,7 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
      * Gets this list of local attribute values
      * <p>
      * @param attributeValue The Valid Local Attribute to Return
-     * @param uselessInt     A useless parameter purely to return the type
-     *                       Boolean
+     * @param uselessInt     A useless parameter purely to return the type Boolean
      * <p>
      * @return A HashMap if this components local attributes. Never null
      */
@@ -161,8 +151,7 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
      * <p>
      * @param className Class Name to Remove
      * <p>
-     * @return True if the class was removed, False if the class was not part of
-     *         the collection
+     * @return True if the class was removed, False if the class was not part of the collection
      */
     boolean removeClass(String className);
 
@@ -170,6 +159,7 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
      * Sets the ID and adds the attribute to the global set
      *
      * @param id
+     *
      * @return
      */
     J setID(String id);

@@ -18,8 +18,8 @@ package za.co.mmagon.jwebswing.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import java.util.*;
 import java.util.Map.Entry;
+import java.util.*;
 import java.util.logging.Level;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
@@ -28,7 +28,6 @@ import za.co.mmagon.jwebswing.base.interfaces.ComponentHTMLBase;
 import za.co.mmagon.jwebswing.base.interfaces.IComponentHTMLAttributeBase;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.generics.Pair;
-import za.co.mmagon.jwebswing.utilities.EnumerationUtils;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -502,16 +501,16 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
      * @return True if it was added, false if it already existed
      */
     @Override
-    public boolean addClass(String className)
+    public J addClass(String className)
     {
         if (!getClasses().contains(className))
         {
             getClasses().add(className);
-            return true;
+            return (J) this;
         }
         else
         {
-            return false;
+            return (J) this;
         }
     }
 

@@ -45,10 +45,16 @@ public class BSNavBar extends Div<BSNavBarChildren, BSNavBarAttributes, BSNavBar
         setTag("nav");
         addClass("navbar");
         addAttribute("role", "navigation");
-        addClass(navBarTogglerSize);
-        for (BSNavBarColourSchemes colourScheme : colourSchemes)
+        if (navBarTogglerSize != null)
         {
-            addClass(colourScheme);
+            addClass(navBarTogglerSize);
+        }
+        if (colourSchemes != null)
+        {
+            for (BSNavBarColourSchemes colourScheme : colourSchemes)
+            {
+                addClass(colourScheme);
+            }
         }
     }
 

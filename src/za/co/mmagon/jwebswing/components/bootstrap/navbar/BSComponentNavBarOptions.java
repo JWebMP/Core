@@ -51,7 +51,14 @@ public enum BSComponentNavBarOptions implements IBSComponentOptions
      * .navbar-text for adding vertically centered strings of text.
      */
     Navbar_Text,
-    Navbar_Light,;
+    /**
+     * Default for navbar
+     */
+    Navbar_Default,
+    /**
+     * Align the navbar right
+     */
+    Navbar_Right;
 
     private BSComponentNavBarOptions()
     {

@@ -64,4 +64,13 @@ public class BSNavsTest
         nav.add(new BSNavItemDropDown());
         System.out.println(nav.toString(true));
     }
+
+    @Test
+    public void testList()
+    {
+        BSNavs nav = new BSNavs();
+        nav.getNavigationList().add(new BSNavListItem(new BSNavLinkItem("url")));
+
+        System.out.println(nav.toString(true));
+    }
 }

@@ -43,6 +43,7 @@ public class BSJumbotron extends Div<BSJumbotronChildren, BSJumbotronAttributes,
      */
     public BSJumbotron(BSComponentJumbotronOptions... jumbotronType)
     {
+        addClass(BSComponentJumbotronOptions.Jumbotron);
         for (BSComponentJumbotronOptions bSComponentJumbotronOptions : jumbotronType)
         {
             addClass(bSComponentJumbotronOptions);

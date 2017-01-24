@@ -35,9 +35,12 @@ public class JQUIButtonGroupOptions extends JavaScriptPart
      */
     private String items;
 
+    /**
+     * The button group options for
+     */
     public JQUIButtonGroupOptions()
     {
-
+        //Nothing Needed
     }
 
     public String getItems()

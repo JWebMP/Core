@@ -62,7 +62,11 @@ public enum VideoAttributes implements AttributeDefinitions
     /**
      * Sets the width of the video player
      */
-    Width;
+    Width,
+    /**
+     * The specific volume
+     */
+    Volume;
 
     @Override
     public boolean isKeyword()

@@ -16,11 +16,12 @@
  */
 package za.co.mmagon.jwebswing.components;
 
-import com.fasterxml.jackson.annotation.*;
-import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.base.html.*;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import com.fasterxml.jackson.annotation.JsonValue;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 
 /**
  * This Class is a data adapter
@@ -34,7 +35,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
  *
  * @since 01 Jan 2016
  */
-public class DataAdapter<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component>
+public class DataAdapter<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends DataAdapter>
         extends Div<C, A, F, E, J>
 {
 

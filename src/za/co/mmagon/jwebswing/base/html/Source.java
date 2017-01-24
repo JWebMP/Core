@@ -18,28 +18,24 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.SourceAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoClosingTag;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.AudioChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.VideoChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
 /**
  * Definition and Usage<p>
  * <p>
- * The &lt;source&gt; tag is used to specify multiple media resources for media
- * elements, such as &lt;video&gt; and &lt;audio&gt;
+ * The &lt;source&gt; tag is used to specify multiple media resources for media elements, such as &lt;video&gt; and &lt;audio&gt;
  * <p>
  * .<p>
  * <p>
- * The &lt;source&gt; tag allows you to specify alternative video/audio files
- * which the browser may choose from, based on its media type or codec support.<p>
+ * The &lt;source&gt; tag allows you to specify alternative video/audio files which the browser may choose from, based on its media type or codec support.<p>
  * <p>
  * Browser Support<p>
  * <p>
- * The numbers in the table specify the first browser version that fully
- * supports the element.<p>
+ * The numbers in the table specify the first browser version that fully supports the element.<p>
  * <p>
  * Element
  * <p>
@@ -55,8 +51,10 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class Source extends Component<NoChildren, SourceAttributes, NoFeatures, NoEvents, Source> implements AudioChildren, VideoChildren
+public class Source extends Component<NoChildren, SourceAttributes, NoFeatures, NoEvents, Source> implements AudioChildren, VideoChildren, NoClosingTag
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new source tag
