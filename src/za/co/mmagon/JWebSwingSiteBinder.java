@@ -41,12 +41,12 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
 
     private static String QueryParametersRegex = "(\\?.*)?";
 
-    private static String JavaScriptLocation = "/jwjs";
-    private static String AjaxScriptLocation = "/jwajax";
-    private static String CSSLocation = "/jwcss";
+    private static final String JavaScriptLocation = "/jwjs";
+    private static final String AjaxScriptLocation = "/jwajax";
+    private static final String CSSLocation = "/jwcss";
     private static final String AngularDataLocation = "/jwad";
     private static final String SiteLoaderJSLocation = "/jwsiteloader";
-    private static String AngularScriptLocation = "/jwas";
+    private static final String AngularScriptLocation = "/jwas";
     private static final String CordovaLocation = "/jwcordova";
 
     private static String DataLocation = "/jwdata";
@@ -102,6 +102,7 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
         log.log(Level.CONFIG, "Serving CSS at {0}", CSSLocation);
 
         module.serveRegex$("(" + AngularDataLocation + ")" + QueryParametersRegex).with(AngularDataServlet.class);
+        //module.serveRegex$("(" + AngularDataLocation + ")" + QueryParametersRegex).with(AngularDataVariables.class);
         log.log(Level.CONFIG, "Serving Angular Data at " + AngularDataLocation);
 
         module.serveRegex$("(" + AngularScriptLocation + ")" + QueryParametersRegex).with(AngularServlet.class);
@@ -150,16 +151,6 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
     }
 
     /**
-     * Sets the current java script location
-     *
-     * @param JavaScriptLocation
-     */
-    public static void setJavaScriptLocation(String JavaScriptLocation)
-    {
-        JWebSwingSiteBinder.JavaScriptLocation = JavaScriptLocation;
-    }
-
-    /**
      * Gets the current Ajax location
      *
      * @return
@@ -167,16 +158,6 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
     public static String getAjaxScriptLocation()
     {
         return AjaxScriptLocation;
-    }
-
-    /**
-     * Sets the current Ajax location
-     *
-     * @param AjaxScriptLocation
-     */
-    public static void setAjaxScriptLocation(String AjaxScriptLocation)
-    {
-        JWebSwingSiteBinder.AjaxScriptLocation = AjaxScriptLocation;
     }
 
     /**
@@ -190,16 +171,6 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
     }
 
     /**
-     * Sets the CSS Location
-     *
-     * @param CSSLocation
-     */
-    public static void setCSSLocation(String CSSLocation)
-    {
-        JWebSwingSiteBinder.CSSLocation = CSSLocation;
-    }
-
-    /**
      * Gets the angular script location
      *
      * @return
@@ -207,16 +178,6 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
     public static String getAngularScriptLocation()
     {
         return AngularScriptLocation;
-    }
-
-    /**
-     * Sets the angular script location
-     *
-     * @param AngularScriptLocation
-     */
-    public static void setAngularScriptLocation(String AngularScriptLocation)
-    {
-        JWebSwingSiteBinder.AngularScriptLocation = AngularScriptLocation;
     }
 
     /**

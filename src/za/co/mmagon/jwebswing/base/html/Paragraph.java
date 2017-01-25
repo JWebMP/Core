@@ -38,7 +38,7 @@ import za.co.mmagon.jwebswing.components.jqueryui.tabs.JQUITabsChildren;
  * @version 1.0
  */
 public class Paragraph extends Component<ParagraphChildren, ParagraphAttributes, GlobalFeatures, GlobalEvents, Paragraph>
-        implements BodyChildren, NoNewLineForRawText, ParagraphChildren, DetailsChildren, JQUITabsChildren,BSCardChildren
+        implements BodyChildren, NoNewLineForRawText, ParagraphChildren, DetailsChildren, JQUITabsChildren, BSCardChildren
 {
 
     private static final long serialVersionUID = 1L;
@@ -66,11 +66,13 @@ public class Paragraph extends Component<ParagraphChildren, ParagraphAttributes,
      * Don't use the bind attribute, append in curly braces
      *
      * @param variableName
+     *
+     * @return
      */
     @Override
-    public void bind(String variableName)
+    public Paragraph bind(String variableName)
     {
-
+        setLoadAngular(true);
         if (variableName.contains("{{"))
         {
             setText(getText(0) + variableName);
@@ -79,6 +81,7 @@ public class Paragraph extends Component<ParagraphChildren, ParagraphAttributes,
         {
             setText(getText(0) + "{{" + variableName + "}}");
         }
+        return this;
     }
 
 }

@@ -44,7 +44,7 @@ public class AppletTest
         applet.addAttribute(AppletAttributes.CodeBase, "classFile");
 
         System.out.println(applet.toString(true));
-        Assert.assertEquals("<applet align=\"left\" codebase=\"classFile\" object=\"applet object\" id=\"id\"></applet>", applet.toString(true));
+        Assert.assertEquals("<applet align=\"left\" codebase=\"classFile\" id=\"id\" object=\"applet object\"></applet>", applet.toString(true));
     }
 
 }

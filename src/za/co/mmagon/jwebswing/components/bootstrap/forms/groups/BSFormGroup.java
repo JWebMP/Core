@@ -326,10 +326,17 @@ public class BSFormGroup<T extends ComponentHTMLBootstrapBase & BSFormGroupChild
                     referencedForm = new BSForm();
                     referencedForm.setID("InvalidForm");
                 }
+
+                referencedForm.addAttribute("novalidate", (String) null);
+                referencedForm.setTag("ng-form");
+
                 String formName = referencedForm.getID();
-                String fieldName = "'" + getInputComponent().getID() + "'";
-                addAttribute(AngularAttributes.ngClass, "{'" + ERROR_CLASS + "':" + formName + "[" + fieldName + "].$invalid && !" + formName + "[" + fieldName + "].$pristine,"
-                        + "'" + SUCCESS_CLASS + "':" + formName + "[" + fieldName + "].$valid"
+                String fieldName = "" + getInputComponent().getID() + "";
+
+                addAttribute(AngularAttributes.ngInit, "formField = " + formName + "['" + fieldName + "'];");
+
+                addAttribute(AngularAttributes.ngClass, "{'" + ERROR_CLASS + "':'formField.$invalid && !formField.$pristine',"
+                        + "'" + SUCCESS_CLASS + "':'formField.$valid'"
                         + "}");
 
                 if (getRequiredMessage() != null)

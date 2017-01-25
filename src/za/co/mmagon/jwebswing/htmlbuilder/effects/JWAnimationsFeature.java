@@ -28,7 +28,7 @@ public class JWAnimationsFeature extends Feature<JavaScriptPart, JWAnimationsFea
         this.openingEffect = openingEffect;
         this.closingEffect = closingEffect;
         this.movementSpeed = movementSpeed;
-        getJavascriptReferences().add(new JWAnimationsEasingJavascriptReference());
+        getJavascriptReferences().add(new JQEasingJavascriptReference());
     }
 
     /**

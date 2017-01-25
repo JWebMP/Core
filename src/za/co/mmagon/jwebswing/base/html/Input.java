@@ -155,10 +155,14 @@ public class Input<A extends Enum & AttributeDefinitions> extends Component<NoCh
      * Push to model instead of bind
      *
      * @param variableName
+     *
+     * @return
      */
     @Override
-    public void bind(String variableName)
+    public Input bind(String variableName)
     {
+        setLoadAngular(true);
         addAttribute(AngularAttributes.ngModel, variableName);
+        return this;
     }
 }

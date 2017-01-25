@@ -68,7 +68,6 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
      * The actual tag string of this component
      */
     private String tag;
-
     /**
      * Specifies to render a closing tag or not
      */
@@ -104,16 +103,6 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
      * Renders the text of this component before children
      */
     private boolean renderTextBeforeChildren = true;
-    /**
-     * If the component has been rendered already
-     */
-    @JsonIgnore
-    private transient boolean rendered;
-    /**
-     * A cached rendered string of this component
-     */
-    @JsonIgnore
-    private transient StringBuilder renderedString;
 
     /**
      * Returns a HTML Base interface of this component
@@ -148,78 +137,73 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
      */
     protected StringBuilder renderHTML(int tabCount)
     {
-        if (!isRendered())
+        if (this instanceof Comment && isTiny())
         {
-            if (this instanceof Comment && isTiny())
-            {
-                return null;
-            }
-
-            setCurrentTabIndents(tabCount);
-
-            StringBuilder tempStringBuilder = new StringBuilder();
-            StringBuilder beforeTag = renderBeforeTag();
-            if (beforeTag != null && beforeTag.length() > 0)
-            {
-                tempStringBuilder.append(beforeTag);
-            }
-
-            StringBuilder openingTag = renderOpeningTag();
-            tempStringBuilder.append(openingTag);
-
-            if (isInlineClosingTag())
-            {
-                return new StringBuilder(tempStringBuilder);
-            }
-
-            StringBuilder rawText = getText(0);
-
-            if (isRenderTextBeforeChildren())
-            {
-                if (rawText != null && rawText.length() > 0)
-                {
-                    tempStringBuilder.append(rawText);
-                }
-            }
-
-            StringBuilder beforeChildren = renderBeforeChildren();
-            if (beforeChildren != null && beforeChildren.length() > 0)
-            {
-                tempStringBuilder.append(beforeChildren);
-            }
-
-            StringBuilder childrenRender = renderChildren();
-            if (childrenRender != null && childrenRender.length() > 0)
-            {
-                tempStringBuilder.append(childrenRender);
-            }
-            if (!isRenderTextBeforeChildren())
-            {
-                if (rawText != null && rawText.length() > 0)
-                {
-                    tempStringBuilder.append(getNewLine()).append(getCurrentTabIndentString()).append("\t").append(rawText);
-                }
-            }
-
-            StringBuilder afterChildren = renderAfterChildren();
-            if (afterChildren != null && afterChildren.length() > 0)
-            {
-                tempStringBuilder.append(afterChildren);
-            }
-
-            StringBuilder closingTagString = renderClosingTag();
-            tempStringBuilder.append(closingTagString);
-
-            StringBuilder afterTag = renderAfterTag();
-            if (afterTag != null && afterTag.length() > 0)
-            {
-                tempStringBuilder.append(afterTag);
-            }
-
-            renderedString = tempStringBuilder;
-            this.rendered = true;
+            return null;
         }
-        return renderedString;
+
+        setCurrentTabIndents(tabCount);
+
+        StringBuilder tempStringBuilder = new StringBuilder();
+        StringBuilder beforeTag = renderBeforeTag();
+        if (beforeTag != null && beforeTag.length() > 0)
+        {
+            tempStringBuilder.append(beforeTag);
+        }
+
+        StringBuilder openingTag = renderOpeningTag();
+        tempStringBuilder.append(openingTag);
+
+        if (isInlineClosingTag())
+        {
+            return new StringBuilder(tempStringBuilder);
+        }
+
+        StringBuilder rawText = getText(0);
+
+        if (isRenderTextBeforeChildren())
+        {
+            if (rawText != null && rawText.length() > 0)
+            {
+                tempStringBuilder.append(rawText);
+            }
+        }
+
+        StringBuilder beforeChildren = renderBeforeChildren();
+        if (beforeChildren != null && beforeChildren.length() > 0)
+        {
+            tempStringBuilder.append(beforeChildren);
+        }
+
+        StringBuilder childrenRender = renderChildren();
+        if (childrenRender != null && childrenRender.length() > 0)
+        {
+            tempStringBuilder.append(childrenRender);
+        }
+        if (!isRenderTextBeforeChildren())
+        {
+            if (rawText != null && rawText.length() > 0)
+            {
+                tempStringBuilder.append(getNewLine()).append(getCurrentTabIndentString()).append("\t").append(rawText);
+            }
+        }
+
+        StringBuilder afterChildren = renderAfterChildren();
+        if (afterChildren != null && afterChildren.length() > 0)
+        {
+            tempStringBuilder.append(afterChildren);
+        }
+
+        StringBuilder closingTagString = renderClosingTag();
+        tempStringBuilder.append(closingTagString);
+
+        StringBuilder afterTag = renderAfterTag();
+        if (afterTag != null && afterTag.length() > 0)
+        {
+            tempStringBuilder.append(afterTag);
+        }
+
+        return tempStringBuilder;
     }
 
     /**
@@ -574,16 +558,6 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     {
         this.renderTextBeforeChildren = renderTextBeforeChildren;
         return (J) this;
-    }
-
-    /**
-     * If this component is already rendered
-     *
-     * @return
-     */
-    public boolean isRendered()
-    {
-        return rendered;
     }
 
     @Override

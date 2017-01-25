@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package za.co.mmagon.jwebswing.htmlbuilder.effects;
 
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
@@ -25,15 +24,18 @@ import za.co.mmagon.jwebswing.base.references.JavascriptReference;
  * @since Mar 1, 2015
  * @version 1.0
  * <p>
- * 
+ *
  */
-public class JWAnimationsEasingJavascriptReference extends JavascriptReference
+public class JQEasingJavascriptReference extends JavascriptReference
 {
+
+    private static final long serialVersionUID = 1L;
+
     /**
-    *
-    */
-    public JWAnimationsEasingJavascriptReference()
+     *
+     */
+    public JQEasingJavascriptReference()
     {
-        super("EasingAnimations", 1.31, "javascript/jquery.ui/jquery.easing.1.3.js", "http://gsgd.co.uk/sandbox/jquery/easing/jquery.easing.1.3.js");
+        super("EasingAnimations", 1.31, "bower_components/jquery-easing/jquery.easing.min.js", "http://gsgd.co.uk/sandbox/jquery/easing/jquery.easing.1.3.js");
     }
 }

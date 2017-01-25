@@ -43,6 +43,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentBase>
         extends ComponentHTMLAttributeBase<A, F, E, J> implements IComponentHTMLAngularBase<J>
 {
+
     private static final long serialVersionUID = 1L;
     /**
      * specifies if angular should be loaded or not
@@ -212,20 +213,26 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
      * Over-ride this to apply more functionality such as calendar binding
      *
      * @param variableName
+     *
+     * @return
      */
-    public void bind(String variableName)
+    public J bind(String variableName)
     {
         addAttribute(AngularAttributes.ngBind, variableName);
         setLoadAngular(true);
+        return (J) this;
     }
 
     /**
      * Instructs Angular to not show items that are bound until after the digest sequence
+     *
+     * @return
      */
-    public void cloak()
+    public J cloak()
     {
         addAttribute(AngularAttributes.ngCloak, null);
         setLoadAngular(true);
+        return (J) this;
     }
 
     /**
@@ -305,7 +312,8 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 
     /**
      * If angular should be loaded
-     * @return 
+     *
+     * @return
      */
     protected boolean isLoadAngular()
     {
@@ -314,7 +322,8 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 
     /**
      * Sets if angular must be loaded
-     * @param loadAngular 
+     *
+     * @param loadAngular
      */
     protected void setLoadAngular(boolean loadAngular)
     {
@@ -324,6 +333,6 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
     @Override
     public void preConfigure()
     {
-        super.preConfigure(); 
+        super.preConfigure();
     }
 }

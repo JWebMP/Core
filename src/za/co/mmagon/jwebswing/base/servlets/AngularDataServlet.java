@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.base.servlets;
 
+import com.armineasy.injection.GuiceContext;
 import com.armineasy.injection.filters.CorsAllowedFilter;
 import com.google.inject.Singleton;
 import java.io.IOException;
@@ -72,7 +73,7 @@ public class AngularDataServlet extends JWDefaultServlet
             LOG.log(Level.FINE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Security]-[Component ID Incorrect]");
         }
 
-        Page page = (Page) request.getAttribute("jwpage");
+        Page page = GuiceContext.Injector().getInstance(Page.class);
         ComponentHierarchyBase triggerComponent = page.getComponentCache().get(componentId);
         ajaxCall.setComponent(triggerComponent);
         if (triggerComponent == null)
@@ -82,7 +83,7 @@ public class AngularDataServlet extends JWDefaultServlet
         }
         Map<String, JavaScriptPart> angs = ajaxCall.getComponent().getAngularObjectsAll();
         ArrayList<AngularJsonVariable> returnables = new ArrayList<>();
-        angs.entrySet().stream().forEach((entry)
+        angs.entrySet().stream().forEach(entry
                 ->
         {
             String key = entry.getKey();
@@ -125,12 +126,12 @@ public class AngularDataServlet extends JWDefaultServlet
         try (PrintWriter out = response.getWriter())
         {
             response.setContentType("application/json;charset=UTF-8");
-            
+
             response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);
             response.setHeader("Access-Control-Allow-Credentials", "true");
             response.setHeader("Access-Control-Allow-Methods", "GET, POST");
             response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
-            
+
             response.getWriter().write(respJson.toString());
             Date dataTransferDate = new Date();
             LOG.log(Level.FINE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + respJson.toString().length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
@@ -151,13 +152,12 @@ public class AngularDataServlet extends JWDefaultServlet
     {
         try
         {
-            super.doPost(request, response);
+            //    super.doPost(request, response);
             processRequest(request, response);
         }
-        catch (Exception e)
+        catch (IOException | ServletException e)
         {
             LOG.log(Level.SEVERE, "Angular Data Servlet Do Post", e);
         }
     }
-
 }

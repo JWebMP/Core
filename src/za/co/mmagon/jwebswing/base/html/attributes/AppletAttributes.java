@@ -57,4 +57,10 @@ public enum AppletAttributes implements AttributeDefinitions
         return false;
     }
 
+    @Override
+    public String toString()
+    {
+        return super.toString().toLowerCase();
+    }
+
 }

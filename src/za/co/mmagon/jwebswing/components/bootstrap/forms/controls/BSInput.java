@@ -17,6 +17,7 @@
 package za.co.mmagon.jwebswing.components.bootstrap.forms.controls;
 
 import za.co.mmagon.jwebswing.base.html.Input;
+import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 import za.co.mmagon.jwebswing.components.bootstrap.forms.groups.BSComponentFormGroupOptions;
 import za.co.mmagon.jwebswing.components.bootstrap.forms.groups.BSFormGroupChildren;
@@ -38,7 +39,6 @@ public class BSInput extends Input implements BSFormGroupChildren
      */
     public BSInput()
     {
-        addClass(BSComponentFormGroupOptions.Form_Control);
     }
 
     /**
@@ -49,7 +49,16 @@ public class BSInput extends Input implements BSFormGroupChildren
     public BSInput(InputTypes inputType)
     {
         super(inputType);
-        addClass(BSComponentFormGroupOptions.Form_Control);
     }
 
+    @Override
+    public void preConfigure()
+    {
+        if (!isConfigured())
+        {
+            addAttribute(GlobalAttributes.Name, getID());
+            addClass(BSComponentFormGroupOptions.Form_Control);
+        }
+        super.preConfigure();
+    }
 }
