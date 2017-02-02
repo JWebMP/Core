@@ -67,6 +67,9 @@ public enum BSComponentFormGroupOptions implements IBSComponentOptions
      * The input for checkbox and radio buttons
      */
     Form_Check_Input,
+    /**
+     * Deprecated?
+     */
     Form_Text;
 
     @Override

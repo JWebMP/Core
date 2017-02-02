@@ -16,7 +16,7 @@
  */
 package za.co.mmagon.jwebswing.components.jqxwidgets.angular;
 
-import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
 import za.co.mmagon.jwebswing.components.pools.jqxwidgets.JQXReferencePool;
 
@@ -33,14 +33,11 @@ public class JQXAngularModule extends AngularModuleBase
 
     private static final long serialVersionUID = 1L;
 
-    public JQXAngularModule(Page page)
+    public JQXAngularModule(ComponentHierarchyBase component)
     {
-        super("jqwidgets", page.getAngular());
-        page.getBody().getAngularModules().add(this);
-        page.getOptions().setAngularEnabled(true);
-        page.getBody().getJavascriptReferences().add(JQXReferencePool.Core.getJavaScriptReference());
-        page.getBody().getJavascriptReferences().add(JQXReferencePool.AngularJS.getJavaScriptReference());
-
+        super("jqwidgets");
+        component.getJavascriptReferences().add(JQXReferencePool.Core.getJavaScriptReference());
+        component.getJavascriptReferences().add(JQXReferencePool.AngularJS.getJavaScriptReference());
     }
 
     @Override

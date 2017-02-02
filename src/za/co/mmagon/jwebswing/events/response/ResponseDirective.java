@@ -38,7 +38,7 @@ public class ResponseDirective extends AngularDirectiveBase
      */
     public ResponseDirective(AngularFeature angular)
     {
-        super("ngResponse", angular);
+        super("ngResponse");
     }
 
     /**

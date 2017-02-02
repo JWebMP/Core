@@ -38,7 +38,7 @@ public class DropDirective extends AngularDirectiveBase
      */
     public DropDirective(AngularFeature angular)
     {
-        super("ngDrop", angular);
+        super("ngDrop");
     }
 
     /**

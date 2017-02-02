@@ -18,6 +18,7 @@ package za.co.mmagon.jwebswing.base.angular.modules;
 
 import java.util.ArrayList;
 import java.util.List;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 
 /**
@@ -29,11 +30,13 @@ public class JWAngularModule extends AngularModuleBase
 {
 
     private static final long serialVersionUID = 1L;
+    private ComponentHierarchyBase component;
 
-    public JWAngularModule(AngularFeature angularFeature)
+    public JWAngularModule(ComponentHierarchyBase component)
     {
-        super("jwApp", angularFeature);
-        setSortOrder(9999999); //always last
+        super("jwApp");
+        setSortOrder(9999999);
+        this.component = component;
     }
 
     /**
@@ -44,11 +47,11 @@ public class JWAngularModule extends AngularModuleBase
     @Override
     public String renderFunction()
     {
-        String returnable = "var " + this.getAngular().getAppName() + " = angular.module(";
-        returnable += "'" + this.getAngular().getAppName() + "',";
+        String returnable = "var " + AngularFeature.getAppName() + " = angular.module(";
+        returnable += "'" + AngularFeature.getAppName() + "',";
 
         ArrayList<String> moduleNames = new ArrayList<>();
-        List<AngularModuleBase> modules = super.getAngular().getComponent().getPage().getBody().getAngularModulesAll();
+        List<AngularModuleBase> modules = component.getPage().getBody().getAngularModulesAll();
         modules.stream().forEach(module ->
         {
             String name = module.getReferenceName();

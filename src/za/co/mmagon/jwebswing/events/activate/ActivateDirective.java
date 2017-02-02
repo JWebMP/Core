@@ -38,7 +38,7 @@ public class ActivateDirective extends AngularDirectiveBase
      */
     public ActivateDirective(AngularFeature angular)
     {
-        super("ngActivate", angular);
+        super("ngActivate");
     }
 
     /**

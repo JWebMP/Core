@@ -74,6 +74,7 @@ public class AngularDataServlet extends JWDefaultServlet
         }
 
         Page page = GuiceContext.Injector().getInstance(Page.class);
+
         ComponentHierarchyBase triggerComponent = page.getComponentCache().get(componentId);
         ajaxCall.setComponent(triggerComponent);
         if (triggerComponent == null)
@@ -129,7 +130,7 @@ public class AngularDataServlet extends JWDefaultServlet
 
             response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);
             response.setHeader("Access-Control-Allow-Credentials", "true");
-            response.setHeader("Access-Control-Allow-Methods", "GET, POST");
+            response.setHeader("Access-Control-Allow-Methods", "POST");
             response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
 
             response.getWriter().write(respJson.toString());

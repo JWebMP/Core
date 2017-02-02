@@ -17,8 +17,7 @@ import net.sf.uadetector.service.UADetectorServiceFactory;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
 import za.co.mmagon.jwebswing.base.client.Browsers;
-import za.co.mmagon.jwebswing.base.html.Base;
-import za.co.mmagon.jwebswing.base.html.Body;
+import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.html.attributes.*;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.generics.DynamicLoadingPage;
@@ -339,7 +338,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
         p.getPageFields().setGenerator("JWebSwing - https://sourceforge.net/projects/jwebswing/");
         Body b = p.getBody();
         b.add("The following error was encountered during render<br/><hr/>");
-        b.add(TextUtilities.stackTraceToString(t));
+        b.add(new PreFormattedText(TextUtilities.stackTraceToString(t)));
         return p;
     }
 
@@ -362,7 +361,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
         p.getPageFields().setGenerator("JWebSwing - https://sourceforge.net/projects/jwebswing/");
         Body b = p.getBody();
         b.add("The following error was encountered during render<br/><hr/>");
-        b.add(TextUtilities.stackTraceToString(t));
+        b.add(new PreFormattedText(TextUtilities.stackTraceToString(t)));
         return p;
     }
 

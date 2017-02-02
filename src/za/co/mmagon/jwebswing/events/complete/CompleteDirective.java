@@ -38,7 +38,7 @@ public class CompleteDirective extends AngularDirectiveBase
      */
     public CompleteDirective(AngularFeature angular)
     {
-        super("ngComplete", angular);
+        super("ngComplete");
     }
 
     /**

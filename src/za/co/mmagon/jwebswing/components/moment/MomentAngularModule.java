@@ -14,31 +14,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package za.co.mmagon.jwebswing.components.moment;
 
-import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.angular.AngularFeature;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
 
 /**
- * Registers the moment angular module as available for the 
+ * Registers the moment angular module as available for the
+ *
  * @author GedMarc
  * @since Oct 4, 2016
  * @version 1.0
- *  
+ *
  */
 public class MomentAngularModule extends AngularModuleBase
 {
-    private AngularFeature moduleFeature;
-    
-    public MomentAngularModule (Page page)
+
+    private static final long serialVersionUID = 1L;
+
+    public MomentAngularModule(ComponentHierarchyBase component)
     {
-        super("angularMoment", page.getAngular());
-        page.getBody().getAngularModules().add(this);
-        this.moduleFeature = page.getAngular();
-        page.getBody().getJavascriptReferences().add(MomentReferencePool.MomentReference.getJavaScriptReference());
-        page.getBody().getJavascriptReferences().add(MomentReferencePool.MomentAngularReference.getJavaScriptReference());
+        super("angularMoment");
+        component.getJavascriptReferences().add(MomentReferencePool.MomentReference.getJavaScriptReference());
+        component.getJavascriptReferences().add(MomentReferencePool.MomentAngularReference.getJavaScriptReference());
     }
 
     @Override

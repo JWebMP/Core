@@ -38,7 +38,7 @@ public class SearchDirective extends AngularDirectiveBase
      */
     public SearchDirective(AngularFeature angular)
     {
-        super("ngSearch", angular);
+        super("ngSearch");
     }
 
     /**

@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.base.angular.controllers;
 
-import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.AngularReferenceBase;
 
 /**
@@ -29,16 +28,16 @@ public abstract class AngularControllerBase extends AngularReferenceBase
 {
 
     private static final long serialVersionUID = 1L;
+
     /**
      * Constructs a module with this name that always sorts default
      *
      * @param moduleName This modules name
      * @param angular    The angular feature attached
      */
-    public AngularControllerBase(String moduleName, AngularFeature angular)
+    public AngularControllerBase(String moduleName)
     {
-        super(moduleName, angular);
+        super(moduleName);
     }
-    
-    
+
 }

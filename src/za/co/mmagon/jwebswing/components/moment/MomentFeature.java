@@ -25,7 +25,7 @@ public class MomentFeature extends Feature<MomentOptions, MomentFeature> impleme
     public MomentFeature(Component forComponent)
     {
         super("MomentJS");
-        forComponent.getAngularModules().add(new MomentAngularModule(forComponent.getPage()));
+        forComponent.getAngularModules().add(new MomentAngularModule(forComponent));
         setComponent(forComponent);
         getJavascriptReferences().add(MomentReferencePool.MomentReference.getJavaScriptReference());
         getJavascriptReferences().add(MomentReferencePool.MomentAngularReference.getJavaScriptReference());

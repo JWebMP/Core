@@ -28,7 +28,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.NameValuePairCSSImpl;
  * @version 1.0
  *
  */
-public class CustomCSSImpl implements za.co.mmagon.jwebswing.htmlbuilder.css.Annotations.CustomCSS
+public class CustomCSSImpl implements CustomCSS
 {
 
     private NameValuePairCSSImpl[] value;
@@ -44,7 +44,7 @@ public class CustomCSSImpl implements za.co.mmagon.jwebswing.htmlbuilder.css.Ann
     @Override
     public Class<? extends Annotation> annotationType()
     {
-        return za.co.mmagon.jwebswing.htmlbuilder.css.Annotations.CustomCSS.class;
+        return CustomCSS.class;
     }
 
     /**

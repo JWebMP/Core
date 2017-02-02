@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.base.angular.directives;
 
-import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.AngularReferenceBase;
 
 /**
@@ -36,10 +35,9 @@ public abstract class AngularDirectiveBase extends AngularReferenceBase
      * @param directiveName This modules name
      * @param angular       The angular feature attached
      */
-    public AngularDirectiveBase(String directiveName, AngularFeature angular)
+    public AngularDirectiveBase(String directiveName)
     {
-        super(directiveName, angular);
+        super(directiveName);
     }
 
-    
 }

@@ -59,7 +59,6 @@ public class Page extends Html implements IPage
      * The fields available
      */
     private PageFields fields;
-    
 
     /**
      * The current user agent of the render
@@ -238,6 +237,7 @@ public class Page extends Html implements IPage
         if (componentCache == null)
         {
             componentCache = new HashMap<>();
+            buildComponentHierarchy();
         }
         return componentCache;
     }

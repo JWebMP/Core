@@ -38,7 +38,7 @@ public class SpinDirective extends AngularDirectiveBase
      */
     public SpinDirective(AngularFeature angular)
     {
-        super("ngSpin", angular);
+        super("ngSpin");
     }
 
     /**

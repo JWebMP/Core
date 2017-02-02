@@ -38,7 +38,7 @@ public class BeforeStopDirective extends AngularDirectiveBase
      */
     public BeforeStopDirective(AngularFeature angular)
     {
-        super("ngBeforeStop", angular);
+        super("ngBeforeStop");
     }
 
     /**

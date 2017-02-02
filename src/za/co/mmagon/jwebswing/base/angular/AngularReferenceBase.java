@@ -39,10 +39,6 @@ public abstract class AngularReferenceBase extends JavascriptLiteralFunction imp
      * The sort order for this module
      */
     private Integer sortOrder = 0;
-    /**
-     * the angular feature for this module
-     */
-    private AngularFeature angular;
 
     /**
      * Constructs a module with this name that always sorts default
@@ -50,10 +46,9 @@ public abstract class AngularReferenceBase extends JavascriptLiteralFunction imp
      * @param moduleName This references name
      * @param angular    The angular feature attached
      */
-    public AngularReferenceBase(String moduleName, AngularFeature angular)
+    public AngularReferenceBase(String moduleName)
     {
         this.referenceName = moduleName;
-        this.angular = angular;
     }
 
     /**
@@ -97,26 +92,6 @@ public abstract class AngularReferenceBase extends JavascriptLiteralFunction imp
     }
 
     /**
-     * Gets the angular feature for this module
-     *
-     * @return
-     */
-    public AngularFeature getAngular()
-    {
-        return angular;
-    }
-
-    /**
-     * Sets the angular feature for this module
-     *
-     * @param angular
-     */
-    public void setAngular(AngularFeature angular)
-    {
-        this.angular = angular;
-    }
-
-    /**
      * Overwrite the render function
      *
      * @return
@@ -142,6 +117,7 @@ public abstract class AngularReferenceBase extends JavascriptLiteralFunction imp
      * Equals based on sort order and name
      *
      * @param obj
+     *
      * @return
      */
     @Override
@@ -172,6 +148,7 @@ public abstract class AngularReferenceBase extends JavascriptLiteralFunction imp
      *
      * @param o1
      * @param o2
+     *
      * @return
      */
     @Override
@@ -186,5 +163,4 @@ public abstract class AngularReferenceBase extends JavascriptLiteralFunction imp
         return new StringBuilder();
     }
 
-    
 }

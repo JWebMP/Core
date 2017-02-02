@@ -26,7 +26,7 @@ import za.co.mmagon.jwebswing.components.bootstrap.forms.controls.BSInput;
  * @since 18 Jan 2017
  *
  */
-public abstract class BSFormCheckInput extends BSInput
+public abstract class BSFormCheckInput extends BSInput implements BSFormSetChildren
 {
 
     private static final long serialVersionUID = 1L;

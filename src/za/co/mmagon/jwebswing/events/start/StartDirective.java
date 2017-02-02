@@ -38,7 +38,7 @@ public class StartDirective extends AngularDirectiveBase
      */
     public StartDirective(AngularFeature angular)
     {
-        super("ngStart", angular);
+        super("ngStart");
     }
 
     /**

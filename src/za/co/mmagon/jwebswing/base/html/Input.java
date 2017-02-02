@@ -165,4 +165,67 @@ public class Input<A extends Enum & AttributeDefinitions> extends Component<NoCh
         addAttribute(AngularAttributes.ngModel, variableName);
         return this;
     }
+
+    /**
+     * Sets this input as required in the form
+     *
+     * @return
+     */
+    public Input setRequired()
+    {
+        addAttribute("required", null);
+        return this;
+    }
+
+    /**
+     * Sets the minimum length of this input
+     *
+     * @param minLength
+     *
+     * @return
+     */
+    public Input setMinimumLength(int minLength)
+    {
+        addAttribute("minlength", "" + minLength);
+        return this;
+    }
+
+    /**
+     * Sets the minimum length of this input
+     *
+     * @param minLength
+     *
+     * @return
+     */
+    public Input setMaximumLength(int minLength)
+    {
+        addAttribute("maxlength", "" + minLength);
+        return this;
+    }
+
+    /**
+     * Sets the place holder for this input
+     *
+     * @param placeholder
+     *
+     * @return
+     */
+    public Input setPlaceholder(String placeholder)
+    {
+        addAttribute("placeholder", placeholder);
+        return this;
+    }
+
+    /**
+     * Sets the value attribute
+     *
+     * @param value
+     *
+     * @return
+     */
+    public Input setValue(String value)
+    {
+        addAttribute("value", value);
+        return this;
+    }
 }

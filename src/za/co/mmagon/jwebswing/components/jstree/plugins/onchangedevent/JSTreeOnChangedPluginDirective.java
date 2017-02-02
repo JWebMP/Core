@@ -38,7 +38,7 @@ public class JSTreeOnChangedPluginDirective extends AngularDirectiveBase
      */
     public JSTreeOnChangedPluginDirective(AngularFeature angular)
     {
-        super("ngActivate", angular);
+        super("ngActivate");
     }
 
     /**

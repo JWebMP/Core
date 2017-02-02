@@ -1,7 +1,7 @@
-package za.co.mmagon.jwebswing.htmlbuilder.css.Annotations;
+package za.co.mmagon.jwebswing.htmlbuilder.css.annotations;
 
 import java.lang.annotation.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.NameValuePairCSS;
 
 /**
  * Defines any name value pair of a CSS

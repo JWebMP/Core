@@ -40,11 +40,11 @@ public class AngularModuleBaseTest extends BaseTestClass
         Page p = getPage();
         Body b = p.getBody();
         p.getAngular().setAppName("jwApp");
-        AngularModuleBase comp = new JWAngularModule(p.getAngular());
+        AngularModuleBase comp = new JWAngularModule(b);
         System.out.println(comp.toString());
         Assert.assertEquals("var jwApp = angular.module('jwApp',[]);", comp.toString());
 
-        MomentAngularModule mam = new MomentAngularModule(p);
+        b.getAngularModules().add(new MomentAngularModule(b));
         System.out.println(comp.toString());
 
     }

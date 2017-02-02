@@ -38,7 +38,7 @@ public class ResizeDirective extends AngularDirectiveBase
      */
     public ResizeDirective(AngularFeature angular)
     {
-        super("ngResize", angular);
+        super("ngResize");
     }
 
     /**

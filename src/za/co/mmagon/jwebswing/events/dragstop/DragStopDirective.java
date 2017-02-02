@@ -38,7 +38,7 @@ public class DragStopDirective extends AngularDirectiveBase
      */
     public DragStopDirective(AngularFeature angular)
     {
-        super("ngDragStop", angular);
+        super("ngDragStop");
     }
 
     /**

@@ -21,6 +21,8 @@ import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.components.bootstrap.forms.BSFormChildren;
+import za.co.mmagon.jwebswing.components.bootstrap.forms.groups.BSFormGroupChildren;
 
 /**
  * Rows are horizontal groups of columns that ensure your columns are lined up properly.
@@ -32,7 +34,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
  * @version 1.0
  *
  */
-public class BSRow extends Div<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, BSRow>
+public class BSRow extends Div<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, BSRow> implements BSFormChildren, BSFormGroupChildren
 {
 
     private static final long serialVersionUID = 1L;

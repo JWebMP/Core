@@ -38,7 +38,7 @@ public class BeforeCloseDirective extends AngularDirectiveBase
      */
     public BeforeCloseDirective(AngularFeature angular)
     {
-        super("ngBeforeClose", angular);
+        super("ngBeforeClose");
     }
 
     /**

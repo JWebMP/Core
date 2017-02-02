@@ -39,7 +39,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTy
  * @since 23 Apr 2016
  */
 public class Event<A extends JavaScriptPart, J extends Event>
-        extends ComponentEventBase<GlobalFeatures, GlobalEvents, Event>
+        extends ComponentEventBase<GlobalFeatures, GlobalEvents, Event> implements GlobalEvents
 {
 
     private static final long serialVersionUID = 1L;
@@ -128,10 +128,13 @@ public class Event<A extends JavaScriptPart, J extends Event>
      * Adds a variable to return on the call
      *
      * @param returnVariable The name of the variable to return
+     *
+     * @return
      */
-    public void registerReturnVariableName(String returnVariable)
+    public J registerReturnVariableName(String returnVariable)
     {
         getVariables().add(returnVariable);
+        return (J) this;
     }
 
     /**
@@ -139,10 +142,13 @@ public class Event<A extends JavaScriptPart, J extends Event>
      *
      * @param returnVariable  The name of the variable to return
      * @param owningComponent The component to assign this variable to
+     *
+     * @return
      */
-    public void registerReturnVariableName(String returnVariable, String owningComponent)
+    public J registerReturnVariableName(String returnVariable, String owningComponent)
     {
         getVariables().add(returnVariable);
+        return (J) this;
     }
 
     /**
@@ -193,10 +199,13 @@ public class Event<A extends JavaScriptPart, J extends Event>
      * Sets the current list of variables to return
      *
      * @param variables
+     *
+     * @return
      */
-    public void setVariables(List<String> variables)
+    public J setVariables(List<String> variables)
     {
         this.variables = variables;
+        return (J) this;
     }
 
     /**
@@ -224,14 +233,17 @@ public class Event<A extends JavaScriptPart, J extends Event>
      * Sets the linked component if required
      *
      * @param component
+     *
+     * @return
      */
-    public final void setComponent(ComponentHierarchyBase component)
+    public final J setComponent(ComponentHierarchyBase component)
     {
         if (component == null)
         {
             throw new NullComponentException("Components set for events cannot be null");
         }
         this.component = component;
+        return (J) this;
     }
 
     /**
@@ -298,10 +310,13 @@ public class Event<A extends JavaScriptPart, J extends Event>
      * Returns all queries that are executed on ajax response
      *
      * @param onDemandQueries
+     *
+     * @return
      */
-    public void setOnDemandQueries(List<Event> onDemandQueries)
+    public J setOnDemandQueries(List<Event> onDemandQueries)
     {
         this.onDemandQueries = onDemandQueries;
+        return (J) this;
     }
 
     @Override

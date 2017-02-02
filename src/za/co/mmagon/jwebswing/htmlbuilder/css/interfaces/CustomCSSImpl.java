@@ -1,8 +1,7 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.interfaces;
 
-import za.co.mmagon.jwebswing.htmlbuilder.css.Annotations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationAdapter;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationClass;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.CustomCSSImpl;
 
 /**
  * Any custom css record you want

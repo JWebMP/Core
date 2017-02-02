@@ -38,7 +38,7 @@ public class CancelDirective extends AngularDirectiveBase
      */
     public CancelDirective(AngularFeature angular)
     {
-        super("ngCancel", angular);
+        super("ngCancel");
     }
 
     /**

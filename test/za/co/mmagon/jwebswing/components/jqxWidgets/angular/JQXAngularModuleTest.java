@@ -16,11 +16,11 @@
  */
 package za.co.mmagon.jwebswing.components.jqxWidgets.angular;
 
-import za.co.mmagon.jwebswing.components.jqxwidgets.angular.JQXAngularModule;
 import org.junit.Before;
 import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.components.jqxwidgets.angular.JQXAngularModule;
 
 /**
  *
@@ -28,11 +28,11 @@ import za.co.mmagon.jwebswing.Page;
  */
 public class JQXAngularModuleTest extends BaseTestClass
 {
-    
+
     public JQXAngularModuleTest()
     {
     }
-    
+
     @Before
     public void setUp()
     {
@@ -42,9 +42,9 @@ public class JQXAngularModuleTest extends BaseTestClass
     public void testSomeMethod()
     {
         Page p = getInstance();
-        JQXAngularModule mod = new JQXAngularModule(p);
+        JQXAngularModule mod = new JQXAngularModule(p.getBody());
         System.out.println(p.toString(true));
         System.out.println(p.getAngular().renderJavascript());
-        
+
     }
 }

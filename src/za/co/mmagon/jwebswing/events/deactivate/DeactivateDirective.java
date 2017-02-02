@@ -38,7 +38,7 @@ public class DeactivateDirective extends AngularDirectiveBase
      */
     public DeactivateDirective(AngularFeature angular)
     {
-        super("ngDeActivate", angular);
+        super("ngDeActivate");
     }
 
     /**

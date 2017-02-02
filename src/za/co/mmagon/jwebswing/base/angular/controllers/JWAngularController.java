@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.base.angular.controllers;
 
 import za.co.mmagon.FileTemplates;
-import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 
 /**
  * Maps to the angular function of right click
@@ -35,9 +34,9 @@ public class JWAngularController extends AngularControllerBase
      *
      * @param angular
      */
-    public JWAngularController(AngularFeature angular)
+    public JWAngularController()
     {
-        super("jwController", angular);
+        super("jwController");
         setSortOrder(Integer.MAX_VALUE);
     }
 

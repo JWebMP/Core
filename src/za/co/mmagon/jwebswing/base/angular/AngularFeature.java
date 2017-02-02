@@ -100,8 +100,8 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
         setComponent(component);
         setJavascriptRenderedElsewhere(true);
 
-        jwAngularApp = new JWAngularModule(this);
-        jwAngularController = new JWAngularController(this);
+        jwAngularApp = new JWAngularModule(component);
+        jwAngularController = new JWAngularController();
         if (applicationName != null && !applicationName.isEmpty())
         {
             setAppName(applicationName);

@@ -38,7 +38,7 @@ public class RemoveDirective extends AngularDirectiveBase
      */
     public RemoveDirective(AngularFeature angular)
     {
-        super("ngRemove", angular);
+        super("ngRemove");
     }
 
     /**

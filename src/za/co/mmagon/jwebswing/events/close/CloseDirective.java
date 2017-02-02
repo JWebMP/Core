@@ -38,7 +38,7 @@ public class CloseDirective extends AngularDirectiveBase
      */
     public CloseDirective(AngularFeature angular)
     {
-        super("ngClose", angular);
+        super("ngClose");
     }
 
     /**

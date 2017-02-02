@@ -38,7 +38,7 @@ public class SortDirective extends AngularDirectiveBase
      */
     public SortDirective(AngularFeature angular)
     {
-        super("ngSort", angular);
+        super("ngSort");
     }
 
     /**

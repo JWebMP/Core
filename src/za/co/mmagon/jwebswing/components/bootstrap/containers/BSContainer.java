@@ -22,6 +22,8 @@ import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.components.bootstrap.forms.BSFormChildren;
+import za.co.mmagon.jwebswing.components.bootstrap.forms.groups.BSFormGroupChildren;
 import za.co.mmagon.jwebswing.components.bootstrap.navbar.BSNavBarChildren;
 
 /**
@@ -38,7 +40,7 @@ import za.co.mmagon.jwebswing.components.bootstrap.navbar.BSNavBarChildren;
  *
  */
 public class BSContainer extends Div<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, Component>
-        implements BSNavBarChildren
+        implements BSNavBarChildren, BSFormChildren, BSFormGroupChildren
 {
 
     private static final long serialVersionUID = 1L;

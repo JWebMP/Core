@@ -1,27 +1,30 @@
 package za.co.mmagon.jwebswing.events.click;
 
-import za.co.mmagon.logger.LogFactory;
-import java.util.logging.*;
-import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.base.*;
-import za.co.mmagon.jwebswing.base.ajax.*;
-import za.co.mmagon.jwebswing.base.angular.*;
-import za.co.mmagon.jwebswing.base.html.attributes.*;
+import java.util.logging.Level;
+import za.co.mmagon.jwebswing.Event;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
+import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
+import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
+import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
-import za.co.mmagon.jwebswing.components.jqueryui.button.*;
-import za.co.mmagon.jwebswing.components.jqxwidgets.buttongroup.*;
-import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.*;
-import za.co.mmagon.jwebswing.components.jqxwidgets.radiobutton.*;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.*;
+import za.co.mmagon.jwebswing.components.bootstrap.buttons.BSButtonEvents;
+import za.co.mmagon.jwebswing.components.jqueryui.button.JQUIButtonEvents;
+import za.co.mmagon.jwebswing.components.jqxwidgets.buttongroup.JQXButtonGroupEvents;
+import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.JQXButtonEvents;
+import za.co.mmagon.jwebswing.components.jqxwidgets.radiobutton.JQXRadioButtonEvents;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Handles all click events. Over-ride methods.
  *
  * @author Marc Magon
  */
-public abstract class ClickAdapter extends Event
+public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
         implements ParagraphEvents, BodyEvents, GlobalEvents, JQUIButtonEvents, JQXRadioButtonEvents,
-        JQXButtonEvents, JQXButtonGroupEvents
+        JQXButtonEvents, JQXButtonGroupEvents, BSButtonEvents
 {
 
     /**
@@ -70,7 +73,7 @@ public abstract class ClickAdapter extends Event
         }
         catch (Exception e)
         {
-            log.log(Level.SEVERE,"Error In Firing Event", e);
+            log.log(Level.SEVERE, "Error In Firing Event", e);
         }
     }
 

@@ -38,7 +38,7 @@ public class BeforeActivateDirective extends AngularDirectiveBase
      */
     public BeforeActivateDirective(AngularFeature angular)
     {
-        super("ngBeforeActivate", angular);
+        super("ngBeforeActivate");
     }
 
     /**

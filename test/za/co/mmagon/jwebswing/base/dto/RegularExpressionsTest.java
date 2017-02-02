@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 GedMarc
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,30 +14,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.base.angular.modules;
+package za.co.mmagon.jwebswing.base.dto;
 
-import za.co.mmagon.jwebswing.base.angular.AngularReferenceBase;
+import org.junit.Test;
 
 /**
- * Is an angular module
  *
  * @author GedMarc
- * @since 24 Jul 2016
  */
-public abstract class AngularModuleBase extends AngularReferenceBase
+public class RegularExpressionsTest
 {
 
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a module with this name that always sorts default
-     *
-     * @param moduleName This modules name
-     * @param angular    The angular feature attached
-     */
-    public AngularModuleBase(String moduleName)
+    public RegularExpressionsTest()
     {
-        super(moduleName);
+    }
+
+    @Test
+    public void testSomeMethod()
+    {
+        RegularExpressionsDTO re = new RegularExpressionsDTO();
+        re.addExpression("TextField", "asdf");
+        System.out.println(re.toString());
     }
 
 }

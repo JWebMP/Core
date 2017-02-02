@@ -38,7 +38,7 @@ public class ButtonClickDirective extends AngularDirectiveBase
      */
     public ButtonClickDirective(AngularFeature angular)
     {
-        super("ngButtonClick", angular);
+        super("ngButtonClick");
     }
 
     /**

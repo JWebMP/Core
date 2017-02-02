@@ -216,7 +216,7 @@ public class Moment extends Div<MomentChildren, MomentAttributes, MomentFeatures
             if (angularModule == null)
             {
 
-                setAngularModule(new MomentAngularModule(getPage()));
+                setAngularModule(new MomentAngularModule(this));
             }
             getAngularModules().add(angularModule);
             addAttribute(MomentAttributes.am_time_ago, buildAttributeString());

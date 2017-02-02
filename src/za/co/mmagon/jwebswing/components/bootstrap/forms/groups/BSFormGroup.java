@@ -25,8 +25,7 @@ import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 import za.co.mmagon.jwebswing.components.bootstrap.componentoptions.BSComponentDefaultOptions;
-import za.co.mmagon.jwebswing.components.bootstrap.forms.BSForm;
-import za.co.mmagon.jwebswing.components.bootstrap.forms.BSFormChildren;
+import za.co.mmagon.jwebswing.components.bootstrap.forms.*;
 import za.co.mmagon.jwebswing.components.bootstrap.forms.controls.BSFormSelectInput;
 import za.co.mmagon.jwebswing.components.bootstrap.forms.controls.BSInput;
 import za.co.mmagon.jwebswing.components.bootstrap.forms.groups.sets.BSFormInputGroup;
@@ -46,6 +45,7 @@ public class BSFormGroup<T extends ComponentHTMLBootstrapBase & BSFormGroupChild
 {
 
     private static final Logger log = LogFactory.getLog("BSFormGroup");
+
     private static final long serialVersionUID = 1L;
     /**
      * The class name applied to the group when there is an error
@@ -104,6 +104,14 @@ public class BSFormGroup<T extends ComponentHTMLBootstrapBase & BSFormGroupChild
      * The maximum error message
      */
     private T maxMessage;
+    /**
+     * The minimum length for a text field
+     */
+    private T minLengthMessage;
+    /**
+     * The maximum length for a message
+     */
+    private T maxLengthMessage;
 
     /**
      * Constructs a new instance
@@ -301,16 +309,10 @@ public class BSFormGroup<T extends ComponentHTMLBootstrapBase & BSFormGroupChild
             }
 
             getInputComponent().addAttribute(GlobalAttributes.Aria_Describedby, getHelpText().getID());
-            if (!isInline())
-            {
-                getHelpText().addClass(BSComponentFormGroupOptions.Form_Text);
-            }
-            getHelpText().addClass(BSComponentDefaultOptions.Text_Muted);
-            add(getHelpText());
 
             if (isAngularValidation())
             {
-                getPage().getOptions().setAngularEnabled(true);
+                setLoadAngular(true);
                 BSForm referencedForm;
                 if (BSForm.class.isAssignableFrom(getParent().getClass()))
                 {
@@ -326,18 +328,19 @@ public class BSFormGroup<T extends ComponentHTMLBootstrapBase & BSFormGroupChild
                     referencedForm = new BSForm();
                     referencedForm.setID("InvalidForm");
                 }
+                if (BSFormInline.class.isAssignableFrom(referencedForm.getClass()))
+                {
+                    setInline(true);
+                }
 
-                referencedForm.addAttribute("novalidate", (String) null);
+                referencedForm.addAttribute("novalidate", null);
                 referencedForm.setTag("ng-form");
 
                 String formName = referencedForm.getID();
-                String fieldName = "" + getInputComponent().getID() + "";
+                String fieldName = "'" + getInputComponent().getID() + "'";
 
-                addAttribute(AngularAttributes.ngInit, "formField = " + formName + "['" + fieldName + "'];");
-
-                addAttribute(AngularAttributes.ngClass, "{'" + ERROR_CLASS + "':'formField.$invalid && !formField.$pristine',"
-                        + "'" + SUCCESS_CLASS + "':'formField.$valid'"
-                        + "}");
+                addAttribute(AngularAttributes.ngClass, formName + "[" + fieldName + "].$valid && !" + formName + "[" + fieldName + "].$pristine "
+                        + "? '" + SUCCESS_CLASS + "' : " + formName + "[" + fieldName + "].$pristine ? '' : " + " '" + ERROR_CLASS + "'");
 
                 if (getRequiredMessage() != null)
                 {
@@ -347,6 +350,7 @@ public class BSFormGroup<T extends ComponentHTMLBootstrapBase & BSFormGroupChild
                         getRequiredMessage().addClass(BSComponentFormGroupOptions.Form_Text);
                         getRequiredMessage().addClass(BSComponentFormGroupOptions.Form_Control_Feedback);
                     }
+
                     getChildren().add(getRequiredMessage());
                 }
 
@@ -358,6 +362,7 @@ public class BSFormGroup<T extends ComponentHTMLBootstrapBase & BSFormGroupChild
                         getPatternMessage().addClass(BSComponentFormGroupOptions.Form_Text);
                         getPatternMessage().addClass(BSComponentFormGroupOptions.Form_Control_Feedback);
                     }
+
                     getChildren().add(getPatternMessage());
                 }
 
@@ -369,7 +374,20 @@ public class BSFormGroup<T extends ComponentHTMLBootstrapBase & BSFormGroupChild
                         getMinMessage().addClass(BSComponentFormGroupOptions.Form_Text);
                         getMinMessage().addClass(BSComponentFormGroupOptions.Form_Control_Feedback);
                     }
+
                     getChildren().add(getMinMessage());
+                }
+
+                if (getMinLengthMessage() != null)
+                {
+                    getMinLengthMessage().addAttribute(AngularAttributes.ngShow, "" + formName + "[" + fieldName + "].$error.minlength && !" + formName + "[" + fieldName + "].$pristine");
+                    if (!isInline())
+                    {
+                        getMinLengthMessage().addClass(BSComponentFormGroupOptions.Form_Text);
+                        getMinLengthMessage().addClass(BSComponentFormGroupOptions.Form_Control_Feedback);
+                    }
+
+                    getChildren().add(getMinLengthMessage());
                 }
 
                 if (getMaxMessage() != null)
@@ -380,9 +398,28 @@ public class BSFormGroup<T extends ComponentHTMLBootstrapBase & BSFormGroupChild
                         getMaxMessage().addClass(BSComponentFormGroupOptions.Form_Text);
                         getMaxMessage().addClass(BSComponentFormGroupOptions.Form_Control_Feedback);
                     }
+
                     getChildren().add(getMaxMessage());
                 }
+
+                if (getMaxLengthMessage() != null)
+                {
+                    getMaxLengthMessage().addAttribute(AngularAttributes.ngShow, "" + formName + "[" + fieldName + "].$error.max && !" + formName + "[" + fieldName + "].$pristine");
+                    if (!isInline())
+                    {
+                        getMaxLengthMessage().addClass(BSComponentFormGroupOptions.Form_Text);
+                        getMaxLengthMessage().addClass(BSComponentFormGroupOptions.Form_Control_Feedback);
+                    }
+                    getChildren().add(getMaxLengthMessage());
+                }
             }
+
+            if (!isInline())
+            {
+                getHelpText().addClass(BSComponentFormGroupOptions.Form_Text);
+            }
+            getHelpText().addClass(BSComponentDefaultOptions.Text_Muted);
+            add(getHelpText());
         }
         super.preConfigure();
     }
@@ -401,10 +438,13 @@ public class BSFormGroup<T extends ComponentHTMLBootstrapBase & BSFormGroupChild
      * If this group must render as a row
      *
      * @param asRow
+     *
+     * @return
      */
-    public void setAsRow(boolean asRow)
+    public BSFormGroup setAsRow(boolean asRow)
     {
         this.asRow = asRow;
+        return this;
     }
 
     /**
@@ -421,10 +461,13 @@ public class BSFormGroup<T extends ComponentHTMLBootstrapBase & BSFormGroupChild
      * If this group must render as inline
      *
      * @param inline
+     *
+     * @return
      */
-    public void setInline(boolean inline)
+    public BSFormGroup setInline(boolean inline)
     {
         this.inline = inline;
+        return this;
     }
 
     /**
@@ -539,6 +582,40 @@ public class BSFormGroup<T extends ComponentHTMLBootstrapBase & BSFormGroupChild
     public BSFormGroup setMaxMessage(T maxMessage)
     {
         this.maxMessage = maxMessage;
+        return this;
+    }
+
+    /**
+     * Returns the minimum length message
+     *
+     * @return
+     */
+    public T getMinLengthMessage()
+    {
+        return minLengthMessage;
+    }
+
+    /**
+     * Sets the minimum length message
+     *
+     * @param minLengthMessage
+     *
+     * @return
+     */
+    public BSFormGroup setMinLengthMessage(T minLengthMessage)
+    {
+        this.minLengthMessage = minLengthMessage;
+        return this;
+    }
+
+    public T getMaxLengthMessage()
+    {
+        return maxLengthMessage;
+    }
+
+    public BSFormGroup setMaxLengthMessage(T maxLengthMessage)
+    {
+        this.maxLengthMessage = maxLengthMessage;
         return this;
     }
 
