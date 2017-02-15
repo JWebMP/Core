@@ -65,7 +65,7 @@ public class ComponentHierarchyBaseTest extends BaseTestClass
         tag.addClass("KKKKKKK");
         System.out.println(tag);
         System.out.println(tag.toString(true));
-        Assert.assertEquals("<area class=\"This is a class KKKKKKK\" id=\"testTag\">\n"
+        Assert.assertEquals("<area class=\"This is a class KKKKKKK\" id=\"testTag\">"
                 + "</area>", tag.toString(true));
     }
 
