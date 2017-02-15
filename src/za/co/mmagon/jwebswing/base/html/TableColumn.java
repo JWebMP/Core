@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import java.util.logging.*;
-import za.co.mmagon.logger.LogFactory;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.TableColumnAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
@@ -25,6 +25,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.TableColumnGroupChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Definition and Usage<p>
@@ -44,12 +45,17 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * In XHTML, the &lt;col&gt; tag must be properly closed.<p>
  * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since 2014/12/20
  */
-public class TableColumn extends Component<NoChildren, TableColumnAttributes, GlobalFeatures, GlobalEvents, TableColumn> implements TableColumnGroupChildren
+public class TableColumn<J extends TableColumn>
+        extends Component<NoChildren, TableColumnAttributes, GlobalFeatures, GlobalEvents, J>
+        implements TableColumnGroupChildren
 {
 
     private static final Logger log = LogFactory.getInstance().getLogger("TableColumn");
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new table column
@@ -79,7 +85,7 @@ public class TableColumn extends Component<NoChildren, TableColumnAttributes, Gl
         }
         catch (Exception e)
         {
-            log.log(Level.FINE,"Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.",e);
+            log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
         }
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 ged_m
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.base.interfaces;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.ComponentEventBase;
 import za.co.mmagon.jwebswing.base.html.Comment;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
@@ -36,7 +35,7 @@ import za.co.mmagon.logger.LogFactory;
  * @author GedMarc
  * @since 23 Apr 2016
  */
-public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentBase>
+public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHTMLBase>
         extends ComponentEventBase<F, E, J> implements IComponentHTMLBase<J>
 {
 
@@ -71,22 +70,18 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
     /**
      * Specifies to render a closing tag or not
      */
-    @JsonIgnore
     private boolean inlineClosingTag = false;
     /**
      * Specifies if this component should render a closing tag
      */
-    @JsonIgnore
     private boolean closingTag = true;
     /**
      * Specifies if there must be a new line before the raw text entry
      */
-    @JsonIgnore
     private boolean newLineForRawText;
     /**
      * Specifies if there should be a new line for the closing tag
      */
-    @JsonIgnore
     private boolean newLineForClosingTag = true;
 
     /**

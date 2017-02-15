@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>IFrameAttributes.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html.attributes</a> &gt; <span class="el_source">IFrameAttributes.java</span></div><h1>IFrameAttributes.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html.attributes;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>IFrameAttributes.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html.attributes</a> &gt; <span class="el_source">IFrameAttributes.java</span></div><h1>IFrameAttributes.java</h1><pre class="source lang-java linenums">/* 
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.base.html.attributes;
 
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 
@@ -9,7 +25,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  * @since 23 Sep 2013
  * @version 1.0
  */
-<span class="pc" id="L12">public enum IFrameAttributes implements AttributeDefinitions</span>
+<span class="pc" id="L28">public enum IFrameAttributes implements AttributeDefinitions</span>
 {
 
     /**
@@ -17,40 +33,40 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
      * &lt;p&gt;
      * @deprecated
      */
-<span class="fc" id="L20">    Align,</span>
+<span class="fc" id="L36">    Align,</span>
     /**
      * Not supported in HTML5. Specifies whether or not to display a border around an &amp;lt;iframe&amp;gt;
      * &lt;p&gt;
      * @deprecated
      */
-<span class="fc" id="L26">    FrameBorder,</span>
+<span class="fc" id="L42">    FrameBorder,</span>
     /**
      * Specifies the height of an &amp;lt;iframe&amp;gt;
      * &lt;p&gt;
      */
-<span class="fc" id="L31">    Height,</span>
+<span class="fc" id="L47">    Height,</span>
     /**
      * Specifies a page that contains a long description of the content of an &amp;lt;iframe&amp;gt;
      * &lt;p&gt;
      */
-<span class="fc" id="L36">    LongDesc,</span>
+<span class="fc" id="L52">    LongDesc,</span>
     /**
      * Not supported in HTML5. Specifies the top and bottom margins of the content of an &amp;lt;iframe&amp;gt;
      * &lt;p&gt;
      * @deprecated
      */
-<span class="fc" id="L42">    MarginHeight,</span>
+<span class="fc" id="L58">    MarginHeight,</span>
     /**
      * Not supported in HTML5. Specifies the left and right margins of the content of an &amp;lt;iframe&amp;gt;
      * &lt;p&gt;
      * @deprecated
      */
-<span class="fc" id="L48">    MarginWidth,</span>
+<span class="fc" id="L64">    MarginWidth,</span>
     /**
      * Specifies the name of an &amp;lt;iframe&amp;gt;
      * &lt;p&gt;
      */
-<span class="fc" id="L53">    Name,</span>
+<span class="fc" id="L69">    Name,</span>
     /**
      * Enables an extra set of restrictions for the content in an &amp;lt;iframe&amp;gt; allow-forms
      * &lt;p&gt;
@@ -65,33 +81,33 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
      * allow-top-navigation
      * &lt;p&gt;
      */
-<span class="fc" id="L68">    Sandbox,</span>
+<span class="fc" id="L84">    Sandbox,</span>
     /**
      * Not supported in HTML5. Specifies whether or not to display scrollbars in an &amp;lt;iframe&amp;gt;
      * &lt;p&gt;
      * @deprecated
      */
-<span class="fc" id="L74">    Scrolling,</span>
+<span class="fc" id="L90">    Scrolling,</span>
     /**
      * Specifies that the &amp;lt;iframe&amp;gt; should look like it is a part of the containing document
      * &lt;p&gt;
      */
-<span class="fc" id="L79">    Seamless,</span>
+<span class="fc" id="L95">    Seamless,</span>
     /**
      * Specifies the address of the document to embed in the &amp;lt;iframe&amp;gt;
      * &lt;p&gt;
      */
-<span class="fc" id="L84">    Src,</span>
+<span class="fc" id="L100">    Src,</span>
     /**
      * Specifies the HTML content of the page to show in the &amp;lt;iframe&amp;gt;
      * &lt;p&gt;
      */
-<span class="fc" id="L89">    SrcDoc,</span>
+<span class="fc" id="L105">    SrcDoc,</span>
     /**
      * Specifies the width of an &amp;lt;iframe&amp;gt;
      * &lt;p&gt;
      */
-<span class="fc" id="L94">    Width;</span>
+<span class="fc" id="L110">    Width;</span>
 
     /**
      * Returns the name in lowercase form
@@ -101,13 +117,13 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
     @Override
     public String toString()
     {
-<span class="fc" id="L104">        return name().toLowerCase();</span>
+<span class="fc" id="L120">        return name().toLowerCase();</span>
     }
 
     @Override
     public boolean isKeyword()
     {
-<span class="fc" id="L110">        return false;</span>
+<span class="fc" id="L126">        return false;</span>
     }
 
 }

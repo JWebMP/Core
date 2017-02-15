@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JWAngularModule.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.angular.modules</a> &gt; <span class="el_source">JWAngularModule.java</span></div><h1>JWAngularModule.java</h1><pre class="source lang-java linenums">/*
- * Copyright (C) 2016 GedMarc
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JWAngularModule.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.angular.modules</a> &gt; <span class="el_source">JWAngularModule.java</span></div><h1>JWAngularModule.java</h1><pre class="source lang-java linenums">/* 
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,6 +18,7 @@ package za.co.mmagon.jwebswing.base.angular.modules;
 
 import java.util.ArrayList;
 import java.util.List;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 
 /**
@@ -29,12 +30,14 @@ public class JWAngularModule extends AngularModuleBase
 {
 
     private static final long serialVersionUID = 1L;
+    private ComponentHierarchyBase component;
 
-    public JWAngularModule(AngularFeature angularFeature)
+    public JWAngularModule(ComponentHierarchyBase component)
     {
-<span class="fc" id="L35">        super(&quot;jwApp&quot;, angularFeature);</span>
-<span class="fc" id="L36">        setSortOrder(9999999); //always last</span>
-<span class="fc" id="L37">    }</span>
+<span class="fc" id="L37">        super(&quot;jwApp&quot;);</span>
+<span class="fc" id="L38">        setSortOrder(9999999);</span>
+<span class="fc" id="L39">        this.component = component;</span>
+<span class="fc" id="L40">    }</span>
 
     /**
      * Overwrite the render function
@@ -44,36 +47,36 @@ public class JWAngularModule extends AngularModuleBase
     @Override
     public String renderFunction()
     {
-<span class="fc" id="L47">        String returnable = &quot;var &quot; + this.getAngular().getAppName() + &quot; = angular.module(&quot;;</span>
-<span class="fc" id="L48">        returnable += &quot;'&quot; + this.getAngular().getAppName() + &quot;',&quot;;</span>
+<span class="fc" id="L50">        String returnable = &quot;var &quot; + AngularFeature.getAppName() + &quot; = angular.module(&quot;;</span>
+<span class="fc" id="L51">        returnable += &quot;'&quot; + AngularFeature.getAppName() + &quot;',&quot;;</span>
 
-<span class="fc" id="L50">        ArrayList&lt;String&gt; moduleNames = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L51">        List&lt;AngularModuleBase&gt; modules = super.getAngular().getComponent().getPage().getBody().getAngularModulesAll();</span>
-<span class="fc" id="L52">        modules.stream().forEach(module -&gt;</span>
+<span class="fc" id="L53">        ArrayList&lt;String&gt; moduleNames = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L54">        List&lt;AngularModuleBase&gt; modules = component.getPage().getBody().getAngularModulesAll();</span>
+<span class="fc" id="L55">        modules.stream().forEach(module -&gt;</span>
         {
-<span class="fc" id="L54">            String name = module.getReferenceName();</span>
-<span class="fc bfc" id="L55" title="All 2 branches covered.">            if (!moduleNames.contains(name))</span>
+<span class="nc" id="L57">            String name = module.getReferenceName();</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">            if (!moduleNames.contains(name))</span>
             {
-<span class="fc" id="L57">                moduleNames.add(module.getReferenceName());</span>
+<span class="nc" id="L60">                moduleNames.add(module.getReferenceName());</span>
             }
-<span class="fc" id="L59">        });</span>
+<span class="nc" id="L62">        });</span>
 
-<span class="fc" id="L61">        StringBuilder nameRenders = new StringBuilder();</span>
-<span class="fc bfc" id="L62" title="All 2 branches covered.">        for (String name : moduleNames)</span>
+<span class="fc" id="L64">        StringBuilder nameRenders = new StringBuilder();</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        for (String name : moduleNames)</span>
         {
-<span class="fc" id="L64">            nameRenders.append(&quot;'&quot;).append(name).append(&quot;',&quot;);</span>
-<span class="fc" id="L65">        }</span>
+<span class="nc" id="L67">            nameRenders.append(&quot;'&quot;).append(name).append(&quot;',&quot;);</span>
+<span class="nc" id="L68">        }</span>
 
-<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (nameRenders.indexOf(&quot;,&quot;) != -1)</span>
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">        if (nameRenders.indexOf(&quot;,&quot;) != -1)</span>
         {
-<span class="fc" id="L69">            nameRenders = nameRenders.deleteCharAt(nameRenders.lastIndexOf(&quot;,&quot;));</span>
+<span class="nc" id="L72">            nameRenders = nameRenders.deleteCharAt(nameRenders.lastIndexOf(&quot;,&quot;));</span>
         }
-<span class="fc" id="L71">        nameRenders.insert(0, &quot;[&quot;);</span>
-<span class="fc" id="L72">        nameRenders.append(&quot;]&quot;);</span>
-<span class="fc" id="L73">        returnable += nameRenders;</span>
+<span class="fc" id="L74">        nameRenders.insert(0, &quot;[&quot;);</span>
+<span class="fc" id="L75">        nameRenders.append(&quot;]&quot;);</span>
+<span class="fc" id="L76">        returnable += nameRenders;</span>
 
-<span class="fc" id="L75">        returnable += &quot;);&quot;;</span>
-<span class="fc" id="L76">        return returnable;</span>
+<span class="fc" id="L78">        returnable += &quot;);&quot;;</span>
+<span class="fc" id="L79">        return returnable;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

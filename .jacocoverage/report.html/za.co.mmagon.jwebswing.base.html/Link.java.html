@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Link.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">Link.java</span></div><h1>Link.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Link.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">Link.java</span></div><h1>Link.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.base.html;
 
 import java.util.logging.Level;
 import za.co.mmagon.jwebswing.Component;
@@ -10,8 +26,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.bootstrap.carousel.BSCarouselChildren;
-import za.co.mmagon.jwebswing.components.bootstrap.media.BSMediaChildren;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -43,15 +57,22 @@ import za.co.mmagon.logger.LogFactory;
  * HTML5 has some new attributes, and some HTML 4.01 attributes are no longer supported.&lt;p&gt;
  *
  * @author Marc Magon
+ * @param &lt;J&gt;
  */
-public class Link extends Component&lt;ComponentHierarchyBase, LinkAttributes, GlobalFeatures, GlobalEvents, Link&gt;
-        implements BodyChildren, NoNewLineForRawText, ListItemChildren, BSMediaChildren, BSCarouselChildren
+public class Link&lt;J extends Link&gt;
+        extends Component&lt;ComponentHierarchyBase, LinkAttributes, GlobalFeatures, GlobalEvents, J&gt;
+        implements BodyChildren, NoNewLineForRawText, ListItemChildren
 {
 
-<span class="fc" id="L51">    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger(&quot;ALink&quot;);</span>
+<span class="fc" id="L67">    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger(&quot;ALink&quot;);</span>
     private static final long serialVersionUID = 1L;
-
+    /**
+     * The address directing to
+     */
     private String directToAddress;
+    /**
+     * The target frame
+     */
     private String targetFrameName;
 
     /**
@@ -59,8 +80,8 @@ public class Link extends Component&lt;ComponentHierarchyBase, LinkAttributes, G
      */
     public Link()
     {
-<span class="fc" id="L62">        super(&quot;a&quot;, ComponentTypes.Link);</span>
-<span class="fc" id="L63">    }</span>
+<span class="nc" id="L83">        super(&quot;a&quot;, ComponentTypes.Link);</span>
+<span class="nc" id="L84">    }</span>
 
     /**
      * Creates a link directly to the address in the current window
@@ -69,12 +90,12 @@ public class Link extends Component&lt;ComponentHierarchyBase, LinkAttributes, G
      */
     public Link(String directToAddress)
     {
-<span class="fc" id="L72">        this(directToAddress, null);</span>
-<span class="pc bpc" id="L73" title="1 of 4 branches missed.">        if (directToAddress == null || directToAddress.isEmpty())</span>
+<span class="fc" id="L93">        this(directToAddress, null);</span>
+<span class="pc bpc" id="L94" title="1 of 4 branches missed.">        if (directToAddress == null || directToAddress.isEmpty())</span>
         {
-<span class="fc" id="L75">            log.log(Level.FINE, &quot;Invalid Link Address.&quot;);</span>
+<span class="fc" id="L96">            log.log(Level.FINE, &quot;Invalid Link Address.&quot;);</span>
         }
-<span class="fc" id="L77">    }</span>
+<span class="fc" id="L98">    }</span>
 
     /**
      * Creates a link directly to the address in the specified target frame
@@ -84,8 +105,8 @@ public class Link extends Component&lt;ComponentHierarchyBase, LinkAttributes, G
      */
     public Link(String directToAddress, String targetFrameName)
     {
-<span class="fc" id="L87">        this(directToAddress, targetFrameName, (String) null);</span>
-<span class="fc" id="L88">    }</span>
+<span class="fc" id="L108">        this(directToAddress, targetFrameName, (String) null);</span>
+<span class="fc" id="L109">    }</span>
 
     /**
      * Creates a link directly to the address in the specified target frame
@@ -96,19 +117,19 @@ public class Link extends Component&lt;ComponentHierarchyBase, LinkAttributes, G
      */
     public Link(String directToAddress, String targetFrameName, String text)
     {
-<span class="fc" id="L99">        super(&quot;a&quot;, ComponentTypes.Link);</span>
-<span class="fc" id="L100">        this.directToAddress = directToAddress;</span>
-<span class="fc" id="L101">        this.targetFrameName = targetFrameName;</span>
-<span class="pc bpc" id="L102" title="1 of 2 branches missed.">        if (directToAddress != null)</span>
+<span class="fc" id="L120">        super(&quot;a&quot;, ComponentTypes.Link);</span>
+<span class="fc" id="L121">        this.directToAddress = directToAddress;</span>
+<span class="fc" id="L122">        this.targetFrameName = targetFrameName;</span>
+<span class="pc bpc" id="L123" title="1 of 2 branches missed.">        if (directToAddress != null)</span>
         {
-<span class="fc" id="L104">            addAttribute(LinkAttributes.HRef, directToAddress);</span>
+<span class="fc" id="L125">            addAttribute(LinkAttributes.HRef, directToAddress);</span>
         }
-<span class="fc bfc" id="L106" title="All 2 branches covered.">        if (targetFrameName != null)</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">        if (targetFrameName != null)</span>
         {
-<span class="fc" id="L108">            addAttribute(LinkAttributes.Target, targetFrameName);</span>
+<span class="fc" id="L129">            addAttribute(LinkAttributes.Target, targetFrameName);</span>
         }
-<span class="fc" id="L110">        setText(text);</span>
-<span class="fc" id="L111">    }</span>
+<span class="fc" id="L131">        setText(text);</span>
+<span class="fc" id="L132">    }</span>
 
     /**
      * Creates a link directly to the address in the specified target frame
@@ -119,19 +140,19 @@ public class Link extends Component&lt;ComponentHierarchyBase, LinkAttributes, G
      */
     public Link(String directToAddress, String targetFrameName, ComponentHierarchyBase component)
     {
-<span class="nc" id="L122">        super(&quot;a&quot;, ComponentTypes.Link);</span>
-<span class="nc" id="L123">        this.directToAddress = directToAddress;</span>
-<span class="nc" id="L124">        this.targetFrameName = targetFrameName;</span>
-<span class="nc bnc" id="L125" title="All 2 branches missed.">        if (directToAddress != null)</span>
+<span class="nc" id="L143">        super(&quot;a&quot;, ComponentTypes.Link);</span>
+<span class="nc" id="L144">        this.directToAddress = directToAddress;</span>
+<span class="nc" id="L145">        this.targetFrameName = targetFrameName;</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">        if (directToAddress != null)</span>
         {
-<span class="nc" id="L127">            addAttribute(LinkAttributes.HRef, directToAddress);</span>
+<span class="nc" id="L148">            addAttribute(LinkAttributes.HRef, directToAddress);</span>
         }
-<span class="nc bnc" id="L129" title="All 2 branches missed.">        if (targetFrameName != null)</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">        if (targetFrameName != null)</span>
         {
-<span class="nc" id="L131">            addAttribute(LinkAttributes.Target, targetFrameName);</span>
+<span class="nc" id="L152">            addAttribute(LinkAttributes.Target, targetFrameName);</span>
         }
-<span class="nc" id="L133">        add(component);</span>
-<span class="nc" id="L134">    }</span>
+<span class="nc" id="L154">        add(component);</span>
+<span class="nc" id="L155">    }</span>
 
     /**
      * Returns the direct to address
@@ -140,7 +161,7 @@ public class Link extends Component&lt;ComponentHierarchyBase, LinkAttributes, G
      */
     public String getDirectToAddress()
     {
-<span class="nc" id="L143">        return directToAddress;</span>
+<span class="nc" id="L164">        return directToAddress;</span>
     }
 
     /**
@@ -150,9 +171,9 @@ public class Link extends Component&lt;ComponentHierarchyBase, LinkAttributes, G
      */
     public void setDirectToAddress(String directToAddress)
     {
-<span class="nc" id="L153">        this.directToAddress = directToAddress;</span>
-<span class="nc" id="L154">        addAttribute(LinkAttributes.HRef, directToAddress);</span>
-<span class="nc" id="L155">    }</span>
+<span class="nc" id="L174">        this.directToAddress = directToAddress;</span>
+<span class="nc" id="L175">        addAttribute(LinkAttributes.HRef, directToAddress);</span>
+<span class="nc" id="L176">    }</span>
 
     /**
      * Returns the current target frame name
@@ -161,7 +182,7 @@ public class Link extends Component&lt;ComponentHierarchyBase, LinkAttributes, G
      */
     public String getTargetFrameName()
     {
-<span class="nc" id="L164">        return targetFrameName;</span>
+<span class="nc" id="L185">        return targetFrameName;</span>
     }
 
     /**
@@ -171,17 +192,17 @@ public class Link extends Component&lt;ComponentHierarchyBase, LinkAttributes, G
      */
     public void setTargetFrameName(String targetFrameName)
     {
-<span class="nc" id="L174">        this.targetFrameName = targetFrameName;</span>
-<span class="nc" id="L175">        addAttribute(LinkAttributes.Target, targetFrameName);</span>
-<span class="nc" id="L176">    }</span>
+<span class="nc" id="L195">        this.targetFrameName = targetFrameName;</span>
+<span class="nc" id="L196">        addAttribute(LinkAttributes.Target, targetFrameName);</span>
+<span class="nc" id="L197">    }</span>
 
     @Override
     public int hashCode()
     {
-<span class="nc" id="L181">        int hash = 7;</span>
-<span class="nc bnc" id="L182" title="All 2 branches missed.">        hash = 53 * hash + (this.directToAddress != null ? this.directToAddress.hashCode() : 0);</span>
-<span class="nc bnc" id="L183" title="All 2 branches missed.">        hash = 53 * hash + (this.targetFrameName != null ? this.targetFrameName.hashCode() : 0);</span>
-<span class="nc" id="L184">        return hash;</span>
+<span class="nc" id="L202">        int hash = 7;</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">        hash = 53 * hash + (this.directToAddress != null ? this.directToAddress.hashCode() : 0);</span>
+<span class="nc bnc" id="L204" title="All 2 branches missed.">        hash = 53 * hash + (this.targetFrameName != null ? this.targetFrameName.hashCode() : 0);</span>
+<span class="nc" id="L205">        return hash;</span>
     }
 
     /**
@@ -194,21 +215,21 @@ public class Link extends Component&lt;ComponentHierarchyBase, LinkAttributes, G
     @Override
     public boolean equals(Object obj)
     {
-<span class="pc bpc" id="L197" title="1 of 2 branches missed.">        if (obj == null)</span>
+<span class="nc bnc" id="L218" title="All 2 branches missed.">        if (obj == null)</span>
         {
-<span class="nc" id="L199">            return false;</span>
+<span class="nc" id="L220">            return false;</span>
         }
-<span class="pc bpc" id="L201" title="1 of 2 branches missed.">        if (getClass() != obj.getClass())</span>
+<span class="nc bnc" id="L222" title="All 2 branches missed.">        if (getClass() != obj.getClass())</span>
         {
-<span class="fc" id="L203">            return false;</span>
+<span class="nc" id="L224">            return false;</span>
         }
-<span class="nc" id="L205">        final Link other = (Link) obj;</span>
-<span class="nc bnc" id="L206" title="All 6 branches missed.">        if ((this.directToAddress == null) ? (other.directToAddress != null) : !this.directToAddress.equals(other.directToAddress))</span>
+<span class="nc" id="L226">        final Link other = (Link) obj;</span>
+<span class="nc bnc" id="L227" title="All 6 branches missed.">        if ((this.directToAddress == null) ? (other.directToAddress != null) : !this.directToAddress.equals(other.directToAddress))</span>
         {
-<span class="nc" id="L208">            return false;</span>
+<span class="nc" id="L229">            return false;</span>
         }
 
-<span class="nc bnc" id="L211" title="All 6 branches missed.">        return !((this.targetFrameName == null) ? (other.targetFrameName != null) : !this.targetFrameName.equals(other.targetFrameName));</span>
+<span class="nc bnc" id="L232" title="All 6 branches missed.">        return !((this.targetFrameName == null) ? (other.targetFrameName != null) : !this.targetFrameName.equals(other.targetFrameName));</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
@@ -9,8 +25,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.DetailsChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.bootstrap.cards.BSCardChildren;
-import za.co.mmagon.jwebswing.components.jqueryui.tabs.JQUITabsChildren;
+import za.co.mmagon.jwebswing.utilities.TextUtilities;
 
 /**
  * This class defines a paragraph as per<p>
@@ -34,14 +49,21 @@ import za.co.mmagon.jwebswing.components.jqueryui.tabs.JQUITabsChildren;
  * The align attribute is not supported in HTML5.<p>
  * <p>
  * @author Marc Magon
+ * @param <J>
+ *
  * @since forever, 2008 or 2007 sometime I think - will need to check on the original version named "radio on live".
  * @version 1.0
  */
-public class Paragraph extends Component<ParagraphChildren, ParagraphAttributes, GlobalFeatures, GlobalEvents, Paragraph>
-        implements BodyChildren, NoNewLineForRawText, ParagraphChildren, DetailsChildren, JQUITabsChildren, BSCardChildren
+public class Paragraph<J extends Paragraph>
+        extends Component<ParagraphChildren, ParagraphAttributes, GlobalFeatures, GlobalEvents, J>
+        implements BodyChildren, NoNewLineForRawText, ParagraphChildren, DetailsChildren
 {
 
     private static final long serialVersionUID = 1L;
+    /**
+     * Sets if this paragraph must render the text directly without a tag
+     */
+    private boolean textOnly;
 
     /**
      * Constructs a blank paragraph
@@ -63,6 +85,42 @@ public class Paragraph extends Component<ParagraphChildren, ParagraphAttributes,
     }
 
     /**
+     * Sets if this paragraph must render the text directly without a tag
+     *
+     * @return
+     */
+    public boolean isTextOnly()
+    {
+        return textOnly;
+    }
+
+    @Override
+    protected StringBuilder renderHTML(int tabCount)
+    {
+        if (isTextOnly())
+        {
+            return TextUtilities.getTabString(tabCount).append(new StringBuilder(getText(tabCount)));
+        }
+        else
+        {
+            return super.renderHTML(tabCount);
+        }
+    }
+
+    /**
+     * Sets if this paragraph must render the text directly without a tag
+     *
+     * @param textOnly
+     *
+     * @return
+     */
+    public Paragraph setTextOnly(boolean textOnly)
+    {
+        this.textOnly = textOnly;
+        return this;
+    }
+
+    /**
      * Don't use the bind attribute, append in curly braces
      *
      * @param variableName
@@ -70,7 +128,7 @@ public class Paragraph extends Component<ParagraphChildren, ParagraphAttributes,
      * @return
      */
     @Override
-    public Paragraph bind(String variableName)
+    public J bind(String variableName)
     {
         setLoadAngular(true);
         if (variableName.contains("{{"))
@@ -81,7 +139,7 @@ public class Paragraph extends Component<ParagraphChildren, ParagraphAttributes,
         {
             setText(getText(0) + "{{" + variableName + "}}");
         }
-        return this;
+        return (J) this;
     }
 
 }

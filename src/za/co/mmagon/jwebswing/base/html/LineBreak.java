@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,13 +17,8 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -49,11 +44,15 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * In XHTML, the &lt;br&gt; tag must be properly closed, like this: br
  * <p>
  * @author GedMarc
+ * @param <J>
  */
-public class LineBreak extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, LineBreak> implements NoNewLineBeforeClosingTag, NoClosingTag, NoNewLineForRawText, GlobalChildren, NoIDTag
+public class LineBreak<J extends LineBreak>
+        extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+        implements NoNewLineBeforeClosingTag, NoClosingTag, NoNewLineForRawText, GlobalChildren, NoIDTag
 {
 
     private static final LineBreak br = new LineBreak();
+    private static final long serialVersionUID = 1L;
 
     /**
      * Inserts a new object of a line break. Rather access this class statically.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,24 +27,19 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 /**
  * Definition and Usage<p>
  * <p>
- * The &gt;object&lt; tag defines an embedded object within an HTML document.
- * Use this element to embed multimedia (like audio, video, Java applets,
- * ActiveX, PDF, and Flash) in your web pages.<p>
+ * The &gt;object&lt; tag defines an embedded object within an HTML document. Use this element to embed multimedia (like audio, video, Java applets, ActiveX, PDF, and Flash) in your web pages.<p>
  * <p>
- * You can also use the &gt;object&lt; tag to embed another webpage into your
- * HTML document.<p>
+ * You can also use the &gt;object&lt; tag to embed another webpage into your HTML document.<p>
  * <p>
- * You can use the &gt;param&lt; tag to pass parameters to plugins that have
- * been embedded with the &gt;object&lt; tag.<p>
+ * You can use the &gt;param&lt; tag to pass parameters to plugins that have been embedded with the &gt;object&lt; tag.<p>
  * Browser Support<p>
  * Element
  * <p>
  * &gt;object&lt; Yes Yes Yes Yes Yes<p>
  * Tips and Notes<p>
  * <p>
- * Note: An &gt;object&lt; element must appear inside the &gt;body&lt; element.
- * The text between the &gt;object&lt; and &gt;/object&lt; is an alternate text,
- * for browsers that do not support this tag.<p>
+ * Note: An &gt;object&lt; element must appear inside the &gt;body&lt; element. The text between the &gt;object&lt; and &gt;/object&lt; is an alternate text, for browsers that do not support this
+ * tag.<p>
  * <p>
  * Tip: For images use the &gt;img&lt; tag instead of the &gt;object&lt; tag.<p>
  * <p>
@@ -57,16 +52,21 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * In HTML5, objects can be used and submitted in forms.<p>
  * <p>
- * In HTML5, objects can no longer appear inside the &gt;head&lt; element of a
- * document.<p>
+ * In HTML5, objects can no longer appear inside the &gt;head&lt; element of a document.<p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since Feb 9, 2015
  * @version 1.0
  * <p>
  * <p>
  */
-public class ObjectTag extends Component<ObjectTagChildren, ObjectAttributes, GlobalFeatures, GlobalEvents, ObjectTag> implements NoNewLineForRawText
+public class ObjectTag<J extends ObjectTag>
+        extends Component<ObjectTagChildren, ObjectAttributes, GlobalFeatures, GlobalEvents, J>
+        implements NoNewLineForRawText
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      *

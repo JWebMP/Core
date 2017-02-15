@@ -24,7 +24,6 @@ import za.co.mmagon.jwebswing.base.client.InternetExplorerCompatibilityMode;
 import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.html.attributes.BaseAttributes;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.DevelopmentEnvironments;
-import za.co.mmagon.jwebswing.generics.WebReference;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
 
 /**
@@ -163,78 +162,6 @@ public class PageTest extends BaseTestClass
         instance.setRunningEnvironment(DevelopmentEnvironments.Production);
         System.out.println(result = instance.toString(true));
         String expResult = "<!DOCTYPE html><html></html>";
-        assertEquals(expResult, result);
-    }
-
-    //TODO Add theme colours for local reference
-    @Test
-    public void testDefaultWithPaceLoaderLocalReference()
-    {
-        WebReference.setIsLocal(true);
-        String result;
-        instance = getPage();
-        instance.getOptions().setPaceEnabled(true);
-        instance.setTiny(false);
-        instance.setRunningEnvironment(DevelopmentEnvironments.Development);
-        System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html>\n"
-                + "<html>\n"
-                + "	<head>\n"
-                + "		<script src=\"bower_components/PACE/pace.js\" type=\"text/javascript\"></script>\n"
-                + "		<link href=\"bower_components/PACE/themes/red/pace-theme-flash.css\" rel=\"stylesheet\" type=\"text/css\">\n"
-                + "	</head>\n"
-                + "</html>";
-        assertEquals(expResult, result);
-    }
-
-    //TODO Add theme colours for local reference
-    @Test
-    public void testDefaultWithPaceLoaderLocalReferenceTiny()
-    {
-        WebReference.setIsLocal(true);
-        String result;
-        instance = getPage();
-        instance.getOptions().setPaceEnabled(true);
-        instance.setTiny(true);
-        instance.setRunningEnvironment(DevelopmentEnvironments.Production);
-        System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html><html><head><script src=\"bower_components/PACE/pace.js\" type=\"text/javascript\"></script><link href=\"bower_components/PACE/themes/red/pace-theme-flash.css\" rel=\"stylesheet\" type=\"text/css\"></head></html>";
-        assertEquals(expResult, result);
-    }
-
-    //TODO Add theme colours for local reference
-    @Test
-    public void testDefaultWithPaceLoaderRemoteReference()
-    {
-        WebReference.setIsLocal(false);
-        String result;
-        instance = getPage();
-        instance.getOptions().setPaceEnabled(true);
-        instance.setTiny(false);
-        instance.setRunningEnvironment(DevelopmentEnvironments.Development);
-        System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html>\n"
-                + "<html>\n"
-                + "	<head>\n"
-                + "		<script src=\"https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js\" type=\"text/javascript\"></script>\n"
-                + "		<link href=\"https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/red/pace-theme-flash.css\" rel=\"stylesheet\" type=\"text/css\">\n"
-                + "	</head>\n"
-                + "</html>";
-        assertEquals(expResult, result);
-    }
-
-    //TODO Add theme colours for local reference
-    @Test
-    public void testDefaultWithPaceLoaderRemoteReferenceTiny()
-    {
-        WebReference.setIsLocal(false);
-        String result;
-        instance = getPage();
-        instance.getOptions().setPaceEnabled(true);
-        instance.setTiny(true);
-        instance.setRunningEnvironment(DevelopmentEnvironments.Production);
-        System.out.println(result = instance.toString(true));
-        String expResult = "<!DOCTYPE html><html><head><script src=\"https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js\" type=\"text/javascript\"></script><link href=\"https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/red/pace-theme-flash.css\" rel=\"stylesheet\" type=\"text/css\"></head></html>";
         assertEquals(expResult, result);
     }
 

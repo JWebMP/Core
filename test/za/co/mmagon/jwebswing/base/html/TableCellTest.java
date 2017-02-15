@@ -16,8 +16,9 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+import za.co.mmagon.jwebswing.base.ComponentBase;
 
 /**
  *
@@ -38,7 +39,7 @@ public class TableCellTest
     {
         TableCell tc = new TableCell("blah");
         tc.setID("id");
-        tc.getChildren().get(0).setID("id");
+        ComponentBase.class.cast(tc.getChildren().get(0)).setID("id");
         System.out.println(tc.toString(true));
         assertEquals("<td id=\"id\">\n"
                 + "	<p id=\"id\">blah</p>\n"

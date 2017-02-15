@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.bootstrap.cards.BSCardChildren;
 
 /**
  * Browser Support<p>
@@ -50,9 +49,11 @@ import za.co.mmagon.jwebswing.components.bootstrap.cards.BSCardChildren;
  * In XHTML the img tag must be properly closed.<p>
  * <p>
  * @author Marc Magon
+ * @param <J>
  */
-public class Image extends Component<NoChildren, ImageAttributes, GlobalFeatures, GlobalEvents, Image>
-        implements ImageMapChildren, FigureChildren, GlobalChildren, ListItemChildren, BSCardChildren
+public class Image<J extends Image>
+        extends Component<NoChildren, ImageAttributes, GlobalFeatures, GlobalEvents, J>
+        implements ImageMapChildren, FigureChildren, GlobalChildren, ListItemChildren
 {
 
     private static final long serialVersionUID = 1L;

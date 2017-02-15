@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 ged_m
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,8 +18,7 @@ package za.co.mmagon.jwebswing.base;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.HashMap;
-import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.interfaces.IComponentStyleBase;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -39,7 +38,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
  *
  * @since 24 Apr 2016
  */
-public class ComponentStyleBase<C, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentBase>
+public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentStyleBase>
         extends ComponentHierarchyBase<C, A, F, E, J> implements IComponentStyleBase<J>
 {
 

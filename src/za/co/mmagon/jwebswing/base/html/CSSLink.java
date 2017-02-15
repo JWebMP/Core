@@ -1,8 +1,24 @@
+/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package za.co.mmagon.jwebswing.base.html;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.logging.Level;
-import java.util.logging.*;
+import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.CSSLinkAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
@@ -16,6 +32,8 @@ import za.co.mmagon.logger.LogFactory;
 /**
  * The Header CSSLink Component
  * <p>
+ * @param <J>
+ *
  * @since 2013/11/12
  * @version 1.0
  * @author MMagon
@@ -44,15 +62,17 @@ import za.co.mmagon.logger.LogFactory;
  * The "sizes" attribute is new in HTML5.<p>
  *
  */
-public class CSSLink extends Component<NoChildren, CSSLinkAttributes, NoFeatures, NoEvents, Component> implements NoIDTag, NoClosingTag, HeadChildren
+public class CSSLink<J extends CSSLink>
+        extends Component<NoChildren, CSSLinkAttributes, NoFeatures, NoEvents, J>
+        implements NoIDTag, NoClosingTag, HeadChildren
 {
 
     private static final Logger LOG = LogFactory.getInstance().getLogger("<link>");
     private static final long serialVersionUID = 1L;
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private boolean themeLink;
+    private Boolean themeLink;
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private boolean prettifyTheme;
+    private Boolean prettifyTheme;
     private CSSReference linkedReference;
 
     /**
@@ -174,10 +194,7 @@ public class CSSLink extends Component<NoChildren, CSSLinkAttributes, NoFeatures
      */
     public boolean isPrettifyTheme()
     {
-        if (getAttribute(CSSLinkAttributes.HRef).contains("prettify/"))
-        {
-            prettifyTheme = true;
-        }
+        prettifyTheme = getAttribute(CSSLinkAttributes.HRef).contains("prettify/");
         return prettifyTheme;
     }
 

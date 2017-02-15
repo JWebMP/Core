@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,9 +18,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.DescriptionListChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
@@ -31,25 +29,25 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;dd&gt; tag is used to describe a term/name in a description list.
  * <p>
- * The &lt;dd&gt; tag is used in conjunction with dl (defines a description
- * list) and dt (defines terms/names).
+ * The &lt;dd&gt; tag is used in conjunction with dl (defines a description list) and dt (defines terms/names).
  * <p>
- * Inside a &lt;dd&gt; tag you can put paragraphs, line breaks, images, links,
- * lists, etc. Browser Support Element
- * &lt;dd&gt; Yes Yes Yes Yes Yes
+ * Inside a &lt;dd&gt; tag you can put paragraphs, line breaks, images, links, lists, etc. Browser Support Element &lt;dd&gt; Yes Yes Yes Yes Yes
  * <p>
  * Differences Between HTML 4.01 and HTML5
  * <p>
- * In HTML 4.01, the &lt;dd&gt; tag was used to describe an item in a definition
- * list.
+ * In HTML 4.01, the &lt;dd&gt; tag was used to describe an item in a definition list.
  * <p>
- * In HTML5, the &lt;dd&gt; tag is used to describe a term/name in a description
- * list.
+ * In HTML5, the &lt;dd&gt; tag is used to describe a term/name in a description list.
  * <p>
  * @author GedMarc
+ * @param <J>
  */
-public class DataDescription extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, DataDescription> implements NoNewLineBeforeClosingTag, NoNewLineForRawText, DescriptionListChildren
+public class DataDescription<J extends DataDescription>
+        extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+        implements NoNewLineBeforeClosingTag, NoNewLineForRawText, DescriptionListChildren
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new Data Description object

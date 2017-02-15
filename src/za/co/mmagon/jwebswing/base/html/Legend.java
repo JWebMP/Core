@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,21 +27,27 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
 /**
  * Definition and Usage<p>
- *<p>
+ * <p>
  * The legend tag defines a caption for the field set element. Browser Support<p>
  * Element<p>
  * legend Yes Yes Yes Yes Yes Differences Between HTML 4.01 and HTML5<p>
- *<p>
+ * <p>
  * The "align" attribute is not supported in HTML5.<p>
- *<p>
+ * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since Feb 9, 2015
  * @version 1.0
  * <p>
  *
  */
-class Legend extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, Legend> implements FieldSetChildren, NoNewLineBeforeClosingTag
+public class Legend<J extends Legend>
+        extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements FieldSetChildren, NoNewLineBeforeClosingTag
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      *

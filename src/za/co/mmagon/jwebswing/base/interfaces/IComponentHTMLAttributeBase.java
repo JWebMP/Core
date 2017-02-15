@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.base.interfaces;
 
-import java.util.List;
 import java.util.Map;
 import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
@@ -25,6 +24,9 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 /**
  *
  * @author GedMarc
+ * @param <A>
+ * @param <J>
+ *
  * @since Sep 26, 2016
  *
  */
@@ -36,6 +38,8 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
      * <p>
      * @param attribute The GlobalAttribute to set the attribute to
      * @param value     The value of the attribute
+     *
+     * @return
      */
     J addAttribute(GlobalAttributes attribute, String value);
 
@@ -44,6 +48,8 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
      * <p>
      * @param attribute The GlobalAttribute to set the attribute to
      * @param value     The value of the attribute
+     *
+     * @return
      */
     J addAttribute(A attribute, String value);
 
@@ -52,6 +58,8 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
      * <p>
      * @param attribute The GlobalAttribute to set the attribute to
      * @param value     The value of the attribute
+     *
+     * @return
      */
     J addAttribute(A attribute, Integer value);
 
@@ -60,17 +68,10 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
      * <p>
      * @param attribute The valid Local Attribute to add
      * @param value     The value of the attribute
+     *
+     * @return
      */
     J addAttribute(A attribute, Boolean value);
-
-    /**
-     * Adds a class name to the class list
-     * <p>
-     * @param className The class name to add
-     * <p>
-     * @return True if it was added, false if it already existed
-     */
-    J addClass(String className);
 
     J cloneComponent();
 
@@ -138,30 +139,5 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
      * @return
      */
     Map<Enum, String> getAttributesAll();
-
-    /**
-     * Returns a complete list of all class names associated with this component
-     * <p>
-     * @return
-     */
-    List<String> getClasses();
-
-    /**
-     * Removes a class name from this component
-     * <p>
-     * @param className Class Name to Remove
-     * <p>
-     * @return True if the class was removed, False if the class was not part of the collection
-     */
-    boolean removeClass(String className);
-
-    /**
-     * Sets the ID and adds the attribute to the global set
-     *
-     * @param id
-     *
-     * @return
-     */
-    J setID(String id);
 
 }

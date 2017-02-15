@@ -1,25 +1,34 @@
+/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package za.co.mmagon.jwebswing.base.html;
 
-import za.co.mmagon.logger.LogFactory;
-import java.util.logging.*;
-import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.base.*;
-import za.co.mmagon.jwebswing.base.angular.*;
-import za.co.mmagon.jwebswing.base.client.*;
-import za.co.mmagon.jwebswing.base.html.attributes.*;
+import java.util.logging.Logger;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.base.angular.AngularReferencePool;
+import za.co.mmagon.jwebswing.base.client.BrowserGroups;
+import za.co.mmagon.jwebswing.base.html.attributes.BodyAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
-import za.co.mmagon.jwebswing.base.references.*;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
-import za.co.mmagon.jwebswing.base.servlets.interfaces.*;
-import za.co.mmagon.jwebswing.components.bootstrap.*;
-import za.co.mmagon.jwebswing.components.bootstrap.dialog.*;
-import za.co.mmagon.jwebswing.components.modernizr.*;
-import za.co.mmagon.jwebswing.components.pace.*;
-import za.co.mmagon.jwebswing.components.pace.preloadedThemes.*;
-import za.co.mmagon.jwebswing.components.pools.jquery.*;
-import za.co.mmagon.jwebswing.components.pools.jqueryui.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.modernizr.ModernizrFeature;
+import za.co.mmagon.jwebswing.components.pools.jquery.JQueryReferencePool;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Browser Support<p>
@@ -43,34 +52,24 @@ import za.co.mmagon.jwebswing.components.pools.jqueryui.*;
  * All layout attributes is deprecated in HTML 4.01
  * .<p>
  * <p>
- * @param <L> A loader type
+ * @param <C>
  * @param <F> Features Base
+ * @param <J>
  *
  * @since 2013/11/20
  * @author Marc Magon
  * @version 1.0
  */
-public class Body<L extends ComponentFeatureBase & Loader & GlobalChildren, F extends BodyFeatures>
-        extends Component<GlobalChildren, BodyAttributes, F, NoEvents, Body>
-        implements PageChildren, HtmlChildren, LayoutHandler, ContainerType, IBody<L>
+public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Body>
+        extends Component<C, BodyAttributes, F, NoEvents, J>
+        implements PageChildren, HtmlChildren, LayoutHandler, ContainerType, IBody
 {
 
     private static final Logger LOG = LogFactory.getInstance().getLogger("BODY");
 
     private static final long serialVersionUID = 1L;
 
-    private L loader;
-
     private boolean bootstrapConfigured;
-
-    private boolean bootstrap4;
-
-    private boolean jquery3 = true;
-
-    /**
-     * The object for the pace loader
-     */
-    private PaceLoader pace;
 
     /**
      * Constructs a new Body with the given Page input
@@ -93,11 +92,6 @@ public class Body<L extends ComponentFeatureBase & Loader & GlobalChildren, F ex
     {
         return this;
     }
-    
-    public void setLayout(LayoutHandler layout)
-    {
-        
-    }
 
     /**
      * Will configure for Angular 1
@@ -115,125 +109,6 @@ public class Body<L extends ComponentFeatureBase & Loader & GlobalChildren, F ex
             //configureBootstrap();
 
             getJavascriptReferences().add(AngularReferencePool.Angular1.getJavaScriptReference());
-        }
-    }
-
-    /**
-     *
-     * The 3 meta tags *must* come first in the head; any other head content must come *after* these tags
-     * <p>
-     * HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries WARNING: Respond.js doesn't work if you view the page via file://
-     */
-    @Override
-    public void configureBootstrap()
-    {
-        if (isBootstrapConfigured())
-        {
-            return;
-        }
-        else
-        {
-            setBootstrapConfigured(true);
-        }
-        getPage().getOptions().setjQueryEnabled(true);
-        configureJQuery();
-
-        Meta charMeta = new Meta();
-        charMeta.addAttribute(MetaAttributes.Charset, "utf-16");
-
-        Meta viewportMeta = new Meta();
-        viewportMeta.addAttribute(GlobalAttributes.Name, "viewport");
-        if (isBootstrap4())
-        {
-            viewportMeta.addAttribute(MetaAttributes.Content, "width=device-width, initial-scale=1, shrink-to-fit=no");
-        }
-        else
-        {
-            viewportMeta.addAttribute(MetaAttributes.Content, "width=device-width, initial-scale=1");
-        }
-
-        //created again for positioning, not sorted yet TODO
-        Meta compatMeta = new Meta();
-        compatMeta.addAttribute(MetaAttributes.Http_Equiv, "X-UA-Compatible");
-        compatMeta.addAttribute(MetaAttributes.Content, "IE=Edge");
-
-        getPage().getHead().add(charMeta);
-        getPage().getHead().add(compatMeta);
-        getPage().getHead().add(viewportMeta);
-
-        if (getPage().getOptions().isBootstrapEnabled())
-        {
-            if (isBootstrap4())
-            {
-                addJavaScriptReference(BootstrapReferencePool.Bootstrap4TetherReference.getJavaScriptReference());
-                addJavaScriptReference(BootstrapReferencePool.Bootstrap4CoreReference.getJavaScriptReference());
-                addCssReference(BootstrapReferencePool.Bootstrap4CoreReference.getCssReference());
-            }
-            else
-            {
-                addJavaScriptReference(BootstrapReferencePool.BootstrapCoreReference.getJavaScriptReference());
-                addCssReference(BootstrapReferencePool.BootstrapCoreReference.getCssReference());
-            }
-            //always add the dialog for server responses
-            addFeature(new BootstrapDialogFeature(this));
-        }
-
-        if (getPage().getBrowser().compareTo(Browsers.InternetExplorer8) < 1)
-        {
-            addJavaScriptReference(new JavascriptReference("html5shim", 1.0, "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js", RequirementsPriority.Fourth));
-            addJavaScriptReference(new JavascriptReference("html5shimrespond", 1.0, "https://oss.maxcdn.com/respond/1.4.2/respond.min.js", RequirementsPriority.Fourth));
-        }
-
-    }
-
-    @Override
-    public void configureJQueryUI()
-    {
-        getPage().getOptions().setjQueryEnabled(true);
-        configureJQuery();
-
-        if (getPage().getOptions().isjQueryUIEnabled())
-        {
-            addJavaScriptReference(JQueryUIReferencePool.Core.getJavaScriptReference());
-            addCssReference(JQueryUIReferencePool.Core.getCssReference());
-
-            addJavaScriptReference(JQueryUIReferencePool.Widget.getJavaScriptReference());
-            addCssReference(JQueryUIReferencePool.Widget.getCssReference());
-
-            addJavaScriptReference(JQueryUIReferencePool.Mouse.getJavaScriptReference());
-        }
-    }
-
-    /**
-     * Configures pace for use
-     */
-    @Override
-    public void configurePace()
-    {
-
-        if (getPage().getOptions().isPaceEnabled())
-        {
-            removeFeature((F) getLoader());
-            pace = new PaceLoader(PaceTheme.Flash);
-            setLoader((L) pace);
-            addFeature(getLoader());
-        }
-    }
-
-    /**
-     * Configures pace for use
-     *
-     * @param pace
-     */
-    @Override
-    public void configurePace(PaceLoader pace)
-    {
-
-        if (getPage().getOptions().isPaceEnabled())
-        {
-            removeFeature((F) getLoader());
-            setLoader((L) pace);
-            addFeature(getLoader());
         }
     }
 
@@ -270,7 +145,7 @@ public class Body<L extends ComponentFeatureBase & Loader & GlobalChildren, F ex
                     else
                     {
                         removeJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());
-                        if (isJquery3())
+                        if (getPage().getOptions().isJquery3())
                         {
                             addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
                             addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
@@ -282,7 +157,7 @@ public class Body<L extends ComponentFeatureBase & Loader & GlobalChildren, F ex
                         }
                     }
                 }
-                else if (isJquery3())
+                else if (getPage().getOptions().isJquery3())
                 {
                     addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
                     addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
@@ -306,28 +181,6 @@ public class Body<L extends ComponentFeatureBase & Loader & GlobalChildren, F ex
     }
 
     /**
-     * Returns this Body AJAX JQXLoader
-     *
-     * @return The loader associated with this Body object
-     */
-    @Override
-    public L getLoader()
-    {
-        return loader;
-    }
-
-    /**
-     * Sets this bodies loader
-     * <p>
-     * @param loader The loader to set
-     */
-    @Override
-    public void setLoader(L loader)
-    {
-        this.loader = loader;
-    }
-
-    /**
      * Returns if bootstrap is configured
      *
      * @return
@@ -348,69 +201,4 @@ public class Body<L extends ComponentFeatureBase & Loader & GlobalChildren, F ex
     {
         this.bootstrapConfigured = bootstrapConfigured;
     }
-
-    /**
-     * Gets the pace loader associated with this application
-     *
-     * @return
-     */
-    @Override
-    public PaceLoader getPace()
-    {
-        return pace;
-    }
-
-    /**
-     * Sets the pace loader for this application
-     *
-     * @param pace The PaceLoader
-     */
-    @Override
-    public void setPace(PaceLoader pace)
-    {
-        this.pace = pace;
-    }
-
-    /*
-     * If we are using bootstrap 4
-     */
-    @Override
-    public boolean isBootstrap4()
-    {
-        return bootstrap4;
-    }
-
-    /**
-     * If we are using bootstrap 3
-     *
-     * @param bootstrap4
-     */
-    @Override
-    public void setBootstrap4(boolean bootstrap4)
-    {
-        this.bootstrap4 = bootstrap4;
-    }
-
-    /**
-     * Sets if this page must use JQuery 3 or 2
-     *
-     * @return
-     */
-    @Override
-    public boolean isJquery3()
-    {
-        return jquery3;
-    }
-
-    /**
-     * Sets if this page must use JQuery 3 or 2
-     *
-     * @param jquery3
-     */
-    @Override
-    public void setJquery3(boolean jquery3)
-    {
-        this.jquery3 = jquery3;
-    }
-
 }

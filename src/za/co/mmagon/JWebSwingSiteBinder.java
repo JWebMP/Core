@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,6 @@ import java.util.logging.Level;
 import org.reflections.Reflections;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.servlets.*;
-import za.co.mmagon.jwebswing.generics.DynamicLoadingPage;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -39,15 +38,12 @@ import za.co.mmagon.logger.LogFactory;
 public class JWebSwingSiteBinder extends GuiceSiteBinder
 {
 
-    private static String QueryParametersRegex = "(\\?.*)?";
-
     private static final String JavaScriptLocation = "/jwjs";
     private static final String AjaxScriptLocation = "/jwajax";
     private static final String CSSLocation = "/jwcss";
     private static final String AngularDataLocation = "/jwad";
-    private static final String SiteLoaderJSLocation = "/jwsiteloader";
+
     private static final String AngularScriptLocation = "/jwas";
-    private static final String CordovaLocation = "/jwcordova";
 
     private static String DataLocation = "/jwdata";
 
@@ -65,8 +61,6 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
     public void onBind(GuiceSiteInjectorModule module)
     {
         module.filterRegex$("/*").through(new GZipServletFilter());
-
-        module.bind(DynamicLoadingPage.class).asEagerSingleton();
 
         log.log(Level.CONFIG, "Configuring Servlet URL's");
         Reflections reflections = GuiceContext.reflect();
@@ -88,7 +82,6 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
             {
                 log.log(Level.SEVERE, null, ex);
             }
-
             break;
         }
 
@@ -110,12 +103,6 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
 
         module.serveRegex$("(" + DataLocation + ")" + QueryParametersRegex).with(DataServlet.class);
         log.log(Level.CONFIG, "Serving Data at {0}", DataLocation);
-
-        module.serveRegex$("(" + SiteLoaderJSLocation + ")" + QueryParametersRegex).with(SiteLoaderJavascript.class);
-        log.log(Level.CONFIG, "Serving Site Loader Javscript at {0}", SiteLoaderJSLocation);
-
-        module.serveRegex$("(" + CordovaLocation + ")" + QueryParametersRegex).with(CordovaServlet.class);
-        log.log(Level.CONFIG, "Serving Cordova at {0}", CordovaLocation);
 
         log.log(Level.CONFIG, "Finished with configuring URL's");
     }
@@ -208,26 +195,6 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
     public static String getAngularDataLocation()
     {
         return AngularDataLocation;
-    }
-
-    /**
-     * Sets the site loader JS location
-     *
-     * @return
-     */
-    public static String getSiteLoaderJSLocation()
-    {
-        return SiteLoaderJSLocation;
-    }
-
-    /**
-     * Gets the cordova location
-     *
-     * @return
-     */
-    public static String getCordovaLocation()
-    {
-        return CordovaLocation;
     }
 
 }

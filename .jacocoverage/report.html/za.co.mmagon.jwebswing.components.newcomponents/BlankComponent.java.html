@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BlankComponent.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.components.newcomponents</a> &gt; <span class="el_source">BlankComponent.java</span></div><h1>BlankComponent.java</h1><pre class="source lang-java linenums">/*
- * Copyright (C) 2015 Marc Magon
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,16 +16,20 @@
  */
 package za.co.mmagon.jwebswing.components.newcomponents;
 
-import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
 /**
  * An implementation of
  * &lt;p&gt;
  * @author Marc Magon
+ * @param &lt;J&gt;
+ *
  * @since 17 Jan 2017
  * @version 1.0
  */
-public class BlankComponent extends Div&lt;BlankComponentChildren, BlankComponentAttributes, BlankComponentFeatures, BlankComponentEvents, BlankComponent&gt;
+public class BlankComponent&lt;J extends BlankComponent&gt;
+        extends Component&lt;BlankComponentChildren, BlankComponentAttributes, BlankComponentFeatures, BlankComponentEvents, J&gt;
 {
 
     private static final long serialVersionUID = 1L;
@@ -38,9 +42,10 @@ public class BlankComponent extends Div&lt;BlankComponentChildren, BlankComponen
      * Constructs a new instance
      */
     public BlankComponent()
-<span class="nc" id="L41">    {</span>
-<span class="nc" id="L42">        addFeature(getFeature());</span>
-<span class="nc" id="L43">    }</span>
+    {
+<span class="nc" id="L46">        super(ComponentTypes.Div);</span>
+<span class="nc" id="L47">        addFeature(getFeature());</span>
+<span class="nc" id="L48">    }</span>
 
     /**
      * Returns the feature if any is required
@@ -49,11 +54,11 @@ public class BlankComponent extends Div&lt;BlankComponentChildren, BlankComponen
      */
     public final BlankComponentFeature getFeature()
     {
-<span class="nc bnc" id="L52" title="All 2 branches missed.">        if (feature == null)</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        if (feature == null)</span>
         {
-<span class="nc" id="L54">            feature = new BlankComponentFeature(this);</span>
+<span class="nc" id="L59">            feature = new BlankComponentFeature(this);</span>
         }
-<span class="nc" id="L56">        return feature;</span>
+<span class="nc" id="L61">        return feature;</span>
     }
 
     /**
@@ -64,33 +69,33 @@ public class BlankComponent extends Div&lt;BlankComponentChildren, BlankComponen
     @Override
     public BlankComponentOptions getOptions()
     {
-<span class="nc" id="L67">        return getFeature().getOptions();</span>
+<span class="nc" id="L72">        return getFeature().getOptions();</span>
     }
 
     @Override
     public boolean equals(Object obj)
     {
-<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (this == obj)</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        if (this == obj)</span>
         {
-<span class="nc" id="L75">            return true;</span>
+<span class="nc" id="L80">            return true;</span>
         }
-<span class="nc bnc" id="L77" title="All 2 branches missed.">        if (obj == null)</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        if (obj == null)</span>
         {
-<span class="nc" id="L79">            return false;</span>
+<span class="nc" id="L84">            return false;</span>
         }
-<span class="nc bnc" id="L81" title="All 2 branches missed.">        if (getClass() != obj.getClass())</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">        if (getClass() != obj.getClass())</span>
         {
-<span class="nc" id="L83">            return false;</span>
+<span class="nc" id="L88">            return false;</span>
         }
-<span class="nc" id="L85">        return super.equals(obj);</span>
+<span class="nc" id="L90">        return super.equals(obj);</span>
     }
 
     @Override
     public int hashCode()
     {
-<span class="nc" id="L91">        int hash = 7;</span>
-<span class="nc" id="L92">        hash = 79 * hash + (this.getID().hashCode());</span>
-<span class="nc" id="L93">        return hash;</span>
+<span class="nc" id="L96">        int hash = 7;</span>
+<span class="nc" id="L97">        hash = 79 * hash + (this.getID().hashCode());</span>
+<span class="nc" id="L98">        return hash;</span>
     }
 
 }

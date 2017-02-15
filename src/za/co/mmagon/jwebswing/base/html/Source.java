@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,12 +46,16 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;source&gt; tag is new in HTML5.<p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since Mar 1, 2015
  * @version 1.0
  * <p>
  *
  */
-public class Source extends Component<NoChildren, SourceAttributes, NoFeatures, NoEvents, Source> implements AudioChildren, VideoChildren, NoClosingTag
+public class Source<J extends Source>
+        extends Component<NoChildren, SourceAttributes, NoFeatures, NoEvents, J>
+        implements AudioChildren, VideoChildren, NoClosingTag
 {
 
     private static final long serialVersionUID = 1L;

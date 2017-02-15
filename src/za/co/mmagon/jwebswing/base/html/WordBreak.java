@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,10 +18,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -43,18 +40,23 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;wbr&gt; tag is new in HTML5.<p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since Mar 1, 2015
  * @version 1.0
  * <p>
  *
  */
-public class WordBreak extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, WordBreak> implements NoIDTag, NoNewLineBeforeClosingTag, NoNewLineForRawText
+public class WordBreak<J extends WordBreak>
+        extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements NoIDTag, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
     /**
      * Static instance of Word Break
      */
     public static final WordBreak wordBreak = new WordBreak();
+    private static final long serialVersionUID = 1L;
 
     /**
      * Singleton instance of word breaks

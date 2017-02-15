@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,10 +18,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
@@ -38,18 +35,23 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The term inside the &lt;dfn&gt; tag can be any of the following:
  * <p>
- * Browser Support Element
- * &lt;dfn&gt; Yes Yes Yes Yes Yes
+ * Browser Support Element &lt;dfn&gt; Yes Yes Yes Yes Yes
  * <p>
  * Differences Between HTML 4.01 and HTML5
  * <p>
  * NONE.
  * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since 2014/12/21
  */
-public class Definition extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, Definition> implements NoNewLineBeforeClosingTag, NoNewLineForRawText, ParagraphChildren,NoIDTag
+public class Definition<J extends Definition>
+        extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+        implements NoNewLineBeforeClosingTag, NoNewLineForRawText, ParagraphChildren, NoIDTag
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Specifies text that is defined as a definition

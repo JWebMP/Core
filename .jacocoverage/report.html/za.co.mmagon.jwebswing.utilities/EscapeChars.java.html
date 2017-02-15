@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>EscapeChars.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.utilities</a> &gt; <span class="el_source">EscapeChars.java</span></div><h1>EscapeChars.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.utilities;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>EscapeChars.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.utilities</a> &gt; <span class="el_source">EscapeChars.java</span></div><h1>EscapeChars.java</h1><pre class="source lang-java linenums">/* 
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.utilities;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -15,10 +31,10 @@ import java.util.regex.Pattern;
 public final class EscapeChars
 {
 
-<span class="nc" id="L18">    private static final Pattern SCRIPT = Pattern.compile(</span>
+<span class="nc" id="L34">    private static final Pattern SCRIPT = Pattern.compile(</span>
             &quot;&lt;SCRIPT&gt;&quot;, Pattern.CASE_INSENSITIVE
     );
-<span class="nc" id="L21">    private static final Pattern SCRIPT_END = Pattern.compile(</span>
+<span class="nc" id="L37">    private static final Pattern SCRIPT_END = Pattern.compile(</span>
             &quot;&lt;/SCRIPT&gt;&quot;, Pattern.CASE_INSENSITIVE
     );
 
@@ -26,9 +42,9 @@ public final class EscapeChars
      * Static only
      */
     private EscapeChars()
-<span class="nc" id="L29">    {</span>
+<span class="nc" id="L45">    {</span>
         //empty - prevent construction
-<span class="nc" id="L31">    }</span>
+<span class="nc" id="L47">    }</span>
 
     /**
      * Escape characters for text appearing in HTML markup.
@@ -42,121 +58,121 @@ public final class EscapeChars
      */
     public static String forHTML(String aText)
     {
-<span class="nc" id="L45">        final StringBuilder result = new StringBuilder();</span>
-<span class="nc" id="L46">        final StringCharacterIterator iterator = new StringCharacterIterator(aText);</span>
-<span class="nc" id="L47">        char character = iterator.current();</span>
-<span class="nc bnc" id="L48" title="All 2 branches missed.">        while (character != CharacterIterator.DONE)</span>
+<span class="nc" id="L61">        final StringBuilder result = new StringBuilder();</span>
+<span class="nc" id="L62">        final StringCharacterIterator iterator = new StringCharacterIterator(aText);</span>
+<span class="nc" id="L63">        char character = iterator.current();</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        while (character != CharacterIterator.DONE)</span>
         {
-<span class="nc bnc" id="L50" title="All 34 branches missed.">            switch (character)</span>
+<span class="nc bnc" id="L66" title="All 34 branches missed.">            switch (character)</span>
             {
                 case '&lt;':
-<span class="nc" id="L53">                    result.append(&quot;&amp;lt;&quot;);</span>
-<span class="nc" id="L54">                    break;</span>
+<span class="nc" id="L69">                    result.append(&quot;&amp;lt;&quot;);</span>
+<span class="nc" id="L70">                    break;</span>
                 case '&gt;':
-<span class="nc" id="L56">                    result.append(&quot;&amp;gt;&quot;);</span>
-<span class="nc" id="L57">                    break;</span>
+<span class="nc" id="L72">                    result.append(&quot;&amp;gt;&quot;);</span>
+<span class="nc" id="L73">                    break;</span>
                 case '&amp;':
-<span class="nc" id="L59">                    result.append(&quot;&amp;amp;&quot;);</span>
-<span class="nc" id="L60">                    break;</span>
+<span class="nc" id="L75">                    result.append(&quot;&amp;amp;&quot;);</span>
+<span class="nc" id="L76">                    break;</span>
                 case '\&quot;':
-<span class="nc" id="L62">                    result.append(&quot;&amp;quot;&quot;);</span>
-<span class="nc" id="L63">                    break;</span>
+<span class="nc" id="L78">                    result.append(&quot;&amp;quot;&quot;);</span>
+<span class="nc" id="L79">                    break;</span>
                 case '\t':
-<span class="nc" id="L65">                    addCharEntity(9, result);</span>
-<span class="nc" id="L66">                    break;</span>
+<span class="nc" id="L81">                    addCharEntity(9, result);</span>
+<span class="nc" id="L82">                    break;</span>
                 case '!':
-<span class="nc" id="L68">                    addCharEntity(33, result);</span>
-<span class="nc" id="L69">                    break;</span>
+<span class="nc" id="L84">                    addCharEntity(33, result);</span>
+<span class="nc" id="L85">                    break;</span>
                 case '#':
-<span class="nc" id="L71">                    addCharEntity(35, result);</span>
-<span class="nc" id="L72">                    break;</span>
+<span class="nc" id="L87">                    addCharEntity(35, result);</span>
+<span class="nc" id="L88">                    break;</span>
                 case '$':
-<span class="nc" id="L74">                    addCharEntity(36, result);</span>
-<span class="nc" id="L75">                    break;</span>
+<span class="nc" id="L90">                    addCharEntity(36, result);</span>
+<span class="nc" id="L91">                    break;</span>
                 case '%':
-<span class="nc" id="L77">                    addCharEntity(37, result);</span>
-<span class="nc" id="L78">                    break;</span>
+<span class="nc" id="L93">                    addCharEntity(37, result);</span>
+<span class="nc" id="L94">                    break;</span>
                 case '\'':
-<span class="nc" id="L80">                    addCharEntity(39, result);</span>
-<span class="nc" id="L81">                    break;</span>
+<span class="nc" id="L96">                    addCharEntity(39, result);</span>
+<span class="nc" id="L97">                    break;</span>
                 case '(':
-<span class="nc" id="L83">                    addCharEntity(40, result);</span>
-<span class="nc" id="L84">                    break;</span>
+<span class="nc" id="L99">                    addCharEntity(40, result);</span>
+<span class="nc" id="L100">                    break;</span>
                 case ')':
-<span class="nc" id="L86">                    addCharEntity(41, result);</span>
-<span class="nc" id="L87">                    break;</span>
+<span class="nc" id="L102">                    addCharEntity(41, result);</span>
+<span class="nc" id="L103">                    break;</span>
                 case '*':
-<span class="nc" id="L89">                    addCharEntity(42, result);</span>
-<span class="nc" id="L90">                    break;</span>
+<span class="nc" id="L105">                    addCharEntity(42, result);</span>
+<span class="nc" id="L106">                    break;</span>
                 case '+':
-<span class="nc" id="L92">                    addCharEntity(43, result);</span>
-<span class="nc" id="L93">                    break;</span>
+<span class="nc" id="L108">                    addCharEntity(43, result);</span>
+<span class="nc" id="L109">                    break;</span>
                 case ',':
-<span class="nc" id="L95">                    addCharEntity(44, result);</span>
-<span class="nc" id="L96">                    break;</span>
+<span class="nc" id="L111">                    addCharEntity(44, result);</span>
+<span class="nc" id="L112">                    break;</span>
                 case '-':
-<span class="nc" id="L98">                    addCharEntity(45, result);</span>
-<span class="nc" id="L99">                    break;</span>
+<span class="nc" id="L114">                    addCharEntity(45, result);</span>
+<span class="nc" id="L115">                    break;</span>
                 case '.':
-<span class="nc" id="L101">                    addCharEntity(46, result);</span>
-<span class="nc" id="L102">                    break;</span>
+<span class="nc" id="L117">                    addCharEntity(46, result);</span>
+<span class="nc" id="L118">                    break;</span>
                 case '/':
-<span class="nc" id="L104">                    addCharEntity(47, result);</span>
-<span class="nc" id="L105">                    break;</span>
+<span class="nc" id="L120">                    addCharEntity(47, result);</span>
+<span class="nc" id="L121">                    break;</span>
                 case ':':
-<span class="nc" id="L107">                    addCharEntity(58, result);</span>
-<span class="nc" id="L108">                    break;</span>
+<span class="nc" id="L123">                    addCharEntity(58, result);</span>
+<span class="nc" id="L124">                    break;</span>
                 case ';':
-<span class="nc" id="L110">                    addCharEntity(59, result);</span>
-<span class="nc" id="L111">                    break;</span>
+<span class="nc" id="L126">                    addCharEntity(59, result);</span>
+<span class="nc" id="L127">                    break;</span>
                 case '=':
-<span class="nc" id="L113">                    addCharEntity(61, result);</span>
-<span class="nc" id="L114">                    break;</span>
+<span class="nc" id="L129">                    addCharEntity(61, result);</span>
+<span class="nc" id="L130">                    break;</span>
                 case '?':
-<span class="nc" id="L116">                    addCharEntity(63, result);</span>
-<span class="nc" id="L117">                    break;</span>
+<span class="nc" id="L132">                    addCharEntity(63, result);</span>
+<span class="nc" id="L133">                    break;</span>
                 case '@':
-<span class="nc" id="L119">                    addCharEntity(64, result);</span>
-<span class="nc" id="L120">                    break;</span>
+<span class="nc" id="L135">                    addCharEntity(64, result);</span>
+<span class="nc" id="L136">                    break;</span>
                 case '[':
-<span class="nc" id="L122">                    addCharEntity(91, result);</span>
-<span class="nc" id="L123">                    break;</span>
+<span class="nc" id="L138">                    addCharEntity(91, result);</span>
+<span class="nc" id="L139">                    break;</span>
                 case '\\':
-<span class="nc" id="L125">                    addCharEntity(92, result);</span>
-<span class="nc" id="L126">                    break;</span>
+<span class="nc" id="L141">                    addCharEntity(92, result);</span>
+<span class="nc" id="L142">                    break;</span>
                 case ']':
-<span class="nc" id="L128">                    addCharEntity(93, result);</span>
-<span class="nc" id="L129">                    break;</span>
+<span class="nc" id="L144">                    addCharEntity(93, result);</span>
+<span class="nc" id="L145">                    break;</span>
                 case '^':
-<span class="nc" id="L131">                    addCharEntity(94, result);</span>
-<span class="nc" id="L132">                    break;</span>
+<span class="nc" id="L147">                    addCharEntity(94, result);</span>
+<span class="nc" id="L148">                    break;</span>
                 case '_':
-<span class="nc" id="L134">                    addCharEntity(95, result);</span>
-<span class="nc" id="L135">                    break;</span>
+<span class="nc" id="L150">                    addCharEntity(95, result);</span>
+<span class="nc" id="L151">                    break;</span>
                 case '`':
-<span class="nc" id="L137">                    addCharEntity(96, result);</span>
-<span class="nc" id="L138">                    break;</span>
+<span class="nc" id="L153">                    addCharEntity(96, result);</span>
+<span class="nc" id="L154">                    break;</span>
                 case '{':
-<span class="nc" id="L140">                    addCharEntity(123, result);</span>
-<span class="nc" id="L141">                    break;</span>
+<span class="nc" id="L156">                    addCharEntity(123, result);</span>
+<span class="nc" id="L157">                    break;</span>
                 case '|':
-<span class="nc" id="L143">                    addCharEntity(124, result);</span>
-<span class="nc" id="L144">                    break;</span>
+<span class="nc" id="L159">                    addCharEntity(124, result);</span>
+<span class="nc" id="L160">                    break;</span>
                 case '}':
-<span class="nc" id="L146">                    addCharEntity(125, result);</span>
-<span class="nc" id="L147">                    break;</span>
+<span class="nc" id="L162">                    addCharEntity(125, result);</span>
+<span class="nc" id="L163">                    break;</span>
                 case '~':
-<span class="nc" id="L149">                    addCharEntity(126, result);</span>
-<span class="nc" id="L150">                    break;</span>
+<span class="nc" id="L165">                    addCharEntity(126, result);</span>
+<span class="nc" id="L166">                    break;</span>
                 default:
                     //the char is not a special one
                     //add it to the result as is
-<span class="nc" id="L154">                    result.append(character);</span>
+<span class="nc" id="L170">                    result.append(character);</span>
                     break;
             }
-<span class="nc" id="L157">            character = iterator.next();</span>
+<span class="nc" id="L173">            character = iterator.next();</span>
         }
-<span class="nc" id="L159">        return result.toString();</span>
+<span class="nc" id="L175">        return result.toString();</span>
     }
 
     /**
@@ -168,7 +184,7 @@ public final class EscapeChars
      */
     public static String forHrefAmpersand(String aURL)
     {
-<span class="nc" id="L171">        return aURL.replace(&quot;&amp;&quot;, &quot;&amp;amp;&quot;);</span>
+<span class="nc" id="L187">        return aURL.replace(&quot;&amp;&quot;, &quot;&amp;amp;&quot;);</span>
     }
 
     /**
@@ -182,16 +198,16 @@ public final class EscapeChars
      */
     public static String forURL(String aURLFragment) throws UnsupportedEncodingException
     {
-<span class="nc" id="L185">        String result = null;</span>
+<span class="nc" id="L201">        String result = null;</span>
         try
         {
-<span class="nc" id="L188">            result = URLEncoder.encode(aURLFragment, &quot;UTF-8&quot;);</span>
+<span class="nc" id="L204">            result = URLEncoder.encode(aURLFragment, &quot;UTF-8&quot;);</span>
         }
-<span class="nc" id="L190">        catch (UnsupportedEncodingException ex)</span>
+<span class="nc" id="L206">        catch (UnsupportedEncodingException ex)</span>
         {
-<span class="nc" id="L192">            throw ex;</span>
-<span class="nc" id="L193">        }</span>
-<span class="nc" id="L194">        return result;</span>
+<span class="nc" id="L208">            throw ex;</span>
+<span class="nc" id="L209">        }</span>
+<span class="nc" id="L210">        return result;</span>
     }
 
     /**
@@ -203,37 +219,37 @@ public final class EscapeChars
      */
     public static String forXML(String aText)
     {
-<span class="nc" id="L206">        final StringBuilder result = new StringBuilder();</span>
-<span class="nc" id="L207">        final StringCharacterIterator iterator = new StringCharacterIterator(aText);</span>
-<span class="nc" id="L208">        char character = iterator.current();</span>
-<span class="nc bnc" id="L209" title="All 2 branches missed.">        while (character != CharacterIterator.DONE)</span>
+<span class="nc" id="L222">        final StringBuilder result = new StringBuilder();</span>
+<span class="nc" id="L223">        final StringCharacterIterator iterator = new StringCharacterIterator(aText);</span>
+<span class="nc" id="L224">        char character = iterator.current();</span>
+<span class="nc bnc" id="L225" title="All 2 branches missed.">        while (character != CharacterIterator.DONE)</span>
         {
-<span class="nc bnc" id="L211" title="All 6 branches missed.">            switch (character)</span>
+<span class="nc bnc" id="L227" title="All 6 branches missed.">            switch (character)</span>
             {
                 case '&lt;':
-<span class="nc" id="L214">                    result.append(&quot;&amp;lt;&quot;);</span>
-<span class="nc" id="L215">                    break;</span>
+<span class="nc" id="L230">                    result.append(&quot;&amp;lt;&quot;);</span>
+<span class="nc" id="L231">                    break;</span>
                 case '&gt;':
-<span class="nc" id="L217">                    result.append(&quot;&amp;gt;&quot;);</span>
-<span class="nc" id="L218">                    break;</span>
+<span class="nc" id="L233">                    result.append(&quot;&amp;gt;&quot;);</span>
+<span class="nc" id="L234">                    break;</span>
                 case '\&quot;':
-<span class="nc" id="L220">                    result.append(&quot;&amp;quot;&quot;);</span>
-<span class="nc" id="L221">                    break;</span>
+<span class="nc" id="L236">                    result.append(&quot;&amp;quot;&quot;);</span>
+<span class="nc" id="L237">                    break;</span>
                 case '\'':
-<span class="nc" id="L223">                    result.append(&quot;&amp;#039;&quot;);</span>
-<span class="nc" id="L224">                    break;</span>
+<span class="nc" id="L239">                    result.append(&quot;&amp;#039;&quot;);</span>
+<span class="nc" id="L240">                    break;</span>
                 case '&amp;':
-<span class="nc" id="L226">                    result.append(&quot;&amp;amp;&quot;);</span>
-<span class="nc" id="L227">                    break;</span>
+<span class="nc" id="L242">                    result.append(&quot;&amp;amp;&quot;);</span>
+<span class="nc" id="L243">                    break;</span>
                 default:
                     //the char is not a special one
                     //add it to the result as is
-<span class="nc" id="L231">                    result.append(character);</span>
+<span class="nc" id="L247">                    result.append(character);</span>
                     break;
             }
-<span class="nc" id="L234">            character = iterator.next();</span>
+<span class="nc" id="L250">            character = iterator.next();</span>
         }
-<span class="nc" id="L236">        return result.toString();</span>
+<span class="nc" id="L252">        return result.toString();</span>
     }
 
     /**
@@ -245,46 +261,46 @@ public final class EscapeChars
      */
     public static String forJSON(String aText)
     {
-<span class="nc" id="L248">        final StringBuilder result = new StringBuilder();</span>
-<span class="nc" id="L249">        StringCharacterIterator iterator = new StringCharacterIterator(aText);</span>
-<span class="nc" id="L250">        char character = iterator.current();</span>
-<span class="nc bnc" id="L251" title="All 2 branches missed.">        while (character != StringCharacterIterator.DONE)</span>
+<span class="nc" id="L264">        final StringBuilder result = new StringBuilder();</span>
+<span class="nc" id="L265">        StringCharacterIterator iterator = new StringCharacterIterator(aText);</span>
+<span class="nc" id="L266">        char character = iterator.current();</span>
+<span class="nc bnc" id="L267" title="All 2 branches missed.">        while (character != StringCharacterIterator.DONE)</span>
         {
-<span class="nc bnc" id="L253" title="All 9 branches missed.">            switch (character)</span>
+<span class="nc bnc" id="L269" title="All 9 branches missed.">            switch (character)</span>
             {
                 case '\&quot;':
-<span class="nc" id="L256">                    result.append(&quot;\\\&quot;&quot;);</span>
-<span class="nc" id="L257">                    break;</span>
+<span class="nc" id="L272">                    result.append(&quot;\\\&quot;&quot;);</span>
+<span class="nc" id="L273">                    break;</span>
                 case '\\':
-<span class="nc" id="L259">                    result.append(&quot;\\\\&quot;);</span>
-<span class="nc" id="L260">                    break;</span>
+<span class="nc" id="L275">                    result.append(&quot;\\\\&quot;);</span>
+<span class="nc" id="L276">                    break;</span>
                 case '/':
-<span class="nc" id="L262">                    result.append(&quot;\\/&quot;);</span>
-<span class="nc" id="L263">                    break;</span>
+<span class="nc" id="L278">                    result.append(&quot;\\/&quot;);</span>
+<span class="nc" id="L279">                    break;</span>
                 case '\b':
-<span class="nc" id="L265">                    result.append(&quot;\\b&quot;);</span>
-<span class="nc" id="L266">                    break;</span>
+<span class="nc" id="L281">                    result.append(&quot;\\b&quot;);</span>
+<span class="nc" id="L282">                    break;</span>
                 case '\f':
-<span class="nc" id="L268">                    result.append(&quot;\\f&quot;);</span>
-<span class="nc" id="L269">                    break;</span>
+<span class="nc" id="L284">                    result.append(&quot;\\f&quot;);</span>
+<span class="nc" id="L285">                    break;</span>
                 case '\n':
-<span class="nc" id="L271">                    result.append(&quot;\\n&quot;);</span>
-<span class="nc" id="L272">                    break;</span>
+<span class="nc" id="L287">                    result.append(&quot;\\n&quot;);</span>
+<span class="nc" id="L288">                    break;</span>
                 case '\r':
-<span class="nc" id="L274">                    result.append(&quot;\\r&quot;);</span>
-<span class="nc" id="L275">                    break;</span>
+<span class="nc" id="L290">                    result.append(&quot;\\r&quot;);</span>
+<span class="nc" id="L291">                    break;</span>
                 case '\t':
-<span class="nc" id="L277">                    result.append(&quot;\\t&quot;);</span>
-<span class="nc" id="L278">                    break;</span>
+<span class="nc" id="L293">                    result.append(&quot;\\t&quot;);</span>
+<span class="nc" id="L294">                    break;</span>
                 default:
                     //the char is not a special one
                     //add it to the result as is
-<span class="nc" id="L282">                    result.append(character);</span>
+<span class="nc" id="L298">                    result.append(character);</span>
                     break;
             }
-<span class="nc" id="L285">            character = iterator.next();</span>
+<span class="nc" id="L301">            character = iterator.next();</span>
         }
-<span class="nc" id="L287">        return result.toString();</span>
+<span class="nc" id="L303">        return result.toString();</span>
     }
 
     /**
@@ -296,28 +312,28 @@ public final class EscapeChars
      */
     public static String toDisableTags(String aText)
     {
-<span class="nc" id="L299">        final StringBuilder result = new StringBuilder();</span>
-<span class="nc" id="L300">        final StringCharacterIterator iterator = new StringCharacterIterator(aText);</span>
-<span class="nc" id="L301">        char character = iterator.current();</span>
-<span class="nc bnc" id="L302" title="All 2 branches missed.">        while (character != CharacterIterator.DONE)</span>
+<span class="nc" id="L315">        final StringBuilder result = new StringBuilder();</span>
+<span class="nc" id="L316">        final StringCharacterIterator iterator = new StringCharacterIterator(aText);</span>
+<span class="nc" id="L317">        char character = iterator.current();</span>
+<span class="nc bnc" id="L318" title="All 2 branches missed.">        while (character != CharacterIterator.DONE)</span>
         {
-<span class="nc bnc" id="L304" title="All 3 branches missed.">            switch (character)</span>
+<span class="nc bnc" id="L320" title="All 3 branches missed.">            switch (character)</span>
             {
                 case '&lt;':
-<span class="nc" id="L307">                    result.append(&quot;&amp;lt;&quot;);</span>
-<span class="nc" id="L308">                    break;</span>
+<span class="nc" id="L323">                    result.append(&quot;&amp;lt;&quot;);</span>
+<span class="nc" id="L324">                    break;</span>
                 case '&gt;':
-<span class="nc" id="L310">                    result.append(&quot;&amp;gt;&quot;);</span>
-<span class="nc" id="L311">                    break;</span>
+<span class="nc" id="L326">                    result.append(&quot;&amp;gt;&quot;);</span>
+<span class="nc" id="L327">                    break;</span>
                 default:
                     //the char is not a special one
                     //add it to the result as is
-<span class="nc" id="L315">                    result.append(character);</span>
+<span class="nc" id="L331">                    result.append(character);</span>
                     break;
             }
-<span class="nc" id="L318">            character = iterator.next();</span>
+<span class="nc" id="L334">            character = iterator.next();</span>
         }
-<span class="nc" id="L320">        return result.toString();</span>
+<span class="nc" id="L336">        return result.toString();</span>
     }
 
     /**
@@ -329,72 +345,72 @@ public final class EscapeChars
      */
     public static String forRegex(String aRegexFragment)
     {
-<span class="nc" id="L332">        final StringBuilder result = new StringBuilder();</span>
+<span class="nc" id="L348">        final StringBuilder result = new StringBuilder();</span>
 
-<span class="nc" id="L334">        final StringCharacterIterator iterator</span>
+<span class="nc" id="L350">        final StringCharacterIterator iterator</span>
                 = new StringCharacterIterator(aRegexFragment);
-<span class="nc" id="L336">        char character = iterator.current();</span>
-<span class="nc bnc" id="L337" title="All 2 branches missed.">        while (character != CharacterIterator.DONE)</span>
+<span class="nc" id="L352">        char character = iterator.current();</span>
+<span class="nc bnc" id="L353" title="All 2 branches missed.">        while (character != CharacterIterator.DONE)</span>
         {
             /*
              * All literals need to have backslashes doubled.
              */
-<span class="nc bnc" id="L342" title="All 16 branches missed.">            switch (character)</span>
+<span class="nc bnc" id="L358" title="All 16 branches missed.">            switch (character)</span>
             {
                 case '.':
-<span class="nc" id="L345">                    result.append(&quot;\\.&quot;);</span>
-<span class="nc" id="L346">                    break;</span>
+<span class="nc" id="L361">                    result.append(&quot;\\.&quot;);</span>
+<span class="nc" id="L362">                    break;</span>
                 case '\\':
-<span class="nc" id="L348">                    result.append(&quot;\\\\&quot;);</span>
-<span class="nc" id="L349">                    break;</span>
+<span class="nc" id="L364">                    result.append(&quot;\\\\&quot;);</span>
+<span class="nc" id="L365">                    break;</span>
                 case '?':
-<span class="nc" id="L351">                    result.append(&quot;\\?&quot;);</span>
-<span class="nc" id="L352">                    break;</span>
+<span class="nc" id="L367">                    result.append(&quot;\\?&quot;);</span>
+<span class="nc" id="L368">                    break;</span>
                 case '*':
-<span class="nc" id="L354">                    result.append(&quot;\\*&quot;);</span>
-<span class="nc" id="L355">                    break;</span>
+<span class="nc" id="L370">                    result.append(&quot;\\*&quot;);</span>
+<span class="nc" id="L371">                    break;</span>
                 case '+':
-<span class="nc" id="L357">                    result.append(&quot;\\+&quot;);</span>
-<span class="nc" id="L358">                    break;</span>
+<span class="nc" id="L373">                    result.append(&quot;\\+&quot;);</span>
+<span class="nc" id="L374">                    break;</span>
                 case '&amp;':
-<span class="nc" id="L360">                    result.append(&quot;\\&amp;&quot;);</span>
-<span class="nc" id="L361">                    break;</span>
+<span class="nc" id="L376">                    result.append(&quot;\\&amp;&quot;);</span>
+<span class="nc" id="L377">                    break;</span>
                 case ':':
-<span class="nc" id="L363">                    result.append(&quot;\\:&quot;);</span>
-<span class="nc" id="L364">                    break;</span>
+<span class="nc" id="L379">                    result.append(&quot;\\:&quot;);</span>
+<span class="nc" id="L380">                    break;</span>
                 case '{':
-<span class="nc" id="L366">                    result.append(&quot;\\{&quot;);</span>
-<span class="nc" id="L367">                    break;</span>
+<span class="nc" id="L382">                    result.append(&quot;\\{&quot;);</span>
+<span class="nc" id="L383">                    break;</span>
                 case '}':
-<span class="nc" id="L369">                    result.append(&quot;\\}&quot;);</span>
-<span class="nc" id="L370">                    break;</span>
+<span class="nc" id="L385">                    result.append(&quot;\\}&quot;);</span>
+<span class="nc" id="L386">                    break;</span>
                 case '[':
-<span class="nc" id="L372">                    result.append(&quot;\\[&quot;);</span>
-<span class="nc" id="L373">                    break;</span>
+<span class="nc" id="L388">                    result.append(&quot;\\[&quot;);</span>
+<span class="nc" id="L389">                    break;</span>
                 case ']':
-<span class="nc" id="L375">                    result.append(&quot;\\]&quot;);</span>
-<span class="nc" id="L376">                    break;</span>
+<span class="nc" id="L391">                    result.append(&quot;\\]&quot;);</span>
+<span class="nc" id="L392">                    break;</span>
                 case '(':
-<span class="nc" id="L378">                    result.append(&quot;\\(&quot;);</span>
-<span class="nc" id="L379">                    break;</span>
+<span class="nc" id="L394">                    result.append(&quot;\\(&quot;);</span>
+<span class="nc" id="L395">                    break;</span>
                 case ')':
-<span class="nc" id="L381">                    result.append(&quot;\\)&quot;);</span>
-<span class="nc" id="L382">                    break;</span>
+<span class="nc" id="L397">                    result.append(&quot;\\)&quot;);</span>
+<span class="nc" id="L398">                    break;</span>
                 case '^':
-<span class="nc" id="L384">                    result.append(&quot;\\^&quot;);</span>
-<span class="nc" id="L385">                    break;</span>
+<span class="nc" id="L400">                    result.append(&quot;\\^&quot;);</span>
+<span class="nc" id="L401">                    break;</span>
                 case '$':
-<span class="nc" id="L387">                    result.append(&quot;\\$&quot;);</span>
-<span class="nc" id="L388">                    break;</span>
+<span class="nc" id="L403">                    result.append(&quot;\\$&quot;);</span>
+<span class="nc" id="L404">                    break;</span>
                 default:
                     //the char is not a special one
                     //add it to the result as is
-<span class="nc" id="L392">                    result.append(character);</span>
+<span class="nc" id="L408">                    result.append(character);</span>
                     break;
             }
-<span class="nc" id="L395">            character = iterator.next();</span>
+<span class="nc" id="L411">            character = iterator.next();</span>
         }
-<span class="nc" id="L397">        return result.toString();</span>
+<span class="nc" id="L413">        return result.toString();</span>
     }
 
     /**
@@ -406,7 +422,7 @@ public final class EscapeChars
      */
     public static String forReplacementString(String aInput)
     {
-<span class="nc" id="L409">        return Matcher.quoteReplacement(aInput);</span>
+<span class="nc" id="L425">        return Matcher.quoteReplacement(aInput);</span>
     }
 
     /**
@@ -419,11 +435,11 @@ public final class EscapeChars
     public static String forScriptTagsOnly(String aText)
     {
         String result;
-<span class="nc" id="L422">        Matcher matcher = SCRIPT.matcher(aText);</span>
-<span class="nc" id="L423">        result = matcher.replaceAll(&quot;&amp;gt;SCRIPT&amp;lt;&quot;);</span>
-<span class="nc" id="L424">        matcher = SCRIPT_END.matcher(result);</span>
-<span class="nc" id="L425">        result = matcher.replaceAll(&quot;&amp;gt;/SCRIPT&amp;lt;&quot;);</span>
-<span class="nc" id="L426">        return result;</span>
+<span class="nc" id="L438">        Matcher matcher = SCRIPT.matcher(aText);</span>
+<span class="nc" id="L439">        result = matcher.replaceAll(&quot;&amp;gt;SCRIPT&amp;lt;&quot;);</span>
+<span class="nc" id="L440">        matcher = SCRIPT_END.matcher(result);</span>
+<span class="nc" id="L441">        result = matcher.replaceAll(&quot;&amp;gt;/SCRIPT&amp;lt;&quot;);</span>
+<span class="nc" id="L442">        return result;</span>
     }
 
     /**
@@ -434,21 +450,21 @@ public final class EscapeChars
      */
     private static void addCharEntity(Integer aIdx, StringBuilder aBuilder)
     {
-<span class="nc" id="L437">        String padding = &quot;&quot;;</span>
-<span class="nc bnc" id="L438" title="All 2 branches missed.">        if (aIdx &lt;= 9)</span>
+<span class="nc" id="L453">        String padding = &quot;&quot;;</span>
+<span class="nc bnc" id="L454" title="All 2 branches missed.">        if (aIdx &lt;= 9)</span>
         {
-<span class="nc" id="L440">            padding = &quot;00&quot;;</span>
+<span class="nc" id="L456">            padding = &quot;00&quot;;</span>
         }
-<span class="nc bnc" id="L442" title="All 2 branches missed.">        else if (aIdx &lt;= 99)</span>
+<span class="nc bnc" id="L458" title="All 2 branches missed.">        else if (aIdx &lt;= 99)</span>
         {
-<span class="nc" id="L444">            padding = &quot;0&quot;;</span>
+<span class="nc" id="L460">            padding = &quot;0&quot;;</span>
         }
         else
         {
             //no prefix
         }
-<span class="nc" id="L450">        String number = padding + aIdx.toString();</span>
-<span class="nc" id="L451">        aBuilder.append(&quot;&amp;#&quot;).append(number).append(&quot;;&quot;);</span>
-<span class="nc" id="L452">    }</span>
+<span class="nc" id="L466">        String number = padding + aIdx.toString();</span>
+<span class="nc" id="L467">        aBuilder.append(&quot;&amp;#&quot;).append(number).append(&quot;;&quot;);</span>
+<span class="nc" id="L468">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

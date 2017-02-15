@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,22 +26,29 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
 /**
  * Definition and Usage<p>
- *
+ * <p>
  * The &lt;samp&gt; tag is a phrase tag. It defines sample output from a computer program.<p>
  * <p>
  * Tip: This tag is not deprecated, but it is possible to achieve richer effect with CSS.<p>
  *
  * @author GedMarc
+ * @param <J>
+ *
  * @since Mar 1, 2015
  * @version 1.0
  * <p>
  *
  */
-public class SampleCode extends Component<PhraseChildren, NoAttributes, GlobalFeatures, GlobalEvents, SampleCode> implements ParagraphChildren,PhraseChildren
+public class SampleCode<J extends SampleCode>
+        extends Component<PhraseChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements ParagraphChildren, PhraseChildren
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Defines a set of sample code
+     *
      * @param code
      */
     public SampleCode(String code)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 ged_m
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,9 +16,12 @@
  */
 package za.co.mmagon.jwebswing;
 
+import com.armineasy.injection.GuiceContext;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.*;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.sf.uadetector.*;
 import za.co.mmagon.FileTemplates;
 import za.co.mmagon.JWebSwingSiteBinder;
@@ -30,9 +33,11 @@ import za.co.mmagon.jwebswing.base.html.attributes.ScriptAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.DevelopmentEnvironments;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 import za.co.mmagon.jwebswing.base.servlets.interfaces.IPage;
 import za.co.mmagon.jwebswing.generics.WebReference;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Top level of any HTML page.
@@ -51,6 +56,8 @@ public class Page extends Html implements IPage
 {
 
     private static final long serialVersionUID = 1L;
+
+    private static final Logger log = LogFactory.getInstance().getLogger("Page");
     /**
      * The options available
      */
@@ -127,6 +134,21 @@ public class Page extends Html implements IPage
     }
 
     /**
+     * Initializes the page
+     */
+    public void initialize()
+    {
+
+    }
+
+    public <T extends ComponentHierarchyBase> T add(T component)
+    {
+        return (T) getBody().add(component);
+    }
+
+    private boolean initialized;
+
+    /**
      * Renders all the children to a string builder
      *
      * @return
@@ -141,7 +163,6 @@ public class Page extends Html implements IPage
         {
             bodyOutput = new StringBuilder(getBody().toString(1));
         }
-
         if (!isHeadEmpty())
         {
             pageOutput.append(getNewLine()).append(getCurrentTabIndentString()).append(getHead().toString(1));
@@ -156,9 +177,27 @@ public class Page extends Html implements IPage
     @Override
     public void init()
     {
+        if (!initialized)
+        {
+            initialize();
+            initialized = true;
+        }
+
         if (!isInitialized())
         {
             getBody().init();
+            getBody().preConfigure();
+
+            if (!GuiceContext.isBuildingInjector())
+            {
+                for (Class<? extends PageConfigurator> next : GuiceContext.reflect().getSubTypesOf(PageConfigurator.class))
+                {
+                    log.log(Level.CONFIG, "Configuring site for use with configurator [{0}]", next.getCanonicalName());
+                    PageConfigurator configurator = GuiceContext.inject().getInstance(next);
+                    configurator.configure(this);
+                    log.log(Level.CONFIG, "Configured [{0}]", next.getCanonicalName());
+                }
+            }
         }
         super.init();
     }
@@ -433,12 +472,11 @@ public class Page extends Html implements IPage
             allScripts.stream().filter(script -> (script != null)).forEach(getHead()::add);
         }
 
-        getHead().getChildren().stream().forEach((headObject)
-                ->
+        for (Iterator iterator = getHead().getChildren().iterator(); iterator.hasNext();)
         {
-            headObject.init();
+            ComponentHierarchyBase headObject = (ComponentHierarchyBase) iterator.next();
             headObject.preConfigure();
-        });
+        }
     }
 
     /**
@@ -476,7 +514,10 @@ public class Page extends Html implements IPage
         {
             if (!getPriorityRequirements(priority, requirements, true, false).isEmpty())
             {
-                //getBody().add(new Comment("Priority [" + priority + "] Values"));
+                if (getRunningEnvironment().ordinal() >= DevelopmentEnvironments.Development.ordinal())
+                {
+                    getBody().add(new Comment("Priority [" + priority + "] Values"));
+                }
             }
             return priority;
         }).forEachOrdered(priority ->
@@ -607,7 +648,7 @@ public class Page extends Html implements IPage
      * @return
      */
     @Override
-    public final PageOptions getOptions()
+    public PageOptions getOptions()
     {
         if (options == null)
         {

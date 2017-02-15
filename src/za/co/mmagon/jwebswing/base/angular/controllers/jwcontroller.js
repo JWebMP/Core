@@ -3,12 +3,19 @@
 JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, $timeout) {
 
     var self = this;
+
+    if (!self.jw)
+    {
+        self.jw = {};
+    }
+
     /**
      * Loads up the initial variables into angular
      * @returns {undefined}
      */
     $scope._init = function ()
     {
+        self.jw.isLoading = true;
         try
         {
             if (window.Modernizr)
@@ -35,6 +42,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
             success: function (result, status, xhr) {
                 //alert("result : " + result);
                 $scope.loadData(result);
+                self.jw.isLoading = false;
             },
             fail: function (xhr, textStatus, errorThrown) {
                 var err = eval("(" + xhr.responseText + ")");
@@ -49,6 +57,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
                             }
                         }]
                 });
+                self.jw.isLoading = false;
             }
         });
     };
@@ -78,6 +87,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
      * @returns {undefined}
      */
     $scope.perform = function ($event, dataVariables, eventId) {
+        self.jw.isLoading = true;
         if (window.Pace)
             window.Pace.start();
         //alert('doing stuff');
@@ -142,6 +152,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
                 {
 
                 }
+                self.jw.isLoading = false;
             },
             fail: function (xhr, textStatus, errorThrown) {
                 var err = eval("(" + xhr.responseText + ")");
@@ -164,7 +175,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
                 {
 
                 }
-                //alert('Ooops this is never supposed to happen! How did it get through the servlet?\n' + textStatus);
+                self.jw.isLoading = false;
             }
         });
     };
@@ -209,7 +220,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
         $scope.processCss(result);
         $scope.loadData(result);
         $scope.processReactions(result);
-        $scope.processJsScripts(result);
+        //$scope.processJsScripts(result)
     };
 
     /**
@@ -229,12 +240,25 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
      */
     $scope.processJSReferences = function (result)
     {
-        $.each(result.jsReferences, function (i, item) {
+        if (result.jsReferences)
+        {
+            var jsReferences = result.jsReferences.length;
+            var doneReferences = 0;
 
-            var len = $('script[src="' + item + '"]').length;
-            if (len === 0)
-                $.cachedScript(item);
-        });
+            $.each(result.jsReferences, function (i, item) {
+                $.ajax({dataType: "script",
+                    cache: true,
+                    url: item,
+                    async: false})
+                        .done(function () {
+                            doneReferences = doneReferences + 1;
+                            if (doneReferences === jsReferences)
+                            {
+                                $scope.processJsScripts(result);
+                            }
+                        });
+            });
+        }
     };
 
     /**
@@ -244,9 +268,26 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
      */
     $scope.processJsScripts = function (result)
     {
-        $.each(result.jsScripts, function (i, item) {
+        if (result.jsScripts)
+            $.each(result.jsScripts, function (i, item) {
+                $scope.loadScript(item);
+            });
+    };
+
+    $scope.loadScript = function (item, tries)
+    {
+        if (!tries)
+            tries = 0;
+        try
+        {
             var result = eval(item);
-        });
+        } catch (e)
+        {
+            console.log(e);
+            tries = tries + 1;
+            if (tries < 10)
+                setTimeout($scope.loadScript(item, tries), 1500);
+        }
     };
 
     /**

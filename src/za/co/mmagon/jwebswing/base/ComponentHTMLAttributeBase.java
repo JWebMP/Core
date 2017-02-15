@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 ged_m
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ import za.co.mmagon.logger.LogFactory;
  * @author GedMarc
  * @since 23 Apr 2016
  */
-public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentBase>
+public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHTMLAttributeBase>
         extends ComponentHTMLBase<F, E, J> implements IComponentHTMLAttributeBase<A, J>
 {
 
@@ -75,11 +75,6 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private TreeMap<String, String> attributesCustom;
 
-    /**
-     * The list of class names for this object
-     */
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private ArrayList<String> classes;
     /**
      * Specifies if this component should render an ID attribute
      */
@@ -230,7 +225,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
             sb.append(" ");
         }
 
-        for (Entry<Pair<String, Boolean>, String> entry : attributeMap.entrySet())
+        attributeMap.entrySet().forEach(entry ->
         {
             Pair<String, Boolean> key = entry.getKey();
             String value = entry.getValue();
@@ -244,7 +239,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
             {
                 sb.append(" ");
             }
-        }
+        });
         if (!attributeMap.isEmpty())
         {
             sb.deleteCharAt(sb.lastIndexOf(" "));
@@ -479,63 +474,6 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     }
 
     /**
-     * Returns a complete list of all class names associated with this component
-     * <p>
-     * @return
-     */
-    @Override
-    public List<String> getClasses()
-    {
-        if (classes == null)
-        {
-            classes = new ArrayList<>();
-        }
-        return classes;
-    }
-
-    /**
-     * Adds a class name to the class list
-     * <p>
-     * @param className The class name to add
-     * <p>
-     * @return True if it was added, false if it already existed
-     */
-    @Override
-    public J addClass(String className)
-    {
-        if (!getClasses().contains(className))
-        {
-            getClasses().add(className);
-            return (J) this;
-        }
-        else
-        {
-            return (J) this;
-        }
-    }
-
-    /**
-     * Removes a class name from this component
-     * <p>
-     * @param className Class Name to Remove
-     * <p>
-     * @return True if the class was removed, False if the class was not part of the collection
-     */
-    @Override
-    public boolean removeClass(String className)
-    {
-        if (getClasses().contains(className))
-        {
-            getClasses().remove(className);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    /**
      * Returns if this component should render for the ID attribute
      * <p>
      * @return
@@ -557,20 +495,9 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
      *
      * @return
      */
-    private StringBuilder renderClasses()
+    protected StringBuilder renderClasses()
     {
-        StringBuilder sb = new StringBuilder();
-        getClasses().stream().forEach(clazz
-                ->
-        {
-            sb.append(clazz).append(" ");
-        });
-        if (sb.length() > 0)
-        {
-            sb.deleteCharAt(sb.length() - 1);
-        }
-
-        return sb;
+        return new StringBuilder();
     }
 
     /**

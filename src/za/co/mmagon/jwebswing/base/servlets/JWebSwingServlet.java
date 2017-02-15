@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package za.co.mmagon.jwebswing.base.servlets;
 
 import com.armineasy.injection.GuiceContext;
@@ -17,10 +33,9 @@ import net.sf.uadetector.service.UADetectorServiceFactory;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
 import za.co.mmagon.jwebswing.base.client.Browsers;
-import za.co.mmagon.jwebswing.base.html.*;
-import za.co.mmagon.jwebswing.base.html.attributes.*;
+import za.co.mmagon.jwebswing.base.html.Body;
+import za.co.mmagon.jwebswing.base.html.PreFormattedText;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
-import za.co.mmagon.jwebswing.generics.DynamicLoadingPage;
 import za.co.mmagon.jwebswing.utilities.TextUtilities;
 import za.co.mmagon.logger.LogFactory;
 
@@ -71,7 +86,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
     private void readRequestVariables(HttpServletRequest request) throws MissingComponentException
     {
         Page currentPage = getPage();
-        HttpSession session = GuiceContext.Injector().getInstance(HttpSession.class);
+        HttpSession session = GuiceContext.inject().getInstance(HttpSession.class);
         session.setAttribute("jwpage", currentPage);
         if (currentPage == null)
         {
@@ -134,60 +149,13 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
         try
         {
             Date startDate = new Date();
-            StringBuilder output = new StringBuilder();
-
+            StringBuilder output;
             Page page = getPage();
-
-            if (page.getOptions().isLocalStorage())
+            if (page.getOptions().isGoogleMapsJSApi())
             {
-                DynamicLoadingPage p = GuiceContext.Injector().getInstance(DynamicLoadingPage.class);
-                if (!p.isRequirementsConfigured())
-                {
-                    p.setPage(page);
-                }
-
-                if (page.getOptions().isGoogleMapsJSApi())
-                {
-                    p.getBody().addJavaScriptReference(new JavascriptReference("Google Maps API Reference", 1.0, "https://maps.googleapis.com/maps/api/js?key=" + page.getOptions().getGoogleMapsJSApi()).setCordovaRequired(true));
-                }
-                if (page.getPageFields().getTitle() != null)
-                {
-                    p.getPageFields().setTitle(page.getPageFields().getTitle().getTitle());
-                }
-                if (page.getPageFields().getAuthor() != null)
-                {
-                    p.getPageFields().setAuthor(page.getPageFields().getAuthor().getAttribute(MetaAttributes.Content));
-                }
-                if (page.getPageFields().getApplicationName() != null)
-                {
-                    p.getPageFields().setApplicationNameMeta(page.getPageFields().getApplicationName().getAttribute(MetaAttributes.Content));
-                }
-                if (page.getPageFields().getCacheControl() != null)
-                {
-                    p.getPageFields().setCacheControl(page.getPageFields().getCacheControl().getAttribute(MetaAttributes.Content, Boolean.FALSE));
-                }
-                if (page.getPageFields().getFavIconLink() != null)
-                {
-                    p.getPageFields().setFavIcon(page.getPageFields().getFavIconLink().getAttribute(CSSLinkAttributes.HRef));
-                }
-                p.getPageFields().setGenerator("JWebSwing");
-                if (page.getPageFields().getKeywords() != null)
-                {
-                    p.getPageFields().setKeywords(page.getPageFields().getKeywords().getAttribute(MetaAttributes.Content));
-                }
-                Base base = new Base();
-                base.addAttribute(BaseAttributes.HRef, request.getRequestURL().toString());
-                p.getPageFields().setBase(base);
-                output.append(p.toString(true));
+                page.getBody().addJavaScriptReference(new JavascriptReference("Google Maps API Reference", 1.0, "https://maps.googleapis.com/maps/api/js?key=" + page.getOptions().getGoogleMapsJSApi()));
             }
-            else
-            {
-                if (page.getOptions().isGoogleMapsJSApi())
-                {
-                    page.getBody().addJavaScriptReference(new JavascriptReference("Google Maps API Reference", 1.0, "https://maps.googleapis.com/maps/api/js?key=" + page.getOptions().getGoogleMapsJSApi()));
-                }
-                output = getPageHTML(request.getSession());
-            }
+            output = getPageHTML(request.getSession());
 
             Date endDate = new Date();
             Date transferStart = new Date();
@@ -198,11 +166,6 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
             {
                 request.getSession().getId(), endDate.getTime() - startDate.getTime(), output.length(), dataTransferDate.getTime() - transferStart.getTime()
             });
-            //pre render page for next call
-            if (page.getOptions().isLocalStorage())
-            {
-                page.toString(true);
-            }
         }
         catch (IOException ex)
         {

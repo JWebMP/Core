@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
+import org.junit.Assert;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.html.*;
@@ -41,7 +42,6 @@ public class CSSComposerTest
         Div d = new Div();
         d.getCss().getBackground().setBackgroundColor$(ColourNames.DarkGoldenRod);
         d.getCss().getBorder().setBorderBottomStyle(BorderStyles.Dotted);
-        d.getCss().getDimensions().setHeight(400);
         d.setID("d");
         Div d2 = new Div();
         d2.setID("d2");
@@ -51,19 +51,16 @@ public class CSSComposerTest
         dClone.setID("cloned");
         Div dClone2 = (Div) dClone.cloneComponent();
         dClone2.setID("cloned2");
-        //dClone2.setBackground_Image(new BackgroundImageImpl("image url"));
 
         CSSComposer comp = new CSSComposer();
         comp.addComponent(d);
         comp.addComponent(d2);
         comp.addComponent(dClone);
         comp.addComponent(dClone2);
-        //Page.getInstance().setTiny(true);
-        System.out.println(comp.toString());
+        System.out.println(comp.toString()); //Direct from the factory
+        System.out.println(d.renderCss(0)); //Using the convenience method for the
 
-        //TODO Cloned object css
-        // Assert.assertEquals("#cloned,#cloned2,#d {background-Color:darkgoldenrod;border-bottom-style:dotted;height:400px;}#d2 {height:400px;}"
-        //         + "", comp.toString());
+        Assert.assertEquals("#cloned,#cloned2,#d {background-Color:darkgoldenrod;border-bottom-style:dotted}#d2 {height:400px;}", comp.toString());
     }
 
     @Test

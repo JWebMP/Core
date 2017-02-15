@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JWebSwingServlet.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.servlets</a> &gt; <span class="el_source">JWebSwingServlet.java</span></div><h1>JWebSwingServlet.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.servlets;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JWebSwingServlet.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.servlets</a> &gt; <span class="el_source">JWebSwingServlet.java</span></div><h1>JWebSwingServlet.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.base.servlets;
 
 import com.armineasy.injection.GuiceContext;
 import com.google.inject.*;
@@ -17,11 +33,9 @@ import net.sf.uadetector.service.UADetectorServiceFactory;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
 import za.co.mmagon.jwebswing.base.client.Browsers;
-import za.co.mmagon.jwebswing.base.html.Base;
 import za.co.mmagon.jwebswing.base.html.Body;
-import za.co.mmagon.jwebswing.base.html.attributes.*;
+import za.co.mmagon.jwebswing.base.html.PreFormattedText;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
-import za.co.mmagon.jwebswing.generics.DynamicLoadingPage;
 import za.co.mmagon.jwebswing.utilities.TextUtilities;
 import za.co.mmagon.logger.LogFactory;
 
@@ -39,11 +53,11 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
     /**
      * The logger for the swing Servlet
      */
-<span class="nc" id="L42">    private static final Logger LOG = LogFactory.getInstance().getLogger(&quot;JWebSwingServlet&quot;);</span>
+<span class="nc" id="L56">    private static final Logger LOG = LogFactory.getInstance().getLogger(&quot;JWebSwingServlet&quot;);</span>
     /**
      * The logger for the session handler Servlet
      */
-<span class="nc" id="L46">    private static final Logger SESSION_LOG = LogFactory.getInstance().getLogger(&quot;SessionHandler&quot;);</span>
+<span class="nc" id="L60">    private static final Logger SESSION_LOG = LogFactory.getInstance().getLogger(&quot;SessionHandler&quot;);</span>
 
     /**
      * Version 1
@@ -53,14 +67,14 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
     /**
      * The User Agent Parser
      */
-<span class="nc" id="L56">    private static final UserAgentStringParser userAgentParser = UADetectorServiceFactory.getResourceModuleParser();</span>
+<span class="nc" id="L70">    private static final UserAgentStringParser userAgentParser = UADetectorServiceFactory.getResourceModuleParser();</span>
 
     /**
      * Constructs a new JWebSwing Servlet that is not session aware
      */
     public JWebSwingServlet()
-<span class="nc" id="L62">    {</span>
-<span class="nc" id="L63">    }</span>
+<span class="nc" id="L76">    {</span>
+<span class="nc" id="L77">    }</span>
 
     /**
      * Reads the variables into the HTTP session
@@ -71,18 +85,18 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
      */
     private void readRequestVariables(HttpServletRequest request) throws MissingComponentException
     {
-<span class="nc" id="L74">        Page currentPage = getPage();</span>
-<span class="nc" id="L75">        HttpSession session = GuiceContext.Injector().getInstance(HttpSession.class);</span>
-<span class="nc" id="L76">        session.setAttribute(&quot;jwpage&quot;, currentPage);</span>
-<span class="nc bnc" id="L77" title="All 2 branches missed.">        if (currentPage == null)</span>
+<span class="nc" id="L88">        Page currentPage = getPage();</span>
+<span class="nc" id="L89">        HttpSession session = GuiceContext.inject().getInstance(HttpSession.class);</span>
+<span class="nc" id="L90">        session.setAttribute(&quot;jwpage&quot;, currentPage);</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">        if (currentPage == null)</span>
         {
-<span class="nc" id="L79">            throw new MissingComponentException(&quot;[No Page]-[getPage() returning null in servlet class]&quot;);</span>
+<span class="nc" id="L93">            throw new MissingComponentException(&quot;[No Page]-[getPage() returning null in servlet class]&quot;);</span>
         }
-<span class="nc bnc" id="L81" title="All 2 branches missed.">        if (request.getSession().isNew())</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        if (request.getSession().isNew())</span>
         {
-<span class="nc" id="L83">            SESSION_LOG.log(Level.FINE, &quot;[SessionID]-[{0}];[Name]-[User Login];[Action]-[Session Added];&quot;, request.getSession().getId());</span>
+<span class="nc" id="L97">            SESSION_LOG.log(Level.FINE, &quot;[SessionID]-[{0}];[Name]-[User Login];[Action]-[Session Added];&quot;, request.getSession().getId());</span>
         }
-<span class="nc" id="L85">    }</span>
+<span class="nc" id="L99">    }</span>
 
     /**
      * Reads the user agent header into the browser object and places it for the page to render
@@ -91,34 +105,34 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
      */
     private void readBrowserInformation(HttpServletRequest request)
     {
-<span class="nc" id="L94">        String headerInformation = request.getHeader(&quot;User-Agent&quot;);</span>
-<span class="nc" id="L95">        ReadableUserAgent agent = userAgentParser.parse(headerInformation);</span>
-<span class="nc" id="L96">        getPage().setUserAgent(agent);</span>
+<span class="nc" id="L108">        String headerInformation = request.getHeader(&quot;User-Agent&quot;);</span>
+<span class="nc" id="L109">        ReadableUserAgent agent = userAgentParser.parse(headerInformation);</span>
+<span class="nc" id="L110">        getPage().setUserAgent(agent);</span>
         Browsers b;
-<span class="nc bnc" id="L98" title="All 4 branches missed.">        if (agent.getVersionNumber().getMajor().isEmpty() &amp;&amp; agent.getVersionNumber().getMinor().isEmpty())</span>
+<span class="nc bnc" id="L112" title="All 4 branches missed.">        if (agent.getVersionNumber().getMajor().isEmpty() &amp;&amp; agent.getVersionNumber().getMinor().isEmpty())</span>
         {
-<span class="nc" id="L100">            b = Browsers.getBrowserFromNameAndVersion(&quot;Edge&quot;, 13);</span>
+<span class="nc" id="L114">            b = Browsers.getBrowserFromNameAndVersion(&quot;Edge&quot;, 13);</span>
         }
         else
         {
-<span class="nc" id="L104">            b = Browsers.getBrowserFromNameAndVersion(agent.getName(), Double.parseDouble(agent.getVersionNumber().getMajor() + &quot;.&quot; + agent.getVersionNumber().getMinor()));</span>
+<span class="nc" id="L118">            b = Browsers.getBrowserFromNameAndVersion(agent.getName(), Double.parseDouble(agent.getVersionNumber().getMajor() + &quot;.&quot; + agent.getVersionNumber().getMinor()));</span>
         }
-<span class="nc" id="L106">        getPage().setBrowser(b);</span>
-<span class="nc bnc" id="L107" title="All 4 branches missed.">        if (agent.getVersionNumber().getMajor() == null || agent.getVersionNumber().getMajor().isEmpty())</span>
+<span class="nc" id="L120">        getPage().setBrowser(b);</span>
+<span class="nc bnc" id="L121" title="All 4 branches missed.">        if (agent.getVersionNumber().getMajor() == null || agent.getVersionNumber().getMajor().isEmpty())</span>
         {
-<span class="nc" id="L109">            LOG.log(Level.INFO, &quot;[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}];[Operating System]-[{3}];[Device Category]-[{4}];[Device]-[{5}];[CSS]-[{6}];[HTML]-[{7}];&quot;, new Object[]</span>
+<span class="nc" id="L123">            LOG.log(Level.INFO, &quot;[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}];[Operating System]-[{3}];[Device Category]-[{4}];[Device]-[{5}];[CSS]-[{6}];[HTML]-[{7}];&quot;, new Object[]</span>
             {
-<span class="nc" id="L111">                request.getSession().getId(), b.getBrowserGroup().toString(), b.getBrowserVersion(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()</span>
+<span class="nc" id="L125">                request.getSession().getId(), b.getBrowserGroup().toString(), b.getBrowserVersion(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()</span>
             });
         }
         else
         {
-<span class="nc" id="L116">            LOG.log(Level.INFO, &quot;[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}.{3}];[Operating System]-[{4}];[Device Category]-[{5}];[Device]-[{6}];[CSS]-[{7}];[HTML]-[{8}];&quot;, new Object[]</span>
+<span class="nc" id="L130">            LOG.log(Level.INFO, &quot;[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}.{3}];[Operating System]-[{4}];[Device Category]-[{5}];[Device]-[{6}];[CSS]-[{7}];[HTML]-[{8}];&quot;, new Object[]</span>
             {
-<span class="nc" id="L118">                request.getSession().getId(), agent.getName(), agent.getVersionNumber().getMajor(), agent.getVersionNumber().getMinor(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()</span>
+<span class="nc" id="L132">                request.getSession().getId(), agent.getName(), agent.getVersionNumber().getMajor(), agent.getVersionNumber().getMinor(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()</span>
             });
         }
-<span class="nc" id="L121">    }</span>
+<span class="nc" id="L135">    }</span>
 
     /**
      * Sends the page out
@@ -130,101 +144,49 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
      */
     private void sendPage(HttpServletRequest request, HttpServletResponse response) throws IOException
     {
-<span class="nc" id="L133">        response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
-<span class="nc" id="L134">        PrintWriter out = null;</span>
+<span class="nc" id="L147">        response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+<span class="nc" id="L148">        PrintWriter out = null;</span>
         try
         {
-<span class="nc" id="L137">            Date startDate = new Date();</span>
-<span class="nc" id="L138">            StringBuilder output = new StringBuilder();</span>
-
-<span class="nc" id="L140">            Page page = getPage();</span>
-
-<span class="nc bnc" id="L142" title="All 2 branches missed.">            if (page.getOptions().isLocalStorage())</span>
+<span class="nc" id="L151">            Date startDate = new Date();</span>
+            StringBuilder output;
+<span class="nc" id="L153">            Page page = getPage();</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">            if (page.getOptions().isGoogleMapsJSApi())</span>
             {
-<span class="nc" id="L144">                DynamicLoadingPage p = GuiceContext.Injector().getInstance(DynamicLoadingPage.class);</span>
-<span class="nc bnc" id="L145" title="All 2 branches missed.">                if (!p.isRequirementsConfigured())</span>
-                {
-<span class="nc" id="L147">                    p.setPage(page);</span>
-                }
-
-<span class="nc bnc" id="L150" title="All 2 branches missed.">                if (page.getOptions().isGoogleMapsJSApi())</span>
-                {
-<span class="nc" id="L152">                    p.getBody().addJavaScriptReference(new JavascriptReference(&quot;Google Maps API Reference&quot;, 1.0, &quot;https://maps.googleapis.com/maps/api/js?key=&quot; + page.getOptions().getGoogleMapsJSApi()).setCordovaRequired(true));</span>
-                }
-<span class="nc bnc" id="L154" title="All 2 branches missed.">                if (page.getPageFields().getTitle() != null)</span>
-                {
-<span class="nc" id="L156">                    p.getPageFields().setTitle(page.getPageFields().getTitle().getTitle());</span>
-                }
-<span class="nc bnc" id="L158" title="All 2 branches missed.">                if (page.getPageFields().getAuthor() != null)</span>
-                {
-<span class="nc" id="L160">                    p.getPageFields().setAuthor(page.getPageFields().getAuthor().getAttribute(MetaAttributes.Content));</span>
-                }
-<span class="nc bnc" id="L162" title="All 2 branches missed.">                if (page.getPageFields().getApplicationName() != null)</span>
-                {
-<span class="nc" id="L164">                    p.getPageFields().setApplicationNameMeta(page.getPageFields().getApplicationName().getAttribute(MetaAttributes.Content));</span>
-                }
-<span class="nc bnc" id="L166" title="All 2 branches missed.">                if (page.getPageFields().getCacheControl() != null)</span>
-                {
-<span class="nc" id="L168">                    p.getPageFields().setCacheControl(page.getPageFields().getCacheControl().getAttribute(MetaAttributes.Content, Boolean.FALSE));</span>
-                }
-<span class="nc bnc" id="L170" title="All 2 branches missed.">                if (page.getPageFields().getFavIconLink() != null)</span>
-                {
-<span class="nc" id="L172">                    p.getPageFields().setFavIcon(page.getPageFields().getFavIconLink().getAttribute(CSSLinkAttributes.HRef));</span>
-                }
-<span class="nc" id="L174">                p.getPageFields().setGenerator(&quot;JWebSwing&quot;);</span>
-<span class="nc bnc" id="L175" title="All 2 branches missed.">                if (page.getPageFields().getKeywords() != null)</span>
-                {
-<span class="nc" id="L177">                    p.getPageFields().setKeywords(page.getPageFields().getKeywords().getAttribute(MetaAttributes.Content));</span>
-                }
-<span class="nc" id="L179">                Base base = new Base();</span>
-<span class="nc" id="L180">                base.addAttribute(BaseAttributes.HRef, request.getRequestURL().toString());</span>
-<span class="nc" id="L181">                p.getPageFields().setBase(base);</span>
-<span class="nc" id="L182">                output.append(p.toString(true));</span>
-<span class="nc" id="L183">            }</span>
-            else
-            {
-<span class="nc bnc" id="L186" title="All 2 branches missed.">                if (page.getOptions().isGoogleMapsJSApi())</span>
-                {
-<span class="nc" id="L188">                    page.getBody().addJavaScriptReference(new JavascriptReference(&quot;Google Maps API Reference&quot;, 1.0, &quot;https://maps.googleapis.com/maps/api/js?key=&quot; + page.getOptions().getGoogleMapsJSApi()));</span>
-                }
-<span class="nc" id="L190">                output = getPageHTML(request.getSession());</span>
+<span class="nc" id="L156">                page.getBody().addJavaScriptReference(new JavascriptReference(&quot;Google Maps API Reference&quot;, 1.0, &quot;https://maps.googleapis.com/maps/api/js?key=&quot; + page.getOptions().getGoogleMapsJSApi()));</span>
             }
+<span class="nc" id="L158">            output = getPageHTML(request.getSession());</span>
 
-<span class="nc" id="L193">            Date endDate = new Date();</span>
-<span class="nc" id="L194">            Date transferStart = new Date();</span>
-<span class="nc" id="L195">            out = response.getWriter();</span>
-<span class="nc" id="L196">            out.println(output);</span>
-<span class="nc" id="L197">            Date dataTransferDate = new Date();</span>
-<span class="nc" id="L198">            LOG.log(Level.FINE, &quot;[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]&quot;, new Object[]</span>
+<span class="nc" id="L160">            Date endDate = new Date();</span>
+<span class="nc" id="L161">            Date transferStart = new Date();</span>
+<span class="nc" id="L162">            out = response.getWriter();</span>
+<span class="nc" id="L163">            out.println(output);</span>
+<span class="nc" id="L164">            Date dataTransferDate = new Date();</span>
+<span class="nc" id="L165">            LOG.log(Level.FINE, &quot;[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]&quot;, new Object[]</span>
             {
-<span class="nc" id="L200">                request.getSession().getId(), endDate.getTime() - startDate.getTime(), output.length(), dataTransferDate.getTime() - transferStart.getTime()</span>
+<span class="nc" id="L167">                request.getSession().getId(), endDate.getTime() - startDate.getTime(), output.length(), dataTransferDate.getTime() - transferStart.getTime()</span>
             });
-            //pre render page for next call
-<span class="nc bnc" id="L203" title="All 2 branches missed.">            if (page.getOptions().isLocalStorage())</span>
-            {
-<span class="nc" id="L205">                page.toString(true);</span>
-            }
         }
-<span class="nc" id="L208">        catch (IOException ex)</span>
+<span class="nc" id="L170">        catch (IOException ex)</span>
         {
-<span class="nc" id="L210">            LOG.log(Level.SEVERE, &quot;[Network]-[Connection Dead]&quot;, ex);</span>
-<span class="nc" id="L211">            throw ex;</span>
+<span class="nc" id="L172">            LOG.log(Level.SEVERE, &quot;[Network]-[Connection Dead]&quot;, ex);</span>
+<span class="nc" id="L173">            throw ex;</span>
         }
         finally
         {
-<span class="nc" id="L215">            try</span>
+<span class="nc" id="L177">            try</span>
             {
-<span class="nc bnc" id="L217" title="All 4 branches missed.">                if (out != null)</span>
+<span class="nc bnc" id="L179" title="All 4 branches missed.">                if (out != null)</span>
                 {
-<span class="nc" id="L219">                    out.close();</span>
+<span class="nc" id="L181">                    out.close();</span>
                 }
             }
-<span class="nc" id="L222">            catch (Exception e)</span>
+<span class="nc" id="L184">            catch (Exception e)</span>
             {
-<span class="nc" id="L224">                LOG.log(Level.SEVERE, &quot;Can't send page&quot;, e);</span>
-<span class="nc" id="L225">            }</span>
-<span class="nc" id="L226">        }</span>
-<span class="nc" id="L227">    }</span>
+<span class="nc" id="L186">                LOG.log(Level.SEVERE, &quot;Can't send page&quot;, e);</span>
+<span class="nc" id="L187">            }</span>
+<span class="nc" id="L188">        }</span>
+<span class="nc" id="L189">    }</span>
 
     /**
      * Processes requests for the WebSwing Servlet.
@@ -240,76 +202,76 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
     {
         try
         {
-<span class="nc" id="L243">            readRequestVariables(request);</span>
-<span class="nc" id="L244">            readBrowserInformation(request);</span>
-<span class="nc" id="L245">            sendPage(request, response);</span>
+<span class="nc" id="L205">            readRequestVariables(request);</span>
+<span class="nc" id="L206">            readBrowserInformation(request);</span>
+<span class="nc" id="L207">            sendPage(request, response);</span>
         }
-<span class="nc" id="L247">        catch (MissingComponentException mce)</span>
+<span class="nc" id="L209">        catch (MissingComponentException mce)</span>
         {
-<span class="nc" id="L249">            LOG.log(Level.SEVERE, &quot;No Page For Servlet&quot;, mce);</span>
-<span class="nc" id="L250">            Page p = new Page();</span>
-<span class="nc" id="L251">            p.getBody().add(&quot;No Page or Body Configured for the JWebSwingServlet. [getPage()] returned nothing&quot;);</span>
-<span class="nc" id="L252">            response.getWriter().write(p.toString(true));</span>
+<span class="nc" id="L211">            LOG.log(Level.SEVERE, &quot;No Page For Servlet&quot;, mce);</span>
+<span class="nc" id="L212">            Page p = new Page();</span>
+<span class="nc" id="L213">            p.getBody().add(&quot;No Page or Body Configured for the JWebSwingServlet. [getPage()] returned nothing&quot;);</span>
+<span class="nc" id="L214">            response.getWriter().write(p.toString(true));</span>
         }
-<span class="nc" id="L254">        catch (IOException | NumberFormatException ex)</span>
+<span class="nc" id="L216">        catch (IOException | NumberFormatException ex)</span>
         {
 
-<span class="nc" id="L257">            LOG.log(Level.SEVERE, &quot;Couldn't Render Page in Servlet. Fatal Error.&quot;, ex);</span>
-<span class="nc" id="L258">            response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
-<span class="nc" id="L259">            PrintWriter out = null;</span>
+<span class="nc" id="L219">            LOG.log(Level.SEVERE, &quot;Couldn't Render Page in Servlet. Fatal Error.&quot;, ex);</span>
+<span class="nc" id="L220">            response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+<span class="nc" id="L221">            PrintWriter out = null;</span>
             try
             {
-<span class="nc" id="L262">                out = response.getWriter();</span>
-<span class="nc" id="L263">                out.println(getErrorPageHtml(ex).toString(true));</span>
+<span class="nc" id="L224">                out = response.getWriter();</span>
+<span class="nc" id="L225">                out.println(getErrorPageHtml(ex).toString(true));</span>
             }
-<span class="nc" id="L265">            catch (IOException ex1)</span>
+<span class="nc" id="L227">            catch (IOException ex1)</span>
             {
-<span class="nc" id="L267">                LOG.log(Level.SEVERE, &quot;Unable to generate page html to return!&quot;, ex1);</span>
+<span class="nc" id="L229">                LOG.log(Level.SEVERE, &quot;Unable to generate page html to return!&quot;, ex1);</span>
             }
             finally
             {
-<span class="nc" id="L271">                try</span>
+<span class="nc" id="L233">                try</span>
                 {
-<span class="nc bnc" id="L273" title="All 6 branches missed.">                    if (out != null)</span>
+<span class="nc bnc" id="L235" title="All 6 branches missed.">                    if (out != null)</span>
                     {
-<span class="nc" id="L275">                        out.close();</span>
+<span class="nc" id="L237">                        out.close();</span>
                     }
                 }
-<span class="nc" id="L278">                catch (Exception e)</span>
+<span class="nc" id="L240">                catch (Exception e)</span>
                 {
-<span class="nc" id="L280">                    LOG.log(Level.SEVERE, null, e);</span>
-<span class="nc" id="L281">                }</span>
-<span class="nc" id="L282">            }</span>
+<span class="nc" id="L242">                    LOG.log(Level.SEVERE, null, e);</span>
+<span class="nc" id="L243">                }</span>
+<span class="nc" id="L244">            }</span>
         }
-<span class="nc" id="L284">        catch (Error | Exception t)</span>
+<span class="nc" id="L246">        catch (Error | Exception t)</span>
         {
-<span class="nc" id="L286">            response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
-<span class="nc" id="L287">            PrintWriter out = null;</span>
+<span class="nc" id="L248">            response.setContentType(&quot;text/html;charset=UTF-8&quot;);</span>
+<span class="nc" id="L249">            PrintWriter out = null;</span>
             try
             {
-<span class="nc" id="L290">                out = response.getWriter();</span>
-<span class="nc" id="L291">                out.println(getErrorPageHtml(t).toString(true));</span>
+<span class="nc" id="L252">                out = response.getWriter();</span>
+<span class="nc" id="L253">                out.println(getErrorPageHtml(t).toString(true));</span>
             }
-<span class="nc" id="L293">            catch (IOException ex1)</span>
+<span class="nc" id="L255">            catch (IOException ex1)</span>
             {
-<span class="nc" id="L295">                LOG.log(Level.SEVERE, &quot;Unable to generate page html to return!&quot;, ex1);</span>
+<span class="nc" id="L257">                LOG.log(Level.SEVERE, &quot;Unable to generate page html to return!&quot;, ex1);</span>
             }
             finally
             {
-<span class="nc" id="L299">                try</span>
+<span class="nc" id="L261">                try</span>
                 {
-<span class="nc bnc" id="L301" title="All 6 branches missed.">                    if (out != null)</span>
+<span class="nc bnc" id="L263" title="All 6 branches missed.">                    if (out != null)</span>
                     {
-<span class="nc" id="L303">                        out.close();</span>
+<span class="nc" id="L265">                        out.close();</span>
                     }
                 }
-<span class="nc" id="L306">                catch (Exception e)</span>
+<span class="nc" id="L268">                catch (Exception e)</span>
                 {
-<span class="nc" id="L308">                    LOG.log(Level.SEVERE, null, e);</span>
-<span class="nc" id="L309">                }</span>
-<span class="nc" id="L310">            }</span>
-<span class="nc" id="L311">        }</span>
-<span class="nc" id="L312">    }</span>
+<span class="nc" id="L270">                    LOG.log(Level.SEVERE, null, e);</span>
+<span class="nc" id="L271">                }</span>
+<span class="nc" id="L272">            }</span>
+<span class="nc" id="L273">        }</span>
+<span class="nc" id="L274">    }</span>
 
     /**
      * Generates the Page HTML
@@ -319,8 +281,8 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
     private StringBuilder getPageHTML(HttpSession session)
     {
         StringBuilder html;
-<span class="nc" id="L322">        html = new StringBuilder(getPage().toString(true));</span>
-<span class="nc" id="L323">        return html;</span>
+<span class="nc" id="L284">        html = new StringBuilder(getPage().toString(true));</span>
+<span class="nc" id="L285">        return html;</span>
     }
 
     /**
@@ -332,15 +294,15 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
      */
     protected Page getErrorPageHtml(Throwable t)
     {
-<span class="nc" id="L335">        Page p = new Page();</span>
-<span class="nc" id="L336">        p.getPageFields().setTitle(&quot;Exception occured in application&quot;);</span>
-<span class="nc" id="L337">        p.getPageFields().setAuthor(&quot;Marc Magon&quot;);</span>
-<span class="nc" id="L338">        p.getPageFields().setDescription(&quot;JWebSwing Error Generated Page&quot;);</span>
-<span class="nc" id="L339">        p.getPageFields().setGenerator(&quot;JWebSwing - https://sourceforge.net/projects/jwebswing/&quot;);</span>
-<span class="nc" id="L340">        Body b = p.getBody();</span>
-<span class="nc" id="L341">        b.add(&quot;The following error was encountered during render&lt;br/&gt;&lt;hr/&gt;&quot;);</span>
-<span class="nc" id="L342">        b.add(TextUtilities.stackTraceToString(t));</span>
-<span class="nc" id="L343">        return p;</span>
+<span class="nc" id="L297">        Page p = new Page();</span>
+<span class="nc" id="L298">        p.getPageFields().setTitle(&quot;Exception occured in application&quot;);</span>
+<span class="nc" id="L299">        p.getPageFields().setAuthor(&quot;Marc Magon&quot;);</span>
+<span class="nc" id="L300">        p.getPageFields().setDescription(&quot;JWebSwing Error Generated Page&quot;);</span>
+<span class="nc" id="L301">        p.getPageFields().setGenerator(&quot;JWebSwing - https://sourceforge.net/projects/jwebswing/&quot;);</span>
+<span class="nc" id="L302">        Body b = p.getBody();</span>
+<span class="nc" id="L303">        b.add(&quot;The following error was encountered during render&lt;br/&gt;&lt;hr/&gt;&quot;);</span>
+<span class="nc" id="L304">        b.add(new PreFormattedText(TextUtilities.stackTraceToString(t)));</span>
+<span class="nc" id="L305">        return p;</span>
     }
 
     /**
@@ -355,15 +317,15 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
     @RequestScoped
     protected Page getErrorPageHtml(Error t)
     {
-<span class="nc" id="L358">        Page p = new Page();</span>
-<span class="nc" id="L359">        p.getPageFields().setTitle(&quot;ERROR : Error occured in application&quot;);</span>
-<span class="nc" id="L360">        p.getPageFields().setAuthor(&quot;Marc Magon&quot;);</span>
-<span class="nc" id="L361">        p.getPageFields().setDescription(&quot;JWebSwing Error Generated Page&quot;);</span>
-<span class="nc" id="L362">        p.getPageFields().setGenerator(&quot;JWebSwing - https://sourceforge.net/projects/jwebswing/&quot;);</span>
-<span class="nc" id="L363">        Body b = p.getBody();</span>
-<span class="nc" id="L364">        b.add(&quot;The following error was encountered during render&lt;br/&gt;&lt;hr/&gt;&quot;);</span>
-<span class="nc" id="L365">        b.add(TextUtilities.stackTraceToString(t));</span>
-<span class="nc" id="L366">        return p;</span>
+<span class="nc" id="L320">        Page p = new Page();</span>
+<span class="nc" id="L321">        p.getPageFields().setTitle(&quot;ERROR : Error occured in application&quot;);</span>
+<span class="nc" id="L322">        p.getPageFields().setAuthor(&quot;Marc Magon&quot;);</span>
+<span class="nc" id="L323">        p.getPageFields().setDescription(&quot;JWebSwing Error Generated Page&quot;);</span>
+<span class="nc" id="L324">        p.getPageFields().setGenerator(&quot;JWebSwing - https://sourceforge.net/projects/jwebswing/&quot;);</span>
+<span class="nc" id="L325">        Body b = p.getBody();</span>
+<span class="nc" id="L326">        b.add(&quot;The following error was encountered during render&lt;br/&gt;&lt;hr/&gt;&quot;);</span>
+<span class="nc" id="L327">        b.add(new PreFormattedText(TextUtilities.stackTraceToString(t)));</span>
+<span class="nc" id="L328">        return p;</span>
     }
 
     /**
@@ -378,10 +340,10 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
     @RequestScoped
     protected StringBuilder getPageMobileHTML(HttpSession session)
     {
-<span class="nc" id="L381">        LOG.log(Level.FINE, &quot;Started Rendering Mobile HTML&quot;);</span>
+<span class="nc" id="L343">        LOG.log(Level.FINE, &quot;Started Rendering Mobile HTML&quot;);</span>
         StringBuilder html;
-<span class="nc" id="L383">        html = new StringBuilder(getPage().toString(true));</span>
-<span class="nc" id="L384">        return html;</span>
+<span class="nc" id="L345">        html = new StringBuilder(getPage().toString(true));</span>
+<span class="nc" id="L346">        return html;</span>
     }
 
     /**
@@ -401,7 +363,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
     @Override
     public Page get()
     {
-<span class="nc" id="L404">        return getPage();</span>
+<span class="nc" id="L366">        return getPage();</span>
     }
 
     /**
@@ -428,17 +390,17 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
     {
         try
         {
-<span class="nc" id="L431">            super.doGet(request, response);</span>
-<span class="nc bnc" id="L432" title="All 4 branches missed.">            if (request.getHeader(&quot;Content-Type&quot;) == null || request.getHeader(&quot;Content-Type&quot;).isEmpty())</span>
+<span class="nc" id="L393">            super.doGet(request, response);</span>
+<span class="nc bnc" id="L394" title="All 4 branches missed.">            if (request.getHeader(&quot;Content-Type&quot;) == null || request.getHeader(&quot;Content-Type&quot;).isEmpty())</span>
             {
-<span class="nc" id="L434">                processRequest(request, response);</span>
+<span class="nc" id="L396">                processRequest(request, response);</span>
             }
         }
-<span class="nc" id="L437">        catch (IOException | ServletException ex)</span>
+<span class="nc" id="L399">        catch (IOException | ServletException ex)</span>
         {
-<span class="nc" id="L439">            LOG.log(Level.SEVERE, &quot;SwingServlet&quot;, ex);</span>
-<span class="nc" id="L440">        }</span>
-<span class="nc" id="L441">    }</span>
+<span class="nc" id="L401">            LOG.log(Level.SEVERE, &quot;SwingServlet&quot;, ex);</span>
+<span class="nc" id="L402">        }</span>
+<span class="nc" id="L403">    }</span>
 
     /**
      * Returns if the user is logged in or not
@@ -447,7 +409,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
      */
     public boolean isUserLoggedIn()
     {
-<span class="nc" id="L450">        return false;</span>
+<span class="nc" id="L412">        return false;</span>
     }
 
 }

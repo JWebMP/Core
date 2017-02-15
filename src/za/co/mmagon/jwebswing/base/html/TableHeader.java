@@ -1,15 +1,28 @@
+/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.TableChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.TableRowChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemeBlocks;
 
 /**
  * Browser Support
@@ -41,12 +54,17 @@ import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemeBlocks;
  * Some HTML 4.01 attributes are not supported in HTML5.<p>
  *
  * @author MMagon
+ * @param <J>
+ *
  * @since Forever
  * @version 1.0
  */
-public class TableHeader extends Component<Component, NoAttributes, GlobalFeatures, GlobalEvents, TableHeader>
-        implements TableChildren<NoAttributes>, TableRowChildren<NoAttributes>, NoNewLineBeforeClosingTag, NoNewLineForRawText
+public class TableHeader<J extends TableHeader>
+        extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements TableChildren, TableRowChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs an empty Table Header
@@ -65,31 +83,5 @@ public class TableHeader extends Component<Component, NoAttributes, GlobalFeatur
     {
         super(ComponentTypes.TableHeader);
         setText(headerText);
-        /*
-         *
-         */
-    }
-
-    /**
-     * *
-     * Adds the theming classes to the header
-     */
-    public void addTheming()
-    {
-        addClass(JQUIThemeBlocks.UI_Widget_Header);
-        addClass(JQUIThemeBlocks.UI_State_Hover);
-        addClass(JQUIThemeBlocks.UI_Priority_Primary);
-    }
-
-    /**
-     * Removes the default theming classes from the header
-     */
-    public void removeTheming()
-    {
-        /*
-         * removeClass(JQUIThemeBlocks.UI_Widget_Header);
-         * removeClass(JQUIThemeBlocks.UI_State_Hover);
-         * removeClass(JQUIThemeBlocks.UI_Priority_Primary);
-         */
     }
 }

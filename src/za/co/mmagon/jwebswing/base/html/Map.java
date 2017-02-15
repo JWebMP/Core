@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
@@ -26,18 +42,23 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * In XHTML, the name attribute is deprecated, and will be removed. Use the id attribute instead.<p>
  *
+ * @param <J>
+ *
  * @since 2013/11/22
  * @version 1.0
  * @author MMagon
  *
  *
  */
-public class Map extends Component<MapChildren, NoAttributes, GlobalFeatures, GlobalEvents, Map> implements ImageMapChildren
+public class Map<J extends Map>
+        extends Component<MapChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements ImageMapChildren
 {
 
+    private static final long serialVersionUID = 1L;
+
     /**
-     * Constructs a new Map for use with the Image Map
-     * Useless really without
+     * Constructs a new Map for use with the Image Map Useless really without
      */
     public Map()
     {

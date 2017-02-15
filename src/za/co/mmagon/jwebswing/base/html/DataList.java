@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,22 +28,28 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;datalist&gt; tag specifies a list of pre-defined options for an input element.
  * <p>
- * The &lt;datalist&gt; tag is used to provide an "autocomplete" feature on input elements. <p>Users will see a drop-down list of pre-defined options as they input data.
+ * The &lt;datalist&gt; tag is used to provide an "autocomplete" feature on input elements.
+ * <p>
+ * Users will see a drop-down list of pre-defined options as they input data.
  * <p>
  * Use the &lt;input&gt; element's list attribute to bind it together with a &lt;datalist&gt; element. Browser Support
  * <p>
- * The numbers in the table specify the first browser version that fully supports the element. Element
- * &lt;datalist&gt; 20.0 10.0 4.0 Not supported 9.0
+ * The numbers in the table specify the first browser version that fully supports the element. Element &lt;datalist&gt; 20.0 10.0 4.0 Not supported 9.0
  * <p>
  * Differences Between HTML 4.01 and HTML5
  * <p>
  * The &lt;datalist&gt; tag is new in HTML5.
  * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since 2014/12/21
  */
-public class DataList extends Component<DataListChildren, NoAttributes, NoFeatures, NoEvents, DataList> 
+public class DataList<J extends DataList>
+        extends Component<DataListChildren, NoAttributes, NoFeatures, NoEvents, J>
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Creates a new DataList with the given.

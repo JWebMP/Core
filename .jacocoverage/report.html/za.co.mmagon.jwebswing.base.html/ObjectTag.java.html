@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ObjectTag.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">ObjectTag.java</span></div><h1>ObjectTag.java</h1><pre class="source lang-java linenums">/*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,24 +27,19 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 /**
  * Definition and Usage&lt;p&gt;
  * &lt;p&gt;
- * The &amp;gt;object&amp;lt; tag defines an embedded object within an HTML document.
- * Use this element to embed multimedia (like audio, video, Java applets,
- * ActiveX, PDF, and Flash) in your web pages.&lt;p&gt;
+ * The &amp;gt;object&amp;lt; tag defines an embedded object within an HTML document. Use this element to embed multimedia (like audio, video, Java applets, ActiveX, PDF, and Flash) in your web pages.&lt;p&gt;
  * &lt;p&gt;
- * You can also use the &amp;gt;object&amp;lt; tag to embed another webpage into your
- * HTML document.&lt;p&gt;
+ * You can also use the &amp;gt;object&amp;lt; tag to embed another webpage into your HTML document.&lt;p&gt;
  * &lt;p&gt;
- * You can use the &amp;gt;param&amp;lt; tag to pass parameters to plugins that have
- * been embedded with the &amp;gt;object&amp;lt; tag.&lt;p&gt;
+ * You can use the &amp;gt;param&amp;lt; tag to pass parameters to plugins that have been embedded with the &amp;gt;object&amp;lt; tag.&lt;p&gt;
  * Browser Support&lt;p&gt;
  * Element
  * &lt;p&gt;
  * &amp;gt;object&amp;lt; Yes Yes Yes Yes Yes&lt;p&gt;
  * Tips and Notes&lt;p&gt;
  * &lt;p&gt;
- * Note: An &amp;gt;object&amp;lt; element must appear inside the &amp;gt;body&amp;lt; element.
- * The text between the &amp;gt;object&amp;lt; and &amp;gt;/object&amp;lt; is an alternate text,
- * for browsers that do not support this tag.&lt;p&gt;
+ * Note: An &amp;gt;object&amp;lt; element must appear inside the &amp;gt;body&amp;lt; element. The text between the &amp;gt;object&amp;lt; and &amp;gt;/object&amp;lt; is an alternate text, for browsers that do not support this
+ * tag.&lt;p&gt;
  * &lt;p&gt;
  * Tip: For images use the &amp;gt;img&amp;lt; tag instead of the &amp;gt;object&amp;lt; tag.&lt;p&gt;
  * &lt;p&gt;
@@ -57,16 +52,21 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * &lt;p&gt;
  * In HTML5, objects can be used and submitted in forms.&lt;p&gt;
  * &lt;p&gt;
- * In HTML5, objects can no longer appear inside the &amp;gt;head&amp;lt; element of a
- * document.&lt;p&gt;
+ * In HTML5, objects can no longer appear inside the &amp;gt;head&amp;lt; element of a document.&lt;p&gt;
  * @author GedMarc
+ * @param &lt;J&gt;
+ *
  * @since Feb 9, 2015
  * @version 1.0
  * &lt;p&gt;
  * &lt;p&gt;
  */
-public class ObjectTag extends Component&lt;ObjectTagChildren, ObjectAttributes, GlobalFeatures, GlobalEvents, ObjectTag&gt; implements NoNewLineForRawText
+public class ObjectTag&lt;J extends ObjectTag&gt;
+        extends Component&lt;ObjectTagChildren, ObjectAttributes, GlobalFeatures, GlobalEvents, J&gt;
+        implements NoNewLineForRawText
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      *

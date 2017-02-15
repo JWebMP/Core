@@ -17,8 +17,6 @@
 package za.co.mmagon.jwebswing.base;
 
 import org.junit.Test;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemes;
 
 /**
  *
@@ -32,23 +30,9 @@ public class ComponentThemeBaseTest
     }
 
     @Test
-    public void testThemedComponent()
+    public void stuff()
     {
-        ComponentThemeBase tb = new ComponentThemeBase(ComponentTypes.Area);
-        tb.setID("testThemed");
-        tb.addTheme(JQUIThemes.Blitzer);
-        System.out.println(tb.toString(true));
-        System.out.println(tb);
-    }
 
-    @Test
-    public void testThemedComponentTiny()
-    {
-        ComponentThemeBase tb = new ComponentThemeBase(ComponentTypes.Area);
-        tb.setID("testThemed");
-        tb.addTheme(JQUIThemes.Blitzer);
-        System.out.println(tb.toString(true));
-        System.out.println(tb);
     }
 
 }

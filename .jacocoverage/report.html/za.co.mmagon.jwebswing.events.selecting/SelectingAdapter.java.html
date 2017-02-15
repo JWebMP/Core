@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SelectingAdapter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.events.selecting</a> &gt; <span class="el_source">SelectingAdapter.java</span></div><h1>SelectingAdapter.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.events.selecting;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SelectingAdapter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.events.selecting</a> &gt; <span class="el_source">SelectingAdapter.java</span></div><h1>SelectingAdapter.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.events.selecting;
 
 import java.util.logging.Level;
 import za.co.mmagon.jwebswing.Component;
@@ -7,7 +23,6 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
-import za.co.mmagon.jwebswing.components.jqueryui.selectable.JQUISelectableEvents;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
 
@@ -17,13 +32,13 @@ import za.co.mmagon.logger.LogFactory;
  * @author Marc Magon
  */
 public abstract class SelectingAdapter extends Event
-        implements GlobalEvents, JQUISelectableEvents
+        implements GlobalEvents
 {
 
     /**
      * Logger for the Component
      */
-<span class="nc" id="L26">    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger(&quot;SelectingEvent&quot;);</span>
+<span class="nc" id="L41">    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger(&quot;SelectingEvent&quot;);</span>
     private static final long serialVersionUID = 1L;
     private SelectingDirective directive;
 
@@ -34,9 +49,9 @@ public abstract class SelectingAdapter extends Event
      */
     public SelectingAdapter(Component component)
     {
-<span class="nc" id="L37">        super(EventTypes.selecting, component);</span>
+<span class="nc" id="L52">        super(EventTypes.selecting, component);</span>
 
-<span class="nc" id="L39">    }</span>
+<span class="nc" id="L54">    }</span>
 
     /**
      * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
@@ -44,15 +59,15 @@ public abstract class SelectingAdapter extends Event
     @Override
     public void preConfigure()
     {
-<span class="nc bnc" id="L47" title="All 2 branches missed.">        if (!isConfigured())</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (!isConfigured())</span>
         {
-<span class="nc" id="L49">            getComponent().getPage().getOptions().setjQueryEnabled(true);</span>
-<span class="nc" id="L50">            getComponent().getPage().getOptions().setAngularEnabled(true);</span>
-<span class="nc" id="L51">            getComponent().getAngularDirectives().add(getDirective());</span>
-<span class="nc" id="L52">            component.addAttribute(AngularAttributes.ngSelecting, &quot;perform($event,&quot; + renderVariables() + &quot;);&quot;);</span>
+<span class="nc" id="L64">            getComponent().getPage().getOptions().setjQueryEnabled(true);</span>
+<span class="nc" id="L65">            getComponent().getPage().getOptions().setAngularEnabled(true);</span>
+<span class="nc" id="L66">            getComponent().getAngularDirectives().add(getDirective());</span>
+<span class="nc" id="L67">            component.addAttribute(AngularAttributes.ngSelecting, &quot;perform($event,&quot; + renderVariables() + &quot;);&quot;);</span>
         }
-<span class="nc" id="L54">        super.preConfigure();</span>
-<span class="nc" id="L55">    }</span>
+<span class="nc" id="L69">        super.preConfigure();</span>
+<span class="nc" id="L70">    }</span>
 
     /**
      * Returns the angular directive associated with the right click event
@@ -61,11 +76,11 @@ public abstract class SelectingAdapter extends Event
      */
     public SelectingDirective getDirective()
     {
-<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (directive == null)</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        if (directive == null)</span>
         {
-<span class="nc" id="L66">            directive = new SelectingDirective(getComponent().getPage().getAngular());</span>
+<span class="nc" id="L81">            directive = new SelectingDirective(getComponent().getPage().getAngular());</span>
         }
-<span class="nc" id="L68">        return directive;</span>
+<span class="nc" id="L83">        return directive;</span>
     }
 
     /**
@@ -75,8 +90,8 @@ public abstract class SelectingAdapter extends Event
      */
     public void setDirective(SelectingDirective directive)
     {
-<span class="nc" id="L78">        this.directive = directive;</span>
-<span class="nc" id="L79">    }</span>
+<span class="nc" id="L93">        this.directive = directive;</span>
+<span class="nc" id="L94">    }</span>
 
     /**
      * Triggers on Click
@@ -91,13 +106,13 @@ public abstract class SelectingAdapter extends Event
     {
         try
         {
-<span class="nc" id="L94">            onSelecting(call, response);</span>
+<span class="nc" id="L109">            onSelecting(call, response);</span>
         }
-<span class="nc" id="L96">        catch (Exception e)</span>
+<span class="nc" id="L111">        catch (Exception e)</span>
         {
-<span class="nc" id="L98">            LOG.log(Level.SEVERE, &quot;Error In Firing Event&quot;, e);</span>
-<span class="nc" id="L99">        }</span>
-<span class="nc" id="L100">    }</span>
+<span class="nc" id="L113">            LOG.log(Level.SEVERE, &quot;Error In Firing Event&quot;, e);</span>
+<span class="nc" id="L114">        }</span>
+<span class="nc" id="L115">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,13 +18,10 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeaderChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqueryui.tabs.JQUITabsChildren;
 
 /**
  * Definition and Usage<p>
@@ -49,10 +46,13 @@ import za.co.mmagon.jwebswing.components.jqueryui.tabs.JQUITabsChildren;
  * The &lt;header&gt; tag is new in HTML5.<p>
  * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since 2014/12/21
  */
-public class Header extends Component<HeaderChildren, NoAttributes, GlobalFeatures, GlobalEvents, Header>
-        implements NoIDTag, GlobalChildren, JQUITabsChildren
+public class Header<J extends Header>
+        extends Component<HeaderChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements NoIDTag, GlobalChildren
 {
 
     private static final long serialVersionUID = 1L;

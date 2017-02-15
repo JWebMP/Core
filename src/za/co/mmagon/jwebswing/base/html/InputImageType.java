@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,10 +21,15 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 
 /**
  * Specifies an image input type
+ *
  * @author GedMarc
+ * @param <J>
  */
-public class InputImageType extends Input<InputImageTypeAttributes>
+public class InputImageType<J extends InputImageType> extends Input<InputImageTypeAttributes, J>
 {
+
+    private static final long serialVersionUID = 1L;
+
     /**
      * Constructs a new button with the given text
      */

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 ged_m
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,15 +40,12 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  * @author GedMarc
  * @since 27 Apr 2016
  */
-public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentBase>
+public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHTMLAngularBase>
         extends ComponentHTMLAttributeBase<A, F, E, J> implements IComponentHTMLAngularBase<J>
 {
 
+    public static final String AngularEnabledString = "angular-enabled";
     private static final long serialVersionUID = 1L;
-    /**
-     * specifies if angular should be loaded or not
-     */
-    private boolean loadAngular;
 
     /**
      * All the angular attributes for this component
@@ -60,7 +57,6 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private Map<String, JavaScriptPart> angularObjects;
-
     /**
      * All the angular modules for this component
      */
@@ -317,7 +313,20 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
      */
     protected boolean isLoadAngular()
     {
-        return loadAngular;
+        String isEnabled = getProperty(AngularEnabledString);
+        if (isEnabled == null || isEnabled.isEmpty())
+        {
+            return false;
+        }
+        try
+        {
+            Boolean en = Boolean.parseBoolean(isEnabled);
+            return en;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
     }
 
     /**
@@ -327,7 +336,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
      */
     protected void setLoadAngular(boolean loadAngular)
     {
-        this.loadAngular = loadAngular;
+        getProperties().put(AngularEnabledString, loadAngular);
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,6 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.BlockQuoteAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
@@ -27,24 +26,19 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 /**
  * Definition and Usage
  * <p>
- * The &lt;blockquote&gt; tag specifies a section that is quoted from another
- * source.
+ * The &lt;blockquote&gt; tag specifies a section that is quoted from another source.
  * <p>
- * Browsers usually indent &lt;blockquote&gt; elements. Browser Support Element
- * &lt;blockquote&gt; Yes Yes Yes Yes Yes
+ * Browsers usually indent &lt;blockquote&gt; elements. Browser Support Element &lt;blockquote&gt; Yes Yes Yes Yes Yes
  * <p>
  * Tips and Notes
  * <p>
- * Tip: Use &lt;q&gt; for inline (short) quotations. Differences Between HTML
- * 4.01 and HTML5
+ * Tip: Use &lt;q&gt; for inline (short) quotations. Differences Between HTML 4.01 and HTML5
  * <p>
  * In HTML 4.01, the &lt;blockquote&gt; tag defines a long quotation.
  * <p>
- * In HTML5, the &lt;blockquote&gt; tag specifies a section that is quoted from
- * another source. Differences Between HTML and XHTML
+ * In HTML5, the &lt;blockquote&gt; tag specifies a section that is quoted from another source. Differences Between HTML and XHTML
  * <p>
- * Note: To validate a &lt;blockquote&gt; element as XHTML, it must contain only
- * other block-level elements, like this:
+ * Note: To validate a &lt;blockquote&gt; element as XHTML, it must contain only other block-level elements, like this:
  * <p>
  * &lt;blockquote&gt;
  * <p>
@@ -53,8 +47,11 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * &lt;/blockquote&gt;
  * <p>
  * @author GedMarc
+ * @param <J>
  */
-public class BlockQuote extends Component<ParagraphChildren, BlockQuoteAttributes, GlobalFeatures, GlobalEvents, BlockQuote> implements GlobalChildren
+public class BlockQuote<J extends BlockQuote>
+        extends Component<ParagraphChildren, BlockQuoteAttributes, GlobalFeatures, GlobalEvents, J>
+
 {
 
     private static final long serialVersionUID = 1L;
@@ -66,13 +63,24 @@ public class BlockQuote extends Component<ParagraphChildren, BlockQuoteAttribute
     {
         super(ComponentTypes.BlockQuotes);
     }
-    
+
+    /**
+     * Constructs a new block quote with the given text
+     *
+     * @param text
+     */
     public BlockQuote(String text)
     {
         this();
         setText(text);
     }
 
+    /**
+     * Constructs a new block quote with the given text and footer
+     *
+     * @param text
+     * @param footer
+     */
     public BlockQuote(String text, String footer)
     {
         this();

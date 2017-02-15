@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2016 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
@@ -88,7 +88,7 @@
                     var the_string = item.variableName;
                     var model = $parse(the_string);
                     model.assign($scope, item.variableObject);
-                    $timeout(function(){});
+                    $timeout(function () {});
                     //$scope.$apply();
                 });
             };
@@ -152,7 +152,7 @@
             };
 
             /**
-             * 
+             *
              * @param {type} data
              * @returns {undefined}
              */
@@ -359,10 +359,24 @@
  * $.cachedScript( "ajax/test.js",{async:true).done(function( script, textStatus ) {});
  * @param {type} url The URL to use
  * @param {type} options Any $.ajax options
- * 
+ *
  * @returns {jqXHR} The ajax object for chaining
  */
 jQuery.cachedScript = function (url, options) {
+    // Allow user to set any option except for dataType, cache, and url
+    options = $.extend(options || {}, {
+        dataType: "script",
+        cache: true,
+        url: url,
+        async: false
+    });
+
+    // Use $.ajax() since it is more flexible than $.getScript
+    // Return the jqXHR object so we can chain callbacks
+    return jQuery.ajax(options);
+};
+
+jQuery.cachedScriptNonAsync = function (url, options) {
     // Allow user to set any option except for dataType, cache, and url
     options = $.extend(options || {}, {
         dataType: "script",

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,10 +16,14 @@
  */
 package za.co.mmagon.jwebswing.base.html.interfaces.children.generics;
 
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+
 /**
  * Specifies all children that are paragraph or textual in nature
+ *
  * @author GedMarc
  */
-public interface ParagraphChildren {
-    
+public interface ParagraphChildren extends GlobalChildren
+{
+
 }

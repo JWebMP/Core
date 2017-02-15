@@ -29,7 +29,7 @@ import za.co.mmagon.jwebswing.events.mouseout.MouseOutAdapter;
 import za.co.mmagon.jwebswing.events.mouseover.MouseOverAdapter;
 import za.co.mmagon.jwebswing.events.open.OpenAdapter;
 import za.co.mmagon.jwebswing.events.receive.ReceiveAdapter;
-import za.co.mmagon.jwebswing.events.remove.Removedapter;
+import za.co.mmagon.jwebswing.events.remove.RemoveAdapter;
 import za.co.mmagon.jwebswing.events.resize.ResizeAdapter;
 import za.co.mmagon.jwebswing.events.resizestart.ResizeStartAdapter;
 import za.co.mmagon.jwebswing.events.resizestop.ResizeStopAdapter;
@@ -43,8 +43,8 @@ import za.co.mmagon.jwebswing.events.sort.SortAdapter;
 import za.co.mmagon.jwebswing.events.spin.SpinAdapter;
 import za.co.mmagon.jwebswing.events.start.StartAdapter;
 import za.co.mmagon.jwebswing.events.stop.StopAdapter;
-import za.co.mmagon.jwebswing.events.unselected.UnSelectedEvent;
-import za.co.mmagon.jwebswing.events.update.UpdateEvent;
+import za.co.mmagon.jwebswing.events.unselected.UnselectedtAdapter;
+import za.co.mmagon.jwebswing.events.update.UpdateAdapter;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.commandEvent.PerformCommandEvent;
 
 /**
@@ -57,157 +57,142 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.commandEvent.Perform
 
     /**
      * Sends an Ajax call to the server to perform any command on document render. Very flexible, Maybe overly so
-     *//**
+     */
+    /**
      * Sends an Ajax call to the server to perform any command on document render. Very flexible, Maybe overly so
      */
-<span class="fc" id="L63">    performCommand(PerformCommandEvent.class, null),</span>
+<span class="fc" id="L64">    performCommand(PerformCommandEvent.class, null),</span>
     /**
      * Registers a Mouse Over event
      */
-<span class="fc" id="L67">    mouseOver(MouseOverAdapter.class, null),</span>
+<span class="fc" id="L68">    mouseOver(MouseOverAdapter.class, null),</span>
     /**
      * Registers a Mouse Over event
      */
-<span class="fc" id="L71">    mouseOut(MouseOutAdapter.class, null),</span>
-<span class="fc" id="L72">    mouseDown(MouseDownAdapter.class, null),</span>
-<span class="fc" id="L73">    mouseUp(MouseDownAdapter.class, null),</span>
-<span class="fc" id="L74">    mouseEnter(MouseEnterAdapter.class, null),</span>
-<span class="fc" id="L75">    mouseMove(MouseMoveAdapter.class, null),</span>
-<span class="fc" id="L76">    keyDown(MouseMoveAdapter.class, null),</span>
-<span class="fc" id="L77">    keyPressed(MouseMoveAdapter.class, null),</span>
-<span class="fc" id="L78">    keyUp(MouseMoveAdapter.class, null),</span>
+<span class="fc" id="L72">    mouseOut(MouseOutAdapter.class, null),</span>
+<span class="fc" id="L73">    mouseDown(MouseDownAdapter.class, null),</span>
+<span class="fc" id="L74">    mouseUp(MouseDownAdapter.class, null),</span>
+<span class="fc" id="L75">    mouseEnter(MouseEnterAdapter.class, null),</span>
+<span class="fc" id="L76">    mouseMove(MouseMoveAdapter.class, null),</span>
+<span class="fc" id="L77">    keyDown(MouseMoveAdapter.class, null),</span>
+<span class="fc" id="L78">    keyPressed(MouseMoveAdapter.class, null),</span>
+<span class="fc" id="L79">    keyUp(MouseMoveAdapter.class, null),</span>
     /**
      * Registers a Right Click event
      */
-<span class="fc" id="L82">    contextmenu(RightClickAdapter.class, null),</span>
+<span class="fc" id="L83">    contextmenu(RightClickAdapter.class, null),</span>
     /*
      * Registers a normal click event
      */
-<span class="fc" id="L86">    click(ClickAdapter.class, null),</span>
+<span class="fc" id="L87">    click(ClickAdapter.class, null),</span>
     /**
-     * Known as focus-lost in Swing
-     * Triggered when the menu loses focus.
+     * Known as focus-lost in Swing Triggered when the menu loses focus.
      */
 <span class="fc" id="L91">    blur(BlurAdapter.class, null),</span>
     /**
-     * Triggered when focus is moved to an item (not selecting).
-     * The default action is to replace the text field's value with the value of the focused item, though only if the event was triggered by a keyboard interaction.
+     * Triggered when focus is moved to an item (not selecting). The default action is to replace the text field's value with the value of the focused item, though only if the event was triggered by a
+     * keyboard interaction.
      * &lt;p&gt;
      * Canceling this event prevents the value from being updated, but does not prevent the menu item from being focused.
      */
 <span class="fc" id="L98">    focus(FocusEvent.class, null),</span>
     /**
-     * Registers when a drag starts
-     * Triggered when the user starts dragging the dialog.
+     * Registers when a drag starts Triggered when the user starts dragging the dialog.
      */
-<span class="fc" id="L103">    dragStart(DragStartAdapter.class, null),</span>
+<span class="fc" id="L102">    dragStart(DragStartAdapter.class, null),</span>
     /**
-     * Registers when a drag stops
-     * Triggered after the dialog has been dragged.
+     * Registers when a drag stops Triggered after the dialog has been dragged.
      */
-<span class="fc" id="L108">    dragStop(DragStopAdapter.class, null),</span>
+<span class="fc" id="L106">    dragStop(DragStopAdapter.class, null),</span>
     /**
      * Triggered when an accepted Draggable is dropped on the droppable (based on the tolerance option).
      */
-<span class="fc" id="L112">    drop(DropAdapter.class, null),</span>
+<span class="fc" id="L110">    drop(DropAdapter.class, null),</span>
     /**
      * Triggered when a dialog is about to close. If canceled, the dialog will not close.
      */
-<span class="fc" id="L116">    beforeClose(BeforeCloseAdapter.class, null),</span>
+<span class="fc" id="L114">    beforeClose(BeforeCloseAdapter.class, null),</span>
     /**
-     * Triggered when the menu is hidden.
-     * Not every close event will be accompanied by a change event.
-     * Triggered when the dialog is closed.
-     * Triggered when the menu is hidden.
+     * Triggered when the menu is hidden. Not every close event will be accompanied by a change event. Triggered when the dialog is closed. Triggered when the menu is hidden.
      */
-<span class="fc" id="L123">    close(CloseAdapter.class, null),</span>
+<span class="fc" id="L118">    close(CloseAdapter.class, null),</span>
     /**
-     * Triggered when the accordion is created.
-     * If the accordion is collapsed, ui.header and ui.panel will be empty jQuery objects.
-     * Triggered when the dialog is created.
-     * Triggered when the progressbar is created.
-     * Triggered when the selectmenu is created.
+     * Triggered when the accordion is created. If the accordion is collapsed, ui.header and ui.panel will be empty jQuery objects. Triggered when the dialog is created. Triggered when the progressbar
+     * is created. Triggered when the selectmenu is created.
      */
-<span class="fc" id="L131">    create(CreateAdapter.class, null),</span>
+<span class="fc" id="L123">    create(CreateAdapter.class, null),</span>
     /**
      * Prevents interactions from starting on specified elements.
      */
-<span class="fc" id="L135">    cancel(CancelAdapter.class, null),</span>
+<span class="fc" id="L127">    cancel(CancelAdapter.class, null),</span>
     /**
      * Triggered while the dialog is being dragged.
      */
-<span class="fc" id="L139">    drag(DragEvent.class, null),</span>
+<span class="fc" id="L131">    drag(DragEvent.class, null),</span>
     /**
-     * Triggered when the suggestion menu is opened or updated.
-     * Triggered when the dialog is opened.
+     * Triggered when the suggestion menu is opened or updated. Triggered when the dialog is opened.
      */
-<span class="fc" id="L144">    open(OpenAdapter.class, null),</span>
+<span class="fc" id="L135">    open(OpenAdapter.class, null),</span>
     /**
      * Triggered while the dialog is being resized.
      */
-<span class="fc" id="L148">    resize(ResizeAdapter.class, null),</span>
+<span class="fc" id="L139">    resize(ResizeAdapter.class, null),</span>
     /**
      * Triggered when the user starts resizing the dialog.
      */
-<span class="fc" id="L152">    resizeStart(ResizeStartAdapter.class, null),</span>
+<span class="fc" id="L143">    resizeStart(ResizeStartAdapter.class, null),</span>
     /**
-     * This event is triggered at the end of a resize operation.
-     * Triggered after the dialog has been resized.
+     * This event is triggered at the end of a resize operation. Triggered after the dialog has been resized.
      */
-<span class="fc" id="L157">    resizeStop(ResizeStopAdapter.class, null),</span>
+<span class="fc" id="L147">    resizeStop(ResizeStopAdapter.class, null),</span>
     /**
-     * Triggered after a panel has been activated (after animation completes).
-     * If the accordion was previously collapsed, ui.oldHeader and ui.oldPanel will be empty jQuery objects.
-     * If the accordion is collapsing, ui.newHeader and ui.newPanel will be empty jQuery objects.
+     * Triggered after a panel has been activated (after animation completes). If the accordion was previously collapsed, ui.oldHeader and ui.oldPanel will be empty jQuery objects. If the accordion is
+     * collapsing, ui.newHeader and ui.newPanel will be empty jQuery objects.
      */
-<span class="fc" id="L163">    activate(ActivateAdapter.class, null),</span>
+<span class="fc" id="L152">    activate(ActivateAdapter.class, null),</span>
     /**
-     * Triggered directly before a panel is activated. Can be canceled to prevent the panel from activating.
-     * If the accordion is currently collapsed, ui.oldHeader and ui.oldPanel will be empty jQuery objects.
-     * If the accordion is collapsing, ui.newHeader and ui.newPanel will be empty jQuery objects.
+     * Triggered directly before a panel is activated. Can be canceled to prevent the panel from activating. If the accordion is currently collapsed, ui.oldHeader and ui.oldPanel will be empty jQuery
+     * objects. If the accordion is collapsing, ui.newHeader and ui.newPanel will be empty jQuery objects.
      * &lt;p&gt;
-     * Triggered immediately before a tab is activated. Can be canceled to prevent the tab from activating.
-     * If the tabs are currently collapsed, ui.oldTab and ui.oldPanel will be empty jQuery objects. If the tabs are collapsing,
-     * ui.newTab and ui.newPanel will be empty jQuery objects.
+     * Triggered immediately before a tab is activated. Can be canceled to prevent the tab from activating. If the tabs are currently collapsed, ui.oldTab and ui.oldPanel will be empty jQuery objects.
+     * If the tabs are collapsing, ui.newTab and ui.newPanel will be empty jQuery objects.
      */
-<span class="fc" id="L173">    beforeActivate(BeforeActivateAdapter.class, null),</span>
-<span class="fc" id="L174">    beforeStop(BeforeStopAdapter.class, null),</span>
-<span class="fc" id="L175">    buttonClickEvent(ButtonClickAdapter.class,null),</span>
+<span class="fc" id="L160">    beforeActivate(BeforeActivateAdapter.class, null),</span>
+<span class="fc" id="L161">    beforeStop(BeforeStopAdapter.class, null),</span>
+<span class="fc" id="L162">    buttonClickEvent(ButtonClickAdapter.class, null),</span>
     /**
-     * Triggered when the field is blurred, if the value has changed.
-     * Triggered when the value of the progressbar changes.
-     * Triggered when the selected item has changed. Not every select event will fire a change event.
+     * Triggered when the field is blurred, if the value has changed. Triggered when the value of the progressbar changes. Triggered when the selected item has changed. Not every select event will
+     * fire a change event.
      */
-<span class="fc" id="L181">    change(ChangeEvent.class, null),</span>
-<span class="fc" id="L182">    unselected(UnSelectedEvent.class, null),</span>
-<span class="fc" id="L183">    selected(SelectedAdapter.class, null),</span>
-<span class="fc" id="L184">    selecting(SelectingAdapter.class, null),</span>
-<span class="fc" id="L185">    deactivate(DeactivateAdapter.class, null),</span>
-<span class="fc" id="L186">    out(MouseOutAdapter.class, null),</span>
-<span class="fc" id="L187">    over(MouseOverAdapter.class, null),</span>
-<span class="fc" id="L188">    receive(ReceiveAdapter.class, null),</span>
-<span class="fc" id="L189">    remove(Removedapter.class, null),</span>
-<span class="fc" id="L190">    sort(SortAdapter.class, null),</span>
+<span class="fc" id="L167">    change(ChangeEvent.class, null),</span>
+<span class="fc" id="L168">    unselected(UnselectedtAdapter.class, null),</span>
+<span class="fc" id="L169">    selected(SelectedAdapter.class, null),</span>
+<span class="fc" id="L170">    selecting(SelectingAdapter.class, null),</span>
+<span class="fc" id="L171">    deactivate(DeactivateAdapter.class, null),</span>
+<span class="fc" id="L172">    out(MouseOutAdapter.class, null),</span>
+<span class="fc" id="L173">    over(MouseOverAdapter.class, null),</span>
+<span class="fc" id="L174">    receive(ReceiveAdapter.class, null),</span>
+<span class="fc" id="L175">    remove(RemoveAdapter.class, null),</span>
+<span class="fc" id="L176">    sort(SortAdapter.class, null),</span>
     /**
      * Triggered when the user starts sliding.
      */
-<span class="fc" id="L194">    start(StartAdapter.class, null),</span>
+<span class="fc" id="L180">    start(StartAdapter.class, null),</span>
     /**
      * Triggered after the user slides a handle.
      */
-<span class="fc" id="L198">    stop(StopAdapter.class, null),</span>
+<span class="fc" id="L184">    stop(StopAdapter.class, null),</span>
     /**
      * Triggered after a search completes, before the menu is shown.
      * &lt;p&gt;
-     * Useful for local manipulation of suggestion data, where a custom source option callback is not required.
-     * This event is always triggered when a search completes, even if the menu will not be shown because there are no results or the Autocomplete is disabled.
+     * Useful for local manipulation of suggestion data, where a custom source option callback is not required. This event is always triggered when a search completes, even if the menu will not be
+     * shown because there are no results or the Autocomplete is disabled.
      */
-<span class="fc" id="L205">    response(ResponseAdapter.class, null),</span>
+<span class="fc" id="L191">    response(ResponseAdapter.class, null),</span>
     /**
-     * Triggered before a search is performed, after minLength and delay are met.
-     * If canceled, then no request will be started and no items suggested.
+     * Triggered before a search is performed, after minLength and delay are met. If canceled, then no request will be started and no items suggested.
      */
-<span class="fc" id="L210">    search(SearchAdapter.class, null),</span>
+<span class="fc" id="L195">    search(SearchAdapter.class, null),</span>
     /**
      * Triggered when an item is selected from the menu.
      * &lt;p&gt;
@@ -217,51 +202,45 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.commandEvent.Perform
      * &lt;p&gt;
      * Triggered when a menu item is selected.
      */
-<span class="fc" id="L220">    select(SelectedAdapter.class, null),</span>
+<span class="fc" id="L205">    select(SelectedAdapter.class, null),</span>
     /**
      * Triggered when the value of the progressbar reaches the maximum value.
      */
-<span class="fc" id="L224">    complete(CompleteAdapter.class, null),</span>
+<span class="fc" id="L209">    complete(CompleteAdapter.class, null),</span>
     /**
-     * Triggered on every mouse move during slide.
-     * The value provided in the event as ui.value represents the value that the handle will have as a result of the current movement.
-     * Canceling the event
+     * Triggered on every mouse move during slide. The value provided in the event as ui.value represents the value that the handle will have as a result of the current movement. Canceling the event
      * will prevent the handle from moving and the handle will continue to have its previous value.
      */
-<span class="fc" id="L231">    slide(SlideAdapter.class, null),</span>
+<span class="fc" id="L214">    slide(SlideAdapter.class, null),</span>
     /**
      *
      * &lt;p&gt;
-     * Triggered when a remote tab is about to be loaded, after the beforeActivate event.
-     * Can be canceled to prevent the tab panel from loading content; though the panel will still be activated.
-     * This event is triggered just before the Ajax request is made, so modifications can be made to ui.jqXHR and ui.ajaxSettings.
+     * Triggered when a remote tab is about to be loaded, after the beforeActivate event. Can be canceled to prevent the tab panel from loading content; though the panel will still be activated. This
+     * event is triggered just before the Ajax request is made, so modifications can be made to ui.jqXHR and ui.ajaxSettings.
      * &lt;p&gt;
-     * Note: Although ui.ajaxSettings is provided and can be modified, some of these properties have already been processed by jQuery.
-     * For example, prefilters have been applied, data has been processed, and type has been determined.
-     * The beforeLoad event occurs at the same time,
-     * and therefore has the same restrictions, as the beforeSend callback from jQuery.ajax().
+     * Note: Although ui.ajaxSettings is provided and can be modified, some of these properties have already been processed by jQuery. For example, prefilters have been applied, data has been
+     * processed, and type has been determined. The beforeLoad event occurs at the same time, and therefore has the same restrictions, as the beforeSend callback from jQuery.ajax().
      * &lt;p&gt;
      */
-<span class="fc" id="L245">    beforeLoad(BeforeLoadAdapter.class, null),</span>
+<span class="fc" id="L225">    beforeLoad(BeforeLoadAdapter.class, null),</span>
     /**
      * Triggered after a remote tab has been loaded.
      */
-<span class="fc" id="L249">    load(LoadAdapter.class, null),</span>
-<span class="fc" id="L250">    update(UpdateEvent.class, null), </span>
-<span class="fc" id="L251">    undefined(null, null),</span>
+<span class="fc" id="L229">    load(LoadAdapter.class, null),</span>
+<span class="fc" id="L230">    update(UpdateAdapter.class, null),</span>
+<span class="fc" id="L231">    undefined(null, null),</span>
     /**
      * Triggered during increment/decrement (to determine direction of spin compare current value with ui.value).
      * &lt;p&gt;
      * Can be canceled, preventing the value from being updated.
      */
-<span class="fc" id="L257">    spin(SpinAdapter.class, null),</span>
+<span class="fc" id="L237">    spin(SpinAdapter.class, null),</span>
     /**
-     * Marks a data. Always null,
-     * Internal.
+     * Marks a data. Always null, Internal.
      */
-<span class="fc" id="L262">    data(null, null),</span>
-<span class="fc" id="L263">    checked(CheckedAdapter.class,null),</span>
-<span class="fc" id="L264">    custom(null,null);</span>
+<span class="fc" id="L241">    data(null, null),</span>
+<span class="fc" id="L242">    checked(CheckedAdapter.class, null),</span>
+<span class="fc" id="L243">    custom(null, null);</span>
 
     private final Class classType;
     private final Class ajaxOptionsReturn;
@@ -273,10 +252,10 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.commandEvent.Perform
      * @param groupedType
      */
     private EventTypes(Class classType, Class groupedType)
-<span class="fc" id="L276">    {</span>
-<span class="fc" id="L277">        this.classType = classType;</span>
-<span class="fc" id="L278">        this.ajaxOptionsReturn = groupedType;</span>
-<span class="fc" id="L279">    }</span>
+<span class="fc" id="L255">    {</span>
+<span class="fc" id="L256">        this.classType = classType;</span>
+<span class="fc" id="L257">        this.ajaxOptionsReturn = groupedType;</span>
+<span class="fc" id="L258">    }</span>
 
     /**
      * Get the class type that this AJAX event type is matched to
@@ -285,7 +264,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.commandEvent.Perform
      */
     public Class getClassType()
     {
-<span class="nc" id="L288">        return classType;</span>
+<span class="nc" id="L267">        return classType;</span>
     }
 
     /**
@@ -295,14 +274,14 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.commandEvent.Perform
      */
     public Class getAjaxOptionsReturn()
     {
-<span class="nc" id="L298">        return ajaxOptionsReturn;</span>
+<span class="nc" id="L277">        return ajaxOptionsReturn;</span>
     }
 
     @Override
     @JsonValue
     public String toString()
     {
-<span class="fc" id="L305">        return name().toString();</span>
+<span class="fc" id="L284">        return name().toString();</span>
     }
 
 }

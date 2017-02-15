@@ -1,14 +1,28 @@
+/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package za.co.mmagon.jwebswing.base.html;
 
-import za.co.mmagon.logger.LogFactory;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.AudioAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.AudioChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Definition and Usage
@@ -38,13 +52,16 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * Tip: Any text inside the between audio&lt; and &gt;/audio&lt; will be<p>
  * displayed in browsers that do not support the &gt;audio&lt; tag.<p>
  * <p>
+ * @param <J>
+ *
  * @since 2014/10/26
  * @version 1.0
  * @author MMagon
  *
  *
  */
-public class Audio extends Component<AudioChildren, AudioAttributes, GlobalFeatures, GlobalEvents, Audio>
+public class Audio<J extends Audio>
+        extends Component<AudioChildren, AudioAttributes, GlobalFeatures, GlobalEvents, J>
         implements NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
@@ -65,5 +82,15 @@ public class Audio extends Component<AudioChildren, AudioAttributes, GlobalFeatu
     public Audio(String src)
     {
         super(ComponentTypes.Audio);
+        addAttribute(AudioAttributes.Src, src);
     }
+
+    /**
+     * Constructs a new instance of audio
+     */
+    public Audio()
+    {
+        this(null);
+    }
+
 }

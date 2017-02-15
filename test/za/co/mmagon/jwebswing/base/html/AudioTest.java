@@ -16,7 +16,7 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.base.html.attributes.AudioAttributes;
 
@@ -38,7 +38,7 @@ public class AudioTest
         aud.setID("Audio");
         aud.addAttribute(AudioAttributes.Autoplay, true);
         System.out.println(aud.toString(true));
-        assertEquals("<audio autoplay=\"true\" id=\"Audio\"></audio>", aud.toString(true).toString());
+        assertEquals("<audio autoplay=\"true\" id=\"Audio\" src=\"src\"></audio>", aud.toString(true).toString());
     }
 
 }

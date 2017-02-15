@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,24 +25,29 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
 /**
  * Definition and Usage<p>
- *<p>
+ * <p>
  * The &lt;output&gt; tag represents the result of a calculation (like one performed by a script). Browser Support<p>
- *<p>
+ * <p>
  * The numbers in the table specify the first browser version that fully supports the element. Element<p>
  * &lt;output&gt; 10.0 Not supported 4.0 5.1 11.0 Differences Between HTML 4.01 and HTML5<p>
- *<p>
+ * <p>
  * The &lt;output&gt; tag is new in HTML5.<p>
- *<p>
+ * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since Mar 1, 2015
  * @version 1.0
- * @deprecated 
+ * @deprecated
  * <p>
  *
  * No support in I.E. - can't be used, the results are not compatible - may make as a server function but the point is client side.
  */
-public class Output extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, Output>
+public class Output<J extends Output>
+        extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      *

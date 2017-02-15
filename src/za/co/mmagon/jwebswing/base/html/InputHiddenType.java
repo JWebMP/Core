@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,9 +22,12 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 /**
  *
  * @author GedMarc
+ * @param <J>
  */
-public class InputHiddenType extends Input<InputHiddenTypeAttributes>
+public class InputHiddenType<J extends InputHiddenType> extends Input<InputHiddenTypeAttributes, J>
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new button with the given text

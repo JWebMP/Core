@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
@@ -41,10 +57,16 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * @author Marc Magon
  * @version 1.0
+ * @param <J>
+ *
  * @since 2012/10/01
  */
-public class TableCell extends Component<GlobalChildren, TableCellAttributes, GlobalFeatures, GlobalEvents, TableCell> implements TableRowChildren<TableCellAttributes>
+public class TableCell<J extends TableCell>
+        extends Component<Component, TableCellAttributes, GlobalFeatures, GlobalEvents, J>
+        implements TableRowChildren
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a normal table cell
@@ -64,7 +86,7 @@ public class TableCell extends Component<GlobalChildren, TableCellAttributes, Gl
         super(ComponentTypes.TableCell);
         if (dataDisplay != null)
         {
-            add(GlobalChildren.class.cast(dataDisplay));
+            add(Component.class.cast(dataDisplay));
         }
     }
 
@@ -97,9 +119,10 @@ public class TableCell extends Component<GlobalChildren, TableCellAttributes, Gl
      *
      * @param columnSpan Sets this table cells column span
      */
-    public void setColumnSpan(int columnSpan)
+    public J setColumnSpan(int columnSpan)
     {
         addAttribute(TableCellAttributes.ColSpan, columnSpan);
+        return (J) this;
     }
 
     /**
@@ -109,7 +132,6 @@ public class TableCell extends Component<GlobalChildren, TableCellAttributes, Gl
      */
     public int getRowSpan()
     {
-
         return new Integer(getAttribute(TableCellAttributes.RowSpan));
     }
 
@@ -118,8 +140,9 @@ public class TableCell extends Component<GlobalChildren, TableCellAttributes, Gl
      *
      * @param rowSpan Integer that is row span
      */
-    public void setRowSpan(int rowSpan)
+    public J setRowSpan(int rowSpan)
     {
         addAttribute(TableCellAttributes.RowSpan, Integer.toString(rowSpan));
+        return (J) this;
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 ged_m
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,7 +35,8 @@ import za.co.mmagon.logger.LogFactory;
  */
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
+public class ComponentBase<J extends ComponentBase>
+        implements IComponentBase<J>
 {
 
     /**
@@ -490,5 +491,29 @@ public class ComponentBase<J extends ComponentBase> implements IComponentBase<J>
     protected String getComponentClass()
     {
         return getClass().getCanonicalName();
+    }
+
+    /**
+     * If the component has a property attached
+     *
+     * @param propertyName
+     *
+     * @return
+     */
+    public boolean hasProperty(String propertyName)
+    {
+        return getProperties().containsKey(propertyName);
+    }
+
+    /**
+     * Returns a specific property in toString form
+     *
+     * @param propertyName
+     *
+     * @return
+     */
+    public String getProperty(String propertyName)
+    {
+        return getProperties().get(propertyName).toString();
     }
 }

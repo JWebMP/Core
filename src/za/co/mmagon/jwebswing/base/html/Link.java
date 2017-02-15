@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package za.co.mmagon.jwebswing.base.html;
 
 import java.util.logging.Level;
@@ -10,8 +26,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.bootstrap.carousel.BSCarouselChildren;
-import za.co.mmagon.jwebswing.components.bootstrap.media.BSMediaChildren;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -43,15 +57,22 @@ import za.co.mmagon.logger.LogFactory;
  * HTML5 has some new attributes, and some HTML 4.01 attributes are no longer supported.<p>
  *
  * @author Marc Magon
+ * @param <J>
  */
-public class Link extends Component<ComponentHierarchyBase, LinkAttributes, GlobalFeatures, GlobalEvents, Link>
-        implements BodyChildren, NoNewLineForRawText, ListItemChildren, BSMediaChildren, BSCarouselChildren
+public class Link<J extends Link>
+        extends Component<ComponentHierarchyBase, LinkAttributes, GlobalFeatures, GlobalEvents, J>
+        implements BodyChildren, NoNewLineForRawText, ListItemChildren
 {
 
     private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("ALink");
     private static final long serialVersionUID = 1L;
-
+    /**
+     * The address directing to
+     */
     private String directToAddress;
+    /**
+     * The target frame
+     */
     private String targetFrameName;
 
     /**

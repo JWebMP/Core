@@ -21,7 +21,6 @@ import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.components.pools.jquery.JQueryReferencePool;
-import za.co.mmagon.jwebswing.components.pools.jqueryui.JQueryUIReferencePool;
 
 /**
  *
@@ -39,8 +38,8 @@ public class ComponentDependancyBaseTest extends BaseTestClass
     {
         ComponentDependancyBase cd = new ComponentDependancyBase(ComponentTypes.Abbreviation);
         cd.setID("ID");
-        cd.addCssReference(JQueryUIReferencePool.Accordion.getCssReference());
-        cd.addJavaScriptReference(JQueryUIReferencePool.Accordion.getJavaScriptReference());
+        cd.addCssReference(null);
+        cd.addJavaScriptReference(JQueryReferencePool.AjaxEnabler.getJavaScriptReference());
         System.out.println(cd);
         Assert.assertEquals("{\n"
                 + "  \"id\" : \"ID\",\n"
@@ -49,17 +48,12 @@ public class ComponentDependancyBaseTest extends BaseTestClass
                 + "  \"configured\" : true,\n"
                 + "  \"initialized\" : true,\n"
                 + "  \"touched\" : false,\n"
-                + "  \"cssReferences\" : [ {\n"
-                + "    \"cordovaRequired\" : false,\n"
-                + "    \"name\" : \"JWAccordionCSSRef\",\n"
-                + "    \"version\" : 1.114,\n"
-                + "    \"reference\" : \"bower_components/jquery-ui/themes/base/accordion.css\"\n"
-                + "  } ],\n"
+                + "  \"cssReferences\" : [ null ],\n"
                 + "  \"javascriptReferences\" : [ {\n"
                 + "    \"cordovaRequired\" : false,\n"
-                + "    \"name\" : \"JWAccordionJS\",\n"
-                + "    \"version\" : 1.114,\n"
-                + "    \"reference\" : \"bower_components/jquery-ui/jquery-ui.js\"\n"
+                + "    \"name\" : \"AjaxEnabler\",\n"
+                + "    \"version\" : 1.0,\n"
+                + "    \"reference\" : \"javascript/jwebswing/ajax-enabler.js\"\n"
                 + "  } ],\n"
                 + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentDependancyBase\"\n"
                 + "}", cd.toString());

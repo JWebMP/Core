@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,9 +18,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.PhraseChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
@@ -28,19 +26,25 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
 /**
  * Definition and Usage<p>
- *<p>
+ * <p>
  * The &gt;strong&lt; tag is a phrase tag. It defines important text.<p>
- *<p>
+ * <p>
  * Tip: This tag is not deprecated, but it is possible to achieve richer effect with CSS<p>
  *
  * @author GedMarc
+ * @param <J>
+ *
  * @since Mar 1, 2015
  * @version 1.0
  * <p>
  *
  */
-public class Strong extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, Strong> implements PhraseChildren, ParagraphChildren, NoNewLineBeforeClosingTag,NoNewLineForRawText
+public class Strong<J extends Strong>
+        extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements PhraseChildren, ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new strong text
@@ -52,4 +56,13 @@ public class Strong extends Component<ParagraphChildren, NoAttributes, GlobalFea
         super(ComponentTypes.Strong);
         setText(text);
     }
+
+    /**
+     * Constructs a blank instance of strong
+     */
+    public Strong()
+    {
+        this(null);
+    }
+
 }

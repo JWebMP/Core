@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>HorizontalRule.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">HorizontalRule.java</span></div><h1>HorizontalRule.java</h1><pre class="source lang-java linenums">/*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -49,23 +49,28 @@ import za.co.mmagon.logger.LogFactory;
  * In XHTML, the &amp;lt;hr&amp;gt; tag must be properly closed.&lt;p&gt;
  * &lt;p&gt;
  * @author Marc Magon
+ * @param &lt;J&gt;
  */
-public class HorizontalRule extends Component&lt;NoChildren, NoAttributes, NoFeatures, NoEvents, HorizontalRule&gt; implements NoIDTag, NoClassAttribute
+public class HorizontalRule&lt;J extends HorizontalRule&gt;
+        extends Component&lt;NoChildren, NoAttributes, NoFeatures, NoEvents, J&gt;
+        implements NoIDTag, NoClassAttribute
 {
 
-<span class="fc" id="L56">    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger(&quot;HR&quot;);</span>
-<span class="fc" id="L57">    private static final HorizontalRule hr = new HorizontalRule();</span>
+<span class="fc" id="L59">    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger(&quot;HR&quot;);</span>
+<span class="fc" id="L60">    private static final HorizontalRule hr = new HorizontalRule();</span>
+    private static final long serialVersionUID = 1L;
 
-    private HorizontalRule()
+    public HorizontalRule()
     {
-<span class="fc" id="L61">        super(&quot;hr&quot;, ComponentTypes.HorizontalRule);</span>
-<span class="fc" id="L62">        setInlineClosingTag(true);</span>
-<span class="fc" id="L63">    }</span>
+<span class="fc" id="L65">        super(&quot;hr&quot;, ComponentTypes.HorizontalRule);</span>
+<span class="fc" id="L66">        setInlineClosingTag(true);</span>
+<span class="fc" id="L67">    }</span>
 
     @Override
+    @SuppressWarnings(&quot;&quot;)
     public boolean equals(Object obj)
     {
-<span class="nc" id="L68">        return false;</span>
+<span class="nc" id="L73">        return false;</span>
     }
 
     /**
@@ -75,7 +80,7 @@ public class HorizontalRule extends Component&lt;NoChildren, NoAttributes, NoFea
      */
     public static HorizontalRule getInstance()
     {
-<span class="fc" id="L78">        return hr;</span>
+<span class="fc" id="L83">        return hr;</span>
     }
 
     /**
@@ -85,7 +90,7 @@ public class HorizontalRule extends Component&lt;NoChildren, NoAttributes, NoFea
      */
     public static HorizontalRule getNewInstance()
     {
-<span class="nc" id="L88">        return new HorizontalRule();</span>
+<span class="nc" id="L93">        return new HorizontalRule();</span>
     }
 
     /**
@@ -98,25 +103,25 @@ public class HorizontalRule extends Component&lt;NoChildren, NoAttributes, NoFea
     @Override
     public void preConfigure()
     {
-<span class="fc" id="L101">        super.preConfigure();</span>
+<span class="fc" id="L106">        super.preConfigure();</span>
         try
         {
-<span class="pc bpc" id="L104" title="1 of 2 branches missed.">            if (getPage().getBrowser().getHtmlVersion().name().startsWith(&quot;X&quot;))</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">            if (getPage().getBrowser().getHtmlVersion().name().startsWith(&quot;X&quot;))</span>
             {
-<span class="nc" id="L106">                setInlineClosingTag(true);</span>
+<span class="nc" id="L111">                setInlineClosingTag(true);</span>
             }
         }
-<span class="nc" id="L109">        catch (Exception e)</span>
+<span class="nc" id="L114">        catch (Exception e)</span>
         {
-<span class="nc" id="L111">            log.log(Level.FINE, &quot;Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.&quot;, e);</span>
-<span class="fc" id="L112">        }</span>
-<span class="fc" id="L113">    }</span>
+<span class="nc" id="L116">            log.log(Level.FINE, &quot;Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.&quot;, e);</span>
+<span class="fc" id="L117">        }</span>
+<span class="fc" id="L118">    }</span>
 
     @Override
     public int hashCode()
     {
-<span class="nc" id="L118">        int hash = 7;</span>
-<span class="nc" id="L119">        return hash;</span>
+<span class="nc" id="L123">        int hash = 7;</span>
+<span class="nc" id="L124">        return hash;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

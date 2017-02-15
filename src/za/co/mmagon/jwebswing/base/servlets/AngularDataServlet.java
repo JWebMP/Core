@@ -1,5 +1,5 @@
-/*
- * Copyright (C) 2016 ged_m
+/* 
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -73,7 +73,7 @@ public class AngularDataServlet extends JWDefaultServlet
             LOG.log(Level.FINE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Security]-[Component ID Incorrect]");
         }
 
-        Page page = GuiceContext.Injector().getInstance(Page.class);
+        Page page = GuiceContext.inject().getInstance(Page.class);
 
         ComponentHierarchyBase triggerComponent = page.getComponentCache().get(componentId);
         ajaxCall.setComponent(triggerComponent);

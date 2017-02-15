@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 ged_m
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -58,7 +58,7 @@ public class AjaxResponse extends JavaScriptPart
      * All components that must be updated
      */
     @JsonIgnore
-    private ArrayList<ComponentBase> components;
+    private ArrayList<ComponentHierarchyBase> components;
 
     /**
      * Format as JSON
@@ -124,16 +124,6 @@ public class AjaxResponse extends JavaScriptPart
     {
         getComponents().add(component);
     }
-    
-    /**
-     * Adds a component to be returned to the client
-     *
-     * @param component
-     */
-    public void addComponent(ComponentBase component)
-    {
-        getComponents().add(component);
-    }
 
     /**
      * Adds a client reaction to be performed
@@ -181,7 +171,10 @@ public class AjaxResponse extends JavaScriptPart
         {
             if (ComponentDependancyBase.class.isAssignableFrom(next.getClass()))
             {
-                output.addAll(getJsReferences((ComponentDependancyBase) next));
+                getJsReferences((ComponentDependancyBase) next).stream().forEachOrdered(a ->
+                {
+                    output.add(a);
+                });
             }
         });
         return output;
@@ -202,8 +195,7 @@ public class AjaxResponse extends JavaScriptPart
         {
             if (ComponentHierarchyBase.class.isAssignableFrom(next.getClass()))
             {
-                getJsRenders((ComponentHierarchyBase) next).stream().filter(next1 -> (next1 != null && !next1.isEmpty())).forEach(next1
-                        ->
+                getJsRenders((ComponentHierarchyBase) next).stream().filter(next1 -> (next1 != null && !next1.isEmpty())).forEach(next1 ->
                 {
                     output.add(next1);
                 });
@@ -294,7 +286,7 @@ public class AjaxResponse extends JavaScriptPart
      *
      * @return
      */
-    private StringBuilder getCssRenders(ComponentStyleBase component)
+    public StringBuilder getCssRenders(ComponentStyleBase component)
     {
         StringBuilder cssRender = new StringBuilder();
         cssRender.append(component.renderCss(0).toString());
@@ -308,7 +300,7 @@ public class AjaxResponse extends JavaScriptPart
      *
      * @return
      */
-    private ArrayList<String> getJsRenders(ComponentHierarchyBase component)
+    public ArrayList<String> getJsRenders(ComponentHierarchyBase component)
     {
         ArrayList<String> jsRenders = new ArrayList<>();
         jsRenders.add(component.renderJavascriptAll().toString());
@@ -320,7 +312,7 @@ public class AjaxResponse extends JavaScriptPart
      *
      * @return
      */
-    private ArrayList<AjaxResponseReaction> getReactions()
+    public ArrayList<AjaxResponseReaction> getReactions()
     {
         if (reactions == null)
         {
@@ -334,7 +326,7 @@ public class AjaxResponse extends JavaScriptPart
      *
      * @return
      */
-    private ArrayList<ComponentBase> getComponents()
+    public ArrayList<ComponentHierarchyBase> getComponents()
     {
         if (components == null)
         {
@@ -392,9 +384,23 @@ public class AjaxResponse extends JavaScriptPart
      */
     public void clearVariable(AngularJsonVariable variable)
     {
-        variable.setVariableText(null);
-        variable.setVariable(null);
-        getAngularVariables().add(variable);
+        if (variable != null)
+        {
+            variable.setVariableText(null);
+            variable.setVariable(null);
+            getAngularVariables().add(variable);
+        }
+    }
+
+    /**
+     * Removes the registered variable from the client. Use to clean up memory or assigned variables on the client
+     *
+     * @param variableName
+     */
+    public void clearVariable(String variableName)
+    {
+        AngularJsonVariable var = new AngularJsonVariable(variableName, (JavaScriptPart) null);
+        getAngularVariables().add(var);
     }
 
     /**

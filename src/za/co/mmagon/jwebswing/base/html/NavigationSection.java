@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,7 +33,8 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &gt;nav&lt; element is intended only for major block of navigation links.<p>
  * <p>
- * Browsers, such as screen readers for disabled users, can use this element to determine whether to omit the initial rendering of this content. Browser Support<p><p>
+ * Browsers, such as screen readers for disabled users, can use this element to determine whether to omit the initial rendering of this content. Browser Support<p>
+ * <p>
  * <p>
  * The numbers in the table specify the first browser version that fully supports the element. Element<p>
  * &gt;nav&lt; 6.0 9.0 4.0 5.0 11.1 Differences Between HTML 4.01 and HTML5<p>
@@ -41,13 +42,18 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * The &gt;nav&lt; tag is new in HTML5.<p>
  * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since Feb 9, 2015
  * @version 1.0
  * <p>
  *
  */
-public class NavigationSection extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, NavigationSection>
+public class NavigationSection<J extends NavigationSection>
+        extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Construct a new navigation section

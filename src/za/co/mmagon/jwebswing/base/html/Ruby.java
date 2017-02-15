@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,20 +37,26 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * Element<p>
  * <p>
- * &lt;ruby&gt; 5.0 5.5 Not supported 5.0 15.0<p>
+ * &lt;ruby&gt; 5.0 5.5 Not supported 5.0 15.0
+ * <p>
  * <p>
  * Differences Between HTML 4.01 and HTML5<p>
  * <p>
  * The &lt;ruby&gt; tag is new in HTML5.<p>
  * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since Mar 1, 2015
  * @version 1.0
  * <p>
  *
  */
-public class Ruby extends Component<RubyChildren, NoAttributes, GlobalFeatures, GlobalEvents, Ruby>
+public class Ruby<J extends Ruby>
+        extends Component<RubyChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new Ruby process

@@ -21,8 +21,6 @@ import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.pace.PaceLoaderReferencePool;
-import za.co.mmagon.jwebswing.components.pace.preloadedThemes.PaceTheme;
 
 /**
  *
@@ -52,11 +50,7 @@ public class ComponentHierarchyBaseTest extends BaseTestClass
     {
         ComponentHierarchyBase chb = new ComponentHierarchyBase(ComponentTypes.Paragraph);
         ComponentHierarchyBase chb1 = new ComponentHierarchyBase(ComponentTypes.Paragraph);
-        chb1.addJavaScriptReference(PaceLoaderReferencePool.PaceLoader.getJavaScriptReference());
         ComponentHierarchyBase chb2 = new ComponentHierarchyBase(ComponentTypes.Paragraph);
-        chb2.addCssReference(PaceTheme.Barbershop.getCSSReference());
-        chb2.addCssReference(PaceTheme.Bounce.getCSSReference());
-        chb2.addCssReference(PaceTheme.CenterRader.getCSSReference());
         ComponentHierarchyBase chb3 = new ComponentHierarchyBase(ComponentTypes.Paragraph);
 
         chb.add(chb1);
@@ -79,4 +73,44 @@ public class ComponentHierarchyBaseTest extends BaseTestClass
         System.out.println(p);
         //System.out.println(b.getPage().toString(true));
     }
+
+    /*
+     * @Test public void testFindParent() { Body b = getPage().getBody(); BSForm form = new BSForm(); b.add(form);
+     *
+     * Body compFound = form.findParent(Body.class); System.out.println(" Found Parent? : " + (compFound != null) + (compFound != null ? " " + compFound.getClass() : ""));
+     *
+     * Div d1 = new Div(); Div d2 = new Div(); Div d3 = new Div(); Div d4 = new Div(); Div d5 = new Div(); form.add(d1); d1.add(d2); d2.add(d3); d3.add(d4); d4.add(d5);
+     *
+     * BSForm formFound = (BSForm) d5.findParent(BSForm.class); System.out.println(" Found Parent? : " + (formFound != null) + (formFound != null ? " " + formFound.getClass() : ""));
+     * System.out.println(formFound.toString(true));
+     *
+     * }
+     */
+
+    @Test
+    public void testClasses()
+    {
+        ComponentHierarchyBase tag = new ComponentHierarchyBase(ComponentTypes.Area);
+        tag.setID("testTag");
+        tag.addClass("This is a class");
+        tag.addClass("KKKKKKK");
+        System.out.println(tag);
+        System.out.println(tag.toString(true));
+        Assert.assertEquals("<area class=\"This is a class KKKKKKK\" id=\"testTag\">\n"
+                + "</area>", tag.toString(true));
+    }
+
+    @Test
+    public void testClassesTiny()
+    {
+        ComponentHierarchyBase tag = new ComponentHierarchyBase(ComponentTypes.Area);
+        tag.setID("testTag");
+        tag.setTiny(true);
+        tag.addClass("Class1");
+        tag.addClass("Class2");
+        System.out.println(tag);
+        System.out.println(tag.toString(true));
+        Assert.assertEquals("<area class=\"Class1 Class2\" id=\"testTag\"></area>", tag.toString(true));
+    }
+
 }

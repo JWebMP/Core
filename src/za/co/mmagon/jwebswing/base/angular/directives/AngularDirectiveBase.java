@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,7 +33,6 @@ public abstract class AngularDirectiveBase extends AngularReferenceBase
      * Constructs a directive with this name that always sorts default
      *
      * @param directiveName This modules name
-     * @param angular       The angular feature attached
      */
     public AngularDirectiveBase(String directiveName)
     {

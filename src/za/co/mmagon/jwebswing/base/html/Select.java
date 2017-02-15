@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.SelectChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqueryui.selectmenu.JQUISelectMenuChildren;
 
 /**
  *
@@ -48,13 +47,16 @@ import za.co.mmagon.jwebswing.components.jqueryui.selectmenu.JQUISelectMenuChild
  * HTML5 has added some new attributes.<p>
  * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since Mar 1, 2015
  * @version 1.0
  * <p>
  *
  */
-public class Select extends Component<SelectChildren, NoAttributes, GlobalFeatures, GlobalEvents, Select>
-        implements GlobalChildren, JQUISelectMenuChildren
+public class Select<J extends Select>
+        extends Component<SelectChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements GlobalChildren
 {
 
     private static final long serialVersionUID = 1L;

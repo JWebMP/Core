@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BlockQuote.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">BlockQuote.java</span></div><h1>BlockQuote.java</h1><pre class="source lang-java linenums">/*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,6 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.BlockQuoteAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
@@ -27,24 +26,19 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 /**
  * Definition and Usage
  * &lt;p&gt;
- * The &amp;lt;blockquote&amp;gt; tag specifies a section that is quoted from another
- * source.
+ * The &amp;lt;blockquote&amp;gt; tag specifies a section that is quoted from another source.
  * &lt;p&gt;
- * Browsers usually indent &amp;lt;blockquote&amp;gt; elements. Browser Support Element
- * &amp;lt;blockquote&amp;gt; Yes Yes Yes Yes Yes
+ * Browsers usually indent &amp;lt;blockquote&amp;gt; elements. Browser Support Element &amp;lt;blockquote&amp;gt; Yes Yes Yes Yes Yes
  * &lt;p&gt;
  * Tips and Notes
  * &lt;p&gt;
- * Tip: Use &amp;lt;q&amp;gt; for inline (short) quotations. Differences Between HTML
- * 4.01 and HTML5
+ * Tip: Use &amp;lt;q&amp;gt; for inline (short) quotations. Differences Between HTML 4.01 and HTML5
  * &lt;p&gt;
  * In HTML 4.01, the &amp;lt;blockquote&amp;gt; tag defines a long quotation.
  * &lt;p&gt;
- * In HTML5, the &amp;lt;blockquote&amp;gt; tag specifies a section that is quoted from
- * another source. Differences Between HTML and XHTML
+ * In HTML5, the &amp;lt;blockquote&amp;gt; tag specifies a section that is quoted from another source. Differences Between HTML and XHTML
  * &lt;p&gt;
- * Note: To validate a &amp;lt;blockquote&amp;gt; element as XHTML, it must contain only
- * other block-level elements, like this:
+ * Note: To validate a &amp;lt;blockquote&amp;gt; element as XHTML, it must contain only other block-level elements, like this:
  * &lt;p&gt;
  * &amp;lt;blockquote&amp;gt;
  * &lt;p&gt;
@@ -53,8 +47,11 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * &amp;lt;/blockquote&amp;gt;
  * &lt;p&gt;
  * @author GedMarc
+ * @param &lt;J&gt;
  */
-public class BlockQuote extends Component&lt;ParagraphChildren, BlockQuoteAttributes, GlobalFeatures, GlobalEvents, BlockQuote&gt; implements GlobalChildren
+public class BlockQuote&lt;J extends BlockQuote&gt;
+        extends Component&lt;ParagraphChildren, BlockQuoteAttributes, GlobalFeatures, GlobalEvents, J&gt;
+
 {
 
     private static final long serialVersionUID = 1L;
@@ -64,22 +61,33 @@ public class BlockQuote extends Component&lt;ParagraphChildren, BlockQuoteAttrib
      */
     public BlockQuote()
     {
-<span class="fc" id="L67">        super(ComponentTypes.BlockQuotes);</span>
-<span class="fc" id="L68">    }</span>
-    
+<span class="fc" id="L64">        super(ComponentTypes.BlockQuotes);</span>
+<span class="fc" id="L65">    }</span>
+
+    /**
+     * Constructs a new block quote with the given text
+     *
+     * @param text
+     */
     public BlockQuote(String text)
     {
-<span class="nc" id="L72">        this();</span>
-<span class="nc" id="L73">        setText(text);</span>
-<span class="nc" id="L74">    }</span>
+<span class="nc" id="L74">        this();</span>
+<span class="nc" id="L75">        setText(text);</span>
+<span class="nc" id="L76">    }</span>
 
+    /**
+     * Constructs a new block quote with the given text and footer
+     *
+     * @param text
+     * @param footer
+     */
     public BlockQuote(String text, String footer)
     {
-<span class="nc" id="L78">        this();</span>
-<span class="nc" id="L79">        add(text);</span>
-<span class="nc" id="L80">        Div d = new Div();</span>
-<span class="nc" id="L81">        d.setTag(&quot;footer&quot;);</span>
-<span class="nc" id="L82">        d.setText(footer);</span>
-<span class="nc" id="L83">    }</span>
+<span class="nc" id="L86">        this();</span>
+<span class="nc" id="L87">        add(text);</span>
+<span class="nc" id="L88">        Div d = new Div();</span>
+<span class="nc" id="L89">        d.setTag(&quot;footer&quot;);</span>
+<span class="nc" id="L90">        d.setText(footer);</span>
+<span class="nc" id="L91">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

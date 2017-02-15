@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,9 +18,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.FigureChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
@@ -29,24 +27,30 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;figure&gt; tag specifies self-contained content, like illustrations, diagrams, photos, code listings, etc.
  * <p>
- * While the content of the &lt;figure&gt; element is related to the main flow, its position is independent of the main flow, and if removed it should not affect the flow of the document. Browser Support
+ * While the content of the &lt;figure&gt; element is related to the main flow, its position is independent of the main flow, and if removed it should not affect the flow of the document. Browser
+ * Support
  * <p>
- * The numbers in the table specify the first browser version that fully supports the element. Element
- * &lt;figure&gt; 6.0 9.0 4.0 5.0 11.1
+ * The numbers in the table specify the first browser version that fully supports the element. Element &lt;figure&gt; 6.0 9.0 4.0 5.0 11.1
  * <p>
  * Differences Between HTML 4.01 and HTML5
  * <p>
  * The &lt;figure&gt; tag is new in HTML5.
  * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since 2014/12/21
  */
-public class Figure extends Component<FigureChildren, NoAttributes, GlobalFeatures, GlobalEvents, Figure>  implements NoIDTag
+public class Figure<J extends Figure>
+        extends Component<FigureChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements NoIDTag
 {
+
+    private static final long serialVersionUID = 1L;
 
     public Figure()
     {
         super(ComponentTypes.Figure);
     }
-    
+
 }

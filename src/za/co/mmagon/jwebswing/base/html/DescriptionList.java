@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,9 +18,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.DescriptionListChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -28,9 +26,15 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 /**
  *
  * @author GedMarc
+ * @param <J>
  */
-public class DescriptionList extends Component<DescriptionListChildren, NoAttributes, NoFeatures, NoEvents, DescriptionList> implements GlobalChildren,NoIDTag
+public class DescriptionList<J extends DescriptionList>
+        extends Component<DescriptionListChildren, NoAttributes, NoFeatures, NoEvents, J>
+        implements GlobalChildren, NoIDTag
 {
+
+    private static final long serialVersionUID = 1L;
+
     /**
      * Construct a new Definition List
      */

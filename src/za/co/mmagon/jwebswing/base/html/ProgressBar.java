@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,13 +42,18 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * To represent a gauge, use the meter tag instead.<p>
  * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since Mar 1, 2015
  * @version 1.0
  * <p>
  *
  */
-public class ProgressBar extends Component<NoChildren, ProgressBarAttributes, GlobalFeatures, GlobalEvents, ProgressBar>
+public class ProgressBar<J extends ProgressBar>
+        extends Component<NoChildren, ProgressBarAttributes, GlobalFeatures, GlobalEvents, J>
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new progress bar

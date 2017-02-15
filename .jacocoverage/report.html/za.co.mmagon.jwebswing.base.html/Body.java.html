@@ -1,25 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Body.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">Body.java</span></div><h1>Body.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Body.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">Body.java</span></div><h1>Body.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.base.html;
 
-import za.co.mmagon.logger.LogFactory;
-import java.util.logging.*;
-import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.base.*;
-import za.co.mmagon.jwebswing.base.angular.*;
-import za.co.mmagon.jwebswing.base.client.*;
-import za.co.mmagon.jwebswing.base.html.attributes.*;
+import java.util.logging.Logger;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.base.angular.AngularReferencePool;
+import za.co.mmagon.jwebswing.base.client.BrowserGroups;
+import za.co.mmagon.jwebswing.base.html.attributes.BodyAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
-import za.co.mmagon.jwebswing.base.references.*;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
-import za.co.mmagon.jwebswing.base.servlets.interfaces.*;
-import za.co.mmagon.jwebswing.components.bootstrap.*;
-import za.co.mmagon.jwebswing.components.bootstrap.dialog.*;
-import za.co.mmagon.jwebswing.components.modernizr.*;
-import za.co.mmagon.jwebswing.components.pace.*;
-import za.co.mmagon.jwebswing.components.pace.preloadedThemes.*;
-import za.co.mmagon.jwebswing.components.pools.jquery.*;
-import za.co.mmagon.jwebswing.components.pools.jqueryui.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.components.modernizr.ModernizrFeature;
+import za.co.mmagon.jwebswing.components.pools.jquery.JQueryReferencePool;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Browser Support&lt;p&gt;
@@ -43,34 +52,24 @@ import za.co.mmagon.jwebswing.components.pools.jqueryui.*;
  * All layout attributes is deprecated in HTML 4.01
  * .&lt;p&gt;
  * &lt;p&gt;
- * @param &lt;L&gt; A loader type
+ * @param &lt;C&gt;
  * @param &lt;F&gt; Features Base
+ * @param &lt;J&gt;
  *
  * @since 2013/11/20
  * @author Marc Magon
  * @version 1.0
  */
-public class Body&lt;L extends ComponentFeatureBase &amp; Loader &amp; GlobalChildren, F extends BodyFeatures&gt;
-        extends Component&lt;GlobalChildren, BodyAttributes, F, NoEvents, Body&gt;
-        implements PageChildren, HtmlChildren, LayoutHandler, ContainerType, IBody&lt;L&gt;
+public class Body&lt;C extends GlobalChildren, F extends BodyFeatures, J extends Body&gt;
+        extends Component&lt;C, BodyAttributes, F, NoEvents, J&gt;
+        implements PageChildren, HtmlChildren, LayoutHandler, ContainerType, IBody
 {
 
-<span class="fc" id="L58">    private static final Logger LOG = LogFactory.getInstance().getLogger(&quot;BODY&quot;);</span>
+<span class="fc" id="L68">    private static final Logger LOG = LogFactory.getInstance().getLogger(&quot;BODY&quot;);</span>
 
     private static final long serialVersionUID = 1L;
 
-    private L loader;
-
     private boolean bootstrapConfigured;
-
-    private boolean bootstrap4;
-
-<span class="fc" id="L68">    private boolean jquery3 = true;</span>
-
-    /**
-     * The object for the pace loader
-     */
-    private PaceLoader pace;
 
     /**
      * Constructs a new Body with the given Page input
@@ -79,10 +78,10 @@ public class Body&lt;L extends ComponentFeatureBase &amp; Loader &amp; GlobalChi
      */
     public Body(Page page)
     {
-<span class="fc" id="L82">        super(ComponentTypes.Body);</span>
-<span class="fc" id="L83">        setPage(page);</span>
-<span class="fc" id="L84">        setID(&quot;body&quot;);</span>
-<span class="fc" id="L85">    }</span>
+<span class="fc" id="L81">        super(ComponentTypes.Body);</span>
+<span class="fc" id="L82">        setPage(page);</span>
+<span class="fc" id="L83">        setID(&quot;body&quot;);</span>
+<span class="fc" id="L84">    }</span>
 
     /**
      * Returns the component in its smallest form
@@ -91,13 +90,8 @@ public class Body&lt;L extends ComponentFeatureBase &amp; Loader &amp; GlobalChi
      */
     public IBody asMe()
     {
-<span class="nc" id="L94">        return this;</span>
+<span class="nc" id="L93">        return this;</span>
     }
-    
-    public void setLayout(LayoutHandler layout)
-    {
-        
-<span class="nc" id="L100">    }</span>
 
     /**
      * Will configure for Angular 1
@@ -105,196 +99,77 @@ public class Body&lt;L extends ComponentFeatureBase &amp; Loader &amp; GlobalChi
     @Override
     public void configureAngular()
     {
-<span class="pc bpc" id="L108" title="1 of 2 branches missed.">        if (getPage().getOptions().isAngularEnabled())</span>
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">        if (getPage().getOptions().isAngularEnabled())</span>
         {
             //getPage().getOptions().setPaceEnabled(true);
             //configurePace();
-<span class="fc" id="L112">            getPage().getOptions().setjQueryEnabled(true);</span>
-<span class="fc" id="L113">            configureJQuery();</span>
+<span class="fc" id="L106">            getPage().getOptions().setjQueryEnabled(true);</span>
+<span class="fc" id="L107">            configureJQuery();</span>
             //getPage().getOptions().setBootstrapEnabled(true);
             //configureBootstrap();
 
-<span class="fc" id="L117">            getJavascriptReferences().add(AngularReferencePool.Angular1.getJavaScriptReference());</span>
+<span class="fc" id="L111">            getJavascriptReferences().add(AngularReferencePool.Angular1.getJavaScriptReference());</span>
         }
-<span class="fc" id="L119">    }</span>
-
-    /**
-     *
-     * The 3 meta tags *must* come first in the head; any other head content must come *after* these tags
-     * &lt;p&gt;
-     * HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries WARNING: Respond.js doesn't work if you view the page via file://
-     */
-    @Override
-    public void configureBootstrap()
-    {
-<span class="fc bfc" id="L130" title="All 2 branches covered.">        if (isBootstrapConfigured())</span>
-        {
-<span class="fc" id="L132">            return;</span>
-        }
-        else
-        {
-<span class="fc" id="L136">            setBootstrapConfigured(true);</span>
-        }
-<span class="fc" id="L138">        getPage().getOptions().setjQueryEnabled(true);</span>
-<span class="fc" id="L139">        configureJQuery();</span>
-
-<span class="fc" id="L141">        Meta charMeta = new Meta();</span>
-<span class="fc" id="L142">        charMeta.addAttribute(MetaAttributes.Charset, &quot;utf-16&quot;);</span>
-
-<span class="fc" id="L144">        Meta viewportMeta = new Meta();</span>
-<span class="fc" id="L145">        viewportMeta.addAttribute(GlobalAttributes.Name, &quot;viewport&quot;);</span>
-<span class="pc bpc" id="L146" title="1 of 2 branches missed.">        if (isBootstrap4())</span>
-        {
-<span class="nc" id="L148">            viewportMeta.addAttribute(MetaAttributes.Content, &quot;width=device-width, initial-scale=1, shrink-to-fit=no&quot;);</span>
-        }
-        else
-        {
-<span class="fc" id="L152">            viewportMeta.addAttribute(MetaAttributes.Content, &quot;width=device-width, initial-scale=1&quot;);</span>
-        }
-
-        //created again for positioning, not sorted yet TODO
-<span class="fc" id="L156">        Meta compatMeta = new Meta();</span>
-<span class="fc" id="L157">        compatMeta.addAttribute(MetaAttributes.Http_Equiv, &quot;X-UA-Compatible&quot;);</span>
-<span class="fc" id="L158">        compatMeta.addAttribute(MetaAttributes.Content, &quot;IE=Edge&quot;);</span>
-
-<span class="fc" id="L160">        getPage().getHead().add(charMeta);</span>
-<span class="fc" id="L161">        getPage().getHead().add(compatMeta);</span>
-<span class="fc" id="L162">        getPage().getHead().add(viewportMeta);</span>
-
-<span class="pc bpc" id="L164" title="1 of 2 branches missed.">        if (getPage().getOptions().isBootstrapEnabled())</span>
-        {
-<span class="pc bpc" id="L166" title="1 of 2 branches missed.">            if (isBootstrap4())</span>
-            {
-<span class="nc" id="L168">                addJavaScriptReference(BootstrapReferencePool.Bootstrap4TetherReference.getJavaScriptReference());</span>
-<span class="nc" id="L169">                addJavaScriptReference(BootstrapReferencePool.Bootstrap4CoreReference.getJavaScriptReference());</span>
-<span class="nc" id="L170">                addCssReference(BootstrapReferencePool.Bootstrap4CoreReference.getCssReference());</span>
-            }
-            else
-            {
-<span class="fc" id="L174">                addJavaScriptReference(BootstrapReferencePool.BootstrapCoreReference.getJavaScriptReference());</span>
-<span class="fc" id="L175">                addCssReference(BootstrapReferencePool.BootstrapCoreReference.getCssReference());</span>
-            }
-            //always add the dialog for server responses
-<span class="fc" id="L178">            addFeature(new BootstrapDialogFeature(this));</span>
-        }
-
-<span class="pc bpc" id="L181" title="1 of 2 branches missed.">        if (getPage().getBrowser().compareTo(Browsers.InternetExplorer8) &lt; 1)</span>
-        {
-<span class="nc" id="L183">            addJavaScriptReference(new JavascriptReference(&quot;html5shim&quot;, 1.0, &quot;https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js&quot;, RequirementsPriority.Fourth));</span>
-<span class="nc" id="L184">            addJavaScriptReference(new JavascriptReference(&quot;html5shimrespond&quot;, 1.0, &quot;https://oss.maxcdn.com/respond/1.4.2/respond.min.js&quot;, RequirementsPriority.Fourth));</span>
-        }
-
-<span class="fc" id="L187">    }</span>
-
-    @Override
-    public void configureJQueryUI()
-    {
-<span class="fc" id="L192">        getPage().getOptions().setjQueryEnabled(true);</span>
-<span class="fc" id="L193">        configureJQuery();</span>
-
-<span class="pc bpc" id="L195" title="1 of 2 branches missed.">        if (getPage().getOptions().isjQueryUIEnabled())</span>
-        {
-<span class="fc" id="L197">            addJavaScriptReference(JQueryUIReferencePool.Core.getJavaScriptReference());</span>
-<span class="fc" id="L198">            addCssReference(JQueryUIReferencePool.Core.getCssReference());</span>
-
-<span class="fc" id="L200">            addJavaScriptReference(JQueryUIReferencePool.Widget.getJavaScriptReference());</span>
-<span class="fc" id="L201">            addCssReference(JQueryUIReferencePool.Widget.getCssReference());</span>
-
-<span class="fc" id="L203">            addJavaScriptReference(JQueryUIReferencePool.Mouse.getJavaScriptReference());</span>
-        }
-<span class="fc" id="L205">    }</span>
-
-    /**
-     * Configures pace for use
-     */
-    @Override
-    public void configurePace()
-    {
-
-<span class="pc bpc" id="L214" title="1 of 2 branches missed.">        if (getPage().getOptions().isPaceEnabled())</span>
-        {
-<span class="fc" id="L216">            removeFeature((F) getLoader());</span>
-<span class="fc" id="L217">            pace = new PaceLoader(PaceTheme.Flash);</span>
-<span class="fc" id="L218">            setLoader((L) pace);</span>
-<span class="fc" id="L219">            addFeature(getLoader());</span>
-        }
-<span class="fc" id="L221">    }</span>
-
-    /**
-     * Configures pace for use
-     *
-     * @param pace
-     */
-    @Override
-    public void configurePace(PaceLoader pace)
-    {
-
-<span class="nc bnc" id="L232" title="All 2 branches missed.">        if (getPage().getOptions().isPaceEnabled())</span>
-        {
-<span class="nc" id="L234">            removeFeature((F) getLoader());</span>
-<span class="nc" id="L235">            setLoader((L) pace);</span>
-<span class="nc" id="L236">            addFeature(getLoader());</span>
-        }
-<span class="nc" id="L238">    }</span>
+<span class="fc" id="L113">    }</span>
 
     @Override
     public void configureModernizr()
     {
-<span class="nc bnc" id="L243" title="All 2 branches missed.">        if (getPage().getOptions().isModernizrEnabled())</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        if (getPage().getOptions().isModernizrEnabled())</span>
         {
-<span class="nc" id="L245">            addFeature(new ModernizrFeature(this));</span>
+<span class="nc" id="L120">            addFeature(new ModernizrFeature(this));</span>
         }
-<span class="nc" id="L247">    }</span>
+<span class="nc" id="L122">    }</span>
 
     /**
      * Adds JQuery Accordingly
      */
     public void configureJQuery()
     {
-<span class="pc bpc" id="L254" title="1 of 2 branches missed.">        if (getPage() != null)</span>
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">        if (getPage() != null)</span>
         {
-<span class="pc bpc" id="L256" title="1 of 2 branches missed.">            if (getPage().getOptions().isjQueryEnabled())</span>
+<span class="pc bpc" id="L131" title="1 of 2 branches missed.">            if (getPage().getOptions().isjQueryEnabled())</span>
             {
-<span class="pc bpc" id="L258" title="1 of 2 branches missed.">                if (getPage().getBrowser() != null)</span>
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">                if (getPage().getBrowser() != null)</span>
                 {
-<span class="pc bpc" id="L260" title="1 of 2 branches missed.">                    if (getPage().getBrowser().getBrowserGroup() == BrowserGroups.InternetExplorer)</span>
+<span class="pc bpc" id="L135" title="1 of 2 branches missed.">                    if (getPage().getBrowser().getBrowserGroup() == BrowserGroups.InternetExplorer)</span>
                     {
-<span class="nc bnc" id="L262" title="All 2 branches missed.">                        if (getPage().getBrowser().getBrowserVersion() &lt; 9)</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">                        if (getPage().getBrowser().getBrowserVersion() &lt; 9)</span>
                         {
-<span class="nc" id="L264">                            removeJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());</span>
-<span class="nc" id="L265">                            removeJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());</span>
-<span class="nc" id="L266">                            removeJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());</span>
-<span class="nc" id="L267">                            addJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());</span>
+<span class="nc" id="L139">                            removeJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());</span>
+<span class="nc" id="L140">                            removeJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());</span>
+<span class="nc" id="L141">                            removeJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());</span>
+<span class="nc" id="L142">                            addJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());</span>
                         }
                     }
                     else
                     {
-<span class="fc" id="L272">                        removeJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());</span>
-<span class="pc bpc" id="L273" title="1 of 2 branches missed.">                        if (isJquery3())</span>
+<span class="fc" id="L147">                        removeJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());</span>
+<span class="pc bpc" id="L148" title="1 of 2 branches missed.">                        if (getPage().getOptions().isJquery3())</span>
                         {
-<span class="fc" id="L275">                            addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());</span>
-<span class="fc" id="L276">                            addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());</span>
+<span class="fc" id="L150">                            addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());</span>
+<span class="fc" id="L151">                            addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());</span>
                         }
                         else
                         {
-<span class="nc" id="L280">                            addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());</span>
+<span class="nc" id="L155">                            addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());</span>
                             //addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
                         }
                     }
                 }
-<span class="nc bnc" id="L285" title="All 2 branches missed.">                else if (isJquery3())</span>
+<span class="nc bnc" id="L160" title="All 2 branches missed.">                else if (getPage().getOptions().isJquery3())</span>
                 {
-<span class="nc" id="L287">                    addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());</span>
-<span class="nc" id="L288">                    addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());</span>
+<span class="nc" id="L162">                    addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());</span>
+<span class="nc" id="L163">                    addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());</span>
                 }
                 else
                 {
-<span class="nc" id="L292">                    addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());</span>
+<span class="nc" id="L167">                    addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());</span>
                     //addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
                 }
             }
         }
-<span class="fc" id="L297">    }</span>
+<span class="fc" id="L172">    }</span>
 
     /*
      * @Override public void preConfigure() { super.preConfigure(); configurePace(); configureJQuery(); }
@@ -302,30 +177,8 @@ public class Body&lt;L extends ComponentFeatureBase &amp; Loader &amp; GlobalChi
     @Override
     protected StringBuilder renderHTML(int tabCount)
     {
-<span class="fc" id="L305">        return super.renderHTML(tabCount);</span>
+<span class="fc" id="L180">        return super.renderHTML(tabCount);</span>
     }
-
-    /**
-     * Returns this Body AJAX JQXLoader
-     *
-     * @return The loader associated with this Body object
-     */
-    @Override
-    public L getLoader()
-    {
-<span class="fc" id="L316">        return loader;</span>
-    }
-
-    /**
-     * Sets this bodies loader
-     * &lt;p&gt;
-     * @param loader The loader to set
-     */
-    @Override
-    public void setLoader(L loader)
-    {
-<span class="fc" id="L327">        this.loader = loader;</span>
-<span class="fc" id="L328">    }</span>
 
     /**
      * Returns if bootstrap is configured
@@ -335,7 +188,7 @@ public class Body&lt;L extends ComponentFeatureBase &amp; Loader &amp; GlobalChi
     @Override
     public boolean isBootstrapConfigured()
     {
-<span class="fc" id="L338">        return bootstrapConfigured;</span>
+<span class="fc" id="L191">        return bootstrapConfigured;</span>
     }
 
     /**
@@ -346,72 +199,7 @@ public class Body&lt;L extends ComponentFeatureBase &amp; Loader &amp; GlobalChi
     @Override
     public void setBootstrapConfigured(boolean bootstrapConfigured)
     {
-<span class="fc" id="L349">        this.bootstrapConfigured = bootstrapConfigured;</span>
-<span class="fc" id="L350">    }</span>
-
-    /**
-     * Gets the pace loader associated with this application
-     *
-     * @return
-     */
-    @Override
-    public PaceLoader getPace()
-    {
-<span class="nc" id="L360">        return pace;</span>
-    }
-
-    /**
-     * Sets the pace loader for this application
-     *
-     * @param pace The PaceLoader
-     */
-    @Override
-    public void setPace(PaceLoader pace)
-    {
-<span class="nc" id="L371">        this.pace = pace;</span>
-<span class="nc" id="L372">    }</span>
-
-    /*
-     * If we are using bootstrap 4
-     */
-    @Override
-    public boolean isBootstrap4()
-    {
-<span class="fc" id="L380">        return bootstrap4;</span>
-    }
-
-    /**
-     * If we are using bootstrap 3
-     *
-     * @param bootstrap4
-     */
-    @Override
-    public void setBootstrap4(boolean bootstrap4)
-    {
-<span class="nc" id="L391">        this.bootstrap4 = bootstrap4;</span>
-<span class="nc" id="L392">    }</span>
-
-    /**
-     * Sets if this page must use JQuery 3 or 2
-     *
-     * @return
-     */
-    @Override
-    public boolean isJquery3()
-    {
-<span class="fc" id="L402">        return jquery3;</span>
-    }
-
-    /**
-     * Sets if this page must use JQuery 3 or 2
-     *
-     * @param jquery3
-     */
-    @Override
-    public void setJquery3(boolean jquery3)
-    {
-<span class="nc" id="L413">        this.jquery3 = jquery3;</span>
-<span class="nc" id="L414">    }</span>
-
+<span class="nc" id="L202">        this.bootstrapConfigured = bootstrapConfigured;</span>
+<span class="nc" id="L203">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,13 +35,18 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * The &lt;video&gt; tag is new in HTML5.<p>
  * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since Mar 1, 2015
  * @version 1.0
  * <p>
  *
  */
-public class Video extends Component<VideoChildren, VideoAttributes, GlobalFeatures, GlobalEvents, Video>
+public class Video<J extends Video>
+        extends Component<VideoChildren, VideoAttributes, GlobalFeatures, GlobalEvents, J>
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      *

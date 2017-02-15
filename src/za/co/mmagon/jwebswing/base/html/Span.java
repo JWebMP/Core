@@ -1,19 +1,27 @@
+/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
-import za.co.mmagon.jwebswing.base.html.interfaces.ContainerType;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.AreaChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.MapChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.bootstrap.progressbar.bar.BSProgressBarDisplayChildren;
-import za.co.mmagon.jwebswing.components.jqueryui.dialog.JQUIDialogChildren;
 
 /**
  * Definition and Usage<p>
@@ -40,11 +48,13 @@ import za.co.mmagon.jwebswing.components.jqueryui.dialog.JQUIDialogChildren;
  * @param <A> The attributes allowed
  * @param <J> The component itself for cloning
  */
-public class Span<C extends GlobalChildren, A extends Enum & AttributeDefinitions, J extends Component>
+public class Span<C extends GlobalChildren, A extends Enum & AttributeDefinitions, J extends Span>
         extends Component<C, A, GlobalFeatures, GlobalEvents, J>
-        implements BodyChildren, MapChildren, AreaChildren, ContainerType, JQUIDialogChildren, ParagraphChildren,BSProgressBarDisplayChildren,
-                                                                                                                 ListItemChildren
+        implements BodyChildren, MapChildren, AreaChildren, ContainerType, ParagraphChildren,
+        ListItemChildren
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new instance of a Span item
@@ -54,6 +64,11 @@ public class Span<C extends GlobalChildren, A extends Enum & AttributeDefinition
         super(ComponentTypes.Span);
     }
 
+    /**
+     * Constructs a new span with the given text
+     *
+     * @param text
+     */
     public Span(String text)
     {
         super(ComponentTypes.Span);

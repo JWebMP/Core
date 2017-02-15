@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,43 +14,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package za.co.mmagon.jwebswing.base.interfaces;
 
 import java.util.List;
 import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
-import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemeBlocks;
-import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemes;
-import za.co.mmagon.jwebswing.components.jqxwidgets.themes.JQXWidgetThemes;
 import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
 
 /**
  *
  * @author GedMarc
  * @param <J> This Class
+ *
  * @since Sep 26, 2016
- * 
+ *
  */
-public interface IComponentThemeBase<J extends ComponentBase> 
+public interface IComponentThemeBase<J extends ComponentBase>
 {
-
-    /**
-     * Set the theme applied to this component
-     * <p>
-     * @param theme The JQuery UI theme to apply to the component
-     * @return This Class
-     */
-    J addTheme(JQUIThemes theme);
-
-    /**
-     * Set the theme applied to this component
-     * <p>
-     * @param theme The JQuery UI theme to apply to the component
-     * @return This Class
-     */
-    J addTheme(Theme theme);
 
     /**
      * Adds in the JavaScript References for the Features
@@ -73,19 +54,4 @@ public interface IComponentThemeBase<J extends ComponentBase>
      */
     List<Theme> getThemes();
 
-    /**
-     * Adds a class name to the class list
-     * <p>
-     * @param blockName The class name to add
-     * <p>
-     * @return True if it was added, false if it already existed
-     */
-    boolean addClass(JQUIThemeBlocks blockName);
-
-/**
-     * Set the theme applied to this component
-     * <p>
-     * @param theme The JQuery UI theme to apply to the component
-     */
-    J addTheme(JQXWidgetThemes theme);    
 }

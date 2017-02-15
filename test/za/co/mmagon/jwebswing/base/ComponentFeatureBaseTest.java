@@ -20,7 +20,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 
 /**
  *
@@ -54,18 +53,6 @@ public class ComponentFeatureBaseTest extends BaseTestClass
                 + "    \"configured\" : true,\n"
                 + "    \"initialized\" : true,\n"
                 + "    \"touched\" : false,\n"
-                + "    \"cssReferences\" : [ {\n"
-                + "      \"cordovaRequired\" : false,\n"
-                + "      \"name\" : \"CSSPaceBarberShop\",\n"
-                + "      \"version\" : 1.02,\n"
-                + "      \"reference\" : \"bower_components/PACE/themes/red/pace-theme-barber-shop.css\"\n"
-                + "    } ],\n"
-                + "    \"javascriptReferences\" : [ {\n"
-                + "      \"cordovaRequired\" : false,\n"
-                + "      \"name\" : \"PACE\",\n"
-                + "      \"version\" : 1.02,\n"
-                + "      \"reference\" : \"bower_components/PACE/pace.js\"\n"
-                + "    } ],\n"
                 + "    \"sortOrder\" : 1000,\n"
                 + "    \"name\" : \"Test Feature\",\n"
                 + "    \"renderAfterLoad\" : false,\n"
@@ -78,20 +65,4 @@ public class ComponentFeatureBaseTest extends BaseTestClass
                 + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentFeatureBase\"\n"
                 + "}", cfb.toString());
     }
-
-    @Test
-    public void testComponentWithFeature()
-    {
-        ComponentFeatureBase cfb = new ComponentFeatureBase(ComponentTypes.Abbreviation);
-        cfb.getFeatures().add(getFeature());
-        System.out.println(cfb.getJavascriptReferencesAll());
-        Assert.assertEquals("[bower_components/PACE/pace.js]", cfb.getJavascriptReferencesAll().toString());
-        System.out.println(cfb.getCssReferencesAll());
-        Assert.assertEquals("[bower_components/PACE/themes/red/pace-theme-barber-shop.css]", cfb.getCssReferencesAll().toString());
-        System.out.println(cfb.getJavascriptReferencesAll(RequirementsPriority.First));
-        Assert.assertEquals("[bower_components/PACE/pace.js]", cfb.getJavascriptReferencesAll(RequirementsPriority.Top_Shelf).toString());
-        System.out.println(cfb.getJavascriptReferencesAll(RequirementsPriority.Second));
-        Assert.assertEquals("[]", cfb.getJavascriptReferencesAll(RequirementsPriority.Second).toString());
-    }
-
 }

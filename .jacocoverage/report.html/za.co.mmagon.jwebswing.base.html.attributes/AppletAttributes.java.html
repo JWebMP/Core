@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AppletAttributes.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html.attributes</a> &gt; <span class="el_source">AppletAttributes.java</span></div><h1>AppletAttributes.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html.attributes;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AppletAttributes.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html.attributes</a> &gt; <span class="el_source">AppletAttributes.java</span></div><h1>AppletAttributes.java</h1><pre class="source lang-java linenums">/* 
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.base.html.attributes;
 
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 
@@ -8,53 +24,59 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  *
  *
  */
-<span class="pc" id="L11">public enum AppletAttributes implements AttributeDefinitions</span>
+<span class="pc" id="L27">public enum AppletAttributes implements AttributeDefinitions</span>
 {
     /**
      * Alignment Type
      */
-<span class="fc" id="L16">    Align,</span>
+<span class="fc" id="L32">    Align,</span>
     /**
      * Specifies the file name of a Java applet
      */
-<span class="fc" id="L20">    Code,</span>
+<span class="fc" id="L36">    Code,</span>
     /**
      * Specifies a reference to a serialized representation of an applet
      */
-<span class="fc" id="L24">    Object,</span>
+<span class="fc" id="L40">    Object,</span>
     /**
      * Specifies an alternate text for an applet
      */
-<span class="fc" id="L28">    Alt,</span>
+<span class="fc" id="L44">    Alt,</span>
     /**
      * Specifies the location of an archive file
      */
-<span class="fc" id="L32">    Archive,</span>
+<span class="fc" id="L48">    Archive,</span>
     /**
      * Specifies a relative base URL for applets specified in the code attribute
      */
-<span class="fc" id="L36">    CodeBase,</span>
+<span class="fc" id="L52">    CodeBase,</span>
     /**
      * Specifies the height of an applet
      */
-<span class="fc" id="L40">    Height,</span>
+<span class="fc" id="L56">    Height,</span>
     /**
      * Defines the horizontal spacing around an applet
      */
-<span class="fc" id="L44">    Hspace,</span>
+<span class="fc" id="L60">    Hspace,</span>
     /**
      * Defines the vertical spacing around an applet
      */
-<span class="fc" id="L48">    Vspace,</span>
+<span class="fc" id="L64">    Vspace,</span>
     /**
      * Specifies the width of an applet
      */
-<span class="fc" id="L52">    Width;</span>
+<span class="fc" id="L68">    Width;</span>
 
     @Override
     public boolean isKeyword()
     {
-<span class="fc" id="L57">        return false;</span>
+<span class="fc" id="L73">        return false;</span>
+    }
+
+    @Override
+    public String toString()
+    {
+<span class="fc" id="L79">        return super.toString().toLowerCase();</span>
     }
 
 }

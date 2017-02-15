@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
@@ -26,8 +42,10 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * .<p>
  * <p>
  * @author Marc Magon
+ * @param <J>
  */
-public class Table extends Component<TableChildren, TableAttributes, GlobalFeatures, GlobalEvents, Table>
+public class Table<J extends Table>
+        extends Component<TableChildren, TableAttributes, GlobalFeatures, GlobalEvents, J>
 {
 
     private static final long serialVersionUID = 1L;
@@ -54,10 +72,13 @@ public class Table extends Component<TableChildren, TableAttributes, GlobalFeatu
      * Sets the cell spacing
      * <p>
      * @param cellSpacing
+     *
+     * @return
      */
-    public void setCellSpacing(int cellSpacing)
+    public J setCellSpacing(int cellSpacing)
     {
         addAttribute(TableAttributes.CellSpacing, cellSpacing);
+        return (J) this;
     }
 
     /**
@@ -74,9 +95,12 @@ public class Table extends Component<TableChildren, TableAttributes, GlobalFeatu
      * Sets the cell padding
      * <p>
      * @param cellPadding
+     *
+     * @return
      */
-    public void setCellPadding(int cellPadding)
+    public J setCellPadding(int cellPadding)
     {
         addAttribute(TableAttributes.CellPadding, cellPadding);
+        return (J) this;
     }
 }

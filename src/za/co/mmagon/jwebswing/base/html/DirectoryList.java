@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,8 +28,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The dir tag is not supported in HTML5. Use CSS instead.
  * <p>
- * The dir tag is used to list directory titles. Browser Support Element
- * dir Yes Yes Yes Yes Yes
+ * The dir tag is used to list directory titles. Browser Support Element dir Yes Yes Yes Yes Yes
  * <p>
  * Tips and Notes
  * <p>
@@ -38,10 +37,15 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * The dir tag is not supported in HTML5.
  * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @deprecated
  */
-public class DirectoryList extends Component<DirectoryListChildren, DirectoryListAttributes, NoFeatures, NoEvents, DirectoryList>
+public class DirectoryList<J extends DirectoryList>
+        extends Component<DirectoryListChildren, DirectoryListAttributes, NoFeatures, NoEvents, J>
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * @deprecated

@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package za.co.mmagon.jwebswing.base.servlets;
 
 import com.armineasy.injection.GuiceContext;
@@ -77,7 +93,8 @@ public class AjaxReceiverServlet extends JWDefaultServlet
                 throw new InvalidRequestException("Component ID Was Incorrect.");
             }
 
-            Page page = GuiceContext.Injector().getInstance(Page.class);
+            Page page = GuiceContext.inject().getInstance(Page.class);
+            page.preConfigure();
 
             if (page == null)
             {
@@ -92,7 +109,7 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 
             if (triggerComponent == null)
             {
-                LOG.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Invalid Component Specified]", request.getSession().getId());
+                LOG.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Invalid Component Specified];[Component]-[" + componentId + "]", request.getSession().getId());
                 throw new MissingComponentException("Component could not be found to process any events.");
             }
 
@@ -134,13 +151,21 @@ public class AjaxReceiverServlet extends JWDefaultServlet
             {
                 Event event = (Event) iterator.next();
                 event.fireEvent(ajaxCall, ajaxResponse);
-                ajaxResponse.addComponent(event);
             }
 
             fireTime = ajaxCallObjectCreated.getTime() - new Date().getTime();
             startDate = new Date();
             output = ajaxResponse.toString();
             page.buildComponentHierarchy();
+            ajaxResponse.getComponents().forEach(component ->
+            {
+                component.preConfigure();
+                for (Iterator it = component.getChildren().iterator(); it.hasNext();)
+                {
+                    ComponentHierarchyBase object = (ComponentHierarchyBase) it.next();
+                    page.buildComponentHierarchy(object, page.getComponentCache());
+                }
+            });
             renderTime = new Date().getTime() - startDate.getTime();
         }
         catch (InvalidRequestException ie)

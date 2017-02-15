@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,10 +40,16 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * The &lt;embed&gt; tag is new in HTML5, and will validate in an HTML5 page. However, if you use it in an HTML 4 page, the page will not validate.
  * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since 2014/12/21
  */
-public class Embed extends Component<NoChildren, EmbedAttributes, GlobalFeatures, GlobalEvents, Embed> implements NoClosingTag
+public class Embed<J extends Embed>
+        extends Component<NoChildren, EmbedAttributes, GlobalFeatures, GlobalEvents, J>
+        implements NoClosingTag
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs an embedded content type with the media type and source specified

@@ -25,9 +25,9 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter&lt;MeasurementC
      * Constructs an empty measurement
      */
     public MeasurementCSSImpl()
-<span class="fc" id="L28">    {</span>
+<span class="nc" id="L28">    {</span>
         //nothing required
-<span class="fc" id="L30">    }</span>
+<span class="nc" id="L30">    }</span>
 
     /**
      * Constructs with the given value and/or measurement type
@@ -36,10 +36,10 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter&lt;MeasurementC
      * @param measurementType
      */
     public MeasurementCSSImpl(double value, MeasurementTypes measurementType)
-<span class="fc" id="L39">    {</span>
-<span class="fc" id="L40">        this.value = value;</span>
-<span class="fc" id="L41">        this.measurementType = measurementType;</span>
-<span class="fc" id="L42">    }</span>
+<span class="nc" id="L39">    {</span>
+<span class="nc" id="L40">        this.value = value;</span>
+<span class="nc" id="L41">        this.measurementType = measurementType;</span>
+<span class="nc" id="L42">    }</span>
 
     /**
      * Constructs with the given value in pixels
@@ -148,7 +148,7 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter&lt;MeasurementC
      */
     public String toString(boolean renderQuotes)
     {
-<span class="fc" id="L151">        return toString().replace(&quot;\'&quot;, &quot;&quot;);</span>
+<span class="nc" id="L151">        return toString().replace(&quot;\'&quot;, &quot;&quot;);</span>
         /*
          * if (renderQuotes) { return &quot;'&quot; + value + &quot;&quot; + MeasurementType() == null ? &quot;&quot; : MeasurementType().getHtmlAnnotation() + &quot;'&quot;; } else { return value + &quot;&quot; + MeasurementType() == null ? &quot;&quot; :
          * MeasurementType().getHtmlAnnotation();

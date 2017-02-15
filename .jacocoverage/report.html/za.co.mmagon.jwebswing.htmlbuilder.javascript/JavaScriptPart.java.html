@@ -99,7 +99,7 @@ public class JavaScriptPart implements Serializable
     public String toString()
     {
 <span class="fc" id="L101">        String s = null;</span>
-<span class="pc bpc" id="L102" title="2 of 4 branches missed.">        switch (getJavascriptType())</span>
+<span class="pc bpc" id="L102" title="3 of 4 branches missed.">        switch (getJavascriptType())</span>
         {
             case Javascript:
             {
@@ -121,12 +121,12 @@ public class JavaScriptPart implements Serializable
             {
                 try
                 {
-<span class="fc" id="L124">                    s = jsonObjectMapper.writeValueAsString(this);</span>
+<span class="nc" id="L124">                    s = jsonObjectMapper.writeValueAsString(this);</span>
                 }
 <span class="nc" id="L126">                catch (JsonProcessingException ex)</span>
                 {
 <span class="nc" id="L128">                    LOG.log(Level.SEVERE, &quot;Error Writing as JSON Data!&quot;, ex);</span>
-<span class="fc" id="L129">                }</span>
+<span class="nc" id="L129">                }</span>
 <span class="nc" id="L130">                break;</span>
             }
             case Function:
@@ -156,9 +156,9 @@ public class JavaScriptPart implements Serializable
         }
 <span class="pc bpc" id="L157" title="1 of 2 branches missed.">        if (s != null)</span>
         {
-<span class="fc bfc" id="L159" title="All 2 branches covered.">            if (s.equals(&quot;{ }&quot;))</span>
+<span class="pc bpc" id="L159" title="1 of 2 branches missed.">            if (s.equals(&quot;{ }&quot;))</span>
             {
-<span class="fc" id="L161">                return &quot;&quot;;</span>
+<span class="nc" id="L161">                return &quot;&quot;;</span>
             }
         }
         else

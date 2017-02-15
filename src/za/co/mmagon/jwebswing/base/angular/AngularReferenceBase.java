@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,7 +44,6 @@ public abstract class AngularReferenceBase extends JavascriptLiteralFunction imp
      * Constructs a module with this name that always sorts default
      *
      * @param moduleName This references name
-     * @param angular    The angular feature attached
      */
     public AngularReferenceBase(String moduleName)
     {

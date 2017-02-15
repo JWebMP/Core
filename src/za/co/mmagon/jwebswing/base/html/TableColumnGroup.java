@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,10 +40,15 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * Most of the attributes in HTML 4.01 are not supported in HTML5.<p>
  * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since 2014/12/20
  */
-public class TableColumnGroup extends Component<TableColumnGroupChildren, NoAttributes, NoFeatures, NoEvents, TableColumnGroup>
+public class TableColumnGroup<J extends TableColumnGroup>
+        extends Component<TableColumnGroupChildren, NoAttributes, NoFeatures, NoEvents, J>
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new Table Column Group

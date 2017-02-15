@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,10 +18,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -55,13 +52,19 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * The &lt;u&gt; element is redefined in HTML5, to represent text that should be stylistically different from normal text, such as misspelled words or proper nouns in Chinese.
  * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since Mar 1, 2015
  * @version 1.0
  * <p>
  *
  */
-public class Underline extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, Underline> implements GlobalChildren,NoNewLineForRawText,NoNewLineBeforeClosingTag
+public class Underline<J extends Underline>
+        extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements GlobalChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs new Underlined Text

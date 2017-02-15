@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,9 +39,18 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * HTML5 has added new attributes for fieldset.
  * <p>
  * @author GedMarc
+ * @param <J>
  */
-public class FieldSet extends Component<FieldSetChildren, NoAttributes, NoFeatures, NoEvents, FieldSet> implements FormChildren, NoIDTag
+public class FieldSet<J extends FieldSet>
+        extends Component<FieldSetChildren, NoAttributes, NoFeatures, NoEvents, J>
+        implements FormChildren, NoIDTag
 {
+
+    private static final long serialVersionUID = 1L;
+    /**
+     * The legend if any is applied
+     */
+    private Legend legend;
 
     /**
      * Constructs a new instance of Field Set
@@ -51,8 +60,6 @@ public class FieldSet extends Component<FieldSetChildren, NoAttributes, NoFeatur
         super(ComponentTypes.FieldSet);
         add(legend);
     }
-
-    private Legend legend;
 
     /**
      * Sets the legend

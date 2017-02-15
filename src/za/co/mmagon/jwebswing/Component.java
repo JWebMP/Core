@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,10 +17,9 @@
 package za.co.mmagon.jwebswing;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import za.co.mmagon.jwebswing.base.ComponentHTMLBootstrapBase;
+import za.co.mmagon.jwebswing.base.ComponentStyleBase;
 import za.co.mmagon.jwebswing.base.html.Paragraph;
-import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.interfaces.ICssStructure;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -40,8 +39,8 @@ import za.co.mmagon.logger.LogFactory;
  * @since 2009/10/01
  * @version 1.0
  */
-public class Component<C, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component>
-        extends ComponentHTMLBootstrapBase<C, A, F, E, J> implements ICssStructure<J>
+public class Component<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component>
+        extends ComponentStyleBase<C, A, F, E, J> implements ICssStructure<J>
 {
 
     /**

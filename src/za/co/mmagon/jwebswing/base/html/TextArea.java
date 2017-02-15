@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,10 +18,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.TextAreaAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -43,16 +40,23 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * HTML5 has added several new attributes.<p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since Mar 1, 2015
  * @version 1.0
  * <p>
  *
  */
-public class TextArea extends Component<NoChildren, TextAreaAttributes, GlobalFeatures, GlobalEvents, TextArea> implements NoNewLineBeforeClosingTag,NoNewLineForRawText,GlobalChildren
+public class TextArea<J extends TextArea>
+        extends Component<NoChildren, TextAreaAttributes, GlobalFeatures, GlobalEvents, J>
+        implements NoNewLineBeforeClosingTag, NoNewLineForRawText, GlobalChildren
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new Text Area
+     *
      * @param defaultText The raw text to display.
      */
     public TextArea(String defaultText)
@@ -60,4 +64,13 @@ public class TextArea extends Component<NoChildren, TextAreaAttributes, GlobalFe
         super(ComponentTypes.TextArea);
         setText(defaultText);
     }
+
+    /**
+     * Constructs a new blank instance of a text area
+     */
+    public TextArea()
+    {
+        this(null);
+    }
+
 }

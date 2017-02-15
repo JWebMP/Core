@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,10 +22,13 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.FormChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 
 /**
- * 
+ *
  * @author GedMarc
+ * @param <J>
  */
-public class InputTextType extends Input<InputTextAttributes> implements ParagraphChildren,FormChildren
+public class InputTextType<J extends InputTextType>
+        extends Input<InputTextAttributes, J>
+        implements ParagraphChildren, FormChildren
 {
 
     private static final long serialVersionUID = 1L;

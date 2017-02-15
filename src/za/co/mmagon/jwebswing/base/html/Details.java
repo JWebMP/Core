@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,9 +44,14 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * Tip: The &lt;summary&gt; tag is used to specify a visible heading for the details. The heading can be clicked to view/hide the details.
  * <p>
  * @author GedMarc
+ * @param <J>
  */
-public class Details extends Component<DetailsChildren, NoAttributes, GlobalFeatures, GlobalEvents, Details> implements GlobalChildren, ParagraphChildren, PhraseChildren
+public class Details<J extends Details>
+        extends Component<DetailsChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements GlobalChildren, ParagraphChildren, PhraseChildren
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new Details section.

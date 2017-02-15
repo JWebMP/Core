@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,15 +22,30 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 /**
  *
  * @author GedMarc
+ * @param <J>
  */
-public class InputButtonType extends Input<InputButtonTypeAttributes>
+public class InputButtonType<J extends InputButtonType> extends Input<InputButtonTypeAttributes, J>
 {
+
+    private static final long serialVersionUID = 1L;
+
     /**
      * Constructs a new button with the given text
+     *
+     * @param text
      */
     public InputButtonType(String text)
     {
         super(InputTypes.Button);
         addAttribute(InputButtonTypeAttributes.Value, text);
     }
+
+    /**
+     * Constructs a new instance of a button type
+     */
+    public InputButtonType()
+    {
+        this(null);
+    }
+
 }

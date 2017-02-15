@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 ged_m
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,13 +23,14 @@ import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
 /**
- * Extention of a component with no HTML.
- * Renders the ID and all references to it as a class name instead of ID form
+ * Extention of a component with no HTML. Renders the ID and all references to it as a class name instead of ID form
  * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since 2015/04/24
  */
-public abstract class CSSComponent extends Component<CSSComponent, NoAttributes, GlobalFeatures, GlobalEvents, CSSComponent>
+public abstract class CSSComponent<J extends CSSComponent> extends Component<CSSComponent, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements GlobalChildren
 {
 
@@ -47,8 +48,7 @@ public abstract class CSSComponent extends Component<CSSComponent, NoAttributes,
     }
 
     /**
-     * Returns the component rendering for JQuery string Requires the rendering
-     * for component is set
+     * Returns the component rendering for JQuery string Requires the rendering for component is set
      * <p>
      * @return $('#x').
      */
@@ -84,11 +84,14 @@ public abstract class CSSComponent extends Component<CSSComponent, NoAttributes,
 
     /**
      * CSS Components don't render any HTML
+     *
      * @param tabCount
-     * @return 
+     *
+     * @return
      */
     @Override
-    protected StringBuilder renderHTML(int tabCount) {
+    protected StringBuilder renderHTML(int tabCount)
+    {
         return new StringBuilder();
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 ged_m
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,13 +31,11 @@ public class JWAngularController extends AngularControllerBase
 
     /**
      * Constructs a new right click directive based on the angular object passed in
-     *
-     * @param angular
      */
     public JWAngularController()
     {
         super("jwController");
-        setSortOrder(Integer.MAX_VALUE);
+        setSortOrder(100);
     }
 
     /**

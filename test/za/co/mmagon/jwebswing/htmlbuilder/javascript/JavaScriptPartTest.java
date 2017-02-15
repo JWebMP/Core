@@ -18,7 +18,6 @@ package za.co.mmagon.jwebswing.htmlbuilder.javascript;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Test;
-import za.co.mmagon.jwebswing.components.jquerylayout.layout.JQLayoutDefaultOptions;
 
 /**
  *
@@ -45,13 +44,10 @@ public class JavaScriptPartTest
     {
 
         private String name = "name";
-        private JQLayoutDefaultOptions js;
 
         public JavaScriptPartImpl()
         {
-            this.js = new JQLayoutDefaultOptions();
-            js.setClosable(false);
-            //js.setContainesTabs(true);
+
         }
 
         @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,17 +32,44 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * The &lt;hgroup&gt; element is used to group a set of h1 to h6 elements, when a heading has multiple levels (subheadings). Browser Support<p>
  * <p>
  * The numbers in the table specify the first browser version that fully supports the element. Element<p>
- * &lt;hgroup&gt; 5.0 9.0 4.0 4.1 11.1<p>
+ * &lt;hgroup&gt; 5.0 9.0 4.0 4.1 11.1
+ * <p>
  * <p>
  * Differences Between HTML 4.01 and HTML5<p>
  * <p>
  * The &lt;hgroup&gt; tag is new in HTML5.<p>
  * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since 2014/12/21
  */
-public class HeaderGroup extends Component<HeaderGroupChildren, NoAttributes, GlobalFeatures, GlobalEvents, HeaderGroup> implements BodyChildren
+public class HeaderGroup<J extends HeaderGroup>
+        extends Component<HeaderGroupChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements BodyChildren
 {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Definition and Usage<p>
+     * <p>
+     * The hgroup tag is used to group heading elements.<p>
+     * <p>
+     * The &lt;hgroup&gt; element is used to group a set of h1 to h6 elements, when a heading has multiple levels (subheadings). Browser Support<p>
+     * <p>
+     * The numbers in the table specify the first browser version that fully supports the element. Element<p>
+     * &lt;hgroup&gt; 5.0 9.0 4.0 4.1 11.1
+     * <p>
+     * <p>
+     * Differences Between HTML 4.01 and HTML5<p>
+     * <p>
+     * The &lt;hgroup&gt; tag is new in HTML5.<p>
+     * <p>
+     * @author GedMarc
+     *
+     * @since 2014/12/21
+     */
     public HeaderGroup()
     {
         super(ComponentTypes.HeaderGroup);

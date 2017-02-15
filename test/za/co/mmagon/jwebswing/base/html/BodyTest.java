@@ -55,7 +55,6 @@ public class BodyTest extends BaseTestClass
     public void testLoader()
     {
         resetBody();
-        p.getOptions().setPaceEnabled(true);
         b.add(new Comment("asdf"));
         WebReference.setIsLocal(true);
         //b.addFeature(new PaceLoader(PaceTheme.Bounce));
@@ -109,34 +108,13 @@ public class BodyTest extends BaseTestClass
     }
 
     @Test
-    public void testSetGenerateUI()
-    {
-        resetBody();
-        p.getOptions().setjQueryUIEnabled(true);
-        WebReference.setIsLocal(false);
-        System.out.println(p.toString(true));
-        assertEquals("<!DOCTYPE html>\n"
-                + "<html>\n"
-                + "	<head>\n"
-                + "		<link href=\"https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css\" rel=\"stylesheet\" type=\"text/css\">\n"
-                + "	</head>\n"
-                + "	<body id=\"body\">\n"
-                + "		<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js\" type=\"text/javascript\"></script>\n"
-                + "		<script src=\"http://code.jquery.com/jquery-migrate-1.4.1.js\" type=\"text/javascript\"></script>\n"
-                + "		<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.js\" type=\"text/javascript\"></script>\n"
-                + "	</body>\n"
-                + "</html>", p.toString(true).toString());
-    }
-
-    @Test
     public void testBootstrap()
     {
         WebReference.setIsLocal(true);
         Page p = getPage();
         p.setTiny(false);
-        p.getOptions().setBootstrapEnabled(true);
         p.getPageFields().setTitle("title");
-        System.out.println(p.toString(true));
+        System.out.println(p.toString());
 
         assertEquals("<!DOCTYPE html>\n"
                 + "<html>\n"

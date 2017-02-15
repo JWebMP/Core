@@ -38,32 +38,6 @@ public class ComponentHTMLAttributeTest
     }
 
     @Test
-    public void testClasses()
-    {
-        ComponentHTMLAttributeBase tag = new ComponentHTMLAttributeBase(ComponentTypes.Area);
-        tag.setID("testTag");
-        tag.addClass("This is a class");
-        tag.addClass("KKKKKKK");
-        System.out.println(tag);
-        System.out.println(tag.toString(true));
-        Assert.assertEquals("<area class=\"This is a class KKKKKKK\" id=\"testTag\">\n"
-                + "</area>", tag.toString(true));
-    }
-
-    @Test
-    public void testClassesTiny()
-    {
-        ComponentHTMLAttributeBase tag = new ComponentHTMLAttributeBase(ComponentTypes.Area);
-        tag.setID("testTag");
-        tag.setTiny(true);
-        tag.addClass("Class1");
-        tag.addClass("Class2");
-        System.out.println(tag);
-        System.out.println(tag.toString(true));
-        Assert.assertEquals("<area class=\"Class1 Class2\" id=\"testTag\"></area>", tag.toString(true));
-    }
-
-    @Test
     public void testClone()
     {
         ComponentHTMLAttributeBase shell = new ComponentHTMLAttributeBase(ComponentTypes.Abbreviation);

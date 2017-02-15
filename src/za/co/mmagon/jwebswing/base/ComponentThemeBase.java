@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 ged_m
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,31 +23,28 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.interfaces.IComponentThemeBase;
-import za.co.mmagon.jwebswing.base.references.CSSReference; 
+import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemeBlocks;
-import za.co.mmagon.jwebswing.components.jqueryui.themes.JQUIThemes;
-import za.co.mmagon.jwebswing.components.jqxwidgets.themes.JQXWidgetThemes;
 import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
 
 /**
- * A Theme-Able Component.
- * Only requirement is a tag, keeping it separate for the many different ways that other developers have done their themes
+ * A Theme-Able Component. Only requirement is a tag, keeping it separate for the many different ways that other developers have done their themes
  *
  * @author GedMarc
  * @param <A> Set of attributes
  * @param <F> Any features attached
  * @param <E> Any events
  * @param <J> This class
+ *
  * @since 23 Apr 2016
  */
-public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentBase>
+public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentThemeBase>
         extends ComponentHTMLAngularBase<A, F, E, J> implements IComponentThemeBase<J>
 {
 
     private static final long serialVersionUID = 1L;
- 
+
     /**
      * The associated theme
      */
@@ -85,12 +82,12 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
         List<JavascriptReference> allJs = super.getJavascriptReferencesAll();
         getThemes().stream().forEach((Theme feature)
                 ->
-                {
-                    Theme.class.cast(feature).getJavascriptReferences().stream().filter((js) -> (!allJs.contains(js))).forEach((js)
-                            ->
-                            {
-                                allJs.add(js);
-                    });
+        {
+            Theme.class.cast(feature).getJavascriptReferences().stream().filter((js) -> (!allJs.contains(js))).forEach((js)
+                    ->
+            {
+                allJs.add(js);
+            });
         });
         return allJs;
     }
@@ -106,79 +103,14 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
         List<CSSReference> allCss = super.getCssReferencesAll();
         getThemes().stream().forEach((Theme feature)
                 ->
-                {
-                    Theme.class.cast(feature).getCssReferences().stream().filter((css) -> (!allCss.contains(css))).forEach((css)
-                            ->
-                            {
-                                allCss.add(css);
-                    });
+        {
+            Theme.class.cast(feature).getCssReferences().stream().filter((css) -> (!allCss.contains(css))).forEach((css)
+                    ->
+            {
+                allCss.add(css);
+            });
         });
         return allCss;
-    }
-
-    /**
-     * Set the theme applied to this component
-     * <p>
-     * @param theme The JQuery UI theme to apply to the component
-     */
-    @Override
-    public J addTheme(JQUIThemes theme)
-    {
-        addTheme(theme.getTheme());
-        return (J) this;
-    }
-    
-    /**
-     * Set the theme applied to this component
-     * <p>
-     * @param theme The JQuery UI theme to apply to the component
-     */
-    @Override 
-    public J addTheme(JQXWidgetThemes theme)
-    {
-        addTheme(theme.getTheme());
-        return (J) this;
-    }
-
-    /**
-     * Set the theme applied to this component
-     * <p>
-     * @param theme The JQuery UI theme to apply to the component
-     */
-    @Override
-    public J addTheme(Theme theme)
-    {
-        if (theme != null)
-        {
-            if (!getThemes().contains(theme))
-            {
-                getThemes().add(theme);
-                addClass(theme.getClassName());
-            }
-        }
-        return (J) this;
-    }
-    
-    /**
-     * Adds a class name to the class list
-     * <p>
-     * @param blockName The class name to add
-     * <p>
-     * @return True if it was added, false if it already existed
-     */
-    @Override
-    public boolean addClass(JQUIThemeBlocks blockName)
-    {
-        String className = blockName.toString();
-        if (!getClasses().contains(className))
-        {
-            getClasses().add(className);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 
     /**

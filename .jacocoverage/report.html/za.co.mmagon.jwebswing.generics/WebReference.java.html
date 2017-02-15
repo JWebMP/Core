@@ -1,11 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>WebReference.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.generics</a> &gt; <span class="el_source">WebReference.java</span></div><h1>WebReference.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.generics;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>WebReference.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.generics</a> &gt; <span class="el_source">WebReference.java</span></div><h1>WebReference.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.generics;
 
+import com.armineasy.injection.GuiceContext;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
 import za.co.mmagon.jwebswing.base.html.interfaces.NamedPair;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 import za.co.mmagon.logger.LogFactory;
@@ -38,36 +56,36 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
     /**
      * If this must reference with the left side only
      */
-<span class="fc" id="L41">    @JsonIgnore</span>
+<span class="fc" id="L59">    @JsonIgnore</span>
     private boolean leftOnly = true;
     /**
      * If the reference is local
      */
-<span class="fc" id="L46">    private static boolean isLocal = true;</span>
+<span class="fc" id="L64">    private static boolean isLocal = true;</span>
     /**
      * The ridiculous sort order
      */
-<span class="fc" id="L50">    @JsonIgnore</span>
-<span class="fc" id="L51">    private Integer sortOrder = 500000;</span>
+<span class="fc" id="L68">    @JsonIgnore</span>
+<span class="fc" id="L69">    private Integer sortOrder = 500000;</span>
     /**
      * To use min at the end or not
      */
     @JsonIgnore
-<span class="fc" id="L56">    private static boolean useMinAtEndOfExtension = false;</span>
+<span class="fc" id="L74">    private static boolean useMinAtEndOfExtension = false;</span>
     /**
      * The default priority
      */
-<span class="fc" id="L60">    @JsonIgnore</span>
+<span class="fc" id="L78">    @JsonIgnore</span>
     private RequirementsPriority priority = RequirementsPriority.DontCare;
     /**
      * If the client can minify at the remote source
      */
-<span class="fc" id="L65">    @JsonIgnore</span>
+<span class="fc" id="L83">    @JsonIgnore</span>
     private boolean canMinifyAtRemote = true;
     /**
      * If this reference is a cordova reference, e.g. does it render in the dynamic site loader
      */
-<span class="fc" id="L70">    private boolean cordovaRequired = false;</span>
+<span class="fc" id="L88">    private boolean cordovaRequired = false;</span>
     /**
      * The name of the reference
      */
@@ -91,7 +109,7 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
     /**
      * The dummy reference for the sorting
      */
-<span class="fc" id="L94">    private static final WebReference dummyReference = new WebReference(null, null, null, null);</span>
+<span class="fc" id="L112">    private static final WebReference dummyReference = new WebReference(null, null, null, null);</span>
 
     /**
      * Sets this JavaScript Reference with the Name, the Version
@@ -103,15 +121,15 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      * @param sortOrder       The Sorting Order for the Reference
      */
     public WebReference(String name, Double version, String localReference, String remoteReference, int sortOrder)
-<span class="fc" id="L106">    {</span>
-<span class="fc" id="L107">        this.left = localReference;</span>
-<span class="fc" id="L108">        this.right = remoteReference;</span>
+<span class="fc" id="L124">    {</span>
+<span class="fc" id="L125">        this.left = localReference;</span>
+<span class="fc" id="L126">        this.right = remoteReference;</span>
 
-<span class="fc" id="L110">        this.name = name;</span>
-<span class="fc" id="L111">        this.version = version;</span>
-<span class="fc" id="L112">        this.localReference = localReference;</span>
-<span class="fc" id="L113">        this.remoteReference = remoteReference;</span>
-<span class="fc" id="L114">    }</span>
+<span class="fc" id="L128">        this.name = name;</span>
+<span class="fc" id="L129">        this.version = version;</span>
+<span class="fc" id="L130">        this.localReference = localReference;</span>
+<span class="fc" id="L131">        this.remoteReference = remoteReference;</span>
+<span class="fc" id="L132">    }</span>
 
     /**
      * Sets this JavaScript Reference with the Name, the Version
@@ -123,8 +141,8 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public WebReference(String name, Double version, String localReference, String remoteReference)
     {
-<span class="fc" id="L126">        this(name, version, localReference, remoteReference, 500000);</span>
-<span class="fc" id="L127">    }</span>
+<span class="fc" id="L144">        this(name, version, localReference, remoteReference, 500000);</span>
+<span class="fc" id="L145">    }</span>
 
     /**
      * Sets the local reference
@@ -135,9 +153,9 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public T setLeft(String left)
     {
-<span class="fc" id="L138">        this.left = left;</span>
-<span class="fc" id="L139">        this.localReference = left;</span>
-<span class="fc" id="L140">        return (T) this;</span>
+<span class="nc" id="L156">        this.left = left;</span>
+<span class="nc" id="L157">        this.localReference = left;</span>
+<span class="nc" id="L158">        return (T) this;</span>
     }
 
     /**
@@ -149,9 +167,9 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public T setRight(String right)
     {
-<span class="fc" id="L152">        this.right = right;</span>
-<span class="fc" id="L153">        this.remoteReference = right;</span>
-<span class="fc" id="L154">        return (T) this;</span>
+<span class="nc" id="L170">        this.right = right;</span>
+<span class="nc" id="L171">        this.remoteReference = right;</span>
+<span class="nc" id="L172">        return (T) this;</span>
     }
 
     /**
@@ -162,7 +180,7 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
     @Override
     public String getLeft()
     {
-<span class="nc" id="L165">        return localReference;</span>
+<span class="nc" id="L183">        return localReference;</span>
     }
 
     /**
@@ -173,30 +191,30 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
     @Override
     public String getRight()
     {
-<span class="nc" id="L176">        return remoteReference;</span>
+<span class="nc" id="L194">        return remoteReference;</span>
     }
 
     @Override
     public int hashCode()
     {
-<span class="nc" id="L182">        return left.hashCode() ^ right.hashCode();</span>
+<span class="nc" id="L200">        return left.hashCode() ^ right.hashCode();</span>
     }
 
     @Override
     public boolean equals(Object o)
     {
-<span class="nc bnc" id="L188" title="All 2 branches missed.">        if (o == null)</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">        if (o == null)</span>
         {
-<span class="nc" id="L190">            return false;</span>
+<span class="nc" id="L208">            return false;</span>
         }
-<span class="nc bnc" id="L192" title="All 2 branches missed.">        if (!(o instanceof WebReference))</span>
+<span class="nc bnc" id="L210" title="All 2 branches missed.">        if (!(o instanceof WebReference))</span>
         {
-<span class="nc" id="L194">            return false;</span>
+<span class="nc" id="L212">            return false;</span>
         }
-<span class="nc" id="L196">        WebReference pairo = (WebReference) o;</span>
-<span class="nc bnc" id="L197" title="All 4 branches missed.">        return this.left.equals(pairo.getLeft())</span>
+<span class="nc" id="L214">        WebReference pairo = (WebReference) o;</span>
+<span class="nc bnc" id="L215" title="All 4 branches missed.">        return this.left.equals(pairo.getLeft())</span>
                 &amp;&amp; (!leftOnly
-<span class="nc bnc" id="L199" title="All 2 branches missed.">                &amp;&amp; this.right.equals(pairo.getRight()));</span>
+<span class="nc bnc" id="L217" title="All 2 branches missed.">                &amp;&amp; this.right.equals(pairo.getRight()));</span>
     }
 
     /**
@@ -206,7 +224,7 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public boolean isLeftOnly()
     {
-<span class="nc" id="L209">        return leftOnly;</span>
+<span class="nc" id="L227">        return leftOnly;</span>
     }
 
     /**
@@ -218,8 +236,8 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public T setLeftOnly(boolean leftOnly)
     {
-<span class="nc" id="L221">        this.leftOnly = leftOnly;</span>
-<span class="nc" id="L222">        return (T) this;</span>
+<span class="nc" id="L239">        this.leftOnly = leftOnly;</span>
+<span class="nc" id="L240">        return (T) this;</span>
     }
 
     /**
@@ -230,7 +248,7 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
     @JsonProperty(&quot;local&quot;)
     public static boolean isIsLocal()
     {
-<span class="fc" id="L233">        return isLocal;</span>
+<span class="fc" id="L251">        return isLocal;</span>
     }
 
     /**
@@ -240,8 +258,8 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public static void setIsLocal(boolean isLocal)
     {
-<span class="fc" id="L243">        WebReference.isLocal = isLocal;</span>
-<span class="fc" id="L244">    }</span>
+<span class="fc" id="L261">        WebReference.isLocal = isLocal;</span>
+<span class="fc" id="L262">    }</span>
 
     /**
      * Gets the name of this reference
@@ -250,7 +268,7 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public String getName()
     {
-<span class="fc" id="L253">        return name;</span>
+<span class="fc" id="L271">        return name;</span>
     }
 
     /**
@@ -262,8 +280,8 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public T setName(String name)
     {
-<span class="nc" id="L265">        this.name = name;</span>
-<span class="nc" id="L266">        return (T) this;</span>
+<span class="nc" id="L283">        this.name = name;</span>
+<span class="nc" id="L284">        return (T) this;</span>
     }
 
     /**
@@ -273,7 +291,7 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public Double getVersion()
     {
-<span class="fc" id="L276">        return version;</span>
+<span class="fc" id="L294">        return version;</span>
     }
 
     /**
@@ -285,8 +303,8 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public T setVersion(Double version)
     {
-<span class="nc" id="L288">        this.version = version;</span>
-<span class="nc" id="L289">        return (T) this;</span>
+<span class="nc" id="L306">        this.version = version;</span>
+<span class="nc" id="L307">        return (T) this;</span>
     }
 
     /**
@@ -296,7 +314,7 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public String getLocalReference()
     {
-<span class="fc" id="L299">        return localReference;</span>
+<span class="fc" id="L317">        return localReference;</span>
     }
 
     /**
@@ -308,9 +326,9 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public T setLocalReference(String localReference)
     {
-<span class="fc" id="L311">        setLeft(localReference);</span>
-<span class="fc" id="L312">        this.localReference = localReference;</span>
-<span class="fc" id="L313">        return (T) this;</span>
+<span class="nc" id="L329">        setLeft(localReference);</span>
+<span class="nc" id="L330">        this.localReference = localReference;</span>
+<span class="nc" id="L331">        return (T) this;</span>
     }
 
     /**
@@ -320,7 +338,7 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public String getRemoteReference()
     {
-<span class="fc" id="L323">        return remoteReference;</span>
+<span class="fc" id="L341">        return remoteReference;</span>
     }
 
     /**
@@ -332,12 +350,12 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public T setRemoteReference(String remoteReference)
     {
-<span class="fc" id="L335">        setRight(remoteReference);</span>
-<span class="fc" id="L336">        this.remoteReference = remoteReference;</span>
-<span class="fc" id="L337">        return (T) this;</span>
+<span class="nc" id="L353">        setRight(remoteReference);</span>
+<span class="nc" id="L354">        this.remoteReference = remoteReference;</span>
+<span class="nc" id="L355">        return (T) this;</span>
     }
 
-<span class="fc" id="L340">    private static final Logger LOG = LogFactory.getInstance().getLogger(&quot;Web Reference&quot;);</span>
+<span class="fc" id="L358">    private static final Logger LOG = LogFactory.getInstance().getLogger(&quot;Web Reference&quot;);</span>
 
     /**
      * Sets whether or not to use &quot;min.js&quot; or use a folder for the min directory
@@ -346,7 +364,7 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public static final boolean isUseMinAtEndOfExtension()
     {
-<span class="nc" id="L349">        return useMinAtEndOfExtension;</span>
+<span class="nc" id="L367">        return useMinAtEndOfExtension;</span>
     }
 
     /**
@@ -356,8 +374,8 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public static final void setUseMinAtEndOfExtension(boolean useMinAtEndOfExtension)
     {
-<span class="nc" id="L359">        WebReference.useMinAtEndOfExtension = useMinAtEndOfExtension;</span>
-<span class="nc" id="L360">    }</span>
+<span class="nc" id="L377">        WebReference.useMinAtEndOfExtension = useMinAtEndOfExtension;</span>
+<span class="nc" id="L378">    }</span>
 
     /**
      * Compares two references to each other on sort order
@@ -370,7 +388,7 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
     @Override
     public int compare(WebReference o1, WebReference o2)
     {
-<span class="fc" id="L373">        return o1.getSortOrder().compareTo(o2.getSortOrder());</span>
+<span class="fc" id="L391">        return o1.getSortOrder().compareTo(o2.getSortOrder());</span>
     }
 
     /**
@@ -382,7 +400,7 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public Integer getSortOrder()
     {
-<span class="fc" id="L385">        return sortOrder;</span>
+<span class="fc" id="L403">        return sortOrder;</span>
     }
 
     /**
@@ -396,8 +414,8 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public final T setSortOrder(Integer sortOrder)
     {
-<span class="fc" id="L399">        this.sortOrder = sortOrder;</span>
-<span class="fc" id="L400">        return (T) this;</span>
+<span class="fc" id="L417">        this.sortOrder = sortOrder;</span>
+<span class="fc" id="L418">        return (T) this;</span>
     }
 
     /**
@@ -409,8 +427,8 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public static ArrayList&lt;? extends WebReference&gt; sort(ArrayList&lt;? extends WebReference&gt; arrayList)
     {
-<span class="fc" id="L412">        arrayList.sort(dummyReference);</span>
-<span class="fc" id="L413">        return arrayList;</span>
+<span class="fc" id="L430">        arrayList.sort(dummyReference);</span>
+<span class="fc" id="L431">        return arrayList;</span>
     }
 
     /**
@@ -420,7 +438,7 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public static WebReference getDummyReference()
     {
-<span class="fc" id="L423">        return dummyReference;</span>
+<span class="fc" id="L441">        return dummyReference;</span>
     }
 
     /**
@@ -430,7 +448,7 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public RequirementsPriority getPriority()
     {
-<span class="fc" id="L433">        return priority;</span>
+<span class="fc" id="L451">        return priority;</span>
     }
 
     /**
@@ -442,8 +460,8 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public T setPriority(RequirementsPriority priority)
     {
-<span class="fc" id="L445">        this.priority = priority;</span>
-<span class="fc" id="L446">        return (T) this;</span>
+<span class="fc" id="L463">        this.priority = priority;</span>
+<span class="fc" id="L464">        return (T) this;</span>
     }
 
     /**
@@ -453,7 +471,7 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public boolean isCanMinifyAtRemote()
     {
-<span class="nc" id="L456">        return canMinifyAtRemote;</span>
+<span class="nc" id="L474">        return canMinifyAtRemote;</span>
     }
 
     /**
@@ -465,8 +483,8 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public T setCanMinifyAtRemote(boolean canMinifyAtRemote)
     {
-<span class="fc" id="L468">        this.canMinifyAtRemote = canMinifyAtRemote;</span>
-<span class="fc" id="L469">        return (T) this;</span>
+<span class="nc" id="L486">        this.canMinifyAtRemote = canMinifyAtRemote;</span>
+<span class="nc" id="L487">        return (T) this;</span>
     }
 
     /**
@@ -476,7 +494,7 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public boolean isCordovaRequired()
     {
-<span class="fc" id="L479">        return cordovaRequired;</span>
+<span class="fc" id="L497">        return cordovaRequired;</span>
     }
 
     /**
@@ -488,8 +506,8 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
      */
     public T setCordovaRequired(boolean cordovaRequired)
     {
-<span class="fc" id="L491">        this.cordovaRequired = cordovaRequired;</span>
-<span class="fc" id="L492">        return (T) this;</span>
+<span class="fc" id="L509">        this.cordovaRequired = cordovaRequired;</span>
+<span class="fc" id="L510">        return (T) this;</span>
     }
 
     /**
@@ -501,29 +519,47 @@ public class WebReference&lt;T extends WebReference&gt; implements NamedPair&lt;
     @JsonProperty(&quot;reference&quot;)
     public final String toString()
     {
-<span class="fc bfc" id="L504" title="All 2 branches covered.">        if (isIsLocal())</span>
+<span class="fc bfc" id="L522" title="All 2 branches covered.">        if (isIsLocal())</span>
         {
-<span class="fc" id="L506">            StringBuilder sb = new StringBuilder(getLocalReference());</span>
-<span class="pc bpc" id="L507" title="1 of 2 branches missed.">            if (useMinAtEndOfExtension)</span>
+<span class="fc" id="L524">            StringBuilder sb = new StringBuilder(getLocalReference());</span>
+<span class="pc bpc" id="L525" title="1 of 2 branches missed.">            if (useMinAtEndOfExtension)</span>
             {
-<span class="nc bnc" id="L509" title="All 2 branches missed.">                if (!sb.toString().contains(&quot;.min.&quot;))</span>
+<span class="nc bnc" id="L527" title="All 2 branches missed.">                if (!sb.toString().contains(&quot;.min.&quot;))</span>
                 {
-<span class="nc" id="L511">                    sb.insert(sb.lastIndexOf(&quot;.&quot;), &quot;.min&quot;);</span>
+<span class="nc" id="L529">                    sb.insert(sb.lastIndexOf(&quot;.&quot;), &quot;.min&quot;);</span>
                 }
             }
-<span class="fc" id="L514">            return sb.toString();</span>
+<span class="pc bpc" id="L532" title="1 of 2 branches missed.">            if (sb.indexOf(&quot;http&quot;) &lt; 0)</span>
+            {
+                try
+                {
+<span class="fc bfc" id="L536" title="All 2 branches covered.">                    if (!GuiceContext.isBuildingInjector())</span>
+                    {
+<span class="nc" id="L538">                        HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);</span>
+<span class="nc" id="L539">                        StringBuffer url = request.getRequestURL();</span>
+<span class="nc" id="L540">                        sb = sb.insert(0, url);</span>
+<span class="nc" id="L541">                        sb = new StringBuilder(sb.toString().replaceAll(&quot;jwcordova&quot;, &quot;&quot;).replaceAll(&quot;jwajax&quot;, &quot;&quot;));</span>
+                    }
+                }
+<span class="fc" id="L544">                catch (NoClassDefFoundError | Exception e)</span>
+                {
+
+<span class="fc" id="L547">                }</span>
+            }
+
+<span class="fc" id="L550">            return sb.toString();</span>
         }
         else
         {
-<span class="fc" id="L518">            StringBuilder sb = new StringBuilder(getRemoteReference());</span>
-<span class="pc bpc" id="L519" title="3 of 4 branches missed.">            if (useMinAtEndOfExtension &amp;&amp; isCanMinifyAtRemote())</span>
+<span class="fc" id="L554">            StringBuilder sb = new StringBuilder(getRemoteReference());</span>
+<span class="pc bpc" id="L555" title="3 of 4 branches missed.">            if (useMinAtEndOfExtension &amp;&amp; isCanMinifyAtRemote())</span>
             {
-<span class="nc bnc" id="L521" title="All 2 branches missed.">                if (!sb.toString().contains(&quot;.min.&quot;))</span>
+<span class="nc bnc" id="L557" title="All 2 branches missed.">                if (!sb.toString().contains(&quot;.min.&quot;))</span>
                 {
-<span class="nc" id="L523">                    sb.insert(sb.lastIndexOf(&quot;.&quot;), &quot;.min&quot;);</span>
+<span class="nc" id="L559">                    sb.insert(sb.lastIndexOf(&quot;.&quot;), &quot;.min&quot;);</span>
                 }
             }
-<span class="fc" id="L526">            return sb.toString();</span>
+<span class="fc" id="L562">            return sb.toString();</span>
         }
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,11 +22,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.bootstrap.forms.groups.BSFormGroupChildren;
-import za.co.mmagon.jwebswing.components.jqueryui.autocomplete.JQUIAutoCompleteChildren;
-import za.co.mmagon.jwebswing.components.jqueryui.checkbox.JQUICheckBoxGroupChildren;
-import za.co.mmagon.jwebswing.components.jqueryui.radiobutton.JQUIRadioButtonGroupChildren;
-import za.co.mmagon.jwebswing.components.jqueryui.spinner.JQUISpinnerChildren;
 
 /**
  * Definition and Usage<p>
@@ -46,14 +41,16 @@ import za.co.mmagon.jwebswing.components.jqueryui.spinner.JQUISpinnerChildren;
  * The "form" attribute is new in HTML5.<p>
  * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @since Feb 9, 2015
  * @version 1.0
  * <p>
  *
  */
-public final class Label extends Component<GlobalChildren, LabelAttributes, GlobalFeatures, GlobalEvents, Label>
-        implements JQUICheckBoxGroupChildren, JQUIRadioButtonGroupChildren, ParagraphChildren, JQUIAutoCompleteChildren, NoNewLineBeforeChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag, JQUISpinnerChildren,
-        BSFormGroupChildren
+public final class Label<J extends Label>
+        extends Component<GlobalChildren, LabelAttributes, GlobalFeatures, GlobalEvents, J>
+        implements ParagraphChildren, NoNewLineBeforeChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag
 {
 
     private static final long serialVersionUID = 1L;

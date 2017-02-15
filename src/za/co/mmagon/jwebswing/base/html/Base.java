@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package za.co.mmagon.jwebswing.base.html;
 
 import java.util.logging.Level;
@@ -13,6 +29,8 @@ import za.co.mmagon.logger.LogFactory;
 /**
  * The Base Component
  * <p>
+ * @param <J>
+ *
  * @since 2013/11/12
  * @version 1.0
  * @author MMagon
@@ -39,7 +57,8 @@ import za.co.mmagon.logger.LogFactory;
  * Note: If the base tag is present, it must have either an href attribute or<p>
  * a target attribute, or both.<p>
  */
-public class Base extends Component<NoChildren, BaseAttributes, NoFeatures, NoEvents, Component>
+public class Base<J extends Base>
+        extends Component<NoChildren, BaseAttributes, NoFeatures, NoEvents, J>
         implements NoIDTag, NoClosingTag, HeadChildren, NoClosingBracket, NoClassAttribute
 {
 
@@ -58,6 +77,17 @@ public class Base extends Component<NoChildren, BaseAttributes, NoFeatures, NoEv
     public Base()
     {
         super(ComponentTypes.Base);
+    }
+
+    /**
+     * Constructs a base instance with the given reference
+     *
+     * @param baseReference
+     */
+    public Base(String baseReference)
+    {
+        this();
+        addAttribute(BaseAttributes.HRef, baseReference);
     }
 
     /**

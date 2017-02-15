@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 ged_m
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,7 +35,9 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
  *
  * @since 23 Apr 2016
  */
-public class ComponentDependancyBase<J extends ComponentBase> extends ComponentBase<J> implements IComponentDependancyBase<J>
+public class ComponentDependancyBase<J extends ComponentDependancyBase>
+        extends ComponentBase<J>
+        implements IComponentDependancyBase<J>
 {
 
     private static final long serialVersionUID = 1L;

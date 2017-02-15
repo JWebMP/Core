@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 ged_m
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,15 +16,17 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import za.co.mmagon.logger.LogFactory;
 import com.fasterxml.jackson.annotation.*;
 import java.util.*;
-import java.util.logging.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
-import za.co.mmagon.jwebswing.base.interfaces.*;
-import za.co.mmagon.jwebswing.base.references.*;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
+import java.util.logging.Level;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.interfaces.IComponentFeatureBase;
+import za.co.mmagon.jwebswing.base.references.CSSReference;
+import za.co.mmagon.jwebswing.base.references.JavascriptReference;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * Allows a component to have features and events
@@ -34,7 +36,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.*;
  *
  * @since 23 Apr 2016
  */
-public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentBase> extends ComponentDependancyBase<J>
+public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentFeatureBase>
+        extends ComponentDependancyBase<J>
         implements IComponentFeatureBase<F, J>
 {
 
@@ -242,10 +245,10 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
         }
         StringBuilder sb = new StringBuilder();
         ArrayList<String> allQueries = new ArrayList<>();
-        getQueriesAll().stream().filter(a -> a != null).forEach(query
+        getQueriesAll().stream().forEach(query
                 ->
         {
-            if (!allQueries.contains(query.toString()))
+            if (!allQueries.contains(query.toString()) || !query.toString().isEmpty())
             {
                 allQueries.add(query.toString());
             }
@@ -405,7 +408,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
     {
         if (!feature.getComponentType().equals(ComponentTypes.Feature))
         {
-            LOG.log(Level.WARNING,"Tried to add a non-feature to the feature collection");
+            LOG.log(Level.WARNING, "Tried to add a non-feature to the feature collection");
         }
         else if (!getFeatures().contains((F) feature))
         {
@@ -426,7 +429,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentB
     {
         if (!feature.getComponentType().equals(ComponentTypes.Feature))
         {
-            LOG.log(Level.WARNING,"Tried to add a non-feature to the feature collection");
+            LOG.log(Level.WARNING, "Tried to add a non-feature to the feature collection");
         }
         else if (!getFeatures().contains((F) feature))
         {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -49,20 +49,25 @@ import za.co.mmagon.logger.LogFactory;
  * In XHTML, the &lt;hr&gt; tag must be properly closed.<p>
  * <p>
  * @author Marc Magon
+ * @param <J>
  */
-public class HorizontalRule extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, HorizontalRule> implements NoIDTag, NoClassAttribute
+public class HorizontalRule<J extends HorizontalRule>
+        extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+        implements NoIDTag, NoClassAttribute
 {
 
     private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("HR");
     private static final HorizontalRule hr = new HorizontalRule();
+    private static final long serialVersionUID = 1L;
 
-    private HorizontalRule()
+    public HorizontalRule()
     {
         super("hr", ComponentTypes.HorizontalRule);
         setInlineClosingTag(true);
     }
 
     @Override
+    @SuppressWarnings("")
     public boolean equals(Object obj)
     {
         return false;

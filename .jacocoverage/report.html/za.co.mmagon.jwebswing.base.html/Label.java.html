@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Label.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">Label.java</span></div><h1>Label.java</h1><pre class="source lang-java linenums">/*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,11 +22,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.bootstrap.forms.groups.BSFormGroupChildren;
-import za.co.mmagon.jwebswing.components.jqueryui.autocomplete.JQUIAutoCompleteChildren;
-import za.co.mmagon.jwebswing.components.jqueryui.checkbox.JQUICheckBoxGroupChildren;
-import za.co.mmagon.jwebswing.components.jqueryui.radiobutton.JQUIRadioButtonGroupChildren;
-import za.co.mmagon.jwebswing.components.jqueryui.spinner.JQUISpinnerChildren;
 
 /**
  * Definition and Usage&lt;p&gt;
@@ -46,14 +41,16 @@ import za.co.mmagon.jwebswing.components.jqueryui.spinner.JQUISpinnerChildren;
  * The &quot;form&quot; attribute is new in HTML5.&lt;p&gt;
  * &lt;p&gt;
  * @author GedMarc
+ * @param &lt;J&gt;
+ *
  * @since Feb 9, 2015
  * @version 1.0
  * &lt;p&gt;
  *
  */
-public final class Label extends Component&lt;GlobalChildren, LabelAttributes, GlobalFeatures, GlobalEvents, Label&gt;
-        implements JQUICheckBoxGroupChildren, JQUIRadioButtonGroupChildren, ParagraphChildren, JQUIAutoCompleteChildren, NoNewLineBeforeChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag, JQUISpinnerChildren,
-        BSFormGroupChildren
+public final class Label&lt;J extends Label&gt;
+        extends Component&lt;GlobalChildren, LabelAttributes, GlobalFeatures, GlobalEvents, J&gt;
+        implements ParagraphChildren, NoNewLineBeforeChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag
 {
 
     private static final long serialVersionUID = 1L;
@@ -73,9 +70,9 @@ public final class Label extends Component&lt;GlobalChildren, LabelAttributes, G
      */
     public Label(String label)
     {
-<span class="fc" id="L76">        super(ComponentTypes.Label);</span>
-<span class="fc" id="L77">        setLabel(label);</span>
-<span class="fc" id="L78">    }</span>
+<span class="nc" id="L73">        super(ComponentTypes.Label);</span>
+<span class="nc" id="L74">        setLabel(label);</span>
+<span class="nc" id="L75">    }</span>
 
     /**
      * Constructs a new label with the attribute set and the component specified
@@ -85,11 +82,11 @@ public final class Label extends Component&lt;GlobalChildren, LabelAttributes, G
      */
     public Label(String label, Input forInputComponent)
     {
-<span class="fc" id="L88">        super(ComponentTypes.Label);</span>
-<span class="fc" id="L89">        setForInputComponent(forInputComponent);</span>
-<span class="fc" id="L90">        setLabel(label);</span>
-<span class="fc" id="L91">        addAttribute(LabelAttributes.For, label);</span>
-<span class="fc" id="L92">    }</span>
+<span class="nc" id="L85">        super(ComponentTypes.Label);</span>
+<span class="nc" id="L86">        setForInputComponent(forInputComponent);</span>
+<span class="nc" id="L87">        setLabel(label);</span>
+<span class="nc" id="L88">        addAttribute(LabelAttributes.For, label);</span>
+<span class="nc" id="L89">    }</span>
 
     /**
      * Sets the text of this label
@@ -98,8 +95,8 @@ public final class Label extends Component&lt;GlobalChildren, LabelAttributes, G
      */
     public void setLabel(String label)
     {
-<span class="fc" id="L101">        setText(label);</span>
-<span class="fc" id="L102">    }</span>
+<span class="nc" id="L98">        setText(label);</span>
+<span class="nc" id="L99">    }</span>
 
     /**
      * Gets the text of this label
@@ -108,7 +105,7 @@ public final class Label extends Component&lt;GlobalChildren, LabelAttributes, G
      */
     public String getLabel()
     {
-<span class="nc" id="L111">        return getText(0).toString();</span>
+<span class="nc" id="L108">        return getText(0).toString();</span>
     }
 
     /**
@@ -118,7 +115,7 @@ public final class Label extends Component&lt;GlobalChildren, LabelAttributes, G
      */
     public Component getForInputComponent()
     {
-<span class="nc" id="L121">        return forInputComponent;</span>
+<span class="nc" id="L118">        return forInputComponent;</span>
     }
 
     /**
@@ -128,9 +125,9 @@ public final class Label extends Component&lt;GlobalChildren, LabelAttributes, G
      */
     public void setForInputComponent(Component forInputComponent)
     {
-<span class="fc" id="L131">        this.forInputComponent = forInputComponent;</span>
-<span class="fc" id="L132">        addAttribute(LabelAttributes.For, forInputComponent.getID());</span>
-<span class="fc" id="L133">    }</span>
+<span class="nc" id="L128">        this.forInputComponent = forInputComponent;</span>
+<span class="nc" id="L129">        addAttribute(LabelAttributes.For, forInputComponent.getID());</span>
+<span class="nc" id="L130">    }</span>
 
     /**
      * Returns the form component that the label is attached to
@@ -139,7 +136,7 @@ public final class Label extends Component&lt;GlobalChildren, LabelAttributes, G
      */
     public Form getForFormComponent()
     {
-<span class="nc" id="L142">        return forFormComponent;</span>
+<span class="nc" id="L139">        return forFormComponent;</span>
     }
 
     /**
@@ -149,9 +146,9 @@ public final class Label extends Component&lt;GlobalChildren, LabelAttributes, G
      */
     public void setForFormComponent(Form forFormComponent)
     {
-<span class="nc" id="L152">        this.forFormComponent = forFormComponent;</span>
-<span class="nc" id="L153">        addAttribute(LabelAttributes.Form, forInputComponent.getID());</span>
-<span class="nc" id="L154">    }</span>
+<span class="nc" id="L149">        this.forFormComponent = forFormComponent;</span>
+<span class="nc" id="L150">        addAttribute(LabelAttributes.Form, forInputComponent.getID());</span>
+<span class="nc" id="L151">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

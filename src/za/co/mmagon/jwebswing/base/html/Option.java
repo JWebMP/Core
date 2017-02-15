@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,16 +18,10 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.OptionAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.DisplayObjectType;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.DataListChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.SelectChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqueryui.selectmenu.JQUISelectMenuChildren;
 
 /**
  * Definition and Usage<p>
@@ -42,8 +36,11 @@ import za.co.mmagon.jwebswing.components.jqueryui.selectmenu.JQUISelectMenuChild
  * Tip: If you have a long list of options, you can group related options with the &gt;optgroup&lt; tag.<p>
  *
  * @author GedMarc
+ * @param <J>
  */
-public class Option extends Component<NoChildren, OptionAttributes, NoFeatures, NoEvents, Option> implements DataListChildren, SelectChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, DisplayObjectType, JQUISelectMenuChildren
+public class Option<J extends Option>
+        extends Component<NoChildren, OptionAttributes, NoFeatures, NoEvents, J>
+        implements DataListChildren, SelectChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, DisplayObjectType
 {
 
     private static final long serialVersionUID = 1L;

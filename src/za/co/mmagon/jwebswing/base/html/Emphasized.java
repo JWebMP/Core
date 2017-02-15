@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,10 +18,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.PhraseChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
@@ -35,20 +32,26 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * Tip: This tag is not deprecated, but it is possible to achieve richer effect with CSS.
  * <p>
  * <p>
- * Browser Support Element
- * &lt;em&gt; Yes Yes Yes Yes Yes
+ * Browser Support Element &lt;em&gt; Yes Yes Yes Yes Yes
  * <p>
  * Differences Between HTML 4.01 and HTML5
  * <p>
  * NONE.
  * <p>
  * @author GedMarc
+ * @param <J>
  */
-public class Emphasized extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, Emphasized> implements NoNewLineBeforeClosingTag,NoNewLineForRawText,NoIDTag,PhraseChildren
+public class Emphasized<J extends Emphasized>
+        extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+        implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, PhraseChildren
 {
+
+    private static final long serialVersionUID = 1L;
+
     /**
      * Constructs a new Emphasized Text String
-     * @param text 
+     *
+     * @param text
      */
     public Emphasized(String text)
     {

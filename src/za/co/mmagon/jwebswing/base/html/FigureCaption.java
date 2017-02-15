@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,10 +18,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.FigureChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -33,17 +30,21 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;figcaption&gt; element can be placed as the first or last child of the figure element. Browser Support
  * <p>
- * The numbers in the table specify the first browser version that fully supports the element. Element
- * &lt;figcaption&gt; 6.0 9.0 4.0 5.0 11.1
+ * The numbers in the table specify the first browser version that fully supports the element. Element &lt;figcaption&gt; 6.0 9.0 4.0 5.0 11.1
  * <p>
  * Differences Between HTML 4.01 and HTML5
  * <p>
  * The &lt;figcaption&gt; tag is new in HTML5.
  * <p>
  * @author GedMarc
+ * @param <J>
  */
-public class FigureCaption extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, FigureCaption> implements NoNewLineBeforeClosingTag, NoNewLineForRawText, FigureChildren
+public class FigureCaption<J extends FigureCaption>
+        extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+        implements NoNewLineBeforeClosingTag, NoNewLineForRawText, FigureChildren
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Defines a new Figure Captions

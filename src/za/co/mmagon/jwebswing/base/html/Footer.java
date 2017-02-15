@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,17 +37,22 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * Browser Support
  * <p>
- * The numbers in the table specify the first browser version that fully supports the element. Element
- * &lt;footer&gt; 6.0 9.0 4.0 5.0 11.1
+ * The numbers in the table specify the first browser version that fully supports the element. Element &lt;footer&gt; 6.0 9.0 4.0 5.0 11.1
  * <p>
  * Differences Between HTML 4.01 and HTML5
  * <p>
  * The &lt;footer&gt; tag is new in HTML5.
  * <p>
  * @author GedMarc
+ * @param <J>
  */
-public class Footer extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, Footer> implements AddressChildren,NoIDTag
+public class Footer<J extends Footer>
+        extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements AddressChildren, NoIDTag
 {
+
+    private static final long serialVersionUID = 1L;
+
     /**
      * Construct a new instance of a footer
      */

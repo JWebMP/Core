@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package za.co.mmagon.jwebswing.events.click;
 
 import java.util.logging.Level;
@@ -6,13 +22,7 @@ import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
-import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
-import za.co.mmagon.jwebswing.components.bootstrap.buttons.BSButtonEvents;
-import za.co.mmagon.jwebswing.components.jqueryui.button.JQUIButtonEvents;
-import za.co.mmagon.jwebswing.components.jqxwidgets.buttongroup.JQXButtonGroupEvents;
-import za.co.mmagon.jwebswing.components.jqxwidgets.buttons.JQXButtonEvents;
-import za.co.mmagon.jwebswing.components.jqxwidgets.radiobutton.JQXRadioButtonEvents;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
@@ -23,8 +33,7 @@ import za.co.mmagon.logger.LogFactory;
  * @author Marc Magon
  */
 public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
-        implements ParagraphEvents, BodyEvents, GlobalEvents, JQUIButtonEvents, JQXRadioButtonEvents,
-        JQXButtonEvents, JQXButtonGroupEvents, BSButtonEvents
+        implements ParagraphEvents, BodyEvents, GlobalEvents
 {
 
     /**
@@ -50,8 +59,11 @@ public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
             getComponent().getPage().getOptions().setAngularEnabled(true);
-            getComponent().addAttribute(AngularAttributes.ngClick, "perform($event," + renderVariables() + ");");
-            getComponent().addAttribute(GlobalAttributes.Style, "cursor:pointer;");
+            getComponent().addAttribute(AngularAttributes.ngClick, "jw.isLoading || perform($event," + renderVariables() + ");");
+            if (getComponent().getAttribute(AngularAttributes.ngDisabled) == null)
+            {
+                getComponent().addAttribute(AngularAttributes.ngDisabled, "jw.isLoading");
+            }
         }
         super.preConfigure();
     }

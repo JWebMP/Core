@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>FieldSet.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">FieldSet.java</span></div><h1>FieldSet.java</h1><pre class="source lang-java linenums">/*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,20 +39,27 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * HTML5 has added new attributes for fieldset.
  * &lt;p&gt;
  * @author GedMarc
+ * @param &lt;J&gt;
  */
-public class FieldSet extends Component&lt;FieldSetChildren, NoAttributes, NoFeatures, NoEvents, FieldSet&gt; implements FormChildren, NoIDTag
+public class FieldSet&lt;J extends FieldSet&gt;
+        extends Component&lt;FieldSetChildren, NoAttributes, NoFeatures, NoEvents, J&gt;
+        implements FormChildren, NoIDTag
 {
+
+    private static final long serialVersionUID = 1L;
+    /**
+     * The legend if any is applied
+     */
+    private Legend legend;
 
     /**
      * Constructs a new instance of Field Set
      */
     public FieldSet()
     {
-<span class="fc" id="L51">        super(ComponentTypes.FieldSet);</span>
-<span class="fc" id="L52">        add(legend);</span>
-<span class="fc" id="L53">    }</span>
-
-    private Legend legend;
+<span class="fc" id="L60">        super(ComponentTypes.FieldSet);</span>
+<span class="fc" id="L61">        add(legend);</span>
+<span class="fc" id="L62">    }</span>
 
     /**
      * Sets the legend
@@ -61,17 +68,17 @@ public class FieldSet extends Component&lt;FieldSetChildren, NoAttributes, NoFea
      */
     public void setLegendText(String legendText)
     {
-<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (legend == null)</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        if (legend == null)</span>
         {
-<span class="nc" id="L66">            legend = new Legend();</span>
-<span class="nc" id="L67">            legend.setText(legendText);</span>
-<span class="nc" id="L68">            add(legend);</span>
+<span class="nc" id="L73">            legend = new Legend();</span>
+<span class="nc" id="L74">            legend.setText(legendText);</span>
+<span class="nc" id="L75">            add(legend);</span>
         }
         else
         {
-<span class="nc" id="L72">            legend.setText(legendText);</span>
+<span class="nc" id="L79">            legend.setText(legendText);</span>
         }
-<span class="nc" id="L74">    }</span>
+<span class="nc" id="L81">    }</span>
 
     /**
      * Returns the legends text
@@ -80,7 +87,7 @@ public class FieldSet extends Component&lt;FieldSetChildren, NoAttributes, NoFea
      */
     public String getLegendText()
     {
-<span class="nc" id="L83">        return legend.getText(0).toString();</span>
+<span class="nc" id="L90">        return legend.getText(0).toString();</span>
     }
 
 }

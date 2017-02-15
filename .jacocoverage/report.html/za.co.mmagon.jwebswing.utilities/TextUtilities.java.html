@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TextUtilities.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.utilities</a> &gt; <span class="el_source">TextUtilities.java</span></div><h1>TextUtilities.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.utilities;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TextUtilities.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.utilities</a> &gt; <span class="el_source">TextUtilities.java</span></div><h1>TextUtilities.java</h1><pre class="source lang-java linenums">/* 
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.utilities;
 
 import java.io.*;
 import java.util.StringTokenizer;
@@ -13,10 +29,10 @@ import za.co.mmagon.logger.LogFactory;
  * @since 08 May 2013
  * @version 1.0
  */
-<span class="nc" id="L16">public class TextUtilities</span>
+<span class="nc" id="L32">public class TextUtilities</span>
 {
 
-<span class="fc" id="L19">    private static final Logger log = LogFactory.getLog(&quot;TextUtilities&quot;);</span>
+<span class="fc" id="L35">    private static final Logger log = LogFactory.getLog(&quot;TextUtilities&quot;);</span>
 
     /**
      * Updates an attribute name by changing the enum to a clean format
@@ -27,26 +43,26 @@ import za.co.mmagon.logger.LogFactory;
      */
     public static final synchronized StringBuilder cleanAttributeName(StringBuilder buildStringSB)
     {
-<span class="nc" id="L30">        String buildString = buildStringSB.toString();</span>
-<span class="nc" id="L31">        buildString = buildString.replace('$', ' ');</span>
-<span class="nc" id="L32">        buildString = buildString.replace('_', '-');</span>
-<span class="nc" id="L33">        buildString = buildString.replace('-', ' ').trim();</span>
-<span class="nc" id="L34">        StringTokenizer st = new StringTokenizer(buildString);</span>
-<span class="nc" id="L35">        StringBuilder outputString = new StringBuilder();</span>
-<span class="nc bnc" id="L36" title="All 2 branches missed.">        while (st.hasMoreElements())</span>
+<span class="nc" id="L46">        String buildString = buildStringSB.toString();</span>
+<span class="nc" id="L47">        buildString = buildString.replace('$', ' ');</span>
+<span class="nc" id="L48">        buildString = buildString.replace('_', '-');</span>
+<span class="nc" id="L49">        buildString = buildString.replace('-', ' ').trim();</span>
+<span class="nc" id="L50">        StringTokenizer st = new StringTokenizer(buildString);</span>
+<span class="nc" id="L51">        StringBuilder outputString = new StringBuilder();</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        while (st.hasMoreElements())</span>
         {
-<span class="nc" id="L38">            StringBuilder newSb = new StringBuilder(st.nextToken());</span>
-<span class="nc" id="L39">            Character firstChar = newSb.charAt(0);</span>
-<span class="nc" id="L40">            firstChar = firstChar.toString().toUpperCase().charAt(0);</span>
-<span class="nc" id="L41">            String restOfIt = newSb.substring(1, newSb.length()).toLowerCase();</span>
-<span class="nc" id="L42">            newSb = new StringBuilder();</span>
+<span class="nc" id="L54">            StringBuilder newSb = new StringBuilder(st.nextToken());</span>
+<span class="nc" id="L55">            Character firstChar = newSb.charAt(0);</span>
+<span class="nc" id="L56">            firstChar = firstChar.toString().toUpperCase().charAt(0);</span>
+<span class="nc" id="L57">            String restOfIt = newSb.substring(1, newSb.length()).toLowerCase();</span>
+<span class="nc" id="L58">            newSb = new StringBuilder();</span>
             //newSb.deleteCharAt(0);
-<span class="nc" id="L44">            newSb.append(firstChar);</span>
-<span class="nc" id="L45">            newSb.append(restOfIt);</span>
-<span class="nc" id="L46">            outputString.append(newSb).append(&quot; &quot;);</span>
-<span class="nc" id="L47">        }</span>
+<span class="nc" id="L60">            newSb.append(firstChar);</span>
+<span class="nc" id="L61">            newSb.append(restOfIt);</span>
+<span class="nc" id="L62">            outputString.append(newSb).append(&quot; &quot;);</span>
+<span class="nc" id="L63">        }</span>
 
-<span class="nc" id="L49">        return new StringBuilder(outputString);</span>
+<span class="nc" id="L65">        return new StringBuilder(outputString);</span>
     }
 
     /**
@@ -58,7 +74,7 @@ import za.co.mmagon.logger.LogFactory;
      */
     public static final synchronized StringBuilder cleanCamelCaseName(String hello)
     {
-<span class="nc" id="L61">        return cleanCamelCaseName(new StringBuilder(hello));</span>
+<span class="nc" id="L77">        return cleanCamelCaseName(new StringBuilder(hello));</span>
     }
 
     /**
@@ -70,34 +86,34 @@ import za.co.mmagon.logger.LogFactory;
      */
     public static final synchronized StringBuilder cleanCamelCaseName(StringBuilder buildStringSB)
     {
-<span class="nc" id="L73">        String buildString = buildStringSB.toString();</span>
-<span class="nc" id="L74">        buildString = buildString.replace('$', ' ');</span>
-<span class="nc" id="L75">        buildString = buildString.replace('_', '-');</span>
-<span class="nc" id="L76">        buildString = buildString.replace('-', ' ');</span>
-<span class="nc" id="L77">        String firstChar = buildString.substring(0, 1).toUpperCase();</span>
-<span class="nc" id="L78">        buildString = firstChar + buildString.substring(1, buildString.length());</span>
+<span class="nc" id="L89">        String buildString = buildStringSB.toString();</span>
+<span class="nc" id="L90">        buildString = buildString.replace('$', ' ');</span>
+<span class="nc" id="L91">        buildString = buildString.replace('_', '-');</span>
+<span class="nc" id="L92">        buildString = buildString.replace('-', ' ');</span>
+<span class="nc" id="L93">        String firstChar = buildString.substring(0, 1).toUpperCase();</span>
+<span class="nc" id="L94">        buildString = firstChar + buildString.substring(1, buildString.length());</span>
 
-<span class="nc" id="L80">        String cleanCamelCase = &quot;&quot;;</span>
-<span class="nc" id="L81">        char[] buildStringChars = buildString.toCharArray();</span>
-<span class="nc" id="L82">        char prevChar = '`';</span>
-<span class="nc bnc" id="L83" title="All 2 branches missed.">        for (Character buildStringChar : buildStringChars)</span>
+<span class="nc" id="L96">        String cleanCamelCase = &quot;&quot;;</span>
+<span class="nc" id="L97">        char[] buildStringChars = buildString.toCharArray();</span>
+<span class="nc" id="L98">        char prevChar = '`';</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        for (Character buildStringChar : buildStringChars)</span>
         {
-<span class="nc bnc" id="L85" title="All 4 branches missed.">            if (prevChar == ' ' &amp;&amp; !Character.isUpperCase(buildStringChar))</span>
+<span class="nc bnc" id="L101" title="All 4 branches missed.">            if (prevChar == ' ' &amp;&amp; !Character.isUpperCase(buildStringChar))</span>
             {
-<span class="nc" id="L87">                buildStringChar = Character.toUpperCase(buildStringChar);</span>
-<span class="nc" id="L88">                cleanCamelCase += &quot; &quot; + buildStringChar;</span>
+<span class="nc" id="L103">                buildStringChar = Character.toUpperCase(buildStringChar);</span>
+<span class="nc" id="L104">                cleanCamelCase += &quot; &quot; + buildStringChar;</span>
             }
-<span class="nc bnc" id="L90" title="All 2 branches missed.">            else if (Character.isUpperCase(buildStringChar))</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">            else if (Character.isUpperCase(buildStringChar))</span>
             {
-<span class="nc" id="L92">                cleanCamelCase += &quot; &quot; + buildStringChar;</span>
+<span class="nc" id="L108">                cleanCamelCase += &quot; &quot; + buildStringChar;</span>
             }
             else
             {
-<span class="nc" id="L96">                cleanCamelCase += buildStringChar;</span>
+<span class="nc" id="L112">                cleanCamelCase += buildStringChar;</span>
             }
         }
 
-<span class="nc" id="L100">        return new StringBuilder(cleanCamelCase);</span>
+<span class="nc" id="L116">        return new StringBuilder(cleanCamelCase);</span>
     }
 
     /**
@@ -109,7 +125,7 @@ import za.co.mmagon.logger.LogFactory;
      */
     public static final synchronized String cleanAttributeName(String s)
     {
-<span class="nc" id="L112">        return TextUtilities.cleanAttributeName(new StringBuilder(s)).toString();</span>
+<span class="nc" id="L128">        return TextUtilities.cleanAttributeName(new StringBuilder(s)).toString();</span>
     }
 
     /**
@@ -121,7 +137,7 @@ import za.co.mmagon.logger.LogFactory;
      */
     public static final synchronized String initCap(String s)
     {
-<span class="nc" id="L124">        return TextUtilities.initCap(new StringBuilder(s)).toString();</span>
+<span class="nc" id="L140">        return TextUtilities.initCap(new StringBuilder(s)).toString();</span>
     }
 
     /**
@@ -133,18 +149,18 @@ import za.co.mmagon.logger.LogFactory;
      */
     public static final synchronized StringBuilder initCap(StringBuilder s)
     {
-<span class="nc" id="L136">        StringTokenizer st = new StringTokenizer(s.toString());</span>
-<span class="nc" id="L137">        StringBuilder buildString = new StringBuilder();</span>
-<span class="nc bnc" id="L138" title="All 2 branches missed.">        while (st.hasMoreElements())</span>
+<span class="nc" id="L152">        StringTokenizer st = new StringTokenizer(s.toString());</span>
+<span class="nc" id="L153">        StringBuilder buildString = new StringBuilder();</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">        while (st.hasMoreElements())</span>
         {
-<span class="nc" id="L140">            StringBuilder newSb = new StringBuilder(st.nextToken());</span>
-<span class="nc" id="L141">            Character firstChar = newSb.charAt(0);</span>
-<span class="nc" id="L142">            firstChar = firstChar.toString().toUpperCase().charAt(0);</span>
-<span class="nc" id="L143">            newSb.deleteCharAt(0);</span>
-<span class="nc" id="L144">            newSb.insert(0, firstChar);</span>
-<span class="nc" id="L145">            buildString.append(newSb).append(&quot; &quot;);</span>
-<span class="nc" id="L146">        }</span>
-<span class="nc" id="L147">        return new StringBuilder(buildString);</span>
+<span class="nc" id="L156">            StringBuilder newSb = new StringBuilder(st.nextToken());</span>
+<span class="nc" id="L157">            Character firstChar = newSb.charAt(0);</span>
+<span class="nc" id="L158">            firstChar = firstChar.toString().toUpperCase().charAt(0);</span>
+<span class="nc" id="L159">            newSb.deleteCharAt(0);</span>
+<span class="nc" id="L160">            newSb.insert(0, firstChar);</span>
+<span class="nc" id="L161">            buildString.append(newSb).append(&quot; &quot;);</span>
+<span class="nc" id="L162">        }</span>
+<span class="nc" id="L163">        return new StringBuilder(buildString);</span>
     }
 
     /**
@@ -156,13 +172,13 @@ import za.co.mmagon.logger.LogFactory;
      */
     public static final synchronized StringBuilder getTabString(Integer tabCount)
     {
-<span class="fc" id="L159">        Integer indentationDepth = tabCount;</span>
-<span class="fc" id="L160">        StringBuilder tabIndents = new StringBuilder(&quot;&quot;);</span>
-<span class="fc bfc" id="L161" title="All 2 branches covered.">        for (int i = 0; i &lt; indentationDepth; i++)</span>
+<span class="fc" id="L175">        Integer indentationDepth = tabCount;</span>
+<span class="fc" id="L176">        StringBuilder tabIndents = new StringBuilder(&quot;&quot;);</span>
+<span class="fc bfc" id="L177" title="All 2 branches covered.">        for (int i = 0; i &lt; indentationDepth; i++)</span>
         {
-<span class="fc" id="L163">            tabIndents.append(&quot;\t&quot;);</span>
+<span class="fc" id="L179">            tabIndents.append(&quot;\t&quot;);</span>
         }
-<span class="fc" id="L165">        return tabIndents;</span>
+<span class="fc" id="L181">        return tabIndents;</span>
     }
 
     /**
@@ -174,35 +190,35 @@ import za.co.mmagon.logger.LogFactory;
      */
     public static final synchronized String stackTraceToString(Throwable e)
     {
-<span class="nc" id="L177">        String retValue = null;</span>
-<span class="nc" id="L178">        StringWriter sw = null;</span>
-<span class="nc" id="L179">        PrintWriter pw = null;</span>
+<span class="nc" id="L193">        String retValue = null;</span>
+<span class="nc" id="L194">        StringWriter sw = null;</span>
+<span class="nc" id="L195">        PrintWriter pw = null;</span>
         try
         {
-<span class="nc" id="L182">            sw = new StringWriter();</span>
-<span class="nc" id="L183">            pw = new PrintWriter(sw);</span>
-<span class="nc" id="L184">            e.printStackTrace(pw);</span>
-<span class="nc" id="L185">            retValue = sw.toString();</span>
+<span class="nc" id="L198">            sw = new StringWriter();</span>
+<span class="nc" id="L199">            pw = new PrintWriter(sw);</span>
+<span class="nc" id="L200">            e.printStackTrace(pw);</span>
+<span class="nc" id="L201">            retValue = sw.toString();</span>
         }
         finally
         {
-<span class="nc" id="L189">            try</span>
+<span class="nc" id="L205">            try</span>
             {
-<span class="nc bnc" id="L191" title="All 4 branches missed.">                if (pw != null)</span>
+<span class="nc bnc" id="L207" title="All 4 branches missed.">                if (pw != null)</span>
                 {
-<span class="nc" id="L193">                    pw.close();</span>
+<span class="nc" id="L209">                    pw.close();</span>
                 }
-<span class="nc bnc" id="L195" title="All 4 branches missed.">                if (sw != null)</span>
+<span class="nc bnc" id="L211" title="All 4 branches missed.">                if (sw != null)</span>
                 {
-<span class="nc" id="L197">                    sw.close();</span>
+<span class="nc" id="L213">                    sw.close();</span>
                 }
             }
-<span class="nc" id="L200">            catch (IOException ignore)</span>
+<span class="nc" id="L216">            catch (IOException ignore)</span>
             {
-<span class="nc" id="L202">                log.log(Level.FINEST, &quot;Stack trace produced IO Error&quot;, ignore);</span>
-<span class="nc" id="L203">            }</span>
-<span class="nc" id="L204">        }</span>
-<span class="nc" id="L205">        return retValue;</span>
+<span class="nc" id="L218">                log.log(Level.FINEST, &quot;Stack trace produced IO Error&quot;, ignore);</span>
+<span class="nc" id="L219">            }</span>
+<span class="nc" id="L220">        }</span>
+<span class="nc" id="L221">        return retValue;</span>
     }
 
     /**
@@ -216,7 +232,7 @@ import za.co.mmagon.logger.LogFactory;
      */
     public static &lt;T extends Enum&lt;T&gt;&gt; T getInstance(final String value, final Class&lt;T&gt; enumClass)
     {
-<span class="nc" id="L219">        return Enum.valueOf(enumClass, value);</span>
+<span class="nc" id="L235">        return Enum.valueOf(enumClass, value);</span>
     }
 
     /**
@@ -228,15 +244,15 @@ import za.co.mmagon.logger.LogFactory;
      */
     public static StringBuilder removeLastInstanceOf(StringBuilder sb)
     {
-<span class="nc bnc" id="L231" title="All 2 branches missed.">        if (sb.length() &gt; 0)</span>
+<span class="nc bnc" id="L247" title="All 2 branches missed.">        if (sb.length() &gt; 0)</span>
         {
-<span class="nc bnc" id="L233" title="All 2 branches missed.">            if (sb.lastIndexOf(&quot;,&quot;) != -1)</span>
+<span class="nc bnc" id="L249" title="All 2 branches missed.">            if (sb.lastIndexOf(&quot;,&quot;) != -1)</span>
             {
-<span class="nc" id="L235">                StringBuilder sb2 = sb.deleteCharAt(sb.lastIndexOf(&quot;,&quot;));</span>
-<span class="nc" id="L236">                return sb2;</span>
+<span class="nc" id="L251">                StringBuilder sb2 = sb.deleteCharAt(sb.lastIndexOf(&quot;,&quot;));</span>
+<span class="nc" id="L252">                return sb2;</span>
             }
         }
-<span class="nc" id="L239">        return sb;</span>
+<span class="nc" id="L255">        return sb;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

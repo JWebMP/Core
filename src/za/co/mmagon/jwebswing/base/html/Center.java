@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,12 +18,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoClassAttribute;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
@@ -34,20 +29,24 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The center tag is used to center-align text.
  * <p>
- * Browser Support
- * Yes Yes Yes Yes Yes
+ * Browser Support Yes Yes Yes Yes Yes
  * <p>
  * Differences Between HTML 4.01 and HT1ML5
  * <p>
  * The center tag is not supported in HTML5.
  * <p>
  * @author GedMarc
+ * @param <J>
+ *
  * @deprecated
  */
-public class Center extends Component<GlobalChildren, NoAttributes, NoFeatures, NoEvents, Center> implements NoIDTag, NoClassAttribute, NoNewLineBeforeClosingTag, NoNewLineForRawText
+public class Center<J extends Center>
+        extends Component<GlobalChildren, NoAttributes, NoFeatures, NoEvents, J>
+        implements NoIDTag, NoClassAttribute, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
     private static final Center center = new Center();
+    private static final long serialVersionUID = 1L;
 
     /**
      *
@@ -69,8 +68,7 @@ public class Center extends Component<GlobalChildren, NoAttributes, NoFeatures, 
     }
 
     /**
-     * Returns a new instance of the center object. Better to reference the
-     * static field.
+     * Returns a new instance of the center object. Better to reference the static field.
      * <p>
      * @return
      */

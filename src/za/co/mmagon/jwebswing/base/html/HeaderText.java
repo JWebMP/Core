@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,8 +24,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeaderGroupChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
-import za.co.mmagon.jwebswing.components.bootstrap.cards.BSCardChildren;
-import za.co.mmagon.jwebswing.components.jqueryui.accordion.JQUIAccordionChildren;
 
 /**
  * HTML Headings<p>
@@ -58,11 +56,13 @@ import za.co.mmagon.jwebswing.components.jqueryui.accordion.JQUIAccordionChildre
  * The "align" attribute is deprecated in HTML 4.01, and is not supported in HTML5. Use CSS to align elements.<p>
  * <p>
  * @author Marc Magon
+ * @param <J>
+ *
  * @since forever
  */
-public class HeaderText extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, HeaderText>
-        implements BodyChildren, HeaderGroupChildren, GlobalChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, JQUIAccordionChildren,
-        BSCardChildren
+public class HeaderText<J extends HeaderText>
+        extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements BodyChildren, HeaderGroupChildren, GlobalChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 
 {
 
@@ -105,10 +105,13 @@ public class HeaderText extends Component<GlobalChildren, NoAttributes, GlobalFe
      * Sets the current text
      *
      * @param headerText The text for the header
+     *
+     * @return
      */
-    public final void setHeaderText(String headerText)
+    public final J setHeaderText(String headerText)
     {
         setText(headerText);
+        return (J) this;
     }
 
     /**
@@ -125,12 +128,15 @@ public class HeaderText extends Component<GlobalChildren, NoAttributes, GlobalFe
      * Sets this headers type
      *
      * @param headerType The type of header this is
+     *
+     * @return
      */
-    public void setHeaderType(HeaderTypes headerType)
+    public J setHeaderType(HeaderTypes headerType)
     {
         this.headerType = headerType;
         super.setTag(headerType.name());
         super.setComponentType(headerType.getLinkedComponent());
+        return (J) this;
     }
 
     @Override

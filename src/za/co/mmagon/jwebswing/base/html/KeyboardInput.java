@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,6 @@ import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.PhraseChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
@@ -30,8 +29,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &gt;kbd&lt; tag is a phrase tag. It defines keyboard input.<p>
  * <p>
- * Tip: This tag is not deprecated, but it is possible to achieve richer effect
- * with CSS.<p>
+ * Tip: This tag is not deprecated, but it is possible to achieve richer effect with CSS.<p>
  * <p>
  * All phrase tags: Tag Description<p>
  * &gt;em&lt; Renders as emphasized text<p>
@@ -46,12 +44,18 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * NONE.<p>
  *
+ * @param <J>
+ *
  * @since 2015/02/09
  * @version 1
  * @author GedMarc
  */
-public class KeyboardInput extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, KeyboardInput> implements PhraseChildren
+public class KeyboardInput<J extends KeyboardInput>
+        extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements PhraseChildren
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new Keyboard Input

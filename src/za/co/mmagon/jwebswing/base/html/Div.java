@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,22 +21,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.bootstrap.cards.BSCardChildren;
-import za.co.mmagon.jwebswing.components.bootstrap.carousel.BSCarouselChildren;
-import za.co.mmagon.jwebswing.components.bootstrap.media.BSMediaChildren;
-import za.co.mmagon.jwebswing.components.bootstrap.modal.BSModalChildren;
-import za.co.mmagon.jwebswing.components.jqmetro.metro.interfaces.JQMetroTileChildren;
-import za.co.mmagon.jwebswing.components.jquerylayout.layout.interfaces.JWLayoutChildren;
-import za.co.mmagon.jwebswing.components.jquerylayout.layout.interfaces.JWLayoutDivChildren;
-import za.co.mmagon.jwebswing.components.jqueryui.accordion.JQUIAccordionChildren;
-import za.co.mmagon.jwebswing.components.jqueryui.dialog.JQUIDialogChildren;
-import za.co.mmagon.jwebswing.components.jqueryui.radiobutton.JQUIRadioButtonGroupChildren;
-import za.co.mmagon.jwebswing.components.jqueryui.tabs.JQUITabsChildren;
-import za.co.mmagon.jwebswing.components.jqxwidgets.dropdownlist.JQXDropDownListChildren;
-import za.co.mmagon.jwebswing.components.jqxwidgets.layout.JQXLayoutChildren;
-import za.co.mmagon.jwebswing.components.jqxwidgets.navigationbar.JQXNavigationBarChildren;
-import za.co.mmagon.jwebswing.components.jqxwidgets.notification.JQXNotificationChildren;
-import za.co.mmagon.jwebswing.components.jqxwidgets.ribbon.JQXRibbonChildren;
 
 /**
  * Definition and Usage
@@ -68,12 +52,10 @@ import za.co.mmagon.jwebswing.components.jqxwidgets.ribbon.JQXRibbonChildren;
  * @param <E> The allowed events
  * @param <J> The Clonable object
  */
-public class Div<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component>
+public class Div<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Div>
         extends Component<C, A, F, E, J>
-        implements JWLayoutChildren, BodyChildren, ImageMapChildren, AreaChildren, LayoutHandler, JWLayoutDivChildren,
-        JQUITabsChildren, JQUIAccordionChildren, ContainerType, JQUIDialogChildren, JQXRibbonChildren, JQUIRadioButtonGroupChildren,
-        JQXNavigationBarChildren, JQXDropDownListChildren, JQXLayoutChildren, JQXNotificationChildren, JQMetroTileChildren, ListItemChildren,
-        BSModalChildren, BSMediaChildren, BSCardChildren, BSCarouselChildren
+        implements BodyChildren, ImageMapChildren, AreaChildren, LayoutHandler,
+        ListItemChildren
 {
 
     private static final long serialVersionUID = 1L;
@@ -105,5 +87,6 @@ public class Div<C extends GlobalChildren, A extends Enum & AttributeDefinitions
     {
         super(ComponentTypes.Div);
         setText(text);
+
     }
 }

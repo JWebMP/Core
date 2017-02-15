@@ -20,9 +20,6 @@ import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.components.pools.jquery.JQueryReferencePool;
-import za.co.mmagon.jwebswing.components.pools.jqueryui.JQUIReferencePool;
-import za.co.mmagon.jwebswing.components.pools.jquerylayout.JQLayoutReferencePool;
-import za.co.mmagon.jwebswing.components.references.jqxwidgets.JQXCoreJavaScriptReference;
 import za.co.mmagon.jwebswing.generics.WebReference;
 
 /**
@@ -49,16 +46,7 @@ public class WebReferenceTest
     {
         ArrayList<WebReference> w = new ArrayList<>();
         w.add(JQueryReferencePool.JQueryAtmospherePush.getJavaScriptReference());
-        w.add(new JQXCoreJavaScriptReference());
         w.add(JQueryReferencePool.JQueryV2.getJavaScriptReference());// new JQueryReferenceV2());
-        w.add(JQUIReferencePool.Widget.getJavaScriptReference());
-        w.add(JQUIReferencePool.Core.getJavaScriptReference());
-        w.add(JQUIReferencePool.Dialog.getJavaScriptReference());
-        w.add(JQUIReferencePool.Tabs.getJavaScriptReference());
-        w.add(JQUIReferencePool.Mouse.getJavaScriptReference());
-        w.add(JQUIReferencePool.Button.getJavaScriptReference());
-
-        w.add(JQLayoutReferencePool.JQueryLayout.getJavaScriptReference());
 
         w.add(JQueryReferencePool.JQueryAtmospherePush.getJavaScriptReference());
         w.add(JQueryReferencePool.AjaxEnabler.getJavaScriptReference());
@@ -66,7 +54,7 @@ public class WebReferenceTest
         WebReference.sort(w);
         System.out.println(w);
 
-        String expected = "[bower_components/jquery/dist/jquery.js, javascript/jwebswing/ajax-enabler.js, bower_components/jquery-ui/jquery-ui.js, bower_components/jquery-ui/jquery-ui.js, bower_components/jquery-ui/jquery-ui.js, bower_components/jqwidgets/jqwidgets/jqxcore.js, bower_components/jquery-ui/jquery-ui.js, bower_components/jquery-ui/jquery-ui.js, bower_components/jquery-ui/jquery-ui.js, bower_components/jquery-ui-latest-jwebswing/jquery.layout_and_plugins.js, bower_components/atmosphere.js/atmosphere.js, bower_components/atmosphere.js/atmosphere.js]";
+        String expected = "[bower_components/jquery/dist/jquery.js, javascript/jwebswing/ajax-enabler.js, bower_components/jquery-ui/jquery-ui.js, bower_components/jquery-ui/jquery-ui.js, bower_components/jquery-ui/jquery-ui.js, bower_components/jquery-ui/jquery-ui.js, bower_components/jquery-ui/jquery-ui.js, bower_components/jquery-ui/jquery-ui.js, bower_components/atmosphere.js/atmosphere.js, bower_components/atmosphere.js/atmosphere.js]";
         String result = w.toString();
 
         Assert.assertEquals(expected, result);

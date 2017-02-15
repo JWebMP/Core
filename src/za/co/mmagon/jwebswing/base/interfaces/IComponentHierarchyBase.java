@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@ import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
+import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
@@ -231,4 +232,65 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
      */
     String toString(Integer tabCount);
 
+    /**
+     * Adds a class name to the class list
+     * <p>
+     * @param className The class name to add
+     * <p>
+     * @return True if it was added, false if it already existed
+     */
+    J addClass(String className);
+
+    /**
+     * Removes a class name from this component
+     * <p>
+     * @param className Class Name to Remove
+     * <p>
+     * @return True if the class was removed, False if the class was not part of the collection
+     */
+    boolean removeClass(String className);
+
+    /**
+     * Sets the ID and adds the attribute to the global set
+     *
+     * @param id
+     *
+     * @return
+     */
+    J setID(String id);
+
+    /**
+     * Adds a class name with the given css class name compatible
+     *
+     * @param className
+     *
+     * @return
+     */
+    J addClass(ICSSClassName className);
+
+    /**
+     * Adds the class at the given position
+     *
+     * @param position
+     * @param className
+     *
+     * @return
+     */
+    public J addClass(int position, ICSSClassName className);
+
+    /**
+     * Returns a complete list of all class names associated with this component
+     * <p>
+     * @return
+     */
+    List<String> getClasses();
+
+    /**
+     * Set the theme applied to this component
+     * <p>
+     * @param theme The JQuery UI theme to apply to the component
+     *
+     * @return This Class
+     */
+    J addTheme(Theme theme);
 }

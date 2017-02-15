@@ -1,20 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Area.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">Area.java</span></div><h1>Area.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Area.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">Area.java</span></div><h1>Area.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.base.html;
 
 import java.io.Serializable;
-import java.text.DecimalFormat;
-import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.*;
+import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.attributes.AreaAttributes;
-import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.AreaChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.MapChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqimagemap.imagemap.JQImageMap;
-import za.co.mmagon.jwebswing.components.jqimagemap.imagemap.JQMapInteractiveFeature;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -47,257 +57,16 @@ public class Area extends ComponentHierarchyBase&lt;AreaChildren, AreaAttributes
         implements MapChildren, Serializable
 {
 
-<span class="fc" id="L50">    private static final Logger LOG = LogFactory.getInstance().getLogger(&quot;Area&quot;);</span>
+<span class="nc" id="L60">    private static final Logger LOG = LogFactory.getInstance().getLogger(&quot;Area&quot;);</span>
     /**
      * Serial Version for all Components and their compatibility
      */
     private static final long serialVersionUID = 1l;
 
-    private JQImageMap.ImageMapAreaShapes areaShape;
-    private int[][] coordinatesArray;
-    private String coordinates;
-<span class="pc" id="L59">    private String prettyValue = &quot;0.0&quot;;</span>
-<span class="pc" id="L60">    private double value = 0.0;</span>
-    private JQMapInteractiveFeature interactiveProperties;
-    private JQImageMap drillMap;
-    private DecimalFormat decimalFormat;
-
     public Area()
     {
-<span class="nc" id="L67">        super(ComponentTypes.Area);</span>
-<span class="nc" id="L68">    }</span>
-
-    /**
-     * Construct a new area tag with the given co-ordinates and area shape. A name is required
-     *
-     * @param areaShape   The area shape
-     * @param coordinates The co-ordinates of this area
-     * @param name        The name of this area
-     */
-    public Area(JQImageMap.ImageMapAreaShapes areaShape, String coordinates, String name)
-    {
-<span class="fc" id="L79">        super(ComponentTypes.Area);</span>
-<span class="fc" id="L80">        this.areaShape = areaShape;</span>
-<span class="fc" id="L81">        this.coordinatesArray = getArrayFromStringCoordinates(coordinates);</span>
-<span class="fc" id="L82">        this.coordinates = coordinates;</span>
-<span class="fc" id="L83">        addAttribute(GlobalAttributes.Name, name);</span>
-<span class="fc" id="L84">        addAttribute(AreaAttributes.Coords, this.coordinates);</span>
-<span class="fc" id="L85">        addAttribute(AreaAttributes.Shape, areaShape.name().toLowerCase());</span>
-<span class="fc" id="L86">        setInlineClosingTag(true);</span>
-<span class="fc" id="L87">    }</span>
-
-    /**
-     * Construct a new area tag with the given co-ordinates and area shape. The name &quot;MapArea&quot; is assigned as a default for image maps
-     *
-     * @param areaShape   The area shape
-     * @param coordinates The co-ordinates of this area
-     */
-    public Area(JQImageMap.ImageMapAreaShapes areaShape, String coordinates)
-    {
-<span class="fc" id="L97">        this(areaShape, coordinates, &quot;MapArea&quot;);</span>
-<span class="fc" id="L98">    }</span>
-
-    /**
-     * If a drill through map is specified, returns this map
-     *
-     * @return
-     */
-    public JQImageMap getDrillMap()
-    {
-<span class="nc" id="L107">        return drillMap;</span>
-    }
-
-    /**
-     * Sets the drill map drill through
-     *
-     * @param drillMap
-     */
-    public void setDrillMap(JQImageMap drillMap)
-    {
-<span class="nc" id="L117">        this.drillMap = drillMap;</span>
-<span class="nc" id="L118">    }</span>
-
-    /**
-     * Pre-configures this component with all the required attributes and features
-     */
-    @Override
-    public void preConfigure()
-    {
-<span class="nc bnc" id="L126" title="All 2 branches missed.">        if (coordinates != null)</span>
-        {
-<span class="nc" id="L128">            addAttribute(AreaAttributes.Coords, this.coordinates);</span>
-        }
-<span class="nc bnc" id="L130" title="All 2 branches missed.">        if (areaShape != null)</span>
-        {
-<span class="nc" id="L132">            addAttribute(AreaAttributes.Shape, areaShape.name().toLowerCase());</span>
-        }
-<span class="nc" id="L134">        super.preConfigure();</span>
-<span class="nc" id="L135">    }</span>
-
-    /**
-     * Returns the interactive properties of this feature
-     *
-     * @return
-     */
-    public JQMapInteractiveFeature getInteractiveProperties()
-    {
-<span class="nc bnc" id="L144" title="All 2 branches missed.">        if (interactiveProperties == null)</span>
-        {
-<span class="nc" id="L146">            interactiveProperties = new JQMapInteractiveFeature(null);</span>
-        }
-<span class="nc" id="L148">        return interactiveProperties;</span>
-    }
-
-    /**
-     * Splits the co-ordinates into an array
-     *
-     * @param coordinates The Co-ordinate string
-     *
-     * @return The integer array of all the points
-     */
-    public static synchronized int[][] getArrayFromStringCoordinates(String coordinates)
-    {
-<span class="fc" id="L160">        StringTokenizer st = new StringTokenizer(coordinates, &quot;,&quot;);</span>
-<span class="fc" id="L161">        int coordinateCount = st.countTokens() / 2;</span>
-<span class="fc" id="L162">        int[][] coords = new int[coordinateCount][2];</span>
-<span class="fc" id="L163">        int currentCoord = 0;</span>
-<span class="fc bfc" id="L164" title="All 2 branches covered.">        while (st.hasMoreElements())</span>
-        {
-            try
-            {
-<span class="fc" id="L168">                String coord1 = (String) st.nextElement();</span>
-<span class="fc" id="L169">                String coord2 = (String) st.nextElement();</span>
-<span class="fc" id="L170">                coords[currentCoord][0] = Integer.parseInt(coord1);</span>
-<span class="fc" id="L171">                coords[currentCoord][1] = Integer.parseInt(coord2);</span>
-<span class="fc" id="L172">                currentCoord++;</span>
-            }
-<span class="nc" id="L174">            catch (NullPointerException npe)</span>
-            {
-<span class="nc" id="L176">                LOG.log(Level.WARNING, &quot;Area format incorrect&quot;, npe);</span>
-<span class="pc" id="L177">            }</span>
-        }
-<span class="fc" id="L179">        return coords;</span>
-    }
-
-    /**
-     * Retrieves the Co-Ordinates array
-     *
-     * @return int[2]
-     */
-    public int[][] getCoordinatesArray()
-    {
-<span class="nc" id="L189">        return getArrayFromStringCoordinates(this.coordinates);</span>
-    }
-
-    /**
-     * Return the string form of the co-ordinates
-     *
-     * @return
-     */
-    public String getCoordinates()
-    {
-<span class="nc" id="L199">        return coordinates;</span>
-    }
-
-    /**
-     * Set the Co-ordinates
-     *
-     * @param coordinates
-     */
-    public void setCoordinates(String coordinates)
-    {
-<span class="nc" id="L209">        this.coordinates = coordinates;</span>
-<span class="nc" id="L210">    }</span>
-
-    /**
-     * Return the given area shape
-     *
-     * @return
-     */
-    public JQImageMap.ImageMapAreaShapes getAreaShape()
-    {
-<span class="nc" id="L219">        return areaShape;</span>
-    }
-
-    /**
-     * sets the given area shape
-     *
-     * @param areaShape
-     */
-    public void setAreaShape(JQImageMap.ImageMapAreaShapes areaShape)
-    {
-<span class="nc" id="L229">        this.areaShape = areaShape;</span>
-<span class="nc" id="L230">    }</span>
-
-    /**
-     * Returns a value for this value
-     *
-     * @return
-     */
-    public double getValue()
-    {
-<span class="nc" id="L239">        return value;</span>
-    }
-
-    /**
-     * Sets the value associated with this area
-     *
-     * @param value
-     */
-    public void setValue(double value)
-    {
-<span class="nc" id="L249">        this.value = value;</span>
-<span class="nc" id="L250">    }</span>
-
-    /**
-     * Sets the value assigned to this area
-     *
-     * @param value
-     */
-    public void setValue(String value)
-    {
-<span class="nc" id="L259">        this.prettyValue = value;</span>
-<span class="nc" id="L260">    }</span>
-
-    /**
-     * Returns a pretty print version of the given are
-     *
-     * @return
-     */
-    public String getPrettyValue()
-    {
-<span class="nc" id="L269">        return prettyValue;</span>
-    }
-
-    /**
-     * Set the pretty value of the figure
-     *
-     * @param prettyValue
-     */
-    public void setPrettyValue(String prettyValue)
-    {
-<span class="nc" id="L279">        this.prettyValue = prettyValue;</span>
-<span class="nc" id="L280">    }</span>
-
-    /**
-     * Sets the Decimal Format of this area for pretty print
-     *
-     * @return
-     */
-    public DecimalFormat getDecimalFormat()
-    {
-<span class="nc" id="L289">        return decimalFormat;</span>
-    }
-
-    /**
-     * Sets the Decimal Format of this area for pretty print
-     *
-     * @param decimalFormat
-     */
-    public void setDecimalFormat(DecimalFormat decimalFormat)
-    {
-<span class="nc" id="L299">        this.decimalFormat = decimalFormat;</span>
-<span class="nc" id="L300">    }</span>
+<span class="nc" id="L68">        super(ComponentTypes.Area);</span>
+<span class="nc" id="L69">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

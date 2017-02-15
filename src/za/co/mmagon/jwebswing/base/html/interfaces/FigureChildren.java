@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ package za.co.mmagon.jwebswing.base.html.interfaces;
  *
  * @author GedMarc
  */
-public interface FigureChildren
+public interface FigureChildren extends GlobalChildren
 {
-    
+
 }

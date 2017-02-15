@@ -1,5 +1,5 @@
-/*
- * Copyright (C) 2016 ged_m
+/* 
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -151,10 +151,13 @@ public class AjaxResponseReaction
      * Sets the given reaction title
      *
      * @param reactionTitle
+     *
+     * @return
      */
-    public void setReactionTitle(String reactionTitle)
+    public AjaxResponseReaction setReactionTitle(String reactionTitle)
     {
         this.reactionTitle = reactionTitle;
+        return this;
     }
 
     /**
@@ -172,10 +175,13 @@ public class AjaxResponseReaction
      * Sets the given reaction message
      *
      * @param reactionData
+     *
+     * @return
      */
-    public void setReactionData(String reactionData)
+    public AjaxResponseReaction setReactionData(String reactionData)
     {
         this.reactionData = reactionData;
+        return this;
     }
 
     /**
@@ -192,10 +198,13 @@ public class AjaxResponseReaction
      * Sets the reaction type
      *
      * @param reactionType
+     *
+     * @return
      */
-    public void setReactionType(ReactionType reactionType)
+    public AjaxResponseReaction setReactionType(ReactionType reactionType)
     {
         this.reactionType = reactionType == null ? ReactionType.DialogDisplay : reactionType;
+        return this;
     }
 
     /**
@@ -212,10 +221,13 @@ public class AjaxResponseReaction
      * Sets the response type for the reaction
      *
      * @param responseType
+     *
+     * @return
      */
-    public void setResponseType(AjaxResponseType responseType)
+    public AjaxResponseReaction setResponseType(AjaxResponseType responseType)
     {
         this.responseType = responseType == null ? AjaxResponseType.Info : responseType;
+        return this;
     }
 
     /**
@@ -232,10 +244,13 @@ public class AjaxResponseReaction
      * Apply a timeout before a navigation reaction occurs
      *
      * @param actionTimeout
+     *
+     * @return
      */
-    public void setActionTimeout(int actionTimeout)
+    public AjaxResponseReaction setActionTimeout(int actionTimeout)
     {
         this.actionTimeout = actionTimeout;
+        return this;
     }
 
 }

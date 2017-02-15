@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
@@ -8,7 +24,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.ListChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqueryui.tabs.JQUITabsChildren;
 
 /**
  * Definition and Usage<p>
@@ -32,11 +47,14 @@ import za.co.mmagon.jwebswing.components.jqueryui.tabs.JQUITabsChildren;
  * Tip: Use CSS to define the type of list.<p>
  *
  * @author Marc Magon
+ * @param <J>
+ *
  * @since forever
  * @version 1.0
  */
-public class ListItem extends Component<ListItemChildren, NoAttributes, GlobalFeatures, GlobalEvents, ListItem>
-        implements ListChildren, JQUITabsChildren, NoNewLineForRawText, ListItemChildren
+public class ListItem<J extends ListItem>
+        extends Component<ListItemChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements ListChildren, NoNewLineForRawText, ListItemChildren
 {
 
     private static final long serialVersionUID = 1L;

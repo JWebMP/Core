@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.PhraseChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.bootstrap.forms.groups.BSFormGroupChildren;
 
 /**
  * Definition and Usage<p>
@@ -41,13 +40,16 @@ import za.co.mmagon.jwebswing.components.bootstrap.forms.groups.BSFormGroupChild
  * NONE.<p>
  *
  * @author GedMarc
+ * @param <J>
+ *
  * @since Mar 1, 2015
  * @version 1.0
  * <p>
  *
  */
-public class SmallText extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, SmallText>
-        implements ParagraphChildren, PhraseChildren, BSFormGroupChildren
+public class SmallText<J extends SmallText>
+        extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements ParagraphChildren, PhraseChildren
 {
 
     private static final long serialVersionUID = 1L;

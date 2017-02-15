@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,9 +18,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -30,8 +28,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;cite&gt; tag defines the title of a work (e.g. a book, a song, a movie, a TV show, a painting, a sculpture, etc.).
  * <p>
- * Note: A person's name is not the title of a work. Browser Support Element
- * &lt;cite&gt; Yes Yes Yes Yes Yes
+ * Note: A person's name is not the title of a work. Browser Support Element &lt;cite&gt; Yes Yes Yes Yes Yes
  * <p>
  * Differences Between HTML 4.01 and HTML5
  * <p>
@@ -41,10 +38,24 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * @author GedMarc
  */
-public class Cite extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, Cite> implements NoNewLineBeforeClosingTag,NoNewLineForRawText
+public class Cite
+        extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, Cite>
+        implements NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
+
+    private static final long serialVersionUID = 1L;
+
     /**
      * The cite tag defines the title of a work (e.g. a book, a song, a movie, a TV show, a painting, a sculpture, etc.).
+     */
+    public Cite()
+    {
+        this(null);
+    }
+
+    /**
+     * The cite tag defines the title of a work (e.g. a book, a song, a movie, a TV show, a painting, a sculpture, etc.).
+     *
      * @param citeText The reference of the work
      */
     public Cite(String citeText)

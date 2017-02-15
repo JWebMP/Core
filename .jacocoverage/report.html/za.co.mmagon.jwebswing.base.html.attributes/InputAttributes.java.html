@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>InputAttributes.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html.attributes</a> &gt; <span class="el_source">InputAttributes.java</span></div><h1>InputAttributes.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html.attributes;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>InputAttributes.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html.attributes</a> &gt; <span class="el_source">InputAttributes.java</span></div><h1>InputAttributes.java</h1><pre class="source lang-java linenums">/* 
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.base.html.attributes;
 
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 
@@ -11,49 +27,49 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  *
  *
  */
-<span class="nc" id="L14">public enum InputAttributes implements AttributeDefinitions</span>
+<span class="nc" id="L30">public enum InputAttributes implements AttributeDefinitions</span>
 {
     /**
      * Specifies the types of files that the server accepts (only for type=&quot;file&quot;)
      */
-<span class="nc" id="L19">    Accept,</span>
+<span class="nc" id="L35">    Accept,</span>
     /**
      * Specifies an alternate text for images (only for type=&quot;image&quot;)
      */
-<span class="nc" id="L23">    Alt,</span>
+<span class="nc" id="L39">    Alt,</span>
     /**
      * Specifies that an input element should be pre-selected when the page loads (for type=&quot;checkbox&quot; or type=&quot;radio&quot;)
      */
-<span class="nc" id="L27">    Checked,</span>
+<span class="nc" id="L43">    Checked,</span>
     /**
      * Specifies that an &amp;gt;input&amp;lt; element should be disabled
      */
-<span class="nc" id="L31">    Disabled,</span>
+<span class="nc" id="L47">    Disabled,</span>
     /**
      * Specifies the maximum number of characters allowed in an &amp;gt;input&amp;lt; element
      */
-<span class="nc" id="L35">    MaxLength,</span>
+<span class="nc" id="L51">    MaxLength,</span>
     /**
      * Specifies the width, in characters, of an input element
      */
-<span class="nc" id="L39">    Size,</span>
+<span class="nc" id="L55">    Size,</span>
     /**
      * Specifies the URL of the image to use as a submit button (only for type=&quot;image&quot;)
      */
-<span class="nc" id="L43">    Src,</span>
+<span class="nc" id="L59">    Src,</span>
     /**
      * Specifies the type input element to display
      */
-<span class="nc" id="L47">    Type,</span>
+<span class="nc" id="L63">    Type,</span>
     /**
      * Specifies the value of an input element
      */
-<span class="nc" id="L51">    Value;</span>
+<span class="nc" id="L67">    Value;</span>
 
     @Override
     public boolean isKeyword()
     {
-<span class="nc" id="L56">        return false;</span>
+<span class="nc" id="L72">        return false;</span>
     }
 
 }

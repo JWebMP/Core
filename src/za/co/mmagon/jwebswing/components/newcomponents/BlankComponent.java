@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Marc Magon
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,16 +16,20 @@
  */
 package za.co.mmagon.jwebswing.components.newcomponents;
 
-import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
 /**
  * An implementation of
  * <p>
  * @author Marc Magon
+ * @param <J>
+ *
  * @since 17 Jan 2017
  * @version 1.0
  */
-public class BlankComponent extends Div<BlankComponentChildren, BlankComponentAttributes, BlankComponentFeatures, BlankComponentEvents, BlankComponent>
+public class BlankComponent<J extends BlankComponent>
+        extends Component<BlankComponentChildren, BlankComponentAttributes, BlankComponentFeatures, BlankComponentEvents, J>
 {
 
     private static final long serialVersionUID = 1L;
@@ -39,6 +43,7 @@ public class BlankComponent extends Div<BlankComponentChildren, BlankComponentAt
      */
     public BlankComponent()
     {
+        super(ComponentTypes.Div);
         addFeature(getFeature());
     }
 

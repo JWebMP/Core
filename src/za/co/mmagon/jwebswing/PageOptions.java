@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -50,10 +50,6 @@ public class PageOptions extends JavaScriptPart
      */
     private boolean angularEnabled;
     /**
-     * Whether or not to render bootstrap
-     */
-    private boolean bootstrapEnabled;
-    /**
      * Whether or not to dynamic render the requirements
      */
     private boolean dynamicRender = true;
@@ -73,6 +69,15 @@ public class PageOptions extends JavaScriptPart
      * The Google maps API key that highlights if it should render. Needed for the dynamic rendering sometimes
      */
     private String googleMapsJSApi;
+
+    /**
+     * If the page is using bootstrap 4
+     */
+    private boolean bootstrap4;
+    /**
+     * If the page is using JQuery 3
+     */
+    private boolean jquery3 = true;
 
     /**
      * Construct directly with the page
@@ -109,31 +114,6 @@ public class PageOptions extends JavaScriptPart
     }
 
     /**
-     * Whether or not to render the JQuery UI Requirements
-     *
-     * @return
-     */
-    public boolean isjQueryUIEnabled()
-    {
-        return jQueryUIEnabled;
-    }
-
-    /**
-     * Whether or not to render the JQuery UI Requirements
-     *
-     * @param jQueryUIEnabled
-     */
-    public void setjQueryUIEnabled(boolean jQueryUIEnabled)
-    {
-        this.jQueryUIEnabled = jQueryUIEnabled;
-        if (jQueryUIEnabled)
-        {
-            setjQueryEnabled(true);
-            page.getBody().configureJQueryUI();
-        }
-    }
-
-    /**
      * whether or not to render angular
      *
      * @return
@@ -156,51 +136,6 @@ public class PageOptions extends JavaScriptPart
             setjQueryEnabled(true);
             page.getBody().configureAngular();
         }
-    }
-
-    /**
-     * Whether or not to render bootstrap
-     *
-     * @return
-     */
-    public boolean isBootstrapEnabled()
-    {
-        return bootstrapEnabled;
-    }
-
-    /**
-     * Whether or not to render bootstrap
-     *
-     * @param bootstrapEnabled
-     */
-    public void setBootstrapEnabled(boolean bootstrapEnabled)
-    {
-        this.bootstrapEnabled = bootstrapEnabled;
-        if (bootstrapEnabled)
-        {
-            page.getBody().configureBootstrap();
-        }
-    }
-
-    /**
-     * Returns if pace should be set as the default render
-     *
-     * @return
-     */
-    public boolean isPaceEnabled()
-    {
-        return paceEnabled;
-    }
-
-    /**
-     * Sets if pace should be rendered s the default loader
-     *
-     * @param paceEnabled
-     */
-    public void setPaceEnabled(boolean paceEnabled)
-    {
-        this.paceEnabled = paceEnabled;
-        page.getBody().configurePace();
     }
 
     /**
@@ -318,4 +253,41 @@ public class PageOptions extends JavaScriptPart
         this.googleMapsJSApi = googleMapsJSApi;
     }
 
+    /*
+     * If we are using bootstrap 4
+     */
+    public boolean isBootstrap4()
+    {
+        return bootstrap4;
+    }
+
+    /**
+     * If we are using bootstrap 3
+     *
+     * @param bootstrap4
+     */
+    public void setBootstrap4(boolean bootstrap4)
+    {
+        this.bootstrap4 = bootstrap4;
+    }
+
+    /**
+     * Sets if this page must use JQuery 3 or 2
+     *
+     * @return
+     */
+    public boolean isJquery3()
+    {
+        return jquery3;
+    }
+
+    /**
+     * Sets if this page must use JQuery 3 or 2
+     *
+     * @param jquery3
+     */
+    public void setJquer3y(boolean jquery3)
+    {
+        this.jquery3 = jquery3;
+    }
 }

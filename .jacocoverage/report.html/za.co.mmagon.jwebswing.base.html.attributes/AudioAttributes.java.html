@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AudioAttributes.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html.attributes</a> &gt; <span class="el_source">AudioAttributes.java</span></div><h1>AudioAttributes.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html.attributes;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AudioAttributes.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html.attributes</a> &gt; <span class="el_source">AudioAttributes.java</span></div><h1>AudioAttributes.java</h1><pre class="source lang-java linenums">/* 
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.base.html.attributes;
 
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 
@@ -10,50 +26,50 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  *
  *
  */
-<span class="pc" id="L13">public enum AudioAttributes implements AttributeDefinitions</span>
+<span class="pc" id="L29">public enum AudioAttributes implements AttributeDefinitions</span>
 {
     /**
      * Specifies that the audio will start playing as soon as it is ready
      */
-<span class="fc" id="L18">    Autoplay,</span>
+<span class="fc" id="L34">    Autoplay,</span>
     /**
      * Specifies that audio controls should be displayed (such as a play/pause button etc)
      */
-<span class="fc" id="L22">    Controls,</span>
+<span class="fc" id="L38">    Controls,</span>
     /**
      * Specifies that the audio will start over again, every time it is finished
      */
-<span class="fc" id="L26">    Loop,</span>
+<span class="fc" id="L42">    Loop,</span>
     /**
      * Specifies that the audio output should be muted
      */
-<span class="fc" id="L30">    Muted,</span>
+<span class="fc" id="L46">    Muted,</span>
     /**
      * Specifies if and how the author thinks the audio should be loaded when the page loads
      */
-<span class="fc" id="L34">    Preload,</span>
+<span class="fc" id="L50">    Preload,</span>
     /**
      * Specifies the URL of the audio file
      */
-<span class="fc" id="L38">    Src;</span>
+<span class="fc" id="L54">    Src;</span>
 
     @Override
     public String toString()
     {
-<span class="fc" id="L43">        return super.toString().toLowerCase();</span>
+<span class="fc" id="L59">        return super.toString().toLowerCase();</span>
     }
 
     @Override
     public boolean isKeyword()
     {
-<span class="fc" id="L49">        return false;</span>
+<span class="fc" id="L65">        return false;</span>
     }
 
-<span class="nc" id="L52">    public enum AudioPreloadTypes</span>
+<span class="nc" id="L68">    public enum AudioPreloadTypes</span>
     {
-<span class="nc" id="L54">        Auto,</span>
-<span class="nc" id="L55">        Metadata,</span>
-<span class="nc" id="L56">        None</span>
+<span class="nc" id="L70">        Auto,</span>
+<span class="nc" id="L71">        Metadata,</span>
+<span class="nc" id="L72">        None</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

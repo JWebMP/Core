@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -60,9 +60,12 @@ public class RegularExpressionsDTO extends JavaScriptPart
      */
     private HashMap<String, Object> regularExpressions;
 
+    /**
+     * Constructs a new instance of the regular expression dto
+     */
     public RegularExpressionsDTO()
     {
-
+        //Nothing needed
     }
 
     /**
@@ -78,10 +81,16 @@ public class RegularExpressionsDTO extends JavaScriptPart
         return this;
     }
 
+    /**
+     * Adds the text, alpha numeric and email field patterns to this dto
+     *
+     * @return
+     */
     public RegularExpressionsDTO addDefaults()
     {
-        addExpression("textfield", TextOnlyField);
-        addExpression("alphaNumeric", AlphaNumericField);
+        addExpression("textField", TextOnlyField);
+        addExpression("textFieldMin3", TextFieldMin3);
+        addExpression("alphaNumericField", AlphaNumericField);
         addExpression("emailField", EmailPattern);
         return this;
     }

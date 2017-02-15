@@ -1,5 +1,5 @@
-/*
- * Copyright (C) 2015 GedMarc
+/* 
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -58,7 +58,7 @@ public class CSSServlet extends JWDefaultServlet
         Date startDate = new Date();
         StringBuilder scripts = new StringBuilder();
 
-        Page page = GuiceContext.Injector().getInstance(Page.class);
+        Page page = GuiceContext.inject().getInstance(Page.class);
         
         if (page == null)
         {

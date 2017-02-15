@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,9 +18,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -38,13 +36,19 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * The content inside the &gt;noscript&lt; element will be displayed if scripts are not supported, or are disabled in the user's browser.<p>
  *
  * @author GedMarc
+ * @param <J>
+ *
  * @since Feb 9, 2015
  * @version 1.0
  * <p>
  *
  */
-public class NoScript extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, NoScript> implements BodyChildren, NoIDTag
+public class NoScript<J extends NoScript>
+        extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+        implements BodyChildren, NoIDTag
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      *

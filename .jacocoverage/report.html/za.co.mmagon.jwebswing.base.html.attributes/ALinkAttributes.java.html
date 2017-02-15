@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ALinkAttributes.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html.attributes</a> &gt; <span class="el_source">ALinkAttributes.java</span></div><h1>ALinkAttributes.java</h1><pre class="source lang-java linenums">package za.co.mmagon.jwebswing.base.html.attributes;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ALinkAttributes.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html.attributes</a> &gt; <span class="el_source">ALinkAttributes.java</span></div><h1>ALinkAttributes.java</h1><pre class="source lang-java linenums">/* 
+ * Copyright (C) 2017 Marc Magon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package za.co.mmagon.jwebswing.base.html.attributes;
 
 import za.co.mmagon.jwebswing.base.client.HTMLVersions;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
@@ -35,7 +51,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  *
  * Updated attributes to full suite
  */
-<span class="nc" id="L38">public enum ALinkAttributes implements AttributeDefinitions</span>
+<span class="nc" id="L54">public enum ALinkAttributes implements AttributeDefinitions</span>
 {
     /**
      * Not supported in HTML5.
@@ -43,111 +59,111 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
      *
      * @deprecated
      */
-<span class="nc" id="L46">    Charset(HTMLVersions.HTML401Transitional),</span>
+<span class="nc" id="L62">    Charset(HTMLVersions.HTML401Transitional),</span>
     /**
      * Specifies the coordinates of a link
      *
      * @deprecated
      */
-<span class="nc" id="L52">    Coords(HTMLVersions.HTML401Transitional),</span>
+<span class="nc" id="L68">    Coords(HTMLVersions.HTML401Transitional),</span>
     /**
      * Specifies that the target will be downloaded when a user clicks
      */
-<span class="nc" id="L56">    Download(HTMLVersions.HTML5, true),</span>
+<span class="nc" id="L72">    Download(HTMLVersions.HTML5, true),</span>
     /**
      * Specifies the URL of the page the link goes to
      */
-<span class="nc" id="L60">    HRef,</span>
+<span class="nc" id="L76">    HRef,</span>
     /**
      * Specifies the language of the linked document
      */
-<span class="nc" id="L64">    HRefLang,</span>
+<span class="nc" id="L80">    HRefLang,</span>
     /**
      * Specifies what media/device the linked document is optimized for
      */
-<span class="nc" id="L68">    Media,</span>
+<span class="nc" id="L84">    Media,</span>
     /**
      * Specifies the name of an anchor
      * Not Supported in HTML5 use global attribute ID instead
      *
      * @deprecated
      */
-<span class="nc" id="L75">    Name(HTMLVersions.HTML401Transitional),</span>
+<span class="nc" id="L91">    Name(HTMLVersions.HTML401Transitional),</span>
     /**
      * Specifies the relationship between the current document and the linked document
      */
-<span class="nc" id="L79">    Rel,</span>
+<span class="nc" id="L95">    Rel,</span>
     /**
      * Not supported in HTML5.
      *
      * @deprecated
      */
-<span class="nc" id="L85">    Rev(HTMLVersions.HTML401Transitional, true),</span>
+<span class="nc" id="L101">    Rev(HTMLVersions.HTML401Transitional, true),</span>
     /**
      * Specifies the shape of a link
      *
      * @deprecated
      */
-<span class="nc" id="L91">    Shape(HTMLVersions.HTML401Transitional),</span>
+<span class="nc" id="L107">    Shape(HTMLVersions.HTML401Transitional),</span>
     /**
      * Specifies where to open the linked document
      */
-<span class="nc" id="L95">    Target,</span>
+<span class="nc" id="L111">    Target,</span>
     /**
      * Specifies the media type of the linked document
      */
-<span class="nc" id="L99">    Type;</span>
+<span class="nc" id="L115">    Type;</span>
 
-<span class="nc" id="L101">    private HTMLVersions maxsupportedVersion = HTMLVersions.HTML5;</span>
-<span class="nc" id="L102">    private HTMLVersions minsupportedVersion = HTMLVersions.HTML401Frameset;</span>
-<span class="nc" id="L103">    private Class returnType = String.class;</span>
+<span class="nc" id="L117">    private HTMLVersions maxsupportedVersion = HTMLVersions.HTML5;</span>
+<span class="nc" id="L118">    private HTMLVersions minsupportedVersion = HTMLVersions.HTML401Frameset;</span>
+<span class="nc" id="L119">    private Class returnType = String.class;</span>
 
     /**
      * Construct a new &quot;a&quot; tag with all the predefined supported HTML versions
      */
     private ALinkAttributes()
-<span class="nc" id="L109">    {</span>
-<span class="nc" id="L110">    }</span>
-
-    private ALinkAttributes(HTMLVersions maxsupportedVersion)
-<span class="nc" id="L113">    {</span>
-<span class="nc" id="L114">        this.maxsupportedVersion = maxsupportedVersion;</span>
-<span class="nc" id="L115">    }</span>
-
-    private ALinkAttributes(HTMLVersions minsupportedVersion, boolean trues)
-<span class="nc" id="L118">    {</span>
-<span class="nc" id="L119">        this.minsupportedVersion = minsupportedVersion;</span>
-<span class="nc" id="L120">    }</span>
-
-    private ALinkAttributes(HTMLVersions maxsupportedVersion, HTMLVersions minsupportedVersion)
-<span class="nc" id="L123">    {</span>
-<span class="nc" id="L124">        this.maxsupportedVersion = maxsupportedVersion;</span>
-<span class="nc" id="L125">        this.minsupportedVersion = minsupportedVersion;</span>
+<span class="nc" id="L125">    {</span>
 <span class="nc" id="L126">    }</span>
 
-    private ALinkAttributes(Class returnType)
+    private ALinkAttributes(HTMLVersions maxsupportedVersion)
 <span class="nc" id="L129">    {</span>
-<span class="nc" id="L130">        this.returnType = returnType;</span>
+<span class="nc" id="L130">        this.maxsupportedVersion = maxsupportedVersion;</span>
 <span class="nc" id="L131">    }</span>
 
-    private ALinkAttributes(HTMLVersions maxsupportedVersion, HTMLVersions minsupportedVersion, Class returnType)
+    private ALinkAttributes(HTMLVersions minsupportedVersion, boolean trues)
 <span class="nc" id="L134">    {</span>
-<span class="nc" id="L135">        this.maxsupportedVersion = maxsupportedVersion;</span>
-<span class="nc" id="L136">        this.minsupportedVersion = minsupportedVersion;</span>
-<span class="nc" id="L137">        this.returnType = returnType;</span>
-<span class="nc" id="L138">    }</span>
+<span class="nc" id="L135">        this.minsupportedVersion = minsupportedVersion;</span>
+<span class="nc" id="L136">    }</span>
+
+    private ALinkAttributes(HTMLVersions maxsupportedVersion, HTMLVersions minsupportedVersion)
+<span class="nc" id="L139">    {</span>
+<span class="nc" id="L140">        this.maxsupportedVersion = maxsupportedVersion;</span>
+<span class="nc" id="L141">        this.minsupportedVersion = minsupportedVersion;</span>
+<span class="nc" id="L142">    }</span>
+
+    private ALinkAttributes(Class returnType)
+<span class="nc" id="L145">    {</span>
+<span class="nc" id="L146">        this.returnType = returnType;</span>
+<span class="nc" id="L147">    }</span>
+
+    private ALinkAttributes(HTMLVersions maxsupportedVersion, HTMLVersions minsupportedVersion, Class returnType)
+<span class="nc" id="L150">    {</span>
+<span class="nc" id="L151">        this.maxsupportedVersion = maxsupportedVersion;</span>
+<span class="nc" id="L152">        this.minsupportedVersion = minsupportedVersion;</span>
+<span class="nc" id="L153">        this.returnType = returnType;</span>
+<span class="nc" id="L154">    }</span>
 
     private ALinkAttributes(HTMLVersions maxsupportedVersion, Class returnType)
-<span class="nc" id="L141">    {</span>
-<span class="nc" id="L142">        this.maxsupportedVersion = maxsupportedVersion;</span>
-<span class="nc" id="L143">        this.returnType = returnType;</span>
-<span class="nc" id="L144">    }</span>
+<span class="nc" id="L157">    {</span>
+<span class="nc" id="L158">        this.maxsupportedVersion = maxsupportedVersion;</span>
+<span class="nc" id="L159">        this.returnType = returnType;</span>
+<span class="nc" id="L160">    }</span>
 
     private ALinkAttributes(HTMLVersions minsupportedVersion, boolean trues, Class returnType)
-<span class="nc" id="L147">    {</span>
-<span class="nc" id="L148">        this.minsupportedVersion = maxsupportedVersion;</span>
-<span class="nc" id="L149">        this.returnType = returnType;</span>
-<span class="nc" id="L150">    }</span>
+<span class="nc" id="L163">    {</span>
+<span class="nc" id="L164">        this.minsupportedVersion = maxsupportedVersion;</span>
+<span class="nc" id="L165">        this.returnType = returnType;</span>
+<span class="nc" id="L166">    }</span>
 
     /**
      * Returns the lowercase
@@ -157,13 +173,13 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
     @Override
     public String toString()
     {
-<span class="nc" id="L160">        return super.toString().toLowerCase();</span>
+<span class="nc" id="L176">        return super.toString().toLowerCase();</span>
     }
 
     @Override
     public boolean isKeyword()
     {
-<span class="nc" id="L166">        return false;</span>
+<span class="nc" id="L182">        return false;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

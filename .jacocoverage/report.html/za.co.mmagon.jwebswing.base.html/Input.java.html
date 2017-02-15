@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Input.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;JWebSwing&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">za.co.mmagon.jwebswing.base.html</a> &gt; <span class="el_source">Input.java</span></div><h1>Input.java</h1><pre class="source lang-java linenums">/*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,8 +27,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqueryui.autocomplete.JQUIAutoCompleteChildren;
-import za.co.mmagon.jwebswing.components.jqueryui.spinner.JQUISpinnerChildren;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -70,9 +68,11 @@ import za.co.mmagon.logger.LogFactory;
  * &lt;p&gt;
  * @author Marc Magon
  * @param &lt;A&gt; The attribute set for the input component
+ * @param &lt;J&gt;
  */
-public class Input&lt;A extends Enum &amp; AttributeDefinitions&gt; extends Component&lt;NoChildren, A, GlobalFeatures, GlobalEvents, Input&gt;
-        implements NoClosingTag, GlobalChildren, ParagraphChildren, JQUISpinnerChildren, JQUIAutoCompleteChildren
+public class Input&lt;A extends Enum &amp; AttributeDefinitions, J extends Input&gt;
+        extends Component&lt;NoChildren, A, GlobalFeatures, GlobalEvents, J&gt;
+        implements NoClosingTag, GlobalChildren, ParagraphChildren
 {
 
 <span class="fc" id="L78">    private static final Logger log = LogFactory.getInstance().getLogger(&quot;Input&quot;);</span>
@@ -83,10 +83,13 @@ public class Input&lt;A extends Enum &amp; AttributeDefinitions&gt; extends Comp
      */
     private InputTypes inputType;
 
+    /**
+     * Constructs a blank instance of input - generally not recommended.
+     */
     public Input()
     {
-<span class="fc" id="L88">        this(null);</span>
-<span class="fc" id="L89">    }</span>
+<span class="nc" id="L91">        this(null);</span>
+<span class="nc" id="L92">    }</span>
 
     /**
      * Construct a new instance of the input type field
@@ -95,16 +98,16 @@ public class Input&lt;A extends Enum &amp; AttributeDefinitions&gt; extends Comp
      */
     public Input(InputTypes inputType)
     {
-<span class="fc" id="L98">        super(ComponentTypes.Input);</span>
+<span class="fc" id="L101">        super(ComponentTypes.Input);</span>
 
-<span class="fc bfc" id="L100" title="All 2 branches covered.">        if (inputType != null)</span>
+<span class="pc bpc" id="L103" title="1 of 2 branches missed.">        if (inputType != null)</span>
 
         {
-<span class="fc" id="L103">            this.inputType = inputType;</span>
-<span class="fc" id="L104">            addAttribute(GlobalAttributes.Type, getInputType().name().toLowerCase());</span>
+<span class="fc" id="L106">            this.inputType = inputType;</span>
+<span class="fc" id="L107">            addAttribute(GlobalAttributes.Type, getInputType().name().toLowerCase());</span>
         }
 
-<span class="fc" id="L107">    }</span>
+<span class="fc" id="L110">    }</span>
 
     /**
      * Returns the input type of the input field
@@ -113,19 +116,22 @@ public class Input&lt;A extends Enum &amp; AttributeDefinitions&gt; extends Comp
      */
     public final InputTypes getInputType()
     {
-<span class="fc" id="L116">        return inputType;</span>
+<span class="fc" id="L119">        return inputType;</span>
     }
 
     /**
      * Sets the input type of this field
      * &lt;p&gt;
      * @param inputType
+     *
+     * @return
      */
-    public void setInputType(InputTypes inputType)
+    public J setInputType(InputTypes inputType)
     {
-<span class="fc" id="L126">        this.inputType = inputType;</span>
-<span class="fc" id="L127">        addAttribute(GlobalAttributes.Type, inputType.toString());</span>
-<span class="fc" id="L128">    }</span>
+<span class="nc" id="L131">        this.inputType = inputType;</span>
+<span class="nc" id="L132">        addAttribute(GlobalAttributes.Type, inputType.toString());</span>
+<span class="nc" id="L133">        return (J) this;</span>
+    }
 
     /**
      * Differences Between HTML and XHTML
@@ -137,29 +143,96 @@ public class Input&lt;A extends Enum &amp; AttributeDefinitions&gt; extends Comp
     @Override
     public void preConfigure()
     {
-<span class="fc" id="L140">        super.preConfigure();</span>
+<span class="fc" id="L146">        super.preConfigure();</span>
         try
         {
-<span class="pc bpc" id="L143" title="1 of 2 branches missed.">            if (getPage().getHtmlVersion().name().startsWith(&quot;X&quot;))</span>
+<span class="pc bpc" id="L149" title="1 of 2 branches missed.">            if (getPage().getHtmlVersion().name().startsWith(&quot;X&quot;))</span>
             {
-<span class="nc" id="L145">                setInlineClosingTag(true);</span>
+<span class="nc" id="L151">                setInlineClosingTag(true);</span>
             }
         }
-<span class="nc" id="L148">        catch (Exception e)</span>
+<span class="nc" id="L154">        catch (Exception e)</span>
         {
-<span class="nc" id="L150">            log.log(Level.FINE, &quot;Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.&quot;, e);</span>
-<span class="fc" id="L151">        }</span>
-<span class="fc" id="L152">    }</span>
+<span class="nc" id="L156">            log.log(Level.FINE, &quot;Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.&quot;, e);</span>
+<span class="fc" id="L157">        }</span>
+<span class="fc" id="L158">    }</span>
 
     /**
      * Push to model instead of bind
      *
      * @param variableName
+     *
+     * @return
      */
     @Override
-    public void bind(String variableName)
+    public J bind(String variableName)
     {
-<span class="nc" id="L162">        addAttribute(AngularAttributes.ngModel, variableName);</span>
-<span class="nc" id="L163">    }</span>
+<span class="nc" id="L170">        setLoadAngular(true);</span>
+<span class="nc" id="L171">        addAttribute(AngularAttributes.ngModel, variableName);</span>
+<span class="nc" id="L172">        return (J) this;</span>
+    }
+
+    /**
+     * Sets this input as required in the form
+     *
+     * @return
+     */
+    public J setRequired()
+    {
+<span class="nc" id="L182">        addAttribute(&quot;required&quot;, null);</span>
+<span class="nc" id="L183">        return (J) this;</span>
+    }
+
+    /**
+     * Sets the minimum length of this input
+     *
+     * @param minLength
+     *
+     * @return
+     */
+    public J setMinimumLength(int minLength)
+    {
+<span class="nc" id="L195">        addAttribute(&quot;minlength&quot;, &quot;&quot; + minLength);</span>
+<span class="nc" id="L196">        return (J) this;</span>
+    }
+
+    /**
+     * Sets the minimum length of this input
+     *
+     * @param minLength
+     *
+     * @return
+     */
+    public J setMaximumLength(int minLength)
+    {
+<span class="nc" id="L208">        addAttribute(&quot;maxlength&quot;, &quot;&quot; + minLength);</span>
+<span class="nc" id="L209">        return (J) this;</span>
+    }
+
+    /**
+     * Sets the place holder for this input
+     *
+     * @param placeholder
+     *
+     * @return
+     */
+    public J setPlaceholder(String placeholder)
+    {
+<span class="nc" id="L221">        addAttribute(&quot;placeholder&quot;, placeholder);</span>
+<span class="nc" id="L222">        return (J) this;</span>
+    }
+
+    /**
+     * Sets the value attribute
+     *
+     * @param value
+     *
+     * @return
+     */
+    public J setValue(String value)
+    {
+<span class="nc" id="L234">        addAttribute(&quot;value&quot;, value);</span>
+<span class="nc" id="L235">        return (J) this;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

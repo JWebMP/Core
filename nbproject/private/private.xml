@@ -81,7 +81,12 @@
         </group>
         <group name="ArminEasy"/>
         <group name="JWebSwingStaticPage"/>
-        <group name="JWebSwing"/>
+        <group name="JWebSwing">
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/ComponentHTMLBootstrapBase.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/components/bootstrap/badge/BSBadgeTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/components/bootstrap/alerts/BSAlertDismissButtonTest.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/generics/WebReference.java</file>
+        </group>
         <group name="JWebswing Static"/>
     </open-files>
 </project-private>

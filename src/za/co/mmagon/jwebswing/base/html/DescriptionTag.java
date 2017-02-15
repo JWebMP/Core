@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,10 +18,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.DescriptionListChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
@@ -48,9 +45,14 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * &lt;p&gt;
  *
  * @author GedMarc
+ * @param <J>
  */
-public class DescriptionTag extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, DescriptionTag> implements NoIDTag, NoNewLineBeforeClosingTag, NoNewLineForRawText, DescriptionListChildren
+public class DescriptionTag<J extends DescriptionTag>
+        extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+        implements NoIDTag, NoNewLineBeforeClosingTag, NoNewLineForRawText, DescriptionListChildren
 {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a new Description Tag

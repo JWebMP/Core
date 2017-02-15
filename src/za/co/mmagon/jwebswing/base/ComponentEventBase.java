@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 ged_m
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ import za.co.mmagon.logger.LogFactory;
  * @since 23 Apr 2013
  * @version 2.0
  */
-public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentBase>
+public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentEventBase>
         extends ComponentFeatureBase<F, J> implements IComponentEventBase<E, J>
 {
 

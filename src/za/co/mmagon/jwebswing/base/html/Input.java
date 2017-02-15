@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,8 +27,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.jqueryui.autocomplete.JQUIAutoCompleteChildren;
-import za.co.mmagon.jwebswing.components.jqueryui.spinner.JQUISpinnerChildren;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -70,9 +68,11 @@ import za.co.mmagon.logger.LogFactory;
  * <p>
  * @author Marc Magon
  * @param <A> The attribute set for the input component
+ * @param <J>
  */
-public class Input<A extends Enum & AttributeDefinitions> extends Component<NoChildren, A, GlobalFeatures, GlobalEvents, Input>
-        implements NoClosingTag, GlobalChildren, ParagraphChildren, JQUISpinnerChildren, JQUIAutoCompleteChildren
+public class Input<A extends Enum & AttributeDefinitions, J extends Input>
+        extends Component<NoChildren, A, GlobalFeatures, GlobalEvents, J>
+        implements NoClosingTag, GlobalChildren, ParagraphChildren
 {
 
     private static final Logger log = LogFactory.getInstance().getLogger("Input");
@@ -83,6 +83,9 @@ public class Input<A extends Enum & AttributeDefinitions> extends Component<NoCh
      */
     private InputTypes inputType;
 
+    /**
+     * Constructs a blank instance of input - generally not recommended.
+     */
     public Input()
     {
         this(null);
@@ -120,11 +123,14 @@ public class Input<A extends Enum & AttributeDefinitions> extends Component<NoCh
      * Sets the input type of this field
      * <p>
      * @param inputType
+     *
+     * @return
      */
-    public void setInputType(InputTypes inputType)
+    public J setInputType(InputTypes inputType)
     {
         this.inputType = inputType;
         addAttribute(GlobalAttributes.Type, inputType.toString());
+        return (J) this;
     }
 
     /**
@@ -159,11 +165,11 @@ public class Input<A extends Enum & AttributeDefinitions> extends Component<NoCh
      * @return
      */
     @Override
-    public Input bind(String variableName)
+    public J bind(String variableName)
     {
         setLoadAngular(true);
         addAttribute(AngularAttributes.ngModel, variableName);
-        return this;
+        return (J) this;
     }
 
     /**
@@ -171,10 +177,10 @@ public class Input<A extends Enum & AttributeDefinitions> extends Component<NoCh
      *
      * @return
      */
-    public Input setRequired()
+    public J setRequired()
     {
         addAttribute("required", null);
-        return this;
+        return (J) this;
     }
 
     /**
@@ -184,10 +190,10 @@ public class Input<A extends Enum & AttributeDefinitions> extends Component<NoCh
      *
      * @return
      */
-    public Input setMinimumLength(int minLength)
+    public J setMinimumLength(int minLength)
     {
         addAttribute("minlength", "" + minLength);
-        return this;
+        return (J) this;
     }
 
     /**
@@ -197,10 +203,10 @@ public class Input<A extends Enum & AttributeDefinitions> extends Component<NoCh
      *
      * @return
      */
-    public Input setMaximumLength(int minLength)
+    public J setMaximumLength(int minLength)
     {
         addAttribute("maxlength", "" + minLength);
-        return this;
+        return (J) this;
     }
 
     /**
@@ -210,10 +216,10 @@ public class Input<A extends Enum & AttributeDefinitions> extends Component<NoCh
      *
      * @return
      */
-    public Input setPlaceholder(String placeholder)
+    public J setPlaceholder(String placeholder)
     {
         addAttribute("placeholder", placeholder);
-        return this;
+        return (J) this;
     }
 
     /**
@@ -223,9 +229,9 @@ public class Input<A extends Enum & AttributeDefinitions> extends Component<NoCh
      *
      * @return
      */
-    public Input setValue(String value)
+    public J setValue(String value)
     {
         addAttribute("value", value);
-        return this;
+        return (J) this;
     }
 }

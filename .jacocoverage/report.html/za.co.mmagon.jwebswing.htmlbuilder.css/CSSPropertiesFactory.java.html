@@ -417,7 +417,7 @@ import za.co.mmagon.logger.LogFactory;
 <span class="fc bfc" id="L417" title="All 2 branches covered.">            if (returnedObject instanceof MeasurementCSS)</span>
             {
 <span class="fc" id="L419">                MeasurementCSS m = (MeasurementCSS) returnedObject;</span>
-<span class="pc bpc" id="L420" title="1 of 4 branches missed.">                if (m.MeasurementType().equals(MeasurementTypes.Pixels) &amp;&amp; m.value() == CSSPropertiesFactory.DefaultIntValue)</span>
+<span class="pc bpc" id="L420" title="2 of 4 branches missed.">                if (m.MeasurementType().equals(MeasurementTypes.Pixels) &amp;&amp; m.value() == CSSPropertiesFactory.DefaultIntValue)</span>
                 {
 <span class="fc" id="L422">                    return rawValues;</span>
                 }
@@ -578,7 +578,7 @@ import za.co.mmagon.logger.LogFactory;
                 {
 <span class="nc" id="L579">                    f.set(newInstance, fieldObject);</span>
                 }
-<span class="pc bpc" id="L581" title="4 of 12 branches missed.">                else if (fieldObject instanceof String || fieldObject instanceof Long</span>
+<span class="pc bpc" id="L581" title="5 of 12 branches missed.">                else if (fieldObject instanceof String || fieldObject instanceof Long</span>
                         || fieldObject instanceof Double || fieldObject instanceof Boolean
                         || fieldObject instanceof BigDecimal || fieldObject instanceof ColourCSSImpl)
                 {
