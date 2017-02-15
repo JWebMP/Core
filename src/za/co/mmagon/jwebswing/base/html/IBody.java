@@ -19,7 +19,7 @@ package za.co.mmagon.jwebswing.base.html;
 /**
  *
  * @author GedMarc
- * @param <L> Loader Type
+ *
  *
  * @since Oct 30, 2016
  * @version 1.0
