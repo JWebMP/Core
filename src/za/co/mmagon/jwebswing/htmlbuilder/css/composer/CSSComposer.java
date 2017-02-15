@@ -2,7 +2,7 @@ package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
 import java.lang.reflect.Field;
 import java.util.*;
-import java.util.logging.*;
+import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ComponentStyleBase;
 import za.co.mmagon.jwebswing.htmlbuilder.css.CSSImpl;
@@ -92,7 +92,8 @@ public class CSSComposer
     /**
      * Add a component to this object to render for
      *
-     * @param o The component to render CSS for as well as this object
+     * @param o               The component to render CSS for as well as this object
+     * @param componentBlocks
      *
      * @return True or False
      */

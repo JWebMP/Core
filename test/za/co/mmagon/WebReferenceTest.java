@@ -54,7 +54,7 @@ public class WebReferenceTest
         WebReference.sort(w);
         System.out.println(w);
 
-        String expected = "[bower_components/jquery/dist/jquery.js, javascript/jwebswing/ajax-enabler.js, bower_components/jquery-ui/jquery-ui.js, bower_components/jquery-ui/jquery-ui.js, bower_components/jquery-ui/jquery-ui.js, bower_components/jquery-ui/jquery-ui.js, bower_components/jquery-ui/jquery-ui.js, bower_components/jquery-ui/jquery-ui.js, bower_components/atmosphere.js/atmosphere.js, bower_components/atmosphere.js/atmosphere.js]";
+        String expected = "[bower_components/jquery/dist/jquery.js, javascript/jwebswing/ajax-enabler.js, bower_components/atmosphere.js/atmosphere.js, bower_components/atmosphere.js/atmosphere.js]";
         String result = w.toString();
 
         Assert.assertEquals(expected, result);

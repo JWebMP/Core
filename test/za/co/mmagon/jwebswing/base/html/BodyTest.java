@@ -52,26 +52,6 @@ public class BodyTest extends BaseTestClass
     }
 
     @Test
-    public void testLoader()
-    {
-        resetBody();
-        b.add(new Comment("asdf"));
-        WebReference.setIsLocal(true);
-        //b.addFeature(new PaceLoader(PaceTheme.Bounce));
-        System.out.println(p.toString(true));
-        assertEquals("<!DOCTYPE html>\n"
-                + "<html>\n"
-                + "	<head>\n"
-                + "		<script src=\"bower_components/PACE/pace.js\" type=\"text/javascript\"></script>\n"
-                + "		<link href=\"bower_components/PACE/themes/red/pace-theme-flash.css\" rel=\"stylesheet\" type=\"text/css\">\n"
-                + "	</head>\n"
-                + "	<body id=\"body\">\n"
-                + "		<!-- asdf -->\n"
-                + "	</body>\n"
-                + "</html>", p.toString(true).toString());
-    }
-
-    @Test
     public void testSetGenerateJQuery()
     {
         resetBody();
@@ -105,34 +85,6 @@ public class BodyTest extends BaseTestClass
                 + "		<script src=\"http://code.jquery.com/jquery-migrate-1.4.1.js\" type=\"text/javascript\"></script>\n"
                 + "	</body>\n"
                 + "</html>", p.toString(true).toString());
-    }
-
-    @Test
-    public void testBootstrap()
-    {
-        WebReference.setIsLocal(true);
-        Page p = getPage();
-        p.setTiny(false);
-        p.getPageFields().setTitle("title");
-        System.out.println(p.toString());
-
-        assertEquals("<!DOCTYPE html>\n"
-                + "<html>\n"
-                + "	<head>\n"
-                + "		<meta charset=\"utf-16\">\n"
-                + "		<meta content=\"IE=Edge\" http-equiv=\"X-UA-Compatible\">\n"
-                + "		<meta content=\"width=device-width, initial-scale=1\" name=\"viewport\">\n"
-                + "		<title>title</title>\n"
-                + "		<link href=\"bower_components/bootstrap/dist/css/bootstrap.css\" rel=\"stylesheet\" type=\"text/css\">\n"
-                + "		<link href=\"bower_components/bootstrap3-dialog/dist/css/bootstrap-dialog.css\" rel=\"stylesheet\" type=\"text/css\">\n"
-                + "	</head>\n"
-                + "	<body id=\"body\">\n"
-                + "		<script src=\"bower_components/jquery-3/dist/jquery.js\" type=\"text/javascript\"></script>\n"
-                + "		<script src=\"bower_components/jquery-migrate/jquery-migrate.js\" type=\"text/javascript\"></script>\n"
-                + "		<script src=\"bower_components/bootstrap/dist/js/bootstrap.js\" type=\"text/javascript\"></script>\n"
-                + "		<script src=\"bower_components/bootstrap3-dialog/dist/js/bootstrap-dialog.js\" type=\"text/javascript\"></script>\n"
-                + "	</body>\n"
-                + "</html>", p.toString(true));
     }
 
     @Test
