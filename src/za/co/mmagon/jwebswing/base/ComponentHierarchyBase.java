@@ -1035,6 +1035,26 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
     }
 
     /**
+     * Enumeration to remove
+     *
+     * @param className
+     *
+     * @return
+     */
+    public boolean removeClass(Enum className)
+    {
+        if (getClasses().contains(className.toString()))
+        {
+            getClasses().remove(className.toString());
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
      * Renders the classes array as an in-line class string
      *
      * @return

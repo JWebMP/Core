@@ -34,17 +34,9 @@ public class PageOptions extends JavaScriptPart
     private final Page page;
 
     /**
-     * Whether or not to render pace loader
-     */
-    private boolean paceEnabled = true;
-    /**
      * Whether or not to render jQuery
      */
     private boolean jQueryEnabled;
-    /**
-     * Whether or not to render jQuery UI
-     */
-    private boolean jQueryUIEnabled;
     /**
      * Whether or not to render angular
      */
@@ -70,10 +62,6 @@ public class PageOptions extends JavaScriptPart
      */
     private String googleMapsJSApi;
 
-    /**
-     * If the page is using bootstrap 4
-     */
-    private boolean bootstrap4;
     /**
      * If the page is using JQuery 3
      */
@@ -253,24 +241,6 @@ public class PageOptions extends JavaScriptPart
         this.googleMapsJSApi = googleMapsJSApi;
     }
 
-    /*
-     * If we are using bootstrap 4
-     */
-    public boolean isBootstrap4()
-    {
-        return bootstrap4;
-    }
-
-    /**
-     * If we are using bootstrap 3
-     *
-     * @param bootstrap4
-     */
-    public void setBootstrap4(boolean bootstrap4)
-    {
-        this.bootstrap4 = bootstrap4;
-    }
-
     /**
      * Sets if this page must use JQuery 3 or 2
      *
@@ -286,7 +256,7 @@ public class PageOptions extends JavaScriptPart
      *
      * @param jquery3
      */
-    public void setJquer3y(boolean jquery3)
+    public void setJquery3(boolean jquery3)
     {
         this.jquery3 = jquery3;
     }

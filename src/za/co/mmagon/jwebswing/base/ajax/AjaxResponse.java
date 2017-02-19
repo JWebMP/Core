@@ -204,7 +204,7 @@ public class AjaxResponse extends JavaScriptPart
             //Load on demand scripts
             if (Event.class.isAssignableFrom(next.getClass()))
             {
-                for (Iterator iterator = Event.class.cast(next).getOnDemandQueries().iterator(); iterator.hasNext();)
+                for (Iterator iterator = Event.class.cast(next).getRunEvents().iterator(); iterator.hasNext();)
                 {
                     Event next1 = (Event) iterator.next();
                     next1.preConfigure();

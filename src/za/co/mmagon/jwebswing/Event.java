@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -52,7 +52,11 @@ public class Event<A extends JavaScriptPart, J extends Event>
     /**
      * A list of all queries to execute on ajax response
      */
-    private List<Event> onDemandQueries;
+    private List<Event> runEvents;
+    /**
+     * Any features that must be run
+     */
+    private List<Feature> runFeatures;
 
     /**
      * Creates an event with the given component and type
@@ -288,7 +292,7 @@ public class Event<A extends JavaScriptPart, J extends Event>
      */
     public J addOnDemandEvent(Event event)
     {
-        getOnDemandQueries().add(event);
+        getRunEvents().add(event);
         return (J) this;
     }
 
@@ -297,13 +301,13 @@ public class Event<A extends JavaScriptPart, J extends Event>
      *
      * @return
      */
-    public List<Event> getOnDemandQueries()
+    public List<Event> getRunEvents()
     {
-        if (onDemandQueries == null)
+        if (runEvents == null)
         {
-            onDemandQueries = new ArrayList<>();
+            runEvents = new ArrayList<>();
         }
-        return onDemandQueries;
+        return runEvents;
     }
 
     /**
@@ -315,8 +319,32 @@ public class Event<A extends JavaScriptPart, J extends Event>
      */
     public J setOnDemandQueries(List<Event> onDemandQueries)
     {
-        this.onDemandQueries = onDemandQueries;
+        this.runEvents = onDemandQueries;
         return (J) this;
+    }
+
+    /**
+     * Returns a list of runnable features that occur from an event
+     *
+     * @return
+     */
+    public List<Feature> getRunFeatures()
+    {
+        if (runFeatures == null)
+        {
+            setRunFeatures(new ArrayList<>());
+        }
+        return runFeatures;
+    }
+
+    /**
+     * Sets the running feature base
+     *
+     * @param runFeatures
+     */
+    public void setRunFeatures(List<Feature> runFeatures)
+    {
+        this.runFeatures = runFeatures;
     }
 
     @Override

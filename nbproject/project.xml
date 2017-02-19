@@ -58,6 +58,7 @@
             <word>colour</word>
             <word>Colours</word>
             <word>config</word>
+            <word>Configurator</word>
             <word>contextmenu</word>
             <word>css</word>
             <word>Div's</word>
@@ -109,6 +110,7 @@
             <word>Ummm</word>
             <word>url</word>
             <word>webpage</word>
+            <word>Wiki</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

@@ -48,7 +48,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public final class Label<J extends Label>
+public class Label<J extends Label>
         extends Component<GlobalChildren, LabelAttributes, GlobalFeatures, GlobalEvents, J>
         implements ParagraphChildren, NoNewLineBeforeChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag
 {
@@ -68,6 +68,7 @@ public final class Label<J extends Label>
      * <p>
      * @param label
      */
+    @SuppressWarnings("")
     public Label(String label)
     {
         super(ComponentTypes.Label);
@@ -80,6 +81,7 @@ public final class Label<J extends Label>
      * @param label
      * @param forInputComponent
      */
+    @SuppressWarnings("")
     public Label(String label, Input forInputComponent)
     {
         super(ComponentTypes.Label);

@@ -173,7 +173,12 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     {
         HashMap<Enum, String> allAttributes = new HashMap<>();
 
-        allAttributes.putAll(getAttributesGlobal());
+        for (Entry<GlobalAttributes, String> entry : getAttributesGlobal().entrySet())
+        {
+            GlobalAttributes key = entry.getKey();
+            String value = entry.getValue();
+            allAttributes.put(key, value);
+        }
         allAttributes.putAll(getAttributes());
 
         return allAttributes;
@@ -206,8 +211,19 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
             {
                 AttributeDefinitions ad = AttributeDefinitions.class.cast(key);
                 Pair p = new Pair(key.toString(), ad.isKeyword());
-
                 attributeMap.put(p, value);
+            }
+            else
+            {
+                String keyValue = key.toString();
+                if (value != null && !value.isEmpty())
+                {
+                    attributeMap.put(new Pair(keyValue, false), value);
+                }
+                else
+                {
+                    attributeMap.put(new Pair(keyValue, true), value);
+                }
             }
         }
 
@@ -342,17 +358,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     @Override
     public final J addAttribute(A attribute, String value)
     {
-        if (value != null && !value.isEmpty())
-        {
-            getAttributes().put(attribute, value);
-        }
-        else
-        {
-            LOG.log(Level.FINE, "Invalid Local Attribute value added [{0}] - [{1}] - [{2}]. Ignoring. Possible duplicate all components run..", new Object[]
-            {
-                getClass().getSimpleName(), attribute, value
-            });
-        }
+        getAttributes().put(attribute, value);
         return (J) this;
     }
 
