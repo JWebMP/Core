@@ -82,6 +82,10 @@ public class Page extends Html implements IPage
      * Cache for all the associated components throughout the life-cycle of the application
      */
     private transient java.util.Map<String, ComponentHierarchyBase> componentCache;
+    /**
+     * If this page has already gone through initialization
+     */
+    private boolean initialized;
 
     /**
      * Populates all my components. Excludes this page
@@ -97,7 +101,10 @@ public class Page extends Html implements IPage
         getPageFields().setCompatibilityMode(compatibilityMode);
         getPageFields().setBase(base);
         setID("jwPage");
-        //setGenerator("JWebSwing - https://sourceforge.net/projects/jwebswing/");
+        if (getRunningEnvironment().ordinal() >= DevelopmentEnvironments.QA.ordinal())
+        {
+            getPageFields().setGenerator("https://sourceforge.net/projects/jwebswing/");
+        }
     }
 
     /**
@@ -141,12 +148,18 @@ public class Page extends Html implements IPage
 
     }
 
+    /**
+     * Adds a component onto the body
+     *
+     * @param <T>
+     * @param component
+     *
+     * @return
+     */
     public <T extends ComponentHierarchyBase> T add(T component)
     {
         return (T) getBody().add(component);
     }
-
-    private boolean initialized;
 
     /**
      * Renders all the children to a string builder
@@ -190,13 +203,13 @@ public class Page extends Html implements IPage
 
             if (!GuiceContext.isBuildingInjector())
             {
-                for (Class<? extends PageConfigurator> next : GuiceContext.reflect().getSubTypesOf(PageConfigurator.class))
+                GuiceContext.reflect().getSubTypesOf(PageConfigurator.class).stream().forEachOrdered(next ->
                 {
                     log.log(Level.CONFIG, "Configuring site for use with configurator [{0}]", next.getCanonicalName());
                     PageConfigurator configurator = GuiceContext.inject().getInstance(next);
                     configurator.configure(this);
                     log.log(Level.CONFIG, "Configured [{0}]", next.getCanonicalName());
-                }
+                });
             }
         }
         super.init();
@@ -234,6 +247,13 @@ public class Page extends Html implements IPage
                 allScripts.stream().filter(script -> (script != null)).forEach(getBody()::add);
             }
 
+            if (!getTopShelfScripts().isEmpty())
+            {
+                if (getRunningEnvironment().ordinal() >= DevelopmentEnvironments.Development.ordinal())
+                {
+                    getHead().add(new Comment("Priority [" + RequirementsPriority.Top_Shelf + "] Values"));
+                }
+            }
             getTopShelfScripts().forEach(next ->
             {
                 getHead().add((HeadChildren) next);
@@ -510,18 +530,15 @@ public class Page extends Html implements IPage
 
         List<RequirementsPriority> arrs = new ArrayList<>(Arrays.asList(RequirementsPriority.values()));
         //render JS only
-        arrs.stream().filter(a -> a != RequirementsPriority.Top_Shelf).map(priority ->
+        arrs.stream().filter(a -> a != RequirementsPriority.Top_Shelf).forEachOrdered(priority ->
         {
-            if (!getPriorityRequirements(priority, requirements, true, false).isEmpty())
+            if (getRunningEnvironment().ordinal() >= DevelopmentEnvironments.Development.ordinal())
             {
-                if (getRunningEnvironment().ordinal() >= DevelopmentEnvironments.Development.ordinal())
+                if (!getPriorityRequirements(priority, requirements, false, true).isEmpty())
                 {
                     getBody().add(new Comment("Priority [" + priority + "] Values"));
                 }
             }
-            return priority;
-        }).forEachOrdered(priority ->
-        {
             getPriorityRequirements(priority, requirements, false, true).stream().forEach(comp
                     ->
             {

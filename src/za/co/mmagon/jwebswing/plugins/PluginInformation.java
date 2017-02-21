@@ -14,7 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing;
+package za.co.mmagon.jwebswing.plugins;
+
+import java.lang.annotation.*;
 
 /**
  * Defines a plugin, attach to a Page Configurator
@@ -23,6 +25,12 @@ package za.co.mmagon.jwebswing;
  * @since 19 Feb 2017
  *
  */
+@Target(
+        {
+            ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
+        })
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
 public @interface PluginInformation
 {
 
@@ -82,6 +90,11 @@ public @interface PluginInformation
      */
     public String pluginIconImageUrl() default "";
 
+    /**
+     * The source url for this plugin
+     *
+     * @return
+     */
     public String pluginIconUrl() default "";
 
     /**
@@ -91,6 +104,11 @@ public @interface PluginInformation
      */
     public String pluginSourceUrl() default "";
 
+    /**
+     * The Git url for the java portion of this plugin
+     *
+     * @return
+     */
     public String pluginGitUrl() default "";
 
     /**
@@ -141,4 +159,10 @@ public @interface PluginInformation
      */
     public String pluginPayUrl() default "https://paypal.me/MarcMagon/15";
 
+    /**
+     * The default homepage of the plugin
+     *
+     * @return
+     */
+    public String pluginOriginalHomepage() default "";
 }

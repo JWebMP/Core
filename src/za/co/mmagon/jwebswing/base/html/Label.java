@@ -64,6 +64,14 @@ public class Label<J extends Label>
     private Form forFormComponent;
 
     /**
+     * Constructs a new label
+     */
+    public Label()
+    {
+        this(null);
+    }
+
+    /**
      * Constructs a new label with the attribute set
      * <p>
      * @param label
@@ -128,7 +136,10 @@ public class Label<J extends Label>
     public void setForInputComponent(Component forInputComponent)
     {
         this.forInputComponent = forInputComponent;
-        addAttribute(LabelAttributes.For, forInputComponent.getID());
+        if (forInputComponent != null)
+        {
+            addAttribute(LabelAttributes.For, forInputComponent.getID());
+        }
     }
 
     /**
@@ -149,7 +160,10 @@ public class Label<J extends Label>
     public void setForFormComponent(Form forFormComponent)
     {
         this.forFormComponent = forFormComponent;
-        addAttribute(LabelAttributes.Form, forInputComponent.getID());
+        if (forFormComponent != null)
+        {
+            addAttribute(LabelAttributes.Form, forInputComponent.getID());
+        }
     }
 
 }

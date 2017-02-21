@@ -329,21 +329,12 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     @Override
     public final J addAttribute(GlobalAttributes attribute, String value)
     {
-        if (value != null && !value.isEmpty())
+        if (attribute == GlobalAttributes.Style)
         {
-            if (attribute == GlobalAttributes.Style)
-            {
-                getAttributesGlobal().put(attribute, getAttributesGlobal().get(attribute) + "" + value);
-            }
-            getAttributesGlobal().put(attribute, value);
+            getAttributesGlobal().put(attribute, getAttributesGlobal().get(attribute) + "" + value);
         }
-        else
-        {
-            LOG.log(Level.FINE, "Invalid Global Attribute value added [{0}] - [{1}] - [{2}]. Ignoring. Possible duplicate all components run..", new Object[]
-            {
-                getClass().getSimpleName(), attribute, value
-            });
-        }
+        getAttributesGlobal().put(attribute, value);
+
         return (J) this;
     }
 

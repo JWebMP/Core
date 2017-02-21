@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -93,7 +93,8 @@ public enum GlobalAttributes implements AttributeDefinitions
     /**
      * Screen Reader labelled by
      */
-    Aria_LabelledBy;
+    Aria_LabelledBy,
+    Aria_Controls,;
 
     private GlobalAttributes()
     {

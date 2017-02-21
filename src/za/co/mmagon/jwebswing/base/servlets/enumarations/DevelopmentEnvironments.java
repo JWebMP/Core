@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -28,31 +28,32 @@ package za.co.mmagon.jwebswing.base.servlets.enumarations;
 public enum DevelopmentEnvironments
 {
     /**
-     * Forces tiny HTML to be rendered
+     * All commenting and everything
      */
-    Production,
-    /**
-     * PreProduction Environment
-     */
-    PreProduction,
-    /**
-     * UI Test Environment
-     */
-    UITest,
-    /**
-     * Allows for pretty print of HTML
-     */
-    QA,
-    /**
-     * Always pretty print HTML
-     */
-    Development,
+    Local,
     /**
      * Lots of commenting
      */
     Sandbox,
     /**
-     * All commenting and everything
+     * Always pretty print HTML
      */
-    Local
+    Development,
+    /**
+     * Allows for pretty print of HTML
+     */
+    QA,
+    /**
+     * UI Test Environment
+     */
+    UITest,
+    /**
+     * PreProduction Environment
+     */
+    PreProduction,
+    /**
+     * Forces tiny HTML to be rendered
+     */
+    Production,
+
 }
