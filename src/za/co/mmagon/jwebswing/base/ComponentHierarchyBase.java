@@ -204,13 +204,6 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
                 if (cfb != null && !cfb.isConfigured())
                 {
                     cfb.preConfigure();
-                    if (getClass().isAssignableFrom(ComponentHTMLAngularBase.class))
-                    {
-                        if (ComponentHTMLAngularBase.class.cast(this).isLoadAngular())
-                        {
-                            cfb.getPage().getOptions().setAngularEnabled(true);
-                        }
-                    }
                 }
             });
 

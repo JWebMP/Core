@@ -86,16 +86,4 @@ public class BodyTest extends BaseTestClass
                 + "	</body>\n"
                 + "</html>", p.toString(true).toString());
     }
-
-    @Test
-    public void testAngular()
-    {
-        Page p = getPage();
-        p.getOptions().setAngularEnabled(true);
-        p.getBody().add(new Comment("meh"));
-        //p.getBody().preConfigure();
-        System.out.println(p.toString());
-        System.out.println(p.toString(true));
-    }
-
 }

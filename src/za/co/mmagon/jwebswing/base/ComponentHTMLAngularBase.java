@@ -19,6 +19,7 @@ package za.co.mmagon.jwebswing.base;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.*;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
+import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.angular.controllers.AngularControllerBase;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
@@ -44,7 +45,6 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
         extends ComponentHTMLAttributeBase<A, F, E, J> implements IComponentHTMLAngularBase<J>
 {
 
-    public static final String AngularEnabledString = "angular-enabled";
     private static final long serialVersionUID = 1L;
 
     /**
@@ -131,7 +131,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
         if (attributesAngular == null)
         {
             attributesAngular = new HashMap<>();
-            setLoadAngular(true);
+            AngularPageConfigurator.setAngularRequired(this, true);
         }
         return attributesAngular;
     }
@@ -179,7 +179,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
         if (angularObjects == null)
         {
             angularObjects = new HashMap<>();
-            setLoadAngular(true);
+            AngularPageConfigurator.setAngularRequired(this, true);
         }
         return angularObjects;
     }
@@ -215,7 +215,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
     public J bind(String variableName)
     {
         addAttribute(AngularAttributes.ngBind, variableName);
-        setLoadAngular(true);
+        AngularPageConfigurator.setAngularRequired(this, true);
         return (J) this;
     }
 
@@ -227,7 +227,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
     public J cloak()
     {
         addAttribute(AngularAttributes.ngCloak, null);
-        setLoadAngular(true);
+        AngularPageConfigurator.setAngularRequired(this, true);
         return (J) this;
     }
 
@@ -241,7 +241,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
         if (angularModules == null)
         {
             setAngularModules(new ArrayList<>());
-            setLoadAngular(true);
+            AngularPageConfigurator.setAngularRequired(this, true);
         }
         return angularModules;
     }
@@ -266,7 +266,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
         if (angularDirectives == null)
         {
             setAngularDirectives(new ArrayList<>());
-            setLoadAngular(true);
+            AngularPageConfigurator.setAngularRequired(this, true);
         }
         return angularDirectives;
     }
@@ -291,7 +291,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
         if (angularControllers == null)
         {
             setAngularControllers(new ArrayList<>());
-            setLoadAngular(true);
+            AngularPageConfigurator.setAngularRequired(this, true);
         }
         return angularControllers;
     }
@@ -304,44 +304,5 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
     public void setAngularControllers(List<AngularControllerBase> angularControllers)
     {
         this.angularControllers = angularControllers;
-    }
-
-    /**
-     * If angular should be loaded
-     *
-     * @return
-     */
-    protected boolean isLoadAngular()
-    {
-        String isEnabled = getProperty(AngularEnabledString);
-        if (isEnabled == null || isEnabled.isEmpty())
-        {
-            return false;
-        }
-        try
-        {
-            Boolean en = Boolean.parseBoolean(isEnabled);
-            return en;
-        }
-        catch (Exception e)
-        {
-            return false;
-        }
-    }
-
-    /**
-     * Sets if angular must be loaded
-     *
-     * @param loadAngular
-     */
-    protected void setLoadAngular(boolean loadAngular)
-    {
-        getProperties().put(AngularEnabledString, loadAngular);
-    }
-
-    @Override
-    public void preConfigure()
-    {
-        super.preConfigure();
     }
 }

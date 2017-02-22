@@ -134,10 +134,6 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
         {
             getEvents().add(event);
         }
-        if (this instanceof ComponentHierarchyBase)
-        {
-            ComponentHierarchyBase.class.cast(this).getPage().getOptions().setAngularEnabled(true);
-        }
         return (J) this;
     }
 

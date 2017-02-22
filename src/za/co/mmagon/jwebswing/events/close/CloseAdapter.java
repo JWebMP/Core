@@ -61,7 +61,6 @@ public abstract class CloseAdapter extends Event
         if (!isConfigured())
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
-            getComponent().getPage().getOptions().setAngularEnabled(true);
             getComponent().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngClose, "perform($event," + renderVariables() + ");");
         }

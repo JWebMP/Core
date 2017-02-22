@@ -430,7 +430,6 @@ public class ComponentBase<J extends ComponentBase>
      */
     public void init()
     {
-
         setInitialized(true);
     }
 

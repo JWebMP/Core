@@ -17,6 +17,7 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.html.attributes.ParagraphAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
@@ -130,7 +131,7 @@ public class Paragraph<J extends Paragraph>
     @Override
     public J bind(String variableName)
     {
-        setLoadAngular(true);
+        AngularPageConfigurator.setAngularRequired(this, true);
         if (variableName.contains("{{"))
         {
             setText(getText(0) + variableName);

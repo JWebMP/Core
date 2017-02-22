@@ -62,7 +62,6 @@ public abstract class ResizeStartAdapter extends Event
         if (!isConfigured())
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
-            getComponent().getPage().getOptions().setAngularEnabled(true);
             getComponent().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngResizeStart, "perform($event," + renderVariables() + ");");
         }

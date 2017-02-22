@@ -80,7 +80,7 @@ public class AngularFeatureTest extends BaseTestClass
     {
         Page p = getPage();
         Body b = p.getBody();
-        p.getOptions().setAngularEnabled(true);
+        AngularPageConfigurator.setAngularRequired(b, true);
         p.getAngular().configureTemplateVariables();
         System.out.println(p.toString(true));
     }

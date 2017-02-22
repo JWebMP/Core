@@ -22,6 +22,7 @@ import za.co.mmagon.jwebswing.base.ComponentEventBase;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
+import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.exceptions.NullComponentException;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
@@ -68,7 +69,7 @@ public class Event<A extends JavaScriptPart, J extends Event>
     {
         this(eventTypes.name(), eventTypes);
         setComponent(component);
-        component.getPage().getOptions().setAngularEnabled(true);
+        AngularPageConfigurator.setAngularRequired(component, true);
     }
 
     /**

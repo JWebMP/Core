@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -28,7 +28,6 @@ import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
 import za.co.mmagon.jwebswing.base.angular.modules.JWAngularModule;
 import za.co.mmagon.jwebswing.base.exceptions.NullComponentException;
-import za.co.mmagon.jwebswing.base.html.Comment;
 import za.co.mmagon.jwebswing.base.html.interfaces.HTMLFeatures;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.logger.LogFactory;
@@ -121,12 +120,10 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
     {
         if (!isConfigured())
         {
-            if (getComponent().getPage().getOptions().isAngularEnabled())
+            if (getComponent().getPage().getBody().readChildrenPropertyFirstResult(AngularPageConfigurator.AngularEnabledString, true))
             {
                 getComponent().addAttribute(AngularAttributes.ngApp, getAppName() + "");
                 getComponent().addAttribute(AngularAttributes.ngController, controllerName);
-                getComponent().add(new Comment("Angular Application"));
-
             }
         }
         super.preConfigure();

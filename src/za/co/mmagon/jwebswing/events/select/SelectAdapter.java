@@ -62,7 +62,6 @@ public abstract class SelectAdapter extends Event
         if (!isConfigured())
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
-            getComponent().getPage().getOptions().setAngularEnabled(true);
             getComponent().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngSelect, "perform($event," + renderVariables() + ");");
         }

@@ -28,11 +28,6 @@ package za.co.mmagon.jwebswing.base.html;
 public interface IBody
 {
 
-    /**
-     * Will configure for Angular 1
-     */
-    void configureAngular();
-
     void configureModernizr();
 
     /**

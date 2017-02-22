@@ -59,7 +59,7 @@ public abstract class KeyUpAdapter extends Event
         if (!isConfigured())
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
-            getComponent().getPage().getOptions().setAngularEnabled(true);
+            AngularPageConfigurator.setAngularRequired(getComponent(), true);
             component.addAttribute(AngularAttributes.ngKeyup, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();

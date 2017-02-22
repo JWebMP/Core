@@ -62,7 +62,6 @@ public abstract class UnselectedtAdapter extends Event
         if (!isConfigured())
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
-            getComponent().getPage().getOptions().setAngularEnabled(true);
             getComponent().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngUnselected, "perform($event," + renderVariables() + ");");
         }

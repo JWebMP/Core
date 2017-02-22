@@ -38,10 +38,6 @@ public class PageOptions extends JavaScriptPart
      */
     private boolean jQueryEnabled;
     /**
-     * Whether or not to render angular
-     */
-    private boolean angularEnabled;
-    /**
      * Whether or not to dynamic render the requirements
      */
     private boolean dynamicRender = true;
@@ -98,31 +94,6 @@ public class PageOptions extends JavaScriptPart
         if (this.jQueryEnabled)
         {
             page.getBody().configureJQuery();
-        }
-    }
-
-    /**
-     * whether or not to render angular
-     *
-     * @return
-     */
-    public boolean isAngularEnabled()
-    {
-        return angularEnabled;
-    }
-
-    /**
-     * Whether or not to render angular
-     *
-     * @param angularEnabled
-     */
-    public void setAngularEnabled(boolean angularEnabled)
-    {
-        this.angularEnabled = angularEnabled;
-        if (angularEnabled)
-        {
-            setjQueryEnabled(true);
-            page.getBody().configureAngular();
         }
     }
 

@@ -18,8 +18,8 @@ package za.co.mmagon.jwebswing;
 
 import com.armineasy.injection.GuiceContext;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sf.uadetector.*;
@@ -27,6 +27,7 @@ import za.co.mmagon.FileTemplates;
 import za.co.mmagon.JWebSwingSiteBinder;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
+import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.client.InternetExplorerCompatibilityMode;
 import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.html.attributes.ScriptAttributes;
@@ -37,6 +38,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.DevelopmentEnvironments
 import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 import za.co.mmagon.jwebswing.base.servlets.interfaces.IPage;
 import za.co.mmagon.jwebswing.generics.WebReference;
+import za.co.mmagon.jwebswing.plugins.PluginInformation;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -82,10 +84,11 @@ public class Page extends Html implements IPage
      * Cache for all the associated components throughout the life-cycle of the application
      */
     private transient java.util.Map<String, ComponentHierarchyBase> componentCache;
+
     /**
      * If this page has already gone through initialization
      */
-    private boolean initialized;
+    private boolean pageInitialized;
 
     /**
      * Populates all my components. Excludes this page
@@ -190,10 +193,10 @@ public class Page extends Html implements IPage
     @Override
     public void init()
     {
-        if (!initialized)
+        if (!pageInitialized)
         {
             initialize();
-            initialized = true;
+            pageInitialized = true;
         }
 
         if (!isInitialized())
@@ -201,16 +204,33 @@ public class Page extends Html implements IPage
             getBody().init();
             getBody().preConfigure();
 
-            if (!GuiceContext.isBuildingInjector())
+            log.log(Level.FINE, "Looking for plugins....");
+
+            Set<Class<?>> plugins = GuiceContext.reflect().getTypesAnnotatedWith(PluginInformation.class);
+            for (Class plugin : plugins)
             {
-                GuiceContext.reflect().getSubTypesOf(PageConfigurator.class).stream().forEachOrdered(next ->
+                PluginInformation pi = (PluginInformation) plugin.getAnnotation(PluginInformation.class);
+                //log.log(Level.INFO, "Plugin Found - " + plugin);
+                log.log(Level.FINE, "Plugin Found - " + pi.pluginName() + " - version - " + pi.pluginVersion());
+            }
+            log.log(Level.FINE, "Plugins Completed");
+
+            //if (!GuiceContext.isBuildingInjector())
+            {
+                GuiceContext.reflect().getSubTypesOf(PageConfigurator.class).stream().parallel().forEachOrdered(next ->
                 {
-                    log.log(Level.CONFIG, "Configuring site for use with configurator [{0}]", next.getCanonicalName());
+                    log.log(Level.FINE, "Running configuration : [{0}]", next.getSimpleName());
                     PageConfigurator configurator = GuiceContext.inject().getInstance(next);
                     configurator.configure(this);
-                    log.log(Level.CONFIG, "Configured [{0}]", next.getCanonicalName());
+                    log.log(Level.FINE, "Configuration Completed : [{0}]", next.getSimpleName());
                 });
             }
+            //else
+            {
+                //log.log(Level.INFO, "Context is still building the injector, ignoring page configurations");
+            }
+
+            log.log(Level.INFO, "Page Configured.");
         }
         super.init();
     }
@@ -406,7 +426,7 @@ public class Page extends Html implements IPage
     {
         ArrayList<Script> allScripts = new ArrayList<>();
 
-        if (getOptions().isAngularEnabled())
+        if (getBody().readChildrenPropertyFirstResult(AngularPageConfigurator.AngularEnabledString, true))
         {
             if (getOptions().isDynamicRender())
             {

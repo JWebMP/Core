@@ -19,7 +19,6 @@ package za.co.mmagon.jwebswing.base.html;
 import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.angular.AngularReferencePool;
 import za.co.mmagon.jwebswing.base.client.BrowserGroups;
 import za.co.mmagon.jwebswing.base.html.attributes.BodyAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
@@ -91,25 +90,6 @@ public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Bo
     public IBody asMe()
     {
         return this;
-    }
-
-    /**
-     * Will configure for Angular 1
-     */
-    @Override
-    public void configureAngular()
-    {
-        if (getPage().getOptions().isAngularEnabled())
-        {
-            //getPage().getOptions().setPaceEnabled(true);
-            //configurePace();
-            getPage().getOptions().setjQueryEnabled(true);
-            configureJQuery();
-            //getPage().getOptions().setBootstrapEnabled(true);
-            //configureBootstrap();
-
-            getJavascriptReferences().add(AngularReferencePool.Angular1.getJavaScriptReference());
-        }
     }
 
     @Override

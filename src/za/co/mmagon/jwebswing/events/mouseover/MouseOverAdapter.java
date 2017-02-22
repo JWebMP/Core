@@ -61,7 +61,6 @@ public abstract class MouseOverAdapter extends Event
         if (!isConfigured())
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
-            getComponent().getPage().getOptions().setAngularEnabled(true);
             component.addAttribute(AngularAttributes.ngMouseover, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();

@@ -59,7 +59,7 @@ public abstract class KeyPressedAdapter extends Event
         if (!isConfigured())
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
-            getComponent().getPage().getOptions().setAngularEnabled(true);
+            AngularPageConfigurator.setAngularRequired(getComponent(), true);
             component.addAttribute(AngularAttributes.ngKeypress, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();

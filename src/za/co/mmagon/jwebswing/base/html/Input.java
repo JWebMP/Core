@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
+import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
@@ -167,7 +168,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input>
     @Override
     public J bind(String variableName)
     {
-        setLoadAngular(true);
+        AngularPageConfigurator.setAngularRequired(this, true);
         addAttribute(AngularAttributes.ngModel, variableName);
         return (J) this;
     }

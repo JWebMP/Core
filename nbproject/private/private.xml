@@ -81,18 +81,7 @@
         </group>
         <group name="ArminEasy"/>
         <group name="JWebSwingStaticPage"/>
-        <group name="JWebswing Static">
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/plugins/ComponentInformation.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/PageOptions.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/PageTest.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/PageConfigurator.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/plugins/PluginInformation.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/html/Body.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/Page.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/servlets/enumarations/RequirementsPriority.java</file>
-        </group>
-        <group name="JWebSwing">
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/ComponentHTMLAttributeBase.java</file>
-        </group>
+        <group name="JWebswing Static"/>
+        <group name="JWebSwing"/>
     </open-files>
 </project-private>
