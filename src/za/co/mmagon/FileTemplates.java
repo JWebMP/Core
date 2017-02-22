@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -130,7 +130,7 @@ public class FileTemplates implements Serializable
                  */
                 byte[] fileContents;
                 InputStream is = referenceClass.getResourceAsStream(templateFileName);
-               // BufferedInputStream bis = new BufferedInputStream(is);
+                // BufferedInputStream bis = new BufferedInputStream(is);
                 fileContents = new byte[is.available()];
                 is.read(fileContents, 0, is.available());
                 is.close();

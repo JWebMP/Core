@@ -36,7 +36,7 @@ public class FocusDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public FocusDirective(AngularFeature angular)
+    public FocusDirective()
     {
         super("ngFocus");
     }

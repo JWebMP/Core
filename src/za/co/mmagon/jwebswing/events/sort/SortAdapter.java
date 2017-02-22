@@ -62,7 +62,7 @@ public abstract class SortAdapter extends Event
         if (!isConfigured())
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
-            getComponent().getAngularDirectives().add(getDirective());
+            getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngSort, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
@@ -77,7 +77,7 @@ public abstract class SortAdapter extends Event
     {
         if (directive == null)
         {
-            directive = new SortDirective(getComponent().getPage().getAngular());
+            directive = new SortDirective();
         }
         return directive;
     }

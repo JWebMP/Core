@@ -62,7 +62,7 @@ public abstract class DeactivateAdapter extends Event
         if (!isConfigured())
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
-            getComponent().getAngularDirectives().add(getDirective());
+            getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngRightClick, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
@@ -77,7 +77,7 @@ public abstract class DeactivateAdapter extends Event
     {
         if (directive == null)
         {
-            directive = new DeactivateDirective(getComponent().getPage().getAngular());
+            directive = new DeactivateDirective();
         }
         return directive;
     }

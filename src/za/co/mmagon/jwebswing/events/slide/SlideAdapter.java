@@ -65,7 +65,7 @@ public abstract class SlideAdapter extends Event
         if (!isConfigured())
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
-            getComponent().getAngularDirectives().add(getDirective());
+            getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngSlide, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
@@ -80,7 +80,7 @@ public abstract class SlideAdapter extends Event
     {
         if (directive == null)
         {
-            directive = new SlideDirective(getComponent().getPage().getAngular());
+            directive = new SlideDirective();
         }
         return directive;
     }

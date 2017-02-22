@@ -17,12 +17,10 @@
 package za.co.mmagon.jwebswing.base;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
-import za.co.mmagon.jwebswing.base.angular.controllers.AngularControllerBase;
-import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
-import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
@@ -57,21 +55,6 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private Map<String, JavaScriptPart> angularObjects;
-    /**
-     * All the angular modules for this component
-     */
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private List<AngularModuleBase> angularModules;
-    /**
-     * All of the angular directives for this component
-     */
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private List<AngularDirectiveBase> angularDirectives;
-    /**
-     * All of the angular directives for this component
-     */
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private List<AngularControllerBase> angularControllers;
 
     /**
      * Constructs a new component with the angular features enabled
@@ -231,78 +214,4 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
         return (J) this;
     }
 
-    /**
-     * Gets a list of angular modules
-     *
-     * @return
-     */
-    public List<AngularModuleBase> getAngularModules()
-    {
-        if (angularModules == null)
-        {
-            setAngularModules(new ArrayList<>());
-            AngularPageConfigurator.setAngularRequired(this, true);
-        }
-        return angularModules;
-    }
-
-    /**
-     * Sets the angular modules
-     *
-     * @param angularModules
-     */
-    public void setAngularModules(List<AngularModuleBase> angularModules)
-    {
-        this.angularModules = angularModules;
-    }
-
-    /**
-     * Gets the list of angular directives
-     *
-     * @return
-     */
-    public List<AngularDirectiveBase> getAngularDirectives()
-    {
-        if (angularDirectives == null)
-        {
-            setAngularDirectives(new ArrayList<>());
-            AngularPageConfigurator.setAngularRequired(this, true);
-        }
-        return angularDirectives;
-    }
-
-    /**
-     * Sets the list of angular directives.
-     *
-     * @param angularDirectives
-     */
-    public void setAngularDirectives(List<AngularDirectiveBase> angularDirectives)
-    {
-        this.angularDirectives = angularDirectives;
-    }
-
-    /**
-     * Returns a list of all the angular controllers for this component
-     *
-     * @return
-     */
-    public List<AngularControllerBase> getAngularControllers()
-    {
-        if (angularControllers == null)
-        {
-            setAngularControllers(new ArrayList<>());
-            AngularPageConfigurator.setAngularRequired(this, true);
-        }
-        return angularControllers;
-    }
-
-    /**
-     * Sets the list of angular controllers for this component
-     *
-     * @param angularControllers
-     */
-    public void setAngularControllers(List<AngularControllerBase> angularControllers)
-    {
-        this.angularControllers = angularControllers;
-    }
 }

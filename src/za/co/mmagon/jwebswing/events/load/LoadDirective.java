@@ -36,7 +36,7 @@ public class LoadDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public LoadDirective(AngularFeature angular)
+    public LoadDirective()
     {
         super("ngLoad");
     }

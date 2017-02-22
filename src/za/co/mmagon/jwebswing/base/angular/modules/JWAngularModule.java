@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,7 @@ package za.co.mmagon.jwebswing.base.angular.modules;
 
 import java.util.ArrayList;
 import java.util.List;
-import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 
 /**
@@ -30,13 +30,19 @@ public class JWAngularModule extends AngularModuleBase
 {
 
     private static final long serialVersionUID = 1L;
-    private ComponentHierarchyBase component;
+    private Page page;
 
-    public JWAngularModule(ComponentHierarchyBase component)
+    public JWAngularModule(Page component)
     {
         super("jwApp");
         setSortOrder(9999999);
-        this.component = component;
+        this.page = component;
+    }
+
+    public String renderFunction(Page fromComponent)
+    {
+        this.page = fromComponent;
+        return renderFunction();
     }
 
     /**
@@ -51,7 +57,7 @@ public class JWAngularModule extends AngularModuleBase
         returnable += "'" + AngularFeature.getAppName() + "',";
 
         ArrayList<String> moduleNames = new ArrayList<>();
-        List<AngularModuleBase> modules = component.getPage().getBody().getAngularModulesAll();
+        List<AngularModuleBase> modules = page.getAngular().getAngularModules();
         modules.stream().forEach(module ->
         {
             String name = module.getReferenceName();
@@ -78,4 +84,15 @@ public class JWAngularModule extends AngularModuleBase
         returnable += ");";
         return returnable;
     }
+
+    @Override
+    public String toString()
+    {
+        if (this.page != null)
+        {
+            page.toString(true);
+        }
+        return super.toString();
+    }
+
 }

@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -27,7 +27,6 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.logger.LogFactory;
 
@@ -58,8 +57,8 @@ public class AngularDataVariables extends JWDefaultServlet
 
         Date startDate = new Date();
         //StringBuilder compiled = page.getAngular().compileTemplate(AngularFeature.class, "jwangular");
-        page.getAngular().configureTemplateVariables();
-        StringBuilder output = FileTemplates.renderTemplateScripts("jwangular");
+        //page.getAngular().configureTemplateVariables();
+        StringBuilder output = page.getAngular().renderAngularJavascript(page);
         Date endDate = new Date();
         try (PrintWriter out = response.getWriter())
         {

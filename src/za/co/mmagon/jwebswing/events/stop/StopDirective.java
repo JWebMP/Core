@@ -36,7 +36,7 @@ public class StopDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public StopDirective(AngularFeature angular)
+    public StopDirective()
     {
         super("ngStop");
     }

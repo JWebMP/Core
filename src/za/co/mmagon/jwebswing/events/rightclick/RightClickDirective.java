@@ -36,7 +36,7 @@ public class RightClickDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public RightClickDirective(AngularFeature angular)
+    public RightClickDirective()
     {
         super("ngRightClick");
     }

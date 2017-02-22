@@ -62,7 +62,8 @@ public abstract class SearchAdapter extends Event
         if (!isConfigured())
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
-            getComponent().getAngularDirectives().add(getDirective());
+            getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
+
             component.addAttribute(AngularAttributes.ngSearch, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
@@ -77,7 +78,7 @@ public abstract class SearchAdapter extends Event
     {
         if (directive == null)
         {
-            directive = new SearchDirective(getComponent().getPage().getAngular());
+            directive = new SearchDirective();
         }
         return directive;
     }

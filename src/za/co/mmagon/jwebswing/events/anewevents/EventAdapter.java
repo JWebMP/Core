@@ -65,7 +65,7 @@ public abstract class EventAdapter extends Event
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
             AngularPageConfigurator.setAngularRequired(getComponent(), true);
-            getComponent().getAngularDirectives().add(getDirective());
+            getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngRightClick, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
@@ -80,7 +80,7 @@ public abstract class EventAdapter extends Event
     {
         if (directive == null)
         {
-            directive = new EventDirective(getComponent().getPage().getAngular());
+            directive = new EventDirective();
         }
         return directive;
     }

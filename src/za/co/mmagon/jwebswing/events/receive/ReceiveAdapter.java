@@ -62,7 +62,7 @@ public abstract class ReceiveAdapter extends Event
         if (!isConfigured())
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
-            getComponent().getAngularDirectives().add(getDirective());
+            getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngReceive, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
@@ -77,7 +77,7 @@ public abstract class ReceiveAdapter extends Event
     {
         if (directive == null)
         {
-            directive = new ReceiveDirective(getComponent().getPage().getAngular());
+            directive = new ReceiveDirective();
         }
         return directive;
     }

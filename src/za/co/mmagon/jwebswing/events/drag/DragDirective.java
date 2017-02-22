@@ -36,7 +36,7 @@ public class DragDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public DragDirective(AngularFeature angular)
+    public DragDirective()
     {
         super("ngDrag");
     }

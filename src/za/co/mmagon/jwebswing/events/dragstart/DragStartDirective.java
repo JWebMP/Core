@@ -36,7 +36,7 @@ public class DragStartDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public DragStartDirective(AngularFeature angular)
+    public DragStartDirective()
     {
         super("ngDragStart");
     }

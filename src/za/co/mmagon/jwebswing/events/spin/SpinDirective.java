@@ -36,7 +36,7 @@ public class SpinDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public SpinDirective(AngularFeature angular)
+    public SpinDirective()
     {
         super("ngSpin");
     }

@@ -62,7 +62,7 @@ public abstract class ResizeStartAdapter extends Event
         if (!isConfigured())
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
-            getComponent().getAngularDirectives().add(getDirective());
+            getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngResizeStart, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
@@ -77,7 +77,7 @@ public abstract class ResizeStartAdapter extends Event
     {
         if (directive == null)
         {
-            directive = new ResizeStartDirective(getComponent().getPage().getAngular());
+            directive = new ResizeStartDirective();
         }
         return directive;
     }

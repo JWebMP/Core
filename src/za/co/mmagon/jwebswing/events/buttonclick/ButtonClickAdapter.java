@@ -54,7 +54,7 @@ public abstract class ButtonClickAdapter extends Event
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
             AngularPageConfigurator.setAngularRequired(getComponent(), true);
-            getComponent().getAngularDirectives().add(getDirective());
+            getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngButtonClick, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
@@ -89,7 +89,7 @@ public abstract class ButtonClickAdapter extends Event
     {
         if (directive == null)
         {
-            setDirective(new ButtonClickDirective(getComponent().getPage().getAngular()));
+            setDirective(new ButtonClickDirective());
         }
         return directive;
     }

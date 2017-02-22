@@ -62,7 +62,7 @@ public abstract class DragStopAdapter extends Event
         if (!isConfigured())
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
-            getComponent().getAngularDirectives().add(getDirective());
+            getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngDragStop, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
@@ -77,7 +77,7 @@ public abstract class DragStopAdapter extends Event
     {
         if (directive == null)
         {
-            directive = new DragStopDirective(getComponent().getPage().getAngular());
+            directive = new DragStopDirective();
         }
         return directive;
     }

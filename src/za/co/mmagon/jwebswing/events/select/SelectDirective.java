@@ -36,7 +36,7 @@ public class SelectDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public SelectDirective(AngularFeature angular)
+    public SelectDirective()
     {
         super("ngSelect");
     }

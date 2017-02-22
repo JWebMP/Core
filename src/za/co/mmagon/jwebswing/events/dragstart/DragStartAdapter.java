@@ -62,7 +62,7 @@ public abstract class DragStartAdapter extends Event
         if (!isConfigured())
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
-            getComponent().getAngularDirectives().add(getDirective());
+            getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngDragStart, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
@@ -77,7 +77,7 @@ public abstract class DragStartAdapter extends Event
     {
         if (directive == null)
         {
-            directive = new DragStartDirective(getComponent().getPage().getAngular());
+            directive = new DragStartDirective();
         }
         return directive;
     }

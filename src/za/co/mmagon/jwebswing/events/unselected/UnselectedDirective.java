@@ -36,7 +36,7 @@ public class UnselectedDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public UnselectedDirective(AngularFeature angular)
+    public UnselectedDirective()
     {
         super("ngRightClick");
     }

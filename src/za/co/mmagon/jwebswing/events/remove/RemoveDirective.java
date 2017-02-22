@@ -36,7 +36,7 @@ public class RemoveDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public RemoveDirective(AngularFeature angular)
+    public RemoveDirective()
     {
         super("ngRemove");
     }

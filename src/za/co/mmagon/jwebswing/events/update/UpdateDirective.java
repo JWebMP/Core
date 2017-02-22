@@ -36,7 +36,7 @@ public class UpdateDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public UpdateDirective(AngularFeature angular)
+    public UpdateDirective()
     {
         super("ngUpdate");
     }

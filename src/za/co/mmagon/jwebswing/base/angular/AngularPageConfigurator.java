@@ -16,9 +16,16 @@
  */
 package za.co.mmagon.jwebswing.base.angular;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import java.util.ArrayList;
+import java.util.List;
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.PageConfigurator;
 import za.co.mmagon.jwebswing.base.ComponentHTMLAngularBase;
+import za.co.mmagon.jwebswing.base.angular.controllers.AngularControllerBase;
+import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
+import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
 
 /**
  *
@@ -32,9 +39,32 @@ public class AngularPageConfigurator extends PageConfigurator
     private static final long serialVersionUID = 1L;
     public static final String AngularEnabledString = "angular-enabled";
 
+    /**
+     * All the angular modules for this component
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<AngularModuleBase> angularModules;
+    /**
+     * All of the angular directives for this component
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<AngularDirectiveBase> angularDirectives;
+    /**
+     * All of the angular directives for this component
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<AngularControllerBase> angularControllers;
+    /**
+     * All the angular variables
+     */
+    private List<String> angularVariables;
+
+    /**
+     * Configures the angular page
+     */
     public AngularPageConfigurator()
     {
-
+        setSortOrder(99999999); //Always dead last
     }
 
     @Override
@@ -42,12 +72,19 @@ public class AngularPageConfigurator extends PageConfigurator
     {
         if (!page.isConfigured())
         {
-            page.getOptions().setjQueryEnabled(true);
-            page.getOptions().setJquery3(true);
             if (page.getBody().readChildrenPropertyFirstResult(AngularEnabledString, true))
             {
+                page.getOptions().setjQueryEnabled(true);
+                page.getOptions().setJquery3(true);
                 page.getBody().getJavascriptReferences().add(AngularReferencePool.Angular1.getJavaScriptReference());
+
+                page.getBody().addAttribute(AngularAttributes.ngApp, AngularFeature.getAppName());
+                page.getBody().addAttribute(AngularAttributes.ngController, AngularFeature.getControllerName());
             }
+        }
+        else
+        {
+            System.out.println("Page is already configured, not running angualr");
         }
         return page;
     }
@@ -61,5 +98,113 @@ public class AngularPageConfigurator extends PageConfigurator
     public static void setAngularRequired(ComponentHTMLAngularBase component, boolean required)
     {
         component.getProperties().put(AngularEnabledString, required);
+    }
+
+    /**
+     * Gets a list of angular modules
+     *
+     * @return
+     */
+    public List<AngularModuleBase> getAngularModules()
+    {
+        if (angularModules == null)
+        {
+            setAngularModules(new ArrayList<>());
+
+        }
+        return angularModules;
+    }
+
+    /**
+     * Sets the angular modules
+     *
+     * @param angularModules
+     */
+    public void setAngularModules(List<AngularModuleBase> angularModules)
+    {
+        this.angularModules = angularModules;
+    }
+
+    /**
+     * Gets the list of angular directives
+     *
+     * @return
+     */
+    public List<AngularDirectiveBase> getAngularDirectives()
+    {
+        if (angularDirectives == null)
+        {
+            setAngularDirectives(new ArrayList<>());
+
+        }
+        return angularDirectives;
+    }
+
+    /**
+     * Sets the list of angular directives.
+     *
+     * @param angularDirectives
+     */
+    public void setAngularDirectives(List<AngularDirectiveBase> angularDirectives)
+    {
+        this.angularDirectives = angularDirectives;
+    }
+
+    /**
+     * Returns a list of all the angular controllers for this component
+     *
+     * @return
+     */
+    public List<AngularControllerBase> getAngularControllers()
+    {
+        if (angularControllers == null)
+        {
+            setAngularControllers(new ArrayList<>());
+
+        }
+        return angularControllers;
+    }
+
+    /**
+     * Sets the list of angular controllers for this component
+     *
+     * @param angularControllers
+     */
+    public void setAngularControllers(List<AngularControllerBase> angularControllers)
+    {
+        this.angularControllers = angularControllers;
+    }
+
+    /**
+     * Returns the list of angular variables
+     *
+     * @return
+     */
+    public List<String> getAngularVariables()
+    {
+        if (angularVariables == null)
+        {
+            angularVariables = new ArrayList<>();
+        }
+        return angularVariables;
+    }
+
+    /**
+     * Sets the list of angular variables
+     *
+     * @param angularVariables
+     */
+    public void setAngularVariables(List<String> angularVariables)
+    {
+        this.angularVariables = angularVariables;
+    }
+
+    public StringBuilder renderAngularJavascript(Page page)
+    {
+        StringBuilder sb = new StringBuilder();
+        AngularFeature af = new AngularFeature(page);
+        af.configureTemplateVariables();
+        sb.append(FileTemplates.renderTemplateScripts("jwangular"));
+        return sb;
     }
 }

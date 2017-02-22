@@ -23,10 +23,8 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sf.uadetector.*;
-import za.co.mmagon.FileTemplates;
 import za.co.mmagon.JWebSwingSiteBinder;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
-import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.client.InternetExplorerCompatibilityMode;
 import za.co.mmagon.jwebswing.base.html.*;
@@ -78,7 +76,7 @@ public class Page extends Html implements IPage
     /**
      * The angular feature
      */
-    private AngularFeature angular;
+    private AngularPageConfigurator angular;
 
     /**
      * Cache for all the associated components throughout the life-cycle of the application
@@ -195,15 +193,12 @@ public class Page extends Html implements IPage
     {
         if (!pageInitialized)
         {
-            initialize();
+            getBody().preConfigure();
             pageInitialized = true;
         }
 
         if (!isInitialized())
         {
-            getBody().init();
-            getBody().preConfigure();
-
             log.log(Level.FINE, "Looking for plugins....");
 
             Set<Class<?>> plugins = GuiceContext.reflect().getTypesAnnotatedWith(PluginInformation.class);
@@ -230,8 +225,12 @@ public class Page extends Html implements IPage
                 //log.log(Level.INFO, "Context is still building the injector, ignoring page configurations");
             }
 
-            log.log(Level.INFO, "Page Configured.");
+            getBody().init();
+            getBody().preConfigure();
+
+            //log.log(Level.INFO, "Page Configured.");
         }
+
         super.init();
     }
 
@@ -247,13 +246,7 @@ public class Page extends Html implements IPage
         }
         if (!isConfigured())
         {
-            getBody().init();
-            getBody().preConfigure();
-
-            getAngular().preConfigure();
-
             configurePageHeader();
-
             addVariablesScriptToPage();
 
             if (!getOptions().isScriptsInHead())
@@ -278,9 +271,7 @@ public class Page extends Html implements IPage
             {
                 getHead().add((HeadChildren) next);
             });
-
             ArrayList<ComponentHierarchyBase> requirements = new ArrayList<>();
-
             for (RequirementsPriority priority : RequirementsPriority.values())
             {
                 getPriorityRequirements(priority, requirements, true, false).stream().forEach((comp) ->
@@ -439,8 +430,7 @@ public class Page extends Html implements IPage
             }
             else
             {
-                getAngular().configureTemplateVariables();
-                StringBuilder js = FileTemplates.renderTemplateScripts("jwangular");
+                StringBuilder js = getAngular().renderAngularJavascript(this);
                 if (!js.toString().trim().isEmpty())
                 {
                     Script s = new Script();
@@ -767,13 +757,17 @@ public class Page extends Html implements IPage
      * @return
      */
     @Override
-    public AngularFeature getAngular()
+    public AngularPageConfigurator getAngular()
     {
         if (angular == null)
         {
-            angular = new AngularFeature(getBody());
-            getBody().addFeature(angular);
+            angular = new AngularPageConfigurator();
         }
         return angular;
+    }
+
+    public Page getPage()
+    {
+        return this;
     }
 }

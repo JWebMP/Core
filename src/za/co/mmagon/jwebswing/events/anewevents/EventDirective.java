@@ -36,7 +36,7 @@ public class EventDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public EventDirective(AngularFeature angular)
+    public EventDirective()
     {
         super("ngRightClick");
     }

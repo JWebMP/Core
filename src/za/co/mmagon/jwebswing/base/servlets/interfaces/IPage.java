@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 import za.co.mmagon.jwebswing.*;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
-import za.co.mmagon.jwebswing.base.angular.AngularFeature;
+import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.html.DocumentType;
 
 /**
@@ -54,7 +54,7 @@ public interface IPage
      *
      * @return
      */
-    AngularFeature getAngular();
+    AngularPageConfigurator getAngular();
 
     /**
      * Returns this pages current component cache

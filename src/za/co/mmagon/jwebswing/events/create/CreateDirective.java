@@ -36,7 +36,7 @@ public class CreateDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public CreateDirective(AngularFeature angular)
+    public CreateDirective()
     {
         super("ngCreate");
     }

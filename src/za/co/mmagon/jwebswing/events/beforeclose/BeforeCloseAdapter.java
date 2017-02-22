@@ -64,7 +64,7 @@ public abstract class BeforeCloseAdapter extends Event
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
             AngularPageConfigurator.setAngularRequired(getComponent(), true);
-            getComponent().getAngularDirectives().add(getDirective());
+            getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngBeforeClose, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
@@ -79,7 +79,7 @@ public abstract class BeforeCloseAdapter extends Event
     {
         if (directive == null)
         {
-            directive = new BeforeCloseDirective(getComponent().getPage().getAngular());
+            directive = new BeforeCloseDirective();
         }
         return directive;
     }

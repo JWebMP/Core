@@ -36,7 +36,7 @@ public class ResizeStopDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public ResizeStopDirective(AngularFeature angular)
+    public ResizeStopDirective()
     {
         super("ngResizeStop");
     }

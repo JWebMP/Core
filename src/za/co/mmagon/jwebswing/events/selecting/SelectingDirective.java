@@ -36,7 +36,7 @@ public class SelectingDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public SelectingDirective(AngularFeature angular)
+    public SelectingDirective()
     {
         super("ngSelecting");
     }

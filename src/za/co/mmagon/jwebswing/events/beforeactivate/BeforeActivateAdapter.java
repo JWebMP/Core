@@ -67,7 +67,7 @@ public abstract class BeforeActivateAdapter extends Event
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
             AngularPageConfigurator.setAngularRequired(getComponent(), true);
-            getComponent().getAngularDirectives().add(getDirective());
+            getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngBeforeActivate, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
@@ -82,7 +82,7 @@ public abstract class BeforeActivateAdapter extends Event
     {
         if (directive == null)
         {
-            directive = new BeforeActivateDirective(getComponent().getPage().getAngular());
+            directive = new BeforeActivateDirective();
         }
         return directive;
     }

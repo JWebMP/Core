@@ -22,9 +22,6 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.base.angular.controllers.AngularControllerBase;
-import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
-import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.interfaces.ICSSClassName;
@@ -714,84 +711,6 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
     }
 
     /**
-     * Returns all the angular modules required from all the components, features and events.
-     *
-     * @return
-     */
-    public List<AngularModuleBase> getAngularModulesAll()
-    {
-        List<AngularModuleBase> modules = getAngularModules();
-        getChildrenHierarchy(true).stream().map(child -> child.getAngularModules()).forEach(ang
-                ->
-        {
-            for (Iterator iterator = ang.iterator(); iterator.hasNext();)
-            {
-                AngularModuleBase next = (AngularModuleBase) iterator.next();
-                if (next != null)
-                {
-                    if (!modules.contains(next))
-                    {
-                        modules.add(next);
-                    }
-                }
-            }
-        });
-        return modules;
-    }
-
-    /**
-     * Returns all the angular modules required from all the components, features and events.
-     *
-     * @return
-     */
-    public List<AngularDirectiveBase> getAngularDirectivesAll()
-    {
-        List<AngularDirectiveBase> modules = getAngularDirectives();
-        getChildrenHierarchy(true).stream().map(child -> child.getAngularDirectives()).forEach(ang
-                ->
-        {
-            for (Iterator iterator = ang.iterator(); iterator.hasNext();)
-            {
-                AngularDirectiveBase next = (AngularDirectiveBase) iterator.next();
-                if (next != null)
-                {
-                    if (!modules.contains(next))
-                    {
-                        modules.add(next);
-                    }
-                }
-            }
-        });
-        return modules;
-    }
-
-    /**
-     * Returns all the angular modules required from all the components, features and events.
-     *
-     * @return
-     */
-    public List<AngularControllerBase> getAngularControllersAll()
-    {
-        List<AngularControllerBase> modules = getAngularControllers();
-        getChildrenHierarchy(true).stream().map(child -> child.getAngularControllers()).forEach(ang
-                ->
-        {
-            for (Iterator iterator = ang.iterator(); iterator.hasNext();)
-            {
-                AngularControllerBase next = (AngularControllerBase) iterator.next();
-                if (next != null)
-                {
-                    if (!modules.contains(next))
-                    {
-                        modules.add(next);
-                    }
-                }
-            }
-        });
-        return modules;
-    }
-
-    /**
      * Pre-Configure the children tree
      *
      * @return
@@ -1074,8 +993,6 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
     public J cloneComponent()
     {
         ComponentHierarchyBase cloned = (ComponentHierarchyBase) super.cloneComponent();
-        cloned.setAngularControllers(getAngularControllers());
-
         return (J) cloned;
     }
 

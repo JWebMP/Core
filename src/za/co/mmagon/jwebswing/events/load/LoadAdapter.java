@@ -62,7 +62,7 @@ public abstract class LoadAdapter extends Event
         if (!isConfigured())
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
-            getComponent().getAngularDirectives().add(getDirective());
+            getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngLoad, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
@@ -77,7 +77,7 @@ public abstract class LoadAdapter extends Event
     {
         if (directive == null)
         {
-            directive = new LoadDirective(getComponent().getPage().getAngular());
+            directive = new LoadDirective();
         }
         return directive;
     }

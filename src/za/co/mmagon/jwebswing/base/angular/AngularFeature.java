@@ -20,8 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import za.co.mmagon.FileTemplates;
-import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.Feature;
+import za.co.mmagon.jwebswing.*;
 import za.co.mmagon.jwebswing.base.angular.controllers.AngularControllerBase;
 import za.co.mmagon.jwebswing.base.angular.controllers.JWAngularController;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
@@ -67,17 +66,14 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      */
     private static String controllerName = "jwController";
 
-    /**
-     * All the angular variables
-     */
-    private List<String> angularVariables;
+    private final Page page;
 
     /**
      * Adds on the Angular ComponentFeatureBase to the application to allow full data binding
      *
      * @param component
      */
-    public AngularFeature(Component component)
+    public AngularFeature(Page component)
     {
         this(component, appName, controllerName);
     }
@@ -85,21 +81,21 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
     /**
      * Adds on the Angular ComponentFeatureBase to the application to allow full data binding
      *
-     * @param component       The component to associate with
+     * @param page            The component to associate with
      * @param applicationName The name of the application
      * @param controllerName  The name of the controller
      */
-    public AngularFeature(Component component, String applicationName, String controllerName)
+    public AngularFeature(Page page, String applicationName, String controllerName)
     {
         super("AngularFeature");
-        if (component == null)
+        if (page == null)
         {
             throw new NullComponentException("An Angular Application must always be tied with a parent component.");
         }
-        setComponent(component);
+        this.page = page;
         setJavascriptRenderedElsewhere(true);
 
-        jwAngularApp = new JWAngularModule(component);
+        jwAngularApp = new JWAngularModule(page);
         jwAngularController = new JWAngularController();
         if (applicationName != null && !applicationName.isEmpty())
         {
@@ -120,13 +116,18 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
     {
         if (!isConfigured())
         {
-            if (getComponent().getPage().getBody().readChildrenPropertyFirstResult(AngularPageConfigurator.AngularEnabledString, true))
+            if (getPage().getBody().readChildrenPropertyFirstResult(AngularPageConfigurator.AngularEnabledString, true))
             {
-                getComponent().addAttribute(AngularAttributes.ngApp, getAppName() + "");
-                getComponent().addAttribute(AngularAttributes.ngController, controllerName);
+                getPage().getBody().addAttribute(AngularAttributes.ngApp, getAppName() + "");
+                getPage().getBody().addAttribute(AngularAttributes.ngController, controllerName);
             }
         }
         super.preConfigure();
+    }
+
+    public Page getPage()
+    {
+        return page;
     }
 
     /**
@@ -137,15 +138,12 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
      */
     public void configureTemplateVariables()
     {
-        if (FileTemplates.getTemplateScript("jwangular") == null)
-        {
-            FileTemplates.getTemplateVariables().put("JW_APP_NAME", new StringBuilder(getAppName() + ""));
-            FileTemplates.getTemplateVariables().put("JW_MODULES", new StringBuilder(compileModules() + ""));
-            FileTemplates.getTemplateVariables().put("JW_DIRECTIVES", new StringBuilder(compileDirectives() + ""));
-            FileTemplates.getTemplateVariables().put("JW_APP_CONTROLLER", new StringBuilder(getControllerName() + ""));
-            FileTemplates.getTemplateVariables().put("JW_CONTROLLERS", new StringBuilder(compileControllers() + ""));
-            FileTemplates.getTemplateVariables().put("jwangular", FileTemplates.compileTemplate(AngularFeature.class, "jwangular"));
-        }
+        FileTemplates.getTemplateVariables().put("JW_APP_NAME", new StringBuilder(getAppName() + ""));
+        FileTemplates.getTemplateVariables().put("JW_MODULES", new StringBuilder(compileModules() + ""));
+        FileTemplates.getTemplateVariables().put("JW_DIRECTIVES", new StringBuilder(compileDirectives() + ""));
+        FileTemplates.getTemplateVariables().put("JW_APP_CONTROLLER", new StringBuilder(getControllerName() + ""));
+        FileTemplates.getTemplateVariables().put("JW_CONTROLLERS", new StringBuilder(compileControllers() + ""));
+        FileTemplates.getTemplateVariables().put("jwangular", FileTemplates.compileTemplate(AngularFeature.class, "jwangular"));
     }
 
     /**
@@ -157,7 +155,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
     {
         StringBuilder output = new StringBuilder();
         List<AngularDirectiveBase> angulars = new ArrayList<>();
-        angulars.addAll(getComponent().getPage().getBody().getAngularDirectivesAll());
+        angulars.addAll(getPage().getAngular().getAngularDirectives());
         angulars.stream().forEach(directive ->
         {
             output.append(FileTemplates.compileTemplate(directive.getReferenceName(), directive.renderFunction()));
@@ -175,7 +173,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
         StringBuilder output = new StringBuilder();
         List<AngularControllerBase> angulars = new ArrayList<>();
         angulars.add(jwAngularController);
-        angulars.addAll(getComponent().getPage().getBody().getAngularControllersAll());
+        angulars.addAll(getPage().getAngular().getAngularControllers());
         angulars.stream().forEach(controller ->
         {
             output.append(FileTemplates.compileTemplate(controller.getReferenceName(), controller.renderFunction()));
@@ -193,7 +191,6 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
         StringBuilder output = new StringBuilder();
         List<AngularModuleBase> angulars = new ArrayList<>();
         angulars.add(jwAngularApp);
-        //angulars.addAll(getComponent().getPage().getBody().getAngularModulesAll());
         angulars.stream().forEach(module ->
         {
             output.append(FileTemplates.compileTemplate(module.getReferenceName(), module.renderFunction()));
@@ -249,30 +246,6 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
     public static final void setControllerName(String controllerName)
     {
         AngularFeature.controllerName = controllerName;
-    }
-
-    /**
-     * Returns the list of angular variables
-     *
-     * @return
-     */
-    public List<String> getAngularVariables()
-    {
-        if (angularVariables == null)
-        {
-            angularVariables = new ArrayList<>();
-        }
-        return angularVariables;
-    }
-
-    /**
-     * Sets the list of angular variables
-     *
-     * @param angularVariables
-     */
-    public void setAngularVariables(List<String> angularVariables)
-    {
-        this.angularVariables = angularVariables;
     }
 
     /**

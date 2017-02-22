@@ -62,7 +62,7 @@ public abstract class UnselectedtAdapter extends Event
         if (!isConfigured())
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
-            getComponent().getAngularDirectives().add(getDirective());
+            getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngUnselected, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
@@ -77,7 +77,7 @@ public abstract class UnselectedtAdapter extends Event
     {
         if (directive == null)
         {
-            directive = new UnselectedDirective(getComponent().getPage().getAngular());
+            directive = new UnselectedDirective();
         }
         return directive;
     }

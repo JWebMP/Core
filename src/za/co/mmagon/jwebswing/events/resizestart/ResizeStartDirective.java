@@ -36,7 +36,7 @@ public class ResizeStartDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public ResizeStartDirective(AngularFeature angular)
+    public ResizeStartDirective()
     {
         super("ngResizeStart");
     }

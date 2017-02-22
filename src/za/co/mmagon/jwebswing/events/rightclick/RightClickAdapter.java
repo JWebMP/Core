@@ -58,7 +58,7 @@ public abstract class RightClickAdapter extends Event implements ParagraphEvents
         if (!isConfigured())
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
-            getComponent().getAngularDirectives().add(getDirective());
+            getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngRightClick, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
@@ -73,7 +73,7 @@ public abstract class RightClickAdapter extends Event implements ParagraphEvents
     {
         if (rightClickDirective == null)
         {
-            rightClickDirective = new RightClickDirective(getComponent().getPage().getAngular());
+            rightClickDirective = new RightClickDirective();
         }
         return rightClickDirective;
     }

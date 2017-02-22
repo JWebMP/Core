@@ -36,7 +36,7 @@ public class BeforeLoadDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public BeforeLoadDirective(AngularFeature angular)
+    public BeforeLoadDirective()
     {
         super("ngBeforeLoad");
     }

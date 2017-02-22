@@ -36,7 +36,7 @@ public class ReceiveDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public ReceiveDirective(AngularFeature angular)
+    public ReceiveDirective()
     {
         super("ngReceive");
     }

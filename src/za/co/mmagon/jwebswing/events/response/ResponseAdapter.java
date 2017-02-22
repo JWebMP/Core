@@ -62,7 +62,7 @@ public abstract class ResponseAdapter extends Event
         if (!isConfigured())
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
-            getComponent().getAngularDirectives().add(getDirective());
+            getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngResponse, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
@@ -77,7 +77,7 @@ public abstract class ResponseAdapter extends Event
     {
         if (directive == null)
         {
-            directive = new ResponseDirective(getComponent().getPage().getAngular());
+            directive = new ResponseDirective();
         }
         return directive;
     }

@@ -36,7 +36,7 @@ public class SlideDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public SlideDirective(AngularFeature angular)
+    public SlideDirective()
     {
         super("ngSlide");
     }

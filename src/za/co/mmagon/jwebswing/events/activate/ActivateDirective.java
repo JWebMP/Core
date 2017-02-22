@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.events.activate;
 
 import za.co.mmagon.FileTemplates;
-import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
 /**
@@ -36,7 +35,7 @@ public class ActivateDirective extends AngularDirectiveBase
      *
      * @param angular
      */
-    public ActivateDirective(AngularFeature angular)
+    public ActivateDirective()
     {
         super("ngActivate");
     }

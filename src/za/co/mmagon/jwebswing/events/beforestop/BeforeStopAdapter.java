@@ -64,7 +64,7 @@ public abstract class BeforeStopAdapter extends Event
         {
             getComponent().getPage().getOptions().setjQueryEnabled(true);
             AngularPageConfigurator.setAngularRequired(getComponent(), true);
-            getComponent().getAngularDirectives().add(getDirective());
+            getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngBeforeStop, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
@@ -79,7 +79,7 @@ public abstract class BeforeStopAdapter extends Event
     {
         if (directive == null)
         {
-            directive = new BeforeStopDirective(getComponent().getPage().getAngular());
+            directive = new BeforeStopDirective();
         }
         return directive;
     }

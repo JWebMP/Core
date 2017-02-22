@@ -427,13 +427,16 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
     @Override
     public J addFeature(ComponentFeatureBase feature)
     {
-        if (!feature.getComponentType().equals(ComponentTypes.Feature))
+        if (feature != null)
         {
-            LOG.log(Level.WARNING, "Tried to add a non-feature to the feature collection");
-        }
-        else if (!getFeatures().contains((F) feature))
-        {
-            getFeatures().add((F) feature);
+            if (!feature.getComponentType().equals(ComponentTypes.Feature))
+            {
+                LOG.log(Level.WARNING, "Tried to add a non-feature to the feature collection");
+            }
+            else if (!getFeatures().contains((F) feature))
+            {
+                getFeatures().add((F) feature);
+            }
         }
         return (J) this;
     }
