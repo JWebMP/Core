@@ -83,5 +83,9 @@
         <group name="JWebSwingStaticPage"/>
         <group name="JWebswing Static"/>
         <group name="JWebSwing"/>
+        <group name="JWebSwing Build">
+            <file>file:/C:/AESoft/Programs/JWebSwing/jar-resources/META-INF/resources/bower_components/jquery-hashchange/examples/index.css</file>
+        </group>
+        <group name="JWebSwing Website"/>
     </open-files>
 </project-private>

@@ -58,7 +58,7 @@ public class JWAngularModule extends AngularModuleBase
 
         ArrayList<String> moduleNames = new ArrayList<>();
         List<AngularModuleBase> modules = page.getAngular().getAngularModules();
-        modules.stream().forEach(module ->
+        modules.stream().forEachOrdered(module ->
         {
             String name = module.getReferenceName();
             if (!moduleNames.contains(name))

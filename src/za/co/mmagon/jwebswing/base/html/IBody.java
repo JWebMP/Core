@@ -30,18 +30,4 @@ public interface IBody
 
     void configureModernizr();
 
-    /**
-     * Returns if bootstrap is configured
-     *
-     * @return
-     */
-    boolean isBootstrapConfigured();
-
-    /**
-     * Sets the bootstrap configured flag
-     *
-     * @param bootstrapConfigured
-     */
-    void setBootstrapConfigured(boolean bootstrapConfigured);
-
 }

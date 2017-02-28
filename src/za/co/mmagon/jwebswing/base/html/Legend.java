@@ -52,7 +52,7 @@ public class Legend<J extends Legend>
     /**
      *
      */
-    protected Legend()
+    public Legend()
     {
         super(ComponentTypes.Legend);
     }

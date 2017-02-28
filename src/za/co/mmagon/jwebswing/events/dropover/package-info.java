@@ -1,6 +1,5 @@
-
-/*
- * Copyright (C) 2016 GedMarc
+/* 
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,19 +14,4 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.base.angular;
-
-import za.co.mmagon.BaseTestClass;
-
-/**
- *
- * @author GedMarc
- */
-public class AngularFeatureTest extends BaseTestClass
-{
-
-    public AngularFeatureTest()
-    {
-    }
-
-}
+package za.co.mmagon.jwebswing.events.dropover;

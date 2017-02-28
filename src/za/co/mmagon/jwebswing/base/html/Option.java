@@ -63,20 +63,26 @@ public class Option<J extends Option>
      * Sets the value of this option
      * <p>
      * @param value
+     *
+     * @return
      */
-    public void setValue(String value)
+    public J setValue(String value)
     {
         addAttribute(OptionAttributes.Value, value);
+        return (J) this;
     }
 
     /**
      * Sets the label of this option tag
      * <p>
      * @param label
+     *
+     * @return
      */
-    public void setLabel(String label)
+    public J setLabel(String label)
     {
         addAttribute(OptionAttributes.Label, label);
+        return (J) this;
     }
 
     /**

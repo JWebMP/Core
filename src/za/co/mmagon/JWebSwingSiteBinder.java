@@ -25,6 +25,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import org.reflections.Reflections;
 import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.servlets.*;
 import za.co.mmagon.logger.LogFactory;
 
@@ -195,6 +196,18 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
     public static String getAngularDataLocation()
     {
         return AngularDataLocation;
+    }
+
+    /**
+     * Returns the url to access the data binding search
+     *
+     * @param component
+     *
+     * @return
+     */
+    public static String getDataBindUrl(ComponentBase component)
+    {
+        return getDataLocation().replace("/", "") + "?component=" + component.getID();
     }
 
 }

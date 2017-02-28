@@ -165,4 +165,11 @@ public @interface PluginInformation
      * @return
      */
     public String pluginOriginalHomepage() default "";
+
+    /**
+     * If the plugin requires commercial for public sites
+     *
+     * @return
+     */
+    public boolean pluginCommercial() default false;
 }

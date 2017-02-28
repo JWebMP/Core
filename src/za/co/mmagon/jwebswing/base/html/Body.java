@@ -68,8 +68,6 @@ public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Bo
 
     private static final long serialVersionUID = 1L;
 
-    private boolean bootstrapConfigured;
-
     /**
      * Constructs a new Body with the given Page input
      *
@@ -158,27 +156,5 @@ public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Bo
     protected StringBuilder renderHTML(int tabCount)
     {
         return super.renderHTML(tabCount);
-    }
-
-    /**
-     * Returns if bootstrap is configured
-     *
-     * @return
-     */
-    @Override
-    public boolean isBootstrapConfigured()
-    {
-        return bootstrapConfigured;
-    }
-
-    /**
-     * Sets the bootstrap configured flag
-     *
-     * @param bootstrapConfigured
-     */
-    @Override
-    public void setBootstrapConfigured(boolean bootstrapConfigured)
-    {
-        this.bootstrapConfigured = bootstrapConfigured;
     }
 }
