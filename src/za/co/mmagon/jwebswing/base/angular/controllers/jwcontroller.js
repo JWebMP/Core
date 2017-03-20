@@ -1,4 +1,4 @@
-/* global JW_APP_NAME, BootstrapDialog */
+/* global JW_APP_NAME, BootstrapDialog, Pace, JW_SCOPE_INSERTIONS */
 
 JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, $timeout) {
 
@@ -28,7 +28,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
         }
 
         var toGo = 'jwad?o=body';
-        $.ajax({
+        return $.ajax({
             type: "POST",
             url: toGo,
             dataType: "json",
@@ -233,6 +233,49 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
         $('head').append('<style>' + result + '</style>');
     };
 
+
+    /**
+     * Loads the next reference or call the callback if on the final position
+     * @param {type} array
+     * @param {type} position
+     * @param {type} completedCallback
+     * @returns {undefined}
+     */
+    $scope.loadNextJSReference = function (array, position, completedCallback) {
+        position = position + 1;
+        if (position === (array.length))
+        {
+            completedCallback();
+        } else
+        {
+            $scope.synchronizedJSReferencesLoad(array, position, completedCallback);
+        }
+    };
+
+    /**
+     * Loads a list of java script references in synchronized order, fires the last callback when done
+     * @param {type} array
+     * @param {type} position
+     * @param {type} completedCallback
+     * @returns {undefined}
+     */
+    $scope.synchronizedJSReferencesLoad = function (array, position, completedCallback)
+    {
+        var ref = array[position];
+        if (ref)
+        {
+            if (ref.endsWith('/jwas') || ref.endsWith('/jwjs') || ref.endsWith('/jwad') || ref.endsWith('/jwdata') || ref.endsWith('/jwajax'))
+            {
+                position = position + 1;
+                $.notCachedScriptSync(ref).complete($scope.loadNextJSReference(array, position, completedCallback));
+            } else
+            {
+                position = position + 1;
+                $.cachedScriptSync(ref).complete($scope.loadNextJSReference(array, position, completedCallback));
+            }
+        }
+    };
+
     /**
      * Adds the JS Reference
      * @param {type} result
@@ -242,24 +285,13 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
     {
         if (result.jsReferences)
         {
-            var jsReferences = result.jsReferences.length;
-            var doneReferences = 0;
-
-            $.each(result.jsReferences, function (i, item) {
-                $.ajax({dataType: "script",
-                    cache: true,
-                    url: item,
-                    async: false})
-                        .done(function () {
-                            doneReferences = doneReferences + 1;
-                            if (doneReferences === jsReferences)
-                            {
-                                $scope.processJsScripts(result);
-                            }
-                        });
+            $scope.synchronizedJSReferencesLoad(result.jsReferences, 0, function () {
+                $scope.processJsScripts(result);
             });
         }
     };
+
+
 
     /**
      * Process the JavaScripts returned
@@ -269,10 +301,14 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
     $scope.processJsScripts = function (result)
     {
         if (result.jsScripts)
-            $.each(result.jsScripts, function (i, item) {
+        {
+            $.each(result.jsScripts, function (i, item)
+            {
                 $scope.loadScript(item);
             });
+        }
     };
+
 
     $scope.loadScript = function (item, tries)
     {
@@ -298,9 +334,19 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
     $scope.processCssReferences = function (result)
     {
         $.each(result.cssLinks, function (i, item) {
-            var len = $('link[href="' + item + '"]').length;
-            if (len === 0)
+            var ss = document.styleSheets;
+            var found = false;
+            for (var i = 0, max = ss.length; i < max; i++) {
+                if (ss[i].href === item)
+                {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+            {
                 $('head').append('<link rel="stylesheet" type="text/css" href="' + item + '">');
+            }
         });
     };
 
@@ -336,6 +382,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
             {
                 setTimeout('location.reload();', timeout);
             }
+
         });
     };
 
@@ -415,4 +462,10 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
         newEvent.which = $event.which;
         return newEvent;
     };
+
+
+    //JW_SCOPE_INSERTIONS
+
+
+
 }); //end of controller

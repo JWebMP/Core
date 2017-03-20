@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -14,30 +14,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.components.pools.jquery;
+package za.co.mmagon.jwebswing.plugins.ajaxenabler;
 
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 
 /**
- * The JQuery JavaScript Reference
- * <p>
- * @since 2014/12/09
- * @version 1.0
- * @author MMagon
  *
- * I have moved these from the features to make it easier to specify remote or local references.
- * <p>
+ * @since @version @author MMagon
+ *
+ *
  */
-public class JQueryReference extends JavascriptReference
+public enum AjaxEnablerReferencePool
 {
+    AjaxEnabler(new JQueryAjaxEnablerReference()),;
 
-    private static final long serialVersionUID = 1L;
-
-    public JQueryReference()
+    private AjaxEnablerReferencePool(JavascriptReference reference)
     {
-        super("JQuery", 3.0, "bower_components/jquery/dist/jquery.js", "https://code.jquery.com/jquery-3.0.0.js");
-        setSortOrder(0);
-        setPriority(RequirementsPriority.Second);
+        this.reference = reference;
     }
+
+    private final JavascriptReference reference;
+
+    public JavascriptReference getJavaScriptReference()
+    {
+        return reference;
+    }
+
 }

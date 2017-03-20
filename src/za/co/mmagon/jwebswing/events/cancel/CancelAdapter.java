@@ -63,7 +63,7 @@ public abstract class CancelAdapter extends Event
     {
         if (!isConfigured())
         {
-            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            
             AngularPageConfigurator.setAngularRequired(getComponent(), true);
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngCancel, "perform($event," + renderVariables() + ");");

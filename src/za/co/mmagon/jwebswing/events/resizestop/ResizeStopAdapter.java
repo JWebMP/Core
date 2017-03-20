@@ -61,7 +61,7 @@ public abstract class ResizeStopAdapter extends Event
     {
         if (!isConfigured())
         {
-            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngResizeStop, "perform($event," + renderVariables() + ");");
         }

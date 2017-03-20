@@ -58,7 +58,7 @@ public abstract class MouseDownAdapter extends Event
     {
         if (!isConfigured())
         {
-            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            
             AngularPageConfigurator.setAngularRequired(getComponent(), true);
             component.addAttribute(AngularAttributes.ngMousedown, "perform($event," + renderVariables() + ");");
         }

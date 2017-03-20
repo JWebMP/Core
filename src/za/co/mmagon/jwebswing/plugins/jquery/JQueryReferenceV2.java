@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -14,12 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.components.pools.jquery;
+package za.co.mmagon.jwebswing.plugins.jquery;
 
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 
 /**
- * The JQuery Atmosphere JavaScript
+ * The JQuery JavaScript Reference
  * <p>
  * @since 2014/12/09
  * @version 1.0
@@ -28,17 +29,15 @@ import za.co.mmagon.jwebswing.base.references.JavascriptReference;
  * I have moved these from the features to make it easier to specify remote or local references.
  * <p>
  */
-class AtmosphereReference extends JavascriptReference
+class JQueryReferenceV2 extends JavascriptReference
 {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * Uses local until cloudfare puts up the latest version.
-     */
-    public AtmosphereReference()
+    public JQueryReferenceV2()
     {
-        super("AtmosphereFramework", 2.4, "bower_components/atmosphere.js/atmosphere.js");//, "https://cdnjs.cloudflare.com/ajax/libs/atmosphere/2.2.12/atmosphere.js");
-        setSortOrder(600000);
+        super("JQuery", 2.24, "bower_components/jquery/dist/jquery.js", "https://code.jquery.com/jquery-2.2.4.js");
+        setSortOrder(0);
+        setPriority(RequirementsPriority.Second);
     }
 }

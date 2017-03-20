@@ -74,30 +74,6 @@ public class PageOptions extends JavaScriptPart
     }
 
     /**
-     * Whether or not to render the JQuery requirements
-     *
-     * @return
-     */
-    public boolean isjQueryEnabled()
-    {
-        return jQueryEnabled;
-    }
-
-    /**
-     * Whether or not to render the JQuery Requirements
-     *
-     * @param jQueryEnabled
-     */
-    public void setjQueryEnabled(boolean jQueryEnabled)
-    {
-        this.jQueryEnabled = jQueryEnabled;
-        if (this.jQueryEnabled)
-        {
-            page.getBody().configureJQuery();
-        }
-    }
-
-    /**
      * Is Modernizr Enabled
      *
      * @return
@@ -210,25 +186,5 @@ public class PageOptions extends JavaScriptPart
     public void setGoogleMapsJSApi(String googleMapsJSApi)
     {
         this.googleMapsJSApi = googleMapsJSApi;
-    }
-
-    /**
-     * Sets if this page must use JQuery 3 or 2
-     *
-     * @return
-     */
-    public boolean isJquery3()
-    {
-        return jquery3;
-    }
-
-    /**
-     * Sets if this page must use JQuery 3 or 2
-     *
-     * @param jquery3
-     */
-    public void setJquery3(boolean jquery3)
-    {
-        this.jquery3 = jquery3;
     }
 }

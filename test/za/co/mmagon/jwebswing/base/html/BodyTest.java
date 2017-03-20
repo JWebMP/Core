@@ -21,6 +21,7 @@ import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.generics.WebReference;
+import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 
 /**
  *
@@ -55,7 +56,7 @@ public class BodyTest extends BaseTestClass
     public void testSetGenerateJQuery()
     {
         resetBody();
-        p.getOptions().setjQueryEnabled(true);
+        JQueryPageConfigurator.setRequired(b, true);
         b.add(new Comment("meh"));
         WebReference.setIsLocal(true);
         System.out.println(p.toString(true));
@@ -63,7 +64,9 @@ public class BodyTest extends BaseTestClass
                 + "<html>\n"
                 + "	<body id=\"body\">\n"
                 + "		<!-- meh -->\n"
+                + "		<!-- Priority [First] Values -->\n"
                 + "		<script src=\"bower_components/jquery-3/dist/jquery.js\" type=\"text/javascript\"></script>\n"
+                + "		<!-- Priority [Second] Values -->\n"
                 + "		<script src=\"bower_components/jquery-migrate/jquery-migrate.js\" type=\"text/javascript\"></script>\n"
                 + "	</body>\n"
                 + "</html>", p.toString(true).toString());
@@ -73,7 +76,7 @@ public class BodyTest extends BaseTestClass
     public void testSetGenerateJQueryRemote()
     {
         resetBody();
-        p.getOptions().setjQueryEnabled(true);
+        JQueryPageConfigurator.setRequired(b, true);
         b.add(new Comment("meh"));
         WebReference.setIsLocal(false);
         System.out.println(p.toString(true));
@@ -81,7 +84,9 @@ public class BodyTest extends BaseTestClass
                 + "<html>\n"
                 + "	<body id=\"body\">\n"
                 + "		<!-- meh -->\n"
+                + "		<!-- Priority [First] Values -->\n"
                 + "		<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js\" type=\"text/javascript\"></script>\n"
+                + "		<!-- Priority [Second] Values -->\n"
                 + "		<script src=\"http://code.jquery.com/jquery-migrate-1.4.1.js\" type=\"text/javascript\"></script>\n"
                 + "	</body>\n"
                 + "</html>", p.toString(true).toString());

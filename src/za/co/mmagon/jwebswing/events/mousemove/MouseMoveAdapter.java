@@ -58,7 +58,7 @@ public abstract class MouseMoveAdapter extends Event
     {
         if (!isConfigured())
         {
-            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            
             AngularPageConfigurator.setAngularRequired(getComponent(), true);
             component.addAttribute(AngularAttributes.ngMousemove, "perform($event," + renderVariables() + ");");
         }

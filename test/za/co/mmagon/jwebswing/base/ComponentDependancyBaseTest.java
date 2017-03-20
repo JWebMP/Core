@@ -20,7 +20,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.pools.jquery.JQueryReferencePool;
+import za.co.mmagon.jwebswing.plugins.ajaxenabler.AjaxEnablerReferencePool;
+import za.co.mmagon.jwebswing.plugins.jquery.JQueryReferencePool;
 
 /**
  *
@@ -39,7 +40,7 @@ public class ComponentDependancyBaseTest extends BaseTestClass
         ComponentDependancyBase cd = new ComponentDependancyBase(ComponentTypes.Abbreviation);
         cd.setID("ID");
         cd.addCssReference(null);
-        cd.addJavaScriptReference(JQueryReferencePool.AjaxEnabler.getJavaScriptReference());
+        cd.addJavaScriptReference(AjaxEnablerReferencePool.AjaxEnabler.getJavaScriptReference());
         System.out.println(cd);
         Assert.assertEquals("{\n"
                 + "  \"id\" : \"ID\",\n"

@@ -60,7 +60,7 @@ public abstract class OpenAdapter extends Event
     {
         if (!isConfigured())
         {
-            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            
             component.addAttribute(AngularAttributes.ngOpen, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();

@@ -1,6 +1,5 @@
-
 /*
- * Copyright (C) 2016 GedMarc
+ * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,19 +14,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.base.angular;
+package za.co.mmagon.jwebswing.plugins.ajaxenabler;
 
-import za.co.mmagon.BaseTestClass;
+import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 
 /**
  *
- * @author GedMarc
+ * @since @version @author MMagon
+ *
+ *
  */
-public class AngularFeatureTest extends BaseTestClass
+public class JQueryAjaxEnablerReference extends JavascriptReference
 {
 
-    public AngularFeatureTest()
+    private static final long serialVersionUID = 1L;
+
+    public JQueryAjaxEnablerReference()
     {
+        super("AjaxEnabler", 1.0, "javascript/jwebswing/ajax-enabler.js", "javascript/jwebswing/ajax-enabler.js");
+        setSortOrder(1);
     }
 
 }

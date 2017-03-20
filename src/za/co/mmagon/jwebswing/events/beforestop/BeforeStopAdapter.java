@@ -25,6 +25,7 @@ import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -62,7 +63,7 @@ public abstract class BeforeStopAdapter extends Event
     {
         if (!isConfigured())
         {
-            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            JQueryPageConfigurator.setRequired((Component) getComponent(), true);
             AngularPageConfigurator.setAngularRequired(getComponent(), true);
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngBeforeStop, "perform($event," + renderVariables() + ");");

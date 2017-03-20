@@ -60,7 +60,7 @@ public abstract class DropOutAdapter extends Event
     {
         if (!isConfigured())
         {
-            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute("ng-drop-out", "perform($event," + renderVariables() + ");");
         }

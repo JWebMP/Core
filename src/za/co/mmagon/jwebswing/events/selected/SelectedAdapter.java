@@ -60,7 +60,7 @@ public abstract class SelectedAdapter extends Event
     {
         if (!isConfigured())
         {
-            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            
             component.addAttribute(AngularAttributes.ngSelected, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();

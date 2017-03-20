@@ -97,7 +97,7 @@ public class LinkTest
         instance.setTiny(true);
         instance.addAttribute(GlobalAttributes.ID, "instance");
         System.out.println(instance.toString(true));
-        String expResult = "<a id=\"instance\"></a>";
+        String expResult = "<a href=\"\" id=\"instance\"></a>";
         String result = instance.toString(true).toString();
         assertEquals(expResult, result);
     }

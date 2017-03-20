@@ -197,7 +197,10 @@ public class AjaxResponse extends JavaScriptPart
             {
                 getJsRenders((ComponentHierarchyBase) next).stream().filter(next1 -> (next1 != null && !next1.isEmpty())).forEach(next1 ->
                 {
-                    output.add(next1);
+                    if (!next1.equalsIgnoreCase("\n"))
+                    {
+                        output.add(next1);
+                    }
                 });
             }
 
@@ -211,7 +214,10 @@ public class AjaxResponse extends JavaScriptPart
                     for (Iterator iterator1 = next1.getQueriesAll().iterator(); iterator1.hasNext();)
                     {
                         StringBuilder query = (StringBuilder) iterator1.next();
-                        output.add(query.toString());
+                        if (!query.toString().equalsIgnoreCase("\n"))
+                        {
+                            output.add(query.toString());
+                        }
                     }
                 }
             }

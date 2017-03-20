@@ -74,10 +74,7 @@ public class AngularPageConfigurator extends PageConfigurator
         {
             if (page.getBody().readChildrenPropertyFirstResult(AngularEnabledString, true))
             {
-                page.getOptions().setjQueryEnabled(true);
-                page.getOptions().setJquery3(true);
                 page.getBody().getJavascriptReferences().add(AngularReferencePool.Angular1.getJavaScriptReference());
-
                 page.getBody().addAttribute(AngularAttributes.ngApp, AngularFeature.getAppName());
                 page.getBody().addAttribute(AngularAttributes.ngController, AngularFeature.getControllerName());
             }

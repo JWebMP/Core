@@ -61,7 +61,7 @@ public abstract class DropAdapter extends Event
     {
         if (!isConfigured())
         {
-            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngDrop, "perform($event," + renderVariables() + ");");
         }

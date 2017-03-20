@@ -57,7 +57,7 @@ public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
     {
         if (!isConfigured())
         {
-            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            
             getComponent().addAttribute(AngularAttributes.ngClick, "jw.isLoading || perform($event," + renderVariables() + ");");
             if (getComponent().getAttribute(AngularAttributes.ngDisabled) == null)
             {

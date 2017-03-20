@@ -61,7 +61,7 @@ public abstract class SpinAdapter extends Event
     {
         if (!isConfigured())
         {
-            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngSpin, "perform($event," + renderVariables() + ");");
         }

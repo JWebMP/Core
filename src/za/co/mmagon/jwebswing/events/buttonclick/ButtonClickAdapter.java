@@ -24,6 +24,7 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 
 /**
  * This event is triggered when a button is clicked.
@@ -52,7 +53,7 @@ public abstract class ButtonClickAdapter extends Event
     {
         if (!isConfigured())
         {
-            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            JQueryPageConfigurator.setRequired((Component) getComponent(), true);
             AngularPageConfigurator.setAngularRequired(getComponent(), true);
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngButtonClick, "perform($event," + renderVariables() + ");");

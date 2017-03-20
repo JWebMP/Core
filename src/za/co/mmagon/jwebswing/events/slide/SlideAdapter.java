@@ -64,7 +64,7 @@ public abstract class SlideAdapter extends Event
     {
         if (!isConfigured())
         {
-            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngSlide, "perform($event," + renderVariables() + ");");
         }

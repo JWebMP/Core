@@ -60,7 +60,7 @@ public abstract class KeyDownAdapter extends Event
     {
         if (!isConfigured())
         {
-            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            
             component.addAttribute(AngularAttributes.ngKeydown, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();

@@ -29,6 +29,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 
 /**
  * Container Class for Events. Splits from the component hierarchy
@@ -354,6 +355,7 @@ public class Event<A extends JavaScriptPart, J extends Event>
         if (!isConfigured())
         {
             assignFunctionsToComponent();
+            JQueryPageConfigurator.setRequired((Component) getComponent(), true);
         }
         super.preConfigure();
     }

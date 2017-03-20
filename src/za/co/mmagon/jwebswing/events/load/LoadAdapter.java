@@ -61,7 +61,7 @@ public abstract class LoadAdapter extends Event
     {
         if (!isConfigured())
         {
-            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngLoad, "perform($event," + renderVariables() + ");");
         }

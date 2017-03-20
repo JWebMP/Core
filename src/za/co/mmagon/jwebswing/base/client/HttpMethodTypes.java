@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -14,25 +14,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.components.pools.jquery;
-
-import za.co.mmagon.jwebswing.base.references.JavascriptReference;
+package za.co.mmagon.jwebswing.base.client;
 
 /**
  *
- * @since
- * @version
- * @author MMagon
- *
- *
+ * @author Marc Magon
+ * @since 20 Mar 2017
  */
-class JQueryAjaxEnablerReference extends JavascriptReference
+public enum HttpMethodTypes
 {
+    GET,
+    POST,
+    DELETE,
+    PUT;
 
-    public JQueryAjaxEnablerReference()
+    /*
+     * Constructs a new HttpMethodTypes
+     */
+    private HttpMethodTypes()
     {
-        super("AjaxEnabler", 1.0, "javascript/jwebswing/ajax-enabler.js", "javascript/jwebswing/ajax-enabler.js");
-        setSortOrder(1);
+        //Nothing needed
     }
-
 }

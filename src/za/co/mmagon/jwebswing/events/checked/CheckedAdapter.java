@@ -60,7 +60,7 @@ public abstract class CheckedAdapter extends Event
     {
         if (!isConfigured())
         {
-            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            
 
             component.addAttribute(AngularAttributes.ngChecked, "perform($event," + renderVariables() + ");");
         }

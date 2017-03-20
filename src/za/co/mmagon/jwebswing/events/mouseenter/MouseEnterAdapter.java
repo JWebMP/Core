@@ -58,7 +58,7 @@ public abstract class MouseEnterAdapter extends Event
     {
         if (!isConfigured())
         {
-            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            
             AngularPageConfigurator.setAngularRequired(getComponent(), true);
             component.addAttribute(AngularAttributes.ngMouseenter, "perform($event," + renderVariables() + ");");
         }

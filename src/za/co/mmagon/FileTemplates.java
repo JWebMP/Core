@@ -45,6 +45,7 @@ public class FileTemplates implements Serializable
      */
     @JsonIgnore
     private static final Map<String, StringBuilder> TemplateVariables = new HashMap<>();
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -118,19 +119,29 @@ public class FileTemplates implements Serializable
      */
     public static StringBuilder getFileTemplate(Class referenceClass, String templateName)
     {
+        return getFileTemplate(referenceClass, templateName, templateName);
+    }
+
+    /**
+     * Returns the template as a string
+     *
+     * @param referenceClass The class to reference to locate the file
+     * @param templateName   The file without .min.js or .js attached to it
+     * @param fileName
+     *
+     * @return The string for the file
+     */
+    public static StringBuilder getFileTemplate(Class referenceClass, String templateName, String fileName)
+    {
         StringBuilder template = TemplateScripts.get(templateName);
         if (template == null)
         {
             try
             {
-                String templateFileName = templateName;
+                String templateFileName = fileName;
                 templateFileName += ".js";
-                /*
-                 * if (this.component.isTiny()) { templateFileName += ".min.js"; } else { templateFileName += ".js"; }
-                 */
                 byte[] fileContents;
                 InputStream is = referenceClass.getResourceAsStream(templateFileName);
-                // BufferedInputStream bis = new BufferedInputStream(is);
                 fileContents = new byte[is.available()];
                 is.read(fileContents, 0, is.available());
                 is.close();

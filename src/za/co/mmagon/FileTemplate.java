@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -14,30 +14,45 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.components.pools.jquery;
+package za.co.mmagon;
 
-import za.co.mmagon.jwebswing.base.references.JavascriptReference;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
+import java.util.List;
+import java.util.Map;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
- * The JQuery JavaScript Reference
- * <p>
- * @since 2014/12/09
- * @version 1.0
- * @author MMagon
  *
- * I have moved these from the features to make it easier to specify remote or local references.
- * <p>
+ * @author Marc Magon
+ * @since 19 Mar 2017
  */
-public class JQueryReferenceV2 extends JavascriptReference
+public class FileTemplate extends JavaScriptPart
 {
 
     private static final long serialVersionUID = 1L;
 
-    public JQueryReferenceV2()
+    private String id;
+
+    private String rawTemplate;
+
+    private Map<String, String> variables;
+
+    private StringBuilder compiledTemplate;
+
+    private boolean rendered;
+
+    private Class templateLocation;
+
+    private String templateName;
+
+    private List<String> dependsOnTemplateIDs;
+
+    private List<String> updatesTemplateIDs;
+
+    /*
+     * Constructs a new FileTemplate
+     */
+    public FileTemplate()
     {
-        super("JQuery", 2.24, "bower_components/jquery/dist/jquery.js", "https://code.jquery.com/jquery-2.2.4.js");
-        setSortOrder(0);
-        setPriority(RequirementsPriority.Second);
+        //Nothing needed
     }
 }

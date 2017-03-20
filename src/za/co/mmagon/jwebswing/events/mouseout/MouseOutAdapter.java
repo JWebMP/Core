@@ -60,7 +60,7 @@ public abstract class MouseOutAdapter extends Event
     {
         if (!isConfigured())
         {
-            getComponent().getPage().getOptions().setjQueryEnabled(true);
+            
             component.addAttribute(AngularAttributes.ngMouseleave, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();

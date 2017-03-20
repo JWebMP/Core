@@ -16,6 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.angular.controllers;
 
+import com.armineasy.injection.GuiceContext;
+import java.util.Set;
 import za.co.mmagon.FileTemplates;
 
 /**
@@ -46,7 +48,22 @@ public class JWAngularController extends AngularControllerBase
     @Override
     public String renderFunction()
     {
-        return FileTemplates.getFileTemplate(AngularControllerBase.class, "jwcontroller").toString();
+        StringBuilder controllerOutput = FileTemplates.getFileTemplate(AngularControllerBase.class, "jwcontroller");
+        String output = controllerOutput.toString();
+
+        StringBuilder statementOutput = new StringBuilder();
+
+        Set<Class<? extends AngularControllerScopeStatement>> controllers = GuiceContext.reflect().getSubTypesOf(AngularControllerScopeStatement.class);
+        controllers.stream().map(next -> GuiceContext.inject().getInstance(next)).distinct().forEachOrdered(statement ->
+        {
+            if (!statementOutput.toString().contains(statement.getStatement()))
+            {
+                statementOutput.append(statement.getStatement()).append("\n");
+            }
+        });
+
+        output = output.replace("//JW_SCOPE_INSERTIONS", statementOutput.toString());
+        return output;
     }
 
 }

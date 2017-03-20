@@ -19,8 +19,9 @@ package za.co.mmagon;
 import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
-import za.co.mmagon.jwebswing.components.pools.jquery.JQueryReferencePool;
 import za.co.mmagon.jwebswing.generics.WebReference;
+import za.co.mmagon.jwebswing.plugins.ajaxenabler.AjaxEnablerReferencePool;
+import za.co.mmagon.jwebswing.plugins.jquery.JQueryReferencePool;
 
 /**
  *
@@ -45,16 +46,16 @@ public class WebReferenceTest
     public void testSort()
     {
         ArrayList<WebReference> w = new ArrayList<>();
-        w.add(JQueryReferencePool.JQueryAtmospherePush.getJavaScriptReference());
+        // w.add(AtmosphereReferencePool.JQueryAtmospherePush.getJavaScriptReference());
         w.add(JQueryReferencePool.JQueryV2.getJavaScriptReference());// new JQueryReferenceV2());
 
-        w.add(JQueryReferencePool.JQueryAtmospherePush.getJavaScriptReference());
-        w.add(JQueryReferencePool.AjaxEnabler.getJavaScriptReference());
+        //w.add(AtmosphereReferencePool.JQueryAtmospherePush.getJavaScriptReference());
+        w.add(AjaxEnablerReferencePool.AjaxEnabler.getJavaScriptReference());
 
         WebReference.sort(w);
         System.out.println(w);
 
-        String expected = "[bower_components/jquery/dist/jquery.js, javascript/jwebswing/ajax-enabler.js, bower_components/atmosphere.js/atmosphere.js, bower_components/atmosphere.js/atmosphere.js]";
+        String expected = "[bower_components/jquery/dist/jquery.js, javascript/jwebswing/ajax-enabler.js]";
         String result = w.toString();
 
         Assert.assertEquals(expected, result);

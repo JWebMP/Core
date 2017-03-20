@@ -19,14 +19,12 @@ package za.co.mmagon.jwebswing.base.html;
 import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.client.BrowserGroups;
 import za.co.mmagon.jwebswing.base.html.attributes.BodyAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.components.modernizr.ModernizrFeature;
-import za.co.mmagon.jwebswing.components.pools.jquery.JQueryReferencePool;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -96,56 +94,6 @@ public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Bo
         if (getPage().getOptions().isModernizrEnabled())
         {
             addFeature(new ModernizrFeature(this));
-        }
-    }
-
-    /**
-     * Adds JQuery Accordingly
-     */
-    public void configureJQuery()
-    {
-        if (getPage() != null)
-        {
-            if (getPage().getOptions().isjQueryEnabled())
-            {
-                if (getPage().getBrowser() != null)
-                {
-                    if (getPage().getBrowser().getBrowserGroup() == BrowserGroups.InternetExplorer)
-                    {
-                        if (getPage().getBrowser().getBrowserVersion() < 9)
-                        {
-                            removeJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
-                            removeJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
-                            removeJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
-                            addJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());
-                        }
-                    }
-                    else
-                    {
-                        removeJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());
-                        if (getPage().getOptions().isJquery3())
-                        {
-                            addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
-                            addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
-                        }
-                        else
-                        {
-                            addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
-                            //addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
-                        }
-                    }
-                }
-                else if (getPage().getOptions().isJquery3())
-                {
-                    addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
-                    addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
-                }
-                else
-                {
-                    addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
-                    //addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
-                }
-            }
         }
     }
 

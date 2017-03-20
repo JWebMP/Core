@@ -18,8 +18,8 @@ package za.co.mmagon;
 
 import com.armineasy.injection.GuiceContext;
 import com.armineasy.injection.abstractions.GuiceSiteInjectorModule;
-import com.armineasy.injection.filters.GZipServletFilter;
 import com.armineasy.injection.interfaces.GuiceSiteBinder;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
@@ -27,6 +27,7 @@ import org.reflections.Reflections;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.servlets.*;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -61,10 +62,9 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
     @Override
     public void onBind(GuiceSiteInjectorModule module)
     {
-        module.filterRegex$("/*").through(new GZipServletFilter());
-
         log.log(Level.CONFIG, "Configuring Servlet URL's");
         Reflections reflections = GuiceContext.reflect();
+
         Set<Class<? extends JWebSwingServlet>> siteBinders = reflections.getSubTypesOf(JWebSwingServlet.class);
         for (Iterator<Class<? extends JWebSwingServlet>> iterator = siteBinders.iterator(); iterator.hasNext();)
         {
@@ -85,6 +85,8 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
             }
             break;
         }
+
+        module.bind(ObjectMapper.class).toInstance(JavaScriptPart.getJsonObjectMapper());
 
         module.serveRegex$("(" + JavaScriptLocation + ")" + QueryParametersRegex).with(JavaScriptServlet.class);
         log.log(Level.CONFIG, "Serving JavaScripts at {0}", JavaScriptLocation);
