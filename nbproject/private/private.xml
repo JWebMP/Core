@@ -113,5 +113,9 @@
             <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/angular/controllers/jwcontroller.js</file>
         </group>
         <group name="JWebSwing Plugins"/>
+        <group name="JWebSwing Templates">
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/cancel/CancelAdapter.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/modernizr/ModernizrFeature.java</file>
+        </group>
     </open-files>
 </project-private>
