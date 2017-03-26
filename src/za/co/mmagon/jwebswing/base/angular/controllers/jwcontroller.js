@@ -288,6 +288,9 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
             $scope.synchronizedJSReferencesLoad(result.jsReferences, 0, function () {
                 $scope.processJsScripts(result);
             });
+        } else
+        {
+            $scope.processJsScripts(result);
         }
     };
 

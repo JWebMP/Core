@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -74,14 +74,14 @@ public class DataServlet extends JWDefaultServlet
         HttpSession session = GuiceContext.inject().getInstance(HttpSession.class);
 
         log.log(Level.INFO, "[SessionID]-[" + session.getId() + "];");
-        
+
         Page page = GuiceContext.inject().getInstance(Page.class);
-        
+
         if (page == null)
         {
             throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
         }
-        
+
         String componentID = request.getParameter("component");
         ComponentHierarchyBase hb = page.getComponentCache().get(componentID);
         if (hb == null)
@@ -134,7 +134,7 @@ public class DataServlet extends JWDefaultServlet
      * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
         try
