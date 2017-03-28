@@ -47,25 +47,6 @@
             <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/servlets/JavaScriptServlet.java</file>
             <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/Page.java</file>
         </group>
-        <group name="Activity Master">
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/bootstrap/BSRow.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/components/bootstrap/carousel/BSCarouselTest.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/bootstrap/carousel/BSComponentCarouselOptions.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jstree/JSTreeData.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/bootstrap/carousel/BSCarousel.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/bootstrap/carousel/BSCarouselIndicators.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/Page.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/bootstrap/carousel/BSCarouselItem.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jstree/options/JSTreeStateOptions.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jstree/options/JSTreeNodeStateOptions.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/html/Div.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/angular/AngularFeature.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/bootstrap/carousel/BSCarouselControl.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/angular/controllers/jwcontroller.js</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jstree/JSTreeNode.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/jstree/options/JSTreeDefaultOptions.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/html/Body.java</file>
-        </group>
         <group name="ActivityMaster">
             <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/bootstrap/forms/controls/BSInput.java</file>
             <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/bootstrap/forms/groups/BSFormGroup.java</file>
@@ -117,5 +98,6 @@
             <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/cancel/CancelAdapter.java</file>
             <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/components/modernizr/ModernizrFeature.java</file>
         </group>
+        <group name="Activity Master"/>
     </open-files>
 </project-private>
