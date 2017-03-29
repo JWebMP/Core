@@ -74,7 +74,10 @@ public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Bo
     public Body(Page page)
     {
         super(ComponentTypes.Body);
-        setPage(page);
+        if (page != null)
+        {
+            setPage(page);
+        }
         setID("body");
     }
 

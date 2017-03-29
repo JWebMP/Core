@@ -330,7 +330,6 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
         getChildren().stream().filter(a -> a != null).forEach(child
                 ->
         {
-
             child.setPage(page);
         });
         return (J) this;

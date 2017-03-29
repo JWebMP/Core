@@ -23,7 +23,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sf.uadetector.*;
-import za.co.mmagon.JWebSwingSiteBinder;
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.client.InternetExplorerCompatibilityMode;
@@ -32,6 +32,7 @@ import za.co.mmagon.jwebswing.base.html.attributes.ScriptAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
+import za.co.mmagon.jwebswing.base.servlets.JWScriptServlet;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.DevelopmentEnvironments;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 import za.co.mmagon.jwebswing.base.servlets.interfaces.IPage;
@@ -421,15 +422,28 @@ public class Page extends Html implements IPage
         {
             if (getOptions().isDynamicRender())
             {
+                Script jwScript = new Script();
+                jwScript.addAttribute(ScriptAttributes.Type, "application/javascript");
+                jwScript.addAttribute(ScriptAttributes.Src, JWebSwingSiteBinder.getJWScriptLocation().replaceAll("/", ""));
+                allScripts.add(jwScript);
+
                 Script dynamicScript = new Script();
                 dynamicScript.addAttribute(ScriptAttributes.Type, "application/javascript");
                 dynamicScript.addAttribute(ScriptAttributes.Src, JWebSwingSiteBinder.getAngularScriptLocation().replaceAll("/", ""));
-                //dynamicScript.setTiny(true);
-                //dynamicScript.setText("$.ajax({cache:false,async:false,dataType:'script',url:'as'}).fail(function(){alert('session lost'); });");
                 allScripts.add(dynamicScript);
             }
             else
             {
+                FileTemplates.getFileTemplate(JWScriptServlet.class, JWScriptServlet.FILE_TEMPLATE_NAME, "siteloader");
+                StringBuilder jsScript = FileTemplates.renderTemplateScripts(JWScriptServlet.FILE_TEMPLATE_NAME);
+                if (!jsScript.toString().trim().isEmpty())
+                {
+                    Script s = new Script();
+                    s.addAttribute(ScriptAttributes.Type, "application/javascript");
+                    s.setText(jsScript);
+                    allScripts.add(s);
+                }
+
                 StringBuilder js = getAngular().renderAngularJavascript(this);
                 if (!js.toString().trim().isEmpty())
                 {

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon;
+package za.co.mmagon.jwebswing;
 
 import com.armineasy.injection.GuiceContext;
 import com.armineasy.injection.abstractions.GuiceSiteInjectorModule;
@@ -24,7 +24,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
 import org.reflections.Reflections;
-import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.servlets.*;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
@@ -46,6 +45,8 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
     private static final String AngularDataLocation = "/jwad";
 
     private static final String AngularScriptLocation = "/jwas";
+
+    private static final String JWScriptLocation = "/jwscr";
 
     private static String DataLocation = "/jwdata";
 
@@ -106,6 +107,9 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
 
         module.serveRegex$("(" + DataLocation + ")" + QueryParametersRegex).with(DataServlet.class);
         log.log(Level.CONFIG, "Serving Data at {0}", DataLocation);
+
+        module.serveRegex$("(" + JWScriptLocation + ")" + QueryParametersRegex).with(JWScriptServlet.class);
+        log.log(Level.CONFIG, "Serving JW Default Script at {0}", JWScriptLocation);
 
         log.log(Level.CONFIG, "Finished with configuring URL's");
     }
@@ -210,6 +214,16 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
     public static String getDataBindUrl(ComponentBase component)
     {
         return getDataLocation().replace("/", "") + "?component=" + component.getID();
+    }
+
+    /**
+     * The JW Script Location
+     *
+     * @return
+     */
+    public static String getJWScriptLocation()
+    {
+        return JWScriptLocation;
     }
 
 }
