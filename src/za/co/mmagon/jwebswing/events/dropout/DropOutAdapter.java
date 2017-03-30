@@ -23,6 +23,7 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+import za.co.mmagon.jwebswing.plugins.ComponentInformation;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -30,6 +31,8 @@ import za.co.mmagon.logger.LogFactory;
  *
  * @author Marc Magon
  */
+@ComponentInformation(name = "Drop OutEvent", description = "Server Side Event for Drop Out",
+        url = "https://www.armineasy.com/JWebSwing", wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
 public abstract class DropOutAdapter extends Event
         implements GlobalEvents
 {
@@ -60,7 +63,7 @@ public abstract class DropOutAdapter extends Event
     {
         if (!isConfigured())
         {
-            
+
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute("ng-drop-out", "perform($event," + renderVariables() + ");");
         }

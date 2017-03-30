@@ -24,6 +24,7 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+import za.co.mmagon.jwebswing.plugins.ComponentInformation;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -31,6 +32,8 @@ import za.co.mmagon.logger.LogFactory;
  *
  * @author Marc Magon
  */
+@ComponentInformation(name = "DropEvent", description = "Server Side Event for Drop",
+        url = "https://www.armineasy.com/JWebSwing", wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
 public abstract class DropAdapter extends Event
         implements GlobalEvents
 {
@@ -61,7 +64,7 @@ public abstract class DropAdapter extends Event
     {
         if (!isConfigured())
         {
-            
+
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngDrop, "perform($event," + renderVariables() + ");");
         }

@@ -25,6 +25,7 @@ import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+import za.co.mmagon.jwebswing.plugins.ComponentInformation;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -39,6 +40,8 @@ public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
     /**
      * Logger for the Component
      */
+    @ComponentInformation(name = "Click Event", description = "Server Side Event for Click.",
+            url = "https://www.armineasy.com/JWebSwing", wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
     private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("ClickEvent");
     private static final long serialVersionUID = 1L;
 
@@ -57,7 +60,7 @@ public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
     {
         if (!isConfigured())
         {
-            
+
             getComponent().addAttribute(AngularAttributes.ngClick, "jw.isLoading || perform($event," + renderVariables() + ");");
             if (getComponent().getAttribute(AngularAttributes.ngDisabled) == null)
             {

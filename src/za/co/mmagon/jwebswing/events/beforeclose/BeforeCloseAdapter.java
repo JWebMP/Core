@@ -25,6 +25,7 @@ import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
+import za.co.mmagon.jwebswing.plugins.ComponentInformation;
 import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 import za.co.mmagon.logger.LogFactory;
 
@@ -33,6 +34,8 @@ import za.co.mmagon.logger.LogFactory;
  *
  * @author Marc Magon
  */
+@ComponentInformation(name = "Before Close Event", description = "Server Side Event for Before Close Adapter.",
+        url = "https://www.armineasy.com/JWebSwing", wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
 public abstract class BeforeCloseAdapter extends Event
         implements GlobalEvents
 {
