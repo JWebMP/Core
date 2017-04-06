@@ -70,7 +70,7 @@ public class Event<A extends JavaScriptPart, J extends Event>
     {
         this(eventTypes.name(), eventTypes);
         setComponent(component);
-        AngularPageConfigurator.setAngularRequired(component, true);
+        AngularPageConfigurator.setRequired(component, true);
     }
 
     /**

@@ -59,7 +59,7 @@ public abstract class MouseMoveAdapter extends Event
         if (!isConfigured())
         {
             
-            AngularPageConfigurator.setAngularRequired(getComponent(), true);
+            AngularPageConfigurator.setRequired(getComponent(), true);
             component.addAttribute(AngularAttributes.ngMousemove, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();

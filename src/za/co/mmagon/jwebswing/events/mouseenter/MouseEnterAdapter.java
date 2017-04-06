@@ -59,7 +59,7 @@ public abstract class MouseEnterAdapter extends Event
         if (!isConfigured())
         {
             
-            AngularPageConfigurator.setAngularRequired(getComponent(), true);
+            AngularPageConfigurator.setRequired(getComponent(), true);
             component.addAttribute(AngularAttributes.ngMouseenter, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();

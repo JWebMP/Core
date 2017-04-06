@@ -22,14 +22,19 @@ import java.util.List;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 import net.sf.uadetector.*;
 import za.co.mmagon.FileTemplates;
-import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.SessionHelper;
+import za.co.mmagon.jwebswing.annotations.PageConfiguration;
+import za.co.mmagon.jwebswing.annotations.SiteInterception;
+import za.co.mmagon.jwebswing.base.*;
 import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.client.InternetExplorerCompatibilityMode;
 import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.html.attributes.ScriptAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.base.servlets.JWScriptServlet;
@@ -53,6 +58,7 @@ import za.co.mmagon.logger.LogFactory;
  *
  * Replacement of the old page object
  */
+@PageConfiguration
 public class Page extends Html implements IPage
 {
 
@@ -107,6 +113,7 @@ public class Page extends Html implements IPage
         {
             getPageFields().setGenerator("https://sourceforge.net/projects/jwebswing/");
         }
+        intercept();
     }
 
     /**
@@ -142,6 +149,12 @@ public class Page extends Html implements IPage
         this(null, null, null);
     }
 
+    @SiteInterception
+    protected void intercept()
+    {
+
+    }
+
     /**
      * Initializes the page
      */
@@ -161,6 +174,42 @@ public class Page extends Html implements IPage
     public <T extends ComponentHierarchyBase> T add(T component)
     {
         return (T) getBody().add(component);
+    }
+
+    @Override
+    public ComponentDependancyBase addCssReference(CSSReference cssReference)
+    {
+        return getBody().addCssReference(cssReference);
+    }
+
+    @Override
+    public void addVariable(String variable)
+    {
+        getBody().addVariable(variable);
+    }
+
+    @Override
+    public ComponentDependancyBase addJavaScriptReference(JavascriptReference jsReference)
+    {
+        return getBody().addJavaScriptReference(jsReference);
+    }
+
+    @Override
+    public ComponentEventBase addEvent(GlobalEvents event)
+    {
+        return getBody().addEvent(event);
+    }
+
+    @Override
+    public ComponentFeatureBase addFeature(ComponentFeatureBase feature)
+    {
+        return getBody().addFeature(feature);
+    }
+
+    @Override
+    public ComponentFeatureBase addFeature(ComponentFeatureBase feature, int position)
+    {
+        return getBody().addFeature(feature, position);
     }
 
     /**
@@ -211,25 +260,16 @@ public class Page extends Html implements IPage
             }
             log.log(Level.FINE, "Plugins Completed");
 
-            //if (!GuiceContext.isBuildingInjector())
+            GuiceContext.reflect().getSubTypesOf(PageConfigurator.class).stream().parallel().forEachOrdered(next ->
             {
-                GuiceContext.reflect().getSubTypesOf(PageConfigurator.class).stream().parallel().forEachOrdered(next ->
-                {
-                    log.log(Level.FINE, "Running configuration : [{0}]", next.getSimpleName());
-                    PageConfigurator configurator = GuiceContext.inject().getInstance(next);
-                    configurator.configure(this);
-                    log.log(Level.FINE, "Configuration Completed : [{0}]", next.getSimpleName());
-                });
-            }
-            //else
-            {
-                //log.log(Level.INFO, "Context is still building the injector, ignoring page configurations");
-            }
+                log.log(Level.FINE, "Running configuration : [{0}]", next.getSimpleName());
+                PageConfigurator configurator = GuiceContext.inject().getInstance(next);
+                configurator.configure(this);
+                log.log(Level.FINE, "Configuration Completed : [{0}]", next.getSimpleName());
+            });
 
             getBody().init();
             getBody().preConfigure();
-
-            //log.log(Level.INFO, "Page Configured.");
         }
 
         super.init();
@@ -381,7 +421,7 @@ public class Page extends Html implements IPage
         {
             if (getOptions().isDynamicRender())
             {
-                CSSLink renderedCSS = new CSSLink(JWebSwingSiteBinder.getCSSLocation().replaceAll("/", ""));
+                CSSLink renderedCSS = new CSSLink(SessionHelper.getServerPath() + JWebSwingSiteBinder.getCSSLocation().replaceAll("/", ""));
                 return renderedCSS;
             }
             else
@@ -416,6 +456,8 @@ public class Page extends Html implements IPage
      */
     private List<Script> getDynamicScripts()
     {
+        HttpSession session = GuiceContext.inject().getInstance(HttpSession.class);
+
         ArrayList<Script> allScripts = new ArrayList<>();
 
         if (getBody().readChildrenPropertyFirstResult(AngularPageConfigurator.AngularEnabledString, true))
@@ -424,12 +466,12 @@ public class Page extends Html implements IPage
             {
                 Script jwScript = new Script();
                 jwScript.addAttribute(ScriptAttributes.Type, "application/javascript");
-                jwScript.addAttribute(ScriptAttributes.Src, JWebSwingSiteBinder.getJWScriptLocation().replaceAll("/", ""));
+                jwScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + JWebSwingSiteBinder.getJWScriptLocation().replaceAll("/", ""));
                 allScripts.add(jwScript);
 
                 Script dynamicScript = new Script();
                 dynamicScript.addAttribute(ScriptAttributes.Type, "application/javascript");
-                dynamicScript.addAttribute(ScriptAttributes.Src, JWebSwingSiteBinder.getAngularScriptLocation().replaceAll("/", ""));
+                dynamicScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + JWebSwingSiteBinder.getAngularScriptLocation().replaceAll("/", ""));
                 allScripts.add(dynamicScript);
             }
             else
@@ -462,7 +504,7 @@ public class Page extends Html implements IPage
             {
                 Script dynamicScript = new Script();
                 dynamicScript.addAttribute(ScriptAttributes.Type, "application/javascript");
-                dynamicScript.addAttribute(ScriptAttributes.Src, JWebSwingSiteBinder.getJavaScriptLocation().replaceAll("/", ""));
+                dynamicScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + JWebSwingSiteBinder.getJavaScriptLocation().replaceAll("/", ""));
                 //dynamicScript.setTiny(true);
                 //dynamicScript.setText("$.ajax({cache:false,dataType:'script',url:'js'}).fail(function(){alert('session lost'); });");
                 allScripts.add(dynamicScript);

@@ -55,6 +55,11 @@ public class JQueryPageConfigurator extends PageConfigurator
      */
     private static boolean jquery3 = true;
 
+    public JQueryPageConfigurator()
+    {
+        setSortOrder(99999998); //Always before angular
+    }
+
     @Override
     public Page configure(Page page)
     {

@@ -57,7 +57,7 @@ public abstract class ButtonClickAdapter extends Event
         if (!isConfigured())
         {
             JQueryPageConfigurator.setRequired((Component) getComponent(), true);
-            AngularPageConfigurator.setAngularRequired(getComponent(), true);
+            AngularPageConfigurator.setRequired(getComponent(), true);
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
             component.addAttribute(AngularAttributes.ngButtonClick, "perform($event," + renderVariables() + ");");
         }

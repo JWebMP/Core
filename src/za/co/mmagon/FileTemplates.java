@@ -18,8 +18,8 @@ package za.co.mmagon;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.*;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import za.co.mmagon.jwebswing.utilities.TextUtilities;
@@ -39,12 +39,12 @@ public class FileTemplates implements Serializable
      * All registered templates
      */
     @JsonIgnore
-    private static final Map<String, StringBuilder> TemplateScripts = new HashMap<>();
+    private static final Map<String, StringBuilder> TemplateScripts = new ConcurrentHashMap<>();
     /**
      * All registered variables
      */
     @JsonIgnore
-    private static final Map<String, StringBuilder> TemplateVariables = new HashMap<>();
+    private static final Map<String, StringBuilder> TemplateVariables = new ConcurrentHashMap<>();
 
     private static final long serialVersionUID = 1L;
 

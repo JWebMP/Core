@@ -1,10 +1,29 @@
 /* global BootstrapDialog, eval */
 
-var jw = {isLoading: false};
-jw.siteAddress = 'http://localhost:8080/DanceCultureStudios/';
+var jw = {isLoading: false, pageLoading: true};
+jw.siteAddress = 'SITEADDRESSINSERT';
 
 jw.mobile = {};
 jw.actions = {};
+
+jw.localstorage = {};
+if (localStorage)
+{
+    for (var i = 0; i < localStorage.length; i++) {
+        jw.localstorage[localStorage.key(i)] = localStorage.getItem(localStorage.key(i));
+    }
+}
+jw.sessionstorage = {};
+if (sessionStorage)
+{
+    for (var i = 0; i < sessionStorage.length; i++) {
+        jw.sessionstorage[sessionStorage.key(i)] = sessionStorage.getItem(sessionStorage.key(i));
+    }
+}
+
+jw.env = {};
+jw.env.loadescripts = [];
+jw.env.loadedcss = [];
 
 /**
  * Loads an angular JSON variables object from the server
@@ -53,6 +72,8 @@ jw.actions.processResponse = function (result, $scope, $parse, $timeout, $compil
     jw.actions.processCss(result);
     jw.actions.loadData(result, $scope, $parse, $timeout);
     jw.actions.processReactions(result);
+
+
     //jw.actions.processJsScripts(result)
 };
 
@@ -214,6 +235,7 @@ jw.actions.processReactions = function (result) {
 
     });
 };
+
 /**
  * @param title The title of the dialog
  * @param message The message to display
@@ -261,14 +283,95 @@ jw.actions.showDialog = function (title, message, type) {
     }
 };
 
-var xhr = new XMLHttpRequest();
-xhr.open('GET', jw.siteAddress + 'jwcordova');
-xhr.onload = function () {
-    if (xhr.status === 200) {
-        var result = JSON.parse(xhr.responseText);
-        processResponse(result);
-    } else {
-        alert('Request failed.  Returned status of ' + xhr.status);
-    }
+
+/**
+ * Loads up cached url script objects.
+ * Used when pulling scripts from the server
+ * $.cachedScript( "ajax/test.js" ).done(function( script, textStatus ) {});
+ * $.cachedScript( "ajax/test.js",{async:true).done(function( script, textStatus ) {});
+ * @param {type} url The URL to use
+ * @param {type} options Any $.ajax options
+ *
+ * @returns {jqXHR} The ajax object for chaining
+ */
+jQuery.cachedScript = function (url, options) {
+    // Allow user to set any option except for dataType, cache, and url
+    options = $.extend(options || {}, {
+        dataType: "script",
+        cache: true,
+        url: url,
+        async: true
+    });
+    // Use $.ajax() since it is more flexible than $.getScript
+    // Return the jqXHR object so we can chain callbacks
+    return jQuery.ajax(options);
 };
-xhr.send();
+
+/**
+ * Loads up cached url script objects.
+ * Used when pulling scripts from the server
+ * $.cachedScript( "ajax/test.js" ).done(function( script, textStatus ) {});
+ * $.cachedScript( "ajax/test.js",{async:true).done(function( script, textStatus ) {});
+ * @param {type} url The URL to use
+ * @param {type} options Any $.ajax options
+ *
+ * @returns {jqXHR} The ajax object for chaining
+ */
+jQuery.cachedScriptSync = function (url, options) {
+    // Allow user to set any option except for dataType, cache, and url
+    options = $.extend(options || {}, {
+        dataType: "script",
+        cache: true,
+        url: url,
+        async: false
+    });
+    // Use $.ajax() since it is more flexible than $.getScript
+    // Return the jqXHR object so we can chain callbacks
+    return jQuery.ajax(options);
+};
+
+/**
+ * Loads up non-cached url script objects.
+ * Used when pulling scripts from the server
+ * $.cachedScript( "ajax/test.js" ).done(function( script, textStatus ) {});
+ * $.cachedScript( "ajax/test.js",{async:true).done(function( script, textStatus ) {});
+ * @param {type} url The URL to use
+ * @param {type} options Any $.ajax options
+ *
+ * @returns {jqXHR} The ajax object for chaining
+ */
+jQuery.notCachedScript = function (url, options) {
+    // Allow user to set any option except for dataType, cache, and url
+    options = $.extend(options || {}, {
+        dataType: "script",
+        cache: false,
+        url: url,
+        async: true
+    });
+    // Use $.ajax() since it is more flexible than $.getScript
+    // Return the jqXHR object so we can chain callbacks
+    return jQuery.ajax(options);
+};
+
+/**
+ * Loads up non-cached url script objects.
+ * Used when pulling scripts from the server
+ * $.cachedScript( "ajax/test.js" ).done(function( script, textStatus ) {});
+ * $.cachedScript( "ajax/test.js",{async:true).done(function( script, textStatus ) {});
+ * @param {type} url The URL to use
+ * @param {type} options Any $.ajax options
+ *
+ * @returns {jqXHR} The ajax object for chaining
+ */
+jQuery.notCachedScriptSync = function (url, options) {
+    // Allow user to set any option except for dataType, cache, and url
+    options = $.extend(options || {}, {
+        dataType: "script",
+        cache: false,
+        url: url,
+        async: false
+    });
+    // Use $.ajax() since it is more flexible than $.getScript
+    // Return the jqXHR object so we can chain callbacks
+    return jQuery.ajax(options);
+};

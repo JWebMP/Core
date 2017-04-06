@@ -168,7 +168,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input>
     @Override
     public J bind(String variableName)
     {
-        AngularPageConfigurator.setAngularRequired(this, true);
+        AngularPageConfigurator.setRequired(this, true);
         addAttribute(AngularAttributes.ngModel, variableName);
         return (J) this;
     }

@@ -20,12 +20,20 @@ import com.armineasy.injection.GuiceContext;
 import com.armineasy.injection.abstractions.GuiceSiteInjectorModule;
 import com.armineasy.injection.interfaces.GuiceSiteBinder;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.Iterator;
-import java.util.Set;
+import com.google.inject.Provider;
+import com.google.inject.matcher.Matchers;
+import com.google.inject.name.Names;
+import java.lang.reflect.Modifier;
+import java.util.*;
 import java.util.logging.Level;
+import javax.servlet.http.HttpSession;
 import org.reflections.Reflections;
+import za.co.mmagon.BaseTestClass;
+import za.co.mmagon.SessionHelper;
+import za.co.mmagon.jwebswing.annotations.*;
 import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.servlets.*;
+import za.co.mmagon.jwebswing.components.modernizr.ModernizrDto;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.logger.LogFactory;
 
@@ -43,11 +51,8 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
     private static final String AjaxScriptLocation = "/jwajax";
     private static final String CSSLocation = "/jwcss";
     private static final String AngularDataLocation = "/jwad";
-
     private static final String AngularScriptLocation = "/jwas";
-
     private static final String JWScriptLocation = "/jwscr";
-
     private static String DataLocation = "/jwdata";
 
     private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("JWebSwingSiteBinder");
@@ -60,34 +65,88 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
         //Nothing needed to be done
     }
 
+    private Set<Class<?>> pages = GuiceContext.reflect().getTypesAnnotatedWith(PageConfiguration.class);
+
     @Override
     public void onBind(GuiceSiteInjectorModule module)
     {
         log.log(Level.CONFIG, "Configuring Servlet URL's");
         Reflections reflections = GuiceContext.reflect();
 
-        Set<Class<? extends JWebSwingServlet>> siteBinders = reflections.getSubTypesOf(JWebSwingServlet.class);
-        for (Iterator<Class<? extends JWebSwingServlet>> iterator = siteBinders.iterator(); iterator.hasNext();)
+        module.bindInterceptor$(Matchers.any(), Matchers.annotatedWith(SiteInterception.class),
+                new SiteIntercepters());
+
+        //Bind Local Storage
+        module.bind(Map.class).annotatedWith(Names.named("LocalStorage")).toProvider((Provider<Map>) () ->
         {
-            try
+            if (!GuiceContext.isBuildingInjector())
             {
-                Class<? extends JWebSwingServlet> jwebSwingSite = iterator.next();
-                JWebSwingServlet servlet = jwebSwingSite.newInstance();
-                module.serveRegex$("(" + servlet.getUrl() + ")" + QueryParametersRegex).with(jwebSwingSite);
-                module.bind(Page.class).toProvider(servlet);
-                log.log(Level.CONFIG, "Serving {0} at {1}", new Object[]
+                HttpSession session = GuiceContext.inject().getInstance(HttpSession.class);
+                Map attributeMap = (Map) session.getAttribute(AngularDataServlet.LocalStorageSessionKey);
+                return attributeMap;
+            }
+            return new HashMap();
+        });
+        //Bind Session Storage
+        module.bind(Map.class).annotatedWith(Names.named("SessionStorage")).toProvider((Provider<Map>) () ->
+        {
+            if (!GuiceContext.isBuildingInjector())
+            {
+                HttpSession session = GuiceContext.inject().getInstance(HttpSession.class);
+                Map attributeMap = (Map) session.getAttribute(AngularDataServlet.SessionStorageSessionKey);
+                return attributeMap;
+            }
+            return new HashMap();
+        });
+        //Bind Modernizr
+        module.bind(ModernizrDto.class).toProvider((Provider<ModernizrDto>) () ->
+        {
+            if (!GuiceContext.isBuildingInjector())
+            {
+                HttpSession session = GuiceContext.inject().getInstance(HttpSession.class);
+                ModernizrDto attributeMap = (ModernizrDto) session.getAttribute(AngularDataServlet.ModernizrSessionKey);
+                return attributeMap;
+            }
+            return new ModernizrDto();
+        });
+
+        module.bind(Page.class).toProvider((Provider<Page>) () ->
+        {
+            if (!GuiceContext.isBuildingInjector())
+            {
+                for (Class<? extends Object> next : pages)
                 {
-                    jwebSwingSite.getSimpleName(), servlet.getUrl()
-                });
+                    if (Modifier.isAbstract(next.getModifiers()))
+                    {
+                        continue;
+                    }
+                    if (next.equals(Page.class))
+                    {
+                        continue;
+                    }
+
+                    PageConfiguration pc = next.getAnnotation(PageConfiguration.class);
+                    if (SessionHelper.getServletUrl().equalsIgnoreCase(pc.url()))
+                    {
+                        Page returnedPage = (Page) GuiceContext.inject().getInstance(next);
+                        return returnedPage;
+                    }
+                }
             }
-            catch (InstantiationException | IllegalAccessException ex)
-            {
-                log.log(Level.SEVERE, null, ex);
-            }
-            break;
-        }
+            return new BaseTestClass().getInstance();
+        });
 
         module.bind(ObjectMapper.class).toInstance(JavaScriptPart.getJsonObjectMapper());
+
+        pages.stream().filter(page -> !(Modifier.isAbstract(page.getModifiers()))).filter(page -> !(page.equals(Page.class))).forEachOrdered(page ->
+        {
+            PageConfiguration pc = page.getAnnotation(PageConfiguration.class);
+            module.serveRegex$("(" + pc.url() + ")" + QueryParametersRegex).with(JWebSwingServlet.class);
+            log.log(Level.CONFIG, "Serving Page URL [{0}] with [{1}]", new Object[]
+            {
+                pc.url(), page.getCanonicalName()
+            });
+        });
 
         module.serveRegex$("(" + JavaScriptLocation + ")" + QueryParametersRegex).with(JavaScriptServlet.class);
         log.log(Level.CONFIG, "Serving JavaScripts at {0}", JavaScriptLocation);

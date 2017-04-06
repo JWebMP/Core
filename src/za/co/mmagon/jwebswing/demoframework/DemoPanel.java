@@ -14,30 +14,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.plugins.jquery;
+package za.co.mmagon.jwebswing.demoframework;
 
-import za.co.mmagon.jwebswing.base.references.JavascriptReference;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
+import za.co.mmagon.jwebswing.base.html.Div;
 
 /**
- * The JQuery JavaScript Reference
  *
- * @since 2014/12/09
- * @version 1.0
- * @author MMagon
- *
- * I have moved these from the features to make it easier to specify remote or local references.
- *
+ * @author Marc Magon
+ * @since 04 Apr 2017
  */
-public class JQueryMigrateReference extends JavascriptReference
+public abstract class DemoPanel extends Div
 {
 
     private static final long serialVersionUID = 1L;
 
-    public JQueryMigrateReference()
+    /*
+     * Constructs a new DemoPanel
+     */
+    public DemoPanel()
     {
-        super("JQueryMigrate", 1.21, "bower_components/jquery-migrate/jquery-migrate.min.js", "http://code.jquery.com/jquery-migrate-1.4.1.js");
-        setSortOrder(2);
-        setPriority(RequirementsPriority.Second);
+        //Nothing needed
     }
 }

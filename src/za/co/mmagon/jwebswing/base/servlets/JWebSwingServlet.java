@@ -17,7 +17,8 @@
 package za.co.mmagon.jwebswing.base.servlets;
 
 import com.armineasy.injection.GuiceContext;
-import com.google.inject.*;
+import com.google.inject.Provides;
+import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import com.google.inject.servlet.RequestScoped;
 import java.io.IOException;
@@ -47,7 +48,7 @@ import za.co.mmagon.logger.LogFactory;
  * @since 2012/10/09
  */
 @Singleton
-public abstract class JWebSwingServlet extends JWDefaultServlet implements Provider<Page>
+public final class JWebSwingServlet extends JWDefaultServlet
 {
 
     /**
@@ -77,6 +78,21 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
     }
 
     /**
+     * Finds the page for the current URL
+     *
+     * @return
+     */
+    private Page getPageFromGuice()
+    {
+        if (!GuiceContext.isBuildingInjector())
+        {
+            Page p = GuiceContext.inject().getInstance(Page.class);
+            return p;
+        }
+        return new Page();
+    }
+
+    /**
      * Reads the variables into the HTTP session
      *
      * @param request
@@ -85,7 +101,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
      */
     private void readRequestVariables(HttpServletRequest request) throws MissingComponentException
     {
-        Page currentPage = getPage();
+        Page currentPage = getPageFromGuice();
         HttpSession session = GuiceContext.inject().getInstance(HttpSession.class);
         session.setAttribute("jwpage", currentPage);
         if (currentPage == null)
@@ -107,7 +123,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
     {
         String headerInformation = request.getHeader("User-Agent");
         ReadableUserAgent agent = userAgentParser.parse(headerInformation);
-        getPage().setUserAgent(agent);
+        getPageFromGuice().setUserAgent(agent);
         Browsers b;
         if (agent.getVersionNumber().getMajor().isEmpty() && agent.getVersionNumber().getMinor().isEmpty())
         {
@@ -117,7 +133,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
         {
             b = Browsers.getBrowserFromNameAndVersion(agent.getName(), Double.parseDouble(agent.getVersionNumber().getMajor() + "." + agent.getVersionNumber().getMinor()));
         }
-        getPage().setBrowser(b);
+        getPageFromGuice().setBrowser(b);
         if (agent.getVersionNumber().getMajor() == null || agent.getVersionNumber().getMajor().isEmpty())
         {
             LOG.log(Level.INFO, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}];[Operating System]-[{3}];[Device Category]-[{4}];[Device]-[{5}];[CSS]-[{6}];[HTML]-[{7}];", new Object[]
@@ -150,7 +166,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
         {
             Date startDate = new Date();
             StringBuilder output;
-            Page page = getPage();
+            Page page = getPageFromGuice();
             if (page.getOptions().isGoogleMapsJSApi())
             {
                 page.getBody().addJavaScriptReference(new JavascriptReference("Google Maps API Reference", 1.0, "https://maps.googleapis.com/maps/api/js?key=" + page.getOptions().getGoogleMapsJSApi()));
@@ -200,6 +216,12 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        if (GuiceContext.isBuildingInjector())
+        {
+            LOG.fine("Guice is still building, ignoring this request");
+            return;
+        }
+
         try
         {
             readRequestVariables(request);
@@ -281,7 +303,7 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
     private StringBuilder getPageHTML(HttpSession session)
     {
         StringBuilder html;
-        html = new StringBuilder(getPage().toString(true));
+        html = new StringBuilder(getPageFromGuice().toString(true));
         return html;
     }
 
@@ -342,38 +364,9 @@ public abstract class JWebSwingServlet extends JWDefaultServlet implements Provi
     {
         LOG.log(Level.FINE, "Started Rendering Mobile HTML");
         StringBuilder html;
-        html = new StringBuilder(getPage().toString(true));
+        html = new StringBuilder(getPageFromGuice().toString(true));
         return html;
     }
-
-    /**
-     * The initial page for this Servlet
-     *
-     * @return A Page for the Servlet
-     */
-    @Provides
-    @RequestScoped
-    public abstract Page getPage();
-
-    /**
-     * Returns the get page method
-     *
-     * @return
-     */
-    @Override
-    public Page get()
-    {
-        return getPage();
-    }
-
-    /**
-     * Returns the URL associated with this Servlet
-     *
-     * @return
-     */
-    @Provides
-    @Named("URLPath")
-    public abstract String getUrl();
 
     /**
      * Handles the HTTP <code>GET</code> method.

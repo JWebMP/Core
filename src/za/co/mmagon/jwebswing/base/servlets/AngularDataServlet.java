@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,8 +19,7 @@ package za.co.mmagon.jwebswing.base.servlets;
 import com.armineasy.injection.GuiceContext;
 import com.armineasy.injection.filters.CorsAllowedFilter;
 import com.google.inject.Singleton;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,7 +31,6 @@ import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AngularJsonVariable;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
 
@@ -49,6 +47,10 @@ public class AngularDataServlet extends JWDefaultServlet
     private static final Logger LOG = LogFactory.getInstance().getLogger("AngularDataServlet");
     private static final long serialVersionUID = 1L;
 
+    public static final String LocalStorageSessionKey = "LocalStorage";
+    public static final String SessionStorageSessionKey = "SessionStorage";
+    public static final String ModernizrSessionKey = "Modernizr";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
@@ -62,8 +64,28 @@ public class AngularDataServlet extends JWDefaultServlet
             throws ServletException, IOException
     {
         String componentId = request.getParameter("o");
-        Date startDate = new Date();
+        StringBuilder jb = new StringBuilder();
+        String line;
+        try
+        {
+            BufferedReader reader = request.getReader();
+            while ((line = reader.readLine()) != null)
+            {
+                jb.append(line);
+            }
+        }
+        catch (IOException e)
+        {
+        }
+        if (jb.length() > 0)
+        {
+            AngularDataServletInitData initData = JavaScriptPart.From(jb.toString(), AngularDataServletInitData.class);
+            request.getSession().setAttribute(LocalStorageSessionKey, initData.getLocalStorage());
+            request.getSession().setAttribute(SessionStorageSessionKey, initData.getSessionStorage());
+            request.getSession().setAttribute(ModernizrSessionKey, initData.getModernizr());
+        }
 
+        Date startDate = new Date();
         AjaxCall ajaxCall = new AjaxCall();
         ajaxCall.setComponentId(componentId);
         ajaxCall.setDatetime(new Date());
@@ -94,6 +116,7 @@ public class AngularDataServlet extends JWDefaultServlet
 
         JavaScriptPart respJson = new JavaScriptPart()
         {
+            private static final long serialVersionUID = 1L;
             ArrayList<AngularJsonVariable> variables;
 
             public ArrayList<AngularJsonVariable> getVariables()
@@ -108,12 +131,6 @@ public class AngularDataServlet extends JWDefaultServlet
             public void setVariables(ArrayList<AngularJsonVariable> variables)
             {
                 this.variables = variables;
-            }
-
-            @Override
-            public JavascriptPartType getJavascriptType()
-            {
-                return JavascriptPartType.JSON;
             }
 
             @Override

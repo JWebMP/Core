@@ -60,8 +60,10 @@ public class JWScriptServlet extends JWDefaultServlet
         page.toString(true);
         Date startDate = new Date();
         FileTemplates.getFileTemplate(JWScriptServlet.class, FILE_TEMPLATE_NAME, "siteloader");
+        FileTemplates.getTemplateVariables().put("SITEADDRESSINSERT", new StringBuilder(request.getRequestURL().toString().replace("jwscr", "")));
 
         StringBuilder output = FileTemplates.renderTemplateScripts(FILE_TEMPLATE_NAME);
+
         Date endDate = new Date();
         try (PrintWriter out = response.getWriter())
         {

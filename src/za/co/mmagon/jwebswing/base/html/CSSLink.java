@@ -67,13 +67,32 @@ public class CSSLink<J extends CSSLink>
         implements NoIDTag, NoClosingTag, HeadChildren
 {
 
-    private static final Logger LOG = LogFactory.getInstance().getLogger("<link>");
+    private static final Logger LOG = LogFactory.getInstance().getLogger("HeadCSSLink");
+
     private static final long serialVersionUID = 1L;
+    /**
+     * If this link is a theme link
+     */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private Boolean themeLink;
+
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    /**
+     * If this link is a secondary theme link
+     */
     private Boolean prettifyTheme;
+    /**
+     * An applied linked reference
+     */
     private CSSReference linkedReference;
+
+    /**
+     * Constructs an empty link
+     */
+    public CSSLink()
+    {
+        super(ComponentTypes.CSSLink);
+    }
 
     /**
      * Constructs a new Head Link

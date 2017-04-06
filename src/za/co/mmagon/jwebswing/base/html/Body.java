@@ -67,6 +67,14 @@ public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Bo
     private static final long serialVersionUID = 1L;
 
     /**
+     * Instantiates an empty body
+     */
+    public Body()
+    {
+        this(null);
+    }
+
+    /**
      * Constructs a new Body with the given Page input
      *
      * @param page
@@ -98,14 +106,5 @@ public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Bo
         {
             addFeature(new ModernizrFeature(this));
         }
-    }
-
-    /*
-     * @Override public void preConfigure() { super.preConfigure(); configurePace(); configureJQuery(); }
-     */
-    @Override
-    protected StringBuilder renderHTML(int tabCount)
-    {
-        return super.renderHTML(tabCount);
     }
 }

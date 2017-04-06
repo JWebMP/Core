@@ -255,7 +255,10 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
         });
         allQueries.stream().forEach(query ->
         {
-            sb.append(query);
+            if (!query.trim().equals("\n"))
+            {
+                sb.append(query);
+            }
         });
         return sb;
     }

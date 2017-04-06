@@ -65,7 +65,7 @@ public abstract class CancelAdapter extends Event
         if (!isConfigured())
         {
 
-            AngularPageConfigurator.setAngularRequired(getComponent(), true);
+            AngularPageConfigurator.setRequired(getComponent(), true);
             component.addAttribute(AngularAttributes.ngCancel, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();

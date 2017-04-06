@@ -67,7 +67,7 @@ public class AngularDataVariables extends JWDefaultServlet
 
             response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);
             response.setHeader("Access-Control-Allow-Credentials", "true");
-            response.setHeader("Access-Control-Allow-Methods", "GET, POST");
+            response.setHeader("Access-Control-Allow-Methods", "POST");
             response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
 
             response.getWriter().write(output.toString());
@@ -99,29 +99,6 @@ public class AngularDataVariables extends JWDefaultServlet
         catch (IOException | ServletException e)
         {
             LOG.log(Level.SEVERE, "Do Post Error", e);
-        }
-    }
-
-    /**
-     * Post handler
-     *
-     * @param request
-     * @param response
-     *
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-        try
-        {
-            super.doGet(request, response);
-            processRequest(request, response);
-        }
-        catch (IOException | ServletException e)
-        {
-            LOG.log(Level.SEVERE, "Angualr Do Get Error", e);
         }
     }
 }

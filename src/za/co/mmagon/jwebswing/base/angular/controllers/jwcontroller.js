@@ -1,19 +1,22 @@
 /* global JW_APP_NAME, BootstrapDialog, Pace, JW_SCOPE_INSERTIONS, jw */
 JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, $timeout) {
-    var self = this;
-
     /**
      * Loads up the initial variables into angular
      * @returns {undefined}
      */
     $scope._init = function ()
     {
+        var initData = {};
+        initData.localStorage = jw.localstorage;
+        initData.sessionStorage = jw.sessionstorage;
+
         jw.isLoading = true;
         try
         {
             if (window.Modernizr)
             {
                 $scope.Modernizr = window.Modernizr;
+                initData.modernizr = window.Modernizr;
             }
         } catch (e)
         {
@@ -29,6 +32,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
             mimeType: 'application/json',
             asynch: false,
             cache: false,
+            data: JSON.stringify(initData),
             beforeSend: function (xhr) {
                 try
                 {
@@ -50,17 +54,20 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
             },
             fail: function (xhr, textStatus, errorThrown) {
                 var err = eval("(" + xhr.responseText + ")");
-                BootstrapDialog.show({
-                    title: "Server Error",
-                    message: "An error was encountered during the initial phase between the server and the client.<br>" + textStatus + "<br>" + err,
-                    type: BootstrapDialog.TYPE_DANGER,
-                    buttons: [{
-                            label: 'Close',
-                            action: function (dialogItself) {
-                                dialogItself.close();
-                            }
-                        }]
-                });
+                if (BootstrapDialog)
+                {
+                    BootstrapDialog.show({
+                        title: "Server Error",
+                        message: "An error was encountered during the initial phase between the server and the client.<br>" + textStatus + "<br>" + err,
+                        type: BootstrapDialog.TYPE_DANGER,
+                        buttons: [{
+                                label: 'Close',
+                                action: function (dialogItself) {
+                                    dialogItself.close();
+                                }
+                            }]
+                    });
+                }
                 jw.isLoading = false;
             },
             complete: function (jqXHR, textStatus) {
@@ -150,7 +157,13 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
                 'json': true
             },
             success: function (result, status, xhr) {
-                jw.actions.processResponse(result, $scope, $parse, $timeout, $compile);
+                try
+                {
+                    jw.actions.processResponse(result, $scope, $parse, $timeout, $compile);
+                } catch (e)
+                {
+                    console.log("Error in processing response : " + result);
+                }
                 try
                 {
                     if (window.Pace)
@@ -164,17 +177,20 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
             },
             fail: function (xhr, textStatus, errorThrown) {
                 var err = eval("(" + xhr.responseText + ")");
-                BootstrapDialog.show({
-                    title: "Server Error",
-                    message: "An error was encountered in the connection between the server and the client<br>" + textStatus + "<br>" + err + "<br>" + errorThrown,
-                    type: BootstrapDialog.TYPE_DANGER,
-                    buttons: [{
-                            label: 'Close',
-                            action: function (dialogItself) {
-                                dialogItself.close();
-                            }
-                        }]
-                });
+                if (BootstrapDialog)
+                {
+                    BootstrapDialog.show({
+                        title: "Server Error",
+                        message: "An error was encountered in the connection between the server and the client<br>" + textStatus + "<br>" + err + "<br>" + errorThrown,
+                        type: BootstrapDialog.TYPE_DANGER,
+                        buttons: [{
+                                label: 'Close',
+                                action: function (dialogItself) {
+                                    dialogItself.close();
+                                }
+                            }]
+                    });
+                }
                 try
                 {
                     if (window.Pace)
@@ -185,7 +201,6 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
                 } catch (e)
                 {
                 }
-                jw.isLoading = false;
             },
         });
     };
@@ -220,4 +235,8 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
         return newEvent;
     };
     //JW_SCOPE_INSERTIONS
+
+
+
+    jw.pageLoading = false;
 }); //end of controller

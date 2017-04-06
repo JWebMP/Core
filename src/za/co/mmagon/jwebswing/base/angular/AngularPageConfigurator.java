@@ -109,7 +109,7 @@ public class AngularPageConfigurator extends PageConfigurator
      * @param component
      * @param required
      */
-    public static void setAngularRequired(ComponentHTMLAngularBase component, boolean required)
+    public static void setRequired(ComponentHTMLAngularBase component, boolean required)
     {
         component.getProperties().put(AngularEnabledString, required);
     }

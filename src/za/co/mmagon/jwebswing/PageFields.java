@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -274,11 +274,11 @@ public class PageFields extends JavaScriptPart
      */
     public void setFavIcon(String favIconURL)
     {
+        favIconLink = new CSSLink();
         favIconLink.addAttribute(CSSLinkAttributes.Rel, "icon");
-        String mimeType = "";
+        String mimeType = "image/png";
         try
         {
-
             mimeType = Files.probeContentType(new File(favIconURL).toPath());
         }
         catch (IOException ex)

@@ -102,28 +102,9 @@
             <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/html/Body.java</file>
         </group>
         <group name="JWebSwing Plugins">
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/angular/AngularPageConfigurator.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/drag/DragAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/beforeload/BeforeLoadAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/beforeclose/BeforeCloseAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/dragstop/DragStopAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/beforeactivate/BeforeActivateAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/complete/CompleteAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/dropout/DropOutAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/beforestop/BeforeStopAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/activate/ActivateAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/close/CloseAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/focus/FocusAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/change/ChangeAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/drop/DropAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/buttonclick/ButtonClickAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/dragstart/DragStartAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/cancel/CancelAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/blur/BlurAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/dropover/DropOverAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/create/CreateAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/click/ClickAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/deactivate/DeactivateAdapter.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/activate/ActivateDirective.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/annotations/SiteIntercepters.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/html/Body.java</file>
         </group>
     </open-files>
 </project-private>

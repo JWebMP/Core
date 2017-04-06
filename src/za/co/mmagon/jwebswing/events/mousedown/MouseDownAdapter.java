@@ -59,7 +59,7 @@ public abstract class MouseDownAdapter extends Event
         if (!isConfigured())
         {
             
-            AngularPageConfigurator.setAngularRequired(getComponent(), true);
+            AngularPageConfigurator.setRequired(getComponent(), true);
             component.addAttribute(AngularAttributes.ngMousedown, "perform($event," + renderVariables() + ");");
         }
         super.preConfigure();

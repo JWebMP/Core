@@ -114,7 +114,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
         if (attributesAngular == null)
         {
             attributesAngular = new HashMap<>();
-            AngularPageConfigurator.setAngularRequired(this, true);
+            AngularPageConfigurator.setRequired(this, true);
         }
         return attributesAngular;
     }
@@ -162,7 +162,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
         if (angularObjects == null)
         {
             angularObjects = new HashMap<>();
-            AngularPageConfigurator.setAngularRequired(this, true);
+            AngularPageConfigurator.setRequired(this, true);
         }
         return angularObjects;
     }
@@ -198,7 +198,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
     public J bind(String variableName)
     {
         addAttribute(AngularAttributes.ngBind, variableName);
-        AngularPageConfigurator.setAngularRequired(this, true);
+        AngularPageConfigurator.setRequired(this, true);
         return (J) this;
     }
 
@@ -210,7 +210,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
     public J cloak()
     {
         addAttribute(AngularAttributes.ngCloak, null);
-        AngularPageConfigurator.setAngularRequired(this, true);
+        AngularPageConfigurator.setRequired(this, true);
         return (J) this;
     }
 
