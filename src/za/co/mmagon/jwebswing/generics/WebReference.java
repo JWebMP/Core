@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import za.co.mmagon.jwebswing.base.html.interfaces.NamedPair;
@@ -529,22 +530,29 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
                     sb.insert(sb.lastIndexOf("."), ".min");
                 }
             }
-            if (sb.indexOf("http") < 0)
+
+            try
             {
-                try
+                if (!GuiceContext.isBuildingInjector())
                 {
-                    if (!GuiceContext.isBuildingInjector())
+                    HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);
+                    if (request != null)
                     {
-                        HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);
                         StringBuffer url = request.getRequestURL();
-                        sb = sb.insert(0, url);
-                        sb = new StringBuilder(sb.toString().replaceAll("jwcordova", "").replaceAll("jwajax", ""));
+                        String realUrl = url.substring(0, url.lastIndexOf("/"));
+                        realUrl += "/";
+                        sb = sb.insert(0, realUrl);
+                        sb = new StringBuilder(sb.toString());
                     }
                 }
-                catch (NoClassDefFoundError | Exception e)
-                {
-
-                }
+            }
+            catch (com.google.inject.ProvisionException e)
+            {
+                //Intentional
+            }
+            catch (NoClassDefFoundError | Exception e)
+            {
+                LOG.log(Level.WARNING, "Error in getting url to append to the web reference", e);
             }
 
             return sb.toString();

@@ -14,35 +14,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.annotations;
+package za.co.mmagon.jwebswing.base;
 
-import java.lang.annotation.*;
+import org.junit.Test;
+import za.co.mmagon.jwebswing.base.html.Div;
 
 /**
  *
  * @author Marc Magon
- * @since 05 Apr 2017
  */
-@Target(
-        {
-            ElementType.TYPE, ElementType.TYPE_USE
-        })
-@Retention(RetentionPolicy.RUNTIME)
-@Inherited
-public @interface PageConfiguration
+public class ComponentHTMLAttributeBaseTest
 {
 
-    /**
-     * Specifies the URL that this page serves
-     *
-     * @return
-     */
-    public String url() default "/";
+    public ComponentHTMLAttributeBaseTest()
+    {
+    }
 
-    /**
-     * Specifies the type this page serves (best to leave it alone - or only use one page for error types etc)
-     *
-     * @return
-     */
-    public PageTypes type() default PageTypes.Default;
+    @Test
+    public void testCustomAttributesKeywords()
+    {
+        Div d = new Div();
+        d.addAttribute("thisIsKeyword", null);
+        d.addAttribute("uib-dropdown", null);
+        System.out.println(d.toString(true));
+    }
+
 }

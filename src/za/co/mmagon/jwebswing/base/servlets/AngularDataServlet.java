@@ -27,9 +27,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.annotations.DataCallInterception;
+import za.co.mmagon.jwebswing.annotations.SiteInterception;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
-import za.co.mmagon.jwebswing.base.ajax.AngularJsonVariable;
+import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
@@ -63,9 +65,11 @@ public class AngularDataServlet extends JWDefaultServlet
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        LOG.log(Level.CONFIG, "[SessionID]-[{0}];[Connection]-[Data Call Connection Established]", request.getSession().getId());
         String componentId = request.getParameter("o");
         StringBuilder jb = new StringBuilder();
         String line;
+
         try
         {
             BufferedReader reader = request.getReader();
@@ -77,6 +81,7 @@ public class AngularDataServlet extends JWDefaultServlet
         catch (IOException e)
         {
         }
+
         if (jb.length() > 0)
         {
             AngularDataServletInitData initData = JavaScriptPart.From(jb.toString(), AngularDataServletInitData.class);
@@ -86,60 +91,63 @@ public class AngularDataServlet extends JWDefaultServlet
         }
 
         Date startDate = new Date();
-        AjaxCall ajaxCall = new AjaxCall();
+        AjaxCall ajaxCall = GuiceContext.inject().getInstance(AjaxCall.class);
         ajaxCall.setComponentId(componentId);
         ajaxCall.setDatetime(new Date());
         ajaxCall.setEventType(EventTypes.data);
         if (componentId == null || componentId.isEmpty())
         {
-            LOG.log(Level.FINE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Security]-[Component ID Incorrect]");
+            LOG.log(Level.FINE, "[SessionID]-[{0}];[Security]-[Component ID Incorrect]", request.getSession().getId());
         }
 
         Page page = GuiceContext.inject().getInstance(Page.class);
-
-        ComponentHierarchyBase triggerComponent = page.getComponentCache().get(componentId);
+        ComponentHierarchyBase triggerComponent;
+        if (ajaxCall.getComponentId().equalsIgnoreCase("body"))
+        {
+            triggerComponent = page.getBody();
+        }
+        else
+        {
+            triggerComponent = page.getComponentCache().get(componentId);
+        }
         ajaxCall.setComponent(triggerComponent);
         if (triggerComponent == null)
         {
-            LOG.log(Level.SEVERE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Security]-[Invalid Component Specified]");
+            LOG.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Invalid Component Specified]", request.getSession().getId());
             throw new ServletException("Component could not be found to process any events.");
         }
-        Map<String, JavaScriptPart> angs = ajaxCall.getComponent().getAngularObjectsAll();
-        ArrayList<AngularJsonVariable> returnables = new ArrayList<>();
-        angs.entrySet().stream().forEach(entry
-                ->
+        AjaxResponse ajaxResponse = GuiceContext.inject().getInstance(AjaxResponse.class);
+
+        if (!GuiceContext.isBuildingInjector())
         {
-            String key = entry.getKey();
-            JavaScriptPart value = entry.getValue();
-            returnables.add(new AngularJsonVariable(key, value));
+            intercept();
+        }
+
+        GuiceContext.inject().getInstance(Page.class).onConnect(ajaxCall, ajaxResponse);
+
+        page.buildComponentHierarchy();
+        ajaxResponse.getComponents().forEach(component ->
+        {
+            component.preConfigure();
+            for (Iterator it = component.getChildren().iterator(); it.hasNext();)
+            {
+                ComponentHierarchyBase object = (ComponentHierarchyBase) it.next();
+                page.buildComponentHierarchy(object, page.getComponentCache());
+            }
         });
 
-        JavaScriptPart respJson = new JavaScriptPart()
-        {
-            private static final long serialVersionUID = 1L;
-            ArrayList<AngularJsonVariable> variables;
-
-            public ArrayList<AngularJsonVariable> getVariables()
-            {
-                if (variables == null)
-                {
-                    variables = returnables;
-                }
-                return variables;
-            }
-
-            public void setVariables(ArrayList<AngularJsonVariable> variables)
-            {
-                this.variables = variables;
-            }
-
-            @Override
-            public String toString()
-            {
-                getVariables();
-                return super.toString();
-            }
-        };
+        /*
+         * Map<String, JavaScriptPart> angs = ajaxCall.getComponent().getAngularObjectsAll(); ArrayList<AngularJsonVariable> returnables = new ArrayList<>(); angs.entrySet().stream().forEach(entry ->
+         * { String key = entry.getKey(); JavaScriptPart value = entry.getValue(); returnables.add(new AngularJsonVariable(key, value)); });
+         *
+         * JavaScriptPart respJson = new JavaScriptPart() { private static final long serialVersionUID = 1L; ArrayList<AngularJsonVariable> variables;
+         *
+         * public ArrayList<AngularJsonVariable> getVariables() { if (variables == null) { variables = returnables; } return variables; }
+         *
+         * public void setVariables(ArrayList<AngularJsonVariable> variables) { this.variables = variables; }
+         *
+         * @Override public String toString() { getVariables(); return super.toString(); } };
+         */
         Date endDate = new Date();
         try (PrintWriter out = response.getWriter())
         {
@@ -150,10 +158,20 @@ public class AngularDataServlet extends JWDefaultServlet
             response.setHeader("Access-Control-Allow-Methods", "POST");
             response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
 
-            response.getWriter().write(respJson.toString());
+            response.getWriter().write(ajaxResponse.toString());
             Date dataTransferDate = new Date();
-            LOG.log(Level.FINE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + respJson.toString().length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
+            LOG.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
+            {
+                request.getSession().getId(), endDate.getTime() - startDate.getTime(), ajaxResponse.toString().length(), dataTransferDate.getTime() - startDate.getTime()
+            });
         }
+    }
+
+    @SiteInterception
+    @DataCallInterception
+    protected void intercept()
+    {
+
     }
 
     /**

@@ -25,24 +25,11 @@ import java.lang.annotation.*;
  */
 @Target(
         {
-            ElementType.TYPE, ElementType.TYPE_USE
+            ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
         })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
-public @interface PageConfiguration
+public @interface DataCallInterception
 {
 
-    /**
-     * Specifies the URL that this page serves
-     *
-     * @return
-     */
-    public String url() default "/";
-
-    /**
-     * Specifies the type this page serves (best to leave it alone - or only use one page for error types etc)
-     *
-     * @return
-     */
-    public PageTypes type() default PageTypes.Default;
 }

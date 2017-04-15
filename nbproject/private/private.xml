@@ -64,30 +64,6 @@
         <group name="JWebSwingStaticPage"/>
         <group name="JWebswing Static"/>
         <group name="JWebSwing"/>
-        <group name="JWebSwing Website">
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/plugins/jquery/JQueryPageConfigurator.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/beforeclose/BeforeCloseAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/activate/ActivateAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/beforeactivate/BeforeActivateAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/PageOptions.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/angular/AngularPageConfigurator.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/buttonclick/ButtonClickAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/plugins/ajaxenabler/JQueryAjaxEnablerReference.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/blur/BlurAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/plugins/jquery/JQueryReferencePool.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/plugins/jquery/JQueryReference.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/html/Body.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/Event.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/plugins/atmosphere/AtmosphereReferencePool.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/plugins/jquery/JQueryReferenceV2.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/anewevents/EventAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/plugins/atmosphere/AtmosphereReference.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/plugins/jquery/JQueryMigrateReference.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/beforestop/BeforeStopAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/beforeload/BeforeLoadAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/cancel/CancelAdapter.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/plugins/ajaxenabler/AjaxEnablerReferencePool.java</file>
-        </group>
         <group name="JWebSwing Build">
             <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/base/html/BodyTest.java</file>
             <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/WebReferenceTest.java</file>
@@ -101,10 +77,7 @@
         <group name="Dance Culture Studios">
             <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/html/Body.java</file>
         </group>
-        <group name="JWebSwing Plugins">
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/activate/ActivateDirective.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/annotations/SiteIntercepters.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/html/Body.java</file>
-        </group>
+        <group name="JWebSwing Website"/>
+        <group name="JWebSwing Plugins"/>
     </open-files>
 </project-private>

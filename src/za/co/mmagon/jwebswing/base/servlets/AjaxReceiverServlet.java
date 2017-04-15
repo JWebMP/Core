@@ -26,8 +26,9 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import za.co.mmagon.jwebswing.Event;
-import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.*;
+import za.co.mmagon.jwebswing.annotations.AjaxCallInterception;
+import za.co.mmagon.jwebswing.annotations.SiteInterception;
 import za.co.mmagon.jwebswing.base.ComponentEventBase;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ajax.*;
@@ -54,6 +55,13 @@ public class AjaxReceiverServlet extends JWDefaultServlet
     {
     }
 
+    @SiteInterception
+    @AjaxCallInterception
+    protected void intercept()
+    {
+
+    }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
@@ -74,12 +82,8 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 
         try
         {
-            String json;
-            /*
-             * try ( BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()))) { json = ""; json += br.readLine(); }
-             */
-
             AjaxCall ajaxCall = JavaScriptPart.From(request.getInputStream(), AjaxCall.class);
+            GuiceContext.inject().getInstance(JWebSwingSiteBinder.class).setAjaxCall(ajaxCall);
             if (ajaxCall.getComponentId() == null)
             {
                 LOG.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Component ID Not Found]", request.getSession().getId());
@@ -94,12 +98,11 @@ public class AjaxReceiverServlet extends JWDefaultServlet
             }
 
             Page page = GuiceContext.inject().getInstance(Page.class);
-            page.preConfigure();
-
             if (page == null)
             {
                 throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
             }
+            page.preConfigure();
 
             ComponentHierarchyBase triggerComponent;
             page.buildComponentHierarchy();
@@ -145,7 +148,12 @@ public class AjaxReceiverServlet extends JWDefaultServlet
             Date ajaxCallObjectCreated = new Date();
             ArrayList<ComponentEventBase> events = getEvents(ajaxCall, ajaxCall.getEventTypeFrom());
 
-            AjaxResponse ajaxResponse = new AjaxResponse();
+            AjaxResponse ajaxResponse = GuiceContext.inject().getInstance(AjaxResponse.class);
+
+            if (!GuiceContext.isBuildingInjector())
+            {
+                intercept();
+            }
 
             for (Iterator<ComponentEventBase> iterator = events.iterator(); iterator.hasNext();)
             {
@@ -153,7 +161,7 @@ public class AjaxReceiverServlet extends JWDefaultServlet
                 event.fireEvent(ajaxCall, ajaxResponse);
             }
 
-            fireTime = ajaxCallObjectCreated.getTime() - new Date().getTime();
+            fireTime = new Date().getTime() - ajaxCallObjectCreated.getTime();
             startDate = new Date();
             output = ajaxResponse.toString();
             page.buildComponentHierarchy();

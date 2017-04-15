@@ -18,8 +18,8 @@ package za.co.mmagon.jwebswing;
 
 import com.armineasy.injection.GuiceContext;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.List;
 import java.util.*;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
@@ -27,8 +27,9 @@ import net.sf.uadetector.*;
 import za.co.mmagon.FileTemplates;
 import za.co.mmagon.SessionHelper;
 import za.co.mmagon.jwebswing.annotations.PageConfiguration;
-import za.co.mmagon.jwebswing.annotations.SiteInterception;
 import za.co.mmagon.jwebswing.base.*;
+import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
+import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.client.InternetExplorerCompatibilityMode;
 import za.co.mmagon.jwebswing.base.html.*;
@@ -42,7 +43,6 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.DevelopmentEnvironments
 import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 import za.co.mmagon.jwebswing.base.servlets.interfaces.IPage;
 import za.co.mmagon.jwebswing.generics.WebReference;
-import za.co.mmagon.jwebswing.plugins.PluginInformation;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -113,7 +113,7 @@ public class Page extends Html implements IPage
         {
             getPageFields().setGenerator("https://sourceforge.net/projects/jwebswing/");
         }
-        intercept();
+
     }
 
     /**
@@ -149,18 +149,27 @@ public class Page extends Html implements IPage
         this(null, null, null);
     }
 
-    @SiteInterception
-    protected void intercept()
-    {
-
-    }
-
     /**
      * Initializes the page
      */
     public void initialize()
     {
 
+    }
+
+    /**
+     * Gets called when the client makes a valid request.
+     * <p>
+     * Local Storage, Modernizr and Session Storage are available at the time of this call
+     *
+     * @param call
+     * @param response
+     *
+     * @return
+     */
+    public AjaxResponse onConnect(AjaxCall call, AjaxResponse response)
+    {
+        return response;
     }
 
     /**
@@ -251,15 +260,11 @@ public class Page extends Html implements IPage
         {
             log.log(Level.FINE, "Looking for plugins....");
 
-            Set<Class<?>> plugins = GuiceContext.reflect().getTypesAnnotatedWith(PluginInformation.class);
-            for (Class plugin : plugins)
-            {
-                PluginInformation pi = (PluginInformation) plugin.getAnnotation(PluginInformation.class);
-                //log.log(Level.INFO, "Plugin Found - " + plugin);
-                log.log(Level.FINE, "Plugin Found - " + pi.pluginName() + " - version - " + pi.pluginVersion());
-            }
-            log.log(Level.FINE, "Plugins Completed");
-
+            /*
+             * Set<Class<?>> plugins = GuiceContext.reflect().getTypesAnnotatedWith(PluginInformation.class); for (Class plugin : plugins) { PluginInformation pi = (PluginInformation)
+             * plugin.getAnnotation(PluginInformation.class); log.log(Level.FINE, "Plugin Found - {0} - version - {1}", new Object[] { pi.pluginName(), pi.pluginVersion() }); } log.log(Level.FINE,
+             * "Plugins Completed");
+             */
             GuiceContext.reflect().getSubTypesOf(PageConfigurator.class).stream().parallel().forEachOrdered(next ->
             {
                 log.log(Level.FINE, "Running configuration : [{0}]", next.getSimpleName());
@@ -370,7 +375,7 @@ public class Page extends Html implements IPage
     public void buildComponentHierarchy()
     {
         //getComponentCache().clear();
-        getComponentCache().put(getBody().getID(), getBody());
+        //getComponentCache().put(getBody().getID(), getBody());
         buildComponentHierarchy(getBody(), getComponentCache());
     }
 
@@ -386,7 +391,10 @@ public class Page extends Html implements IPage
                 ->
         {
             ComponentHierarchyBase c = (ComponentHierarchyBase) child;
-            addToMap.put(c.getID(), c);
+            if (!c.getEvents().isEmpty() || !c.getFeatures().isEmpty())
+            {
+                addToMap.put(c.getID(), c);
+            }
             return child;
         }).forEach(child
                 ->

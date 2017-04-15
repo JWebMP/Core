@@ -1,5 +1,9 @@
 /* global JW_APP_NAME, BootstrapDialog, Pace, JW_SCOPE_INSERTIONS, jw */
+
+jw.afterInit = function () {};
+
 JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, $timeout) {
+    jw.angularLoading = true;
     /**
      * Loads up the initial variables into angular
      * @returns {undefined}
@@ -49,8 +53,11 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
                 'json': true
             },
             success: function (result, status, xhr) {
-                jw.actions.loadData(result, $scope, $parse, $timeout);
+                jw.actions.processResponse(result, $scope, $parse, $timeout, $compile);
+                //jw.actions.loadData(result, $scope, $parse, $timeout);
                 jw.isLoading = false;
+                if (jw.afterInit)
+                    jw.afterInit();
             },
             fail: function (xhr, textStatus, errorThrown) {
                 var err = eval("(" + xhr.responseText + ")");
@@ -69,6 +76,8 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
                     });
                 }
                 jw.isLoading = false;
+                if (jw.afterInit)
+                    jw.afterInit();
             },
             complete: function (jqXHR, textStatus) {
                 try
@@ -76,17 +85,19 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
                     if (window.Pace)
                     {
                         window.Pace.stop();
-                        jw.isLoading = false;
                     }
                 } catch (e)
                 {
+                } finally
+                {
+                    jw.isLoading = false;
+                    jw.angularLoading = false;
                 }
             }
         });
     };
 
     $scope._init();
-
     /**
      * Performs a post send to the server
      * @param {type} $event
@@ -235,8 +246,6 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
         return newEvent;
     };
     //JW_SCOPE_INSERTIONS
-
-
 
     jw.pageLoading = false;
 }); //end of controller

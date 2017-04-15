@@ -817,6 +817,18 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
         return null;
     }
 
+    public <T extends ComponentHierarchyBase> T findChild(Class<T> childType)
+    {
+        for (ComponentHierarchyBase componentHierarchyBase : getChildren())
+        {
+            if (componentHierarchyBase.getClass().equals(childType))
+            {
+                return (T) componentHierarchyBase;
+            }
+        }
+        return null;
+    }
+
     /**
      * Iterates through all the children checking if a boolean property has been placed, Returns the first instance of true or always false
      *

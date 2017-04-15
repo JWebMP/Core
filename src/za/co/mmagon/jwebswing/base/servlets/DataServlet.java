@@ -29,6 +29,8 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.annotations.DataCallInterception;
+import za.co.mmagon.jwebswing.annotations.SiteInterception;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
 import za.co.mmagon.jwebswing.base.servlets.interfaces.IDataComponent;
@@ -72,17 +74,17 @@ public class DataServlet extends JWDefaultServlet
         Date startDate = new Date();
         StringBuilder responseString = new StringBuilder();
         HttpSession session = GuiceContext.inject().getInstance(HttpSession.class);
-
-        log.log(Level.INFO, "[SessionID]-[" + session.getId() + "];");
-
         Page page = GuiceContext.inject().getInstance(Page.class);
-
         if (page == null)
         {
             throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
         }
 
         String componentID = request.getParameter("component");
+        log.log(Level.CONFIG, "[SessionID]-[{0}];[DataFetch];[ComponentID]-[{1}]", new Object[]
+        {
+            session.getId(), componentID
+        });
         ComponentHierarchyBase hb = page.getComponentCache().get(componentID);
         if (hb == null)
         {
@@ -93,6 +95,11 @@ public class DataServlet extends JWDefaultServlet
         String searchString = (String) request.getSession().getAttribute("search");
         Integer totalCount = (Integer) request.getSession().getAttribute("count");
         String lastItemID = (String) request.getSession().getAttribute("lastID");
+
+        if (!GuiceContext.isBuildingInjector())
+        {
+            intercept();
+        }
 
         if (IDataComponent.class.isAssignableFrom(hb.getClass()))
         {
@@ -120,7 +127,10 @@ public class DataServlet extends JWDefaultServlet
 
             out.println(responseString);
             Date dataTransferDate = new Date();
-            log.log(Level.FINE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + responseString.length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
+            log.log(Level.CONFIG, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
+            {
+                request.getSession().getId(), endDate.getTime() - startDate.getTime(), responseString.length(), dataTransferDate.getTime() - startDate.getTime()
+            });
         }
     }
 
@@ -144,11 +154,18 @@ public class DataServlet extends JWDefaultServlet
         }
         catch (IOException | ServletException e)
         {
-            log.log(Level.SEVERE, "Do Post in CSS Servlet", e);
+            log.log(Level.SEVERE, "Do Post in Data Servlet", e);
         }
         catch (MissingComponentException ex)
         {
             Logger.getLogger(DataServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @SiteInterception
+    @DataCallInterception
+    protected void intercept()
+    {
+
     }
 }

@@ -18,6 +18,7 @@ package za.co.mmagon.jwebswing.base.dto;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.HashMap;
+import java.util.Map;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
@@ -63,7 +64,7 @@ public class RegularExpressionsDTO extends JavaScriptPart
     /**
      * Default regular expressions
      */
-    private HashMap<String, Object> regularExpressions;
+    private Map<String, Object> regularExpressions;
 
     /**
      * Constructs a new instance of the regular expression dto
@@ -106,7 +107,7 @@ public class RegularExpressionsDTO extends JavaScriptPart
      * @return
      */
     @JsonValue
-    public HashMap<String, Object> getRegularExpressions()
+    public Map<String, Object> getRegularExpressions()
     {
         if (regularExpressions == null)
         {
@@ -120,7 +121,7 @@ public class RegularExpressionsDTO extends JavaScriptPart
      *
      * @param regularExpressions
      */
-    public void setRegularExpressions(HashMap<String, Object> regularExpressions)
+    public void setRegularExpressions(Map<String, Object> regularExpressions)
     {
         this.regularExpressions = regularExpressions;
     }

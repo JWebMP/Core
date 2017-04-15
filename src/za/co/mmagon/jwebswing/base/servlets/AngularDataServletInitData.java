@@ -25,7 +25,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  * @author Marc Magon
  * @since 05 Apr 2017
  */
-public class AngularDataServletInitData extends JavaScriptPart
+class AngularDataServletInitData extends JavaScriptPart
 {
 
     private static final long serialVersionUID = 1L;

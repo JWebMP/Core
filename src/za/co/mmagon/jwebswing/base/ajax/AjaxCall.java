@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,6 +17,7 @@
 package za.co.mmagon.jwebswing.base.ajax;
 
 import com.fasterxml.jackson.annotation.*;
+import com.google.inject.servlet.RequestScoped;
 import java.util.*;
 import javax.servlet.ServletException;
 import za.co.mmagon.jwebswing.Page;
@@ -33,6 +34,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTy
  */
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
+@RequestScoped
 public class AjaxCall extends JavaScriptPart
 {
 

@@ -132,7 +132,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
      * <p>
      * @return An ArrayList of features
      */
-    protected List<F> getFeatures()
+    public List<F> getFeatures()
     {
         if (features == null)
         {

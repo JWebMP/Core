@@ -30,8 +30,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import net.sf.uadetector.ReadableUserAgent;
 import net.sf.uadetector.UserAgentStringParser;
-import net.sf.uadetector.service.UADetectorServiceFactory;
 import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.annotations.SiteInterception;
 import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
 import za.co.mmagon.jwebswing.base.client.Browsers;
 import za.co.mmagon.jwebswing.base.html.Body;
@@ -48,7 +48,7 @@ import za.co.mmagon.logger.LogFactory;
  * @since 2012/10/09
  */
 @Singleton
-public final class JWebSwingServlet extends JWDefaultServlet
+public class JWebSwingServlet extends JWDefaultServlet
 {
 
     /**
@@ -64,11 +64,6 @@ public final class JWebSwingServlet extends JWDefaultServlet
      * Version 1
      */
     private static final long serialVersionUID = 1L;
-
-    /**
-     * The User Agent Parser
-     */
-    private static final UserAgentStringParser userAgentParser = UADetectorServiceFactory.getResourceModuleParser();
 
     /**
      * Constructs a new JWebSwing Servlet that is not session aware
@@ -110,7 +105,7 @@ public final class JWebSwingServlet extends JWDefaultServlet
         }
         if (request.getSession().isNew())
         {
-            SESSION_LOG.log(Level.FINE, "[SessionID]-[{0}];[Name]-[User Login];[Action]-[Session Added];", request.getSession().getId());
+            SESSION_LOG.log(Level.FINE, "[SessionID]-[{0}];[Name]-[User Login];[Action]-[Session Page Added];", request.getSession().getId());
         }
     }
 
@@ -122,7 +117,7 @@ public final class JWebSwingServlet extends JWDefaultServlet
     private void readBrowserInformation(HttpServletRequest request)
     {
         String headerInformation = request.getHeader("User-Agent");
-        ReadableUserAgent agent = userAgentParser.parse(headerInformation);
+        ReadableUserAgent agent = GuiceContext.inject().getInstance(UserAgentStringParser.class).parse(headerInformation);
         getPageFromGuice().setUserAgent(agent);
         Browsers b;
         if (agent.getVersionNumber().getMajor().isEmpty() && agent.getVersionNumber().getMinor().isEmpty())
@@ -134,6 +129,7 @@ public final class JWebSwingServlet extends JWDefaultServlet
             b = Browsers.getBrowserFromNameAndVersion(agent.getName(), Double.parseDouble(agent.getVersionNumber().getMajor() + "." + agent.getVersionNumber().getMinor()));
         }
         getPageFromGuice().setBrowser(b);
+
         if (agent.getVersionNumber().getMajor() == null || agent.getVersionNumber().getMajor().isEmpty())
         {
             LOG.log(Level.INFO, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}];[Operating System]-[{3}];[Device Category]-[{4}];[Device]-[{5}];[CSS]-[{6}];[HTML]-[{7}];", new Object[]
@@ -166,6 +162,10 @@ public final class JWebSwingServlet extends JWDefaultServlet
         {
             Date startDate = new Date();
             StringBuilder output;
+            if (!GuiceContext.isBuildingInjector())
+            {
+                intercept();
+            }
             Page page = getPageFromGuice();
             if (page.getOptions().isGoogleMapsJSApi())
             {
@@ -202,6 +202,12 @@ public final class JWebSwingServlet extends JWDefaultServlet
                 LOG.log(Level.SEVERE, "Can't send page", e);
             }
         }
+    }
+
+    @SiteInterception
+    protected void intercept()
+    {
+
     }
 
     /**
@@ -395,14 +401,13 @@ public final class JWebSwingServlet extends JWDefaultServlet
         }
     }
 
-    /**
-     * Returns if the user is logged in or not
-     *
-     * @return
-     */
-    public boolean isUserLoggedIn()
+    @Override
+    public void destroy()
     {
-        return false;
+        LOG.log(Level.INFO, "Destroying Servlet JWebSwing Servlet and all Static Objects");
+        GuiceContext.inject().getInstance(UserAgentStringParser.class).shutdown();
+        GuiceContext.setReflections(null);
+        LOG.log(Level.INFO, "User Agent Parser Shutdown");
+        super.destroy();
     }
-
 }

@@ -231,8 +231,9 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
         {
             String key = entry.getKey();
             String value = entry.getValue();
+            boolean isKeyword = value == null || value.trim().isEmpty();
 
-            Pair p = new Pair(key, (value == null || value.isEmpty()));
+            Pair p = new Pair(key, isKeyword);
             attributeMap.put(p, value);
         }
 

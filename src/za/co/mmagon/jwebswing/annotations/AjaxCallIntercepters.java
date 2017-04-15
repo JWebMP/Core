@@ -20,7 +20,7 @@ import com.armineasy.injection.GuiceContext;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.aopalliance.intercept.MethodInvocation;
-import za.co.mmagon.jwebswing.interception.SiteCallInterceptor;
+import za.co.mmagon.jwebswing.interception.AjaxCallIntercepter;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -28,15 +28,15 @@ import za.co.mmagon.logger.LogFactory;
  * @author Marc Magon
  * @since 05 Apr 2017
  */
-public class SiteIntercepters implements org.aopalliance.intercept.MethodInterceptor
+public class AjaxCallIntercepters implements org.aopalliance.intercept.MethodInterceptor
 {
 
-    private static final Logger LOG = LogFactory.getLog(SiteIntercepters.class.getName());
+    private static final Logger LOG = LogFactory.getLog(AjaxCallIntercepters.class.getName());
 
     /*
      * Constructs a new SiteIntercepters
      */
-    public SiteIntercepters()
+    public AjaxCallIntercepters()
     {
         //Nothing needed
     }
@@ -44,15 +44,14 @@ public class SiteIntercepters implements org.aopalliance.intercept.MethodInterce
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable
     {
-
-        LOG.fine("Intercepting Site Call");
-        GuiceContext.reflect().getSubTypesOf(SiteCallInterceptor.class).forEach(siClass ->
+        LOG.fine("Intercepting Ajax Call");
+        GuiceContext.reflect().getSubTypesOf(AjaxCallIntercepter.class).forEach(siClass ->
         {
-            SiteCallInterceptor si = GuiceContext.inject().getInstance(siClass);
+            AjaxCallIntercepter si = GuiceContext.inject().getInstance(siClass);
             LOG.log(Level.FINE, "Interception Occuring : {0}", siClass.getCanonicalName());
             si.intercept();
         });
-        LOG.fine("Interception of Site Call Complete");
+        LOG.fine("Interception for Ajax Call Complete");
         return invocation.proceed();
     }
 

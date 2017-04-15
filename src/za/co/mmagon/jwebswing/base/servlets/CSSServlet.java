@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -59,12 +59,12 @@ public class CSSServlet extends JWDefaultServlet
         StringBuilder scripts = new StringBuilder();
 
         Page page = GuiceContext.inject().getInstance(Page.class);
-        
+
         if (page == null)
         {
             throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
         }
-        
+
         StringBuilder css = page.getBody().renderCss(0);
         scripts.append(css);
 
@@ -76,10 +76,14 @@ public class CSSServlet extends JWDefaultServlet
             response.setHeader("Access-Control-Allow-Credentials", "true");
             response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
             response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
-            
+
             out.println(scripts);
             Date dataTransferDate = new Date();
-            LOG.log(Level.FINE,"[SessionID]-[" + request.getSession().getId() + "];" + "[Render Time]-[" + (endDate.getTime() - startDate.getTime()) + "];[Data Size]-[" + scripts.length() + "];[Transer Time]=[" + (dataTransferDate.getTime() - startDate.getTime()) + "]");
+            LOG.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]",
+                    new Object[]
+                    {
+                        request.getSession().getId(), endDate.getTime() - startDate.getTime(), scripts.length(), dataTransferDate.getTime() - startDate.getTime()
+                    });
         }
     }
 

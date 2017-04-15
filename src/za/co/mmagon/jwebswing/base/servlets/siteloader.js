@@ -3,6 +3,8 @@
 var jw = {isLoading: false, pageLoading: true};
 jw.siteAddress = 'SITEADDRESSINSERT';
 
+jw.angularLoading = false;
+
 jw.mobile = {};
 jw.actions = {};
 
@@ -158,7 +160,22 @@ jw.actions.processJsScripts = function (result)
             jw.actions.loadScript(item);
         });
     }
+    if (result.events)
+    {
+        $.each(result.events, function (i, item)
+        {
+            jw.actions.loadScript(item);
+        });
+    }
+    if (result.features)
+    {
+        $.each(result.features, function (i, item)
+        {
+            jw.actions.loadScript(item);
+        });
+    }
 };
+
 jw.actions.loadScript = function (item, tries)
 {
     if (!tries)
@@ -232,7 +249,6 @@ jw.actions.processReactions = function (result) {
         {
             setTimeout('location.reload();', timeout);
         }
-
     });
 };
 

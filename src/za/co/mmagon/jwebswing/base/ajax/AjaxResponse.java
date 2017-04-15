@@ -17,14 +17,15 @@
 package za.co.mmagon.jwebswing.base.ajax;
 
 import com.fasterxml.jackson.annotation.*;
-import java.util.ArrayList;
-import java.util.Iterator;
+import com.google.inject.servlet.RequestScoped;
+import java.util.*;
+import java.util.Map.Entry;
 import za.co.mmagon.jwebswing.Event;
+import za.co.mmagon.jwebswing.Feature;
 import za.co.mmagon.jwebswing.base.*;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
 
 /**
  * A response sent back to the client
@@ -32,6 +33,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptPartType;
  * @author GedMarc
  * @since 27 Apr 2016
  */
+@RequestScoped
 public class AjaxResponse extends JavaScriptPart
 {
 
@@ -59,16 +61,47 @@ public class AjaxResponse extends JavaScriptPart
      */
     @JsonIgnore
     private ArrayList<ComponentHierarchyBase> components;
-
     /**
-     * Format as JSON
-     *
-     * @return
+     * An additional list of events that can fire, not stored in memory
      */
-    @Override
-    public JavascriptPartType getJavascriptType()
+    @JsonIgnore
+    private List<Event> events;
+    /**
+     * An additional list of features that can fire
+     */
+    @JsonIgnore
+    private List<Feature> features;
+    /**
+     * A list of local storage items and their keys
+     */
+    private Map<String, JavaScriptPart> localStorage;
+    /**
+     * A list of local storage items and their keys
+     */
+    private Map<String, JavaScriptPart> sessionStorage;
+
+    @JsonProperty("features")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    protected List<String> getFeatureQueries()
     {
-        return JavascriptPartType.JSON;
+        ArrayList<String> list = new ArrayList<>();
+        getFeatures().forEach(feature ->
+        {
+            list.add(feature.renderJavascript().toString());
+        });
+        return list;
+    }
+
+    @JsonProperty("events")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    protected List<String> getEventQueries()
+    {
+        ArrayList<String> list = new ArrayList<>();
+        getEvents().forEach(event ->
+        {
+            list.add(event.renderJavascript().toString());
+        });
+        return list;
     }
 
     /**
@@ -292,7 +325,7 @@ public class AjaxResponse extends JavaScriptPart
      *
      * @return
      */
-    public StringBuilder getCssRenders(ComponentStyleBase component)
+    protected StringBuilder getCssRenders(ComponentStyleBase component)
     {
         StringBuilder cssRender = new StringBuilder();
         cssRender.append(component.renderCss(0).toString());
@@ -306,7 +339,7 @@ public class AjaxResponse extends JavaScriptPart
      *
      * @return
      */
-    public ArrayList<String> getJsRenders(ComponentHierarchyBase component)
+    protected ArrayList<String> getJsRenders(ComponentHierarchyBase component)
     {
         ArrayList<String> jsRenders = new ArrayList<>();
         jsRenders.add(component.renderJavascriptAll().toString());
@@ -410,6 +443,70 @@ public class AjaxResponse extends JavaScriptPart
     }
 
     /**
+     * Gets events assigned to the response
+     *
+     * @return
+     */
+    public List<Event> getEvents()
+    {
+        if (events == null)
+        {
+            events = new ArrayList<>();
+        }
+        return events;
+    }
+
+    /**
+     * Sets events assigned to the response
+     *
+     * @param events
+     */
+    public void setEvents(List<Event> events)
+    {
+        this.events = events;
+    }
+
+    /**
+     * Gets features assigned to the response
+     *
+     * @return
+     */
+    public List<Feature> getFeatures()
+    {
+        if (features == null)
+        {
+            features = new ArrayList<>();
+        }
+        return features;
+    }
+
+    /**
+     * Sets features assigned to the response
+     *
+     * @param features
+     */
+    public void setFeatures(List<Feature> features)
+    {
+        this.features = features;
+    }
+
+    @Override
+    public String toString()
+    {
+        for (ComponentHierarchyBase component : getComponents())
+        {
+            for (Iterator it = component.getAngularObjectsAll().entrySet().iterator(); it.hasNext();)
+            {
+                Entry<String, JavaScriptPart> object = (Entry<String, JavaScriptPart>) it.next();
+                String key = object.getKey();
+                JavaScriptPart value = object.getValue();
+                addDto(key, value);
+            }
+        }
+        return super.toString();
+    }
+
+    /**
      * A JSON Class for component updates
      */
     public class ComponentUpdates extends JavaScriptPart
@@ -454,4 +551,53 @@ public class AjaxResponse extends JavaScriptPart
             return replaceID;
         }
     }
+
+    /**
+     * Returns the map going back for the local storage
+     *
+     * @return
+     */
+    public Map<String, JavaScriptPart> getLocalStorage()
+    {
+        if (localStorage == null)
+        {
+            localStorage = new HashMap<>();
+        }
+        return localStorage;
+    }
+
+    /**
+     * Sets the map for the local storage going back
+     *
+     * @param localStorage
+     */
+    public void setLocalStorage(Map<String, JavaScriptPart> localStorage)
+    {
+        this.localStorage = localStorage;
+    }
+
+    /**
+     * Gets the local session going back
+     *
+     * @return
+     */
+    public Map<String, JavaScriptPart> getSessionStorage()
+    {
+        if (sessionStorage == null)
+        {
+            sessionStorage = new HashMap<>();
+        }
+        return sessionStorage;
+    }
+
+    /**
+     * The session storage going back
+     *
+     * @param sessionStorage
+     */
+    public void setSessionStorage(Map<String, JavaScriptPart> sessionStorage)
+    {
+        this.sessionStorage = sessionStorage;
+    }
+
 }

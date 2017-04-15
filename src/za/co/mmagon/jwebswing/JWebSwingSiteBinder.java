@@ -21,17 +21,24 @@ import com.armineasy.injection.abstractions.GuiceSiteInjectorModule;
 import com.armineasy.injection.interfaces.GuiceSiteBinder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.name.Names;
+import com.google.inject.servlet.RequestScoped;
+import com.google.inject.servlet.SessionScoped;
 import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.logging.Level;
 import javax.servlet.http.HttpSession;
+import net.sf.uadetector.UserAgentStringParser;
+import net.sf.uadetector.service.UADetectorServiceFactory;
 import org.reflections.Reflections;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.SessionHelper;
 import za.co.mmagon.jwebswing.annotations.*;
 import za.co.mmagon.jwebswing.base.ComponentBase;
+import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
+import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.servlets.*;
 import za.co.mmagon.jwebswing.components.modernizr.ModernizrDto;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
@@ -46,6 +53,11 @@ import za.co.mmagon.logger.LogFactory;
  */
 public class JWebSwingSiteBinder extends GuiceSiteBinder
 {
+
+    /**
+     * The User Agent Parser
+     */
+    private static final UserAgentStringParser userAgentParser = UADetectorServiceFactory.getResourceModuleParser();
 
     private static final String JavaScriptLocation = "/jwjs";
     private static final String AjaxScriptLocation = "/jwajax";
@@ -66,6 +78,7 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
     }
 
     private Set<Class<?>> pages = GuiceContext.reflect().getTypesAnnotatedWith(PageConfiguration.class);
+    private AjaxCall ajaxCall = new AjaxCall();
 
     @Override
     public void onBind(GuiceSiteInjectorModule module)
@@ -73,8 +86,25 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
         log.log(Level.CONFIG, "Configuring Servlet URL's");
         Reflections reflections = GuiceContext.reflect();
 
+        module.bind(JWebSwingSiteBinder.class).in(SessionScoped.class);
+        module.bind(UserAgentStringParser.class).toProvider(new Provider<UserAgentStringParser>()
+        {
+            @Override
+            public UserAgentStringParser get()
+            {
+                return UADetectorServiceFactory.getResourceModuleParser();
+            }
+        }).in(Singleton.class);
+
+        module.bind(AjaxResponse.class).in(RequestScoped.class);
+        module.bind(AjaxCall.class).toProvider((Provider<AjaxCall>) () -> ajaxCall).in(RequestScoped.class);
+
         module.bindInterceptor$(Matchers.any(), Matchers.annotatedWith(SiteInterception.class),
                 new SiteIntercepters());
+        module.bindInterceptor$(Matchers.any(), Matchers.annotatedWith(AjaxCallInterception.class),
+                new AjaxCallIntercepters());
+        module.bindInterceptor$(Matchers.any(), Matchers.annotatedWith(DataCallInterception.class),
+                new DataCallIntercepters());
 
         //Bind Local Storage
         module.bind(Map.class).annotatedWith(Names.named("LocalStorage")).toProvider((Provider<Map>) () ->
@@ -83,6 +113,10 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
             {
                 HttpSession session = GuiceContext.inject().getInstance(HttpSession.class);
                 Map attributeMap = (Map) session.getAttribute(AngularDataServlet.LocalStorageSessionKey);
+                if (attributeMap == null)
+                {
+                    attributeMap = new HashMap();
+                }
                 return attributeMap;
             }
             return new HashMap();
@@ -94,6 +128,10 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
             {
                 HttpSession session = GuiceContext.inject().getInstance(HttpSession.class);
                 Map attributeMap = (Map) session.getAttribute(AngularDataServlet.SessionStorageSessionKey);
+                if (attributeMap == null)
+                {
+                    attributeMap = new HashMap();
+                }
                 return attributeMap;
             }
             return new HashMap();
@@ -105,6 +143,10 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
             {
                 HttpSession session = GuiceContext.inject().getInstance(HttpSession.class);
                 ModernizrDto attributeMap = (ModernizrDto) session.getAttribute(AngularDataServlet.ModernizrSessionKey);
+                if (attributeMap == null)
+                {
+                    attributeMap = new ModernizrDto();
+                }
                 return attributeMap;
             }
             return new ModernizrDto();
@@ -137,6 +179,7 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
         });
 
         module.bind(ObjectMapper.class).toInstance(JavaScriptPart.getJsonObjectMapper());
+        module.bind(ObjectMapper.class).annotatedWith(Names.named("JSON")).toInstance(JavaScriptPart.getJsonObjectMapper());
 
         pages.stream().filter(page -> !(Modifier.isAbstract(page.getModifiers()))).filter(page -> !(page.equals(Page.class))).forEachOrdered(page ->
         {
@@ -171,6 +214,16 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
         log.log(Level.CONFIG, "Serving JW Default Script at {0}", JWScriptLocation);
 
         log.log(Level.CONFIG, "Finished with configuring URL's");
+    }
+
+    public AjaxCall getAjaxCall()
+    {
+        return ajaxCall;
+    }
+
+    public void setAjaxCall(AjaxCall ajaxCall)
+    {
+        this.ajaxCall = ajaxCall;
     }
 
     /**
