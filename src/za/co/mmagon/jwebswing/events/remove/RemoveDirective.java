@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.events.remove;
 
 import za.co.mmagon.FileTemplates;
-import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
 /**
@@ -33,8 +32,7 @@ public class RemoveDirective extends AngularDirectiveBase
 
     /**
      * Constructs a new right click directive based on the angular object passed in
-     *
-     * @param angular
+     * <p>
      */
     public RemoveDirective()
     {

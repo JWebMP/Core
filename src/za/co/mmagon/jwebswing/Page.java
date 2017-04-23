@@ -22,7 +22,6 @@ import java.util.*;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpSession;
 import net.sf.uadetector.*;
 import za.co.mmagon.FileTemplates;
 import za.co.mmagon.SessionHelper;
@@ -464,8 +463,6 @@ public class Page extends Html implements IPage
      */
     private List<Script> getDynamicScripts()
     {
-        HttpSession session = GuiceContext.inject().getInstance(HttpSession.class);
-
         ArrayList<Script> allScripts = new ArrayList<>();
 
         if (getBody().readChildrenPropertyFirstResult(AngularPageConfigurator.AngularEnabledString, true))

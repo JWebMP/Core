@@ -65,9 +65,9 @@ public class BodyTest extends BaseTestClass
                 + "	<body id=\"body\">\n"
                 + "		<!-- meh -->\n"
                 + "		<!-- Priority [First] Values -->\n"
-                + "		<script src=\"bower_components/jquery-3/dist/jquery.js\" type=\"text/javascript\"></script>\n"
+                + "		<script src=\"bower_components/jquery-3/dist/jquery.min.js\" type=\"text/javascript\"></script>\n"
                 + "		<!-- Priority [Second] Values -->\n"
-                + "		<script src=\"bower_components/jquery-migrate/jquery-migrate.js\" type=\"text/javascript\"></script>\n"
+                + "		<script src=\"bower_components/jquery-migrate/jquery-migrate.min.js\" type=\"text/javascript\"></script>\n"
                 + "	</body>\n"
                 + "</html>", p.toString(true).toString());
     }
@@ -85,7 +85,7 @@ public class BodyTest extends BaseTestClass
                 + "	<body id=\"body\">\n"
                 + "		<!-- meh -->\n"
                 + "		<!-- Priority [First] Values -->\n"
-                + "		<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js\" type=\"text/javascript\"></script>\n"
+                + "		<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js\" type=\"text/javascript\"></script>\n"
                 + "		<!-- Priority [Second] Values -->\n"
                 + "		<script src=\"http://code.jquery.com/jquery-migrate-1.4.1.js\" type=\"text/javascript\"></script>\n"
                 + "	</body>\n"

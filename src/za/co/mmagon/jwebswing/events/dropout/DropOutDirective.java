@@ -32,8 +32,7 @@ public class DropOutDirective extends AngularDirectiveBase
 
     /**
      * Constructs a new right click directive based on the angular object passed in
-     *
-     * @param angular
+     * <p>
      */
     public DropOutDirective()
     {
