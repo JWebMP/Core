@@ -222,7 +222,23 @@ jw.actions.processCssReferences = function (result)
  */
 jw.actions.processHtml = function (result, $scope, $compile) {
     $.each(result.components, function (i, item) {
-        $('#' + item.id).replaceWith((item.html));
+        if (item.insertType === 'Replace')
+        {
+            $('#' + item.id).replaceWith((item.html));
+        } else if (item.insertType === 'Append')
+        {
+            $('#' + item.id).after((item.html));
+        } else if (item.insertType === 'Prepend')
+        {
+            $('#' + item.id).before((item.html));
+        } else if (item.insertType === 'Insert')
+        {
+            $('#' + item.id).prepend((item.html));
+        } else if (item.insertType === 'Insert_Last')
+        {
+            $('#' + item.id).append((item.html));
+        }
+
         if ($compile)
         {
             $compile($('body').find('#' + item.id))($scope);

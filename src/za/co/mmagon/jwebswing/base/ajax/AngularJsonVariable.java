@@ -197,7 +197,7 @@ public class AngularJsonVariable extends JavaScriptPart
      *
      * @throws IOException
      */
-    public <T> T getVariable(Class<T> classType) throws IOException
+    public <T> T as(Class<T> classType) throws IOException
     {
         return JavaScriptPart.From(getVariableText(), classType);
     }

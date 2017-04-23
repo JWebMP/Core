@@ -28,20 +28,20 @@
     "test",
     "tests",
     "src",
-    "composer.json"
+    "composer.json",
+    ".tmp",
+    "templates"
   ],
   "dependencies": {
-    "jquery": "~2.2.3"
+    "jquery": "~2.2.4"
   },
-  "devDependencies": {
-    "normalize-css": "normalize.css#^5.0.0"
-  },
-  "version": "2.6.1",
-  "_release": "2.6.1",
+  "devDependencies": {},
+  "version": "2.7.0",
+  "_release": "2.7.0",
   "_resolution": {
     "type": "version",
-    "tag": "v2.6.1",
-    "commit": "662528114386eb025f3992e41a90c75699bb5926"
+    "tag": "v2.7.0",
+    "commit": "412043318ac2cf5c589154d6042d7ac45fffc0be"
   },
   "_source": "https://github.com/onokumus/metisMenu.git",
   "_target": "^2.5.2",

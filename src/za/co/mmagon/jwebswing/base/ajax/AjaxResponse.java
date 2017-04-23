@@ -44,33 +44,45 @@ public class AjaxResponse extends JavaScriptPart
      */
     @JsonProperty("success")
     private boolean success = true;
+
     /**
      * All angular variable updates to be performed
      */
     @JsonProperty("variables")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private ArrayList<AngularJsonVariable> angularVariables;
+
     /**
      * All relevant client reactions to perform
      */
     @JsonProperty("reactions")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private ArrayList<AjaxResponseReaction> reactions;
+
     /**
      * All components that must be updated
      */
     @JsonIgnore
-    private ArrayList<ComponentHierarchyBase> components;
+    private List<ComponentHierarchyBase> components;
+
+    /**
+     * A complete list of the component update objects
+     */
+    @JsonIgnore
+    private List<AjaxComponentUpdates> componentUpdates;
+
     /**
      * An additional list of events that can fire, not stored in memory
      */
     @JsonIgnore
     private List<Event> events;
+
     /**
      * An additional list of features that can fire
      */
     @JsonIgnore
     private List<Feature> features;
+
     /**
      * A list of local storage items and their keys
      */
@@ -80,6 +92,11 @@ public class AjaxResponse extends JavaScriptPart
      */
     private Map<String, JavaScriptPart> sessionStorage;
 
+    /**
+     * Returns all the feature queries for the given response
+     *
+     * @return
+     */
     @JsonProperty("features")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     protected List<String> getFeatureQueries()
@@ -92,6 +109,11 @@ public class AjaxResponse extends JavaScriptPart
         return list;
     }
 
+    /**
+     * Returns all the event queries from the components
+     *
+     * @return
+     */
     @JsonProperty("events")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     protected List<String> getEventQueries()
@@ -152,10 +174,29 @@ public class AjaxResponse extends JavaScriptPart
      * Adds a component to be returned to the client
      *
      * @param component
+     *
+     * @return
      */
-    public void addComponent(ComponentHierarchyBase component)
+    public AjaxComponentUpdates addComponent(ComponentHierarchyBase component)
     {
         getComponents().add(component);
+        AjaxComponentUpdates newComponent;
+        getComponentUpdates().add(newComponent = new AjaxComponentUpdates(component));
+        return newComponent;
+    }
+
+    /**
+     * Returns a list of the needed component updates
+     *
+     * @return
+     */
+    public List<AjaxComponentUpdates> getComponentUpdates()
+    {
+        if (componentUpdates == null)
+        {
+            componentUpdates = new ArrayList<>();
+        }
+        return componentUpdates;
     }
 
     /**
@@ -339,7 +380,7 @@ public class AjaxResponse extends JavaScriptPart
      *
      * @return
      */
-    protected ArrayList<String> getJsRenders(ComponentHierarchyBase component)
+    protected List<String> getJsRenders(ComponentHierarchyBase component)
     {
         ArrayList<String> jsRenders = new ArrayList<>();
         jsRenders.add(component.renderJavascriptAll().toString());
@@ -351,7 +392,7 @@ public class AjaxResponse extends JavaScriptPart
      *
      * @return
      */
-    public ArrayList<AjaxResponseReaction> getReactions()
+    public List<AjaxResponseReaction> getReactions()
     {
         if (reactions == null)
         {
@@ -365,7 +406,7 @@ public class AjaxResponse extends JavaScriptPart
      *
      * @return
      */
-    public ArrayList<ComponentHierarchyBase> getComponents()
+    public List<ComponentHierarchyBase> getComponents()
     {
         if (components == null)
         {
@@ -381,15 +422,9 @@ public class AjaxResponse extends JavaScriptPart
      */
     @JsonProperty("components")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    protected ArrayList<ComponentUpdates> getUpdates()
+    protected List<AjaxComponentUpdates> getUpdates()
     {
-        ArrayList<ComponentUpdates> updates = new ArrayList<>();
-        getComponents().stream().filter(next -> (ComponentHierarchyBase.class.isAssignableFrom(next.getClass())))
-                .forEachOrdered(next ->
-                {
-                    updates.add(new ComponentUpdates((ComponentHierarchyBase) next));
-                });
-        return updates;
+        return getComponentUpdates();
     }
 
     /**
@@ -504,52 +539,6 @@ public class AjaxResponse extends JavaScriptPart
             }
         }
         return super.toString();
-    }
-
-    /**
-     * A JSON Class for component updates
-     */
-    public class ComponentUpdates extends JavaScriptPart
-    {
-
-        private static final long serialVersionUID = 1L;
-
-        @JsonProperty("html")
-        private final String html;
-        @JsonProperty("id")
-        private final String replaceID;
-
-        /**
-         * Constructs an update class from a given component
-         *
-         * @param component
-         */
-        public ComponentUpdates(ComponentHierarchyBase component)
-        {
-            component.setTiny(true);
-            this.html = component.toString(true);
-            this.replaceID = component.getID();
-        }
-
-        /**
-         * Returns the HTML of the component
-         *
-         * @return
-         */
-        public String getHtml()
-        {
-            return html;
-        }
-
-        /**
-         * Returns which component ID is getting replaced
-         *
-         * @return
-         */
-        public String getReplaceID()
-        {
-            return replaceID;
-        }
     }
 
     /**

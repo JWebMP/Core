@@ -1,30 +1,34 @@
 {
   "name": "metismenu",
-  "version": "2.6.1",
+  "version": "2.7.0",
   "description": "A jQuery menu plugin",
   "main": "./dist/metisMenu.js",
+  "style":"./dist/metisMenu.css",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
-    "test": "grunt travis --verbose",
-    "js": "babel src -d dist"
+    "test": "grunt travis --verbose"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/onokumus/metisMenu.git"
+    "url": "git+https://github.com/onokumus/metismenu.git"
   },
   "keywords": [
-    "twitter",
+    "accordion",
     "bootstrap",
-    "twbs",
     "jquery",
     "menu",
-    "accordion",
-    "toggle",
     "metis",
-    "metisMenu"
+    "metisMenu",
+    "toggle",
+    "twbs",
+    "twitter"
   ],
-  "author": "Osman Nuri Okumuş <onokumus@gmail.com> (https://github.com/onokumus)",
+  "author": "Osman Nuri Okumus <onokumus@gmail.com> (https://github.com/onokumus)",
   "contributors": [
-    "Osman Nuri Okumuş <onokumus@gmail.com> (https://github.com/onokumus)",
+    "Osman Nuri Okumus <onokumus@gmail.com> (https://github.com/onokumus)",
     "Rein de Vries <info@reinos.nl> (https://github.com/reinos/)",
     "Arthur CHAN <arthur@talkgoal.com> (http://catchtop.com)",
     "Andrew Eastwood (https://github.com/AndrewEastwood)",
@@ -39,34 +43,57 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/onokumus/metisMenu/issues"
+    "url": "https://github.com/onokumus/metismenu/issues"
   },
-  "homepage": "https://github.com/onokumus/metisMenu#readme",
+  "homepage": "https://github.com/onokumus/metismenu#readme",
   "devDependencies": {
-    "autoprefixer": "^6.3.6",
-    "babel-cli": "^6.18.0",
-    "babel-eslint": "^6.0.4",
-    "babel-plugin-transform-es2015-modules-umd": "^6.8.0",
-    "babel-preset-latest": "^6.16.0",
-    "cssnano": "^3.6.2",
+    "assemble": "^0.23.0",
+    "autoprefixer": "^6.7.6",
+    "babel-eslint": "^7.1.1",
+    "babel-preset-env": "^1.2.1",
+    "cssnano": "^3.10.0",
     "grunt": "^1.0.1",
     "grunt-babel": "^6.0.0",
     "grunt-banner": "^0.6.0",
+    "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-connect": "^1.0.2",
-    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-uglify": "^2.2.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-eslint": "^18.1.0",
+    "grunt-eslint": "^19.0.0",
     "grunt-postcss": "^0.8.0",
+    "gulp-extname": "^0.2.2",
+    "helper-markdown": "^0.2.1",
     "pixrem": "^3.0.2"
   },
   "verb": {
-    "run": true,
-    "toc": true,
+    "toc": {
+      "collapsible": false,
+      "method": "preWrite"
+    },
     "tasks": [
       "readme"
     ],
+    "plugins": [
+      "gulp-format-md"
+    ],
+    "helpers": [
+      "helper-changelog"
+    ],
+    "related": {
+      "list": [
+        "chl",
+        "elektron",
+        "onoffcanvas",
+        "twbuttons"
+      ]
+    },
     "reflinks": [
-      "twbuttons"
+      "chl",
+      "elektron",
+      "onoffcanvas",
+      "twbuttons",
+      "helper-changelog",
+      "keep-a-changelog"
     ]
   }
 }
