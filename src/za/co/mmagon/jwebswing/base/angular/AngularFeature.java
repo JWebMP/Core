@@ -24,6 +24,7 @@ import za.co.mmagon.jwebswing.*;
 import za.co.mmagon.jwebswing.base.angular.controllers.AngularControllerBase;
 import za.co.mmagon.jwebswing.base.angular.controllers.JWAngularController;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
+import za.co.mmagon.jwebswing.base.angular.factories.AngularFactoryBase;
 import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
 import za.co.mmagon.jwebswing.base.angular.modules.JWAngularModule;
 import za.co.mmagon.jwebswing.base.exceptions.NullComponentException;
@@ -140,10 +141,34 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
     {
         FileTemplates.getTemplateVariables().put("JW_APP_NAME", new StringBuilder(getAppName() + ""));
         FileTemplates.getTemplateVariables().put("JW_MODULES", new StringBuilder(compileModules() + ""));
+        FileTemplates.getTemplateVariables().put("JW_FACTORIES", new StringBuilder(compileFactories() + ""));
         FileTemplates.getTemplateVariables().put("JW_DIRECTIVES", new StringBuilder(compileDirectives() + ""));
         FileTemplates.getTemplateVariables().put("JW_APP_CONTROLLER", new StringBuilder(getControllerName() + ""));
+
+        FileTemplates.getTemplateVariables().put("//%CONTROLLER_INSERTIONS%", new StringBuilder(compileControllerInsertions() + ""));
+
         FileTemplates.getTemplateVariables().put("JW_CONTROLLERS", new StringBuilder(compileControllers() + ""));
         FileTemplates.getTemplateVariables().put("jwangular", FileTemplates.compileTemplate(AngularFeature.class, "jwangular"));
+    }
+
+    /**
+     * Creates the controller insertion
+     *
+     * @return
+     */
+    public StringBuilder compileControllerInsertions()
+    {
+        StringBuilder output = new StringBuilder();
+        if (!getPage().getAngular().getControllerInsertions().isEmpty())
+        {
+            output.append(",");
+            getPage().getAngular().getControllerInsertions().stream().forEach(a ->
+            {
+                output.append(a).append(",");
+            });
+            output.deleteCharAt(output.length() - 1);
+        }
+        return output;
     }
 
     /**
@@ -156,6 +181,23 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
         StringBuilder output = new StringBuilder();
         List<AngularDirectiveBase> angulars = new ArrayList<>();
         angulars.addAll(getPage().getAngular().getAngularDirectives());
+        angulars.stream().forEach(directive ->
+        {
+            output.append(FileTemplates.compileTemplate(directive.getReferenceName(), directive.renderFunction()));
+        });
+        return output;
+    }
+
+    /**
+     * Builds up the directives from all the present children
+     *
+     * @return
+     */
+    public StringBuilder compileFactories()
+    {
+        StringBuilder output = new StringBuilder();
+        List<AngularFactoryBase> angulars = new ArrayList<>();
+        angulars.addAll(getPage().getAngular().getAngularFactories());
         angulars.stream().forEach(directive ->
         {
             output.append(FileTemplates.compileTemplate(directive.getReferenceName(), directive.renderFunction()));

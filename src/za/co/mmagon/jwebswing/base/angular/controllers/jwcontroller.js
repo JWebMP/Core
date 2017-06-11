@@ -2,7 +2,16 @@
 
 jw.afterInit = function () {};
 
-JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, $timeout) {
+JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
+        , $compile
+        , $parse
+        , $timeout
+        , $rootScope
+//%CONTROLLER_INSERTIONS%
+        ) {
+    var me = this;
+    me.jw = window.jw;
+
     jw.angularLoading = true;
     /**
      * Loads up the initial variables into angular
@@ -28,7 +37,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
         }
 
         var toGo = 'jwad?o=body';
-        return $.ajax({
+        $.ajax({
             type: "POST",
             url: toGo,
             dataType: "json",
@@ -53,7 +62,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
                 'json': true
             },
             success: function (result, status, xhr) {
-                jw.actions.processResponse(result, $scope, $parse, $timeout, $compile);
+                jw.actions.processResponse(result, $scope, $parse, $timeout, $compile, $rootScope);
                 //jw.actions.loadData(result, $scope, $parse, $timeout);
                 jw.isLoading = false;
                 if (jw.afterInit)
@@ -94,6 +103,10 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
                     jw.angularLoading = false;
                 }
             }
+        }).then(function (resp) {
+            if (resp.error)
+                return $.Deferred().reject(resp.error);
+            return $.Deferred();
         });
     };
 
@@ -103,7 +116,8 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
      * @param {type} $event
      * @param {type} dataVariables
      * @param {type} eventId
-     * @returns {undefined}
+     *
+     * @returns $.ajax
      */
     $scope.perform = function ($event, dataVariables, eventId) {
         jw.isLoading = true;
@@ -143,7 +157,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
                 console.log("Unable to find variable " + arrItem);
             }
         }
-        $.ajax({
+        return $.ajax({
             type: "POST",
             url: "jwajax",
             data: JSON.stringify(article),
@@ -170,7 +184,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
             success: function (result, status, xhr) {
                 try
                 {
-                    jw.actions.processResponse(result, $scope, $parse, $timeout, $compile);
+                    jw.actions.processResponse(result, $scope, $parse, $timeout, $compile, $rootScope);
                 } catch (e)
                 {
                     console.log("Error in processing response : " + result);
@@ -212,7 +226,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
                 } catch (e)
                 {
                 }
-            },
+            }
         });
     };
     /**
@@ -245,6 +259,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope, $compile, $parse, 
         newEvent.which = $event.which;
         return newEvent;
     };
+
     //JW_SCOPE_INSERTIONS
 
     jw.pageLoading = false;

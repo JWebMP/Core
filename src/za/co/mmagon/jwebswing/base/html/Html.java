@@ -210,4 +210,15 @@ public abstract class Html<J extends Html>
     {
         this.browser = browser;
     }
+
+    @Override
+    public void preConfigure()
+    {
+        if (!isConfigured())
+        {
+
+        }
+        super.preConfigure();
+    }
+
 }

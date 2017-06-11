@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -114,19 +114,23 @@ public class XYObject<X extends Serializable, Y extends Serializable> implements
     @JsonRawValue
     public String toString()
     {
-        if (!StringUtils.isNumericSpace(getX().toString()))
+        if (getX() != null && getY() != null)
         {
-            if (getX() instanceof Date)
+            if (!StringUtils.isNumericSpace(getX().toString()))
             {
-                String formatted = "['" + outputFormat.format(Date.class.cast(getX())) + "'," + getY() + "]";
-                return formatted;
+                if (getX() instanceof Date)
+                {
+                    String formatted = "['" + outputFormat.format(Date.class.cast(getX())) + "'," + getY() + "]";
+                    return formatted;
+                }
+                else if (getX() instanceof String)
+                {
+                    return "['" + getX() + "'," + getY() + "]";
+                }
             }
-            else if (getX() instanceof String)
-            {
-                return "['" + getX() + "'," + getY() + "]";
-            }
+            return "[" + getX() + "," + getY() + "]";
         }
-        return "[" + getX() + "," + getY() + "]";
+        return "[]";
     }
 
 }

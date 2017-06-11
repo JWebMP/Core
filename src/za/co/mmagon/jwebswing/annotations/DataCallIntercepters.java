@@ -17,6 +17,7 @@
 package za.co.mmagon.jwebswing.annotations;
 
 import com.armineasy.injection.GuiceContext;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.aopalliance.intercept.MethodInvocation;
@@ -45,13 +46,27 @@ public class DataCallIntercepters implements org.aopalliance.intercept.MethodInt
     public Object invoke(MethodInvocation invocation) throws Throwable
     {
         LOG.fine("Intercepting Data Calls");
-        GuiceContext.reflect().getSubTypesOf(DataCallIntercepter.class).forEach(siClass ->
+        Set<Class<? extends DataCallIntercepter>> res = GuiceContext.reflect().getSubTypesOf(DataCallIntercepter.class);
+        List<DataCallIntercepter> outs = new ArrayList<>();
+        for (Class<? extends DataCallIntercepter> re : res)
         {
-            DataCallIntercepter si = GuiceContext.inject().getInstance(siClass);
-            LOG.log(Level.FINE, "Interception Occuring : {0}", siClass.getCanonicalName());
-            si.intercept();
+            outs.add(GuiceContext.getInstance(re));
+        }
+        Collections.sort(outs, new Comparator<DataCallIntercepter>()
+        {
+            @Override
+            public int compare(DataCallIntercepter o1, DataCallIntercepter o2)
+            {
+                return o1.sortOrder().compareTo(o2.sortOrder());
+            }
         });
+        for (DataCallIntercepter out : outs)
+        {
+            LOG.log(Level.FINE, "Interception Occuring : {0}", out.getClass().getCanonicalName());
+            GuiceContext.getInstance(out.getClass()).intercept();
+        }
         LOG.fine("Interception of Data Calls complete");
+
         return invocation.proceed();
     }
 

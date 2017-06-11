@@ -27,36 +27,32 @@ import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
  *
  * @author MMagon
  */
-public class BodyTest extends BaseTestClass
-{
+public class BodyTest extends BaseTestClass {
 
     private Page p;
     private Body b;
 
-    public BodyTest()
-    {
+    public BodyTest() {
         resetBody();
     }
 
-    private void resetBody()
-    {
+    private void resetBody() {
         p = new Page();
         b = p.getBody();
     }
 
     @Test
-    public void testBody()
-    {
+    public void testBody() {
         resetBody();
         System.out.println(b.toString(true));
         assertEquals("<body id=\"body\"></body>", b.toString(true));
     }
 
     @Test
-    public void testSetGenerateJQuery()
-    {
+    public void testSetGenerateJQuery() {
         resetBody();
         JQueryPageConfigurator.setRequired(b, true);
+        new JQueryPageConfigurator().configure(getPage());
         b.add(new Comment("meh"));
         WebReference.setIsLocal(true);
         System.out.println(p.toString(true));
@@ -73,8 +69,7 @@ public class BodyTest extends BaseTestClass
     }
 
     @Test
-    public void testSetGenerateJQueryRemote()
-    {
+    public void testSetGenerateJQueryRemote() {
         resetBody();
         JQueryPageConfigurator.setRequired(b, true);
         b.add(new Comment("meh"));

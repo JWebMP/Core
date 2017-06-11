@@ -25,6 +25,7 @@ import za.co.mmagon.jwebswing.PageConfigurator;
 import za.co.mmagon.jwebswing.base.ComponentHTMLAngularBase;
 import za.co.mmagon.jwebswing.base.angular.controllers.AngularControllerBase;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
+import za.co.mmagon.jwebswing.base.angular.factories.AngularFactoryBase;
 import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
 import za.co.mmagon.jwebswing.plugins.PluginInformation;
 
@@ -72,6 +73,18 @@ public class AngularPageConfigurator extends PageConfigurator
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<AngularControllerBase> angularControllers;
     /**
+     * All of the angular directives for this component
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<AngularFactoryBase> angularFactories;
+
+    /**
+     * All of the angular controller insertions for this component
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<String> controllerInsertions;
+
+    /**
      * All the angular variables
      */
     private List<String> angularVariables;
@@ -79,6 +92,7 @@ public class AngularPageConfigurator extends PageConfigurator
     /**
      * Configures the angular page
      */
+    @SuppressWarnings("")
     public AngularPageConfigurator()
     {
         setSortOrder(99999999); //Always dead last
@@ -124,7 +138,6 @@ public class AngularPageConfigurator extends PageConfigurator
         if (angularModules == null)
         {
             setAngularModules(new ArrayList<>());
-
         }
         return angularModules;
     }
@@ -213,6 +226,13 @@ public class AngularPageConfigurator extends PageConfigurator
         this.angularVariables = angularVariables;
     }
 
+    /**
+     * Renders the complete angular javascript with the variables configured
+     *
+     * @param page
+     *
+     * @return
+     */
     public StringBuilder renderAngularJavascript(Page page)
     {
         StringBuilder sb = new StringBuilder();
@@ -221,4 +241,53 @@ public class AngularPageConfigurator extends PageConfigurator
         sb.append(FileTemplates.renderTemplateScripts("jwangular"));
         return sb;
     }
+
+    /**
+     * Returns a list of factories
+     *
+     * @return
+     */
+    public List<AngularFactoryBase> getAngularFactories()
+    {
+        if (angularFactories == null)
+        {
+            angularFactories = new ArrayList<>();
+        }
+        return angularFactories;
+    }
+
+    /**
+     * Sets the list of angular factories
+     *
+     * @param angularFactories
+     */
+    public void setAngularFactories(List<AngularFactoryBase> angularFactories)
+    {
+        this.angularFactories = angularFactories;
+    }
+
+    /**
+     * Returns the list of controller insertions
+     *
+     * @return
+     */
+    public List<String> getControllerInsertions()
+    {
+        if (controllerInsertions == null)
+        {
+            this.controllerInsertions = new ArrayList<>();
+        }
+        return controllerInsertions;
+    }
+
+    /**
+     * Sets the list of controller insertions
+     *
+     * @param controllerInsertions
+     */
+    public void setControllerInsertions(List<String> controllerInsertions)
+    {
+        this.controllerInsertions = controllerInsertions;
+    }
+
 }

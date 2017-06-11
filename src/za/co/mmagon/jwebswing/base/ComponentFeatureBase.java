@@ -19,6 +19,7 @@ package za.co.mmagon.jwebswing.base;
 import com.fasterxml.jackson.annotation.*;
 import java.util.*;
 import java.util.logging.Level;
+import za.co.mmagon.jwebswing.Feature;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.interfaces.IComponentFeatureBase;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
@@ -146,6 +147,10 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
     {
         if (!isConfigured())
         {
+            if (this instanceof Feature)
+            {
+                assignFunctionsToComponent();
+            }
             getFeatures().stream().forEach(feature
                     ->
             {
@@ -257,7 +262,10 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
         {
             if (!query.trim().equals("\n"))
             {
-                sb.append(query);
+                if (!sb.toString().contains(query))
+                {
+                    sb.append(query);
+                }
             }
         });
         return sb;
@@ -538,10 +546,13 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
      * Sets if this feature must be rendered in an $(document).ready statement
      *
      * @param renderAfterLoad
+     *
+     * @return
      */
-    public void setRenderAfterLoad(boolean renderAfterLoad)
+    public J setRenderAfterLoad(boolean renderAfterLoad)
     {
         this.renderAfterLoad = renderAfterLoad;
+        return (J) this;
     }
 
     /**
@@ -559,10 +570,13 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
      * Sets the render priority of this feature
      *
      * @param priority
+     *
+     * @return
      */
-    public void setPriority(RequirementsPriority priority)
+    public J setPriority(RequirementsPriority priority)
     {
         this.priority = priority;
+        return (J) this;
     }
 
     /**
@@ -579,10 +593,13 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
      * Returns if the JavaScript for this component is rendered elsewhere
      *
      * @param javascriptRenderedElsewhere
+     *
+     * @return
      */
-    public void setJavascriptRenderedElsewhere(boolean javascriptRenderedElsewhere)
+    public J setJavascriptRenderedElsewhere(boolean javascriptRenderedElsewhere)
     {
         this.javascriptRenderedElsewhere = javascriptRenderedElsewhere;
+        return (J) this;
     }
 
 }

@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -25,12 +25,12 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
- * Container Class for Features.
- * Splits from the hierarchy
+ * Container Class for Features. Splits from the hierarchy
  *
  * @author GedMarc
  * @param <O> Any options associated with this feature
  * @param <J> This Class
+ *
  * @since 23 Apr 2016
  */
 public class Feature<O extends JavaScriptPart, J extends Feature>
@@ -60,6 +60,7 @@ public class Feature<O extends JavaScriptPart, J extends Feature>
      * Constructs a feature that can be used with all components
      *
      * @param name
+     * @param component
      */
     public Feature(String name, ComponentHierarchyBase component)
     {
@@ -93,6 +94,8 @@ public class Feature<O extends JavaScriptPart, J extends Feature>
      * Adds a query to builder
      *
      * @param query
+     *
+     * @return
      */
     public J addQuery(StringBuilder query)
     {
@@ -107,7 +110,8 @@ public class Feature<O extends JavaScriptPart, J extends Feature>
      * Adds a query to builder
      *
      * @param query
-     * @return 
+     *
+     * @return
      */
     public J addQuery(String query)
     {

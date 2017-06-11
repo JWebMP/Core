@@ -274,19 +274,15 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
     @Override
     public List<ComponentHierarchyBase> getChildrenHierarchy(List<ComponentHierarchyBase> componentsToAddTo)
     {
-        getChildren().stream().filter(child -> !(child == null)).map(child
-                ->
-        {
-            if (!componentsToAddTo.contains(child))
-            {
-                componentsToAddTo.add(child);
-            }
-            return child;
-        }).forEach(child
+        getChildren().stream().filter(child -> !(child == null)).forEach(child
                 ->
         {
             if (child != null)
             {
+                if (!componentsToAddTo.contains(child))
+                {
+                    componentsToAddTo.add(child);
+                }
                 child.getChildrenHierarchy(componentsToAddTo);
             }
         });

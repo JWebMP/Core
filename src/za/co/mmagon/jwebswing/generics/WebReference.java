@@ -43,6 +43,7 @@ import za.co.mmagon.logger.LogFactory;
 public class WebReference<T extends WebReference> implements NamedPair<String, String>, Serializable, Comparator<WebReference>
 {
 
+    private static final Logger LOG = LogFactory.getInstance().getLogger("Web Reference");
     private static final long serialVersionUID = 1L;
     /**
      * The left side
@@ -356,8 +357,6 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
         return (T) this;
     }
 
-    private static final Logger LOG = LogFactory.getInstance().getLogger("Web Reference");
-
     /**
      * Sets whether or not to use "min.js" or use a folder for the min directory
      *
@@ -535,14 +534,19 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
             {
                 if (!GuiceContext.isBuildingInjector())
                 {
-                    HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);
-                    if (request != null)
+                    if (!(sb.toString().toLowerCase().startsWith("http://")
+                            || sb.toString().toLowerCase().startsWith("https://")
+                            || sb.toString().startsWith("//")))
                     {
-                        StringBuffer url = request.getRequestURL();
-                        String realUrl = url.substring(0, url.lastIndexOf("/"));
-                        realUrl += "/";
-                        sb = sb.insert(0, realUrl);
-                        sb = new StringBuilder(sb.toString());
+                        HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);
+                        if (request != null)
+                        {
+                            StringBuffer url = request.getRequestURL();
+                            String realUrl = url.substring(0, url.lastIndexOf("/"));
+                            realUrl += "/";
+                            sb = sb.insert(0, realUrl);
+                            sb = new StringBuilder(sb.toString());
+                        }
                     }
                 }
             }

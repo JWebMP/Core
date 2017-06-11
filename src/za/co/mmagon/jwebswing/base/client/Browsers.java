@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,17 +16,21 @@
  */
 package za.co.mmagon.jwebswing.base.client;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.*;
 import java.util.ArrayList;
 
 /**
- * Lists Browsers and their capable CSS.
- * Stores when the compatibility changed per version
- * Only includes the version number where the CSS and HTML version changes.
+ * Lists Browsers and their capable CSS. Stores when the compatibility changed per version Only includes the version number where the CSS and HTML version changes.
  *
  * @author MMagon
  * @since 22 Jun 2013
  * @version 1.0
  */
+@JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
+@JsonInclude(Include.NON_NULL)
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum Browsers
 {
     /**
@@ -102,9 +106,13 @@ public enum Browsers
      */
     Custom(CSSVersions.CSS3, HTMLVersions.Custom, 5.5, BrowserGroups.InternetExplorer);
 
+    @JsonProperty("cssVersion")
     private CSSVersions capableCSSVersion;
+    @JsonProperty("browserGroup")
     private BrowserGroups browserGroup;
+    @JsonProperty("htmlVersion")
     private HTMLVersions htmlVersion;
+    @JsonProperty("browserLastCssHtmlUpdate")
     private double browserVersion;
 
     /**
@@ -207,6 +215,7 @@ public enum Browsers
      * Returns all the browsers that exist in a group
      *
      * @param group The group name
+     *
      * @return A list of browsers
      */
     public static ArrayList<Browsers> getBrowsersForGroup(String group)
@@ -232,6 +241,7 @@ public enum Browsers
      *
      * @param name    The name of the browser in the header file
      * @param version The version of the browser in the header file
+     *
      * @return The browser object applicable
      */
     public static Browsers getBrowserFromNameAndVersion(String name, double version)

@@ -28,6 +28,4 @@ package za.co.mmagon.jwebswing.base.html;
 public interface IBody
 {
 
-    void configureModernizr();
-
 }

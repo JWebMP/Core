@@ -17,6 +17,7 @@
 package za.co.mmagon.jwebswing.annotations;
 
 import com.armineasy.injection.GuiceContext;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.aopalliance.intercept.MethodInvocation;
@@ -45,14 +46,20 @@ public class SiteIntercepters implements org.aopalliance.intercept.MethodInterce
     public Object invoke(MethodInvocation invocation) throws Throwable
     {
 
-        LOG.fine("Intercepting Site Call");
-        GuiceContext.reflect().getSubTypesOf(SiteCallInterceptor.class).forEach(siClass ->
+        LOG.finer("Intercepting Site Call");
+        Set<Class<? extends SiteCallInterceptor>> res = GuiceContext.reflect().getSubTypesOf(SiteCallInterceptor.class);
+        List<SiteCallInterceptor> outs = new ArrayList<>();
+        for (Class<? extends SiteCallInterceptor> re : res)
         {
-            SiteCallInterceptor si = GuiceContext.inject().getInstance(siClass);
-            LOG.log(Level.FINE, "Interception Occuring : {0}", siClass.getCanonicalName());
-            si.intercept();
-        });
-        LOG.fine("Interception of Site Call Complete");
+            outs.add(GuiceContext.inject().getInstance(re));
+        }
+        Collections.sort(outs, (SiteCallInterceptor o1, SiteCallInterceptor o2) -> o1.sortOrder().compareTo(o2.sortOrder()));
+        for (SiteCallInterceptor out : outs)
+        {
+            LOG.log(Level.FINE, "Interception Occuring : {0}", out.getClass().getCanonicalName());
+            out.intercept();
+        }
+        LOG.finer("Interception of Site Call Complete");
         return invocation.proceed();
     }
 

@@ -1,6 +1,7 @@
 /* global BootstrapDialog, eval */
 
 var jw = {isLoading: false, pageLoading: true};
+window.jw = jw;
 jw.siteAddress = 'SITEADDRESSINSERT';
 
 jw.angularLoading = false;
@@ -9,17 +10,17 @@ jw.mobile = {};
 jw.actions = {};
 
 jw.localstorage = {};
-if (localStorage)
+if (window.localStorage)
 {
-    for (var i = 0; i < localStorage.length; i++) {
-        jw.localstorage[localStorage.key(i)] = localStorage.getItem(localStorage.key(i));
+    for (var i = 0; i < window.localStorage.length; i++) {
+        jw.localstorage[window.localStorage.key(i)] = window.localStorage.getItem(window.localStorage.key(i));
     }
 }
 jw.sessionstorage = {};
-if (sessionStorage)
+if (window.sessionStorage)
 {
-    for (var i = 0; i < sessionStorage.length; i++) {
-        jw.sessionstorage[sessionStorage.key(i)] = sessionStorage.getItem(sessionStorage.key(i));
+    for (var i = 0; i < window.sessionStorage.length; i++) {
+        jw.sessionstorage[window.sessionStorage.key(i)] = window.sessionStorage.getItem(window.sessionStorage.key(i));
     }
 }
 
@@ -67,8 +68,10 @@ jw.actions.dataVariable = function (name, object) {
  * @param {type} xhr
  * @returns {undefined}
  */
-jw.actions.processResponse = function (result, $scope, $parse, $timeout, $compile) {
-    jw.actions.processHtml(result, $scope, $compile);
+jw.actions.processResponse = function (result, $scope, $parse, $timeout, $compile, $rootScope) {
+    jw.actions.processLocalStorage(result);
+    jw.actions.processSessionStorage(result);
+    jw.actions.processHtml(result, $scope, $compile, $rootScope);
     jw.actions.processCssReferences(result);
     jw.actions.processJSReferences(result);
     jw.actions.processCss(result);
@@ -77,6 +80,41 @@ jw.actions.processResponse = function (result, $scope, $parse, $timeout, $compil
 
 
     //jw.actions.processJsScripts(result)
+};
+
+jw.actions.processLocalStorage = function (result)
+{
+    if (result.localStorage)
+    {
+        for (var name in result.localStorage) {
+            if (!result.localStorage.hasOwnProperty(name))
+                continue;    //Skip inherited properties
+
+            var value = result.localStorage[name];
+
+            window.localStorage.setItem(name, value);
+            jw.localstorage[name] = value;
+            //Do things
+        }
+    }
+};
+
+
+jw.actions.processSessionStorage = function (result)
+{
+    if (result.sessionStorage)
+    {
+        for (var name in result.sessionStorage) {
+            if (!result.sessionStorage.hasOwnProperty(name))
+                continue;    //Skip inherited properties
+
+            var value = result.sessionStorage[name];
+
+            sessionStorage.setItem(name, value);
+            jw.sessionStorage[name] = value;
+            //Do things
+        }
+    }
 };
 
 /**
@@ -220,30 +258,70 @@ jw.actions.processCssReferences = function (result)
  * @param {type} result
  * @returns {undefined}
  */
-jw.actions.processHtml = function (result, $scope, $compile) {
-    $.each(result.components, function (i, item) {
-        if (item.insertType === 'Replace')
-        {
-            $('#' + item.id).replaceWith((item.html));
-        } else if (item.insertType === 'Append')
-        {
-            $('#' + item.id).after((item.html));
-        } else if (item.insertType === 'Prepend')
-        {
-            $('#' + item.id).before((item.html));
-        } else if (item.insertType === 'Insert')
-        {
-            $('#' + item.id).prepend((item.html));
-        } else if (item.insertType === 'Insert_Last')
-        {
-            $('#' + item.id).append((item.html));
-        }
+jw.actions.processHtml = function (result, $scope, $compile, $rootScope) {
+    if (result.components)
+        $.each(result.components, function (i, item) {
+            var htmlString;
+            var jqHtmlString = $(item.html);
+            if (item.insertType === 'Replace')
+            {
+                $('#' + item.id).replaceWith(jqHtmlString);
+            } else if (item.insertType === 'Append')
+            {
+                $('#' + item.id).after(jqHtmlString);
+            } else if (item.insertType === 'Prepend')
+            {
+                $('#' + item.id).before(jqHtmlString);
+            } else if (item.insertType === 'Insert')
+            {
+                $('#' + item.id).prepend(jqHtmlString);
+            } else if (item.insertType === 'Insert_Last')
+            {
+                $('#' + item.id).append(jqHtmlString);
+            }
+            var elementWithController = $('#' + item.id).find('[ng-controller]');
+            var controllerName = elementWithController.attr('ng-controller');
+            if (controllerName != undefined)
+            {
+                var $appElement = angular.element('body');
+                $appElement.injector().invoke(function ($compile) {
+                    var scope = angular.element(jqHtmlString).scope();
+                    $compile(jqHtmlString)(scope);
+                    console.log('compiled the returned html');
+                    scope.$apply();
+                });
+            } else
+            {
+                try
+                {
+                    $compile(jqHtmlString)($scope);
+                } catch (e)
+                {
+                    $compile(jqHtmlString)($rootScope);
+                }
+                $scope.$apply();
+            }
 
-        if ($compile)
-        {
-            $compile($('body').find('#' + item.id))($scope);
-        }
-    });
+            /*
+             var elementWithController = $('#' + item.id).find('[ng-controller]');
+             var controllerName = elementWithController.attr('ng-controller');
+             if (controllerName != undefined)
+             {
+             // Some variables
+             var $controllerElement = angular.element('#' + elementWithController.attr('id'));
+
+
+             // compiling and applying / digesting the scope.
+             $appElement.injector().invoke(function ($compile) {
+             var newScope = $rootScope.$new();
+             var scope = $controllerElement.scope();
+             $compile($controllerElement)(scope);
+             scope.$apply();
+             });
+             }*/
+        });
+
+
 };
 /**
  * Goes through each reaction performing each task

@@ -29,16 +29,13 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
  * @author ged_m
  */
 public class ComponentStyleBaseTest
-        extends BaseTestClass
-{
+        extends BaseTestClass {
 
-    public ComponentStyleBaseTest()
-    {
+    public ComponentStyleBaseTest() {
     }
 
     @Test
-    public void testCSS()
-    {
+    public void testCSS() {
         Page p = getPage();
         Body b = p.getBody();
 
@@ -50,10 +47,14 @@ public class ComponentStyleBaseTest
         Assert.assertEquals("<!DOCTYPE html>\n"
                 + "<html>\n"
                 + "	<head>\n"
+                + "		\n"
+                + "		\n"
                 + "		<style type=\"text/css\">#body {background-color:darkgoldenrod;}</style>\n"
                 + "	</head>\n"
                 + "	<body id=\"body\">\n"
                 + "		<!-- asdf -->\n"
+                + "		\n"
+                + "		\n"
                 + "	</body>\n"
                 + "</html>", p.toString(true));
     }

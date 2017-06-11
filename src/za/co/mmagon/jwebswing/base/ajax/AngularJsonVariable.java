@@ -22,7 +22,10 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.logger.LogFactory;
 
 /**
  * DTO for angular variable transfers forward and back
@@ -34,6 +37,7 @@ public class AngularJsonVariable extends JavaScriptPart
 {
 
     private static final long serialVersionUID = 1L;
+    private static final Logger log = LogFactory.getLog(AngularJsonVariable.class.getName());
 
     /**
      * The variable name to use
@@ -195,11 +199,18 @@ public class AngularJsonVariable extends JavaScriptPart
      *
      * @return
      *
-     * @throws IOException
      */
-    public <T> T as(Class<T> classType) throws IOException
+    public <T> T as(Class<T> classType)
     {
-        return JavaScriptPart.From(getVariableText(), classType);
+        try
+        {
+            return JavaScriptPart.From(getVariableText(), classType);
+        }
+        catch (Exception e)
+        {
+            log.log(Level.WARNING, "Error in decoding Ajax Response Variable", e);
+            return null;
+        }
     }
 
 }

@@ -63,7 +63,6 @@ public class JQueryPageConfigurator extends PageConfigurator
     @Override
     public Page configure(Page page)
     {
-
         if (page != null)
         {
             if (page.getBody().readChildrenPropertyFirstResult(JQueryEnabledString, true))
@@ -86,7 +85,7 @@ public class JQueryPageConfigurator extends PageConfigurator
                         if (isJquery3())
                         {
                             page.getBody().addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
-                            page.getBody().addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
+                            //page.getBody().addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
                         }
                         else
                         {
@@ -97,7 +96,7 @@ public class JQueryPageConfigurator extends PageConfigurator
                 else if (isJquery3())
                 {
                     page.getBody().addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
-                    page.getBody().addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
+                    //page.getBody().addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
                 }
                 else
                 {

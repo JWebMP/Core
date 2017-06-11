@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * This Class
+ * This Class renders the given function as the result for a given json property
  *
  * @author GedMarc
  * @since 14 Dec 2015
@@ -30,8 +30,12 @@ public abstract class JavascriptFunction extends JavaScriptPart
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Constructs a new function
+     */
     public JavascriptFunction()
     {
+        //Nothing needed
     }
 
     /**
@@ -41,6 +45,11 @@ public abstract class JavascriptFunction extends JavaScriptPart
      */
     public abstract String renderFunction();
 
+    /**
+     * Renders the to function method as the JSON Value
+     *
+     * @return
+     */
     @JsonValue
     @JsonRawValue
     @Override

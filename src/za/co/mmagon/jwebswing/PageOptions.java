@@ -91,7 +91,6 @@ public class PageOptions extends JavaScriptPart
     public void setModernizrEnabled(boolean modernizrEnabled)
     {
         this.modernizrEnabled = modernizrEnabled;
-        page.getBody().configureModernizr();
     }
 
     /**

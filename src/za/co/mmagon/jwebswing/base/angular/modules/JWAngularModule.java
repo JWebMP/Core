@@ -16,8 +16,7 @@
  */
 package za.co.mmagon.jwebswing.base.angular.modules;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 
@@ -58,7 +57,15 @@ public class JWAngularModule extends AngularModuleBase
 
         ArrayList<String> moduleNames = new ArrayList<>();
         List<AngularModuleBase> modules = page.getAngular().getAngularModules();
-        modules.stream().forEachOrdered(module ->
+        Collections.sort(modules, new Comparator<AngularModuleBase>()
+        {
+            @Override
+            public int compare(AngularModuleBase o1, AngularModuleBase o2)
+            {
+                return o1.compare(o1, o2);
+            }
+        });
+        for (AngularModuleBase module : modules)
         {
             String name = module.getReferenceName();
             if (name != null)
@@ -68,7 +75,11 @@ public class JWAngularModule extends AngularModuleBase
                     moduleNames.add(module.getReferenceName());
                 }
             }
+        }
+        /*
+         * modules.stream().forEachOrdered(module -> { String name = module.getReferenceName(); if (name != null) { if (!moduleNames.contains(name)) { moduleNames.add(module.getReferenceName()); } }
         });
+         */
 
         StringBuilder nameRenders = new StringBuilder();
         for (String name : moduleNames)

@@ -143,7 +143,7 @@ public class ComponentBase<J extends ComponentBase>
     @Override
     public String getJQueryID()
     {
-        return "$(\'" + getID(true) + "\').";
+        return "$(\"" + getID(true) + "\").";
     }
 
     /**

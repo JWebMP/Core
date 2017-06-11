@@ -2,8 +2,6 @@
 // Angular Implementation
 //***********************************
 (function (angular) {
-    'use strict';
-
     /**
      * All Modules
      */
@@ -13,6 +11,11 @@
      * All Directives
      */
     JW_DIRECTIVES
+
+    /**
+     * All Directives
+     */
+    JW_FACTORIES
 
     /**
      * All Controllers

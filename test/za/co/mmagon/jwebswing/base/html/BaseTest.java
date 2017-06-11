@@ -11,16 +11,13 @@ import za.co.mmagon.jwebswing.base.html.attributes.BaseAttributes;
  *
  * @author MMagon
  */
-public class BaseTest extends BaseTestClass
-{
+public class BaseTest extends BaseTestClass {
 
-    public BaseTest()
-    {
+    public BaseTest() {
     }
 
     @Test
-    public void testBaseOutputTiny()
-    {
+    public void testBaseOutputTiny() {
         Page page = getPage();
         Base instance = new Base();
         page.getPageFields().setBase(instance);
@@ -34,8 +31,7 @@ public class BaseTest extends BaseTestClass
     }
 
     @Test
-    public void testBaseOutputOldBrowsers()
-    {
+    public void testBaseOutputOldBrowsers() {
         Page page = getPage();
         Base instance = new Base();
         page.getPageFields().setBase(instance);
@@ -52,8 +48,7 @@ public class BaseTest extends BaseTestClass
     }
 
     @Test
-    public void testBaseOutputOldBrowsersTiny()
-    {
+    public void testBaseOutputOldBrowsersTiny() {
         Page page = getPage();
         Base instance = new Base();
         page.getPageFields().setBase(instance);
@@ -70,8 +65,7 @@ public class BaseTest extends BaseTestClass
     }
 
     @Test
-    public void testBaseOutput()
-    {
+    public void testBaseOutput() {
         Page page = getPage();
         Base instance = new Base();
         page.getPageFields().setBase(instance);
@@ -88,14 +82,20 @@ public class BaseTest extends BaseTestClass
                 + "<html>\n"
                 + "	<head>\n"
                 + "		<base href=\"This is a link to something\" target=\"Target Frame\">\n"
+                + "		\n"
+                + "		\n"
                 + "	</head>\n"
+                + "	<body id=\"body\">\n"
+                + "		\n"
+                + "		\n"
+                + "	</body>\n"
                 + "</html>";
         result = page.toString(true).toString();
         assertEquals(expResult, result);
 
         page.setTiny(true);
         System.out.println(page.toString(true));
-        expResult = "<!DOCTYPE html><html><head><base href=\"This is a link to something\" target=\"Target Frame\"></head></html>";
+        expResult = "<!DOCTYPE html><html><head><base href=\"This is a link to something\" target=\"Target Frame\"></head><body id=\"body\"></body></html>";
         result = page.toString(true).toString();
         assertEquals(expResult, result);
     }

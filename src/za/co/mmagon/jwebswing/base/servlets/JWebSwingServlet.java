@@ -54,7 +54,7 @@ public class JWebSwingServlet extends JWDefaultServlet
     /**
      * The logger for the swing Servlet
      */
-    private static final Logger LOG = LogFactory.getInstance().getLogger("JWebSwingServlet");
+    private static final Logger log = LogFactory.getInstance().getLogger("JWebSwingServlet");
     /**
      * The logger for the session handler Servlet
      */
@@ -65,11 +65,17 @@ public class JWebSwingServlet extends JWDefaultServlet
      */
     private static final long serialVersionUID = 1L;
 
+    static
+    {
+
+    }
+
     /**
      * Constructs a new JWebSwing Servlet that is not session aware
      */
     public JWebSwingServlet()
     {
+
     }
 
     /**
@@ -98,12 +104,11 @@ public class JWebSwingServlet extends JWDefaultServlet
     {
         Page currentPage = getPageFromGuice();
         HttpSession session = GuiceContext.inject().getInstance(HttpSession.class);
-        session.setAttribute("jwpage", currentPage);
         if (currentPage == null)
         {
             throw new MissingComponentException("[No Page]-[getPage() returning null in servlet class]");
         }
-        if (request.getSession().isNew())
+        if (session.isNew())
         {
             SESSION_LOG.log(Level.FINE, "[SessionID]-[{0}];[Name]-[User Login];[Action]-[Session Page Added];", request.getSession().getId());
         }
@@ -132,14 +137,14 @@ public class JWebSwingServlet extends JWDefaultServlet
 
         if (agent.getVersionNumber().getMajor() == null || agent.getVersionNumber().getMajor().isEmpty())
         {
-            LOG.log(Level.INFO, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}];[Operating System]-[{3}];[Device Category]-[{4}];[Device]-[{5}];[CSS]-[{6}];[HTML]-[{7}];", new Object[]
+            log.log(Level.INFO, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}];[Operating System]-[{3}];[Device Category]-[{4}];[Device]-[{5}];[CSS]-[{6}];[HTML]-[{7}];", new Object[]
             {
                 request.getSession().getId(), b.getBrowserGroup().toString(), b.getBrowserVersion(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()
             });
         }
         else
         {
-            LOG.log(Level.INFO, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}.{3}];[Operating System]-[{4}];[Device Category]-[{5}];[Device]-[{6}];[CSS]-[{7}];[HTML]-[{8}];", new Object[]
+            log.log(Level.INFO, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}.{3}];[Operating System]-[{4}];[Device Category]-[{5}];[Device]-[{6}];[CSS]-[{7}];[HTML]-[{8}];", new Object[]
             {
                 request.getSession().getId(), agent.getName(), agent.getVersionNumber().getMajor(), agent.getVersionNumber().getMinor(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()
             });
@@ -178,14 +183,14 @@ public class JWebSwingServlet extends JWDefaultServlet
             out = response.getWriter();
             out.println(output);
             Date dataTransferDate = new Date();
-            LOG.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
+            log.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
             {
                 request.getSession().getId(), endDate.getTime() - startDate.getTime(), output.length(), dataTransferDate.getTime() - transferStart.getTime()
             });
         }
         catch (IOException ex)
         {
-            LOG.log(Level.SEVERE, "[Network]-[Connection Dead]", ex);
+            log.log(Level.SEVERE, "[Network]-[Connection Dead]", ex);
             throw ex;
         }
         finally
@@ -199,7 +204,7 @@ public class JWebSwingServlet extends JWDefaultServlet
             }
             catch (Exception e)
             {
-                LOG.log(Level.SEVERE, "Can't send page", e);
+                log.log(Level.SEVERE, "Can't send page", e);
             }
         }
     }
@@ -224,7 +229,7 @@ public class JWebSwingServlet extends JWDefaultServlet
     {
         if (GuiceContext.isBuildingInjector())
         {
-            LOG.fine("Guice is still building, ignoring this request");
+            log.fine("Guice is still building, ignoring this request");
             return;
         }
 
@@ -236,7 +241,7 @@ public class JWebSwingServlet extends JWDefaultServlet
         }
         catch (MissingComponentException mce)
         {
-            LOG.log(Level.SEVERE, "No Page For Servlet", mce);
+            log.log(Level.SEVERE, "No Page For Servlet", mce);
             Page p = new Page();
             p.getBody().add("No Page or Body Configured for the JWebSwingServlet. [getPage()] returned nothing");
             response.getWriter().write(p.toString(true));
@@ -244,7 +249,7 @@ public class JWebSwingServlet extends JWDefaultServlet
         catch (IOException | NumberFormatException ex)
         {
 
-            LOG.log(Level.SEVERE, "Couldn't Render Page in Servlet. Fatal Error.", ex);
+            log.log(Level.SEVERE, "Couldn't Render Page in Servlet. Fatal Error.", ex);
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = null;
             try
@@ -254,7 +259,7 @@ public class JWebSwingServlet extends JWDefaultServlet
             }
             catch (IOException ex1)
             {
-                LOG.log(Level.SEVERE, "Unable to generate page html to return!", ex1);
+                log.log(Level.SEVERE, "Unable to generate page html to return!", ex1);
             }
             finally
             {
@@ -267,7 +272,7 @@ public class JWebSwingServlet extends JWDefaultServlet
                 }
                 catch (Exception e)
                 {
-                    LOG.log(Level.SEVERE, null, e);
+                    log.log(Level.SEVERE, null, e);
                 }
             }
         }
@@ -282,7 +287,7 @@ public class JWebSwingServlet extends JWDefaultServlet
             }
             catch (IOException ex1)
             {
-                LOG.log(Level.SEVERE, "Unable to generate page html to return!", ex1);
+                log.log(Level.SEVERE, "Unable to generate page html to return!", ex1);
             }
             finally
             {
@@ -295,7 +300,7 @@ public class JWebSwingServlet extends JWDefaultServlet
                 }
                 catch (Exception e)
                 {
-                    LOG.log(Level.SEVERE, null, e);
+                    log.log(Level.SEVERE, null, e);
                 }
             }
         }
@@ -368,7 +373,7 @@ public class JWebSwingServlet extends JWDefaultServlet
     @RequestScoped
     protected StringBuilder getPageMobileHTML(HttpSession session)
     {
-        LOG.log(Level.FINE, "Started Rendering Mobile HTML");
+        log.log(Level.FINE, "Started Rendering Mobile HTML");
         StringBuilder html;
         html = new StringBuilder(getPageFromGuice().toString(true));
         return html;
@@ -397,17 +402,25 @@ public class JWebSwingServlet extends JWDefaultServlet
         }
         catch (IOException | ServletException ex)
         {
-            LOG.log(Level.SEVERE, "SwingServlet", ex);
+            log.log(Level.SEVERE, "SwingServlet", ex);
         }
     }
 
     @Override
     public void destroy()
     {
-        LOG.log(Level.INFO, "Destroying Servlet JWebSwing Servlet and all Static Objects");
-        GuiceContext.inject().getInstance(UserAgentStringParser.class).shutdown();
-        GuiceContext.setReflections(null);
-        LOG.log(Level.INFO, "User Agent Parser Shutdown");
+        try
+        {
+
+            log.log(Level.INFO, "Destroying Servlet JWebSwing Servlet and all Static Objects");
+            GuiceContext.inject().getInstance(UserAgentStringParser.class).shutdown();
+            GuiceContext.setReflections(null);
+            log.log(Level.INFO, "User Agent Parser Shutdown");
+        }
+        catch (Throwable t)
+        {
+            log.log(Level.SEVERE, "Unable to destroy");
+        }
         super.destroy();
     }
 }

@@ -86,11 +86,11 @@ public class AjaxResponse extends JavaScriptPart
     /**
      * A list of local storage items and their keys
      */
-    private Map<String, JavaScriptPart> localStorage;
+    private Map<String, String> localStorage;
     /**
      * A list of local storage items and their keys
      */
-    private Map<String, JavaScriptPart> sessionStorage;
+    private Map<String, String> sessionStorage;
 
     /**
      * Returns all the feature queries for the given response
@@ -104,6 +104,7 @@ public class AjaxResponse extends JavaScriptPart
         ArrayList<String> list = new ArrayList<>();
         getFeatures().forEach(feature ->
         {
+            feature.preConfigure();
             list.add(feature.renderJavascript().toString());
         });
         return list;
@@ -546,7 +547,7 @@ public class AjaxResponse extends JavaScriptPart
      *
      * @return
      */
-    public Map<String, JavaScriptPart> getLocalStorage()
+    public Map<String, String> getLocalStorage()
     {
         if (localStorage == null)
         {
@@ -560,7 +561,7 @@ public class AjaxResponse extends JavaScriptPart
      *
      * @param localStorage
      */
-    public void setLocalStorage(Map<String, JavaScriptPart> localStorage)
+    public void setLocalStorage(Map<String, String> localStorage)
     {
         this.localStorage = localStorage;
     }
@@ -570,7 +571,7 @@ public class AjaxResponse extends JavaScriptPart
      *
      * @return
      */
-    public Map<String, JavaScriptPart> getSessionStorage()
+    public Map<String, String> getSessionStorage()
     {
         if (sessionStorage == null)
         {
@@ -584,7 +585,7 @@ public class AjaxResponse extends JavaScriptPart
      *
      * @param sessionStorage
      */
-    public void setSessionStorage(Map<String, JavaScriptPart> sessionStorage)
+    public void setSessionStorage(Map<String, String> sessionStorage)
     {
         this.sessionStorage = sessionStorage;
     }

@@ -24,7 +24,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.components.modernizr.ModernizrFeature;
 import za.co.mmagon.logger.LogFactory;
 
 /**
@@ -65,6 +64,10 @@ public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Bo
     private static final Logger LOG = LogFactory.getInstance().getLogger("BODY");
 
     private static final long serialVersionUID = 1L;
+    /**
+     * If this body has rendered the scripts on itself
+     */
+    private boolean renderedScripts;
 
     /**
      * Instantiates an empty body
@@ -100,11 +103,32 @@ public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Bo
     }
 
     @Override
-    public void configureModernizr()
+    public void preConfigure()
     {
-        if (getPage().getOptions().isModernizrEnabled())
-        {
-            addFeature(new ModernizrFeature(this));
-        }
+        super.preConfigure();
     }
+
+    /**
+     * If the scripts have been rendered
+     *
+     * @return
+     */
+    protected boolean isRenderedScripts()
+    {
+        return renderedScripts;
+    }
+
+    /**
+     * If the scripts have been rendered
+     *
+     * @param renderedScripts
+     *
+     * @return
+     */
+    protected Body setRenderedScripts(boolean renderedScripts)
+    {
+        this.renderedScripts = renderedScripts;
+        return this;
+    }
+
 }

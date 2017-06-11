@@ -46,6 +46,10 @@ public class SessionHelper
         {
             HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);
             StringBuffer buff = request.getRequestURL();
+            if (request.getHeader("jwsiteurl") != null && !request.getHeader("jwsiteurl").isEmpty())
+            {
+                buff = new StringBuffer(request.getHeader("jwsiteurl"));
+            }
             String address = buff.substring(0, buff.lastIndexOf("/") + 1);
             return address;
         }

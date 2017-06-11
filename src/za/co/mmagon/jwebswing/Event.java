@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing;
 
+import com.armineasy.injection.GuiceContext;
 import java.util.ArrayList;
 import java.util.List;
 import za.co.mmagon.jwebswing.base.ComponentEventBase;
@@ -137,7 +138,7 @@ public class Event<A extends JavaScriptPart, J extends Event>
      *
      * @return
      */
-    public J registerReturnVariableName(String returnVariable)
+    public J returnVariable(String returnVariable)
     {
         getVariables().add(returnVariable);
         return (J) this;
@@ -151,7 +152,7 @@ public class Event<A extends JavaScriptPart, J extends Event>
      *
      * @return
      */
-    public J registerReturnVariableName(String returnVariable, String owningComponent)
+    public J returnVariable(String returnVariable, String owningComponent)
     {
         getVariables().add(returnVariable);
         return (J) this;
@@ -162,7 +163,7 @@ public class Event<A extends JavaScriptPart, J extends Event>
      *
      * @return
      */
-    protected String renderVariables()
+    public String renderVariables()
     {
         final StringBuilder s = new StringBuilder("[");
         getVariables().stream().forEach((event) ->
@@ -349,6 +350,9 @@ public class Event<A extends JavaScriptPart, J extends Event>
         this.runFeatures = runFeatures;
     }
 
+    /**
+     * Runs the assign function to components then executes the parents configuration
+     */
     @Override
     public void preConfigure()
     {
@@ -358,6 +362,26 @@ public class Event<A extends JavaScriptPart, J extends Event>
             JQueryPageConfigurator.setRequired((Component) getComponent(), true);
         }
         super.preConfigure();
+    }
+
+    /**
+     * Initializes the event by adding itself to the page registered events list
+     */
+    @Override
+    public void init()
+    {
+        if (!isInitialized())
+        {
+            if (!GuiceContext.isBuildingInjector())
+            {
+                Page page = GuiceContext.getInstance(Page.class);
+                if (!page.getRegisteredEvents().contains(this))
+                {
+                    page.getRegisteredEvents().add(this);
+                }
+            }
+        }
+        super.init();
     }
 
 }

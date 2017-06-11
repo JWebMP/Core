@@ -36,4 +36,24 @@ public class InputCheckBoxType<J extends InputCheckBoxType> extends Input<InputC
     {
         super(InputTypes.Checkbox);
     }
+
+    /**
+     * Sets the checkbox accordingly
+     *
+     * @param checked
+     *
+     * @return
+     */
+    public J setChecked(boolean checked)
+    {
+        if (checked)
+        {
+            addAttribute(InputCheckBoxTypeAttributes.Checked.toString(), null);
+        }
+        else
+        {
+            getAttributesCustom().remove(InputCheckBoxTypeAttributes.Checked.toString());
+        }
+        return (J) this;
+    }
 }

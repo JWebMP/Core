@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -37,13 +37,17 @@ public class Pair<L extends Serializable, R extends Serializable> implements Nam
     /**
      * The left side
      */
-    protected final L left;
+    protected L left;
     /**
      * The right side
      */
-    protected final R right;
+    protected R right;
 
     private static boolean leftOnly = true;
+
+    public Pair()
+    {
+    }
 
     /**
      * Constructs a new pair
@@ -135,6 +139,16 @@ public class Pair<L extends Serializable, R extends Serializable> implements Nam
     public static void setLeftOnly(boolean leftOnly)
     {
         Pair.leftOnly = leftOnly;
+    }
+
+    public void setLeft(L left)
+    {
+        this.left = left;
+    }
+
+    public void setRight(R right)
+    {
+        this.right = right;
     }
 
 }
