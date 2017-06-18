@@ -13,7 +13,7 @@
     JW_DIRECTIVES
 
     /**
-     * All Directives
+     * All Factories
      */
     JW_FACTORIES
 

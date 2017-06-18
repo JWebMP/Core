@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -38,11 +38,11 @@ public enum InputTypes implements AttributeDefinitions
      */
     Color,
     /**
-     *
+     * The date input type
      */
     Date,
     /**
-     *
+     * The date time input type
      */
     Datetime,
     /**
@@ -50,7 +50,7 @@ public enum InputTypes implements AttributeDefinitions
      */
     Datetime_local,
     /**
-     *
+     * The email type
      */
     Email,
     /**

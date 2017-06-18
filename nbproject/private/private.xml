@@ -79,12 +79,6 @@
         </group>
         <group name="JWebSwing Plugins"/>
         <group name="Dance Culture Complete"/>
-        <group name="LSM">
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/Event.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/servlets/siteloader.js</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/events/click/ClickAdapterTest.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/angular/controllers/jwcontroller.js</file>
-            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/events/click/ClickAdapter.java</file>
-        </group>
+        <group name="LSM"/>
     </open-files>
 </project-private>

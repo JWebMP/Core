@@ -31,7 +31,8 @@ import za.co.mmagon.logger.LogFactory;
  * @author GedMarc
  * @since A long time ago in a galaxy far away
  */
-public class FileTemplates implements Serializable {
+public class FileTemplates implements Serializable
+{
 
     private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("FileTemplates");
     /**
@@ -52,7 +53,8 @@ public class FileTemplates implements Serializable {
      *
      * @return
      */
-    public static Map<String, StringBuilder> getTemplateVariables() {
+    public static Map<String, StringBuilder> getTemplateVariables()
+    {
         return TemplateVariables;
     }
 
@@ -61,7 +63,8 @@ public class FileTemplates implements Serializable {
      *
      * @return
      */
-    public static Map<String, StringBuilder> getTemplateScripts() {
+    public static Map<String, StringBuilder> getTemplateScripts()
+    {
         return TemplateScripts;
     }
 
@@ -72,7 +75,8 @@ public class FileTemplates implements Serializable {
      *
      * @return
      */
-    public static StringBuilder getTemplateScript(String templateName) {
+    public static StringBuilder getTemplateScript(String templateName)
+    {
         return TemplateScripts.get(templateName);
     }
 
@@ -82,7 +86,8 @@ public class FileTemplates implements Serializable {
      * @param templateName
      * @param templateScript
      */
-    public static void setTemplateScript(String templateName, StringBuilder templateScript) {
+    public static void setTemplateScript(String templateName, StringBuilder templateScript)
+    {
         TemplateScripts.put(templateName, templateScript);
     }
 
@@ -93,8 +98,10 @@ public class FileTemplates implements Serializable {
      *
      * @return A final HashMap
      */
-    public static StringBuilder renderTemplateScripts(String template) {
-        if (TemplateScripts.containsKey(template) && TemplateScripts.get(template) != null) {
+    public static StringBuilder renderTemplateScripts(String template)
+    {
+        if (TemplateScripts.containsKey(template) && TemplateScripts.get(template) != null)
+        {
             StringBuilder output = processTemplate(template, getTemplateScripts().get(template).toString());
             return output;
         }
@@ -106,11 +113,12 @@ public class FileTemplates implements Serializable {
      * Returns the template as a string
      *
      * @param referenceClass The class to reference to locate the file
-     * @param templateName The file without .min.js or .js attached to it
+     * @param templateName   The file without .min.js or .js attached to it
      *
      * @return The string for the file
      */
-    public static StringBuilder getFileTemplate(Class referenceClass, String templateName) {
+    public static StringBuilder getFileTemplate(Class referenceClass, String templateName)
+    {
         return getFileTemplate(referenceClass, templateName, templateName);
     }
 
@@ -118,15 +126,18 @@ public class FileTemplates implements Serializable {
      * Returns the template as a string
      *
      * @param referenceClass The class to reference to locate the file
-     * @param templateName The file without .min.js or .js attached to it
+     * @param templateName   The file without .min.js or .js attached to it
      * @param fileName
      *
      * @return The string for the file
      */
-    public static StringBuilder getFileTemplate(Class referenceClass, String templateName, String fileName) {
+    public static StringBuilder getFileTemplate(Class referenceClass, String templateName, String fileName)
+    {
         StringBuilder template = TemplateScripts.get(templateName);
-        if (template == null) {
-            try {
+        if (template == null)
+        {
+            try
+            {
                 String templateFileName = fileName;
                 templateFileName += ".js";
                 byte[] fileContents;
@@ -136,10 +147,18 @@ public class FileTemplates implements Serializable {
                 is.close();
                 String contents = new String(fileContents);
                 setTemplateScript(templateName, new StringBuilder(contents));
-            } catch (FileNotFoundException ex) {
+            }
+            catch (FileNotFoundException ex)
+            {
                 LOG.log(Level.SEVERE, "[Error]-[unable to find template file];[TemplateFile]-[" + templateName + "];[TemplatePath]-[" + referenceClass.getResource(templateName).getPath() + "]", ex);
-            } catch (IOException ex) {
+            }
+            catch (IOException ex)
+            {
                 LOG.log(Level.SEVERE, "Unable to read file contents jwangular template File", ex);
+            }
+            catch (NullPointerException npe)
+            {
+                LOG.log(Level.SEVERE, "template file [" + fileName + "(.js)] not found.", npe);
             }
         }
         return TemplateScripts.get(templateName);
@@ -151,11 +170,12 @@ public class FileTemplates implements Serializable {
      * %%APP%% - the angular module application name %%DIRECTIVES%% - the angular directives %%MODULES%% the modules generates %%CONTROLLER%% the modules generates
      *
      * @param templateName The template name
-     * @param template the template to build
+     * @param template     the template to build
      *
      * @return the name
      */
-    public static StringBuilder compileTemplate(String templateName, String template) {
+    public static StringBuilder compileTemplate(String templateName, String template)
+    {
         return processTemplate(templateName, template);
     }
 
@@ -163,19 +183,25 @@ public class FileTemplates implements Serializable {
      * Replaces all instances of the following
      *
      * @param templateName The name of the template being processed
-     * @param template The physical string to process
+     * @param template     The physical string to process
      *
      * @return
      */
-    public static StringBuilder processTemplate(String templateName, String template) {
+    public static StringBuilder processTemplate(String templateName, String template)
+    {
         String templateOutput = template;
-        for (String templateVariable : getTemplateVariables().keySet()) {
+        for (String templateVariable : getTemplateVariables().keySet())
+        {
             String templateScript = Matcher.quoteReplacement(getTemplateVariables().get(templateVariable).toString());
             String templateNameClean = templateVariable;
-            try {
+            try
+            {
                 templateOutput = templateOutput.replaceAll("" + templateNameClean + "", templateScript);
-            } catch (IllegalArgumentException iae) {
-                LOG.log(Level.CONFIG, "[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[{0}];[Script]-[{1}]", new Object[]{
+            }
+            catch (IllegalArgumentException iae)
+            {
+                LOG.log(Level.CONFIG, "[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[{0}];[Script]-[{1}]", new Object[]
+                {
                     templateVariable, templateScript
                 });
                 LOG.severe(TextUtilities.stackTraceToString(iae));
@@ -191,11 +217,12 @@ public class FileTemplates implements Serializable {
      * %%APP%% - the angular module application name %%DIRECTIVES%% - the angular directives %%MODULES%% the modules generates %%CONTROLLER%% the modules generates
      *
      * @param referenceClass The class to find where the file is at
-     * @param templateName the template to use
+     * @param templateName   the template to use
      *
      * @return the name
      */
-    public static StringBuilder compileTemplate(Class referenceClass, String templateName) {
+    public static StringBuilder compileTemplate(Class referenceClass, String templateName)
+    {
         String template = getFileTemplate(referenceClass, templateName).toString();
         return processTemplate(templateName, template);
     }

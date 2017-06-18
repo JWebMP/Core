@@ -183,7 +183,13 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
         angulars.addAll(getPage().getAngular().getAngularDirectives());
         angulars.stream().forEach(directive ->
         {
-            output.append(FileTemplates.compileTemplate(directive.getReferenceName(), directive.renderFunction()));
+            String function = directive.renderFunction();
+            StringBuilder outputString = FileTemplates.compileTemplate(directive.getReferenceName(), function);
+            if (!outputString.toString().endsWith("\n\r"))
+            {
+                outputString.append("\n\r\t");
+            }
+            output.append(outputString);
         });
         return output;
     }

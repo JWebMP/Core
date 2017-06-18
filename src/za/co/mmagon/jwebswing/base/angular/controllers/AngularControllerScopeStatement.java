@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.base.angular.controllers;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 /**
@@ -24,8 +25,10 @@ import java.util.Comparator;
  * @author Marc Magon
  * @since 19 Mar 2017
  */
-public abstract class AngularControllerScopeStatement implements Comparator<AngularControllerScopeStatement>
+public abstract class AngularControllerScopeStatement implements Comparator<AngularControllerScopeStatement>, Serializable
 {
+
+    private static final long serialVersionUID = 1L;
 
     private int sortOrder = 100;
 
