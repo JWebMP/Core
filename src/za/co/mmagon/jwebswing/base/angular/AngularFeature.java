@@ -120,7 +120,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
             if (getPage().getBody().readChildrenPropertyFirstResult(AngularPageConfigurator.AngularEnabledString, true))
             {
                 getPage().getBody().addAttribute(AngularAttributes.ngApp, getAppName() + "");
-                getPage().getBody().addAttribute(AngularAttributes.ngController, controllerName);
+                getPage().getBody().addAttribute(AngularAttributes.ngController, controllerName + " as jwCntrl");
             }
         }
         super.preConfigure();
@@ -185,10 +185,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
         {
             String function = directive.renderFunction();
             StringBuilder outputString = FileTemplates.compileTemplate(directive.getReferenceName(), function);
-            if (!outputString.toString().endsWith("\n\r"))
-            {
-                outputString.append("\n\r\t");
-            }
+            outputString.append("\n\t");
             output.append(outputString);
         });
         return output;
@@ -206,7 +203,10 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
         angulars.addAll(getPage().getAngular().getAngularFactories());
         angulars.stream().forEach(directive ->
         {
-            output.append(FileTemplates.compileTemplate(directive.getReferenceName(), directive.renderFunction()));
+            String function = directive.renderFunction();
+            StringBuilder outputString = FileTemplates.compileTemplate(directive.getReferenceName(), function);
+            outputString.append("\n\t");
+            output.append(outputString);
         });
         return output;
     }
@@ -224,7 +224,10 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
         angulars.addAll(getPage().getAngular().getAngularControllers());
         angulars.stream().forEach(controller ->
         {
-            output.append(FileTemplates.compileTemplate(controller.getReferenceName(), controller.renderFunction()));
+            String function = controller.renderFunction();
+            StringBuilder outputString = FileTemplates.compileTemplate(controller.getReferenceName(), function);
+            outputString.append("\n");
+            output.append(outputString);
         });
         return output;
     }

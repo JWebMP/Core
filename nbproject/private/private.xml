@@ -79,6 +79,10 @@
         </group>
         <group name="JWebSwing Plugins"/>
         <group name="Dance Culture Complete"/>
-        <group name="LSM"/>
+        <group name="LSM">
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/angular/AngularPageConfigurator.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/src/za/co/mmagon/jwebswing/base/angular/AngularFeature.java</file>
+            <file>file:/C:/AESoft/Programs/JWebSwing/test/za/co/mmagon/jwebswing/base/angular/AngularFeatureTest.java</file>
+        </group>
     </open-files>
 </project-private>

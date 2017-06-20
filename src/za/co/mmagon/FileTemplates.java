@@ -141,10 +141,11 @@ public class FileTemplates implements Serializable
                 String templateFileName = fileName;
                 templateFileName += ".js";
                 byte[] fileContents;
-                InputStream is = referenceClass.getResourceAsStream(templateFileName);
-                fileContents = new byte[is.available()];
-                is.read(fileContents, 0, is.available());
-                is.close();
+                try (InputStream is = referenceClass.getResourceAsStream(templateFileName))
+                {
+                    fileContents = new byte[is.available()];
+                    is.read(fileContents, 0, is.available());
+                }
                 String contents = new String(fileContents);
                 setTemplateScript(templateName, new StringBuilder(contents));
             }
@@ -207,7 +208,7 @@ public class FileTemplates implements Serializable
                 LOG.severe(TextUtilities.stackTraceToString(iae));
             }
         }
-        TemplateScripts.put(templateName, new StringBuilder(templateOutput));
+        TemplateScripts.put(templateName, new StringBuilder(templateOutput.trim()));
         return TemplateScripts.get(templateName);
     }
 

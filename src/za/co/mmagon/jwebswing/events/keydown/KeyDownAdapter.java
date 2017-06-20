@@ -60,8 +60,8 @@ public abstract class KeyDownAdapter extends Event
     {
         if (!isConfigured())
         {
-            
-            component.addAttribute(AngularAttributes.ngKeydown, "perform($event," + renderVariables() + ");");
+
+            component.addAttribute(AngularAttributes.ngKeydown, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

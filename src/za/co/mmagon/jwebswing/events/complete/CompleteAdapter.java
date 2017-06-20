@@ -66,7 +66,7 @@ public abstract class CompleteAdapter extends Event
         {
 
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngComplete, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngComplete, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

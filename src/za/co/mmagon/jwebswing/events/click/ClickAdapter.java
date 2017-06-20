@@ -60,11 +60,10 @@ public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
     {
         if (!isConfigured())
         {
-
-            getComponent().addAttribute(AngularAttributes.ngClick, "jw.isLoading || perform($event," + renderVariables() + ");");
+            getComponent().addAttribute(AngularAttributes.ngClick, "jwCntrl.jw.isLoading || jwCntrl.perform($event," + renderVariables() + ");");
             if (getComponent().getAttribute(AngularAttributes.ngDisabled) == null)
             {
-                getComponent().addAttribute(AngularAttributes.ngDisabled, "jw.isLoading");
+                getComponent().addAttribute(AngularAttributes.ngDisabled, "jwCntrl.jw.isLoading");
             }
         }
         super.preConfigure();

@@ -61,9 +61,9 @@ public abstract class LoadAdapter extends Event
     {
         if (!isConfigured())
         {
-            
+
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngLoad, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngLoad, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

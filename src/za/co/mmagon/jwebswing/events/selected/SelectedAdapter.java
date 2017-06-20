@@ -60,8 +60,8 @@ public abstract class SelectedAdapter extends Event
     {
         if (!isConfigured())
         {
-            
-            component.addAttribute(AngularAttributes.ngSelected, "perform($event," + renderVariables() + ");");
+
+            component.addAttribute(AngularAttributes.ngSelected, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

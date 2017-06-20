@@ -61,9 +61,9 @@ public abstract class UnselectedtAdapter extends Event
     {
         if (!isConfigured())
         {
-            
+
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngUnselected, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngUnselected, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

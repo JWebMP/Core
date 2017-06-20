@@ -61,9 +61,9 @@ public abstract class ResizeStartAdapter extends Event
     {
         if (!isConfigured())
         {
-            
+
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngResizeStart, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngResizeStart, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

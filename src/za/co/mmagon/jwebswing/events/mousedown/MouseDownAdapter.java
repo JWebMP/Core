@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,13 +16,16 @@
  */
 package za.co.mmagon.jwebswing.events.mousedown;
 
+import java.util.logging.Level;
+import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.Event;
+import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
+import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
+import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
+import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
-import java.util.logging.*;
-import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.base.ajax.*;
-import za.co.mmagon.jwebswing.base.angular.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.*;
 
 /**
  * Handles all events. Over-ride methods.
@@ -58,9 +61,9 @@ public abstract class MouseDownAdapter extends Event
     {
         if (!isConfigured())
         {
-            
+
             AngularPageConfigurator.setRequired(getComponent(), true);
-            component.addAttribute(AngularAttributes.ngMousedown, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngMousedown, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }
@@ -82,7 +85,7 @@ public abstract class MouseDownAdapter extends Event
         }
         catch (Exception e)
         {
-            LOG.log(Level.SEVERE,"Error In Firing Event", e);
+            LOG.log(Level.SEVERE, "Error In Firing Event", e);
         }
     }
 

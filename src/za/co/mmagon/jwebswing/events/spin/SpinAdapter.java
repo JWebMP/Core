@@ -61,9 +61,9 @@ public abstract class SpinAdapter extends Event
     {
         if (!isConfigured())
         {
-            
+
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngSpin, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngSpin, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

@@ -69,7 +69,7 @@ public abstract class BeforeCloseAdapter extends Event
             JQueryPageConfigurator.setRequired((Component) getComponent(), true);
             AngularPageConfigurator.setRequired(getComponent(), true);
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngBeforeClose, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngBeforeClose, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

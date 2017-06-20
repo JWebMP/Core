@@ -65,7 +65,7 @@ public abstract class DropOutAdapter extends Event
         {
 
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute("ng-drop-out", "perform($event," + renderVariables() + ");");
+            component.addAttribute("ng-drop-out", "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

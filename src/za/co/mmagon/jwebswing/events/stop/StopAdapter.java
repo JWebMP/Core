@@ -61,9 +61,9 @@ public abstract class StopAdapter extends Event
     {
         if (!isConfigured())
         {
-            
+
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngStop, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngStop, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

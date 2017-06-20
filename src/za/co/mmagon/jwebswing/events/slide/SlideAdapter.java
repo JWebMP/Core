@@ -64,9 +64,9 @@ public abstract class SlideAdapter extends Event
     {
         if (!isConfigured())
         {
-            
+
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngSlide, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngSlide, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

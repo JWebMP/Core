@@ -1,6 +1,3 @@
-//***********************************
-// Angular Implementation
-//***********************************
 (function (angular) {
     /**
      * All Modules
@@ -21,5 +18,4 @@
      * All Controllers
      */
     JW_CONTROLLERS
-
 })(window.angular);

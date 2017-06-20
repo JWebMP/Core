@@ -61,9 +61,9 @@ public abstract class StartAdapter extends Event
     {
         if (!isConfigured())
         {
-            
+
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngStart, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngStart, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

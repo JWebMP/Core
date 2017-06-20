@@ -61,9 +61,9 @@ public abstract class RemoveAdapter extends Event
     {
         if (!isConfigured())
         {
-            
+
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngRemove, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngRemove, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

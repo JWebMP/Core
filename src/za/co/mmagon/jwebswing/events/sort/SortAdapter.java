@@ -61,9 +61,9 @@ public abstract class SortAdapter extends Event
     {
         if (!isConfigured())
         {
-            
+
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngSort, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngSort, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

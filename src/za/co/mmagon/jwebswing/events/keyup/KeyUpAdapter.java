@@ -61,7 +61,7 @@ public abstract class KeyUpAdapter extends Event
         if (!isConfigured())
         {
             AngularPageConfigurator.setRequired(getComponent(), true);
-            component.addAttribute(AngularAttributes.ngKeyup, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngKeyup, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

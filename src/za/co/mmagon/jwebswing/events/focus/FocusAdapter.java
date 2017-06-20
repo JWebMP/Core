@@ -66,7 +66,7 @@ public abstract class FocusAdapter extends Event
         {
 
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngFocus, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngFocus, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

@@ -72,7 +72,7 @@ public abstract class BeforeActivateAdapter extends Event
             JQueryPageConfigurator.setRequired((Component) getComponent(), true);
             AngularPageConfigurator.setRequired(getComponent(), true);
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngBeforeActivate, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngBeforeActivate, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

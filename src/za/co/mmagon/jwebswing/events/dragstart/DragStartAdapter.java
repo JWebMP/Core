@@ -66,7 +66,7 @@ public abstract class DragStartAdapter extends Event
         {
 
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngDragStart, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngDragStart, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

@@ -66,7 +66,7 @@ public abstract class ChangeAdapter extends Event
         {
 
             AngularPageConfigurator.setRequired(getComponent(), true);
-            component.addAttribute(AngularAttributes.ngChange, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngChange, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

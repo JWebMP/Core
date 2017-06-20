@@ -61,9 +61,9 @@ public abstract class ReceiveAdapter extends Event
     {
         if (!isConfigured())
         {
-            
+
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngReceive, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngReceive, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

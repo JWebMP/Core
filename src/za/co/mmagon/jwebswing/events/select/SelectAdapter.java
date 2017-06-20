@@ -61,9 +61,9 @@ public abstract class SelectAdapter extends Event
     {
         if (!isConfigured())
         {
-            
+
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngSelect, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngSelect, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

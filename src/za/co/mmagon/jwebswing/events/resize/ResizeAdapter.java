@@ -61,9 +61,9 @@ public abstract class ResizeAdapter extends Event
     {
         if (!isConfigured())
         {
-            
+
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngResize, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngResize, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

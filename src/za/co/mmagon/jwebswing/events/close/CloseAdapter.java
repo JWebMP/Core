@@ -65,7 +65,7 @@ public abstract class CloseAdapter extends Event
         {
 
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngClose, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngClose, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

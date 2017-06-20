@@ -66,7 +66,7 @@ public abstract class CreateAdapter extends Event
         {
 
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngCreate, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngCreate, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

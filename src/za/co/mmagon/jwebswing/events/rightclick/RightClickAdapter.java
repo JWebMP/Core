@@ -57,9 +57,9 @@ public abstract class RightClickAdapter extends Event implements ParagraphEvents
     {
         if (!isConfigured())
         {
-            
+
             getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngRightClick, "perform($event," + renderVariables() + ");");
+            component.addAttribute(AngularAttributes.ngRightClick, "jwCntrl.perform($event," + renderVariables() + ");");
         }
         super.preConfigure();
     }

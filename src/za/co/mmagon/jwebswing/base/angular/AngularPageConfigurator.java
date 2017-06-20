@@ -107,7 +107,7 @@ public class AngularPageConfigurator extends PageConfigurator
             {
                 page.getBody().getJavascriptReferences().add(AngularReferencePool.Angular1.getJavaScriptReference());
                 page.getBody().addAttribute(AngularAttributes.ngApp, AngularFeature.getAppName());
-                page.getBody().addAttribute(AngularAttributes.ngController, AngularFeature.getControllerName());
+                page.getBody().addAttribute(AngularAttributes.ngController, AngularFeature.getControllerName() + " as jwCntrl");
             }
         }
         else
