@@ -27,6 +27,14 @@ if (window.sessionStorage)
 jw.env = {};
 jw.env.loadescripts = [];
 jw.env.loadedcss = [];
+jw.env.controller = null;
+
+
+$('head link[rel$=\'stylesheet\']').each(function(item){
+    jw.env.loadedcss.push($(this).attr('href'));
+});
+
+
 
 /**
  * Loads an angular JSON variables object from the server
@@ -287,7 +295,6 @@ jw.actions.processHtml = function (result, $scope, $compile, $rootScope) {
                 $appElement.injector().invoke(function ($compile) {
                     var scope = angular.element(jqHtmlString).scope();
                     $compile(jqHtmlString)(scope);
-                    console.log('compiled the returned html');
                     scope.$apply();
                 });
             } else
@@ -301,27 +308,7 @@ jw.actions.processHtml = function (result, $scope, $compile, $rootScope) {
                 }
                 $scope.$apply();
             }
-
-            /*
-             var elementWithController = $('#' + item.id).find('[ng-controller]');
-             var controllerName = elementWithController.attr('ng-controller');
-             if (controllerName != undefined)
-             {
-             // Some variables
-             var $controllerElement = angular.element('#' + elementWithController.attr('id'));
-
-
-             // compiling and applying / digesting the scope.
-             $appElement.injector().invoke(function ($compile) {
-             var newScope = $rootScope.$new();
-             var scope = $controllerElement.scope();
-             $compile($controllerElement)(scope);
-             scope.$apply();
-             });
-             }*/
         });
-
-
 };
 /**
  * Goes through each reaction performing each task

@@ -2,15 +2,21 @@
 
 jw.afterInit = function () {};
 
+if (window.Pace)
+{
+    Pace.options = {ajax: {ignoreURLs: ['jwatmospush']}};
+}
+
 JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
         , $compile
         , $parse
         , $timeout
         , $rootScope
-//%CONTROLLER_INSERTIONS%
+        //%CONTROLLER_INSERTIONS%
         ) {
-    var me = this;
-    me.jw = window.jw;
+    var self = this;
+    self.jw = window.jw;
+    jw.env.controller = self; //give external access to the body controller
 
     jw.angularLoading = true;
     /**
@@ -191,10 +197,11 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
                 }
                 try
                 {
+                    jw.isLoading = false;
                     if (window.Pace)
                     {
                         window.Pace.stop();
-                        jw.isLoading = false;
+
                     }
                 } catch (e)
                 {
@@ -218,10 +225,10 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
                 }
                 try
                 {
+                    jw.isLoading = false;
                     if (window.Pace)
                     {
                         window.Pace.stop();
-                        jw.isLoading = false;
                     }
                 } catch (e)
                 {
@@ -262,5 +269,5 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
 
     //JW_SCOPE_INSERTIONS
 
-    jw.pageLoading = false;
+    //jw.pageLoading = false;
 }); //end of controller
