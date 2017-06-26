@@ -115,7 +115,6 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
             return $.Deferred();
         });
     };
-
     $scope._init();
     /**
      * Performs a post send to the server
@@ -125,7 +124,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
      *
      * @returns $.ajax
      */
-    $scope.perform = function ($event, dataVariables, eventId) {
+    self.perform = function ($event, dataVariables, eventId) {
         jw.isLoading = true;
         if (window.Pace)
             window.Pace.start();
