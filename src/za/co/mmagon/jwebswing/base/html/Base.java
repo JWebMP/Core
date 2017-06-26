@@ -57,7 +57,7 @@ import za.co.mmagon.logger.LogFactory;
  * Note: If the base tag is present, it must have either an href attribute or<p>
  * a target attribute, or both.<p>
  */
-public class Base<J extends Base>
+public class Base<J extends Base<J>>
         extends Component<NoChildren, BaseAttributes, NoFeatures, NoEvents, J>
         implements NoIDTag, NoClosingTag, HeadChildren, NoClosingBracket, NoClassAttribute
 {

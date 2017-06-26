@@ -61,7 +61,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * <p>
  */
-public class ObjectTag<J extends ObjectTag>
+public class ObjectTag<J extends ObjectTag<J>>
         extends Component<ObjectTagChildren, ObjectAttributes, GlobalFeatures, GlobalEvents, J>
         implements NoNewLineForRawText
 {

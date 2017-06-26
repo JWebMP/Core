@@ -51,7 +51,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class S<J extends S>
+public class S<J extends S<J>>
         extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements ParagraphChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag
 {

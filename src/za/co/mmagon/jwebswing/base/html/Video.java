@@ -42,7 +42,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class Video<J extends Video>
+public class Video<J extends Video<J>>
         extends Component<VideoChildren, VideoAttributes, GlobalFeatures, GlobalEvents, J>
 {
 

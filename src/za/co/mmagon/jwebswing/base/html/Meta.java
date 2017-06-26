@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,8 +17,7 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import java.util.logging.Level;
-import java.util.logging.*;
-import za.co.mmagon.jwebswing.Component;
+import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.attributes.MetaAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
@@ -57,11 +56,13 @@ import za.co.mmagon.logger.LogFactory;
  *
  *
  */
-public class Meta extends ComponentHierarchyBase<NoChildren, MetaAttributes, NoFeatures, NoEvents, Component>
+public class Meta extends ComponentHierarchyBase<NoChildren, MetaAttributes, NoFeatures, NoEvents, Meta>
         implements NoIDTag, NoClosingTag, HeadChildren, NoClassAttribute, NoNewLineBeforeClosingTag
 {
 
     private static Logger logger = LogFactory.getInstance().getLogger("<META>");
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs an empty Meta tag

@@ -44,7 +44,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class Marker<J extends Marker>
+public class Marker<J extends Marker<J>>
         extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {

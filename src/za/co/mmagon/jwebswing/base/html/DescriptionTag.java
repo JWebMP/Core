@@ -47,7 +47,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  * @param <J>
  */
-public class DescriptionTag<J extends DescriptionTag>
+public class DescriptionTag<J extends DescriptionTag<J>>
         extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
         implements NoIDTag, NoNewLineBeforeClosingTag, NoNewLineForRawText, DescriptionListChildren
 {

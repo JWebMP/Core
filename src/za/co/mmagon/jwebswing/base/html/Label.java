@@ -48,7 +48,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class Label<J extends Label>
+public class Label<J extends Label<J>>
         extends Component<GlobalChildren, LabelAttributes, GlobalFeatures, GlobalEvents, J>
         implements ParagraphChildren, NoNewLineBeforeChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag
 {

@@ -24,7 +24,8 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
  * @author GedMarc
  * @param <J>
  */
-public class InputButtonType<J extends InputButtonType> extends Input<InputButtonTypeAttributes, J>
+public class InputButtonType<J extends InputButtonType<J>>
+        extends Input<InputButtonTypeAttributes, J>
 {
 
     private static final long serialVersionUID = 1L;

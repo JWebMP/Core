@@ -50,7 +50,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  * @since 2014/12/21
  */
-public class Header<J extends Header>
+public class Header<J extends Header<J>>
         extends Component<HeaderChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements NoIDTag, GlobalChildren
 {

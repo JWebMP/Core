@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,7 +17,7 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import java.util.logging.Level;
-import java.util.logging.*;
+import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.attributes.ScriptAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
@@ -74,7 +74,8 @@ import za.co.mmagon.logger.LogFactory;
  *
  *
  */
-public class Script extends ComponentHierarchyBase<NoChildren, ScriptAttributes, NoFeatures, NoEvents, Script>
+public class Script<J extends Script<J>>
+        extends ComponentHierarchyBase<NoChildren, ScriptAttributes, NoFeatures, NoEvents, J>
         implements NoIDTag, HeadChildren, NoClassAttribute
 {
 
@@ -137,9 +138,10 @@ public class Script extends ComponentHierarchyBase<NoChildren, ScriptAttributes,
      *
      * @param javascript The JavaScript to directly insert
      */
-    public void setJavascript(String javascript)
+    public J setJavascript(String javascript)
     {
         setText(javascript);
+        return (J) this;
     }
 
     /**

@@ -52,7 +52,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @since forever
  * @version 1.0
  */
-public class ListItem<J extends ListItem>
+public class ListItem<J extends ListItem<J>>
         extends Component<ListItemChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements ListChildren, NoNewLineForRawText, ListItemChildren
 {

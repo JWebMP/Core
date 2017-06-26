@@ -52,7 +52,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @param <E> The allowed events
  * @param <J> The Clonable object
  */
-public class Div<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Div>
+public class Div<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Div<C, A, F, E, J>>
         extends Component<C, A, F, E, J>
         implements BodyChildren, ImageMapChildren, AreaChildren, LayoutHandler,
         ListItemChildren

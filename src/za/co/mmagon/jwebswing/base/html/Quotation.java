@@ -50,7 +50,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class Quotation<J extends Quotation>
+public class Quotation<J extends Quotation<J>>
         extends Component<NoChildren, QuotationAttributes, GlobalFeatures, GlobalEvents, J>
         implements ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {

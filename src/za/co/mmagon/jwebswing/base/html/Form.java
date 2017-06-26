@@ -61,7 +61,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  * @since forever
  */
-public class Form<J extends Form>
+public class Form<J extends Form<J>>
         extends Component<FormChildren, FormAttributes, GlobalFeatures, GlobalEvents, J>
 {
 

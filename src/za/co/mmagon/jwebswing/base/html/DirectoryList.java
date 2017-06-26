@@ -41,7 +41,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  * @deprecated
  */
-public class DirectoryList<J extends DirectoryList>
+public class DirectoryList<J extends DirectoryList<J>>
         extends Component<DirectoryListChildren, DirectoryListAttributes, NoFeatures, NoEvents, J>
 {
 

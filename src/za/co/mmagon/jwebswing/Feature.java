@@ -33,7 +33,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  *
  * @since 23 Apr 2016
  */
-public class Feature<O extends JavaScriptPart, J extends Feature>
+public class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
         extends ComponentFeatureBase<NoFeatures, J>
         implements GlobalFeatures
 {

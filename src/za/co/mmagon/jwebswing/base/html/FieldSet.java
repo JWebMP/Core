@@ -41,7 +41,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  * @param <J>
  */
-public class FieldSet<J extends FieldSet>
+public class FieldSet<J extends FieldSet<J>>
         extends Component<FieldSetChildren, NoAttributes, NoFeatures, NoEvents, J>
         implements FormChildren, NoIDTag
 {

@@ -55,7 +55,7 @@ import za.co.mmagon.logger.LogFactory;
  * <p>
  *
  */
-public class Abbreviation<J extends Abbreviation>
+public class Abbreviation<J extends Abbreviation<J>>
         extends Component<AbbreviationChildren, AbbreviationAttributes, GlobalFeatures, GlobalEvents, J>
         implements NoNewLineBeforeClosingTag, NoNewLineForRawText
 {

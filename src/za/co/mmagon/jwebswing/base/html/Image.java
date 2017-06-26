@@ -51,7 +51,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author Marc Magon
  * @param <J>
  */
-public class Image<J extends Image>
+public class Image<J extends Image<J>>
         extends Component<NoChildren, ImageAttributes, GlobalFeatures, GlobalEvents, J>
         implements ImageMapChildren, FigureChildren, GlobalChildren, ListItemChildren
 {

@@ -24,7 +24,8 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
  * @author GedMarc
  * @param <J>
  */
-public class InputFileType<J extends InputFileType> extends Input<InputFileTypeAttributes, J>
+public class InputFileType<J extends InputFileType<J>>
+        extends Input<InputFileTypeAttributes, J>
 {
 
     private static final long serialVersionUID = 1L;

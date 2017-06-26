@@ -24,7 +24,8 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
  * @author GedMarc
  * @param <J>
  */
-public class InputHiddenType<J extends InputHiddenType> extends Input<InputHiddenTypeAttributes, J>
+public class InputHiddenType<J extends InputHiddenType<J>>
+        extends Input<InputHiddenTypeAttributes, J>
 {
 
     private static final long serialVersionUID = 1L;

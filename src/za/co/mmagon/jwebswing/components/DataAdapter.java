@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -35,7 +35,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
  *
  * @since 01 Jan 2016
  */
-public class DataAdapter<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends DataAdapter>
+public class DataAdapter<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends DataAdapter<C, A, F, E, J>>
         extends Div<C, A, F, E, J>
 {
 

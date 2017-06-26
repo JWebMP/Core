@@ -71,7 +71,7 @@ import za.co.mmagon.logger.LogFactory;
  * @param <A> The attribute set for the input component
  * @param <J>
  */
-public class Input<A extends Enum & AttributeDefinitions, J extends Input>
+public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
         extends Component<NoChildren, A, GlobalFeatures, GlobalEvents, J>
         implements NoClosingTag, GlobalChildren, ParagraphChildren
 {

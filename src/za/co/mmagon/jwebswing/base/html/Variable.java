@@ -39,7 +39,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class Variable<J extends Variable>
+public class Variable<J extends Variable<J>>
         extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements PhraseChildren, ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {

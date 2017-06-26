@@ -53,7 +53,8 @@ import za.co.mmagon.logger.LogFactory;
  *
  *
  */
-public class Area extends ComponentHierarchyBase<AreaChildren, AreaAttributes, GlobalFeatures, GlobalEvents, Area>
+public class Area<J extends Area<J>>
+        extends ComponentHierarchyBase<AreaChildren, AreaAttributes, GlobalFeatures, GlobalEvents, J>
         implements MapChildren, Serializable
 {
 

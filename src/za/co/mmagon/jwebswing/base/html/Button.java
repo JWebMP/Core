@@ -50,7 +50,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  * @since 2014/12/20
  */
-public class Button<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Button>
+public class Button<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Button<C, A, F, E, J>>
         extends Component<C, A, F, E, J>
         implements GlobalChildren
 {

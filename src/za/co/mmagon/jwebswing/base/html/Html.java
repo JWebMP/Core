@@ -61,7 +61,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.DevelopmentEnvironments
  *
  * @since right from the start, 2007 with radio on live
  */
-public abstract class Html<J extends Html>
+public abstract class Html<J extends Html<J>>
         extends ComponentHTMLBase<HTMLFeatures, NoEvents, J>
         implements NoIDTag, NoClassAttribute
 {

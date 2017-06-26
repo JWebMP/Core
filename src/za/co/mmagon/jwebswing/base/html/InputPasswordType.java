@@ -24,7 +24,8 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
  * @author GedMarc
  * @param <J>
  */
-public class InputPasswordType<J extends InputPasswordType> extends Input<InputPasswordTypeAttributes, J>
+public class InputPasswordType<J extends InputPasswordType<J>>
+        extends Input<InputPasswordTypeAttributes, J>
 {
 
     private static final long serialVersionUID = 1L;

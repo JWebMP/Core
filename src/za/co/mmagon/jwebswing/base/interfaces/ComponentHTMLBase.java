@@ -35,7 +35,7 @@ import za.co.mmagon.logger.LogFactory;
  * @author GedMarc
  * @since 23 Apr 2016
  */
-public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHTMLBase>
+public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHTMLBase<F, E, J>>
         extends ComponentEventBase<F, E, J> implements IComponentHTMLBase<J>
 {
 

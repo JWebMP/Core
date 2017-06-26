@@ -60,8 +60,8 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  *
  */
-public class DocumentType
-        extends ComponentHTMLBase<GlobalFeatures, GlobalEvents, DocumentType>
+public class DocumentType<J extends DocumentType<J>>
+        extends ComponentHTMLBase<GlobalFeatures, GlobalEvents, J>
         implements NoNewLineForRawText
 {
 

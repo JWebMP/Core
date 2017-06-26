@@ -38,7 +38,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
  *
  * @since 24 Apr 2016
  */
-public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentStyleBase>
+public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentStyleBase<C, A, F, E, J>>
         extends ComponentHierarchyBase<C, A, F, E, J> implements IComponentStyleBase<J>
 {
 

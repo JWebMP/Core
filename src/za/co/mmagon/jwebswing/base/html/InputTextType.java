@@ -26,7 +26,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphCh
  * @author GedMarc
  * @param <J>
  */
-public class InputTextType<J extends InputTextType>
+public class InputTextType<J extends InputTextType<J>>
         extends Input<InputTextAttributes, J>
         implements ParagraphChildren, FormChildren
 {

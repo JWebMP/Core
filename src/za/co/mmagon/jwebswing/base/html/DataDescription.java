@@ -42,7 +42,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  * @param <J>
  */
-public class DataDescription<J extends DataDescription>
+public class DataDescription<J extends DataDescription<J>>
         extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
         implements NoNewLineBeforeClosingTag, NoNewLineForRawText, DescriptionListChildren
 {

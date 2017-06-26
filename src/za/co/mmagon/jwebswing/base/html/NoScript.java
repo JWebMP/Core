@@ -43,7 +43,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class NoScript<J extends NoScript>
+public class NoScript<J extends NoScript<J>>
         extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements BodyChildren, NoIDTag
 {

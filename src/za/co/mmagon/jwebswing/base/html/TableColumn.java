@@ -49,7 +49,7 @@ import za.co.mmagon.logger.LogFactory;
  *
  * @since 2014/12/20
  */
-public class TableColumn<J extends TableColumn>
+public class TableColumn<J extends TableColumn<J>>
         extends Component<NoChildren, TableColumnAttributes, GlobalFeatures, GlobalEvents, J>
         implements TableColumnGroupChildren
 {

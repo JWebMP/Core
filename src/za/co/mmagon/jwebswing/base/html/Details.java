@@ -46,7 +46,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  * @param <J>
  */
-public class Details<J extends Details>
+public class Details<J extends Details<J>>
         extends Component<DetailsChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements GlobalChildren, ParagraphChildren, PhraseChildren
 {

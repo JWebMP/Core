@@ -54,7 +54,8 @@ import za.co.mmagon.jwebswing.base.html.attributes.HeaderTypes;
  *
  * @since 24 Apr 2016
  */
-public class H1<J extends H1> extends HeaderText<J>
+public class H1<J extends H1<J>>
+        extends HeaderText<J>
 {
 
     private static final long serialVersionUID = 1L;

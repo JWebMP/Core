@@ -68,7 +68,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * <p>
  */
-public class Head<J extends Head>
+public class Head<J extends Head<J>>
         extends ComponentHierarchyBase<HeadChildren, NoAttributes, NoFeatures, NoEvents, J>
         implements NoIDTag, HtmlChildren, NoClassAttribute
 {

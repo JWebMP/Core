@@ -24,7 +24,8 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
  * @author GedMarc
  * @param <J>
  */
-public class InputCheckBoxType<J extends InputCheckBoxType> extends Input<InputCheckBoxTypeAttributes, J>
+public class InputCheckBoxType<J extends InputCheckBoxType<J>>
+        extends Input<InputCheckBoxTypeAttributes, J>
 {
 
     private static final long serialVersionUID = 1L;

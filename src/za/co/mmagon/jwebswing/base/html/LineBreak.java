@@ -46,7 +46,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  * @param <J>
  */
-public class LineBreak<J extends LineBreak>
+public class LineBreak<J extends LineBreak<J>>
         extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
         implements NoNewLineBeforeClosingTag, NoClosingTag, NoNewLineForRawText, GlobalChildren, NoIDTag
 {

@@ -37,7 +37,7 @@ import za.co.mmagon.logger.LogFactory;
  *
  * @since 23 Apr 2016
  */
-public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentFeatureBase>
+public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentFeatureBase<F, J>>
         extends ComponentDependancyBase<J>
         implements IComponentFeatureBase<F, J>
 {

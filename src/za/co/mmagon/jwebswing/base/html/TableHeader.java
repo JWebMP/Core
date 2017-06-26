@@ -59,7 +59,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @since Forever
  * @version 1.0
  */
-public class TableHeader<J extends TableHeader>
+public class TableHeader<J extends TableHeader<J>>
         extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements TableChildren, TableRowChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {

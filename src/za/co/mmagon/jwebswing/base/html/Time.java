@@ -50,7 +50,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class Time<J extends Time>
+public class Time<J extends Time<J>>
         extends Component<NoChildren, TimeAttributes, GlobalFeatures, GlobalEvents, J>
         implements GlobalChildren
 {

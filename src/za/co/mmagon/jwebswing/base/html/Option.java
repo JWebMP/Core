@@ -38,7 +38,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  * @param <J>
  */
-public class Option<J extends Option>
+public class Option<J extends Option<J>>
         extends Component<NoChildren, OptionAttributes, NoFeatures, NoEvents, J>
         implements DataListChildren, SelectChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, DisplayObjectType
 {

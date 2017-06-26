@@ -33,7 +33,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class Track<J extends Track>
+public class Track<J extends Track<J>>
         extends Component<NoChildren, TrackAttributes, NoFeatures, NoEvents, J>
 {
 

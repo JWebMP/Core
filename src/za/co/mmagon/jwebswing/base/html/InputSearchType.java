@@ -24,7 +24,8 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
  * @author GedMarc
  * @param <J>
  */
-public class InputSearchType<J extends InputSearchType> extends Input<InputResetTypeAttributes, J>
+public class InputSearchType<J extends InputSearchType<J>>
+        extends Input<InputResetTypeAttributes, J>
 {
 
     private static final long serialVersionUID = 1L;

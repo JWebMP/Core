@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -30,8 +30,10 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  * @author MMagon
  * <p>
  */
-public abstract class OnDemandCapableFeature extends Feature<JavaScriptPart, Feature>
+public abstract class OnDemandCapableFeature extends Feature<JavaScriptPart, OnDemandCapableFeature>
 {
+
+    private static final long serialVersionUID = 1L;
 
     private ArrayList<ComponentFeatureBase> onDemandFeatures;
     private boolean serverActing = true;
@@ -74,8 +76,8 @@ public abstract class OnDemandCapableFeature extends Feature<JavaScriptPart, Fea
         ArrayList<String> currentFunctionsToComponent = new ArrayList<>();
         getOnDemandFeatures().stream().forEach((next)
                 ->
-                {
-                    addQuery(next.renderJavascript());
+        {
+            addQuery(next.renderJavascript());
         });
     }
 

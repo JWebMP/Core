@@ -30,7 +30,7 @@ jw.env.loadedcss = [];
 jw.env.controller = null;
 
 
-$('head link[rel$=\'stylesheet\']').each(function(item){
+$('head link[rel$=\'stylesheet\']').each(function (item) {
     jw.env.loadedcss.push($(this).attr('href'));
 });
 
@@ -287,26 +287,15 @@ jw.actions.processHtml = function (result, $scope, $compile, $rootScope) {
             {
                 $('#' + item.id).append(jqHtmlString);
             }
-            var elementWithController = $('#' + item.id).find('[ng-controller]');
-            var controllerName = elementWithController.attr('ng-controller');
-            if (controllerName != undefined)
+            var myNewSelf = $('#' + item.id);
+            try
             {
-                var $appElement = angular.element('body');
-                $appElement.injector().invoke(function ($compile) {
-                    var scope = angular.element(jqHtmlString).scope();
-                    $compile(jqHtmlString)(scope);
-                    scope.$apply();
-                });
-            } else
-            {
-                try
-                {
-                    $compile(jqHtmlString)($scope);
-                } catch (e)
-                {
-                    $compile(jqHtmlString)($rootScope);
-                }
+                $compile(myNewSelf)($scope);
                 $scope.$apply();
+            } catch (e)
+            {
+                $compile(myNewSelf)($rootScope);
+                $rootScope.$apply();
             }
         });
 };

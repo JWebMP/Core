@@ -24,7 +24,8 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
  * @author GedMarc
  * @param <J>
  */
-public class InputSubmitType<J extends InputSubmitType> extends Input<InputSubmitTypeAttributes, J>
+public class InputSubmitType<J extends InputSubmitType<J>>
+        extends Input<InputSubmitTypeAttributes, J>
 {
 
     private static final long serialVersionUID = 1L;

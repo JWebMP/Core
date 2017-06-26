@@ -54,7 +54,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author Marc Magon
  * @param <J>
  */
-public class IFrame<J extends IFrame>
+public class IFrame<J extends IFrame<J>>
         extends Component<NoChildren, IFrameAttributes, GlobalFeatures, GlobalEvents, J>
 {
 

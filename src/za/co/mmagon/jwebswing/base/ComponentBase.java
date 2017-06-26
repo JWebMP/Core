@@ -35,7 +35,7 @@ import za.co.mmagon.logger.LogFactory;
  */
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ComponentBase<J extends ComponentBase>
+public class ComponentBase<J extends ComponentBase<J>>
         implements IComponentBase<J>
 {
 

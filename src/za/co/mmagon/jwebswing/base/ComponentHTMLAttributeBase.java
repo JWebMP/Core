@@ -41,7 +41,7 @@ import za.co.mmagon.logger.LogFactory;
  * @author GedMarc
  * @since 23 Apr 2016
  */
-public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHTMLAttributeBase>
+public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHTMLAttributeBase<A, F, E, J>>
         extends ComponentHTMLBase<F, E, J> implements IComponentHTMLAttributeBase<A, J>
 {
 

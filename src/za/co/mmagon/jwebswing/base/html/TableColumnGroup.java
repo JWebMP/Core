@@ -44,7 +44,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  * @since 2014/12/20
  */
-public class TableColumnGroup<J extends TableColumnGroup>
+public class TableColumnGroup<J extends TableColumnGroup<J>>
         extends Component<TableColumnGroupChildren, NoAttributes, NoFeatures, NoEvents, J>
 {
 

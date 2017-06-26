@@ -56,7 +56,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @since forever
  * @version 1.0
  */
-public class TableBodyGroup<J extends TableBodyGroup>
+public class TableBodyGroup<J extends TableBodyGroup<J>>
         extends Component<TableBodyGroupChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements TableChildren
 {

@@ -25,7 +25,8 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
  * @author GedMarc
  * @param <J>
  */
-public class InputImageType<J extends InputImageType> extends Input<InputImageTypeAttributes, J>
+public class InputImageType<J extends InputImageType<J>>
+        extends Input<InputImageTypeAttributes, J>
 {
 
     private static final long serialVersionUID = 1L;

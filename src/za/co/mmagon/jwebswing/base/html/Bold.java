@@ -44,7 +44,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author Marc Magon
  * @param <J>
  */
-public class Bold<J extends Bold>
+public class Bold<J extends Bold<J>>
         extends Component<Component, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag
 {

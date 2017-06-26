@@ -31,7 +31,7 @@ import za.co.mmagon.logger.LogFactory;
  *
  * @since @version @author MMagon
  */
-public class Applet<J extends Applet>
+public class Applet<J extends Applet<J>>
         extends Component<NoChildren, AppletAttributes, GlobalFeatures, GlobalEvents, J>
 {
 

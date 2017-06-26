@@ -40,7 +40,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  * @deprecated
  */
-public class Center<J extends Center>
+public class Center<J extends Center<J>>
         extends Component<GlobalChildren, NoAttributes, NoFeatures, NoEvents, J>
         implements NoIDTag, NoClassAttribute, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {

@@ -52,7 +52,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @version 1.0
  * @deprecated
  */
-public class KeyGen<J extends KeyGen>
+public class KeyGen<J extends KeyGen<J>>
         extends Component<NoChildren, KeyGenAttributes, GlobalFeatures, GlobalEvents, J>
 {
 

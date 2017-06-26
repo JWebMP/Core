@@ -53,7 +53,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class Source<J extends Source>
+public class Source<J extends Source<J>>
         extends Component<NoChildren, SourceAttributes, NoFeatures, NoEvents, J>
         implements AudioChildren, VideoChildren, NoClosingTag
 {

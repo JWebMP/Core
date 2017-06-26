@@ -50,7 +50,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @version 1
  * @author GedMarc
  */
-public class KeyboardInput<J extends KeyboardInput>
+public class KeyboardInput<J extends KeyboardInput<J>>
         extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements PhraseChildren
 {

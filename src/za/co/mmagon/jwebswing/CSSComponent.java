@@ -30,7 +30,8 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  * @since 2015/04/24
  */
-public abstract class CSSComponent<J extends CSSComponent> extends Component<CSSComponent, NoAttributes, GlobalFeatures, GlobalEvents, J>
+public abstract class CSSComponent<J extends CSSComponent<J>>
+        extends Component<CSSComponent, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements GlobalChildren
 {
 

@@ -44,7 +44,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  * @since 2014/12/21
  */
-public class HeaderGroup<J extends HeaderGroup>
+public class HeaderGroup<J extends HeaderGroup<J>>
         extends Component<HeaderGroupChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements BodyChildren
 {

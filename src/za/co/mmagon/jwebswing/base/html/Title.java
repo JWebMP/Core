@@ -52,7 +52,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  *
  */
-public class Title<J extends Title>
+public class Title<J extends Title<J>>
         extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
         implements NoIDTag, HeadChildren, OneValidTag, NoClassAttribute, NoNewLineForRawText, NoNewLineBeforeChildren, NoNewLineBeforeClosingTag
 {

@@ -41,7 +41,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  * @since 2014/12/21
  */
-public class Figure<J extends Figure>
+public class Figure<J extends Figure<J>>
         extends Component<FigureChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements NoIDTag
 {

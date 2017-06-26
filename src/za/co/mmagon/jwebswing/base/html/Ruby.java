@@ -52,7 +52,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class Ruby<J extends Ruby>
+public class Ruby<J extends Ruby<J>>
         extends Component<RubyChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 {
 

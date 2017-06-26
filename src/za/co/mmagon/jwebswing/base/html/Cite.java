@@ -38,8 +38,8 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * @author GedMarc
  */
-public class Cite
-        extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, Cite>
+public class Cite<J extends Cite<J>>
+        extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 

@@ -36,7 +36,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @since 06 Feb 2017
  *
  */
-public class ImportFile<J extends ImportFile>
+public class ImportFile<J extends ImportFile<J>>
         extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
         implements BodyChildren, ParagraphChildren
 {

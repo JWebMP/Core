@@ -39,7 +39,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  * @param <J>
  */
-public class FigureCaption<J extends FigureCaption>
+public class FigureCaption<J extends FigureCaption<J>>
         extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
         implements NoNewLineBeforeClosingTag, NoNewLineForRawText, FigureChildren
 {

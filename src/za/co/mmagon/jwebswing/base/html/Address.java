@@ -59,7 +59,7 @@ import za.co.mmagon.logger.LogFactory;
  *
  *
  */
-public class Address<J extends Address>
+public class Address<J extends Address<J>>
         extends Component<AddressChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements NoNewLineBeforeClosingTag, NoNewLineForRawText, Serializable
 {

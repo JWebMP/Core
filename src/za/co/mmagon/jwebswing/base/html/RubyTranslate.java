@@ -54,7 +54,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @deprecated
  *
  */
-public class RubyTranslate<J extends RubyTranslate>
+public class RubyTranslate<J extends RubyTranslate<J>>
         extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements RubyChildren
 {

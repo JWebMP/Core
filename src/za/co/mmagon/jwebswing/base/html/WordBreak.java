@@ -47,7 +47,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class WordBreak<J extends WordBreak>
+public class WordBreak<J extends WordBreak<J>>
         extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements NoIDTag, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {

@@ -42,7 +42,7 @@ import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
  * @since 23 Apr 2016
  */
 public class Event<A extends JavaScriptPart, J extends Event>
-        extends ComponentEventBase<GlobalFeatures, GlobalEvents, Event> implements GlobalEvents
+        extends ComponentEventBase<GlobalFeatures, GlobalEvents, Event<A, J>> implements GlobalEvents
 {
 
     private static final long serialVersionUID = 1L;

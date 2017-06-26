@@ -60,7 +60,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
  *
  * @since forever
  */
-public class HeaderText<J extends HeaderText>
+public class HeaderText<J extends HeaderText<J>>
         extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements BodyChildren, HeaderGroupChildren, GlobalChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 

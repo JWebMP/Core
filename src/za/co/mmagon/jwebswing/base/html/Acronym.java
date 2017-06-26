@@ -56,7 +56,7 @@ import za.co.mmagon.logger.LogFactory;
  * @deprecated
  *
  */
-public class Acronym<J extends Acronym>
+public class Acronym<J extends Acronym<J>>
         extends Component<NoChildren, NoAttributes, NoFeatures, GlobalEvents, J>
         implements NoNewLineBeforeClosingTag, NoNewLineForRawText, HtmlChildren, BodyChildren, Serializable, NoIDTag
 {

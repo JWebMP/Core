@@ -55,7 +55,7 @@ import za.co.mmagon.jwebswing.utilities.TextUtilities;
  * @since forever, 2008 or 2007 sometime I think - will need to check on the original version named "radio on live".
  * @version 1.0
  */
-public class Paragraph<J extends Paragraph>
+public class Paragraph<J extends Paragraph<J>>
         extends Component<ParagraphChildren, ParagraphAttributes, GlobalFeatures, GlobalEvents, J>
         implements BodyChildren, NoNewLineForRawText, ParagraphChildren, DetailsChildren
 {

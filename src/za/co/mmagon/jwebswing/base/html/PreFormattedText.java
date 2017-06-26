@@ -50,7 +50,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author mmagon
  * @version 1.0
  */
-public class PreFormattedText<J extends PreFormattedText>
+public class PreFormattedText<J extends PreFormattedText<J>>
         extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements BodyChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag, ParagraphChildren
 {

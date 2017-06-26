@@ -61,7 +61,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  * @since 2012/10/01
  */
-public class TableCell<J extends TableCell>
+public class TableCell<J extends TableCell<J>>
         extends Component<Component, TableCellAttributes, GlobalFeatures, GlobalEvents, J>
         implements TableRowChildren
 {

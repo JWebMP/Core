@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -29,7 +29,7 @@ import za.co.mmagon.jwebswing.base.ComponentBase;
  *
  * @since 2016/09/26
  */
-public interface IComponentBase<J extends ComponentBase> extends Cloneable, Serializable
+public interface IComponentBase<J extends ComponentBase<J>> extends Cloneable, Serializable
 {
 
     /**

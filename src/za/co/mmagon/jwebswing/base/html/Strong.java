@@ -39,7 +39,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class Strong<J extends Strong>
+public class Strong<J extends Strong<J>>
         extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements PhraseChildren, ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {

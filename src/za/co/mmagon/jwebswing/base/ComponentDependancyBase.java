@@ -17,8 +17,7 @@
 package za.co.mmagon.jwebswing.base;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import za.co.mmagon.jwebswing.base.interfaces.IComponentDependancyBase;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
@@ -35,7 +34,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
  *
  * @since 23 Apr 2016
  */
-public class ComponentDependancyBase<J extends ComponentDependancyBase>
+public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
         extends ComponentBase<J>
         implements IComponentDependancyBase<J>
 {
@@ -111,7 +110,7 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase>
     @Override
     public List<JavascriptReference> getJavascriptReferencesAll()
     {
-        return getJavascriptReferences();
+        return Collections.synchronizedList(getJavascriptReferences());
     }
 
     /**
@@ -124,7 +123,7 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase>
     @Override
     public List<JavascriptReference> getJavascriptReferencesAll(RequirementsPriority priority)
     {
-        ArrayList<JavascriptReference> arr = new ArrayList<>();
+        List<JavascriptReference> arr = Collections.synchronizedList(new ArrayList<>());
         getJavascriptReferencesAll().stream()
                 .filter(css -> (css.getPriority().equals(priority)))
                 .filter((JavascriptReference css) -> (!arr.contains(css)))
@@ -157,7 +156,7 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase>
     @Override
     public List<CSSReference> getCssReferencesAll(RequirementsPriority priority)
     {
-        ArrayList<CSSReference> arr = new ArrayList<>();
+        List<CSSReference> arr = Collections.synchronizedList(new ArrayList<>());
         getCssReferencesAll().stream()
                 .filter(css -> (css != null))
                 .filter(css -> (css.getPriority().equals(priority)))

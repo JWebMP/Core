@@ -52,7 +52,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @since forever, was created for the jwimagemap
  * @version 1.0
  */
-public class Canvas<J extends Canvas>
+public class Canvas<J extends Canvas<J>>
         extends Component<NoChildren, CanvasAttributes, GlobalFeatures, GlobalEvents, J>
         implements NoNewLineBeforeClosingTag
 {

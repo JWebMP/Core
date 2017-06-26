@@ -45,7 +45,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  * @since 2014/12/21
  */
-public class DataList<J extends DataList>
+public class DataList<J extends DataList<J>>
         extends Component<DataListChildren, NoAttributes, NoFeatures, NoEvents, J>
 {
 

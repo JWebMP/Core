@@ -51,8 +51,8 @@ import za.co.mmagon.logger.LogFactory;
  * <p>
  *
  */
-public class Parameter<J extends Parameter>
-        extends Component<NoChildren, ParameterAttributes, GlobalFeatures, GlobalEvents, Parameter>
+public class Parameter<J extends Parameter<J>>
+        extends Component<NoChildren, ParameterAttributes, GlobalFeatures, GlobalEvents, J>
         implements ObjectTagChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 

@@ -46,7 +46,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  * @param <J>
  */
-public class Footer<J extends Footer>
+public class Footer<J extends Footer<J>>
         extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements AddressChildren, NoIDTag
 {

@@ -39,7 +39,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class SampleCode<J extends SampleCode>
+public class SampleCode<J extends SampleCode<J>>
         extends Component<PhraseChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements ParagraphChildren, PhraseChildren
 {

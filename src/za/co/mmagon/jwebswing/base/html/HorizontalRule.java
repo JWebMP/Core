@@ -51,7 +51,7 @@ import za.co.mmagon.logger.LogFactory;
  * @author Marc Magon
  * @param <J>
  */
-public class HorizontalRule<J extends HorizontalRule>
+public class HorizontalRule<J extends HorizontalRule<J>>
         extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
         implements NoIDTag, NoClassAttribute
 {

@@ -50,7 +50,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @since forever
  * @version 1.0
  */
-public class Superscript<J extends Superscript>
+public class Superscript<J extends Superscript<J>>
         extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements NoNewLineBeforeClosingTag, NoNewLineForRawText, ParagraphChildren, PhraseChildren
 {

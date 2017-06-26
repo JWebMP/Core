@@ -47,7 +47,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class TextArea<J extends TextArea>
+public class TextArea<J extends TextArea<J>>
         extends Component<NoChildren, TextAreaAttributes, GlobalFeatures, GlobalEvents, J>
         implements NoNewLineBeforeClosingTag, NoNewLineForRawText, GlobalChildren
 {

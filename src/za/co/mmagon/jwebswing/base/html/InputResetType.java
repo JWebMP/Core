@@ -24,7 +24,8 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
  * @author GedMarc
  * @param <J>
  */
-public class InputResetType<J extends InputResetType> extends Input<InputResetTypeAttributes, J>
+public class InputResetType<J extends InputResetType<J>>
+        extends Input<InputResetTypeAttributes, J>
 {
 
     private static final long serialVersionUID = 1L;

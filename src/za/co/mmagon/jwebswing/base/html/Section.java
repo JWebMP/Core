@@ -44,7 +44,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class Section<J extends Section>
+public class Section<J extends Section<J>>
         extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 {
 

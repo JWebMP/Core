@@ -42,7 +42,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class Legend<J extends Legend>
+public class Legend<J extends Legend<J>>
         extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements FieldSetChildren, NoNewLineBeforeClosingTag
 {

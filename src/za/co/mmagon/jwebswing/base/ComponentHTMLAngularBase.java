@@ -39,7 +39,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  * @author GedMarc
  * @since 27 Apr 2016
  */
-public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHTMLAngularBase>
+public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHTMLAngularBase<A, F, E, J>>
         extends ComponentHTMLAttributeBase<A, F, E, J> implements IComponentHTMLAngularBase<J>
 {
 

@@ -53,7 +53,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * Not support in FireFox xD wait what??!? something in ie5 is not in firefox xD
  * @deprecated
  */
-public class RubyNoSupport<J extends RubyNoSupport>
+public class RubyNoSupport<J extends RubyNoSupport<J>>
         extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements RubyChildren
 {

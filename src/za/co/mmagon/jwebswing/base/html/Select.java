@@ -54,7 +54,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class Select<J extends Select>
+public class Select<J extends Select<J>>
         extends Component<SelectChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements GlobalChildren
 {

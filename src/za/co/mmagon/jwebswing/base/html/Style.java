@@ -18,9 +18,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.attributes.StyleAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoClassAttribute;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
@@ -52,7 +50,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  * <p>
  */
-public class Style<J extends Style>
+public class Style<J extends Style<J>>
         extends ComponentHierarchyBase<NoChildren, StyleAttributes, NoFeatures, NoEvents, J>
         implements NoIDTag, HeadChildren, NoClassAttribute
 {

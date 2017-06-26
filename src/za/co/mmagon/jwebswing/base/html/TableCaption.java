@@ -45,7 +45,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  * @since forever
  */
-public class TableCaption<J extends TableCaption>
+public class TableCaption<J extends TableCaption<J>>
         extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements TableChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {

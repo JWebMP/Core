@@ -41,7 +41,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  * @param <J>
  */
-public class Emphasized<J extends Emphasized>
+public class Emphasized<J extends Emphasized<J>>
         extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
         implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, PhraseChildren
 {

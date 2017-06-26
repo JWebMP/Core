@@ -28,7 +28,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  * @param <J>
  */
-public class DescriptionList<J extends DescriptionList>
+public class DescriptionList<J extends DescriptionList<J>>
         extends Component<DescriptionListChildren, NoAttributes, NoFeatures, NoEvents, J>
         implements GlobalChildren, NoIDTag
 {

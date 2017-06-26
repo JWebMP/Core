@@ -57,7 +57,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @since forever
  * @version 1.0
  */
-public class TableHeaderGroup<J extends TableHeaderGroup>
+public class TableHeaderGroup<J extends TableHeaderGroup<J>>
         extends Component<TableHeaderGroupChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements TableChildren
 {

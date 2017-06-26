@@ -60,7 +60,7 @@ import za.co.mmagon.logger.LogFactory;
  *
  *
  */
-public class Audio<J extends Audio>
+public class Audio<J extends Audio<J>>
         extends Component<AudioChildren, AudioAttributes, GlobalFeatures, GlobalEvents, J>
         implements NoNewLineBeforeClosingTag, NoNewLineForRawText
 {

@@ -46,7 +46,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  * @since 2014/12/21
  */
-public class Deleted<J extends Deleted>
+public class Deleted<J extends Deleted<J>>
         extends Component<NoChildren, DeletedAttributes, NoFeatures, NoEvents, J>
         implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, ParagraphChildren
 {

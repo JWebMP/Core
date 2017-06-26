@@ -54,7 +54,7 @@ import za.co.mmagon.logger.LogFactory;
  *
  *
  */
-public class Aside<J extends Aside>
+public class Aside<J extends Aside<J>>
         extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements GlobalChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {

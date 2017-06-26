@@ -39,7 +39,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
  *
  * @since 23 Apr 2016
  */
-public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentThemeBase>
+public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentThemeBase<A, F, E, J>>
         extends ComponentHTMLAngularBase<A, F, E, J> implements IComponentThemeBase<J>
 {
 

@@ -45,7 +45,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author Marc Magon
  * @param <J>
  */
-public class BiDirectionalIsolation<J extends BiDirectionalIsolation>
+public class BiDirectionalIsolation<J extends BiDirectionalIsolation<J>>
         extends Component<Component, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements GlobalChildren, ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag
 {

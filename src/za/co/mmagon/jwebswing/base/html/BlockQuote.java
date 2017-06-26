@@ -49,7 +49,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  * @param <J>
  */
-public class BlockQuote<J extends BlockQuote>
+public class BlockQuote<J extends BlockQuote<J>>
         extends Component<ParagraphChildren, BlockQuoteAttributes, GlobalFeatures, GlobalEvents, J>
 
 {

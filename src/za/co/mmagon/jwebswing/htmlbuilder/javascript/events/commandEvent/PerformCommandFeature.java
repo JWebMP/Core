@@ -12,13 +12,18 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  * @since 2012-12-30
  * @author MMagon
  */
-public abstract class PerformCommandFeature extends Feature<JavaScriptPart, Feature>
+public abstract class PerformCommandFeature extends Feature<JavaScriptPart, PerformCommandFeature>
 {
+
+    private static final long serialVersionUID = 1L;
 
     public ArrayList<String> javascriptLinesToExecuteAfterLoad;
     private String commandName;
     private Component assignedComponent;
 
+    /**
+     * Tells the server to send something to the client
+     */
     public PerformCommandFeature()
     {
         super("JWPerformCommand");
@@ -26,13 +31,7 @@ public abstract class PerformCommandFeature extends Feature<JavaScriptPart, Feat
     }
 
     /*
-     * public PerformCommandFeature(String name)
-     * {
-     * super(name);
-     * setIncludeComponentIdentify(false);
-     * setRenderOnLoad(false);
-     * this.commandName = name;
-     * }
+     * public PerformCommandFeature(String name) { super(name); setIncludeComponentIdentify(false); setRenderOnLoad(false); this.commandName = name; }
      */
     public PerformCommandFeature(String commandName, Component assignedComponent, String name)
     {

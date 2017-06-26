@@ -29,8 +29,8 @@ import za.co.mmagon.jwebswing.utilities.TextUtilities;
  *
  * @author GedMarc
  */
-public class Comment
-        extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, Comment>
+public class Comment<J extends Comment<J>>
+        extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
         implements HtmlChildren, HeadChildren, ImageMapChildren, BodyChildren
 {
 

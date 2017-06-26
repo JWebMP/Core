@@ -44,7 +44,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  * @since 2014/12/21
  */
-public class Embed<J extends Embed>
+public class Embed<J extends Embed<J>>
         extends Component<NoChildren, EmbedAttributes, GlobalFeatures, GlobalEvents, J>
         implements NoClosingTag
 {

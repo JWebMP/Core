@@ -54,7 +54,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @since Forever
  * @version 1.0
  */
-public class Code<J extends Code>
+public class Code<J extends Code<J>>
         extends Component<NoChildren, CodeAttributes, GlobalFeatures, GlobalEvents, J>
         implements PhraseChildren
 {

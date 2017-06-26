@@ -45,7 +45,7 @@ import za.co.mmagon.logger.LogFactory;
  *
  * @since 24 Apr 2016
  */
-public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHierarchyBase>
+public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHierarchyBase<C, A, F, E, J>>
         extends ComponentThemeBase<A, F, E, J>
         implements IComponentHierarchyBase<C, J>, GlobalChildren
 {
@@ -57,7 +57,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
      * The list of children of this component
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private ArrayList<ComponentHierarchyBase> children;
+    private List<ComponentHierarchyBase> children;
 
     /**
      * My Parent
@@ -69,7 +69,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
      * The list of class names for this object
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private ArrayList<String> classes;
+    private List<String> classes;
 
     /**
      * My Page
@@ -171,7 +171,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
         if (!isInitialized())
         {
 
-            ArrayList<ComponentHierarchyBase> clonedBase = (ArrayList<ComponentHierarchyBase>) getChildren();
+            List<ComponentHierarchyBase> clonedBase = (List<ComponentHierarchyBase>) getChildren();
             clonedBase.stream().filter(a -> a != null).forEach(comp
                     ->
             {
@@ -192,8 +192,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 
         if (!isConfigured())
         {
-            ArrayList<ComponentHierarchyBase> clonedBase = (ArrayList<ComponentHierarchyBase>) getChildren();
-            clonedBase = (ArrayList<ComponentHierarchyBase>) clonedBase.clone();
+            List<ComponentHierarchyBase> clonedBase = (List<ComponentHierarchyBase>) getChildren();
             clonedBase.stream().filter(a -> a != null).forEach(feature
                     ->
             {
@@ -226,7 +225,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
     {
         if (children == null)
         {
-            children = new ArrayList<>();
+            children = Collections.synchronizedList(new ArrayList<>());
         }
         return children;
     }
@@ -252,7 +251,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
     @Override
     public List<ComponentHierarchyBase> getChildrenHierarchy(boolean trues)
     {
-        ArrayList<ComponentHierarchyBase> components = new ArrayList();
+        List<ComponentHierarchyBase> components = Collections.synchronizedList(new ArrayList());
         if (trues)
         {
             components.add(this);

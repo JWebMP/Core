@@ -56,9 +56,9 @@ import za.co.mmagon.logger.LogFactory;
  * @author Marc Magon
  * @version 1.0
  */
-public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Body>
+public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Body<C, F, J>>
         extends Component<C, BodyAttributes, F, NoEvents, J>
-        implements PageChildren, HtmlChildren, LayoutHandler, ContainerType, IBody
+        implements PageChildren, HtmlChildren, LayoutHandler, ContainerType
 {
 
     private static final Logger LOG = LogFactory.getInstance().getLogger("BODY");
@@ -90,16 +90,6 @@ public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Bo
             setPage(page);
         }
         setID("body");
-    }
-
-    /**
-     * Returns the component in its smallest form
-     *
-     * @return
-     */
-    public IBody asMe()
-    {
-        return this;
     }
 
     @Override

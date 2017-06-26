@@ -49,7 +49,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class ProgressBar<J extends ProgressBar>
+public class ProgressBar<J extends ProgressBar<J>>
         extends Component<NoChildren, ProgressBarAttributes, GlobalFeatures, GlobalEvents, J>
 {
 

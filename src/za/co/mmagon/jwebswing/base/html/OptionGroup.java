@@ -41,7 +41,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class OptionGroup<J extends OptionGroup>
+public class OptionGroup<J extends OptionGroup<J>>
         extends Component<SelectChildren, OptionGroupAttributes, GlobalFeatures, GlobalEvents, J>
         implements SelectChildren, NoIDTag, NoNewLineBeforeClosingTag
 {

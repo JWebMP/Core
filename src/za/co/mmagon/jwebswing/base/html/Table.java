@@ -44,7 +44,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author Marc Magon
  * @param <J>
  */
-public class Table<J extends Table>
+public class Table<J extends Table<J>>
         extends Component<TableChildren, TableAttributes, GlobalFeatures, GlobalEvents, J>
 {
 

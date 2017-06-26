@@ -48,7 +48,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @param <A> The attributes allowed
  * @param <J> The component itself for cloning
  */
-public class Span<C extends GlobalChildren, A extends Enum & AttributeDefinitions, J extends Span>
+public class Span<C extends GlobalChildren, A extends Enum & AttributeDefinitions, J extends Span<C, A, J>>
         extends Component<C, A, GlobalFeatures, GlobalEvents, J>
         implements BodyChildren, MapChildren, AreaChildren, ContainerType, ParagraphChildren,
         ListItemChildren

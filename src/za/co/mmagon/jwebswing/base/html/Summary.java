@@ -46,7 +46,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class Summary<J extends Summary>
+public class Summary<J extends Summary<J>>
         extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements DetailsChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {

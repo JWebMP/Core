@@ -43,7 +43,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author Marc Magon
  * @param <J>
  */
-public class BiDirectionalOverride<J extends BiDirectionalOverride>
+public class BiDirectionalOverride<J extends BiDirectionalOverride<J>>
         extends Component<BiDirectionalOverrideChildren, BiDirectionalOverrideAttributes, GlobalFeatures, GlobalEvents, J>
         implements ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag
 {

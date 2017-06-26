@@ -243,27 +243,30 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
      */
     $scope.getEventObject = function ($event) {
         var newEvent = new Object();
-        newEvent.altKey = $event.altKey;
-        newEvent.ctrlKey = $event.ctrlKey;
-        newEvent.bubbles = $event.bubbles;
-        newEvent.cancelable = $event.cancelable;
-        newEvent.clientX = $event.clientX;
-        newEvent.clientY = $event.clientY;
-        newEvent.componentID = $event.currentTarget.id;
-        newEvent.detail = $event.detail;
-        newEvent.eventPhase = $event.eventPhase;
-        newEvent.metaKey = $event.metaKey;
-        newEvent.offsetX = $event.offsetX;
-        newEvent.offsetY = $event.offsetY;
-        newEvent.pageX = $event.pageX;
-        newEvent.pageY = $event.pageY;
-        newEvent.screenX = $event.screenX;
-        newEvent.screenY = $event.screenY;
-        newEvent.shiftKey = $event.shiftKey;
-        newEvent.type = $event.type;
-        newEvent.data = $event.data;
-        newEvent.target = $event.target.id;
-        newEvent.which = $event.which;
+        if ($event !== null)
+        {
+            newEvent.altKey = $event.altKey;
+            newEvent.ctrlKey = $event.ctrlKey;
+            newEvent.bubbles = $event.bubbles;
+            newEvent.cancelable = $event.cancelable;
+            newEvent.clientX = $event.clientX;
+            newEvent.clientY = $event.clientY;
+            newEvent.componentID = $event.currentTarget.id;
+            newEvent.detail = $event.detail;
+            newEvent.eventPhase = $event.eventPhase;
+            newEvent.metaKey = $event.metaKey;
+            newEvent.offsetX = $event.offsetX;
+            newEvent.offsetY = $event.offsetY;
+            newEvent.pageX = $event.pageX;
+            newEvent.pageY = $event.pageY;
+            newEvent.screenX = $event.screenX;
+            newEvent.screenY = $event.screenY;
+            newEvent.shiftKey = $event.shiftKey;
+            newEvent.type = $event.type;
+            newEvent.data = $event.data;
+            newEvent.target = $event.target.id;
+            newEvent.which = $event.which;
+        }
         return newEvent;
     };
 

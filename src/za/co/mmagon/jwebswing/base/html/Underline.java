@@ -59,7 +59,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class Underline<J extends Underline>
+public class Underline<J extends Underline<J>>
         extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements GlobalChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag
 {

@@ -49,7 +49,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class NavigationSection<J extends NavigationSection>
+public class NavigationSection<J extends NavigationSection<J>>
         extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 {
 

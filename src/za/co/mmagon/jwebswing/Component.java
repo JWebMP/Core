@@ -39,7 +39,7 @@ import za.co.mmagon.logger.LogFactory;
  * @since 2009/10/01
  * @version 1.0
  */
-public class Component<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component>
+public class Component<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component<C, A, F, E, J>>
         extends ComponentStyleBase<C, A, F, E, J> implements ICssStructure<J>
 {
 

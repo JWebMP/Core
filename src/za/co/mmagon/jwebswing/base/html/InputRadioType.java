@@ -24,7 +24,8 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
  * @author GedMarc
  * @param <J>
  */
-public class InputRadioType<J extends InputRadioType> extends Input<InputRadioTypeAttributes, J>
+public class InputRadioType<J extends InputRadioType<J>>
+        extends Input<InputRadioTypeAttributes, J>
 {
 
     private static final long serialVersionUID = 1L;

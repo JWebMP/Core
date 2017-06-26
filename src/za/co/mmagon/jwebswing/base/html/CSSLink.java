@@ -62,7 +62,7 @@ import za.co.mmagon.logger.LogFactory;
  * The "sizes" attribute is new in HTML5.<p>
  *
  */
-public class CSSLink<J extends CSSLink>
+public class CSSLink<J extends CSSLink<J>>
         extends Component<NoChildren, CSSLinkAttributes, NoFeatures, NoEvents, J>
         implements NoIDTag, NoClosingTag, HeadChildren
 {

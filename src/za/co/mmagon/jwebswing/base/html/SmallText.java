@@ -47,7 +47,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  */
-public class SmallText<J extends SmallText>
+public class SmallText<J extends SmallText<J>>
         extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements ParagraphChildren, PhraseChildren
 {

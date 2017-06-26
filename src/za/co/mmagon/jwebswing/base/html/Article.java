@@ -62,7 +62,7 @@ import za.co.mmagon.logger.LogFactory;
  * <p>
  *
  */
-public class Article<J extends Article>
+public class Article<J extends Article<J>>
         extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements GlobalChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, Serializable
 {

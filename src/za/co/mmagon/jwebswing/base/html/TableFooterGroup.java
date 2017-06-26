@@ -55,7 +55,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @since 2012/10/01
  * @version 1.0
  */
-public class TableFooterGroup<J extends TableFooterGroup>
+public class TableFooterGroup<J extends TableFooterGroup<J>>
         extends Component<TableFooterGroupChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
         implements TableChildren
 {

@@ -59,7 +59,7 @@ import za.co.mmagon.logger.LogFactory;
  * @author Marc Magon
  * @param <J>
  */
-public class Link<J extends Link>
+public class Link<J extends Link<J>>
         extends Component<ComponentHierarchyBase, LinkAttributes, GlobalFeatures, GlobalEvents, J>
         implements BodyChildren, NoNewLineForRawText, ListItemChildren
 {
