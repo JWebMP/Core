@@ -20,6 +20,7 @@ import com.armineasy.injection.GuiceContext;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sf.uadetector.*;
@@ -733,9 +734,9 @@ public class Page extends Html implements IPage
      */
     private void addScriptsTo(ComponentHierarchyBase component)
     {
-        List<ComponentHierarchyBase> requirements = new ArrayList<>();
+        List<ComponentHierarchyBase> requirements = new CopyOnWriteArrayList<>();
 
-        List<RequirementsPriority> arrs = new ArrayList<>(Arrays.asList(RequirementsPriority.values()));
+        List<RequirementsPriority> arrs = new CopyOnWriteArrayList<>(Arrays.asList(RequirementsPriority.values()));
         //render JS only
         arrs.stream().filter(a -> a != RequirementsPriority.Top_Shelf).forEachOrdered(priority ->
         {
@@ -764,7 +765,7 @@ public class Page extends Html implements IPage
      */
     private List<ComponentHierarchyBase> getPriorityRequirements(RequirementsPriority priority, List<ComponentHierarchyBase> input, boolean css, boolean javascript)
     {
-        List<ComponentHierarchyBase> requirements = new ArrayList<>();
+        List<ComponentHierarchyBase> requirements = new CopyOnWriteArrayList<>();
         if (css)
         {
             getAllCssLinks(priority).stream().filter(cssLink -> (!input.contains(cssLink) && !requirements.contains(cssLink))).forEach(cssLink
@@ -1037,4 +1038,9 @@ public class Page extends Html implements IPage
         this.registeredEvents = registeredEvents;
     }
 
+    @Override
+    public synchronized String toString(Integer num)
+    {
+        return super.toString(0);
+    }
 }

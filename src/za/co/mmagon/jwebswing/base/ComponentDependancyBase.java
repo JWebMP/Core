@@ -18,6 +18,7 @@ package za.co.mmagon.jwebswing.base;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import za.co.mmagon.jwebswing.base.interfaces.IComponentDependancyBase;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
@@ -123,7 +124,7 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
     @Override
     public List<JavascriptReference> getJavascriptReferencesAll(RequirementsPriority priority)
     {
-        List<JavascriptReference> arr = Collections.synchronizedList(new ArrayList<>());
+        List<JavascriptReference> arr = new CopyOnWriteArrayList<>();
         getJavascriptReferencesAll().stream()
                 .filter(css -> (css.getPriority().equals(priority)))
                 .filter((JavascriptReference css) -> (!arr.contains(css)))
@@ -156,7 +157,7 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
     @Override
     public List<CSSReference> getCssReferencesAll(RequirementsPriority priority)
     {
-        List<CSSReference> arr = Collections.synchronizedList(new ArrayList<>());
+        List<CSSReference> arr = new CopyOnWriteArrayList<>();
         getCssReferencesAll().stream()
                 .filter(css -> (css != null))
                 .filter(css -> (css.getPriority().equals(priority)))

@@ -17,6 +17,7 @@
 package za.co.mmagon.jwebswing.annotations;
 
 import com.armineasy.injection.GuiceContext;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.aopalliance.intercept.MethodInvocation;
@@ -45,12 +46,17 @@ public class AjaxCallIntercepters implements org.aopalliance.intercept.MethodInt
     public Object invoke(MethodInvocation invocation) throws Throwable
     {
         LOG.fine("Intercepting Ajax Call");
-        GuiceContext.reflect().getSubTypesOf(AjaxCallIntercepter.class).forEach(siClass ->
+        for (Iterator<Class<? extends AjaxCallIntercepter>> iterator = GuiceContext.reflect().getSubTypesOf(AjaxCallIntercepter.class).iterator(); iterator.hasNext();)
         {
+            Class<? extends AjaxCallIntercepter> siClass = iterator.next();
+            if (siClass.isInterface())
+            {
+                continue;
+            }
             AjaxCallIntercepter si = GuiceContext.inject().getInstance(siClass);
-            LOG.log(Level.FINE, "Interception Occuring : {0}", siClass.getCanonicalName());
+            LOG.log(Level.FINER, "Interception Occuring : {0}", siClass.getCanonicalName());
             si.intercept();
-        });
+        }
         LOG.fine("Interception for Ajax Call Complete");
         return invocation.proceed();
     }

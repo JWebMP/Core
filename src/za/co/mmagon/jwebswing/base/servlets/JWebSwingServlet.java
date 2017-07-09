@@ -413,8 +413,7 @@ public class JWebSwingServlet extends JWDefaultServlet
         {
 
             log.log(Level.INFO, "Destroying Servlet JWebSwing Servlet and all Static Objects");
-            GuiceContext.inject().getInstance(UserAgentStringParser.class).shutdown();
-            GuiceContext.setReflections(null);
+            GuiceContext.destroy();
             log.log(Level.INFO, "User Agent Parser Shutdown");
         }
         catch (Throwable t)

@@ -51,7 +51,13 @@ public class SiteIntercepters implements org.aopalliance.intercept.MethodInterce
         List<SiteCallInterceptor> outs = new ArrayList<>();
         for (Class<? extends SiteCallInterceptor> re : res)
         {
-            outs.add(GuiceContext.inject().getInstance(re));
+            if (re.isInterface())
+            {
+                continue;
+            }
+            SiteCallInterceptor intercepter = re.newInstance();
+            GuiceContext.inject().injectMembers(intercepter);
+            outs.add(intercepter);
         }
         Collections.sort(outs, (SiteCallInterceptor o1, SiteCallInterceptor o2) -> o1.sortOrder().compareTo(o2.sortOrder()));
         for (SiteCallInterceptor out : outs)

@@ -50,16 +50,14 @@ public class DataCallIntercepters implements org.aopalliance.intercept.MethodInt
         List<DataCallIntercepter> outs = new ArrayList<>();
         for (Class<? extends DataCallIntercepter> re : res)
         {
+            if (re.isInterface())
+            {
+                continue;
+            }
             outs.add(GuiceContext.getInstance(re));
         }
-        Collections.sort(outs, new Comparator<DataCallIntercepter>()
-        {
-            @Override
-            public int compare(DataCallIntercepter o1, DataCallIntercepter o2)
-            {
-                return o1.sortOrder().compareTo(o2.sortOrder());
-            }
-        });
+        Collections.sort(outs, (DataCallIntercepter o1, DataCallIntercepter o2) -> o1.sortOrder().compareTo(o2.sortOrder()));
+
         for (DataCallIntercepter out : outs)
         {
             LOG.log(Level.FINE, "Interception Occuring : {0}", out.getClass().getCanonicalName());
