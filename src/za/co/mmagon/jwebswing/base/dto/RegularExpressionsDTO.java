@@ -17,113 +17,109 @@
 package za.co.mmagon.jwebswing.base.dto;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.HashMap;
-import java.util.Map;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- *
  * @author GedMarc
  * @since 25 Jan 2017
- *
  */
 public class RegularExpressionsDTO extends JavaScriptPart
 {
 
-    private static final long serialVersionUID = 1L;
-    /**
-     * Forces only text at least one character
-     */
-    public static final String TextOnlyField = "([a-zA-Z ]){1,}";
-    /**
-     * Forces only characters and numbers
-     */
-    public static final String AlphaNumericField = "(?=.*[a-zA-Z])([a-zA-Z0-9 ]){1,}";
-    /**
-     * Text only minimum of 3 characters
-     */
-    public static final String TextFieldMin3 = "([a-zA-Z ]){3,}";
-    /**
-     * Alpha Numeric minimum of 3 characters
-     */
-    public static final String AlphaNumericFieldMin3 = "(?=.*[a-zA-Z])([a-zA-Z0-9 ]){1,}";
-    /**
-     * Text Field only minimum 3 WORDS
-     */
-    public static final String TextFieldMin3Words = "(?=.*[a-zA-Z])(\\b\\w+\\b\\s?){3,}";
-    /**
-     * Global standard for email recognition
-     */
-    public static final String EmailPattern = "(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+	/**
+	 * Forces only text at least one character
+	 */
+	public static final String TextOnlyField = "([a-zA-Z ]){1,}";
+	/**
+	 * Forces only characters and numbers
+	 */
+	public static final String AlphaNumericField = "(?=.*[a-zA-Z])([a-zA-Z0-9 ]){1,}";
+	/**
+	 * Text only minimum of 3 characters
+	 */
+	public static final String TextFieldMin3 = "([a-zA-Z ]){3,}";
+	/**
+	 * Alpha Numeric minimum of 3 characters
+	 */
+	public static final String AlphaNumericFieldMin3 = "(?=.*[a-zA-Z])([a-zA-Z0-9 ]){1,}";
+	/**
+	 * Text Field only minimum 3 WORDS
+	 */
+	public static final String TextFieldMin3Words = "(?=.*[a-zA-Z])(\\b\\w+\\b\\s?){3,}";
+	/**
+	 * Global standard for email recognition
+	 */
+	public static final String EmailPattern = "(?:[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+	/*
+	 * Only 2 spaces or more no new lines
+	 */
+	public static final String WhiteSpacesNoNewLines = "[^\\S\\x0a\\x0d]{2,}";
+	private static final long serialVersionUID = 1L;
+	/**
+	 * Default regular expressions
+	 */
+	private Map<String, Object> regularExpressions;
 
-    /*
-     * Only 2 spaces or more no new lines
-     */
-    public static final String WhiteSpacesNoNewLines = "[^\\S\\x0a\\x0d]{2,}";
+	/**
+	 * Constructs a new instance of the regular expression dto
+	 */
+	public RegularExpressionsDTO()
+	{
+		//Nothing needed
+	}
 
-    /**
-     * Default regular expressions
-     */
-    private Map<String, Object> regularExpressions;
+	/**
+	 * @param name
+	 * @param expression
+	 *
+	 * @return
+	 */
+	public RegularExpressionsDTO addExpression(String name, String expression)
+	{
+		getRegularExpressions().put(name, expression);
+		return this;
+	}
 
-    /**
-     * Constructs a new instance of the regular expression dto
-     */
-    public RegularExpressionsDTO()
-    {
-        //Nothing needed
-    }
+	/**
+	 * Adds the text, alpha numeric and email field patterns to this dto
+	 *
+	 * @return
+	 */
+	public RegularExpressionsDTO addDefaults()
+	{
+		addExpression("textField", TextOnlyField);
+		addExpression("textFieldMin3", TextFieldMin3);
+		addExpression("alphaNumericField", AlphaNumericField);
+		addExpression("emailField", EmailPattern);
+		return this;
+	}
 
-    /**
-     *
-     * @param name
-     * @param expression
-     *
-     * @return
-     */
-    public RegularExpressionsDTO addExpression(String name, String expression)
-    {
-        getRegularExpressions().put(name, expression);
-        return this;
-    }
+	/**
+	 * Returns the regular expression map
+	 *
+	 * @return
+	 */
+	@JsonValue
+	public Map<String, Object> getRegularExpressions()
+	{
+		if (regularExpressions == null)
+		{
+			setRegularExpressions(new HashMap());
+		}
+		return regularExpressions;
+	}
 
-    /**
-     * Adds the text, alpha numeric and email field patterns to this dto
-     *
-     * @return
-     */
-    public RegularExpressionsDTO addDefaults()
-    {
-        addExpression("textField", TextOnlyField);
-        addExpression("textFieldMin3", TextFieldMin3);
-        addExpression("alphaNumericField", AlphaNumericField);
-        addExpression("emailField", EmailPattern);
-        return this;
-    }
-
-    /**
-     * Returns the regular expression map
-     *
-     * @return
-     */
-    @JsonValue
-    public Map<String, Object> getRegularExpressions()
-    {
-        if (regularExpressions == null)
-        {
-            setRegularExpressions(new HashMap());
-        }
-        return regularExpressions;
-    }
-
-    /**
-     * Reset the variable expressions
-     *
-     * @param regularExpressions
-     */
-    public void setRegularExpressions(Map<String, Object> regularExpressions)
-    {
-        this.regularExpressions = regularExpressions;
-    }
+	/**
+	 * Reset the variable expressions
+	 *
+	 * @param regularExpressions
+	 */
+	public void setRegularExpressions(Map<String, Object> regularExpressions)
+	{
+		this.regularExpressions = regularExpressions;
+	}
 
 }

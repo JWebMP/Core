@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import java.util.logging.Level;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.BaseAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.*;
@@ -26,17 +25,18 @@ import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.logger.LogFactory;
 
+import java.util.logging.Level;
+
 /**
  * The Base Component
  * <p>
+ *
  * @param <J>
  *
- * @since 2013/11/12
- * @version 1.0
  * @author MMagon
- *
  * <p>
- *
+ * <p>
+ * <p>
  * Browser Support
  * <p>
  * Internet Explorer Firefox Opera Google Chrome Safari<p>
@@ -56,62 +56,64 @@ import za.co.mmagon.logger.LogFactory;
  * <p>
  * Note: If the base tag is present, it must have either an href attribute or<p>
  * a target attribute, or both.<p>
+ * @version 1.0
+ * @since 2013/11/12
  */
 public class Base<J extends Base<J>>
-        extends Component<NoChildren, BaseAttributes, NoFeatures, NoEvents, J>
-        implements NoIDTag, NoClosingTag, HeadChildren, NoClosingBracket, NoClassAttribute
+		extends Component<NoChildren, BaseAttributes, NoFeatures, NoEvents, J>
+		implements NoIDTag, NoClosingTag, HeadChildren, NoClosingBracket, NoClassAttribute
 {
-
-    /**
-     * Logger for the Component
-     */
-    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Base");
-    /**
-     * Serial Version for all Components and their compatibility
-     */
-    private static final long serialVersionUID = 1l;
-
-    /**
-     * Constructs a new Base
-     */
-    public Base()
-    {
-        super(ComponentTypes.Base);
-    }
-
-    /**
-     * Constructs a base instance with the given reference
-     *
-     * @param baseReference
-     */
-    public Base(String baseReference)
-    {
-        this();
-        addAttribute(BaseAttributes.HRef, baseReference);
-    }
-
-    /**
-     * Differences Between HTML and XHTML
-     * <p>
-     * In HTML the base tag has no end tag.
-     * <p>
-     * In XHTML the base tag must be properly closed.
-     */
-    @Override
-    public void preConfigure()
-    {
-        super.preConfigure();
-        try
-        {
-            if (getPage().getBrowser().getHtmlVersion().name().startsWith("X"))
-            {
-                setInlineClosingTag(true);
-            }
-        }
-        catch (Exception e)
-        {
-            log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
-        }
-    }
-
+	
+	/**
+	 * Logger for the Component
+	 */
+	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Base");
+	/**
+	 * Serial Version for all Components and their compatibility
+	 */
+	private static final long serialVersionUID = 1l;
+	
+	/**
+	 * Constructs a new Base
+	 */
+	public Base()
+	{
+		super(ComponentTypes.Base);
+	}
+	
+	/**
+	 * Constructs a base instance with the given reference
+	 *
+	 * @param baseReference
+	 */
+	public Base(String baseReference)
+	{
+		this();
+		addAttribute(BaseAttributes.HRef, baseReference);
+	}
+	
+	/**
+	 * Differences Between HTML and XHTML
+	 * <p>
+	 * In HTML the base tag has no end tag.
+	 * <p>
+	 * In XHTML the base tag must be properly closed.
+	 */
+	@Override
+	public void preConfigure()
+	{
+		super.preConfigure();
+		try
+		{
+			if (getPage().getBrowser().getHtmlVersion().name().startsWith("X"))
+			{
+				setInlineClosingTag(true);
+			}
+		}
+		catch (Exception e)
+		{
+			log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
+		}
+	}
+	
 }

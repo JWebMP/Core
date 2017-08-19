@@ -17,27 +17,25 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
- *
  * @author MMagon
  */
 public class BiDirectionalOverideTest
 {
-    
-    public BiDirectionalOverideTest()
-    {
-    }
-
-    @Test
-    public void testGetText()
-    {
-    }
-
-    @Test
-    public void testSetText()
-    {
-    }
-    
+	
+	public BiDirectionalOverideTest()
+	{
+	}
+	
+	@Test
+	public void testGetText()
+	{
+	}
+	
+	@Test
+	public void testSetText()
+	{
+	}
+	
 }

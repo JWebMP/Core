@@ -17,22 +17,21 @@
 package za.co.mmagon.jwebswing.base.client;
 
 /**
- *
  * @author Marc Magon
  * @since 20 Mar 2017
  */
 public enum HttpMethodTypes
 {
-    GET,
-    POST,
-    DELETE,
-    PUT;
+	GET,
+	POST,
+	DELETE,
+	PUT;
 
-    /*
-     * Constructs a new HttpMethodTypes
-     */
-    private HttpMethodTypes()
-    {
-        //Nothing needed
-    }
+	/*
+	 * Constructs a new HttpMethodTypes
+	 */
+	private HttpMethodTypes()
+	{
+		//Nothing needed
+	}
 }

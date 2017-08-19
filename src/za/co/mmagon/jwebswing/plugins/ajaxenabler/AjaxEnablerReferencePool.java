@@ -19,25 +19,22 @@ package za.co.mmagon.jwebswing.plugins.ajaxenabler;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 
 /**
- *
  * @since @version @author MMagon
- *
- *
  */
 public enum AjaxEnablerReferencePool
 {
-    AjaxEnabler(new JQueryAjaxEnablerReference()),;
+	AjaxEnabler(new JQueryAjaxEnablerReference()),;
 
-    private AjaxEnablerReferencePool(JavascriptReference reference)
-    {
-        this.reference = reference;
-    }
+	private final JavascriptReference reference;
 
-    private final JavascriptReference reference;
+	private AjaxEnablerReferencePool(JavascriptReference reference)
+	{
+		this.reference = reference;
+	}
 
-    public JavascriptReference getJavaScriptReference()
-    {
-        return reference;
-    }
+	public JavascriptReference getJavaScriptReference()
+	{
+		return reference;
+	}
 
 }

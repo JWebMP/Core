@@ -1,7 +1,8 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.annotations;
 
-import java.lang.annotation.*;
 import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.NameValuePairCSS;
+
+import java.lang.annotation.*;
 
 /**
  * Defines any name value pair of a CSS
@@ -10,13 +11,13 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.NameValuePairCSS;
  */
 @za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType
 @Target(
-        {
-            ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
-        })
+		{
+				ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
+		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface CustomCSS
 {
 
-    public NameValuePairCSS[] value() default @NameValuePairCSS;
+	public NameValuePairCSS[] value() default @NameValuePairCSS;
 }

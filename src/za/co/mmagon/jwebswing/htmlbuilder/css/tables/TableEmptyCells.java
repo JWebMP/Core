@@ -36,64 +36,62 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
 @CSSAnnotationType
 public enum TableEmptyCells implements CSSEnumeration<TableEmptyCells>
 {
-    /**
-     * Background and borders are shown on empty cells. This is default
-     */
-    Show,
-    /**
-     * No background or borders are shown on empty cells
-     */
-    Hide,
-    /**
-     * Sets this property to its default value
-     *
-     * see http://www.w3schools.com/cssref/css_initial.asp
-     */
-    Initial,
-    /**
-     * Inherits this property from its parent element.
-     *
-     * see http://www.w3schools.com/cssref/css_inherit.asp
-     */
-    Inherit,
-    /**
-     * Sets this field as not set
-     */
-    Unset;
+	/**
+	 * Background and borders are shown on empty cells. This is default
+	 */
+	Show,
+	/**
+	 * No background or borders are shown on empty cells
+	 */
+	Hide,
+	/**
+	 * Sets this property to its default value
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_initial.asp
+	 */
+	Initial,
+	/**
+	 * Inherits this property from its parent element.
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_inherit.asp
+	 */
+	Inherit,
+	/**
+	 * Sets this field as not set
+	 */
+	Unset;;
 
-    ;
+	private TableEmptyCells()
+	{
+	}
 
-    @Override
-    public String toString()
-    {
-        return name().toLowerCase();
-    }
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
+	}
 
-    private TableEmptyCells()
-    {
-    }
+	@Override
+	public String getJavascriptSyntax()
+	{
+		return "style.emptyCells";
+	}
 
-    @Override
-    public String getJavascriptSyntax()
-    {
-        return "style.emptyCells";
-    }
+	@Override
+	public CSSVersions getCSSVersion()
+	{
+		return CSSVersions.CSS2;
+	}
 
-    @Override
-    public CSSVersions getCSSVersion()
-    {
-        return CSSVersions.CSS2;
-    }
+	@Override
+	public String getValue()
+	{
+		return name();
+	}
 
-    @Override
-    public String getValue()
-    {
-        return name();
-    }
-
-    @Override
-    public TableEmptyCells getDefault()
-    {
-        return Unset;
-    }
+	@Override
+	public TableEmptyCells getDefault()
+	{
+		return Unset;
+	}
 }

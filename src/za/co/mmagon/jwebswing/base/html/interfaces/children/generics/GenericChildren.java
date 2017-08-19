@@ -21,6 +21,7 @@ package za.co.mmagon.jwebswing.base.html.interfaces.children.generics;
  *
  * @author GedMarc
  */
-public interface GenericChildren {
+public interface GenericChildren
+{
 
 }

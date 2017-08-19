@@ -20,22 +20,21 @@ import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
 
 /**
- *
  * @author ged_m
  */
 public class FeatureTest extends BaseTestClass
 {
 
-    public FeatureTest()
-    {
-    }
+	public FeatureTest()
+	{
+	}
 
-    @Test
-    public void testFeature()
-    {
-        ComponentFeatureBase f = getFeature();
-        f.preConfigure();
-        System.out.println(f.toString());
-    }
+	@Test
+	public void testFeature()
+	{
+		ComponentFeatureBase f = getFeature();
+		f.preConfigure();
+		System.out.println(f.toString());
+	}
 
 }

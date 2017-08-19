@@ -27,60 +27,58 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
  */
 public enum HeightSetting implements CSSEnumeration<HeightSetting>
 {
-    /**
-     * Sets the type to auto
-     */
-    Auto,
-    /**
-     * Sets this property to its default value
-     *
-     * see http://www.w3schools.com/cssref/css_initial.asp
-     */
-    Initial,
-    /**
-     * Inherits this property from its parent element.
-     *
-     * see http://www.w3schools.com/cssref/css_inherit.asp
-     */
-    Inherit,
-    /**
-     * Sets this field as not set
-     */
-    Unset;
+	/**
+	 * Sets the type to auto
+	 */
+	Auto,
+	/**
+	 * Sets this property to its default value
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_initial.asp
+	 */
+	Initial,
+	/**
+	 * Inherits this property from its parent element.
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_inherit.asp
+	 */
+	Inherit,
+	/**
+	 * Sets this field as not set
+	 */
+	Unset;;
 
-    ;
+	private HeightSetting()
+	{
+	}
 
-    @Override
-    public String toString()
-    {
-        return super.name().toLowerCase();
-    }
+	@Override
+	public String toString()
+	{
+		return super.name().toLowerCase();
+	}
 
-    private HeightSetting()
-    {
-    }
+	@Override
+	public String getJavascriptSyntax()
+	{
+		return "style.height";
+	}
 
-    @Override
-    public String getJavascriptSyntax()
-    {
-        return "style.height";
-    }
+	@Override
+	public CSSVersions getCSSVersion()
+	{
+		return CSSVersions.CSS1;
+	}
 
-    @Override
-    public CSSVersions getCSSVersion()
-    {
-        return CSSVersions.CSS1;
-    }
+	@Override
+	public String getValue()
+	{
+		return name();
+	}
 
-    @Override
-    public String getValue()
-    {
-        return name();
-    }
-
-    @Override
-    public HeightSetting getDefault()
-    {
-        return Unset;
-    }
+	@Override
+	public HeightSetting getDefault()
+	{
+		return Unset;
+	}
 }

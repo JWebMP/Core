@@ -18,14 +18,13 @@ package za.co.mmagon.jwebswing.base.html.sorters;
 
 /**
  * This class sorts the Meta tag nicely
- * @since 2014/02/20
- * @version 1.0
- * @author MMagon
  *
- * 
+ * @author MMagon
+ * @version 1.0
+ * @since 2014/02/20
  */
 
-public class MetadataHeadersSorter 
+public class MetadataHeadersSorter
 {
 
 }

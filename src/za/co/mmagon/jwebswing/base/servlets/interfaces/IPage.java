@@ -16,10 +16,9 @@
  */
 package za.co.mmagon.jwebswing.base.servlets.interfaces;
 
-import java.util.List;
-import java.util.Map;
-import za.co.mmagon.jwebswing.*;
-import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.PageFields;
+import za.co.mmagon.jwebswing.PageOptions;
 import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.html.DocumentType;
 
@@ -28,60 +27,46 @@ import za.co.mmagon.jwebswing.base.html.DocumentType;
  *
  * @author GedMarc
  * @since Nov 21, 2016
- *
  */
 public interface IPage
 {
+	
+	/**
+	 * Adds a variable into angular
+	 *
+	 * @param variableName
+	 *
+	 * @return
+	 */
+	Page addAngularVariable(String variableName);
 
-    /**
-     * Adds a variable into angular
-     *
-     * @param variableName
-     *
-     * @return
-     */
-    Page addAngularVariable(String variableName);
-
-    /**
-     * Returns all the components currently associated with this page
-     *
-     * @return
-     */
-    List<ComponentHierarchyBase> getAllComponents();
-
-    /**
-     * Returns the angular object
-     *
-     * @return
-     */
-    AngularPageConfigurator getAngular();
-
-    /**
-     * Returns this pages current component cache
-     *
-     * @return
-     */
-    Map<String, ComponentHierarchyBase> getComponentCache();
-
-    /**
-     * Returns the document type that will be rendered with this HTML page real-time
-     * <p>
-     * @return Document Type
-     */
-    DocumentType getDocumentType();
-
-    /**
-     * Returns the fields available for entry on this page
-     *
-     * @return
-     */
-    PageFields getPageFields();
-
-    /**
-     * Returns all the dynamic options for a page
-     *
-     * @return
-     */
-    PageOptions getOptions();
-
+	/**
+	 * Returns the angular object
+	 *
+	 * @return
+	 */
+	AngularPageConfigurator getAngular();
+	
+	/**
+	 * Returns the document type that will be rendered with this HTML page real-time
+	 * <p>
+	 *
+	 * @return Document Type
+	 */
+	DocumentType getDocumentType();
+	
+	/**
+	 * Returns the fields available for entry on this page
+	 *
+	 * @return
+	 */
+	PageFields getPageFields();
+	
+	/**
+	 * Returns all the dynamic options for a page
+	 *
+	 * @return
+	 */
+	PageOptions getOptions();
+	
 }

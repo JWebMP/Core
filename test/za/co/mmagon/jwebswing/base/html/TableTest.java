@@ -16,30 +16,30 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class TableTest
 {
 
-    public TableTest()
-    {
-    }
+	public TableTest()
+	{
+	}
 
-    /**
-     * Test of getCellSpacing method, of class Table.
-     */
-    @Test
-    public void testGetCellSpacing()
-    {
-        Table t = new Table();
-        t.setCellSpacing(0);
-        t.setID("id");
-        System.out.println(t.toString(true));
-        assertEquals("<table cellspacing=\"0\" id=\"id\"></table>", t.toString(true).toString());
-    }
+	/**
+	 * Test of getCellSpacing method, of class Table.
+	 */
+	@Test
+	public void testGetCellSpacing()
+	{
+		Table t = new Table();
+		t.setCellSpacing(0);
+		t.setID("id");
+		System.out.println(t.toString(true));
+		assertEquals("<table cellspacing=\"0\" id=\"id\"></table>", t.toString(true).toString());
+	}
 }

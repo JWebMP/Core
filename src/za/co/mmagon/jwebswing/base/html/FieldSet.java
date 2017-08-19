@@ -38,56 +38,58 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * HTML5 has added new attributes for fieldset.
  * <p>
- * @author GedMarc
+ *
  * @param <J>
+ *
+ * @author GedMarc
  */
 public class FieldSet<J extends FieldSet<J>>
-        extends Component<FieldSetChildren, NoAttributes, NoFeatures, NoEvents, J>
-        implements FormChildren, NoIDTag
+		extends Component<FieldSetChildren, NoAttributes, NoFeatures, NoEvents, J>
+		implements FormChildren, NoIDTag
 {
-
-    private static final long serialVersionUID = 1L;
-    /**
-     * The legend if any is applied
-     */
-    private Legend legend;
-
-    /**
-     * Constructs a new instance of Field Set
-     */
-    public FieldSet()
-    {
-        super(ComponentTypes.FieldSet);
-        add(legend);
-    }
-
-    /**
-     * Sets the legend
-     *
-     * @param legendText
-     */
-    public void setLegendText(String legendText)
-    {
-        if (legend == null)
-        {
-            legend = new Legend();
-            legend.setText(legendText);
-            add(legend);
-        }
-        else
-        {
-            legend.setText(legendText);
-        }
-    }
-
-    /**
-     * Returns the legends text
-     *
-     * @return
-     */
-    public String getLegendText()
-    {
-        return legend.getText(0).toString();
-    }
-
+	
+	private static final long serialVersionUID = 1L;
+	/**
+	 * The legend if any is applied
+	 */
+	private Legend legend;
+	
+	/**
+	 * Constructs a new instance of Field Set
+	 */
+	public FieldSet()
+	{
+		super(ComponentTypes.FieldSet);
+		add(legend);
+	}
+	
+	/**
+	 * Returns the legends text
+	 *
+	 * @return
+	 */
+	public String getLegendText()
+	{
+		return legend.getText(0).toString();
+	}
+	
+	/**
+	 * Sets the legend
+	 *
+	 * @param legendText
+	 */
+	public void setLegendText(String legendText)
+	{
+		if (legend == null)
+		{
+			legend = new Legend();
+			legend.setText(legendText);
+			add(legend);
+		}
+		else
+		{
+			legend.setText(legendText);
+		}
+	}
+	
 }

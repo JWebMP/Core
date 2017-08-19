@@ -16,40 +16,40 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.html.attributes.HeaderTypes;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author MMagon
  */
 public class HeaderTest
 {
-
-    public HeaderTest()
-    {
-    }
-
-    /**
-     * Test of equals method, of class HeaderText.
-     */
-    @Test
-    public void testEquals()
-    {
-        Body b = new Body(new Page());
-        b.add(new HeaderText(HeaderTypes.H3, "Text goes here"));
-        b.add(new HeaderText(HeaderTypes.H6, "456"));
-
-        System.out.println(b.toString(true));
-
-        System.out.println("equals");
-        Object obj = null;
-        HeaderText instance = new HeaderText();
-        boolean expResult = false;
-        boolean result = instance.equals(obj);
-        assertEquals(expResult, result);
-    }
-
+	
+	public HeaderTest()
+	{
+	}
+	
+	/**
+	 * Test of equals method, of class HeaderText.
+	 */
+	@Test
+	public void testEquals()
+	{
+		Body b = new Body(new Page());
+		b.add(new HeaderText(HeaderTypes.H3, "Text goes here"));
+		b.add(new HeaderText(HeaderTypes.H6, "456"));
+		
+		System.out.println(b.toString(true));
+		
+		System.out.println("equals");
+		Object obj = null;
+		HeaderText instance = new HeaderText();
+		boolean expResult = false;
+		boolean result = instance.equals(obj);
+		assertEquals(expResult, result);
+	}
+	
 }

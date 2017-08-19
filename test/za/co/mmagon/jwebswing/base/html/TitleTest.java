@@ -17,26 +17,24 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
- *
  * @author GedMarc
  */
 public class TitleTest
 {
-    
-    public TitleTest()
-    {
-    }
-
-    /**
-     * Test of getTitle method, of class Title.
-     */
-    @Test
-    public void testGetTitle()
-    {
-        Title t = new Title("title");
-        System.out.println(t.toString(true));
-    }
+	
+	public TitleTest()
+	{
+	}
+	
+	/**
+	 * Test of getTitle method, of class Title.
+	 */
+	@Test
+	public void testGetTitle()
+	{
+		Title t = new Title("title");
+		System.out.println(t.toString(true));
+	}
 }

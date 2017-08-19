@@ -18,8 +18,13 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.OptionAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.DisplayObjectType;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.DataListChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.SelectChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
@@ -35,73 +40,79 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * Tip: If you have a long list of options, you can group related options with the &gt;optgroup&lt; tag.<p>
  *
- * @author GedMarc
  * @param <J>
+ *
+ * @author GedMarc
  */
 public class Option<J extends Option<J>>
-        extends Component<NoChildren, OptionAttributes, NoFeatures, NoEvents, J>
-        implements DataListChildren, SelectChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, DisplayObjectType
+		extends Component<NoChildren, OptionAttributes, NoFeatures, NoEvents, J>
+		implements DataListChildren, SelectChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, DisplayObjectType
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new Option tag
-     * <p>
-     * @param optionValue
-     */
-    public Option(String optionValue)
-    {
-        super(ComponentTypes.Option);
-        setInlineClosingTag(false);
-        addAttribute(OptionAttributes.Value, optionValue);
-        addAttribute(OptionAttributes.Label, optionValue);
-        setText(optionValue);
-    }
-
-    /**
-     * Sets the value of this option
-     * <p>
-     * @param value
-     *
-     * @return
-     */
-    public J setValue(String value)
-    {
-        addAttribute(OptionAttributes.Value, value);
-        return (J) this;
-    }
-
-    /**
-     * Sets the label of this option tag
-     * <p>
-     * @param label
-     *
-     * @return
-     */
-    public J setLabel(String label)
-    {
-        addAttribute(OptionAttributes.Label, label);
-        return (J) this;
-    }
-
-    /**
-     * Returns the label
-     * <p>
-     * @return
-     */
-    public String getLabel()
-    {
-        return getAttribute(OptionAttributes.Label);
-    }
-
-    /**
-     * Returns the label
-     * <p>
-     * @return
-     */
-    public String getValue()
-    {
-        return getAttribute(OptionAttributes.Value);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new Option tag
+	 * <p>
+	 *
+	 * @param optionValue
+	 */
+	public Option(String optionValue)
+	{
+		super(ComponentTypes.Option);
+		setInlineClosingTag(false);
+		addAttribute(OptionAttributes.Value, optionValue);
+		addAttribute(OptionAttributes.Label, optionValue);
+		setText(optionValue);
+	}
+	
+	/**
+	 * Returns the label
+	 * <p>
+	 *
+	 * @return
+	 */
+	public String getLabel()
+	{
+		return getAttribute(OptionAttributes.Label);
+	}
+	
+	/**
+	 * Sets the label of this option tag
+	 * <p>
+	 *
+	 * @param label
+	 *
+	 * @return
+	 */
+	public J setLabel(String label)
+	{
+		addAttribute(OptionAttributes.Label, label);
+		return (J) this;
+	}
+	
+	/**
+	 * Returns the label
+	 * <p>
+	 *
+	 * @return
+	 */
+	public String getValue()
+	{
+		return getAttribute(OptionAttributes.Value);
+	}
+	
+	/**
+	 * Sets the value of this option
+	 * <p>
+	 *
+	 * @param value
+	 *
+	 * @return
+	 */
+	public J setValue(String value)
+	{
+		addAttribute(OptionAttributes.Value, value);
+		return (J) this;
+	}
 }

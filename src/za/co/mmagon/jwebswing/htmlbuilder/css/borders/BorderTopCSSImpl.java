@@ -16,130 +16,133 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 
-import za.co.mmagon.jwebswing.base.client.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
+import za.co.mmagon.jwebswing.base.client.CSSVersions;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSDetail;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationAdapter;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationClass;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
 
 /**
  * CSS Border Properties
  * <p>
  * The CSS border properties allow you to specify the style, width, and color of an element's border.
  * <p>
+ *
  * @author GedMarc
  * @since 18 Jan 2016
  */
 public class BorderTopCSSImpl extends CSSImplementationAdapter<BorderTopCSS, BorderTopCSSImpl> implements CSSImplementationClass<BorderTopCSS, BorderTopCSSImpl>
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @CSSDetail(cssName = "border-top-color", cssVersion = CSSVersions.CSS21)
-    private ColourCSSImpl borderTopColor;
-    @CSSDetail(cssName = "border-top-color", cssVersion = CSSVersions.CSS21)
-    private ColourNames borderTopColor$;
-    @CSSDetail(cssName = "border-top-style", cssVersion = CSSVersions.CSS21)
-    private BorderStyles borderTopStyle;
-    @CSSDetail(cssName = "border-top-width", cssVersion = CSSVersions.CSS21)
-    private MeasurementCSSImpl borderTopWidth;
+	@CSSDetail(cssName = "border-top-color", cssVersion = CSSVersions.CSS21)
+	private ColourCSSImpl borderTopColor;
+	@CSSDetail(cssName = "border-top-color", cssVersion = CSSVersions.CSS21)
+	private ColourNames borderTopColor$;
+	@CSSDetail(cssName = "border-top-style", cssVersion = CSSVersions.CSS21)
+	private BorderStyles borderTopStyle;
+	@CSSDetail(cssName = "border-top-width", cssVersion = CSSVersions.CSS21)
+	private MeasurementCSSImpl borderTopWidth;
 
-    public BorderTopCSSImpl()
-    {
-    }
+	public BorderTopCSSImpl()
+	{
+	}
 
-    @Override
-    public String toString()
-    {
-        String out = "";
-        out += borderTopWidth + " ";
-        out += borderTopStyle + " ";
-        out += borderTopColor + " ";
-        out += borderTopColor$ + " ";
-        out = out.replaceAll("null", "");
-        out = out.trim();
-        return out;
-    }
+	@Override
+	public String toString()
+	{
+		String out = "";
+		out += borderTopWidth + " ";
+		out += borderTopStyle + " ";
+		out += borderTopColor + " ";
+		out += borderTopColor$ + " ";
+		out = out.replaceAll("null", "");
+		out = out.trim();
+		return out;
+	}
 
-    /**
-     * Sets the width of the right border
-     *
-     * @return
-     */
-    public ColourCSSImpl getBorderTopColor()
-    {
-        return borderTopColor;
-    }
+	/**
+	 * Sets the width of the right border
+	 *
+	 * @return
+	 */
+	public ColourCSSImpl getBorderTopColor()
+	{
+		return borderTopColor;
+	}
 
-    /**
-     * Sets the width of the top border
-     *
-     * @return
-     */
-    public ColourNames getBorderTopColor$()
-    {
-        return borderTopColor$;
-    }
+	/**
+	 * Sets the top colour for the border
+	 *
+	 * @param borderTopColor
+	 */
+	public void setBorderTopColor(ColourCSSImpl borderTopColor)
+	{
+		this.borderTopColor = borderTopColor;
+	}
 
-    /**
-     * Gets the style of the top border
-     *
-     * @return
-     */
-    public BorderStyles getBorderTopStyle()
-    {
-        return borderTopStyle;
-    }
+	/**
+	 * Sets the width of the top border
+	 *
+	 * @return
+	 */
+	public ColourNames getBorderTopColor$()
+	{
+		return borderTopColor$;
+	}
 
-    /**
-     * Sets the style of the top border
-     *
-     * @return
-     */
-    public MeasurementCSSImpl getBorderTopWidth()
-    {
-        return borderTopWidth;
-    }
+	/**
+	 * Sets the top colour for the border
+	 *
+	 * @param borderTopColor$
+	 */
+	public void setBorderTopColor$(ColourNames borderTopColor$)
+	{
+		this.borderTopColor$ = borderTopColor$;
+	}
 
-    /**
-     * Sets the top colour for the border
-     *
-     * @param borderTopColor
-     */
-    public void setBorderTopColor(ColourCSSImpl borderTopColor)
-    {
-        this.borderTopColor = borderTopColor;
-    }
+	/**
+	 * Gets the style of the top border
+	 *
+	 * @return
+	 */
+	public BorderStyles getBorderTopStyle()
+	{
+		return borderTopStyle;
+	}
 
-    /**
-     * Sets the top colour for the border
-     *
-     * @param borderTopColor$
-     */
-    public void setBorderTopColor$(ColourNames borderTopColor$)
-    {
-        this.borderTopColor$ = borderTopColor$;
-    }
+	/**
+	 * Sets the top style for the border
+	 *
+	 * @param borderTopStyle
+	 */
+	public void setBorderTopStyle(BorderStyles borderTopStyle)
+	{
+		this.borderTopStyle = borderTopStyle;
+	}
 
-    /**
-     * Sets the top style for the border
-     *
-     * @param borderTopStyle
-     */
-    public void setBorderTopStyle(BorderStyles borderTopStyle)
-    {
-        this.borderTopStyle = borderTopStyle;
-    }
+	/**
+	 * Sets the style of the top border
+	 *
+	 * @return
+	 */
+	public MeasurementCSSImpl getBorderTopWidth()
+	{
+		return borderTopWidth;
+	}
 
-    /**
-     * Sets the top width for the border
-     *
-     * @param borderTopWidth
-     */
-    public void setBorderTopWidth(MeasurementCSSImpl borderTopWidth)
-    {
-        this.borderTopWidth = borderTopWidth;
-    }
+	/**
+	 * Sets the top width for the border
+	 *
+	 * @param borderTopWidth
+	 */
+	public void setBorderTopWidth(MeasurementCSSImpl borderTopWidth)
+	{
+		this.borderTopWidth = borderTopWidth;
+	}
 
 }

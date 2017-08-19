@@ -17,24 +17,22 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
- *
  * @author GedMarc
  */
 public class TableRowTest
 {
-    
-    public TableRowTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        TableRow tr = new TableRow();
-        System.out.println(tr.toString(true));
-    }
-    
+	
+	public TableRowTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		TableRow tr = new TableRow();
+		System.out.println(tr.toString(true));
+	}
+	
 }

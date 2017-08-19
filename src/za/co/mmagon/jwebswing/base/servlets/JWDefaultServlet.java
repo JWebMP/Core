@@ -17,102 +17,105 @@
 package za.co.mmagon.jwebswing.base.servlets;
 
 import com.google.inject.Singleton;
+import za.co.mmagon.logger.LogFactory;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.ServletException;
-import javax.servlet.http.*;
-import za.co.mmagon.logger.LogFactory;
 
 /**
  * Provides default methods for authentication authorization etc
  *
  * @author GedMarc
- * @since Nov 14, 2016
  * @version 1.0
- *
+ * @since Nov 14, 2016
  */
 @Singleton
 public class JWDefaultServlet extends HttpServlet
 {
-
-    /**
-     * The Servlet base logger
-     */
-    private static final Logger LOG = LogFactory.getInstance().getLogger("ServletBase");
-    /**
-     * Version 1
-     */
-    private static final long serialVersionUID = 1L;
-
-    public JWDefaultServlet()
-    {
-
-    }
-
-    /**
-     * Validates the session
-     *
-     * @param checkPageExists If the main page has to be hit first
-     * @param request         The physical request
-     *
-     * @throws javax.servlet.ServletException When any security check fails
-     */
-    public void validate(Boolean checkPageExists, HttpServletRequest request)
-            throws ServletException
-    {
-        HttpSession session = request.getSession();
-        String sessionID = session.getId();
-
-        if (sessionID == null)
-        {
-            LOG.log(Level.SEVERE, "Session Doesn't Exist", new ServletException("There is no session for a data pull"));
-            throw new ServletException("There is no session for a data pull");
-        }
-    }
-
-    /**
-     * Does a default security check on the request
-     *
-     * @param req
-     * @param resp
-     *
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
-    {
-        try
-        {
-            validate(false, req);
-        }
-        catch (ServletException e)
-        {
-            LOG.log(Level.SEVERE, "Unable to Do Get", e);
-        }
-    }
-
-    /**
-     * Does a default security check on the request
-     *
-     * @param req
-     * @param resp
-     *
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
-    {
-        try
-        {
-            validate(true, req);
-        }
-        catch (ServletException e)
-        {
-            LOG.log(Level.SEVERE, "Security Exception in Validation", e);
-        }
-    }
-
+	
+	/**
+	 * The Servlet base logger
+	 */
+	private static final Logger LOG = LogFactory.getInstance().getLogger("ServletBase");
+	/**
+	 * Version 1
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public JWDefaultServlet()
+	{
+	
+	}
+	
+	/**
+	 * Validates the session
+	 *
+	 * @param checkPageExists If the main page has to be hit first
+	 * @param request         The physical request
+	 *
+	 * @throws javax.servlet.ServletException When any security check fails
+	 */
+	public void validate(Boolean checkPageExists, HttpServletRequest request)
+			throws ServletException
+	{
+		HttpSession session = request.getSession();
+		String sessionID = session.getId();
+		
+		if (sessionID == null)
+		{
+			LOG.log(Level.SEVERE, "Session Doesn't Exist", new ServletException("There is no session for a data pull"));
+			throw new ServletException("There is no session for a data pull");
+		}
+	}
+	
+	/**
+	 * Does a default security check on the request
+	 *
+	 * @param req
+	 * @param resp
+	 *
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	{
+		try
+		{
+			validate(false, req);
+		}
+		catch (ServletException e)
+		{
+			LOG.log(Level.SEVERE, "Unable to Do Get", e);
+		}
+	}
+	
+	/**
+	 * Does a default security check on the request
+	 *
+	 * @param req
+	 * @param resp
+	 *
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	{
+		try
+		{
+			validate(true, req);
+		}
+		catch (ServletException e)
+		{
+			LOG.log(Level.SEVERE, "Security Exception in Validation", e);
+		}
+	}
+	
 }

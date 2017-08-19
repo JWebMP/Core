@@ -19,46 +19,45 @@ package za.co.mmagon.jwebswing.base.html.attributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 
 /**
- *
  * @author GedMarc
- * @since Feb 9, 2015
  * @version 1.0
+ * @since Feb 9, 2015
  */
 public enum ObjectAttributes implements AttributeDefinitions
 {
 
-    /**
-     * Specifies the URL of the resource to be used by the object
-     */
-    Data,
-    /**
-     * Specifies one or more forms the object belongs to
-     */
-    Form,
-    /**
-     * Specifies the height of the object
-     */
-    Height,
-    /**
-     * Specifies a name for the object
-     */
-    Name,
-    /**
-     * Specifies the media type of data specified in the data attribute
-     */
-    Type,
-    /**
-     * Specifies the name of a client-side image map to be used with the object
-     */
-    UseMap,
-    /**
-     * Specifies the width in pixels
-     */
-    Width;
+	/**
+	 * Specifies the URL of the resource to be used by the object
+	 */
+	Data,
+	/**
+	 * Specifies one or more forms the object belongs to
+	 */
+	Form,
+	/**
+	 * Specifies the height of the object
+	 */
+	Height,
+	/**
+	 * Specifies a name for the object
+	 */
+	Name,
+	/**
+	 * Specifies the media type of data specified in the data attribute
+	 */
+	Type,
+	/**
+	 * Specifies the name of a client-side image map to be used with the object
+	 */
+	UseMap,
+	/**
+	 * Specifies the width in pixels
+	 */
+	Width;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

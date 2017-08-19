@@ -23,95 +23,95 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
  * Definition and Usage
  * <p>
  * <p>
- The background-blend-mode property defines the blending mode of each background layer (Color and/or image).
- <p>
- Default value: Normal
- <p>
+ * The background-blend-mode property defines the blending mode of each background layer (Color and/or image).
+ * <p>
+ * Default value: Normal
+ * <p>
  * Inherited: no
  * <p>
  * Animatable: no. Read about animatable
  * <p>
  * Version: CSS3
  * <p>
- JavaScript syntax: object.style.backgroundBlendMode="Screen"
+ * JavaScript syntax: object.style.backgroundBlendMode="Screen"
  *
  * @author GedMarc
  * @since 17 Jan 2016
  */
 public enum BackgroundBlendMode implements CSSEnumeration<BackgroundBlendMode>
 {
-    /**
-     * This is default. Sets the blending mode to Normal
-     */
-    Normal,
-    /**
-     * Sets the blending mode to Multiply
-     */
-    Multiply,
-    /**
-     * Sets the blending mode to Screen
-     */
-    Screen,
-    /**
-     * Sets the blending mode to Overlay
-     */
-    Overlay,
-    /**
-     * Sets the blending mode to Darken
-     */
-    Darken,
-    /**
-     * Sets the blending mode to Lighten
-     */
-    Lighten,
-    /**
-     * Sets the blending mode to Color-dodge
-     */
-    Color_Dodge,
-    /**
-     * Sets the blending mode to Saturation
-     */
-    Saturation,
-    /**
-     * Sets the blending mode to Color
-     */
-    Color,
-    /**
-     * Sets the blending mode to Luminosity
-     */
-    Luminosity,
-    /**
-     * Sets this field as not set
-     */
-    Unset;
+	/**
+	 * This is default. Sets the blending mode to Normal
+	 */
+	Normal,
+	/**
+	 * Sets the blending mode to Multiply
+	 */
+	Multiply,
+	/**
+	 * Sets the blending mode to Screen
+	 */
+	Screen,
+	/**
+	 * Sets the blending mode to Overlay
+	 */
+	Overlay,
+	/**
+	 * Sets the blending mode to Darken
+	 */
+	Darken,
+	/**
+	 * Sets the blending mode to Lighten
+	 */
+	Lighten,
+	/**
+	 * Sets the blending mode to Color-dodge
+	 */
+	Color_Dodge,
+	/**
+	 * Sets the blending mode to Saturation
+	 */
+	Saturation,
+	/**
+	 * Sets the blending mode to Color
+	 */
+	Color,
+	/**
+	 * Sets the blending mode to Luminosity
+	 */
+	Luminosity,
+	/**
+	 * Sets this field as not set
+	 */
+	Unset;
 
-    @Override
-    public String toString()
-    {
-        return name().toLowerCase().replace('_', '-');
-    }
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase().replace('_', '-');
+	}
 
-    @Override
-    public String getJavascriptSyntax()
-    {
-        return "style.backgroundBlendMode";
-    }
+	@Override
+	public String getJavascriptSyntax()
+	{
+		return "style.backgroundBlendMode";
+	}
 
-    @Override
-    public CSSVersions getCSSVersion()
-    {
-        return CSSVersions.CSS3;
-    }
+	@Override
+	public CSSVersions getCSSVersion()
+	{
+		return CSSVersions.CSS3;
+	}
 
-    @Override
-    public String getValue()
-    {
-        return name();
-    }
+	@Override
+	public String getValue()
+	{
+		return name();
+	}
 
-    @Override
-    public BackgroundBlendMode getDefault()
-    {
-        return Unset;
-    }
+	@Override
+	public BackgroundBlendMode getDefault()
+	{
+		return Unset;
+	}
 }

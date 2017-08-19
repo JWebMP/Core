@@ -16,38 +16,38 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class SelectTest
 {
-
-    public SelectTest()
-    {
-    }
-
-    @Test
-    public void testOptionGroups()
-    {
-        Select s = new Select();
-        Option o = new Option("Option");
-        OptionGroup op = new OptionGroup("Option Group");
-        s.setID("id");
-        o.setID("id");
-        op.setID("id");
-        s.add(op);
-        op.add(o);
-
-        System.out.println(s.toString(true));
-
-        assertEquals("<select id=\"id\">\n"
-                + "	<optgroup label=\"Option Group\">\n"
-                + "		<option label=\"Option\" value=\"Option\" id=\"id\">Option</option>\n"
-                + "	</optgroup>\n"
-                + "</select>", s.toString(true).toString());
-    }
+	
+	public SelectTest()
+	{
+	}
+	
+	@Test
+	public void testOptionGroups()
+	{
+		Select s = new Select();
+		Option o = new Option("Option");
+		OptionGroup op = new OptionGroup("Option Group");
+		s.setID("id");
+		o.setID("id");
+		op.setID("id");
+		s.add(op);
+		op.add(o);
+		
+		System.out.println(s.toString(true));
+		
+		assertEquals("<select id=\"id\">\n"
+				             + "	<optgroup label=\"Option Group\">\n"
+				             + "		<option label=\"Option\" value=\"Option\" id=\"id\">Option</option>\n"
+				             + "	</optgroup>\n"
+				             + "</select>", s.toString(true).toString());
+	}
 }

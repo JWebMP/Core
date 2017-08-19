@@ -16,49 +16,50 @@
  */
 package za.co.mmagon;
 
-import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.generics.WebReference;
 import za.co.mmagon.jwebswing.plugins.ajaxenabler.AjaxEnablerReferencePool;
 import za.co.mmagon.jwebswing.plugins.jquery.JQueryReferencePool;
 
+import java.util.ArrayList;
+
 /**
- *
  * @author GedMarc
  */
 public class WebReferenceTest
 {
 
-    public WebReferenceTest()
-    {
-    }
+	public WebReferenceTest()
+	{
+	}
 
-    /**
-     * Test of setLeft method, of class WebReference.
-     */
-    @Test
-    public void testSetLeft()
-    {
-    }
+	/**
+	 * Test of setLeft method, of class WebReference.
+	 */
+	@Test
+	public void testSetLeft()
+	{
+	}
 
-    @Test
-    public void testSort()
-    {
-        ArrayList<WebReference> w = new ArrayList<>();
-        // w.add(AtmosphereReferencePool.JQueryAtmospherePush.getJavaScriptReference());
-        w.add(JQueryReferencePool.JQueryV2.getJavaScriptReference());// new JQueryReferenceV2());
+	@Test
+	public void testSort()
+	{
+		WebReference.setIsLocal(true);
+		ArrayList<WebReference> w = new ArrayList<>();
+		// w.add(AtmosphereReferencePool.JQueryAtmospherePush.getJavaScriptReference());
+		w.add(JQueryReferencePool.JQueryV2.getJavaScriptReference());// new JQueryReferenceV2());
 
-        //w.add(AtmosphereReferencePool.JQueryAtmospherePush.getJavaScriptReference());
-        w.add(AjaxEnablerReferencePool.AjaxEnabler.getJavaScriptReference());
+		//w.add(AtmosphereReferencePool.JQueryAtmospherePush.getJavaScriptReference());
+		w.add(AjaxEnablerReferencePool.AjaxEnabler.getJavaScriptReference());
 
-        WebReference.sort(w);
-        System.out.println(w);
+		WebReference.sort(w);
+		System.out.println(w);
 
-        String expected = "[bower_components/jquery/dist/jquery.js, javascript/jwebswing/ajax-enabler.js]";
-        String result = w.toString();
+		String expected = "[bower_components/jquery/dist/jquery.js, javascript/jwebswing/ajax-enabler.js]";
+		String result = w.toString();
 
-        Assert.assertEquals(expected, result);
+		Assert.assertEquals(expected, result);
 
-    }
+	}
 }

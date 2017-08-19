@@ -19,20 +19,19 @@ package za.co.mmagon.jwebswing.base.html.attributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 
 /**
- *
  * @author GedMarc
  */
 public enum AbbreviationAttributes implements AttributeDefinitions
 {
 
-    /**
-     * Defines the title of the abbreviation
-     */
-    Title;
+	/**
+	 * Defines the title of the abbreviation
+	 */
+	Title;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

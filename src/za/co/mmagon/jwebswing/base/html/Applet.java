@@ -27,30 +27,31 @@ import za.co.mmagon.logger.LogFactory;
 /**
  * Defines a java Applet tag
  * <p>
+ *
  * @param <J>
  *
  * @since @version @author MMagon
  */
 public class Applet<J extends Applet<J>>
-        extends Component<NoChildren, AppletAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<NoChildren, AppletAttributes, GlobalFeatures, GlobalEvents, J>
 {
 
-    /**
-     * Logger for the Component
-     */
-    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Applet");
-    /**
-     * Serial Version for all Components and their compatibility
-     */
-    private static final long serialVersionUID = 1l;
+	/**
+	 * Logger for the Component
+	 */
+	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Applet");
+	/**
+	 * Serial Version for all Components and their compatibility
+	 */
+	private static final long serialVersionUID = 1l;
 
-    /**
-     * Constructs a new applet
-     */
-    public Applet()
-    {
-        super(ComponentTypes.Applet.getComponentTag(), ComponentTypes.Applet);
-        setTiny(true);
-    }
+	/**
+	 * Constructs a new applet
+	 */
+	public Applet()
+	{
+		super(ComponentTypes.Applet.getComponentTag(), ComponentTypes.Applet);
+		setTiny(true);
+	}
 
 }

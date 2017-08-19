@@ -21,71 +21,69 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
 
 /**
- *
  * @author GedMarc
  * @since 18 Jan 2016
  */
 @CSSAnnotationType
 public enum TableCaptionSides implements CSSEnumeration<TableCaptionSides>
 {
-    /**
-     * Puts the caption above the table. This is default Play it »
-     */
-    Top,
-    /**
-     * Puts the caption below the table
-     */
-    Bottom,
-    /**
-     * Sets this property to its default value
-     *
-     * see http://www.w3schools.com/cssref/css_initial.asp
-     */
-    Initial,
-    /**
-     * Inherits this property from its parent element.
-     *
-     * see http://www.w3schools.com/cssref/css_inherit.asp
-     */
-    Inherit,
-    /**
-     * Sets this field as not set
-     */
-    Unset;
+	/**
+	 * Puts the caption above the table. This is default Play it »
+	 */
+	Top,
+	/**
+	 * Puts the caption below the table
+	 */
+	Bottom,
+	/**
+	 * Sets this property to its default value
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_initial.asp
+	 */
+	Initial,
+	/**
+	 * Inherits this property from its parent element.
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_inherit.asp
+	 */
+	Inherit,
+	/**
+	 * Sets this field as not set
+	 */
+	Unset;;
 
-    ;
-    private TableCaptionSides()
-    {
-    }
+	private TableCaptionSides()
+	{
+	}
 
-    @Override
-    public String toString()
-    {
-        return name().toLowerCase();
-    }
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
+	}
 
-    @Override
-    public String getJavascriptSyntax()
-    {
-        return "style.captionSide";
-    }
+	@Override
+	public String getJavascriptSyntax()
+	{
+		return "style.captionSide";
+	}
 
-    @Override
-    public CSSVersions getCSSVersion()
-    {
-        return CSSVersions.CSS1;
-    }
+	@Override
+	public CSSVersions getCSSVersion()
+	{
+		return CSSVersions.CSS1;
+	}
 
-    @Override
-    public String getValue()
-    {
-        return name();
-    }
+	@Override
+	public String getValue()
+	{
+		return name();
+	}
 
-    @Override
-    public TableCaptionSides getDefault()
-    {
-        return Unset;
-    }
+	@Override
+	public TableCaptionSides getDefault()
+	{
+		return Unset;
+	}
 
 }

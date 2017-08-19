@@ -19,56 +19,55 @@ package za.co.mmagon.jwebswing.base.ajax;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
- *
  * @author Marc Magon
  * @since 02 May 2017
  */
 public class LocalStorageJavascriptPart extends JavaScriptPart
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private String key;
-    private String value;
+	private String key;
+	private String value;
 
-    /*
-     * Constructs a new LocalStorageJavascriptPart
-     */
-    public LocalStorageJavascriptPart()
-    {
-        //Nothing needed
-    }
+	/*
+	 * Constructs a new LocalStorageJavascriptPart
+	 */
+	public LocalStorageJavascriptPart()
+	{
+		//Nothing needed
+	}
 
-    public LocalStorageJavascriptPart(String key, String value)
-    {
-        this.key = key;
-        this.value = value;
-    }
+	public LocalStorageJavascriptPart(String key, String value)
+	{
+		this.key = key;
+		this.value = value;
+	}
 
-    public LocalStorageJavascriptPart(String key, JavaScriptPart value)
-    {
-        this.key = key;
-        this.value = value.toString();
-    }
+	public LocalStorageJavascriptPart(String key, JavaScriptPart value)
+	{
+		this.key = key;
+		this.value = value.toString();
+	}
 
-    public String getKey()
-    {
-        return key;
-    }
+	public String getKey()
+	{
+		return key;
+	}
 
-    public void setKey(String key)
-    {
-        this.key = key;
-    }
+	public void setKey(String key)
+	{
+		this.key = key;
+	}
 
-    public String getValue()
-    {
-        return value;
-    }
+	public String getValue()
+	{
+		return value;
+	}
 
-    public void setValue(String value)
-    {
-        this.value = value;
-    }
+	public void setValue(String value)
+	{
+		this.value = value;
+	}
 
 }

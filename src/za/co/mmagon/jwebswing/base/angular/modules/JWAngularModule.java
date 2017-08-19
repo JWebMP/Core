@@ -16,97 +16,100 @@
  */
 package za.co.mmagon.jwebswing.base.angular.modules;
 
-import java.util.*;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 /**
- *
  * @author GedMarc
  * @since 25 Jul 2016
  */
 public class JWAngularModule extends AngularModuleBase
 {
 
-    private static final long serialVersionUID = 1L;
-    private Page page;
+	private static final long serialVersionUID = 1L;
+	private Page page;
 
-    public JWAngularModule(Page component)
-    {
-        super("jwApp");
-        setSortOrder(9999999);
-        this.page = component;
-    }
+	public JWAngularModule(Page component)
+	{
+		super("jwApp");
+		setSortOrder(9999999);
+		this.page = component;
+	}
 
-    public String renderFunction(Page fromComponent)
-    {
-        this.page = fromComponent;
-        return renderFunction();
-    }
+	public String renderFunction(Page fromComponent)
+	{
+		this.page = fromComponent;
+		return renderFunction();
+	}
 
-    /**
-     * Overwrite the render function
-     *
-     * @return
-     */
-    @Override
-    public String renderFunction()
-    {
-        String returnable = "var " + AngularFeature.getAppName() + " = angular.module(";
-        returnable += "'" + AngularFeature.getAppName() + "',";
+	/**
+	 * Overwrite the render function
+	 *
+	 * @return
+	 */
+	@Override
+	public String renderFunction()
+	{
+		String returnable = "var " + AngularFeature.getAppName() + " = angular.module(";
+		returnable += "'" + AngularFeature.getAppName() + "',";
 
-        ArrayList<String> moduleNames = new ArrayList<>();
-        List<AngularModuleBase> modules = page.getAngular().getAngularModules();
-        Collections.sort(modules, new Comparator<AngularModuleBase>()
-        {
-            @Override
-            public int compare(AngularModuleBase o1, AngularModuleBase o2)
-            {
-                return o1.compare(o1, o2);
-            }
-        });
-        for (AngularModuleBase module : modules)
-        {
-            String name = module.getReferenceName();
-            if (name != null)
-            {
-                if (!moduleNames.contains(name))
-                {
-                    moduleNames.add(module.getReferenceName());
-                }
-            }
-        }
-        /*
+		ArrayList<String> moduleNames = new ArrayList<>();
+		List<AngularModuleBase> modules = page.getAngular().getAngularModules();
+		Collections.sort(modules, new Comparator<AngularModuleBase>()
+		{
+			@Override
+			public int compare(AngularModuleBase o1, AngularModuleBase o2)
+			{
+				return o1.compare(o1, o2);
+			}
+		});
+		for (AngularModuleBase module : modules)
+		{
+			String name = module.getReferenceName();
+			if (name != null)
+			{
+				if (!moduleNames.contains(name))
+				{
+					moduleNames.add(module.getReferenceName());
+				}
+			}
+		}
+	    /*
          * modules.stream().forEachOrdered(module -> { String name = module.getReferenceName(); if (name != null) { if (!moduleNames.contains(name)) { moduleNames.add(module.getReferenceName()); } }
         });
          */
 
-        StringBuilder nameRenders = new StringBuilder();
-        for (String name : moduleNames)
-        {
-            nameRenders.append("'").append(name).append("',");
-        }
+		StringBuilder nameRenders = new StringBuilder();
+		for (String name : moduleNames)
+		{
+			nameRenders.append("'").append(name).append("',");
+		}
 
-        if (nameRenders.indexOf(",") != -1)
-        {
-            nameRenders = nameRenders.deleteCharAt(nameRenders.lastIndexOf(","));
-        }
-        nameRenders.insert(0, "[");
-        nameRenders.append("]");
-        returnable += nameRenders;
+		if (nameRenders.indexOf(",") != -1)
+		{
+			nameRenders = nameRenders.deleteCharAt(nameRenders.lastIndexOf(","));
+		}
+		nameRenders.insert(0, "[");
+		nameRenders.append("]");
+		returnable += nameRenders;
 
-        returnable += ");";
-        return returnable;
-    }
+		returnable += ");";
+		return returnable;
+	}
 
-    @Override
-    public String toString()
-    {
-        if (this.page != null)
-        {
-            page.toString(true);
-        }
-        return super.toString();
-    }
+	@Override
+	public String toString()
+	{
+		if (this.page != null)
+		{
+			page.toString(true);
+		}
+		return super.toString();
+	}
 
 }

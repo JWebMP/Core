@@ -16,28 +16,28 @@
  */
 package za.co.mmagon.jwebswing.base.servlets.interfaces;
 
-import java.util.Map;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+import java.util.Map;
 
 /**
  * Marks a component as one with Data that is available as either AJAX or direct
  *
- * @author GedMarc
  * @param <J> The data DTO class
  *
+ * @author GedMarc
  * @since Nov 9, 2016
- *
  */
 public interface IDataComponent<J extends JavaScriptPart>
 {
 
-    /**
-     * Returns the data object associated with this component.
-     * Gets called from a separate Servlet in Asynchronous format. Sometimes the fields are set
-     *
-     *
-     * @param params The request parameters received
-     * @return
-     */
-    J getData(Map<String, String[]> params);
+	/**
+	 * Returns the data object associated with this component.
+	 * Gets called from a separate Servlet in Asynchronous format. Sometimes the fields are set
+	 *
+	 * @param params The request parameters received
+	 *
+	 * @return
+	 */
+	J getData(Map<String, String[]> params);
 }

@@ -17,26 +17,24 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 import za.co.mmagon.jwebswing.base.html.attributes.HeaderTypes;
 
 /**
- *
  * @author GedMarc
  */
 public class NavigationSectionTest
 {
-    
-    public NavigationSectionTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        NavigationSection ns = new NavigationSection();
-        ns.add(new HeaderText(HeaderTypes.H1, "asd"));
-        System.out.println(ns.toString(true));
-    }
-    
+	
+	public NavigationSectionTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		NavigationSection ns = new NavigationSection();
+		ns.add(new HeaderText(HeaderTypes.H1, "asd"));
+		System.out.println(ns.toString(true));
+	}
+	
 }

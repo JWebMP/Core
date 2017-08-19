@@ -40,62 +40,62 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
  */
 public enum BackgroundAttachments implements CSSEnumeration<BackgroundAttachments>
 {
-    /**
-     * The background scrolls along with the element. This is default
-     */
-    Scroll,
-    /**
-     *
-     */
-    Fixed,
-    /**
-     * The background scrolls along with the element's contents
-     */
-    Local,
-    /**
-     * Sets this property to its default value
-     *
-     * see http://www.w3schools.com/cssref/css_initial.asp
-     */
-    Initial,
-    /**
-     * Inherits this property from its parent element.
-     *
-     * see http://www.w3schools.com/cssref/css_inherit.asp
-     */
-    Inherit,
-    /**
-     * Sets this field as not set
-     */
-    Unset;
+	/**
+	 * The background scrolls along with the element. This is default
+	 */
+	Scroll,
+	/**
+	 *
+	 */
+	Fixed,
+	/**
+	 * The background scrolls along with the element's contents
+	 */
+	Local,
+	/**
+	 * Sets this property to its default value
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_initial.asp
+	 */
+	Initial,
+	/**
+	 * Inherits this property from its parent element.
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_inherit.asp
+	 */
+	Inherit,
+	/**
+	 * Sets this field as not set
+	 */
+	Unset;
 
-    @Override
-    public String getJavascriptSyntax()
-    {
-        return "style.backgroundAttachment";
-    }
+	@Override
+	public String getJavascriptSyntax()
+	{
+		return "style.backgroundAttachment";
+	}
 
-    @Override
-    public CSSVersions getCSSVersion()
-    {
-        return CSSVersions.CSS1;
-    }
+	@Override
+	public CSSVersions getCSSVersion()
+	{
+		return CSSVersions.CSS1;
+	}
 
-    @Override
-    public String getValue()
-    {
-        return name();
-    }
+	@Override
+	public String getValue()
+	{
+		return name();
+	}
 
-    @Override
-    public BackgroundAttachments getDefault()
-    {
-        return Unset;
-    }
+	@Override
+	public BackgroundAttachments getDefault()
+	{
+		return Unset;
+	}
 
-    @Override
-    public String toString()
-    {
-        return name().toLowerCase();
-    }
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
+	}
 }

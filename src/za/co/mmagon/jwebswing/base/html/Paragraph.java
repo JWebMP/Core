@@ -49,98 +49,100 @@ import za.co.mmagon.jwebswing.utilities.TextUtilities;
  * <p>
  * The align attribute is not supported in HTML5.<p>
  * <p>
- * @author Marc Magon
+ *
  * @param <J>
  *
- * @since forever, 2008 or 2007 sometime I think - will need to check on the original version named "radio on live".
+ * @author Marc Magon
  * @version 1.0
+ * @since forever, 2008 or 2007 sometime I think - will need to check on the original version named "radio on live".
  */
 public class Paragraph<J extends Paragraph<J>>
-        extends Component<ParagraphChildren, ParagraphAttributes, GlobalFeatures, GlobalEvents, J>
-        implements BodyChildren, NoNewLineForRawText, ParagraphChildren, DetailsChildren
+		extends Component<ParagraphChildren, ParagraphAttributes, GlobalFeatures, GlobalEvents, J>
+		implements BodyChildren, NoNewLineForRawText, ParagraphChildren, DetailsChildren
 {
-
-    private static final long serialVersionUID = 1L;
-    /**
-     * Sets if this paragraph must render the text directly without a tag
-     */
-    private boolean textOnly;
-
-    /**
-     * Constructs a blank paragraph
-     */
-    public Paragraph()
-    {
-        this("");
-    }
-
-    /**
-     * Constructs a new paragraph with the raw text set as the input text
-     * <p>
-     * @param text
-     */
-    public Paragraph(String text)
-    {
-        super("p", ComponentTypes.Paragraph);
-        setText(text);
-    }
-
-    /**
-     * Sets if this paragraph must render the text directly without a tag
-     *
-     * @return
-     */
-    public boolean isTextOnly()
-    {
-        return textOnly;
-    }
-
-    @Override
-    protected StringBuilder renderHTML(int tabCount)
-    {
-        if (isTextOnly())
-        {
-            return TextUtilities.getTabString(tabCount).append(new StringBuilder(getText(tabCount)));
-        }
-        else
-        {
-            return super.renderHTML(tabCount);
-        }
-    }
-
-    /**
-     * Sets if this paragraph must render the text directly without a tag
-     *
-     * @param textOnly
-     *
-     * @return
-     */
-    public Paragraph setTextOnly(boolean textOnly)
-    {
-        this.textOnly = textOnly;
-        return this;
-    }
-
-    /**
-     * Don't use the bind attribute, append in curly braces
-     *
-     * @param variableName
-     *
-     * @return
-     */
-    @Override
-    public J bind(String variableName)
-    {
-        AngularPageConfigurator.setRequired(this, true);
-        if (variableName.contains("{{"))
-        {
-            setText(getText(0) + variableName);
-        }
-        else
-        {
-            setText(getText(0) + "{{" + variableName + "}}");
-        }
-        return (J) this;
-    }
-
+	
+	private static final long serialVersionUID = 1L;
+	/**
+	 * Sets if this paragraph must render the text directly without a tag
+	 */
+	private boolean textOnly;
+	
+	/**
+	 * Constructs a blank paragraph
+	 */
+	public Paragraph()
+	{
+		this("");
+	}
+	
+	/**
+	 * Constructs a new paragraph with the raw text set as the input text
+	 * <p>
+	 *
+	 * @param text
+	 */
+	public Paragraph(String text)
+	{
+		super("p", ComponentTypes.Paragraph);
+		setText(text);
+	}
+	
+	/**
+	 * Sets if this paragraph must render the text directly without a tag
+	 *
+	 * @return
+	 */
+	public boolean isTextOnly()
+	{
+		return textOnly;
+	}
+	
+	/**
+	 * Sets if this paragraph must render the text directly without a tag
+	 *
+	 * @param textOnly
+	 *
+	 * @return
+	 */
+	public Paragraph setTextOnly(boolean textOnly)
+	{
+		this.textOnly = textOnly;
+		return this;
+	}
+	
+	@Override
+	protected StringBuilder renderHTML(int tabCount)
+	{
+		if (isTextOnly())
+		{
+			return TextUtilities.getTabString(tabCount).append(new StringBuilder(getText(tabCount)));
+		}
+		else
+		{
+			return super.renderHTML(tabCount);
+		}
+	}
+	
+	/**
+	 * Don't use the bind attribute, append in curly braces
+	 *
+	 * @param variableName
+	 *
+	 * @return
+	 */
+	@Override
+	public J bind(String variableName)
+	{
+		AngularPageConfigurator.setRequired(this, true);
+		if (variableName.contains("{{"))
+		{
+			setText(getText(0) + variableName);
+		}
+		else
+		{
+			setText(getText(0) + "{{" + variableName + "}}");
+		}
+		return (J) this;
+	}
+	
 }

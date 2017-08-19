@@ -16,12 +16,9 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.image;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
+
+import java.lang.annotation.*;
 
 /**
  * Denotes a singular ImageCSS
@@ -31,13 +28,13 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
  */
 @CSSAnnotationType
 @Target(
-        {
-            ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
-        })
+		{
+				ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
+		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface ImageCSS
 {
 
-    public String value() default "";
+	public String value() default "";
 }

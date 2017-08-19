@@ -44,65 +44,63 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.animatable.AnimateCSS;
 @AnimateCSS
 public enum BackgroundSizes implements CSSEnumeration<BackgroundSizes>
 {
-    /**
-     * Default value. The background-image contains its width and height
-     */
-    Auto,
-    /**
-     * Scale the background image to be as large as possible so that the background area is completely covered by the background image. Some parts of the background image may not be in view within the
-     * background positioning area
-     */
-    Cover,
-    /**
-     * Scale the image to the largest size such that both its width and its height can fit inside the content area
-     */
-    Contain,
-    /**
-     * Sets this property to its default value
-     *
-     * see http://www.w3schools.com/cssref/css_initial.asp
-     */
-    Initial,
-    /**
-     * Inherits this property from its parent element.
-     *
-     * see http://www.w3schools.com/cssref/css_inherit.asp
-     */
-    Inherit,
-    /**
-     * Sets this field as not set
-     */
-    Unset;
+	/**
+	 * Default value. The background-image contains its width and height
+	 */
+	Auto,
+	/**
+	 * Scale the background image to be as large as possible so that the background area is completely covered by the background image. Some parts of the background image may not be in view within the
+	 * background positioning area
+	 */
+	Cover,
+	/**
+	 * Scale the image to the largest size such that both its width and its height can fit inside the content area
+	 */
+	Contain,
+	/**
+	 * Sets this property to its default value
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_initial.asp
+	 */
+	Initial,
+	/**
+	 * Inherits this property from its parent element.
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_inherit.asp
+	 */
+	Inherit,
+	/**
+	 * Sets this field as not set
+	 */
+	Unset;;
 
-    ;
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
+	}
 
-@Override
-    public String toString()
-    {
-        return name().toLowerCase();
-    }
+	@Override
+	public String getJavascriptSyntax()
+	{
+		return "style.backgroundSize";
+	}
 
-    @Override
-    public String getJavascriptSyntax()
-    {
-        return "style.backgroundSize";
-    }
+	@Override
+	public CSSVersions getCSSVersion()
+	{
+		return CSSVersions.CSS3;
+	}
 
-    @Override
-    public CSSVersions getCSSVersion()
-    {
-        return CSSVersions.CSS3;
-    }
+	@Override
+	public String getValue()
+	{
+		return name();
+	}
 
-    @Override
-    public String getValue()
-    {
-        return name();
-    }
-
-    @Override
-    public BackgroundSizes getDefault()
-    {
-        return Unset;
-    }
+	@Override
+	public BackgroundSizes getDefault()
+	{
+		return Unset;
+	}
 }

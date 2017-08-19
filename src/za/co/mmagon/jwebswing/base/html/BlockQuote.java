@@ -46,47 +46,49 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * &lt;/blockquote&gt;
  * <p>
- * @author GedMarc
+ *
  * @param <J>
+ *
+ * @author GedMarc
  */
 public class BlockQuote<J extends BlockQuote<J>>
-        extends Component<ParagraphChildren, BlockQuoteAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<ParagraphChildren, BlockQuoteAttributes, GlobalFeatures, GlobalEvents, J>
 
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new Block Quote Item
-     */
-    public BlockQuote()
-    {
-        super(ComponentTypes.BlockQuotes);
-    }
-
-    /**
-     * Constructs a new block quote with the given text
-     *
-     * @param text
-     */
-    public BlockQuote(String text)
-    {
-        this();
-        setText(text);
-    }
-
-    /**
-     * Constructs a new block quote with the given text and footer
-     *
-     * @param text
-     * @param footer
-     */
-    public BlockQuote(String text, String footer)
-    {
-        this();
-        add(text);
-        Div d = new Div();
-        d.setTag("footer");
-        d.setText(footer);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new Block Quote Item
+	 */
+	public BlockQuote()
+	{
+		super(ComponentTypes.BlockQuotes);
+	}
+	
+	/**
+	 * Constructs a new block quote with the given text
+	 *
+	 * @param text
+	 */
+	public BlockQuote(String text)
+	{
+		this();
+		setText(text);
+	}
+	
+	/**
+	 * Constructs a new block quote with the given text and footer
+	 *
+	 * @param text
+	 * @param footer
+	 */
+	public BlockQuote(String text, String footer)
+	{
+		this();
+		add(text);
+		Div d = new Div();
+		d.setTag("footer");
+		d.setText(footer);
+	}
 }

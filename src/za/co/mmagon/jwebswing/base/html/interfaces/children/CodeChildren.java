@@ -17,10 +17,9 @@
 package za.co.mmagon.jwebswing.base.html.interfaces.children;
 
 /**
- *
  * @author GedMarc
  */
 public interface CodeChildren
 {
-    
+
 }

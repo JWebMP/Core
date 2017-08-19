@@ -16,16 +16,13 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.outline;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+
+import java.lang.annotation.*;
 
 /**
  * An outline is a line drawn around an element - outside the border. This can be use to make an element "stand out".
@@ -36,47 +33,47 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
  * @since 18 Jan 2016
  */
 @Target(
-        {
-            ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
-        })
+		{
+				ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
+		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
 public @interface OutlineCSS
 {
-
-    /**
-     * Sets the color of an outline
-     *
-     * @return
-     */
-    public ColourCSS OutlineColor() default @ColourCSS;
-
-    /**
-     * Sets the color of an outline
-     *
-     * @return
-     */
-    public ColourNames OutlineColor$() default ColourNames.Unset;
-
-    /**
-     * Sets the style of an outline
-     *
-     * @return
-     */
-    public BorderStyles OutlineStyle() default BorderStyles.Unset;
-
-    /**
-     * Sets the width of an outline
-     *
-     * @return
-     */
-    public MeasurementCSS OutlineWidth() default @MeasurementCSS;
-
-    /**
-     * Specifies the space between an outline and the edge or border of an element
-     *
-     * @return
-     */
-    public MeasurementCSS OutlineOffset() default @MeasurementCSS;
+	
+	/**
+	 * Sets the color of an outline
+	 *
+	 * @return
+	 */
+	public ColourCSS OutlineColor() default @ColourCSS;
+	
+	/**
+	 * Sets the color of an outline
+	 *
+	 * @return
+	 */
+	public ColourNames OutlineColor$() default ColourNames.Unset;
+	
+	/**
+	 * Sets the style of an outline
+	 *
+	 * @return
+	 */
+	public BorderStyles OutlineStyle() default BorderStyles.Unset;
+	
+	/**
+	 * Sets the width of an outline
+	 *
+	 * @return
+	 */
+	public MeasurementCSS OutlineWidth() default @MeasurementCSS;
+	
+	/**
+	 * Specifies the space between an outline and the edge or border of an element
+	 *
+	 * @return
+	 */
+	public MeasurementCSS OutlineOffset() default @MeasurementCSS;
 }

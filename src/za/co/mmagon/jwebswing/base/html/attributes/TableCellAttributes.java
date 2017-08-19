@@ -22,17 +22,17 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  * Valid additional attributes for table cells
  *
  * @author MMagon
- * @since 23 Sep 2013
  * @version 1.0
+ * @since 23 Sep 2013
  */
 public enum TableCellAttributes implements AttributeDefinitions
 {
-    ColSpan,
-    RowSpan;
+	ColSpan,
+	RowSpan;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

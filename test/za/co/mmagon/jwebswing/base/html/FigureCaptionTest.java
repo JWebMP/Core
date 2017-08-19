@@ -20,24 +20,23 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class FigureCaptionTest
 {
-
-    public FigureCaptionTest()
-    {
-    }
-
-    @Test
-    public void testFigureCaption()
-    {
-        FigureCaption fc = new FigureCaption();
-        fc.setID("id");
-        fc.setText("This is FC");
-        System.out.println(fc.toString(true));
-        Assert.assertEquals("<figcaption id=\"id\">This is FC</figcaption>", fc.toString(true));
-    }
-
+	
+	public FigureCaptionTest()
+	{
+	}
+	
+	@Test
+	public void testFigureCaption()
+	{
+		FigureCaption fc = new FigureCaption();
+		fc.setID("id");
+		fc.setText("This is FC");
+		System.out.println(fc.toString(true));
+		Assert.assertEquals("<figcaption id=\"id\">This is FC</figcaption>", fc.toString(true));
+	}
+	
 }

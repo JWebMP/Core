@@ -25,27 +25,27 @@ package za.co.mmagon.jwebswing.base.ajax.exceptions;
 public class NoServletFoundException extends Exception
 {
 
-    public NoServletFoundException()
-    {
-    }
+	public NoServletFoundException()
+	{
+	}
 
-    public NoServletFoundException(String message)
-    {
-        super(message);
-    }
+	public NoServletFoundException(String message)
+	{
+		super(message);
+	}
 
-    public NoServletFoundException(String message, Throwable cause)
-    {
-        super(message, cause);
-    }
+	public NoServletFoundException(String message, Throwable cause)
+	{
+		super(message, cause);
+	}
 
-    public NoServletFoundException(Throwable cause)
-    {
-        super(cause);
-    }
+	public NoServletFoundException(Throwable cause)
+	{
+		super(cause);
+	}
 
-    public NoServletFoundException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
-    {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
+	public NoServletFoundException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
+	{
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
 }

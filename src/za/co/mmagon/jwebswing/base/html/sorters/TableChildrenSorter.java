@@ -16,35 +16,37 @@
  */
 package za.co.mmagon.jwebswing.base.html.sorters;
 
-import java.util.Comparator;
 import za.co.mmagon.jwebswing.base.html.TableCaption;
 import za.co.mmagon.jwebswing.base.html.TableColumnGroup;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.TableChildren;
+
+import java.util.Comparator;
 
 /**
  * Sorts the table children properly
  * <p>
  * First caption, then Table Column Groups then headers body then footer
  * <p>
+ *
  * @author GedMarc
  */
 public class TableChildrenSorter implements Comparator<TableChildren>
 {
 
-    @Override
-    public synchronized final int compare(TableChildren o1, TableChildren o2)
-    {
-        if (o1 instanceof TableCaption)
-        {
-            return -1;
-        }
-        else if (o1 instanceof TableColumnGroup)
-        {
-            return 0;
-        }
-        else
-        {
-            return 1;
-        }
-    }
+	@Override
+	public synchronized final int compare(TableChildren o1, TableChildren o2)
+	{
+		if (o1 instanceof TableCaption)
+		{
+			return -1;
+		}
+		else if (o1 instanceof TableColumnGroup)
+		{
+			return 0;
+		}
+		else
+		{
+			return 1;
+		}
+	}
 }

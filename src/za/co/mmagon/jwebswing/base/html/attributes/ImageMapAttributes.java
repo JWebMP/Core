@@ -21,19 +21,17 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 /**
  * Lists all the attributes available for the image map
  *
- * @since Forever
- * @version 1.0
  * @author MMagon
- *
- *
+ * @version 1.0
+ * @since Forever
  */
 public enum ImageMapAttributes implements AttributeDefinitions
 {
-    Element;
+	Element;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

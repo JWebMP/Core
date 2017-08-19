@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import java.util.logging.Level;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.attributes.LinkAttributes;
@@ -27,6 +26,8 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.logger.LogFactory;
+
+import java.util.logging.Level;
 
 /**
  * Browser Support<p>
@@ -56,179 +57,189 @@ import za.co.mmagon.logger.LogFactory;
  * <p>
  * HTML5 has some new attributes, and some HTML 4.01 attributes are no longer supported.<p>
  *
- * @author Marc Magon
  * @param <J>
+ *
+ * @author Marc Magon
  */
 public class Link<J extends Link<J>>
-        extends Component<ComponentHierarchyBase, LinkAttributes, GlobalFeatures, GlobalEvents, J>
-        implements BodyChildren, NoNewLineForRawText, ListItemChildren
+		extends Component<ComponentHierarchyBase, LinkAttributes, GlobalFeatures, GlobalEvents, J>
+		implements BodyChildren, NoNewLineForRawText, ListItemChildren
 {
 
-    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("ALink");
-    private static final long serialVersionUID = 1L;
-    /**
-     * The address directing to
-     */
-    private String directToAddress;
-    /**
-     * The target frame
-     */
-    private String targetFrameName;
+	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("ALink");
+	private static final long serialVersionUID = 1L;
+	/**
+	 * The address directing to
+	 */
+	private String directToAddress;
+	/**
+	 * The target frame
+	 */
+	private String targetFrameName;
 
-    /**
-     * Constructs a new A tag
-     */
-    public Link()
-    {
-        super("a", ComponentTypes.Link);
-    }
+	/**
+	 * Constructs a new A tag
+	 */
+	public Link()
+	{
+		super("a", ComponentTypes.Link);
+	}
 
-    /**
-     * Creates a link directly to the address in the current window
-     * <p>
-     * @param directToAddress The address to redirect to
-     */
-    public Link(String directToAddress)
-    {
-        this(directToAddress, null);
-        if (directToAddress == null || directToAddress.isEmpty())
-        {
-            log.log(Level.FINE, "Invalid Link Address.");
-        }
-    }
+	/**
+	 * Creates a link directly to the address in the current window
+	 * <p>
+	 *
+	 * @param directToAddress The address to redirect to
+	 */
+	public Link(String directToAddress)
+	{
+		this(directToAddress, null);
+		if (directToAddress == null || directToAddress.isEmpty())
+		{
+			log.log(Level.FINE, "Invalid Link Address.");
+		}
+	}
 
-    /**
-     * Creates a link directly to the address in the specified target frame
-     * <p>
-     * @param directToAddress The address to redirect to
-     * @param targetFrameName The frame to redirect
-     */
-    public Link(String directToAddress, String targetFrameName)
-    {
-        this(directToAddress, targetFrameName, (String) null);
-    }
+	/**
+	 * Creates a link directly to the address in the specified target frame
+	 * <p>
+	 *
+	 * @param directToAddress The address to redirect to
+	 * @param targetFrameName The frame to redirect
+	 */
+	public Link(String directToAddress, String targetFrameName)
+	{
+		this(directToAddress, targetFrameName, (String) null);
+	}
 
-    /**
-     * Creates a link directly to the address in the specified target frame
-     * <p>
-     * @param directToAddress The address to redirect to
-     * @param targetFrameName The frame to redirect
-     * @param text            Includes raw text in the link
-     */
-    public Link(String directToAddress, String targetFrameName, String text)
-    {
-        super("a", ComponentTypes.Link);
-        this.directToAddress = directToAddress;
-        this.targetFrameName = targetFrameName;
-        if (directToAddress != null)
-        {
-            addAttribute(LinkAttributes.HRef, directToAddress);
-        }
-        if (targetFrameName != null)
-        {
-            addAttribute(LinkAttributes.Target, targetFrameName);
-        }
-        setText(text);
-    }
+	/**
+	 * Creates a link directly to the address in the specified target frame
+	 * <p>
+	 *
+	 * @param directToAddress The address to redirect to
+	 * @param targetFrameName The frame to redirect
+	 * @param text            Includes raw text in the link
+	 */
+	public Link(String directToAddress, String targetFrameName, String text)
+	{
+		super("a", ComponentTypes.Link);
+		this.directToAddress = directToAddress;
+		this.targetFrameName = targetFrameName;
+		if (directToAddress != null)
+		{
+			addAttribute(LinkAttributes.HRef, directToAddress);
+		}
+		if (targetFrameName != null)
+		{
+			addAttribute(LinkAttributes.Target, targetFrameName);
+		}
+		setText(text);
+	}
 
-    /**
-     * Creates a link directly to the address in the specified target frame
-     * <p>
-     * @param directToAddress The address to redirect to
-     * @param targetFrameName The frame to redirect
-     * @param component       Includes raw text in the link
-     */
-    public Link(String directToAddress, String targetFrameName, ComponentHierarchyBase component)
-    {
-        super("a", ComponentTypes.Link);
-        this.directToAddress = directToAddress;
-        this.targetFrameName = targetFrameName;
-        if (directToAddress != null)
-        {
-            addAttribute(LinkAttributes.HRef, directToAddress);
-        }
-        if (targetFrameName != null)
-        {
-            addAttribute(LinkAttributes.Target, targetFrameName);
-        }
-        add(component);
-    }
+	/**
+	 * Creates a link directly to the address in the specified target frame
+	 * <p>
+	 *
+	 * @param directToAddress The address to redirect to
+	 * @param targetFrameName The frame to redirect
+	 * @param component       Includes raw text in the link
+	 */
+	public Link(String directToAddress, String targetFrameName, ComponentHierarchyBase component)
+	{
+		super("a", ComponentTypes.Link);
+		this.directToAddress = directToAddress;
+		this.targetFrameName = targetFrameName;
+		if (directToAddress != null)
+		{
+			addAttribute(LinkAttributes.HRef, directToAddress);
+		}
+		if (targetFrameName != null)
+		{
+			addAttribute(LinkAttributes.Target, targetFrameName);
+		}
+		add(component);
+	}
 
-    /**
-     * Returns the direct to address
-     * <p>
-     * @return The address redirecting to
-     */
-    public String getDirectToAddress()
-    {
-        return directToAddress;
-    }
+	/**
+	 * Returns the direct to address
+	 * <p>
+	 *
+	 * @return The address redirecting to
+	 */
+	public String getDirectToAddress()
+	{
+		return directToAddress;
+	}
 
-    /**
-     * Sets the address to direct to
-     * <p>
-     * @param directToAddress
-     */
-    public void setDirectToAddress(String directToAddress)
-    {
-        this.directToAddress = directToAddress;
-        addAttribute(LinkAttributes.HRef, directToAddress);
-    }
+	/**
+	 * Sets the address to direct to
+	 * <p>
+	 *
+	 * @param directToAddress
+	 */
+	public void setDirectToAddress(String directToAddress)
+	{
+		this.directToAddress = directToAddress;
+		addAttribute(LinkAttributes.HRef, directToAddress);
+	}
 
-    /**
-     * Returns the current target frame name
-     * <p>
-     * @return The current target frame. Can be Null
-     */
-    public String getTargetFrameName()
-    {
-        return targetFrameName;
-    }
+	/**
+	 * Returns the current target frame name
+	 * <p>
+	 *
+	 * @return The current target frame. Can be Null
+	 */
+	public String getTargetFrameName()
+	{
+		return targetFrameName;
+	}
 
-    /**
-     * Sets the target frame
-     * <p>
-     * @param targetFrameName The target frame
-     */
-    public void setTargetFrameName(String targetFrameName)
-    {
-        this.targetFrameName = targetFrameName;
-        addAttribute(LinkAttributes.Target, targetFrameName);
-    }
+	/**
+	 * Sets the target frame
+	 * <p>
+	 *
+	 * @param targetFrameName The target frame
+	 */
+	public void setTargetFrameName(String targetFrameName)
+	{
+		this.targetFrameName = targetFrameName;
+		addAttribute(LinkAttributes.Target, targetFrameName);
+	}
 
-    @Override
-    public int hashCode()
-    {
-        int hash = 7;
-        hash = 53 * hash + (this.directToAddress != null ? this.directToAddress.hashCode() : 0);
-        hash = 53 * hash + (this.targetFrameName != null ? this.targetFrameName.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode()
+	{
+		int hash = 7;
+		hash = 53 * hash + (this.directToAddress != null ? this.directToAddress.hashCode() : 0);
+		hash = 53 * hash + (this.targetFrameName != null ? this.targetFrameName.hashCode() : 0);
+		return hash;
+	}
 
-    /**
-     * A valid equals
-     * <p>
-     * @param obj Anything
-     *
-     * @return True only if the attributes specified are identical
-     */
-    @Override
-    public boolean equals(Object obj)
-    {
-        if (obj == null)
-        {
-            return false;
-        }
-        if (getClass() != obj.getClass())
-        {
-            return false;
-        }
-        final Link other = (Link) obj;
-        if ((this.directToAddress == null) ? (other.directToAddress != null) : !this.directToAddress.equals(other.directToAddress))
-        {
-            return false;
-        }
+	/**
+	 * A valid equals
+	 * <p>
+	 *
+	 * @param obj Anything
+	 *
+	 * @return True only if the attributes specified are identical
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (obj == null)
+		{
+			return false;
+		}
+		if (getClass() != obj.getClass())
+		{
+			return false;
+		}
+		final Link other = (Link) obj;
+		if ((this.directToAddress == null) ? (other.directToAddress != null) : !this.directToAddress.equals(other.directToAddress))
+		{
+			return false;
+		}
 
-        return !((this.targetFrameName == null) ? (other.targetFrameName != null) : !this.targetFrameName.equals(other.targetFrameName));
-    }
+		return !((this.targetFrameName == null) ? (other.targetFrameName != null) : !this.targetFrameName.equals(other.targetFrameName));
+	}
 }

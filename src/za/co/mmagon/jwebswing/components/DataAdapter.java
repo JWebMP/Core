@@ -20,94 +20,96 @@ import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.fasterxml.jackson.annotation.JsonValue;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 
 /**
  * This Class is a data adapter
  *
- * @author GedMarc
  * @param <C> The specified global children
  * @param <A> The given component data adapaters
  * @param <F> The given features
  * @param <E> The given events
  * @param <J> This component
  *
+ * @author GedMarc
  * @since 01 Jan 2016
  */
 public class DataAdapter<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends DataAdapter<C, A, F, E, J>>
-        extends Div<C, A, F, E, J>
+		extends Div<C, A, F, E, J>
 {
 
-    private static final long serialVersionUID = 1L;
-    private Component linkedComponent;
-    private String dataAdapterID;
+	private static final long serialVersionUID = 1L;
+	private Component linkedComponent;
+	private String dataAdapterID;
 
-    /**
-     * The component this data adapter should render on
-     *
-     * @param linkedComponent
-     */
-    public DataAdapter(Component linkedComponent)
-    {
-        //this.linkedComponent = linkedComponent;
-        setLinkedComponent(linkedComponent);
-    }
+	/**
+	 * The component this data adapter should render on
+	 *
+	 * @param linkedComponent
+	 */
+	public DataAdapter(Component linkedComponent)
+	{
+		//this.linkedComponent = linkedComponent;
+		setLinkedComponent(linkedComponent);
+	}
 
-    public String getDataAdapterID()
-    {
-        return dataAdapterID;
-    }
+	public String getDataAdapterID()
+	{
+		return dataAdapterID;
+	}
 
-    public final void setDataAdapterID(String dataAdapterID)
-    {
-        this.dataAdapterID = dataAdapterID;
-    }
+	public final void setDataAdapterID(String dataAdapterID)
+	{
+		this.dataAdapterID = dataAdapterID;
+	}
 
-    @JsonRawValue
-    @JsonValue
-    public String getDAID()
-    {
-        return dataAdapterID;
-    }
+	@JsonRawValue
+	@JsonValue
+	public String getDAID()
+	{
+		return dataAdapterID;
+	}
 
-    /**
-     * Gets the component this adapter is added to
-     *
-     * @return
-     */
-    public Component getLinkedComponent()
-    {
-        return linkedComponent;
-    }
+	/**
+	 * Gets the component this adapter is added to
+	 *
+	 * @return
+	 */
+	public Component getLinkedComponent()
+	{
+		return linkedComponent;
+	}
 
-    /**
-     * Sets the component this data adapter is linked to
-     *
-     * @param linkedComponent
-     */
-    public final void setLinkedComponent(Component linkedComponent)
-    {
-        if (this.linkedComponent != null)
-        {
-            this.linkedComponent.removeVariable(getDAID());
-        }
-        this.linkedComponent = linkedComponent;
-        if (linkedComponent != null)
-        {
-            setDataAdapterID("da" + linkedComponent.getID());
-            linkedComponent.addVariable(getDAID());
-        }
-    }
+	/**
+	 * Sets the component this data adapter is linked to
+	 *
+	 * @param linkedComponent
+	 */
+	public final void setLinkedComponent(Component linkedComponent)
+	{
+		if (this.linkedComponent != null)
+		{
+			this.linkedComponent.removeVariable(getDAID());
+		}
+		this.linkedComponent = linkedComponent;
+		if (linkedComponent != null)
+		{
+			setDataAdapterID("da" + linkedComponent.getID());
+			linkedComponent.addVariable(getDAID());
+		}
+	}
 
-    /**
-     * Returns only this data adapters ID for the JSON rendering
-     *
-     * @return
-     */
-    @Override
-    public String toString()
-    {
-        return getDAID();
-    }
+	/**
+	 * Returns only this data adapters ID for the JSON rendering
+	 *
+	 * @return
+	 */
+	@Override
+	public String toString()
+	{
+		return getDAID();
+	}
 }

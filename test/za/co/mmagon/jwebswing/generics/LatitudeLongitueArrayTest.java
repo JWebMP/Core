@@ -19,30 +19,29 @@ package za.co.mmagon.jwebswing.generics;
 import org.junit.Test;
 
 /**
- *
  * @author Marc Magon
  */
 public class LatitudeLongitueArrayTest
 {
 
-    public LatitudeLongitueArrayTest()
-    {
-    }
+	public LatitudeLongitueArrayTest()
+	{
+	}
 
-    @Test
-    public void testEmpty()
-    {
-        LatitudeLongitueArray lat = new LatitudeLongitueArray();
+	@Test
+	public void testEmpty()
+	{
+		LatitudeLongitueArray lat = new LatitudeLongitueArray();
 
-        System.out.println(lat);
-    }
+		System.out.println(lat);
+	}
 
-    @Test
-    public void testCoords()
-    {
-        LatitudeLongitueArray lat = new LatitudeLongitueArray();
-        lat.setX(5.0);
-        lat.setY(6.0);
-        System.out.println(lat);
-    }
+	@Test
+	public void testCoords()
+	{
+		LatitudeLongitueArray lat = new LatitudeLongitueArray();
+		lat.setX(5.0);
+		lat.setY(6.0);
+		System.out.println(lat);
+	}
 }

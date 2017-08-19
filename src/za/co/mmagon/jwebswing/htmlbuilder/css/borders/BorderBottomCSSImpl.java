@@ -16,129 +16,132 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 
-import za.co.mmagon.jwebswing.base.client.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
+import za.co.mmagon.jwebswing.base.client.CSSVersions;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSDetail;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationAdapter;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationClass;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
 
 /**
  * CSS Border Properties
  * <p>
  * The CSS border properties allow you to specify the style, width, and color of an element's border.
  * <p>
+ *
  * @author GedMarc
  * @since 18 Jan 2016
  */
 public class BorderBottomCSSImpl extends CSSImplementationAdapter<BorderBottomCSS, BorderBottomCSSImpl> implements CSSImplementationClass<BorderBottomCSS, BorderBottomCSSImpl>
 {
 
-    private static final long serialVersionUID = 1L;
-    @CSSDetail(cssName = "border-bottom-color", cssVersion = CSSVersions.CSS21)
-    private ColourCSSImpl borderBottomColor;
-    @CSSDetail(cssName = "border-bottom-color", cssVersion = CSSVersions.CSS21)
-    private ColourNames borderBottomColor$;
-    @CSSDetail(cssName = "border-bottom-style", cssVersion = CSSVersions.CSS21)
-    private BorderStyles borderBottomStyle;
-    @CSSDetail(cssName = "border-bottom-width", cssVersion = CSSVersions.CSS21)
-    private MeasurementCSSImpl borderBottomWidth;
+	private static final long serialVersionUID = 1L;
+	@CSSDetail(cssName = "border-bottom-color", cssVersion = CSSVersions.CSS21)
+	private ColourCSSImpl borderBottomColor;
+	@CSSDetail(cssName = "border-bottom-color", cssVersion = CSSVersions.CSS21)
+	private ColourNames borderBottomColor$;
+	@CSSDetail(cssName = "border-bottom-style", cssVersion = CSSVersions.CSS21)
+	private BorderStyles borderBottomStyle;
+	@CSSDetail(cssName = "border-bottom-width", cssVersion = CSSVersions.CSS21)
+	private MeasurementCSSImpl borderBottomWidth;
 
-    public BorderBottomCSSImpl()
-    {
-    }
+	public BorderBottomCSSImpl()
+	{
+	}
 
-    @Override
-    public String toString()
-    {
-        String out = "";
-        out += borderBottomWidth + " ";
-        out += borderBottomStyle + " ";
-        out += borderBottomColor + " ";
-        out += borderBottomColor$ + " ";
-        out = out.replaceAll("null", "");
-        out = out.trim();
-        return out;
-    }
+	@Override
+	public String toString()
+	{
+		String out = "";
+		out += borderBottomWidth + " ";
+		out += borderBottomStyle + " ";
+		out += borderBottomColor + " ";
+		out += borderBottomColor$ + " ";
+		out = out.replaceAll("null", "");
+		out = out.trim();
+		return out;
+	}
 
-    /**
-     * Sets the color of the bottom border
-     *
-     * @return
-     */
-    public ColourCSSImpl getBorderBottomColor()
-    {
-        return borderBottomColor;
-    }
+	/**
+	 * Sets the color of the bottom border
+	 *
+	 * @return
+	 */
+	public ColourCSSImpl getBorderBottomColor()
+	{
+		return borderBottomColor;
+	}
 
-    /**
-     * sets the colour of the bottom border
-     *
-     * @return
-     */
-    public ColourNames getBorderBottomColor$()
-    {
-        return borderBottomColor$;
-    }
+	/**
+	 * Sets the border bottom color
+	 *
+	 * @param borderBottomColor
+	 */
+	public void setBorderBottomColor(ColourCSSImpl borderBottomColor)
+	{
+		this.borderBottomColor = borderBottomColor;
+	}
 
-    /**
-     * Sets the style of the bottom border
-     *
-     * @return
-     */
-    public BorderStyles getBorderBottomStyle()
-    {
-        return borderBottomStyle;
-    }
+	/**
+	 * sets the colour of the bottom border
+	 *
+	 * @return
+	 */
+	public ColourNames getBorderBottomColor$()
+	{
+		return borderBottomColor$;
+	}
 
-    /**
-     * Sets the width of the bottom border
-     *
-     * @return
-     */
-    public MeasurementCSSImpl getBorderBottomWidth()
-    {
-        return borderBottomWidth;
-    }
+	/**
+	 * Sets the border bottom color
+	 *
+	 * @param borderBottomColor$
+	 */
+	public void setBorderBottomColor$(ColourNames borderBottomColor$)
+	{
+		this.borderBottomColor$ = borderBottomColor$;
+	}
 
-    /**
-     * Sets the border bottom color
-     *
-     * @param borderBottomColor
-     */
-    public void setBorderBottomColor(ColourCSSImpl borderBottomColor)
-    {
-        this.borderBottomColor = borderBottomColor;
-    }
+	/**
+	 * Sets the style of the bottom border
+	 *
+	 * @return
+	 */
+	public BorderStyles getBorderBottomStyle()
+	{
+		return borderBottomStyle;
+	}
 
-    /**
-     * Sets the border bottom color
-     *
-     * @param borderBottomColor$
-     */
-    public void setBorderBottomColor$(ColourNames borderBottomColor$)
-    {
-        this.borderBottomColor$ = borderBottomColor$;
-    }
+	/**
+	 * Sets the style of the bottom border
+	 *
+	 * @param borderBottomStyle
+	 */
+	public void setBorderBottomStyle(BorderStyles borderBottomStyle)
+	{
+		this.borderBottomStyle = borderBottomStyle;
+	}
 
-    /**
-     * Sets the style of the bottom border
-     *
-     * @param borderBottomStyle
-     */
-    public void setBorderBottomStyle(BorderStyles borderBottomStyle)
-    {
-        this.borderBottomStyle = borderBottomStyle;
-    }
+	/**
+	 * Sets the width of the bottom border
+	 *
+	 * @return
+	 */
+	public MeasurementCSSImpl getBorderBottomWidth()
+	{
+		return borderBottomWidth;
+	}
 
-    /**
-     * Sets the width of the bottom border
-     *
-     * @param borderBottomWidth
-     */
-    public void setBorderBottomWidth(MeasurementCSSImpl borderBottomWidth)
-    {
-        this.borderBottomWidth = borderBottomWidth;
-    }
+	/**
+	 * Sets the width of the bottom border
+	 *
+	 * @param borderBottomWidth
+	 */
+	public void setBorderBottomWidth(MeasurementCSSImpl borderBottomWidth)
+	{
+		this.borderBottomWidth = borderBottomWidth;
+	}
 
 }

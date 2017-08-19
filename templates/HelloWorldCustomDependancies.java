@@ -10,34 +10,34 @@ import za.co.mmagon.jwebswing.base.servlets.JWebSwingServlet;
 public class HelloWorldCustomDependancies extends JWebSwingServlet
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * The page to be displayed.
-     *
-     * @return
-     */
-    @Override
-    public Page getPage()
-    {
-        Page p = new Page();
-        p.getBody().add("Hello World");
+	/**
+	 * The page to be displayed.
+	 *
+	 * @return
+	 */
+	@Override
+	public Page getPage()
+	{
+		Page p = new Page();
+		p.getBody().add("Hello World");
 
-        //Add or Remove external dependancies to any built component at any point of the app
-        p.getBody().getCssReferences().add(new CSSReference("CSSRef1", 1.0, "style.css"));
-        p.getBody().getJavascriptReferences().add(new JavascriptReference("JSRef1", 1.0, "app.js"));
+		//Add or Remove external dependancies to any built component at any point of the app
+		p.getBody().getCssReferences().add(new CSSReference("CSSRef1", 1.0, "style.css"));
+		p.getBody().getJavascriptReferences().add(new JavascriptReference("JSRef1", 1.0, "app.js"));
 
-        return p;
-    }
+		return p;
+	}
 
-    /**
-     * Relative path to context
-     *
-     * @return
-     */
-    @Override
-    public String getUrl()
-    {
-        return "/";
-    }
+	/**
+	 * Relative path to context
+	 *
+	 * @return
+	 */
+	@Override
+	public String getUrl()
+	{
+		return "/";
+	}
 }

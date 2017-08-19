@@ -17,8 +17,14 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
+import za.co.mmagon.jwebswing.base.html.interfaces.ContainerType;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.AreaChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.MapChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -42,36 +48,38 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * NONE.<p>
  * <p>
- * @author Marc Magon
- * @since forever
+ *
  * @param <C> The children allowed
  * @param <A> The attributes allowed
  * @param <J> The component itself for cloning
+ *
+ * @author Marc Magon
+ * @since forever
  */
 public class Span<C extends GlobalChildren, A extends Enum & AttributeDefinitions, J extends Span<C, A, J>>
-        extends Component<C, A, GlobalFeatures, GlobalEvents, J>
-        implements BodyChildren, MapChildren, AreaChildren, ContainerType, ParagraphChildren,
-        ListItemChildren
+		extends Component<C, A, GlobalFeatures, GlobalEvents, J>
+		implements BodyChildren, MapChildren, AreaChildren, ContainerType, ParagraphChildren,
+		ListItemChildren
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a new instance of a Span item
-     */
-    public Span()
-    {
-        super(ComponentTypes.Span);
-    }
+	/**
+	 * Constructs a new instance of a Span item
+	 */
+	public Span()
+	{
+		super(ComponentTypes.Span);
+	}
 
-    /**
-     * Constructs a new span with the given text
-     *
-     * @param text
-     */
-    public Span(String text)
-    {
-        super(ComponentTypes.Span);
-        setText(text);
-    }
+	/**
+	 * Constructs a new span with the given text
+	 *
+	 * @param text
+	 */
+	public Span(String text)
+	{
+		super(ComponentTypes.Span);
+		setText(text);
+	}
 }

@@ -20,28 +20,27 @@ import org.junit.Test;
 import za.co.mmagon.jwebswing.base.html.attributes.TableColumnAttributes;
 
 /**
- *
  * @author GedMarc
  */
 public class TableColumnGroupTest
 {
-
-    public TableColumnGroupTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        TableColumnGroup tc = new TableColumnGroup();
-        tc.add(new TableColumn()
-        {
-            {
-                addAttribute(TableColumnAttributes.Span, 2);
-            }
-        }
-        );
-        System.out.println(tc.toString(true));
-    }
-
+	
+	public TableColumnGroupTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		TableColumnGroup tc = new TableColumnGroup();
+		tc.add(new TableColumn()
+		       {
+			       {
+				       addAttribute(TableColumnAttributes.Span, 2);
+			       }
+		       }
+		      );
+		System.out.println(tc.toString(true));
+	}
+	
 }

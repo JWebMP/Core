@@ -16,34 +16,34 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class MapTest
 {
 
-    public MapTest()
-    {
-    }
+	public MapTest()
+	{
+	}
 
-    /**
-     * Test of preConfigure method, of class Map.
-     */
-    @Test
-    public void testPreConfigure()
-    {
-        System.out.println("preConfigure");
-        Map instance = new Map();
-        instance.setID("id");
-        instance.addAttribute(GlobalAttributes.Name, "id");
-        System.out.println(instance.toString(true));
+	/**
+	 * Test of preConfigure method, of class Map.
+	 */
+	@Test
+	public void testPreConfigure()
+	{
+		System.out.println("preConfigure");
+		Map instance = new Map();
+		instance.setID("id");
+		instance.addAttribute(GlobalAttributes.Name, "id");
+		System.out.println(instance.toString(true));
 
-        assertEquals("<map id=\"id\" name=\"id\"></map>", instance.toString(true).toString());
-    }
+		assertEquals("<map id=\"id\" name=\"id\"></map>", instance.toString(true).toString());
+	}
 
 }

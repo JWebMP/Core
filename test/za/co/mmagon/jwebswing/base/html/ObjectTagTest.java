@@ -29,24 +29,24 @@ import org.junit.Test;
  * You can create an &lt;object&gt; element by using the document.createElement() method:
  *
  * @author GedMarc
- * @since 2014/12/29
  * @version 1.0
+ * @since 2014/12/29
  */
 public class ObjectTagTest
 {
-
-    public ObjectTagTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        ObjectTag ot = new ObjectTag();
-        ot.setID("id");
-        System.out.println(ot.toString(true));
-        Assert.assertEquals(""
-                + "<object id=\"id\"></object>", ot.toString(true).toString());
-    }
-
+	
+	public ObjectTagTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		ObjectTag ot = new ObjectTag();
+		ot.setID("id");
+		System.out.println(ot.toString(true));
+		Assert.assertEquals(""
+				                    + "<object id=\"id\"></object>", ot.toString(true).toString());
+	}
+	
 }

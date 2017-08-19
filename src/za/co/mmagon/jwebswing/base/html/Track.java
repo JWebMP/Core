@@ -24,26 +24,24 @@ import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
 /**
- *
- * @author GedMarc
  * @param <J>
  *
- * @since Mar 1, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
- *
+ * @since Mar 1, 2015
  */
 public class Track<J extends Track<J>>
-        extends Component<NoChildren, TrackAttributes, NoFeatures, NoEvents, J>
+		extends Component<NoChildren, TrackAttributes, NoFeatures, NoEvents, J>
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a new track
-     */
-    public Track()
-    {
-        super(ComponentTypes.Track);
-    }
+	/**
+	 * Constructs a new track
+	 */
+	public Track()
+	{
+		super(ComponentTypes.Track);
+	}
 }

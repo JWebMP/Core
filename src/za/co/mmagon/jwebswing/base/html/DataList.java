@@ -40,25 +40,27 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;datalist&gt; tag is new in HTML5.
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
+ * @author GedMarc
  * @since 2014/12/21
  */
 public class DataList<J extends DataList<J>>
-        extends Component<DataListChildren, NoAttributes, NoFeatures, NoEvents, J>
+		extends Component<DataListChildren, NoAttributes, NoFeatures, NoEvents, J>
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Creates a new DataList with the given.
-     * <p>
-     * @param id The ID of the data list to be linked with the Input Tag
-     */
-    public DataList(String id)
-    {
-        super(ComponentTypes.DataList);
-        setID(id);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Creates a new DataList with the given.
+	 * <p>
+	 *
+	 * @param id The ID of the data list to be linked with the Input Tag
+	 */
+	public DataList(String id)
+	{
+		super(ComponentTypes.DataList);
+		setID(id);
+	}
 }

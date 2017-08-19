@@ -17,55 +17,58 @@
 package za.co.mmagon.jwebswing.annotations;
 
 import com.armineasy.injection.GuiceContext;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.aopalliance.intercept.MethodInvocation;
 import za.co.mmagon.jwebswing.interception.DataCallIntercepter;
 import za.co.mmagon.logger.LogFactory;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
- *
  * @author Marc Magon
  * @since 05 Apr 2017
  */
 public class DataCallIntercepters implements org.aopalliance.intercept.MethodInterceptor
 {
 
-    private static final Logger LOG = LogFactory.getLog(DataCallIntercepters.class.getName());
+	private static final Logger LOG = LogFactory.getLog(DataCallIntercepters.class.getName());
 
-    /*
-     * Constructs a new SiteIntercepters
-     */
-    public DataCallIntercepters()
-    {
-        //Nothing needed
-    }
+	/*
+	 * Constructs a new SiteIntercepters
+	 */
+	public DataCallIntercepters()
+	{
+		//Nothing needed
+	}
 
-    @Override
-    public Object invoke(MethodInvocation invocation) throws Throwable
-    {
-        LOG.fine("Intercepting Data Calls");
-        Set<Class<? extends DataCallIntercepter>> res = GuiceContext.reflect().getSubTypesOf(DataCallIntercepter.class);
-        List<DataCallIntercepter> outs = new ArrayList<>();
-        for (Class<? extends DataCallIntercepter> re : res)
-        {
-            if (re.isInterface())
-            {
-                continue;
-            }
-            outs.add(GuiceContext.getInstance(re));
-        }
-        Collections.sort(outs, (DataCallIntercepter o1, DataCallIntercepter o2) -> o1.sortOrder().compareTo(o2.sortOrder()));
+	@Override
+	public Object invoke(MethodInvocation invocation) throws Throwable
+	{
+		LOG.fine("Intercepting Data Calls");
+		Set<Class<? extends DataCallIntercepter>> res = GuiceContext.reflect().getSubTypesOf(DataCallIntercepter.class);
+		List<DataCallIntercepter> outs = new ArrayList<>();
+		for (Class<? extends DataCallIntercepter> re : res)
+		{
+			if (re.isInterface())
+			{
+				continue;
+			}
+			outs.add(GuiceContext.getInstance(re));
+		}
+		Collections.sort(outs, (DataCallIntercepter o1, DataCallIntercepter o2) -> o1.sortOrder().compareTo(o2.sortOrder()));
 
-        for (DataCallIntercepter out : outs)
-        {
-            LOG.log(Level.FINE, "Interception Occuring : {0}", out.getClass().getCanonicalName());
-            GuiceContext.getInstance(out.getClass()).intercept();
-        }
-        LOG.fine("Interception of Data Calls complete");
+		for (DataCallIntercepter out : outs)
+		{
+			LOG.log(Level.FINE, "Interception Occuring : {0}", out.getClass().getCanonicalName());
+			GuiceContext.getInstance(out.getClass()).intercept();
+		}
+		LOG.fine("Interception of Data Calls complete");
 
-        return invocation.proceed();
-    }
+		return invocation.proceed();
+	}
 
 }

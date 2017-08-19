@@ -22,29 +22,28 @@ import java.io.Serializable;
  * Just default strings
  *
  * @author GedMarc
- * @since Oct 4, 2016
  * @version 1.0
- *
+ * @since Oct 4, 2016
  */
 public class StringConstants implements Serializable
 {
-
-    private static final long serialVersionUID = 1L;
-    /**
-     * The &times; string
-     */
-    public static final String times = "&times;";
-    /**
-     * The &nbsp; string
-     */
-    public static final String tab = "&nbsp;";
-    /**
-     * Default text for Latin
-     */
-    public static final String shortLatin = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...";
-    /**
-     * Default Medium text for Latin
-     */
-    public static final String mediumLatin = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero laboriosam dolor perspiciatis omnis exercitationem. Beatae, officia pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas suscipit facere rem dicta, debitis...";
-
+	
+	/**
+	 * The &times; string
+	 */
+	public static final String times = "&times;";
+	/**
+	 * The &nbsp; string
+	 */
+	public static final String tab = "&nbsp;";
+	/**
+	 * Default text for Latin
+	 */
+	public static final String shortLatin = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...";
+	/**
+	 * Default Medium text for Latin
+	 */
+	public static final String mediumLatin = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero laboriosam dolor perspiciatis omnis exercitationem. Beatae, officia pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas suscipit facere rem dicta, debitis...";
+	private static final long serialVersionUID = 1L;
+	
 }

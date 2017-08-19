@@ -20,23 +20,22 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class EmbedTest
 {
 
-    public EmbedTest()
-    {
-    }
+	public EmbedTest()
+	{
+	}
 
-    @Test
-    public void testEmbed()
-    {
-        Embed e = new Embed("Source", "Media Type");
-        e.setID("id");
-        System.out.println(e.toString(true));
-        Assert.assertEquals("<embed src=\"Source\" type=\"Media Type\" id=\"id\">", e.toString(true));
-    }
+	@Test
+	public void testEmbed()
+	{
+		Embed e = new Embed("Source", "Media Type");
+		e.setID("id");
+		System.out.println(e.toString(true));
+		Assert.assertEquals("<embed src=\"Source\" type=\"Media Type\" id=\"id\">", e.toString(true));
+	}
 
 }

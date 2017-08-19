@@ -19,11 +19,9 @@ package za.co.mmagon.jwebswing.utilities;
 /**
  * Assists with managing Polygons
  *
- * @since 2013/11/22
- * @version 1.0
  * @author mmagon
- *
- *
+ * @version 1.0
+ * @since 2013/11/22
  */
 public class PolygonUtils
 {

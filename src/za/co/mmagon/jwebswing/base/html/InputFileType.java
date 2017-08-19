@@ -20,21 +20,21 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputFileTypeAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 
 /**
+ * @param <J>
  *
  * @author GedMarc
- * @param <J>
  */
 public class InputFileType<J extends InputFileType<J>>
-        extends Input<InputFileTypeAttributes, J>
+		extends Input<InputFileTypeAttributes, J>
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new file type input
-     */
-    public InputFileType()
-    {
-        super(InputTypes.File);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new file type input
+	 */
+	public InputFileType()
+	{
+		super(InputTypes.File);
+	}
 }

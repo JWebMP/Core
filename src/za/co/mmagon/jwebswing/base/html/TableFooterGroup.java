@@ -49,24 +49,25 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * Differences Between HTML 4.01 and HTML5<p>
  * <p>
  * None of the HTML 4.01 attributes are supported in HTML5.<p>
- * @author Marc Magon
+ *
  * @param <J>
  *
- * @since 2012/10/01
+ * @author Marc Magon
  * @version 1.0
+ * @since 2012/10/01
  */
 public class TableFooterGroup<J extends TableFooterGroup<J>>
-        extends Component<TableFooterGroupChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements TableChildren
+		extends Component<TableFooterGroupChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements TableChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new Table Footer Group
-     */
-    public TableFooterGroup()
-    {
-        super(ComponentTypes.TableFooterGroup);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new Table Footer Group
+	 */
+	public TableFooterGroup()
+	{
+		super(ComponentTypes.TableFooterGroup);
+	}
 }

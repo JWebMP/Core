@@ -16,28 +16,28 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.base.client.HTMLVersions;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author MMagon
  */
 public class DocumentTypeTest
 {
-
-    public DocumentTypeTest()
-    {
-    }
-
-    @Test
-    public void testtoString()
-    {
-        DocumentType dt = new DocumentType(HTMLVersions.HTML401Frameset);
-        System.out.println(dt.toString(true));
-        String s = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\" \"http://www.w3.org/TR/html4/frameset.dtd\">";
-        assertEquals(dt.toString(true).toString(), "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\" \"http://www.w3.org/TR/html4/frameset.dtd\">");
-    }
-
+	
+	public DocumentTypeTest()
+	{
+	}
+	
+	@Test
+	public void testtoString()
+	{
+		DocumentType dt = new DocumentType(HTMLVersions.HTML401Frameset);
+		System.out.println(dt.toString(true));
+		String s = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\" \"http://www.w3.org/TR/html4/frameset.dtd\">";
+		assertEquals(dt.toString(true).toString(), "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\" \"http://www.w3.org/TR/html4/frameset.dtd\">");
+	}
+	
 }

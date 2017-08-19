@@ -21,11 +21,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 /**
  * Allows labels inside of areas
  *
- * @since
- * @version
  * @author MMagon
- *
- *
  */
 public interface AreaChildren extends GlobalChildren
 {

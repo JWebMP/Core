@@ -17,26 +17,24 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
- *
  * @author GedMarc
  */
 public class UnderlineTest
 {
-    
-    public UnderlineTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        Underline u = new Underline();
-        u.setID("id");
-        u.setText("underline");
-        System.out.println(u.toString(true));
-    }
-    
+	
+	public UnderlineTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		Underline u = new Underline();
+		u.setID("id");
+		u.setText("underline");
+		System.out.println(u.toString(true));
+	}
+	
 }

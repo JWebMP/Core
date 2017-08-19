@@ -21,28 +21,27 @@ import org.junit.Test;
 import za.co.mmagon.jwebswing.base.html.attributes.HeaderTypes;
 
 /**
- *
  * @author GedMarc
  */
 public class HeaderTextTest
 {
-    public HeaderTextTest()
-    {
-    }
-
-    @Test
-    public void reset()
-    {
-        HeaderText h1 = new HeaderText(HeaderTypes.H1, "bla");
-        HeaderText h2 = new HeaderText(HeaderTypes.H2, "bla");
-        h1.setID("id");
-        h2.setID("id");
-        System.out.println(h1.toString(true));
-        System.out.println(h2.toString(true));
-        Assert.assertNotSame(h1,h2);
-        h2.setHeaderType(HeaderTypes.H1);
-        Assert.assertEquals(h1,h2);
-        h2.setHeaderText("new text");
-        Assert.assertNotSame(h1,h2);
-    }
+	public HeaderTextTest()
+	{
+	}
+	
+	@Test
+	public void reset()
+	{
+		HeaderText h1 = new HeaderText(HeaderTypes.H1, "bla");
+		HeaderText h2 = new HeaderText(HeaderTypes.H2, "bla");
+		h1.setID("id");
+		h2.setID("id");
+		System.out.println(h1.toString(true));
+		System.out.println(h2.toString(true));
+		Assert.assertNotSame(h1, h2);
+		h2.setHeaderType(HeaderTypes.H1);
+		Assert.assertEquals(h1, h2);
+		h2.setHeaderText("new text");
+		Assert.assertNotSame(h1, h2);
+	}
 }

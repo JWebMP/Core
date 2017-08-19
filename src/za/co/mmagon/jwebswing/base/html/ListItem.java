@@ -46,66 +46,66 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * Tip: Use CSS to define the type of list.<p>
  *
- * @author Marc Magon
  * @param <J>
  *
- * @since forever
+ * @author Marc Magon
  * @version 1.0
+ * @since forever
  */
 public class ListItem<J extends ListItem<J>>
-        extends Component<ListItemChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements ListChildren, NoNewLineForRawText, ListItemChildren
+		extends Component<ListItemChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ListChildren, NoNewLineForRawText, ListItemChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a blank text List Item
-     */
-    public ListItem()
-    {
-        this("");
-
-    }
-
-    /**
-     * Constructs a list item with the given text
-     *
-     * @param text
-     */
-    public ListItem(String text)
-    {
-        super(ComponentTypes.ListItem);
-        setText(text);
-    }
-
-    /**
-     * Returns a list item of the specified text
-     *
-     * @param textToAdd
-     *
-     * @return
-     */
-    public ListItemChildren addItem(String textToAdd)
-    {
-        ListItem li = new ListItem(textToAdd);
-        add(li);
-        return li;
-    }
-
-    /**
-     * Returns a list of the specified text
-     *
-     * @param textToAdd
-     *
-     * @return
-     */
-    public List addList(String textToAdd)
-    {
-        ListItem lit = new ListItem(textToAdd);
-        List li = new List(false);
-        lit.add(li);
-        super.add(li);
-        return li;
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a blank text List Item
+	 */
+	public ListItem()
+	{
+		this("");
+		
+	}
+	
+	/**
+	 * Constructs a list item with the given text
+	 *
+	 * @param text
+	 */
+	public ListItem(String text)
+	{
+		super(ComponentTypes.ListItem);
+		setText(text);
+	}
+	
+	/**
+	 * Returns a list item of the specified text
+	 *
+	 * @param textToAdd
+	 *
+	 * @return
+	 */
+	public ListItemChildren addItem(String textToAdd)
+	{
+		ListItem li = new ListItem(textToAdd);
+		add(li);
+		return li;
+	}
+	
+	/**
+	 * Returns a list of the specified text
+	 *
+	 * @param textToAdd
+	 *
+	 * @return
+	 */
+	public List addList(String textToAdd)
+	{
+		ListItem lit = new ListItem(textToAdd);
+		List li = new List(false);
+		lit.add(li);
+		super.add(li);
+		return li;
+	}
 }

@@ -16,32 +16,32 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class PreFormattedTextTest
 {
-
-    public PreFormattedTextTest()
-    {
-    }
-
-    /**
-     * Test of setText method, of class PreFormattedText.
-     */
-    @Test
-    public void testSetText()
-    {
-        System.out.println("setText");
-        String preFormattedText = "";
-        PreFormattedText instance = new PreFormattedText("pre");
-        instance.setID("id");
-        System.out.println(instance.toString(true));
-        assertEquals(""
-                + "<pre id=\"id\">pre</pre>", instance.toString(true).toString());
-    }
+	
+	public PreFormattedTextTest()
+	{
+	}
+	
+	/**
+	 * Test of setText method, of class PreFormattedText.
+	 */
+	@Test
+	public void testSetText()
+	{
+		System.out.println("setText");
+		String preFormattedText = "";
+		PreFormattedText instance = new PreFormattedText("pre");
+		instance.setID("id");
+		System.out.println(instance.toString(true));
+		assertEquals(""
+				             + "<pre id=\"id\">pre</pre>", instance.toString(true).toString());
+	}
 }

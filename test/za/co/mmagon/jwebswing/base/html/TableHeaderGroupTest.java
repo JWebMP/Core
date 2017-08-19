@@ -16,30 +16,30 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class TableHeaderGroupTest
 {
-
-    public TableHeaderGroupTest()
-    {
-    }
-
-    /**
-     * Test of addTheming method, of class TableHeaderGroup.
-     */
-    @Test
-    public void testAddTheming()
-    {
-        TableHeaderGroup th = new TableHeaderGroup();
-        th.setID("id");
-        System.out.println(th.toString(true));
-        assertEquals(""
-                + "<thead id=\"id\"></thead>", th.toString(true).toString());
-    }
+	
+	public TableHeaderGroupTest()
+	{
+	}
+	
+	/**
+	 * Test of addTheming method, of class TableHeaderGroup.
+	 */
+	@Test
+	public void testAddTheming()
+	{
+		TableHeaderGroup th = new TableHeaderGroup();
+		th.setID("id");
+		System.out.println(th.toString(true));
+		assertEquals(""
+				             + "<thead id=\"id\"></thead>", th.toString(true).toString());
+	}
 }

@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,19 +16,19 @@
  */
 package za.co.mmagon.jwebswing.base.interfaces;
 
-import java.util.Map;
 import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
+import java.util.Map;
+
 /**
+ * @param <J> This Type (Always this class)
  *
  * @author GedMarc
- * @param <J> This Type (Always this class)
  * @since Sep 26, 2016
- * 
  */
-public interface IComponentHTMLAngularBase<J extends ComponentBase> 
+public interface IComponentHTMLAngularBase<J extends ComponentBase>
 {
 
     /**
@@ -36,6 +36,7 @@ public interface IComponentHTMLAngularBase<J extends ComponentBase>
      *
      * @param attribute
      * @param value
+     *
      * @return
      */
     J addAttribute(AngularAttributes attribute, String value);
@@ -45,6 +46,7 @@ public interface IComponentHTMLAngularBase<J extends ComponentBase>
      *
      * @param name       The variable name to use
      * @param dataObject The data object to map
+     *
      * @return This for chain setting
      */
     J addDto(String name, JavaScriptPart dataObject);
@@ -60,25 +62,20 @@ public interface IComponentHTMLAngularBase<J extends ComponentBase>
      * Gets an angular attribute
      *
      * @param attribute
+     *
      * @return
      */
     String getAttribute(AngularAttributes attribute);
-
-    /**
-     * Adds all the attributes associated with angular
-     *
-     * @return
-     */
-    Map<Enum, String> getAttributesAll();
-
+    
     /**
      * Returns the DTO currently mapped
      *
-     * @param <T> JavascriptPart
-     * @param name The name of the DTO to map
+     * @param <T>       JavascriptPart
+     * @param name      The name of the DTO to map
      * @param classType The class type
+     *
      * @return Null if not available
      */
-     <T extends JavaScriptPart> T getDto(String name, Class<T> classType);
+    <T extends JavaScriptPart> T getDto(String name, Class<T> classType);
 
 }

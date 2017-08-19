@@ -19,21 +19,20 @@ package za.co.mmagon.jwebswing.base.html;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class InputButtonTypeTest
 {
-
-    public InputButtonTypeTest()
-    {
-    }
-
-    @Test
-    public void testButtonInput()
-    {
-        InputButtonType input = new InputButtonType("Front text");
-        System.out.println(input.toString(true));
-    }
-
+	
+	public InputButtonTypeTest()
+	{
+	}
+	
+	@Test
+	public void testButtonInput()
+	{
+		InputButtonType input = new InputButtonType("Front text");
+		System.out.println(input.toString(true));
+	}
+	
 }

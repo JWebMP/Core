@@ -28,26 +28,26 @@ import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 public class DragStopDirective extends AngularDirectiveBase
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a new right click directive based on the angular object passed in
-     * <p>
-     */
-    public DragStopDirective()
-    {
-        super("ngDragStop");
-    }
+	/**
+	 * Constructs a new right click directive based on the angular object passed in
+	 * <p>
+	 */
+	public DragStopDirective()
+	{
+		super("ngDragStop");
+	}
 
-    /**
-     * Renders the right click directive from the JavaScript file
-     *
-     * @return
-     */
-    @Override
-    public String renderFunction()
-    {
-        return FileTemplates.getFileTemplate(DragStopDirective.class, "DragStop").toString();
-    }
+	/**
+	 * Renders the right click directive from the JavaScript file
+	 *
+	 * @return
+	 */
+	@Override
+	public String renderFunction()
+	{
+		return FileTemplates.getFileTemplate(DragStopDirective.class, "DragStop").toString();
+	}
 
 }

@@ -30,10 +30,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public abstract class FunctionPart extends JavascriptLiteralFunction
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public FunctionPart()
-    {
-    }
+	public FunctionPart()
+	{
+	}
 
 }

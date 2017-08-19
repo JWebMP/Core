@@ -46,24 +46,25 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * Tip: For a complete reference of all the properties and methods that can be used with the canvas object, go to our HTML Canvas Reference.
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
- * @since forever, was created for the jwimagemap
+ * @author GedMarc
  * @version 1.0
+ * @since forever, was created for the jwimagemap
  */
 public class Canvas<J extends Canvas<J>>
-        extends Component<NoChildren, CanvasAttributes, GlobalFeatures, GlobalEvents, J>
-        implements NoNewLineBeforeClosingTag
+		extends Component<NoChildren, CanvasAttributes, GlobalFeatures, GlobalEvents, J>
+		implements NoNewLineBeforeClosingTag
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new canvas
-     */
-    public Canvas()
-    {
-        super(ComponentTypes.Canvas);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new canvas
+	 */
+	public Canvas()
+	{
+		super(ComponentTypes.Canvas);
+	}
 }

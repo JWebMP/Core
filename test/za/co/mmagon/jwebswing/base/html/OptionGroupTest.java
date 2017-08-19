@@ -16,26 +16,26 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class OptionGroupTest
 {
-
-    public OptionGroupTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        OptionGroup og = new OptionGroup("labelled");
-        System.out.println(og.toString(true));
-        assertEquals("<optgroup label=\"labelled\"></optgroup>", og.toString(true).toString());
-    }
-
+	
+	public OptionGroupTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		OptionGroup og = new OptionGroup("labelled");
+		System.out.println(og.toString(true));
+		assertEquals("<optgroup label=\"labelled\"></optgroup>", og.toString(true).toString());
+	}
+	
 }

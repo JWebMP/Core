@@ -43,21 +43,23 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * Tip: The &lt;summary&gt; tag is used to specify a visible heading for the details. The heading can be clicked to view/hide the details.
  * <p>
- * @author GedMarc
+ *
  * @param <J>
+ *
+ * @author GedMarc
  */
 public class Details<J extends Details<J>>
-        extends Component<DetailsChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements GlobalChildren, ParagraphChildren, PhraseChildren
+		extends Component<DetailsChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements GlobalChildren, ParagraphChildren, PhraseChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new Details section.
-     */
-    public Details()
-    {
-        super(ComponentTypes.Details);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new Details section.
+	 */
+	public Details()
+	{
+		super(ComponentTypes.Details);
+	}
 }

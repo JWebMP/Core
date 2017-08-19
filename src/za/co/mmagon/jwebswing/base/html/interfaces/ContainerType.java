@@ -19,9 +19,10 @@ package za.co.mmagon.jwebswing.base.html.interfaces;
 /**
  * Defines a class that can contain the general element types
  * <p>
+ *
  * @author Marc Magon
- * @since 07 Aug 2015
  * @version 1.0
+ * @since 07 Aug 2015
  */
 public interface ContainerType extends DisplayObjects
 {

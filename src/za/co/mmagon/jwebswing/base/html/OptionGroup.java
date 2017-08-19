@@ -18,7 +18,9 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.OptionGroupAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.SelectChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -33,49 +35,48 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * NONE.<p>
  *
- * @author GedMarc
  * @param <J>
  *
- * @since Feb 9, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
- *
+ * @since Feb 9, 2015
  */
 public class OptionGroup<J extends OptionGroup<J>>
-        extends Component<SelectChildren, OptionGroupAttributes, GlobalFeatures, GlobalEvents, J>
-        implements SelectChildren, NoIDTag, NoNewLineBeforeClosingTag
+		extends Component<SelectChildren, OptionGroupAttributes, GlobalFeatures, GlobalEvents, J>
+		implements SelectChildren, NoIDTag, NoNewLineBeforeClosingTag
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new OptionGroup for select Children
-     *
-     * @param label The displayed label of this option group
-     */
-    public OptionGroup(String label)
-    {
-        super(ComponentTypes.OptionGroup);
-        addAttribute(OptionGroupAttributes.Label, label);
-    }
-
-    /**
-     * Sets this option groups label
-     *
-     * @param label
-     */
-    public void setLabel(String label)
-    {
-        addAttribute(OptionGroupAttributes.Label, label);
-    }
-
-    /**
-     * Returns the label
-     *
-     * @return
-     */
-    public String getLabel()
-    {
-        return getAttribute(OptionGroupAttributes.Label);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new OptionGroup for select Children
+	 *
+	 * @param label The displayed label of this option group
+	 */
+	public OptionGroup(String label)
+	{
+		super(ComponentTypes.OptionGroup);
+		addAttribute(OptionGroupAttributes.Label, label);
+	}
+	
+	/**
+	 * Returns the label
+	 *
+	 * @return
+	 */
+	public String getLabel()
+	{
+		return getAttribute(OptionGroupAttributes.Label);
+	}
+	
+	/**
+	 * Sets this option groups label
+	 *
+	 * @param label
+	 */
+	public void setLabel(String label)
+	{
+		addAttribute(OptionGroupAttributes.Label, label);
+	}
 }

@@ -16,42 +16,42 @@
  */
 package za.co.mmagon.jwebswing.base.interfaces;
 
-import java.util.List;
 import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
 
+import java.util.List;
+
 /**
- *
- * @author GedMarc
  * @param <J> This Class
  *
+ * @author GedMarc
  * @since Sep 26, 2016
- *
  */
 public interface IComponentThemeBase<J extends ComponentBase>
 {
-
-    /**
-     * Adds in the JavaScript References for the Features
-     *
-     * @return
-     */
-    List<CSSReference> getCssReferencesAll();
-
-    /**
-     * Adds in the JavaScript References for the Features
-     *
-     * @return
-     */
-    List<JavascriptReference> getJavascriptReferencesAll();
-
-    /**
-     * Returns the parents theme or the applied theme
-     * <p>
-     * @return The theme
-     */
-    List<Theme> getThemes();
-
+	
+	/**
+	 * Adds in the JavaScript References for the Features
+	 *
+	 * @return
+	 */
+	List<CSSReference> getCssReferencesAll();
+	
+	/**
+	 * Adds in the JavaScript References for the Features
+	 *
+	 * @return
+	 */
+	List<JavascriptReference> getJavascriptReferencesAll();
+	
+	/**
+	 * Returns the parents theme or the applied theme
+	 * <p>
+	 *
+	 * @return The theme
+	 */
+	List<Theme> getThemes();
+	
 }

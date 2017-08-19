@@ -19,21 +19,22 @@ package za.co.mmagon.jwebswing.base.interfaces;
 /**
  * A set of CSS attributes that the Component class exposes.
  *
- * @author GedMarc
  * @param <J> My type
  *
+ * @author GedMarc
  * @since Sep 26, 2016
- *
  */
 public interface ICssStructure<J>
 {
-
-    /**
-     * Adds a paragraph component with the attached text
-     * <p>
-     * @param textToAdd The text to add
-     * <p>
-     * @return The new paragraph component
-     */
-    J add(String textToAdd);
+	
+	/**
+	 * Adds a paragraph component with the attached text
+	 * <p>
+	 *
+	 * @param textToAdd The text to add
+	 *                  <p>
+	 *
+	 * @return The new paragraph component
+	 */
+	J add(String textToAdd);
 }

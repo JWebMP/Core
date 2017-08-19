@@ -17,24 +17,22 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
- *
  * @author GedMarc
  */
 public class SmallTextTest
 {
-    
-    public SmallTextTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        SmallText st = new SmallText("Small Text");
-        System.out.println(st.toString(true));
-    }
-    
+	
+	public SmallTextTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		SmallText st = new SmallText("Small Text");
+		System.out.println(st.toString(true));
+	}
+	
 }

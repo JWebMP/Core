@@ -16,14 +16,15 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+
 import java.lang.annotation.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
- *
  * CSS Border Properties
  * <p>
  * The CSS border properties allow you to specify the style, width, and color of an element's border.
@@ -34,41 +35,41 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
  * see http://www.w3schools.com/css/css_border.asp
  */
 @Target(
-        {
-            ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
-        })
+		{
+				ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
+		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
 public @interface BorderBottomCSS
 {
 
-    /**
-     * Sets the color of the bottom border
-     *
-     * @return
-     */
-    public ColourCSS BorderBottomColor() default @ColourCSS;
+	/**
+	 * Sets the color of the bottom border
+	 *
+	 * @return
+	 */
+	public ColourCSS BorderBottomColor() default @ColourCSS;
 
-    /**
-     * Sets the color of the bottom border
-     *
-     * @return
-     */
-    public ColourNames BorderBottomColor$() default ColourNames.Unset;
+	/**
+	 * Sets the color of the bottom border
+	 *
+	 * @return
+	 */
+	public ColourNames BorderBottomColor$() default ColourNames.Unset;
 
-    /**
-     * Sets the Style of the bottom border
-     *
-     * @return
-     */
-    public BorderStyles BorderBottomStyle() default BorderStyles.Unset;
+	/**
+	 * Sets the Style of the bottom border
+	 *
+	 * @return
+	 */
+	public BorderStyles BorderBottomStyle() default BorderStyles.Unset;
 
-    /**
-     * Sets the width of the bottom border
-     *
-     * @return
-     */
-    public MeasurementCSS BorderBottomWidth() default @MeasurementCSS;
+	/**
+	 * Sets the width of the bottom border
+	 *
+	 * @return
+	 */
+	public MeasurementCSS BorderBottomWidth() default @MeasurementCSS;
 
 }

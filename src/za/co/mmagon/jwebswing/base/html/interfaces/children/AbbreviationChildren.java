@@ -23,6 +23,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
  *
  * @author GedMarc
  */
-public interface AbbreviationChildren extends GlobalChildren {
+public interface AbbreviationChildren extends GlobalChildren
+{
 
 }

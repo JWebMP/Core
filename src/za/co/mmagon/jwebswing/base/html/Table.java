@@ -41,66 +41,72 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * HTML5 only supports the "border" attribute, and its value can be "1" or ""
  * .<p>
  * <p>
- * @author Marc Magon
+ *
  * @param <J>
+ *
+ * @author Marc Magon
  */
 public class Table<J extends Table<J>>
-        extends Component<TableChildren, TableAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<TableChildren, TableAttributes, GlobalFeatures, GlobalEvents, J>
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs an Empty Table
-     */
-    public Table()
-    {
-        super("table", ComponentTypes.Table, false);
-    }
+	/**
+	 * Constructs an Empty Table
+	 */
+	public Table()
+	{
+		super("table", ComponentTypes.Table, false);
+	}
 
-    /**
-     * Returns the cell spacing
-     * <p>
-     * @return
-     */
-    public int getCellSpacing()
-    {
-        return getAttribute(TableAttributes.CellSpacing, 0);
-    }
+	/**
+	 * Returns the cell spacing
+	 * <p>
+	 *
+	 * @return
+	 */
+	public int getCellSpacing()
+	{
+		return getAttribute(TableAttributes.CellSpacing, 0);
+	}
 
-    /**
-     * Sets the cell spacing
-     * <p>
-     * @param cellSpacing
-     *
-     * @return
-     */
-    public J setCellSpacing(int cellSpacing)
-    {
-        addAttribute(TableAttributes.CellSpacing, cellSpacing);
-        return (J) this;
-    }
+	/**
+	 * Sets the cell spacing
+	 * <p>
+	 *
+	 * @param cellSpacing
+	 *
+	 * @return
+	 */
+	public J setCellSpacing(int cellSpacing)
+	{
+		addAttribute(TableAttributes.CellSpacing, cellSpacing);
+		return (J) this;
+	}
 
-    /**
-     * Returns the cell padding
-     * <p>
-     * @return
-     */
-    public int getCellPadding()
-    {
-        return getAttribute(TableAttributes.CellSpacing, 0);
-    }
+	/**
+	 * Returns the cell padding
+	 * <p>
+	 *
+	 * @return
+	 */
+	public int getCellPadding()
+	{
+		return getAttribute(TableAttributes.CellSpacing, 0);
+	}
 
-    /**
-     * Sets the cell padding
-     * <p>
-     * @param cellPadding
-     *
-     * @return
-     */
-    public J setCellPadding(int cellPadding)
-    {
-        addAttribute(TableAttributes.CellPadding, cellPadding);
-        return (J) this;
-    }
+	/**
+	 * Sets the cell padding
+	 * <p>
+	 *
+	 * @param cellPadding
+	 *
+	 * @return
+	 */
+	public J setCellPadding(int cellPadding)
+	{
+		addAttribute(TableAttributes.CellPadding, cellPadding);
+		return (J) this;
+	}
 }

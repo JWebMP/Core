@@ -53,26 +53,27 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * In HTML5, objects can be used and submitted in forms.<p>
  * <p>
  * In HTML5, objects can no longer appear inside the &gt;head&lt; element of a document.<p>
- * @author GedMarc
+ *
  * @param <J>
  *
- * @since Feb 9, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
  * <p>
+ * @since Feb 9, 2015
  */
 public class ObjectTag<J extends ObjectTag<J>>
-        extends Component<ObjectTagChildren, ObjectAttributes, GlobalFeatures, GlobalEvents, J>
-        implements NoNewLineForRawText
+		extends Component<ObjectTagChildren, ObjectAttributes, GlobalFeatures, GlobalEvents, J>
+		implements NoNewLineForRawText
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     *
-     */
-    public ObjectTag()
-    {
-        super(ComponentTypes.Object);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 *
+	 */
+	public ObjectTag()
+	{
+		super(ComponentTypes.Object);
+	}
 }

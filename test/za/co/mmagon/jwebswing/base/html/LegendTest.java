@@ -17,23 +17,21 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
- *
  * @author GedMarc
  */
 public class LegendTest
 {
-    
-    public LegendTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        System.out.println(new Legend().toString(true));
-    }
-    
+	
+	public LegendTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		System.out.println(new Legend().toString(true));
+	}
+	
 }

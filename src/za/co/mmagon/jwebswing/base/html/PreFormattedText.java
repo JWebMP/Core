@@ -18,7 +18,9 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
@@ -46,33 +48,33 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  * @param <J>
  *
- * @since 2014/06/12
  * @author mmagon
  * @version 1.0
+ * @since 2014/06/12
  */
 public class PreFormattedText<J extends PreFormattedText<J>>
-        extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements BodyChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag, ParagraphChildren
+		extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements BodyChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag, ParagraphChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Creates a new Pre tag
-     */
-    public PreFormattedText()
-    {
-        this(null);
-    }
-
-    /**
-     * Constructs a new Pre-formatted Text Object with the given text set as the raw text
-     *
-     * @param preFormattedText
-     */
-    public PreFormattedText(String preFormattedText)
-    {
-        super(ComponentTypes.PreFormatted);
-        setText(preFormattedText);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Creates a new Pre tag
+	 */
+	public PreFormattedText()
+	{
+		this(null);
+	}
+	
+	/**
+	 * Constructs a new Pre-formatted Text Object with the given text set as the raw text
+	 *
+	 * @param preFormattedText
+	 */
+	public PreFormattedText(String preFormattedText)
+	{
+		super(ComponentTypes.PreFormatted);
+		setText(preFormattedText);
+	}
 }

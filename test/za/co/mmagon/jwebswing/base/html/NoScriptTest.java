@@ -17,25 +17,23 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
- *
  * @author GedMarc
  */
 public class NoScriptTest
 {
-    
-    public NoScriptTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        NoScript ns = new NoScript();
-        ns.add("JavaScript not enabled");
-        System.out.println(ns.toString(true));
-    }
-    
+	
+	public NoScriptTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		NoScript ns = new NoScript();
+		ns.add("JavaScript not enabled");
+		System.out.println(ns.toString(true));
+	}
+	
 }

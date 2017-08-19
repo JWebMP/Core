@@ -4,7 +4,6 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
 
 /**
- *
  * @author Marc Magon
  */
 @CSSAnnotationType

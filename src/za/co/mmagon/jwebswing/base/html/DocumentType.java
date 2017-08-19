@@ -16,11 +16,11 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
+import za.co.mmagon.jwebswing.base.ComponentHTMLBase;
 import za.co.mmagon.jwebswing.base.client.HTMLVersions;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
-import za.co.mmagon.jwebswing.base.interfaces.ComponentHTMLBase;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -54,77 +54,76 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * HTML5 there is only one:
  * <p>
  *
- * @since 2014/10/26
- * @version 1.0
  * @author MMagon
- *
- *
+ * @version 1.0
+ * @since 2014/10/26
  */
 public class DocumentType<J extends DocumentType<J>>
-        extends ComponentHTMLBase<GlobalFeatures, GlobalEvents, J>
-        implements NoNewLineForRawText
+		extends ComponentHTMLBase<GlobalFeatures, GlobalEvents, J>
+		implements NoNewLineForRawText
 {
-
-    private static final long serialVersionUID = 1L;
-
-    private final HTMLVersions clientHtmlVersion;
-
-    /**
-     * Constructs a new document type for the HTML Component
-     *
-     * @param clientHtmlVersion The browser HTML version to render for, usually the clients. This gets set by the JWebSwing Servlet.
-     */
-    public DocumentType(HTMLVersions clientHtmlVersion)
-    {
-        super(ComponentTypes.Feature);
-        this.clientHtmlVersion = clientHtmlVersion;
-    }
-
-    /**
-     * Renders the DTD clause
-     *
-     * @return
-     */
-    @Override
-    public String toString()
-    {
-        return (clientHtmlVersion.getDtd());
-    }
-
-    /**
-     * Renders the DTD Clause
-     *
-     * @param outputHtml
-     *
-     * @return
-     */
-    @Override
-    public String toString(boolean outputHtml)
-    {
-        return toString();
-    }
-
-    /**
-     * Renders the DTD Clause
-     *
-     * @param tabCount
-     *
-     * @return
-     */
-    @Override
-    public String toString(Integer tabCount)
-    {
-        return toString();
-    }
-
-    /**
-     * Returns the connected client browser version
-     * <p>
-     * @return The HTML version that the client browser is running
-     */
-    public HTMLVersions getClientHtmlVersion()
-    {
-        return clientHtmlVersion;
-    }
-
+	
+	private static final long serialVersionUID = 1L;
+	
+	private final HTMLVersions clientHtmlVersion;
+	
+	/**
+	 * Constructs a new document type for the HTML Component
+	 *
+	 * @param clientHtmlVersion The browser HTML version to render for, usually the clients. This gets set by the JWebSwing Servlet.
+	 */
+	public DocumentType(HTMLVersions clientHtmlVersion)
+	{
+		super(ComponentTypes.Feature);
+		this.clientHtmlVersion = clientHtmlVersion;
+	}
+	
+	/**
+	 * Renders the DTD clause
+	 *
+	 * @return
+	 */
+	@Override
+	public String toString()
+	{
+		return (clientHtmlVersion.getDtd());
+	}
+	
+	/**
+	 * Renders the DTD Clause
+	 *
+	 * @param outputHtml
+	 *
+	 * @return
+	 */
+	@Override
+	public String toString(boolean outputHtml)
+	{
+		return toString();
+	}
+	
+	/**
+	 * Renders the DTD Clause
+	 *
+	 * @param tabCount
+	 *
+	 * @return
+	 */
+	@Override
+	public String toString(Integer tabCount)
+	{
+		return toString();
+	}
+	
+	/**
+	 * Returns the connected client browser version
+	 * <p>
+	 *
+	 * @return The HTML version that the client browser is running
+	 */
+	public HTMLVersions getClientHtmlVersion()
+	{
+		return clientHtmlVersion;
+	}
+	
 }

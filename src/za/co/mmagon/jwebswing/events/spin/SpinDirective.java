@@ -28,26 +28,26 @@ import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 public class SpinDirective extends AngularDirectiveBase
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a new right click directive based on the angular object passed in
-     * <p>
-     */
-    public SpinDirective()
-    {
-        super("ngSpin");
-    }
+	/**
+	 * Constructs a new right click directive based on the angular object passed in
+	 * <p>
+	 */
+	public SpinDirective()
+	{
+		super("ngSpin");
+	}
 
-    /**
-     * Renders the right click directive from the JavaScript file
-     *
-     * @return
-     */
-    @Override
-    public String renderFunction()
-    {
-        return FileTemplates.getFileTemplate(SpinDirective.class, "Spin").toString();
-    }
+	/**
+	 * Renders the right click directive from the JavaScript file
+	 *
+	 * @return
+	 */
+	@Override
+	public String renderFunction()
+	{
+		return FileTemplates.getFileTemplate(SpinDirective.class, "Spin").toString();
+	}
 
 }

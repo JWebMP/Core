@@ -21,11 +21,9 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 /**
  * Describes a valid child for the MAP Tag
  *
- * @since 2013/11/22
- * @version 1.0
  * @author MMagon
- *
- *
+ * @version 1.0
+ * @since 2013/11/22
  */
 public interface MapChildren extends GlobalChildren
 {

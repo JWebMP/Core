@@ -25,56 +25,56 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum InputPasswordTypeAttributes implements AttributeDefinitions
 {
-    /**
-     * The alternative text or tooltip to display
-     */
-    Alt,
-    /**
-     * HTML 5 Only
-     * Specifies whether an input element should have auto-complete enabled
-     */
-    AutoComplete,
-    /**
-     * HTML 5 Only
-     * Specifies that an input element should automatically get focus when the page loads
-     */
-    AutoFocus,
-    /**
-     * The value of the field
-     */
-    Value,
-    /**
-     * A reference to the form that contain the button
-     */
-    Form,
-    /**
-     * Sets the value of the name attribute of an input button
-     */
-    Name,
-    /**
-     * Sets or returns the default value of the hidden input field
-     */
-    DefaultValue,
-    /**
-     * Sets or returns whether a password field is read-only, or not
-     */
-    ReadOnly,
-    /**
-     * Sets or returns whether the password field is disabled, or not
-     */
-    Disabled,
-    /**
-     * Sets or returns the value of the maxlength attribute of a password field
-     */
-    MaxLength,
-    /**
-     * Sets or returns the value of the size attribute of a password field
-     */
-    Size,;
-
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	/**
+	 * The alternative text or tooltip to display
+	 */
+	Alt,
+	/**
+	 * HTML 5 Only
+	 * Specifies whether an input element should have auto-complete enabled
+	 */
+	AutoComplete,
+	/**
+	 * HTML 5 Only
+	 * Specifies that an input element should automatically get focus when the page loads
+	 */
+	AutoFocus,
+	/**
+	 * The value of the field
+	 */
+	Value,
+	/**
+	 * A reference to the form that contain the button
+	 */
+	Form,
+	/**
+	 * Sets the value of the name attribute of an input button
+	 */
+	Name,
+	/**
+	 * Sets or returns the default value of the hidden input field
+	 */
+	DefaultValue,
+	/**
+	 * Sets or returns whether a password field is read-only, or not
+	 */
+	ReadOnly,
+	/**
+	 * Sets or returns whether the password field is disabled, or not
+	 */
+	Disabled,
+	/**
+	 * Sets or returns the value of the maxlength attribute of a password field
+	 */
+	MaxLength,
+	/**
+	 * Sets or returns the value of the size attribute of a password field
+	 */
+	Size,;
+	
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

@@ -18,14 +18,13 @@ package za.co.mmagon.jwebswing.base.html.interfaces;
 
 /**
  * Specifies that this tag can only be used once
- * @since 2011/11/14
- * @version 1.0
- * @author MMagon
  *
- * 
+ * @author MMagon
+ * @version 1.0
+ * @since 2011/11/14
  */
 
-public interface OneValidTag 
+public interface OneValidTag
 {
 
 }

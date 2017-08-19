@@ -39,23 +39,24 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * Most of the attributes in HTML 4.01 are not supported in HTML5.<p>
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
+ * @author GedMarc
  * @since 2014/12/20
  */
 public class TableColumnGroup<J extends TableColumnGroup<J>>
-        extends Component<TableColumnGroupChildren, NoAttributes, NoFeatures, NoEvents, J>
+		extends Component<TableColumnGroupChildren, NoAttributes, NoFeatures, NoEvents, J>
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new Table Column Group
-     */
-    public TableColumnGroup()
-    {
-        super(ComponentTypes.TableColumnGroup);
-    }
-
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new Table Column Group
+	 */
+	public TableColumnGroup()
+	{
+		super(ComponentTypes.TableColumnGroup);
+	}
+	
 }

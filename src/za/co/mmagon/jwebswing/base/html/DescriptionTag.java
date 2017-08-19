@@ -18,7 +18,10 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.DescriptionListChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
@@ -44,21 +47,22 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * In HTML5, the &lt;dt&gt; tag defines a term/name in a description list.<p>
  * &lt;p&gt;
  *
- * @author GedMarc
  * @param <J>
+ *
+ * @author GedMarc
  */
 public class DescriptionTag<J extends DescriptionTag<J>>
-        extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
-        implements NoIDTag, NoNewLineBeforeClosingTag, NoNewLineForRawText, DescriptionListChildren
+		extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+		implements NoIDTag, NoNewLineBeforeClosingTag, NoNewLineForRawText, DescriptionListChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new Description Tag
-     */
-    public DescriptionTag()
-    {
-        super(ComponentTypes.DescriptionTag);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new Description Tag
+	 */
+	public DescriptionTag()
+	{
+		super(ComponentTypes.DescriptionTag);
+	}
 }

@@ -16,14 +16,17 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import java.util.logging.Level;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoClassAttribute;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.logger.LogFactory;
+
+import java.util.logging.Level;
 
 /**
  * Definition and Usage
@@ -48,79 +51,81 @@ import za.co.mmagon.logger.LogFactory;
  * <p>
  * In XHTML, the &lt;hr&gt; tag must be properly closed.<p>
  * <p>
- * @author Marc Magon
+ *
  * @param <J>
+ *
+ * @author Marc Magon
  */
 public class HorizontalRule<J extends HorizontalRule<J>>
-        extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
-        implements NoIDTag, NoClassAttribute
+		extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+		implements NoIDTag, NoClassAttribute
 {
-
-    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("HR");
-    private static final HorizontalRule hr = new HorizontalRule();
-    private static final long serialVersionUID = 1L;
-
-    public HorizontalRule()
-    {
-        super("hr", ComponentTypes.HorizontalRule);
-        setInlineClosingTag(true);
-    }
-
-    @Override
-    @SuppressWarnings("")
-    public boolean equals(Object obj)
-    {
-        return false;
-    }
-
-    /**
-     * Return the Horizontal Rule Instance
-     *
-     * @return
-     */
-    public static HorizontalRule getInstance()
-    {
-        return hr;
-    }
-
-    /**
-     * Return a new instance of the Horizontal Rule
-     *
-     * @return
-     */
-    public static HorizontalRule getNewInstance()
-    {
-        return new HorizontalRule();
-    }
-
-    /**
-     * Differences Between HTML and XHTML
-     * <p>
-     * In HTML the base tag has no end tag.
-     * <p>
-     * In XHTML the base tag must be properly closed.
-     */
-    @Override
-    public void preConfigure()
-    {
-        super.preConfigure();
-        try
-        {
-            if (getPage().getBrowser().getHtmlVersion().name().startsWith("X"))
-            {
-                setInlineClosingTag(true);
-            }
-        }
-        catch (Exception e)
-        {
-            log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
-        }
-    }
-
-    @Override
-    public int hashCode()
-    {
-        int hash = 7;
-        return hash;
-    }
+	
+	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("HR");
+	private static final HorizontalRule hr = new HorizontalRule();
+	private static final long serialVersionUID = 1L;
+	
+	public HorizontalRule()
+	{
+		super("hr", ComponentTypes.HorizontalRule);
+		setInlineClosingTag(true);
+	}
+	
+	/**
+	 * Return the Horizontal Rule Instance
+	 *
+	 * @return
+	 */
+	public static HorizontalRule getInstance()
+	{
+		return hr;
+	}
+	
+	/**
+	 * Return a new instance of the Horizontal Rule
+	 *
+	 * @return
+	 */
+	public static HorizontalRule getNewInstance()
+	{
+		return new HorizontalRule();
+	}
+	
+	@Override
+	@SuppressWarnings("")
+	public boolean equals(Object obj)
+	{
+		return false;
+	}
+	
+	/**
+	 * Differences Between HTML and XHTML
+	 * <p>
+	 * In HTML the base tag has no end tag.
+	 * <p>
+	 * In XHTML the base tag must be properly closed.
+	 */
+	@Override
+	public void preConfigure()
+	{
+		super.preConfigure();
+		try
+		{
+			if (getPage().getBrowser().getHtmlVersion().name().startsWith("X"))
+			{
+				setInlineClosingTag(true);
+			}
+		}
+		catch (Exception e)
+		{
+			log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
+		}
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		int hash = 7;
+		return hash;
+	}
 }

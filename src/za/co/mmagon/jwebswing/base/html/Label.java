@@ -40,130 +40,138 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The "form" attribute is new in HTML5.<p>
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
- * @since Feb 9, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
- *
+ * @since Feb 9, 2015
  */
 public class Label<J extends Label<J>>
-        extends Component<GlobalChildren, LabelAttributes, GlobalFeatures, GlobalEvents, J>
-        implements ParagraphChildren, NoNewLineBeforeChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag
+		extends Component<GlobalChildren, LabelAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ParagraphChildren, NoNewLineBeforeChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag
 {
 
-    private static final long serialVersionUID = 1L;
-    /**
-     * The component this is for
-     */
-    private Component forInputComponent;
-    /**
-     * The form this label is for
-     */
-    private Form forFormComponent;
+	private static final long serialVersionUID = 1L;
+	/**
+	 * The component this is for
+	 */
+	private Component forInputComponent;
+	/**
+	 * The form this label is for
+	 */
+	private Form forFormComponent;
 
-    /**
-     * Constructs a new label
-     */
-    public Label()
-    {
-        this(null);
-    }
+	/**
+	 * Constructs a new label
+	 */
+	public Label()
+	{
+		this(null);
+	}
 
-    /**
-     * Constructs a new label with the attribute set
-     * <p>
-     * @param label
-     */
-    @SuppressWarnings("")
-    public Label(String label)
-    {
-        super(ComponentTypes.Label);
-        setLabel(label);
-    }
+	/**
+	 * Constructs a new label with the attribute set
+	 * <p>
+	 *
+	 * @param label
+	 */
+	@SuppressWarnings("")
+	public Label(String label)
+	{
+		super(ComponentTypes.Label);
+		setLabel(label);
+	}
 
-    /**
-     * Constructs a new label with the attribute set and the component specified
-     * <p>
-     * @param label
-     * @param forInputComponent
-     */
-    @SuppressWarnings("")
-    public Label(String label, Input forInputComponent)
-    {
-        super(ComponentTypes.Label);
-        setForInputComponent(forInputComponent);
-        setLabel(label);
-        addAttribute(LabelAttributes.For, label);
-    }
+	/**
+	 * Constructs a new label with the attribute set and the component specified
+	 * <p>
+	 *
+	 * @param label
+	 * @param forInputComponent
+	 */
+	@SuppressWarnings("")
+	public Label(String label, Input forInputComponent)
+	{
+		super(ComponentTypes.Label);
+		setForInputComponent(forInputComponent);
+		setLabel(label);
+		addAttribute(LabelAttributes.For, label);
+	}
 
-    /**
-     * Sets the text of this label
-     * <p>
-     * @param label
-     */
-    public void setLabel(String label)
-    {
-        setText(label);
-    }
+	/**
+	 * Gets the text of this label
+	 * <p>
+	 *
+	 * @return
+	 */
+	public String getLabel()
+	{
+		return getText(0).toString();
+	}
 
-    /**
-     * Gets the text of this label
-     * <p>
-     * @return
-     */
-    public String getLabel()
-    {
-        return getText(0).toString();
-    }
+	/**
+	 * Sets the text of this label
+	 * <p>
+	 *
+	 * @param label
+	 */
+	public void setLabel(String label)
+	{
+		setText(label);
+	}
 
-    /**
-     * Returns the input type for which this is the component for
-     * <p>
-     * @return
-     */
-    public Component getForInputComponent()
-    {
-        return forInputComponent;
-    }
+	/**
+	 * Returns the input type for which this is the component for
+	 * <p>
+	 *
+	 * @return
+	 */
+	public Component getForInputComponent()
+	{
+		return forInputComponent;
+	}
 
-    /**
-     * Sets the for component with the given ID
-     * <p>
-     * @param forInputComponent
-     */
-    public void setForInputComponent(Component forInputComponent)
-    {
-        this.forInputComponent = forInputComponent;
-        if (forInputComponent != null)
-        {
-            addAttribute(LabelAttributes.For, forInputComponent.getID());
-        }
-    }
+	/**
+	 * Sets the for component with the given ID
+	 * <p>
+	 *
+	 * @param forInputComponent
+	 */
+	public void setForInputComponent(Component forInputComponent)
+	{
+		this.forInputComponent = forInputComponent;
+		if (forInputComponent != null)
+		{
+			addAttribute(LabelAttributes.For, forInputComponent.getID());
+		}
+	}
 
-    /**
-     * Returns the form component that the label is attached to
-     * <p>
-     * @return
-     */
-    public Form getForFormComponent()
-    {
-        return forFormComponent;
-    }
+	/**
+	 * Returns the form component that the label is attached to
+	 * <p>
+	 *
+	 * @return
+	 */
+	public Form getForFormComponent()
+	{
+		return forFormComponent;
+	}
 
-    /**
-     * Sets the form for which the label is for
-     * <p>
-     * @param forFormComponent
-     */
-    public void setForFormComponent(Form forFormComponent)
-    {
-        this.forFormComponent = forFormComponent;
-        if (forFormComponent != null)
-        {
-            addAttribute(LabelAttributes.Form, forInputComponent.getID());
-        }
-    }
+	/**
+	 * Sets the form for which the label is for
+	 * <p>
+	 *
+	 * @param forFormComponent
+	 */
+	public void setForFormComponent(Form forFormComponent)
+	{
+		this.forFormComponent = forFormComponent;
+		if (forFormComponent != null)
+		{
+			addAttribute(LabelAttributes.Form, forInputComponent.getID());
+		}
+	}
 
 }

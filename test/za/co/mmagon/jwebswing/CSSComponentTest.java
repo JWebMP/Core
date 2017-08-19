@@ -20,19 +20,19 @@ import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
 
 /**
- *
  * @author GedMarc
  */
 public class CSSComponentTest extends BaseTestClass
 {
-    
-    public CSSComponentTest() {
-    }
 
-    @Test
-    public void empty()
-    {
-        
-    }
-    
+	public CSSComponentTest()
+	{
+	}
+
+	@Test
+	public void empty()
+	{
+
+	}
+
 }

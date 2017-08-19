@@ -21,11 +21,9 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 /**
  * Describes valid children for the Head tag
  *
- * @since 2013/11/12
- * @version 1.0
  * @author MMagon
- *
- *
+ * @version 1.0
+ * @since 2013/11/12
  */
 public interface HeadChildren extends GlobalChildren
 {

@@ -16,27 +16,27 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author MMagon
  */
 public class AsideTest
 {
 
-    public AsideTest()
-    {
-    }
+	public AsideTest()
+	{
+	}
 
-    @Test
-    public void testAside()
-    {
-        Aside a = new Aside("asdf");
-        a.setID("ID");
-        System.out.println(a.toString(true));
-        assertEquals("<aside id=\"ID\">asdf</aside>", a.toString(true).toString());
-    }
+	@Test
+	public void testAside()
+	{
+		Aside a = new Aside("asdf");
+		a.setID("ID");
+		System.out.println(a.toString(true));
+		assertEquals("<aside id=\"ID\">asdf</aside>", a.toString(true).toString());
+	}
 
 }

@@ -18,102 +18,106 @@ package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
 import org.junit.Test;
 import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.html.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.*;
+import za.co.mmagon.jwebswing.base.html.Body;
+import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.base.html.H1;
+import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.BackgroundBlendMode;
+import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.BackgroundCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.BackgroundCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.BackgroundClip;
 import za.co.mmagon.jwebswing.htmlbuilder.css.borders.BorderCSSObjectTest;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
 import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
 
 /**
- *
  * @author GedMarc
  */
 public class CSSComposerTest
 {
 
-    public CSSComposerTest()
-    {
-    }
+	public CSSComposerTest()
+	{
+	}
 
-    @Test
-    public void testInnerComposer()
-    {
-        Div d = new Div();
-        d.getCss().getBackground().setBackgroundColor$(ColourNames.DarkGoldenRod);
-        d.getCss().getBorder().setBorderBottomStyle(BorderStyles.Dotted);
-        d.setID("d");
-        Div d2 = new Div();
-        d2.setID("d2");
-        d2.getCss().getDimensions().setHeight(400);
-        //test block merging
-        Div dClone = (Div) d.cloneComponent();
-        dClone.setID("cloned");
-        Div dClone2 = (Div) dClone.cloneComponent();
-        dClone2.setID("cloned2");
+	@Test
+	public void testInnerComposer()
+	{
+		Div d = new Div();
+		d.getCss().getBackground().setBackgroundColor$(ColourNames.DarkGoldenRod);
+		d.getCss().getBorder().setBorderBottomStyle(BorderStyles.Dotted);
+		d.setID("d");
+		Div d2 = new Div();
+		d2.setID("d2");
+		d2.getCss().getDimensions().setHeight(400);
+		//test block merging
+		Div dClone = (Div) d.cloneComponent();
+		dClone.setID("cloned");
+		Div dClone2 = (Div) dClone.cloneComponent();
+		dClone2.setID("cloned2");
 
-        CSSComposer comp = new CSSComposer();
-        comp.addComponent(d);
-        comp.addComponent(d2);
-        comp.addComponent(dClone);
-        comp.addComponent(dClone2);
-        System.out.println(comp.toString()); //Direct from the factory
-        System.out.println(d.renderCss(0)); //Using the convenience method for the
-        //TODO
-        // Assert.assertEquals("#cloned,#cloned2,#d {background-Color:darkgoldenrod;border-bottom-style:dotted}#d2 {height:400px;}", comp.toString());
-    }
+		CSSComposer comp = new CSSComposer();
+		comp.addComponent(d);
+		comp.addComponent(d2);
+		comp.addComponent(dClone);
+		comp.addComponent(dClone2);
+		System.out.println(comp.toString()); //Direct from the factory
+		System.out.println(d.renderCss(0)); //Using the convenience method for the
+		//TODO
+		// Assert.assertEquals("#cloned,#cloned2,#d {background-Color:darkgoldenrod;border-bottom-style:dotted}#d2 {height:400px;}", comp.toString());
+	}
 
-    @Test
-    public void testClassComposer()
-    {
-        Div d = new Div();
-        BorderCSSObjectTest borderClassObject = new BorderCSSObjectTest();
-        CSSComposer comp = new CSSComposer();
-        comp.addComponent(d);
-        comp.addComponent(borderClassObject);
-        System.out.println(comp.toString());
-    }
+	@Test
+	public void testClassComposer()
+	{
+		Div d = new Div();
+		BorderCSSObjectTest borderClassObject = new BorderCSSObjectTest();
+		CSSComposer comp = new CSSComposer();
+		comp.addComponent(d);
+		comp.addComponent(borderClassObject);
+		System.out.println(comp.toString());
+	}
 
-    @Test
-    public void testInnerClass()
-    {
-        InnerClass d = new InnerClass();
-        d.getCss().getBackground().setBackgroundColor$(ColourNames.DarkGoldenRod);
-        d.getCss().getBackground().setBackgroundClip(BackgroundClip.content_box);
-        BorderCSSObjectTest borderClassObject = new BorderCSSObjectTest();
-        CSSComposer comp = new CSSComposer();
-        comp.addComponent(d);
-        //comp.addComponent(borderClassObject);
-        System.out.println(comp.toString());
+	@Test
+	public void testInnerClass()
+	{
+		InnerClass d = new InnerClass();
+		d.getCss().getBackground().setBackgroundColor$(ColourNames.DarkGoldenRod);
+		d.getCss().getBackground().setBackgroundClip(BackgroundClip.content_box);
+		BorderCSSObjectTest borderClassObject = new BorderCSSObjectTest();
+		CSSComposer comp = new CSSComposer();
+		comp.addComponent(d);
+		//comp.addComponent(borderClassObject);
+		System.out.println(comp.toString());
 
-    }
+	}
 
-    @Test
-    public void testCSSRender()
-    {
-        Page p = new Page();
-        Body b = new Body(p);
-        InnerClass ic;
-        b.add(ic = new InnerClass());
-        CSSComposer comp = new CSSComposer();
-        comp.addComponent(b, true);
-        System.out.println(comp.toString());
+	@Test
+	public void testCSSRender()
+	{
+		Page p = new Page();
+		Body b = new Body(p);
+		InnerClass ic;
+		b.add(ic = new InnerClass());
+		CSSComposer comp = new CSSComposer();
+		comp.addComponent(b, true);
+		System.out.println(comp.toString());
 
-        BackgroundCSSImpl back = new BackgroundCSSImpl();
-        back.setBackgroundColor$(ColourNames.DarkGoldenRod);
+		BackgroundCSSImpl back = new BackgroundCSSImpl();
+		back.setBackgroundColor$(ColourNames.DarkGoldenRod);
 
-        comp.addComponent(ic);
-        System.out.println(comp.toString());
-    }
+		comp.addComponent(ic);
+		System.out.println(comp.toString());
+	}
 
-    @BackgroundCSS(BackgroundBlendMode = BackgroundBlendMode.Lighten)
-    public class InnerClass extends Div
-    {
+	@BackgroundCSS(BackgroundBlendMode = BackgroundBlendMode.Lighten)
+	public class InnerClass extends Div
+	{
 
-        private H1 comp = new H1("asdf");
+		private H1 comp = new H1("asdf");
 
-        public InnerClass()
-        {
-            comp.getCss().getBackground().setBackgroundColor$(ColourNames.White);
-        }
-    }
+		public InnerClass()
+		{
+			comp.getCss().getBackground().setBackgroundColor$(ColourNames.White);
+		}
+	}
 }

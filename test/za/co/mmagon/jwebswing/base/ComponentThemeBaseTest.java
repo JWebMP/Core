@@ -19,20 +19,19 @@ package za.co.mmagon.jwebswing.base;
 import org.junit.Test;
 
 /**
- *
  * @author ged_m
  */
 public class ComponentThemeBaseTest
 {
 
-    public ComponentThemeBaseTest()
-    {
-    }
+	public ComponentThemeBaseTest()
+	{
+	}
 
-    @Test
-    public void stuff()
-    {
+	@Test
+	public void stuff()
+	{
 
-    }
+	}
 
 }

@@ -33,27 +33,27 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;output&gt; tag is new in HTML5.<p>
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
- * @since Mar 1, 2015
+ * @author GedMarc
  * @version 1.0
- * @deprecated
+ * @since Mar 1, 2015
+ * @deprecated <p>
  * <p>
- *
  * No support in I.E. - can't be used, the results are not compatible - may make as a server function but the point is client side.
  */
 public class Output<J extends Output<J>>
-        extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+		extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     *
-     */
-    public Output()
-    {
-        super(ComponentTypes.Output);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 *
+	 */
+	public Output()
+	{
+		super(ComponentTypes.Output);
+	}
 }

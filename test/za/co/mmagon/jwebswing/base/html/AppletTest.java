@@ -21,30 +21,29 @@ import org.junit.Test;
 import za.co.mmagon.jwebswing.base.html.attributes.AppletAttributes;
 
 /**
- *
  * @author ged_m
  */
 public class AppletTest
 {
 
-    public AppletTest()
-    {
-    }
+	public AppletTest()
+	{
+	}
 
-    @Test
-    public void testApplet()
-    {
-        Applet applet = new Applet();
-        applet.setID("id");
-        System.out.println(applet.toString(true));
-        Assert.assertEquals("<applet id=\"id\"></applet>", applet.toString(true));
+	@Test
+	public void testApplet()
+	{
+		Applet applet = new Applet();
+		applet.setID("id");
+		System.out.println(applet.toString(true));
+		Assert.assertEquals("<applet id=\"id\"></applet>", applet.toString(true));
 
-        applet.addAttribute(AppletAttributes.Object, "applet object");
-        applet.addAttribute(AppletAttributes.Align, "left");
-        applet.addAttribute(AppletAttributes.CodeBase, "classFile");
+		applet.addAttribute(AppletAttributes.Object, "applet object");
+		applet.addAttribute(AppletAttributes.Align, "left");
+		applet.addAttribute(AppletAttributes.CodeBase, "classFile");
 
-        System.out.println(applet.toString(true));
-        Assert.assertEquals("<applet align=\"left\" codebase=\"classFile\" id=\"id\" object=\"applet object\"></applet>", applet.toString(true));
-    }
+		System.out.println(applet.toString(true));
+		Assert.assertEquals("<applet align=\"left\" codebase=\"classFile\" id=\"id\" object=\"applet object\"></applet>", applet.toString(true));
+	}
 
 }

@@ -44,27 +44,27 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;rp&gt; tag is new in HTML5.<p>
  *
- * @author GedMarc
  * @param <J>
  *
- * @since Mar 1, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
  * Not support in FireFox xD wait what??!? something in ie5 is not in firefox xD
+ * @since Mar 1, 2015
  * @deprecated
  */
 public class RubyNoSupport<J extends RubyNoSupport<J>>
-        extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements RubyChildren
+		extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements RubyChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new instance of Ruby No Support
-     */
-    public RubyNoSupport()
-    {
-        super(ComponentTypes.RubyNoSupport);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new instance of Ruby No Support
+	 */
+	public RubyNoSupport()
+	{
+		super(ComponentTypes.RubyNoSupport);
+	}
 }

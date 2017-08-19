@@ -24,46 +24,46 @@ package za.co.mmagon.jwebswing.generics;
  */
 public enum Positions
 {
-    Top,
-    Bottom,
-    Right,
-    Left;
-    /**
-     * Any sub data
-     */
-    private String data;
-
-    /**
-     * A new Positions
-     */
-    private Positions()
-    {
-
-    }
-
-    /**
-     * A new Positions with data
-     */
-    private Positions(String data)
-    {
-
-    }
-
-    /**
-     * Returns the name or the data contained within
-     *
-     * @return
-     */
-    @Override
-    public String toString()
-    {
-        if (data != null && !data.isEmpty())
-        {
-            return data;
-        }
-        else
-        {
-            return name().toLowerCase();
-        }
-    }
+	Top,
+	Bottom,
+	Right,
+	Left;
+	/**
+	 * Any sub data
+	 */
+	private String data;
+	
+	/**
+	 * A new Positions
+	 */
+	private Positions()
+	{
+	
+	}
+	
+	/**
+	 * A new Positions with data
+	 */
+	private Positions(String data)
+	{
+	
+	}
+	
+	/**
+	 * Returns the name or the data contained within
+	 *
+	 * @return
+	 */
+	@Override
+	public String toString()
+	{
+		if (data != null && !data.isEmpty())
+		{
+			return data;
+		}
+		else
+		{
+			return name().toLowerCase();
+		}
+	}
 }

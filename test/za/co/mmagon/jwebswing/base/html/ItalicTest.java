@@ -19,21 +19,20 @@ package za.co.mmagon.jwebswing.base.html;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class ItalicTest
 {
-    
-    public ItalicTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        Italic i = new Italic("italic");
-        System.out.println(i.toString(true));
-    }
-    
+	
+	public ItalicTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		Italic i = new Italic("italic");
+		System.out.println(i.toString(true));
+	}
+	
 }

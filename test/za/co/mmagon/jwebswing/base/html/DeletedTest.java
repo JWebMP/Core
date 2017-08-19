@@ -19,21 +19,20 @@ package za.co.mmagon.jwebswing.base.html;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class DeletedTest
 {
-
-    public DeletedTest()
-    {
-    }
-
-    @Test
-    public void testDeleted()
-    {
-        Deleted d = new Deleted("deleted text");
-        System.out.println(d.toString(true));
-    }
-
+	
+	public DeletedTest()
+	{
+	}
+	
+	@Test
+	public void testDeleted()
+	{
+		Deleted d = new Deleted("deleted text");
+		System.out.println(d.toString(true));
+	}
+	
 }

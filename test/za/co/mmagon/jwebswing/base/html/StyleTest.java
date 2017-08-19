@@ -16,32 +16,32 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class StyleTest
 {
 
-    public StyleTest()
-    {
-    }
+	public StyleTest()
+	{
+	}
 
-    /**
-     * Test of getCSS method, of class Style.
-     */
-    @Test
-    public void testGetCSS()
-    {
-        System.out.println("getCSS");
-        Style s = new Style();
-        s.setCSS(".class");
-        System.out.println(s.toString(true));
-        assertEquals(""
-                + "<style type=\"text/css\">.class</style>", s.toString(true).toString());
-    }
+	/**
+	 * Test of getCSS method, of class Style.
+	 */
+	@Test
+	public void testGetCSS()
+	{
+		System.out.println("getCSS");
+		Style s = new Style();
+		s.setCSS(".class");
+		System.out.println(s.toString(true));
+		assertEquals(""
+				             + "<style type=\"text/css\">.class</style>", s.toString(true).toString());
+	}
 
 }

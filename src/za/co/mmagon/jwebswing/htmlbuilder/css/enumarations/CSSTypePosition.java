@@ -24,12 +24,12 @@ package za.co.mmagon.jwebswing.htmlbuilder.css.enumarations;
  */
 public enum CSSTypePosition
 {
-    Before,
-    Middle,
-    After,
-    Wrap,
-    /**
-     * Sets this field as not set
-     */
-    Unset
+	Before,
+	Middle,
+	After,
+	Wrap,
+	/**
+	 * Sets this field as not set
+	 */
+	Unset
 }

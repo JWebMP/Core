@@ -16,8 +16,6 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import java.io.Serializable;
-import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.attributes.AreaAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
@@ -26,6 +24,9 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.MapChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.logger.LogFactory;
+
+import java.io.Serializable;
+import java.util.logging.Logger;
 
 /**
  * Browser Support<p>
@@ -47,26 +48,24 @@ import za.co.mmagon.logger.LogFactory;
  * <p>
  * In XHTML the area tag must be properly closed.<p>
  *
- * @since 2013/11/22
- * @version 1.0
  * @author MMagon
- *
- *
+ * @version 1.0
+ * @since 2013/11/22
  */
 public class Area<J extends Area<J>>
-        extends ComponentHierarchyBase<AreaChildren, AreaAttributes, GlobalFeatures, GlobalEvents, J>
-        implements MapChildren, Serializable
+		extends ComponentHierarchyBase<AreaChildren, AreaAttributes, GlobalFeatures, GlobalEvents, J>
+		implements MapChildren, Serializable
 {
 
-    private static final Logger LOG = LogFactory.getInstance().getLogger("Area");
-    /**
-     * Serial Version for all Components and their compatibility
-     */
-    private static final long serialVersionUID = 1l;
+	private static final Logger LOG = LogFactory.getInstance().getLogger("Area");
+	/**
+	 * Serial Version for all Components and their compatibility
+	 */
+	private static final long serialVersionUID = 1l;
 
-    public Area()
-    {
-        super(ComponentTypes.Area);
-    }
+	public Area()
+	{
+		super(ComponentTypes.Area);
+	}
 
 }

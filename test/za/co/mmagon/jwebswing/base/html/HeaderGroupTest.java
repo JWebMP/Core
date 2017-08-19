@@ -20,22 +20,21 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class HeaderGroupTest
 {
-
-    public HeaderGroupTest()
-    {
-    }
-
-    @Test
-    public void testHeaderGroup()
-    {
-        Header hg = new Header();
-        System.out.println(hg.toString(true));
-        Assert.assertEquals("<header></header>", hg.toString(true));
-    }
-
+	
+	public HeaderGroupTest()
+	{
+	}
+	
+	@Test
+	public void testHeaderGroup()
+	{
+		Header hg = new Header();
+		System.out.println(hg.toString(true));
+		Assert.assertEquals("<header></header>", hg.toString(true));
+	}
+	
 }

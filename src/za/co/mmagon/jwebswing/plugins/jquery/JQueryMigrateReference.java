@@ -22,22 +22,22 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 /**
  * The JQuery JavaScript Reference
  *
- * @since 2014/12/09
- * @version 1.0
  * @author MMagon
- *
+ * <p>
  * I have moved these from the features to make it easier to specify remote or local references.
- *
+ * @version 1.0
+ * @since 2014/12/09
  */
 public class JQueryMigrateReference extends JavascriptReference
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public JQueryMigrateReference()
-    {
-        super("JQueryMigrate", 1.21, "bower_components/jquery-migrate/jquery-migrate.min.js", "http://code.jquery.com/jquery-migrate-1.4.1.js");
-        setSortOrder(2);
-        setPriority(RequirementsPriority.Second);
-    }
+	public JQueryMigrateReference()
+	{
+		super("JQueryMigrate", 1.21, "bower_components/jquery-migrate/jquery-migrate.min.js", "http://code.jquery.com/jquery-migrate-1.4.1.js");
+		setSortOrder(2);
+		setPriority(RequirementsPriority.Second);
+	}
+
 }

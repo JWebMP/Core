@@ -30,33 +30,36 @@ import za.co.mmagon.jwebswing.utilities.TextUtilities;
  * @author GedMarc
  */
 public class Comment<J extends Comment<J>>
-        extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
-        implements HtmlChildren, HeadChildren, ImageMapChildren, BodyChildren
+		extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+		implements HtmlChildren, HeadChildren, ImageMapChildren, BodyChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Adds the specified comment in a comment block for HTML
-     * <p>
-     * @param comment
-     */
-    public Comment(String comment)
-    {
-        super(ComponentTypes.Comment);
-        setText(comment);
-    }
-
-    /**
-     * Over-rides the render HTML tag
-     * <p>
-     * @param tabCount The specified tab count
-     * <p>
-     * @return A customized string for comments
-     */
-    @Override
-    protected StringBuilder renderHTML(int tabCount)
-    {
-        return !isTiny() ? new StringBuilder(TextUtilities.getTabString(tabCount) + "<!-- " + getText(0) + " -->") : new StringBuilder();
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Adds the specified comment in a comment block for HTML
+	 * <p>
+	 *
+	 * @param comment
+	 */
+	public Comment(String comment)
+	{
+		super(ComponentTypes.Comment);
+		setText(comment);
+	}
+	
+	/**
+	 * Over-rides the render HTML tag
+	 * <p>
+	 *
+	 * @param tabCount The specified tab count
+	 *                 <p>
+	 *
+	 * @return A customized string for comments
+	 */
+	@Override
+	protected StringBuilder renderHTML(int tabCount)
+	{
+		return !isTiny() ? new StringBuilder(TextUtilities.getTabString(tabCount) + "<!-- " + getText(0) + " -->") : new StringBuilder();
+	}
 }

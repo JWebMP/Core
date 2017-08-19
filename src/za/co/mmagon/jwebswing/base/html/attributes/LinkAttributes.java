@@ -46,142 +46,142 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  * HTML5 has some new attributes, and some HTML 4.01 attributes are no longer supported.
  *
  * @author MMagon
- * @since 23 Sep 2013
  * @version 1.1
- *
+ * <p>
  * Updated attributes to full suite
+ * @since 23 Sep 2013
  */
 public enum LinkAttributes implements AttributeDefinitions
 {
-    /**
-     * Not supported in HTML5.
-     * Specifies the character-set of a linked document
-     *
-     * @deprecated
-     */
-    Charset(HTMLVersions.HTML401Transitional),
-    /**
-     * Specifies the coordinates of a link
-     *
-     * @deprecated
-     */
-    Coords(HTMLVersions.HTML401Transitional),
-    /**
-     * Specifies that the target will be downloaded when a user clicks
-     */
-    Download(HTMLVersions.HTML5, true),
-    /**
-     * Specifies the URL of the page the link goes to
-     */
-    HRef,
-    /**
-     * Specifies the language of the linked document
-     */
-    HRefLang,
-    /**
-     * Specifies what media/device the linked document is optimized for
-     */
-    Media,
-    /**
-     * Specifies the name of an anchor
-     * Not Supported in HTML5 use global attribute ID instead
-     *
-     * @deprecated
-     */
-    Name(HTMLVersions.HTML401Transitional),
-    /**
-     * Specifies the relationship between the current document and the linked document
-     */
-    Rel,
-    /**
-     * Not supported in HTML5.
-     *
-     * @deprecated
-     */
-    Rev(HTMLVersions.HTML401Transitional, true),
-    /**
-     * Specifies the shape of a link
-     *
-     * @deprecated
-     */
-    Shape(HTMLVersions.HTML401Transitional),
-    /**
-     * Specifies where to open the linked document
-     */
-    Target,
-    /**
-     * Specifies the media type of the linked document
-     */
-    Type,
-    /**
-     * Sets the toggle
-     */
-    Data_Toggle,
-    /**
-     * Sets the target
-     */
-    Data_Target,;
+	/**
+	 * Not supported in HTML5.
+	 * Specifies the character-set of a linked document
+	 *
+	 * @deprecated
+	 */
+	Charset(HTMLVersions.HTML401Transitional),
+	/**
+	 * Specifies the coordinates of a link
+	 *
+	 * @deprecated
+	 */
+	Coords(HTMLVersions.HTML401Transitional),
+	/**
+	 * Specifies that the target will be downloaded when a user clicks
+	 */
+	Download(HTMLVersions.HTML5, true),
+	/**
+	 * Specifies the URL of the page the link goes to
+	 */
+	HRef,
+	/**
+	 * Specifies the language of the linked document
+	 */
+	HRefLang,
+	/**
+	 * Specifies what media/device the linked document is optimized for
+	 */
+	Media,
+	/**
+	 * Specifies the name of an anchor
+	 * Not Supported in HTML5 use global attribute ID instead
+	 *
+	 * @deprecated
+	 */
+	Name(HTMLVersions.HTML401Transitional),
+	/**
+	 * Specifies the relationship between the current document and the linked document
+	 */
+	Rel,
+	/**
+	 * Not supported in HTML5.
+	 *
+	 * @deprecated
+	 */
+	Rev(HTMLVersions.HTML401Transitional, true),
+	/**
+	 * Specifies the shape of a link
+	 *
+	 * @deprecated
+	 */
+	Shape(HTMLVersions.HTML401Transitional),
+	/**
+	 * Specifies where to open the linked document
+	 */
+	Target,
+	/**
+	 * Specifies the media type of the linked document
+	 */
+	Type,
+	/**
+	 * Sets the toggle
+	 */
+	Data_Toggle,
+	/**
+	 * Sets the target
+	 */
+	Data_Target,;
 
-    private HTMLVersions maxsupportedVersion = HTMLVersions.HTML5;
-    private HTMLVersions minsupportedVersion = HTMLVersions.HTML401Frameset;
-    private Class returnType = String.class;
+	private HTMLVersions maxsupportedVersion = HTMLVersions.HTML5;
+	private HTMLVersions minsupportedVersion = HTMLVersions.HTML401Frameset;
+	private Class returnType = String.class;
 
-    /**
-     * Construct a new "a" tag with all the predefined supported HTML versions
-     */
-    private LinkAttributes()
-    {
-    }
+	/**
+	 * Construct a new "a" tag with all the predefined supported HTML versions
+	 */
+	private LinkAttributes()
+	{
+	}
 
-    private LinkAttributes(HTMLVersions maxsupportedVersion)
-    {
-        this.maxsupportedVersion = maxsupportedVersion;
-    }
+	private LinkAttributes(HTMLVersions maxsupportedVersion)
+	{
+		this.maxsupportedVersion = maxsupportedVersion;
+	}
 
-    private LinkAttributes(HTMLVersions minsupportedVersion, boolean trues)
-    {
-        this.minsupportedVersion = minsupportedVersion;
-    }
+	private LinkAttributes(HTMLVersions minsupportedVersion, boolean trues)
+	{
+		this.minsupportedVersion = minsupportedVersion;
+	}
 
-    private LinkAttributes(HTMLVersions maxsupportedVersion, HTMLVersions minsupportedVersion)
-    {
-        this.maxsupportedVersion = maxsupportedVersion;
-        this.minsupportedVersion = minsupportedVersion;
-    }
+	private LinkAttributes(HTMLVersions maxsupportedVersion, HTMLVersions minsupportedVersion)
+	{
+		this.maxsupportedVersion = maxsupportedVersion;
+		this.minsupportedVersion = minsupportedVersion;
+	}
 
-    private LinkAttributes(Class returnType)
-    {
-        this.returnType = returnType;
-    }
+	private LinkAttributes(Class returnType)
+	{
+		this.returnType = returnType;
+	}
 
-    private LinkAttributes(HTMLVersions maxsupportedVersion, HTMLVersions minsupportedVersion, Class returnType)
-    {
-        this.maxsupportedVersion = maxsupportedVersion;
-        this.minsupportedVersion = minsupportedVersion;
-        this.returnType = returnType;
-    }
+	private LinkAttributes(HTMLVersions maxsupportedVersion, HTMLVersions minsupportedVersion, Class returnType)
+	{
+		this.maxsupportedVersion = maxsupportedVersion;
+		this.minsupportedVersion = minsupportedVersion;
+		this.returnType = returnType;
+	}
 
-    private LinkAttributes(HTMLVersions maxsupportedVersion, Class returnType)
-    {
-        this.maxsupportedVersion = maxsupportedVersion;
-        this.returnType = returnType;
-    }
+	private LinkAttributes(HTMLVersions maxsupportedVersion, Class returnType)
+	{
+		this.maxsupportedVersion = maxsupportedVersion;
+		this.returnType = returnType;
+	}
 
-    private LinkAttributes(HTMLVersions minsupportedVersion, boolean trues, Class returnType)
-    {
-        this.minsupportedVersion = maxsupportedVersion;
-        this.returnType = returnType;
-    }
+	private LinkAttributes(HTMLVersions minsupportedVersion, boolean trues, Class returnType)
+	{
+		this.minsupportedVersion = maxsupportedVersion;
+		this.returnType = returnType;
+	}
 
-   @Override
-    public String toString()
-    {
-        return name().toLowerCase().replace('_', '-');
-    }
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase().replace('_', '-');
+	}
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

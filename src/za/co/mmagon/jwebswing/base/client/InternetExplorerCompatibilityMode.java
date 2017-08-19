@@ -45,91 +45,92 @@ package za.co.mmagon.jwebswing.base.client;
  * follows:.
  *
  * @author MMagon
- * @since 24 Jun 2013
  * @version 1.0
+ * @since 24 Jun 2013
  */
 public enum InternetExplorerCompatibilityMode
 {
 
-    /**
-     * Quirks mode
-     */
-    IE5("IE=5"),
-    /**
-     *
-     * IE7 mode
-     */
-    IE7("IE=7"),
-    /**
-     * IE7 mode (if a valid &lt;!DOCTYPE&gt; declaration is present)
-     * <p>
-     * Quirks mode (otherwise)
-     */
-    EmulateIE7("IE=Emulate7"),
-    /**
-     * Set to IE 8
-     */
-    IE8("IE=8"),
-    /**
-     * IE8 mode (if a valid &lt;!DOCTYPE&gt; declaration is present)
-     * <p>
-     * Quirks mode (otherwise)
-     */
-    EmulateIE8("IE=Emulate8"),
-    /**
-     * Set to run in IE 9 (Or Latest Version)
-     */
-    IE9("IE=9"),
-    /**
-     * IE9 mode (if a valid &lt;!DOCTYPE&gt; declaration is present)
-     * <p>
-     * Quirks mode (otherwise)
-     */
-    EmulateIE9("IE=Emulate9"),
-    /**
-     * IE10 mode
-     */
-    IE10("IE=10"),
-    /**
-     * IE10 mode (if a valid &lt;!DOCTYPE&gt; declaration is present)
-     * <p>
-     * Quirks mode (otherwise)
-     */
-    EmulateIE10("IE=Emulate10"),
-    /**
-     * IE 11 Mode
-     */
-    IE11("IE=11"),
-    /**
-     * IE11 mode (if a valid &lt;!DOCTYPE&gt; declaration is present)
-     * <p>
-     * Quirks mode (otherwise)
-     */
-    EmulateIE11("IE=Emulate11"),
-    /**
-     * The highest supported document mode of the browser
-     */
-    Edge("IE=Edge");
+	/**
+	 * Quirks mode
+	 */
+	IE5("IE=5"),
+	/**
+	 * IE7 mode
+	 */
+	IE7("IE=7"),
+	/**
+	 * IE7 mode (if a valid &lt;!DOCTYPE&gt; declaration is present)
+	 * <p>
+	 * Quirks mode (otherwise)
+	 */
+	EmulateIE7("IE=Emulate7"),
+	/**
+	 * Set to IE 8
+	 */
+	IE8("IE=8"),
+	/**
+	 * IE8 mode (if a valid &lt;!DOCTYPE&gt; declaration is present)
+	 * <p>
+	 * Quirks mode (otherwise)
+	 */
+	EmulateIE8("IE=Emulate8"),
+	/**
+	 * Set to run in IE 9 (Or Latest Version)
+	 */
+	IE9("IE=9"),
+	/**
+	 * IE9 mode (if a valid &lt;!DOCTYPE&gt; declaration is present)
+	 * <p>
+	 * Quirks mode (otherwise)
+	 */
+	EmulateIE9("IE=Emulate9"),
+	/**
+	 * IE10 mode
+	 */
+	IE10("IE=10"),
+	/**
+	 * IE10 mode (if a valid &lt;!DOCTYPE&gt; declaration is present)
+	 * <p>
+	 * Quirks mode (otherwise)
+	 */
+	EmulateIE10("IE=Emulate10"),
+	/**
+	 * IE 11 Mode
+	 */
+	IE11("IE=11"),
+	/**
+	 * IE11 mode (if a valid &lt;!DOCTYPE&gt; declaration is present)
+	 * <p>
+	 * Quirks mode (otherwise)
+	 */
+	EmulateIE11("IE=Emulate11"),
+	/**
+	 * The highest supported document mode of the browser
+	 */
+	Edge("IE=Edge");
 
-    private final String valueString;
+	private final String valueString;
 
-    /**
-     * The constructor accepting the values for the X-UA-Compatible value.
-     * <p>
-     * @param valueString
-     */
-    private InternetExplorerCompatibilityMode(String valueString)
-    {
-        this.valueString = valueString;
-    }
+	/**
+	 * The constructor accepting the values for the X-UA-Compatible value.
+	 * <p>
+	 *
+	 * @param valueString
+	 */
+	private InternetExplorerCompatibilityMode(String valueString)
+	{
+		this.valueString = valueString;
+	}
 
-    /**
-     * The value that must be inside the compatible set
-     * <p>
-     * @return A string of the value that must be in the X-UA-Compatible string
-     */
-    public String getValue()
-    {
-        return valueString;
-    }
+	/**
+	 * The value that must be inside the compatible set
+	 * <p>
+	 *
+	 * @return A string of the value that must be in the X-UA-Compatible string
+	 */
+	public String getValue()
+	{
+		return valueString;
+	}
 }

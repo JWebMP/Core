@@ -18,7 +18,9 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -43,26 +45,26 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;s&gt; element is redefined in HTML5, and is now used to define text that is no longer correct.<p>
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
- * @since Mar 1, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
- *
+ * @since Mar 1, 2015
  */
 public class S<J extends S<J>>
-        extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements ParagraphChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag
+		extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ParagraphChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a new instance of S
-     */
-    public S()
-    {
-        super(ComponentTypes.S);
-    }
+	/**
+	 * Constructs a new instance of S
+	 */
+	public S()
+	{
+		super(ComponentTypes.S);
+	}
 }

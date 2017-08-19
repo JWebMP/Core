@@ -39,28 +39,29 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;embed&gt; tag is new in HTML5, and will validate in an HTML5 page. However, if you use it in an HTML 4 page, the page will not validate.
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
+ * @author GedMarc
  * @since 2014/12/21
  */
 public class Embed<J extends Embed<J>>
-        extends Component<NoChildren, EmbedAttributes, GlobalFeatures, GlobalEvents, J>
-        implements NoClosingTag
+		extends Component<NoChildren, EmbedAttributes, GlobalFeatures, GlobalEvents, J>
+		implements NoClosingTag
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs an embedded content type with the media type and source specified
-     *
-     * @param source
-     * @param mediaType
-     */
-    public Embed(String source, String mediaType)
-    {
-        super(ComponentTypes.Embed);
-        addAttribute(EmbedAttributes.Src, source);
-        addAttribute(EmbedAttributes.Type, mediaType);
-    }
+	/**
+	 * Constructs an embedded content type with the media type and source specified
+	 *
+	 * @param source
+	 * @param mediaType
+	 */
+	public Embed(String source, String mediaType)
+	{
+		super(ComponentTypes.Embed);
+		addAttribute(EmbedAttributes.Src, source);
+		addAttribute(EmbedAttributes.Type, mediaType);
+	}
 }

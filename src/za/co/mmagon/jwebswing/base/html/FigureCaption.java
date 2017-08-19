@@ -18,7 +18,10 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.FigureChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -36,21 +39,23 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;figcaption&gt; tag is new in HTML5.
  * <p>
- * @author GedMarc
+ *
  * @param <J>
+ *
+ * @author GedMarc
  */
 public class FigureCaption<J extends FigureCaption<J>>
-        extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
-        implements NoNewLineBeforeClosingTag, NoNewLineForRawText, FigureChildren
+		extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, FigureChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Defines a new Figure Captions
-     */
-    public FigureCaption()
-    {
-        super(ComponentTypes.FigureCaption);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Defines a new Figure Captions
+	 */
+	public FigureCaption()
+	{
+		super(ComponentTypes.FigureCaption);
+	}
 }

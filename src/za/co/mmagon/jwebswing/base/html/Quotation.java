@@ -18,7 +18,9 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.QuotationAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
@@ -42,28 +44,27 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * NONE.
  *
- * @author GedMarc
  * @param <J>
  *
- * @since Mar 1, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
- *
+ * @since Mar 1, 2015
  */
 public class Quotation<J extends Quotation<J>>
-        extends Component<NoChildren, QuotationAttributes, GlobalFeatures, GlobalEvents, J>
-        implements ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
+		extends Component<NoChildren, QuotationAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new Quotation
-     *
-     * @param text Specifies the quotation text
-     */
-    public Quotation(String text)
-    {
-        super(ComponentTypes.Quotation);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new Quotation
+	 *
+	 * @param text Specifies the quotation text
+	 */
+	public Quotation(String text)
+	{
+		super(ComponentTypes.Quotation);
+	}
 }

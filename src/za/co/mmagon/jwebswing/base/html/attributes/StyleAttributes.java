@@ -25,23 +25,23 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum StyleAttributes implements AttributeDefinitions
 {
-    /**
-     * Specifies what media/device the media resource is optimized for
-     */
-    Media,
-    /**
-     * Specifies that the style only applies to this elements parent element and the
-     * elements child elements
-     */
-    Scoped,
-    /**
-     * Specifies the MIME Type of the style sheet
-     */
-    Type;
+	/**
+	 * Specifies what media/device the media resource is optimized for
+	 */
+	Media,
+	/**
+	 * Specifies that the style only applies to this elements parent element and the
+	 * elements child elements
+	 */
+	Scoped,
+	/**
+	 * Specifies the MIME Type of the style sheet
+	 */
+	Type;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

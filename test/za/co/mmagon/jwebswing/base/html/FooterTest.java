@@ -16,27 +16,27 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class FooterTest
 {
 
-    public FooterTest()
-    {
-    }
+	public FooterTest()
+	{
+	}
 
-    @Test
-    public void testFooter()
-    {
-        Footer f = new Footer();
-        System.out.println(f.toString(true));
-        assertEquals(""
-                + "<footer></footer>", f.toString(true).toString());
-    }
+	@Test
+	public void testFooter()
+	{
+		Footer f = new Footer();
+		System.out.println(f.toString(true));
+		assertEquals(""
+				             + "<footer></footer>", f.toString(true).toString());
+	}
 
 }

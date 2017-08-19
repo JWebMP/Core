@@ -16,27 +16,27 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class WordBreakTest
 {
-
-    public WordBreakTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        WordBreak wb = WordBreak.wordBreak;
-        System.out.println(wb.toString(true));
-        assertEquals(""
-                + "<wbr></wbr>", wb.toString(true).toString());
-    }
-
+	
+	public WordBreakTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		WordBreak wb = WordBreak.wordBreak;
+		System.out.println(wb.toString(true));
+		assertEquals(""
+				             + "<wbr></wbr>", wb.toString(true).toString());
+	}
+	
 }

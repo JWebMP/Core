@@ -16,11 +16,12 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.text;
 
-import za.co.mmagon.jwebswing.base.client.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
+import za.co.mmagon.jwebswing.base.client.CSSVersions;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSDetail;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationAdapter;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationClass;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
 
 /**
  * Defines text shadows
@@ -31,102 +32,104 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 public class TextShadowsCSSImpl extends CSSImplementationAdapter<TextShadows, TextShadowsCSSImpl> implements CSSImplementationClass<TextShadows, TextShadowsCSSImpl>
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @CSSDetail(cssName = "h-shadow", cssVersion = CSSVersions.CSS21)
-    private MeasurementCSSImpl hShadow;
-    @CSSDetail(cssName = "v-shadow", cssVersion = CSSVersions.CSS21)
-    private MeasurementCSSImpl vShadow;
-    @CSSDetail(cssName = "blur-radius", cssVersion = CSSVersions.CSS21)
-    private MeasurementCSSImpl blurRadius;
-    @CSSDetail(cssName = "color", cssVersion = CSSVersions.CSS21)
-    private ColourCSSImpl color;
+	@CSSDetail(cssName = "h-shadow", cssVersion = CSSVersions.CSS21)
+	private MeasurementCSSImpl hShadow;
+	@CSSDetail(cssName = "v-shadow", cssVersion = CSSVersions.CSS21)
+	private MeasurementCSSImpl vShadow;
+	@CSSDetail(cssName = "blur-radius", cssVersion = CSSVersions.CSS21)
+	private MeasurementCSSImpl blurRadius;
+	@CSSDetail(cssName = "color", cssVersion = CSSVersions.CSS21)
+	private ColourCSSImpl color;
 
-    /**
-     * Constructs a new text shadow instance
-     */
-    public TextShadowsCSSImpl()
-    {
-    }
+	/**
+	 * Constructs a new text shadow instance
+	 */
+	public TextShadowsCSSImpl()
+	{
+	}
 
-    /**
-     * Required. The position of the horizontal shadow. Negative values are allowed
-     *
-     * @return
-     */
-    public MeasurementCSSImpl getHShadow()
-    {
-        return hShadow;
-    }
+	/**
+	 * Required. The position of the horizontal shadow. Negative values are allowed
+	 *
+	 * @return
+	 */
+	public MeasurementCSSImpl getHShadow()
+	{
+		return hShadow;
+	}
 
-    /**
-     * Required. The position of the vertical shadow. Negative values are allowed
-     *
-     * @return
-     */
-    public MeasurementCSSImpl getVShadow()
-    {
-        return vShadow;
-    }
+	/**
+	 * Required. The position of the vertical shadow. Negative values are allowed
+	 *
+	 * @return
+	 */
+	public MeasurementCSSImpl getVShadow()
+	{
+		return vShadow;
+	}
 
-    /**
-     * Optional. The blur radius. Default value is 0
-     *
-     * @return
-     */
-    public MeasurementCSSImpl getBlurRadius()
-    {
-        return blurRadius;
-    }
+	/**
+	 * Optional. The blur radius. Default value is 0
+	 *
+	 * @return
+	 */
+	public MeasurementCSSImpl getBlurRadius()
+	{
+		return blurRadius;
+	}
 
-    /**
-     * Sets the colour
-     *
-     * @return
-     */
-    public ColourCSSImpl getColour()
-    {
-        return color;
-    }
+	/**
+	 * Sets the blur radius Default is 0
+	 *
+	 * @param blurRadius
+	 */
+	public void setBlurRadius(MeasurementCSSImpl blurRadius)
+	{
+		this.blurRadius = blurRadius;
+	}
 
-    /**
-     * Required. The position of the horizontal shadow. Negative values are allowed
-     * <p>
-     * @param hShadow
-     */
-    public void sethShadow(MeasurementCSSImpl hShadow)
-    {
-        this.hShadow = hShadow;
-    }
+	/**
+	 * Sets the colour
+	 *
+	 * @return
+	 */
+	public ColourCSSImpl getColour()
+	{
+		return color;
+	}
 
-    /**
-     * Required. The position of the vertical shadow. Negative values are allowed
-     * <p>
-     * @param vShadow
-     */
-    public void setvShadow(MeasurementCSSImpl vShadow)
-    {
-        this.vShadow = vShadow;
-    }
+	/**
+	 * Set the colour
+	 *
+	 * @param Color
+	 */
+	public void setColour(ColourCSSImpl Color)
+	{
+		this.color = Color;
+	}
 
-    /**
-     * Sets the blur radius Default is 0
-     *
-     * @param blurRadius
-     */
-    public void setBlurRadius(MeasurementCSSImpl blurRadius)
-    {
-        this.blurRadius = blurRadius;
-    }
+	/**
+	 * Required. The position of the horizontal shadow. Negative values are allowed
+	 * <p>
+	 *
+	 * @param hShadow
+	 */
+	public void sethShadow(MeasurementCSSImpl hShadow)
+	{
+		this.hShadow = hShadow;
+	}
 
-    /**
-     * Set the colour
-     *
-     * @param Color
-     */
-    public void setColour(ColourCSSImpl Color)
-    {
-        this.color = Color;
-    }
+	/**
+	 * Required. The position of the vertical shadow. Negative values are allowed
+	 * <p>
+	 *
+	 * @param vShadow
+	 */
+	public void setvShadow(MeasurementCSSImpl vShadow)
+	{
+		this.vShadow = vShadow;
+	}
 
 }

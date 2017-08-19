@@ -17,7 +17,9 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
@@ -41,38 +43,40 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * Use &gt;input&lt; to create buttons in an HTML form.<p>
  * Differences Between HTML 4.01 and HTML5 &gt;p&lt; HTML5 has the following new attributes: autofocus, form, formaction, formenctype, formmethod, formnovalidate, and formtarget. &gt;p&lt;
  * <p>
- * @author Marc Magon
+ *
  * @param <C>
  * @param <J>
  * @param <A>
  * @param <F>
  * @param <E>
  *
+ * @author Marc Magon
  * @since 2014/12/20
  */
 public class Button<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Button<C, A, F, E, J>>
-        extends Component<C, A, F, E, J>
-        implements GlobalChildren
+		extends Component<C, A, F, E, J>
+		implements GlobalChildren
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a new button object with no text
-     */
-    public Button()
-    {
-        this("");
-    }
+	/**
+	 * Constructs a new button object with no text
+	 */
+	public Button()
+	{
+		this("");
+	}
 
-    /**
-     * Constructs a new button object with the given text
-     * <p>
-     * @param text The text to show on the button
-     */
-    public Button(String text)
-    {
-        super(ComponentTypes.Button);
-        setText(text);
-    }
+	/**
+	 * Constructs a new button object with the given text
+	 * <p>
+	 *
+	 * @param text The text to show on the button
+	 */
+	public Button(String text)
+	{
+		super(ComponentTypes.Button);
+		setText(text);
+	}
 }

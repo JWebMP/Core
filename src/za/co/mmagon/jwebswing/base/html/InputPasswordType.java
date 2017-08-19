@@ -20,21 +20,21 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputPasswordTypeAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 
 /**
+ * @param <J>
  *
  * @author GedMarc
- * @param <J>
  */
 public class InputPasswordType<J extends InputPasswordType<J>>
-        extends Input<InputPasswordTypeAttributes, J>
+		extends Input<InputPasswordTypeAttributes, J>
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new button with the given text
-     */
-    public InputPasswordType()
-    {
-        super(InputTypes.Password);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new button with the given text
+	 */
+	public InputPasswordType()
+	{
+		super(InputTypes.Password);
+	}
 }

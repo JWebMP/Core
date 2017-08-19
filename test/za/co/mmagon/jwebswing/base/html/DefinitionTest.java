@@ -20,22 +20,21 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class DefinitionTest
 {
-
-    public DefinitionTest()
-    {
-    }
-
-    @Test
-    public void testDefinition()
-    {
-        Definition d = new Definition("HTML");
-        System.out.println(d.toString(true));
-        Assert.assertEquals("<dfn>HTML</dfn>", d.toString(true).toString());
-    }
-
+	
+	public DefinitionTest()
+	{
+	}
+	
+	@Test
+	public void testDefinition()
+	{
+		Definition d = new Definition("HTML");
+		System.out.println(d.toString(true));
+		Assert.assertEquals("<dfn>HTML</dfn>", d.toString(true).toString());
+	}
+	
 }

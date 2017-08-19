@@ -20,21 +20,21 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputHiddenTypeAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 
 /**
+ * @param <J>
  *
  * @author GedMarc
- * @param <J>
  */
 public class InputHiddenType<J extends InputHiddenType<J>>
-        extends Input<InputHiddenTypeAttributes, J>
+		extends Input<InputHiddenTypeAttributes, J>
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new button with the given text
-     */
-    public InputHiddenType()
-    {
-        super(InputTypes.Hidden);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new button with the given text
+	 */
+	public InputHiddenType()
+	{
+		super(InputTypes.Hidden);
+	}
 }

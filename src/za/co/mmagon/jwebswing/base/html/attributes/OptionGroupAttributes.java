@@ -19,21 +19,20 @@ package za.co.mmagon.jwebswing.base.html.attributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 
 /**
- *
  * @author GedMarc
- * @since Feb 9, 2015
  * @version 1.0
+ * @since Feb 9, 2015
  */
 public enum OptionGroupAttributes implements AttributeDefinitions
 {
-    /**
-     * Specifies the label for an option group
-     */
-    Label,;
+	/**
+	 * Specifies the label for an option group
+	 */
+	Label,;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

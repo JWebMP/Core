@@ -19,7 +19,6 @@ package za.co.mmagon.jwebswing.base.html.interfaces.children;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 
 /**
- *
  * @author MMagon
  */
 public interface TableRowChildren extends GlobalChildren

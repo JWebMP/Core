@@ -19,21 +19,20 @@ package za.co.mmagon.jwebswing.base.html;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class FieldSetTest
 {
-    
-    public FieldSetTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        FieldSet fs = new FieldSet();
-        System.out.println(fs.toString(true));
-    }
-    
+	
+	public FieldSetTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		FieldSet fs = new FieldSet();
+		System.out.println(fs.toString(true));
+	}
+	
 }

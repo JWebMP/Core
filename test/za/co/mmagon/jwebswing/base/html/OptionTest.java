@@ -17,24 +17,22 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
- *
  * @author GedMarc
  */
 public class OptionTest
 {
-    
-    public OptionTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        Option o = new Option("oo");
-        System.out.println(o.toString(true).toString());
-    }
-    
+	
+	public OptionTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		Option o = new Option("oo");
+		System.out.println(o.toString(true).toString());
+	}
+	
 }

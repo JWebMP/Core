@@ -19,20 +19,19 @@ package za.co.mmagon.jwebswing.base;
 import org.junit.Test;
 
 /**
- *
  * @author ged_m
  */
 public class ComponentHTMLAngularBaseTest
 {
 
-    public ComponentHTMLAngularBaseTest()
-    {
-    }
+	public ComponentHTMLAngularBaseTest()
+	{
+	}
 
-    @Test
-    public void testAngularFields()
-    {
+	@Test
+	public void testAngularFields()
+	{
 
-    }
+	}
 
 }

@@ -23,25 +23,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author GedMarc
  * @since 06 Feb 2017
- *
  */
 public class DateUtils
 {
-
-    public static Date EndOfTime;
-
-    static
-    {
-        try
-        {
-            EndOfTime = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").parse("2999/12/31 11:59:59");
-        }
-        catch (ParseException ex)
-        {
-            Logger.getLogger(DateUtils.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+	
+	public static Date EndOfTime;
+	
+	static
+	{
+		try
+		{
+			EndOfTime = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").parse("2999/12/31 11:59:59");
+		}
+		catch (ParseException ex)
+		{
+			Logger.getLogger(DateUtils.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 }

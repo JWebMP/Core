@@ -17,24 +17,22 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
- *
  * @author GedMarc
  */
 public class InputSubmitTypeTest
 {
-    
-    public InputSubmitTypeTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        InputSubmitType instance = new InputSubmitType();
-        System.out.println(instance.toString(true));
-    }
-    
+	
+	public InputSubmitTypeTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		InputSubmitType instance = new InputSubmitType();
+		System.out.println(instance.toString(true));
+	}
+	
 }

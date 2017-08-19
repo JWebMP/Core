@@ -16,28 +16,28 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class TableFooterGroupTest
 {
-
-    public TableFooterGroupTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        TableFooterGroup tf = new TableFooterGroup();
-        tf.setID("id");
-        System.out.println(tf.toString(true).toString());
-        assertEquals(""
-                + "<tfoot id=\"id\"></tfoot>", tf.toString(true).toString());
-    }
-
+	
+	public TableFooterGroupTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		TableFooterGroup tf = new TableFooterGroup();
+		tf.setID("id");
+		System.out.println(tf.toString(true).toString());
+		assertEquals(""
+				             + "<tfoot id=\"id\"></tfoot>", tf.toString(true).toString());
+	}
+	
 }

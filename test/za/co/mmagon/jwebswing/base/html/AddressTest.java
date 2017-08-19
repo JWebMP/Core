@@ -20,23 +20,22 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- *
  * @author MMagon
  */
 public class AddressTest
 {
-
-    public AddressTest()
-    {
-    }
-
-    @Test
-    public void testAddress()
-    {
-        Address addr = new Address("This is an address");
-        addr.setID("id");
-        System.out.println(addr.toString(true));
-        Assert.assertEquals("<addr id=\"id\">This is an address</addr>", addr.toString(true));
-    }
-
+	
+	public AddressTest()
+	{
+	}
+	
+	@Test
+	public void testAddress()
+	{
+		Address addr = new Address("This is an address");
+		addr.setID("id");
+		System.out.println(addr.toString(true));
+		Assert.assertEquals("<addr id=\"id\">This is an address</addr>", addr.toString(true));
+	}
+	
 }

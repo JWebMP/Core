@@ -24,49 +24,49 @@ package za.co.mmagon.jwebswing.base.servlets.enumarations;
  */
 public enum RequirementsPriority implements Comparable<RequirementsPriority>
 {
-    /**
-     * Loads it at the top (in the head)
-     */
-    Top_Shelf,
-    /**
-     * Run in First Group
-     */
-    First,
-    /**
-     * Run in Second Group
-     */
-    Second,
-    /**
-     * Run in Third Group
-     */
-    Third,
-    /**
-     * Run in Fourth Group
-     */
-    Fourth,
-    /**
-     * Run in Fifth Group
-     */
-    Fifth,
-    /**
-     * Somewhere in the middle, sorted, but who cares
-     */
-    DontCare,
-    /**
-     * Somewhere after the don't care section
-     */
-    Last,
-    /**
-     * The very last section. Usually at the end of the page, before or at the scripts section of body
-     */
-    VeryLast,
-    /**
-     * After all the dynamic scripts, just before body close tag
-     */
-    StoneLast;
-
-    private RequirementsPriority()
-    {
-    }
-
+	/**
+	 * Loads it at the top (in the head)
+	 */
+	Top_Shelf,
+	/**
+	 * Run in First Group
+	 */
+	First,
+	/**
+	 * Run in Second Group
+	 */
+	Second,
+	/**
+	 * Run in Third Group
+	 */
+	Third,
+	/**
+	 * Run in Fourth Group
+	 */
+	Fourth,
+	/**
+	 * Run in Fifth Group
+	 */
+	Fifth,
+	/**
+	 * Somewhere in the middle, sorted, but who cares
+	 */
+	DontCare,
+	/**
+	 * Somewhere after the don't care section
+	 */
+	Last,
+	/**
+	 * The very last section. Usually at the end of the page, before or at the scripts section of body
+	 */
+	VeryLast,
+	/**
+	 * After all the dynamic scripts, just before body close tag
+	 */
+	StoneLast;
+	
+	private RequirementsPriority()
+	{
+	}
+	
 }

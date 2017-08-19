@@ -18,7 +18,10 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -41,33 +44,35 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * Tip: You can also use the CSS "font-weight" property to set bold text.<p>
  * <p>
- * @author Marc Magon
+ *
  * @param <J>
+ *
+ * @author Marc Magon
  */
 public class Bold<J extends Bold<J>>
-        extends Component<Component, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag
+		extends Component<Component, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a bold section of text
-     */
-    public Bold()
-    {
-        this("");
-        setTiny(true);
-    }
+	/**
+	 * Constructs a bold section of text
+	 */
+	public Bold()
+	{
+		this("");
+		setTiny(true);
+	}
 
-    /**
-     * Specifies the text as bold
-     *
-     * @param text
-     */
-    public Bold(String text)
-    {
-        super(ComponentTypes.Bold);
-        setText(text);
-    }
+	/**
+	 * Specifies the text as bold
+	 *
+	 * @param text
+	 */
+	public Bold(String text)
+	{
+		super(ComponentTypes.Bold);
+		setText(text);
+	}
 }

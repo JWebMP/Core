@@ -19,43 +19,42 @@ package za.co.mmagon.jwebswing.base.html;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class DivTest
 {
 
-    public DivTest()
-    {
-    }
+	public DivTest()
+	{
+	}
 
-    /**
-     * Test of getLayout method, of class Div.
-     */
-    @Test
-    public void testGetLayout()
-    {
-        Div d = new Div();
-        d.setID("id");
-        System.out.println(d.toString(true));
-    }
+	/**
+	 * Test of getLayout method, of class Div.
+	 */
+	@Test
+	public void testGetLayout()
+	{
+		Div d = new Div();
+		d.setID("id");
+		System.out.println(d.toString(true));
+	}
 
-    /**
-     * Test of setLayout method, of class Div.
-     */
-    @Test
-    public void testSetLayout()
-    {
-        Div d = new Div();
-        System.out.println(d.toString(true));
-    }
+	/**
+	 * Test of setLayout method, of class Div.
+	 */
+	@Test
+	public void testSetLayout()
+	{
+		Div d = new Div();
+		System.out.println(d.toString(true));
+	}
 
-    /**
-     * Test of setText method, of class Div.
-     */
-    @Test
-    public void testSetRawText()
-    {
-    }
+	/**
+	 * Test of setText method, of class Div.
+	 */
+	@Test
+	public void testSetRawText()
+	{
+	}
 
 }

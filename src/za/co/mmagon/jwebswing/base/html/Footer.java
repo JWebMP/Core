@@ -43,21 +43,23 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;footer&gt; tag is new in HTML5.
  * <p>
- * @author GedMarc
+ *
  * @param <J>
+ *
+ * @author GedMarc
  */
 public class Footer<J extends Footer<J>>
-        extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements AddressChildren, NoIDTag
+		extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements AddressChildren, NoIDTag
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Construct a new instance of a footer
-     */
-    public Footer()
-    {
-        super(ComponentTypes.Footer);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Construct a new instance of a footer
+	 */
+	public Footer()
+	{
+		super(ComponentTypes.Footer);
+	}
 }

@@ -20,21 +20,21 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputResetTypeAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 
 /**
+ * @param <J>
  *
  * @author GedMarc
- * @param <J>
  */
 public class InputResetType<J extends InputResetType<J>>
-        extends Input<InputResetTypeAttributes, J>
+		extends Input<InputResetTypeAttributes, J>
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new check box
-     */
-    public InputResetType()
-    {
-        super(InputTypes.Reset);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new check box
+	 */
+	public InputResetType()
+	{
+		super(InputTypes.Reset);
+	}
 }

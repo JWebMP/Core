@@ -19,18 +19,17 @@ package za.co.mmagon.jwebswing.base.html.attributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 
 /**
- *
  * @author GedMarc
  */
 public enum CodeAttributes implements AttributeDefinitions
 {
 
-    ;
+	;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 
 }

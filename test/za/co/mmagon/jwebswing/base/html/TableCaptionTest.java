@@ -20,24 +20,23 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class TableCaptionTest
 {
-
-    public TableCaptionTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        TableCaption tc = new TableCaption("caption");
-        tc.setID("id");
-        System.out.println(tc.toString(true));
-        Assert.assertEquals(""
-                + "<caption id=\"id\">caption</caption>", tc.toString(true).toString());
-    }
-
+	
+	public TableCaptionTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		TableCaption tc = new TableCaption("caption");
+		tc.setID("id");
+		System.out.println(tc.toString(true));
+		Assert.assertEquals(""
+				                    + "<caption id=\"id\">caption</caption>", tc.toString(true).toString());
+	}
+	
 }

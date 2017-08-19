@@ -22,6 +22,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTy
 
 /**
  * Basic set of event options
+ *
  * @author GedMarc
  * @since 07 Feb 2016
  * @deprecated
@@ -29,39 +30,39 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTy
 public class EventOptions extends JavaScriptPart
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private EventTypes eventType;
-    private JavascriptFunction valueFunction;
+	private EventTypes eventType;
+	private JavascriptFunction valueFunction;
 
-    public EventOptions()
-    {
-    }
+	public EventOptions()
+	{
+	}
 
-    @Override
-    public String toString()
-    {
-        return "";
-    }
+	@Override
+	public String toString()
+	{
+		return "";
+	}
 
-    public EventTypes getEventType()
-    {
-        return eventType;
-    }
+	public EventTypes getEventType()
+	{
+		return eventType;
+	}
 
-    public void setEventType(EventTypes eventType)
-    {
-        this.eventType = eventType;
-    }
+	public void setEventType(EventTypes eventType)
+	{
+		this.eventType = eventType;
+	}
 
-    public JavascriptFunction getValueFunction()
-    {
-        return valueFunction;
-    }
+	public JavascriptFunction getValueFunction()
+	{
+		return valueFunction;
+	}
 
-    public void setValueFunction(JavascriptFunction valueFunction)
-    {
-        this.valueFunction = valueFunction;
-    }
+	public void setValueFunction(JavascriptFunction valueFunction)
+	{
+		this.valueFunction = valueFunction;
+	}
 
 }

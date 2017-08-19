@@ -22,8 +22,8 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
  * Valid table children implements this class
  *
  * @author MMagon
- * @since 23 Sep 2013
  * @version 1.0
+ * @since 23 Sep 2013
  */
 public interface TableChildren extends GlobalChildren
 {

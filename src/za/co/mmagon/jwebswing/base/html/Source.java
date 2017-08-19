@@ -20,7 +20,9 @@ import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.SourceAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoClosingTag;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.AudioChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.VideoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
@@ -45,26 +47,26 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * Differences Between HTML 4.01 and HTML5<p>
  * <p>
  * The &lt;source&gt; tag is new in HTML5.<p>
- * @author GedMarc
+ *
  * @param <J>
  *
- * @since Mar 1, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
- *
+ * @since Mar 1, 2015
  */
 public class Source<J extends Source<J>>
-        extends Component<NoChildren, SourceAttributes, NoFeatures, NoEvents, J>
-        implements AudioChildren, VideoChildren, NoClosingTag
+		extends Component<NoChildren, SourceAttributes, NoFeatures, NoEvents, J>
+		implements AudioChildren, VideoChildren, NoClosingTag
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new source tag
-     */
-    public Source()
-    {
-        super(ComponentTypes.Source);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new source tag
+	 */
+	public Source()
+	{
+		super(ComponentTypes.Source);
+	}
 }

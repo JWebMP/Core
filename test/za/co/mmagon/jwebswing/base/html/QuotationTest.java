@@ -16,28 +16,28 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class QuotationTest
 {
-
-    public QuotationTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        Quotation q = new Quotation("q");
-        q.setID("id");
-        System.out.println(q.toString(true));
-        assertEquals(""
-                + "<q id=\"id\"></q>", q.toString(true).toString());
-    }
-
+	
+	public QuotationTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		Quotation q = new Quotation("q");
+		q.setID("id");
+		System.out.println(q.toString(true));
+		assertEquals(""
+				             + "<q id=\"id\"></q>", q.toString(true).toString());
+	}
+	
 }

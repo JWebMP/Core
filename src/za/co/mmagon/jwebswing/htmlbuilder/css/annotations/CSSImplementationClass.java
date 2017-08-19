@@ -16,28 +16,31 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.annotations;
 
-import com.fasterxml.jackson.annotation.*;
-import java.io.*;
-import java.lang.annotation.*;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import java.io.Serializable;
+import java.lang.annotation.Annotation;
 
 /**
  * Defines a class as a CSS Implementation Class
  *
- * @author GedMarc
  * @param <A> From Annotation Type
  * @param <I> To Implementation Type, usually this
+ *
+ * @author GedMarc
  */
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public interface CSSImplementationClass<A extends Annotation, I extends CSSImplementationClass> extends Serializable
 {
-
-    /**
-     * Returns this implementation from a given annotation
-     *
-     * @param annotation The annotation to read from
-     *
-     * @return
-     */
-    public I fromAnnotation(A annotation);
+	
+	/**
+	 * Returns this implementation from a given annotation
+	 *
+	 * @param annotation The annotation to read from
+	 *
+	 * @return
+	 */
+	public I fromAnnotation(A annotation);
 }

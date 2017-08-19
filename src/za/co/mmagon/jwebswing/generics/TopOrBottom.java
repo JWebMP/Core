@@ -24,44 +24,44 @@ package za.co.mmagon.jwebswing.generics;
  */
 public enum TopOrBottom
 {
-    Top,
-    Bottom;
-    /**
-     * Any sub data
-     */
-    private String data;
-
-    /**
-     * A new LeftOrRight
-     */
-    private TopOrBottom()
-    {
-
-    }
-
-    /**
-     * A new LeftOrRight with data
-     */
-    private TopOrBottom(String data)
-    {
-
-    }
-
-    /**
-     * Returns the name or the data contained within
-     *
-     * @return
-     */
-    @Override
-    public String toString()
-    {
-        if (data != null && !data.isEmpty())
-        {
-            return data;
-        }
-        else
-        {
-            return name().toLowerCase();
-        }
-    }
+	Top,
+	Bottom;
+	/**
+	 * Any sub data
+	 */
+	private String data;
+	
+	/**
+	 * A new LeftOrRight
+	 */
+	private TopOrBottom()
+	{
+	
+	}
+	
+	/**
+	 * A new LeftOrRight with data
+	 */
+	private TopOrBottom(String data)
+	{
+	
+	}
+	
+	/**
+	 * Returns the name or the data contained within
+	 *
+	 * @return
+	 */
+	@Override
+	public String toString()
+	{
+		if (data != null && !data.isEmpty())
+		{
+			return data;
+		}
+		else
+		{
+			return name().toLowerCase();
+		}
+	}
 }

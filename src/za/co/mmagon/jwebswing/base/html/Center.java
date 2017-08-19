@@ -35,45 +35,47 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The center tag is not supported in HTML5.
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
+ * @author GedMarc
  * @deprecated
  */
 public class Center<J extends Center<J>>
-        extends Component<GlobalChildren, NoAttributes, NoFeatures, NoEvents, J>
-        implements NoIDTag, NoClassAttribute, NoNewLineBeforeClosingTag, NoNewLineForRawText
+		extends Component<GlobalChildren, NoAttributes, NoFeatures, NoEvents, J>
+		implements NoIDTag, NoClassAttribute, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
-
-    private static final Center center = new Center();
-    private static final long serialVersionUID = 1L;
-
-    /**
-     *
-     * Constructs a new center placement. Better to use the static option
-     */
-    private Center()
-    {
-        super(ComponentTypes.Center);
-    }
-
-    /**
-     * Return a center placement object
-     * <p>
-     * @return
-     */
-    public static Center getCenter()
-    {
-        return center;
-    }
-
-    /**
-     * Returns a new instance of the center object. Better to reference the static field.
-     * <p>
-     * @return
-     */
-    public static Center getNewInstance()
-    {
-        return new Center();
-    }
+	
+	private static final Center center = new Center();
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new center placement. Better to use the static option
+	 */
+	private Center()
+	{
+		super(ComponentTypes.Center);
+	}
+	
+	/**
+	 * Return a center placement object
+	 * <p>
+	 *
+	 * @return
+	 */
+	public static Center getCenter()
+	{
+		return center;
+	}
+	
+	/**
+	 * Returns a new instance of the center object. Better to reference the static field.
+	 * <p>
+	 *
+	 * @return
+	 */
+	public static Center getNewInstance()
+	{
+		return new Center();
+	}
 }

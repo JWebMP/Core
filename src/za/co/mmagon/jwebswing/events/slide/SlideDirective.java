@@ -28,27 +28,27 @@ import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 public class SlideDirective extends AngularDirectiveBase
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a new right click directive based on the angular object passed in
-     * <p>
-     * <p>
-     */
-    public SlideDirective()
-    {
-        super("ngSlide");
-    }
+	/**
+	 * Constructs a new right click directive based on the angular object passed in
+	 * <p>
+	 * <p>
+	 */
+	public SlideDirective()
+	{
+		super("ngSlide");
+	}
 
-    /**
-     * Renders the right click directive from the JavaScript file
-     *
-     * @return
-     */
-    @Override
-    public String renderFunction()
-    {
-        return FileTemplates.getFileTemplate(SlideDirective.class, "Slide").toString();
-    }
+	/**
+	 * Renders the right click directive from the JavaScript file
+	 *
+	 * @return
+	 */
+	@Override
+	public String renderFunction()
+	{
+		return FileTemplates.getFileTemplate(SlideDirective.class, "Slide").toString();
+	}
 
 }

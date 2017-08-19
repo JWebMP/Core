@@ -27,16 +27,16 @@ import za.co.mmagon.jwebswing.base.angular.AngularReferenceBase;
 public abstract class AngularDirectiveBase extends AngularReferenceBase
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a directive with this name that always sorts default
-     *
-     * @param directiveName This modules name
-     */
-    public AngularDirectiveBase(String directiveName)
-    {
-        super(directiveName);
-    }
+	/**
+	 * Constructs a directive with this name that always sorts default
+	 *
+	 * @param directiveName This modules name
+	 */
+	public AngularDirectiveBase(String directiveName)
+	{
+		super(directiveName);
+	}
 
 }

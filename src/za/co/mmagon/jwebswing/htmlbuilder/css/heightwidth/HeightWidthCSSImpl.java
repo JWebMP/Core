@@ -16,325 +16,337 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.heightwidth;
 
-import za.co.mmagon.jwebswing.base.client.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
+import za.co.mmagon.jwebswing.base.client.CSSVersions;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSDetail;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationAdapter;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationClass;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementTypes;
 
 /**
- *
  * @author GedMarc
  * @since 18 Jan 2016
  */
 public class HeightWidthCSSImpl extends CSSImplementationAdapter<HeightWidthCSS, HeightWidthCSSImpl> implements CSSImplementationClass<HeightWidthCSS, HeightWidthCSSImpl>
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
+	@CSSDetail(cssName = "height", cssVersion = CSSVersions.CSS21)
+	private MeasurementCSSImpl height;
+	@CSSDetail(cssName = "height", cssVersion = CSSVersions.CSS21)
+	private HeightSetting height$;
+	@CSSDetail(cssName = "width", cssVersion = CSSVersions.CSS21)
+	private MeasurementCSSImpl width;
+	@CSSDetail(cssName = "width", cssVersion = CSSVersions.CSS21)
+	private WidthSetting width$;
+	@CSSDetail(cssName = "min-height", cssVersion = CSSVersions.CSS21)
+	private MeasurementCSSImpl minHeight;
+	@CSSDetail(cssName = "max-height", cssVersion = CSSVersions.CSS21)
+	private MeasurementCSSImpl maxHeight;
+	@CSSDetail(cssName = "min-width", cssVersion = CSSVersions.CSS21)
+	private MeasurementCSSImpl minWidth;
+	@CSSDetail(cssName = "max-width", cssVersion = CSSVersions.CSS21)
+	private MeasurementCSSImpl maxWidth;
+	public HeightWidthCSSImpl()
+	{
+	}
 
-    public HeightWidthCSSImpl()
-    {
-    }
-    @CSSDetail(cssName = "height", cssVersion = CSSVersions.CSS21)
-    private MeasurementCSSImpl height;
-    @CSSDetail(cssName = "height", cssVersion = CSSVersions.CSS21)
-    private HeightSetting height$;
-    @CSSDetail(cssName = "width", cssVersion = CSSVersions.CSS21)
-    private MeasurementCSSImpl width;
-    @CSSDetail(cssName = "width", cssVersion = CSSVersions.CSS21)
-    private WidthSetting width$;
-    @CSSDetail(cssName = "min-height", cssVersion = CSSVersions.CSS21)
-    private MeasurementCSSImpl minHeight;
-    @CSSDetail(cssName = "max-height", cssVersion = CSSVersions.CSS21)
-    private MeasurementCSSImpl maxHeight;
-    @CSSDetail(cssName = "min-width", cssVersion = CSSVersions.CSS21)
-    private MeasurementCSSImpl minWidth;
-    @CSSDetail(cssName = "max-width", cssVersion = CSSVersions.CSS21)
-    private MeasurementCSSImpl maxWidth;
+	/**
+	 * Sets the height of an element
+	 *
+	 * @return
+	 */
+	public MeasurementCSSImpl getHeight()
+	{
+		return height;
+	}
 
-    /**
-     * Sets the height of an element
-     *
-     * @return
-     */
-    public MeasurementCSSImpl getHeight()
-    {
-        return height;
-    }
+	/**
+	 * Convenience method setting the inner HTML value - Default of Pixels
+	 * <p>
+	 *
+	 * @param Width getWidth
+	 */
+	public void setHeight(int Width)
+	{
+		setHeight(Width, MeasurementTypes.Pixels);
+	}
 
-    /**
-     * Sets the height of an element
-     *
-     * @return
-     */
-    public HeightSetting getHeight$()
-    {
-        return height$;
-    }
+	/**
+	 * Sets the height of an element
+	 *
+	 * @return
+	 */
+	public HeightSetting getHeight$()
+	{
+		return height$;
+	}
 
-    /**
-     * Sets the width of an element
-     *
-     * @return
-     */
-    public MeasurementCSSImpl getWidth()
-    {
-        return width;
-    }
+	/**
+	 * Sets the height of an element
+	 *
+	 * @param Height$
+	 */
+	public void setHeight$(HeightSetting Height$)
+	{
+		this.height$ = Height$;
+	}
 
-    /**
-     * Sets the width of an element
-     *
-     * @return
-     */
-    public WidthSetting getWidth$()
-    {
-        return width$;
-    }
+	/**
+	 * Sets the width of an element
+	 *
+	 * @return
+	 */
+	public MeasurementCSSImpl getWidth()
+	{
+		return width;
+	}
 
-    /**
-     * Sets the min height of an element
-     *
-     * @return
-     */
-    public MeasurementCSSImpl getMinHeight()
-    {
-        return minHeight;
-    }
+	/**
+	 * Convenience method setting the inner HTML value - Default of Pixels
+	 * <p>
+	 *
+	 * @param Width getWidth
+	 */
+	public void setWidth(int Width)
+	{
+		setWidth(Width, MeasurementTypes.Pixels);
+	}
 
-    /**
-     * Sets the max height of an element
-     *
-     * @return
-     */
-    public MeasurementCSSImpl getMaxHeight()
-    {
-        return maxHeight;
-    }
+	/**
+	 * Sets the width of an element
+	 *
+	 * @return
+	 */
+	public WidthSetting getWidth$()
+	{
+		return width$;
+	}
 
-    /**
-     * Sets the min width of an element
-     *
-     * @return
-     */
-    public MeasurementCSSImpl getMinWidth()
-    {
-        return minWidth;
-    }
+	/**
+	 * Sets the width of an element
+	 *
+	 * @param Width$
+	 */
+	public void setWidth$(WidthSetting Width$)
+	{
+		this.width$ = Width$;
+	}
 
-    /**
-     * Sets the max height of an element
-     *
-     * @return
-     */
-    public MeasurementCSSImpl getMaxWidth()
-    {
-        return maxWidth;
-    }
+	/**
+	 * Sets the min height of an element
+	 *
+	 * @return
+	 */
+	public MeasurementCSSImpl getMinHeight()
+	{
+		return minHeight;
+	}
 
-    /**
-     * Sets the height of an element
-     *
-     * @param Height
-     */
-    public void setHeight(MeasurementCSSImpl Height)
-    {
-        this.height = Height;
-    }
+	/**
+	 * Convenience method setting the inner HTML value - Default of Pixels
+	 * <p>
+	 *
+	 * @param Width getWidth
+	 */
+	public void setMinHeight(int Width)
+	{
+		setMinHeight(Width, MeasurementTypes.Pixels);
+	}
 
-    /**
-     * Sets the height of an element
-     *
-     * @param Height$
-     */
-    public void setHeight$(HeightSetting Height$)
-    {
-        this.height$ = Height$;
-    }
+	/**
+	 * Sets the max height of an element
+	 *
+	 * @return
+	 */
+	public MeasurementCSSImpl getMaxHeight()
+	{
+		return maxHeight;
+	}
 
-    /**
-     * Sets the width of an element
-     *
-     * @param Width
-     */
-    public void setWidth(MeasurementCSSImpl Width)
-    {
-        this.width = Width;
-    }
+	/**
+	 * Convenience method setting the inner HTML value - Default of Pixels
+	 * <p>
+	 *
+	 * @param Width getWidth
+	 */
+	public void setMaxHeight(int Width)
+	{
+		setMaxHeight(Width, MeasurementTypes.Pixels);
+	}
 
-    /**
-     * Sets the width of an element
-     *
-     * @param Width$
-     */
-    public void setWidth$(WidthSetting Width$)
-    {
-        this.width$ = Width$;
-    }
+	/**
+	 * Sets the min width of an element
+	 *
+	 * @return
+	 */
+	public MeasurementCSSImpl getMinWidth()
+	{
+		return minWidth;
+	}
 
-    /**
-     * Sets the width of an element
-     *
-     * @param minHeight
-     */
-    public void setMinHeight(MeasurementCSSImpl minHeight)
-    {
-        this.minHeight = minHeight;
-    }
+	/**
+	 * Convenience method setting the inner HTML value - Default of Pixels
+	 * <p>
+	 *
+	 * @param Width getWidth
+	 */
+	public void setMinWidth(int Width)
+	{
+		setMinWidth(Width, MeasurementTypes.Pixels);
+	}
 
-    /**
-     * Sets the width of an element
-     *
-     * @param maxHeight
-     */
-    public void setMaxHeight(MeasurementCSSImpl maxHeight)
-    {
-        this.maxHeight = maxHeight;
-    }
+	/**
+	 * Sets the max height of an element
+	 *
+	 * @return
+	 */
+	public MeasurementCSSImpl getMaxWidth()
+	{
+		return maxWidth;
+	}
 
-    /**
-     * Sets the width of an element
-     *
-     * @param minWidth
-     */
-    public void setMinWidth(MeasurementCSSImpl minWidth)
-    {
-        this.minWidth = minWidth;
-    }
+	/**
+	 * Convenience method setting the inner HTML value - Default of Pixels
+	 * <p>
+	 *
+	 * @param Width getWidth
+	 */
+	public void setMaxWidth(int Width)
+	{
+		setMaxWidth(Width, MeasurementTypes.Pixels);
+	}
 
-    /**
-     * Sets the width of an element
-     *
-     * @param maxWidth
-     */
-    public void setMaxWidth(MeasurementCSSImpl maxWidth)
-    {
-        this.maxWidth = maxWidth;
-    }
+	/**
+	 * Sets the height of an element
+	 *
+	 * @param Height
+	 */
+	public void setHeight(MeasurementCSSImpl Height)
+	{
+		this.height = Height;
+	}
 
-    /**
-     * Convenience method setting the getWidth
-     * <p>
-     * @param Width           The width to set
-     * @param measurementType The measurement type
-     */
-    public void setWidth(int Width, MeasurementTypes measurementType)
-    {
-        setWidth(new MeasurementCSSImpl(Width, measurementType));
-    }
+	/**
+	 * Sets the width of an element
+	 *
+	 * @param Width
+	 */
+	public void setWidth(MeasurementCSSImpl Width)
+	{
+		this.width = Width;
+	}
 
-    /**
-     * Convenience method setting the inner HTML value - Default of Pixels
-     * <p>
-     * @param Width getWidth
-     */
-    public void setWidth(int Width)
-    {
-        setWidth(Width, MeasurementTypes.Pixels);
-    }
+	/**
+	 * Sets the width of an element
+	 *
+	 * @param minHeight
+	 */
+	public void setMinHeight(MeasurementCSSImpl minHeight)
+	{
+		this.minHeight = minHeight;
+	}
 
-    /**
-     * Convenience method setting the getWidth
-     * <p>
-     * @param Width           The width to set
-     * @param measurementType The measurement type
-     */
-    public void setHeight(int Width, MeasurementTypes measurementType)
-    {
-        setHeight(new MeasurementCSSImpl(Width, measurementType));
-    }
+	/**
+	 * Sets the width of an element
+	 *
+	 * @param maxHeight
+	 */
+	public void setMaxHeight(MeasurementCSSImpl maxHeight)
+	{
+		this.maxHeight = maxHeight;
+	}
 
-    /**
-     * Convenience method setting the inner HTML value - Default of Pixels
-     * <p>
-     * @param Width getWidth
-     */
-    public void setHeight(int Width)
-    {
-        setHeight(Width, MeasurementTypes.Pixels);
-    }
+	/**
+	 * Sets the width of an element
+	 *
+	 * @param minWidth
+	 */
+	public void setMinWidth(MeasurementCSSImpl minWidth)
+	{
+		this.minWidth = minWidth;
+	}
 
-    /**
-     * Convenience method setting the getWidth
-     * <p>
-     * @param Width           The width to set
-     * @param measurementType The measurement type
-     */
-    public void setMinWidth(int Width, MeasurementTypes measurementType)
-    {
-        setMinWidth(new MeasurementCSSImpl(Width, measurementType));
-    }
+	/**
+	 * Sets the width of an element
+	 *
+	 * @param maxWidth
+	 */
+	public void setMaxWidth(MeasurementCSSImpl maxWidth)
+	{
+		this.maxWidth = maxWidth;
+	}
 
-    /**
-     * Convenience method setting the inner HTML value - Default of Pixels
-     * <p>
-     * @param Width getWidth
-     */
-    public void setMinWidth(int Width)
-    {
-        setMinWidth(Width, MeasurementTypes.Pixels);
-    }
+	/**
+	 * Convenience method setting the getWidth
+	 * <p>
+	 *
+	 * @param Width           The width to set
+	 * @param measurementType The measurement type
+	 */
+	public void setWidth(int Width, MeasurementTypes measurementType)
+	{
+		setWidth(new MeasurementCSSImpl(Width, measurementType));
+	}
 
-    /**
-     * Convenience method setting the getWidth
-     * <p>
-     * @param Width           The width to set
-     * @param measurementType The measurement type
-     */
-    public void setMaxWidth(int Width, MeasurementTypes measurementType)
-    {
-        setMaxWidth(new MeasurementCSSImpl(Width, measurementType));
-    }
+	/**
+	 * Convenience method setting the getWidth
+	 * <p>
+	 *
+	 * @param Width           The width to set
+	 * @param measurementType The measurement type
+	 */
+	public void setHeight(int Width, MeasurementTypes measurementType)
+	{
+		setHeight(new MeasurementCSSImpl(Width, measurementType));
+	}
 
-    /**
-     * Convenience method setting the inner HTML value - Default of Pixels
-     * <p>
-     * @param Width getWidth
-     */
-    public void setMaxWidth(int Width)
-    {
-        setMaxWidth(Width, MeasurementTypes.Pixels);
-    }
+	/**
+	 * Convenience method setting the getWidth
+	 * <p>
+	 *
+	 * @param Width           The width to set
+	 * @param measurementType The measurement type
+	 */
+	public void setMinWidth(int Width, MeasurementTypes measurementType)
+	{
+		setMinWidth(new MeasurementCSSImpl(Width, measurementType));
+	}
 
-    /**
-     * Convenience method setting the getWidth
-     * <p>
-     * @param Width           The width to set
-     * @param measurementType The measurement type
-     */
-    public void setMinHeight(int Width, MeasurementTypes measurementType)
-    {
-        setMinHeight(new MeasurementCSSImpl(Width, measurementType));
-    }
+	/**
+	 * Convenience method setting the getWidth
+	 * <p>
+	 *
+	 * @param Width           The width to set
+	 * @param measurementType The measurement type
+	 */
+	public void setMaxWidth(int Width, MeasurementTypes measurementType)
+	{
+		setMaxWidth(new MeasurementCSSImpl(Width, measurementType));
+	}
 
-    /**
-     * Convenience method setting the inner HTML value - Default of Pixels
-     * <p>
-     * @param Width getWidth
-     */
-    public void setMinHeight(int Width)
-    {
-        setMinHeight(Width, MeasurementTypes.Pixels);
-    }
+	/**
+	 * Convenience method setting the getWidth
+	 * <p>
+	 *
+	 * @param Width           The width to set
+	 * @param measurementType The measurement type
+	 */
+	public void setMinHeight(int Width, MeasurementTypes measurementType)
+	{
+		setMinHeight(new MeasurementCSSImpl(Width, measurementType));
+	}
 
-    /**
-     * Convenience method setting the getWidth
-     * <p>
-     * @param Width           The width to set
-     * @param measurementType The measurement type
-     */
-    public void setMaxHeight(int Width, MeasurementTypes measurementType)
-    {
-        setMaxHeight(new MeasurementCSSImpl(Width, measurementType));
-    }
-
-    /**
-     * Convenience method setting the inner HTML value - Default of Pixels
-     * <p>
-     * @param Width getWidth
-     */
-    public void setMaxHeight(int Width)
-    {
-        setMaxHeight(Width, MeasurementTypes.Pixels);
-    }
+	/**
+	 * Convenience method setting the getWidth
+	 * <p>
+	 *
+	 * @param Width           The width to set
+	 * @param measurementType The measurement type
+	 */
+	public void setMaxHeight(int Width, MeasurementTypes measurementType)
+	{
+		setMaxHeight(new MeasurementCSSImpl(Width, measurementType));
+	}
 
 }

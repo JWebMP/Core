@@ -17,37 +17,35 @@
 
 package za.co.mmagon.jwebswing.base.servlet;
 
-import za.co.mmagon.jwebswing.base.servlets.AjaxReceiverServlet;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import za.co.mmagon.jwebswing.base.servlets.AjaxReceiverServlet;
 
 /**
- *
  * @author MMagon
  */
 public class AjaxReceiverTest
 {
-    private AjaxReceiverServlet ar = new AjaxReceiverServlet();
-    
-    
-    public AjaxReceiverTest()
-    {
-    }
-    
-    @Before
-    public void setUp()
-    {
-    }
+	private AjaxReceiverServlet ar = new AjaxReceiverServlet();
 
-    @Test
-    public void testGetServletInfo()
-    {
-    }
 
-    @Test
-    public void testAddUpdatedComponentToResponse()
-    {
-    }
-    
+	public AjaxReceiverTest()
+	{
+	}
+
+	@Before
+	public void setUp()
+	{
+	}
+
+	@Test
+	public void testGetServletInfo()
+	{
+	}
+
+	@Test
+	public void testAddUpdatedComponentToResponse()
+	{
+	}
+
 }

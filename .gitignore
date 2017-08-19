@@ -9,3 +9,4 @@ persistence.xml
 /javadoc/
 /.jacocoverage/
 /build
+/target/

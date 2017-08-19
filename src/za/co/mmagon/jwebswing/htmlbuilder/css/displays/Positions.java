@@ -18,61 +18,61 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
 @CSSAnnotationType
 public enum Positions implements CSSEnumeration<Positions>
 {
-    /**
-     * The element is positioned relative to its first positioned (not static) ancestor element
-     */
-    Absolute,
-    /**
-     * The element is positioned relative to the browser window
-     */
-    Fixed,
-    /**
-     * The element is positioned relative to its normal position, so "left:20" adds 20 pixels to the element's LEFT position
-     */
-    Relative,
-    /**
-     * The value of the position property is inherited from the parent element
-     */
-    Static,
-    /**
-     * Sets this property to its default value
-     *
-     * see http://www.w3schools.com/cssref/css_initial.asp
-     */
-    Initial,
-    /**
-     * Inherits this property from its parent element.
-     *
-     * see http://www.w3schools.com/cssref/css_inherit.asp
-     */
-    Inherit,
-    /**
-     * Sets this field as not set
-     */
-    Unset;
+	/**
+	 * The element is positioned relative to its first positioned (not static) ancestor element
+	 */
+	Absolute,
+	/**
+	 * The element is positioned relative to the browser window
+	 */
+	Fixed,
+	/**
+	 * The element is positioned relative to its normal position, so "left:20" adds 20 pixels to the element's LEFT position
+	 */
+	Relative,
+	/**
+	 * The value of the position property is inherited from the parent element
+	 */
+	Static,
+	/**
+	 * Sets this property to its default value
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_initial.asp
+	 */
+	Initial,
+	/**
+	 * Inherits this property from its parent element.
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_inherit.asp
+	 */
+	Inherit,
+	/**
+	 * Sets this field as not set
+	 */
+	Unset;
 
-    @Override
-    public String getValue()
-    {
-        return name();
-    }
+	@Override
+	public String getValue()
+	{
+		return name();
+	}
 
-    @Override
-    public Positions getDefault()
-    {
-        return Unset;
-    }
+	@Override
+	public Positions getDefault()
+	{
+		return Unset;
+	}
 
-    @Override
-    public String getJavascriptSyntax()
-    {
-        return "style.position";
-    }
+	@Override
+	public String getJavascriptSyntax()
+	{
+		return "style.position";
+	}
 
-    @Override
-    public CSSVersions getCSSVersion()
-    {
-        return CSSVersions.CSS1;
-    }
+	@Override
+	public CSSVersions getCSSVersion()
+	{
+		return CSSVersions.CSS1;
+	}
 
 }

@@ -19,22 +19,21 @@ package za.co.mmagon.jwebswing.base.dto;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class RegularExpressionsTest
 {
 
-    public RegularExpressionsTest()
-    {
-    }
+	public RegularExpressionsTest()
+	{
+	}
 
-    @Test
-    public void testSomeMethod()
-    {
-        RegularExpressionsDTO re = new RegularExpressionsDTO();
-        re.addExpression("TextField", "asdf");
-        System.out.println(re.toString());
-    }
+	@Test
+	public void testSomeMethod()
+	{
+		RegularExpressionsDTO re = new RegularExpressionsDTO();
+		re.addExpression("TextField", "asdf");
+		System.out.println(re.toString());
+	}
 
 }

@@ -18,7 +18,10 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.DeletedAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
@@ -41,26 +44,28 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * NONE.
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
+ * @author GedMarc
  * @since 2014/12/21
  */
 public class Deleted<J extends Deleted<J>>
-        extends Component<NoChildren, DeletedAttributes, NoFeatures, NoEvents, J>
-        implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, ParagraphChildren
+		extends Component<NoChildren, DeletedAttributes, NoFeatures, NoEvents, J>
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, ParagraphChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * The text marked as deleted
-     * <p>
-     * @param text
-     */
-    public Deleted(String text)
-    {
-        super(ComponentTypes.Deleted);
-        setText(text);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * The text marked as deleted
+	 * <p>
+	 *
+	 * @param text
+	 */
+	public Deleted(String text)
+	{
+		super(ComponentTypes.Deleted);
+		setText(text);
+	}
 }

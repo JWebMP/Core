@@ -30,41 +30,41 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
 public interface CSSEnumeration<T extends CSSEnumeration>
 {
 
-    /**
-     * Returns the Enumeration Name in its clean form
-     *
-     * @return The Formatted Output for the enumeration
-     */
-    @Override
-    public String toString();
+	/**
+	 * Returns the Enumeration Name in its clean form
+	 *
+	 * @return The Formatted Output for the enumeration
+	 */
+	@Override
+	public String toString();
 
-    /**
-     * Returns the JavaScript CSS Property form
-     *
-     * @return
-     */
-    public String getJavascriptSyntax();
+	/**
+	 * Returns the JavaScript CSS Property form
+	 *
+	 * @return
+	 */
+	public String getJavascriptSyntax();
 
-    /**
-     * Returns the CSS Version this enumeration is compatible with
-     *
-     * @return
-     */
-    public CSSVersions getCSSVersion();
+	/**
+	 * Returns the CSS Version this enumeration is compatible with
+	 *
+	 * @return
+	 */
+	public CSSVersions getCSSVersion();
 
-    /**
-     * Returns the value of this CSS Option.
-     * Usually the name of the Enumeration
-     *
-     * @return
-     */
-    public String getValue();
+	/**
+	 * Returns the value of this CSS Option.
+	 * Usually the name of the Enumeration
+	 *
+	 * @return
+	 */
+	public String getValue();
 
-    /**
-     * Returns the default, AKA exclude render
-     *
-     * @return The member to never render, as it is the default
-     */
-    public T getDefault();
+	/**
+	 * Returns the default, AKA exclude render
+	 *
+	 * @return The member to never render, as it is the default
+	 */
+	public T getDefault();
 
 }

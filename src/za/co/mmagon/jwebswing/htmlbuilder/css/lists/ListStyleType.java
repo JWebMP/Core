@@ -20,128 +20,127 @@ import za.co.mmagon.jwebswing.base.client.CSSVersions;
 import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
 
 /**
- *
  * @author GedMarc
  * @since 18 Jan 2016
  */
 public enum ListStyleType implements CSSEnumeration<ListStyleType>
 {
-    /**
-     * Default value. The marker is a filled circle
-     */
-    disc,
-    /**
-     * The marker is traditional Armenian numbering
-     */
-    armenian,
-    /**
-     * The marker is a circle
-     */
-    circle,
-    /**
-     * The marker is plain ideographic numbers
-     */
-    cjk_ideographic,
-    /**
-     * The marker is a number
-     */
-    decimal,
-    /**
-     * The marker is a number with leading zeros (01, 02, 03, etc.)
-     */
-    decimal_leading_zero,
-    /**
-     * The marker is traditional Georgian numbering
-     */
-    georgian,
-    /**
-     * The marker is traditional Hebrew numbering
-     */
-    hebrew,
-    /**
-     * The marker is traditional Hiragana numbering
-     */
-    hiragana,
-    /**
-     * The marker is traditional Hiragana iroha numbering
-     */
-    hiragana_iroha,
-    /**
-     * The marker is traditional Katakana numbering
-     */
-    katakana,
-    /**
-     * The marker is traditional Katakana iroha numbering
-     */
-    katakana_iroha,
-    /**
-     * The marker is lower_alpha (a, b, c, d, e, etc.)
-     */
-    lower_alpha,
-    /**
-     * The marker is lower_greek
-     */
-    lower_greek,
-    /**
-     * The marker is lower_latin (a, b, c, d, e, etc.)
-     */
-    lower_latin,
-    /**
-     * The marker is lower_roman (i, ii, iii, iv, v, etc.)
-     */
-    lower_roman,
-    /**
-     * No marker is shown
-     */
-    none,
-    /**
-     * The marker is a square
-     */
-    square,
-    /**
-     * The marker is upper_alpha (A, B, C, D, E, etc.)
-     */
-    upper_alpha,
-    /**
-     * The marker is upper_latin (A, B, C, D, E, etc.)
-     */
-    upper_latin,
-    /**
-     * The marker is upper_roman (I, II, III, IV, V, etc.)
-     */
-    upper_roman,
-    /**
-     * Sets this field as not set
-     */
-    Unset;
+	/**
+	 * Default value. The marker is a filled circle
+	 */
+	disc,
+	/**
+	 * The marker is traditional Armenian numbering
+	 */
+	armenian,
+	/**
+	 * The marker is a circle
+	 */
+	circle,
+	/**
+	 * The marker is plain ideographic numbers
+	 */
+	cjk_ideographic,
+	/**
+	 * The marker is a number
+	 */
+	decimal,
+	/**
+	 * The marker is a number with leading zeros (01, 02, 03, etc.)
+	 */
+	decimal_leading_zero,
+	/**
+	 * The marker is traditional Georgian numbering
+	 */
+	georgian,
+	/**
+	 * The marker is traditional Hebrew numbering
+	 */
+	hebrew,
+	/**
+	 * The marker is traditional Hiragana numbering
+	 */
+	hiragana,
+	/**
+	 * The marker is traditional Hiragana iroha numbering
+	 */
+	hiragana_iroha,
+	/**
+	 * The marker is traditional Katakana numbering
+	 */
+	katakana,
+	/**
+	 * The marker is traditional Katakana iroha numbering
+	 */
+	katakana_iroha,
+	/**
+	 * The marker is lower_alpha (a, b, c, d, e, etc.)
+	 */
+	lower_alpha,
+	/**
+	 * The marker is lower_greek
+	 */
+	lower_greek,
+	/**
+	 * The marker is lower_latin (a, b, c, d, e, etc.)
+	 */
+	lower_latin,
+	/**
+	 * The marker is lower_roman (i, ii, iii, iv, v, etc.)
+	 */
+	lower_roman,
+	/**
+	 * No marker is shown
+	 */
+	none,
+	/**
+	 * The marker is a square
+	 */
+	square,
+	/**
+	 * The marker is upper_alpha (A, B, C, D, E, etc.)
+	 */
+	upper_alpha,
+	/**
+	 * The marker is upper_latin (A, B, C, D, E, etc.)
+	 */
+	upper_latin,
+	/**
+	 * The marker is upper_roman (I, II, III, IV, V, etc.)
+	 */
+	upper_roman,
+	/**
+	 * Sets this field as not set
+	 */
+	Unset;
 
-    @Override
-    public String toString()
-    {
-        return name().toLowerCase().replace('_', '-');
-    }
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase().replace('_', '-');
+	}
 
-    @Override
-    public String getJavascriptSyntax()
-    {
-        return "style.listStyleType";
-    }
+	@Override
+	public String getJavascriptSyntax()
+	{
+		return "style.listStyleType";
+	}
 
-    @Override
-    public CSSVersions getCSSVersion()
-    {
-        return CSSVersions.CSS1;
-    }
+	@Override
+	public CSSVersions getCSSVersion()
+	{
+		return CSSVersions.CSS1;
+	}
 
-    @Override
-    public String getValue()
-    {
-        return name();
-    }
+	@Override
+	public String getValue()
+	{
+		return name();
+	}
 
-    @Override
-    public ListStyleType getDefault()
-    {
-        return Unset;
-    }
+	@Override
+	public ListStyleType getDefault()
+	{
+		return Unset;
+	}
 }

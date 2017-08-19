@@ -16,9 +16,10 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 
-import za.co.mmagon.jwebswing.base.client.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import za.co.mmagon.jwebswing.base.client.CSSVersions;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSDetail;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationAdapter;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationClass;
 
 /**
  * A default border
@@ -29,41 +30,41 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
 public class BorderImpl extends CSSImplementationAdapter<Border, BorderImpl> implements CSSImplementationClass<Border, BorderImpl>
 {
 
-    private static final long serialVersionUID = 1L;
-    @CSSDetail(cssName = "border-bottom-color", cssVersion = CSSVersions.CSS21)
-    private BorderLeftCSSImpl border;
+	private static final long serialVersionUID = 1L;
+	@CSSDetail(cssName = "border-bottom-color", cssVersion = CSSVersions.CSS21)
+	private BorderLeftCSSImpl border;
 
-    @Override
-    public String toString()
-    {
-        if (border != null)
-        {
-            return border.toString();
-        }
-        else
-        {
-            return "";
-        }
-    }
+	@Override
+	public String toString()
+	{
+		if (border != null)
+		{
+			return border.toString();
+		}
+		else
+		{
+			return "";
+		}
+	}
 
-    /**
-     * Returns the border
-     *
-     * @return
-     */
-    public BorderLeftCSSImpl getBorder()
-    {
-        return border;
-    }
+	/**
+	 * Returns the border
+	 *
+	 * @return
+	 */
+	public BorderLeftCSSImpl getBorder()
+	{
+		return border;
+	}
 
-    /**
-     * Sets the border
-     *
-     * @param Border
-     */
-    public void setBorder(BorderLeftCSSImpl Border)
-    {
-        this.border = Border;
-    }
+	/**
+	 * Sets the border
+	 *
+	 * @param Border
+	 */
+	public void setBorder(BorderLeftCSSImpl Border)
+	{
+		this.border = Border;
+	}
 
 }

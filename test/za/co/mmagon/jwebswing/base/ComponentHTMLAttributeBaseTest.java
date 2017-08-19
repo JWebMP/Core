@@ -17,26 +17,47 @@
 package za.co.mmagon.jwebswing.base;
 
 import org.junit.Test;
+import za.co.mmagon.jwebswing.base.html.CSSLink;
 import za.co.mmagon.jwebswing.base.html.Div;
 
+import static org.junit.Assert.fail;
+
 /**
- *
  * @author Marc Magon
  */
 public class ComponentHTMLAttributeBaseTest
 {
-
-    public ComponentHTMLAttributeBaseTest()
-    {
-    }
-
-    @Test
-    public void testCustomAttributesKeywords()
-    {
-        Div d = new Div();
-        d.addAttribute("thisIsKeyword", null);
-        d.addAttribute("uib-dropdown", null);
-        System.out.println(d.toString(true));
-    }
-
+	
+	public ComponentHTMLAttributeBaseTest()
+	{
+	}
+	
+	@Test
+	public void testCustomAttributesKeywords()
+	{
+		Div d = new Div();
+		d.addAttribute("thisIsKeyword", null);
+		d.addAttribute("uib-dropdown", null);
+		System.out.println(d.toString(true));
+	}
+	
+	@Test
+	public void testNullAttribute()
+	{
+		CSSLink link = (CSSLink) new CSSLink(null, "rel", "href").setID("id");
+		System.out.println(link.toString(true));
+		if (link.toString(true).contains("type=\"null\""))
+		{
+			fail("Inserting null as attribute values");
+		}
+	}
+	
+	@Test
+	public void testAddStyle()
+	{
+		Div d = new Div();
+		d.addStyle("background-black");
+		System.out.println(d.toString(true));
+		
+	}
 }

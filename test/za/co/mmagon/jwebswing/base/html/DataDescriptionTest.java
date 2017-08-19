@@ -21,23 +21,22 @@ import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
 
 /**
- *
  * @author ged_m
  */
 public class DataDescriptionTest extends BaseTestClass
 {
-
-    public DataDescriptionTest()
-    {
-    }
-
-    @Test
-    public void testDataDescription()
-    {
-        DataDescription dd = new DataDescription("data desc");
-        dd.setID("id");
-        System.out.println(dd.toString(true));
-        Assert.assertEquals("<dd id=\"id\">data desc</dd>", dd.toString(true));
-    }
-
+	
+	public DataDescriptionTest()
+	{
+	}
+	
+	@Test
+	public void testDataDescription()
+	{
+		DataDescription dd = new DataDescription("data desc");
+		dd.setID("id");
+		System.out.println(dd.toString(true));
+		Assert.assertEquals("<dd id=\"id\">data desc</dd>", dd.toString(true));
+	}
+	
 }

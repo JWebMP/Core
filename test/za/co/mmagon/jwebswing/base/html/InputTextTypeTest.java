@@ -17,26 +17,24 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTextAttributes;
 
 /**
- *
  * @author GedMarc
  */
 public class InputTextTypeTest
 {
-    
-    public InputTextTypeTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        InputTextType itt = new InputTextType();
-        itt.addAttribute(InputTextAttributes.Form, "form");
-        System.out.println(itt.toString(true));
-    }
-    
+	
+	public InputTextTypeTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		InputTextType itt = new InputTextType();
+		itt.addAttribute(InputTextAttributes.Form, "form");
+		System.out.println(itt.toString(true));
+	}
+	
 }

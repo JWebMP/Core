@@ -20,27 +20,26 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class DataListTest
 {
-
-    public DataListTest()
-    {
-    }
-
-    @Test
-    public void testdatalist()
-    {
-        DataList dl = new DataList("browsers");
-        Option o = new Option("option 1");
-        dl.add(o);
-        o.setID("id");
-        System.out.println(dl.toString(true));
-        Assert.assertEquals("<datalist id=\"browsers\">\n"
-                + "	<option label=\"option 1\" value=\"option 1\" id=\"id\">option 1</option>\n"
-                + "</datalist>", dl.toString(true).toString());
-    }
-
+	
+	public DataListTest()
+	{
+	}
+	
+	@Test
+	public void testdatalist()
+	{
+		DataList dl = new DataList("browsers");
+		Option o = new Option("option 1");
+		dl.add(o);
+		o.setID("id");
+		System.out.println(dl.toString(true));
+		Assert.assertEquals("<datalist id=\"browsers\">\n"
+				                    + "	<option label=\"option 1\" value=\"option 1\" id=\"id\">option 1</option>\n"
+				                    + "</datalist>", dl.toString(true).toString());
+	}
+	
 }

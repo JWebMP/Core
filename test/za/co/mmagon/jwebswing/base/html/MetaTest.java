@@ -20,29 +20,28 @@ import org.junit.Test;
 import za.co.mmagon.jwebswing.base.client.HTMLVersions;
 
 /**
- *
  * @author GedMarc
  */
 
 public class MetaTest
 {
 
-    public MetaTest()
-    {
-    }
+	public MetaTest()
+	{
+	}
 
-    /**
-     * Test of getMinimumSupportVersion method, of class Meta.
-     */
-    @Test
-    public void testGetMinimumSupportVersion()
-    {
-        System.out.println("getMinimumSupportVersion");
-        Meta instance = null;
-        HTMLVersions expResult = null;
-        instance = new Meta(Meta.MetadataFields.Author, "Author");
-        System.out.println("This is tested in the page test");
-        System.out.println(instance.toString(true));
-    }
+	/**
+	 * Test of getMinimumSupportVersion method, of class Meta.
+	 */
+	@Test
+	public void testGetMinimumSupportVersion()
+	{
+		System.out.println("getMinimumSupportVersion");
+		Meta instance = null;
+		HTMLVersions expResult = null;
+		instance = new Meta(Meta.MetadataFields.Author, "Author");
+		System.out.println("This is tested in the page test");
+		System.out.println(instance.toString(true));
+	}
 
 }

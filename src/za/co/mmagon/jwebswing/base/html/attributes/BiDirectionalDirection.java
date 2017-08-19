@@ -26,18 +26,18 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum BiDirectionalDirection implements AttributeDefinitions
 {
-    /**
-     * Left to Right
-     */
-    Ltr,
-    /**
-     * Right to Left
-     */
-    Rtl;
+	/**
+	 * Left to Right
+	 */
+	Ltr,
+	/**
+	 * Right to Left
+	 */
+	Rtl;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

@@ -18,7 +18,9 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.FigureChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
@@ -36,21 +38,22 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;figure&gt; tag is new in HTML5.
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
+ * @author GedMarc
  * @since 2014/12/21
  */
 public class Figure<J extends Figure<J>>
-        extends Component<FigureChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements NoIDTag
+		extends Component<FigureChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements NoIDTag
 {
-
-    private static final long serialVersionUID = 1L;
-
-    public Figure()
-    {
-        super(ComponentTypes.Figure);
-    }
-
+	
+	private static final long serialVersionUID = 1L;
+	
+	public Figure()
+	{
+		super(ComponentTypes.Figure);
+	}
+	
 }

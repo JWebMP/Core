@@ -27,27 +27,27 @@ import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
  */
 public class BeforeActivateDirective extends AngularDirectiveBase
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new right click directive based on the angular object passed in
-     * <p>
-     */
-    public BeforeActivateDirective()
-    {
-        super("ngBeforeActivate");
-    }
-
-    /**
-     * Renders the right click directive from the JavaScript file
-     *
-     * @return
-     */
-    @Override
-    public String renderFunction()
-    {
-        return FileTemplates.getFileTemplate(BeforeActivateDirective.class, "BeforeActivate").toString();
-    }
-
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new right click directive based on the angular object passed in
+	 * <p>
+	 */
+	public BeforeActivateDirective()
+	{
+		super("ngBeforeActivate");
+	}
+	
+	/**
+	 * Renders the right click directive from the JavaScript file
+	 *
+	 * @return
+	 */
+	@Override
+	public String renderFunction()
+	{
+		return FileTemplates.getFileTemplate(BeforeActivateDirective.class, "BeforeActivate").toString();
+	}
+	
 }

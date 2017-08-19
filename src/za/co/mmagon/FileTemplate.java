@@ -16,43 +16,43 @@
  */
 package za.co.mmagon;
 
-import java.util.List;
-import java.util.Map;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
+import java.util.List;
+import java.util.Map;
+
 /**
- *
  * @author Marc Magon
  * @since 19 Mar 2017
  */
 public class FileTemplate extends JavaScriptPart
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private String id;
+	private String id;
 
-    private String rawTemplate;
+	private String rawTemplate;
 
-    private Map<String, String> variables;
+	private Map<String, String> variables;
 
-    private StringBuilder compiledTemplate;
+	private StringBuilder compiledTemplate;
 
-    private boolean rendered;
+	private boolean rendered;
 
-    private Class templateLocation;
+	private Class templateLocation;
 
-    private String templateName;
+	private String templateName;
 
-    private List<String> dependsOnTemplateIDs;
+	private List<String> dependsOnTemplateIDs;
 
-    private List<String> updatesTemplateIDs;
+	private List<String> updatesTemplateIDs;
 
-    /*
-     * Constructs a new FileTemplate
-     */
-    public FileTemplate()
-    {
-        //Nothing needed
-    }
+	/*
+	 * Constructs a new FileTemplate
+	 */
+	public FileTemplate()
+	{
+		//Nothing needed
+	}
 }

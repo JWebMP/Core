@@ -21,78 +21,79 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 /**
  * The attribute enumeration for the input button type
  * <p>
+ *
  * @author GedMarc
  */
 public enum InputFileTypeAttributes implements AttributeDefinitions
 {
 
-    /**
-     * The alternative text or tooltip to display
-     */
-    Alt,
-    /**
-     * HTML 5 Only Specifies whether an input element should have auto-complete enabled
-     */
-    AutoComplete,
-    /**
-     * HTML 5 Only Specifies that an input element should automatically get focus when the page loads
-     */
-    AutoFocus,
-    /**
-     * The value of the field
-     */
-    Value,
-    /**
-     * A reference to the form that contain the button
-     */
-    Form,
-    /**
-     * Sets the value of the name attribute of an input button
-     */
-    Name,
-    /**
-     * The accept property sets or returns the value of the accept attribute of the file upload button.
-     * <p>
-     * The accept attribute specifies the types of files that the server accepts (that can be submitted through a file upload).
-     * <p>
-     * file_extension file_extension
-     * <p>
-     * audio/*
-     * <p>
-     * <p>
-     * video/*
-     * <p>
-     * <p>
-     * image/*
-     * <p>
-     * <p>
-     * media_type
-     */
-    Accept,
-    /**
-     * Sets or returns the default value of the file upload button
-     */
-    DefaultValue,
-    /**
-     * Sets or returns whether the file upload button is disabled, or not
-     */
-    Disabled,
-    /**
-     * Returns a FileList object that represents the file or files selected with the file upload button
-     */
-    Files,
-    /**
-     * Sets or returns whether a user is allowed to select more than one file in the file upload field
-     */
-    Multiple,;
+	/**
+	 * The alternative text or tooltip to display
+	 */
+	Alt,
+	/**
+	 * HTML 5 Only Specifies whether an input element should have auto-complete enabled
+	 */
+	AutoComplete,
+	/**
+	 * HTML 5 Only Specifies that an input element should automatically get focus when the page loads
+	 */
+	AutoFocus,
+	/**
+	 * The value of the field
+	 */
+	Value,
+	/**
+	 * A reference to the form that contain the button
+	 */
+	Form,
+	/**
+	 * Sets the value of the name attribute of an input button
+	 */
+	Name,
+	/**
+	 * The accept property sets or returns the value of the accept attribute of the file upload button.
+	 * <p>
+	 * The accept attribute specifies the types of files that the server accepts (that can be submitted through a file upload).
+	 * <p>
+	 * file_extension file_extension
+	 * <p>
+	 * audio/*
+	 * <p>
+	 * <p>
+	 * video/*
+	 * <p>
+	 * <p>
+	 * image/*
+	 * <p>
+	 * <p>
+	 * media_type
+	 */
+	Accept,
+	/**
+	 * Sets or returns the default value of the file upload button
+	 */
+	DefaultValue,
+	/**
+	 * Sets or returns whether the file upload button is disabled, or not
+	 */
+	Disabled,
+	/**
+	 * Returns a FileList object that represents the file or files selected with the file upload button
+	 */
+	Files,
+	/**
+	 * Sets or returns whether a user is allowed to select more than one file in the file upload field
+	 */
+	Multiple,;
 
-    /**
-     *
-     */
+	/**
+	 *
+	 */
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

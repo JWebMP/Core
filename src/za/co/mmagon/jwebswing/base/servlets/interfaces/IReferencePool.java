@@ -16,45 +16,48 @@
  */
 package za.co.mmagon.jwebswing.base.servlets.interfaces;
 
-import java.io.Serializable;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 
+import java.io.Serializable;
+
 /**
- *
  * @author GedMarc
  * @since Oct 24, 2016
- * 
  */
 public interface IReferencePool extends Serializable
 {
-    
-    /**
-     * Gets the CSS Reference
-     * <p>
-     * @return
-     */
-    CSSReference getCssReference();
 
-    /**
-     * Gets the JavaScript reference
-     * <p>
-     * @return
-     */
-    JavascriptReference getJavaScriptReference();
+	/**
+	 * Gets the CSS Reference
+	 * <p>
+	 *
+	 * @return
+	 */
+	CSSReference getCssReference();
 
-    /**
-     * Sets the CSS Reference
-     * <p>
-     * @param cssReference
-     */
-    void setCssReference(CSSReference cssReference);
+	/**
+	 * Sets the CSS Reference
+	 * <p>
+	 *
+	 * @param cssReference
+	 */
+	void setCssReference(CSSReference cssReference);
 
-    /**
-     * Sets the JavaScript reference
-     * <p>
-     * @param javaScriptReference
-     */
-    void setJavaScriptReference(JavascriptReference javaScriptReference);
+	/**
+	 * Gets the JavaScript reference
+	 * <p>
+	 *
+	 * @return
+	 */
+	JavascriptReference getJavaScriptReference();
+
+	/**
+	 * Sets the JavaScript reference
+	 * <p>
+	 *
+	 * @param javaScriptReference
+	 */
+	void setJavaScriptReference(JavascriptReference javaScriptReference);
 
 }

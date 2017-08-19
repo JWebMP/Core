@@ -19,21 +19,20 @@ package za.co.mmagon.jwebswing.base.html.attributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 
 /**
- *
  * @author GedMarc
- * @since Mar 1, 2015
  * @version 1.0
+ * @since Mar 1, 2015
  */
 public enum TimeAttributes implements AttributeDefinitions
 {
-    /**
-     * Represent a machine-readable date/time of the time element
-     */
-    DateTime,;
+	/**
+	 * Represent a machine-readable date/time of the time element
+	 */
+	DateTime,;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

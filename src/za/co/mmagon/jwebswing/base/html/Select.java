@@ -25,7 +25,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
 /**
- *
  * Definition and Usage<p>
  * <p>
  * The &lt;select&gt; element is used to create a drop-down list.<p>
@@ -46,26 +45,26 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * HTML5 has added some new attributes.<p>
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
- * @since Mar 1, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
- *
+ * @since Mar 1, 2015
  */
 public class Select<J extends Select<J>>
-        extends Component<SelectChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements GlobalChildren
+		extends Component<SelectChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements GlobalChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     *
-     */
-    public Select()
-    {
-        super(ComponentTypes.Select);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 *
+	 */
+	public Select()
+	{
+		super(ComponentTypes.Select);
+	}
 }

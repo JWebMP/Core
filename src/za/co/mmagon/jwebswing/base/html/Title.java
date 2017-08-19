@@ -46,47 +46,45 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  * @param <J>
  *
- * @since 2013/11/12
- * @version 1.0
  * @author MMagon
- *
- *
+ * @version 1.0
+ * @since 2013/11/12
  */
 public class Title<J extends Title<J>>
-        extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
-        implements NoIDTag, HeadChildren, OneValidTag, NoClassAttribute, NoNewLineForRawText, NoNewLineBeforeChildren, NoNewLineBeforeClosingTag
+		extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+		implements NoIDTag, HeadChildren, OneValidTag, NoClassAttribute, NoNewLineForRawText, NoNewLineBeforeChildren, NoNewLineBeforeClosingTag
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a header title
-     *
-     * @param title The title of the page
-     */
-    public Title(String title)
-    {
-        super("title", ComponentTypes.HeadTitle);
-        setText(title);
-    }
-
-    /**
-     * Returns the current set title
-     *
-     * @return
-     */
-    public String getTitle()
-    {
-        return getText(0).toString();
-    }
-
-    /**
-     * Sets the pages title.
-     *
-     * @param title The title of the page
-     */
-    public void setTitle(String title)
-    {
-        setText(title);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a header title
+	 *
+	 * @param title The title of the page
+	 */
+	public Title(String title)
+	{
+		super("title", ComponentTypes.HeadTitle);
+		setText(title);
+	}
+	
+	/**
+	 * Returns the current set title
+	 *
+	 * @return
+	 */
+	public String getTitle()
+	{
+		return getText(0).toString();
+	}
+	
+	/**
+	 * Sets the pages title.
+	 *
+	 * @param title The title of the page
+	 */
+	public void setTitle(String title)
+	{
+		setText(title);
+	}
 }

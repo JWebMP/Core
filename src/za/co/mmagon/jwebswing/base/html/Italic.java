@@ -54,34 +54,37 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * In HTML 4.01, the &lt;i;&gt; tag was used to render text in italics. However, this is not necessarily the case with HTML5. Style sheets can be used to format the text inside the &lt;i;&gt;
  * element.<p>
  * <p>
- * @author Marc Magon
+ *
  * @param <J>
+ *
+ * @author Marc Magon
  */
 public class Italic<J extends Italic<J>>
-        extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, ParagraphChildren, GlobalChildren, ListItemChildren
+		extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, ParagraphChildren, GlobalChildren, ListItemChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new paragraph child of Italic
-     */
-    public Italic()
-    {
-        this(null);
-    }
-
-    /**
-     * *
-     * Constructs a new italic section with the given text
-     * <p>
-     * @param text
-     */
-    public Italic(String text)
-    {
-        super(ComponentTypes.Italic);
-        setText(text);
-    }
-
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new paragraph child of Italic
+	 */
+	public Italic()
+	{
+		this(null);
+	}
+	
+	/**
+	 * *
+	 * Constructs a new italic section with the given text
+	 * <p>
+	 *
+	 * @param text
+	 */
+	public Italic(String text)
+	{
+		super(ComponentTypes.Italic);
+		setText(text);
+	}
+	
 }

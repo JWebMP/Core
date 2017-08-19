@@ -36,64 +36,62 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
 @CSSAnnotationType
 public enum TableBorderCollapse implements CSSEnumeration<TableBorderCollapse>
 {
-    /**
-     * Borders are detached (border-spacing and empty-cells properties will not be ignored). This is default
-     */
-    Separate,
-    /**
-     * Borders are collapsed into a single border when possible (border-spacing and empty-cells properties will be ignored)
-     */
-    Collapse,
-    /**
-     * Sets this property to its default value
-     *
-     * see http://www.w3schools.com/cssref/css_initial.asp
-     */
-    Initial,
-    /**
-     * Inherits this property from its parent element.
-     *
-     * see http://www.w3schools.com/cssref/css_inherit.asp
-     */
-    Inherit,
-    /**
-     * Sets this field as not set
-     */
-    Unset;
+	/**
+	 * Borders are detached (border-spacing and empty-cells properties will not be ignored). This is default
+	 */
+	Separate,
+	/**
+	 * Borders are collapsed into a single border when possible (border-spacing and empty-cells properties will be ignored)
+	 */
+	Collapse,
+	/**
+	 * Sets this property to its default value
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_initial.asp
+	 */
+	Initial,
+	/**
+	 * Inherits this property from its parent element.
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_inherit.asp
+	 */
+	Inherit,
+	/**
+	 * Sets this field as not set
+	 */
+	Unset;;
 
-    ;
+	private TableBorderCollapse()
+	{
+	}
 
-    @Override
-    public String toString()
-    {
-        return name().toLowerCase();
-    }
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
+	}
 
-    private TableBorderCollapse()
-    {
-    }
+	@Override
+	public String getJavascriptSyntax()
+	{
+		return "style.borderCollapse";
+	}
 
-    @Override
-    public String getJavascriptSyntax()
-    {
-        return "style.borderCollapse";
-    }
+	@Override
+	public CSSVersions getCSSVersion()
+	{
+		return CSSVersions.CSS2;
+	}
 
-    @Override
-    public CSSVersions getCSSVersion()
-    {
-        return CSSVersions.CSS2;
-    }
+	@Override
+	public String getValue()
+	{
+		return name();
+	}
 
-    @Override
-    public String getValue()
-    {
-        return name();
-    }
-
-    @Override
-    public TableBorderCollapse getDefault()
-    {
-        return Unset;
-    }
+	@Override
+	public TableBorderCollapse getDefault()
+	{
+		return Unset;
+	}
 }

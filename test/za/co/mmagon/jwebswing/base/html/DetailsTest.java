@@ -20,23 +20,22 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class DetailsTest
 {
-
-    public DetailsTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        Details d = new Details();
-        d.setID("id");
-        System.out.println(d.toString(true));
-        Assert.assertEquals("<details id=\"id\"></details>", d.toString(true).toString());
-    }
-
+	
+	public DetailsTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		Details d = new Details();
+		d.setID("id");
+		System.out.println(d.toString(true));
+		Assert.assertEquals("<details id=\"id\"></details>", d.toString(true).toString());
+	}
+	
 }

@@ -19,46 +19,45 @@ package za.co.mmagon.jwebswing.base.html.attributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 
 /**
- *
  * @author GedMarc
- * @since Mar 1, 2015
  * @version 1.0
+ * @since Mar 1, 2015
  */
 public enum TrackAttributes implements AttributeDefinitions
 {
 
-    /**
-     * Sets or returns the default state of the track
-     */
-    Default,
-    /**
-     * Sets or returns the value of the kind attribute of the track
-     */
-    Kind,
-    /**
-     * Sets or returns the value of the label attribute of the track
-     */
-    Label,
-    /**
-     * Returns the current state of the track resource
-     */
-    ReadyState,
-    /**
-     * Sets or returns the value of the src attribute of the track
-     */
-    Src,
-    /**
-     * Sets or returns the value of the srclang attribute of the track
-     */
-    Srclang,
-    /**
-     * Returns a TextTrack object representing the track element's text track data
-     */
-    Track;
+	/**
+	 * Sets or returns the default state of the track
+	 */
+	Default,
+	/**
+	 * Sets or returns the value of the kind attribute of the track
+	 */
+	Kind,
+	/**
+	 * Sets or returns the value of the label attribute of the track
+	 */
+	Label,
+	/**
+	 * Returns the current state of the track resource
+	 */
+	ReadyState,
+	/**
+	 * Sets or returns the value of the src attribute of the track
+	 */
+	Src,
+	/**
+	 * Sets or returns the value of the srclang attribute of the track
+	 */
+	Srclang,
+	/**
+	 * Returns a TextTrack object representing the track element's text track data
+	 */
+	Track;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

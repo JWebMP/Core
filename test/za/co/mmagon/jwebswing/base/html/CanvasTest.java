@@ -22,30 +22,29 @@ import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.base.html.attributes.CanvasAttributes;
 
 /**
- *
  * @author GedMarc
  */
 public class CanvasTest extends BaseTestClass
 {
 
-    public CanvasTest()
-    {
-    }
+	public CanvasTest()
+	{
+	}
 
-    @Test
-    public void testSomeMethod()
-    {
-        System.out.println("neg");
-        Canvas c21 = new Canvas();
-        System.out.println("asdfg");
-        c21.addAttribute(CanvasAttributes.Height, "asdf");
-        System.out.println(c21.toString(true));
-        Canvas c = new Canvas();
-        c.setID("Canvas");
-        c.addAttribute(CanvasAttributes.Height, "200px");
-        c.addAttribute(CanvasAttributes.Width, "200px");
-        System.out.println(c.toString(true));
-        Assert.assertEquals("<canvas height=\"200px\" width=\"200px\" id=\"Canvas\"></canvas>", c.toString(true).toString());
-    }
+	@Test
+	public void testSomeMethod()
+	{
+		System.out.println("neg");
+		Canvas c21 = new Canvas();
+		System.out.println("asdfg");
+		c21.addAttribute(CanvasAttributes.Height, "asdf");
+		System.out.println(c21.toString(true));
+		Canvas c = new Canvas();
+		c.setID("Canvas");
+		c.addAttribute(CanvasAttributes.Height, "200px");
+		c.addAttribute(CanvasAttributes.Width, "200px");
+		System.out.println(c.toString(true));
+		Assert.assertEquals("<canvas height=\"200px\" width=\"200px\" id=\"Canvas\"></canvas>", c.toString(true).toString());
+	}
 
 }

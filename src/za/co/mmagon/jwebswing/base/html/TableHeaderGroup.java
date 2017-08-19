@@ -51,25 +51,25 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * None of the HTML 4.01 attributes are supported in HTML5.<p>
  *
- * @author Marc Magon
  * @param <J>
  *
- * @since forever
+ * @author Marc Magon
  * @version 1.0
+ * @since forever
  */
 public class TableHeaderGroup<J extends TableHeaderGroup<J>>
-        extends Component<TableHeaderGroupChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements TableChildren
+		extends Component<TableHeaderGroupChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements TableChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new blank header group
-     */
-    public TableHeaderGroup()
-    {
-        super(ComponentTypes.TableHeaderGroup);
-    }
-
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new blank header group
+	 */
+	public TableHeaderGroup()
+	{
+		super(ComponentTypes.TableHeaderGroup);
+	}
+	
 }

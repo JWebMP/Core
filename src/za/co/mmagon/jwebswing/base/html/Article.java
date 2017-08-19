@@ -16,14 +16,18 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import java.io.Serializable;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.logger.LogFactory;
+
+import java.io.Serializable;
 
 /**
  * Definition and Usage
@@ -54,45 +58,45 @@ import za.co.mmagon.logger.LogFactory;
  * <p>
  * The article tag also supports the Event Attributes in HTML.<p>
  * <p>
+ *
  * @param <J>
  *
- * @since 2014/10/26
- * @version 1.0
  * @author MMagon
  * <p>
- *
+ * @version 1.0
+ * @since 2014/10/26
  */
 public class Article<J extends Article<J>>
-        extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements GlobalChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, Serializable
+		extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements GlobalChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, Serializable
 {
-
-    /**
-     * Logger for the Component
-     */
-    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Article");
-    /**
-     * Serial Version for all Components and their compatibility
-     */
-    private static final long serialVersionUID = 1l;
-
-    /**
-     * Constructs a new article instance
-     *
-     * @param text
-     */
-    public Article(String text)
-    {
-        super(ComponentTypes.Article.getComponentTag(), ComponentTypes.Article);
-        setText(text);
-    }
-
-    /**
-     * Constructs a new instance of article
-     */
-    public Article()
-    {
-        this(null);
-    }
-
+	
+	/**
+	 * Logger for the Component
+	 */
+	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Article");
+	/**
+	 * Serial Version for all Components and their compatibility
+	 */
+	private static final long serialVersionUID = 1l;
+	
+	/**
+	 * Constructs a new article instance
+	 *
+	 * @param text
+	 */
+	public Article(String text)
+	{
+		super(ComponentTypes.Article.getComponentTag(), ComponentTypes.Article);
+		setText(text);
+	}
+	
+	/**
+	 * Constructs a new instance of article
+	 */
+	public Article()
+	{
+		this(null);
+	}
+	
 }

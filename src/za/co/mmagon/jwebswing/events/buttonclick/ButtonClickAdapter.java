@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.events.buttonclick;
 
-import java.io.Serializable;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.Event;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
@@ -27,85 +26,88 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTy
 import za.co.mmagon.jwebswing.plugins.ComponentInformation;
 import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 
+import java.io.Serializable;
+
 /**
  * This event is triggered when a button is clicked.
  *
  * @author Marc Magon
  */
 @ComponentInformation(name = "Button Event", description = "Server Side Event for Button Click Event.",
-        url = "https://www.armineasy.com/JWebSwing", wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
+		url = "https://www.armineasy.com/JWebSwing", wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
 public abstract class ButtonClickAdapter extends Event
-        implements Serializable
+		implements Serializable
 {
 
-    private static final long serialVersionUID = 1L;
-    private ButtonClickDirective directive;
+	private static final long serialVersionUID = 1L;
+	private ButtonClickDirective directive;
 
-    /**
-     * This event is triggered when a button is clicked.
-     *
-     * @param component The component this click is going to be acting on
-     */
-    public ButtonClickAdapter(Component component)
-    {
-        super(EventTypes.buttonClickEvent, component);
-    }
+	/**
+	 * This event is triggered when a button is clicked.
+	 *
+	 * @param component The component this click is going to be acting on
+	 */
+	public ButtonClickAdapter(Component component)
+	{
+		super(EventTypes.buttonClickEvent, component);
+	}
 
-    @Override
-    public void preConfigure()
-    {
-        if (!isConfigured())
-        {
-            JQueryPageConfigurator.setRequired((Component) getComponent(), true);
-            AngularPageConfigurator.setRequired(getComponent(), true);
-            getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngButtonClick, "jwCntrl.perform($event," + renderVariables() + ");");
-        }
-        super.preConfigure();
-    }
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			JQueryPageConfigurator.setRequired((Component) getComponent(), true);
+			AngularPageConfigurator.setRequired(getComponent(), true);
+			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
+			component.addAttribute(AngularAttributes.ngButtonClick, "jwCntrl.perform($event," + renderVariables() + ");");
+		}
+		super.preConfigure();
+	}
 
-    /**
-     * Triggers on Activation
-     * <p>
-     * @param ajaxObject   The physical AJAX call
-     * @param ajaxReceiver The physical Ajax Receiver
-     */
-    public abstract void onButtonClick(AjaxCall ajaxObject, AjaxResponse ajaxReceiver);
+	/**
+	 * Triggers on Activation
+	 * <p>
+	 *
+	 * @param ajaxObject   The physical AJAX call
+	 * @param ajaxReceiver The physical Ajax Receiver
+	 */
+	public abstract void onButtonClick(AjaxCall ajaxObject, AjaxResponse ajaxReceiver);
 
-    /**
-     * The method that is fired on call
-     *
-     * @param ajaxObject   The component that made the call
-     * @param ajaxReceiver The Response Object Being Returned
-     */
-    @Override
-    public void fireEvent(AjaxCall ajaxObject, AjaxResponse ajaxReceiver)
-    {
-        onButtonClick(ajaxObject, ajaxReceiver);
-    }
+	/**
+	 * The method that is fired on call
+	 *
+	 * @param ajaxObject   The component that made the call
+	 * @param ajaxReceiver The Response Object Being Returned
+	 */
+	@Override
+	public void fireEvent(AjaxCall ajaxObject, AjaxResponse ajaxReceiver)
+	{
+		onButtonClick(ajaxObject, ajaxReceiver);
+	}
 
-    /**
-     * Returns this directive
-     *
-     * @return
-     */
-    public ButtonClickDirective getDirective()
-    {
-        if (directive == null)
-        {
-            setDirective(new ButtonClickDirective());
-        }
-        return directive;
-    }
+	/**
+	 * Returns this directive
+	 *
+	 * @return
+	 */
+	public ButtonClickDirective getDirective()
+	{
+		if (directive == null)
+		{
+			setDirective(new ButtonClickDirective());
+		}
+		return directive;
+	}
 
-    /**
-     * Sets this directive
-     *
-     * @param directive
-     */
-    public void setDirective(ButtonClickDirective directive)
-    {
-        this.directive = directive;
-    }
+	/**
+	 * Sets this directive
+	 *
+	 * @param directive
+	 */
+	public void setDirective(ButtonClickDirective directive)
+	{
+		this.directive = directive;
+	}
 
 }

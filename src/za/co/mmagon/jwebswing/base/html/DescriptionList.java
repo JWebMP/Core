@@ -18,28 +18,30 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.DescriptionListChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
 /**
+ * @param <J>
  *
  * @author GedMarc
- * @param <J>
  */
 public class DescriptionList<J extends DescriptionList<J>>
-        extends Component<DescriptionListChildren, NoAttributes, NoFeatures, NoEvents, J>
-        implements GlobalChildren, NoIDTag
+		extends Component<DescriptionListChildren, NoAttributes, NoFeatures, NoEvents, J>
+		implements GlobalChildren, NoIDTag
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Construct a new Definition List
-     */
-    public DescriptionList()
-    {
-        super(ComponentTypes.DescriptionList);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Construct a new Definition List
+	 */
+	public DescriptionList()
+	{
+		super(ComponentTypes.DescriptionList);
+	}
 }

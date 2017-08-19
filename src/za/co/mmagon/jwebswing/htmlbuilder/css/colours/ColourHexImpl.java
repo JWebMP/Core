@@ -18,29 +18,27 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.colours;
 
 /**
- *
  * @author GedMarc
- * @since Nov 19, 2016
  * @version 1.0
- * 
+ * @since Nov 19, 2016
  */
 public class ColourHexImpl extends ColourHex
 {
 
-    public ColourHexImpl ()
-    {
-        super("");
-    }
+	public ColourHexImpl()
+	{
+		super("");
+	}
 
-    public ColourHexImpl(String thisHex)
-    {
-        super(thisHex);
-    }
+	public ColourHexImpl(String thisHex)
+	{
+		super(thisHex);
+	}
 
-    public ColourHexImpl(ColourNames colourName)
-    {
-        super(colourName);
-    }
-    
-    
+	public ColourHexImpl(ColourNames colourName)
+	{
+		super(colourName);
+	}
+
+
 }

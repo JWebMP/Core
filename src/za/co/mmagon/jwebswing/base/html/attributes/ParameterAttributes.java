@@ -22,43 +22,41 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  * Defines the attributes for a parameter
  *
  * @author GedMarc
- * @since Mar 1, 2015
  * @version 1.0
+ * @since Mar 1, 2015
  */
 public enum ParameterAttributes implements AttributeDefinitions
 {
 
-    /**
-     * Specifies the name of a parameter
-     */
-    Name,
-    /**
-     * Not supported in HTML5. Specifies the media type of the parameter
-     *
-     * @deprecated
-     *
-     *
-     */
-    Type,
-    /**
-     * Specifies the value of the parameter
-     */
-    Value,
-    /**
-     * Not supported in HTML5
-     * <p>
-     * Specifies the type of the value
-     * data
-     * ref
-     * object
-     *
-     * @deprecated
-     */
-    ValueType;
+	/**
+	 * Specifies the name of a parameter
+	 */
+	Name,
+	/**
+	 * Not supported in HTML5. Specifies the media type of the parameter
+	 *
+	 * @deprecated
+	 */
+	Type,
+	/**
+	 * Specifies the value of the parameter
+	 */
+	Value,
+	/**
+	 * Not supported in HTML5
+	 * <p>
+	 * Specifies the type of the value
+	 * data
+	 * ref
+	 * object
+	 *
+	 * @deprecated
+	 */
+	ValueType;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

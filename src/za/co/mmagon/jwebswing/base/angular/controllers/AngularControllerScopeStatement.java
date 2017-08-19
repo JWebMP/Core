@@ -28,42 +28,42 @@ import java.util.Comparator;
 public abstract class AngularControllerScopeStatement implements Comparator<AngularControllerScopeStatement>, Serializable
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private int sortOrder = 100;
+	private int sortOrder = 100;
 
-    /*
-     * Constructs a new AngularControllerScopeStatement
-     */
-    public AngularControllerScopeStatement()
-    {
-        //Nothing needed
-    }
+	/*
+	 * Constructs a new AngularControllerScopeStatement
+	 */
+	public AngularControllerScopeStatement()
+	{
+		//Nothing needed
+	}
 
-    @Override
-    public int compare(AngularControllerScopeStatement o1, AngularControllerScopeStatement o2)
-    {
-        return o1.getSortOrder().compareTo(o2.getSortOrder());
-    }
+	@Override
+	public int compare(AngularControllerScopeStatement o1, AngularControllerScopeStatement o2)
+	{
+		return o1.getSortOrder().compareTo(o2.getSortOrder());
+	}
 
-    public abstract StringBuilder getStatement();
+	public abstract StringBuilder getStatement();
 
-    /**
-     * Gets the sort order
-     *
-     * @return
-     */
-    public Integer getSortOrder()
-    {
-        return sortOrder;
-    }
+	/**
+	 * Gets the sort order
+	 *
+	 * @return
+	 */
+	public Integer getSortOrder()
+	{
+		return sortOrder;
+	}
 
-    /*
-     * Sets the sort order
-     */
-    public void setSortOrder(int sortOrder)
-    {
-        this.sortOrder = sortOrder;
-    }
+	/*
+	 * Sets the sort order
+	 */
+	public void setSortOrder(int sortOrder)
+	{
+		this.sortOrder = sortOrder;
+	}
 
 }

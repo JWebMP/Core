@@ -17,58 +17,66 @@
 package za.co.mmagon;
 
 import com.armineasy.injection.GuiceContext;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
- *
  * @author Marc Magon
  * @since 05 Apr 2017
  */
 public class SessionHelper
 {
 
-    /*
-     * Constructs a new SessionHelper
-     */
-    private SessionHelper()
-    {
-        //Nothing needed
-    }
+	/*
+	 * Constructs a new SessionHelper
+	 */
+	private SessionHelper()
+	{
+		//Nothing needed
+	}
 
-    /**
-     * Returns the full server address, without the final section
-     *
-     * @return
-     */
-    public static String getServerPath()
-    {
-        if (!GuiceContext.isBuildingInjector())
-        {
-            HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);
-            StringBuffer buff = request.getRequestURL();
-            if (request.getHeader("jwsiteurl") != null && !request.getHeader("jwsiteurl").isEmpty())
-            {
-                buff = new StringBuffer(request.getHeader("jwsiteurl"));
-            }
-            String address = buff.substring(0, buff.lastIndexOf("/") + 1);
-            return address;
-        }
-        return "";
-    }
+	/**
+	 * Returns the full server address, without the final section
+	 *
+	 * @return
+	 */
+	public static String getServerPath()
+	{
+		if (!GuiceContext.isBuildingInjector())
+		{
+			StringBuffer url = new StringBuffer();
+			try
+			{
+				HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);
+				StringBuffer buff = request.getRequestURL();
+				if (request.getHeader("jwsiteurl") != null && !request.getHeader("jwsiteurl").isEmpty())
+				{
+					buff = new StringBuffer(request.getHeader("jwsiteurl"));
+				}
+				String address = buff.substring(0, buff.lastIndexOf("/") + 1);
+				return address;
+			}
+			catch (Exception e)
+			{
+				return "";
+			}
+		}
+		return "";
+	}
 
-    /**
-     * Returns the last section of the url, to be matched with page configurator url
-     *
-     * @return
-     */
-    public static String getServletUrl()
-    {
-        if (!GuiceContext.isBuildingInjector())
-        {
-            HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);
-            String buff = request.getServletPath();
-            return buff.isEmpty() ? "/" : buff;
-        }
-        return "/";
-    }
+	/**
+	 * Returns the last section of the url, to be matched with page configurator url
+	 *
+	 * @return
+	 */
+	public static String getServletUrl()
+	{
+		if (!GuiceContext.isBuildingInjector())
+		{
+			HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);
+			String buff = request.getServletPath();
+			return buff.isEmpty() ? "/" : buff;
+		}
+		return "/";
+	}
 }

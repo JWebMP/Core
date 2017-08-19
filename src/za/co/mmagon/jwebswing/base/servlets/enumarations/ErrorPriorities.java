@@ -18,14 +18,16 @@ package za.co.mmagon.jwebswing.base.servlets.enumarations;
 
 /**
  * A generic error level enum
- * @since 2012-12-30
+ *
  * @author MMagon
+ * @since 2012-12-30
  */
-public enum ErrorPriorities {
-    General,
-    Info,
-    Warning,
-    Exception,
-    Error,
-    Fatal;
+public enum ErrorPriorities
+{
+	General,
+	Info,
+	Warning,
+	Exception,
+	Error,
+	Fatal;
 }

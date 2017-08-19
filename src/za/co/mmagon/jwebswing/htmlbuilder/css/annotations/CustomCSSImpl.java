@@ -16,69 +16,69 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.annotations;
 
-import java.lang.annotation.Annotation;
 import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.NameValuePairCSS;
 import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.NameValuePairCSSImpl;
+
+import java.lang.annotation.Annotation;
 
 /**
  * Any custom CSS Implementation
  *
  * @author GedMarc
- * @since Nov 20, 2016
  * @version 1.0
- *
+ * @since Nov 20, 2016
  */
 public class CustomCSSImpl implements CustomCSS
 {
 
-    private NameValuePairCSSImpl[] value;
+	private NameValuePairCSSImpl[] value;
 
-    /**
-     * Any custom CSS implementation
-     */
-    public CustomCSSImpl()
-    {
+	/**
+	 * Any custom CSS implementation
+	 */
+	public CustomCSSImpl()
+	{
 
-    }
+	}
 
-    @Override
-    public Class<? extends Annotation> annotationType()
-    {
-        return CustomCSS.class;
-    }
+	@Override
+	public Class<? extends Annotation> annotationType()
+	{
+		return CustomCSS.class;
+	}
 
-    /**
-     * use getValue
-     *
-     * @return
-     *
-     * @deprecated doesn't really exist
-     */
-    @Deprecated
-    @Override
-    public NameValuePairCSS[] value()
-    {
-        return null;
-    }
+	/**
+	 * use getValue
+	 *
+	 * @return
+	 *
+	 * @deprecated doesn't really exist
+	 */
+	@Deprecated
+	@Override
+	public NameValuePairCSS[] value()
+	{
+		return null;
+	}
 
-    /**
-     * Returns the value pairs
-     *
-     * @return
-     */
-    public NameValuePairCSSImpl[] getValue()
-    {
-        return value;
-    }
+	/**
+	 * Returns the value pairs
+	 *
+	 * @return
+	 */
+	public NameValuePairCSSImpl[] getValue()
+	{
+		return value;
+	}
 
-    /**
-     * Returns the value pairs
-     *
-     * @param value
-     */
-    public void setValue(NameValuePairCSSImpl[] value)
-    {
-        this.value = value;
-    }
+	/**
+	 * Returns the value pairs
+	 *
+	 * @param value
+	 */
+	public void setValue(NameValuePairCSSImpl[] value)
+	{
+		this.value = value;
+	}
 
 }

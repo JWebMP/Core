@@ -19,9 +19,9 @@ package za.co.mmagon.jwebswing.events.click;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
+import za.co.mmagon.jwebswing.base.html.Div;
 
 /**
- *
  * @author Marc Magon
  */
 public class ClickAdapterTest
@@ -39,6 +39,16 @@ public class ClickAdapterTest
     @Test
     public void testOnClick()
     {
+        Div d = new Div();
+        d.addEvent(new ClickAdapter(d)
+        {
+            @Override
+            public void onClick(AjaxCall call, AjaxResponse response)
+            {
+
+            }
+        });
+        System.out.println(d.toString(true));
     }
 
     @Test

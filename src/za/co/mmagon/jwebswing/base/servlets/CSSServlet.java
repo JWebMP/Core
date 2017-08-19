@@ -19,17 +19,18 @@ package za.co.mmagon.jwebswing.base.servlets;
 import com.armineasy.injection.GuiceContext;
 import com.armineasy.injection.filters.CorsAllowedFilter;
 import com.google.inject.Singleton;
+import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
+import za.co.mmagon.logger.LogFactory;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
-import za.co.mmagon.logger.LogFactory;
 
 /**
  * This Servlet supplies all the JavaScript for a given HTML Page
@@ -40,78 +41,78 @@ import za.co.mmagon.logger.LogFactory;
 public class CSSServlet extends JWDefaultServlet
 {
 
-    private static final Logger LOG = LogFactory.getInstance().getLogger("CSSServlet");
-    private static final long serialVersionUID = 1L;
+	private static final Logger LOG = LogFactory.getInstance().getLogger("CSSServlet");
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     *
-     * @param request  Servlet request
-     * @param response Servlet response
-     *
-     * @throws ServletException if a Servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, MissingComponentException
-    {
-        Date startDate = new Date();
-        StringBuilder scripts = new StringBuilder();
+	/**
+	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+	 *
+	 * @param request  Servlet request
+	 * @param response Servlet response
+	 *
+	 * @throws ServletException if a Servlet-specific error occurs
+	 * @throws IOException      if an I/O error occurs
+	 */
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, MissingComponentException
+	{
+		Date startDate = new Date();
+		StringBuilder scripts = new StringBuilder();
 
-        Page page = GuiceContext.inject().getInstance(Page.class);
+		Page page = GuiceContext.inject().getInstance(Page.class);
 
-        if (page == null)
-        {
-            throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
-        }
+		if (page == null)
+		{
+			throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
+		}
 
-        StringBuilder css = page.getBody().renderCss(0);
-        scripts.append(css);
+		StringBuilder css = page.getBody().renderCss(0);
+		scripts.append(css);
 
-        Date endDate = new Date();
-        try (PrintWriter out = response.getWriter())
-        {
-            response.setContentType("text/css");
-            response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);
-            response.setHeader("Access-Control-Allow-Credentials", "true");
-            response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
-            response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+		Date endDate = new Date();
+		try (PrintWriter out = response.getWriter())
+		{
+			response.setContentType("text/css");
+			response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);
+			response.setHeader("Access-Control-Allow-Credentials", "true");
+			response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
+			response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
 
-            out.println(scripts);
-            Date dataTransferDate = new Date();
-            LOG.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]",
-                    new Object[]
-                    {
-                        request.getSession().getId(), endDate.getTime() - startDate.getTime(), scripts.length(), dataTransferDate.getTime() - startDate.getTime()
-                    });
-        }
-    }
+			out.println(scripts);
+			Date dataTransferDate = new Date();
+			LOG.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]",
+			        new Object[]
+					        {
+							        request.getSession().getId(), endDate.getTime() - startDate.getTime(), scripts.length(), dataTransferDate.getTime() - startDate.getTime()
+					        });
+		}
+	}
 
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request  Servlet request
-     * @param response Servlet response
-     *
-     * @throws ServletException if a Servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        try
-        {
-            super.doPost(request, response); //Checks for the page existance
-            processRequest(request, response);
-        }
-        catch (IOException | ServletException e)
-        {
-            LOG.log(Level.SEVERE, "Do Get in CSS Servlet", e);
-        }
-        catch (MissingComponentException ex)
-        {
-            Logger.getLogger(CSSServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+	/**
+	 * Handles the HTTP <code>GET</code> method.
+	 *
+	 * @param request  Servlet request
+	 * @param response Servlet response
+	 *
+	 * @throws ServletException if a Servlet-specific error occurs
+	 * @throws IOException      if an I/O error occurs
+	 */
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException
+	{
+		try
+		{
+			super.doPost(request, response); //Checks for the page existance
+			processRequest(request, response);
+		}
+		catch (IOException | ServletException e)
+		{
+			LOG.log(Level.SEVERE, "Do Get in CSS Servlet", e);
+		}
+		catch (MissingComponentException ex)
+		{
+			Logger.getLogger(CSSServlet.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 }

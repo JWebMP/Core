@@ -18,7 +18,9 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.AbbreviationAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.AbbreviationChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -47,33 +49,32 @@ import za.co.mmagon.logger.LogFactory;
  * <p>
  * None.
  * <p>
+ *
  * @param <J>
  *
- * @since Forever
- * @version
  * @author MMagon
  * <p>
- *
+ * @since Forever
  */
 public class Abbreviation<J extends Abbreviation<J>>
-        extends Component<AbbreviationChildren, AbbreviationAttributes, GlobalFeatures, GlobalEvents, J>
-        implements NoNewLineBeforeClosingTag, NoNewLineForRawText
+		extends Component<AbbreviationChildren, AbbreviationAttributes, GlobalFeatures, GlobalEvents, J>
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
-
-    /**
-     * Logger for the Component
-     */
-    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Abbreviation");
-    /**
-     * Serial Version for all Components and their compatibility
-     */
-    private static final long serialVersionUID = 1l;
-
-    /**
-     * Constructs a new Abbreviation Tag
-     */
-    public Abbreviation()
-    {
-        super(ComponentTypes.Abbreviation.getComponentTag(), ComponentTypes.Abbreviation);
-    }
+	
+	/**
+	 * Logger for the Component
+	 */
+	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Abbreviation");
+	/**
+	 * Serial Version for all Components and their compatibility
+	 */
+	private static final long serialVersionUID = 1l;
+	
+	/**
+	 * Constructs a new Abbreviation Tag
+	 */
+	public Abbreviation()
+	{
+		super(ComponentTypes.Abbreviation.getComponentTag(), ComponentTypes.Abbreviation);
+	}
 }

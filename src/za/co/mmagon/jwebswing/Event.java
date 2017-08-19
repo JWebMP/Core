@@ -17,8 +17,6 @@
 package za.co.mmagon.jwebswing;
 
 import com.armineasy.injection.GuiceContext;
-import java.util.ArrayList;
-import java.util.List;
 import za.co.mmagon.jwebswing.base.ComponentEventBase;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
@@ -32,13 +30,16 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Container Class for Events. Splits from the component hierarchy
  *
- * @author GedMarc
  * @param <A> Ajax Event type object back
  * @param <J> This class
  *
+ * @author GedMarc
  * @since 23 Apr 2016
  */
 public class Event<A extends JavaScriptPart, J extends Event>
@@ -51,7 +52,6 @@ public class Event<A extends JavaScriptPart, J extends Event>
      * The variables to return
      */
     private List<String> variables;
-
     /**
      * A list of all queries to execute on ajax response
      */
@@ -163,7 +163,7 @@ public class Event<A extends JavaScriptPart, J extends Event>
      *
      * @return
      */
-    public String renderVariables()
+    public StringBuilder renderVariables()
     {
         final StringBuilder s = new StringBuilder("[");
         getVariables().stream().forEach((event) ->
@@ -184,7 +184,7 @@ public class Event<A extends JavaScriptPart, J extends Event>
         //append Event ID
         s2.append(",'").append(getID()).append("'");
 
-        return s2.toString();
+        return s2;
     }
 
     /**
@@ -250,39 +250,6 @@ public class Event<A extends JavaScriptPart, J extends Event>
             throw new NullComponentException("Components set for events cannot be null");
         }
         this.component = component;
-        return (J) this;
-    }
-
-    /**
-     * Adds a query to builder
-     *
-     * @param query
-     *
-     * @return Adds a query to the window
-     */
-    public J addQuery(StringBuilder query)
-    {
-        if (!getQueries().contains(query))
-        {
-            getQueries().add(query);
-        }
-        return (J) this;
-    }
-
-    /**
-     * Adds a query to builder
-     *
-     * @param query
-     *
-     * @return
-     */
-    public J addQuery(String query)
-    {
-        StringBuilder sb = new StringBuilder(query);
-        if (!getQueries().contains(sb))
-        {
-            getQueries().add(new StringBuilder(query));
-        }
         return (J) this;
     }
 
@@ -374,11 +341,6 @@ public class Event<A extends JavaScriptPart, J extends Event>
         {
             if (!GuiceContext.isBuildingInjector())
             {
-                Page page = GuiceContext.getInstance(Page.class);
-                if (!page.getRegisteredEvents().contains(this))
-                {
-                    page.getRegisteredEvents().add(this);
-                }
             }
         }
         super.init();

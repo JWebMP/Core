@@ -31,28 +31,27 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * Tip: This tag is not deprecated, but it is possible to achieve richer effect with CSS.<p>
  *
- * @author GedMarc
  * @param <J>
  *
- * @since Mar 1, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
- *
+ * @since Mar 1, 2015
  */
 public class SampleCode<J extends SampleCode<J>>
-        extends Component<PhraseChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements ParagraphChildren, PhraseChildren
+		extends Component<PhraseChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ParagraphChildren, PhraseChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Defines a set of sample code
-     *
-     * @param code
-     */
-    public SampleCode(String code)
-    {
-        super(ComponentTypes.SampleCode);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Defines a set of sample code
+	 *
+	 * @param code
+	 */
+	public SampleCode(String code)
+	{
+		super(ComponentTypes.SampleCode);
+	}
 }

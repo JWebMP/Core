@@ -18,17 +18,20 @@ package za.co.mmagon.jwebswing.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import java.util.Map.Entry;
-import java.util.*;
-import java.util.logging.Level;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoClassAttribute;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
-import za.co.mmagon.jwebswing.base.interfaces.ComponentHTMLBase;
 import za.co.mmagon.jwebswing.base.interfaces.IComponentHTMLAttributeBase;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.generics.Pair;
 import za.co.mmagon.logger.LogFactory;
+
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
+import java.util.logging.Level;
 
 /**
  * Denotes a component that has a tag. By default these can add events, features, variables etc
@@ -60,20 +63,10 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("ComponentAttributes");
 
     /**
-     * The SORTED global attribute collection of this component
+     * The current stored attribute lists
      */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private TreeMap<GlobalAttributes, String> attributesGlobal;
-    /**
-     * The generic list of the attributes that are local to this component
-     */
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private TreeMap<A, String> attributesLocal;
-    /**
-     * The custom list of the attributes that are local to this component
-     */
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private TreeMap<String, String> attributesCustom;
+    private Map<String, String> attributes;
 
     /**
      * Specifies if this component should render an ID attribute
@@ -102,48 +95,6 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     }
 
     /**
-     * Returns the list of global attributes currently assigned
-     *
-     * @return
-     */
-    protected Map<GlobalAttributes, String> getAttributesGlobal()
-    {
-        if (attributesGlobal == null)
-        {
-            attributesGlobal = new TreeMap<>();
-        }
-        return attributesGlobal;
-    }
-
-    /**
-     * Returns the local set of attributes currently assigned
-     *
-     * @return
-     */
-    protected Map<A, String> getAttributes()
-    {
-        if (attributesLocal == null)
-        {
-            attributesLocal = new TreeMap<>();
-        }
-        return attributesLocal;
-    }
-
-    /**
-     * Returns the list of global attributes currently assigned
-     *
-     * @return
-     */
-    protected Map<String, String> getAttributesCustom()
-    {
-        if (attributesCustom == null)
-        {
-            attributesCustom = new TreeMap<>();
-        }
-        return attributesCustom;
-    }
-
-    /**
      * Adds the ID attribute to the component
      */
     @Override
@@ -157,38 +108,33 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
             }
             else
             {
-                getAttributesGlobal().remove(GlobalAttributes.ID);
+                removeAttribute(GlobalAttributes.ID);
             }
         }
         super.preConfigure();
     }
 
     /**
-     * Returns a complete collection of attributes
+     * Returns the current raw attribute map
      *
      * @return
      */
-    @Override
-    public Map<Enum, String> getAttributesAll()
+    protected Map<String, String> getAttributes()
     {
-        HashMap<Enum, String> allAttributes = new HashMap<>();
-
-        for (Entry<GlobalAttributes, String> entry : getAttributesGlobal().entrySet())
+        if (attributes == null)
         {
-            GlobalAttributes key = entry.getKey();
-            String value = entry.getValue();
-            allAttributes.put(key, value);
+            attributes = new TreeMap<>();
         }
-        allAttributes.putAll(getAttributes());
-
-        return allAttributes;
+        return attributes;
     }
 
     /**
      * Renders all the Attribute HTML. The All Custom attributes can contain any value=parameter pair
      * <p>
-     * @see GlobalAttributes
+     *
      * @return The attribute HTML
+     *
+     * @see GlobalAttributes
      */
     @Override
     protected StringBuilder renderAttributes(StringBuilder sb)
@@ -196,95 +142,63 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
         StringBuilder sbClasses = renderClasses();
         if (sbClasses.length() > 0 && !(this instanceof NoClassAttribute))
         {
-            getAttributesGlobal().put(GlobalAttributes.Class, sbClasses.toString());
+            addAttribute(GlobalAttributes.Class, sbClasses.toString());
         }
 
-        Map<Pair<String, Boolean>, String> attributeMap = new TreeMap<>();
-
-        Map<Enum, String> allDefinedAttributes = getAttributesAll();
-
-        for (Entry<Enum, String> entry : allDefinedAttributes.entrySet())
-        {
-            Enum key = entry.getKey();
-            String value = entry.getValue();
-            if (AttributeDefinitions.class.isAssignableFrom(key.getClass()))
-            {
-                AttributeDefinitions ad = AttributeDefinitions.class.cast(key);
-                Pair p = new Pair(key.toString(), ad.isKeyword());
-                attributeMap.put(p, value);
-            }
-            else
-            {
-                String keyValue = key.toString();
-                if (value != null && !value.isEmpty())
-                {
-                    attributeMap.put(new Pair(keyValue, false), value);
-                }
-                else
-                {
-                    attributeMap.put(new Pair(keyValue, true), value);
-                }
-            }
-        }
-
-        for (Entry<String, String> entry : getAttributesCustom().entrySet())
-        {
-            String key = entry.getKey();
-            String value = entry.getValue();
-            boolean isKeyword = value == null || value.trim().isEmpty();
-
-            Pair p = new Pair(key, isKeyword);
-            attributeMap.put(p, value);
-        }
-
-        if (!attributeMap.isEmpty())
+        //Build up the string builder
+        if (!getAttributes().isEmpty())
         {
             sb.append(" ");
         }
-
-        attributeMap.entrySet().forEach(entry ->
+        for (Entry<String, String> entry : getAttributes().entrySet())
         {
-            Pair<String, Boolean> key = entry.getKey();
+            String key = entry.getKey();
             String value = entry.getValue();
-
-            sb.append(key.getLeft().toLowerCase());
-            if (!key.getRight())
+            if (value == null)
             {
-                sb.append("=\"").append(value).append("\" ");
+                continue;
+            }
+            boolean isKeyword = value.isEmpty();
+            if (!isKeyword)
+            {
+                sb.append(key.toLowerCase()).append("=\"").append(value).append("\" ");
             }
             else
             {
-                sb.append(" ");
+                sb.append(key.toLowerCase()).append(" ");
             }
-        });
-        if (!attributeMap.isEmpty())
+        }
+        if (!getAttributes().isEmpty())
         {
             sb.deleteCharAt(sb.lastIndexOf(" "));
         }
-
         return sb;
     }
 
     /**
      * Returns an enumerated HashMap for ease of access
      * <p>
+     *
      * @param attribute The Global Attribute to apply
      * @param bop       Place Holder for return type boolean
      * <p>
+     *
      * @return HashMap of Attributes with GlobalAttributes Enumeration as Identifier
      */
     @Override
     public final Boolean getAttribute(GlobalAttributes attribute, Boolean bop)
     {
-        return Boolean.parseBoolean(getAttributesGlobal().get(attribute));
+        return Boolean.parseBoolean(getAttributes().get(attribute.toString()));
     }
 
     /**
      * Returns an enumerated HashMap for ease of access
      * <p>
+     *
      * @param attribute The Global Attribute to apply
      * @param bop       Place Holder for return type integer
      * <p>
+     *
      * @return HashMap of Attributes with GlobalAttributes Enumeration as Identifier
      */
     @Override
@@ -292,7 +206,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     {
         try
         {
-            return Integer.parseInt(getAttributesGlobal().get(attribute));
+            return Integer.parseInt(getAttributes().get(attribute.toString()));
         }
         catch (NumberFormatException | NullPointerException nfe)
         {
@@ -304,24 +218,27 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     /**
      * Returns an enumerated HashMap for ease of access
      * <p>
+     *
      * @param attribute The Global Attribute to apply
      * <p>
+     *
      * @return HashMap of Attributes with GlobalAttributes Enumeration as Identifier
      */
     @Override
     public final String getAttribute(GlobalAttributes attribute)
     {
-        if (getAttributesGlobal().get(attribute) == null)
+        if (getAttributes().get(attribute.toString()) == null)
         {
-            getAttributesGlobal().put(attribute, "");
+            getAttributes().put(attribute.toString(), "");
         }
 
-        return getAttributesGlobal().get(attribute);
+        return getAttributes().get(attribute.toString());
     }
 
     /**
      * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
      * <p>
+     *
      * @param attribute The GlobalAttribute to set the attribute to
      * @param value     The value of the attribute
      *
@@ -332,9 +249,9 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     {
         if (attribute == GlobalAttributes.Style)
         {
-            getAttributesGlobal().put(attribute, getAttributesGlobal().get(attribute) + "" + value);
+            getAttributes().put(attribute.toString(), getAttributes().get(attribute) + "" + value);
         }
-        getAttributesGlobal().put(attribute, value);
+        getAttributes().put(attribute.toString(), value);
 
         return (J) this;
     }
@@ -342,6 +259,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     /**
      * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
      * <p>
+     *
      * @param attribute The GlobalAttribute to set the attribute to
      * @param value     The value of the attribute
      *
@@ -350,13 +268,14 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     @Override
     public final J addAttribute(A attribute, String value)
     {
-        getAttributes().put(attribute, value);
+        getAttributes().put(attribute.toString(), value);
         return (J) this;
     }
 
     /**
      * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
      * <p>
+     *
      * @param attribute The GlobalAttribute to set the attribute to
      * @param value     The value of the attribute
      *
@@ -365,13 +284,14 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     @Override
     public final J addAttribute(A attribute, Integer value)
     {
-        getAttributes().put(attribute, value.toString());
+        getAttributes().put(attribute.toString(), value.toString());
         return (J) this;
     }
 
     /**
      * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
      * <p>
+     *
      * @param attribute The valid Local Attribute to add
      * @param value     The value of the attribute
      *
@@ -380,13 +300,14 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     @Override
     public final J addAttribute(A attribute, Boolean value)
     {
-        getAttributes().put(attribute, value.toString());
+        getAttributes().put(attribute.toString(), value.toString());
         return (J) this;
     }
 
     /**
      * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
      * <p>
+     *
      * @param attribute The valid Local Attribute to add
      * @param value     The value of the attribute
      *
@@ -394,21 +315,23 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
      */
     public final J addAttribute(String attribute, String value)
     {
-        getAttributesCustom().put(attribute, value);
+        getAttributes().put(attribute, value);
         return (J) this;
     }
 
     /**
      * Gets this list of local attribute values
      * <p>
+     *
      * @param attributeValue The Valid Local Attribute to Return
      * <p>
+     *
      * @return A String of the attribute value currently set
      */
     @Override
     public String getAttribute(A attributeValue)
     {
-        String s = getAttributes().get(attributeValue);
+        String s = getAttributes().get(attributeValue.toString());
         if (s == null)
         {
             s = "";
@@ -419,15 +342,17 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     /**
      * Gets this list of local attribute values
      * <p>
+     *
      * @param attributeValue The Valid Local Attribute to Return
      * @param uselessInt     A useless parameter purely to return the type integer
      * <p>
+     *
      * @return A HashMap if this components local attributes. Never null
      */
     @Override
     public Integer getAttribute(A attributeValue, Integer uselessInt)
     {
-        String s = getAttributes().get(attributeValue);
+        String s = getAttributes().get(attributeValue.toString());
         if (s == null)
         {
             s = "0";
@@ -438,15 +363,17 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     /**
      * Gets this list of local attribute values
      * <p>
+     *
      * @param attributeValue The Valid Local Attribute to Return
      * @param uselessInt     A useless parameter purely to return the type Boolean
      * <p>
+     *
      * @return A HashMap if this components local attributes. Never null
      */
     @Override
     public Boolean getAttribute(A attributeValue, Boolean uselessInt)
     {
-        String s = getAttributes().get(attributeValue);
+        String s = getAttributes().get(attributeValue.toString());
         if (s == null)
         {
             s = "false";
@@ -455,25 +382,9 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     }
 
     /**
-     * Sets if this component should render an ID attribute
-     * <p>
-     * @param renderIDAttibute
-     *
-     * @return
-     */
-    protected J setRenderIDAttibute(boolean renderIDAttibute)
-    {
-        this.renderIDAttibute = renderIDAttibute;
-        if (!renderIDAttibute)
-        {
-            getAttributesGlobal().remove(GlobalAttributes.ID);
-        }
-        return (J) this;
-    }
-
-    /**
      * Returns if this component should render for the ID attribute
      * <p>
+     *
      * @return
      */
     protected boolean isRenderIDAttibute()
@@ -486,6 +397,24 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
         {
             return renderIDAttibute;
         }
+    }
+
+    /**
+     * Sets if this component should render an ID attribute
+     * <p>
+     *
+     * @param renderIDAttibute
+     *
+     * @return
+     */
+    protected J setRenderIDAttibute(boolean renderIDAttibute)
+    {
+        this.renderIDAttibute = renderIDAttibute;
+        if (!renderIDAttibute)
+        {
+            getAttributes().remove(GlobalAttributes.ID);
+        }
+        return (J) this;
     }
 
     /**
@@ -508,7 +437,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     @Override
     public J setID(String id)
     {
-        getAttributesGlobal().put(GlobalAttributes.ID, id);
+        addAttribute(GlobalAttributes.ID, id);
         return super.setID(id);
     }
 
@@ -517,12 +446,78 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
     {
         ComponentHTMLAttributeBase cloned = (ComponentHTMLAttributeBase) super.cloneComponent();
 
-        cloned.attributesGlobal = new TreeMap();
-        cloned.attributesLocal = new TreeMap();
-        cloned.attributesGlobal.putAll(getAttributesGlobal());
-        cloned.attributesLocal.putAll(getAttributes());
+        cloned.attributes = new TreeMap();
+        cloned.attributes.putAll(getAttributes());
 
         return (J) cloned;
+    }
+
+    /**
+     * Shortcut to adding a style attribute
+     *
+     * @param style
+     *
+     * @return
+     */
+    public J addStyle(String style)
+    {
+        if (!style.endsWith(";"))
+        {
+            style += ";";
+        }
+        if (getAttributes().get("style") == null)
+        {
+            addAttribute("style", style);
+        }
+        else
+        {
+            addAttribute("style", getAttributes().get("style") + style);
+        }
+        return (J) this;
+    }
+    
+    /**
+     * Removes an attribute
+     * @param key
+     * @return
+     */
+    public J removeAttribute(String key)
+    {
+        getAttributes().remove(key);
+        return (J)this;
+    }
+    
+    /**
+     * Removes a key from the attribute set
+     * @param key
+     * @return
+     */
+    public J removeAttribute(GlobalAttributes key)
+    {
+        getAttributes().remove(key.toString());
+        return (J)this;
+    }
+    
+    /**
+     * Removes a key from the attribute set
+     * @param key
+     * @return
+     */
+    public J removeAttribute(A key)
+    {
+        getAttributes().remove(key.toString());
+        return (J)this;
+    }
+    
+    @Override
+    public void destroy()
+    {
+        if (this.attributes != null)
+        {
+            this.attributes.clear();
+            attributes = null;
+        }
+        super.destroy();
     }
 
 }

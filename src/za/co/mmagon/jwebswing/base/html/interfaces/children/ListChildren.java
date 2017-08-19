@@ -21,11 +21,9 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 /**
  * Defines children available to the list component
  *
- * @since 2014/06/16
- * @version 1.0
  * @author MMagon
- *
- *
+ * @version 1.0
+ * @since 2014/06/16
  */
 public interface ListChildren extends GlobalChildren
 {

@@ -16,8 +16,9 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.image;
 
-import com.fasterxml.jackson.annotation.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
+import com.fasterxml.jackson.annotation.JsonValue;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationAdapter;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationClass;
 
 /**
  * Any default image
@@ -26,53 +27,53 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
  * @since 17 Jan 2016
  */
 public class ImageCSSImpl extends CSSImplementationAdapter<ImageCSS, ImageCSSImpl>
-        implements CSSImplementationClass<ImageCSS, ImageCSSImpl>
+		implements CSSImplementationClass<ImageCSS, ImageCSSImpl>
 
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private String value;
+	private String value;
 
-    /**
-     * Constructs a new instance of the image CSS
-     */
-    public ImageCSSImpl()
-    {
-    }
+	/**
+	 * Constructs a new instance of the image CSS
+	 */
+	public ImageCSSImpl()
+	{
+	}
 
-    /**
-     * Constructs a new image with the given URL
-     *
-     * @param url
-     */
-    public ImageCSSImpl(String url)
-    {
-        this.value = url;
-    }
+	/**
+	 * Constructs a new image with the given URL
+	 *
+	 * @param url
+	 */
+	public ImageCSSImpl(String url)
+	{
+		this.value = url;
+	}
 
-    @Override
-    @JsonValue
-    public String toString()
-    {
-        if (value == null || value.isEmpty())
-        {
-            return "";
-        }
-        else
-        {
-            return "url('" + value + "')";
-        }
-    }
+	@Override
+	@JsonValue
+	public String toString()
+	{
+		if (value == null || value.isEmpty())
+		{
+			return "";
+		}
+		else
+		{
+			return "url('" + value + "')";
+		}
+	}
 
-    /**
-     * Returns the raw value
-     *
-     * @return
-     */
-    public String value()
-    {
-        return value;
-    }
+	/**
+	 * Returns the raw value
+	 *
+	 * @return
+	 */
+	public String value()
+	{
+		return value;
+	}
 
 }

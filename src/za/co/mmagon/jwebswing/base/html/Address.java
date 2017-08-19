@@ -16,14 +16,17 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import java.io.Serializable;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.AddressChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.logger.LogFactory;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -53,43 +56,39 @@ import za.co.mmagon.logger.LogFactory;
  *
  * @param <J>
  *
- * @since
- * @version
  * @author MMagon
- *
- *
  */
 public class Address<J extends Address<J>>
-        extends Component<AddressChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements NoNewLineBeforeClosingTag, NoNewLineForRawText, Serializable
+		extends Component<AddressChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, Serializable
 {
-
-    /**
-     * Logger for the Component
-     */
-    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Address");
-    /**
-     * Serial Version for all Components and their compatibility
-     */
-    private static final long serialVersionUID = 1l;
-
-    /**
-     * Constructs a new address, usually displayed in italic
-     *
-     * @param address
-     */
-    public Address(String address)
-    {
-        super(ComponentTypes.Address.getComponentTag(), ComponentTypes.Address);
-        setText(address);
-    }
-
-    /**
-     * Constructs a new instance of address
-     */
-    public Address()
-    {
-        this(null);
-    }
-
+	
+	/**
+	 * Logger for the Component
+	 */
+	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Address");
+	/**
+	 * Serial Version for all Components and their compatibility
+	 */
+	private static final long serialVersionUID = 1l;
+	
+	/**
+	 * Constructs a new address, usually displayed in italic
+	 *
+	 * @param address
+	 */
+	public Address(String address)
+	{
+		super(ComponentTypes.Address.getComponentTag(), ComponentTypes.Address);
+		setText(address);
+	}
+	
+	/**
+	 * Constructs a new instance of address
+	 */
+	public Address()
+	{
+		this(null);
+	}
+	
 }

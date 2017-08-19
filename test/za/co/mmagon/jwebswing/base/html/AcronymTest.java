@@ -16,38 +16,38 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.base.client.Browsers;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author MMagon
  */
 public class AcronymTest
 {
-
-    public AcronymTest()
-    {
-    }
-
-    @Test
-    public void testDefault()
-    {
-        Acronym acr = new Acronym("This is my acronym");
-        acr.getPage().setBrowser(Browsers.InternetExplorer6);
-        System.out.println(acr.toString(true));
-        assertEquals("<acronym>This is my acronym</acronym>", acr.toString(true).toString());
-
-    }
-
-    @Test
-    public void testHTML5()
-    {
-        Acronym acr = new Acronym("This is my acronym");
-        acr.getPage().setBrowser(Browsers.InternetExplorer9);
-        System.out.println(acr.toString(true));
-        assertEquals("<abbr>This is my acronym</abbr>", acr.toString(true).toString());
-    }
-
+	
+	public AcronymTest()
+	{
+	}
+	
+	@Test
+	public void testDefault()
+	{
+		Acronym acr = new Acronym("This is my acronym");
+		acr.getPage().setBrowser(Browsers.InternetExplorer6);
+		System.out.println(acr.toString(true));
+		assertEquals("<acronym>This is my acronym</acronym>", acr.toString(true).toString());
+		
+	}
+	
+	@Test
+	public void testHTML5()
+	{
+		Acronym acr = new Acronym("This is my acronym");
+		acr.getPage().setBrowser(Browsers.InternetExplorer9);
+		System.out.println(acr.toString(true));
+		assertEquals("<abbr>This is my acronym</abbr>", acr.toString(true).toString());
+	}
+	
 }

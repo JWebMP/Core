@@ -16,32 +16,32 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class STest
 {
 
-    public STest()
-    {
-    }
+	public STest()
+	{
+	}
 
-    @Test
-    public void testSomeMethod()
-    {
-        Paragraph p = new Paragraph();
-        S s = new S();
-        p.setID("id");
-        s.setID("s");
-        p.add(s);
-        System.out.println(p.toString(true));
-        assertEquals("<p id=\"id\">\n"
-                + "	<s id=\"s\"></s>\n"
-                + "</p>", p.toString(true).toString());
-    }
+	@Test
+	public void testSomeMethod()
+	{
+		Paragraph p = new Paragraph();
+		S s = new S();
+		p.setID("id");
+		s.setID("s");
+		p.add(s);
+		System.out.println(p.toString(true));
+		assertEquals("<p id=\"id\">\n"
+				             + "	<s id=\"s\"></s>\n"
+				             + "</p>", p.toString(true).toString());
+	}
 
 }

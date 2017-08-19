@@ -16,15 +16,18 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds;
 
-import java.util.*;
-import za.co.mmagon.jwebswing.base.client.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.image.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
+import za.co.mmagon.jwebswing.base.client.CSSVersions;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSDetail;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationAdapter;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationClass;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.Repeats;
+import za.co.mmagon.jwebswing.htmlbuilder.css.image.ImageCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.CSSShortHand;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
+
+import java.util.Arrays;
 
 /**
  * CSS Background Short Hand Object
@@ -35,242 +38,242 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 public class BackgroundImpl extends CSSImplementationAdapter<Background, BackgroundImpl> implements CSSShortHand, CSSImplementationClass<Background, BackgroundImpl>
 {
 
-    private static final long serialVersionUID = 1L;
-    @CSSDetail(cssName = "background-attachment", cssVersion = CSSVersions.CSS21, jsName = "backgroundAttachment")
-    private BackgroundAttachments backgroundAttachment;
-    @CSSDetail(cssName = "background-color", cssVersion = CSSVersions.CSS21, jsName = "backgroundColor")
-    private ColourCSSImpl backgroundColor;
-    @CSSDetail(cssName = "background-color", cssVersion = CSSVersions.CSS21, jsName = "backgroundColor")
-    private ColourNames backgroundColor$;
-    @CSSDetail(cssName = "background-image", cssVersion = CSSVersions.CSS21, jsName = "backgroundImage")
-    private ImageCSSImpl backgroundImage;
-    @CSSDetail(cssName = "background-image", cssVersion = CSSVersions.CSS21, jsName = "backgroundImage")
-    private ImageCSSImpl[] backgroundImage$;
-    @CSSDetail(cssName = "background-position", cssVersion = CSSVersions.CSS21, jsName = "backgroundPosition")
-    private BackgroundPositions backgroundPosition;
-    @CSSDetail(cssName = "background-repeat", cssVersion = CSSVersions.CSS21, jsName = "backgroundRepeat")
-    private Repeats backgroundRepeat;
-    @CSSDetail(cssName = "background-clip", cssVersion = CSSVersions.CSS21, jsName = "backgroundClip")
-    private BackgroundClip backgroundClip;
-    @CSSDetail(cssName = "background-origins", cssVersion = CSSVersions.CSS21, jsName = "backgroundOrigins")
-    private BackgroundOrigins backgroundOrigin;
-    @CSSDetail(cssName = "background-size", cssVersion = CSSVersions.CSS21, jsName = "backgroundSize")
-    private MeasurementCSSImpl[] backgroundSize;
+	private static final long serialVersionUID = 1L;
+	@CSSDetail(cssName = "background-attachment", cssVersion = CSSVersions.CSS21, jsName = "backgroundAttachment")
+	private BackgroundAttachments backgroundAttachment;
+	@CSSDetail(cssName = "background-color", cssVersion = CSSVersions.CSS21, jsName = "backgroundColor")
+	private ColourCSSImpl backgroundColor;
+	@CSSDetail(cssName = "background-color", cssVersion = CSSVersions.CSS21, jsName = "backgroundColor")
+	private ColourNames backgroundColor$;
+	@CSSDetail(cssName = "background-image", cssVersion = CSSVersions.CSS21, jsName = "backgroundImage")
+	private ImageCSSImpl backgroundImage;
+	@CSSDetail(cssName = "background-image", cssVersion = CSSVersions.CSS21, jsName = "backgroundImage")
+	private ImageCSSImpl[] backgroundImage$;
+	@CSSDetail(cssName = "background-position", cssVersion = CSSVersions.CSS21, jsName = "backgroundPosition")
+	private BackgroundPositions backgroundPosition;
+	@CSSDetail(cssName = "background-repeat", cssVersion = CSSVersions.CSS21, jsName = "backgroundRepeat")
+	private Repeats backgroundRepeat;
+	@CSSDetail(cssName = "background-clip", cssVersion = CSSVersions.CSS21, jsName = "backgroundClip")
+	private BackgroundClip backgroundClip;
+	@CSSDetail(cssName = "background-origins", cssVersion = CSSVersions.CSS21, jsName = "backgroundOrigins")
+	private BackgroundOrigins backgroundOrigin;
+	@CSSDetail(cssName = "background-size", cssVersion = CSSVersions.CSS21, jsName = "backgroundSize")
+	private MeasurementCSSImpl[] backgroundSize;
 
-    @Override
-    public String toString()
-    {
-        String output = backgroundColor + " "
-                + backgroundImage + " "
-                + backgroundPosition + " "
-                + Arrays.toString(backgroundSize) + " "
-                + backgroundRepeat + " "
-                + backgroundOrigin + " "
-                + backgroundClip + " "
-                + backgroundAttachment;
-        output = output.replaceAll("null", "");
-        output = output.trim();
-        return output;
-    }
+	@Override
+	public String toString()
+	{
+		String output = backgroundColor + " "
+				+ backgroundImage + " "
+				+ backgroundPosition + " "
+				+ Arrays.toString(backgroundSize) + " "
+				+ backgroundRepeat + " "
+				+ backgroundOrigin + " "
+				+ backgroundClip + " "
+				+ backgroundAttachment;
+		output = output.replaceAll("null", "");
+		output = output.trim();
+		return output;
+	}
 
-    /**
-     * Specifies the background color of an element
-     *
-     * @return
-     */
-    public ColourCSSImpl getBackgroundColor()
-    {
-        return backgroundColor;
-    }
+	/**
+	 * Specifies the background color of an element
+	 *
+	 * @return
+	 */
+	public ColourCSSImpl getBackgroundColor()
+	{
+		return backgroundColor;
+	}
 
-    /**
-     * Specifies the background color of an element
-     *
-     * @return
-     */
-    public ColourNames getBackgroundColor$()
-    {
-        return backgroundColor$;
-    }
+	/**
+	 * Sets the background colour
+	 *
+	 * @param backgroundColor
+	 */
+	public void setBackgroundColor(ColourCSSImpl backgroundColor)
+	{
+		this.backgroundColor = backgroundColor;
+	}
 
-    /**
-     * Specifies one or more background images for an element
-     *
-     * @return
-     */
-    public ImageCSSImpl getBackgroundImage()
-    {
-        return backgroundImage;
-    }
+	/**
+	 * Specifies the background color of an element
+	 *
+	 * @return
+	 */
+	public ColourNames getBackgroundColor$()
+	{
+		return backgroundColor$;
+	}
 
-    /**
-     * Specifies the position of a background image
-     *
-     * @return
-     */
-    public BackgroundPositions getBackgroundPosition()
-    {
-        return backgroundPosition;
-    }
+	/**
+	 * Sets the background colour
+	 *
+	 * @param backgroundColor$
+	 */
+	public void setBackgroundColor$(ColourNames backgroundColor$)
+	{
+		this.backgroundColor$ = backgroundColor$;
+	}
 
-    /**
-     * Sets how a background image will be repeated
-     *
-     * @return
-     */
-    public Repeats getBackgroundRepeat()
-    {
-        return backgroundRepeat;
-    }
+	/**
+	 * Specifies one or more background images for an element
+	 *
+	 * @return
+	 */
+	public ImageCSSImpl getBackgroundImage()
+	{
+		return backgroundImage;
+	}
 
-    /**
-     * Specifies the painting area of the background
-     *
-     * @return
-     */
-    public BackgroundClip getBackgroundClip()
-    {
-        return backgroundClip;
-    }
+	/**
+	 * Sets the background image
+	 *
+	 * @param backgroundImage
+	 */
+	public void setBackgroundImage(ImageCSSImpl backgroundImage)
+	{
+		this.backgroundImage = backgroundImage;
+	}
 
-    /**
-     * Specifies where the background image(s) is/are positioned
-     *
-     * @return
-     */
-    public BackgroundOrigins getBackgroundOrigin()
-    {
-        return backgroundOrigin;
-    }
+	/**
+	 * Specifies the position of a background image
+	 *
+	 * @return
+	 */
+	public BackgroundPositions getBackgroundPosition()
+	{
+		return backgroundPosition;
+	}
 
-    /**
-     * Specifies the size of the background image(s)
-     *
-     * @return
-     */
-    public MeasurementCSSImpl[] getBackgroundSize()
-    {
-        return backgroundSize;
-    }
+	/**
+	 * Sets the background position
+	 *
+	 * @param backgroundPosition
+	 */
+	public void setBackgroundPosition(BackgroundPositions backgroundPosition)
+	{
+		this.backgroundPosition = backgroundPosition;
+	}
 
-    /**
-     * Specifies one or more background images for an element
-     *
-     * @return
-     */
-    public ImageCSSImpl[] getBackgroundImage$()
-    {
-        return backgroundImage$;
-    }
+	/**
+	 * Sets how a background image will be repeated
+	 *
+	 * @return
+	 */
+	public Repeats getBackgroundRepeat()
+	{
+		return backgroundRepeat;
+	}
 
-    /**
-     * Sets whether a background image is fixed or scrolls with the rest of the page
-     *
-     * @return
-     */
-    public BackgroundAttachments getBackgroundAttachment()
-    {
-        return backgroundAttachment;
-    }
+	/**
+	 * Sets the background repeat
+	 *
+	 * @param backgroundRepeat
+	 */
+	public void setBackgroundRepeat(Repeats backgroundRepeat)
+	{
+		this.backgroundRepeat = backgroundRepeat;
+	}
 
-    /**
-     * Sets the background attachment
-     *
-     * @param backgroundAttachment
-     */
-    public void setBackgroundAttachment(BackgroundAttachments backgroundAttachment)
-    {
-        this.backgroundAttachment = backgroundAttachment;
-    }
+	/**
+	 * Specifies the painting area of the background
+	 *
+	 * @return
+	 */
+	public BackgroundClip getBackgroundClip()
+	{
+		return backgroundClip;
+	}
 
-    /**
-     * Sets the background colour
-     *
-     * @param backgroundColor
-     */
-    public void setBackgroundColor(ColourCSSImpl backgroundColor)
-    {
-        this.backgroundColor = backgroundColor;
-    }
+	/**
+	 * Sets the background clip
+	 *
+	 * @param backgroundClip
+	 */
+	public void setBackgroundClip(za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.BackgroundClip backgroundClip)
+	{
+		this.backgroundClip = backgroundClip;
+	}
 
-    /**
-     * Sets the background colour
-     *
-     * @param backgroundColor$
-     */
-    public void setBackgroundColor$(ColourNames backgroundColor$)
-    {
-        this.backgroundColor$ = backgroundColor$;
-    }
+	/**
+	 * Specifies where the background image(s) is/are positioned
+	 *
+	 * @return
+	 */
+	public BackgroundOrigins getBackgroundOrigin()
+	{
+		return backgroundOrigin;
+	}
 
-    /**
-     * Sets the background image
-     *
-     * @param backgroundImage
-     */
-    public void setBackgroundImage(ImageCSSImpl backgroundImage)
-    {
-        this.backgroundImage = backgroundImage;
-    }
+	/**
+	 * Sets the background clip
+	 *
+	 * @param backgroundOrigin
+	 */
+	public void setBackgroundOrigin(BackgroundOrigins backgroundOrigin)
+	{
+		this.backgroundOrigin = backgroundOrigin;
+	}
 
-    /**
-     * Sets the background image
-     *
-     * @param backgroundImage$
-     */
-    public void setBackgroundImage$(ImageCSSImpl[] backgroundImage$)
-    {
-        this.backgroundImage$ = backgroundImage$;
-    }
+	/**
+	 * Specifies the size of the background image(s)
+	 *
+	 * @return
+	 */
+	public MeasurementCSSImpl[] getBackgroundSize()
+	{
+		return backgroundSize;
+	}
 
-    /**
-     * Sets the background position
-     *
-     * @param backgroundPosition
-     */
-    public void setBackgroundPosition(BackgroundPositions backgroundPosition)
-    {
-        this.backgroundPosition = backgroundPosition;
-    }
+	/**
+	 * Sets the background size
+	 *
+	 * @param backgroundSize
+	 */
+	public void setBackgroundSize(MeasurementCSSImpl[] backgroundSize)
+	{
+		this.backgroundSize = backgroundSize;
+	}
 
-    /**
-     * Sets the background repeat
-     *
-     * @param backgroundRepeat
-     */
-    public void setBackgroundRepeat(Repeats backgroundRepeat)
-    {
-        this.backgroundRepeat = backgroundRepeat;
-    }
+	/**
+	 * Specifies one or more background images for an element
+	 *
+	 * @return
+	 */
+	public ImageCSSImpl[] getBackgroundImage$()
+	{
+		return backgroundImage$;
+	}
 
-    /**
-     * Sets the background clip
-     *
-     * @param backgroundClip
-     */
-    public void setBackgroundClip(za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.BackgroundClip backgroundClip)
-    {
-        this.backgroundClip = backgroundClip;
-    }
+	/**
+	 * Sets the background image
+	 *
+	 * @param backgroundImage$
+	 */
+	public void setBackgroundImage$(ImageCSSImpl[] backgroundImage$)
+	{
+		this.backgroundImage$ = backgroundImage$;
+	}
 
-    /**
-     * Sets the background clip
-     *
-     * @param backgroundOrigin
-     */
-    public void setBackgroundOrigin(BackgroundOrigins backgroundOrigin)
-    {
-        this.backgroundOrigin = backgroundOrigin;
-    }
+	/**
+	 * Sets whether a background image is fixed or scrolls with the rest of the page
+	 *
+	 * @return
+	 */
+	public BackgroundAttachments getBackgroundAttachment()
+	{
+		return backgroundAttachment;
+	}
 
-    /**
-     * Sets the background size
-     *
-     * @param backgroundSize
-     */
-    public void setBackgroundSize(MeasurementCSSImpl[] backgroundSize)
-    {
-        this.backgroundSize = backgroundSize;
-    }
+	/**
+	 * Sets the background attachment
+	 *
+	 * @param backgroundAttachment
+	 */
+	public void setBackgroundAttachment(BackgroundAttachments backgroundAttachment)
+	{
+		this.backgroundAttachment = backgroundAttachment;
+	}
 
 }

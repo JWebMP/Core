@@ -18,14 +18,13 @@ package za.co.mmagon.jwebswing.base.html.interfaces;
 
 /**
  * This interface marks a component as able to be a layout
- * @since 2013/11/20
- * @version 1.0
- * @author mmagon
  *
- * 
+ * @author mmagon
+ * @version 1.0
+ * @since 2013/11/20
  */
 
-public interface LayoutHandler 
+public interface LayoutHandler
 {
 
 }

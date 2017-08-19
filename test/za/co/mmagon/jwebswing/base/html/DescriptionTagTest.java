@@ -20,39 +20,38 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class DescriptionTagTest
 {
-
-    public DescriptionTagTest()
-    {
-    }
-
-    @Test
-    public void testDescriptionTag()
-    {
-        DescriptionTag dt = new DescriptionTag();
-        DescriptionList dl = new DescriptionList();
-        dl.add(dt);
-        dt.setText("asdf");
-        System.out.println(dl.toString(true));
-        Assert.assertEquals("<dl>\n"
-                + "	<dt>asdf</dt>\n"
-                + "</dl>", dl.toString(true));
-    }
-
-    @Test
-    public void testDescriptionTagTiny()
-    {
-        DescriptionTag dt = new DescriptionTag();
-        DescriptionList dl = new DescriptionList();
-        dl.setTiny(true);
-        dl.add(dt);
-        dt.setText("asdf");
-        System.out.println(dl.toString(true));
-        Assert.assertEquals("<dl><dt>asdf</dt></dl>", dl.toString(true));
-    }
-
+	
+	public DescriptionTagTest()
+	{
+	}
+	
+	@Test
+	public void testDescriptionTag()
+	{
+		DescriptionTag dt = new DescriptionTag();
+		DescriptionList dl = new DescriptionList();
+		dl.add(dt);
+		dt.setText("asdf");
+		System.out.println(dl.toString(true));
+		Assert.assertEquals("<dl>\n"
+				                    + "	<dt>asdf</dt>\n"
+				                    + "</dl>", dl.toString(true));
+	}
+	
+	@Test
+	public void testDescriptionTagTiny()
+	{
+		DescriptionTag dt = new DescriptionTag();
+		DescriptionList dl = new DescriptionList();
+		dl.setTiny(true);
+		dl.add(dt);
+		dt.setText("asdf");
+		System.out.println(dl.toString(true));
+		Assert.assertEquals("<dl><dt>asdf</dt></dl>", dl.toString(true));
+	}
+	
 }

@@ -18,7 +18,9 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeaderChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -45,23 +47,24 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;header&gt; tag is new in HTML5.<p>
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
+ * @author GedMarc
  * @since 2014/12/21
  */
 public class Header<J extends Header<J>>
-        extends Component<HeaderChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements NoIDTag, GlobalChildren
+		extends Component<HeaderChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements NoIDTag, GlobalChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Construct a new instance of a footer
-     */
-    public Header()
-    {
-        super(ComponentTypes.Header);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Construct a new instance of a footer
+	 */
+	public Header()
+	{
+		super(ComponentTypes.Header);
+	}
 }

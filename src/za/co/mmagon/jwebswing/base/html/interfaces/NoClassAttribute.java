@@ -18,10 +18,12 @@ package za.co.mmagon.jwebswing.base.html.interfaces;
 
 /**
  * Specifies a component must not generate any class string
+ *
  * @author mmagon
- * @since 2013/04/23
  * @version 1.0
+ * @since 2013/04/23
  */
-public interface NoClassAttribute {
-    
+public interface NoClassAttribute
+{
+
 }

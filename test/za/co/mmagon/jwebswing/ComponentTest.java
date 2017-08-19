@@ -16,42 +16,43 @@
  */
 package za.co.mmagon.jwebswing;
 
-import org.junit.Assert;
 import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.base.html.Body;
 import za.co.mmagon.jwebswing.base.html.Paragraph;
 
+import static org.junit.Assert.fail;
+
 /**
- *
  * @author GedMarc
  */
 public class ComponentTest extends BaseTestClass
 {
-
-    public ComponentTest()
-    {
-    }
-
-    /**
-     * Test of add method, of class Component.
-     */
-    @Test
-    public void testAdd()
-    {
-        Page p = getPage();
-        Body b = p.getBody();
-        Paragraph pa = new Paragraph("String adds a paragraph");
-        b.add(pa);
-        pa.setID("paragraph");
-        System.out.println(p.toString(true));
-        Assert.assertEquals("<!DOCTYPE html>\n"
-                + "<html>\n"
-                + "	<body id=\"body\">\n"
-                + "		<p id=\"paragraph\">String adds a paragraph</p>\n"
-                + "	</body>\n"
-                + "</html>", p.toString(true));
-
-    }
-
+	
+	public ComponentTest()
+	{
+	}
+	
+	/**
+	 * Test of add method, of class Component.
+	 */
+	@Test
+	public void testAdd()
+	{
+		Page p = getPage();
+		Body b = p.getBody();
+		Paragraph pa = new Paragraph("String adds a paragraph");
+		b.add(pa);
+		pa.setID("paragraph");
+		System.out.println(p.toString(true));
+		if (!p.toString(true).startsWith("<!DOCTYPE html>\n" +
+				                                 "<html>\n" +
+				                                 "\t<body id=\"body\" ng-app=\"jwApp\" ng-controller=\"jwController as jwCntrl\">\n" +
+				                                 "\t\t<p id=\"paragraph\">String adds a paragraph</p>"))
+		{
+			fail("didn't add paragraph");
+		}
+		
+	}
+	
 }

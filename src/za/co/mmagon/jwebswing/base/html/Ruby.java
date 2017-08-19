@@ -44,25 +44,25 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;ruby&gt; tag is new in HTML5.<p>
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
- * @since Mar 1, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
- *
+ * @since Mar 1, 2015
  */
 public class Ruby<J extends Ruby<J>>
-        extends Component<RubyChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<RubyChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a new Ruby process
-     */
-    public Ruby()
-    {
-        super(ComponentTypes.Ruby);
-    }
+	/**
+	 * Constructs a new Ruby process
+	 */
+	public Ruby()
+	{
+		super(ComponentTypes.Ruby);
+	}
 }

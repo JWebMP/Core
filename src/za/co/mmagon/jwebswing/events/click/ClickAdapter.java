@@ -16,17 +16,20 @@
  */
 package za.co.mmagon.jwebswing.events.click;
 
-import java.util.logging.Level;
 import za.co.mmagon.jwebswing.Event;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.BodyEvents;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
+import za.co.mmagon.jwebswing.base.html.interfaces.events.ParagraphEvents;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.jwebswing.plugins.ComponentInformation;
 import za.co.mmagon.logger.LogFactory;
+
+import java.util.logging.Level;
 
 /**
  * Handles all click events. Over-ride methods.
@@ -34,60 +37,61 @@ import za.co.mmagon.logger.LogFactory;
  * @author Marc Magon
  */
 public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
-        implements ParagraphEvents, BodyEvents, GlobalEvents
+		implements ParagraphEvents, BodyEvents, GlobalEvents
 {
 
-    /**
-     * Logger for the Component
-     */
-    @ComponentInformation(name = "Click Event", description = "Server Side Event for Click.",
-            url = "https://www.armineasy.com/JWebSwing", wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
-    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("ClickEvent");
-    private static final long serialVersionUID = 1L;
+	/**
+	 * Logger for the Component
+	 */
+	@ComponentInformation(name = "Click Event", description = "Server Side Event for Click.",
+			url = "https://www.armineasy.com/JWebSwing", wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
+	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("ClickEvent");
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Performs a click
-     *
-     * @param component The component this click is going to be acting on
-     */
-    public ClickAdapter(ComponentHierarchyBase component)
-    {
-        super(EventTypes.click, component);
-    }
+	/**
+	 * Performs a click
+	 *
+	 * @param component The component this click is going to be acting on
+	 */
+	public ClickAdapter(ComponentHierarchyBase component)
+	{
+		super(EventTypes.click, component);
+	}
 
-    @Override
-    public void preConfigure()
-    {
-        if (!isConfigured())
-        {
-            getComponent().addAttribute(AngularAttributes.ngClick, "jwCntrl.jw.isLoading || jwCntrl.perform($event," + renderVariables() + ");");
-            if (getComponent().getAttribute(AngularAttributes.ngDisabled) == null)
-            {
-                getComponent().addAttribute(AngularAttributes.ngDisabled, "jwCntrl.jw.isLoading");
-            }
-        }
-        super.preConfigure();
-    }
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			getComponent().addAttribute(AngularAttributes.ngClick, "jwCntrl.jw.isLoading || jwCntrl.perform($event," + renderVariables() + ");");
+			if (getComponent().getAttribute(AngularAttributes.ngDisabled) == null)
+			{
+				getComponent().addAttribute(AngularAttributes.ngDisabled, "jwCntrl.jw.isLoading");
+			}
+		}
+		super.preConfigure();
+	}
 
-    /**
-     * Triggers on Click
-     * <p>
-     * @param call     The physical AJAX call
-     * @param response The physical Ajax Receiver
-     */
-    public abstract void onClick(AjaxCall call, AjaxResponse response);
+	/**
+	 * Triggers on Click
+	 * <p>
+	 *
+	 * @param call     The physical AJAX call
+	 * @param response The physical Ajax Receiver
+	 */
+	public abstract void onClick(AjaxCall call, AjaxResponse response);
 
-    @Override
-    public void fireEvent(AjaxCall call, AjaxResponse response)
-    {
-        try
-        {
-            onClick(call, response);
-        }
-        catch (Exception e)
-        {
-            log.log(Level.SEVERE, "Error In Firing Event", e);
-        }
-    }
+	@Override
+	public void fireEvent(AjaxCall call, AjaxResponse response)
+	{
+		try
+		{
+			onClick(call, response);
+		}
+		catch (Exception e)
+		{
+			log.log(Level.SEVERE, "Error In Firing Event", e);
+		}
+	}
 
 }

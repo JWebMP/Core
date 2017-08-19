@@ -18,7 +18,9 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -36,32 +38,33 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * In HTML 4.01, the &lt;cite&gt; tag defines a citation.
  * <p>
+ *
  * @author GedMarc
  */
 public class Cite<J extends Cite<J>>
-        extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements NoNewLineBeforeClosingTag, NoNewLineForRawText
+		extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * The cite tag defines the title of a work (e.g. a book, a song, a movie, a TV show, a painting, a sculpture, etc.).
-     */
-    public Cite()
-    {
-        this(null);
-    }
+	/**
+	 * The cite tag defines the title of a work (e.g. a book, a song, a movie, a TV show, a painting, a sculpture, etc.).
+	 */
+	public Cite()
+	{
+		this(null);
+	}
 
-    /**
-     * The cite tag defines the title of a work (e.g. a book, a song, a movie, a TV show, a painting, a sculpture, etc.).
-     *
-     * @param citeText The reference of the work
-     */
-    public Cite(String citeText)
-    {
-        super(ComponentTypes.Cite);
-        setText(citeText);
-    }
+	/**
+	 * The cite tag defines the title of a work (e.g. a book, a song, a movie, a TV show, a painting, a sculpture, etc.).
+	 *
+	 * @param citeText The reference of the work
+	 */
+	public Cite(String citeText)
+	{
+		super(ComponentTypes.Cite);
+		setText(citeText);
+	}
 
 }

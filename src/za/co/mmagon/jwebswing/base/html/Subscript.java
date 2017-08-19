@@ -18,7 +18,9 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -39,36 +41,37 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * Differences Between HTML 4.01 and HTML5<p>
  * <p>
  * NONE.<p>
- * @author Marc Magon
+ *
  * @param <J>
  *
- * @since forever
+ * @author Marc Magon
  * @version 1.0
+ * @since forever
  */
 public class Subscript<J extends Subscript<J>>
-        extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements NoNewLineBeforeClosingTag, NoNewLineForRawText
+		extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs an empty sub script
-     */
-    public Subscript()
-    {
-        this(null);
-    }
-
-    /**
-     * Constructs a new subscript section with the relevant text as raw text
-     *
-     * @param text
-     */
-    public Subscript(String text)
-    {
-        super("sub", ComponentTypes.Subscript);
-        setText(text);
-    }
-
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs an empty sub script
+	 */
+	public Subscript()
+	{
+		this(null);
+	}
+	
+	/**
+	 * Constructs a new subscript section with the relevant text as raw text
+	 *
+	 * @param text
+	 */
+	public Subscript(String text)
+	{
+		super("sub", ComponentTypes.Subscript);
+		setText(text);
+	}
+	
 }

@@ -17,48 +17,48 @@
 package za.co.mmagon.jwebswing.annotations;
 
 import com.armineasy.injection.GuiceContext;
-import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.aopalliance.intercept.MethodInvocation;
 import za.co.mmagon.jwebswing.interception.AjaxCallIntercepter;
 import za.co.mmagon.logger.LogFactory;
 
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
- *
  * @author Marc Magon
  * @since 05 Apr 2017
  */
 public class AjaxCallIntercepters implements org.aopalliance.intercept.MethodInterceptor
 {
 
-    private static final Logger LOG = LogFactory.getLog(AjaxCallIntercepters.class.getName());
+	private static final Logger LOG = LogFactory.getLog(AjaxCallIntercepters.class.getName());
 
-    /*
-     * Constructs a new SiteIntercepters
-     */
-    public AjaxCallIntercepters()
-    {
-        //Nothing needed
-    }
+	/*
+	 * Constructs a new SiteIntercepters
+	 */
+	public AjaxCallIntercepters()
+	{
+		//Nothing needed
+	}
 
-    @Override
-    public Object invoke(MethodInvocation invocation) throws Throwable
-    {
-        LOG.fine("Intercepting Ajax Call");
-        for (Iterator<Class<? extends AjaxCallIntercepter>> iterator = GuiceContext.reflect().getSubTypesOf(AjaxCallIntercepter.class).iterator(); iterator.hasNext();)
-        {
-            Class<? extends AjaxCallIntercepter> siClass = iterator.next();
-            if (siClass.isInterface())
-            {
-                continue;
-            }
-            AjaxCallIntercepter si = GuiceContext.inject().getInstance(siClass);
-            LOG.log(Level.FINER, "Interception Occuring : {0}", siClass.getCanonicalName());
-            si.intercept();
-        }
-        LOG.fine("Interception for Ajax Call Complete");
-        return invocation.proceed();
-    }
+	@Override
+	public Object invoke(MethodInvocation invocation) throws Throwable
+	{
+		LOG.fine("Intercepting Ajax Call");
+		for (Iterator<Class<? extends AjaxCallIntercepter>> iterator = GuiceContext.reflect().getSubTypesOf(AjaxCallIntercepter.class).iterator(); iterator.hasNext(); )
+		{
+			Class<? extends AjaxCallIntercepter> siClass = iterator.next();
+			if (siClass.isInterface())
+			{
+				continue;
+			}
+			AjaxCallIntercepter si = GuiceContext.inject().getInstance(siClass);
+			LOG.log(Level.FINER, "Interception Occuring : {0}", siClass.getCanonicalName());
+			si.intercept();
+		}
+		LOG.fine("Interception for Ajax Call Complete");
+		return invocation.proceed();
+	}
 
 }

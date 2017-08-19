@@ -56,43 +56,43 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * In XHTML, the name attribute is deprecated. Use the global id attribute instead.<p>
  * <p>
- * @author Marc Magon
+ *
  * @param <J>
  *
+ * @author Marc Magon
  * @since forever
  */
 public class Form<J extends Form<J>>
-        extends Component<FormChildren, FormAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<FormChildren, FormAttributes, GlobalFeatures, GlobalEvents, J>
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
+	/**
+	 * The label of this form
+	 */
+	private Label label;
 
-    /**
-     * Constructs a new form
-     */
-    public Form()
-    {
-        super(ComponentTypes.Form);
-    }
+	/**
+	 * Constructs a new form
+	 */
+	public Form()
+	{
+		super(ComponentTypes.Form);
+	}
 
-    /**
-     * The label of this form
-     */
-    private Label label;
-
-    @Override
-    protected StringBuilder renderBeforeTag()
-    {
-        if (label != null)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.append(super.renderBeforeTag());
-            sb.append(label.toString(true));
-            return sb;
-        }
-        else
-        {
-            return super.renderBeforeTag();
-        }
-    }
+	@Override
+	protected StringBuilder renderBeforeTag()
+	{
+		if (label != null)
+		{
+			StringBuilder sb = new StringBuilder();
+			sb.append(super.renderBeforeTag());
+			sb.append(label.toString(true));
+			return sb;
+		}
+		else
+		{
+			return super.renderBeforeTag();
+		}
+	}
 }

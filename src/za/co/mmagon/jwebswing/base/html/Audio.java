@@ -18,7 +18,9 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.AudioAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.AudioChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -52,45 +54,45 @@ import za.co.mmagon.logger.LogFactory;
  * Tip: Any text inside the between audio&lt; and &gt;/audio&lt; will be<p>
  * displayed in browsers that do not support the &gt;audio&lt; tag.<p>
  * <p>
+ *
  * @param <J>
  *
- * @since 2014/10/26
- * @version 1.0
  * @author MMagon
- *
- *
+ * @version 1.0
+ * @since 2014/10/26
  */
 public class Audio<J extends Audio<J>>
-        extends Component<AudioChildren, AudioAttributes, GlobalFeatures, GlobalEvents, J>
-        implements NoNewLineBeforeClosingTag, NoNewLineForRawText
+		extends Component<AudioChildren, AudioAttributes, GlobalFeatures, GlobalEvents, J>
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
-    /**
-     * Logger for the Component
-     */
-    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Audio");
-    /**
-     * Serial Version for all Components and their compatibility
-     */
-    private static final long serialVersionUID = 1l;
+	/**
+	 * Logger for the Component
+	 */
+	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Audio");
+	/**
+	 * Serial Version for all Components and their compatibility
+	 */
+	private static final long serialVersionUID = 1l;
 
-    /**
-     * The audio source of the file
-     * <p>
-     * @param src
-     */
-    public Audio(String src)
-    {
-        super(ComponentTypes.Audio);
-        addAttribute(AudioAttributes.Src, src);
-    }
+	/**
+	 * The audio source of the file
+	 * <p>
+	 *
+	 * @param src
+	 */
+	public Audio(String src)
+	{
+		super(ComponentTypes.Audio);
+		addAttribute(AudioAttributes.Src, src);
+	}
 
-    /**
-     * Constructs a new instance of audio
-     */
-    public Audio()
-    {
-        this(null);
-    }
+	/**
+	 * Constructs a new instance of audio
+	 */
+	public Audio()
+	{
+		this(null);
+	}
 
 }

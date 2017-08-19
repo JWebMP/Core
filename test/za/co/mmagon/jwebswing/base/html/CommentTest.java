@@ -16,45 +16,45 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author MMagon
  */
 public class CommentTest
 {
-
-    Comment comment = new Comment("This is the comment");
-
-    public CommentTest()
-    {
-    }
-
-    @Before
-    public void setUp()
-    {
-    }
-
-    @Test
-    public void testtoString()
-    {
-        String expected = "<!-- This is the comment -->";
-        String result = comment.toString(true).toString();
-        assertEquals(expected, result);
-        System.out.println(comment.toString(true));
-    }
-
-    @Test
-    public void testTinytoString()
-    {
-        comment = new Comment("This is not supposed to render");
-        String expected = "";
-        comment.setTiny(true);
-        String result = comment.toString(true).toString();
-        assertEquals(expected, result);
-        System.out.println(comment.toString(true));
-    }
+	
+	Comment comment = new Comment("This is the comment");
+	
+	public CommentTest()
+	{
+	}
+	
+	@Before
+	public void setUp()
+	{
+	}
+	
+	@Test
+	public void testtoString()
+	{
+		String expected = "<!-- This is the comment -->";
+		String result = comment.toString(true).toString();
+		assertEquals(expected, result);
+		System.out.println(comment.toString(true));
+	}
+	
+	@Test
+	public void testTinytoString()
+	{
+		comment = new Comment("This is not supposed to render");
+		String expected = "";
+		comment.setTiny(true);
+		String result = comment.toString(true).toString();
+		assertEquals(expected, result);
+		System.out.println(comment.toString(true));
+	}
 }

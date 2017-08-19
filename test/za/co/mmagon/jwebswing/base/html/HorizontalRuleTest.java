@@ -19,23 +19,22 @@ package za.co.mmagon.jwebswing.base.html;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class HorizontalRuleTest
 {
-
-    public HorizontalRuleTest()
-    {
-    }
-
-    /**
-     * Test of equals method, of class HorizontalRule.
-     */
-    @Test
-    public void testEquals()
-    {
-        System.out.println(HorizontalRule.getInstance().toString(true));
-    }
-
+	
+	public HorizontalRuleTest()
+	{
+	}
+	
+	/**
+	 * Test of equals method, of class HorizontalRule.
+	 */
+	@Test
+	public void testEquals()
+	{
+		System.out.println(HorizontalRule.getInstance().toString(true));
+	}
+	
 }

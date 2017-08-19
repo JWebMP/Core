@@ -40,62 +40,62 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
  */
 public enum BackgroundClip implements CSSEnumeration<BackgroundClip>
 {
-    /**
-     * Default value. The background is clipped/starts to the border box
-     */
-    border_box,
-    /**
-     * The background is clipped/starts to the padding box
-     */
-    padding_box,
-    /**
-     * The background is clipped/starts to the content box
-     */
-    content_box,
-    /**
-     * Sets this property to its default value
-     * <p>
-     * see http://www.w3schools.com/cssref/css_initial.asp
-     */
-    Initial,
-    /**
-     * Inherits this property from its parent element.
-     * <p>
-     * see http://www.w3schools.com/cssref/css_inherit.asp
-     */
-    Inherit,
-    /**
-     * Sets this field as not set
-     */
-    Unset;
+	/**
+	 * Default value. The background is clipped/starts to the border box
+	 */
+	border_box,
+	/**
+	 * The background is clipped/starts to the padding box
+	 */
+	padding_box,
+	/**
+	 * The background is clipped/starts to the content box
+	 */
+	content_box,
+	/**
+	 * Sets this property to its default value
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_initial.asp
+	 */
+	Initial,
+	/**
+	 * Inherits this property from its parent element.
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_inherit.asp
+	 */
+	Inherit,
+	/**
+	 * Sets this field as not set
+	 */
+	Unset;
 
-    @Override
-    public String toString()
-    {
-        return name().toLowerCase().replace('_', '-');
-    }
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase().replace('_', '-');
+	}
 
-    @Override
-    public String getJavascriptSyntax()
-    {
-        return "style.backgroundClip";
-    }
+	@Override
+	public String getJavascriptSyntax()
+	{
+		return "style.backgroundClip";
+	}
 
-    @Override
-    public CSSVersions getCSSVersion()
-    {
-        return CSSVersions.CSS3;
-    }
+	@Override
+	public CSSVersions getCSSVersion()
+	{
+		return CSSVersions.CSS3;
+	}
 
-    @Override
-    public String getValue()
-    {
-        return toString();
-    }
+	@Override
+	public String getValue()
+	{
+		return toString();
+	}
 
-    @Override
-    public BackgroundClip getDefault()
-    {
-        return Unset;
-    }
+	@Override
+	public BackgroundClip getDefault()
+	{
+		return Unset;
+	}
 }

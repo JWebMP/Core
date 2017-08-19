@@ -20,12 +20,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.logger.LogFactory;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.logger.LogFactory;
 
 /**
  * DTO for angular variable transfers forward and back
@@ -36,181 +37,180 @@ import za.co.mmagon.logger.LogFactory;
 public class AngularJsonVariable extends JavaScriptPart
 {
 
-    private static final long serialVersionUID = 1L;
-    private static final Logger log = LogFactory.getLog(AngularJsonVariable.class.getName());
+	private static final long serialVersionUID = 1L;
+	private static final Logger log = LogFactory.getLog(AngularJsonVariable.class.getName());
 
-    /**
-     * The variable name to use
-     */
-    private String variableName;
-    /**
-     * The object to assign
-     */
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
-    @JsonDeserialize(using = ObjectToStringDeserialize.class)
-    @JsonSerialize(using = AlwaysEmptySerializer.class)
-    private String variableText;
-    /**
-     * The actual variable object
-     */
-    private Serializable variable;
-    /**
-     * The owner id of this DTO
-     */
-    @JsonProperty(value = "$jwid")
-    private String ownerId;
+	/**
+	 * The variable name to use
+	 */
+	private String variableName;
+	/**
+	 * The object to assign
+	 */
+	@JsonFormat(shape = JsonFormat.Shape.STRING)
+	@JsonDeserialize(using = ObjectToStringDeserialize.class)
+	@JsonSerialize(using = AlwaysEmptySerializer.class)
+	private String variableText;
+	/**
+	 * The actual variable object
+	 */
+	private Serializable variable;
+	/**
+	 * The owner id of this DTO
+	 */
+	@JsonProperty(value = "$jwid")
+	private String ownerId;
 
-    /**
-     * Constructs a blank object
-     */
-    public AngularJsonVariable()
-    {
-    }
+	/**
+	 * Constructs a blank object
+	 */
+	public AngularJsonVariable()
+	{
+	}
 
-    /**
-     * Constructs a new instance with a given name and object
-     *
-     * @param variableName   The variable name to apply
-     * @param variableObject The JSON object to use
-     */
-    public AngularJsonVariable(String variableName, String variableObject)
-    {
-        this.variableName = variableName;
-        this.variableText = variableObject;
-        this.variable = variableText;
-    }
+	/**
+	 * Constructs a new instance with a given name and object
+	 *
+	 * @param variableName   The variable name to apply
+	 * @param variableObject The JSON object to use
+	 */
+	public AngularJsonVariable(String variableName, String variableObject)
+	{
+		this.variableName = variableName;
+		this.variableText = variableObject;
+		this.variable = variableText;
+	}
 
-    /**
-     * Constructs a new instance with a given name and object
-     *
-     * @param variableName   The variable name to apply
-     * @param variableObject The JSON object to use
-     */
-    public AngularJsonVariable(String variableName, JavaScriptPart variableObject)
-    {
-        this.variableName = variableName;
-        this.variable = variableObject;
-    }
+	/**
+	 * Constructs a new instance with a given name and object
+	 *
+	 * @param variableName   The variable name to apply
+	 * @param variableObject The JSON object to use
+	 */
+	public AngularJsonVariable(String variableName, JavaScriptPart variableObject)
+	{
+		this.variableName = variableName;
+		this.variable = variableObject;
+	}
 
-    /**
-     * Gets the DTO Form of this object
-     *
-     * @param <T>       The type this object actually is
-     * @param classType The class type to return
-     *
-     * @return The DTO direct from the call
-     *
-     * @throws IOException
-     */
-    public <T extends JavaScriptPart> T getDto(Class<T> classType) throws IOException
-    {
-        T output = JavaScriptPart.From(variableText, classType);
-        variable = output;
-        return output;
-    }
+	/**
+	 * Gets the DTO Form of this object
+	 *
+	 * @param <T>       The type this object actually is
+	 * @param classType The class type to return
+	 *
+	 * @return The DTO direct from the call
+	 *
+	 * @throws IOException
+	 */
+	public <T extends JavaScriptPart> T getDto(Class<T> classType) throws IOException
+	{
+		T output = (T) new JavaScriptPart().From(variableText, classType);
+		variable = output;
+		return output;
+	}
 
-    /**
-     * Gets the variable name
-     *
-     * @return
-     */
-    public String getVariableName()
-    {
-        return variableName;
-    }
+	/**
+	 * Gets the variable name
+	 *
+	 * @return
+	 */
+	public String getVariableName()
+	{
+		return variableName;
+	}
 
-    /**
-     * Sets the variable name
-     *
-     * @param variableName
-     */
-    public void setVariableName(String variableName)
-    {
-        this.variableName = variableName;
-    }
+	/**
+	 * Sets the variable name
+	 *
+	 * @param variableName
+	 */
+	public void setVariableName(String variableName)
+	{
+		this.variableName = variableName;
+	}
 
-    /**
-     * Gets a variable object or blank so it at least gets instantiated
-     *
-     * @return
-     */
-    public String getVariableText()
-    {
-        return variableText;
-    }
+	/**
+	 * Gets a variable object or blank so it at least gets instantiated
+	 *
+	 * @return
+	 */
+	public String getVariableText()
+	{
+		return variableText;
+	}
 
-    /**
-     * Sets the variable name to a new object
-     *
-     * @param variableText
-     */
-    public void setVariableText(String variableText)
-    {
-        this.variableText = variableText;
-    }
+	/**
+	 * Sets the variable name to a new object
+	 *
+	 * @param variableText
+	 */
+	public void setVariableText(String variableText)
+	{
+		this.variableText = variableText;
+	}
 
-    /**
-     * Returns the variable if any is applied
-     *
-     * @return
-     */
-    public Object getVariable()
-    {
-        return variable;
-    }
+	/**
+	 * Returns the variable if any is applied
+	 *
+	 * @return
+	 */
+	public Object getVariable()
+	{
+		return variable;
+	}
 
-    /**
-     * Sets the variable if any is applied
-     *
-     * @param variable
-     */
-    public void setVariable(Serializable variable)
-    {
-        this.variable = variable;
-    }
+	/**
+	 * Sets the variable if any is applied
+	 *
+	 * @param variable
+	 */
+	public void setVariable(Serializable variable)
+	{
+		this.variable = variable;
+	}
 
-    /**
-     * Sets the owning component ID
-     *
-     * @return
-     */
-    @Override
-    public String getOwnerId()
-    {
-        return ownerId;
-    }
+	/**
+	 * Sets the owning component ID
+	 *
+	 * @return
+	 */
+	@Override
+	public String getOwnerId()
+	{
+		return ownerId;
+	}
 
-    /**
-     * Gets the owning component ID
-     *
-     * @param ownerId
-     */
-    @Override
-    public void setOwnerId(String ownerId)
-    {
-        this.ownerId = ownerId;
-    }
+	/**
+	 * Gets the owning component ID
+	 *
+	 * @param ownerId
+	 */
+	@Override
+	public void setOwnerId(String ownerId)
+	{
+		this.ownerId = ownerId;
+	}
 
-    /**
-     * Returns the variable object in the format requested
-     *
-     * @param <T>       Generic type of JavaScript part
-     * @param classType
-     *
-     * @return
-     *
-     */
-    public <T> T as(Class<T> classType)
-    {
-        try
-        {
-            return JavaScriptPart.From(getVariableText(), classType);
-        }
-        catch (Exception e)
-        {
-            log.log(Level.WARNING, "Error in decoding Ajax Response Variable", e);
-            return null;
-        }
-    }
+	/**
+	 * Returns the variable object in the format requested
+	 *
+	 * @param <T>       Generic type of JavaScript part
+	 * @param classType
+	 *
+	 * @return
+	 */
+	public <T> T as(Class<T> classType)
+	{
+		try
+		{
+			return (T) new JavaScriptPart().From(getVariableText(), classType);
+		}
+		catch (Exception e)
+		{
+			log.log(Level.WARNING, "Error in decoding Ajax Response Variable", e);
+			return null;
+		}
+	}
 
 }

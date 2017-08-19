@@ -16,28 +16,28 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class TextAreaTest
 {
-
-    public TextAreaTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        TextArea ta = new TextArea("default text");
-        ta.setID("id");
-        System.out.println(ta.toString(true));
-        assertEquals(""
-                + "<textarea id=\"id\">default text</textarea>", ta.toString(true).toString());
-    }
-
+	
+	public TextAreaTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		TextArea ta = new TextArea("default text");
+		ta.setID("id");
+		System.out.println(ta.toString(true));
+		assertEquals(""
+				             + "<textarea id=\"id\">default text</textarea>", ta.toString(true).toString());
+	}
+	
 }

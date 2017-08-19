@@ -25,65 +25,65 @@ import za.co.mmagon.jwebswing.base.client.Browsers;
  */
 public class UpdatePair extends za.co.mmagon.jwebswing.generics.Pair<String, Component>
 {
-
-    private static final long serialVersionUID = 1L;
-    /*
-     * The current browser of the render
-     */
-    private Browsers browser;
-    /**
-     * The current user agent of the render
-     */
-    private transient ReadableUserAgent userAgent;
-
-    /**
-     * Load an Update WebReference
-     *
-     * @param componentID           The component ID to replace
-     * @param componentToUpdateWith The component to update with (Best to pool these)
-     */
-    public UpdatePair(String componentID, Component componentToUpdateWith)
-    {
-        super(componentID, componentToUpdateWith);
-    }
-
-    /**
-     * Returns the assigned user agent
-     *
-     * @return
-     */
-    public ReadableUserAgent getUserAgent()
-    {
-        return userAgent;
-    }
-
-    /**
-     * Sets the assigned user agent
-     *
-     * @param userAgent
-     */
-    public void setUserAgent(ReadableUserAgent userAgent)
-    {
-        this.userAgent = userAgent;
-    }
-
-    /**
-     * Gets the current assigned browser
-     *
-     * @return
-     */
-    public Browsers getBrowser()
-    {
-        return browser;
-    }
-
-    /**
-     * Sets the current assigned browser
-     *
-     * @param browser
-     */
-    public void setBrowser(Browsers browser)
-    {
-        this.browser = browser;
-    }
+	
+	private static final long serialVersionUID = 1L;
+	/*
+	 * The current browser of the render
+	 */
+	private Browsers browser;
+	/**
+	 * The current user agent of the render
+	 */
+	private transient ReadableUserAgent userAgent;
+	
+	/**
+	 * Load an Update WebReference
+	 *
+	 * @param componentID           The component ID to replace
+	 * @param componentToUpdateWith The component to update with (Best to pool these)
+	 */
+	public UpdatePair(String componentID, Component componentToUpdateWith)
+	{
+		super(componentID, componentToUpdateWith);
+	}
+	
+	/**
+	 * Returns the assigned user agent
+	 *
+	 * @return
+	 */
+	public ReadableUserAgent getUserAgent()
+	{
+		return userAgent;
+	}
+	
+	/**
+	 * Sets the assigned user agent
+	 *
+	 * @param userAgent
+	 */
+	public void setUserAgent(ReadableUserAgent userAgent)
+	{
+		this.userAgent = userAgent;
+	}
+	
+	/**
+	 * Gets the current assigned browser
+	 *
+	 * @return
+	 */
+	public Browsers getBrowser()
+	{
+		return browser;
+	}
+	
+	/**
+	 * Sets the current assigned browser
+	 *
+	 * @param browser
+	 */
+	public void setBrowser(Browsers browser)
+	{
+		this.browser = browser;
+	}
 }

@@ -17,8 +17,6 @@
 package za.co.mmagon.jwebswing.base;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import java.util.ArrayList;
-import java.util.List;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
@@ -28,103 +26,128 @@ import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * A Theme-Able Component. Only requirement is a tag, keeping it separate for the many different ways that other developers have done their themes
  *
- * @author GedMarc
  * @param <A> Set of attributes
  * @param <F> Any features attached
  * @param <E> Any events
  * @param <J> This class
  *
+ * @author GedMarc
  * @since 23 Apr 2016
  */
 public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentThemeBase<A, F, E, J>>
-        extends ComponentHTMLAngularBase<A, F, E, J> implements IComponentThemeBase<J>
+		extends ComponentHTMLAngularBase<A, F, E, J> implements IComponentThemeBase<J>
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * The associated theme
-     */
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private ArrayList<Theme> themes;
-
-    /**
-     * Constructs a theme controller for a component
-     *
-     * @param componentType
-     */
-    public ComponentThemeBase(ComponentTypes componentType)
-    {
-        super(componentType);
-    }
-
-    /**
-     * Returns a Theme Base interface of this component
-     *
-     * @return
-     */
-    public IComponentThemeBase asThemeBase()
-    {
-        return (ComponentThemeBase) this;
-    }
-
-    /**
-     * Adds in the JavaScript References for the Features
-     *
-     * @return
-     */
-    @Override
-    public List<JavascriptReference> getJavascriptReferencesAll()
-    {
-        List<JavascriptReference> allJs = super.getJavascriptReferencesAll();
-        getThemes().stream().forEach((Theme feature)
-                ->
-        {
-            Theme.class.cast(feature).getJavascriptReferences().stream().filter((js) -> (!allJs.contains(js))).forEach((js)
-                    ->
-            {
-                allJs.add(js);
-            });
-        });
-        return allJs;
-    }
-
-    /**
-     * Adds in the JavaScript References for the Features
-     *
-     * @return
-     */
-    @Override
-    public List<CSSReference> getCssReferencesAll()
-    {
-        List<CSSReference> allCss = super.getCssReferencesAll();
-        getThemes().stream().forEach((Theme feature)
-                ->
-        {
-            Theme.class.cast(feature).getCssReferences().stream().filter((css) -> (!allCss.contains(css))).forEach((css)
-                    ->
-            {
-                allCss.add(css);
-            });
-        });
-        return allCss;
-    }
-
-    /**
-     * Returns the parents theme or the applied theme
-     * <p>
-     * @return The theme
-     */
-    @Override
-    public List<Theme> getThemes()
-    {
-        if (this.themes == null)
-        {
-            this.themes = new ArrayList<>();
-        }
-        return this.themes;
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * The associated theme
+	 */
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	private ArrayList<Theme> themes;
+	
+	/**
+	 * Constructs a theme controller for a component
+	 *
+	 * @param componentType
+	 */
+	public ComponentThemeBase(ComponentTypes componentType)
+	{
+		super(componentType);
+	}
+	
+	/**
+	 * Returns a Theme Base interface of this component
+	 *
+	 * @return
+	 */
+	public IComponentThemeBase asThemeBase()
+	{
+		return (ComponentThemeBase) this;
+	}
+	
+	/**
+	 * Adds in the JavaScript References for the Features
+	 *
+	 * @return
+	 */
+	@Override
+	public List<JavascriptReference> getJavascriptReferencesAll()
+	{
+		List<JavascriptReference> allJs = super.getJavascriptReferencesAll();
+		getThemes().forEach((Theme feature)
+				                    ->
+		                    {
+			                    Theme.class.cast(feature).getJavascriptReferences().forEach((js)
+					                                                                                ->
+			                                                                                {
+				                                                                                if (!allJs.contains(js))
+				                                                                                {
+					                                                                                allJs.add(js);
+				                                                                                }
+			                                                                                });
+		                    });
+		return allJs;
+	}
+	
+	/**
+	 * Adds in the JavaScript References for the Features
+	 *
+	 * @return
+	 */
+	@Override
+	public List<CSSReference> getCssReferencesAll()
+	{
+		List<CSSReference> allCss = super.getCssReferencesAll();
+		getThemes().forEach((Theme feature)
+				                    ->
+		                    {
+			                    for (Iterator<CSSReference> iterator = feature.getCssReferences().iterator(); iterator.hasNext(); )
+			                    {
+				                    CSSReference next = iterator.next();
+				                    if (allCss.contains(next))
+				                    {
+					                    continue;
+				                    }
+				
+				                    allCss.add(next);
+			                    }
+		                    });
+		return allCss;
+	}
+	
+	/**
+	 * Returns the parents theme or the applied theme
+	 * <p>
+	 *
+	 * @return The theme
+	 */
+	@Override
+	public List<Theme> getThemes()
+	{
+		if (this.themes == null)
+		{
+			this.themes = new ArrayList<>();
+		}
+		return this.themes;
+	}
+	
+	@Override
+	public void destroy()
+	{
+		if (this.themes != null)
+		{
+			this.themes.clear();
+			this.themes = null;
+		}
+		super.destroy();
+	}
+	
 }

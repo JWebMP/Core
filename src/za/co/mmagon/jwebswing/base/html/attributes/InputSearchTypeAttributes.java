@@ -21,62 +21,63 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 /**
  * The attribute enumeration for the input button type
  * <p>
+ *
  * @author GedMarc
  */
 public enum InputSearchTypeAttributes implements AttributeDefinitions
 {
-
-    AutoComplete, /**
-     * Sets or returns the value of the autocomplete attribute of a search field
-     */
-    AutoCocus, /**
-     * Sets or returns whether a search field should automatically get focus when the page loads
-     */
-    DefaultValue, /**
-     * Sets or returns the default value of a search field
-     */
-    Disabled, /**
-     * Sets or returns whether a search field is disabled, or not
-     */
-    Form, /**
-     * Returns a reference to the form that contains the search field
-     */
-    List, /**
-     * Returns a reference to the datalist that contains the search field
-     */
-    MaxLength, /**
-     * Sets or returns the value of the maxlength attribute of a search field
-     */
-    Name, /**
-     * Sets or returns the value of the name attribute of a search field
-     */
-    Pattern, /**
-     * Sets or returns the value of the pattern attribute of a search field
-     */
-    PlaceHolder, /**
-     * Sets or returns the value of the placeholder attribute of a search field
-     */
-    ReadOnly, /**
-     * Sets or returns whether the search field is read-only, or not
-     */
-    Required, /**
-     * Sets or returns whether the search field must be filled out before submitting a form
-     */
-    Size, /**
-     * Sets or returns the value of the size attribute of the search field
-     */
-    Type, /**
-     * Returns which type of form element the search field is
-     */
-    Value, /**
-     * Sets or returns the value of the value attribute of a search field
-     */
-    ;
-
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
-
+	
+	AutoComplete, /**
+ * Sets or returns the value of the autocomplete attribute of a search field
+ */
+AutoCocus, /**
+ * Sets or returns whether a search field should automatically get focus when the page loads
+ */
+DefaultValue, /**
+ * Sets or returns the default value of a search field
+ */
+Disabled, /**
+ * Sets or returns whether a search field is disabled, or not
+ */
+Form, /**
+ * Returns a reference to the form that contains the search field
+ */
+List, /**
+ * Returns a reference to the datalist that contains the search field
+ */
+MaxLength, /**
+ * Sets or returns the value of the maxlength attribute of a search field
+ */
+Name, /**
+ * Sets or returns the value of the name attribute of a search field
+ */
+Pattern, /**
+ * Sets or returns the value of the pattern attribute of a search field
+ */
+PlaceHolder, /**
+ * Sets or returns the value of the placeholder attribute of a search field
+ */
+ReadOnly, /**
+ * Sets or returns whether the search field is read-only, or not
+ */
+Required, /**
+ * Sets or returns whether the search field must be filled out before submitting a form
+ */
+Size, /**
+ * Sets or returns the value of the size attribute of the search field
+ */
+Type, /**
+ * Returns which type of form element the search field is
+ */
+Value, /**
+ * Sets or returns the value of the value attribute of a search field
+ */
+	;
+	
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
+	
 }

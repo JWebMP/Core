@@ -17,24 +17,23 @@
 package za.co.mmagon.jwebswing.base.interfaces;
 
 /**
- *
  * @author Marc Magon
  * @since 30 May 2017
  */
 public interface RenderAfterLinks
 {
-
-    /**
-     * Renders after the scripts
-     *
-     * @return
-     */
-    public StringBuffer render();
-
-    /**
-     * The sort order
-     *
-     * @return
-     */
-    public int sortOrder();
+	
+	/**
+	 * Renders after the scripts
+	 *
+	 * @return
+	 */
+	public StringBuffer render();
+	
+	/**
+	 * The sort order
+	 *
+	 * @return
+	 */
+	public int sortOrder();
 }

@@ -18,7 +18,10 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.TableChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.TableRowChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
@@ -53,35 +56,35 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * Some HTML 4.01 attributes are not supported in HTML5.<p>
  *
- * @author MMagon
  * @param <J>
  *
- * @since Forever
+ * @author MMagon
  * @version 1.0
+ * @since Forever
  */
 public class TableHeader<J extends TableHeader<J>>
-        extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements TableChildren, TableRowChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
+		extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements TableChildren, TableRowChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs an empty Table Header
-     */
-    public TableHeader()
-    {
-        this(null);
-    }
-
-    /**
-     * Constructs a new header with the given text
-     *
-     * @param headerText
-     */
-    public TableHeader(String headerText)
-    {
-        super(ComponentTypes.TableHeader);
-        setText(headerText);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs an empty Table Header
+	 */
+	public TableHeader()
+	{
+		this(null);
+	}
+	
+	/**
+	 * Constructs a new header with the given text
+	 *
+	 * @param headerText
+	 */
+	public TableHeader(String headerText)
+	{
+		super(ComponentTypes.TableHeader);
+		setText(headerText);
+	}
 }

@@ -19,26 +19,25 @@ package za.co.mmagon.jwebswing.base.html.attributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 
 /**
- *
  * @author GedMarc
  */
 public enum DeletedAttributes implements AttributeDefinitions
 {
 
-    /**
-     * Specifies a URL to a document that explains the reason why the text was deleted
-     */
-    Cite,
-    /**
-     * Specifies the date and time of when the text was deleted
-     * <p>
-     * YYYY-MM-DDThh:mm:ssTZD
-     */
-    DateTime;
+	/**
+	 * Specifies a URL to a document that explains the reason why the text was deleted
+	 */
+	Cite,
+	/**
+	 * Specifies the date and time of when the text was deleted
+	 * <p>
+	 * YYYY-MM-DDThh:mm:ssTZD
+	 */
+	DateTime;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

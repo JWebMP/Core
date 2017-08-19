@@ -25,9 +25,10 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 /**
  * Extention of a component with no HTML. Renders the ID and all references to it as a class name instead of ID form
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
+ * @author GedMarc
  * @since 2015/04/24
  */
 public abstract class CSSComponent<J extends CSSComponent<J>>
@@ -40,6 +41,7 @@ public abstract class CSSComponent<J extends CSSComponent<J>>
     /**
      * Constructs a new CSS Class with the given features and events associated
      * <p>
+     *
      * @param className
      */
     public CSSComponent(String className)
@@ -51,6 +53,7 @@ public abstract class CSSComponent<J extends CSSComponent<J>>
     /**
      * Returns the component rendering for JQuery string Requires the rendering for component is set
      * <p>
+     *
      * @return $('#x').
      */
     @Override
@@ -62,8 +65,10 @@ public abstract class CSSComponent<J extends CSSComponent<J>>
     /**
      * Returns the ID with the . in the front of it
      * <p>
+     *
      * @param jQueryHolder Anything
      * <p>
+     *
      * @return An ID starting with .
      */
     @Override

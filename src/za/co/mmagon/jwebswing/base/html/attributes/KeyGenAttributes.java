@@ -28,47 +28,46 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  * The numbers in the table specify the first browser version that fully supports the element. Element &gt;keygen&lt; 1.0 Not supported 1.0 1.2 3.0
  *
  * @author GedMarc
- * @since Feb 9, 2015
  * @version 1.0
  * <p>
- *
+ * @since Feb 9, 2015
  */
 public enum KeyGenAttributes implements AttributeDefinitions
 {
 
-    /**
-     * Sets or returns whether a keygen field automatically gets focus when the page loads, or not
-     */
-    AutoFocus,
-    /**
-     * Sets or returns the value of the challenge attribute of a keygen field
-     */
-    Challenge,
-    /**
-     * Sets or returns whether a keygen field is disabled, or not
-     */
-    Disabled,
-    /**
-     * Returns a reference to the form that contains the keygen field
-     * <p>
-     */
-    Form,
-    /**
-     * Sets or returns the value of the keytype attribute of a keygen field
-     */
-    KeyType,
-    /**
-     * Sets or returns the value of the name attribute of a keygen field
-     */
-    Name,
-    /**
-     * Returns which type of form element the keygen field is
-     */
-    Type;
+	/**
+	 * Sets or returns whether a keygen field automatically gets focus when the page loads, or not
+	 */
+	AutoFocus,
+	/**
+	 * Sets or returns the value of the challenge attribute of a keygen field
+	 */
+	Challenge,
+	/**
+	 * Sets or returns whether a keygen field is disabled, or not
+	 */
+	Disabled,
+	/**
+	 * Returns a reference to the form that contains the keygen field
+	 * <p>
+	 */
+	Form,
+	/**
+	 * Sets or returns the value of the keytype attribute of a keygen field
+	 */
+	KeyType,
+	/**
+	 * Sets or returns the value of the name attribute of a keygen field
+	 */
+	Name,
+	/**
+	 * Returns which type of form element the keygen field is
+	 */
+	Type;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

@@ -19,7 +19,6 @@ package za.co.mmagon.jwebswing.base.servlets.interfaces;
 import java.io.Serializable;
 
 /**
- *
  * @author GedMarc
  */
 public interface ReferencePool extends Serializable, IReferencePool

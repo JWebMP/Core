@@ -16,15 +16,20 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.html.attributes.BodyAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.ContainerType;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.LayoutHandler;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.HtmlChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.PageChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.logger.LogFactory;
+
+import java.util.logging.Logger;
 
 /**
  * Browser Support<p>
@@ -48,77 +53,78 @@ import za.co.mmagon.logger.LogFactory;
  * All layout attributes is deprecated in HTML 4.01
  * .<p>
  * <p>
+ *
  * @param <C>
  * @param <F> Features Base
  * @param <J>
  *
- * @since 2013/11/20
  * @author Marc Magon
  * @version 1.0
+ * @since 2013/11/20
  */
 public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Body<C, F, J>>
-        extends Component<C, BodyAttributes, F, NoEvents, J>
-        implements PageChildren, HtmlChildren, LayoutHandler, ContainerType
+		extends Component<C, BodyAttributes, F, NoEvents, J>
+		implements PageChildren, HtmlChildren, LayoutHandler, ContainerType
 {
-
-    private static final Logger LOG = LogFactory.getInstance().getLogger("BODY");
-
-    private static final long serialVersionUID = 1L;
-    /**
-     * If this body has rendered the scripts on itself
-     */
-    private boolean renderedScripts;
-
-    /**
-     * Instantiates an empty body
-     */
-    public Body()
-    {
-        this(null);
-    }
-
-    /**
-     * Constructs a new Body with the given Page input
-     *
-     * @param page
-     */
-    public Body(Page page)
-    {
-        super(ComponentTypes.Body);
-        if (page != null)
-        {
-            setPage(page);
-        }
-        setID("body");
-    }
-
-    @Override
-    public void preConfigure()
-    {
-        super.preConfigure();
-    }
-
-    /**
-     * If the scripts have been rendered
-     *
-     * @return
-     */
-    protected boolean isRenderedScripts()
-    {
-        return renderedScripts;
-    }
-
-    /**
-     * If the scripts have been rendered
-     *
-     * @param renderedScripts
-     *
-     * @return
-     */
-    protected Body setRenderedScripts(boolean renderedScripts)
-    {
-        this.renderedScripts = renderedScripts;
-        return this;
-    }
-
+	
+	private static final Logger LOG = LogFactory.getInstance().getLogger("BODY");
+	
+	private static final long serialVersionUID = 1L;
+	/**
+	 * If this body has rendered the scripts on itself
+	 */
+	private boolean renderedScripts;
+	
+	/**
+	 * Instantiates an empty body
+	 */
+	public Body()
+	{
+		this(null);
+	}
+	
+	/**
+	 * Constructs a new Body with the given Page input
+	 *
+	 * @param page
+	 */
+	public Body(Page page)
+	{
+		super(ComponentTypes.Body);
+		if (page != null)
+		{
+			setPage(page);
+		}
+		setID("body");
+	}
+	
+	@Override
+	public void preConfigure()
+	{
+		super.preConfigure();
+	}
+	
+	/**
+	 * If the scripts have been rendered
+	 *
+	 * @return
+	 */
+	protected boolean isRenderedScripts()
+	{
+		return renderedScripts;
+	}
+	
+	/**
+	 * If the scripts have been rendered
+	 *
+	 * @param renderedScripts
+	 *
+	 * @return
+	 */
+	protected Body setRenderedScripts(boolean renderedScripts)
+	{
+		this.renderedScripts = renderedScripts;
+		return this;
+	}
+	
 }

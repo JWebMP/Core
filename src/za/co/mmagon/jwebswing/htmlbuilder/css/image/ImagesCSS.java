@@ -1,7 +1,8 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.image;
 
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
+
 import java.lang.annotation.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
 
 /**
  * A list of URL's for a background Image
@@ -11,13 +12,13 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
  */
 @CSSAnnotationType
 @Target(
-        {
-            ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
-        })
+		{
+				ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
+		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface ImagesCSS
 {
 
-    public ImageCSS[] value() default @ImageCSS;
+	public ImageCSS[] value() default @ImageCSS;
 }

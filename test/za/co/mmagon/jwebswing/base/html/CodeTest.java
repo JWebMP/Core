@@ -19,23 +19,22 @@ package za.co.mmagon.jwebswing.base.html;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class CodeTest
 {
 
-    public CodeTest()
-    {
-    }
+	public CodeTest()
+	{
+	}
 
-    @Test
-    public void testCode()
-    {
-        Code c = new Code();
-        c.setID("id");
-        c.setText("This is computer code");
-        System.out.println(c.toString(true));
-    }
+	@Test
+	public void testCode()
+	{
+		Code c = new Code();
+		c.setID("id");
+		c.setText("This is computer code");
+		System.out.println(c.toString(true));
+	}
 
 }

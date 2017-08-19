@@ -48,25 +48,25 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * 1
  *
- * @author Marc Magon
  * @param <J>
  *
- * @since Forever
+ * @author Marc Magon
  * @version 1.0
+ * @since Forever
  */
 public class Code<J extends Code<J>>
-        extends Component<NoChildren, CodeAttributes, GlobalFeatures, GlobalEvents, J>
-        implements PhraseChildren
+		extends Component<NoChildren, CodeAttributes, GlobalFeatures, GlobalEvents, J>
+		implements PhraseChildren
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a new Code Objects
-     */
-    public Code()
-    {
-        super(ComponentTypes.Code);
-        setTiny(true);
-    }
+	/**
+	 * Constructs a new Code Objects
+	 */
+	public Code()
+	{
+		super(ComponentTypes.Code);
+		setTiny(true);
+	}
 }

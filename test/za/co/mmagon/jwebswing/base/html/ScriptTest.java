@@ -16,50 +16,50 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.base.html.attributes.ScriptAttributes;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author MMagon
  */
 public class ScriptTest
 {
-
-    public ScriptTest()
-    {
-    }
-
-    @Test
-    public void testJavascript()
-    {
-        java.util.Date start = new java.util.Date();
-        Script s = new Script("src");
-        //java.util.Date construct = new java.util.Date();
-        //System.out.println("Script Construct Time [" + (construct.getTime() - start.getTime()) + "]");
-        s.setJavascript("javascript");
-        //java.util.Date attribute = new java.util.Date();
-        //System.out.println("Script Attribute Time [" + (attribute.getTime() - start.getTime()) + "]");
-        StringBuilder sb = new StringBuilder(s.toString(true));
-        java.util.Date html = new java.util.Date();
-        System.out.println("Script HTML Time [" + (html.getTime() - start.getTime()) + "]");
-        System.out.println(sb.toString());
-
-        start = new java.util.Date();
-        s = new Script();
-        s.setJavascript("javascript");
-        html = new java.util.Date();
-        sb = new StringBuilder(s.toString(true));
-        System.out.println("Second Script Construct Time [" + (html.getTime() - start.getTime()) + "]");
-        System.out.println(sb.toString());
-
-        Script s1 = new Script();
-        Script s2 = new Script();
-        assertEquals(s1, s2);
-
-        s2.addAttribute(ScriptAttributes.Type, "type");
-        System.out.println(s1.equals(s2));
-    }
-
+	
+	public ScriptTest()
+	{
+	}
+	
+	@Test
+	public void testJavascript()
+	{
+		java.util.Date start = new java.util.Date();
+		Script s = new Script("src");
+		//java.util.Date construct = new java.util.Date();
+		//System.out.println("Script Construct Time [" + (construct.getTime() - start.getTime()) + "]");
+		s.setJavascript("javascript");
+		//java.util.Date attribute = new java.util.Date();
+		//System.out.println("Script Attribute Time [" + (attribute.getTime() - start.getTime()) + "]");
+		StringBuilder sb = new StringBuilder(s.toString(true));
+		java.util.Date html = new java.util.Date();
+		System.out.println("Script HTML Time [" + (html.getTime() - start.getTime()) + "]");
+		System.out.println(sb.toString());
+		
+		start = new java.util.Date();
+		s = new Script();
+		s.setJavascript("javascript");
+		html = new java.util.Date();
+		sb = new StringBuilder(s.toString(true));
+		System.out.println("Second Script Construct Time [" + (html.getTime() - start.getTime()) + "]");
+		System.out.println(sb.toString());
+		
+		Script s1 = new Script();
+		Script s2 = new Script();
+		assertEquals(s1, s2);
+		
+		s2.addAttribute(ScriptAttributes.Type, "type");
+		System.out.println(s1.equals(s2));
+	}
+	
 }

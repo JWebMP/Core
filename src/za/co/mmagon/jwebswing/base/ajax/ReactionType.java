@@ -24,28 +24,28 @@ package za.co.mmagon.jwebswing.base.ajax;
  */
 public enum ReactionType
 {
-    /**
-     * Displays a normal message using the System variables messages
-     */
-    MessageDisplay,
-    /**
-     * Displays a dialogue using the bootstrap dialog
-     */
-    DialogDisplay,
-    /**
-     * Navigates to a new page
-     */
-    RedirectUrl,
-    /**
-     * Creates a new window with the URL
-     */
-    PopoutUrl,
-    /**
-     * Refreshes the current page
-     */
-    RefreshPage,
-    /**
-     * Send the user back home
-     */
-    RedirectHome,
+	/**
+	 * Displays a normal message using the System variables messages
+	 */
+	MessageDisplay,
+	/**
+	 * Displays a dialogue using the bootstrap dialog
+	 */
+	DialogDisplay,
+	/**
+	 * Navigates to a new page
+	 */
+	RedirectUrl,
+	/**
+	 * Creates a new window with the URL
+	 */
+	PopoutUrl,
+	/**
+	 * Refreshes the current page
+	 */
+	RefreshPage,
+	/**
+	 * Send the user back home
+	 */
+	RedirectHome,
 }

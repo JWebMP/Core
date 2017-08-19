@@ -16,19 +16,15 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
 
+import java.lang.annotation.*;
+
 /**
- *
  * CSS Border Properties
  * <p>
  * The CSS border properties allow you to specify the style, width, and color of an element's border.
@@ -39,40 +35,40 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
  * see http://www.w3schools.com/css/css_border.asp
  */
 @Target(
-        {
-            ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
-        })
+		{
+				ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
+		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
 public @interface BorderTopCSS
 {
 
-    /**
-     * Sets the color of the top border
-     *
-     * @return
-     */
-    public ColourCSS BorderTopColor() default @ColourCSS;
+	/**
+	 * Sets the color of the top border
+	 *
+	 * @return
+	 */
+	public ColourCSS BorderTopColor() default @ColourCSS;
 
-    /**
-     * Sets the color of the top border
-     *
-     * @return
-     */
-    public ColourNames BorderTopColor$() default ColourNames.Unset;
+	/**
+	 * Sets the color of the top border
+	 *
+	 * @return
+	 */
+	public ColourNames BorderTopColor$() default ColourNames.Unset;
 
-    /**
-     * Sets the style of the top border
-     *
-     * @return
-     */
-    public BorderStyles BorderTopStyle() default BorderStyles.Unset;
+	/**
+	 * Sets the style of the top border
+	 *
+	 * @return
+	 */
+	public BorderStyles BorderTopStyle() default BorderStyles.Unset;
 
-    /**
-     * Sets the width of the top border
-     *
-     * @return
-     */
-    public MeasurementCSS BorderTopWidth() default @MeasurementCSS;
+	/**
+	 * Sets the width of the top border
+	 *
+	 * @return
+	 */
+	public MeasurementCSS BorderTopWidth() default @MeasurementCSS;
 }

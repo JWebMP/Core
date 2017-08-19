@@ -19,59 +19,62 @@ package za.co.mmagon.jwebswing.base.html.attributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 
 /**
- *
  * @author GedMarc
  */
 public enum TableColumnAttributes implements AttributeDefinitions
 {
-
-    /**
-     * Specifies the alignment of the content related to a col element.
-     * <p>
-     * left right center justify char Not supported in HTML5.
-     * <p>
-     * @deprecated
-     */
-    Align,
-    /**
-     * Not supported in HTML5.
-     * <p>
-     * Specifies the alignment of the content related to a col element to a character
-     * <p>
-     * @deprecated
-     */
-    Char,
-    /**
-     * Not supported in HTML5. Specifies the number of characters the content will be aligned from the character specified by the char attribute
-     * <p>
-     * @deprecated
-     */
-    CharOff,
-    /**
-     * Specifies the number of columns a col element should span
-     */
-    Span,
-    /**
-     * Not supported in HTML5.
-     * <p>
-     * Specifies the vertical alignment of the content related to a col element
-     * <p>
-     * @deprecated
-     */
-    VAlign,
-    /**
-     * Not supported in HTML5.
-     * <p>
-     * Specifies the width of a col element
-     *
-     * @deprecated
-     */
-    Width;
-
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
-
+	
+	/**
+	 * Specifies the alignment of the content related to a col element.
+	 * <p>
+	 * left right center justify char Not supported in HTML5.
+	 * <p>
+	 *
+	 * @deprecated
+	 */
+	Align,
+	/**
+	 * Not supported in HTML5.
+	 * <p>
+	 * Specifies the alignment of the content related to a col element to a character
+	 * <p>
+	 *
+	 * @deprecated
+	 */
+	Char,
+	/**
+	 * Not supported in HTML5. Specifies the number of characters the content will be aligned from the character specified by the char attribute
+	 * <p>
+	 *
+	 * @deprecated
+	 */
+	CharOff,
+	/**
+	 * Specifies the number of columns a col element should span
+	 */
+	Span,
+	/**
+	 * Not supported in HTML5.
+	 * <p>
+	 * Specifies the vertical alignment of the content related to a col element
+	 * <p>
+	 *
+	 * @deprecated
+	 */
+	VAlign,
+	/**
+	 * Not supported in HTML5.
+	 * <p>
+	 * Specifies the width of a col element
+	 *
+	 * @deprecated
+	 */
+	Width;
+	
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
+	
 }

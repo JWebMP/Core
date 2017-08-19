@@ -42,32 +42,33 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &gt;bdi&lt; tag is new in HTML5.<p>
  *
- * @author Marc Magon
  * @param <J>
+ *
+ * @author Marc Magon
  */
 public class BiDirectionalIsolation<J extends BiDirectionalIsolation<J>>
-        extends Component<Component, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements GlobalChildren, ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag
+		extends Component<Component, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements GlobalChildren, ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a bold section of text
-     */
-    public BiDirectionalIsolation()
-    {
-        this("");
-    }
-
-    /**
-     * Specifies the text as bold
-     *
-     * @param text
-     */
-    public BiDirectionalIsolation(String text)
-    {
-        super(ComponentTypes.BiDirectionalIsolation);
-        setText(text);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a bold section of text
+	 */
+	public BiDirectionalIsolation()
+	{
+		this("");
+	}
+	
+	/**
+	 * Specifies the text as bold
+	 *
+	 * @param text
+	 */
+	public BiDirectionalIsolation(String text)
+	{
+		super(ComponentTypes.BiDirectionalIsolation);
+		setText(text);
+	}
 }

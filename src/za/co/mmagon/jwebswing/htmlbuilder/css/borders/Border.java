@@ -16,12 +16,9 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
+
+import java.lang.annotation.*;
 
 /**
  * The border shorthand property sets all the border properties in one declaration.
@@ -30,14 +27,14 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
  * @since 18 Jan 2016
  */
 @Target(
-        {
-            ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
-        })
+		{
+				ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
+		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
 public @interface Border
 {
 
-    public BorderLeftCSS Border() default @BorderLeftCSS;
+	public BorderLeftCSS Border() default @BorderLeftCSS;
 }

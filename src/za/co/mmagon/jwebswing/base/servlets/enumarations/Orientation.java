@@ -24,13 +24,13 @@ package za.co.mmagon.jwebswing.base.servlets.enumarations;
  */
 public enum Orientation
 {
-    VERTICAL,
-    HORIZONTAL;
+	VERTICAL,
+	HORIZONTAL;
 
-    @Override
-    public String toString()
-    {
-        return super.toString().toLowerCase();
-    }
+	@Override
+	public String toString()
+	{
+		return super.toString().toLowerCase();
+	}
 
 }

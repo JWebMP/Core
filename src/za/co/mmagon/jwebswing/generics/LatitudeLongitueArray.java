@@ -25,24 +25,24 @@ package za.co.mmagon.jwebswing.generics;
 public class LatitudeLongitueArray extends XYObject<Double, Double>
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /*
-     * Constructs a new LatitudeLongitueArray. X is latitude usually
-     */
-    public LatitudeLongitueArray()
-    {
-        //Nothing needed
-    }
+	/*
+	 * Constructs a new LatitudeLongitueArray. X is latitude usually
+	 */
+	public LatitudeLongitueArray()
+	{
+		//Nothing needed
+	}
 
-    /**
-     * Sets the parameters
-     *
-     * @param X Latitude
-     * @param Y Longitude
-     */
-    public LatitudeLongitueArray(Double X, Double Y)
-    {
-        super(X, Y);
-    }
+	/**
+	 * Sets the parameters
+	 *
+	 * @param X Latitude
+	 * @param Y Longitude
+	 */
+	public LatitudeLongitueArray(Double X, Double Y)
+	{
+		super(X, Y);
+	}
 }

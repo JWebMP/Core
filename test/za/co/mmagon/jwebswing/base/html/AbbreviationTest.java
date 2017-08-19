@@ -20,25 +20,24 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- *
  * @author MMagon
  */
 public class AbbreviationTest
 {
-
-    public AbbreviationTest()
-    {
-    }
-
-    @Test
-    public void testRender()
-    {
-        Abbreviation abb = new Abbreviation();
-        abb.setID("ID");
-        abb.setText("A.B.C.");
-        System.out.println(abb.toString(true));
-        String expected = "<abbr id=\"ID\">A.B.C.</abbr>";
-        Assert.assertEquals(expected, abb.toString(true));
-    }
-
+	
+	public AbbreviationTest()
+	{
+	}
+	
+	@Test
+	public void testRender()
+	{
+		Abbreviation abb = new Abbreviation();
+		abb.setID("ID");
+		abb.setText("A.B.C.");
+		System.out.println(abb.toString(true));
+		String expected = "<abbr id=\"ID\">A.B.C.</abbr>";
+		Assert.assertEquals(expected, abb.toString(true));
+	}
+	
 }

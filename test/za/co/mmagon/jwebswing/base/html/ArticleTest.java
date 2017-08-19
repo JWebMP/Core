@@ -16,28 +16,28 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author MMagon
  */
 public class ArticleTest
 {
-
-    public ArticleTest()
-    {
-    }
-
-    @Test
-    public void testArticle()
-    {
-        Article art = new Article("this is an article");
-        art.setID("ID");
-        System.out.println(art.toString(true));
-        assertEquals("<article id=\"ID\">this is an article</article>", art.toString(true));
-        //  fail("");
-    }
-
+	
+	public ArticleTest()
+	{
+	}
+	
+	@Test
+	public void testArticle()
+	{
+		Article art = new Article("this is an article");
+		art.setID("ID");
+		System.out.println(art.toString(true));
+		assertEquals("<article id=\"ID\">this is an article</article>", art.toString(true));
+		//  fail("");
+	}
+	
 }

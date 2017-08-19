@@ -22,22 +22,23 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 /**
  * The JQuery JavaScript Reference
  * <p>
- * @since 2014/12/09
- * @version 1.0
- * @author MMagon
  *
+ * @author MMagon
+ * <p>
  * I have moved these from the features to make it easier to specify remote or local references.
  * <p>
+ * @version 1.0
+ * @since 2014/12/09
  */
 class JQueryReference extends JavascriptReference
 {
-
-    private static final long serialVersionUID = 1L;
-
-    public JQueryReference()
-    {
-        super("JQuery", 3.0, "bower_components/jquery/dist/jquery.min.js", "https://code.jquery.com/jquery-3.0.0.min.js");
-        setSortOrder(0);
-        setPriority(RequirementsPriority.Second);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	public JQueryReference()
+	{
+		super("JQuery", 3.0, "bower_components/jquery/dist/jquery.min.js", "https://code.jquery.com/jquery-3.0.0.min.js");
+		setSortOrder(0);
+		setPriority(RequirementsPriority.Second);
+	}
 }

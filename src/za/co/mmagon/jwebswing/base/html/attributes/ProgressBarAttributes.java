@@ -19,25 +19,24 @@ package za.co.mmagon.jwebswing.base.html.attributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 
 /**
- *
  * @author GedMarc
- * @since Mar 1, 2015
  * @version 1.0
+ * @since Mar 1, 2015
  */
 public enum ProgressBarAttributes implements AttributeDefinitions
 {
-    /**
-     * Sets the Maximum Value
-     */
-    Max,
-    /**
-     * Sets the current value
-     */
-    Value;
+	/**
+	 * Sets the Maximum Value
+	 */
+	Max,
+	/**
+	 * Sets the current value
+	 */
+	Value;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

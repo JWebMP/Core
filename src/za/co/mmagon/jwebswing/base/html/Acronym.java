@@ -16,16 +16,22 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import java.io.Serializable;
-import java.util.logging.Level;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.client.HTMLVersions;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.HtmlChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.logger.LogFactory;
+
+import java.io.Serializable;
+import java.util.logging.Level;
 
 /**
  * Definition and Usage<p>
@@ -49,57 +55,56 @@ import za.co.mmagon.logger.LogFactory;
  *
  * @param <J>
  *
- * @since 2014 09 22
- * @version 1.0
  * @author MMagon
- *
+ * @version 1.0
+ * @since 2014 09 22
  * @deprecated
- *
  */
 public class Acronym<J extends Acronym<J>>
-        extends Component<NoChildren, NoAttributes, NoFeatures, GlobalEvents, J>
-        implements NoNewLineBeforeClosingTag, NoNewLineForRawText, HtmlChildren, BodyChildren, Serializable, NoIDTag
+		extends Component<NoChildren, NoAttributes, NoFeatures, GlobalEvents, J>
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, HtmlChildren, BodyChildren, Serializable, NoIDTag
 {
-
-    /**
-     * Logger for the Component
-     */
-    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("Acronym");
-    /**
-     * Serial Version for all Components and their compatibility
-     */
-    private static final long serialVersionUID = 1l;
-
-    /**
-     * Constructs an Acronym
-     * <p>
-     * @param text
-     */
-    public Acronym(String text)
-    {
-        super(ComponentTypes.Acronym.getComponentTag(), ComponentTypes.Acronym);
-        setText(text);
-    }
-
-    /**
-     * Differences Between HTML and HTML 5
-     * <p>
-     * The &gt;acronym&lt; tag is not supported in HTML5. Use the &gt;abbr&lt; tag instead.
-     */
-    @Override
-    public void preConfigure()
-    {
-        super.preConfigure();
-        try
-        {
-            if (getPage().getBrowser().getHtmlVersion() == HTMLVersions.HTML5)
-            {
-                setTag("abbr");
-            }
-        }
-        catch (Exception e)
-        {
-            LOG.log(Level.FINE, "Unable to determine whether HTML or HTML5. Document type not set?", e);
-        }
-    }
+	
+	/**
+	 * Logger for the Component
+	 */
+	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("Acronym");
+	/**
+	 * Serial Version for all Components and their compatibility
+	 */
+	private static final long serialVersionUID = 1l;
+	
+	/**
+	 * Constructs an Acronym
+	 * <p>
+	 *
+	 * @param text
+	 */
+	public Acronym(String text)
+	{
+		super(ComponentTypes.Acronym.getComponentTag(), ComponentTypes.Acronym);
+		setText(text);
+	}
+	
+	/**
+	 * Differences Between HTML and HTML 5
+	 * <p>
+	 * The &gt;acronym&lt; tag is not supported in HTML5. Use the &gt;abbr&lt; tag instead.
+	 */
+	@Override
+	public void preConfigure()
+	{
+		super.preConfigure();
+		try
+		{
+			if (getPage().getBrowser().getHtmlVersion() == HTMLVersions.HTML5)
+			{
+				setTag("abbr");
+			}
+		}
+		catch (Exception e)
+		{
+			LOG.log(Level.FINE, "Unable to determine whether HTML or HTML5. Document type not set?", e);
+		}
+	}
 }

@@ -16,29 +16,29 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class SubscriptTest
 {
-
-    public SubscriptTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        Subscript s = new Subscript("subs");
-        s.setID("id");
-        System.out.println(s.toString(true));
-        assertEquals(""
-                + "<sub id=\"id\">subs</sub>", s.toString(true).toString()
-        );
-    }
-
+	
+	public SubscriptTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		Subscript s = new Subscript("subs");
+		s.setID("id");
+		System.out.println(s.toString(true));
+		assertEquals(""
+				             + "<sub id=\"id\">subs</sub>", s.toString(true).toString()
+		            );
+	}
+	
 }

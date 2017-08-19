@@ -20,230 +20,229 @@ package za.co.mmagon.jwebswing.components.modernizr;
  * The input section
  *
  * @author GedMarc
- * @since Nov 21, 2016
  * @version 1.0
- *
+ * @since Nov 21, 2016
  */
 public class ModernizrInputDto
 {
 
-    private Boolean autocomplete;
-    private Boolean autofocus;
-    private Boolean list;
-    private Boolean placeholder;
-    private Boolean max;
-    private Boolean min;
-    private Boolean multiple;
-    private Boolean pattern;
-    private Boolean required;
-    private Boolean step;
+	private Boolean autocomplete;
+	private Boolean autofocus;
+	private Boolean list;
+	private Boolean placeholder;
+	private Boolean max;
+	private Boolean min;
+	private Boolean multiple;
+	private Boolean pattern;
+	private Boolean required;
+	private Boolean step;
 
-    /**
-     * Constructs a new input dto
-     */
-    public ModernizrInputDto()
-    {
-        //Nothing needed
-    }
+	/**
+	 * Constructs a new input dto
+	 */
+	public ModernizrInputDto()
+	{
+		//Nothing needed
+	}
 
-    /**
-     * Returns if autocomplete is available
-     *
-     * @return
-     */
-    public Boolean getAutocomplete()
-    {
-        return autocomplete;
-    }
+	/**
+	 * Returns if autocomplete is available
+	 *
+	 * @return
+	 */
+	public Boolean getAutocomplete()
+	{
+		return autocomplete;
+	}
 
-    /**
-     * Sets if auto complete is available
-     *
-     * @param autocomplete
-     */
-    public void setAutocomplete(Boolean autocomplete)
-    {
-        this.autocomplete = autocomplete;
-    }
+	/**
+	 * Sets if auto complete is available
+	 *
+	 * @param autocomplete
+	 */
+	public void setAutocomplete(Boolean autocomplete)
+	{
+		this.autocomplete = autocomplete;
+	}
 
-    /**
-     * Gets if auto focus is available
-     *
-     * @return
-     */
-    public Boolean getAutofocus()
-    {
-        return autofocus;
-    }
+	/**
+	 * Gets if auto focus is available
+	 *
+	 * @return
+	 */
+	public Boolean getAutofocus()
+	{
+		return autofocus;
+	}
 
-    /**
-     * Sets if auto focus is available
-     *
-     * @param autofocus
-     */
-    public void setAutofocus(Boolean autofocus)
-    {
-        this.autofocus = autofocus;
-    }
+	/**
+	 * Sets if auto focus is available
+	 *
+	 * @param autofocus
+	 */
+	public void setAutofocus(Boolean autofocus)
+	{
+		this.autofocus = autofocus;
+	}
 
-    /**
-     * Gets if list is available
-     *
-     * @return
-     */
-    public Boolean getList()
-    {
-        return list;
-    }
+	/**
+	 * Gets if list is available
+	 *
+	 * @return
+	 */
+	public Boolean getList()
+	{
+		return list;
+	}
 
-    /**
-     * Sets if list is available
-     *
-     * @param list
-     */
-    public void setList(Boolean list)
-    {
-        this.list = list;
-    }
+	/**
+	 * Sets if list is available
+	 *
+	 * @param list
+	 */
+	public void setList(Boolean list)
+	{
+		this.list = list;
+	}
 
-    /**
-     * Gets if place holder is available
-     *
-     * @return
-     */
-    public Boolean getPlaceholder()
-    {
-        return placeholder;
-    }
+	/**
+	 * Gets if place holder is available
+	 *
+	 * @return
+	 */
+	public Boolean getPlaceholder()
+	{
+		return placeholder;
+	}
 
-    /**
-     * Sets if place holder is available
-     *
-     * @param placeholder
-     */
-    public void setPlaceholder(Boolean placeholder)
-    {
-        this.placeholder = placeholder;
-    }
+	/**
+	 * Sets if place holder is available
+	 *
+	 * @param placeholder
+	 */
+	public void setPlaceholder(Boolean placeholder)
+	{
+		this.placeholder = placeholder;
+	}
 
-    /**
-     * Gets if max is available
-     *
-     * @return
-     */
-    public Boolean getMax()
-    {
-        return max;
-    }
+	/**
+	 * Gets if max is available
+	 *
+	 * @return
+	 */
+	public Boolean getMax()
+	{
+		return max;
+	}
 
-    /**
-     * Sets if max is available
-     *
-     * @param max
-     */
-    public void setMax(Boolean max)
-    {
-        this.max = max;
-    }
+	/**
+	 * Sets if max is available
+	 *
+	 * @param max
+	 */
+	public void setMax(Boolean max)
+	{
+		this.max = max;
+	}
 
-    /**
-     * Gets the min
-     *
-     * @return
-     */
-    public Boolean getMin()
-    {
-        return min;
-    }
+	/**
+	 * Gets the min
+	 *
+	 * @return
+	 */
+	public Boolean getMin()
+	{
+		return min;
+	}
 
-    /**
-     * Sets min
-     *
-     * @param min
-     */
-    public void setMin(Boolean min)
-    {
-        this.min = min;
-    }
+	/**
+	 * Sets min
+	 *
+	 * @param min
+	 */
+	public void setMin(Boolean min)
+	{
+		this.min = min;
+	}
 
-    /**
-     * Gets multiple
-     *
-     * @return
-     */
-    public Boolean getMultiple()
-    {
-        return multiple;
-    }
+	/**
+	 * Gets multiple
+	 *
+	 * @return
+	 */
+	public Boolean getMultiple()
+	{
+		return multiple;
+	}
 
-    /**
-     * Sets multiple
-     *
-     * @param multiple
-     */
-    public void setMultiple(Boolean multiple)
-    {
-        this.multiple = multiple;
-    }
+	/**
+	 * Sets multiple
+	 *
+	 * @param multiple
+	 */
+	public void setMultiple(Boolean multiple)
+	{
+		this.multiple = multiple;
+	}
 
-    /**
-     * Gets the pattern
-     *
-     * @return
-     */
-    public Boolean getPattern()
-    {
-        return pattern;
-    }
+	/**
+	 * Gets the pattern
+	 *
+	 * @return
+	 */
+	public Boolean getPattern()
+	{
+		return pattern;
+	}
 
-    /**
-     * Sets the pattern
-     *
-     * @param pattern
-     */
-    public void setPattern(Boolean pattern)
-    {
-        this.pattern = pattern;
-    }
+	/**
+	 * Sets the pattern
+	 *
+	 * @param pattern
+	 */
+	public void setPattern(Boolean pattern)
+	{
+		this.pattern = pattern;
+	}
 
-    /**
-     * Gets required
-     *
-     * @return
-     */
-    public Boolean getRequired()
-    {
-        return required;
-    }
+	/**
+	 * Gets required
+	 *
+	 * @return
+	 */
+	public Boolean getRequired()
+	{
+		return required;
+	}
 
-    /**
-     * Sets required
-     *
-     * @param required
-     */
-    public void setRequired(Boolean required)
-    {
-        this.required = required;
-    }
+	/**
+	 * Sets required
+	 *
+	 * @param required
+	 */
+	public void setRequired(Boolean required)
+	{
+		this.required = required;
+	}
 
-    /**
-     * Gets step
-     *
-     * @return
-     */
-    public Boolean getStep()
-    {
-        return step;
-    }
+	/**
+	 * Gets step
+	 *
+	 * @return
+	 */
+	public Boolean getStep()
+	{
+		return step;
+	}
 
-    /**
-     * Set step
-     *
-     * @param step
-     */
-    public void setStep(Boolean step)
-    {
-        this.step = step;
-    }
+	/**
+	 * Set step
+	 *
+	 * @param step
+	 */
+	public void setStep(Boolean step)
+	{
+		this.step = step;
+	}
 
 }

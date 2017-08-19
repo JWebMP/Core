@@ -20,23 +20,22 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class CiteTest
 {
 
-    public CiteTest()
-    {
-    }
+	public CiteTest()
+	{
+	}
 
-    @Test
-    public void testCite()
-    {
-        Cite c = new Cite("Reference");
-        c.setID("ID");
-        System.out.println(c.toString(true));
-        Assert.assertEquals("<cite id=\"ID\">Reference</cite>", c.toString(true).toString());
-    }
+	@Test
+	public void testCite()
+	{
+		Cite c = new Cite("Reference");
+		c.setID("ID");
+		System.out.println(c.toString(true));
+		Assert.assertEquals("<cite id=\"ID\">Reference</cite>", c.toString(true).toString());
+	}
 
 }

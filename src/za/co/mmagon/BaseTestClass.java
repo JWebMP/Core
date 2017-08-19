@@ -16,11 +16,12 @@
  */
 package za.co.mmagon;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import za.co.mmagon.jwebswing.Feature;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.html.Body;
+
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * This Class
@@ -30,65 +31,65 @@ import za.co.mmagon.jwebswing.base.html.Body;
  */
 public class BaseTestClass
 {
-
-    public BaseTestClass()
-    {
-
-    }
-
-    public Page getInstance()
-    {
-        return resetInstance();
-    }
-
-    public Page resetInstance()
-    {
-        soutDivider();
-        Page page = new Page();
-        Body body = new Body(page);
-        page.setID("Page");
-        body.setID("Body");
-        page.getOptions().setDynamicRender(false);
-        return page;
-    }
-
-    public void soutDivider()
-    {
-        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<===============================================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-    }
-
-    public Page getPage()
-    {
-        return resetInstance();
-    }
-
-    protected void writeValuesToFile(String expected, String rendered)
-    {
-        try (FileWriter fw = new FileWriter("c:/temp/equalsText.txt"))
-        {
-            fw.write(rendered);
-            fw.write("\n\n-----\n\n");
-            fw.write(expected);
-        }
-        catch (IOException ex)
-        {
-            System.out.println("Couldn't write to file");
-        }
-    }
-
-    public Feature getFeature()
-    {
-        Feature f = new Feature("Test Feature")
-        {
-            @Override
-            public void assignFunctionsToComponent()
-            {
-                addQuery(new StringBuilder("Query Added"));
-            }
-        };
-        f.setID("featureTest");
-        return f;
-    }
+	
+	public BaseTestClass()
+	{
+	
+	}
+	
+	public Page getInstance()
+	{
+		return resetInstance();
+	}
+	
+	public Page resetInstance()
+	{
+		soutDivider();
+		Page page = new Page();
+		Body body = new Body(page);
+		page.setID("Page");
+		body.setID("Body");
+		page.getOptions().setDynamicRender(false);
+		return page;
+	}
+	
+	public void soutDivider()
+	{
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<===============================================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+	}
+	
+	public Page getPage()
+	{
+		return resetInstance();
+	}
+	
+	protected void writeValuesToFile(String expected, String rendered)
+	{
+		try (FileWriter fw = new FileWriter("c:/temp/equalsText.txt"))
+		{
+			fw.write(rendered);
+			fw.write("\n\n-----\n\n");
+			fw.write(expected);
+		}
+		catch (IOException ex)
+		{
+			System.out.println("Couldn't write to file");
+		}
+	}
+	
+	public Feature getFeature()
+	{
+		Feature f = new Feature("Test Feature")
+		{
+			@Override
+			public void assignFunctionsToComponent()
+			{
+				addQuery(new StringBuilder("Query Added"));
+			}
+		};
+		f.setID("featureTest");
+		return f;
+	}
 
     /*
      * public ComponentEventBase getEvent() { ComponentEventBase e = new Event(EventTypes.activate, EventTypes.activate) { @Override public void fireEvent(AjaxCallObject ajaxObject, String calledFrom,

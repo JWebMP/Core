@@ -17,24 +17,22 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
- *
  * @author GedMarc
  */
 public class TimeTest
 {
-    
-    public TimeTest()
-    {
-    }
 
-    @Test
-    public void testSomeMethod()
-    {
-        Time t = new Time();
-        System.out.println(t.toString(true));
-    }
-    
+	public TimeTest()
+	{
+	}
+
+	@Test
+	public void testSomeMethod()
+	{
+		Time t = new Time();
+		System.out.println(t.toString(true));
+	}
+
 }

@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.events.complete;
 
-import java.util.logging.Level;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.Event;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
@@ -27,93 +26,96 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTy
 import za.co.mmagon.jwebswing.plugins.ComponentInformation;
 import za.co.mmagon.logger.LogFactory;
 
+import java.util.logging.Level;
+
 /**
  * Handles all events. Over-ride methods.
  *
  * @author Marc Magon
  */
 @ComponentInformation(name = "Complete Event", description = "Server Side Event for Complete.",
-        url = "https://www.armineasy.com/JWebSwing", wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
+		url = "https://www.armineasy.com/JWebSwing", wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
 public abstract class CompleteAdapter extends Event
-        implements GlobalEvents
+		implements GlobalEvents
 {
 
-    /**
-     * Logger for the Component
-     */
-    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("CompleteEvent");
-    private static final long serialVersionUID = 1L;
-    private CompleteDirective directive;
+	/**
+	 * Logger for the Component
+	 */
+	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("CompleteEvent");
+	private static final long serialVersionUID = 1L;
+	private CompleteDirective directive;
 
-    /**
-     * Performs a click
-     *
-     * @param component The component this click is going to be acting on
-     */
-    public CompleteAdapter(Component component)
-    {
-        super(EventTypes.contextmenu, component);
+	/**
+	 * Performs a click
+	 *
+	 * @param component The component this click is going to be acting on
+	 */
+	public CompleteAdapter(Component component)
+	{
+		super(EventTypes.contextmenu, component);
 
-    }
+	}
 
-    /**
-     * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
-     */
-    @Override
-    public void preConfigure()
-    {
-        if (!isConfigured())
-        {
+	/**
+	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
+	 */
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
 
-            getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-            component.addAttribute(AngularAttributes.ngComplete, "jwCntrl.perform($event," + renderVariables() + ");");
-        }
-        super.preConfigure();
-    }
+			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
+			component.addAttribute(AngularAttributes.ngComplete, "jwCntrl.perform($event," + renderVariables() + ");");
+		}
+		super.preConfigure();
+	}
 
-    /**
-     * Returns the angular directive associated with the right click event
-     *
-     * @return
-     */
-    public CompleteDirective getDirective()
-    {
-        if (directive == null)
-        {
-            directive = new CompleteDirective();
-        }
-        return directive;
-    }
+	/**
+	 * Returns the angular directive associated with the right click event
+	 *
+	 * @return
+	 */
+	public CompleteDirective getDirective()
+	{
+		if (directive == null)
+		{
+			directive = new CompleteDirective();
+		}
+		return directive;
+	}
 
-    /**
-     * Sets the right click angular event
-     *
-     * @param directive
-     */
-    public void setDirective(CompleteDirective directive)
-    {
-        this.directive = directive;
-    }
+	/**
+	 * Sets the right click angular event
+	 *
+	 * @param directive
+	 */
+	public void setDirective(CompleteDirective directive)
+	{
+		this.directive = directive;
+	}
 
-    /**
-     * Triggers on Click
-     * <p>
-     * @param call     The physical AJAX call
-     * @param response The physical Ajax Receiver
-     */
-    public abstract void onComplete(AjaxCall call, AjaxResponse response);
+	/**
+	 * Triggers on Click
+	 * <p>
+	 *
+	 * @param call     The physical AJAX call
+	 * @param response The physical Ajax Receiver
+	 */
+	public abstract void onComplete(AjaxCall call, AjaxResponse response);
 
-    @Override
-    public void fireEvent(AjaxCall call, AjaxResponse response)
-    {
-        try
-        {
-            onComplete(call, response);
-        }
-        catch (Exception e)
-        {
-            LOG.log(Level.SEVERE, "Error In Firing Event", e);
-        }
-    }
+	@Override
+	public void fireEvent(AjaxCall call, AjaxResponse response)
+	{
+		try
+		{
+			onComplete(call, response);
+		}
+		catch (Exception e)
+		{
+			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+		}
+	}
 
 }

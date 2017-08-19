@@ -17,11 +17,12 @@
 package za.co.mmagon.jwebswing.base.html;
 
 /**
- *  Just no. rather use the jquery stuff
+ * Just no. rather use the jquery stuff
+ *
  * @author GedMarc
- * @deprecated 
+ * @deprecated
  */
 public class Dialog
 {
-    
+
 }

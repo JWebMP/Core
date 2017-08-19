@@ -16,12 +16,14 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds;
 
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.Repeats;
+import za.co.mmagon.jwebswing.htmlbuilder.css.image.ImageCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+
 import java.lang.annotation.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.image.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * The CSS background properties are used to define the background effects for elements.
@@ -33,99 +35,106 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
  */
 @CSSAnnotationType
 @Target(
-        {
-            ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
-        })
+		{
+				ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
+		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface BackgroundCSS
 {
-    /**
-     * The shortcut for Background CSS Files
-     * @return 
-     */
-    public Background Background() default @Background;
+	/**
+	 * The shortcut for Background CSS Files
+	 *
+	 * @return
+	 */
+	public Background Background() default @Background;
 
-    /**
-     * Sets whether a background image is fixed or scrolls with the rest of the page
-     * @return 
-     */
-    public BackgroundAttachments BackgroundAttachment() default BackgroundAttachments.Unset;
+	/**
+	 * Sets whether a background image is fixed or scrolls with the rest of the page
+	 *
+	 * @return
+	 */
+	public BackgroundAttachments BackgroundAttachment() default BackgroundAttachments.Unset;
 
-    /**
-     * Sets the background Color of an element
-     * @return 
-     */
-    public ColourCSS BackgroundColor() default @ColourCSS;
+	/**
+	 * Sets the background Color of an element
+	 *
+	 * @return
+	 */
+	public ColourCSS BackgroundColor() default @ColourCSS;
 
-    /**
-     * Sets the background Color to a colour name
-     *
-     * @return
-     */
-    public ColourNames BackgroundColor$() default ColourNames.Unset;
+	/**
+	 * Sets the background Color to a colour name
+	 *
+	 * @return
+	 */
+	public ColourNames BackgroundColor$() default ColourNames.Unset;
 
-    /**
-     * Specifies one or more background images for an element
-     * @return 
-     */
-    public ImageCSS BackgroundImage() default @ImageCSS;
+	/**
+	 * Specifies one or more background images for an element
+	 *
+	 * @return
+	 */
+	public ImageCSS BackgroundImage() default @ImageCSS;
 
-    /**
-     * Specifies one or more background images for an element
-     * @return 
-     */
-    public ImageCSS[] BackgroundImage$() default
-    {
-    };
+	/**
+	 * Specifies one or more background images for an element
+	 *
+	 * @return
+	 */
+	public ImageCSS[] BackgroundImage$() default
+			{
+			};
 
-    /**
-     * Specifies the position of a background image
-     * @return 
-     */
-    public BackgroundPositions BackgroundPosition() default BackgroundPositions.Unset;
+	/**
+	 * Specifies the position of a background image
+	 *
+	 * @return
+	 */
+	public BackgroundPositions BackgroundPosition() default BackgroundPositions.Unset;
 
-    /**
-     * Sets how a background image will be repeated
-     * @return 
-     */
-    public Repeats BackgroundRepeat() default Repeats.Unset;
+	/**
+	 * Sets how a background image will be repeated
+	 *
+	 * @return
+	 */
+	public Repeats BackgroundRepeat() default Repeats.Unset;
 
-    /**
-     * Specifies the blending mode of each background layer (Color/image)
-     *
-     * @return
-     */
-    public BackgroundBlendMode BackgroundBlendMode() default BackgroundBlendMode.Unset;
+	/**
+	 * Specifies the blending mode of each background layer (Color/image)
+	 *
+	 * @return
+	 */
+	public BackgroundBlendMode BackgroundBlendMode() default BackgroundBlendMode.Unset;
 
-    /**
-     * The background-clip property specifies the painting area of the background.
-     *
-     * @return
-     */
-    public BackgroundClip BackgroundClip() default BackgroundClip.Unset;
+	/**
+	 * The background-clip property specifies the painting area of the background.
+	 *
+	 * @return
+	 */
+	public BackgroundClip BackgroundClip() default BackgroundClip.Unset;
 
-    /**
-     * The background-origin property specifies where the background image is positioned.
-     *
-     * @return
-     */
-    public BackgroundOrigins BackgroundOrigin() default BackgroundOrigins.Unset;
+	/**
+	 * The background-origin property specifies where the background image is positioned.
+	 *
+	 * @return
+	 */
+	public BackgroundOrigins BackgroundOrigin() default BackgroundOrigins.Unset;
 
-    /**
-     * The background-size property specifies the size of the background images.
-     *
-     * @return
-     */
-    public MeasurementCSS[] BackgroundSize() default
-    {
-    };
+	/**
+	 * The background-size property specifies the size of the background images.
+	 *
+	 * @return
+	 */
+	public MeasurementCSS[] BackgroundSize() default
+			{
+			};
 
-    /**
-     * The background-size property specifies the size of the background images.
-     *
-     * @return
-     */
-    public BackgroundSizes BackgroundSize$() default BackgroundSizes.Unset;
+	/**
+	 * The background-size property specifies the size of the background images.
+	 *
+	 * @return
+	 */
+	public BackgroundSizes BackgroundSize$() default BackgroundSizes.Unset;
 
 }

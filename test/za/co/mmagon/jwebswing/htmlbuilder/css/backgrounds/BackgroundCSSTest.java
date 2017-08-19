@@ -16,34 +16,35 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds;
 
-import java.util.*;
-import org.junit.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.composer.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
+import org.junit.Test;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSPropertiesFactory;
+import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSBlock;
+import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSBlockIdentifier;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
+
+import java.util.Map;
 
 /**
- *
  * @author GedMarc
  */
 public class BackgroundCSSTest
 {
 
-    public BackgroundCSSTest()
-    {
+	public BackgroundCSSTest()
+	{
 
-    }
+	}
 
-    @Test
-    public void testBackgroundOutput()
-    {
-        BackgroundCSSObjectTest t = new BackgroundCSSObjectTest();
-        BackgroundCSSObjectTest cssObject = new BackgroundCSSObjectTest();
-        CSSPropertiesFactory factory = new CSSPropertiesFactory();
-        Map<String, Object> strings = factory.getCSS(cssObject);
-        CSSBlock newBlock = factory.getCSSBlock("NewBlock", CSSTypes.None, strings, CSSBlockIdentifier.Class);
-        System.out.println("out : " + newBlock.toString());
-        // Assert.assertEquals(newBlock.toString(), ".NewBlock {background-attachment:inherit;background-image:url(image specified);background-image:url(url 1) url(url 2) ;}");
-    }
+	@Test
+	public void testBackgroundOutput()
+	{
+		BackgroundCSSObjectTest t = new BackgroundCSSObjectTest();
+		BackgroundCSSObjectTest cssObject = new BackgroundCSSObjectTest();
+		CSSPropertiesFactory factory = new CSSPropertiesFactory();
+		Map<String, Object> strings = factory.getCSS(cssObject);
+		CSSBlock newBlock = factory.getCSSBlock("NewBlock", CSSTypes.None, strings, CSSBlockIdentifier.Class);
+		System.out.println("out : " + newBlock.toString());
+		// Assert.assertEquals(newBlock.toString(), ".NewBlock {background-attachment:inherit;background-image:url(image specified);background-image:url(url 1) url(url 2) ;}");
+	}
 
 }

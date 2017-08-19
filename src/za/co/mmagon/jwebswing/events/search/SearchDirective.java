@@ -28,26 +28,26 @@ import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 public class SearchDirective extends AngularDirectiveBase
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a new right click directive based on the angular object passed in
-     * <p>
-     */
-    public SearchDirective()
-    {
-        super("ngSearch");
-    }
+	/**
+	 * Constructs a new right click directive based on the angular object passed in
+	 * <p>
+	 */
+	public SearchDirective()
+	{
+		super("ngSearch");
+	}
 
-    /**
-     * Renders the right click directive from the JavaScript file
-     *
-     * @return
-     */
-    @Override
-    public String renderFunction()
-    {
-        return FileTemplates.getFileTemplate(SearchDirective.class, "Search").toString();
-    }
+	/**
+	 * Renders the right click directive from the JavaScript file
+	 *
+	 * @return
+	 */
+	@Override
+	public String renderFunction()
+	{
+		return FileTemplates.getFileTemplate(SearchDirective.class, "Search").toString();
+	}
 
 }

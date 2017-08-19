@@ -16,8 +16,6 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.TableColumnAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
@@ -26,6 +24,9 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.TableColumnGroupChil
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.logger.LogFactory;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Definition and Usage<p>
@@ -44,49 +45,50 @@ import za.co.mmagon.logger.LogFactory;
  * <p>
  * In XHTML, the &lt;col&gt; tag must be properly closed.<p>
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
+ * @author GedMarc
  * @since 2014/12/20
  */
 public class TableColumn<J extends TableColumn<J>>
-        extends Component<NoChildren, TableColumnAttributes, GlobalFeatures, GlobalEvents, J>
-        implements TableColumnGroupChildren
+		extends Component<NoChildren, TableColumnAttributes, GlobalFeatures, GlobalEvents, J>
+		implements TableColumnGroupChildren
 {
-
-    private static final Logger log = LogFactory.getInstance().getLogger("TableColumn");
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new table column
-     */
-    public TableColumn()
-    {
-        super(ComponentTypes.TableColumn);
-    }
-
-    /**
-     * Differences Between HTML and XHTML
-     * <p>
-     * In HTML the base tag has no end tag.
-     * <p>
-     * In XHTML the base tag must be properly closed.
-     */
-    @Override
-    public void preConfigure()
-    {
-        super.preConfigure();
-        try
-        {
-            if (getPage().getHtmlVersion().name().startsWith("X"))
-            {
-                setInlineClosingTag(true);
-            }
-        }
-        catch (Exception e)
-        {
-            log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
-        }
-    }
-
+	
+	private static final Logger log = LogFactory.getInstance().getLogger("TableColumn");
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new table column
+	 */
+	public TableColumn()
+	{
+		super(ComponentTypes.TableColumn);
+	}
+	
+	/**
+	 * Differences Between HTML and XHTML
+	 * <p>
+	 * In HTML the base tag has no end tag.
+	 * <p>
+	 * In XHTML the base tag must be properly closed.
+	 */
+	@Override
+	public void preConfigure()
+	{
+		super.preConfigure();
+		try
+		{
+			if (getPage().getHtmlVersion().name().startsWith("X"))
+			{
+				setInlineClosingTag(true);
+			}
+		}
+		catch (Exception e)
+		{
+			log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
+		}
+	}
+	
 }

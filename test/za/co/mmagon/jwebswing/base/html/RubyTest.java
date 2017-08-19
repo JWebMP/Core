@@ -17,31 +17,29 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
- *
  * @author GedMarc
  */
 public class RubyTest
 {
-    
-    public RubyTest()
-    {
-    }
 
-    @Test
-    public void testSomeMethod()
-    {
-        Ruby r = new Ruby();
-        RubyNoSupport rns = new RubyNoSupport();
-        RubyTranslate rt = new RubyTranslate();
-        r.setID("id");
-        rns.setID("id");
-        rt.setID("id");
-        r.add(rns);
-        r.add(rt);
-        System.out.println();
-    }
-    
+	public RubyTest()
+	{
+	}
+
+	@Test
+	public void testSomeMethod()
+	{
+		Ruby r = new Ruby();
+		RubyNoSupport rns = new RubyNoSupport();
+		RubyTranslate rt = new RubyTranslate();
+		r.setID("id");
+		rns.setID("id");
+		rt.setID("id");
+		r.add(rns);
+		r.add(rt);
+		System.out.println();
+	}
+
 }

@@ -25,27 +25,27 @@ package za.co.mmagon.jwebswing.base.ajax.exceptions;
 public class UserSecurityException extends Exception
 {
 
-    public UserSecurityException()
-    {
-    }
+	public UserSecurityException()
+	{
+	}
 
-    public UserSecurityException(String message)
-    {
-        super(message);
-    }
+	public UserSecurityException(String message)
+	{
+		super(message);
+	}
 
-    public UserSecurityException(String message, Throwable cause)
-    {
-        super(message, cause);
-    }
+	public UserSecurityException(String message, Throwable cause)
+	{
+		super(message, cause);
+	}
 
-    public UserSecurityException(Throwable cause)
-    {
-        super(cause);
-    }
+	public UserSecurityException(Throwable cause)
+	{
+		super(cause);
+	}
 
-    public UserSecurityException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
-    {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
+	public UserSecurityException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
+	{
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
 }

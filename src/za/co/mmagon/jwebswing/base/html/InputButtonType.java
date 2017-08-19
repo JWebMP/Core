@@ -20,33 +20,33 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputButtonTypeAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 
 /**
+ * @param <J>
  *
  * @author GedMarc
- * @param <J>
  */
 public class InputButtonType<J extends InputButtonType<J>>
-        extends Input<InputButtonTypeAttributes, J>
+		extends Input<InputButtonTypeAttributes, J>
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new button with the given text
-     *
-     * @param text
-     */
-    public InputButtonType(String text)
-    {
-        super(InputTypes.Button);
-        addAttribute(InputButtonTypeAttributes.Value, text);
-    }
-
-    /**
-     * Constructs a new instance of a button type
-     */
-    public InputButtonType()
-    {
-        this(null);
-    }
-
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new button with the given text
+	 *
+	 * @param text
+	 */
+	public InputButtonType(String text)
+	{
+		super(InputTypes.Button);
+		addAttribute(InputButtonTypeAttributes.Value, text);
+	}
+	
+	/**
+	 * Constructs a new instance of a button type
+	 */
+	public InputButtonType()
+	{
+		this(null);
+	}
+	
 }

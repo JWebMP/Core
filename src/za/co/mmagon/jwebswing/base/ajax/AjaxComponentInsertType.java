@@ -17,53 +17,52 @@
 package za.co.mmagon.jwebswing.base.ajax;
 
 /**
- *
  * @author Marc Magon
  * @since 22 Apr 2017
  */
 public enum AjaxComponentInsertType
 {
-    Replace,
-    Append,
-    Prepend,
-    Insert,
-    Insert_Last("InsertLast");
-    /**
-     * Any sub data
-     */
-    private String data;
+	Replace,
+	Append,
+	Prepend,
+	Insert,
+	Insert_Last("InsertLast");
+	/**
+	 * Any sub data
+	 */
+	private String data;
 
-    /**
-     * A new AjaxComponentInsertType
-     */
-    private AjaxComponentInsertType()
-    {
+	/**
+	 * A new AjaxComponentInsertType
+	 */
+	private AjaxComponentInsertType()
+	{
 
-    }
+	}
 
-    /**
-     * A new AjaxComponentInsertType with data
-     */
-    private AjaxComponentInsertType(String data)
-    {
+	/**
+	 * A new AjaxComponentInsertType with data
+	 */
+	private AjaxComponentInsertType(String data)
+	{
 
-    }
+	}
 
-    /**
-     * Returns the name or the data contained within
-     *
-     * @return
-     */
-    @Override
-    public String toString()
-    {
-        if (data != null && !data.isEmpty())
-        {
-            return data;
-        }
-        else
-        {
-            return name();
-        }
-    }
+	/**
+	 * Returns the name or the data contained within
+	 *
+	 * @return
+	 */
+	@Override
+	public String toString()
+	{
+		if (data != null && !data.isEmpty())
+		{
+			return data;
+		}
+		else
+		{
+			return name();
+		}
+	}
 }

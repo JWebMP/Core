@@ -27,16 +27,16 @@ import za.co.mmagon.jwebswing.base.angular.AngularReferenceBase;
 public abstract class AngularModuleBase extends AngularReferenceBase
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a module with this name that always sorts default
-     *
-     * @param moduleName This modules name
-     */
-    public AngularModuleBase(String moduleName)
-    {
-        super(moduleName);
-    }
+	/**
+	 * Constructs a module with this name that always sorts default
+	 *
+	 * @param moduleName This modules name
+	 */
+	public AngularModuleBase(String moduleName)
+	{
+		super(moduleName);
+	}
 
 }

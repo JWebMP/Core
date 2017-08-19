@@ -22,122 +22,121 @@ import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
 /**
- *
  * @author ged_m
  */
 public class ComponentBaseTest extends BaseTestClass
 {
 
-    public ComponentBaseTest()
-    {
-    }
+	public ComponentBaseTest()
+	{
+	}
 
-    @Test
-    public void testShell()
-    {
-        ComponentBase shell = new ComponentBase(ComponentTypes.Abbreviation);
-        shell.setID("ID");
-        System.out.println(shell);
-        Assert.assertEquals("{\n"
-                + "  \"id\" : \"ID\",\n"
-                + "  \"componentType\" : \"abbreviation\",\n"
-                + "  \"tiny\" : false,\n"
-                + "  \"configured\" : true,\n"
-                + "  \"initialized\" : true,\n"
-                + "  \"touched\" : false,\n"
-                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
-                + "}", shell.toString());
-    }
+	@Test
+	public void testShell()
+	{
+		ComponentBase shell = new ComponentBase(ComponentTypes.Abbreviation);
+		shell.setID("ID");
+		System.out.println(shell);
+		Assert.assertEquals("{\n"
+				                    + "  \"id\" : \"ID\",\n"
+				                    + "  \"componentType\" : \"abbreviation\",\n"
+				                    + "  \"tiny\" : false,\n"
+				                    + "  \"configured\" : true,\n"
+				                    + "  \"initialized\" : true,\n"
+				                    + "  \"touched\" : false,\n"
+				                    + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
+				                    + "}", shell.toString());
+	}
 
-    @Test
-    public void testShellRawText()
-    {
-        ComponentBase shell = new ComponentBase(ComponentTypes.Abbreviation);
-        shell.setID("ID");
-        shell.setText("This is raw text");
-        System.out.println(shell);
-        Assert.assertEquals("{\n"
-                + "  \"id\" : \"ID\",\n"
-                + "  \"componentType\" : \"abbreviation\",\n"
-                + "  \"text\" : \"This is raw text\",\n"
-                + "  \"tiny\" : false,\n"
-                + "  \"configured\" : true,\n"
-                + "  \"initialized\" : true,\n"
-                + "  \"touched\" : false,\n"
-                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
-                + "}", shell.toString());
-    }
+	@Test
+	public void testShellRawText()
+	{
+		ComponentBase shell = new ComponentBase(ComponentTypes.Abbreviation);
+		shell.setID("ID");
+		shell.setText("This is raw text");
+		System.out.println(shell);
+		Assert.assertEquals("{\n"
+				                    + "  \"id\" : \"ID\",\n"
+				                    + "  \"componentType\" : \"abbreviation\",\n"
+				                    + "  \"text\" : \"This is raw text\",\n"
+				                    + "  \"tiny\" : false,\n"
+				                    + "  \"configured\" : true,\n"
+				                    + "  \"initialized\" : true,\n"
+				                    + "  \"touched\" : false,\n"
+				                    + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
+				                    + "}", shell.toString());
+	}
 
-    @Test
-    public void testShellTiny()
-    {
-        ComponentBase shell = new ComponentBase(ComponentTypes.Abbreviation);
-        shell.setTiny(true);
-        shell.setID("ID");
-        System.out.println(shell);
-        Assert.assertEquals("{\n"
-                + "  \"id\" : \"ID\",\n"
-                + "  \"componentType\" : \"abbreviation\",\n"
-                + "  \"tiny\" : true,\n"
-                + "  \"configured\" : true,\n"
-                + "  \"initialized\" : true,\n"
-                + "  \"touched\" : false,\n"
-                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
-                + "}", shell.toString());
-    }
+	@Test
+	public void testShellTiny()
+	{
+		ComponentBase shell = new ComponentBase(ComponentTypes.Abbreviation);
+		shell.setTiny(true);
+		shell.setID("ID");
+		System.out.println(shell);
+		Assert.assertEquals("{\n"
+				                    + "  \"id\" : \"ID\",\n"
+				                    + "  \"componentType\" : \"abbreviation\",\n"
+				                    + "  \"tiny\" : true,\n"
+				                    + "  \"configured\" : true,\n"
+				                    + "  \"initialized\" : true,\n"
+				                    + "  \"touched\" : false,\n"
+				                    + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
+				                    + "}", shell.toString());
+	}
 
-    @Test
-    public void testClone()
-    {
-        ComponentBase shell = new ComponentBase(ComponentTypes.Abbreviation);
-        shell.setID("shell");
-        ComponentBase shell2 = shell.cloneComponent();
-        shell2.setID("shell2");
-        System.out.println(shell);
-        System.out.println(shell2);
-        String shellExpected = "{\n"
-                + "  \"id\" : \"shell\",\n"
-                + "  \"componentType\" : \"abbreviation\",\n"
-                + "  \"tiny\" : false,\n"
-                + "  \"configured\" : true,\n"
-                + "  \"initialized\" : true,\n"
-                + "  \"touched\" : false,\n"
-                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
-                + "}";
-        String shell2Expected = "{\n"
-                + "  \"id\" : \"shell2\",\n"
-                + "  \"componentType\" : \"abbreviation\",\n"
-                + "  \"tiny\" : false,\n"
-                + "  \"configured\" : true,\n"
-                + "  \"initialized\" : true,\n"
-                + "  \"touched\" : false,\n"
-                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
-                + "}";
-        Assert.assertEquals(shell.toString(), shellExpected);
-        Assert.assertEquals(shell2.toString(), shell2Expected);
-    }
+	@Test
+	public void testClone()
+	{
+		ComponentBase shell = new ComponentBase(ComponentTypes.Abbreviation);
+		shell.setID("shell");
+		ComponentBase shell2 = shell.cloneComponent();
+		shell2.setID("shell2");
+		System.out.println(shell);
+		System.out.println(shell2);
+		String shellExpected = "{\n"
+				+ "  \"id\" : \"shell\",\n"
+				+ "  \"componentType\" : \"abbreviation\",\n"
+				+ "  \"tiny\" : false,\n"
+				+ "  \"configured\" : true,\n"
+				+ "  \"initialized\" : true,\n"
+				+ "  \"touched\" : false,\n"
+				+ "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
+				+ "}";
+		String shell2Expected = "{\n"
+				+ "  \"id\" : \"shell2\",\n"
+				+ "  \"componentType\" : \"abbreviation\",\n"
+				+ "  \"tiny\" : false,\n"
+				+ "  \"configured\" : true,\n"
+				+ "  \"initialized\" : true,\n"
+				+ "  \"touched\" : false,\n"
+				+ "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
+				+ "}";
+		Assert.assertEquals(shell.toString(), shellExpected);
+		Assert.assertEquals(shell2.toString(), shell2Expected);
+	}
 
-    @Test
-    public void testProperties()
-    {
-        ComponentBase shell = new ComponentBase(ComponentTypes.Abbreviation);
-        shell.setID("shell");
-        shell.getProperties().put("Property1", "Value 1");
-        System.out.println(shell);
+	@Test
+	public void testProperties()
+	{
+		ComponentBase shell = new ComponentBase(ComponentTypes.Abbreviation);
+		shell.setID("shell");
+		shell.getProperties().put("Property1", "Value 1");
+		System.out.println(shell);
 
-        String shellExpected = "{\n"
-                + "  \"id\" : \"shell\",\n"
-                + "  \"componentType\" : \"abbreviation\",\n"
-                + "  \"tiny\" : false,\n"
-                + "  \"configured\" : true,\n"
-                + "  \"initialized\" : true,\n"
-                + "  \"touched\" : false,\n"
-                + "  \"properties\" : {\n"
-                + "    \"Property1\" : \"Value 1\"\n"
-                + "  },\n"
-                + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
-                + "}";
+		String shellExpected = "{\n"
+				+ "  \"id\" : \"shell\",\n"
+				+ "  \"componentType\" : \"abbreviation\",\n"
+				+ "  \"tiny\" : false,\n"
+				+ "  \"configured\" : true,\n"
+				+ "  \"initialized\" : true,\n"
+				+ "  \"touched\" : false,\n"
+				+ "  \"properties\" : {\n"
+				+ "    \"Property1\" : \"Value 1\"\n"
+				+ "  },\n"
+				+ "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
+				+ "}";
 
-        Assert.assertEquals(shell.toString(), shellExpected);
-    }
+		Assert.assertEquals(shell.toString(), shellExpected);
+	}
 }

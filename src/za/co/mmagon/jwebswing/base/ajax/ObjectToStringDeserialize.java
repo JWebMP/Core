@@ -22,29 +22,29 @@ import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import java.io.IOException;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+import java.io.IOException;
 
 /**
  * Deserializes a field returned in JSON as an object into a string
  *
  * @author GedMarc
  * @since Nov 9, 2016
- *
  */
 public class ObjectToStringDeserialize extends JsonDeserializer<Object>
 {
 
-    public ObjectToStringDeserialize()
-    {
-    }
+	public ObjectToStringDeserialize()
+	{
+	}
 
-    @Override
-    public Object deserialize(JsonParser jp, DeserializationContext dc) throws IOException, JsonProcessingException
-    {
-        JsonToken jt = jp.getCurrentToken();
-        JsonNode node = jp.readValueAsTree();
-        String nodeAsString = JavaScriptPart.objectAsString(node);
-        return nodeAsString;
-    }
+	@Override
+	public Object deserialize(JsonParser jp, DeserializationContext dc) throws IOException, JsonProcessingException
+	{
+		JsonToken jt = jp.getCurrentToken();
+		JsonNode node = jp.readValueAsTree();
+		String nodeAsString = new JavaScriptPart().objectAsString(node);
+		return nodeAsString;
+	}
 }

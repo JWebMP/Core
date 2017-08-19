@@ -45,28 +45,30 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * &gt;keygen&lt; 1.0 Not supported 1.0 1.2 3.0
  * <p>
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
- * @since 2015/02/09
+ * @author GedMarc
  * @version 1.0
+ * @since 2015/02/09
  * @deprecated
  */
 public class KeyGen<J extends KeyGen<J>>
-        extends Component<NoChildren, KeyGenAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<NoChildren, KeyGenAttributes, GlobalFeatures, GlobalEvents, J>
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new KeyGen with the given name
-     * <p>
-     * @param name
-     */
-    public KeyGen(String name)
-    {
-        super(ComponentTypes.KeyGen);
-        addAttribute(GlobalAttributes.Name, name);
-    }
-
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new KeyGen with the given name
+	 * <p>
+	 *
+	 * @param name
+	 */
+	public KeyGen(String name)
+	{
+		super(ComponentTypes.KeyGen);
+		addAttribute(GlobalAttributes.Name, name);
+	}
+	
 }

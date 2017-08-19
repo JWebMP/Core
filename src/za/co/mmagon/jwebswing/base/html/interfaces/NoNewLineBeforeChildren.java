@@ -18,10 +18,11 @@ package za.co.mmagon.jwebswing.base.html.interfaces;
 
 /**
  * marks no new lines before children
+ *
  * @author GedMarc
  * @since 2015/03/01
  */
 public interface NoNewLineBeforeChildren
 {
-    
+
 }

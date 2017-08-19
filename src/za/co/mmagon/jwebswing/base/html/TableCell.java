@@ -55,94 +55,94 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * Some HTML 4.01 attributes are not supported in HTML5.<p>
  * <p>
- * @author Marc Magon
- * @version 1.0
+ *
  * @param <J>
  *
+ * @author Marc Magon
+ * @version 1.0
  * @since 2012/10/01
  */
 public class TableCell<J extends TableCell<J>>
-        extends Component<Component, TableCellAttributes, GlobalFeatures, GlobalEvents, J>
-        implements TableRowChildren
+		extends Component<Component, TableCellAttributes, GlobalFeatures, GlobalEvents, J>
+		implements TableRowChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a normal table cell
-     */
-    public TableCell()
-    {
-        this((GlobalChildren) null);
-    }
-
-    /**
-     * Constructs a table cell with the given child.
-     *
-     * @param dataDisplay The component that is a child
-     */
-    public TableCell(GlobalChildren dataDisplay)
-    {
-        super(ComponentTypes.TableCell);
-        if (dataDisplay != null)
-        {
-            add(Component.class.cast(dataDisplay));
-        }
-    }
-
-    /**
-     * A paragraph as a child. Good for testing or Render on Load
-     *
-     * @param dataDisplay
-     */
-    public TableCell(String dataDisplay)
-    {
-        this(new Paragraph(dataDisplay));
-    }
-
-    /**
-     * Returns this table cell column span
-     *
-     * @return Integer of Column Span
-     */
-    public int getColumnSpan()
-    {
-        String s = getAttribute(TableCellAttributes.ColSpan);
-        if (s == null || s.isEmpty())
-        {
-            s = "0";
-        }
-        return new Integer(s);
-    }
-
-    /**
-     *
-     * @param columnSpan Sets this table cells column span
-     */
-    public J setColumnSpan(int columnSpan)
-    {
-        addAttribute(TableCellAttributes.ColSpan, columnSpan);
-        return (J) this;
-    }
-
-    /**
-     * Gets this table cells row span
-     *
-     * @return Integer of Row Span
-     */
-    public int getRowSpan()
-    {
-        return new Integer(getAttribute(TableCellAttributes.RowSpan));
-    }
-
-    /**
-     * Sets this objects row span
-     *
-     * @param rowSpan Integer that is row span
-     */
-    public J setRowSpan(int rowSpan)
-    {
-        addAttribute(TableCellAttributes.RowSpan, Integer.toString(rowSpan));
-        return (J) this;
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a normal table cell
+	 */
+	public TableCell()
+	{
+		this((GlobalChildren) null);
+	}
+	
+	/**
+	 * Constructs a table cell with the given child.
+	 *
+	 * @param dataDisplay The component that is a child
+	 */
+	public TableCell(GlobalChildren dataDisplay)
+	{
+		super(ComponentTypes.TableCell);
+		if (dataDisplay != null)
+		{
+			add(Component.class.cast(dataDisplay));
+		}
+	}
+	
+	/**
+	 * A paragraph as a child. Good for testing or Render on Load
+	 *
+	 * @param dataDisplay
+	 */
+	public TableCell(String dataDisplay)
+	{
+		this(new Paragraph(dataDisplay));
+	}
+	
+	/**
+	 * Returns this table cell column span
+	 *
+	 * @return Integer of Column Span
+	 */
+	public int getColumnSpan()
+	{
+		String s = getAttribute(TableCellAttributes.ColSpan);
+		if (s == null || s.isEmpty())
+		{
+			s = "0";
+		}
+		return new Integer(s);
+	}
+	
+	/**
+	 * @param columnSpan Sets this table cells column span
+	 */
+	public J setColumnSpan(int columnSpan)
+	{
+		addAttribute(TableCellAttributes.ColSpan, columnSpan);
+		return (J) this;
+	}
+	
+	/**
+	 * Gets this table cells row span
+	 *
+	 * @return Integer of Row Span
+	 */
+	public int getRowSpan()
+	{
+		return new Integer(getAttribute(TableCellAttributes.RowSpan));
+	}
+	
+	/**
+	 * Sets this objects row span
+	 *
+	 * @param rowSpan Integer that is row span
+	 */
+	public J setRowSpan(int rowSpan)
+	{
+		addAttribute(TableCellAttributes.RowSpan, Integer.toString(rowSpan));
+		return (J) this;
+	}
 }

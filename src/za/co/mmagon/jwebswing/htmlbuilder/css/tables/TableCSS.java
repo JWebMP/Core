@@ -16,9 +16,10 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.tables;
 
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+
 import java.lang.annotation.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * The look of an HTML table can be greatly improved with CSS:
@@ -27,33 +28,34 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
  * @since 18 Jan 2016
  */
 @Target(
-        {
-            ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
-        })
+		{
+				ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
+		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
 public @interface TableCSS
 {
 
-    /**
-     * Specifies whether or not table borders should be collapsed
-     * @return 
-     */
-    public TableBorderCollapse BorderCollapse() default TableBorderCollapse.Unset;
+	/**
+	 * Specifies whether or not table borders should be collapsed
+	 *
+	 * @return
+	 */
+	public TableBorderCollapse BorderCollapse() default TableBorderCollapse.Unset;
 
-    /**
-     * Sets where the caption will appear
-     *
-     * @return
-     */
-    public TableCaptionSides TableCaptionSide() default TableCaptionSides.Unset;
+	/**
+	 * Sets where the caption will appear
+	 *
+	 * @return
+	 */
+	public TableCaptionSides TableCaptionSide() default TableCaptionSides.Unset;
 
-    /**
-     * Sets the border spacing for the table
-     *
-     * @return
-     */
-    public MeasurementCSS BorderSpacing() default @MeasurementCSS;
+	/**
+	 * Sets the border spacing for the table
+	 *
+	 * @return
+	 */
+	public MeasurementCSS BorderSpacing() default @MeasurementCSS;
 
 }

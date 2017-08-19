@@ -16,33 +16,33 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class ParameterTest
 {
-
-    public ParameterTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        Parameter p1 = new Parameter();
-        p1.setID("id");
-        ObjectTag ot = new ObjectTag();
-        ot.setID("ot");
-        ot.add(p1);
-
-        System.out.println(ot.toString(true));
-        assertEquals("<object id=\"ot\">\n"
-                + "	<param id=\"id\"></param>\n"
-                + "</object>", ot.toString(true).toString());
-    }
-
+	
+	public ParameterTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		Parameter p1 = new Parameter();
+		p1.setID("id");
+		ObjectTag ot = new ObjectTag();
+		ot.setID("ot");
+		ot.add(p1);
+		
+		System.out.println(ot.toString(true));
+		assertEquals("<object id=\"ot\">\n"
+				             + "	<param id=\"id\"></param>\n"
+				             + "</object>", ot.toString(true).toString());
+	}
+	
 }

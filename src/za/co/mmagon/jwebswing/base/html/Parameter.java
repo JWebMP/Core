@@ -16,15 +16,18 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import java.util.logging.Level;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.ParameterAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.ObjectTagChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.logger.LogFactory;
+
+import java.util.logging.Level;
 
 /**
  * Definition and Usage<p>
@@ -43,57 +46,57 @@ import za.co.mmagon.logger.LogFactory;
  * In XHTML the &gt;param&lt; tag must be properly closed, like this &gt;param /&lt;
  * .<p>
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
- * @since Mar 1, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
- *
+ * @since Mar 1, 2015
  */
 public class Parameter<J extends Parameter<J>>
-        extends Component<NoChildren, ParameterAttributes, GlobalFeatures, GlobalEvents, J>
-        implements ObjectTagChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
+		extends Component<NoChildren, ParameterAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ObjectTagChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
-
-    /**
-     * Logger for the Component
-     */
-    private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Parameter");
-    /**
-     * Serial Version for all Components and their compatibility
-     */
-    private static final long serialVersionUID = 1l;
-
-    /**
-     *
-     */
-    public Parameter()
-    {
-        super(ComponentTypes.Parameter);
-    }
-
-    /**
-     * Differences Between HTML and XHTML
-     * <p>
-     * In HTML the base tag has no end tag.
-     * <p>
-     * In XHTML the base tag must be properly closed.
-     */
-    @Override
-    public void preConfigure()
-    {
-        super.preConfigure();
-        try
-        {
-            if (getPage().getHtmlVersion().name().startsWith("X"))
-            {
-                setInlineClosingTag(true);
-            }
-        }
-        catch (Exception e)
-        {
-            log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
-        }
-    }
+	
+	/**
+	 * Logger for the Component
+	 */
+	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Parameter");
+	/**
+	 * Serial Version for all Components and their compatibility
+	 */
+	private static final long serialVersionUID = 1l;
+	
+	/**
+	 *
+	 */
+	public Parameter()
+	{
+		super(ComponentTypes.Parameter);
+	}
+	
+	/**
+	 * Differences Between HTML and XHTML
+	 * <p>
+	 * In HTML the base tag has no end tag.
+	 * <p>
+	 * In XHTML the base tag must be properly closed.
+	 */
+	@Override
+	public void preConfigure()
+	{
+		super.preConfigure();
+		try
+		{
+			if (getPage().getHtmlVersion().name().startsWith("X"))
+			{
+				setInlineClosingTag(true);
+			}
+		}
+		catch (Exception e)
+		{
+			log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
+		}
+	}
 }

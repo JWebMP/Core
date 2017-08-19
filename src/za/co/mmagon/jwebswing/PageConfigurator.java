@@ -24,50 +24,49 @@ import java.util.Comparator;
  *
  * @author GedMarc
  * @since 13 Feb 2017
- *
  */
 public abstract class PageConfigurator implements Comparator<PageConfigurator>, Serializable
 {
 
-    private static final long serialVersionUID = 1L;
-    /**
-     * The loading sort order for this page configurator. Default 100;
-     */
-    private int sortOrder = 100;
+	private static final long serialVersionUID = 1L;
+	/**
+	 * The loading sort order for this page configurator. Default 100;
+	 */
+	private int sortOrder = 100;
 
-    /**
-     * Method that is called during the page configuration setup
-     *
-     * @param page
-     *
-     * @return
-     */
-    public abstract Page configure(Page page);
+	/**
+	 * Method that is called during the page configuration setup
+	 *
+	 * @param page
+	 *
+	 * @return
+	 */
+	public abstract Page configure(Page page);
 
-    /**
-     * Returns the default sort order
-     *
-     * @return
-     */
-    public Integer getSortOrder()
-    {
-        return sortOrder;
-    }
+	/**
+	 * Returns the default sort order
+	 *
+	 * @return
+	 */
+	public Integer getSortOrder()
+	{
+		return sortOrder;
+	}
 
-    /**
-     * Sets the default sort order
-     *
-     * @param sortOrder
-     */
-    public void setSortOrder(int sortOrder)
-    {
-        this.sortOrder = sortOrder;
-    }
+	/**
+	 * Sets the default sort order
+	 *
+	 * @param sortOrder
+	 */
+	public void setSortOrder(int sortOrder)
+	{
+		this.sortOrder = sortOrder;
+	}
 
-    @Override
-    public int compare(PageConfigurator o1, PageConfigurator o2)
-    {
-        return o1.getSortOrder().compareTo(o2.getSortOrder());
-    }
+	@Override
+	public int compare(PageConfigurator o1, PageConfigurator o2)
+	{
+		return o1.getSortOrder().compareTo(o2.getSortOrder());
+	}
 
 }

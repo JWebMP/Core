@@ -19,18 +19,19 @@ package za.co.mmagon.jwebswing.base.servlets;
 import com.armineasy.injection.GuiceContext;
 import com.armineasy.injection.filters.CorsAllowedFilter;
 import com.google.inject.Singleton;
+import za.co.mmagon.FileTemplates;
+import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
+import za.co.mmagon.logger.LogFactory;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import za.co.mmagon.FileTemplates;
-import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
-import za.co.mmagon.logger.LogFactory;
 
 /**
  * This Servlet supplies all the JavaScript for a given HTML Page
@@ -41,106 +42,106 @@ import za.co.mmagon.logger.LogFactory;
 public class JavaScriptServlet extends JWDefaultServlet
 {
 
-    private static final Logger log = LogFactory.getInstance().getLogger("JavaScriptServlet");
-    private static final long serialVersionUID = 1L;
+	private static final Logger log = LogFactory.getInstance().getLogger("JavaScriptServlet");
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     *
-     * @param request  Servlet request
-     * @param response Servlet response
-     *
-     * @throws ServletException                                                      if a Servlet-specific error occurs
-     * @throws IOException                                                           if an I/O error occurs
-     * @throws za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, MissingComponentException
-    {
-        response.setContentType("text/javascript");
-        Date startDate = new Date();
-        Page page = GuiceContext.inject().getInstance(Page.class);
+	/**
+	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+	 *
+	 * @param request  Servlet request
+	 * @param response Servlet response
+	 *
+	 * @throws ServletException                                                      if a Servlet-specific error occurs
+	 * @throws IOException                                                           if an I/O error occurs
+	 * @throws za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException
+	 */
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, MissingComponentException
+	{
+		response.setContentType("text/javascript");
+		Date startDate = new Date();
+		Page page = GuiceContext.inject().getInstance(Page.class);
 
-        if (page == null)
-        {
-            throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
-        }
-        FileTemplates.getFileTemplate(JavaScriptServlet.class, "JW_JAVASCRIPT", "javascriptScript");
-        FileTemplates.getTemplateVariables().put("//%%JW_JAVASCRIPT%%", page.renderJavascript());
-        StringBuilder scripts = FileTemplates.renderTemplateScripts("JW_JAVASCRIPT");
+		if (page == null)
+		{
+			throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
+		}
+		FileTemplates.getFileTemplate(JavaScriptServlet.class, "JW_JAVASCRIPT", "javascriptScript");
+		FileTemplates.getTemplateVariables().put("//%%JW_JAVASCRIPT%%", page.renderJavascript());
+		StringBuilder scripts = FileTemplates.renderTemplateScripts("JW_JAVASCRIPT");
 
-        Date endDate = new Date();
-        try (PrintWriter out = response.getWriter())
-        {
-            response.setContentType("application/javascript");
+		Date endDate = new Date();
+		try (PrintWriter out = response.getWriter())
+		{
+			response.setContentType("application/javascript");
 
-            response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);
-            response.setHeader("Access-Control-Allow-Credentials", "true");
-            response.setHeader("Access-Control-Allow-Methods", "GET, POST");
-            response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+			response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);
+			response.setHeader("Access-Control-Allow-Credentials", "true");
+			response.setHeader("Access-Control-Allow-Methods", "GET, POST");
+			response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
 
-            out.println(scripts);
-            Date dataTransferDate = new Date();
-            log.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
-            {
-                request.getSession().getId(), endDate.getTime() - startDate.getTime(), scripts.length(), dataTransferDate.getTime() - startDate.getTime()
-            });
-        }
-    }
+			out.println(scripts);
+			Date dataTransferDate = new Date();
+			log.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
+					{
+							request.getSession().getId(), endDate.getTime() - startDate.getTime(), scripts.length(), dataTransferDate.getTime() - startDate.getTime()
+					});
+		}
+	}
 
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request  Servlet request
-     * @param response Servlet response
-     *
-     * @throws ServletException if a Servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        try
-        {
-            super.doGet(request, response);
-            processRequest(request, response);
-        }
-        catch (IOException | ServletException e)
-        {
-            log.log(Level.SEVERE, "JavascriptServlet", e);
-        }
-        catch (MissingComponentException ex)
-        {
-            Logger.getLogger(JavaScriptServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+	/**
+	 * Handles the HTTP <code>GET</code> method.
+	 *
+	 * @param request  Servlet request
+	 * @param response Servlet response
+	 *
+	 * @throws ServletException if a Servlet-specific error occurs
+	 * @throws IOException      if an I/O error occurs
+	 */
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException
+	{
+		try
+		{
+			super.doGet(request, response);
+			processRequest(request, response);
+		}
+		catch (IOException | ServletException e)
+		{
+			log.log(Level.SEVERE, "JavascriptServlet", e);
+		}
+		catch (MissingComponentException ex)
+		{
+			Logger.getLogger(JavaScriptServlet.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request  Servlet request
-     * @param response Servlet response
-     *
-     * @throws ServletException if a Servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        try
-        {
-            super.doGet(request, response);
-            processRequest(request, response);
-        }
-        catch (IOException | ServletException e)
-        {
-            log.log(Level.SEVERE, "JavascriptServlet", e);
-        }
-        catch (MissingComponentException ex)
-        {
-            Logger.getLogger(JavaScriptServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+	/**
+	 * Handles the HTTP <code>GET</code> method.
+	 *
+	 * @param request  Servlet request
+	 * @param response Servlet response
+	 *
+	 * @throws ServletException if a Servlet-specific error occurs
+	 * @throws IOException      if an I/O error occurs
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException
+	{
+		try
+		{
+			super.doGet(request, response);
+			processRequest(request, response);
+		}
+		catch (IOException | ServletException e)
+		{
+			log.log(Level.SEVERE, "JavascriptServlet", e);
+		}
+		catch (MissingComponentException ex)
+		{
+			Logger.getLogger(JavaScriptServlet.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 }

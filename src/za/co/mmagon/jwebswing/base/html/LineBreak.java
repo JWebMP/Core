@@ -43,42 +43,46 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * In XHTML, the &lt;br&gt; tag must be properly closed, like this: br
  * <p>
- * @author GedMarc
+ *
  * @param <J>
+ *
+ * @author GedMarc
  */
 public class LineBreak<J extends LineBreak<J>>
-        extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
-        implements NoNewLineBeforeClosingTag, NoClosingTag, NoNewLineForRawText, GlobalChildren, NoIDTag
+		extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+		implements NoNewLineBeforeClosingTag, NoClosingTag, NoNewLineForRawText, GlobalChildren, NoIDTag
 {
-
-    private static final LineBreak br = new LineBreak();
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Inserts a new object of a line break. Rather access this class statically.
-     */
-    private LineBreak()
-    {
-        super(ComponentTypes.LineBreak);
-    }
-
-    /**
-     * Returns the instance of a line break
-     * <p>
-     * @return
-     */
-    public static LineBreak getLineBreak()
-    {
-        return br;
-    }
-
-    /**
-     * Inserts a new object of a line break. Rather access this class statically if not applying custom styling.
-     * <p>
-     * @return A new instance of a line break
-     */
-    public static LineBreak getNewInstance()
-    {
-        return new LineBreak();
-    }
+	
+	private static final LineBreak br = new LineBreak();
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Inserts a new object of a line break. Rather access this class statically.
+	 */
+	private LineBreak()
+	{
+		super(ComponentTypes.LineBreak);
+	}
+	
+	/**
+	 * Returns the instance of a line break
+	 * <p>
+	 *
+	 * @return
+	 */
+	public static LineBreak getLineBreak()
+	{
+		return br;
+	}
+	
+	/**
+	 * Inserts a new object of a line break. Rather access this class statically if not applying custom styling.
+	 * <p>
+	 *
+	 * @return A new instance of a line break
+	 */
+	public static LineBreak getNewInstance()
+	{
+		return new LineBreak();
+	}
 }

@@ -34,71 +34,70 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
  */
 public enum UnicodeBidis implements CSSEnumeration<UnicodeBidis>
 {
-    /**
-     * Does not use an additional level of embedding. This is default
-     */
-    /**
-     * Does not use an additional level of embedding. This is default
-     */
-    Normal,
-    /**
-     * Creates an additional level of embedding
-     */
-    Embed,
-    /**
-     * Creates an additional level of embedding. Reordering depends on the direction property
-     */
-    Bidi_Override,
-    /**
-     * Sets this property to its default value
-     *
-     * see http://www.w3schools.com/cssref/css_initial.asp
-     */
-    Initial,
-    /**
-     * Inherits this property from its parent element.
-     *
-     * see http://www.w3schools.com/cssref/css_inherit.asp
-     */
-    Inherit,
-    /**
-     * Sets this field as not set
-     */
-    Unset;
+	/**
+	 * Does not use an additional level of embedding. This is default
+	 */
+	/**
+	 * Does not use an additional level of embedding. This is default
+	 */
+	Normal,
+	/**
+	 * Creates an additional level of embedding
+	 */
+	Embed,
+	/**
+	 * Creates an additional level of embedding. Reordering depends on the direction property
+	 */
+	Bidi_Override,
+	/**
+	 * Sets this property to its default value
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_initial.asp
+	 */
+	Initial,
+	/**
+	 * Inherits this property from its parent element.
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_inherit.asp
+	 */
+	Inherit,
+	/**
+	 * Sets this field as not set
+	 */
+	Unset;;
 
-    ;
-    private UnicodeBidis()
-    {
-    }
+	private UnicodeBidis()
+	{
+	}
 
-    @Override
-    public String getJavascriptSyntax()
-    {
-        return "style.unicodeBidi";
-    }
+	@Override
+	public String getJavascriptSyntax()
+	{
+		return "style.unicodeBidi";
+	}
 
-    @Override
-    public CSSVersions getCSSVersion()
-    {
-        return CSSVersions.CSS3;
-    }
+	@Override
+	public CSSVersions getCSSVersion()
+	{
+		return CSSVersions.CSS3;
+	}
 
-    @Override
-    public String getValue()
-    {
-        return name();
-    }
+	@Override
+	public String getValue()
+	{
+		return name();
+	}
 
-    @Override
-    public UnicodeBidis getDefault()
-    {
-        return Unset;
-    }
+	@Override
+	public UnicodeBidis getDefault()
+	{
+		return Unset;
+	}
 
-    @Override
-    public String toString()
-    {
-        return name().toLowerCase().replace('_', '-');
-    }
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase().replace('_', '-');
+	}
 
 }

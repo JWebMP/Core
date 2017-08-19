@@ -27,34 +27,34 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public abstract class JavascriptFunction extends JavaScriptPart
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new function
-     */
-    public JavascriptFunction()
-    {
-        //Nothing needed
-    }
-
-    /**
-     * Render the full function including function(){};
-     *
-     * @return
-     */
-    public abstract String renderFunction();
-
-    /**
-     * Renders the to function method as the JSON Value
-     *
-     * @return
-     */
-    @JsonValue
-    @JsonRawValue
-    @Override
-    public String toString()
-    {
-        return renderFunction();
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new function
+	 */
+	public JavascriptFunction()
+	{
+		//Nothing needed
+	}
+	
+	/**
+	 * Render the full function including function(){};
+	 *
+	 * @return
+	 */
+	public abstract String renderFunction();
+	
+	/**
+	 * Renders the to function method as the JSON Value
+	 *
+	 * @return
+	 */
+	@JsonValue
+	@JsonRawValue
+	@Override
+	public String toString()
+	{
+		return renderFunction();
+	}
 }

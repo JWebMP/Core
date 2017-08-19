@@ -18,7 +18,9 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.DetailsChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
@@ -38,37 +40,36 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * Differences Between HTML 4.01 and HTML5<p>
  * <p>
  * The &lt;summary&gt; tag is new in HTML5.<p>
- * @author GedMarc
+ *
  * @param <J>
  *
- * @since Mar 1, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
- *
+ * @since Mar 1, 2015
  */
 public class Summary<J extends Summary<J>>
-        extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements DetailsChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
+		extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements DetailsChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     *
-     * @param text The raw text
-     */
-    public Summary(String text)
-    {
-        super(ComponentTypes.Summary);
-        setText(text);
-    }
-
-    /**
-     * Constructs a new instance of summary
-     */
-    public Summary()
-    {
-        this(null);
-    }
-
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * @param text The raw text
+	 */
+	public Summary(String text)
+	{
+		super(ComponentTypes.Summary);
+		setText(text);
+	}
+	
+	/**
+	 * Constructs a new instance of summary
+	 */
+	public Summary()
+	{
+		this(null);
+	}
+	
 }

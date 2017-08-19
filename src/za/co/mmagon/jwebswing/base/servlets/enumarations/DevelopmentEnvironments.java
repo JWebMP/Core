@@ -19,41 +19,39 @@ package za.co.mmagon.jwebswing.base.servlets.enumarations;
 /**
  * Configures the global generation type
  *
- * @since 2013/11/20
- * @version 1.0
  * @author mmagon
- *
- *
+ * @version 1.0
+ * @since 2013/11/20
  */
 public enum DevelopmentEnvironments
 {
-    /**
-     * All commenting and everything
-     */
-    Local,
-    /**
-     * Lots of commenting
-     */
-    Sandbox,
-    /**
-     * Always pretty print HTML
-     */
-    Development,
-    /**
-     * Allows for pretty print of HTML
-     */
-    QA,
-    /**
-     * UI Test Environment
-     */
-    UITest,
-    /**
-     * PreProduction Environment
-     */
-    PreProduction,
-    /**
-     * Forces tiny HTML to be rendered
-     */
-    Production,
+	/**
+	 * All commenting and everything
+	 */
+	Local,
+	/**
+	 * Lots of commenting
+	 */
+	Sandbox,
+	/**
+	 * Always pretty print HTML
+	 */
+	Development,
+	/**
+	 * Allows for pretty print of HTML
+	 */
+	QA,
+	/**
+	 * UI Test Environment
+	 */
+	UITest,
+	/**
+	 * PreProduction Environment
+	 */
+	PreProduction,
+	/**
+	 * Forces tiny HTML to be rendered
+	 */
+	Production,
 
 }

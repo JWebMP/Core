@@ -20,22 +20,20 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationAdapt
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationClass;
 
 /**
- *
  * @author GedMarc
  * @since 17 Jan 2017
- *
  */
 public class AnimateCSSImpl extends CSSImplementationAdapter<AnimateCSS, AnimateCSSImpl> implements CSSImplementationClass<AnimateCSS, AnimateCSSImpl>
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * The implementation class for animate CSS
-     */
-    public AnimateCSSImpl()
-    {
-        //Nothing Needed
-    }
+	/**
+	 * The implementation class for animate CSS
+	 */
+	public AnimateCSSImpl()
+	{
+		//Nothing Needed
+	}
 
 }

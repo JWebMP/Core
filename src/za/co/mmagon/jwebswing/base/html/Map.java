@@ -44,34 +44,32 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  * @param <J>
  *
- * @since 2013/11/22
- * @version 1.0
  * @author MMagon
- *
- *
+ * @version 1.0
+ * @since 2013/11/22
  */
 public class Map<J extends Map<J>>
-        extends Component<MapChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements ImageMapChildren
+		extends Component<MapChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ImageMapChildren
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a new Map for use with the Image Map Useless really without
-     */
-    public Map()
-    {
-        super(ComponentTypes.Map);
-    }
+	/**
+	 * Constructs a new Map for use with the Image Map Useless really without
+	 */
+	public Map()
+	{
+		super(ComponentTypes.Map);
+	}
 
-    /**
-     * Adds the absolute CSS Configuration, and sets the name to the ID of the Map
-     */
-    @Override
-    public void preConfigure()
-    {
-        super.preConfigure();
-        addAttribute(GlobalAttributes.Name, getID());
-    }
+	/**
+	 * Adds the absolute CSS Configuration, and sets the name to the ID of the Map
+	 */
+	@Override
+	public void preConfigure()
+	{
+		super.preConfigure();
+		addAttribute(GlobalAttributes.Name, getID());
+	}
 }

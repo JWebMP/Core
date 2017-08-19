@@ -44,28 +44,28 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;rt&gt; tag is new in HTML5.<p>
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
- * @since Mar 1, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
  * Not support in FireFox xD wait what??!? something in ie5 is not in firefox xD
+ * @since Mar 1, 2015
  * @deprecated
- *
  */
 public class RubyTranslate<J extends RubyTranslate<J>>
-        extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements RubyChildren
+		extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements RubyChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new instance of ruby translate
-     */
-    public RubyTranslate()
-    {
-        super(ComponentTypes.RubyTranslate);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new instance of ruby translate
+	 */
+	public RubyTranslate()
+	{
+		super(ComponentTypes.RubyTranslate);
+	}
 }

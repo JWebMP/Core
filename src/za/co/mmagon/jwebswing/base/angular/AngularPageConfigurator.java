@@ -17,8 +17,6 @@
 package za.co.mmagon.jwebswing.base.angular;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import java.util.ArrayList;
-import java.util.List;
 import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.PageConfigurator;
@@ -29,265 +27,265 @@ import za.co.mmagon.jwebswing.base.angular.factories.AngularFactoryBase;
 import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
 import za.co.mmagon.jwebswing.plugins.PluginInformation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author GedMarc
  * @since 21 Feb 2017
- *
  */
 @PluginInformation(pluginName = "AngularJS",
-        pluginUniqueName = "angular",
-        pluginDescription = "AngularJS is a toolset for building the framework most suited to your application development. It is fully extensible and works well with other libraries. Every feature can be modified or replaced to suit your unique development workflow and feature needs. Read on to find out how. ",
-        pluginVersion = "1.6",
-        pluginDependancyUniqueIDs = "jquery",
-        pluginCategories = "jquery, angular, data-binding, ng,google",
-        pluginSubtitle = "Data-binding is an automatic way of updating the view whenever the model changes, as well as updating the model whenever the view changes. This is awesome because it eliminates DOM manipulation from the list of things you have to worry about. ",
-        pluginGitUrl = "https://github.com/GedMarc/JWebSwing",
-        pluginSourceUrl = "https://angularjs.org",
-        pluginWikiUrl = "https://github.com/GedMarc/JWebSwing/wiki",
-        pluginOriginalHomepage = "https://angularjs.org",
-        pluginDownloadUrl = "https://angularjs.org/",
-        pluginIconUrl = "",
-        pluginIconImageUrl = "https://angularjs.org/img/AngularJS-large.png",
-        pluginLastUpdatedDate = "2017/03/30"
+		pluginUniqueName = "angular",
+		pluginDescription = "AngularJS is a toolset for building the framework most suited to your application development. It is fully extensible and works well with other libraries. Every feature can be modified or replaced to suit your unique development workflow and feature needs. Read on to find out how. ",
+		pluginVersion = "1.6",
+		pluginDependancyUniqueIDs = "jquery",
+		pluginCategories = "jquery, angular, data-binding, ng,google",
+		pluginSubtitle = "Data-binding is an automatic way of updating the view whenever the model changes, as well as updating the model whenever the view changes. This is awesome because it eliminates DOM manipulation from the list of things you have to worry about. ",
+		pluginGitUrl = "https://github.com/GedMarc/JWebSwing",
+		pluginSourceUrl = "https://angularjs.org",
+		pluginWikiUrl = "https://github.com/GedMarc/JWebSwing/wiki",
+		pluginOriginalHomepage = "https://angularjs.org",
+		pluginDownloadUrl = "https://angularjs.org/",
+		pluginIconUrl = "",
+		pluginIconImageUrl = "https://angularjs.org/img/AngularJS-large.png",
+		pluginLastUpdatedDate = "2017/03/30"
 )
 public class AngularPageConfigurator extends PageConfigurator
 {
 
-    private static final long serialVersionUID = 1L;
-    public static final String AngularEnabledString = "angular-enabled";
+	public static final String AngularEnabledString = "angular-enabled";
+	private static final long serialVersionUID = 1L;
+	/**
+	 * All the angular modules for this component
+	 */
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	private List<AngularModuleBase> angularModules;
+	/**
+	 * All of the angular directives for this component
+	 */
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	private List<AngularDirectiveBase> angularDirectives;
+	/**
+	 * All of the angular directives for this component
+	 */
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	private List<AngularControllerBase> angularControllers;
+	/**
+	 * All of the angular directives for this component
+	 */
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	private List<AngularFactoryBase> angularFactories;
 
-    /**
-     * All the angular modules for this component
-     */
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private List<AngularModuleBase> angularModules;
-    /**
-     * All of the angular directives for this component
-     */
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private List<AngularDirectiveBase> angularDirectives;
-    /**
-     * All of the angular directives for this component
-     */
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private List<AngularControllerBase> angularControllers;
-    /**
-     * All of the angular directives for this component
-     */
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private List<AngularFactoryBase> angularFactories;
+	/**
+	 * All of the angular controller insertions for this component
+	 */
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	private List<String> controllerInsertions;
 
-    /**
-     * All of the angular controller insertions for this component
-     */
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private List<String> controllerInsertions;
+	/**
+	 * All the angular variables
+	 */
+	private List<String> angularVariables;
 
-    /**
-     * All the angular variables
-     */
-    private List<String> angularVariables;
+	/**
+	 * Configures the angular page
+	 */
+	@SuppressWarnings("")
+	public AngularPageConfigurator()
+	{
+		setSortOrder(99999999); //Always dead last
+	}
 
-    /**
-     * Configures the angular page
-     */
-    @SuppressWarnings("")
-    public AngularPageConfigurator()
-    {
-        setSortOrder(99999999); //Always dead last
-    }
+	/**
+	 * Sets angular as a required component
+	 *
+	 * @param component
+	 * @param required
+	 */
+	public static void setRequired(ComponentHTMLAngularBase component, boolean required)
+	{
+		component.getProperties().put(AngularEnabledString, required);
+	}
 
-    @Override
-    public Page configure(Page page)
-    {
-        if (!page.isConfigured())
-        {
-            if (page.getBody().readChildrenPropertyFirstResult(AngularEnabledString, true))
-            {
-                page.getBody().getJavascriptReferences().add(AngularReferencePool.Angular1.getJavaScriptReference());
-                page.getBody().addAttribute(AngularAttributes.ngApp, AngularFeature.getAppName());
-                page.getBody().addAttribute(AngularAttributes.ngController, AngularFeature.getControllerName() + " as jwCntrl");
-            }
-        }
-        else
-        {
-            System.out.println("Page is already configured, not running angualr");
-        }
-        return page;
-    }
+	@Override
+	public Page configure(Page page)
+	{
+		if (!page.isConfigured())
+		{
+			if (page.getBody().readChildrenPropertyFirstResult(AngularEnabledString, true))
+			{
+				page.getBody().getJavascriptReferences().add(AngularReferencePool.Angular1.getJavaScriptReference());
+				page.getBody().addAttribute(AngularAttributes.ngApp, AngularFeature.getAppName());
+				page.getBody().addAttribute(AngularAttributes.ngController, AngularFeature.getControllerName() + " as jwCntrl");
+			}
+		}
+		else
+		{
+			System.out.println("Page is already configured, not running angualr");
+		}
+		return page;
+	}
 
-    /**
-     * Sets angular as a required component
-     *
-     * @param component
-     * @param required
-     */
-    public static void setRequired(ComponentHTMLAngularBase component, boolean required)
-    {
-        component.getProperties().put(AngularEnabledString, required);
-    }
+	/**
+	 * Gets a list of angular modules
+	 *
+	 * @return
+	 */
+	public List<AngularModuleBase> getAngularModules()
+	{
+		if (angularModules == null)
+		{
+			setAngularModules(new ArrayList<>());
+		}
+		return angularModules;
+	}
 
-    /**
-     * Gets a list of angular modules
-     *
-     * @return
-     */
-    public List<AngularModuleBase> getAngularModules()
-    {
-        if (angularModules == null)
-        {
-            setAngularModules(new ArrayList<>());
-        }
-        return angularModules;
-    }
+	/**
+	 * Sets the angular modules
+	 *
+	 * @param angularModules
+	 */
+	public void setAngularModules(List<AngularModuleBase> angularModules)
+	{
+		this.angularModules = angularModules;
+	}
 
-    /**
-     * Sets the angular modules
-     *
-     * @param angularModules
-     */
-    public void setAngularModules(List<AngularModuleBase> angularModules)
-    {
-        this.angularModules = angularModules;
-    }
+	/**
+	 * Gets the list of angular directives
+	 *
+	 * @return
+	 */
+	public List<AngularDirectiveBase> getAngularDirectives()
+	{
+		if (angularDirectives == null)
+		{
+			setAngularDirectives(new ArrayList<>());
 
-    /**
-     * Gets the list of angular directives
-     *
-     * @return
-     */
-    public List<AngularDirectiveBase> getAngularDirectives()
-    {
-        if (angularDirectives == null)
-        {
-            setAngularDirectives(new ArrayList<>());
+		}
+		return angularDirectives;
+	}
 
-        }
-        return angularDirectives;
-    }
+	/**
+	 * Sets the list of angular directives.
+	 *
+	 * @param angularDirectives
+	 */
+	public void setAngularDirectives(List<AngularDirectiveBase> angularDirectives)
+	{
+		this.angularDirectives = angularDirectives;
+	}
 
-    /**
-     * Sets the list of angular directives.
-     *
-     * @param angularDirectives
-     */
-    public void setAngularDirectives(List<AngularDirectiveBase> angularDirectives)
-    {
-        this.angularDirectives = angularDirectives;
-    }
+	/**
+	 * Returns a list of all the angular controllers for this component
+	 *
+	 * @return
+	 */
+	public List<AngularControllerBase> getAngularControllers()
+	{
+		if (angularControllers == null)
+		{
+			setAngularControllers(new ArrayList<>());
 
-    /**
-     * Returns a list of all the angular controllers for this component
-     *
-     * @return
-     */
-    public List<AngularControllerBase> getAngularControllers()
-    {
-        if (angularControllers == null)
-        {
-            setAngularControllers(new ArrayList<>());
+		}
+		return angularControllers;
+	}
 
-        }
-        return angularControllers;
-    }
+	/**
+	 * Sets the list of angular controllers for this component
+	 *
+	 * @param angularControllers
+	 */
+	public void setAngularControllers(List<AngularControllerBase> angularControllers)
+	{
+		this.angularControllers = angularControllers;
+	}
 
-    /**
-     * Sets the list of angular controllers for this component
-     *
-     * @param angularControllers
-     */
-    public void setAngularControllers(List<AngularControllerBase> angularControllers)
-    {
-        this.angularControllers = angularControllers;
-    }
+	/**
+	 * Returns the list of angular variables
+	 *
+	 * @return
+	 */
+	public List<String> getAngularVariables()
+	{
+		if (angularVariables == null)
+		{
+			angularVariables = new ArrayList<>();
+		}
+		return angularVariables;
+	}
 
-    /**
-     * Returns the list of angular variables
-     *
-     * @return
-     */
-    public List<String> getAngularVariables()
-    {
-        if (angularVariables == null)
-        {
-            angularVariables = new ArrayList<>();
-        }
-        return angularVariables;
-    }
+	/**
+	 * Sets the list of angular variables
+	 *
+	 * @param angularVariables
+	 */
+	public void setAngularVariables(List<String> angularVariables)
+	{
+		this.angularVariables = angularVariables;
+	}
 
-    /**
-     * Sets the list of angular variables
-     *
-     * @param angularVariables
-     */
-    public void setAngularVariables(List<String> angularVariables)
-    {
-        this.angularVariables = angularVariables;
-    }
+	/**
+	 * Renders the complete angular javascript with the variables configured
+	 *
+	 * @param page
+	 *
+	 * @return
+	 */
+	public StringBuilder renderAngularJavascript(Page page)
+	{
+		StringBuilder sb = new StringBuilder();
+		AngularFeature af = new AngularFeature(page);
+		af.configureTemplateVariables();
+		sb.append(FileTemplates.renderTemplateScripts("jwangular"));
+		return sb;
+	}
 
-    /**
-     * Renders the complete angular javascript with the variables configured
-     *
-     * @param page
-     *
-     * @return
-     */
-    public StringBuilder renderAngularJavascript(Page page)
-    {
-        StringBuilder sb = new StringBuilder();
-        AngularFeature af = new AngularFeature(page);
-        af.configureTemplateVariables();
-        sb.append(FileTemplates.renderTemplateScripts("jwangular"));
-        return sb;
-    }
+	/**
+	 * Returns a list of factories
+	 *
+	 * @return
+	 */
+	public List<AngularFactoryBase> getAngularFactories()
+	{
+		if (angularFactories == null)
+		{
+			angularFactories = new ArrayList<>();
+		}
+		return angularFactories;
+	}
 
-    /**
-     * Returns a list of factories
-     *
-     * @return
-     */
-    public List<AngularFactoryBase> getAngularFactories()
-    {
-        if (angularFactories == null)
-        {
-            angularFactories = new ArrayList<>();
-        }
-        return angularFactories;
-    }
+	/**
+	 * Sets the list of angular factories
+	 *
+	 * @param angularFactories
+	 */
+	public void setAngularFactories(List<AngularFactoryBase> angularFactories)
+	{
+		this.angularFactories = angularFactories;
+	}
 
-    /**
-     * Sets the list of angular factories
-     *
-     * @param angularFactories
-     */
-    public void setAngularFactories(List<AngularFactoryBase> angularFactories)
-    {
-        this.angularFactories = angularFactories;
-    }
+	/**
+	 * Returns the list of controller insertions
+	 *
+	 * @return
+	 */
+	public List<String> getControllerInsertions()
+	{
+		if (controllerInsertions == null)
+		{
+			this.controllerInsertions = new ArrayList<>();
+		}
+		return controllerInsertions;
+	}
 
-    /**
-     * Returns the list of controller insertions
-     *
-     * @return
-     */
-    public List<String> getControllerInsertions()
-    {
-        if (controllerInsertions == null)
-        {
-            this.controllerInsertions = new ArrayList<>();
-        }
-        return controllerInsertions;
-    }
-
-    /**
-     * Sets the list of controller insertions
-     *
-     * @param controllerInsertions
-     */
-    public void setControllerInsertions(List<String> controllerInsertions)
-    {
-        this.controllerInsertions = controllerInsertions;
-    }
+	/**
+	 * Sets the list of controller insertions
+	 *
+	 * @param controllerInsertions
+	 */
+	public void setControllerInsertions(List<String> controllerInsertions)
+	{
+		this.controllerInsertions = controllerInsertions;
+	}
 
 }

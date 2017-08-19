@@ -20,24 +20,23 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class CenterTest
 {
 
-    public CenterTest()
-    {
-    }
+	public CenterTest()
+	{
+	}
 
-    /**
-     * Test of getCenter method, of class Center.
-     */
-    @Test
-    public void testGetCenter()
-    {
-        Center c = Center.getCenter();
-        System.out.println(c.toString(true).toString());
-        Assert.assertEquals("<center></center>", c.toString(true).toString());
-    }
+	/**
+	 * Test of getCenter method, of class Center.
+	 */
+	@Test
+	public void testGetCenter()
+	{
+		Center c = Center.getCenter();
+		System.out.println(c.toString(true).toString());
+		Assert.assertEquals("<center></center>", c.toString(true).toString());
+	}
 }

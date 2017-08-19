@@ -19,20 +19,19 @@ package za.co.mmagon.jwebswing.base.html.attributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 
 /**
- *
  * @author GedMarc
  * @since 2014/12/20
  */
 public enum BiDirectionalOverrideAttributes implements AttributeDefinitions
 {
-    /**
-     * Required. Specifies the text direction of the text inside the &gt;bdo&lt; element
-     */
-    Dir;
-
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	/**
+	 * Required. Specifies the text direction of the text inside the &gt;bdo&lt; element
+	 */
+	Dir;
+	
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

@@ -51,121 +51,132 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * In XHTML, the name attribute is deprecated, and will be removed. Use the id attribute instead.<p>
  * <p>
- * @author Marc Magon
+ *
  * @param <J>
+ *
+ * @author Marc Magon
  */
 public class IFrame<J extends IFrame<J>>
-        extends Component<NoChildren, IFrameAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<NoChildren, IFrameAttributes, GlobalFeatures, GlobalEvents, J>
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new IFrame
-     * <p>
-     * @param URL            The source URL to utilize
-     * @param name           The name of the IFrame. Used for Targets
-     * @param widthInPixels  The width in Pixels of the IFrame
-     * @param heightInPixels The height in Pixels of the IFrame
-     */
-    public IFrame(String URL, String name, int widthInPixels, int heightInPixels)
-    {
-        super(ComponentTypes.IFrame);
-        addAttribute(IFrameAttributes.Name, name);
-        addAttribute(IFrameAttributes.Src, URL);
-        addAttribute(IFrameAttributes.Width, widthInPixels);
-        addAttribute(IFrameAttributes.Height, heightInPixels);
-        setTiny(true);
-    }
-
-    /**
-     * Returns this IFrames URL
-     * <p>
-     * @return String that is this frame URL
-     */
-    public String getURL()
-    {
-        return getAttribute(IFrameAttributes.Src);
-    }
-
-    /**
-     * Sets this Frames URL
-     * <p>
-     * @param URL The URL to use for this frame
-     */
-    public void setURL(String URL)
-    {
-        addAttribute(IFrameAttributes.Src, URL);
-    }
-
-    /**
-     * Get this frames name
-     * <p>
-     * @return The name of this frame
-     */
-    public String getFrameName()
-    {
-        return getAttribute(IFrameAttributes.Name);
-    }
-
-    /**
-     * Sets this frames name
-     * <p>
-     * @param frameName The new name of the IFrame
-     */
-    public void setFrameName(String frameName)
-    {
-        addAttribute(IFrameAttributes.Name, frameName);
-    }
-
-    /**
-     * Returns the Width in Pixels
-     * <p>
-     * @return
-     */
-    public int getWidthInPixels()
-    {
-        return new Integer(getAttribute(IFrameAttributes.Width));
-    }
-
-    /**
-     * Sets the width in pixels
-     * <p>
-     * @param widthInPixels
-     */
-    public void setWidthInPixels(int widthInPixels)
-    {
-        addAttribute(IFrameAttributes.Width, widthInPixels);
-    }
-
-    /**
-     * Returns the Height in Pixels
-     * <p>
-     * @return The height in Pixels
-     */
-    public int getHeightInPixles()
-    {
-        return new Integer(getAttribute(IFrameAttributes.Height));
-    }
-
-    /**
-     * Sets this IFrames Height
-     * <p>
-     * @param heightInPixles The height of the frame
-     */
-    public void setHeightInPixles(int heightInPixles)
-    {
-        addAttribute(IFrameAttributes.Height, heightInPixles);
-    }
-
-    /**
-     * Sets the raw text to display when the browser doesn't support iframe's
-     *
-     * @param text
-     */
-    public void setUnsupportedText(String text)
-    {
-        setText(text);
-    }
-
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new IFrame
+	 * <p>
+	 *
+	 * @param URL            The source URL to utilize
+	 * @param name           The name of the IFrame. Used for Targets
+	 * @param widthInPixels  The width in Pixels of the IFrame
+	 * @param heightInPixels The height in Pixels of the IFrame
+	 */
+	public IFrame(String URL, String name, int widthInPixels, int heightInPixels)
+	{
+		super(ComponentTypes.IFrame);
+		addAttribute(IFrameAttributes.Name, name);
+		addAttribute(IFrameAttributes.Src, URL);
+		addAttribute(IFrameAttributes.Width, widthInPixels);
+		addAttribute(IFrameAttributes.Height, heightInPixels);
+		setTiny(true);
+	}
+	
+	/**
+	 * Returns this IFrames URL
+	 * <p>
+	 *
+	 * @return String that is this frame URL
+	 */
+	public String getURL()
+	{
+		return getAttribute(IFrameAttributes.Src);
+	}
+	
+	/**
+	 * Sets this Frames URL
+	 * <p>
+	 *
+	 * @param URL The URL to use for this frame
+	 */
+	public void setURL(String URL)
+	{
+		addAttribute(IFrameAttributes.Src, URL);
+	}
+	
+	/**
+	 * Get this frames name
+	 * <p>
+	 *
+	 * @return The name of this frame
+	 */
+	public String getFrameName()
+	{
+		return getAttribute(IFrameAttributes.Name);
+	}
+	
+	/**
+	 * Sets this frames name
+	 * <p>
+	 *
+	 * @param frameName The new name of the IFrame
+	 */
+	public void setFrameName(String frameName)
+	{
+		addAttribute(IFrameAttributes.Name, frameName);
+	}
+	
+	/**
+	 * Returns the Width in Pixels
+	 * <p>
+	 *
+	 * @return
+	 */
+	public int getWidthInPixels()
+	{
+		return new Integer(getAttribute(IFrameAttributes.Width));
+	}
+	
+	/**
+	 * Sets the width in pixels
+	 * <p>
+	 *
+	 * @param widthInPixels
+	 */
+	public void setWidthInPixels(int widthInPixels)
+	{
+		addAttribute(IFrameAttributes.Width, widthInPixels);
+	}
+	
+	/**
+	 * Returns the Height in Pixels
+	 * <p>
+	 *
+	 * @return The height in Pixels
+	 */
+	public int getHeightInPixles()
+	{
+		return new Integer(getAttribute(IFrameAttributes.Height));
+	}
+	
+	/**
+	 * Sets this IFrames Height
+	 * <p>
+	 *
+	 * @param heightInPixles The height of the frame
+	 */
+	public void setHeightInPixles(int heightInPixles)
+	{
+		addAttribute(IFrameAttributes.Height, heightInPixles);
+	}
+	
+	/**
+	 * Sets the raw text to display when the browser doesn't support iframe's
+	 *
+	 * @param text
+	 */
+	public void setUnsupportedText(String text)
+	{
+		setText(text);
+	}
+	
 }

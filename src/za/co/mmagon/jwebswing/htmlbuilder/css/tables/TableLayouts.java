@@ -36,73 +36,71 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
 @CSSAnnotationType
 public enum TableLayouts implements CSSEnumeration<TableLayouts>
 {
-    /**
-     * Automatic table layout algorithm (this is default):
-     * <p>
-     * The column width is set by the widest unbreakable content in the cells
-     * Can be slow, since it needs to read through all the content in the table, before determining the final layout
-     * <p>
-     */
-    Auto,
-    /**
-     * Fixed table layout algorithm:
-     * <p>
-     * The horizontal layout only depends on the table's width and the width of the columns, not the contents of the cells
-     * Allows a browser to lay out the table faster than the automatic table layout
-     * The browser can begin to display the table once the first row has been received
-     * <p>
-     */
-    Fixed,
-    /**
-     * Sets this property to its default value
-     *
-     * see http://www.w3schools.com/cssref/css_initial.asp
-     */
-    Initial,
-    /**
-     * Inherits this property from its parent element.
-     *
-     * see http://www.w3schools.com/cssref/css_inherit.asp
-     */
-    Inherit,
-    /**
-     * Sets this field as not set
-     */
-    Unset;
+	/**
+	 * Automatic table layout algorithm (this is default):
+	 * <p>
+	 * The column width is set by the widest unbreakable content in the cells
+	 * Can be slow, since it needs to read through all the content in the table, before determining the final layout
+	 * <p>
+	 */
+	Auto,
+	/**
+	 * Fixed table layout algorithm:
+	 * <p>
+	 * The horizontal layout only depends on the table's width and the width of the columns, not the contents of the cells
+	 * Allows a browser to lay out the table faster than the automatic table layout
+	 * The browser can begin to display the table once the first row has been received
+	 * <p>
+	 */
+	Fixed,
+	/**
+	 * Sets this property to its default value
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_initial.asp
+	 */
+	Initial,
+	/**
+	 * Inherits this property from its parent element.
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_inherit.asp
+	 */
+	Inherit,
+	/**
+	 * Sets this field as not set
+	 */
+	Unset;;
 
-    ;
+	private TableLayouts()
+	{
+	}
 
-    @Override
-    public String toString()
-    {
-        return name().toLowerCase();
-    }
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
+	}
 
-    private TableLayouts()
-    {
-    }
+	@Override
+	public String getJavascriptSyntax()
+	{
+		return "style.emptyCells";
+	}
 
-    @Override
-    public String getJavascriptSyntax()
-    {
-        return "style.emptyCells";
-    }
+	@Override
+	public CSSVersions getCSSVersion()
+	{
+		return CSSVersions.CSS2;
+	}
 
-    @Override
-    public CSSVersions getCSSVersion()
-    {
-        return CSSVersions.CSS2;
-    }
+	@Override
+	public String getValue()
+	{
+		return name();
+	}
 
-    @Override
-    public String getValue()
-    {
-        return name();
-    }
-
-    @Override
-    public TableLayouts getDefault()
-    {
-        return Unset;
-    }
+	@Override
+	public TableLayouts getDefault()
+	{
+		return Unset;
+	}
 }

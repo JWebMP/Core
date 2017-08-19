@@ -16,34 +16,34 @@
  */
 package za.co.mmagon.jwebswing.demoframework;
 
-import java.lang.annotation.*;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
+import java.lang.annotation.*;
+
 /**
- *
  * @author Marc Magon
  * @since 04 Apr 2017
  */
 @Target(
-        {
-            ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
-        })
+		{
+				ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
+		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface DemoConfig
 {
 
-    /**
-     * A class that can be instantiated with Guice that constructs a demonstration page
-     *
-     * @return
-     */
-    public Class<? extends DemoPanel> demoPanel();
+	/**
+	 * A class that can be instantiated with Guice that constructs a demonstration page
+	 *
+	 * @return
+	 */
+	public Class<? extends DemoPanel> demoPanel();
 
-    /**
-     * A class that can be instantiated
-     *
-     * @return
-     */
-    public Class<? extends JavaScriptPart> optionsObject();
+	/**
+	 * A class that can be instantiated
+	 *
+	 * @return
+	 */
+	public Class<? extends JavaScriptPart> optionsObject();
 }

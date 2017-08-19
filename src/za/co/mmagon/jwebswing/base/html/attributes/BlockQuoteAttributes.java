@@ -27,16 +27,16 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 public enum BlockQuoteAttributes implements AttributeDefinitions
 {
 
-    /**
-     * Specifies the source of the quotation.
-     * <p>
-     * String
-     */
-    Cite;
+	/**
+	 * Specifies the source of the quotation.
+	 * <p>
+	 * String
+	 */
+	Cite;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

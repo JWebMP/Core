@@ -29,44 +29,43 @@ import za.co.mmagon.jwebswing.base.servlets.interfaces.ReferencePool;
  */
 public enum ModernizrReferencePool implements ReferencePool
 {
-    ModernizrReference(new JavascriptReference("Modernizr", 1.0, "bower_components/jwebswing-moderniz/modernizr.js",10),null)
-    ;
-    private ModernizrReferencePool()
-    {
-    }
+	ModernizrReference(new JavascriptReference("Modernizr", 1.0, "bower_components/jwebswing-moderniz/modernizr.js", 10), null);
 
-    private JavascriptReference javaScriptReference;
-    private CSSReference cssReference;
+	private JavascriptReference javaScriptReference;
+	private CSSReference cssReference;
+	private ModernizrReferencePool()
+	{
+	}
 
-    private ModernizrReferencePool(JavascriptReference javaScriptReference, CSSReference cssReference)
-    {
-        this.javaScriptReference = javaScriptReference;
-        this.javaScriptReference.setPriority(RequirementsPriority.First);
-        
-        this.cssReference = cssReference;
-    }
+	private ModernizrReferencePool(JavascriptReference javaScriptReference, CSSReference cssReference)
+	{
+		this.javaScriptReference = javaScriptReference;
+		this.javaScriptReference.setPriority(RequirementsPriority.First);
 
-    @Override
-    public JavascriptReference getJavaScriptReference()
-    {
-        return javaScriptReference;
-    }
+		this.cssReference = cssReference;
+	}
 
-    @Override
-    public void setJavaScriptReference(JavascriptReference javaScriptReference)
-    {
-        this.javaScriptReference = javaScriptReference;
-    }
+	@Override
+	public JavascriptReference getJavaScriptReference()
+	{
+		return javaScriptReference;
+	}
 
-    @Override
-    public CSSReference getCssReference()
-    {
-        return cssReference;
-    }
+	@Override
+	public void setJavaScriptReference(JavascriptReference javaScriptReference)
+	{
+		this.javaScriptReference = javaScriptReference;
+	}
 
-    @Override
-    public void setCssReference(CSSReference cssReference)
-    {
-        this.cssReference = cssReference;
-    }
+	@Override
+	public CSSReference getCssReference()
+	{
+		return cssReference;
+	}
+
+	@Override
+	public void setCssReference(CSSReference cssReference)
+	{
+		this.cssReference = cssReference;
+	}
 }

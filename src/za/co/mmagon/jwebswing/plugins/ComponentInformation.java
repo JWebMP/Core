@@ -16,56 +16,58 @@
  */
 package za.co.mmagon.jwebswing.plugins;
 
-import java.lang.annotation.*;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * Any specific component
  *
  * @author GedMarc
  * @since 19 Feb 2017
- *
  */
 @Target(
-        {
-            ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
-        })
+		{
+				ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
+		})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ComponentInformation
 {
 
-    /**
-     * The name of the component
-     *
-     * @return
-     */
-    public String name();
+	/**
+	 * The name of the component
+	 *
+	 * @return
+	 */
+	public String name();
 
-    /**
-     * The description of the component
-     *
-     * @return
-     */
-    public String description();
+	/**
+	 * The description of the component
+	 *
+	 * @return
+	 */
+	public String description();
 
-    /**
-     * The URL of the component
-     *
-     * @return
-     */
-    public String url();
+	/**
+	 * The URL of the component
+	 *
+	 * @return
+	 */
+	public String url();
 
-    /**
-     * The wiki url of the component
-     *
-     * @return
-     */
-    public String wikiUrl() default "";
+	/**
+	 * The wiki url of the component
+	 *
+	 * @return
+	 */
+	public String wikiUrl() default "";
 
-    /**
-     * The icon of the component
-     *
-     * @return
-     */
-    public String icon() default "";
+	/**
+	 * The icon of the component
+	 *
+	 * @return
+	 */
+	public String icon() default "";
 
 }

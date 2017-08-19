@@ -16,29 +16,29 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author MMagon
  */
 public class BoldTest
 {
 
-    public BoldTest()
-    {
-    }
+	public BoldTest()
+	{
+	}
 
-    @Test
-    public void testBoldRender()
-    {
-        Bold b = new Bold();
-        b.setID("ID");
-        b.setText("Bold Text");
-        System.out.println(b.toString(true));
-        assertEquals("<b>Bold Text</b>", b.toString(true));
+	@Test
+	public void testBoldRender()
+	{
+		Bold b = new Bold();
+		b.setID("ID");
+		b.setText("Bold Text");
+		System.out.println(b.toString(true));
+		assertEquals("<b>Bold Text</b>", b.toString(true));
 
-    }
+	}
 
 }

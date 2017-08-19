@@ -19,67 +19,68 @@ package za.co.mmagon.jwebswing.base;
 import org.junit.Assert;
 import org.junit.Test;
 import za.co.mmagon.BaseTestClass;
-import za.co.mmagon.jwebswing.base.html.*;
+import za.co.mmagon.jwebswing.base.html.Body;
+import za.co.mmagon.jwebswing.base.html.Meta;
+import za.co.mmagon.jwebswing.base.html.Paragraph;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
 /**
- *
  * @author ged_m
  */
 public class ComponentHierarchyBaseTest extends BaseTestClass
 {
-
-    public ComponentHierarchyBaseTest()
-    {
-    }
-
-    @Test
-    public void test()
-    {
-        ComponentHierarchyBase head = new ComponentHierarchyBase(ComponentTypes.Head);
-        head.add(new Meta("name"));
-        head.add(new Meta(Meta.MetadataFields.Author, "Author Me"));
-        ComponentHierarchyBase body = new ComponentHierarchyBase(ComponentTypes.Body);
-        System.out.println(head.toString());
-        System.out.println(head.toString(true));
-        System.out.println(body.toString(true));
-    }
-
-    @Test
-    public void testChildrenPreConfigure()
-    {
-        Body b = getPage().getBody();
-        Paragraph p = new Paragraph("Text");
-        b.add(p);
-        b.preConfigure();
-        System.out.println(p);
-        //System.out.println(b.getPage().toString(true));
-    }
-
-    @Test
-    public void testClasses()
-    {
-        ComponentHierarchyBase tag = new ComponentHierarchyBase(ComponentTypes.Area);
-        tag.setID("testTag");
-        tag.addClass("This is a class");
-        tag.addClass("KKKKKKK");
-        System.out.println(tag);
-        System.out.println(tag.toString(true));
-        Assert.assertEquals("<area class=\"This is a class KKKKKKK\" id=\"testTag\">"
-                + "</area>", tag.toString(true));
-    }
-
-    @Test
-    public void testClassesTiny()
-    {
-        ComponentHierarchyBase tag = new ComponentHierarchyBase(ComponentTypes.Area);
-        tag.setID("testTag");
-        tag.setTiny(true);
-        tag.addClass("Class1");
-        tag.addClass("Class2");
-        System.out.println(tag);
-        System.out.println(tag.toString(true));
-        Assert.assertEquals("<area class=\"Class1 Class2\" id=\"testTag\"></area>", tag.toString(true));
-    }
-
+	
+	public ComponentHierarchyBaseTest()
+	{
+	}
+	
+	@Test
+	public void test()
+	{
+		ComponentHierarchyBase head = new ComponentHierarchyBase(ComponentTypes.Head);
+		head.add(new Meta("name"));
+		head.add(new Meta(Meta.MetadataFields.Author, "Author Me"));
+		ComponentHierarchyBase body = new ComponentHierarchyBase(ComponentTypes.Body);
+		System.out.println(head.toString());
+		System.out.println(head.toString(true));
+		System.out.println(body.toString(true));
+	}
+	
+	@Test
+	public void testChildrenPreConfigure()
+	{
+		Body b = getPage().getBody();
+		Paragraph p = new Paragraph("Text");
+		b.add(p);
+		b.preConfigure();
+		System.out.println(p);
+		//System.out.println(b.getPage().toString(true));
+	}
+	
+	@Test
+	public void testClasses()
+	{
+		ComponentHierarchyBase tag = new ComponentHierarchyBase(ComponentTypes.Area);
+		tag.setID("testTag");
+		tag.addClass("This is a class");
+		tag.addClass("KKKKKKK");
+		System.out.println(tag);
+		System.out.println(tag.toString(true));
+		Assert.assertEquals("<area class=\"This is a class KKKKKKK\" id=\"testTag\">"
+				                    + "</area>", tag.toString(true));
+	}
+	
+	@Test
+	public void testClassesTiny()
+	{
+		ComponentHierarchyBase tag = new ComponentHierarchyBase(ComponentTypes.Area);
+		tag.setID("testTag");
+		tag.setTiny(true);
+		tag.addClass("Class1");
+		tag.addClass("Class2");
+		System.out.println(tag);
+		System.out.println(tag.toString(true));
+		Assert.assertEquals("<area class=\"Class1 Class2\" id=\"testTag\"></area>", tag.toString(true));
+	}
+	
 }

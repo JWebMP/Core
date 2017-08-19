@@ -1,7 +1,8 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.interfaces;
 
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.CustomCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationAdapter;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationClass;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CustomCSS;
 
 /**
  * Any custom css record you want
@@ -11,27 +12,27 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.CustomCSSImpl;
 public class CustomCSSImpl extends CSSImplementationAdapter<CustomCSS, CustomCSSImpl> implements CSSImplementationClass<CustomCSS, CustomCSSImpl>
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private NameValuePairCSSImpl[] valuePair;
+	private NameValuePairCSSImpl[] valuePair;
 
-    /**
-     * A Name Value Pair for CSS Properties
-     *
-     * @return
-     */
-    public NameValuePairCSSImpl[] value()
-    {
-        return valuePair;
-    }
+	/**
+	 * A Name Value Pair for CSS Properties
+	 *
+	 * @return
+	 */
+	public NameValuePairCSSImpl[] value()
+	{
+		return valuePair;
+	}
 
-    /**
-     * Sets the name value pair
-     *
-     * @param valuePair
-     */
-    public void setvalue(NameValuePairCSS[] valuePair)
-    {
-        this.valuePair = (NameValuePairCSSImpl[]) valuePair;
-    }
+	/**
+	 * Sets the name value pair
+	 *
+	 * @param valuePair
+	 */
+	public void setvalue(NameValuePairCSS[] valuePair)
+	{
+		this.valuePair = (NameValuePairCSSImpl[]) valuePair;
+	}
 }

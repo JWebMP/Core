@@ -16,28 +16,28 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class SummaryTest
 {
-
-    public SummaryTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        Summary s = new Summary("ssss");
-        s.setID("id");
-        System.out.println(s.toString(true));
-        assertEquals(""
-                + "<summary id=\"id\">ssss</summary>", s.toString(true).toString());
-    }
-
+	
+	public SummaryTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		Summary s = new Summary("ssss");
+		s.setID("id");
+		System.out.println(s.toString(true));
+		assertEquals(""
+				             + "<summary id=\"id\">ssss</summary>", s.toString(true).toString());
+	}
+	
 }

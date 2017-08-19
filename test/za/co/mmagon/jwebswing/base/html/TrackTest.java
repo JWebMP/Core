@@ -16,28 +16,28 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class TrackTest
 {
 
-    public TrackTest()
-    {
-    }
+	public TrackTest()
+	{
+	}
 
-    @Test
-    public void testSomeMethod()
-    {
-        Track t = new Track();
-        t.setID("id");
-        System.out.println(t.toString(true));
-        assertEquals(""
-                + "<track id=\"id\"></track>", t.toString(true).toString());
-    }
+	@Test
+	public void testSomeMethod()
+	{
+		Track t = new Track();
+		t.setID("id");
+		System.out.println(t.toString(true));
+		assertEquals(""
+				             + "<track id=\"id\"></track>", t.toString(true).toString());
+	}
 
 }

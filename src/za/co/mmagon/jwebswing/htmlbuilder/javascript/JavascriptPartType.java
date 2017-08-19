@@ -17,27 +17,26 @@
 package za.co.mmagon.jwebswing.htmlbuilder.javascript;
 
 /**
- *
  * @author Marc Magon
- * @since 31 Aug 2015
  * @version 1.0
  * /**
  * Determines how to display the key to the object
+ * @since 31 Aug 2015
  */
 public enum JavascriptPartType
 {
 
-    /**
-     * Don't use quotes around the key
-     */
-    Javascript,
-    /**
-     * Use quotes around the key
-     */
-    JSON,
-    /**
-     * As a Function
-     */
-    Function;
+	/**
+	 * Don't use quotes around the key
+	 */
+	Javascript,
+	/**
+	 * Use quotes around the key
+	 */
+	JSON,
+	/**
+	 * As a Function
+	 */
+	Function;
 
 }

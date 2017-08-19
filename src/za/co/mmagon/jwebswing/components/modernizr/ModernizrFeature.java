@@ -25,27 +25,28 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  * Adds on a ToolTip, String for custom text using header theme, Div for custom contents
  *
  * @author MMagon
- * @since 2013/01/16
  * @version 1.0
+ * @since 2013/01/16
  */
 public class ModernizrFeature extends Feature<JavaScriptPart, ModernizrFeature> implements ModernizrFeatures, GlobalFeatures
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private final Component forComponent;
+	private final Component forComponent;
 
-    /**
-     * Constructs a new Tooltip ComponentFeatureBase for a component. Adds the tooltip text as the Title attribute to the component
-     * <p>
-     * @param forComponent
-     */
-    public ModernizrFeature(Component forComponent)
-    {
-        super("ModernizrFeature");
-        this.forComponent = forComponent;
-        getJavascriptReferences().add(ModernizrReferencePool.ModernizrReference.getJavaScriptReference());
-        // getCssReferences().add(JQXReferencePool.Core.getCssReference());
-    }
+	/**
+	 * Constructs a new Tooltip ComponentFeatureBase for a component. Adds the tooltip text as the Title attribute to the component
+	 * <p>
+	 *
+	 * @param forComponent
+	 */
+	public ModernizrFeature(Component forComponent)
+	{
+		super("ModernizrFeature");
+		this.forComponent = forComponent;
+		getJavascriptReferences().add(ModernizrReferencePool.ModernizrReference.getJavaScriptReference());
+		// getCssReferences().add(JQXReferencePool.Core.getCssReference());
+	}
 
 }

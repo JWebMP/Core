@@ -16,11 +16,11 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.margins;
 
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
 import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.MarginSetting;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+
 import java.lang.annotation.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
 
 /**
  * The CSS margin properties are used to generate space around elements.
@@ -32,76 +32,76 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
  * @since 18 Jan 2016
  */
 @Target(
-        {
-            ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
-        })
+		{
+				ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
+		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
 public @interface MarginsCSS
 {
 
-    /**
-     * The shorthand for margin
-     *
-     * @return
-     */
-    public Margin Margin() default @Margin;
+	/**
+	 * The shorthand for margin
+	 *
+	 * @return
+	 */
+	public Margin Margin() default @Margin;
 
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @return
-     */
-    public MeasurementCSS MarginRight() default @MeasurementCSS;
+	/**
+	 * The CSS margin properties set the size of the white space OUTSIDE the border.
+	 *
+	 * @return
+	 */
+	public MeasurementCSS MarginRight() default @MeasurementCSS;
 
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @return
-     */
-    public MarginSetting MarginRight$() default MarginSetting.Unset;
+	/**
+	 * The CSS margin properties set the size of the white space OUTSIDE the border.
+	 *
+	 * @return
+	 */
+	public MarginSetting MarginRight$() default MarginSetting.Unset;
 
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @return
-     */
-    public MeasurementCSS MarginLeft() default @MeasurementCSS;
+	/**
+	 * The CSS margin properties set the size of the white space OUTSIDE the border.
+	 *
+	 * @return
+	 */
+	public MeasurementCSS MarginLeft() default @MeasurementCSS;
 
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @return
-     */
-    public MarginSetting MarginLeft$() default MarginSetting.Unset;
+	/**
+	 * The CSS margin properties set the size of the white space OUTSIDE the border.
+	 *
+	 * @return
+	 */
+	public MarginSetting MarginLeft$() default MarginSetting.Unset;
 
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @return
-     */
-    public MeasurementCSS MarginTop() default @MeasurementCSS;
+	/**
+	 * The CSS margin properties set the size of the white space OUTSIDE the border.
+	 *
+	 * @return
+	 */
+	public MeasurementCSS MarginTop() default @MeasurementCSS;
 
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @return
-     */
-    public MarginSetting MarginTop$() default MarginSetting.Unset;
+	/**
+	 * The CSS margin properties set the size of the white space OUTSIDE the border.
+	 *
+	 * @return
+	 */
+	public MarginSetting MarginTop$() default MarginSetting.Unset;
 
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @return
-     */
-    public MeasurementCSS MarginBottom() default @MeasurementCSS;
+	/**
+	 * The CSS margin properties set the size of the white space OUTSIDE the border.
+	 *
+	 * @return
+	 */
+	public MeasurementCSS MarginBottom() default @MeasurementCSS;
 
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @return
-     */
-    public MarginSetting MarginBottom$() default MarginSetting.Unset;
+	/**
+	 * The CSS margin properties set the size of the white space OUTSIDE the border.
+	 *
+	 * @return
+	 */
+	public MarginSetting MarginBottom$() default MarginSetting.Unset;
 
 }

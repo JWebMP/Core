@@ -17,28 +17,26 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
- *
  * @author GedMarc
  */
 public class SourceTest
 {
-    
-    public SourceTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        Audio a = new Audio("url");
-        a.setID("id");
-        Source s = new Source();
-        s.setID("id");
-        a.add(s);
-        System.out.println(a.toString(true));
-    }
-    
+	
+	public SourceTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		Audio a = new Audio("url");
+		a.setID("id");
+		Source s = new Source();
+		s.setID("id");
+		a.add(s);
+		System.out.println(a.toString(true));
+	}
+	
 }

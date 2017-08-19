@@ -20,21 +20,21 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputRadioTypeAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 
 /**
+ * @param <J>
  *
  * @author GedMarc
- * @param <J>
  */
 public class InputRadioType<J extends InputRadioType<J>>
-        extends Input<InputRadioTypeAttributes, J>
+		extends Input<InputRadioTypeAttributes, J>
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new check box
-     */
-    public InputRadioType()
-    {
-        super(InputTypes.Radio);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new check box
+	 */
+	public InputRadioType()
+	{
+		super(InputTypes.Radio);
+	}
 }

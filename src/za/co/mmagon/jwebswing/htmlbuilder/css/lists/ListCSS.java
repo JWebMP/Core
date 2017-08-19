@@ -16,9 +16,10 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.lists;
 
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
+import za.co.mmagon.jwebswing.htmlbuilder.css.image.ImageCSS;
+
 import java.lang.annotation.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.image.*;
 
 /**
  * In HTML, there are two main types of lists:
@@ -37,30 +38,33 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.image.*;
  * @since 18 Jan 2016
  */
 @Target(
-        {
-            ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
-        })
+		{
+				ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
+		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
 public @interface ListCSS
 {
 
-    /**
-     * Specifies an image as the list-item marker
-     * @return 
-     */
-    public ImageCSS ListStyleImage() default @ImageCSS;
+	/**
+	 * Specifies an image as the list-item marker
+	 *
+	 * @return
+	 */
+	public ImageCSS ListStyleImage() default @ImageCSS;
 
-    /**
-     * Specifies if the list-item markers should appear inside or outside the content flow
-     * @return 
-     */
-    public ListStylePosition ListStylePosition() default ListStylePosition.Unset;
+	/**
+	 * Specifies if the list-item markers should appear inside or outside the content flow
+	 *
+	 * @return
+	 */
+	public ListStylePosition ListStylePosition() default ListStylePosition.Unset;
 
-    /**
-     * Specifies the type of list-item marker
-     * @return 
-     */
-    public ListStyleType ListStyleType() default ListStyleType.Unset;
+	/**
+	 * Specifies the type of list-item marker
+	 *
+	 * @return
+	 */
+	public ListStyleType ListStyleType() default ListStyleType.Unset;
 }

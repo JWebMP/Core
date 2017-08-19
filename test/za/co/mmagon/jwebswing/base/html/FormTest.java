@@ -20,39 +20,38 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class FormTest
 {
 
-    Form f = new Form();
+	Form f = new Form();
 
-    public FormTest()
-    {
-    }
+	public FormTest()
+	{
+	}
 
-    private void reset()
-    {
-        f = new Form();
-        f.setID("id");
-    }
+	private void reset()
+	{
+		f = new Form();
+		f.setID("id");
+	}
 
-    @Test
-    public void testForm()
-    {
-        reset();
-        System.out.println(f.toString(true));
-        Assert.assertEquals("<form id=\"id\"></form>", f.toString(true));
-    }
+	@Test
+	public void testForm()
+	{
+		reset();
+		System.out.println(f.toString(true));
+		Assert.assertEquals("<form id=\"id\"></form>", f.toString(true));
+	}
 
-    @Test
-    public void testFormTiny()
-    {
-        reset();
-        f.setTiny(true);
-        System.out.println(f.toString(true));
-        Assert.assertEquals("<form id=\"id\"></form>", f.toString(true));
-        f.setTiny(false);
-    }
+	@Test
+	public void testFormTiny()
+	{
+		reset();
+		f.setTiny(true);
+		System.out.println(f.toString(true));
+		Assert.assertEquals("<form id=\"id\"></form>", f.toString(true));
+		f.setTiny(false);
+	}
 }

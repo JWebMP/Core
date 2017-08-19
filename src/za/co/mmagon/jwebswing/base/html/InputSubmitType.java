@@ -20,21 +20,21 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputSubmitTypeAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 
 /**
+ * @param <J>
  *
  * @author GedMarc
- * @param <J>
  */
 public class InputSubmitType<J extends InputSubmitType<J>>
-        extends Input<InputSubmitTypeAttributes, J>
+		extends Input<InputSubmitTypeAttributes, J>
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a search type input field
-     */
-    public InputSubmitType()
-    {
-        super(InputTypes.Submit);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a search type input field
+	 */
+	public InputSubmitType()
+	{
+		super(InputTypes.Submit);
+	}
 }

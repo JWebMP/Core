@@ -20,21 +20,20 @@ import za.co.mmagon.JWebSwingSiteBinder;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 
 /**
- *
  * @author Marc Magon
  * @since 26 Apr 2017
  */
 public class JWebSwingScriptsReference extends JavascriptReference
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /*
-     * Constructs a new JWebSwingScriptsReference
-     */
-    public JWebSwingScriptsReference()
-    {
-        super("JWSCRScript", 1.0, JWebSwingSiteBinder.getJWScriptLocation());
-        //Nothing needed
-    }
+	/*
+	 * Constructs a new JWebSwingScriptsReference
+	 */
+	public JWebSwingScriptsReference()
+	{
+		super("JWSCRScript", 1.0, JWebSwingSiteBinder.getJWScriptLocation());
+		//Nothing needed
+	}
 }

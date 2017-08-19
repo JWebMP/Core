@@ -21,32 +21,33 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 /**
  * Specifies the attributes for the Embed component
  * <p>
+ *
  * @author GedMarc
  */
 public enum EmbedAttributes implements AttributeDefinitions
 {
 
-    /**
-     * The height
-     */
-    Height,
-    /**
-     * The source for the object
-     */
-    Src,
-    /**
-     * Specifies the media type of the embedded content
-     */
-    Type,
-    /**
-     * Specifies the width of the embedded content
-     */
-    Width;
+	/**
+	 * The height
+	 */
+	Height,
+	/**
+	 * The source for the object
+	 */
+	Src,
+	/**
+	 * Specifies the media type of the embedded content
+	 */
+	Type,
+	/**
+	 * Specifies the width of the embedded content
+	 */
+	Width;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 
 }

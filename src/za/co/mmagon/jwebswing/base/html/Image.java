@@ -18,8 +18,12 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.ImageAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.FigureChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.ImageMapChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
@@ -48,44 +52,46 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * In XHTML the img tag must be properly closed.<p>
  * <p>
- * @author Marc Magon
+ *
  * @param <J>
+ *
+ * @author Marc Magon
  */
 public class Image<J extends Image<J>>
-        extends Component<NoChildren, ImageAttributes, GlobalFeatures, GlobalEvents, J>
-        implements ImageMapChildren, FigureChildren, GlobalChildren, ListItemChildren
+		extends Component<NoChildren, ImageAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ImageMapChildren, FigureChildren, GlobalChildren, ListItemChildren
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Construct a new Image
-     *
-     * @param image
-     */
-    public Image(String image)
-    {
-        super(ComponentTypes.Image);
-        setInlineClosingTag(true);
-        addAttribute(ImageAttributes.Src, image);
-    }
+	/**
+	 * Construct a new Image
+	 *
+	 * @param image
+	 */
+	public Image(String image)
+	{
+		super(ComponentTypes.Image);
+		setInlineClosingTag(true);
+		addAttribute(ImageAttributes.Src, image);
+	}
 
-    @Override
-    public boolean equals(Object obj)
-    {
-        if (!(obj instanceof Image))
-        {
-            return false;
-        }
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (!(obj instanceof Image))
+		{
+			return false;
+		}
 
-        return getAttribute(ImageAttributes.Src).equals(Image.class.cast(obj).getAttribute(ImageAttributes.Src));
-    }
+		return getAttribute(ImageAttributes.Src).equals(Image.class.cast(obj).getAttribute(ImageAttributes.Src));
+	}
 
-    @Override
-    public int hashCode()
-    {
-        int hash = 7;
-        return hash;
-    }
+	@Override
+	public int hashCode()
+	{
+		int hash = 7;
+		return hash;
+	}
 
 }

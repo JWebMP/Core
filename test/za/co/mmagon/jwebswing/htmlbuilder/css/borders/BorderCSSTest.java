@@ -16,29 +16,29 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 
-import java.util.ArrayList;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSComposer;
 
+import java.util.ArrayList;
+
 /**
- *
  * @author GedMarc
  */
 public class BorderCSSTest
 {
 
-    public BorderCSSTest()
-    {
-    }
+	public BorderCSSTest()
+	{
+	}
 
-    @Test
-    public void testBorder()
-    {
-        BorderCSSObjectTest cssObject = new BorderCSSObjectTest();
-        CSSComposer composer = new CSSComposer();
-        composer.addComponent(cssObject, new ArrayList<>());
-        System.out.println("out from : " + composer.toString());
-        //   Assert.assertEquals(composer.toString(), "#TestBorder {border:really deep colour;border-bottom-color:colourTop;border-left-style:double;}#text {border-bottom-color:antiquewhite;}");
-    }
+	@Test
+	public void testBorder()
+	{
+		BorderCSSObjectTest cssObject = new BorderCSSObjectTest();
+		CSSComposer composer = new CSSComposer();
+		composer.addComponent(cssObject, new ArrayList<>());
+		System.out.println("out from : " + composer.toString());
+		//   Assert.assertEquals(composer.toString(), "#TestBorder {border:really deep colour;border-bottom-color:colourTop;border-left-style:double;}#text {border-bottom-color:antiquewhite;}");
+	}
 
 }

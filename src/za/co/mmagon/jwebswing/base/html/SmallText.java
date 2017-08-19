@@ -39,37 +39,36 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * NONE.<p>
  *
- * @author GedMarc
  * @param <J>
  *
- * @since Mar 1, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
- *
+ * @since Mar 1, 2015
  */
 public class SmallText<J extends SmallText<J>>
-        extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements ParagraphChildren, PhraseChildren
+		extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ParagraphChildren, PhraseChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Construct a new instance of the small text
-     */
-    public SmallText()
-    {
-        this(null);
-    }
-
-    /**
-     * Specifies some small text
-     *
-     * @param text The raw text for the small text
-     */
-    public SmallText(String text)
-    {
-        super(ComponentTypes.SmallText);
-        setText(text);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Construct a new instance of the small text
+	 */
+	public SmallText()
+	{
+		this(null);
+	}
+	
+	/**
+	 * Specifies some small text
+	 *
+	 * @param text The raw text for the small text
+	 */
+	public SmallText(String text)
+	{
+		super(ComponentTypes.SmallText);
+		setText(text);
+	}
 }

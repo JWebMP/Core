@@ -20,23 +20,22 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class FigureTest
 {
 
-    public FigureTest()
-    {
-    }
+	public FigureTest()
+	{
+	}
 
-    @Test
-    public void testFigure()
-    {
-        Figure f = new Figure();
-        System.out.println(f.toString(true).toString());
-        Assert.assertEquals(""
-                + "<figure></figure>", f.toString(true).toString());
-    }
+	@Test
+	public void testFigure()
+	{
+		Figure f = new Figure();
+		System.out.println(f.toString(true).toString());
+		Assert.assertEquals(""
+				                    + "<figure></figure>", f.toString(true).toString());
+	}
 
 }

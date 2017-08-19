@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.base.html.interfaces;
 
 /**
- *
  * @author GedMarc
  */
 public interface FigureChildren extends GlobalChildren

@@ -17,51 +17,50 @@
 package za.co.mmagon.jwebswing.annotations;
 
 /**
- *
  * @author Marc Magon
  * @since 05 Apr 2017
  */
 public enum PageTypes
 {
-    Default,
-    Mobile,
-    Error;
-    /**
-     * Any sub data
-     */
-    private String data;
+	Default,
+	Mobile,
+	Error;
+	/**
+	 * Any sub data
+	 */
+	private String data;
 
-    /**
-     * A new PageTypes
-     */
-    private PageTypes()
-    {
+	/**
+	 * A new PageTypes
+	 */
+	private PageTypes()
+	{
 
-    }
+	}
 
-    /**
-     * A new PageTypes with data
-     */
-    private PageTypes(String data)
-    {
+	/**
+	 * A new PageTypes with data
+	 */
+	private PageTypes(String data)
+	{
 
-    }
+	}
 
-    /**
-     * Returns the name or the data contained within
-     *
-     * @return
-     */
-    @Override
-    public String toString()
-    {
-        if (data != null && !data.isEmpty())
-        {
-            return data;
-        }
-        else
-        {
-            return name();
-        }
-    }
+	/**
+	 * Returns the name or the data contained within
+	 *
+	 * @return
+	 */
+	@Override
+	public String toString()
+	{
+		if (data != null && !data.isEmpty())
+		{
+			return data;
+		}
+		else
+		{
+			return name();
+		}
+	}
 }

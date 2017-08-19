@@ -16,28 +16,28 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class SpanTest
 {
 
-    public SpanTest()
-    {
-    }
+	public SpanTest()
+	{
+	}
 
-    @Test
-    public void testSomeMethod()
-    {
-        Span s = new Span();
-        s.setID("id");
-        System.out.println(s.toString(true));
-        assertEquals(""
-                + "<span id=\"id\"></span>", s.toString(true).toString());
-    }
+	@Test
+	public void testSomeMethod()
+	{
+		Span s = new Span();
+		s.setID("id");
+		System.out.println(s.toString(true));
+		assertEquals(""
+				             + "<span id=\"id\"></span>", s.toString(true).toString());
+	}
 
 }

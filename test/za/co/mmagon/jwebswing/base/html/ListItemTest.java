@@ -17,27 +17,25 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
- *
  * @author GedMarc
  */
 public class ListItemTest
 {
-    
-    public ListItemTest()
-    {
-    }
-
-    /**
-     * Test of getText method, of class ListItem.
-     */
-    @Test
-    public void testGetText()
-    {
-        ListItem li = new ListItem();
-        System.out.println(li.toString(true));
-    }
-    
+	
+	public ListItemTest()
+	{
+	}
+	
+	/**
+	 * Test of getText method, of class ListItem.
+	 */
+	@Test
+	public void testGetText()
+	{
+		ListItem li = new ListItem();
+		System.out.println(li.toString(true));
+	}
+	
 }

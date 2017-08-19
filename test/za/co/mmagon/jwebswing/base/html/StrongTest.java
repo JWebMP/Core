@@ -16,28 +16,28 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class StrongTest
 {
-
-    public StrongTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        Strong s = new Strong("strong");
-        s.setID("id");
-        System.out.println(s.toString(true).toString());
-        assertEquals(""
-                + "<strong id=\"id\">strong</strong>", s.toString(true).toString());
-    }
-
+	
+	public StrongTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		Strong s = new Strong("strong");
+		s.setID("id");
+		System.out.println(s.toString(true).toString());
+		assertEquals(""
+				             + "<strong id=\"id\">strong</strong>", s.toString(true).toString());
+	}
+	
 }

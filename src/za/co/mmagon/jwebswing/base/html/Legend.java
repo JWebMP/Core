@@ -34,26 +34,26 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The "align" attribute is not supported in HTML5.<p>
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
- * @since Feb 9, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
- *
+ * @since Feb 9, 2015
  */
 public class Legend<J extends Legend<J>>
-        extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements FieldSetChildren, NoNewLineBeforeClosingTag
+		extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements FieldSetChildren, NoNewLineBeforeClosingTag
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     *
-     */
-    public Legend()
-    {
-        super(ComponentTypes.Legend);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 *
+	 */
+	public Legend()
+	{
+		super(ComponentTypes.Legend);
+	}
 }

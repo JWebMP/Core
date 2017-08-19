@@ -19,24 +19,23 @@ package za.co.mmagon.jwebswing.base.html.attributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 
 /**
- *
  * @author GedMarc
  */
 public enum CanvasAttributes implements AttributeDefinitions
 {
-    /**
-     * Specifies the height
-     */
-    Height,
-    /**
-     * Specifies the width
-     */
-    Width;
+	/**
+	 * Specifies the height
+	 */
+	Height,
+	/**
+	 * Specifies the width
+	 */
+	Width;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 
 }

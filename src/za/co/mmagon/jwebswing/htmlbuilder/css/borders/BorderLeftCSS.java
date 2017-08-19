@@ -16,19 +16,15 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
 
+import java.lang.annotation.*;
+
 /**
- *
  * CSS Border Properties
  * <p>
  * The CSS border properties allow you to specify the style, width, and color of an element's border.
@@ -39,41 +35,41 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
  * see http://www.w3schools.com/css/css_border.asp
  */
 @Target(
-        {
-            ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
-        })
+		{
+				ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
+		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
 public @interface BorderLeftCSS
 {
 
-    /**
-     * Sets the colour of the left border
-     *
-     * @return
-     */
-    public ColourCSS BorderLeftColor() default @ColourCSS;
+	/**
+	 * Sets the colour of the left border
+	 *
+	 * @return
+	 */
+	public ColourCSS BorderLeftColor() default @ColourCSS;
 
-    /**
-     * Sets the colour of the left border
-     *
-     * @return
-     */
-    public ColourNames BorderLeftColor$() default ColourNames.Unset;
+	/**
+	 * Sets the colour of the left border
+	 *
+	 * @return
+	 */
+	public ColourNames BorderLeftColor$() default ColourNames.Unset;
 
-    /**
-     * Sets the style of the left border
-     *
-     * @return
-     */
-    public BorderStyles BorderLeftStyle() default BorderStyles.Unset;
+	/**
+	 * Sets the style of the left border
+	 *
+	 * @return
+	 */
+	public BorderStyles BorderLeftStyle() default BorderStyles.Unset;
 
-    /**
-     * Sets the width of the left border
-     *
-     * @return
-     */
-    public MeasurementCSS BorderLeftWidth() default @MeasurementCSS;
+	/**
+	 * Sets the width of the left border
+	 *
+	 * @return
+	 */
+	public MeasurementCSS BorderLeftWidth() default @MeasurementCSS;
 
 }

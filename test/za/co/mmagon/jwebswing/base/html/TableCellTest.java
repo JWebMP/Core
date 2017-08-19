@@ -16,40 +16,40 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.base.ComponentBase;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class TableCellTest
 {
-
-    public TableCellTest()
-    {
-    }
-
-    /**
-     * Test of getColumnSpan method, of class TableCell.
-     */
-    @Test
-    public void testGetColumnSpan()
-    {
-        TableCell tc = new TableCell("blah");
-        tc.setID("id");
-        ComponentBase.class.cast(tc.getChildren().get(0)).setID("id");
-        System.out.println(tc.toString(true));
-        assertEquals("<td id=\"id\">\n"
-                + "	<p id=\"id\">blah</p>\n"
-                + "</td>", tc.toString(true).toString());
-
-        tc.setColumnSpan(0);
-        System.out.println(tc.toString(true));
-        assertEquals("<td colspan=\"0\" id=\"id\">\n"
-                + "	<p id=\"id\">blah</p>\n"
-                + "</td>", tc.toString(true).toString());
-    }
-
+	
+	public TableCellTest()
+	{
+	}
+	
+	/**
+	 * Test of getColumnSpan method, of class TableCell.
+	 */
+	@Test
+	public void testGetColumnSpan()
+	{
+		TableCell tc = new TableCell("blah");
+		tc.setID("id");
+		ComponentBase.class.cast(tc.getChildren().get(0)).setID("id");
+		System.out.println(tc.toString(true));
+		assertEquals("<td id=\"id\">\n"
+				             + "	<p id=\"id\">blah</p>\n"
+				             + "</td>", tc.toString(true).toString());
+		
+		tc.setColumnSpan(0);
+		System.out.println(tc.toString(true));
+		assertEquals("<td colspan=\"0\" id=\"id\">\n"
+				             + "	<p id=\"id\">blah</p>\n"
+				             + "</td>", tc.toString(true).toString());
+	}
+	
 }

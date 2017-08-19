@@ -20,11 +20,10 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 
 /**
  * Marks a tag as not being capable of having children
- * @since 2013/11/12
- * @version 1.0
- * @author MMagon
  *
- * 
+ * @author MMagon
+ * @version 1.0
+ * @since 2013/11/12
  */
 
 public interface NoChildren extends GlobalChildren

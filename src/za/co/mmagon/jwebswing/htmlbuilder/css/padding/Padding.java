@@ -16,13 +16,10 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.padding;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
+
+import java.lang.annotation.*;
 
 /**
  * To shorten the code, it is possible to specify all the margin properties in one property.
@@ -31,68 +28,68 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
  * @since 18 Jan 2016
  */
 @Target(
-        {
-            ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
-        })
+		{
+				ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
+		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
 public @interface Padding
 {
-
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @return
-     */
-    public MeasurementCSS PaddingRight() default @MeasurementCSS;
-
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @return
-     */
-    public PaddingSetting PaddingRight$() default PaddingSetting.Unset;
-
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @return
-     */
-    public MeasurementCSS PaddingLeft() default @MeasurementCSS;
-
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @return
-     */
-    public PaddingSetting PaddingLeft$() default PaddingSetting.Unset;
-
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @return
-     */
-    public MeasurementCSS PaddingTop() default @MeasurementCSS;
-
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @return
-     */
-    public PaddingSetting PaddingTop$() default PaddingSetting.Unset;
-
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @return
-     */
-    public MeasurementCSS PaddingBottom() default @MeasurementCSS;
-
-    /**
-     * The CSS margin properties set the size of the white space OUTSIDE the border.
-     *
-     * @return
-     */
-    public PaddingSetting PaddingBottom$() default PaddingSetting.Unset;
+	
+	/**
+	 * The CSS margin properties set the size of the white space OUTSIDE the border.
+	 *
+	 * @return
+	 */
+	public MeasurementCSS PaddingRight() default @MeasurementCSS;
+	
+	/**
+	 * The CSS margin properties set the size of the white space OUTSIDE the border.
+	 *
+	 * @return
+	 */
+	public PaddingSetting PaddingRight$() default PaddingSetting.Unset;
+	
+	/**
+	 * The CSS margin properties set the size of the white space OUTSIDE the border.
+	 *
+	 * @return
+	 */
+	public MeasurementCSS PaddingLeft() default @MeasurementCSS;
+	
+	/**
+	 * The CSS margin properties set the size of the white space OUTSIDE the border.
+	 *
+	 * @return
+	 */
+	public PaddingSetting PaddingLeft$() default PaddingSetting.Unset;
+	
+	/**
+	 * The CSS margin properties set the size of the white space OUTSIDE the border.
+	 *
+	 * @return
+	 */
+	public MeasurementCSS PaddingTop() default @MeasurementCSS;
+	
+	/**
+	 * The CSS margin properties set the size of the white space OUTSIDE the border.
+	 *
+	 * @return
+	 */
+	public PaddingSetting PaddingTop$() default PaddingSetting.Unset;
+	
+	/**
+	 * The CSS margin properties set the size of the white space OUTSIDE the border.
+	 *
+	 * @return
+	 */
+	public MeasurementCSS PaddingBottom() default @MeasurementCSS;
+	
+	/**
+	 * The CSS margin properties set the size of the white space OUTSIDE the border.
+	 *
+	 * @return
+	 */
+	public PaddingSetting PaddingBottom$() default PaddingSetting.Unset;
 }

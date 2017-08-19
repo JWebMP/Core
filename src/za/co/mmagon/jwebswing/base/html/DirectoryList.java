@@ -36,22 +36,23 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The dir tag is not supported in HTML5.
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
+ * @author GedMarc
  * @deprecated
  */
 public class DirectoryList<J extends DirectoryList<J>>
-        extends Component<DirectoryListChildren, DirectoryListAttributes, NoFeatures, NoEvents, J>
+		extends Component<DirectoryListChildren, DirectoryListAttributes, NoFeatures, NoEvents, J>
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * @deprecated
-     */
-    public DirectoryList()
-    {
-        super(ComponentTypes.DirectoryList);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * @deprecated
+	 */
+	public DirectoryList()
+	{
+		super(ComponentTypes.DirectoryList);
+	}
 }

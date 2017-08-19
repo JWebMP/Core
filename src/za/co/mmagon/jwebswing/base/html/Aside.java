@@ -18,7 +18,10 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -48,43 +51,41 @@ import za.co.mmagon.logger.LogFactory;
  *
  * @param <J>
  *
- * @since 2014/10/26
- * @version 1.0
  * @author MMagon
- *
- *
+ * @version 1.0
+ * @since 2014/10/26
  */
 public class Aside<J extends Aside<J>>
-        extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements GlobalChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
+		extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements GlobalChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
-    /**
-     * Logger for the Component
-     */
-    private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("Aside");
-    /**
-     * Serial Version for all Components and their compatibility
-     */
-    private static final long serialVersionUID = 1l;
+	/**
+	 * Logger for the Component
+	 */
+	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("Aside");
+	/**
+	 * Serial Version for all Components and their compatibility
+	 */
+	private static final long serialVersionUID = 1l;
 
-    /**
-     * Constructs a new ASide with the given text set as Raw Text
-     *
-     * @param text The text for this ASide
-     */
-    public Aside(String text)
-    {
-        super(ComponentTypes.Aside.getComponentTag(), ComponentTypes.Aside);
-        setText(text);
-    }
+	/**
+	 * Constructs a new ASide with the given text set as Raw Text
+	 *
+	 * @param text The text for this ASide
+	 */
+	public Aside(String text)
+	{
+		super(ComponentTypes.Aside.getComponentTag(), ComponentTypes.Aside);
+		setText(text);
+	}
 
-    /**
-     * Constructs a new instance of Aside
-     */
-    public Aside()
-    {
-        this(null);
-    }
+	/**
+	 * Constructs a new instance of Aside
+	 */
+	public Aside()
+	{
+		this(null);
+	}
 
 }

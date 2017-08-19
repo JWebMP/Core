@@ -18,7 +18,9 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.PhraseChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
@@ -31,38 +33,37 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * Tip: This tag is not deprecated, but it is possible to achieve richer effect with CSS<p>
  *
- * @author GedMarc
  * @param <J>
  *
- * @since Mar 1, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
- *
+ * @since Mar 1, 2015
  */
 public class Strong<J extends Strong<J>>
-        extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements PhraseChildren, ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
+		extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements PhraseChildren, ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new strong text
-     *
-     * @param text The text to highlight
-     */
-    public Strong(String text)
-    {
-        super(ComponentTypes.Strong);
-        setText(text);
-    }
-
-    /**
-     * Constructs a blank instance of strong
-     */
-    public Strong()
-    {
-        this(null);
-    }
-
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new strong text
+	 *
+	 * @param text The text to highlight
+	 */
+	public Strong(String text)
+	{
+		super(ComponentTypes.Strong);
+		setText(text);
+	}
+	
+	/**
+	 * Constructs a blank instance of strong
+	 */
+	public Strong()
+	{
+		this(null);
+	}
+	
 }

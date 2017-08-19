@@ -19,42 +19,41 @@ package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.H1;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
 import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSComposer;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
 
 /**
- *
  * @author GedMarc
  * @since 17 Jan 2016
  */
 @BorderCSS(BorderBottomColor = @ColourCSS("colourTop"), BorderLeftStyle = BorderStyles.Double,
-        Border = @Border(Border = @BorderLeftCSS(BorderLeftColor = @ColourCSS("really deep colour"))))
+		Border = @Border(Border = @BorderLeftCSS(BorderLeftColor = @ColourCSS("really deep colour"))))
 public class BorderCSSObjectTest extends Div
 {
 
-    @BorderCSS(BorderBottomColor$ = ColourNames.AntiqueWhite, Border = @Border())
-    private H1 hello;
+	@BorderCSS(BorderBottomColor$ = ColourNames.AntiqueWhite, Border = @Border())
+	private H1 hello;
 
-    public BorderCSSObjectTest()
-    {
-        hello = new H1("Testing CSS Object Hello Field");
-        setID("TestBorder");
-        hello.setID("text");
-    }
+	public BorderCSSObjectTest()
+	{
+		hello = new H1("Testing CSS Object Hello Field");
+		setID("TestBorder");
+		hello.setID("text");
+	}
 
-    @Test
-    public void testObject()
-    {
-        CSSComposer comp = new CSSComposer();
-        comp.addComponent(this, true);
-        System.out.println(comp.toString());
-        // comp.getBlockMaster().reset();
-        //comp.addComponent(hello, true);
-        // hello.setBackgroundColor$(ColourNames.DarkGoldenRod);
-        // System.out.println(comp);
+	@Test
+	public void testObject()
+	{
+		CSSComposer comp = new CSSComposer();
+		comp.addComponent(this, true);
+		System.out.println(comp.toString());
+		// comp.getBlockMaster().reset();
+		//comp.addComponent(hello, true);
+		// hello.setBackgroundColor$(ColourNames.DarkGoldenRod);
+		// System.out.println(comp);
 
 //        Assert.assertEquals("#TestBorder {border:really deep colour;border-bottom-color:colourTop;border-left-style:double;}#text {border-bottom-color:antiquewhite;}", comp.toString());
-    }
+	}
 }

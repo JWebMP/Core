@@ -19,21 +19,20 @@ package za.co.mmagon.jwebswing.base.html;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class EmphasizedTest
 {
-    
-    public EmphasizedTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        Emphasized em = new Emphasized("Emphasized Text");
-        System.out.println(em.toString(true));
-    }
-    
+	
+	public EmphasizedTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		Emphasized em = new Emphasized("Emphasized Text");
+		System.out.println(em.toString(true));
+	}
+	
 }

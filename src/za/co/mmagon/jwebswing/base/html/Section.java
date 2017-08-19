@@ -36,25 +36,25 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;section&gt; tag is new in HTML5.<p>
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
- * @since Mar 1, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
- *
+ * @since Mar 1, 2015
  */
 public class Section<J extends Section<J>>
-        extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Create a new section
-     */
-    public Section()
-    {
-        super(ComponentTypes.Section);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Create a new section
+	 */
+	public Section()
+	{
+		super(ComponentTypes.Section);
+	}
 }

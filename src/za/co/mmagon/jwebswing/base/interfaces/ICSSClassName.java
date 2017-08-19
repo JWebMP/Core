@@ -21,7 +21,6 @@ package za.co.mmagon.jwebswing.base.interfaces;
  *
  * @author GedMarc
  * @since 13 Feb 2017
- *
  */
 public interface ICSSClassName
 {

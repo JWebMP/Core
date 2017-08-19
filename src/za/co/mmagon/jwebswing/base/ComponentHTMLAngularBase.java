@@ -17,8 +17,6 @@
 package za.co.mmagon.jwebswing.base;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import java.util.HashMap;
-import java.util.Map;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
@@ -27,6 +25,9 @@ import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.interfaces.IComponentHTMLAngularBase;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Enables Angular
@@ -173,15 +174,18 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
      * @return
      */
     @Override
-    public Map<Enum, String> getAttributesAll()
+    public Map<String, String> getAttributes()
     {
-        HashMap<Enum, String> allAttributes = (HashMap<Enum, String>) super.getAttributesAll();
-        getAttributesAngular().entrySet().stream().filter(a -> a != null).forEach((entry)
+        Map<String, String> allAttributes = (Map<String, String>) super.getAttributes();
+        getAttributesAngular().entrySet().forEach((entry)
                 ->
         {
-            AngularAttributes key = entry.getKey();
-            String value = entry.getValue();
-            allAttributes.put(key, value);
+            if (entry != null)
+            {
+                AngularAttributes key = entry.getKey();
+                String value = entry.getValue();
+                allAttributes.put(key.toString(), value);
+            }
         });
         return allAttributes;
     }
@@ -212,6 +216,22 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
         addAttribute(AngularAttributes.ngCloak, null);
         AngularPageConfigurator.setRequired(this, true);
         return (J) this;
+    }
+
+    @Override
+    public void destroy()
+    {
+        if (this.angularObjects != null)
+        {
+            this.angularObjects.clear();
+            this.angularObjects = null;
+        }
+        if (this.attributesAngular != null)
+        {
+            this.attributesAngular.clear();
+            this.attributesAngular = null;
+        }
+        super.destroy();
     }
 
 }

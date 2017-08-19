@@ -18,7 +18,9 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.attributes.StyleAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoClassAttribute;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
@@ -42,48 +44,51 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * Each HTML document can contain multiple style tags.<p>
  * <p>
  * <p>
+ *
  * @param <J>
  *
- * @since 2013/11/12
- * @version 1.0
  * @author MMagon
- *
  * <p>
+ * <p>
+ * @version 1.0
+ * @since 2013/11/12
  */
 public class Style<J extends Style<J>>
-        extends ComponentHierarchyBase<NoChildren, StyleAttributes, NoFeatures, NoEvents, J>
-        implements NoIDTag, HeadChildren, NoClassAttribute
+		extends ComponentHierarchyBase<NoChildren, StyleAttributes, NoFeatures, NoEvents, J>
+		implements NoIDTag, HeadChildren, NoClassAttribute
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a new blank Style tag
-     */
-    public Style()
-    {
-        super(ComponentTypes.Style);
-        addAttribute(StyleAttributes.Type, "text/css");
-    }
+	/**
+	 * Constructs a new blank Style tag
+	 */
+	public Style()
+	{
+		super(ComponentTypes.Style);
+		addAttribute(StyleAttributes.Type, "text/css");
+	}
 
-    /**
-     * Sets the raw CSS Data
-     * <p>
-     * @param cssString
-     */
-    public void setCSS(String cssString)
-    {
-        setText(cssString);
-    }
+	/**
+	 * Returns the raw CSS Data
+	 * <p>
+	 *
+	 * @return
+	 */
+	public String getCSS()
+	{
+		return getText(0).toString();
+	}
 
-    /**
-     * Returns the raw CSS Data
-     * <p>
-     * @return
-     */
-    public String getCSS()
-    {
-        return getText(0).toString();
-    }
+	/**
+	 * Sets the raw CSS Data
+	 * <p>
+	 *
+	 * @param cssString
+	 */
+	public void setCSS(String cssString)
+	{
+		setText(cssString);
+	}
 
 }

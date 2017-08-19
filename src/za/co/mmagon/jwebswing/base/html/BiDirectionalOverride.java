@@ -18,7 +18,10 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.BiDirectionalOverrideAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.BiDirectionalOverrideChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
@@ -40,32 +43,35 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * Tip: You can also use the CSS "font-weight" property to set bold text.
  * <p>
- * @author Marc Magon
+ *
  * @param <J>
+ *
+ * @author Marc Magon
  */
 public class BiDirectionalOverride<J extends BiDirectionalOverride<J>>
-        extends Component<BiDirectionalOverrideChildren, BiDirectionalOverrideAttributes, GlobalFeatures, GlobalEvents, J>
-        implements ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag
+		extends Component<BiDirectionalOverrideChildren, BiDirectionalOverrideAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a bold section of text
-     */
-    public BiDirectionalOverride()
-    {
-        this(null);
-    }
-
-    /**
-     * Specifies the text as bold
-     * <p>
-     * @param text
-     */
-    public BiDirectionalOverride(String text)
-    {
-        super(ComponentTypes.BiDirectionalOverride.getComponentTag(), ComponentTypes.BiDirectionalOverride);
-        setText(text);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a bold section of text
+	 */
+	public BiDirectionalOverride()
+	{
+		this(null);
+	}
+	
+	/**
+	 * Specifies the text as bold
+	 * <p>
+	 *
+	 * @param text
+	 */
+	public BiDirectionalOverride(String text)
+	{
+		super(ComponentTypes.BiDirectionalOverride.getComponentTag(), ComponentTypes.BiDirectionalOverride);
+		setText(text);
+	}
 }

@@ -22,19 +22,19 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  * Specifies a quotations attributes
  *
  * @author GedMarc
- * @since Mar 1, 2015
  * @version 1.0
+ * @since Mar 1, 2015
  */
 public enum QuotationAttributes implements AttributeDefinitions
 {
-    /**
-     * Specifies the source URL of the quote
-     */
-    Cite;
+	/**
+	 * Specifies the source URL of the quote
+	 */
+	Cite;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

@@ -41,25 +41,25 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * To represent a gauge, use the meter tag instead.<p>
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
- * @since Mar 1, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
- *
+ * @since Mar 1, 2015
  */
 public class ProgressBar<J extends ProgressBar<J>>
-        extends Component<NoChildren, ProgressBarAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<NoChildren, ProgressBarAttributes, GlobalFeatures, GlobalEvents, J>
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new progress bar
-     */
-    public ProgressBar()
-    {
-        super(ComponentTypes.ProgressBar);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new progress bar
+	 */
+	public ProgressBar()
+	{
+		super(ComponentTypes.ProgressBar);
+	}
 }

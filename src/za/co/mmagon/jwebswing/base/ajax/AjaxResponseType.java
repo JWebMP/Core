@@ -24,33 +24,33 @@ package za.co.mmagon.jwebswing.base.ajax;
  */
 public enum AjaxResponseType
 {
-    Default("Information"),
-    Primary("Information"),
-    Success("Success"),
-    Info("Information"),
-    Warning("Warning"),
-    Danger("Danger");
+	Default("Information"),
+	Primary("Information"),
+	Success("Success"),
+	Info("Information"),
+	Warning("Warning"),
+	Danger("Danger");
 
-    private String valueString;
+	private String valueString;
 
-    /**
-     * Constructs with the given value string
-     *
-     * @param valueString
-     */
-    private AjaxResponseType(String valueString)
-    {
-        this.valueString = valueString;
-    }
+	/**
+	 * Constructs with the given value string
+	 *
+	 * @param valueString
+	 */
+	private AjaxResponseType(String valueString)
+	{
+		this.valueString = valueString;
+	}
 
-    /**
-     * Returns the value string associated with this type
-     *
-     * @return
-     */
-    @Override
-    public String toString()
-    {
-        return valueString;
-    }
+	/**
+	 * Returns the value string associated with this type
+	 *
+	 * @return
+	 */
+	@Override
+	public String toString()
+	{
+		return valueString;
+	}
 }

@@ -19,28 +19,27 @@ package za.co.mmagon.jwebswing.base.html.attributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 
 /**
- *
  * @author GedMarc
  */
 public enum LabelAttributes implements AttributeDefinitions
 {
 
-    /**
-     * Returns the labeled control
-     */
-    Control,
-    /**
-     * Returns a reference to the form that contains the label
-     */
-    Form,
-    /**
-     * Sets or returns the value of the for attribute of a label
-     */
-    For,;
+	/**
+	 * Returns the labeled control
+	 */
+	Control,
+	/**
+	 * Returns a reference to the form that contains the label
+	 */
+	Form,
+	/**
+	 * Sets or returns the value of the for attribute of a label
+	 */
+	For,;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

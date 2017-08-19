@@ -16,130 +16,133 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 
-import za.co.mmagon.jwebswing.base.client.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.colours.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.*;
-import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.*;
+import za.co.mmagon.jwebswing.base.client.CSSVersions;
+import za.co.mmagon.jwebswing.htmlbuilder.css.CSSDetail;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationAdapter;
+import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationClass;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSSImpl;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
+import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
+import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
 
 /**
  * CSS Border Properties
  * <p>
  * The CSS border properties allow you to specify the style, width, and color of an element's border.
  * <p>
+ *
  * @author GedMarc
  * @since 18 Jan 2016
  */
 public class BorderRightCSSImpl extends CSSImplementationAdapter<BorderRightCSS, BorderRightCSSImpl> implements CSSImplementationClass<BorderRightCSS, BorderRightCSSImpl>
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @CSSDetail(cssName = "border-right-color", cssVersion = CSSVersions.CSS21)
-    private ColourCSSImpl borderRightColor;
-    @CSSDetail(cssName = "border-right-color", cssVersion = CSSVersions.CSS21)
-    private ColourNames borderRightColor$;
-    @CSSDetail(cssName = "border-right-style", cssVersion = CSSVersions.CSS21)
-    private BorderStyles borderRightStyle;
-    @CSSDetail(cssName = "border-right-width", cssVersion = CSSVersions.CSS21)
-    private MeasurementCSSImpl borderRightWidth;
+	@CSSDetail(cssName = "border-right-color", cssVersion = CSSVersions.CSS21)
+	private ColourCSSImpl borderRightColor;
+	@CSSDetail(cssName = "border-right-color", cssVersion = CSSVersions.CSS21)
+	private ColourNames borderRightColor$;
+	@CSSDetail(cssName = "border-right-style", cssVersion = CSSVersions.CSS21)
+	private BorderStyles borderRightStyle;
+	@CSSDetail(cssName = "border-right-width", cssVersion = CSSVersions.CSS21)
+	private MeasurementCSSImpl borderRightWidth;
 
-    public BorderRightCSSImpl()
-    {
-    }
+	public BorderRightCSSImpl()
+	{
+	}
 
-    @Override
-    public String toString()
-    {
-        String out = "";
-        out += borderRightWidth + " ";
-        out += borderRightStyle + " ";
-        out += borderRightColor + " ";
-        out += borderRightColor$ + " ";
-        out = out.replaceAll("null", "");
-        out = out.trim();
-        return out;
-    }
+	@Override
+	public String toString()
+	{
+		String out = "";
+		out += borderRightWidth + " ";
+		out += borderRightStyle + " ";
+		out += borderRightColor + " ";
+		out += borderRightColor$ + " ";
+		out = out.replaceAll("null", "");
+		out = out.trim();
+		return out;
+	}
 
-    /**
-     * Gets the colour of the right border
-     *
-     * @return
-     */
-    public ColourCSSImpl getBorderRightColor()
-    {
-        return borderRightColor;
-    }
+	/**
+	 * Gets the colour of the right border
+	 *
+	 * @return
+	 */
+	public ColourCSSImpl getBorderRightColor()
+	{
+		return borderRightColor;
+	}
 
-    /**
-     * Sets the colour of the right border
-     *
-     * @return
-     */
-    public ColourNames getBorderRightColor$()
-    {
-        return borderRightColor$;
-    }
+	/**
+	 * Sets the border colour
+	 *
+	 * @param borderRightColor
+	 */
+	public void setBorderRightColor(ColourCSSImpl borderRightColor)
+	{
+		this.borderRightColor = borderRightColor;
+	}
 
-    /**
-     * Gets the style of the right border
-     *
-     * @return
-     */
-    public BorderStyles getBorderRightStyle()
-    {
-        return borderRightStyle;
-    }
+	/**
+	 * Sets the colour of the right border
+	 *
+	 * @return
+	 */
+	public ColourNames getBorderRightColor$()
+	{
+		return borderRightColor$;
+	}
 
-    /**
-     * Gets the width of the right border
-     *
-     * @return
-     */
-    public MeasurementCSSImpl getBorderRightWidth()
-    {
-        return borderRightWidth;
-    }
+	/**
+	 * Sets the border colour
+	 *
+	 * @param borderRightColor$
+	 */
+	public void setBorderRightColor$(ColourNames borderRightColor$)
+	{
+		this.borderRightColor$ = borderRightColor$;
+	}
 
-    /**
-     * Sets the border colour
-     *
-     * @param borderRightColor
-     */
-    public void setBorderRightColor(ColourCSSImpl borderRightColor)
-    {
-        this.borderRightColor = borderRightColor;
-    }
+	/**
+	 * Gets the style of the right border
+	 *
+	 * @return
+	 */
+	public BorderStyles getBorderRightStyle()
+	{
+		return borderRightStyle;
+	}
 
-    /**
-     * Sets the border colour
-     *
-     * @param borderRightColor$
-     */
-    public void setBorderRightColor$(ColourNames borderRightColor$)
-    {
-        this.borderRightColor$ = borderRightColor$;
-    }
+	/**
+	 * Sets the border style
+	 *
+	 * @param borderRightStyle
+	 */
+	public void setBorderRightStyle(BorderStyles borderRightStyle)
+	{
+		this.borderRightStyle = borderRightStyle;
+	}
 
-    /**
-     * Sets the border style
-     *
-     * @param borderRightStyle
-     */
-    public void setBorderRightStyle(BorderStyles borderRightStyle)
-    {
-        this.borderRightStyle = borderRightStyle;
-    }
+	/**
+	 * Gets the width of the right border
+	 *
+	 * @return
+	 */
+	public MeasurementCSSImpl getBorderRightWidth()
+	{
+		return borderRightWidth;
+	}
 
-    /**
-     * Sets the border width
-     *
-     * @param borderRightWidth
-     */
-    public void setBorderRightWidth(MeasurementCSSImpl borderRightWidth)
-    {
-        this.borderRightWidth = borderRightWidth;
-    }
+	/**
+	 * Sets the border width
+	 *
+	 * @param borderRightWidth
+	 */
+	public void setBorderRightWidth(MeasurementCSSImpl borderRightWidth)
+	{
+		this.borderRightWidth = borderRightWidth;
+	}
 
 }

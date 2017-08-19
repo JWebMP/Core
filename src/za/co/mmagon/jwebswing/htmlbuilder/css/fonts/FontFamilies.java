@@ -25,51 +25,52 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
  * Version: CSS1
  * JavaScript syntax: object.style.fontFamily="arial,sans-serif"
  * <p>
+ *
  * @author Marc Magon
  */
 public enum FontFamilies implements CSSEnumeration<FontFamilies>
 {
 
-    Times$New$Roman,
-    Georgia,
-    Courier$New,
-    Verdana,
-    Arial,
-    Lucida$Console,
-    None,
-    /**
-     * Sets this field as not set
-     */
-    Unset;
+	Times$New$Roman,
+	Georgia,
+	Courier$New,
+	Verdana,
+	Arial,
+	Lucida$Console,
+	None,
+	/**
+	 * Sets this field as not set
+	 */
+	Unset;
 
-    @Override
-    public String getValue()
-    {
-        return name();
-    }
+	@Override
+	public String getValue()
+	{
+		return name();
+	}
 
-    @Override
-    public FontFamilies getDefault()
-    {
-        return Unset;
-    }
+	@Override
+	public FontFamilies getDefault()
+	{
+		return Unset;
+	}
 
-    @Override
-    public String toString()
-    {
-        return super.toString().replace('$', ' ').toLowerCase();
-    }
+	@Override
+	public String toString()
+	{
+		return super.toString().replace('$', ' ').toLowerCase();
+	}
 
-    @Override
-    public String getJavascriptSyntax()
-    {
-        return "style.fontFamily";
-    }
+	@Override
+	public String getJavascriptSyntax()
+	{
+		return "style.fontFamily";
+	}
 
-    @Override
-    public CSSVersions getCSSVersion()
-    {
-        return CSSVersions.CSS1;
-    }
+	@Override
+	public CSSVersions getCSSVersion()
+	{
+		return CSSVersions.CSS1;
+	}
 
 }

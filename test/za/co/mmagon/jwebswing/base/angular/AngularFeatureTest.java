@@ -21,23 +21,22 @@ import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.Page;
 
 /**
- *
  * @author Marc Magon
  */
 public class AngularFeatureTest extends BaseTestClass
 {
 
-    public AngularFeatureTest()
-    {
-    }
+	public AngularFeatureTest()
+	{
+	}
 
-    @Test
-    public void testSomeMethod()
-    {
-        Page p = getInstance();
-        p.getBody().add("Hello");
-        AngularPageConfigurator.setRequired(p.getBody(), true);
-        System.out.println(p.toString(0));
-    }
+	@Test
+	public void testSomeMethod()
+	{
+		Page p = getInstance();
+		p.getBody().add("Hello");
+		AngularPageConfigurator.setRequired(p.getBody(), true);
+		System.out.println(p.toString(0));
+	}
 
 }

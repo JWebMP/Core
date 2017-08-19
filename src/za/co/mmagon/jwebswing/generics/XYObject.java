@@ -16,121 +16,124 @@
  */
 package za.co.mmagon.jwebswing.generics;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonRawValue;
+import com.fasterxml.jackson.annotation.JsonValue;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * This Class is basic XY Co-Ordinates
  *
- * @author GedMarc
  * @param <X> x Co-Ordinate Class
  * @param <Y> y Co-Ordinate class
  *
+ * @author GedMarc
  * @since 25 Dec 2015
  */
 public class XYObject<X extends Serializable, Y extends Serializable> implements Serializable
 {
-
-    private static final long serialVersionUID = 1L;
-
-    private final SimpleDateFormat outputFormat;
-
-    @JsonIgnore
-    private X X;
-    @JsonIgnore
-    private Y Y;
-
-    /**
-     * Constructs a blank XY Object
-     */
-    public XYObject()
-    {
-        this.outputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    }
-
-    /**
-     * Constructs with this XY Object
-     *
-     * @param X
-     * @param Y
-     */
-    public XYObject(X X, Y Y)
-    {
-        this.outputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        this.X = X;
-        this.Y = Y;
-    }
-
-    /**
-     * Returns X
-     *
-     * @return
-     */
-    public X getX()
-    {
-        return X;
-    }
-
-    /**
-     * Sets X
-     *
-     * @param X
-     */
-    public void setX(X X)
-    {
-        this.X = X;
-    }
-
-    /**
-     * Returns Y
-     *
-     * @return
-     */
-    public Y getY()
-    {
-        return Y;
-    }
-
-    /**
-     * Sets Y
-     *
-     * @param Y
-     */
-    public void setY(Y Y)
-    {
-        this.Y = Y;
-    }
-
-    /**
-     * An Array Representation [X,Y]
-     *
-     * @return
-     */
-    @Override
-    @JsonValue
-    @JsonRawValue
-    public String toString()
-    {
-        if (getX() != null && getY() != null)
-        {
-            if (!StringUtils.isNumericSpace(getX().toString()))
-            {
-                if (getX() instanceof Date)
-                {
-                    String formatted = "['" + outputFormat.format(Date.class.cast(getX())) + "'," + getY() + "]";
-                    return formatted;
-                }
-                else if (getX() instanceof String)
-                {
-                    return "['" + getX() + "'," + getY() + "]";
-                }
-            }
-            return "[" + getX() + "," + getY() + "]";
-        }
-        return "[]";
-    }
-
+	
+	private static final long serialVersionUID = 1L;
+	
+	private final SimpleDateFormat outputFormat;
+	
+	@JsonIgnore
+	private X X;
+	@JsonIgnore
+	private Y Y;
+	
+	/**
+	 * Constructs a blank XY Object
+	 */
+	public XYObject()
+	{
+		this.outputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	}
+	
+	/**
+	 * Constructs with this XY Object
+	 *
+	 * @param X
+	 * @param Y
+	 */
+	public XYObject(X X, Y Y)
+	{
+		this.outputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		this.X = X;
+		this.Y = Y;
+	}
+	
+	/**
+	 * Returns X
+	 *
+	 * @return
+	 */
+	public X getX()
+	{
+		return X;
+	}
+	
+	/**
+	 * Sets X
+	 *
+	 * @param X
+	 */
+	public void setX(X X)
+	{
+		this.X = X;
+	}
+	
+	/**
+	 * Returns Y
+	 *
+	 * @return
+	 */
+	public Y getY()
+	{
+		return Y;
+	}
+	
+	/**
+	 * Sets Y
+	 *
+	 * @param Y
+	 */
+	public void setY(Y Y)
+	{
+		this.Y = Y;
+	}
+	
+	/**
+	 * An Array Representation [X,Y]
+	 *
+	 * @return
+	 */
+	@Override
+	@JsonValue
+	@JsonRawValue
+	public String toString()
+	{
+		if (getX() != null && getY() != null)
+		{
+			if (!StringUtils.isNumericSpace(getX().toString()))
+			{
+				if (getX() instanceof Date)
+				{
+					String formatted = "['" + outputFormat.format(Date.class.cast(getX())) + "'," + getY() + "]";
+					return formatted;
+				}
+				else if (getX() instanceof String)
+				{
+					return "['" + getX() + "'," + getY() + "]";
+				}
+			}
+			return "[" + getX() + "," + getY() + "]";
+		}
+		return "[]";
+	}
+	
 }

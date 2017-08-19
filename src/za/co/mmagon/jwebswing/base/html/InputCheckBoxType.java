@@ -20,9 +20,9 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputCheckBoxTypeAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 
 /**
+ * @param <J>
  *
  * @author GedMarc
- * @param <J>
  */
 public class InputCheckBoxType<J extends InputCheckBoxType<J>>
         extends Input<InputCheckBoxTypeAttributes, J>
@@ -53,7 +53,7 @@ public class InputCheckBoxType<J extends InputCheckBoxType<J>>
         }
         else
         {
-            getAttributesCustom().remove(InputCheckBoxTypeAttributes.Checked.toString());
+            getAttributes().remove(InputCheckBoxTypeAttributes.Checked.toString());
         }
         return (J) this;
     }

@@ -25,36 +25,36 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum InputButtonTypeAttributes implements AttributeDefinitions
 {
-    /**
-     * The alternative text or tooltip to display
-     */
-    Alt,
-    /**
-     * HTML 5 Only
-     * Specifies whether an input element should have auto-complete enabled
-     */
-    AutoComplete,
-    /**
-     * HTML 5 Only
-     * Specifies that an input element should automatically get focus when the page loads
-     */
-    AutoFocus,
-    /**
-     * The value of the field
-     */
-    Value,
-    /**
-     * A reference to the form that contain the button
-     */
-    Form,
-    /**
-     * Sets the value of the name attribute of an input button
-     */
-    Name,;
+	/**
+	 * The alternative text or tooltip to display
+	 */
+	Alt,
+	/**
+	 * HTML 5 Only
+	 * Specifies whether an input element should have auto-complete enabled
+	 */
+	AutoComplete,
+	/**
+	 * HTML 5 Only
+	 * Specifies that an input element should automatically get focus when the page loads
+	 */
+	AutoFocus,
+	/**
+	 * The value of the field
+	 */
+	Value,
+	/**
+	 * A reference to the form that contain the button
+	 */
+	Form,
+	/**
+	 * Sets the value of the name attribute of an input button
+	 */
+	Name,;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

@@ -21,72 +21,74 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
 /**
- *
  * An enumeration of the available header types
  * <p>
+ *
  * @author GedMarc
  */
 public enum HeaderTypes implements AttributeDefinitions
 {
 
-    /**
-     * The Header 1 Size
-     */
-    H1(ComponentTypes.Header1),
-    /**
-     * The HeaderText 2 Size
-     */
-    H2(ComponentTypes.Header2),
-    /**
-     * The HeaderText 3 Size
-     */
-    H3(ComponentTypes.Header3),
-    /**
-     * The HeaderText 4 Size
-     */
-    H4(ComponentTypes.Header4),
-    /**
-     * The HeaderText 5 Size
-     */
-    H5(ComponentTypes.Header5),
-    /**
-     * The HeaderText 6 Size
-     */
-    H6(ComponentTypes.Header6);
+	/**
+	 * The Header 1 Size
+	 */
+	H1(ComponentTypes.Header1),
+	/**
+	 * The HeaderText 2 Size
+	 */
+	H2(ComponentTypes.Header2),
+	/**
+	 * The HeaderText 3 Size
+	 */
+	H3(ComponentTypes.Header3),
+	/**
+	 * The HeaderText 4 Size
+	 */
+	H4(ComponentTypes.Header4),
+	/**
+	 * The HeaderText 5 Size
+	 */
+	H5(ComponentTypes.Header5),
+	/**
+	 * The HeaderText 6 Size
+	 */
+	H6(ComponentTypes.Header6);
 
-    private final ComponentTypes linkedComponent;
+	private final ComponentTypes linkedComponent;
 
-    /**
-     * Constructs with linked Component
-     * <p>
-     * @param linkedComponent The linked component
-     */
-    private HeaderTypes(ComponentTypes linkedComponent)
-    {
-        this.linkedComponent = linkedComponent;
-    }
+	/**
+	 * Constructs with linked Component
+	 * <p>
+	 *
+	 * @param linkedComponent The linked component
+	 */
+	private HeaderTypes(ComponentTypes linkedComponent)
+	{
+		this.linkedComponent = linkedComponent;
+	}
 
-    /**
-     * Get Linked Component
-     * <p>
-     * @return The linked component
-     */
-    public ComponentTypes getLinkedComponent()
-    {
-        return linkedComponent;
-    }
+	/**
+	 * Get Linked Component
+	 * <p>
+	 *
+	 * @return The linked component
+	 */
+	public ComponentTypes getLinkedComponent()
+	{
+		return linkedComponent;
+	}
 
-    @JsonValue
-    @Override
-    public String toString()
-    {
-        return name().toLowerCase();
-    }
+	@JsonValue
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
+	}
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 
 }

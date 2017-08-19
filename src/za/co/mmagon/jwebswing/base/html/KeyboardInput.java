@@ -46,23 +46,23 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  *
  * @param <J>
  *
- * @since 2015/02/09
- * @version 1
  * @author GedMarc
+ * @version 1
+ * @since 2015/02/09
  */
 public class KeyboardInput<J extends KeyboardInput<J>>
-        extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements PhraseChildren
+		extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements PhraseChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new Keyboard Input
-     */
-    public KeyboardInput()
-    {
-        super(ComponentTypes.KeyboardInput);
-    }
-
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new Keyboard Input
+	 */
+	public KeyboardInput()
+	{
+		super(ComponentTypes.KeyboardInput);
+	}
+	
 }

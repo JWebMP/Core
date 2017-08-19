@@ -19,22 +19,21 @@ package za.co.mmagon.jwebswing.base.html;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class DescriptionListTest
 {
-
-    public DescriptionListTest()
-    {
-    }
-
-    @Test
-    public void testDescriptionList()
-    {
-        DescriptionList dl = new DescriptionList();
-        dl.add(new DataDescription("Data Description"));
-        System.out.println(dl.toString(true));
-    }
-
+	
+	public DescriptionListTest()
+	{
+	}
+	
+	@Test
+	public void testDescriptionList()
+	{
+		DescriptionList dl = new DescriptionList();
+		dl.add(new DataDescription("Data Description"));
+		System.out.println(dl.toString(true));
+	}
+	
 }

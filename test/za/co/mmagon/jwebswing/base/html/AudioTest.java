@@ -16,29 +16,29 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.base.html.attributes.AudioAttributes;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author MMagon
  */
 public class AudioTest
 {
 
-    public AudioTest()
-    {
-    }
+	public AudioTest()
+	{
+	}
 
-    @Test
-    public void testAudio()
-    {
-        Audio aud = new Audio("src");
-        aud.setID("Audio");
-        aud.addAttribute(AudioAttributes.Autoplay, true);
-        System.out.println(aud.toString(true));
-        assertEquals("<audio autoplay=\"true\" id=\"Audio\" src=\"src\"></audio>", aud.toString(true).toString());
-    }
+	@Test
+	public void testAudio()
+	{
+		Audio aud = new Audio("src");
+		aud.setID("Audio");
+		aud.addAttribute(AudioAttributes.Autoplay, true);
+		System.out.println(aud.toString(true));
+		assertEquals("<audio autoplay=\"true\" id=\"Audio\" src=\"src\"></audio>", aud.toString(true).toString());
+	}
 
 }

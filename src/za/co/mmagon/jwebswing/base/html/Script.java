@@ -16,17 +16,20 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.attributes.ScriptAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoClassAttribute;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.logger.LogFactory;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The Base Component<p>
@@ -68,191 +71,192 @@ import za.co.mmagon.logger.LogFactory;
  * <p>
  * </p>
  *
- * @since 2013/11/12
- * @version 1.0
  * @author MMagon
- *
- *
+ * @version 1.0
+ * @since 2013/11/12
  */
 public class Script<J extends Script<J>>
-        extends ComponentHierarchyBase<NoChildren, ScriptAttributes, NoFeatures, NoEvents, J>
-        implements NoIDTag, HeadChildren, NoClassAttribute
+		extends ComponentHierarchyBase<NoChildren, ScriptAttributes, NoFeatures, NoEvents, J>
+		implements NoIDTag, HeadChildren, NoClassAttribute
 {
-
-    private static final Logger logger = LogFactory.getInstance().getLogger("<SCRIPT>");
-    private static final long serialVersionUID = 1L;
-    private JavascriptReference reference;
-
-    /**
-     * Constructs a script with the given reference
-     *
-     * @param reference
-     */
-    public Script(JavascriptReference reference)
-    {
-        this(reference.toString());
-        this.reference = reference;
-    }
-
-    /**
-     * Constructs a script component
-     */
-    public Script()
-    {
-        super(ComponentTypes.Script);
-    }
-
-    /**
-     * Constructs a new script with a specified source and type
-     * <p>
-     * @param src  The source of the file
-     * @param type The type of script
-     */
-    public Script(String src, String type)
-    {
-        this();
-        if (src != null)
-        {
-            addAttribute(ScriptAttributes.Src, src);
-        }
-        if (type != null)
-        {
-            addAttribute(ScriptAttributes.Type, type);
-        }
-    }
-
-    /**
-     * Constructs a new script with a specified source and the type of JavaScript
-     * <p>
-     * @param src The source of the file
-     */
-    public Script(String src)
-    {
-        this();
-        addAttribute(ScriptAttributes.Src, src);
-        addAttribute(ScriptAttributes.Type, "text/javascript");
-    }
-
-    /**
-     * Sets this script's JavaScript AS-IS
-     *
-     * @param javascript The JavaScript to directly insert
-     */
-    public J setJavascript(String javascript)
-    {
-        setText(javascript);
-        return (J) this;
-    }
-
-    /**
-     * Returns the currently set JavaScript with no indentation
-     *
-     * @return The JavaScript
-     */
-    public StringBuilder getJavascript()
-    {
-        return getJavascript(0);
-    }
-
-    /**
-     * Returns the currently set JavaScript with the specified indentation
-     *
-     * @param tabCount The indentation of the JavaScript
-     * <p>
-     * @return The JavaScript
-     */
-    public StringBuilder getJavascript(Integer tabCount)
-    {
-        preConfigure();
-        return getText(tabCount);
-    }
-
-    /**
-     * Differences Between HTML and XHTML
-     * <p>
-     * In XHTML, the content inside scripts is declared as #PCDATA (instead of CDATA), which means that entities will be parsed.
-     * <p>
-     * This means that in XHTML, all special characters should be encoded, or all content should be wrapped inside a CDATA section:
-     */
-    @Override
-    public void preConfigure()
-    {
-        super.preConfigure();
-
-        if (getAttribute(ScriptAttributes.Src) != null && !getAttribute(ScriptAttributes.Src).isEmpty())
-        {
-            // setInlineClosingTag(true);
-        }
-        if (getAttribute(ScriptAttributes.Src) != null || !getAttribute(ScriptAttributes.Src).isEmpty())
-        {
-            try
-            {
-                if (getPage().getHtmlVersion().name().startsWith("X"))
-                {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("//<![CDATA[");
-                    sb.append(getText(0));
-                    sb.append("//]]");
-                    setText(sb.toString());
-                }
-            }
-            catch (Exception e)
-            {
-                logger.log(Level.FINE, "Unable to determine whether XHTML or HTML. Skipping CDATA Implementation", e);
-            }
-        }
-    }
-
-    @Override
-    public boolean equals(Object obj)
-    {
-        if (obj == null)
-        {
-            return false;
-        }
-        if (obj.getClass() != getClass())
-        {
-            return false;
-        }
-
-        Script s = (Script) obj;
-        if (s.getAttribute(ScriptAttributes.Src).equals(getAttribute(ScriptAttributes.Src)))
-        {
-            if (s.getAttribute(ScriptAttributes.Type).equals(getAttribute(ScriptAttributes.Type)))
-            {
-                if (s.getText(0).toString().equals(getText(0).toString()))
-                {
-                    //System.out.println("everything equal? script is [" + getText(0).toString() + "] - [" + s.getText(0).toString());
-                    return true;
-                }
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            return false;
-        }
-        return false;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        int hash = 7;
-        return hash;
-    }
-
-    /**
-     * Returns a reference if one was attached
-     *
-     * @return
-     */
-    public JavascriptReference getReference()
-    {
-        return reference;
-    }
-
+	
+	private static final Logger logger = LogFactory.getInstance().getLogger("<SCRIPT>");
+	private static final long serialVersionUID = 1L;
+	private JavascriptReference reference;
+	
+	/**
+	 * Constructs a script with the given reference
+	 *
+	 * @param reference
+	 */
+	public Script(JavascriptReference reference)
+	{
+		this(reference.toString());
+		this.reference = reference;
+	}
+	
+	/**
+	 * Constructs a script component
+	 */
+	public Script()
+	{
+		super(ComponentTypes.Script);
+	}
+	
+	/**
+	 * Constructs a new script with a specified source and type
+	 * <p>
+	 *
+	 * @param src  The source of the file
+	 * @param type The type of script
+	 */
+	public Script(String src, String type)
+	{
+		this();
+		if (src != null)
+		{
+			addAttribute(ScriptAttributes.Src, src);
+		}
+		if (type != null)
+		{
+			addAttribute(ScriptAttributes.Type, type);
+		}
+	}
+	
+	/**
+	 * Constructs a new script with a specified source and the type of JavaScript
+	 * <p>
+	 *
+	 * @param src The source of the file
+	 */
+	public Script(String src)
+	{
+		this();
+		addAttribute(ScriptAttributes.Src, src);
+		addAttribute(ScriptAttributes.Type, "text/javascript");
+	}
+	
+	/**
+	 * Returns the currently set JavaScript with no indentation
+	 *
+	 * @return The JavaScript
+	 */
+	public StringBuilder getJavascript()
+	{
+		return getJavascript(0);
+	}
+	
+	/**
+	 * Sets this script's JavaScript AS-IS
+	 *
+	 * @param javascript The JavaScript to directly insert
+	 */
+	public J setJavascript(String javascript)
+	{
+		setText(javascript);
+		return (J) this;
+	}
+	
+	/**
+	 * Returns the currently set JavaScript with the specified indentation
+	 *
+	 * @param tabCount The indentation of the JavaScript
+	 *                 <p>
+	 *
+	 * @return The JavaScript
+	 */
+	public StringBuilder getJavascript(Integer tabCount)
+	{
+		preConfigure();
+		return getText(tabCount);
+	}
+	
+	/**
+	 * Differences Between HTML and XHTML
+	 * <p>
+	 * In XHTML, the content inside scripts is declared as #PCDATA (instead of CDATA), which means that entities will be parsed.
+	 * <p>
+	 * This means that in XHTML, all special characters should be encoded, or all content should be wrapped inside a CDATA section:
+	 */
+	@Override
+	public void preConfigure()
+	{
+		super.preConfigure();
+		
+		if (getAttribute(ScriptAttributes.Src) != null && !getAttribute(ScriptAttributes.Src).isEmpty())
+		{
+			// setInlineClosingTag(true);
+		}
+		if (getAttribute(ScriptAttributes.Src) != null || !getAttribute(ScriptAttributes.Src).isEmpty())
+		{
+			try
+			{
+				if (getPage().getHtmlVersion().name().startsWith("X"))
+				{
+					StringBuilder sb = new StringBuilder();
+					sb.append("//<![CDATA[");
+					sb.append(getText(0));
+					sb.append("//]]");
+					setText(sb.toString());
+				}
+			}
+			catch (Exception e)
+			{
+				logger.log(Level.FINE, "Unable to determine whether XHTML or HTML. Skipping CDATA Implementation", e);
+			}
+		}
+	}
+	
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (obj == null)
+		{
+			return false;
+		}
+		if (obj.getClass() != getClass())
+		{
+			return false;
+		}
+		
+		Script s = (Script) obj;
+		if (s.getAttribute(ScriptAttributes.Src).equals(getAttribute(ScriptAttributes.Src)))
+		{
+			if (s.getAttribute(ScriptAttributes.Type).equals(getAttribute(ScriptAttributes.Type)))
+			{
+				if (s.getText(0).toString().equals(getText(0).toString()))
+				{
+					//System.out.println("everything equal? script is [" + getText(0).toString() + "] - [" + s.getText(0).toString());
+					return true;
+				}
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		int hash = 7;
+		return hash;
+	}
+	
+	/**
+	 * Returns a reference if one was attached
+	 *
+	 * @return
+	 */
+	public JavascriptReference getReference()
+	{
+		return reference;
+	}
+	
 }

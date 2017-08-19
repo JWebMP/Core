@@ -19,30 +19,29 @@ package za.co.mmagon.jwebswing.base.html.attributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 
 /**
- *
  * @author GedMarc
- * @since Mar 1, 2015
  * @version 1.0
+ * @since Mar 1, 2015
  */
 public enum SourceAttributes implements AttributeDefinitions
 {
 
-    /**
-     * Specifies the type of media resource
-     */
-    Media,
-    /**
-     * Specifies the URL of the media file
-     */
-    URL,
-    /**
-     * Specifies the media type of the media resource
-     */
-    Type;
+	/**
+	 * Specifies the type of media resource
+	 */
+	Media,
+	/**
+	 * Specifies the URL of the media file
+	 */
+	URL,
+	/**
+	 * Specifies the media type of the media resource
+	 */
+	Type;
 
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

@@ -38,27 +38,25 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * All the layout attributes are removed in HTML5.<p>
  *
- *
+ * @param <J>
  *
  * @author Marc Magon
  * @version 1.0
- * @param <J>
- *
  * @since 2012/10/01
  */
 public class TableRow<J extends TableRow<J>>
-        extends Component<TableRowChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements TableChildren, TableHeaderGroupChildren, TableBodyGroupChildren, TableFooterGroupChildren
+		extends Component<TableRowChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements TableChildren, TableHeaderGroupChildren, TableBodyGroupChildren, TableFooterGroupChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Construct a new default table row with no Ajax support
-     */
-    public TableRow()
-    {
-        super(ComponentTypes.TableRow);
-        setTiny(true);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Construct a new default table row with no Ajax support
+	 */
+	public TableRow()
+	{
+		super(ComponentTypes.TableRow);
+		setTiny(true);
+	}
 }

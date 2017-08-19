@@ -20,33 +20,32 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- *
  * @author GedMarc
  */
 public class LineBreakTest
 {
-
-    public LineBreakTest()
-    {
-    }
-
-    /**
-     * Test of getLineBreak method, of class LineBreak.
-     */
-    @Test
-    public void testGetLineBreak()
-    {
-        LineBreak br = LineBreak.getLineBreak();
-        System.out.println(br.toString(true));
-        Assert.assertEquals("<br>", br.toString(true).toString());
-    }
-
-    /**
-     * Test of getNewInstance method, of class LineBreak.
-     */
-    @Test
-    public void testGetNewInstance()
-    {
-    }
-
+	
+	public LineBreakTest()
+	{
+	}
+	
+	/**
+	 * Test of getLineBreak method, of class LineBreak.
+	 */
+	@Test
+	public void testGetLineBreak()
+	{
+		LineBreak br = LineBreak.getLineBreak();
+		System.out.println(br.toString(true));
+		Assert.assertEquals("<br>", br.toString(true).toString());
+	}
+	
+	/**
+	 * Test of getNewInstance method, of class LineBreak.
+	 */
+	@Test
+	public void testGetNewInstance()
+	{
+	}
+	
 }

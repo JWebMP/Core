@@ -21,45 +21,44 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 /**
  * Valid script attributes
  *
- * @since 2013/11/14
- * @version 1.0
  * @author MMagon
- *
- *
+ * @version 1.0
+ * @since 2013/11/14
  */
 public enum ScriptAttributes implements AttributeDefinitions
 {
-    Async,
-    Charset,
-    Defer,
-    Src,
-    Type;
-
-    private ScriptAttributes()
-    {
-        
-    }
-    
-    private boolean keyWord;
-    
-    private ScriptAttributes(boolean isKeyword)
-    {
-        this.keyWord = isKeyword;
-    }
-    /**
-     * Returns the lowercase name
-     *
-     * @return
-     */
-    @Override
-    public String toString()
-    {
-        return name().toLowerCase();
-    }
-
-    @Override
-    public boolean isKeyword()
-    {
-        return keyWord;
-    }
+	Async,
+	Charset,
+	Defer,
+	Src,
+	Type;
+	
+	private boolean keyWord;
+	
+	private ScriptAttributes()
+	{
+	
+	}
+	
+	private ScriptAttributes(boolean isKeyword)
+	{
+		this.keyWord = isKeyword;
+	}
+	
+	/**
+	 * Returns the lowercase name
+	 *
+	 * @return
+	 */
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
+	}
+	
+	@Override
+	public boolean isKeyword()
+	{
+		return keyWord;
+	}
 }

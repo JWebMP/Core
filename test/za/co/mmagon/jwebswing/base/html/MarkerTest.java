@@ -17,25 +17,23 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
- *
  * @author GedMarc
  */
 public class MarkerTest
 {
-    
-    public MarkerTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        Marker marker = new Marker();
-        marker.setText("Highlighted Text");
-        System.out.println(marker.toString(true));
-    }
-    
+	
+	public MarkerTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		Marker marker = new Marker();
+		marker.setText("Highlighted Text");
+		System.out.println(marker.toString(true));
+	}
+	
 }

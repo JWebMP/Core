@@ -41,25 +41,25 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &gt;nav&lt; tag is new in HTML5.<p>
  * <p>
- * @author GedMarc
+ *
  * @param <J>
  *
- * @since Feb 9, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
- *
+ * @since Feb 9, 2015
  */
 public class NavigationSection<J extends NavigationSection<J>>
-        extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Construct a new navigation section
-     */
-    public NavigationSection()
-    {
-        super(ComponentTypes.Navigation);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Construct a new navigation section
+	 */
+	public NavigationSection()
+	{
+		super(ComponentTypes.Navigation);
+	}
 }

@@ -29,20 +29,20 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 class Angular2Feature extends Feature<JavaScriptPart, Angular2Feature>
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Adds on the Angular ComponentFeatureBase to the application to allow full data binding
-     *
-     * @param b
-     */
-    public Angular2Feature(Body b)
-    {
-        super("Angular2Feature");
-        //Angular Addition
-        getJavascriptReferences().add(AngularReferencePool.Angular2RX.getJavaScriptReference());
-        getJavascriptReferences().add(AngularReferencePool.Angular2Polyfills.getJavaScriptReference());
-        getJavascriptReferences().add(AngularReferencePool.Angular2AllUMD.getJavaScriptReference());
+	/**
+	 * Adds on the Angular ComponentFeatureBase to the application to allow full data binding
+	 *
+	 * @param b
+	 */
+	public Angular2Feature(Body b)
+	{
+		super("Angular2Feature");
+		//Angular Addition
+		getJavascriptReferences().add(AngularReferencePool.Angular2RX.getJavaScriptReference());
+		getJavascriptReferences().add(AngularReferencePool.Angular2Polyfills.getJavaScriptReference());
+		getJavascriptReferences().add(AngularReferencePool.Angular2AllUMD.getJavaScriptReference());
 
         /*
          * getJavascriptReferences().add(AngularReferencePool.Angular2Polyfills.getJavaScriptReference()); getJavascriptReferences().add(AngularReferencePool.Angular2RX.getJavaScriptReference());
@@ -51,24 +51,24 @@ class Angular2Feature extends Feature<JavaScriptPart, Angular2Feature>
          * getJavascriptReferences().add(AngularReferencePool.AngularSystemPolyfills.getJavaScriptReference()); getJavascriptReferences().add(AngularReferencePool.ES6.getJavaScriptReference());
          * getJavascriptReferences().add(AngularReferencePool.Angular2Router.getJavaScriptReference());
          */
-    }
+	}
 
-    @Override
-    public void assignFunctionsToComponent()
-    {
-        String jWebApplicationSetup = "(function() {\n"
-                + "\n"
-                + "  var HelloApp = \n"
-                + "    ng.core\n"
-                + "    .Component({\n"
-                + "      selector: 'hello-app',\n"
-                + "      template: '<h1>Hello Angular 2!</h1>'\n"
-                + "    })\n"
-                + "    .Class({\n"
-                + "      constructor: function() {}\n"
-                + "    });\n"
-                + "    ng.platform.browser.bootstrap(HelloApp);\n"
-                + "})();";
-        addQuery(jWebApplicationSetup);
-    }
+	@Override
+	public void assignFunctionsToComponent()
+	{
+		String jWebApplicationSetup = "(function() {\n"
+				+ "\n"
+				+ "  var HelloApp = \n"
+				+ "    ng.core\n"
+				+ "    .Component({\n"
+				+ "      selector: 'hello-app',\n"
+				+ "      template: '<h1>Hello Angular 2!</h1>'\n"
+				+ "    })\n"
+				+ "    .Class({\n"
+				+ "      constructor: function() {}\n"
+				+ "    });\n"
+				+ "    ng.platform.browser.bootstrap(HelloApp);\n"
+				+ "})();";
+		addQuery(jWebApplicationSetup);
+	}
 }

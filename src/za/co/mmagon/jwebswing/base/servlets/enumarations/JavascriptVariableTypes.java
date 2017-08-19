@@ -17,12 +17,11 @@
 package za.co.mmagon.jwebswing.base.servlets.enumarations;
 
 /**
- * 
  * @author MMagon
- * @since 21 Jul 2013
  * @version 1.0
+ * @since 21 Jul 2013
  */
-public enum JavascriptVariableTypes 
+public enum JavascriptVariableTypes
 {
-    Layout;
+	Layout;
 }

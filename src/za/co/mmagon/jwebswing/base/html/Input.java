@@ -16,22 +16,25 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoClosingTag;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.logger.LogFactory;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
- *
  * Please note I have left out all the input type attributes that are not cross-browser - rather use the features available.<p>
  * <p>
  * Browser Support<p>
@@ -67,172 +70,177 @@ import za.co.mmagon.logger.LogFactory;
  * <p>
  * In XHTML, the input tag must be properly closed.<p>
  * <p>
- * @author Marc Magon
+ *
  * @param <A> The attribute set for the input component
  * @param <J>
+ *
+ * @author Marc Magon
  */
 public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
-        extends Component<NoChildren, A, GlobalFeatures, GlobalEvents, J>
-        implements NoClosingTag, GlobalChildren, ParagraphChildren
+		extends Component<NoChildren, A, GlobalFeatures, GlobalEvents, J>
+		implements NoClosingTag, GlobalChildren, ParagraphChildren
 {
 
-    private static final Logger log = LogFactory.getInstance().getLogger("Input");
-    private static final long serialVersionUID = 1L;
+	private static final Logger log = LogFactory.getInstance().getLogger("Input");
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * The input type of this input tag
-     */
-    private InputTypes inputType;
+	/**
+	 * The input type of this input tag
+	 */
+	private InputTypes inputType;
 
-    /**
-     * Constructs a blank instance of input - generally not recommended.
-     */
-    public Input()
-    {
-        this(null);
-    }
+	/**
+	 * Constructs a blank instance of input - generally not recommended.
+	 */
+	public Input()
+	{
+		this(null);
+	}
 
-    /**
-     * Construct a new instance of the input type field
-     * <p>
-     * @param inputType
-     */
-    public Input(InputTypes inputType)
-    {
-        super(ComponentTypes.Input);
+	/**
+	 * Construct a new instance of the input type field
+	 * <p>
+	 *
+	 * @param inputType
+	 */
+	public Input(InputTypes inputType)
+	{
+		super(ComponentTypes.Input);
 
-        if (inputType != null)
+		if (inputType != null)
 
-        {
-            this.inputType = inputType;
-            addAttribute(GlobalAttributes.Type, getInputType().name().toLowerCase());
-        }
+		{
+			this.inputType = inputType;
+			addAttribute(GlobalAttributes.Type, getInputType().name().toLowerCase());
+		}
 
-    }
+	}
 
-    /**
-     * Returns the input type of the input field
-     * <p>
-     * @return
-     */
-    public final InputTypes getInputType()
-    {
-        return inputType;
-    }
+	/**
+	 * Returns the input type of the input field
+	 * <p>
+	 *
+	 * @return
+	 */
+	public final InputTypes getInputType()
+	{
+		return inputType;
+	}
 
-    /**
-     * Sets the input type of this field
-     * <p>
-     * @param inputType
-     *
-     * @return
-     */
-    public J setInputType(InputTypes inputType)
-    {
-        this.inputType = inputType;
-        addAttribute(GlobalAttributes.Type, inputType.toString());
-        return (J) this;
-    }
+	/**
+	 * Sets the input type of this field
+	 * <p>
+	 *
+	 * @param inputType
+	 *
+	 * @return
+	 */
+	public J setInputType(InputTypes inputType)
+	{
+		this.inputType = inputType;
+		addAttribute(GlobalAttributes.Type, inputType.toString());
+		return (J) this;
+	}
 
-    /**
-     * Differences Between HTML and XHTML
-     * <p>
-     * In HTML the base tag has no end tag.
-     * <p>
-     * In XHTML the base tag must be properly closed.
-     */
-    @Override
-    public void preConfigure()
-    {
-        super.preConfigure();
-        try
-        {
-            if (getPage().getHtmlVersion().name().startsWith("X"))
-            {
-                setInlineClosingTag(true);
-            }
-        }
-        catch (Exception e)
-        {
-            log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
-        }
-    }
+	/**
+	 * Differences Between HTML and XHTML
+	 * <p>
+	 * In HTML the base tag has no end tag.
+	 * <p>
+	 * In XHTML the base tag must be properly closed.
+	 */
+	@Override
+	public void preConfigure()
+	{
+		super.preConfigure();
+		try
+		{
+			if (getPage().getHtmlVersion().name().startsWith("X"))
+			{
+				setInlineClosingTag(true);
+			}
+		}
+		catch (Exception e)
+		{
+			log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
+		}
+	}
 
-    /**
-     * Push to model instead of bind
-     *
-     * @param variableName
-     *
-     * @return
-     */
-    @Override
-    public J bind(String variableName)
-    {
-        AngularPageConfigurator.setRequired(this, true);
-        addAttribute(AngularAttributes.ngModel, variableName);
-        return (J) this;
-    }
+	/**
+	 * Push to model instead of bind
+	 *
+	 * @param variableName
+	 *
+	 * @return
+	 */
+	@Override
+	public J bind(String variableName)
+	{
+		AngularPageConfigurator.setRequired(this, true);
+		addAttribute(AngularAttributes.ngModel, variableName);
+		return (J) this;
+	}
 
-    /**
-     * Sets this input as required in the form
-     *
-     * @return
-     */
-    public J setRequired()
-    {
-        addAttribute("required", null);
-        return (J) this;
-    }
+	/**
+	 * Sets this input as required in the form
+	 *
+	 * @return
+	 */
+	public J setRequired()
+	{
+		addAttribute("required", null);
+		return (J) this;
+	}
 
-    /**
-     * Sets the minimum length of this input
-     *
-     * @param minLength
-     *
-     * @return
-     */
-    public J setMinimumLength(int minLength)
-    {
-        addAttribute("minlength", "" + minLength);
-        return (J) this;
-    }
+	/**
+	 * Sets the minimum length of this input
+	 *
+	 * @param minLength
+	 *
+	 * @return
+	 */
+	public J setMinimumLength(int minLength)
+	{
+		addAttribute("minlength", "" + minLength);
+		return (J) this;
+	}
 
-    /**
-     * Sets the minimum length of this input
-     *
-     * @param minLength
-     *
-     * @return
-     */
-    public J setMaximumLength(int minLength)
-    {
-        addAttribute("maxlength", "" + minLength);
-        return (J) this;
-    }
+	/**
+	 * Sets the minimum length of this input
+	 *
+	 * @param minLength
+	 *
+	 * @return
+	 */
+	public J setMaximumLength(int minLength)
+	{
+		addAttribute("maxlength", "" + minLength);
+		return (J) this;
+	}
 
-    /**
-     * Sets the place holder for this input
-     *
-     * @param placeholder
-     *
-     * @return
-     */
-    public J setPlaceholder(String placeholder)
-    {
-        addAttribute("placeholder", placeholder);
-        return (J) this;
-    }
+	/**
+	 * Sets the place holder for this input
+	 *
+	 * @param placeholder
+	 *
+	 * @return
+	 */
+	public J setPlaceholder(String placeholder)
+	{
+		addAttribute("placeholder", placeholder);
+		return (J) this;
+	}
 
-    /**
-     * Sets the value attribute
-     *
-     * @param value
-     *
-     * @return
-     */
-    public J setValue(String value)
-    {
-        addAttribute("value", value);
-        return (J) this;
-    }
+	/**
+	 * Sets the value attribute
+	 *
+	 * @param value
+	 *
+	 * @return
+	 */
+	public J setValue(String value)
+	{
+		addAttribute("value", value);
+		return (J) this;
+	}
 }

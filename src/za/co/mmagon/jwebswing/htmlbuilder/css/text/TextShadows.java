@@ -16,55 +16,51 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.text;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
 
+import java.lang.annotation.*;
+
 /**
- *
  * @author GedMarc
  * @since 18 Jan 2016
  */
 @Target(
-        {
-            ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
-        })
+		{
+				ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
+		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
 public @interface TextShadows
 {
 
-    /**
-     * Required. The position of the horizontal shadow. Negative values are allowed
-     *
-     * @return
-     */
-    public MeasurementCSS HShadow();
+	/**
+	 * Required. The position of the horizontal shadow. Negative values are allowed
+	 *
+	 * @return
+	 */
+	public MeasurementCSS HShadow();
 
-    /**
-     * Required. The position of the vertical shadow. Negative values are allowed
-     *
-     * @return
-     */
-    public MeasurementCSS VShadow();
+	/**
+	 * Required. The position of the vertical shadow. Negative values are allowed
+	 *
+	 * @return
+	 */
+	public MeasurementCSS VShadow();
 
-    /**
-     * Optional. The blur radius. Default value is 0
-     *
-     * @return
-     */
-    public MeasurementCSS BlurRadius() default @MeasurementCSS;
+	/**
+	 * Optional. The blur radius. Default value is 0
+	 *
+	 * @return
+	 */
+	public MeasurementCSS BlurRadius() default @MeasurementCSS;
 
-    /**
-     * Optional. The color of the shadow. Look at CSS Color Values for a complete list of possible color values
-     *
-     * @return
-     */
-    public ColourCSS Color() default @ColourCSS;
+	/**
+	 * Optional. The color of the shadow. Look at CSS Color Values for a complete list of possible color values
+	 *
+	 * @return
+	 */
+	public ColourCSS Color() default @ColourCSS;
 }

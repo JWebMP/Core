@@ -24,44 +24,44 @@ package za.co.mmagon.jwebswing.generics;
  */
 public enum LeftOrRight
 {
-    Left,
-    Right;
-    /**
-     * Any sub data
-     */
-    private String data;
+	Left,
+	Right;
+	/**
+	 * Any sub data
+	 */
+	private String data;
 
-    /**
-     * A new LeftOrRight
-     */
-    private LeftOrRight()
-    {
+	/**
+	 * A new LeftOrRight
+	 */
+	private LeftOrRight()
+	{
 
-    }
+	}
 
-    /**
-     * A new LeftOrRight with data
-     */
-    private LeftOrRight(String data)
-    {
+	/**
+	 * A new LeftOrRight with data
+	 */
+	private LeftOrRight(String data)
+	{
 
-    }
+	}
 
-    /**
-     * Returns the name or the data contained within
-     *
-     * @return
-     */
-    @Override
-    public String toString()
-    {
-        if (data != null && !data.isEmpty())
-        {
-            return data;
-        }
-        else
-        {
-            return name().toLowerCase();
-        }
-    }
+	/**
+	 * Returns the name or the data contained within
+	 *
+	 * @return
+	 */
+	@Override
+	public String toString()
+	{
+		if (data != null && !data.isEmpty())
+		{
+			return data;
+		}
+		else
+		{
+			return name().toLowerCase();
+		}
+	}
 }

@@ -18,7 +18,9 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -35,38 +37,37 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The content inside the &gt;noscript&lt; element will be displayed if scripts are not supported, or are disabled in the user's browser.<p>
  *
- * @author GedMarc
  * @param <J>
  *
- * @since Feb 9, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
- *
+ * @since Feb 9, 2015
  */
 public class NoScript<J extends NoScript<J>>
-        extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements BodyChildren, NoIDTag
+		extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements BodyChildren, NoIDTag
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     *
-     */
-    public NoScript()
-    {
-        super(ComponentTypes.NoScript);
-    }
-
-    /**
-     * Means no script available, so no point in rendering ID tags
-     */
-    @Override
-    public void preConfigure()
-
-    {
-        setRenderIDAttibute(false);
-        super.preConfigure(); //To change body of generated methods, choose Tools | Templates.
-    }
-
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 *
+	 */
+	public NoScript()
+	{
+		super(ComponentTypes.NoScript);
+	}
+	
+	/**
+	 * Means no script available, so no point in rendering ID tags
+	 */
+	@Override
+	public void preConfigure()
+	
+	{
+		setRenderIDAttibute(false);
+		super.preConfigure(); //To change body of generated methods, choose Tools | Templates.
+	}
+	
 }

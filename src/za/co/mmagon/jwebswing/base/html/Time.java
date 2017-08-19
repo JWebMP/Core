@@ -42,26 +42,25 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The &lt;time&gt; tag is new in HTML5.<p>
  *
- * @author GedMarc
  * @param <J>
  *
- * @since Mar 1, 2015
+ * @author GedMarc
  * @version 1.0
  * <p>
- *
+ * @since Mar 1, 2015
  */
 public class Time<J extends Time<J>>
-        extends Component<NoChildren, TimeAttributes, GlobalFeatures, GlobalEvents, J>
-        implements GlobalChildren
+		extends Component<NoChildren, TimeAttributes, GlobalFeatures, GlobalEvents, J>
+		implements GlobalChildren
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a new time object
-     */
-    public Time()
-    {
-        super(ComponentTypes.Time);
-    }
+	/**
+	 * Constructs a new time object
+	 */
+	public Time()
+	{
+		super(ComponentTypes.Time);
+	}
 }

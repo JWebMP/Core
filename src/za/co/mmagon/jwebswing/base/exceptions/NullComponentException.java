@@ -25,56 +25,56 @@ package za.co.mmagon.jwebswing.base.exceptions;
 public class NullComponentException extends RuntimeException
 {
 
-    /**
-     * Exception thrown when a component cannot be null
-     */
-    public NullComponentException()
-    {
-    }
+	/**
+	 * Exception thrown when a component cannot be null
+	 */
+	public NullComponentException()
+	{
+	}
 
-    /**
-     * Exception thrown when a component cannot be null
-     *
-     * @param message a message for the exception
-     */
-    public NullComponentException(String message)
-    {
-        super(message);
-    }
+	/**
+	 * Exception thrown when a component cannot be null
+	 *
+	 * @param message a message for the exception
+	 */
+	public NullComponentException(String message)
+	{
+		super(message);
+	}
 
-    /**
-     * Exception thrown when a component cannot be null
-     *
-     * @param message A message for the exception
-     * @param cause   the exception
-     */
-    public NullComponentException(String message, Throwable cause)
-    {
-        super(message, cause);
-    }
+	/**
+	 * Exception thrown when a component cannot be null
+	 *
+	 * @param message A message for the exception
+	 * @param cause   the exception
+	 */
+	public NullComponentException(String message, Throwable cause)
+	{
+		super(message, cause);
+	}
 
-    /**
-     * Exception thrown when a component cannot be null
-     *
-     * @param cause the exception that caused this
-     */
+	/**
+	 * Exception thrown when a component cannot be null
+	 *
+	 * @param cause the exception that caused this
+	 */
 
-    public NullComponentException(Throwable cause)
-    {
-        super(cause);
-    }
+	public NullComponentException(Throwable cause)
+	{
+		super(cause);
+	}
 
-    /**
-     * Exception thrown when a component cannot be null
-     *
-     * @param message            The message for the exception
-     * @param cause              the exception that caused it
-     * @param enableSuppression  enable suppression
-     * @param writableStackTrace make the stack trace writable
-     */
-    public NullComponentException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
-    {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
+	/**
+	 * Exception thrown when a component cannot be null
+	 *
+	 * @param message            The message for the exception
+	 * @param cause              the exception that caused it
+	 * @param enableSuppression  enable suppression
+	 * @param writableStackTrace make the stack trace writable
+	 */
+	public NullComponentException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
+	{
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
 
 }

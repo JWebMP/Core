@@ -18,7 +18,9 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoClassAttribute;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HtmlChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
@@ -60,26 +62,27 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * In HTML5, the &lt;head&gt; element can be omitted. The following code will validate as HTML5:
  * <p>
  * <p>
+ *
  * @param <J>
  *
- * @since 2013/11/12
- * @version 1.0
  * @author MMagon
  * <p>
  * <p>
+ * @version 1.0
+ * @since 2013/11/12
  */
 public class Head<J extends Head<J>>
-        extends ComponentHierarchyBase<HeadChildren, NoAttributes, NoFeatures, NoEvents, J>
-        implements NoIDTag, HtmlChildren, NoClassAttribute
+		extends ComponentHierarchyBase<HeadChildren, NoAttributes, NoFeatures, NoEvents, J>
+		implements NoIDTag, HtmlChildren, NoClassAttribute
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a new Head Tag
-     */
-    public Head()
-    {
-        super(ComponentTypes.Head);
-    }
+	/**
+	 * Constructs a new Head Tag
+	 */
+	public Head()
+	{
+		super(ComponentTypes.Head);
+	}
 }

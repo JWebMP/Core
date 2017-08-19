@@ -19,30 +19,29 @@ package za.co.mmagon.jwebswing.annotations;
 import java.lang.annotation.*;
 
 /**
- *
  * @author Marc Magon
  * @since 05 Apr 2017
  */
 @Target(
-        {
-            ElementType.TYPE, ElementType.TYPE_USE
-        })
+		{
+				ElementType.TYPE, ElementType.TYPE_USE
+		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface PageConfiguration
 {
 
-    /**
-     * Specifies the URL that this page serves
-     *
-     * @return
-     */
-    public String url() default "/";
+	/**
+	 * Specifies the URL that this page serves
+	 *
+	 * @return
+	 */
+	public String url() default "/";
 
-    /**
-     * Specifies the type this page serves (best to leave it alone - or only use one page for error types etc)
-     *
-     * @return
-     */
-    public PageTypes type() default PageTypes.Default;
+	/**
+	 * Specifies the type this page serves (best to leave it alone - or only use one page for error types etc)
+	 *
+	 * @return
+	 */
+	public PageTypes type() default PageTypes.Default;
 }

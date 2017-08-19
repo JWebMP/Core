@@ -16,19 +16,16 @@
  */
 package za.co.mmagon.jwebswing.base.interfaces;
 
-import java.util.Map;
 import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 
 /**
- *
- * @author GedMarc
  * @param <A>
  * @param <J>
  *
+ * @author GedMarc
  * @since Sep 26, 2016
- *
  */
 public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, J extends ComponentBase>
 {
@@ -36,6 +33,7 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
     /**
      * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
      * <p>
+     *
      * @param attribute The GlobalAttribute to set the attribute to
      * @param value     The value of the attribute
      *
@@ -46,6 +44,7 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
     /**
      * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
      * <p>
+     *
      * @param attribute The GlobalAttribute to set the attribute to
      * @param value     The value of the attribute
      *
@@ -56,6 +55,7 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
     /**
      * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
      * <p>
+     *
      * @param attribute The GlobalAttribute to set the attribute to
      * @param value     The value of the attribute
      *
@@ -66,6 +66,7 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
     /**
      * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
      * <p>
+     *
      * @param attribute The valid Local Attribute to add
      * @param value     The value of the attribute
      *
@@ -78,9 +79,11 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
     /**
      * Returns an enumerated HashMap for ease of access
      * <p>
+     *
      * @param attribute The Global Attribute to apply
      * @param bop       Place Holder for return type boolean
      * <p>
+     *
      * @return HashMap of Attributes with GlobalAttributes Enumeration as Identifier
      */
     Boolean getAttribute(GlobalAttributes attribute, Boolean bop);
@@ -88,9 +91,11 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
     /**
      * Returns an enumerated HashMap for ease of access
      * <p>
+     *
      * @param attribute The Global Attribute to apply
      * @param bop       Place Holder for return type integer
      * <p>
+     *
      * @return HashMap of Attributes with GlobalAttributes Enumeration as Identifier
      */
     Integer getAttribute(GlobalAttributes attribute, Integer bop);
@@ -98,8 +103,10 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
     /**
      * Returns an enumerated HashMap for ease of access
      * <p>
+     *
      * @param attribute The Global Attribute to apply
      * <p>
+     *
      * @return HashMap of Attributes with GlobalAttributes Enumeration as Identifier
      */
     String getAttribute(GlobalAttributes attribute);
@@ -107,8 +114,10 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
     /**
      * Gets this list of local attribute values
      * <p>
+     *
      * @param attributeValue The Valid Local Attribute to Return
      * <p>
+     *
      * @return A String of the attribute value currently set
      */
     String getAttribute(A attributeValue);
@@ -116,9 +125,11 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
     /**
      * Gets this list of local attribute values
      * <p>
+     *
      * @param attributeValue The Valid Local Attribute to Return
      * @param uselessInt     A useless parameter purely to return the type integer
      * <p>
+     *
      * @return A HashMap if this components local attributes. Never null
      */
     Integer getAttribute(A attributeValue, Integer uselessInt);
@@ -126,18 +137,13 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
     /**
      * Gets this list of local attribute values
      * <p>
+     *
      * @param attributeValue The Valid Local Attribute to Return
      * @param uselessInt     A useless parameter purely to return the type Boolean
      * <p>
+     *
      * @return A HashMap if this components local attributes. Never null
      */
     Boolean getAttribute(A attributeValue, Boolean uselessInt);
-
-    /**
-     * Returns a complete collection of attributes
-     *
-     * @return
-     */
-    Map<Enum, String> getAttributesAll();
-
+    
 }

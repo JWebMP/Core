@@ -18,7 +18,9 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineBeforeClosingTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.TableChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
@@ -40,26 +42,28 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The align attribute is removed from HTML5.
  * <p>
- * @author Marc Magon
+ *
  * @param <J>
  *
+ * @author Marc Magon
  * @since forever
  */
 public class TableCaption<J extends TableCaption<J>>
-        extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements TableChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
+		extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements TableChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new table caption
-     * <p>
-     * @param caption The caption
-     */
-    public TableCaption(String caption)
-    {
-        super(ComponentTypes.TableCaption);
-        setText(caption);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new table caption
+	 * <p>
+	 *
+	 * @param caption The caption
+	 */
+	public TableCaption(String caption)
+	{
+		super(ComponentTypes.TableCaption);
+		setText(caption);
+	}
 }

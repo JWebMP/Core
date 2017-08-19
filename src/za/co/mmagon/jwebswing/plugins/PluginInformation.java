@@ -23,153 +23,151 @@ import java.lang.annotation.*;
  *
  * @author GedMarc
  * @since 19 Feb 2017
- *
  */
 @Target(
-        {
-            ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
-        })
+		{
+				ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE
+		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface PluginInformation
 {
 
-    /**
-     * Lower case unique id name
-     *
-     * @return
-     */
-    public String pluginUniqueName();
+	/**
+	 * Lower case unique id name
+	 *
+	 * @return
+	 */
+	public String pluginUniqueName();
 
-    /**
-     * The actual name of the plugin
-     *
-     * @return
-     */
-    public String pluginName();
+	/**
+	 * The actual name of the plugin
+	 *
+	 * @return
+	 */
+	public String pluginName();
 
-    /**
-     * The version identifier for the plugin
-     *
-     * @return
-     */
-    public String pluginVersion();
+	/**
+	 * The version identifier for the plugin
+	 *
+	 * @return
+	 */
+	public String pluginVersion();
 
-    /**
-     * The subtitle of the plugin
-     *
-     * @return
-     */
-    public String pluginSubtitle() default "";
+	/**
+	 * The subtitle of the plugin
+	 *
+	 * @return
+	 */
+	public String pluginSubtitle() default "";
 
-    /**
-     * The description of the plugin
-     *
-     * @return
-     */
-    public String pluginDescription();
+	/**
+	 * The description of the plugin
+	 *
+	 * @return
+	 */
+	public String pluginDescription();
 
-    /**
-     * The categories of the plugin
-     *
-     * @return
-     */
-    public String pluginCategories() default "";
+	/**
+	 * The categories of the plugin
+	 *
+	 * @return
+	 */
+	public String pluginCategories() default "";
 
-    /**
-     * The actual Wiki url for this plugin
-     *
-     * @return
-     */
-    public String pluginWikiUrl() default "";
+	/**
+	 * The actual Wiki url for this plugin
+	 *
+	 * @return
+	 */
+	public String pluginWikiUrl() default "";
 
-    /**
-     * The image for the icon of this plugin (192x192)
-     *
-     * @return
-     */
-    public String pluginIconImageUrl() default "";
+	/**
+	 * The image for the icon of this plugin (192x192)
+	 *
+	 * @return
+	 */
+	public String pluginIconImageUrl() default "";
 
-    /**
-     * The source url for this plugin
-     *
-     * @return
-     */
-    public String pluginIconUrl() default "";
+	/**
+	 * The source url for this plugin
+	 *
+	 * @return
+	 */
+	public String pluginIconUrl() default "";
 
-    /**
-     * The source url for this plugin (usually git)
-     *
-     * @return
-     */
-    public String pluginSourceUrl() default "";
+	/**
+	 * The source url for this plugin (usually git)
+	 *
+	 * @return
+	 */
+	public String pluginSourceUrl() default "";
 
-    /**
-     * The Git url for the java portion of this plugin
-     *
-     * @return
-     */
-    public String pluginGitUrl() default "";
+	/**
+	 * The Git url for the java portion of this plugin
+	 *
+	 * @return
+	 */
+	public String pluginGitUrl() default "";
 
-    /**
-     * The donate button for the source url of this plugin
-     *
-     * @return
-     */
-    public String pluginSourceDonateUrl() default "https://paypal.me/MarcMagon/15";
+	/**
+	 * The donate button for the source url of this plugin
+	 *
+	 * @return
+	 */
+	public String pluginSourceDonateUrl() default "https://paypal.me/MarcMagon/15";
 
-    /**
-     * The default download URL for plugins
-     *
-     * @return
-     */
-    public String pluginDownloadUrl() default "https://sourceforge.net/projects/jwebswing/files/";
+	/**
+	 * The default download URL for plugins
+	 *
+	 * @return
+	 */
+	public String pluginDownloadUrl() default "https://sourceforge.net/projects/jwebswing/files/";
 
-    /**
-     * The author of this plugin
-     *
-     * @return
-     */
-    public String pluginAuthor() default "Marc Magon";
+	/**
+	 * The author of this plugin
+	 *
+	 * @return
+	 */
+	public String pluginAuthor() default "Marc Magon";
 
-    /**
-     * The date (pls yyyy/MM/dd format) for this plugin
-     *
-     * @return
-     */
-    public String pluginLastUpdatedDate() default "2017/02/19";
+	/**
+	 * The date (pls yyyy/MM/dd format) for this plugin
+	 *
+	 * @return
+	 */
+	public String pluginLastUpdatedDate() default "2017/02/19";
 
-    /**
-     * Comma separated list of unique id name for plugins
-     *
-     * @return
-     */
-    public String pluginDependancyUniqueIDs() default "";
+	/**
+	 * Comma separated list of unique id name for plugins
+	 *
+	 * @return
+	 */
+	public String pluginDependancyUniqueIDs() default "";
 
-    /**
-     * The price of this plugin
-     *
-     * @return
-     */
-    public double pluginPrice() default 0.0;
+	/**
+	 * The price of this plugin
+	 *
+	 * @return
+	 */
+	public double pluginPrice() default 0.0;
 
-    /**
-     *
-     * @return
-     */
-    public String pluginPayUrl() default "https://paypal.me/MarcMagon/15";
+	/**
+	 * @return
+	 */
+	public String pluginPayUrl() default "https://paypal.me/MarcMagon/15";
 
-    /**
-     * The default homepage of the plugin
-     *
-     * @return
-     */
-    public String pluginOriginalHomepage() default "";
+	/**
+	 * The default homepage of the plugin
+	 *
+	 * @return
+	 */
+	public String pluginOriginalHomepage() default "";
 
-    /**
-     * If the plugin requires commercial for public sites
-     *
-     * @return
-     */
-    public boolean pluginCommercial() default false;
+	/**
+	 * If the plugin requires commercial for public sites
+	 *
+	 * @return
+	 */
+	public boolean pluginCommercial() default false;
 }

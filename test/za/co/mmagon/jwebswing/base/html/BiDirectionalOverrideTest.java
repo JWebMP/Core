@@ -20,26 +20,25 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- *
  * @author MMagon
  */
 public class BiDirectionalOverrideTest
 {
-
-    public BiDirectionalOverrideTest()
-    {
-    }
-
-    /**
-     * Test of setText method, of class BiDirectionalIsolation.
-     */
-    @Test
-    public void testSetText()
-    {
-        BiDirectionalOverride bdo = new BiDirectionalOverride();
-        bdo.setText("set text demo");
-        System.out.println(bdo.toString(true));
-        Assert.assertEquals("<bdo>set text demo</bdo>", bdo.toString(true).toString());
-    }
-
+	
+	public BiDirectionalOverrideTest()
+	{
+	}
+	
+	/**
+	 * Test of setText method, of class BiDirectionalIsolation.
+	 */
+	@Test
+	public void testSetText()
+	{
+		BiDirectionalOverride bdo = new BiDirectionalOverride();
+		bdo.setText("set text demo");
+		System.out.println(bdo.toString(true));
+		Assert.assertEquals("<bdo>set text demo</bdo>", bdo.toString(true).toString());
+	}
+	
 }

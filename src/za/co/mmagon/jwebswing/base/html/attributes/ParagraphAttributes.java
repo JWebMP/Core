@@ -22,27 +22,27 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  * Defines all the attributes for a paragraph
  *
  * @author GedMarc
- * @since Mar 1, 2015
  * @version 1.0
+ * @since Mar 1, 2015
  */
 public enum ParagraphAttributes implements AttributeDefinitions
 {
-
-    /**
-     * Specifies the alignment of the text within a paragraph
-     * <p>
-     * left
-     * right
-     * center
-     * justify
-     *
-     * @deprecated Not supported in HTML 5
-     */
-    Align;
-
-    @Override
-    public boolean isKeyword()
-    {
-        return false;
-    }
+	
+	/**
+	 * Specifies the alignment of the text within a paragraph
+	 * <p>
+	 * left
+	 * right
+	 * center
+	 * justify
+	 *
+	 * @deprecated Not supported in HTML 5
+	 */
+	Align;
+	
+	@Override
+	public boolean isKeyword()
+	{
+		return false;
+	}
 }

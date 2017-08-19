@@ -8,29 +8,29 @@ import za.co.mmagon.jwebswing.base.servlets.JWebSwingServlet;
 public class HelloWorldBasic extends JWebSwingServlet
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * The page to be displayed.
-     *
-     * @return
-     */
-    @Override
-    public Page getPage()
-    {
-        Page p = new Page();
-        p.getBody().add("Hello World");
-        return p;
-    }
+	/**
+	 * The page to be displayed.
+	 *
+	 * @return
+	 */
+	@Override
+	public Page getPage()
+	{
+		Page p = new Page();
+		p.getBody().add("Hello World");
+		return p;
+	}
 
-    /**
-     * Relative path to context
-     *
-     * @return
-     */
-    @Override
-    public String getUrl()
-    {
-        return "/";
-    }
+	/**
+	 * Relative path to context
+	 *
+	 * @return
+	 */
+	@Override
+	public String getUrl()
+	{
+		return "/";
+	}
 }

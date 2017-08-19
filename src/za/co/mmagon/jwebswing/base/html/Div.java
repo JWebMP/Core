@@ -17,8 +17,14 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.LayoutHandler;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.AreaChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.ImageMapChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
@@ -45,48 +51,51 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The align attribute not supported in HTML5.
  * <p>
- * @author Marc Magon
+ *
  * @param <C> The Children Allowed
  * @param <A> The allowed attributes for the component
  * @param <F> The allowed features on the div type
  * @param <E> The allowed events
  * @param <J> The Clonable object
+ *
+ * @author Marc Magon
  */
 public class Div<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Div<C, A, F, E, J>>
-        extends Component<C, A, F, E, J>
-        implements BodyChildren, ImageMapChildren, AreaChildren, LayoutHandler,
-        ListItemChildren
+		extends Component<C, A, F, E, J>
+		implements BodyChildren, ImageMapChildren, AreaChildren, LayoutHandler,
+		ListItemChildren
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a new Div Object
-     */
-    public Div()
-    {
-        super(ComponentTypes.Div);
-    }
+	/**
+	 * Constructs a new Div Object
+	 */
+	public Div()
+	{
+		super(ComponentTypes.Div);
+	}
 
-    /**
-     * Use a different tag for this div
-     * <p>
-     * @param myComponent
-     */
-    public Div(ComponentTypes myComponent)
-    {
-        super(myComponent);
-    }
+	/**
+	 * Use a different tag for this div
+	 * <p>
+	 *
+	 * @param myComponent
+	 */
+	public Div(ComponentTypes myComponent)
+	{
+		super(myComponent);
+	}
 
-    /**
-     * Div with in-line text
-     *
-     * @param text
-     */
-    public Div(String text)
-    {
-        super(ComponentTypes.Div);
-        setText(text);
+	/**
+	 * Div with in-line text
+	 *
+	 * @param text
+	 */
+	public Div(String text)
+	{
+		super(ComponentTypes.Div);
+		setText(text);
 
-    }
+	}
 }

@@ -16,9 +16,10 @@
  */
 package za.co.mmagon.jwebswing.generics;
 
+import za.co.mmagon.jwebswing.base.html.interfaces.NamedPair;
+
 import java.io.Serializable;
 import java.util.Comparator;
-import za.co.mmagon.jwebswing.base.html.interfaces.NamedPair;
 
 /**
  * Denotes a pair of anything. Left side master right side is slave
@@ -26,129 +27,128 @@ import za.co.mmagon.jwebswing.base.html.interfaces.NamedPair;
  * @param <L> Left Side Type
  * @param <R> Right Side Type
  *
- * @since
- * @version
  * @author MMagon
  */
 public class Pair<L extends Serializable, R extends Serializable> implements NamedPair<L, R>, Serializable, Comparable<Pair>, Comparator<Pair>
 {
 
-    private static final long serialVersionUID = 1L;
-    /**
-     * The left side
-     */
-    protected L left;
-    /**
-     * The right side
-     */
-    protected R right;
+	private static final long serialVersionUID = 1L;
+	private static boolean leftOnly = true;
+	/**
+	 * The left side
+	 */
+	protected L left;
+	/**
+	 * The right side
+	 */
+	protected R right;
 
-    private static boolean leftOnly = true;
+	public Pair()
+	{
+	}
 
-    public Pair()
-    {
-    }
+	/**
+	 * Constructs a new pair
+	 *
+	 * @param left
+	 * @param right
+	 */
+	public Pair(L left, R right)
+	{
+		this.left = left;
+		this.right = right;
+	}
 
-    /**
-     * Constructs a new pair
-     *
-     * @param left
-     * @param right
-     */
-    public Pair(L left, R right)
-    {
-        this.left = left;
-        this.right = right;
-    }
+	/**
+	 * Returns if this pair is set to validate on the left field only
+	 * <p>
+	 *
+	 * @return
+	 */
+	public static boolean isLeftOnly()
+	{
+		return leftOnly;
+	}
 
-    @Override
-    public int compare(Pair o1, Pair o2)
-    {
-        return o1.left.toString().compareTo(o2.left.toString());
-    }
+	/**
+	 * Sets if this pair should validate on the left pair only
+	 * <p>
+	 *
+	 * @param leftOnly
+	 */
+	public static void setLeftOnly(boolean leftOnly)
+	{
+		Pair.leftOnly = leftOnly;
+	}
 
-    @Override
-    public int compareTo(Pair o)
-    {
-        if (o == null)
-        {
-            return -1;
-        }
-        return left.toString().compareTo(o.left.toString());
-    }
+	@Override
+	public int compare(Pair o1, Pair o2)
+	{
+		return o1.left.toString().compareTo(o2.left.toString());
+	}
 
-    /**
-     * Gets the left side
-     *
-     * @return
-     */
-    @Override
-    public L getLeft()
-    {
-        return left;
-    }
+	@Override
+	public int compareTo(Pair o)
+	{
+		if (o == null)
+		{
+			return -1;
+		}
+		return left.toString().compareTo(o.left.toString());
+	}
 
-    /**
-     * Gets the right side
-     *
-     * @return
-     */
-    @Override
-    public R getRight()
-    {
-        return right;
-    }
+	/**
+	 * Gets the left side
+	 *
+	 * @return
+	 */
+	@Override
+	public L getLeft()
+	{
+		return left;
+	}
 
-    @Override
-    public int hashCode()
-    {
-        return left.hashCode() ^ right.hashCode();
-    }
+	public void setLeft(L left)
+	{
+		this.left = left;
+	}
 
-    @Override
-    public boolean equals(Object o)
-    {
-        if (o == null)
-        {
-            return false;
-        }
-        if (!(o instanceof Pair))
-        {
-            return false;
-        }
-        Pair pairo = (Pair) o;
-        return this.left.equals(pairo.getLeft())
-                && this.right.equals(pairo.getRight());
-    }
+	/**
+	 * Gets the right side
+	 *
+	 * @return
+	 */
+	@Override
+	public R getRight()
+	{
+		return right;
+	}
 
-    /**
-     * Returns if this pair is set to validate on the left field only
-     * <p>
-     * @return
-     */
-    public static boolean isLeftOnly()
-    {
-        return leftOnly;
-    }
+	public void setRight(R right)
+	{
+		this.right = right;
+	}
 
-    /**
-     * Sets if this pair should validate on the left pair only
-     * <p>
-     * @param leftOnly
-     */
-    public static void setLeftOnly(boolean leftOnly)
-    {
-        Pair.leftOnly = leftOnly;
-    }
+	@Override
+	public int hashCode()
+	{
+		return left.hashCode() ^ right.hashCode();
+	}
 
-    public void setLeft(L left)
-    {
-        this.left = left;
-    }
-
-    public void setRight(R right)
-    {
-        this.right = right;
-    }
+	@Override
+	public boolean equals(Object o)
+	{
+		if (o == null)
+		{
+			return false;
+		}
+		if (!(o instanceof Pair))
+		{
+			return false;
+		}
+		Pair pairo = (Pair) o;
+		return this.left.equals(pairo.getLeft())
+				&& this.right.equals(pairo.getRight());
+	}
 
 }

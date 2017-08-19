@@ -28,26 +28,26 @@ import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 public class ResizeStopDirective extends AngularDirectiveBase
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs a new right click directive based on the angular object passed in
-     * <p>
-     */
-    public ResizeStopDirective()
-    {
-        super("ngResizeStop");
-    }
+	/**
+	 * Constructs a new right click directive based on the angular object passed in
+	 * <p>
+	 */
+	public ResizeStopDirective()
+	{
+		super("ngResizeStop");
+	}
 
-    /**
-     * Renders the right click directive from the JavaScript file
-     *
-     * @return
-     */
-    @Override
-    public String renderFunction()
-    {
-        return FileTemplates.getFileTemplate(ResizeStopDirective.class, "ResizeStop").toString();
-    }
+	/**
+	 * Renders the right click directive from the JavaScript file
+	 *
+	 * @return
+	 */
+	@Override
+	public String renderFunction()
+	{
+		return FileTemplates.getFileTemplate(ResizeStopDirective.class, "ResizeStop").toString();
+	}
 
 }

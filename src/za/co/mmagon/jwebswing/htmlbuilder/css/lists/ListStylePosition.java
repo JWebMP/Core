@@ -20,70 +20,67 @@ import za.co.mmagon.jwebswing.base.client.CSSVersions;
 import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
 
 /**
- *
  * @author GedMarc
  * @since 18 Jan 2016
  */
 public enum ListStylePosition implements CSSEnumeration<ListStylePosition>
 {
-    /**
-     * Indents the marker and the text. The bullets appear inside the content flow
-     */
-    Inside,
-    /**
-     * Keeps the marker to the left of the text. The bullets appears outside the content flow. This is default
-     */
-    Outside,
-    /**
-     * Sets this property to its default value
-     *
-     * see http://www.w3schools.com/cssref/css_initial.asp
-     */
-    Initial,
-    /**
-     * Inherits this property from its parent element.
-     *
-     * see http://www.w3schools.com/cssref/css_inherit.asp
-     */
-    Inherit,
-    /**
-     * Sets this field as not set
-     */
-    Unset;
+	/**
+	 * Indents the marker and the text. The bullets appear inside the content flow
+	 */
+	Inside,
+	/**
+	 * Keeps the marker to the left of the text. The bullets appears outside the content flow. This is default
+	 */
+	Outside,
+	/**
+	 * Sets this property to its default value
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_initial.asp
+	 */
+	Initial,
+	/**
+	 * Inherits this property from its parent element.
+	 * <p>
+	 * see http://www.w3schools.com/cssref/css_inherit.asp
+	 */
+	Inherit,
+	/**
+	 * Sets this field as not set
+	 */
+	Unset;;
 
-    ;
+	private ListStylePosition()
+	{
+	}
 
-    @Override
-    public String toString()
-    {
-        return name().toLowerCase();
-    }
+	@Override
+	public String toString()
+	{
+		return name().toLowerCase();
+	}
 
-    private ListStylePosition()
-    {
-    }
+	@Override
+	public String getJavascriptSyntax()
+	{
+		return "style.listStylePosition";
+	}
 
-    @Override
-    public String getJavascriptSyntax()
-    {
-        return "style.listStylePosition";
-    }
+	@Override
+	public CSSVersions getCSSVersion()
+	{
+		return CSSVersions.CSS1;
+	}
 
-    @Override
-    public CSSVersions getCSSVersion()
-    {
-        return CSSVersions.CSS1;
-    }
+	@Override
+	public String getValue()
+	{
+		return name();
+	}
 
-    @Override
-    public String getValue()
-    {
-        return name();
-    }
-
-    @Override
-    public ListStylePosition getDefault()
-    {
-        return Unset;
-    }
+	@Override
+	public ListStylePosition getDefault()
+	{
+		return Unset;
+	}
 }

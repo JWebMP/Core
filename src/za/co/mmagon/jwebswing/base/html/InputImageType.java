@@ -22,20 +22,21 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 /**
  * Specifies an image input type
  *
- * @author GedMarc
  * @param <J>
+ *
+ * @author GedMarc
  */
 public class InputImageType<J extends InputImageType<J>>
-        extends Input<InputImageTypeAttributes, J>
+		extends Input<InputImageTypeAttributes, J>
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new button with the given text
-     */
-    public InputImageType()
-    {
-        super(InputTypes.Image);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new button with the given text
+	 */
+	public InputImageType()
+	{
+		super(InputTypes.Image);
+	}
 }

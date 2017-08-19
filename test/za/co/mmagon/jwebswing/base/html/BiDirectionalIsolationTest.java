@@ -22,36 +22,35 @@ import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.Page;
 
 /**
- *
  * @author GedMarc
  */
 public class BiDirectionalIsolationTest extends BaseTestClass
 {
-
-    private BiDirectionalIsolation bdi = new BiDirectionalIsolation();
-    private Page p = new Page();
-    private Body b = new Body(p);
-
-    public BiDirectionalIsolationTest()
-    {
-    }
-
-    private void reset()
-    {
-        bdi = new BiDirectionalIsolation("test");
-        p = getPage();
-        b.add(bdi);
-    }
-
-    /**
-     * Test of setText method, of class BiDirectionalIsolation.
-     */
-    @Test
-    public void testSetText()
-    {
-        reset();
-        bdi.setText("set text demo");
-        System.out.println(bdi.toString(true));
-        Assert.assertEquals("<bdi>set text demo</bdi>", bdi.toString(true).toString());
-    }
+	
+	private BiDirectionalIsolation bdi = new BiDirectionalIsolation();
+	private Page p = new Page();
+	private Body b = new Body(p);
+	
+	public BiDirectionalIsolationTest()
+	{
+	}
+	
+	private void reset()
+	{
+		bdi = new BiDirectionalIsolation("test");
+		p = getPage();
+		b.add(bdi);
+	}
+	
+	/**
+	 * Test of setText method, of class BiDirectionalIsolation.
+	 */
+	@Test
+	public void testSetText()
+	{
+		reset();
+		bdi.setText("set text demo");
+		System.out.println(bdi.toString(true));
+		Assert.assertEquals("<bdi>set text demo</bdi>", bdi.toString(true).toString());
+	}
 }

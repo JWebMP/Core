@@ -4,49 +4,48 @@ import za.co.mmagon.jwebswing.base.client.CSSVersions;
 import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
 
 /**
- *
  * @author MMagon
- * @since 24 Sep 2013
  * @version 1.0
+ * @since 24 Sep 2013
  */
 public enum MarginSetting implements CSSEnumeration<MarginSetting>
 {
-    /**
-     * Sets to auto, use to center items
-     */
-    Auto,
-    /**
-     * Inherit from parent
-     */
-    Inherit,
-    /**
-     * None
-     */
-    None,
-    
-    Unset;
+	/**
+	 * Sets to auto, use to center items
+	 */
+	Auto,
+	/**
+	 * Inherit from parent
+	 */
+	Inherit,
+	/**
+	 * None
+	 */
+	None,
 
-    @Override
-    public String getValue()
-    {
-        return name().toLowerCase();
-    }
+	Unset;
 
-    @Override
-    public MarginSetting getDefault()
-    {
-        return Unset;
-    }
+	@Override
+	public String getValue()
+	{
+		return name().toLowerCase();
+	}
 
-    @Override
-    public String getJavascriptSyntax()
-    {
-        return "style.margin";
-    }
+	@Override
+	public MarginSetting getDefault()
+	{
+		return Unset;
+	}
 
-    @Override
-    public CSSVersions getCSSVersion()
-    {
-        return CSSVersions.CSS3;
-    }
+	@Override
+	public String getJavascriptSyntax()
+	{
+		return "style.margin";
+	}
+
+	@Override
+	public CSSVersions getCSSVersion()
+	{
+		return CSSVersions.CSS3;
+	}
 }

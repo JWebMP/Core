@@ -19,20 +19,17 @@ package za.co.mmagon.jwebswing.plugins.ajaxenabler;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 
 /**
- *
  * @since @version @author MMagon
- *
- *
  */
 public class JQueryAjaxEnablerReference extends JavascriptReference
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public JQueryAjaxEnablerReference()
-    {
-        super("AjaxEnabler", 1.0, "javascript/jwebswing/ajax-enabler.js", "javascript/jwebswing/ajax-enabler.js");
-        setSortOrder(1);
-    }
+	public JQueryAjaxEnablerReference()
+	{
+		super("AjaxEnabler", 1.0, "javascript/jwebswing/ajax-enabler.js", "javascript/jwebswing/ajax-enabler.js");
+		setSortOrder(1);
+	}
 
 }

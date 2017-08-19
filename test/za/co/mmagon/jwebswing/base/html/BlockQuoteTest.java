@@ -21,44 +21,43 @@ import org.junit.Test;
 import za.co.mmagon.jwebswing.base.html.attributes.BlockQuoteAttributes;
 
 /**
- *
  * @author GedMarc
  */
 public class BlockQuoteTest
 {
-
-    public BlockQuoteTest()
-    {
-    }
-    BlockQuote bq = new BlockQuote();
-    Paragraph p = new Paragraph("test");
-
-    private void reset()
-    {
-        bq = new BlockQuote();
-        bq.addAttribute(BlockQuoteAttributes.Cite, "cite");
-        bq.setID("id");
-        p.setID("id");
-        bq.add(p);
-    }
-
-    @Test
-    public void testBlockQuotes()
-    {
-        reset();
-        System.out.println(bq.toString(true));
-        Assert.assertEquals("<blockquote cite=\"cite\" id=\"id\">\n"
-                + "	<p id=\"id\">test</p>\n"
-                + "</blockquote>", bq.toString(true));
-    }
-
-    @Test
-    public void testBlockQuotesTiny()
-    {
-        reset();
-        bq.setTiny(true);
-        System.out.println(bq.toString(true));
-        Assert.assertEquals("<blockquote cite=\"cite\" id=\"id\"><p id=\"id\">test</p></blockquote>", bq.toString(true));
-    }
-
+	
+	BlockQuote bq = new BlockQuote();
+	Paragraph p = new Paragraph("test");
+	public BlockQuoteTest()
+	{
+	}
+	
+	private void reset()
+	{
+		bq = new BlockQuote();
+		bq.addAttribute(BlockQuoteAttributes.Cite, "cite");
+		bq.setID("id");
+		p.setID("id");
+		bq.add(p);
+	}
+	
+	@Test
+	public void testBlockQuotes()
+	{
+		reset();
+		System.out.println(bq.toString(true));
+		Assert.assertEquals("<blockquote cite=\"cite\" id=\"id\">\n"
+				                    + "	<p id=\"id\">test</p>\n"
+				                    + "</blockquote>", bq.toString(true));
+	}
+	
+	@Test
+	public void testBlockQuotesTiny()
+	{
+		reset();
+		bq.setTiny(true);
+		System.out.println(bq.toString(true));
+		Assert.assertEquals("<blockquote cite=\"cite\" id=\"id\"><p id=\"id\">test</p></blockquote>", bq.toString(true));
+	}
+	
 }

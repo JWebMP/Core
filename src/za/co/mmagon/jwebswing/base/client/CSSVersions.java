@@ -53,31 +53,29 @@ package za.co.mmagon.jwebswing.base.client;
  * are advised to drop vendor prefixes.[26]
  *
  * @author MMagon
- * @since 22 Jun 2013
  * @version 1.0
- *
- *
+ * @since 22 Jun 2013
  */
 public enum CSSVersions
 {
-    /**
-     * CSS Version 1.0
-     */
-    CSS1,
-    /**
-     * CSS Version 2.0
-     */
-    CSS2,
-    /**
-     * CSS Version 2.1
-     */
-    CSS21,
-    /**
-     * CSS Version 3
-     */
-    CSS3,
-    /**
-     * CSS Version 4
-     */
-    CSS4;
+	/**
+	 * CSS Version 1.0
+	 */
+	CSS1,
+	/**
+	 * CSS Version 2.0
+	 */
+	CSS2,
+	/**
+	 * CSS Version 2.1
+	 */
+	CSS21,
+	/**
+	 * CSS Version 3
+	 */
+	CSS3,
+	/**
+	 * CSS Version 4
+	 */
+	CSS4;
 }

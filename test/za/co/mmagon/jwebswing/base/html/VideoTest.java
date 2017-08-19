@@ -16,30 +16,30 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 import za.co.mmagon.jwebswing.base.html.attributes.VideoAttributes;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class VideoTest
 {
 
-    public VideoTest()
-    {
-    }
+	public VideoTest()
+	{
+	}
 
-    @Test
-    public void testSomeMethod()
-    {
-        Video v = new Video();
-        v.setID("id");
-        v.addAttribute(VideoAttributes.Src, "Source");
-        System.out.println(v.toString(true));
-        assertEquals(""
-                + "<video src=\"Source\" id=\"id\"></video>", v.toString(true).toString());
-    }
+	@Test
+	public void testSomeMethod()
+	{
+		Video v = new Video();
+		v.setID("id");
+		v.addAttribute(VideoAttributes.Src, "Source");
+		System.out.println(v.toString(true));
+		assertEquals(""
+				             + "<video src=\"Source\" id=\"id\"></video>", v.toString(true).toString());
+	}
 
 }

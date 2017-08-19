@@ -20,42 +20,41 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Test;
 
 /**
- *
  * @author Marc Magon
  */
 public class JavaScriptPartTest
 {
 
-    public JavaScriptPartTest()
-    {
-    }
+	public JavaScriptPartTest()
+	{
+	}
 
-    @Test
-    public void testDisplay()
-            throws JsonProcessingException
-    {
-        JavaScriptPartImpl bean = new JavaScriptPartImpl();
-        System.out.println(bean.toString());
+	@Test
+	public void testDisplay()
+			throws JsonProcessingException
+	{
+		JavaScriptPartImpl bean = new JavaScriptPartImpl();
+		System.out.println(bean.toString());
 
-        //assertEuq
-    }
+		//assertEuq
+	}
 
-    public class JavaScriptPartImpl extends JavaScriptPart
-    {
+	public class JavaScriptPartImpl extends JavaScriptPart
+	{
 
-        private String name = "name";
+		private String name = "name";
 
-        public JavaScriptPartImpl()
-        {
+		public JavaScriptPartImpl()
+		{
 
-        }
+		}
 
-        @Override
-        public JavascriptPartType getJavascriptType()
-        {
-            return JavascriptPartType.Javascript;
-        }
+		@Override
+		public JavascriptPartType getJavascriptType()
+		{
+			return JavascriptPartType.Javascript;
+		}
 
-    }
+	}
 
 }

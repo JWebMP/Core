@@ -16,28 +16,28 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class SectionTest
 {
-
-    public SectionTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        Section s = new Section();
-        s.setID("s");
-        System.out.println(s.toString(true));
-        assertEquals(""
-                + "<section id=\"s\"></section>", s.toString(true).toString());
-    }
-
+	
+	public SectionTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		Section s = new Section();
+		s.setID("s");
+		System.out.println(s.toString(true));
+		assertEquals(""
+				             + "<section id=\"s\"></section>", s.toString(true).toString());
+	}
+	
 }

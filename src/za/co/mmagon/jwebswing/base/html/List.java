@@ -17,7 +17,9 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
-import za.co.mmagon.jwebswing.base.html.interfaces.*;
+import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
+import za.co.mmagon.jwebswing.base.html.interfaces.DisplayObjectType;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.ListChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
@@ -46,65 +48,67 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * <p>
  * The "compact" attribute is not supported in HTML5.<p>
  * <p>
- * @author Marc Magon
+ *
  * @param <C>
  * @param <A>
  * @param <E>
  * @param <J>
+ *
+ * @author Marc Magon
  */
 public class List<C extends ListChildren, A extends Enum & AttributeDefinitions, E extends GlobalEvents, J extends List<C, A, E, J>>
-        extends Component<C, A, GlobalFeatures, E, J>
-        implements ListChildren, DisplayObjectType, ListItemChildren
+		extends Component<C, A, GlobalFeatures, E, J>
+		implements ListChildren, DisplayObjectType, ListItemChildren
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Constructs an unordered list
-     */
-    public List()
-    {
-        this(false);
-    }
+	/**
+	 * Constructs an unordered list
+	 */
+	public List()
+	{
+		this(false);
+	}
 
-    /**
-     * Specifies if the list is ordered or unordered
-     *
-     * @param orderedList
-     */
-    public List(boolean orderedList)
-    {
-        super(orderedList ? "ol" : "ul", orderedList ? ComponentTypes.OrderedList : ComponentTypes.UnorderedList, false);
-    }
+	/**
+	 * Specifies if the list is ordered or unordered
+	 *
+	 * @param orderedList
+	 */
+	public List(boolean orderedList)
+	{
+		super(orderedList ? "ol" : "ul", orderedList ? ComponentTypes.OrderedList : ComponentTypes.UnorderedList, false);
+	}
 
-    /**
-     * Adds a list item to this list
-     *
-     * @param textToAdd
-     *
-     * @return
-     */
-    public ListItem addItem(String textToAdd)
-    {
-        ListItem li = new ListItem(textToAdd);
-        add((C) li);
-        return li;
-    }
+	/**
+	 * Adds a list item to this list
+	 *
+	 * @param textToAdd
+	 *
+	 * @return
+	 */
+	public ListItem addItem(String textToAdd)
+	{
+		ListItem li = new ListItem(textToAdd);
+		add((C) li);
+		return li;
+	}
 
-    /**
-     * Returns a list of the specified text
-     *
-     * @param textToAdd
-     *
-     * @return
-     */
-    public List addList(String textToAdd)
-    {
-        ListItem lit = new ListItem(textToAdd);
-        List li = new List(false);
-        lit.add(li);
-        add((C) lit);
-        return li;
-    }
+	/**
+	 * Returns a list of the specified text
+	 *
+	 * @param textToAdd
+	 *
+	 * @return
+	 */
+	public List addList(String textToAdd)
+	{
+		ListItem lit = new ListItem(textToAdd);
+		List li = new List(false);
+		lit.add(li);
+		add((C) lit);
+		return li;
+	}
 
 }

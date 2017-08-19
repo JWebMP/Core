@@ -16,33 +16,33 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author GedMarc
  */
 public class ParagraphTest
 {
-
-    public ParagraphTest()
-    {
-    }
-
-    /**
-     * Test of getText method, of class Paragraph.
-     */
-    @Test
-    public void testGetText()
-    {
-        System.out.println("getText");
-        Paragraph instance = new Paragraph();
-        instance.setID("Paragraph");
-        System.out.println(instance.toString(true));
-        String expResult = "<p id=\"Paragraph\"></p>";
-        StringBuilder result = new StringBuilder(instance.toString(true));
-        assertEquals(expResult, result.toString());
-    }
-
+	
+	public ParagraphTest()
+	{
+	}
+	
+	/**
+	 * Test of getText method, of class Paragraph.
+	 */
+	@Test
+	public void testGetText()
+	{
+		System.out.println("getText");
+		Paragraph instance = new Paragraph();
+		instance.setID("Paragraph");
+		System.out.println(instance.toString(true));
+		String expResult = "<p id=\"Paragraph\"></p>";
+		StringBuilder result = new StringBuilder(instance.toString(true));
+		assertEquals(expResult, result.toString());
+	}
+	
 }

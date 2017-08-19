@@ -26,94 +26,94 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 public class AjaxComponentUpdates extends JavaScriptPart
 {
 
-    private static final long serialVersionUID = 1L;
-    /**
-     * The stored HTML
-     */
-    @JsonProperty("html")
-    private String html;
-    /**
-     * An assigned ID for a component action
-     */
-    @JsonProperty("id")
-    private String id;
-    /**
-     * The type for an action, defaulted to Replace
-     */
-    @JsonProperty("insertType")
-    private AjaxComponentInsertType insertType;
+	private static final long serialVersionUID = 1L;
+	/**
+	 * The stored HTML
+	 */
+	@JsonProperty("html")
+	private String html;
+	/**
+	 * An assigned ID for a component action
+	 */
+	@JsonProperty("id")
+	private String id;
+	/**
+	 * The type for an action, defaulted to Replace
+	 */
+	@JsonProperty("insertType")
+	private AjaxComponentInsertType insertType;
 
-    /**
-     * Constructs an update class from a given component
-     *
-     * @param component
-     */
-    public AjaxComponentUpdates(ComponentHierarchyBase component)
-    {
-        component.setTiny(true);
-        this.html = component.toString(true);
-        this.id = component.getID();
-        this.insertType = AjaxComponentInsertType.Replace;
-    }
+	/**
+	 * Constructs an update class from a given component
+	 *
+	 * @param component
+	 */
+	public AjaxComponentUpdates(ComponentHierarchyBase component)
+	{
+		component.setTiny(true);
+		this.html = component.toString(true);
+		this.id = component.getID();
+		this.insertType = AjaxComponentInsertType.Replace;
+	}
 
-    /**
-     * Returns the HTML of the component
-     *
-     * @return
-     */
-    public String getHtml()
-    {
-        return html;
-    }
+	/**
+	 * Returns the HTML of the component
+	 *
+	 * @return
+	 */
+	public String getHtml()
+	{
+		return html;
+	}
 
-    /**
-     * Returns which component ID is getting replaced
-     *
-     * @return
-     */
-    public String getId()
-    {
-        return id;
-    }
+	/**
+	 * Sets the HTML
+	 *
+	 * @param html
+	 */
+	public void setHtml(String html)
+	{
+		this.html = html;
+	}
 
-    /**
-     * Sets the type of insert that should occur on component ID
-     *
-     * @return
-     */
-    public AjaxComponentInsertType getInsertType()
-    {
-        return insertType;
-    }
+	/**
+	 * Returns which component ID is getting replaced
+	 *
+	 * @return
+	 */
+	public String getId()
+	{
+		return id;
+	}
 
-    /**
-     * Sets the type of insert that should occur on component ID
-     *
-     * @param insertType
-     */
-    public void setInsertType(AjaxComponentInsertType insertType)
-    {
-        this.insertType = insertType;
-    }
+	/**
+	 * Sets the ID being used for the insert type
+	 *
+	 * @param id
+	 */
+	public void setId(String id)
+	{
+		this.id = id;
+	}
 
-    /**
-     * Sets the HTML
-     *
-     * @param html
-     */
-    public void setHtml(String html)
-    {
-        this.html = html;
-    }
+	/**
+	 * Sets the type of insert that should occur on component ID
+	 *
+	 * @return
+	 */
+	public AjaxComponentInsertType getInsertType()
+	{
+		return insertType;
+	}
 
-    /**
-     * Sets the ID being used for the insert type
-     *
-     * @param id
-     */
-    public void setId(String id)
-    {
-        this.id = id;
-    }
+	/**
+	 * Sets the type of insert that should occur on component ID
+	 *
+	 * @param insertType
+	 */
+	public void setInsertType(AjaxComponentInsertType insertType)
+	{
+		this.insertType = insertType;
+	}
 
 }

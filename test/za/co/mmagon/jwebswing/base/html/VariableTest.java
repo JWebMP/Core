@@ -17,24 +17,22 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
- *
  * @author GedMarc
  */
 public class VariableTest
 {
-    
-    public VariableTest()
-    {
-    }
-
-    @Test
-    public void testSomeMethod()
-    {
-        Variable v= new Variable("variable text");
-        System.out.println(v.toString(true));
-    }
-    
+	
+	public VariableTest()
+	{
+	}
+	
+	@Test
+	public void testSomeMethod()
+	{
+		Variable v = new Variable("variable text");
+		System.out.println(v.toString(true));
+	}
+	
 }

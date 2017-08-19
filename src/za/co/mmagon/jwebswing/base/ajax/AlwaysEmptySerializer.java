@@ -20,25 +20,24 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+
 import java.io.IOException;
 
 /**
- *
  * @author GedMarc
  * @since Nov 9, 2016
- * 
  */
 public class AlwaysEmptySerializer extends JsonSerializer<Object>
 {
 
-    public AlwaysEmptySerializer()
-    {
-        
-    }
+	public AlwaysEmptySerializer()
+	{
 
-    @Override
-    public void serialize(Object t, JsonGenerator jg, SerializerProvider sp) throws IOException, JsonProcessingException
-    {
-        jg.writeNull();
-    }
+	}
+
+	@Override
+	public void serialize(Object t, JsonGenerator jg, SerializerProvider sp) throws IOException, JsonProcessingException
+	{
+		jg.writeNull();
+	}
 }

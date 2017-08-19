@@ -20,27 +20,26 @@ import org.junit.Test;
 import za.co.mmagon.jwebswing.base.html.attributes.ButtonAttributes;
 
 /**
- *
  * @author GedMarc
  */
 public class ButtonTest
 {
 
-    private Button b = new Button("button");
+	private Button b = new Button("button");
 
-    public ButtonTest()
-    {
+	public ButtonTest()
+	{
 
-    }
+	}
 
-    /**
-     * Test of getText method, of class Button.
-     */
-    @Test
-    public void testGetText()
-    {
-        b.addAttribute(ButtonAttributes.Type, "button");
-        System.out.println(b.toString(true));
-    }
+	/**
+	 * Test of getText method, of class Button.
+	 */
+	@Test
+	public void testGetText()
+	{
+		b.addAttribute(ButtonAttributes.Type, "button");
+		System.out.println(b.toString(true));
+	}
 
 }

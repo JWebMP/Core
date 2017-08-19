@@ -8,15 +8,15 @@ import za.co.mmagon.jwebswing.base.servlets.JWebSwingServlet;
 public class BasicAppTemplate extends JWebSwingServlet
 {
 
-    @Override
-    public Page getPage()
-    {
-        return new Page();
-    }
+	@Override
+	public Page getPage()
+	{
+		return new Page();
+	}
 
-    @Override
-    public String getUrl()
-    {
-        return "/";
-    }
+	@Override
+	public String getUrl()
+	{
+		return "/";
+	}
 }

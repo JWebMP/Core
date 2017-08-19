@@ -19,20 +19,19 @@ package za.co.mmagon.jwebswing.demoframework;
 import za.co.mmagon.jwebswing.base.html.Div;
 
 /**
- *
  * @author Marc Magon
  * @since 04 Apr 2017
  */
 public abstract class DemoPanel extends Div
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /*
-     * Constructs a new DemoPanel
-     */
-    public DemoPanel()
-    {
-        //Nothing needed
-    }
+	/*
+	 * Constructs a new DemoPanel
+	 */
+	public DemoPanel()
+	{
+		//Nothing needed
+	}
 }

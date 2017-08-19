@@ -19,7 +19,6 @@ package za.co.mmagon.jwebswing.base.html.interfaces.children;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 
 /**
- *
  * @author GedMarc
  */
 public interface BiDirectionalOverrideChildren extends ParagraphChildren

@@ -22,22 +22,22 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.FormChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 
 /**
+ * @param <J>
  *
  * @author GedMarc
- * @param <J>
  */
 public class InputTextType<J extends InputTextType<J>>
-        extends Input<InputTextAttributes, J>
-        implements ParagraphChildren, FormChildren
+		extends Input<InputTextAttributes, J>
+		implements ParagraphChildren, FormChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a search type input field
-     */
-    public InputTextType()
-    {
-        super(InputTypes.Text);
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a search type input field
+	 */
+	public InputTextType()
+	{
+		super(InputTypes.Text);
+	}
 }
