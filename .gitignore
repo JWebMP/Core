@@ -10,3 +10,7 @@ persistence.xml
 /.jacocoverage/
 /build
 /target/
+/out/
+/**/.sonar/
+**.jacocoverage/
+
