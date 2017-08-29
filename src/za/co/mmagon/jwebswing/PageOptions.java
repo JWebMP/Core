@@ -56,6 +56,10 @@ public class PageOptions extends JavaScriptPart
 	 * The Google maps API key that highlights if it should render. Needed for the dynamic rendering sometimes
 	 */
 	private String googleMapsJSApi;
+	/**
+	 * The google maps paramters
+	 */
+	private String googleMapsParameters;
 
 	/**
 	 * If the page is using JQuery 3
@@ -184,5 +188,23 @@ public class PageOptions extends JavaScriptPart
 	public void setGoogleMapsJSApi(String googleMapsJSApi)
 	{
 		this.googleMapsJSApi = googleMapsJSApi;
+	}
+
+	/**
+	 * Gets the google maps parameters
+	 * @return
+	 */
+	public String getGoogleMapsParameters()
+	{
+		return googleMapsParameters;
+	}
+
+	/**
+	 * Google Maps Parameters
+	 * @param googleMapsParameters
+	 */
+	public void setGoogleMapsParameters(String googleMapsParameters)
+	{
+		this.googleMapsParameters = googleMapsParameters;
 	}
 }

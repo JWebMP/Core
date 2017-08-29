@@ -354,14 +354,15 @@ public class Page extends Html implements IPage
 			log.log(Level.FINE, "Looking for plugins....");
 			Set<Class<? extends PageConfigurator>> configs = GuiceContext.reflect().getSubTypesOf(PageConfigurator.class);
 			List<PageConfigurator> configInstances = new ArrayList<>();
-			configs.stream().map(config -> GuiceContext.getInstance(config)).filter(a -> a != null).forEachOrdered((pc) ->
-			                                                                                                       {
-				                                                                                                       configInstances.add(pc);
-			                                                                                                       });
-			Collections.sort(configInstances, (PageConfigurator o1, PageConfigurator o2) -> o1.getSortOrder().compareTo(o2.getSortOrder()));
+			for(Class<? extends PageConfigurator> pc : configs)
+			{
+				PageConfigurator config = GuiceContext.getInstance(pc);
+				configInstances.add(config);
+			}
+			Collections.sort(configInstances, Comparator.comparing(PageConfigurator::getSortOrder));
 			for (PageConfigurator configInstance : configInstances)
 			{
-				log.log(Level.FINE, "Configuring [{0}]", configInstance.getClass().getSimpleName());
+				log.log(Level.FINE, new StringBuilder().append("Configuring [").append(configInstance.getClass().getSimpleName()).append("]").toString());
 				configInstance.configure(this);
 			}
 		}
@@ -482,7 +483,7 @@ public class Page extends Html implements IPage
 			ArrayList<ComponentHierarchyBase> requirements = new ArrayList<>();
 			for (RequirementsPriority priority : RequirementsPriority.values())
 			{
-				getPriorityRequirements(priority, requirements, true, false).stream().forEach((comp) ->
+				getPriorityRequirements(priority, requirements, true, false).forEach((comp) ->
 				                                                                              {
 					                                                                              getHead().getChildren().add(comp);
 				                                                                              });
@@ -937,7 +938,7 @@ public class Page extends Html implements IPage
 	{
 		if (angular == null)
 		{
-			angular = new AngularPageConfigurator();
+			angular = GuiceContext.getInstance(AngularPageConfigurator.class);
 		}
 		return angular;
 	}

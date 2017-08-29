@@ -57,11 +57,16 @@ public class RegularExpressionsDTO extends JavaScriptPart
 	 * Only 2 spaces or more no new lines
 	 */
 	public static final String WhiteSpacesNoNewLines = "[^\\S\\x0a\\x0d]{2,}";
+	
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Default regular expressions
 	 */
 	private Map<String, Object> regularExpressions;
+	
+	public static final String SouthAfricanIDNumber = "(((\\d{2}((0[13578]|1[02])(0[1-9]|[12]\\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\\d|30)|02(0[1-9]|1\\d|2[0-8])))|([02468][048]|[13579][26])0229))(( |-)(\\d{4})( |-)(\\d{3})|(\\d{7}))";
+	
+	public static final String yyyy_MM_dd = "([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))";
 
 	/**
 	 * Constructs a new instance of the regular expression dto
@@ -94,6 +99,8 @@ public class RegularExpressionsDTO extends JavaScriptPart
 		addExpression("textFieldMin3", TextFieldMin3);
 		addExpression("alphaNumericField", AlphaNumericField);
 		addExpression("emailField", EmailPattern);
+		addExpression("saID", SouthAfricanIDNumber);
+		addExpression("yyyy_MM_dd", yyyy_MM_dd);
 		return this;
 	}
 

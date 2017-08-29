@@ -243,4 +243,15 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		addAttribute("value", value);
 		return (J) this;
 	}
+	
+	/**
+	 * Sets the pattern for this input object if required
+	 * @param angularPatternName
+	 * @return
+	 */
+	public J setPattern(String angularPatternName)
+	{
+		addAttribute(AngularAttributes.ngPattern, angularPatternName);
+		return (J)this;
+	}
 }

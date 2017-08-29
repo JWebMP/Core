@@ -41,53 +41,53 @@ import java.util.Map.Entry;
 @RequestScoped
 public class AjaxResponse extends JavaScriptPart
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Whether or not the response is a success or not
 	 */
 	@JsonProperty("success")
 	private boolean success = true;
-
+	
 	/**
 	 * All angular variable updates to be performed
 	 */
 	@JsonProperty("variables")
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private ArrayList<AngularJsonVariable> angularVariables;
-
+	
 	/**
 	 * All relevant client reactions to perform
 	 */
 	@JsonProperty("reactions")
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private ArrayList<AjaxResponseReaction> reactions;
-
+	
 	/**
 	 * All components that must be updated
 	 */
 	@JsonIgnore
 	private List<ComponentHierarchyBase> components;
-
+	
 	/**
 	 * A complete list of the component update objects
 	 */
 	@JsonIgnore
 	private List<AjaxComponentUpdates> componentUpdates;
-
+	
 	/**
 	 * An additional list of events that can fire, not stored in memory
 	 */
 	@JsonIgnore
 	private List<Event> events;
-
+	
 	/**
 	 * An additional list of features that can fire
 	 */
 	@JsonIgnore
 	private List<Feature> features;
-
+	
 	/**
 	 * A list of local storage items and their keys
 	 */
@@ -96,7 +96,7 @@ public class AjaxResponse extends JavaScriptPart
 	 * A list of local storage items and their keys
 	 */
 	private Map<String, String> sessionStorage;
-
+	
 	/**
 	 * Returns all the feature queries for the given response
 	 *
@@ -114,7 +114,7 @@ public class AjaxResponse extends JavaScriptPart
 		                      });
 		return list;
 	}
-
+	
 	/**
 	 * Returns all the event queries from the components
 	 *
@@ -131,7 +131,7 @@ public class AjaxResponse extends JavaScriptPart
 		                    });
 		return list;
 	}
-
+	
 	/**
 	 * Adds a DTO to the response call
 	 *
@@ -143,7 +143,7 @@ public class AjaxResponse extends JavaScriptPart
 		AngularJsonVariable variable = new AngularJsonVariable(name, object);
 		getAngularVariables().add(variable);
 	}
-
+	
 	/**
 	 * Adds a DTO to the response call
 	 *
@@ -155,7 +155,7 @@ public class AjaxResponse extends JavaScriptPart
 		AngularJsonVariable variable = new AngularJsonVariable(name, object);
 		getAngularVariables().add(variable);
 	}
-
+	
 	/**
 	 * If the server action was a success
 	 *
@@ -165,7 +165,7 @@ public class AjaxResponse extends JavaScriptPart
 	{
 		return success;
 	}
-
+	
 	/**
 	 * If the server action was a success, default is no
 	 *
@@ -175,7 +175,7 @@ public class AjaxResponse extends JavaScriptPart
 	{
 		this.success = success;
 	}
-
+	
 	/**
 	 * Adds a component to be returned to the client
 	 *
@@ -190,7 +190,7 @@ public class AjaxResponse extends JavaScriptPart
 		getComponentUpdates().add(newComponent = new AjaxComponentUpdates(component));
 		return newComponent;
 	}
-
+	
 	/**
 	 * Returns a list of the needed component updates
 	 *
@@ -204,7 +204,7 @@ public class AjaxResponse extends JavaScriptPart
 		}
 		return componentUpdates;
 	}
-
+	
 	/**
 	 * Adds a client reaction to be performed
 	 *
@@ -214,7 +214,7 @@ public class AjaxResponse extends JavaScriptPart
 	{
 		getReactions().add(reaction);
 	}
-
+	
 	/**
 	 * Gets all the CSS References
 	 *
@@ -235,7 +235,7 @@ public class AjaxResponse extends JavaScriptPart
 		                                 });
 		return output;
 	}
-
+	
 	/**
 	 * Gets all the JavaScript References
 	 *
@@ -259,7 +259,7 @@ public class AjaxResponse extends JavaScriptPart
 		                                 });
 		return output;
 	}
-
+	
 	/**
 	 * Gets all the JavaScript and inserts it into the JSON response
 	 *
@@ -283,7 +283,7 @@ public class AjaxResponse extends JavaScriptPart
 					                                                                                                                                                   }
 				                                                                                                                                                   });
 			                                 }
-
+			
 			                                 //Load on demand scripts
 			                                 if (Event.class.isAssignableFrom(next.getClass()))
 			                                 {
@@ -304,7 +304,7 @@ public class AjaxResponse extends JavaScriptPart
 		                                 });
 		return output;
 	}
-
+	
 	/**
 	 * Gets all the CSS Renders
 	 *
@@ -315,14 +315,14 @@ public class AjaxResponse extends JavaScriptPart
 	protected String getAllCss()
 	{
 		StringBuilder sb = new StringBuilder();
-		getComponents().stream().filter(next -> (next instanceof ComponentStyleBase)).forEach(next
-				                                                                                      ->
-		                                                                                      {
-			                                                                                      sb.append(getCssRenders(ComponentStyleBase.class.cast(next)));
-		                                                                                      });
+		getComponents().forEach(next
+				                        ->
+		                        {
+			                        sb.append(getCssRenders(ComponentStyleBase.class.cast(next)));
+		                        });
 		return sb.toString();
 	}
-
+	
 	/**
 	 * Returns all the CSS references for all the components
 	 *
@@ -343,7 +343,7 @@ public class AjaxResponse extends JavaScriptPart
 		}
 		return cssRender;
 	}
-
+	
 	/**
 	 * Gets all JavaScript references for a component and it's children
 	 *
@@ -364,7 +364,7 @@ public class AjaxResponse extends JavaScriptPart
 		}
 		return cssRender;
 	}
-
+	
 	/**
 	 * Gets all the CSS renders for a component and its children
 	 *
@@ -378,7 +378,7 @@ public class AjaxResponse extends JavaScriptPart
 		cssRender.append(component.renderCss(0).toString());
 		return cssRender;
 	}
-
+	
 	/**
 	 * Gets all the JavaScript to render for a component and its children
 	 *
@@ -392,7 +392,7 @@ public class AjaxResponse extends JavaScriptPart
 		jsRenders.add(component.renderJavascriptAll().toString());
 		return jsRenders;
 	}
-
+	
 	/**
 	 * Returns the list of client reactions available
 	 *
@@ -406,7 +406,7 @@ public class AjaxResponse extends JavaScriptPart
 		}
 		return reactions;
 	}
-
+	
 	/**
 	 * Returns the list of components sending back
 	 *
@@ -420,7 +420,7 @@ public class AjaxResponse extends JavaScriptPart
 		}
 		return components;
 	}
-
+	
 	/**
 	 * Returns the updates
 	 *
@@ -432,7 +432,7 @@ public class AjaxResponse extends JavaScriptPart
 	{
 		return getComponentUpdates();
 	}
-
+	
 	/**
 	 * Returns the list of angular variables from the server
 	 *
@@ -446,7 +446,7 @@ public class AjaxResponse extends JavaScriptPart
 		}
 		return angularVariables;
 	}
-
+	
 	/**
 	 * Sets the list of angular variables
 	 *
@@ -456,7 +456,7 @@ public class AjaxResponse extends JavaScriptPart
 	{
 		this.angularVariables = angularVariables;
 	}
-
+	
 	/**
 	 * Removes the registered variable from the client. Use to clean up memory or assigned variables on the client
 	 *
@@ -471,7 +471,7 @@ public class AjaxResponse extends JavaScriptPart
 			getAngularVariables().add(variable);
 		}
 	}
-
+	
 	/**
 	 * Removes the registered variable from the client. Use to clean up memory or assigned variables on the client
 	 *
@@ -482,7 +482,7 @@ public class AjaxResponse extends JavaScriptPart
 		AngularJsonVariable var = new AngularJsonVariable(variableName, (JavaScriptPart) null);
 		getAngularVariables().add(var);
 	}
-
+	
 	/**
 	 * Gets events assigned to the response
 	 *
@@ -496,7 +496,7 @@ public class AjaxResponse extends JavaScriptPart
 		}
 		return events;
 	}
-
+	
 	/**
 	 * Sets events assigned to the response
 	 *
@@ -506,7 +506,7 @@ public class AjaxResponse extends JavaScriptPart
 	{
 		this.events = events;
 	}
-
+	
 	/**
 	 * Gets features assigned to the response
 	 *
@@ -520,7 +520,7 @@ public class AjaxResponse extends JavaScriptPart
 		}
 		return features;
 	}
-
+	
 	/**
 	 * Sets features assigned to the response
 	 *
@@ -530,7 +530,7 @@ public class AjaxResponse extends JavaScriptPart
 	{
 		this.features = features;
 	}
-
+	
 	@Override
 	public String toString()
 	{
@@ -546,7 +546,7 @@ public class AjaxResponse extends JavaScriptPart
 		}
 		return super.toString();
 	}
-
+	
 	/**
 	 * Returns the map going back for the local storage
 	 *
@@ -560,7 +560,7 @@ public class AjaxResponse extends JavaScriptPart
 		}
 		return localStorage;
 	}
-
+	
 	/**
 	 * Sets the map for the local storage going back
 	 *
@@ -570,7 +570,7 @@ public class AjaxResponse extends JavaScriptPart
 	{
 		this.localStorage = localStorage;
 	}
-
+	
 	/**
 	 * Gets the local session going back
 	 *
@@ -584,7 +584,7 @@ public class AjaxResponse extends JavaScriptPart
 		}
 		return sessionStorage;
 	}
-
+	
 	/**
 	 * The session storage going back
 	 *
@@ -594,5 +594,5 @@ public class AjaxResponse extends JavaScriptPart
 	{
 		this.sessionStorage = sessionStorage;
 	}
-
+	
 }

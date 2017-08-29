@@ -771,6 +771,10 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 					JavaScriptPart part = (JavaScriptPart) next.getAngularObjects().get(next1);
 					map.put(next1, part);
 				}
+				catch(ClassCastException cce)
+				{
+					log.log(Level.WARNING, "Incorrect Object Type, Perhaps JavaScriptPart?", cce);
+				}
 				catch (Exception e)
 				{
 					log.log(Level.WARNING, "Unable to render angular object", e);

@@ -407,7 +407,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
      *
      * @return
      */
-    protected J setRenderIDAttibute(boolean renderIDAttibute)
+    public J setRenderIDAttibute(boolean renderIDAttibute)
     {
         this.renderIDAttibute = renderIDAttibute;
         if (!renderIDAttibute)

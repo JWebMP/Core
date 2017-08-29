@@ -166,7 +166,7 @@ public class Event<A extends JavaScriptPart, J extends Event>
     public StringBuilder renderVariables()
     {
         final StringBuilder s = new StringBuilder("[");
-        getVariables().stream().forEach((event) ->
+        getVariables().forEach((event) ->
         {
             s.append("'").append(event).append("'").append(",");
         });

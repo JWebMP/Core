@@ -17,6 +17,7 @@
 package za.co.mmagon.jwebswing.base.angular;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.google.inject.Singleton;
 import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.PageConfigurator;
@@ -50,6 +51,7 @@ import java.util.List;
 		pluginIconImageUrl = "https://angularjs.org/img/AngularJS-large.png",
 		pluginLastUpdatedDate = "2017/03/30"
 )
+@Singleton
 public class AngularPageConfigurator extends PageConfigurator
 {
 
