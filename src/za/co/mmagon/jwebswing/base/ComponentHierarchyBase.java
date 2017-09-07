@@ -767,9 +767,17 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 			{
 				try
 				{
-					String next1 = (String) iterator1.next();
-					JavaScriptPart part = (JavaScriptPart) next.getAngularObjects().get(next1);
-					map.put(next1, part);
+					Object ne = iterator1.next();
+					if(ne instanceof String)
+					{
+						String next1 = (String) iterator1.next();
+						JavaScriptPart part = (JavaScriptPart) next.getAngularObjects().get(next1);
+						map.put(next1, part);
+					}
+					else if(ne instanceof Map)
+					{
+					
+					}
 				}
 				catch(ClassCastException cce)
 				{

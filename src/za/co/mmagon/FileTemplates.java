@@ -24,6 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -37,7 +38,7 @@ import java.util.regex.Matcher;
  */
 public class FileTemplates implements Serializable
 {
-
+	
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("FileTemplates");
 	/**
 	 * All registered templates
@@ -49,9 +50,9 @@ public class FileTemplates implements Serializable
 	 */
 	@JsonIgnore
 	private static final Map<String, StringBuilder> TemplateVariables = new ConcurrentHashMap<>();
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Returns all the template variables currently loaded into memory
 	 *
@@ -61,7 +62,7 @@ public class FileTemplates implements Serializable
 	{
 		return TemplateVariables;
 	}
-
+	
 	/**
 	 * Sets all the template scripts currently loaded in memory
 	 *
@@ -71,7 +72,7 @@ public class FileTemplates implements Serializable
 	{
 		return TemplateScripts;
 	}
-
+	
 	/**
 	 * Gets the text string for the template script
 	 *
@@ -83,7 +84,7 @@ public class FileTemplates implements Serializable
 	{
 		return TemplateScripts.get(templateName);
 	}
-
+	
 	/**
 	 * Sets the template script
 	 *
@@ -94,7 +95,7 @@ public class FileTemplates implements Serializable
 	{
 		TemplateScripts.put(templateName, templateScript);
 	}
-
+	
 	/**
 	 * Get the map of all the template scripts
 	 *
@@ -109,10 +110,10 @@ public class FileTemplates implements Serializable
 			StringBuilder output = processTemplate(template, getTemplateScripts().get(template).toString());
 			return output;
 		}
-
+		
 		return new StringBuilder();
 	}
-
+	
 	/**
 	 * Returns the template as a string
 	 *
@@ -125,7 +126,7 @@ public class FileTemplates implements Serializable
 	{
 		return getFileTemplate(referenceClass, templateName, templateName);
 	}
-
+	
 	/**
 	 * Returns the template as a string
 	 *
@@ -143,14 +144,18 @@ public class FileTemplates implements Serializable
 			try
 			{
 				String templateFileName = fileName;
-				templateFileName += ".js";
+				if (!(fileName.contains(".html") || fileName.contains(".htm") || fileName.contains(".js") || fileName.contains(".css") || fileName.contains(".min")))
+				{
+					templateFileName += ".js";
+				}
+				
 				byte[] fileContents;
 				try (InputStream is = referenceClass.getResourceAsStream(templateFileName))
 				{
 					fileContents = new byte[is.available()];
 					is.read(fileContents, 0, is.available());
 				}
-				String contents = new String(fileContents);
+				String contents = new String(fileContents, Charset.forName("UTF-8"));
 				setTemplateScript(templateName, new StringBuilder(contents));
 			}
 			catch (FileNotFoundException ex)
@@ -168,7 +173,7 @@ public class FileTemplates implements Serializable
 		}
 		return TemplateScripts.get(templateName);
 	}
-
+	
 	/**
 	 * Replaces all instances of the following
 	 * <p>
@@ -183,7 +188,7 @@ public class FileTemplates implements Serializable
 	{
 		return processTemplate(templateName, template);
 	}
-
+	
 	/**
 	 * Replaces all instances of the following
 	 *
@@ -215,7 +220,7 @@ public class FileTemplates implements Serializable
 		TemplateScripts.put(templateName, new StringBuilder(templateOutput.trim()));
 		return TemplateScripts.get(templateName);
 	}
-
+	
 	/**
 	 * Replaces all instances of the following
 	 * <p>

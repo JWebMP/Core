@@ -45,7 +45,7 @@ public class AjaxCallIntercepters implements org.aopalliance.intercept.MethodInt
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable
 	{
-		LOG.fine("Intercepting Ajax Call");
+		LOG.finer("Intercepting Ajax Call");
 		for (Iterator<Class<? extends AjaxCallIntercepter>> iterator = GuiceContext.reflect().getSubTypesOf(AjaxCallIntercepter.class).iterator(); iterator.hasNext(); )
 		{
 			Class<? extends AjaxCallIntercepter> siClass = iterator.next();
@@ -57,7 +57,7 @@ public class AjaxCallIntercepters implements org.aopalliance.intercept.MethodInt
 			LOG.log(Level.FINER, "Interception Occuring : {0}", siClass.getCanonicalName());
 			si.intercept();
 		}
-		LOG.fine("Interception for Ajax Call Complete");
+		LOG.finer("Interception for Ajax Call Complete");
 		return invocation.proceed();
 	}
 

@@ -158,6 +158,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
             {
                 continue;
             }
+            value = value.replaceAll("\"","'");
             boolean isKeyword = value.isEmpty();
             if (!isKeyword)
             {

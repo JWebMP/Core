@@ -29,6 +29,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTy
 import za.co.mmagon.jwebswing.plugins.ComponentInformation;
 import za.co.mmagon.logger.LogFactory;
 
+import javax.management.InvalidAttributeValueException;
 import java.util.logging.Level;
 
 /**
@@ -79,7 +80,7 @@ public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
 	 * @param call     The physical AJAX call
 	 * @param response The physical Ajax Receiver
 	 */
-	public abstract void onClick(AjaxCall call, AjaxResponse response);
+	public abstract void onClick(AjaxCall call, AjaxResponse response) throws InvalidAttributeValueException;
 
 	@Override
 	public void fireEvent(AjaxCall call, AjaxResponse response)

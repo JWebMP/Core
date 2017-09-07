@@ -299,7 +299,7 @@ public class AjaxCall extends JavaScriptPart
 		setEventId(incoming.getEventId());
 		setEventType(incoming.getEventType());
 		setEventTypeFrom(incoming.getEventTypeFrom());
-		setOwnerId(incoming.getOwnerId());
+		setReferenceId(incoming.getReferenceId());
 		setValue(incoming.getValue());
 		setVariableData(incoming.getVariableData());
 	}

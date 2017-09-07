@@ -176,7 +176,7 @@ public class AngularJsonVariable extends JavaScriptPart
 	 * @return
 	 */
 	@Override
-	public String getOwnerId()
+	public String getReferenceId()
 	{
 		return ownerId;
 	}
@@ -184,12 +184,12 @@ public class AngularJsonVariable extends JavaScriptPart
 	/**
 	 * Gets the owning component ID
 	 *
-	 * @param ownerId
+	 * @param referenceId
 	 */
 	@Override
-	public void setOwnerId(String ownerId)
+	public void setReferenceId(String referenceId)
 	{
-		this.ownerId = ownerId;
+		this.ownerId = referenceId;
 	}
 
 	/**

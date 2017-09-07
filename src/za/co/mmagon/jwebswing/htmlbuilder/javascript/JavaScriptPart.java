@@ -19,6 +19,7 @@ package za.co.mmagon.jwebswing.htmlbuilder.javascript;
 import com.armineasy.injection.GuiceContext;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -45,6 +46,7 @@ import java.util.logging.Logger;
  */
 @JsonAutoDetect(fieldVisibility = Visibility.ANY, getterVisibility = Visibility.NONE, setterVisibility = Visibility.NONE)
 @JsonInclude(Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 {
 	
@@ -55,7 +57,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 	private static final long serialVersionUID = 2L;
 
 	@JsonProperty(value = "$jwid")
-	private String ownerId;
+	private String referenceId;
 	
 	public JavaScriptPart()
 	{
@@ -399,19 +401,19 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 	 *
 	 * @return
 	 */
-	public String getOwnerId()
+	public String getReferenceId()
 	{
-		return ownerId;
+		return referenceId;
 	}
 	
 	/**
 	 * Sets the JW ID to send if necessary
 	 *
-	 * @param ownerId
+	 * @param referenceId
 	 */
-	public void setOwnerId(String ownerId)
+	public void setReferenceId(String referenceId)
 	{
-		this.ownerId = ownerId;
+		this.referenceId = referenceId;
 	}
 	
 }

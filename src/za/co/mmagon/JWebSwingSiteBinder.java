@@ -20,8 +20,12 @@ import com.armineasy.injection.GuiceContext;
 import com.armineasy.injection.abstractions.GuiceSiteInjectorModule;
 import com.armineasy.injection.interfaces.GuiceSiteBinder;
 import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import com.google.inject.Key;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -337,6 +341,10 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
 			                                                                              jsonObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 			                                                                              jsonObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
 			                                                                              jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
+			                                                                              jsonObjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			                                                                              jsonObjectMapper.registerModule(new ParameterNamesModule());
+			                                                                              jsonObjectMapper.registerModule(new Jdk8Module());
+			                                                                              jsonObjectMapper.registerModule(new JavaTimeModule());
 			                                                                              return jsonObjectMapper;
 		                                                                              }).in(Singleton.class);
 		
@@ -346,6 +354,10 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
 			                                                                            jsonObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 			                                                                            jsonObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
 			                                                                            jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
+			                                                                            jsonObjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			                                                                            jsonObjectMapper.registerModule(new ParameterNamesModule());
+			                                                                            jsonObjectMapper.registerModule(new Jdk8Module());
+			                                                                            jsonObjectMapper.registerModule(new JavaTimeModule());
 			                                                                            return jsonObjectMapper;
 		                                                                            }).in(Singleton.class);
 		
@@ -355,6 +367,10 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
 			                                                                                    jsonObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 			                                                                                    jsonObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
 			                                                                                    jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
+			                                                                                    jsonObjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			                                                                                    jsonObjectMapper.registerModule(new ParameterNamesModule());
+			                                                                                    jsonObjectMapper.registerModule(new Jdk8Module());
+			                                                                                    jsonObjectMapper.registerModule(new JavaTimeModule());
 			                                                                                    return jsonObjectMapper;
 		                                                                                    }).in(Singleton.class);
 		

@@ -275,4 +275,5 @@ public enum Browsers
 	{
 		this.browserVersion = browserVersion;
 	}
+	
 }

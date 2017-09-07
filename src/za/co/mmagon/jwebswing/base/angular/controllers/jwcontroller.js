@@ -1,19 +1,42 @@
 /* global JW_APP_NAME, BootstrapDialog, Pace, JW_SCOPE_INSERTIONS, jw */
 
-jw.afterInit = function () {};
+jw.afterInit = function () {
+};
 
-if (window.Pace)
-{
+if (window.Pace) {
     Pace.options = {ajax: {ignoreURLs: ['jwatmospush']}};
 }
 
+function insertParam(key, value) {
+    if(key === null)
+        return "";
+
+    if (!('URLSearchParams' in window)) {
+        var query = "";
+        if (window.location.search.indexOf("?") != -1) {
+            query = window.location.search + "&" + key + "=" + value;
+        }
+        else {
+            query = window.location.search + "?" + key + "=" + value;
+        }
+        return query;
+
+    }
+    else {
+        const query = new URLSearchParams(window.location.search);
+        if (key != null)
+            query.append(key, value);
+        return query;
+    }
+}
+
 JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
-        , $compile
-        , $parse
-        , $timeout
-        , $rootScope
-        //%CONTROLLER_INSERTIONS%
-        ) {
+    , $compile
+    , $parse
+    , $timeout
+    , $rootScope
+                                                      //%CONTROLLER_INSERTIONS%
+) {
     var self = this;
     self.jw = window.jw;
     jw.env.controller = self; //give external access to the body controller
@@ -23,26 +46,23 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
      * Loads up the initial variables into angular
      * @returns {undefined}
      */
-    $scope._init = function ()
-    {
+    $scope._init = function () {
         var initData = {};
         initData.localStorage = jw.localstorage;
         initData.sessionStorage = jw.sessionstorage;
 
         jw.isLoading = true;
-        try
-        {
-            if (window.Modernizr)
-            {
+        try {
+            if (window.Modernizr) {
                 $scope.Modernizr = window.Modernizr;
                 initData.modernizr = window.Modernizr;
             }
-        } catch (e)
-        {
+        } catch (e) {
             console.warn("moderniz not enabled");
         }
 
-        var toGo = 'jwad?o=body';
+        var toGo = 'jwad?' + insertParam('o', 'body');
+        // alert(' To Go : ' + toGo);
         $.ajax({
             type: "POST",
             url: toGo,
@@ -53,15 +73,12 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
             cache: false,
             data: JSON.stringify(initData),
             beforeSend: function (xhr) {
-                try
-                {
-                    if (window.Pace)
-                    {
+                try {
+                    if (window.Pace) {
                         window.Pace.start();
                         jw.isLoading = true;
                     }
-                } catch (e)
-                {
+                } catch (e) {
                 }
             },
             converters: {
@@ -76,18 +93,17 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
             },
             fail: function (xhr, textStatus, errorThrown) {
                 var err = eval("(" + xhr.responseText + ")");
-                if (BootstrapDialog)
-                {
+                if (BootstrapDialog) {
                     BootstrapDialog.show({
                         title: "Server Error",
                         message: "An error was encountered during the initial phase between the server and the client.<br>" + textStatus + "<br>" + err,
                         type: BootstrapDialog.TYPE_DANGER,
                         buttons: [{
-                                label: 'Close',
-                                action: function (dialogItself) {
-                                    dialogItself.close();
-                                }
-                            }]
+                            label: 'Close',
+                            action: function (dialogItself) {
+                                dialogItself.close();
+                            }
+                        }]
                     });
                 }
                 jw.isLoading = false;
@@ -95,18 +111,16 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
                     jw.afterInit();
             },
             complete: function (jqXHR, textStatus) {
-                try
-                {
-                    if (window.Pace)
-                    {
+                try {
+                    if (window.Pace) {
                         window.Pace.stop();
                     }
-                } catch (e)
-                {
-                } finally
-                {
+                } catch (e) {
+                } finally {
                     jw.isLoading = false;
                     jw.angularLoading = false;
+                    $("#preloader").hide();
+                    $(".splashscreen").hide();
                 }
             }
         }).then(function (resp) {
@@ -143,28 +157,26 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
         article.eventId = eventId;
 
         article.variableData = [];
-        for (var i = 0; i < dataVariables.length; i++)
-        {
+        for (var i = 0; i < dataVariables.length; i++) {
             var arrItem = dataVariables[i];
-            try
-            {
+            try {
                 var data = $scope.$eval(arrItem);
-                if (data !== 'undefined')
-                {
+                if (data !== 'undefined') {
                     var jsonVariable = {};
                     jsonVariable.variableName = arrItem;
                     jsonVariable.variableText = data;
                     jsonVariable.$jwid = data.$jwid;
                     article.variableData.push(jsonVariable);
                 }
-            } catch (e)
-            {
+            } catch (e) {
                 console.log("Unable to find variable " + arrItem);
             }
         }
+        var ajaxUrl = "jwajax?" + insertParam(null, null);
+        // alert('ajax url : ' + ajaxUrl);
         return $.ajax({
             type: "POST",
-            url: "jwajax",
+            url: ajaxUrl,
             data: JSON.stringify(article),
             dataType: "json",
             contentType: 'application/json',
@@ -172,65 +184,65 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
             asynch: true,
             cache: true,
             beforeSend: function (xhr) {
-                try
-                {
-                    if (window.Pace)
-                    {
+                try {
+                    if (window.Pace) {
                         window.Pace.start();
                         jw.isLoading = true;
                     }
-                } catch (e)
-                {
+                } catch (e) {
                 }
             },
             converters: {
                 'json': true
             },
             success: function (result, status, xhr) {
-                try
-                {
+                try {
                     jw.actions.processResponse(result, $scope, $parse, $timeout, $compile, $rootScope);
-                } catch (e)
-                {
+                } catch (e) {
                     console.log("Error in processing response : " + result);
                 }
-                try
-                {
+                try {
                     jw.isLoading = false;
-                    if (window.Pace)
-                    {
+                    if (window.Pace) {
                         window.Pace.stop();
-
                     }
-                } catch (e)
-                {
+                } catch (e) {
                 }
             },
             fail: function (xhr, textStatus, errorThrown) {
                 var err = eval("(" + xhr.responseText + ")");
-                if (BootstrapDialog)
-                {
+                if (BootstrapDialog) {
                     BootstrapDialog.show({
                         title: "Server Error",
                         message: "An error was encountered in the connection between the server and the client<br>" + textStatus + "<br>" + err + "<br>" + errorThrown,
                         type: BootstrapDialog.TYPE_DANGER,
                         buttons: [{
-                                label: 'Close',
-                                action: function (dialogItself) {
-                                    dialogItself.close();
-                                }
-                            }]
+                            label: 'Close',
+                            action: function (dialogItself) {
+                                dialogItself.close();
+                            }
+                        }]
                     });
                 }
-                try
-                {
+                try {
                     jw.isLoading = false;
-                    if (window.Pace)
-                    {
+                    if (window.Pace) {
                         window.Pace.stop();
                     }
-                } catch (e)
-                {
+                } catch (e) {
+                }
+            },
+            complete: function (jqXHR, textStatus) {
+                try {
+                    if (window.Pace) {
+                        window.Pace.stop();
+                    }
+                } catch (e) {
+                } finally {
+                    jw.isLoading = false;
+                    jw.angularLoading = false;
+                    $("#preloader").hide();
+                    $(".splashscreen").hide();
                 }
             }
         });
@@ -242,8 +254,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
      */
     $scope.getEventObject = function ($event) {
         var newEvent = new Object();
-        if ($event !== null)
-        {
+        if ($event !== null) {
             newEvent.altKey = $event.altKey;
             newEvent.ctrlKey = $event.ctrlKey;
             newEvent.bubbles = $event.bubbles;

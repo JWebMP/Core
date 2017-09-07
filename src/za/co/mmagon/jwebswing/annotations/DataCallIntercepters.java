@@ -48,7 +48,7 @@ public class DataCallIntercepters implements org.aopalliance.intercept.MethodInt
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable
 	{
-		LOG.fine("Intercepting Data Calls");
+		LOG.finer("Intercepting Data Calls");
 		Set<Class<? extends DataCallIntercepter>> res = GuiceContext.reflect().getSubTypesOf(DataCallIntercepter.class);
 		List<DataCallIntercepter> outs = new ArrayList<>();
 		for (Class<? extends DataCallIntercepter> re : res)
@@ -63,10 +63,10 @@ public class DataCallIntercepters implements org.aopalliance.intercept.MethodInt
 
 		for (DataCallIntercepter out : outs)
 		{
-			LOG.log(Level.FINE, "Interception Occuring : {0}", out.getClass().getCanonicalName());
+			LOG.log(Level.FINER, "Interception Occuring : {0}", out.getClass().getCanonicalName());
 			GuiceContext.getInstance(out.getClass()).intercept();
 		}
-		LOG.fine("Interception of Data Calls complete");
+		LOG.finer("Interception of Data Calls complete");
 
 		return invocation.proceed();
 	}

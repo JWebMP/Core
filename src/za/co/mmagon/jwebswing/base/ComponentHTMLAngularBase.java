@@ -115,7 +115,6 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
         if (attributesAngular == null)
         {
             attributesAngular = new HashMap<>();
-            AngularPageConfigurator.setRequired(this, true);
         }
         return attributesAngular;
     }
@@ -131,7 +130,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
     @Override
     public J addDto(String name, JavaScriptPart dataObject)
     {
-        dataObject.setOwnerId(getID());
+        dataObject.setReferenceId(getID());
         getAngularObjects().put(name, dataObject);
         return (J) this;
     }

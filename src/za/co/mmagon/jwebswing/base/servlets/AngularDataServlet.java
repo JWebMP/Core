@@ -73,7 +73,7 @@ public class AngularDataServlet extends JWDefaultServlet
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
-		LOG.log(Level.CONFIG, "[SessionID]-[{0}];[Connection]-[Data Call Connection Established]", request.getSession().getId());
+		LOG.log(Level.FINER, "[SessionID]-[{0}];[Connection]-[Data Call Connection Established]", request.getSession().getId());
 		String componentId = request.getParameter("o");
 		StringBuilder jb = new StringBuilder();
 		String line;
@@ -106,7 +106,7 @@ public class AngularDataServlet extends JWDefaultServlet
 		ajaxCall.setEventType(EventTypes.data);
 		if (componentId == null || componentId.isEmpty())
 		{
-			LOG.log(Level.FINE, "[SessionID]-[{0}];[Security]-[Component ID Incorrect]", request.getSession().getId());
+			LOG.log(Level.FINER, "[SessionID]-[{0}];[Security]-[Component ID Incorrect]", request.getSession().getId());
 		}
 		
 		Page page = GuiceContext.inject().getInstance(Page.class);
@@ -162,7 +162,7 @@ public class AngularDataServlet extends JWDefaultServlet
 			
 			out.write(ajaxResponse.toString());
 			Date dataTransferDate = new Date();
-			LOG.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
+			LOG.log(Level.FINER, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
 					{
 							request.getSession().getId(), endDate.getTime() - startDate.getTime(), ajaxResponse.toString().length(), dataTransferDate.getTime() - startDate.getTime()
 					});
