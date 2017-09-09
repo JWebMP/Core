@@ -62,15 +62,15 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
         }
 
         var toGo = 'jwad?' + insertParam('o', 'body');
-        // alert(' To Go : ' + toGo);
+        alert(' To Go : ' + toGo);
         $.ajax({
             type: "POST",
             url: toGo,
             dataType: "json",
             contentType: 'application/json',
             mimeType: 'application/json',
-            asynch: false,
-            cache: false,
+            asynch: true,
+            cache: true,
             data: JSON.stringify(initData),
             beforeSend: function (xhr) {
                 try {
@@ -129,6 +129,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
             return $.Deferred();
         });
     };
+
     $scope._init();
     /**
      * Performs a post send to the server
@@ -172,8 +173,9 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
                 console.log("Unable to find variable " + arrItem);
             }
         }
+
         var ajaxUrl = "jwajax?" + insertParam(null, null);
-        // alert('ajax url : ' + ajaxUrl);
+        alert('ajax url : ' + ajaxUrl);
         return $.ajax({
             type: "POST",
             url: ajaxUrl,
