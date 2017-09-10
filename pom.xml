@@ -4,7 +4,7 @@
 
     <groupId>za.co.mmagon</groupId>
     <artifactId>jwebswing</artifactId>
-    <version>0.11.5-RELEASE</version>
+    <version>0.0.0_0</version>
     <packaging>jar</packaging>
 
     <name>JWebSwing</name>
@@ -302,7 +302,19 @@
         </dependency>
 
     </dependencies>
-<distributionManagement>        <snapshotRepository>            <id>snapshots</id>            <name>ArminSoftwareArtifactory-snapshots</name>            <url>https://www.armin.software/artifactory/libs-snapshot-local</url>        </snapshotRepository>        <repository>            <id>central</id>            <name>ArminSoftwareArtifactory-releases</name>            <url>https://www.armin.software/artifactory/libs-release-local</url>        </repository>    </distributionManagement><organization>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>ArminSoftwareArtifactory-snapshots</name>
+            <url>https://www.armin.software/artifactory/libs-snapshot-local</url>
+        </snapshotRepository>
+        <repository>
+            <id>central</id>
+            <name>ArminSoftwareArtifactory-releases</name>
+            <url>https://www.armin.software/artifactory/libs-release-local</url>
+        </repository>
+    </distributionManagement>
+    <organization>
         <name>Armin Software</name>
         <url>http://www.armin.software/</url>
     </organization>
