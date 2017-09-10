@@ -74,7 +74,7 @@ public class AngularDataServlet extends JWDefaultServlet
 			throws ServletException, IOException
 	{
 		LOG.log(Level.FINER, "[SessionID]-[{0}];[Connection]-[Data Call Connection Established]", request.getSession().getId());
-		String componentId = request.getParameter("o");
+		String componentId = "";
 		StringBuilder jb = new StringBuilder();
 		String line;
 		
@@ -91,16 +91,19 @@ public class AngularDataServlet extends JWDefaultServlet
 		{
 		}
 		
+		AngularDataServletInitData initData = null;
 		if (jb.length() > 0)
 		{
-			AngularDataServletInitData initData = (AngularDataServletInitData) new JavaScriptPart().From(jb.toString(), AngularDataServletInitData.class);
+			initData = (AngularDataServletInitData) new JavaScriptPart().From(jb.toString(), AngularDataServletInitData.class);
 			request.getSession().setAttribute(LocalStorageSessionKey, initData.getLocalStorage());
 			request.getSession().setAttribute(SessionStorageSessionKey, initData.getSessionStorage());
 			request.getSession().setAttribute(ModernizrSessionKey, initData.getModernizr());
+			componentId = initData.getParameters().get("objectId");
 		}
 		
 		Date startDate = new Date();
 		AjaxCall ajaxCall = GuiceContext.inject().getInstance(AjaxCall.class);
+		ajaxCall.setParameters(initData.getParameters());
 		ajaxCall.setComponentId(componentId);
 		ajaxCall.setDatetime(new Date());
 		ajaxCall.setEventType(EventTypes.data);

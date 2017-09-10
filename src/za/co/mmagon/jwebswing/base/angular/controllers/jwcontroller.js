@@ -7,27 +7,10 @@ if (window.Pace) {
     Pace.options = {ajax: {ignoreURLs: ['jwatmospush']}};
 }
 
-function insertParam(key, value) {
-    if(key === null)
-        return "";
-
-    if (!('URLSearchParams' in window)) {
-        var query = "";
-        if (window.location.search.indexOf("?") != -1) {
-            query = window.location.search + "&" + key + "=" + value;
-        }
-        else {
-            query = window.location.search + "?" + key + "=" + value;
-        }
-        return query;
-
-    }
-    else {
-        const query = new URLSearchParams(window.location.search);
-        if (key != null)
-            query.append(key, value);
-        return query;
-    }
+function getParametersObject() {
+    var search = location.search.substring(1);
+    var dataObject = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
+    return dataObject;
 }
 
 JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
@@ -47,7 +30,10 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
      * @returns {undefined}
      */
     $scope._init = function () {
-        var initData = {};
+
+        var initData = new Object();
+        initData.parameters = getParametersObject();
+        initData.parameters['objectId'] = 'body';
         initData.localStorage = jw.localstorage;
         initData.sessionStorage = jw.sessionstorage;
 
@@ -61,11 +47,9 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
             console.warn("moderniz not enabled");
         }
 
-        var toGo = 'jwad?' + insertParam('o', 'body');
-        alert(' To Go : ' + toGo);
         $.ajax({
             type: "POST",
-            url: toGo,
+            url: 'jwad',
             dataType: "json",
             contentType: 'application/json',
             mimeType: 'application/json',
@@ -150,6 +134,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
 
         var getdate = new Date();
         var article = new Object();
+        article.parameters = getParametersObject();
         article.componentId = element;
         article.eventType = $event.type;
         article.eventTypeFrom = $event.type;
@@ -174,11 +159,9 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
             }
         }
 
-        var ajaxUrl = "jwajax?" + insertParam(null, null);
-        alert('ajax url : ' + ajaxUrl);
         return $.ajax({
             type: "POST",
-            url: ajaxUrl,
+            url: "jwajax",
             data: JSON.stringify(article),
             dataType: "json",
             contentType: 'application/json',

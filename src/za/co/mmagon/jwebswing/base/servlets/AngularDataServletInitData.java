@@ -19,6 +19,7 @@ package za.co.mmagon.jwebswing.base.servlets;
 import za.co.mmagon.jwebswing.components.modernizr.ModernizrDto;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -42,6 +43,10 @@ class AngularDataServletInitData extends JavaScriptPart
 	 * The modernizr dto
 	 */
 	private ModernizrDto modernizr;
+	/**
+	 * The parameters for the initialized data
+	 */
+	private Map<String,String> parameters;
 
 	/*
 	 * Constructs a new AngularDataServletInitData
@@ -80,5 +85,16 @@ class AngularDataServletInitData extends JavaScriptPart
 	{
 		this.modernizr = modernizr;
 	}
-
+	
+	public Map<String, String> getParameters()
+	{
+		if(parameters == null)
+			parameters = new HashMap<>();
+		return parameters;
+	}
+	
+	public void setParameters(Map<String, String> parameters)
+	{
+		this.parameters = parameters;
+	}
 }

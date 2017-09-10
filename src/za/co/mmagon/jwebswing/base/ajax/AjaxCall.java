@@ -26,9 +26,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 
 import javax.servlet.ServletException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * This class handles the decoding of an AJAX call being received
@@ -78,6 +76,10 @@ public class AjaxCall extends JavaScriptPart
 	 * The event ID
 	 */
 	private String eventId;
+	/**
+	 * The parameters associated with the call
+	 */
+	private Map<String,String> parameters;
 
 	/**
 	 * JSon Jackson Constructor
@@ -302,5 +304,17 @@ public class AjaxCall extends JavaScriptPart
 		setReferenceId(incoming.getReferenceId());
 		setValue(incoming.getValue());
 		setVariableData(incoming.getVariableData());
+	}
+	
+	public Map<String, String> getParameters()
+	{
+		if(parameters == null)
+			parameters = new HashMap<>();
+		return parameters;
+	}
+	
+	public void setParameters(Map<String, String> parameters)
+	{
+		this.parameters = parameters;
 	}
 }
