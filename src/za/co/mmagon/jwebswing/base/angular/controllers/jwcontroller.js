@@ -8,9 +8,14 @@ if (window.Pace) {
 }
 
 function getParametersObject() {
-    var search = location.search.substring(1);
-    var dataObject = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
-    return dataObject;
+    try {
+        var search = location.search.substring(1);
+        var dataObject = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
+        return dataObject;
+    }
+    catch(err) {
+        return {};
+    }
 }
 
 JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope

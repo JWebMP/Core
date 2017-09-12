@@ -896,7 +896,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		{
 			T found;
 			found = (T) root.getParent();
-			while (found != null && !found.getClass().getCanonicalName().equals(parentType.getCanonicalName()))
+			while (found != null && !parentType.isAssignableFrom(found.getClass()))
 			{
 				found = (T) found.getParent();
 			}
