@@ -188,7 +188,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	 */
 	public J setRequired()
 	{
-		addAttribute("required", null);
+		addAttribute("required", "");
 		return (J) this;
 	}
 
@@ -252,6 +252,17 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	public J setPattern(String angularPatternName)
 	{
 		addAttribute(AngularAttributes.ngPattern, angularPatternName);
+		return (J)this;
+	}
+	
+	/**
+	 * Sets the raw pattern for this input object if required
+	 * @param pattern
+	 * @return
+	 */
+	public J setPattern(String pattern,boolean raw)
+	{
+		addAttribute("pattern", pattern);
 		return (J)this;
 	}
 }
