@@ -61,9 +61,9 @@ public class Span<C extends GlobalChildren, A extends Enum & AttributeDefinition
 		implements BodyChildren, MapChildren, AreaChildren, ContainerType, ParagraphChildren,
 		ListItemChildren
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs a new instance of a Span item
 	 */
@@ -71,7 +71,7 @@ public class Span<C extends GlobalChildren, A extends Enum & AttributeDefinition
 	{
 		super(ComponentTypes.Span);
 	}
-
+	
 	/**
 	 * Constructs a new span with the given text
 	 *

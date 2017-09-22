@@ -17,7 +17,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
  */
 public enum BorderStyles implements CSSEnumeration<BorderStyles>
 {
-
+	
 	/**
 	 * Specifies no border
 	 */
@@ -55,35 +55,35 @@ public enum BorderStyles implements CSSEnumeration<BorderStyles>
 	 */
 	Outset,
 	Unset;
-
+	
 	@Override
 	public String getValue()
 	{
 		return name();
 	}
-
+	
 	@Override
 	public BorderStyles getDefault()
 	{
 		return Unset;
 	}
-
+	
 	@Override
 	public String toString()
 	{
 		return super.toString().toLowerCase();
 	}
-
+	
 	@Override
 	public String getJavascriptSyntax()
 	{
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
-
+	
 	@Override
 	public CSSVersions getCSSVersion()
 	{
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
-
+	
 }

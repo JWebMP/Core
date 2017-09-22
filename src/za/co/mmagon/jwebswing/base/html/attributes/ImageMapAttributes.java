@@ -28,7 +28,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 public enum ImageMapAttributes implements AttributeDefinitions
 {
 	Element;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

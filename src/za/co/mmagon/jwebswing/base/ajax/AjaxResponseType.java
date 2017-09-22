@@ -30,19 +30,19 @@ public enum AjaxResponseType
 	Info("Information"),
 	Warning("Warning"),
 	Danger("Danger");
-
+	
 	private String valueString;
-
+	
 	/**
 	 * Constructs with the given value string
 	 *
 	 * @param valueString
 	 */
-	private AjaxResponseType(String valueString)
+	AjaxResponseType(String valueString)
 	{
 		this.valueString = valueString;
 	}
-
+	
 	/**
 	 * Returns the value string associated with this type
 	 *

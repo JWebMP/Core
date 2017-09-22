@@ -26,7 +26,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum EmbedAttributes implements AttributeDefinitions
 {
-
+	
 	/**
 	 * The height
 	 */
@@ -43,11 +43,11 @@ public enum EmbedAttributes implements AttributeDefinitions
 	 * Specifies the width of the embedded content
 	 */
 	Width;
-
+	
 	@Override
 	public boolean isKeyword()
 	{
 		return false;
 	}
-
+	
 }

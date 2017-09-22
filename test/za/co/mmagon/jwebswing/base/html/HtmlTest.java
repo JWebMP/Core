@@ -13,12 +13,12 @@ import static org.junit.Assert.assertEquals;
  */
 public class HtmlTest
 {
-
+	
 	public HtmlTest()
 	{
 		System.out.println("Testing <HTML> Tag");
 	}
-
+	
 	/**
 	 * Test of getMinimumBrowserSupport method, of class HTML.
 	 */
@@ -32,7 +32,7 @@ public class HtmlTest
 		Browsers result = instance.getBrowser();
 		assertEquals(expResult, result);
 	}
-
+	
 	/**
 	 * Test of setMinimumBrowserSupport method, of class HTML.
 	 */
@@ -47,7 +47,7 @@ public class HtmlTest
 		Browsers result = instance.getBrowser();
 		assertEquals(expResult, result);
 	}
-
+	
 	@Test
 	public void testOutput()
 	{
@@ -60,17 +60,17 @@ public class HtmlTest
 				+ "</html>";
 		String result = instance.toString(true).toString();
 		assertEquals(expResult, result);
-
+		
 		instance.setTiny(true);
 		expResult = "<!DOCTYPE html><html></html>";
 		result = instance.toString(true).toString();
 		System.out.println(instance.toString(true));
 		assertEquals(expResult, result);
 	}
-
+	
 	public class HtmlImpl extends Page
 	{
-
+		
 		public HtmlImpl()
 		{
 			super();

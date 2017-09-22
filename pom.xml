@@ -12,7 +12,22 @@
     </description>
     <url>https://github.com/GedMarc/JWebSwing</url>
 
-    <repositories>        <repository>            <id>oss.sonatype.org</id>            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>        </repository>        <repository>            <id>armin-release</id>            <name>ArminSoftwareArtifactory-releases</name>            <url>https://www.armin.software/artifactory/libs-release</url>        </repository>        <repository>            <id>armin-snapshot</id>            <name>ArminSoftwareArtifactory-releases</name>            <url>https://www.armin.software/artifactory/libs-snapshot</url>        </repository>    </repositories>
+    <repositories>
+        <repository>
+            <id>oss.sonatype.org</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>armin-release</id>
+            <name>ArminSoftwareArtifactory-releases</name>
+            <url>https://www.armin.software/artifactory/libs-release</url>
+        </repository>
+        <repository>
+            <id>armin-snapshot</id>
+            <name>ArminSoftwareArtifactory-releases</name>
+            <url>https://www.armin.software/artifactory/libs-snapshot</url>
+        </repository>
+    </repositories>
 
     <profiles>
         <profile>

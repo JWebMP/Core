@@ -24,19 +24,19 @@ import org.junit.Test;
  */
 public class FormTest
 {
-
+	
 	Form f = new Form();
-
+	
 	public FormTest()
 	{
 	}
-
+	
 	private void reset()
 	{
 		f = new Form();
 		f.setID("id");
 	}
-
+	
 	@Test
 	public void testForm()
 	{
@@ -44,7 +44,7 @@ public class FormTest
 		System.out.println(f.toString(true));
 		Assert.assertEquals("<form id=\"id\"></form>", f.toString(true));
 	}
-
+	
 	@Test
 	public void testFormTiny()
 	{

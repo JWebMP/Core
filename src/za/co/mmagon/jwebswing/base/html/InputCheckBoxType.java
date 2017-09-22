@@ -25,36 +25,36 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
  * @author GedMarc
  */
 public class InputCheckBoxType<J extends InputCheckBoxType<J>>
-        extends Input<InputCheckBoxTypeAttributes, J>
+		extends Input<InputCheckBoxTypeAttributes, J>
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new check box
-     */
-    public InputCheckBoxType()
-    {
-        super(InputTypes.Checkbox);
-    }
-
-    /**
-     * Sets the checkbox accordingly
-     *
-     * @param checked
-     *
-     * @return
-     */
-    public J setChecked(boolean checked)
-    {
-        if (checked)
-        {
-            addAttribute(InputCheckBoxTypeAttributes.Checked.toString(), null);
-        }
-        else
-        {
-            getAttributes().remove(InputCheckBoxTypeAttributes.Checked.toString());
-        }
-        return (J) this;
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new check box
+	 */
+	public InputCheckBoxType()
+	{
+		super(InputTypes.Checkbox);
+	}
+	
+	/**
+	 * Sets the checkbox accordingly
+	 *
+	 * @param checked
+	 *
+	 * @return
+	 */
+	public J setChecked(boolean checked)
+	{
+		if (checked)
+		{
+			addAttribute(InputCheckBoxTypeAttributes.Checked.toString(), null);
+		}
+		else
+		{
+			getAttributes().remove(InputCheckBoxTypeAttributes.Checked.toString());
+		}
+		return (J) this;
+	}
 }

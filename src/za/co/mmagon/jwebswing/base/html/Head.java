@@ -75,9 +75,9 @@ public class Head<J extends Head<J>>
 		extends ComponentHierarchyBase<HeadChildren, NoAttributes, NoFeatures, NoEvents, J>
 		implements NoIDTag, HtmlChildren, NoClassAttribute
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs a new Head Tag
 	 */

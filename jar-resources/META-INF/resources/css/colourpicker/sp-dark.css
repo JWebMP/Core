@@ -11,17 +11,21 @@
     color: #eee;
     vertical-align: middle;
 }
+
 .sp-replacer:hover, .sp-replacer.sp-active {
     border-color: #F0C49B;
     color: #fff;
 }
+
 .sp-replacer.sp-disabled {
     border-color: silver;
     color: silver;
 }
+
 .sp-dark .sp-preview {
     border: solid 1px #999;
 }
+
 .sp-dark .sp-cancel {
     color: #f99f9f !important;
 }
@@ -34,22 +38,27 @@
 .sp-dark .sp-input-container {
 
 }
+
 .sp-dark .sp-initial-disabled .sp-input-container {
 
 }
+
 .sp-dark .sp-input {
 
 }
-.sp-dark .sp-input:focus  {
+
+.sp-dark .sp-input:focus {
 
 }
+
 .sp-dark .sp-input.sp-validation-error {
 
 }
 
-.sp-dark .sp-picker-container , .sp-dark .sp-palette-container {
+.sp-dark .sp-picker-container, .sp-dark .sp-palette-container {
 
 }
+
 .sp-dark .sp-picker-container {
 
 }
@@ -62,9 +71,11 @@
 .sp-dark .sp-palette .sp-thumb-el {
 
 }
+
 .sp-dark .sp-palette .sp-thumb-el:hover, .sp-dark .sp-palette .sp-thumb-el.sp-thumb-active {
 
 }
+
 .sp-dark .sp-thumb-el {
 }
 
@@ -72,6 +83,7 @@
 .sp-dark .sp-initial {
 
 }
+
 .sp-dark .sp-initial span {
 
 }
@@ -85,25 +97,28 @@
 .sp-dark.sp-replacer {
 
 }
+
 .sp-dark.sp-replacer:hover, .sp-dark.sp-replacer.sp-active {
     border-color: #F0C49B;
     color: #111;
 }
+
 .sp-dark.sp-replacer.sp-disabled {
 
 }
+
 .sp-dark .sp-dd {
 
 }
 
-
-
 .sp-dark .sp-preview {
 
 }
+
 .sp-dark .sp-palette {
 
 }
+
 .sp-dark .sp-palette .sp-thumb-el {
 
 }
@@ -111,18 +126,23 @@
 .sp-dark button {
 
 }
+
 .sp-dark button:hover {
 
 }
+
 .sp-dark button:active {
 
 }
+
 .sp-dark .sp-cancel {
 
 }
+
 .sp-dark .sp-cancel:hover {
 
 }
+
 .sp-dark .sp-palette span:hover, .sp-dark .sp-palette span.sp-thumb-active {
 
 }

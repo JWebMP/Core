@@ -73,7 +73,7 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	 */
 	public IComponentDependancyBase asDependancyBase()
 	{
-		return (ComponentDependancyBase) this;
+		return this;
 	}
 	
 	/**
@@ -132,6 +132,11 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 		List<JavascriptReference> arr = new CopyOnWriteArrayList<>();
 		for (JavascriptReference next : getJavascriptReferencesAll())
 		{
+			if (next == null)
+			{
+				continue;
+			}
+			
 			if (!next.getPriority().equals(priority))
 			{
 				continue;
@@ -170,6 +175,10 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 		
 		for (CSSReference next : getCssReferencesAll())
 		{
+			if (next == null)
+			{
+				continue;
+			}
 			if (!next.getPriority().equals(priority))
 			{
 				continue;
@@ -260,7 +269,7 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	@Override
 	public J cloneComponent()
 	{
-		ComponentDependancyBase cloned = (ComponentDependancyBase) super.cloneComponent();
+		ComponentDependancyBase cloned = super.cloneComponent();
 		
 		cloned.cssReferences = new ArrayList();
 		cloned.javascriptReferences = new ArrayList();

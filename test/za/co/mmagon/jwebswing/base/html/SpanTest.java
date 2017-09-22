@@ -25,11 +25,11 @@ import static org.junit.Assert.assertEquals;
  */
 public class SpanTest
 {
-
+	
 	public SpanTest()
 	{
 	}
-
+	
 	@Test
 	public void testSomeMethod()
 	{
@@ -39,5 +39,5 @@ public class SpanTest
 		assertEquals(""
 				             + "<span id=\"id\"></span>", s.toString(true).toString());
 	}
-
+	
 }

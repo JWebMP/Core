@@ -25,7 +25,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum TextAreaAttributes implements AttributeDefinitions
 {
-
+	
 	/**
 	 * Sets or returns whether a text area should automatically get focus when the page loads
 	 */
@@ -82,7 +82,7 @@ public enum TextAreaAttributes implements AttributeDefinitions
 	 * sets or returns the value of the wrap attribute of a text area
 	 */
 	Wrap;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

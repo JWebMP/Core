@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 var divClasses = [];
-function jqxWidgetPreCallClassFix(jqxWidgetID)
-{
+
+function jqxWidgetPreCallClassFix(jqxWidgetID) {
     $('#' + jqxWidgetID + ' > div > div').each(function (i, val) {
 
         divClasses[i] = $(this).attr('id') + '-' + $(this).attr('class');
@@ -25,10 +25,8 @@ function jqxWidgetPreCallClassFix(jqxWidgetID)
     });
 }
 
-function jqxWidgetPostCallClassFix(jqxWidgetID)
-{
-    for (index = 0; index < divClasses.length; index++)
-    {
+function jqxWidgetPostCallClassFix(jqxWidgetID) {
+    for (index = 0; index < divClasses.length; index++) {
         var stringArr = divClasses[index].split('-');
         var compID = stringArr[0];
         var oldClasses = stringArr[1];
@@ -38,10 +36,8 @@ function jqxWidgetPostCallClassFix(jqxWidgetID)
     divClasses = [];//reset
 }
 
-function jqxWidgetRibbonWindowResize(jqxWidgetID)
-{
-    $('#' + jqxWidgetID + '').bind('select', function ()
-    {
+function jqxWidgetRibbonWindowResize(jqxWidgetID) {
+    $('#' + jqxWidgetID + '').bind('select', function () {
         $(window).resize();
     })
 }
@@ -52,12 +48,11 @@ $.fn.jqxSelectItem = function (opts) {
     var event = opts.eventType;
     var tree = $(this);
     tree.off('select.jw');
-    tree.on('select.jw', function (event)
-    {
+    tree.on('select.jw', function (event) {
         var args = event.args;
         var me = $(this);
         var item = me.jqxTree('getItem', args.element);
-        var eventElementBack = new Object();
+        var eventElementBack = {};
         eventElementBack.label = item.label;
         eventElementBack.value = item.value;
         eventElementBack.url = item.url;

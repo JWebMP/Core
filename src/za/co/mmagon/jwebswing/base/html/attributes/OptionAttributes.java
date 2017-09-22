@@ -31,7 +31,7 @@ public enum OptionAttributes implements AttributeDefinitions
 	 * Specifies the value of an option
 	 */
 	Value;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

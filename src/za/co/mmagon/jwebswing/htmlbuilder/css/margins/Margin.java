@@ -37,60 +37,60 @@ import java.lang.annotation.*;
 @CSSAnnotationType
 public @interface Margin
 {
-
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
 	 * @return
 	 */
-	public MeasurementCSS MarginRight() default @MeasurementCSS;
-
+	MeasurementCSS MarginRight() default @MeasurementCSS;
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
 	 * @return
 	 */
-	public MarginSetting MarginRight$() default MarginSetting.Unset;
-
+	MarginSetting MarginRight$() default MarginSetting.Unset;
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
 	 * @return
 	 */
-	public MeasurementCSS MarginLeft() default @MeasurementCSS;
-
+	MeasurementCSS MarginLeft() default @MeasurementCSS;
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
 	 * @return
 	 */
-	public MarginSetting MarginLeft$() default MarginSetting.Unset;
-
+	MarginSetting MarginLeft$() default MarginSetting.Unset;
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
 	 * @return
 	 */
-	public MeasurementCSS MarginTop() default @MeasurementCSS;
-
+	MeasurementCSS MarginTop() default @MeasurementCSS;
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
 	 * @return
 	 */
-	public MarginSetting MarginTop$() default MarginSetting.Unset;
-
+	MarginSetting MarginTop$() default MarginSetting.Unset;
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
 	 * @return
 	 */
-	public MeasurementCSS MarginBottom() default @MeasurementCSS;
-
+	MeasurementCSS MarginBottom() default @MeasurementCSS;
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
 	 * @return
 	 */
-	public MarginSetting MarginBottom$() default MarginSetting.Unset;
+	MarginSetting MarginBottom$() default MarginSetting.Unset;
 }

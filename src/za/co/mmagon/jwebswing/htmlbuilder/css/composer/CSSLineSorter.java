@@ -11,7 +11,7 @@ import java.util.Comparator;
  */
 public class CSSLineSorter implements Comparator<CSSLine>
 {
-
+	
 	/**
 	 * Orders the CSS Lines by property then Value
 	 *

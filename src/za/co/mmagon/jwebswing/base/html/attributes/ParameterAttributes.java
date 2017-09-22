@@ -27,7 +27,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum ParameterAttributes implements AttributeDefinitions
 {
-
+	
 	/**
 	 * Specifies the name of a parameter
 	 */
@@ -53,7 +53,7 @@ public enum ParameterAttributes implements AttributeDefinitions
 	 * @deprecated
 	 */
 	ValueType;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

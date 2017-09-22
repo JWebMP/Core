@@ -26,47 +26,47 @@ import za.co.mmagon.jwebswing.base.html.Div;
  */
 public class ClickAdapterTest
 {
-
-    public ClickAdapterTest()
-    {
-    }
-
-    @Test
-    public void testPreConfigure()
-    {
-    }
-
-    @Test
-    public void testOnClick()
-    {
-        Div d = new Div();
-        d.addEvent(new ClickAdapter(d)
-        {
-            @Override
-            public void onClick(AjaxCall call, AjaxResponse response)
-            {
-
-            }
-        });
-        System.out.println(d.toString(true));
-    }
-
-    @Test
-    public void testFireEvent()
-    {
-    }
-
-    public class ClickAdapterImpl extends ClickAdapter
-    {
-
-        public ClickAdapterImpl()
-        {
-            super(null);
-        }
-
-        public void onClick(AjaxCall call, AjaxResponse response)
-        {
-        }
-    }
+	
+	public ClickAdapterTest()
+	{
+	}
+	
+	@Test
+	public void testPreConfigure()
+	{
+	}
+	
+	@Test
+	public void testOnClick()
+	{
+		Div d = new Div();
+		d.addEvent(new ClickAdapter(d)
+		{
+			@Override
+			public void onClick(AjaxCall call, AjaxResponse response)
+			{
+			
+			}
+		});
+		System.out.println(d.toString(true));
+	}
+	
+	@Test
+	public void testFireEvent()
+	{
+	}
+	
+	public class ClickAdapterImpl extends ClickAdapter
+	{
+		
+		public ClickAdapterImpl()
+		{
+			super(null);
+		}
+		
+		public void onClick(AjaxCall call, AjaxResponse response)
+		{
+		}
+	}
 
 }

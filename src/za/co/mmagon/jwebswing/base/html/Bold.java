@@ -53,9 +53,9 @@ public class Bold<J extends Bold<J>>
 		extends Component<Component, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs a bold section of text
 	 */
@@ -64,7 +64,7 @@ public class Bold<J extends Bold<J>>
 		this("");
 		setTiny(true);
 	}
-
+	
 	/**
 	 * Specifies the text as bold
 	 *

@@ -25,11 +25,11 @@ import static org.junit.Assert.assertEquals;
  */
 public class BoldTest
 {
-
+	
 	public BoldTest()
 	{
 	}
-
+	
 	@Test
 	public void testBoldRender()
 	{
@@ -38,7 +38,7 @@ public class BoldTest
 		b.setText("Bold Text");
 		System.out.println(b.toString(true));
 		assertEquals("<b>Bold Text</b>", b.toString(true));
-
+		
 	}
-
+	
 }

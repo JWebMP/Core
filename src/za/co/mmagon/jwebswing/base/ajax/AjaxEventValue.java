@@ -27,7 +27,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTy
  */
 public class AjaxEventValue extends JavaScriptPart
 {
-
+	
 	private static final long serialVersionUID = 1L;
 	/**
 	 * If the alt key was pressed
@@ -101,7 +101,7 @@ public class AjaxEventValue extends JavaScriptPart
 	 * The event type
 	 */
 	private EventTypes type;
-
+	
 	/**
 	 * The JSON data
 	 */
@@ -114,7 +114,7 @@ public class AjaxEventValue extends JavaScriptPart
 	 * Which and Where to put it
 	 */
 	private String which;
-
+	
 	/**
 	 * Blank Constructor
 	 */
@@ -122,7 +122,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		//Just a dto
 	}
-
+	
 	/**
 	 * If the alt key was pressed
 	 *
@@ -132,7 +132,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return altKey;
 	}
-
+	
 	/**
 	 * If the alt key was pressed
 	 *
@@ -142,7 +142,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.altKey = altKey;
 	}
-
+	
 	/**
 	 * If the cntrl key was pressed
 	 *
@@ -152,7 +152,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return ctrlKey;
 	}
-
+	
 	/**
 	 * If the cntrl key was pressed
 	 *
@@ -162,7 +162,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.ctrlKey = ctrlKey;
 	}
-
+	
 	/**
 	 * If the event bubbles down
 	 *
@@ -172,7 +172,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return bubbles;
 	}
-
+	
 	/**
 	 * If the event bubbles down
 	 *
@@ -182,7 +182,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.bubbles = bubbles;
 	}
-
+	
 	/**
 	 * If the event is cancellable
 	 *
@@ -192,7 +192,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return cancelable;
 	}
-
+	
 	/**
 	 * If the event is cancellable
 	 *
@@ -202,7 +202,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.cancelable = cancelable;
 	}
-
+	
 	/**
 	 * The mouse position for the client
 	 *
@@ -212,7 +212,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return clientX;
 	}
-
+	
 	/**
 	 * The mouse position for the client
 	 *
@@ -222,7 +222,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.clientX = clientX;
 	}
-
+	
 	/**
 	 * The mouse position for the client
 	 *
@@ -232,7 +232,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return clientY;
 	}
-
+	
 	/**
 	 * The mouse position for the client
 	 *
@@ -242,7 +242,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.clientY = clientY;
 	}
-
+	
 	/**
 	 * *
 	 * The component ID of the event cause
@@ -253,7 +253,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return componentID;
 	}
-
+	
 	/**
 	 * The component ID of the event cause
 	 *
@@ -263,7 +263,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.componentID = componentID;
 	}
-
+	
 	/**
 	 * Returns a detail number
 	 *
@@ -273,7 +273,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return detail;
 	}
-
+	
 	/**
 	 * Sets a detail number
 	 *
@@ -283,7 +283,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.detail = detail;
 	}
-
+	
 	/**
 	 * The event phase
 	 *
@@ -293,7 +293,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return eventPhase;
 	}
-
+	
 	/**
 	 * Sets the event phase
 	 *
@@ -303,7 +303,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.eventPhase = eventPhase;
 	}
-
+	
 	/**
 	 * Indicates if the meta key was pressed
 	 *
@@ -313,7 +313,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return metaKey;
 	}
-
+	
 	/**
 	 * Sets if the meta key was pressed
 	 *
@@ -323,7 +323,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.metaKey = metaKey;
 	}
-
+	
 	/**
 	 * Returns the offset x from the parent
 	 *
@@ -333,7 +333,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return offsetX;
 	}
-
+	
 	/**
 	 * *
 	 * The offset position for the client
@@ -344,7 +344,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.offsetX = offsetX;
 	}
-
+	
 	/**
 	 * The offset position for Y
 	 *
@@ -354,7 +354,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return offsetY;
 	}
-
+	
 	/**
 	 * The offset position for Y
 	 *
@@ -364,7 +364,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.offsetY = offsetY;
 	}
-
+	
 	/**
 	 * *
 	 * The page location X
@@ -375,7 +375,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return pageX;
 	}
-
+	
 	/**
 	 * The page location X
 	 *
@@ -385,7 +385,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.pageX = pageX;
 	}
-
+	
 	/*
 	 * The page location Y
 	 */
@@ -393,7 +393,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return pageY;
 	}
-
+	
 	/**
 	 * The page location Y
 	 *
@@ -403,7 +403,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.pageY = pageY;
 	}
-
+	
 	/**
 	 * The Screen position X
 	 *
@@ -413,7 +413,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return screenX;
 	}
-
+	
 	/**
 	 * The screen position X
 	 *
@@ -423,7 +423,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.screenX = screenX;
 	}
-
+	
 	/**
 	 * The screen position Y
 	 *
@@ -433,7 +433,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return screenY;
 	}
-
+	
 	/**
 	 * The screen position Y
 	 *
@@ -443,7 +443,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.screenY = screenY;
 	}
-
+	
 	/**
 	 * If the shift key was pressed
 	 *
@@ -453,7 +453,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return shiftKey;
 	}
-
+	
 	/**
 	 * If the shift key was pressed
 	 *
@@ -463,7 +463,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.shiftKey = shiftKey;
 	}
-
+	
 	/**
 	 * The type of event
 	 *
@@ -473,7 +473,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return type;
 	}
-
+	
 	/**
 	 * The type of event
 	 *
@@ -483,7 +483,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.type = type;
 	}
-
+	
 	/**
 	 * Any data attached to the object
 	 *
@@ -493,7 +493,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return data;
 	}
-
+	
 	/**
 	 * Any data attached to the object
 	 *
@@ -503,7 +503,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.data = data;
 	}
-
+	
 	/**
 	 * Gets the target component ID
 	 *
@@ -513,7 +513,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return target;
 	}
-
+	
 	/**
 	 * Sets the target component ID
 	 *
@@ -523,7 +523,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.target = target;
 	}
-
+	
 	/**
 	 * Which button was pushed
 	 *
@@ -533,7 +533,7 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		return which;
 	}
-
+	
 	/**
 	 * Which button was pushed
 	 *
@@ -543,5 +543,5 @@ public class AjaxEventValue extends JavaScriptPart
 	{
 		this.which = which;
 	}
-
+	
 }

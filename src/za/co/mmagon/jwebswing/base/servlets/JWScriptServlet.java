@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.base.servlets;
 
 import com.armineasy.injection.GuiceContext;
-import com.armineasy.injection.filters.CorsAllowedFilter;
 import com.google.inject.Singleton;
 import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.Page;
@@ -38,11 +37,11 @@ import java.util.logging.Logger;
 @Singleton
 public class JWScriptServlet extends JWDefaultServlet
 {
-
+	
 	public static final String FILE_TEMPLATE_NAME = "jwscript";
 	private static final Logger LOG = LogFactory.getInstance().getLogger("JWScriptServlet");
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
 	 *
@@ -60,20 +59,20 @@ public class JWScriptServlet extends JWDefaultServlet
 		Date startDate = new Date();
 		FileTemplates.getFileTemplate(JWScriptServlet.class, FILE_TEMPLATE_NAME, "siteloader");
 		FileTemplates.getTemplateVariables().put("SITEADDRESSINSERT", new StringBuilder(request.getRequestURL().toString().replace("jwscr", "")));
-
+		
 		StringBuilder output = FileTemplates.renderTemplateScripts(FILE_TEMPLATE_NAME);
-
+		
 		Date endDate = new Date();
 		try (PrintWriter out = response.getWriter())
 		{
 			response.setContentType("application/javascript;charset=UTF-8");
 			response.setCharacterEncoding("UTF-8");
-
-			response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);
+			
+			response.setHeader("Access-Control-Allow-Origin", "*");
 			response.setHeader("Access-Control-Allow-Credentials", "true");
 			response.setHeader("Access-Control-Allow-Methods", "GET");
 			response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
-
+			
 			out.write(output.toString());
 			Date dataTransferDate = new Date();
 			LOG.log(Level.FINER, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
@@ -82,7 +81,7 @@ public class JWScriptServlet extends JWDefaultServlet
 					});
 		}
 	}
-
+	
 	/**
 	 * Post handler
 	 *
@@ -105,7 +104,7 @@ public class JWScriptServlet extends JWDefaultServlet
 			LOG.log(Level.SEVERE, "Do Post Error", e);
 		}
 	}
-
+	
 	/**
 	 * Post handler
 	 *

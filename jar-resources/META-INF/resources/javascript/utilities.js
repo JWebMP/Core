@@ -20,15 +20,14 @@
  * @param {type} domObjectID DomObjectID to get the HTML Code For
  * @returns String of document
  */
-function cleanHtml(domObjectID)
-{
+function cleanHtml(domObjectID) {
     var text = $('#' + domObjectID).html();
     text = text.trim();
     alert('Pre Cleaned HTML : ' + text);
-    text = text.replace(/[\n\r]+/g,'');
-    text = text.replace(/[\t]/g,'');
+    text = text.replace(/[\n\r]+/g, '');
+    text = text.replace(/[\t]/g, '');
     text = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     alert('Cleaned Text [' + text + ']');
-    
+
     return text;
 }

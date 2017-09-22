@@ -29,21 +29,21 @@ import static org.junit.Assert.assertEquals;
  */
 public class BodyTest extends BaseTestClass
 {
-
+	
 	private Page p;
 	private Body b;
-
+	
 	public BodyTest()
 	{
 		resetBody();
 	}
-
+	
 	private void resetBody()
 	{
 		p = new Page();
 		b = p.getBody();
 	}
-
+	
 	@Test
 	public void testBody()
 	{
@@ -51,7 +51,7 @@ public class BodyTest extends BaseTestClass
 		System.out.println(b.toString(true));
 		assertEquals("<body id=\"body\"></body>", b.toString(true));
 	}
-
+	
 	@Test
 	public void testSetGenerateJQuery()
 	{
@@ -72,7 +72,7 @@ public class BodyTest extends BaseTestClass
 				             + "	</body>\n"
 				             + "</html>", p.toString(true).toString());
 	}
-
+	
 	@Test
 	public void testSetGenerateJQueryRemote()
 	{

@@ -46,7 +46,7 @@ import za.co.mmagon.jwebswing.plugins.PluginInformation;
 )
 public class JQueryPageConfigurator extends PageConfigurator
 {
-
+	
 	private static final long serialVersionUID = 1L;
 	/**
 	 * String property denoting JQuery is enabled on a page
@@ -56,12 +56,12 @@ public class JQueryPageConfigurator extends PageConfigurator
 	 * If the page must render JQuery 3
 	 */
 	private static boolean jquery3 = true;
-
+	
 	public JQueryPageConfigurator()
 	{
 		setSortOrder(99999998); //Always before angular
 	}
-
+	
 	/**
 	 * Sets the component/feature/hierarchy as JQuery required
 	 *
@@ -72,7 +72,7 @@ public class JQueryPageConfigurator extends PageConfigurator
 	{
 		component.getProperties().put(JQueryEnabledString, required.toString());
 	}
-
+	
 	/**
 	 * Whether or not this page must render JQuery 3
 	 *
@@ -82,7 +82,7 @@ public class JQueryPageConfigurator extends PageConfigurator
 	{
 		return jquery3;
 	}
-
+	
 	/**
 	 * Whether or not this page must render JQuery 3
 	 *
@@ -92,12 +92,14 @@ public class JQueryPageConfigurator extends PageConfigurator
 	{
 		JQueryPageConfigurator.jquery3 = jquery3;
 	}
-
+	
 	@Override
 	public Page configure(Page page)
 	{
 		if (page != null)
 		{
+			page.getBody().addJavaScriptReference(JQueryReferencePool.FallbackLocalStorage.getJavaScriptReference());
+			
 			if (page.getBody().readChildrenPropertyFirstResult(JQueryEnabledString, true))
 			{
 				if (page.getBrowser() != null)
@@ -138,8 +140,8 @@ public class JQueryPageConfigurator extends PageConfigurator
 				}
 			}
 		}
-
+		
 		return page;
 	}
-
+	
 }

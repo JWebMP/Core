@@ -54,19 +54,19 @@ public enum MeasurementTypes implements CSSEnumeration<MeasurementTypes>
 	 * Any annotations
 	 */
 	private final String htmlAnnotation;
-
+	
 	/**
 	 * Any basic measurement type
 	 *
 	 * @param requiresQuotes
 	 * @param htmlAnnotation
 	 */
-	private MeasurementTypes(boolean requiresQuotes, String htmlAnnotation)
+	MeasurementTypes(boolean requiresQuotes, String htmlAnnotation)
 	{
 		this.requiresQuotes = requiresQuotes;
 		this.htmlAnnotation = htmlAnnotation;
 	}
-
+	
 	/**
 	 * Returns a measurement type from the annotation
 	 *
@@ -85,17 +85,17 @@ public enum MeasurementTypes implements CSSEnumeration<MeasurementTypes>
 		}
 		return null;
 	}
-
+	
 	public boolean isRequiresQuotes()
 	{
 		return requiresQuotes;
 	}
-
+	
 	public String getHtmlAnnotation()
 	{
 		return htmlAnnotation;
 	}
-
+	
 	/**
 	 * Returns the formatted value
 	 *
@@ -106,7 +106,7 @@ public enum MeasurementTypes implements CSSEnumeration<MeasurementTypes>
 	{
 		return getHtmlAnnotation();
 	}
-
+	
 	/**
 	 * Returns the default annotation of None
 	 *
@@ -117,19 +117,19 @@ public enum MeasurementTypes implements CSSEnumeration<MeasurementTypes>
 	{
 		return None;
 	}
-
+	
 	@Override
 	public String getJavascriptSyntax()
 	{
 		return "";
 	}
-
+	
 	@Override
 	public CSSVersions getCSSVersion()
 	{
 		return null;
 	}
-
+	
 	/**
 	 * Returns the final HTML annotation
 	 *

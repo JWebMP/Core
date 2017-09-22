@@ -26,7 +26,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum InputTextAttributes implements AttributeDefinitions
 {
-
+	
 	/**
 	 * Sets or returns the value of the autocomplete attribute of a text field
 	 */
@@ -87,11 +87,11 @@ public enum InputTextAttributes implements AttributeDefinitions
 	 * Sets or returns the value of the value attribute of the text field
 	 */
 	Value;
-
+	
 	@Override
 	public boolean isKeyword()
 	{
 		return false;
 	}
-
+	
 }

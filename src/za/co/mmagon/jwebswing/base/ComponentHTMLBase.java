@@ -88,6 +88,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	 * Renders the text of this component before children
 	 */
 	private boolean renderTextBeforeChildren = true;
+	
 	/**
 	 * Construct a new component that will render a tag
 	 *
@@ -107,7 +108,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	 */
 	public IComponentHTMLBase asTagBase()
 	{
-		return (ComponentHTMLBase) this;
+		return this;
 	}
 	
 	/**

@@ -26,7 +26,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum FormAttributes implements AttributeDefinitions
 {
-
+	
 	/**
 	 * Not supported in HTML5. Specifies a comma-separated list of file types that the server accepts (that can be submitted through the file upload)
 	 * <p>
@@ -75,7 +75,7 @@ public enum FormAttributes implements AttributeDefinitions
 	 * Specifies where to display the response that is received after submitting the form
 	 */
 	Target;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

@@ -40,29 +40,29 @@ import java.util.logging.Logger;
  * @param <J>
  *
  * @author MMagon
- * 		<p>
- * 		<p>
- * 		<p>
- * 		Browser Support<p>
- * 		<p>
- * 		Internet Explorer Firefox Opera Google Chrome Safari<p>
- * 		<p>
- * 		When used for style sheets, the link tag is supported in all major browsers.<p>
- * 		No real support for anything else. Definition and Usage<p>
- * 		<p>
- * 		The link tag defines the relationship between a document and an external<p>
- * 		resource.<p>
- * 		<p>
- * 		The link tag is most used to link to style sheets.<p>
- * 		<p>
- * 		Note: The link element is an empty element, it contains attributes only.<p>
- * 		<p>
- * 		Note: This element goes only in the head section, but it can appear any<p>
- * 		number of times. Differences Between HTML 4.01 and HTML5<p>
- * 		<p>
- * 		Some HTML 4.01 attributes are not supported in HTML5.<p>
- * 		<p>
- * 		The "sizes" attribute is new in HTML5.<p>
+ * <p>
+ * <p>
+ * <p>
+ * Browser Support<p>
+ * <p>
+ * Internet Explorer Firefox Opera Google Chrome Safari<p>
+ * <p>
+ * When used for style sheets, the link tag is supported in all major browsers.<p>
+ * No real support for anything else. Definition and Usage<p>
+ * <p>
+ * The link tag defines the relationship between a document and an external<p>
+ * resource.<p>
+ * <p>
+ * The link tag is most used to link to style sheets.<p>
+ * <p>
+ * Note: The link element is an empty element, it contains attributes only.<p>
+ * <p>
+ * Note: This element goes only in the head section, but it can appear any<p>
+ * number of times. Differences Between HTML 4.01 and HTML5<p>
+ * <p>
+ * Some HTML 4.01 attributes are not supported in HTML5.<p>
+ * <p>
+ * The "sizes" attribute is new in HTML5.<p>
  * @version 1.0
  * @since 2013/11/12
  */
@@ -113,8 +113,7 @@ public class CSSLink<J extends CSSLink<J>>
 	/**
 	 * The CSS file link
 	 *
-	 * @param cssFile
-	 * 		The file to route
+	 * @param cssFile The file to route
 	 */
 	public CSSLink(String cssFile)
 	{
@@ -165,7 +164,7 @@ public class CSSLink<J extends CSSLink<J>>
 		
 		//add theme class name
 		/*
-         * if (isThemeLink()) { addClass(Theme.themeClassIdentifier); }
+		 * if (isThemeLink()) { addClass(Theme.themeClassIdentifier); }
          */
 		//add theme class name
 		if (isPrettifyTheme())
@@ -178,8 +177,7 @@ public class CSSLink<J extends CSSLink<J>>
 	 * Is a valid equals clause
 	 * <p>
 	 *
-	 * @param obj
-	 * 		<p>
+	 * @param obj <p>
 	 *
 	 * @return
 	 */

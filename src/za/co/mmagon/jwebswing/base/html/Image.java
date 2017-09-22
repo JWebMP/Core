@@ -61,9 +61,9 @@ public class Image<J extends Image<J>>
 		extends Component<NoChildren, ImageAttributes, GlobalFeatures, GlobalEvents, J>
 		implements ImageMapChildren, FigureChildren, GlobalChildren, ListItemChildren
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Construct a new Image
 	 *
@@ -75,7 +75,7 @@ public class Image<J extends Image<J>>
 		setInlineClosingTag(true);
 		addAttribute(ImageAttributes.Src, image);
 	}
-
+	
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -83,15 +83,15 @@ public class Image<J extends Image<J>>
 		{
 			return false;
 		}
-
+		
 		return getAttribute(ImageAttributes.Src).equals(Image.class.cast(obj).getAttribute(ImageAttributes.Src));
 	}
-
+	
 	@Override
 	public int hashCode()
 	{
 		int hash = 7;
 		return hash;
 	}
-
+	
 }

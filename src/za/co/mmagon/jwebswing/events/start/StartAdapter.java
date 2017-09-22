@@ -35,14 +35,14 @@ import java.util.logging.Level;
 public abstract class StartAdapter extends Event
 		implements GlobalEvents
 {
-
+	
 	/**
 	 * Logger for the Component
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("StartEvent");
 	private static final long serialVersionUID = 1L;
 	private StartDirective directive;
-
+	
 	/**
 	 * Performs a click
 	 *
@@ -51,9 +51,9 @@ public abstract class StartAdapter extends Event
 	public StartAdapter(Component component)
 	{
 		super(EventTypes.start, component);
-
+		
 	}
-
+	
 	/**
 	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
 	 */
@@ -62,13 +62,13 @@ public abstract class StartAdapter extends Event
 	{
 		if (!isConfigured())
 		{
-
+			
 			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
 			component.addAttribute(AngularAttributes.ngStart, "jwCntrl.perform($event," + renderVariables() + ");");
 		}
 		super.preConfigure();
 	}
-
+	
 	/**
 	 * Returns the angular directive associated with the right click event
 	 *
@@ -82,7 +82,7 @@ public abstract class StartAdapter extends Event
 		}
 		return directive;
 	}
-
+	
 	/**
 	 * Sets the right click angular event
 	 *
@@ -92,7 +92,7 @@ public abstract class StartAdapter extends Event
 	{
 		this.directive = directive;
 	}
-
+	
 	/**
 	 * Triggers on Click
 	 * <p>
@@ -101,7 +101,7 @@ public abstract class StartAdapter extends Event
 	 * @param response The physical Ajax Receiver
 	 */
 	public abstract void onStart(AjaxCall call, AjaxResponse response);
-
+	
 	@Override
 	public void fireEvent(AjaxCall call, AjaxResponse response)
 	{
@@ -114,5 +114,5 @@ public abstract class StartAdapter extends Event
 			LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
-
+	
 }

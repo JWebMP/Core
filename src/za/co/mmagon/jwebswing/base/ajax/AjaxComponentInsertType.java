@@ -31,23 +31,23 @@ public enum AjaxComponentInsertType
 	 * Any sub data
 	 */
 	private String data;
-
+	
 	/**
 	 * A new AjaxComponentInsertType
 	 */
-	private AjaxComponentInsertType()
+	AjaxComponentInsertType()
 	{
-
+	
 	}
-
+	
 	/**
 	 * A new AjaxComponentInsertType with data
 	 */
-	private AjaxComponentInsertType(String data)
+	AjaxComponentInsertType(String data)
 	{
-
+	
 	}
-
+	
 	/**
 	 * Returns the name or the data contained within
 	 *

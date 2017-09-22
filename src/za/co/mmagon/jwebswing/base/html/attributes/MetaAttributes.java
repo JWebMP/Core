@@ -32,7 +32,7 @@ public enum MetaAttributes implements AttributeDefinitions
 	Http_Equiv,
 	Content,
 	Charset;
-
+	
 	/**
 	 * Returns the lowercase variant of the attribute
 	 *
@@ -43,11 +43,11 @@ public enum MetaAttributes implements AttributeDefinitions
 	{
 		return name().toLowerCase().replace('_', '-');
 	}
-
+	
 	@Override
 	public boolean isKeyword()
 	{
 		return false;
 	}
-
+	
 }

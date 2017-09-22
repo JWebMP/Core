@@ -38,10 +38,8 @@ import java.util.logging.Level;
 /**
  * Allows a component to have features and events
  *
- * @param <F>
- * 		The allowed feature JavaScripts
- * @param <J>
- * 		Component output for cloning. Returned on CloneComponent
+ * @param <F> The allowed feature JavaScripts
+ * @param <J> Component output for cloning. Returned on CloneComponent
  *
  * @since 23 Apr 2016
  */
@@ -133,7 +131,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 */
 	public IComponentFeatureBase asFeatureBase()
 	{
-		return (ComponentFeatureBase) this;
+		return this;
 	}
 	
 	/**
@@ -352,8 +350,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	/**
 	 * Sets the name of the feature
 	 *
-	 * @param name
-	 * 		Sets the name of the feature
+	 * @param name Sets the name of the feature
 	 *
 	 * @return
 	 */
@@ -444,7 +441,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		{
 			LOG.log(Level.WARNING, "Tried to add a non-feature to the feature collection");
 		}
-		else if (!getFeatures().contains((F) feature))
+		else if (!getFeatures().contains(feature))
 		{
 			getFeatures().add(position, (F) feature);
 		}
@@ -467,7 +464,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 			{
 				LOG.log(Level.WARNING, "Tried to add a non-feature to the feature collection");
 			}
-			else if (!getFeatures().contains((F) feature))
+			else if (!getFeatures().contains(feature))
 			{
 				getFeatures().add((F) feature);
 			}
@@ -495,9 +492,8 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 * Removes a feature from the components collection
 	 * <p>
 	 *
-	 * @param feature
-	 * 		The feature to be removed
-	 * 		<p>
+	 * @param feature The feature to be removed
+	 *                <p>
 	 *
 	 * @return True or false on whether it could be removed, e.g. if it ever existed.
 	 */
@@ -641,6 +637,29 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	public J setJavascriptRenderedElsewhere(boolean javascriptRenderedElsewhere)
 	{
 		this.javascriptRenderedElsewhere = javascriptRenderedElsewhere;
+		return (J) this;
+	}
+	
+	/**
+	 * Returns any hierarchal assigned component
+	 *
+	 * @return
+	 */
+	protected ComponentHierarchyBase getComponent()
+	{
+		return component;
+	}
+	
+	/**
+	 * Returns any hierarchal assigned component
+	 *
+	 * @param component
+	 *
+	 * @return
+	 */
+	protected J setComponent(ComponentHierarchyBase component)
+	{
+		this.component = component;
 		return (J) this;
 	}
 	

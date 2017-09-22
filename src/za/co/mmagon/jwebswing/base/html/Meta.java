@@ -57,10 +57,10 @@ import java.util.logging.Logger;
 public class Meta extends ComponentHierarchyBase<NoChildren, MetaAttributes, NoFeatures, NoEvents, Meta>
 		implements NoIDTag, NoClosingTag, HeadChildren, NoClassAttribute, NoNewLineBeforeClosingTag
 {
-
+	
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = LogFactory.getInstance().getLogger("<META>");
-
+	
 	/**
 	 * Constructs an empty Meta tag
 	 */
@@ -68,7 +68,7 @@ public class Meta extends ComponentHierarchyBase<NoChildren, MetaAttributes, NoF
 	{
 		super(ComponentTypes.Metadata);
 	}
-
+	
 	/**
 	 * Creates a Meta tag of HTTP Equiv with the custom name
 	 *
@@ -79,7 +79,7 @@ public class Meta extends ComponentHierarchyBase<NoChildren, MetaAttributes, NoF
 		super(ComponentTypes.Metadata);
 		addAttribute(MetaAttributes.Http_Equiv, httpEquivName);
 	}
-
+	
 	/**
 	 * Constructs a Meta tag
 	 *
@@ -99,21 +99,21 @@ public class Meta extends ComponentHierarchyBase<NoChildren, MetaAttributes, NoF
 			}
 			case Author:
 			{
-
+				
 				addAttribute(MetaAttributes.Content, value);
 				addAttribute(MetaAttributes.Name, MetadataFields.Author.getDataNameField());
 				break;
 			}
 			case Description:
 			{
-
+				
 				addAttribute(MetaAttributes.Content, value);
 				addAttribute(MetaAttributes.Name, MetadataFields.Description.getDataNameField());
 				break;
 			}
 			case Keywords:
 			{
-
+				
 				addAttribute(MetaAttributes.Content, value);
 				addAttribute(MetaAttributes.Name, MetadataFields.Keywords.getDataNameField());
 				break;
@@ -130,7 +130,7 @@ public class Meta extends ComponentHierarchyBase<NoChildren, MetaAttributes, NoF
 		addAttribute(MetaAttributes.Content, value);
 		setTiny(true);
 	}
-
+	
 	/**
 	 * Differences Between HTML and XHTML
 	 * <p>
@@ -153,32 +153,33 @@ public class Meta extends ComponentHierarchyBase<NoChildren, MetaAttributes, NoF
 			logger.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
 		}
 	}
-
+	
 	/**
 	 * A set list of fields available to the Meta tag
 	 */
 	public enum MetadataFields
 	{
-
+		
 		Application_Name("application-name"),
 		Generator("generator"),
 		Author("author"),
 		Keywords("keywords"),
 		Description("description"),
-		http_equiv("X-UA-Compatible");
-
+		http_equiv("X-UA-Compatible"),
+		Name("name");
+		
 		private String dataNameField;
-
+		
 		/**
 		 * Doh
 		 *
 		 * @param dataNameField
 		 */
-		private MetadataFields(String dataNameField)
+		MetadataFields(String dataNameField)
 		{
 			this.dataNameField = dataNameField;
 		}
-
+		
 		/**
 		 * Returns this tags data name field
 		 *
@@ -188,7 +189,7 @@ public class Meta extends ComponentHierarchyBase<NoChildren, MetaAttributes, NoF
 		{
 			return dataNameField;
 		}
-
+		
 		/**
 		 * Sets this fields dataset name Useful.
 		 *
@@ -199,5 +200,5 @@ public class Meta extends ComponentHierarchyBase<NoChildren, MetaAttributes, NoF
 			this.dataNameField = dataNameField;
 		}
 	}
-
+	
 }

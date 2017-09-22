@@ -57,9 +57,9 @@ public class S<J extends S<J>>
 		extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements ParagraphChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs a new instance of S
 	 */

@@ -18,9 +18,9 @@ import java.util.Objects;
  */
 public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	private final String name;
 	private final String cssClassName;
 	private final String icon30;
@@ -31,7 +31,7 @@ public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private ArrayList<JavascriptReference> javascriptRefs;
 	private boolean renderClassName = true;
-
+	
 	/**
 	 * Loads a theme with the default icons. This cannot be changed later on
 	 *
@@ -41,7 +41,7 @@ public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 	{
 		this(null, null);
 	}
-
+	
 	/**
 	 * Loads a theme with the default icons. This cannot be changed later on
 	 *
@@ -52,7 +52,7 @@ public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 	{
 		this(name, cssClassName, null, null, null);
 	}
-
+	
 	/**
 	 * Constructs a new theme object with all specified lines if available
 	 *
@@ -70,7 +70,7 @@ public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 		this.icon60 = icon60;
 		this.icon90 = icon90;
 	}
-
+	
 	/**
 	 * Returns this theme's class name
 	 *
@@ -81,7 +81,7 @@ public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 	{
 		return cssClassName;
 	}
-
+	
 	/**
 	 * Returns this object Java class name
 	 *
@@ -92,7 +92,7 @@ public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 	{
 		return getName();
 	}
-
+	
 	/**
 	 * Returns the CSS Class name for this theme
 	 *
@@ -103,7 +103,7 @@ public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 	{
 		return name;
 	}
-
+	
 	/**
 	 * Compares themes via their name
 	 *
@@ -117,7 +117,7 @@ public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 	{
 		return o1.getName().compareTo(o2.getName());
 	}
-
+	
 	/**
 	 * Returns all the CSS References used by this theme
 	 * <p>
@@ -133,7 +133,7 @@ public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 		}
 		return cssRefs;
 	}
-
+	
 	/**
 	 * Returns all JavaScript references used by this theme
 	 * <p>
@@ -149,7 +149,7 @@ public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 		}
 		return javascriptRefs;
 	}
-
+	
 	/**
 	 * Returns a size 30x30 icon if present
 	 * <p>
@@ -161,7 +161,7 @@ public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 	{
 		return this.icon30;
 	}
-
+	
 	/**
 	 * Returns a size 60x60 icon if present
 	 * <p>
@@ -173,7 +173,7 @@ public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 	{
 		return this.icon60;
 	}
-
+	
 	/**
 	 * Returns a size 90x90 icon if present
 	 * <p>
@@ -185,7 +185,7 @@ public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 	{
 		return this.icon90;
 	}
-
+	
 	/**
 	 * Sets if the class name should be rendered
 	 *
@@ -195,7 +195,7 @@ public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 	{
 		return renderClassName;
 	}
-
+	
 	/**
 	 * Sets if the class name should be rendered
 	 *
@@ -205,7 +205,7 @@ public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 	{
 		this.renderClassName = renderClassName;
 	}
-
+	
 	@Override
 	public int hashCode()
 	{
@@ -216,7 +216,7 @@ public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 		hash = 53 * hash + (this.renderClassName ? 1 : 0);
 		return hash;
 	}
-
+	
 	/**
 	 * Equals for themes
 	 *
@@ -252,11 +252,7 @@ public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 		{
 			return false;
 		}
-		if (!Objects.equals(this.javascriptRefs, other.javascriptRefs))
-		{
-			return false;
-		}
-		return true;
+		return Objects.equals(this.javascriptRefs, other.javascriptRefs);
 	}
-
+	
 }

@@ -30,18 +30,18 @@ import java.lang.annotation.*;
 @Inherited
 public @interface PageConfiguration
 {
-
+	
 	/**
 	 * Specifies the URL that this page serves
 	 *
 	 * @return
 	 */
-	public String url() default "/";
-
+	String url() default "/";
+	
 	/**
 	 * Specifies the type this page serves (best to leave it alone - or only use one page for error types etc)
 	 *
 	 * @return
 	 */
-	public PageTypes type() default PageTypes.Default;
+	PageTypes type() default PageTypes.Default;
 }

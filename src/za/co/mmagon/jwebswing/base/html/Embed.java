@@ -49,9 +49,9 @@ public class Embed<J extends Embed<J>>
 		extends Component<NoChildren, EmbedAttributes, GlobalFeatures, GlobalEvents, J>
 		implements NoClosingTag
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs an embedded content type with the media type and source specified
 	 *

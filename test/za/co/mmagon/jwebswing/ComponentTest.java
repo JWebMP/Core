@@ -47,8 +47,10 @@ public class ComponentTest extends BaseTestClass
 		System.out.println(p.toString(true));
 		if (!p.toString(true).startsWith("<!DOCTYPE html>\n" +
 				                                 "<html>\n" +
-				                                 "\t<body id=\"body\" ng-app=\"jwApp\" ng-controller=\"jwController as jwCntrl\">\n" +
-				                                 "\t\t<p id=\"paragraph\">String adds a paragraph</p>"))
+				                                 "\t<body id=\"body\">\n" +
+				                                 "\t\t<p id=\"paragraph\">String adds a paragraph</p>\n" +
+				                                 "\t</body>\n" +
+				                                 "</html>"))
 		{
 			fail("didn't add paragraph");
 		}

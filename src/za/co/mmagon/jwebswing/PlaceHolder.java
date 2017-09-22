@@ -10,9 +10,9 @@ import za.co.mmagon.jwebswing.base.html.Div;
  */
 public class PlaceHolder extends Div
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/*
 	 * Constructs a new PlaceHolder with the given ID
 	 */

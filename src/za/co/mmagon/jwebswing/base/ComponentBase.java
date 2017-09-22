@@ -26,6 +26,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.utilities.GUIDGenerator;
 import za.co.mmagon.logger.LogFactory;
 
+import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -73,7 +74,6 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 * Any raw text that should be built into this component. Rendered before children
 	 */
 	private String text;
-	
 	/**
 	 * Specifies if this component should render as small as possible
 	 */
@@ -101,7 +101,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 *
 	 * @param componentType
 	 */
-	public ComponentBase(ComponentTypes componentType)
+	public ComponentBase(@NotNull ComponentTypes componentType)
 	{
 		this.id = GUIDGenerator.generateGuid();
 		this.componentType = componentType;
@@ -112,9 +112,10 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 *
 	 * @return
 	 */
+	@NotNull
 	public IComponentBase asBase()
 	{
-		return (ComponentBase) this;
+		return this;
 	}
 	
 	/**
@@ -539,6 +540,23 @@ public class ComponentBase<J extends ComponentBase<J>>
 	public String getProperty(String propertyName)
 	{
 		return getProperties().get(propertyName).toString();
+	}
+	
+	/**
+	 * Returns the classes canonical name used for ID's in events
+	 *
+	 * @return
+	 */
+	public String getClassCanonicalName()
+	{
+		try
+		{
+			return getClass().getCanonicalName().replace('.', '_');
+		}
+		catch (NullPointerException npe)
+		{
+			return getClass().getTypeName();
+		}
 	}
 	
 	/**

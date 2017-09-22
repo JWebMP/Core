@@ -23,14 +23,14 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum DirectoryListAttributes implements AttributeDefinitions
 {
-
+	
 	/**
 	 * Not supported in HTML5. Specifies that the list should render smaller than normal
 	 *
 	 * @deprecated
 	 */
 	Compact,;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

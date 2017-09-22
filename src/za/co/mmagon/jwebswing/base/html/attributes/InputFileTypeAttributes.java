@@ -26,7 +26,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum InputFileTypeAttributes implements AttributeDefinitions
 {
-
+	
 	/**
 	 * The alternative text or tooltip to display
 	 */
@@ -86,11 +86,11 @@ public enum InputFileTypeAttributes implements AttributeDefinitions
 	 * Sets or returns whether a user is allowed to select more than one file in the file upload field
 	 */
 	Multiple,;
-
+	
 	/**
 	 *
 	 */
-
+	
 	@Override
 	public boolean isKeyword()
 	{

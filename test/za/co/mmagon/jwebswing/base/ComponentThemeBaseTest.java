@@ -23,15 +23,15 @@ import org.junit.Test;
  */
 public class ComponentThemeBaseTest
 {
-
+	
 	public ComponentThemeBaseTest()
 	{
 	}
-
+	
 	@Test
 	public void stuff()
 	{
-
+	
 	}
-
+	
 }

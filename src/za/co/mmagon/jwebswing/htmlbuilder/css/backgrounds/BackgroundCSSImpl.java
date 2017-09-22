@@ -34,9 +34,9 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
  */
 public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, BackgroundCSSImpl> implements CSSImplementationClass<BackgroundCSS, BackgroundCSSImpl>
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	@CSSDetail(cssName = "background-attachment", cssVersion = CSSVersions.CSS21, jsName = "backgroundAttachment")
 	private BackgroundAttachments backgroundAttachment;
 	@CSSDetail(cssName = "background-color", cssVersion = CSSVersions.CSS21, jsName = "backgroundColor")
@@ -63,7 +63,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	private MeasurementCSSImpl[] backgroundSize;
 	@CSSDetail(cssName = "background", cssVersion = CSSVersions.CSS21, jsName = "background")
 	private BackgroundImpl background;
-
+	
 	/**
 	 * Specifies the background color of an element
 	 *
@@ -73,7 +73,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		return backgroundColor;
 	}
-
+	
 	/**
 	 * Sets the background colour
 	 *
@@ -83,7 +83,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		this.backgroundColor = backgroundColor;
 	}
-
+	
 	/**
 	 * Specifies the background color of an element
 	 *
@@ -93,7 +93,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		return backgroundColor$;
 	}
-
+	
 	/**
 	 * Sets the background colour
 	 *
@@ -103,7 +103,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		this.backgroundColor$ = backgroundColor$;
 	}
-
+	
 	/**
 	 * Specifies one or more background images for an element
 	 *
@@ -113,7 +113,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		return backgroundImage;
 	}
-
+	
 	/**
 	 * Sets the background image
 	 *
@@ -123,7 +123,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		this.backgroundImage = backgroundImage;
 	}
-
+	
 	/**
 	 * Specifies the position of a background image
 	 *
@@ -133,7 +133,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		return backgroundPosition;
 	}
-
+	
 	/**
 	 * Gets the background position
 	 *
@@ -143,7 +143,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		this.backgroundPosition = backgroundPosition;
 	}
-
+	
 	/**
 	 * Sets how a background image will be repeated
 	 *
@@ -153,7 +153,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		return backgroundRepeat;
 	}
-
+	
 	/**
 	 * Sets the background repeat
 	 *
@@ -163,7 +163,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		this.backgroundRepeat = backgroundRepeat;
 	}
-
+	
 	/**
 	 * Specifies the blending mode of each background layer (color/image)
 	 *
@@ -173,7 +173,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		return backgroundBlendMode;
 	}
-
+	
 	/**
 	 * Sets the background blend mode
 	 *
@@ -183,7 +183,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		this.backgroundBlendMode = backgroundBlendMode;
 	}
-
+	
 	/**
 	 * Specifies the painting area of the background
 	 *
@@ -193,7 +193,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		return backgroundClip;
 	}
-
+	
 	/**
 	 * Sets the background clip
 	 *
@@ -203,7 +203,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		this.backgroundClip = backgroundClip;
 	}
-
+	
 	/**
 	 * Specifies where the background image(s) is/are positioned
 	 *
@@ -213,7 +213,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		return backgroundOrigin;
 	}
-
+	
 	/**
 	 * Sets the background origin
 	 *
@@ -223,7 +223,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		this.backgroundOrigin = backgroundOrigin;
 	}
-
+	
 	/**
 	 * Specifies the size of the background image(s)
 	 *
@@ -233,7 +233,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		return backgroundSize;
 	}
-
+	
 	/**
 	 * Sets the background size
 	 *
@@ -243,7 +243,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		this.backgroundSize = backgroundSize;
 	}
-
+	
 	/**
 	 * Specifies the size of the background image(s)
 	 *
@@ -253,7 +253,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		return backgroundSize$;
 	}
-
+	
 	/**
 	 * Sets the background size
 	 *
@@ -263,7 +263,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		this.backgroundSize$ = backgroundSize$;
 	}
-
+	
 	/**
 	 * Specifies one or more background images for an element
 	 *
@@ -273,7 +273,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		return backgroundImage$;
 	}
-
+	
 	/**
 	 * Sets the background images
 	 *
@@ -283,7 +283,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		this.backgroundImage$ = backgroundImage$;
 	}
-
+	
 	/**
 	 * Sets whether a background image is fixed or scrolls with the rest of the page
 	 *
@@ -293,7 +293,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		return backgroundAttachment;
 	}
-
+	
 	/**
 	 * Sets the background attachment
 	 *
@@ -303,7 +303,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		this.backgroundAttachment = backgroundAttachment;
 	}
-
+	
 	/**
 	 * The background
 	 *
@@ -313,7 +313,7 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		return background;
 	}
-
+	
 	/**
 	 * Sets the background
 	 *
@@ -323,5 +323,5 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	{
 		this.background = background;
 	}
-
+	
 }

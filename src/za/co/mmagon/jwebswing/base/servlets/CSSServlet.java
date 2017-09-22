@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.base.servlets;
 
 import com.armineasy.injection.GuiceContext;
-import com.armineasy.injection.filters.CorsAllowedFilter;
 import com.google.inject.Singleton;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
@@ -40,10 +39,10 @@ import java.util.logging.Logger;
 @Singleton
 public class CSSServlet extends JWDefaultServlet
 {
-
+	
 	private static final Logger LOG = LogFactory.getInstance().getLogger("CSSServlet");
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
 	 *
@@ -58,26 +57,26 @@ public class CSSServlet extends JWDefaultServlet
 	{
 		Date startDate = new Date();
 		StringBuilder scripts = new StringBuilder();
-
+		
 		Page page = GuiceContext.inject().getInstance(Page.class);
-
+		
 		if (page == null)
 		{
 			throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
 		}
-
+		
 		StringBuilder css = page.getBody().renderCss(0);
 		scripts.append(css);
-
+		
 		Date endDate = new Date();
 		try (PrintWriter out = response.getWriter())
 		{
 			response.setContentType("text/css");
-			response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);
+			response.setHeader("Access-Control-Allow-Origin", "*");
 			response.setHeader("Access-Control-Allow-Credentials", "true");
 			response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
 			response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
-
+			
 			out.println(scripts);
 			Date dataTransferDate = new Date();
 			LOG.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]",
@@ -87,7 +86,7 @@ public class CSSServlet extends JWDefaultServlet
 					        });
 		}
 	}
-
+	
 	/**
 	 * Handles the HTTP <code>GET</code> method.
 	 *

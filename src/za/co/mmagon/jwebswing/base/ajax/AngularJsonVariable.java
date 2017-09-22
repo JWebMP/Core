@@ -36,10 +36,10 @@ import java.util.logging.Logger;
  */
 public class AngularJsonVariable extends JavaScriptPart
 {
-
+	
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = LogFactory.getLog(AngularJsonVariable.class.getName());
-
+	
 	/**
 	 * The variable name to use
 	 */
@@ -60,14 +60,14 @@ public class AngularJsonVariable extends JavaScriptPart
 	 */
 	@JsonProperty(value = "$jwid")
 	private String ownerId;
-
+	
 	/**
 	 * Constructs a blank object
 	 */
 	public AngularJsonVariable()
 	{
 	}
-
+	
 	/**
 	 * Constructs a new instance with a given name and object
 	 *
@@ -80,7 +80,7 @@ public class AngularJsonVariable extends JavaScriptPart
 		this.variableText = variableObject;
 		this.variable = variableText;
 	}
-
+	
 	/**
 	 * Constructs a new instance with a given name and object
 	 *
@@ -92,7 +92,7 @@ public class AngularJsonVariable extends JavaScriptPart
 		this.variableName = variableName;
 		this.variable = variableObject;
 	}
-
+	
 	/**
 	 * Gets the DTO Form of this object
 	 *
@@ -109,7 +109,7 @@ public class AngularJsonVariable extends JavaScriptPart
 		variable = output;
 		return output;
 	}
-
+	
 	/**
 	 * Gets the variable name
 	 *
@@ -119,7 +119,7 @@ public class AngularJsonVariable extends JavaScriptPart
 	{
 		return variableName;
 	}
-
+	
 	/**
 	 * Sets the variable name
 	 *
@@ -129,7 +129,7 @@ public class AngularJsonVariable extends JavaScriptPart
 	{
 		this.variableName = variableName;
 	}
-
+	
 	/**
 	 * Gets a variable object or blank so it at least gets instantiated
 	 *
@@ -139,7 +139,7 @@ public class AngularJsonVariable extends JavaScriptPart
 	{
 		return variableText;
 	}
-
+	
 	/**
 	 * Sets the variable name to a new object
 	 *
@@ -149,7 +149,7 @@ public class AngularJsonVariable extends JavaScriptPart
 	{
 		this.variableText = variableText;
 	}
-
+	
 	/**
 	 * Returns the variable if any is applied
 	 *
@@ -159,7 +159,7 @@ public class AngularJsonVariable extends JavaScriptPart
 	{
 		return variable;
 	}
-
+	
 	/**
 	 * Sets the variable if any is applied
 	 *
@@ -169,7 +169,7 @@ public class AngularJsonVariable extends JavaScriptPart
 	{
 		this.variable = variable;
 	}
-
+	
 	/**
 	 * Sets the owning component ID
 	 *
@@ -180,7 +180,7 @@ public class AngularJsonVariable extends JavaScriptPart
 	{
 		return ownerId;
 	}
-
+	
 	/**
 	 * Gets the owning component ID
 	 *
@@ -191,7 +191,7 @@ public class AngularJsonVariable extends JavaScriptPart
 	{
 		this.ownerId = referenceId;
 	}
-
+	
 	/**
 	 * Returns the variable object in the format requested
 	 *
@@ -212,5 +212,5 @@ public class AngularJsonVariable extends JavaScriptPart
 			return null;
 		}
 	}
-
+	
 }

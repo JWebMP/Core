@@ -50,7 +50,7 @@ public class ColourUtils
 	/**
 	 * Returns a heat map colour between the min and maximum set
 	 *
-	 * @param province
+	 *
 	 * @return
 	 */
 

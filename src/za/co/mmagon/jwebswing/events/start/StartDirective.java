@@ -27,9 +27,9 @@ import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
  */
 public class StartDirective extends AngularDirectiveBase
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs a new right click directive based on the angular object passed in
 	 * <p>
@@ -38,7 +38,7 @@ public class StartDirective extends AngularDirectiveBase
 	{
 		super("ngStart");
 	}
-
+	
 	/**
 	 * Renders the right click directive from the JavaScript file
 	 *
@@ -49,5 +49,5 @@ public class StartDirective extends AngularDirectiveBase
 	{
 		return FileTemplates.getFileTemplate(StartDirective.class, "Start").toString();
 	}
-
+	
 }

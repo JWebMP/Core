@@ -27,7 +27,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum ButtonAttributes implements AttributeDefinitions
 {
-
+	
 	/**
 	 * Specifies that a button should automatically get focus when the page loads
 	 */
@@ -84,18 +84,18 @@ public enum ButtonAttributes implements AttributeDefinitions
 	 * What to dismiss
 	 */
 	Data_Dismiss;
-
+	
 	@Override
 	public boolean isKeyword()
 	{
 		return false;
 	}
-
+	
 	@Override
 	public String toString()
 	{
 		return name().toLowerCase().replace('_', '-');
 	}
-
-
+	
+	
 }

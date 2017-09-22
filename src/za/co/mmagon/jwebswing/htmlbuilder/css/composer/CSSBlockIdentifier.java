@@ -43,7 +43,7 @@ public enum CSSBlockIdentifier
 	 * The name to represent
 	 */
 	private String cssName;
-
+	
 	/**
 	 * Constructs a new CSS Render Type
 	 *
@@ -51,13 +51,13 @@ public enum CSSBlockIdentifier
 	 * @param cssName     The physical display name of the selector
 	 * @param cssPosition Where to place the type
 	 */
-	private CSSBlockIdentifier(double cssVersion, String cssName, CSSTypePosition cssPosition)
+	CSSBlockIdentifier(double cssVersion, String cssName, CSSTypePosition cssPosition)
 	{
 		this.cssVersion = cssVersion;
 		this.cssName = cssName;
 		this.cssPosition = cssPosition;
 	}
-
+	
 	/**
 	 * Returns the capable CSS Version
 	 *
@@ -67,7 +67,7 @@ public enum CSSBlockIdentifier
 	{
 		return cssVersion;
 	}
-
+	
 	/**
 	 * Sets the capable CSS Version
 	 *
@@ -77,7 +77,7 @@ public enum CSSBlockIdentifier
 	{
 		this.cssVersion = cssVersion;
 	}
-
+	
 	/**
 	 * Returns the CSS Name of this type
 	 *
@@ -87,7 +87,7 @@ public enum CSSBlockIdentifier
 	{
 		return cssName;
 	}
-
+	
 	/**
 	 * Returns the CSS Name of this type
 	 *
@@ -97,7 +97,7 @@ public enum CSSBlockIdentifier
 	{
 		this.cssName = cssName;
 	}
-
+	
 	/**
 	 * Returns where this CSS name type is placed
 	 *

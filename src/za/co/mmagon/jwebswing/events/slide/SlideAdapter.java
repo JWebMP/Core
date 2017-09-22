@@ -35,7 +35,7 @@ import java.util.logging.Level;
 public abstract class SlideAdapter extends Event
 		implements GlobalEvents
 {
-
+	
 	/**
 	 * Logger for the Component
 	 */
@@ -45,7 +45,7 @@ public abstract class SlideAdapter extends Event
 	 * The directive for this adapter
 	 */
 	private SlideDirective directive;
-
+	
 	/**
 	 * Performs a click
 	 *
@@ -54,9 +54,9 @@ public abstract class SlideAdapter extends Event
 	public SlideAdapter(Component component)
 	{
 		super(EventTypes.slide, component);
-
+		
 	}
-
+	
 	/**
 	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
 	 */
@@ -65,13 +65,13 @@ public abstract class SlideAdapter extends Event
 	{
 		if (!isConfigured())
 		{
-
+			
 			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
 			component.addAttribute(AngularAttributes.ngSlide, "jwCntrl.perform($event," + renderVariables() + ");");
 		}
 		super.preConfigure();
 	}
-
+	
 	/**
 	 * Returns the angular directive associated with the right click event
 	 *
@@ -85,7 +85,7 @@ public abstract class SlideAdapter extends Event
 		}
 		return directive;
 	}
-
+	
 	/**
 	 * Sets the right click angular event
 	 *
@@ -95,7 +95,7 @@ public abstract class SlideAdapter extends Event
 	{
 		this.directive = directive;
 	}
-
+	
 	/**
 	 * Triggers on Click
 	 * <p>
@@ -104,7 +104,7 @@ public abstract class SlideAdapter extends Event
 	 * @param response The physical Ajax Receiver
 	 */
 	public abstract void onSlide(AjaxCall call, AjaxResponse response);
-
+	
 	@Override
 	public void fireEvent(AjaxCall call, AjaxResponse response)
 	{
@@ -117,5 +117,5 @@ public abstract class SlideAdapter extends Event
 			LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
-
+	
 }

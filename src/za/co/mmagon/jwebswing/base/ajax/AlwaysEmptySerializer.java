@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.base.ajax;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
@@ -29,14 +28,14 @@ import java.io.IOException;
  */
 public class AlwaysEmptySerializer extends JsonSerializer<Object>
 {
-
+	
 	public AlwaysEmptySerializer()
 	{
-
+	
 	}
-
+	
 	@Override
-	public void serialize(Object t, JsonGenerator jg, SerializerProvider sp) throws IOException, JsonProcessingException
+	public void serialize(Object t, JsonGenerator jg, SerializerProvider sp) throws IOException
 	{
 		jg.writeNull();
 	}

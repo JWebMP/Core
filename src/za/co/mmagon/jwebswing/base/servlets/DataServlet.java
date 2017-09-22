@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.base.servlets;
 
 import com.armineasy.injection.GuiceContext;
-import com.armineasy.injection.filters.CorsAllowedFilter;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Singleton;
@@ -49,7 +48,7 @@ import java.util.logging.Logger;
 @Singleton
 public class DataServlet extends JWDefaultServlet
 {
-
+	
 	/**
 	 * The Servlet base logger
 	 */
@@ -59,17 +58,17 @@ public class DataServlet extends JWDefaultServlet
 	 * The Object Mapper for rendering the JSON with Jackson
 	 */
 	private static final ObjectMapper jsonObjectMapper = new ObjectMapper();
-
+	
 	static
 	{
 		jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
 	}
-
+	
 	public DataServlet()
 	{
-
+	
 	}
-
+	
 	public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, MissingComponentException
 	{
 		Date startDate = new Date();
@@ -80,7 +79,7 @@ public class DataServlet extends JWDefaultServlet
 		{
 			throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
 		}
-
+		
 		String componentID = request.getParameter("component");
 		log.log(Level.CONFIG, "[SessionID]-[{0}];[DataFetch];[ComponentID]-[{1}]", new Object[]
 				{
@@ -92,16 +91,16 @@ public class DataServlet extends JWDefaultServlet
 			throw new MissingComponentException("Unable to find the specified component : " + request.getParameter("component"));
 		}
 		StringBuilder output = new StringBuilder();
-
+		
 		String searchString = (String) request.getSession().getAttribute("search");
 		Integer totalCount = (Integer) request.getSession().getAttribute("count");
 		String lastItemID = (String) request.getSession().getAttribute("lastID");
-
+		
 		if (!GuiceContext.isBuildingInjector())
 		{
 			intercept();
 		}
-
+		
 		if (IDataComponent.class.isAssignableFrom(hb.getClass()))
 		{
 			IDataComponent dc = (IDataComponent) hb;
@@ -112,20 +111,20 @@ public class DataServlet extends JWDefaultServlet
 					                   );
 			output.append(outputJson).toString();
 		}
-
+		
 		responseString.append(output);
-
+		
 		Date endDate = new Date();
 		try (PrintWriter out = response.getWriter())
 		{
 			response.setContentType("application/json;charset=UTF-8");
 			response.setCharacterEncoding("UTF-8");
-
-			response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);
+			
+			response.setHeader("Access-Control-Allow-Origin", "*");
 			response.setHeader("Access-Control-Allow-Credentials", "true");
 			response.setHeader("Access-Control-Allow-Methods", "GET, POST");
 			response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
-
+			
 			out.println(responseString);
 			Date dataTransferDate = new Date();
 			log.log(Level.CONFIG, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
@@ -134,7 +133,7 @@ public class DataServlet extends JWDefaultServlet
 					});
 		}
 	}
-
+	
 	/**
 	 * Handles the HTTP <code>GET</code> method.
 	 *
@@ -162,11 +161,11 @@ public class DataServlet extends JWDefaultServlet
 			Logger.getLogger(DataServlet.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-
+	
 	@SiteInterception
 	@DataCallInterception
 	protected void intercept()
 	{
-
+	
 	}
 }

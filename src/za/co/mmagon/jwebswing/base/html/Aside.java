@@ -59,7 +59,7 @@ public class Aside<J extends Aside<J>>
 		extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements GlobalChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
-
+	
 	/**
 	 * Logger for the Component
 	 */
@@ -68,7 +68,7 @@ public class Aside<J extends Aside<J>>
 	 * Serial Version for all Components and their compatibility
 	 */
 	private static final long serialVersionUID = 1l;
-
+	
 	/**
 	 * Constructs a new ASide with the given text set as Raw Text
 	 *
@@ -79,7 +79,7 @@ public class Aside<J extends Aside<J>>
 		super(ComponentTypes.Aside.getComponentTag(), ComponentTypes.Aside);
 		setText(text);
 	}
-
+	
 	/**
 	 * Constructs a new instance of Aside
 	 */
@@ -87,5 +87,5 @@ public class Aside<J extends Aside<J>>
 	{
 		this(null);
 	}
-
+	
 }

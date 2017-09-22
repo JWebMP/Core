@@ -60,11 +60,11 @@ public enum InputResetTypeAttributes implements AttributeDefinitions
 	 * HTML 5 Only
 	 */
 	Required,;
-
+	
 	/**
 	 *
 	 */
-
+	
 	@Override
 	public boolean isKeyword()
 	{

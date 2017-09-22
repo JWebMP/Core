@@ -47,19 +47,19 @@ public enum AudioAttributes implements AttributeDefinitions
 	 * Specifies the URL of the audio file
 	 */
 	Src;
-
+	
 	@Override
 	public String toString()
 	{
 		return super.toString().toLowerCase();
 	}
-
+	
 	@Override
 	public boolean isKeyword()
 	{
 		return false;
 	}
-
+	
 	public enum AudioPreloadTypes
 	{
 		Auto,

@@ -29,7 +29,7 @@ public enum TableAttributes implements AttributeDefinitions
 {
 	CellSpacing,
 	CellPadding;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

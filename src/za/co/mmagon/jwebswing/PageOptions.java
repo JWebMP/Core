@@ -27,11 +27,11 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  */
 public class PageOptions extends JavaScriptPart
 {
-
+	
 	private static final long serialVersionUID = 1L;
 	@JsonIgnore
 	private final Page page;
-
+	
 	/**
 	 * Whether or not to render jQuery
 	 */
@@ -60,12 +60,12 @@ public class PageOptions extends JavaScriptPart
 	 * The google maps paramters
 	 */
 	private String googleMapsParameters;
-
+	
 	/**
 	 * If the page is using JQuery 3
 	 */
 	private boolean jquery3 = true;
-
+	
 	/**
 	 * Construct directly with the page
 	 *
@@ -75,7 +75,7 @@ public class PageOptions extends JavaScriptPart
 	{
 		this.page = page;
 	}
-
+	
 	/**
 	 * Is Modernizr Enabled
 	 *
@@ -85,7 +85,7 @@ public class PageOptions extends JavaScriptPart
 	{
 		return modernizrEnabled;
 	}
-
+	
 	/**
 	 * Sets if Modernizr is enabled
 	 *
@@ -95,7 +95,7 @@ public class PageOptions extends JavaScriptPart
 	{
 		this.modernizrEnabled = modernizrEnabled;
 	}
-
+	
 	/**
 	 * Whether or not to dynamic render the requirements
 	 *
@@ -105,7 +105,7 @@ public class PageOptions extends JavaScriptPart
 	{
 		return dynamicRender;
 	}
-
+	
 	/**
 	 * Whether or not to dynamic render the requirements
 	 *
@@ -115,7 +115,7 @@ public class PageOptions extends JavaScriptPart
 	{
 		this.dynamicRender = dynamicRender;
 	}
-
+	
 	/**
 	 * Whether or not to place the scripts in the head
 	 *
@@ -125,7 +125,7 @@ public class PageOptions extends JavaScriptPart
 	{
 		return scriptsInHead;
 	}
-
+	
 	/**
 	 * Sets if scripts must be rendered in the head
 	 *
@@ -135,7 +135,7 @@ public class PageOptions extends JavaScriptPart
 	{
 		this.scriptsInHead = scriptsInHead;
 	}
-
+	
 	/**
 	 * If this page should be rendered with dynamic local storage support
 	 *
@@ -145,7 +145,7 @@ public class PageOptions extends JavaScriptPart
 	{
 		return localStorage;
 	}
-
+	
 	/**
 	 * If the page should be rendered with dynamic local storage support. This renders a default page that is then fetched from the server to support cordova applications
 	 *
@@ -155,7 +155,7 @@ public class PageOptions extends JavaScriptPart
 	{
 		this.localStorage = localStorage;
 	}
-
+	
 	/**
 	 * Whether or not google maps api is being used
 	 *
@@ -169,7 +169,7 @@ public class PageOptions extends JavaScriptPart
 		}
 		return !googleMapsJSApi.isEmpty();
 	}
-
+	
 	/**
 	 * Returns the current assigned google maps api key
 	 *
@@ -179,7 +179,7 @@ public class PageOptions extends JavaScriptPart
 	{
 		return googleMapsJSApi;
 	}
-
+	
 	/**
 	 * The api code for the google maps javascript implementation
 	 *
@@ -189,18 +189,20 @@ public class PageOptions extends JavaScriptPart
 	{
 		this.googleMapsJSApi = googleMapsJSApi;
 	}
-
+	
 	/**
 	 * Gets the google maps parameters
+	 *
 	 * @return
 	 */
 	public String getGoogleMapsParameters()
 	{
 		return googleMapsParameters;
 	}
-
+	
 	/**
 	 * Google Maps Parameters
+	 *
 	 * @param googleMapsParameters
 	 */
 	public void setGoogleMapsParameters(String googleMapsParameters)

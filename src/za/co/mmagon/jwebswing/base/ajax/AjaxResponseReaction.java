@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class AjaxResponseReaction
 {
-
+	
 	/**
 	 * The title of the reaction
 	 */
@@ -49,12 +49,12 @@ public class AjaxResponseReaction
 	 */
 	@JsonProperty("type")
 	private AjaxResponseType responseType;
-
+	
 	/**
 	 * Action timeout for request
 	 */
 	private int actionTimeout;
-
+	
 	/**
 	 * Constructs a response reaction
 	 */
@@ -62,7 +62,7 @@ public class AjaxResponseReaction
 	{
 		this(null);
 	}
-
+	
 	/**
 	 * Constructs a reaction with the given message as a dialog
 	 *
@@ -72,7 +72,7 @@ public class AjaxResponseReaction
 	{
 		this(null, reactionData);
 	}
-
+	
 	/**
 	 * Constructs a reaction with the given message
 	 *
@@ -83,7 +83,7 @@ public class AjaxResponseReaction
 	{
 		this(null, reactionData, reactionType);
 	}
-
+	
 	/**
 	 * Constructs a reaction with the given parameters
 	 *
@@ -95,7 +95,7 @@ public class AjaxResponseReaction
 	{
 		this(reactionTitle, reactionData, reactionType, null);
 	}
-
+	
 	/**
 	 * Constructs a reaction with the given parameters
 	 *
@@ -112,7 +112,7 @@ public class AjaxResponseReaction
 		setReactionType(reactionType);
 		setResponseType(responseType);
 	}
-
+	
 	/**
 	 * Constructs a redirection response after the specific seconds
 	 *
@@ -125,7 +125,7 @@ public class AjaxResponseReaction
 		this(null, reactionData, ReactionType.RedirectUrl, null);
 		setActionTimeout(actionTimeout);
 	}
-
+	
 	/**
 	 * Constructs a reaction with the given title and message
 	 *
@@ -136,7 +136,7 @@ public class AjaxResponseReaction
 	{
 		this(reactionTitle, reactionData, null);
 	}
-
+	
 	/**
 	 * Returns the given reaction title
 	 *
@@ -146,7 +146,7 @@ public class AjaxResponseReaction
 	{
 		return reactionTitle;
 	}
-
+	
 	/**
 	 * Sets the given reaction title
 	 *
@@ -159,7 +159,7 @@ public class AjaxResponseReaction
 		this.reactionTitle = reactionTitle;
 		return this;
 	}
-
+	
 	/**
 	 * Gets the reaction message
 	 *
@@ -169,7 +169,7 @@ public class AjaxResponseReaction
 	{
 		return reactionData;
 	}
-
+	
 	/**
 	 * *
 	 * Sets the given reaction message
@@ -183,7 +183,7 @@ public class AjaxResponseReaction
 		this.reactionData = reactionData;
 		return this;
 	}
-
+	
 	/**
 	 * Gets the reaction type
 	 *
@@ -193,7 +193,7 @@ public class AjaxResponseReaction
 	{
 		return reactionType;
 	}
-
+	
 	/**
 	 * Sets the reaction type
 	 *
@@ -206,7 +206,7 @@ public class AjaxResponseReaction
 		this.reactionType = reactionType == null ? ReactionType.DialogDisplay : reactionType;
 		return this;
 	}
-
+	
 	/**
 	 * Gets the response type for the reaction
 	 *
@@ -216,7 +216,7 @@ public class AjaxResponseReaction
 	{
 		return responseType;
 	}
-
+	
 	/**
 	 * Sets the response type for the reaction
 	 *
@@ -229,7 +229,7 @@ public class AjaxResponseReaction
 		this.responseType = responseType == null ? AjaxResponseType.Info : responseType;
 		return this;
 	}
-
+	
 	/**
 	 * Apply a timeout before a navigation reaction occurs
 	 *
@@ -239,7 +239,7 @@ public class AjaxResponseReaction
 	{
 		return actionTimeout;
 	}
-
+	
 	/**
 	 * Apply a timeout before a navigation reaction occurs
 	 *
@@ -252,5 +252,5 @@ public class AjaxResponseReaction
 		this.actionTimeout = actionTimeout;
 		return this;
 	}
-
+	
 }

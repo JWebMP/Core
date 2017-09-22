@@ -26,11 +26,11 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  */
 public class ComponentBaseTest extends BaseTestClass
 {
-
+	
 	public ComponentBaseTest()
 	{
 	}
-
+	
 	@Test
 	public void testShell()
 	{
@@ -47,7 +47,7 @@ public class ComponentBaseTest extends BaseTestClass
 				                    + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
 				                    + "}", shell.toString());
 	}
-
+	
 	@Test
 	public void testShellRawText()
 	{
@@ -66,7 +66,7 @@ public class ComponentBaseTest extends BaseTestClass
 				                    + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
 				                    + "}", shell.toString());
 	}
-
+	
 	@Test
 	public void testShellTiny()
 	{
@@ -84,7 +84,7 @@ public class ComponentBaseTest extends BaseTestClass
 				                    + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
 				                    + "}", shell.toString());
 	}
-
+	
 	@Test
 	public void testClone()
 	{
@@ -115,7 +115,7 @@ public class ComponentBaseTest extends BaseTestClass
 		Assert.assertEquals(shell.toString(), shellExpected);
 		Assert.assertEquals(shell2.toString(), shell2Expected);
 	}
-
+	
 	@Test
 	public void testProperties()
 	{
@@ -123,7 +123,7 @@ public class ComponentBaseTest extends BaseTestClass
 		shell.setID("shell");
 		shell.getProperties().put("Property1", "Value 1");
 		System.out.println(shell);
-
+		
 		String shellExpected = "{\n"
 				+ "  \"id\" : \"shell\",\n"
 				+ "  \"componentType\" : \"abbreviation\",\n"
@@ -136,7 +136,7 @@ public class ComponentBaseTest extends BaseTestClass
 				+ "  },\n"
 				+ "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
 				+ "}";
-
+		
 		Assert.assertEquals(shell.toString(), shellExpected);
 	}
 }

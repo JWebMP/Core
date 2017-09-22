@@ -40,7 +40,7 @@ import java.util.*;
 @RequestScoped
 public class AjaxCall extends JavaScriptPart
 {
-
+	
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The component ID that was sent back
@@ -79,8 +79,12 @@ public class AjaxCall extends JavaScriptPart
 	/**
 	 * The parameters associated with the call
 	 */
-	private Map<String,String> parameters;
-
+	private Map<String, String> parameters;
+	/**
+	 * The class to create
+	 */
+	private String className;
+	
 	/**
 	 * JSon Jackson Constructor
 	 */
@@ -88,7 +92,7 @@ public class AjaxCall extends JavaScriptPart
 	{
 		//set nothing
 	}
-
+	
 	/**
 	 * Creates a valid AJAX call object that can be processed
 	 *
@@ -109,7 +113,7 @@ public class AjaxCall extends JavaScriptPart
 		this.eventType = EventTypes.valueOf(eventType);
 		this.eventTypeFrom = EventTypes.valueOf(eventTypeFrom);
 	}
-
+	
 	/**
 	 * Returns this component ID
 	 *
@@ -119,7 +123,7 @@ public class AjaxCall extends JavaScriptPart
 	{
 		return componentId;
 	}
-
+	
 	/**
 	 * Sets this component ID
 	 *
@@ -129,7 +133,7 @@ public class AjaxCall extends JavaScriptPart
 	{
 		this.componentId = componentId;
 	}
-
+	
 	/**
 	 * Returns this date time of this call
 	 *
@@ -139,7 +143,7 @@ public class AjaxCall extends JavaScriptPart
 	{
 		return datetime;
 	}
-
+	
 	/**
 	 * Sets the date time of this call
 	 *
@@ -149,7 +153,7 @@ public class AjaxCall extends JavaScriptPart
 	{
 		this.datetime = datetime;
 	}
-
+	
 	/**
 	 * Gets event type
 	 *
@@ -159,7 +163,7 @@ public class AjaxCall extends JavaScriptPart
 	{
 		return eventType;
 	}
-
+	
 	/**
 	 * Sets the event type
 	 *
@@ -169,7 +173,7 @@ public class AjaxCall extends JavaScriptPart
 	{
 		this.eventType = eventType;
 	}
-
+	
 	/**
 	 * Returns this calls event type from
 	 *
@@ -179,7 +183,7 @@ public class AjaxCall extends JavaScriptPart
 	{
 		return eventTypeFrom;
 	}
-
+	
 	/**
 	 * Sets this calls event type from
 	 *
@@ -189,7 +193,7 @@ public class AjaxCall extends JavaScriptPart
 	{
 		this.eventTypeFrom = eventTypeFrom;
 	}
-
+	
 	/**
 	 * Returns this calls value
 	 *
@@ -199,7 +203,7 @@ public class AjaxCall extends JavaScriptPart
 	{
 		return value;
 	}
-
+	
 	/**
 	 * Sets this calls value
 	 *
@@ -209,7 +213,7 @@ public class AjaxCall extends JavaScriptPart
 	{
 		this.value = value;
 	}
-
+	
 	/**
 	 * Returns this calls component
 	 *
@@ -219,7 +223,7 @@ public class AjaxCall extends JavaScriptPart
 	{
 		return component;
 	}
-
+	
 	/**
 	 * Sets this calls component
 	 *
@@ -229,7 +233,7 @@ public class AjaxCall extends JavaScriptPart
 	{
 		this.component = component;
 	}
-
+	
 	/**
 	 * Returns JSON strings of inbound variables
 	 *
@@ -243,7 +247,7 @@ public class AjaxCall extends JavaScriptPart
 		}
 		return variableData;
 	}
-
+	
 	/**
 	 * Sets the array list of bound objects?
 	 *
@@ -253,7 +257,7 @@ public class AjaxCall extends JavaScriptPart
 	{
 		this.variableData = variableData;
 	}
-
+	
 	/**
 	 * Returns the variable with the given name in the array or null
 	 *
@@ -272,7 +276,7 @@ public class AjaxCall extends JavaScriptPart
 		}
 		return null;
 	}
-
+	
 	/**
 	 * The event ID
 	 *
@@ -282,7 +286,7 @@ public class AjaxCall extends JavaScriptPart
 	{
 		return eventId;
 	}
-
+	
 	/**
 	 * The Event ID
 	 *
@@ -292,7 +296,7 @@ public class AjaxCall extends JavaScriptPart
 	{
 		this.eventId = eventId;
 	}
-
+	
 	public void from(AjaxCall incoming)
 	{
 		setComponent(incoming.getComponent());
@@ -308,13 +312,35 @@ public class AjaxCall extends JavaScriptPart
 	
 	public Map<String, String> getParameters()
 	{
-		if(parameters == null)
+		if (parameters == null)
+		{
 			parameters = new HashMap<>();
+		}
 		return parameters;
 	}
 	
 	public void setParameters(Map<String, String> parameters)
 	{
 		this.parameters = parameters;
+	}
+	
+	/**
+	 * Returns the event class this event is associated with
+	 *
+	 * @return
+	 */
+	public String getClassName()
+	{
+		return className;
+	}
+	
+	/**
+	 * Sets the class name this event is associated with
+	 *
+	 * @param className
+	 */
+	public void setClassName(String className)
+	{
+		this.className = className;
 	}
 }

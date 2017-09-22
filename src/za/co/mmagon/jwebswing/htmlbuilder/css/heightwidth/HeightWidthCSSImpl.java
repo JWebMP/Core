@@ -47,6 +47,7 @@ public class HeightWidthCSSImpl extends CSSImplementationAdapter<HeightWidthCSS,
 	private MeasurementCSSImpl minWidth;
 	@CSSDetail(cssName = "max-width", cssVersion = CSSVersions.CSS21)
 	private MeasurementCSSImpl maxWidth;
+
 	public HeightWidthCSSImpl()
 	{
 	}
@@ -59,6 +60,16 @@ public class HeightWidthCSSImpl extends CSSImplementationAdapter<HeightWidthCSS,
 	public MeasurementCSSImpl getHeight()
 	{
 		return height;
+	}
+	
+	/**
+	 * Sets the height of an element
+	 *
+	 * @param Height
+	 */
+	public void setHeight(MeasurementCSSImpl Height)
+	{
+		this.height = Height;
 	}
 
 	/**
@@ -101,6 +112,16 @@ public class HeightWidthCSSImpl extends CSSImplementationAdapter<HeightWidthCSS,
 	{
 		return width;
 	}
+	
+	/**
+	 * Sets the width of an element
+	 *
+	 * @param Width
+	 */
+	public void setWidth(MeasurementCSSImpl Width)
+	{
+		this.width = Width;
+	}
 
 	/**
 	 * Convenience method setting the inner HTML value - Default of Pixels
@@ -142,6 +163,16 @@ public class HeightWidthCSSImpl extends CSSImplementationAdapter<HeightWidthCSS,
 	{
 		return minHeight;
 	}
+	
+	/**
+	 * Sets the width of an element
+	 *
+	 * @param minHeight
+	 */
+	public void setMinHeight(MeasurementCSSImpl minHeight)
+	{
+		this.minHeight = minHeight;
+	}
 
 	/**
 	 * Convenience method setting the inner HTML value - Default of Pixels
@@ -162,6 +193,16 @@ public class HeightWidthCSSImpl extends CSSImplementationAdapter<HeightWidthCSS,
 	public MeasurementCSSImpl getMaxHeight()
 	{
 		return maxHeight;
+	}
+	
+	/**
+	 * Sets the width of an element
+	 *
+	 * @param maxHeight
+	 */
+	public void setMaxHeight(MeasurementCSSImpl maxHeight)
+	{
+		this.maxHeight = maxHeight;
 	}
 
 	/**
@@ -184,6 +225,16 @@ public class HeightWidthCSSImpl extends CSSImplementationAdapter<HeightWidthCSS,
 	{
 		return minWidth;
 	}
+	
+	/**
+	 * Sets the width of an element
+	 *
+	 * @param minWidth
+	 */
+	public void setMinWidth(MeasurementCSSImpl minWidth)
+	{
+		this.minWidth = minWidth;
+	}
 
 	/**
 	 * Convenience method setting the inner HTML value - Default of Pixels
@@ -205,7 +256,17 @@ public class HeightWidthCSSImpl extends CSSImplementationAdapter<HeightWidthCSS,
 	{
 		return maxWidth;
 	}
-
+	
+	/**
+	 * Sets the width of an element
+	 *
+	 * @param maxWidth
+	 */
+	public void setMaxWidth(MeasurementCSSImpl maxWidth)
+	{
+		this.maxWidth = maxWidth;
+	}
+	
 	/**
 	 * Convenience method setting the inner HTML value - Default of Pixels
 	 * <p>
@@ -215,66 +276,6 @@ public class HeightWidthCSSImpl extends CSSImplementationAdapter<HeightWidthCSS,
 	public void setMaxWidth(int Width)
 	{
 		setMaxWidth(Width, MeasurementTypes.Pixels);
-	}
-
-	/**
-	 * Sets the height of an element
-	 *
-	 * @param Height
-	 */
-	public void setHeight(MeasurementCSSImpl Height)
-	{
-		this.height = Height;
-	}
-
-	/**
-	 * Sets the width of an element
-	 *
-	 * @param Width
-	 */
-	public void setWidth(MeasurementCSSImpl Width)
-	{
-		this.width = Width;
-	}
-
-	/**
-	 * Sets the width of an element
-	 *
-	 * @param minHeight
-	 */
-	public void setMinHeight(MeasurementCSSImpl minHeight)
-	{
-		this.minHeight = minHeight;
-	}
-
-	/**
-	 * Sets the width of an element
-	 *
-	 * @param maxHeight
-	 */
-	public void setMaxHeight(MeasurementCSSImpl maxHeight)
-	{
-		this.maxHeight = maxHeight;
-	}
-
-	/**
-	 * Sets the width of an element
-	 *
-	 * @param minWidth
-	 */
-	public void setMinWidth(MeasurementCSSImpl minWidth)
-	{
-		this.minWidth = minWidth;
-	}
-
-	/**
-	 * Sets the width of an element
-	 *
-	 * @param maxWidth
-	 */
-	public void setMaxWidth(MeasurementCSSImpl maxWidth)
-	{
-		this.maxWidth = maxWidth;
 	}
 
 	/**

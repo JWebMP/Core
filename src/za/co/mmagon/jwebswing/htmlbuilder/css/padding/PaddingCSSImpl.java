@@ -33,9 +33,9 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
  */
 public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, PaddingCSSImpl> implements CSSImplementationClass<PaddingCSS, PaddingCSSImpl>
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	@CSSDetail(cssName = "padding", cssVersion = CSSVersions.CSS21)
 	private PaddingImpl padding;
 	@CSSDetail(cssName = "padding-right", cssVersion = CSSVersions.CSS21)
@@ -54,7 +54,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, Padding
 	private MeasurementCSSImpl paddingBottom;
 	@CSSDetail(cssName = "padding-bottom", cssVersion = CSSVersions.CSS21)
 	private PaddingSetting paddingBottom$;
-
+	
 	/**
 	 * Constructs a new getPadding implementation
 	 */
@@ -62,7 +62,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, Padding
 	{
 		//Nothing needed
 	}
-
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
@@ -72,7 +72,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, Padding
 	{
 		return paddingRight;
 	}
-
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 * <p>
@@ -84,7 +84,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, Padding
 	{
 		this.paddingRight = paddingRight;
 	}
-
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
@@ -94,7 +94,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, Padding
 	{
 		return paddingRight$;
 	}
-
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 * <p>
@@ -106,7 +106,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, Padding
 	{
 		this.paddingRight$ = paddingRight$;
 	}
-
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
@@ -116,7 +116,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, Padding
 	{
 		return paddingLeft;
 	}
-
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 * <p>
@@ -128,7 +128,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, Padding
 	{
 		this.paddingLeft = paddingLeft;
 	}
-
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
@@ -138,7 +138,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, Padding
 	{
 		return paddingLeft$;
 	}
-
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 * <p>
@@ -150,7 +150,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, Padding
 	{
 		this.paddingLeft$ = paddingLeft$;
 	}
-
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
@@ -160,7 +160,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, Padding
 	{
 		return paddingTop;
 	}
-
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 * <p>
@@ -172,7 +172,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, Padding
 	{
 		this.paddingTop = paddingTop;
 	}
-
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
@@ -182,7 +182,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, Padding
 	{
 		return paddingTop$;
 	}
-
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
@@ -192,7 +192,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, Padding
 	{
 		this.paddingTop$ = paddingTop$;
 	}
-
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
@@ -202,7 +202,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, Padding
 	{
 		return paddingBottom;
 	}
-
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
@@ -212,7 +212,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, Padding
 	{
 		this.paddingBottom = paddingBottom;
 	}
-
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
@@ -222,7 +222,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, Padding
 	{
 		return paddingBottom$;
 	}
-
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
@@ -232,7 +232,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, Padding
 	{
 		this.paddingBottom$ = paddingBottom$;
 	}
-
+	
 	/**
 	 * Shorthand for getPadding
 	 *
@@ -242,7 +242,7 @@ public class PaddingCSSImpl extends CSSImplementationAdapter<PaddingCSS, Padding
 	{
 		return padding;
 	}
-
+	
 	/**
 	 * Set the shorthand for the margin.
 	 * <p>

@@ -29,7 +29,7 @@ public enum TimeAttributes implements AttributeDefinitions
 	 * Represent a machine-readable date/time of the time element
 	 */
 	DateTime,;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

@@ -23,7 +23,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum LabelAttributes implements AttributeDefinitions
 {
-
+	
 	/**
 	 * Returns the labeled control
 	 */
@@ -36,7 +36,7 @@ public enum LabelAttributes implements AttributeDefinitions
 	 * Sets or returns the value of the for attribute of a label
 	 */
 	For,;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

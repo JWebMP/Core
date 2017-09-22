@@ -12,31 +12,31 @@ import static org.junit.Assert.fail;
  */
 public class CSSLineSorterTest
 {
-
+	
 	public CSSLineSorterTest()
 	{
 	}
-
+	
 	@BeforeClass
 	public static void setUpClass()
 	{
 	}
-
+	
 	@AfterClass
 	public static void tearDownClass()
 	{
 	}
-
+	
 	@Before
 	public void setUp()
 	{
 	}
-
+	
 	@After
 	public void tearDown()
 	{
 	}
-
+	
 	/**
 	 * Test of compare method, of class CSSLineSorter.
 	 */
@@ -61,7 +61,7 @@ public class CSSLineSorterTest
 		line.add(line7);
 		CSSLineSorter instance = new CSSLineSorter();
 		Collections.sort(line, instance);
-
+		
 		if (line.indexOf(line1) != 0)
 		{
 			fail("Didn't sort correctly");
@@ -78,7 +78,7 @@ public class CSSLineSorterTest
 		{
 			fail("didn't sort correctly");
 		}
-
+		
 		System.out.println("Line Sorting Compare Complete");
 	}
 }

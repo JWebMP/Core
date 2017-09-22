@@ -14,18 +14,18 @@ import static org.junit.Assert.assertEquals;
  */
 public class LinkTest
 {
-
+	
 	public LinkTest()
 	{
 	}
-
+	
 	private Link getInstance()
 	{
 		Link instance = new Link("tt");
 		instance.setID("id");
 		return instance;
 	}
-
+	
 	/**
 	 * Test of getCSSClassName method, of class Link.
 	 */
@@ -39,7 +39,7 @@ public class LinkTest
 		String result = instance.toString(true).toString();
 		assertEquals(expResult, result);
 	}
-
+	
 	/**
 	 * Test of getCSSClassName method, of class Link.
 	 */
@@ -54,7 +54,7 @@ public class LinkTest
 		String result = instance.toString(true).toString();
 		assertEquals(expResult, result);
 	}
-
+	
 	@Test
 	public void testALinkWithAddressAndTarget()
 	{
@@ -66,7 +66,7 @@ public class LinkTest
 		String result = instance.toString(true).toString();
 		assertEquals(expResult, result);
 	}
-
+	
 	@Test
 	public void testALinkWithAddressAndTargetAndChildren()
 	{
@@ -85,7 +85,7 @@ public class LinkTest
 		String result = instance.toString(true).toString();
 		assertEquals(expResult, result);
 	}
-
+	
 	/**
 	 * Test of getCSSClassName method, of class Link.
 	 */
@@ -102,7 +102,7 @@ public class LinkTest
 		String result = instance.toString(true).toString();
 		assertEquals(expResult, result);
 	}
-
+	
 	/**
 	 * Test of getCSSClassName method, of class Link.
 	 */
@@ -118,7 +118,7 @@ public class LinkTest
 		String result = instance.toString(true).toString();
 		assertEquals(expResult, result);
 	}
-
+	
 	@Test
 	public void testALinkWithAddressAndTargetTiny()
 	{
@@ -130,7 +130,7 @@ public class LinkTest
 		String result = instance.toString(true).toString();
 		assertEquals(expResult, result);
 	}
-
+	
 	@Test
 	public void testALinkWithAddressAndTargetAndChildrenTiny()
 	{

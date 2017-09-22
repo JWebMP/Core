@@ -34,7 +34,7 @@ public enum BiDirectionalDirection implements AttributeDefinitions
 	 * Right to Left
 	 */
 	Rtl;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

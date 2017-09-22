@@ -24,18 +24,18 @@ package za.co.mmagon.jwebswing.base.interfaces;
  */
 public interface RenderAfterScripts
 {
-
+	
 	/**
 	 * Renders after the scripts
 	 *
 	 * @return
 	 */
-	public StringBuffer render();
-
+	StringBuffer render();
+	
 	/**
 	 * The sort order
 	 *
 	 * @return
 	 */
-	public int sortOrder();
+	int sortOrder();
 }

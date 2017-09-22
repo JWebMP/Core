@@ -25,7 +25,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum TrackAttributes implements AttributeDefinitions
 {
-
+	
 	/**
 	 * Sets or returns the default state of the track
 	 */
@@ -54,7 +54,7 @@ public enum TrackAttributes implements AttributeDefinitions
 	 * Returns a TextTrack object representing the track element's text track data
 	 */
 	Track;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

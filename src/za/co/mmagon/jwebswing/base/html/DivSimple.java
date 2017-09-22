@@ -8,9 +8,10 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
 /**
  * A basic div with the typed mostly taken care of
+ *
  * @param <J> This type
  */
-public class DivSimple<J> extends Div<GlobalChildren,NoAttributes,GlobalFeatures,GlobalEvents,DivSimple<J>>
+public class DivSimple<J> extends Div<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, DivSimple<J>>
 {
 	/**
 	 * Constructs a new simple div
@@ -18,18 +19,20 @@ public class DivSimple<J> extends Div<GlobalChildren,NoAttributes,GlobalFeatures
 	public DivSimple()
 	{
 	}
-
+	
 	/**
 	 * Constructs a new simple div
+	 *
 	 * @param myComponent
 	 */
 	public DivSimple(ComponentTypes myComponent)
 	{
 		super(myComponent);
 	}
-
+	
 	/**
 	 * Constructs a new simple div with the given text
+	 *
 	 * @param text Raw text to apply
 	 */
 	public DivSimple(String text)

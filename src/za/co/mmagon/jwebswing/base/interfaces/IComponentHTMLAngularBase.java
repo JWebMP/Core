@@ -30,52 +30,52 @@ import java.util.Map;
  */
 public interface IComponentHTMLAngularBase<J extends ComponentBase>
 {
-
-    /**
-     * Sets an Angular Attribute
-     *
-     * @param attribute
-     * @param value
-     *
-     * @return
-     */
-    J addAttribute(AngularAttributes attribute, String value);
-
-    /**
-     * Adds an object for watching across an application
-     *
-     * @param name       The variable name to use
-     * @param dataObject The data object to map
-     *
-     * @return This for chain setting
-     */
-    J addDto(String name, JavaScriptPart dataObject);
-
-    /**
-     * Returns the angular objects mapped to this component
-     *
-     * @return
-     */
-    Map<String, JavaScriptPart> getAngularObjects();
-
-    /**
-     * Gets an angular attribute
-     *
-     * @param attribute
-     *
-     * @return
-     */
-    String getAttribute(AngularAttributes attribute);
-    
-    /**
-     * Returns the DTO currently mapped
-     *
-     * @param <T>       JavascriptPart
-     * @param name      The name of the DTO to map
-     * @param classType The class type
-     *
-     * @return Null if not available
-     */
-    <T extends JavaScriptPart> T getDto(String name, Class<T> classType);
-
+	
+	/**
+	 * Sets an Angular Attribute
+	 *
+	 * @param attribute
+	 * @param value
+	 *
+	 * @return
+	 */
+	J addAttribute(AngularAttributes attribute, String value);
+	
+	/**
+	 * Adds an object for watching across an application
+	 *
+	 * @param name       The variable name to use
+	 * @param dataObject The data object to map
+	 *
+	 * @return This for chain setting
+	 */
+	J addDto(String name, JavaScriptPart dataObject);
+	
+	/**
+	 * Returns the angular objects mapped to this component
+	 *
+	 * @return
+	 */
+	Map<String, JavaScriptPart> getAngularObjects();
+	
+	/**
+	 * Gets an angular attribute
+	 *
+	 * @param attribute
+	 *
+	 * @return
+	 */
+	String getAttribute(AngularAttributes attribute);
+	
+	/**
+	 * Returns the DTO currently mapped
+	 *
+	 * @param <T>       JavascriptPart
+	 * @param name      The name of the DTO to map
+	 * @param classType The class type
+	 *
+	 * @return Null if not available
+	 */
+	<T extends JavaScriptPart> T getDto(String name, Class<T> classType);
+	
 }

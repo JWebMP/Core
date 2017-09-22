@@ -31,7 +31,7 @@ public enum QuotationAttributes implements AttributeDefinitions
 	 * Specifies the source URL of the quote
 	 */
 	Cite;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

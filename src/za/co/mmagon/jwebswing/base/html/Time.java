@@ -53,9 +53,9 @@ public class Time<J extends Time<J>>
 		extends Component<NoChildren, TimeAttributes, GlobalFeatures, GlobalEvents, J>
 		implements GlobalChildren
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs a new time object
 	 */

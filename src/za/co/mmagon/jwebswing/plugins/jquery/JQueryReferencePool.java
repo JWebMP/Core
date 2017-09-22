@@ -24,6 +24,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
  */
 public enum JQueryReferencePool
 {
+	FallbackLocalStorage(new JavascriptReference("FallbackLocalStorage", 1.0, "bower_components/fallback-local-storage/dist/fallback-local-storage.web.js")),
 	JQuery(new JQueryReference()),
 	JQueryV2(new JQueryReferenceV2()),
 	JQueryV3(new JavascriptReference("Jquery3", 3.1, "bower_components/jquery-3/dist/jquery.min.js", "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js", 0, RequirementsPriority.First).setCordovaRequired(true)),
@@ -35,18 +36,18 @@ public enum JQueryReferencePool
      *
      * JQueryRightClickHandler(new JQueryRightClickHandlerReference()), JQueryScrollBars(new JWDataTablesJavaScriptReference()),
      *
-     */;
-
+     */
+	
 	private final JavascriptReference reference;
-
-	private JQueryReferencePool(JavascriptReference reference)
+	
+	JQueryReferencePool(JavascriptReference reference)
 	{
 		this.reference = reference;
 	}
-
+	
 	public JavascriptReference getJavaScriptReference()
 	{
 		return reference;
 	}
-
+	
 }

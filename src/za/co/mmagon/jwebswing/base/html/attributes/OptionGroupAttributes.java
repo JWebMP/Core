@@ -29,7 +29,7 @@ public enum OptionGroupAttributes implements AttributeDefinitions
 	 * Specifies the label for an option group
 	 */
 	Label,;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

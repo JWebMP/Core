@@ -23,13 +23,13 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum CodeAttributes implements AttributeDefinitions
 {
-
+	
 	;
-
+	
 	@Override
 	public boolean isKeyword()
 	{
 		return false;
 	}
-
+	
 }

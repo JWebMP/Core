@@ -31,11 +31,11 @@ public enum CanvasAttributes implements AttributeDefinitions
 	 * Specifies the width
 	 */
 	Width;
-
+	
 	@Override
 	public boolean isKeyword()
 	{
 		return false;
 	}
-
+	
 }

@@ -44,16 +44,11 @@ import java.util.logging.Logger;
 /**
  * Provides the Hierarchy for any component. Manages children and parent relationships
  *
- * @param <C>
- * 		All allowed children
- * @param <A>
- * 		All attributes for this component
- * @param <F>
- * 		All features allowed for this component
- * @param <E>
- * 		All events allowed for this component
- * @param <J>
- * 		Always this class
+ * @param <C> All allowed children
+ * @param <A> All attributes for this component
+ * @param <F> All features allowed for this component
+ * @param <E> All events allowed for this component
+ * @param <J> Always this class
  *
  * @author GedMarc
  * @since 24 Apr 2016
@@ -107,18 +102,16 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 */
 	public IComponentHierarchyBase asHierarchyBase()
 	{
-		return (ComponentHierarchyBase) this;
+		return this;
 	}
 	
 	/**
 	 * Add a new child to this component
 	 * <p>
 	 *
-	 * @param position
-	 * 		The position to add the child to
-	 * @param newChild
-	 * 		The child to be added
-	 * 		<p>
+	 * @param position The position to add the child to
+	 * @param newChild The child to be added
+	 *                 <p>
 	 *
 	 * @return The new child added
 	 */
@@ -144,9 +137,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * Add a new child to this component
 	 * <p>
 	 *
-	 * @param newChild
-	 * 		The child to be added
-	 * 		<p>
+	 * @param newChild The child to be added
+	 *                 <p>
 	 *
 	 * @return The new child added
 	 */
@@ -191,7 +183,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		if (!isInitialized())
 		{
 			
-			List<ComponentHierarchyBase> clonedBase = (List<ComponentHierarchyBase>) getChildren();
+			List<ComponentHierarchyBase> clonedBase = getChildren();
 			clonedBase.stream().filter(a -> a != null).forEach(comp
 					                                                   ->
 			                                                   {
@@ -212,7 +204,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		
 		if (!isConfigured())
 		{
-			List<ComponentHierarchyBase> clonedBase = (List<ComponentHierarchyBase>) getChildren();
+			List<ComponentHierarchyBase> clonedBase = getChildren();
 			clonedBase.stream().filter(a -> a != null).forEach(feature
 					                                                   ->
 			                                                   {
@@ -267,9 +259,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * Get an array list of all children and their children recursively Excludes this object
 	 * <p>
 	 *
-	 * @param trues
-	 * 		Whether or not to include this component
-	 * 		<p>
+	 * @param trues Whether or not to include this component
+	 *              <p>
 	 *
 	 * @return A complete array list of all children at time of call
 	 */
@@ -292,9 +283,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * <p>
 	 * <p>
 	 *
-	 * @param componentsToAddTo
-	 * 		The component Array List to add to
-	 * 		<p>
+	 * @param componentsToAddTo The component Array List to add to
+	 *                          <p>
 	 *
 	 * @return original components added with
 	 */
@@ -361,8 +351,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * Sets the page this component belongs on.
 	 * <p>
 	 *
-	 * @param page
-	 * 		A Page
+	 * @param page A Page
 	 */
 	@Override
 	public J setPage(Page page)
@@ -460,17 +449,17 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	{
 		ArrayList<Event> allEvents = new ArrayList<>();
 		getChildrenHierarchy(true).forEach(child
-				                               ->
-		                               {
-			                               for (Iterator<Event> iterator1 = child.getEvents().iterator(); iterator1.hasNext(); )
-			                               {
-				                               Event event = iterator1.next();
-				                               if (event != null)
-				                               {
-					                               allEvents.add(event);
-				                               }
-			                               }
-		                               });
+				                                   ->
+		                                   {
+			                                   for (Iterator<Event> iterator1 = child.getEvents().iterator(); iterator1.hasNext(); )
+			                                   {
+				                                   Event event = iterator1.next();
+				                                   if (event != null)
+				                                   {
+					                                   allEvents.add(event);
+				                                   }
+			                                   }
+		                                   });
 		return allEvents;
 	}
 	
@@ -592,7 +581,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 					                 reallyAllQueries.add(feature.renderJavascript());
 				                 }
 			                 });
-			Collections.sort(features, (ComponentFeatureBase o1, ComponentFeatureBase o2) -> o1.getSortOrder().compareTo(o2.getSortOrder()));
+			Collections.sort(features, Comparator.comparing(ComponentFeatureBase::getSortOrder));
 			List<ComponentEventBase> events = componentQuery.getEvents();
 			events.remove(null);
 			events.forEach(event ->
@@ -603,7 +592,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 					               reallyAllQueries.add(event.renderJavascript());
 				               }
 			               });
-			Collections.sort(events, (ComponentEventBase o1, ComponentEventBase o2) -> o1.getSortOrder().compareTo(o2.getSortOrder()));
+			Collections.sort(events, Comparator.comparing(ComponentFeatureBase::getSortOrder));
 			List<ComponentHierarchyBase> myQueries = new ArrayList<>();// componentQuery.getQueriesAll();
 			myQueries.remove(null);
 			myQueries.forEach(query ->
@@ -673,7 +662,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	public boolean addClass(CSSComponent classComponent)
 	{
 		String className = classComponent.getID();
-		getPage().getBody().add((C) classComponent);
+		getPage().getBody().add(classComponent);
 		if (!getClasses().contains(className))
 		{
 			getClasses().add(className);
@@ -689,9 +678,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * Takes a component off this components child list
 	 * <p>
 	 *
-	 * @param childToRemove
-	 * 		The child object to remove from this list
-	 * 		<p>
+	 * @param childToRemove The child object to remove from this list
+	 *                      <p>
 	 *
 	 * @return True if the child was part of this components children's list
 	 */
@@ -731,9 +719,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * Convenience method for checking if a tag has already been added as a child
 	 * <p>
 	 *
-	 * @param classType
-	 * 		The Tag type to check for
-	 * 		<p>
+	 * @param classType The Tag type to check for
+	 *                  <p>
 	 *
 	 * @return The Obvious
 	 */
@@ -768,18 +755,18 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 				try
 				{
 					Object ne = iterator1.next();
-					if(ne instanceof String)
+					if (ne instanceof String)
 					{
 						String next1 = (String) iterator1.next();
 						JavaScriptPart part = (JavaScriptPart) next.getAngularObjects().get(next1);
 						map.put(next1, part);
 					}
-					else if(ne instanceof Map)
+					else if (ne instanceof Map)
 					{
 					
 					}
 				}
-				catch(ClassCastException cce)
+				catch (ClassCastException cce)
 				{
 					log.log(Level.WARNING, "Incorrect Object Type, Perhaps JavaScriptPart?", cce);
 				}
@@ -868,10 +855,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	/**
 	 * Returns the first parent in the chain of the class type
 	 *
-	 * @param <T>
-	 * 		The class type
-	 * @param parentType
-	 * 		The type to look for
+	 * @param <T>        The class type
+	 * @param parentType The type to look for
 	 *
 	 * @return
 	 */
@@ -883,10 +868,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	/**
 	 * Recursive method for going through the parent base
 	 *
-	 * @param root
-	 * 		The root
-	 * @param parentType
-	 * 		The parent type
+	 * @param root       The root
+	 * @param parentType The parent type
 	 *
 	 * @return
 	 */
@@ -972,9 +955,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * Adds a class name to the class list
 	 * <p>
 	 *
-	 * @param className
-	 * 		The class name to add
-	 * 		<p>
+	 * @param className The class name to add
+	 *                  <p>
 	 *
 	 * @return True if it was added, false if it already existed
 	 */
@@ -1032,9 +1014,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * Removes a class name from this component
 	 * <p>
 	 *
-	 * @param className
-	 * 		Class Name to Remove
-	 * 		<p>
+	 * @param className Class Name to Remove
+	 *                  <p>
 	 *
 	 * @return True if the class was removed, False if the class was not part of the collection
 	 */
@@ -1098,7 +1079,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	@Override
 	public J cloneComponent()
 	{
-		ComponentHierarchyBase cloned = (ComponentHierarchyBase) super.cloneComponent();
+		ComponentHierarchyBase cloned = super.cloneComponent();
 		return (J) cloned;
 	}
 	
@@ -1106,8 +1087,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * Set the theme applied to this component
 	 * <p>
 	 *
-	 * @param theme
-	 * 		The JQuery UI theme to apply to the component
+	 * @param theme The JQuery UI theme to apply to the component
 	 */
 	@Override
 	public J addTheme(Theme theme)

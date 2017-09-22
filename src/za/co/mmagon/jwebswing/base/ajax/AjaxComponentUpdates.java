@@ -25,7 +25,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  */
 public class AjaxComponentUpdates extends JavaScriptPart
 {
-
+	
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The stored HTML
@@ -42,7 +42,7 @@ public class AjaxComponentUpdates extends JavaScriptPart
 	 */
 	@JsonProperty("insertType")
 	private AjaxComponentInsertType insertType;
-
+	
 	/**
 	 * Constructs an update class from a given component
 	 *
@@ -55,7 +55,7 @@ public class AjaxComponentUpdates extends JavaScriptPart
 		this.id = component.getID();
 		this.insertType = AjaxComponentInsertType.Replace;
 	}
-
+	
 	/**
 	 * Returns the HTML of the component
 	 *
@@ -65,7 +65,7 @@ public class AjaxComponentUpdates extends JavaScriptPart
 	{
 		return html;
 	}
-
+	
 	/**
 	 * Sets the HTML
 	 *
@@ -75,7 +75,7 @@ public class AjaxComponentUpdates extends JavaScriptPart
 	{
 		this.html = html;
 	}
-
+	
 	/**
 	 * Returns which component ID is getting replaced
 	 *
@@ -85,7 +85,7 @@ public class AjaxComponentUpdates extends JavaScriptPart
 	{
 		return id;
 	}
-
+	
 	/**
 	 * Sets the ID being used for the insert type
 	 *
@@ -95,7 +95,7 @@ public class AjaxComponentUpdates extends JavaScriptPart
 	{
 		this.id = id;
 	}
-
+	
 	/**
 	 * Sets the type of insert that should occur on component ID
 	 *
@@ -105,7 +105,7 @@ public class AjaxComponentUpdates extends JavaScriptPart
 	{
 		return insertType;
 	}
-
+	
 	/**
 	 * Sets the type of insert that should occur on component ID
 	 *
@@ -115,5 +115,5 @@ public class AjaxComponentUpdates extends JavaScriptPart
 	{
 		this.insertType = insertType;
 	}
-
+	
 }

@@ -51,7 +51,7 @@ public enum InputButtonTypeAttributes implements AttributeDefinitions
 	 * Sets the value of the name attribute of an input button
 	 */
 	Name,;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

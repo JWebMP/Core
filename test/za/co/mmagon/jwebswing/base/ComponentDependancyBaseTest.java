@@ -28,11 +28,11 @@ import za.co.mmagon.jwebswing.plugins.jquery.JQueryReferencePool;
  */
 public class ComponentDependancyBaseTest extends BaseTestClass
 {
-
+	
 	public ComponentDependancyBaseTest()
 	{
 	}
-
+	
 	@Test
 	public void testReferences()
 	{
@@ -58,7 +58,7 @@ public class ComponentDependancyBaseTest extends BaseTestClass
 				                    + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentDependancyBase\"\n"
 				                    + "}", cd.toString());
 	}
-
+	
 	@Test
 	public void testClone()
 	{
@@ -102,5 +102,5 @@ public class ComponentDependancyBaseTest extends BaseTestClass
 		Assert.assertEquals(shell.toString(), shellExpected);
 		Assert.assertEquals(shell2.toString(), shell2Expected);
 	}
-
+	
 }

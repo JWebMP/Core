@@ -29,7 +29,7 @@ public enum TableCellAttributes implements AttributeDefinitions
 {
 	ColSpan,
 	RowSpan;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

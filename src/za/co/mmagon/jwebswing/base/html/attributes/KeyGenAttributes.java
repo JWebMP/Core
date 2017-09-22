@@ -34,7 +34,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum KeyGenAttributes implements AttributeDefinitions
 {
-
+	
 	/**
 	 * Sets or returns whether a keygen field automatically gets focus when the page loads, or not
 	 */
@@ -64,7 +64,7 @@ public enum KeyGenAttributes implements AttributeDefinitions
 	 * Returns which type of form element the keygen field is
 	 */
 	Type;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

@@ -80,15 +80,15 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		extends Component<NoChildren, A, GlobalFeatures, GlobalEvents, J>
 		implements NoClosingTag, GlobalChildren, ParagraphChildren
 {
-
+	
 	private static final Logger log = LogFactory.getInstance().getLogger("Input");
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * The input type of this input tag
 	 */
 	private InputTypes inputType;
-
+	
 	/**
 	 * Constructs a blank instance of input - generally not recommended.
 	 */
@@ -96,7 +96,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	{
 		this(null);
 	}
-
+	
 	/**
 	 * Construct a new instance of the input type field
 	 * <p>
@@ -106,16 +106,16 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	public Input(InputTypes inputType)
 	{
 		super(ComponentTypes.Input);
-
+		
 		if (inputType != null)
-
+		
 		{
 			this.inputType = inputType;
 			addAttribute(GlobalAttributes.Type, getInputType().name().toLowerCase());
 		}
-
+		
 	}
-
+	
 	/**
 	 * Returns the input type of the input field
 	 * <p>
@@ -126,7 +126,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	{
 		return inputType;
 	}
-
+	
 	/**
 	 * Sets the input type of this field
 	 * <p>
@@ -141,7 +141,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		addAttribute(GlobalAttributes.Type, inputType.toString());
 		return (J) this;
 	}
-
+	
 	/**
 	 * Differences Between HTML and XHTML
 	 * <p>
@@ -165,7 +165,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 			log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
 		}
 	}
-
+	
 	/**
 	 * Push to model instead of bind
 	 *
@@ -180,7 +180,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		addAttribute(AngularAttributes.ngModel, variableName);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Sets this input as required in the form
 	 *
@@ -191,7 +191,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		addAttribute("required", "");
 		return (J) this;
 	}
-
+	
 	/**
 	 * Sets the minimum length of this input
 	 *
@@ -204,7 +204,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		addAttribute("minlength", "" + minLength);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Sets the minimum length of this input
 	 *
@@ -217,7 +217,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		addAttribute("maxlength", "" + minLength);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Sets the place holder for this input
 	 *
@@ -230,7 +230,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		addAttribute("placeholder", placeholder);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Sets the value attribute
 	 *
@@ -246,23 +246,27 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	
 	/**
 	 * Sets the pattern for this input object if required
+	 *
 	 * @param angularPatternName
+	 *
 	 * @return
 	 */
 	public J setPattern(String angularPatternName)
 	{
 		addAttribute(AngularAttributes.ngPattern, angularPatternName);
-		return (J)this;
+		return (J) this;
 	}
 	
 	/**
 	 * Sets the raw pattern for this input object if required
+	 *
 	 * @param pattern
+	 *
 	 * @return
 	 */
-	public J setPattern(String pattern,boolean raw)
+	public J setPattern(String pattern, boolean raw)
 	{
 		addAttribute("pattern", pattern);
-		return (J)this;
+		return (J) this;
 	}
 }

@@ -34,17 +34,17 @@ public enum TopOrBottom
 	/**
 	 * A new LeftOrRight
 	 */
-	private TopOrBottom()
+	TopOrBottom()
 	{
-	
+
 	}
 	
 	/**
 	 * A new LeftOrRight with data
 	 */
-	private TopOrBottom(String data)
+	TopOrBottom(String data)
 	{
-	
+
 	}
 	
 	/**

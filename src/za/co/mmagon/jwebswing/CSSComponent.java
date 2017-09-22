@@ -32,72 +32,72 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @since 2015/04/24
  */
 public abstract class CSSComponent<J extends CSSComponent<J>>
-        extends Component<CSSComponent, NoAttributes, GlobalFeatures, GlobalEvents, J>
-        implements GlobalChildren
+		extends Component<CSSComponent, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements GlobalChildren
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Constructs a new CSS Class with the given features and events associated
-     * <p>
-     *
-     * @param className
-     */
-    public CSSComponent(String className)
-    {
-        super(ComponentTypes.CSSClass);
-        setID(className);
-    }
-
-    /**
-     * Returns the component rendering for JQuery string Requires the rendering for component is set
-     * <p>
-     *
-     * @return $('#x').
-     */
-    @Override
-    public String getJQueryID()
-    {
-        return "$(\'" + getID(true) + "\').";
-    }
-
-    /**
-     * Returns the ID with the . in the front of it
-     * <p>
-     *
-     * @param jQueryHolder Anything
-     * <p>
-     *
-     * @return An ID starting with .
-     */
-    @Override
-    public String getID(boolean jQueryHolder)
-    {
-        return "." + getID();
-    }
-
-    /**
-     * Replaces the # with a .
-     *
-     * @return
-     */
-    @Override
-    public String getID()
-    {
-        return super.getID().replace('#', '.');
-    }
-
-    /**
-     * CSS Components don't render any HTML
-     *
-     * @param tabCount
-     *
-     * @return
-     */
-    @Override
-    protected StringBuilder renderHTML(int tabCount)
-    {
-        return new StringBuilder();
-    }
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constructs a new CSS Class with the given features and events associated
+	 * <p>
+	 *
+	 * @param className
+	 */
+	public CSSComponent(String className)
+	{
+		super(ComponentTypes.CSSClass);
+		setID(className);
+	}
+	
+	/**
+	 * Returns the component rendering for JQuery string Requires the rendering for component is set
+	 * <p>
+	 *
+	 * @return $('#x').
+	 */
+	@Override
+	public String getJQueryID()
+	{
+		return "$(\'" + getID(true) + "\').";
+	}
+	
+	/**
+	 * Returns the ID with the . in the front of it
+	 * <p>
+	 *
+	 * @param jQueryHolder Anything
+	 *                     <p>
+	 *
+	 * @return An ID starting with .
+	 */
+	@Override
+	public String getID(boolean jQueryHolder)
+	{
+		return "." + getID();
+	}
+	
+	/**
+	 * Replaces the # with a .
+	 *
+	 * @return
+	 */
+	@Override
+	public String getID()
+	{
+		return super.getID().replace('#', '.');
+	}
+	
+	/**
+	 * CSS Components don't render any HTML
+	 *
+	 * @param tabCount
+	 *
+	 * @return
+	 */
+	@Override
+	protected StringBuilder renderHTML(int tabCount)
+	{
+		return new StringBuilder();
+	}
 }

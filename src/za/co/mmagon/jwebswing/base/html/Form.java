@@ -65,13 +65,13 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 public class Form<J extends Form<J>>
 		extends Component<FormChildren, FormAttributes, GlobalFeatures, GlobalEvents, J>
 {
-
+	
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The label of this form
 	 */
 	private Label label;
-
+	
 	/**
 	 * Constructs a new form
 	 */
@@ -79,7 +79,7 @@ public class Form<J extends Form<J>>
 	{
 		super(ComponentTypes.Form);
 	}
-
+	
 	@Override
 	protected StringBuilder renderBeforeTag()
 	{

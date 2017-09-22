@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class CSSBlock
 {
-
+	
 	private static final Logger LOG = LogFactory.getInstance().getLogger("CSSBlock");
 	private static final CSSLineSorter SORTER = new CSSLineSorter();
 	private ArrayList<String> linkedBlocks = new ArrayList();
@@ -26,7 +26,7 @@ public class CSSBlock
 	private CSSTypes blockType;
 	private CSSBlockIdentifier blockIdentifer;
 	private String idOfBlock;
-
+	
 	/**
 	 * Creates a new ID (#) block of ID with no type
 	 *
@@ -54,7 +54,7 @@ public class CSSBlock
 		blockType = CSSTypes.None;
 		blockIdentifer = CSSBlockIdentifier.Id;
 	}
-
+	
 	/**
 	 * Creates a new In-Line block inside quotations
 	 */
@@ -68,7 +68,7 @@ public class CSSBlock
 		blockType = CSSTypes.None;
 		blockIdentifer = CSSBlockIdentifier.Inline;
 	}
-
+	
 	/**
 	 * @param blockType      The block type, active or changed
 	 * @param blockIdentifer The block identifier
@@ -78,13 +78,13 @@ public class CSSBlock
 	{
 		this.blockType = blockType;
 		this.idOfBlock = idOfBlock;
-
+		
 		cssLines = new CSSLines();
 		cssLines.setPrettyPrint(true);
 		cssLines.setRenderBraces(true);
 		cssLines.setRenderInQuotations(false);
 	}
-
+	
 	/**
 	 * @param blockType        The block type, active or changed
 	 * @param blockIdentifer   The block identifier
@@ -102,7 +102,7 @@ public class CSSBlock
 		cssLines.setRenderBraces(true);
 		cssLines.setRenderInQuotations(false);
 	}
-
+	
 	public static void main(String... args)
 	{
 		GregorianCalendar date = new GregorianCalendar();
@@ -113,7 +113,7 @@ public class CSSBlock
 		cssIDComponentBlock.add(new CSSLine("property1:value1"));
 		cssIDComponentBlock.add(new CSSLine("property1:value2"));
 		System.out.println("CSS Block : \n" + cssIDComponentBlock);
-
+		
 		CSSBlock cssIDComponentBlockActive = new CSSBlock("className");
 		cssIDComponentBlockActive.blockType = CSSTypes.Active;
 		cssIDComponentBlockActive.blockIdentifer = CSSBlockIdentifier.Class;
@@ -123,7 +123,7 @@ public class CSSBlock
 		cssIDComponentBlockActive.add(new CSSLine("property1:value1"));
 		cssIDComponentBlockActive.add(new CSSLine("property1:value2"));
 		System.out.println("\n" + cssIDComponentBlockActive);
-
+		
 		CSSBlock cssTagComponent = new CSSBlock("normal-tag");
 		cssTagComponent.blockType = CSSTypes.Hover;
 		cssTagComponent.blockIdentifer = CSSBlockIdentifier.Id;
@@ -134,7 +134,7 @@ public class CSSBlock
 		cssTagComponent.add(new CSSLine("property1:value2"));
 		cssTagComponent.addLinkedBlock(cssTagComponent);
 		System.out.println("\n" + cssTagComponent);
-
+		
 		CSSBlock cssInLineComponent = new CSSBlock();
 		cssInLineComponent.add(null);
 		cssInLineComponent.add(new CSSLine("property2:value2"));
@@ -142,11 +142,11 @@ public class CSSBlock
 		cssInLineComponent.add(new CSSLine("property1:value1"));
 		cssInLineComponent.add(new CSSLine("property1:value2"));
 		System.out.println("\n" + cssInLineComponent);
-
+		
 		GregorianCalendar date2 = new GregorianCalendar();
 		System.out.println("Time Taken : " + (date2.getTimeInMillis() - date.getTimeInMillis()) + "milliseconds.");
 	}
-
+	
 	/**
 	 * Adds a property value pair to the Lines group. If it already exists, just returns it
 	 *
@@ -160,7 +160,7 @@ public class CSSBlock
 		{
 			return null;
 		}
-
+		
 		if (cssLines.getCssLines().contains(line))
 		{
 			return line;
@@ -172,7 +172,7 @@ public class CSSBlock
 			return line;
 		}
 	}
-
+	
 	/**
 	 * Removes a line from the list
 	 *
@@ -192,7 +192,7 @@ public class CSSBlock
 			return false;
 		}
 	}
-
+	
 	/**
 	 * This blocks CSS according to how it is configured with 0 tabs
 	 *
@@ -203,7 +203,7 @@ public class CSSBlock
 	{
 		return toString(01);
 	}
-
+	
 	/**
 	 * Returns a generated block ID to apply on top of this CSS
 	 *
@@ -215,7 +215,7 @@ public class CSSBlock
 	{
 		return generateBlockID(block, 0);
 	}
-
+	
 	/**
 	 * Returns a generated block ID to apply on top of this CSS
 	 *
@@ -230,7 +230,7 @@ public class CSSBlock
 		{
 			sb.append(TextUtilities.getTabString(tabCount - 1));
 		}
-
+		
 		switch (block.blockIdentifer)
 		{
 			case Class:
@@ -261,7 +261,7 @@ public class CSSBlock
 				throw new UnsupportedOperationException("Block Identifier has not been catered for in generate block id");
 			}
 		}
-
+		
 		switch (block.blockType)
 		{
 			case Active:
@@ -289,11 +289,11 @@ public class CSSBlock
 				break;
 			}
 		}
-
+		
 		//addBlockID(idOfBlock);
 		return sb.toString();
 	}
-
+	
 	/**
 	 * Returns a generated block ID to apply on top of this CSS
 	 *
@@ -309,7 +309,7 @@ public class CSSBlock
 		}
 		return block;
 	}
-
+	
 	/**
 	 * Generates this block ID
 	 *
@@ -333,7 +333,7 @@ public class CSSBlock
 		sb.append(generateBlockID(this));
 		return sb.toString();
 	}
-
+	
 	/**
 	 * This blocks CSS according to how it is configured with Set tabs
 	 *
@@ -360,7 +360,7 @@ public class CSSBlock
 		}
 		return sb.toString();
 	}
-
+	
 	/**
 	 * @return This objects CSS Lines string
 	 */
@@ -368,7 +368,7 @@ public class CSSBlock
 	{
 		return cssLines;
 	}
-
+	
 	/**
 	 * Adds a block ID into this blocks generated String
 	 *
@@ -381,7 +381,7 @@ public class CSSBlock
 		addBlockID(linkedBlock.generateBlockID(linkedBlock));
 		return true;
 	}
-
+	
 	/**
 	 * Returns the full ID of this block as a string
 	 *
@@ -391,7 +391,7 @@ public class CSSBlock
 	{
 		return idOfBlock;
 	}
-
+	
 	/**
 	 * Sets the ID of the block to be built
 	 *
@@ -401,7 +401,7 @@ public class CSSBlock
 	{
 		this.idOfBlock = idOfBlock;
 	}
-
+	
 	@Override
 	public int hashCode()
 	{
@@ -410,7 +410,7 @@ public class CSSBlock
 		hash = 41 * hash + Objects.hashCode(this.idOfBlock);
 		return hash;
 	}
-
+	
 	/**
 	 * Compares the body string to each other
 	 *
@@ -438,13 +438,9 @@ public class CSSBlock
 		{
 			return false;
 		}
-		if (this.blockIdentifer != other.blockIdentifer)
-		{
-			return false;
-		}
-		return true;
+		return this.blockIdentifer == other.blockIdentifer;
 	}
-
+	
 	/**
 	 * Gets the block ID's that are currently linked
 	 *
@@ -454,7 +450,7 @@ public class CSSBlock
 	{
 		return linkedBlocks;
 	}
-
+	
 	/**
 	 * Sets the block ID's that are linked to this block
 	 *
@@ -464,7 +460,7 @@ public class CSSBlock
 	{
 		this.linkedBlocks = linkedBlocks;
 	}
-
+	
 	/**
 	 * Gets this Master block's Type
 	 *
@@ -474,7 +470,7 @@ public class CSSBlock
 	{
 		return blockType;
 	}
-
+	
 	/**
 	 * Sets this Block Type
 	 *
@@ -484,7 +480,7 @@ public class CSSBlock
 	{
 		this.blockType = blockType;
 	}
-
+	
 	/**
 	 * Sets how this block is identified
 	 *
@@ -494,7 +490,7 @@ public class CSSBlock
 	{
 		return blockIdentifer;
 	}
-
+	
 	/**
 	 * Sets how this block is identified
 	 *

@@ -24,11 +24,11 @@ import java.util.logging.Logger;
  */
 public class CSSComposer
 {
-
+	
 	protected static Logger log = LogFactory.getInstance().getLogger("CSSComposer");
 	private CSSBlockMaster blockMaster;
 	private CSSPropertiesFactory propertiesFactory;
-
+	
 	/**
 	 * Constructs a new instance of this ComponentCSSComposer.
 	 * <p>
@@ -40,7 +40,7 @@ public class CSSComposer
 		this.blockMaster = new CSSBlockMaster();
 		this.propertiesFactory = new CSSPropertiesFactory();
 	}
-
+	
 	/**
 	 * Adds a component to be registered with the block master
 	 *
@@ -76,23 +76,23 @@ public class CSSComposer
 						                                                               list.add(a2);
 					                                                               }
 				                                                               });
-
+				
 			                        });
 		}
 		else
 		{
 			addComponent(o, list);
 		}
-
+		
 		list.forEach(getBlockMaster()::addBlock);
 		return list;
 	}
-
+	
 	public final ArrayList<CSSBlock> addComponent(ComponentStyleBase o)
 	{
 		return addComponent(o, new ArrayList());
 	}
-
+	
 	/**
 	 * Add a component to this object to render for
 	 *
@@ -127,7 +127,7 @@ public class CSSComposer
 				                                              componentBlocks.add(e);
 			                                              }
 		                                              });
-
+		
 		ArrayList<Field> fields = new ArrayList<>(Arrays.asList(o.getClass().getDeclaredFields()));
 		fields.stream().filter(a -> ComponentUtils.fieldGet(a, o) != null).forEach((Field field) ->
 		                                                                           {
@@ -141,13 +141,13 @@ public class CSSComposer
 				                                                                           componentBlocks.add(newFieldBlock);
 			                                                                           }
 		                                                                           });
-
+		
 		componentBlocks.forEach(getBlockMaster()::addBlock);
-
+		
 		return componentBlocks;
-
+		
 	}
-
+	
 	/**
 	 * Returns the block master handler
 	 *
@@ -161,7 +161,7 @@ public class CSSComposer
 		}
 		return blockMaster;
 	}
-
+	
 	/**
 	 * Sets the block master to a new master
 	 *
@@ -171,7 +171,7 @@ public class CSSComposer
 	{
 		this.blockMaster = blockMaster;
 	}
-
+	
 	/**
 	 * Properties factory builder
 	 *
@@ -185,7 +185,7 @@ public class CSSComposer
 		}
 		return propertiesFactory;
 	}
-
+	
 	/**
 	 * Properties factory builder
 	 *
@@ -195,7 +195,7 @@ public class CSSComposer
 	{
 		this.propertiesFactory = propertiesFactory;
 	}
-
+	
 	/**
 	 * Output the CSS Blocks rendered. Updates all block pretty print value to the page instance Tiny HTML
 	 *

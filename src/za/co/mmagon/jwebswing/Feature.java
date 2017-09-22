@@ -24,6 +24,8 @@ import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Container Class for Features. Splits from the hierarchy
  *
@@ -33,18 +35,18 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  * @author GedMarc
  * @since 23 Apr 2016
  */
-public class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
+public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 		extends ComponentFeatureBase<NoFeatures, J>
 		implements GlobalFeatures
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * The options object associated with this feature
 	 */
 	private O options;
-
+	
 	/**
 	 * Constructs a feature that can be used with all components
 	 *
@@ -55,7 +57,7 @@ public class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 		super(ComponentTypes.Feature);
 		setName(name);
 	}
-
+	
 	/**
 	 * Constructs a feature that can be used with all components
 	 *
@@ -68,7 +70,7 @@ public class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 		setName(name);
 		setComponent(component);
 	}
-
+	
 	/**
 	 * Returns any client side options available with this component
 	 *
@@ -79,7 +81,7 @@ public class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 	{
 		return options;
 	}
-
+	
 	/**
 	 * Sets the options object
 	 *
@@ -89,7 +91,7 @@ public class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 	{
 		this.options = options;
 	}
-
+	
 	/**
 	 * Adds a query to builder
 	 *
@@ -102,16 +104,13 @@ public class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 		StringBuilder sb = new StringBuilder(query);
 		return super.addQuery(sb);
 	}
-
+	
 	/**
 	 * Any work that needs to get done pre render
 	 */
 	@Override
-	protected void assignFunctionsToComponent()
-	{
-
-	}
-
+	protected abstract void assignFunctionsToComponent();
+	
 	/**
 	 * Returns the linked component if required
 	 *
@@ -121,18 +120,19 @@ public class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 	{
 		return component;
 	}
-
+	
 	/**
 	 * Sets the linked component if required
 	 *
 	 * @param component
 	 */
-	public void setComponent(ComponentHierarchyBase component)
+	public J setComponent(@NotNull ComponentHierarchyBase component)
 	{
 		if (component == null)
 		{
 			throw new NullComponentException("A Feature cannot be configured on a null component");
 		}
 		this.component = component;
+		return (J) this;
 	}
 }

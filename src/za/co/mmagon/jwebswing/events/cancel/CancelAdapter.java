@@ -39,13 +39,13 @@ import java.util.logging.Level;
 public abstract class CancelAdapter extends Event
 		implements GlobalEvents
 {
-
+	
 	/**
 	 * Logger for the Component
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("CancelEvent");
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Performs a click
 	 *
@@ -54,9 +54,9 @@ public abstract class CancelAdapter extends Event
 	public CancelAdapter(Component component)
 	{
 		super(EventTypes.cancel, component);
-
+		
 	}
-
+	
 	/**
 	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
 	 */
@@ -65,13 +65,13 @@ public abstract class CancelAdapter extends Event
 	{
 		if (!isConfigured())
 		{
-
+			
 			AngularPageConfigurator.setRequired(getComponent(), true);
 			component.addAttribute(AngularAttributes.ngCancel, "jwCntrl.perform($event," + renderVariables() + ");");
 		}
 		super.preConfigure();
 	}
-
+	
 	/**
 	 * Triggers on Cancel
 	 * <p>
@@ -80,7 +80,7 @@ public abstract class CancelAdapter extends Event
 	 * @param response The physical Ajax Receiver
 	 */
 	public abstract void onCancel(AjaxCall call, AjaxResponse response);
-
+	
 	@Override
 	public void fireEvent(AjaxCall call, AjaxResponse response)
 	{
@@ -93,5 +93,5 @@ public abstract class CancelAdapter extends Event
 			LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
-
+	
 }

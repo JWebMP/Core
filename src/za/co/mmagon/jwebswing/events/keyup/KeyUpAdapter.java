@@ -36,13 +36,13 @@ import java.util.logging.Level;
 public abstract class KeyUpAdapter extends Event
 		implements GlobalEvents
 {
-
+	
 	/**
 	 * Logger for the Component
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("KeyUpEvent");
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Performs a click
 	 *
@@ -52,7 +52,7 @@ public abstract class KeyUpAdapter extends Event
 	{
 		super(EventTypes.keyUp, component);
 	}
-
+	
 	/**
 	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
 	 */
@@ -66,7 +66,7 @@ public abstract class KeyUpAdapter extends Event
 		}
 		super.preConfigure();
 	}
-
+	
 	/**
 	 * Triggers on Key Up
 	 * <p>
@@ -75,7 +75,7 @@ public abstract class KeyUpAdapter extends Event
 	 * @param response The physical Ajax Receiver
 	 */
 	public abstract void onKeyUp(AjaxCall call, AjaxResponse response);
-
+	
 	@Override
 	public void fireEvent(AjaxCall call, AjaxResponse response)
 	{
@@ -88,5 +88,5 @@ public abstract class KeyUpAdapter extends Event
 			LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
-
+	
 }

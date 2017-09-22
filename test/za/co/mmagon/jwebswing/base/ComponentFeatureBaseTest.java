@@ -25,11 +25,11 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  */
 public class ComponentFeatureBaseTest extends BaseTestClass
 {
-
+	
 	public ComponentFeatureBaseTest()
 	{
 	}
-
+	
 	@Test
 	public void testFeatureComponentBuild()
 	{

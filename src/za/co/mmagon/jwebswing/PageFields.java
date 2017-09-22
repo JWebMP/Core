@@ -41,7 +41,7 @@ import java.util.logging.Logger;
  */
 public class PageFields extends JavaScriptPart
 {
-
+	
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The back reference to the page
@@ -88,7 +88,7 @@ public class PageFields extends JavaScriptPart
 	 * The base of this page
 	 */
 	private Base base;
-
+	
 	/**
 	 * Constructor for page fields
 	 *
@@ -98,7 +98,7 @@ public class PageFields extends JavaScriptPart
 	{
 		this.page = page;
 	}
-
+	
 	/**
 	 * Returns the description of the page
 	 *
@@ -108,7 +108,7 @@ public class PageFields extends JavaScriptPart
 	{
 		return descriptionMeta;
 	}
-
+	
 	/**
 	 * Sets the description of this page
 	 *
@@ -125,7 +125,7 @@ public class PageFields extends JavaScriptPart
 			descriptionMeta.addAttribute(MetaAttributes.Content, description);
 		}
 	}
-
+	
 	/**
 	 * Returns the Application Name of the page
 	 *
@@ -135,7 +135,7 @@ public class PageFields extends JavaScriptPart
 	{
 		return applicationNameMeta;
 	}
-
+	
 	/**
 	 * Sets the Application Name of this page
 	 *
@@ -152,7 +152,7 @@ public class PageFields extends JavaScriptPart
 			applicationNameMeta.addAttribute(MetaAttributes.Content, applicationName);
 		}
 	}
-
+	
 	/**
 	 * Returns the Application Name of the page
 	 *
@@ -162,7 +162,7 @@ public class PageFields extends JavaScriptPart
 	{
 		return generatorMeta;
 	}
-
+	
 	/**
 	 * Sets the Generator of this page
 	 *
@@ -179,7 +179,7 @@ public class PageFields extends JavaScriptPart
 			generatorMeta.addAttribute(MetaAttributes.Content, Generator);
 		}
 	}
-
+	
 	/**
 	 * Returns the Application Name of the page
 	 *
@@ -189,7 +189,7 @@ public class PageFields extends JavaScriptPart
 	{
 		return keywordsMeta;
 	}
-
+	
 	/**
 	 * Sets the Keywords of this page
 	 *
@@ -206,7 +206,7 @@ public class PageFields extends JavaScriptPart
 			keywordsMeta.addAttribute(MetaAttributes.Content, Keywords);
 		}
 	}
-
+	
 	/**
 	 * Removes Title from the Header
 	 *
@@ -216,7 +216,7 @@ public class PageFields extends JavaScriptPart
 	{
 		return page.getHead().getChildren().remove(getTitle());
 	}
-
+	
 	/**
 	 * Returns the Application Name of the page
 	 *
@@ -226,7 +226,7 @@ public class PageFields extends JavaScriptPart
 	{
 		return httpEquivMeta;
 	}
-
+	
 	/**
 	 * Sets the Application Name of this page Null removes compatibility specification
 	 *
@@ -247,7 +247,7 @@ public class PageFields extends JavaScriptPart
 			httpEquivMeta = null;
 		}
 	}
-
+	
 	/**
 	 * Returns the Application Name of the page
 	 *
@@ -259,7 +259,7 @@ public class PageFields extends JavaScriptPart
 	{
 		return httpEquivMeta.getAttribute(MetaAttributes.Http_Equiv);
 	}
-
+	
 	/**
 	 * Sets the Icon in the browser address bar
 	 *
@@ -282,7 +282,7 @@ public class PageFields extends JavaScriptPart
 		favIconLink.addAttribute(CSSLinkAttributes.Type, mimeType);
 		favIconLink.addAttribute(CSSLinkAttributes.HRef, favIconURL);
 	}
-
+	
 	/**
 	 * Returns the author
 	 *
@@ -292,7 +292,7 @@ public class PageFields extends JavaScriptPart
 	{
 		return author;
 	}
-
+	
 	/**
 	 * Sets the author of this page
 	 *
@@ -302,7 +302,7 @@ public class PageFields extends JavaScriptPart
 	{
 		this.author = new Meta(Meta.MetadataFields.Author, author);
 	}
-
+	
 	/**
 	 * Returns the fav icon link
 	 *
@@ -312,7 +312,7 @@ public class PageFields extends JavaScriptPart
 	{
 		return favIconLink;
 	}
-
+	
 	/**
 	 * Returns the http-equiv meta tag
 	 *
@@ -322,7 +322,7 @@ public class PageFields extends JavaScriptPart
 	{
 		return httpEquivMeta;
 	}
-
+	
 	/**
 	 * Returns the Cache Control Meta Object
 	 *
@@ -332,7 +332,7 @@ public class PageFields extends JavaScriptPart
 	{
 		return cacheControl;
 	}
-
+	
 	/**
 	 * Sets the Cache Control.
 	 * <p>
@@ -368,7 +368,7 @@ public class PageFields extends JavaScriptPart
 			cacheControl = null;
 		}
 	}
-
+	
 	/**
 	 * Returns the Application Name of the page
 	 *
@@ -378,7 +378,7 @@ public class PageFields extends JavaScriptPart
 	{
 		return this.base;
 	}
-
+	
 	/**
 	 * Sets the Base of this page
 	 *
@@ -392,7 +392,7 @@ public class PageFields extends JavaScriptPart
 			base.setPage(page);
 		}
 	}
-
+	
 	/**
 	 * Returns the Application Name of the page
 	 *
@@ -402,7 +402,7 @@ public class PageFields extends JavaScriptPart
 	{
 		return this.title;
 	}
-
+	
 	/**
 	 * Sets the Title of this page
 	 *
@@ -416,7 +416,7 @@ public class PageFields extends JavaScriptPart
 			title.setPage(page);
 		}
 	}
-
+	
 	/**
 	 * Sets the Title of this page
 	 *
@@ -430,7 +430,7 @@ public class PageFields extends JavaScriptPart
 			title.setPage(page);
 		}
 	}
-
+	
 	/**
 	 * Removes Base from the Header
 	 *
@@ -440,5 +440,5 @@ public class PageFields extends JavaScriptPart
 	{
 		return page.getHead().getChildren().remove(getBase());
 	}
-
+	
 }

@@ -23,19 +23,19 @@ import org.junit.Test;
  */
 public class LatitudeLongitueArrayTest
 {
-
+	
 	public LatitudeLongitueArrayTest()
 	{
 	}
-
+	
 	@Test
 	public void testEmpty()
 	{
 		LatitudeLongitueArray lat = new LatitudeLongitueArray();
-
+		
 		System.out.println(lat);
 	}
-
+	
 	@Test
 	public void testCoords()
 	{

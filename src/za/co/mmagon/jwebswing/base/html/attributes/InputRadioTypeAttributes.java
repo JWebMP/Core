@@ -75,7 +75,7 @@ public enum InputRadioTypeAttributes implements AttributeDefinitions
  *
  */
 	;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

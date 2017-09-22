@@ -55,9 +55,9 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 public class Ruby<J extends Ruby<J>>
 		extends Component<RubyChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs a new Ruby process
 	 */

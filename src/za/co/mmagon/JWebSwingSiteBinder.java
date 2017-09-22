@@ -27,21 +27,18 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import com.google.inject.Key;
-import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.name.Names;
 import com.google.inject.servlet.RequestScoped;
 import net.sf.uadetector.UserAgentStringParser;
 import net.sf.uadetector.service.UADetectorServiceFactory;
-import za.co.mmagon.jwebswing.JWebSwingContext;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.annotations.*;
 import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.servlets.*;
-import za.co.mmagon.jwebswing.components.modernizr.ModernizrDto;
 import za.co.mmagon.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
@@ -201,11 +198,12 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
 	@Override
 	public void onBind(GuiceSiteInjectorModule module)
 	{
+		log.log(Level.CONFIG, "Building Event Map");
 		log.log(Level.CONFIG, "Configuring Servlet URL's");
 		//module.bind(JWebSwingSiteBinder.class).in(SessionScoped.class);
 		module.bind(UserAgentStringParser.class).toInstance(userAgentParser);
 		module.bind(AjaxResponse.class).in(RequestScoped.class);
-		module.bind(AjaxCall.class).toProvider((Provider<AjaxCall>) () -> ajaxCall).in(RequestScoped.class);
+		module.bind(AjaxCall.class).toProvider(() -> ajaxCall).in(RequestScoped.class);
 		
 		module.bindInterceptor$(Matchers.any(), Matchers.annotatedWith(SiteInterception.class),
 		                        new SiteIntercepters());
@@ -215,7 +213,7 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
 		                        new DataCallIntercepters());
 		
 		//Bind Local Storage
-		module.bind(Map.class).annotatedWith(Names.named("LocalStorage")).toProvider((Provider<Map>) () ->
+		module.bind(Map.class).annotatedWith(Names.named("LocalStorage")).toProvider(() ->
 		{
 			if (!GuiceContext.isBuildingInjector())
 			{
@@ -230,7 +228,7 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
 			return new HashMap();
 		});
 		//Bind Session Storage
-		module.bind(Map.class).annotatedWith(Names.named("SessionStorage")).toProvider((Provider<Map>) () ->
+		module.bind(Map.class).annotatedWith(Names.named("SessionStorage")).toProvider(() ->
 		{
 			if (!GuiceContext.isBuildingInjector())
 			{
@@ -244,8 +242,11 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
 			}
 			return new HashMap();
 		});
+		
+		
 		//Bind Modernizr
-		module.bind(ModernizrDto.class).toProvider((Provider<ModernizrDto>) () ->
+		//TODO move to modernizr page configurator
+		/*module.bind(ModernizrDto.class).toProvider((Provider<ModernizrDto>) () ->
 		{
 			if (!GuiceContext.isBuildingInjector())
 			{
@@ -258,31 +259,11 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
 				return attributeMap;
 			}
 			return new ModernizrDto();
-		});
+		});*/
 		
 		//Page
-		module.bind(JWebSwingContext.class).toProvider(new Provider<JWebSwingContext>()
-		{
-			@Override
-			public JWebSwingContext get()
-			{
-				JWebSwingContext jwc = null;
-				if (!GuiceContext.isBuildingInjector())
-				{
-					HttpSession session = GuiceContext.getInstance(HttpSession.class);
-					if (session.getAttribute("JWebSwingContext") == null)
-					{
-						jwc = new JWebSwingContext();
-						session.setAttribute("JWebSwingContext", jwc);
-					}
-					return (JWebSwingContext) session.getAttribute("JWebSwingContext");
-					
-				}
-				return jwc = new JWebSwingContext();
-			}
-		}).in(Singleton.class);
 		
-		module.bind(Page.class).toProvider((Provider<Page>) () ->
+		module.bind(Page.class).toProvider(() ->
 		{
 			if (!GuiceContext.isBuildingInjector())
 			{

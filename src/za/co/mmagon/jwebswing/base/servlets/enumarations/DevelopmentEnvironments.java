@@ -53,5 +53,5 @@ public enum DevelopmentEnvironments
 	 * Forces tiny HTML to be rendered
 	 */
 	Production,
-
+	
 }

@@ -56,16 +56,16 @@ public class Area<J extends Area<J>>
 		extends ComponentHierarchyBase<AreaChildren, AreaAttributes, GlobalFeatures, GlobalEvents, J>
 		implements MapChildren, Serializable
 {
-
+	
 	private static final Logger LOG = LogFactory.getInstance().getLogger("Area");
 	/**
 	 * Serial Version for all Components and their compatibility
 	 */
 	private static final long serialVersionUID = 1l;
-
+	
 	public Area()
 	{
 		super(ComponentTypes.Area);
 	}
-
+	
 }

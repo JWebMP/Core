@@ -24,11 +24,11 @@ import org.junit.Test;
  */
 public class EmbedTest
 {
-
+	
 	public EmbedTest()
 	{
 	}
-
+	
 	@Test
 	public void testEmbed()
 	{
@@ -37,5 +37,5 @@ public class EmbedTest
 		System.out.println(e.toString(true));
 		Assert.assertEquals("<embed src=\"Source\" type=\"Media Type\" id=\"id\">", e.toString(true));
 	}
-
+	
 }

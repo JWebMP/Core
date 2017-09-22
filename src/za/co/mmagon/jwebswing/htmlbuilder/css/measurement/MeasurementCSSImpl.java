@@ -116,7 +116,7 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter<MeasurementCSS,
 	public String toString()
 	{
 	    /*
-         * if (measurementType == null) { return ""; }
+	     * if (measurementType == null) { return ""; }
          */
 		if (Double.class.cast(value).toString().endsWith(".0")) //format as an integer
 		{

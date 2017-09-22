@@ -33,7 +33,7 @@ public enum ProgressBarAttributes implements AttributeDefinitions
 	 * Sets the current value
 	 */
 	Value;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

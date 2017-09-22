@@ -56,7 +56,7 @@ import java.util.logging.Logger;
 @Singleton
 public class JWebSwingServlet extends JWDefaultServlet
 {
-
+	
 	/**
 	 * The logger for the swing Servlet
 	 */
@@ -65,25 +65,25 @@ public class JWebSwingServlet extends JWDefaultServlet
 	 * The logger for the session handler Servlet
 	 */
 	private static final Logger SESSION_LOG = LogFactory.getInstance().getLogger("SessionHandler");
-
+	
 	/**
 	 * Version 1
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	static
 	{
-
+	
 	}
-
+	
 	/**
 	 * Constructs a new JWebSwing Servlet that is not session aware
 	 */
 	public JWebSwingServlet()
 	{
-
+	
 	}
-
+	
 	/**
 	 * Finds the page for the current URL
 	 *
@@ -98,7 +98,7 @@ public class JWebSwingServlet extends JWDefaultServlet
 		}
 		return new Page();
 	}
-
+	
 	/**
 	 * Reads the variables into the HTTP session
 	 *
@@ -119,7 +119,7 @@ public class JWebSwingServlet extends JWDefaultServlet
 			SESSION_LOG.log(Level.FINE, "[SessionID]-[{0}];[Name]-[User Login];[Action]-[Session Page Added];", request.getSession().getId());
 		}
 	}
-
+	
 	/**
 	 * Reads the user agent header into the browser object and places it for the page to render
 	 *
@@ -140,7 +140,7 @@ public class JWebSwingServlet extends JWDefaultServlet
 			b = Browsers.getBrowserFromNameAndVersion(agent.getName(), Double.parseDouble(agent.getVersionNumber().getMajor() + "." + agent.getVersionNumber().getMinor()));
 		}
 		getPageFromGuice().setBrowser(b);
-
+		
 		if (agent.getVersionNumber().getMajor() == null || agent.getVersionNumber().getMajor().isEmpty())
 		{
 			log.log(Level.INFO, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}];[Operating System]-[{3}];[Device Category]-[{4}];[Device]-[{5}];[CSS]-[{6}];[HTML]-[{7}];", new Object[]
@@ -156,7 +156,7 @@ public class JWebSwingServlet extends JWDefaultServlet
 					});
 		}
 	}
-
+	
 	/**
 	 * Sends the page out
 	 *
@@ -182,7 +182,7 @@ public class JWebSwingServlet extends JWDefaultServlet
 				page.getBody().addJavaScriptReference(new JavascriptReference("Google Maps API Reference", 1.0, "https://maps.googleapis.com/maps/api/js?key=" + page.getOptions().getGoogleMapsJSApi()));
 			}
 			output = getPageHTML(request.getSession());
-
+			
 			Date endDate = new Date();
 			Date transferStart = new Date();
 			out.println(output);
@@ -198,13 +198,13 @@ public class JWebSwingServlet extends JWDefaultServlet
 			throw ex;
 		}
 	}
-
+	
 	@SiteInterception
 	protected void intercept()
 	{
-
+	
 	}
-
+	
 	/**
 	 * Processes requests for the WebSwing Servlet.
 	 *
@@ -222,7 +222,7 @@ public class JWebSwingServlet extends JWDefaultServlet
 			log.fine("Guice is still building, ignoring this request");
 			return;
 		}
-
+		
 		try
 		{
 			readRequestVariables(request);
@@ -238,7 +238,7 @@ public class JWebSwingServlet extends JWDefaultServlet
 		}
 		catch (IOException | NumberFormatException ex)
 		{
-
+			
 			log.log(Level.SEVERE, "Couldn't Render Page in Servlet. Fatal Error.", ex);
 			response.setContentType("text/html;charset=UTF-8");
 			try (PrintWriter out = response.getWriter())
@@ -252,7 +252,7 @@ public class JWebSwingServlet extends JWDefaultServlet
 		}
 		catch (Error | Exception t)
 		{
-			log.log(Level.SEVERE,"Unable to render page",t);
+			log.log(Level.SEVERE, "Unable to render page", t);
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = null;
 			try
@@ -280,7 +280,7 @@ public class JWebSwingServlet extends JWDefaultServlet
 			}
 		}
 	}
-
+	
 	/**
 	 * Generates the Page HTML
 	 *
@@ -292,7 +292,7 @@ public class JWebSwingServlet extends JWDefaultServlet
 		html = new StringBuilder(getPageFromGuice().toString(true));
 		return html;
 	}
-
+	
 	/**
 	 * In the event of any error return this page.
 	 *
@@ -312,7 +312,7 @@ public class JWebSwingServlet extends JWDefaultServlet
 		b.add(new PreFormattedText(TextUtilities.stackTraceToString(t)));
 		return p;
 	}
-
+	
 	/**
 	 * In the event of any error return this page.
 	 *
@@ -335,7 +335,7 @@ public class JWebSwingServlet extends JWDefaultServlet
 		b.add(new PreFormattedText(TextUtilities.stackTraceToString(t)));
 		return p;
 	}
-
+	
 	/**
 	 * Return the Mobile Page HTML
 	 *
@@ -353,7 +353,7 @@ public class JWebSwingServlet extends JWDefaultServlet
 		html = new StringBuilder(getPageFromGuice().toString(true));
 		return html;
 	}
-
+	
 	/**
 	 * Handles the HTTP <code>GET</code> method.
 	 *
@@ -380,7 +380,7 @@ public class JWebSwingServlet extends JWDefaultServlet
 			log.log(Level.SEVERE, "SwingServlet", ex);
 		}
 	}
-
+	
 	@Override
 	public void destroy()
 	{
@@ -399,11 +399,11 @@ public class JWebSwingServlet extends JWDefaultServlet
 				{
 					continue;
 				}
-
+				
 				Page p = (Page) GuiceContext.getInstance(page);
 				p.destroy();
 			}
-
+			
 			GuiceContext.destroy();
 			log.log(Level.INFO, "User Agent Parser Shutdown");
 		}

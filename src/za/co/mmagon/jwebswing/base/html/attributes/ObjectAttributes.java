@@ -25,7 +25,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum ObjectAttributes implements AttributeDefinitions
 {
-
+	
 	/**
 	 * Specifies the URL of the resource to be used by the object
 	 */
@@ -54,7 +54,7 @@ public enum ObjectAttributes implements AttributeDefinitions
 	 * Specifies the width in pixels
 	 */
 	Width;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

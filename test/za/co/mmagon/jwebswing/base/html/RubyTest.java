@@ -23,11 +23,11 @@ import org.junit.Test;
  */
 public class RubyTest
 {
-
+	
 	public RubyTest()
 	{
 	}
-
+	
 	@Test
 	public void testSomeMethod()
 	{
@@ -41,5 +41,5 @@ public class RubyTest
 		r.add(rt);
 		System.out.println();
 	}
-
+	
 }

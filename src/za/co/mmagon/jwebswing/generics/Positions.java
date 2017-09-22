@@ -36,17 +36,17 @@ public enum Positions
 	/**
 	 * A new Positions
 	 */
-	private Positions()
+	Positions()
 	{
-	
+
 	}
 	
 	/**
 	 * A new Positions with data
 	 */
-	private Positions(String data)
+	Positions(String data)
 	{
-	
+
 	}
 	
 	/**

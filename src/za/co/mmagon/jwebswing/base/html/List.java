@@ -60,9 +60,9 @@ public class List<C extends ListChildren, A extends Enum & AttributeDefinitions,
 		extends Component<C, A, GlobalFeatures, E, J>
 		implements ListChildren, DisplayObjectType, ListItemChildren
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs an unordered list
 	 */
@@ -70,7 +70,7 @@ public class List<C extends ListChildren, A extends Enum & AttributeDefinitions,
 	{
 		this(false);
 	}
-
+	
 	/**
 	 * Specifies if the list is ordered or unordered
 	 *
@@ -80,7 +80,7 @@ public class List<C extends ListChildren, A extends Enum & AttributeDefinitions,
 	{
 		super(orderedList ? "ol" : "ul", orderedList ? ComponentTypes.OrderedList : ComponentTypes.UnorderedList, false);
 	}
-
+	
 	/**
 	 * Adds a list item to this list
 	 *
@@ -94,7 +94,7 @@ public class List<C extends ListChildren, A extends Enum & AttributeDefinitions,
 		add((C) li);
 		return li;
 	}
-
+	
 	/**
 	 * Returns a list of the specified text
 	 *
@@ -110,5 +110,5 @@ public class List<C extends ListChildren, A extends Enum & AttributeDefinitions,
 		add((C) lit);
 		return li;
 	}
-
+	
 }

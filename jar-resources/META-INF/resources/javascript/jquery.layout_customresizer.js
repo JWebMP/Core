@@ -32,9 +32,8 @@
                 //   alert('resize accordion');
             }
         });
-        
-        
-        
+
+
         // may be called EITHER from layout-pane.onresize OR tabs.show
         var oPane = ui.jquery ? ui[0] : ui.panel;
         // cannot resize if the pane is currently closed or hidden
@@ -46,7 +45,7 @@
                 $(table).dataTable().fnAdjustColumnSizing();
             }
         });
-        
-        
+
+
     };
 })(jQuery);

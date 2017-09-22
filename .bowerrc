@@ -1,3 +1,12 @@
 {
-  "directory": "jar-resources/META-INF/resources/bower_components"
+  "directory": "jar-resources/META-INF/resources/bower_components",
+  "ignoredDependencies": [
+    "jquery-ui",
+    "font-awesome",
+    "holderjs",
+    "metisMenu",
+    "cldrjs",
+    "bootstrap-social",
+    "flot.tooltip"
+  ]
 }

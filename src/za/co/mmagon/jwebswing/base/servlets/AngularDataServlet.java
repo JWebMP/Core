@@ -17,10 +17,7 @@
 package za.co.mmagon.jwebswing.base.servlets;
 
 import com.armineasy.injection.GuiceContext;
-import com.armineasy.injection.filters.CorsAllowedFilter;
 import com.google.inject.Singleton;
-import za.co.mmagon.jwebswing.Event;
-import za.co.mmagon.jwebswing.JWebSwingContext;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.annotations.DataCallInterception;
 import za.co.mmagon.jwebswing.annotations.SiteInterception;
@@ -60,15 +57,11 @@ public class AngularDataServlet extends JWDefaultServlet
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
 	 *
-	 * @param request
-	 * 		Servlet request
-	 * @param response
-	 * 		Servlet response
+	 * @param request  Servlet request
+	 * @param response Servlet response
 	 *
-	 * @throws ServletException
-	 * 		if a Servlet-specific error occurs
-	 * @throws IOException
-	 * 		if an I/O error occurs
+	 * @throws ServletException if a Servlet-specific error occurs
+	 * @throws IOException      if an I/O error occurs
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
@@ -97,7 +90,8 @@ public class AngularDataServlet extends JWDefaultServlet
 			initData = (AngularDataServletInitData) new JavaScriptPart().From(jb.toString(), AngularDataServletInitData.class);
 			request.getSession().setAttribute(LocalStorageSessionKey, initData.getLocalStorage());
 			request.getSession().setAttribute(SessionStorageSessionKey, initData.getSessionStorage());
-			request.getSession().setAttribute(ModernizrSessionKey, initData.getModernizr());
+			//TODOmodernizr remove for other transport way
+			//request.getSession().setAttribute(ModernizrSessionKey, initData.getModernizr());
 			componentId = initData.getParameters().get("objectId");
 		}
 		
@@ -139,26 +133,13 @@ public class AngularDataServlet extends JWDefaultServlet
 		ajaxResponse.getComponents().forEach(component ->
 		                                     {
 			                                     component.preConfigure();
-			                                     if (!component.getEvents().isEmpty())
-			                                     {
-				                                     JWebSwingContext jwc = GuiceContext.getInstance(JWebSwingContext.class);
-				                                     for (Object ev : component.getEvents())
-				                                     {
-					                                     Event event = (Event) ev;
-					                                     if (!jwc.getKnownEvents().contains(event))
-					                                     {
-						                                     jwc.getKnownEvents().add(event);
-					                                     }
-				                                     }
-				                                     jwc.getKnownComponents().add(component);
-			                                     }
 		                                     });
 		Date endDate = new Date();
 		try (PrintWriter out = response.getWriter())
 		{
 			response.setContentType("application/json;charset=UTF-8");
 			
-			response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);
+			response.setHeader("Access-Control-Allow-Origin", "*");
 			response.setHeader("Access-Control-Allow-Credentials", "true");
 			response.setHeader("Access-Control-Allow-Methods", "POST");
 			response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");

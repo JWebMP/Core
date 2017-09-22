@@ -38,7 +38,7 @@ public enum StyleAttributes implements AttributeDefinitions
 	 * Specifies the MIME Type of the style sheet
 	 */
 	Type;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

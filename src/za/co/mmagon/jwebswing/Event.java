@@ -22,7 +22,6 @@ import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
-import za.co.mmagon.jwebswing.base.exceptions.NullComponentException;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -30,8 +29,11 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Container Class for Events. Splits from the component hierarchy
@@ -42,308 +44,346 @@ import java.util.List;
  * @author GedMarc
  * @since 23 Apr 2016
  */
-public class Event<A extends JavaScriptPart, J extends Event>
-        extends ComponentEventBase<GlobalFeatures, GlobalEvents, Event<A, J>> implements GlobalEvents
+public abstract class Event<A extends JavaScriptPart, J extends Event>
+		extends ComponentEventBase<GlobalFeatures, GlobalEvents, Event<A, J>> implements GlobalEvents
 {
-
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * The variables to return
-     */
-    private List<String> variables;
-    /**
-     * A list of all queries to execute on ajax response
-     */
-    private List<Event> runEvents;
-    /**
-     * Any features that must be run
-     */
-    private List<Feature> runFeatures;
-
-    /**
-     * Creates an event with the given component and type
-     *
-     * @param eventTypes
-     * @param component
-     */
-    public Event(EventTypes eventTypes, ComponentHierarchyBase component)
-    {
-        this(eventTypes.name(), eventTypes);
-        setComponent(component);
-        AngularPageConfigurator.setRequired(component, true);
-    }
-
-    /**
-     * Creates an event with the given component and type
-     *
-     * @param component
-     */
-    public Event(ComponentHierarchyBase component)
-    {
-        this(EventTypes.undefined, component);
-    }
-
-    /**
-     * Constructs an event with the given name
-     *
-     * @param name
-     * @param eventType
-     */
-    public Event(String name, EventTypes eventType)
-    {
-        this(name, eventType, null);
-    }
-
-    /**
-     * Constructs an event with the given name
-     *
-     * @param name
-     */
-    public Event(String name)
-    {
-        this(name, EventTypes.undefined);
-    }
-
-    /**
-     * Constructs an event with the given name
-     *
-     * @param name      The name of this event
-     * @param eventType The event type of this event
-     * @param component The component type of this event
-     */
-    public Event(String name, EventTypes eventType, ComponentHierarchyBase component)
-    {
-        super(ComponentTypes.Event);
-        setName(name);
-        this.component = component;
-        setEventType(eventType);
-    }
-
-    /**
-     * Constructs an event with the given name
-     *
-     * @param name      The name of this event
-     * @param component The component type of this event
-     */
-    public Event(String name, ComponentHierarchyBase component)
-    {
-        this(name, EventTypes.undefined, component);
-    }
-
-    /**
-     * Adds a variable to return on the call
-     *
-     * @param returnVariable The name of the variable to return
-     *
-     * @return
-     */
-    public J returnVariable(String returnVariable)
-    {
-        getVariables().add(returnVariable);
-        return (J) this;
-    }
-
-    /**
-     * Adds a variable to return on the call
-     *
-     * @param returnVariable  The name of the variable to return
-     * @param owningComponent The component to assign this variable to
-     *
-     * @return
-     */
-    public J returnVariable(String returnVariable, String owningComponent)
-    {
-        getVariables().add(returnVariable);
-        return (J) this;
-    }
-
-    /**
-     * Render the variable return array
-     *
-     * @return
-     */
-    public StringBuilder renderVariables()
-    {
-        final StringBuilder s = new StringBuilder("[");
-        getVariables().forEach((event) ->
-        {
-            s.append("'").append(event).append("'").append(",");
-        });
-        StringBuilder s2;
-        if (s.indexOf(",") > 0)
-        {
-            s2 = s.deleteCharAt(s.lastIndexOf(","));
-        }
-        else
-        {
-            s2 = s;
-        }
-        s2.append("]");
-
-        //append Event ID
-        s2.append(",'").append(getID()).append("'");
-
-        return s2;
-    }
-
-    /**
-     * Returns the list of currently associated variables
-     *
-     * @return
-     */
-    @Override
-    public List<String> getVariables()
-    {
-        if (variables == null)
-        {
-            variables = new ArrayList<>();
-        }
-        return variables;
-    }
-
-    /**
-     * Sets the current list of variables to return
-     *
-     * @param variables
-     *
-     * @return
-     */
-    public J setVariables(List<String> variables)
-    {
-        this.variables = variables;
-        return (J) this;
-    }
-
-    /**
-     * The method that is fired on call
-     *
-     * @param call     The component that made the call
-     * @param response The Response Object Being Returned
-     */
-    public void fireEvent(AjaxCall call, AjaxResponse response)
-    {
-
-    }
-
-    /**
-     * Returns the linked component if required
-     *
-     * @return
-     */
-    public ComponentHierarchyBase getComponent()
-    {
-        return component;
-    }
-
-    /**
-     * Sets the linked component if required
-     *
-     * @param component
-     *
-     * @return
-     */
-    public final J setComponent(ComponentHierarchyBase component)
-    {
-        if (component == null)
-        {
-            throw new NullComponentException("Components set for events cannot be null");
-        }
-        this.component = component;
-        return (J) this;
-    }
-
-    /**
-     * Adds an on demand event to be performed after ajax response
-     *
-     * @param event
-     *
-     * @return
-     */
-    public J addOnDemandEvent(Event event)
-    {
-        getRunEvents().add(event);
-        return (J) this;
-    }
-
-    /**
-     * Return all the queries to execute on ajax response
-     *
-     * @return
-     */
-    public List<Event> getRunEvents()
-    {
-        if (runEvents == null)
-        {
-            runEvents = new ArrayList<>();
-        }
-        return runEvents;
-    }
-
-    /**
-     * Returns all queries that are executed on ajax response
-     *
-     * @param onDemandQueries
-     *
-     * @return
-     */
-    public J setOnDemandQueries(List<Event> onDemandQueries)
-    {
-        this.runEvents = onDemandQueries;
-        return (J) this;
-    }
-
-    /**
-     * Returns a list of runnable features that occur from an event
-     *
-     * @return
-     */
-    public List<Feature> getRunFeatures()
-    {
-        if (runFeatures == null)
-        {
-            setRunFeatures(new ArrayList<>());
-        }
-        return runFeatures;
-    }
-
-    /**
-     * Sets the running feature base
-     *
-     * @param runFeatures
-     */
-    public void setRunFeatures(List<Feature> runFeatures)
-    {
-        this.runFeatures = runFeatures;
-    }
-
-    /**
-     * Runs the assign function to components then executes the parents configuration
-     */
-    @Override
-    public void preConfigure()
-    {
-        if (!isConfigured())
-        {
-            assignFunctionsToComponent();
-            JQueryPageConfigurator.setRequired((Component) getComponent(), true);
-        }
-        super.preConfigure();
-    }
-
-    /**
-     * Initializes the event by adding itself to the page registered events list
-     */
-    @Override
-    public void init()
-    {
-        if (!isInitialized())
-        {
-            if (!GuiceContext.isBuildingInjector())
-            {
-            }
-        }
-        super.init();
-    }
-
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * The variables to return
+	 */
+	private List<String> variables;
+	/**
+	 * A list of all queries to execute on ajax response
+	 */
+	private List<Event> runEvents;
+	/**
+	 * Any features that must be run
+	 */
+	private List<Feature> runFeatures;
+	/**
+	 * A set of components that this event can construct
+	 */
+	private Set<Class<? extends ComponentHierarchyBase>> registeredComponents;
+	
+	/**
+	 * Creates an event with the given component and type
+	 *
+	 * @param eventTypes
+	 * @param component
+	 */
+	public Event(EventTypes eventTypes, ComponentHierarchyBase component)
+	{
+		this(eventTypes.name(), eventTypes, component);
+	}
+	
+	/**
+	 * Creates an event with the given component and type
+	 *
+	 * @param component
+	 */
+	public Event(ComponentHierarchyBase component)
+	{
+		this(EventTypes.undefined, component);
+	}
+	
+	/**
+	 * Constructs an event with the given name
+	 *
+	 * @param name
+	 * @param eventType
+	 */
+	public Event(String name, EventTypes eventType)
+	{
+		this(name, eventType, null);
+	}
+	
+	/**
+	 * Constructs an event with the given name
+	 *
+	 * @param name
+	 */
+	public Event(String name)
+	{
+		this(name, EventTypes.undefined);
+	}
+	
+	/**
+	 * Constructs an event with the given name
+	 *
+	 * @param name      The name of this event
+	 * @param eventType The event type of this event
+	 * @param component The component type of this event
+	 */
+	public Event(String name, EventTypes eventType, ComponentHierarchyBase component)
+	{
+		super(ComponentTypes.Event);
+		setID(getClassCanonicalName());
+		setName(name);
+		setComponent(component);
+		setEventType(eventType);
+	}
+	
+	/**
+	 * Constructs an event with the given name
+	 *
+	 * @param name      The name of this event
+	 * @param component The component type of this event
+	 */
+	public Event(String name, ComponentHierarchyBase component)
+	{
+		this(name, EventTypes.undefined, component);
+	}
+	
+	/**
+	 * Sets the ID as whatever with dots as underscores
+	 *
+	 * @param id The ID
+	 *
+	 * @return
+	 */
+	@Override
+	public Event<A, J> setID(String id)
+	{
+		return super.setID(id.replace('.', '_'));
+	}
+	
+	/**
+	 * Adds a variable to return on the call
+	 *
+	 * @param returnVariable The name of the variable to return
+	 *
+	 * @return
+	 */
+	public J returnVariable(String returnVariable)
+	{
+		getVariables().add(returnVariable);
+		return (J) this;
+	}
+	
+	/**
+	 * Render the variable return array
+	 *
+	 * @return
+	 */
+	public StringBuilder renderVariables()
+	{
+		final StringBuilder s = new StringBuilder("[");
+		getVariables().forEach((event) ->
+		                       {
+			                       s.append("'").append(event).append("'").append(",");
+		                       });
+		StringBuilder s2;
+		if (s.indexOf(",") > 0)
+		{
+			s2 = s.deleteCharAt(s.lastIndexOf(","));
+		}
+		else
+		{
+			s2 = s;
+		}
+		s2.append("]");
+		//append Event ID
+		s2.append(",'").append(getID()).append("'");
+		//append Event Class
+		s2.append(",'").append(getClassCanonicalName()).append("'");
+		
+		return s2;
+	}
+	
+	/**
+	 * Returns the list of currently associated variables
+	 *
+	 * @return
+	 */
+	@Override
+	public List<String> getVariables()
+	{
+		if (variables == null)
+		{
+			variables = new ArrayList<>();
+		}
+		return variables;
+	}
+	
+	/**
+	 * Sets the current list of variables to return
+	 *
+	 * @param variables
+	 *
+	 * @return
+	 */
+	public J setVariables(List<String> variables)
+	{
+		this.variables = variables;
+		return (J) this;
+	}
+	
+	/**
+	 * The method that is fired on call
+	 *
+	 * @param call     The component that made the call
+	 * @param response The Response Object Being Returned
+	 */
+	public void fireEvent(AjaxCall call, AjaxResponse response)
+	{
+	
+	}
+	
+	/**
+	 * Adds an on demand event to be performed after ajax response
+	 *
+	 * @param event
+	 *
+	 * @return
+	 */
+	public J addOnDemandEvent(Event event)
+	{
+		getRunEvents().add(event);
+		return (J) this;
+	}
+	
+	/**
+	 * Return all the queries to execute on ajax response
+	 *
+	 * @return
+	 */
+	public List<Event> getRunEvents()
+	{
+		if (runEvents == null)
+		{
+			runEvents = new ArrayList<>();
+		}
+		return runEvents;
+	}
+	
+	/**
+	 * Returns all queries that are executed on ajax response
+	 *
+	 * @param onDemandQueries
+	 *
+	 * @return
+	 */
+	public J setOnDemandQueries(List<Event> onDemandQueries)
+	{
+		this.runEvents = onDemandQueries;
+		return (J) this;
+	}
+	
+	/**
+	 * Returns a list of runnable features that occur from an event
+	 *
+	 * @return
+	 */
+	public List<Feature> getRunFeatures()
+	{
+		if (runFeatures == null)
+		{
+			setRunFeatures(new ArrayList<>());
+		}
+		return runFeatures;
+	}
+	
+	/**
+	 * Sets the running feature base
+	 *
+	 * @param runFeatures
+	 */
+	public void setRunFeatures(List<Feature> runFeatures)
+	{
+		this.runFeatures = runFeatures;
+	}
+	
+	
+	/**
+	 * A set of components that this event can construct/be called from (same thing)
+	 *
+	 * @return
+	 */
+	public Set<Class<? extends ComponentHierarchyBase>> getRegisteredComponents()
+	{
+		if (registeredComponents == null)
+		{
+			setRegisteredComponents(new HashSet<>());
+		}
+		return registeredComponents;
+	}
+	
+	/**
+	 * A set of components that this event can construct/be called from (same thing)
+	 *
+	 * @param registeredComponents
+	 *
+	 * @return
+	 */
+	public J setRegisteredComponents(Set<Class<? extends ComponentHierarchyBase>> registeredComponents)
+	{
+		this.registeredComponents = registeredComponents;
+		return (J) this;
+	}
+	
+	/**
+	 * Exposes the get component method
+	 *
+	 * @return
+	 */
+	@Nullable
+	public ComponentHierarchyBase getComponent()
+	{
+		return component;
+	}
+	
+	/**
+	 * Sets the given component and class for this events. Component instance is destroyed on delivery
+	 *
+	 * @param component
+	 *
+	 * @return
+	 */
+	@Override
+	public Event<A, J> setComponent(ComponentHierarchyBase component)
+	{
+		if (component != null)
+		{
+			getRegisteredComponents().add(component.getClass());
+			this.component = component;
+		}
+		return super.setComponent(component);
+	}
+	
+	/**
+	 *
+	 */
+	@Override
+	public void init()
+	{
+		if (!isInitialized())
+		{
+		
+		}
+		super.init();
+	}
+	
+	/**
+	 * Runs the assign function to components then executes the parents configuration
+	 */
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			if (!GuiceContext.isBuildingInjector())
+			{
+				assignFunctionsToComponent();
+				if (getComponent() != null)
+				{
+					Page p = getComponent().getPage();
+					JQueryPageConfigurator.setRequired(p.getBody(), true);
+					AngularPageConfigurator.setRequired(p.getBody(), true);
+				}
+			}
+		}
+		super.preConfigure();
+	}
 }

@@ -68,31 +68,31 @@ public enum BackgroundAttachments implements CSSEnumeration<BackgroundAttachment
 	 * Sets this field as not set
 	 */
 	Unset;
-
+	
 	@Override
 	public String getJavascriptSyntax()
 	{
 		return "style.backgroundAttachment";
 	}
-
+	
 	@Override
 	public CSSVersions getCSSVersion()
 	{
 		return CSSVersions.CSS1;
 	}
-
+	
 	@Override
 	public String getValue()
 	{
 		return name();
 	}
-
+	
 	@Override
 	public BackgroundAttachments getDefault()
 	{
 		return Unset;
 	}
-
+	
 	@Override
 	public String toString()
 	{

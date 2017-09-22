@@ -23,7 +23,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum DeletedAttributes implements AttributeDefinitions
 {
-
+	
 	/**
 	 * Specifies a URL to a document that explains the reason why the text was deleted
 	 */
@@ -34,7 +34,7 @@ public enum DeletedAttributes implements AttributeDefinitions
 	 * YYYY-MM-DDThh:mm:ssTZD
 	 */
 	DateTime;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

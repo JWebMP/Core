@@ -55,7 +55,7 @@ public enum ImageAttributes implements AttributeDefinitions
 	 * Specifies height as an attribute
 	 */
 	Height;
-
+	
 	/**
 	 * Returns the lowercase variant
 	 *
@@ -66,11 +66,11 @@ public enum ImageAttributes implements AttributeDefinitions
 	{
 		return name().toLowerCase();
 	}
-
+	
 	@Override
 	public boolean isKeyword()
 	{
 		return false;
 	}
-
+	
 }

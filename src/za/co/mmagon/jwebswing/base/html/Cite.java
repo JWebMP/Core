@@ -45,9 +45,9 @@ public class Cite<J extends Cite<J>>
 		extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * The cite tag defines the title of a work (e.g. a book, a song, a movie, a TV show, a painting, a sculpture, etc.).
 	 */
@@ -55,7 +55,7 @@ public class Cite<J extends Cite<J>>
 	{
 		this(null);
 	}
-
+	
 	/**
 	 * The cite tag defines the title of a work (e.g. a book, a song, a movie, a TV show, a painting, a sculpture, etc.).
 	 *
@@ -66,5 +66,5 @@ public class Cite<J extends Cite<J>>
 		super(ComponentTypes.Cite);
 		setText(citeText);
 	}
-
+	
 }

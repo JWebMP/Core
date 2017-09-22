@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.base.servlets;
 
 import com.armineasy.injection.GuiceContext;
-import com.armineasy.injection.filters.CorsAllowedFilter;
 import com.google.inject.Singleton;
 import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.Page;
@@ -41,10 +40,10 @@ import java.util.logging.Logger;
 @Singleton
 public class JavaScriptServlet extends JWDefaultServlet
 {
-
+	
 	private static final Logger log = LogFactory.getInstance().getLogger("JavaScriptServlet");
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
 	 *
@@ -61,7 +60,7 @@ public class JavaScriptServlet extends JWDefaultServlet
 		response.setContentType("text/javascript");
 		Date startDate = new Date();
 		Page page = GuiceContext.inject().getInstance(Page.class);
-
+		
 		if (page == null)
 		{
 			throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
@@ -69,17 +68,17 @@ public class JavaScriptServlet extends JWDefaultServlet
 		FileTemplates.getFileTemplate(JavaScriptServlet.class, "JW_JAVASCRIPT", "javascriptScript");
 		FileTemplates.getTemplateVariables().put("//%%JW_JAVASCRIPT%%", page.renderJavascript());
 		StringBuilder scripts = FileTemplates.renderTemplateScripts("JW_JAVASCRIPT");
-
+		
 		Date endDate = new Date();
 		try (PrintWriter out = response.getWriter())
 		{
 			response.setContentType("application/javascript");
-
-			response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);
+			
+			response.setHeader("Access-Control-Allow-Origin", "*");
 			response.setHeader("Access-Control-Allow-Credentials", "true");
 			response.setHeader("Access-Control-Allow-Methods", "GET, POST");
 			response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
-
+			
 			out.println(scripts);
 			Date dataTransferDate = new Date();
 			log.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
@@ -88,7 +87,7 @@ public class JavaScriptServlet extends JWDefaultServlet
 					});
 		}
 	}
-
+	
 	/**
 	 * Handles the HTTP <code>GET</code> method.
 	 *
@@ -116,7 +115,7 @@ public class JavaScriptServlet extends JWDefaultServlet
 			Logger.getLogger(JavaScriptServlet.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-
+	
 	/**
 	 * Handles the HTTP <code>GET</code> method.
 	 *

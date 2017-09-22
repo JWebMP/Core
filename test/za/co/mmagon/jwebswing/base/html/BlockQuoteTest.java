@@ -28,6 +28,7 @@ public class BlockQuoteTest
 	
 	BlockQuote bq = new BlockQuote();
 	Paragraph p = new Paragraph("test");
+	
 	public BlockQuoteTest()
 	{
 	}

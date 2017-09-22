@@ -17,15 +17,12 @@
 package za.co.mmagon.jwebswing.base.servlets;
 
 import com.armineasy.injection.GuiceContext;
-import com.armineasy.injection.filters.CorsAllowedFilter;
 import com.google.inject.Singleton;
 import za.co.mmagon.jwebswing.Event;
-import za.co.mmagon.jwebswing.JWebSwingContext;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.annotations.AjaxCallInterception;
 import za.co.mmagon.jwebswing.annotations.SiteInterception;
 import za.co.mmagon.jwebswing.base.ComponentEventBase;
-import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ajax.*;
 import za.co.mmagon.jwebswing.base.ajax.exceptions.InvalidRequestException;
 import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
@@ -39,7 +36,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.*;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -52,21 +52,21 @@ import java.util.logging.Logger;
 @Singleton
 public class AjaxReceiverServlet extends JWDefaultServlet
 {
-
+	
 	private static final Logger log = LogFactory.getInstance().getLogger("AJAXServlet");
 	private static final long serialVersionUID = 1L;
-
+	
 	public AjaxReceiverServlet()
 	{
 	}
-
+	
 	@SiteInterception
 	@AjaxCallInterception
 	protected void intercept()
 	{
-
+	
 	}
-
+	
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
 	 *
@@ -84,7 +84,7 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 		String _eventType = "Servlet Accessed";
 		long renderTime = 1L;
 		long fireTime = 1L;
-
+		
 		try
 		{
 			AjaxCall ajaxCallIncoming = (AjaxCall) new JavaScriptPart().From(request.getInputStream(), AjaxCall.class);
@@ -95,63 +95,47 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 				log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Component ID Not Found]", request.getSession().getId());
 				throw new InvalidRequestException("There is no Component ID in this call.");
 			}
-
+			
 			String componentId = ajaxCall.getComponentId();
 			if (componentId == null || componentId.isEmpty())
 			{
 				log.log(Level.FINER, "[SessionID]-[{0}];[Security]-[Component ID Incorrect]", request.getSession().getId());
 				throw new InvalidRequestException("Component ID Was Incorrect.");
 			}
-
+			
 			Page page = GuiceContext.inject().getInstance(Page.class);
 			
 			if (page == null)
 			{
 				throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
 			}
-			ComponentHierarchyBase triggerComponent = null;
-			JWebSwingContext jwc = GuiceContext.getInstance(JWebSwingContext.class);
-			if (ajaxCall.getEventId() != null && !ajaxCall.getEventId().isEmpty())
+			
+			Event triggerEvent = null;
+			
+			try
 			{
-				String eventId = ajaxCall.getEventId();
-				List<Event> allEvents = jwc.getKnownEvents();
-				
-				for (Event allEvent : allEvents)
+				Class eventClass = Class.forName(ajaxCallIncoming.getClassName().replace('_', '.'));
+				triggerEvent = (Event) GuiceContext.getInstance(eventClass);
+			}
+			catch (ClassNotFoundException cnfe)
+			{
+				Set<Class<? extends Event>> events = GuiceContext.reflect().getSubTypesOf(Event.class);
+				for (Class<? extends Event> event : events)
 				{
-					if (allEvent.getID().equals(eventId))
+					if (Modifier.isAbstract(event.getModifiers()))
 					{
-						log.log(Level.FINER, "Found event by ID. No search for component necessary. Event ID [{0}], Component [{1}]", new Object[]
-								{
-										eventId, allEvent.getComponent().getID()
-								});
-						triggerComponent = allEvent.getComponent();
-						ajaxCall.setComponent(triggerComponent);
+						continue;
+					}
+					Event instance = GuiceContext.getInstance(event);
+					if (instance.getID().equals(ajaxCall.getEventId()))
+					{
+						triggerEvent = instance;
 						break;
 					}
 				}
 			}
-
-			if (triggerComponent == null)
-			{
-				log.log(Level.FINER, "Searching for event by component. Component [{0}]", componentId);
-				
-				List<ComponentHierarchyBase> comps = jwc.getKnownComponents();
-				for(ComponentHierarchyBase hb : comps)
-				{
-					if(hb.getID().equals(componentId))
-					{
-						triggerComponent = hb;
-						break;
-					}
-				}
-				ajaxCall.setComponent(triggerComponent);
-				if (triggerComponent == null)
-				{
-					log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Invalid Component Specified];[Component]-[" + componentId + "]", request.getSession().getId());
-					throw new MissingComponentException("Component could not be found to process any events.");
-				}
-			}
-
+			
+			
 			Date datetime = ajaxCall.getDatetime();
 			if (datetime == null)
 			{
@@ -165,48 +149,39 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 				throw new InvalidRequestException("Invalid Event Type");
 			}
 			_eventType = eventType.toString();
-
+			
 			EventTypes eventTypeFrom = ajaxCall.getEventTypeFrom();
 			if (eventTypeFrom == null)
 			{
 				log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Event From Incorrect]", request.getSession().getId());
 				throw new InvalidRequestException("Invalid Event Type From");
 			}
-
+			
 			AjaxEventValue value = ajaxCall.getValue();
-
+			
 			if (value == null)
 			{
 				log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Value Is Missing]", request.getSession().getId());
 				throw new InvalidRequestException("Invalid Event Value");
 			}
-
+			
 			Date ajaxCallObjectCreated = new Date();
-			ArrayList<ComponentEventBase> events = getEvents(ajaxCall, ajaxCall.getEventTypeFrom());
-
+			
 			AjaxResponse ajaxResponse = GuiceContext.inject().getInstance(AjaxResponse.class);
-
+			
 			if (!GuiceContext.isBuildingInjector())
 			{
 				intercept();
 			}
-
-			for (Iterator<ComponentEventBase> iterator = events.iterator(); iterator.hasNext(); )
-			{
-				Event event = (Event) iterator.next();
-				event.fireEvent(ajaxCall, ajaxResponse);
-			}
-
+			
+			triggerEvent.fireEvent(ajaxCall, ajaxResponse);
+			
 			fireTime = new Date().getTime() - ajaxCallObjectCreated.getTime();
 			startDate = new Date();
 			output = ajaxResponse.toString();
 			ajaxResponse.getComponents().forEach(component ->
 			                                     {
 				                                     component.preConfigure();
-				                                     for (Iterator it = component.getChildren().iterator(); it.hasNext(); )
-				                                     {
-					                                     ComponentHierarchyBase object = (ComponentHierarchyBase) it.next();
-				                                     }
 			                                     });
 			renderTime = new Date().getTime() - startDate.getTime();
 		}
@@ -273,12 +248,12 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 				Date dataTransferDate = new Date();
 				response.setContentType("application/json;charset=UTF-8");
 				response.setCharacterEncoding("UTF-8");
-
-				response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);
+				
+				response.setHeader("Access-Control-Allow-Origin", "*");
 				response.setHeader("Access-Control-Allow-Credentials", "true");
 				response.setHeader("Access-Control-Allow-Methods", "GET, POST");
 				response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
-
+				
 				out.write(output);
 				//LOG.log(Level.FINE,"[Ajax Reply]-[" + output + "]");
 				long transferTime = new Date().getTime() - dataTransferDate.getTime();
@@ -293,7 +268,7 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 			}
 		}
 	}
-
+	
 	/**
 	 * Handles the HTTP <code>POST</code> method.
 	 *
@@ -316,9 +291,9 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 		{
 			log.log(Level.SEVERE, "Error in post", e);
 		}
-
+		
 	}
-
+	
 	/**
 	 * This returns all the event associated with a call
 	 *

@@ -57,9 +57,9 @@ public class Button<C extends GlobalChildren, A extends Enum & AttributeDefiniti
 		extends Component<C, A, F, E, J>
 		implements GlobalChildren
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs a new button object with no text
 	 */
@@ -67,7 +67,7 @@ public class Button<C extends GlobalChildren, A extends Enum & AttributeDefiniti
 	{
 		this("");
 	}
-
+	
 	/**
 	 * Constructs a new button object with the given text
 	 * <p>

@@ -31,30 +31,32 @@ import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 public class ComponentStyleBaseTest
 		extends BaseTestClass
 {
-
+	
 	public ComponentStyleBaseTest()
 	{
 	}
-
+	
 	@Test
 	public void testCSS()
 	{
 		Page p = getPage();
 		Body b = p.getBody();
-
+		
 		b.getCss().getBackground().setBackgroundColor$(ColourNames.DarkGoldenRod);
 		b.add(new Comment("asdf"));
 		//System.out.println(p.toString(true));
 		p.getOptions().setDynamicRender(true);
-		JQueryPageConfigurator.setRequired(p.getBody(),false);
-		AngularPageConfigurator.setRequired(p.getBody(),false);
-
-		if(p.toString(true).startsWith("<!DOCTYPE html>\n" +
-				                               "<html>\n" +
-				                               "\t<head>\n" +
-				                               "\t\t<style type=\"text/css\">#body {background-color:darkgoldenrod;}</style>\n" +
-				                               "\t</head>\n" +
-				                               "\t<body id=\"body\" ng-app=\"jwApp\" ng-controller=\"jwController as jwCntrl\">"));
+		JQueryPageConfigurator.setRequired(p.getBody(), false);
+		AngularPageConfigurator.setRequired(p.getBody(), false);
+		
+		if (p.toString(true).startsWith("<!DOCTYPE html>\n" +
+				                                "<html>\n" +
+				                                "\t<head>\n" +
+				                                "\t\t<style type=\"text/css\">#body {background-color:darkgoldenrod;}</style>\n" +
+				                                "\t</head>\n" +
+				                                "\t<body id=\"body\" ng-app=\"jwApp\" ng-controller=\"jwController as jwCntrl\">"))
+		{
+		}
 		
 		
 		/*Assert.assertEquals("<!DOCTYPE html>\n"

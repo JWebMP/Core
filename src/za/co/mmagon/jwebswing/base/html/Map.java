@@ -52,9 +52,9 @@ public class Map<J extends Map<J>>
 		extends Component<MapChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements ImageMapChildren
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs a new Map for use with the Image Map Useless really without
 	 */
@@ -62,7 +62,7 @@ public class Map<J extends Map<J>>
 	{
 		super(ComponentTypes.Map);
 	}
-
+	
 	/**
 	 * Adds the absolute CSS Configuration, and sets the name to the ID of the Map
 	 */

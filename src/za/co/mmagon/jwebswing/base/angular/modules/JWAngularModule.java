@@ -79,8 +79,8 @@ public class JWAngularModule extends AngularModuleBase
 				}
 			}
 		}
-	    /*
-         * modules.stream().forEachOrdered(module -> { String name = module.getReferenceName(); if (name != null) { if (!moduleNames.contains(name)) { moduleNames.add(module.getReferenceName()); } }
+		/*
+	     * modules.stream().forEachOrdered(module -> { String name = module.getReferenceName(); if (name != null) { if (!moduleNames.contains(name)) { moduleNames.add(module.getReferenceName()); } }
         });
          */
 

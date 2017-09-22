@@ -24,11 +24,11 @@ import za.co.mmagon.BaseTestClass;
  */
 public class FeatureTest extends BaseTestClass
 {
-
+	
 	public FeatureTest()
 	{
 	}
-
+	
 	@Test
 	public void testFeature()
 	{
@@ -36,5 +36,5 @@ public class FeatureTest extends BaseTestClass
 		f.preConfigure();
 		System.out.println(f.toString());
 	}
-
+	
 }

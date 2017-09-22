@@ -63,7 +63,7 @@ public enum InputImageTypeAttributes implements AttributeDefinitions
 	 * Sets or returns the disabled attribute of an image attribute
 	 */
 	Disabled,;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

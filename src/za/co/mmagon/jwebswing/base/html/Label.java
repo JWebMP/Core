@@ -52,7 +52,7 @@ public class Label<J extends Label<J>>
 		extends Component<GlobalChildren, LabelAttributes, GlobalFeatures, GlobalEvents, J>
 		implements ParagraphChildren, NoNewLineBeforeChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag
 {
-
+	
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The component this is for
@@ -62,7 +62,7 @@ public class Label<J extends Label<J>>
 	 * The form this label is for
 	 */
 	private Form forFormComponent;
-
+	
 	/**
 	 * Constructs a new label
 	 */
@@ -70,7 +70,7 @@ public class Label<J extends Label<J>>
 	{
 		this(null);
 	}
-
+	
 	/**
 	 * Constructs a new label with the attribute set
 	 * <p>
@@ -83,7 +83,7 @@ public class Label<J extends Label<J>>
 		super(ComponentTypes.Label);
 		setLabel(label);
 	}
-
+	
 	/**
 	 * Constructs a new label with the attribute set and the component specified
 	 * <p>
@@ -99,7 +99,7 @@ public class Label<J extends Label<J>>
 		setLabel(label);
 		addAttribute(LabelAttributes.For, label);
 	}
-
+	
 	/**
 	 * Gets the text of this label
 	 * <p>
@@ -110,7 +110,7 @@ public class Label<J extends Label<J>>
 	{
 		return getText(0).toString();
 	}
-
+	
 	/**
 	 * Sets the text of this label
 	 * <p>
@@ -121,7 +121,7 @@ public class Label<J extends Label<J>>
 	{
 		setText(label);
 	}
-
+	
 	/**
 	 * Returns the input type for which this is the component for
 	 * <p>
@@ -132,7 +132,7 @@ public class Label<J extends Label<J>>
 	{
 		return forInputComponent;
 	}
-
+	
 	/**
 	 * Sets the for component with the given ID
 	 * <p>
@@ -147,7 +147,7 @@ public class Label<J extends Label<J>>
 			addAttribute(LabelAttributes.For, forInputComponent.getID());
 		}
 	}
-
+	
 	/**
 	 * Returns the form component that the label is attached to
 	 * <p>
@@ -158,7 +158,7 @@ public class Label<J extends Label<J>>
 	{
 		return forFormComponent;
 	}
-
+	
 	/**
 	 * Sets the form for which the label is for
 	 * <p>
@@ -173,5 +173,5 @@ public class Label<J extends Label<J>>
 			addAttribute(LabelAttributes.Form, forInputComponent.getID());
 		}
 	}
-
+	
 }

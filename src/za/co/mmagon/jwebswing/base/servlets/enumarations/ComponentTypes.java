@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum ComponentTypes
 {
-
+	
 	/**
 	 * Defines a document type
 	 */
@@ -534,20 +534,20 @@ public enum ComponentTypes
 	 * Formats a component as a CSS Class Name Reference Only
 	 */
 	CSSClass("meh"),;
-
+	
 	private String componentTag;
 	private Class classType;
 	private Object instance;
-
-	private ComponentTypes()
+	
+	ComponentTypes()
 	{
 	}
-
-	private ComponentTypes(String componentTag)
+	
+	ComponentTypes(String componentTag)
 	{
 		this.componentTag = componentTag;
 	}
-
+	
 	/**
 	 * Returns an array of all the values
 	 *
@@ -557,7 +557,7 @@ public enum ComponentTypes
 	{
 		return values();
 	}
-
+	
 	/**
 	 * Returns the component tag
 	 *
@@ -567,7 +567,7 @@ public enum ComponentTypes
 	{
 		return componentTag;
 	}
-
+	
 	/**
 	 * Descriptive string of the reference
 	 *

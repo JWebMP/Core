@@ -27,9 +27,9 @@ import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
  */
 public class SlideDirective extends AngularDirectiveBase
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs a new right click directive based on the angular object passed in
 	 * <p>
@@ -39,7 +39,7 @@ public class SlideDirective extends AngularDirectiveBase
 	{
 		super("ngSlide");
 	}
-
+	
 	/**
 	 * Renders the right click directive from the JavaScript file
 	 *
@@ -50,5 +50,5 @@ public class SlideDirective extends AngularDirectiveBase
 	{
 		return FileTemplates.getFileTemplate(SlideDirective.class, "Slide").toString();
 	}
-
+	
 }

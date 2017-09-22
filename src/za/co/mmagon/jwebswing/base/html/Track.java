@@ -34,9 +34,9 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 public class Track<J extends Track<J>>
 		extends Component<NoChildren, TrackAttributes, NoFeatures, NoEvents, J>
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs a new track
 	 */

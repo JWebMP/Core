@@ -57,9 +57,9 @@ public class Style<J extends Style<J>>
 		extends ComponentHierarchyBase<NoChildren, StyleAttributes, NoFeatures, NoEvents, J>
 		implements NoIDTag, HeadChildren, NoClassAttribute
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs a new blank Style tag
 	 */
@@ -68,7 +68,7 @@ public class Style<J extends Style<J>>
 		super(ComponentTypes.Style);
 		addAttribute(StyleAttributes.Type, "text/css");
 	}
-
+	
 	/**
 	 * Returns the raw CSS Data
 	 * <p>
@@ -79,7 +79,7 @@ public class Style<J extends Style<J>>
 	{
 		return getText(0).toString();
 	}
-
+	
 	/**
 	 * Sets the raw CSS Data
 	 * <p>
@@ -90,5 +90,5 @@ public class Style<J extends Style<J>>
 	{
 		setText(cssString);
 	}
-
+	
 }

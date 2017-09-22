@@ -55,7 +55,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 	 * Version 2
 	 */
 	private static final long serialVersionUID = 2L;
-
+	
 	@JsonProperty(value = "$jwid")
 	private String referenceId;
 	

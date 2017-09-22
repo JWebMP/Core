@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.base.servlets;
 
 import com.armineasy.injection.GuiceContext;
-import com.armineasy.injection.filters.CorsAllowedFilter;
 import com.google.inject.Singleton;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.logger.LogFactory;
@@ -37,10 +36,10 @@ import java.util.logging.Logger;
 @Singleton
 public class AngularDataVariables extends JWDefaultServlet
 {
-
+	
 	private static final Logger LOG = LogFactory.getInstance().getLogger("AngularServlet");
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
 	 *
@@ -54,7 +53,7 @@ public class AngularDataVariables extends JWDefaultServlet
 			throws ServletException, IOException
 	{
 		Page page = GuiceContext.inject().getInstance(Page.class);
-
+		
 		Date startDate = new Date();
 		//StringBuilder compiled = page.getAngular().compileTemplate(AngularFeature.class, "jwangular");
 		//page.getAngular().configureTemplateVariables();
@@ -64,12 +63,12 @@ public class AngularDataVariables extends JWDefaultServlet
 		{
 			response.setContentType("application/javascript;charset=UTF-8");
 			response.setCharacterEncoding("UTF-8");
-
-			response.setHeader("Access-Control-Allow-Origin", CorsAllowedFilter.allowedLocations);
+			
+			response.setHeader("Access-Control-Allow-Origin", "*");
 			response.setHeader("Access-Control-Allow-Credentials", "true");
 			response.setHeader("Access-Control-Allow-Methods", "POST");
 			response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
-
+			
 			out.write(output.toString());
 			Date dataTransferDate = new Date();
 			LOG.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
@@ -78,7 +77,7 @@ public class AngularDataVariables extends JWDefaultServlet
 					});
 		}
 	}
-
+	
 	/**
 	 * Post handler
 	 *

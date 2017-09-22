@@ -23,15 +23,15 @@ import org.junit.Test;
  */
 public class ComponentHTMLAngularBaseTest
 {
-
+	
 	public ComponentHTMLAngularBaseTest()
 	{
 	}
-
+	
 	@Test
 	public void testAngularFields()
 	{
-
+	
 	}
-
+	
 }

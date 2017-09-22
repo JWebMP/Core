@@ -40,7 +40,7 @@ import java.util.logging.Level;
 public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
 		implements ParagraphEvents, BodyEvents, GlobalEvents
 {
-
+	
 	/**
 	 * Logger for the Component
 	 */
@@ -48,7 +48,12 @@ public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
 			url = "https://www.armineasy.com/JWebSwing", wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
 	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("ClickEvent");
 	private static final long serialVersionUID = 1L;
-
+	
+	protected ClickAdapter()
+	{
+		super("ClickAdapter", EventTypes.click);
+	}
+	
 	/**
 	 * Performs a click
 	 *
@@ -58,21 +63,24 @@ public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
 	{
 		super(EventTypes.click, component);
 	}
-
+	
 	@Override
 	public void preConfigure()
 	{
 		if (!isConfigured())
 		{
-			getComponent().addAttribute(AngularAttributes.ngClick, "jwCntrl.jw.isLoading || jwCntrl.perform($event," + renderVariables() + ");");
-			if (getComponent().getAttribute(AngularAttributes.ngDisabled) == null)
+			if (getComponent() != null)
 			{
-				getComponent().addAttribute(AngularAttributes.ngDisabled, "jwCntrl.jw.isLoading");
+				getComponent().addAttribute(AngularAttributes.ngClick, "jwCntrl.jw.isLoading || jwCntrl.perform($event," + renderVariables() + ");");
+				if (getComponent().getAttribute(AngularAttributes.ngDisabled) == null)
+				{
+					getComponent().addAttribute(AngularAttributes.ngDisabled, "jwCntrl.jw.isLoading");
+				}
 			}
 		}
 		super.preConfigure();
 	}
-
+	
 	/**
 	 * Triggers on Click
 	 * <p>
@@ -81,7 +89,7 @@ public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
 	 * @param response The physical Ajax Receiver
 	 */
 	public abstract void onClick(AjaxCall call, AjaxResponse response) throws InvalidAttributeValueException;
-
+	
 	@Override
 	public void fireEvent(AjaxCall call, AjaxResponse response)
 	{
@@ -94,5 +102,5 @@ public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
 			log.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
-
+	
 }

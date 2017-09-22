@@ -25,7 +25,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum VideoAttributes implements AttributeDefinitions
 {
-
+	
 	/**
 	 * Specifies that the video will start playing as soon as it is ready
 	 */
@@ -66,7 +66,7 @@ public enum VideoAttributes implements AttributeDefinitions
 	 * The specific volume
 	 */
 	Volume;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

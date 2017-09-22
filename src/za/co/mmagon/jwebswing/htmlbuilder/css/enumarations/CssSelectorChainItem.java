@@ -27,7 +27,7 @@ public enum CssSelectorChainItem
 	 * [attribute|=value] [lang|=en] Selects all elements with a lang attribute value starting with "en"
 	 */
 	AttributeStartsWith(2.0, "|=", CSSTypePosition.Middle),;
-
+	
 	/**
 	 * Where to place the position
 	 */
@@ -40,14 +40,14 @@ public enum CssSelectorChainItem
 	 * The name to represent
 	 */
 	private String cssName;
-
-	private CssSelectorChainItem(double cssVersion, String cssName, CSSTypePosition cssPosition)
+	
+	CssSelectorChainItem(double cssVersion, String cssName, CSSTypePosition cssPosition)
 	{
 		this.cssVersion = cssVersion;
 		this.cssName = cssName;
 		this.cssPosition = cssPosition;
 	}
-
+	
 	/**
 	 * Returns the capable CSS Version
 	 *
@@ -57,7 +57,7 @@ public enum CssSelectorChainItem
 	{
 		return cssVersion;
 	}
-
+	
 	/**
 	 * Sets the capable CSS Version
 	 *
@@ -67,7 +67,7 @@ public enum CssSelectorChainItem
 	{
 		this.cssVersion = cssVersion;
 	}
-
+	
 	/**
 	 * Returns the CSS Name of this type
 	 *
@@ -77,7 +77,7 @@ public enum CssSelectorChainItem
 	{
 		return cssName;
 	}
-
+	
 	/**
 	 * Returns the CSS Name of this type
 	 *
@@ -87,7 +87,7 @@ public enum CssSelectorChainItem
 	{
 		this.cssName = cssName;
 	}
-
+	
 	/**
 	 * Returns where this CSS name type is placed
 	 *

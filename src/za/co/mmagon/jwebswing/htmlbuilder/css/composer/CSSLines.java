@@ -15,7 +15,7 @@ import java.util.Iterator;
  */
 public class CSSLines implements Serializable
 {
-
+	
 	private static boolean tinyHTML;
 	private ArrayList<CSSLine> cssLines;
 	private boolean renderInQuotations;
@@ -23,7 +23,7 @@ public class CSSLines implements Serializable
 	private boolean prettyPrint;
 	private boolean renderInLine;
 	private boolean renderSemiColons;
-
+	
 	/**
 	 * A New CSS Lines Holder, setting Braces on, Quotations off, pretty print as true
 	 */
@@ -31,7 +31,7 @@ public class CSSLines implements Serializable
 	{
 		this(new ArrayList<CSSLine>());
 	}
-
+	
 	/**
 	 * A New CSS Lines Holder, setting Braces on, Quotations off, pretty print as true
 	 *
@@ -41,7 +41,7 @@ public class CSSLines implements Serializable
 	{
 		this(cssLines, false);
 	}
-
+	
 	/**
 	 * A New CSS Lines Holder, setting Braces on, Quotations Set, pretty print as true
 	 *
@@ -52,7 +52,7 @@ public class CSSLines implements Serializable
 	{
 		this(cssLines, renderInQuotations, false);
 	}
-
+	
 	/**
 	 * A New CSS Lines Holder, setting Braces Set, Quotations Set, pretty print as true
 	 *
@@ -64,7 +64,7 @@ public class CSSLines implements Serializable
 	{
 		this(cssLines, renderInQuotations, renderBraces, true, false);
 	}
-
+	
 	/**
 	 * A New CSS Lines Holder, setting Braces Set, Quotations Set, and pretty print Set
 	 *
@@ -80,9 +80,9 @@ public class CSSLines implements Serializable
 		this.renderInQuotations = renderInQuotations;
 		this.renderBraces = renderBraces;
 		this.prettyPrint = prettyPrint;
-		this.tinyHTML = tinyHtml;
+		tinyHTML = tinyHtml;
 	}
-
+	
 	/**
 	 * A New CSS Lines Holder, setting Braces Set, Quotations Set, and pretty print Set
 	 *
@@ -94,7 +94,7 @@ public class CSSLines implements Serializable
 	{
 		this(new ArrayList<CSSLine>(), renderInQuotations, renderBraces, prettyPrint, false);
 	}
-
+	
 	/**
 	 * Get all CSSLines
 	 *
@@ -108,7 +108,7 @@ public class CSSLines implements Serializable
 		}
 		return cssLines;
 	}
-
+	
 	/**
 	 * Reset this lines object with a new CSSLine
 	 *
@@ -118,7 +118,7 @@ public class CSSLines implements Serializable
 	{
 		this.cssLines = cssLines;
 	}
-
+	
 	/**
 	 * @return Whether or not to enclose property and value in quotations '
 	 */
@@ -126,7 +126,7 @@ public class CSSLines implements Serializable
 	{
 		return renderInQuotations;
 	}
-
+	
 	/**
 	 * Sets Whether or not to enclose property and value in quotations '
 	 *
@@ -136,7 +136,7 @@ public class CSSLines implements Serializable
 	{
 		this.renderInQuotations = renderInQuotations;
 	}
-
+	
 	/**
 	 * Whether or not it must render opening and or closing braces {}
 	 *
@@ -146,7 +146,7 @@ public class CSSLines implements Serializable
 	{
 		return renderBraces;
 	}
-
+	
 	/**
 	 * Sets Whether or not it must render opening and or closing braces {}
 	 *
@@ -156,7 +156,7 @@ public class CSSLines implements Serializable
 	{
 		this.renderBraces = renderBraces;
 	}
-
+	
 	/**
 	 * Whether or not it must render new lines
 	 *
@@ -166,7 +166,7 @@ public class CSSLines implements Serializable
 	{
 		return prettyPrint;
 	}
-
+	
 	/**
 	 * Sets Whether or not it must render new lines
 	 *
@@ -176,7 +176,7 @@ public class CSSLines implements Serializable
 	{
 		this.prettyPrint = prettyPrint;
 	}
-
+	
 	/**
 	 * Returns whether or not should render in semi colons
 	 *
@@ -186,7 +186,7 @@ public class CSSLines implements Serializable
 	{
 		return renderSemiColons;
 	}
-
+	
 	/**
 	 * Sets whether or not to render in semi colons
 	 *
@@ -196,7 +196,7 @@ public class CSSLines implements Serializable
 	{
 		this.renderSemiColons = renderSemiColons;
 	}
-
+	
 	/**
 	 * Returns this lines CSS object with 0 tabs
 	 *
@@ -207,7 +207,7 @@ public class CSSLines implements Serializable
 	{
 		return toString(0, false);
 	}
-
+	
 	/**
 	 * Returns this lines object at the tab count indentation
 	 *
@@ -222,7 +222,7 @@ public class CSSLines implements Serializable
 		StringBuilder tabs = TextUtilities.getTabString(tabCount);
 		//String cssTabs = Component.tinyHtml ? "" : TextUtilities.getTabString(tinyHTML,tabCount + 1);
 		StringBuilder cssTabsLess = TextUtilities.getTabString(tabCount - 1);
-
+		
 		if (isRenderBraces())
 		{
 			if (isPrettyPrint())
@@ -235,7 +235,7 @@ public class CSSLines implements Serializable
 				sb.append("\n");
 			}
 		}
-
+		
 		for (Iterator<CSSLine> it = getCssLines().iterator(); it.hasNext(); )
 		{
 			CSSLine cSSLine = it.next();
@@ -260,7 +260,7 @@ public class CSSLines implements Serializable
 		}
 		return sb.toString();
 	}
-
+	
 	/**
 	 * Checks if this lines object is equal to another
 	 *
@@ -272,21 +272,14 @@ public class CSSLines implements Serializable
 		if (o instanceof CSSLines)
 		{
 			CSSLines lines = (CSSLines) o;
-			if (!lines.toString().equals(toString()))
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			return !lines.toString().equals(toString());
 		}
 		else
 		{
 			return false;
 		}
 	}
-
+	
 	/**
 	 * A custom hash code
 	 *

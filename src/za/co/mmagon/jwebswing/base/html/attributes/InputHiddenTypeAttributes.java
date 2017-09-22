@@ -55,11 +55,11 @@ public enum InputHiddenTypeAttributes implements AttributeDefinitions
 	 * Sets or returns the default value of the hidden input field
 	 */
 	DefaultValue,;
-
+	
 	/**
 	 *
 	 */
-
+	
 	@Override
 	public boolean isKeyword()
 	{

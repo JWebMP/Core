@@ -23,12 +23,12 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum AbbreviationAttributes implements AttributeDefinitions
 {
-
+	
 	/**
 	 * Defines the title of the abbreviation
 	 */
 	Title;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.base.servlets;
 
-import za.co.mmagon.jwebswing.components.modernizr.ModernizrDto;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 import java.util.HashMap;
@@ -28,9 +27,9 @@ import java.util.Map;
  */
 class AngularDataServletInitData extends JavaScriptPart
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * The local storage map to be set for the provider
 	 */
@@ -40,14 +39,10 @@ class AngularDataServletInitData extends JavaScriptPart
 	 */
 	private Map<String, String> sessionStorage;
 	/**
-	 * The modernizr dto
-	 */
-	private ModernizrDto modernizr;
-	/**
 	 * The parameters for the initialized data
 	 */
-	private Map<String,String> parameters;
-
+	private Map<String, String> parameters;
+	
 	/*
 	 * Constructs a new AngularDataServletInitData
 	 */
@@ -55,41 +50,33 @@ class AngularDataServletInitData extends JavaScriptPart
 	{
 		//Nothing needed
 	}
-
+	
 	public Map<String, String> getLocalStorage()
 	{
 		return localStorage;
 	}
-
+	
 	public void setLocalStorage(Map<String, String> localStorage)
 	{
 		this.localStorage = localStorage;
 	}
-
+	
 	public Map<String, String> getSessionStorage()
 	{
 		return sessionStorage;
 	}
-
+	
 	public void setSessionStorage(Map<String, String> sessionStorage)
 	{
 		this.sessionStorage = sessionStorage;
 	}
-
-	public ModernizrDto getModernizr()
-	{
-		return modernizr;
-	}
-
-	public void setModernizr(ModernizrDto modernizr)
-	{
-		this.modernizr = modernizr;
-	}
 	
 	public Map<String, String> getParameters()
 	{
-		if(parameters == null)
+		if (parameters == null)
+		{
 			parameters = new HashMap<>();
+		}
 		return parameters;
 	}
 	

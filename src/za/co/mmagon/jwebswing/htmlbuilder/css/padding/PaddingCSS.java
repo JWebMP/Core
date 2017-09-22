@@ -39,68 +39,68 @@ import java.lang.annotation.*;
 @CSSAnnotationType
 public @interface PaddingCSS
 {
-
+	
 	/**
 	 * Shorthand format for padding
 	 *
 	 * @return
 	 */
-	public Padding Padding() default @Padding;
-
+	Padding Padding() default @Padding;
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
 	 * @return
 	 */
-	public MeasurementCSS PaddingRight() default @MeasurementCSS;
-
+	MeasurementCSS PaddingRight() default @MeasurementCSS;
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
 	 * @return
 	 */
-	public PaddingSetting PaddingRight$() default PaddingSetting.Unset;
-
+	PaddingSetting PaddingRight$() default PaddingSetting.Unset;
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
 	 * @return
 	 */
-	public MeasurementCSS PaddingLeft() default @MeasurementCSS;
-
+	MeasurementCSS PaddingLeft() default @MeasurementCSS;
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
 	 * @return
 	 */
-	public PaddingSetting PaddingLeft$() default PaddingSetting.Unset;
-
+	PaddingSetting PaddingLeft$() default PaddingSetting.Unset;
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
 	 * @return
 	 */
-	public MeasurementCSS PaddingTop() default @MeasurementCSS;
-
+	MeasurementCSS PaddingTop() default @MeasurementCSS;
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
 	 * @return
 	 */
-	public PaddingSetting PaddingTop$() default PaddingSetting.Unset;
-
+	PaddingSetting PaddingTop$() default PaddingSetting.Unset;
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
 	 * @return
 	 */
-	public MeasurementCSS PaddingBottom() default @MeasurementCSS;
-
+	MeasurementCSS PaddingBottom() default @MeasurementCSS;
+	
 	/**
 	 * The CSS margin properties set the size of the white space OUTSIDE the border.
 	 *
 	 * @return
 	 */
-	public PaddingSetting PaddingBottom$() default PaddingSetting.Unset;
-
+	PaddingSetting PaddingBottom$() default PaddingSetting.Unset;
+	
 }

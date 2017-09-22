@@ -50,7 +50,7 @@ package za.co.mmagon.jwebswing.base.client;
  */
 public enum InternetExplorerCompatibilityMode
 {
-
+	
 	/**
 	 * Quirks mode
 	 */
@@ -109,20 +109,20 @@ public enum InternetExplorerCompatibilityMode
 	 * The highest supported document mode of the browser
 	 */
 	Edge("IE=Edge");
-
+	
 	private final String valueString;
-
+	
 	/**
 	 * The constructor accepting the values for the X-UA-Compatible value.
 	 * <p>
 	 *
 	 * @param valueString
 	 */
-	private InternetExplorerCompatibilityMode(String valueString)
+	InternetExplorerCompatibilityMode(String valueString)
 	{
 		this.valueString = valueString;
 	}
-
+	
 	/**
 	 * The value that must be inside the compatible set
 	 * <p>

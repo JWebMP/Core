@@ -16,12 +16,9 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import com.armineasy.injection.GuiceContext;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import za.co.mmagon.jwebswing.Event;
-import za.co.mmagon.jwebswing.JWebSwingContext;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.interfaces.IComponentEventBase;
@@ -39,12 +36,9 @@ import java.util.logging.Level;
 /**
  * Enables Events in the Component Tree Hierarchy
  *
- * @param <F>
- * 		The Features TYpe
- * @param <E>
- * 		The Events Type
- * @param <J>
- * 		This Type
+ * @param <F> The Features TYpe
+ * @param <E> The Events Type
+ * @param <J> This Type
  *
  * @author GedMarc
  * @version 2.0
@@ -95,10 +89,8 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	/**
 	 * Constructs a new event type for component type
 	 *
-	 * @param eventType
-	 * 		The Event Type being applied
-	 * @param componentType
-	 * 		The component type of this component
+	 * @param eventType     The Event Type being applied
+	 * @param componentType The component type of this component
 	 */
 	public ComponentEventBase(EventTypes eventType, ComponentTypes componentType)
 	{
@@ -113,7 +105,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	 */
 	public IComponentEventBase asEventBase()
 	{
-		return (ComponentEventBase) this;
+		return this;
 	}
 	
 	/**
@@ -146,8 +138,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	 * Adds an event to this object
 	 * <p>
 	 *
-	 * @param event
-	 * 		The Event to add
+	 * @param event The Event to add
 	 */
 	@Override
 	public J addEvent(E event)
@@ -167,12 +158,11 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	 * Events are types of feature that have server side support. These are referenced using the Ajax Receiver.
 	 * <p>
 	 *
-	 * @param event
-	 * 		The event to be removed
-	 * 		<p>
+	 * @param event The event to be removed
+	 *              <p>
 	 *
 	 * @return currently false
-	 * 		<p>
+	 * <p>
 	 */
 	@Override
 	public J removeEvent(E event)
@@ -198,11 +188,6 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 			                    {
 				                    ComponentEventBase.class.cast(event).preConfigure();
 				                    assignFunctionsToComponent();
-				                    JWebSwingContext jws = GuiceContext.getInstance(JWebSwingContext.class);
-				                    if (!jws.getKnownEvents().contains(event))
-				                    {
-					                    jws.getKnownEvents().add((Event) event);
-				                    }
 			                    });
 		}
 		super.preConfigure();
@@ -346,7 +331,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 			ComponentEventBase next = (ComponentEventBase) iterator.next();
 			next.setTiny(tiny);
 		}
-		return (J) super.setTiny(tiny);
+		return super.setTiny(tiny);
 	}
 	
 	/**
@@ -363,6 +348,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 		return (J) this;
 	}
 	
+	
 	/**
 	 * Clones the component and all its events
 	 *
@@ -371,7 +357,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	@Override
 	public J cloneComponent()
 	{
-		ComponentEventBase cloned = (ComponentEventBase) super.cloneComponent();
+		ComponentEventBase cloned = super.cloneComponent();
 		cloned.events = new ArrayList();
 		cloned.events.addAll(getEvents());
 		return (J) cloned;

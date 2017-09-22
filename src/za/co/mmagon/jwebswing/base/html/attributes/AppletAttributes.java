@@ -63,17 +63,17 @@ public enum AppletAttributes implements AttributeDefinitions
 	 * Specifies the width of an applet
 	 */
 	Width;
-
+	
 	@Override
 	public boolean isKeyword()
 	{
 		return false;
 	}
-
+	
 	@Override
 	public String toString()
 	{
 		return super.toString().toLowerCase();
 	}
-
+	
 }

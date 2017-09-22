@@ -39,7 +39,7 @@ public interface IPage
 	 * @return
 	 */
 	Page addAngularVariable(String variableName);
-
+	
 	/**
 	 * Returns the angular object
 	 *

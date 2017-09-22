@@ -23,11 +23,11 @@ import org.junit.Test;
  */
 public class RegularExpressionsTest
 {
-
+	
 	public RegularExpressionsTest()
 	{
 	}
-
+	
 	@Test
 	public void testSomeMethod()
 	{
@@ -35,5 +35,5 @@ public class RegularExpressionsTest
 		re.addExpression("TextField", "asdf");
 		System.out.println(re.toString());
 	}
-
+	
 }

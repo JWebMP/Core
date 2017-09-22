@@ -58,9 +58,9 @@ public class Code<J extends Code<J>>
 		extends Component<NoChildren, CodeAttributes, GlobalFeatures, GlobalEvents, J>
 		implements PhraseChildren
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs a new Code Objects
 	 */

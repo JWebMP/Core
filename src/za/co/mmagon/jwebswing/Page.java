@@ -35,7 +35,6 @@ import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.ScriptAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
@@ -67,8 +66,8 @@ import java.util.logging.Logger;
  *
  * @author GedMarc
  * @version 2.0
- * 		<p>
- * 		Replacement of the old page object
+ * <p>
+ * Replacement of the old page object
  * @since 24 Apr 2016
  */
 @PageConfiguration
@@ -102,16 +101,13 @@ public class Page extends Html implements IPage
 	 * If this page has already gone through initialization
 	 */
 	private boolean pageInitialized;
-
+	
 	/**
 	 * Populates all my components. Excludes this page
 	 *
-	 * @param title
-	 * 		Sets the title of the page
-	 * @param compatibilityMode
-	 * 		Sets the Internet explorer mode to work on
-	 * @param base
-	 * 		Sets the base tag for the page. Convenience Parameter
+	 * @param title             Sets the title of the page
+	 * @param compatibilityMode Sets the Internet explorer mode to work on
+	 * @param base              Sets the base tag for the page. Convenience Parameter
 	 */
 	public Page(Title title, InternetExplorerCompatibilityMode compatibilityMode, Base base)
 	{
@@ -127,10 +123,8 @@ public class Page extends Html implements IPage
 	}
 	
 	/**
-	 * @param title
-	 * 		Sets the title of the page
-	 * @param compatibilityMode
-	 * 		Sets the Internet explorer mode to work on
+	 * @param title             Sets the title of the page
+	 * @param compatibilityMode Sets the Internet explorer mode to work on
 	 */
 	public Page(Title title, InternetExplorerCompatibilityMode compatibilityMode)
 	{
@@ -138,8 +132,7 @@ public class Page extends Html implements IPage
 	}
 	
 	/**
-	 * @param title
-	 * 		Sets the title of the page
+	 * @param title Sets the title of the page
 	 */
 	public Page(Title title)
 	{
@@ -147,8 +140,7 @@ public class Page extends Html implements IPage
 	}
 	
 	/**
-	 * @param title
-	 * 		Sets the title of the page
+	 * @param title Sets the title of the page
 	 */
 	public Page(String title)
 	{
@@ -305,8 +297,7 @@ public class Page extends Html implements IPage
 	/**
 	 * Returns the cached component
 	 *
-	 * @param componentID
-	 * 		The component to look for
+	 * @param componentID The component to look for
 	 *
 	 * @return
 	 */
@@ -328,24 +319,11 @@ public class Page extends Html implements IPage
 	{
 		if (!pageInitialized)
 		{
-			getBody().preConfigure();
+			getBody().init();
 			pageInitialized = true;
 			for (Object chb : getBody().getChildrenHierarchy())
 			{
 				ComponentHierarchyBase<NoChildren, NoAttributes, NoFeatures, NoEvents, ? extends ComponentHierarchyBase> ch = (ComponentHierarchyBase) chb;
-				if (!ch.getEvents().isEmpty())
-				{
-					JWebSwingContext jws = GuiceContext.getInstance(JWebSwingContext.class);
-					for (Object ev : ch.getEvents())
-					{
-						Event event = (Event) ev;
-						if (!jws.getKnownEvents().contains(event))
-						{
-							jws.getKnownEvents().add(event);
-						}
-					}
-					jws.getKnownComponents().add(ch);
-				}
 			}
 		}
 		
@@ -354,7 +332,7 @@ public class Page extends Html implements IPage
 			log.log(Level.FINE, "Looking for plugins....");
 			Set<Class<? extends PageConfigurator>> configs = GuiceContext.reflect().getSubTypesOf(PageConfigurator.class);
 			List<PageConfigurator> configInstances = new ArrayList<>();
-			for(Class<? extends PageConfigurator> pc : configs)
+			for (Class<? extends PageConfigurator> pc : configs)
 			{
 				PageConfigurator config = GuiceContext.getInstance(pc);
 				configInstances.add(config);
@@ -395,6 +373,7 @@ public class Page extends Html implements IPage
 					RenderBeforeDynamicScripts s = GuiceContext.getInstance(renderBeforeScript);
 					renderB.add(s);
 				}
+				
 				Collections.sort(renderB, (RenderBeforeDynamicScripts o1, RenderBeforeDynamicScripts o2) -> ((Integer) o1.sortOrder()).compareTo(o2.sortOrder()));
 				Paragraph before = new Paragraph().setTextOnly(true);
 				renderB.forEach(render ->
@@ -428,7 +407,13 @@ public class Page extends Html implements IPage
 			if (!getOptions().isScriptsInHead())
 			{
 				List<Script> allScripts = getDynamicScripts();
-				allScripts.stream().filter(script -> (script != null)).forEach(getBody()::add);
+				for (Script script : allScripts)
+				{
+					if (script != null)
+					{
+						allScripts.forEach(getBody()::add);
+					}
+				}
 			}
 			
 			if (!getTopShelfScripts().isEmpty())
@@ -460,7 +445,7 @@ public class Page extends Html implements IPage
 			//Top SHelf Scripts
 			getTopShelfScripts().forEach(next ->
 			                             {
-				                             getHead().add((HeadChildren) next);
+				                             getHead().add(next);
 			                             });
 			//After
 			Set<Class<? extends RenderAfterLinks>> renderAfterScripts = GuiceContext.reflect().getSubTypesOf(RenderAfterLinks.class);
@@ -484,11 +469,11 @@ public class Page extends Html implements IPage
 			for (RequirementsPriority priority : RequirementsPriority.values())
 			{
 				getPriorityRequirements(priority, requirements, true, false).forEach((comp) ->
-				                                                                              {
-					                                                                              getHead().getChildren().add(comp);
-				                                                                              });
+				                                                                     {
+					                                                                     getHead().getChildren().add(comp);
+				                                                                     });
 			}
-			getHead().add((HeadChildren) getCssStyle());
+			getHead().add(getCssStyle());
 		}
 		super.preConfigure();
 	}
@@ -732,33 +717,41 @@ public class Page extends Html implements IPage
 	/**
 	 * Adds all the stuff for a given priority
 	 *
-	 * @param css
-	 * 		CSS
-	 * @param input
-	 * 		the hierarchy to read from
-	 * @param priority
-	 * 		the priority
-	 * @param javascript
-	 * 		to return JavaScript or not
+	 * @param css        CSS
+	 * @param input      the hierarchy to read from
+	 * @param priority   the priority
+	 * @param javascript to return JavaScript or not
 	 */
 	private List<ComponentHierarchyBase> getPriorityRequirements(RequirementsPriority priority, List<ComponentHierarchyBase> input, boolean css, boolean javascript)
 	{
 		List<ComponentHierarchyBase> requirements = new CopyOnWriteArrayList<>();
 		if (css)
 		{
-			getAllCssLinks(priority).stream().filter(cssLink -> (!input.contains(cssLink) && !requirements.contains(cssLink))).forEach(cssLink
-					                                                                                                                           ->
-			                                                                                                                           {
-				                                                                                                                           requirements.add(cssLink);
-			                                                                                                                           });
+			List<CSSLink> links = getAllCssLinks(priority);
+			for (CSSLink link : links)
+			{
+				if (!input.contains(link))
+				{
+					if (!requirements.contains(link))
+					{
+						requirements.add(link);
+					}
+				}
+			}
 		}
 		if (javascript)
 		{
-			getAllScripts(priority).stream().filter(script -> (!input.contains(script) && !requirements.contains(script))).forEach(script
-					                                                                                                                       ->
-			                                                                                                                       {
-				                                                                                                                       requirements.add(script);
-			                                                                                                                       });
+			List<Script> scripts = getAllScripts(priority);
+			for (Script script : scripts)
+			{
+				if (!input.contains(script))
+				{
+					if (!requirements.contains(script))
+					{
+						requirements.add(script);
+					}
+				}
+			}
 		}
 		
 		return requirements;
@@ -776,7 +769,15 @@ public class Page extends Html implements IPage
 		List<CSSReference> allReferences = getBody().getCssReferencesAll(priority);
 		allReferences.sort(WebReference.getDummyReference());
 		ArrayList<CSSLink> allLinks = new ArrayList<>();
-		allReferences.stream().map(ref -> new CSSLink(ref)).forEach(allLinks::add);
+		
+		for (CSSReference reference : allReferences)
+		{
+			CSSLink link = new CSSLink(reference);
+			if (!allLinks.contains(link))
+			{
+				allLinks.add(link);
+			}
+		}
 		return allLinks;
 	}
 	
@@ -792,12 +793,16 @@ public class Page extends Html implements IPage
 		List<JavascriptReference> allJavascripts = getBody().getJavascriptReferencesAll(priority);
 		allJavascripts.sort(WebReference.getDummyReference());
 		ArrayList<Script> allScripts = new ArrayList<>();
-		allJavascripts.stream().map(js -> new Script(js)).forEach(s
-				                                                          ->
-		                                                          {
-			                                                          s.setNewLineForClosingTag(false);
-			                                                          allScripts.add(s);
-		                                                          });
+		
+		for (JavascriptReference reference : allJavascripts)
+		{
+			Script script = new Script(reference);
+			script.setNewLineForClosingTag(false);
+			if (!allScripts.contains(script))
+			{
+				allScripts.add(script);
+			}
+		}
 		return allScripts;
 	}
 	

@@ -36,7 +36,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
      */
     $scope._init = function () {
 
-        var initData = new Object();
+        var initData = {};
         initData.parameters = getParametersObject();
         initData.parameters['objectId'] = 'body';
         initData.localStorage = jw.localstorage;
@@ -128,7 +128,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
      *
      * @returns $.ajax
      */
-    self.perform = function ($event, dataVariables, eventId) {
+    self.perform = function ($event, dataVariables, eventId, className) {
         jw.isLoading = true;
         if (window.Pace)
             window.Pace.start();
@@ -138,7 +138,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
         var el$ = $('#' + element);
 
         var getdate = new Date();
-        var article = new Object();
+        var article = {};
         article.parameters = getParametersObject();
         article.componentId = element;
         article.eventType = $event.type;
@@ -146,6 +146,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
         article.datetime = getdate;
         article.value = eventStuff;
         article.eventId = eventId;
+        article.className = className;
 
         article.variableData = [];
         for (var i = 0; i < dataVariables.length; i++) {
@@ -243,7 +244,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
      * @returns {Object} The Event DTO
      */
     $scope.getEventObject = function ($event) {
-        var newEvent = new Object();
+        var newEvent = {};
         if ($event !== null) {
             newEvent.altKey = $event.altKey;
             newEvent.ctrlKey = $event.ctrlKey;

@@ -61,11 +61,11 @@ public enum AreaAttributes implements AttributeDefinitions
 	 * Any data element
 	 */
 	Data;
-
+	
 	@Override
 	public boolean isKeyword()
 	{
 		return false;
 	}
-
+	
 }

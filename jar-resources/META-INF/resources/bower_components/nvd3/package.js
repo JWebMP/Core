@@ -16,7 +16,7 @@ Package.on_use(function (api) {
     api.add_files('meteor/export.js', 'client');
     api.export("nv");
 });
-Package.onTest(function(api) {
+Package.onTest(function (api) {
     api.use(['tinytest', 'test-helpers']);
     api.use('d3js:d3', 'client');
     api.addFiles(['build/nv.d3.js', 'meteor/export.js'], "client");

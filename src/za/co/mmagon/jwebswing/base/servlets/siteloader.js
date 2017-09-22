@@ -1,4 +1,4 @@
-/* global BootstrapDialog, eval */
+/* global BootstrapDialog, eval,cordova */
 
 var jw = {isLoading: false, pageLoading: true};
 window.jw = jw;
@@ -10,15 +10,15 @@ jw.mobile = {};
 jw.actions = {};
 
 jw.localstorage = {};
-if (window.localStorage)
-{
+
+if (window.localStorage) {
     for (var i = 0; i < window.localStorage.length; i++) {
         jw.localstorage[window.localStorage.key(i)] = window.localStorage.getItem(window.localStorage.key(i));
     }
 }
+
 jw.sessionstorage = {};
-if (window.sessionStorage)
-{
+if (window.sessionStorage) {
     for (var i = 0; i < window.sessionStorage.length; i++) {
         jw.sessionstorage[window.sessionStorage.key(i)] = window.sessionStorage.getItem(window.sessionStorage.key(i));
     }
@@ -29,11 +29,22 @@ jw.env.loadescripts = [];
 jw.env.loadedcss = [];
 jw.env.controller = null;
 
+var hasStorage = (function () {
+    try {
+        window.localStorage.setItem(mod, mod);
+        window.localStorage.removeItem(mod);
+        return true;
+    } catch (exception) {
+
+
+        return false;
+    }
+}());
+
 
 $('head link[rel$=\'stylesheet\']').each(function (item) {
     jw.env.loadedcss.push($(this).attr('href'));
 });
-
 
 
 /**
@@ -44,15 +55,14 @@ $('head link[rel$=\'stylesheet\']').each(function (item) {
 jw.actions.loadData = function (data, $scope, $parse, $timeout) {
     $.each(data.variables, function (i, item) {
         var the_string = item.variableName;
-        if ($parse)
-        {
+        if ($parse) {
             var model = $parse(the_string);
             model.assign($scope, item.variable);
         }
     });
-    if ($timeout)
-    {
-        $timeout(function () {});
+    if ($timeout) {
+        $timeout(function () {
+        });
     }
 };
 
@@ -63,7 +73,7 @@ jw.actions.loadData = function (data, $scope, $parse, $timeout) {
  * @returns {Object} The new data bound object
  */
 jw.actions.dataVariable = function (name, object) {
-    var newVariable = new Object();
+    var newVariable = {};
     newVariable.variableName = name;
     newVariable.variableObject = object;
     return newVariable;
@@ -90,16 +100,13 @@ jw.actions.processResponse = function (result, $scope, $parse, $timeout, $compil
     //jw.actions.processJsScripts(result)
 };
 
-jw.actions.processLocalStorage = function (result)
-{
-    if (result.localStorage)
-    {
+jw.actions.processLocalStorage = function (result) {
+    if (result.localStorage) {
         for (var name in result.localStorage) {
             if (!result.localStorage.hasOwnProperty(name))
                 continue;    //Skip inherited properties
 
             var value = result.localStorage[name];
-
             window.localStorage.setItem(name, value);
             jw.localstorage[name] = value;
             //Do things
@@ -108,16 +115,13 @@ jw.actions.processLocalStorage = function (result)
 };
 
 
-jw.actions.processSessionStorage = function (result)
-{
-    if (result.sessionStorage)
-    {
+jw.actions.processSessionStorage = function (result) {
+    if (result.sessionStorage) {
         for (var name in result.sessionStorage) {
             if (!result.sessionStorage.hasOwnProperty(name))
                 continue;    //Skip inherited properties
 
             var value = result.sessionStorage[name];
-
             sessionStorage.setItem(name, value);
             jw.sessionStorage[name] = value;
             //Do things
@@ -130,8 +134,7 @@ jw.actions.processSessionStorage = function (result)
  * @param {type} result
  * @returns {undefined}
  */
-jw.actions.processCss = function (result)
-{
+jw.actions.processCss = function (result) {
     $('head').append('<style>' + result + '</style>');
 };
 
@@ -144,11 +147,9 @@ jw.actions.processCss = function (result)
  */
 jw.actions.loadNextJSReference = function (array, position, completedCallback) {
     position = position + 1;
-    if (position === (array.length))
-    {
+    if (position === (array.length)) {
         completedCallback();
-    } else
-    {
+    } else {
         jw.actions.synchronizedJSReferencesLoad(array, position, completedCallback);
     }
 };
@@ -159,17 +160,13 @@ jw.actions.loadNextJSReference = function (array, position, completedCallback) {
  * @param {type} completedCallback
  * @returns {undefined}
  */
-jw.actions.synchronizedJSReferencesLoad = function (array, position, completedCallback)
-{
+jw.actions.synchronizedJSReferencesLoad = function (array, position, completedCallback) {
     var ref = array[position];
-    if (ref)
-    {
-        if (ref.endsWith('/jwas') || ref.endsWith('/jwjs') || ref.endsWith('/jwad') || ref.endsWith('/jwdata') || ref.endsWith('/jwajax'))
-        {
+    if (ref) {
+        if (ref.endsWith('/jwas') || ref.endsWith('/jwjs') || ref.endsWith('/jwad') || ref.endsWith('/jwdata') || ref.endsWith('/jwajax')) {
             position = position + 1;
             $.notCachedScriptSync(ref).complete(jw.actions.loadNextJSReference(array, position, completedCallback));
-        } else
-        {
+        } else {
             position = position + 1;
             $.cachedScriptSync(ref).complete(jw.actions.loadNextJSReference(array, position, completedCallback));
         }
@@ -180,15 +177,12 @@ jw.actions.synchronizedJSReferencesLoad = function (array, position, completedCa
  * @param {type} result
  * @returns {undefined}
  */
-jw.actions.processJSReferences = function (result)
-{
-    if (result.jsReferences)
-    {
+jw.actions.processJSReferences = function (result) {
+    if (result.jsReferences) {
         jw.actions.synchronizedJSReferencesLoad(result.jsReferences, 0, function () {
             jw.actions.processJsScripts(result);
         });
-    } else
-    {
+    } else {
         jw.actions.processJsScripts(result);
     }
 };
@@ -197,40 +191,30 @@ jw.actions.processJSReferences = function (result)
  * @param {type} result
  * @returns {undefined}
  */
-jw.actions.processJsScripts = function (result)
-{
-    if (result.jsScripts)
-    {
-        $.each(result.jsScripts, function (i, item)
-        {
+jw.actions.processJsScripts = function (result) {
+    if (result.jsScripts) {
+        $.each(result.jsScripts, function (i, item) {
             jw.actions.loadScript(item);
         });
     }
-    if (result.events)
-    {
-        $.each(result.events, function (i, item)
-        {
+    if (result.events) {
+        $.each(result.events, function (i, item) {
             jw.actions.loadScript(item);
         });
     }
-    if (result.features)
-    {
-        $.each(result.features, function (i, item)
-        {
+    if (result.features) {
+        $.each(result.features, function (i, item) {
             jw.actions.loadScript(item);
         });
     }
 };
 
-jw.actions.loadScript = function (item, tries)
-{
+jw.actions.loadScript = function (item, tries) {
     if (!tries)
         tries = 0;
-    try
-    {
+    try {
         var result = eval(item);
-    } catch (e)
-    {
+    } catch (e) {
         console.log(e);
         tries = tries + 1;
         if (tries < 10)
@@ -243,20 +227,17 @@ jw.actions.loadScript = function (item, tries)
  * @param {type} result
  * @returns {undefined}
  */
-jw.actions.processCssReferences = function (result)
-{
+jw.actions.processCssReferences = function (result) {
     $.each(result.cssLinks, function (i, item) {
         var ss = document.styleSheets;
         var found = false;
         for (var i = 0, max = ss.length; i < max; i++) {
-            if (ss[i].href === item)
-            {
+            if (ss[i].href === item) {
                 found = true;
                 break;
             }
         }
-        if (!found)
-        {
+        if (!found) {
             $('head').append('<link rel="stylesheet" type="text/css" href="' + item + '">');
         }
     });
@@ -271,29 +252,22 @@ jw.actions.processHtml = function (result, $scope, $compile, $rootScope) {
         $.each(result.components, function (i, item) {
             var htmlString;
             var jqHtmlString = $(item.html);
-            if (item.insertType === 'Replace')
-            {
+            if (item.insertType === 'Replace') {
                 $('#' + item.id).replaceWith(jqHtmlString);
-            } else if (item.insertType === 'Append')
-            {
+            } else if (item.insertType === 'Append') {
                 $('#' + item.id).after(jqHtmlString);
-            } else if (item.insertType === 'Prepend')
-            {
+            } else if (item.insertType === 'Prepend') {
                 $('#' + item.id).before(jqHtmlString);
-            } else if (item.insertType === 'Insert')
-            {
+            } else if (item.insertType === 'Insert') {
                 $('#' + item.id).prepend(jqHtmlString);
-            } else if (item.insertType === 'Insert_Last')
-            {
+            } else if (item.insertType === 'Insert_Last') {
                 $('#' + item.id).append(jqHtmlString);
             }
             var myNewSelf = $('#' + item.id);
-            try
-            {
+            try {
                 $compile(myNewSelf)($scope);
                 $scope.$apply();
-            } catch (e)
-            {
+            } catch (e) {
                 $compile(myNewSelf)($rootScope);
                 $rootScope.$apply();
             }
@@ -312,11 +286,9 @@ jw.actions.processReactions = function (result) {
         var dialogType = item.type;
         var timeout = item.actionTimeout;
 
-        if (type === 'DialogDisplay')
-        {
+        if (type === 'DialogDisplay') {
             jw.actions.showDialog(title, message, dialogType);
-        } else if (type === 'RedirectHome')
-        {
+        } else if (type === 'RedirectHome') {
             setTimeout('location.reload();', timeout);
         }
     });
@@ -328,8 +300,7 @@ jw.actions.processReactions = function (result) {
  * @param type the type of dialog - Danger,Success,Warning,Primary,Information,Default
  */
 jw.actions.showDialog = function (title, message, type) {
-    if (BootstrapDialog)
-    {
+    if (BootstrapDialog) {
         if (type === 'Danger')
             BootstrapDialog.show({
                 title: title,

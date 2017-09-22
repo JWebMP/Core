@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SessionHelper
 {
-
+	
 	/*
 	 * Constructs a new SessionHelper
 	 */
@@ -34,7 +34,7 @@ public class SessionHelper
 	{
 		//Nothing needed
 	}
-
+	
 	/**
 	 * Returns the full server address, without the final section
 	 *
@@ -63,7 +63,7 @@ public class SessionHelper
 		}
 		return "";
 	}
-
+	
 	/**
 	 * Returns the last section of the url, to be matched with page configurator url
 	 *

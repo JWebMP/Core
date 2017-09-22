@@ -121,64 +121,64 @@ public enum LinkAttributes implements AttributeDefinitions
 	 * Sets the target
 	 */
 	Data_Target,;
-
+	
 	private HTMLVersions maxsupportedVersion = HTMLVersions.HTML5;
 	private HTMLVersions minsupportedVersion = HTMLVersions.HTML401Frameset;
 	private Class returnType = String.class;
-
+	
 	/**
 	 * Construct a new "a" tag with all the predefined supported HTML versions
 	 */
-	private LinkAttributes()
+	LinkAttributes()
 	{
 	}
-
-	private LinkAttributes(HTMLVersions maxsupportedVersion)
+	
+	LinkAttributes(HTMLVersions maxsupportedVersion)
 	{
 		this.maxsupportedVersion = maxsupportedVersion;
 	}
-
-	private LinkAttributes(HTMLVersions minsupportedVersion, boolean trues)
+	
+	LinkAttributes(HTMLVersions minsupportedVersion, boolean trues)
 	{
 		this.minsupportedVersion = minsupportedVersion;
 	}
-
-	private LinkAttributes(HTMLVersions maxsupportedVersion, HTMLVersions minsupportedVersion)
+	
+	LinkAttributes(HTMLVersions maxsupportedVersion, HTMLVersions minsupportedVersion)
 	{
 		this.maxsupportedVersion = maxsupportedVersion;
 		this.minsupportedVersion = minsupportedVersion;
 	}
-
-	private LinkAttributes(Class returnType)
+	
+	LinkAttributes(Class returnType)
 	{
 		this.returnType = returnType;
 	}
-
-	private LinkAttributes(HTMLVersions maxsupportedVersion, HTMLVersions minsupportedVersion, Class returnType)
+	
+	LinkAttributes(HTMLVersions maxsupportedVersion, HTMLVersions minsupportedVersion, Class returnType)
 	{
 		this.maxsupportedVersion = maxsupportedVersion;
 		this.minsupportedVersion = minsupportedVersion;
 		this.returnType = returnType;
 	}
-
-	private LinkAttributes(HTMLVersions maxsupportedVersion, Class returnType)
+	
+	LinkAttributes(HTMLVersions maxsupportedVersion, Class returnType)
 	{
 		this.maxsupportedVersion = maxsupportedVersion;
 		this.returnType = returnType;
 	}
-
-	private LinkAttributes(HTMLVersions minsupportedVersion, boolean trues, Class returnType)
+	
+	LinkAttributes(HTMLVersions minsupportedVersion, boolean trues, Class returnType)
 	{
 		this.minsupportedVersion = maxsupportedVersion;
 		this.returnType = returnType;
 	}
-
+	
 	@Override
 	public String toString()
 	{
 		return name().toLowerCase().replace('_', '-');
 	}
-
+	
 	@Override
 	public boolean isKeyword()
 	{

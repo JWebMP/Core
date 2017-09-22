@@ -25,7 +25,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  */
 public enum SourceAttributes implements AttributeDefinitions
 {
-
+	
 	/**
 	 * Specifies the type of media resource
 	 */
@@ -38,7 +38,7 @@ public enum SourceAttributes implements AttributeDefinitions
 	 * Specifies the media type of the media resource
 	 */
 	Type;
-
+	
 	@Override
 	public boolean isKeyword()
 	{

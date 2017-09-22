@@ -23,16 +23,16 @@ import org.junit.Test;
  */
 public class TimeTest
 {
-
+	
 	public TimeTest()
 	{
 	}
-
+	
 	@Test
 	public void testSomeMethod()
 	{
 		Time t = new Time();
 		System.out.println(t.toString(true));
 	}
-
+	
 }

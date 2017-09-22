@@ -26,35 +26,35 @@ public enum PaddingSetting implements CSSEnumeration<PaddingSetting>
 	 * Sets this field as not set
 	 */
 	Unset;
-
+	
 	@Override
 	public String getValue()
 	{
 		return name().toLowerCase();
 	}
-
+	
 	@Override
 	public PaddingSetting getDefault()
 	{
 		return Unset;
 	}
-
+	
 	@Override
 	public String getJavascriptSyntax()
 	{
 		return "style.padding";
 	}
-
+	
 	@Override
 	public CSSVersions getCSSVersion()
 	{
 		return CSSVersions.CSS3;
 	}
-
+	
 	@Override
 	public String toString()
 	{
 		return name().toLowerCase();
 	}
-
+	
 }

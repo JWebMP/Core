@@ -65,7 +65,7 @@ public class Link<J extends Link<J>>
 		extends Component<ComponentHierarchyBase, LinkAttributes, GlobalFeatures, GlobalEvents, J>
 		implements BodyChildren, NoNewLineForRawText, ListItemChildren
 {
-
+	
 	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("ALink");
 	private static final long serialVersionUID = 1L;
 	/**
@@ -76,7 +76,7 @@ public class Link<J extends Link<J>>
 	 * The target frame
 	 */
 	private String targetFrameName;
-
+	
 	/**
 	 * Constructs a new A tag
 	 */
@@ -84,7 +84,7 @@ public class Link<J extends Link<J>>
 	{
 		super("a", ComponentTypes.Link);
 	}
-
+	
 	/**
 	 * Creates a link directly to the address in the current window
 	 * <p>
@@ -99,7 +99,7 @@ public class Link<J extends Link<J>>
 			log.log(Level.FINE, "Invalid Link Address.");
 		}
 	}
-
+	
 	/**
 	 * Creates a link directly to the address in the specified target frame
 	 * <p>
@@ -111,7 +111,7 @@ public class Link<J extends Link<J>>
 	{
 		this(directToAddress, targetFrameName, (String) null);
 	}
-
+	
 	/**
 	 * Creates a link directly to the address in the specified target frame
 	 * <p>
@@ -135,7 +135,7 @@ public class Link<J extends Link<J>>
 		}
 		setText(text);
 	}
-
+	
 	/**
 	 * Creates a link directly to the address in the specified target frame
 	 * <p>
@@ -159,7 +159,7 @@ public class Link<J extends Link<J>>
 		}
 		add(component);
 	}
-
+	
 	/**
 	 * Returns the direct to address
 	 * <p>
@@ -170,7 +170,7 @@ public class Link<J extends Link<J>>
 	{
 		return directToAddress;
 	}
-
+	
 	/**
 	 * Sets the address to direct to
 	 * <p>
@@ -182,7 +182,7 @@ public class Link<J extends Link<J>>
 		this.directToAddress = directToAddress;
 		addAttribute(LinkAttributes.HRef, directToAddress);
 	}
-
+	
 	/**
 	 * Returns the current target frame name
 	 * <p>
@@ -193,7 +193,7 @@ public class Link<J extends Link<J>>
 	{
 		return targetFrameName;
 	}
-
+	
 	/**
 	 * Sets the target frame
 	 * <p>
@@ -205,7 +205,7 @@ public class Link<J extends Link<J>>
 		this.targetFrameName = targetFrameName;
 		addAttribute(LinkAttributes.Target, targetFrameName);
 	}
-
+	
 	@Override
 	public int hashCode()
 	{
@@ -214,7 +214,7 @@ public class Link<J extends Link<J>>
 		hash = 53 * hash + (this.targetFrameName != null ? this.targetFrameName.hashCode() : 0);
 		return hash;
 	}
-
+	
 	/**
 	 * A valid equals
 	 * <p>
@@ -239,7 +239,7 @@ public class Link<J extends Link<J>>
 		{
 			return false;
 		}
-
+		
 		return !((this.targetFrameName == null) ? (other.targetFrameName != null) : !this.targetFrameName.equals(other.targetFrameName));
 	}
 }

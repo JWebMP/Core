@@ -49,9 +49,9 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 public class Table<J extends Table<J>>
 		extends Component<TableChildren, TableAttributes, GlobalFeatures, GlobalEvents, J>
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Constructs an Empty Table
 	 */
@@ -59,7 +59,7 @@ public class Table<J extends Table<J>>
 	{
 		super("table", ComponentTypes.Table, false);
 	}
-
+	
 	/**
 	 * Returns the cell spacing
 	 * <p>
@@ -70,7 +70,7 @@ public class Table<J extends Table<J>>
 	{
 		return getAttribute(TableAttributes.CellSpacing, 0);
 	}
-
+	
 	/**
 	 * Sets the cell spacing
 	 * <p>
@@ -84,7 +84,7 @@ public class Table<J extends Table<J>>
 		addAttribute(TableAttributes.CellSpacing, cellSpacing);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns the cell padding
 	 * <p>
@@ -95,7 +95,7 @@ public class Table<J extends Table<J>>
 	{
 		return getAttribute(TableAttributes.CellSpacing, 0);
 	}
-
+	
 	/**
 	 * Sets the cell padding
 	 * <p>

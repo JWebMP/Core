@@ -32,13 +32,11 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTy
 import java.util.List;
 
 /**
- *
- * @author GedMarc
  * @param <E> This event type
  * @param <J> Clone type
  *
+ * @author GedMarc
  * @since $(date)
- *
  */
 public interface IComponentEventBase<E extends GlobalEvents, J extends ComponentBase>
 {
@@ -46,6 +44,7 @@ public interface IComponentEventBase<E extends GlobalEvents, J extends Component
 	/**
 	 * Adds an event to this object
 	 * <p>
+	 *
 	 * @param event The Event to add
 	 *
 	 * @return
@@ -70,6 +69,7 @@ public interface IComponentEventBase<E extends GlobalEvents, J extends Component
 	/**
 	 * Gets all registered events
 	 * <p>
+	 *
 	 * @return A Hash Map containing the event type and the events associated with it
 	 */
 	List<E> getEvents();
@@ -100,8 +100,10 @@ public interface IComponentEventBase<E extends GlobalEvents, J extends Component
 	/**
 	 * Events are types of feature that have server side support. These are referenced using the Ajax Receiver.
 	 * <p>
+	 *
 	 * @param event The event to be removed
-	 * <p>
+	 *              <p>
+	 *
 	 * @return currently false
 	 * <p>
 	 */

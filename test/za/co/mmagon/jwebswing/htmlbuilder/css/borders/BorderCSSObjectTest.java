@@ -32,17 +32,17 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
 		Border = @Border(Border = @BorderLeftCSS(BorderLeftColor = @ColourCSS("really deep colour"))))
 public class BorderCSSObjectTest extends Div
 {
-
+	
 	@BorderCSS(BorderBottomColor$ = ColourNames.AntiqueWhite, Border = @Border())
 	private H1 hello;
-
+	
 	public BorderCSSObjectTest()
 	{
 		hello = new H1("Testing CSS Object Hello Field");
 		setID("TestBorder");
 		hello.setID("text");
 	}
-
+	
 	@Test
 	public void testObject()
 	{
