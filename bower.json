@@ -44,8 +44,7 @@
     "waypoints": "^4.0.1",
     "counterup": "https://github.com/bfintal/Counter-Up.git",
     "owl.carousel": "^2.2.0",
-    "magnific-popup": "^1.1.0",
-    "fallback-local-storage": "*"
+    "magnific-popup": "^1.1.0"
   },
   "resolutions": {
     "jquery": ">=1.3.2"

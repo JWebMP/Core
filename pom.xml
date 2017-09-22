@@ -175,6 +175,7 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
         </plugins>
 
         <resources>
@@ -309,6 +310,7 @@
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>

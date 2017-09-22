@@ -11,13 +11,14 @@ jw.actions = {};
 
 jw.localstorage = {};
 
-if (window.localStorage) {
-    for (var i = 0; i < window.localStorage.length; i++) {
-        jw.localstorage[window.localStorage.key(i)] = window.localStorage.getItem(window.localStorage.key(i));
-    }
-}
+var jwebswingPermStore = new Persist.Store('JWebSwingStore');
+
+jwebswingPermStore.iterate(function (k, v) {
+    jw.localstorage[k] = v;
+});
 
 jw.sessionstorage = {};
+if (window.sessionStorage)
 if (window.sessionStorage) {
     for (var i = 0; i < window.sessionStorage.length; i++) {
         jw.sessionstorage[window.sessionStorage.key(i)] = window.sessionStorage.getItem(window.sessionStorage.key(i));
@@ -28,18 +29,6 @@ jw.env = {};
 jw.env.loadescripts = [];
 jw.env.loadedcss = [];
 jw.env.controller = null;
-
-var hasStorage = (function () {
-    try {
-        window.localStorage.setItem(mod, mod);
-        window.localStorage.removeItem(mod);
-        return true;
-    } catch (exception) {
-
-
-        return false;
-    }
-}());
 
 
 $('head link[rel$=\'stylesheet\']').each(function (item) {
@@ -107,8 +96,9 @@ jw.actions.processLocalStorage = function (result) {
                 continue;    //Skip inherited properties
 
             var value = result.localStorage[name];
-            window.localStorage.setItem(name, value);
+            jwebswingPermStore.set(name, value);
             jw.localstorage[name] = value;
+            jwebswingPermStore.save();
             //Do things
         }
     }
@@ -122,7 +112,7 @@ jw.actions.processSessionStorage = function (result) {
                 continue;    //Skip inherited properties
 
             var value = result.sessionStorage[name];
-            sessionStorage.setItem(name, value);
+            jwebswingPermStore.set(name, value);
             jw.sessionStorage[name] = value;
             //Do things
         }
@@ -153,6 +143,7 @@ jw.actions.loadNextJSReference = function (array, position, completedCallback) {
         jw.actions.synchronizedJSReferencesLoad(array, position, completedCallback);
     }
 };
+
 /**
  * Loads a list of java script references in synchronized order, fires the last callback when done
  * @param {type} array
