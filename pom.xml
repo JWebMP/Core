@@ -147,6 +147,7 @@
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+		<sonar.host.url>https://www.armin.software/sonar</sonar.host.url>
     </properties>
 
     <build>
@@ -175,8 +176,10 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-
-        </plugins>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.3.0.603</version>            </plugin>            <plugin>                <groupId>org.jacoco</groupId>                <artifactId>jacoco-maven-plugin</artifactId>                <version>0.7.9</version>            </plugin>        </plugins>
 
         <resources>
             <resource>
