@@ -260,7 +260,7 @@ define( [
 				return false;
 			} else {
 				// if the current active page is a dialog and we're navigating
-				// to a dialog use the dialog objected saved in the stack
+                // to a dialog use the dialog objected
 				to = data.pageUrl;
 				active = this._getActiveHistory();
 

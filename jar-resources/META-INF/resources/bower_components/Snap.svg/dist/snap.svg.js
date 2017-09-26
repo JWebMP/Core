@@ -1278,7 +1278,7 @@ Snap.closestPoint = function (path, x, y) {
         distance: Math.sqrt(bestDistance)
     };
     return best;
-}
+};
 /*\
  * Snap.is
  [ method ]
@@ -4260,7 +4260,7 @@ Snap.plugin(function (Snap, Element, Paper, glob, Fragment) {
                         $(value.node, {id: value.id});
                     }
                     this.node.style[name] = URL(id);
-                    return;
+
                 }
             };
         }
@@ -4318,7 +4318,7 @@ Snap.plugin(function (Snap, Element, Paper, glob, Fragment) {
             vb = vb.split(separator);
             return Snap._.box(+vb[0], +vb[1], +vb[2], +vb[3]);
         } else {
-            return;
+
         }
     })(-1);
     eve.on("snap.util.getattr.points", function () {
@@ -4327,7 +4327,7 @@ Snap.plugin(function (Snap, Element, Paper, glob, Fragment) {
         if (p) {
             return p.split(separator);
         } else {
-            return;
+
         }
     })(-1);
     eve.on("snap.util.getattr.path", function () {
@@ -6313,7 +6313,7 @@ Snap.plugin(function (Snap, Element, Paper, glob) {
         for (var i = 0, ii = mmax(p.length, p2 && p2.length || 0); i < ii; i++) {
             p[i] && (pfirst = p[i][0]); // save current path command
 
-            if (pfirst != "C") // C is not saved yet, because it may be result of conversion
+            if (pfirst != "C") // C is not 
             {
                 pcoms1[i] = pfirst; // Save current path command
                 i && ( pcom = pcoms1[i - 1]); // Get previous path command pcom

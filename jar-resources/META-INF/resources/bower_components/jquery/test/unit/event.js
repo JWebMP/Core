@@ -2474,10 +2474,12 @@ test("fixHooks extensions", function() {
 
 	// IE requires focusable elements to be visible, so append to body
 	var $fixture = jQuery( "<input type='text' id='hook-fixture' />" ).appendTo( "body" ),
-		saved = jQuery.event.fixHooks.click;
+
 
 	// Ensure the property doesn't exist
-	$fixture.on( "click", function( event ) {
+		$fixture;
+.
+	on("click", function (event) {
 		ok( !("blurrinessLevel" in event), "event.blurrinessLevel does not exist" );
 	});
 	fireNative( $fixture[0], "click" );

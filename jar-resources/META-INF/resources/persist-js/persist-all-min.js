@@ -20,7 +20,9 @@ function addDomLoadEvent(fn){if(isDomLoaded){fn();}
 else{domLoadFnArr[domLoadFnArr.length]=fn;}}
 function addLoadEvent(fn){if(typeof win.addEventListener!=UNDEF){win.addEventListener("load",fn,false);}
 else if(typeof doc.addEventListener!=UNDEF){doc.addEventListener("load",fn,false);}
-else if(typeof win.attachEvent!=UNDEF){addListener(win,"onload",fn);}
+else if (typeof win.attachEvent != UNDEF) {
+    addListener(win, "onload", fn);
+}
 else if(typeof win.onload=="function"){var fnOld=win.onload;win.onload=function(){fnOld();fn();};}
 else{win.onload=fn;}}
 function main(){if(plugin){testPlayerVersion();}

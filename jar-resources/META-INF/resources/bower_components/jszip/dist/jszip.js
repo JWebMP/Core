@@ -8222,7 +8222,7 @@ module.exports = function inflate_fast(strm, start) {
           }
           else if ((op & 64) === 0) {          /* 2nd level distance code */
             here = dcode[(here & 0xffff)/*here.val*/ + (hold & ((1 << op) - 1))];
-            continue dodist;
+              continue;
           }
           else {
             strm.msg = 'invalid distance code';
@@ -8235,7 +8235,7 @@ module.exports = function inflate_fast(strm, start) {
       }
       else if ((op & 64) === 0) {              /* 2nd level length code */
         here = lcode[(here & 0xffff)/*here.val*/ + (hold & ((1 << op) - 1))];
-        continue dolen;
+          continue;
       }
       else if (op & 32) {                     /* end-of-block */
         //Tracevv((stderr, "inflate:         end of block\n"));
@@ -8265,7 +8265,7 @@ module.exports = function inflate_fast(strm, start) {
   strm.avail_out = (_out < end ? 257 + (end - _out) : 257 - (_out - end));
   state.hold = hold;
   state.bits = bits;
-  return;
+
 };
 
 },{}],70:[function(require,module,exports){
@@ -9980,7 +9980,7 @@ module.exports = function inflate_table(type, lens, lens_index, codes, table, ta
 
    root is the number of index bits for the root table.  When len exceeds
    root, sub-tables are created pointed to by the root entry with an index
-   of the low root bits of huff.  This is saved in low to check for when a
+   of the low root bits of huff.  This is
    new sub-table should be started.  drop is zero when the root table is
    being filled, and drop is root when sub-tables are being filled.
 

@@ -802,7 +802,7 @@ asyncTest( "stop( queue, ..., ... ) - Stop single queues", function() {
 		duration: 1000,
 		queue: "height"
 	}).dequeue( "height" ).stop( "height", false, false );
-	saved = parseFloat( foo.css("height") );
+
 });
 
 test("toggle()", function() {

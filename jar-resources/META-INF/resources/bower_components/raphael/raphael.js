@@ -2125,7 +2125,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            for (var i = 0, ii = mmax(p.length, p2 && p2.length || 0); i < ii; i++) {
 	                p[i] && (pfirst = p[i][0]); // save current path command
 
-	                if (pfirst != "C") // C is not saved yet, because it may be result of conversion
+                    if (pfirst != "C") // C is not
 	                {
 	                    pcoms1[i] = pfirst; // Save current path command
 	                    i && ( pcom = pcoms1[i-1]); // Get previous path command pcom
@@ -8350,4 +8350,4 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ }
 /******/ ])
 });
-;
+

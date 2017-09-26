@@ -168,7 +168,7 @@ Note that the value must be a string.  If you want to save structured
 data like arrays or hashes, you should serialize it using Array.join or
 JSON.
 
-Once you have saved a value to the store, you can read it back, 
+Once you have 
 like this:
 
     // get value from store and prompt user
@@ -214,7 +214,7 @@ will load all data when getting a value, and save all data when setting
 a value.  When the `defer` flag is set, the store data will only be
 loaded when the store is created or when the `load()` method is called.  
 
-More importantly, data will _not_ be saved unless the `save()` method is
+More importantly, data will _not_ be 
 called.  If you choose to use the `defer` flag, the easiest way to make
 sure `save()` is called is to use an unload handler, like so:
 
@@ -294,7 +294,7 @@ specific backend, use `Persist.remove()`, like this:
 5. Other Limits
 ---------------
 The `cookie` backend is limited by the number of maximum number of
-cookies that can be saved by the browser.  Older browsers typically
+cookies that can be 
 limited the number of cookies to 20 per domain, although newer browsers
 have increased this limit to 50 cookies per domain.  
 

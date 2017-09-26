@@ -268,7 +268,7 @@ Licensed under the MIT license.
 
         // Save the context, so we can reset in case we get replotted.  The
         // restore ensure that we're really back at the initial state, and
-        // should be safe even if we haven't saved the initial state yet.
+        // should be safe even if we haven't 
 
         context.restore();
         context.save();

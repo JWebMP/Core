@@ -2352,7 +2352,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * pdfKitDoc.pipe(fs.createWriteStream('sample.pdf'));
 	 * pdfKitDoc.end();
 	 *
-	 * @return {Object} a pdfKit document object which can be saved or encode to data-url
+     * @return {Object} a pdfKit document object which can be
 	 */
 	PdfPrinter.prototype.createPdfKitDocument = function (docDefinition, options) {
 		options = options || {};
@@ -23695,7 +23695,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	DocumentContext.prototype.beginColumn = function (width, offset, endingCell) {
-		var saved = this.snapshots[this.snapshots.length - 1];
+        var
 
 		this.calculateBottomMost(saved);
 
@@ -23739,7 +23739,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	DocumentContext.prototype.completeColumnGroup = function () {
-		var saved = this.snapshots.pop();
+        var
 
 		this.calculateBottomMost(saved);
 
@@ -23802,7 +23802,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	DocumentContext.prototype.endDetachedBlock = function () {
-		var saved = this.snapshots.pop();
+        var
 
 		this.x = saved.x;
 		this.y = saved.y;
@@ -35044,7 +35044,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	   root is the number of index bits for the root table.  When len exceeds
 	   root, sub-tables are created pointed to by the root entry with an index
-	   of the low root bits of huff.  This is saved in low to check for when a
+	   of the low root bits of huff.  This is
 	   new sub-table should be started.  drop is zero when the root table is
 	   being filled, and drop is root when sub-tables are being filled.
 

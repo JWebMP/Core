@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/C:/Users/MMagon.ANGELSOFTWARE/SkyDrive/JWebSwing/JWebSwing/src/za/co/mmagon/jwebswing/htmlbuilder/javascript/ajax/jaxb/ajax.xsd"
+            uri="xml-resources/jaxb/AjaxReceiver/ajax.xsd"/>
+    <system systemId="file:/C:/Users/GedMarc/OneDrive/JWebSwing/JWebSwing/src/za/co/mmagon/logger/LoggerFactory.xsd" uri="xml-resources/jaxb/LoggerFactoryXML/LoggerFactory.xsd"/>
+</catalog>
+
+
