@@ -271,7 +271,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
         return newEvent;
     };
 
-    //JW_SCOPE_INSERTIONS
+    JW_SCOPE_INSERTIONS;
 
     //jw.pageLoading = false;
 }); //end of controller

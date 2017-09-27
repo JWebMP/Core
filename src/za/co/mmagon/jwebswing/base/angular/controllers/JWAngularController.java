@@ -70,7 +70,8 @@ public class JWAngularController extends AngularControllerBase
 					                          }
 				                          });
 		
-		output = output.replace("//JW_SCOPE_INSERTIONS", statementOutput.toString());
+		output = output.replace("JW_SCOPE_INSERTIONS;", statementOutput.toString());
+		output = output.replace("JW_SCOPE_INSERTIONS", statementOutput.toString());
 		return output;
 	}
 	
