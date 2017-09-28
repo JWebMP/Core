@@ -147,7 +147,7 @@
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-		<sonar.host.url>https://www.armin.software/sonar</sonar.host.url>
+        <sonar.host.url>https://www.armin.software/sonar</sonar.host.url>
     </properties>
 
     <build>
@@ -179,7 +179,14 @@
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.3.0.603</version>            </plugin>            <plugin>                <groupId>org.jacoco</groupId>                <artifactId>jacoco-maven-plugin</artifactId>                <version>0.7.9</version>            </plugin>        </plugins>
+                <version>3.3.0.603</version>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.9</version>
+            </plugin>
+        </plugins>
 
         <resources>
             <resource>
@@ -262,10 +269,9 @@
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <type>jar</type>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
 

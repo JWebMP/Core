@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Object
@@ -45,7 +45,7 @@ public class ObjectTagTest
 		ObjectTag ot = new ObjectTag();
 		ot.setID("id");
 		System.out.println(ot.toString(true));
-		Assert.assertEquals(""
+		Assertions.assertEquals(""
 				                    + "<object id=\"id\"></object>", ot.toString(true).toString());
 	}
 	

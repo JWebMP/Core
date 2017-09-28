@@ -16,7 +16,7 @@
  */
 package za.co.mmagon.jwebswing.base.angular;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.Page;
 

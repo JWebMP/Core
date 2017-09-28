@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author GedMarc
@@ -34,7 +34,7 @@ public class FigureTest
 	{
 		Figure f = new Figure();
 		System.out.println(f.toString(true).toString());
-		Assert.assertEquals(""
+		Assertions.assertEquals(""
 				                    + "<figure></figure>", f.toString(true).toString());
 	}
 

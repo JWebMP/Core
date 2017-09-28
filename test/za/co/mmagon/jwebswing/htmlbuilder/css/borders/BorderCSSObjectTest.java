@@ -16,7 +16,7 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.borders;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.H1;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
@@ -54,6 +54,6 @@ public class BorderCSSObjectTest extends Div
 		// hello.setBackgroundColor$(ColourNames.DarkGoldenRod);
 		// System.out.println(comp);
 
-//        Assert.assertEquals("#TestBorder {border:really deep colour;border-bottom-color:colourTop;border-left-style:double;}#text {border-bottom-color:antiquewhite;}", comp.toString());
+//        Assertions.assertEquals("#TestBorder {border:really deep colour;border-bottom-color:colourTop;border-left-style:double;}#text {border-bottom-color:antiquewhite;}", comp.toString());
 	}
 }

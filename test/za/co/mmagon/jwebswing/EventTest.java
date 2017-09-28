@@ -1,6 +1,6 @@
 package za.co.mmagon.jwebswing;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 //TODO update the rest of these methods
 public class EventTest

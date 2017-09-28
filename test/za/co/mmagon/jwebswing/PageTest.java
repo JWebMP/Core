@@ -16,7 +16,7 @@
  */
 package za.co.mmagon.jwebswing;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.base.client.Browsers;
 import za.co.mmagon.jwebswing.base.client.InternetExplorerCompatibilityMode;
@@ -28,7 +28,7 @@ import za.co.mmagon.jwebswing.base.html.attributes.BaseAttributes;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.DevelopmentEnvironments;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author GedMarc

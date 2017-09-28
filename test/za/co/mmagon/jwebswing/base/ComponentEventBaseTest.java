@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.Event;
 import za.co.mmagon.jwebswing.Page;
@@ -134,8 +134,8 @@ public class ComponentEventBaseTest extends BaseTestClass
 				"  } ],\n" +
 				"  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentEventBase\"\n" +
 				"}";
-		Assert.assertEquals(shell.toString(), shellExpected);
-		Assert.assertEquals(shell2.toString(), shell2Expected);
+		Assertions.assertEquals(shell.toString(), shellExpected);
+		Assertions.assertEquals(shell2.toString(), shell2Expected);
 	}
 	
 	@Test

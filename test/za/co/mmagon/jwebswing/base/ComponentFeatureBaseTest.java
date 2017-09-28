@@ -16,7 +16,7 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
@@ -38,7 +38,7 @@ public class ComponentFeatureBaseTest extends BaseTestClass
 		cfb.addFeature(getFeature());
 		System.out.println(cfb);
 		//TODO find out why the queryies are duplicating...
-	   /* Assert.assertEquals("{\n"
+	   /* Assertions.assertEquals("{\n"
 	            + "  \"id\" : \"testComp\",\n"
                 + "  \"componentType\" : \"abbreviation\",\n"
                 + "  \"tiny\" : false,\n"

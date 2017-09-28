@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
@@ -37,7 +37,7 @@ public class ComponentBaseTest extends BaseTestClass
 		ComponentBase shell = new ComponentBase(ComponentTypes.Abbreviation);
 		shell.setID("ID");
 		System.out.println(shell);
-		Assert.assertEquals("{\n"
+		Assertions.assertEquals("{\n"
 				                    + "  \"id\" : \"ID\",\n"
 				                    + "  \"componentType\" : \"abbreviation\",\n"
 				                    + "  \"tiny\" : false,\n"
@@ -55,7 +55,7 @@ public class ComponentBaseTest extends BaseTestClass
 		shell.setID("ID");
 		shell.setText("This is raw text");
 		System.out.println(shell);
-		Assert.assertEquals("{\n"
+		Assertions.assertEquals("{\n"
 				                    + "  \"id\" : \"ID\",\n"
 				                    + "  \"componentType\" : \"abbreviation\",\n"
 				                    + "  \"text\" : \"This is raw text\",\n"
@@ -74,7 +74,7 @@ public class ComponentBaseTest extends BaseTestClass
 		shell.setTiny(true);
 		shell.setID("ID");
 		System.out.println(shell);
-		Assert.assertEquals("{\n"
+		Assertions.assertEquals("{\n"
 				                    + "  \"id\" : \"ID\",\n"
 				                    + "  \"componentType\" : \"abbreviation\",\n"
 				                    + "  \"tiny\" : true,\n"
@@ -112,8 +112,8 @@ public class ComponentBaseTest extends BaseTestClass
 				+ "  \"touched\" : false,\n"
 				+ "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
 				+ "}";
-		Assert.assertEquals(shell.toString(), shellExpected);
-		Assert.assertEquals(shell2.toString(), shell2Expected);
+		Assertions.assertEquals(shell.toString(), shellExpected);
+		Assertions.assertEquals(shell2.toString(), shell2Expected);
 	}
 	
 	@Test
@@ -137,6 +137,6 @@ public class ComponentBaseTest extends BaseTestClass
 				+ "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentBase\"\n"
 				+ "}";
 		
-		Assert.assertEquals(shell.toString(), shellExpected);
+		Assertions.assertEquals(shell.toString(), shellExpected);
 	}
 }

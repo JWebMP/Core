@@ -1,11 +1,11 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
-import org.junit.*;
+import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * @author MMagon
@@ -17,22 +17,22 @@ public class CSSLineSorterTest
 	{
 	}
 	
-	@BeforeClass
+	@BeforeAll
 	public static void setUpClass()
 	{
 	}
 	
-	@AfterClass
+	@AfterAll
 	public static void tearDownClass()
 	{
 	}
 	
-	@Before
+	@BeforeEach
 	public void setUp()
 	{
 	}
 	
-	@After
+	@AfterEach
 	public void tearDown()
 	{
 	}

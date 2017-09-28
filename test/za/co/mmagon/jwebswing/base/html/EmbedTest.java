@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author GedMarc
@@ -35,7 +35,7 @@ public class EmbedTest
 		Embed e = new Embed("Source", "Media Type");
 		e.setID("id");
 		System.out.println(e.toString(true));
-		Assert.assertEquals("<embed src=\"Source\" type=\"Media Type\" id=\"id\">", e.toString(true));
+		Assertions.assertEquals("<embed src=\"Source\" type=\"Media Type\" id=\"id\">", e.toString(true));
 	}
 	
 }

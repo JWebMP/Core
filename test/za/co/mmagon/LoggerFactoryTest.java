@@ -1,7 +1,7 @@
 package za.co.mmagon;
 
 import com.armineasy.injection.GuiceContext;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.logger.LogFactory;
 
 import java.util.logging.Level;

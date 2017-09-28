@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author MMagon
@@ -37,7 +37,7 @@ public class AbbreviationTest
 		abb.setText("A.B.C.");
 		System.out.println(abb.toString(true));
 		String expected = "<abbr id=\"ID\">A.B.C.</abbr>";
-		Assert.assertEquals(expected, abb.toString(true));
+		Assertions.assertEquals(expected, abb.toString(true));
 	}
 	
 }

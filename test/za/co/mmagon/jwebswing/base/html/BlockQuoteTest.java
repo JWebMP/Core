@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.base.html.attributes.BlockQuoteAttributes;
 
 /**
@@ -47,7 +47,7 @@ public class BlockQuoteTest
 	{
 		reset();
 		System.out.println(bq.toString(true));
-		Assert.assertEquals("<blockquote cite=\"cite\" id=\"id\">\n"
+		Assertions.assertEquals("<blockquote cite=\"cite\" id=\"id\">\n"
 				                    + "	<p id=\"id\">test</p>\n"
 				                    + "</blockquote>", bq.toString(true));
 	}
@@ -58,7 +58,7 @@ public class BlockQuoteTest
 		reset();
 		bq.setTiny(true);
 		System.out.println(bq.toString(true));
-		Assert.assertEquals("<blockquote cite=\"cite\" id=\"id\"><p id=\"id\">test</p></blockquote>", bq.toString(true));
+		Assertions.assertEquals("<blockquote cite=\"cite\" id=\"id\"><p id=\"id\">test</p></blockquote>", bq.toString(true));
 	}
 	
 }

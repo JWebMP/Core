@@ -16,7 +16,7 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.html.Body;
 import za.co.mmagon.jwebswing.base.html.Div;
@@ -63,7 +63,7 @@ public class CSSComposerTest
 		System.out.println(comp.toString()); //Direct from the factory
 		System.out.println(d.renderCss(0)); //Using the convenience method for the
 		//TODO
-		// Assert.assertEquals("#cloned,#cloned2,#d {background-Color:darkgoldenrod;border-bottom-style:dotted}#d2 {height:400px;}", comp.toString());
+		// Assertions.assertEquals("#cloned,#cloned2,#d {background-Color:darkgoldenrod;border-bottom-style:dotted}#d2 {height:400px;}", comp.toString());
 	}
 
 	@Test

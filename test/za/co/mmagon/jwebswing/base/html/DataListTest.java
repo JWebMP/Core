@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author GedMarc
@@ -37,7 +37,7 @@ public class DataListTest
 		dl.add(o);
 		o.setID("id");
 		System.out.println(dl.toString(true));
-		Assert.assertEquals("<datalist id=\"browsers\">\n"
+		Assertions.assertEquals("<datalist id=\"browsers\">\n"
 				                    + "	<option label=\"option 1\" value=\"option 1\" id=\"id\">option 1</option>\n"
 				                    + "</datalist>", dl.toString(true).toString());
 	}

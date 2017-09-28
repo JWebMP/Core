@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.Page;
 
@@ -51,6 +51,6 @@ public class BiDirectionalIsolationTest extends BaseTestClass
 		reset();
 		bdi.setText("set text demo");
 		System.out.println(bdi.toString(true));
-		Assert.assertEquals("<bdi>set text demo</bdi>", bdi.toString(true).toString());
+		Assertions.assertEquals("<bdi>set text demo</bdi>", bdi.toString(true).toString());
 	}
 }

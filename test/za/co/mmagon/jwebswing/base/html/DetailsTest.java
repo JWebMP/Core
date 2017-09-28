@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author GedMarc
@@ -35,7 +35,7 @@ public class DetailsTest
 		Details d = new Details();
 		d.setID("id");
 		System.out.println(d.toString(true));
-		Assert.assertEquals("<details id=\"id\"></details>", d.toString(true).toString());
+		Assertions.assertEquals("<details id=\"id\"></details>", d.toString(true).toString());
 	}
 	
 }

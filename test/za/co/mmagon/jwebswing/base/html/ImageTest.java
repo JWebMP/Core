@@ -4,8 +4,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author MMagon
@@ -23,6 +23,6 @@ public class ImageTest
 		Image image = new Image("image");
 		image.setID("id");
 		System.out.println(image.toString(true));
-		Assert.assertEquals("<img id=\"id\" src=\"image\"/>", image.toString(true));
+		Assertions.assertEquals("<img id=\"id\" src=\"image\"/>", image.toString(true));
 	}
 }

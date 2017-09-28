@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author GedMarc
@@ -37,7 +37,7 @@ public class LineBreakTest
 	{
 		LineBreak br = LineBreak.getLineBreak();
 		System.out.println(br.toString(true));
-		Assert.assertEquals("<br>", br.toString(true).toString());
+		Assertions.assertEquals("<br>", br.toString(true).toString());
 	}
 	
 	/**

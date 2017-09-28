@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author MMagon
@@ -35,7 +35,7 @@ public class AddressTest
 		Address addr = new Address("This is an address");
 		addr.setID("id");
 		System.out.println(addr.toString(true));
-		Assert.assertEquals("<addr id=\"id\">This is an address</addr>", addr.toString(true));
+		Assertions.assertEquals("<addr id=\"id\">This is an address</addr>", addr.toString(true));
 	}
 	
 }

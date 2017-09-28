@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author GedMarc
@@ -37,6 +37,6 @@ public class CenterTest
 	{
 		Center c = Center.getCenter();
 		System.out.println(c.toString(true).toString());
-		Assert.assertEquals("<center></center>", c.toString(true).toString());
+		Assertions.assertEquals("<center></center>", c.toString(true).toString());
 	}
 }

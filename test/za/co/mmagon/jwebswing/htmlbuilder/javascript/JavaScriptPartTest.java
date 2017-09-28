@@ -17,7 +17,7 @@
 package za.co.mmagon.jwebswing.htmlbuilder.javascript;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Marc Magon

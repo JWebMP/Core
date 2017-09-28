@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author MMagon
@@ -38,7 +38,7 @@ public class BiDirectionalOverrideTest
 		BiDirectionalOverride bdo = new BiDirectionalOverride();
 		bdo.setText("set text demo");
 		System.out.println(bdo.toString(true));
-		Assert.assertEquals("<bdo>set text demo</bdo>", bdo.toString(true).toString());
+		Assertions.assertEquals("<bdo>set text demo</bdo>", bdo.toString(true).toString());
 	}
 	
 }

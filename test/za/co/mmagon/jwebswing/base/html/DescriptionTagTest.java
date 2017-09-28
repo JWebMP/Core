@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author GedMarc
@@ -37,7 +37,7 @@ public class DescriptionTagTest
 		dl.add(dt);
 		dt.setText("asdf");
 		System.out.println(dl.toString(true));
-		Assert.assertEquals("<dl>\n"
+		Assertions.assertEquals("<dl>\n"
 				                    + "	<dt>asdf</dt>\n"
 				                    + "</dl>", dl.toString(true));
 	}
@@ -51,7 +51,7 @@ public class DescriptionTagTest
 		dl.add(dt);
 		dt.setText("asdf");
 		System.out.println(dl.toString(true));
-		Assert.assertEquals("<dl><dt>asdf</dt></dl>", dl.toString(true));
+		Assertions.assertEquals("<dl><dt>asdf</dt></dl>", dl.toString(true));
 	}
 	
 }

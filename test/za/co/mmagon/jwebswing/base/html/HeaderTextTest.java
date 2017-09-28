@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.base.html.attributes.HeaderTypes;
 
 /**
@@ -38,10 +38,10 @@ public class HeaderTextTest
 		h2.setID("id");
 		System.out.println(h1.toString(true));
 		System.out.println(h2.toString(true));
-		Assert.assertNotSame(h1, h2);
+		Assertions.assertNotSame(h1, h2);
 		h2.setHeaderType(HeaderTypes.H1);
-		Assert.assertEquals(h1, h2);
+		Assertions.assertEquals(h1, h2);
 		h2.setHeaderText("new text");
-		Assert.assertNotSame(h1, h2);
+		Assertions.assertNotSame(h1, h2);
 	}
 }

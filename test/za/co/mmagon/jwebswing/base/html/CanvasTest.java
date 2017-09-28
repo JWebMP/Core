@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.base.html.attributes.CanvasAttributes;
 
@@ -44,7 +44,7 @@ public class CanvasTest extends BaseTestClass
 		c.addAttribute(CanvasAttributes.Height, "200px");
 		c.addAttribute(CanvasAttributes.Width, "200px");
 		System.out.println(c.toString(true));
-		Assert.assertEquals("<canvas height=\"200px\" width=\"200px\" id=\"Canvas\"></canvas>", c.toString(true).toString());
+		Assertions.assertEquals("<canvas height=\"200px\" width=\"200px\" id=\"Canvas\"></canvas>", c.toString(true).toString());
 	}
 
 }

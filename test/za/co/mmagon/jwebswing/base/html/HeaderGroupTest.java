@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author GedMarc
@@ -34,7 +34,7 @@ public class HeaderGroupTest
 	{
 		Header hg = new Header();
 		System.out.println(hg.toString(true));
-		Assert.assertEquals("<header></header>", hg.toString(true));
+		Assertions.assertEquals("<header></header>", hg.toString(true));
 	}
 	
 }

@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import junit.framework.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author GedMarc
@@ -42,7 +42,7 @@ public class FormTest
 	{
 		reset();
 		System.out.println(f.toString(true));
-		Assert.assertEquals("<form id=\"id\"></form>", f.toString(true));
+		Assertions.assertEquals("<form id=\"id\"></form>", f.toString(true));
 	}
 	
 	@Test
@@ -51,7 +51,7 @@ public class FormTest
 		reset();
 		f.setTiny(true);
 		System.out.println(f.toString(true));
-		Assert.assertEquals("<form id=\"id\"></form>", f.toString(true));
+		Assertions.assertEquals("<form id=\"id\"></form>", f.toString(true));
 		f.setTiny(false);
 	}
 }

@@ -17,8 +17,8 @@
 
 package za.co.mmagon.jwebswing.base.servlet;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.base.servlets.AjaxReceiverServlet;
 
 /**
@@ -32,8 +32,8 @@ public class AjaxReceiverTest
 	public AjaxReceiverTest()
 	{
 	}
-
-	@Before
+	
+	@BeforeEach
 	public void setUp()
 	{
 	}

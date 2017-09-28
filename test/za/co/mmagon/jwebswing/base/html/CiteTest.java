@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author GedMarc
@@ -35,7 +35,7 @@ public class CiteTest
 		Cite c = new Cite("Reference");
 		c.setID("ID");
 		System.out.println(c.toString(true));
-		Assert.assertEquals("<cite id=\"ID\">Reference</cite>", c.toString(true).toString());
+		Assertions.assertEquals("<cite id=\"ID\">Reference</cite>", c.toString(true).toString());
 	}
 
 }

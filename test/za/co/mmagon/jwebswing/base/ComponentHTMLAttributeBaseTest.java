@@ -16,11 +16,11 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.base.html.CSSLink;
 import za.co.mmagon.jwebswing.base.html.Div;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * @author Marc Magon

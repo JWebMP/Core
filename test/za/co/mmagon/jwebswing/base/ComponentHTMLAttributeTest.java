@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.Event;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
@@ -140,7 +140,7 @@ public class ComponentHTMLAttributeTest
 				"  },\n" +
 				"  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentHTMLAttributeBase\"\n" +
 				"}";
-		Assert.assertEquals(shell.toString(), shellExpected);
-		Assert.assertEquals(shell2.toString(), shell2Expected);
+		Assertions.assertEquals(shell.toString(), shellExpected);
+		Assertions.assertEquals(shell2.toString(), shell2Expected);
 	}
 }

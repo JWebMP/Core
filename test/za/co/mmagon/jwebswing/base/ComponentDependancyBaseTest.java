@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.plugins.ajaxenabler.AjaxEnablerReferencePool;
@@ -41,7 +41,7 @@ public class ComponentDependancyBaseTest extends BaseTestClass
 		cd.addCssReference(null);
 		cd.addJavaScriptReference(AjaxEnablerReferencePool.AjaxEnabler.getJavaScriptReference());
 		System.out.println(cd);
-		Assert.assertEquals("{\n"
+		Assertions.assertEquals("{\n"
 				                    + "  \"id\" : \"ID\",\n"
 				                    + "  \"componentType\" : \"abbreviation\",\n"
 				                    + "  \"tiny\" : false,\n"
@@ -99,8 +99,8 @@ public class ComponentDependancyBaseTest extends BaseTestClass
 				+ "  } ],\n"
 				+ "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentDependancyBase\"\n"
 				+ "}";
-		Assert.assertEquals(shell.toString(), shellExpected);
-		Assert.assertEquals(shell2.toString(), shell2Expected);
+		Assertions.assertEquals(shell.toString(), shellExpected);
+		Assertions.assertEquals(shell2.toString(), shell2Expected);
 	}
 	
 }

@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.Event;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
@@ -44,7 +44,7 @@ public class ComponentHTMLBaseTest
 		tag.setID("testTag");
 		//System.out.println(tag.toString());
 		System.out.println(tag.toString(4));
-		Assert.assertEquals("				<area id=\"testTag\">\n"
+		Assertions.assertEquals("				<area id=\"testTag\">\n"
 				                    + "				</area>", tag.toString(4).toString());
 	}
 	
@@ -56,7 +56,7 @@ public class ComponentHTMLBaseTest
 		tag.setTiny(true);
 		tag.setID("testTag");
 		System.out.println(tag.toString(4));
-		Assert.assertEquals("<area id=\"testTag\"></area>", tag.toString(4).toString());
+		Assertions.assertEquals("<area id=\"testTag\"></area>", tag.toString(4).toString());
 	}
 	
 	@Test
@@ -66,7 +66,7 @@ public class ComponentHTMLBaseTest
 		tag.setText("Raw Text");
 		tag.setID("testTag");
 		System.out.println(tag.toString(4));
-		Assert.assertEquals("				<area id=\"testTag\">Raw Text\n"
+		Assertions.assertEquals("				<area id=\"testTag\">Raw Text\n"
 				                    + "				</area>", tag.toString(4));
 	}
 	
@@ -76,7 +76,7 @@ public class ComponentHTMLBaseTest
 		ComponentHTMLBase tag = new ComponentHTMLAttributeBase(ComponentTypes.Area);
 		tag.setID("testTag");
 		System.out.println(tag.toString(4));
-		Assert.assertEquals("				<area id=\"testTag\">\n"
+		Assertions.assertEquals("				<area id=\"testTag\">\n"
 				                    + "				</area>", tag.toString(4));
 	}
 	
@@ -87,7 +87,7 @@ public class ComponentHTMLBaseTest
 		tag.setID("testTag");
 		tag.setTiny(true);
 		System.out.println(tag.toString(4));
-		Assert.assertEquals("<area id=\"testTag\"></area>", tag.toString(4));
+		Assertions.assertEquals("<area id=\"testTag\"></area>", tag.toString(4));
 	}
 	
 	@Test
@@ -187,7 +187,7 @@ public class ComponentHTMLBaseTest
 				"  } ],\n" +
 				"  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentEventBase\"\n" +
 				"}";
-		Assert.assertEquals(shell.toString(), shellExpected);
-		Assert.assertEquals(shell2.toString(), shell2Expected);
+		Assertions.assertEquals(shell.toString(), shellExpected);
+		Assertions.assertEquals(shell2.toString(), shell2Expected);
 	}
 }

@@ -16,8 +16,8 @@
  */
 package za.co.mmagon;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.generics.WebReference;
 import za.co.mmagon.jwebswing.plugins.ajaxenabler.AjaxEnablerReferencePool;
 import za.co.mmagon.jwebswing.plugins.jquery.JQueryReferencePool;
@@ -58,8 +58,8 @@ public class WebReferenceTest
 
 		String expected = "[bower_components/jquery/dist/jquery.js, javascript/jwebswing/ajax-enabler.js]";
 		String result = w.toString();
-
-		Assert.assertEquals(expected, result);
+		
+		Assertions.assertEquals(expected, result);
 
 	}
 }

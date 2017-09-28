@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.base.html.attributes.AppletAttributes;
 
 /**
@@ -36,14 +36,14 @@ public class AppletTest
 		Applet applet = new Applet();
 		applet.setID("id");
 		System.out.println(applet.toString(true));
-		Assert.assertEquals("<applet id=\"id\"></applet>", applet.toString(true));
+		Assertions.assertEquals("<applet id=\"id\"></applet>", applet.toString(true));
 
 		applet.addAttribute(AppletAttributes.Object, "applet object");
 		applet.addAttribute(AppletAttributes.Align, "left");
 		applet.addAttribute(AppletAttributes.CodeBase, "classFile");
 
 		System.out.println(applet.toString(true));
-		Assert.assertEquals("<applet align=\"left\" codebase=\"classFile\" id=\"id\" object=\"applet object\"></applet>", applet.toString(true));
+		Assertions.assertEquals("<applet align=\"left\" codebase=\"classFile\" id=\"id\" object=\"applet object\"></applet>", applet.toString(true));
 	}
 
 }

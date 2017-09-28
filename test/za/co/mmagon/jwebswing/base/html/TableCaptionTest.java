@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author GedMarc
@@ -35,7 +35,7 @@ public class TableCaptionTest
 		TableCaption tc = new TableCaption("caption");
 		tc.setID("id");
 		System.out.println(tc.toString(true));
-		Assert.assertEquals(""
+		Assertions.assertEquals(""
 				                    + "<caption id=\"id\">caption</caption>", tc.toString(true).toString());
 	}
 	

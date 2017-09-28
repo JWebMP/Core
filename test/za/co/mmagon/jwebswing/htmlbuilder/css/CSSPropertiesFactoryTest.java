@@ -16,7 +16,7 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.BackgroundCSSImpl;
 import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.BackgroundCSSObjectTest;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;

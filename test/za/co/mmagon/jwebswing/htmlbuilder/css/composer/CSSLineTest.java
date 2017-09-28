@@ -1,8 +1,8 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
-import org.junit.*;
+import org.junit.jupiter.api.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author MMagon
@@ -13,23 +13,23 @@ public class CSSLineTest
 	public CSSLineTest()
 	{
 	}
-
-	@BeforeClass
+	
+	@BeforeAll
 	public static void setUpClass()
 	{
 	}
-
-	@AfterClass
+	
+	@AfterAll
 	public static void tearDownClass()
 	{
 	}
-
-	@Before
+	
+	@BeforeEach
 	public void setUp()
 	{
 	}
-
-	@After
+	
+	@AfterEach
 	public void tearDown()
 	{
 	}

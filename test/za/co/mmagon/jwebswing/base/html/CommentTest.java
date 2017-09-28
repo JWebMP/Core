@@ -16,10 +16,10 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author MMagon
@@ -33,7 +33,7 @@ public class CommentTest
 	{
 	}
 	
-	@Before
+	@BeforeAll
 	public void setUp()
 	{
 	}

@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.base.html.Body;
 import za.co.mmagon.jwebswing.base.html.Meta;
@@ -66,7 +66,7 @@ public class ComponentHierarchyBaseTest extends BaseTestClass
 		tag.addClass("KKKKKKK");
 		System.out.println(tag);
 		System.out.println(tag.toString(true));
-		Assert.assertEquals("<area class=\"This is a class KKKKKKK\" id=\"testTag\">"
+		Assertions.assertEquals("<area class=\"This is a class KKKKKKK\" id=\"testTag\">"
 				                    + "</area>", tag.toString(true));
 	}
 	
@@ -80,7 +80,7 @@ public class ComponentHierarchyBaseTest extends BaseTestClass
 		tag.addClass("Class2");
 		System.out.println(tag);
 		System.out.println(tag.toString(true));
-		Assert.assertEquals("<area class=\"Class1 Class2\" id=\"testTag\"></area>", tag.toString(true));
+		Assertions.assertEquals("<area class=\"Class1 Class2\" id=\"testTag\"></area>", tag.toString(true));
 	}
 	
 }

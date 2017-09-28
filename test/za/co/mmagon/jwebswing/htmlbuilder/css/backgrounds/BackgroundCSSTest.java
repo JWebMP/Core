@@ -16,7 +16,7 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.htmlbuilder.css.CSSPropertiesFactory;
 import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSBlock;
 import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSBlockIdentifier;
@@ -44,7 +44,7 @@ public class BackgroundCSSTest
 		Map<String, Object> strings = factory.getCSS(cssObject);
 		CSSBlock newBlock = factory.getCSSBlock("NewBlock", CSSTypes.None, strings, CSSBlockIdentifier.Class);
 		System.out.println("out : " + newBlock.toString());
-		// Assert.assertEquals(newBlock.toString(), ".NewBlock {background-attachment:inherit;background-image:url(image specified);background-image:url(url 1) url(url 2) ;}");
+		// Assertions.assertEquals(newBlock.toString(), ".NewBlock {background-attachment:inherit;background-image:url(image specified);background-image:url(url 1) url(url 2) ;}");
 	}
 
 }

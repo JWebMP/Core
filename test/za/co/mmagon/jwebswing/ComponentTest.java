@@ -16,12 +16,12 @@
  */
 package za.co.mmagon.jwebswing;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.base.html.Body;
 import za.co.mmagon.jwebswing.base.html.Paragraph;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * @author GedMarc

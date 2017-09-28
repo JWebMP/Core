@@ -1,11 +1,11 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
-import org.junit.*;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
 
 import java.util.GregorianCalendar;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * @author MMagon
@@ -62,26 +62,6 @@ public class CSSBlockTest
 	private String inlinePrint = "property1:value1;property1:value2;property2:value1;property2:value2;";
 
 	public CSSBlockTest()
-	{
-	}
-
-	@BeforeClass
-	public static void setUpClass()
-	{
-	}
-
-	@AfterClass
-	public static void tearDownClass()
-	{
-	}
-
-	@Before
-	public void setUp()
-	{
-	}
-
-	@After
-	public void tearDown()
 	{
 	}
 

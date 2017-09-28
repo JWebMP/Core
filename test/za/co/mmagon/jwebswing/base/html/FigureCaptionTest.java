@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import junit.framework.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author GedMarc
@@ -36,7 +36,7 @@ public class FigureCaptionTest
 		fc.setID("id");
 		fc.setText("This is FC");
 		System.out.println(fc.toString(true));
-		Assert.assertEquals("<figcaption id=\"id\">This is FC</figcaption>", fc.toString(true));
+		Assertions.assertEquals("<figcaption id=\"id\">This is FC</figcaption>", fc.toString(true));
 	}
 	
 }

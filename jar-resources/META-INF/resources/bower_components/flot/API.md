@@ -536,7 +536,7 @@ i.e. everywhere a time value is expected or handed over, a Javascript
 timestamp number is used. This is a number, not a Date object. A
 Javascript timestamp is the number of milliseconds since January 1,
 1970 00:00:00 UTC. This is almost the same as Unix timestamps, except it's
-in milliseconds, so remember to multiply by 1000!
+in milliseconds, so remember to multiple by 1000!
 
 You can see a timestamp like this
 
@@ -578,7 +578,7 @@ In Ruby you can get it using the `#to_i` method on the
 [`Time`](http://apidock.com/ruby/Time/to_i) object. If you're using the
 `active_support` gem (default for Ruby on Rails applications) `#to_i` is also
 available on the `DateTime` and `ActiveSupport::TimeWithZone` objects. You
-simply need to multiply the result by 1000:
+simply need to multiple the result by 1000:
 
 ```ruby
 Time.now.to_i * 1000     # => 1383582043000
@@ -1365,7 +1365,7 @@ hooks in the plugins bundled with Flot.
     multiplies all y coordinates by 2:
 
     ```js
-    function multiply(plot, series, datapoints) {
+    function multiple(plot, series, datapoints) {
         var points = datapoints.points, ps = datapoints.pointsize;
         for (var i = 0; i < points.length; i += ps)
             points[i + 1] *= 2;

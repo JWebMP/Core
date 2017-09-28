@@ -16,7 +16,7 @@
  */
 package za.co.mmagon.jwebswing.base;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
@@ -59,7 +59,7 @@ public class ComponentStyleBaseTest
 		}
 		
 		
-		/*Assert.assertEquals("<!DOCTYPE html>\n"
+		/*Assertions.assertEquals("<!DOCTYPE html>\n"
 				                    + "<html>\n"
 				                    + "	<head>\n"
 				                    + "		<style type=\"text/css\">#body {background-color:darkgoldenrod;}</style>\n"

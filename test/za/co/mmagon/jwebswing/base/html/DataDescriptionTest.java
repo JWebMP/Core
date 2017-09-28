@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import za.co.mmagon.BaseTestClass;
 
 /**
@@ -36,7 +36,7 @@ public class DataDescriptionTest extends BaseTestClass
 		DataDescription dd = new DataDescription("data desc");
 		dd.setID("id");
 		System.out.println(dd.toString(true));
-		Assert.assertEquals("<dd id=\"id\">data desc</dd>", dd.toString(true));
+		Assertions.assertEquals("<dd id=\"id\">data desc</dd>", dd.toString(true));
 	}
 	
 }

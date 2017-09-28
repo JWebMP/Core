@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author GedMarc
@@ -34,7 +34,7 @@ public class DefinitionTest
 	{
 		Definition d = new Definition("HTML");
 		System.out.println(d.toString(true));
-		Assert.assertEquals("<dfn>HTML</dfn>", d.toString(true).toString());
+		Assertions.assertEquals("<dfn>HTML</dfn>", d.toString(true).toString());
 	}
 	
 }

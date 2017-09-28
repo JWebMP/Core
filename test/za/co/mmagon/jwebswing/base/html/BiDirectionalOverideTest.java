@@ -16,7 +16,7 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author MMagon
