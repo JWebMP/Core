@@ -24,7 +24,6 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.NoClosingTag;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
@@ -78,7 +77,7 @@ import java.util.logging.Logger;
  */
 public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		extends Component<NoChildren, A, GlobalFeatures, GlobalEvents, J>
-		implements NoClosingTag, GlobalChildren, ParagraphChildren
+		implements GlobalChildren, ParagraphChildren
 {
 	
 	private static final Logger log = LogFactory.getInstance().getLogger("Input");
@@ -113,7 +112,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 			this.inputType = inputType;
 			addAttribute(GlobalAttributes.Type, getInputType().name().toLowerCase());
 		}
-		
+		setClosingTag(false);
 	}
 	
 	/**
@@ -152,18 +151,24 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	@Override
 	public void preConfigure()
 	{
-		super.preConfigure();
-		try
+		if (!isConfigured())
 		{
-			if (getPage().getHtmlVersion().name().startsWith("X"))
+			try
 			{
-				setInlineClosingTag(true);
+				if (getInlineClosingTag() == null || !getInlineClosingTag())
+				{
+					if (getPage().getHtmlVersion().name().startsWith("X"))
+					{
+						setInlineClosingTag(true);
+					}
+				}
+			}
+			catch (Exception e)
+			{
+				log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
 			}
 		}
-		catch (Exception e)
-		{
-			log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
-		}
+		super.preConfigure();
 	}
 	
 	/**

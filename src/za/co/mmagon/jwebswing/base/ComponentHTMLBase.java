@@ -61,11 +61,11 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	/**
 	 * Specifies to render a closing tag or not
 	 */
-	private boolean inlineClosingTag = false;
+	private Boolean inlineClosingTag;
 	/**
 	 * Specifies if this component should render a closing tag
 	 */
-	private boolean closingTag = true;
+	private Boolean closingTag = true;
 	/**
 	 * Specifies if there must be a new line before the raw text entry
 	 */
@@ -332,6 +332,17 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	 */
 	protected boolean isInlineClosingTag()
 	{
+		if(inlineClosingTag == null)
+			inlineClosingTag = false;
+		return inlineClosingTag;
+	}
+	
+	/**
+	 * Gets the physical inline closing tag value
+	 * @return
+	 */
+	public Boolean getInlineClosingTag()
+	{
 		return inlineClosingTag;
 	}
 	
@@ -362,7 +373,6 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		{
 			return false;
 		}
-		
 		return this.closingTag;
 	}
 	

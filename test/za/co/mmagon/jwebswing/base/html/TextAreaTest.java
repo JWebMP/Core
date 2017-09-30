@@ -17,13 +17,14 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.jupiter.api.Test;
+import za.co.mmagon.BaseTestClass;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author GedMarc
  */
-public class TextAreaTest
+public class TextAreaTest extends BaseTestClass
 {
 	
 	public TextAreaTest()

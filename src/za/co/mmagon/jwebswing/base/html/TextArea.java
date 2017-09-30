@@ -66,6 +66,7 @@ public class TextArea<J extends TextArea<J>>
 	{
 		super(ComponentTypes.TextArea);
 		setText(defaultText);
+		setClosingTag(true);
 	}
 	
 	/**
