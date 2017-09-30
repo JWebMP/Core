@@ -17,12 +17,9 @@
 package za.co.mmagon.jwebswing.htmlbuilder.javascript;
 
 import com.armineasy.injection.GuiceContext;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Key;
@@ -416,4 +413,18 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 		this.referenceId = referenceId;
 	}
 	
+	@JsonIgnore
+	public boolean isConfigured()
+	{
+		return true;
+	}
+	@JsonIgnore
+	public boolean isInitialized()
+	{
+		return true;
+	}
+	
+	public void init(){};
+	public void preConfigure(){};
+	public void destroy(){};
 }

@@ -94,7 +94,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 *
 	 * @return An array list of components
 	 */
-	List<ComponentHierarchyBase> getChildren();
+	List<ComponentHierarchyBase>  getChildren();
 	
 	/**
 	 * Get an array list of all children and their children recursively Includes this object
@@ -316,4 +316,10 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return This Class
 	 */
 	J addTheme(Theme theme);
+	
+	public void init();
+	public void preConfigure();
+	public boolean isConfigured();
+	public boolean isInitialized();
+	public void destroy();
 }

@@ -62,7 +62,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @version 1.0
  * @since 2012/10/01
  */
-public class TableCell<J extends TableCell<J>>
+public class TableHeaderCell<J extends TableHeaderCell<J>>
 		extends Component<Component, TableCellAttributes, GlobalFeatures, GlobalEvents, J>
 		implements TableRowChildren
 {
@@ -72,7 +72,7 @@ public class TableCell<J extends TableCell<J>>
 	/**
 	 * Constructs a normal table cell
 	 */
-	public TableCell()
+	public TableHeaderCell()
 	{
 		this((GlobalChildren) null);
 	}
@@ -82,13 +82,14 @@ public class TableCell<J extends TableCell<J>>
 	 *
 	 * @param dataDisplay The component that is a child
 	 */
-	public TableCell(GlobalChildren dataDisplay)
+	public TableHeaderCell(GlobalChildren dataDisplay)
 	{
 		super(ComponentTypes.TableCell);
 		if (dataDisplay != null)
 		{
 			add(Component.class.cast(dataDisplay));
 		}
+		setTag("th");
 	}
 	
 	/**
@@ -96,10 +97,9 @@ public class TableCell<J extends TableCell<J>>
 	 *
 	 * @param dataDisplay
 	 */
-	public TableCell(String dataDisplay)
+	public TableHeaderCell(String dataDisplay)
 	{
-		this((GlobalChildren) null);
-		setText(dataDisplay);
+		this(new Paragraph(dataDisplay));
 	}
 	
 	/**

@@ -59,4 +59,5 @@ public class TableRow<J extends TableRow<J>>
 		super(ComponentTypes.TableRow);
 		setTiny(true);
 	}
+	
 }

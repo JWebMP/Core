@@ -26,5 +26,9 @@ package za.co.mmagon.jwebswing.base.html.interfaces;
 
 public interface GlobalChildren
 {
-
+	public void init();
+	public void preConfigure();
+	public boolean isConfigured();
+	public boolean isInitialized();
+	public void destroy();
 }

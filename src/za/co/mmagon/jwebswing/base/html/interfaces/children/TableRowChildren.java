@@ -23,5 +23,4 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
  */
 public interface TableRowChildren extends GlobalChildren
 {
-
 }
