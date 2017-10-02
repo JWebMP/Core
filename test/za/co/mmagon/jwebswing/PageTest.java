@@ -59,15 +59,17 @@ public class PageTest extends BaseTestClass
 		p.getBody().getCss().getBackground().setBackgroundColor$(ColourNames.DarkGoldenRod);
 		System.out.println(p.toString(true));
 
-		assertEquals("<!DOCTYPE html>\n"
-				             + "<html>\n"
-				             + "	<head>\n"
-				             + "		<style type=\"text/css\">#body {background-color:darkgoldenrod;}</style>\n"
-				             + "	</head>\n"
-				             + "	<body id=\"body\">\n"
-				             + "		<!-- Meh -->\n"
-				             + "	</body>\n"
-				             + "</html>", p.toString(true));
+		assertEquals("<!DOCTYPE html>\n" +
+				             "<html>\n" +
+				             "\t<head>\n" +
+				             "\t\t<!-- Priority [Top_Shelf] Values -->\n" +
+				             "\t\t<script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script>\n" +
+				             "\t\t<style type=\"text/css\">#body {background-color:darkgoldenrod;}</style>\n" +
+				             "\t</head>\n" +
+				             "\t<body id=\"body\">\n" +
+				             "\t\t<!-- Meh -->\n" +
+				             "\t</body>\n" +
+				             "</html>", p.toString(true));
 	}
 
 	@Test
@@ -84,16 +86,18 @@ public class PageTest extends BaseTestClass
 
 		// System.out.println(p.getBody().renderCss(0));
 		// System.out.println(child.renderCss(0));
-		assertEquals("<!DOCTYPE html>\n"
-				             + "<html>\n"
-				             + "	<head>\n"
-				             + "		<style type=\"text/css\">#body {background-color:darkgoldenrod;}#child {background-color:antiquewhite;}</style>\n"
-				             + "	</head>\n"
-				             + "	<body id=\"body\">\n"
-				             + "		<!-- Meh -->\n"
-				             + "		<h1 id=\"child\">child</h1>\n"
-				             + "	</body>\n"
-				             + "</html>", p.toString(true));
+		assertEquals("<!DOCTYPE html>\n" +
+				             "<html>\n" +
+				             "\t<head>\n" +
+				             "\t\t<!-- Priority [Top_Shelf] Values -->\n" +
+				             "\t\t<script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script>\n" +
+				             "\t\t<style type=\"text/css\">#body {background-color:darkgoldenrod;}#child {background-color:antiquewhite;}</style>\n" +
+				             "\t</head>\n" +
+				             "\t<body id=\"body\">\n" +
+				             "\t\t<!-- Meh -->\n" +
+				             "\t\t<h1 id=\"child\">child</h1>\n" +
+				             "\t</body>\n" +
+				             "</html>", p.toString(true));
 
 	}
 
@@ -105,9 +109,13 @@ public class PageTest extends BaseTestClass
 		instance.setTiny(false);
 		instance.setRunningEnvironment(DevelopmentEnvironments.Development);
 		System.out.println(result = instance.toString(true));
-		String expResult = "<!DOCTYPE html>\n"
-				+ "<html>\n"
-				+ "</html>";
+		String expResult = "<!DOCTYPE html>\n" +
+				"<html>\n" +
+				"\t<head>\n" +
+				"\t\t<!-- Priority [Top_Shelf] Values -->\n" +
+				"\t\t<script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script>\n" +
+				"\t</head>\n" +
+				"</html>";
 		assertEquals(expResult, result);
 	}
 
@@ -119,7 +127,7 @@ public class PageTest extends BaseTestClass
 		instance.setTiny(true);
 		instance.setRunningEnvironment(DevelopmentEnvironments.Production);
 		System.out.println(result = instance.toString(true));
-		String expResult = "<!DOCTYPE html><html></html>";
+		String expResult = "<!DOCTYPE html><html><head><script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script></head></html>";
 		assertEquals(expResult, result);
 	}
 
@@ -133,9 +141,13 @@ public class PageTest extends BaseTestClass
 		instance = getPage();
 		instance.setRunningEnvironment(DevelopmentEnvironments.Development);
 		System.out.println(result = instance.toString(true));
-		String expResult = "<!DOCTYPE html>\n"
-				+ "<html>\n"
-				+ "</html>";
+		String expResult = "<!DOCTYPE html>\n" +
+				"<html>\n" +
+				"\t<head>\n" +
+				"\t\t<!-- Priority [Top_Shelf] Values -->\n" +
+				"\t\t<script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script>\n" +
+				"\t</head>\n" +
+				"</html>";
 		assertEquals(expResult, result);
 	}
 
@@ -150,9 +162,13 @@ public class PageTest extends BaseTestClass
 		//instance.setRenderComments(false);
 		instance.setRunningEnvironment(DevelopmentEnvironments.Development);
 		System.out.println(result = instance.toString(true));
-		String expResult = "<!DOCTYPE html>\n"
-				+ "<html>\n"
-				+ "</html>";
+		String expResult = "<!DOCTYPE html>\n" +
+				"<html>\n" +
+				"\t<head>\n" +
+				"\t\t<!-- Priority [Top_Shelf] Values -->\n" +
+				"\t\t<script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script>\n" +
+				"\t</head>\n" +
+				"</html>";
 		assertEquals(expResult, result);
 	}
 
@@ -164,7 +180,7 @@ public class PageTest extends BaseTestClass
 		instance.setTiny(true);
 		instance.setRunningEnvironment(DevelopmentEnvironments.Production);
 		System.out.println(result = instance.toString(true));
-		String expResult = "<!DOCTYPE html><html></html>";
+		String expResult = "<!DOCTYPE html><html><head><script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script></head></html>";
 		assertEquals(expResult, result);
 	}
 
@@ -176,12 +192,14 @@ public class PageTest extends BaseTestClass
 		instance.setRunningEnvironment(DevelopmentEnvironments.Development);
 		instance.getPageFields().setAuthor("Marc Magon");
 		System.out.println(result = instance.toString(true));
-		String expResult = "<!DOCTYPE html>\n"
-				+ "<html>\n"
-				+ "	<head>\n"
-				+ "		<meta content=\"Marc Magon\" name=\"author\">\n"
-				+ "	</head>\n"
-				+ "</html>";
+		String expResult = "<!DOCTYPE html>\n" +
+				"<html>\n" +
+				"\t<head>\n" +
+				"\t\t<meta content=\"Marc Magon\" name=\"author\">\n" +
+				"\t\t<!-- Priority [Top_Shelf] Values -->\n" +
+				"\t\t<script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script>\n" +
+				"\t</head>\n" +
+				"</html>";
 		assertEquals(expResult, result);
 	}
 
@@ -194,7 +212,7 @@ public class PageTest extends BaseTestClass
 		instance.setRunningEnvironment(DevelopmentEnvironments.Production);
 		instance.getPageFields().setAuthor("Marc Magon");
 		System.out.println(result = instance.toString(true));
-		String expResult = "<!DOCTYPE html><html><head><meta content=\"Marc Magon\" name=\"author\"></head></html>";
+		String expResult = "<!DOCTYPE html><html><head><meta content=\"Marc Magon\" name=\"author\"><script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script></head></html>";
 		assertEquals(expResult, result);
 	}
 
@@ -207,12 +225,14 @@ public class PageTest extends BaseTestClass
 		instance.setRunningEnvironment(DevelopmentEnvironments.Development);
 		instance.getPageFields().setDescription("This is my page description... It can be very very long");
 		System.out.println(result = instance.toString(true));
-		String expResult = "<!DOCTYPE html>\n"
-				+ "<html>\n"
-				+ "	<head>\n"
-				+ "		<meta content=\"This is my page description... It can be very very long\" name=\"description\">\n"
-				+ "	</head>\n"
-				+ "</html>";
+		String expResult = "<!DOCTYPE html>\n" +
+				"<html>\n" +
+				"\t<head>\n" +
+				"\t\t<meta content=\"This is my page description... It can be very very long\" name=\"description\">\n" +
+				"\t\t<!-- Priority [Top_Shelf] Values -->\n" +
+				"\t\t<script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script>\n" +
+				"\t</head>\n" +
+				"</html>";
 		assertEquals(expResult, result);
 	}
 
@@ -225,7 +245,7 @@ public class PageTest extends BaseTestClass
 		instance.setRunningEnvironment(DevelopmentEnvironments.Production);
 		instance.getPageFields().setDescription("This is my page description... It can be very very long");
 		System.out.println(result = instance.toString(true));
-		String expResult = "<!DOCTYPE html><html><head><meta content=\"This is my page description... It can be very very long\" name=\"description\"></head></html>";
+		String expResult = "<!DOCTYPE html><html><head><meta content=\"This is my page description... It can be very very long\" name=\"description\"><script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script></head></html>";
 		assertEquals(expResult, result);
 	}
 
@@ -237,12 +257,14 @@ public class PageTest extends BaseTestClass
 		instance.setRunningEnvironment(DevelopmentEnvironments.Development);
 		instance.getPageFields().setGenerator("This is my page description... It can be very very long");
 		System.out.println(result = instance.toString(true));
-		String expResult = "<!DOCTYPE html>\n"
-				+ "<html>\n"
-				+ "	<head>\n"
-				+ "		<meta content=\"This is my page description... It can be very very long\" name=\"generator\">\n"
-				+ "	</head>\n"
-				+ "</html>";
+		String expResult = "<!DOCTYPE html>\n" +
+				"<html>\n" +
+				"\t<head>\n" +
+				"\t\t<meta content=\"This is my page description... It can be very very long\" name=\"generator\">\n" +
+				"\t\t<!-- Priority [Top_Shelf] Values -->\n" +
+				"\t\t<script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script>\n" +
+				"\t</head>\n" +
+				"</html>";
 		assertEquals(expResult, result);
 	}
 
@@ -255,7 +277,7 @@ public class PageTest extends BaseTestClass
 		instance.setRunningEnvironment(DevelopmentEnvironments.Production);
 		instance.getPageFields().setGenerator("This is my page description... It can be very very long");
 		System.out.println(result = instance.toString(true));
-		String expResult = "<!DOCTYPE html><html><head><meta content=\"This is my page description... It can be very very long\" name=\"generator\"></head></html>";
+		String expResult = "<!DOCTYPE html><html><head><meta content=\"This is my page description... It can be very very long\" name=\"generator\"><script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script></head></html>";
 		assertEquals(expResult, result);
 	}
 
@@ -267,12 +289,14 @@ public class PageTest extends BaseTestClass
 		instance.setRunningEnvironment(DevelopmentEnvironments.Development);
 		instance.getPageFields().setKeywords("This is my page description... It can be very very long");
 		System.out.println(result = instance.toString(true));
-		String expResult = "<!DOCTYPE html>\n"
-				+ "<html>\n"
-				+ "	<head>\n"
-				+ "		<meta content=\"This is my page description... It can be very very long\" name=\"keywords\">\n"
-				+ "	</head>\n"
-				+ "</html>";
+		String expResult = "<!DOCTYPE html>\n" +
+				"<html>\n" +
+				"\t<head>\n" +
+				"\t\t<meta content=\"This is my page description... It can be very very long\" name=\"keywords\">\n" +
+				"\t\t<!-- Priority [Top_Shelf] Values -->\n" +
+				"\t\t<script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script>\n" +
+				"\t</head>\n" +
+				"</html>";
 		assertEquals(expResult, result);
 	}
 
@@ -285,7 +309,7 @@ public class PageTest extends BaseTestClass
 		instance.setRunningEnvironment(DevelopmentEnvironments.Production);
 		instance.getPageFields().setKeywords("This is my page description... It can be very very long");
 		System.out.println(result = instance.toString(true));
-		String expResult = "<!DOCTYPE html><html><head><meta content=\"This is my page description... It can be very very long\" name=\"keywords\"></head></html>";
+		String expResult = "<!DOCTYPE html><html><head><meta content=\"This is my page description... It can be very very long\" name=\"keywords\"><script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script></head></html>";
 		assertEquals(expResult, result);
 	}
 
@@ -301,12 +325,14 @@ public class PageTest extends BaseTestClass
 		instance.setTiny(false);
 		instance.setRunningEnvironment(DevelopmentEnvironments.Development);
 		System.out.println(result = instance.toString(true));
-		String expResult = "<!DOCTYPE html>\n"
-				+ "<html>\n"
-				+ "	<head>\n"
-				+ "		<base target=\"The Base Target\">\n"
-				+ "	</head>\n"
-				+ "</html>";
+		String expResult = "<!DOCTYPE html>\n" +
+				"<html>\n" +
+				"\t<head>\n" +
+				"\t\t<base target=\"The Base Target\">\n" +
+				"\t\t<!-- Priority [Top_Shelf] Values -->\n" +
+				"\t\t<script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script>\n" +
+				"\t</head>\n" +
+				"</html>";
 		assertEquals(expResult, result);
 	}
 
@@ -319,7 +345,7 @@ public class PageTest extends BaseTestClass
 		instance.setTiny(true);
 		instance.setRunningEnvironment(DevelopmentEnvironments.Production);
 		System.out.println(result = instance.toString(true));
-		String expResult = "<!DOCTYPE html><html><head><base></head></html>";
+		String expResult = "<!DOCTYPE html><html><head><base><script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script></head></html>";
 		assertEquals(expResult, result);
 	}
 
@@ -341,18 +367,20 @@ public class PageTest extends BaseTestClass
 		String result;
 		body.setID(null);
 		System.out.println(result = instance.toString(true));
-		String expResult = "<!DOCTYPE html>\n"
-				+ "<html>\n"
-				+ "	<head>\n"
-				+ "		<title>This is my title</title>\n"
-				+ "		<base target=\"Base Target\">\n"
-				+ "		<meta content=\"IE=10\" http-equiv=\"X-UA-Compatible\">\n"
-				+ "		<meta content=\"Author Marc Magon\" name=\"author\">\n"
-				+ "		<meta content=\"Application Name\" name=\"application-name\">\n"
-				+ "		<meta content=\"Generator\" name=\"generator\">\n"
-				+ "		<meta content=\"Page Description\" name=\"description\">\n"
-				+ "	</head>\n"
-				+ "</html>";
+		String expResult = "<!DOCTYPE html>\n" +
+				"<html>\n" +
+				"\t<head>\n" +
+				"\t\t<title>This is my title</title>\n" +
+				"\t\t<base target=\"Base Target\">\n" +
+				"\t\t<meta content=\"IE=10\" http-equiv=\"X-UA-Compatible\">\n" +
+				"\t\t<meta content=\"Author Marc Magon\" name=\"author\">\n" +
+				"\t\t<meta content=\"Application Name\" name=\"application-name\">\n" +
+				"\t\t<meta content=\"Generator\" name=\"generator\">\n" +
+				"\t\t<meta content=\"Page Description\" name=\"description\">\n" +
+				"\t\t<!-- Priority [Top_Shelf] Values -->\n" +
+				"\t\t<script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script>\n" +
+				"\t</head>\n" +
+				"</html>";
 		assertEquals(expResult, result);
 	}
 
@@ -374,7 +402,7 @@ public class PageTest extends BaseTestClass
 		instance.setRunningEnvironment(DevelopmentEnvironments.Production);
 		String result;
 		System.out.println(result = instance.toString(true));
-		String expResult = "<!DOCTYPE html><html><head><title>This is my title</title><base target=\"Base Target\"><meta content=\"IE=10\" http-equiv=\"X-UA-Compatible\"><meta content=\"Author Marc Magon\" name=\"author\"><meta content=\"Application Name\" name=\"application-name\"><meta content=\"Generator\" name=\"generator\"><meta content=\"Page Description\" name=\"description\"></head></html>";
+		String expResult = "<!DOCTYPE html><html><head><title>This is my title</title><base target=\"Base Target\"><meta content=\"IE=10\" http-equiv=\"X-UA-Compatible\"><meta content=\"Author Marc Magon\" name=\"author\"><meta content=\"Application Name\" name=\"application-name\"><meta content=\"Generator\" name=\"generator\"><meta content=\"Page Description\" name=\"description\"><script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script></head></html>";
 		assertEquals(expResult, result);
 	}
 }

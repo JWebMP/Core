@@ -88,7 +88,7 @@ public class ComponentHTMLAttributeTest
 				"    \"eventType\" : \"click\"\n" +
 				"  } ],\n" +
 				"  \"tag\" : \"abbr\",\n" +
-				"  \"inlineClosingTag\" : false,\n" +
+				//"  \"inlineClosingTag\" : false,\n" +
 				"  \"closingTag\" : true,\n" +
 				"  \"newLineForRawText\" : false,\n" +
 				"  \"newLineForClosingTag\" : true,\n" +
@@ -130,7 +130,6 @@ public class ComponentHTMLAttributeTest
 				"    \"eventType\" : \"click\"\n" +
 				"  } ],\n" +
 				"  \"tag\" : \"abbr\",\n" +
-				"  \"inlineClosingTag\" : false,\n" +
 				"  \"closingTag\" : true,\n" +
 				"  \"newLineForRawText\" : false,\n" +
 				"  \"newLineForClosingTag\" : true,\n" +

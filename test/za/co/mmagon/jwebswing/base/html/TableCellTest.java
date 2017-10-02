@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.jupiter.api.Test;
-import za.co.mmagon.jwebswing.base.ComponentBase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -39,17 +38,13 @@ public class TableCellTest
 	{
 		TableCell tc = new TableCell("blah");
 		tc.setID("id");
-		ComponentBase.class.cast(tc.getChildren().get(0)).setID("id");
+		tc.setID("id");
 		System.out.println(tc.toString(true));
-		assertEquals("<td id=\"id\">\n"
-				             + "	<p id=\"id\">blah</p>\n"
-				             + "</td>", tc.toString(true).toString());
+		assertEquals("<td id=\"id\">blah</td>", tc.toString(true).toString());
 		
 		tc.setColumnSpan(0);
 		System.out.println(tc.toString(true));
-		assertEquals("<td colspan=\"0\" id=\"id\">\n"
-				             + "	<p id=\"id\">blah</p>\n"
-				             + "</td>", tc.toString(true).toString());
+		assertEquals("<td colspan=\"0\" id=\"id\">blah</td>", tc.toString(true).toString());
 	}
 	
 }

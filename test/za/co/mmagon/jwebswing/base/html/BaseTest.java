@@ -84,18 +84,20 @@ public class BaseTest extends BaseTestClass
 
 		page.setTiny(false);
 		System.out.println(page.toString(true));
-		expResult = "<!DOCTYPE html>\n"
-				+ "<html>\n"
-				+ "	<head>\n"
-				+ "		<base href=\"This is a link to something\" target=\"Target Frame\">\n"
-				+ "	</head>\n"
-				+ "</html>";
+		expResult = "<!DOCTYPE html>\n" +
+				"<html>\n" +
+				"\t<head>\n" +
+				"\t\t<base href=\"This is a link to something\" target=\"Target Frame\">\n" +
+				"\t\t<!-- Priority [Top_Shelf] Values -->\n" +
+				"\t\t<script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script>\n" +
+				"\t</head>\n" +
+				"</html>";
 		result = page.toString(true).toString();
 		assertEquals(expResult, result);
 
 		page.setTiny(true);
 		System.out.println(page.toString(true));
-		expResult = "<!DOCTYPE html><html><head><base href=\"This is a link to something\" target=\"Target Frame\"></head></html>";
+		expResult = "<!DOCTYPE html><html><head><base href=\"This is a link to something\" target=\"Target Frame\"><script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script></head></html>";
 		result = page.toString(true).toString();
 		assertEquals(expResult, result);
 	}

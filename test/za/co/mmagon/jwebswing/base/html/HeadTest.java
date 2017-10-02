@@ -53,9 +53,13 @@ public class HeadTest extends BaseTestClass
 		String expResult;
 		Html html = getPage();
 		html.setTiny(false);
-		expResult = "<!DOCTYPE html>\n"
-				+ "<html>\n"
-				+ "</html>";
+		expResult = "<!DOCTYPE html>\n" +
+				"<html>\n" +
+				"\t<head>\n" +
+				"\t\t<!-- Priority [Top_Shelf] Values -->\n" +
+				"\t\t<script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script>\n" +
+				"\t</head>\n" +
+				"</html>";
 		result = html.toString(true);
 		System.out.println(html.toString(true));
 		assertEquals(expResult, result);
@@ -69,7 +73,7 @@ public class HeadTest extends BaseTestClass
 		Page html = getPage();
 		html.setTiny(true);
 		html.setRunningEnvironment(DevelopmentEnvironments.Production);
-		expResult = "<!DOCTYPE html><html></html>";
+		expResult = "<!DOCTYPE html><html><head><script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script></head></html>";
 		result = html.toString(true);
 		System.out.println(html.toString(true));
 		assertEquals(expResult, result);

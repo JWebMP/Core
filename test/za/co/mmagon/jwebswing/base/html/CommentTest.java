@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,11 +29,6 @@ public class CommentTest
 	Comment comment = new Comment("This is the comment");
 	
 	public CommentTest()
-	{
-	}
-	
-	@BeforeAll
-	public void setUp()
 	{
 	}
 	

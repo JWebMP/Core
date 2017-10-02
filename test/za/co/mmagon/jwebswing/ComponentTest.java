@@ -47,6 +47,10 @@ public class ComponentTest extends BaseTestClass
 		System.out.println(p.toString(true));
 		if (!p.toString(true).startsWith("<!DOCTYPE html>\n" +
 				                                 "<html>\n" +
+				                                 "\t<head>\n" +
+				                                 "\t\t<!-- Priority [Top_Shelf] Values -->\n" +
+				                                 "\t\t<script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script>\n" +
+				                                 "\t</head>\n" +
 				                                 "\t<body id=\"body\">\n" +
 				                                 "\t\t<p id=\"paragraph\">String adds a paragraph</p>\n" +
 				                                 "\t</body>\n" +

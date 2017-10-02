@@ -55,14 +55,18 @@ public class HtmlTest
 		Html instance = new HtmlImpl();
 		instance.setBrowser(Browsers.Firefox19);
 		System.out.println(instance.toString(true));
-		String expResult = "<!DOCTYPE html>\n"
-				+ "<html>\n"
-				+ "</html>";
+		String expResult = "<!DOCTYPE html>\n" +
+				"<html>\n" +
+				"\t<head>\n" +
+				"\t\t<!-- Priority [Top_Shelf] Values -->\n" +
+				"\t\t<script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script>\n" +
+				"\t</head>\n" +
+				"</html>";
 		String result = instance.toString(true).toString();
 		assertEquals(expResult, result);
 		
 		instance.setTiny(true);
-		expResult = "<!DOCTYPE html><html></html>";
+		expResult = "<!DOCTYPE html><html><head><script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script></head></html>";
 		result = instance.toString(true).toString();
 		System.out.println(instance.toString(true));
 		assertEquals(expResult, result);

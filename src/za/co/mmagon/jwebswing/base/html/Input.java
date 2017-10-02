@@ -206,6 +206,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	 */
 	public J setMinimumLength(int minLength)
 	{
+		addAttribute("data-minlength", "" + minLength);
 		addAttribute("minlength", "" + minLength);
 		return (J) this;
 	}
@@ -219,6 +220,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	 */
 	public J setMaximumLength(int minLength)
 	{
+		addAttribute("data-maxlength", "" + minLength);
 		addAttribute("maxlength", "" + minLength);
 		return (J) this;
 	}
