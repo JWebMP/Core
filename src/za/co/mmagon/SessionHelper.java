@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SessionHelper
 {
+	private static String address = null;
 	
 	/*
 	 * Constructs a new SessionHelper
@@ -42,26 +43,30 @@ public class SessionHelper
 	 */
 	public static String getServerPath()
 	{
-		if (!GuiceContext.isBuildingInjector())
+		if (address == null)
 		{
-			StringBuffer url = new StringBuffer();
-			try
+			if (!GuiceContext.isBuildingInjector())
 			{
-				HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);
-				StringBuffer buff = request.getRequestURL();
-				if (request.getHeader("jwsiteurl") != null && !request.getHeader("jwsiteurl").isEmpty())
+				StringBuffer url = new StringBuffer();
+				try
 				{
-					buff = new StringBuffer(request.getHeader("jwsiteurl"));
+					HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);
+					StringBuffer buff = request.getRequestURL();
+					if (request.getHeader("jwsiteurl") != null && !request.getHeader("jwsiteurl").isEmpty())
+					{
+						buff = new StringBuffer(request.getHeader("jwsiteurl"));
+					}
+					String address = buff.substring(0, buff.lastIndexOf("/") + 1);
+					SessionHelper.address = address;
+					return address;
 				}
-				String address = buff.substring(0, buff.lastIndexOf("/") + 1);
-				return address;
-			}
-			catch (Exception e)
-			{
-				return "";
+				catch (Exception e)
+				{
+					return "";
+				}
 			}
 		}
-		return "";
+		return address;
 	}
 	
 	/**

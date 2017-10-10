@@ -39,6 +39,8 @@ import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.servlets.*;
+import za.co.mmagon.jwebswing.base.servlets.options.AngularDataServletInitData;
+import za.co.mmagon.jwebswing.base.servlets.options.AngularFileTransferData;
 import za.co.mmagon.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
@@ -243,25 +245,11 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
 			return new HashMap();
 		});
 		
+		module.bind(SessionProperties.class);
+		module.bind(AngularDataServletInitData.class);
 		
-		//Bind Modernizr
-		//TODO move to modernizr page configurator
-		/*module.bind(ModernizrDto.class).toProvider((Provider<ModernizrDto>) () ->
-		{
-			if (!GuiceContext.isBuildingInjector())
-			{
-				HttpSession session = GuiceContext.inject().getInstance(HttpSession.class);
-				ModernizrDto attributeMap = (ModernizrDto) session.getAttribute(AngularDataServlet.ModernizrSessionKey);
-				if (attributeMap == null)
-				{
-					attributeMap = new ModernizrDto();
-				}
-				return attributeMap;
-			}
-			return new ModernizrDto();
-		});*/
 		
-		//Page
+		
 		
 		module.bind(Page.class).toProvider(() ->
 		{

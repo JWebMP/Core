@@ -24,7 +24,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.AddressChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.logger.LogFactory;
 
 import java.io.Serializable;
 
@@ -62,11 +61,6 @@ public class Address<J extends Address<J>>
 		extends Component<AddressChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, Serializable
 {
-	
-	/**
-	 * Logger for the Component
-	 */
-	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Address");
 	/**
 	 * Serial Version for all Components and their compatibility
 	 */

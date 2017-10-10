@@ -28,10 +28,12 @@ import java.io.IOException;
  */
 public class AlwaysEmptySerializer extends JsonSerializer<Object>
 {
-	
+	/**
+	 * Always serialize as an empty serialization
+	 */
 	public AlwaysEmptySerializer()
 	{
-	
+		//Nothing required here
 	}
 	
 	@Override

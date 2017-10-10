@@ -14,8 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.base.servlets;
+package za.co.mmagon.jwebswing.base.servlets.options;
 
+import com.google.inject.servlet.RequestScoped;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 import java.util.HashMap;
@@ -25,7 +26,8 @@ import java.util.Map;
  * @author Marc Magon
  * @since 05 Apr 2017
  */
-class AngularDataServletInitData extends JavaScriptPart
+@RequestScoped
+public class AngularDataServletInitData extends JavaScriptPart
 {
 	
 	private static final long serialVersionUID = 1L;

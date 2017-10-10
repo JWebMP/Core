@@ -19,15 +19,13 @@ package za.co.mmagon.jwebswing.base.servlets;
 import com.armineasy.injection.GuiceContext;
 import com.google.inject.Singleton;
 import za.co.mmagon.jwebswing.Event;
-import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.annotations.AjaxCallInterception;
 import za.co.mmagon.jwebswing.annotations.SiteInterception;
-import za.co.mmagon.jwebswing.base.ComponentEventBase;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ajax.*;
 import za.co.mmagon.jwebswing.base.ajax.exceptions.InvalidRequestException;
 import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.jwebswing.utilities.TextUtilities;
 import za.co.mmagon.logger.LogFactory;
 
@@ -35,10 +33,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Date;
+import java.nio.charset.Charset;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -58,13 +55,16 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 	
 	public AjaxReceiverServlet()
 	{
+		//Quick construction
 	}
 	
 	@SiteInterception
 	@AjaxCallInterception
 	protected void intercept()
 	{
-	
+		/**
+		 * Intercepted with the annotations
+		 */
 	}
 	
 	/**
@@ -76,114 +76,31 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 	 * @throws ServletException if a Servlet-specific error occurs
 	 * @throws IOException      if an I/O error occurs
 	 */
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
+	protected void processRequest(HttpServletRequest request)
 	{
-		Date startDate;
-		String output = new String();
-		String _eventType = "Servlet Accessed";
-		long renderTime = 1L;
-		long fireTime = 1L;
-		
+		StringBuilder output = new StringBuilder();
 		try
 		{
 			AjaxCall ajaxCallIncoming = (AjaxCall) new JavaScriptPart().From(request.getInputStream(), AjaxCall.class);
 			AjaxCall ajaxCall = GuiceContext.getInstance(AjaxCall.class);
-			ajaxCall.from(ajaxCallIncoming);
-			if (ajaxCall.getComponentId() == null)
-			{
-				log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Component ID Not Found]", request.getSession().getId());
-				throw new InvalidRequestException("There is no Component ID in this call.");
-			}
-			
-			String componentId = ajaxCall.getComponentId();
-			if (componentId == null || componentId.isEmpty())
-			{
-				log.log(Level.FINER, "[SessionID]-[{0}];[Security]-[Component ID Incorrect]", request.getSession().getId());
-				throw new InvalidRequestException("Component ID Was Incorrect.");
-			}
-			
-			Page page = GuiceContext.inject().getInstance(Page.class);
-			
-			if (page == null)
-			{
-				throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
-			}
-			
-			Event triggerEvent = null;
-			
-			try
-			{
-				Class eventClass = Class.forName(ajaxCallIncoming.getClassName().replace('_', '.'));
-				triggerEvent = (Event) GuiceContext.getInstance(eventClass);
-			}
-			catch (ClassNotFoundException cnfe)
-			{
-				Set<Class<? extends Event>> events = GuiceContext.reflect().getSubTypesOf(Event.class);
-				for (Class<? extends Event> event : events)
-				{
-					if (Modifier.isAbstract(event.getModifiers()))
-					{
-						continue;
-					}
-					Event instance = GuiceContext.getInstance(event);
-					if (instance.getID().equals(ajaxCall.getEventId()))
-					{
-						triggerEvent = instance;
-						break;
-					}
-				}
-			}
-			
-			
-			Date datetime = ajaxCall.getDatetime();
-			if (datetime == null)
-			{
-				log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Date Time Incorrect]", request.getSession().getId());
-				throw new InvalidRequestException("Invalid Date Time Value");
-			}
-			EventTypes eventType = ajaxCall.getEventType();
-			if (eventType == null)
-			{
-				log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Event Type Incorrect]", request.getSession().getId());
-				throw new InvalidRequestException("Invalid Event Type");
-			}
-			_eventType = eventType.toString();
-			
-			EventTypes eventTypeFrom = ajaxCall.getEventTypeFrom();
-			if (eventTypeFrom == null)
-			{
-				log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Event From Incorrect]", request.getSession().getId());
-				throw new InvalidRequestException("Invalid Event Type From");
-			}
-			
-			AjaxEventValue value = ajaxCall.getValue();
-			
-			if (value == null)
-			{
-				log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Value Is Missing]", request.getSession().getId());
-				throw new InvalidRequestException("Invalid Event Value");
-			}
-			
-			Date ajaxCallObjectCreated = new Date();
+			ajaxCall.fromCall(ajaxCallIncoming);
 			
 			AjaxResponse ajaxResponse = GuiceContext.inject().getInstance(AjaxResponse.class);
+
+			validateCall(ajaxCall);
+			validatePage();
+			validateRequest(ajaxCall);
 			
+			Event triggerEvent = processEvent();
+
 			if (!GuiceContext.isBuildingInjector())
 			{
 				intercept();
 			}
 			
 			triggerEvent.fireEvent(ajaxCall, ajaxResponse);
-			
-			fireTime = new Date().getTime() - ajaxCallObjectCreated.getTime();
-			startDate = new Date();
-			output = ajaxResponse.toString();
-			ajaxResponse.getComponents().forEach(component ->
-			                                     {
-				                                     component.preConfigure();
-			                                     });
-			renderTime = new Date().getTime() - startDate.getTime();
+			output = new StringBuilder(ajaxResponse.toString());
+			ajaxResponse.getComponents().forEach(ComponentHierarchyBase::preConfigure);
 		}
 		catch (InvalidRequestException ie)
 		{
@@ -194,9 +111,7 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 					                                                    + ie.getMessage(), ReactionType.DialogDisplay);
 			arr.setResponseType(AjaxResponseType.Danger);
 			ajaxResponse.addReaction(arr);
-			startDate = new Date();
-			output = ajaxResponse.toString();
-			renderTime = new Date().getTime() - startDate.getTime();
+			output = new StringBuilder(ajaxResponse.toString());
 			log.log(Level.SEVERE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Exception]-[Invalid Request]", ie);
 		}
 		catch (MissingComponentException mce)
@@ -208,24 +123,8 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 					                                                    + mce.getMessage(), ReactionType.DialogDisplay);
 			arr.setResponseType(AjaxResponseType.Danger);
 			ajaxResponse.addReaction(arr);
-			startDate = new Date();
-			output = ajaxResponse.toString();
-			renderTime = new Date().getTime() - startDate.getTime();
+			output = new StringBuilder(ajaxResponse.toString());
 			log.log(Level.SEVERE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Exception]-[Missing Component]", mce);
-		}
-		catch (IOException T)
-		{
-			AjaxResponse ajaxResponse = new AjaxResponse();
-			ajaxResponse.setSuccess(false);
-			AjaxResponseReaction arr = new AjaxResponseReaction("Unknown Error",
-			                                                    "An AJAX call resulted in an unknown server error<br>"
-					                                                    + T.getMessage() + "<br>" + TextUtilities.stackTraceToString(T), ReactionType.DialogDisplay);
-			arr.setResponseType(AjaxResponseType.Danger);
-			ajaxResponse.addReaction(arr);
-			startDate = new Date();
-			output = ajaxResponse.toString();
-			renderTime = new Date().getTime() - startDate.getTime();
-			log.log(Level.SEVERE, "Unknown in ajax reply\n", T);
 		}
 		catch (Exception T)
 		{
@@ -236,37 +135,50 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 					                                                    + T.getMessage() + "<br>" + TextUtilities.stackTraceToString(T), ReactionType.DialogDisplay);
 			arr.setResponseType(AjaxResponseType.Danger);
 			ajaxResponse.addReaction(arr);
-			startDate = new Date();
-			output = ajaxResponse.toString();
-			renderTime = new Date().getTime() - startDate.getTime();
+			output = new StringBuilder(ajaxResponse.toString());
 			log.log(Level.SEVERE, "Unknown in ajax reply\n", T);
 		}
 		finally
 		{
-			try (PrintWriter out = response.getWriter())
+			writeOutput(output, "application/json;charset=UTF-8", Charset.forName("UTF-8"));
+		}
+	}
+	
+	protected Event processEvent() throws InvalidRequestException
+	{
+		Event triggerEvent = null;
+		try
+		{
+			Class eventClass = Class.forName(GuiceContext.getInstance(AjaxCall.class).getClassName().replace('_', '.'));
+			triggerEvent = (Event) GuiceContext.getInstance(eventClass);
+		}
+		catch (ClassNotFoundException cnfe)
+		{
+			Set<Class<? extends Event>> events = GuiceContext.reflect().getSubTypesOf(Event.class);
+			for (Iterator<Class<? extends Event>> iterator = events.iterator(); iterator.hasNext(); )
 			{
-				Date dataTransferDate = new Date();
-				response.setContentType("application/json;charset=UTF-8");
-				response.setCharacterEncoding("UTF-8");
-				
-				response.setHeader("Access-Control-Allow-Origin", "*");
-				response.setHeader("Access-Control-Allow-Credentials", "true");
-				response.setHeader("Access-Control-Allow-Methods", "GET, POST");
-				response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
-				
-				out.write(output);
-				//LOG.log(Level.FINE,"[Ajax Reply]-[" + output + "]");
-				long transferTime = new Date().getTime() - dataTransferDate.getTime();
-				log.log(Level.FINER, "[SessionID]-[{0}];[EventType]-[{1}];[Render Time]-[{2}];[Data Size]-[{3}];[Transer Time]-[{4}];[Fire Time]-[{5}]", new Object[]
-						{
-								request.getSession().getId(), _eventType, renderTime, output.length(), transferTime, fireTime
-						});
+				Class<? extends Event> event = iterator.next();
+				if (Modifier.isAbstract(event.getModifiers()))
+				{
+					iterator.remove();
+				}
 			}
-			catch (IOException io)
+			for (Class<? extends Event> event : events)
 			{
-				log.log(Level.SEVERE, "Unable to send response to client", io);
+				Event instance = GuiceContext.getInstance(event);
+				if (instance.getID().equals(GuiceContext.getInstance(AjaxCall.class).getEventId()))
+				{
+					triggerEvent = instance;
+					break;
+				}
+			}
+			if(triggerEvent == null)
+			{
+				log.log(Level.FINEST,"Unable to find the event class specified",cnfe);
+				throw new InvalidRequestException("The Event To Be Triggered Could Not Be Found");
 			}
 		}
+		return triggerEvent;
 	}
 	
 	/**
@@ -285,25 +197,12 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 		try
 		{
 			super.doPost(request, response);
-			processRequest(request, response);
+			processRequest(request);
 		}
 		catch (IOException | ServletException e)
 		{
 			log.log(Level.SEVERE, "Error in post", e);
 		}
 		
-	}
-	
-	/**
-	 * This returns all the event associated with a call
-	 *
-	 * @param callObject The call object to process
-	 * @param eventType  The ComponentEventBase Type to get events for
-	 *
-	 * @return
-	 */
-	private ArrayList<ComponentEventBase> getEvents(AjaxCall callObject, EventTypes eventType)
-	{
-		return callObject.getComponent().getEventsFor(eventType);
 	}
 }

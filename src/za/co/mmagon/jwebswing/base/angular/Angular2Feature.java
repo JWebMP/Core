@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.base.angular;
 
 import za.co.mmagon.jwebswing.Feature;
-import za.co.mmagon.jwebswing.base.html.Body;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
@@ -28,31 +27,23 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  */
 class Angular2Feature extends Feature<JavaScriptPart, Angular2Feature>
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Adds on the Angular ComponentFeatureBase to the application to allow full data binding
 	 *
 	 * @param b
 	 */
-	public Angular2Feature(Body b)
+	public Angular2Feature()
 	{
 		super("Angular2Feature");
 		//Angular Addition
 		getJavascriptReferences().add(AngularReferencePool.Angular2RX.getJavaScriptReference());
 		getJavascriptReferences().add(AngularReferencePool.Angular2Polyfills.getJavaScriptReference());
 		getJavascriptReferences().add(AngularReferencePool.Angular2AllUMD.getJavaScriptReference());
-
-        /*
-         * getJavascriptReferences().add(AngularReferencePool.Angular2Polyfills.getJavaScriptReference()); getJavascriptReferences().add(AngularReferencePool.Angular2RX.getJavaScriptReference());
-         * getJavascriptReferences().add(AngularReferencePool.Angular2System.getJavaScriptReference()); getJavascriptReferences().add(AngularReferencePool.Angular2Typescript.getJavaScriptReference());
-         * getJavascriptReferences().add(AngularReferencePool.AngularShimsForIE.getJavaScriptReference());
-         * getJavascriptReferences().add(AngularReferencePool.AngularSystemPolyfills.getJavaScriptReference()); getJavascriptReferences().add(AngularReferencePool.ES6.getJavaScriptReference());
-         * getJavascriptReferences().add(AngularReferencePool.Angular2Router.getJavaScriptReference());
-         */
 	}
-
+	
 	@Override
 	public void assignFunctionsToComponent()
 	{

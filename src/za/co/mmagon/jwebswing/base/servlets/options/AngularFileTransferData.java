@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -14,43 +14,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.base.ajax;
+package za.co.mmagon.jwebswing.base.servlets.options;
+
+import com.google.inject.servlet.RequestScoped;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
- * The list of bootstrap dialogue message types, used globally because its a complete list
- *
- * @author GedMarc
- * @since 09 May 2016
+ * @author Marc Magon
+ * @since 05 Apr 2017
  */
-public enum AjaxResponseType
+@RequestScoped
+public class AngularFileTransferData extends JavaScriptPart
 {
-	Default("Default"),
-	Primary("Primary"),
-	Success("Success"),
-	Info("Information"),
-	Warning("Warning"),
-	Danger("Danger");
 	
-	private String valueString;
-	
-	/**
-	 * Constructs with the given value string
-	 *
-	 * @param valueString
+	private static final long serialVersionUID = 1L;
+
+	/*
+	 * Constructs a new AngularDataServletInitData
 	 */
-	AjaxResponseType(String valueString)
+	public AngularFileTransferData()
 	{
-		this.valueString = valueString;
+		//Nothing needed
 	}
 	
-	/**
-	 * Returns the value string associated with this type
-	 *
-	 * @return
-	 */
-	@Override
-	public String toString()
-	{
-		return valueString;
-	}
 }

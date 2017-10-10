@@ -27,9 +27,11 @@ import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 import za.co.mmagon.jwebswing.base.angular.factories.AngularFactoryBase;
 import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
 import za.co.mmagon.jwebswing.plugins.PluginInformation;
+import za.co.mmagon.logger.LogFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * @author GedMarc
@@ -56,6 +58,8 @@ public class AngularPageConfigurator extends PageConfigurator
 {
 	
 	public static final String AngularEnabledString = "angular-enabled";
+	private static final Logger log = LogFactory.getLog("Angular Page Configurator");
+	
 	private static final long serialVersionUID = 1L;
 	/**
 	 * All the angular modules for this component
@@ -123,7 +127,7 @@ public class AngularPageConfigurator extends PageConfigurator
 		}
 		else
 		{
-			System.out.println("Page is already configured, not running angualr");
+			log.finer("Page is already configured, angular not added this time round");
 		}
 		return page;
 	}

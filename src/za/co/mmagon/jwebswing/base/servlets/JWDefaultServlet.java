@@ -16,7 +16,14 @@
  */
 package za.co.mmagon.jwebswing.base.servlets;
 
+import com.armineasy.injection.GuiceContext;
 import com.google.inject.Singleton;
+import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
+import za.co.mmagon.jwebswing.base.ajax.AjaxEventValue;
+import za.co.mmagon.jwebswing.base.ajax.exceptions.InvalidRequestException;
+import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
 
 import javax.servlet.ServletException;
@@ -24,7 +31,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,15 +53,133 @@ public class JWDefaultServlet extends HttpServlet
 	/**
 	 * The Servlet base logger
 	 */
-	private static final Logger LOG = LogFactory.getInstance().getLogger("ServletBase");
+	private static final Logger log = LogFactory.getInstance().getLogger("ServletBase");
 	/**
 	 * Version 1
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private static String allowOrigin = "*";
+	
 	public JWDefaultServlet()
 	{
 	
+	}
+	
+	/**
+	 * Writes the output to the request
+	 * @param output
+	 */
+	public void writeOutput(StringBuilder output, String contentType, Charset charSet)
+	{
+		HttpServletResponse response = GuiceContext.getInstance(HttpServletResponse.class);
+		try (PrintWriter out = response.getWriter())
+		{
+			Date dataTransferDate = new Date();
+			response.setContentType(contentType);
+			response.setCharacterEncoding(charSet == null ? Charset.forName("UTF-8").toString() :  charSet.displayName());
+			
+			response.setHeader("Access-Control-Allow-Origin", allowOrigin);
+			response.setHeader("Access-Control-Allow-Credentials", "true");
+			response.setHeader("Access-Control-Allow-Methods", "GET, POST");
+			response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+			out.write(output.toString());
+			long transferTime = new Date().getTime() - dataTransferDate.getTime();
+			log.log(Level.FINE,"[Network Reply Data Size]-[" + output.length() + "];");
+			log.log(Level.FINE,"[Network Reply]-[" + output + "];[Time]-[" + transferTime + "];");
+			
+		}
+		catch (IOException io)
+		{
+			log.log(Level.SEVERE, "Unable to send response to client", io);
+		}
+	}
+	
+	/**
+	 * Validates the given call for the servlet
+	 * @param ajaxCall
+	 * @param strict optional parameter to validate on more fields
+	 * @return
+	 * @throws InvalidRequestException
+	 */
+	public boolean validateCall(AjaxCall ajaxCall,boolean...strict) throws InvalidRequestException
+	{
+		HttpServletRequest request = GuiceContext.getInstance(HttpServletRequest.class);
+		if (ajaxCall.getComponentId() == null)
+		{
+			log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Component ID Not Found]", request.getSession().getId());
+			throw new InvalidRequestException("There is no Component ID in this call.");
+		}
+		
+		String componentId = ajaxCall.getComponentId();
+		if (componentId == null || componentId.isEmpty())
+		{
+			log.log(Level.FINER, "[SessionID]-[{0}];[Security]-[Component ID Incorrect]", request.getSession().getId());
+			throw new InvalidRequestException("Component ID Was Incorrect.");
+		}
+		
+		if(strict != null && strict.length > 0)
+		{
+			if(strict[0])
+			{
+			
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Validates if the page is found and correct
+	 * @return
+	 * @throws MissingComponentException
+	 */
+	public boolean validatePage() throws MissingComponentException
+	{
+		Page page = GuiceContext.inject().getInstance(Page.class);
+		if (page == null)
+		{
+			throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
+		}
+		return true;
+	}
+	
+	/**
+	 * Validates the request if it from a legitimate source
+	 * @param ajaxCall
+	 * @return
+	 * @throws InvalidRequestException
+	 */
+	public boolean validateRequest(AjaxCall ajaxCall) throws InvalidRequestException
+	{
+		HttpServletRequest request = GuiceContext.getInstance(HttpServletRequest.class);
+		Date datetime = ajaxCall.getDatetime();
+		if (datetime == null)
+		{
+			log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Date Time Incorrect]", request.getSession().getId());
+			throw new InvalidRequestException("Invalid Date Time Value");
+		}
+		EventTypes eventType = ajaxCall.getEventType();
+		if (eventType == null)
+		{
+			log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Event Type Incorrect]", request.getSession().getId());
+			throw new InvalidRequestException("Invalid Event Type");
+		}
+		EventTypes eventTypeFrom = ajaxCall.getEventTypeFrom();
+		if (eventTypeFrom == null)
+		{
+			log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Event From Incorrect]", request.getSession().getId());
+			throw new InvalidRequestException("Invalid Event Type From");
+		}
+		
+		AjaxEventValue value = ajaxCall.getValue();
+		
+		if (value == null)
+		{
+			log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Value Is Missing]", request.getSession().getId());
+			throw new InvalidRequestException("Invalid Event Value");
+		}
+		
+		return true;
 	}
 	
 	/**
@@ -66,10 +195,9 @@ public class JWDefaultServlet extends HttpServlet
 	{
 		HttpSession session = request.getSession();
 		String sessionID = session.getId();
-		
 		if (sessionID == null)
 		{
-			LOG.log(Level.SEVERE, "Session Doesn't Exist", new ServletException("There is no session for a data pull"));
+			log.log(Level.SEVERE, "Session Doesn't Exist", new ServletException("There is no session for a data pull"));
 			throw new ServletException("There is no session for a data pull");
 		}
 	}
@@ -92,7 +220,7 @@ public class JWDefaultServlet extends HttpServlet
 		}
 		catch (ServletException e)
 		{
-			LOG.log(Level.SEVERE, "Unable to Do Get", e);
+			log.log(Level.SEVERE, "Unable to Do Get", e);
 		}
 	}
 	
@@ -114,8 +242,25 @@ public class JWDefaultServlet extends HttpServlet
 		}
 		catch (ServletException e)
 		{
-			LOG.log(Level.SEVERE, "Security Exception in Validation", e);
+			log.log(Level.SEVERE, "Security Exception in Validation", e);
 		}
 	}
 	
+	/**
+	 * Sets the stream allow origins
+	 * @return
+	 */
+	public static String getAllowOrigin()
+	{
+		return allowOrigin;
+	}
+	
+	/**
+	 * Sets the streams allow origins
+	 * @param allowOrigin
+	 */
+	public static void setAllowOrigin(@NotNull  String allowOrigin)
+	{
+		JWDefaultServlet.allowOrigin = allowOrigin;
+	}
 }

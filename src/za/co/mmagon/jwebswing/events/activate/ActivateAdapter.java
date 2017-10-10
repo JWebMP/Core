@@ -123,5 +123,27 @@ public abstract class ActivateAdapter extends Event
 			LOG.log(Level.WARNING, "Error In Firing Event", e);
 		}
 	}
-
+	
+	/**
+	 * This object is never equal to another as an event
+	 * @param obj
+	 * @return
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		return false;
+	}
+	
+	/**
+	 * A hash code
+	 * @return
+	 */
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getDirective().hashCode();
+		return result;
+	}
 }

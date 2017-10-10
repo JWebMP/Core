@@ -18,12 +18,16 @@ package za.co.mmagon.jwebswing.base.servlets;
 
 import com.armineasy.injection.GuiceContext;
 import com.google.inject.Singleton;
+import org.apache.commons.io.IOUtils;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.annotations.DataCallInterception;
 import za.co.mmagon.jwebswing.annotations.SiteInterception;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
+import za.co.mmagon.jwebswing.base.ajax.exceptions.InvalidRequestException;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.base.servlets.options.AngularDataServletInitData;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
@@ -31,9 +35,8 @@ import za.co.mmagon.logger.LogFactory;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,38 +67,23 @@ public class AngularDataServlet extends JWDefaultServlet
 	 * @throws IOException      if an I/O error occurs
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
+			throws ServletException, IOException, InvalidRequestException
 	{
 		LOG.log(Level.FINER, "[SessionID]-[{0}];[Connection]-[Data Call Connection Established]", request.getSession().getId());
 		String componentId = "";
-		StringBuilder jb = new StringBuilder();
-		String line;
+		StringBuilder jb = new StringBuilder(IOUtils.toString(request.getInputStream(), "UTF-8"));
 		
-		try
-		{
-			BufferedReader reader = request.getReader();
-			while ((line = reader.readLine()) != null)
-			{
-				jb.append(line);
-			}
-			reader.close();
-		}
-		catch (IOException e)
-		{
-		}
-		
-		AngularDataServletInitData initData = null;
+		AngularDataServletInitData initData = new JavaScriptPart<>().From(jb.toString(), AngularDataServletInitData.class);
+		if(initData == null)
+			throw new InvalidRequestException("Could not extract the initial data from the information sent in");
 		if (jb.length() > 0)
 		{
-			initData = (AngularDataServletInitData) new JavaScriptPart().From(jb.toString(), AngularDataServletInitData.class);
-			request.getSession().setAttribute(LocalStorageSessionKey, initData.getLocalStorage());
-			request.getSession().setAttribute(SessionStorageSessionKey, initData.getSessionStorage());
-			//TODOmodernizr remove for other transport way
-			//request.getSession().setAttribute(ModernizrSessionKey, initData.getModernizr());
+			initData = new JavaScriptPart<>().From(jb.toString(), AngularDataServletInitData.class);
+			GuiceContext.getInstance(SessionProperties.class).setLocalStorage(initData.getLocalStorage());
+			GuiceContext.getInstance(SessionProperties.class).setSessionStorage(initData.getSessionStorage());
 			componentId = initData.getParameters().get("objectId");
 		}
 		
-		Date startDate = new Date();
 		AjaxCall ajaxCall = GuiceContext.inject().getInstance(AjaxCall.class);
 		ajaxCall.setParameters(initData.getParameters());
 		ajaxCall.setComponentId(componentId);
@@ -108,7 +96,7 @@ public class AngularDataServlet extends JWDefaultServlet
 		
 		Page page = GuiceContext.inject().getInstance(Page.class);
 		ComponentHierarchyBase triggerComponent;
-		if (ajaxCall.getComponentId().equalsIgnoreCase("body"))
+		if (ComponentTypes.Body.getComponentTag().equals(ajaxCall.getComponentId()))
 		{
 			triggerComponent = page.getBody();
 		}
@@ -130,34 +118,15 @@ public class AngularDataServlet extends JWDefaultServlet
 		}
 		
 		page.onConnect(ajaxCall, ajaxResponse);
-		ajaxResponse.getComponents().forEach(component ->
-		                                     {
-			                                     component.preConfigure();
-		                                     });
-		Date endDate = new Date();
-		try (PrintWriter out = response.getWriter())
-		{
-			response.setContentType("application/json;charset=UTF-8");
-			
-			response.setHeader("Access-Control-Allow-Origin", "*");
-			response.setHeader("Access-Control-Allow-Credentials", "true");
-			response.setHeader("Access-Control-Allow-Methods", "POST");
-			response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
-			
-			out.write(ajaxResponse.toString());
-			Date dataTransferDate = new Date();
-			LOG.log(Level.FINER, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
-					{
-							request.getSession().getId(), endDate.getTime() - startDate.getTime(), ajaxResponse.toString().length(), dataTransferDate.getTime() - startDate.getTime()
-					});
-		}
+		ajaxResponse.getComponents().forEach(ComponentHierarchyBase::preConfigure);
+		writeOutput(new StringBuilder(ajaxResponse.toString()), "application/json;charset=UTF-8", Charset.forName("UTF-8"));
 	}
 	
 	@SiteInterception
 	@DataCallInterception
 	protected void intercept()
 	{
-	
+		//Provides interception on the given annotations
 	}
 	
 	/**
@@ -174,10 +143,9 @@ public class AngularDataServlet extends JWDefaultServlet
 	{
 		try
 		{
-			//    super.doPost(request, response);
 			processRequest(request, response);
 		}
-		catch (IOException | ServletException e)
+		catch (IOException | ServletException | InvalidRequestException e)
 		{
 			LOG.log(Level.SEVERE, "Angular Data Servlet Do Post", e);
 		}

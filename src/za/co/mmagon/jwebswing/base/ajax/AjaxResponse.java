@@ -55,14 +55,14 @@ public class AjaxResponse extends JavaScriptPart
 	 */
 	@JsonProperty("variables")
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private ArrayList<AngularJsonVariable> angularVariables;
+	private List<AngularJsonVariable> angularVariables;
 	
 	/**
 	 * All relevant client reactions to perform
 	 */
 	@JsonProperty("reactions")
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private ArrayList<AjaxResponseReaction> reactions;
+	private List<AjaxResponseReaction> reactions;
 	
 	/**
 	 * All components that must be updated
@@ -125,10 +125,7 @@ public class AjaxResponse extends JavaScriptPart
 	protected List<String> getEventQueries()
 	{
 		ArrayList<String> list = new ArrayList<>();
-		getEvents().forEach(event ->
-		                    {
-			                    list.add(event.renderJavascript().toString());
-		                    });
+		getEvents().forEach(event -> list.add(event.renderJavascript().toString()));
 		return list;
 	}
 	
@@ -186,8 +183,8 @@ public class AjaxResponse extends JavaScriptPart
 	public AjaxComponentUpdates addComponent(ComponentHierarchyBase component)
 	{
 		getComponents().add(component);
-		AjaxComponentUpdates newComponent;
-		getComponentUpdates().add(newComponent = new AjaxComponentUpdates(component));
+		AjaxComponentUpdates newComponent = new AjaxComponentUpdates(component);
+		getComponentUpdates().add(newComponent);
 		return newComponent;
 	}
 	
@@ -246,17 +243,16 @@ public class AjaxResponse extends JavaScriptPart
 	protected ArrayList<String> getAllJsReferences()
 	{
 		ArrayList<String> output = new ArrayList<>();
-		getComponents().stream().forEach(next
-				                                 ->
-		                                 {
-			                                 if (ComponentDependancyBase.class.isAssignableFrom(next.getClass()))
-			                                 {
-				                                 getJsReferences((ComponentDependancyBase) next).stream().forEachOrdered(a ->
-				                                                                                                         {
-					                                                                                                         output.add(a);
-				                                                                                                         });
-			                                 }
-		                                 });
+		getComponents().forEach(next ->
+		                        {
+			                        for (String a : getJsReferences(next))
+			                        {
+				                        if (!output.contains(a))
+				                        {
+					                        output.add(a);
+				                        }
+			                        }
+		                        });
 		return output;
 	}
 	
@@ -270,38 +266,47 @@ public class AjaxResponse extends JavaScriptPart
 	protected ArrayList<String> getAllJsScripts()
 	{
 		ArrayList<String> output = new ArrayList<>();
-		getComponents().stream().forEach(next
-				                                 ->
-		                                 {
-			                                 if (ComponentHierarchyBase.class.isAssignableFrom(next.getClass()))
-			                                 {
-				                                 getJsRenders((ComponentHierarchyBase) next).stream().filter(next1 -> (next1 != null && !next1.isEmpty())).forEach(next1 ->
-				                                                                                                                                                   {
-					                                                                                                                                                   if (!next1.equalsIgnoreCase("\n"))
-					                                                                                                                                                   {
-						                                                                                                                                                   output.add(next1);
-					                                                                                                                                                   }
-				                                                                                                                                                   });
-			                                 }
+		getComponents().forEach(next ->
+		                        {
+			                        List<String> jsRenders = getJsRenders(next);
+			                        for (String rendered : jsRenders)
+			                        {
+				                        if (rendered != null && !rendered.isEmpty())
+				                        {
+					                        if (!rendered.endsWith(next.getNewLine()))
+					                        {
+						                        rendered = rendered + next.getNewLine();
+					                        }
+					                        output.add(rendered);
+				                        }
+			                        }
+			                        StringBuilder eventQueries = new StringBuilder();
 			
-			                                 //Load on demand scripts
-			                                 if (Event.class.isAssignableFrom(next.getClass()))
-			                                 {
-				                                 for (Iterator iterator = Event.class.cast(next).getRunEvents().iterator(); iterator.hasNext(); )
-				                                 {
-					                                 Event next1 = (Event) iterator.next();
-					                                 next1.preConfigure();
-					                                 for (Iterator iterator1 = next1.getQueriesAll().iterator(); iterator1.hasNext(); )
-					                                 {
-						                                 StringBuilder query = (StringBuilder) iterator1.next();
-						                                 if (!query.toString().equalsIgnoreCase("\n"))
-						                                 {
-							                                 output.add(query.toString());
-						                                 }
-					                                 }
-				                                 }
-			                                 }
-		                                 });
+			                        //Load on demand scripts
+			                        buildEventQueries(next, output);
+		                        });
+		return output;
+	}
+	
+	private List<String> buildEventQueries(ComponentHierarchyBase next, List<String> output)
+	{
+		//Load on demand scripts
+		if (Event.class.isAssignableFrom(next.getClass()))
+		{
+			for (Iterator iterator = Event.class.cast(next).getRunEvents().iterator(); iterator.hasNext(); )
+			{
+				Event next1 = (Event) iterator.next();
+				next1.preConfigure();
+				for (Iterator iterator1 = next1.getQueriesAll().iterator(); iterator1.hasNext(); )
+				{
+					StringBuilder query = (StringBuilder) iterator1.next();
+					if (!query.toString().equalsIgnoreCase(next.getNewLine()))
+					{
+						output.add(query.toString());
+					}
+				}
+			}
+		}
 		return output;
 	}
 	
@@ -315,11 +320,7 @@ public class AjaxResponse extends JavaScriptPart
 	protected String getAllCss()
 	{
 		StringBuilder sb = new StringBuilder();
-		getComponents().forEach(next
-				                        ->
-		                        {
-			                        sb.append(getCssRenders(ComponentStyleBase.class.cast(next)));
-		                        });
+		getComponents().forEach(next -> sb.append(getCssRenders(ComponentStyleBase.class.cast(next))));
 		return sb.toString();
 	}
 	
@@ -438,7 +439,7 @@ public class AjaxResponse extends JavaScriptPart
 	 *
 	 * @return
 	 */
-	public ArrayList<AngularJsonVariable> getAngularVariables()
+	public List<AngularJsonVariable> getAngularVariables()
 	{
 		if (angularVariables == null)
 		{
@@ -452,7 +453,7 @@ public class AjaxResponse extends JavaScriptPart
 	 *
 	 * @param angularVariables
 	 */
-	public void setAngularVariables(ArrayList<AngularJsonVariable> angularVariables)
+	public void setAngularVariables(List<AngularJsonVariable> angularVariables)
 	{
 		this.angularVariables = angularVariables;
 	}

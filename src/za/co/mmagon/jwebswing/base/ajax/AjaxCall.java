@@ -20,12 +20,11 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.inject.servlet.RequestScoped;
-import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 
-import javax.servlet.ServletException;
+import javax.validation.constraints.NotNull;
 import java.util.*;
 
 /**
@@ -38,7 +37,7 @@ import java.util.*;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @RequestScoped
-public class AjaxCall extends JavaScriptPart
+public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 {
 	
 	private static final long serialVersionUID = 1L;
@@ -55,9 +54,8 @@ public class AjaxCall extends JavaScriptPart
 	 */
 	private EventTypes eventType;
 	/**
-	 * @deprecated
+	 * A secondary event type from option
 	 */
-	@Deprecated
 	private EventTypes eventTypeFrom;
 	/**
 	 * The angular event variable
@@ -101,11 +99,9 @@ public class AjaxCall extends JavaScriptPart
 	 * @param eventType     The ComponentEventBase Type
 	 * @param eventTypeFrom The ComponentEventBase Type From
 	 * @param value         The Value
-	 * @param page          The Page
 	 *
-	 * @throws ServletException In Case anything is funky
 	 */
-	public AjaxCall(String componentId, Date datetime, String eventType, String eventTypeFrom, AjaxEventValue value, Page page) throws ServletException
+	public AjaxCall(String componentId, Date datetime, String eventType, String eventTypeFrom, AjaxEventValue value)
 	{
 		this.componentId = componentId;
 		this.datetime = datetime;
@@ -129,9 +125,10 @@ public class AjaxCall extends JavaScriptPart
 	 *
 	 * @param componentId
 	 */
-	public void setComponentId(String componentId)
+	public J setComponentId(String componentId)
 	{
 		this.componentId = componentId;
+		return (J)this;
 	}
 	
 	/**
@@ -149,9 +146,10 @@ public class AjaxCall extends JavaScriptPart
 	 *
 	 * @param datetime
 	 */
-	public void setDatetime(Date datetime)
+	public J setDatetime(Date datetime)
 	{
 		this.datetime = datetime;
+		return (J)this;
 	}
 	
 	/**
@@ -169,9 +167,10 @@ public class AjaxCall extends JavaScriptPart
 	 *
 	 * @param eventType
 	 */
-	public void setEventType(EventTypes eventType)
+	public J setEventType(EventTypes eventType)
 	{
 		this.eventType = eventType;
+		return (J)this;
 	}
 	
 	/**
@@ -189,9 +188,10 @@ public class AjaxCall extends JavaScriptPart
 	 *
 	 * @param eventTypeFrom
 	 */
-	public void setEventTypeFrom(EventTypes eventTypeFrom)
+	public J setEventTypeFrom(EventTypes eventTypeFrom)
 	{
 		this.eventTypeFrom = eventTypeFrom;
+		return (J)this;
 	}
 	
 	/**
@@ -209,9 +209,10 @@ public class AjaxCall extends JavaScriptPart
 	 *
 	 * @param value
 	 */
-	public void setValue(AjaxEventValue value)
+	public J setValue(AjaxEventValue value)
 	{
 		this.value = value;
+		return (J)this;
 	}
 	
 	/**
@@ -229,9 +230,10 @@ public class AjaxCall extends JavaScriptPart
 	 *
 	 * @param component
 	 */
-	public void setComponent(ComponentHierarchyBase component)
+	public J setComponent(ComponentHierarchyBase component)
 	{
 		this.component = component;
+		return (J)this;
 	}
 	
 	/**
@@ -239,6 +241,7 @@ public class AjaxCall extends JavaScriptPart
 	 *
 	 * @return
 	 */
+	@NotNull
 	public List<AngularJsonVariable> getVariableData()
 	{
 		if (variableData == null)
@@ -253,9 +256,10 @@ public class AjaxCall extends JavaScriptPart
 	 *
 	 * @param variableData
 	 */
-	public void setVariableData(List<AngularJsonVariable> variableData)
+	public J setVariableData(List<AngularJsonVariable> variableData)
 	{
 		this.variableData = variableData;
+		return (J)this;
 	}
 	
 	/**
@@ -292,12 +296,17 @@ public class AjaxCall extends JavaScriptPart
 	 *
 	 * @param eventId
 	 */
-	public void setEventId(String eventId)
+	public J setEventId(String eventId)
 	{
 		this.eventId = eventId;
+		return (J)this;
 	}
 	
-	public void from(AjaxCall incoming)
+	/**
+	 * Creates this as a copy from the incoming call
+	 * @param incoming
+	 */
+	public J fromCall(AjaxCall incoming)
 	{
 		setComponent(incoming.getComponent());
 		setComponentId(incoming.getComponentId());
@@ -308,8 +317,14 @@ public class AjaxCall extends JavaScriptPart
 		setReferenceId(incoming.getReferenceId());
 		setValue(incoming.getValue());
 		setVariableData(incoming.getVariableData());
+		return (J)this;
 	}
 	
+	/**
+	 * Returns a list of parameters
+	 * @return
+	 */
+	@NotNull
 	public Map<String, String> getParameters()
 	{
 		if (parameters == null)
@@ -319,9 +334,14 @@ public class AjaxCall extends JavaScriptPart
 		return parameters;
 	}
 	
-	public void setParameters(Map<String, String> parameters)
+	/**
+	 * Sets the list of parameters
+	 * @param parameters
+	 */
+	public J setParameters(Map<String, String> parameters)
 	{
 		this.parameters = parameters;
+		return (J)this;
 	}
 	
 	/**
@@ -329,6 +349,7 @@ public class AjaxCall extends JavaScriptPart
 	 *
 	 * @return
 	 */
+	@NotNull
 	public String getClassName()
 	{
 		return className;
@@ -339,8 +360,10 @@ public class AjaxCall extends JavaScriptPart
 	 *
 	 * @param className
 	 */
-	public void setClassName(String className)
+	@NotNull
+	public J setClassName(String className)
 	{
 		this.className = className;
+		return (J)this;
 	}
 }

@@ -113,10 +113,15 @@ public enum ALinkAttributes implements AttributeDefinitions
 	 * Specifies the media type of the linked document
 	 */
 	Type;
-
+	
+	/**
+	 * The maximum supported version of this tag
+	 */
 	private HTMLVersions maxsupportedVersion = HTMLVersions.HTML5;
+	/**
+	 * The minimum supported version of this tag
+	 */
 	private HTMLVersions minsupportedVersion = HTMLVersions.HTML401Frameset;
-	private Class returnType = String.class;
 
 	/**
 	 * Construct a new "a" tag with all the predefined supported HTML versions
@@ -134,37 +139,43 @@ public enum ALinkAttributes implements AttributeDefinitions
 	{
 		this.minsupportedVersion = minsupportedVersion;
 	}
-
-	private ALinkAttributes(HTMLVersions maxsupportedVersion, HTMLVersions minsupportedVersion)
+	
+	/**
+	 * Returns the minimum supported version of this tag
+	 * @return
+	 */
+	public HTMLVersions getMaxsupportedVersion()
+	{
+		return maxsupportedVersion;
+	}
+	
+	/**
+	 * Sets the maximum version of this tag
+	 * @param maxsupportedVersion
+	 */
+	public void setMaxsupportedVersion(HTMLVersions maxsupportedVersion)
 	{
 		this.maxsupportedVersion = maxsupportedVersion;
+	}
+	
+	/**
+	 * Gets the minimum html version of this tag
+	 * @return
+	 */
+	public HTMLVersions getMinsupportedVersion()
+	{
+		return minsupportedVersion;
+	}
+	
+	/**
+	 * Sets the minimum version of this tag
+	 * @param minsupportedVersion
+	 */
+	public void setMinsupportedVersion(HTMLVersions minsupportedVersion)
+	{
 		this.minsupportedVersion = minsupportedVersion;
 	}
-
-	private ALinkAttributes(Class returnType)
-	{
-		this.returnType = returnType;
-	}
-
-	private ALinkAttributes(HTMLVersions maxsupportedVersion, HTMLVersions minsupportedVersion, Class returnType)
-	{
-		this.maxsupportedVersion = maxsupportedVersion;
-		this.minsupportedVersion = minsupportedVersion;
-		this.returnType = returnType;
-	}
-
-	private ALinkAttributes(HTMLVersions maxsupportedVersion, Class returnType)
-	{
-		this.maxsupportedVersion = maxsupportedVersion;
-		this.returnType = returnType;
-	}
-
-	private ALinkAttributes(HTMLVersions minsupportedVersion, boolean trues, Class returnType)
-	{
-		this.minsupportedVersion = maxsupportedVersion;
-		this.returnType = returnType;
-	}
-
+	
 	/**
 	 * Returns the lowercase
 	 *
@@ -175,7 +186,11 @@ public enum ALinkAttributes implements AttributeDefinitions
 	{
 		return super.toString().toLowerCase();
 	}
-
+	
+	/**
+	 * Whether or not this tag is actually just a keyword
+	 * @return
+	 */
 	@Override
 	public boolean isKeyword()
 	{
