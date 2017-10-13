@@ -25,8 +25,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
+import java.nio.charset.Charset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,32 +49,12 @@ public class AngularServlet extends JWDefaultServlet
 	 * @throws IOException      if an I/O error occurs
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
+			throws IOException
 	{
 		Page page = GuiceContext.inject().getInstance(Page.class);
 		page.toString(true);
-		Date startDate = new Date();
-		//page.getAngular().configureTemplateVariables();
-		
 		StringBuilder output = page.getAngular().renderAngularJavascript(page);
-		Date endDate = new Date();
-		try (PrintWriter out = response.getWriter())
-		{
-			response.setContentType("application/javascript;charset=UTF-8");
-			response.setCharacterEncoding("UTF-8");
-			
-			response.setHeader("Access-Control-Allow-Origin", "*");
-			response.setHeader("Access-Control-Allow-Credentials", "true");
-			response.setHeader("Access-Control-Allow-Methods", "GET");
-			response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
-			
-			out.write(output.toString());
-			Date dataTransferDate = new Date();
-			LOG.log(Level.FINER, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
-					{
-							request.getSession().getId(), endDate.getTime() - startDate.getTime(), output.toString().length(), dataTransferDate.getTime() - startDate.getTime()
-					});
-		}
+		writeOutput(output, "application/javascript;charset=UTF-8", Charset.forName("UTF-8"));
 	}
 	
 	/**
@@ -88,7 +67,7 @@ public class AngularServlet extends JWDefaultServlet
 	 * @throws IOException
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	{
 		try
 		{
@@ -111,7 +90,7 @@ public class AngularServlet extends JWDefaultServlet
 	 * @throws IOException
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	{
 		try
 		{

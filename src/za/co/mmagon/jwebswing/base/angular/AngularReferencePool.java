@@ -56,21 +56,21 @@ public enum AngularReferencePool
 	/**
 	 * The applicable sort order
 	 */
-	private int SortOrder;
+	private int sortOrder;
 
 	/**
 	 * Constructs with the given new values. no null allowed
 	 *
 	 * @param jsReference
 	 * @param cssReferece
-	 * @param SortOrder
+	 * @param sortOrder
 	 */
-	private AngularReferencePool(JavascriptReference jsReference, CSSReference cssReferece, int SortOrder)
+	private AngularReferencePool(JavascriptReference jsReference, CSSReference cssReferece, int sortOrder)
 	{
 		this.jsReference = jsReference;
 		this.jsReference.setPriority(RequirementsPriority.Fourth);
 		this.cssReferece = cssReferece;
-		this.SortOrder = SortOrder;
+		this.sortOrder = sortOrder;
 	}
 
 	/**
@@ -120,17 +120,17 @@ public enum AngularReferencePool
 	 */
 	public int getSortOrder()
 	{
-		return SortOrder;
+		return sortOrder;
 	}
 
 	/**
 	 * Sets the references sort order
 	 *
-	 * @param SortOrder
+	 * @param sortOrder
 	 */
-	public void setSortOrder(int SortOrder)
+	public void setSortOrder(int sortOrder)
 	{
-		this.SortOrder = SortOrder;
+		this.sortOrder = sortOrder;
 	}
 
 }

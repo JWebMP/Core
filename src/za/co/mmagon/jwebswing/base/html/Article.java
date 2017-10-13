@@ -25,7 +25,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.logger.LogFactory;
 
 import java.io.Serializable;
 
@@ -70,11 +69,6 @@ public class Article<J extends Article<J>>
 		extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements GlobalChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, Serializable
 {
-	
-	/**
-	 * Logger for the Component
-	 */
-	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Article");
 	/**
 	 * Serial Version for all Components and their compatibility
 	 */

@@ -66,7 +66,7 @@ public class AngularDataServlet extends JWDefaultServlet
 	 * @throws ServletException if a Servlet-specific error occurs
 	 * @throws IOException      if an I/O error occurs
 	 */
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+	protected void processRequest(HttpServletRequest request)
 			throws ServletException, IOException, InvalidRequestException
 	{
 		LOG.log(Level.FINER, "[SessionID]-[{0}];[Connection]-[Data Call Connection Established]", request.getSession().getId());
@@ -139,11 +139,11 @@ public class AngularDataServlet extends JWDefaultServlet
 	 * @throws IOException
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	{
 		try
 		{
-			processRequest(request, response);
+			processRequest(request);
 		}
 		catch (IOException | ServletException | InvalidRequestException e)
 		{

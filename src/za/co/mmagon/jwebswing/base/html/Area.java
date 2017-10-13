@@ -23,10 +23,8 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.AreaChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.MapChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.logger.LogFactory;
 
 import java.io.Serializable;
-import java.util.logging.Logger;
 
 /**
  * Browser Support<p>
@@ -57,7 +55,6 @@ public class Area<J extends Area<J>>
 		implements MapChildren, Serializable
 {
 	
-	private static final Logger LOG = LogFactory.getInstance().getLogger("Area");
 	/**
 	 * Serial Version for all Components and their compatibility
 	 */

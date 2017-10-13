@@ -47,8 +47,7 @@ public class AngularDataVariables extends JWDefaultServlet
 	 * @throws ServletException if a Servlet-specific error occurs
 	 * @throws IOException      if an I/O error occurs
 	 */
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws IOException
+	protected void processRequest()
 	{
 		Page page = GuiceContext.inject().getInstance(Page.class);
 		StringBuilder output = page.getAngular().renderAngularJavascript(page);
@@ -65,14 +64,14 @@ public class AngularDataVariables extends JWDefaultServlet
 	 * @throws IOException
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	{
 		try
 		{
 			super.doGet(request, response);
-			processRequest(request, response);
+			processRequest();
 		}
-		catch (IOException | ServletException e)
+		catch (ServletException | IOException e)
 		{
 			LOG.log(Level.SEVERE, "Do Post Error", e);
 		}

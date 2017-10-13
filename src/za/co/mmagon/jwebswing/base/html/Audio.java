@@ -24,7 +24,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.AudioChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.logger.LogFactory;
 
 /**
  * Definition and Usage
@@ -66,10 +65,6 @@ public class Audio<J extends Audio<J>>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 	
-	/**
-	 * Logger for the Component
-	 */
-	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Audio");
 	/**
 	 * Serial Version for all Components and their compatibility
 	 */

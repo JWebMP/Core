@@ -18,10 +18,12 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.FormAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.FormChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+
+import java.util.Objects;
 
 /**
  * Definition and Usage
@@ -63,7 +65,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @since forever
  */
 public class Form<J extends Form<J>>
-		extends Component<FormChildren, FormAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<GlobalChildren, FormAttributes, GlobalFeatures, GlobalEvents, J>
 {
 	
 	private static final long serialVersionUID = 1L;
@@ -71,6 +73,12 @@ public class Form<J extends Form<J>>
 	 * The label of this form
 	 */
 	private Label label;
+	/**
+	 * If this form must be applied as inline
+	 *
+	 * Doesn't do anything here really, but children use it
+	 */
+	private boolean inline;
 	
 	/**
 	 * Constructs a new form
@@ -94,5 +102,71 @@ public class Form<J extends Form<J>>
 		{
 			return super.renderBeforeTag();
 		}
+	}
+	
+	/**
+	 * Returns the label
+	 * @return
+	 */
+	public Label getLabel()
+	{
+		return label;
+	}
+	
+	/**
+	 * Sets the label
+	 * @param label
+	 * @return
+	 */
+	public J setLabel(Label label)
+	{
+		this.label = label;
+		return (J)this;
+	}
+	
+	/**
+	 * If this form is set to render inline
+	 * @return
+	 */
+	public boolean isInline()
+	{
+		return inline;
+	}
+	
+	/**
+	 * If this form must be rendered inline by children
+	 * @param inline
+	 * @return
+	 */
+	public J setInline(boolean inline)
+	{
+		this.inline = inline;
+		return (J)this;
+	}
+	
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof Form))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+		Form<?> form = (Form<?>) o;
+		return inline == form.inline &&
+				Objects.equals(getLabel(), form.getLabel());
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), getLabel(), inline);
 	}
 }

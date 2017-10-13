@@ -25,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * @version 1.0
  * @since 21 Jul 2013
  */
+@FunctionalInterface
 public interface AttributeDefinitions
 {
 	

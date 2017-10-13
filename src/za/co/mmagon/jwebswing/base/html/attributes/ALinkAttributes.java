@@ -122,7 +122,11 @@ public enum ALinkAttributes implements AttributeDefinitions
 	 * The minimum supported version of this tag
 	 */
 	private HTMLVersions minsupportedVersion = HTMLVersions.HTML401Frameset;
-
+	/**
+	 * If the restriction is minimum based
+	 */
+	private boolean minSet;
+	
 	/**
 	 * Construct a new "a" tag with all the predefined supported HTML versions
 	 */
@@ -138,6 +142,7 @@ public enum ALinkAttributes implements AttributeDefinitions
 	private ALinkAttributes(HTMLVersions minsupportedVersion, boolean trues)
 	{
 		this.minsupportedVersion = minsupportedVersion;
+		this.minSet = trues;
 	}
 	
 	/**
@@ -195,5 +200,23 @@ public enum ALinkAttributes implements AttributeDefinitions
 	public boolean isKeyword()
 	{
 		return false;
+	}
+	
+	/**
+	 * If the restriction is min set
+	 * @return
+	 */
+	public boolean isMinSet()
+	{
+		return minSet;
+	}
+	
+	/**
+	 * Sets if the restriction is min or max based
+	 * @param minSet
+	 */
+	public void setMinSet(boolean minSet)
+	{
+		this.minSet = minSet;
 	}
 }

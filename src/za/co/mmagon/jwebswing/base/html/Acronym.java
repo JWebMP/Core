@@ -58,9 +58,8 @@ import java.util.logging.Level;
  * @author MMagon
  * @version 1.0
  * @since 2014 09 22
- * @deprecated
+ *
  */
-@Deprecated()
 public class Acronym<J extends Acronym<J>>
 		extends Component<NoChildren, NoAttributes, NoFeatures, GlobalEvents, J>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, HtmlChildren, BodyChildren, Serializable, NoIDTag

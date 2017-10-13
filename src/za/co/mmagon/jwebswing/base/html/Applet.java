@@ -22,7 +22,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.logger.LogFactory;
 
 /**
  * Defines a java Applet tag
@@ -36,10 +35,6 @@ public class Applet<J extends Applet<J>>
 		extends Component<NoChildren, AppletAttributes, GlobalFeatures, GlobalEvents, J>
 {
 	
-	/**
-	 * Logger for the Component
-	 */
-	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("Applet");
 	/**
 	 * Serial Version for all Components and their compatibility
 	 */

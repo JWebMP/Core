@@ -192,14 +192,13 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
 	{
 		try
 		{
 			super.doPost(request, response);
 			processRequest(request);
 		}
-		catch (IOException | ServletException e)
+		catch (ServletException | IOException e)
 		{
 			log.log(Level.SEVERE, "Error in post", e);
 		}

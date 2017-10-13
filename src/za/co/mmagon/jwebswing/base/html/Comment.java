@@ -60,6 +60,10 @@ public class Comment<J extends Comment<J>>
 	@Override
 	protected StringBuilder renderHTML(int tabCount)
 	{
+		if(getText(0).length() == 0)
+		{
+			return new StringBuilder();
+		}
 		return !isTiny() ? new StringBuilder(TextUtilities.getTabString(tabCount) + "<!-- " + getText(0) + " -->") : new StringBuilder();
 	}
 }

@@ -280,8 +280,6 @@ public class AjaxResponse extends JavaScriptPart
 					                        output.add(rendered);
 				                        }
 			                        }
-			                        StringBuilder eventQueries = new StringBuilder();
-			
 			                        //Load on demand scripts
 			                        buildEventQueries(next, output);
 		                        });
@@ -300,10 +298,7 @@ public class AjaxResponse extends JavaScriptPart
 				for (Iterator iterator1 = next1.getQueriesAll().iterator(); iterator1.hasNext(); )
 				{
 					StringBuilder query = (StringBuilder) iterator1.next();
-					if (!query.toString().equalsIgnoreCase(next.getNewLine()))
-					{
-						output.add(query.toString());
-					}
+					output.add(query.toString());
 				}
 			}
 		}

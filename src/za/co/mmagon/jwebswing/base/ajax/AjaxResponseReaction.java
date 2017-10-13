@@ -18,6 +18,7 @@ package za.co.mmagon.jwebswing.base.ajax;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 /**
  * Denotes a specific reaction to occur at the client
@@ -26,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @since 27 Apr 2016
  */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class AjaxResponseReaction
+public class AjaxResponseReaction<J extends AjaxResponseReaction<J>> extends JavaScriptPart<J>
 {
 	
 	/**
