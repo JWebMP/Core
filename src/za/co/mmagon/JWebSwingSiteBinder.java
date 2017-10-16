@@ -40,7 +40,6 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.servlets.*;
 import za.co.mmagon.jwebswing.base.servlets.options.AngularDataServletInitData;
-import za.co.mmagon.jwebswing.base.servlets.options.AngularFileTransferData;
 import za.co.mmagon.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;

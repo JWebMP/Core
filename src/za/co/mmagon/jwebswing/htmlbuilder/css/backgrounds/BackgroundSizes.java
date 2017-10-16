@@ -72,7 +72,7 @@ public enum BackgroundSizes implements CSSEnumeration<BackgroundSizes>
 	/**
 	 * Sets this field as not set
 	 */
-	Unset;;
+	Unset;
 
 	@Override
 	public String toString()

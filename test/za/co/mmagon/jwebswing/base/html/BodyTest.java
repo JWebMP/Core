@@ -17,7 +17,7 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.jupiter.api.Test;
-import za.co.mmagon.BaseTestClass;
+import za.co.mmagon.jwebswing.BaseTestClass;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.generics.WebReference;
 import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;

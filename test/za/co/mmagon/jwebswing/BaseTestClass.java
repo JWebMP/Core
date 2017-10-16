@@ -14,10 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon;
+package za.co.mmagon.jwebswing;
 
-import za.co.mmagon.jwebswing.Feature;
-import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.html.Body;
 
 import java.io.FileWriter;
@@ -90,10 +88,4 @@ public class BaseTestClass
 		f.setID("featureTest");
 		return f;
 	}
-
-    /*
-     * public ComponentEventBase getEvent() { ComponentEventBase e = new Event(EventTypes.activate, EventTypes.activate) { @Override public void fireEvent(AjaxCallObject ajaxObject, String calledFrom,
-     * AjaxReceiver ajaxReceiver) { throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates. } }; e.setID("testEvent");
-     * e.addQuery("This is the event query"); return e; }
-     */
 }

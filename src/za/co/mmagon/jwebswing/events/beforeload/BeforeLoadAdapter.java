@@ -28,6 +28,7 @@ import za.co.mmagon.jwebswing.plugins.ComponentInformation;
 import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 import za.co.mmagon.logger.LogFactory;
 
+import java.util.Objects;
 import java.util.logging.Level;
 
 /**
@@ -120,5 +121,29 @@ public abstract class BeforeLoadAdapter extends Event
 			LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
-
+	
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof BeforeLoadAdapter))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+		BeforeLoadAdapter that = (BeforeLoadAdapter) o;
+		return Objects.equals(getComponent(), that.getComponent());
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), getComponent());
+	}
 }

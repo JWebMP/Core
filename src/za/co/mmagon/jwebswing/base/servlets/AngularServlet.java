@@ -49,11 +49,12 @@ public class AngularServlet extends JWDefaultServlet
 	 * @throws IOException      if an I/O error occurs
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws IOException
 	{
 		Page page = GuiceContext.inject().getInstance(Page.class);
 		page.toString(true);
 		StringBuilder output = page.getAngular().renderAngularJavascript(page);
+		request.getHeaderNames();
+		response.getHeaderNames();
 		writeOutput(output, "application/javascript;charset=UTF-8", Charset.forName("UTF-8"));
 	}
 	

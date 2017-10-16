@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Lists Browsers and their capable CSS. Stores when the compatibility changed per version Only includes the version number where the CSS and HTML version changes.
@@ -127,7 +128,7 @@ public enum Browsers
 	 * @param browserVersion     The Browser Version
 	 * @param browserGroup       The Browser Group
 	 */
-	private Browsers(CSSVersions capableCSSVersion, HTMLVersions capableHTMLVersion, double browserVersion, BrowserGroups browserGroup)
+	Browsers(CSSVersions capableCSSVersion, HTMLVersions capableHTMLVersion, double browserVersion, BrowserGroups browserGroup)
 	{
 		this.capableCSSVersion = capableCSSVersion;
 		this.browserGroup = browserGroup;
@@ -142,7 +143,7 @@ public enum Browsers
 	 *
 	 * @return A list of browsers
 	 */
-	public static ArrayList<Browsers> getBrowsersForGroup(String group)
+	public static List<Browsers> getBrowsersForGroup(String group)
 	{
 		String groupRead = group;
 		if (group.equalsIgnoreCase("Trident"))
@@ -170,7 +171,7 @@ public enum Browsers
 	 */
 	public static Browsers getBrowserFromNameAndVersion(String name, double version)
 	{
-		ArrayList<Browsers> browsers = getBrowsersForGroup(name);
+		List<Browsers> browsers = getBrowsersForGroup(name);
 		double maxCapableVersion = 0.0;
 		Browsers maxCapabableBrowser = Firefox19;
 		for (Browsers browsers1 : browsers)

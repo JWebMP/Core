@@ -27,9 +27,8 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.HtmlChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.PageChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.logger.LogFactory;
 
-import java.util.logging.Logger;
+import java.util.Objects;
 
 /**
  * Browser Support<p>
@@ -66,9 +65,6 @@ public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Bo
 		extends Component<C, BodyAttributes, F, NoEvents, J>
 		implements PageChildren, HtmlChildren, LayoutHandler, ContainerType
 {
-	
-	private static final Logger LOG = LogFactory.getInstance().getLogger("BODY");
-	
 	private static final long serialVersionUID = 1L;
 	/**
 	 * If this body has rendered the scripts on itself
@@ -97,13 +93,7 @@ public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Bo
 		}
 		setID("body");
 	}
-	
-	@Override
-	public void preConfigure()
-	{
-		super.preConfigure();
-	}
-	
+
 	/**
 	 * If the scripts have been rendered
 	 *
@@ -127,4 +117,28 @@ public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Bo
 		return this;
 	}
 	
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof Body))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+		Body<?, ?, ?> body = (Body<?, ?, ?>) o;
+		return isRenderedScripts() == body.isRenderedScripts();
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), isRenderedScripts());
+	}
 }

@@ -17,7 +17,7 @@
 package za.co.mmagon.jwebswing.base;
 
 import org.junit.jupiter.api.Test;
-import za.co.mmagon.BaseTestClass;
+import za.co.mmagon.jwebswing.BaseTestClass;
 
 /**
  * @author ged_m

@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing;
 
 import org.junit.jupiter.api.Test;
-import za.co.mmagon.BaseTestClass;
 import za.co.mmagon.jwebswing.base.client.Browsers;
 import za.co.mmagon.jwebswing.base.client.InternetExplorerCompatibilityMode;
 import za.co.mmagon.jwebswing.base.html.Base;

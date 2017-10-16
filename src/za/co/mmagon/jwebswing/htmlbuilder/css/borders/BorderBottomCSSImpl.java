@@ -46,9 +46,13 @@ public class BorderBottomCSSImpl extends CSSImplementationAdapter<BorderBottomCS
 	private BorderStyles borderBottomStyle;
 	@CSSDetail(cssName = "border-bottom-width", cssVersion = CSSVersions.CSS21)
 	private MeasurementCSSImpl borderBottomWidth;
-
+	
+	/**
+	 * Default Border Bottom
+	 */
 	public BorderBottomCSSImpl()
 	{
+		//Nothing Needed
 	}
 
 	@Override

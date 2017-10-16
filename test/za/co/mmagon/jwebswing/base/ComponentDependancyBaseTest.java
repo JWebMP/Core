@@ -18,7 +18,7 @@ package za.co.mmagon.jwebswing.base;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import za.co.mmagon.BaseTestClass;
+import za.co.mmagon.jwebswing.BaseTestClass;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.plugins.ajaxenabler.AjaxEnablerReferencePool;
 import za.co.mmagon.jwebswing.plugins.jquery.JQueryReferencePool;

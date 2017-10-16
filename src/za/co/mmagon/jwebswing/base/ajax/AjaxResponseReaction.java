@@ -30,6 +30,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 public class AjaxResponseReaction<J extends AjaxResponseReaction<J>> extends JavaScriptPart<J>
 {
 	
+	private static final long serialVersionUID = 1L;
 	/**
 	 * The title of the reaction
 	 */

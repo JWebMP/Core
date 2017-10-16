@@ -18,7 +18,7 @@ package za.co.mmagon.jwebswing.base;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import za.co.mmagon.BaseTestClass;
+import za.co.mmagon.jwebswing.BaseTestClass;
 import za.co.mmagon.jwebswing.base.html.Body;
 import za.co.mmagon.jwebswing.base.html.Meta;
 import za.co.mmagon.jwebswing.base.html.Paragraph;
