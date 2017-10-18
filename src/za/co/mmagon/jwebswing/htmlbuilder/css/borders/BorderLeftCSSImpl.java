@@ -50,6 +50,7 @@ public class BorderLeftCSSImpl extends CSSImplementationAdapter<BorderLeftCSS, B
 
 	public BorderLeftCSSImpl()
 	{
+		//Nothing needed
 	}
 
 	@Override

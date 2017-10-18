@@ -27,6 +27,7 @@ import za.co.mmagon.jwebswing.plugins.ComponentInformation;
 import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * This event is triggered when a button is clicked.
@@ -109,5 +110,29 @@ public abstract class ButtonClickAdapter extends Event
 	{
 		this.directive = directive;
 	}
-
+	
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof ButtonClickAdapter))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+		ButtonClickAdapter that = (ButtonClickAdapter) o;
+		return Objects.equals(getComponent(), that.getComponent());
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), getComponent());
+	}
 }

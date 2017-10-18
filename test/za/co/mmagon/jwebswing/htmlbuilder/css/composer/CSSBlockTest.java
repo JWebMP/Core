@@ -12,7 +12,11 @@ import static org.junit.jupiter.api.Assertions.fail;
  */
 public class CSSBlockTest
 {
-
+	@Test
+	void add()
+	{
+	}
+	
 	String bla = "#idOfTag {\n"
 			+ "	property1:value1;\n"
 			+ "	property1:value2;\n"

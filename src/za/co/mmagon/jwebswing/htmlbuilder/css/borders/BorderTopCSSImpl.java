@@ -50,6 +50,7 @@ public class BorderTopCSSImpl extends CSSImplementationAdapter<BorderTopCSS, Bor
 
 	public BorderTopCSSImpl()
 	{
+		//Nothing Needed
 	}
 
 	@Override

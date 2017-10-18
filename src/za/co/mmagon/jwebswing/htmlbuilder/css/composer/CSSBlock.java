@@ -2,12 +2,10 @@ package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
 import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
 import za.co.mmagon.jwebswing.utilities.TextUtilities;
-import za.co.mmagon.logger.LogFactory;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 /**
  * A Block of CSS
@@ -18,10 +16,9 @@ import java.util.logging.Logger;
  */
 public class CSSBlock
 {
-	
-	private static final Logger LOG = LogFactory.getInstance().getLogger("CSSBlock");
 	private static final CSSLineSorter SORTER = new CSSLineSorter();
-	private ArrayList<String> linkedBlocks = new ArrayList();
+	
+	private List<String> linkedBlocks = new ArrayList();
 	private CSSLines cssLines;
 	private CSSTypes blockType;
 	private CSSBlockIdentifier blockIdentifer;
@@ -78,6 +75,7 @@ public class CSSBlock
 	{
 		this.blockType = blockType;
 		this.idOfBlock = idOfBlock;
+		this.blockIdentifer = blockIdentifer;
 		
 		cssLines = new CSSLines();
 		cssLines.setPrettyPrint(true);
@@ -96,56 +94,15 @@ public class CSSBlock
 	public CSSBlock(CSSTypes blockType, CSSBlockIdentifier blockIdentifer, String idOfBlock, boolean prettyPrint, boolean renderBraces, boolean renderQuotations)
 	{
 		this.blockType = blockType;
+		this.blockIdentifer = blockIdentifer;
 		this.idOfBlock = idOfBlock;
+		
 		cssLines = new CSSLines();
-		cssLines.setPrettyPrint(true);
-		cssLines.setRenderBraces(true);
-		cssLines.setRenderInQuotations(false);
+		cssLines.setPrettyPrint(prettyPrint);
+		cssLines.setRenderBraces(renderBraces);
+		cssLines.setRenderInQuotations(renderQuotations);
 	}
 	
-	public static void main(String... args)
-	{
-		GregorianCalendar date = new GregorianCalendar();
-		CSSBlock cssIDComponentBlock = new CSSBlock("idOfTag");
-		cssIDComponentBlock.add(null);
-		cssIDComponentBlock.add(new CSSLine("property2:value2"));
-		cssIDComponentBlock.add(new CSSLine("property2:value1"));
-		cssIDComponentBlock.add(new CSSLine("property1:value1"));
-		cssIDComponentBlock.add(new CSSLine("property1:value2"));
-		System.out.println("CSS Block : \n" + cssIDComponentBlock);
-		
-		CSSBlock cssIDComponentBlockActive = new CSSBlock("className");
-		cssIDComponentBlockActive.blockType = CSSTypes.Active;
-		cssIDComponentBlockActive.blockIdentifer = CSSBlockIdentifier.Class;
-		cssIDComponentBlockActive.add(null);
-		cssIDComponentBlockActive.add(new CSSLine("property2:value2"));
-		cssIDComponentBlockActive.add(new CSSLine("property2:value1"));
-		cssIDComponentBlockActive.add(new CSSLine("property1:value1"));
-		cssIDComponentBlockActive.add(new CSSLine("property1:value2"));
-		System.out.println("\n" + cssIDComponentBlockActive);
-		
-		CSSBlock cssTagComponent = new CSSBlock("normal-tag");
-		cssTagComponent.blockType = CSSTypes.Hover;
-		cssTagComponent.blockIdentifer = CSSBlockIdentifier.Id;
-		cssTagComponent.add(null);
-		cssTagComponent.add(new CSSLine("property2:value2"));
-		cssTagComponent.add(new CSSLine("property2:value1"));
-		cssTagComponent.add(new CSSLine("property1:value1"));
-		cssTagComponent.add(new CSSLine("property1:value2"));
-		cssTagComponent.addLinkedBlock(cssTagComponent);
-		System.out.println("\n" + cssTagComponent);
-		
-		CSSBlock cssInLineComponent = new CSSBlock();
-		cssInLineComponent.add(null);
-		cssInLineComponent.add(new CSSLine("property2:value2"));
-		cssInLineComponent.add(new CSSLine("property2:value1"));
-		cssInLineComponent.add(new CSSLine("property1:value1"));
-		cssInLineComponent.add(new CSSLine("property1:value2"));
-		System.out.println("\n" + cssInLineComponent);
-		
-		GregorianCalendar date2 = new GregorianCalendar();
-		System.out.println("Time Taken : " + (date2.getTimeInMillis() - date.getTimeInMillis()) + "milliseconds.");
-	}
 	
 	/**
 	 * Adds a property value pair to the Lines group. If it already exists, just returns it
@@ -289,10 +246,9 @@ public class CSSBlock
 				break;
 			}
 		}
-		
-		//addBlockID(idOfBlock);
 		return sb.toString();
 	}
+	
 	
 	/**
 	 * Returns a generated block ID to apply on top of this CSS
@@ -303,9 +259,9 @@ public class CSSBlock
 	 */
 	public String addBlockID(String block)
 	{
-		if (!linkedBlocks.contains(block))
+		if (!getLinkedBlocks().contains(block))
 		{
-			linkedBlocks.add(block);
+			getLinkedBlocks().add(block);
 		}
 		return block;
 	}
@@ -318,18 +274,15 @@ public class CSSBlock
 	private String generateBlockIDS(int tabCount)
 	{
 		StringBuilder sb = new StringBuilder();
-		getLinkedBlocks().stream().map(cssBlock ->
-		                               {
-			                               sb.append(cssBlock);
-			                               return cssBlock;
-		                               }).map(_item ->
-		                                      {
-			                                      sb.append(",");
-			                                      return _item;
-		                                      }).filter(_item -> (cssLines.isPrettyPrint())).forEachOrdered(_item ->
-		                                                                                                    {
-			                                                                                                    sb.append(TextUtilities.getTabString(tabCount - 1));
-		                                                                                                    });
+		for (String _item : getLinkedBlocks())
+		{
+			sb.append(_item);
+			sb.append(",");
+			if ((cssLines.isPrettyPrint()))
+			{
+				sb.append(TextUtilities.getTabString(tabCount - 1));
+			}
+		}
 		sb.append(generateBlockID(this));
 		return sb.toString();
 	}
@@ -446,7 +399,7 @@ public class CSSBlock
 	 *
 	 * @return
 	 */
-	public ArrayList<String> getLinkedBlocks()
+	public List<String> getLinkedBlocks()
 	{
 		return linkedBlocks;
 	}
@@ -456,7 +409,7 @@ public class CSSBlock
 	 *
 	 * @param linkedBlocks
 	 */
-	public void setLinkedBlocks(ArrayList<String> linkedBlocks)
+	public void setLinkedBlocks(List<String> linkedBlocks)
 	{
 		this.linkedBlocks = linkedBlocks;
 	}

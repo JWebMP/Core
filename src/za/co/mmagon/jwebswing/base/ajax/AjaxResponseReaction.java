@@ -20,6 +20,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
+import java.io.Serializable;
+
 /**
  * Denotes a specific reaction to occur at the client
  *
@@ -27,7 +29,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
  * @since 27 Apr 2016
  */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class AjaxResponseReaction<J extends AjaxResponseReaction<J>> extends JavaScriptPart<J>
+public class AjaxResponseReaction<J extends AjaxResponseReaction<J>> extends JavaScriptPart<J> implements Serializable
 {
 	
 	private static final long serialVersionUID = 1L;

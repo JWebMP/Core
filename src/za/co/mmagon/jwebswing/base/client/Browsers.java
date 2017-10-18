@@ -146,7 +146,7 @@ public enum Browsers
 	public static List<Browsers> getBrowsersForGroup(String group)
 	{
 		String groupRead = group;
-		if (group.equalsIgnoreCase("Trident"))
+		if ("Trident".equalsIgnoreCase(group))
 		{
 			groupRead = "Internet Explorer";
 		}
