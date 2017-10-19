@@ -53,7 +53,7 @@ public class CSSServlet extends JWDefaultServlet
 	 * @throws IOException      if an I/O error occurs
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException, MissingComponentException
+			throws IOException, MissingComponentException
 	{
 		Date startDate = new Date();
 		StringBuilder scripts = new StringBuilder();

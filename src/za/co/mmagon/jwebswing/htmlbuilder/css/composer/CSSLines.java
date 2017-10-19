@@ -2,9 +2,10 @@ package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
 import za.co.mmagon.jwebswing.utilities.TextUtilities;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 
 /**
  * Denotes many lines of CSS. This belongs to a Block This can be not defined, or hover, a, visited, link... etc
@@ -15,13 +16,29 @@ import java.util.Iterator;
  */
 public class CSSLines implements Serializable
 {
-	
+	/**
+	 * If this should be rendered as tiny
+	 */
 	private static boolean tinyHTML;
-	private ArrayList<CSSLine> cssLines;
+	/**
+	 * A list of all the CSS lines
+	 */
+	private List<CSSLine> cssLines;
+	/**
+	 * Whether or not to render in quotations
+	 */
 	private boolean renderInQuotations;
+	/**
+	 * If the surrounding braces should be rendered
+	 */
 	private boolean renderBraces;
+	/**
+	 * If the css should be pretty printed
+	 */
 	private boolean prettyPrint;
-	private boolean renderInLine;
+	/**
+	 * If semicolon's shouldn't exists
+	 */
 	private boolean renderSemiColons;
 	
 	/**
@@ -29,7 +46,7 @@ public class CSSLines implements Serializable
 	 */
 	public CSSLines()
 	{
-		this(new ArrayList<CSSLine>());
+		this(new ArrayList<>());
 	}
 	
 	/**
@@ -37,7 +54,7 @@ public class CSSLines implements Serializable
 	 *
 	 * @param cssLines The lines that should be rendered for CSS Lines
 	 */
-	public CSSLines(ArrayList<CSSLine> cssLines)
+	public CSSLines(List<CSSLine> cssLines)
 	{
 		this(cssLines, false);
 	}
@@ -48,7 +65,7 @@ public class CSSLines implements Serializable
 	 * @param cssLines           The lines that should be rendered for CSS Lines
 	 * @param renderInQuotations Sets to render the CSS for JQuery
 	 */
-	public CSSLines(ArrayList<CSSLine> cssLines, boolean renderInQuotations)
+	public CSSLines(List<CSSLine> cssLines, boolean renderInQuotations)
 	{
 		this(cssLines, renderInQuotations, false);
 	}
@@ -60,7 +77,7 @@ public class CSSLines implements Serializable
 	 * @param renderInQuotations Sets to render the CSS for JQuery
 	 * @param renderBraces       Sets to render braces for the CSS
 	 */
-	public CSSLines(ArrayList<CSSLine> cssLines, boolean renderInQuotations, boolean renderBraces)
+	public CSSLines(List<CSSLine> cssLines, boolean renderInQuotations, boolean renderBraces)
 	{
 		this(cssLines, renderInQuotations, renderBraces, true, false);
 	}
@@ -74,7 +91,7 @@ public class CSSLines implements Serializable
 	 * @param prettyPrint        Sets to put on the pretty print
 	 * @param tinyHtml           Old field for tiny HTML - replaced with getNewLine();
 	 */
-	public CSSLines(ArrayList<CSSLine> cssLines, boolean renderInQuotations, boolean renderBraces, boolean prettyPrint, boolean tinyHtml)
+	public CSSLines(List<CSSLine> cssLines, boolean renderInQuotations, boolean renderBraces, boolean prettyPrint, boolean tinyHtml)
 	{
 		this.cssLines = cssLines;
 		this.renderInQuotations = renderInQuotations;
@@ -92,7 +109,7 @@ public class CSSLines implements Serializable
 	 */
 	public CSSLines(boolean renderInQuotations, boolean renderBraces, boolean prettyPrint)
 	{
-		this(new ArrayList<CSSLine>(), renderInQuotations, renderBraces, prettyPrint, false);
+		this(new ArrayList<>(), renderInQuotations, renderBraces, prettyPrint, false);
 	}
 	
 	/**
@@ -100,7 +117,8 @@ public class CSSLines implements Serializable
 	 *
 	 * @return a list of CSS Line
 	 */
-	public ArrayList<CSSLine> getCssLines()
+	@NotNull
+	public List<CSSLine> getCssLines()
 	{
 		if (cssLines == null)
 		{
@@ -114,7 +132,7 @@ public class CSSLines implements Serializable
 	 *
 	 * @param cssLines The lines list to set
 	 */
-	public void setCssLines(ArrayList<CSSLine> cssLines)
+	public void setCssLines(List<CSSLine> cssLines)
 	{
 		this.cssLines = cssLines;
 	}
@@ -220,30 +238,28 @@ public class CSSLines implements Serializable
 	{
 		StringBuilder sb = new StringBuilder();
 		StringBuilder tabs = TextUtilities.getTabString(tabCount);
-		//String cssTabs = Component.tinyHtml ? "" : TextUtilities.getTabString(tinyHTML,tabCount + 1);
 		StringBuilder cssTabsLess = TextUtilities.getTabString(tabCount - 1);
+		StringBuilder newline = new StringBuilder(renderInLine?"\n":"");
 		
 		if (isRenderBraces())
 		{
 			if (isPrettyPrint())
 			{
-				sb.append("\n");
+				sb.append(newline);
 			}
 			sb.append("{");
 			if (isPrettyPrint())
 			{
-				sb.append("\n");
+				sb.append(newline);
 			}
 		}
 		
-		for (Iterator<CSSLine> it = getCssLines().iterator(); it.hasNext(); )
+		for (CSSLine cSSLine : getCssLines())
 		{
-			CSSLine cSSLine = it.next();
 			if (!isPrettyPrint())
 			{
 				sb.append(cSSLine.toString(renderInQuotations));
 				sb.append(";");
-				//sb.append(renderInLine ? ";" : ",");
 			}
 			else
 			{

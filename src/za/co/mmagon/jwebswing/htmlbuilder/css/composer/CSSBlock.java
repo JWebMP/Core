@@ -18,7 +18,7 @@ public class CSSBlock
 {
 	private static final CSSLineSorter SORTER = new CSSLineSorter();
 	
-	private List<String> linkedBlocks = new ArrayList();
+	private List<String> linkedBlocks;
 	private CSSLines cssLines;
 	private CSSTypes blockType;
 	private CSSBlockIdentifier blockIdentifer;
@@ -50,6 +50,7 @@ public class CSSBlock
 		cssLines.setRenderInQuotations(false);
 		blockType = CSSTypes.None;
 		blockIdentifer = CSSBlockIdentifier.Id;
+		linkedBlocks = new ArrayList();
 	}
 	
 	/**
@@ -64,6 +65,7 @@ public class CSSBlock
 		cssLines.setRenderInQuotations(false);
 		blockType = CSSTypes.None;
 		blockIdentifer = CSSBlockIdentifier.Inline;
+		linkedBlocks = new ArrayList();
 	}
 	
 	/**
@@ -81,6 +83,7 @@ public class CSSBlock
 		cssLines.setPrettyPrint(true);
 		cssLines.setRenderBraces(true);
 		cssLines.setRenderInQuotations(false);
+		linkedBlocks = new ArrayList();
 	}
 	
 	/**
@@ -101,6 +104,7 @@ public class CSSBlock
 		cssLines.setPrettyPrint(prettyPrint);
 		cssLines.setRenderBraces(renderBraces);
 		cssLines.setRenderInQuotations(renderQuotations);
+		linkedBlocks = new ArrayList();
 	}
 	
 	
@@ -302,7 +306,7 @@ public class CSSBlock
 			return "";
 		}
 		sb.append(generateBlockIDS(tabCount));
-		if (!(this.blockType == CSSTypes.None))
+		if (this.blockType != CSSTypes.None)
 		{
 			sb.append(" ");
 		}

@@ -20,7 +20,7 @@ import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.htmlbuilder.css.CSSImpl;
 import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
 
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @param <J> Returns this class
@@ -85,7 +85,7 @@ public interface IComponentStyleBase<J extends ComponentBase>
 	 *
 	 * @return
 	 */
-	HashMap<CSSTypes, CSSImpl> getCssTypeHashMap();
+	Map<CSSTypes, CSSImpl> getCssTypeHashMap();
 	
 	/**
 	 * Gets the hover format CSS

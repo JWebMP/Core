@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,14 +26,19 @@ import java.util.List;
  */
 public class CSSBlockMaster
 {
-
+	/**
+	 * A list of all the existing css blocks
+	 */
 	private List<CSSBlock> allBlocks;
-
+	
+	/**
+	 * Creates a new block master
+	 */
 	public CSSBlockMaster()
 	{
-
+		//Nothing Needed
 	}
-
+	
 	/**
 	 * Restart a block building section
 	 */
@@ -40,7 +46,7 @@ public class CSSBlockMaster
 	{
 		allBlocks.clear();
 	}
-
+	
 	/**
 	 * Adds a block to the CSS Composer
 	 *
@@ -51,7 +57,7 @@ public class CSSBlockMaster
 		CSSBlock dupLines;
 		if (!getAllCSSBlocks().contains(block))
 		{
-
+			
 			if ((dupLines = checkBlocksForDuplicateLines(block)) != null)
 			{
 				dupLines.addLinkedBlock(block);
@@ -62,7 +68,7 @@ public class CSSBlockMaster
 			}
 		}
 	}
-
+	
 	/**
 	 * Adds a block to the CSS Composer
 	 *
@@ -72,14 +78,10 @@ public class CSSBlockMaster
 	 */
 	public List<CSSBlock> addBlock(List<CSSBlock> block)
 	{
-		block.stream().forEach(cssBlock
-				                       ->
-		                       {
-			                       addBlock(cssBlock);
-		                       });
+		block.forEach(cssBlock -> addBlock(cssBlock));
 		return block;
 	}
-
+	
 	/**
 	 * Returns any duplicate blocks
 	 *
@@ -99,7 +101,7 @@ public class CSSBlockMaster
 		}
 		return null;
 	}
-
+	
 	/**
 	 * Checks if the ID of a block is loaded for this composer
 	 *
@@ -111,12 +113,13 @@ public class CSSBlockMaster
 	{
 		return getAllCSSBlocks().stream().anyMatch(cssBlock -> (block.getIdOfBlock().equalsIgnoreCase(cssBlock.getIdOfBlock())));
 	}
-
+	
 	/**
 	 * Return the list of CSS Blocks loaded in this composer
 	 *
 	 * @return
 	 */
+	@NotNull
 	public List<CSSBlock> getAllCSSBlocks()
 	{
 		if (allBlocks == null)
@@ -125,7 +128,7 @@ public class CSSBlockMaster
 		}
 		return allBlocks;
 	}
-
+	
 	/**
 	 * Returns the generated CSS as small as possible
 	 *
@@ -135,17 +138,16 @@ public class CSSBlockMaster
 	public String toString()
 	{
 		StringBuilder cssBlocksSB = new StringBuilder();
-		getAllCSSBlocks().stream().forEach(cSSBlock
-				                                   ->
-		                                   {
-			                                   if (!cSSBlock.toString().isEmpty())
-			                                   {
-				                                   cssBlocksSB.append(cSSBlock);//.append(cSSBlock.getBlockIdentifer() == CSSBlockIdentifier.Inline ? "" : "\n");
-			                                   }
-		                                   });
+		getAllCSSBlocks().forEach(cSSBlock ->
+		                          {
+			                          if (!cSSBlock.toString().isEmpty())
+			                          {
+				                          cssBlocksSB.append(cSSBlock);
+			                          }
+		                          });
 		return cssBlocksSB.toString();
 	}
-
+	
 	/**
 	 * Returns the generated CSS as small as possible
 	 *
@@ -155,18 +157,24 @@ public class CSSBlockMaster
 	 */
 	public String toString(boolean ajax)
 	{
-		StringBuilder cssBlocksSB = new StringBuilder();
-		getAllCSSBlocks().stream().forEach(cSSBlock
-				                                   ->
-		                                   {
-			                                   CSSBlockIdentifier oldIdent = cSSBlock.getBlockIdentifer();
-			                                   cSSBlock.setBlockIdentifer(CSSBlockIdentifier.Inline);
-			                                   if (!cSSBlock.toString().isEmpty())
-			                                   {
-				                                   cssBlocksSB.append(cSSBlock).append(cSSBlock.getBlockIdentifer() == CSSBlockIdentifier.Inline ? "" : "\n");
-			                                   }
-			                                   cSSBlock.setBlockIdentifer(oldIdent);
-		                                   });
-		return cssBlocksSB.toString();
+		if (ajax)
+		{
+			StringBuilder cssBlocksSB = new StringBuilder();
+			getAllCSSBlocks().forEach(cSSBlock ->
+			                          {
+				                          CSSBlockIdentifier oldIdent = cSSBlock.getBlockIdentifer();
+				                          cSSBlock.setBlockIdentifer(CSSBlockIdentifier.Inline);
+				                          if (!cSSBlock.toString().isEmpty())
+				                          {
+					                          cssBlocksSB.append(cSSBlock).append(cSSBlock.getBlockIdentifer() == CSSBlockIdentifier.Inline ? "" : "\n");
+				                          }
+				                          cSSBlock.setBlockIdentifer(oldIdent);
+			                          });
+			return cssBlocksSB.toString();
+		}
+		else
+		{
+			return toString();
+		}
 	}
 }

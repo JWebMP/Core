@@ -54,7 +54,7 @@ public enum CSSTypes
 	/**
 	 * :focus input:focus Selects the input element which has focus
 	 */
-	Focus(2.0, "*", CSSTypePosition.After);;
+	Focus(2.0, "*", CSSTypePosition.After);
 	/**
 	 * Where to place the position
 	 */
@@ -75,7 +75,7 @@ public enum CSSTypes
 	 * @param cssName     The physical display name of the selector
 	 * @param cssPosition Where to place the type
 	 */
-	private CSSTypes(double cssVersion, String cssName, CSSTypePosition cssPosition)
+	CSSTypes(double cssVersion, String cssName, CSSTypePosition cssPosition)
 	{
 		this.cssVersion = cssVersion;
 		this.cssName = cssName;

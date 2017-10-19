@@ -49,14 +49,14 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 	/**
 	 * The properties factory
 	 */
-	private CSSPropertiesFactory propertyFactory;
+	private CSSPropertiesFactory<A> propertyFactory;
 	
 	/**
 	 * For implementing generic methods on CSS
 	 */
 	public CSSImplementationAdapter()
 	{
-	
+		//Nothing Needed
 	}
 	
 	/**
@@ -89,11 +89,11 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 	 *
 	 * @return
 	 */
-	protected CSSPropertiesFactory getPropertyFactory()
+	protected CSSPropertiesFactory<A> getPropertyFactory()
 	{
 		if (propertyFactory == null)
 		{
-			propertyFactory = new CSSPropertiesFactory();
+			propertyFactory = new CSSPropertiesFactory<>();
 		}
 		return propertyFactory;
 	}

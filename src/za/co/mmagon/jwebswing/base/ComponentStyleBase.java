@@ -28,6 +28,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSComposer;
 import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The CSS Portion of the Component.
@@ -76,7 +77,7 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 	 * Container for all the CSS Types
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private HashMap<CSSTypes, CSSImpl> cssTypeHashMap;
+	private Map<CSSTypes, CSSImpl> cssTypeHashMap;
 	
 	/**
 	 * Constructs a tag with styling options enabled
@@ -95,7 +96,7 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 	 */
 	public IComponentStyleBase asStyleBase()
 	{
-		return (ComponentStyleBase) this;
+		return this;
 	}
 	
 	/**
@@ -104,7 +105,7 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 	 * @return
 	 */
 	@Override
-	public HashMap<CSSTypes, CSSImpl> getCssTypeHashMap()
+	public Map<CSSTypes, CSSImpl> getCssTypeHashMap()
 	{
 		if (cssTypeHashMap == null)
 		{

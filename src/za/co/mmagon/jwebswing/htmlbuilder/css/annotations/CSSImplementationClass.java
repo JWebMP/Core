@@ -32,6 +32,7 @@ import java.lang.annotation.Annotation;
  */
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@FunctionalInterface
 public interface CSSImplementationClass<A extends Annotation, I extends CSSImplementationClass> extends Serializable
 {
 	
@@ -42,5 +43,5 @@ public interface CSSImplementationClass<A extends Annotation, I extends CSSImple
 	 *
 	 * @return
 	 */
-	public I fromAnnotation(A annotation);
+	I fromAnnotation(A annotation);
 }

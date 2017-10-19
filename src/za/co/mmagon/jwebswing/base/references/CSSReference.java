@@ -106,8 +106,7 @@ public class CSSReference extends WebReference<CSSReference>
 	@Override
 	public int hashCode()
 	{
-		int hash = 5;
-		return hash;
+		return 5;
 	}
 	
 }

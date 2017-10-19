@@ -30,6 +30,7 @@ import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.logger.LogFactory;
 
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -154,7 +155,6 @@ public class CSSLink<J extends CSSLink<J>>
 			if (getPage().getBrowser().getHtmlVersion().name().startsWith("X"))
 			{
 				setInlineClosingTag(true);
-				//System.out.println("Set base to close on in line tag");
 			}
 		}
 		catch (Exception e)
@@ -162,11 +162,6 @@ public class CSSLink<J extends CSSLink<J>>
 			LOG.log(Level.WARNING, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
 		}
 		
-		//add theme class name
-		/*
-		 * if (isThemeLink()) { addClass(Theme.themeClassIdentifier); }
-         */
-		//add theme class name
 		if (isPrettifyTheme())
 		{
 			addClass("prettify");
@@ -196,36 +191,25 @@ public class CSSLink<J extends CSSLink<J>>
 	@Override
 	public int hashCode()
 	{
-		int hash = 3;
-		return hash;
+		return Objects.hash(super.hashCode(), isThemeLink(), isPrettifyTheme(), getLinkedReference());
 	}
 	
 	/**
-	 * TODO remove this
-	 *
 	 * @return
-	 *
-	 * @deprecated
 	 */
 	@JsonIgnore
 	public boolean isThemeLink()
 	{
-		if (getAttribute(CSSLinkAttributes.HRef) != null)
+		if (getAttribute(CSSLinkAttributes.HRef) != null && getAttribute(CSSLinkAttributes.HRef).contains("_theme"))
 		{
-			if (getAttribute(CSSLinkAttributes.HRef).contains("_theme"))
-			{
-				themeLink = true;
-			}
+			themeLink = true;
 		}
+		
 		return themeLink;
 	}
 	
 	/**
-	 * TODO remove this
-	 *
 	 * @param themeLink
-	 *
-	 * @deprecated
 	 */
 	public void setThemeLink(boolean themeLink)
 	{
@@ -233,11 +217,9 @@ public class CSSLink<J extends CSSLink<J>>
 	}
 	
 	/**
-	 * Gets the prettify theme TODO remove this
+	 * Gets the prettify theme
 	 *
 	 * @return
-	 *
-	 * @deprecated
 	 */
 	public boolean isPrettifyTheme()
 	{
@@ -246,11 +228,9 @@ public class CSSLink<J extends CSSLink<J>>
 	}
 	
 	/**
-	 * Sets the prettify theme if required TODO remove this
+	 * Sets the prettify theme if required
 	 *
 	 * @param prettifyTheme
-	 *
-	 * @deprecated
 	 */
 	public void setPrettifyTheme(boolean prettifyTheme)
 	{

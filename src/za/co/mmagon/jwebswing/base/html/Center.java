@@ -39,7 +39,6 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @param <J>
  *
  * @author GedMarc
- * @deprecated
  */
 public class Center<J extends Center<J>>
 		extends Component<GlobalChildren, NoAttributes, NoFeatures, NoEvents, J>
