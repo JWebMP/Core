@@ -26,7 +26,7 @@ public class HelloWorldBasicCSS extends JWebSwingServlet
 			active = @CSS,
 			link = @CSS,
 			visited = @CSS)
-	private Paragraph helloThree;
+	private final Paragraph helloThree;
 
 	/**
 	 * The page to be displayed.

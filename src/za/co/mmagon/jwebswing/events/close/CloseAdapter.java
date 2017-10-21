@@ -26,6 +26,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTy
 import za.co.mmagon.jwebswing.plugins.ComponentInformation;
 import za.co.mmagon.logger.LogFactory;
 
+import java.util.Objects;
 import java.util.logging.Level;
 
 /**
@@ -64,7 +65,6 @@ public abstract class CloseAdapter extends Event
 	{
 		if (!isConfigured())
 		{
-
 			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
 			component.addAttribute(AngularAttributes.ngClose, "jwCntrl.perform($event," + renderVariables() + ");");
 		}
@@ -117,4 +117,28 @@ public abstract class CloseAdapter extends Event
 		}
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof CloseAdapter))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+		CloseAdapter that = (CloseAdapter) o;
+		return Objects.equals(getComponent(), that.getComponent());
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), getComponent());
+	}
 }

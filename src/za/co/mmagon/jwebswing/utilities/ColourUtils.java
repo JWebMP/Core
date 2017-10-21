@@ -25,7 +25,6 @@ package za.co.mmagon.jwebswing.utilities;
  */
 public class ColourUtils
 {
-	
 	/**
 	 * Converts a colour to hex i suppose
 	 */
@@ -33,7 +32,6 @@ public class ColourUtils
 	
 	private static String hexToRGB(String color)
 	{
-		//System.out.println("HEX TO RGB [" + color + "]");
 		String val1 = color.substring(0, 2);
 		String val2 = color.substring(2, 4);
 		String val3 = color.substring(4, 6);
@@ -42,14 +40,12 @@ public class ColourUtils
 	
 	private static String rgbToHex(String color)
 	{
-		//System.out.println("RGB TO HEX [" + color + "]");
 		String[] RGB = color.split(",");
 		return toHex(RGB[0]) + toHex(RGB[1]) + toHex(RGB[2]);
 	}
 	
 	/**
 	 * Returns a heat map colour between the min and maximum set
-	 *
 	 *
 	 * @return
 	 */
@@ -60,13 +56,15 @@ public class ColourUtils
 	}
 	
 	/**
-	 * @param minNumber
-	 * @param maxNumber
-	 * @param value
-	 * @param colourMin
-	 * @param colourMax
+	 * Returns a colour found between two colours from two numbers
 	 *
-	 * @return
+	 * @param minNumber The minimum number range
+	 * @param maxNumber The maximum number range
+	 * @param value     The actual value
+	 * @param colourMin The colour assigned to the minimum range
+	 * @param colourMax The colour assigned to the maximum range
+	 *
+	 * @return Colour Hex for the colour
 	 */
 	public static String getColourBetweenColours(double minNumber, double maxNumber, double value, String colourMin, String colourMax)
 	{
@@ -84,7 +82,6 @@ public class ColourUtils
 		colMin[1] = Integer.parseInt(minRGB.split(",")[1]);
 		colMin[2] = Integer.parseInt(minRGB.split(",")[2]);
 		
-		// ratio difference here numerically
 		int[] diff = new int[3];
 		diff[0] = colMin[0] - colMax[0];
 		diff[1] = colMin[1] - colMax[1];
@@ -94,7 +91,6 @@ public class ColourUtils
 		double divisor = maxNumber - minNumber;
 		
 		double perc = dividend / divisor;
-		//System.out.println("perc " + perc);
 		Integer[] c = new Integer[3];
 		
 		c[0] = colMin[0] - (int) (perc * diff[0]);
@@ -102,18 +98,19 @@ public class ColourUtils
 		c[2] = colMin[2] - (int) (perc * diff[2]);
 		
 		String co = c[0] + "," + c[1] + "," + c[2];
-		//System.out.println("CO - " + co);
 		String newColour = rgbToHex(co);
 		return newColour;
 	}
-	
+
+	/**
+	 * Sends a colour to a hex
+	 *
+	 * @param color
+	 *
+	 * @return
+	 */
 	private static String toHex(String color)
 	{
-		//System.out.println("TO HEX [" + color + "]");
-		//return Integer.toHexString(Integer.parseInt(color));
-		
-		//cant do as it truncates the 09 to 9
-//    	System.out.println(Integer.toHexString(Integer.parseInt(color)));
 		if (color == null)
 		{
 			return "00";
@@ -129,28 +126,7 @@ public class ColourUtils
 		N = Math.round(N);
 		char s = chars.charAt((N - N % 16) / 16);
 		char s1 = chars.charAt(N % 16);
-		return "" + s + s1;// "0123456789ABCDEF".charAt((N-N%16)/16)+ "0123456789ABCDEF".charAt(N%16);
+		return "" + s + s1;
 	}
-	
-	/**
-	 * @param args
-	 */
-	public static void main(String... args)
-	{
-		System.out.println(107560.0 / 1000);
-		System.out.println(Math.ceil(107560.0 / 1000));
-		System.out.println(Math.ceil(1.3));
-		System.out.println("hi");
-		Double dob = Double.parseDouble("2098.0583935946");
-		System.out.println(dob);
-		
-		int minNumber = 2635518;
-		int maxNumber = 49869420;
-		
-		System.out.println(getColourBetweenColours(minNumber, maxNumber, 26671095, "ffffff", "900020"));
-		System.out.println(getColourBetweenColours(minNumber, maxNumber, 49869420, "ffffff", "900020"));
-		System.out.println(getColourBetweenColours(minNumber, maxNumber, 5538699, "ffffff", "900020"));
-//    	System.out.println(getColour(minNumber, maxNumber, value));
-	
-	}
+
 }

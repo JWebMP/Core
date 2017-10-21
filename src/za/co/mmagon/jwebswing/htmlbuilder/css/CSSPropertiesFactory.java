@@ -71,6 +71,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
 	 *
 	 * @return
 	 */
+	@NotNull
 	public Map<StringBuilder, Object> getCSSProperties(List<Annotation> classAnnotations)
 	{
 		Map<StringBuilder, Object> implementedProperties = new HashMap<>();
@@ -87,53 +88,78 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
 	}
 	
 	/**
-	 * Return an Annotation/Implementation Pair of all CSS Properties defined in the class. Populates the All CSS Class Properties with these
+	 * Produce the original annotation mapping from an annotation
 	 *
-	 * @param classAnnotations
-	 *
-	 * @return
-	 */
-	public Map<StringBuilder, Object> getCSSProperties(CSSImplementationClass classAnnotations)
-	{
-		return processImplementationObjectFields(classAnnotations, new HashMap<>());
-	}
-	
-	/**
-	 * Return an Annotation/Implementation Pair of all CSS Properties defined in the class. Populates the All CSS Class Properties with these
-	 *
-	 * @param classImpl
+	 * @param annotation The annotation to pivot into a HashMap
 	 *
 	 * @return
 	 */
-	public Map<StringBuilder, Object> getCSSProperties(CSSImpl classImpl)
+	@NotNull
+	public Map<StringBuilder, Object> processAnnotation(Annotation annotation)
 	{
-		Map<StringBuilder, Object> m = new HashMap<>();
-		Field[] fields = classImpl.getClass().getDeclaredFields();
-		for (Field field : fields)
+		Map<StringBuilder, Object> output = new HashMap<>();
+
+		if (annotation == null)
 		{
-			if (field.getModifiers() == Modifier.STATIC)
+			return output;
+		}
+		Method[] methods = annotation.getClass().getDeclaredMethods();
+		for (Method method : methods)
+		{
+			if (IgnoreMethods.contains(method.getName()))
 			{
 				continue;
 			}
-			field.setAccessible(true);
 			try
 			{
-				Object obj = field.get(classImpl);
-				if (obj == null)
-				{
-					continue;
-				}
-				if (CSSImplementationClass.class.isAssignableFrom(obj.getClass()))
-				{
-					m.putAll(getCSSProperties(CSSImplementationClass.class.cast(obj)));
-				}
+				output.putAll(getPairFromAnnotationMethod(method, annotation));
 			}
-			catch (IllegalArgumentException | IllegalAccessException ex)
+			catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex)
 			{
-				Logger.getLogger(CSSPropertiesFactory.class.getName()).log(Level.SEVERE, null, ex);
+				log.log(Level.SEVERE, "[Value Generation]-[" + ex.getMessage() + "];[Method]-[" + method.getName() + "];", ex);
 			}
 		}
-		return m;
+
+		return output;
+	}
+
+	/**
+	 * Returns a map for the process implementation
+	 *
+	 * @param impClass
+	 * @param currentReturnList
+	 *
+	 * @return
+	 */
+	@NotNull
+	public Map<StringBuilder, Object> processImplementationObjectFields(CSSImplementationClass impClass, @NotNull Map<StringBuilder, Object> currentReturnList)
+	{
+		if (impClass == null)
+		{
+			return currentReturnList;
+		}
+
+		Field[] allFields = impClass.getClass().getDeclaredFields();
+		List<Field> fields = Arrays.asList(allFields);
+		fields.forEach(field ->
+		               {
+			               try
+			               {
+				               Map<StringBuilder, Object> map = getPairFromField(field, impClass);
+				               map.entrySet().forEach(entry ->
+				                                      {
+					                                      StringBuilder key = entry.getKey();
+					                                      Object value = entry.getValue();
+					                                      currentReturnList.put(key, value);
+				                                      });
+			               }
+			               catch (IllegalArgumentException | IllegalAccessException ex)
+			               {
+				               log.log(Level.FINE, "Unable to read pair from field due to permission", ex);
+			               }
+		               });
+
+		return currentReturnList;
 	}
 	
 	/**
@@ -299,78 +325,53 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
 			newCSSBlock.add(new CSSLine(key.toString(), value.toString()));
 		}
 	}
-	
+
 	/**
-	 * Returns a map for the process implementation
+	 * Return an Annotation/Implementation Pair of all CSS Properties defined in the class. Populates the All CSS Class Properties with these
 	 *
-	 * @param impClass
-	 * @param currentReturnList
+	 * @param classImpl
 	 *
 	 * @return
 	 */
-	public Map<StringBuilder, Object> processImplementationObjectFields(CSSImplementationClass impClass, Map<StringBuilder, Object> currentReturnList)
+	@NotNull
+	public Map<StringBuilder, Object> getCSSProperties(CSSImpl classImpl)
 	{
-		if (impClass == null)
+		Map<StringBuilder, Object> m = new HashMap<>();
+		Field[] fields = classImpl.getClass().getDeclaredFields();
+		for (Field field : fields)
 		{
-			return currentReturnList;
-		}
-		
-		Field[] allFields = impClass.getClass().getDeclaredFields();
-		List<Field> fields = Arrays.asList(allFields);
-		fields.forEach(field ->
-		               {
-			               try
-			               {
-				               Map<StringBuilder, Object> map = getPairFromField(field, impClass);
-				               map.entrySet().forEach(entry ->
-				                                      {
-					                                      StringBuilder key = entry.getKey();
-					                                      Object value = entry.getValue();
-					                                      currentReturnList.put(key, value);
-				                                      });
-			               }
-			               catch (IllegalArgumentException | IllegalAccessException ex)
-			               {
-				               log.log(Level.FINE, "Unable to read pair from field due to permission", ex);
-			               }
-		               });
-		
-		return currentReturnList;
-	}
-	
-	/**
-	 * Produce the original annotation mapping from an annotation
-	 *
-	 * @param annotation The annotation to pivot into a HashMap
-	 *
-	 * @return
-	 */
-	public Map<StringBuilder, Object> processAnnotation(Annotation annotation)
-	{
-		Map<StringBuilder, Object> output = new HashMap<>();
-		
-		if (annotation == null)
-		{
-			return output;
-		}
-		Method[] methods = annotation.getClass().getDeclaredMethods();
-		for (Method method : methods)
-		{
-			if (IgnoreMethods.contains(method.getName()))
-			{
-				continue;
-			}
 			try
 			{
-				output.putAll(getPairFromAnnotationMethod(method, annotation));
+				if (field.getModifiers() == Modifier.STATIC || field.get(classImpl) == null)
+				{
+					continue;
+				}
+				field.setAccessible(true);
+				Object obj = field.get(classImpl);
+				if (CSSImplementationClass.class.isAssignableFrom(obj.getClass()))
+				{
+					m.putAll(getCSSProperties(CSSImplementationClass.class.cast(obj)));
+				}
 			}
-			catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex)
+			catch (IllegalArgumentException | IllegalAccessException ex)
 			{
-				log.log(Level.SEVERE, "[Value Generation]-[" + ex.getMessage() + "];[Method]-[" + method.getName() + "];", ex);
+				Logger.getLogger(CSSPropertiesFactory.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
-		
-		return output;
+		return m;
+	}
+
+	/**
+	 * Return an Annotation/Implementation Pair of all CSS Properties defined in the class. Populates the All CSS Class Properties with these
+	 *
+	 * @param classAnnotations
+	 *
+	 * @return
+	 */
+	@NotNull
+	public Map<StringBuilder, Object> getCSSProperties(CSSImplementationClass classAnnotations)
+	{
+		return processImplementationObjectFields(classAnnotations, new HashMap<>());
 	}
 	
 	/**
@@ -704,4 +705,6 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
 		arrayList.removeIf(a -> a.annotationType().isAnnotationPresent(CSSAnnotationType.class));
 		return arrayList;
 	}
+	
+	
 }

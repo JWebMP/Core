@@ -61,27 +61,4 @@
     <orderEntry type="module" module-name="jwebswing-interception" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax:javaee-web-api:7.0" level="project" />
   </component>
-  <component name="sonarModuleSettings">
-    <option name="alternativeWorkingDirPath" value="" />
-    <option name="localAnalysisScripName" value="&lt;PROJECT&gt;" />
-    <option name="resources">
-      <list>
-        <Resource>
-          <option name="creationDate" value="1506370567000" />
-          <option name="date" value="1506962724000" />
-          <option name="description" value="The core of the JWebSwing library allowing you to create enterprise grade level applications" />
-          <option name="id" value="48" />
-          <option name="key" value="za.co.mmagon:jwebswing" />
-          <option name="longName" value="JWebSwing" />
-          <option name="name" value="JWebSwing" />
-          <option name="qualifier" value="TRK" />
-          <option name="scope" value="PRJ" />
-          <option name="version" value="0.11.6.1-RELEASE" />
-        </Resource>
-      </list>
-    </option>
-    <option name="serverName" value="ArminHost" />
-    <option name="useAlternativeWorkingDir" value="false" />
-    <option name="workingDirSelection" value="&lt;MODULE&gt;" />
-  </component>
 </module>

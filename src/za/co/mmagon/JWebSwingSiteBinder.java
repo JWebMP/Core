@@ -297,7 +297,7 @@ public class JWebSwingSiteBinder extends GuiceSiteBinder
 					}
 				}
 			}
-			return new BaseTestClass().getInstance();
+			return new Page();
 		});
 		
 		
