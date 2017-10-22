@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="50.0" y="16.951171875">za.co.mmagon.jwebswing</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="za.co.mmagon.jwebswing" target="za.co.mmagon.jwebswing">
+      <point x="17.125" y="15.0" />
+      <point x="135.625" y="86.951171875" />
+      <point x="10.0" y="86.951171875" />
+      <point x="10.0" y="28.201171875" />
+      <point x="-68.5" y="-3.75" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="0.0" y="0.0" />
+  <SelectedNodes>
+    <node>za.co.mmagon.jwebswing</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
