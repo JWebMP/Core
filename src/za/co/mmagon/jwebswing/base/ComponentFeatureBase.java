@@ -64,7 +64,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 * A linked component if required
 	 */
 	@JsonIgnore
-	protected ComponentHierarchyBase component;
+	private ComponentHierarchyBase component;
 	/**
 	 * The features of this component
 	 */
