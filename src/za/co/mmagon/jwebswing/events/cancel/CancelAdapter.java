@@ -67,7 +67,7 @@ public abstract class CancelAdapter extends Event
 		{
 			
 			AngularPageConfigurator.setRequired(getComponent(), true);
-			component.addAttribute(AngularAttributes.ngCancel, "jwCntrl.perform($event," + renderVariables() + ");");
+			getComponent().addAttribute(AngularAttributes.ngCancel, "jwCntrl.perform($event," + renderVariables() + ");");
 		}
 		super.preConfigure();
 	}

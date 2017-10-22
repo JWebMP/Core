@@ -67,7 +67,7 @@ public abstract class DropAdapter extends Event
 		{
 
 			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-			component.addAttribute(AngularAttributes.ngDrop, "jwCntrl.perform($event," + renderVariables() + ");");
+			getComponent().addAttribute(AngularAttributes.ngDrop, "jwCntrl.perform($event," + renderVariables() + ");");
 		}
 		super.preConfigure();
 	}

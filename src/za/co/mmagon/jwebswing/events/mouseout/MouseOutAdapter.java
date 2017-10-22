@@ -62,7 +62,7 @@ public abstract class MouseOutAdapter extends Event
 		if (!isConfigured())
 		{
 
-			component.addAttribute(AngularAttributes.ngMouseleave, "jwCntrl.perform($event," + renderVariables() + ");");
+			getComponent().addAttribute(AngularAttributes.ngMouseleave, "jwCntrl.perform($event," + renderVariables() + ");");
 		}
 		super.preConfigure();
 	}

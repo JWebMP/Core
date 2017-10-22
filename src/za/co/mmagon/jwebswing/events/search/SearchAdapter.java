@@ -65,7 +65,7 @@ public abstract class SearchAdapter extends Event
 
 			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
 
-			component.addAttribute(AngularAttributes.ngSearch, "jwCntrl.perform($event," + renderVariables() + ");");
+			getComponent().addAttribute(AngularAttributes.ngSearch, "jwCntrl.perform($event," + renderVariables() + ");");
 		}
 		super.preConfigure();
 	}

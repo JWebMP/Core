@@ -64,7 +64,7 @@ public abstract class ResponseAdapter extends Event
 		{
 
 			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-			component.addAttribute(AngularAttributes.ngResponse, "jwCntrl.perform($event," + renderVariables() + ");");
+			getComponent().addAttribute(AngularAttributes.ngResponse, "jwCntrl.perform($event," + renderVariables() + ");");
 		}
 		super.preConfigure();
 	}

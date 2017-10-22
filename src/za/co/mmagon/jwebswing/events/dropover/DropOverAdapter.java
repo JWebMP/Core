@@ -66,7 +66,7 @@ public abstract class DropOverAdapter extends Event
 		{
 
 			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-			component.addAttribute("ng-drop-over", "jwCntrl.perform($event," + renderVariables() + ");");
+			getComponent().addAttribute("ng-drop-over", "jwCntrl.perform($event," + renderVariables() + ");");
 		}
 		super.preConfigure();
 	}

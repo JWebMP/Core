@@ -29,7 +29,6 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -38,8 +37,10 @@ import java.util.Set;
 /**
  * Container Class for Events. Splits from the component hierarchy
  *
- * @param <A> Ajax Event type object back
- * @param <J> This class
+ * @param <A>
+ * 		Ajax Event type object back
+ * @param <J>
+ * 		This class
  *
  * @author GedMarc
  * @since 23 Apr 2016
@@ -47,9 +48,9 @@ import java.util.Set;
 public abstract class Event<A extends JavaScriptPart, J extends Event>
 		extends ComponentEventBase<GlobalFeatures, GlobalEvents, Event<A, J>> implements GlobalEvents
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * The variables to return
 	 */
@@ -66,7 +67,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	 * A set of components that this event can construct
 	 */
 	private Set<Class<? extends ComponentHierarchyBase>> registeredComponents;
-	
+
 	/**
 	 * Creates an event with the given component and type
 	 *
@@ -77,7 +78,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	{
 		this(eventTypes.name(), eventTypes, component);
 	}
-	
+
 	/**
 	 * Creates an event with the given component and type
 	 *
@@ -87,7 +88,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	{
 		this(EventTypes.undefined, component);
 	}
-	
+
 	/**
 	 * Constructs an event with the given name
 	 *
@@ -98,7 +99,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	{
 		this(name, eventType, null);
 	}
-	
+
 	/**
 	 * Constructs an event with the given name
 	 *
@@ -108,13 +109,29 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	{
 		this(name, EventTypes.undefined);
 	}
-	
+
 	/**
 	 * Constructs an event with the given name
 	 *
-	 * @param name      The name of this event
-	 * @param eventType The event type of this event
-	 * @param component The component type of this event
+	 * @param name
+	 * 		The name of this event
+	 * @param component
+	 * 		The component type of this event
+	 */
+	public Event(String name, ComponentHierarchyBase component)
+	{
+		this(name, EventTypes.undefined, component);
+	}
+
+	/**
+	 * Constructs an event with the given name
+	 *
+	 * @param name
+	 * 		The name of this event
+	 * @param eventType
+	 * 		The event type of this event
+	 * @param component
+	 * 		The component type of this event
 	 */
 	public Event(String name, EventTypes eventType, ComponentHierarchyBase component)
 	{
@@ -124,22 +141,12 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 		setComponent(component);
 		setEventType(eventType);
 	}
-	
-	/**
-	 * Constructs an event with the given name
-	 *
-	 * @param name      The name of this event
-	 * @param component The component type of this event
-	 */
-	public Event(String name, ComponentHierarchyBase component)
-	{
-		this(name, EventTypes.undefined, component);
-	}
-	
+
 	/**
 	 * Sets the ID as whatever with dots as underscores
 	 *
-	 * @param id The ID
+	 * @param id
+	 * 		The ID
 	 *
 	 * @return
 	 */
@@ -148,11 +155,12 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	{
 		return super.setID(id.replace('.', '_'));
 	}
-	
+
 	/**
 	 * Adds a variable to return on the call
 	 *
-	 * @param returnVariable The name of the variable to return
+	 * @param returnVariable
+	 * 		The name of the variable to return
 	 *
 	 * @return
 	 */
@@ -161,7 +169,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 		getVariables().add(returnVariable);
 		return (J) this;
 	}
-	
+
 	/**
 	 * Render the variable return array
 	 *
@@ -188,10 +196,10 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 		s2.append(",'").append(getID()).append("'");
 		//append Event Class
 		s2.append(",'").append(getClassCanonicalName()).append("'");
-		
+
 		return s2;
 	}
-	
+
 	/**
 	 * Returns the list of currently associated variables
 	 *
@@ -206,7 +214,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 		}
 		return variables;
 	}
-	
+
 	/**
 	 * Sets the current list of variables to return
 	 *
@@ -219,18 +227,20 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 		this.variables = variables;
 		return (J) this;
 	}
-	
+
 	/**
 	 * The method that is fired on call
 	 *
-	 * @param call     The component that made the call
-	 * @param response The Response Object Being Returned
+	 * @param call
+	 * 		The component that made the call
+	 * @param response
+	 * 		The Response Object Being Returned
 	 */
 	public void fireEvent(AjaxCall call, AjaxResponse response)
 	{
-	
+
 	}
-	
+
 	/**
 	 * Adds an on demand event to be performed after ajax response
 	 *
@@ -243,7 +253,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 		getRunEvents().add(event);
 		return (J) this;
 	}
-	
+
 	/**
 	 * Return all the queries to execute on ajax response
 	 *
@@ -257,7 +267,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 		}
 		return runEvents;
 	}
-	
+
 	/**
 	 * Returns all queries that are executed on ajax response
 	 *
@@ -270,7 +280,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 		this.runEvents = onDemandQueries;
 		return (J) this;
 	}
-	
+
 	/**
 	 * Returns a list of runnable features that occur from an event
 	 *
@@ -284,7 +294,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 		}
 		return runFeatures;
 	}
-	
+
 	/**
 	 * Sets the running feature base
 	 *
@@ -294,8 +304,8 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	{
 		this.runFeatures = runFeatures;
 	}
-	
-	
+
+
 	/**
 	 * A set of components that this event can construct/be called from (same thing)
 	 *
@@ -309,7 +319,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 		}
 		return registeredComponents;
 	}
-	
+
 	/**
 	 * A set of components that this event can construct/be called from (same thing)
 	 *
@@ -322,18 +332,8 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 		this.registeredComponents = registeredComponents;
 		return (J) this;
 	}
-	
-	/**
-	 * Exposes the get component method
-	 *
-	 * @return
-	 */
-	@Nullable
-	public ComponentHierarchyBase getComponent()
-	{
-		return component;
-	}
-	
+
+
 	/**
 	 * Sets the given component and class for this events. Component instance is destroyed on delivery
 	 *
@@ -347,11 +347,10 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 		if (component != null)
 		{
 			getRegisteredComponents().add(component.getClass());
-			this.component = component;
 		}
 		return super.setComponent(component);
 	}
-	
+
 	/**
 	 *
 	 */
@@ -360,11 +359,11 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	{
 		if (!isInitialized())
 		{
-		
+
 		}
 		super.init();
 	}
-	
+
 	/**
 	 * Runs the assign function to components then executes the parents configuration
 	 */

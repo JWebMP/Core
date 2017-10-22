@@ -18,19 +18,18 @@ package za.co.mmagon.jwebswing;
 
 import za.co.mmagon.jwebswing.base.ComponentFeatureBase;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
-import za.co.mmagon.jwebswing.base.exceptions.NullComponentException;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
-import javax.validation.constraints.NotNull;
-
 /**
  * Container Class for Features. Splits from the hierarchy
  *
- * @param <O> Any options associated with this feature
- * @param <J> This Class
+ * @param <O>
+ * 		Any options associated with this feature
+ * @param <J>
+ * 		This Class
  *
  * @author GedMarc
  * @since 23 Apr 2016
@@ -39,14 +38,14 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 		extends ComponentFeatureBase<NoFeatures, J>
 		implements GlobalFeatures
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * The options object associated with this feature
 	 */
 	private O options;
-	
+
 	/**
 	 * Constructs a feature that can be used with all components
 	 *
@@ -57,7 +56,7 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 		super(ComponentTypes.Feature);
 		setName(name);
 	}
-	
+
 	/**
 	 * Constructs a feature that can be used with all components
 	 *
@@ -70,7 +69,7 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 		setName(name);
 		setComponent(component);
 	}
-	
+
 	/**
 	 * Returns any client side options available with this component
 	 *
@@ -81,7 +80,7 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 	{
 		return options;
 	}
-	
+
 	/**
 	 * Sets the options object
 	 *
@@ -91,7 +90,7 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 	{
 		this.options = options;
 	}
-	
+
 	/**
 	 * Adds a query to builder
 	 *
@@ -104,35 +103,11 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 		StringBuilder sb = new StringBuilder(query);
 		return super.addQuery(sb);
 	}
-	
+
 	/**
 	 * Any work that needs to get done pre render
 	 */
 	@Override
 	protected abstract void assignFunctionsToComponent();
-	
-	/**
-	 * Returns the linked component if required
-	 *
-	 * @return
-	 */
-	public ComponentHierarchyBase getComponent()
-	{
-		return component;
-	}
-	
-	/**
-	 * Sets the linked component if required
-	 *
-	 * @param component
-	 */
-	public J setComponent(@NotNull ComponentHierarchyBase component)
-	{
-		if (component == null)
-		{
-			throw new NullComponentException("A Feature cannot be configured on a null component");
-		}
-		this.component = component;
-		return (J) this;
-	}
+
 }

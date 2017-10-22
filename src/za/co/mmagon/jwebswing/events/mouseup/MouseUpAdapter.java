@@ -64,7 +64,7 @@ public abstract class MouseUpAdapter extends Event
 		{
 
 			AngularPageConfigurator.setRequired(getComponent(), true);
-			component.addAttribute(AngularAttributes.ngMouseup, "jwCntrl.perform($event," + renderVariables() + ");");
+			getComponent().addAttribute(AngularAttributes.ngMouseup, "jwCntrl.perform($event," + renderVariables() + ");");
 		}
 		super.preConfigure();
 	}

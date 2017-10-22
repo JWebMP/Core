@@ -62,7 +62,7 @@ public abstract class OpenAdapter extends Event
 		if (!isConfigured())
 		{
 
-			component.addAttribute(AngularAttributes.ngOpen, "jwCntrl.perform($event," + renderVariables() + ");");
+			getComponent().addAttribute(AngularAttributes.ngOpen, "jwCntrl.perform($event," + renderVariables() + ");");
 		}
 		super.preConfigure();
 	}

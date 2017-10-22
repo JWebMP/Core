@@ -61,7 +61,7 @@ public abstract class CheckedAdapter extends Event
 	{
 		if (!isConfigured())
 		{
-			component.addAttribute(AngularAttributes.ngChecked, "jwCntrl.perform($event," + renderVariables() + ");");
+			getComponent().addAttribute(AngularAttributes.ngChecked, "jwCntrl.perform($event," + renderVariables() + ");");
 		}
 		super.preConfigure();
 	}

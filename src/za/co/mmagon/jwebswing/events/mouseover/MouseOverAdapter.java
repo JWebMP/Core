@@ -62,7 +62,7 @@ public abstract class MouseOverAdapter extends Event
 		if (!isConfigured())
 		{
 
-			component.addAttribute(AngularAttributes.ngMouseover, "jwCntrl.perform($event," + renderVariables() + ");");
+			getComponent().addAttribute(AngularAttributes.ngMouseover, "jwCntrl.perform($event," + renderVariables() + ");");
 		}
 		super.preConfigure();
 	}

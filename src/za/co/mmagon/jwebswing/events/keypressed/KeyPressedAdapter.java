@@ -64,7 +64,7 @@ public abstract class KeyPressedAdapter extends Event
 		{
 
 			AngularPageConfigurator.setRequired(getComponent(), true);
-			component.addAttribute(AngularAttributes.ngKeypress, "jwCntrl.perform($event," + renderVariables() + ");");
+			getComponent().addAttribute(AngularAttributes.ngKeypress, "jwCntrl.perform($event," + renderVariables() + ");");
 		}
 		super.preConfigure();
 	}

@@ -71,7 +71,7 @@ public abstract class BeforeStopAdapter extends Event
 			JQueryPageConfigurator.setRequired((Component) getComponent(), true);
 			AngularPageConfigurator.setRequired(getComponent(), true);
 			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-			component.addAttribute(AngularAttributes.ngBeforeStop, "jwCntrl.perform($event," + renderVariables() + ");");
+			getComponent().addAttribute(AngularAttributes.ngBeforeStop, "jwCntrl.perform($event," + renderVariables() + ");");
 		}
 		super.preConfigure();
 	}

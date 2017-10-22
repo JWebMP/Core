@@ -66,16 +66,16 @@ import java.util.logging.Logger;
  *
  * @author GedMarc
  * @version 2.0
- * <p>
- * Replacement of the old page object
+ * 		<p>
+ * 		Replacement of the old page object
  * @since 24 Apr 2016
  */
 @PageConfiguration
 public class Page extends Html implements IPage
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private static final Logger log = LogFactory.getInstance().getLogger("Page");
 	/**
 	 * The options available
@@ -85,29 +85,43 @@ public class Page extends Html implements IPage
 	 * The fields available
 	 */
 	private PageFields fields;
-	
+
 	/**
 	 * The current user agent of the render
 	 */
 	@JsonIgnore
 	private transient ReadableUserAgent userAgent;
-	
+
 	/**
 	 * The angular feature
 	 */
 	private AngularPageConfigurator angular;
-	
+
 	/**
 	 * If this page has already gone through initialization
 	 */
 	private boolean pageInitialized;
-	
+
+	/**
+	 * @param title
+	 * 		Sets the title of the page
+	 * @param compatibilityMode
+	 * 		Sets the Internet explorer mode to work on
+	 */
+	public Page(Title title, InternetExplorerCompatibilityMode compatibilityMode)
+	{
+		this(title, compatibilityMode, null);
+	}
+
 	/**
 	 * Populates all my components. Excludes this page
 	 *
-	 * @param title             Sets the title of the page
-	 * @param compatibilityMode Sets the Internet explorer mode to work on
-	 * @param base              Sets the base tag for the page. Convenience Parameter
+	 * @param title
+	 * 		Sets the title of the page
+	 * @param compatibilityMode
+	 * 		Sets the Internet explorer mode to work on
+	 * @param base
+	 * 		Sets the base tag for the page. Convenience Parameter
 	 */
 	public Page(Title title, InternetExplorerCompatibilityMode compatibilityMode, Base base)
 	{
@@ -119,34 +133,27 @@ public class Page extends Html implements IPage
 		{
 			getPageFields().setGenerator("https://sourceforge.net/projects/jwebswing/");
 		}
-		
+
 	}
-	
+
 	/**
-	 * @param title             Sets the title of the page
-	 * @param compatibilityMode Sets the Internet explorer mode to work on
-	 */
-	public Page(Title title, InternetExplorerCompatibilityMode compatibilityMode)
-	{
-		this(title, compatibilityMode, null);
-	}
-	
-	/**
-	 * @param title Sets the title of the page
+	 * @param title
+	 * 		Sets the title of the page
 	 */
 	public Page(Title title)
 	{
 		this(title, null, null);
 	}
-	
+
 	/**
-	 * @param title Sets the title of the page
+	 * @param title
+	 * 		Sets the title of the page
 	 */
 	public Page(String title)
 	{
 		this(new Title(title), null, null);
 	}
-	
+
 	/**
 	 * Constructs an empty page object
 	 */
@@ -154,15 +161,15 @@ public class Page extends Html implements IPage
 	{
 		this(null, null, null);
 	}
-	
+
 	/**
 	 * Initializes the page
 	 */
 	public void initialize()
 	{
-	
+
 	}
-	
+
 	/**
 	 * Gets called when the client makes a valid request.
 	 * <p>
@@ -177,7 +184,7 @@ public class Page extends Html implements IPage
 	{
 		return response;
 	}
-	
+
 	/**
 	 * Adds a component onto the body
 	 *
@@ -190,7 +197,7 @@ public class Page extends Html implements IPage
 	{
 		return (T) getBody().add(component);
 	}
-	
+
 	/**
 	 * Adds a css reference to the body
 	 *
@@ -203,7 +210,7 @@ public class Page extends Html implements IPage
 	{
 		return getBody().addCssReference(cssReference);
 	}
-	
+
 	/**
 	 * Adds a global variable to the body
 	 *
@@ -214,7 +221,7 @@ public class Page extends Html implements IPage
 	{
 		getBody().addVariable(variable);
 	}
-	
+
 	/**
 	 * Adds a java script reference to the body
 	 *
@@ -227,7 +234,7 @@ public class Page extends Html implements IPage
 	{
 		return getBody().addJavaScriptReference(jsReference);
 	}
-	
+
 	/**
 	 * Adds an event to the body
 	 *
@@ -240,7 +247,7 @@ public class Page extends Html implements IPage
 	{
 		return getBody().addEvent(event);
 	}
-	
+
 	/**
 	 * Adds a feature to the body
 	 *
@@ -253,7 +260,7 @@ public class Page extends Html implements IPage
 	{
 		return getBody().addFeature(feature);
 	}
-	
+
 	/**
 	 * Adds a feature to the body
 	 *
@@ -267,7 +274,7 @@ public class Page extends Html implements IPage
 	{
 		return getBody().addFeature(feature, position);
 	}
-	
+
 	/**
 	 * Renders all the children to a string builder
 	 *
@@ -278,7 +285,7 @@ public class Page extends Html implements IPage
 	{
 		StringBuilder pageOutput = new StringBuilder();
 		StringBuilder bodyOutput = null;
-		
+
 		if (!isBodyEmpty())
 		{
 			bodyOutput = new StringBuilder(getBody().toString(1));
@@ -293,11 +300,31 @@ public class Page extends Html implements IPage
 		}
 		return pageOutput;
 	}
-	
+
+	@Override
+	public void destroy()
+	{
+		if (getHead() != null)
+		{
+			getHead().destroy();
+		}
+		if (getBody() != null)
+		{
+			getBody().destroy();
+		}
+		this.angular = null;
+		this.fields = null;
+		this.options = null;
+		this.userAgent = null;
+
+		super.destroy();
+	}
+
 	/**
 	 * Returns the cached component
 	 *
-	 * @param componentID The component to look for
+	 * @param componentID
+	 * 		The component to look for
 	 *
 	 * @return
 	 */
@@ -313,7 +340,7 @@ public class Page extends Html implements IPage
 		}
 		return null;
 	}
-	
+
 	@Override
 	public void init()
 	{
@@ -326,7 +353,7 @@ public class Page extends Html implements IPage
 				ComponentHierarchyBase<NoChildren, NoAttributes, NoFeatures, NoEvents, ? extends ComponentHierarchyBase> ch = (ComponentHierarchyBase) chb;
 			}
 		}
-		
+
 		if (!isInitialized())
 		{
 			log.log(Level.FINE, "Looking for plugins....");
@@ -344,10 +371,60 @@ public class Page extends Html implements IPage
 				configInstance.configure(this);
 			}
 		}
-		
+
 		super.init();
 	}
-	
+
+	/**
+	 * Returns the component with only it's methods
+	 *
+	 * @return
+	 */
+	public IPage asMe()
+	{
+		return this;
+	}
+
+	/**
+	 * Returns the style object. If dynamic rendering is enabled it will point to the Servlet.
+	 *
+	 * @return
+	 */
+	public ComponentHierarchyBase getCssStyle()
+	{
+		StringBuilder css = getBody().renderCss(0);
+		if (!css.toString().isEmpty())
+		{
+			if (getOptions().isDynamicRender())
+			{
+				CSSLink renderedCSS = new CSSLink(SessionHelper.getServerPath() + JWebSwingSiteBinder.getCSSLocation().replaceAll("/", ""));
+				return renderedCSS;
+			}
+			else
+			{
+				if (css.length() > 0)
+				{
+					Style style = new Style();
+					style.setText(css);
+					return style;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the top shelf script and css references
+	 *
+	 * @return
+	 */
+	private List<ComponentHierarchyBase> getTopShelfScripts()
+	{
+		List<ComponentHierarchyBase> arr;
+		arr = getPriorityRequirements(RequirementsPriority.Top_Shelf, new ArrayList<>(), true, true);
+		return arr;
+	}
+
 	/**
 	 * Configures the page and all its components
 	 */
@@ -362,7 +439,7 @@ public class Page extends Html implements IPage
 		{
 			configurePageHeader();
 			addVariablesScriptToPage();
-			
+
 			if (!getOptions().isScriptsInHead())
 			{
 				//script rendering in body
@@ -373,7 +450,7 @@ public class Page extends Html implements IPage
 					RenderBeforeDynamicScripts s = GuiceContext.getInstance(renderBeforeScript);
 					renderB.add(s);
 				}
-				
+
 				Collections.sort(renderB, (RenderBeforeDynamicScripts o1, RenderBeforeDynamicScripts o2) -> ((Integer) o1.sortOrder()).compareTo(o2.sortOrder()));
 				Paragraph before = new Paragraph().setTextOnly(true);
 				renderB.forEach(render ->
@@ -403,7 +480,7 @@ public class Page extends Html implements IPage
 					getBody().add(after);
 				}
 			}
-			
+
 			if (!getOptions().isScriptsInHead())
 			{
 				List<Script> allScripts = getDynamicScripts();
@@ -415,7 +492,7 @@ public class Page extends Html implements IPage
 					}
 				}
 			}
-			
+
 			if (!getTopShelfScripts().isEmpty())
 			{
 				if (getRunningEnvironment().ordinal() >= DevelopmentEnvironments.Development.ordinal())
@@ -423,7 +500,7 @@ public class Page extends Html implements IPage
 					getHead().add(new Comment("Priority [" + RequirementsPriority.Top_Shelf + "] Values"));
 				}
 			}
-			
+
 			//HERE
 			Set<Class<? extends RenderBeforeLinks>> renderBeforeScripts = GuiceContext.reflect().getSubTypesOf(RenderBeforeLinks.class);
 			List<RenderBeforeLinks> renderB = new ArrayList<>();
@@ -477,57 +554,7 @@ public class Page extends Html implements IPage
 		}
 		super.preConfigure();
 	}
-	
-	/**
-	 * Returns the component with only it's methods
-	 *
-	 * @return
-	 */
-	public IPage asMe()
-	{
-		return this;
-	}
-	
-	/**
-	 * Returns the style object. If dynamic rendering is enabled it will point to the Servlet.
-	 *
-	 * @return
-	 */
-	public ComponentHierarchyBase getCssStyle()
-	{
-		StringBuilder css = getBody().renderCss(0);
-		if (!css.toString().isEmpty())
-		{
-			if (getOptions().isDynamicRender())
-			{
-				CSSLink renderedCSS = new CSSLink(SessionHelper.getServerPath() + JWebSwingSiteBinder.getCSSLocation().replaceAll("/", ""));
-				return renderedCSS;
-			}
-			else
-			{
-				if (css.length() > 0)
-				{
-					Style style = new Style();
-					style.setText(css);
-					return style;
-				}
-			}
-		}
-		return null;
-	}
-	
-	/**
-	 * Returns the top shelf script and css references
-	 *
-	 * @return
-	 */
-	private List<ComponentHierarchyBase> getTopShelfScripts()
-	{
-		List<ComponentHierarchyBase> arr;
-		arr = getPriorityRequirements(RequirementsPriority.Top_Shelf, new ArrayList<>(), true, true);
-		return arr;
-	}
-	
+
 	/**
 	 * Returns the script reference
 	 *
@@ -545,7 +572,7 @@ public class Page extends Html implements IPage
 				jwScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + JWebSwingSiteBinder.getJWScriptLocation().replaceAll("/", ""));
 				allScripts.add(jwScript);
 			}
-			
+
 			StringBuilder js = renderJavascript();
 			if (!js.toString().trim().isEmpty())
 			{
@@ -556,7 +583,7 @@ public class Page extends Html implements IPage
 				//dynamicScript.setText("$.ajax({cache:false,dataType:'script',url:'js'}).fail(function(){alert('session lost'); });");
 				allScripts.add(dynamicScript);
 			}
-			
+
 			if (getBody().readChildrenPropertyFirstResult(AngularPageConfigurator.AngularEnabledString, true))
 			{
 				Script dynamicScript = new Script();
@@ -564,7 +591,7 @@ public class Page extends Html implements IPage
 				dynamicScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + JWebSwingSiteBinder.getAngularScriptLocation().replaceAll("/", ""));
 				allScripts.add(dynamicScript);
 			}
-			
+
 		}
 		else
 		{
@@ -580,7 +607,7 @@ public class Page extends Html implements IPage
 					allScripts.add(s);
 				}
 			}
-			
+
 			StringBuilder js = renderJavascript();
 			if (!js.toString().trim().isEmpty())
 			{
@@ -589,7 +616,7 @@ public class Page extends Html implements IPage
 				s.setText(getNewLine() + js);
 				allScripts.add(s);
 			}
-			
+
 			if (getBody().readChildrenPropertyFirstResult(AngularPageConfigurator.AngularEnabledString, true))
 			{
 				StringBuilder jsAngular = getAngular().renderAngularJavascript(this);
@@ -602,59 +629,19 @@ public class Page extends Html implements IPage
 				}
 			}
 		}
-		
+
 		if (getOptions().isDynamicRender())
 		{
-		
+
 		}
 		else
 		{
-		
+
 		}
-		
+
 		return allScripts;
 	}
-	
-	/**
-	 * Builds up the Header Tag
-	 */
-	private void configurePageHeader()
-	{
-		if (getPageFields().getTitle() != null)
-		{
-			getHead().add(getPageFields().getTitle());
-		}
-		if (getPageFields().getBase() != null)
-		{
-			getHead().add(getPageFields().getBase());
-		}
-		getHead().add(getPageFields().getHttpEquivMeta());
-		getHead().add(getPageFields().getCacheControl());
-		getHead().add(getPageFields().getAuthor());
-		getHead().add(getPageFields().getApplicationName());
-		getHead().add(getPageFields().getGenerator());
-		getHead().add(getPageFields().getDescription());
-		getHead().add(getPageFields().getKeywords());
-		getHead().add(getPageFields().getFavIconLink());
-		
-		if (getOptions().isScriptsInHead())
-		{
-			addScriptsTo(getHead());
-		}
-		
-		if (getOptions().isScriptsInHead())
-		{
-			List<Script> allScripts = getDynamicScripts();
-			allScripts.forEach(getHead()::add);
-		}
-		
-		for (Iterator iterator = getHead().getChildren().iterator(); iterator.hasNext(); )
-		{
-			ComponentHierarchyBase headObject = (ComponentHierarchyBase) iterator.next();
-			headObject.preConfigure();
-		}
-	}
-	
+
 	/**
 	 * Adds the variables in the application to the collection
 	 */
@@ -679,7 +666,47 @@ public class Page extends Html implements IPage
 			}
 		}
 	}
-	
+
+	/**
+	 * Builds up the Header Tag
+	 */
+	private void configurePageHeader()
+	{
+		if (getPageFields().getTitle() != null)
+		{
+			getHead().add(getPageFields().getTitle());
+		}
+		if (getPageFields().getBase() != null)
+		{
+			getHead().add(getPageFields().getBase());
+		}
+		getHead().add(getPageFields().getHttpEquivMeta());
+		getHead().add(getPageFields().getCacheControl());
+		getHead().add(getPageFields().getAuthor());
+		getHead().add(getPageFields().getApplicationName());
+		getHead().add(getPageFields().getGenerator());
+		getHead().add(getPageFields().getDescription());
+		getHead().add(getPageFields().getKeywords());
+		getHead().add(getPageFields().getFavIconLink());
+
+		if (getOptions().isScriptsInHead())
+		{
+			addScriptsTo(getHead());
+		}
+
+		if (getOptions().isScriptsInHead())
+		{
+			List<Script> allScripts = getDynamicScripts();
+			allScripts.forEach(getHead()::add);
+		}
+
+		for (Iterator iterator = getHead().getChildren().iterator(); iterator.hasNext(); )
+		{
+			ComponentHierarchyBase headObject = (ComponentHierarchyBase) iterator.next();
+			headObject.preConfigure();
+		}
+	}
+
 	/**
 	 * Adds scripts to a component, ordered by priority and sort order.
 	 * <p>
@@ -690,7 +717,7 @@ public class Page extends Html implements IPage
 	private void addScriptsTo(ComponentHierarchyBase component)
 	{
 		List<ComponentHierarchyBase> requirements = new CopyOnWriteArrayList<>();
-		
+
 		List<RequirementsPriority> arrs = new ArrayList<>(Arrays.asList(RequirementsPriority.values()));
 		for (RequirementsPriority priority : arrs)
 		{
@@ -698,7 +725,7 @@ public class Page extends Html implements IPage
 			{
 				continue;
 			}
-			
+
 			if (getRunningEnvironment().ordinal() >= DevelopmentEnvironments.Development.ordinal())
 			{
 				if (!getPriorityRequirements(priority, requirements, false, true).isEmpty())
@@ -713,14 +740,18 @@ public class Page extends Html implements IPage
 			                                                                     });
 		}
 	}
-	
+
 	/**
 	 * Adds all the stuff for a given priority
 	 *
-	 * @param css        CSS
-	 * @param input      the hierarchy to read from
-	 * @param priority   the priority
-	 * @param javascript to return JavaScript or not
+	 * @param css
+	 * 		CSS
+	 * @param input
+	 * 		the hierarchy to read from
+	 * @param priority
+	 * 		the priority
+	 * @param javascript
+	 * 		to return JavaScript or not
 	 */
 	private List<ComponentHierarchyBase> getPriorityRequirements(RequirementsPriority priority, List<ComponentHierarchyBase> input, boolean css, boolean javascript)
 	{
@@ -753,10 +784,10 @@ public class Page extends Html implements IPage
 				}
 			}
 		}
-		
+
 		return requirements;
 	}
-	
+
 	/**
 	 * Gets all the links for all the bodies components
 	 *
@@ -769,7 +800,7 @@ public class Page extends Html implements IPage
 		List<CSSReference> allReferences = getBody().getCssReferencesAll(priority);
 		allReferences.sort(WebReference.getDummyReference());
 		ArrayList<CSSLink> allLinks = new ArrayList<>();
-		
+
 		for (CSSReference reference : allReferences)
 		{
 			CSSLink link = new CSSLink(reference);
@@ -780,32 +811,7 @@ public class Page extends Html implements IPage
 		}
 		return allLinks;
 	}
-	
-	/**
-	 * Gets all the scripts for all the body components
-	 *
-	 * @param priority
-	 *
-	 * @return
-	 */
-	private List<Script> getAllScripts(RequirementsPriority priority)
-	{
-		List<JavascriptReference> allJavascripts = getBody().getJavascriptReferencesAll(priority);
-		allJavascripts.sort(WebReference.getDummyReference());
-		ArrayList<Script> allScripts = new ArrayList<>();
-		
-		for (JavascriptReference reference : allJavascripts)
-		{
-			Script script = new Script(reference);
-			script.setNewLineForClosingTag(false);
-			if (!allScripts.contains(script))
-			{
-				allScripts.add(script);
-			}
-		}
-		return allScripts;
-	}
-	
+
 	/**
 	 * Returns if the head object is empty
 	 *
@@ -815,7 +821,7 @@ public class Page extends Html implements IPage
 	{
 		return getHead().getChildren().isEmpty();
 	}
-	
+
 	/**
 	 * Returns if the body object is empty
 	 *
@@ -825,7 +831,7 @@ public class Page extends Html implements IPage
 	{
 		return getBody().getChildren().isEmpty();
 	}
-	
+
 	/**
 	 * Returns a readable user agent, or null if just a basic render
 	 *
@@ -839,7 +845,7 @@ public class Page extends Html implements IPage
 		}
 		return userAgent;
 	}
-	
+
 	/**
 	 * Sets the userAgent
 	 *
@@ -849,7 +855,7 @@ public class Page extends Html implements IPage
 	{
 		this.userAgent = userAgent;
 	}
-	
+
 	/**
 	 * Returns all the dynamic options for a page
 	 *
@@ -864,7 +870,7 @@ public class Page extends Html implements IPage
 		}
 		return options;
 	}
-	
+
 	/**
 	 * Returns the fields available for entry on this page
 	 *
@@ -879,7 +885,7 @@ public class Page extends Html implements IPage
 		}
 		return fields;
 	}
-	
+
 	/**
 	 * Returns the document type that will be rendered with this HTML page real-time
 	 * <p>
@@ -891,7 +897,7 @@ public class Page extends Html implements IPage
 	{
 		return new DocumentType(getBrowser().getHtmlVersion());
 	}
-	
+
 	/**
 	 * Sets all component in the head and body to tiny
 	 *
@@ -907,7 +913,7 @@ public class Page extends Html implements IPage
 		getBody().setTiny(tiny);
 		return this;
 	}
-	
+
 	/**
 	 * Returns the JavaScript render for the body
 	 *
@@ -918,7 +924,7 @@ public class Page extends Html implements IPage
 	{
 		return getBody().renderJavascript();
 	}
-	
+
 	/**
 	 * Adds a variable into angular
 	 *
@@ -932,7 +938,7 @@ public class Page extends Html implements IPage
 		getAngular().getAngularVariables().add(variableName);
 		return this;
 	}
-	
+
 	/**
 	 * Returns the angular object
 	 *
@@ -947,7 +953,7 @@ public class Page extends Html implements IPage
 		}
 		return angular;
 	}
-	
+
 	/**
 	 * Overidden method to return this, beware circular joins
 	 *
@@ -957,7 +963,7 @@ public class Page extends Html implements IPage
 	{
 		return this;
 	}
-	
+
 	/**
 	 * Returns the page fields currently set on the page
 	 *
@@ -967,7 +973,7 @@ public class Page extends Html implements IPage
 	{
 		return fields;
 	}
-	
+
 	/**
 	 * Sets teh fields currently set on the page
 	 *
@@ -977,7 +983,7 @@ public class Page extends Html implements IPage
 	{
 		this.fields = fields;
 	}
-	
+
 	/**
 	 * Whether or not the page is initialized
 	 *
@@ -987,7 +993,7 @@ public class Page extends Html implements IPage
 	{
 		return pageInitialized;
 	}
-	
+
 	/**
 	 * Sets if the page is initialized
 	 *
@@ -997,36 +1003,41 @@ public class Page extends Html implements IPage
 	{
 		this.pageInitialized = pageInitialized;
 	}
-	
+
 	@Override
 	public List getJavascriptReferences()
 	{
 		return getBody().getJavascriptReferences();
 	}
-	
+
 	@Override
 	public List getCssReferences()
 	{
 		return getBody().getCssReferences();
 	}
-	
-	@Override
-	public void destroy()
+
+	/**
+	 * Gets all the scripts for all the body components
+	 *
+	 * @param priority
+	 *
+	 * @return
+	 */
+	private List<Script> getAllScripts(RequirementsPriority priority)
 	{
-		if (getHead() != null)
+		List<JavascriptReference> allJavascripts = getBody().getJavascriptReferencesAll(priority);
+		allJavascripts.sort(WebReference.getDummyReference());
+		ArrayList<Script> allScripts = new ArrayList<>();
+
+		for (JavascriptReference reference : allJavascripts)
 		{
-			getHead().destroy();
+			Script script = new Script(reference);
+			script.setNewLineForClosingTag(false);
+			if (!allScripts.contains(script))
+			{
+				allScripts.add(script);
+			}
 		}
-		if (getBody() != null)
-		{
-			getBody().destroy();
-		}
-		this.angular = null;
-		this.component = null;
-		this.fields = null;
-		this.options = null;
-		this.userAgent = null;
-		
-		super.destroy();
+		return allScripts;
 	}
 }
