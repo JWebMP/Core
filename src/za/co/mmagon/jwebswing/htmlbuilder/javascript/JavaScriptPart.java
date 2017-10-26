@@ -67,7 +67,14 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 	 */
 	public ObjectMapper getJavascriptObjectMapper()
 	{
-		return GuiceContext.getInstance(Key.get(ObjectMapper.class, Names.named("JS")));
+		try
+		{
+			return GuiceContext.getInstance(Key.get(ObjectMapper.class, Names.named("JS")));
+		}
+		catch (NullPointerException e)
+		{
+			return new ObjectMapper();
+		}
 	}
 	
 	/**
@@ -423,8 +430,16 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 	{
 		return true;
 	}
-	
-	public void init(){};
-	public void preConfigure(){};
-	public void destroy(){};
+
+	public void init()
+	{
+	}
+
+	public void preConfigure()
+	{
+	}
+
+	public void destroy()
+	{
+	}
 }

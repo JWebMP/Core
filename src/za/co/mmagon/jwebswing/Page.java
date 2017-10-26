@@ -20,8 +20,8 @@ import com.armineasy.injection.GuiceContext;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import net.sf.uadetector.*;
 import za.co.mmagon.FileTemplates;
-import za.co.mmagon.JWebSwingSiteBinder;
 import za.co.mmagon.SessionHelper;
+import za.co.mmagon.SiteBinder;
 import za.co.mmagon.jwebswing.annotations.PageConfiguration;
 import za.co.mmagon.jwebswing.base.ComponentDependancyBase;
 import za.co.mmagon.jwebswing.base.ComponentEventBase;
@@ -180,7 +180,7 @@ public class Page extends Html implements IPage
 	 *
 	 * @return
 	 */
-	public AjaxResponse onConnect(AjaxCall call, AjaxResponse response)
+	public AjaxResponse onConnect(AjaxCall<?> call, AjaxResponse response)
 	{
 		return response;
 	}
@@ -397,7 +397,7 @@ public class Page extends Html implements IPage
 		{
 			if (getOptions().isDynamicRender())
 			{
-				CSSLink renderedCSS = new CSSLink(SessionHelper.getServerPath() + JWebSwingSiteBinder.getCSSLocation().replaceAll("/", ""));
+				CSSLink renderedCSS = new CSSLink(SessionHelper.getServerPath() + SiteBinder.getCSSLocation().replaceAll("/", ""));
 				return renderedCSS;
 			}
 			else
@@ -569,7 +569,7 @@ public class Page extends Html implements IPage
 			{
 				Script jwScript = new Script();
 				jwScript.addAttribute(ScriptAttributes.Type, "application/javascript");
-				jwScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + JWebSwingSiteBinder.getJWScriptLocation().replaceAll("/", ""));
+				jwScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + SiteBinder.getJWScriptLocation().replaceAll("/", ""));
 				allScripts.add(jwScript);
 			}
 
@@ -578,7 +578,7 @@ public class Page extends Html implements IPage
 			{
 				Script dynamicScript = new Script();
 				dynamicScript.addAttribute(ScriptAttributes.Type, "application/javascript");
-				dynamicScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + JWebSwingSiteBinder.getJavaScriptLocation().replaceAll("/", ""));
+				dynamicScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + SiteBinder.getJavaScriptLocation().replaceAll("/", ""));
 				//dynamicScript.setTiny(true);
 				//dynamicScript.setText("$.ajax({cache:false,dataType:'script',url:'js'}).fail(function(){alert('session lost'); });");
 				allScripts.add(dynamicScript);
@@ -588,7 +588,7 @@ public class Page extends Html implements IPage
 			{
 				Script dynamicScript = new Script();
 				dynamicScript.addAttribute(ScriptAttributes.Type, "application/javascript");
-				dynamicScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + JWebSwingSiteBinder.getAngularScriptLocation().replaceAll("/", ""));
+				dynamicScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + SiteBinder.getAngularScriptLocation().replaceAll("/", ""));
 				allScripts.add(dynamicScript);
 			}
 

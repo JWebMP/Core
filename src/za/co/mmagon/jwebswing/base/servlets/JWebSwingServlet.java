@@ -23,7 +23,7 @@ import com.google.inject.name.Named;
 import com.google.inject.servlet.RequestScoped;
 import net.sf.uadetector.ReadableUserAgent;
 import net.sf.uadetector.UserAgentStringParser;
-import za.co.mmagon.JWebSwingSiteBinder;
+import za.co.mmagon.SiteBinder;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.annotations.SiteInterception;
 import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
@@ -388,7 +388,7 @@ public class JWebSwingServlet extends JWDefaultServlet
 		{
 			log.log(Level.INFO, "Destroying Servlet JWebSwing Servlet and all Static Objects");
 			GuiceContext.inject().getInstance(UserAgentStringParser.class).shutdown();
-			Set<Class<?>> pages = JWebSwingSiteBinder.getPages();
+			Set<Class<?>> pages = SiteBinder.getPages();
 			for (Class<?> page : pages)
 			{
 				if (page.equals(Page.class))

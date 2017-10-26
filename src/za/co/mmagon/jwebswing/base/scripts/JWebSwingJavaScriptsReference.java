@@ -16,7 +16,7 @@
  */
 package za.co.mmagon.jwebswing.base.scripts;
 
-import za.co.mmagon.JWebSwingSiteBinder;
+import za.co.mmagon.SiteBinder;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 
 /**
@@ -33,7 +33,7 @@ public class JWebSwingJavaScriptsReference extends JavascriptReference
 	 */
 	public JWebSwingJavaScriptsReference()
 	{
-		super("JWJavaSCRScript", 1.0, JWebSwingSiteBinder.getJavaScriptLocation());
+		super("JWJavaSCRScript", 1.0, SiteBinder.getJavaScriptLocation());
 		//Nothing needed
 	}
 }
