@@ -128,6 +128,16 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	}
 
 	/**
+	 * Gets the physical inline closing tag value
+	 *
+	 * @return
+	 */
+	public Boolean getInlineClosingTag()
+	{
+		return inlineClosingTag;
+	}
+
+	/**
 	 * The actual logic of the before tag rendering
 	 *
 	 * @param tempStringBuilder
@@ -145,13 +155,18 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	}
 
 	/**
-	 * Gets the physical inline closing tag value
+	 * Sets Whether or not to close this tag as /
+	 * <p>
+	 *
+	 * @param inlineClosingTag
+	 * 		Sets whether to close this tag and disable the usage of children for this tag
 	 *
 	 * @return
 	 */
-	public Boolean getInlineClosingTag()
+	protected J setInlineClosingTag(boolean inlineClosingTag)
 	{
-		return inlineClosingTag;
+		this.inlineClosingTag = inlineClosingTag;
+		return (J) this;
 	}
 
 	/**
@@ -171,20 +186,6 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		return tempStringBuilder;
 	}
 
-	/**
-	 * Sets Whether or not to close this tag as /
-	 * <p>
-	 *
-	 * @param inlineClosingTag
-	 * 		Sets whether to close this tag and disable the usage of children for this tag
-	 *
-	 * @return
-	 */
-	protected J setInlineClosingTag(boolean inlineClosingTag)
-	{
-		this.inlineClosingTag = inlineClosingTag;
-		return (J) this;
-	}
 
 	/**
 	 * The actual logic of the render text after children
@@ -444,9 +445,6 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		}
 		return inlineClosingTag;
 	}
-
-
-
 
 
 	/**

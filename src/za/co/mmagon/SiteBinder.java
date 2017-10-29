@@ -116,16 +116,6 @@ public class SiteBinder extends GuiceSiteBinder
 	}
 
 	/**
-	 * Gets the data location
-	 *
-	 * @return
-	 */
-	public static String getDataLocation()
-	{
-		return DATA_LOCATION;
-	}
-
-	/**
 	 * Returns the angular data location
 	 *
 	 * @return
@@ -155,6 +145,16 @@ public class SiteBinder extends GuiceSiteBinder
 	public static String getDataBindUrl(ComponentBase component)
 	{
 		return getDataLocation().replace("/", "") + "?component=" + component.getID();
+	}
+
+	/**
+	 * Gets the data location
+	 *
+	 * @return
+	 */
+	public static String getDataLocation()
+	{
+		return DATA_LOCATION;
 	}
 
 	@Override

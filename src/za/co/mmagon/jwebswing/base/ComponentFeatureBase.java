@@ -299,6 +299,17 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	}
 
 	/**
+	 * Returns the name of this feature
+	 *
+	 * @return the name of this feature
+	 */
+	@Override
+	public String getName()
+	{
+		return name;
+	}
+
+	/**
 	 * Sets the name of the feature
 	 *
 	 * @param name
@@ -310,17 +321,6 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	{
 		this.name = name;
 		return (J) this;
-	}
-
-	/**
-	 * Returns the name of this feature
-	 *
-	 * @return the name of this feature
-	 */
-	@Override
-	public String getName()
-	{
-		return name;
 	}
 
 	/**

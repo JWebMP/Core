@@ -206,50 +206,6 @@ public class CSSBlock
 	}
 
 	/**
-	 * Adds a block ID into this blocks generated String
-	 *
-	 * @param linkedBlock
-	 * 		The block to test if it's contents match, if so, then it is added
-	 *
-	 * @return True if the block can be added to this one
-	 */
-	public boolean addLinkedBlock(CSSBlock linkedBlock)
-	{
-		addBlockID(linkedBlock.generateBlockID(linkedBlock));
-		return true;
-	}
-
-	/**
-	 * Returns a generated block ID to apply on top of this CSS
-	 *
-	 * @param block
-	 * 		The linked block
-	 *
-	 * @return
-	 */
-	public String addBlockID(String block)
-	{
-		if (!getLinkedBlocks().contains(block))
-		{
-			getLinkedBlocks().add(block);
-		}
-		return block;
-	}
-
-	/**
-	 * Returns a generated block ID to apply on top of this CSS
-	 *
-	 * @param block
-	 * 		The linked block
-	 *
-	 * @return
-	 */
-	private String generateBlockID(CSSBlock block)
-	{
-		return generateBlockID(block, 0);
-	}
-
-	/**
 	 * Generates this block ID
 	 *
 	 * @return This blocks linked and itself ID
@@ -268,6 +224,19 @@ public class CSSBlock
 		}
 		sb.append(generateBlockID(this));
 		return sb.toString();
+	}
+
+	/**
+	 * Returns a generated block ID to apply on top of this CSS
+	 *
+	 * @param block
+	 * 		The linked block
+	 *
+	 * @return
+	 */
+	private String generateBlockID(CSSBlock block)
+	{
+		return generateBlockID(block, 0);
 	}
 
 	/**
@@ -324,14 +293,6 @@ public class CSSBlock
 		return sb.toString();
 	}
 
-	/**
-	 * @return This objects CSS Lines string
-	 */
-	public CSSLines getCssLines()
-	{
-		return cssLines;
-	}
-
 	private StringBuilder renderBlockIdentifier(StringBuilder sb, CSSBlockIdentifier cssBlockIdentifier, CSSBlock block)
 	{
 		switch (cssBlockIdentifier)
@@ -365,6 +326,45 @@ public class CSSBlock
 			}
 		}
 		return sb;
+	}
+
+	/**
+	 * Adds a block ID into this blocks generated String
+	 *
+	 * @param linkedBlock
+	 * 		The block to test if it's contents match, if so, then it is added
+	 *
+	 * @return True if the block can be added to this one
+	 */
+	public boolean addLinkedBlock(CSSBlock linkedBlock)
+	{
+		addBlockID(linkedBlock.generateBlockID(linkedBlock));
+		return true;
+	}
+
+	/**
+	 * @return This objects CSS Lines string
+	 */
+	public CSSLines getCssLines()
+	{
+		return cssLines;
+	}
+
+	/**
+	 * Returns a generated block ID to apply on top of this CSS
+	 *
+	 * @param block
+	 * 		The linked block
+	 *
+	 * @return
+	 */
+	public String addBlockID(String block)
+	{
+		if (!getLinkedBlocks().contains(block))
+		{
+			getLinkedBlocks().add(block);
+		}
+		return block;
 	}
 
 	/**

@@ -286,6 +286,11 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 		return lists;
 	}
 
+	public String render()
+	{
+		return toString();
+	}
+
 	/**
 	 * Returns the section of string to be applied to the JavaScript part
 	 * <p>
@@ -366,11 +371,6 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 		s = s.replaceAll("\r\n", "\n");
 
 		return s;
-	}
-
-	public String render()
-	{
-		return toString();
 	}
 
 	/**

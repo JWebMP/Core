@@ -127,6 +127,14 @@ public class CSSLines implements Serializable
 	}
 
 	/**
+	 * @return Whether or not to enclose property and value in quotations '
+	 */
+	public boolean isRenderInQuotations()
+	{
+		return renderInQuotations;
+	}
+
+	/**
 	 * Sets Whether or not to enclose property and value in quotations '
 	 *
 	 * @param renderInQuotations
@@ -138,43 +146,13 @@ public class CSSLines implements Serializable
 	}
 
 	/**
-	 * Sets Whether or not it must render opening and or closing braces {}
+	 * Returns whether or not should render in semi colons
 	 *
-	 * @param renderBraces
-	 * 		Whether or not it must render opening and or closing braces {}
+	 * @return True or False
 	 */
-	public void setRenderBraces(boolean renderBraces)
+	public boolean isRenderSemiColons()
 	{
-		this.renderBraces = renderBraces;
-	}
-
-	/**
-	 * @return Whether or not to enclose property and value in quotations '
-	 */
-	public boolean isRenderInQuotations()
-	{
-		return renderInQuotations;
-	}
-
-	/**
-	 * Sets Whether or not it must render new lines
-	 *
-	 * @param prettyPrint
-	 * 		Whether or not it must render new lines
-	 */
-	public void setPrettyPrint(boolean prettyPrint)
-	{
-		this.prettyPrint = prettyPrint;
-	}
-
-	/**
-	 * Whether or not it must render opening and or closing braces {}
-	 *
-	 * @return Whether or not it must render opening and or closing braces {}
-	 */
-	public boolean isRenderBraces()
-	{
-		return renderBraces;
+		return renderSemiColons;
 	}
 
 	/**
@@ -189,13 +167,23 @@ public class CSSLines implements Serializable
 	}
 
 	/**
-	 * Whether or not it must render new lines
+	 * Checks if this lines object is equal to another
 	 *
-	 * @return Whether or not it must render new lines
+	 * @param o
+	 * 		Any object
 	 */
-	public boolean isPrettyPrint()
+	@Override
+	public boolean equals(Object o)
 	{
-		return prettyPrint;
+		if (o instanceof CSSLines)
+		{
+			CSSLines lines = (CSSLines) o;
+			return !lines.toString().equals(toString());
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	/**
@@ -252,13 +240,45 @@ public class CSSLines implements Serializable
 	}
 
 	/**
-	 * Returns whether or not should render in semi colons
+	 * Whether or not it must render opening and or closing braces {}
 	 *
-	 * @return True or False
+	 * @return Whether or not it must render opening and or closing braces {}
 	 */
-	public boolean isRenderSemiColons()
+	public boolean isRenderBraces()
 	{
-		return renderSemiColons;
+		return renderBraces;
+	}
+
+	/**
+	 * Sets Whether or not it must render opening and or closing braces {}
+	 *
+	 * @param renderBraces
+	 * 		Whether or not it must render opening and or closing braces {}
+	 */
+	public void setRenderBraces(boolean renderBraces)
+	{
+		this.renderBraces = renderBraces;
+	}
+
+	/**
+	 * Whether or not it must render new lines
+	 *
+	 * @return Whether or not it must render new lines
+	 */
+	public boolean isPrettyPrint()
+	{
+		return prettyPrint;
+	}
+
+	/**
+	 * Sets Whether or not it must render new lines
+	 *
+	 * @param prettyPrint
+	 * 		Whether or not it must render new lines
+	 */
+	public void setPrettyPrint(boolean prettyPrint)
+	{
+		this.prettyPrint = prettyPrint;
 	}
 
 	/**
@@ -277,17 +297,6 @@ public class CSSLines implements Serializable
 	}
 
 	/**
-	 * Returns this lines CSS object with 0 tabs
-	 *
-	 * @return
-	 */
-	@Override
-	public String toString()
-	{
-		return toString(0, false);
-	}
-
-	/**
 	 * Reset this lines object with a new CSSLine
 	 *
 	 * @param allLines
@@ -299,23 +308,14 @@ public class CSSLines implements Serializable
 	}
 
 	/**
-	 * Checks if this lines object is equal to another
+	 * Returns this lines CSS object with 0 tabs
 	 *
-	 * @param o
-	 * 		Any object
+	 * @return
 	 */
 	@Override
-	public boolean equals(Object o)
+	public String toString()
 	{
-		if (o instanceof CSSLines)
-		{
-			CSSLines lines = (CSSLines) o;
-			return !lines.toString().equals(toString());
-		}
-		else
-		{
-			return false;
-		}
+		return toString(0, false);
 	}
 
 	/**
