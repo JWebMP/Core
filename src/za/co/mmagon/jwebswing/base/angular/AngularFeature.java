@@ -26,8 +26,8 @@ import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 import za.co.mmagon.jwebswing.base.angular.factories.AngularFactoryBase;
 import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
 import za.co.mmagon.jwebswing.base.angular.modules.JWAngularModule;
-import za.co.mmagon.jwebswing.base.exceptions.NullComponentException;
 import za.co.mmagon.jwebswing.base.html.interfaces.HTMLFeatures;
+import za.co.mmagon.jwebswing.exceptions.NullComponentException;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.logger.LogFactory;
 

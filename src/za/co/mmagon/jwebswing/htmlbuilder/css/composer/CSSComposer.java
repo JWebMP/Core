@@ -22,14 +22,14 @@ import java.util.logging.Logger;
  */
 public class CSSComposer
 {
-	
+
 	protected static Logger log = LogFactory.getInstance().getLogger("CSSComposer");
 	/**
 	 * The block master instance
 	 */
 	private final CSSBlockMaster blockMaster;
 	private final CSSPropertiesFactory<java.lang.annotation.Annotation> propertiesFactory;
-	
+
 	/**
 	 * Constructs a new instance of this ComponentCSSComposer.
 	 * <p>
@@ -41,7 +41,7 @@ public class CSSComposer
 		this.blockMaster = new CSSBlockMaster();
 		this.propertiesFactory = new CSSPropertiesFactory<>();
 	}
-	
+
 	/**
 	 * Adds a component to be registered with the block master
 	 *
@@ -68,36 +68,33 @@ public class CSSComposer
 					             }
 				             }
 			             });
-			compti.forEach(a ->
-			               {
-				               addComponent(a, list).forEach(a2 ->
-				                                             {
-					                                             if (!list.contains(a2))
-					                                             {
-						                                             list.add(a2);
-					                                             }
-				                                             });
-				
-			               });
+			compti.forEach(a -> addComponent(a, list).forEach(a2 ->
+			                                                  {
+				                                                  if (!list.contains(a2))
+				                                                  {
+					                                                  list.add(a2);
+				                                                  }
+			                                                  }));
 		}
 		else
 		{
 			addComponent(o, list);
 		}
-		
+
 		list.forEach(getBlockMaster()::addBlock);
 		return list;
 	}
-	
+
 	public final List<CSSBlock> addComponent(ComponentStyleBase o)
 	{
 		return addComponent(o, new ArrayList<>());
 	}
-	
+
 	/**
 	 * Add a component to this object to render for
 	 *
-	 * @param o               The component to render CSS for as well as this object
+	 * @param o
+	 * 		The component to render CSS for as well as this object
 	 * @param componentBlocks
 	 *
 	 * @return True or False
@@ -130,7 +127,7 @@ public class CSSComposer
 				               componentBlocks.add(e);
 			               }
 		               });
-		
+
 		List<Field> fields = new ArrayList<>(Arrays.asList(o.getClass().getDeclaredFields()));
 		fields.forEach((Field field) ->
 		               {
@@ -147,12 +144,12 @@ public class CSSComposer
 				               }
 			               }
 		               });
-		
+
 		componentBlocks.forEach(getBlockMaster()::addBlock);
 		return componentBlocks;
-		
+
 	}
-	
+
 	/**
 	 * Returns the block master handler
 	 *
@@ -163,7 +160,7 @@ public class CSSComposer
 	{
 		return blockMaster;
 	}
-	
+
 	/**
 	 * Properties factory builder
 	 *
@@ -174,7 +171,7 @@ public class CSSComposer
 	{
 		return propertiesFactory;
 	}
-	
+
 	/**
 	 * Output the CSS Blocks rendered. Updates all block pretty print value to the page instance Tiny HTML
 	 *

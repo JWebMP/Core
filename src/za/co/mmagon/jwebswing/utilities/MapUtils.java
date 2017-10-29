@@ -16,29 +16,66 @@
  */
 package za.co.mmagon.jwebswing.utilities;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
+ * A class to assist with maps and their values
+ *
  * @author GedMarc
  */
 public class MapUtils
 {
+	/**
+	 * Never make one xD
+	 */
+	private MapUtils()
+	{
+		//Not constructable
+	}
 
-
+	/**
+	 * Sorts a map in order by value
+	 *
+	 * @param map
+	 * @param <K>
+	 * @param <V>
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unused")
 	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map)
 	{
 		return map.entrySet()
-				.stream()
-				.sorted(Map.Entry.comparingByValue( /*
-			             * Collections.reverseOrder()
-                         */))
-				.collect(Collectors.toMap(
-						Map.Entry::getKey,
-						Map.Entry::getValue,
-						(e1, e2) -> e1,
-						LinkedHashMap::new
-				                         ));
+				       .stream()
+				       .sorted(Map.Entry.comparingByValue())
+				       .collect(Collectors.toMap(
+						       Map.Entry::getKey,
+						       Map.Entry::getValue,
+						       (e1, e2) -> e1,
+						       LinkedHashMap::new));
+	}
+
+	/**
+	 * Sorts a map by value in the reverse
+	 *
+	 * @param map
+	 * @param <K>
+	 * @param <V>
+	 *
+	 * @return
+	 */
+	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValueReverse(Map<K, V> map)
+	{
+		return map.entrySet()
+				       .stream()
+				       .sorted(Map.Entry.comparingByValue(Collections.reverseOrder()))
+				       .collect(Collectors.toMap(
+						       Map.Entry::getKey,
+						       Map.Entry::getValue,
+						       (e1, e2) -> e1,
+						       LinkedHashMap::new));
 	}
 }

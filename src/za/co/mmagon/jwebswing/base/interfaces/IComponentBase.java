@@ -19,7 +19,6 @@ package za.co.mmagon.jwebswing.base.interfaces;
 import za.co.mmagon.jwebswing.base.ComponentBase;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -81,7 +80,7 @@ public interface IComponentBase<J extends ComponentBase<J>> extends Cloneable, S
 	 *
 	 * @return
 	 */
-	Map<String, Object> getProperties();
+	Map<String, Serializable> getProperties();
 	
 	/**
 	 * returns a new StringSuilder of the raw text with the specific tab counts
@@ -139,7 +138,7 @@ public interface IComponentBase<J extends ComponentBase<J>> extends Cloneable, S
 	 *
 	 * @return
 	 */
-	J setProperties(HashMap<String, Object> properties);
+	J setProperties(Map<String, Serializable> properties);
 	
 	/**
 	 * Sets this components Raw Text

@@ -48,9 +48,13 @@ public class OutlineCSSImpl extends CSSImplementationAdapter<OutlineCSS, Outline
 	private MeasurementCSSImpl outlineWidth;
 	@CSSDetail(cssName = "outline-offset", cssVersion = CSSVersions.CSS21)
 	private MeasurementCSSImpl outlineOffset;
-	
+
+	/**
+	 * Outline of the CSS
+	 */
 	public OutlineCSSImpl()
 	{
+		//Nothing Needed
 	}
 	
 	/**

@@ -47,7 +47,7 @@ public enum FontWeights implements CSSEnumeration<FontWeights>
 	/**
 	 * Sets this field as not set
 	 */
-	Unset;;
+	Unset;
 
 	@Override
 	public String toString()

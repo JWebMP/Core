@@ -43,9 +43,9 @@ public enum WidthSetting implements CSSEnumeration<WidthSetting>
 	 * see http://www.w3schools.com/cssref/css_inherit.asp
 	 */
 	Inherit,
-	Unset;;
+	Unset;
 
-	private WidthSetting()
+	WidthSetting()
 	{
 	}
 

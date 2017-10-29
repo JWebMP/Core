@@ -28,24 +28,26 @@ import java.util.Date;
 /**
  * This Class is basic XY Co-Ordinates
  *
- * @param <X> x Co-Ordinate Class
- * @param <Y> y Co-Ordinate class
+ * @param <X>
+ * 		x Co-Ordinate Class
+ * @param <Y>
+ * 		y Co-Ordinate class
  *
  * @author GedMarc
  * @since 25 Dec 2015
  */
 public class XYObject<X extends Serializable, Y extends Serializable> implements Serializable
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private final SimpleDateFormat outputFormat;
-	
+
 	@JsonIgnore
 	private X X;
 	@JsonIgnore
 	private Y Y;
-	
+
 	/**
 	 * Constructs a blank XY Object
 	 */
@@ -53,7 +55,7 @@ public class XYObject<X extends Serializable, Y extends Serializable> implements
 	{
 		this.outputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	}
-	
+
 	/**
 	 * Constructs with this XY Object
 	 *
@@ -66,7 +68,7 @@ public class XYObject<X extends Serializable, Y extends Serializable> implements
 		this.X = X;
 		this.Y = Y;
 	}
-	
+
 	/**
 	 * Returns X
 	 *
@@ -76,7 +78,7 @@ public class XYObject<X extends Serializable, Y extends Serializable> implements
 	{
 		return X;
 	}
-	
+
 	/**
 	 * Sets X
 	 *
@@ -86,7 +88,7 @@ public class XYObject<X extends Serializable, Y extends Serializable> implements
 	{
 		this.X = X;
 	}
-	
+
 	/**
 	 * Returns Y
 	 *
@@ -96,7 +98,7 @@ public class XYObject<X extends Serializable, Y extends Serializable> implements
 	{
 		return Y;
 	}
-	
+
 	/**
 	 * Sets Y
 	 *
@@ -106,7 +108,7 @@ public class XYObject<X extends Serializable, Y extends Serializable> implements
 	{
 		this.Y = Y;
 	}
-	
+
 	/**
 	 * An Array Representation [X,Y]
 	 *
@@ -123,8 +125,7 @@ public class XYObject<X extends Serializable, Y extends Serializable> implements
 			{
 				if (getX() instanceof Date)
 				{
-					String formatted = "['" + outputFormat.format(Date.class.cast(getX())) + "'," + getY() + "]";
-					return formatted;
+					return "['" + outputFormat.format(Date.class.cast(getX())) + "'," + getY() + "]";
 				}
 				else if (getX() instanceof String)
 				{
@@ -135,5 +136,5 @@ public class XYObject<X extends Serializable, Y extends Serializable> implements
 		}
 		return "[]";
 	}
-	
+
 }

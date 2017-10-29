@@ -64,10 +64,11 @@ public enum UnicodeBidis implements CSSEnumeration<UnicodeBidis>
 	/**
 	 * Sets this field as not set
 	 */
-	Unset;;
+	Unset;
 
-	private UnicodeBidis()
+	UnicodeBidis()
 	{
+		//No configuration
 	}
 
 	@Override

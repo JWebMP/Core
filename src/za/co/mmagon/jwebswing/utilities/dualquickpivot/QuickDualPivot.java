@@ -37,11 +37,17 @@ package za.co.mmagon.jwebswing.utilities.dualquickpivot;
  */
 public class QuickDualPivot
 {
+	/**
+	 * Nothing required
+	 */
+	private QuickDualPivot()
+	{
+		//Nothing Needed
+	}
 
 	// quicksort the array a[] using dual-pivot quicksort
 	public static void sort(Comparable[] a)
 	{
-		//StdRandom.shuffle(a);
 		sort(a, 0, a.length - 1);
 		assert isSorted(a);
 	}
@@ -60,7 +66,8 @@ public class QuickDualPivot
 			exch(a, lo, hi);
 		}
 
-		int lt = lo + 1, gt = hi - 1;
+		int lt = lo + 1;
+		int gt = hi - 1;
 		int i = lo + 1;
 		while (i <= gt)
 		{
@@ -129,22 +136,4 @@ public class QuickDualPivot
 		}
 		return true;
 	}
-
-	// print array to standard output
-	private static void show(Comparable[] a)
-	{
-		for (int i = 0; i < a.length; i++)
-		{
-			System.out.println(a[i]);
-		}
-	}
-
-	// Read strings from standard input, sort them, and print.
-	public static void main(String[] args)
-	{
-		//String[] a = ;// StdIn.readAllStrings();
-		QuickDualPivot.sort(args);
-		show(args);
-	}
-
 }

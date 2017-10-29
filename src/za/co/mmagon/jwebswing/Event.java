@@ -34,6 +34,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SINGLE_QUOTES;
+
 /**
  * Container Class for Events. Splits from the component hierarchy
  *
@@ -178,10 +180,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	public StringBuilder renderVariables()
 	{
 		final StringBuilder s = new StringBuilder("[");
-		getVariables().forEach((event) ->
-		                       {
-			                       s.append("'").append(event).append("'").append(",");
-		                       });
+		getVariables().forEach(event -> s.append(STRING_SINGLE_QUOTES).append(event).append(STRING_SINGLE_QUOTES).append(","));
 		StringBuilder s2;
 		if (s.indexOf(",") > 0)
 		{
@@ -192,10 +191,8 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 			s2 = s;
 		}
 		s2.append("]");
-		//append Event ID
-		s2.append(",'").append(getID()).append("'");
-		//append Event Class
-		s2.append(",'").append(getClassCanonicalName()).append("'");
+		s2.append(",'").append(getID()).append(STRING_SINGLE_QUOTES);
+		s2.append(",'").append(getClassCanonicalName()).append(STRING_SINGLE_QUOTES);
 
 		return s2;
 	}
@@ -352,37 +349,66 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	}
 
 	/**
-	 *
-	 */
-	@Override
-	public void init()
-	{
-		if (!isInitialized())
-		{
-
-		}
-		super.init();
-	}
-
-	/**
 	 * Runs the assign function to components then executes the parents configuration
 	 */
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
+		if (!isConfigured() && !GuiceContext.isBuildingInjector())
 		{
-			if (!GuiceContext.isBuildingInjector())
+			assignFunctionsToComponent();
+			if (getComponent() != null)
 			{
-				assignFunctionsToComponent();
-				if (getComponent() != null)
-				{
-					Page p = getComponent().getPage();
-					JQueryPageConfigurator.setRequired(p.getBody(), true);
-					AngularPageConfigurator.setRequired(p.getBody(), true);
-				}
+				Page p = getComponent().getPage();
+				JQueryPageConfigurator.setRequired(p.getBody(), true);
+				AngularPageConfigurator.setRequired(p.getBody(), true);
 			}
 		}
+
 		super.preConfigure();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof Event))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		Event<?, ?> event = (Event<?, ?>) o;
+
+		if (!getVariables().equals(event.getVariables()))
+		{
+			return false;
+		}
+		if (!getRunEvents().equals(event.getRunEvents()))
+		{
+			return false;
+		}
+		if (!getRunFeatures().equals(event.getRunFeatures()))
+		{
+			return false;
+		}
+		return getRegisteredComponents().equals(event.getRegisteredComponents());
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getVariables().hashCode();
+		result = 31 * result + getRunEvents().hashCode();
+		result = 31 * result + getRunFeatures().hashCode();
+		result = 31 * result + getRegisteredComponents().hashCode();
+		return result;
 	}
 }

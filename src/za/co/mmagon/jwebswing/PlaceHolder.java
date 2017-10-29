@@ -19,6 +19,5 @@ public class PlaceHolder extends Div
 	public PlaceHolder(String id)
 	{
 		setID(id);
-		//Nothing needed
 	}
 }

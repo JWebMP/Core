@@ -25,6 +25,9 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.CHAR_SPACE;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SPACE;
+
 /**
  * Provides default text functions
  *
@@ -34,9 +37,16 @@ import java.util.logging.Logger;
  */
 public class TextUtilities
 {
-	
 	private static final Logger log = LogFactory.getLog("TextUtilities");
-	
+
+	/**
+	 * No construction
+	 */
+	private TextUtilities()
+	{
+		//Nothign needed
+	}
+
 	/**
 	 * Updates an attribute name by changing the enum to a clean format
 	 *
@@ -47,9 +57,9 @@ public class TextUtilities
 	public static final synchronized StringBuilder cleanAttributeName(StringBuilder buildStringSB)
 	{
 		String buildString = buildStringSB.toString();
-		buildString = buildString.replace('$', ' ');
+		buildString = buildString.replace('$', CHAR_SPACE);
 		buildString = buildString.replace('_', '-');
-		buildString = buildString.replace('-', ' ').trim();
+		buildString = buildString.replace('-', CHAR_SPACE).trim();
 		StringTokenizer st = new StringTokenizer(buildString);
 		StringBuilder outputString = new StringBuilder();
 		while (st.hasMoreElements())
@@ -59,15 +69,13 @@ public class TextUtilities
 			firstChar = firstChar.toString().toUpperCase().charAt(0);
 			String restOfIt = newSb.substring(1, newSb.length()).toLowerCase();
 			newSb = new StringBuilder();
-			//newSb.deleteCharAt(0);
 			newSb.append(firstChar);
 			newSb.append(restOfIt);
-			outputString.append(newSb).append(" ");
+			outputString.append(newSb).append(STRING_SPACE);
 		}
-		
 		return new StringBuilder(outputString);
 	}
-	
+
 	/**
 	 * Camel Case Replacement
 	 *
@@ -79,7 +87,7 @@ public class TextUtilities
 	{
 		return cleanCamelCaseName(new StringBuilder(hello));
 	}
-	
+
 	/**
 	 * Camel Case Replacement
 	 *
@@ -90,13 +98,13 @@ public class TextUtilities
 	public static final synchronized StringBuilder cleanCamelCaseName(StringBuilder buildStringSB)
 	{
 		String buildString = buildStringSB.toString();
-		buildString = buildString.replace('$', ' ');
+		buildString = buildString.replace('$', CHAR_SPACE);
 		buildString = buildString.replace('_', '-');
-		buildString = buildString.replace('-', ' ');
+		buildString = buildString.replace('-', CHAR_SPACE);
 		String firstChar = buildString.substring(0, 1).toUpperCase();
 		buildString = firstChar + buildString.substring(1, buildString.length());
-		
-		String cleanCamelCase = "";
+
+		StringBuilder cleanCamelCase = new StringBuilder();
 		char[] buildStringChars = buildString.toCharArray();
 		char prevChar = '`';
 		for (Character buildStringChar : buildStringChars)
@@ -104,21 +112,21 @@ public class TextUtilities
 			if (prevChar == ' ' && !Character.isUpperCase(buildStringChar))
 			{
 				buildStringChar = Character.toUpperCase(buildStringChar);
-				cleanCamelCase += " " + buildStringChar;
+				cleanCamelCase.append(STRING_SPACE).append(buildStringChar);
 			}
 			else if (Character.isUpperCase(buildStringChar))
 			{
-				cleanCamelCase += " " + buildStringChar;
+				cleanCamelCase.append(STRING_SPACE).append(buildStringChar);
 			}
 			else
 			{
-				cleanCamelCase += buildStringChar;
+				cleanCamelCase.append(buildStringChar);
 			}
 		}
-		
+
 		return new StringBuilder(cleanCamelCase);
 	}
-	
+
 	/**
 	 * Cleans the attribute name
 	 *
@@ -130,7 +138,7 @@ public class TextUtilities
 	{
 		return TextUtilities.cleanAttributeName(new StringBuilder(s)).toString();
 	}
-	
+
 	/**
 	 * Does the init cap
 	 *
@@ -142,7 +150,7 @@ public class TextUtilities
 	{
 		return TextUtilities.initCap(new StringBuilder(s)).toString();
 	}
-	
+
 	/**
 	 * Performs an Init Cap
 	 *
@@ -161,15 +169,16 @@ public class TextUtilities
 			firstChar = firstChar.toString().toUpperCase().charAt(0);
 			newSb.deleteCharAt(0);
 			newSb.insert(0, firstChar);
-			buildString.append(newSb).append(" ");
+			buildString.append(newSb).append(STRING_SPACE);
 		}
 		return new StringBuilder(buildString);
 	}
-	
+
 	/**
 	 * Returns a string of tabs the length of count
 	 *
-	 * @param tabCount Number of tabs to append
+	 * @param tabCount
+	 * 		Number of tabs to append
 	 *
 	 * @return The output string of tabs
 	 */
@@ -183,55 +192,41 @@ public class TextUtilities
 		}
 		return tabIndents;
 	}
-	
+
 	/**
 	 * Returns a stack trace as a string
 	 * <p>
 	 *
-	 * @param e The Exception Object
+	 * @param e
+	 * 		The Exception Object
 	 *
 	 * @return The Stack Trace as a String
 	 */
 	public static final synchronized String stackTraceToString(Throwable e)
 	{
 		String retValue = null;
-		StringWriter sw = null;
-		PrintWriter pw = null;
-		try
+		try (StringWriter sw = new StringWriter(); PrintWriter pw = new PrintWriter(sw))
 		{
-			sw = new StringWriter();
-			pw = new PrintWriter(sw);
 			e.printStackTrace(pw);
 			retValue = sw.toString();
 		}
-		finally
+		catch (IOException io)
 		{
-			try
-			{
-				if (pw != null)
-				{
-					pw.close();
-				}
-				if (sw != null)
-				{
-					sw.close();
-				}
-			}
-			catch (IOException ignore)
-			{
-				log.log(Level.FINEST, "Stack trace produced IO Error", ignore);
-			}
+			log.log(Level.FINEST, "Stack trace produced IO Error", io);
 		}
 		return retValue;
 	}
-	
+
 	/**
 	 * Returns Enum instance from class type
 	 * <p>
 	 *
-	 * @param <T>       Return type
-	 * @param value     The value to pass through
-	 * @param enumClass The Enum class
+	 * @param <T>
+	 * 		Return type
+	 * @param value
+	 * 		The value to pass through
+	 * @param enumClass
+	 * 		The Enum class
 	 *
 	 * @return
 	 */
@@ -239,7 +234,7 @@ public class TextUtilities
 	{
 		return Enum.valueOf(enumClass, value);
 	}
-	
+
 	/**
 	 * Removes the last index of a group
 	 *
@@ -249,13 +244,9 @@ public class TextUtilities
 	 */
 	public static StringBuilder removeLastInstanceOf(StringBuilder sb)
 	{
-		if (sb.length() > 0)
+		if (sb.length() > 0 && sb.lastIndexOf(",") != -1)
 		{
-			if (sb.lastIndexOf(",") != -1)
-			{
-				StringBuilder sb2 = sb.deleteCharAt(sb.lastIndexOf(","));
-				return sb2;
-			}
+			return sb.deleteCharAt(sb.lastIndexOf(","));
 		}
 		return sb;
 	}

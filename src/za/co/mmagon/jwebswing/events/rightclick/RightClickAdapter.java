@@ -47,7 +47,8 @@ public abstract class RightClickAdapter extends Event implements ParagraphEvents
 	/**
 	 * Performs a click
 	 *
-	 * @param component The component this click is going to be acting on
+	 * @param component
+	 * 		The component this click is going to be acting on
 	 */
 	public RightClickAdapter(Component component)
 	{
@@ -95,8 +96,10 @@ public abstract class RightClickAdapter extends Event implements ParagraphEvents
 	 * Triggers on Click
 	 * <p>
 	 *
-	 * @param call     The physical AJAX call
-	 * @param response The physical Ajax Receiver
+	 * @param call
+	 * 		The physical AJAX call
+	 * @param response
+	 * 		The physical Ajax Receiver
 	 */
 	public abstract void onRightClick(AjaxCall call, AjaxResponse response);
 
@@ -113,4 +116,32 @@ public abstract class RightClickAdapter extends Event implements ParagraphEvents
 		}
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof RightClickAdapter))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		RightClickAdapter that = (RightClickAdapter) o;
+
+		return rightClickDirective.equals(that.rightClickDirective);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + rightClickDirective.hashCode();
+		return result;
+	}
 }

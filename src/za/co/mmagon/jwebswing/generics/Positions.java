@@ -42,14 +42,6 @@ public enum Positions
 	}
 	
 	/**
-	 * A new Positions with data
-	 */
-	Positions(String data)
-	{
-
-	}
-	
-	/**
 	 * Returns the name or the data contained within
 	 *
 	 * @return

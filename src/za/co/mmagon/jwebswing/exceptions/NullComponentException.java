@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.base.exceptions;
+package za.co.mmagon.jwebswing.exceptions;
 
 /**
  * Exception thrown when a component cannot be null

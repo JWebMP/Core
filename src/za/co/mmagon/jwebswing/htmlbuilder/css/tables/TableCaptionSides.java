@@ -50,9 +50,9 @@ public enum TableCaptionSides implements CSSEnumeration<TableCaptionSides>
 	/**
 	 * Sets this field as not set
 	 */
-	Unset;;
+	Unset;
 
-	private TableCaptionSides()
+	TableCaptionSides()
 	{
 	}
 

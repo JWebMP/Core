@@ -110,4 +110,32 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 	@Override
 	protected abstract void assignFunctionsToComponent();
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof Feature))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		Feature<?, ?> feature = (Feature<?, ?>) o;
+
+		return getOptions() != null ? getOptions().equals(feature.getOptions()) : feature.getOptions() == null;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + (getOptions() != null ? getOptions().hashCode() : 0);
+		return result;
+	}
 }

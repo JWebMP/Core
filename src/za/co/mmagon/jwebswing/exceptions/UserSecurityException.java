@@ -1,4 +1,4 @@
-/*
+/* 
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -14,45 +14,38 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon;
-
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
-
-import java.util.List;
-import java.util.Map;
+package za.co.mmagon.jwebswing.exceptions;
 
 /**
- * @author Marc Magon
- * @since 19 Mar 2017
+ * Occurs when no Servlet was found in an event situation
+ *
+ * @author GedMarc
+ * @since 09 May 2016
  */
-public class FileTemplate extends JavaScriptPart
+public class UserSecurityException extends Exception
 {
 
-	private static final long serialVersionUID = 1L;
-
-	private String id;
-
-	private String rawTemplate;
-
-	private Map<String, String> variables;
-
-	private StringBuilder compiledTemplate;
-
-	private boolean rendered;
-
-	private Class templateLocation;
-
-	private String templateName;
-
-	private List<String> dependsOnTemplateIDs;
-
-	private List<String> updatesTemplateIDs;
-
-	/*
-	 * Constructs a new FileTemplate
-	 */
-	public FileTemplate()
+	public UserSecurityException()
 	{
-		//Nothing needed
+	}
+
+	public UserSecurityException(String message)
+	{
+		super(message);
+	}
+
+	public UserSecurityException(String message, Throwable cause)
+	{
+		super(message, cause);
+	}
+
+	public UserSecurityException(Throwable cause)
+	{
+		super(cause);
+	}
+
+	public UserSecurityException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
+	{
+		super(message, cause, enableSuppression, writableStackTrace);
 	}
 }

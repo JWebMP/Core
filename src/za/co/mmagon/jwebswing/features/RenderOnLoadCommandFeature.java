@@ -16,9 +16,12 @@
  */
 package za.co.mmagon.jwebswing.features;
 
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.commandEvent.PerformCommandFeature;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.commandevent.PerformCommandFeature;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SINGLE_QUOTES;
 
 /**
  * @author MMagon
@@ -37,10 +40,10 @@ public class RenderOnLoadCommandFeature extends PerformCommandFeature
 	}
 
 	@Override
-	public ArrayList<String> getJQueryValuesForCommand()
+	public List<String> getJQueryValuesForCommand()
 	{
 		ArrayList<String> jQueries = new ArrayList();
-		addQuery("'" + nextComponentID + "'");
+		addQuery(STRING_SINGLE_QUOTES + nextComponentID + STRING_SINGLE_QUOTES);
 		return jQueries;
 	}
 }

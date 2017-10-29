@@ -28,6 +28,7 @@ import java.util.Map;
  * @author GedMarc
  * @since Nov 9, 2016
  */
+@FunctionalInterface
 public interface IDataComponent<J extends JavaScriptPart>
 {
 

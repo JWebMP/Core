@@ -20,14 +20,15 @@ import com.armineasy.injection.GuiceContext;
 import com.google.inject.Singleton;
 import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
+import za.co.mmagon.jwebswing.exceptions.MissingComponentException;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 import za.co.mmagon.logger.LogFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,27 +41,31 @@ import java.util.logging.Logger;
 @Singleton
 public class JavaScriptServlet extends JWDefaultServlet
 {
-	
+
 	private static final Logger log = LogFactory.getInstance().getLogger("JavaScriptServlet");
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
 	 *
-	 * @param request  Servlet request
-	 * @param response Servlet response
+	 * @param request
+	 * 		Servlet request
+	 * @param response
+	 * 		Servlet response
 	 *
-	 * @throws ServletException                                                      if a Servlet-specific error occurs
-	 * @throws IOException                                                           if an I/O error occurs
+	 * @throws ServletException
+	 * 		if a Servlet-specific error occurs
+	 * @throws IOException
+	 * 		if an I/O error occurs
 	 * @throws za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException, MissingComponentException
+			throws MissingComponentException
 	{
 		response.setContentType("text/javascript");
 		Date startDate = new Date();
 		Page page = GuiceContext.inject().getInstance(Page.class);
-		
+
 		if (page == null)
 		{
 			throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
@@ -68,34 +73,26 @@ public class JavaScriptServlet extends JWDefaultServlet
 		FileTemplates.getFileTemplate(JavaScriptServlet.class, "JW_JAVASCRIPT", "javascriptScript");
 		FileTemplates.getTemplateVariables().put("//%%JW_JAVASCRIPT%%", page.renderJavascript());
 		StringBuilder scripts = FileTemplates.renderTemplateScripts("JW_JAVASCRIPT");
-		
 		Date endDate = new Date();
-		try (PrintWriter out = response.getWriter())
-		{
-			response.setContentType("application/javascript");
-			
-			response.setHeader("Access-Control-Allow-Origin", "*");
-			response.setHeader("Access-Control-Allow-Credentials", "true");
-			response.setHeader("Access-Control-Allow-Methods", "GET, POST");
-			response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
-			
-			out.println(scripts);
-			Date dataTransferDate = new Date();
-			log.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
-					{
-							request.getSession().getId(), endDate.getTime() - startDate.getTime(), scripts.length(), dataTransferDate.getTime() - startDate.getTime()
-					});
-		}
+		writeOutput(scripts, StaticStrings.HTML_HEADER_JAVASCRIPT, Charset.forName("UTF-8"));
+		log.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
+				                                                                                                    {
+						                                                                                                    request.getSession().getId(), endDate.getTime() - startDate.getTime(), scripts.length(), new Date().getTime() - startDate.getTime()
+				                                                                                                    });
 	}
-	
+
 	/**
 	 * Handles the HTTP <code>GET</code> method.
 	 *
-	 * @param request  Servlet request
-	 * @param response Servlet response
+	 * @param request
+	 * 		Servlet request
+	 * @param response
+	 * 		Servlet response
 	 *
-	 * @throws ServletException if a Servlet-specific error occurs
-	 * @throws IOException      if an I/O error occurs
+	 * @throws ServletException
+	 * 		if a Servlet-specific error occurs
+	 * @throws IOException
+	 * 		if an I/O error occurs
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -115,15 +112,19 @@ public class JavaScriptServlet extends JWDefaultServlet
 			Logger.getLogger(JavaScriptServlet.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-	
+
 	/**
 	 * Handles the HTTP <code>GET</code> method.
 	 *
-	 * @param request  Servlet request
-	 * @param response Servlet response
+	 * @param request
+	 * 		Servlet request
+	 * @param response
+	 * 		Servlet response
 	 *
-	 * @throws ServletException if a Servlet-specific error occurs
-	 * @throws IOException      if an I/O error occurs
+	 * @throws ServletException
+	 * 		if a Servlet-specific error occurs
+	 * @throws IOException
+	 * 		if an I/O error occurs
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -131,14 +132,9 @@ public class JavaScriptServlet extends JWDefaultServlet
 	{
 		try
 		{
-			super.doGet(request, response);
-			processRequest(request, response);
+			doGet(request, response);
 		}
-		catch (IOException | ServletException e)
-		{
-			log.log(Level.SEVERE, "JavascriptServlet", e);
-		}
-		catch (MissingComponentException ex)
+		catch (Exception ex)
 		{
 			Logger.getLogger(JavaScriptServlet.class.getName()).log(Level.SEVERE, null, ex);
 		}

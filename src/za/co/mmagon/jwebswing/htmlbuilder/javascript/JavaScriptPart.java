@@ -46,57 +46,24 @@ import java.util.logging.Logger;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 {
-	
-	private static final Logger LOG = LogFactory.getInstance().getLogger("JavaScriptPart");
+
+	private static final Logger log = LogFactory.getInstance().getLogger("JavaScriptPart");
 	/**
 	 * Version 2
 	 */
 	private static final long serialVersionUID = 2L;
-	
+
 	@JsonProperty(value = "$jwid")
 	private String referenceId;
-	
+
+	/**
+	 * Constructs a new javascript part
+	 */
 	public JavaScriptPart()
 	{
+		//No configuration needed
 	}
-	
-	/**
-	 * Returns the JavaScript renderer
-	 *
-	 * @return
-	 */
-	public ObjectMapper getJavascriptObjectMapper()
-	{
-		try
-		{
-			return GuiceContext.getInstance(Key.get(ObjectMapper.class, Names.named("JS")));
-		}
-		catch (NullPointerException e)
-		{
-			return new ObjectMapper();
-		}
-	}
-	
-	/**
-	 * Returns the JSON Renderer
-	 *
-	 * @return
-	 */
-	public ObjectMapper getJsonObjectMapper()
-	{
-		return GuiceContext.getInstance(Key.get(ObjectMapper.class, Names.named("JSON")));
-	}
-	
-	/**
-	 * Returns the raw function renderer
-	 *
-	 * @return
-	 */
-	public ObjectMapper getFunctionObjectMapper()
-	{
-		return GuiceContext.getInstance(Key.get(ObjectMapper.class, Names.named("JSFUNCTION")));
-	}
-	
+
 	/**
 	 * Returns the object presented as a JSON strong
 	 *
@@ -112,21 +79,42 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 		}
 		catch (JsonProcessingException ex)
 		{
-			LOG.log(Level.SEVERE, "Unable to Serialize as JSON", ex);
+			log.log(Level.SEVERE, "Unable to Serialize as JSON Json Processing Exception", ex);
 			return "";
 		}
 		catch (Exception ex)
 		{
-			LOG.log(Level.SEVERE, "Unable to Serialize as JSON", ex);
+			log.log(Level.SEVERE, "Unable to Serialize as JSON", ex);
 			return "";
 		}
 	}
-	
+
+	/**
+	 * Returns the JSON Renderer
+	 *
+	 * @return
+	 */
+	public ObjectMapper getJsonObjectMapper()
+	{
+		return GuiceContext.getInstance(Key.get(ObjectMapper.class, Names.named("JSON")));
+	}
+
+	/**
+	 * Returns the raw function renderer
+	 *
+	 * @return
+	 */
+	public ObjectMapper getFunctionObjectMapper()
+	{
+		return GuiceContext.getInstance(Key.get(ObjectMapper.class, Names.named("JSFUNCTION")));
+	}
+
 	/**
 	 * Read direct from the stream
 	 *
 	 * @param <T>
-	 * @param file  the stream
+	 * @param file
+	 * 		the stream
 	 * @param clazz
 	 *
 	 * @return
@@ -135,10 +123,9 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 	 */
 	public <T> T From(InputStream file, Class<T> clazz) throws IOException
 	{
-		T out = getJsonObjectMapper().readValue(file, clazz);
-		return out;
+		return getJsonObjectMapper().readValue(file, clazz);
 	}
-	
+
 	/**
 	 * Read from a file
 	 *
@@ -152,10 +139,9 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 	 */
 	public <T> T From(File file, Class<T> clazz) throws IOException
 	{
-		T out = getJsonObjectMapper().readValue(file, clazz);
-		return out;
+		return getJsonObjectMapper().readValue(file, clazz);
 	}
-	
+
 	/**
 	 * Read from a reader
 	 *
@@ -169,10 +155,9 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 	 */
 	public <T> T From(Reader file, Class<T> clazz) throws IOException
 	{
-		T out = getJsonObjectMapper().readValue(file, clazz);
-		return out;
+		return getJsonObjectMapper().readValue(file, clazz);
 	}
-	
+
 	/**
 	 * Read from a content string
 	 *
@@ -186,10 +171,9 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 	 */
 	public <T> T From(String content, Class<T> clazz) throws IOException
 	{
-		T out = getJsonObjectMapper().readValue(content, clazz);
-		return out;
+		return getJsonObjectMapper().readValue(content, clazz);
 	}
-	
+
 	/**
 	 * Read from a URL
 	 *
@@ -203,15 +187,15 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 	 */
 	public <T> T From(URL content, Class<T> clazz) throws IOException
 	{
-		T out = getJsonObjectMapper().readValue(content, clazz);
-		return out;
+		return getJsonObjectMapper().readValue(content, clazz);
 	}
-	
+
 	/**
 	 * Read direct from the stream
 	 *
 	 * @param <T>
-	 * @param file  the stream
+	 * @param file
+	 * 		the stream
 	 * @param clazz
 	 *
 	 * @return
@@ -225,7 +209,26 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 		lists.addAll(Arrays.asList((T[]) list));
 		return lists;
 	}
-	
+
+	/**
+	 * Read from a URL
+	 *
+	 * @param <T>
+	 * @param content
+	 * @param clazz
+	 *
+	 * @return
+	 *
+	 * @throws IOException
+	 */
+	public <T> List<T> FromToList(URL content, Class<T> clazz) throws IOException
+	{
+		T list = getJsonObjectMapper().readValue(content, clazz);
+		ArrayList<T> lists = new ArrayList<>();
+		lists.addAll(Arrays.asList((T[]) list));
+		return lists;
+	}
+
 	/**
 	 * Read from a file
 	 *
@@ -244,7 +247,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 		lists.addAll(Arrays.asList((T[]) list));
 		return lists;
 	}
-	
+
 	/**
 	 * Read from a reader
 	 *
@@ -263,7 +266,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 		lists.addAll(Arrays.asList((T[]) list));
 		return lists;
 	}
-	
+
 	/**
 	 * Read from a content string
 	 *
@@ -282,31 +285,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 		lists.addAll(Arrays.asList((T[]) list));
 		return lists;
 	}
-	
-	/**
-	 * Read from a URL
-	 *
-	 * @param <T>
-	 * @param content
-	 * @param clazz
-	 *
-	 * @return
-	 *
-	 * @throws IOException
-	 */
-	public <T> ArrayList<T> FromToList(URL content, Class<T> clazz) throws IOException
-	{
-		T list = getJsonObjectMapper().readValue(content, clazz);
-		ArrayList<T> lists = new ArrayList<>();
-		lists.addAll(Arrays.asList((T[]) list));
-		return lists;
-	}
-	
-	public String render()
-	{
-		return toString();
-	}
-	
+
 	/**
 	 * Returns the section of string to be applied to the JavaScript part
 	 * <p>
@@ -327,11 +306,11 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 				}
 				catch (com.fasterxml.jackson.databind.JsonMappingException mapException)
 				{
-					LOG.log(Level.FINE, "JSON Mapping Exception!", mapException);
+					log.log(Level.FINE, "JSON Mapping Exception!", mapException);
 				}
 				catch (JsonProcessingException ex)
 				{
-					LOG.log(Level.SEVERE, "Error Writing as Javascript!", ex);
+					log.log(Level.SEVERE, "Error Writing as Javascript!", ex);
 				}
 				break;
 			}
@@ -343,7 +322,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 				}
 				catch (JsonProcessingException ex)
 				{
-					LOG.log(Level.SEVERE, "Error Writing as JSON Data!", ex);
+					log.log(Level.SEVERE, "Error Writing as JSON Data!", ex);
 				}
 				break;
 			}
@@ -355,7 +334,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 				}
 				catch (JsonProcessingException ex)
 				{
-					LOG.log(Level.SEVERE, "Error Writing as Javascript Function!", ex);
+					log.log(Level.SEVERE, "Error Writing as Javascript Function!", ex);
 				}
 				break;
 			}
@@ -367,14 +346,14 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 				}
 				catch (JsonProcessingException ex)
 				{
-					LOG.log(Level.SEVERE, "Error Writing as Default!", ex);
+					log.log(Level.SEVERE, "Error Writing as Default!", ex);
 				}
 				break;
 			}
 		}
 		if (s != null)
 		{
-			if (s.equals("{ }"))
+			if ("{ }".equals(s))
 			{
 				return "";
 			}
@@ -383,12 +362,35 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 		{
 			return "";
 		}
-		
+
 		s = s.replaceAll("\r\n", "\n");
-		
+
 		return s;
 	}
-	
+
+	public String render()
+	{
+		return toString();
+	}
+
+	/**
+	 * Returns the JavaScript renderer
+	 *
+	 * @return
+	 */
+	public ObjectMapper getJavascriptObjectMapper()
+	{
+		try
+		{
+			return GuiceContext.getInstance(Key.get(ObjectMapper.class, Names.named("JS")));
+		}
+		catch (NullPointerException e)
+		{
+			log.log(Level.SEVERE, "Cant find javascript object mapper, returning default", e);
+			return new ObjectMapper();
+		}
+	}
+
 	/**
 	 * Set the render type
 	 * <p>
@@ -399,7 +401,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 	{
 		return JavascriptPartType.Javascript;
 	}
-	
+
 	/**
 	 * Sets the JW ID to send if necessary
 	 *
@@ -409,7 +411,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 	{
 		return referenceId;
 	}
-	
+
 	/**
 	 * Sets the JW ID to send if necessary
 	 *
@@ -419,12 +421,13 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 	{
 		this.referenceId = referenceId;
 	}
-	
+
 	@JsonIgnore
 	public boolean isConfigured()
 	{
 		return true;
 	}
+
 	@JsonIgnore
 	public boolean isInitialized()
 	{
@@ -433,13 +436,16 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 
 	public void init()
 	{
+		//No configuration needed
 	}
 
 	public void preConfigure()
 	{
+		//No configuration needed
 	}
 
 	public void destroy()
 	{
+		//No configuration needed
 	}
 }

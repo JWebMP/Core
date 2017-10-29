@@ -14,15 +14,38 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.base.servlets.interfaces;
+package za.co.mmagon.jwebswing.exceptions;
 
 /**
- * Defines a collection of component types
+ * Occurs when no Servlet was found in an event situation
  *
- * @author MMagon
+ * @author GedMarc
+ * @since 09 May 2016
  */
-
-public interface IComponentType
+public class MissingComponentException extends Exception
 {
-
+	
+	public MissingComponentException()
+	{
+	}
+	
+	public MissingComponentException(String message)
+	{
+		super(message);
+	}
+	
+	public MissingComponentException(String message, Throwable cause)
+	{
+		super(message, cause);
+	}
+	
+	public MissingComponentException(Throwable cause)
+	{
+		super(cause);
+	}
+	
+	public MissingComponentException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
+	{
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
 }

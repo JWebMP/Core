@@ -42,7 +42,7 @@ public enum FontVariants implements CSSEnumeration<FontVariants>
 	/**
 	 * Sets this field as not set
 	 */
-	Unset;;
+	Unset;
 
 	@Override
 	public String toString()

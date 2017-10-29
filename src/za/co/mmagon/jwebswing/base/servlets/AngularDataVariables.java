@@ -19,6 +19,7 @@ package za.co.mmagon.jwebswing.base.servlets;
 import com.armineasy.injection.GuiceContext;
 import com.google.inject.Singleton;
 import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 import za.co.mmagon.logger.LogFactory;
 
 import javax.servlet.ServletException;
@@ -51,7 +52,7 @@ public class AngularDataVariables extends JWDefaultServlet
 	{
 		Page page = GuiceContext.inject().getInstance(Page.class);
 		StringBuilder output = page.getAngular().renderAngularJavascript(page);
-		writeOutput(output, "application/javascript;charset=UTF-8", Charset.forName("UTF-8"));
+		writeOutput(output, StaticStrings.HTML_HEADER_JAVASCRIPT, Charset.forName("UTF-8"));
 	}
 	
 	/**

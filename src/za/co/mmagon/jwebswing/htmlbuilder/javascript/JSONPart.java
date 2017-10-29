@@ -34,6 +34,7 @@ public class JSONPart extends JavaScriptPart
 
 	public JSONPart()
 	{
+		//No configuration needed
 	}
 
 	@Override

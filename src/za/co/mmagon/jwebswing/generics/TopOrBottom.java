@@ -38,15 +38,7 @@ public enum TopOrBottom
 	{
 
 	}
-	
-	/**
-	 * A new LeftOrRight with data
-	 */
-	TopOrBottom(String data)
-	{
 
-	}
-	
 	/**
 	 * Returns the name or the data contained within
 	 *

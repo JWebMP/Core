@@ -10,6 +10,7 @@ import za.co.mmagon.jwebswing.base.servlets.interfaces.IFeature;
  *
  * @author Marc Magon
  */
+@FunctionalInterface
 public interface IEvent extends IFeature
 {
 	

@@ -38,7 +38,7 @@ import java.util.regex.Matcher;
  */
 public class FileTemplates implements Serializable
 {
-	
+
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("FileTemplates");
 	/**
 	 * All registered templates
@@ -50,9 +50,9 @@ public class FileTemplates implements Serializable
 	 */
 	@JsonIgnore
 	private static final Map<String, StringBuilder> TemplateVariables = new ConcurrentHashMap<>();
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Returns all the template variables currently loaded into memory
 	 *
@@ -62,7 +62,7 @@ public class FileTemplates implements Serializable
 	{
 		return TemplateVariables;
 	}
-	
+
 	/**
 	 * Sets all the template scripts currently loaded in memory
 	 *
@@ -72,7 +72,7 @@ public class FileTemplates implements Serializable
 	{
 		return TemplateScripts;
 	}
-	
+
 	/**
 	 * Gets the text string for the template script
 	 *
@@ -84,7 +84,7 @@ public class FileTemplates implements Serializable
 	{
 		return TemplateScripts.get(templateName);
 	}
-	
+
 	/**
 	 * Sets the template script
 	 *
@@ -95,7 +95,7 @@ public class FileTemplates implements Serializable
 	{
 		TemplateScripts.put(templateName, templateScript);
 	}
-	
+
 	/**
 	 * Get the map of all the template scripts
 	 *
@@ -107,18 +107,88 @@ public class FileTemplates implements Serializable
 	{
 		if (TemplateScripts.containsKey(template) && TemplateScripts.get(template) != null)
 		{
-			StringBuilder output = processTemplate(template, getTemplateScripts().get(template).toString());
-			return output;
+			return processTemplate(template, getTemplateScripts().get(template).toString());
 		}
-		
+
 		return new StringBuilder();
 	}
-	
+
+	/**
+	 * Replaces all instances of the following
+	 *
+	 * @param templateName
+	 * 		The name of the template being processed
+	 * @param template
+	 * 		The physical string to process
+	 *
+	 * @return
+	 */
+	public static StringBuilder processTemplate(String templateName, String template)
+	{
+		String templateOutput = template;
+		for (String templateVariable : getTemplateVariables().keySet())
+		{
+			String templateScript = Matcher.quoteReplacement(getTemplateVariables().get(templateVariable).toString());
+			String templateNameClean = templateVariable;
+			try
+			{
+				templateOutput = templateOutput.replaceAll("" + templateNameClean + "", templateScript);
+			}
+			catch (IllegalArgumentException iae)
+			{
+				LOG.log(Level.CONFIG, "[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[{0}];[Script]-[{1}]", new Object[]
+						                                                                                                                       {
+								                                                                                                                       templateVariable, templateScript
+						                                                                                                                       });
+				LOG.severe(TextUtilities.stackTraceToString(iae));
+			}
+		}
+		TemplateScripts.put(templateName, new StringBuilder(templateOutput.trim()));
+		return TemplateScripts.get(templateName);
+	}
+
+	/**
+	 * Replaces all instances of the following
+	 * <p>
+	 * %%APP%% - the angular module application name %%DIRECTIVES%% - the angular directives %%MODULES%% the modules generates %%CONTROLLER%% the modules generates
+	 *
+	 * @param templateName
+	 * 		The template name
+	 * @param template
+	 * 		the template to build
+	 *
+	 * @return the name
+	 */
+	public static StringBuilder compileTemplate(String templateName, String template)
+	{
+		return processTemplate(templateName, template);
+	}
+
+	/**
+	 * Replaces all instances of the following
+	 * <p>
+	 * %%APP%% - the angular module application name %%DIRECTIVES%% - the angular directives %%MODULES%% the modules generates %%CONTROLLER%% the modules generates
+	 *
+	 * @param referenceClass
+	 * 		The class to find where the file is at
+	 * @param templateName
+	 * 		the template to use
+	 *
+	 * @return the name
+	 */
+	public static StringBuilder compileTemplate(Class referenceClass, String templateName)
+	{
+		String template = getFileTemplate(referenceClass, templateName).toString();
+		return processTemplate(templateName, template);
+	}
+
 	/**
 	 * Returns the template as a string
 	 *
-	 * @param referenceClass The class to reference to locate the file
-	 * @param templateName   The file without .min.js or .js attached to it
+	 * @param referenceClass
+	 * 		The class to reference to locate the file
+	 * @param templateName
+	 * 		The file without .min.js or .js attached to it
 	 *
 	 * @return The string for the file
 	 */
@@ -126,12 +196,14 @@ public class FileTemplates implements Serializable
 	{
 		return getFileTemplate(referenceClass, templateName, templateName);
 	}
-	
+
 	/**
 	 * Returns the template as a string
 	 *
-	 * @param referenceClass The class to reference to locate the file
-	 * @param templateName   The file without .min.js or .js attached to it
+	 * @param referenceClass
+	 * 		The class to reference to locate the file
+	 * @param templateName
+	 * 		The file without .min.js or .js attached to it
 	 * @param fileName
 	 *
 	 * @return The string for the file
@@ -148,7 +220,7 @@ public class FileTemplates implements Serializable
 				{
 					templateFileName += ".js";
 				}
-				
+
 				byte[] fileContents;
 				try (InputStream is = referenceClass.getResourceAsStream(templateFileName))
 				{
@@ -172,68 +244,5 @@ public class FileTemplates implements Serializable
 			}
 		}
 		return TemplateScripts.get(templateName);
-	}
-	
-	/**
-	 * Replaces all instances of the following
-	 * <p>
-	 * %%APP%% - the angular module application name %%DIRECTIVES%% - the angular directives %%MODULES%% the modules generates %%CONTROLLER%% the modules generates
-	 *
-	 * @param templateName The template name
-	 * @param template     the template to build
-	 *
-	 * @return the name
-	 */
-	public static StringBuilder compileTemplate(String templateName, String template)
-	{
-		return processTemplate(templateName, template);
-	}
-	
-	/**
-	 * Replaces all instances of the following
-	 *
-	 * @param templateName The name of the template being processed
-	 * @param template     The physical string to process
-	 *
-	 * @return
-	 */
-	public static StringBuilder processTemplate(String templateName, String template)
-	{
-		String templateOutput = template;
-		for (String templateVariable : getTemplateVariables().keySet())
-		{
-			String templateScript = Matcher.quoteReplacement(getTemplateVariables().get(templateVariable).toString());
-			String templateNameClean = templateVariable;
-			try
-			{
-				templateOutput = templateOutput.replaceAll("" + templateNameClean + "", templateScript);
-			}
-			catch (IllegalArgumentException iae)
-			{
-				LOG.log(Level.CONFIG, "[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[{0}];[Script]-[{1}]", new Object[]
-						{
-								templateVariable, templateScript
-						});
-				LOG.severe(TextUtilities.stackTraceToString(iae));
-			}
-		}
-		TemplateScripts.put(templateName, new StringBuilder(templateOutput.trim()));
-		return TemplateScripts.get(templateName);
-	}
-	
-	/**
-	 * Replaces all instances of the following
-	 * <p>
-	 * %%APP%% - the angular module application name %%DIRECTIVES%% - the angular directives %%MODULES%% the modules generates %%CONTROLLER%% the modules generates
-	 *
-	 * @param referenceClass The class to find where the file is at
-	 * @param templateName   the template to use
-	 *
-	 * @return the name
-	 */
-	public static StringBuilder compileTemplate(Class referenceClass, String templateName)
-	{
-		String template = getFileTemplate(referenceClass, templateName).toString();
-		return processTemplate(templateName, template);
 	}
 }

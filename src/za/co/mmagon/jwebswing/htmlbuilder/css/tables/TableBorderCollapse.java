@@ -59,9 +59,9 @@ public enum TableBorderCollapse implements CSSEnumeration<TableBorderCollapse>
 	/**
 	 * Sets this field as not set
 	 */
-	Unset;;
+	Unset;
 
-	private TableBorderCollapse()
+	TableBorderCollapse()
 	{
 	}
 

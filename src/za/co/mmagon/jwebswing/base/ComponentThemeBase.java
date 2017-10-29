@@ -33,26 +33,30 @@ import java.util.List;
 /**
  * A Theme-Able Component. Only requirement is a tag, keeping it separate for the many different ways that other developers have done their themes
  *
- * @param <A> Set of attributes
- * @param <F> Any features attached
- * @param <E> Any events
- * @param <J> This class
+ * @param <A>
+ * 		Set of attributes
+ * @param <F>
+ * 		Any features attached
+ * @param <E>
+ * 		Any events
+ * @param <J>
+ * 		This class
  *
  * @author GedMarc
  * @since 23 Apr 2016
  */
 public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentThemeBase<A, F, E, J>>
-		extends ComponentHTMLAngularBase<A, F, E, J> implements IComponentThemeBase<J>
+		extends ComponentHTMLAngularBase<A, F, E, J> implements IComponentThemeBase
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * The associated theme
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private ArrayList<Theme> themes;
-	
+
 	/**
 	 * Constructs a theme controller for a component
 	 *
@@ -62,7 +66,7 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 	{
 		super(componentType);
 	}
-	
+
 	/**
 	 * Returns a Theme Base interface of this component
 	 *
@@ -70,9 +74,9 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 	 */
 	public IComponentThemeBase asThemeBase()
 	{
-		return (ComponentThemeBase) this;
+		return this;
 	}
-	
+
 	/**
 	 * Adds in the JavaScript References for the Features
 	 *
@@ -83,20 +87,17 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 	{
 		List<JavascriptReference> allJs = super.getJavascriptReferencesAll();
 		getThemes().forEach((Theme feature)
-				                    ->
-		                    {
-			                    Theme.class.cast(feature).getJavascriptReferences().forEach((js)
-					                                                                                ->
-			                                                                                {
-				                                                                                if (!allJs.contains(js))
-				                                                                                {
-					                                                                                allJs.add(js);
-				                                                                                }
-			                                                                                });
-		                    });
+				                    -> Theme.class.cast(feature).getJavascriptReferences().forEach(js ->
+				                                                                                   {
+					                                                                                   if (!allJs.contains(js))
+					                                                                                   {
+						                                                                                   allJs.add(js);
+					                                                                                   }
+				                                                                                   })
+		                   );
 		return allJs;
 	}
-	
+
 	/**
 	 * Adds in the JavaScript References for the Features
 	 *
@@ -116,13 +117,13 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 				                    {
 					                    continue;
 				                    }
-				
+
 				                    allCss.add(next);
 			                    }
 		                    });
 		return allCss;
 	}
-	
+
 	/**
 	 * Returns the parents theme or the applied theme
 	 * <p>
@@ -138,7 +139,7 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 		}
 		return this.themes;
 	}
-	
+
 	@Override
 	public void destroy()
 	{
@@ -149,5 +150,33 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 		}
 		super.destroy();
 	}
-	
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof ComponentThemeBase))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		ComponentThemeBase<?, ?, ?, ?> that = (ComponentThemeBase<?, ?, ?, ?>) o;
+
+		return getThemes().equals(that.getThemes());
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getThemes().hashCode();
+		return result;
+	}
 }

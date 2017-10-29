@@ -5,6 +5,7 @@ import za.co.mmagon.jwebswing.base.ComponentFeatureBase;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class implements an ordered hierarchy of JQueries. This is useful is
@@ -15,8 +16,8 @@ import java.util.ArrayList;
 public class JQueryExecuteSynchronouslyFeature extends Feature<JavaScriptPart, JQueryExecuteSynchronouslyFeature>
 {
 
-	private ArrayList<ComponentFeatureBase> orderedWhenList = new ArrayList();
-	private ArrayList<ComponentFeatureBase> orderedThenList = new ArrayList();
+	private List<ComponentFeatureBase> orderedWhenList = new ArrayList();
+	private List<ComponentFeatureBase> orderedThenList = new ArrayList();
 
 	public JQueryExecuteSynchronouslyFeature()
 	{
@@ -38,7 +39,6 @@ public class JQueryExecuteSynchronouslyFeature extends Feature<JavaScriptPart, J
 	@Override
 	public void assignFunctionsToComponent()
 	{
-		ArrayList<String> queries = new ArrayList();
 		StringBuilder query = new StringBuilder("$.when(");
 		for (ComponentFeatureBase feature : orderedWhenList)
 		{
@@ -50,7 +50,39 @@ public class JQueryExecuteSynchronouslyFeature extends Feature<JavaScriptPart, J
 			query.append(feature.renderJavascript());
 		}
 		query.append(");");
-
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof JQueryExecuteSynchronouslyFeature))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		JQueryExecuteSynchronouslyFeature that = (JQueryExecuteSynchronouslyFeature) o;
+
+		if (!orderedWhenList.equals(that.orderedWhenList))
+		{
+			return false;
+		}
+		return orderedThenList.equals(that.orderedThenList);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + orderedWhenList.hashCode();
+		result = 31 * result + orderedThenList.hashCode();
+		return result;
+	}
 }

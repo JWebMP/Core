@@ -48,7 +48,8 @@ public abstract class DropOverAdapter extends Event
 	/**
 	 * Performs a click
 	 *
-	 * @param component The component this click is going to be acting on
+	 * @param component
+	 * 		The component this click is going to be acting on
 	 */
 	public DropOverAdapter(Component component)
 	{
@@ -99,8 +100,10 @@ public abstract class DropOverAdapter extends Event
 	 * Triggers on Drop
 	 * <p>
 	 *
-	 * @param call     The physical AJAX call
-	 * @param response The physical Ajax Receiver
+	 * @param call
+	 * 		The physical AJAX call
+	 * @param response
+	 * 		The physical Ajax Receiver
 	 */
 	public abstract void onDropOver(AjaxCall call, AjaxResponse response);
 
@@ -117,4 +120,32 @@ public abstract class DropOverAdapter extends Event
 		}
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof DropOverAdapter))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		DropOverAdapter that = (DropOverAdapter) o;
+
+		return getDirective().equals(that.getDirective());
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getDirective().hashCode();
+		return result;
+	}
 }

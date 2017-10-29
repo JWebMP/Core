@@ -35,11 +35,15 @@ import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_NEWLINE_TEXT;
+
 /**
  * Allows a component to have features and events
  *
- * @param <F> The allowed feature JavaScripts
- * @param <J> Component output for cloning. Returned on CloneComponent
+ * @param <F>
+ * 		The allowed feature JavaScripts
+ * @param <J>
+ * 		Component output for cloning. Returned on CloneComponent
  *
  * @since 23 Apr 2016
  */
@@ -47,12 +51,12 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		extends ComponentDependancyBase<J>
 		implements IComponentFeatureBase<F, J>
 {
-	
+
 	/**
 	 * Logger for the Component
 	 */
 	@JsonIgnore
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("Component");
+	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("ComponentFeatureBase");
 	/**
 	 * Serial Version for all Components and their compatibility
 	 *
@@ -96,12 +100,12 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 * The assigned priority for the given application
 	 */
 	private RequirementsPriority priority;
-	
+
 	/**
 	 * Specifies if this components JavaScript is rendered somewhere else
 	 */
 	private boolean javascriptRenderedElsewhere;
-	
+
 	/**
 	 * Constructs a new feature with the given name
 	 *
@@ -113,7 +117,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		this.name = name;
 		variables = new ArrayList<>();
 	}
-	
+
 	/**
 	 * Constructs a new component that can have features
 	 *
@@ -123,7 +127,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	{
 		super(componentType);
 	}
-	
+
 	/**
 	 * Returns an Attribute Base interface of this component
 	 *
@@ -133,7 +137,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	{
 		return this;
 	}
-	
+
 	/**
 	 * Returns a list of all the features associated with this component
 	 * <p>
@@ -148,7 +152,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		}
 		return features;
 	}
-	
+
 	@Override
 	public void preConfigure()
 	{
@@ -171,7 +175,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		}
 		super.preConfigure();
 	}
-	
+
 	/**
 	 * Initialize all the features
 	 */
@@ -192,7 +196,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		}
 		super.init();
 	}
-	
+
 	/**
 	 * Adds in the JavaScript References for the Features
 	 *
@@ -220,7 +224,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		                      });
 		return allJs;
 	}
-	
+
 	/**
 	 * Adds in the JavaScript References for the Features
 	 *
@@ -230,8 +234,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	public List<CSSReference> getCssReferencesAll()
 	{
 		List<CSSReference> allCss = super.getCssReferencesAll();
-		getFeatures().forEach((feature)
-				                      ->
+		getFeatures().forEach(feature ->
 		                      {
 			                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
 			                      if (cfb != null)
@@ -248,49 +251,15 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		                      });
 		return allCss;
 	}
-	
+
 	/**
-	 * Renders the JavaScript for this Builder
-	 *
-	 * @return
+	 * Use Add Query to add a query to the container
 	 */
-	@Override
-	public StringBuilder renderJavascript()
+	protected void assignFunctionsToComponent()
 	{
-		if (!isConfigured())
-		{
-			preConfigure();
-		}
-		StringBuilder sb = new StringBuilder();
-		ArrayList<String> allQueries = new ArrayList<>();
-		getQueriesAll().forEach(query
-				                        ->
-		                        {
-			                        if (query != null)
-			                        {
-				                        String queryS = query.toString();
-				                        if (queryS != null)
-				                        {
-					                        if (!allQueries.contains(queryS) || !queryS.isEmpty())
-					                        {
-						                        allQueries.add(query.toString());
-					                        }
-				                        }
-			                        }
-		                        });
-		allQueries.forEach(query ->
-		                   {
-			                   if (!query.trim().equals("\n"))
-			                   {
-				                   if (!sb.toString().contains(query))
-				                   {
-					                   sb.append(query);
-				                   }
-			                   }
-		                   });
-		return sb;
+		//Nothing needed to be here
 	}
-	
+
 	/**
 	 * Returns the queries
 	 *
@@ -306,7 +275,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		}
 		return queries;
 	}
-	
+
 	/**
 	 * Returns all Queries Associated with a component
 	 *
@@ -317,7 +286,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	{
 		return getQueries();
 	}
-	
+
 	/**
 	 * Specifies whether or not this feature actually contains some JavaScript lines or is just a link
 	 *
@@ -328,14 +297,21 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	{
 		return !getQueries().isEmpty();
 	}
-	
+
 	/**
-	 * Use Add Query to add a query to the container
+	 * Sets the name of the feature
+	 *
+	 * @param name
+	 * 		Sets the name of the feature
+	 *
+	 * @return
 	 */
-	protected void assignFunctionsToComponent()
+	public J setName(String name)
 	{
+		this.name = name;
+		return (J) this;
 	}
-	
+
 	/**
 	 * Returns the name of this feature
 	 *
@@ -346,20 +322,23 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	{
 		return name;
 	}
-	
+
 	/**
-	 * Sets the name of the feature
+	 * Removes a feature from the components collection
+	 * <p>
 	 *
-	 * @param name Sets the name of the feature
+	 * @param feature
+	 * 		The feature to be removed
+	 * 		<p>
 	 *
-	 * @return
+	 * @return True or false on whether it could be removed, e.g. if it ever existed.
 	 */
-	public J setName(String name)
+	@Override
+	public boolean removeFeature(F feature)
 	{
-		this.name = name;
-		return (J) this;
+		return getFeatures().remove(feature);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -390,7 +369,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		}
 		return Objects.equals(this.queries, other.queries);
 	}
-	
+
 	@Override
 	public int hashCode()
 	{
@@ -401,7 +380,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		hash = 97 * hash + Objects.hashCode(this.name);
 		return hash;
 	}
-	
+
 	/**
 	 * Sets the sort order for this feature. Default 10000
 	 *
@@ -412,7 +391,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	{
 		return sortOrder;
 	}
-	
+
 	/**
 	 * Gets the sort order for this feature Default 10000
 	 *
@@ -425,7 +404,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		this.sortOrder = sortOrder;
 		return (J) this;
 	}
-	
+
 	/**
 	 * Adds a feature to the collection
 	 *
@@ -447,7 +426,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		}
 		return (J) this;
 	}
-	
+
 	/**
 	 * Adds a feature to the collection
 	 *
@@ -471,7 +450,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		}
 		return (J) this;
 	}
-	
+
 	/**
 	 * Adds a query to the object queue
 	 *
@@ -487,22 +466,43 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		}
 		return (J) this;
 	}
-	
+
 	/**
-	 * Removes a feature from the components collection
-	 * <p>
+	 * Renders the JavaScript for this Builder
 	 *
-	 * @param feature The feature to be removed
-	 *                <p>
-	 *
-	 * @return True or false on whether it could be removed, e.g. if it ever existed.
+	 * @return
 	 */
 	@Override
-	public boolean removeFeature(F feature)
+	public StringBuilder renderJavascript()
 	{
-		return getFeatures().remove(feature);
+		if (!isConfigured())
+		{
+			preConfigure();
+		}
+		StringBuilder sb = new StringBuilder();
+		ArrayList<String> allQueries = new ArrayList<>();
+		getQueriesAll().forEach(query
+				                        ->
+		                        {
+			                        if (query != null)
+			                        {
+				                        String queryS = query.toString();
+				                        if (queryS != null && !allQueries.contains(queryS) || !queryS.isEmpty())
+				                        {
+					                        allQueries.add(query.toString());
+				                        }
+			                        }
+		                        });
+		allQueries.forEach(query ->
+		                   {
+			                   if (!query.trim().equals(STRING_NEWLINE_TEXT) && !sb.toString().contains(query))
+			                   {
+				                   sb.append(query);
+			                   }
+		                   });
+		return sb;
 	}
-	
+
 	/**
 	 * Adds a variable to the collection
 	 *
@@ -513,7 +513,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	{
 		getVariables().add(variable);
 	}
-	
+
 	/**
 	 * Removes a variable from the collection
 	 *
@@ -524,7 +524,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	{
 		getVariables().remove(variable);
 	}
-	
+
 	/**
 	 * Returns the list of variables
 	 *
@@ -539,7 +539,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		}
 		return variables;
 	}
-	
+
 	/**
 	 * Returns any client side options available with this component
 	 *
@@ -550,7 +550,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	{
 		return null;
 	}
-	
+
 	/**
 	 * Sets all features beneath to tiny
 	 *
@@ -568,7 +568,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		}
 		return super.setTiny(tiny);
 	}
-	
+
 	/**
 	 * Sets if this feature must be rendered in an $(document).ready statement
 	 *
@@ -579,7 +579,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	{
 		return renderAfterLoad;
 	}
-	
+
 	/**
 	 * Sets if this feature must be rendered in an $(document).ready statement
 	 *
@@ -592,7 +592,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		this.renderAfterLoad = renderAfterLoad;
 		return (J) this;
 	}
-	
+
 	/**
 	 * Gets the render priority of this feature
 	 *
@@ -603,7 +603,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	{
 		return priority;
 	}
-	
+
 	/**
 	 * Sets the render priority of this feature
 	 *
@@ -616,7 +616,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		this.priority = priority;
 		return (J) this;
 	}
-	
+
 	/**
 	 * Returns if the JavaScript for this component is rendered elsewhere
 	 *
@@ -626,7 +626,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	{
 		return javascriptRenderedElsewhere;
 	}
-	
+
 	/**
 	 * Returns if the JavaScript for this component is rendered elsewhere
 	 *
@@ -639,7 +639,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		this.javascriptRenderedElsewhere = javascriptRenderedElsewhere;
 		return (J) this;
 	}
-	
+
 	/**
 	 * Returns any hierarchal assigned component
 	 *
@@ -649,7 +649,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	{
 		return component;
 	}
-	
+
 	/**
 	 * Returns any hierarchal assigned component
 	 *
@@ -662,7 +662,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		this.component = component;
 		return (J) this;
 	}
-	
+
 	@Override
 	public void destroy()
 	{
@@ -683,5 +683,5 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		}
 		super.destroy();
 	}
-	
+
 }

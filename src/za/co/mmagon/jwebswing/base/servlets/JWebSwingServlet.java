@@ -26,11 +26,12 @@ import net.sf.uadetector.UserAgentStringParser;
 import za.co.mmagon.SiteBinder;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.annotations.SiteInterception;
-import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
 import za.co.mmagon.jwebswing.base.client.Browsers;
 import za.co.mmagon.jwebswing.base.html.Body;
 import za.co.mmagon.jwebswing.base.html.PreFormattedText;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
+import za.co.mmagon.jwebswing.exceptions.MissingComponentException;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 import za.co.mmagon.jwebswing.utilities.TextUtilities;
 import za.co.mmagon.logger.LogFactory;
 
@@ -56,7 +57,7 @@ import java.util.logging.Logger;
 @Singleton
 public class JWebSwingServlet extends JWDefaultServlet
 {
-	
+
 	/**
 	 * The logger for the swing Servlet
 	 */
@@ -65,40 +66,44 @@ public class JWebSwingServlet extends JWDefaultServlet
 	 * The logger for the session handler Servlet
 	 */
 	private static final Logger SESSION_LOG = LogFactory.getInstance().getLogger("SessionHandler");
-	
+
 	/**
 	 * Version 1
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	static
-	{
-	
-	}
-	
+
 	/**
 	 * Constructs a new JWebSwing Servlet that is not session aware
 	 */
 	public JWebSwingServlet()
 	{
-	
+		//Nothing Needed
 	}
-	
+
 	/**
-	 * Finds the page for the current URL
+	 * In the event of any error return this page.
 	 *
-	 * @return
+	 * @param t
+	 * 		The exception thrown
+	 *
+	 * @return The rendered HTML.
 	 */
-	private Page getPageFromGuice()
+	@Provides
+	@Named("ErrorPage")
+	@RequestScoped
+	protected Page getErrorPageHtml(Error t)
 	{
-		if (!GuiceContext.isBuildingInjector())
-		{
-			Page p = GuiceContext.inject().getInstance(Page.class);
-			return p;
-		}
-		return new Page();
+		Page p = new Page();
+		p.getPageFields().setTitle("ERROR : Error occured in application");
+		p.getPageFields().setAuthor("Marc Magon");
+		p.getPageFields().setDescription("JWebSwing Error Generated Page");
+		p.getPageFields().setGenerator("JWebSwing - https://sourceforge.net/projects/jwebswing/");
+		Body b = p.getBody();
+		b.add("The following error was encountered during render<br/><hr/>");
+		b.add(new PreFormattedText(TextUtilities.stackTraceToString(t)));
+		return p;
 	}
-	
+
 	/**
 	 * Reads the variables into the HTTP session
 	 *
@@ -119,110 +124,60 @@ public class JWebSwingServlet extends JWDefaultServlet
 			SESSION_LOG.log(Level.FINE, "[SessionID]-[{0}];[Name]-[User Login];[Action]-[Session Page Added];", request.getSession().getId());
 		}
 	}
-	
+
 	/**
-	 * Reads the user agent header into the browser object and places it for the page to render
+	 * Handles the HTTP <code>GET</code> method.
 	 *
 	 * @param request
-	 */
-	private void readBrowserInformation(HttpServletRequest request)
-	{
-		String headerInformation = request.getHeader("User-Agent");
-		ReadableUserAgent agent = GuiceContext.inject().getInstance(UserAgentStringParser.class).parse(headerInformation);
-		getPageFromGuice().setUserAgent(agent);
-		Browsers b;
-		if (agent.getVersionNumber().getMajor().isEmpty() && agent.getVersionNumber().getMinor().isEmpty())
-		{
-			b = Browsers.getBrowserFromNameAndVersion("Edge", 13);
-		}
-		else
-		{
-			b = Browsers.getBrowserFromNameAndVersion(agent.getName(), Double.parseDouble(agent.getVersionNumber().getMajor() + "." + agent.getVersionNumber().getMinor()));
-		}
-		getPageFromGuice().setBrowser(b);
-		
-		if (agent.getVersionNumber().getMajor() == null || agent.getVersionNumber().getMajor().isEmpty())
-		{
-			log.log(Level.INFO, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}];[Operating System]-[{3}];[Device Category]-[{4}];[Device]-[{5}];[CSS]-[{6}];[HTML]-[{7}];", new Object[]
-					{
-							request.getSession().getId(), b.getBrowserGroup().toString(), b.getBrowserVersion(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()
-					});
-		}
-		else
-		{
-			log.log(Level.INFO, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}.{3}];[Operating System]-[{4}];[Device Category]-[{5}];[Device]-[{6}];[CSS]-[{7}];[HTML]-[{8}];", new Object[]
-					{
-							request.getSession().getId(), agent.getName(), agent.getVersionNumber().getMajor(), agent.getVersionNumber().getMinor(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()
-					});
-		}
-	}
-	
-	/**
-	 * Sends the page out
-	 *
-	 * @param request
+	 * 		Servlet request
 	 * @param response
+	 * 		Servlet response
 	 *
+	 * @throws ServletException
+	 * 		if a Servlet-specific error occurs
 	 * @throws IOException
+	 * 		if an I/O error occurs
 	 */
-	private void sendPage(HttpServletRequest request, HttpServletResponse response) throws IOException
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException
 	{
-		response.setContentType("text/html;charset=UTF-8");
-		try (PrintWriter out = response.getWriter())
+		try
 		{
-			Date startDate = new Date();
-			StringBuilder output;
-			if (!GuiceContext.isBuildingInjector())
+			super.doGet(request, response);
+			if (request.getHeader("Content-Type") == null || request.getHeader("Content-Type").isEmpty())
 			{
-				intercept();
+				processRequest(request, response);
 			}
-			Page page = getPageFromGuice();
-			if (page.getOptions().isGoogleMapsJSApi())
-			{
-				page.getBody().addJavaScriptReference(new JavascriptReference("Google Maps API Reference", 1.0, "https://maps.googleapis.com/maps/api/js?key=" + page.getOptions().getGoogleMapsJSApi()));
-			}
-			output = getPageHTML(request.getSession());
-			
-			Date endDate = new Date();
-			Date transferStart = new Date();
-			out.println(output);
-			Date dataTransferDate = new Date();
-			log.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
-					{
-							request.getSession().getId(), endDate.getTime() - startDate.getTime(), output.length(), dataTransferDate.getTime() - transferStart.getTime()
-					});
 		}
-		catch (IOException ex)
+		catch (IOException | ServletException ex)
 		{
-			log.log(Level.SEVERE, "[Network]-[Connection Dead]", ex);
-			throw ex;
+			log.log(Level.SEVERE, "SwingServlet", ex);
 		}
 	}
-	
-	@SiteInterception
-	protected void intercept()
-	{
-	
-	}
-	
+
 	/**
 	 * Processes requests for the WebSwing Servlet.
 	 *
-	 * @param request  The Default Servlet request
-	 * @param response The Default Servlet response
+	 * @param request
+	 * 		The Default Servlet request
+	 * @param response
+	 * 		The Default Servlet response
 	 *
-	 * @throws ServletException if a Servlet-specific error occurs
-	 * @throws IOException      if an I/O error occurs
+	 * @throws ServletException
+	 * 		if a Servlet-specific error occurs
+	 * @throws IOException
+	 * 		if an I/O error occurs
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
+			throws IOException
 	{
 		if (GuiceContext.isBuildingInjector())
 		{
 			log.fine("Guice is still building, ignoring this request");
 			return;
 		}
-		
+
 		try
 		{
 			readRequestVariables(request);
@@ -238,9 +193,9 @@ public class JWebSwingServlet extends JWDefaultServlet
 		}
 		catch (IOException | NumberFormatException ex)
 		{
-			
+
 			log.log(Level.SEVERE, "Couldn't Render Page in Servlet. Fatal Error.", ex);
-			response.setContentType("text/html;charset=UTF-8");
+			response.setContentType(StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE);
 			try (PrintWriter out = response.getWriter())
 			{
 				out.println(getErrorPageHtml(ex).toString(true));
@@ -250,10 +205,10 @@ public class JWebSwingServlet extends JWDefaultServlet
 				log.log(Level.SEVERE, "Unable to generate page html to return!", ex1);
 			}
 		}
-		catch (Error | Exception t)
+		catch (Exception t)
 		{
 			log.log(Level.SEVERE, "Unable to render page", t);
-			response.setContentType("text/html;charset=UTF-8");
+			response.setContentType(StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE);
 			PrintWriter out = null;
 			try
 			{
@@ -280,23 +235,91 @@ public class JWebSwingServlet extends JWDefaultServlet
 			}
 		}
 	}
-	
+
 	/**
-	 * Generates the Page HTML
+	 * Reads the user agent header into the browser object and places it for the page to render
 	 *
-	 * @return
+	 * @param request
 	 */
-	private StringBuilder getPageHTML(HttpSession session)
+	private void readBrowserInformation(HttpServletRequest request)
 	{
-		StringBuilder html;
-		html = new StringBuilder(getPageFromGuice().toString(true));
-		return html;
+		String headerInformation = request.getHeader("User-Agent");
+		ReadableUserAgent agent = GuiceContext.inject().getInstance(UserAgentStringParser.class).parse(headerInformation);
+		getPageFromGuice().setUserAgent(agent);
+		Browsers b;
+		if (agent.getVersionNumber().getMajor().isEmpty() && agent.getVersionNumber().getMinor().isEmpty())
+		{
+			b = Browsers.getBrowserFromNameAndVersion("Edge", 13);
+		}
+		else
+		{
+			b = Browsers.getBrowserFromNameAndVersion(agent.getName(), Double.parseDouble(agent.getVersionNumber().getMajor() + "." + agent.getVersionNumber().getMinor()));
+		}
+		getPageFromGuice().setBrowser(b);
+
+		if (agent.getVersionNumber().getMajor() == null || agent.getVersionNumber().getMajor().isEmpty())
+		{
+			log.log(Level.INFO, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}];[Operating System]-[{3}];[Device Category]-[{4}];[Device]-[{5}];[CSS]-[{6}];[HTML]-[{7}];", new Object[]
+					                                                                                                                                                                   {
+							                                                                                                                                                                   request.getSession().getId(), b.getBrowserGroup().toString(), b.getBrowserVersion(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()
+					                                                                                                                                                                   });
+		}
+		else
+		{
+			log.log(Level.INFO, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}.{3}];[Operating System]-[{4}];[Device Category]-[{5}];[Device]-[{6}];[CSS]-[{7}];[HTML]-[{8}];", new Object[]
+					                                                                                                                                                                       {
+							                                                                                                                                                                       request.getSession().getId(), agent.getName(), agent.getVersionNumber().getMajor(), agent.getVersionNumber().getMinor(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()
+					                                                                                                                                                                       });
+		}
 	}
-	
+
+	/**
+	 * Sends the page out
+	 *
+	 * @param request
+	 * @param response
+	 *
+	 * @throws IOException
+	 */
+	private void sendPage(HttpServletRequest request, HttpServletResponse response) throws IOException
+	{
+		response.setContentType(StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE);
+		try (PrintWriter out = response.getWriter())
+		{
+			Date startDate = new Date();
+			StringBuilder output;
+			if (!GuiceContext.isBuildingInjector())
+			{
+				intercept();
+			}
+			Page page = getPageFromGuice();
+			if (page.getOptions().isGoogleMapsJSApi())
+			{
+				page.getBody().addJavaScriptReference(new JavascriptReference("Google Maps API Reference", 1.0, "https://maps.googleapis.com/maps/api/js?key=" + page.getOptions().getGoogleMapsJSApi()));
+			}
+			output = getPageHTML();
+
+			Date endDate = new Date();
+			Date transferStart = new Date();
+			out.println(output);
+			Date dataTransferDate = new Date();
+			log.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
+					                                                                                                    {
+							                                                                                                    request.getSession().getId(), endDate.getTime() - startDate.getTime(), output.length(), dataTransferDate.getTime() - transferStart.getTime()
+					                                                                                                    });
+		}
+		catch (IOException ex)
+		{
+			log.log(Level.SEVERE, "[Network]-[Connection Dead]", ex);
+			throw ex;
+		}
+	}
+
 	/**
 	 * In the event of any error return this page.
 	 *
-	 * @param t The exception thrown
+	 * @param t
+	 * 		The exception thrown
 	 *
 	 * @return The rendered HTML.
 	 */
@@ -312,30 +335,27 @@ public class JWebSwingServlet extends JWDefaultServlet
 		b.add(new PreFormattedText(TextUtilities.stackTraceToString(t)));
 		return p;
 	}
-	
+
 	/**
-	 * In the event of any error return this page.
+	 * Finds the page for the current URL
 	 *
-	 * @param t The exception thrown
-	 *
-	 * @return The rendered HTML.
+	 * @return
 	 */
-	@Provides
-	@Named("ErrorPage")
-	@RequestScoped
-	protected Page getErrorPageHtml(Error t)
+	private Page getPageFromGuice()
 	{
-		Page p = new Page();
-		p.getPageFields().setTitle("ERROR : Error occured in application");
-		p.getPageFields().setAuthor("Marc Magon");
-		p.getPageFields().setDescription("JWebSwing Error Generated Page");
-		p.getPageFields().setGenerator("JWebSwing - https://sourceforge.net/projects/jwebswing/");
-		Body b = p.getBody();
-		b.add("The following error was encountered during render<br/><hr/>");
-		b.add(new PreFormattedText(TextUtilities.stackTraceToString(t)));
-		return p;
+		if (!GuiceContext.isBuildingInjector())
+		{
+			return GuiceContext.inject().getInstance(Page.class);
+		}
+		return new Page();
 	}
-	
+
+	@SiteInterception
+	protected void intercept()
+	{
+		//Interception Method
+	}
+
 	/**
 	 * Return the Mobile Page HTML
 	 *
@@ -353,34 +373,19 @@ public class JWebSwingServlet extends JWDefaultServlet
 		html = new StringBuilder(getPageFromGuice().toString(true));
 		return html;
 	}
-	
+
 	/**
-	 * Handles the HTTP <code>GET</code> method.
+	 * Generates the Page HTML
 	 *
-	 * @param request  Servlet request
-	 * @param response Servlet response
-	 *
-	 * @throws ServletException if a Servlet-specific error occurs
-	 * @throws IOException      if an I/O error occurs
+	 * @return
 	 */
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
+	private StringBuilder getPageHTML()
 	{
-		try
-		{
-			super.doGet(request, response);
-			if (request.getHeader("Content-Type") == null || request.getHeader("Content-Type").isEmpty())
-			{
-				processRequest(request, response);
-			}
-		}
-		catch (IOException | ServletException ex)
-		{
-			log.log(Level.SEVERE, "SwingServlet", ex);
-		}
+		StringBuilder html;
+		html = new StringBuilder(getPageFromGuice().toString(true));
+		return html;
 	}
-	
+
 	@Override
 	public void destroy()
 	{
@@ -391,26 +396,20 @@ public class JWebSwingServlet extends JWDefaultServlet
 			Set<Class<?>> pages = SiteBinder.getPages();
 			for (Class<?> page : pages)
 			{
-				if (page.equals(Page.class))
+				if (page.equals(Page.class) || Modifier.isAbstract(page.getModifiers()))
 				{
 					continue;
 				}
-				if (Modifier.isAbstract(page.getModifiers()))
-				{
-					continue;
-				}
-				
 				Page p = (Page) GuiceContext.getInstance(page);
 				p.destroy();
 			}
-			
+
 			GuiceContext.destroy();
 			log.log(Level.INFO, "User Agent Parser Shutdown");
 		}
-		catch (Throwable t)
+		catch (Exception t)
 		{
 			log.log(Level.SEVERE, "Unable to destroy", t);
-			t.printStackTrace();
 		}
 		super.destroy();
 	}

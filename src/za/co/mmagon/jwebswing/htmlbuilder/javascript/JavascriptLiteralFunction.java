@@ -29,16 +29,12 @@ import java.util.List;
  */
 public abstract class JavascriptLiteralFunction extends JavascriptFunction
 {
-	
+
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The closing string '}'
 	 */
 	private final StringBuilder literalFunctionEndingString = new StringBuilder("}");
-	/**
-	 * the middle rendered string
-	 */
-	//private StringBuilder literalFunction;
 	/**
 	 * The first rendered starting string
 	 */
@@ -47,45 +43,49 @@ public abstract class JavascriptLiteralFunction extends JavascriptFunction
 	 * Any arguments to be passed into the function
 	 */
 	private List<String> functionArugments;
-	
+
 	/**
 	 * An actual function
 	 */
 	public JavascriptLiteralFunction()
 	{
-	
+
 	}
-	
+
 	/**
 	 * Adds the component, and all of its children's JavaScript into this function
 	 *
-	 * @param c               The root component to start at
-	 * @param includeChildren Whether or not to include children
+	 * @param c
+	 * 		The root component to start at
 	 */
+	public void addComponentsJavascript(Component c)
+	{
+		addComponentsJavascript(c, true);
+	}
+
+	/**
+	 * Adds the component, and all of its children's JavaScript into this function
+	 *
+	 * @param c
+	 * 		The root component to start at
+	 * @param includeChildren
+	 * 		Whether or not to include children
+	 */
+	@SuppressWarnings("unused")
 	public void addComponentsJavascript(Component c, boolean includeChildren)
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append(c.renderJavascriptAll());
 		getLiteralFunction().append(sb);
 	}
-	
-	/**
-	 * Adds the component, and all of its children's JavaScript into this function
-	 *
-	 * @param c The root component to start at
-	 */
-	public void addComponentsJavascript(Component c)
-	{
-		addComponentsJavascript(c, true);
-	}
-	
+
 	/**
 	 * The actual string to include in the function
 	 *
 	 * @return
 	 */
 	public abstract StringBuilder getLiteralFunction();
-	
+
 	/**
 	 * Returns this functions output string
 	 *
@@ -96,7 +96,7 @@ public abstract class JavascriptLiteralFunction extends JavascriptFunction
 	{
 		return renderFunction();
 	}
-	
+
 	/**
 	 * Sets the function's ending string
 	 *
@@ -106,7 +106,7 @@ public abstract class JavascriptLiteralFunction extends JavascriptFunction
 	{
 		return literalFunctionStartingString;
 	}
-	
+
 	/**
 	 * Sets the function starting string
 	 *
@@ -116,7 +116,7 @@ public abstract class JavascriptLiteralFunction extends JavascriptFunction
 	{
 		this.literalFunctionStartingString = literalFunctionStartingString;
 	}
-	
+
 	/**
 	 * Gets any functional argument that may be required
 	 *
@@ -130,7 +130,7 @@ public abstract class JavascriptLiteralFunction extends JavascriptFunction
 		}
 		return functionArugments;
 	}
-	
+
 	/**
 	 * Sets any functional arguments required
 	 *
@@ -140,7 +140,7 @@ public abstract class JavascriptLiteralFunction extends JavascriptFunction
 	{
 		this.functionArugments = functionArugments;
 	}
-	
+
 	/**
 	 * Renders this function (calls to string)
 	 *
@@ -156,5 +156,5 @@ public abstract class JavascriptLiteralFunction extends JavascriptFunction
 		returnable.append(literalFunctionEndingString);
 		return returnable.toString();
 	}
-	
+
 }

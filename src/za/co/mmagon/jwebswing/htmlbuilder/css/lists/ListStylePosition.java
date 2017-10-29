@@ -48,9 +48,9 @@ public enum ListStylePosition implements CSSEnumeration<ListStylePosition>
 	/**
 	 * Sets this field as not set
 	 */
-	Unset;;
+	Unset;
 
-	private ListStylePosition()
+	ListStylePosition()
 	{
 	}
 

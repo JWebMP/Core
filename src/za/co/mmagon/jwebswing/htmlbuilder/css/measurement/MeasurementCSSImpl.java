@@ -7,6 +7,9 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationAdapt
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationClass;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationValue;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_EMPTY;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SINGLE_QUOTES;
+
 /**
  * Any basic measurement
  *
@@ -100,9 +103,22 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter<MeasurementCSS,
 	 *
 	 * @return
 	 */
-	public double value()
+	public Double value()
 	{
 		return value;
+	}
+
+	/**
+	 * Returns the measure formatted in quotes
+	 *
+	 * @param renderQuotes
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("'unused")
+	public String toString(boolean renderQuotes)
+	{
+		return toString().replace(STRING_SINGLE_QUOTES, STRING_EMPTY);
 	}
 
 	/**
@@ -115,15 +131,12 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter<MeasurementCSS,
 	@Override
 	public String toString()
 	{
-	    /*
-	     * if (measurementType == null) { return ""; }
-         */
-		if (Double.class.cast(value).toString().endsWith(".0")) //format as an integer
+		if (Double.class.cast(value).toString().endsWith(".0"))
 		{
 			Integer valInt = Double.class.cast(value).intValue();
 			if (MeasurementType().isRequiresQuotes())
 			{
-				return "'" + valInt + "" + MeasurementType().getHtmlAnnotation() + "'";
+				return STRING_SINGLE_QUOTES + valInt + MeasurementType().getHtmlAnnotation() + STRING_SINGLE_QUOTES;
 			}
 			else
 			{
@@ -132,30 +145,13 @@ public class MeasurementCSSImpl extends CSSImplementationAdapter<MeasurementCSS,
 		}
 		else if (MeasurementType().isRequiresQuotes())
 		{
-			return "'" + value + "" + MeasurementType().getHtmlAnnotation() + "'";
+			return STRING_SINGLE_QUOTES + value + MeasurementType().getHtmlAnnotation() + STRING_SINGLE_QUOTES;
 		}
 		else
 		{
-			return value + "" + MeasurementType().getHtmlAnnotation();
+			return value + MeasurementType().getHtmlAnnotation();
 		}
 
-	}
-
-	/**
-	 * Returns the measure formatted in quotes
-	 *
-	 * @param renderQuotes
-	 *
-	 * @return
-	 */
-	public String toString(boolean renderQuotes)
-	{
-		return toString().replace("\'", "");
-        /*
-         * if (renderQuotes) { return "'" + value + "" + MeasurementType() == null ? "" : MeasurementType().getHtmlAnnotation() + "'"; } else { return value + "" + MeasurementType() == null ? "" :
-         * MeasurementType().getHtmlAnnotation();
-        }
-         */
 	}
 
 	/**

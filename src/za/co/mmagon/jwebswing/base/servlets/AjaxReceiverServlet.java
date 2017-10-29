@@ -23,8 +23,8 @@ import za.co.mmagon.jwebswing.annotations.AjaxCallInterception;
 import za.co.mmagon.jwebswing.annotations.SiteInterception;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ajax.*;
-import za.co.mmagon.jwebswing.base.ajax.exceptions.InvalidRequestException;
-import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
+import za.co.mmagon.jwebswing.exceptions.InvalidRequestException;
+import za.co.mmagon.jwebswing.exceptions.MissingComponentException;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.utilities.TextUtilities;
 import za.co.mmagon.logger.LogFactory;
@@ -49,15 +49,15 @@ import java.util.logging.Logger;
 @Singleton
 public class AjaxReceiverServlet extends JWDefaultServlet
 {
-	
+
 	private static final Logger log = LogFactory.getInstance().getLogger("AJAXServlet");
 	private static final long serialVersionUID = 1L;
-	
+
 	public AjaxReceiverServlet()
 	{
 		//Quick construction
 	}
-	
+
 	@SiteInterception
 	@AjaxCallInterception
 	protected void intercept()
@@ -66,15 +66,47 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 		 * Intercepted with the annotations
 		 */
 	}
-	
+
+	/**
+	 * Handles the HTTP <code>POST</code> method.
+	 *
+	 * @param request
+	 * 		Servlet request
+	 * @param response
+	 * 		Servlet response
+	 *
+	 * @throws ServletException
+	 * 		if a Servlet-specific error occurs
+	 * @throws IOException
+	 * 		if an I/O error occurs
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	{
+		try
+		{
+			super.doPost(request, response);
+			processRequest(request);
+		}
+		catch (ServletException | IOException e)
+		{
+			log.log(Level.SEVERE, "Error in post", e);
+		}
+
+	}
+
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
 	 *
-	 * @param request  Servlet request
-	 * @param response Servlet response
+	 * @param request
+	 * 		Servlet request
+	 * @param response
+	 * 		Servlet response
 	 *
-	 * @throws ServletException if a Servlet-specific error occurs
-	 * @throws IOException      if an I/O error occurs
+	 * @throws ServletException
+	 * 		if a Servlet-specific error occurs
+	 * @throws IOException
+	 * 		if an I/O error occurs
 	 */
 	protected void processRequest(HttpServletRequest request)
 	{
@@ -84,20 +116,20 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 			AjaxCall ajaxCallIncoming = (AjaxCall) new JavaScriptPart().From(request.getInputStream(), AjaxCall.class);
 			AjaxCall ajaxCall = GuiceContext.getInstance(AjaxCall.class);
 			ajaxCall.fromCall(ajaxCallIncoming);
-			
+
 			AjaxResponse ajaxResponse = GuiceContext.inject().getInstance(AjaxResponse.class);
 
 			validateCall(ajaxCall);
 			validatePage();
 			validateRequest(ajaxCall);
-			
+
 			Event triggerEvent = processEvent();
 
 			if (!GuiceContext.isBuildingInjector())
 			{
 				intercept();
 			}
-			
+
 			triggerEvent.fireEvent(ajaxCall, ajaxResponse);
 			output = new StringBuilder(ajaxResponse.toString());
 			ajaxResponse.getComponents().forEach(ComponentHierarchyBase::preConfigure);
@@ -143,7 +175,7 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 			writeOutput(output, "application/json;charset=UTF-8", Charset.forName("UTF-8"));
 		}
 	}
-	
+
 	protected Event processEvent() throws InvalidRequestException
 	{
 		Event triggerEvent = null;
@@ -172,36 +204,12 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 					break;
 				}
 			}
-			if(triggerEvent == null)
+			if (triggerEvent == null)
 			{
-				log.log(Level.FINEST,"Unable to find the event class specified",cnfe);
+				log.log(Level.FINEST, "Unable to find the event class specified", cnfe);
 				throw new InvalidRequestException("The Event To Be Triggered Could Not Be Found");
 			}
 		}
 		return triggerEvent;
-	}
-	
-	/**
-	 * Handles the HTTP <code>POST</code> method.
-	 *
-	 * @param request  Servlet request
-	 * @param response Servlet response
-	 *
-	 * @throws ServletException if a Servlet-specific error occurs
-	 * @throws IOException      if an I/O error occurs
-	 */
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	{
-		try
-		{
-			super.doPost(request, response);
-			processRequest(request);
-		}
-		catch (ServletException | IOException e)
-		{
-			log.log(Level.SEVERE, "Error in post", e);
-		}
-		
 	}
 }

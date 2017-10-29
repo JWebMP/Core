@@ -19,7 +19,8 @@ package za.co.mmagon.jwebswing.base.servlets;
 import com.armineasy.injection.GuiceContext;
 import com.google.inject.Singleton;
 import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException;
+import za.co.mmagon.jwebswing.exceptions.MissingComponentException;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 import za.co.mmagon.logger.LogFactory;
 
 import javax.servlet.ServletException;
@@ -39,62 +40,22 @@ import java.util.logging.Logger;
 @Singleton
 public class CSSServlet extends JWDefaultServlet
 {
-	
+
 	private static final Logger LOG = LogFactory.getInstance().getLogger("CSSServlet");
 	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-	 *
-	 * @param request  Servlet request
-	 * @param response Servlet response
-	 *
-	 * @throws ServletException if a Servlet-specific error occurs
-	 * @throws IOException      if an I/O error occurs
-	 */
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, MissingComponentException
-	{
-		Date startDate = new Date();
-		StringBuilder scripts = new StringBuilder();
-		
-		Page page = GuiceContext.inject().getInstance(Page.class);
-		
-		if (page == null)
-		{
-			throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
-		}
-		
-		StringBuilder css = page.getBody().renderCss(0);
-		scripts.append(css);
-		
-		Date endDate = new Date();
-		try (PrintWriter out = response.getWriter())
-		{
-			response.setContentType("text/css");
-			response.setHeader("Access-Control-Allow-Origin", "*");
-			response.setHeader("Access-Control-Allow-Credentials", "true");
-			response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
-			response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
-			
-			out.println(scripts);
-			Date dataTransferDate = new Date();
-			LOG.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]",
-			        new Object[]
-					        {
-							        request.getSession().getId(), endDate.getTime() - startDate.getTime(), scripts.length(), dataTransferDate.getTime() - startDate.getTime()
-					        });
-		}
-	}
-	
+
 	/**
 	 * Handles the HTTP <code>GET</code> method.
 	 *
-	 * @param request  Servlet request
-	 * @param response Servlet response
+	 * @param request
+	 * 		Servlet request
+	 * @param response
+	 * 		Servlet response
 	 *
-	 * @throws ServletException if a Servlet-specific error occurs
-	 * @throws IOException      if an I/O error occurs
+	 * @throws ServletException
+	 * 		if a Servlet-specific error occurs
+	 * @throws IOException
+	 * 		if an I/O error occurs
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -112,6 +73,54 @@ public class CSSServlet extends JWDefaultServlet
 		catch (MissingComponentException ex)
 		{
 			Logger.getLogger(CSSServlet.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+
+	/**
+	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+	 *
+	 * @param request
+	 * 		Servlet request
+	 * @param response
+	 * 		Servlet response
+	 *
+	 * @throws ServletException
+	 * 		if a Servlet-specific error occurs
+	 * @throws IOException
+	 * 		if an I/O error occurs
+	 */
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, MissingComponentException
+	{
+		Date startDate = new Date();
+		StringBuilder scripts = new StringBuilder();
+
+		Page page = GuiceContext.inject().getInstance(Page.class);
+
+		if (page == null)
+		{
+			throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
+		}
+
+		StringBuilder css = page.getBody().renderCss(0);
+		scripts.append(css);
+
+		Date endDate = new Date();
+		try (PrintWriter out = response.getWriter())
+		{
+			response.setContentType("text/css");
+			response.setHeader(StaticStrings.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER_NAME, "*");
+			response.setHeader(StaticStrings.ACCESS_CONTROL_ALLOW_CREDENTIALS_HEADER_NAME, "true");
+			response.setHeader(StaticStrings.ACCESS_CONTROL_ALLOW_METHODS_HEADER_NAME, "GET, POST, DELETE, PUT");
+			response.setHeader(StaticStrings.ACCESS_CONTROL_ALLOW_HEADERS_HEADER_NAME, "Content-Type, Accept");
+
+			out.println(scripts);
+			Date dataTransferDate = new Date();
+			LOG.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]",
+			        new Object[]
+					        {
+							        request.getSession().getId(), endDate.getTime() - startDate.getTime(), scripts.length(), dataTransferDate.getTime() - startDate.getTime()
+					        });
 		}
 	}
 }

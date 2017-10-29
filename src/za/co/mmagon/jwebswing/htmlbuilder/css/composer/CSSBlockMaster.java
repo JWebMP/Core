@@ -30,7 +30,7 @@ public class CSSBlockMaster
 	 * A list of all the existing css blocks
 	 */
 	private List<CSSBlock> allBlocks;
-	
+
 	/**
 	 * Creates a new block master
 	 */
@@ -38,7 +38,7 @@ public class CSSBlockMaster
 	{
 		//Nothing Needed
 	}
-	
+
 	/**
 	 * Restart a block building section
 	 */
@@ -46,18 +46,19 @@ public class CSSBlockMaster
 	{
 		allBlocks.clear();
 	}
-	
+
 	/**
 	 * Adds a block to the CSS Composer
 	 *
-	 * @param block The block to add to the composer
+	 * @param block
+	 * 		The block to add to the composer
 	 */
 	public void addBlock(CSSBlock block)
 	{
 		CSSBlock dupLines;
 		if (!getAllCSSBlocks().contains(block))
 		{
-			
+
 			if ((dupLines = checkBlocksForDuplicateLines(block)) != null)
 			{
 				dupLines.addLinkedBlock(block);
@@ -68,24 +69,12 @@ public class CSSBlockMaster
 			}
 		}
 	}
-	
-	/**
-	 * Adds a block to the CSS Composer
-	 *
-	 * @param block
-	 *
-	 * @return
-	 */
-	public List<CSSBlock> addBlock(List<CSSBlock> block)
-	{
-		block.forEach(cssBlock -> addBlock(cssBlock));
-		return block;
-	}
-	
+
 	/**
 	 * Returns any duplicate blocks
 	 *
-	 * @param blockToCompare The block to compare against
+	 * @param blockToCompare
+	 * 		The block to compare against
 	 *
 	 * @return The block with the same lines
 	 */
@@ -101,11 +90,26 @@ public class CSSBlockMaster
 		}
 		return null;
 	}
-	
+
+	/**
+	 * Adds a block to the CSS Composer
+	 *
+	 * @param block
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unused")
+	public List<CSSBlock> addBlock(List<CSSBlock> block)
+	{
+		block.forEach(this::addBlock);
+		return block;
+	}
+
 	/**
 	 * Checks if the ID of a block is loaded for this composer
 	 *
-	 * @param block The block to check
+	 * @param block
+	 * 		The block to check
 	 *
 	 * @return True if the ID is already complete
 	 */
@@ -113,7 +117,7 @@ public class CSSBlockMaster
 	{
 		return getAllCSSBlocks().stream().anyMatch(cssBlock -> (block.getIdOfBlock().equalsIgnoreCase(cssBlock.getIdOfBlock())));
 	}
-	
+
 	/**
 	 * Return the list of CSS Blocks loaded in this composer
 	 *
@@ -128,7 +132,7 @@ public class CSSBlockMaster
 		}
 		return allBlocks;
 	}
-	
+
 	/**
 	 * Returns the generated CSS as small as possible
 	 *
@@ -147,11 +151,12 @@ public class CSSBlockMaster
 		                          });
 		return cssBlocksSB.toString();
 	}
-	
+
 	/**
 	 * Returns the generated CSS as small as possible
 	 *
-	 * @param ajax Placeholder - will always render as in-line
+	 * @param ajax
+	 * 		Placeholder - will always render as in-line
 	 *
 	 * @return The generated CSS
 	 */

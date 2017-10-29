@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.base.interfaces;
 
-import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
@@ -24,28 +23,29 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
 import java.util.List;
 
 /**
- * @param <J> This Class
+ * @param <J>
+ * 		This Class
  *
  * @author GedMarc
  * @since Sep 26, 2016
  */
-public interface IComponentThemeBase<J extends ComponentBase>
+public interface IComponentThemeBase
 {
-	
+
 	/**
 	 * Adds in the JavaScript References for the Features
 	 *
 	 * @return
 	 */
 	List<CSSReference> getCssReferencesAll();
-	
+
 	/**
 	 * Adds in the JavaScript References for the Features
 	 *
 	 * @return
 	 */
 	List<JavascriptReference> getJavascriptReferencesAll();
-	
+
 	/**
 	 * Returns the parents theme or the applied theme
 	 * <p>
@@ -53,5 +53,5 @@ public interface IComponentThemeBase<J extends ComponentBase>
 	 * @return The theme
 	 */
 	List<Theme> getThemes();
-	
+
 }

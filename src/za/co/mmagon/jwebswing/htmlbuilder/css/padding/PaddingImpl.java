@@ -22,6 +22,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationAdapt
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationClass;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SPACE;
+
 /**
  * To shorten the code, it is possible to specify all the margin properties in one property.
  *
@@ -62,14 +64,14 @@ public class PaddingImpl extends CSSImplementationAdapter<Padding, PaddingImpl> 
 	public String toString()
 	{
 		String out = "";
-		out += paddingTop + " ";
-		out += paddingTop$ + " ";
-		out += paddingRight + " ";
-		out += paddingRight$ + " ";
-		out += paddingBottom + " ";
-		out += paddingBottom$ + " ";
-		out += paddingLeft + " ";
-		out += paddingLeft$ + " ";
+		out += paddingTop + STRING_SPACE;
+		out += paddingTop$ + STRING_SPACE;
+		out += paddingRight + STRING_SPACE;
+		out += paddingRight$ + STRING_SPACE;
+		out += paddingBottom + STRING_SPACE;
+		out += paddingBottom$ + STRING_SPACE;
+		out += paddingLeft + STRING_SPACE;
+		out += paddingLeft$ + STRING_SPACE;
 		out = out.replaceAll("null", "");
 		out = out.trim();
 		return out;

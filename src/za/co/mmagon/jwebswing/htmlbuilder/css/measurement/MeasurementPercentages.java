@@ -25,7 +25,6 @@ package za.co.mmagon.jwebswing.htmlbuilder.css.measurement;
  */
 public class MeasurementPercentages
 {
-
 	/**
 	 * 1 hundred percent
 	 */
@@ -115,4 +114,14 @@ public class MeasurementPercentages
 	 * zero
 	 */
 	public static final MeasurementCSSImpl zero = new MeasurementCSSImpl(0, MeasurementTypes.Pixels);
+
+	/**
+	 * Access statically please
+	 */
+	private MeasurementPercentages()
+	{
+		//nothing needed
+	}
+
+
 }

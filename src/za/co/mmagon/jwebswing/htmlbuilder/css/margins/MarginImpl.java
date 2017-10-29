@@ -23,6 +23,9 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationClass
 import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.MarginSetting;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_EMPTY;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SPACE;
+
 /**
  * To shorten the code, it is possible to specify all the margin properties in one property.
  *
@@ -51,23 +54,27 @@ public class MarginImpl extends CSSImplementationAdapter<Margin, MarginImpl> imp
 	@CSSDetail(cssName = "margin-bottom", cssVersion = CSSVersions.CSS21)
 	private MarginSetting marginBottom$;
 
+	/**
+	 * Creates a new instance of the margin impl
+	 */
 	public MarginImpl()
 	{
+		//No configuration needed
 	}
 
 	@Override
 	public String toString()
 	{
 		String out = "";
-		out += marginTop + " ";
-		out += marginTop$ + " ";
-		out += marginRight + " ";
-		out += marginRight$ + " ";
-		out += marginBottom + " ";
-		out += marginBottom$ + " ";
-		out += marginLeft + " ";
-		out += marginLeft$ + " ";
-		out = out.replaceAll("null", "");
+		out += marginTop + STRING_SPACE;
+		out += marginTop$ + STRING_SPACE;
+		out += marginRight + STRING_SPACE;
+		out += marginRight$ + STRING_SPACE;
+		out += marginBottom + STRING_SPACE;
+		out += marginBottom$ + STRING_SPACE;
+		out += marginLeft + STRING_SPACE;
+		out += marginLeft$ + STRING_SPACE;
+		out = out.replaceAll("null", STRING_EMPTY);
 		out = out.trim();
 		return out;
 	}

@@ -59,9 +59,9 @@ public enum TableEmptyCells implements CSSEnumeration<TableEmptyCells>
 	/**
 	 * Sets this field as not set
 	 */
-	Unset;;
+	Unset;
 
-	private TableEmptyCells()
+	TableEmptyCells()
 	{
 	}
 

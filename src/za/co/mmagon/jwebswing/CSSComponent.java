@@ -35,9 +35,9 @@ public abstract class CSSComponent<J extends CSSComponent<J>>
 		extends Component<CSSComponent, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements GlobalChildren
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructs a new CSS Class with the given features and events associated
 	 * <p>
@@ -49,7 +49,7 @@ public abstract class CSSComponent<J extends CSSComponent<J>>
 		super(ComponentTypes.CSSClass);
 		setID(className);
 	}
-	
+
 	/**
 	 * Returns the component rendering for JQuery string Requires the rendering for component is set
 	 * <p>
@@ -61,13 +61,14 @@ public abstract class CSSComponent<J extends CSSComponent<J>>
 	{
 		return "$(\'" + getID(true) + "\').";
 	}
-	
+
 	/**
 	 * Returns the ID with the . in the front of it
 	 * <p>
 	 *
-	 * @param jQueryHolder Anything
-	 *                     <p>
+	 * @param jQueryHolder
+	 * 		Anything
+	 * 		<p>
 	 *
 	 * @return An ID starting with .
 	 */
@@ -76,7 +77,7 @@ public abstract class CSSComponent<J extends CSSComponent<J>>
 	{
 		return "." + getID();
 	}
-	
+
 	/**
 	 * Replaces the # with a .
 	 *
@@ -87,7 +88,7 @@ public abstract class CSSComponent<J extends CSSComponent<J>>
 	{
 		return super.getID().replace('#', '.');
 	}
-	
+
 	/**
 	 * CSS Components don't render any HTML
 	 *

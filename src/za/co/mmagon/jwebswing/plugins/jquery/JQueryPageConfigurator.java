@@ -46,7 +46,7 @@ import za.co.mmagon.jwebswing.plugins.PluginInformation;
 )
 public class JQueryPageConfigurator extends PageConfigurator
 {
-	
+
 	private static final long serialVersionUID = 1L;
 	/**
 	 * String property denoting JQuery is enabled on a page
@@ -56,12 +56,12 @@ public class JQueryPageConfigurator extends PageConfigurator
 	 * If the page must render JQuery 3
 	 */
 	private static boolean jquery3 = true;
-	
+
 	public JQueryPageConfigurator()
 	{
 		setSortOrder(99999998); //Always before angular
 	}
-	
+
 	/**
 	 * Sets the component/feature/hierarchy as JQuery required
 	 *
@@ -72,7 +72,7 @@ public class JQueryPageConfigurator extends PageConfigurator
 	{
 		component.getProperties().put(JQueryEnabledString, required.toString());
 	}
-	
+
 	/**
 	 * Whether or not this page must render JQuery 3
 	 *
@@ -82,7 +82,7 @@ public class JQueryPageConfigurator extends PageConfigurator
 	{
 		return jquery3;
 	}
-	
+
 	/**
 	 * Whether or not this page must render JQuery 3
 	 *
@@ -92,41 +92,19 @@ public class JQueryPageConfigurator extends PageConfigurator
 	{
 		JQueryPageConfigurator.jquery3 = jquery3;
 	}
-	
+
 	@Override
 	public Page configure(Page page)
 	{
 		if (page != null)
 		{
 			page.getBody().addJavaScriptReference(JQueryReferencePool.PersistJS.getJavaScriptReference());
-			
+
 			if (page.getBody().readChildrenPropertyFirstResult(JQueryEnabledString, true))
 			{
 				if (page.getBrowser() != null)
 				{
-					if (page.getBrowser().getBrowserGroup() == BrowserGroups.InternetExplorer)
-					{
-						if (page.getBrowser().getBrowserVersion() < 9)
-						{
-							page.getBody().removeJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
-							page.getBody().removeJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
-							page.getBody().removeJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
-							page.getBody().addJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());
-						}
-					}
-					else
-					{
-						page.getBody().removeJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());
-						if (isJquery3())
-						{
-							page.getBody().addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
-							page.getBody().addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
-						}
-						else
-						{
-							page.getBody().addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
-						}
-					}
+					page = configureForInternetExplorer(page);
 				}
 				else if (isJquery3())
 				{
@@ -136,12 +114,39 @@ public class JQueryPageConfigurator extends PageConfigurator
 				else
 				{
 					page.getBody().addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
-					//addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
 				}
 			}
 		}
-		
+
 		return page;
 	}
-	
+
+	private Page configureForInternetExplorer(Page page)
+	{
+		if (page.getBrowser().getBrowserGroup() == BrowserGroups.InternetExplorer)
+		{
+			if (page.getBrowser().getBrowserVersion() < 9)
+			{
+				page.getBody().removeJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
+				page.getBody().removeJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
+				page.getBody().removeJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
+				page.getBody().addJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());
+			}
+		}
+		else
+		{
+			page.getBody().removeJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());
+			if (isJquery3())
+			{
+				page.getBody().addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
+				page.getBody().addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
+			}
+			else
+			{
+				page.getBody().addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
+			}
+		}
+
+		return page;
+	}
 }

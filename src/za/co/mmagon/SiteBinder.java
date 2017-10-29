@@ -42,6 +42,7 @@ import za.co.mmagon.jwebswing.base.servlets.*;
 import za.co.mmagon.jwebswing.base.servlets.options.AngularDataServletInitData;
 import za.co.mmagon.logger.LogFactory;
 
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Modifier;
@@ -49,6 +50,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
+
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.*;
 
 /**
  * @author GedMarc
@@ -64,41 +67,94 @@ public class SiteBinder extends GuiceSiteBinder
 	 */
 	private static final UserAgentStringParser userAgentParser = UADetectorServiceFactory.getResourceModuleParser();
 
-	private static final String JavaScriptLocation = "/jwjs";
-	private static final String AjaxScriptLocation = "/jwajax";
-	private static final String CSSLocation = "/jwcss";
-	private static final String AngularDataLocation = "/jwad";
-	private static final String AngularScriptLocation = "/jwas";
-	private static final String JWScriptLocation = "/jwscr";
-	private static final String DataLocation = "/jwdata";
-
-
 	/**
 	 * Constructs a new instance, mostly for injection
 	 */
 	public SiteBinder()
 	{
-
+		//Nothing Needed
 	}
 
 	/**
-	 * Sets the query parameter regex, but the current one works fine. just in case
-	 *
-	 * @param QueryParametersRegex
-	 */
-	public static void setQueryParametersRegex(String QueryParametersRegex)
-	{
-		SiteBinder.QueryParametersRegex = QueryParametersRegex;
-	}
-
-	/**
-	 * Returns the query parameters
+	 * gets the location of the JavaScript Servlet
 	 *
 	 * @return
 	 */
-	public static String getQueryParametersRegex()
+	public static String getJavaScriptLocation()
 	{
-		return QueryParametersRegex;
+		return JAVASCRIPT_LOCATION;
+	}
+
+	/**
+	 * Gets the current Ajax location
+	 *
+	 * @return
+	 */
+	public static String getAjaxScriptLocation()
+	{
+		return AJAX_SCRIPT_LOCATION;
+	}
+
+	/**
+	 * Gets the CSS Location
+	 *
+	 * @return
+	 */
+	public static String getCSSLocation()
+	{
+		return CSS_LOCATION;
+	}
+
+	/**
+	 * Gets the angular script location
+	 *
+	 * @return
+	 */
+	public static String getAngularScriptLocation()
+	{
+		return ANGULAR_SCRIPT_LOCATION;
+	}
+
+	/**
+	 * Gets the data location
+	 *
+	 * @return
+	 */
+	public static String getDataLocation()
+	{
+		return DATA_LOCATION;
+	}
+
+	/**
+	 * Returns the angular data location
+	 *
+	 * @return
+	 */
+	public static String getAngularDataLocation()
+	{
+		return ANGULAR_DATA_LOCATION;
+	}
+
+	/**
+	 * The JW Script Location
+	 *
+	 * @return
+	 */
+	public static String getJWScriptLocation()
+	{
+		return JW_SCRIPT_LOCATION;
+	}
+
+	/**
+	 * Returns the url to access the data binding search
+	 *
+	 * @param component
+	 *
+	 * @return
+	 */
+	public static String getDataBindUrl(ComponentBase component)
+	{
+		return getDataLocation().replace("/", "") + "?component=" + component.getID();
 	}
 
 	@Override
@@ -156,13 +212,9 @@ public class SiteBinder extends GuiceSiteBinder
 		                                   {
 			                                   if (!GuiceContext.isBuildingInjector())
 			                                   {
-				                                   for (Class<? extends Object> next : getPages())
+				                                   for (Class<?> next : getPages())
 				                                   {
-					                                   if (Modifier.isAbstract(next.getModifiers()))
-					                                   {
-						                                   continue;
-					                                   }
-					                                   if (next.equals(Page.class))
+					                                   if (Modifier.isAbstract(next.getModifiers()) || next.equals(Page.class))
 					                                   {
 						                                   continue;
 					                                   }
@@ -189,7 +241,7 @@ public class SiteBinder extends GuiceSiteBinder
 						                                   }
 						                                   else
 						                                   {
-							                                   throw new RuntimeException("A JWebSwing Application must have a page applied. Please create a class that extends the za.co.mmagon.jwebswing.Page object.");
+							                                   throw new NoResultException("A JWebSwing Application must have a page applied. Please create a class that extends the za.co.mmagon.jwebswing.Page object.");
 
 						                                   }
 					                                   }
@@ -253,7 +305,7 @@ public class SiteBinder extends GuiceSiteBinder
 					continue;
 				}
 				PageConfiguration pc = page.getAnnotation(PageConfiguration.class);
-				module.serveRegex$("(" + pc.url() + ")" + QueryParametersRegex).with(JWebSwingServlet.class);
+				module.serveRegex$("(" + pc.url() + ")" + QUERY_PARAMETERS_REGEX).with(JWebSwingServlet.class);
 				log.log(Level.INFO, "Serving Page URL [{0}] with [{1}]", new Object[]
 						                                                         {
 								                                                         pc.url(), page.getCanonicalName()
@@ -261,110 +313,28 @@ public class SiteBinder extends GuiceSiteBinder
 			}
 		}
 
-		module.serveRegex$("(" + JavaScriptLocation + ")" + QueryParametersRegex).with(JavaScriptServlet.class);
-		log.log(Level.INFO, "Serving JavaScripts at {0}", JavaScriptLocation);
+		module.serveRegex$("(" + JAVASCRIPT_LOCATION + ")" + QUERY_PARAMETERS_REGEX).with(JavaScriptServlet.class);
+		log.log(Level.INFO, "Serving JavaScripts at {0}", JAVASCRIPT_LOCATION);
 
-		module.serveRegex$("(" + AjaxScriptLocation + ")" + QueryParametersRegex).with(AjaxReceiverServlet.class);
-		log.log(Level.INFO, "Serving Ajax at {0}", AjaxScriptLocation);
+		module.serveRegex$("(" + AJAX_SCRIPT_LOCATION + ")" + QUERY_PARAMETERS_REGEX).with(AjaxReceiverServlet.class);
+		log.log(Level.INFO, "Serving Ajax at {0}", AJAX_SCRIPT_LOCATION);
 
-		module.serveRegex$("(" + CSSLocation + ")" + QueryParametersRegex).with(CSSServlet.class);
-		log.log(Level.INFO, "Serving CSS at {0}", CSSLocation);
+		module.serveRegex$("(" + CSS_LOCATION + ")" + QUERY_PARAMETERS_REGEX).with(CSSServlet.class);
+		log.log(Level.INFO, "Serving CSS at {0}", CSS_LOCATION);
 
-		module.serveRegex$("(" + AngularDataLocation + ")" + QueryParametersRegex).with(AngularDataServlet.class);
-		log.log(Level.INFO, "Serving Angular Data at " + AngularDataLocation);
+		module.serveRegex$("(" + ANGULAR_DATA_LOCATION + ")" + QUERY_PARAMETERS_REGEX).with(AngularDataServlet.class);
+		log.log(Level.INFO, "Serving Angular Data at " + ANGULAR_DATA_LOCATION);
 
-		module.serveRegex$("(" + AngularScriptLocation + ")" + QueryParametersRegex).with(AngularServlet.class);
-		log.log(Level.INFO, "Serving Angular JavaScript at {0}", AngularScriptLocation);
+		module.serveRegex$("(" + ANGULAR_SCRIPT_LOCATION + ")" + QUERY_PARAMETERS_REGEX).with(AngularServlet.class);
+		log.log(Level.INFO, "Serving Angular JavaScript at {0}", ANGULAR_SCRIPT_LOCATION);
 
-		module.serveRegex$("(" + DataLocation + ")" + QueryParametersRegex).with(DataServlet.class);
-		log.log(Level.INFO, "Serving Data at {0}", DataLocation);
+		module.serveRegex$("(" + DATA_LOCATION + ")" + QUERY_PARAMETERS_REGEX).with(DataServlet.class);
+		log.log(Level.INFO, "Serving Data at {0}", DATA_LOCATION);
 
-		module.serveRegex$("(" + JWScriptLocation + ")" + QueryParametersRegex).with(JWScriptServlet.class);
-		log.log(Level.INFO, "Serving JW Default Script at {0}", JWScriptLocation);
+		module.serveRegex$("(" + JW_SCRIPT_LOCATION + ")" + QUERY_PARAMETERS_REGEX).with(JWScriptServlet.class);
+		log.log(Level.INFO, "Serving JW Default Script at {0}", JW_SCRIPT_LOCATION);
 
 		log.log(Level.INFO, "Finished with configuring URL's");
-	}
-
-	/**
-	 * gets the location of the JavaScript Servlet
-	 *
-	 * @return
-	 */
-	public static String getJavaScriptLocation()
-	{
-		return JavaScriptLocation;
-	}
-
-	/**
-	 * Gets the current Ajax location
-	 *
-	 * @return
-	 */
-	public static String getAjaxScriptLocation()
-	{
-		return AjaxScriptLocation;
-	}
-
-	/**
-	 * Gets the CSS Location
-	 *
-	 * @return
-	 */
-	public static String getCSSLocation()
-	{
-		return CSSLocation;
-	}
-
-	/**
-	 * Gets the angular script location
-	 *
-	 * @return
-	 */
-	public static String getAngularScriptLocation()
-	{
-		return AngularScriptLocation;
-	}
-
-	/**
-	 * Gets the data location
-	 *
-	 * @return
-	 */
-	public static String getDataLocation()
-	{
-		return DataLocation;
-	}
-
-	/**
-	 * Returns the angular data location
-	 *
-	 * @return
-	 */
-	public static String getAngularDataLocation()
-	{
-		return AngularDataLocation;
-	}
-
-	/**
-	 * Returns the url to access the data binding search
-	 *
-	 * @param component
-	 *
-	 * @return
-	 */
-	public static String getDataBindUrl(ComponentBase component)
-	{
-		return getDataLocation().replace("/", "") + "?component=" + component.getID();
-	}
-
-	/**
-	 * The JW Script Location
-	 *
-	 * @return
-	 */
-	public static String getJWScriptLocation()
-	{
-		return JWScriptLocation;
 	}
 
 	/**

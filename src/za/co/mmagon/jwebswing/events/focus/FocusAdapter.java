@@ -49,7 +49,8 @@ public abstract class FocusAdapter extends Event
 	/**
 	 * Performs a click
 	 *
-	 * @param component The component this click is going to be acting on
+	 * @param component
+	 * 		The component this click is going to be acting on
 	 */
 	public FocusAdapter(Component component)
 	{
@@ -100,8 +101,10 @@ public abstract class FocusAdapter extends Event
 	 * Triggers on Focus
 	 * <p>
 	 *
-	 * @param call     The physical AJAX call
-	 * @param response The physical Ajax Receiver
+	 * @param call
+	 * 		The physical AJAX call
+	 * @param response
+	 * 		The physical Ajax Receiver
 	 */
 	public abstract void onFocus(AjaxCall call, AjaxResponse response);
 
@@ -118,4 +121,32 @@ public abstract class FocusAdapter extends Event
 		}
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof FocusAdapter))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		FocusAdapter that = (FocusAdapter) o;
+
+		return getDirective().equals(that.getDirective());
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getDirective().hashCode();
+		return result;
+	}
 }

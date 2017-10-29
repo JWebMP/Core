@@ -14,4 +14,38 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.base.html.sorters;
+package za.co.mmagon.jwebswing.exceptions;
+
+/**
+ * Occurs when no Servlet was found in an event situation
+ *
+ * @author GedMarc
+ * @since 09 May 2016
+ */
+public class NoServletFoundException extends Exception
+{
+
+	public NoServletFoundException()
+	{
+	}
+
+	public NoServletFoundException(String message)
+	{
+		super(message);
+	}
+
+	public NoServletFoundException(String message, Throwable cause)
+	{
+		super(message, cause);
+	}
+
+	public NoServletFoundException(Throwable cause)
+	{
+		super(cause);
+	}
+
+	public NoServletFoundException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
+	{
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
+}

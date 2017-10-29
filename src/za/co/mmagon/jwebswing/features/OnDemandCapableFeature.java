@@ -22,13 +22,14 @@ import za.co.mmagon.jwebswing.base.ComponentFeatureBase;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Describes a client event feature
  * <p>
  *
  * @author MMagon
- * <p>
+ * 		<p>
  * @version 1.0
  * @since 2014/09/29
  */
@@ -37,7 +38,7 @@ public abstract class OnDemandCapableFeature extends Feature<JavaScriptPart, OnD
 
 	private static final long serialVersionUID = 1L;
 
-	private ArrayList<ComponentFeatureBase> onDemandFeatures;
+	private List<ComponentFeatureBase> onDemandFeatures;
 	private boolean serverActing = true;
 	private boolean onDemandActing = true;
 
@@ -45,29 +46,15 @@ public abstract class OnDemandCapableFeature extends Feature<JavaScriptPart, OnD
 	 * Constructs a new On-Demand Capable ComponentFeatureBase
 	 * <p>
 	 *
-	 * @param name      The name of this feature
-	 * @param component The component rendering for (Client Side Event Triggering component)
+	 * @param name
+	 * 		The name of this feature
+	 * @param component
+	 * 		The component rendering for (Client Side Event Triggering component)
 	 */
 	public OnDemandCapableFeature(String name, Component component)
 	{
 		super(name);
 		setComponent(component);
-	}
-
-	/**
-	 * A List of Of-Demand capable renderer
-	 * <p>
-	 *
-	 * @return
-	 */
-	protected ArrayList<ComponentFeatureBase> getOnDemandFeatures()
-	{
-		if (onDemandFeatures == null)
-		{
-			return onDemandFeatures = new ArrayList<>();
-		}
-
-		return onDemandFeatures;
 	}
 
 	/**
@@ -77,12 +64,22 @@ public abstract class OnDemandCapableFeature extends Feature<JavaScriptPart, OnD
 	@Override
 	public void assignFunctionsToComponent()
 	{
-		ArrayList<String> currentFunctionsToComponent = new ArrayList<>();
-		getOnDemandFeatures().stream().forEach((next)
-				                                       ->
-		                                       {
-			                                       addQuery(next.renderJavascript());
-		                                       });
+		getOnDemandFeatures().forEach(next -> addQuery(next.renderJavascript()));
+	}
+
+	/**
+	 * A List of Of-Demand capable renderer
+	 * <p>
+	 *
+	 * @return
+	 */
+	protected List<ComponentFeatureBase> getOnDemandFeatures()
+	{
+		if (onDemandFeatures == null)
+		{
+			onDemandFeatures = new ArrayList<>();
+		}
+		return onDemandFeatures;
 	}
 
 	/**
@@ -140,4 +137,42 @@ public abstract class OnDemandCapableFeature extends Feature<JavaScriptPart, OnD
 		this.onDemandActing = onDemandActing;
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof OnDemandCapableFeature))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		OnDemandCapableFeature that = (OnDemandCapableFeature) o;
+
+		if (isServerActing() != that.isServerActing())
+		{
+			return false;
+		}
+		if (isOnDemandActing() != that.isOnDemandActing())
+		{
+			return false;
+		}
+		return getOnDemandFeatures().equals(that.getOnDemandFeatures());
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getOnDemandFeatures().hashCode();
+		result = 31 * result + (isServerActing() ? 1 : 0);
+		result = 31 * result + (isOnDemandActing() ? 1 : 0);
+		return result;
+	}
 }

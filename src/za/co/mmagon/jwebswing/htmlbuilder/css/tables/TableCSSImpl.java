@@ -44,6 +44,7 @@ public class TableCSSImpl extends CSSImplementationAdapter<TableCSS, TableCSSImp
 	 */
 	public TableCSSImpl()
 	{
+		//Nothing needed
 	}
 
 	/**

@@ -16,9 +16,6 @@
  */
 package za.co.mmagon.jwebswing.base.servlets.interfaces;
 
-import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.interfaces.IEvent;
-
 /**
  * The base of each component
  *
@@ -29,7 +26,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.interfaces.IEvent;
  *
  * @author Marc Magon
  */
-public interface IComponent<T, A extends Enum, J extends GlobalFeatures, I extends IEvent>
+public interface IComponent
 {
 
 }

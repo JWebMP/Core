@@ -17,8 +17,13 @@
 package za.co.mmagon;
 
 import com.armineasy.injection.GuiceContext;
+import za.co.mmagon.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.REQUEST_SITE_HEADER_NAME;
 
 /**
  * @author Marc Magon
@@ -26,8 +31,12 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SessionHelper
 {
+	private static final Logger log = LogFactory.getLog("SessionHelper");
+	/**
+	 * The given address
+	 */
 	private static String address = null;
-	
+
 	/*
 	 * Constructs a new SessionHelper
 	 */
@@ -35,7 +44,7 @@ public class SessionHelper
 	{
 		//Nothing needed
 	}
-	
+
 	/**
 	 * Returns the full server address, without the final section
 	 *
@@ -43,32 +52,29 @@ public class SessionHelper
 	 */
 	public static String getServerPath()
 	{
-		if (address == null)
+		if (address == null && !GuiceContext.isBuildingInjector())
 		{
-			if (!GuiceContext.isBuildingInjector())
+			try
 			{
-				StringBuffer url = new StringBuffer();
-				try
+				HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);
+				StringBuffer buff = request.getRequestURL();
+				if (request.getHeader(REQUEST_SITE_HEADER_NAME) != null && !request.getHeader(REQUEST_SITE_HEADER_NAME).isEmpty())
 				{
-					HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);
-					StringBuffer buff = request.getRequestURL();
-					if (request.getHeader("jwsiteurl") != null && !request.getHeader("jwsiteurl").isEmpty())
-					{
-						buff = new StringBuffer(request.getHeader("jwsiteurl"));
-					}
-					String address = buff.substring(0, buff.lastIndexOf("/") + 1);
-					SessionHelper.address = address;
-					return address;
+					buff = new StringBuffer(request.getHeader(REQUEST_SITE_HEADER_NAME));
 				}
-				catch (Exception e)
-				{
-					return "";
-				}
+				String address = buff.substring(0, buff.lastIndexOf("/") + 1);
+				SessionHelper.address = address;
+				return address;
+			}
+			catch (Exception e)
+			{
+				log.log(Level.SEVERE, "Unable to get server path", e);
+				return "";
 			}
 		}
 		return address;
 	}
-	
+
 	/**
 	 * Returns the last section of the url, to be matched with page configurator url
 	 *

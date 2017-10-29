@@ -51,14 +51,13 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  * @version 1.0
  * @since 2015/02/09
- * @deprecated
  */
 public class KeyGen<J extends KeyGen<J>>
 		extends Component<NoChildren, KeyGenAttributes, GlobalFeatures, GlobalEvents, J>
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructs a new KeyGen with the given name
 	 * <p>
@@ -70,5 +69,5 @@ public class KeyGen<J extends KeyGen<J>>
 		super(ComponentTypes.KeyGen);
 		addAttribute(GlobalAttributes.Name, name);
 	}
-	
+
 }

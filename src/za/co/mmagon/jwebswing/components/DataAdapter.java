@@ -28,11 +28,16 @@ import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 /**
  * This Class is a data adapter
  *
- * @param <C> The specified global children
- * @param <A> The given component data adapaters
- * @param <F> The given features
- * @param <E> The given events
- * @param <J> This component
+ * @param <C>
+ * 		The specified global children
+ * @param <A>
+ * 		The given component data adapaters
+ * @param <F>
+ * 		The given features
+ * @param <E>
+ * 		The given events
+ * @param <J>
+ * 		This component
  *
  * @author GedMarc
  * @since 01 Jan 2016
@@ -52,7 +57,6 @@ public class DataAdapter<C extends GlobalChildren, A extends Enum & AttributeDef
 	 */
 	public DataAdapter(Component linkedComponent)
 	{
-		//this.linkedComponent = linkedComponent;
 		setLinkedComponent(linkedComponent);
 	}
 
@@ -111,5 +115,39 @@ public class DataAdapter<C extends GlobalChildren, A extends Enum & AttributeDef
 	public String toString()
 	{
 		return getDAID();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof DataAdapter))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		DataAdapter<?, ?, ?, ?, ?> that = (DataAdapter<?, ?, ?, ?, ?>) o;
+
+		if (!getLinkedComponent().equals(that.getLinkedComponent()))
+		{
+			return false;
+		}
+		return getDataAdapterID() != null ? getDataAdapterID().equals(that.getDataAdapterID()) : that.getDataAdapterID() == null;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getLinkedComponent().hashCode();
+		result = 31 * result + (getDataAdapterID() != null ? getDataAdapterID().hashCode() : 0);
+		return result;
 	}
 }

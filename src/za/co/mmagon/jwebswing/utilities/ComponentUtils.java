@@ -42,8 +42,8 @@ public class ComponentUtils
 {
 	
 	private static final Logger log = LogFactory.getLog("ComponentUtils");
-	
-	public ComponentUtils()
+
+	private ComponentUtils()
 	{
 	}
 	
@@ -162,8 +162,8 @@ public class ComponentUtils
 		FullScreen(new FullScreenCSSClass());
 		
 		private CSSComponent cssClass;
-		
-		private CSSClassList(CSSComponent comp)
+
+		CSSClassList(CSSComponent comp)
 		{
 			this.cssClass = comp;
 		}

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.utilities;
+package za.co.mmagon.jwebswing.demoframework;
 
 import java.io.Serializable;
 
@@ -44,6 +44,7 @@ public class StringConstants implements Serializable
 	 * Default Medium text for Latin
 	 */
 	public static final String mediumLatin = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero laboriosam dolor perspiciatis omnis exercitationem. Beatae, officia pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas suscipit facere rem dicta, debitis...";
+
 	private static final long serialVersionUID = 1L;
 	
 }

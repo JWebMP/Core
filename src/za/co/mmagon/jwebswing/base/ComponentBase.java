@@ -27,6 +27,7 @@ import za.co.mmagon.jwebswing.utilities.GUIDGenerator;
 import za.co.mmagon.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -35,7 +36,8 @@ import java.util.logging.Level;
 /**
  * Defines the raw necessities for a component to exist
  *
- * @param <J> Component output for cloning. Always make it this class to make life easy
+ * @param <J>
+ * 		Component output for cloning. Always make it this class to make life easy
  *
  * @author GedMarc
  * @since 22 Apr 2016
@@ -45,13 +47,13 @@ import java.util.logging.Level;
 public class ComponentBase<J extends ComponentBase<J>>
 		implements IComponentBase<J>
 {
-	
+
 	/**
 	 * Logger for the Component
 	 */
 	@JsonIgnore
-	protected static final java.util.logging.Logger logShell = LogFactory.getLog("ComponentBase");
-	
+	protected static final java.util.logging.Logger log = LogFactory.getLog("ComponentBase");
+
 	/**
 	 * Serial Version for all Components and their compatibility
 	 *
@@ -59,17 +61,17 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 */
 	@JsonIgnore
 	private static final long serialVersionUID = 1l;
-	
+
 	/**
 	 * The ID of the component rendering for
 	 */
 	private String id;
-	
+
 	/**
 	 * The enumeration component type associated with this class to escape the use of "instance of" statements. performance thing
 	 */
 	private ComponentTypes componentType;
-	
+
 	/**
 	 * Any raw text that should be built into this component. Rendered before children
 	 */
@@ -94,8 +96,8 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 * A set of properties for this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private HashMap<String, Object> properties;
-	
+	private Map<String, Serializable> properties;
+
 	/**
 	 * Constructs a new Component Shell
 	 *
@@ -106,7 +108,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 		this.id = GUIDGenerator.generateGuid();
 		this.componentType = componentType;
 	}
-	
+
 	/**
 	 * Returns an Attribute Base interface of this component
 	 *
@@ -117,7 +119,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	{
 		return this;
 	}
-	
+
 	/**
 	 * Gets the ID of this component
 	 * <p>
@@ -129,63 +131,13 @@ public class ComponentBase<J extends ComponentBase<J>>
 	{
 		return this.id;
 	}
-	
-	/**
-	 * Sets the ID of this component
-	 * <p>
-	 *
-	 * @param id The ID
-	 */
-	@Override
-	public J setID(String id)
-	{
-		this.id = id;
-		return (J) this;
-	}
-	
-	/**
-	 * Returns the ID with the # in the front of it
-	 * <p>
-	 *
-	 * @param jQueryHolder Anything
-	 *                     <p>
-	 *
-	 * @return An ID starting with #
-	 */
-	@Override
-	public String getID(boolean jQueryHolder)
-	{
-		return "#" + this.id;
-	}
-	
-	/**
-	 * Returns the component rendering for JQuery string Requires the rendering for component is set
-	 * <p>
-	 *
-	 * @return $('#x').
-	 */
-	@Override
-	public String getJQueryID()
-	{
-		return "$(\"" + getID(true) + "\").";
-	}
-	
-	/**
-	 * Gets this components enumeration
-	 * <p>
-	 *
-	 * @return The Component Enumeration of this component
-	 */
-	protected ComponentTypes getComponentType()
-	{
-		return componentType;
-	}
-	
+
 	/**
 	 * Sets this components enumeration. Currently little more than an easy to compare Enum
 	 * <p>
 	 *
-	 * @param componentType The component to mimic
+	 * @param componentType
+	 * 		The component to mimic
 	 *
 	 * @return
 	 */
@@ -194,71 +146,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 		this.componentType = componentType;
 		return (J) this;
 	}
-	
-	/**
-	 * Appends the text used as raw text outside the tags to the incoming StringBuilder
-	 * <p>
-	 *
-	 * @param sb The StringBuilder to append to
-	 *           <p>
-	 *
-	 * @return The current set Raw Text
-	 */
-	protected StringBuilder getText(StringBuilder sb)
-	{
-		if (text == null)
-		{
-			return new StringBuilder();
-		}
-		else
-		{
-			sb.append(text);
-			return sb;
-		}
-	}
-	
-	/**
-	 * returns a new StringSuilder of the raw text with the specific tab counts
-	 * <p>
-	 *
-	 * @param tabCounts <p>
-	 *
-	 * @return
-	 */
-	@Override
-	public StringBuilder getText(int tabCounts)
-	{
-		StringBuilder sb = new StringBuilder();
-		getText(sb);
-		return sb;
-	}
-	
-	/**
-	 * Sets this components Raw Text
-	 * <p>
-	 *
-	 * @param text The text to display as Raw Text
-	 */
-	@Override
-	public J setText(String text)
-	{
-		this.text = text;
-		return (J) this;
-	}
-	
-	/**
-	 * Sets this components Raw Text
-	 * <p>
-	 *
-	 * @param text The text to display as Raw Text
-	 */
-	@Override
-	public J setText(StringBuilder text)
-	{
-		this.text = text.toString();
-		return (J) this;
-	}
-	
+
 	/**
 	 * Clones this component and assigns a new ID
 	 * <p>
@@ -276,11 +164,131 @@ public class ComponentBase<J extends ComponentBase<J>>
 		}
 		catch (CloneNotSupportedException ex)
 		{
-			logShell.log(Level.SEVERE, "Cloning Error in Shell", ex);
+			log.log(Level.SEVERE, "Cloning Error in Shell", ex);
 		}
 		return component;
 	}
-	
+
+	/**
+	 * Returns the component rendering for JQuery string Requires the rendering for component is set
+	 * <p>
+	 *
+	 * @return $('#x').
+	 */
+	@Override
+	public String getJQueryID()
+	{
+		return "$(\"" + getID(true) + "\").";
+	}
+
+	/**
+	 * Gets this components enumeration
+	 * <p>
+	 *
+	 * @return The Component Enumeration of this component
+	 */
+	protected ComponentTypes getComponentType()
+	{
+		return componentType;
+	}
+
+	/**
+	 * Returns the ID with the # in the front of it
+	 * <p>
+	 *
+	 * @param jQueryHolder
+	 * 		Anything
+	 * 		<p>
+	 *
+	 * @return An ID starting with #
+	 */
+	@Override
+	public String getID(boolean jQueryHolder)
+	{
+		return "#" + this.id;
+	}
+
+	/**
+	 * Returns a map of user defined properties for this component
+	 *
+	 * @return
+	 */
+	@Override
+	public Map<String, Serializable> getProperties()
+	{
+		if (properties == null)
+		{
+			properties = new HashMap<>();
+		}
+		return properties;
+	}
+
+	/**
+	 * returns a new StringSuilder of the raw text with the specific tab counts
+	 * <p>
+	 *
+	 * @param tabCounts
+	 * 		<p>
+	 *
+	 * @return
+	 */
+	@Override
+	public StringBuilder getText(int tabCounts)
+	{
+		StringBuilder sb = new StringBuilder();
+		getText(sb);
+		return sb;
+	}
+
+	/**
+	 * Sets the ID of this component
+	 * <p>
+	 *
+	 * @param id
+	 * 		The ID
+	 */
+	@Override
+	public J setID(String id)
+	{
+		this.id = id;
+		return (J) this;
+	}
+
+	/**
+	 * Appends the text used as raw text outside the tags to the incoming StringBuilder
+	 * <p>
+	 *
+	 * @param sb
+	 * 		The StringBuilder to append to
+	 * 		<p>
+	 *
+	 * @return The current set Raw Text
+	 */
+	protected StringBuilder getText(StringBuilder sb)
+	{
+		if (text == null)
+		{
+			return new StringBuilder();
+		}
+		else
+		{
+			sb.append(text);
+			return sb;
+		}
+	}
+
+	/**
+	 * Sets this components user defined properties
+	 *
+	 * @param properties
+	 */
+	@Override
+	public J setProperties(Map<String, Serializable> properties)
+	{
+		this.properties = properties;
+		return (J) this;
+	}
+
 	/**
 	 * Specifies whether or not to render this component in a Production/QA fashion
 	 * <p>
@@ -292,20 +300,21 @@ public class ComponentBase<J extends ComponentBase<J>>
 	{
 		return this.tiny;
 	}
-	
+
 	/**
-	 * If this component will render as tiny HTML. Global override value
+	 * Sets this components Raw Text
 	 * <p>
 	 *
-	 * @param tiny Set if this component must render as tiny HTML. Does not affect CSS or JavaScript rendering
+	 * @param text
+	 * 		The text to display as Raw Text
 	 */
 	@Override
-	public J setTiny(boolean tiny)
+	public J setText(String text)
 	{
-		this.tiny = tiny;
+		this.text = text;
 		return (J) this;
 	}
-	
+
 	/**
 	 * Returns the new line character according to Running Environment
 	 * <p>
@@ -324,7 +333,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 			return "";
 		}
 	}
-	
+
 	/**
 	 * Run-Once on creation Executes a piece of code before running any rendering. Call super after your changes Marks the component as configured
 	 */
@@ -333,7 +342,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	{
 		setConfigured(true);
 	}
-	
+
 	/**
 	 * If this component is already configured
 	 *
@@ -344,7 +353,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	{
 		return configured;
 	}
-	
+
 	/**
 	 * If this component is already configured
 	 *
@@ -356,34 +365,35 @@ public class ComponentBase<J extends ComponentBase<J>>
 		this.configured = configured;
 		return (J) this;
 	}
-	
+
 	/**
-	 * Returns a map of user defined properties for this component
+	 * Sets this components Raw Text
+	 * <p>
 	 *
-	 * @return
+	 * @param text
+	 * 		The text to display as Raw Text
 	 */
 	@Override
-	public Map<String, Object> getProperties()
+	public J setText(StringBuilder text)
 	{
-		if (properties == null)
-		{
-			properties = new HashMap<>();
-		}
-		return properties;
-	}
-	
-	/**
-	 * Sets this components user defined properties
-	 *
-	 * @param properties
-	 */
-	@Override
-	public J setProperties(HashMap<String, Object> properties)
-	{
-		this.properties = properties;
+		this.text = text.toString();
 		return (J) this;
 	}
-	
+
+	/**
+	 * If this component will render as tiny HTML. Global override value
+	 * <p>
+	 *
+	 * @param tiny
+	 * 		Set if this component must render as tiny HTML. Does not affect CSS or JavaScript rendering
+	 */
+	@Override
+	public J setTiny(boolean tiny)
+	{
+		this.tiny = tiny;
+		return (J) this;
+	}
+
 	/**
 	 * Default HashCode over-ride
 	 *
@@ -398,11 +408,87 @@ public class ComponentBase<J extends ComponentBase<J>>
 		hash = 23 * hash + Objects.hashCode(this.text);
 		return hash;
 	}
-	
+
+	/**
+	 * Mark this component as needing refresh to the Ajax Controller
+	 * <p>
+	 *
+	 * @param touched
+	 * 		Whether or not to update on next ajax call
+	 *
+	 * @return
+	 */
+	@Override
+	public J setTouched(boolean touched)
+	{
+		this.touched = touched;
+		return (J) this;
+	}
+
+	/**
+	 * Renders the component as a JSON Object
+	 *
+	 * @return
+	 */
+	@Override
+	public String toString()
+	{
+		if (!isConfigured())
+		{
+			init();
+			preConfigure();
+		}
+		return new JavaScriptPart().objectAsString(this);
+	}
+
+	/**
+	 * Runs before anything Can be used as constructor intializations.
+	 */
+	public void init()
+	{
+		setInitialized(true);
+	}
+
+	/**
+	 * If this component has been initialized
+	 *
+	 * @return
+	 */
+	public boolean isInitialized()
+	{
+		return initialized;
+	}
+
+	/**
+	 * If this component has been initialized
+	 *
+	 * @param initialized
+	 *
+	 * @return
+	 */
+	public J setInitialized(boolean initialized)
+	{
+		this.initialized = initialized;
+		return (J) this;
+	}
+
+	/**
+	 * Returns if this component is needing refresh on next Ajax call
+	 * <p>
+	 *
+	 * @return true if going to be touched
+	 */
+	@Override
+	public boolean isTouched()
+	{
+		return touched;
+	}
+
 	/**
 	 * Default equals for a component
 	 *
-	 * @param obj The incoming object
+	 * @param obj
+	 * 		The incoming object
 	 *
 	 * @return True if the ID, Type and Text are the same
 	 */
@@ -432,81 +518,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 		}
 		return this.componentType == other.componentType;
 	}
-	
-	/**
-	 * Renders the component as a JSON Object
-	 *
-	 * @return
-	 */
-	@Override
-	public String toString()
-	{
-		if (!isConfigured())
-		{
-			init();
-			preConfigure();
-		}
-		return new JavaScriptPart().objectAsString(this);
-	}
-	
-	/**
-	 * Runs before anything Can be used as constructor intializations.
-	 */
-	public void init()
-	{
-		setInitialized(true);
-	}
-	
-	/**
-	 * If this component has been initialized
-	 *
-	 * @return
-	 */
-	public boolean isInitialized()
-	{
-		return initialized;
-	}
-	
-	/**
-	 * If this component has been initialized
-	 *
-	 * @param initialized
-	 *
-	 * @return
-	 */
-	public J setInitialized(boolean initialized)
-	{
-		this.initialized = initialized;
-		return (J) this;
-	}
-	
-	/**
-	 * Returns if this component is needing refresh on next Ajax call
-	 * <p>
-	 *
-	 * @return true if going to be touched
-	 */
-	@Override
-	public boolean isTouched()
-	{
-		return touched;
-	}
-	
-	/**
-	 * Mark this component as needing refresh to the Ajax Controller
-	 * <p>
-	 *
-	 * @param touched Whether or not to update on next ajax call
-	 *
-	 * @return
-	 */
-	@Override
-	public J setTouched(boolean touched)
-	{
-		this.touched = touched;
-		return (J) this;
-	}
-	
+
 	/**
 	 * For JSON Reconstruction
 	 *
@@ -517,7 +529,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	{
 		return getClass().getCanonicalName();
 	}
-	
+
 	/**
 	 * If the component has a property attached
 	 *
@@ -529,7 +541,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	{
 		return getProperties().containsKey(propertyName);
 	}
-	
+
 	/**
 	 * Returns a specific property in toString form
 	 *
@@ -541,7 +553,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	{
 		return getProperties().get(propertyName).toString();
 	}
-	
+
 	/**
 	 * Returns the classes canonical name used for ID's in events
 	 *
@@ -555,10 +567,11 @@ public class ComponentBase<J extends ComponentBase<J>>
 		}
 		catch (NullPointerException npe)
 		{
+			log.log(Level.FINE, "Null Pointer in getting canonical name", npe);
 			return getClass().getTypeName();
 		}
 	}
-	
+
 	/**
 	 * Destroys this instance
 	 */

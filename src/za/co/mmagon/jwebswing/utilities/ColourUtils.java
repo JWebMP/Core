@@ -29,7 +29,15 @@ public class ColourUtils
 	 * Converts a colour to hex i suppose
 	 */
 	private static final String chars = "0123456789ABCDEF";
-	
+
+	/**
+	 * No construct
+	 */
+	private ColourUtils()
+	{
+		//Nothing NEeded
+	}
+
 	private static String hexToRGB(String color)
 	{
 		String val1 = color.substring(0, 2);
@@ -37,32 +45,36 @@ public class ColourUtils
 		String val3 = color.substring(4, 6);
 		return hexToDecimal(val1) + "," + hexToDecimal(val2) + "," + hexToDecimal(val3);
 	}
-	
+
 	private static String rgbToHex(String color)
 	{
 		String[] RGB = color.split(",");
 		return toHex(RGB[0]) + toHex(RGB[1]) + toHex(RGB[2]);
 	}
-	
+
 	/**
 	 * Returns a heat map colour between the min and maximum set
 	 *
 	 * @return
 	 */
-
 	private static int hexToDecimal(String hex)
 	{
 		return Math.max(0, Math.min(Integer.parseInt(hex, 16), 255));
 	}
-	
+
 	/**
 	 * Returns a colour found between two colours from two numbers
 	 *
-	 * @param minNumber The minimum number range
-	 * @param maxNumber The maximum number range
-	 * @param value     The actual value
-	 * @param colourMin The colour assigned to the minimum range
-	 * @param colourMax The colour assigned to the maximum range
+	 * @param minNumber
+	 * 		The minimum number range
+	 * @param maxNumber
+	 * 		The maximum number range
+	 * @param value
+	 * 		The actual value
+	 * @param colourMin
+	 * 		The colour assigned to the minimum range
+	 * @param colourMax
+	 * 		The colour assigned to the maximum range
 	 *
 	 * @return Colour Hex for the colour
 	 */
@@ -70,36 +82,35 @@ public class ColourUtils
 	{
 		Integer[] colMax = new Integer[3];
 		Integer[] colMin = new Integer[3];
-		
+
 		String maxRGB = hexToRGB(colourMax);
 		String minRGB = hexToRGB(colourMin);
-		
+
 		colMax[0] = Integer.parseInt(maxRGB.split(",")[0]);
 		colMax[1] = Integer.parseInt(maxRGB.split(",")[1]);
 		colMax[2] = Integer.parseInt(maxRGB.split(",")[2]);
-		
+
 		colMin[0] = Integer.parseInt(minRGB.split(",")[0]);
 		colMin[1] = Integer.parseInt(minRGB.split(",")[1]);
 		colMin[2] = Integer.parseInt(minRGB.split(",")[2]);
-		
+
 		int[] diff = new int[3];
 		diff[0] = colMin[0] - colMax[0];
 		diff[1] = colMin[1] - colMax[1];
 		diff[2] = colMin[2] - colMax[2];
-		
+
 		double dividend = value - minNumber;
 		double divisor = maxNumber - minNumber;
-		
+
 		double perc = dividend / divisor;
 		Integer[] c = new Integer[3];
-		
+
 		c[0] = colMin[0] - (int) (perc * diff[0]);
 		c[1] = colMin[1] - (int) (perc * diff[1]);
 		c[2] = colMin[2] - (int) (perc * diff[2]);
-		
+
 		String co = c[0] + "," + c[1] + "," + c[2];
-		String newColour = rgbToHex(co);
-		return newColour;
+		return rgbToHex(co);
 	}
 
 	/**
@@ -126,7 +137,7 @@ public class ColourUtils
 		N = Math.round(N);
 		char s = chars.charAt((N - N % 16) / 16);
 		char s1 = chars.charAt(N % 16);
-		return "" + s + s1;
+		return "" + Character.toString(s) + Character.toString(s1);
 	}
 
 }

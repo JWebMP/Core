@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.StringTokenizer;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.*;
+
 /**
  * This denotes a line for the CSS, for the composer.
  * <p>
@@ -74,7 +76,7 @@ public class CSSLine implements Serializable, Comparable<CSSLine>, Comparator<CS
 	private String cleanMethodNameToCSSName(String methodName)
 	{
 		String cssName = methodName.replace('_', '-').toLowerCase();
-		cssName = cssName.replace('$', ' ').trim();
+		cssName = cssName.replace('$', CHAR_SPACE).trim();
 		return cssName;
 	}
 
@@ -137,8 +139,8 @@ public class CSSLine implements Serializable, Comparable<CSSLine>, Comparator<CS
 		}
 		if (!valueUse.isEmpty())
 		{
-			valueUse = valueUse.replace("'", "");
-			valueUse = valueUse.replace("\"", "");
+			valueUse = valueUse.replace(STRING_SINGLE_QUOTES, STRING_EMPTY);
+			valueUse = valueUse.replace(STRING_DOUBLE_QUOTES, STRING_EMPTY);
 		}
 		this.value = valueUse;
 	}
@@ -184,7 +186,7 @@ public class CSSLine implements Serializable, Comparable<CSSLine>, Comparator<CS
 	{
 		if (renderQuotations)
 		{
-			return "'" + getProperty() + ":" + getValue() + "'";
+			return STRING_SINGLE_QUOTES + getProperty() + ":" + getValue() + STRING_SINGLE_QUOTES;
 		}
 		else
 		{

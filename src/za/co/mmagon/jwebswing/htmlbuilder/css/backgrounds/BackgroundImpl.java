@@ -29,6 +29,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
 
 import java.util.Arrays;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SPACE;
+
 /**
  * CSS Background Short Hand Object
  *
@@ -63,14 +65,14 @@ public class BackgroundImpl extends CSSImplementationAdapter<Background, Backgro
 	@Override
 	public String toString()
 	{
-		String output = backgroundColor + " "
-				+ backgroundImage + " "
-				+ backgroundPosition + " "
-				+ Arrays.toString(backgroundSize) + " "
-				+ backgroundRepeat + " "
-				+ backgroundOrigin + " "
-				+ backgroundClip + " "
-				+ backgroundAttachment;
+		String output = backgroundColor + STRING_SPACE
+				                + backgroundImage + STRING_SPACE
+				                + backgroundPosition + STRING_SPACE
+				                + Arrays.toString(backgroundSize) + STRING_SPACE
+				                + backgroundRepeat + STRING_SPACE
+				                + backgroundOrigin + STRING_SPACE
+				                + backgroundClip + STRING_SPACE
+				                + backgroundAttachment;
 		output = output.replaceAll("null", "");
 		output = output.trim();
 		return output;

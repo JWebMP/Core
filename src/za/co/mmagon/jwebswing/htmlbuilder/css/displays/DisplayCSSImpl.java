@@ -58,8 +58,12 @@ public class DisplayCSSImpl extends CSSImplementationAdapter<DisplayCSS, Display
 	@CSSDetail(cssName = "top", cssVersion = CSSVersions.CSS21)
 	private MeasurementCSSImpl top;
 
+	/**
+	 * New instance of the Impl
+	 */
 	public DisplayCSSImpl()
 	{
+		//Nothing Needed
 	}
 
 	/**

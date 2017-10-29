@@ -255,6 +255,7 @@ public class PageFields extends JavaScriptPart
 	 *
 	 * @return String The actual used compatibility mode
 	 */
+	@SuppressWarnings("unused")
 	public final String getCompatibilityMode(int dummyInt)
 	{
 		return httpEquivMeta.getAttribute(MetaAttributes.Http_Equiv);
@@ -276,9 +277,8 @@ public class PageFields extends JavaScriptPart
 		}
 		catch (IOException | InvalidPathException ex)
 		{
-			Logger.getLogger(Page.class.getName()).log(Level.WARNING, "Unable to determine fav icon type from {0}", favIconURL);
+			Logger.getLogger(Page.class.getName()).log(Level.WARNING, "Unable to determine fav icon type from {0}", ex);
 		}
-		//@TODO define the image type from url
 		favIconLink.addAttribute(CSSLinkAttributes.Type, mimeType);
 		favIconLink.addAttribute(CSSLinkAttributes.HRef, favIconURL);
 	}

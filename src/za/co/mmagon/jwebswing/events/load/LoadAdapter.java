@@ -46,7 +46,8 @@ public abstract class LoadAdapter extends Event
 	/**
 	 * Performs a click
 	 *
-	 * @param component The component this click is going to be acting on
+	 * @param component
+	 * 		The component this click is going to be acting on
 	 */
 	public LoadAdapter(Component component)
 	{
@@ -97,8 +98,10 @@ public abstract class LoadAdapter extends Event
 	 * Triggers on Click
 	 * <p>
 	 *
-	 * @param call     The physical AJAX call
-	 * @param response The physical Ajax Receiver
+	 * @param call
+	 * 		The physical AJAX call
+	 * @param response
+	 * 		The physical Ajax Receiver
 	 */
 	public abstract void onLoad(AjaxCall call, AjaxResponse response);
 
@@ -115,4 +118,32 @@ public abstract class LoadAdapter extends Event
 		}
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof LoadAdapter))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		LoadAdapter that = (LoadAdapter) o;
+
+		return getDirective().equals(that.getDirective());
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getDirective().hashCode();
+		return result;
+	}
 }

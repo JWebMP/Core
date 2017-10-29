@@ -46,7 +46,8 @@ public abstract class ResizeStartAdapter extends Event
 	/**
 	 * Performs a click
 	 *
-	 * @param component The component this click is going to be acting on
+	 * @param component
+	 * 		The component this click is going to be acting on
 	 */
 	public ResizeStartAdapter(Component component)
 	{
@@ -97,8 +98,10 @@ public abstract class ResizeStartAdapter extends Event
 	 * Triggers on Click
 	 * <p>
 	 *
-	 * @param call     The physical AJAX call
-	 * @param response The physical Ajax Receiver
+	 * @param call
+	 * 		The physical AJAX call
+	 * @param response
+	 * 		The physical Ajax Receiver
 	 */
 	public abstract void onResizeStart(AjaxCall call, AjaxResponse response);
 
@@ -115,4 +118,32 @@ public abstract class ResizeStartAdapter extends Event
 		}
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof ResizeStartAdapter))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		ResizeStartAdapter that = (ResizeStartAdapter) o;
+
+		return getDirective().equals(that.getDirective());
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getDirective().hashCode();
+		return result;
+	}
 }

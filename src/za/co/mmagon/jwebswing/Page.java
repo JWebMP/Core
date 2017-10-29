@@ -57,6 +57,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.HTML_HEADER_JAVASCRIPT;
+
 /**
  * Top level of any HTML page.
  * <p>
@@ -167,7 +169,7 @@ public class Page extends Html implements IPage
 	 */
 	public void initialize()
 	{
-
+		//Interception Marker
 	}
 
 	/**
@@ -180,6 +182,7 @@ public class Page extends Html implements IPage
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	public AjaxResponse onConnect(AjaxCall<?> call, AjaxResponse response)
 	{
 		return response;
@@ -348,10 +351,6 @@ public class Page extends Html implements IPage
 		{
 			getBody().init();
 			pageInitialized = true;
-			for (Object chb : getBody().getChildrenHierarchy())
-			{
-				ComponentHierarchyBase<NoChildren, NoAttributes, NoFeatures, NoEvents, ? extends ComponentHierarchyBase> ch = (ComponentHierarchyBase) chb;
-			}
 		}
 
 		if (!isInitialized())
@@ -397,8 +396,7 @@ public class Page extends Html implements IPage
 		{
 			if (getOptions().isDynamicRender())
 			{
-				CSSLink renderedCSS = new CSSLink(SessionHelper.getServerPath() + SiteBinder.getCSSLocation().replaceAll("/", ""));
-				return renderedCSS;
+				return new CSSLink(SessionHelper.getServerPath() + SiteBinder.getCSSLocation().replaceAll("/", ""));
 			}
 			else
 			{
@@ -425,10 +423,58 @@ public class Page extends Html implements IPage
 		return arr;
 	}
 
+	private void configurePageBuild()
+	{
+		if (!getOptions().isScriptsInHead())
+		{
+			//script rendering in body
+			Set<Class<? extends RenderBeforeDynamicScripts>> renderBeforeScripts = GuiceContext.reflect().getSubTypesOf(RenderBeforeDynamicScripts.class);
+			List<RenderBeforeDynamicScripts> renderB = new ArrayList<>();
+			for (Class<? extends RenderBeforeDynamicScripts> renderBeforeScript : renderBeforeScripts)
+			{
+				RenderBeforeDynamicScripts s = GuiceContext.getInstance(renderBeforeScript);
+				renderB.add(s);
+			}
+
+			Collections.sort(renderB, (RenderBeforeDynamicScripts o1, RenderBeforeDynamicScripts o2) -> ((Integer) o1.sortOrder()).compareTo(o2.sortOrder()));
+			Paragraph before = new Paragraph().setTextOnly(true);
+			renderB.forEach(render -> before.setText(before.getText(0).toString() + render.render().toString()));
+			if (before.getText(0).toString().trim().length() > 0)
+			{
+				getBody().add(before);
+			}
+			addScriptsTo(getBody());
+			Set<Class<? extends RenderAfterScripts>> renderAfterScripts = GuiceContext.reflect().getSubTypesOf(RenderAfterScripts.class);
+			List<RenderAfterScripts> renderA = new ArrayList<>();
+			for (Class<? extends RenderAfterScripts> renderBeforeScript : renderAfterScripts)
+			{
+				RenderAfterScripts s = GuiceContext.getInstance(renderBeforeScript);
+				renderA.add(s);
+			}
+			Collections.sort(renderA, (RenderAfterScripts o1, RenderAfterScripts o2) -> ((Integer) o1.sortOrder()).compareTo(o2.sortOrder()));
+			Paragraph after = new Paragraph().setTextOnly(true);
+			for (RenderAfterScripts render : renderA)
+			{
+				after.setText(after.getText(0).toString() + render.render().toString());
+			}
+			if (after.getText(0).toString().trim().length() > 0)
+			{
+				getBody().add(after);
+			}
+		}
+
+		if (!getOptions().isScriptsInHead())
+		{
+			List<Script> allScripts = getDynamicScripts();
+			allScripts.forEach(getBody()::add);
+		}
+	}
+
 	/**
 	 * Configures the page and all its components
 	 */
 	@Override
+
 	public void preConfigure()
 	{
 		if (!isInitialized())
@@ -439,66 +485,11 @@ public class Page extends Html implements IPage
 		{
 			configurePageHeader();
 			addVariablesScriptToPage();
+			configurePageBuild();
 
-			if (!getOptions().isScriptsInHead())
+			if (!getTopShelfScripts().isEmpty() && getRunningEnvironment().ordinal() >= DevelopmentEnvironments.Development.ordinal())
 			{
-				//script rendering in body
-				Set<Class<? extends RenderBeforeDynamicScripts>> renderBeforeScripts = GuiceContext.reflect().getSubTypesOf(RenderBeforeDynamicScripts.class);
-				List<RenderBeforeDynamicScripts> renderB = new ArrayList<>();
-				for (Class<? extends RenderBeforeDynamicScripts> renderBeforeScript : renderBeforeScripts)
-				{
-					RenderBeforeDynamicScripts s = GuiceContext.getInstance(renderBeforeScript);
-					renderB.add(s);
-				}
-
-				Collections.sort(renderB, (RenderBeforeDynamicScripts o1, RenderBeforeDynamicScripts o2) -> ((Integer) o1.sortOrder()).compareTo(o2.sortOrder()));
-				Paragraph before = new Paragraph().setTextOnly(true);
-				renderB.forEach(render ->
-				                {
-					                before.setText(before.getText(0).toString() + render.render().toString());
-				                });
-				if (before.getText(0).toString().trim().length() > 0)
-				{
-					getBody().add(before);
-				}
-				addScriptsTo(getBody());
-				Set<Class<? extends RenderAfterScripts>> renderAfterScripts = GuiceContext.reflect().getSubTypesOf(RenderAfterScripts.class);
-				List<RenderAfterScripts> renderA = new ArrayList<>();
-				for (Class<? extends RenderAfterScripts> renderBeforeScript : renderAfterScripts)
-				{
-					RenderAfterScripts s = GuiceContext.getInstance(renderBeforeScript);
-					renderA.add(s);
-				}
-				Collections.sort(renderA, (RenderAfterScripts o1, RenderAfterScripts o2) -> ((Integer) o1.sortOrder()).compareTo(o2.sortOrder()));
-				Paragraph after = new Paragraph().setTextOnly(true);
-				for (RenderAfterScripts render : renderA)
-				{
-					after.setText(after.getText(0).toString() + render.render().toString());
-				}
-				if (after.getText(0).toString().trim().length() > 0)
-				{
-					getBody().add(after);
-				}
-			}
-
-			if (!getOptions().isScriptsInHead())
-			{
-				List<Script> allScripts = getDynamicScripts();
-				for (Script script : allScripts)
-				{
-					if (script != null)
-					{
-						allScripts.forEach(getBody()::add);
-					}
-				}
-			}
-
-			if (!getTopShelfScripts().isEmpty())
-			{
-				if (getRunningEnvironment().ordinal() >= DevelopmentEnvironments.Development.ordinal())
-				{
-					getHead().add(new Comment("Priority [" + RequirementsPriority.Top_Shelf + "] Values"));
-				}
+				getHead().add(new Comment("Priority [" + RequirementsPriority.Top_Shelf + "] Values"));
 			}
 
 			//HERE
@@ -520,10 +511,7 @@ public class Page extends Html implements IPage
 				getHead().add(before);
 			}
 			//Top SHelf Scripts
-			getTopShelfScripts().forEach(next ->
-			                             {
-				                             getHead().add(next);
-			                             });
+			getTopShelfScripts().forEach(next -> getHead().add(next));
 			//After
 			Set<Class<? extends RenderAfterLinks>> renderAfterScripts = GuiceContext.reflect().getSubTypesOf(RenderAfterLinks.class);
 			List<RenderAfterLinks> renderA = new ArrayList<>();
@@ -545,10 +533,7 @@ public class Page extends Html implements IPage
 			ArrayList<ComponentHierarchyBase> requirements = new ArrayList<>();
 			for (RequirementsPriority priority : RequirementsPriority.values())
 			{
-				getPriorityRequirements(priority, requirements, true, false).forEach((comp) ->
-				                                                                     {
-					                                                                     getHead().getChildren().add(comp);
-				                                                                     });
+				getPriorityRequirements(priority, requirements, true, false).forEach(comp -> getHead().getChildren().add(comp));
 			}
 			getHead().add(getCssStyle());
 		}
@@ -568,7 +553,7 @@ public class Page extends Html implements IPage
 			if (getBody().readChildrenPropertyFirstResult(AngularPageConfigurator.AngularEnabledString, true))
 			{
 				Script jwScript = new Script();
-				jwScript.addAttribute(ScriptAttributes.Type, "application/javascript");
+				jwScript.addAttribute(ScriptAttributes.Type, HTML_HEADER_JAVASCRIPT);
 				jwScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + SiteBinder.getJWScriptLocation().replaceAll("/", ""));
 				allScripts.add(jwScript);
 			}
@@ -577,17 +562,15 @@ public class Page extends Html implements IPage
 			if (!js.toString().trim().isEmpty())
 			{
 				Script dynamicScript = new Script();
-				dynamicScript.addAttribute(ScriptAttributes.Type, "application/javascript");
+				dynamicScript.addAttribute(ScriptAttributes.Type, HTML_HEADER_JAVASCRIPT);
 				dynamicScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + SiteBinder.getJavaScriptLocation().replaceAll("/", ""));
-				//dynamicScript.setTiny(true);
-				//dynamicScript.setText("$.ajax({cache:false,dataType:'script',url:'js'}).fail(function(){alert('session lost'); });");
 				allScripts.add(dynamicScript);
 			}
 
 			if (getBody().readChildrenPropertyFirstResult(AngularPageConfigurator.AngularEnabledString, true))
 			{
 				Script dynamicScript = new Script();
-				dynamicScript.addAttribute(ScriptAttributes.Type, "application/javascript");
+				dynamicScript.addAttribute(ScriptAttributes.Type, HTML_HEADER_JAVASCRIPT);
 				dynamicScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + SiteBinder.getAngularScriptLocation().replaceAll("/", ""));
 				allScripts.add(dynamicScript);
 			}
@@ -602,7 +585,7 @@ public class Page extends Html implements IPage
 				if (!jsScript.toString().trim().isEmpty())
 				{
 					Script s = new Script();
-					s.addAttribute(ScriptAttributes.Type, "application/javascript");
+					s.addAttribute(ScriptAttributes.Type, HTML_HEADER_JAVASCRIPT);
 					s.setText(jsScript);
 					allScripts.add(s);
 				}
@@ -612,7 +595,7 @@ public class Page extends Html implements IPage
 			if (!js.toString().trim().isEmpty())
 			{
 				Script s = new Script();
-				s.addAttribute(ScriptAttributes.Type, "application/javascript");
+				s.addAttribute(ScriptAttributes.Type, HTML_HEADER_JAVASCRIPT);
 				s.setText(getNewLine() + js);
 				allScripts.add(s);
 			}
@@ -623,22 +606,12 @@ public class Page extends Html implements IPage
 				if (!jsAngular.toString().trim().isEmpty())
 				{
 					Script s = new Script();
-					s.addAttribute(ScriptAttributes.Type, "application/javascript");
+					s.addAttribute(ScriptAttributes.Type, HTML_HEADER_JAVASCRIPT);
 					s.setText(jsAngular);
 					allScripts.add(s);
 				}
 			}
 		}
-
-		if (getOptions().isDynamicRender())
-		{
-
-		}
-		else
-		{
-
-		}
-
 		return allScripts;
 	}
 
@@ -658,7 +631,7 @@ public class Page extends Html implements IPage
 			Script variablesScript = new Script();
 			variablesScript.setID("variables");
 			variablesScript.setNewLineForRawText(true);
-			variablesScript.addAttribute(ScriptAttributes.Type, "text/javascript");
+			variablesScript.addAttribute(ScriptAttributes.Type, HTML_HEADER_JAVASCRIPT);
 			variablesScript.setText(variablesScriptBuilder.toString());
 			if (!getHead().getChildren().contains(variablesScript))
 			{
@@ -726,18 +699,13 @@ public class Page extends Html implements IPage
 				continue;
 			}
 
-			if (getRunningEnvironment().ordinal() >= DevelopmentEnvironments.Development.ordinal())
+			if (getRunningEnvironment().ordinal() >= DevelopmentEnvironments.Development.ordinal() &&
+					    !getPriorityRequirements(priority, requirements, false, true).isEmpty())
 			{
-				if (!getPriorityRequirements(priority, requirements, false, true).isEmpty())
-				{
-					getBody().add(new Comment("Priority [" + priority + "] Values"));
-				}
+				getBody().add(new Comment("Priority [" + priority + "] Values"));
 			}
-			getPriorityRequirements(priority, requirements, false, true).forEach(comp
-					                                                                     ->
-			                                                                     {
-				                                                                     component.add(comp);
-			                                                                     });
+
+			getPriorityRequirements(priority, requirements, false, true).forEach(component::add);
 		}
 	}
 
@@ -761,26 +729,21 @@ public class Page extends Html implements IPage
 			List<CSSLink> links = getAllCssLinks(priority);
 			for (CSSLink link : links)
 			{
-				if (!input.contains(link))
+				if (!input.contains(link) && !requirements.contains(link))
 				{
-					if (!requirements.contains(link))
-					{
-						requirements.add(link);
-					}
+					requirements.add(link);
 				}
 			}
 		}
 		if (javascript)
+
 		{
 			List<Script> scripts = getAllScripts(priority);
 			for (Script script : scripts)
 			{
-				if (!input.contains(script))
+				if (!input.contains(script) && !requirements.contains(script))
 				{
-					if (!requirements.contains(script))
-					{
-						requirements.add(script);
-					}
+					requirements.add(script);
 				}
 			}
 		}
@@ -856,19 +819,41 @@ public class Page extends Html implements IPage
 		this.userAgent = userAgent;
 	}
 
-	/**
-	 * Returns all the dynamic options for a page
-	 *
-	 * @return
-	 */
 	@Override
-	public PageOptions getOptions()
+	public boolean equals(Object o)
 	{
-		if (options == null)
+		if (this == o)
 		{
-			options = new PageOptions(this);
+			return true;
 		}
-		return options;
+		if (!(o instanceof Page))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		Page page = (Page) o;
+
+		if (isPageInitialized() != page.isPageInitialized())
+		{
+			return false;
+		}
+		if (!getOptions().equals(page.getOptions()))
+		{
+			return false;
+		}
+		if (!getFields().equals(page.getFields()))
+		{
+			return false;
+		}
+		if (!getUserAgent().equals(page.getUserAgent()))
+		{
+			return false;
+		}
+		return getAngular().equals(page.getAngular());
 	}
 
 	/**
@@ -1039,5 +1024,32 @@ public class Page extends Html implements IPage
 			}
 		}
 		return allScripts;
+	}
+
+	/**
+	 * Returns all the dynamic options for a page
+	 *
+	 * @return
+	 */
+	@Override
+	public PageOptions getOptions()
+	{
+		if (options == null)
+		{
+			options = new PageOptions();
+		}
+		return options;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getOptions().hashCode();
+		result = 31 * result + getFields().hashCode();
+		result = 31 * result + getUserAgent().hashCode();
+		result = 31 * result + getAngular().hashCode();
+		result = 31 * result + (isPageInitialized() ? 1 : 0);
+		return result;
 	}
 }

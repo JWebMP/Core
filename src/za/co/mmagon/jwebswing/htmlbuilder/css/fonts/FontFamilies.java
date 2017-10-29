@@ -3,6 +3,8 @@ package za.co.mmagon.jwebswing.htmlbuilder.css.fonts;
 import za.co.mmagon.jwebswing.base.client.CSSVersions;
 import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.CHAR_SPACE;
+
 /**
  * Definition and Usage
  * <p>
@@ -58,7 +60,7 @@ public enum FontFamilies implements CSSEnumeration<FontFamilies>
 	@Override
 	public String toString()
 	{
-		return super.toString().replace('$', ' ').toLowerCase();
+		return super.toString().replace('$', CHAR_SPACE).toLowerCase();
 	}
 
 	@Override

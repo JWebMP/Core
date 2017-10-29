@@ -24,7 +24,14 @@ import java.util.UUID;
  */
 public class GUIDGenerator
 {
-	
+	/**
+	 * Never constructable
+	 */
+	private GUIDGenerator()
+	{
+		//Static class
+	}
+
 	/**
 	 * Retrieve a new unique GUID
 	 *
@@ -34,7 +41,7 @@ public class GUIDGenerator
 	{
 		return "jw" + UUID.randomUUID().toString().substring(0, 6);
 	}
-	
+
 	/**
 	 * Retrieve a new unique GUID
 	 *
@@ -44,7 +51,7 @@ public class GUIDGenerator
 	{
 		return UUID.randomUUID().toString();
 	}
-	
+
 	/**
 	 * Pads a string to the given length with blanks
 	 *
@@ -53,26 +60,26 @@ public class GUIDGenerator
 	 *
 	 * @return
 	 */
-	public static final synchronized String ensureLength(String original, int length)
+	public static final String ensureLength(String original, int length)
 	{
-		String output = original;
+		StringBuilder output = new StringBuilder(original);
 		int diff = output.length() - length;
 		if (diff > 0)
 		{
 			// String is too long; trim it down to the proper side
-			output = output.substring(0, length);
+			output.delete(0, length);
 		}
 		else if (diff < 0)
 		{
 			// String is too short; pad it with trailing zeroes
 			for (int i = 0; i < diff; i++)
 			{
-				output += "0";
+				output.append("0");
 			}
 		}
-		return output;
+		return output.toString();
 	}
-	
+
 	/**
 	 * Returns a specific GUID section
 	 *
@@ -80,14 +87,14 @@ public class GUIDGenerator
 	 *
 	 * @return
 	 */
-	public static final synchronized String createGuidSection(int characters)
+	public static final String createGuidSection(int characters)
 	{
-		String ret = "";
+		StringBuilder ret = new StringBuilder("");
 		Random random = new Random();
 		for (int i = 0; i < characters; i++)
 		{
-			ret += Integer.toHexString(random.nextInt(15));
+			ret.append(Integer.toHexString(random.nextInt(15)));
 		}
-		return ret;
+		return ret.toString();
 	}
 }

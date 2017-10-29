@@ -28,9 +28,17 @@ import java.util.logging.Logger;
  */
 public class DateUtils
 {
-	
-	public static Date EndOfTime;
-	
+
+	private static Date EndOfTime;
+
+	/**
+	 * Not Needed
+	 */
+	private DateUtils()
+	{
+		//Nothing Needed
+	}
+
 	static
 	{
 		try
@@ -41,5 +49,27 @@ public class DateUtils
 		{
 			Logger.getLogger(DateUtils.class.getName()).log(Level.SEVERE, null, ex);
 		}
+	}
+
+	/**
+	 * Returns the end of time specified time
+	 * <p>
+	 * Default 2999/12/31 11:59:59
+	 *
+	 * @return
+	 */
+	public static Date getEndOfTime()
+	{
+		return EndOfTime;
+	}
+
+	/**
+	 * Sets the end of time
+	 *
+	 * @param endOfTime
+	 */
+	public static void setEndOfTime(Date endOfTime)
+	{
+		EndOfTime = endOfTime;
 	}
 }

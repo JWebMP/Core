@@ -41,7 +41,7 @@ public interface IComponentHTMLBase<J extends ComponentBase>
 	 *
 	 * @return
 	 */
-	boolean isClosingTag();
+	Boolean isClosingTag();
 	
 	/**
 	 * If a new line for the closing tag is required.
@@ -49,7 +49,7 @@ public interface IComponentHTMLBase<J extends ComponentBase>
 	 *
 	 * @return
 	 */
-	boolean isNewLineForClosingTag();
+	Boolean isNewLineForClosingTag();
 	
 	/**
 	 * If a new line for the closing tag is required.
@@ -64,7 +64,7 @@ public interface IComponentHTMLBase<J extends ComponentBase>
 	 *
 	 * @return
 	 */
-	boolean isNewLineForRawText();
+	Boolean isNewLineForRawText();
 	
 	/**
 	 * Whether or not this component should render a closing tag

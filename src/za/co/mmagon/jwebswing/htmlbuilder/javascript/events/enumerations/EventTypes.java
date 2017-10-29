@@ -43,7 +43,7 @@ import za.co.mmagon.jwebswing.events.start.StartAdapter;
 import za.co.mmagon.jwebswing.events.stop.StopAdapter;
 import za.co.mmagon.jwebswing.events.unselected.UnselectedtAdapter;
 import za.co.mmagon.jwebswing.events.update.UpdateAdapter;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.commandEvent.PerformCommandEvent;
+import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.commandevent.PerformCommandEvent;
 
 import javax.swing.event.ChangeEvent;
 import java.awt.event.FocusEvent;
@@ -55,7 +55,7 @@ import java.awt.event.FocusEvent;
  */
 public enum EventTypes implements Comparable<EventTypes>
 {
-	
+
 	/**
 	 * Sends an Ajax call to the server to perform any command on document render. Very flexible, Maybe overly so
 	 */
@@ -241,22 +241,22 @@ public enum EventTypes implements Comparable<EventTypes>
 	data(null, null),
 	checked(CheckedAdapter.class, null),
 	custom(null, null);
-	
+
 	private final Class classType;
 	private final Class ajaxOptionsReturn;
-	
+
 	/**
 	 * Registers and Ajax Event Type
 	 *
 	 * @param classType
 	 * @param groupedType
 	 */
-	private EventTypes(Class classType, Class groupedType)
+	EventTypes(Class classType, Class groupedType)
 	{
 		this.classType = classType;
 		this.ajaxOptionsReturn = groupedType;
 	}
-	
+
 	/**
 	 * Get the class type that this AJAX event type is matched to
 	 *
@@ -266,7 +266,7 @@ public enum EventTypes implements Comparable<EventTypes>
 	{
 		return classType;
 	}
-	
+
 	/**
 	 * Gets the Ajax Event Types that this event is linked to
 	 *
@@ -276,12 +276,12 @@ public enum EventTypes implements Comparable<EventTypes>
 	{
 		return ajaxOptionsReturn;
 	}
-	
+
 	@Override
 	@JsonValue
 	public String toString()
 	{
-		return name().toString();
+		return name().toLowerCase();
 	}
-	
+
 }

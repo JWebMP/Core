@@ -33,21 +33,26 @@ import java.util.Map;
 /**
  * The CSS Portion of the Component.
  *
- * @param <C> All allowed children
- * @param <A> All attributes for this component
- * @param <F> All features allowed for this component
- * @param <E> All events allowed for this component
- * @param <J> Always this class
+ * @param <C>
+ * 		All allowed children
+ * @param <A>
+ * 		All attributes for this component
+ * @param <F>
+ * 		All features allowed for this component
+ * @param <E>
+ * 		All events allowed for this component
+ * @param <J>
+ * 		Always this class
  *
  * @author GedMarc
  * @since 24 Apr 2016
  */
-public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentStyleBase<C, A, F, E, J>>
+public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentStyleBase<C, A, F, E, J>>
 		extends ComponentHierarchyBase<C, A, F, E, J> implements IComponentStyleBase<J>
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * The CSS Object for all styling
 	 */
@@ -72,13 +77,13 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 	 * The CSS Class name if required
 	 */
 	private String cssName;
-	
+
 	/**
 	 * Container for all the CSS Types
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Map<CSSTypes, CSSImpl> cssTypeHashMap;
-	
+
 	/**
 	 * Constructs a tag with styling options enabled
 	 *
@@ -88,7 +93,7 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 	{
 		super(componentType);
 	}
-	
+
 	/**
 	 * Returns a ComponentStyleBase component of this
 	 *
@@ -98,7 +103,7 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 	{
 		return this;
 	}
-	
+
 	/**
 	 * Returns the current HashMap of all CSS Entries for the component
 	 *
@@ -113,7 +118,7 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 		}
 		return cssTypeHashMap;
 	}
-	
+
 	/**
 	 * Gets the CSS Object used for styling
 	 *
@@ -129,7 +134,7 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 		}
 		return css;
 	}
-	
+
 	/**
 	 * Sets the CSS Object used for styling
 	 *
@@ -140,13 +145,26 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 	{
 		this.css = css;
 	}
-	
+
+	/**
+	 * Sets the hover format CSS
+	 *
+	 * @param hoverCss
+	 */
+	@Override
+	public void setHoverCss(CSSImpl hoverCss)
+	{
+
+		this.hoverCss = hoverCss;
+	}
+
 	/**
 	 * Renders the component CSS at the specified tab count with the &lt;style&gt; tag
 	 * <p>
 	 *
-	 * @param tabCount Tab indentation for the SQL
-	 *                 <p>
+	 * @param tabCount
+	 * 		Tab indentation for the SQL
+	 * 		<p>
 	 *
 	 * @return The Component CSS
 	 */
@@ -155,17 +173,59 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 	{
 		return renderCss(tabCount, true, false, false);
 	}
-	
+
+	/**
+	 * Returns the currently assigned CSS Name
+	 *
+	 * @return
+	 */
+	@Override
+	public String getCssName()
+	{
+		return cssName;
+	}
+
+	/**
+	 * Sets the currently assigned CSS Name
+	 *
+	 * @param cssName
+	 */
+	@Override
+	public void setCssName(String cssName)
+	{
+		this.cssName = cssName;
+	}
+
+	/**
+	 * Gets the hover format CSS
+	 *
+	 * @return
+	 */
+	@Override
+	public CSSImpl getHoverCss()
+	{
+		if (hoverCss == null)
+		{
+			hoverCss = new CSSImpl();
+			getCssTypeHashMap().put(CSSTypes.Hover, hoverCss);
+		}
+		return hoverCss;
+	}
+
 	/**
 	 * Renders the component CSS at the specified tab count with the &lt;style&gt; tag This includes everything from this classes CSS, to the CSS for each field. It will also populate the lower level
 	 * child CSS for fields in this class
 	 * <p>
 	 *
-	 * @param tabCount           Tab indentation for the SQL
-	 * @param renderOpening      Whether or not to render the opening XML tag for a CSS style
-	 * @param renderInQuotations Sets whether to render the CSS Fields in Quotations
-	 * @param isAjaxCall         Sets whether the CSS is being called from an AJAX call
-	 *                           <p>
+	 * @param tabCount
+	 * 		Tab indentation for the SQL
+	 * @param renderOpening
+	 * 		Whether or not to render the opening XML tag for a CSS style
+	 * @param renderInQuotations
+	 * 		Sets whether to render the CSS Fields in Quotations
+	 * @param isAjaxCall
+	 * 		Sets whether the CSS is being called from an AJAX call
+	 * 		<p>
 	 *
 	 * @return The Component CSS
 	 */
@@ -184,57 +244,7 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 		comp.addComponent(this, true);
 		return new StringBuilder(comp.toString());
 	}
-	
-	/**
-	 * Returns the currently assigned CSS Name
-	 *
-	 * @return
-	 */
-	@Override
-	public String getCssName()
-	{
-		return cssName;
-	}
-	
-	/**
-	 * Sets the currently assigned CSS Name
-	 *
-	 * @param cssName
-	 */
-	@Override
-	public void setCssName(String cssName)
-	{
-		this.cssName = cssName;
-	}
-	
-	/**
-	 * Gets the hover format CSS
-	 *
-	 * @return
-	 */
-	@Override
-	public CSSImpl getHoverCss()
-	{
-		if (hoverCss == null)
-		{
-			hoverCss = new CSSImpl();
-			getCssTypeHashMap().put(CSSTypes.Hover, hoverCss);
-		}
-		return hoverCss;
-	}
-	
-	/**
-	 * Sets the hover format CSS
-	 *
-	 * @param hoverCss
-	 */
-	@Override
-	public void setHoverCss(CSSImpl hoverCss)
-	{
-		
-		this.hoverCss = hoverCss;
-	}
-	
+
 	/**
 	 * Gets the active CSS
 	 *
@@ -250,7 +260,7 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 		}
 		return activeCss;
 	}
-	
+
 	/**
 	 * Sets the active CSS
 	 *
@@ -261,7 +271,7 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 	{
 		this.activeCss = activeCss;
 	}
-	
+
 	/**
 	 * Gets the link CSS
 	 *
@@ -277,7 +287,7 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 		}
 		return linkCss;
 	}
-	
+
 	/**
 	 * Sets the Link CSS
 	 *
@@ -288,7 +298,7 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 	{
 		this.linkCss = linkCss;
 	}
-	
+
 	/**
 	 * Gets the Visited CSS
 	 *
@@ -304,7 +314,7 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 		}
 		return visitedCss;
 	}
-	
+
 	/**
 	 * Sets the Visited CSS
 	 *
@@ -315,7 +325,7 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 	{
 		this.visitedCss = visitedCss;
 	}
-	
+
 	/**
 	 * Adds a CSS object to the component with the given type
 	 *
@@ -327,7 +337,7 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 	{
 		getCssTypeHashMap().put(type, cssItem);
 	}
-	
+
 	/**
 	 * Removes a CSS item for the component
 	 *
@@ -338,7 +348,7 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 	{
 		getCssTypeHashMap().remove(cssType);
 	}
-	
+
 	@Override
 	public void destroy()
 	{
@@ -349,5 +359,63 @@ public class ComponentStyleBase<C extends GlobalChildren, A extends Enum & Attri
 		}
 		super.destroy();
 	}
-	
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof ComponentStyleBase))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		ComponentStyleBase<?, ?, ?, ?, ?> that = (ComponentStyleBase<?, ?, ?, ?, ?>) o;
+
+		if (getCss() != null ? !getCss().equals(that.getCss()) : that.getCss() != null)
+		{
+			return false;
+		}
+		if (getHoverCss() != null ? !getHoverCss().equals(that.getHoverCss()) : that.getHoverCss() != null)
+		{
+			return false;
+		}
+		if (getActiveCss() != null ? !getActiveCss().equals(that.getActiveCss()) : that.getActiveCss() != null)
+		{
+			return false;
+		}
+		if (getLinkCss() != null ? !getLinkCss().equals(that.getLinkCss()) : that.getLinkCss() != null)
+		{
+			return false;
+		}
+		if (getVisitedCss() != null ? !getVisitedCss().equals(that.getVisitedCss()) : that.getVisitedCss() != null)
+		{
+			return false;
+		}
+		if (!getCssName().equals(that.getCssName()))
+		{
+			return false;
+		}
+		return getCssTypeHashMap() != null ? getCssTypeHashMap().equals(that.getCssTypeHashMap()) : that.getCssTypeHashMap() == null;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + (getCss() != null ? getCss().hashCode() : 0);
+		result = 31 * result + (getHoverCss() != null ? getHoverCss().hashCode() : 0);
+		result = 31 * result + (getActiveCss() != null ? getActiveCss().hashCode() : 0);
+		result = 31 * result + (getLinkCss() != null ? getLinkCss().hashCode() : 0);
+		result = 31 * result + (getVisitedCss() != null ? getVisitedCss().hashCode() : 0);
+		result = 31 * result + getCssName().hashCode();
+		result = 31 * result + (getCssTypeHashMap() != null ? getCssTypeHashMap().hashCode() : 0);
+		return result;
+	}
 }

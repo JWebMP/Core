@@ -25,9 +25,9 @@ import za.co.mmagon.jwebswing.annotations.SiteInterception;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
-import za.co.mmagon.jwebswing.base.ajax.exceptions.InvalidRequestException;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.base.servlets.options.AngularDataServletInitData;
+import za.co.mmagon.jwebswing.exceptions.InvalidRequestException;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
@@ -50,21 +50,24 @@ import java.util.logging.Logger;
 @Singleton
 public class AngularDataServlet extends JWDefaultServlet
 {
-	
+
 	public static final String LocalStorageSessionKey = "LocalStorage";
 	public static final String SessionStorageSessionKey = "SessionStorage";
-	public static final String ModernizrSessionKey = "Modernizr";
 	private static final Logger LOG = LogFactory.getInstance().getLogger("AngularDataServlet");
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
 	 *
-	 * @param request  Servlet request
-	 * @param response Servlet response
+	 * @param request
+	 * 		Servlet request
+	 * @param response
+	 * 		Servlet response
 	 *
-	 * @throws ServletException if a Servlet-specific error occurs
-	 * @throws IOException      if an I/O error occurs
+	 * @throws ServletException
+	 * 		if a Servlet-specific error occurs
+	 * @throws IOException
+	 * 		if an I/O error occurs
 	 */
 	protected void processRequest(HttpServletRequest request)
 			throws ServletException, IOException, InvalidRequestException
@@ -72,10 +75,12 @@ public class AngularDataServlet extends JWDefaultServlet
 		LOG.log(Level.FINER, "[SessionID]-[{0}];[Connection]-[Data Call Connection Established]", request.getSession().getId());
 		String componentId = "";
 		StringBuilder jb = new StringBuilder(IOUtils.toString(request.getInputStream(), "UTF-8"));
-		
+
 		AngularDataServletInitData initData = new JavaScriptPart<>().From(jb.toString(), AngularDataServletInitData.class);
-		if(initData == null)
+		if (initData == null)
+		{
 			throw new InvalidRequestException("Could not extract the initial data from the information sent in");
+		}
 		if (jb.length() > 0)
 		{
 			initData = new JavaScriptPart<>().From(jb.toString(), AngularDataServletInitData.class);
@@ -83,7 +88,7 @@ public class AngularDataServlet extends JWDefaultServlet
 			GuiceContext.getInstance(SessionProperties.class).setSessionStorage(initData.getSessionStorage());
 			componentId = initData.getParameters().get("objectId");
 		}
-		
+
 		AjaxCall ajaxCall = GuiceContext.inject().getInstance(AjaxCall.class);
 		ajaxCall.setParameters(initData.getParameters());
 		ajaxCall.setComponentId(componentId);
@@ -93,7 +98,7 @@ public class AngularDataServlet extends JWDefaultServlet
 		{
 			LOG.log(Level.FINER, "[SessionID]-[{0}];[Security]-[Component ID Incorrect]", request.getSession().getId());
 		}
-		
+
 		Page page = GuiceContext.inject().getInstance(Page.class);
 		ComponentHierarchyBase triggerComponent;
 		if (ComponentTypes.Body.getComponentTag().equals(ajaxCall.getComponentId()))
@@ -111,24 +116,24 @@ public class AngularDataServlet extends JWDefaultServlet
 			throw new ServletException("Component could not be found to process any events.");
 		}
 		AjaxResponse ajaxResponse = GuiceContext.inject().getInstance(AjaxResponse.class);
-		
+
 		if (!GuiceContext.isBuildingInjector())
 		{
 			intercept();
 		}
-		
+
 		page.onConnect(ajaxCall, ajaxResponse);
 		ajaxResponse.getComponents().forEach(ComponentHierarchyBase::preConfigure);
 		writeOutput(new StringBuilder(ajaxResponse.toString()), "application/json;charset=UTF-8", Charset.forName("UTF-8"));
 	}
-	
+
 	@SiteInterception
 	@DataCallInterception
 	protected void intercept()
 	{
 		//Provides interception on the given annotations
 	}
-	
+
 	/**
 	 * Validates and sends the post
 	 *

@@ -26,25 +26,26 @@ import za.co.mmagon.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * Denotes a specific Web Reference, either remotely or locally
  *
- * @param <T> The type implementation
+ * @param <T>
+ * 		The type implementation
  *
  * @author MMagon
- * <p>
- * 2.0 Added Sorting
+ * 		<p>
+ * 		2.0 Added Sorting
  * @version 2.0
  * @since Forever
  */
 public class WebReference<T extends WebReference> implements NamedPair<String, String>, Serializable, Comparator<WebReference>
 {
-	
+
 	private static final Logger LOG = LogFactory.getInstance().getLogger("Web Reference");
 	private static final long serialVersionUID = 1L;
 	/**
@@ -112,40 +113,51 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	 */
 	@JsonIgnore
 	private String remoteReference;
-	
+
 	/**
 	 * Sets this JavaScript Reference with the Name, the Version
 	 *
-	 * @param name            The Name of the Plugin
-	 * @param version         The version of the Plugin
-	 * @param localReference  The local Reference
-	 * @param remoteReference The Remote Reference
-	 * @param sortOrder       The Sorting Order for the Reference
-	 */
-	public WebReference(String name, Double version, String localReference, String remoteReference, int sortOrder)
-	{
-		this.left = localReference;
-		this.right = remoteReference;
-		
-		this.name = name;
-		this.version = version;
-		this.localReference = localReference;
-		this.remoteReference = remoteReference;
-	}
-	
-	/**
-	 * Sets this JavaScript Reference with the Name, the Version
-	 *
-	 * @param name            The Name of the Plugin
-	 * @param version         The version of the Plugin
-	 * @param localReference  The local Reference
-	 * @param remoteReference The Remote Reference
+	 * @param name
+	 * 		The Name of the Plugin
+	 * @param version
+	 * 		The version of the Plugin
+	 * @param localReference
+	 * 		The local Reference
+	 * @param remoteReference
+	 * 		The Remote Reference
 	 */
 	public WebReference(String name, Double version, String localReference, String remoteReference)
 	{
 		this(name, version, localReference, remoteReference, 500000);
 	}
-	
+
+	/**
+	 * Sets this JavaScript Reference with the Name, the Version
+	 *
+	 * @param name
+	 * 		The Name of the Plugin
+	 * @param version
+	 * 		The version of the Plugin
+	 * @param localReference
+	 * 		The local Reference
+	 * @param remoteReference
+	 * 		The Remote Reference
+	 * @param sortOrder
+	 * 		The Sorting Order for the Reference
+	 */
+	public WebReference(String name, Double version, String localReference, String remoteReference, int sortOrder)
+	{
+		this.left = localReference;
+		this.right = remoteReference;
+
+		this.name = name;
+		this.version = version;
+		this.localReference = localReference;
+		this.remoteReference = remoteReference;
+
+		this.sortOrder = sortOrder;
+	}
+
 	/**
 	 * Whether or not to return the local reference or the remote reference
 	 *
@@ -156,7 +168,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	{
 		return isLocal;
 	}
-	
+
 	/**
 	 * Sets whether this reference should be local or remote
 	 *
@@ -166,7 +178,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	{
 		WebReference.isLocal = isLocal;
 	}
-	
+
 	/**
 	 * Sets whether or not to use "min.js" or use a folder for the min directory
 	 *
@@ -176,7 +188,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	{
 		return useMinAtEndOfExtension;
 	}
-	
+
 	/**
 	 * Sets whether or not to append min into the filename
 	 *
@@ -186,7 +198,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	{
 		WebReference.useMinAtEndOfExtension = useMinAtEndOfExtension;
 	}
-	
+
 	/**
 	 * Sorts an Array List of References
 	 *
@@ -194,12 +206,12 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	 *
 	 * @return
 	 */
-	public static ArrayList<? extends WebReference> sort(ArrayList<? extends WebReference> arrayList)
+	public static List<? extends WebReference> sort(List<? extends WebReference> arrayList)
 	{
 		arrayList.sort(dummyReference);
 		return arrayList;
 	}
-	
+
 	/**
 	 * Returns a dummy reference for the sorting array
 	 *
@@ -209,7 +221,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	{
 		return dummyReference;
 	}
-	
+
 	/**
 	 * Gets the local reference
 	 *
@@ -220,7 +232,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	{
 		return localReference;
 	}
-	
+
 	/**
 	 * Sets the local reference
 	 *
@@ -234,7 +246,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 		this.localReference = left;
 		return (T) this;
 	}
-	
+
 	/**
 	 * Sets the local reference
 	 *
@@ -245,7 +257,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	{
 		return remoteReference;
 	}
-	
+
 	/**
 	 * Sets the remote reference
 	 *
@@ -259,13 +271,13 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 		this.remoteReference = right;
 		return (T) this;
 	}
-	
+
 	@Override
 	public int hashCode()
 	{
 		return left.hashCode() ^ right.hashCode();
 	}
-	
+
 	@Override
 	public boolean equals(Object o)
 	{
@@ -279,10 +291,10 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 		}
 		WebReference pairo = (WebReference) o;
 		return this.left.equals(pairo.getLeft())
-				&& (!leftOnly
-				&& this.right.equals(pairo.getRight()));
+				       && (!leftOnly
+						           && this.right.equals(pairo.getRight()));
 	}
-	
+
 	/**
 	 * Returns if this pair is set to validate on the left field only
 	 *
@@ -292,7 +304,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	{
 		return leftOnly;
 	}
-	
+
 	/**
 	 * Sets if this pair should validate on the left pair only
 	 *
@@ -305,7 +317,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 		this.leftOnly = leftOnly;
 		return (T) this;
 	}
-	
+
 	/**
 	 * Gets the name of this reference
 	 *
@@ -315,7 +327,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	{
 		return name;
 	}
-	
+
 	/**
 	 * Sets the name of this reference
 	 *
@@ -328,7 +340,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 		this.name = name;
 		return (T) this;
 	}
-	
+
 	/**
 	 * Gets the double version of this reference
 	 *
@@ -338,7 +350,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	{
 		return version;
 	}
-	
+
 	/**
 	 * Sets the double version of this reference
 	 *
@@ -351,7 +363,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 		this.version = version;
 		return (T) this;
 	}
-	
+
 	/**
 	 * Gets the physical local reference
 	 *
@@ -361,7 +373,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	{
 		return localReference;
 	}
-	
+
 	/**
 	 * Sets the physical local reference
 	 *
@@ -375,7 +387,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 		this.localReference = localReference;
 		return (T) this;
 	}
-	
+
 	/**
 	 * Gets the physical remote reference
 	 *
@@ -385,7 +397,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	{
 		return remoteReference;
 	}
-	
+
 	/**
 	 * Sets the remote physical reference
 	 *
@@ -399,7 +411,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 		this.remoteReference = remoteReference;
 		return (T) this;
 	}
-	
+
 	/**
 	 * Compares two references to each other on sort order
 	 *
@@ -413,7 +425,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	{
 		return o1.getSortOrder().compareTo(o2.getSortOrder());
 	}
-	
+
 	/**
 	 * Default Sort Order
 	 * <p>
@@ -425,7 +437,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	{
 		return sortOrder;
 	}
-	
+
 	/**
 	 * Default Sort Order
 	 * <p>
@@ -441,7 +453,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 		this.sortOrder = sortOrder;
 		return (T) this;
 	}
-	
+
 	/**
 	 * Return the priority of the reference
 	 *
@@ -451,7 +463,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	{
 		return priority;
 	}
-	
+
 	/**
 	 * Sets the priority of the reference
 	 *
@@ -464,7 +476,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 		this.priority = priority;
 		return (T) this;
 	}
-	
+
 	/**
 	 * Specifies if the remote has a min file
 	 *
@@ -474,7 +486,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	{
 		return canMinifyAtRemote;
 	}
-	
+
 	/**
 	 * Specifies if the remote has a min file
 	 *
@@ -487,7 +499,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 		this.canMinifyAtRemote = canMinifyAtRemote;
 		return (T) this;
 	}
-	
+
 	/**
 	 * If this reference is a cordova reference, e.g. does it render in the dynamic site loader
 	 *
@@ -497,7 +509,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	{
 		return cordovaRequired;
 	}
-	
+
 	/**
 	 * If this reference is a cordova reference, e.g. does it render in the dynamic site loader
 	 *
@@ -510,7 +522,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 		this.cordovaRequired = cordovaRequired;
 		return (T) this;
 	}
-	
+
 	/**
 	 * Returns either the local or remote reference depending on configuration
 	 * <p>
@@ -524,70 +536,72 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 		if (isIsLocal())
 		{
 			StringBuilder sb = new StringBuilder(getLocalReference());
-			if (useMinAtEndOfExtension)
+
+			if (useMinAtEndOfExtension && !sb.toString().contains(".min."))
 			{
-				if (!sb.toString().contains(".min."))
-				{
-					sb.insert(sb.lastIndexOf("."), ".min");
-				}
+				sb.insert(sb.lastIndexOf("."), ".min");
 			}
-			
+
 			try
 			{
-				if (!GuiceContext.isBuildingInjector())
+				if (!GuiceContext.isBuildingInjector() && (!(sb.toString().toLowerCase().startsWith("http://")
+						                                             || sb.toString().toLowerCase().startsWith("https://")
+						                                             || sb.toString().startsWith("//"))))
 				{
-					if (!(sb.toString().toLowerCase().startsWith("http://")
-							|| sb.toString().toLowerCase().startsWith("https://")
-							|| sb.toString().startsWith("//")))
-					{
-						//sb = new StringBuilder(SessionHelper.getServerPath());
-						try
-						{
-							HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);
-							if (request != null)
-							{
-								String url = SessionHelper.getServerPath();
-								if (url == null)
-								{
-									url = "";
-								}
-								else
-								{
-									url += "";
-								}
-								sb = sb.insert(0, url);
-								sb = new StringBuilder(sb.toString());
-							}
-						}
-						catch (Exception e)
-						{
-						
-						}
-					}
+					sb = renderUrlString(sb);
 				}
-			}
-			catch (com.google.inject.ProvisionException e)
-			{
-				//Intentional
+
 			}
 			catch (NoClassDefFoundError | Exception e)
 			{
 				LOG.log(Level.WARNING, "Error in getting url to append to the web reference", e);
 			}
-			
+
 			return sb.toString();
 		}
 		else
 		{
 			StringBuilder sb = new StringBuilder(getRemoteReference());
-			if (useMinAtEndOfExtension && isCanMinifyAtRemote())
+			if (useMinAtEndOfExtension && isCanMinifyAtRemote() && !sb.toString().contains(".min."))
 			{
-				if (!sb.toString().contains(".min."))
-				{
-					sb.insert(sb.lastIndexOf("."), ".min");
-				}
+				sb.insert(sb.lastIndexOf("."), ".min");
 			}
+
 			return sb.toString();
 		}
+	}
+
+	/**
+	 * Renders the actual URL String
+	 *
+	 * @param sb
+	 *
+	 * @return
+	 */
+	private StringBuilder renderUrlString(StringBuilder sb)
+	{
+		try
+		{
+			HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);
+			if (request != null)
+			{
+				String url = SessionHelper.getServerPath();
+				if (url == null)
+				{
+					url = "";
+				}
+				else
+				{
+					url += "";
+				}
+				sb = sb.insert(0, url);
+				return sb;
+			}
+		}
+		catch (Exception e)
+		{
+			LOG.log(Level.WARNING, "Error in getting url reference", e);
+		}
+		return new StringBuilder();
 	}
 }

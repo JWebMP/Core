@@ -25,6 +25,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
 import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SPACE;
+
 /**
  * CSS Border Properties
  * <p>
@@ -57,10 +59,10 @@ public class BorderTopCSSImpl extends CSSImplementationAdapter<BorderTopCSS, Bor
 	public String toString()
 	{
 		String out = "";
-		out += borderTopWidth + " ";
-		out += borderTopStyle + " ";
-		out += borderTopColor + " ";
-		out += borderTopColor$ + " ";
+		out += borderTopWidth + STRING_SPACE;
+		out += borderTopStyle + STRING_SPACE;
+		out += borderTopColor + STRING_SPACE;
+		out += borderTopColor$ + STRING_SPACE;
 		out = out.replaceAll("null", "");
 		out = out.trim();
 		return out;

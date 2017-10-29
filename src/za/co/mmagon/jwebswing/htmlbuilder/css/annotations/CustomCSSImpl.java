@@ -38,7 +38,7 @@ public class CustomCSSImpl implements CustomCSS
 	 */
 	public CustomCSSImpl()
 	{
-
+		//No Coniguration Needed
 	}
 
 	@Override
@@ -51,14 +51,11 @@ public class CustomCSSImpl implements CustomCSS
 	 * use getValue
 	 *
 	 * @return
-	 *
-	 * @deprecated doesn't really exist
 	 */
-	@Deprecated
 	@Override
 	public NameValuePairCSS[] value()
 	{
-		return null;
+		return new NameValuePairCSS[]{};
 	}
 
 	/**

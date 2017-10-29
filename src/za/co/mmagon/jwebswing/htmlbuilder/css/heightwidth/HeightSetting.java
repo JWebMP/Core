@@ -46,9 +46,9 @@ public enum HeightSetting implements CSSEnumeration<HeightSetting>
 	/**
 	 * Sets this field as not set
 	 */
-	Unset;;
+	Unset;
 
-	private HeightSetting()
+	HeightSetting()
 	{
 	}
 

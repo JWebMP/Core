@@ -34,15 +34,7 @@ public enum LeftOrRight
 	/**
 	 * A new LeftOrRight
 	 */
-	private LeftOrRight()
-	{
-
-	}
-
-	/**
-	 * A new LeftOrRight with data
-	 */
-	private LeftOrRight(String data)
+	LeftOrRight()
 	{
 
 	}

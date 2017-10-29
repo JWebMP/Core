@@ -35,25 +35,26 @@ import java.util.logging.Level;
 public abstract class StartAdapter extends Event
 		implements GlobalEvents
 {
-	
+
 	/**
 	 * Logger for the Component
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("StartEvent");
 	private static final long serialVersionUID = 1L;
 	private StartDirective directive;
-	
+
 	/**
 	 * Performs a click
 	 *
-	 * @param component The component this click is going to be acting on
+	 * @param component
+	 * 		The component this click is going to be acting on
 	 */
 	public StartAdapter(Component component)
 	{
 		super(EventTypes.start, component);
-		
+
 	}
-	
+
 	/**
 	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
 	 */
@@ -62,13 +63,13 @@ public abstract class StartAdapter extends Event
 	{
 		if (!isConfigured())
 		{
-			
+
 			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
 			getComponent().addAttribute(AngularAttributes.ngStart, "jwCntrl.perform($event," + renderVariables() + ");");
 		}
 		super.preConfigure();
 	}
-	
+
 	/**
 	 * Returns the angular directive associated with the right click event
 	 *
@@ -82,7 +83,7 @@ public abstract class StartAdapter extends Event
 		}
 		return directive;
 	}
-	
+
 	/**
 	 * Sets the right click angular event
 	 *
@@ -92,16 +93,28 @@ public abstract class StartAdapter extends Event
 	{
 		this.directive = directive;
 	}
-	
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call     The physical AJAX call
-	 * @param response The physical Ajax Receiver
-	 */
-	public abstract void onStart(AjaxCall call, AjaxResponse response);
-	
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof StartAdapter))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		StartAdapter that = (StartAdapter) o;
+
+		return getDirective().equals(that.getDirective());
+	}
+
 	@Override
 	public void fireEvent(AjaxCall call, AjaxResponse response)
 	{
@@ -114,5 +127,23 @@ public abstract class StartAdapter extends Event
 			LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
-	
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getDirective().hashCode();
+		return result;
+	}
+
+	/**
+	 * Triggers on Click
+	 * <p>
+	 *
+	 * @param call
+	 * 		The physical AJAX call
+	 * @param response
+	 * 		The physical Ajax Receiver
+	 */
+	public abstract void onStart(AjaxCall call, AjaxResponse response);
 }

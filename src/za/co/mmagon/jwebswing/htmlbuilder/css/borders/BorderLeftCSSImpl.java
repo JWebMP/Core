@@ -25,6 +25,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
 import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SPACE;
+
 /**
  * CSS Border Properties
  * <p>
@@ -57,10 +59,10 @@ public class BorderLeftCSSImpl extends CSSImplementationAdapter<BorderLeftCSS, B
 	public String toString()
 	{
 		String out = "";
-		out += borderLeftWidth + " ";
-		out += borderLeftStyle + " ";
-		out += borderLeftColor + " ";
-		out += borderLeftColor$ + " ";
+		out += borderLeftWidth + STRING_SPACE;
+		out += borderLeftStyle + STRING_SPACE;
+		out += borderLeftColor + STRING_SPACE;
+		out += borderLeftColor$ + STRING_SPACE;
 		out = out.replaceAll("null", "");
 		out = out.trim();
 		return out;

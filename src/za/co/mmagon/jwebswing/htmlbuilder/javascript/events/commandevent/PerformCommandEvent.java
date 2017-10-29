@@ -1,4 +1,4 @@
-package za.co.mmagon.jwebswing.htmlbuilder.javascript.events.commandEvent;
+package za.co.mmagon.jwebswing.htmlbuilder.javascript.events.commandevent;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.Event;

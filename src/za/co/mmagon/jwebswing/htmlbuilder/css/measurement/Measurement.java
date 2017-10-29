@@ -1,5 +1,7 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.measurement;
 
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
+
 /**
  * Defines any measurement
  *
@@ -76,7 +78,7 @@ public final class Measurement
 	{
 		outputMeasurement = new StringBuilder(
 				measurementType.isRequiresQuotes()
-						? "\"" + measurementValue + measurementType.getHtmlAnnotation() + "\""
+						? StaticStrings.STRING_DOUBLE_QUOTES + measurementValue + measurementType.getHtmlAnnotation() + StaticStrings.STRING_DOUBLE_QUOTES
 						: measurementValue + measurementType.getHtmlAnnotation());
 		return outputMeasurement;
 	}

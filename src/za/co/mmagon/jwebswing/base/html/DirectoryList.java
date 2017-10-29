@@ -40,14 +40,13 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @param <J>
  *
  * @author GedMarc
- * @deprecated
  */
 public class DirectoryList<J extends DirectoryList<J>>
 		extends Component<DirectoryListChildren, DirectoryListAttributes, NoFeatures, NoEvents, J>
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * @deprecated
 	 */

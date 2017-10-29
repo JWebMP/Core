@@ -23,6 +23,8 @@ import java.text.StringCharacterIterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.HTML_AMPERSAND;
+
 /**
  * Convenience methods for escaping special characters related to HTML, XML, and regular expressions.
  * <p>
@@ -30,14 +32,14 @@ import java.util.regex.Pattern;
  */
 public final class EscapeChars
 {
-	
+
 	private static final Pattern SCRIPT = Pattern.compile(
 			"<SCRIPT>", Pattern.CASE_INSENSITIVE
 	                                                     );
 	private static final Pattern SCRIPT_END = Pattern.compile(
 			"</SCRIPT>", Pattern.CASE_INSENSITIVE
 	                                                         );
-	
+
 	/**
 	 * Static only
 	 */
@@ -45,7 +47,7 @@ public final class EscapeChars
 	{
 		//empty - prevent construction
 	}
-	
+
 	/**
 	 * Escape characters for text appearing in HTML markup.
 	 * <p>
@@ -72,7 +74,7 @@ public final class EscapeChars
 					result.append("&gt;");
 					break;
 				case '&':
-					result.append("&amp;");
+					result.append(HTML_AMPERSAND);
 					break;
 				case '\"':
 					result.append("&quot;");
@@ -174,7 +176,7 @@ public final class EscapeChars
 		}
 		return result.toString();
 	}
-	
+
 	/**
 	 * Escape all ampersand characters in a URL.
 	 *
@@ -184,9 +186,9 @@ public final class EscapeChars
 	 */
 	public static String forHrefAmpersand(String aURL)
 	{
-		return aURL.replace("&", "&amp;");
+		return aURL.replace("&", HTML_AMPERSAND);
 	}
-	
+
 	/**
 	 * Formats as UTF-8
 	 *
@@ -209,7 +211,7 @@ public final class EscapeChars
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Escape characters for text appearing as XML data, between tags.
 	 *
@@ -239,7 +241,7 @@ public final class EscapeChars
 					result.append("&#039;");
 					break;
 				case '&':
-					result.append("&amp;");
+					result.append(HTML_AMPERSAND);
 					break;
 				default:
 					//the char is not a special one
@@ -251,7 +253,7 @@ public final class EscapeChars
 		}
 		return result.toString();
 	}
-	
+
 	/**
 	 * Escapes characters for text appearing as data in the
 	 *
@@ -302,7 +304,7 @@ public final class EscapeChars
 		}
 		return result.toString();
 	}
-	
+
 	/**
 	 * Returns opening and closing tags replaced with the HTML Equivalents replaced by their escaped equivalents.
 	 *
@@ -335,7 +337,7 @@ public final class EscapeChars
 		}
 		return result.toString();
 	}
-	
+
 	/**
 	 * Replace characters having special meaning in regular expressions with their escaped equivalents, preceded by a '\' character.
 	 *
@@ -346,7 +348,7 @@ public final class EscapeChars
 	public static String forRegex(String aRegexFragment)
 	{
 		final StringBuilder result = new StringBuilder();
-		
+
 		final StringCharacterIterator iterator
 				= new StringCharacterIterator(aRegexFragment);
 		char character = iterator.current();
@@ -412,7 +414,7 @@ public final class EscapeChars
 		}
 		return result.toString();
 	}
-	
+
 	/**
 	 * Escape <tt>'$'</tt> and <tt>'\'</tt> characters in replacement strings.
 	 *
@@ -424,7 +426,7 @@ public final class EscapeChars
 	{
 		return Matcher.quoteReplacement(aInput);
 	}
-	
+
 	/**
 	 * Disable all script tags
 	 *
@@ -441,7 +443,7 @@ public final class EscapeChars
 		result = matcher.replaceAll("&gt;/SCRIPT&lt;");
 		return result;
 	}
-	
+
 	/**
 	 * Adds padding to string builder
 	 *

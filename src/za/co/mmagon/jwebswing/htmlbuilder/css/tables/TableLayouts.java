@@ -68,9 +68,9 @@ public enum TableLayouts implements CSSEnumeration<TableLayouts>
 	/**
 	 * Sets this field as not set
 	 */
-	Unset;;
+	Unset;
 
-	private TableLayouts()
+	TableLayouts()
 	{
 	}
 

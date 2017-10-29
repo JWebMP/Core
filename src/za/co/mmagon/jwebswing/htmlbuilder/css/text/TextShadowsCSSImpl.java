@@ -29,6 +29,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
  * @author GedMarc
  * @since 18 Jan 2016
  */
+@SuppressWarnings("unused")
 public class TextShadowsCSSImpl extends CSSImplementationAdapter<TextShadows, TextShadowsCSSImpl> implements CSSImplementationClass<TextShadows, TextShadowsCSSImpl>
 {
 
@@ -48,6 +49,7 @@ public class TextShadowsCSSImpl extends CSSImplementationAdapter<TextShadows, Te
 	 */
 	public TextShadowsCSSImpl()
 	{
+		//No configuration needed
 	}
 
 	/**

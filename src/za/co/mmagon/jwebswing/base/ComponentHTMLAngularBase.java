@@ -32,10 +32,14 @@ import java.util.Map;
 /**
  * Enables Angular
  *
- * @param <A> The allowed local attributes (Separate from Global Attributes)
- * @param <F> The allowed feature JavaScripts
- * @param <E> The allowed associated Events
- * @param <J> Component output for cloning. Returned on CloneComponent
+ * @param <A>
+ * 		The allowed local attributes (Separate from Global Attributes)
+ * @param <F>
+ * 		The allowed feature JavaScripts
+ * @param <E>
+ * 		The allowed associated Events
+ * @param <J>
+ * 		Component output for cloning. Returned on CloneComponent
  *
  * @author GedMarc
  * @since 27 Apr 2016
@@ -43,9 +47,9 @@ import java.util.Map;
 public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHTMLAngularBase<A, F, E, J>>
 		extends ComponentHTMLAttributeBase<A, F, E, J> implements IComponentHTMLAngularBase<J>
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * All the angular attributes for this component
 	 */
@@ -56,7 +60,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Map<String, JavaScriptPart> angularObjects;
-	
+
 	/**
 	 * Constructs a new component with the angular features enabled
 	 *
@@ -66,7 +70,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	{
 		super(componentType);
 	}
-	
+
 	/**
 	 * Returns an Angular Base interface of this component
 	 *
@@ -76,7 +80,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	{
 		return this;
 	}
-	
+
 	/**
 	 * Sets an Angular Attribute
 	 *
@@ -91,7 +95,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 		getAttributesAngular().put(attribute, value);
 		return (J) this;
 	}
-	
+
 	/**
 	 * Gets an angular attribute
 	 *
@@ -104,7 +108,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	{
 		return getAttributesAngular().get(attribute);
 	}
-	
+
 	/**
 	 * Returns all the angular attributes on this component
 	 *
@@ -118,12 +122,14 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 		}
 		return attributesAngular;
 	}
-	
+
 	/**
 	 * Adds an object for watching across an application
 	 *
-	 * @param name       The variable name to use
-	 * @param dataObject The data object to map
+	 * @param name
+	 * 		The variable name to use
+	 * @param dataObject
+	 * 		The data object to map
 	 *
 	 * @return This for chain setting
 	 */
@@ -134,23 +140,25 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 		getAngularObjects().put(name, dataObject);
 		return (J) this;
 	}
-	
+
 	/**
 	 * Returns the DTO currently mapped
 	 *
-	 * @param <T>       The type to return
-	 * @param name      The name of the DTO to map
-	 * @param classType The class type
+	 * @param <T>
+	 * 		The type to return
+	 * @param name
+	 * 		The name of the DTO to map
+	 * @param classType
+	 * 		The class type
 	 *
 	 * @return Null if not available
 	 */
 	@Override
 	public <T extends JavaScriptPart> T getDto(String name, Class<T> classType)
 	{
-		T jp = (T) getAngularObjects().get(name);
-		return jp;
+		return (T) getAngularObjects().get(name);
 	}
-	
+
 	/**
 	 * Returns the angular objects mapped to this component
 	 *
@@ -166,7 +174,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 		}
 		return angularObjects;
 	}
-	
+
 	/**
 	 * Adds all the attributes associated with angular
 	 *
@@ -176,19 +184,10 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	public Map<String, String> getAttributes()
 	{
 		Map<String, String> allAttributes = super.getAttributes();
-		getAttributesAngular().entrySet().forEach((entry)
-				                                          ->
-		                                          {
-			                                          if (entry != null)
-			                                          {
-				                                          AngularAttributes key = entry.getKey();
-				                                          String value = entry.getValue();
-				                                          allAttributes.put(key.toString(), value);
-			                                          }
-		                                          });
+		getAttributesAngular().forEach((key, value) -> allAttributes.put(key.toString(), value));
 		return allAttributes;
 	}
-	
+
 	/**
 	 * Binds this component to an angular variable. If it is an input is it bound directly, otherwise the text is set to what the variable contains
 	 * <p>
@@ -204,7 +203,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 		AngularPageConfigurator.setRequired(this, true);
 		return (J) this;
 	}
-	
+
 	/**
 	 * Instructs Angular to not show items that are bound until after the digest sequence
 	 *
@@ -216,7 +215,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 		AngularPageConfigurator.setRequired(this, true);
 		return (J) this;
 	}
-	
+
 	@Override
 	public void destroy()
 	{
@@ -232,5 +231,38 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 		}
 		super.destroy();
 	}
-	
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof ComponentHTMLAngularBase))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		ComponentHTMLAngularBase<?, ?, ?, ?> that = (ComponentHTMLAngularBase<?, ?, ?, ?>) o;
+
+		if (!getAttributesAngular().equals(that.getAttributesAngular()))
+		{
+			return false;
+		}
+		return getAngularObjects().equals(that.getAngularObjects());
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getAttributesAngular().hashCode();
+		result = 31 * result + getAngularObjects().hashCode();
+		return result;
+	}
 }

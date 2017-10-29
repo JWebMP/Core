@@ -16,6 +16,9 @@
  */
 package za.co.mmagon.jwebswing.base.servlets.enumarations;
 
+import javax.validation.constraints.NotNull;
+import java.util.Properties;
+
 /**
  * Configures the global generation type
  *
@@ -28,11 +31,11 @@ public enum DevelopmentEnvironments
 	/**
 	 * All commenting and everything
 	 */
-	Local,
+	Local(null),
 	/**
 	 * Lots of commenting
 	 */
-	Sandbox,
+	Sandbox(null),
 	/**
 	 * Always pretty print HTML
 	 */
@@ -52,6 +55,48 @@ public enum DevelopmentEnvironments
 	/**
 	 * Forces tiny HTML to be rendered
 	 */
-	Production,
-	
+	Production;
+
+	private Properties environmentProperties;
+
+	DevelopmentEnvironments()
+	{
+		environmentProperties = null;
+	}
+
+	/**
+	 * Constructs with a default properties set
+	 *
+	 * @param environmentProperties
+	 */
+	DevelopmentEnvironments(Properties environmentProperties)
+	{
+		this.environmentProperties = environmentProperties;
+	}
+
+	/**
+	 * Returns the assigned environment properties
+	 *
+	 * @return
+	 */
+	@NotNull
+	public Properties getEnvironmentProperties()
+	{
+		if (environmentProperties == null)
+		{
+			environmentProperties = new Properties();
+		}
+		return environmentProperties;
+	}
+
+	/**
+	 * Sets the default properties
+	 *
+	 * @param environmentProperties
+	 */
+	@SuppressWarnings("unused")
+	public void setEnvironmentProperties(@NotNull Properties environmentProperties)
+	{
+		this.environmentProperties = environmentProperties;
+	}
 }

@@ -17,6 +17,7 @@
 package za.co.mmagon.jwebswing.base.dto;
 
 import org.junit.jupiter.api.Test;
+import za.co.mmagon.jwebswing.utilities.RegularExpressionsDTO;
 
 /**
  * @author GedMarc

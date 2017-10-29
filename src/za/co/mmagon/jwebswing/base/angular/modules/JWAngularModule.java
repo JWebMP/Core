@@ -21,8 +21,9 @@ import za.co.mmagon.jwebswing.base.angular.AngularFeature;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
+
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SINGLE_QUOTES;
 
 /**
  * @author GedMarc
@@ -56,38 +57,24 @@ public class JWAngularModule extends AngularModuleBase
 	public String renderFunction()
 	{
 		String returnable = "var " + AngularFeature.getAppName() + " = angular.module(";
-		returnable += "'" + AngularFeature.getAppName() + "',";
+		returnable += STRING_SINGLE_QUOTES + AngularFeature.getAppName() + "',";
 
 		ArrayList<String> moduleNames = new ArrayList<>();
 		List<AngularModuleBase> modules = page.getAngular().getAngularModules();
-		Collections.sort(modules, new Comparator<AngularModuleBase>()
-		{
-			@Override
-			public int compare(AngularModuleBase o1, AngularModuleBase o2)
-			{
-				return o1.compare(o1, o2);
-			}
-		});
+		Collections.sort(modules, (o1, o2) -> o1.compare(o1, o2));
 		for (AngularModuleBase module : modules)
 		{
 			String name = module.getReferenceName();
-			if (name != null)
+			if (name != null && !moduleNames.contains(name))
 			{
-				if (!moduleNames.contains(name))
-				{
-					moduleNames.add(module.getReferenceName());
-				}
+				moduleNames.add(module.getReferenceName());
 			}
 		}
-		/*
-	     * modules.stream().forEachOrdered(module -> { String name = module.getReferenceName(); if (name != null) { if (!moduleNames.contains(name)) { moduleNames.add(module.getReferenceName()); } }
-        });
-         */
 
 		StringBuilder nameRenders = new StringBuilder();
 		for (String name : moduleNames)
 		{
-			nameRenders.append("'").append(name).append("',");
+			nameRenders.append(STRING_SINGLE_QUOTES).append(name).append("',");
 		}
 
 		if (nameRenders.indexOf(",") != -1)
@@ -112,4 +99,32 @@ public class JWAngularModule extends AngularModuleBase
 		return super.toString();
 	}
 
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + page.hashCode();
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof JWAngularModule))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		JWAngularModule that = (JWAngularModule) o;
+
+		return page.equals(that.page);
+	}
 }

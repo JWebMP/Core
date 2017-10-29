@@ -24,14 +24,14 @@ package za.co.mmagon.jwebswing.base.interfaces;
  */
 public interface RenderBeforeDynamicScripts
 {
-	
+
 	/**
 	 * Renders after the scripts
 	 *
 	 * @return
 	 */
-	StringBuffer render();
-	
+	StringBuilder render();
+
 	/**
 	 * The sort order
 	 *
