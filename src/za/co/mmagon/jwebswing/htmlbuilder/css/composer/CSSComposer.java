@@ -139,7 +139,6 @@ public class CSSComposer
 			               }
 			               catch (IllegalAccessException e)
 			               {
-				               e.printStackTrace();
 				               log.log(Level.WARNING, "Unable to read field object " + field.getName(), e);
 			               }
 			               if (Objects.nonNull(fieldObject))

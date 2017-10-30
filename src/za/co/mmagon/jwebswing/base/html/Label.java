@@ -173,5 +173,38 @@ public class Label<J extends Label<J>>
 			addAttribute(LabelAttributes.Form, forInputComponent.getID());
 		}
 	}
-	
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (o == null || getClass() != o.getClass())
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		Label<?> label = (Label<?>) o;
+
+		if (getForInputComponent() != null ? !getForInputComponent().equals(label.getForInputComponent()) : label.getForInputComponent() != null)
+		{
+			return false;
+		}
+		return getForFormComponent() != null ? getForFormComponent().equals(label.getForFormComponent()) : label.getForFormComponent() == null;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + (getForInputComponent() != null ? getForInputComponent().hashCode() : 0);
+		result = 31 * result + (getForFormComponent() != null ? getForFormComponent().hashCode() : 0);
+		return result;
+	}
 }

@@ -400,7 +400,7 @@ public class JWebSwingServlet extends JWDefaultServlet
 				{
 					continue;
 				}
-				Page p = (Page) GuiceContext.getInstance(page);
+				Page p = GuiceContext.getInstance(page);
 				p.destroy();
 			}
 

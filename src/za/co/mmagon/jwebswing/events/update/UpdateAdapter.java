@@ -103,14 +103,14 @@ public abstract class UpdateAdapter extends Event
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onStop(AjaxCall call, AjaxResponse response);
+	public abstract void onUpdate(AjaxCall call, AjaxResponse response);
 
 	@Override
 	public void fireEvent(AjaxCall call, AjaxResponse response)
 	{
 		try
 		{
-			onStop(call, response);
+			onUpdate(call, response);
 		}
 		catch (Exception e)
 		{

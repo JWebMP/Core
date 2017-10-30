@@ -225,26 +225,11 @@ public class SiteBinder extends GuiceSiteBinder
 			                                   return new Page();
 		                                   });
 
-		module.bind(ObjectMapper.class).annotatedWith(Names.named("JSON")).toProvider(() ->
-		                                                                              {
-			                                                                              ObjectMapper jsonObjectMapper = new ObjectMapper();
-			                                                                              configureObjectMapperForJSON(jsonObjectMapper);
-			                                                                              return jsonObjectMapper;
-		                                                                              }).in(Singleton.class);
+		module.bind(ObjectMapper.class).annotatedWith(Names.named("JSON")).toProvider(this::getJsonMapper).in(Singleton.class);
 
-		module.bind(ObjectMapper.class).annotatedWith(Names.named("JS")).toProvider(() ->
-		                                                                            {
-			                                                                            ObjectMapper jsonObjectMapper = new ObjectMapper();
-			                                                                            configureObjectMapperForJSON(jsonObjectMapper);
-			                                                                            return jsonObjectMapper;
-		                                                                            }).in(Singleton.class);
+		module.bind(ObjectMapper.class).annotatedWith(Names.named("JS")).toProvider(this::getJsonMapper).in(Singleton.class);
 
-		module.bind(ObjectMapper.class).annotatedWith(Names.named("JSFunction")).toProvider(() ->
-		                                                                                    {
-			                                                                                    ObjectMapper jsonObjectMapper = new ObjectMapper();
-			                                                                                    configureObjectMapperForJSON(jsonObjectMapper);
-			                                                                                    return jsonObjectMapper;
-		                                                                                    }).in(Singleton.class);
+		module.bind(ObjectMapper.class).annotatedWith(Names.named("JSFunction")).toProvider(this::getJsonMapper).in(Singleton.class);
 
 
 		for (Class<?> page : getPages())
@@ -316,6 +301,13 @@ public class SiteBinder extends GuiceSiteBinder
 			log.log(Level.WARNING, "Unable to process page : " + next + " due to null pointer", npe);
 		}
 		return null;
+	}
+
+	private ObjectMapper getJsonMapper()
+	{
+		ObjectMapper jsonObjectMapper = new ObjectMapper();
+		configureObjectMapperForJSON(jsonObjectMapper);
+		return jsonObjectMapper;
 	}
 
 	/**
