@@ -25,9 +25,10 @@ import java.io.Serializable;
  * @version 1.0
  * @since 2014/04/23
  */
+@FunctionalInterface
 public interface CssClass extends Serializable
 {
-	
+
 	/**
 	 * @return The class name this object must yield
 	 */

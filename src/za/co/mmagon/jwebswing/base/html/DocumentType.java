@@ -23,6 +23,8 @@ import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
+import java.util.Objects;
+
 /**
  * <p>
  * Definition and Usage<p>
@@ -62,22 +64,23 @@ public class DocumentType<J extends DocumentType<J>>
 		extends ComponentHTMLBase<GlobalFeatures, GlobalEvents, J>
 		implements NoNewLineForRawText
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private final HTMLVersions clientHtmlVersion;
-	
+
 	/**
 	 * Constructs a new document type for the HTML Component
 	 *
-	 * @param clientHtmlVersion The browser HTML version to render for, usually the clients. This gets set by the JWebSwing Servlet.
+	 * @param clientHtmlVersion
+	 * 		The browser HTML version to render for, usually the clients. This gets set by the JWebSwing Servlet.
 	 */
 	public DocumentType(HTMLVersions clientHtmlVersion)
 	{
 		super(ComponentTypes.Feature);
 		this.clientHtmlVersion = clientHtmlVersion;
 	}
-	
+
 	/**
 	 * Renders the DTD clause
 	 *
@@ -88,7 +91,7 @@ public class DocumentType<J extends DocumentType<J>>
 	{
 		return (clientHtmlVersion.getDtd());
 	}
-	
+
 	/**
 	 * Renders the DTD Clause
 	 *
@@ -101,7 +104,7 @@ public class DocumentType<J extends DocumentType<J>>
 	{
 		return toString();
 	}
-	
+
 	/**
 	 * Renders the DTD Clause
 	 *
@@ -114,7 +117,7 @@ public class DocumentType<J extends DocumentType<J>>
 	{
 		return toString();
 	}
-	
+
 	/**
 	 * Returns the connected client browser version
 	 * <p>
@@ -125,5 +128,16 @@ public class DocumentType<J extends DocumentType<J>>
 	{
 		return clientHtmlVersion;
 	}
-	
+
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hashCode(this);
+	}
 }

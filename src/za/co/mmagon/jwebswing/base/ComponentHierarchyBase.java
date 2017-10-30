@@ -193,38 +193,41 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	public Map<String, JavaScriptPart> getAngularObjectsAll()
 	{
 		Map<String, JavaScriptPart> map = getAngularObjects();
-
-		for (Iterator<ComponentHierarchyBase> iterator = getChildrenHierarchy(true).iterator(); iterator.hasNext(); )
+		for (ComponentHierarchyBase next : getChildrenHierarchy(true))
 		{
-			ComponentHierarchyBase next = iterator.next();
-			for (Iterator iterator1 = next.getAngularObjects().entrySet().iterator(); iterator1.hasNext(); )
-			{
-				try
-				{
-					Object ne = iterator1.next();
-					if (ne instanceof String)
-					{
-						String next1 = (String) iterator1.next();
-						JavaScriptPart part = (JavaScriptPart) next.getAngularObjects().get(next1);
-						map.put(next1, part);
-					}
-					else if (ne instanceof Map)
-					{
-
-					}
-				}
-				catch (ClassCastException cce)
-				{
-					log.log(Level.WARNING, "Incorrect Object Type, Perhaps JavaScriptPart?", cce);
-				}
-				catch (Exception e)
-				{
-					log.log(Level.WARNING, "Unable to render angular object", e);
-				}
-			}
-
+			processAngularObjects(next, map);
 		}
 		return map;
+	}
+
+	/**
+	 * Processes the angular objects into a map
+	 *
+	 * @param next
+	 * @param map
+	 */
+	private void processAngularObjects(ComponentHierarchyBase next, Map<String, JavaScriptPart> map)
+	{
+		next.getAngularObjects().forEach((key, value) ->
+		                                 {
+			                                 try
+			                                 {
+				                                 Object ne = key;
+				                                 if (ne instanceof String)
+				                                 {
+					                                 JavaScriptPart part = JavaScriptPart.class.cast(next.getAngularObjects().get(key));
+					                                 map.put((String) key, part);
+				                                 }
+			                                 }
+			                                 catch (ClassCastException cce)
+			                                 {
+				                                 log.log(Level.WARNING, "Incorrect Object Type, Perhaps JavaScriptPart?", cce);
+			                                 }
+			                                 catch (Exception e)
+			                                 {
+				                                 log.log(Level.WARNING, "Unable to render angular object", e);
+			                                 }
+		                                 });
 	}
 
 	/**
@@ -293,8 +296,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	@Override
 	public List<ComponentHierarchyBase> getChildrenHierarchy(List<ComponentHierarchyBase> componentsToAddTo)
 	{
-		getChildren().forEach(child
-				                      ->
+		getChildren().forEach(child ->
 		                      {
 			                      if (child != null)
 			                      {
@@ -339,11 +341,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		{
 			sb.append(renderBeforeChildren());
 		}
-		getChildren().forEach(child
-				                      ->
-		                      {
-			                      sb.append(getNewLine()).append(child.toString(isTiny() ? 0 : getCurrentTabIndents() + 1));
-		                      });
+		getChildren().forEach(child -> sb.append(getNewLine()).append(child.toString(isTiny() ? 0 : getCurrentTabIndents() + 1)));
 		if (renderAfterChildren() != null)
 		{
 			sb.append(renderAfterChildren());
@@ -378,11 +376,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	public J setPage(Page page)
 	{
 		this.page = page;
-		getChildren().forEach(child
-				                      ->
-		                      {
-			                      child.setPage(page);
-		                      });
+		getChildren().forEach(child -> child.setPage(page));
 		return (J) this;
 	}
 
@@ -638,11 +632,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	@Override
 	public J setTiny(boolean tiny)
 	{
-		getChildren().forEach(child
-				                      ->
-		                      {
-			                      child.setTiny(tiny);
-		                      });
+		getChildren().forEach(child -> child.setTiny(tiny));
 		return super.setTiny(tiny);
 	}
 
@@ -728,14 +718,12 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	@Override
 	public J addTheme(Theme theme)
 	{
-		if (theme != null)
+		if (theme != null && !getThemes().contains(theme))
 		{
-			if (!getThemes().contains(theme))
-			{
-				getThemes().add(theme);
-				addClass(theme.getClassName());
-			}
+			getThemes().add(theme);
+			addClass(theme.getClassName());
 		}
+
 		return (J) this;
 	}
 
@@ -749,12 +737,11 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		{
 
 			List<ComponentHierarchyBase> clonedBase = getChildren();
-			clonedBase.stream().filter(a -> a != null).forEach(comp
-					                                                   ->
-			                                                   {
-				                                                   ComponentHierarchyBase cfb = comp;
-				                                                   cfb.init();
-			                                                   });
+			clonedBase.forEach(comp ->
+			                   {
+				                   ComponentHierarchyBase cfb = comp;
+				                   cfb.init();
+			                   });
 		}
 		super.init();
 	}
@@ -767,8 +754,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	@Override
 	public String toString()
 	{
-		getChildren().forEach(next
-				                      ->
+		getChildren().forEach(next ->
 		                      {
 			                      if (!next.isConfigured())
 			                      {
@@ -776,20 +762,6 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 			                      }
 		                      });
 		return super.toString();
-	}
-
-	/**
-	 * Returns the HTML with the specified tab count
-	 *
-	 * @param tabCount
-	 *
-	 * @return Indented HTML
-	 */
-	@Override
-	public String toString(Integer tabCount)
-	{
-//        preConfigure();
-		return super.toString(tabCount);
 	}
 
 	/**
@@ -823,43 +795,52 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	{
 		ArrayList<StringBuilder> reallyAllQueries = new ArrayList<>();
 		List<ComponentHierarchyBase> allComponents = getChildrenHierarchy(true);
-		allComponents.forEach((Consumer<? super ComponentHierarchyBase>) componentQuery ->
-		{
-			List<ComponentFeatureBase> features = componentQuery.getFeatures();
-			features.remove(null);
-			features.forEach(feature ->
-			                 {
-				                 if (feature != null)
-				                 {
-					                 feature.preConfigure();
-					                 reallyAllQueries.add(feature.renderJavascript());
-				                 }
-			                 });
-			Collections.sort(features, Comparator.comparing(ComponentFeatureBase::getSortOrder));
-			List<ComponentEventBase> events = componentQuery.getEvents();
-			events.remove(null);
-			events.forEach(event ->
-			               {
-				               if (event != null)
-				               {
-					               event.preConfigure();
-					               reallyAllQueries.add(event.renderJavascript());
-				               }
-			               });
-			Collections.sort(events, Comparator.comparing(ComponentFeatureBase::getSortOrder));
-			List<ComponentHierarchyBase> myQueries = new ArrayList<>();// componentQuery.getQueriesAll();
-			myQueries.remove(null);
-			myQueries.forEach(query ->
-			                  {
-				                  if (query != null)
-				                  {
-					                  query.preConfigure();
-					                  reallyAllQueries.add(query.renderJavascript());
-				                  }
-			                  });
-		});
-
+		allComponents.forEach((Consumer<? super ComponentHierarchyBase>) componentQuery -> processComponentQueries(componentQuery, reallyAllQueries));
 		return reallyAllQueries;
+	}
+
+	/**
+	 * Processes the queries
+	 *
+	 * @param componentQuery
+	 * @param reallyAllQueries
+	 */
+	private void processComponentQueries(ComponentHierarchyBase componentQuery, List<StringBuilder> reallyAllQueries)
+	{
+		List<ComponentFeatureBase> features = componentQuery.getFeatures();
+		features.remove(null);
+		features.forEach(feature ->
+		                 {
+			                 if (feature != null)
+			                 {
+				                 feature.preConfigure();
+				                 reallyAllQueries.add(feature.renderJavascript());
+			                 }
+		                 });
+
+		Collections.sort(features, Comparator.comparing(ComponentFeatureBase::getSortOrder));
+		List<ComponentEventBase> events = componentQuery.getEvents();
+		events.remove(null);
+		events.forEach(event ->
+		               {
+			               if (event != null)
+			               {
+				               event.preConfigure();
+				               reallyAllQueries.add(event.renderJavascript());
+			               }
+		               });
+
+		Collections.sort(events, Comparator.comparing(ComponentFeatureBase::getSortOrder));
+		List<ComponentHierarchyBase> myQueries = new ArrayList<>();
+		myQueries.remove(null);
+		myQueries.forEach(query ->
+		                  {
+			                  if (query != null)
+			                  {
+				                  query.preConfigure();
+				                  reallyAllQueries.add(query.renderJavascript());
+			                  }
+		                  });
 	}
 
 	@Override
@@ -873,15 +854,14 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		if (!isConfigured())
 		{
 			List<ComponentHierarchyBase> clonedBase = getChildren();
-			clonedBase.stream().filter(a -> a != null).forEach(feature
-					                                                   ->
-			                                                   {
-				                                                   ComponentHierarchyBase cfb = feature;
-				                                                   if (cfb != null && !cfb.isConfigured())
-				                                                   {
-					                                                   cfb.preConfigure();
-				                                                   }
-			                                                   });
+			clonedBase.forEach(feature ->
+			                   {
+				                   ComponentHierarchyBase cfb = feature;
+				                   if (cfb != null && !cfb.isConfigured())
+				                   {
+					                   cfb.preConfigure();
+				                   }
+			                   });
 
 			if (hasChildren())
 			{
@@ -932,6 +912,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	public boolean readChildrenPropertyFirstResult(String propertyName, boolean returnBool)
 	{
 		for (ComponentHierarchyBase next : getChildrenHierarchy(true))
@@ -939,20 +920,13 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 			if (next.hasProperty(propertyName))
 			{
 				String propertyValue = next.getProperties().get(propertyName).toString();
-				if (propertyValue != null && !propertyValue.isEmpty())
+				try
 				{
-					try
-					{
-						Boolean bool = Boolean.parseBoolean(propertyValue);
-						if (bool)
-						{
-							return bool;
-						}
-					}
-					catch (Exception e)
-					{
-						log.log(Level.WARNING, "Property value was not a boolean.", e);
-					}
+					return Boolean.parseBoolean(propertyValue);
+				}
+				catch (Exception e)
+				{
+					log.log(Level.WARNING, "Property value was not a boolean.", e);
 				}
 			}
 		}
@@ -1126,17 +1100,13 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		{
 			for (ComponentHierarchyBase next : children)
 			{
-				if (next != null)
+				try
 				{
-					try
-					{
-						next.destroy();
-						next = null;
-					}
-					catch (Exception e)
-					{
-						e.printStackTrace();
-					}
+					next.destroy();
+				}
+				catch (Exception e)
+				{
+					log.log(Level.SEVERE, "UUnable to destroy", e);
 				}
 			}
 		}
@@ -1153,4 +1123,47 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		super.destroy();
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof ComponentHierarchyBase))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		ComponentHierarchyBase<?, ?, ?, ?, ?> that = (ComponentHierarchyBase<?, ?, ?, ?, ?>) o;
+
+		if (!getChildren().equals(that.getChildren()))
+		{
+			return false;
+		}
+		if (getParent() != null ? !getParent().equals(that.getParent()) : that.getParent() != null)
+		{
+			return false;
+		}
+		if (!getClasses().equals(that.getClasses()))
+		{
+			return false;
+		}
+		return getPage() != null ? getPage().equals(that.getPage()) : that.getPage() == null;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getChildren().hashCode();
+		result = 31 * result + (getParent() != null ? getParent().hashCode() : 0);
+		result = 31 * result + getClasses().hashCode();
+		result = 31 * result + (getPage() != null ? getPage().hashCode() : 0);
+		return result;
+	}
 }

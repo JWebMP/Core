@@ -60,17 +60,17 @@ public class HorizontalRule<J extends HorizontalRule<J>>
 		extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
 		implements NoIDTag, NoClassAttribute
 {
-	
+
 	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("HR");
 	private static final HorizontalRule hr = new HorizontalRule();
 	private static final long serialVersionUID = 1L;
-	
+
 	public HorizontalRule()
 	{
 		super("hr", ComponentTypes.HorizontalRule);
 		setInlineClosingTag(true);
 	}
-	
+
 	/**
 	 * Return the Horizontal Rule Instance
 	 *
@@ -80,7 +80,7 @@ public class HorizontalRule<J extends HorizontalRule<J>>
 	{
 		return hr;
 	}
-	
+
 	/**
 	 * Return a new instance of the Horizontal Rule
 	 *
@@ -90,14 +90,13 @@ public class HorizontalRule<J extends HorizontalRule<J>>
 	{
 		return new HorizontalRule();
 	}
-	
+
 	@Override
-	@SuppressWarnings("")
 	public boolean equals(Object obj)
 	{
 		return false;
 	}
-	
+
 	/**
 	 * Differences Between HTML and XHTML
 	 * <p>
@@ -121,11 +120,10 @@ public class HorizontalRule<J extends HorizontalRule<J>>
 			log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
 		}
 	}
-	
+
 	@Override
 	public int hashCode()
 	{
-		int hash = 7;
-		return hash;
+		return super.hashCode();
 	}
 }

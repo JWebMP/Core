@@ -43,13 +43,13 @@ public class ImportFile<J extends ImportFile<J>>
 		extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
 		implements BodyChildren, ParagraphChildren
 {
-	
+
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The actual name for the template
 	 */
 	private final String templateName;
-	
+
 	/**
 	 * Constructs a new instance of an imported file via a stream
 	 *
@@ -67,21 +67,18 @@ public class ImportFile<J extends ImportFile<J>>
 		try (InputStreamReader isr = new InputStreamReader(inputStream); BufferedReader br = new BufferedReader(isr))
 		{
 			sb = new StringBuilder();
-			br.lines().forEach(line ->
-			                   {
-				                   sb.append(line);
-			                   });
+			br.lines().forEach(sb::append);
 		}
 		inputStream.close();
 		FileTemplates.setTemplateScript(templateName, sb);
 	}
-	
+
 	@Override
 	protected StringBuilder renderHTML(int tabCount)
 	{
 		return FileTemplates.renderTemplateScripts(templateName);
 	}
-	
+
 	/**
 	 * Returns the template name for this file
 	 *
@@ -91,5 +88,33 @@ public class ImportFile<J extends ImportFile<J>>
 	{
 		return templateName;
 	}
-	
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof ImportFile))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		ImportFile<?> that = (ImportFile<?>) o;
+
+		return getTemplateName().equals(that.getTemplateName());
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getTemplateName().hashCode();
+		return result;
+	}
 }

@@ -60,13 +60,13 @@ public class Paragraph<J extends Paragraph<J>>
 		extends Component<ParagraphChildren, ParagraphAttributes, GlobalFeatures, GlobalEvents, J>
 		implements BodyChildren, NoNewLineForRawText, ParagraphChildren, DetailsChildren
 {
-	
+
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Sets if this paragraph must render the text directly without a tag
 	 */
 	private boolean textOnly;
-	
+
 	/**
 	 * Constructs a blank paragraph
 	 */
@@ -74,7 +74,7 @@ public class Paragraph<J extends Paragraph<J>>
 	{
 		this("");
 	}
-	
+
 	/**
 	 * Constructs a new paragraph with the raw text set as the input text
 	 * <p>
@@ -86,7 +86,7 @@ public class Paragraph<J extends Paragraph<J>>
 		super("p", ComponentTypes.Paragraph);
 		setText(text);
 	}
-	
+
 	/**
 	 * Sets if this paragraph must render the text directly without a tag
 	 *
@@ -96,7 +96,7 @@ public class Paragraph<J extends Paragraph<J>>
 	{
 		return textOnly;
 	}
-	
+
 	/**
 	 * Sets if this paragraph must render the text directly without a tag
 	 *
@@ -109,7 +109,7 @@ public class Paragraph<J extends Paragraph<J>>
 		this.textOnly = textOnly;
 		return this;
 	}
-	
+
 	@Override
 	protected StringBuilder renderHTML(int tabCount)
 	{
@@ -122,7 +122,7 @@ public class Paragraph<J extends Paragraph<J>>
 			return super.renderHTML(tabCount);
 		}
 	}
-	
+
 	/**
 	 * Don't use the bind attribute, append in curly braces
 	 *
@@ -144,5 +144,16 @@ public class Paragraph<J extends Paragraph<J>>
 		}
 		return (J) this;
 	}
-	
+
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
+	}
 }

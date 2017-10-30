@@ -39,14 +39,6 @@ public enum PageTypes
 	}
 
 	/**
-	 * A new PageTypes with data
-	 */
-	private PageTypes(String data)
-	{
-
-	}
-
-	/**
 	 * Returns the name or the data contained within
 	 *
 	 * @return

@@ -28,34 +28,44 @@ import za.co.mmagon.jwebswing.generics.WebReference;
  */
 public class JavascriptReference extends WebReference<JavascriptReference>
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
-	 * @param name            The name of the reference
-	 * @param version         The version of the reference
-	 * @param localReference  The local reference
-	 * @param remoteReference The remote reference
+	 * @param name
+	 * 		The name of the reference
+	 * @param version
+	 * 		The version of the reference
+	 * @param localReference
+	 * 		The local reference
+	 * @param remoteReference
+	 * 		The remote reference
 	 */
 	public JavascriptReference(String name, Double version, String localReference, String remoteReference)
 	{
 		super(name, version, localReference, remoteReference);
 	}
-	
+
 	/**
-	 * @param name           The name of the reference
-	 * @param version        The version of the reference
-	 * @param localReference The local reference
+	 * @param name
+	 * 		The name of the reference
+	 * @param version
+	 * 		The version of the reference
+	 * @param localReference
+	 * 		The local reference
 	 */
 	public JavascriptReference(String name, Double version, String localReference)
 	{
 		super(name, version, localReference, localReference);
 	}
-	
+
 	/**
-	 * @param name           The name of the reference
-	 * @param version        The version of the reference
-	 * @param localReference The local reference
+	 * @param name
+	 * 		The name of the reference
+	 * @param version
+	 * 		The version of the reference
+	 * @param localReference
+	 * 		The local reference
 	 * @param priority
 	 */
 	@SuppressWarnings("")
@@ -64,45 +74,59 @@ public class JavascriptReference extends WebReference<JavascriptReference>
 		super(name, version, localReference, localReference);
 		setPriority(priority);
 	}
-	
+
 	/**
-	 * @param name           The name of the reference
-	 * @param version        The version of the reference
-	 * @param localReference The local reference
-	 * @param sortOrder      Default Sort Order
-	 *                       <p>
-	 *                       0 - Root (JQuery) 5 - Core 10 - Core Accompanied 15 - Stand Alone Components 20 - Complex Components 500k - Default 600k - Atmosphere Reserved
+	 * @param name
+	 * 		The name of the reference
+	 * @param version
+	 * 		The version of the reference
+	 * @param localReference
+	 * 		The local reference
+	 * @param sortOrder
+	 * 		Default Sort Order
+	 * 		<p>
+	 * 		0 - Root (JQuery) 5 - Core 10 - Core Accompanied 15 - Stand Alone Components 20 - Complex Components 500k - Default 600k - Atmosphere Reserved
 	 */
 	public JavascriptReference(String name, Double version, String localReference, Integer sortOrder)
 	{
 		super(name, version, localReference, localReference);
 		setSortOrder(sortOrder);
 	}
-	
+
 	/**
-	 * @param name            The name of the reference
-	 * @param version         The version of the reference
-	 * @param localReference  The local reference
-	 * @param remoteReference The remote reference
-	 * @param sortOrder       Default Sort Order
-	 *                        <p>
-	 *                        0 - Root (JQuery) 5 - Core 10 - Core Accompanied 15 - Stand Alone Components 20 - Complex Components 500k - Default 600k - Atmosphere Reserved
+	 * @param name
+	 * 		The name of the reference
+	 * @param version
+	 * 		The version of the reference
+	 * @param localReference
+	 * 		The local reference
+	 * @param remoteReference
+	 * 		The remote reference
+	 * @param sortOrder
+	 * 		Default Sort Order
+	 * 		<p>
+	 * 		0 - Root (JQuery) 5 - Core 10 - Core Accompanied 15 - Stand Alone Components 20 - Complex Components 500k - Default 600k - Atmosphere Reserved
 	 */
 	public JavascriptReference(String name, Double version, String localReference, String remoteReference, Integer sortOrder)
 	{
 		super(name, version, localReference, remoteReference);
 		setSortOrder(sortOrder);
 	}
-	
+
 	/**
 	 * <p>
 	 * 0 - Root (JQuery) 5 - Core 10 - Core Accompanied 15 - Stand Alone Components 20 - Complex Components 500k - Default 600k - Atmosphere Reserved
 	 *
-	 * @param name            The name of the reference
-	 * @param version         The version of the reference
-	 * @param localReference  The local reference
-	 * @param remoteReference The remote reference
-	 * @param sortOrder       Default Sort Order
+	 * @param name
+	 * 		The name of the reference
+	 * @param version
+	 * 		The version of the reference
+	 * @param localReference
+	 * 		The local reference
+	 * @param remoteReference
+	 * 		The remote reference
+	 * @param sortOrder
+	 * 		Default Sort Order
 	 * @param priority
 	 */
 	@SuppressWarnings("")
@@ -112,7 +136,7 @@ public class JavascriptReference extends WebReference<JavascriptReference>
 		setSortOrder(sortOrder);
 		setPriority(priority);
 	}
-	
+
 	@Override
 	public boolean equals(Object o)
 	{
@@ -122,7 +146,7 @@ public class JavascriptReference extends WebReference<JavascriptReference>
 			{
 				return true;
 			}
-			
+
 			return getName().equalsIgnoreCase(JavascriptReference.class.cast(o).getName());
 		}
 		else
@@ -130,12 +154,11 @@ public class JavascriptReference extends WebReference<JavascriptReference>
 			return false;
 		}
 	}
-	
+
 	@Override
 	public int hashCode()
 	{
-		int hash = 3;
-		return hash;
+		return 13;
 	}
-	
+
 }

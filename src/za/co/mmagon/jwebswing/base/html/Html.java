@@ -68,7 +68,7 @@ public abstract class Html<J extends Html<J>>
 		extends ComponentHTMLBase<HTMLFeatures, NoEvents, J>
 		implements NoIDTag, NoClassAttribute
 {
-	
+
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The head object
@@ -84,13 +84,13 @@ public abstract class Html<J extends Html<J>>
 	 * The HTML Version the page
 	 */
 	private HTMLVersions htmlVersion;
-	
+
 	/*
 	 * The current browser of the render
 	 */
 	@JsonIgnore
 	private Browsers browser;
-	
+
 	/**
 	 * Constructs a new HTML Tag with I.E. 10 support
 	 */
@@ -98,12 +98,13 @@ public abstract class Html<J extends Html<J>>
 	{
 		this(Browsers.Edge);
 	}
-	
+
 	/**
 	 * Constructs a new HTML Tag with a HTML Version. This supplies the most wanted HTML Version, and CSS Support. When measured the HTML Version
 	 * <p>
 	 *
-	 * @param browser The minimum browser to support. Please don't choose IE5.5, or even 7 for that matter, You're making life difficult.
+	 * @param browser
+	 * 		The minimum browser to support. Please don't choose IE5.5, or even 7 for that matter, You're making life difficult.
 	 */
 	public Html(Browsers browser)
 	{
@@ -111,7 +112,7 @@ public abstract class Html<J extends Html<J>>
 		this.htmlVersion = browser.getHtmlVersion();
 		head = new Head();
 	}
-	
+
 	/**
 	 * Renders the DocType for the HTML
 	 * <p>
@@ -125,7 +126,7 @@ public abstract class Html<J extends Html<J>>
 		sb.append(getBrowser().getHtmlVersion().getDtd()).append(getNewLine());
 		return sb;
 	}
-	
+
 	/**
 	 * Returns a valid HTML Version
 	 * <p>
@@ -136,7 +137,7 @@ public abstract class Html<J extends Html<J>>
 	{
 		return htmlVersion;
 	}
-	
+
 	/**
 	 * Returns the currently set running environment
 	 * <p>
@@ -147,18 +148,19 @@ public abstract class Html<J extends Html<J>>
 	{
 		return runningEnvironment;
 	}
-	
+
 	/**
 	 * Sets the global running environment value
 	 * <p>
 	 *
-	 * @param runningEnvironmentSetting The running environment value
+	 * @param runningEnvironmentSetting
+	 * 		The running environment value
 	 */
 	public void setRunningEnvironment(DevelopmentEnvironments runningEnvironmentSetting)
 	{
 		runningEnvironment = runningEnvironmentSetting;
 	}
-	
+
 	/**
 	 * Returns the head object on the HTML Tag
 	 *
@@ -168,7 +170,7 @@ public abstract class Html<J extends Html<J>>
 	{
 		return head;
 	}
-	
+
 	/*
 	 * Returns the body object on the HTML Tag
 	 */
@@ -180,7 +182,7 @@ public abstract class Html<J extends Html<J>>
 		}
 		return body;
 	}
-	
+
 	/**
 	 * Sets the body for this class
 	 *
@@ -188,12 +190,9 @@ public abstract class Html<J extends Html<J>>
 	 */
 	public void setBody(Body body)
 	{
-		if (this.body != null)
-		{
-		}
 		this.body = body;
 	}
-	
+
 	/**
 	 * Returns the current browser or FireFox
 	 *
@@ -207,7 +206,7 @@ public abstract class Html<J extends Html<J>>
 		}
 		return browser;
 	}
-	
+
 	/**
 	 * Returns the current browser or FireFox
 	 *
@@ -217,15 +216,53 @@ public abstract class Html<J extends Html<J>>
 	{
 		this.browser = browser;
 	}
-	
+
 	@Override
-	public void preConfigure()
+	public boolean equals(Object o)
 	{
-		if (!isConfigured())
+		if (this == o)
 		{
-		
+			return true;
 		}
-		super.preConfigure();
+		if (!(o instanceof Html))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		Html<?> html = (Html<?>) o;
+
+		if (!getHead().equals(html.getHead()))
+		{
+			return false;
+		}
+		if (getRunningEnvironment() != html.getRunningEnvironment())
+		{
+			return false;
+		}
+		if (!getBody().equals(html.getBody()))
+		{
+			return false;
+		}
+		if (getHtmlVersion() != html.getHtmlVersion())
+		{
+			return false;
+		}
+		return getBrowser() == html.getBrowser();
 	}
-	
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getHead().hashCode();
+		result = 31 * result + getRunningEnvironment().hashCode();
+		result = 31 * result + getBody().hashCode();
+		result = 31 * result + getHtmlVersion().hashCode();
+		result = 31 * result + getBrowser().hashCode();
+		return result;
+	}
 }

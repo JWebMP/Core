@@ -47,13 +47,13 @@ public class FieldSet<J extends FieldSet<J>>
 		extends Component<FieldSetChildren, NoAttributes, NoFeatures, NoEvents, J>
 		implements FormChildren, NoIDTag
 {
-	
+
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The legend if any is applied
 	 */
 	private Legend legend;
-	
+
 	/**
 	 * Constructs a new instance of Field Set
 	 */
@@ -62,7 +62,7 @@ public class FieldSet<J extends FieldSet<J>>
 		super(ComponentTypes.FieldSet);
 		add(legend);
 	}
-	
+
 	/**
 	 * Returns the legends text
 	 *
@@ -72,7 +72,7 @@ public class FieldSet<J extends FieldSet<J>>
 	{
 		return legend.getText(0).toString();
 	}
-	
+
 	/**
 	 * Sets the legend
 	 *
@@ -91,5 +91,33 @@ public class FieldSet<J extends FieldSet<J>>
 			legend.setText(legendText);
 		}
 	}
-	
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof FieldSet))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		FieldSet<?> fieldSet = (FieldSet<?>) o;
+
+		return legend.equals(fieldSet.legend);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + legend.hashCode();
+		return result;
+	}
 }

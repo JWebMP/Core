@@ -48,7 +48,7 @@ public class DirectoryList<J extends DirectoryList<J>>
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @deprecated
+	 *
 	 */
 	public DirectoryList()
 	{

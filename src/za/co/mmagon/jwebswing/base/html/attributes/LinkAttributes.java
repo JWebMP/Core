@@ -47,8 +47,8 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
  *
  * @author MMagon
  * @version 1.1
- * <p>
- * Updated attributes to full suite
+ * 		<p>
+ * 		Updated attributes to full suite
  * @since 23 Sep 2013
  */
 public enum LinkAttributes implements AttributeDefinitions
@@ -120,65 +120,36 @@ public enum LinkAttributes implements AttributeDefinitions
 	/**
 	 * Sets the target
 	 */
-	Data_Target,;
-	
+	Data_Target;
+
 	private HTMLVersions maxsupportedVersion = HTMLVersions.HTML5;
 	private HTMLVersions minsupportedVersion = HTMLVersions.HTML401Frameset;
 	private Class returnType = String.class;
-	
+
 	/**
 	 * Construct a new "a" tag with all the predefined supported HTML versions
 	 */
 	LinkAttributes()
 	{
 	}
-	
+
 	LinkAttributes(HTMLVersions maxsupportedVersion)
 	{
 		this.maxsupportedVersion = maxsupportedVersion;
 	}
-	
+
+	@SuppressWarnings("unused")
 	LinkAttributes(HTMLVersions minsupportedVersion, boolean trues)
 	{
 		this.minsupportedVersion = minsupportedVersion;
 	}
-	
-	LinkAttributes(HTMLVersions maxsupportedVersion, HTMLVersions minsupportedVersion)
-	{
-		this.maxsupportedVersion = maxsupportedVersion;
-		this.minsupportedVersion = minsupportedVersion;
-	}
-	
-	LinkAttributes(Class returnType)
-	{
-		this.returnType = returnType;
-	}
-	
-	LinkAttributes(HTMLVersions maxsupportedVersion, HTMLVersions minsupportedVersion, Class returnType)
-	{
-		this.maxsupportedVersion = maxsupportedVersion;
-		this.minsupportedVersion = minsupportedVersion;
-		this.returnType = returnType;
-	}
-	
-	LinkAttributes(HTMLVersions maxsupportedVersion, Class returnType)
-	{
-		this.maxsupportedVersion = maxsupportedVersion;
-		this.returnType = returnType;
-	}
-	
-	LinkAttributes(HTMLVersions minsupportedVersion, boolean trues, Class returnType)
-	{
-		this.minsupportedVersion = maxsupportedVersion;
-		this.returnType = returnType;
-	}
-	
+
 	@Override
 	public String toString()
 	{
 		return name().toLowerCase().replace('_', '-');
 	}
-	
+
 	@Override
 	public boolean isKeyword()
 	{

@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum ComponentTypes
 {
-	
+
 	/**
 	 * Defines a document type
 	 */
@@ -190,8 +190,6 @@ public enum ComponentTypes
 	 * The dir tag is not supported in HTML5. Use CSS instead. The dir tag is
 	 * used to list directory titles.
 	 * <p>
-	 *
-	 * @deprecated
 	 */
 	DirectoryList("dir"),
 	/**
@@ -369,9 +367,7 @@ public enum ComponentTypes
 	Option("option"),
 	/**
 	 * The output tag represents the result of a calculation (like one performed
-	 * by a script).
-	 *
-	 * @deprecated No Support in I.E.
+	 * by a script.
 	 */
 	Output("output"),
 	/**
@@ -534,20 +530,20 @@ public enum ComponentTypes
 	 * Formats a component as a CSS Class Name Reference Only
 	 */
 	CSSClass("meh"),;
-	
+
 	private String componentTag;
 	private Class classType;
 	private Object instance;
-	
+
 	ComponentTypes()
 	{
 	}
-	
+
 	ComponentTypes(String componentTag)
 	{
 		this.componentTag = componentTag;
 	}
-	
+
 	/**
 	 * Returns an array of all the values
 	 *
@@ -557,7 +553,7 @@ public enum ComponentTypes
 	{
 		return values();
 	}
-	
+
 	/**
 	 * Returns the component tag
 	 *
@@ -567,7 +563,7 @@ public enum ComponentTypes
 	{
 		return componentTag;
 	}
-	
+
 	/**
 	 * Descriptive string of the reference
 	 *

@@ -28,10 +28,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.logger.LogFactory;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Please note I have left out all the input type attributes that are not cross-browser - rather use the features available.<p>
@@ -70,7 +66,8 @@ import java.util.logging.Logger;
  * In XHTML, the input tag must be properly closed.<p>
  * <p>
  *
- * @param <A> The attribute set for the input component
+ * @param <A>
+ * 		The attribute set for the input component
  * @param <J>
  *
  * @author Marc Magon
@@ -79,15 +76,13 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		extends Component<NoChildren, A, GlobalFeatures, GlobalEvents, J>
 		implements GlobalChildren, ParagraphChildren
 {
-	
-	private static final Logger log = LogFactory.getInstance().getLogger("Input");
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * The input type of this input tag
 	 */
 	private InputTypes inputType;
-	
+
 	/**
 	 * Constructs a blank instance of input - generally not recommended.
 	 */
@@ -95,7 +90,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	{
 		this(null);
 	}
-	
+
 	/**
 	 * Construct a new instance of the input type field
 	 * <p>
@@ -105,16 +100,16 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	public Input(InputTypes inputType)
 	{
 		super(ComponentTypes.Input);
-		
+
 		if (inputType != null)
-		
+
 		{
 			this.inputType = inputType;
 			addAttribute(GlobalAttributes.Type, getInputType().name().toLowerCase());
 		}
 		setClosingTag(false);
 	}
-	
+
 	/**
 	 * Returns the input type of the input field
 	 * <p>
@@ -125,7 +120,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	{
 		return inputType;
 	}
-	
+
 	/**
 	 * Sets the input type of this field
 	 * <p>
@@ -140,7 +135,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		addAttribute(GlobalAttributes.Type, inputType.toString());
 		return (J) this;
 	}
-	
+
 	/**
 	 * Differences Between HTML and XHTML
 	 * <p>
@@ -151,26 +146,16 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
+		if (!isConfigured() &&
+				    getInlineClosingTag() == null || !getInlineClosingTag() &&
+						                                     getPage().getHtmlVersion().name().startsWith("X"))
 		{
-			try
-			{
-				if (getInlineClosingTag() == null || !getInlineClosingTag())
-				{
-					if (getPage().getHtmlVersion().name().startsWith("X"))
-					{
-						setInlineClosingTag(true);
-					}
-				}
-			}
-			catch (Exception e)
-			{
-				log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
-			}
+			setInlineClosingTag(true);
+
 		}
 		super.preConfigure();
 	}
-	
+
 	/**
 	 * Push to model instead of bind
 	 *
@@ -185,7 +170,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		addAttribute(AngularAttributes.ngModel, variableName);
 		return (J) this;
 	}
-	
+
 	/**
 	 * Sets this input as required in the form
 	 *
@@ -196,7 +181,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		addAttribute("required", "");
 		return (J) this;
 	}
-	
+
 	/**
 	 * Sets the minimum length of this input
 	 *
@@ -206,11 +191,11 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	 */
 	public J setMinimumLength(int minLength)
 	{
-		addAttribute("data-minlength", "" + minLength);
-		addAttribute("minlength", "" + minLength);
+		addAttribute("data-minlength", Integer.toString(minLength));
+		addAttribute("minlength", Integer.toString(minLength));
 		return (J) this;
 	}
-	
+
 	/**
 	 * Sets the minimum length of this input
 	 *
@@ -220,11 +205,11 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	 */
 	public J setMaximumLength(int minLength)
 	{
-		addAttribute("data-maxlength", "" + minLength);
-		addAttribute("maxlength", "" + minLength);
+		addAttribute("data-maxlength", Integer.toString(minLength));
+		addAttribute("maxlength", Integer.toString(minLength));
 		return (J) this;
 	}
-	
+
 	/**
 	 * Sets the place holder for this input
 	 *
@@ -237,7 +222,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		addAttribute("placeholder", placeholder);
 		return (J) this;
 	}
-	
+
 	/**
 	 * Sets the value attribute
 	 *
@@ -250,7 +235,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		addAttribute("value", value);
 		return (J) this;
 	}
-	
+
 	/**
 	 * Sets the pattern for this input object if required
 	 *
@@ -263,7 +248,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		addAttribute(AngularAttributes.ngPattern, angularPatternName);
 		return (J) this;
 	}
-	
+
 	/**
 	 * Sets the raw pattern for this input object if required
 	 *
@@ -273,7 +258,43 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	 */
 	public J setPattern(String pattern, boolean raw)
 	{
-		addAttribute("pattern", pattern);
+		if (raw)
+		{
+			addAttribute("pattern", pattern);
+		}
+		else
+		{
+			setPattern(pattern);
+		}
 		return (J) this;
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof Input))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		Input<?, ?> input = (Input<?, ?>) o;
+
+		return getInputType() == input.getInputType();
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getInputType().hashCode();
+		return result;
 	}
 }

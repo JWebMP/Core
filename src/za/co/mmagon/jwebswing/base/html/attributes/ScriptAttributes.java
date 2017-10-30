@@ -39,12 +39,6 @@ public enum ScriptAttributes implements AttributeDefinitions
 	{
 	
 	}
-	
-	private ScriptAttributes(boolean isKeyword)
-	{
-		this.keyWord = isKeyword;
-	}
-	
 	/**
 	 * Returns the lowercase name
 	 *

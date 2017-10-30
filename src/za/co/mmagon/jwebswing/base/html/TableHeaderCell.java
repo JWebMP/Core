@@ -66,9 +66,9 @@ public class TableHeaderCell<J extends TableHeaderCell<J>>
 		extends Component<Component, TableCellAttributes, GlobalFeatures, GlobalEvents, J>
 		implements TableRowChildren
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructs a normal table cell
 	 */
@@ -76,11 +76,12 @@ public class TableHeaderCell<J extends TableHeaderCell<J>>
 	{
 		this((GlobalChildren) null);
 	}
-	
+
 	/**
 	 * Constructs a table cell with the given child.
 	 *
-	 * @param dataDisplay The component that is a child
+	 * @param dataDisplay
+	 * 		The component that is a child
 	 */
 	public TableHeaderCell(GlobalChildren dataDisplay)
 	{
@@ -91,7 +92,7 @@ public class TableHeaderCell<J extends TableHeaderCell<J>>
 		}
 		setTag("th");
 	}
-	
+
 	/**
 	 * A paragraph as a child. Good for testing or Render on Load
 	 *
@@ -101,7 +102,7 @@ public class TableHeaderCell<J extends TableHeaderCell<J>>
 	{
 		this(new Paragraph(dataDisplay));
 	}
-	
+
 	/**
 	 * Returns this table cell column span
 	 *
@@ -116,16 +117,17 @@ public class TableHeaderCell<J extends TableHeaderCell<J>>
 		}
 		return new Integer(s);
 	}
-	
+
 	/**
-	 * @param columnSpan Sets this table cells column span
+	 * @param columnSpan
+	 * 		Sets this table cells column span
 	 */
 	public J setColumnSpan(int columnSpan)
 	{
 		addAttribute(TableCellAttributes.ColSpan, columnSpan);
 		return (J) this;
 	}
-	
+
 	/**
 	 * Gets this table cells row span
 	 *
@@ -135,11 +137,12 @@ public class TableHeaderCell<J extends TableHeaderCell<J>>
 	{
 		return new Integer(getAttribute(TableCellAttributes.RowSpan));
 	}
-	
+
 	/**
 	 * Sets this objects row span
 	 *
-	 * @param rowSpan Integer that is row span
+	 * @param rowSpan
+	 * 		Integer that is row span
 	 */
 	public J setRowSpan(int rowSpan)
 	{

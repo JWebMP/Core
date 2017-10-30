@@ -27,8 +27,6 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeaderGroupChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 
-import java.util.Objects;
-
 /**
  * HTML Headings<p>
  * <p>
@@ -70,11 +68,11 @@ public class HeaderText<J extends HeaderText<J>>
 		implements BodyChildren, HeaderGroupChildren, GlobalChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private HeaderTypes headerType;
-	
+
 	/**
 	 * Constructs a new blank header of type H1
 	 */
@@ -82,12 +80,14 @@ public class HeaderText<J extends HeaderText<J>>
 	{
 		this(HeaderTypes.H1, "");
 	}
-	
+
 	/**
 	 * Constructs a new header of specified type with the text
 	 *
-	 * @param headerType The type of header
-	 * @param text       The text for the header
+	 * @param headerType
+	 * 		The type of header
+	 * @param text
+	 * 		The text for the header
 	 */
 	public HeaderText(final HeaderTypes headerType, String text)
 	{
@@ -95,7 +95,7 @@ public class HeaderText<J extends HeaderText<J>>
 		setText(text == null ? "" : text);
 		this.headerType = headerType;
 	}
-	
+
 	/**
 	 * Returns the current header text
 	 *
@@ -105,11 +105,12 @@ public class HeaderText<J extends HeaderText<J>>
 	{
 		return getText(0).toString();
 	}
-	
+
 	/**
 	 * Sets the current text
 	 *
-	 * @param headerText The text for the header
+	 * @param headerText
+	 * 		The text for the header
 	 *
 	 * @return
 	 */
@@ -118,7 +119,7 @@ public class HeaderText<J extends HeaderText<J>>
 		setText(headerText);
 		return (J) this;
 	}
-	
+
 	/**
 	 * Returns the current header type
 	 *
@@ -128,11 +129,12 @@ public class HeaderText<J extends HeaderText<J>>
 	{
 		return headerType;
 	}
-	
+
 	/**
 	 * Sets this headers type
 	 *
-	 * @param headerType The type of header this is
+	 * @param headerType
+	 * 		The type of header this is
 	 *
 	 * @return
 	 */
@@ -143,34 +145,33 @@ public class HeaderText<J extends HeaderText<J>>
 		super.setComponentType(headerType.getLinkedComponent());
 		return (J) this;
 	}
-	
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof HeaderText))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		HeaderText<?> that = (HeaderText<?>) o;
+
+		return getHeaderType() == that.getHeaderType();
+	}
+
 	@Override
 	public int hashCode()
 	{
-		int hash = 7;
-		hash = 71 * hash + Objects.hashCode(this.headerType);
-		return hash;
-	}
-	
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (obj == null)
-		{
-			return false;
-		}
-		if (getClass() != obj.getClass())
-		{
-			return false;
-		}
-		final HeaderText other = (HeaderText) obj;
-		if ((this.headerType == other.headerType))
-		{
-			if (this.getText(0).toString().equals(other.getText(0).toString()))
-			{
-				return true;
-			}
-		}
-		return false;
+		int result = super.hashCode();
+		result = 31 * result + getHeaderType().hashCode();
+		return result;
 	}
 }

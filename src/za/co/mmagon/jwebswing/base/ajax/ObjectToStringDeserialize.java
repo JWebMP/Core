@@ -17,7 +17,6 @@
 package za.co.mmagon.jwebswing.base.ajax;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -33,17 +32,18 @@ import java.io.IOException;
  */
 public class ObjectToStringDeserialize extends JsonDeserializer<Object>
 {
-	
+	/**
+	 * An instant to serialize everything as tostring
+	 */
 	public ObjectToStringDeserialize()
 	{
+		//No config needed
 	}
-	
+
 	@Override
 	public Object deserialize(JsonParser jp, DeserializationContext dc) throws IOException
 	{
-		JsonToken jt = jp.getCurrentToken();
 		JsonNode node = jp.readValueAsTree();
-		String nodeAsString = new JavaScriptPart().objectAsString(node);
-		return nodeAsString;
+		return new JavaScriptPart().objectAsString(node);
 	}
 }

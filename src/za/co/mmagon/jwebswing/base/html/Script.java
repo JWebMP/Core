@@ -79,11 +79,11 @@ public class Script<J extends Script<J>>
 		extends ComponentHierarchyBase<NoChildren, ScriptAttributes, NoFeatures, NoEvents, J>
 		implements NoIDTag, HeadChildren, NoClassAttribute
 {
-	
+
 	private static final Logger logger = LogFactory.getInstance().getLogger("<SCRIPT>");
 	private static final long serialVersionUID = 1L;
 	private JavascriptReference reference;
-	
+
 	/**
 	 * Constructs a script with the given reference
 	 *
@@ -94,7 +94,7 @@ public class Script<J extends Script<J>>
 		this(reference.toString());
 		this.reference = reference;
 	}
-	
+
 	/**
 	 * Constructs a script component
 	 */
@@ -102,13 +102,15 @@ public class Script<J extends Script<J>>
 	{
 		super(ComponentTypes.Script);
 	}
-	
+
 	/**
 	 * Constructs a new script with a specified source and type
 	 * <p>
 	 *
-	 * @param src  The source of the file
-	 * @param type The type of script
+	 * @param src
+	 * 		The source of the file
+	 * @param type
+	 * 		The type of script
 	 */
 	public Script(String src, String type)
 	{
@@ -122,12 +124,13 @@ public class Script<J extends Script<J>>
 			addAttribute(ScriptAttributes.Type, type);
 		}
 	}
-	
+
 	/**
 	 * Constructs a new script with a specified source and the type of JavaScript
 	 * <p>
 	 *
-	 * @param src The source of the file
+	 * @param src
+	 * 		The source of the file
 	 */
 	public Script(String src)
 	{
@@ -135,7 +138,7 @@ public class Script<J extends Script<J>>
 		addAttribute(ScriptAttributes.Src, src);
 		addAttribute(ScriptAttributes.Type, "text/javascript");
 	}
-	
+
 	/**
 	 * Returns the currently set JavaScript with no indentation
 	 *
@@ -145,23 +148,25 @@ public class Script<J extends Script<J>>
 	{
 		return getJavascript(0);
 	}
-	
+
 	/**
 	 * Sets this script's JavaScript AS-IS
 	 *
-	 * @param javascript The JavaScript to directly insert
+	 * @param javascript
+	 * 		The JavaScript to directly insert
 	 */
 	public J setJavascript(String javascript)
 	{
 		setText(javascript);
 		return (J) this;
 	}
-	
+
 	/**
 	 * Returns the currently set JavaScript with the specified indentation
 	 *
-	 * @param tabCount The indentation of the JavaScript
-	 *                 <p>
+	 * @param tabCount
+	 * 		The indentation of the JavaScript
+	 * 		<p>
 	 *
 	 * @return The JavaScript
 	 */
@@ -170,7 +175,7 @@ public class Script<J extends Script<J>>
 		preConfigure();
 		return getText(tabCount);
 	}
-	
+
 	/**
 	 * Differences Between HTML and XHTML
 	 * <p>
@@ -182,11 +187,6 @@ public class Script<J extends Script<J>>
 	public void preConfigure()
 	{
 		super.preConfigure();
-		
-		if (getAttribute(ScriptAttributes.Src) != null && !getAttribute(ScriptAttributes.Src).isEmpty())
-		{
-			// setInlineClosingTag(true);
-		}
 		if (getAttribute(ScriptAttributes.Src) != null || !getAttribute(ScriptAttributes.Src).isEmpty())
 		{
 			try
@@ -206,7 +206,7 @@ public class Script<J extends Script<J>>
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -218,7 +218,7 @@ public class Script<J extends Script<J>>
 		{
 			return false;
 		}
-		
+
 		Script s = (Script) obj;
 		if (s.getAttribute(ScriptAttributes.Src).equals(getAttribute(ScriptAttributes.Src)))
 		{
@@ -226,7 +226,6 @@ public class Script<J extends Script<J>>
 			{
 				if (s.getText(0).toString().equals(getText(0).toString()))
 				{
-					//System.out.println("everything equal? script is [" + getText(0).toString() + "] - [" + s.getText(0).toString());
 					return true;
 				}
 			}
@@ -241,14 +240,13 @@ public class Script<J extends Script<J>>
 		}
 		return false;
 	}
-	
+
 	@Override
 	public int hashCode()
 	{
-		int hash = 7;
-		return hash;
+		return 17;
 	}
-	
+
 	/**
 	 * Returns a reference if one was attached
 	 *
@@ -258,5 +256,5 @@ public class Script<J extends Script<J>>
 	{
 		return reference;
 	}
-	
+
 }

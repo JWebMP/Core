@@ -26,7 +26,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
-import com.google.inject.Key;
 import com.google.inject.Singleton;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.name.Names;
@@ -42,6 +41,7 @@ import za.co.mmagon.jwebswing.base.servlets.*;
 import za.co.mmagon.jwebswing.base.servlets.options.AngularDataServletInitData;
 import za.co.mmagon.logger.LogFactory;
 
+import javax.annotation.Nullable;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -210,91 +210,43 @@ public class SiteBinder extends GuiceSiteBinder
 
 		module.bind(Page.class).toProvider(() ->
 		                                   {
-			                                   if (!GuiceContext.isBuildingInjector())
+			                                   for (Class<? extends Page> next : getPages())
 			                                   {
-				                                   for (Class<?> next : getPages())
+				                                   if (Modifier.isAbstract(next.getModifiers()) || next.equals(Page.class))
 				                                   {
-					                                   if (Modifier.isAbstract(next.getModifiers()) || next.equals(Page.class))
-					                                   {
-						                                   continue;
-					                                   }
-					                                   try
-					                                   {
-						                                   PageConfiguration pc = next.getAnnotation(PageConfiguration.class);
-						                                   HttpServletRequest request = GuiceContext.getInstance(HttpServletRequest.class);
-						                                   String pathInfo = request.getPathInfo();
-						                                   if (pathInfo == null)
-						                                   {
-							                                   pathInfo = "/";
-						                                   }
-
-						                                   String pcUrl = pc.url();
-						                                   if (pathInfo.equalsIgnoreCase(pcUrl))
-						                                   {
-							                                   Page returnedPage = (Page) GuiceContext.inject().getInstance(next);
-							                                   return returnedPage;
-						                                   }
-						                                   else if (SessionHelper.getServletUrl().equalsIgnoreCase(pc.url()))
-						                                   {
-							                                   Page returnedPage = (Page) GuiceContext.inject().getInstance(next);
-							                                   return returnedPage;
-						                                   }
-						                                   else
-						                                   {
-							                                   throw new NoResultException("A JWebSwing Application must have a page applied. Please create a class that extends the za.co.mmagon.jwebswing.Page object.");
-
-						                                   }
-					                                   }
-					                                   catch (NullPointerException npe)
-					                                   {
-						                                   log.warning("Unable to process page : " + next + " due to null pointer");
-					                                   }
+					                                   continue;
+				                                   }
+				                                   Page page = findPage(next);
+				                                   if (page != null)
+				                                   {
+					                                   return page;
 				                                   }
 			                                   }
+			                                   log.log(Level.WARNING, "Returning blank page since no class was found that extends page or matches the given url");
 			                                   return new Page();
 		                                   });
-
-
-		module.bind(ObjectMapper.class).toProvider(() -> GuiceContext.getInstance(Key.get(ObjectMapper.class, Names.named("JSON")))).in(Singleton.class);
 
 		module.bind(ObjectMapper.class).annotatedWith(Names.named("JSON")).toProvider(() ->
 		                                                                              {
 			                                                                              ObjectMapper jsonObjectMapper = new ObjectMapper();
-			                                                                              jsonObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-			                                                                              jsonObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
-			                                                                              jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
-			                                                                              jsonObjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			                                                                              jsonObjectMapper.registerModule(new ParameterNamesModule());
-			                                                                              jsonObjectMapper.registerModule(new Jdk8Module());
-			                                                                              jsonObjectMapper.registerModule(new JavaTimeModule());
+			                                                                              configureObjectMapperForJSON(jsonObjectMapper);
 			                                                                              return jsonObjectMapper;
 		                                                                              }).in(Singleton.class);
 
 		module.bind(ObjectMapper.class).annotatedWith(Names.named("JS")).toProvider(() ->
 		                                                                            {
 			                                                                            ObjectMapper jsonObjectMapper = new ObjectMapper();
-			                                                                            jsonObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-			                                                                            jsonObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
-			                                                                            jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
-			                                                                            jsonObjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			                                                                            jsonObjectMapper.registerModule(new ParameterNamesModule());
-			                                                                            jsonObjectMapper.registerModule(new Jdk8Module());
-			                                                                            jsonObjectMapper.registerModule(new JavaTimeModule());
+			                                                                            configureObjectMapperForJSON(jsonObjectMapper);
 			                                                                            return jsonObjectMapper;
 		                                                                            }).in(Singleton.class);
 
 		module.bind(ObjectMapper.class).annotatedWith(Names.named("JSFunction")).toProvider(() ->
 		                                                                                    {
 			                                                                                    ObjectMapper jsonObjectMapper = new ObjectMapper();
-			                                                                                    jsonObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-			                                                                                    jsonObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
-			                                                                                    jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
-			                                                                                    jsonObjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			                                                                                    jsonObjectMapper.registerModule(new ParameterNamesModule());
-			                                                                                    jsonObjectMapper.registerModule(new Jdk8Module());
-			                                                                                    jsonObjectMapper.registerModule(new JavaTimeModule());
+			                                                                                    configureObjectMapperForJSON(jsonObjectMapper);
 			                                                                                    return jsonObjectMapper;
 		                                                                                    }).in(Singleton.class);
+
 
 		for (Class<?> page : getPages())
 		{
@@ -337,12 +289,59 @@ public class SiteBinder extends GuiceSiteBinder
 		log.log(Level.INFO, "Finished with configuring URL's");
 	}
 
+	@Nullable
+	private Page findPage(Class<? extends Page> next)
+	{
+		try
+		{
+			PageConfiguration pc = next.getAnnotation(PageConfiguration.class);
+			HttpServletRequest request = GuiceContext.getInstance(HttpServletRequest.class);
+			String pathInfo = request.getPathInfo();
+			if (pathInfo == null)
+			{
+				pathInfo = "/";
+			}
+
+			String pcUrl = pc.url();
+			if (pathInfo.equalsIgnoreCase(pcUrl) || SessionHelper.getServletUrl().equalsIgnoreCase(pc.url()))
+			{
+				return GuiceContext.inject().getInstance(next);
+			}
+			else
+			{
+				throw new NoResultException("A JWebSwing Application must have a page applied. Please create a class that extends the za.co.mmagon.jwebswing.Page object.");
+			}
+		}
+		catch (NullPointerException npe)
+		{
+			log.log(Level.WARNING, "Unable to process page : " + next + " due to null pointer", npe);
+		}
+		return null;
+	}
+
+	/**
+	 * Configures json with the given properties
+	 *
+	 * @param jsonObjectMapper
+	 */
+	private void configureObjectMapperForJSON(ObjectMapper jsonObjectMapper)
+	{
+		jsonObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+		jsonObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
+		jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
+		jsonObjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		jsonObjectMapper.registerModule(new ParameterNamesModule());
+		jsonObjectMapper.registerModule(new Jdk8Module());
+		jsonObjectMapper.registerModule(new JavaTimeModule());
+	}
+
+
 	/**
 	 * Returns all the mapped pages
 	 *
 	 * @return
 	 */
-	public static Set<Class<?>> getPages()
+	public static Set<Class<? extends Page>> getPages()
 	{
 		return GuiceContext.reflect().getTypesAnnotatedWith(PageConfiguration.class);
 	}
