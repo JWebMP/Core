@@ -42,7 +42,6 @@ import za.co.mmagon.jwebswing.base.servlets.options.AngularDataServletInitData;
 import za.co.mmagon.logger.LogFactory;
 
 import javax.annotation.Nullable;
-import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Modifier;
@@ -309,7 +308,7 @@ public class SiteBinder extends GuiceSiteBinder
 			}
 			else
 			{
-				throw new NoResultException("A JWebSwing Application must have a page applied. Please create a class that extends the za.co.mmagon.jwebswing.Page object.");
+				log.log(Level.INFO, "A JWebSwing Application must have a page applied. Please create a class that extends the za.co.mmagon.jwebswing.Page object.");
 			}
 		}
 		catch (NullPointerException npe)

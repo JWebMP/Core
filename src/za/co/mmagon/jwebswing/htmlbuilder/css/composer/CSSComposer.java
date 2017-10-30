@@ -5,12 +5,12 @@ import za.co.mmagon.jwebswing.base.ComponentStyleBase;
 import za.co.mmagon.jwebswing.htmlbuilder.css.CSSImpl;
 import za.co.mmagon.jwebswing.htmlbuilder.css.CSSPropertiesFactory;
 import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
-import za.co.mmagon.jwebswing.utilities.ComponentUtils;
 import za.co.mmagon.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -131,7 +131,17 @@ public class CSSComposer
 		List<Field> fields = new ArrayList<>(Arrays.asList(o.getClass().getDeclaredFields()));
 		fields.forEach((Field field) ->
 		               {
-			               Object fieldObject = ComponentUtils.fieldGet(field, o);
+			               field.setAccessible(true);
+			               Object fieldObject = null;
+			               try
+			               {
+				               fieldObject = field.get(o);
+			               }
+			               catch (IllegalAccessException e)
+			               {
+				               e.printStackTrace();
+				               log.log(Level.WARNING, "Unable to read field object " + field.getName(), e);
+			               }
 			               if (Objects.nonNull(fieldObject))
 			               {
 				               field.setAccessible(true);

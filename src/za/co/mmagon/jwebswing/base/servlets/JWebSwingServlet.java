@@ -393,8 +393,8 @@ public class JWebSwingServlet extends JWDefaultServlet
 		{
 			log.log(Level.INFO, "Destroying Servlet JWebSwing Servlet and all Static Objects");
 			GuiceContext.inject().getInstance(UserAgentStringParser.class).shutdown();
-			Set<Class<?>> pages = SiteBinder.getPages();
-			for (Class<?> page : pages)
+			Set<Class<? extends Page>> pages = SiteBinder.getPages();
+			for (Class<? extends Page> page : pages)
 			{
 				if (page.equals(Page.class) || Modifier.isAbstract(page.getModifiers()))
 				{
