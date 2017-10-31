@@ -198,7 +198,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	{
 		if (attribute == GlobalAttributes.Style)
 		{
-			getAttributes().put(attribute.toString(), getAttributes().get(attribute) + STRING_EMPTY + value);
+			getAttributes().put(attribute.toString(), getAttributes().get(attribute.toString()) + STRING_EMPTY + value);
 		}
 		getAttributes().put(attribute.toString(), value);
 

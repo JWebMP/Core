@@ -44,4 +44,6 @@ public interface StaticStrings extends Serializable
 	String ACCESS_CONTROL_ALLOW_CREDENTIALS_HEADER_NAME = "Access-Control-Allow-Credentials";
 	String ACCESS_CONTROL_ALLOW_METHODS_HEADER_NAME = "Access-Control-Allow-Methods";
 	String ACCESS_CONTROL_ALLOW_HEADERS_HEADER_NAME = "Access-Control-Allow-Headers";
+
+	String DEFAULT_DATE_TIME_PATTERN ="yyyy-MM-dd HH:mm:ss";
 }
