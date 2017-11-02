@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_COMMNA;
 import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SINGLE_QUOTES;
 
 /**
@@ -77,9 +78,9 @@ public class JWAngularModule extends AngularModuleBase
 			nameRenders.append(STRING_SINGLE_QUOTES).append(name).append("',");
 		}
 
-		if (nameRenders.indexOf(",") != -1)
+		if (nameRenders.indexOf(STRING_COMMNA) != -1)
 		{
-			nameRenders = nameRenders.deleteCharAt(nameRenders.lastIndexOf(","));
+			nameRenders = nameRenders.deleteCharAt(nameRenders.lastIndexOf(STRING_COMMNA));
 		}
 		nameRenders.insert(0, "[");
 		nameRenders.append("]");

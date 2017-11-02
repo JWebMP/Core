@@ -16,6 +16,8 @@
  */
 package za.co.mmagon.jwebswing.utilities;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_COMMNA;
+
 /**
  * Provides basics for Colours
  *
@@ -36,30 +38,6 @@ public class ColourUtils
 	private ColourUtils()
 	{
 		//Nothing NEeded
-	}
-
-	private static String hexToRGB(String color)
-	{
-		String val1 = color.substring(0, 2);
-		String val2 = color.substring(2, 4);
-		String val3 = color.substring(4, 6);
-		return hexToDecimal(val1) + "," + hexToDecimal(val2) + "," + hexToDecimal(val3);
-	}
-
-	private static String rgbToHex(String color)
-	{
-		String[] RGB = color.split(",");
-		return toHex(RGB[0]) + toHex(RGB[1]) + toHex(RGB[2]);
-	}
-
-	/**
-	 * Returns a heat map colour between the min and maximum set
-	 *
-	 * @return
-	 */
-	private static int hexToDecimal(String hex)
-	{
-		return Math.max(0, Math.min(Integer.parseInt(hex, 16), 255));
 	}
 
 	/**
@@ -86,13 +64,13 @@ public class ColourUtils
 		String maxRGB = hexToRGB(colourMax);
 		String minRGB = hexToRGB(colourMin);
 
-		colMax[0] = Integer.parseInt(maxRGB.split(",")[0]);
-		colMax[1] = Integer.parseInt(maxRGB.split(",")[1]);
-		colMax[2] = Integer.parseInt(maxRGB.split(",")[2]);
+		colMax[0] = Integer.parseInt(maxRGB.split(STRING_COMMNA)[0]);
+		colMax[1] = Integer.parseInt(maxRGB.split(STRING_COMMNA)[1]);
+		colMax[2] = Integer.parseInt(maxRGB.split(STRING_COMMNA)[2]);
 
-		colMin[0] = Integer.parseInt(minRGB.split(",")[0]);
-		colMin[1] = Integer.parseInt(minRGB.split(",")[1]);
-		colMin[2] = Integer.parseInt(minRGB.split(",")[2]);
+		colMin[0] = Integer.parseInt(minRGB.split(STRING_COMMNA)[0]);
+		colMin[1] = Integer.parseInt(minRGB.split(STRING_COMMNA)[1]);
+		colMin[2] = Integer.parseInt(minRGB.split(STRING_COMMNA)[2]);
 
 		int[] diff = new int[3];
 		diff[0] = colMin[0] - colMax[0];
@@ -109,8 +87,32 @@ public class ColourUtils
 		c[1] = colMin[1] - (int) (perc * diff[1]);
 		c[2] = colMin[2] - (int) (perc * diff[2]);
 
-		String co = c[0] + "," + c[1] + "," + c[2];
+		String co = c[0] + STRING_COMMNA + c[1] + STRING_COMMNA + c[2];
 		return rgbToHex(co);
+	}
+
+	private static String hexToRGB(String color)
+	{
+		String val1 = color.substring(0, 2);
+		String val2 = color.substring(2, 4);
+		String val3 = color.substring(4, 6);
+		return hexToDecimal(val1) + STRING_COMMNA + hexToDecimal(val2) + STRING_COMMNA + hexToDecimal(val3);
+	}
+
+	/**
+	 * Returns a heat map colour between the min and maximum set
+	 *
+	 * @return
+	 */
+	private static int hexToDecimal(String hex)
+	{
+		return Math.max(0, Math.min(Integer.parseInt(hex, 16), 255));
+	}
+
+	private static String rgbToHex(String color)
+	{
+		String[] RGB = color.split(STRING_COMMNA);
+		return toHex(RGB[0]) + toHex(RGB[1]) + toHex(RGB[2]);
 	}
 
 	/**

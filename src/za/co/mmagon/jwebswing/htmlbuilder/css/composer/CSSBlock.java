@@ -1,12 +1,14 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
 import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 import za.co.mmagon.jwebswing.utilities.TextUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_COMMNA;
 import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SPACE;
 
 /**
@@ -200,7 +202,7 @@ public class CSSBlock
 		sb.append(cssLines.toString(tabCount, this.blockType == CSSTypes.None));
 		if (this.blockType == CSSTypes.None)
 		{
-			sb = new StringBuilder(sb.toString().replaceAll(",", ";"));
+			sb = new StringBuilder(sb.toString().replaceAll(STRING_COMMNA, ";"));
 		}
 		return sb.toString();
 	}
@@ -216,7 +218,7 @@ public class CSSBlock
 		for (String _item : getLinkedBlocks())
 		{
 			sb.append(_item);
-			sb.append(",");
+			sb.append(STRING_COMMNA);
 			if ((cssLines.isPrettyPrint()))
 			{
 				sb.append(TextUtilities.getTabString(tabCount - 1));
@@ -313,7 +315,7 @@ public class CSSBlock
 			}
 			case Id:
 			{
-				sb.append("#").append(block.getIdOfBlock()).append(STRING_SPACE);
+				sb.append(StaticStrings.STRING_HASH).append(block.getIdOfBlock()).append(STRING_SPACE);
 				break;
 			}
 			case Theme:

@@ -6,6 +6,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -95,7 +96,7 @@ public class LinkTest
 		Link instance = new Link("");
 		instance.setID("instance");
 		instance.setTiny(true);
-		instance.setDirectToAddress("#");
+		instance.setDirectToAddress(StaticStrings.STRING_HASH);
 		instance.addAttribute(GlobalAttributes.ID, "instance");
 		System.out.println(instance.toString(true));
 		String expResult = "<a href=\"#\" id=\"instance\"></a>";

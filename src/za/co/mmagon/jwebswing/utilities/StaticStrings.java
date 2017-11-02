@@ -21,6 +21,8 @@ public interface StaticStrings extends Serializable
 	String STRING_SINGLE_QUOTES = "'";
 	String STRING_DOUBLE_QUOTES = "\"";
 	String STRING_DOUBLE_QUOTES_SPACE = "\" ";
+	String STRING_HASH = "#";
+	String STRING_COMMNA = ",";
 
 	char CHAR_SPACE = ' ';
 
@@ -46,4 +48,6 @@ public interface StaticStrings extends Serializable
 	String ACCESS_CONTROL_ALLOW_HEADERS_HEADER_NAME = "Access-Control-Allow-Headers";
 
 	String DEFAULT_DATE_TIME_PATTERN ="yyyy-MM-dd HH:mm:ss";
+
+	String STRING_SELECTED = "selected";
 }

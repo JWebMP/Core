@@ -35,6 +35,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_COMMNA;
+
 /**
  * The Angular 1 Feature Implementation
  *
@@ -201,8 +203,8 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 		StringBuilder output = new StringBuilder();
 		if (!getPage().getAngular().getControllerInsertions().isEmpty())
 		{
-			output.append(",");
-			getPage().getAngular().getControllerInsertions().stream().forEach(a -> output.append(a).append(","));
+			output.append(STRING_COMMNA);
+			getPage().getAngular().getControllerInsertions().stream().forEach(a -> output.append(a).append(STRING_COMMNA));
 			output.deleteCharAt(output.length() - 1);
 		}
 		return output;

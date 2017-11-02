@@ -34,6 +34,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_COMMNA;
 import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SINGLE_QUOTES;
 
 /**
@@ -180,11 +181,11 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	public StringBuilder renderVariables()
 	{
 		final StringBuilder s = new StringBuilder("[");
-		getVariables().forEach(event -> s.append(STRING_SINGLE_QUOTES).append(event).append(STRING_SINGLE_QUOTES).append(","));
+		getVariables().forEach(event -> s.append(STRING_SINGLE_QUOTES).append(event).append(STRING_SINGLE_QUOTES).append(STRING_COMMNA));
 		StringBuilder s2;
-		if (s.indexOf(",") > 0)
+		if (s.indexOf(STRING_COMMNA) > 0)
 		{
-			s2 = s.deleteCharAt(s.lastIndexOf(","));
+			s2 = s.deleteCharAt(s.lastIndexOf(STRING_COMMNA));
 		}
 		else
 		{

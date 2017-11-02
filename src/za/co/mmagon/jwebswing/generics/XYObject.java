@@ -25,6 +25,8 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_COMMNA;
+
 /**
  * This Class is basic XY Co-Ordinates
  *
@@ -132,7 +134,7 @@ public class XYObject<X extends Serializable, Y extends Serializable> implements
 					return "['" + getX() + "'," + getY() + "]";
 				}
 			}
-			return "[" + getX() + "," + getY() + "]";
+			return "[" + getX() + STRING_COMMNA + getY() + "]";
 		}
 		return "[]";
 	}

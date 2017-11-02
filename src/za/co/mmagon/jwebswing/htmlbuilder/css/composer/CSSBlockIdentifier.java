@@ -2,6 +2,8 @@ package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
 import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypePosition;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_HASH;
+
 /**
  * Type of CSS Block Identifier, e.g. class, ID, In-Line, or inherited
  *
@@ -14,7 +16,7 @@ public enum CSSBlockIdentifier
 	/**
 	 * #id #firstname Selects the element with id="firstname"
 	 */
-	Id(1.0, "#", CSSTypePosition.Before),
+	Id(1.0, STRING_HASH, CSSTypePosition.Before),
 	/**
 	 * .class .intro Selects all elements with class="intro"
 	 */

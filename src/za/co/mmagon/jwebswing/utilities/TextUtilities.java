@@ -25,8 +25,7 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static za.co.mmagon.jwebswing.utilities.StaticStrings.CHAR_SPACE;
-import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SPACE;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.*;
 
 /**
  * Provides default text functions
@@ -244,9 +243,9 @@ public class TextUtilities
 	 */
 	public static StringBuilder removeLastInstanceOf(StringBuilder sb)
 	{
-		if (sb.length() > 0 && sb.lastIndexOf(",") != -1)
+		if (sb.length() > 0 && sb.lastIndexOf(STRING_COMMNA) != -1)
 		{
-			return sb.deleteCharAt(sb.lastIndexOf(","));
+			return sb.deleteCharAt(sb.lastIndexOf(STRING_COMMNA));
 		}
 		return sb;
 	}

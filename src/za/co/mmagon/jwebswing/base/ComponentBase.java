@@ -24,6 +24,7 @@ import za.co.mmagon.jwebswing.base.interfaces.IComponentBase;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.utilities.GUIDGenerator;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 import za.co.mmagon.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
@@ -205,7 +206,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	@Override
 	public String getID(boolean jQueryHolder)
 	{
-		return "#" + this.id;
+		return StaticStrings.STRING_HASH + this.id;
 	}
 
 	/**

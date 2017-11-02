@@ -2,6 +2,7 @@ package za.co.mmagon.jwebswing.htmlbuilder.css.colours;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import za.co.mmagon.jwebswing.base.client.CSSVersions;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 
 import java.io.Serializable;
 
@@ -16,13 +17,13 @@ public class ColourHex implements CssColour<ColourHex>, Serializable
 
 	public ColourHex(String thisHex)
 	{
-		if (thisHex.startsWith("#"))
+		if (thisHex.startsWith(StaticStrings.STRING_HASH))
 		{
 			this.thisHex = thisHex;
 		}
 		else
 		{
-			this.thisHex = "#" + thisHex;
+			this.thisHex = StaticStrings.STRING_HASH + thisHex;
 		}
 	}
 

@@ -41,6 +41,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_COMMNA;
 import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SPACE;
 
 /**
@@ -481,9 +482,9 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
 				log.fine("Processed CSS Block into Implementation [" + (implementedObject == null ? "null" : implementedObject.getClass().getCanonicalName()) + "]");
 			}
 
-			if (!(valueString.length() > 0 && valueString.indexOf(",") >= 0))
+			if (!(valueString.length() > 0 && valueString.indexOf(STRING_COMMNA) >= 0))
 			{
-				valueString = new StringBuilder(valueString.substring(0, valueString.lastIndexOf(",")).trim());
+				valueString = new StringBuilder(valueString.substring(0, valueString.lastIndexOf(STRING_COMMNA)).trim());
 			}
 			newCSSBlock.add(new CSSLine(key.toString(), valueString.toString()));
 		}
@@ -515,7 +516,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
 			valueArr[arrayPosition] = implementedObject;
 			if (object instanceof ImageCSS) //special treatment for image arrays for some reason
 			{
-				valueString.append(implementedObject.toString()).append(",");
+				valueString.append(implementedObject.toString()).append(STRING_COMMNA);
 			}
 			else
 			{
