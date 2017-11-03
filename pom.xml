@@ -19,13 +19,13 @@
         </repository>
         <repository>
             <id>armin-release</id>
-            <name>ArminSoftwareArtifactory-releases</name>
-            <url>https://www.armin.software/artifactory/libs-release</url>
+            <name>JWebSwingArtifactory-releases</name>
+            <url>https://jwebswing.com/artifactory/libs-release</url>
         </repository>
         <repository>
             <id>armin-snapshot</id>
-            <name>ArminSoftwareArtifactory-releases</name>
-            <url>https://www.armin.software/artifactory/libs-snapshot</url>
+            <name>JWebSwingArtifactory-snapshots</name>
+            <url>https://jwebswing.com/artifactory/libs-snapshot</url>
         </repository>
     </repositories>
 
@@ -149,7 +149,8 @@
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <sonar.host.url>https://www.armin.software/sonar</sonar.host.url><sonar.exclusions>**bower_components</sonar.exclusions>
+        <sonar.host.url>https://jwebswing.com/sonar</sonar.host.url>
+        <sonar.exclusions>**bower_components</sonar.exclusions>
     </properties>
 
     <build>
@@ -336,21 +337,21 @@
     <distributionManagement>
         <snapshotRepository>
             <id>snapshot</id>
-            <name>ArminSoftwareArtifactory-snapshots</name>
-            <url>https://www.armin.software/artifactory/libs-snapshot-local</url>
+            <name>JWebSwingArtifactory-snapshots</name>
+            <url>https://jwebswing.com/artifactory/libs-snapshot-local</url>
         </snapshotRepository>
         <repository>
             <id>central</id>
-            <name>ArminSoftwareArtifactory-releases</name>
-            <url>https://www.armin.software/artifactory/libs-release-local</url>
+            <name>JWebSwingArtifactory-releases</name>
+            <url>https://jwebswing.com/artifactory/libs-release-local</url>
         </repository>
     </distributionManagement>
     <organization>
-        <name>Armin Software</name>
+        <name>Marc Magon</name>
         <url>http://www.armin.software/</url>
     </organization>
     <scm>
-        <url>http://www.armin.software/artifactory</url>
+        <url>https://github.com/GedMarc?tab=repositories</url>
         <developerConnection>Marc Magon</developerConnection>
     </scm>
     <issueManagement>
@@ -359,7 +360,7 @@
     </issueManagement>
     <ciManagement>
         <system>TeamCity</system>
-        <url>http://www.armin.software/teamcity</url>
+        <url>http://jwebswing.com/teamcity</url>
     </ciManagement>
     <reporting>
         <plugins>
