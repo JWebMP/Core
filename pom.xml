@@ -18,12 +18,12 @@
             <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
         </repository>
         <repository>
-            <id>armin-release</id>
+            <id>jwebswing-release</id>
             <name>JWebSwingArtifactory-releases</name>
             <url>https://jwebswing.com/artifactory/libs-release</url>
         </repository>
         <repository>
-            <id>armin-snapshot</id>
+            <id>jwebswing-snapshot</id>
             <name>JWebSwingArtifactory-snapshots</name>
             <url>https://jwebswing.com/artifactory/libs-snapshot</url>
         </repository>
