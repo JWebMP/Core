@@ -148,7 +148,7 @@ public final class EscapeChars
 				case '^':
 					addCharEntity(94, result);
 					break;
-				case '_':
+				case StaticStrings.CHAR_UNDERSCORE:
 					addCharEntity(95, result);
 					break;
 				case '`':

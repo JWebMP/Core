@@ -28,6 +28,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -156,7 +157,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	@Override
 	public Event<A, J> setID(String id)
 	{
-		return super.setID(id.replace('.', '_'));
+		return super.setID(id.replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE));
 	}
 
 	/**

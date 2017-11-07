@@ -26,6 +26,7 @@ import za.co.mmagon.jwebswing.base.ajax.*;
 import za.co.mmagon.jwebswing.exceptions.InvalidRequestException;
 import za.co.mmagon.jwebswing.exceptions.MissingComponentException;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 import za.co.mmagon.jwebswing.utilities.TextUtilities;
 import za.co.mmagon.logger.LogFactory;
 
@@ -181,7 +182,7 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 		Event triggerEvent = null;
 		try
 		{
-			Class eventClass = Class.forName(GuiceContext.getInstance(AjaxCall.class).getClassName().replace('_', '.'));
+			Class eventClass = Class.forName(GuiceContext.getInstance(AjaxCall.class).getClassName().replace(StaticStrings.CHAR_UNDERSCORE, StaticStrings.CHAR_DOT));
 			triggerEvent = (Event) GuiceContext.getInstance(eventClass);
 		}
 		catch (ClassNotFoundException cnfe)

@@ -19,8 +19,7 @@ package za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds;
 import za.co.mmagon.jwebswing.base.client.CSSVersions;
 import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
-
-import static za.co.mmagon.jwebswing.utilities.StaticStrings.CHAR_SPACE;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 
 /**
  * Definition and Usage
@@ -118,7 +117,7 @@ public enum BackgroundPositions implements CSSEnumeration<BackgroundPositions>
 	@Override
 	public String toString()
 	{
-		return name().toLowerCase().replace('_', CHAR_SPACE);
+		return name().toLowerCase().replace(StaticStrings.CHAR_UNDERSCORE, StaticStrings.CHAR_SPACE);
 	}
 
 	public String getJavascriptSyntax()

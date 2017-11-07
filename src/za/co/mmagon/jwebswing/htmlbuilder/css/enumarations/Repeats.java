@@ -18,6 +18,7 @@ package za.co.mmagon.jwebswing.htmlbuilder.css.enumarations;
 
 import za.co.mmagon.jwebswing.base.client.CSSVersions;
 import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 
 /**
  * Definition and Usage
@@ -88,7 +89,7 @@ public enum Repeats implements CSSEnumeration
 	@Override
 	public String toString()
 	{
-		return name().toLowerCase().replace('_', '-');
+		return name().toLowerCase().replace(StaticStrings.CHAR_UNDERSCORE, '-');
 	}
 
 	@Override

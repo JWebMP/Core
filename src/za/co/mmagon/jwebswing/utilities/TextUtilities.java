@@ -57,7 +57,7 @@ public class TextUtilities
 	{
 		String buildString = buildStringSB.toString();
 		buildString = buildString.replace('$', CHAR_SPACE);
-		buildString = buildString.replace('_', '-');
+		buildString = buildString.replace(StaticStrings.CHAR_UNDERSCORE, '-');
 		buildString = buildString.replace('-', CHAR_SPACE).trim();
 		StringTokenizer st = new StringTokenizer(buildString);
 		StringBuilder outputString = new StringBuilder();
@@ -98,7 +98,7 @@ public class TextUtilities
 	{
 		String buildString = buildStringSB.toString();
 		buildString = buildString.replace('$', CHAR_SPACE);
-		buildString = buildString.replace('_', '-');
+		buildString = buildString.replace(StaticStrings.CHAR_UNDERSCORE, '-');
 		buildString = buildString.replace('-', CHAR_SPACE);
 		String firstChar = buildString.substring(0, 1).toUpperCase();
 		buildString = firstChar + buildString.substring(1, buildString.length());

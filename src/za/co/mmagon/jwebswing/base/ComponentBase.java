@@ -564,7 +564,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	{
 		try
 		{
-			return getClass().getCanonicalName().replace('.', '_');
+			return getClass().getCanonicalName().replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE);
 		}
 		catch (NullPointerException npe)
 		{

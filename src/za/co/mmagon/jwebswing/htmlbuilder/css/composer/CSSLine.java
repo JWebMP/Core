@@ -75,7 +75,7 @@ public class CSSLine implements Serializable, Comparable<CSSLine>, Comparator<CS
 	 */
 	private String cleanMethodNameToCSSName(String methodName)
 	{
-		String cssName = methodName.replace('_', '-').toLowerCase();
+		String cssName = methodName.replace(CHAR_UNDERSCORE, '-').toLowerCase();
 		cssName = cssName.replace('$', CHAR_SPACE).trim();
 		return cssName;
 	}

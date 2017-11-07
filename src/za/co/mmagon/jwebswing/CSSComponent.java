@@ -87,7 +87,7 @@ public abstract class CSSComponent<J extends CSSComponent<J>>
 	@Override
 	public String getID()
 	{
-		return super.getID().replace('#', '.');
+		return super.getID().replace('#', StaticStrings.CHAR_DOT);
 	}
 
 	/**
