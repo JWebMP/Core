@@ -32,7 +32,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class MarginsCSSImpl extends CSSImplementationAdapter<MarginsCSS, MarginsCSSImpl> implements CSSImplementationClass<MarginsCSS, MarginsCSSImpl>
+public class MarginsCSSImpl extends CSSImplementationAdapter<MarginsCSS, MarginsCSSImpl>
+		implements CSSImplementationClass<MarginsCSS, MarginsCSSImpl>
 {
 
 	private static final long serialVersionUID = 1L;

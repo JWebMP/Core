@@ -92,7 +92,6 @@ public class ComponentEventBaseTest extends BaseTestClass
 				"    \"initialized\" : true,\n" +
 				"    \"touched\" : false,\n" +
 				"    \"sortOrder\" : 1000,\n" +
-				"    \"variables\" : [ ],\n" +
 				"    \"name\" : \"click\",\n" +
 				"    \"renderAfterLoad\" : false,\n" +
 				"    \"javascriptRenderedElsewhere\" : false,\n" +
@@ -125,7 +124,6 @@ public class ComponentEventBaseTest extends BaseTestClass
 				"    \"initialized\" : true,\n" +
 				"    \"touched\" : false,\n" +
 				"    \"sortOrder\" : 1000,\n" +
-				"    \"variables\" : [ ],\n" +
 				"    \"name\" : \"click\",\n" +
 				"    \"renderAfterLoad\" : false,\n" +
 				"    \"javascriptRenderedElsewhere\" : false,\n" +

@@ -63,10 +63,6 @@ public class BodyTest extends BaseTestClass
 		System.out.println(p.toString(true));
 		assertEquals("<!DOCTYPE html>\n" +
 				             "<html>\n" +
-				             "\t<head>\n" +
-				             "\t\t<!-- Priority [Top_Shelf] Values -->\n" +
-				             "\t\t<script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script>\n" +
-				             "\t</head>\n" +
 				             "\t<body id=\"body\">\n" +
 				             "\t\t<!-- meh -->\n" +
 				             "\t\t<!-- Priority [First] Values -->\n" +
@@ -87,10 +83,6 @@ public class BodyTest extends BaseTestClass
 		System.out.println(p.toString(true));
 		assertEquals("<!DOCTYPE html>\n" +
 				             "<html>\n" +
-				             "\t<head>\n" +
-				             "\t\t<!-- Priority [Top_Shelf] Values -->\n" +
-				             "\t\t<script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script>\n" +
-				             "\t</head>\n" +
 				             "\t<body id=\"body\">\n" +
 				             "\t\t<!-- meh -->\n" +
 				             "\t\t<!-- Priority [First] Values -->\n" +

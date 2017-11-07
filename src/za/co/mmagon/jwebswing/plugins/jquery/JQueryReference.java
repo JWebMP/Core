@@ -37,7 +37,7 @@ class JQueryReference extends JavascriptReference
 	
 	public JQueryReference()
 	{
-		super("JQuery", 3.0, "bower_components/jquery/dist/jquery.min.js", "https://code.jquery.com/jquery-3.0.0.min.js");
+		super("JQuery3.0", 3.0, "bower_components/jquery/dist/jquery.min.js", "https://code.jquery.com/jquery-3.0.0.min.js");
 		setSortOrder(0);
 		setPriority(RequirementsPriority.Second);
 	}

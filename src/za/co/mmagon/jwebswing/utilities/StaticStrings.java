@@ -23,8 +23,13 @@ public interface StaticStrings extends Serializable
 	String STRING_DOUBLE_QUOTES_SPACE = "\" ";
 	String STRING_HASH = "#";
 	String STRING_COMMNA = ",";
+	String STRING_DOT = ".";
+	String STRING_BRACES_OPEN = "{";
+	String STRING_BRACES_CLOSE = "}";
 
 	char CHAR_SPACE = ' ';
+	char CHAR_DOT = '.';
+	char CHAR_UNDERSCORE = '_';
 
 	String JAVASCRIPT_LOCATION = "/jwjs";
 	String AJAX_SCRIPT_LOCATION = "/jwajax";

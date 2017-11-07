@@ -253,7 +253,7 @@ public class JWebSwingServlet extends JWDefaultServlet
 		}
 		else
 		{
-			b = Browsers.getBrowserFromNameAndVersion(agent.getName(), Double.parseDouble(agent.getVersionNumber().getMajor() + "." + agent.getVersionNumber().getMinor()));
+			b = Browsers.getBrowserFromNameAndVersion(agent.getName(), Double.parseDouble(agent.getVersionNumber().getMajor() + StaticStrings.STRING_DOT + agent.getVersionNumber().getMinor()));
 		}
 		getPageFromGuice().setBrowser(b);
 

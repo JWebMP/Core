@@ -40,8 +40,8 @@ public class HeaderTextTest
 		System.out.println(h2.toString(true));
 		Assertions.assertNotSame(h1, h2);
 		h2.setHeaderType(HeaderTypes.H1);
-		Assertions.assertEquals(h1, h2);
+		Assertions.assertFalse(h1.equals(h2));
 		h2.setHeaderText("new text");
-		Assertions.assertNotSame(h1, h2);
+		Assertions.assertFalse(h1.equals(h2));
 	}
 }

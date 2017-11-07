@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.base;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.BaseTestClass;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -37,11 +38,10 @@ public class ComponentFeatureBaseTest extends BaseTestClass
 		cfb.setID("testComp");
 		cfb.addFeature(getFeature());
 		System.out.println(cfb);
-		//TODO find out why the queryies are duplicating...
-	   /* Assertions.assertEquals("{\n"
-	            + "  \"id\" : \"testComp\",\n"
-                + "  \"componentType\" : \"abbreviation\",\n"
-                + "  \"tiny\" : false,\n"
+		Assertions.assertEquals("{\n"
+				                        + "  \"id\" : \"testComp\",\n"
+				                        + "  \"componentType\" : \"abbreviation\",\n"
+				                        + "  \"tiny\" : false,\n"
                 + "  \"configured\" : true,\n"
                 + "  \"initialized\" : true,\n"
                 + "  \"touched\" : false,\n"
@@ -62,6 +62,6 @@ public class ComponentFeatureBaseTest extends BaseTestClass
                 + "  \"renderAfterLoad\" : false,\n"
                 + "  \"javascriptRenderedElsewhere\" : false,\n"
                 + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentFeatureBase\"\n"
-                + "}", cfb.toString());*/
+				                        + "}", cfb.toString());
 	}
 }

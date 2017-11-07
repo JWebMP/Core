@@ -1,6 +1,7 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
 import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypePosition;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 
 import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_HASH;
 
@@ -20,7 +21,7 @@ public enum CSSBlockIdentifier
 	/**
 	 * .class .intro Selects all elements with class="intro"
 	 */
-	Class(1.0, ".", CSSTypePosition.Before),
+	Class(1.0, StaticStrings.STRING_DOT, CSSTypePosition.Before),
 	/**
 	 * element p Selects all p elements
 	 */
@@ -32,7 +33,7 @@ public enum CSSBlockIdentifier
 	/**
 	 * Puts the CSS inside the header. Referenced by tagname.themename
 	 */
-	Theme(1.0, ".", CSSTypePosition.Before),;
+	Theme(1.0, StaticStrings.STRING_DOT, CSSTypePosition.Before),;
 	/**
 	 * Where to place the position
 	 */

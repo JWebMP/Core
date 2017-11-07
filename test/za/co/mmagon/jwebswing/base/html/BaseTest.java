@@ -81,23 +81,47 @@ public class BaseTest extends BaseTestClass
 		String expResult = "<base href=\"This is a link to something\" target=\"Target Frame\">";
 		String result = instance.toString(true).toString();
 		assertEquals(expResult, result);
+	}
+
+	@Test
+	public void testBaseTiny()
+	{
+		Page page = getPage();
+		Base instance = new Base();
+		page.getPageFields().setBase(instance);
+		instance.addAttribute(BaseAttributes.Target, "Target Frame");
+		instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
+		System.out.println(instance.toString(true));
+		String expResult;
+		String result;
 
 		page.setTiny(false);
 		System.out.println(page.toString(true));
 		expResult = "<!DOCTYPE html>\n" +
-				"<html>\n" +
-				"\t<head>\n" +
-				"\t\t<base href=\"This is a link to something\" target=\"Target Frame\">\n" +
-				"\t\t<!-- Priority [Top_Shelf] Values -->\n" +
-				"\t\t<script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script>\n" +
-				"\t</head>\n" +
-				"</html>";
+				            "<html>\n" +
+				            "\t<head>\n" +
+				            "\t\t<base href=\"This is a link to something\" target=\"Target Frame\">\n" +
+				            "\t</head>\n" +
+				            "</html>";
 		result = page.toString(true).toString();
 		assertEquals(expResult, result);
+	}
+
+	@Test
+	public void testBaseTinyPage()
+	{
+		Page page = getPage();
+		Base instance = new Base();
+		page.getPageFields().setBase(instance);
+		instance.addAttribute(BaseAttributes.Target, "Target Frame");
+		instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
+		System.out.println(instance.toString(true));
+		String expResult;
+		String result;
 
 		page.setTiny(true);
 		System.out.println(page.toString(true));
-		expResult = "<!DOCTYPE html><html><head><base href=\"This is a link to something\" target=\"Target Frame\"><script src=\"persist-js/persist-all-min.js\" type=\"text/javascript\"></script></head></html>";
+		expResult = "<!DOCTYPE html><html><head><base href=\"This is a link to something\" target=\"Target Frame\"></head></html>";
 		result = page.toString(true).toString();
 		assertEquals(expResult, result);
 	}

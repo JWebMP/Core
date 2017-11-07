@@ -13,6 +13,8 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.*;
+
 /**
  * This class specifically build CSS according to a JWebSwing component
  *
@@ -57,6 +59,7 @@ public class CSSComposer
 		{
 			List<ComponentHierarchyBase> comp = o.getChildrenHierarchy(true);
 			List<ComponentStyleBase> compti = new ArrayList<>();
+
 			comp.forEach(co ->
 			             {
 				             if (ComponentStyleBase.class.isAssignableFrom(co.getClass()))
@@ -68,6 +71,7 @@ public class CSSComposer
 					             }
 				             }
 			             });
+
 			compti.forEach(a -> addComponent(a, list).forEach(a2 ->
 			                                                  {
 				                                                  if (!list.contains(a2))
@@ -99,10 +103,12 @@ public class CSSComposer
 	 *
 	 * @return True or False
 	 */
+	@SuppressWarnings("all")
 	public final List<CSSBlock> addComponent(ComponentStyleBase o, List<CSSBlock> componentBlocks)
 	{
 		CSSBlock annotatedCssBlocks = getPropertiesFactory().getCSSBlock(o.getID(), CSSTypes.None, getPropertiesFactory().getCSS(o), CSSBlockIdentifier.Class);
-		String output = annotatedCssBlocks.getCssLines().toString().replace("{", "").replace("}", "");
+
+		String output = annotatedCssBlocks.getCssLines().toString().replace(STRING_BRACES_OPEN, STRING_EMPTY).replace(STRING_BRACES_CLOSE, STRING_EMPTY);
 		if (!output.isEmpty())
 		{
 			o.addClass(annotatedCssBlocks.getIdOfBlock());
@@ -111,13 +117,14 @@ public class CSSComposer
 				componentBlocks.add(annotatedCssBlocks);
 			}
 		}
+
+
 		Map<CSSTypes, CSSImpl> css = o.getCssTypeHashMap();
 		List<CSSBlock> blocks = new ArrayList<>();
 		css.forEach((key, value) ->
 		            {
-			            CSSBlock declaredCssBlocks = CSSComposer.this.getPropertiesFactory().getCSSBlock(
-					            o.getID() + key.getCssName(), key, CSSComposer.this.getPropertiesFactory().getCSS(value), CSSBlockIdentifier.Id
-			                                                                                            );
+			            Map<StringBuilder, Object> typeCss = value.getMap();
+			            CSSBlock declaredCssBlocks = propertiesFactory.getCSSBlock(o.getID() + key.getCssName(), key, typeCss, CSSBlockIdentifier.Id);
 			            blocks.add(declaredCssBlocks);
 		            });
 		blocks.forEach(e ->
@@ -141,16 +148,12 @@ public class CSSComposer
 			               {
 				               log.log(Level.WARNING, "Unable to read field object " + field.getName(), e);
 			               }
-			               if (Objects.nonNull(fieldObject))
+			               if (Objects.nonNull(fieldObject) && ComponentStyleBase.class.isAssignableFrom(fieldObject.getClass()))
 			               {
-				               field.setAccessible(true);
-				               if (ComponentStyleBase.class.isAssignableFrom(fieldObject.getClass()))
-				               {
-					               ComponentStyleBase c = (ComponentStyleBase) fieldObject;
-					               CSSBlock newFieldBlock = getPropertiesFactory().getCSSBlock(c.getID(), CSSTypes.None, getPropertiesFactory().getCSS(field, o), CSSBlockIdentifier.Id);
-					               newFieldBlock.setBlockIdentifer(CSSBlockIdentifier.Id);
-					               componentBlocks.add(newFieldBlock);
-				               }
+				               ComponentStyleBase c = (ComponentStyleBase) fieldObject;
+				               CSSBlock newFieldBlock = getPropertiesFactory().getCSSBlock(c.getID(), CSSTypes.None, getPropertiesFactory().getCSS(field, o), CSSBlockIdentifier.Id);
+				               newFieldBlock.setBlockIdentifer(CSSBlockIdentifier.Id);
+				               componentBlocks.add(newFieldBlock);
 			               }
 		               });
 

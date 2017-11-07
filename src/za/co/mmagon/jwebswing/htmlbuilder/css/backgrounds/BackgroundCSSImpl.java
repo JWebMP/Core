@@ -311,6 +311,10 @@ public class BackgroundCSSImpl extends CSSImplementationAdapter<BackgroundCSS, B
 	 */
 	public BackgroundImpl getBackground()
 	{
+		if (background == null)
+		{
+			background = new BackgroundImpl();
+		}
 		return background;
 	}
 	

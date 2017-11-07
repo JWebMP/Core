@@ -19,7 +19,6 @@ package za.co.mmagon.jwebswing.htmlbuilder.css.annotations;
 import com.armineasy.injection.GuiceContext;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import za.co.mmagon.jwebswing.htmlbuilder.css.CSSPropertiesFactory;
 import za.co.mmagon.logger.LogFactory;
@@ -29,8 +28,10 @@ import java.util.Map;
 import java.util.logging.Level;
 
 /**
- * @param <A> The annotation type
- * @param <T> The implementation class type
+ * @param <A>
+ * 		The annotation type
+ * @param <T>
+ * 		The implementation class type
  *
  * @author GedMarc
  * @version 1.0
@@ -40,7 +41,7 @@ import java.util.logging.Level;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CSSImplementationAdapter<A extends Annotation, T extends CSSImplementationClass> implements CSSImplementationClass<A, T>
 {
-	
+
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The default adapter
@@ -50,7 +51,7 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 	 * The properties factory
 	 */
 	private CSSPropertiesFactory<A> propertyFactory;
-	
+
 	/**
 	 * For implementing generic methods on CSS
 	 */
@@ -58,11 +59,12 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 	{
 		//Nothing Needed
 	}
-	
+
 	/**
 	 * From annotation
 	 *
-	 * @param annotation The annotation to pull from
+	 * @param annotation
+	 * 		The annotation to pull from
 	 *
 	 * @return
 	 */
@@ -72,7 +74,7 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 		T newInstance = null;
 		try
 		{
-			
+
 			Map<StringBuilder, Object> fieldMapping = getPropertyFactory().getCSS(annotation);
 			newInstance = (T) getPropertyFactory().getImplementationObject(annotation, fieldMapping);
 			return newInstance;
@@ -83,7 +85,7 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Returns the properties factory
 	 *
@@ -97,7 +99,7 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 		}
 		return propertyFactory;
 	}
-	
+
 	/**
 	 * Sets the properties factory
 	 *
@@ -107,7 +109,18 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 	{
 		this.propertyFactory = propertyFactory;
 	}
-	
+
+	/**
+	 * Returns the object map
+	 *
+	 * @return
+	 */
+	public Map<StringBuilder, Object> getMap()
+	{
+		CSSPropertiesFactory props = new CSSPropertiesFactory();
+		return props.getCSSProperties(this);
+	}
+
 	@Override
 	public String toString()
 	{
@@ -115,11 +128,11 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 		{
 			return GuiceContext.getInstance(ObjectMapper.class).writeValueAsString(this);
 		}
-		catch (JsonProcessingException e)
+		catch (Exception e)
 		{
 			log.log(Level.SEVERE, "Error in IMPL Object", e);
 			return "";
 		}
 	}
-	
+
 }

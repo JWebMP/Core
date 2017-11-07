@@ -17,15 +17,16 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.collect.Lists;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSAnnotationType;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationClass;
-import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationValue;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSSImpl;
 import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSBlock;
 import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSBlockIdentifier;
 import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSLine;
 import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
 import za.co.mmagon.jwebswing.htmlbuilder.css.image.ImageCSS;
+import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.CSSShortHand;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSS;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementTypes;
@@ -185,7 +186,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
 			throws IllegalAccessException
 	{
 		Map<StringBuilder, Object> rawValues = new HashMap<>();
-		if (field.getModifiers() == Modifier.STATIC)
+		if (field.getModifiers() == 26)
 		{
 			return rawValues;
 		}
@@ -213,9 +214,9 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
 			}
 			return rawValues;
 		}
-
 		if (cssDetails == null)
 		{
+			log.info("Field missing CSS Details {" + cssKey + "}");
 			return rawValues;
 		}
 		else if (returnedObject instanceof CSSEnumeration)
@@ -242,14 +243,17 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
 			{
 				return rawValues;
 			}
+			else
+			{
+				rawValues.put(new StringBuilder(cssKey), returnedObject.toString());
+			}
 		}
 		else if (returnedObject instanceof Integer && returnedObject.equals(CSSPropertiesFactory.DefaultIntValue))
 		{
 			return rawValues;
 		}
 
-
-		if (returnedObject instanceof CSSImplementationClass && !(returnedObject instanceof CSSImplementationValue))
+		else if (returnedObject instanceof CSSImplementationClass && !(returnedObject instanceof CSSShortHand))
 		{
 			Map m = getCSS(returnedObject);
 			rawValues.putAll(m);
@@ -258,7 +262,14 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
 
 		if (!returnedObject.toString().isEmpty())
 		{
-			rawValues.put(new StringBuilder(cssKey), returnedObject);
+			if (CSSShortHand.class.isAssignableFrom(returnedObject.getClass()))
+			{
+				rawValues.put(new StringBuilder(cssKey), returnedObject.toString());
+			}
+			else
+			{
+				rawValues.put(new StringBuilder(cssKey), returnedObject);
+			}
 		}
 		return rawValues;
 	}
@@ -300,11 +311,11 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
 	 *
 	 * @return ArrayList of all applicable CSS annotations
 	 */
-	protected <A extends Annotation, T extends Object> List<A> getAllAppliedCSSAnnotations(T cssObjectIn)
+	public <T extends Object> List<Annotation> getAllAppliedCSSAnnotations(T cssObjectIn)
 	{
 		Class clazz = cssObjectIn.getClass();
-		List<A> arrayList = new ArrayList<>((Collection<? extends A>) Arrays.asList(clazz.getAnnotations()));
-		arrayList.removeIf(a -> a.annotationType().isAnnotationPresent(CSSAnnotationType.class));
+		List<Annotation> arrayList = Lists.newArrayList(clazz.getAnnotations());
+		arrayList.removeIf(a -> !a.annotationType().isAnnotationPresent(CSSAnnotationType.class));
 		return arrayList;
 	}
 
@@ -325,8 +336,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
 			log.log(Level.SEVERE, "[Action]-[Null Object Retrieved];");
 			return null;
 		}
-		List<Annotation> anos = new ArrayList<>();
-		anos.addAll(Arrays.asList(classAnnotations));
+		List<Annotation> anos = Lists.newArrayList(classAnnotations);
 		return getCSSProperties(anos);
 	}
 
@@ -377,10 +387,10 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
 	 *
 	 * @return ArrayList of all applicable CSS annotations
 	 */
-	protected <A extends Annotation> List<A> getAllAppliedCSSAnnotations(Field field)
+	public <A extends Annotation> List<A> getAllAppliedCSSAnnotations(Field field)
 	{
 		List<A> arrayList = new ArrayList<>((Collection<? extends A>) Arrays.asList(field.getAnnotations()));
-		arrayList.removeIf(a -> a.annotationType().isAnnotationPresent(CSSAnnotationType.class));
+		arrayList.removeIf(a -> !a.annotationType().isAnnotationPresent(CSSAnnotationType.class));
 		return arrayList;
 	}
 
@@ -482,7 +492,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
 				log.fine("Processed CSS Block into Implementation [" + (implementedObject == null ? "null" : implementedObject.getClass().getCanonicalName()) + "]");
 			}
 
-			if (!(valueString.length() > 0 && valueString.indexOf(STRING_COMMNA) >= 0))
+			if (valueString.length() > 0 && valueString.indexOf(STRING_COMMNA) >= 0)
 			{
 				valueString = new StringBuilder(valueString.substring(0, valueString.lastIndexOf(STRING_COMMNA)).trim());
 			}
@@ -490,7 +500,6 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
 		}
 		else
 		{
-
 			newCSSBlock.add(new CSSLine(key.toString(), value.toString()));
 		}
 	}

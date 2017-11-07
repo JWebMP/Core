@@ -5,6 +5,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
 
 import java.util.GregorianCalendar;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 /**
@@ -39,7 +40,7 @@ public class CSSBlockTest
 			+ "	property2:value2;\n"
 			+ "}\n"
 			+ "property1:value1;property1:value2;property2:value1;property2:value2;";
-	private String idTagPrettyPrint = "#idOfTag \n"
+	private String idTagPrettyPrint = "#idOfTag\n"
 			+ "{\n"
 			+ "	property1:value1;\n"
 			+ "	property1:value2;\n"
@@ -47,7 +48,7 @@ public class CSSBlockTest
 			+ "	property2:value2;\n"
 			+ "}";
 	private String idTagTinyPrint = "#idOfTag {property1:value1;property1:value2;property2:value1;property2:value2;}";
-	private String classNamePrettyPrint = ".className:active \n"
+	private String classNamePrettyPrint = ".className:active\n"
 			+ "{\n"
 			+ "	property1:value1;\n"
 			+ "	property1:value2;\n"
@@ -55,7 +56,7 @@ public class CSSBlockTest
 			+ "	property2:value2;\n"
 			+ "}";
 	private String classNameTinyPrint = ".className:active{property1:value1;property1:value2;property2:value1;property2:value2;}";
-	private String tagBlockPrettyPrint = "#normal-tag-active-ID:active,.normal-tag-link-class:link,normal-tag:hover \n"
+	private String tagBlockPrettyPrint = "#normal-tag-active-ID:active,.normal-tag-link-class:link,normal-tag:hover\n"
 			+ "{\n"
 			+ "	property1:value1;\n"
 			+ "	property1:value2;\n"
@@ -81,10 +82,7 @@ public class CSSBlockTest
 		cssIDComponentBlockActive.add(new CSSLine("property1:value1"));
 		cssIDComponentBlockActive.add(new CSSLine("property1:value2"));
 		System.out.println("\n" + cssIDComponentBlockActive);
-		if (!cssIDComponentBlockActive.toString().equals(classNamePrettyPrint))
-		{
-			fail("The CSS Block for Type ID and Active is not sorting or building properly");
-		}
+		assertEquals(cssIDComponentBlockActive.toString(), classNamePrettyPrint);
 		System.out.println("Starting Tiny HTML Test");
 
 		System.out.println(cssIDComponentBlockActive.toString());
@@ -157,11 +155,7 @@ public class CSSBlockTest
 		cssIDComponentBlock.add(new CSSLine("property1:value2"));
 		System.out.println("" + cssIDComponentBlock);
 		System.out.println(cssIDComponentBlock.toString().equals(idTagPrettyPrint));
-		if (!cssIDComponentBlock.toString().equals(idTagPrettyPrint))
-		{
-			fail("The CSS Block for Type ID is not sorting or building properly");
-		}
-
+		assertEquals(cssIDComponentBlock.toString(), idTagPrettyPrint);
 		System.out.println("Starting Tiny HTML Test");
 		System.out.println(cssIDComponentBlock);
 		if (!cssIDComponentBlock.toString().equals(idTagTinyPrint))

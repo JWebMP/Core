@@ -22,7 +22,8 @@ import za.co.mmagon.jwebswing.generics.WebReference;
 import za.co.mmagon.jwebswing.plugins.ajaxenabler.AjaxEnablerReferencePool;
 import za.co.mmagon.jwebswing.plugins.jquery.JQueryReferencePool;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author GedMarc
@@ -46,12 +47,12 @@ public class WebReferenceTest
 	public void testSort()
 	{
 		WebReference.setIsLocal(true);
-		ArrayList<WebReference> w = new ArrayList<>();
+		List<WebReference> w = new LinkedList<>();
 		// w.add(AtmosphereReferencePool.JQueryAtmospherePush.getJavaScriptReference());
-		w.add(JQueryReferencePool.JQueryV2.getJavaScriptReference());// new JQueryReferenceV2());
+		w.add(JQueryReferencePool.JQueryV2.getJavaScriptReference().setSortOrder(0));// new JQueryReferenceV2());
 
 		//w.add(AtmosphereReferencePool.JQueryAtmospherePush.getJavaScriptReference());
-		w.add(AjaxEnablerReferencePool.AjaxEnabler.getJavaScriptReference());
+		w.add(AjaxEnablerReferencePool.AjaxEnabler.getJavaScriptReference().setSortOrder(0));
 
 		WebReference.sort(w);
 		System.out.println(w);

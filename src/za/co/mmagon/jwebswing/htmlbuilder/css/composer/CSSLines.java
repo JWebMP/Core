@@ -1,5 +1,6 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 import za.co.mmagon.jwebswing.utilities.TextUtilities;
 
 import javax.validation.constraints.NotNull;
@@ -187,56 +188,14 @@ public class CSSLines implements Serializable
 	}
 
 	/**
-	 * Returns this lines object at the tab count indentation
+	 * Returns this lines CSS object with 0 tabs
 	 *
-	 * @param tabCount
-	 * 		Number of tab indents to apply
-	 * @param renderInLine
-	 * 		Set to make the render in line
-	 *
-	 * @return The CSS line block
+	 * @return
 	 */
-	public String toString(int tabCount, boolean renderInLine)
+	@Override
+	public String toString()
 	{
-		StringBuilder sb = new StringBuilder();
-		StringBuilder tabs = TextUtilities.getTabString(tabCount);
-		StringBuilder cssTabsLess = TextUtilities.getTabString(tabCount - 1);
-		StringBuilder newline = new StringBuilder(renderInLine ? "\n" : "");
-
-		if (isRenderBraces())
-		{
-			if (isPrettyPrint())
-			{
-				sb.append(newline);
-			}
-			sb.append("{");
-			if (isPrettyPrint())
-			{
-				sb.append(newline);
-			}
-		}
-
-		for (CSSLine cSSLine : getAllLines())
-		{
-			if (!isPrettyPrint())
-			{
-				sb.append(cSSLine.toString(renderInQuotations));
-				sb.append(";");
-			}
-			else
-			{
-				sb.append(!isPrettyPrint() ? "" : tabs).append(cSSLine.toString(renderInQuotations)).append(";");
-			}
-			if (isPrettyPrint())
-			{
-				sb.append("\n");
-			}
-		}
-		if (isRenderBraces())
-		{
-			sb.append(tinyHTML ? "" : cssTabsLess).append("}");
-		}
-		return sb.toString();
+		return toString(0);
 	}
 
 	/**
@@ -308,14 +267,56 @@ public class CSSLines implements Serializable
 	}
 
 	/**
-	 * Returns this lines CSS object with 0 tabs
+	 * Returns this lines object at the tab count indentation
 	 *
-	 * @return
+	 * @param tabCount
+	 * 		Number of tab indents to apply
+	 * @param renderInLine
+	 * 		Set to make the render in line
+	 *
+	 * @return The CSS line block
 	 */
-	@Override
-	public String toString()
+	public String toString(int tabCount)
 	{
-		return toString(0, false);
+		StringBuilder sb = new StringBuilder();
+		StringBuilder tabs = TextUtilities.getTabString(tabCount);
+		StringBuilder cssTabsLess = TextUtilities.getTabString(tabCount - 1);
+		StringBuilder newline = new StringBuilder(StaticStrings.STRING_NEWLINE_TEXT);
+
+		if (isRenderBraces())
+		{
+			if (isPrettyPrint())
+			{
+				sb.append(newline);
+			}
+			sb.append("{");
+			if (isPrettyPrint())
+			{
+				sb.append(newline);
+			}
+		}
+
+		for (CSSLine cSSLine : getAllLines())
+		{
+			if (!isPrettyPrint())
+			{
+				sb.append(cSSLine.toString(renderInQuotations));
+				sb.append(";");
+			}
+			else
+			{
+				sb.append(!isPrettyPrint() ? "" : tabs).append(cSSLine.toString(renderInQuotations)).append(";");
+			}
+			if (isPrettyPrint())
+			{
+				sb.append("\n");
+			}
+		}
+		if (isRenderBraces())
+		{
+			sb.append(tinyHTML ? "" : cssTabsLess).append("}");
+		}
+		return sb.toString();
 	}
 
 	/**

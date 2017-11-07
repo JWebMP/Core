@@ -22,10 +22,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import za.co.mmagon.SessionHelper;
 import za.co.mmagon.jwebswing.base.html.interfaces.NamedPair;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 import za.co.mmagon.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
@@ -208,7 +210,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	 */
 	public static List<? extends WebReference> sort(List<? extends WebReference> arrayList)
 	{
-		arrayList.sort(dummyReference);
+		Collections.sort(arrayList, dummyReference);
 		return arrayList;
 	}
 
@@ -423,6 +425,10 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	@Override
 	public int compare(WebReference o1, WebReference o2)
 	{
+		if (o1.getSortOrder().compareTo(o2.getSortOrder()) == 0)
+		{
+			return o1.toString().compareTo(o2.toString());
+		}
 		return o1.getSortOrder().compareTo(o2.getSortOrder());
 	}
 
@@ -539,7 +545,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 
 			if (useMinAtEndOfExtension && !sb.toString().contains(".min."))
 			{
-				sb.insert(sb.lastIndexOf("."), ".min");
+				sb.insert(sb.lastIndexOf(StaticStrings.STRING_DOT), ".min");
 			}
 
 			try
@@ -564,7 +570,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 			StringBuilder sb = new StringBuilder(getRemoteReference());
 			if (useMinAtEndOfExtension && isCanMinifyAtRemote() && !sb.toString().contains(".min."))
 			{
-				sb.insert(sb.lastIndexOf("."), ".min");
+				sb.insert(sb.lastIndexOf(StaticStrings.STRING_DOT), ".min");
 			}
 
 			return sb.toString();
@@ -602,6 +608,6 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 		{
 			LOG.log(Level.WARNING, "Error in getting url reference", e);
 		}
-		return new StringBuilder();
+		return sb;
 	}
 }

@@ -17,6 +17,7 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds;
 
 import org.junit.jupiter.api.Test;
+import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSS;
 import za.co.mmagon.jwebswing.htmlbuilder.css.image.ImageCSS;
 
 /**
@@ -28,8 +29,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.image.ImageCSS;
 				@ImageCSS("url 1")
 				,
 				@ImageCSS("url 2")
-		}, BackgroundImage
-		= @ImageCSS("image specified"),
+		}, BackgroundColor = @ColourCSS("colour1"),
 		BackgroundAttachment = BackgroundAttachments.Inherit)
 public class BackgroundCSSObjectTest
 {

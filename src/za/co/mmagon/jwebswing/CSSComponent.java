@@ -21,6 +21,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 
 /**
  * Extention of a component with no HTML. Renders the ID and all references to it as a class name instead of ID form
@@ -75,7 +76,7 @@ public abstract class CSSComponent<J extends CSSComponent<J>>
 	@Override
 	public String getID(boolean jQueryHolder)
 	{
-		return "." + getID();
+		return StaticStrings.STRING_DOT + getID();
 	}
 
 	/**

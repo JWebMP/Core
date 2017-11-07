@@ -15,6 +15,10 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.padding.PaddingCSSImpl;
 import za.co.mmagon.jwebswing.htmlbuilder.css.tables.TableCSSImpl;
 import za.co.mmagon.jwebswing.htmlbuilder.css.text.TextCSSImpl;
 
+import javax.validation.constraints.NotNull;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * This class is an object implementation of the CSS Annotations
  * <p>
@@ -84,13 +88,26 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
 	}
 	
 	/**
-	 * Returns the animatable object
-	 *
+	 * Returns all the maps of the underlying objects
 	 * @return
 	 */
-	public AnimateCSSImpl getAnimatable()
+	@Override
+	public Map<StringBuilder, Object> getMap()
 	{
-		return animatable;
+		Map<StringBuilder, Object> returnable = new HashMap<>();
+		returnable.putAll(getBackground().getMap());
+		returnable.putAll(getDimensions().getMap());
+		returnable.putAll(getMargins().getMap());
+		returnable.putAll(getDisplay().getMap());
+		returnable.putAll(getPadding().getMap());
+		returnable.putAll(getText().getMap());
+		returnable.putAll(getBorder().getMap());
+		returnable.putAll(getFont().getMap());
+		returnable.putAll(getList().getMap());
+		returnable.putAll(getOutline().getMap());
+		returnable.putAll(getTable().getMap());
+		returnable.putAll(getAnimatable().getMap());
+		return returnable;
 	}
 	
 	/**
@@ -108,6 +125,7 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
 	 *
 	 * @return
 	 */
+	@NotNull
 	public BackgroundCSSImpl getBackground()
 	{
 		if (background == null)
@@ -128,17 +146,17 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
 	}
 	
 	/**
-	 * Gets the border
-	 *
+	 * Returns dimension settings for the object
 	 * @return
 	 */
-	public BorderCSSImpl getBorder()
+	@NotNull
+	public HeightWidthCSSImpl getDimensions()
 	{
-		if (border == null)
+		if (dimensions == null)
 		{
-			border = new BorderCSSImpl();
+			dimensions = new HeightWidthCSSImpl();
 		}
-		return border;
+		return dimensions;
 	}
 	
 	/**
@@ -152,17 +170,18 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
 	}
 	
 	/**
-	 * Returns the display
+	 * Returns the margins
 	 *
 	 * @return
 	 */
-	public DisplayCSSImpl getDisplay()
+	@NotNull
+	public MarginsCSSImpl getMargins()
 	{
-		if (display == null)
+		if (margins == null)
 		{
-			display = new DisplayCSSImpl();
+			margins = new MarginsCSSImpl();
 		}
-		return display;
+		return margins;
 	}
 	
 	/**
@@ -176,15 +195,18 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
 	}
 	
 	/**
+	 * Returns the display
+	 *
 	 * @return
 	 */
-	public FontsCSSImpl getFont()
+	@NotNull
+	public DisplayCSSImpl getDisplay()
 	{
-		if (font == null)
+		if (display == null)
 		{
-			font = new FontsCSSImpl();
+			display = new DisplayCSSImpl();
 		}
-		return font;
+		return display;
 	}
 	
 	/**
@@ -196,14 +218,20 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
 	{
 		this.font = font;
 	}
-	
-	public HeightWidthCSSImpl getDimensions()
+
+	/**
+	 * Returns the padding
+	 *
+	 * @return
+	 */
+	@NotNull
+	public PaddingCSSImpl getPadding()
 	{
-		if (dimensions == null)
+		if (padding == null)
 		{
-			dimensions = new HeightWidthCSSImpl();
+			padding = new PaddingCSSImpl();
 		}
-		return dimensions;
+		return padding;
 	}
 	
 	/**
@@ -215,19 +243,20 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
 	{
 		this.dimensions = dimensions;
 	}
-	
+
 	/**
-	 * Returns the list
+	 * Returns the text
 	 *
 	 * @return
 	 */
-	public ListCSSImpl getList()
+	@NotNull
+	public TextCSSImpl getText()
 	{
-		if (list == null)
+		if (text == null)
 		{
-			list = new ListCSSImpl();
+			text = new TextCSSImpl();
 		}
-		return list;
+		return text;
 	}
 	
 	/**
@@ -239,19 +268,20 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
 	{
 		this.list = list;
 	}
-	
+
 	/**
-	 * Returns the margins
+	 * Gets the border
 	 *
 	 * @return
 	 */
-	public MarginsCSSImpl getMargins()
+	@NotNull
+	public BorderCSSImpl getBorder()
 	{
-		if (margins == null)
+		if (border == null)
 		{
-			margins = new MarginsCSSImpl();
+			border = new BorderCSSImpl();
 		}
-		return margins;
+		return border;
 	}
 	
 	/**
@@ -265,17 +295,16 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
 	}
 	
 	/**
-	 * Returns the outline
-	 *
 	 * @return
 	 */
-	public OutlineCSSImpl getOutline()
+	@NotNull
+	public FontsCSSImpl getFont()
 	{
-		if (outline == null)
+		if (font == null)
 		{
-			outline = new OutlineCSSImpl();
+			font = new FontsCSSImpl();
 		}
-		return outline;
+		return font;
 	}
 	
 	/**
@@ -287,19 +316,20 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
 	{
 		this.outline = outline;
 	}
-	
+
 	/**
-	 * Returns the padding
+	 * Returns the list
 	 *
 	 * @return
 	 */
-	public PaddingCSSImpl getPadding()
+	@NotNull
+	public ListCSSImpl getList()
 	{
-		if (padding == null)
+		if (list == null)
 		{
-			padding = new PaddingCSSImpl();
+			list = new ListCSSImpl();
 		}
-		return padding;
+		return list;
 	}
 	
 	/**
@@ -311,19 +341,20 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
 	{
 		this.padding = padding;
 	}
-	
+
 	/**
-	 * Returns the table
+	 * Returns the outline
 	 *
 	 * @return
 	 */
-	public TableCSSImpl getTable()
+	@NotNull
+	public OutlineCSSImpl getOutline()
 	{
-		if (table == null)
+		if (outline == null)
 		{
-			table = new TableCSSImpl();
+			outline = new OutlineCSSImpl();
 		}
-		return table;
+		return outline;
 	}
 	
 	/**
@@ -335,19 +366,20 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
 	{
 		this.table = table;
 	}
-	
+
 	/**
-	 * Returns the text
+	 * Returns the table
 	 *
 	 * @return
 	 */
-	public TextCSSImpl getText()
+	@NotNull
+	public TableCSSImpl getTable()
 	{
-		if (text == null)
+		if (table == null)
 		{
-			text = new TextCSSImpl();
+			table = new TableCSSImpl();
 		}
-		return text;
+		return table;
 	}
 	
 	/**
@@ -359,5 +391,19 @@ public class CSSImpl extends CSSImplementationAdapter<CSS, CSSImpl> implements C
 	{
 		this.text = text;
 	}
-	
+
+	/**
+	 * Returns the animatable object
+	 *
+	 * @return
+	 */
+	@NotNull
+	public AnimateCSSImpl getAnimatable()
+	{
+		if (animatable == null)
+		{
+			animatable = new AnimateCSSImpl();
+		}
+		return animatable;
+	}
 }

@@ -21,6 +21,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.CSSDetail;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationAdapter;
 import za.co.mmagon.jwebswing.htmlbuilder.css.annotations.CSSImplementationClass;
 import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.MarginSetting;
+import za.co.mmagon.jwebswing.htmlbuilder.css.interfaces.CSSShortHand;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
 
 import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_EMPTY;
@@ -32,7 +33,8 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SPACE;
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class MarginImpl extends CSSImplementationAdapter<Margin, MarginImpl> implements CSSImplementationClass<Margin, MarginImpl>
+public class MarginImpl extends CSSImplementationAdapter<Margin, MarginImpl>
+		implements CSSImplementationClass<Margin, MarginImpl>, CSSShortHand
 {
 
 	private static final long serialVersionUID = 1L;

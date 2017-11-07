@@ -17,6 +17,7 @@
 package za.co.mmagon.jwebswing.htmlbuilder.css.composer;
 
 import org.junit.jupiter.api.Test;
+import za.co.mmagon.jwebswing.BaseTestClass;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.html.Body;
 import za.co.mmagon.jwebswing.base.html.Div;
@@ -32,7 +33,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.BorderStyles;
 /**
  * @author GedMarc
  */
-public class CSSComposerTest
+public class CSSComposerTest extends BaseTestClass
 {
 
 	public CSSComposerTest()

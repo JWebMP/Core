@@ -98,8 +98,10 @@ public class JQueryPageConfigurator extends PageConfigurator
 	{
 		if (page != null)
 		{
-			page.getBody().addJavaScriptReference(JQueryReferencePool.PersistJS.getJavaScriptReference());
-
+			if (page.getOptions().isLocalStorage())
+			{
+				page.getBody().addJavaScriptReference(JQueryReferencePool.PersistJS.getJavaScriptReference());
+			}
 			if (page.getBody().readChildrenPropertyFirstResult(JQueryEnabledString, true))
 			{
 				if (page.getBrowser() != null)

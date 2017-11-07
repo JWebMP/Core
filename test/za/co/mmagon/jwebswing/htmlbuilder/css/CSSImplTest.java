@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.BaseTestClass;
 import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.BackgroundClip;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourCSSImpl;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
 import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSBlock;
@@ -32,10 +33,9 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.lists.ListStylePosition;
 import za.co.mmagon.jwebswing.htmlbuilder.css.lists.ListStyleType;
 import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
 import za.co.mmagon.jwebswing.htmlbuilder.css.padding.PaddingSetting;
+import za.co.mmagon.jwebswing.htmlbuilder.css.tables.TableBorderCollapse;
 import za.co.mmagon.jwebswing.htmlbuilder.css.tables.TableCaptionSides;
 import za.co.mmagon.jwebswing.htmlbuilder.css.text.TextAlignments;
-
-import java.util.Map;
 
 /**
  * Tests the generation for css
@@ -55,12 +55,11 @@ public class CSSImplTest extends BaseTestClass
 		Page p = getInstance();
 		CSSImpl imp = new CSSImpl();
 		imp.getBackground().setBackgroundColor$(ColourNames.DarkGoldenRod);
+		System.out.println("CSS Map : " + imp.getMap());
+		imp = new CSSImpl();
+		imp.getBackground().setBackgroundColor$(ColourNames.DarkGoldenRod);
 		System.out.println(imp.toString());
-		Assertions.assertEquals("{\r\n"
-				                    + "  \"background\" : {\r\n"
-				                    + "    \"backgroundColor$\" : \"darkgoldenrod\"\r\n"
-				                    + "  }\r\n"
-				                    + "}", imp.toString());
+		Assertions.assertEquals("{\"background\":{\"backgroundColor$\":\"DarkGoldenRod\"}}", imp.toString());
 	}
 
 	/**
@@ -73,11 +72,7 @@ public class CSSImplTest extends BaseTestClass
 		CSSImpl imp = new CSSImpl();
 		imp.getBorder().setBorderBottomColor$(ColourNames.PowderBlue);
 		System.out.println(imp.toString());
-		Assertions.assertEquals("{\r\n"
-				                    + "  \"border\" : {\r\n"
-				                    + "    \"borderBottomColor$\" : \"powderblue\"\r\n"
-				                    + "  }\r\n"
-				                    + "}", imp.toString());
+		Assertions.assertEquals("{\"border\":{\"borderBottomColor$\":\"PowderBlue\"}}", imp.toString());
 	}
 
 	/**
@@ -90,11 +85,7 @@ public class CSSImplTest extends BaseTestClass
 		CSSImpl imp = new CSSImpl();
 		imp.getBackground().setBackgroundColor(new ColourCSSImpl("asdf"));
 		System.out.println(imp.toString());
-		Assertions.assertEquals("{\r\n"
-				                    + "  \"background\" : {\r\n"
-				                    + "    \"backgroundColor\" : \"asdf\"\r\n"
-				                    + "  }\r\n"
-				                    + "}", imp.toString());
+		Assertions.assertEquals("{\"background\":{\"backgroundColor\":\"asdf\"}}", imp.toString());
 	}
 
 	/**
@@ -107,11 +98,7 @@ public class CSSImplTest extends BaseTestClass
 		CSSImpl imp = new CSSImpl();
 		imp.getDisplay().setDisplay(Displays.Inline);
 		System.out.println(imp.toString());
-		Assertions.assertEquals("{\r\n"
-				                    + "  \"display\" : {\r\n"
-				                    + "    \"display\" : \"inline\"\r\n"
-				                    + "  }\r\n"
-				                    + "}", imp.toString());
+		Assertions.assertEquals("{\"display\":{\"display\":\"Inline\"}}", imp.toString());
 	}
 
 	/**
@@ -124,11 +111,7 @@ public class CSSImplTest extends BaseTestClass
 		CSSImpl imp = new CSSImpl();
 		imp.getFont().setFontStyle(FontStyles.Normal);
 		System.out.println(imp.toString());
-		Assertions.assertEquals("{\r\n"
-				                    + "  \"font\" : {\r\n"
-				                    + "    \"fontStyle\" : \"normal\"\r\n"
-				                    + "  }\r\n"
-				                    + "}", imp.toString());
+		Assertions.assertEquals("{\"font\":{\"fontStyle\":\"Normal\"}}", imp.toString());
 	}
 
 	/**
@@ -141,11 +124,7 @@ public class CSSImplTest extends BaseTestClass
 		CSSImpl imp = new CSSImpl();
 		imp.getDimensions().setHeight(300);
 		System.out.println(imp.toString());
-		Assertions.assertEquals("{\r\n"
-				                    + "  \"dimensions\" : {\r\n"
-				                    + "    \"height\" : '300px'\r\n"
-				                    + "  }\r\n"
-				                    + "}", imp.toString());
+		Assertions.assertEquals("{\"dimensions\":{\"height\":'300px'}}", imp.toString());
 	}
 
 	/**
@@ -158,11 +137,7 @@ public class CSSImplTest extends BaseTestClass
 		CSSImpl imp = new CSSImpl();
 		imp.getList().setListStyleType(ListStyleType.circle);
 		System.out.println(imp.toString());
-		Assertions.assertEquals("{\r\n"
-				                    + "  \"list\" : {\r\n"
-				                    + "    \"listStyleType\" : \"circle\"\r\n"
-				                    + "  }\r\n"
-				                    + "}", imp.toString());
+		Assertions.assertEquals("{\"list\":{\"listStyleType\":\"circle\"}}", imp.toString());
 	}
 
 	/**
@@ -175,11 +150,7 @@ public class CSSImplTest extends BaseTestClass
 		CSSImpl imp = new CSSImpl();
 		imp.getMargins().setMarginBottom(new MeasurementCSSImpl(0));
 		System.out.println(imp.toString());
-		Assertions.assertEquals("{\r\n"
-				                    + "  \"margins\" : {\r\n"
-				                    + "    \"marginBottom\" : '0px'\r\n"
-				                    + "  }\r\n"
-				                    + "}", imp.toString());
+		Assertions.assertEquals("{\"margins\":{\"marginBottom\":'0px'}}", imp.toString());
 	}
 
 	/**
@@ -192,11 +163,7 @@ public class CSSImplTest extends BaseTestClass
 		CSSImpl imp = new CSSImpl();
 		imp.getOutline().setOutlineColor$(ColourNames.AliceBlue);
 		System.out.println(imp.toString());
-		Assertions.assertEquals("{\r\n"
-				                    + "  \"outline\" : {\r\n"
-				                    + "    \"outlineColor$\" : \"aliceblue\"\r\n"
-				                    + "  }\r\n"
-				                    + "}", imp.toString());
+		Assertions.assertEquals("{\"outline\":{\"outlineColor$\":\"AliceBlue\"}}", imp.toString());
 	}
 
 	/**
@@ -209,11 +176,7 @@ public class CSSImplTest extends BaseTestClass
 		CSSImpl imp = new CSSImpl();
 		imp.getPadding().setPaddingBottom$(PaddingSetting.Auto);
 		System.out.println(imp.toString());
-		Assertions.assertEquals("{\r\n"
-				                    + "  \"padding\" : {\r\n"
-				                    + "    \"paddingBottom$\" : \"auto\"\r\n"
-				                    + "  }\r\n"
-				                    + "}", imp.toString());
+		Assertions.assertEquals("{\"padding\":{\"paddingBottom$\":\"Auto\"}}", imp.toString());
 	}
 
 	/**
@@ -224,13 +187,9 @@ public class CSSImplTest extends BaseTestClass
 	{
 		Page p = getInstance();
 		CSSImpl imp = new CSSImpl();
-		imp.getPadding().setPaddingBottom$(PaddingSetting.Auto);
+		imp.getTable().setBorderCollapse(TableBorderCollapse.Separate);
 		System.out.println(imp.toString());
-		Assertions.assertEquals("{\r\n"
-				                    + "  \"padding\" : {\r\n"
-				                    + "    \"paddingBottom$\" : \"auto\"\r\n"
-				                    + "  }\r\n"
-				                    + "}", imp.toString());
+		Assertions.assertEquals("{\"table\":{\"borderCollapse\":\"Separate\"}}", imp.toString());
 	}
 
 	/**
@@ -243,20 +202,7 @@ public class CSSImplTest extends BaseTestClass
 		CSSImpl imp = new CSSImpl();
 		imp.getText().setTextAlign(TextAlignments.Center);
 		System.out.println(imp.toString());
-		Assertions.assertEquals("{\r\n"
-				                    + "  \"text\" : {\r\n"
-				                    + "    \"textAlign\" : \"center\"\r\n"
-				                    + "  }\r\n"
-				                    + "}", imp.toString());
-	}
-
-	/**
-	 * Test of setAnimatable method, of class CSSImpl.
-	 */
-	@Test
-	public void testSetAnimatable()
-	{
-//        Assertions.fail("not done yet");
+		Assertions.assertEquals("{\"text\":{\"textAlign\":\"Center\"}}", imp.toString());
 	}
 
 	/**
@@ -268,13 +214,11 @@ public class CSSImplTest extends BaseTestClass
 		Page p = getInstance();
 		CSSImpl imp = new CSSImpl();
 		imp.getBackground().setBackgroundColor$(ColourNames.DarkGoldenRod);
-
 		CSSPropertiesFactory factory = new CSSPropertiesFactory();
-		Map map = factory.getCSSProperties(imp);
-		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, map, CSSBlockIdentifier.Id);
+		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, imp.getMap(), CSSBlockIdentifier.Id);
 
 		System.out.println(block.toString());
-		Assertions.assertEquals("#id {background-color:darkgoldenrod;}", block.toString());
+		Assertions.assertEquals("#id{background-color:darkgoldenrod;}", block.toString());
 	}
 
 	/**
@@ -286,21 +230,14 @@ public class CSSImplTest extends BaseTestClass
 		Page p = getInstance();
 		CSSImpl imp = new CSSImpl();
 		imp.getBackground().setBackgroundColor$(ColourNames.DarkGoldenRod);
+		imp.getBackground().setBackgroundClip(BackgroundClip.border_box);
+		imp.getBorder().setBorderBottomStyle(BorderStyles.Double);
 
 		CSSPropertiesFactory factory = new CSSPropertiesFactory();
-		Map map = factory.getCSSProperties(imp);
-		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, map, CSSBlockIdentifier.Id);
+		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, imp.getMap(), CSSBlockIdentifier.Id);
 
 		System.out.println(block.toString());
-		Assertions.assertEquals("#id {background-color:darkgoldenrod;}", block.toString());
-	}
-
-	/**
-	 * Test of setCustom method, of class CSSImpl.
-	 */
-	@Test
-	public void testSetCustom()
-	{
+		Assertions.assertEquals("#id{background-clip:border-box;background-color:darkgoldenrod;border-bottom-style:double;}", block.toString());
 	}
 
 	/**
@@ -314,11 +251,10 @@ public class CSSImplTest extends BaseTestClass
 		imp.getText().setColor(new ColourCSSImpl("asd"));
 
 		CSSPropertiesFactory factory = new CSSPropertiesFactory();
-		Map map = factory.getCSSProperties(imp);
-		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, map, CSSBlockIdentifier.Id);
+		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, imp.getMap(), CSSBlockIdentifier.Id);
 
 		System.out.println(block.toString());
-		Assertions.assertEquals("#id {color:asd;}", block.toString());
+		Assertions.assertEquals("#id{color:asd;}", block.toString());
 	}
 
 	/**
@@ -332,11 +268,10 @@ public class CSSImplTest extends BaseTestClass
 		imp.getDisplay().setDisplay(Displays.Inline);
 
 		CSSPropertiesFactory factory = new CSSPropertiesFactory();
-		Map map = factory.getCSSProperties(imp);
-		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, map, CSSBlockIdentifier.Id);
+		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, imp.getMap(), CSSBlockIdentifier.Id);
 
 		System.out.println(block.toString());
-		Assertions.assertEquals("#id {display:inline;}", block.toString());
+		Assertions.assertEquals("#id{display:inline;}", block.toString());
 	}
 
 	/**
@@ -350,11 +285,10 @@ public class CSSImplTest extends BaseTestClass
 		imp.getFont().setFontStyle(FontStyles.Normal);
 
 		CSSPropertiesFactory factory = new CSSPropertiesFactory();
-		Map map = factory.getCSSProperties(imp);
-		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, map, CSSBlockIdentifier.Id);
+		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, imp.getMap(), CSSBlockIdentifier.Id);
 
 		System.out.println(block.toString());
-		Assertions.assertEquals("#id {font-style:normal;}", block.toString());
+		Assertions.assertEquals("#id{font-style:normal;}", block.toString());
 	}
 
 	/**
@@ -368,11 +302,10 @@ public class CSSImplTest extends BaseTestClass
 		imp.getDimensions().setHeight(500);
 
 		CSSPropertiesFactory factory = new CSSPropertiesFactory();
-		Map map = factory.getCSSProperties(imp);
-		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, map, CSSBlockIdentifier.Id);
+		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, imp.getMap(), CSSBlockIdentifier.Id);
 
 		System.out.println(block.toString());
-		Assertions.assertEquals("#id {height:500px;}", block.toString());
+		Assertions.assertEquals("#id{height:500px;}", block.toString());
 	}
 
 	/**
@@ -386,11 +319,10 @@ public class CSSImplTest extends BaseTestClass
 		imp.getList().setListStylePosition(ListStylePosition.Inherit);
 
 		CSSPropertiesFactory factory = new CSSPropertiesFactory();
-		Map map = factory.getCSSProperties(imp);
-		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, map, CSSBlockIdentifier.Id);
+		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, imp.getMap(), CSSBlockIdentifier.Id);
 
 		System.out.println(block.toString());
-		Assertions.assertEquals("#id {list-style-position:inherit;}", block.toString());
+		Assertions.assertEquals("#id{list-style-position:inherit;}", block.toString());
 	}
 
 	/**
@@ -404,11 +336,10 @@ public class CSSImplTest extends BaseTestClass
 		imp.getMargins().setMarginBottom(new MeasurementCSSImpl(500));
 
 		CSSPropertiesFactory factory = new CSSPropertiesFactory();
-		Map map = factory.getCSSProperties(imp);
-		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, map, CSSBlockIdentifier.Id);
+		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, imp.getMap(), CSSBlockIdentifier.Id);
 
 		System.out.println(block.toString());
-		Assertions.assertEquals("#id {margin-bottom:500px;}", block.toString());
+		Assertions.assertEquals("#id{margin-bottom:500px;}", block.toString());
 	}
 
 	/**
@@ -422,11 +353,10 @@ public class CSSImplTest extends BaseTestClass
 		imp.getOutline().setOutlineStyle(BorderStyles.Dotted);
 
 		CSSPropertiesFactory factory = new CSSPropertiesFactory();
-		Map map = factory.getCSSProperties(imp);
-		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, map, CSSBlockIdentifier.Id);
+		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, imp.getMap(), CSSBlockIdentifier.Id);
 
 		System.out.println(block.toString());
-		Assertions.assertEquals("#id {outline-style:dotted;}", block.toString());
+		Assertions.assertEquals("#id{outline-style:dotted;}", block.toString());
 	}
 
 	/**
@@ -440,11 +370,10 @@ public class CSSImplTest extends BaseTestClass
 		imp.getPadding().setPaddingLeft$(PaddingSetting.Inherit);
 
 		CSSPropertiesFactory factory = new CSSPropertiesFactory();
-		Map map = factory.getCSSProperties(imp);
-		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, map, CSSBlockIdentifier.Id);
+		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, imp.getMap(), CSSBlockIdentifier.Id);
 
 		System.out.println(block.toString());
-		Assertions.assertEquals("#id {padding-left:inherit;}", block.toString());
+		Assertions.assertEquals("#id{padding-left:inherit;}", block.toString());
 	}
 
 	/**
@@ -458,11 +387,10 @@ public class CSSImplTest extends BaseTestClass
 		imp.getTable().setTableCaptionSide(TableCaptionSides.Bottom);
 
 		CSSPropertiesFactory factory = new CSSPropertiesFactory();
-		Map map = factory.getCSSProperties(imp);
-		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, map, CSSBlockIdentifier.Id);
+		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, imp.getMap(), CSSBlockIdentifier.Id);
 
 		System.out.println(block.toString());
-		Assertions.assertEquals("#id {table-caption-side:bottom;}", block.toString());
+		Assertions.assertEquals("#id{table-caption-side:bottom;}", block.toString());
 	}
 
 	/**
@@ -476,11 +404,27 @@ public class CSSImplTest extends BaseTestClass
 		imp.getText().setColor(new ColourCSSImpl("colour"));
 
 		CSSPropertiesFactory factory = new CSSPropertiesFactory();
-		Map map = factory.getCSSProperties(imp);
-		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, map, CSSBlockIdentifier.Id);
+		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, imp.getMap(), CSSBlockIdentifier.Id);
 
 		System.out.println(block.toString());
-		Assertions.assertEquals("#id {color:colour;}", block.toString());
+		Assertions.assertEquals("#id{color:colour;}", block.toString());
 	}
 
+	/**
+	 * Test of setText method, of class CSSImpl.
+	 */
+	@Test
+	public void testSetBackgroundDeep()
+	{
+		Page p = getInstance();
+		CSSImpl imp = new CSSImpl();
+		imp.getBackground().getBackground().setBackgroundColor$(ColourNames.Aquamarine);
+		imp.getText().setColor(new ColourCSSImpl("colour"));
+
+		CSSPropertiesFactory factory = new CSSPropertiesFactory();
+		CSSBlock block = factory.getCSSBlock("id", CSSTypes.None, imp.getMap(), CSSBlockIdentifier.Id);
+
+		System.out.println(block.toString());
+		Assertions.assertEquals("#id{background:aquamarine;color:colour;}", block.toString());
+	}
 }

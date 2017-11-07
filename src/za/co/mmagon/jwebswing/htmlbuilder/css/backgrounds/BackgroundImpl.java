@@ -37,7 +37,8 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SPACE;
  * @author GedMarc
  * @since 18 Jan 2016
  */
-public class BackgroundImpl extends CSSImplementationAdapter<Background, BackgroundImpl> implements CSSShortHand, CSSImplementationClass<Background, BackgroundImpl>
+public class BackgroundImpl extends CSSImplementationAdapter<Background, BackgroundImpl>
+		implements CSSShortHand, CSSImplementationClass<Background, BackgroundImpl>
 {
 
 	private static final long serialVersionUID = 1L;
@@ -66,6 +67,7 @@ public class BackgroundImpl extends CSSImplementationAdapter<Background, Backgro
 	public String toString()
 	{
 		String output = backgroundColor + STRING_SPACE
+				                + backgroundColor$ + STRING_SPACE
 				                + backgroundImage + STRING_SPACE
 				                + backgroundPosition + STRING_SPACE
 				                + Arrays.toString(backgroundSize) + STRING_SPACE

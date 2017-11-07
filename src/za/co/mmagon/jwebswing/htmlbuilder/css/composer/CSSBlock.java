@@ -69,7 +69,7 @@ public class CSSBlock
 		cssLines.setRenderInQuotations(false);
 		blockType = CSSTypes.None;
 		blockIdentifer = CSSBlockIdentifier.Inline;
-		linkedBlocks = new ArrayList();
+		linkedBlocks = new ArrayList<>();
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class CSSBlock
 		cssLines.setPrettyPrint(true);
 		cssLines.setRenderBraces(true);
 		cssLines.setRenderInQuotations(false);
-		linkedBlocks = new ArrayList();
+		linkedBlocks = new ArrayList<>();
 	}
 
 	/**
@@ -117,7 +117,7 @@ public class CSSBlock
 		cssLines.setPrettyPrint(prettyPrint);
 		cssLines.setRenderBraces(renderBraces);
 		cssLines.setRenderInQuotations(renderQuotations);
-		linkedBlocks = new ArrayList();
+		linkedBlocks = new ArrayList<>();
 	}
 
 
@@ -195,11 +195,7 @@ public class CSSBlock
 			return "";
 		}
 		sb.append(generateBlockIDS(tabCount));
-		if (this.blockType != CSSTypes.None)
-		{
-			sb.append(STRING_SPACE);
-		}
-		sb.append(cssLines.toString(tabCount, this.blockType == CSSTypes.None));
+		sb.append(cssLines.toString(tabCount));
 		if (this.blockType == CSSTypes.None)
 		{
 			sb = new StringBuilder(sb.toString().replaceAll(STRING_COMMNA, ";"));
@@ -258,40 +254,7 @@ public class CSSBlock
 		}
 
 		renderBlockIdentifier(sb, block.blockIdentifer, block);
-
-		switch (block.blockType)
-		{
-			case Active:
-			{
-				sb = new StringBuilder(sb.toString().trim());
-				sb.append(":active");
-				break;
-			}
-			case Link:
-			{
-				sb = new StringBuilder(sb.toString().trim());
-				sb.append(":link");
-				break;
-			}
-			case Hover:
-			{
-				sb = new StringBuilder(sb.toString().trim());
-				sb.append(":hover");
-				break;
-			}
-			case Visited:
-			{
-				sb = new StringBuilder(sb.toString().trim());
-				sb.append(":visited");
-				break;
-			}
-			default:
-			{
-				sb = new StringBuilder(sb.toString().trim());
-				sb.append(":unknown");
-				break;
-			}
-		}
+		sb.append(block.blockType.getCssName().trim());
 		return sb.toString();
 	}
 
@@ -301,12 +264,12 @@ public class CSSBlock
 		{
 			case Class:
 			{
-				sb.append(".").append(block.getIdOfBlock()).append(STRING_SPACE);
+				sb.append(StaticStrings.STRING_DOT).append(block.getIdOfBlock());
 				break;
 			}
 			case Element:
 			{
-				sb.append("").append(block.getIdOfBlock()).append(STRING_SPACE);
+				sb.append(block.getIdOfBlock());
 				break;
 			}
 			case Inline:
@@ -315,7 +278,7 @@ public class CSSBlock
 			}
 			case Id:
 			{
-				sb.append(StaticStrings.STRING_HASH).append(block.getIdOfBlock()).append(STRING_SPACE);
+				sb.append(StaticStrings.STRING_HASH).append(block.getIdOfBlock());
 				break;
 			}
 			case Theme:
