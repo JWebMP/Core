@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,13 +16,20 @@
  */
 package za.co.mmagon.jwebswing.utilities;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
+import javax.annotation.Nullable;
+import javax.validation.constraints.NotNull;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.CHAR_DOT;
 import static za.co.mmagon.jwebswing.utilities.StaticStrings.HTML_AMPERSAND;
 
 /**
@@ -30,7 +37,7 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.HTML_AMPERSAND;
  * <p>
  * <p>
  */
-public final class EscapeChars
+public class EscapeChars
 {
 
 	private static final Pattern SCRIPT = Pattern.compile(
@@ -39,6 +46,9 @@ public final class EscapeChars
 	private static final Pattern SCRIPT_END = Pattern.compile(
 			"</SCRIPT>", Pattern.CASE_INSENSITIVE
 	                                                         );
+
+	private static final Character[] EscapeRegexCharsetRaw = new Character[]{CHAR_DOT, '\\', '?', '*', '+', '&', ':', '{', '}', '[', ']', '(', ')', '^', '$'};
+	private static final List<Character> EscapeRegexCharset = Arrays.asList(EscapeRegexCharsetRaw);
 
 	/**
 	 * Static only
@@ -54,139 +64,25 @@ public final class EscapeChars
 	 * &lt;P&gt;This method exists as a defence against Cross Site Scripting (XSS) hacks. The idea is to neutralize control characters commonly used by scripts, such that they will not be executed by
 	 * the browser. This is done by replacing the control characters with their escaped equivalents. See {link hirondelle.web4j.security.SafeText} as well.
 	 *
-	 * @param aText
+	 * @param input
 	 *
 	 * @return
 	 */
-	public static String forHTML(String aText)
+	public static String forHTML(String input)
 	{
-		final StringBuilder result = new StringBuilder();
-		final StringCharacterIterator iterator = new StringCharacterIterator(aText);
-		char character = iterator.current();
-		while (character != CharacterIterator.DONE)
-		{
-			switch (character)
-			{
-				case '<':
-					result.append("&lt;");
-					break;
-				case '>':
-					result.append("&gt;");
-					break;
-				case '&':
-					result.append(HTML_AMPERSAND);
-					break;
-				case '\"':
-					result.append("&quot;");
-					break;
-				case '\t':
-					addCharEntity(9, result);
-					break;
-				case '!':
-					addCharEntity(33, result);
-					break;
-				case '#':
-					addCharEntity(35, result);
-					break;
-				case '$':
-					addCharEntity(36, result);
-					break;
-				case '%':
-					addCharEntity(37, result);
-					break;
-				case '\'':
-					addCharEntity(39, result);
-					break;
-				case '(':
-					addCharEntity(40, result);
-					break;
-				case ')':
-					addCharEntity(41, result);
-					break;
-				case '*':
-					addCharEntity(42, result);
-					break;
-				case '+':
-					addCharEntity(43, result);
-					break;
-				case ',':
-					addCharEntity(44, result);
-					break;
-				case '-':
-					addCharEntity(45, result);
-					break;
-				case '.':
-					addCharEntity(46, result);
-					break;
-				case '/':
-					addCharEntity(47, result);
-					break;
-				case ':':
-					addCharEntity(58, result);
-					break;
-				case ';':
-					addCharEntity(59, result);
-					break;
-				case '=':
-					addCharEntity(61, result);
-					break;
-				case '?':
-					addCharEntity(63, result);
-					break;
-				case '@':
-					addCharEntity(64, result);
-					break;
-				case '[':
-					addCharEntity(91, result);
-					break;
-				case '\\':
-					addCharEntity(92, result);
-					break;
-				case ']':
-					addCharEntity(93, result);
-					break;
-				case '^':
-					addCharEntity(94, result);
-					break;
-				case StaticStrings.CHAR_UNDERSCORE:
-					addCharEntity(95, result);
-					break;
-				case '`':
-					addCharEntity(96, result);
-					break;
-				case '{':
-					addCharEntity(123, result);
-					break;
-				case '|':
-					addCharEntity(124, result);
-					break;
-				case '}':
-					addCharEntity(125, result);
-					break;
-				case '~':
-					addCharEntity(126, result);
-					break;
-				default:
-					//the char is not a special one
-					//add it to the result as is
-					result.append(character);
-					break;
-			}
-			character = iterator.next();
-		}
-		return result.toString();
+		return StringEscapeUtils.escapeHtml4(input);
 	}
 
 	/**
 	 * Escape all ampersand characters in a URL.
 	 *
-	 * @param aURL
+	 * @param input
 	 *
 	 * @return
 	 */
-	public static String forHrefAmpersand(String aURL)
+	public static String forHrefAmpersand(String input)
 	{
-		return aURL.replace("&", HTML_AMPERSAND);
+		return input.replace("&", HTML_AMPERSAND);
 	}
 
 	/**
@@ -198,9 +94,10 @@ public final class EscapeChars
 	 *
 	 * @throws java.io.UnsupportedEncodingException
 	 */
-	public static String forURL(String aURLFragment) throws UnsupportedEncodingException
+	@NotNull
+	public static String forURL(@Nullable String aURLFragment) throws UnsupportedEncodingException
 	{
-		String result = null;
+		String result = "";
 		try
 		{
 			result = URLEncoder.encode(aURLFragment, "UTF-8");
@@ -221,88 +118,19 @@ public final class EscapeChars
 	 */
 	public static String forXML(String aText)
 	{
-		final StringBuilder result = new StringBuilder();
-		final StringCharacterIterator iterator = new StringCharacterIterator(aText);
-		char character = iterator.current();
-		while (character != CharacterIterator.DONE)
-		{
-			switch (character)
-			{
-				case '<':
-					result.append("&lt;");
-					break;
-				case '>':
-					result.append("&gt;");
-					break;
-				case '\"':
-					result.append("&quot;");
-					break;
-				case '\'':
-					result.append("&#039;");
-					break;
-				case '&':
-					result.append(HTML_AMPERSAND);
-					break;
-				default:
-					//the char is not a special one
-					//add it to the result as is
-					result.append(character);
-					break;
-			}
-			character = iterator.next();
-		}
-		return result.toString();
+		return StringEscapeUtils.escapeXml11(aText);
 	}
 
 	/**
 	 * Escapes characters for text appearing as data in the
 	 *
-	 * @param aText
+	 * @param input
 	 *
 	 * @return
 	 */
-	public static String forJSON(String aText)
+	public static String forJSON(String input)
 	{
-		final StringBuilder result = new StringBuilder();
-		StringCharacterIterator iterator = new StringCharacterIterator(aText);
-		char character = iterator.current();
-		while (character != StringCharacterIterator.DONE)
-		{
-			switch (character)
-			{
-				case '\"':
-					result.append("\\\"");
-					break;
-				case '\\':
-					result.append("\\\\");
-					break;
-				case '/':
-					result.append("\\/");
-					break;
-				case '\b':
-					result.append("\\b");
-					break;
-				case '\f':
-					result.append("\\f");
-					break;
-				case '\n':
-					result.append("\\n");
-					break;
-				case '\r':
-					result.append("\\r");
-					break;
-				case '\t':
-					result.append("\\t");
-					break;
-				default:
-					//the char is not a special one
-					//add it to the result as is
-					result.append(character);
-					break;
-			}
-			character = iterator.next();
-		}
-		return result.toString();
+		return StringEscapeUtils.escapeJson(input);
 	}
 
 	/**
@@ -312,7 +140,7 @@ public final class EscapeChars
 	 *
 	 * @return
 	 */
-	public static String toDisableTags(String aText)
+	public static String disableTags(String aText)
 	{
 		final StringBuilder result = new StringBuilder();
 		final StringCharacterIterator iterator = new StringCharacterIterator(aText);
@@ -337,6 +165,7 @@ public final class EscapeChars
 		}
 		return result.toString();
 	}
+
 
 	/**
 	 * Replace characters having special meaning in regular expressions with their escaped equivalents, preceded by a '\' character.
@@ -348,67 +177,18 @@ public final class EscapeChars
 	public static String forRegex(String aRegexFragment)
 	{
 		final StringBuilder result = new StringBuilder();
-
 		final StringCharacterIterator iterator
 				= new StringCharacterIterator(aRegexFragment);
 		char character = iterator.current();
 		while (character != CharacterIterator.DONE)
 		{
-            /*
-             * All literals need to have backslashes doubled.
-             */
-			switch (character)
+			if (EscapeRegexCharset.contains(character))
 			{
-				case '.':
-					result.append("\\.");
-					break;
-				case '\\':
-					result.append("\\\\");
-					break;
-				case '?':
-					result.append("\\?");
-					break;
-				case '*':
-					result.append("\\*");
-					break;
-				case '+':
-					result.append("\\+");
-					break;
-				case '&':
-					result.append("\\&");
-					break;
-				case ':':
-					result.append("\\:");
-					break;
-				case '{':
-					result.append("\\{");
-					break;
-				case '}':
-					result.append("\\}");
-					break;
-				case '[':
-					result.append("\\[");
-					break;
-				case ']':
-					result.append("\\]");
-					break;
-				case '(':
-					result.append("\\(");
-					break;
-				case ')':
-					result.append("\\)");
-					break;
-				case '^':
-					result.append("\\^");
-					break;
-				case '$':
-					result.append("\\$");
-					break;
-				default:
-					//the char is not a special one
-					//add it to the result as is
-					result.append(character);
-					break;
+				result.append('\\' + character);
+			}
+			else
+			{
+				result.append(character);
 			}
 			character = iterator.next();
 		}
@@ -418,13 +198,13 @@ public final class EscapeChars
 	/**
 	 * Escape <tt>'$'</tt> and <tt>'\'</tt> characters in replacement strings.
 	 *
-	 * @param aInput
+	 * @param input
 	 *
 	 * @return
 	 */
-	public static String forReplacementString(String aInput)
+	public static String forReplacementString(String input)
 	{
-		return Matcher.quoteReplacement(aInput);
+		return Matcher.quoteReplacement(input);
 	}
 
 	/**
@@ -447,17 +227,17 @@ public final class EscapeChars
 	/**
 	 * Adds padding to string builder
 	 *
-	 * @param aIdx
-	 * @param aBuilder
+	 * @param index
+	 * @param stringBuilder
 	 */
-	private static void addCharEntity(Integer aIdx, StringBuilder aBuilder)
+	public static void addCharEntity(Integer index, StringBuilder stringBuilder)
 	{
 		String padding = "";
-		if (aIdx <= 9)
+		if (index <= 9)
 		{
 			padding = "00";
 		}
-		else if (aIdx <= 99)
+		else if (index <= 99)
 		{
 			padding = "0";
 		}
@@ -465,7 +245,7 @@ public final class EscapeChars
 		{
 			//no prefix
 		}
-		String number = padding + aIdx.toString();
-		aBuilder.append("&#").append(number).append(";");
+		String number = padding + index.toString();
+		stringBuilder.append("&#").append(number).append(";");
 	}
 }
