@@ -20,8 +20,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.BaseTestClass;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.plugins.ajaxenabler.AjaxEnablerReferencePool;
-import za.co.mmagon.jwebswing.plugins.jquery.JQueryReferencePool;
+
+import static za.co.mmagon.jwebswing.plugins.ajaxenabler.AjaxEnablerReferencePool.AjaxEnabler;
 
 /**
  * @author ged_m
@@ -39,7 +39,7 @@ public class ComponentDependancyBaseTest extends BaseTestClass
 		ComponentDependancyBase cd = new ComponentDependancyBase(ComponentTypes.Abbreviation);
 		cd.setID("ID");
 		cd.addCssReference(null);
-		cd.addJavaScriptReference(AjaxEnablerReferencePool.AjaxEnabler.getJavaScriptReference());
+		cd.addJavaScriptReference(AjaxEnabler.getJavaScriptReference());
 		System.out.println(cd);
 		Assertions.assertEquals("{\n"
 				                    + "  \"id\" : \"ID\",\n"
@@ -64,41 +64,41 @@ public class ComponentDependancyBaseTest extends BaseTestClass
 	{
 		ComponentDependancyBase shell = new ComponentDependancyBase(ComponentTypes.Abbreviation);
 		shell.setID("shell");
-		shell.addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
+		shell.addJavaScriptReference(AjaxEnabler.getJavaScriptReference());
 		ComponentBase shell2 = shell.cloneComponent();
 		shell2.setID("shell2");
 		System.out.println(shell);
 		System.out.println(shell2);
-		String shellExpected = "{\n"
-				+ "  \"id\" : \"shell\",\n"
-				+ "  \"componentType\" : \"abbreviation\",\n"
-				+ "  \"tiny\" : false,\n"
-				+ "  \"configured\" : true,\n"
-				+ "  \"initialized\" : true,\n"
-				+ "  \"touched\" : false,\n"
-				+ "  \"javascriptReferences\" : [ {\n"
-				+ "    \"cordovaRequired\" : false,\n"
-				+ "    \"name\" : \"JQuery\",\n"
-				+ "    \"version\" : 2.24,\n"
-				+ "    \"reference\" : \"bower_components/jquery/dist/jquery.js\"\n"
-				+ "  } ],\n"
-				+ "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentDependancyBase\"\n"
-				+ "}";
-		String shell2Expected = "{\n"
-				+ "  \"id\" : \"shell2\",\n"
-				+ "  \"componentType\" : \"abbreviation\",\n"
-				+ "  \"tiny\" : false,\n"
-				+ "  \"configured\" : true,\n"
-				+ "  \"initialized\" : true,\n"
-				+ "  \"touched\" : false,\n"
-				+ "  \"javascriptReferences\" : [ {\n"
-				+ "    \"cordovaRequired\" : false,\n"
-				+ "    \"name\" : \"JQuery\",\n"
-				+ "    \"version\" : 2.24,\n"
-				+ "    \"reference\" : \"bower_components/jquery/dist/jquery.js\"\n"
-				+ "  } ],\n"
-				+ "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentDependancyBase\"\n"
-				+ "}";
+		String shellExpected = "{\n" +
+				                       "  \"id\" : \"shell\",\n" +
+				                       "  \"componentType\" : \"abbreviation\",\n" +
+				                       "  \"tiny\" : false,\n" +
+				                       "  \"configured\" : true,\n" +
+				                       "  \"initialized\" : true,\n" +
+				                       "  \"touched\" : false,\n" +
+				                       "  \"javascriptReferences\" : [ {\n" +
+				                       "    \"cordovaRequired\" : false,\n" +
+				                       "    \"name\" : \"AjaxEnabler\",\n" +
+				                       "    \"version\" : 1.0,\n" +
+				                       "    \"reference\" : \"javascript/jwebswing/ajax-enabler.js\"\n" +
+				                       "  } ],\n" +
+				                       "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentDependancyBase\"\n" +
+				                       "}";
+		String shell2Expected = "{\n" +
+				                        "  \"id\" : \"shell2\",\n" +
+				                        "  \"componentType\" : \"abbreviation\",\n" +
+				                        "  \"tiny\" : false,\n" +
+				                        "  \"configured\" : true,\n" +
+				                        "  \"initialized\" : true,\n" +
+				                        "  \"touched\" : false,\n" +
+				                        "  \"javascriptReferences\" : [ {\n" +
+				                        "    \"cordovaRequired\" : false,\n" +
+				                        "    \"name\" : \"AjaxEnabler\",\n" +
+				                        "    \"version\" : 1.0,\n" +
+				                        "    \"reference\" : \"javascript/jwebswing/ajax-enabler.js\"\n" +
+				                        "  } ],\n" +
+				                        "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentDependancyBase\"\n" +
+				                        "}";
 		Assertions.assertEquals(shell.toString(), shellExpected);
 		Assertions.assertEquals(shell2.toString(), shell2Expected);
 	}

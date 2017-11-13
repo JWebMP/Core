@@ -24,7 +24,6 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.events.click.ClickAdapter;
-import za.co.mmagon.jwebswing.plugins.jquery.JQueryReferencePool;
 
 /**
  * @author ged_m
@@ -105,8 +104,9 @@ public class ComponentHTMLBaseTest
 	public void testClone()
 	{
 		ComponentEventBase shell = new ComponentEventBase(ComponentTypes.Abbreviation);
+
 		shell.setID("shell");
-		shell.addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
+		//shell.addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
 		shell.addEvent(new ClickAdapter(new Div())
 		{
 			@Override
@@ -122,69 +122,57 @@ public class ComponentHTMLBaseTest
 		System.out.println(shell);
 		System.out.println(shell2);
 		String shellExpected = "{\n" +
-				"  \"id\" : \"shell\",\n" +
-				"  \"componentType\" : \"abbreviation\",\n" +
-				"  \"tiny\" : false,\n" +
-				"  \"configured\" : true,\n" +
-				"  \"initialized\" : true,\n" +
-				"  \"touched\" : false,\n" +
-				"  \"javascriptReferences\" : [ {\n" +
-				"    \"cordovaRequired\" : false,\n" +
-				"    \"name\" : \"JQuery\",\n" +
-				"    \"version\" : 2.24,\n" +
-				"    \"reference\" : \"bower_components/jquery/dist/jquery.js\"\n" +
-				"  } ],\n" +
-				"  \"sortOrder\" : 1000,\n" +
-				"  \"renderAfterLoad\" : false,\n" +
-				"  \"javascriptRenderedElsewhere\" : false,\n" +
-				"  \"events\" : [ {\n" +
-				"    \"id\" : \"clickEvent\",\n" +
-				"    \"componentType\" : \"event\",\n" +
-				"    \"tiny\" : false,\n" +
-				"    \"configured\" : true,\n" +
-				"    \"initialized\" : true,\n" +
-				"    \"touched\" : false,\n" +
-				"    \"sortOrder\" : 1000,\n" +
-				"    \"name\" : \"click\",\n" +
-				"    \"renderAfterLoad\" : false,\n" +
-				"    \"javascriptRenderedElsewhere\" : false,\n" +
-				"    \"registeredComponents\" : [ \"za.co.mmagon.jwebswing.base.html.Div\" ],\n" +
-				"    \"eventType\" : \"click\"\n" +
-				"  } ],\n" +
-				"  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentEventBase\"\n" +
-				"}";
+				                       "  \"id\" : \"shell\",\n" +
+				                       "  \"componentType\" : \"abbreviation\",\n" +
+				                       "  \"tiny\" : false,\n" +
+				                       "  \"configured\" : true,\n" +
+				                       "  \"initialized\" : true,\n" +
+				                       "  \"touched\" : false,\n" +
+				                       "  \"sortOrder\" : 1000,\n" +
+				                       "  \"renderAfterLoad\" : false,\n" +
+				                       "  \"javascriptRenderedElsewhere\" : false,\n" +
+				                       "  \"events\" : [ {\n" +
+				                       "    \"id\" : \"clickEvent\",\n" +
+				                       "    \"componentType\" : \"event\",\n" +
+				                       "    \"tiny\" : false,\n" +
+				                       "    \"configured\" : true,\n" +
+				                       "    \"initialized\" : true,\n" +
+				                       "    \"touched\" : false,\n" +
+				                       "    \"sortOrder\" : 1000,\n" +
+				                       "    \"name\" : \"click\",\n" +
+				                       "    \"renderAfterLoad\" : false,\n" +
+				                       "    \"javascriptRenderedElsewhere\" : false,\n" +
+				                       "    \"registeredComponents\" : [ \"za.co.mmagon.jwebswing.base.html.Div\" ],\n" +
+				                       "    \"eventType\" : \"click\"\n" +
+				                       "  } ],\n" +
+				                       "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentEventBase\"\n" +
+				                       "}";
 		String shell2Expected = "{\n" +
-				"  \"id\" : \"shell2\",\n" +
-				"  \"componentType\" : \"abbreviation\",\n" +
-				"  \"tiny\" : false,\n" +
-				"  \"configured\" : true,\n" +
-				"  \"initialized\" : true,\n" +
-				"  \"touched\" : false,\n" +
-				"  \"javascriptReferences\" : [ {\n" +
-				"    \"cordovaRequired\" : false,\n" +
-				"    \"name\" : \"JQuery\",\n" +
-				"    \"version\" : 2.24,\n" +
-				"    \"reference\" : \"bower_components/jquery/dist/jquery.js\"\n" +
-				"  } ],\n" +
-				"  \"sortOrder\" : 1000,\n" +
-				"  \"renderAfterLoad\" : false,\n" +
-				"  \"javascriptRenderedElsewhere\" : false,\n" +
-				"  \"events\" : [ {\n" +
-				"    \"id\" : \"clickEvent\",\n" +
-				"    \"componentType\" : \"event\",\n" +
-				"    \"tiny\" : false,\n" +
-				"    \"configured\" : true,\n" +
-				"    \"initialized\" : true,\n" +
-				"    \"touched\" : false,\n" +
-				"    \"sortOrder\" : 1000,\n" +
-				"    \"name\" : \"click\",\n" +
-				"    \"renderAfterLoad\" : false,\n" +
-				"    \"javascriptRenderedElsewhere\" : false,\n" +
-				"    \"registeredComponents\" : [ \"za.co.mmagon.jwebswing.base.html.Div\" ],\n" +
-				"    \"eventType\" : \"click\"\n" +
-				"  } ],\n" +
-				"  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentEventBase\"\n" +
-				"}";
+				                        "  \"id\" : \"shell2\",\n" +
+				                        "  \"componentType\" : \"abbreviation\",\n" +
+				                        "  \"tiny\" : false,\n" +
+				                        "  \"configured\" : true,\n" +
+				                        "  \"initialized\" : true,\n" +
+				                        "  \"touched\" : false,\n" +
+				                        "  \"sortOrder\" : 1000,\n" +
+				                        "  \"renderAfterLoad\" : false,\n" +
+				                        "  \"javascriptRenderedElsewhere\" : false,\n" +
+				                        "  \"events\" : [ {\n" +
+				                        "    \"id\" : \"clickEvent\",\n" +
+				                        "    \"componentType\" : \"event\",\n" +
+				                        "    \"tiny\" : false,\n" +
+				                        "    \"configured\" : true,\n" +
+				                        "    \"initialized\" : true,\n" +
+				                        "    \"touched\" : false,\n" +
+				                        "    \"sortOrder\" : 1000,\n" +
+				                        "    \"name\" : \"click\",\n" +
+				                        "    \"renderAfterLoad\" : false,\n" +
+				                        "    \"javascriptRenderedElsewhere\" : false,\n" +
+				                        "    \"registeredComponents\" : [ \"za.co.mmagon.jwebswing.base.html.Div\" ],\n" +
+				                        "    \"eventType\" : \"click\"\n" +
+				                        "  } ],\n" +
+				                        "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentEventBase\"\n" +
+				                        "}";
 		Assertions.assertEquals(shell.toString(), shellExpected);
 		Assertions.assertEquals(shell2.toString(), shell2Expected);
 	}
