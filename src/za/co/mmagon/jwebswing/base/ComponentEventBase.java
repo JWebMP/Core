@@ -28,9 +28,10 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
 
+import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -69,9 +70,6 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	 * The event of this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	/**
-	 * A list of all events
-	 */
 	private ArrayList<E> events;
 
 	/**
@@ -98,6 +96,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	 * @param componentType
 	 * 		The component type of this component
 	 */
+	@SuppressWarnings("all")
 	public ComponentEventBase(EventTypes eventType, ComponentTypes componentType)
 	{
 		super(componentType);
@@ -109,25 +108,11 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	 *
 	 * @return
 	 */
+	@NotNull
+	@SuppressWarnings("unused")
 	public IComponentEventBase asEventBase()
 	{
 		return this;
-	}
-
-	/**
-	 * Gets all registered events
-	 * <p>
-	 *
-	 * @return A Hash Map containing the event type and the events associated with it
-	 */
-	@Override
-	public List<E> getEvents()
-	{
-		if (events == null)
-		{
-			events = new ArrayList<>();
-		}
-		return events;
 	}
 
 	/**
@@ -138,7 +123,9 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	 * 		The Event to add
 	 */
 	@Override
-	public J addEvent(E event)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J addEvent(@NotNull E event)
 	{
 		if (!ComponentEventBase.class.cast(event).getComponentType().equals(ComponentTypes.Event))
 		{
@@ -152,6 +139,43 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	}
 
 	/**
+	 * Returns the event type for this event
+	 *
+	 * @return
+	 */
+	@JsonProperty("eventType")
+	@Override
+	@Nullable
+	public EventTypes getEventTypes()
+	{
+		if (this.eventType == EventTypes.undefined)
+		{
+			return null;
+		}
+		else
+		{
+			return this.eventType;
+		}
+	}
+
+	/**
+	 * Gets all registered events
+	 * <p>
+	 *
+	 * @return A Hash Map containing the event type and the events associated with it
+	 */
+	@Override
+	@NotNull
+	public List<E> getEvents()
+	{
+		if (events == null)
+		{
+			events = new ArrayList<>();
+		}
+		return events;
+	}
+
+	/**
 	 * Returns all the events associated with the given type
 	 *
 	 * @param eventType
@@ -160,36 +184,18 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	 */
 	@Override
 	@NotNull
-	public List<ComponentEventBase> getEventsFor(EventTypes eventType)
+	public List<ComponentEventBase> getEventsFor(@NotNull EventTypes eventType)
 	{
 		ArrayList<ComponentEventBase> output = new ArrayList<>();
-		for (Iterator<E> iterator = getEvents().iterator(); iterator.hasNext(); )
+		for (E e : getEvents())
 		{
-			ComponentEventBase next = (ComponentEventBase) iterator.next();
+			ComponentEventBase next = (ComponentEventBase) e;
 			if (next.getEventTypes().equals(eventType))
 			{
 				output.add(next);
 			}
 		}
 		return output;
-	}
-
-	/**
-	 * Events are types of feature that have server side support. These are referenced using the Ajax Receiver.
-	 * <p>
-	 *
-	 * @param event
-	 * 		The event to be removed
-	 * 		<p>
-	 *
-	 * @return currently false
-	 * 		<p>
-	 */
-	@Override
-	public J removeEvent(E event)
-	{
-		getEvents().remove(event);
-		return (J) this;
 	}
 
 	/**
@@ -215,22 +221,79 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	}
 
 	/**
+	 * Events are types of feature that have server side support. These are referenced using the Ajax Receiver.
+	 * <p>
+	 *
+	 * @param event
+	 * 		The event to be removed
+	 * 		<p>
+	 *
+	 * @return currently false
+	 * 		<p>
+	 */
+	@Override
+	@NotNull
+	public J removeEvent(@Nullable E event)
+	{
+		getEvents().remove(event);
+		return (J) this;
+	}
+
+	/**
+	 * Sets the event type of an event
+	 *
+	 * @param eventType
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setEventType(@NotNull EventTypes eventType)
+	{
+		this.eventType = eventType;
+		return (J) this;
+	}
+
+	/**
+	 * Returns an event with the given Id
+	 *
+	 * @param eventId
+	 *
+	 * @return
+	 */
+	@Override
+	@Nullable
+	public ComponentEventBase getEvent(@NotNull String eventId)
+	{
+		for (E e : getEvents())
+		{
+			ComponentEventBase next = (ComponentEventBase) e;
+			if (next.getID().equals(eventId))
+			{
+				return next;
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Adds in the JavaScript References for the Features
 	 *
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public List<JavascriptReference> getJavascriptReferencesAll()
 	{
 		List<JavascriptReference> allJs = super.getJavascriptReferencesAll();
 		getEvents().forEach(feature ->
 		                    {
-			                    for (Iterator<JavascriptReference> it = ComponentEventBase.class.cast(feature).getJavascriptReferencesAll().iterator(); it.hasNext(); )
+			                    for (Object js : ComponentEventBase.class.cast(feature).getJavascriptReferencesAll())
 			                    {
-				                    JavascriptReference js = it.next();
-				                    if (!allJs.contains(js))
+				                    if (!allJs.contains(JavascriptReference.class.cast(js)))
 				                    {
-					                    allJs.add(js);
+					                    allJs.add(JavascriptReference.class.cast(js));
 				                    }
 			                    }
 		                    });
@@ -243,40 +306,30 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public List<CSSReference> getCssReferencesAll()
 	{
 		List<CSSReference> allCss = super.getCssReferencesAll();
 		getEvents().forEach((E feature) ->
 		                    {
-			                    for (Iterator<CSSReference> it = ComponentEventBase.class.cast(feature).getCssReferencesAll().iterator(); it.hasNext(); )
+			                    for (Object css : ComponentEventBase.class.cast(feature).getCssReferencesAll())
 			                    {
-				                    CSSReference css = it.next();
-				                    if (!allCss.contains(css))
+				                    if (!allCss.contains(CSSReference.class.cast(css)))
 				                    {
-					                    allCss.add(css);
+					                    allCss.add(CSSReference.class.cast(css));
 				                    }
 			                    }
 		                    });
 		return allCss;
 	}
 
-	/**
-	 * Returns the event type for this event
-	 *
-	 * @return
-	 */
-	@JsonProperty("eventType")
 	@Override
-	public EventTypes getEventTypes()
+	public int hashCode()
 	{
-		if (this.eventType == EventTypes.undefined)
-		{
-			return null;
-		}
-		else
-		{
-			return this.eventType;
-		}
+		int result = super.hashCode();
+		result = 31 * result + getEvents().hashCode();
+		result = 31 * result + eventType.hashCode();
+		return result;
 	}
 
 	@Override
@@ -297,70 +350,27 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 
 		ComponentEventBase<?, ?, ?> that = (ComponentEventBase<?, ?, ?>) o;
 
-		if (!getEvents().equals(that.getEvents()))
+		return getEvents().equals(that.getEvents()) && eventType == that.eventType;
+	}
+
+	/**
+	 * Sets this component and all its children components tiny
+	 *
+	 * @param tiny
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public J setTiny(boolean tiny)
+	{
+
+		for (E e : getEvents())
 		{
-			return false;
+			ComponentEventBase next = (ComponentEventBase) e;
+			next.setTiny(tiny);
 		}
-		return eventType == that.eventType;
-	}
-
-	/**
-	 * Returns an event with the given Id
-	 *
-	 * @param eventId
-	 *
-	 * @return
-	 */
-	@Override
-	public ComponentEventBase getEvent(String eventId)
-	{
-		for (Iterator<E> iterator = getEvents().iterator(); iterator.hasNext(); )
-		{
-			ComponentEventBase next = (ComponentEventBase) iterator.next();
-			if (next.getID().equals(eventId))
-			{
-				return next;
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		int result = super.hashCode();
-		result = 31 * result + getEvents().hashCode();
-		result = 31 * result + eventType.hashCode();
-		return result;
-	}
-
-	/**
-	 * Sets the event type of an event
-	 *
-	 * @param eventType
-	 *
-	 * @return
-	 */
-	@Override
-	public J setEventType(EventTypes eventType)
-	{
-		this.eventType = eventType;
-		return (J) this;
-	}
-
-
-	/**
-	 * Clones the component and all its events
-	 *
-	 * @return
-	 */
-	@Override
-	public J cloneComponent()
-	{
-		ComponentEventBase cloned = super.cloneComponent();
-		cloned.events = new ArrayList();
-		cloned.events.addAll(getEvents());
-		return (J) cloned;
+		return super.setTiny(tiny);
 	}
 
 	@Override
@@ -375,32 +385,30 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	}
 
 	/**
-	 * Sets this component and all its children components tiny
-	 *
-	 * @param tiny
-	 *
-	 * @return
-	 */
-	@Override
-	public J setTiny(boolean tiny)
-	{
-
-		for (Iterator<E> iterator = getEvents().iterator(); iterator.hasNext(); )
-		{
-			ComponentEventBase next = (ComponentEventBase) iterator.next();
-			next.setTiny(tiny);
-		}
-		return super.setTiny(tiny);
-	}
-
-	/**
 	 * Returns null
 	 *
 	 * @return
 	 */
 	@Override
+	@Null
 	public ComponentHierarchyBase getComponent()
 	{
 		return null;
+	}
+
+	/**
+	 * Clones the component and all its events
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J cloneComponent()
+	{
+		ComponentEventBase cloned = super.cloneComponent();
+		cloned.events = new ArrayList();
+		cloned.events.addAll(getEvents());
+		return (J) cloned;
 	}
 }

@@ -23,6 +23,7 @@ import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -71,111 +72,11 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	 *
 	 * @return
 	 */
+	@NotNull
+	@SuppressWarnings("unused")
 	public IComponentDependancyBase asDependancyBase()
 	{
 		return this;
-	}
-
-	/**
-	 * Returns the strings of the CSS Links this will use
-	 * <p>
-	 *
-	 * @return ArrayList of all CSS File Links in String format
-	 */
-	@Override
-	public List<CSSReference> getCssReferences()
-	{
-		if (this.cssReferences == null)
-		{
-			this.cssReferences = new ArrayList<>();
-		}
-		return this.cssReferences;
-	}
-
-	/**
-	 * Returns the JavaScript links attached to this component
-	 * <p>
-	 *
-	 * @return
-	 */
-	@Override
-	public List<JavascriptReference> getJavascriptReferences()
-	{
-		if (javascriptReferences == null)
-		{
-			javascriptReferences = new ArrayList<>();
-		}
-		return javascriptReferences;
-	}
-
-	/**
-	 * Return all the CSS References associated with this component. Override and add the references required for the functionality
-	 *
-	 * @return
-	 */
-	@Override
-	public List<JavascriptReference> getJavascriptReferencesAll()
-	{
-		return Collections.synchronizedList(getJavascriptReferences());
-	}
-
-	/**
-	 * Returns all the CSS references with the given priority
-	 *
-	 * @param priority
-	 * 		The priority of the references to retrieve
-	 *
-	 * @return A new array list of all the requested for references
-	 */
-	@Override
-	public List<CSSReference> getCssReferencesAll(RequirementsPriority priority)
-	{
-		List<CSSReference> arr = new CopyOnWriteArrayList<>();
-
-		for (CSSReference next : getCssReferencesAll())
-		{
-			if (next == null || !next.getPriority().equals(priority) || arr.contains(next))
-			{
-				continue;
-			}
-			arr.add(next);
-		}
-
-		return arr;
-	}
-
-	/**
-	 * Return all the CSS References associated with this component
-	 *
-	 * @return
-	 */
-	@Override
-	public List<CSSReference> getCssReferencesAll()
-	{
-		return getCssReferences();
-	}
-
-	/**
-	 * Returns all the CSS references with the given priority Override and add the references required for the functionality
-	 *
-	 * @param priority
-	 * 		The priority of the references to retrieve
-	 *
-	 * @return A new array list of all the requested for references
-	 */
-	@Override
-	public List<JavascriptReference> getJavascriptReferencesAll(RequirementsPriority priority)
-	{
-		List<JavascriptReference> arr = new CopyOnWriteArrayList<>();
-		for (JavascriptReference next : getJavascriptReferencesAll())
-		{
-			if (next == null || !next.getPriority().equals(priority) || arr.contains(next))
-			{
-				continue;
-			}
-			arr.add(next);
-		}
-		return arr;
 	}
 
 	/**
@@ -186,7 +87,9 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	 * @return This Class
 	 */
 	@Override
-	public J addCssReference(CSSReference cssReference)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J addCssReference(@NotNull CSSReference cssReference)
 	{
 		if (!getCssReferences().contains(cssReference))
 		{
@@ -203,13 +106,123 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	 * @return This Class
 	 */
 	@Override
-	public J addJavaScriptReference(JavascriptReference jsReference)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J addJavaScriptReference(@NotNull JavascriptReference jsReference)
 	{
 		if (!getJavascriptReferences().contains(jsReference))
 		{
 			getJavascriptReferences().add(jsReference);
 		}
 		return (J) this;
+	}
+
+	/**
+	 * Returns the strings of the CSS Links this will use
+	 * <p>
+	 *
+	 * @return ArrayList of all CSS File Links in String format
+	 */
+	@Override
+	@NotNull
+	public List<CSSReference> getCssReferences()
+	{
+		if (this.cssReferences == null)
+		{
+			this.cssReferences = new ArrayList<>();
+		}
+		return this.cssReferences;
+	}
+
+	/**
+	 * Return all the CSS References associated with this component
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public List<CSSReference> getCssReferencesAll()
+	{
+		return getCssReferences();
+	}
+
+	/**
+	 * Returns all the CSS references with the given priority
+	 *
+	 * @param priority
+	 * 		The priority of the references to retrieve
+	 *
+	 * @return A new array list of all the requested for references
+	 */
+	@Override
+	@NotNull
+	public List<CSSReference> getCssReferencesAll(@NotNull RequirementsPriority priority)
+	{
+		List<CSSReference> arr = new CopyOnWriteArrayList<>();
+
+		for (CSSReference next : getCssReferencesAll())
+		{
+			if (!next.getPriority().equals(priority) || arr.contains(next))
+			{
+				continue;
+			}
+			arr.add(next);
+		}
+
+		return arr;
+	}
+
+	/**
+	 * Returns the JavaScript links attached to this component
+	 * <p>
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public List<JavascriptReference> getJavascriptReferences()
+	{
+		if (javascriptReferences == null)
+		{
+			javascriptReferences = new ArrayList<>();
+		}
+		return javascriptReferences;
+	}
+
+	/**
+	 * Return all the CSS References associated with this component. Override and add the references required for the functionality
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public List<JavascriptReference> getJavascriptReferencesAll()
+	{
+		return Collections.synchronizedList(getJavascriptReferences());
+	}
+
+	/**
+	 * Returns all the CSS references with the given priority Override and add the references required for the functionality
+	 *
+	 * @param priority
+	 * 		The priority of the references to retrieve
+	 *
+	 * @return A new array list of all the requested for references
+	 */
+	@Override
+	@NotNull
+	public List<JavascriptReference> getJavascriptReferencesAll(@NotNull RequirementsPriority priority)
+	{
+		List<JavascriptReference> arr = new CopyOnWriteArrayList<>();
+		for (JavascriptReference next : getJavascriptReferencesAll())
+		{
+			if (!next.getPriority().equals(priority) || arr.contains(next))
+			{
+				continue;
+			}
+			arr.add(next);
+		}
+		return arr;
 	}
 
 	/**
@@ -220,7 +233,9 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	 * @return This Class
 	 */
 	@Override
-	public J removeCssReference(CSSReference cssReference)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J removeCssReference(@NotNull CSSReference cssReference)
 	{
 		getCssReferences().remove(cssReference);
 		return (J) this;
@@ -234,6 +249,8 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	 * @return This Class
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
 	public J removeJavaScriptReference(JavascriptReference jsReference)
 	{
 		getJavascriptReferences().remove(jsReference);
@@ -246,6 +263,8 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	 * @return
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
 	public J cloneComponent()
 	{
 		ComponentDependancyBase cloned = super.cloneComponent();
@@ -301,10 +320,6 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 
 		ComponentDependancyBase<?> that = (ComponentDependancyBase<?>) o;
 
-		if (!getCssReferences().equals(that.getCssReferences()))
-		{
-			return false;
-		}
-		return getJavascriptReferences().equals(that.getJavascriptReferences());
+		return getCssReferences().equals(that.getCssReferences()) && getJavascriptReferences().equals(that.getJavascriptReferences());
 	}
 }
