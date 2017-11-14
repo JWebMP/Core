@@ -67,6 +67,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	 *
 	 * @param componentType
 	 */
+	@SuppressWarnings("all")
 	public ComponentHTMLAngularBase(ComponentTypes componentType)
 	{
 		super(componentType);
@@ -116,20 +117,6 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	}
 
 	/**
-	 * Returns all the angular attributes on this component
-	 *
-	 * @return
-	 */
-	private Map<AngularAttributes, String> getAttributesAngular()
-	{
-		if (attributesAngular == null)
-		{
-			attributesAngular = new HashMap<>();
-		}
-		return attributesAngular;
-	}
-
-	/**
 	 * Adds an object for watching across an application
 	 *
 	 * @param name
@@ -140,11 +127,30 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	 * @return This for chain setting
 	 */
 	@Override
-	public J addDto(String name, JavaScriptPart dataObject)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J addDto(@NotNull String name, @NotNull JavaScriptPart dataObject)
 	{
 		dataObject.setReferenceId(getID());
 		getAngularObjects().put(name, dataObject);
 		return (J) this;
+	}
+
+	/**
+	 * Returns the angular objects mapped to this component
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public Map<String, JavaScriptPart> getAngularObjects()
+	{
+		if (angularObjects == null)
+		{
+			angularObjects = new HashMap<>();
+			AngularPageConfigurator.setRequired(this, true);
+		}
+		return angularObjects;
 	}
 
 	/**
@@ -160,25 +166,11 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	 * @return Null if not available
 	 */
 	@Override
-	public <T extends JavaScriptPart> T getDto(String name, Class<T> classType)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public <T extends JavaScriptPart> T getDto(@NotNull String name, @NotNull Class<T> classType)
 	{
 		return (T) getAngularObjects().get(name);
-	}
-
-	/**
-	 * Returns the angular objects mapped to this component
-	 *
-	 * @return
-	 */
-	@Override
-	public Map<String, JavaScriptPart> getAngularObjects()
-	{
-		if (angularObjects == null)
-		{
-			angularObjects = new HashMap<>();
-			AngularPageConfigurator.setRequired(this, true);
-		}
-		return angularObjects;
 	}
 
 	/**
@@ -187,6 +179,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public Map<String, String> getAttributes()
 	{
 		Map<String, String> allAttributes = super.getAttributes();
@@ -195,47 +188,19 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	}
 
 	/**
-	 * Binds this component to an angular variable. If it is an input is it bound directly, otherwise the text is set to what the variable contains
-	 * <p>
-	 * Over-ride this to apply more functionality such as calendar binding
-	 *
-	 * @param variableName
+	 * Returns all the angular attributes on this component
 	 *
 	 * @return
 	 */
-	public J bind(String variableName)
+	@NotNull
+	@SuppressWarnings("all")
+	private Map<AngularAttributes, String> getAttributesAngular()
 	{
-		addAttribute(AngularAttributes.ngBind, variableName);
-		AngularPageConfigurator.setRequired(this, true);
-		return (J) this;
-	}
-
-	/**
-	 * Instructs Angular to not show items that are bound until after the digest sequence
-	 *
-	 * @return
-	 */
-	public J cloak()
-	{
-		addAttribute(AngularAttributes.ngCloak, null);
-		AngularPageConfigurator.setRequired(this, true);
-		return (J) this;
-	}
-
-	@Override
-	public void destroy()
-	{
-		if (this.angularObjects != null)
+		if (attributesAngular == null)
 		{
-			this.angularObjects.clear();
-			this.angularObjects = null;
+			attributesAngular = new HashMap<>();
 		}
-		if (this.attributesAngular != null)
-		{
-			this.attributesAngular.clear();
-			this.attributesAngular = null;
-		}
-		super.destroy();
+		return attributesAngular;
 	}
 
 	@Override
@@ -256,11 +221,55 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 
 		ComponentHTMLAngularBase<?, ?, ?, ?> that = (ComponentHTMLAngularBase<?, ?, ?, ?>) o;
 
-		if (!getAttributesAngular().equals(that.getAttributesAngular()))
+		return getAttributesAngular().equals(that.getAttributesAngular()) && getAngularObjects().equals(that.getAngularObjects());
+	}
+
+	/**
+	 * Binds this component to an angular variable. If it is an input is it bound directly, otherwise the text is set to what the variable contains
+	 * <p>
+	 * Over-ride this to apply more functionality such as calendar binding
+	 *
+	 * @param variableName
+	 *
+	 * @return
+	 */
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J bind(@NotNull String variableName)
+	{
+		addAttribute(AngularAttributes.ngBind, variableName);
+		AngularPageConfigurator.setRequired(this, true);
+		return (J) this;
+	}
+
+	@Override
+	public void destroy()
+	{
+		if (this.angularObjects != null)
 		{
-			return false;
+			this.angularObjects.clear();
+			this.angularObjects = null;
 		}
-		return getAngularObjects().equals(that.getAngularObjects());
+		if (this.attributesAngular != null)
+		{
+			this.attributesAngular.clear();
+			this.attributesAngular = null;
+		}
+		super.destroy();
+	}
+
+	/**
+	 * Instructs Angular to not show items that are bound until after the digest sequence
+	 *
+	 * @return
+	 */
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J cloak()
+	{
+		addAttribute(AngularAttributes.ngCloak, null);
+		AngularPageConfigurator.setRequired(this, true);
+		return (J) this;
 	}
 
 	@Override
