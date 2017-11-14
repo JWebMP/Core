@@ -29,6 +29,9 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.logger.LogFactory;
 
+import javax.annotation.Nullable;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -111,7 +114,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 *
 	 * @param name
 	 */
-	public ComponentFeatureBase(String name)
+	public ComponentFeatureBase(@NotNull String name)
 	{
 		super(ComponentTypes.Feature);
 		this.name = name;
@@ -133,24 +136,35 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 *
 	 * @return
 	 */
+	@SuppressWarnings({"unused"})
+	@NotNull
 	public IComponentFeatureBase asFeatureBase()
 	{
 		return this;
 	}
 
 	/**
-	 * Returns a list of all the features associated with this component
-	 * <p>
+	 * Adds in the JavaScript References for the Features
 	 *
-	 * @return An ArrayList of features
+	 * @return
 	 */
-	public List<F> getFeatures()
+	@Override
+	@NotNull
+	public List<CSSReference> getCssReferencesAll()
 	{
-		if (features == null)
-		{
-			features = new ArrayList<>();
-		}
-		return features;
+		List<CSSReference> allCss = super.getCssReferencesAll();
+		getFeatures().forEach(feature ->
+		                      {
+			                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
+			                      for (Object css : cfb.getCssReferencesAll())
+			                      {
+				                      if (!allCss.contains(CSSReference.class.cast(css)))
+				                      {
+					                      allCss.add(CSSReference.class.cast(css));
+				                      }
+			                      }
+		                      });
+		return allCss;
 	}
 
 	@Override
@@ -203,22 +217,19 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 * @return
 	 */
 	@Override
+	@NotNull
+	@SuppressWarnings("unchecked")
 	public List<JavascriptReference> getJavascriptReferencesAll()
 	{
 		List<JavascriptReference> allJs = super.getJavascriptReferencesAll();
-		getFeatures().forEach(feature
-				                      ->
+		getFeatures().forEach(feature ->
 		                      {
 			                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
-			                      if (cfb != null)
+			                      for (Object js : cfb.getJavascriptReferencesAll())
 			                      {
-				                      for (Iterator<JavascriptReference> it = cfb.getJavascriptReferencesAll().iterator(); it.hasNext(); )
+				                      if (!allJs.contains(JavascriptReference.class.cast(js)))
 				                      {
-					                      JavascriptReference js = it.next();
-					                      if (!allJs.contains(js))
-					                      {
-						                      allJs.add(js);
-					                      }
+					                      allJs.add(JavascriptReference.class.cast(js));
 				                      }
 			                      }
 		                      });
@@ -226,30 +237,27 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	}
 
 	/**
-	 * Adds in the JavaScript References for the Features
+	 * Adds a feature to the collection
+	 *
+	 * @param feature
+	 * @param position
 	 *
 	 * @return
 	 */
 	@Override
-	public List<CSSReference> getCssReferencesAll()
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J addFeature(@NotNull ComponentFeatureBase feature, int position)
 	{
-		List<CSSReference> allCss = super.getCssReferencesAll();
-		getFeatures().forEach(feature ->
-		                      {
-			                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
-			                      if (cfb != null)
-			                      {
-				                      for (Iterator<CSSReference> it = cfb.getCssReferencesAll().iterator(); it.hasNext(); )
-				                      {
-					                      CSSReference css = it.next();
-					                      if (!allCss.contains(css))
-					                      {
-						                      allCss.add(css);
-					                      }
-				                      }
-			                      }
-		                      });
-		return allCss;
+		if (!feature.getComponentType().equals(ComponentTypes.Feature))
+		{
+			LOG.log(Level.WARNING, "Tried to add a non-feature to the feature collection");
+		}
+		else if (!getFeatures().contains(feature))
+		{
+			getFeatures().add(position, (F) feature);
+		}
+		return (J) this;
 	}
 
 	/**
@@ -261,30 +269,42 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	}
 
 	/**
-	 * Returns the queries
+	 * Returns a list of all the features associated with this component
+	 * <p>
 	 *
-	 * @return
+	 * @return An ArrayList of features
 	 */
-	@JsonProperty("queries")
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private List<StringBuilder> getQueries()
+	@NotNull
+	public List<F> getFeatures()
 	{
-		if (queries == null)
+		if (features == null)
 		{
-			queries = new ArrayList<>();
+			features = new ArrayList<>();
 		}
-		return queries;
+		return features;
 	}
 
 	/**
-	 * Returns all Queries Associated with a component
+	 * Adds a feature to the collection
+	 *
+	 * @param feature
 	 *
 	 * @return
 	 */
 	@Override
-	public List<StringBuilder> getQueriesAll()
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J addFeature(@NotNull ComponentFeatureBase feature)
 	{
-		return getQueries();
+		if (!feature.getComponentType().equals(ComponentTypes.Feature))
+		{
+			LOG.log(Level.WARNING, "Tried to add a non-feature to the feature collection");
+		}
+		else if (!getFeatures().contains(feature))
+		{
+			getFeatures().add((F) feature);
+		}
+		return (J) this;
 	}
 
 	/**
@@ -299,28 +319,26 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	}
 
 	/**
+	 * Adds a variable to the collection
+	 *
+	 * @param variable
+	 */
+	@Override
+	public void addVariable(@NotNull String variable)
+	{
+		getVariables().add(variable);
+	}
+
+	/**
 	 * Returns the name of this feature
 	 *
 	 * @return the name of this feature
 	 */
 	@Override
+	@NotNull
 	public String getName()
 	{
 		return name;
-	}
-
-	/**
-	 * Sets the name of the feature
-	 *
-	 * @param name
-	 * 		Sets the name of the feature
-	 *
-	 * @return
-	 */
-	public J setName(String name)
-	{
-		this.name = name;
-		return (J) this;
 	}
 
 	/**
@@ -382,11 +400,63 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	}
 
 	/**
+	 * Sets the name of the feature
+	 *
+	 * @param name
+	 * 		Sets the name of the feature
+	 *
+	 * @return
+	 */
+	@NotNull
+	public J setName(@NotNull String name)
+	{
+		this.name = name;
+		return (J) this;
+	}
+
+	/**
+	 * Returns any client side options available with this component
+	 *
+	 * @return
+	 */
+	@Override
+	@Nullable
+	public JavaScriptPart getOptions()
+	{
+		return null;
+	}
+
+	/**
+	 * Gets the render priority of this feature
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public RequirementsPriority getPriority()
+	{
+		return priority;
+	}
+
+	/**
+	 * Returns all Queries Associated with a component
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public List<StringBuilder> getQueriesAll()
+	{
+		return getQueries();
+	}
+
+	/**
 	 * Sets the sort order for this feature. Default 10000
 	 *
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public Integer getSortOrder()
 	{
 		return sortOrder;
@@ -399,6 +469,8 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 *
 	 * @return
 	 */
+	@NotNull
+	@SuppressWarnings("unchecked")
 	public final J setSortOrder(int sortOrder)
 	{
 		this.sortOrder = sortOrder;
@@ -406,70 +478,30 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	}
 
 	/**
-	 * Adds a feature to the collection
-	 *
-	 * @param feature
-	 * @param position
+	 * Returns the list of variables
 	 *
 	 * @return
 	 */
 	@Override
-	public J addFeature(ComponentFeatureBase feature, int position)
+	@NotNull
+	public List<String> getVariables()
 	{
-		if (!feature.getComponentType().equals(ComponentTypes.Feature))
+		if (variables == null)
 		{
-			LOG.log(Level.WARNING, "Tried to add a non-feature to the feature collection");
+			variables = new ArrayList<>();
 		}
-		else if (!getFeatures().contains(feature))
-		{
-			getFeatures().add(position, (F) feature);
-		}
-		return (J) this;
+		return variables;
 	}
 
 	/**
-	 * Adds a feature to the collection
+	 * Removes a variable from the collection
 	 *
-	 * @param feature
-	 *
-	 * @return
+	 * @param variable
 	 */
 	@Override
-	public J addFeature(ComponentFeatureBase feature)
+	public void removeVariable(@NotNull String variable)
 	{
-		if (feature != null)
-		{
-			if (!feature.getComponentType().equals(ComponentTypes.Feature))
-			{
-				LOG.log(Level.WARNING, "Tried to add a non-feature to the feature collection");
-			}
-			else if (!getFeatures().contains(feature))
-			{
-				getFeatures().add((F) feature);
-			}
-		}
-		return (J) this;
-	}
-
-	/**
-	 * Adds a query to the object queue
-	 *
-	 * @param query
-	 *
-	 * @return
-	 */
-	public J addQuery(StringBuilder query)
-	{
-		for (StringBuilder existingQuery : getQueriesAll())
-		{
-			if (existingQuery.toString().equalsIgnoreCase(query.toString()))
-			{
-				return (J) this;
-			}
-		}
-		getQueries().add(query);
-
-		return (J) this;
+		getVariables().remove(variable);
 	}
 
 	/**
@@ -478,6 +510,8 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 * @return
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
 	public StringBuilder renderJavascript()
 	{
 		if (!isConfigured())
@@ -486,13 +520,12 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		}
 		StringBuilder sb = new StringBuilder();
 		ArrayList<String> allQueries = new ArrayList<>();
-		getQueriesAll().forEach(query
-				                        ->
+		getQueriesAll().forEach(query ->
 		                        {
 			                        if (query != null)
 			                        {
 				                        String queryS = query.toString();
-				                        if (queryS != null && !allQueries.contains(queryS) || !queryS.isEmpty())
+				                        if (!allQueries.contains(queryS) || !queryS.isEmpty())
 				                        {
 					                        allQueries.add(query.toString());
 				                        }
@@ -509,69 +542,40 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	}
 
 	/**
-	 * Adds a variable to the collection
+	 * Sets the render priority of this feature
 	 *
-	 * @param variable
-	 */
-	@Override
-	public void addVariable(String variable)
-	{
-		getVariables().add(variable);
-	}
-
-	/**
-	 * Removes a variable from the collection
-	 *
-	 * @param variable
-	 */
-	@Override
-	public void removeVariable(String variable)
-	{
-		getVariables().remove(variable);
-	}
-
-	/**
-	 * Returns the list of variables
+	 * @param priority
 	 *
 	 * @return
 	 */
-	@Override
-	public List<String> getVariables()
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setPriority(@NotNull RequirementsPriority priority)
 	{
-		if (variables == null)
+		this.priority = priority;
+		return (J) this;
+	}
+
+	/**
+	 * Adds a query to the object queue
+	 *
+	 * @param query
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J addQuery(@NotNull StringBuilder query)
+	{
+		for (StringBuilder existingQuery : getQueriesAll())
 		{
-			variables = new ArrayList<>();
+			if (existingQuery.toString().equalsIgnoreCase(query.toString()))
+			{
+				return (J) this;
+			}
 		}
-		return variables;
-	}
-
-	/**
-	 * Returns any client side options available with this component
-	 *
-	 * @return
-	 */
-	@Override
-	public JavaScriptPart getOptions()
-	{
-		return null;
-	}
-
-	/**
-	 * Sets all features beneath to tiny
-	 *
-	 * @param tiny
-	 *
-	 * @return
-	 */
-	@Override
-	public J setTiny(boolean tiny)
-	{
-		for (Iterator<F> iterator = getFeatures().iterator(); iterator.hasNext(); )
-		{
-			ComponentFeatureBase next = (ComponentFeatureBase) iterator.next();
-			next.setTiny(tiny);
-		}
-		return super.setTiny(tiny);
+		getQueries().add(query);
+		return (J) this;
 	}
 
 	/**
@@ -586,39 +590,52 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	}
 
 	/**
+	 * Returns the queries
+	 *
+	 * @return
+	 */
+	@JsonProperty("queries")
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	@NotNull
+	private List<StringBuilder> getQueries()
+	{
+		if (queries == null)
+		{
+			queries = new ArrayList<>();
+		}
+		return queries;
+	}
+
+	/**
+	 * Sets all features beneath to tiny
+	 *
+	 * @param tiny
+	 *
+	 * @return
+	 */
+	@Override
+	@Null
+	public J setTiny(boolean tiny)
+	{
+		for (Iterator<F> iterator = getFeatures().iterator(); iterator.hasNext(); )
+		{
+			ComponentFeatureBase next = (ComponentFeatureBase) iterator.next();
+			next.setTiny(tiny);
+		}
+		return super.setTiny(tiny);
+	}
+
+	/**
 	 * Sets if this feature must be rendered in an $(document).ready statement
 	 *
 	 * @param renderAfterLoad
 	 *
 	 * @return
 	 */
+	@NotNull
 	public J setRenderAfterLoad(boolean renderAfterLoad)
 	{
 		this.renderAfterLoad = renderAfterLoad;
-		return (J) this;
-	}
-
-	/**
-	 * Gets the render priority of this feature
-	 *
-	 * @return
-	 */
-	@Override
-	public RequirementsPriority getPriority()
-	{
-		return priority;
-	}
-
-	/**
-	 * Sets the render priority of this feature
-	 *
-	 * @param priority
-	 *
-	 * @return
-	 */
-	public J setPriority(RequirementsPriority priority)
-	{
-		this.priority = priority;
 		return (J) this;
 	}
 
@@ -639,6 +656,8 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 *
 	 * @return
 	 */
+	@NotNull
+	@SuppressWarnings("unused")
 	public J setJavascriptRenderedElsewhere(boolean javascriptRenderedElsewhere)
 	{
 		this.javascriptRenderedElsewhere = javascriptRenderedElsewhere;
@@ -662,7 +681,9 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 *
 	 * @return
 	 */
-	protected J setComponent(ComponentHierarchyBase component)
+	@NotNull
+	@SuppressWarnings("unused")
+	protected J setComponent(@NotNull ComponentHierarchyBase component)
 	{
 		this.component = component;
 		return (J) this;

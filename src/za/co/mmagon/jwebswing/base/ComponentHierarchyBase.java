@@ -36,11 +36,14 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.logger.LogFactory;
 
+import javax.annotation.Nullable;
+import javax.validation.constraints.NotNull;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static java.util.Comparator.comparing;
 import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SPACE;
 
 /**
@@ -97,7 +100,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 *
 	 * @param componentType
 	 */
-	public ComponentHierarchyBase(ComponentTypes componentType)
+	public ComponentHierarchyBase(@NotNull ComponentTypes componentType)
 	{
 		super(componentType);
 	}
@@ -107,6 +110,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 *
 	 * @return
 	 */
+	@NotNull
 	public IComponentHierarchyBase asHierarchyBase()
 	{
 		return this;
@@ -125,20 +129,15 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * @return The new child added
 	 */
 	@Override
-	public J add(int position, C newChild)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J add(int position, @NotNull C newChild)
 	{
-		if (newChild == null)
-		{
-			return (J) this;
-		}
 		ComponentHierarchyBase comp = ComponentHierarchyBase.class.cast(newChild);
-		if (comp != null)
-		{
-			comp.setParent(this);
-			comp.setTiny(isTiny());
-			comp.setPage(getPage());
-			getChildren().add(position, comp);
-		}
+		comp.setParent(this);
+		comp.setTiny(isTiny());
+		comp.setPage(getPage());
+		getChildren().add(position, comp);
 		return (J) this;
 	}
 
@@ -153,20 +152,15 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * @return The new child added
 	 */
 	@Override
-	public J add(C newChild)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J add(@NotNull C newChild)
 	{
-		if (newChild == null)
-		{
-			return (J) this;
-		}
 		ComponentHierarchyBase comp = ComponentHierarchyBase.class.cast(newChild);
-		if (comp != null)
-		{
-			comp.setParent(this);
-			comp.setTiny(isTiny());
-			comp.setPage(getPage());
-			getChildren().add(comp);
-		}
+		comp.setParent(this);
+		comp.setTiny(isTiny());
+		comp.setPage(getPage());
+		getChildren().add(comp);
 		return (J) this;
 	}
 
@@ -178,7 +172,9 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * @return
 	 */
 	@Override
-	public J add(String text)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J add(@NotNull String text)
 	{
 		setText(text);
 		return (J) this;
@@ -201,12 +197,406 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	}
 
 	/**
+	 * Adds the given CSS Class Name with the given references
+	 * <p>
+	 *
+	 * @param classComponent
+	 *
+	 * @return
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public boolean addClass(@NotNull CSSComponent classComponent)
+	{
+		String className = classComponent.getID();
+		getPage().getBody().add(classComponent);
+		if (!getClasses().contains(className))
+		{
+			getClasses().add(className);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the children ArrayList of type Component
+	 * <p>
+	 *
+	 * @return An array list of components
+	 */
+	@Override
+	@NotNull
+	public final List<ComponentHierarchyBase> getChildren()
+	{
+		if (children == null)
+		{
+			children = new ArrayList<>();
+		}
+		return children;
+	}
+
+	/**
+	 * Get an array list of all children and their children recursively Includes this object
+	 * <p>
+	 *
+	 * @return A complete array list of all children at time of call
+	 */
+	@Override
+	@NotNull
+	public List<ComponentHierarchyBase> getChildrenHierarchy()
+	{
+		return getChildrenHierarchy(true);
+	}
+
+	/**
+	 * Get an array list of all children and their children recursively Excludes this object
+	 * <p>
+	 *
+	 * @param trues
+	 * 		Whether or not to include this component
+	 * 		<p>
+	 *
+	 * @return A complete array list of all children at time of call
+	 */
+	@Override
+	@NotNull
+	public List<ComponentHierarchyBase> getChildrenHierarchy(boolean trues)
+	{
+		List<ComponentHierarchyBase> components = new ArrayList<>();
+		if (trues)
+		{
+			components.add(this);
+		}
+		getChildrenHierarchy(components);
+
+		return components;
+	}
+
+	/**
+	 * Adds the children of this component onto the array list coming in
+	 * <p>
+	 * <p>
+	 * <p>
+	 *
+	 * @param componentsToAddTo
+	 * 		The component Array List to add to
+	 * 		<p>
+	 *
+	 * @return original components added with
+	 */
+	@Override
+	@NotNull
+	public List<ComponentHierarchyBase> getChildrenHierarchy(@NotNull List<ComponentHierarchyBase> componentsToAddTo)
+	{
+		getChildren().forEach(child ->
+		                      {
+			                      if (!componentsToAddTo.contains(child))
+			                      {
+				                      componentsToAddTo.add(child);
+			                      }
+			                      child.getChildrenHierarchy(componentsToAddTo);
+		                      });
+		return componentsToAddTo;
+	}
+
+	/**
+	 * Returns a complete list of events
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public List<Event> getEventsAll()
+	{
+		ArrayList<Event> allEvents = new ArrayList<>();
+		getChildrenHierarchy(true).forEach(child
+				                                   ->
+		                                   {
+			                                   for (Object event : child.getEvents())
+			                                   {
+				                                   if (event != null)
+				                                   {
+					                                   allEvents.add(Event.class.cast(event));
+				                                   }
+			                                   }
+		                                   });
+		return allEvents;
+	}
+
+	/**
+	 * Get the page this component exists on
+	 * <p>
+	 *
+	 * @return A Page
+	 */
+	@Override
+	@NotNull
+	public Page getPage()
+	{
+		if (page == null)
+		{
+			setPage(new Page());
+		}
+		return page;
+	}
+
+	/**
+	 * Sets the page this component belongs on.
+	 * Null to reset the page hierarchy for all children
+	 * <p>
+	 *
+	 * @param page
+	 * 		A Page
+	 */
+	@Override
+	public J setPage(@Nullable Page page)
+	{
+		this.page = page;
+		getChildren().forEach(child -> child.setPage(page));
+		return (J) this;
+	}
+
+	/**
+	 * Gets the parent of this hierarchy item
+	 *
+	 * @return
+	 */
+	@Override
+	@Nullable
+	public ComponentHierarchyBase getParent()
+	{
+		return parent;
+	}
+
+	/**
+	 * Sets the parent of this item
+	 *
+	 * @param parent
+	 */
+	@Override
+	@NotNull
+	public J setParent(@Nullable ComponentHierarchyBase parent)
+	{
+		this.parent = parent;
+		return (J) this;
+	}
+
+	/**
+	 * Adds a class name to the class list
+	 * <p>
+	 *
+	 * @param className
+	 * 		The class name to add
+	 * 		<p>
+	 *
+	 * @return True if it was added, false if it already existed
+	 */
+	@Override
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J addClass(@NotNull String className)
+	{
+		if (!getClasses().contains(className))
+		{
+			getClasses().add(className);
+			return (J) this;
+		}
+		else
+		{
+			return (J) this;
+		}
+	}
+
+	/**
+	 * Removes a class name from this component
+	 * <p>
+	 *
+	 * @param className
+	 * 		Class Name to Remove
+	 * 		<p>
+	 *
+	 * @return True if the class was removed, False if the class was not part of the collection
+	 */
+	@Override
+	public boolean removeClass(@Nullable String className)
+	{
+		if (getClasses().contains(className))
+		{
+			getClasses().remove(className);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	/**
+	 * Returns if this object has children or not
+	 * <p>
+	 *
+	 * @return true if there are children attached
+	 */
+	@Override
+	public boolean hasChildren()
+	{
+		return !getChildren().isEmpty();
+	}
+
+	@Override
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J addClass(@NotNull ICSSClassName className)
+	{
+		if (!getClasses().contains(className.toString()))
+		{
+			getClasses().add(className.toString());
+			return (J) this;
+		}
+		else
+		{
+			return (J) this;
+		}
+	}
+
+	/**
+	 * Adds the class at the given position
+	 *
+	 * @param position
+	 * @param className
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J addClass(int position, @NotNull ICSSClassName className)
+	{
+		if (!getClasses().contains(className.toString()))
+		{
+			getClasses().add(position, className.toString());
+			return (J) this;
+		}
+		else
+		{
+			return (J) this;
+		}
+	}
+
+	/**
+	 * Returns a complete list of all class names associated with this component
+	 * <p>
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public List<String> getClasses()
+	{
+		if (classes == null)
+		{
+			classes = new ArrayList<>();
+		}
+		return classes;
+	}
+
+	/**
+	 * Set the theme applied to this component
+	 * <p>
+	 *
+	 * @param theme
+	 * 		The JQuery UI theme to apply to the component
+	 */
+	@Override
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J addTheme(@NotNull Theme theme)
+	{
+		if (!getThemes().contains(theme))
+		{
+			getThemes().add(theme);
+			addClass(theme.getClassName());
+		}
+
+		return (J) this;
+	}
+
+	/**
+	 * *
+	 * Returns all the variables for all the components
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public List<String> getVariablesAll()
+	{
+		Set<String> allVariables = new TreeSet<>();
+		getChildrenHierarchy().forEach(child
+				                               ->
+		                               {
+			                               for (Object o : child.getVariables())
+			                               {
+				                               allVariables.add(o.toString());
+			                               }
+		                               });
+		return new ArrayList<>(allVariables);
+	}
+
+	/**
+	 * Takes a component off this components child list
+	 * <p>
+	 *
+	 * @param childToRemove
+	 * 		The child object to remove from this list
+	 * 		<p>
+	 *
+	 * @return True if the child was part of this components children's list
+	 */
+	@Override
+	public boolean remove(@Nullable C childToRemove)
+	{
+		ComponentHierarchyBase comp = (ComponentHierarchyBase) childToRemove;
+		getChildren().remove(comp);
+		return true;
+	}
+
+	/**
+	 * *
+	 * Returns all the JavaScript for all the components
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public StringBuilder renderJavascriptAll()
+	{
+		preConfigure();
+		StringBuilder sb = new StringBuilder();
+		Set<String> allScripts = new TreeSet<>();
+		ArrayList<StringBuilder> queries = (ArrayList<StringBuilder>) getQueriesAll();
+		queries.forEach(a ->
+		                {
+			                if (!a.toString().isEmpty())
+			                {
+				                allScripts.add(a.toString());
+			                }
+		                });
+		allScripts.forEach(sb.append(getNewLine())::append);
+		return sb;
+	}
+
+	/**
 	 * Processes the angular objects into a map
 	 *
 	 * @param next
 	 * @param map
 	 */
-	private void processAngularObjects(ComponentHierarchyBase next, Map<String, JavaScriptPart> map)
+	@SuppressWarnings("unchecked")
+	private void processAngularObjects(@NotNull ComponentHierarchyBase next, @NotNull Map<String, JavaScriptPart> map)
 	{
 		next.getAngularObjects().forEach((key, value) ->
 		                                 {
@@ -231,109 +621,12 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	}
 
 	/**
-	 * Get an array list of all children and their children recursively Excludes this object
-	 * <p>
-	 *
-	 * @param trues
-	 * 		Whether or not to include this component
-	 * 		<p>
-	 *
-	 * @return A complete array list of all children at time of call
-	 */
-	@Override
-	public List<ComponentHierarchyBase> getChildrenHierarchy(boolean trues)
-	{
-		List<ComponentHierarchyBase> components = new ArrayList<>();
-		if (trues)
-		{
-			components.add(this);
-		}
-		getChildrenHierarchy(components);
-
-		return components;
-	}
-
-	/**
-	 * Returns the children ArrayList of type Component
-	 * <p>
-	 *
-	 * @return An array list of components
-	 */
-	@Override
-	public final List<ComponentHierarchyBase> getChildren()
-	{
-		if (children == null)
-		{
-			children = new ArrayList<>();
-		}
-		return children;
-	}
-
-	/**
-	 * Get an array list of all children and their children recursively Includes this object
-	 * <p>
-	 *
-	 * @return A complete array list of all children at time of call
-	 */
-	@Override
-	public List<ComponentHierarchyBase> getChildrenHierarchy()
-	{
-		return getChildrenHierarchy(true);
-	}
-
-	/**
-	 * Adds the children of this component onto the array list coming in
-	 * <p>
-	 * <p>
-	 * <p>
-	 *
-	 * @param componentsToAddTo
-	 * 		The component Array List to add to
-	 * 		<p>
-	 *
-	 * @return original components added with
-	 */
-	@Override
-	public List<ComponentHierarchyBase> getChildrenHierarchy(List<ComponentHierarchyBase> componentsToAddTo)
-	{
-		getChildren().forEach(child ->
-		                      {
-			                      if (child != null)
-			                      {
-				                      if (!componentsToAddTo.contains(child))
-				                      {
-					                      componentsToAddTo.add(child);
-				                      }
-				                      child.getChildrenHierarchy(componentsToAddTo);
-			                      }
-		                      });
-		return componentsToAddTo;
-	}
-
-	/**
-	 * Takes a component off this components child list
-	 * <p>
-	 *
-	 * @param childToRemove
-	 * 		The child object to remove from this list
-	 * 		<p>
-	 *
-	 * @return True if the child was part of this components children's list
-	 */
-	@Override
-	public boolean remove(C childToRemove)
-	{
-		ComponentHierarchyBase comp = (ComponentHierarchyBase) childToRemove;
-		getChildren().remove(comp);
-		return true;
-	}
-
-	/**
 	 * Renders each child
 	 *
 	 * @return
 	 */
 	@Override
+	@NotNull
 	protected StringBuilder renderChildren()
 	{
 		StringBuilder sb = new StringBuilder();
@@ -350,347 +643,13 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	}
 
 	/**
-	 * Get the page this component exists on
-	 * <p>
-	 *
-	 * @return A Page
-	 */
-	@Override
-	public Page getPage()
-	{
-		if (page == null)
-		{
-			setPage(new Page());
-		}
-		return page;
-	}
-
-	/**
-	 * Sets the page this component belongs on.
-	 * <p>
-	 *
-	 * @param page
-	 * 		A Page
-	 */
-	@Override
-	public J setPage(Page page)
-	{
-		this.page = page;
-		getChildren().forEach(child -> child.setPage(page));
-		return (J) this;
-	}
-
-	/**
-	 * Gets the parent of this hierarchy item
-	 *
-	 * @return
-	 */
-	@Override
-	public ComponentHierarchyBase getParent()
-	{
-		return parent;
-	}
-
-	/**
-	 * Sets the parent of this item
-	 *
-	 * @param parent
-	 */
-	@Override
-	public J setParent(ComponentHierarchyBase parent)
-	{
-		this.parent = parent;
-		return (J) this;
-	}
-
-	/**
-	 * Returns the parent id for the parent property so JSON doesn't go circular
-	 *
-	 * @return
-	 */
-	@JsonProperty("parent")
-	private String getParentJSON()
-	{
-		if (getParent() != null)
-		{
-			return getParent().getID();
-		}
-		return null;
-	}
-
-	/**
-	 * Returns if this object has children or not
-	 * <p>
-	 *
-	 * @return true if there are children attached
-	 */
-	@Override
-	public boolean hasChildren()
-	{
-		return !getChildren().isEmpty();
-	}
-
-	/**
-	 * Adds in the JavaScript References for all the children
-	 *
-	 * @return
-	 */
-	@Override
-	public List<JavascriptReference> getJavascriptReferencesAll()
-	{
-		List<JavascriptReference> allJs = super.getJavascriptReferencesAll();
-		getChildren().forEach(child
-				                      ->
-		                      {
-			                      for (Iterator<JavascriptReference> iterator1 = child.getJavascriptReferencesAll().iterator(); iterator1.hasNext(); )
-			                      {
-				                      JavascriptReference jScript = iterator1.next();
-				                      if (!allJs.contains(jScript))
-				                      {
-					                      allJs.add(jScript);
-				                      }
-			                      }
-		                      });
-		return allJs;
-	}
-
-	/**
-	 * Returns a complete list of events
-	 *
-	 * @return
-	 */
-	@Override
-	public List<Event> getEventsAll()
-	{
-		ArrayList<Event> allEvents = new ArrayList<>();
-		getChildrenHierarchy(true).forEach(child
-				                                   ->
-		                                   {
-			                                   for (Iterator<Event> iterator1 = child.getEvents().iterator(); iterator1.hasNext(); )
-			                                   {
-				                                   Event event = iterator1.next();
-				                                   if (event != null)
-				                                   {
-					                                   allEvents.add(event);
-				                                   }
-			                                   }
-		                                   });
-		return allEvents;
-	}
-
-	/**
-	 * Returns a complete list of events
-	 *
-	 * @return
-	 */
-	public List<Feature> getFeaturesAll()
-	{
-		ArrayList<Feature> allFeatures = new ArrayList<>();
-		getChildrenHierarchy().forEach(child
-				                               ->
-		                               {
-			                               for (Iterator<Feature> iterator1 = child.getFeatures().iterator(); iterator1.hasNext(); )
-			                               {
-				                               Feature event = iterator1.next();
-				                               if (event != null)
-				                               {
-					                               allFeatures.add(event);
-				                               }
-			                               }
-		                               });
-		return allFeatures;
-	}
-
-	/**
-	 * Adds in the JavaScript References for all the children
-	 *
-	 * @return
-	 */
-	@Override
-	public List<CSSReference> getCssReferencesAll()
-	{
-		List<CSSReference> allCss = super.getCssReferencesAll();
-		getChildren().forEach(child
-				                      ->
-		                      {
-			                      for (Iterator<CSSReference> iterator1 = child.getCssReferencesAll().iterator(); iterator1.hasNext(); )
-			                      {
-				                      CSSReference jScript = iterator1.next();
-				                      if (!allCss.contains(jScript))
-				                      {
-					                      allCss.add(jScript);
-				                      }
-			                      }
-		                      });
-		return allCss;
-	}
-
-	/**
-	 * Finds the event in all this components and child components
-	 *
-	 * @param eventId
-	 *
-	 * @return
-	 */
-	@Override
-	public ComponentEventBase getEvent(String eventId)
-	{
-		for (ComponentHierarchyBase child : getChildren())
-		{
-			for (Iterator<ComponentEventBase> iterator1 = child.getEventsAll().iterator(); iterator1.hasNext(); )
-			{
-				ComponentEventBase jScript = iterator1.next();
-				if (jScript.getID().equals(eventId))
-				{
-					return jScript;
-				}
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * *
-	 * Returns all the variables for all the components
-	 *
-	 * @return
-	 */
-	@Override
-	public List<String> getVariablesAll()
-	{
-		ArrayList<String> allVariables = new ArrayList<>();
-		getChildrenHierarchy().forEach(child
-				                               ->
-		                               {
-			                               for (Iterator it = child.getVariables().iterator(); it.hasNext(); )
-			                               {
-				                               String variable = (String) it.next();
-				                               if (!allVariables.contains(variable))
-				                               {
-					                               allVariables.add(variable);
-				                               }
-			                               }
-		                               });
-		return allVariables;
-	}
-
-	/**
-	 * Adds a class name to the class list
-	 * <p>
-	 *
-	 * @param className
-	 * 		The class name to add
-	 * 		<p>
-	 *
-	 * @return True if it was added, false if it already existed
-	 */
-	@Override
-	public J addClass(String className)
-	{
-		if (!getClasses().contains(className))
-		{
-			getClasses().add(className);
-			return (J) this;
-		}
-		else
-		{
-			return (J) this;
-		}
-	}
-
-	/**
-	 * *
-	 * Returns all the JavaScript for all the components
-	 *
-	 * @return
-	 */
-	@Override
-	public StringBuilder renderJavascriptAll()
-	{
-		preConfigure();
-		StringBuilder sb = new StringBuilder();
-		ArrayList<String> allScripts = new ArrayList<>();
-		ArrayList<StringBuilder> queries = (ArrayList<StringBuilder>) getQueriesAll();
-		queries.forEach(a ->
-		                {
-			                if (!a.toString().isEmpty() && !allScripts.contains(a.toString()))
-			                {
-				                allScripts.add(a.toString());
-			                }
-		                });
-		allScripts.forEach(sb.append(getNewLine())::append);
-		return sb;
-	}
-
-	/**
-	 * Overrides this and all below components to set tiny false
-	 *
-	 * @param tiny
-	 *
-	 * @return super.tiny
-	 */
-	@Override
-	public J setTiny(boolean tiny)
-	{
-		getChildren().forEach(child -> child.setTiny(tiny));
-		return super.setTiny(tiny);
-	}
-
-	/**
-	 * Adds the given CSS Class Name with the given references
-	 * <p>
-	 *
-	 * @param classComponent
-	 *
-	 * @return
-	 */
-	@Override
-	public boolean addClass(CSSComponent classComponent)
-	{
-		String className = classComponent.getID();
-		getPage().getBody().add(classComponent);
-		if (!getClasses().contains(className))
-		{
-			getClasses().add(className);
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	/**
-	 * Removes a class name from this component
-	 * <p>
-	 *
-	 * @param className
-	 * 		Class Name to Remove
-	 * 		<p>
-	 *
-	 * @return True if the class was removed, False if the class was not part of the collection
-	 */
-	@Override
-	public boolean removeClass(String className)
-	{
-		if (getClasses().contains(className))
-		{
-			getClasses().remove(className);
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	/**
 	 * Renders String content before the children tags are rendered
 	 * <p>
 	 *
 	 * @return Custom HTML String to be inserted before Children tags
 	 */
 	@Override
+	@Nullable
 	protected StringBuilder renderBeforeChildren()
 	{
 		return null;
@@ -703,28 +662,157 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * @return Custom HTML String to be inserted after Children tags
 	 */
 	@Override
+	@Nullable
 	protected StringBuilder renderAfterChildren()
 	{
 		return null;
 	}
 
 	/**
-	 * Set the theme applied to this component
-	 * <p>
+	 * Ensure if there are children that new lines must be rendered
 	 *
-	 * @param theme
-	 * 		The JQuery UI theme to apply to the component
+	 * Boxed for operating purposes
+	 *
+	 * @return
 	 */
 	@Override
-	public J addTheme(Theme theme)
+	@NotNull
+	public Boolean isNewLineForClosingTag()
 	{
-		if (theme != null && !getThemes().contains(theme))
+		if (hasChildren() && !isTiny())
 		{
-			getThemes().add(theme);
-			addClass(theme.getClassName());
+			return true;
 		}
+		else
+		{
+			return super.isNewLineForClosingTag();
+		}
+	}
 
-		return (J) this;
+	/**
+	 * Returns the parent id for the parent property so JSON doesn't go circular
+	 *
+	 * @return
+	 */
+	@JsonProperty("parent")
+	@Nullable
+	private String getParentJSON()
+	{
+		if (getParent() != null)
+		{
+			return getParent().getID();
+		}
+		return null;
+	}
+
+	/**
+	 * Adds in the JavaScript References for all the children
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public List<JavascriptReference> getJavascriptReferencesAll()
+	{
+		List<JavascriptReference> allJs = super.getJavascriptReferencesAll();
+		getChildren().forEach(child ->
+		                      {
+			                      for (Object jScript : child.getJavascriptReferencesAll())
+			                      {
+				                      if (!allJs.contains(jScript))
+				                      {
+					                      allJs.add(JavascriptReference.class.cast(jScript));
+				                      }
+			                      }
+		                      });
+		return allJs;
+	}
+
+	/**
+	 * Adds in the JavaScript References for all the children
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public List<CSSReference> getCssReferencesAll()
+	{
+		List<CSSReference> allCss = super.getCssReferencesAll();
+		getChildren().forEach(child
+				                      ->
+		                      {
+			                      for (Object jScript : child.getCssReferencesAll())
+			                      {
+				                      if (!allCss.contains(jScript))
+				                      {
+					                      allCss.add(CSSReference.class.cast(jScript));
+				                      }
+			                      }
+		                      });
+		return allCss;
+	}
+
+	/**
+	 * Returns a complete list of events
+	 *
+	 * @return
+	 */
+	@NotNull
+	public List<Feature> getFeaturesAll()
+	{
+		ArrayList<Feature> allFeatures = new ArrayList<>();
+		getChildrenHierarchy().forEach(child
+				                               ->
+		                               {
+			                               for (Object event : child.getFeatures())
+			                               {
+				                               if (event != null)
+				                               {
+					                               allFeatures.add(Feature.class.cast(event));
+				                               }
+			                               }
+		                               });
+		return allFeatures;
+	}
+
+	/**
+	 * Finds the event in all this components and child components
+	 *
+	 * @param eventId
+	 *
+	 * @return
+	 */
+	@Override
+	@Nullable
+	public ComponentEventBase getEvent(String eventId)
+	{
+		for (ComponentHierarchyBase child : getChildren())
+		{
+			for (Object jScript : child.getEventsAll())
+			{
+				if (Event.class.cast(jScript).getID().equals(eventId))
+				{
+					return (ComponentEventBase) jScript;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Overrides this and all below components to set tiny false
+	 *
+	 * @param tiny
+	 *
+	 * @return super.tiny
+	 */
+	@Override
+	@NotNull
+	public J setTiny(boolean tiny)
+	{
+		getChildren().forEach(child -> child.setTiny(tiny));
+		return super.setTiny(tiny);
 	}
 
 	/**
@@ -735,112 +823,9 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	{
 		if (!isInitialized())
 		{
-
-			List<ComponentHierarchyBase> clonedBase = getChildren();
-			clonedBase.forEach(comp ->
-			                   {
-				                   ComponentHierarchyBase cfb = comp;
-				                   cfb.init();
-			                   });
+			getChildren().forEach(ComponentHierarchyBase::init);
 		}
 		super.init();
-	}
-
-	/**
-	 * Pre-Configure the children tree
-	 *
-	 * @return
-	 */
-	@Override
-	public String toString()
-	{
-		getChildren().forEach(next ->
-		                      {
-			                      if (!next.isConfigured())
-			                      {
-				                      next.preConfigure();
-			                      }
-		                      });
-		return super.toString();
-	}
-
-	/**
-	 * Takes an instance and wraps around the component
-	 * <p>
-	 * e.g. BSRow.wrap(div) = iv class="row"myComponent//div
-	 *
-	 * @param component
-	 *
-	 * @return
-	 */
-	public J wrap(ComponentHierarchyBase component)
-	{
-		ComponentHierarchyBase existingParent = component.getParent();
-		if (component.getParent() != null)
-		{
-			existingParent.remove(component);
-			existingParent.add(this);
-		}
-		getChildren().add(component);
-		return (J) this;
-	}
-
-	/**
-	 * Returns all the feature queries associated to this component and all its children
-	 *
-	 * @return
-	 */
-	@Override
-	public List<StringBuilder> getQueriesAll()
-	{
-		ArrayList<StringBuilder> reallyAllQueries = new ArrayList<>();
-		List<ComponentHierarchyBase> allComponents = getChildrenHierarchy(true);
-		allComponents.forEach((Consumer<? super ComponentHierarchyBase>) componentQuery -> processComponentQueries(componentQuery, reallyAllQueries));
-		return reallyAllQueries;
-	}
-
-	/**
-	 * Processes the queries
-	 *
-	 * @param componentQuery
-	 * @param reallyAllQueries
-	 */
-	private void processComponentQueries(ComponentHierarchyBase componentQuery, List<StringBuilder> reallyAllQueries)
-	{
-		List<ComponentFeatureBase> features = componentQuery.getFeatures();
-		features.remove(null);
-		features.forEach(feature ->
-		                 {
-			                 if (feature != null)
-			                 {
-				                 feature.preConfigure();
-				                 reallyAllQueries.add(feature.renderJavascript());
-			                 }
-		                 });
-
-		Collections.sort(features, Comparator.comparing(ComponentFeatureBase::getSortOrder));
-		List<ComponentEventBase> events = componentQuery.getEvents();
-		events.remove(null);
-		events.forEach(event ->
-		               {
-			               if (event != null)
-			               {
-				               event.preConfigure();
-				               reallyAllQueries.add(event.renderJavascript());
-			               }
-		               });
-
-		Collections.sort(events, Comparator.comparing(ComponentFeatureBase::getSortOrder));
-		List<ComponentHierarchyBase> myQueries = new ArrayList<>();
-		myQueries.remove(null);
-		myQueries.forEach(query ->
-		                  {
-			                  if (query != null)
-			                  {
-				                  query.preConfigure();
-				                  reallyAllQueries.add(query.renderJavascript());
-			                  }
-		                  });
 	}
 
 	@Override
@@ -876,32 +861,37 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	}
 
 	/**
-	 * Renders the classes array as an in-line class string
+	 * Returns all the feature queries associated to this component and all its children
 	 *
 	 * @return
 	 */
 	@Override
-	protected StringBuilder renderClasses()
+	@NotNull
+	public List<StringBuilder> getQueriesAll()
 	{
-		StringBuilder sb = new StringBuilder();
-		getClasses().forEach(clazz -> sb.append(clazz).append(STRING_SPACE));
-		if (sb.length() > 0)
-		{
-			sb.deleteCharAt(sb.length() - 1);
-		}
-		return sb;
+		ArrayList<StringBuilder> reallyAllQueries = new ArrayList<>();
+		List<ComponentHierarchyBase> allComponents = getChildrenHierarchy(true);
+		allComponents.forEach((Consumer<? super ComponentHierarchyBase>) componentQuery -> processComponentQueries(componentQuery, reallyAllQueries));
+		return reallyAllQueries;
 	}
 
-	public <T extends ComponentHierarchyBase> T findChild(Class<T> childType)
+	/**
+	 * Pre-Configure the children tree
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public String toString()
 	{
-		for (ComponentHierarchyBase componentHierarchyBase : getChildren())
-		{
-			if (componentHierarchyBase.getClass().equals(childType))
-			{
-				return (T) componentHierarchyBase;
-			}
-		}
-		return null;
+		getChildren().forEach(next ->
+		                      {
+			                      if (!next.isConfigured())
+			                      {
+				                      next.preConfigure();
+			                      }
+		                      });
+		return super.toString();
 	}
 
 	/**
@@ -934,19 +924,106 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	}
 
 	/**
-	 * Returns a complete list of all class names associated with this component
+	 * Takes an instance and wraps around the component
 	 * <p>
+	 * e.g. BSRow.wrap(div) = iv class="row"myComponent//div
+	 *
+	 * @param component
+	 *
+	 * @return
+	 */
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J wrap(@NotNull ComponentHierarchyBase component)
+	{
+		ComponentHierarchyBase existingParent = component.getParent();
+		existingParent.remove(component);
+		existingParent.add(this);
+		getChildren().add(component);
+		return (J) this;
+	}
+
+	/**
+	 * Processes the queries
+	 *
+	 * @param componentQuery
+	 * @param reallyAllQueries
+	 */
+	@SuppressWarnings("unchecked")
+	private void processComponentQueries(@NotNull ComponentHierarchyBase componentQuery, @NotNull List<StringBuilder> reallyAllQueries)
+	{
+		List<ComponentFeatureBase> features = componentQuery.getFeatures();
+		features.remove(null);
+		features.forEach(feature ->
+		                 {
+			                 if (feature != null)
+			                 {
+				                 feature.preConfigure();
+				                 reallyAllQueries.add(feature.renderJavascript());
+			                 }
+		                 });
+
+		features.sort(comparing(ComponentFeatureBase::getSortOrder));
+		List<ComponentEventBase> events = componentQuery.getEvents();
+		events.remove(null);
+		events.forEach(event ->
+		               {
+			               if (event != null)
+			               {
+				               event.preConfigure();
+				               reallyAllQueries.add(event.renderJavascript());
+			               }
+		               });
+
+		events.sort(comparing(ComponentFeatureBase::getSortOrder));
+		List<ComponentHierarchyBase> myQueries = new ArrayList<>();
+		myQueries.removeIf(Objects::isNull);
+		myQueries.forEach(query ->
+		                  {
+			                  query.preConfigure();
+			                  reallyAllQueries.add(query.renderJavascript());
+		                  });
+	}
+
+	/**
+	 * Renders the classes array as an in-line class string
 	 *
 	 * @return
 	 */
 	@Override
-	public List<String> getClasses()
+	@NotNull
+	protected StringBuilder renderClasses()
 	{
-		if (classes == null)
+		StringBuilder sb = new StringBuilder();
+		getClasses().forEach(clazz -> sb.append(clazz).append(STRING_SPACE));
+		if (sb.length() > 0)
 		{
-			classes = new ArrayList<>();
+			sb.deleteCharAt(sb.length() - 1);
 		}
-		return classes;
+		return sb;
+	}
+
+	@Override
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J cloneComponent()
+	{
+		ComponentHierarchyBase cloned = super.cloneComponent();
+		return (J) cloned;
+	}
+
+	@Nullable
+	@SuppressWarnings({"unchecked", "unused"})
+	public <T extends ComponentHierarchyBase> T findChild(@NotNull Class<T> childType)
+	{
+		for (ComponentHierarchyBase componentHierarchyBase : getChildren())
+		{
+			if (componentHierarchyBase.getClass().equals(childType))
+			{
+				return (T) componentHierarchyBase;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -959,71 +1036,17 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 *
 	 * @return The Obvious
 	 */
-	protected boolean containsClass(Class classType)
+	@SuppressWarnings("unused")
+	protected boolean containsClass(@NotNull Class classType)
 	{
-		for (Iterator<ComponentHierarchyBase> iterator = getChildren().iterator(); iterator.hasNext(); )
+		for (ComponentHierarchyBase next : getChildren())
 		{
-			ComponentHierarchyBase next = iterator.next();
 			if (next.getClass().equals(classType))
 			{
 				return true;
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public J addClass(ICSSClassName className)
-	{
-		if (!getClasses().contains(className.toString()))
-		{
-			getClasses().add(className.toString());
-			return (J) this;
-		}
-		else
-		{
-			return (J) this;
-		}
-	}
-
-	/**
-	 * Adds the class at the given position
-	 *
-	 * @param position
-	 * @param className
-	 *
-	 * @return
-	 */
-	@Override
-	public J addClass(int position, ICSSClassName className)
-	{
-		if (!getClasses().contains(className.toString()))
-		{
-			getClasses().add(position, className.toString());
-			return (J) this;
-		}
-		else
-		{
-			return (J) this;
-		}
-	}
-
-	/**
-	 * Ensure if there are children that new lines must be rendered
-	 *
-	 * @return
-	 */
-	@Override
-	public Boolean isNewLineForClosingTag()
-	{
-		if (hasChildren() && !isTiny())
-		{
-			return true;
-		}
-		else
-		{
-			return super.isNewLineForClosingTag();
-		}
 	}
 
 	/**
@@ -1033,7 +1056,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 *
 	 * @return
 	 */
-	public boolean removeClass(Enum className)
+	public boolean removeClass(@NotNull Enum className)
 	{
 		if (getClasses().contains(className.toString()))
 		{
@@ -1056,16 +1079,10 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 *
 	 * @return
 	 */
+	@Nullable
 	public <T extends ComponentHierarchyBase> T findParent(Class<T> parentType)
 	{
 		return findParent(this, parentType);
-	}
-
-	@Override
-	public J cloneComponent()
-	{
-		ComponentHierarchyBase cloned = super.cloneComponent();
-		return (J) cloned;
 	}
 
 	/**
@@ -1078,7 +1095,9 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 *
 	 * @return
 	 */
-	private <T extends ComponentHierarchyBase> T findParent(ComponentHierarchyBase root, Class<T> parentType)
+	@Nullable
+	@SuppressWarnings("unchecked")
+	private <T extends ComponentHierarchyBase> T findParent(@NotNull ComponentHierarchyBase root,@NotNull Class<T> parentType)
 	{
 		if (root.getParent() != null)
 		{
