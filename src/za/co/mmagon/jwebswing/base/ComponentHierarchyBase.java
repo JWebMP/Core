@@ -134,10 +134,13 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	public J add(int position, @NotNull C newChild)
 	{
 		ComponentHierarchyBase comp = ComponentHierarchyBase.class.cast(newChild);
-		comp.setParent(this);
-		comp.setTiny(isTiny());
-		comp.setPage(getPage());
-		getChildren().add(position, comp);
+		if (comp != null)
+		{
+			comp.setParent(this);
+			comp.setTiny(isTiny());
+			comp.setPage(getPage());
+			getChildren().add(position, comp);
+		}
 		return (J) this;
 	}
 
@@ -157,10 +160,13 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	public J add(@NotNull C newChild)
 	{
 		ComponentHierarchyBase comp = ComponentHierarchyBase.class.cast(newChild);
-		comp.setParent(this);
-		comp.setTiny(isTiny());
-		comp.setPage(getPage());
-		getChildren().add(comp);
+		if (comp != null)
+		{
+			comp.setParent(this);
+			comp.setTiny(isTiny());
+			comp.setPage(getPage());
+			getChildren().add(comp);
+		}
 		return (J) this;
 	}
 
