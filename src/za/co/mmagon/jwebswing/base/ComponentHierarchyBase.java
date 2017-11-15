@@ -283,10 +283,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	{
 		getChildren().forEach(child ->
 		                      {
-			                      if (!componentsToAddTo.contains(child))
-			                      {
-				                      componentsToAddTo.add(child);
-			                      }
+			                      componentsToAddTo.add(child);
 			                      child.getChildrenHierarchy(componentsToAddTo);
 		                      });
 		return componentsToAddTo;
@@ -797,19 +794,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof ComponentHierarchyBase))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-		return false;
+		return this == o || o instanceof ComponentHierarchyBase && (super.equals(o));
 	}
 
 	@Override

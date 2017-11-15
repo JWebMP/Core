@@ -268,7 +268,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	@SuppressWarnings("unchecked")
 	public J cloak()
 	{
-		addAttribute(AngularAttributes.ngCloak, null);
+		addAttribute(AngularAttributes.ngCloak, "");
 		AngularPageConfigurator.setRequired(this, true);
 		return (J) this;
 	}

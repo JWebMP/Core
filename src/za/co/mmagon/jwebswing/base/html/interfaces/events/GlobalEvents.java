@@ -16,13 +16,15 @@
  */
 package za.co.mmagon.jwebswing.base.html.interfaces.events;
 
+import java.io.Serializable;
+
 /**
  * Defines a global event that can be added to all components
  *
  * @author GedMarc
  * @since 214/12/20
  */
-public interface GlobalEvents
+public interface GlobalEvents extends Serializable
 {
 
 }
