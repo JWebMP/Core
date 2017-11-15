@@ -1,4 +1,5 @@
 **/*.iml
+*.iml
 .sass-cache
 .bowerrc
 .idea
