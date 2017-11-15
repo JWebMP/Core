@@ -155,6 +155,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 * @return The cloned component
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public J cloneComponent()
 	{
 		J component = null;

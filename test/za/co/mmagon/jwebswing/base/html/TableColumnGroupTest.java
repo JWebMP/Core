@@ -22,6 +22,7 @@ import za.co.mmagon.jwebswing.base.html.attributes.TableColumnAttributes;
 /**
  * @author GedMarc
  */
+@SuppressWarnings("unchecked")
 public class TableColumnGroupTest
 {
 	
