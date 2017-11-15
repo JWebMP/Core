@@ -50,7 +50,7 @@ public class ComponentHTMLAttributeTest
 				throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 			}
 		});
-		Event.class.cast(shell.getEvents().get(0)).setID("clickEvent");
+		Event.class.cast(shell.getEvents().stream().findFirst().get()).setID("clickEvent");
 		
 		ComponentBase shell2 = shell.cloneComponent();
 		shell2.setID("shell2");

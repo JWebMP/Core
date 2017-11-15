@@ -24,10 +24,9 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * This class marks a component as a web component.
@@ -50,12 +49,12 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	 * The CSS String List of this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private List<CSSReference> cssReferences;
+	private Set<CSSReference> cssReferences;
 	/**
 	 * The JavaSript String list for this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private List<JavascriptReference> javascriptReferences;
+	private Set<JavascriptReference> javascriptReferences;
 
 	/**
 	 * Instantiates a Component with the ability to have CSS and JavaScript references
@@ -118,6 +117,26 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	}
 
 	/**
+	 * Clones this component with all the CSS and JavaScript references
+	 *
+	 * @return
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J cloneComponent()
+	{
+		ComponentDependancyBase cloned = super.cloneComponent();
+
+		cloned.cssReferences = new LinkedHashSet();
+		cloned.javascriptReferences = new LinkedHashSet();
+		cloned.cssReferences.addAll(getCssReferences());
+		cloned.javascriptReferences.addAll(getJavascriptReferences());
+
+		return (J) cloned;
+	}
+
+	/**
 	 * Returns the strings of the CSS Links this will use
 	 * <p>
 	 *
@@ -125,11 +144,11 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	 */
 	@Override
 	@NotNull
-	public List<CSSReference> getCssReferences()
+	public Set<CSSReference> getCssReferences()
 	{
 		if (this.cssReferences == null)
 		{
-			this.cssReferences = new ArrayList<>();
+			this.cssReferences = new LinkedHashSet<>();
 		}
 		return this.cssReferences;
 	}
@@ -141,7 +160,7 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	 */
 	@Override
 	@NotNull
-	public List<CSSReference> getCssReferencesAll()
+	public Set<CSSReference> getCssReferencesAll()
 	{
 		return getCssReferences();
 	}
@@ -156,9 +175,9 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	 */
 	@Override
 	@NotNull
-	public List<CSSReference> getCssReferencesAll(@NotNull RequirementsPriority priority)
+	public Set<CSSReference> getCssReferencesAll(@NotNull RequirementsPriority priority)
 	{
-		List<CSSReference> arr = new CopyOnWriteArrayList<>();
+		Set<CSSReference> arr = new LinkedHashSet<>();
 
 		for (CSSReference next : getCssReferencesAll())
 		{
@@ -180,11 +199,11 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	 */
 	@Override
 	@NotNull
-	public List<JavascriptReference> getJavascriptReferences()
+	public Set<JavascriptReference> getJavascriptReferences()
 	{
 		if (javascriptReferences == null)
 		{
-			javascriptReferences = new ArrayList<>();
+			javascriptReferences = new LinkedHashSet<>();
 		}
 		return javascriptReferences;
 	}
@@ -196,9 +215,9 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	 */
 	@Override
 	@NotNull
-	public List<JavascriptReference> getJavascriptReferencesAll()
+	public Set<JavascriptReference> getJavascriptReferencesAll()
 	{
-		return Collections.synchronizedList(getJavascriptReferences());
+		return Collections.synchronizedSet(getJavascriptReferences());
 	}
 
 	/**
@@ -211,9 +230,9 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	 */
 	@Override
 	@NotNull
-	public List<JavascriptReference> getJavascriptReferencesAll(@NotNull RequirementsPriority priority)
+	public Set<JavascriptReference> getJavascriptReferencesAll(@NotNull RequirementsPriority priority)
 	{
-		List<JavascriptReference> arr = new CopyOnWriteArrayList<>();
+		Set<JavascriptReference> arr = new LinkedHashSet<>();
 		for (JavascriptReference next : getJavascriptReferencesAll())
 		{
 			if (!next.getPriority().equals(priority) || arr.contains(next))
@@ -257,25 +276,7 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 		return (J) this;
 	}
 
-	/**
-	 * Clones this component with all the CSS and JavaScript references
-	 *
-	 * @return
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J cloneComponent()
-	{
-		ComponentDependancyBase cloned = super.cloneComponent();
 
-		cloned.cssReferences = new ArrayList();
-		cloned.javascriptReferences = new ArrayList();
-		cloned.cssReferences.addAll(getCssReferences());
-		cloned.javascriptReferences.addAll(getJavascriptReferences());
-
-		return (J) cloned;
-	}
 
 	@Override
 	public void destroy()

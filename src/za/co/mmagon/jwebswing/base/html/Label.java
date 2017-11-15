@@ -202,9 +202,6 @@ public class Label<J extends Label<J>>
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + (getForInputComponent() != null ? getForInputComponent().hashCode() : 0);
-		result = 31 * result + (getForFormComponent() != null ? getForFormComponent().hashCode() : 0);
-		return result;
+		return super.hashCode();
 	}
 }

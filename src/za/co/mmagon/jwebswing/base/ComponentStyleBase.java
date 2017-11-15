@@ -408,14 +408,6 @@ public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enu
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + (getCss() != null ? getCss().hashCode() : 0);
-		result = 31 * result + (getHoverCss() != null ? getHoverCss().hashCode() : 0);
-		result = 31 * result + (getActiveCss() != null ? getActiveCss().hashCode() : 0);
-		result = 31 * result + (getLinkCss() != null ? getLinkCss().hashCode() : 0);
-		result = 31 * result + (getVisitedCss() != null ? getVisitedCss().hashCode() : 0);
-		result = 31 * result + getCssName().hashCode();
-		result = 31 * result + (getCssTypeHashMap() != null ? getCssTypeHashMap().hashCode() : 0);
-		return result;
+		return super.hashCode();
 	}
 }

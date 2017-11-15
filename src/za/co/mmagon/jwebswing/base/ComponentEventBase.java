@@ -30,9 +30,8 @@ import za.co.mmagon.logger.LogFactory;
 
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -70,7 +69,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	 * The event of this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private ArrayList<E> events;
+	private Set<E> events;
 
 	/**
 	 * The actual event type
@@ -159,6 +158,29 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	}
 
 	/**
+	 * Adds in the JavaScript References for the Features
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public Set<CSSReference> getCssReferencesAll()
+	{
+		Set<CSSReference> allCss = super.getCssReferencesAll();
+		getEvents().forEach((E feature) ->
+		                    {
+			                    for (Object css : ComponentEventBase.class.cast(feature).getCssReferencesAll())
+			                    {
+				                    if (!allCss.contains(CSSReference.class.cast(css)))
+				                    {
+					                    allCss.add(CSSReference.class.cast(css));
+				                    }
+			                    }
+		                    });
+		return allCss;
+	}
+
+	/**
 	 * Gets all registered events
 	 * <p>
 	 *
@@ -166,13 +188,36 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	 */
 	@Override
 	@NotNull
-	public List<E> getEvents()
+	public Set<E> getEvents()
 	{
 		if (events == null)
 		{
-			events = new ArrayList<>();
+			events = new LinkedHashSet<>();
 		}
 		return events;
+	}
+
+	/**
+	 * Adds in the JavaScript References for the Features
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public Set<JavascriptReference> getJavascriptReferencesAll()
+	{
+		Set<JavascriptReference> allJs = super.getJavascriptReferencesAll();
+		getEvents().forEach(feature ->
+		                    {
+			                    for (Object js : ComponentEventBase.class.cast(feature).getJavascriptReferencesAll())
+			                    {
+				                    if (!allJs.contains(JavascriptReference.class.cast(js)))
+				                    {
+					                    allJs.add(JavascriptReference.class.cast(js));
+				                    }
+			                    }
+		                    });
+		return allJs;
 	}
 
 	/**
@@ -184,9 +229,9 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	 */
 	@Override
 	@NotNull
-	public List<ComponentEventBase> getEventsFor(@NotNull EventTypes eventType)
+	public Set<ComponentEventBase> getEventsFor(@NotNull EventTypes eventType)
 	{
-		ArrayList<ComponentEventBase> output = new ArrayList<>();
+		Set<ComponentEventBase> output = new LinkedHashSet<>();
 		for (E e : getEvents())
 		{
 			ComponentEventBase next = (ComponentEventBase) e;
@@ -277,60 +322,29 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 		return null;
 	}
 
-	/**
-	 * Adds in the JavaScript References for the Features
-	 *
-	 * @return
-	 */
-	@Override
-	@NotNull
-	public List<JavascriptReference> getJavascriptReferencesAll()
-	{
-		List<JavascriptReference> allJs = super.getJavascriptReferencesAll();
-		getEvents().forEach(feature ->
-		                    {
-			                    for (Object js : ComponentEventBase.class.cast(feature).getJavascriptReferencesAll())
-			                    {
-				                    if (!allJs.contains(JavascriptReference.class.cast(js)))
-				                    {
-					                    allJs.add(JavascriptReference.class.cast(js));
-				                    }
-			                    }
-		                    });
-		return allJs;
-	}
-
-	/**
-	 * Adds in the JavaScript References for the Features
-	 *
-	 * @return
-	 */
-	@Override
-	@NotNull
-	public List<CSSReference> getCssReferencesAll()
-	{
-		List<CSSReference> allCss = super.getCssReferencesAll();
-		getEvents().forEach((E feature) ->
-		                    {
-			                    for (Object css : ComponentEventBase.class.cast(feature).getCssReferencesAll())
-			                    {
-				                    if (!allCss.contains(CSSReference.class.cast(css)))
-				                    {
-					                    allCss.add(CSSReference.class.cast(css));
-				                    }
-			                    }
-		                    });
-		return allCss;
-	}
-
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + getEvents().hashCode();
-		result = 31 * result + eventType.hashCode();
-		return result;
+		return super.hashCode();
 	}
+
+	/**
+	 * Clones the component and all its events
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J cloneComponent()
+	{
+		ComponentEventBase cloned = super.cloneComponent();
+		cloned.events = new LinkedHashSet();
+		cloned.events.addAll(getEvents());
+		return (J) cloned;
+	}
+
+
 
 	@Override
 	public boolean equals(Object o)
@@ -384,31 +398,5 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 		super.destroy();
 	}
 
-	/**
-	 * Returns null
-	 *
-	 * @return
-	 */
-	@Override
-	@Null
-	public ComponentHierarchyBase getComponent()
-	{
-		return null;
-	}
 
-	/**
-	 * Clones the component and all its events
-	 *
-	 * @return
-	 */
-	@Override
-	@NotNull
-	@SuppressWarnings("unchecked")
-	public J cloneComponent()
-	{
-		ComponentEventBase cloned = super.cloneComponent();
-		cloned.events = new ArrayList();
-		cloned.events.addAll(getEvents());
-		return (J) cloned;
-	}
 }

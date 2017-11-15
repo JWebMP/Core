@@ -159,6 +159,7 @@ public class Meta extends ComponentHierarchyBase<NoChildren, MetaAttributes, NoF
 		}
 	}
 
+
 	/**
 	 * A set list of fields available to the Meta tag
 	 */
@@ -207,4 +208,21 @@ public class Meta extends ComponentHierarchyBase<NoChildren, MetaAttributes, NoF
 		}
 	}
 
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (o instanceof Meta)
+		{
+			Meta m = (Meta) o;
+			return getAttributes().entrySet().equals(m.getAttributes().entrySet());
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
+	}
 }

@@ -17,6 +17,7 @@
 package za.co.mmagon.jwebswing;
 
 import com.armineasy.injection.GuiceContext;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import za.co.mmagon.jwebswing.base.ComponentEventBase;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
@@ -56,16 +57,14 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * The variables to return
-	 */
-	private List<String> variables;
-	/**
 	 * A list of all queries to execute on ajax response
 	 */
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private List<Event> runEvents;
 	/**
 	 * Any features that must be run
 	 */
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private List<Feature> runFeatures;
 	/**
 	 * A set of components that this event can construct
@@ -199,33 +198,6 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 		return s2;
 	}
 
-	/**
-	 * Returns the list of currently associated variables
-	 *
-	 * @return
-	 */
-	@Override
-	public List<String> getVariables()
-	{
-		if (variables == null)
-		{
-			variables = new ArrayList<>();
-		}
-		return variables;
-	}
-
-	/**
-	 * Sets the current list of variables to return
-	 *
-	 * @param variables
-	 *
-	 * @return
-	 */
-	public J setVariables(List<String> variables)
-	{
-		this.variables = variables;
-		return (J) this;
-	}
 
 	/**
 	 * The method that is fired on call

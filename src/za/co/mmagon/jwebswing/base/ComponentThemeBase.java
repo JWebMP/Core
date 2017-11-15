@@ -26,9 +26,9 @@ import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * A Theme-Able Component. Only requirement is a tag, keeping it separate for the many different ways that other developers have done their themes
@@ -55,7 +55,7 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 	 * The associated theme
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private ArrayList<Theme> themes;
+	private Set<Theme> themes;
 
 	/**
 	 * Constructs a theme controller for a component
@@ -83,30 +83,9 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 	 * @return
 	 */
 	@Override
-	public List<JavascriptReference> getJavascriptReferencesAll()
+	public Set<CSSReference> getCssReferencesAll()
 	{
-		List<JavascriptReference> allJs = super.getJavascriptReferencesAll();
-		getThemes().forEach((Theme feature)
-				                    -> Theme.class.cast(feature).getJavascriptReferences().forEach(js ->
-				                                                                                   {
-					                                                                                   if (!allJs.contains(js))
-					                                                                                   {
-						                                                                                   allJs.add(js);
-					                                                                                   }
-				                                                                                   })
-		                   );
-		return allJs;
-	}
-
-	/**
-	 * Adds in the JavaScript References for the Features
-	 *
-	 * @return
-	 */
-	@Override
-	public List<CSSReference> getCssReferencesAll()
-	{
-		List<CSSReference> allCss = super.getCssReferencesAll();
+		Set<CSSReference> allCss = super.getCssReferencesAll();
 		getThemes().forEach((Theme feature)
 				                    ->
 		                    {
@@ -125,17 +104,38 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 	}
 
 	/**
+	 * Adds in the JavaScript References for the Features
+	 *
+	 * @return
+	 */
+	@Override
+	public Set<JavascriptReference> getJavascriptReferencesAll()
+	{
+		Set<JavascriptReference> allJs = super.getJavascriptReferencesAll();
+		getThemes().forEach((Theme feature)
+				                    -> Theme.class.cast(feature).getJavascriptReferences().forEach(js ->
+				                                                                                   {
+					                                                                                   if (!allJs.contains(js))
+					                                                                                   {
+						                                                                                   allJs.add(js);
+					                                                                                   }
+				                                                                                   })
+		                   );
+		return allJs;
+	}
+
+	/**
 	 * Returns the parents theme or the applied theme
 	 * <p>
 	 *
 	 * @return The theme
 	 */
 	@Override
-	public List<Theme> getThemes()
+	public Set<Theme> getThemes()
 	{
 		if (this.themes == null)
 		{
-			this.themes = new ArrayList<>();
+			this.themes = new LinkedHashSet<>();
 		}
 		return this.themes;
 	}
@@ -175,8 +175,6 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + getThemes().hashCode();
-		return result;
+		return super.hashCode();
 	}
 }

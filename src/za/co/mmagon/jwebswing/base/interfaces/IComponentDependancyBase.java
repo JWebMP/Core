@@ -21,7 +21,7 @@ import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @param <J> Always this object
@@ -63,14 +63,14 @@ public interface IComponentDependancyBase<J extends ComponentBase>
 	 *
 	 * @return ArrayList of all CSS File Links in String format
 	 */
-	List<CSSReference> getCssReferences();
+	Set<CSSReference> getCssReferences();
 	
 	/**
 	 * Return all the CSS References associated with this component
 	 *
 	 * @return
 	 */
-	List<CSSReference> getCssReferencesAll();
+	Set<CSSReference> getCssReferencesAll();
 	
 	/**
 	 * Returns all the CSS references with the given priority
@@ -79,7 +79,7 @@ public interface IComponentDependancyBase<J extends ComponentBase>
 	 *
 	 * @return A new array list of all the requested for references
 	 */
-	List<CSSReference> getCssReferencesAll(RequirementsPriority priority);
+	Set<CSSReference> getCssReferencesAll(RequirementsPriority priority);
 	
 	/**
 	 * Returns the JavaScript links attached to this component
@@ -87,7 +87,7 @@ public interface IComponentDependancyBase<J extends ComponentBase>
 	 *
 	 * @return
 	 */
-	List<JavascriptReference> getJavascriptReferences();
+	Set<JavascriptReference> getJavascriptReferences();
 	
 	/**
 	 * Return all the CSS References associated with this component.
@@ -95,7 +95,7 @@ public interface IComponentDependancyBase<J extends ComponentBase>
 	 *
 	 * @return
 	 */
-	List<JavascriptReference> getJavascriptReferencesAll();
+	Set<JavascriptReference> getJavascriptReferencesAll();
 	
 	/**
 	 * Returns all the CSS references with the given priority
@@ -105,7 +105,7 @@ public interface IComponentDependancyBase<J extends ComponentBase>
 	 *
 	 * @return A new array list of all the requested for references
 	 */
-	List<JavascriptReference> getJavascriptReferencesAll(RequirementsPriority priority);
+	Set<JavascriptReference> getJavascriptReferencesAll(RequirementsPriority priority);
 	
 	
 	/**

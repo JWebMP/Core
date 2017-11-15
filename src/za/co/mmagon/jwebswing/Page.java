@@ -51,6 +51,7 @@ import za.co.mmagon.jwebswing.base.servlets.interfaces.IPage;
 import za.co.mmagon.jwebswing.generics.WebReference;
 import za.co.mmagon.logger.LogFactory;
 
+import javax.validation.constraints.NotNull;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -262,20 +263,6 @@ public class Page extends Html implements IPage
 	public ComponentFeatureBase addFeature(ComponentFeatureBase feature)
 	{
 		return getBody().addFeature(feature);
-	}
-
-	/**
-	 * Adds a feature to the body
-	 *
-	 * @param feature
-	 * @param position
-	 *
-	 * @return
-	 */
-	@Override
-	public ComponentFeatureBase addFeature(ComponentFeatureBase feature, int position)
-	{
-		return getBody().addFeature(feature, position);
 	}
 
 	/**
@@ -723,13 +710,13 @@ public class Page extends Html implements IPage
 	 */
 	private List<ComponentHierarchyBase> getPriorityRequirements(RequirementsPriority priority, List<ComponentHierarchyBase> input, boolean css, boolean javascript)
 	{
-		List<ComponentHierarchyBase> requirements = new CopyOnWriteArrayList<>();
+		Set<ComponentHierarchyBase> requirements = new LinkedHashSet<>();
 		if (css)
 		{
 			List<CSSLink> links = getAllCssLinks(priority);
 			for (CSSLink link : links)
 			{
-				if (!input.contains(link) && !requirements.contains(link))
+				if (!input.contains(link))
 				{
 					requirements.add(link);
 				}
@@ -738,17 +725,17 @@ public class Page extends Html implements IPage
 		if (javascript)
 
 		{
-			List<Script> scripts = getAllScripts(priority);
+			Set<Script> scripts = getAllScripts(priority);
 			for (Script script : scripts)
 			{
-				if (!input.contains(script) && !requirements.contains(script))
+				if (!input.contains(script))
 				{
 					requirements.add(script);
 				}
 			}
 		}
 
-		return requirements;
+		return new ArrayList<>(requirements);
 	}
 
 	/**
@@ -758,9 +745,11 @@ public class Page extends Html implements IPage
 	 *
 	 * @return
 	 */
-	private List<CSSLink> getAllCssLinks(RequirementsPriority priority)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	private List<CSSLink> getAllCssLinks(@NotNull RequirementsPriority priority)
 	{
-		List<CSSReference> allReferences = getBody().getCssReferencesAll(priority);
+		List<CSSReference> allReferences = new ArrayList<>(getBody().getCssReferencesAll(priority));
 		allReferences.sort(WebReference.getDummyReference());
 		ArrayList<CSSLink> allLinks = new ArrayList<>();
 
@@ -989,18 +978,6 @@ public class Page extends Html implements IPage
 		this.pageInitialized = pageInitialized;
 	}
 
-	@Override
-	public List getJavascriptReferences()
-	{
-		return getBody().getJavascriptReferences();
-	}
-
-	@Override
-	public List getCssReferences()
-	{
-		return getBody().getCssReferences();
-	}
-
 	/**
 	 * Gets all the scripts for all the body components
 	 *
@@ -1008,22 +985,31 @@ public class Page extends Html implements IPage
 	 *
 	 * @return
 	 */
-	private List<Script> getAllScripts(RequirementsPriority priority)
+	@SuppressWarnings("unchecked")
+	private Set<Script> getAllScripts(RequirementsPriority priority)
 	{
-		List<JavascriptReference> allJavascripts = getBody().getJavascriptReferencesAll(priority);
+		List<JavascriptReference> allJavascripts = new ArrayList<>(getBody().getJavascriptReferencesAll(priority));
 		allJavascripts.sort(WebReference.getDummyReference());
-		ArrayList<Script> allScripts = new ArrayList<>();
-
+		Set<Script> allScripts = new LinkedHashSet<>();
 		for (JavascriptReference reference : allJavascripts)
 		{
 			Script script = new Script(reference);
 			script.setNewLineForClosingTag(false);
-			if (!allScripts.contains(script))
-			{
-				allScripts.add(script);
-			}
+			allScripts.add(script);
 		}
 		return allScripts;
+	}
+
+	@Override
+	public Set getCssReferences()
+	{
+		return getBody().getCssReferences();
+	}
+
+	@Override
+	public Set getJavascriptReferences()
+	{
+		return getBody().getJavascriptReferences();
 	}
 
 	/**

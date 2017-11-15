@@ -29,7 +29,7 @@ import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @param <E> This event type
@@ -56,7 +56,7 @@ public interface IComponentEventBase<E extends GlobalEvents, J extends Component
 	 *
 	 * @return
 	 */
-	List<CSSReference> getCssReferencesAll();
+	Set<CSSReference> getCssReferencesAll();
 	
 	/**
 	 * Returns the event type for this event
@@ -72,7 +72,7 @@ public interface IComponentEventBase<E extends GlobalEvents, J extends Component
 	 *
 	 * @return A Hash Map containing the event type and the events associated with it
 	 */
-	List<E> getEvents();
+	Set<E> getEvents();
 	
 	/**
 	 * Returns all the events associated with the given type
@@ -81,22 +81,22 @@ public interface IComponentEventBase<E extends GlobalEvents, J extends Component
 	 *
 	 * @return
 	 */
-	List<ComponentEventBase> getEventsFor(EventTypes eventType);
+	Set<ComponentEventBase> getEventsFor(EventTypes eventType);
 	
 	/**
 	 * Adds in the JavaScript References for the Features
 	 *
 	 * @return
 	 */
-	List<JavascriptReference> getJavascriptReferencesAll();
+	Set<JavascriptReference> getJavascriptReferencesAll();
 	
 	/**
 	 * In case need to put extra logic here
 	 *
 	 * @return
 	 */
-	List<StringBuilder> getQueriesAll();
-	
+	Set<StringBuilder> getQueriesAll();
+
 	/**
 	 * Events are types of feature that have server side support. These are referenced using the Ajax Receiver.
 	 * <p>

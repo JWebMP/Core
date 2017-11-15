@@ -191,7 +191,7 @@ public class CSSLink<J extends CSSLink<J>>
 	@Override
 	public int hashCode()
 	{
-		return Objects.hash(super.hashCode(), isThemeLink(), isPrettifyTheme(), getLinkedReference());
+		return Objects.hash(super.hashCode(), isPrettifyTheme(), getLinkedReference());
 	}
 	
 	/**

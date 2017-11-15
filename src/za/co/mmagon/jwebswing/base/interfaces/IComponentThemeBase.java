@@ -20,7 +20,7 @@ import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @param <J>
@@ -37,14 +37,14 @@ public interface IComponentThemeBase
 	 *
 	 * @return
 	 */
-	List<CSSReference> getCssReferencesAll();
+	Set<CSSReference> getCssReferencesAll();
 
 	/**
 	 * Adds in the JavaScript References for the Features
 	 *
 	 * @return
 	 */
-	List<JavascriptReference> getJavascriptReferencesAll();
+	Set<JavascriptReference> getJavascriptReferencesAll();
 
 	/**
 	 * Returns the parents theme or the applied theme
@@ -52,6 +52,6 @@ public interface IComponentThemeBase
 	 *
 	 * @return The theme
 	 */
-	List<Theme> getThemes();
+	Set<Theme> getThemes();
 
 }

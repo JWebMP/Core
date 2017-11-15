@@ -24,7 +24,7 @@ import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @param <F>
@@ -35,17 +35,6 @@ import java.util.List;
  */
 public interface IComponentFeatureBase<F extends GlobalFeatures, J extends ComponentBase>
 {
-	
-	/**
-	 * Adds a feature to the collection
-	 *
-	 * @param feature
-	 * @param position
-	 *
-	 * @return
-	 */
-	J addFeature(ComponentFeatureBase feature, int position);
-	
 	/**
 	 * Adds a feature to the collection
 	 *
@@ -67,14 +56,14 @@ public interface IComponentFeatureBase<F extends GlobalFeatures, J extends Compo
 	 *
 	 * @return
 	 */
-	List<CSSReference> getCssReferencesAll();
+	Set<CSSReference> getCssReferencesAll();
 	
 	/**
 	 * Adds in the JavaScript References for the Features
 	 *
 	 * @return
 	 */
-	List<JavascriptReference> getJavascriptReferencesAll();
+	Set<JavascriptReference> getJavascriptReferencesAll();
 	
 	/**
 	 * Returns the name of this feature
@@ -102,7 +91,7 @@ public interface IComponentFeatureBase<F extends GlobalFeatures, J extends Compo
 	 *
 	 * @return
 	 */
-	List<StringBuilder> getQueriesAll();
+	Set<StringBuilder> getQueriesAll();
 	
 	/**
 	 * Sets the sort order for this feature. Default 10000
@@ -116,7 +105,7 @@ public interface IComponentFeatureBase<F extends GlobalFeatures, J extends Compo
 	 *
 	 * @return
 	 */
-	List<String> getVariables();
+	Set<String> getVariables();
 	
 	/**
 	 * Sets if this feature must be rendered in an $(document).ready statement

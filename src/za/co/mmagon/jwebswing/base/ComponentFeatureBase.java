@@ -32,10 +32,7 @@ import za.co.mmagon.logger.LogFactory;
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.logging.Level;
 
 import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_NEWLINE_TEXT;
@@ -76,12 +73,12 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 * The features of this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private ArrayList<F> features;
+	private Set<F> features;
 	/**
 	 * The list of queries in this feature
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private List<StringBuilder> queries;
+	private Set<StringBuilder> queries;
 	/**
 	 * The sort order for this feature
 	 */
@@ -90,7 +87,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 * The variables associated with this feature
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private List<String> variables;
+	private Set<String> variables;
 	/**
 	 * Name of this feature, not yet used anywhere.. Wondering on it's usefulness
 	 */
@@ -118,7 +115,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	{
 		super(ComponentTypes.Feature);
 		this.name = name;
-		variables = new ArrayList<>();
+		variables = new LinkedHashSet<>();
 	}
 
 	/**
@@ -150,18 +147,15 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 */
 	@Override
 	@NotNull
-	public List<CSSReference> getCssReferencesAll()
+	public Set<CSSReference> getCssReferencesAll()
 	{
-		List<CSSReference> allCss = super.getCssReferencesAll();
+		Set<CSSReference> allCss = super.getCssReferencesAll();
 		getFeatures().forEach(feature ->
 		                      {
 			                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
 			                      for (Object css : cfb.getCssReferencesAll())
 			                      {
-				                      if (!allCss.contains(CSSReference.class.cast(css)))
-				                      {
-					                      allCss.add(CSSReference.class.cast(css));
-				                      }
+				                      allCss.add(CSSReference.class.cast(css));
 			                      }
 		                      });
 		return allCss;
@@ -219,9 +213,9 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	@Override
 	@NotNull
 	@SuppressWarnings("unchecked")
-	public List<JavascriptReference> getJavascriptReferencesAll()
+	public Set<JavascriptReference> getJavascriptReferencesAll()
 	{
-		List<JavascriptReference> allJs = super.getJavascriptReferencesAll();
+		Set<JavascriptReference> allJs = super.getJavascriptReferencesAll();
 		getFeatures().forEach(feature ->
 		                      {
 			                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
@@ -234,30 +228,6 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 			                      }
 		                      });
 		return allJs;
-	}
-
-	/**
-	 * Adds a feature to the collection
-	 *
-	 * @param feature
-	 * @param position
-	 *
-	 * @return
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J addFeature(@NotNull ComponentFeatureBase feature, int position)
-	{
-		if (!feature.getComponentType().equals(ComponentTypes.Feature))
-		{
-			LOG.log(Level.WARNING, "Tried to add a non-feature to the feature collection");
-		}
-		else if (!getFeatures().contains(feature))
-		{
-			getFeatures().add(position, (F) feature);
-		}
-		return (J) this;
 	}
 
 	/**
@@ -275,11 +245,11 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 * @return An ArrayList of features
 	 */
 	@NotNull
-	public List<F> getFeatures()
+	public Set<F> getFeatures()
 	{
 		if (features == null)
 		{
-			features = new ArrayList<>();
+			features = new LinkedHashSet<>();
 		}
 		return features;
 	}
@@ -445,7 +415,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 */
 	@Override
 	@NotNull
-	public List<StringBuilder> getQueriesAll()
+	public Set<StringBuilder> getQueriesAll()
 	{
 		return getQueries();
 	}
@@ -484,11 +454,11 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 */
 	@Override
 	@NotNull
-	public List<String> getVariables()
+	public Set<String> getVariables()
 	{
 		if (variables == null)
 		{
-			variables = new ArrayList<>();
+			variables = new LinkedHashSet<>();
 		}
 		return variables;
 	}
@@ -597,11 +567,11 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	@JsonProperty("queries")
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	@NotNull
-	private List<StringBuilder> getQueries()
+	private Set<StringBuilder> getQueries()
 	{
 		if (queries == null)
 		{
-			queries = new ArrayList<>();
+			queries = new LinkedHashSet<>();
 		}
 		return queries;
 	}

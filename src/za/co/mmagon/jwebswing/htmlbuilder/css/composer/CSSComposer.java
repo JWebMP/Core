@@ -57,18 +57,15 @@ public class CSSComposer
 		ArrayList<CSSBlock> list = new ArrayList<>();
 		if (includeChildren)
 		{
-			List<ComponentHierarchyBase> comp = o.getChildrenHierarchy(true);
-			List<ComponentStyleBase> compti = new ArrayList<>();
+			Set<ComponentHierarchyBase> comp = o.getChildrenHierarchy(true);
+			Set<ComponentStyleBase> compti = new LinkedHashSet<>();
 
 			comp.forEach(co ->
 			             {
 				             if (ComponentStyleBase.class.isAssignableFrom(co.getClass()))
 				             {
 					             ComponentStyleBase chb = ComponentStyleBase.class.cast(co);
-					             if (!compti.contains(chb))
-					             {
-						             compti.add(chb);
-					             }
+					             compti.add(chb);
 				             }
 			             });
 

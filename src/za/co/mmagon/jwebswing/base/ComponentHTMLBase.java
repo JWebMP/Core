@@ -735,15 +735,6 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + getTag().hashCode();
-		result = 31 * result + isInlineClosingTag().hashCode();
-		result = 31 * result + isClosingTag().hashCode();
-		result = 31 * result + (isNewLineForRawText() ? 1 : 0);
-		result = 31 * result + (isNewLineForClosingTag() ? 1 : 0);
-		result = 31 * result + getCurrentTabIndentString().hashCode();
-		result = 31 * result + getCurrentTabIndents();
-		result = 31 * result + (isRenderTextBeforeChildren() ? 1 : 0);
-		return result;
+		return super.hashCode();
 	}
 }

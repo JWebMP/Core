@@ -26,6 +26,7 @@ import za.co.mmagon.jwebswing.base.interfaces.IComponentHTMLAngularBase;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
+import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
@@ -96,7 +97,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J addAttribute(AngularAttributes attribute, String value)
+	public J addAttribute(@NotNull AngularAttributes attribute, @NotNull String value)
 	{
 		getAttributesAngular().put(attribute, value);
 		return (J) this;
@@ -110,8 +111,8 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	 * @return
 	 */
 	@Override
-	@NotNull
-	public String getAttribute(AngularAttributes attribute)
+	@Nullable
+	public String getAttribute(@NotNull AngularAttributes attribute)
 	{
 		return getAttributesAngular().get(attribute);
 	}
@@ -275,9 +276,6 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + getAttributesAngular().hashCode();
-		result = 31 * result + getAngularObjects().hashCode();
-		return result;
+		return super.hashCode();
 	}
 }

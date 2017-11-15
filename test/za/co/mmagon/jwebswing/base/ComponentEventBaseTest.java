@@ -62,7 +62,7 @@ public class ComponentEventBaseTest extends BaseTestClass
 				throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 			}
 		});
-		Event.class.cast(shell.getEvents().get(0)).setID("clickEvent");
+		Event.class.cast(shell.getEvents().stream().findFirst().get()).setID("clickEvent");
 		
 		ComponentBase shell2 = shell.cloneComponent();
 		shell2.setID("shell2");
@@ -152,8 +152,8 @@ public class ComponentEventBaseTest extends BaseTestClass
 				throw new UnsupportedOperationException("Not supported yet.");
 			}
 		});
-		
-		Event.class.cast(shell.getEvents().get(0)).setID("clickEvent");
+
+		Event.class.cast(shell.getEvents().stream().findFirst().get()).setID("clickEvent");
 		d.addEvent(e);
 		
 		System.out.println(d.toString(true));
@@ -175,8 +175,8 @@ public class ComponentEventBaseTest extends BaseTestClass
 				throw new UnsupportedOperationException("Not supported yet.");
 			}
 		});
-		
-		Event.class.cast(shell.getEvents().get(0)).setID("clickEvent");
+
+		Event.class.cast(shell.getEvents().stream().findFirst().get()).setID("clickEvent");
 		d.addEvent(e);
 		
 		Page page = getInstance();

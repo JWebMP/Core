@@ -86,7 +86,7 @@ public class BaseTest extends BaseTestClass
 	@Test
 	public void testBaseTiny()
 	{
-		Page page = getPage();
+		Page page = getInstance();
 		Base instance = new Base();
 		page.getPageFields().setBase(instance);
 		instance.addAttribute(BaseAttributes.Target, "Target Frame");
@@ -94,7 +94,6 @@ public class BaseTest extends BaseTestClass
 		System.out.println(instance.toString(true));
 		String expResult;
 		String result;
-
 		page.setTiny(false);
 		System.out.println(page.toString(true));
 		expResult = "<!DOCTYPE html>\n" +
@@ -110,7 +109,7 @@ public class BaseTest extends BaseTestClass
 	@Test
 	public void testBaseTinyPage()
 	{
-		Page page = getPage();
+		Page page = getInstance();
 		Base instance = new Base();
 		page.getPageFields().setBase(instance);
 		instance.addAttribute(BaseAttributes.Target, "Target Frame");

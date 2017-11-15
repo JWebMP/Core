@@ -26,8 +26,8 @@ import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @param <C> All allowed children
@@ -38,19 +38,6 @@ import java.util.Map;
  */
 public interface IComponentHierarchyBase<C, J extends ComponentBase>
 {
-	
-	/**
-	 * Add a new child to this component
-	 * <p>
-	 *
-	 * @param position Position in the hierarchy to add the component
-	 * @param newChild The child to be added
-	 *                 <p>
-	 *
-	 * @return The new child added
-	 */
-	J add(int position, C newChild);
-	
 	/**
 	 * Add a new child to this component
 	 * <p>
@@ -94,7 +81,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 *
 	 * @return An array list of components
 	 */
-	List<ComponentHierarchyBase>  getChildren();
+	Set<ComponentHierarchyBase> getChildren();
 	
 	/**
 	 * Get an array list of all children and their children recursively Includes this object
@@ -102,7 +89,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 *
 	 * @return A complete array list of all children at time of call
 	 */
-	List<ComponentHierarchyBase> getChildrenHierarchy();
+	Set<ComponentHierarchyBase> getChildrenHierarchy();
 	
 	/**
 	 * Get an array list of all children and their children recursively Excludes this object
@@ -113,7 +100,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 *
 	 * @return A complete array list of all children at time of call
 	 */
-	List<ComponentHierarchyBase> getChildrenHierarchy(boolean trues);
+	Set<ComponentHierarchyBase> getChildrenHierarchy(boolean trues);
 	
 	/**
 	 * Adds the children of this component onto the array list coming in
@@ -124,28 +111,28 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 *
 	 * @return original components added with
 	 */
-	List<ComponentHierarchyBase> getChildrenHierarchy(List<ComponentHierarchyBase> componentsToAddTo);
+	Set<ComponentHierarchyBase> getChildrenHierarchy(Set<ComponentHierarchyBase> componentsToAddTo);
 	
 	/**
 	 * Adds in the JavaScript References for all the children
 	 *
 	 * @return
 	 */
-	List<CSSReference> getCssReferencesAll();
+	Set<CSSReference> getCssReferencesAll();
 	
 	/**
 	 * Returns a complete list of events
 	 *
 	 * @return
 	 */
-	List<Event> getEventsAll();
+	Set<Event> getEventsAll();
 	
 	/**
 	 * Adds in the JavaScript References for all the children
 	 *
 	 * @return
 	 */
-	List<JavascriptReference> getJavascriptReferencesAll();
+	Set<JavascriptReference> getJavascriptReferencesAll();
 	
 	/**
 	 * Get the page this component exists on
@@ -167,7 +154,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 *
 	 * @return
 	 */
-	List<StringBuilder> getQueriesAll();
+	Set<StringBuilder> getQueriesAll();
 	
 	/**
 	 * *
@@ -175,7 +162,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 *
 	 * @return
 	 */
-	List<String> getVariablesAll();
+	Set<String> getVariablesAll();
 	
 	/**
 	 * Returns if this object has children or not
@@ -288,24 +275,14 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return
 	 */
 	J addClass(ICSSClassName className);
-	
-	/**
-	 * Adds the class at the given position
-	 *
-	 * @param position
-	 * @param className
-	 *
-	 * @return
-	 */
-	public J addClass(int position, ICSSClassName className);
-	
+
 	/**
 	 * Returns a complete list of all class names associated with this component
 	 * <p>
 	 *
 	 * @return
 	 */
-	List<String> getClasses();
+	Set<String> getClasses();
 	
 	/**
 	 * Set the theme applied to this component
@@ -316,10 +293,14 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return This Class
 	 */
 	J addTheme(Theme theme);
-	
-	public void init();
-	public void preConfigure();
-	public boolean isConfigured();
-	public boolean isInitialized();
-	public void destroy();
+
+	void init();
+
+	void preConfigure();
+
+	boolean isConfigured();
+
+	boolean isInitialized();
+
+	void destroy();
 }

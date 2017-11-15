@@ -293,8 +293,6 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + getInputType().hashCode();
-		return result;
+		return super.hashCode();
 	}
 }
