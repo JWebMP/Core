@@ -36,7 +36,8 @@ public class CommentTest
 	public void testtoString()
 	{
 		String expected = "<!-- This is the comment -->";
-		String result = comment.toString(true).toString();
+		comment.setTiny(false);
+		String result = comment.toString(true);
 		assertEquals(expected, result);
 		System.out.println(comment.toString(true));
 	}
@@ -47,7 +48,7 @@ public class CommentTest
 		comment = new Comment("This is not supposed to render");
 		String expected = "";
 		comment.setTiny(true);
-		String result = comment.toString(true).toString();
+		String result = comment.toString(true);
 		assertEquals(expected, result);
 		System.out.println(comment.toString(true));
 	}
