@@ -69,7 +69,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	 * The event of this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private transient Set<E> events;
+	private Set<E> events;
 
 	/**
 	 * The actual event type

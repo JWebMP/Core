@@ -73,7 +73,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 * The features of this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private transient Set<F> features;
+	private Set<F> features;
 	/**
 	 * The list of queries in this feature
 	 */
