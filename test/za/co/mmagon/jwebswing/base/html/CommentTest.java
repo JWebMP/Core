@@ -25,9 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class CommentTest
 {
-	
-	Comment comment = new Comment("This is the comment");
-	
 	public CommentTest()
 	{
 	}
@@ -35,6 +32,7 @@ public class CommentTest
 	@Test
 	public void testtoString()
 	{
+		Comment comment = new Comment("This is the comment");
 		String expected = "<!-- This is the comment -->";
 		comment.setTiny(false);
 		String result = comment.toString(true);
@@ -45,11 +43,12 @@ public class CommentTest
 	@Test
 	public void testTinytoString()
 	{
+		Comment comment = new Comment("This is the comment");
 		comment = new Comment("This is not supposed to render");
 		String expected = "";
 		comment.setTiny(true);
 		String result = comment.toString(true);
-		assertEquals(expected, result);
 		System.out.println(comment.toString(true));
+		assertEquals(expected, result);
 	}
 }

@@ -41,7 +41,7 @@ public class ComponentHTMLAttributeTest
 	{
 		ComponentHTMLAttributeBase shell = new ComponentHTMLAttributeBase(ComponentTypes.Abbreviation);
 		shell.setID("shell");
-		shell.addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
+		shell.addJavaScriptReference(JQueryReferencePool.PersistJS.getJavaScriptReference());
 		shell.addEvent(new ClickAdapter(new Div())
 		{
 			@Override
@@ -57,86 +57,85 @@ public class ComponentHTMLAttributeTest
 		System.out.println(shell);
 		System.out.println(shell2);
 		String shellExpected = "{\n" +
-				"  \"id\" : \"shell\",\n" +
-				"  \"componentType\" : \"abbreviation\",\n" +
-				"  \"tiny\" : false,\n" +
-				"  \"configured\" : true,\n" +
-				"  \"initialized\" : true,\n" +
-				"  \"touched\" : false,\n" +
-				"  \"javascriptReferences\" : [ {\n" +
-				"    \"cordovaRequired\" : false,\n" +
-				"    \"name\" : \"JQuery\",\n" +
-				"    \"version\" : 2.24,\n" +
-				"    \"reference\" : \"bower_components/jquery/dist/jquery.js\"\n" +
-				"  } ],\n" +
-				"  \"sortOrder\" : 1000,\n" +
-				"  \"renderAfterLoad\" : false,\n" +
-				"  \"javascriptRenderedElsewhere\" : false,\n" +
-				"  \"events\" : [ {\n" +
-				"    \"id\" : \"clickEvent\",\n" +
-				"    \"componentType\" : \"event\",\n" +
-				"    \"tiny\" : false,\n" +
-				"    \"configured\" : true,\n" +
-				"    \"initialized\" : true,\n" +
-				"    \"touched\" : false,\n" +
-				"    \"sortOrder\" : 1000,\n" +
-				"    \"name\" : \"click\",\n" +
-				"    \"renderAfterLoad\" : false,\n" +
-				"    \"javascriptRenderedElsewhere\" : false,\n" +
-				"    \"registeredComponents\" : [ \"za.co.mmagon.jwebswing.base.html.Div\" ],\n" +
-				"    \"eventType\" : \"click\"\n" +
-				"  } ],\n" +
-				"  \"tag\" : \"abbr\",\n" +
-				//"  \"inlineClosingTag\" : false,\n" +
-				"  \"closingTag\" : true,\n" +
-				"  \"newLineForRawText\" : false,\n" +
-				"  \"newLineForClosingTag\" : true,\n" +
-				"  \"renderTextBeforeChildren\" : true,\n" +
-				"  \"attributes\" : {\n" +
-				"    \"id\" : \"shell\"\n" +
-				"  },\n" +
-				"  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentHTMLAttributeBase\"\n" +
-				"}";
+				                       "  \"id\" : \"shell\",\n" +
+				                       "  \"componentType\" : \"abbreviation\",\n" +
+				                       "  \"tiny\" : false,\n" +
+				                       "  \"configured\" : true,\n" +
+				                       "  \"initialized\" : true,\n" +
+				                       "  \"touched\" : false,\n" +
+				                       "  \"javascriptReferences\" : [ {\n" +
+				                       "    \"cordovaRequired\" : false,\n" +
+				                       "    \"name\" : \"PersistJS\",\n" +
+				                       "    \"version\" : 1.0,\n" +
+				                       "    \"reference\" : \"persist-js/persist-all-min.js\"\n" +
+				                       "  } ],\n" +
+				                       "  \"sortOrder\" : 1000,\n" +
+				                       "  \"renderAfterLoad\" : false,\n" +
+				                       "  \"javascriptRenderedElsewhere\" : false,\n" +
+				                       "  \"events\" : [ {\n" +
+				                       "    \"id\" : \"clickEvent\",\n" +
+				                       "    \"componentType\" : \"event\",\n" +
+				                       "    \"tiny\" : false,\n" +
+				                       "    \"configured\" : true,\n" +
+				                       "    \"initialized\" : true,\n" +
+				                       "    \"touched\" : false,\n" +
+				                       "    \"sortOrder\" : 1000,\n" +
+				                       "    \"name\" : \"click\",\n" +
+				                       "    \"renderAfterLoad\" : false,\n" +
+				                       "    \"javascriptRenderedElsewhere\" : false,\n" +
+				                       "    \"registeredComponents\" : [ \"za.co.mmagon.jwebswing.base.html.Div\" ],\n" +
+				                       "    \"eventType\" : \"click\"\n" +
+				                       "  } ],\n" +
+				                       "  \"tag\" : \"abbr\",\n" +
+				                       "  \"closingTag\" : true,\n" +
+				                       "  \"newLineForRawText\" : false,\n" +
+				                       "  \"newLineForClosingTag\" : true,\n" +
+				                       "  \"renderTextBeforeChildren\" : true,\n" +
+				                       "  \"attributes\" : {\n" +
+				                       "    \"id\" : \"shell\"\n" +
+				                       "  },\n" +
+				                       "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentHTMLAttributeBase\"\n" +
+				                       "}";
 		String shell2Expected = "{\n" +
-				"  \"id\" : \"shell2\",\n" +
-				"  \"componentType\" : \"abbreviation\",\n" +
-				"  \"tiny\" : false,\n" +
-				"  \"configured\" : true,\n" +
-				"  \"initialized\" : true,\n" +
-				"  \"touched\" : false,\n" +
-				"  \"javascriptReferences\" : [ {\n" +
-				"    \"cordovaRequired\" : false,\n" +
-				"    \"name\" : \"JQuery\",\n" +
-				"    \"version\" : 2.24,\n" +
-				"    \"reference\" : \"bower_components/jquery/dist/jquery.js\"\n" +
-				"  } ],\n" +
-				"  \"sortOrder\" : 1000,\n" +
-				"  \"renderAfterLoad\" : false,\n" +
-				"  \"javascriptRenderedElsewhere\" : false,\n" +
-				"  \"events\" : [ {\n" +
-				"    \"id\" : \"clickEvent\",\n" +
-				"    \"componentType\" : \"event\",\n" +
-				"    \"tiny\" : false,\n" +
-				"    \"configured\" : true,\n" +
-				"    \"initialized\" : true,\n" +
-				"    \"touched\" : false,\n" +
-				"    \"sortOrder\" : 1000,\n" +
-				"    \"name\" : \"click\",\n" +
-				"    \"renderAfterLoad\" : false,\n" +
-				"    \"javascriptRenderedElsewhere\" : false,\n" +
-				"    \"registeredComponents\" : [ \"za.co.mmagon.jwebswing.base.html.Div\" ],\n" +
-				"    \"eventType\" : \"click\"\n" +
-				"  } ],\n" +
-				"  \"tag\" : \"abbr\",\n" +
-				"  \"closingTag\" : true,\n" +
-				"  \"newLineForRawText\" : false,\n" +
-				"  \"newLineForClosingTag\" : true,\n" +
-				"  \"renderTextBeforeChildren\" : true,\n" +
-				"  \"attributes\" : {\n" +
-				"    \"id\" : \"shell2\"\n" +
-				"  },\n" +
-				"  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentHTMLAttributeBase\"\n" +
-				"}";
+				                        "  \"id\" : \"shell2\",\n" +
+				                        "  \"componentType\" : \"abbreviation\",\n" +
+				                        "  \"tiny\" : false,\n" +
+				                        "  \"configured\" : true,\n" +
+				                        "  \"initialized\" : true,\n" +
+				                        "  \"touched\" : false,\n" +
+				                        "  \"javascriptReferences\" : [ {\n" +
+				                        "    \"cordovaRequired\" : false,\n" +
+				                        "    \"name\" : \"PersistJS\",\n" +
+				                        "    \"version\" : 1.0,\n" +
+				                        "    \"reference\" : \"persist-js/persist-all-min.js\"\n" +
+				                        "  } ],\n" +
+				                        "  \"sortOrder\" : 1000,\n" +
+				                        "  \"renderAfterLoad\" : false,\n" +
+				                        "  \"javascriptRenderedElsewhere\" : false,\n" +
+				                        "  \"events\" : [ {\n" +
+				                        "    \"id\" : \"clickEvent\",\n" +
+				                        "    \"componentType\" : \"event\",\n" +
+				                        "    \"tiny\" : false,\n" +
+				                        "    \"configured\" : true,\n" +
+				                        "    \"initialized\" : true,\n" +
+				                        "    \"touched\" : false,\n" +
+				                        "    \"sortOrder\" : 1000,\n" +
+				                        "    \"name\" : \"click\",\n" +
+				                        "    \"renderAfterLoad\" : false,\n" +
+				                        "    \"javascriptRenderedElsewhere\" : false,\n" +
+				                        "    \"registeredComponents\" : [ \"za.co.mmagon.jwebswing.base.html.Div\" ],\n" +
+				                        "    \"eventType\" : \"click\"\n" +
+				                        "  } ],\n" +
+				                        "  \"tag\" : \"abbr\",\n" +
+				                        "  \"closingTag\" : true,\n" +
+				                        "  \"newLineForRawText\" : false,\n" +
+				                        "  \"newLineForClosingTag\" : true,\n" +
+				                        "  \"renderTextBeforeChildren\" : true,\n" +
+				                        "  \"attributes\" : {\n" +
+				                        "    \"id\" : \"shell2\"\n" +
+				                        "  },\n" +
+				                        "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentHTMLAttributeBase\"\n" +
+				                        "}";
 		Assertions.assertEquals(shell.toString(), shellExpected);
 		Assertions.assertEquals(shell2.toString(), shell2Expected);
 	}
