@@ -49,7 +49,7 @@ public interface IComponentFeatureBase<F extends GlobalFeatures, J extends Compo
 	 *
 	 * @param variable
 	 */
-	void addVariable(String variable);
+	J addVariable(String variable);
 	
 	/**
 	 * Adds in the JavaScript References for the Features
@@ -124,14 +124,14 @@ public interface IComponentFeatureBase<F extends GlobalFeatures, J extends Compo
 	 * @return True or false on whether it could be removed, e.g. if it ever
 	 * existed.
 	 */
-	boolean removeFeature(F feature);
+	J removeFeature(F feature);
 	
 	/**
 	 * Removes a variable from the collection
 	 *
 	 * @param variable
 	 */
-	void removeVariable(String variable);
+	J removeVariable(String variable);
 	
 	/**
 	 * Renders the JavaScript for this Builder

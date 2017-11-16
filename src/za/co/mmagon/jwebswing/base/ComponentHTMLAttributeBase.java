@@ -62,7 +62,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 * @version 2 Version 2 - Updated CSS Library and References
 	 */
 	@JsonIgnore
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Logger for the Component
@@ -160,7 +160,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 			boolean isKeyword = value.isEmpty();
 			if (!isKeyword)
 			{
-				sb.append(key.toLowerCase()).append("=\"").append(value).append(STRING_DOUBLE_QUOTES_SPACE);
+				sb.append(key.toLowerCase()).append(STRING_EQUALS_DOUBLE_QUOTES).append(value).append(STRING_DOUBLE_QUOTES_SPACE);
 			}
 			else
 			{
@@ -356,7 +356,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		String s = getAttributes().get(attributeValue.toString());
 		if (s == null)
 		{
-			s = "";
+			s = STRING_EMPTY;
 		}
 		return s;
 	}
@@ -404,7 +404,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		String s = getAttributes().get(attributeValue.toString());
 		if (s == null)
 		{
-			s = "false";
+			s = Boolean.toString(false);
 		}
 		return Boolean.valueOf(s);
 	}
@@ -492,7 +492,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 * @return
 	 */
 	@NotNull
-
+	@SuppressWarnings({"unchecked", "unused"})
 	public J setRenderIDAttibute(boolean renderIDAttibute)
 	{
 		this.renderIDAttibute = renderIDAttibute;
@@ -514,6 +514,8 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
 	public final J addAttribute(String attribute, String value)
 	{
 		getAttributes().put(attribute, value);
@@ -527,6 +529,8 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
 	public J removeAttribute(String key)
 	{
 		getAttributes().remove(key);
@@ -540,6 +544,8 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
 	public J removeAttribute(GlobalAttributes key)
 	{
 		getAttributes().remove(key.toString());
@@ -553,6 +559,8 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
 	public J removeAttribute(A key)
 	{
 		getAttributes().remove(key.toString());
@@ -571,6 +579,8 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
 	public J cloneComponent()
 	{
 		ComponentHTMLAttributeBase cloned = super.cloneComponent();
@@ -588,19 +598,21 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
 	public J addStyle(String style)
 	{
-		if (!style.endsWith(";"))
+		if (!style.endsWith(STRING_SEMICOLON))
 		{
-			style += ";";
+			style += STRING_SEMICOLON;
 		}
-		if (getAttributes().get(GlobalAttributes.Style) == null)
+		if (getAttributes().get(GlobalAttributes.Style.toString()) == null)
 		{
 			addAttribute(GlobalAttributes.Style, style);
 		}
 		else
 		{
-			addAttribute(GlobalAttributes.Style, getAttributes().get(GlobalAttributes.Style) + style);
+			addAttribute(GlobalAttributes.Style, getAttributes().get(GlobalAttributes.Style.toString()) + style);
 		}
 		return (J) this;
 	}

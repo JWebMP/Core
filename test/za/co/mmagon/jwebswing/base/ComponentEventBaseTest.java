@@ -45,7 +45,7 @@ public class ComponentEventBaseTest extends BaseTestClass
 	@Test
 	public void testEventBase()
 	{
-		//System.out.println(getEvent());
+		//System.out.println(findEvent());
 	}
 	
 	@Test

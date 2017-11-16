@@ -32,7 +32,9 @@ import za.co.mmagon.logger.LogFactory;
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
 import java.util.logging.Level;
 
 import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_NEWLINE_TEXT;
@@ -63,7 +65,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 * @version 2 Version 2 - Updated CSS Library and References
 	 */
 	@JsonIgnore
-	private static final long serialVersionUID = 2l;
+	private static final long serialVersionUID = 2L;
 	/**
 	 * A linked component if required
 	 */
@@ -161,48 +163,41 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		return allCss;
 	}
 
+	/**
+	 * Adds a feature to the collection
+	 *
+	 * @param feature
+	 *
+	 * @return
+	 */
 	@Override
-	public void preConfigure()
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J addFeature(@NotNull ComponentFeatureBase feature)
 	{
-		if (!isConfigured())
+		if (!feature.getComponentType().equals(ComponentTypes.Feature))
 		{
-			if (this instanceof Feature)
-			{
-				assignFunctionsToComponent();
-			}
-			getFeatures().forEach(feature
-					                      ->
-			                      {
-				                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
-				                      if (cfb != null && !cfb.isConfigured())
-				                      {
-					                      cfb.preConfigure();
-					                      cfb.assignFunctionsToComponent();
-				                      }
-			                      });
+			LOG.log(Level.WARNING, "Tried to add a non-feature to the feature collection");
 		}
-		super.preConfigure();
+		else
+		{
+			getFeatures().add((F) feature);
+		}
+		return (J) this;
 	}
 
 	/**
-	 * Initialize all the features
+	 * Adds a variable to the collection
+	 *
+	 * @param variable
 	 */
 	@Override
-	public void init()
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J addVariable(@NotNull String variable)
 	{
-		if (!isInitialized())
-		{
-			getFeatures().forEach(feature
-					                      ->
-			                      {
-				                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
-				                      if (cfb != null && !cfb.isConfigured())
-				                      {
-					                      cfb.init();
-				                      }
-			                      });
-		}
-		super.init();
+		getVariables().add(variable);
+		return (J) this;
 	}
 
 	/**
@@ -221,10 +216,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 			                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
 			                      for (Object js : cfb.getJavascriptReferencesAll())
 			                      {
-				                      if (!allJs.contains(JavascriptReference.class.cast(js)))
-				                      {
 					                      allJs.add(JavascriptReference.class.cast(js));
-				                      }
 			                      }
 		                      });
 		return allJs;
@@ -255,25 +247,21 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	}
 
 	/**
-	 * Adds a feature to the collection
+	 * Removes a feature from the components collection
+	 * <p>
 	 *
 	 * @param feature
+	 * 		The feature to be removed
+	 * 		<p>
 	 *
-	 * @return
+	 * @return True or false on whether it could be removed, e.g. if it ever existed.
 	 */
 	@Override
-	@NotNull
 	@SuppressWarnings("unchecked")
-	public J addFeature(@NotNull ComponentFeatureBase feature)
+	@NotNull
+	public J removeFeature(F feature)
 	{
-		if (!feature.getComponentType().equals(ComponentTypes.Feature))
-		{
-			LOG.log(Level.WARNING, "Tried to add a non-feature to the feature collection");
-		}
-		else if (!getFeatures().contains(feature))
-		{
-			getFeatures().add((F) feature);
-		}
+		getFeatures().remove(feature);
 		return (J) this;
 	}
 
@@ -289,14 +277,16 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	}
 
 	/**
-	 * Adds a variable to the collection
+	 * Removes a variable from the collection
 	 *
 	 * @param variable
 	 */
 	@Override
-	public void addVariable(@NotNull String variable)
+	@SuppressWarnings("unchecked")
+	public J removeVariable(@NotNull String variable)
 	{
-		getVariables().add(variable);
+		getVariables().remove(variable);
+		return (J) this;
 	}
 
 	/**
@@ -312,19 +302,40 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	}
 
 	/**
-	 * Removes a feature from the components collection
-	 * <p>
+	 * Renders the JavaScript for this Builder
 	 *
-	 * @param feature
-	 * 		The feature to be removed
-	 * 		<p>
-	 *
-	 * @return True or false on whether it could be removed, e.g. if it ever existed.
+	 * @return
 	 */
 	@Override
-	public boolean removeFeature(F feature)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public StringBuilder renderJavascript()
 	{
-		return getFeatures().remove(feature);
+		if (!isConfigured())
+		{
+			preConfigure();
+		}
+		StringBuilder sb = new StringBuilder();
+		Set<String> allQueries = new LinkedHashSet<>();
+		getQueriesAll().forEach(query ->
+		                        {
+			                        if (query != null)
+			                        {
+				                        String queryS = query.toString();
+				                        if (!queryS.isEmpty())
+				                        {
+					                        allQueries.add(query.toString());
+				                        }
+			                        }
+		                        });
+		allQueries.forEach(query ->
+		                   {
+			                   if (!query.trim().equals(STRING_NEWLINE_TEXT) && !sb.toString().contains(query))
+			                   {
+				                   sb.append(query);
+			                   }
+		                   });
+		return sb;
 	}
 
 	@Override
@@ -378,6 +389,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 * @return
 	 */
 	@NotNull
+	@SuppressWarnings("unchecked")
 	public J setName(@NotNull String name)
 	{
 		this.name = name;
@@ -464,51 +476,46 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	}
 
 	/**
-	 * Removes a variable from the collection
+	 * Sets all features beneath to tiny
 	 *
-	 * @param variable
-	 */
-	@Override
-	public void removeVariable(@NotNull String variable)
-	{
-		getVariables().remove(variable);
-	}
-
-	/**
-	 * Renders the JavaScript for this Builder
+	 * @param tiny
 	 *
 	 * @return
 	 */
 	@Override
+	@Null
 	@SuppressWarnings("unchecked")
-	@NotNull
-	public StringBuilder renderJavascript()
+	public J setTiny(boolean tiny)
+	{
+		for (F f : getFeatures())
+		{
+			ComponentFeatureBase next = (ComponentFeatureBase) f;
+			next.setTiny(tiny);
+		}
+		return super.setTiny(tiny);
+	}
+
+	@Override
+	public void preConfigure()
 	{
 		if (!isConfigured())
 		{
-			preConfigure();
+			if (this instanceof Feature)
+			{
+				assignFunctionsToComponent();
+			}
+			getFeatures().forEach(feature
+					                      ->
+			                      {
+				                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
+				                      if (!cfb.isConfigured())
+				                      {
+					                      cfb.preConfigure();
+					                      cfb.assignFunctionsToComponent();
+				                      }
+			                      });
 		}
-		StringBuilder sb = new StringBuilder();
-		ArrayList<String> allQueries = new ArrayList<>();
-		getQueriesAll().forEach(query ->
-		                        {
-			                        if (query != null)
-			                        {
-				                        String queryS = query.toString();
-				                        if (!allQueries.contains(queryS) || !queryS.isEmpty())
-				                        {
-					                        allQueries.add(query.toString());
-				                        }
-			                        }
-		                        });
-		allQueries.forEach(query ->
-		                   {
-			                   if (!query.trim().equals(STRING_NEWLINE_TEXT) && !sb.toString().contains(query))
-			                   {
-				                   sb.append(query);
-			                   }
-		                   });
-		return sb;
+		super.preConfigure();
 	}
 
 	/**
@@ -577,22 +584,23 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	}
 
 	/**
-	 * Sets all features beneath to tiny
-	 *
-	 * @param tiny
-	 *
-	 * @return
+	 * Initialize all the features
 	 */
 	@Override
-	@Null
-	public J setTiny(boolean tiny)
+	public void init()
 	{
-		for (Iterator<F> iterator = getFeatures().iterator(); iterator.hasNext(); )
+		if (!isInitialized())
 		{
-			ComponentFeatureBase next = (ComponentFeatureBase) iterator.next();
-			next.setTiny(tiny);
+			getFeatures().forEach(feature ->
+			                      {
+				                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
+				                      if (!cfb.isConfigured())
+				                      {
+					                      cfb.init();
+				                      }
+			                      });
 		}
-		return super.setTiny(tiny);
+		super.init();
 	}
 
 	/**
@@ -603,6 +611,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 * @return
 	 */
 	@NotNull
+	@SuppressWarnings("unchecked")
 	public J setRenderAfterLoad(boolean renderAfterLoad)
 	{
 		this.renderAfterLoad = renderAfterLoad;
@@ -627,7 +636,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 * @return
 	 */
 	@NotNull
-	@SuppressWarnings("unused")
+	@SuppressWarnings({"unused","unchecked"})
 	public J setJavascriptRenderedElsewhere(boolean javascriptRenderedElsewhere)
 	{
 		this.javascriptRenderedElsewhere = javascriptRenderedElsewhere;
@@ -652,7 +661,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 * @return
 	 */
 	@NotNull
-	@SuppressWarnings("unused")
+	@SuppressWarnings({"unused","unchecked"})
 	protected J setComponent(@NotNull ComponentHierarchyBase component)
 	{
 		this.component = component;

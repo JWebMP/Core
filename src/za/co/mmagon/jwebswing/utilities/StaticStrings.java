@@ -16,14 +16,20 @@ public interface StaticStrings extends Serializable
 
 	String STRING_EMPTY = "";
 	String STRING_SPACE = " ";
+	String STRING_FORWARD_SLASH = "/";
 	String STRING_TAB = "\t";
 	String STRING_NEWLINE_TEXT = "\n";
 	String STRING_SINGLE_QUOTES = "'";
 	String STRING_DOUBLE_QUOTES = "\"";
 	String STRING_DOUBLE_QUOTES_SPACE = "\" ";
+	String STRING_EQUALS_DOUBLE_QUOTES = "=\"";
+	String STRING_SHARP_BRACE_OPEN = "<";
+	String STRING_SHARP_BRACE_SLASH_OPEN = "</";
+	String STRING_SHARP_BRACE_CLOSED = ">";
 	String STRING_HASH = "#";
 	String STRING_COMMNA = ",";
 	String STRING_DOT = ".";
+	String STRING_SEMICOLON = ";";
 	String STRING_BRACES_OPEN = "{";
 	String STRING_BRACES_CLOSE = "}";
 

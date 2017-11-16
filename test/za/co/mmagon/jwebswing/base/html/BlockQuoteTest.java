@@ -47,9 +47,9 @@ public class BlockQuoteTest
 	{
 		reset();
 		System.out.println(bq.toString(true));
-		Assertions.assertEquals("<blockquote cite=\"cite\" id=\"id\">\n"
-				                    + "	<p id=\"id\">test</p>\n"
-				                    + "</blockquote>", bq.toString(true));
+		Assertions.assertEquals("<blockquote cite=\"cite\" id=\"id\">\n" +
+				                        "\t<p id=\"id\">test</p>\n" +
+				                        "</blockquote>", bq.toString(true));
 	}
 	
 	@Test

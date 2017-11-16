@@ -90,10 +90,7 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	@SuppressWarnings("unchecked")
 	public J addCssReference(@NotNull CSSReference cssReference)
 	{
-		if (!getCssReferences().contains(cssReference))
-		{
-			getCssReferences().add(cssReference);
-		}
+		getCssReferences().add(cssReference);
 		return (J) this;
 	}
 
@@ -109,10 +106,7 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	@SuppressWarnings("unchecked")
 	public J addJavaScriptReference(@NotNull JavascriptReference jsReference)
 	{
-		if (!getJavascriptReferences().contains(jsReference))
-		{
-			getJavascriptReferences().add(jsReference);
-		}
+		getJavascriptReferences().add(jsReference);
 		return (J) this;
 	}
 
@@ -178,7 +172,6 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	public Set<CSSReference> getCssReferencesAll(@NotNull RequirementsPriority priority)
 	{
 		Set<CSSReference> arr = new LinkedHashSet<>();
-
 		for (CSSReference next : getCssReferencesAll())
 		{
 			if (!next.getPriority().equals(priority) || arr.contains(next))
@@ -318,9 +311,7 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 		{
 			return false;
 		}
-
 		ComponentDependancyBase<?> that = (ComponentDependancyBase<?>) o;
-
 		return getCssReferences().equals(that.getCssReferences()) && getJavascriptReferences().equals(that.getJavascriptReferences());
 	}
 }

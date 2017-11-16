@@ -121,13 +121,21 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	}
 	
 	/**
-	 * Sets this component ID
-	 *
-	 * @param componentId
+	 * Creates this as a copy from the incoming call
+	 * @param incoming
 	 */
-	public J setComponentId(String componentId)
+	@SuppressWarnings("unchecked")
+	public J fromCall(AjaxCall incoming)
 	{
-		this.componentId = componentId;
+		setComponent(incoming.getComponent());
+		setComponentId(incoming.getComponentId());
+		setDatetime(incoming.getDatetime());
+		setEventId(incoming.getEventId());
+		setEventType(incoming.getEventType());
+		setEventTypeFrom(incoming.getEventTypeFrom());
+		setReferenceId(incoming.getReferenceId());
+		setValue(incoming.getValue());
+		setVariableData(incoming.getVariableData());
 		return (J)this;
 	}
 	
@@ -142,13 +150,14 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	}
 	
 	/**
-	 * Sets the date time of this call
+	 * Sets this calls component
 	 *
-	 * @param datetime
+	 * @param component
 	 */
-	public J setDatetime(Date datetime)
+	@SuppressWarnings("unchecked")
+	public J setComponent(ComponentHierarchyBase component)
 	{
-		this.datetime = datetime;
+		this.component = component;
 		return (J)this;
 	}
 	
@@ -163,13 +172,14 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	}
 	
 	/**
-	 * Sets the event type
+	 * Sets this component ID
 	 *
-	 * @param eventType
+	 * @param componentId
 	 */
-	public J setEventType(EventTypes eventType)
+	@SuppressWarnings("unchecked")
+	public J setComponentId(String componentId)
 	{
-		this.eventType = eventType;
+		this.componentId = componentId;
 		return (J)this;
 	}
 	
@@ -184,13 +194,14 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	}
 	
 	/**
-	 * Sets this calls event type from
+	 * Sets the date time of this call
 	 *
-	 * @param eventTypeFrom
+	 * @param datetime
 	 */
-	public J setEventTypeFrom(EventTypes eventTypeFrom)
+	@SuppressWarnings("unchecked")
+	public J setDatetime(Date datetime)
 	{
-		this.eventTypeFrom = eventTypeFrom;
+		this.datetime = datetime;
 		return (J)this;
 	}
 	
@@ -205,13 +216,14 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	}
 	
 	/**
-	 * Sets this calls value
+	 * The Event ID
 	 *
-	 * @param value
+	 * @param eventId
 	 */
-	public J setValue(AjaxEventValue value)
+	@SuppressWarnings("unchecked")
+	public J setEventId(String eventId)
 	{
-		this.value = value;
+		this.eventId = eventId;
 		return (J)this;
 	}
 	
@@ -226,13 +238,14 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	}
 	
 	/**
-	 * Sets this calls component
+	 * Sets the event type
 	 *
-	 * @param component
+	 * @param eventType
 	 */
-	public J setComponent(ComponentHierarchyBase component)
+	@SuppressWarnings("unchecked")
+	public J setEventType(EventTypes eventType)
 	{
-		this.component = component;
+		this.eventType = eventType;
 		return (J)this;
 	}
 	
@@ -252,13 +265,14 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	}
 	
 	/**
-	 * Sets the array list of bound objects?
+	 * Sets this calls event type from
 	 *
-	 * @param variableData
+	 * @param eventTypeFrom
 	 */
-	public J setVariableData(List<AngularJsonVariable> variableData)
+	@SuppressWarnings("unchecked")
+	public J setEventTypeFrom(EventTypes eventTypeFrom)
 	{
-		this.variableData = variableData;
+		this.eventTypeFrom = eventTypeFrom;
 		return (J)this;
 	}
 	
@@ -292,31 +306,26 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	}
 	
 	/**
-	 * The Event ID
+	 * Sets this calls value
 	 *
-	 * @param eventId
+	 * @param value
 	 */
-	public J setEventId(String eventId)
+	@SuppressWarnings("unchecked")
+	public J setValue(AjaxEventValue value)
 	{
-		this.eventId = eventId;
+		this.value = value;
 		return (J)this;
 	}
 	
 	/**
-	 * Creates this as a copy from the incoming call
-	 * @param incoming
+	 * Sets the array list of bound objects?
+	 *
+	 * @param variableData
 	 */
-	public J fromCall(AjaxCall incoming)
+	@SuppressWarnings("unchecked")
+	public J setVariableData(List<AngularJsonVariable> variableData)
 	{
-		setComponent(incoming.getComponent());
-		setComponentId(incoming.getComponentId());
-		setDatetime(incoming.getDatetime());
-		setEventId(incoming.getEventId());
-		setEventType(incoming.getEventType());
-		setEventTypeFrom(incoming.getEventTypeFrom());
-		setReferenceId(incoming.getReferenceId());
-		setValue(incoming.getValue());
-		setVariableData(incoming.getVariableData());
+		this.variableData = variableData;
 		return (J)this;
 	}
 	
@@ -338,6 +347,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	 * Sets the list of parameters
 	 * @param parameters
 	 */
+	@SuppressWarnings("unchecked")
 	public J setParameters(Map<String, String> parameters)
 	{
 		this.parameters = parameters;
@@ -361,6 +371,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	 * @param className
 	 */
 	@NotNull
+	@SuppressWarnings("unchecked")
 	public J setClassName(String className)
 	{
 		this.className = className;

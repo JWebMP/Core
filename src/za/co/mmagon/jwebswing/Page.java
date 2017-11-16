@@ -221,9 +221,10 @@ public class Page extends Html implements IPage
 	 * @param variable
 	 */
 	@Override
-	public void addVariable(String variable)
+	public ComponentFeatureBase addVariable(String variable)
 	{
 		getBody().addVariable(variable);
+		return this;
 	}
 
 	/**

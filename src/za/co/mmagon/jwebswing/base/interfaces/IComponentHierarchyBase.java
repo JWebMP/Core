@@ -66,7 +66,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 *
 	 * @return
 	 */
-	boolean addClass(CSSComponent classComponent);
+	J addClass(CSSComponent classComponent);
 	
 	/**
 	 * Returns All the angular objects mapped to this component and its children
@@ -256,7 +256,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 *
 	 * @return True if the class was removed, False if the class was not part of the collection
 	 */
-	boolean removeClass(String className);
+	J removeClass(String className);
 	
 	/**
 	 * Sets the ID and adds the attribute to the global set

@@ -34,6 +34,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.logging.Level;
 
+import static za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes.undefined;
+
 /**
  * Enables Events in the Component Tree Hierarchy
  *
@@ -63,7 +65,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	 * @version 2 Version 2 - Updated CSS Library and References
 	 */
 	@JsonIgnore
-	private static final long serialVersionUID = 2l;
+	private static final long serialVersionUID = 2L;
 
 	/**
 	 * The event of this component
@@ -84,7 +86,7 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	 */
 	public ComponentEventBase(ComponentTypes componentType)
 	{
-		this(EventTypes.undefined, componentType);
+		this(undefined, componentType);
 	}
 
 	/**
@@ -142,14 +144,14 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	 *
 	 * @return
 	 */
-	@JsonProperty("eventType")
 	@Override
-	@Nullable
+	@NotNull
+	@JsonIgnore
 	public EventTypes getEventTypes()
 	{
-		if (this.eventType == EventTypes.undefined)
+		if (this.eventType == undefined)
 		{
-			return null;
+			return undefined;
 		}
 		else
 		{
@@ -158,26 +160,45 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	}
 
 	/**
-	 * Adds in the JavaScript References for the Features
+	 * Events are types of feature that have server side support. These are referenced using the Ajax Receiver.
+	 * <p>
+	 *
+	 * @param event
+	 * 		The event to be removed
+	 * 		<p>
+	 *
+	 * @return currently false
+	 * 		<p>
+	 */
+	@Override
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J removeEvent(@Nullable E event)
+	{
+		getEvents().remove(event);
+		return (J) this;
+	}
+
+	/**
+	 * Returns an event with the given Id
+	 *
+	 * @param eventId
 	 *
 	 * @return
 	 */
 	@Override
-	@NotNull
-	public Set<CSSReference> getCssReferencesAll()
+	@Nullable
+	public ComponentEventBase findEvent(@NotNull String eventId)
 	{
-		Set<CSSReference> allCss = super.getCssReferencesAll();
-		getEvents().forEach((E feature) ->
-		                    {
-			                    for (Object css : ComponentEventBase.class.cast(feature).getCssReferencesAll())
-			                    {
-				                    if (!allCss.contains(CSSReference.class.cast(css)))
-				                    {
-					                    allCss.add(CSSReference.class.cast(css));
-				                    }
-			                    }
-		                    });
-		return allCss;
+		for (E e : getEvents())
+		{
+			ComponentEventBase next = (ComponentEventBase) e;
+			if (next.getID().equals(eventId))
+			{
+				return next;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -198,26 +219,24 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	}
 
 	/**
-	 * Adds in the JavaScript References for the Features
+	 * Returns the event type for this event
 	 *
 	 * @return
 	 */
-	@Override
-	@NotNull
-	public Set<JavascriptReference> getJavascriptReferencesAll()
+	@JsonProperty("eventType")
+	@JsonInclude(value = JsonInclude.Include.NON_NULL)
+	@Nullable
+	@SuppressWarnings("unused")
+	private EventTypes getEventTypesJSON()
 	{
-		Set<JavascriptReference> allJs = super.getJavascriptReferencesAll();
-		getEvents().forEach(feature ->
-		                    {
-			                    for (Object js : ComponentEventBase.class.cast(feature).getJavascriptReferencesAll())
-			                    {
-				                    if (!allJs.contains(JavascriptReference.class.cast(js)))
-				                    {
-					                    allJs.add(JavascriptReference.class.cast(js));
-				                    }
-			                    }
-		                    });
-		return allJs;
+		if (this.eventType == undefined)
+		{
+			return null;
+		}
+		else
+		{
+			return this.eventType;
+		}
 	}
 
 	/**
@@ -266,22 +285,23 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	}
 
 	/**
-	 * Events are types of feature that have server side support. These are referenced using the Ajax Receiver.
-	 * <p>
+	 * Adds in the JavaScript References for the Features
 	 *
-	 * @param event
-	 * 		The event to be removed
-	 * 		<p>
-	 *
-	 * @return currently false
-	 * 		<p>
+	 * @return
 	 */
 	@Override
 	@NotNull
-	public J removeEvent(@Nullable E event)
+	public Set<CSSReference> getCssReferencesAll()
 	{
-		getEvents().remove(event);
-		return (J) this;
+		Set<CSSReference> allCss = super.getCssReferencesAll();
+		getEvents().forEach((E feature) ->
+		                    {
+			                    for (Object css : ComponentEventBase.class.cast(feature).getCssReferencesAll())
+			                    {
+				                    allCss.add(CSSReference.class.cast(css));
+			                    }
+		                    });
+		return allCss;
 	}
 
 	/**
@@ -301,25 +321,23 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	}
 
 	/**
-	 * Returns an event with the given Id
-	 *
-	 * @param eventId
+	 * Adds in the JavaScript References for the Features
 	 *
 	 * @return
 	 */
 	@Override
-	@Nullable
-	public ComponentEventBase getEvent(@NotNull String eventId)
+	@NotNull
+	public Set<JavascriptReference> getJavascriptReferencesAll()
 	{
-		for (E e : getEvents())
-		{
-			ComponentEventBase next = (ComponentEventBase) e;
-			if (next.getID().equals(eventId))
-			{
-				return next;
-			}
-		}
-		return null;
+		Set<JavascriptReference> allJs = super.getJavascriptReferencesAll();
+		getEvents().forEach(feature ->
+		                    {
+			                    for (Object js : ComponentEventBase.class.cast(feature).getJavascriptReferencesAll())
+			                    {
+				                    allJs.add(JavascriptReference.class.cast(js));
+			                    }
+		                    });
+		return allJs;
 	}
 
 	@Override
@@ -378,7 +396,6 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 	@NotNull
 	public J setTiny(boolean tiny)
 	{
-
 		for (E e : getEvents())
 		{
 			ComponentEventBase next = (ComponentEventBase) e;

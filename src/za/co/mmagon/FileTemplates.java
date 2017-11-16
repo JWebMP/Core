@@ -17,7 +17,6 @@
 package za.co.mmagon;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import za.co.mmagon.jwebswing.utilities.TextUtilities;
 import za.co.mmagon.logger.LogFactory;
 
 import java.io.FileNotFoundException;
@@ -129,18 +128,13 @@ public class FileTemplates implements Serializable
 		for (String templateVariable : getTemplateVariables().keySet())
 		{
 			String templateScript = Matcher.quoteReplacement(getTemplateVariables().get(templateVariable).toString());
-			String templateNameClean = templateVariable;
 			try
 			{
-				templateOutput = templateOutput.replaceAll("" + templateNameClean + "", templateScript);
+				templateOutput = templateOutput.replaceAll("" + templateVariable + "", templateScript);
 			}
 			catch (IllegalArgumentException iae)
 			{
-				LOG.log(Level.CONFIG, "[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[{0}];[Script]-[{1}]", new Object[]
-						                                                                                                                       {
-								                                                                                                                       templateVariable, templateScript
-						                                                                                                                       });
-				LOG.severe(TextUtilities.stackTraceToString(iae));
+				LOG.log(Level.WARNING, String.format("[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[{0}];[Script]-[{1}]", templateVariable, templateScript), iae);
 			}
 		}
 		TemplateScripts.put(templateName, new StringBuilder(templateOutput.trim()));

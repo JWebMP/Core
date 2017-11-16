@@ -36,21 +36,14 @@ public interface IComponentStyleBase<J extends ComponentBase>
 	 *
 	 * @param cssItem
 	 */
-	void addCSSEntry(CSSTypes type, CSSImpl cssItem);
-	
+	J addCSSEntry(CSSTypes type, CSSImpl cssItem);
+
 	/**
-	 * Gets the active CSS
+	 * Adds a CSS object to the component with the given type
 	 *
-	 * @return
+	 * @param cssItem
 	 */
-	CSSImpl getActiveCss();
-	
-	/**
-	 * Sets the active CSS
-	 *
-	 * @param activeCss
-	 */
-	void setActiveCss(CSSImpl activeCss);
+	J removeCSSEntry(CSSTypes type);
 	
 	/**
 	 * Gets the CSS Object used for styling
@@ -64,8 +57,7 @@ public interface IComponentStyleBase<J extends ComponentBase>
 	 *
 	 * @param css
 	 */
-	void setCss(CSSImpl css);
-	
+	J setCss(CSSImpl css);
 	/**
 	 * Returns the currently assigned CSS Name
 	 *
@@ -78,64 +70,15 @@ public interface IComponentStyleBase<J extends ComponentBase>
 	 *
 	 * @param cssName
 	 */
-	void setCssName(String cssName);
-	
+	J setCssName(String cssName);
 	/**
 	 * Returns the current HashMap of all CSS Entries for the component
 	 *
 	 * @return
 	 */
 	Map<CSSTypes, CSSImpl> getCssTypeHashMap();
-	
-	/**
-	 * Gets the hover format CSS
-	 *
-	 * @return
-	 */
-	CSSImpl getHoverCss();
-	
-	/**
-	 * Sets the hover format CSS
-	 *
-	 * @param hoverCss
-	 */
-	void setHoverCss(CSSImpl hoverCss);
-	
-	/**
-	 * Gets the link CSS
-	 *
-	 * @return
-	 */
-	CSSImpl getLinkCss();
-	
-	/**
-	 * Sets the Link CSS
-	 *
-	 * @param linkCss
-	 */
-	void setLinkCss(CSSImpl linkCss);
-	
-	/**
-	 * Gets the Visited CSS
-	 *
-	 * @return
-	 */
-	CSSImpl getVisitedCss();
-	
-	/**
-	 * Sets the Visited CSS
-	 *
-	 * @param visitedCss
-	 */
-	void setVisitedCss(CSSImpl visitedCss);
-	
-	/**
-	 * Removes a CSS item for the component
-	 *
-	 * @param cssType
-	 */
-	void removeCSSEntry(CSSTypes cssType);
-	
+
+
 	/**
 	 * Renders the component CSS at the specified tab count with the
 	 * &lt;style&gt; tag

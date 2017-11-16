@@ -57,7 +57,7 @@ public interface IComponentHTMLBase<J extends ComponentBase>
 	 *
 	 * @param newLineForClosingTag
 	 */
-	void setNewLineForClosingTag(boolean newLineForClosingTag);
+	J setNewLineForClosingTag(boolean newLineForClosingTag);
 	
 	/**
 	 * Sets if there must be a new line before the raw text starts

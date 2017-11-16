@@ -25,6 +25,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.interfaces.IComponentHTMLAngularBase;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
@@ -268,7 +269,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	@SuppressWarnings("unchecked")
 	public J cloak()
 	{
-		addAttribute(AngularAttributes.ngCloak, "");
+		addAttribute(AngularAttributes.ngCloak, StaticStrings.STRING_EMPTY);
 		AngularPageConfigurator.setRequired(this, true);
 		return (J) this;
 	}

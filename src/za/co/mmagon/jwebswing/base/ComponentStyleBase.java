@@ -27,7 +27,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.CSSImpl;
 import za.co.mmagon.jwebswing.htmlbuilder.css.composer.CSSComposer;
 import za.co.mmagon.jwebswing.htmlbuilder.css.enumarations.CSSTypes;
 
-import java.util.HashMap;
+import javax.validation.constraints.NotNull;
+import java.util.EnumMap;
 import java.util.Map;
 
 /**
@@ -57,22 +58,7 @@ public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enu
 	 * The CSS Object for all styling
 	 */
 	private CSSImpl css;
-	/**
-	 * The Hover CSS Object
-	 */
-	private CSSImpl hoverCss;
-	/**
-	 * The Active CSS Object
-	 */
-	private CSSImpl activeCss;
-	/**
-	 * The Link CSS Object
-	 */
-	private CSSImpl linkCss;
-	/**
-	 * The visited CSS Object
-	 */
-	private CSSImpl visitedCss;
+
 	/**
 	 * The CSS Class name if required
 	 */
@@ -99,24 +85,40 @@ public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enu
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unused")
+	@NotNull
 	public IComponentStyleBase asStyleBase()
 	{
 		return this;
 	}
 
 	/**
-	 * Returns the current HashMap of all CSS Entries for the component
+	 * Adds a CSS object to the component with the given type
 	 *
-	 * @return
+	 * @param type
+	 * @param cssItem
 	 */
 	@Override
-	public Map<CSSTypes, CSSImpl> getCssTypeHashMap()
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J addCSSEntry(CSSTypes type, CSSImpl cssItem)
 	{
-		if (cssTypeHashMap == null)
-		{
-			cssTypeHashMap = new HashMap<>();
-		}
-		return cssTypeHashMap;
+		getCssTypeHashMap().put(type, cssItem);
+		return (J) this;
+	}
+
+	/**
+	 * Removes a CSS item for the component
+	 *
+	 * @param cssType
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J removeCSSEntry(CSSTypes cssType)
+	{
+		getCssTypeHashMap().remove(cssType);
+		return (J) this;
 	}
 
 	/**
@@ -125,6 +127,7 @@ public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enu
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public CSSImpl getCss()
 	{
 		if (css == null)
@@ -141,21 +144,54 @@ public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enu
 	 * @param css
 	 */
 	@Override
-	public void setCss(CSSImpl css)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setCss(CSSImpl css)
 	{
 		this.css = css;
+		return (J) this;
 	}
 
 	/**
-	 * Sets the hover format CSS
+	 * Returns the currently assigned CSS Name
 	 *
-	 * @param hoverCss
+	 * @return
 	 */
 	@Override
-	public void setHoverCss(CSSImpl hoverCss)
+	@NotNull
+	public String getCssName()
 	{
+		return cssName;
+	}
 
-		this.hoverCss = hoverCss;
+	/**
+	 * Sets the currently assigned CSS Name
+	 *
+	 * @param cssName
+	 */
+	@Override
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setCssName(String cssName)
+	{
+		this.cssName = cssName;
+		return (J) this;
+	}
+
+	/**
+	 * Returns the current HashMap of all CSS Entries for the component
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public Map<CSSTypes, CSSImpl> getCssTypeHashMap()
+	{
+		if (cssTypeHashMap == null)
+		{
+			cssTypeHashMap = new EnumMap<>(CSSTypes.class);
+		}
+		return cssTypeHashMap;
 	}
 
 	/**
@@ -169,47 +205,10 @@ public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enu
 	 * @return The Component CSS
 	 */
 	@Override
+	@NotNull
 	public StringBuilder renderCss(int tabCount)
 	{
 		return renderCss(tabCount, true, false, false);
-	}
-
-	/**
-	 * Returns the currently assigned CSS Name
-	 *
-	 * @return
-	 */
-	@Override
-	public String getCssName()
-	{
-		return cssName;
-	}
-
-	/**
-	 * Sets the currently assigned CSS Name
-	 *
-	 * @param cssName
-	 */
-	@Override
-	public void setCssName(String cssName)
-	{
-		this.cssName = cssName;
-	}
-
-	/**
-	 * Gets the hover format CSS
-	 *
-	 * @return
-	 */
-	@Override
-	public CSSImpl getHoverCss()
-	{
-		if (hoverCss == null)
-		{
-			hoverCss = new CSSImpl();
-			getCssTypeHashMap().put(CSSTypes.Hover, hoverCss);
-		}
-		return hoverCss;
 	}
 
 	/**
@@ -230,6 +229,7 @@ public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enu
 	 * @return The Component CSS
 	 */
 	@Override
+	@NotNull
 	public StringBuilder renderCss(int tabCount, boolean renderOpening, boolean renderInQuotations, boolean isAjaxCall)
 	{
 		if (!isInitialized())
@@ -243,110 +243,6 @@ public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enu
 		CSSComposer comp = new CSSComposer();
 		comp.addComponent(this, true);
 		return new StringBuilder(comp.toString());
-	}
-
-	/**
-	 * Gets the active CSS
-	 *
-	 * @return
-	 */
-	@Override
-	public CSSImpl getActiveCss()
-	{
-		if (activeCss == null)
-		{
-			activeCss = new CSSImpl();
-			getCssTypeHashMap().put(CSSTypes.Active, activeCss);
-		}
-		return activeCss;
-	}
-
-	/**
-	 * Sets the active CSS
-	 *
-	 * @param activeCss
-	 */
-	@Override
-	public void setActiveCss(CSSImpl activeCss)
-	{
-		this.activeCss = activeCss;
-	}
-
-	/**
-	 * Gets the link CSS
-	 *
-	 * @return
-	 */
-	@Override
-	public CSSImpl getLinkCss()
-	{
-		if (linkCss == null)
-		{
-			linkCss = new CSSImpl();
-			getCssTypeHashMap().put(CSSTypes.Link, linkCss);
-		}
-		return linkCss;
-	}
-
-	/**
-	 * Sets the Link CSS
-	 *
-	 * @param linkCss
-	 */
-	@Override
-	public void setLinkCss(CSSImpl linkCss)
-	{
-		this.linkCss = linkCss;
-	}
-
-	/**
-	 * Gets the Visited CSS
-	 *
-	 * @return
-	 */
-	@Override
-	public CSSImpl getVisitedCss()
-	{
-		if (visitedCss == null)
-		{
-			visitedCss = new CSSImpl();
-			getCssTypeHashMap().put(CSSTypes.Visited, visitedCss);
-		}
-		return visitedCss;
-	}
-
-	/**
-	 * Sets the Visited CSS
-	 *
-	 * @param visitedCss
-	 */
-	@Override
-	public void setVisitedCss(CSSImpl visitedCss)
-	{
-		this.visitedCss = visitedCss;
-	}
-
-	/**
-	 * Adds a CSS object to the component with the given type
-	 *
-	 * @param type
-	 * @param cssItem
-	 */
-	@Override
-	public void addCSSEntry(CSSTypes type, CSSImpl cssItem)
-	{
-		getCssTypeHashMap().put(type, cssItem);
-	}
-
-	/**
-	 * Removes a CSS item for the component
-	 *
-	 * @param cssType
-	 */
-	@Override
-	public void removeCSSEntry(CSSTypes cssType)
-	{
-		getCssTypeHashMap().remove(cssType);
 	}
 
 	@Override
@@ -379,22 +275,6 @@ public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enu
 		ComponentStyleBase<?, ?, ?, ?, ?> that = (ComponentStyleBase<?, ?, ?, ?, ?>) o;
 
 		if (getCss() != null ? !getCss().equals(that.getCss()) : that.getCss() != null)
-		{
-			return false;
-		}
-		if (getHoverCss() != null ? !getHoverCss().equals(that.getHoverCss()) : that.getHoverCss() != null)
-		{
-			return false;
-		}
-		if (getActiveCss() != null ? !getActiveCss().equals(that.getActiveCss()) : that.getActiveCss() != null)
-		{
-			return false;
-		}
-		if (getLinkCss() != null ? !getLinkCss().equals(that.getLinkCss()) : that.getLinkCss() != null)
-		{
-			return false;
-		}
-		if (getVisitedCss() != null ? !getVisitedCss().equals(that.getVisitedCss()) : that.getVisitedCss() != null)
 		{
 			return false;
 		}

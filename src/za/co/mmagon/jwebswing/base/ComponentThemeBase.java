@@ -26,7 +26,7 @@ import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
 
-import java.util.Iterator;
+import javax.validation.constraints.NotNull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -72,6 +72,7 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	public IComponentThemeBase asThemeBase()
 	{
 		return this;
@@ -83,20 +84,18 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public Set<CSSReference> getCssReferencesAll()
 	{
 		Set<CSSReference> allCss = super.getCssReferencesAll();
-		getThemes().forEach((Theme feature)
-				                    ->
+		getThemes().forEach((Theme feature) ->
 		                    {
-			                    for (Iterator<CSSReference> iterator = feature.getCssReferences().iterator(); iterator.hasNext(); )
+			                    for (CSSReference next : feature.getCssReferences())
 			                    {
-				                    CSSReference next = iterator.next();
 				                    if (allCss.contains(next))
 				                    {
 					                    continue;
 				                    }
-
 				                    allCss.add(next);
 			                    }
 		                    });
@@ -109,6 +108,7 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public Set<JavascriptReference> getJavascriptReferencesAll()
 	{
 		Set<JavascriptReference> allJs = super.getJavascriptReferencesAll();
@@ -131,6 +131,7 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 	 * @return The theme
 	 */
 	@Override
+	@NotNull
 	public Set<Theme> getThemes()
 	{
 		if (this.themes == null)

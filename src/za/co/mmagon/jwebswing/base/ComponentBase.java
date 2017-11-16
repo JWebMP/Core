@@ -61,7 +61,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 * @version 2 Version 2 - Updated CSS Library and References
 	 */
 	@JsonIgnore
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The ID of the component rendering for
@@ -116,36 +116,10 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 * @return
 	 */
 	@NotNull
+	@SuppressWarnings("unused")
 	public IComponentBase asBase()
 	{
 		return this;
-	}
-
-	/**
-	 * Gets the ID of this component
-	 * <p>
-	 *
-	 * @return The ID of this component
-	 */
-	@Override
-	public String getID()
-	{
-		return this.id;
-	}
-
-	/**
-	 * Sets this components enumeration. Currently little more than an easy to compare Enum
-	 * <p>
-	 *
-	 * @param componentType
-	 * 		The component to mimic
-	 *
-	 * @return
-	 */
-	protected J setComponentType(ComponentTypes componentType)
-	{
-		this.componentType = componentType;
-		return (J) this;
 	}
 
 	/**
@@ -156,6 +130,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
+	@NotNull
 	public J cloneComponent()
 	{
 		J component = null;
@@ -172,26 +147,16 @@ public class ComponentBase<J extends ComponentBase<J>>
 	}
 
 	/**
-	 * Returns the component rendering for JQuery string Requires the rendering for component is set
+	 * Gets the ID of this component
 	 * <p>
 	 *
-	 * @return $('#x').
+	 * @return The ID of this component
 	 */
 	@Override
-	public String getJQueryID()
+	@NotNull
+	public String getID()
 	{
-		return "$(\"" + getID(true) + "\").";
-	}
-
-	/**
-	 * Gets this components enumeration
-	 * <p>
-	 *
-	 * @return The Component Enumeration of this component
-	 */
-	protected ComponentTypes getComponentType()
-	{
-		return componentType;
+		return this.id;
 	}
 
 	/**
@@ -205,9 +170,43 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 * @return An ID starting with #
 	 */
 	@Override
+	@NotNull
 	public String getID(boolean jQueryHolder)
 	{
 		return StaticStrings.STRING_HASH + this.id;
+	}
+
+	/**
+	 * Returns the component rendering for JQuery string Requires the rendering for component is set
+	 * <p>
+	 *
+	 * @return $('#x').
+	 */
+	@Override
+	@NotNull
+	public String getJQueryID()
+	{
+		return "$(\"" + getID(true) + "\").";
+	}
+
+	/**
+	 * Returns the new line character according to Running Environment
+	 * <p>
+	 *
+	 * @return A new line if is in development mode
+	 */
+	@Override
+	@NotNull
+	public String getNewLine()
+	{
+		if (!isTiny())
+		{
+			return StaticStrings.STRING_NEWLINE_TEXT;
+		}
+		else
+		{
+			return StaticStrings.STRING_EMPTY;
+		}
 	}
 
 	/**
@@ -216,6 +215,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public Map<String, Serializable> getProperties()
 	{
 		if (properties == null)
@@ -235,25 +235,12 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public StringBuilder getText(int tabCounts)
 	{
 		StringBuilder sb = new StringBuilder();
 		getText(sb);
 		return sb;
-	}
-
-	/**
-	 * Sets the ID of this component
-	 * <p>
-	 *
-	 * @param id
-	 * 		The ID
-	 */
-	@Override
-	public J setID(String id)
-	{
-		this.id = id;
-		return (J) this;
 	}
 
 	/**
@@ -266,6 +253,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 *
 	 * @return The current set Raw Text
 	 */
+	@NotNull
 	protected StringBuilder getText(StringBuilder sb)
 	{
 		if (text == null)
@@ -277,72 +265,6 @@ public class ComponentBase<J extends ComponentBase<J>>
 			sb.append(text);
 			return sb;
 		}
-	}
-
-	/**
-	 * Sets this components user defined properties
-	 *
-	 * @param properties
-	 */
-	@Override
-	public J setProperties(Map<String, Serializable> properties)
-	{
-		this.properties = properties;
-		return (J) this;
-	}
-
-	/**
-	 * Specifies whether or not to render this component in a Production/QA fashion
-	 * <p>
-	 *
-	 * @return If this component will render in production mode
-	 */
-	@Override
-	public boolean isTiny()
-	{
-		return this.tiny;
-	}
-
-	/**
-	 * Sets this components Raw Text
-	 * <p>
-	 *
-	 * @param text
-	 * 		The text to display as Raw Text
-	 */
-	@Override
-	public J setText(String text)
-	{
-		this.text = text;
-		return (J) this;
-	}
-
-	/**
-	 * Returns the new line character according to Running Environment
-	 * <p>
-	 *
-	 * @return A new line if is in development mode
-	 */
-	@Override
-	public String getNewLine()
-	{
-		if (!isTiny())
-		{
-			return "\n";
-		}
-		else
-		{
-			return "";
-		}
-	}
-
-	/**
-	 * Run-Once on creation Executes a piece of code before running any rendering. Call super after your changes Marks the component as configured
-	 */
-	@Override
-	public void preConfigure()
-	{
-		setConfigured(true);
 	}
 
 	/**
@@ -362,6 +284,8 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 * @param configured
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
 	public J setConfigured(boolean configured)
 	{
 		this.configured = configured;
@@ -369,17 +293,15 @@ public class ComponentBase<J extends ComponentBase<J>>
 	}
 
 	/**
-	 * Sets this components Raw Text
+	 * Specifies whether or not to render this component in a Production/QA fashion
 	 * <p>
 	 *
-	 * @param text
-	 * 		The text to display as Raw Text
+	 * @return If this component will render in production mode
 	 */
 	@Override
-	public J setText(StringBuilder text)
+	public boolean isTiny()
 	{
-		this.text = text.toString();
-		return (J) this;
+		return this.tiny;
 	}
 
 	/**
@@ -390,25 +312,12 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 * 		Set if this component must render as tiny HTML. Does not affect CSS or JavaScript rendering
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
 	public J setTiny(boolean tiny)
 	{
 		this.tiny = tiny;
 		return (J) this;
-	}
-
-	/**
-	 * Default HashCode over-ride
-	 *
-	 * @return
-	 */
-	@Override
-	public int hashCode()
-	{
-		int hash = 7;
-		hash = 23 * hash + Objects.hashCode(this.id);
-		hash = 23 * hash + Objects.hashCode(this.componentType);
-		hash = 23 * hash + Objects.hashCode(this.text);
-		return hash;
 	}
 
 	/**
@@ -421,10 +330,123 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 * @return
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
 	public J setTouched(boolean touched)
 	{
 		this.touched = touched;
 		return (J) this;
+	}
+
+	/**
+	 * Run-Once on creation Executes a piece of code before running any rendering. Call super after your changes Marks the component as configured
+	 */
+	@Override
+	public void preConfigure()
+	{
+		setConfigured(true);
+	}
+
+	/**
+	 * Sets this components user defined properties
+	 *
+	 * @param properties
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setProperties(Map<String, Serializable> properties)
+	{
+		this.properties = properties;
+		return (J) this;
+	}
+
+	/**
+	 * Sets this components Raw Text
+	 * <p>
+	 *
+	 * @param text
+	 * 		The text to display as Raw Text
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setText(String text)
+	{
+		this.text = text;
+		return (J) this;
+	}
+
+	/**
+	 * Sets this components Raw Text
+	 * <p>
+	 *
+	 * @param text
+	 * 		The text to display as Raw Text
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setText(StringBuilder text)
+	{
+		this.text = text.toString();
+		return (J) this;
+	}
+
+	/**
+	 * Sets the ID of this component
+	 * <p>
+	 *
+	 * @param id
+	 * 		The ID
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setID(String id)
+	{
+		this.id = id;
+		return (J) this;
+	}
+
+	/**
+	 * Gets this components enumeration
+	 * <p>
+	 *
+	 * @return The Component Enumeration of this component
+	 */
+	@NotNull
+	public ComponentTypes getComponentType()
+	{
+		return componentType;
+	}
+
+	/**
+	 * Sets this components enumeration. Currently little more than an easy to compare Enum
+	 * <p>
+	 *
+	 * @param componentType
+	 * 		The component to mimic
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setComponentType(ComponentTypes componentType)
+	{
+		this.componentType = componentType;
+		return (J) this;
+	}
+
+	/**
+	 * Default HashCode over-ride
+	 *
+	 * @return
+	 */
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
 	}
 
 	/**
@@ -468,6 +490,8 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
 	public J setInitialized(boolean initialized)
 	{
 		this.initialized = initialized;
@@ -527,6 +551,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 * @return
 	 */
 	@JsonProperty("componentClass")
+	@SuppressWarnings("unused")
 	protected String getComponentClass()
 	{
 		return getClass().getCanonicalName();
@@ -551,6 +576,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 *
 	 * @return
 	 */
+	@NotNull
 	public String getProperty(String propertyName)
 	{
 		return getProperties().get(propertyName).toString();
@@ -561,6 +587,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 *
 	 * @return
 	 */
+	@NotNull
 	public String getClassCanonicalName()
 	{
 		try

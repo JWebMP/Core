@@ -69,6 +69,7 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 	 * @return
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public T fromAnnotation(A annotation)
 	{
 		T newInstance = null;
@@ -115,6 +116,7 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public Map<StringBuilder, Object> getMap()
 	{
 		CSSPropertiesFactory props = new CSSPropertiesFactory();
@@ -131,7 +133,7 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 		catch (Exception e)
 		{
 			log.log(Level.SEVERE, "Error in IMPL Object", e);
-			return "";
+			return "Can't Render JSON!";
 		}
 	}
 

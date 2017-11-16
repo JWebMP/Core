@@ -27,6 +27,8 @@ import za.co.mmagon.jwebswing.base.interfaces.ICssStructure;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.logger.LogFactory;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * The base class for all HTML generation, Everything must extend a component
  * <p>
@@ -63,7 +65,7 @@ public class Component<C extends GlobalChildren, A extends Enum & AttributeDefin
 	 * @version 2 Version 2 - Updated CSS Library and References
 	 */
 	@JsonIgnore
-	private static final long serialVersionUID = 2l;
+	private static final long serialVersionUID = 2L;
 
 	/**
 	 * Construct a new Component with a custom tag
@@ -120,6 +122,8 @@ public class Component<C extends GlobalChildren, A extends Enum & AttributeDefin
 	 * @return The new paragraph component
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
 	public J add(String textToAdd)
 	{
 		Paragraph p = new Paragraph();
@@ -133,6 +137,8 @@ public class Component<C extends GlobalChildren, A extends Enum & AttributeDefin
 	 *
 	 * @return The CSS Set of a component
 	 */
+	@SuppressWarnings("unused")
+	@NotNull
 	public ICssStructure asCSS()
 	{
 		return ICssStructure.class.cast(this);
