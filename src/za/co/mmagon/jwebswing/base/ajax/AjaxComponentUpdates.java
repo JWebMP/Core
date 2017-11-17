@@ -20,10 +20,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * A JSON Class for component updates
  */
-public class AjaxComponentUpdates extends JavaScriptPart
+public class AjaxComponentUpdates<J extends AjaxComponentUpdates<J>> extends JavaScriptPart<J>
 {
 	
 	private static final long serialVersionUID = 1L;
@@ -71,9 +73,12 @@ public class AjaxComponentUpdates extends JavaScriptPart
 	 *
 	 * @param html
 	 */
-	public void setHtml(String html)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setHtml(String html)
 	{
 		this.html = html;
+		return (J) this;
 	}
 	
 	/**
@@ -91,9 +96,12 @@ public class AjaxComponentUpdates extends JavaScriptPart
 	 *
 	 * @param id
 	 */
-	public void setId(String id)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setId(String id)
 	{
 		this.id = id;
+		return (J) this;
 	}
 	
 	/**
@@ -111,9 +119,12 @@ public class AjaxComponentUpdates extends JavaScriptPart
 	 *
 	 * @param insertType
 	 */
-	public void setInsertType(AjaxComponentInsertType insertType)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setInsertType(AjaxComponentInsertType insertType)
 	{
 		this.insertType = insertType;
+		return (J) this;
 	}
 	
 }

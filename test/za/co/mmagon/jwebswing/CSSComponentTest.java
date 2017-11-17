@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -23,15 +24,38 @@ import org.junit.jupiter.api.Test;
  */
 public class CSSComponentTest extends BaseTestClass
 {
-
-	public CSSComponentTest()
+	@Test
+	void getJQueryID()
 	{
 	}
 
 	@Test
-	public void empty()
+	void getID()
 	{
-
+		CSSComponentImpl impl = new CSSComponentImpl();
+		System.out.println(impl.getID(true));
+		Assertions.assertEquals(".TestClass", impl.getID(true));
 	}
 
+	@Test
+	void renderHTML()
+	{
+		CSSComponentImpl impl = new CSSComponentImpl();
+		impl.add("stuffs");
+		System.out.println(impl.toString(true));
+		Assertions.assertEquals(impl.toString(true), "");
+	}
+
+	private class CSSComponentImpl extends CSSComponent
+	{
+
+		/**
+		 * Constructs a new CSS Class with the given features and events associated
+		 * <p>
+		 */
+		public CSSComponentImpl()
+		{
+			super("TestClass");
+		}
+	}
 }

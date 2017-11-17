@@ -19,13 +19,15 @@ package za.co.mmagon.jwebswing.base.ajax;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * An angular event that is returned
  *
  * @author GedMarc
  * @since 27 Apr 2016
  */
-public class AjaxEventValue extends JavaScriptPart
+public class AjaxEventValue<J extends AjaxEventValue<J>> extends JavaScriptPart<J>
 {
 	
 	private static final long serialVersionUID = 1L;
@@ -138,9 +140,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param altKey
 	 */
-	public void setAltKey(Boolean altKey)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setAltKey(Boolean altKey)
 	{
 		this.altKey = altKey;
+		return (J) this;
 	}
 	
 	/**
@@ -158,9 +163,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param ctrlKey
 	 */
-	public void setCtrlKey(Boolean ctrlKey)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setCtrlKey(Boolean ctrlKey)
 	{
 		this.ctrlKey = ctrlKey;
+		return (J) this;
 	}
 	
 	/**
@@ -178,9 +186,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param bubbles
 	 */
-	public void setBubbles(Boolean bubbles)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setBubbles(Boolean bubbles)
 	{
 		this.bubbles = bubbles;
+		return (J) this;
 	}
 	
 	/**
@@ -198,9 +209,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param cancelable
 	 */
-	public void setCancelable(Boolean cancelable)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setCancelable(Boolean cancelable)
 	{
 		this.cancelable = cancelable;
+		return (J) this;
 	}
 	
 	/**
@@ -218,9 +232,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param clientX
 	 */
-	public void setClientX(Integer clientX)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setClientX(Integer clientX)
 	{
 		this.clientX = clientX;
+		return (J) this;
 	}
 	
 	/**
@@ -238,9 +255,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param clientY
 	 */
-	public void setClientY(Integer clientY)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setClientY(Integer clientY)
 	{
 		this.clientY = clientY;
+		return (J) this;
 	}
 	
 	/**
@@ -259,9 +279,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param componentID
 	 */
-	public void setComponentID(String componentID)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setComponentID(String componentID)
 	{
 		this.componentID = componentID;
+		return (J) this;
 	}
 	
 	/**
@@ -279,9 +302,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param detail
 	 */
-	public void setDetail(Integer detail)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setDetail(Integer detail)
 	{
 		this.detail = detail;
+		return (J) this;
 	}
 	
 	/**
@@ -299,9 +325,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param eventPhase
 	 */
-	public void setEventPhase(Integer eventPhase)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setEventPhase(Integer eventPhase)
 	{
 		this.eventPhase = eventPhase;
+		return (J) this;
 	}
 	
 	/**
@@ -319,9 +348,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param metaKey
 	 */
-	public void setMetaKey(Boolean metaKey)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setMetaKey(Boolean metaKey)
 	{
 		this.metaKey = metaKey;
+		return (J) this;
 	}
 	
 	/**
@@ -340,9 +372,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param offsetX
 	 */
-	public void setOffsetX(Integer offsetX)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setOffsetX(Integer offsetX)
 	{
 		this.offsetX = offsetX;
+		return (J) this;
 	}
 	
 	/**
@@ -360,9 +395,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param offsetY
 	 */
-	public void setOffsetY(Integer offsetY)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setOffsetY(Integer offsetY)
 	{
 		this.offsetY = offsetY;
+		return (J) this;
 	}
 	
 	/**
@@ -381,9 +419,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param pageX
 	 */
-	public void setPageX(Integer pageX)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setPageX(Integer pageX)
 	{
 		this.pageX = pageX;
+		return (J) this;
 	}
 	
 	/*
@@ -399,9 +440,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param pageY
 	 */
-	public void setPageY(Integer pageY)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setPageY(Integer pageY)
 	{
 		this.pageY = pageY;
+		return (J) this;
 	}
 	
 	/**
@@ -419,9 +463,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param screenX
 	 */
-	public void setScreenX(Integer screenX)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setScreenX(Integer screenX)
 	{
 		this.screenX = screenX;
+		return (J) this;
 	}
 	
 	/**
@@ -439,9 +486,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param screenY
 	 */
-	public void setScreenY(Integer screenY)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setScreenY(Integer screenY)
 	{
 		this.screenY = screenY;
+		return (J) this;
 	}
 	
 	/**
@@ -459,9 +509,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param shiftKey
 	 */
-	public void setShiftKey(Boolean shiftKey)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setShiftKey(Boolean shiftKey)
 	{
 		this.shiftKey = shiftKey;
+		return (J) this;
 	}
 	
 	/**
@@ -479,9 +532,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param type
 	 */
-	public void setType(EventTypes type)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setType(EventTypes type)
 	{
 		this.type = type;
+		return (J) this;
 	}
 	
 	/**
@@ -499,9 +555,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param data
 	 */
-	public void setData(String data)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setData(String data)
 	{
 		this.data = data;
+		return (J) this;
 	}
 	
 	/**
@@ -519,9 +578,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param target
 	 */
-	public void setTarget(String target)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setTarget(String target)
 	{
 		this.target = target;
+		return (J) this;
 	}
 	
 	/**
@@ -539,9 +601,12 @@ public class AjaxEventValue extends JavaScriptPart
 	 *
 	 * @param which
 	 */
-	public void setWhich(String which)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setWhich(String which)
 	{
 		this.which = which;
+		return (J) this;
 	}
 	
 }

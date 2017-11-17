@@ -18,13 +18,11 @@ package za.co.mmagon.jwebswing.annotations;
 
 import com.armineasy.injection.GuiceContext;
 import org.aopalliance.intercept.MethodInvocation;
+import za.co.mmagon.jwebswing.interception.DefaultIntercepter;
 import za.co.mmagon.jwebswing.interception.SiteCallInterceptor;
 import za.co.mmagon.logger.LogFactory;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,7 +60,7 @@ public class SiteIntercepters implements org.aopalliance.intercept.MethodInterce
 			GuiceContext.inject().injectMembers(intercepter);
 			outs.add(intercepter);
 		}
-		Collections.sort(outs, (SiteCallInterceptor o1, SiteCallInterceptor o2) -> o1.sortOrder().compareTo(o2.sortOrder()));
+		Collections.sort(outs, Comparator.comparing(DefaultIntercepter::sortOrder));
 		for (SiteCallInterceptor out : outs)
 		{
 			LOG.log(Level.FINE, "Interception Occuring : {0}", out.getClass().getCanonicalName());
