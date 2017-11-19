@@ -25,12 +25,12 @@ import org.junit.jupiter.api.Test;
 public class CSSComponentTest extends BaseTestClass
 {
 	@Test
-	void getJQueryID()
+	public void getJQueryID()
 	{
 	}
 
 	@Test
-	void getID()
+	public void getID()
 	{
 		CSSComponentImpl impl = new CSSComponentImpl();
 		System.out.println(impl.getID(true));
@@ -38,7 +38,7 @@ public class CSSComponentTest extends BaseTestClass
 	}
 
 	@Test
-	void renderHTML()
+	public void renderHTML()
 	{
 		CSSComponentImpl impl = new CSSComponentImpl();
 		impl.add("stuffs");

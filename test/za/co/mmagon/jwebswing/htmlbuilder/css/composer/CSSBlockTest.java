@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class CSSBlockTest
 {
 	@Test
-	void add()
+	public void add()
 	{
 	}
 	

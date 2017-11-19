@@ -8,10 +8,10 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.DivSimple;
 
-class BlurAdapterTest extends BaseTestClass
+public class BlurAdapterTest extends BaseTestClass
 {
 	@Test
-	void test()
+	public void test()
 	{
 		Div test = new DivSimple<>();
 		test.setID("test");
@@ -28,7 +28,7 @@ class BlurAdapterTest extends BaseTestClass
 	}
 
 	@Test
-	void testDirective()
+	public void testDirective()
 	{
 		Div test = new DivSimple<>();
 		test.getPage().getAngular().getAngularDirectives().clear();

@@ -42,15 +42,10 @@ public class BackgroundCSSObjectTest
 		hello = "Testing CSS Object Hello Field";
 	}
 
-	public static void main(String[] args)
-	{
-		BackgroundCSSObjectTest t = new BackgroundCSSObjectTest();
-		System.out.println(t.getClass().getAnnotations());
-	}
-
 	@Test
 	public void blank()
 	{
-
+		BackgroundCSSObjectTest t = new BackgroundCSSObjectTest();
+		System.out.println(t.getClass().getAnnotations());
 	}
 }

@@ -7,10 +7,10 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.html.Option;
 
-class SelectedAdapterTest extends BaseTestClass
+public class SelectedAdapterTest extends BaseTestClass
 {
 	@Test
-	void test()
+	public void test()
 	{
 		Option test = new Option<>("optionValue");
 		test.setID("test");
@@ -27,7 +27,7 @@ class SelectedAdapterTest extends BaseTestClass
 	}
 
 	@Test
-	void testDirective()
+	public void testDirective()
 	{
 		Option test = new Option<>("optionValue");
 		test.setID("test");

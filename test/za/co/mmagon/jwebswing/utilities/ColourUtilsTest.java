@@ -3,10 +3,10 @@ package za.co.mmagon.jwebswing.utilities;
 import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.BaseTestClass;
 
-class ColourUtilsTest extends BaseTestClass
+public class ColourUtilsTest extends BaseTestClass
 {
 	@Test
-	void getColourBetweenColours()
+	public void getColourBetweenColours()
 	{
 		System.out.println(107560.0 / 1000);
 		System.out.println(Math.ceil(107560.0 / 1000));

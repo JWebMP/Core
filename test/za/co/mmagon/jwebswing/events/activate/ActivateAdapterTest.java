@@ -9,10 +9,10 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.DivSimple;
 
-class ActivateAdapterTest extends BaseTestClass
+public class ActivateAdapterTest extends BaseTestClass
 {
 	@Test
-	void test()
+	public void test()
 	{
 		Div test = new DivSimple<>();
 		test.setID("test");
@@ -29,7 +29,7 @@ class ActivateAdapterTest extends BaseTestClass
 	}
 
 	@Test
-	void testDirective()
+	public void testDirective()
 	{
 		Div test = new DivSimple<>();
 		test.setPage(new Page());

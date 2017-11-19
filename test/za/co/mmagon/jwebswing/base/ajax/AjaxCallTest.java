@@ -11,7 +11,7 @@ import java.util.Date;
 public class AjaxCallTest extends BaseTestClass
 {
 	@Test
-	void fromCall()
+	public void fromCall()
 	{
 		AjaxCall call = new AjaxCall();
 		call.setComponent(new CSSComponent("TestComponent")

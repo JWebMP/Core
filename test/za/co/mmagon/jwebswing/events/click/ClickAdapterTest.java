@@ -35,7 +35,7 @@ public class ClickAdapterTest extends BaseTestClass
 	}
 
 	@Test
-	void test()
+	public void test()
 	{
 		Div test = new DivSimple<>();
 		test.setID("test");
@@ -52,7 +52,7 @@ public class ClickAdapterTest extends BaseTestClass
 	}
 
 	@Test
-	void testDirective()
+	public void testDirective()
 	{
 		Div test = new DivSimple<>();
 		test.setID("test");
