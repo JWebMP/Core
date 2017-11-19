@@ -3,7 +3,7 @@ package za.co.mmagon.jwebswing.utilities;
 import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.BaseTestClass;
 
-class ColourUtilsTest extends BaseTestClass
+public class ColourUtilsTest extends BaseTestClass
 {
 	@Test
 	void getColourBetweenColours()

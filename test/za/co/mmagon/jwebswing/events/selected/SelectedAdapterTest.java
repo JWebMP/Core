@@ -7,7 +7,7 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.html.Option;
 
-class SelectedAdapterTest extends BaseTestClass
+public class SelectedAdapterTest extends BaseTestClass
 {
 	@Test
 	void test()

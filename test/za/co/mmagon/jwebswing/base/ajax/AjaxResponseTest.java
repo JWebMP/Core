@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.base.html.DivSimple;
 
-class AjaxResponseTest
+public class AjaxResponseTest
 {
 	@Test
 	public void testResponse()

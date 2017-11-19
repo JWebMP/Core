@@ -8,7 +8,7 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.DivSimple;
 
-class MouseMoveAdapterTest extends BaseTestClass
+public class MouseMoveAdapterTest extends BaseTestClass
 {
 	@Test
 	void test()

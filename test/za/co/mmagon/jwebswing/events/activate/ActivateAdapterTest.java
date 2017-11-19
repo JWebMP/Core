@@ -9,7 +9,7 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.DivSimple;
 
-class ActivateAdapterTest extends BaseTestClass
+public class ActivateAdapterTest extends BaseTestClass
 {
 	@Test
 	void test()
