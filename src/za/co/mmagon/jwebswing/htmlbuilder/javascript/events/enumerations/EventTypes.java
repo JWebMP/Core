@@ -41,7 +41,7 @@ import za.co.mmagon.jwebswing.events.sort.SortAdapter;
 import za.co.mmagon.jwebswing.events.spin.SpinAdapter;
 import za.co.mmagon.jwebswing.events.start.StartAdapter;
 import za.co.mmagon.jwebswing.events.stop.StopAdapter;
-import za.co.mmagon.jwebswing.events.unselected.UnselectedtAdapter;
+import za.co.mmagon.jwebswing.events.unselected.UnselectedAdapter;
 import za.co.mmagon.jwebswing.events.update.UpdateAdapter;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.commandevent.PerformCommandEvent;
 
@@ -166,7 +166,7 @@ public enum EventTypes implements Comparable<EventTypes>
 	 * fire a change event.
 	 */
 	change(ChangeEvent.class, null),
-	unselected(UnselectedtAdapter.class, null),
+	unselected(UnselectedAdapter.class, null),
 	selected(SelectedAdapter.class, null),
 	selecting(SelectingAdapter.class, null),
 	deactivate(DeactivateAdapter.class, null),

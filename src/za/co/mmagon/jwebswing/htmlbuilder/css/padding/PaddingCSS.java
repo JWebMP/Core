@@ -37,6 +37,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
+@Documented
 public @interface PaddingCSS
 {
 	

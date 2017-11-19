@@ -41,6 +41,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
+@Documented
 public @interface BorderRightCSS
 {
 
@@ -49,27 +50,27 @@ public @interface BorderRightCSS
 	 *
 	 * @return
 	 */
-	public ColourCSS BorderRightColor() default @ColourCSS;
+	ColourCSS BorderRightColor() default @ColourCSS;
 
 	/**
 	 * Sets the color of the right border
 	 *
 	 * @return
 	 */
-	public ColourNames BorderRightColor$() default ColourNames.Unset;
+	ColourNames BorderRightColor$() default ColourNames.Unset;
 
 	/**
 	 * Sets the style of the right border
 	 *
 	 * @return
 	 */
-	public BorderStyles BorderRightStyle() default BorderStyles.Unset;
+	BorderStyles BorderRightStyle() default BorderStyles.Unset;
 
 	/**
 	 * Sets the style of the right border
 	 *
 	 * @return
 	 */
-	public MeasurementCSS BorderRightWidth() default @MeasurementCSS;
+	MeasurementCSS BorderRightWidth() default @MeasurementCSS;
 
 }

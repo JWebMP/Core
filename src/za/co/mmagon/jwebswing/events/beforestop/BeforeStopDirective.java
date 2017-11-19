@@ -19,6 +19,8 @@ package za.co.mmagon.jwebswing.events.beforestop;
 import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Maps to the angular function of right click
  *
@@ -45,6 +47,7 @@ public class BeforeStopDirective extends AngularDirectiveBase
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public String renderFunction()
 	{
 		return FileTemplates.getFileTemplate(BeforeStopDirective.class, "BeforeStop").toString();

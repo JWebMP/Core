@@ -27,7 +27,7 @@ import java.util.List;
  * @author GedMarc
  * @since 30 Dec 2015
  */
-public abstract class JavascriptLiteralFunction extends JavascriptFunction
+public abstract class JavascriptLiteralFunction<J extends JavascriptLiteralFunction<J>> extends JavascriptFunction<J>
 {
 
 	private static final long serialVersionUID = 1L;

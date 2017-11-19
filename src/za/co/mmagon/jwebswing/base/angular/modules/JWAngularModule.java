@@ -18,13 +18,15 @@ package za.co.mmagon.jwebswing.base.angular.modules;
 
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.angular.AngularFeature;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
-import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_COMMNA;
-import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SINGLE_QUOTES;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.*;
 
 /**
  * @author GedMarc
@@ -34,6 +36,9 @@ public class JWAngularModule extends AngularModuleBase
 {
 
 	private static final long serialVersionUID = 1L;
+	/**
+	 * The attached page
+	 */
 	private Page page;
 
 	public JWAngularModule(Page component)
@@ -55,21 +60,18 @@ public class JWAngularModule extends AngularModuleBase
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public String renderFunction()
 	{
 		String returnable = "var " + AngularFeature.getAppName() + " = angular.module(";
 		returnable += STRING_SINGLE_QUOTES + AngularFeature.getAppName() + "',";
 
-		ArrayList<String> moduleNames = new ArrayList<>();
-		List<AngularModuleBase> modules = page.getAngular().getAngularModules();
-		Collections.sort(modules, (o1, o2) -> o1.compare(o1, o2));
+		Set<String> moduleNames = new LinkedHashSet<>();
+		List<AngularModuleBase> modules = new ArrayList<>(page.getAngular().getAngularModules());
+		modules.sort((o1, o2) -> o1.compare(o1, o2));
 		for (AngularModuleBase module : modules)
 		{
-			String name = module.getReferenceName();
-			if (name != null && !moduleNames.contains(name))
-			{
-				moduleNames.add(module.getReferenceName());
-			}
+			moduleNames.add(module.getReferenceName());
 		}
 
 		StringBuilder nameRenders = new StringBuilder();
@@ -82,8 +84,8 @@ public class JWAngularModule extends AngularModuleBase
 		{
 			nameRenders = nameRenders.deleteCharAt(nameRenders.lastIndexOf(STRING_COMMNA));
 		}
-		nameRenders.insert(0, "[");
-		nameRenders.append("]");
+		nameRenders.insert(0, StaticStrings.STRING_SQUARE_BRACE_OPEN);
+		nameRenders.append(STRING_SQUARE_BRACE_CLOSED);
 		returnable += nameRenders;
 
 		returnable += ");";

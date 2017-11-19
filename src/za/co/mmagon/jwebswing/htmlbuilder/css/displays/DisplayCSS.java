@@ -34,6 +34,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
+@Documented
 public @interface DisplayCSS
 {
 
@@ -73,83 +74,83 @@ public @interface DisplayCSS
 	 *
 	 * @return
 	 */
-	public Displays Display() default Displays.Unset;
+	Displays Display() default Displays.Unset;
 
 	/**
 	 * The mouse cursor
 	 *
 	 * @return
 	 */
-	public Cursors Cursor() default Cursors.Unset;
+	Cursors Cursor() default Cursors.Unset;
 
 	/**
 	 * Sets the overflow
 	 *
 	 * @return
 	 */
-	public Overflows Overflow() default Overflows.Unset;
+	Overflows Overflow() default Overflows.Unset;
 
 	/**
 	 * Sets the Overflow for Horizontal
 	 *
 	 * @return
 	 */
-	public Overflows OverflowX() default Overflows.Unset;
+	Overflows OverflowX() default Overflows.Unset;
 
 	/**
 	 * Sets the Overflow for Vertical
 	 *
 	 * @return
 	 */
-	public Overflows OverflowY() default Overflows.Unset;
+	Overflows OverflowY() default Overflows.Unset;
 
 	/**
 	 * Sets the Position to apply
 	 *
 	 * @return
 	 */
-	public Positions Position() default Positions.Unset;
+	Positions Position() default Positions.Unset;
 
 	/**
 	 * Sets how an object must float
 	 *
 	 * @return
 	 */
-	public za.co.mmagon.jwebswing.htmlbuilder.css.displays.Floats FloatProperty() default za.co.mmagon.jwebswing.htmlbuilder.css.displays.Floats.Unset;
+	za.co.mmagon.jwebswing.htmlbuilder.css.displays.Floats FloatProperty() default za.co.mmagon.jwebswing.htmlbuilder.css.displays.Floats.Unset;
 
 	/**
 	 * Sets the Z-Index of the component
 	 *
 	 * @return
 	 */
-	public MeasurementCSS ZIndex() default @MeasurementCSS;
+	MeasurementCSS ZIndex() default @MeasurementCSS;
 
 	/**
 	 * Sets the bottom margin edge for a positioned box
 	 *
 	 * @return
 	 */
-	public MeasurementCSS Bottom() default @MeasurementCSS;
+	MeasurementCSS Bottom() default @MeasurementCSS;
 
 	/**
 	 * Sets the bottom margin edge for a positioned box
 	 *
 	 * @return
 	 */
-	public MeasurementCSS Left() default @MeasurementCSS;
+	MeasurementCSS Left() default @MeasurementCSS;
 
 	/**
 	 * Sets the bottom margin edge for a positioned box
 	 *
 	 * @return
 	 */
-	public MeasurementCSS Right() default @MeasurementCSS;
+	MeasurementCSS Right() default @MeasurementCSS;
 
 	/**
 	 * Sets the bottom margin edge for a positioned box
 	 *
 	 * @return
 	 */
-	public MeasurementCSS Top() default @MeasurementCSS;
+	MeasurementCSS Top() default @MeasurementCSS;
 
 }

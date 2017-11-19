@@ -6,8 +6,7 @@ import za.co.mmagon.jwebswing.BaseTestClass;
 import za.co.mmagon.jwebswing.CSSComponent;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import java.util.Date;
 
 public class AjaxCallTest extends BaseTestClass
 {
@@ -42,7 +41,7 @@ public class AjaxCallTest extends BaseTestClass
 			}
 		});
 		call.setComponentId("ComponentID");
-		call.setDatetime(Date.valueOf(LocalDate.MAX));
+		call.setDatetime(new Date(2017, 11, 18));
 		call.setEventType(EventTypes.undefined);
 		call.setEventId("EventID");
 		call.getParameters().put("Test", "value");
@@ -73,7 +72,7 @@ public class AjaxCallTest extends BaseTestClass
 
 		Assertions.assertEquals("{\n" +
 				                        "  \"componentId\" : \"ComponentID\",\n" +
-				                        "  \"datetime\" : -5336598314731903232,\n" +
+				                        "  \"datetime\" : 61471692000000,\n" +
 				                        "  \"eventType\" : \"undefined\",\n" +
 				                        "  \"value\" : {\n" +
 				                        "    \"altKey\" : true,\n" +

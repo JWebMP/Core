@@ -16,6 +16,7 @@
  */
 package za.co.mmagon.jwebswing.base.angular.controllers;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Comparator;
 
@@ -53,6 +54,7 @@ public abstract class AngularControllerScopeStatement implements Comparator<Angu
 	 *
 	 * @return
 	 */
+	@NotNull
 	public Integer getSortOrder()
 	{
 		return sortOrder;

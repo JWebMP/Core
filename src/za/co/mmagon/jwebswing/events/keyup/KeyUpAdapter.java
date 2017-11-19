@@ -28,6 +28,9 @@ import za.co.mmagon.logger.LogFactory;
 
 import java.util.logging.Level;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_ANGULAR_EVENT_START;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON;
+
 /**
  * Handles all events. Over-ride methods.
  *
@@ -62,7 +65,7 @@ public abstract class KeyUpAdapter extends Event
 		if (!isConfigured())
 		{
 			AngularPageConfigurator.setRequired(getComponent(), true);
-			getComponent().addAttribute(AngularAttributes.ngKeyup, "jwCntrl.perform($event," + renderVariables() + ");");
+			getComponent().addAttribute(AngularAttributes.ngKeyup, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
 		super.preConfigure();
 	}

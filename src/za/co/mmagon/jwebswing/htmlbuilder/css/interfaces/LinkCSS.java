@@ -15,14 +15,15 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
+@Documented
 public @interface LinkCSS
 {
 
-	public CSS hover() default @CSS();
+	CSS hover() default @CSS();
 
-	public CSS link() default @CSS();
+	CSS link() default @CSS();
 
-	public CSS visited() default @CSS();
+	CSS visited() default @CSS();
 
-	public CSS active() default @CSS();
+	CSS active() default @CSS();
 }

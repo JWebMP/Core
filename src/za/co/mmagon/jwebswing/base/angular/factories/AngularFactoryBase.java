@@ -18,6 +18,8 @@ package za.co.mmagon.jwebswing.base.angular.factories;
 
 import za.co.mmagon.jwebswing.base.angular.AngularReferenceBase;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Is an angular module
  *
@@ -34,7 +36,7 @@ public abstract class AngularFactoryBase extends AngularReferenceBase
 	 *
 	 * @param moduleName This modules name
 	 */
-	public AngularFactoryBase(String moduleName)
+	public AngularFactoryBase(@NotNull String moduleName)
 	{
 		super(moduleName);
 	}

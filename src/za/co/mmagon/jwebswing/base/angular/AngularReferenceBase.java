@@ -18,6 +18,7 @@ package za.co.mmagon.jwebswing.base.angular;
 
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptLiteralFunction;
 
+import javax.validation.constraints.NotNull;
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -46,7 +47,7 @@ public abstract class AngularReferenceBase extends JavascriptLiteralFunction imp
 	 *
 	 * @param moduleName This references name
 	 */
-	public AngularReferenceBase(String moduleName)
+	public AngularReferenceBase(@NotNull String moduleName)
 	{
 		this.referenceName = moduleName;
 	}
@@ -56,6 +57,7 @@ public abstract class AngularReferenceBase extends JavascriptLiteralFunction imp
 	 *
 	 * @return
 	 */
+	@NotNull
 	public String getReferenceName()
 	{
 		return referenceName;

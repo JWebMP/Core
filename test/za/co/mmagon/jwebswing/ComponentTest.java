@@ -17,8 +17,11 @@
 package za.co.mmagon.jwebswing;
 
 import org.junit.jupiter.api.Test;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.Body;
+import za.co.mmagon.jwebswing.base.html.Meta;
 import za.co.mmagon.jwebswing.base.html.Paragraph;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -30,6 +33,20 @@ public class ComponentTest extends BaseTestClass
 	
 	public ComponentTest()
 	{
+	}
+
+	@Test
+	public void test()
+	{
+		Component head = new Component(ComponentTypes.Head)
+		{
+		};
+		head.add(new Meta("name"));
+		head.add(new Meta(Meta.MetadataFields.Author, "Author Me"));
+		ComponentHierarchyBase body = new ComponentHierarchyBase(ComponentTypes.Body);
+		System.out.println(head.toString());
+		System.out.println(head.toString(true));
+		System.out.println(body.toString(true));
 	}
 	
 	/**

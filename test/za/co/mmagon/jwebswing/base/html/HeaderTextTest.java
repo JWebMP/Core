@@ -44,4 +44,23 @@ public class HeaderTextTest
 		h2.setHeaderText("new text");
 		Assertions.assertFalse(h1.equals(h2));
 	}
+
+	@Test
+	public void allHeaders()
+	{
+		H1 h1 = new H1<>("bla").setID("id");
+		H2 h2 = new H2<>("bla").setID("id");
+		H3 h3 = new H3<>("bla").setID("id");
+		H4 h4 = new H4<>("bla").setID("id");
+		H5 h5 = new H5<>("bla").setID("id");
+		H6 h6 = new H6<>("bla").setID("id");
+
+		h1.setID("id");
+		System.out.println(h1.toString(true));
+		System.out.println(h2.toString(true));
+		System.out.println(h3.toString(true));
+		System.out.println(h4.toString(true));
+		System.out.println(h5.toString(true));
+		System.out.println(h6.toString(true));
+	}
 }

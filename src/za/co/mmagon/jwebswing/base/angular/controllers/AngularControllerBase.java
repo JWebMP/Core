@@ -18,6 +18,8 @@ package za.co.mmagon.jwebswing.base.angular.controllers;
 
 import za.co.mmagon.jwebswing.base.angular.AngularReferenceBase;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Is an angular module
  *
@@ -34,7 +36,7 @@ public abstract class AngularControllerBase extends AngularReferenceBase
 	 *
 	 * @param moduleName This modules name
 	 */
-	public AngularControllerBase(String moduleName)
+	public AngularControllerBase(@NotNull String moduleName)
 	{
 		super(moduleName);
 	}

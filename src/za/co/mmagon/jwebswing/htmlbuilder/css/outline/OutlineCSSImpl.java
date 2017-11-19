@@ -33,6 +33,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.measurement.MeasurementCSSImpl;
  * @author GedMarc
  * @since 18 Jan 2016
  */
+
 public class OutlineCSSImpl extends CSSImplementationAdapter<OutlineCSS, OutlineCSSImpl> implements CSSImplementationClass<OutlineCSS, OutlineCSSImpl>
 {
 	

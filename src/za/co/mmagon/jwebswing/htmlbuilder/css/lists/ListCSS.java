@@ -44,6 +44,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
+@Documented
 public @interface ListCSS
 {
 
@@ -52,19 +53,19 @@ public @interface ListCSS
 	 *
 	 * @return
 	 */
-	public ImageCSS ListStyleImage() default @ImageCSS;
+	ImageCSS ListStyleImage() default @ImageCSS;
 
 	/**
 	 * Specifies if the list-item markers should appear inside or outside the content flow
 	 *
 	 * @return
 	 */
-	public ListStylePosition ListStylePosition() default ListStylePosition.Unset;
+	ListStylePosition ListStylePosition() default ListStylePosition.Unset;
 
 	/**
 	 * Specifies the type of list-item marker
 	 *
 	 * @return
 	 */
-	public ListStyleType ListStyleType() default ListStyleType.Unset;
+	ListStyleType ListStyleType() default ListStyleType.Unset;
 }

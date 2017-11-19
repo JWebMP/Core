@@ -101,8 +101,6 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 	 *
 	 * @param request
 	 * 		Servlet request
-	 * @param response
-	 * 		Servlet response
 	 *
 	 * @throws ServletException
 	 * 		if a Servlet-specific error occurs
@@ -133,7 +131,11 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 
 			triggerEvent.fireEvent(ajaxCall, ajaxResponse);
 			output = new StringBuilder(ajaxResponse.toString());
-			ajaxResponse.getComponents().forEach(ComponentHierarchyBase::preConfigure);
+			ajaxResponse.getComponents().forEach(a ->
+			                                     {
+				                                     ComponentHierarchyBase c = (ComponentHierarchyBase) a;
+				                                     c.preConfigure();
+			                                     });
 		}
 		catch (InvalidRequestException ie)
 		{

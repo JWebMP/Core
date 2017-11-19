@@ -34,6 +34,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
+@Documented
 public @interface TableCSS
 {
 
@@ -42,20 +43,20 @@ public @interface TableCSS
 	 *
 	 * @return
 	 */
-	public TableBorderCollapse BorderCollapse() default TableBorderCollapse.Unset;
+	TableBorderCollapse BorderCollapse() default TableBorderCollapse.Unset;
 
 	/**
 	 * Sets where the caption will appear
 	 *
 	 * @return
 	 */
-	public TableCaptionSides TableCaptionSide() default TableCaptionSides.Unset;
+	TableCaptionSides TableCaptionSide() default TableCaptionSides.Unset;
 
 	/**
 	 * Sets the border spacing for the table
 	 *
 	 * @return
 	 */
-	public MeasurementCSS BorderSpacing() default @MeasurementCSS;
+	MeasurementCSS BorderSpacing() default @MeasurementCSS;
 
 }

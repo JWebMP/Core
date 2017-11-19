@@ -39,6 +39,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
+@Documented
 public @interface OutlineCSS
 {
 	
@@ -47,33 +48,33 @@ public @interface OutlineCSS
 	 *
 	 * @return
 	 */
-	public ColourCSS OutlineColor() default @ColourCSS;
+	ColourCSS OutlineColor() default @ColourCSS;
 	
 	/**
 	 * Sets the color of an outline
 	 *
 	 * @return
 	 */
-	public ColourNames OutlineColor$() default ColourNames.Unset;
+	ColourNames OutlineColor$() default ColourNames.Unset;
 	
 	/**
 	 * Sets the style of an outline
 	 *
 	 * @return
 	 */
-	public BorderStyles OutlineStyle() default BorderStyles.Unset;
+	BorderStyles OutlineStyle() default BorderStyles.Unset;
 	
 	/**
 	 * Sets the width of an outline
 	 *
 	 * @return
 	 */
-	public MeasurementCSS OutlineWidth() default @MeasurementCSS;
+	MeasurementCSS OutlineWidth() default @MeasurementCSS;
 	
 	/**
 	 * Specifies the space between an outline and the edge or border of an element
 	 *
 	 * @return
 	 */
-	public MeasurementCSS OutlineOffset() default @MeasurementCSS;
+	MeasurementCSS OutlineOffset() default @MeasurementCSS;
 }

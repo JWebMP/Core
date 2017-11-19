@@ -28,7 +28,11 @@ import za.co.mmagon.jwebswing.plugins.ComponentInformation;
 import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 import za.co.mmagon.logger.LogFactory;
 
+import javax.validation.constraints.NotNull;
 import java.util.logging.Level;
+
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_ANGULAR_EVENT_START;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON;
 
 /**
  * Handles all events. Over-ride methods.
@@ -59,7 +63,7 @@ public abstract class ActivateAdapter extends Event
 	public ActivateAdapter(Component component)
 	{
 		super(EventTypes.activate, component);
-
+		setComponent(component);
 	}
 
 	/**
@@ -73,7 +77,7 @@ public abstract class ActivateAdapter extends Event
 			JQueryPageConfigurator.setRequired((Component) getComponent(), true);
 			AngularPageConfigurator.setRequired(getComponent(), true);
 			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-			getComponent().addAttribute(AngularAttributes.ngActivate, "jwCntrl.perform($event," + renderVariables() + ");");
+			getComponent().addAttribute(AngularAttributes.ngActivate, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
 		super.preConfigure();
 	}
@@ -83,6 +87,7 @@ public abstract class ActivateAdapter extends Event
 	 *
 	 * @return
 	 */
+	@NotNull
 	public ActivateDirective getDirective()
 	{
 		if (directive == null)

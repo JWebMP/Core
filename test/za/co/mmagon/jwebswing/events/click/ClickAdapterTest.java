@@ -16,57 +16,57 @@
  */
 package za.co.mmagon.jwebswing.events.click;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import za.co.mmagon.jwebswing.BaseTestClass;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.html.Div;
+import za.co.mmagon.jwebswing.base.html.DivSimple;
 
 /**
  * @author Marc Magon
  */
-public class ClickAdapterTest
+public class ClickAdapterTest extends BaseTestClass
 {
 	
 	public ClickAdapterTest()
 	{
 	}
-	
+
 	@Test
-	public void testPreConfigure()
+	void test()
 	{
-	}
-	
-	@Test
-	public void testOnClick()
-	{
-		Div d = new Div();
-		d.addEvent(new ClickAdapter(d)
+		Div test = new DivSimple<>();
+		test.setID("test");
+		ClickAdapter aa = new ClickAdapter(test)
 		{
 			@Override
 			public void onClick(AjaxCall call, AjaxResponse response)
 			{
-			
+
 			}
-		});
-		System.out.println(d.toString(true));
-	}
-	
-	@Test
-	public void testFireEvent()
-	{
-	}
-	
-	public class ClickAdapterImpl extends ClickAdapter
-	{
-		
-		public ClickAdapterImpl()
-		{
-			super(null);
-		}
-		
-		public void onClick(AjaxCall call, AjaxResponse response)
-		{
-		}
+		};
+		System.out.println(test.toString(0));
+		Assertions.assertEquals("<div id=\"test\" ng-click=\"jwCntrl.jw.isLoading || jwCntrl.perform($event,[],'za_co_mmagon_jwebswing_events_click_ClickAdapterTest$1','za.co.mmagon.jwebswing.events.click.ClickAdapterTest$1');\" ng-disabled=\"jwCntrl.jw.isLoading\"></div>", test.toString(0));
 	}
 
+	@Test
+	void testDirective()
+	{
+		Div test = new DivSimple<>();
+		test.setID("test");
+		test.getPage().getAngular().getAngularDirectives().clear();
+		ClickAdapter aa = new ClickAdapter(test)
+		{
+			@Override
+			public void onClick(AjaxCall call, AjaxResponse response)
+			{
+
+			}
+		};
+		System.out.println(test.toString(0));
+		System.out.println(test.getPage().getAngular().getAngularDirectives());
+		Assertions.assertEquals(0, test.getPage().getAngular().getAngularDirectives().size());
+	}
 }

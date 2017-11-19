@@ -16,19 +16,24 @@
  */
 package za.co.mmagon.jwebswing.events.selected;
 
-import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.Event;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
+import za.co.mmagon.jwebswing.base.html.Option;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
 
 import java.util.logging.Level;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_ANGULAR_EVENT_START;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON;
+
 /**
- * Handles all events. Over-ride methods.
+ * Sets the selected attribute on the element, if the expression inside ngSelected is truthy.
+
+ A special directive is necessary because we cannot use interpolation inside the selected attribute. See the interpolation guide for more info.
  *
  * @author Marc Magon
  */
@@ -47,10 +52,23 @@ public abstract class SelectedAdapter extends Event
 	 *
 	 * @param component The component this click is going to be acting on
 	 */
-	public SelectedAdapter(Component component)
+	public SelectedAdapter(Option component)
 	{
 		super(EventTypes.selected, component);
 
+	}
+
+	@Override
+	public void fireEvent(AjaxCall call, AjaxResponse response)
+	{
+		try
+		{
+			onSelected(call, response);
+		}
+		catch (Exception e)
+		{
+			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+		}
 	}
 
 	/**
@@ -62,7 +80,7 @@ public abstract class SelectedAdapter extends Event
 		if (!isConfigured())
 		{
 
-			getComponent().addAttribute(AngularAttributes.ngSelected, "jwCntrl.perform($event," + renderVariables() + ");");
+			getComponent().addAttribute(AngularAttributes.ngSelected, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
 		super.preConfigure();
 	}
@@ -74,19 +92,6 @@ public abstract class SelectedAdapter extends Event
 	 * @param call     The physical AJAX call
 	 * @param response The physical Ajax Receiver
 	 */
-	public abstract void onRightClick(AjaxCall call, AjaxResponse response);
-
-	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
-	{
-		try
-		{
-			onRightClick(call, response);
-		}
-		catch (Exception e)
-		{
-			LOG.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+	public abstract void onSelected(AjaxCall call, AjaxResponse response);
 
 }

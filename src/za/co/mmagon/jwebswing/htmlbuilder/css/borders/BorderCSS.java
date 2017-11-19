@@ -41,6 +41,7 @@ import java.lang.annotation.*;
 		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
+@Documented
 public @interface BorderCSS
 {
 
@@ -49,145 +50,145 @@ public @interface BorderCSS
 	 *
 	 * @return
 	 */
-	public Border Border() default @Border;
+	Border Border() default @Border;
 
 	/**
 	 * The border-top shorthand property sets all the top border properties in one declaration.
 	 *
 	 * @return
 	 */
-	public BorderBottomCSS BorderBottom() default @BorderBottomCSS;
+	BorderBottomCSS BorderBottom() default @BorderBottomCSS;
 
 	/**
 	 * The border-top shorthand property sets all the top border properties in one declaration.
 	 *
 	 * @return
 	 */
-	public BorderBottomCSS BorderLeft() default @BorderBottomCSS;
+	BorderBottomCSS BorderLeft() default @BorderBottomCSS;
 
 	/**
 	 * The border-top shorthand property sets all the top border properties in one declaration.
 	 *
 	 * @return
 	 */
-	public BorderBottomCSS BorderRight() default @BorderBottomCSS;
+	BorderBottomCSS BorderRight() default @BorderBottomCSS;
 
 	/**
 	 * The border-top shorthand property sets all the top border properties in one declaration.
 	 *
 	 * @return
 	 */
-	public BorderBottomCSS BorderTop() default @BorderBottomCSS;
+	BorderBottomCSS BorderTop() default @BorderBottomCSS;
 
 	/**
 	 * Sets the color of the bottom border
 	 *
 	 * @return
 	 */
-	public ColourCSS BorderBottomColor() default @ColourCSS;
+	ColourCSS BorderBottomColor() default @ColourCSS;
 
 	/**
 	 * Sets the color of the bottom border
 	 *
 	 * @return
 	 */
-	public ColourNames BorderBottomColor$() default ColourNames.Unset;
+	ColourNames BorderBottomColor$() default ColourNames.Unset;
 
 	/**
 	 * Sets the Style of the bottom border
 	 *
 	 * @return
 	 */
-	public BorderStyles BorderBottomStyle() default BorderStyles.Unset;
+	BorderStyles BorderBottomStyle() default BorderStyles.Unset;
 
 	/**
 	 * Sets the width of the bottom border
 	 *
 	 * @return
 	 */
-	public MeasurementCSS BorderBottomWidth() default @MeasurementCSS;
+	MeasurementCSS BorderBottomWidth() default @MeasurementCSS;
 
 	/**
 	 * Sets the colour of the left border
 	 *
 	 * @return
 	 */
-	public ColourCSS BorderLeftColor() default @ColourCSS;
+	ColourCSS BorderLeftColor() default @ColourCSS;
 
 	/**
 	 * Sets the colour of the left border
 	 *
 	 * @return
 	 */
-	public ColourNames BorderLeftColor$() default ColourNames.Unset;
+	ColourNames BorderLeftColor$() default ColourNames.Unset;
 
 	/**
 	 * Sets the style of the left border
 	 *
 	 * @return
 	 */
-	public BorderStyles BorderLeftStyle() default BorderStyles.Unset;
+	BorderStyles BorderLeftStyle() default BorderStyles.Unset;
 
 	/**
 	 * Sets the width of the left border
 	 *
 	 * @return
 	 */
-	public MeasurementCSS BorderLeftWidth() default @MeasurementCSS;
+	MeasurementCSS BorderLeftWidth() default @MeasurementCSS;
 
 	/**
 	 * Sets the color of the right border
 	 *
 	 * @return
 	 */
-	public ColourCSS BorderRightColor() default @ColourCSS;
+	ColourCSS BorderRightColor() default @ColourCSS;
 
 	/**
 	 * Sets the color of the right border
 	 *
 	 * @return
 	 */
-	public ColourNames BorderRightColor$() default ColourNames.Unset;
+	ColourNames BorderRightColor$() default ColourNames.Unset;
 
 	/**
 	 * Sets the style of the right border
 	 *
 	 * @return
 	 */
-	public BorderStyles BorderRightStyle() default BorderStyles.Unset;
+	BorderStyles BorderRightStyle() default BorderStyles.Unset;
 
 	/**
 	 * Sets the style of the right border
 	 *
 	 * @return
 	 */
-	public MeasurementCSS BorderRightWidth() default @MeasurementCSS;
+	MeasurementCSS BorderRightWidth() default @MeasurementCSS;
 
 	/**
 	 * Sets the color of the top border
 	 *
 	 * @return
 	 */
-	public ColourCSS BorderTopColor() default @ColourCSS;
+	ColourCSS BorderTopColor() default @ColourCSS;
 
 	/**
 	 * Sets the color of the top border
 	 *
 	 * @return
 	 */
-	public ColourNames BorderTopColor$() default ColourNames.Unset;
+	ColourNames BorderTopColor$() default ColourNames.Unset;
 
 	/**
 	 * Sets the style of the top border
 	 *
 	 * @return
 	 */
-	public BorderStyles BorderTopStyle() default BorderStyles.Unset;
+	BorderStyles BorderTopStyle() default BorderStyles.Unset;
 
 	/**
 	 * Sets the width of the top border
 	 *
 	 * @return
 	 */
-	public MeasurementCSS BorderTopWidth() default @MeasurementCSS;
+	MeasurementCSS BorderTopWidth() default @MeasurementCSS;
 }

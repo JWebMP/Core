@@ -41,6 +41,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
+@Documented
 public @interface BorderTopCSS
 {
 
@@ -49,26 +50,26 @@ public @interface BorderTopCSS
 	 *
 	 * @return
 	 */
-	public ColourCSS BorderTopColor() default @ColourCSS;
+	ColourCSS BorderTopColor() default @ColourCSS;
 
 	/**
 	 * Sets the color of the top border
 	 *
 	 * @return
 	 */
-	public ColourNames BorderTopColor$() default ColourNames.Unset;
+	ColourNames BorderTopColor$() default ColourNames.Unset;
 
 	/**
 	 * Sets the style of the top border
 	 *
 	 * @return
 	 */
-	public BorderStyles BorderTopStyle() default BorderStyles.Unset;
+	BorderStyles BorderTopStyle() default BorderStyles.Unset;
 
 	/**
 	 * Sets the width of the top border
 	 *
 	 * @return
 	 */
-	public MeasurementCSS BorderTopWidth() default @MeasurementCSS;
+	MeasurementCSS BorderTopWidth() default @MeasurementCSS;
 }

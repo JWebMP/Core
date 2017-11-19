@@ -37,6 +37,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
+@Documented
 public @interface CSSDetail
 {
 	/**
@@ -44,54 +45,54 @@ public @interface CSSDetail
 	 *
 	 * @return
 	 */
-	public CSSVersions cssVersion() default CSSVersions.CSS21;
+	CSSVersions cssVersion() default CSSVersions.CSS21;
 
 	/**
 	 * The name of this CSS class
 	 *
 	 * @return
 	 */
-	public String cssName() default "";
+	String cssName() default "";
 
 	/**
 	 * The JSon name
 	 *
 	 * @return
 	 */
-	public String jsonName() default "";
+	String jsonName() default "";
 
 	/**
 	 * The JavaScript name
 	 *
 	 * @return
 	 */
-	public String jsName() default "";
+	String jsName() default "";
 
 	/**
 	 * Tooltip if any
 	 *
 	 * @return
 	 */
-	public String tooltip() default "";
+	String tooltip() default "";
 
 	/**
 	 * What to do display when falling back
 	 *
 	 * @return
 	 */
-	public String fallback() default "";
+	String fallback() default "";
 
 	/**
 	 * Referenced Field Name
 	 *
 	 * @return
 	 */
-	public String field() default "";
+	String field() default "";
 
 	/**
 	 * Whether or not this tag is flagged as important
 	 *
 	 * @return
 	 */
-	public boolean isImportant() default false;
+	boolean isImportant() default false;
 }

@@ -33,8 +33,9 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
+@Documented
 public @interface Border
 {
 
-	public BorderLeftCSS Border() default @BorderLeftCSS;
+	BorderLeftCSS Border() default @BorderLeftCSS;
 }

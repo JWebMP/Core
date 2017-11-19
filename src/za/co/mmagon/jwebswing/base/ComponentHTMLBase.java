@@ -309,7 +309,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	{
 		if (this instanceof Comment && isTiny())
 		{
-			return null;
+			return new StringBuilder();
 		}
 
 		setCurrentTabIndents(tabCount);

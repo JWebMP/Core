@@ -19,6 +19,8 @@ package za.co.mmagon.jwebswing.events.unselected;
 import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Maps to the angular function of right click
  *
@@ -36,7 +38,7 @@ public class UnselectedDirective extends AngularDirectiveBase
 	 */
 	public UnselectedDirective()
 	{
-		super("ngRightClick");
+		super("ngUnselected");
 	}
 
 	/**
@@ -45,9 +47,10 @@ public class UnselectedDirective extends AngularDirectiveBase
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(UnselectedDirective.class, "Event").toString();
+		return FileTemplates.getFileTemplate(UnselectedDirective.class, "Unselected").toString();
 	}
 
 }

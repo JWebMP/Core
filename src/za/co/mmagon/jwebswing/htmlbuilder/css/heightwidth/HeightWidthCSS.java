@@ -36,6 +36,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
+@Documented
 public @interface HeightWidthCSS
 {
 
@@ -54,7 +55,7 @@ public @interface HeightWidthCSS
 	 *
 	 * @return
 	 */
-	public MeasurementCSS Height() default @MeasurementCSS;
+	MeasurementCSS Height() default @MeasurementCSS;
 
 	/**
 	 * The height property sets the height of an element.
@@ -71,7 +72,7 @@ public @interface HeightWidthCSS
 	 *
 	 * @return
 	 */
-	public HeightSetting Height$() default HeightSetting.Unset;
+	HeightSetting Height$() default HeightSetting.Unset;
 
 	/**
 	 * Definition and Usage
@@ -90,7 +91,7 @@ public @interface HeightWidthCSS
 	 *
 	 * @return
 	 */
-	public MeasurementCSS Width() default @MeasurementCSS;
+	MeasurementCSS Width() default @MeasurementCSS;
 
 	/**
 	 * Definition and Usage
@@ -109,7 +110,7 @@ public @interface HeightWidthCSS
 	 *
 	 * @return
 	 */
-	public WidthSetting Width$() default WidthSetting.Unset;
+	WidthSetting Width$() default WidthSetting.Unset;
 
 	/**
 	 * Definition and Usage
@@ -128,7 +129,7 @@ public @interface HeightWidthCSS
 	 *
 	 * @return
 	 */
-	public MeasurementCSS MinHeight() default @MeasurementCSS;
+	MeasurementCSS MinHeight() default @MeasurementCSS;
 
 	/**
 	 * Definition and Usage
@@ -147,7 +148,7 @@ public @interface HeightWidthCSS
 	 *
 	 * @return
 	 */
-	public MeasurementCSS MaxHeight() default @MeasurementCSS;
+	MeasurementCSS MaxHeight() default @MeasurementCSS;
 
 	/**
 	 * Definition and Usage
@@ -166,7 +167,7 @@ public @interface HeightWidthCSS
 	 *
 	 * @return
 	 */
-	public MeasurementCSS MinWidth() default @MeasurementCSS;
+	MeasurementCSS MinWidth() default @MeasurementCSS;
 
 	/**
 	 * Definition and Usage
@@ -185,5 +186,5 @@ public @interface HeightWidthCSS
 	 *
 	 * @return
 	 */
-	public MeasurementCSS MaxWidth() default @MeasurementCSS;
+	MeasurementCSS MaxWidth() default @MeasurementCSS;
 }

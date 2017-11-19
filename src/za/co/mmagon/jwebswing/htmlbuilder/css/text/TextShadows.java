@@ -33,6 +33,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
+@Documented
 public @interface TextShadows
 {
 
@@ -41,26 +42,26 @@ public @interface TextShadows
 	 *
 	 * @return
 	 */
-	public MeasurementCSS HShadow();
+	MeasurementCSS HShadow();
 
 	/**
 	 * Required. The position of the vertical shadow. Negative values are allowed
 	 *
 	 * @return
 	 */
-	public MeasurementCSS VShadow();
+	MeasurementCSS VShadow();
 
 	/**
 	 * Optional. The blur radius. Default value is 0
 	 *
 	 * @return
 	 */
-	public MeasurementCSS BlurRadius() default @MeasurementCSS;
+	MeasurementCSS BlurRadius() default @MeasurementCSS;
 
 	/**
 	 * Optional. The color of the shadow. Look at CSS Color Values for a complete list of possible color values
 	 *
 	 * @return
 	 */
-	public ColourCSS Color() default @ColourCSS;
+	ColourCSS Color() default @ColourCSS;
 }

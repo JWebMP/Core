@@ -32,6 +32,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
+@Documented
 public @interface CSS
 {
 	
@@ -40,82 +41,82 @@ public @interface CSS
 	 *
 	 * @return
 	 */
-	public AnimateCSS Animatable() default @AnimateCSS;
+	AnimateCSS Animatable() default @AnimateCSS;
 	
 	/**
 	 * Background Properties
 	 *
 	 * @return
 	 */
-	public BackgroundCSS Background() default @BackgroundCSS;
+	BackgroundCSS Background() default @BackgroundCSS;
 	
 	/**
 	 * Border properties
 	 *
 	 * @return
 	 */
-	public BorderCSS Border() default @BorderCSS;
+	BorderCSS Border() default @BorderCSS;
 	
 	/**
 	 * Display properties
 	 *
 	 * @return
 	 */
-	public DisplayCSS Display() default @DisplayCSS;
+	DisplayCSS Display() default @DisplayCSS;
 	
 	/**
 	 * Font properties
 	 *
 	 * @return
 	 */
-	public FontsCSS Font() default @FontsCSS;
+	FontsCSS Font() default @FontsCSS;
 	
 	/**
 	 * Dimension Properties
 	 *
 	 * @return
 	 */
-	public HeightWidthCSS Dimensions() default @HeightWidthCSS;
+	HeightWidthCSS Dimensions() default @HeightWidthCSS;
 	
 	/**
 	 * List Properties
 	 *
 	 * @return
 	 */
-	public ListCSS List() default @ListCSS;
+	ListCSS List() default @ListCSS;
 	
 	/**
 	 * Margin Properties
 	 *
 	 * @return
 	 */
-	public MarginsCSS Margins() default @MarginsCSS;
+	MarginsCSS Margins() default @MarginsCSS;
 	
 	/**
 	 * Outline Properties
 	 *
 	 * @return
 	 */
-	public OutlineCSS Outline() default @OutlineCSS;
+	OutlineCSS Outline() default @OutlineCSS;
 	
 	/**
 	 * Padding Properties
 	 *
 	 * @return
 	 */
-	public PaddingCSS Padding() default @PaddingCSS;
+	PaddingCSS Padding() default @PaddingCSS;
 	
 	/**
 	 * Table Properties
 	 *
 	 * @return
 	 */
-	public TableCSS Table() default @TableCSS;
+	TableCSS Table() default @TableCSS;
 	
 	/**
 	 * Text Properties
 	 *
 	 * @return
 	 */
-	public TextCSS Text() default @TextCSS;
+	TextCSS Text() default @TextCSS;
 }

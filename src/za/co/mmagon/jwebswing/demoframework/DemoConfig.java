@@ -38,12 +38,20 @@ public @interface DemoConfig
 	 *
 	 * @return
 	 */
-	public Class<? extends DemoPanel> demoPanel();
+	Class<? extends DemoPanel> demoPanel();
 
 	/**
 	 * A class that can be instantiated
 	 *
 	 * @return
 	 */
-	public Class<? extends JavaScriptPart> optionsObject();
+	Class<? extends JavaScriptPart> optionsObject();
+
+	/**
+	 * If the demo allows for CSS Entries
+	 *
+	 * @return
+	 */
+	boolean cssCapable() default true;
+
 }

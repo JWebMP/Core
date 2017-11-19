@@ -19,6 +19,8 @@ package za.co.mmagon.jwebswing.events.slide;
 import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Maps to the angular function of right click
  *
@@ -46,6 +48,7 @@ public class SlideDirective extends AngularDirectiveBase
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public String renderFunction()
 	{
 		return FileTemplates.getFileTemplate(SlideDirective.class, "Slide").toString();

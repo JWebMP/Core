@@ -25,14 +25,18 @@ import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.logger.LogFactory;
 
+import javax.validation.constraints.NotNull;
 import java.util.logging.Level;
+
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_ANGULAR_EVENT_START;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON;
 
 /**
  * Handles all events. Over-ride methods.
  *
  * @author Marc Magon
  */
-public abstract class UnselectedtAdapter extends Event
+public abstract class UnselectedAdapter extends Event
 		implements GlobalEvents
 {
 
@@ -48,10 +52,23 @@ public abstract class UnselectedtAdapter extends Event
 	 *
 	 * @param component The component this click is going to be acting on
 	 */
-	public UnselectedtAdapter(Component component)
+	public UnselectedAdapter(Component component)
 	{
 		super(EventTypes.unselected, component);
 
+	}
+
+	@Override
+	public void fireEvent(AjaxCall call, AjaxResponse response)
+	{
+		try
+		{
+			onUnselected(call, response);
+		}
+		catch (Exception e)
+		{
+			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+		}
 	}
 
 	/**
@@ -62,9 +79,8 @@ public abstract class UnselectedtAdapter extends Event
 	{
 		if (!isConfigured())
 		{
-
 			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-			getComponent().addAttribute(AngularAttributes.ngUnselected, "jwCntrl.perform($event," + renderVariables() + ");");
+			getComponent().addAttribute(AngularAttributes.ngUnselected, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
 		super.preConfigure();
 	}
@@ -74,6 +90,7 @@ public abstract class UnselectedtAdapter extends Event
 	 *
 	 * @return
 	 */
+	@NotNull
 	public UnselectedDirective getDirective()
 	{
 		if (directive == null)
@@ -100,20 +117,7 @@ public abstract class UnselectedtAdapter extends Event
 	 * @param call     The physical AJAX call
 	 * @param response The physical Ajax Receiver
 	 */
-	public abstract void onUnselect(AjaxCall call, AjaxResponse response);
-
-	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
-	{
-		try
-		{
-			onUnselect(call, response);
-		}
-		catch (Exception e)
-		{
-			LOG.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+	public abstract void onUnselected(AjaxCall call, AjaxResponse response);
 
 	@Override
 	public boolean equals(Object o)

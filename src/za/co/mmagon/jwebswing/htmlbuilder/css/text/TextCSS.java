@@ -38,6 +38,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
+@Documented
 public @interface TextCSS
 {
 
@@ -49,7 +50,7 @@ public @interface TextCSS
 	 *
 	 * @return
 	 */
-	public ColourCSS Color() default @ColourCSS;
+	ColourCSS Color() default @ColourCSS;
 
 	/**
 	 * Definition and Usage
@@ -59,7 +60,7 @@ public @interface TextCSS
 	 *
 	 * @return
 	 */
-	public ColourNames Color$() default ColourNames.Unset;
+	ColourNames Color$() default ColourNames.Unset;
 
 	/**
 	 * Definition and Usage
@@ -69,7 +70,7 @@ public @interface TextCSS
 	 *
 	 * @return
 	 */
-	public TextDirections Direction() default TextDirections.Unset;
+	TextDirections Direction() default TextDirections.Unset;
 
 	/**
 	 * Definition and Usage
@@ -79,7 +80,7 @@ public @interface TextCSS
 	 *
 	 * @return
 	 */
-	public MeasurementCSS LetterSpacing() default @MeasurementCSS;
+	MeasurementCSS LetterSpacing() default @MeasurementCSS;
 
 	/**
 	 * Definition and Usage
@@ -91,7 +92,7 @@ public @interface TextCSS
 	 *
 	 * @return
 	 */
-	public MeasurementCSS LineHeight() default @MeasurementCSS;
+	MeasurementCSS LineHeight() default @MeasurementCSS;
 
 	/**
 	 * Definition and Usage
@@ -102,7 +103,7 @@ public @interface TextCSS
 	 *
 	 * @return
 	 */
-	public TextAlignments TextAlign() default TextAlignments.Unset;
+	TextAlignments TextAlign() default TextAlignments.Unset;
 
 	/**
 	 * Definition and Usage
@@ -114,7 +115,7 @@ public @interface TextCSS
 	 *
 	 * @return
 	 */
-	public TextDecorations TextDecoration() default TextDecorations.Unset;
+	TextDecorations TextDecoration() default TextDecorations.Unset;
 
 	/**
 	 * Definition and Usage
@@ -127,7 +128,7 @@ public @interface TextCSS
 	 *
 	 * @return
 	 */
-	public MeasurementCSS TextIndent() default @MeasurementCSS;
+	MeasurementCSS TextIndent() default @MeasurementCSS;
 
 	/**
 	 * Definition and Usage
@@ -137,14 +138,14 @@ public @interface TextCSS
 	 *
 	 * @return
 	 */
-	public TextTransforms TextTransform() default TextTransforms.Unset;
+	TextTransforms TextTransform() default TextTransforms.Unset;
 
 	/**
 	 * Used together with the direction property to set or return whether the text should be overridden to support multiple languages in the same document
 	 *
 	 * @return
 	 */
-	public UnicodeBidis UnicodeBidi() default UnicodeBidis.Unset;
+	UnicodeBidis UnicodeBidi() default UnicodeBidis.Unset;
 
 	/**
 	 * Definition and Usage
@@ -154,7 +155,7 @@ public @interface TextCSS
 	 *
 	 * @return
 	 */
-	public VerticalAlignments VerticalAlign() default VerticalAlignments.Unset;
+	VerticalAlignments VerticalAlign() default VerticalAlignments.Unset;
 
 	/**
 	 * Definition and Usage
@@ -164,7 +165,7 @@ public @interface TextCSS
 	 *
 	 * @return
 	 */
-	public WhiteSpacing WhiteSpace() default WhiteSpacing.Unset;
+	WhiteSpacing WhiteSpace() default WhiteSpacing.Unset;
 
 	/**
 	 * Definition and Usage
@@ -176,5 +177,5 @@ public @interface TextCSS
 	 *
 	 * @return
 	 */
-	public MeasurementCSS WordSpacing() default @MeasurementCSS;
+	MeasurementCSS WordSpacing() default @MeasurementCSS;
 }

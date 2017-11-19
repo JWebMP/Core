@@ -16,8 +16,9 @@ import java.lang.annotation.*;
 		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
+@Documented
 public @interface CustomCSS
 {
 
-	public NameValuePairCSS[] value() default @NameValuePairCSS;
+	NameValuePairCSS[] value() default @NameValuePairCSS;
 }

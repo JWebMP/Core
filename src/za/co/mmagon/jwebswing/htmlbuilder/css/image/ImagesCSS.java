@@ -17,8 +17,9 @@ import java.lang.annotation.*;
 		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
+@Documented
 public @interface ImagesCSS
 {
 
-	public ImageCSS[] value() default @ImageCSS;
+	ImageCSS[] value() default @ImageCSS;
 }

@@ -37,7 +37,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.Date;
+import java.sql.Date;
+import java.time.ZonedDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -61,8 +62,6 @@ public class AngularDataServlet extends JWDefaultServlet
 	 *
 	 * @param request
 	 * 		Servlet request
-	 * @param response
-	 * 		Servlet response
 	 *
 	 * @throws ServletException
 	 * 		if a Servlet-specific error occurs
@@ -92,7 +91,7 @@ public class AngularDataServlet extends JWDefaultServlet
 		AjaxCall ajaxCall = GuiceContext.inject().getInstance(AjaxCall.class);
 		ajaxCall.setParameters(initData.getParameters());
 		ajaxCall.setComponentId(componentId);
-		ajaxCall.setDatetime(new Date());
+		ajaxCall.setDatetime(Date.from(ZonedDateTime.now().toInstant()));
 		ajaxCall.setEventType(EventTypes.data);
 		if (componentId == null || componentId.isEmpty())
 		{
@@ -123,7 +122,11 @@ public class AngularDataServlet extends JWDefaultServlet
 		}
 
 		page.onConnect(ajaxCall, ajaxResponse);
-		ajaxResponse.getComponents().forEach(ComponentHierarchyBase::preConfigure);
+		ajaxResponse.getComponents().forEach(a ->
+		                                     {
+			                                     ComponentHierarchyBase c = (ComponentHierarchyBase) a;
+			                                     c.preConfigure();
+		                                     });
 		writeOutput(new StringBuilder(ajaxResponse.toString()), "application/json;charset=UTF-8", Charset.forName("UTF-8"));
 	}
 

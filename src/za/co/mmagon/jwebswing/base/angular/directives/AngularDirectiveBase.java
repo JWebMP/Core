@@ -18,6 +18,8 @@ package za.co.mmagon.jwebswing.base.angular.directives;
 
 import za.co.mmagon.jwebswing.base.angular.AngularReferenceBase;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * An angular registered directive
  *
@@ -34,7 +36,7 @@ public abstract class AngularDirectiveBase extends AngularReferenceBase
 	 *
 	 * @param directiveName This modules name
 	 */
-	public AngularDirectiveBase(String directiveName)
+	public AngularDirectiveBase(@NotNull String directiveName)
 	{
 		super(directiveName);
 	}

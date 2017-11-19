@@ -29,6 +29,9 @@ import za.co.mmagon.logger.LogFactory;
 
 import java.util.logging.Level;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_ANGULAR_EVENT_START;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON;
+
 /**
  * Handles all events. Over-ride methods.
  *
@@ -67,7 +70,7 @@ public abstract class ChangeAdapter extends Event
 		{
 
 			AngularPageConfigurator.setRequired(getComponent(), true);
-			getComponent().addAttribute(AngularAttributes.ngChange, "jwCntrl.perform($event," + renderVariables() + ");");
+			getComponent().addAttribute(AngularAttributes.ngChange, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
 		super.preConfigure();
 	}

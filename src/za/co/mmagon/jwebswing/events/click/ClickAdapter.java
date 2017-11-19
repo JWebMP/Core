@@ -32,6 +32,9 @@ import za.co.mmagon.logger.LogFactory;
 import javax.management.InvalidAttributeValueException;
 import java.util.logging.Level;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_ANGULAR_EVENT_START;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON;
+
 /**
  * Handles all click events. Over-ride methods.
  *
@@ -70,7 +73,7 @@ public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
 
 		if (!isConfigured() && getComponent() != null)
 		{
-			getComponent().addAttribute(AngularAttributes.ngClick, "jwCntrl.jw.isLoading || jwCntrl.perform($event," + renderVariables() + ");");
+			getComponent().addAttribute(AngularAttributes.ngClick, "jwCntrl.jw.isLoading || " + STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 			if (getComponent().getAttribute(AngularAttributes.ngDisabled) == null)
 			{
 				getComponent().addAttribute(AngularAttributes.ngDisabled, "jwCntrl.jw.isLoading");

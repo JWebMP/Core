@@ -29,8 +29,11 @@ import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * A response sent back to the client
@@ -39,7 +42,7 @@ import java.util.Map.Entry;
  * @since 27 Apr 2016
  */
 @RequestScoped
-public class AjaxResponse extends JavaScriptPart
+public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 {
 
 	private static final long serialVersionUID = 1L;
@@ -55,43 +58,44 @@ public class AjaxResponse extends JavaScriptPart
 	 */
 	@JsonProperty("variables")
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private List<AngularJsonVariable> angularVariables;
+	private Set<AngularJsonVariable> angularVariables;
 
 	/**
 	 * All relevant client reactions to perform
 	 */
 	@JsonProperty("reactions")
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private List<AjaxResponseReaction> reactions;
+	private Set<AjaxResponseReaction> reactions;
 
 	/**
 	 * All components that must be updated
 	 */
 	@JsonIgnore
-	private List<ComponentHierarchyBase> components;
+	private Set<ComponentHierarchyBase> components;
 
 	/**
 	 * A complete list of the component update objects
 	 */
 	@JsonIgnore
-	private List<AjaxComponentUpdates> componentUpdates;
+	private Set<AjaxComponentUpdates> componentUpdates;
 
 	/**
 	 * An additional list of events that can fire, not stored in memory
 	 */
 	@JsonIgnore
-	private List<Event> events;
+	private Set<Event> events;
 
 	/**
 	 * An additional list of features that can fire
 	 */
 	@JsonIgnore
-	private List<Feature> features;
+	private Set<Feature> features;
 
 	/**
 	 * A list of local storage items and their keys
 	 */
 	private Map<String, String> localStorage;
+
 	/**
 	 * A list of local storage items and their keys
 	 */
@@ -104,9 +108,9 @@ public class AjaxResponse extends JavaScriptPart
 	 */
 	@JsonProperty("features")
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	protected List<String> getFeatureQueries()
+	protected Set<String> getFeatureQueries()
 	{
-		ArrayList<String> list = new ArrayList<>();
+		Set<String> list = new LinkedHashSet<>();
 		getFeatures().forEach(feature ->
 		                      {
 			                      feature.preConfigure();
@@ -116,17 +120,17 @@ public class AjaxResponse extends JavaScriptPart
 	}
 
 	/**
-	 * Returns all the event queries from the components
+	 * Gets features assigned to the response
 	 *
 	 * @return
 	 */
-	@JsonProperty("events")
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	protected List<String> getEventQueries()
+	public Set<Feature> getFeatures()
 	{
-		ArrayList<String> list = new ArrayList<>();
-		getEvents().forEach(event -> list.add(event.renderJavascript().toString()));
-		return list;
+		if (features == null)
+		{
+			features = new LinkedHashSet<>();
+		}
+		return features;
 	}
 
 	/**
@@ -193,17 +197,13 @@ public class AjaxResponse extends JavaScriptPart
 	}
 
 	/**
-	 * Returns a list of the needed component updates
+	 * Sets features assigned to the response
 	 *
-	 * @return
+	 * @param features
 	 */
-	public List<AjaxComponentUpdates> getComponentUpdates()
+	public void setFeatures(Set<Feature> features)
 	{
-		if (componentUpdates == null)
-		{
-			componentUpdates = new ArrayList<>();
-		}
-		return componentUpdates;
+		this.features = features;
 	}
 
 	/**
@@ -217,17 +217,54 @@ public class AjaxResponse extends JavaScriptPart
 	}
 
 	/**
+	 * Returns all the event queries from the components
+	 *
+	 * @return
+	 */
+	@JsonProperty("events")
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	protected Set<String> getEventQueries()
+	{
+		Set<String> list = new LinkedHashSet<>();
+		getEvents().forEach(event -> list.add(event.renderJavascript().toString()));
+		return list;
+	}
+
+	/**
+	 * Gets events assigned to the response
+	 *
+	 * @return
+	 */
+	public Set<Event> getEvents()
+	{
+		if (events == null)
+		{
+			events = new LinkedHashSet<>();
+		}
+		return events;
+	}
+
+	/**
+	 * Sets events assigned to the response
+	 *
+	 * @param events
+	 */
+	public void setEvents(Set<Event> events)
+	{
+		this.events = events;
+	}
+
+	/**
 	 * Gets all the CSS References
 	 *
 	 * @return
 	 */
 	@JsonProperty("cssLinks")
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	protected ArrayList<String> getAllCssReferences()
+	protected Set<String> getAllCssReferences()
 	{
-		ArrayList<String> output = new ArrayList<>();
-		getComponents().stream().forEach(next
-				                                 ->
+		Set<String> output = new LinkedHashSet<>();
+		getComponents().forEach(next ->
 		                                 {
 			                                 if (ComponentDependancyBase.class.isAssignableFrom(next.getClass()))
 			                                 {
@@ -238,83 +275,35 @@ public class AjaxResponse extends JavaScriptPart
 	}
 
 	/**
-	 * Gets all the JavaScript References
+	 * Returns the list of components sending back
 	 *
 	 * @return
 	 */
-	@JsonProperty("jsReferences")
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	protected ArrayList<String> getAllJsReferences()
+	public Set<ComponentHierarchyBase> getComponents()
 	{
-		ArrayList<String> output = new ArrayList<>();
-		getComponents().forEach(next ->
-		                        {
-			                        for (String a : getJsReferences(next))
-			                        {
-				                        if (!output.contains(a))
-				                        {
-					                        output.add(a);
-				                        }
-			                        }
-		                        });
-		return output;
+		if (components == null)
+		{
+			components = new LinkedHashSet<>();
+		}
+		return components;
 	}
 
 	/**
-	 * Gets all the JavaScript and inserts it into the JSON response
+	 * Returns all the CSS references for all the components
+	 *
+	 * @param component
 	 *
 	 * @return
 	 */
-	@JsonProperty("jsScripts")
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	protected ArrayList<String> getAllJsScripts()
+	public Set<String> getCssReferences(ComponentDependancyBase component)
 	{
-		ArrayList<String> output = new ArrayList<>();
-		getComponents().forEach(next ->
-		                        {
-			                        List<String> jsRenders = getJsRenders(next);
-			                        for (String rendered : jsRenders)
-			                        {
-				                        if (rendered != null && !rendered.isEmpty())
-				                        {
-					                        if (!rendered.endsWith(next.getNewLine()))
-					                        {
-						                        rendered = rendered + next.getNewLine();
-					                        }
-					                        output.add(rendered);
-				                        }
-			                        }
-			                        //Load on demand scripts
-			                        buildEventQueries(next, output);
-		                        });
-		return output;
-	}
-
-	private List<String> buildEventQueries(ComponentHierarchyBase next, List<String> output)
-	{
-		if (Event.class.isAssignableFrom(next.getClass()))
+		Set<String> cssRender = new LinkedHashSet<>();
+		for (Object o : component.getCssReferencesAll())
 		{
-			for (Iterator iterator = Event.class.cast(next).getRunEvents().iterator(); iterator.hasNext(); )
-			{
-				Event next1 = (Event) iterator.next();
-				next1.preConfigure();
-				addEventQuery(next1, output);
-			}
+			CSSReference next = (CSSReference) o;
+			cssRender.add(next.toString());
 		}
-		return output;
-	}
-
-	private void addEventQuery(Event next1, List<String> output)
-	{
-		next1.preConfigure();
-		for (Iterator iterator1 = next1.getQueriesAll().iterator(); iterator1.hasNext(); )
-		{
-			StringBuilder query = (StringBuilder) iterator1.next();
-			if (!output.contains(query.toString()))
-			{
-				output.add(query.toString());
-			}
-		}
+		return cssRender;
 	}
 
 	/**
@@ -332,24 +321,37 @@ public class AjaxResponse extends JavaScriptPart
 	}
 
 	/**
-	 * Returns all the CSS references for all the components
+	 * Gets all the CSS renders for a component and its children
 	 *
 	 * @param component
 	 *
 	 * @return
 	 */
-	protected ArrayList<String> getCssReferences(ComponentDependancyBase component)
+	public StringBuilder getCssRenders(ComponentStyleBase component)
 	{
-		ArrayList<String> cssRender = new ArrayList<>();
-		for (Iterator iterator = component.getCssReferencesAll().iterator(); iterator.hasNext(); )
-		{
-			CSSReference next = (CSSReference) iterator.next();
-			if (!cssRender.contains(next.toString()))
-			{
-				cssRender.add(next.toString());
-			}
-		}
+		StringBuilder cssRender = new StringBuilder();
+		cssRender.append(component.renderCss(0).toString());
 		return cssRender;
+	}
+
+	/**
+	 * Gets all the JavaScript References
+	 *
+	 * @return
+	 */
+	@JsonProperty("jsReferences")
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	protected Set<String> getAllJsReferences()
+	{
+		Set<String> output = new LinkedHashSet<>();
+		getComponents().forEach(next ->
+		                        {
+			                        for (String a : getJsReferences(next))
+			                        {
+				                        output.add(a);
+			                        }
+		                        });
+		return output;
 	}
 
 	/**
@@ -359,32 +361,43 @@ public class AjaxResponse extends JavaScriptPart
 	 *
 	 * @return
 	 */
-	protected ArrayList<String> getJsReferences(ComponentDependancyBase component)
+	public Set<String> getJsReferences(ComponentDependancyBase component)
 	{
-		ArrayList<String> cssRender = new ArrayList<>();
-		for (Iterator iterator = component.getJavascriptReferencesAll().iterator(); iterator.hasNext(); )
+		Set<String> cssRender = new LinkedHashSet<>();
+		for (Object o : component.getJavascriptReferencesAll())
 		{
-			JavascriptReference next = (JavascriptReference) iterator.next();
-			if (!cssRender.contains(next.toString()))
-			{
-				cssRender.add(next.toString());
-			}
+			JavascriptReference next = (JavascriptReference) o;
+			cssRender.add(next.toString());
 		}
 		return cssRender;
 	}
 
 	/**
-	 * Gets all the CSS renders for a component and its children
-	 *
-	 * @param component
+	 * Gets all the JavaScript and inserts it into the JSON response
 	 *
 	 * @return
 	 */
-	protected StringBuilder getCssRenders(ComponentStyleBase component)
+	@JsonProperty("jsScripts")
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	protected Set<String> getAllJsScripts()
 	{
-		StringBuilder cssRender = new StringBuilder();
-		cssRender.append(component.renderCss(0).toString());
-		return cssRender;
+		Set<String> output = new LinkedHashSet<>();
+		getComponents().forEach(next ->
+		                        {
+			                        getJsRenders(next).forEach(rendered->{
+				                        if (!rendered.isEmpty())
+				                        {
+					                        if (!rendered.endsWith(next.getNewLine()))
+					                        {
+						                        rendered = rendered + next.getNewLine();
+					                        }
+					                        output.add(rendered);
+				                        }
+			                        });
+			                        //Load on demand scripts
+			                        buildEventQueries(next, output);
+		                        });
+		return output;
 	}
 
 	/**
@@ -394,11 +407,35 @@ public class AjaxResponse extends JavaScriptPart
 	 *
 	 * @return
 	 */
-	protected List<String> getJsRenders(ComponentHierarchyBase component)
+	public Set<String> getJsRenders(ComponentHierarchyBase component)
 	{
-		ArrayList<String> jsRenders = new ArrayList<>();
+		Set<String> jsRenders = new LinkedHashSet<>();
 		jsRenders.add(component.renderJavascriptAll().toString());
 		return jsRenders;
+	}
+
+	private Set<String> buildEventQueries(ComponentHierarchyBase next, Set<String> output)
+	{
+		if (Event.class.isAssignableFrom(next.getClass()))
+		{
+			for (Object o : Event.class.cast(next).getRunEvents())
+			{
+				Event next1 = (Event) o;
+				next1.preConfigure();
+				addEventQuery(next1, output);
+			}
+		}
+		return output;
+	}
+
+	private void addEventQuery(Event next1, Set<String> output)
+	{
+		next1.preConfigure();
+		for (Object o : next1.getQueriesAll())
+		{
+			StringBuilder query = (StringBuilder) o;
+			output.add(query.toString());
+		}
 	}
 
 	/**
@@ -406,63 +443,13 @@ public class AjaxResponse extends JavaScriptPart
 	 *
 	 * @return
 	 */
-	public List<AjaxResponseReaction> getReactions()
+	public Set<AjaxResponseReaction> getReactions()
 	{
 		if (reactions == null)
 		{
-			reactions = new ArrayList<>();
+			reactions = new LinkedHashSet<>();
 		}
 		return reactions;
-	}
-
-	/**
-	 * Returns the list of components sending back
-	 *
-	 * @return
-	 */
-	public List<ComponentHierarchyBase> getComponents()
-	{
-		if (components == null)
-		{
-			components = new ArrayList<>();
-		}
-		return components;
-	}
-
-	/**
-	 * Returns the updates
-	 *
-	 * @return
-	 */
-	@JsonProperty("components")
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	protected List<AjaxComponentUpdates> getUpdates()
-	{
-		return getComponentUpdates();
-	}
-
-	/**
-	 * Returns the list of angular variables from the server
-	 *
-	 * @return
-	 */
-	public List<AngularJsonVariable> getAngularVariables()
-	{
-		if (angularVariables == null)
-		{
-			angularVariables = new ArrayList<>();
-		}
-		return angularVariables;
-	}
-
-	/**
-	 * Sets the list of angular variables
-	 *
-	 * @param angularVariables
-	 */
-	public void setAngularVariables(List<AngularJsonVariable> angularVariables)
-	{
-		this.angularVariables = angularVariables;
 	}
 
 	/**
@@ -492,61 +479,64 @@ public class AjaxResponse extends JavaScriptPart
 	}
 
 	/**
-	 * Gets events assigned to the response
+	 * Returns the updates
 	 *
 	 * @return
 	 */
-	public List<Event> getEvents()
+	@JsonProperty("components")
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	protected Set<AjaxComponentUpdates> getUpdates()
 	{
-		if (events == null)
-		{
-			events = new ArrayList<>();
-		}
-		return events;
+		return getComponentUpdates();
 	}
 
 	/**
-	 * Sets events assigned to the response
-	 *
-	 * @param events
-	 */
-	public void setEvents(List<Event> events)
-	{
-		this.events = events;
-	}
-
-	/**
-	 * Gets features assigned to the response
+	 * Returns a list of the needed component updates
 	 *
 	 * @return
 	 */
-	public List<Feature> getFeatures()
+	public Set<AjaxComponentUpdates> getComponentUpdates()
 	{
-		if (features == null)
+		if (componentUpdates == null)
 		{
-			features = new ArrayList<>();
+			componentUpdates = new LinkedHashSet<>();
 		}
-		return features;
+		return componentUpdates;
 	}
 
 	/**
-	 * Sets features assigned to the response
+	 * Returns the list of angular variables from the server
 	 *
-	 * @param features
+	 * @return
 	 */
-	public void setFeatures(List<Feature> features)
+	public Set<AngularJsonVariable> getAngularVariables()
 	{
-		this.features = features;
+		if (angularVariables == null)
+		{
+			angularVariables = new LinkedHashSet<>();
+		}
+		return angularVariables;
+	}
+
+	/**
+	 * Sets the list of angular variables
+	 *
+	 * @param angularVariables
+	 */
+	public void setAngularVariables(Set<AngularJsonVariable> angularVariables)
+	{
+		this.angularVariables = angularVariables;
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public String toString()
 	{
 		for (ComponentHierarchyBase component : getComponents())
 		{
-			for (Iterator it = component.getAngularObjectsAll().entrySet().iterator(); it.hasNext(); )
+			for (Object o : component.getAngularObjectsAll().entrySet())
 			{
-				Entry<String, JavaScriptPart> object = (Entry<String, JavaScriptPart>) it.next();
+				Entry<String, JavaScriptPart> object = (Entry<String, JavaScriptPart>) o;
 				String key = object.getKey();
 				JavaScriptPart value = object.getValue();
 				addDto(key, value);

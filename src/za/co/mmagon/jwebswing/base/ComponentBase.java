@@ -27,6 +27,7 @@ import za.co.mmagon.jwebswing.utilities.GUIDGenerator;
 import za.co.mmagon.jwebswing.utilities.StaticStrings;
 import za.co.mmagon.logger.LogFactory;
 
+import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -130,7 +131,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	@NotNull
+	@Nullable
 	public J cloneComponent()
 	{
 		J component = null;

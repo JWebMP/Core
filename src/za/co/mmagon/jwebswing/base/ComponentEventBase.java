@@ -30,6 +30,7 @@ import za.co.mmagon.logger.LogFactory;
 
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.logging.Level;
@@ -50,7 +51,7 @@ import static za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.
  * @version 2.0
  * @since 23 Apr 2013
  */
-public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentEventBase<F, E, J>>
+public class ComponentEventBase<F extends GlobalFeatures & Serializable, E extends GlobalEvents, J extends ComponentEventBase<F, E, J>>
 		extends ComponentFeatureBase<F, J> implements IComponentEventBase<E, J>
 {
 

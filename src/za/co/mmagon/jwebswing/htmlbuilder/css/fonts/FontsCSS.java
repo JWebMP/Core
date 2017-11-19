@@ -20,6 +20,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
+@Documented
 public @interface FontsCSS
 {
 
@@ -28,40 +29,40 @@ public @interface FontsCSS
 	 *
 	 * @return
 	 */
-	public FontFamilies FontFamily() default FontFamilies.Unset;
+	FontFamilies FontFamily() default FontFamilies.Unset;
 
 	/**
 	 * Specifies the font size of text
 	 *
 	 * @return
 	 */
-	public MeasurementCSS FontSize() default @MeasurementCSS;
+	MeasurementCSS FontSize() default @MeasurementCSS;
 
 	/**
 	 * The font-style property specifies the font style for a text.
 	 *
 	 * @return
 	 */
-	public FontStyles FontStyle() default FontStyles.Unset;
+	FontStyles FontStyle() default FontStyles.Unset;
 
 	/**
 	 * The font-variant property specifies whether or not a text should be displayed in a small-caps font.
 	 *
 	 * @return
 	 */
-	public FontVariants FontVariant() default FontVariants.Unset;
+	FontVariants FontVariant() default FontVariants.Unset;
 
 	/**
 	 * Specifies the weight of a font
 	 *
 	 * @return
 	 */
-	public FontWeights FontWeight() default FontWeights.Unset;
+	FontWeights FontWeight() default FontWeights.Unset;
 
 	/**
 	 * Specifies the weight of a font
 	 *
 	 * @return
 	 */
-	public int FontWeight$() default CSSPropertiesFactory.DefaultIntValue;
+	int FontWeight$() default CSSPropertiesFactory.DefaultIntValue;
 }

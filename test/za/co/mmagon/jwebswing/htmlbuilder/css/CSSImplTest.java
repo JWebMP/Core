@@ -50,6 +50,15 @@ public class CSSImplTest extends BaseTestClass
 	}
 
 	@Test
+	public void testJson()
+	{
+		CSSImpl css = new CSSImpl();
+		css.getBackground().setBackgroundColor$(ColourNames.Aqua);
+		System.out.println(css);
+		Assertions.assertEquals("{\"background\":{\"backgroundColor$\":\"Aqua\"}}", css.toString());
+	}
+
+	@Test
 	public void testBackground()
 	{
 		Page p = getInstance();

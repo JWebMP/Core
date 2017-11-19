@@ -19,6 +19,7 @@ package za.co.mmagon.jwebswing.base.angular.controllers;
 import com.armineasy.injection.GuiceContext;
 import za.co.mmagon.FileTemplates;
 
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 /**
@@ -47,6 +48,7 @@ public class JWAngularController extends AngularControllerBase
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public String renderFunction()
 	{
 		StringBuilder controllerOutput = FileTemplates.getFileTemplate(AngularControllerBase.class, "jwcontroller");
@@ -59,17 +61,14 @@ public class JWAngularController extends AngularControllerBase
 		StringBuilder statementOutput = new StringBuilder();
 		
 		Set<Class<? extends AngularControllerScopeStatement>> controllers = GuiceContext.reflect().getSubTypesOf(AngularControllerScopeStatement.class);
-		controllers.stream().map(next ->
-				                         GuiceContext.inject().
-						                         getInstance(next)).
-				distinct().forEachOrdered(statement ->
-				                          {
-					                          if (!statementOutput.toString().contains(statement.getStatement()))
-					                          {
-						                          statementOutput.append(statement.getStatement()).append("\n");
-					                          }
-				                          });
-		
+		controllers.forEach(a ->
+		                    {
+			                    AngularControllerScopeStatement statement = GuiceContext.inject().getInstance(a);
+			                    if (!statementOutput.toString().contains(statement.getStatement()))
+			                    {
+				                    statementOutput.append(statement.getStatement()).append("\n");
+			                    }
+		                    });
 		output = output.replace("JW_SCOPE_INSERTIONS;", statementOutput.toString());
 		output = output.replace("JW_SCOPE_INSERTIONS", statementOutput.toString());
 		return output;

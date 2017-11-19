@@ -37,8 +37,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_COMMNA;
-import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SINGLE_QUOTES;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.*;
 
 /**
  * Container Class for Events. Splits from the component hierarchy
@@ -137,6 +136,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	 * @param component
 	 * 		The component type of this event
 	 */
+	@SuppressWarnings("unchecked")
 	public Event(String name, EventTypes eventType, ComponentHierarchyBase component)
 	{
 		super(ComponentTypes.Event);
@@ -144,6 +144,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 		setName(name);
 		setComponent(component);
 		setEventType(eventType);
+		getComponent().addEvent(this);
 	}
 
 	/**
@@ -168,6 +169,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public J returnVariable(String returnVariable)
 	{
 		getVariables().add(returnVariable);
@@ -181,7 +183,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	 */
 	public StringBuilder renderVariables()
 	{
-		final StringBuilder s = new StringBuilder("[");
+		final StringBuilder s = new StringBuilder(STRING_SQUARE_BRACE_OPEN);
 		getVariables().forEach(event -> s.append(STRING_SINGLE_QUOTES).append(event).append(STRING_SINGLE_QUOTES).append(STRING_COMMNA));
 		StringBuilder s2;
 		if (s.indexOf(STRING_COMMNA) > 0)
@@ -192,7 +194,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 		{
 			s2 = s;
 		}
-		s2.append("]");
+		s2.append(STRING_SQUARE_BRACE_CLOSED);
 		s2.append(",'").append(getID()).append(STRING_SINGLE_QUOTES);
 		s2.append(",'").append(getClassCanonicalName()).append(STRING_SINGLE_QUOTES);
 
@@ -220,6 +222,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public J addOnDemandEvent(Event event)
 	{
 		getRunEvents().add(event);
@@ -247,6 +250,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public J setOnDemandQueries(List<Event> onDemandQueries)
 	{
 		this.runEvents = onDemandQueries;
@@ -299,6 +303,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public J setRegisteredComponents(Set<Class<? extends ComponentHierarchyBase>> registeredComponents)
 	{
 		this.registeredComponents = registeredComponents;

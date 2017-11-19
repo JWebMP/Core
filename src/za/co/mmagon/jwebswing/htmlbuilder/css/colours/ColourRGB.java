@@ -14,12 +14,13 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
+@Documented
 public @interface ColourRGB
 {
 
-	public int Red() default 0;
+	int Red() default 0;
 
-	public int Green() default 0;
+	int Green() default 0;
 
-	public int Blue() default 0;
+	int Blue() default 0;
 }

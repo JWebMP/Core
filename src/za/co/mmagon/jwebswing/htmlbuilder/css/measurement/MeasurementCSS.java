@@ -15,10 +15,11 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
+@Documented
 public @interface MeasurementCSS
 {
 
-	public double value() default CSSPropertiesFactory.DefaultIntValue;
+	double value() default CSSPropertiesFactory.DefaultIntValue;
 
-	public MeasurementTypes MeasurementType() default MeasurementTypes.Pixels;
+	MeasurementTypes MeasurementType() default MeasurementTypes.Pixels;
 }

@@ -14,8 +14,9 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
+@Documented
 public @interface ColourCSS
 {
-	
-	public String value() default "";
+
+	String value() default "";
 }

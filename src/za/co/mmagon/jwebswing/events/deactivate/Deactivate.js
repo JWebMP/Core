@@ -1,4 +1,4 @@
-JW_APP_NAME.directive('ngDeActtivate', function ($parse) {
+JW_APP_NAME.directive('ngDeActivate', function ($parse) {
         return function (scope, element, attrs) {
             var fn = $parse(attrs.ngDeActivate);
             element.on('deactivate', function (event) {

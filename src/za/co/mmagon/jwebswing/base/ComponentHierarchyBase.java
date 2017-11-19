@@ -341,7 +341,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		preConfigure();
 		StringBuilder sb = new StringBuilder();
 		Set<String> allScripts = new TreeSet<>();
-		ArrayList<StringBuilder> queries = (ArrayList<StringBuilder>) getQueriesAll();
+		Set<StringBuilder> queries = getQueriesAll();
 		queries.forEach(a ->
 		                {
 			                if (!a.toString().isEmpty())
@@ -552,11 +552,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		                                 {
 			                                 try
 			                                 {
-				                                 if (key instanceof String)
-				                                 {
-					                                 JavaScriptPart part = JavaScriptPart.class.cast(next.getAngularObjects().get(key));
-					                                 map.put((String) key, part);
-				                                 }
+				                                 JavaScriptPart part = JavaScriptPart.class.cast(next.getAngularObjects().get(key));
+				                                 map.put((String) key, part);
 			                                 }
 			                                 catch (ClassCastException cce)
 			                                 {
@@ -702,9 +699,9 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 */
 	@NotNull
 	@SuppressWarnings("unused")
-	public List<Feature> getFeaturesAll()
+	public Set<Feature> getFeaturesAll()
 	{
-		ArrayList<Feature> allFeatures = new ArrayList<>();
+		Set<Feature> allFeatures = new LinkedHashSet<>();
 		getChildrenHierarchy().forEach(child ->
 		                               {
 			                               for (Object event : child.getFeatures())

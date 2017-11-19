@@ -29,8 +29,9 @@ import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
 import za.co.mmagon.jwebswing.plugins.PluginInformation;
 import za.co.mmagon.logger.LogFactory;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.constraints.NotNull;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.logging.Logger;
 
 /**
@@ -65,33 +66,33 @@ public class AngularPageConfigurator extends PageConfigurator
 	 * All the angular modules for this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private List<AngularModuleBase> angularModules;
+	private Set<AngularModuleBase> angularModules;
 	/**
 	 * All of the angular directives for this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private List<AngularDirectiveBase> angularDirectives;
+	private Set<AngularDirectiveBase> angularDirectives;
 	/**
 	 * All of the angular directives for this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private List<AngularControllerBase> angularControllers;
+	private Set<AngularControllerBase> angularControllers;
 	/**
 	 * All of the angular directives for this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private List<AngularFactoryBase> angularFactories;
+	private Set<AngularFactoryBase> angularFactories;
 	
 	/**
 	 * All of the angular controller insertions for this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private List<String> controllerInsertions;
+	private Set<String> controllerInsertions;
 	
 	/**
 	 * All the angular variables
 	 */
-	private List<String> angularVariables;
+	private Set<String> angularVariables;
 	
 	/**
 	 * Configures the angular page
@@ -108,12 +109,14 @@ public class AngularPageConfigurator extends PageConfigurator
 	 * @param component
 	 * @param required
 	 */
+	@SuppressWarnings("unchecked")
 	public static void setRequired(ComponentHTMLAngularBase component, boolean required)
 	{
 		component.getProperties().put(AngularEnabledString, required);
 	}
 	
 	@Override
+	@SuppressWarnings("unchecked")
 	public Page configure(Page page)
 	{
 		if (!page.isConfigured())
@@ -137,11 +140,12 @@ public class AngularPageConfigurator extends PageConfigurator
 	 *
 	 * @return
 	 */
-	public List<AngularModuleBase> getAngularModules()
+	@NotNull
+	public Set<AngularModuleBase> getAngularModules()
 	{
 		if (angularModules == null)
 		{
-			setAngularModules(new ArrayList<>());
+			setAngularModules(new LinkedHashSet<>());
 		}
 		return angularModules;
 	}
@@ -151,7 +155,7 @@ public class AngularPageConfigurator extends PageConfigurator
 	 *
 	 * @param angularModules
 	 */
-	public void setAngularModules(List<AngularModuleBase> angularModules)
+	public void setAngularModules(@NotNull Set<AngularModuleBase> angularModules)
 	{
 		this.angularModules = angularModules;
 	}
@@ -161,11 +165,12 @@ public class AngularPageConfigurator extends PageConfigurator
 	 *
 	 * @return
 	 */
-	public List<AngularDirectiveBase> getAngularDirectives()
+	@NotNull
+	public Set<AngularDirectiveBase> getAngularDirectives()
 	{
 		if (angularDirectives == null)
 		{
-			setAngularDirectives(new ArrayList<>());
+			setAngularDirectives(new LinkedHashSet<>());
 			
 		}
 		return angularDirectives;
@@ -176,7 +181,7 @@ public class AngularPageConfigurator extends PageConfigurator
 	 *
 	 * @param angularDirectives
 	 */
-	public void setAngularDirectives(List<AngularDirectiveBase> angularDirectives)
+	public void setAngularDirectives(@NotNull Set<AngularDirectiveBase> angularDirectives)
 	{
 		this.angularDirectives = angularDirectives;
 	}
@@ -186,11 +191,12 @@ public class AngularPageConfigurator extends PageConfigurator
 	 *
 	 * @return
 	 */
-	public List<AngularControllerBase> getAngularControllers()
+	@NotNull
+	public Set<AngularControllerBase> getAngularControllers()
 	{
 		if (angularControllers == null)
 		{
-			setAngularControllers(new ArrayList<>());
+			setAngularControllers(new LinkedHashSet<>());
 			
 		}
 		return angularControllers;
@@ -201,7 +207,7 @@ public class AngularPageConfigurator extends PageConfigurator
 	 *
 	 * @param angularControllers
 	 */
-	public void setAngularControllers(List<AngularControllerBase> angularControllers)
+	public void setAngularControllers(@NotNull Set<AngularControllerBase> angularControllers)
 	{
 		this.angularControllers = angularControllers;
 	}
@@ -211,11 +217,12 @@ public class AngularPageConfigurator extends PageConfigurator
 	 *
 	 * @return
 	 */
-	public List<String> getAngularVariables()
+	@NotNull
+	public Set<String> getAngularVariables()
 	{
 		if (angularVariables == null)
 		{
-			angularVariables = new ArrayList<>();
+			angularVariables = new LinkedHashSet<>();
 		}
 		return angularVariables;
 	}
@@ -225,7 +232,7 @@ public class AngularPageConfigurator extends PageConfigurator
 	 *
 	 * @param angularVariables
 	 */
-	public void setAngularVariables(List<String> angularVariables)
+	public void setAngularVariables(@NotNull Set<String> angularVariables)
 	{
 		this.angularVariables = angularVariables;
 	}
@@ -237,6 +244,7 @@ public class AngularPageConfigurator extends PageConfigurator
 	 *
 	 * @return
 	 */
+	@NotNull
 	public StringBuilder renderAngularJavascript(Page page)
 	{
 		StringBuilder sb = new StringBuilder();
@@ -251,11 +259,12 @@ public class AngularPageConfigurator extends PageConfigurator
 	 *
 	 * @return
 	 */
-	public List<AngularFactoryBase> getAngularFactories()
+	@NotNull
+	public Set<AngularFactoryBase> getAngularFactories()
 	{
 		if (angularFactories == null)
 		{
-			angularFactories = new ArrayList<>();
+			angularFactories = new LinkedHashSet<>();
 		}
 		return angularFactories;
 	}
@@ -265,7 +274,7 @@ public class AngularPageConfigurator extends PageConfigurator
 	 *
 	 * @param angularFactories
 	 */
-	public void setAngularFactories(List<AngularFactoryBase> angularFactories)
+	public void setAngularFactories(@NotNull Set<AngularFactoryBase> angularFactories)
 	{
 		this.angularFactories = angularFactories;
 	}
@@ -275,11 +284,12 @@ public class AngularPageConfigurator extends PageConfigurator
 	 *
 	 * @return
 	 */
-	public List<String> getControllerInsertions()
+	@NotNull
+	public Set<String> getControllerInsertions()
 	{
 		if (controllerInsertions == null)
 		{
-			this.controllerInsertions = new ArrayList<>();
+			this.controllerInsertions = new LinkedHashSet<>();
 		}
 		return controllerInsertions;
 	}
@@ -289,7 +299,7 @@ public class AngularPageConfigurator extends PageConfigurator
 	 *
 	 * @param controllerInsertions
 	 */
-	public void setControllerInsertions(List<String> controllerInsertions)
+	public void setControllerInsertions(@NotNull Set<String> controllerInsertions)
 	{
 		this.controllerInsertions = controllerInsertions;
 	}

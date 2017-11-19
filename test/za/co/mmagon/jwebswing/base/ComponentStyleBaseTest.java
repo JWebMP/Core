@@ -22,6 +22,8 @@ import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.html.Body;
 import za.co.mmagon.jwebswing.base.html.Comment;
+import za.co.mmagon.jwebswing.base.html.Meta;
+import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
 import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 
@@ -34,6 +36,20 @@ public class ComponentStyleBaseTest
 	
 	public ComponentStyleBaseTest()
 	{
+	}
+
+	@Test
+	public void test()
+	{
+		ComponentStyleBase head = new ComponentStyleBase(ComponentTypes.Head)
+		{
+		};
+		head.add(new Meta("name"));
+		head.add(new Meta(Meta.MetadataFields.Author, "Author Me"));
+		ComponentHierarchyBase body = new ComponentHierarchyBase(ComponentTypes.Body);
+		System.out.println(head.toString());
+		System.out.println(head.toString(true));
+		System.out.println(body.toString(true));
 	}
 	
 	@Test

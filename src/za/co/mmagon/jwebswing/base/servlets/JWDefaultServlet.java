@@ -121,7 +121,6 @@ public abstract class JWDefaultServlet extends HttpServlet
 	 * Validates the given call for the servlet
 	 *
 	 * @param ajaxCall
-	 * @param strict
 	 * 		optional parameter to validate on more fields
 	 *
 	 * @return

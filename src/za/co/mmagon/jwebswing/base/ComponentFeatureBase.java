@@ -32,6 +32,7 @@ import za.co.mmagon.logger.LogFactory;
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
+import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -49,7 +50,7 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_NEWLINE_TEXT
  *
  * @since 23 Apr 2016
  */
-public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentFeatureBase<F, J>>
+public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J extends ComponentFeatureBase<F, J>>
 		extends ComponentDependancyBase<J>
 		implements IComponentFeatureBase<F, J>
 {

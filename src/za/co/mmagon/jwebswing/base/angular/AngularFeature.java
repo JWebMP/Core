@@ -29,13 +29,15 @@ import za.co.mmagon.jwebswing.base.angular.modules.JWAngularModule;
 import za.co.mmagon.jwebswing.base.html.interfaces.HTMLFeatures;
 import za.co.mmagon.jwebswing.exceptions.NullComponentException;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 import za.co.mmagon.logger.LogFactory;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_COMMNA;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.*;
 
 /**
  * The Angular 1 Feature Implementation
@@ -194,10 +196,88 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 	}
 
 	/**
+	 * JW_APP_NAME - the angular module application name JW_DIRECTIVES - the angular directives JW_MODULES the modules generates JW_APP_CONTROLLER the physical controller name JW_CONTROLLERS - the
+	 * controllers render part
+	 * <p>
+	 * Configures the base template variables. Override the method to add your own (keep call to super)
+	 */
+	public void configureTemplateVariables()
+	{
+		FileTemplates.getTemplateVariables().put("JW_APP_NAME", new StringBuilder(getAppName()));
+		FileTemplates.getTemplateVariables().put("JW_MODULES", new StringBuilder(compileModules()));
+		FileTemplates.getTemplateVariables().put("JW_FACTORIES", new StringBuilder(compileFactories()));
+		FileTemplates.getTemplateVariables().put("JW_DIRECTIVES", new StringBuilder(compileDirectives()));
+		FileTemplates.getTemplateVariables().put("JW_APP_CONTROLLER", new StringBuilder(getControllerName()));
+
+		FileTemplates.getTemplateVariables().put("//%CONTROLLER_INSERTIONS%", new StringBuilder(compileControllerInsertions()));
+
+		FileTemplates.getTemplateVariables().put("JW_CONTROLLERS", new StringBuilder(compileControllers() + ""));
+		FileTemplates.getTemplateVariables().put("jwangular", FileTemplates.compileTemplate(AngularFeature.class, "jwangular"));
+	}
+
+	/**
+	 * compiles the global JW Angular Module, where the separate modules get listed inside of JWAngularModule
+	 *
+	 * @return
+	 */
+	@NotNull
+	public StringBuilder compileModules()
+	{
+		StringBuilder output = new StringBuilder();
+		List<AngularModuleBase> angulars = new ArrayList<>();
+		angulars.add(jwAngularApp);
+		angulars.forEach(module -> output.append(FileTemplates.compileTemplate(module.getReferenceName(), module.renderFunction())));
+		return output;
+	}
+
+	/**
+	 * Builds up the directives from all the present children
+	 *
+	 * @return
+	 */
+	@NotNull
+	public StringBuilder compileFactories()
+	{
+		StringBuilder output = new StringBuilder();
+		List<AngularFactoryBase> angulars = new ArrayList<>();
+		angulars.addAll(getPage().getAngular().getAngularFactories());
+		angulars.forEach(directive ->
+		                 {
+			                 String function = directive.renderFunction();
+			                 StringBuilder outputString = FileTemplates.compileTemplate(directive.getReferenceName(), function);
+			                 outputString.append(STRING_NEWLINE_TEXT + STRING_TAB);
+			                 output.append(outputString);
+		                 });
+		return output;
+	}
+
+	/**
+	 * Builds up the directives from all the present children
+	 *
+	 * @return
+	 */
+	@NotNull
+	public StringBuilder compileDirectives()
+	{
+		StringBuilder output = new StringBuilder();
+		List<AngularDirectiveBase> angulars = new ArrayList<>();
+		angulars.addAll(getPage().getAngular().getAngularDirectives());
+		angulars.forEach(directive ->
+		                 {
+			                 String function = directive.renderFunction();
+			                 StringBuilder outputString = FileTemplates.compileTemplate(directive.getReferenceName(), function);
+			                 outputString.append(getNewLine() + StaticStrings.STRING_TAB);
+			                 output.append(outputString);
+		                 });
+		return output;
+	}
+
+	/**
 	 * Creates the controller insertion
 	 *
 	 * @return
 	 */
+	@NotNull
 	public StringBuilder compileControllerInsertions()
 	{
 		StringBuilder output = new StringBuilder();
@@ -215,19 +295,30 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 	 *
 	 * @return
 	 */
-	public StringBuilder compileDirectives()
+	@NotNull
+	public StringBuilder compileControllers()
 	{
 		StringBuilder output = new StringBuilder();
-		List<AngularDirectiveBase> angulars = new ArrayList<>();
-		angulars.addAll(getPage().getAngular().getAngularDirectives());
-		angulars.forEach(directive ->
+		List<AngularControllerBase> angulars = new ArrayList<>();
+		angulars.add(jwAngularController);
+		angulars.addAll(getPage().getAngular().getAngularControllers());
+		angulars.forEach(controller ->
 		                 {
-			                 String function = directive.renderFunction();
-			                 StringBuilder outputString = FileTemplates.compileTemplate(directive.getReferenceName(), function);
-			                 outputString.append(getNewLine() + "\t");
+			                 String function = controller.renderFunction();
+			                 StringBuilder outputString = FileTemplates.compileTemplate(controller.getReferenceName(), function);
+			                 outputString.append(STRING_NEWLINE_TEXT);
 			                 output.append(outputString);
 		                 });
 		return output;
+	}
+
+	/**
+	 * Returns the JavaScript for this feature
+	 */
+	@Override
+	public void assignFunctionsToComponent()
+	{
+		//Do Nothing Force Overide
 	}
 
 	@Override
@@ -252,53 +343,11 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 	}
 
 	/**
-	 * JW_APP_NAME - the angular module application name JW_DIRECTIVES - the angular directives JW_MODULES the modules generates JW_APP_CONTROLLER the physical controller name JW_CONTROLLERS - the
-	 * controllers render part
-	 * <p>
-	 * Configures the base template variables. Override the method to add your own (keep call to super)
-	 */
-	public void configureTemplateVariables()
-	{
-		FileTemplates.getTemplateVariables().put("JW_APP_NAME", new StringBuilder(getAppName() + ""));
-		FileTemplates.getTemplateVariables().put("JW_MODULES", new StringBuilder(compileModules() + ""));
-		FileTemplates.getTemplateVariables().put("JW_FACTORIES", new StringBuilder(compileFactories() + ""));
-		FileTemplates.getTemplateVariables().put("JW_DIRECTIVES", new StringBuilder(compileDirectives() + ""));
-		FileTemplates.getTemplateVariables().put("JW_APP_CONTROLLER", new StringBuilder(getControllerName() + ""));
-
-		FileTemplates.getTemplateVariables().put("//%CONTROLLER_INSERTIONS%", new StringBuilder(compileControllerInsertions() + ""));
-
-		FileTemplates.getTemplateVariables().put("JW_CONTROLLERS", new StringBuilder(compileControllers() + ""));
-		FileTemplates.getTemplateVariables().put("jwangular", FileTemplates.compileTemplate(AngularFeature.class, "jwangular"));
-	}
-
-	/**
-	 * compiles the global JW Angular Module, where the separate modules get listed inside of JWAngularModule
-	 *
-	 * @return
-	 */
-	public StringBuilder compileModules()
-	{
-		StringBuilder output = new StringBuilder();
-		List<AngularModuleBase> angulars = new ArrayList<>();
-		angulars.add(jwAngularApp);
-		angulars.forEach(module -> output.append(FileTemplates.compileTemplate(module.getReferenceName(), module.renderFunction())));
-		return output;
-	}
-
-	/**
-	 * Returns the JavaScript for this feature
-	 */
-	@Override
-	public void assignFunctionsToComponent()
-	{
-		//Do Nothing Force Overide
-	}
-
-	/**
 	 * Returns the physical angular application in use
 	 *
 	 * @return
 	 */
+	@NotNull
 	public final JWAngularModule getJwAngularApp()
 	{
 		return jwAngularApp;
@@ -309,50 +358,10 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 	 *
 	 * @return
 	 */
+	@NotNull
 	public final JWAngularController getJwAngularController()
 	{
 		return jwAngularController;
-	}
-
-	/**
-	 * Builds up the directives from all the present children
-	 *
-	 * @return
-	 */
-	public StringBuilder compileFactories()
-	{
-		StringBuilder output = new StringBuilder();
-		List<AngularFactoryBase> angulars = new ArrayList<>();
-		angulars.addAll(getPage().getAngular().getAngularFactories());
-		angulars.forEach(directive ->
-		                 {
-			                 String function = directive.renderFunction();
-			                 StringBuilder outputString = FileTemplates.compileTemplate(directive.getReferenceName(), function);
-			                 outputString.append("\n\t");
-			                 output.append(outputString);
-		                 });
-		return output;
-	}
-
-	/**
-	 * Builds up the directives from all the present children
-	 *
-	 * @return
-	 */
-	public StringBuilder compileControllers()
-	{
-		StringBuilder output = new StringBuilder();
-		List<AngularControllerBase> angulars = new ArrayList<>();
-		angulars.add(jwAngularController);
-		angulars.addAll(getPage().getAngular().getAngularControllers());
-		angulars.forEach(controller ->
-		                 {
-			                 String function = controller.renderFunction();
-			                 StringBuilder outputString = FileTemplates.compileTemplate(controller.getReferenceName(), function);
-			                 outputString.append("\n");
-			                 output.append(outputString);
-		                 });
-		return output;
 	}
 
 	@Override

@@ -30,6 +30,9 @@ import za.co.mmagon.logger.LogFactory;
 
 import java.util.logging.Level;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_ANGULAR_EVENT_START;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON;
+
 /**
  * Handles all events. Over-ride methods.
  *
@@ -68,7 +71,7 @@ public abstract class BlurAdapter extends Event
 		{
 			JQueryPageConfigurator.setRequired((Component) getComponent(), true);
 			AngularPageConfigurator.setRequired(getComponent(), true);
-			getComponent().addAttribute(AngularAttributes.ngBlur, "jwCntrl.perform($event," + renderVariables() + ");");
+			getComponent().addAttribute(AngularAttributes.ngBlur, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
 		super.preConfigure();
 	}

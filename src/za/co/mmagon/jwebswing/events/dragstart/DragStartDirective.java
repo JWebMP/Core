@@ -19,6 +19,8 @@ package za.co.mmagon.jwebswing.events.dragstart;
 import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Maps to the angular function of right click
  *
@@ -45,9 +47,10 @@ public class DragStartDirective extends AngularDirectiveBase
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(DragStartDirective.class, "DragStartS").toString();
+		return FileTemplates.getFileTemplate(DragStartDirective.class, "DragStart").toString();
 	}
 
 }

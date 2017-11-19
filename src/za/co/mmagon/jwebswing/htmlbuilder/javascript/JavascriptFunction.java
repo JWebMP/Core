@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * @author GedMarc
  * @since 14 Dec 2015
  */
-public abstract class JavascriptFunction extends JavaScriptPart
+public abstract class JavascriptFunction<J extends JavascriptFunction<J>> extends JavaScriptPart<J>
 {
 	
 	private static final long serialVersionUID = 1L;

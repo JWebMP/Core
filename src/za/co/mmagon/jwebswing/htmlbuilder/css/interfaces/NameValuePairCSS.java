@@ -16,10 +16,11 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @CSSAnnotationType
+@Documented
 public @interface NameValuePairCSS
 {
 
-	public String name() default "";
+	String name() default "";
 
-	public String value() default "";
+	String value() default "";
 }

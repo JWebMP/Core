@@ -103,6 +103,8 @@ public enum AngularAttributes implements AttributeDefinitions
 	ngDragStart("ng-drag-start"),
 	ngDragStop("ng-drag-stop"),
 	ngDrop("ng-drop"),
+	ngDropOut("ng-drop-out"),
+	ngDropOver("ng-drop-over"),
 	ngLoad("ng-load"),
 	ngReceive("ng-receive"),
 	ngRemove("ng-remove"),
@@ -128,13 +130,13 @@ public enum AngularAttributes implements AttributeDefinitions
 	private String attributeName;
 	
 	private boolean isKeyword;
-	
-	private AngularAttributes(String attributeName)
+
+	AngularAttributes(String attributeName)
 	{
 		this.attributeName = attributeName;
 	}
-	
-	private AngularAttributes(String attributeName, boolean isKeyword)
+
+	AngularAttributes(String attributeName, boolean isKeyword)
 	{
 		this.attributeName = attributeName;
 		this.isKeyword = isKeyword;

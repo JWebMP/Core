@@ -40,6 +40,7 @@ import java.lang.annotation.*;
 		})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
+@Documented
 public @interface BackgroundCSS
 {
 	/**
@@ -47,42 +48,42 @@ public @interface BackgroundCSS
 	 *
 	 * @return
 	 */
-	public Background Background() default @Background;
+	Background Background() default @Background;
 
 	/**
 	 * Sets whether a background image is fixed or scrolls with the rest of the page
 	 *
 	 * @return
 	 */
-	public BackgroundAttachments BackgroundAttachment() default BackgroundAttachments.Unset;
+	BackgroundAttachments BackgroundAttachment() default BackgroundAttachments.Unset;
 
 	/**
 	 * Sets the background Color of an element
 	 *
 	 * @return
 	 */
-	public ColourCSS BackgroundColor() default @ColourCSS;
+	ColourCSS BackgroundColor() default @ColourCSS;
 
 	/**
 	 * Sets the background Color to a colour name
 	 *
 	 * @return
 	 */
-	public ColourNames BackgroundColor$() default ColourNames.Unset;
+	ColourNames BackgroundColor$() default ColourNames.Unset;
 
 	/**
 	 * Specifies one or more background images for an element
 	 *
 	 * @return
 	 */
-	public ImageCSS BackgroundImage() default @ImageCSS;
+	ImageCSS BackgroundImage() default @ImageCSS;
 
 	/**
 	 * Specifies one or more background images for an element
 	 *
 	 * @return
 	 */
-	public ImageCSS[] BackgroundImage$() default
+	ImageCSS[] BackgroundImage$() default
 			{
 			};
 
@@ -91,42 +92,42 @@ public @interface BackgroundCSS
 	 *
 	 * @return
 	 */
-	public BackgroundPositions BackgroundPosition() default BackgroundPositions.Unset;
+	BackgroundPositions BackgroundPosition() default BackgroundPositions.Unset;
 
 	/**
 	 * Sets how a background image will be repeated
 	 *
 	 * @return
 	 */
-	public Repeats BackgroundRepeat() default Repeats.Unset;
+	Repeats BackgroundRepeat() default Repeats.Unset;
 
 	/**
 	 * Specifies the blending mode of each background layer (Color/image)
 	 *
 	 * @return
 	 */
-	public BackgroundBlendMode BackgroundBlendMode() default BackgroundBlendMode.Unset;
+	BackgroundBlendMode BackgroundBlendMode() default BackgroundBlendMode.Unset;
 
 	/**
 	 * The background-clip property specifies the painting area of the background.
 	 *
 	 * @return
 	 */
-	public BackgroundClip BackgroundClip() default BackgroundClip.Unset;
+	BackgroundClip BackgroundClip() default BackgroundClip.Unset;
 
 	/**
 	 * The background-origin property specifies where the background image is positioned.
 	 *
 	 * @return
 	 */
-	public BackgroundOrigins BackgroundOrigin() default BackgroundOrigins.Unset;
+	BackgroundOrigins BackgroundOrigin() default BackgroundOrigins.Unset;
 
 	/**
 	 * The background-size property specifies the size of the background images.
 	 *
 	 * @return
 	 */
-	public MeasurementCSS[] BackgroundSize() default
+	MeasurementCSS[] BackgroundSize() default
 			{
 			};
 
@@ -135,6 +136,6 @@ public @interface BackgroundCSS
 	 *
 	 * @return
 	 */
-	public BackgroundSizes BackgroundSize$() default BackgroundSizes.Unset;
+	BackgroundSizes BackgroundSize$() default BackgroundSizes.Unset;
 
 }

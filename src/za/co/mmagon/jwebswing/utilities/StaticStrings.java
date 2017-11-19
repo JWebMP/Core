@@ -12,8 +12,6 @@ public interface StaticStrings extends Serializable
 	String HTML_HEADER_JAVASCRIPT = "application/javascript";
 	String HTML_HEADER_DEFAULT_CONTENT_TYPE = "text/html";
 
-	String HTML_AMPERSAND = "&amp;";
-
 	String STRING_EMPTY = "";
 	String STRING_SPACE = " ";
 	String STRING_FORWARD_SLASH = "/";
@@ -25,6 +23,8 @@ public interface StaticStrings extends Serializable
 	String STRING_EQUALS_DOUBLE_QUOTES = "=\"";
 	String STRING_SHARP_BRACE_OPEN = "<";
 	String STRING_SHARP_BRACE_SLASH_OPEN = "</";
+	String STRING_SQUARE_BRACE_OPEN = "[";
+	String STRING_SQUARE_BRACE_CLOSED = "]";
 	String STRING_SHARP_BRACE_CLOSED = ">";
 	String STRING_HASH = "#";
 	String STRING_COMMNA = ",";
@@ -32,6 +32,10 @@ public interface StaticStrings extends Serializable
 	String STRING_SEMICOLON = ";";
 	String STRING_BRACES_OPEN = "{";
 	String STRING_BRACES_CLOSE = "}";
+
+	String STRING_CLOSING_BRACKET_SEMICOLON = ");";
+
+	String STRING_ANGULAR_EVENT_START = "jwCntrl.perform($event,";
 
 	char CHAR_SPACE = ' ';
 	char CHAR_DOT = '.';
@@ -53,7 +57,6 @@ public interface StaticStrings extends Serializable
 
 	String LOCAL_STORAGE_PARAMETER_KEY = "jwamsmk";
 
-
 	String ACCESS_CONTROL_ALLOW_ORIGIN_HEADER_NAME = "Access-Control-Allow-Origin";
 	String ACCESS_CONTROL_ALLOW_CREDENTIALS_HEADER_NAME = "Access-Control-Allow-Credentials";
 	String ACCESS_CONTROL_ALLOW_METHODS_HEADER_NAME = "Access-Control-Allow-Methods";
@@ -62,4 +65,23 @@ public interface StaticStrings extends Serializable
 	String DEFAULT_DATE_TIME_PATTERN ="yyyy-MM-dd HH:mm:ss";
 
 	String STRING_SELECTED = "selected";
+
+	/**
+	 * The &times; string
+	 */
+	String HTML_TIMES = "&times;";
+	/**
+	 * The &nbsp; string
+	 */
+	String HTML_TAB = "&nbsp;";
+	String HTML_AMPERSAND = "&amp;";
+	/**
+	 * Default text for Latin
+	 */
+	String ShortLatin = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...";
+	/**
+	 * Default Medium text for Latin
+	 */
+	String MediumLatin = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero laboriosam dolor perspiciatis omnis exercitationem. Beatae, officia pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas suscipit facere rem dicta, debitis...";
+
 }

@@ -16,12 +16,14 @@
  */
 package za.co.mmagon.jwebswing.base.html.interfaces;
 
+import java.io.Serializable;
+
 /**
  * Defines a collection of features available on most component types
  *
  * @author MMagon
  */
-public interface GlobalFeatures
+public interface GlobalFeatures extends Serializable
 {
 
 }

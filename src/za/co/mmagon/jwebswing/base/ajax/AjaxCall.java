@@ -69,7 +69,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	/**
 	 * Is an incoming string of angular data
 	 */
-	private List<AngularJsonVariable> variableData;
+	private Set<AngularJsonVariable> variableData;
 	/**
 	 * The event ID
 	 */
@@ -255,11 +255,11 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	 * @return
 	 */
 	@NotNull
-	public List<AngularJsonVariable> getVariableData()
+	public Set<AngularJsonVariable> getVariableData()
 	{
 		if (variableData == null)
 		{
-			variableData = new ArrayList<>();
+			variableData = new HashSet<>();
 		}
 		return variableData;
 	}
@@ -323,7 +323,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	 * @param variableData
 	 */
 	@SuppressWarnings("unchecked")
-	public J setVariableData(List<AngularJsonVariable> variableData)
+	public J setVariableData(Set<AngularJsonVariable> variableData)
 	{
 		this.variableData = variableData;
 		return (J)this;
