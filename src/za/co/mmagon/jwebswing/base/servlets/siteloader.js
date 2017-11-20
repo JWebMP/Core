@@ -11,11 +11,14 @@ jw.actions = {};
 
 jw.localstorage = {};
 
-var jwebswingPermStore = new Persist.Store('JWebSwingStore');
+var jwebswingPermStore = {};
 
-jwebswingPermStore.iterate(function (k, v) {
-    jw.localstorage[k] = v;
-});
+if (Persist) {
+    jwebswingPermStore = new Persist.Store('JWebSwingStore');
+    jwebswingPermStore.iterate(function (k, v) {
+        jw.localstorage[k] = v;
+    });
+}
 
 jw.sessionstorage = {};
 if (window.sessionStorage)
@@ -96,10 +99,11 @@ jw.actions.processLocalStorage = function (result) {
                 continue;    //Skip inherited properties
 
             var value = result.localStorage[name];
-            jwebswingPermStore.set(name, value);
+            if (Persist) {
+                jwebswingPermStore.set(name, value);
+                jwebswingPermStore.save();
+            }
             jw.localstorage[name] = value;
-            jwebswingPermStore.save();
-            //Do things
         }
     }
 };
@@ -112,7 +116,9 @@ jw.actions.processSessionStorage = function (result) {
                 continue;    //Skip inherited properties
 
             var value = result.sessionStorage[name];
-            jwebswingPermStore.set(name, value);
+            if (Persist) {
+                jwebswingPermStore.set(name, value);
+            }
             jw.sessionStorage[name] = value;
             //Do things
         }
