@@ -174,7 +174,7 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 		Set<CSSReference> arr = new LinkedHashSet<>();
 		for (CSSReference next : getCssReferencesAll())
 		{
-			if (!next.getPriority().equals(priority) || arr.contains(next))
+			if (next == null || !next.getPriority().equals(priority) || arr.contains(next))
 			{
 				continue;
 			}

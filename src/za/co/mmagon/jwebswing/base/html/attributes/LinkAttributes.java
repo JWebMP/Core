@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -121,7 +121,11 @@ public enum LinkAttributes implements AttributeDefinitions
 	/**
 	 * Sets the target
 	 */
-	Data_Target;
+	Data_Target,
+	/**
+	 * Speicifies the data parent of the link
+	 */
+	Data_Parent;
 
 	private HTMLVersions maxsupportedVersion = HTMLVersions.HTML5;
 	private HTMLVersions minsupportedVersion = HTMLVersions.HTML401Frameset;

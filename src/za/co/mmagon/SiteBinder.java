@@ -283,7 +283,7 @@ public class SiteBinder extends GuiceSiteBinder
 			String pathInfo = request.getPathInfo();
 			if (pathInfo == null)
 			{
-				pathInfo = "/";
+				pathInfo = STRING_FORWARD_SLASH;
 			}
 
 			String pcUrl = pc.url();
@@ -325,7 +325,6 @@ public class SiteBinder extends GuiceSiteBinder
 		jsonObjectMapper.registerModule(new Jdk8Module());
 		jsonObjectMapper.registerModule(new JavaTimeModule());
 	}
-
 
 	/**
 	 * Returns all the mapped pages

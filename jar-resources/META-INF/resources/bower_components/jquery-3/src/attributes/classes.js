@@ -141,8 +141,8 @@ jQuery.fn.extend( {
 				}
 
 				// If the element has a class name or if we're passed `false`,
-                // then remove the whole classname (if there was one, the above
-                // Otherwise bring back whatever was previously
+                // then remove the whole classname (if there was one, the above saved it).
+                // Otherwise bring back whatever was previously saved (if anything),
 				// falling back to the empty string if nothing was stored.
 				if ( this.setAttribute ) {
 					this.setAttribute( "class",

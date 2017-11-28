@@ -1,0 +1,1 @@
+define(["../../core","../../selector"],function(jQuery){"use strict";return function(elem,el){elem=el||elem;return elem.style.display==="none"||elem.style.display===""&&jQuery.contains(elem.ownerDocument,elem)&&jQuery.css(elem,"display")==="none"}});

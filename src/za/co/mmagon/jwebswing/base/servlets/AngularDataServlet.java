@@ -19,12 +19,12 @@ package za.co.mmagon.jwebswing.base.servlets;
 import com.armineasy.injection.GuiceContext;
 import com.google.inject.Singleton;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.annotations.DataCallInterception;
 import za.co.mmagon.jwebswing.annotations.SiteInterception;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
-import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
-import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
+import za.co.mmagon.jwebswing.base.ajax.*;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.base.servlets.options.AngularDataServletInitData;
 import za.co.mmagon.jwebswing.exceptions.InvalidRequestException;
@@ -115,13 +115,16 @@ public class AngularDataServlet extends JWDefaultServlet
 			throw new ServletException("Component could not be found to process any events.");
 		}
 		AjaxResponse ajaxResponse = GuiceContext.inject().getInstance(AjaxResponse.class);
-
-		if (!GuiceContext.isBuildingInjector())
+		try
 		{
 			intercept();
+			page.onConnect(ajaxCall, ajaxResponse);
+		}
+		catch (Exception e)
+		{
+			ajaxResponse.addReaction(new AjaxResponseReaction("Error Performing Data Request", ExceptionUtils.getStackTrace(e), ReactionType.DialogDisplay, AjaxResponseType.Danger));
 		}
 
-		page.onConnect(ajaxCall, ajaxResponse);
 		ajaxResponse.getComponents().forEach(a ->
 		                                     {
 			                                     ComponentHierarchyBase c = (ComponentHierarchyBase) a;

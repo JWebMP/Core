@@ -236,6 +236,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+
+        <dependency>
             <groupId>net.sf.uadetector</groupId>
             <artifactId>uadetector-json</artifactId>
             <version>0.1.22</version>
