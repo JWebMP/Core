@@ -36,7 +36,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.nio.charset.Charset;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -116,7 +115,7 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 			AjaxCall ajaxCall = GuiceContext.getInstance(AjaxCall.class);
 			ajaxCall.fromCall(ajaxCallIncoming);
 
-			AjaxResponse ajaxResponse = GuiceContext.inject().getInstance(AjaxResponse.class);
+			AjaxResponse ajaxResponse = GuiceContext.getInstance(AjaxResponse.class);
 
 			validateCall(ajaxCall);
 			validatePage();
@@ -184,20 +183,14 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 		Event triggerEvent = null;
 		try
 		{
-			Class eventClass = Class.forName(GuiceContext.getInstance(AjaxCall.class).getClassName().replace(StaticStrings.CHAR_UNDERSCORE, StaticStrings.CHAR_DOT));
+			AjaxCall call = GuiceContext.getInstance(AjaxCall.class);
+			Class eventClass = Class.forName(call.getClassName().replace(StaticStrings.CHAR_UNDERSCORE, StaticStrings.CHAR_DOT));
 			triggerEvent = (Event) GuiceContext.getInstance(eventClass);
 		}
 		catch (ClassNotFoundException cnfe)
 		{
 			Set<Class<? extends Event>> events = GuiceContext.reflect().getSubTypesOf(Event.class);
-			for (Iterator<Class<? extends Event>> iterator = events.iterator(); iterator.hasNext(); )
-			{
-				Class<? extends Event> event = iterator.next();
-				if (Modifier.isAbstract(event.getModifiers()))
-				{
-					iterator.remove();
-				}
-			}
+			events.removeIf(event -> Modifier.isAbstract(event.getModifiers()));
 			for (Class<? extends Event> event : events)
 			{
 				Event instance = GuiceContext.getInstance(event);

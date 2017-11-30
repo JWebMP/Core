@@ -39,7 +39,7 @@ import java.util.*;
 @RequestScoped
 public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 {
-	
+
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The component ID that was sent back
@@ -82,7 +82,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	 * The class to create
 	 */
 	private String className;
-	
+
 	/**
 	 * JSon Jackson Constructor
 	 */
@@ -90,7 +90,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	{
 		//set nothing
 	}
-	
+
 	/**
 	 * Creates a valid AJAX call object that can be processed
 	 *
@@ -109,7 +109,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		this.eventType = EventTypes.valueOf(eventType);
 		this.eventTypeFrom = EventTypes.valueOf(eventTypeFrom);
 	}
-	
+
 	/**
 	 * Returns this component ID
 	 *
@@ -119,7 +119,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	{
 		return componentId;
 	}
-	
+
 	/**
 	 * Creates this as a copy from the incoming call
 	 * @param incoming
@@ -136,9 +136,10 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		setReferenceId(incoming.getReferenceId());
 		setValue(incoming.getValue());
 		setVariableData(incoming.getVariableData());
+		setClassName(incoming.getClassName());
 		return (J)this;
 	}
-	
+
 	/**
 	 * Returns this date time of this call
 	 *
@@ -148,7 +149,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	{
 		return datetime;
 	}
-	
+
 	/**
 	 * Sets this calls component
 	 *
@@ -160,7 +161,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		this.component = component;
 		return (J)this;
 	}
-	
+
 	/**
 	 * Gets event type
 	 *
@@ -170,7 +171,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	{
 		return eventType;
 	}
-	
+
 	/**
 	 * Sets this component ID
 	 *
@@ -182,7 +183,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		this.componentId = componentId;
 		return (J)this;
 	}
-	
+
 	/**
 	 * Returns this calls event type from
 	 *
@@ -192,7 +193,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	{
 		return eventTypeFrom;
 	}
-	
+
 	/**
 	 * Sets the date time of this call
 	 *
@@ -204,7 +205,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		this.datetime = datetime;
 		return (J)this;
 	}
-	
+
 	/**
 	 * Returns this calls value
 	 *
@@ -214,7 +215,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	{
 		return value;
 	}
-	
+
 	/**
 	 * The Event ID
 	 *
@@ -226,7 +227,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		this.eventId = eventId;
 		return (J)this;
 	}
-	
+
 	/**
 	 * Returns this calls component
 	 *
@@ -236,7 +237,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	{
 		return component;
 	}
-	
+
 	/**
 	 * Sets the event type
 	 *
@@ -248,7 +249,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		this.eventType = eventType;
 		return (J)this;
 	}
-	
+
 	/**
 	 * Returns JSON strings of inbound variables
 	 *
@@ -263,7 +264,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		}
 		return variableData;
 	}
-	
+
 	/**
 	 * Sets this calls event type from
 	 *
@@ -275,7 +276,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		this.eventTypeFrom = eventTypeFrom;
 		return (J)this;
 	}
-	
+
 	/**
 	 * Returns the variable with the given name in the array or null
 	 *
@@ -294,7 +295,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		}
 		return null;
 	}
-	
+
 	/**
 	 * The event ID
 	 *
@@ -304,7 +305,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	{
 		return eventId;
 	}
-	
+
 	/**
 	 * Sets this calls value
 	 *
@@ -316,7 +317,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		this.value = value;
 		return (J)this;
 	}
-	
+
 	/**
 	 * Sets the array list of bound objects?
 	 *
@@ -328,7 +329,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		this.variableData = variableData;
 		return (J)this;
 	}
-	
+
 	/**
 	 * Returns a list of parameters
 	 * @return
@@ -342,7 +343,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		}
 		return parameters;
 	}
-	
+
 	/**
 	 * Sets the list of parameters
 	 * @param parameters
@@ -353,7 +354,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		this.parameters = parameters;
 		return (J)this;
 	}
-	
+
 	/**
 	 * Returns the event class this event is associated with
 	 *
@@ -364,7 +365,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	{
 		return className;
 	}
-	
+
 	/**
 	 * Sets the class name this event is associated with
 	 *

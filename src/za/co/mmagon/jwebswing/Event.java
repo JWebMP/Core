@@ -31,7 +31,6 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTy
 import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 import za.co.mmagon.jwebswing.utilities.StaticStrings;
 
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -144,7 +143,10 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 		setName(name);
 		setComponent(component);
 		setEventType(eventType);
-		getComponent().addEvent(this);
+		if (getComponent() != null)
+		{
+			getComponent().addEvent(this);
+		}
 	}
 
 	/**
@@ -319,10 +321,12 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	 * @return
 	 */
 	@Override
-	@NotNull
-	public Event<A, J> setComponent(@NotNull ComponentHierarchyBase component)
+	public Event<A, J> setComponent(ComponentHierarchyBase component)
 	{
-		getRegisteredComponents().add(component.getClass());
+		if (component != null)
+		{
+			getRegisteredComponents().add(component.getClass());
+		}
 		return super.setComponent(component);
 	}
 
