@@ -29,117 +29,11 @@
         </repository>
     </repositories>
 
-    <profiles>
-        <profile>
-            <id>development</id>
-            <properties>
-                <src.dir>src</src.dir>
-                <test.dir>test</test.dir><additionalparam>-Xdoclint:none</additionalparam>
-            </properties>
-
-        </profile>
-        <profile>
-            <id>unittest-profile</id>
-            <properties>
-                <src.dir>src</src.dir>
-                <test.dir>test</test.dir><additionalparam>-Xdoclint:none</additionalparam>
-
-
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <version>${maven.dependency.version}</version>
-                        <executions>
-                            <execution>
-                                <id>copy-dependencies</id>
-                                <phase>prepare-package</phase>
-                                <goals>
-                                    <goal>copy-dependencies</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                                    <includeScope>runtime</includeScope>
-                                    <!--<overWriteReleases>true</overWriteReleases>
-                                    <overWriteSnapshots>true</overWriteSnapshots>
-                                    <overWriteIfNewer>true</overWriteIfNewer>-->
-                                    <stripVersion>true</stripVersion>
-                                </configuration>
-                            </execution>
-
-                            <execution>
-                                <id>copy-test-libs</id>
-                                <phase>generate-test-resources</phase>
-                                <goals>
-                                    <goal>copy-dependencies</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${project.build.directory}/test-libs</outputDirectory>
-                                    <excludeScope>compile</excludeScope>
-                                    <excludeTransitive>true</excludeTransitive>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>release-profile</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                                <configuration>
-                                    <failOnError>false</failOnError><additionalparam>-Xdoclint:none</additionalparam>
-                                </configuration>
-                            </execution>
-                        </executions>
-                        <version>${maven.javadoc.version}</version>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>${maven.source.version}</version>
-                        <executions>
-                            <execution>
-                                <id>attach-source</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                                <configuration>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-
-            <properties>
-                <src.dir>src</src.dir>
-                <test.dir>test</test.dir><additionalparam>-Xdoclint:none</additionalparam>
-            </properties>
-
-        </profile>
-    </profiles>
-
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <src.dir>src</src.dir>
-        <test.dir>test</test.dir><additionalparam>-Xdoclint:none</additionalparam>
+        <test.dir>test</test.dir>
+        <additionalparam>-Xdoclint:none</additionalparam>
         <maven.jar.version>3.0.2</maven.jar.version>
         <maven.dependency.version>3.0.1</maven.dependency.version>
         <maven.javadoc.version>2.10.4</maven.javadoc.version>
