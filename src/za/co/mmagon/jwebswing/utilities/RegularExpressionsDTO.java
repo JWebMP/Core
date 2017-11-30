@@ -45,7 +45,7 @@ public class RegularExpressionsDTO extends JavaScriptPart
 	/**
 	 * Alpha Numeric minimum of 3 characters
 	 */
-	public static final String AlphaNumericFieldMin3 = "(?=.*[a-zA-Z])([a-zA-Z0-9 ]){1,}";
+	public static final String AlphaNumericFieldMin3 = "(?=.*[a-zA-Z])([a-zA-Z0-9 ]){3,}";
 	/**
 	 * Text Field only minimum 3 WORDS
 	 */
