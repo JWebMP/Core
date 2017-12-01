@@ -13,15 +13,7 @@
     <url>https://github.com/GedMarc/JWebSwing</url>
 
     <repositories>
-        <repository>
-            <id>oss.sonatype.org</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
-            <id>jwebswing-release</id>
-            <name>JWebSwingArtifactory-releases</name>
-            <url>https://jwebswing.com/artifactory/libs-release</url>
-        </repository>
+
         <repository>
             <id>jwebswing-snapshot</id>
             <name>JWebSwingArtifactory-snapshots</name>
