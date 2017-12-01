@@ -40,6 +40,7 @@ public interface StaticStrings extends Serializable
 	char CHAR_SPACE = ' ';
 	char CHAR_DOT = '.';
 	char CHAR_UNDERSCORE = '_';
+	char CHAR_DASH = '_';
 	char CHAR_HASH = '#';
 
 	String JAVASCRIPT_LOCATION = "/jwjs";

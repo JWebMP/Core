@@ -21,8 +21,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import net.sf.uadetector.*;
 import za.co.mmagon.FileTemplates;
 import za.co.mmagon.SessionHelper;
-import za.co.mmagon.SiteBinder;
 import za.co.mmagon.jwebswing.annotations.PageConfiguration;
+import za.co.mmagon.jwebswing.annotations.SiteBinder;
 import za.co.mmagon.jwebswing.base.ComponentDependancyBase;
 import za.co.mmagon.jwebswing.base.ComponentEventBase;
 import za.co.mmagon.jwebswing.base.ComponentFeatureBase;
@@ -59,6 +59,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static za.co.mmagon.jwebswing.utilities.StaticStrings.HTML_HEADER_JAVASCRIPT;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SEMICOLON;
 
 /**
  * Top level of any HTML page.
@@ -216,18 +217,6 @@ public class Page extends Html implements IPage
 	}
 
 	/**
-	 * Adds a global variable to the body
-	 *
-	 * @param variable
-	 */
-	@Override
-	public ComponentFeatureBase addVariable(String variable)
-	{
-		getBody().addVariable(variable);
-		return this;
-	}
-
-	/**
 	 * Adds a java script reference to the body
 	 *
 	 * @param jsReference
@@ -238,6 +227,18 @@ public class Page extends Html implements IPage
 	public ComponentDependancyBase addJavaScriptReference(JavascriptReference jsReference)
 	{
 		return getBody().addJavaScriptReference(jsReference);
+	}
+
+	@Override
+	public Set getCssReferences()
+	{
+		return getBody().getCssReferences();
+	}
+
+	@Override
+	public Set getJavascriptReferences()
+	{
+		return getBody().getJavascriptReferences();
 	}
 
 	/**
@@ -254,6 +255,41 @@ public class Page extends Html implements IPage
 	}
 
 	/**
+	 * Sets all component in the head and body to tiny
+	 *
+	 * @param tiny
+	 *
+	 * @return
+	 */
+	@Override
+	public Page setTiny(boolean tiny)
+	{
+		super.setTiny(tiny);
+		getHead().setTiny(tiny);
+		getBody().setTiny(tiny);
+		return this;
+	}
+
+	@Override
+	public void destroy()
+	{
+		if (getHead() != null)
+		{
+			getHead().destroy();
+		}
+		if (getBody() != null)
+		{
+			getBody().destroy();
+		}
+		this.angular = null;
+		this.fields = null;
+		this.options = null;
+		this.userAgent = null;
+
+		super.destroy();
+	}
+
+	/**
 	 * Adds a feature to the body
 	 *
 	 * @param feature
@@ -264,6 +300,75 @@ public class Page extends Html implements IPage
 	public ComponentFeatureBase addFeature(ComponentFeatureBase feature)
 	{
 		return getBody().addFeature(feature);
+	}
+
+	/**
+	 * Adds a global variable to the body
+	 *
+	 * @param variable
+	 */
+	@Override
+	public ComponentFeatureBase addVariable(String variable)
+	{
+		getBody().addVariable(variable);
+		return this;
+	}
+
+	/**
+	 * Returns the JavaScript render for the body
+	 *
+	 * @return
+	 */
+	@Override
+	public StringBuilder renderJavascript()
+	{
+		return getBody().renderJavascript();
+	}
+
+	/**
+	 * Returns all the dynamic options for a page
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public PageOptions getOptions()
+	{
+		if (options == null)
+		{
+			options = new PageOptions();
+		}
+		return options;
+	}
+
+	@Override
+	public void init()
+	{
+		if (!pageInitialized)
+		{
+			getBody().init();
+			pageInitialized = true;
+		}
+
+		if (!isInitialized())
+		{
+			log.log(Level.FINE, "Looking for plugins....");
+			Set<Class<? extends PageConfigurator>> configs = GuiceContext.reflect().getSubTypesOf(PageConfigurator.class);
+			List<PageConfigurator> configInstances = new ArrayList<>();
+			for (Class<? extends PageConfigurator> pc : configs)
+			{
+				PageConfigurator config = GuiceContext.getInstance(pc);
+				configInstances.add(config);
+			}
+			configInstances.sort(Comparator.comparing(PageConfigurator::getSortOrder));
+			for (PageConfigurator configInstance : configInstances)
+			{
+				log.log(Level.FINE, new StringBuilder().append("Configuring [").append(configInstance.getClass().getSimpleName()).append("]").toString());
+				configInstance.configure(this);
+			}
+		}
+
+		super.init();
 	}
 
 	/**
@@ -292,23 +397,95 @@ public class Page extends Html implements IPage
 		return pageOutput;
 	}
 
+	/**
+	 * Configures the page and all its components
+	 */
 	@Override
-	public void destroy()
-	{
-		if (getHead() != null)
-		{
-			getHead().destroy();
-		}
-		if (getBody() != null)
-		{
-			getBody().destroy();
-		}
-		this.angular = null;
-		this.fields = null;
-		this.options = null;
-		this.userAgent = null;
 
-		super.destroy();
+	@SuppressWarnings("unchecked")
+	public void preConfigure()
+	{
+		if (!isInitialized())
+		{
+			init();
+		}
+		if (!isConfigured())
+		{
+			configurePageHeader();
+			addVariablesScriptToPage();
+			configurePageBuild();
+
+			if (!getTopShelfScripts().isEmpty() && getRunningEnvironment().ordinal() >= DevelopmentEnvironments.Development.ordinal())
+			{
+				getHead().add(new Comment("Priority [" + RequirementsPriority.Top_Shelf + "] Values"));
+			}
+
+			//HERE
+			Set<Class<? extends RenderBeforeLinks>> renderBeforeScripts = GuiceContext.reflect().getSubTypesOf(RenderBeforeLinks.class);
+			List<RenderBeforeLinks> renderB = new ArrayList<>();
+			for (Class<? extends RenderBeforeLinks> renderBeforeScript : renderBeforeScripts)
+			{
+				RenderBeforeLinks s = GuiceContext.getInstance(renderBeforeScript);
+				renderB.add(s);
+			}
+			renderB.sort(Comparator.comparingInt(RenderBeforeLinks::sortOrder));
+			Paragraph before = new Paragraph().setTextOnly(true);
+			for (RenderBeforeLinks render : renderB)
+			{
+				before.setText(before.getText(0).toString() + render.render().toString());
+			}
+			if (before.getText(0).toString().trim().length() > 0)
+			{
+				getHead().add(before);
+			}
+			//Top SHelf Scripts
+			getTopShelfScripts().forEach(next -> getHead().add(next));
+			//After
+			Set<Class<? extends RenderAfterLinks>> renderAfterScripts = GuiceContext.reflect().getSubTypesOf(RenderAfterLinks.class);
+			List<RenderAfterLinks> renderA = new ArrayList<>();
+			for (Class<? extends RenderAfterLinks> renderBeforeScript : renderAfterScripts)
+			{
+				RenderAfterLinks s = GuiceContext.getInstance(renderBeforeScript);
+				renderA.add(s);
+			}
+			renderA.sort(Comparator.comparingInt(RenderAfterLinks::sortOrder));
+			Paragraph after = new Paragraph().setTextOnly(true);
+			for (RenderAfterLinks render : renderA)
+			{
+				after.setText(after.getText(0).toString() + render.render().toString());
+			}
+			if (after.getText(0).toString().trim().length() > 0)
+			{
+				getHead().add(after);
+			}
+			ArrayList<ComponentHierarchyBase> requirements = new ArrayList<>();
+			for (RequirementsPriority priority : RequirementsPriority.values())
+			{
+				getPriorityRequirements(priority, requirements, true, false).forEach(comp -> getHead().getChildren().add(comp));
+			}
+			getHead().add(getCssStyle());
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Returns if the body object is empty
+	 *
+	 * @return
+	 */
+	private boolean isBodyEmpty()
+	{
+		return getBody().getChildren().isEmpty();
+	}
+
+	/**
+	 * Returns if the head object is empty
+	 *
+	 * @return
+	 */
+	private boolean isHeadEmpty()
+	{
+		return getHead().getChildren().isEmpty();
 	}
 
 	/**
@@ -319,6 +496,7 @@ public class Page extends Html implements IPage
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public ComponentHierarchyBase getCachedComponent(String componentID)
 	{
 		for (Object chb : getBody().getChildrenHierarchy())
@@ -330,36 +508,6 @@ public class Page extends Html implements IPage
 			}
 		}
 		return null;
-	}
-
-	@Override
-	public void init()
-	{
-		if (!pageInitialized)
-		{
-			getBody().init();
-			pageInitialized = true;
-		}
-
-		if (!isInitialized())
-		{
-			log.log(Level.FINE, "Looking for plugins....");
-			Set<Class<? extends PageConfigurator>> configs = GuiceContext.reflect().getSubTypesOf(PageConfigurator.class);
-			List<PageConfigurator> configInstances = new ArrayList<>();
-			for (Class<? extends PageConfigurator> pc : configs)
-			{
-				PageConfigurator config = GuiceContext.getInstance(pc);
-				configInstances.add(config);
-			}
-			Collections.sort(configInstances, Comparator.comparing(PageConfigurator::getSortOrder));
-			for (PageConfigurator configInstance : configInstances)
-			{
-				log.log(Level.FINE, new StringBuilder().append("Configuring [").append(configInstance.getClass().getSimpleName()).append("]").toString());
-				configInstance.configure(this);
-			}
-		}
-
-		super.init();
 	}
 
 	/**
@@ -411,6 +559,7 @@ public class Page extends Html implements IPage
 		return arr;
 	}
 
+	@SuppressWarnings("unchecked")
 	private void configurePageBuild()
 	{
 		if (!getOptions().isScriptsInHead())
@@ -424,7 +573,7 @@ public class Page extends Html implements IPage
 				renderB.add(s);
 			}
 
-			Collections.sort(renderB, (RenderBeforeDynamicScripts o1, RenderBeforeDynamicScripts o2) -> ((Integer) o1.sortOrder()).compareTo(o2.sortOrder()));
+			renderB.sort(Comparator.comparingInt(RenderBeforeDynamicScripts::sortOrder));
 			Paragraph before = new Paragraph().setTextOnly(true);
 			renderB.forEach(render -> before.setText(before.getText(0).toString() + render.render().toString()));
 			if (before.getText(0).toString().trim().length() > 0)
@@ -439,7 +588,7 @@ public class Page extends Html implements IPage
 				RenderAfterScripts s = GuiceContext.getInstance(renderBeforeScript);
 				renderA.add(s);
 			}
-			Collections.sort(renderA, (RenderAfterScripts o1, RenderAfterScripts o2) -> ((Integer) o1.sortOrder()).compareTo(o2.sortOrder()));
+			renderA.sort(Comparator.comparingInt(RenderAfterScripts::sortOrder));
 			Paragraph after = new Paragraph().setTextOnly(true);
 			for (RenderAfterScripts render : renderA)
 			{
@@ -459,80 +608,11 @@ public class Page extends Html implements IPage
 	}
 
 	/**
-	 * Configures the page and all its components
-	 */
-	@Override
-
-	public void preConfigure()
-	{
-		if (!isInitialized())
-		{
-			init();
-		}
-		if (!isConfigured())
-		{
-			configurePageHeader();
-			addVariablesScriptToPage();
-			configurePageBuild();
-
-			if (!getTopShelfScripts().isEmpty() && getRunningEnvironment().ordinal() >= DevelopmentEnvironments.Development.ordinal())
-			{
-				getHead().add(new Comment("Priority [" + RequirementsPriority.Top_Shelf + "] Values"));
-			}
-
-			//HERE
-			Set<Class<? extends RenderBeforeLinks>> renderBeforeScripts = GuiceContext.reflect().getSubTypesOf(RenderBeforeLinks.class);
-			List<RenderBeforeLinks> renderB = new ArrayList<>();
-			for (Class<? extends RenderBeforeLinks> renderBeforeScript : renderBeforeScripts)
-			{
-				RenderBeforeLinks s = GuiceContext.getInstance(renderBeforeScript);
-				renderB.add(s);
-			}
-			Collections.sort(renderB, (RenderBeforeLinks o1, RenderBeforeLinks o2) -> ((Integer) o1.sortOrder()).compareTo(o2.sortOrder()));
-			Paragraph before = new Paragraph().setTextOnly(true);
-			for (RenderBeforeLinks render : renderB)
-			{
-				before.setText(before.getText(0).toString() + render.render().toString());
-			}
-			if (before.getText(0).toString().trim().length() > 0)
-			{
-				getHead().add(before);
-			}
-			//Top SHelf Scripts
-			getTopShelfScripts().forEach(next -> getHead().add(next));
-			//After
-			Set<Class<? extends RenderAfterLinks>> renderAfterScripts = GuiceContext.reflect().getSubTypesOf(RenderAfterLinks.class);
-			List<RenderAfterLinks> renderA = new ArrayList<>();
-			for (Class<? extends RenderAfterLinks> renderBeforeScript : renderAfterScripts)
-			{
-				RenderAfterLinks s = GuiceContext.getInstance(renderBeforeScript);
-				renderA.add(s);
-			}
-			Collections.sort(renderA, (RenderAfterLinks o1, RenderAfterLinks o2) -> ((Integer) o1.sortOrder()).compareTo(o2.sortOrder()));
-			Paragraph after = new Paragraph().setTextOnly(true);
-			for (RenderAfterLinks render : renderA)
-			{
-				after.setText(after.getText(0).toString() + render.render().toString());
-			}
-			if (after.getText(0).toString().trim().length() > 0)
-			{
-				getHead().add(after);
-			}
-			ArrayList<ComponentHierarchyBase> requirements = new ArrayList<>();
-			for (RequirementsPriority priority : RequirementsPriority.values())
-			{
-				getPriorityRequirements(priority, requirements, true, false).forEach(comp -> getHead().getChildren().add(comp));
-			}
-			getHead().add(getCssStyle());
-		}
-		super.preConfigure();
-	}
-
-	/**
 	 * Returns the script reference
 	 *
 	 * @return ArrayList of type script
 	 */
+	@SuppressWarnings("unchecked")
 	private List<Script> getDynamicScripts()
 	{
 		ArrayList<Script> allScripts = new ArrayList<>();
@@ -606,13 +686,14 @@ public class Page extends Html implements IPage
 	/**
 	 * Adds the variables in the application to the collection
 	 */
+	@SuppressWarnings("unchecked")
 	private void addVariablesScriptToPage()
 	{
 		StringBuilder variablesScriptBuilder = new StringBuilder();
-		for (Iterator it = getBody().getVariablesAll().iterator(); it.hasNext(); )
+		for (Object o : getBody().getVariablesAll())
 		{
-			String var = (String) it.next();
-			variablesScriptBuilder.append("var ").append(var).append(";");
+			String var = (String) o;
+			variablesScriptBuilder.append("var ").append(var).append(STRING_SEMICOLON);
 		}
 		if (variablesScriptBuilder.length() > 0)
 		{
@@ -631,6 +712,7 @@ public class Page extends Html implements IPage
 	/**
 	 * Builds up the Header Tag
 	 */
+	@SuppressWarnings("unchecked")
 	private void configurePageHeader()
 	{
 		if (getPageFields().getTitle() != null)
@@ -661,9 +743,9 @@ public class Page extends Html implements IPage
 			allScripts.forEach(getHead()::add);
 		}
 
-		for (Iterator iterator = getHead().getChildren().iterator(); iterator.hasNext(); )
+		for (Object o : getHead().getChildren())
 		{
-			ComponentHierarchyBase headObject = (ComponentHierarchyBase) iterator.next();
+			ComponentHierarchyBase headObject = (ComponentHierarchyBase) o;
 			headObject.preConfigure();
 		}
 	}
@@ -675,6 +757,7 @@ public class Page extends Html implements IPage
 	 *
 	 * @param component
 	 */
+	@SuppressWarnings("unchecked")
 	private void addScriptsTo(ComponentHierarchyBase component)
 	{
 		List<ComponentHierarchyBase> requirements = new CopyOnWriteArrayList<>();
@@ -765,50 +848,6 @@ public class Page extends Html implements IPage
 		return allLinks;
 	}
 
-	/**
-	 * Returns if the head object is empty
-	 *
-	 * @return
-	 */
-	private boolean isHeadEmpty()
-	{
-		return getHead().getChildren().isEmpty();
-	}
-
-	/**
-	 * Returns if the body object is empty
-	 *
-	 * @return
-	 */
-	private boolean isBodyEmpty()
-	{
-		return getBody().getChildren().isEmpty();
-	}
-
-	/**
-	 * Returns a readable user agent, or null if just a basic render
-	 *
-	 * @return
-	 */
-	public ReadableUserAgent getUserAgent()
-	{
-		if (userAgent == null)
-		{
-			userAgent = new UserAgent(DeviceCategory.EMPTY, UserAgentFamily.FIREFOX, "", "", OperatingSystem.EMPTY, "", "", UserAgentType.BROWSER, "", "", VersionNumber.UNKNOWN);
-		}
-		return userAgent;
-	}
-
-	/**
-	 * Sets the userAgent
-	 *
-	 * @param userAgent
-	 */
-	public void setUserAgent(ReadableUserAgent userAgent)
-	{
-		this.userAgent = userAgent;
-	}
-
 	@Override
 	public boolean equals(Object o)
 	{
@@ -835,7 +874,7 @@ public class Page extends Html implements IPage
 		{
 			return false;
 		}
-		if (!getFields().equals(page.getFields()))
+		if (!getPageFields().equals(page.getPageFields()))
 		{
 			return false;
 		}
@@ -847,57 +886,69 @@ public class Page extends Html implements IPage
 	}
 
 	/**
-	 * Returns the fields available for entry on this page
+	 * Whether or not the page is initialized
 	 *
 	 * @return
 	 */
-	@Override
-	public final PageFields getPageFields()
+	public boolean isPageInitialized()
 	{
-		if (fields == null)
+		return pageInitialized;
+	}
+
+	/**
+	 * Returns a readable user agent, or null if just a basic render
+	 *
+	 * @return
+	 */
+	public ReadableUserAgent getUserAgent()
+	{
+		if (userAgent == null)
 		{
-			fields = new PageFields(this);
+			userAgent = new UserAgent(DeviceCategory.EMPTY, UserAgentFamily.FIREFOX, "", "", OperatingSystem.EMPTY, "", "", UserAgentType.BROWSER, "", "", VersionNumber.UNKNOWN);
 		}
-		return fields;
+		return userAgent;
 	}
 
 	/**
-	 * Returns the document type that will be rendered with this HTML page real-time
-	 * <p>
+	 * Sets the userAgent
 	 *
-	 * @return Document Type
+	 * @param userAgent
 	 */
-	@Override
-	public DocumentType getDocumentType()
+	public void setUserAgent(ReadableUserAgent userAgent)
 	{
-		return new DocumentType(getBrowser().getHtmlVersion());
+		this.userAgent = userAgent;
 	}
 
 	/**
-	 * Sets all component in the head and body to tiny
+	 * Sets if the page is initialized
 	 *
-	 * @param tiny
-	 *
-	 * @return
+	 * @param pageInitialized
 	 */
-	@Override
-	public Page setTiny(boolean tiny)
+	public void setPageInitialized(boolean pageInitialized)
 	{
-		super.setTiny(tiny);
-		getHead().setTiny(tiny);
-		getBody().setTiny(tiny);
-		return this;
+		this.pageInitialized = pageInitialized;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getOptions().hashCode();
+		result = 31 * result + getPageFields().hashCode();
+		result = 31 * result + getUserAgent().hashCode();
+		result = 31 * result + getAngular().hashCode();
+		result = 31 * result + (isPageInitialized() ? 1 : 0);
+		return result;
 	}
 
 	/**
-	 * Returns the JavaScript render for the body
+	 * Sets teh fields currently set on the page
 	 *
-	 * @return
+	 * @param fields
 	 */
-	@Override
-	public StringBuilder renderJavascript()
+	public void setFields(PageFields fields)
 	{
-		return getBody().renderJavascript();
+		this.fields = fields;
 	}
 
 	/**
@@ -930,6 +981,33 @@ public class Page extends Html implements IPage
 	}
 
 	/**
+	 * Returns the document type that will be rendered with this HTML page real-time
+	 * <p>
+	 *
+	 * @return Document Type
+	 */
+	@Override
+	public DocumentType getDocumentType()
+	{
+		return new DocumentType(getBrowser().getHtmlVersion());
+	}
+
+	/**
+	 * Returns the fields available for entry on this page
+	 *
+	 * @return
+	 */
+	@Override
+	public final PageFields getPageFields()
+	{
+		if (fields == null)
+		{
+			fields = new PageFields(this);
+		}
+		return fields;
+	}
+
+	/**
 	 * Overidden method to return this, beware circular joins
 	 *
 	 * @return
@@ -937,46 +1015,6 @@ public class Page extends Html implements IPage
 	public Page getPage()
 	{
 		return this;
-	}
-
-	/**
-	 * Returns the page fields currently set on the page
-	 *
-	 * @return
-	 */
-	public PageFields getFields()
-	{
-		return fields;
-	}
-
-	/**
-	 * Sets teh fields currently set on the page
-	 *
-	 * @param fields
-	 */
-	public void setFields(PageFields fields)
-	{
-		this.fields = fields;
-	}
-
-	/**
-	 * Whether or not the page is initialized
-	 *
-	 * @return
-	 */
-	public boolean isPageInitialized()
-	{
-		return pageInitialized;
-	}
-
-	/**
-	 * Sets if the page is initialized
-	 *
-	 * @param pageInitialized
-	 */
-	public void setPageInitialized(boolean pageInitialized)
-	{
-		this.pageInitialized = pageInitialized;
 	}
 
 	/**
@@ -999,44 +1037,5 @@ public class Page extends Html implements IPage
 			allScripts.add(script);
 		}
 		return allScripts;
-	}
-
-	@Override
-	public Set getCssReferences()
-	{
-		return getBody().getCssReferences();
-	}
-
-	@Override
-	public Set getJavascriptReferences()
-	{
-		return getBody().getJavascriptReferences();
-	}
-
-	/**
-	 * Returns all the dynamic options for a page
-	 *
-	 * @return
-	 */
-	@Override
-	public PageOptions getOptions()
-	{
-		if (options == null)
-		{
-			options = new PageOptions();
-		}
-		return options;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		int result = super.hashCode();
-		result = 31 * result + getOptions().hashCode();
-		result = 31 * result + getFields().hashCode();
-		result = 31 * result + getUserAgent().hashCode();
-		result = 31 * result + getAngular().hashCode();
-		result = 31 * result + (isPageInitialized() ? 1 : 0);
-		return result;
 	}
 }

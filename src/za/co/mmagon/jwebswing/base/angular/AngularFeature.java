@@ -135,7 +135,6 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 	public static final void setAppName(String appName)
 	{
 		AngularFeature.appName = appName;
-
 	}
 
 	/**
@@ -170,7 +169,6 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 			getPage().getBody().addAttribute(AngularAttributes.ngController, controllerName + " as jwCntrl");
 			log.finer("Applied angular configuration to the page");
 		}
-
 		super.preConfigure();
 	}
 
@@ -211,7 +209,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 
 		FileTemplates.getTemplateVariables().put("//%CONTROLLER_INSERTIONS%", new StringBuilder(compileControllerInsertions()));
 
-		FileTemplates.getTemplateVariables().put("JW_CONTROLLERS", new StringBuilder(compileControllers() + ""));
+		FileTemplates.getTemplateVariables().put("JW_CONTROLLERS", new StringBuilder(compileControllers()));
 		FileTemplates.getTemplateVariables().put("jwangular", FileTemplates.compileTemplate(AngularFeature.class, "jwangular"));
 	}
 

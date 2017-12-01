@@ -68,6 +68,7 @@ public class JQueryPageConfigurator extends PageConfigurator
 	 * @param component
 	 * @param required
 	 */
+	@SuppressWarnings("unchecked")
 	public static void setRequired(Component component, Boolean required)
 	{
 		component.getProperties().put(JQueryEnabledString, required.toString());

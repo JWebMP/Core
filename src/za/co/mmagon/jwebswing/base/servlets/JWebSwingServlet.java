@@ -23,8 +23,8 @@ import com.google.inject.name.Named;
 import com.google.inject.servlet.RequestScoped;
 import net.sf.uadetector.ReadableUserAgent;
 import net.sf.uadetector.UserAgentStringParser;
-import za.co.mmagon.SiteBinder;
 import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.annotations.SiteBinder;
 import za.co.mmagon.jwebswing.annotations.SiteInterception;
 import za.co.mmagon.jwebswing.base.client.Browsers;
 import za.co.mmagon.jwebswing.base.html.Body;
@@ -140,7 +140,6 @@ public class JWebSwingServlet extends JWDefaultServlet
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
 	{
 		try
 		{

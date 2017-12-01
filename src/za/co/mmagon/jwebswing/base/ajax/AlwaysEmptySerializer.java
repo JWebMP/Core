@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -26,7 +26,7 @@ import java.io.IOException;
  * @author GedMarc
  * @since Nov 9, 2016
  */
-public class AlwaysEmptySerializer extends JsonSerializer<Object>
+class AlwaysEmptySerializer extends JsonSerializer<Object>
 {
 	/**
 	 * Always serialize as an empty serialization
@@ -35,7 +35,7 @@ public class AlwaysEmptySerializer extends JsonSerializer<Object>
 	{
 		//Nothing required here
 	}
-	
+
 	@Override
 	public void serialize(Object t, JsonGenerator jg, SerializerProvider sp) throws IOException
 	{

@@ -18,6 +18,7 @@ package za.co.mmagon.jwebswing.base.angular.controllers;
 
 import com.armineasy.injection.GuiceContext;
 import za.co.mmagon.FileTemplates;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 
 import javax.validation.constraints.NotNull;
 import java.util.Set;
@@ -30,9 +31,9 @@ import java.util.Set;
  */
 public class JWAngularController extends AngularControllerBase
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructs a new right click directive based on the angular object passed in
 	 */
@@ -41,7 +42,7 @@ public class JWAngularController extends AngularControllerBase
 		super("jwController");
 		setSortOrder(100);
 	}
-	
+
 	/**
 	 * Renders the right click directive from the JavaScript file
 	 *
@@ -57,21 +58,21 @@ public class JWAngularController extends AngularControllerBase
 			throw new UnsupportedOperationException("Didn't find FileTemplate for Angular Controller Classes.");
 		}
 		String output = controllerOutput.toString();
-		
+
 		StringBuilder statementOutput = new StringBuilder();
-		
+
 		Set<Class<? extends AngularControllerScopeStatement>> controllers = GuiceContext.reflect().getSubTypesOf(AngularControllerScopeStatement.class);
 		controllers.forEach(a ->
 		                    {
 			                    AngularControllerScopeStatement statement = GuiceContext.inject().getInstance(a);
 			                    if (!statementOutput.toString().contains(statement.getStatement()))
 			                    {
-				                    statementOutput.append(statement.getStatement()).append("\n");
+				                    statementOutput.append(statement.getStatement()).append(StaticStrings.STRING_NEWLINE_TEXT);
 			                    }
 		                    });
 		output = output.replace("JW_SCOPE_INSERTIONS;", statementOutput.toString());
 		output = output.replace("JW_SCOPE_INSERTIONS", statementOutput.toString());
 		return output;
 	}
-	
+
 }

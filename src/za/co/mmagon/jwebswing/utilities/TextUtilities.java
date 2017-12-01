@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -47,42 +47,13 @@ public class TextUtilities
 	}
 
 	/**
-	 * Updates an attribute name by changing the enum to a clean format
-	 *
-	 * @param buildStringSB
-	 *
-	 * @return
-	 */
-	public static final synchronized StringBuilder cleanAttributeName(StringBuilder buildStringSB)
-	{
-		String buildString = buildStringSB.toString();
-		buildString = buildString.replace('$', CHAR_SPACE);
-		buildString = buildString.replace(StaticStrings.CHAR_UNDERSCORE, '-');
-		buildString = buildString.replace('-', CHAR_SPACE).trim();
-		StringTokenizer st = new StringTokenizer(buildString);
-		StringBuilder outputString = new StringBuilder();
-		while (st.hasMoreElements())
-		{
-			StringBuilder newSb = new StringBuilder(st.nextToken());
-			Character firstChar = newSb.charAt(0);
-			firstChar = firstChar.toString().toUpperCase().charAt(0);
-			String restOfIt = newSb.substring(1, newSb.length()).toLowerCase();
-			newSb = new StringBuilder();
-			newSb.append(firstChar);
-			newSb.append(restOfIt);
-			outputString.append(newSb).append(STRING_SPACE);
-		}
-		return new StringBuilder(outputString);
-	}
-
-	/**
 	 * Camel Case Replacement
 	 *
 	 * @param hello
 	 *
 	 * @return
 	 */
-	public static final synchronized StringBuilder cleanCamelCaseName(String hello)
+	public static synchronized StringBuilder cleanCamelCaseName(String hello)
 	{
 		return cleanCamelCaseName(new StringBuilder(hello));
 	}
@@ -94,7 +65,7 @@ public class TextUtilities
 	 *
 	 * @return
 	 */
-	public static final synchronized StringBuilder cleanCamelCaseName(StringBuilder buildStringSB)
+	public static synchronized StringBuilder cleanCamelCaseName(StringBuilder buildStringSB)
 	{
 		String buildString = buildStringSB.toString();
 		buildString = buildString.replace('$', CHAR_SPACE);
@@ -133,9 +104,38 @@ public class TextUtilities
 	 *
 	 * @return
 	 */
-	public static final synchronized String cleanAttributeName(String s)
+	public static synchronized String cleanAttributeName(String s)
 	{
 		return TextUtilities.cleanAttributeName(new StringBuilder(s)).toString();
+	}
+
+	/**
+	 * Updates an attribute name by changing the enum to a clean format
+	 *
+	 * @param buildStringSB
+	 *
+	 * @return
+	 */
+	public static synchronized StringBuilder cleanAttributeName(StringBuilder buildStringSB)
+	{
+		String buildString = buildStringSB.toString();
+		buildString = buildString.replace('$', CHAR_SPACE);
+		buildString = buildString.replace(StaticStrings.CHAR_UNDERSCORE, '-');
+		buildString = buildString.replace('-', CHAR_SPACE).trim();
+		StringTokenizer st = new StringTokenizer(buildString);
+		StringBuilder outputString = new StringBuilder();
+		while (st.hasMoreElements())
+		{
+			StringBuilder newSb = new StringBuilder(st.nextToken());
+			Character firstChar = newSb.charAt(0);
+			firstChar = firstChar.toString().toUpperCase().charAt(0);
+			String restOfIt = newSb.substring(1, newSb.length()).toLowerCase();
+			newSb = new StringBuilder();
+			newSb.append(firstChar);
+			newSb.append(restOfIt);
+			outputString.append(newSb).append(STRING_SPACE);
+		}
+		return new StringBuilder(outputString);
 	}
 
 	/**
@@ -145,7 +145,7 @@ public class TextUtilities
 	 *
 	 * @return
 	 */
-	public static final synchronized String initCap(String s)
+	public static synchronized String initCap(String s)
 	{
 		return TextUtilities.initCap(new StringBuilder(s)).toString();
 	}
@@ -157,7 +157,7 @@ public class TextUtilities
 	 *
 	 * @return
 	 */
-	public static final synchronized StringBuilder initCap(StringBuilder s)
+	public static synchronized StringBuilder initCap(StringBuilder s)
 	{
 		StringTokenizer st = new StringTokenizer(s.toString());
 		StringBuilder buildString = new StringBuilder();
@@ -181,7 +181,7 @@ public class TextUtilities
 	 *
 	 * @return The output string of tabs
 	 */
-	public static final synchronized StringBuilder getTabString(Integer tabCount)
+	public static synchronized StringBuilder getTabString(Integer tabCount)
 	{
 		Integer indentationDepth = tabCount;
 		StringBuilder tabIndents = new StringBuilder("");
@@ -201,7 +201,7 @@ public class TextUtilities
 	 *
 	 * @return The Stack Trace as a String
 	 */
-	public static final synchronized String stackTraceToString(Throwable e)
+	public static synchronized String stackTraceToString(Throwable e)
 	{
 		String retValue = null;
 		try (StringWriter sw = new StringWriter(); PrintWriter pw = new PrintWriter(sw))

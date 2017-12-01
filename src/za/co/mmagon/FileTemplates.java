@@ -37,7 +37,6 @@ import java.util.regex.Matcher;
  */
 public class FileTemplates implements Serializable
 {
-
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("FileTemplates");
 	/**
 	 * All registered templates
@@ -51,6 +50,11 @@ public class FileTemplates implements Serializable
 	private static final Map<String, StringBuilder> TemplateVariables = new ConcurrentHashMap<>();
 
 	private static final long serialVersionUID = 1L;
+
+	private FileTemplates()
+	{
+
+	}
 
 	/**
 	 * Returns all the template variables currently loaded into memory

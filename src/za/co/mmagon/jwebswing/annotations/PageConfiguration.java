@@ -16,6 +16,8 @@
  */
 package za.co.mmagon.jwebswing.annotations;
 
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
+
 import java.lang.annotation.*;
 
 /**
@@ -31,14 +33,13 @@ import java.lang.annotation.*;
 @Documented
 public @interface PageConfiguration
 {
-	
 	/**
 	 * Specifies the URL that this page serves
 	 *
 	 * @return
 	 */
-	String url() default "/";
-	
+	String url() default StaticStrings.STRING_FORWARD_SLASH;
+
 	/**
 	 * Specifies the type this page serves (best to leave it alone - or only use one page for error types etc)
 	 *

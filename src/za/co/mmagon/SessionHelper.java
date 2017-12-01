@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static za.co.mmagon.jwebswing.utilities.StaticStrings.REQUEST_SITE_HEADER_NAME;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.*;
 
 /**
  * @author Marc Magon
@@ -62,14 +62,14 @@ public class SessionHelper
 				{
 					buff = new StringBuffer(request.getHeader(REQUEST_SITE_HEADER_NAME));
 				}
-				String address = buff.substring(0, buff.lastIndexOf("/") + 1);
+				String address = buff.substring(0, buff.lastIndexOf(STRING_FORWARD_SLASH) + 1);
 				SessionHelper.address = address;
 				return address;
 			}
 			catch (Exception e)
 			{
 				log.log(Level.SEVERE, "Unable to get server path", e);
-				return "";
+				return STRING_EMPTY;
 			}
 		}
 		return address;
@@ -86,8 +86,8 @@ public class SessionHelper
 		{
 			HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);
 			String buff = request.getServletPath();
-			return buff.isEmpty() ? "/" : buff;
+			return buff.isEmpty() ? STRING_FORWARD_SLASH : buff;
 		}
-		return "/";
+		return STRING_FORWARD_SLASH;
 	}
 }

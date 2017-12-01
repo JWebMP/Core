@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -37,7 +37,7 @@ public class GUIDGenerator
 	 *
 	 * @return
 	 */
-	public static final synchronized String generateGuid()
+	public static synchronized String generateGuid()
 	{
 		return "jw" + UUID.randomUUID().toString().substring(0, 6);
 	}
@@ -47,7 +47,7 @@ public class GUIDGenerator
 	 *
 	 * @return
 	 */
-	public static final synchronized String generateGuidFull()
+	public static synchronized String generateGuidFull()
 	{
 		return UUID.randomUUID().toString();
 	}
@@ -60,7 +60,7 @@ public class GUIDGenerator
 	 *
 	 * @return
 	 */
-	public static final String ensureLength(String original, int length)
+	public static String ensureLength(String original, int length)
 	{
 		StringBuilder output = new StringBuilder(original);
 		int diff = output.length() - length;
@@ -87,7 +87,7 @@ public class GUIDGenerator
 	 *
 	 * @return
 	 */
-	public static final String createGuidSection(int characters)
+	public static String createGuidSection(int characters)
 	{
 		StringBuilder ret = new StringBuilder("");
 		Random random = new Random();

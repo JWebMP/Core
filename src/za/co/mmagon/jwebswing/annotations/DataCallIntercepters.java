@@ -30,7 +30,7 @@ import java.util.logging.Logger;
  * @author Marc Magon
  * @since 05 Apr 2017
  */
-public class DataCallIntercepters implements org.aopalliance.intercept.MethodInterceptor
+class DataCallIntercepters implements org.aopalliance.intercept.MethodInterceptor
 {
 
 	private static final Logger LOG = LogFactory.getLog(DataCallIntercepters.class.getName());

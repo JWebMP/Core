@@ -25,10 +25,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ *
  * @author Marc Magon
  * @since 05 Apr 2017
  */
-public class AjaxCallIntercepters implements org.aopalliance.intercept.MethodInterceptor
+class AjaxCallIntercepters implements org.aopalliance.intercept.MethodInterceptor
 {
 
 	private static final Logger LOG = LogFactory.getLog(AjaxCallIntercepters.class.getName());

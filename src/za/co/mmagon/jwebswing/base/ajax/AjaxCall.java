@@ -324,6 +324,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 	 * @param variableData
 	 */
 	@SuppressWarnings("unchecked")
+	@NotNull
 	public J setVariableData(Set<AngularJsonVariable> variableData)
 	{
 		this.variableData = variableData;

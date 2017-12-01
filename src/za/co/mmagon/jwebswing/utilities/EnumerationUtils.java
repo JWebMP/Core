@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -27,7 +27,7 @@ import java.util.Comparator;
 public class EnumerationUtils
 {
 	public static final EnumerationNameSorter enumNameSorter = new EnumerationNameSorter();
-	
+
 	/**
 	 * Instance only construction
 	 */
@@ -35,19 +35,27 @@ public class EnumerationUtils
 	{
 		//No construction
 	}
-	
-	
+
+
+	/**
+	 * Returns a static instance of the sorter
+	 *
+	 * @return
+	 */
+	public static EnumerationNameSorter getEnumNameSorter()
+	{
+		return enumNameSorter;
+	}
+
 	/**
 	 * A sorter for an enumeration name by name
 	 */
 	public static class EnumerationNameSorter implements Comparator<Enum>
 	{
-		
 		@Override
 		public int compare(Enum o1, Enum o2)
 		{
 			return o1.name().compareTo(o2.name());
 		}
-		
 	}
 }

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon;
+package za.co.mmagon.jwebswing.annotations;
 
 import com.armineasy.injection.GuiceContext;
 import com.armineasy.injection.abstractions.GuiceSiteInjectorModule;
@@ -32,8 +32,8 @@ import com.google.inject.name.Names;
 import com.google.inject.servlet.RequestScoped;
 import net.sf.uadetector.UserAgentStringParser;
 import net.sf.uadetector.service.UADetectorServiceFactory;
+import za.co.mmagon.SessionHelper;
 import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.annotations.*;
 import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
