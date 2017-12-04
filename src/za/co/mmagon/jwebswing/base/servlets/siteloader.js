@@ -13,20 +13,24 @@ jw.localstorage = {};
 
 var jwebswingPermStore = {};
 
-if (Persist) {
-    jwebswingPermStore = new Persist.Store('JWebSwingStore');
-    jwebswingPermStore.iterate(function (k, v) {
-        jw.localstorage[k] = v;
-    });
+try {
+    if (Persist) {
+        jwebswingPermStore = new Persist.Store('JWebSwingStore');
+        jwebswingPermStore.iterate(function (k, v) {
+            jw.localstorage[k] = v;
+        });
+    }
+} catch (e) {
+    console.warn("LocalStorage may not work. No persist library added");
 }
 
 jw.sessionstorage = {};
 if (window.sessionStorage)
-if (window.sessionStorage) {
-    for (var i = 0; i < window.sessionStorage.length; i++) {
-        jw.sessionstorage[window.sessionStorage.key(i)] = window.sessionStorage.getItem(window.sessionStorage.key(i));
+    if (window.sessionStorage) {
+        for (var i = 0; i < window.sessionStorage.length; i++) {
+            jw.sessionstorage[window.sessionStorage.key(i)] = window.sessionStorage.getItem(window.sessionStorage.key(i));
+        }
     }
-}
 
 jw.env = {};
 jw.env.loadescripts = [];
@@ -99,9 +103,13 @@ jw.actions.processLocalStorage = function (result) {
                 continue;    //Skip inherited properties
 
             var value = result.localStorage[name];
-            if (Persist) {
-                jwebswingPermStore.set(name, value);
-                jwebswingPermStore.save();
+            try {
+                if (Persist) {
+                    jwebswingPermStore.set(name, value);
+                    jwebswingPermStore.save();
+                }
+            } catch (e) {
+                console.warn("LocalStorage may not work. No persist library added");
             }
             jw.localstorage[name] = value;
         }
@@ -116,8 +124,12 @@ jw.actions.processSessionStorage = function (result) {
                 continue;    //Skip inherited properties
 
             var value = result.sessionStorage[name];
-            if (Persist) {
-                jwebswingPermStore.set(name, value);
+            try {
+                if (Persist) {
+                    jwebswingPermStore.set(name, value);
+                }
+            } catch (e) {
+                console.warn("LocalStorage may not work. No persist library added");
             }
             jw.sessionStorage[name] = value;
             //Do things
