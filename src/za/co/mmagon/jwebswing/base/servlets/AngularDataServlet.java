@@ -81,9 +81,8 @@ public class AngularDataServlet extends JWDefaultServlet
 		}
 		if (jb.length() > 0)
 		{
-			initData = new JavaScriptPart<>().From(jb.toString(), AngularDataServletInitData.class);
-			getInstance(SessionProperties.class).setLocalStorage(initData.getLocalStorage());
-			getInstance(SessionProperties.class).setSessionStorage(initData.getSessionStorage());
+			getInstance(SessionStorageProperties.class).setLocalStorage(initData.getLocalStorage());
+			getInstance(SessionStorageProperties.class).setSessionStorage(initData.getSessionStorage());
 			componentId = initData.getParameters().get("objectId");
 		}
 

@@ -12,9 +12,9 @@ import java.util.Map;
  * @param <J> any extension
  */
 @SessionScoped
-public class SessionProperties<J extends SessionProperties<J>> extends JavaScriptPart<J>
+public class SessionStorageProperties<J extends SessionStorageProperties<J>> extends JavaScriptPart<J>
 {
-	
+
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The client browser local storage
@@ -24,15 +24,15 @@ public class SessionProperties<J extends SessionProperties<J>> extends JavaScrip
 	 * The client browser session storage
 	 */
 	private Map<String,String> sessionStorage;
-	
+
 	/**
 	 * Constructs the session properties
 	 */
-	public SessionProperties()
+	public SessionStorageProperties()
 	{
 		//Not needed
 	}
-	
+
 	/**
 	 * The client browser local storage
 	 * @return
@@ -44,7 +44,7 @@ public class SessionProperties<J extends SessionProperties<J>> extends JavaScrip
 			localStorage = new HashMap<>();
 		return localStorage;
 	}
-	
+
 	/**
 	 * The client browser local storage
 	 * @param localStorage
@@ -53,7 +53,7 @@ public class SessionProperties<J extends SessionProperties<J>> extends JavaScrip
 	{
 		this.localStorage = localStorage;
 	}
-	
+
 	/**
 	 * The client browser session storage
 	 * @return
@@ -67,7 +67,7 @@ public class SessionProperties<J extends SessionProperties<J>> extends JavaScrip
 		}
 		return sessionStorage;
 	}
-	
+
 	/**
 	 * The client browser session storage
 	 * @param sessionStorage

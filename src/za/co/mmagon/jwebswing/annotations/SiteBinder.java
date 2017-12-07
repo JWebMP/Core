@@ -204,7 +204,7 @@ public class SiteBinder extends GuiceSiteBinder
 			                                                                               return new HashMap();
 		                                                                               });
 
-		module.bind(SessionProperties.class);
+		module.bind(SessionStorageProperties.class);
 		module.bind(AngularDataServletInitData.class);
 
 		module.bind(Page.class).toProvider(() ->
