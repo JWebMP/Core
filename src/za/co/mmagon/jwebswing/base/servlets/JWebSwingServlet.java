@@ -35,7 +35,6 @@ import za.co.mmagon.jwebswing.utilities.StaticStrings;
 import za.co.mmagon.jwebswing.utilities.TextUtilities;
 import za.co.mmagon.logger.LogFactory;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -144,7 +143,7 @@ public class JWebSwingServlet extends JWDefaultServlet
 				processRequest(request, response);
 			}
 		}
-		catch (IOException | ServletException ex)
+		catch (IOException ex)
 		{
 			log.log(Level.SEVERE, "SwingServlet", ex);
 		}

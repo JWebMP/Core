@@ -22,12 +22,9 @@ import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.utilities.StaticStrings;
 import za.co.mmagon.logger.LogFactory;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -41,7 +38,6 @@ public class AngularDataVariables extends JWDefaultServlet
 
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-	 *
 	 */
 	protected void processRequest()
 	{
@@ -55,19 +51,12 @@ public class AngularDataVariables extends JWDefaultServlet
 	 *
 	 * @param request
 	 * @param response
-	 *
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	{
-		try
-		{
-			super.doGet(request, response);
-			processRequest();
-		}
-		catch (ServletException | IOException e)
-		{
-			LOG.log(Level.SEVERE, "Do Post Error", e);
-		}
+		super.doGet(request, response);
+		processRequest();
+
 	}
 }

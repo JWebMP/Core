@@ -29,11 +29,9 @@ import za.co.mmagon.jwebswing.base.servlets.interfaces.IDataComponent;
 import za.co.mmagon.jwebswing.exceptions.MissingComponentException;
 import za.co.mmagon.logger.LogFactory;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.logging.Level;
@@ -88,10 +86,6 @@ public class DataServlet extends JWDefaultServlet
 		{
 			super.doGet(request, response);
 			processRequest(request);
-		}
-		catch (IOException | ServletException e)
-		{
-			log.log(Level.SEVERE, "Do Post in Data Servlet", e);
 		}
 		catch (MissingComponentException ex)
 		{

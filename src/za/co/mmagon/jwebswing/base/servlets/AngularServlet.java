@@ -21,12 +21,9 @@ import com.google.inject.Singleton;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.logger.LogFactory;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -40,11 +37,38 @@ public class AngularServlet extends JWDefaultServlet
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * Post handler
+	 *
+	 * @param request
+	 * @param response
+	 */
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	{
+		super.doGet(request, response);
+		processRequest(request, response);
+	}
+
+	/**
+	 * Post handler
+	 *
+	 * @param request
+	 * @param response
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	{
+		super.doGet(request, response);
+		processRequest(request, response);
+	}
+
+	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
 	 *
-	 * @param request  Servlet request
-	 * @param response Servlet response
-	 *
+	 * @param request
+	 * 		Servlet request
+	 * @param response
+	 * 		Servlet response
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 	{
@@ -54,47 +78,5 @@ public class AngularServlet extends JWDefaultServlet
 		request.getHeaderNames();
 		response.getHeaderNames();
 		writeOutput(output, "application/javascript;charset=UTF-8", Charset.forName("UTF-8"));
-	}
-
-	/**
-	 * Post handler
-	 *
-	 * @param request
-	 * @param response
-	 *
-	 */
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	{
-		try
-		{
-			super.doGet(request, response);
-			processRequest(request, response);
-		}
-		catch (IOException | ServletException e)
-		{
-			LOG.log(Level.SEVERE, "Do Post Error", e);
-		}
-	}
-
-	/**
-	 * Post handler
-	 *
-	 * @param request
-	 * @param response
-	 *
-	 */
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-	{
-		try
-		{
-			super.doGet(request, response);
-			processRequest(request, response);
-		}
-		catch (IOException | ServletException e)
-		{
-			LOG.log(Level.SEVERE, "Angualr Do Get Error", e);
-		}
 	}
 }

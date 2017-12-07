@@ -30,10 +30,8 @@ import za.co.mmagon.jwebswing.utilities.StaticStrings;
 import za.co.mmagon.jwebswing.utilities.TextUtilities;
 import za.co.mmagon.logger.LogFactory;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.nio.charset.Charset;
 import java.util.Set;
@@ -74,21 +72,12 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 	 * 		Servlet request
 	 * @param response
 	 * 		Servlet response
-	 *
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	{
-		try
-		{
-			super.doPost(request, response);
-			processRequest(request);
-		}
-		catch (ServletException | IOException e)
-		{
-			log.log(Level.SEVERE, "Error in post", e);
-		}
-
+		super.doPost(request, response);
+		processRequest(request);
 	}
 
 	/**
@@ -96,7 +85,6 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 	 *
 	 * @param request
 	 * 		Servlet request
-	 *
 	 */
 	protected void processRequest(HttpServletRequest request)
 	{

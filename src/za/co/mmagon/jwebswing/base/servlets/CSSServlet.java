@@ -23,7 +23,6 @@ import za.co.mmagon.jwebswing.exceptions.MissingComponentException;
 import za.co.mmagon.jwebswing.utilities.StaticStrings;
 import za.co.mmagon.logger.LogFactory;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -60,7 +59,7 @@ public class CSSServlet extends JWDefaultServlet
 			super.doPost(request, response); //Checks for the page existance
 			processRequest(request, response);
 		}
-		catch (IOException | ServletException e)
+		catch (IOException e)
 		{
 			LOG.log(Level.SEVERE, "Do Get in CSS Servlet", e);
 		}
