@@ -208,9 +208,6 @@ public abstract class JWDefaultServlet extends HttpServlet
 	 *
 	 * @param req
 	 * @param resp
-	 *
-	 * @throws ServletException
-	 * @throws IOException
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -251,9 +248,6 @@ public abstract class JWDefaultServlet extends HttpServlet
 	 *
 	 * @param req
 	 * @param resp
-	 *
-	 * @throws ServletException
-	 * @throws IOException
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
