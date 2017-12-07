@@ -80,15 +80,9 @@ public class DataServlet extends JWDefaultServlet
 	 * 		Servlet request
 	 * @param response
 	 * 		Servlet response
-	 *
-	 * @throws ServletException
-	 * 		if a Servlet-specific error occurs
-	 * @throws IOException
-	 * 		if an I/O error occurs
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
 	{
 		try
 		{

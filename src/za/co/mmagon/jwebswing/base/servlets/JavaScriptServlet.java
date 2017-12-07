@@ -52,12 +52,6 @@ public class JavaScriptServlet extends JWDefaultServlet
 	 * 		Servlet request
 	 * @param response
 	 * 		Servlet response
-	 *
-	 * @throws ServletException
-	 * 		if a Servlet-specific error occurs
-	 * @throws IOException
-	 * 		if an I/O error occurs
-	 * @throws za.co.mmagon.jwebswing.base.ajax.exceptions.MissingComponentException
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws MissingComponentException
@@ -88,15 +82,9 @@ public class JavaScriptServlet extends JWDefaultServlet
 	 * 		Servlet request
 	 * @param response
 	 * 		Servlet response
-	 *
-	 * @throws ServletException
-	 * 		if a Servlet-specific error occurs
-	 * @throws IOException
-	 * 		if an I/O error occurs
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
 	{
 		try
 		{
@@ -120,15 +108,9 @@ public class JavaScriptServlet extends JWDefaultServlet
 	 * 		Servlet request
 	 * @param response
 	 * 		Servlet response
-	 *
-	 * @throws ServletException
-	 * 		if a Servlet-specific error occurs
-	 * @throws IOException
-	 * 		if an I/O error occurs
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
 	{
 		try
 		{

@@ -35,18 +35,16 @@ import java.util.logging.Logger;
 @Singleton
 public class AngularServlet extends JWDefaultServlet
 {
-	
+
 	private static final Logger LOG = LogFactory.getInstance().getLogger("AngularServlet");
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
 	 *
 	 * @param request  Servlet request
 	 * @param response Servlet response
 	 *
-	 * @throws ServletException if a Servlet-specific error occurs
-	 * @throws IOException      if an I/O error occurs
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 	{
@@ -57,15 +55,13 @@ public class AngularServlet extends JWDefaultServlet
 		response.getHeaderNames();
 		writeOutput(output, "application/javascript;charset=UTF-8", Charset.forName("UTF-8"));
 	}
-	
+
 	/**
 	 * Post handler
 	 *
 	 * @param request
 	 * @param response
 	 *
-	 * @throws ServletException
-	 * @throws IOException
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -80,15 +76,13 @@ public class AngularServlet extends JWDefaultServlet
 			LOG.log(Level.SEVERE, "Do Post Error", e);
 		}
 	}
-	
+
 	/**
 	 * Post handler
 	 *
 	 * @param request
 	 * @param response
 	 *
-	 * @throws ServletException
-	 * @throws IOException
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

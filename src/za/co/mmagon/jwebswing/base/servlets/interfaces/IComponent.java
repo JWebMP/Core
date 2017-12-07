@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,11 +18,6 @@ package za.co.mmagon.jwebswing.base.servlets.interfaces;
 
 /**
  * The base of each component
- *
- * @param <T> The types allowed to be added to this component. Must extend IComponent
- * @param <A> The types allowed to be attributes, must be enumerated
- * @param <J> The types of java class to allow, must extends IJavascriptComponent
- * @param <I> The actual implementing class. Used for cloning
  *
  * @author Marc Magon
  */

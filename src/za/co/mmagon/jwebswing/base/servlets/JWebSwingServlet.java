@@ -132,11 +132,6 @@ public class JWebSwingServlet extends JWDefaultServlet
 	 * 		Servlet request
 	 * @param response
 	 * 		Servlet response
-	 *
-	 * @throws ServletException
-	 * 		if a Servlet-specific error occurs
-	 * @throws IOException
-	 * 		if an I/O error occurs
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -162,9 +157,6 @@ public class JWebSwingServlet extends JWDefaultServlet
 	 * 		The Default Servlet request
 	 * @param response
 	 * 		The Default Servlet response
-	 *
-	 * @throws ServletException
-	 * 		if a Servlet-specific error occurs
 	 * @throws IOException
 	 * 		if an I/O error occurs
 	 */

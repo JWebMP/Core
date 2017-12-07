@@ -125,8 +125,6 @@ public abstract class JWDefaultServlet extends HttpServlet
 	 * 		optional parameter to validate on more fields
 	 *
 	 * @return
-	 *
-	 * @throws InvalidRequestException
 	 */
 	public boolean validateCall(AjaxCall ajaxCall) throws InvalidRequestException
 	{
@@ -215,7 +213,7 @@ public abstract class JWDefaultServlet extends HttpServlet
 	 * @throws IOException
 	 */
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 	{
 		try
 		{
@@ -258,7 +256,7 @@ public abstract class JWDefaultServlet extends HttpServlet
 	 * @throws IOException
 	 */
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 	{
 		try
 		{

@@ -53,8 +53,6 @@ public class PageOptions extends JavaScriptPart
 
 	/**
 	 * Construct directly with the page
-	 *
-	 * @param page
 	 */
 	protected PageOptions()
 	{

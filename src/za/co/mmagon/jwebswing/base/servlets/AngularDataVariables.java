@@ -38,15 +38,10 @@ public class AngularDataVariables extends JWDefaultServlet
 {
 	private static final Logger LOG = LogFactory.getInstance().getLogger("AngularServlet");
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
 	 *
-	 * @param request  Servlet request
-	 * @param response Servlet response
-	 *
-	 * @throws ServletException if a Servlet-specific error occurs
-	 * @throws IOException      if an I/O error occurs
 	 */
 	protected void processRequest()
 	{
@@ -54,15 +49,13 @@ public class AngularDataVariables extends JWDefaultServlet
 		StringBuilder output = page.getAngular().renderAngularJavascript(page);
 		writeOutput(output, StaticStrings.HTML_HEADER_JAVASCRIPT, Charset.forName("UTF-8"));
 	}
-	
+
 	/**
 	 * Post handler
 	 *
 	 * @param request
 	 * @param response
 	 *
-	 * @throws ServletException
-	 * @throws IOException
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

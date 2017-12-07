@@ -49,11 +49,9 @@ public class JWScriptServlet extends JWDefaultServlet
 	 * @param request
 	 * @param response
 	 *
-	 * @throws ServletException
-	 * @throws IOException
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	{
 		try
 		{
@@ -72,11 +70,9 @@ public class JWScriptServlet extends JWDefaultServlet
 	 * @param request
 	 * @param response
 	 *
-	 * @throws ServletException
-	 * @throws IOException
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	{
 		try
 		{
@@ -94,13 +90,7 @@ public class JWScriptServlet extends JWDefaultServlet
 	 *
 	 * @param request
 	 * 		Servlet request
-	 * @param response
-	 * 		Servlet response
 	 *
-	 * @throws ServletException
-	 * 		if a Servlet-specific error occurs
-	 * @throws IOException
-	 * 		if an I/O error occurs
 	 */
 	protected void processRequest(HttpServletRequest request)
 	{

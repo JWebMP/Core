@@ -51,15 +51,9 @@ public class CSSServlet extends JWDefaultServlet
 	 * 		Servlet request
 	 * @param response
 	 * 		Servlet response
-	 *
-	 * @throws ServletException
-	 * 		if a Servlet-specific error occurs
-	 * @throws IOException
-	 * 		if an I/O error occurs
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
 	{
 		try
 		{
@@ -84,8 +78,6 @@ public class CSSServlet extends JWDefaultServlet
 	 * @param response
 	 * 		Servlet response
 	 *
-	 * @throws ServletException
-	 * 		if a Servlet-specific error occurs
 	 * @throws IOException
 	 * 		if an I/O error occurs
 	 */

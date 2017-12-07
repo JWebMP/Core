@@ -303,8 +303,7 @@ public class CSSPropertiesFactory<A extends Annotation> implements Serializable
 	/**
 	 * Returns all annotations for a field that end with 'CSS'
 	 *
-	 * @param <A>
-	 * 		CSS Annotations
+
 	 * @param <T>
 	 * @param cssObjectIn
 	 * 		The class to get the annotations from

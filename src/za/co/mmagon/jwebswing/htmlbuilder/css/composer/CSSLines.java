@@ -271,8 +271,6 @@ public class CSSLines implements Serializable
 	 *
 	 * @param tabCount
 	 * 		Number of tab indents to apply
-	 * @param renderInLine
-	 * 		Set to make the render in line
 	 *
 	 * @return The CSS line block
 	 */

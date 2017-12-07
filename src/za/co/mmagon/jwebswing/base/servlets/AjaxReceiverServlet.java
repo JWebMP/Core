@@ -75,10 +75,6 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 	 * @param response
 	 * 		Servlet response
 	 *
-	 * @throws ServletException
-	 * 		if a Servlet-specific error occurs
-	 * @throws IOException
-	 * 		if an I/O error occurs
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -101,10 +97,6 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 	 * @param request
 	 * 		Servlet request
 	 *
-	 * @throws ServletException
-	 * 		if a Servlet-specific error occurs
-	 * @throws IOException
-	 * 		if an I/O error occurs
 	 */
 	protected void processRequest(HttpServletRequest request)
 	{

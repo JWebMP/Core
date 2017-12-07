@@ -141,8 +141,6 @@ public class AngularDataServlet extends JWDefaultServlet
 	 * @param request
 	 * @param response
 	 *
-	 * @throws ServletException
-	 * @throws IOException
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

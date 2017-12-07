@@ -23,8 +23,6 @@ import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
 import java.util.Set;
 
 /**
- * @param <J>
- * 		This Class
  *
  * @author GedMarc
  * @since Sep 26, 2016

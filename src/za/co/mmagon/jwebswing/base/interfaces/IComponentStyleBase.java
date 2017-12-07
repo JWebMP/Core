@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -30,7 +30,7 @@ import java.util.Map;
  */
 public interface IComponentStyleBase<J extends ComponentBase>
 {
-	
+
 	/**
 	 * Adds a CSS object to the component with the given type
 	 *
@@ -40,18 +40,16 @@ public interface IComponentStyleBase<J extends ComponentBase>
 
 	/**
 	 * Adds a CSS object to the component with the given type
-	 *
-	 * @param cssItem
 	 */
 	J removeCSSEntry(CSSTypes type);
-	
+
 	/**
 	 * Gets the CSS Object used for styling
 	 *
 	 * @return
 	 */
 	CSSImpl getCss();
-	
+
 	/**
 	 * Sets the CSS Object used for styling
 	 *
@@ -64,7 +62,7 @@ public interface IComponentStyleBase<J extends ComponentBase>
 	 * @return
 	 */
 	String getCssName();
-	
+
 	/**
 	 * Sets the currently assigned CSS Name
 	 *
@@ -90,7 +88,7 @@ public interface IComponentStyleBase<J extends ComponentBase>
 	 * @return The Component CSS
 	 */
 	StringBuilder renderCss(int tabCount);
-	
+
 	/**
 	 * Renders the component CSS at the specified tab count with the
 	 * &lt;style&gt; tag This includes everything from this classes CSS, to the
@@ -110,7 +108,7 @@ public interface IComponentStyleBase<J extends ComponentBase>
 	 * @return The Component CSS
 	 */
 	StringBuilder renderCss(int tabCount, boolean renderOpening, boolean renderInQuotations, boolean isAjaxCall);
-	
+
 	/**
 	 * Updates the ID of all the CSS Objects
 	 *
@@ -119,5 +117,5 @@ public interface IComponentStyleBase<J extends ComponentBase>
 	 * @return Me
 	 */
 	J setID(String id);
-	
+
 }
