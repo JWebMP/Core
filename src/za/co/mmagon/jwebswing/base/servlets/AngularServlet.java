@@ -19,12 +19,10 @@ package za.co.mmagon.jwebswing.base.servlets;
 import com.armineasy.injection.GuiceContext;
 import com.google.inject.Singleton;
 import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.Charset;
-import java.util.logging.Logger;
 
 /**
  * @author GedMarc
@@ -32,8 +30,6 @@ import java.util.logging.Logger;
 @Singleton
 public class AngularServlet extends JWDefaultServlet
 {
-
-	private static final Logger LOG = LogFactory.getInstance().getLogger("AngularServlet");
 	private static final long serialVersionUID = 1L;
 
 	/**
