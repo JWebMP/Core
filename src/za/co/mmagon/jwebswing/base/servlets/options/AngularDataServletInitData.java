@@ -27,11 +27,11 @@ import java.util.Map;
  * @since 05 Apr 2017
  */
 @RequestScoped
-public class AngularDataServletInitData extends JavaScriptPart
+public class AngularDataServletInitData<J extends AngularDataServletInitData<J>> extends JavaScriptPart<J>
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * The local storage map to be set for the provider
 	 */
@@ -44,7 +44,7 @@ public class AngularDataServletInitData extends JavaScriptPart
 	 * The parameters for the initialized data
 	 */
 	private Map<String, String> parameters;
-	
+
 	/*
 	 * Constructs a new AngularDataServletInitData
 	 */
@@ -52,27 +52,27 @@ public class AngularDataServletInitData extends JavaScriptPart
 	{
 		//Nothing needed
 	}
-	
+
 	public Map<String, String> getLocalStorage()
 	{
 		return localStorage;
 	}
-	
+
 	public void setLocalStorage(Map<String, String> localStorage)
 	{
 		this.localStorage = localStorage;
 	}
-	
+
 	public Map<String, String> getSessionStorage()
 	{
 		return sessionStorage;
 	}
-	
+
 	public void setSessionStorage(Map<String, String> sessionStorage)
 	{
 		this.sessionStorage = sessionStorage;
 	}
-	
+
 	public Map<String, String> getParameters()
 	{
 		if (parameters == null)
@@ -81,7 +81,7 @@ public class AngularDataServletInitData extends JavaScriptPart
 		}
 		return parameters;
 	}
-	
+
 	public void setParameters(Map<String, String> parameters)
 	{
 		this.parameters = parameters;

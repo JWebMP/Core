@@ -85,4 +85,7 @@ public interface StaticStrings extends Serializable
 	 */
 	String MediumLatin = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero laboriosam dolor perspiciatis omnis exercitationem. Beatae, officia pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas suscipit facere rem dicta, debitis...";
 
+	String LocalStorageSessionAttributeKey = "LocalStorage";
+	String SessionStorageSessionAttributeKey = "SessionStorage";
+
 }

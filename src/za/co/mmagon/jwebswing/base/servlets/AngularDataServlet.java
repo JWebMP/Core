@@ -42,6 +42,8 @@ import java.time.ZonedDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static com.armineasy.injection.GuiceContext.getInstance;
+
 /**
  * Handles angular data binding calls, registers variables for access. Can handle population, use event binding for call back.
  *
@@ -51,9 +53,6 @@ import java.util.logging.Logger;
 @Singleton
 public class AngularDataServlet extends JWDefaultServlet
 {
-
-	public static final String LocalStorageSessionKey = "LocalStorage";
-	public static final String SessionStorageSessionKey = "SessionStorage";
 	private static final Logger LOG = LogFactory.getInstance().getLogger("AngularDataServlet");
 	private static final long serialVersionUID = 1L;
 
@@ -75,7 +74,7 @@ public class AngularDataServlet extends JWDefaultServlet
 		String componentId = "";
 		StringBuilder jb = new StringBuilder(IOUtils.toString(request.getInputStream(), "UTF-8"));
 
-		AngularDataServletInitData initData = new JavaScriptPart<>().From(jb.toString(), AngularDataServletInitData.class);
+		AngularDataServletInitData<?> initData = new JavaScriptPart<>().From(jb.toString(), AngularDataServletInitData.class);
 		if (initData == null)
 		{
 			throw new InvalidRequestException("Could not extract the initial data from the information sent in");
@@ -83,12 +82,12 @@ public class AngularDataServlet extends JWDefaultServlet
 		if (jb.length() > 0)
 		{
 			initData = new JavaScriptPart<>().From(jb.toString(), AngularDataServletInitData.class);
-			GuiceContext.getInstance(SessionProperties.class).setLocalStorage(initData.getLocalStorage());
-			GuiceContext.getInstance(SessionProperties.class).setSessionStorage(initData.getSessionStorage());
+			getInstance(SessionProperties.class).setLocalStorage(initData.getLocalStorage());
+			getInstance(SessionProperties.class).setSessionStorage(initData.getSessionStorage());
 			componentId = initData.getParameters().get("objectId");
 		}
 
-		AjaxCall ajaxCall = GuiceContext.inject().getInstance(AjaxCall.class);
+		AjaxCall ajaxCall = getInstance(AjaxCall.class);
 		ajaxCall.setParameters(initData.getParameters());
 		ajaxCall.setComponentId(componentId);
 		ajaxCall.setDatetime(Date.from(ZonedDateTime.now().toInstant()));
@@ -114,7 +113,7 @@ public class AngularDataServlet extends JWDefaultServlet
 			LOG.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Invalid Component Specified]", request.getSession().getId());
 			throw new ServletException("Component could not be found to process any events.");
 		}
-		AjaxResponse ajaxResponse = GuiceContext.inject().getInstance(AjaxResponse.class);
+		AjaxResponse<?> ajaxResponse = GuiceContext.inject().getInstance(AjaxResponse.class);
 		try
 		{
 			intercept();
@@ -126,11 +125,7 @@ public class AngularDataServlet extends JWDefaultServlet
 			LOG.log(Level.SEVERE, "Unable to perform the data request", e);
 		}
 
-		ajaxResponse.getComponents().forEach(a ->
-		                                     {
-			                                     ComponentHierarchyBase c = (ComponentHierarchyBase) a;
-			                                     c.preConfigure();
-		                                     });
+		ajaxResponse.getComponents().forEach(ComponentHierarchyBase::preConfigure);
 		writeOutput(new StringBuilder(ajaxResponse.toString()), "application/json;charset=UTF-8", Charset.forName("UTF-8"));
 	}
 

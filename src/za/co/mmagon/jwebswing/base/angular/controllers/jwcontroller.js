@@ -65,8 +65,8 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
                 try {
                     if (window.Pace) {
                         window.Pace.start();
-                        jw.isLoading = true;
                     }
+                    jw.isLoading = true;
                 } catch (e) {
                 }
             },

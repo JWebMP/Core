@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -23,7 +23,6 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxEventValue;
 import za.co.mmagon.jwebswing.exceptions.InvalidRequestException;
 import za.co.mmagon.jwebswing.exceptions.MissingComponentException;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
-import za.co.mmagon.jwebswing.utilities.StaticStrings;
 import za.co.mmagon.logger.LogFactory;
 
 import javax.servlet.ServletException;
@@ -38,6 +37,8 @@ import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.*;
 
 /**
  * Provides default methods for authentication authorization etc
@@ -102,10 +103,10 @@ public abstract class JWDefaultServlet extends HttpServlet
 			response.setContentType(contentType);
 			response.setCharacterEncoding(charSet == null ? Charset.forName("UTF-8").toString() : charSet.displayName());
 
-			response.setHeader(StaticStrings.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER_NAME, allowOrigin);
-			response.setHeader(StaticStrings.ACCESS_CONTROL_ALLOW_CREDENTIALS_HEADER_NAME, "true");
-			response.setHeader(StaticStrings.ACCESS_CONTROL_ALLOW_METHODS_HEADER_NAME, "GET, POST");
-			response.setHeader(StaticStrings.ACCESS_CONTROL_ALLOW_HEADERS_HEADER_NAME, "Content-Type, Accept");
+			response.setHeader(ACCESS_CONTROL_ALLOW_ORIGIN_HEADER_NAME, allowOrigin);
+			response.setHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS_HEADER_NAME, "true");
+			response.setHeader(ACCESS_CONTROL_ALLOW_METHODS_HEADER_NAME, "GET, POST");
+			response.setHeader(ACCESS_CONTROL_ALLOW_HEADERS_HEADER_NAME, "Content-Type, Accept");
 			out.write(output.toString());
 			long transferTime = new Date().getTime() - dataTransferDate.getTime();
 			log.log(Level.FINE, "[Network Reply Data Size]-[" + output.length() + "];");

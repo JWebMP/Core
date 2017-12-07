@@ -143,7 +143,7 @@ public class SiteBinder extends GuiceSiteBinder
 	 */
 	public static String getDataBindUrl(ComponentBase component)
 	{
-		return getDataLocation().replace("/", "") + "?component=" + component.getID();
+		return getDataLocation().replace(STRING_FORWARD_SLASH, STRING_EMPTY) + "?component=" + component.getID();
 	}
 
 	/**
@@ -179,7 +179,7 @@ public class SiteBinder extends GuiceSiteBinder
 			                                                                             if (!GuiceContext.isBuildingInjector())
 			                                                                             {
 				                                                                             HttpSession session = GuiceContext.inject().getInstance(HttpSession.class);
-				                                                                             Map attributeMap = (Map) session.getAttribute(AngularDataServlet.LocalStorageSessionKey);
+				                                                                             Map attributeMap = (Map) session.getAttribute(LocalStorageSessionAttributeKey);
 				                                                                             if (attributeMap == null)
 				                                                                             {
 					                                                                             attributeMap = new HashMap();
@@ -194,7 +194,7 @@ public class SiteBinder extends GuiceSiteBinder
 			                                                                               if (!GuiceContext.isBuildingInjector())
 			                                                                               {
 				                                                                               HttpSession session = GuiceContext.inject().getInstance(HttpSession.class);
-				                                                                               Map attributeMap = (Map) session.getAttribute(AngularDataServlet.SessionStorageSessionKey);
+				                                                                               Map attributeMap = (Map) session.getAttribute(SessionStorageSessionAttributeKey);
 				                                                                               if (attributeMap == null)
 				                                                                               {
 					                                                                               attributeMap = new HashMap();
