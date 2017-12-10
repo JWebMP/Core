@@ -5,11 +5,14 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 import javax.validation.constraints.NotNull;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
  * A global qualified session properties map
- * @param <J> any extension
+ *
+ * @param <J>
+ * 		any extension
  */
 @SessionScoped
 public class SessionStorageProperties<J extends SessionStorageProperties<J>> extends JavaScriptPart<J>
@@ -19,11 +22,15 @@ public class SessionStorageProperties<J extends SessionStorageProperties<J>> ext
 	/**
 	 * The client browser local storage
 	 */
-	private Map<String,String> localStorage;
+	private Map<String, String> localStorage;
 	/**
 	 * The client browser session storage
 	 */
-	private Map<String,String> sessionStorage;
+	private Map<String, String> sessionStorage;
+	/**
+	 * Sets a list of files to be uploaded
+	 */
+	private Map<String, byte[]> uploadedFiles;
 
 	/**
 	 * Constructs the session properties
@@ -35,27 +42,34 @@ public class SessionStorageProperties<J extends SessionStorageProperties<J>> ext
 
 	/**
 	 * The client browser local storage
+	 *
 	 * @return
 	 */
 	@NotNull
 	public Map<String, String> getLocalStorage()
 	{
-		if(localStorage == null)
+		if (localStorage == null)
+		{
 			localStorage = new HashMap<>();
+		}
 		return localStorage;
 	}
 
 	/**
 	 * The client browser local storage
+	 *
 	 * @param localStorage
 	 */
-	public void setLocalStorage(Map<String, String> localStorage)
+	@SuppressWarnings("unchecked")
+	public J setLocalStorage(Map<String, String> localStorage)
 	{
 		this.localStorage = localStorage;
+		return (J) this;
 	}
 
 	/**
 	 * The client browser session storage
+	 *
 	 * @return
 	 */
 	@NotNull
@@ -70,10 +84,46 @@ public class SessionStorageProperties<J extends SessionStorageProperties<J>> ext
 
 	/**
 	 * The client browser session storage
+	 *
 	 * @param sessionStorage
 	 */
-	public void setSessionStorage(Map<String, String> sessionStorage)
+	@SuppressWarnings("unchecked")
+	public J setSessionStorage(Map<String, String> sessionStorage)
 	{
 		this.sessionStorage = sessionStorage;
+		return (J) this;
 	}
+
+	/**
+	 * Returns a list of files in the last upload
+	 *
+	 * @return
+	 */
+	@NotNull
+	public Map<String, byte[]> getUploadedFiles()
+	{
+		if (uploadedFiles == null)
+		{
+			uploadedFiles = new LinkedHashMap<>();
+		}
+		return uploadedFiles;
+	}
+
+
+	/**
+	 * Sets the list of uploaded files
+	 *
+	 * @param uploadedFiles
+	 *
+	 * @return
+	 */
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setUploadedFiles(@NotNull Map<String, byte[]> uploadedFiles)
+	{
+		this.uploadedFiles = uploadedFiles;
+		return (J) this;
+	}
+
+
 }
