@@ -15,7 +15,9 @@ public interface StaticStrings extends Serializable
 	String STRING_EMPTY = "";
 	String STRING_SPACE = " ";
 	String STRING_FORWARD_SLASH = "/";
+	String STRING_BACK_SLASH = "\\";
 	String STRING_TAB = "\t";
+	String STRING_EQUALS = "=";
 	String STRING_NEWLINE_TEXT = "\n";
 	String STRING_SINGLE_QUOTES = "'";
 	String STRING_DOUBLE_QUOTES = "\"";
@@ -39,8 +41,9 @@ public interface StaticStrings extends Serializable
 
 	char CHAR_SPACE = ' ';
 	char CHAR_DOT = '.';
+	char CHAR_EQUALS = '=';
 	char CHAR_UNDERSCORE = '_';
-	char CHAR_DASH = '_';
+	char CHAR_DASH = '-';
 	char CHAR_HASH = '#';
 
 	String JAVASCRIPT_LOCATION = "/jwjs";

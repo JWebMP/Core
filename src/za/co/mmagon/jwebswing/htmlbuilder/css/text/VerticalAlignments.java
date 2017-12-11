@@ -4,6 +4,8 @@ import za.co.mmagon.jwebswing.base.client.CSSVersions;
 import za.co.mmagon.jwebswing.htmlbuilder.css.CSSEnumeration;
 import za.co.mmagon.jwebswing.utilities.StaticStrings;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.CHAR_DASH;
+
 /**
  * Definition and Usage
  * <p>
@@ -73,7 +75,7 @@ public enum VerticalAlignments implements CSSEnumeration<VerticalAlignments>
 	@Override
 	public String toString()
 	{
-		return super.toString().toLowerCase().replace(StaticStrings.CHAR_UNDERSCORE, '-');
+		return super.toString().toLowerCase().replace(StaticStrings.CHAR_UNDERSCORE, CHAR_DASH);
 	}
 
 	@Override

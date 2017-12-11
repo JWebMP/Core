@@ -19,6 +19,7 @@ package za.co.mmagon.jwebswing;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import za.co.mmagon.jwebswing.base.ComponentStyleBase;
 import za.co.mmagon.jwebswing.base.html.Paragraph;
+import za.co.mmagon.jwebswing.base.html.Span;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
@@ -127,6 +128,16 @@ public class Component<C extends GlobalChildren, A extends Enum & AttributeDefin
 	public J add(String textToAdd)
 	{
 		Paragraph p = new Paragraph();
+		p.setText(textToAdd);
+		add((C) p);
+		return (J) this;
+	}
+
+	@SuppressWarnings({"unused", "unchecked"})
+	@NotNull
+	public J add(String textToAdd, boolean inline)
+	{
+		Span p = new Span();
 		p.setText(textToAdd);
 		add((C) p);
 		return (J) this;
