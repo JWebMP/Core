@@ -16,10 +16,10 @@
  */
 package za.co.mmagon.jwebswing.base.servlets;
 
-import com.armineasy.injection.GuiceContext;
 import com.google.inject.Singleton;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import za.co.mmagon.guiceinjection.GuiceContext;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.annotations.DataCallInterception;
 import za.co.mmagon.jwebswing.annotations.SiteInterception;
@@ -42,7 +42,7 @@ import java.time.ZonedDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.armineasy.injection.GuiceContext.getInstance;
+import static za.co.mmagon.guiceinjection.GuiceContext.getInstance;
 
 /**
  * Handles angular data binding calls, registers variables for access. Can handle population, use event binding for call back.

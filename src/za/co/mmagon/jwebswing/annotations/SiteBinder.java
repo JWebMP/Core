@@ -16,9 +16,6 @@
  */
 package za.co.mmagon.jwebswing.annotations;
 
-import com.armineasy.injection.GuiceContext;
-import com.armineasy.injection.abstractions.GuiceSiteInjectorModule;
-import com.armineasy.injection.interfaces.GuiceSiteBinder;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,6 +30,9 @@ import com.google.inject.servlet.RequestScoped;
 import net.sf.uadetector.UserAgentStringParser;
 import net.sf.uadetector.service.UADetectorServiceFactory;
 import za.co.mmagon.SessionHelper;
+import za.co.mmagon.guiceinjection.GuiceContext;
+import za.co.mmagon.guiceinjection.abstractions.GuiceSiteInjectorModule;
+import za.co.mmagon.guiceinjection.interfaces.GuiceSiteBinder;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;

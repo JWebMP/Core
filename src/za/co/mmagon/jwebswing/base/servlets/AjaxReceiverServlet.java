@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.servlets;
 
-import com.armineasy.injection.GuiceContext;
 import com.google.inject.Singleton;
+import za.co.mmagon.guiceinjection.GuiceContext;
 import za.co.mmagon.jwebswing.Event;
 import za.co.mmagon.jwebswing.annotations.AjaxCallInterception;
 import za.co.mmagon.jwebswing.annotations.SiteInterception;

@@ -16,11 +16,11 @@
  */
 package za.co.mmagon.jwebswing.base.servlets;
 
-import com.armineasy.injection.GuiceContext;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Singleton;
+import za.co.mmagon.guiceinjection.GuiceContext;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.annotations.DataCallInterception;
 import za.co.mmagon.jwebswing.annotations.SiteInterception;

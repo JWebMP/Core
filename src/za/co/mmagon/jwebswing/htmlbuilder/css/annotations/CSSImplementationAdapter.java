@@ -16,10 +16,10 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.css.annotations;
 
-import com.armineasy.injection.GuiceContext;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import za.co.mmagon.guiceinjection.GuiceContext;
 import za.co.mmagon.jwebswing.htmlbuilder.css.CSSPropertiesFactory;
 import za.co.mmagon.logger.LogFactory;
 

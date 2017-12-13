@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.annotations;
 
-import com.armineasy.injection.GuiceContext;
 import org.aopalliance.intercept.MethodInvocation;
+import za.co.mmagon.guiceinjection.GuiceContext;
 import za.co.mmagon.jwebswing.interception.DataCallIntercepter;
 import za.co.mmagon.jwebswing.interception.DefaultIntercepter;
 import za.co.mmagon.logger.LogFactory;

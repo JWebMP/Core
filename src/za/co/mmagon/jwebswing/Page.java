@@ -16,11 +16,11 @@
  */
 package za.co.mmagon.jwebswing;
 
-import com.armineasy.injection.GuiceContext;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import net.sf.uadetector.*;
 import za.co.mmagon.FileTemplates;
 import za.co.mmagon.SessionHelper;
+import za.co.mmagon.guiceinjection.GuiceContext;
 import za.co.mmagon.jwebswing.annotations.PageConfiguration;
 import za.co.mmagon.jwebswing.annotations.SiteBinder;
 import za.co.mmagon.jwebswing.base.ComponentDependancyBase;

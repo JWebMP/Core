@@ -16,13 +16,13 @@
  */
 package za.co.mmagon.jwebswing.base.servlets;
 
-import com.armineasy.injection.GuiceContext;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import com.google.inject.servlet.RequestScoped;
 import net.sf.uadetector.ReadableUserAgent;
 import net.sf.uadetector.UserAgentStringParser;
+import za.co.mmagon.guiceinjection.GuiceContext;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.annotations.SiteBinder;
 import za.co.mmagon.jwebswing.annotations.SiteInterception;

@@ -1,7 +1,7 @@
 package za.co.mmagon.jwebswing;
 
-import com.armineasy.injection.GuiceContext;
 import org.junit.jupiter.api.Test;
+import za.co.mmagon.guiceinjection.GuiceContext;
 
 class PlaceHolderTest extends BaseTestClass
 {

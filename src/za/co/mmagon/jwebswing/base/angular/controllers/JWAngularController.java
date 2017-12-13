@@ -16,8 +16,8 @@
  */
 package za.co.mmagon.jwebswing.base.angular.controllers;
 
-import com.armineasy.injection.GuiceContext;
 import za.co.mmagon.FileTemplates;
+import za.co.mmagon.guiceinjection.GuiceContext;
 import za.co.mmagon.jwebswing.utilities.StaticStrings;
 
 import javax.validation.constraints.NotNull;

@@ -16,7 +16,7 @@
  */
 package za.co.mmagon;
 
-import com.armineasy.injection.GuiceContext;
+import za.co.mmagon.guiceinjection.GuiceContext;
 import za.co.mmagon.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;

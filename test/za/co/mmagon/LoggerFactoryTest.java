@@ -1,7 +1,7 @@
 package za.co.mmagon;
 
-import com.armineasy.injection.GuiceContext;
 import org.junit.jupiter.api.Test;
+import za.co.mmagon.guiceinjection.GuiceContext;
 import za.co.mmagon.logger.LogFactory;
 
 import java.util.logging.Level;
@@ -12,14 +12,14 @@ import java.util.logging.Logger;
  */
 public class LoggerFactoryTest
 {
-	
+
 	private LogFactory instance;
-	
+
 	public LoggerFactoryTest()
 	{
 		instance = LogFactory.getInstance();
 	}
-	
+
 	/**
 	 * Test of addLogAppender method, of class LogFactory.
 	 */
@@ -34,7 +34,7 @@ public class LoggerFactoryTest
 		log.log(Level.SEVERE, "error");
 		log.log(Level.FINE, "trace");
 	}
-	
+
 	/**
 	 * Test of addLogAppender method, of class LogFactory.
 	 */
@@ -47,5 +47,5 @@ public class LoggerFactoryTest
 		GuiceContext.inject();
 		GuiceContext.reflect();
 	}
-	
+
 }

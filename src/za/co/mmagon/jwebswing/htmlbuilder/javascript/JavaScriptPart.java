@@ -16,12 +16,12 @@
  */
 package za.co.mmagon.jwebswing.htmlbuilder.javascript;
 
-import com.armineasy.injection.GuiceContext;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Key;
 import com.google.inject.name.Names;
+import za.co.mmagon.guiceinjection.GuiceContext;
 import za.co.mmagon.logger.LogFactory;
 
 import java.io.*;

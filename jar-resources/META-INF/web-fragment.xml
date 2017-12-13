@@ -5,7 +5,7 @@
     <name>JWebSwingCore</name>
     <listener>
         <description>Guice Injector</description>
-        <listener-class>com.armineasy.injection.GuiceContext</listener-class>
+        <listener-class>za.co.mmagon.guiceinjection.GuiceContext</listener-class>
     </listener>
 
     <filter>
