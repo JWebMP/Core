@@ -60,6 +60,7 @@
     <orderEntry type="library" name="Maven: javax.cache:cache-api:1.0.0" level="project" />
     <orderEntry type="library" name="Maven: javax.transaction:jta:1.1" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.btm:btm:2.1.4" level="project" />
+    <orderEntry type="library" name="Maven: com.h2database:h2:1.4.195" level="project" />
     <orderEntry type="module" module-name="guice-injection" scope="TEST" production-on-test="" />
     <orderEntry type="module" module-name="log-master" />
     <orderEntry type="module" module-name="jwebswing-interception" />
