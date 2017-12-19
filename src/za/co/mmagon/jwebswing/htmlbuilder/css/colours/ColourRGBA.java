@@ -18,5 +18,5 @@ public @interface ColourRGBA
 
 	int Blue() default 0;
 
-	int Alpha() default 0;
+	double Alpha() default 0.0;
 }
