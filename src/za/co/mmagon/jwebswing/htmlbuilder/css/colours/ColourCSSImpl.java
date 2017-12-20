@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class ColourCSSImpl extends CSSImplementationAdapter<ColourCSS, ColourCSSImpl>
 		implements Serializable, CSSImplementationValue, CSSImplementationClass<ColourCSS, ColourCSSImpl>
 {
-	
+
 	/**
 	 * Version 1
 	 */
@@ -24,7 +24,7 @@ public class ColourCSSImpl extends CSSImplementationAdapter<ColourCSS, ColourCSS
 	 * The actual value
 	 */
 	private String value;
-	
+
 	/**
 	 * Constructs a new Colour CSS
 	 */
@@ -32,7 +32,7 @@ public class ColourCSSImpl extends CSSImplementationAdapter<ColourCSS, ColourCSS
 	{
 		//No need for anything here
 	}
-	
+
 	/**
 	 * Constructs a new colour with a value
 	 *
@@ -42,7 +42,7 @@ public class ColourCSSImpl extends CSSImplementationAdapter<ColourCSS, ColourCSS
 	{
 		this.value = value;
 	}
-	
+
 	@JsonValue
 	/**
 	 * Returns the actual value
@@ -53,7 +53,7 @@ public class ColourCSSImpl extends CSSImplementationAdapter<ColourCSS, ColourCSS
 	{
 		return value;
 	}
-	
+
 	/**
 	 * Sets the actual value
 	 *
@@ -63,7 +63,69 @@ public class ColourCSSImpl extends CSSImplementationAdapter<ColourCSS, ColourCSS
 	{
 		this.value = value;
 	}
-	
+
+	public ColourCSSImpl setValue(ColourRGBAImpl value)
+	{
+		this.value = new ColourRGBAImpl().setBlue(value.Blue()).setGreen(value.Green()).setRed(value.Red()).setAlpha(value.Alpha()).toString();
+		return this;
+	}
+
+	/**
+	 * Sets the colour value associated
+	 *
+	 * @param value
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public ColourCSSImpl setValue(ColourCSSImpl value)
+	{
+		this.value = value.value();
+		return this;
+	}
+
+	/**
+	 * Sets the colour
+	 *
+	 * @param value
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public ColourCSSImpl setValue(ColourNames value)
+	{
+		this.value = value.toString();
+		return this;
+	}
+
+	/**
+	 * Sets the colour
+	 *
+	 * @param value
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public ColourCSSImpl setValue(ColourHexImpl value)
+	{
+		this.value = value.toString();
+		return this;
+	}
+
+	/**
+	 * Sets the colour
+	 *
+	 * @param value
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public ColourCSSImpl setValue(ColourRGBImpl value)
+	{
+		this.value = new ColourRGBImpl().setBlue(value.Blue()).setGreen(value.Green()).setRed(value.Red()).toString();
+		return this;
+	}
+
 	/**
 	 * Returns the value of this colour
 	 *
@@ -74,5 +136,5 @@ public class ColourCSSImpl extends CSSImplementationAdapter<ColourCSS, ColourCSS
 	{
 		return value == null ? "" : value;
 	}
-	
+
 }
