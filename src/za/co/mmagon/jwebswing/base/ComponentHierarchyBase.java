@@ -191,7 +191,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		getPage().getBody().add(classComponent);
 		if (!getClasses().contains(className))
 		{
-			getClasses().add(className);
+			addClass(className);
 			return (J) this;
 		}
 		else
@@ -616,7 +616,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 
 	/**
 	 * Ensure if there are children that new lines must be rendered
-	 *
+	 * <p>
 	 * Boxed for operating purposes
 	 *
 	 * @return
@@ -665,7 +665,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		                      {
 			                      for (Object jScript : child.getCssReferencesAll())
 			                      {
-					                      allCss.add(CSSReference.class.cast(jScript));
+				                      allCss.add(CSSReference.class.cast(jScript));
 			                      }
 		                      });
 		return allCss;
@@ -706,7 +706,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		                               {
 			                               for (Object event : child.getFeatures())
 			                               {
-					                               allFeatures.add(Feature.class.cast(event));
+				                               allFeatures.add(Feature.class.cast(event));
 			                               }
 		                               });
 		return allFeatures;
@@ -887,7 +887,16 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	protected StringBuilder renderClasses()
 	{
 		StringBuilder sb = new StringBuilder();
-		getClasses().forEach(clazz -> sb.append(clazz).append(STRING_SPACE));
+		Set classes = getClasses();
+		classes.forEach(a ->
+		                {
+			                if (a instanceof String)
+			                {
+				                sb.append(a).append(STRING_SPACE);
+			                }
+		                });
+		//	getClasses().forEach(clazz -> sb.append(clazz).append(STRING_SPACE));
+
 		if (sb.length() > 0)
 		{
 			sb.deleteCharAt(sb.length() - 1);
@@ -989,7 +998,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 */
 	@Nullable
 	@SuppressWarnings("unchecked")
-	private <T extends ComponentHierarchyBase> T findParent(@NotNull ComponentHierarchyBase root,@NotNull Class<T> parentType)
+	private <T extends ComponentHierarchyBase> T findParent(@NotNull ComponentHierarchyBase root, @NotNull Class<T> parentType)
 	{
 		if (root.getParent() != null)
 		{
