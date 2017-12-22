@@ -626,7 +626,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	@NotNull
 	public J addStyle(String property, String value)
 	{
-		addStyle(property + "=" + value);
+		addStyle(property + ":" + value);
 		return (J) this;
 	}
 }
