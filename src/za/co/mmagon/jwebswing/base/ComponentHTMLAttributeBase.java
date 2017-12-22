@@ -620,8 +620,6 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	/**
 	 * Shortcut to adding a style attribute
 	 *
-	 * @param style
-	 *
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
