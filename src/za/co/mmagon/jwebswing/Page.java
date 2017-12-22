@@ -190,6 +190,7 @@ public class Page extends Html implements IPage
 		return response;
 	}
 
+	@SuppressWarnings("unchecked")
 	/**
 	 * Adds a component onto the body
 	 *
@@ -249,6 +250,7 @@ public class Page extends Html implements IPage
 	 * @return
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public ComponentEventBase addEvent(GlobalEvents event)
 	{
 		return getBody().addEvent(event);

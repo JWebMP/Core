@@ -217,7 +217,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 			                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
 			                      for (Object js : cfb.getJavascriptReferencesAll())
 			                      {
-					                      allJs.add(JavascriptReference.class.cast(js));
+				                      allJs.add(JavascriptReference.class.cast(js));
 			                      }
 		                      });
 		return allJs;
@@ -637,7 +637,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	 * @return
 	 */
 	@NotNull
-	@SuppressWarnings({"unused","unchecked"})
+	@SuppressWarnings({"unused", "unchecked"})
 	public J setJavascriptRenderedElsewhere(boolean javascriptRenderedElsewhere)
 	{
 		this.javascriptRenderedElsewhere = javascriptRenderedElsewhere;
@@ -662,7 +662,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	 * @return
 	 */
 	@NotNull
-	@SuppressWarnings({"unused","unchecked"})
+	@SuppressWarnings({"unused", "unchecked"})
 	protected J setComponent(ComponentHierarchyBase component)
 	{
 		this.component = component;

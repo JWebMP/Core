@@ -41,6 +41,8 @@ public class JavaScriptServlet extends JWDefaultServlet
 {
 
 	private static final Logger log = LogFactory.getInstance().getLogger("JavaScriptServlet");
+	private static final String scriptReplacement = "JW_JAVASCRIPT";
+
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -57,20 +59,20 @@ public class JavaScriptServlet extends JWDefaultServlet
 		response.setContentType("text/javascript");
 		Date startDate = new Date();
 		Page page = GuiceContext.inject().getInstance(Page.class);
-
 		if (page == null)
 		{
 			throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
 		}
-		FileTemplates.getFileTemplate(JavaScriptServlet.class, "JW_JAVASCRIPT", "javascriptScript");
-		FileTemplates.getTemplateVariables().put("//%%JW_JAVASCRIPT%%", page.renderJavascript());
-		StringBuilder scripts = FileTemplates.renderTemplateScripts("JW_JAVASCRIPT");
+		FileTemplates.getFileTemplate(JavaScriptServlet.class, scriptReplacement, "javascriptScript");
+		FileTemplates.getTemplateVariables().put(scriptReplacement, page.renderJavascript());
+		StringBuilder scripts = FileTemplates.renderTemplateScripts(scriptReplacement);
 		Date endDate = new Date();
 		writeOutput(scripts, StaticStrings.HTML_HEADER_JAVASCRIPT, Charset.forName("UTF-8"));
 		log.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]", new Object[]
 				                                                                                                    {
 						                                                                                                    request.getSession().getId(), endDate.getTime() - startDate.getTime(), scripts.length(), new Date().getTime() - startDate.getTime()
 				                                                                                                    });
+		FileTemplates.getTemplateVariables().remove(scriptReplacement);
 	}
 
 	/**

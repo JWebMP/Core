@@ -16,6 +16,6 @@ function jwCheckJS() {
 ;
 
 jw.jwDoJavascript = function () {
-    //%%JW_JAVASCRIPT%%
+    JW_JAVASCRIPT
 };
 jwCheckJS();
