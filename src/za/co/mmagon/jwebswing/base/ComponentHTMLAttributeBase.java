@@ -616,4 +616,19 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		}
 		return (J) this;
 	}
+
+	/**
+	 * Shortcut to adding a style attribute
+	 *
+	 * @param style
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J addStyle(String property, String value)
+	{
+		addStyle(property + "=" + value);
+		return (J) this;
+	}
 }
