@@ -887,16 +887,14 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	protected StringBuilder renderClasses()
 	{
 		StringBuilder sb = new StringBuilder();
-		Set classes = getClasses();
-		classes.forEach(a ->
-		                {
-			                if (a instanceof String)
-			                {
-				                sb.append(a).append(STRING_SPACE);
-			                }
-		                });
-		//	getClasses().forEach(clazz -> sb.append(clazz).append(STRING_SPACE));
-
+		Set eachClass = getClasses();
+		eachClass.forEach(a ->
+		                  {
+			                  if (a instanceof String)
+			                  {
+				                  sb.append(a).append(STRING_SPACE);
+			                  }
+		                  });
 		if (sb.length() > 0)
 		{
 			sb.deleteCharAt(sb.length() - 1);
