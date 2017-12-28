@@ -29,6 +29,7 @@ public interface StaticStrings extends Serializable
 	String STRING_SQUARE_BRACE_CLOSED = "]";
 	String STRING_SHARP_BRACE_CLOSED = ">";
 	String STRING_HASH = "#";
+	String STRING_DASH = "-";
 	String STRING_COMMNA = ",";
 	String STRING_DOT = ".";
 	String STRING_SEMICOLON = ";";
@@ -44,6 +45,8 @@ public interface StaticStrings extends Serializable
 	char CHAR_EQUALS = '=';
 	char CHAR_UNDERSCORE = '_';
 	char CHAR_DASH = '-';
+	char CHAR_SLASH = '/';
+	char CHAR_BACKSLASH = '\\';
 	char CHAR_HASH = '#';
 
 	String JAVASCRIPT_LOCATION = "/jwjs";

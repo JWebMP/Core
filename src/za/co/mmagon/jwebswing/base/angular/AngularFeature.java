@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.Feature;
 import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.base.angular.configurations.AngularConfigurationBase;
 import za.co.mmagon.jwebswing.base.angular.controllers.AngularControllerBase;
 import za.co.mmagon.jwebswing.base.angular.controllers.JWAngularController;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
@@ -204,6 +205,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 		FileTemplates.getTemplateVariables().put("JW_APP_NAME", new StringBuilder(getAppName()));
 		FileTemplates.getTemplateVariables().put("JW_MODULES", new StringBuilder(compileModules()));
 		FileTemplates.getTemplateVariables().put("JW_FACTORIES", new StringBuilder(compileFactories()));
+		FileTemplates.getTemplateVariables().put("JW_CONFIGURATIONS", new StringBuilder(compileConfigurations()));
 		FileTemplates.getTemplateVariables().put("JW_DIRECTIVES", new StringBuilder(compileDirectives()));
 		FileTemplates.getTemplateVariables().put("JW_APP_CONTROLLER", new StringBuilder(getControllerName()));
 
@@ -225,6 +227,27 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 		List<AngularModuleBase> angulars = new ArrayList<>();
 		angulars.add(jwAngularApp);
 		angulars.forEach(module -> output.append(FileTemplates.compileTemplate(module.getReferenceName(), module.renderFunction())));
+		return output;
+	}
+
+	/**
+	 * Builds up the directives from all the present children
+	 *
+	 * @return
+	 */
+	@NotNull
+	public StringBuilder compileConfigurations()
+	{
+		StringBuilder output = new StringBuilder();
+		List<AngularConfigurationBase> angulars = new ArrayList<>();
+		angulars.addAll(getPage().getAngular().getAngularConfigurations());
+		angulars.forEach(directive ->
+		                 {
+			                 String function = directive.renderFunction();
+			                 StringBuilder configurations = FileTemplates.compileTemplate(directive.getReferenceName(), function);
+			                 configurations.append(STRING_NEWLINE_TEXT + STRING_TAB);
+			                 output.append(configurations);
+		                 });
 		return output;
 	}
 

@@ -18,4 +18,10 @@
      * All Controllers
      */
     JW_CONTROLLERS
+
+    /**
+     * All Configurations
+     */
+    JW_CONFIGURATIONS
+
 })(window.angular);

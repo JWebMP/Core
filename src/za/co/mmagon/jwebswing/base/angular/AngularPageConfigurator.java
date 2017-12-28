@@ -22,6 +22,7 @@ import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.PageConfigurator;
 import za.co.mmagon.jwebswing.base.ComponentHTMLAngularBase;
+import za.co.mmagon.jwebswing.base.angular.configurations.AngularConfigurationBase;
 import za.co.mmagon.jwebswing.base.angular.controllers.AngularControllerBase;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 import za.co.mmagon.jwebswing.base.angular.factories.AngularFactoryBase;
@@ -30,6 +31,7 @@ import za.co.mmagon.jwebswing.plugins.PluginInformation;
 import za.co.mmagon.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -57,10 +59,10 @@ import java.util.logging.Logger;
 @Singleton
 public class AngularPageConfigurator extends PageConfigurator
 {
-	
+
 	public static final String AngularEnabledString = "angular-enabled";
 	private static final Logger log = LogFactory.getLog("Angular Page Configurator");
-	
+
 	private static final long serialVersionUID = 1L;
 	/**
 	 * All the angular modules for this component
@@ -82,18 +84,24 @@ public class AngularPageConfigurator extends PageConfigurator
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Set<AngularFactoryBase> angularFactories;
-	
+
+	/**
+	 * All of the angular directives for this component
+	 */
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	private Set<AngularConfigurationBase> angularConfigurations;
+
 	/**
 	 * All of the angular controller insertions for this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Set<String> controllerInsertions;
-	
+
 	/**
 	 * All the angular variables
 	 */
 	private Set<String> angularVariables;
-	
+
 	/**
 	 * Configures the angular page
 	 */
@@ -102,7 +110,7 @@ public class AngularPageConfigurator extends PageConfigurator
 	{
 		setSortOrder(99999999); //Always dead last
 	}
-	
+
 	/**
 	 * Sets angular as a required component
 	 *
@@ -114,7 +122,7 @@ public class AngularPageConfigurator extends PageConfigurator
 	{
 		component.getProperties().put(AngularEnabledString, required);
 	}
-	
+
 	@Override
 	@SuppressWarnings("unchecked")
 	public Page configure(Page page)
@@ -134,7 +142,7 @@ public class AngularPageConfigurator extends PageConfigurator
 		}
 		return page;
 	}
-	
+
 	/**
 	 * Gets a list of angular modules
 	 *
@@ -149,7 +157,7 @@ public class AngularPageConfigurator extends PageConfigurator
 		}
 		return angularModules;
 	}
-	
+
 	/**
 	 * Sets the angular modules
 	 *
@@ -159,7 +167,7 @@ public class AngularPageConfigurator extends PageConfigurator
 	{
 		this.angularModules = angularModules;
 	}
-	
+
 	/**
 	 * Gets the list of angular directives
 	 *
@@ -171,11 +179,11 @@ public class AngularPageConfigurator extends PageConfigurator
 		if (angularDirectives == null)
 		{
 			setAngularDirectives(new LinkedHashSet<>());
-			
+
 		}
 		return angularDirectives;
 	}
-	
+
 	/**
 	 * Sets the list of angular directives.
 	 *
@@ -185,7 +193,7 @@ public class AngularPageConfigurator extends PageConfigurator
 	{
 		this.angularDirectives = angularDirectives;
 	}
-	
+
 	/**
 	 * Returns a list of all the angular controllers for this component
 	 *
@@ -197,11 +205,11 @@ public class AngularPageConfigurator extends PageConfigurator
 		if (angularControllers == null)
 		{
 			setAngularControllers(new LinkedHashSet<>());
-			
+
 		}
 		return angularControllers;
 	}
-	
+
 	/**
 	 * Sets the list of angular controllers for this component
 	 *
@@ -211,7 +219,7 @@ public class AngularPageConfigurator extends PageConfigurator
 	{
 		this.angularControllers = angularControllers;
 	}
-	
+
 	/**
 	 * Returns the list of angular variables
 	 *
@@ -226,7 +234,7 @@ public class AngularPageConfigurator extends PageConfigurator
 		}
 		return angularVariables;
 	}
-	
+
 	/**
 	 * Sets the list of angular variables
 	 *
@@ -236,7 +244,7 @@ public class AngularPageConfigurator extends PageConfigurator
 	{
 		this.angularVariables = angularVariables;
 	}
-	
+
 	/**
 	 * Renders the complete angular javascript with the variables configured
 	 *
@@ -253,7 +261,7 @@ public class AngularPageConfigurator extends PageConfigurator
 		sb.append(FileTemplates.renderTemplateScripts("jwangular"));
 		return sb;
 	}
-	
+
 	/**
 	 * Returns a list of factories
 	 *
@@ -268,7 +276,7 @@ public class AngularPageConfigurator extends PageConfigurator
 		}
 		return angularFactories;
 	}
-	
+
 	/**
 	 * Sets the list of angular factories
 	 *
@@ -278,7 +286,7 @@ public class AngularPageConfigurator extends PageConfigurator
 	{
 		this.angularFactories = angularFactories;
 	}
-	
+
 	/**
 	 * Returns the list of controller insertions
 	 *
@@ -293,7 +301,7 @@ public class AngularPageConfigurator extends PageConfigurator
 		}
 		return controllerInsertions;
 	}
-	
+
 	/**
 	 * Sets the list of controller insertions
 	 *
@@ -303,5 +311,28 @@ public class AngularPageConfigurator extends PageConfigurator
 	{
 		this.controllerInsertions = controllerInsertions;
 	}
-	
+
+	/**
+	 * Gets the Angular Configurations
+	 *
+	 * @return
+	 */
+	public Set<AngularConfigurationBase> getAngularConfigurations()
+	{
+		if (angularConfigurations == null)
+		{
+			angularConfigurations = new HashSet<>();
+		}
+		return angularConfigurations;
+	}
+
+	/**
+	 * Sets the current angular configuration base
+	 *
+	 * @param angularConfigurations
+	 */
+	public void setAngularConfigurations(@NotNull Set<AngularConfigurationBase> angularConfigurations)
+	{
+		this.angularConfigurations = angularConfigurations;
+	}
 }
