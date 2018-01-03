@@ -3,17 +3,12 @@
 jw.afterInit = function () {
 };
 
-if (window.Pace) {
-    Pace.options = {ajax: {ignoreURLs: ['jwatmospush']}};
-}
-
 function getParametersObject() {
     try {
         var search = location.search.substring(1);
-        var dataObject = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
-        return dataObject;
+        return dataObject = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
     }
-    catch(err) {
+    catch (err) {
         return {};
     }
 }
@@ -52,6 +47,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
             console.warn("moderniz not enabled");
         }
 
+        //PACE_TRACK_START
         $.ajax({
             type: "POST",
             url: 'jwad',
@@ -112,11 +108,8 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
                     $(".splashscreen").hide();
                 }
             }
-        }).then(function (resp) {
-            if (resp.error)
-                return $.Deferred().reject(resp.error);
-            return $.Deferred();
         });
+        //PACE_TRACK_END
     };
 
     $scope._init();
@@ -164,8 +157,8 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
                 console.log("Unable to find variable " + arrItem);
             }
         }
-
-        return $.ajax({
+        //PACE_TRACK_START
+        $.ajax({
             type: "POST",
             url: "jwajax",
             data: JSON.stringify(article),
@@ -237,6 +230,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
                 }
             }
         });
+        //PACE_TRACK_END
     };
     /**
      * The event object that gets sent through

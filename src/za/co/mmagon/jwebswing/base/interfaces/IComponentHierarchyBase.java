@@ -24,8 +24,8 @@ import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 
@@ -48,7 +48,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return The new child added
 	 */
 	J add(C newChild);
-	
+
 	/**
 	 * Returns null sets the text
 	 *
@@ -57,7 +57,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return
 	 */
 	J add(String text);
-	
+
 	/**
 	 * Adds the given CSS Class Name with the given references
 	 * <p>
@@ -67,14 +67,14 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return
 	 */
 	J addClass(CSSComponent classComponent);
-	
+
 	/**
 	 * Returns All the angular objects mapped to this component and its children
 	 *
 	 * @return
 	 */
-	Map<String, JavaScriptPart> getAngularObjectsAll();
-	
+	Map<String, Serializable> getAngularObjectsAll();
+
 	/**
 	 * Returns the children ArrayList of type Component
 	 * <p>
@@ -82,7 +82,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return An array list of components
 	 */
 	Set<ComponentHierarchyBase> getChildren();
-	
+
 	/**
 	 * Get an array list of all children and their children recursively Includes this object
 	 * <p>
@@ -90,7 +90,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return A complete array list of all children at time of call
 	 */
 	Set<ComponentHierarchyBase> getChildrenHierarchy();
-	
+
 	/**
 	 * Get an array list of all children and their children recursively Excludes this object
 	 * <p>
@@ -101,7 +101,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return A complete array list of all children at time of call
 	 */
 	Set<ComponentHierarchyBase> getChildrenHierarchy(boolean trues);
-	
+
 	/**
 	 * Adds the children of this component onto the array list coming in
 	 * <p>
@@ -112,28 +112,28 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return original components added with
 	 */
 	Set<ComponentHierarchyBase> getChildrenHierarchy(Set<ComponentHierarchyBase> componentsToAddTo);
-	
+
 	/**
 	 * Adds in the JavaScript References for all the children
 	 *
 	 * @return
 	 */
 	Set<CSSReference> getCssReferencesAll();
-	
+
 	/**
 	 * Returns a complete list of events
 	 *
 	 * @return
 	 */
 	Set<Event> getEventsAll();
-	
+
 	/**
 	 * Adds in the JavaScript References for all the children
 	 *
 	 * @return
 	 */
 	Set<JavascriptReference> getJavascriptReferencesAll();
-	
+
 	/**
 	 * Get the page this component exists on
 	 * <p>
@@ -141,21 +141,21 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return A Page
 	 */
 	Page getPage();
-	
+
 	/**
 	 * Gets the parent of this hierarchy item
 	 *
 	 * @return
 	 */
 	ComponentHierarchyBase getParent();
-	
+
 	/**
 	 * Returns all the feature queries associated to this component and all its children
 	 *
 	 * @return
 	 */
 	Set<StringBuilder> getQueriesAll();
-	
+
 	/**
 	 * *
 	 * Returns all the variables for all the components
@@ -163,7 +163,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return
 	 */
 	Set<String> getVariablesAll();
-	
+
 	/**
 	 * Returns if this object has children or not
 	 * <p>
@@ -171,7 +171,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return true if there are children attached
 	 */
 	boolean hasChildren();
-	
+
 	/**
 	 * Takes a component off this components child list
 	 * <p>
@@ -182,7 +182,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return True if the child was part of this components children's list
 	 */
 	boolean remove(C childToRemove);
-	
+
 	/**
 	 * *
 	 * Returns all the JavaScript for all the components
@@ -190,7 +190,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return
 	 */
 	StringBuilder renderJavascriptAll();
-	
+
 	/**
 	 * Sets the page this component belongs on.
 	 * <p>
@@ -200,7 +200,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return This Class
 	 */
 	J setPage(Page page);
-	
+
 	/**
 	 * Sets the parent of this item
 	 *
@@ -209,7 +209,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return This Class
 	 */
 	J setParent(ComponentHierarchyBase parent);
-	
+
 	/**
 	 * Overrides this and all below components to set tiny false
 	 *
@@ -218,7 +218,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return
 	 */
 	J setTiny(boolean tiny);
-	
+
 	/**
 	 * Pre-Configure the children tree and extracts the JSON
 	 *
@@ -226,7 +226,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 */
 	@Override
 	String toString();
-	
+
 	/**
 	 * Returns the HTML with the specified tab count
 	 *
@@ -235,7 +235,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return Indented HTML
 	 */
 	String toString(Integer tabCount);
-	
+
 	/**
 	 * Adds a class name to the class list
 	 * <p>
@@ -246,7 +246,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return True if it was added, false if it already existed
 	 */
 	J addClass(String className);
-	
+
 	/**
 	 * Removes a class name from this component
 	 * <p>
@@ -257,7 +257,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return True if the class was removed, False if the class was not part of the collection
 	 */
 	J removeClass(String className);
-	
+
 	/**
 	 * Sets the ID and adds the attribute to the global set
 	 *
@@ -266,7 +266,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return
 	 */
 	J setID(String id);
-	
+
 	/**
 	 * Adds a class name with the given css class name compatible
 	 *
@@ -283,7 +283,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * @return
 	 */
 	Set<String> getClasses();
-	
+
 	/**
 	 * Set the theme applied to this component
 	 * <p>

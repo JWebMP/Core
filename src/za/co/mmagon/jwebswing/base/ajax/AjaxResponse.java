@@ -29,6 +29,7 @@ import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -141,7 +142,7 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 	 * @param object
 	 * 		The DTO to pass through
 	 */
-	public void addDto(String name, JavaScriptPart object)
+	public void addDto(String name, Serializable object)
 	{
 		AngularJsonVariable variable = new AngularJsonVariable(name, object);
 		getAngularVariables().add(variable);

@@ -29,6 +29,7 @@ import za.co.mmagon.jwebswing.utilities.StaticStrings;
 
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,7 +63,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	 * All the angular DTO objects for this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private Map<String, JavaScriptPart> angularObjects;
+	private Map<String, Serializable> angularObjects;
 
 	/**
 	 * Constructs a new component with the angular features enabled
@@ -131,9 +132,12 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	@Override
 	@NotNull
 	@SuppressWarnings("unchecked")
-	public J addDto(@NotNull String name, @NotNull JavaScriptPart dataObject)
+	public J addDto(@NotNull String name, @NotNull Serializable dataObject)
 	{
-		dataObject.setReferenceId(getID());
+		if (dataObject instanceof JavaScriptPart)
+		{
+			JavaScriptPart.class.cast(dataObject).setReferenceId(getID());
+		}
 		getAngularObjects().put(name, dataObject);
 		return (J) this;
 	}
@@ -145,7 +149,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	 */
 	@Override
 	@NotNull
-	public Map<String, JavaScriptPart> getAngularObjects()
+	public Map<String, Serializable> getAngularObjects()
 	{
 		if (angularObjects == null)
 		{
@@ -170,7 +174,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	@Override
 	@NotNull
 	@SuppressWarnings("unchecked")
-	public <T extends JavaScriptPart> T getDto(@NotNull String name, @NotNull Class<T> classType)
+	public <T> T getDto(@NotNull String name, @NotNull Class<T> classType)
 	{
 		return (T) getAngularObjects().get(name);
 	}

@@ -33,11 +33,11 @@ import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.logger.LogFactory;
 
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.logging.Level;
@@ -165,9 +165,9 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * @return
 	 */
 	@Override
-	public Map<String, JavaScriptPart> getAngularObjectsAll()
+	public Map<String, Serializable> getAngularObjectsAll()
 	{
-		Map<String, JavaScriptPart> map = getAngularObjects();
+		Map<String, Serializable> map = getAngularObjects();
 		for (ComponentHierarchyBase next : getChildrenHierarchy(true))
 		{
 			processAngularObjects(next, map);
@@ -546,14 +546,13 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * @param map
 	 */
 	@SuppressWarnings("unchecked")
-	private void processAngularObjects(@NotNull ComponentHierarchyBase next, @NotNull Map<String, JavaScriptPart> map)
+	private void processAngularObjects(@NotNull ComponentHierarchyBase next, @NotNull Map<String, Serializable> map)
 	{
 		next.getAngularObjects().forEach((key, value) ->
 		                                 {
 			                                 try
 			                                 {
-				                                 JavaScriptPart part = JavaScriptPart.class.cast(next.getAngularObjects().get(key));
-				                                 map.put((String) key, part);
+				                                 map.put((String) key, (Serializable) next.getAngularObjects().get(key));
 			                                 }
 			                                 catch (ClassCastException cce)
 			                                 {

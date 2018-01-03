@@ -71,8 +71,10 @@ public class AngularJsonVariable extends JavaScriptPart
 	/**
 	 * Constructs a new instance with a given name and object
 	 *
-	 * @param variableName   The variable name to apply
-	 * @param variableObject The JSON object to use
+	 * @param variableName
+	 * 		The variable name to apply
+	 * @param variableObject
+	 * 		The JSON object to use
 	 */
 	public AngularJsonVariable(String variableName, String variableObject)
 	{
@@ -84,8 +86,24 @@ public class AngularJsonVariable extends JavaScriptPart
 	/**
 	 * Constructs a new instance with a given name and object
 	 *
-	 * @param variableName   The variable name to apply
-	 * @param variableObject The JSON object to use
+	 * @param variableName
+	 * 		The variable name to apply
+	 * @param variableObject
+	 * 		The JSON object to use
+	 */
+	public AngularJsonVariable(String variableName, Serializable variableObject)
+	{
+		this.variableName = variableName;
+		this.variable = variableObject;
+	}
+
+	/**
+	 * Constructs a new instance with a given name and object
+	 *
+	 * @param variableName
+	 * 		The variable name to apply
+	 * @param variableObject
+	 * 		The JSON object to use
 	 */
 	public AngularJsonVariable(String variableName, JavaScriptPart variableObject)
 	{
@@ -96,16 +114,18 @@ public class AngularJsonVariable extends JavaScriptPart
 	/**
 	 * Gets the DTO Form of this object
 	 *
-	 * @param <T>       The type this object actually is
-	 * @param classType The class type to return
+	 * @param <T>
+	 * 		The type this object actually is
+	 * @param classType
+	 * 		The class type to return
 	 *
 	 * @return The DTO direct from the call
 	 *
 	 * @throws IOException
 	 */
-	public <T extends JavaScriptPart> T getDto(Class<T> classType) throws IOException
+	public <T extends Serializable> T getDto(Class<T> classType) throws IOException
 	{
-		T output = (T) new JavaScriptPart().From(variableText, classType);
+		T output = new JavaScriptPart<>().From(variableText, classType);
 		variable = output;
 		return output;
 	}
@@ -195,7 +215,8 @@ public class AngularJsonVariable extends JavaScriptPart
 	/**
 	 * Returns the variable object in the format requested
 	 *
-	 * @param <T>       Generic type of JavaScript part
+	 * @param <T>
+	 * 		Generic type of JavaScript part
 	 * @param classType
 	 *
 	 * @return
@@ -204,7 +225,7 @@ public class AngularJsonVariable extends JavaScriptPart
 	{
 		try
 		{
-			return (T) new JavaScriptPart().From(getVariableText(), classType);
+			return new JavaScriptPart<>().From(getVariableText(), classType);
 		}
 		catch (Exception e)
 		{

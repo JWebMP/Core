@@ -18,8 +18,8 @@ package za.co.mmagon.jwebswing.base.interfaces;
 
 import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -30,7 +30,7 @@ import java.util.Map;
  */
 public interface IComponentHTMLAngularBase<J extends ComponentBase>
 {
-	
+
 	/**
 	 * Sets an Angular Attribute
 	 *
@@ -40,7 +40,7 @@ public interface IComponentHTMLAngularBase<J extends ComponentBase>
 	 * @return
 	 */
 	J addAttribute(AngularAttributes attribute, String value);
-	
+
 	/**
 	 * Adds an object for watching across an application
 	 *
@@ -49,15 +49,15 @@ public interface IComponentHTMLAngularBase<J extends ComponentBase>
 	 *
 	 * @return This for chain setting
 	 */
-	J addDto(String name, JavaScriptPart dataObject);
-	
+	J addDto(String name, Serializable dataObject);
+
 	/**
 	 * Returns the angular objects mapped to this component
 	 *
 	 * @return
 	 */
-	Map<String, JavaScriptPart> getAngularObjects();
-	
+	Map<String, Serializable> getAngularObjects();
+
 	/**
 	 * Gets an angular attribute
 	 *
@@ -66,7 +66,7 @@ public interface IComponentHTMLAngularBase<J extends ComponentBase>
 	 * @return
 	 */
 	String getAttribute(AngularAttributes attribute);
-	
+
 	/**
 	 * Returns the DTO currently mapped
 	 *
@@ -76,6 +76,6 @@ public interface IComponentHTMLAngularBase<J extends ComponentBase>
 	 *
 	 * @return Null if not available
 	 */
-	<T extends JavaScriptPart> T getDto(String name, Class<T> classType);
-	
+	<T> T getDto(String name, Class<T> classType);
+
 }

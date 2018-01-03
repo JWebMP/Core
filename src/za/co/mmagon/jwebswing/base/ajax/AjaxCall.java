@@ -37,7 +37,7 @@ import java.util.*;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @RequestScoped
-public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
+public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J> implements IAjaxCall<J>
 {
 
 	private static final long serialVersionUID = 1L;
@@ -110,20 +110,13 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		this.eventTypeFrom = EventTypes.valueOf(eventTypeFrom);
 	}
 
-	/**
-	 * Returns this component ID
-	 *
-	 * @return
-	 */
+	@Override
 	public final String getComponentId()
 	{
 		return componentId;
 	}
 
-	/**
-	 * Creates this as a copy from the incoming call
-	 * @param incoming
-	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public J fromCall(AjaxCall incoming)
 	{
@@ -140,21 +133,13 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		return (J)this;
 	}
 
-	/**
-	 * Returns this date time of this call
-	 *
-	 * @return
-	 */
+	@Override
 	public Date getDatetime()
 	{
 		return datetime;
 	}
 
-	/**
-	 * Sets this calls component
-	 *
-	 * @param component
-	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public J setComponent(ComponentHierarchyBase component)
 	{
@@ -162,21 +147,13 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		return (J)this;
 	}
 
-	/**
-	 * Gets event type
-	 *
-	 * @return
-	 */
+	@Override
 	public EventTypes getEventType()
 	{
 		return eventType;
 	}
 
-	/**
-	 * Sets this component ID
-	 *
-	 * @param componentId
-	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public J setComponentId(String componentId)
 	{
@@ -184,21 +161,13 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		return (J)this;
 	}
 
-	/**
-	 * Returns this calls event type from
-	 *
-	 * @return
-	 */
+	@Override
 	public EventTypes getEventTypeFrom()
 	{
 		return eventTypeFrom;
 	}
 
-	/**
-	 * Sets the date time of this call
-	 *
-	 * @param datetime
-	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public J setDatetime(Date datetime)
 	{
@@ -206,21 +175,13 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		return (J)this;
 	}
 
-	/**
-	 * Returns this calls value
-	 *
-	 * @return
-	 */
+	@Override
 	public AjaxEventValue getValue()
 	{
 		return value;
 	}
 
-	/**
-	 * The Event ID
-	 *
-	 * @param eventId
-	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public J setEventId(String eventId)
 	{
@@ -228,21 +189,13 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		return (J)this;
 	}
 
-	/**
-	 * Returns this calls component
-	 *
-	 * @return
-	 */
+	@Override
 	public ComponentHierarchyBase getComponent()
 	{
 		return component;
 	}
 
-	/**
-	 * Sets the event type
-	 *
-	 * @param eventType
-	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public J setEventType(EventTypes eventType)
 	{
@@ -250,11 +203,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		return (J)this;
 	}
 
-	/**
-	 * Returns JSON strings of inbound variables
-	 *
-	 * @return
-	 */
+	@Override
 	@NotNull
 	public Set<AngularJsonVariable> getVariableData()
 	{
@@ -265,11 +214,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		return variableData;
 	}
 
-	/**
-	 * Sets this calls event type from
-	 *
-	 * @param eventTypeFrom
-	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public J setEventTypeFrom(EventTypes eventTypeFrom)
 	{
@@ -277,13 +222,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		return (J)this;
 	}
 
-	/**
-	 * Returns the variable with the given name in the array or null
-	 *
-	 * @param name The name of the variable as designated
-	 *
-	 * @return
-	 */
+	@Override
 	public AngularJsonVariable getVariable(String name)
 	{
 		for (AngularJsonVariable next : getVariableData())
@@ -296,21 +235,13 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		return null;
 	}
 
-	/**
-	 * The event ID
-	 *
-	 * @return
-	 */
+	@Override
 	public String getEventId()
 	{
 		return eventId;
 	}
 
-	/**
-	 * Sets this calls value
-	 *
-	 * @param value
-	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public J setValue(AjaxEventValue value)
 	{
@@ -318,11 +249,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		return (J)this;
 	}
 
-	/**
-	 * Sets the array list of bound objects?
-	 *
-	 * @param variableData
-	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull
 	public J setVariableData(Set<AngularJsonVariable> variableData)
@@ -331,10 +258,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		return (J)this;
 	}
 
-	/**
-	 * Returns a list of parameters
-	 * @return
-	 */
+	@Override
 	@NotNull
 	public Map<String, String> getParameters()
 	{
@@ -345,10 +269,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		return parameters;
 	}
 
-	/**
-	 * Sets the list of parameters
-	 * @param parameters
-	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public J setParameters(Map<String, String> parameters)
 	{
@@ -356,22 +277,14 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J>
 		return (J)this;
 	}
 
-	/**
-	 * Returns the event class this event is associated with
-	 *
-	 * @return
-	 */
+	@Override
 	@NotNull
 	public String getClassName()
 	{
 		return className;
 	}
 
-	/**
-	 * Sets the class name this event is associated with
-	 *
-	 * @param className
-	 */
+	@Override
 	@NotNull
 	@SuppressWarnings("unchecked")
 	public J setClassName(String className)
