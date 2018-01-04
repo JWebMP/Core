@@ -266,12 +266,12 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 	{
 		Set<String> output = new LinkedHashSet<>();
 		getComponents().forEach(next ->
-		                                 {
-			                                 if (ComponentDependancyBase.class.isAssignableFrom(next.getClass()))
-			                                 {
-				                                 output.addAll(getCssReferences(next));
-			                                 }
-		                                 });
+		                        {
+			                        if (ComponentDependancyBase.class.isAssignableFrom(next.getClass()))
+			                        {
+				                        output.addAll(getCssReferences(next));
+			                        }
+		                        });
 		return output;
 	}
 
@@ -385,16 +385,17 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 		Set<String> output = new LinkedHashSet<>();
 		getComponents().forEach(next ->
 		                        {
-			                        getJsRenders(next).forEach(rendered->{
-				                        if (!rendered.isEmpty())
-				                        {
-					                        if (!rendered.endsWith(next.getNewLine()))
-					                        {
-						                        rendered = rendered + next.getNewLine();
-					                        }
-					                        output.add(rendered);
-				                        }
-			                        });
+			                        getJsRenders(next).forEach(rendered ->
+			                                                   {
+				                                                   if (!rendered.isEmpty())
+				                                                   {
+					                                                   if (!rendered.endsWith(next.getNewLine()))
+					                                                   {
+						                                                   rendered = rendered + next.getNewLine();
+					                                                   }
+					                                                   output.add(rendered);
+				                                                   }
+			                                                   });
 			                        //Load on demand scripts
 			                        buildEventQueries(next, output);
 		                        });
@@ -537,9 +538,9 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 		{
 			for (Object o : component.getAngularObjectsAll().entrySet())
 			{
-				Entry<String, JavaScriptPart> object = (Entry<String, JavaScriptPart>) o;
+				Entry<String, Serializable> object = (Entry<String, Serializable>) o;
 				String key = object.getKey();
-				JavaScriptPart value = object.getValue();
+				Serializable value = object.getValue();
 				addDto(key, value);
 			}
 		}
