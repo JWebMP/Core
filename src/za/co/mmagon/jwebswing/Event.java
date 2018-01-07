@@ -137,12 +137,12 @@ public abstract class Event<J extends Event<J>>
 	{
 		super(ComponentTypes.Event);
 		setID(getClassCanonicalName());
-		setID(component.getID());
 		setName(name);
 		setComponent(component);
 		setEventType(eventType);
 		if (getComponent() != null)
 		{
+			setID(component.getID());
 			getComponent().addEvent(this);
 		}
 	}
