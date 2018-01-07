@@ -21,6 +21,7 @@ import za.co.mmagon.jwebswing.base.html.attributes.ScriptAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoClassAttribute;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
@@ -77,7 +78,7 @@ import java.util.logging.Logger;
  */
 public class Script<J extends Script<J>>
 		extends ComponentHierarchyBase<NoChildren, ScriptAttributes, NoFeatures, NoEvents, J>
-		implements NoIDTag, HeadChildren, NoClassAttribute
+		implements NoIDTag, HeadChildren, NoClassAttribute, BodyChildren
 {
 
 	private static final Logger logger = LogFactory.getInstance().getLogger("<SCRIPT>");

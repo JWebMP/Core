@@ -28,6 +28,7 @@ import za.co.mmagon.jwebswing.base.angular.factories.AngularFactoryBase;
 import za.co.mmagon.jwebswing.base.angular.modules.AngularMessagesModule;
 import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
 import za.co.mmagon.jwebswing.plugins.PluginInformation;
+import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 import za.co.mmagon.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
@@ -126,6 +127,10 @@ public class AngularPageConfigurator extends PageConfigurator
 	public static void setRequired(boolean required)
 	{
 		AngularPageConfigurator.required = required;
+		if (required)
+		{
+			JQueryPageConfigurator.setRequired(true);
+		}
 	}
 
 	@Override
@@ -367,5 +372,15 @@ public class AngularPageConfigurator extends PageConfigurator
 	public static void setAngularMessagesRequired(boolean angularMessagesRequired)
 	{
 		AngularPageConfigurator.angularMessagesRequired = angularMessagesRequired;
+	}
+
+	/**
+	 * If the configurator is required
+	 *
+	 * @return
+	 */
+	public static boolean isRequired()
+	{
+		return required;
 	}
 }

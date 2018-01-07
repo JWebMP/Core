@@ -153,4 +153,14 @@ public class JQueryPageConfigurator extends PageConfigurator
 
 		return page;
 	}
+
+	/**
+	 * Returns if JQuery is configured as required for the page
+	 *
+	 * @return
+	 */
+	public static boolean isRequired()
+	{
+		return required;
+	}
 }

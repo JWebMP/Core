@@ -166,7 +166,7 @@ public abstract class Html<J extends Html<J>>
 	 *
 	 * @return
 	 */
-	public Head<?> getHead()
+	public Head getHead()
 	{
 		return head;
 	}

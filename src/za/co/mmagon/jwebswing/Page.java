@@ -18,13 +18,8 @@ package za.co.mmagon.jwebswing;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import net.sf.uadetector.*;
-import za.co.mmagon.FileTemplates;
-import za.co.mmagon.SessionHelper;
 import za.co.mmagon.guiceinjection.GuiceContext;
 import za.co.mmagon.jwebswing.annotations.PageConfiguration;
-import za.co.mmagon.jwebswing.annotations.SiteBinder;
-import za.co.mmagon.jwebswing.base.ComponentDependancyBase;
-import za.co.mmagon.jwebswing.base.ComponentEventBase;
 import za.co.mmagon.jwebswing.base.ComponentFeatureBase;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
@@ -36,25 +31,19 @@ import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.ScriptAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
-import za.co.mmagon.jwebswing.base.interfaces.RenderAfterLinks;
-import za.co.mmagon.jwebswing.base.interfaces.RenderAfterScripts;
-import za.co.mmagon.jwebswing.base.interfaces.RenderBeforeDynamicScripts;
-import za.co.mmagon.jwebswing.base.interfaces.RenderBeforeLinks;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
-import za.co.mmagon.jwebswing.base.servlets.JWScriptServlet;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.DevelopmentEnvironments;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 import za.co.mmagon.jwebswing.base.servlets.interfaces.IPage;
-import za.co.mmagon.jwebswing.generics.WebReference;
 import za.co.mmagon.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -75,7 +64,7 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SEMICOLON;
  * @since 24 Apr 2016
  */
 @PageConfiguration
-public class Page extends Html implements IPage
+public class Page<J extends Page<J>> extends Html<J> implements IPage
 {
 
 	private static final long serialVersionUID = 1L;
@@ -137,7 +126,6 @@ public class Page extends Html implements IPage
 		{
 			getPageFields().setGenerator("https://sourceforge.net/projects/jwebswing/");
 		}
-
 	}
 
 	/**
@@ -212,9 +200,12 @@ public class Page extends Html implements IPage
 	 * @return
 	 */
 	@Override
-	public ComponentDependancyBase addCssReference(CSSReference cssReference)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J addCssReference(CSSReference cssReference)
 	{
-		return getBody().addCssReference(cssReference);
+		getBody().addCssReference(cssReference);
+		return (J) this;
 	}
 
 	/**
@@ -225,9 +216,12 @@ public class Page extends Html implements IPage
 	 * @return
 	 */
 	@Override
-	public ComponentDependancyBase addJavaScriptReference(JavascriptReference jsReference)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J addJavaScriptReference(JavascriptReference jsReference)
 	{
-		return getBody().addJavaScriptReference(jsReference);
+		getBody().addJavaScriptReference(jsReference);
+		return (J) this;
 	}
 
 	@Override
@@ -243,20 +237,6 @@ public class Page extends Html implements IPage
 	}
 
 	/**
-	 * Adds an event to the body
-	 *
-	 * @param event
-	 *
-	 * @return
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public ComponentEventBase addEvent(GlobalEvents event)
-	{
-		return getBody().addEvent(event);
-	}
-
-	/**
 	 * Sets all component in the head and body to tiny
 	 *
 	 * @param tiny
@@ -264,12 +244,14 @@ public class Page extends Html implements IPage
 	 * @return
 	 */
 	@Override
-	public Page setTiny(boolean tiny)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setTiny(boolean tiny)
 	{
 		super.setTiny(tiny);
 		getHead().setTiny(tiny);
 		getBody().setTiny(tiny);
-		return this;
+		return (J) this;
 	}
 
 	@Override
@@ -291,29 +273,22 @@ public class Page extends Html implements IPage
 		super.destroy();
 	}
 
-	/**
-	 * Adds a feature to the body
-	 *
-	 * @param feature
-	 *
-	 * @return
-	 */
 	@Override
-	public ComponentFeatureBase addFeature(ComponentFeatureBase feature)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J addFeature(ComponentFeatureBase feature)
 	{
-		return getBody().addFeature(feature);
+		getBody().addFeature(feature);
+		return (J) this;
 	}
 
-	/**
-	 * Adds a global variable to the body
-	 *
-	 * @param variable
-	 */
 	@Override
-	public ComponentFeatureBase addVariable(String variable)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J addVariable(String variable)
 	{
 		getBody().addVariable(variable);
-		return this;
+		return (J) this;
 	}
 
 	/**
@@ -352,13 +327,17 @@ public class Page extends Html implements IPage
 			pageInitialized = true;
 		}
 
-		if (!isInitialized())
+		if (!isConfigured())
 		{
 			log.log(Level.FINE, "Looking for plugins....");
 			Set<Class<? extends PageConfigurator>> configs = GuiceContext.reflect().getSubTypesOf(PageConfigurator.class);
 			List<PageConfigurator> configInstances = new ArrayList<>();
 			for (Class<? extends PageConfigurator> pc : configs)
 			{
+				if (Modifier.isAbstract(pc.getModifiers()))
+				{
+					continue;
+				}
 				PageConfigurator config = GuiceContext.getInstance(pc);
 				configInstances.add(config);
 			}
@@ -415,57 +394,6 @@ public class Page extends Html implements IPage
 		{
 			configurePageHeader();
 			addVariablesScriptToPage();
-			configurePageBuild();
-
-			if (!getTopShelfScripts().isEmpty() && getRunningEnvironment().ordinal() >= DevelopmentEnvironments.Development.ordinal())
-			{
-				getHead().add(new Comment("Priority [" + RequirementsPriority.Top_Shelf + "] Values"));
-			}
-
-			//HERE
-			Set<Class<? extends RenderBeforeLinks>> renderBeforeScripts = GuiceContext.reflect().getSubTypesOf(RenderBeforeLinks.class);
-			List<RenderBeforeLinks> renderB = new ArrayList<>();
-			for (Class<? extends RenderBeforeLinks> renderBeforeScript : renderBeforeScripts)
-			{
-				RenderBeforeLinks s = GuiceContext.getInstance(renderBeforeScript);
-				renderB.add(s);
-			}
-			renderB.sort(Comparator.comparingInt(RenderBeforeLinks::sortOrder));
-			Paragraph before = new Paragraph().setTextOnly(true);
-			for (RenderBeforeLinks render : renderB)
-			{
-				before.setText(before.getText(0).toString() + render.render().toString());
-			}
-			if (before.getText(0).toString().trim().length() > 0)
-			{
-				getHead().add(before);
-			}
-			//Top SHelf Scripts
-			getTopShelfScripts().forEach(next -> getHead().add(next));
-			//After
-			Set<Class<? extends RenderAfterLinks>> renderAfterScripts = GuiceContext.reflect().getSubTypesOf(RenderAfterLinks.class);
-			List<RenderAfterLinks> renderA = new ArrayList<>();
-			for (Class<? extends RenderAfterLinks> renderBeforeScript : renderAfterScripts)
-			{
-				RenderAfterLinks s = GuiceContext.getInstance(renderBeforeScript);
-				renderA.add(s);
-			}
-			renderA.sort(Comparator.comparingInt(RenderAfterLinks::sortOrder));
-			Paragraph after = new Paragraph().setTextOnly(true);
-			for (RenderAfterLinks render : renderA)
-			{
-				after.setText(after.getText(0).toString() + render.render().toString());
-			}
-			if (after.getText(0).toString().trim().length() > 0)
-			{
-				getHead().add(after);
-			}
-			ArrayList<ComponentHierarchyBase> requirements = new ArrayList<>();
-			for (RequirementsPriority priority : RequirementsPriority.values())
-			{
-				getPriorityRequirements(priority, requirements, true, false).forEach(comp -> getHead().getChildren().add(comp));
-			}
-			getHead().add(getCssStyle());
 		}
 		super.preConfigure();
 	}
@@ -523,169 +451,6 @@ public class Page extends Html implements IPage
 	}
 
 	/**
-	 * Returns the style object. If dynamic rendering is enabled it will point to the Servlet.
-	 *
-	 * @return
-	 */
-	public ComponentHierarchyBase getCssStyle()
-	{
-		StringBuilder css = getBody().renderCss(0);
-		if (!css.toString().isEmpty())
-		{
-			if (getOptions().isDynamicRender())
-			{
-				return new CSSLink(SessionHelper.getServerPath() + SiteBinder.getCSSLocation().replaceAll("/", ""));
-			}
-			else
-			{
-				if (css.length() > 0)
-				{
-					Style style = new Style();
-					style.setText(css);
-					return style;
-				}
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Returns the top shelf script and css references
-	 *
-	 * @return
-	 */
-	private List<ComponentHierarchyBase> getTopShelfScripts()
-	{
-		List<ComponentHierarchyBase> arr;
-		arr = getPriorityRequirements(RequirementsPriority.Top_Shelf, new ArrayList<>(), true, true);
-		return arr;
-	}
-
-	@SuppressWarnings("unchecked")
-	private void configurePageBuild()
-	{
-		if (!getOptions().isScriptsInHead())
-		{
-			//script rendering in body
-			Set<Class<? extends RenderBeforeDynamicScripts>> renderBeforeScripts = GuiceContext.reflect().getSubTypesOf(RenderBeforeDynamicScripts.class);
-			List<RenderBeforeDynamicScripts> renderB = new ArrayList<>();
-			for (Class<? extends RenderBeforeDynamicScripts> renderBeforeScript : renderBeforeScripts)
-			{
-				RenderBeforeDynamicScripts s = GuiceContext.getInstance(renderBeforeScript);
-				renderB.add(s);
-			}
-
-			renderB.sort(Comparator.comparingInt(RenderBeforeDynamicScripts::sortOrder));
-			Paragraph before = new Paragraph().setTextOnly(true);
-			renderB.forEach(render -> before.setText(before.getText(0).toString() + render.render().toString()));
-			if (before.getText(0).toString().trim().length() > 0)
-			{
-				getBody().add(before);
-			}
-			addScriptsTo(getBody());
-			Set<Class<? extends RenderAfterScripts>> renderAfterScripts = GuiceContext.reflect().getSubTypesOf(RenderAfterScripts.class);
-			List<RenderAfterScripts> renderA = new ArrayList<>();
-			for (Class<? extends RenderAfterScripts> renderBeforeScript : renderAfterScripts)
-			{
-				RenderAfterScripts s = GuiceContext.getInstance(renderBeforeScript);
-				renderA.add(s);
-			}
-			renderA.sort(Comparator.comparingInt(RenderAfterScripts::sortOrder));
-			Paragraph after = new Paragraph().setTextOnly(true);
-			for (RenderAfterScripts render : renderA)
-			{
-				after.setText(after.getText(0).toString() + render.render().toString());
-			}
-			if (after.getText(0).toString().trim().length() > 0)
-			{
-				getBody().add(after);
-			}
-		}
-
-		if (!getOptions().isScriptsInHead())
-		{
-			List<Script> allScripts = getDynamicScripts();
-			allScripts.forEach(getBody()::add);
-		}
-	}
-
-	/**
-	 * Returns the script reference
-	 *
-	 * @return ArrayList of type script
-	 */
-	@SuppressWarnings("unchecked")
-	private List<Script> getDynamicScripts()
-	{
-		ArrayList<Script> allScripts = new ArrayList<>();
-		if (getOptions().isDynamicRender())
-		{
-			if (getBody().readChildrenPropertyFirstResult(AngularPageConfigurator.AngularEnabledString, true))
-			{
-				Script jwScript = new Script();
-				jwScript.addAttribute(ScriptAttributes.Type, HTML_HEADER_JAVASCRIPT);
-				jwScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + SiteBinder.getJWScriptLocation().replaceAll("/", ""));
-				allScripts.add(jwScript);
-			}
-
-			StringBuilder js = renderJavascript();
-			if (!js.toString().trim().isEmpty())
-			{
-				Script dynamicScript = new Script();
-				dynamicScript.addAttribute(ScriptAttributes.Type, HTML_HEADER_JAVASCRIPT);
-				dynamicScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + SiteBinder.getJavaScriptLocation().replaceAll("/", ""));
-				allScripts.add(dynamicScript);
-			}
-
-			if (getBody().readChildrenPropertyFirstResult(AngularPageConfigurator.AngularEnabledString, true))
-			{
-				Script dynamicScript = new Script();
-				dynamicScript.addAttribute(ScriptAttributes.Type, HTML_HEADER_JAVASCRIPT);
-				dynamicScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + SiteBinder.getAngularScriptLocation().replaceAll("/", ""));
-				allScripts.add(dynamicScript);
-			}
-
-		}
-		else
-		{
-			if (getBody().readChildrenPropertyFirstResult(AngularPageConfigurator.AngularEnabledString, true))
-			{
-				FileTemplates.getFileTemplate(JWScriptServlet.class, JWScriptServlet.FILE_TEMPLATE_NAME, "siteloader");
-				StringBuilder jsScript = FileTemplates.renderTemplateScripts(JWScriptServlet.FILE_TEMPLATE_NAME);
-				if (!jsScript.toString().trim().isEmpty())
-				{
-					Script s = new Script();
-					s.addAttribute(ScriptAttributes.Type, HTML_HEADER_JAVASCRIPT);
-					s.setText(jsScript);
-					allScripts.add(s);
-				}
-			}
-
-			StringBuilder js = renderJavascript();
-			if (!js.toString().trim().isEmpty())
-			{
-				Script s = new Script();
-				s.addAttribute(ScriptAttributes.Type, HTML_HEADER_JAVASCRIPT);
-				s.setText(getNewLine() + js);
-				allScripts.add(s);
-			}
-
-			if (getBody().readChildrenPropertyFirstResult(AngularPageConfigurator.AngularEnabledString, true))
-			{
-				StringBuilder jsAngular = getAngular().renderAngularJavascript(this);
-				if (!jsAngular.toString().trim().isEmpty())
-				{
-					Script s = new Script();
-					s.addAttribute(ScriptAttributes.Type, HTML_HEADER_JAVASCRIPT);
-					s.setText(jsAngular);
-					allScripts.add(s);
-				}
-			}
-		}
-		return allScripts;
-	}
-
-	/**
 	 * Adds the variables in the application to the collection
 	 */
 	@SuppressWarnings("unchecked")
@@ -733,121 +498,6 @@ public class Page extends Html implements IPage
 		getHead().add(getPageFields().getDescription());
 		getHead().add(getPageFields().getKeywords());
 		getHead().add(getPageFields().getFavIconLink());
-
-		if (getOptions().isScriptsInHead())
-		{
-			addScriptsTo(getHead());
-		}
-
-		if (getOptions().isScriptsInHead())
-		{
-			List<Script> allScripts = getDynamicScripts();
-			allScripts.forEach(getHead()::add);
-		}
-
-		for (Object o : getHead().getChildren())
-		{
-			ComponentHierarchyBase headObject = (ComponentHierarchyBase) o;
-			headObject.preConfigure();
-		}
-	}
-
-	/**
-	 * Adds scripts to a component, ordered by priority and sort order.
-	 * <p>
-	 * Does not do top shelf
-	 *
-	 * @param component
-	 */
-	@SuppressWarnings("unchecked")
-	private void addScriptsTo(ComponentHierarchyBase component)
-	{
-		List<ComponentHierarchyBase> requirements = new CopyOnWriteArrayList<>();
-
-		List<RequirementsPriority> arrs = new ArrayList<>(Arrays.asList(RequirementsPriority.values()));
-		for (RequirementsPriority priority : arrs)
-		{
-			if (priority.equals(RequirementsPriority.Top_Shelf))
-			{
-				continue;
-			}
-
-			if (getRunningEnvironment().ordinal() >= DevelopmentEnvironments.Development.ordinal() &&
-					    !getPriorityRequirements(priority, requirements, false, true).isEmpty())
-			{
-				getBody().add(new Comment("Priority [" + priority + "] Values"));
-			}
-
-			getPriorityRequirements(priority, requirements, false, true).forEach(component::add);
-		}
-	}
-
-	/**
-	 * Adds all the stuff for a given priority
-	 *
-	 * @param css
-	 * 		CSS
-	 * @param input
-	 * 		the hierarchy to read from
-	 * @param priority
-	 * 		the priority
-	 * @param javascript
-	 * 		to return JavaScript or not
-	 */
-	private List<ComponentHierarchyBase> getPriorityRequirements(RequirementsPriority priority, List<ComponentHierarchyBase> input, boolean css, boolean javascript)
-	{
-		Set<ComponentHierarchyBase> requirements = new LinkedHashSet<>();
-		if (css)
-		{
-			List<CSSLink> links = getAllCssLinks(priority);
-			for (CSSLink link : links)
-			{
-				if (!input.contains(link))
-				{
-					requirements.add(link);
-				}
-			}
-		}
-		if (javascript)
-
-		{
-			Set<Script> scripts = getAllScripts(priority);
-			for (Script script : scripts)
-			{
-				if (!input.contains(script))
-				{
-					requirements.add(script);
-				}
-			}
-		}
-
-		return new ArrayList<>(requirements);
-	}
-
-	/**
-	 * Gets all the links for all the bodies components
-	 *
-	 * @param priority
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	@NotNull
-	private List<CSSLink> getAllCssLinks(@NotNull RequirementsPriority priority)
-	{
-		List<CSSReference> allReferences = new ArrayList<>(getBody().getCssReferencesAll(priority));
-		allReferences.sort(WebReference.getDummyReference());
-		ArrayList<CSSLink> allLinks = new ArrayList<>();
-
-		for (CSSReference reference : allReferences)
-		{
-			CSSLink link = new CSSLink(reference);
-			if (!allLinks.contains(link))
-			{
-				allLinks.add(link);
-			}
-		}
-		return allLinks;
 	}
 
 	@Override
@@ -934,13 +584,7 @@ public class Page extends Html implements IPage
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + getOptions().hashCode();
-		result = 31 * result + getPageFields().hashCode();
-		result = 31 * result + getUserAgent().hashCode();
-		result = 31 * result + getAngular().hashCode();
-		result = 31 * result + (isPageInitialized() ? 1 : 0);
-		return result;
+		return super.hashCode();
 	}
 
 	/**
@@ -1019,25 +663,4 @@ public class Page extends Html implements IPage
 		return this;
 	}
 
-	/**
-	 * Gets all the scripts for all the body components
-	 *
-	 * @param priority
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	private Set<Script> getAllScripts(RequirementsPriority priority)
-	{
-		List<JavascriptReference> allJavascripts = new ArrayList<>(getBody().getJavascriptReferencesAll(priority));
-		allJavascripts.sort(WebReference.getDummyReference());
-		Set<Script> allScripts = new LinkedHashSet<>();
-		for (JavascriptReference reference : allJavascripts)
-		{
-			Script script = new Script(reference);
-			script.setNewLineForClosingTag(false);
-			allScripts.add(script);
-		}
-		return allScripts;
-	}
 }

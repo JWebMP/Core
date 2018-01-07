@@ -17,6 +17,7 @@
 package za.co.mmagon.jwebswing;
 
 import org.junit.jupiter.api.Test;
+import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.client.Browsers;
 import za.co.mmagon.jwebswing.base.client.InternetExplorerCompatibilityMode;
 import za.co.mmagon.jwebswing.base.html.Base;
@@ -27,6 +28,7 @@ import za.co.mmagon.jwebswing.base.html.attributes.BaseAttributes;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.DevelopmentEnvironments;
 import za.co.mmagon.jwebswing.htmlbuilder.css.backgrounds.BackgroundAttachments;
 import za.co.mmagon.jwebswing.htmlbuilder.css.colours.ColourNames;
+import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -381,4 +383,25 @@ public class PageTest extends BaseTestClass
 		String expResult = "<!DOCTYPE html><html><head><title>This is my title</title><base target=\"Base Target\"><meta content=\"IE=10\" http-equiv=\"X-UA-Compatible\"><meta content=\"Author Marc Magon\" name=\"author\"><meta content=\"Application Name\" name=\"application-name\"><meta content=\"Generator\" name=\"generator\"><meta content=\"Page Description\" name=\"description\"></head></html>";
 		assertEquals(expResult, result);
 	}
+
+	@Test
+	public void testDynamicOn()
+	{
+		instance = getPage();
+		instance.getOptions().setDynamicRender(true);
+		JQueryPageConfigurator.setRequired(true);
+		AngularPageConfigurator.setRequired(true);
+		System.out.println(instance.toString(0));
+	}
+
+	@Test
+	public void testDynamicOff()
+	{
+		instance = getPage();
+		instance.getOptions().setDynamicRender(false);
+		JQueryPageConfigurator.setRequired(true);
+		AngularPageConfigurator.setRequired(true);
+		System.out.println(instance.toString(0));
+	}
+
 }

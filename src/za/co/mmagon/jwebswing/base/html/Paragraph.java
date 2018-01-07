@@ -23,6 +23,7 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoNewLineForRawText;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.BodyChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.DetailsChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.HeadChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -58,7 +59,7 @@ import za.co.mmagon.jwebswing.utilities.TextUtilities;
  */
 public class Paragraph<J extends Paragraph<J>>
 		extends Component<ParagraphChildren, ParagraphAttributes, GlobalFeatures, GlobalEvents, J>
-		implements BodyChildren, NoNewLineForRawText, ParagraphChildren, DetailsChildren
+		implements BodyChildren, NoNewLineForRawText, ParagraphChildren, DetailsChildren, HeadChildren
 {
 
 	private static final long serialVersionUID = 1L;

@@ -27,13 +27,13 @@ import java.util.Comparator;
  */
 public abstract class PageConfigurator implements Comparator<PageConfigurator>, Serializable
 {
-	
+
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The loading sort order for this page configurator. Default 100;
 	 */
 	private int sortOrder = 100;
-	
+
 	/**
 	 * Method that is called during the page configuration setup
 	 *
@@ -41,8 +41,8 @@ public abstract class PageConfigurator implements Comparator<PageConfigurator>, 
 	 *
 	 * @return
 	 */
-	public abstract Page configure(Page page);
-	
+	public abstract Page<?> configure(Page<?> page);
+
 	/**
 	 * Returns the default sort order
 	 *
@@ -52,7 +52,7 @@ public abstract class PageConfigurator implements Comparator<PageConfigurator>, 
 	{
 		return sortOrder;
 	}
-	
+
 	/**
 	 * Sets the default sort order
 	 *
@@ -62,11 +62,11 @@ public abstract class PageConfigurator implements Comparator<PageConfigurator>, 
 	{
 		this.sortOrder = sortOrder;
 	}
-	
+
 	@Override
 	public int compare(PageConfigurator o1, PageConfigurator o2)
 	{
 		return o1.getSortOrder().compareTo(o2.getSortOrder());
 	}
-	
+
 }
