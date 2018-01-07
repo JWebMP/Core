@@ -1,6 +1,7 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.jupiter.api.Test;
+import za.co.mmagon.jwebswing.BaseTestClass;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.client.Browsers;
 
@@ -11,14 +12,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  *
  * @author MMagon
  */
-public class HtmlTest
+public class HtmlTest extends BaseTestClass
 {
-	
+
 	public HtmlTest()
 	{
 		System.out.println("Testing <HTML> Tag");
 	}
-	
+
 	/**
 	 * Test of getMinimumBrowserSupport method, of class HTML.
 	 */
@@ -32,7 +33,7 @@ public class HtmlTest
 		Browsers result = instance.getBrowser();
 		assertEquals(expResult, result);
 	}
-	
+
 	/**
 	 * Test of setMinimumBrowserSupport method, of class HTML.
 	 */
@@ -47,10 +48,11 @@ public class HtmlTest
 		Browsers result = instance.getBrowser();
 		assertEquals(expResult, result);
 	}
-	
+
 	@Test
 	public void testOutput()
 	{
+
 		//System.out.println("testOutput");
 		Html instance = new HtmlImpl();
 		instance.setBrowser(Browsers.Firefox19);
@@ -60,17 +62,17 @@ public class HtmlTest
 				                   "</html>";
 		String result = instance.toString(true).toString();
 		assertEquals(expResult, result);
-		
+
 		instance.setTiny(true);
 		expResult = "<!DOCTYPE html><html></html>";
 		result = instance.toString(true).toString();
 		System.out.println(instance.toString(true));
 		assertEquals(expResult, result);
 	}
-	
+
 	public class HtmlImpl extends Page
 	{
-		
+
 		public HtmlImpl()
 		{
 			super();
