@@ -29,9 +29,6 @@ public class AngularMessagesModule extends AngularModuleBase
 
 	/**
 	 * Constructs a module with this name that always sorts default
-	 *
-	 * @param moduleName
-	 * 		This modules name
 	 */
 	public AngularMessagesModule()
 	{

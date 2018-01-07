@@ -67,7 +67,6 @@ public class JQueryPageConfigurator extends PageConfigurator
 	/**
 	 * Sets the component/feature/hierarchy as JQuery required
 	 *
-	 * @param component
 	 * @param required
 	 */
 	@SuppressWarnings("unchecked")
