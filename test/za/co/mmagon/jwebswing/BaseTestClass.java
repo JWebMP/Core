@@ -49,6 +49,9 @@ public class BaseTestClass
 
 	public Page getInstance()
 	{
+		JQueryPageConfigurator.setRequired(false);
+		AngularPageConfigurator.setRequired(false);
+		AngularPageConfigurator.setAngularMessagesRequired(false);
 		return resetInstance();
 	}
 
