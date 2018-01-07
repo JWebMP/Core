@@ -56,7 +56,8 @@ public abstract class BeforeLoadAdapter extends Event
 	/**
 	 * Performs a click
 	 *
-	 * @param component The component this click is going to be acting on
+	 * @param component
+	 * 		The component this click is going to be acting on
 	 */
 	public BeforeLoadAdapter(Component component)
 	{
@@ -72,8 +73,8 @@ public abstract class BeforeLoadAdapter extends Event
 	{
 		if (!isConfigured())
 		{
-			JQueryPageConfigurator.setRequired((Component) getComponent(), true);
-			AngularPageConfigurator.setRequired(getComponent(), true);
+			JQueryPageConfigurator.setRequired(true);
+			AngularPageConfigurator.setRequired(true);
 			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
 			getComponent().addAttribute(AngularAttributes.ngBeforeLoad, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
@@ -109,8 +110,10 @@ public abstract class BeforeLoadAdapter extends Event
 	 * Triggers on Click
 	 * <p>
 	 *
-	 * @param call     The physical AJAX call
-	 * @param response The physical Ajax Receiver
+	 * @param call
+	 * 		The physical AJAX call
+	 * @param response
+	 * 		The physical Ajax Receiver
 	 */
 	public abstract void onBeforeLoad(AjaxCall call, AjaxResponse response);
 
@@ -126,7 +129,7 @@ public abstract class BeforeLoadAdapter extends Event
 			LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
-	
+
 	@Override
 	public boolean equals(Object o)
 	{
@@ -145,7 +148,7 @@ public abstract class BeforeLoadAdapter extends Event
 		BeforeLoadAdapter that = (BeforeLoadAdapter) o;
 		return Objects.equals(getComponent(), that.getComponent());
 	}
-	
+
 	@Override
 	public int hashCode()
 	{

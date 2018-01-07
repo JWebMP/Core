@@ -72,8 +72,8 @@ public abstract class BeforeStopAdapter extends Event
 	{
 		if (!isConfigured())
 		{
-			JQueryPageConfigurator.setRequired((Component) getComponent(), true);
-			AngularPageConfigurator.setRequired(getComponent(), true);
+			JQueryPageConfigurator.setRequired(true);
+			AngularPageConfigurator.setRequired(true);
 			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
 			getComponent().addAttribute(AngularAttributes.ngBeforeStop, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
@@ -126,7 +126,7 @@ public abstract class BeforeStopAdapter extends Event
 			LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
-	
+
 	@Override
 	public boolean equals(Object o)
 	{
@@ -145,7 +145,7 @@ public abstract class BeforeStopAdapter extends Event
 		BeforeStopAdapter that = (BeforeStopAdapter) o;
 		return Objects.equals(getComponent(), that.getComponent());
 	}
-	
+
 	@Override
 	public int hashCode()
 	{

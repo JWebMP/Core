@@ -44,7 +44,7 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRAC
 public abstract class CancelAdapter extends Event
 		implements GlobalEvents
 {
-	
+
 	/**
 	 * Logger for the Component
 	 */
@@ -52,7 +52,7 @@ public abstract class CancelAdapter extends Event
 	private static final long serialVersionUID = 1L;
 
 	private CancelDirective directive;
-	
+
 	/**
 	 * Performs a click
 	 *
@@ -62,7 +62,7 @@ public abstract class CancelAdapter extends Event
 	{
 		super(EventTypes.cancel, component);
 	}
-	
+
 	/**
 	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
 	 */
@@ -71,13 +71,13 @@ public abstract class CancelAdapter extends Event
 	{
 		if (!isConfigured())
 		{
-			AngularPageConfigurator.setRequired(getComponent(), true);
+			AngularPageConfigurator.setRequired(true);
 			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
 			getComponent().addAttribute(AngularAttributes.ngCancel, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
 		super.preConfigure();
 	}
-	
+
 	/**
 	 * Triggers on Cancel
 	 * <p>

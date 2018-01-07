@@ -49,7 +49,8 @@ public abstract class MouseUpAdapter extends Event
 	/**
 	 * Performs a click
 	 *
-	 * @param component The component this click is going to be acting on
+	 * @param component
+	 * 		The component this click is going to be acting on
 	 */
 	public MouseUpAdapter(Component component)
 	{
@@ -66,7 +67,7 @@ public abstract class MouseUpAdapter extends Event
 		if (!isConfigured())
 		{
 
-			AngularPageConfigurator.setRequired(getComponent(), true);
+			AngularPageConfigurator.setRequired(true);
 			getComponent().addAttribute(AngularAttributes.ngMouseup, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
 		super.preConfigure();
@@ -76,8 +77,10 @@ public abstract class MouseUpAdapter extends Event
 	 * Triggers on Click
 	 * <p>
 	 *
-	 * @param call     The physical AJAX call
-	 * @param response The physical Ajax Receiver
+	 * @param call
+	 * 		The physical AJAX call
+	 * @param response
+	 * 		The physical Ajax Receiver
 	 */
 	public abstract void onMouseUp(AjaxCall call, AjaxResponse response);
 

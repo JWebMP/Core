@@ -24,7 +24,7 @@ public class DragStopAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-drag-stop=\"jwCntrl.perform($event,[],'za_co_mmagon_jwebswing_events_dragstop_DragStopAdapterTest$1','za.co.mmagon.jwebswing.events.dragstop.DragStopAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals("<div id=\"test\" ng-drag-stop=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.dragstop.DragStopAdapterTest$1');\"></div>", test.toString(0));
 	}
 
 	@Test

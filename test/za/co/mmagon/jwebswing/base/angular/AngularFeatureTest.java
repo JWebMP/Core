@@ -35,7 +35,7 @@ public class AngularFeatureTest extends BaseTestClass
 	{
 		Page p = getInstance();
 		p.getBody().add("Hello");
-		AngularPageConfigurator.setRequired(p.getBody(), true);
+		AngularPageConfigurator.setRequired(true);
 		System.out.println(p.toString(0));
 	}
 

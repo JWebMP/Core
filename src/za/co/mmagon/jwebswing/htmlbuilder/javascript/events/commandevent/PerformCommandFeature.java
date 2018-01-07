@@ -7,6 +7,8 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import java.util.Iterator;
 import java.util.List;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON;
+
 /**
  * Executes the JavaScript lines of code directly after the component is executed
  *
@@ -50,7 +52,7 @@ public abstract class PerformCommandFeature extends Feature<JavaScriptPart, Perf
 
 			String showDiv = "$('" + this.getComponent().getID() + "').show();" + (getComponent().isTiny() ? "" : "\n");
 			addQuery(showDiv);
-			String jQuery = "performCommand('" + this.getComponent().getID() + "','" + getName() + "'," + string + ");";
+			String jQuery = "performCommand('" + this.getComponent().getID() + "','" + getName() + "'," + string + STRING_CLOSING_BRACKET_SEMICOLON;
 			addQuery(jQuery);
 		}
 	}

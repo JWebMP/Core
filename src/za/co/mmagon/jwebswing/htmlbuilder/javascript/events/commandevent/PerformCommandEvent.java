@@ -15,7 +15,7 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTy
  * @author MMagon
  * @since 2012-12-30
  */
-public abstract class PerformCommandEvent extends Event<JavaScriptPart, Event>
+public abstract class PerformCommandEvent extends Event<PerformCommandEvent>
 {
 
 	public PerformCommandEvent(Component component)

@@ -24,7 +24,7 @@ public class DragStartAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-drag-start=\"jwCntrl.perform($event,[],'za_co_mmagon_jwebswing_events_dragstart_DragStartAdapterTest$1','za.co.mmagon.jwebswing.events.dragstart.DragStartAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals("<div id=\"test\" ng-drag-start=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.dragstart.DragStartAdapterTest$1');\"></div>", test.toString(0));
 	}
 
 	@Test

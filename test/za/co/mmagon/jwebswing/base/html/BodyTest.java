@@ -29,21 +29,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class BodyTest extends BaseTestClass
 {
-	
+
 	private Page p;
 	private Body b;
-	
+
 	public BodyTest()
 	{
 		resetBody();
 	}
-	
+
 	private void resetBody()
 	{
 		p = new Page();
 		b = p.getBody();
 	}
-	
+
 	@Test
 	public void testBody()
 	{
@@ -51,12 +51,12 @@ public class BodyTest extends BaseTestClass
 		System.out.println(b.toString(true));
 		assertEquals("<body id=\"body\"></body>", b.toString(true));
 	}
-	
+
 	@Test
 	public void testSetGenerateJQuery()
 	{
 		resetBody();
-		JQueryPageConfigurator.setRequired(b, true);
+		JQueryPageConfigurator.setRequired(true);
 		new JQueryPageConfigurator().configure(getPage());
 		b.add(new Comment("meh"));
 		WebReference.setIsLocal(true);
@@ -72,12 +72,12 @@ public class BodyTest extends BaseTestClass
 				             "\t</body>\n" +
 				             "</html>", p.toString(true).toString());
 	}
-	
+
 	@Test
 	public void testSetGenerateJQueryRemote()
 	{
 		resetBody();
-		JQueryPageConfigurator.setRequired(b, true);
+		JQueryPageConfigurator.setRequired(true);
 		b.add(new Comment("meh"));
 		WebReference.setIsLocal(false);
 		System.out.println(p.toString(true));

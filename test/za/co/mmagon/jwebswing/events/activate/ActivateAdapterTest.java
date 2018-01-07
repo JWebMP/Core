@@ -25,7 +25,7 @@ public class ActivateAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-activate=\"jwCntrl.perform($event,[],'za_co_mmagon_jwebswing_events_activate_ActivateAdapterTest$1','za.co.mmagon.jwebswing.events.activate.ActivateAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals("<div id=\"test\" ng-activate=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.activate.ActivateAdapterTest$1');\"></div>", test.toString(0));
 	}
 
 	@Test

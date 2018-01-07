@@ -24,7 +24,7 @@ public class UpdateAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-update=\"jwCntrl.perform($event,[],'za_co_mmagon_jwebswing_events_update_UpdateAdapterTest$1','za.co.mmagon.jwebswing.events.update.UpdateAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals("<div id=\"test\" ng-update=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.update.UpdateAdapterTest$1');\"></div>", test.toString(0));
 	}
 
 	@Test

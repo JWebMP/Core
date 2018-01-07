@@ -24,7 +24,7 @@ public class DeactivateAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-de-activate=\"jwCntrl.perform($event,[],'za_co_mmagon_jwebswing_events_deactivate_DeactivateAdapterTest$1','za.co.mmagon.jwebswing.events.deactivate.DeactivateAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals("<div id=\"test\" ng-de-activate=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.deactivate.DeactivateAdapterTest$1');\"></div>", test.toString(0));
 	}
 
 	@Test

@@ -58,7 +58,8 @@ public abstract class ActivateAdapter extends Event
 	/**
 	 * Performs a click
 	 *
-	 * @param component The component this click is going to be acting on
+	 * @param component
+	 * 		The component this click is going to be acting on
 	 */
 	public ActivateAdapter(Component component)
 	{
@@ -74,8 +75,8 @@ public abstract class ActivateAdapter extends Event
 	{
 		if (!isConfigured())
 		{
-			JQueryPageConfigurator.setRequired((Component) getComponent(), true);
-			AngularPageConfigurator.setRequired(getComponent(), true);
+			JQueryPageConfigurator.setRequired(true);
+			AngularPageConfigurator.setRequired(true);
 			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
 			getComponent().addAttribute(AngularAttributes.ngActivate, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
@@ -111,8 +112,10 @@ public abstract class ActivateAdapter extends Event
 	 * Triggers on Click
 	 * <p>
 	 *
-	 * @param call     The physical AJAX call
-	 * @param response The physical Ajax Receiver
+	 * @param call
+	 * 		The physical AJAX call
+	 * @param response
+	 * 		The physical Ajax Receiver
 	 */
 	public abstract void onActivate(AjaxCall call, AjaxResponse response);
 
@@ -128,10 +131,12 @@ public abstract class ActivateAdapter extends Event
 			LOG.log(Level.WARNING, "Error In Firing Event", e);
 		}
 	}
-	
+
 	/**
 	 * This object is never equal to another as an event
+	 *
 	 * @param obj
+	 *
 	 * @return
 	 */
 	@Override
@@ -139,9 +144,10 @@ public abstract class ActivateAdapter extends Event
 	{
 		return false;
 	}
-	
+
 	/**
 	 * A hash code
+	 *
 	 * @return
 	 */
 	@Override

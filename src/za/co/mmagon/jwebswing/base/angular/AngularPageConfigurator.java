@@ -21,11 +21,11 @@ import com.google.inject.Singleton;
 import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.PageConfigurator;
-import za.co.mmagon.jwebswing.base.ComponentHTMLAngularBase;
 import za.co.mmagon.jwebswing.base.angular.configurations.AngularConfigurationBase;
 import za.co.mmagon.jwebswing.base.angular.controllers.AngularControllerBase;
 import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 import za.co.mmagon.jwebswing.base.angular.factories.AngularFactoryBase;
+import za.co.mmagon.jwebswing.base.angular.modules.AngularMessagesModule;
 import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
 import za.co.mmagon.jwebswing.plugins.PluginInformation;
 import za.co.mmagon.logger.LogFactory;
@@ -62,6 +62,12 @@ public class AngularPageConfigurator extends PageConfigurator
 
 	public static final String AngularEnabledString = "angular-enabled";
 	private static final Logger log = LogFactory.getLog("Angular Page Configurator");
+	/**
+	 * If the angular functionality is require or not
+	 */
+	private static boolean required;
+
+	private static boolean angularMessagesRequired;
 
 	private static final long serialVersionUID = 1L;
 	/**
@@ -114,13 +120,12 @@ public class AngularPageConfigurator extends PageConfigurator
 	/**
 	 * Sets angular as a required component
 	 *
-	 * @param component
 	 * @param required
 	 */
 	@SuppressWarnings("unchecked")
-	public static void setRequired(ComponentHTMLAngularBase component, boolean required)
+	public static void setRequired(boolean required)
 	{
-		component.getProperties().put(AngularEnabledString, required);
+		AngularPageConfigurator.required = required;
 	}
 
 	@Override
@@ -129,9 +134,13 @@ public class AngularPageConfigurator extends PageConfigurator
 	{
 		if (!page.isConfigured())
 		{
-			if (page.getBody().readChildrenPropertyFirstResult(AngularEnabledString, true))
+			if (required)
 			{
 				page.getBody().getJavascriptReferences().add(AngularReferencePool.Angular1.getJavaScriptReference());
+				if (angularMessagesRequired)
+				{
+					page.getBody().getJavascriptReferences().add(AngularReferencePool.Angular1NGMessages.getJavaScriptReference());
+				}
 				page.getBody().addAttribute(AngularAttributes.ngApp, AngularFeature.getAppName());
 				page.getBody().addAttribute(AngularAttributes.ngController, AngularFeature.getControllerName() + " as jwCntrl");
 			}
@@ -154,6 +163,10 @@ public class AngularPageConfigurator extends PageConfigurator
 		if (angularModules == null)
 		{
 			setAngularModules(new LinkedHashSet<>());
+			if (angularMessagesRequired)
+			{
+				angularModules.add(new AngularMessagesModule());
+			}
 		}
 		return angularModules;
 	}
@@ -334,5 +347,25 @@ public class AngularPageConfigurator extends PageConfigurator
 	public void setAngularConfigurations(@NotNull Set<AngularConfigurationBase> angularConfigurations)
 	{
 		this.angularConfigurations = angularConfigurations;
+	}
+
+	/**
+	 * If angular messages must be included
+	 *
+	 * @return
+	 */
+	public static boolean isAngularMessagesRequired()
+	{
+		return angularMessagesRequired;
+	}
+
+	/**
+	 * If anuglar messages are required
+	 *
+	 * @param angularMessagesRequired
+	 */
+	public static void setAngularMessagesRequired(boolean angularMessagesRequired)
+	{
+		AngularPageConfigurator.angularMessagesRequired = angularMessagesRequired;
 	}
 }

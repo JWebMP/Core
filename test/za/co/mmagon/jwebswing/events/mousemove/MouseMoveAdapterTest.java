@@ -24,7 +24,7 @@ public class MouseMoveAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-mousemove=\"jwCntrl.perform($event,[],'za_co_mmagon_jwebswing_events_mousemove_MouseMoveAdapterTest$1','za.co.mmagon.jwebswing.events.mousemove.MouseMoveAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals("<div id=\"test\" ng-mousemove=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.mousemove.MouseMoveAdapterTest$1');\"></div>", test.toString(0));
 	}
 
 	@Test

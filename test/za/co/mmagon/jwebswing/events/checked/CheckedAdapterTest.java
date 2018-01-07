@@ -24,7 +24,7 @@ public class CheckedAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-checked=\"jwCntrl.perform($event,[],'za_co_mmagon_jwebswing_events_checked_CheckedAdapterTest$1','za.co.mmagon.jwebswing.events.checked.CheckedAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals("<div id=\"test\" ng-checked=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.checked.CheckedAdapterTest$1');\"></div>", test.toString(0));
 	}
 
 	@Test

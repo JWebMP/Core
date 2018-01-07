@@ -228,9 +228,25 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public final J addAttribute(@NotNull A attribute, @NotNull String value)
+	public J addAttribute(@NotNull A attribute, @NotNull String value)
 	{
 		getAttributes().put(attribute.toString(), value);
+		return (J) this;
+	}
+
+	/**
+	 * Adds an attribute with an enum value. The toString() method is read
+	 *
+	 * @param attribute
+	 * @param value
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J addAttribute(@NotNull A attribute, @NotNull Enum value)
+	{
+		getAttributes().put(attribute.toString(), value.toString());
 		return (J) this;
 	}
 

@@ -26,17 +26,19 @@ import za.co.mmagon.jwebswing.utilities.StaticStrings;
 import za.co.mmagon.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_EMPTY;
+
 /**
  * Denotes a specific Web Reference, either remotely or locally
  *
- * @param <T>
+ * @param <J>
  * 		The type implementation
  *
  * @author MMagon
@@ -45,7 +47,7 @@ import java.util.logging.Logger;
  * @version 2.0
  * @since Forever
  */
-public class WebReference<T extends WebReference> implements NamedPair<String, String>, Serializable, Comparator<WebReference>
+public class WebReference<J extends WebReference> implements NamedPair<String, String>, Serializable, Comparator<WebReference>
 {
 
 	private static final Logger LOG = LogFactory.getInstance().getLogger("Web Reference");
@@ -115,6 +117,11 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	 */
 	@JsonIgnore
 	private String remoteReference;
+	/**
+	 * A specified class name that can identify these classes on the html
+	 */
+	@JsonIgnore
+	private String specifiedClassName;
 
 	/**
 	 * Sets this JavaScript Reference with the Name, the Version
@@ -186,7 +193,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	 *
 	 * @return
 	 */
-	public static final boolean isUseMinAtEndOfExtension()
+	public static boolean isUseMinAtEndOfExtension()
 	{
 		return useMinAtEndOfExtension;
 	}
@@ -196,7 +203,7 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	 *
 	 * @param useMinAtEndOfExtension
 	 */
-	public static final void setUseMinAtEndOfExtension(boolean useMinAtEndOfExtension)
+	public static void setUseMinAtEndOfExtension(boolean useMinAtEndOfExtension)
 	{
 		WebReference.useMinAtEndOfExtension = useMinAtEndOfExtension;
 	}
@@ -208,9 +215,10 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public static List<? extends WebReference> sort(List<? extends WebReference> arrayList)
 	{
-		Collections.sort(arrayList, dummyReference);
+		arrayList.sort(dummyReference);
 		return arrayList;
 	}
 
@@ -242,11 +250,13 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	 *
 	 * @return
 	 */
-	public T setLeft(String left)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setLeft(String left)
 	{
 		this.left = left;
 		this.localReference = left;
-		return (T) this;
+		return (J) this;
 	}
 
 	/**
@@ -267,11 +277,13 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	 *
 	 * @return
 	 */
-	public T setRight(String right)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setRight(String right)
 	{
 		this.right = right;
 		this.remoteReference = right;
-		return (T) this;
+		return (J) this;
 	}
 
 	@Override
@@ -314,10 +326,12 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	 *
 	 * @return
 	 */
-	public T setLeftOnly(boolean leftOnly)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setLeftOnly(boolean leftOnly)
 	{
 		this.leftOnly = leftOnly;
-		return (T) this;
+		return (J) this;
 	}
 
 	/**
@@ -337,10 +351,12 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	 *
 	 * @return
 	 */
-	public T setName(String name)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setName(String name)
 	{
 		this.name = name;
-		return (T) this;
+		return (J) this;
 	}
 
 	/**
@@ -360,10 +376,12 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	 *
 	 * @return
 	 */
-	public T setVersion(Double version)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setVersion(Double version)
 	{
 		this.version = version;
-		return (T) this;
+		return (J) this;
 	}
 
 	/**
@@ -383,11 +401,13 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	 *
 	 * @return
 	 */
-	public T setLocalReference(String localReference)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setLocalReference(String localReference)
 	{
 		setLeft(localReference);
 		this.localReference = localReference;
-		return (T) this;
+		return (J) this;
 	}
 
 	/**
@@ -407,11 +427,13 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	 *
 	 * @return
 	 */
-	public T setRemoteReference(String remoteReference)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setRemoteReference(String remoteReference)
 	{
 		setRight(remoteReference);
 		this.remoteReference = remoteReference;
-		return (T) this;
+		return (J) this;
 	}
 
 	/**
@@ -454,10 +476,12 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	 *
 	 * @return
 	 */
-	public final T setSortOrder(Integer sortOrder)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public final J setSortOrder(Integer sortOrder)
 	{
 		this.sortOrder = sortOrder;
-		return (T) this;
+		return (J) this;
 	}
 
 	/**
@@ -477,10 +501,12 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	 *
 	 * @return
 	 */
-	public T setPriority(RequirementsPriority priority)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setPriority(RequirementsPriority priority)
 	{
 		this.priority = priority;
-		return (T) this;
+		return (J) this;
 	}
 
 	/**
@@ -500,10 +526,12 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	 *
 	 * @return
 	 */
-	public T setCanMinifyAtRemote(boolean canMinifyAtRemote)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setCanMinifyAtRemote(boolean canMinifyAtRemote)
 	{
 		this.canMinifyAtRemote = canMinifyAtRemote;
-		return (T) this;
+		return (J) this;
 	}
 
 	/**
@@ -523,10 +551,12 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	 *
 	 * @return
 	 */
-	public T setCordovaRequired(boolean cordovaRequired)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setCordovaRequired(boolean cordovaRequired)
 	{
 		this.cordovaRequired = cordovaRequired;
-		return (T) this;
+		return (J) this;
 	}
 
 	/**
@@ -578,6 +608,26 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 	}
 
 	/**
+	 * A specified class name that can identify these classes on the html
+	 *
+	 * @return
+	 */
+	public String getSpecifiedClassName()
+	{
+		return specifiedClassName;
+	}
+
+	/**
+	 * A specified class name that can identify these classes on the html
+	 *
+	 * @param specifiedClassName
+	 */
+	public void setSpecifiedClassName(String specifiedClassName)
+	{
+		this.specifiedClassName = specifiedClassName;
+	}
+
+	/**
 	 * Renders the actual URL String
 	 *
 	 * @param sb
@@ -594,11 +644,11 @@ public class WebReference<T extends WebReference> implements NamedPair<String, S
 				String url = SessionHelper.getServerPath();
 				if (url == null)
 				{
-					url = "";
+					url = STRING_EMPTY;
 				}
 				else
 				{
-					url += "";
+					url += STRING_EMPTY;
 				}
 				sb = sb.insert(0, url);
 				return sb;

@@ -26,7 +26,6 @@ import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 import za.co.mmagon.jwebswing.utilities.StaticStrings;
@@ -41,16 +40,14 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.*;
 /**
  * Container Class for Events. Splits from the component hierarchy
  *
- * @param <A>
- * 		Ajax Event type object back
  * @param <J>
  * 		This class
  *
  * @author GedMarc
  * @since 23 Apr 2016
  */
-public abstract class Event<A extends JavaScriptPart, J extends Event>
-		extends ComponentEventBase<GlobalFeatures, GlobalEvents, Event<A, J>> implements GlobalEvents
+public abstract class Event<J extends Event<J>>
+		extends ComponentEventBase<GlobalFeatures, GlobalEvents, Event<J>> implements GlobalEvents
 {
 
 	private static final long serialVersionUID = 1L;
@@ -140,6 +137,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	{
 		super(ComponentTypes.Event);
 		setID(getClassCanonicalName());
+		setID(component.getID());
 		setName(name);
 		setComponent(component);
 		setEventType(eventType);
@@ -158,7 +156,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	 * @return
 	 */
 	@Override
-	public Event<A, J> setID(String id)
+	public Event<J> setID(String id)
 	{
 		return super.setID(id.replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE));
 	}
@@ -321,7 +319,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	 * @return
 	 */
 	@Override
-	public Event<A, J> setComponent(ComponentHierarchyBase component)
+	public Event<J> setComponent(ComponentHierarchyBase component)
 	{
 		if (component != null)
 		{
@@ -342,8 +340,8 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 			if (getComponent() != null)
 			{
 				Page p = getComponent().getPage();
-				JQueryPageConfigurator.setRequired(p.getBody(), true);
-				AngularPageConfigurator.setRequired(p.getBody(), true);
+				JQueryPageConfigurator.setRequired(true);
+				AngularPageConfigurator.setRequired(true);
 			}
 		}
 
@@ -366,7 +364,7 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 			return false;
 		}
 
-		Event<?, ?> event = (Event<?, ?>) o;
+		Event<?> event = (Event<?>) o;
 
 		if (!getVariables().equals(event.getVariables()))
 		{
@@ -386,11 +384,6 @@ public abstract class Event<A extends JavaScriptPart, J extends Event>
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + getVariables().hashCode();
-		result = 31 * result + getRunEvents().hashCode();
-		result = 31 * result + getRunFeatures().hashCode();
-		result = 31 * result + getRegisteredComponents().hashCode();
-		return result;
+		return super.hashCode();
 	}
 }

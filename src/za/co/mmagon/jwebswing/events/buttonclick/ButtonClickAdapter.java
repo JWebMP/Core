@@ -62,8 +62,8 @@ public abstract class ButtonClickAdapter extends Event
 	{
 		if (!isConfigured())
 		{
-			JQueryPageConfigurator.setRequired((Component) getComponent(), true);
-			AngularPageConfigurator.setRequired(getComponent(), true);
+			JQueryPageConfigurator.setRequired(true);
+			AngularPageConfigurator.setRequired(true);
 			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
 			getComponent().addAttribute(AngularAttributes.ngButtonClick, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
@@ -115,7 +115,7 @@ public abstract class ButtonClickAdapter extends Event
 	{
 		this.directive = directive;
 	}
-	
+
 	@Override
 	public boolean equals(Object o)
 	{
@@ -134,7 +134,7 @@ public abstract class ButtonClickAdapter extends Event
 		ButtonClickAdapter that = (ButtonClickAdapter) o;
 		return Objects.equals(getComponent(), that.getComponent());
 	}
-	
+
 	@Override
 	public int hashCode()
 	{

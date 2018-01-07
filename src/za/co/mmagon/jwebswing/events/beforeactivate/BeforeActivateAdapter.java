@@ -45,7 +45,7 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRAC
 public abstract class BeforeActivateAdapter extends Event
 		implements GlobalEvents
 {
-	
+
 	/**
 	 * Logger for the Component
 	 */
@@ -55,7 +55,7 @@ public abstract class BeforeActivateAdapter extends Event
 	 * The directive for this adapter
 	 */
 	private BeforeActivateDirective directive;
-	
+
 	/**
 	 * Performs a click
 	 *
@@ -64,9 +64,9 @@ public abstract class BeforeActivateAdapter extends Event
 	public BeforeActivateAdapter(Component component)
 	{
 		super(EventTypes.beforeActivate, component);
-		
+
 	}
-	
+
 	/**
 	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
 	 */
@@ -75,14 +75,14 @@ public abstract class BeforeActivateAdapter extends Event
 	{
 		if (!isConfigured())
 		{
-			JQueryPageConfigurator.setRequired((Component) getComponent(), true);
-			AngularPageConfigurator.setRequired(getComponent(), true);
+			JQueryPageConfigurator.setRequired(true);
+			AngularPageConfigurator.setRequired(true);
 			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
 			getComponent().addAttribute(AngularAttributes.ngBeforeActivate, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
 		super.preConfigure();
 	}
-	
+
 	/**
 	 * Returns the angular directive associated with the right click event
 	 *
@@ -97,7 +97,7 @@ public abstract class BeforeActivateAdapter extends Event
 		}
 		return directive;
 	}
-	
+
 	/**
 	 * Sets the right click angular event
 	 *
@@ -107,7 +107,7 @@ public abstract class BeforeActivateAdapter extends Event
 	{
 		this.directive = directive;
 	}
-	
+
 	/**
 	 * Triggers on Click
 	 * <p>
@@ -116,7 +116,7 @@ public abstract class BeforeActivateAdapter extends Event
 	 * @param response The physical Ajax Receiver
 	 */
 	public abstract void onBeforeActivate(AjaxCall call, AjaxResponse response);
-	
+
 	@Override
 	public void fireEvent(AjaxCall call, AjaxResponse response)
 	{
@@ -129,7 +129,7 @@ public abstract class BeforeActivateAdapter extends Event
 			LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
-	
+
 	@Override
 	public boolean equals(Object o)
 	{
@@ -148,7 +148,7 @@ public abstract class BeforeActivateAdapter extends Event
 		BeforeActivateAdapter that = (BeforeActivateAdapter) o;
 		return Objects.equals(getComponent(), that.getComponent());
 	}
-	
+
 	@Override
 	public int hashCode()
 	{

@@ -24,7 +24,7 @@ public class ResizeAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-resize=\"jwCntrl.perform($event,[],'za_co_mmagon_jwebswing_events_resize_ResizeAdapterTest$1','za.co.mmagon.jwebswing.events.resize.ResizeAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals("<div id=\"test\" ng-resize=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.resize.ResizeAdapterTest$1');\"></div>", test.toString(0));
 	}
 
 	@Test

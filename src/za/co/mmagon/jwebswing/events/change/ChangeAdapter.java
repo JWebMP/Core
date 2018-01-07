@@ -69,7 +69,7 @@ public abstract class ChangeAdapter extends Event
 		if (!isConfigured())
 		{
 
-			AngularPageConfigurator.setRequired(getComponent(), true);
+			AngularPageConfigurator.setRequired(true);
 			getComponent().addAttribute(AngularAttributes.ngChange, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
 		super.preConfigure();

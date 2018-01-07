@@ -16,7 +16,6 @@
  */
 package za.co.mmagon.jwebswing.plugins.jquery;
 
-import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.PageConfigurator;
 import za.co.mmagon.jwebswing.base.client.BrowserGroups;
@@ -48,6 +47,9 @@ public class JQueryPageConfigurator extends PageConfigurator
 {
 
 	private static final long serialVersionUID = 1L;
+
+	private static boolean required;
+
 	/**
 	 * String property denoting JQuery is enabled on a page
 	 */
@@ -69,9 +71,9 @@ public class JQueryPageConfigurator extends PageConfigurator
 	 * @param required
 	 */
 	@SuppressWarnings("unchecked")
-	public static void setRequired(Component component, Boolean required)
+	public static void setRequired(boolean required)
 	{
-		component.getProperties().put(JQueryEnabledString, required.toString());
+		JQueryPageConfigurator.required = required;
 	}
 
 	/**
@@ -103,7 +105,7 @@ public class JQueryPageConfigurator extends PageConfigurator
 			{
 				page.getBody().addJavaScriptReference(JQueryReferencePool.PersistJS.getJavaScriptReference());
 			}
-			if (page.getBody().readChildrenPropertyFirstResult(JQueryEnabledString, true))
+			if (required)
 			{
 				if (page.getBrowser() != null)
 				{

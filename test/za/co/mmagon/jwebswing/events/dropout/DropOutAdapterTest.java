@@ -24,7 +24,7 @@ public class DropOutAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-drop-out=\"jwCntrl.perform($event,[],'za_co_mmagon_jwebswing_events_dropout_DropOutAdapterTest$1','za.co.mmagon.jwebswing.events.dropout.DropOutAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals("<div id=\"test\" ng-drop-out=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.dropout.DropOutAdapterTest$1');\"></div>", test.toString(0));
 	}
 
 	@Test

@@ -17,6 +17,7 @@ public interface StaticStrings extends Serializable
 	String STRING_FORWARD_SLASH = "/";
 	String STRING_BACK_SLASH = "\\";
 	String STRING_TAB = "\t";
+	String STRING_DOLLAR = "$";
 	String STRING_EQUALS = "=";
 	String STRING_NEWLINE_TEXT = "\n";
 	String STRING_SINGLE_QUOTES = "'";
@@ -39,6 +40,7 @@ public interface StaticStrings extends Serializable
 	String STRING_CLOSING_BRACKET_SEMICOLON = ");";
 
 	String STRING_ANGULAR_EVENT_START = "jwCntrl.perform($event,";
+	String STRING_ANGULAR_EVENT_START_SHORT = "perform($event,";
 
 	char CHAR_SPACE = ' ';
 	char CHAR_DOT = '.';
@@ -69,7 +71,7 @@ public interface StaticStrings extends Serializable
 	String ACCESS_CONTROL_ALLOW_METHODS_HEADER_NAME = "Access-Control-Allow-Methods";
 	String ACCESS_CONTROL_ALLOW_HEADERS_HEADER_NAME = "Access-Control-Allow-Headers";
 
-	String DEFAULT_DATE_TIME_PATTERN ="yyyy-MM-dd HH:mm:ss";
+	String DEFAULT_DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
 	String STRING_SELECTED = "selected";
 

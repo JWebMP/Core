@@ -24,7 +24,7 @@ public class MouseOverAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-mouseover=\"jwCntrl.perform($event,[],'za_co_mmagon_jwebswing_events_mouseover_MouseOverAdapterTest$1','za.co.mmagon.jwebswing.events.mouseover.MouseOverAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals("<div id=\"test\" ng-mouseover=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.mouseover.MouseOverAdapterTest$1');\"></div>", test.toString(0));
 	}
 
 	@Test

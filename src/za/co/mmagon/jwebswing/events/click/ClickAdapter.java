@@ -40,10 +40,10 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRAC
  *
  * @author Marc Magon
  */
-public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
+public abstract class ClickAdapter extends Event<ClickAdapter>
 		implements ParagraphEvents, BodyEvents, GlobalEvents
 {
-	
+
 	/**
 	 * Logger for the Component
 	 */
@@ -51,12 +51,12 @@ public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
 			url = "https://www.armineasy.com/JWebSwing", wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
 	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("ClickEvent");
 	private static final long serialVersionUID = 1L;
-	
+
 	protected ClickAdapter()
 	{
 		super("ClickAdapter", EventTypes.click);
 	}
-	
+
 	/**
 	 * Performs a click
 	 *
@@ -66,7 +66,7 @@ public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
 	{
 		super(EventTypes.click, component);
 	}
-	
+
 	@Override
 	public void preConfigure()
 	{
@@ -82,7 +82,7 @@ public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
 
 		super.preConfigure();
 	}
-	
+
 	/**
 	 * Triggers on Click
 	 * <p>
@@ -91,7 +91,7 @@ public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
 	 * @param response The physical Ajax Receiver
 	 */
 	public abstract void onClick(AjaxCall call, AjaxResponse response) throws InvalidAttributeValueException;
-	
+
 	@Override
 	public void fireEvent(AjaxCall call, AjaxResponse response)
 	{
@@ -104,5 +104,5 @@ public abstract class ClickAdapter extends Event<JavaScriptPart, ClickAdapter>
 			log.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
-	
+
 }

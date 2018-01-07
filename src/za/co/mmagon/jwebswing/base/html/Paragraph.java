@@ -133,7 +133,7 @@ public class Paragraph<J extends Paragraph<J>>
 	@Override
 	public J bind(String variableName)
 	{
-		AngularPageConfigurator.setRequired(this, true);
+		AngularPageConfigurator.setRequired(true);
 		if (variableName.contains("{{"))
 		{
 			setText(getText(0) + variableName);

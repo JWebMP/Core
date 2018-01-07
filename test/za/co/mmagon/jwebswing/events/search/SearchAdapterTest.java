@@ -24,7 +24,7 @@ public class SearchAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-search=\"jwCntrl.perform($event,[],'za_co_mmagon_jwebswing_events_search_SearchAdapterTest$1','za.co.mmagon.jwebswing.events.search.SearchAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals("<div id=\"test\" ng-search=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.search.SearchAdapterTest$1');\"></div>", test.toString(0));
 	}
 
 	@Test

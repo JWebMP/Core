@@ -24,7 +24,7 @@ public class SelectAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-select=\"jwCntrl.perform($event,[],'za_co_mmagon_jwebswing_events_select_SelectAdapterTest$1','za.co.mmagon.jwebswing.events.select.SelectAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals("<div id=\"test\" ng-select=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.select.SelectAdapterTest$1');\"></div>", test.toString(0));
 	}
 
 	@Test

@@ -19,7 +19,6 @@ package za.co.mmagon.jwebswing.base.html;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
-import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
@@ -28,6 +27,9 @@ import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+
+import static za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes.Name;
+import static za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes.Type;
 
 /**
  * Please note I have left out all the input type attributes that are not cross-browser - rather use the features available.<p>
@@ -100,12 +102,11 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	public Input(InputTypes inputType)
 	{
 		super(ComponentTypes.Input);
-
 		if (inputType != null)
-
 		{
 			this.inputType = inputType;
-			addAttribute(GlobalAttributes.Type, getInputType().name().toLowerCase());
+			addAttribute(Type, getInputType().name().toLowerCase());
+			addAttribute(Name, getID());
 		}
 		setClosingTag(false);
 	}
@@ -132,7 +133,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	public J setInputType(InputTypes inputType)
 	{
 		this.inputType = inputType;
-		addAttribute(GlobalAttributes.Type, inputType.toString());
+		addAttribute(Type, inputType.toString());
 		return (J) this;
 	}
 
@@ -166,7 +167,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	@Override
 	public J bind(String variableName)
 	{
-		AngularPageConfigurator.setRequired(this, true);
+		AngularPageConfigurator.setRequired(true);
 		addAttribute(AngularAttributes.ngModel, variableName);
 		return (J) this;
 	}

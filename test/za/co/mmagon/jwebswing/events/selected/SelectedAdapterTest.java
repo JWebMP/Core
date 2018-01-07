@@ -23,7 +23,7 @@ public class SelectedAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<option label=\"optionValue\" value=\"optionValue\" id=\"test\" ng-selected=\"jwCntrl.perform($event,[],'za_co_mmagon_jwebswing_events_selected_SelectedAdapterTest$1','za.co.mmagon.jwebswing.events.selected.SelectedAdapterTest$1');\">optionValue</option>", test.toString(0));
+		Assertions.assertEquals("<option label=\"optionValue\" value=\"optionValue\" id=\"test\" ng-selected=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.selected.SelectedAdapterTest$1');\">optionValue</option>", test.toString(0));
 	}
 
 	@Test

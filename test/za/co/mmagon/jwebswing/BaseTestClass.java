@@ -16,7 +16,10 @@
  */
 package za.co.mmagon.jwebswing;
 
+import org.junit.jupiter.api.BeforeAll;
+import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.html.Body;
+import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -29,17 +32,26 @@ import java.io.IOException;
  */
 public class BaseTestClass
 {
-	
+
 	public BaseTestClass()
 	{
-	
+
 	}
-	
+
+	@BeforeAll
+	public static void beforeAll()
+	{
+		System.out.println("Reseting Instance");
+		JQueryPageConfigurator.setRequired(false);
+		AngularPageConfigurator.setRequired(false);
+		AngularPageConfigurator.setAngularMessagesRequired(false);
+	}
+
 	public Page getInstance()
 	{
 		return resetInstance();
 	}
-	
+
 	public Page resetInstance()
 	{
 		soutDivider();
@@ -50,17 +62,17 @@ public class BaseTestClass
 		page.getOptions().setDynamicRender(false);
 		return page;
 	}
-	
+
 	public void soutDivider()
 	{
 		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<===============================================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 	}
-	
+
 	public Page getPage()
 	{
 		return resetInstance();
 	}
-	
+
 	protected void writeValuesToFile(String expected, String rendered)
 	{
 		try (FileWriter fw = new FileWriter("c:/temp/equalsText.txt"))
@@ -74,7 +86,7 @@ public class BaseTestClass
 			System.out.println("Couldn't write to file");
 		}
 	}
-	
+
 	public Feature getFeature()
 	{
 		Feature f = new Feature("Test Feature")

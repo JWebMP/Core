@@ -29,7 +29,7 @@ import za.co.mmagon.jwebswing.base.html.DivSimple;
  */
 public class ClickAdapterTest extends BaseTestClass
 {
-	
+
 	public ClickAdapterTest()
 	{
 	}
@@ -48,7 +48,7 @@ public class ClickAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-click=\"jwCntrl.jw.isLoading || jwCntrl.perform($event,[],'za_co_mmagon_jwebswing_events_click_ClickAdapterTest$1','za.co.mmagon.jwebswing.events.click.ClickAdapterTest$1');\" ng-disabled=\"jwCntrl.jw.isLoading\"></div>", test.toString(0));
+		Assertions.assertEquals("<div id=\"test\" ng-click=\"jwCntrl.jw.isLoading || jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.click.ClickAdapterTest$1');\" ng-disabled=\"jwCntrl.jw.isLoading\"></div>", test.toString(0));
 	}
 
 	@Test

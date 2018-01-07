@@ -24,7 +24,7 @@ public class CompleteAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-complete=\"jwCntrl.perform($event,[],'za_co_mmagon_jwebswing_events_complete_CompleteAdapterTest$1','za.co.mmagon.jwebswing.events.complete.CompleteAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals("<div id=\"test\" ng-complete=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.complete.CompleteAdapterTest$1');\"></div>", test.toString(0));
 	}
 
 	@Test

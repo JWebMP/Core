@@ -24,7 +24,7 @@ public class SortAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-sort=\"jwCntrl.perform($event,[],'za_co_mmagon_jwebswing_events_sort_SortAdapterTest$1','za.co.mmagon.jwebswing.events.sort.SortAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals("<div id=\"test\" ng-sort=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.sort.SortAdapterTest$1');\"></div>", test.toString(0));
 	}
 
 	@Test

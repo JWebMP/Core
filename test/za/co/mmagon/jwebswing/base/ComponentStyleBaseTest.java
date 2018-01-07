@@ -33,7 +33,7 @@ import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 public class ComponentStyleBaseTest
 		extends BaseTestClass
 {
-	
+
 	public ComponentStyleBaseTest()
 	{
 	}
@@ -51,20 +51,20 @@ public class ComponentStyleBaseTest
 		System.out.println(head.toString(true));
 		System.out.println(body.toString(true));
 	}
-	
+
 	@Test
 	public void testCSS()
 	{
 		Page p = getPage();
 		Body b = p.getBody();
-		
+
 		b.getCss().getBackground().setBackgroundColor$(ColourNames.DarkGoldenRod);
 		b.add(new Comment("asdf"));
 		//System.out.println(p.toString(true));
 		p.getOptions().setDynamicRender(true);
-		JQueryPageConfigurator.setRequired(p.getBody(), false);
-		AngularPageConfigurator.setRequired(p.getBody(), false);
-		
+		JQueryPageConfigurator.setRequired(false);
+		AngularPageConfigurator.setRequired(false);
+
 		if (p.toString(true).startsWith("<!DOCTYPE html>\n" +
 				                                "<html>\n" +
 				                                "\t<head>\n" +
@@ -73,8 +73,8 @@ public class ComponentStyleBaseTest
 				                                "\t<body id=\"body\" ng-app=\"jwApp\" ng-controller=\"jwController as jwCntrl\">"))
 		{
 		}
-		
-		
+
+
 		/*Assertions.assertEquals("<!DOCTYPE html>\n"
 				                    + "<html>\n"
 				                    + "	<head>\n"

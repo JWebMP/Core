@@ -24,7 +24,7 @@ public class ResponseAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-response=\"jwCntrl.perform($event,[],'za_co_mmagon_jwebswing_events_response_ResponseAdapterTest$1','za.co.mmagon.jwebswing.events.response.ResponseAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals("<div id=\"test\" ng-response=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.response.ResponseAdapterTest$1');\"></div>", test.toString(0));
 	}
 
 	@Test

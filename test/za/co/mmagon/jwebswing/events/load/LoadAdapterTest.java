@@ -25,7 +25,7 @@ public class LoadAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-load=\"jwCntrl.perform($event,[],'za_co_mmagon_jwebswing_events_load_LoadAdapterTest$1','za.co.mmagon.jwebswing.events.load.LoadAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals("<div id=\"test\" ng-load=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.load.LoadAdapterTest$1');\"></div>", test.toString(0));
 	}
 
 	@Test

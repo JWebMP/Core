@@ -69,8 +69,8 @@ public abstract class BlurAdapter extends Event
 	{
 		if (!isConfigured())
 		{
-			JQueryPageConfigurator.setRequired((Component) getComponent(), true);
-			AngularPageConfigurator.setRequired(getComponent(), true);
+			JQueryPageConfigurator.setRequired( true);
+			AngularPageConfigurator.setRequired(true);
 			getComponent().addAttribute(AngularAttributes.ngBlur, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
 		super.preConfigure();
