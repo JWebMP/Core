@@ -30,6 +30,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
 import static za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes.Name;
 import static za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes.Type;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_EMPTY;
 
 /**
  * Please note I have left out all the input type attributes that are not cross-browser - rather use the features available.<p>
@@ -130,6 +131,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public J setInputType(InputTypes inputType)
 	{
 		this.inputType = inputType;
@@ -157,6 +159,13 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		super.preConfigure();
 	}
 
+	@Override
+	public J setID(String id)
+	{
+		addAttribute(Name, getID());
+		return super.setID(id);
+	}
+
 	/**
 	 * Push to model instead of bind
 	 *
@@ -165,6 +174,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	 * @return
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public J bind(String variableName)
 	{
 		AngularPageConfigurator.setRequired(true);
@@ -177,9 +187,10 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public J setRequired()
 	{
-		addAttribute("required", "");
+		addAttribute("required", STRING_EMPTY);
 		return (J) this;
 	}
 
@@ -190,6 +201,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public J setMinimumLength(int minLength)
 	{
 		addAttribute("data-minlength", Integer.toString(minLength));
@@ -204,6 +216,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public J setMaximumLength(int minLength)
 	{
 		addAttribute("data-maxlength", Integer.toString(minLength));
@@ -218,6 +231,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public J setPlaceholder(String placeholder)
 	{
 		addAttribute("placeholder", placeholder);
@@ -231,6 +245,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public J setValue(String value)
 	{
 		addAttribute("value", value);
@@ -244,6 +259,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public J setPattern(String angularPatternName)
 	{
 		addAttribute(AngularAttributes.ngPattern, angularPatternName);
@@ -257,6 +273,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public J setPattern(String pattern, boolean raw)
 	{
 		if (raw)
