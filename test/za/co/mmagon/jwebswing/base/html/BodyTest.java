@@ -55,9 +55,9 @@ public class BodyTest extends BaseTestClass
 	@Test
 	public void testSetGenerateJQuery()
 	{
+		p = getInstance();
 		resetBody();
 		JQueryPageConfigurator.setRequired(true);
-		new JQueryPageConfigurator().configure(getPage());
 		b.add(new Comment("meh"));
 		WebReference.setIsLocal(true);
 		System.out.println(p.toString(true));
