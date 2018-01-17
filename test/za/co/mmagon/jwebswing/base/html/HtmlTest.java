@@ -3,7 +3,9 @@ package za.co.mmagon.jwebswing.base.html;
 import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.BaseTestClass;
 import za.co.mmagon.jwebswing.Page;
+import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.client.Browsers;
+import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -52,7 +54,8 @@ public class HtmlTest extends BaseTestClass
 	@Test
 	public void testOutput()
 	{
-
+		JQueryPageConfigurator.setRequired(false);
+		AngularPageConfigurator.setRequired(false);
 		//System.out.println("testOutput");
 		Html instance = new HtmlImpl();
 		instance.setBrowser(Browsers.Firefox19);
