@@ -63,6 +63,7 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SPACE;
  * @author GedMarc
  * @since 24 Apr 2016
  */
+@SuppressWarnings("unchecked")
 public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHierarchyBase<C, A, F, E, J>>
 		extends ComponentThemeBase<A, F, E, J>
 		implements IComponentHierarchyBase<C, J>, GlobalChildren

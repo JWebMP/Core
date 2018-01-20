@@ -2,22 +2,22 @@
     /**
      * All Modules
      */
-    JW_MODULES
+    JW_MODULES;
 
     /**
      * All Directives
      */
-    JW_DIRECTIVES
+    JW_DIRECTIVES;
 
     /**
      * All Factories
      */
-    JW_FACTORIES
+    JW_FACTORIES;
 
     /**
      * All Controllers
      */
-    JW_CONTROLLERS
+    JW_CONTROLLERS;
 
     /**
      * All Configurations

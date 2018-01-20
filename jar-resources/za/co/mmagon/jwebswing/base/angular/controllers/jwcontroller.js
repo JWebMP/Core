@@ -1,4 +1,4 @@
-/* global JW_APP_NAME, BootstrapDialog, Pace, JW_SCOPE_INSERTIONS, jw */
+/* global JW_APP_NAME, BootstrapDialog, Pace, JW_SCOPE_INSERTIONS, jw, JW_WATCHERS */
 
 jw.afterInit = function () {
 };
@@ -140,8 +140,9 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
         article.value = eventStuff;
         article.eventId = eventId;
         article.className = className;
-
         article.variableData = [];
+
+
         for (var i = 0; i < dataVariables.length; i++) {
             var arrItem = dataVariables[i];
             try {
@@ -157,6 +158,8 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
                 console.log("Unable to find variable " + arrItem);
             }
         }
+
+
         //PACE_TRACK_START
         $.ajax({
             type: "POST",
@@ -232,6 +235,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
         });
         //PACE_TRACK_END
     };
+
     /**
      * The event object that gets sent through
      * @param {type} $event jquery event
@@ -239,7 +243,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
      */
     $scope.getEventObject = function ($event) {
         var newEvent = {};
-        if ($event !== null) {
+        if ($event !== undefined) {
             newEvent.altKey = $event.altKey;
             newEvent.ctrlKey = $event.ctrlKey;
             newEvent.bubbles = $event.bubbles;
@@ -267,5 +271,6 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
 
     JW_SCOPE_INSERTIONS;
 
+    JW_WATCHERS;
     //jw.pageLoading = false;
 }); //end of controller

@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.inject.servlet.RequestScoped;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.base.angular.AngularVariableWatcher;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 
@@ -71,6 +72,10 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J> implement
 	 */
 	private Set<AngularJsonVariable> variableData;
 	/**
+	 * Is an incoming string of angular data
+	 */
+	private Set<AngularVariableWatcher> variableWatchers;
+	/**
 	 * The event ID
 	 */
 	private String eventId;
@@ -94,12 +99,16 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J> implement
 	/**
 	 * Creates a valid AJAX call object that can be processed
 	 *
-	 * @param componentId   The component ID
-	 * @param datetime      The Date Time
-	 * @param eventType     The ComponentEventBase Type
-	 * @param eventTypeFrom The ComponentEventBase Type From
-	 * @param value         The Value
-	 *
+	 * @param componentId
+	 * 		The component ID
+	 * @param datetime
+	 * 		The Date Time
+	 * @param eventType
+	 * 		The ComponentEventBase Type
+	 * @param eventTypeFrom
+	 * 		The ComponentEventBase Type From
+	 * @param value
+	 * 		The Value
 	 */
 	public AjaxCall(String componentId, Date datetime, String eventType, String eventTypeFrom, AjaxEventValue value)
 	{
@@ -130,7 +139,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J> implement
 		setValue(incoming.getValue());
 		setVariableData(incoming.getVariableData());
 		setClassName(incoming.getClassName());
-		return (J)this;
+		return (J) this;
 	}
 
 	@Override
@@ -144,7 +153,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J> implement
 	public J setComponent(ComponentHierarchyBase component)
 	{
 		this.component = component;
-		return (J)this;
+		return (J) this;
 	}
 
 	@Override
@@ -158,7 +167,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J> implement
 	public J setComponentId(String componentId)
 	{
 		this.componentId = componentId;
-		return (J)this;
+		return (J) this;
 	}
 
 	@Override
@@ -172,7 +181,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J> implement
 	public J setDatetime(Date datetime)
 	{
 		this.datetime = datetime;
-		return (J)this;
+		return (J) this;
 	}
 
 	@Override
@@ -186,7 +195,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J> implement
 	public J setEventId(String eventId)
 	{
 		this.eventId = eventId;
-		return (J)this;
+		return (J) this;
 	}
 
 	@Override
@@ -200,7 +209,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J> implement
 	public J setEventType(EventTypes eventType)
 	{
 		this.eventType = eventType;
-		return (J)this;
+		return (J) this;
 	}
 
 	@Override
@@ -219,7 +228,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J> implement
 	public J setEventTypeFrom(EventTypes eventTypeFrom)
 	{
 		this.eventTypeFrom = eventTypeFrom;
-		return (J)this;
+		return (J) this;
 	}
 
 	@Override
@@ -246,7 +255,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J> implement
 	public J setValue(AjaxEventValue value)
 	{
 		this.value = value;
-		return (J)this;
+		return (J) this;
 	}
 
 	@Override
@@ -255,7 +264,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J> implement
 	public J setVariableData(Set<AngularJsonVariable> variableData)
 	{
 		this.variableData = variableData;
-		return (J)this;
+		return (J) this;
 	}
 
 	@Override
@@ -274,7 +283,7 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J> implement
 	public J setParameters(Map<String, String> parameters)
 	{
 		this.parameters = parameters;
-		return (J)this;
+		return (J) this;
 	}
 
 	@Override
@@ -290,6 +299,36 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J> implement
 	public J setClassName(String className)
 	{
 		this.className = className;
-		return (J)this;
+		return (J) this;
+	}
+
+	/**
+	 * Returns a list of variable angular watchers to apply on the ajax call.
+	 * Good for on binding changes
+	 *
+	 * @return
+	 */
+	public Set<AngularVariableWatcher> getVariableWatchers()
+	{
+		if (variableWatchers == null)
+		{
+			variableWatchers = new LinkedHashSet<>();
+		}
+		return variableWatchers;
+	}
+
+	/**
+	 * Sets the variable watchers list to a new list
+	 *
+	 * @param variableWatchers
+	 *
+	 * @return
+	 */
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setVariableWatchers(Set<AngularVariableWatcher> variableWatchers)
+	{
+		this.variableWatchers = variableWatchers;
+		return (J) this;
 	}
 }

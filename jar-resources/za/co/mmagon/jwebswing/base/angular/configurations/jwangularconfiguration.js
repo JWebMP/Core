@@ -1,4 +1,4 @@
 JW_APP_NAME.config([
-    '$httpProvider', 'fileUploadProvider','$scope',
+    '$httpProvider', 'fileUploadProvider', '$scope',
     ANGULAR_CONFIG_FUNCTION
 ]);

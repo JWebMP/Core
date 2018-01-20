@@ -110,6 +110,12 @@ public class AngularPageConfigurator extends PageConfigurator
 	private Set<String> angularVariables;
 
 	/**
+	 * A set of event data event watchers
+	 */
+	private Set<AngularVariableWatcher> angularWatchers;
+
+
+	/**
 	 * Configures the angular page
 	 */
 	@SuppressWarnings("")
@@ -382,5 +388,29 @@ public class AngularPageConfigurator extends PageConfigurator
 	public static boolean isRequired()
 	{
 		return required;
+	}
+
+	/**
+	 * Gets the list of angular watchers
+	 *
+	 * @return
+	 */
+	public Set<AngularVariableWatcher> getAngularWatchers()
+	{
+		if (angularWatchers == null)
+		{
+			angularWatchers = new LinkedHashSet<>();
+		}
+		return angularWatchers;
+	}
+
+	/**
+	 * Gets the list of angular watchers
+	 *
+	 * @param angularWatchers
+	 */
+	public void setAngularWatchers(@NotNull Set<AngularVariableWatcher> angularWatchers)
+	{
+		this.angularWatchers = angularWatchers;
 	}
 }

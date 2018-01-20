@@ -73,6 +73,9 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 	 */
 	@JsonIgnore
 	private final JWAngularController jwAngularController;
+	/**
+	 * The linked page for this feature
+	 */
 	private final Page page;
 
 	/**
@@ -200,7 +203,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 	 * <p>
 	 * Configures the base template variables. Override the method to add your own (keep call to super)
 	 */
-	public void configureTemplateVariables()
+	protected void configureTemplateVariables()
 	{
 		FileTemplates.getTemplateVariables().put("JW_APP_NAME", new StringBuilder(getAppName()));
 		FileTemplates.getTemplateVariables().put("JW_MODULES", new StringBuilder(compileModules()));
@@ -208,6 +211,8 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 		FileTemplates.getTemplateVariables().put("JW_CONFIGURATIONS", new StringBuilder(compileConfigurations()));
 		FileTemplates.getTemplateVariables().put("JW_DIRECTIVES", new StringBuilder(compileDirectives()));
 		FileTemplates.getTemplateVariables().put("JW_APP_CONTROLLER", new StringBuilder(getControllerName()));
+
+		FileTemplates.getTemplateVariables().put("JW_WATCHERS", compileWatchers());
 
 		FileTemplates.getTemplateVariables().put("//%CONTROLLER_INSERTIONS%", new StringBuilder(compileControllerInsertions()));
 
@@ -221,7 +226,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 	 * @return
 	 */
 	@NotNull
-	public StringBuilder compileModules()
+	private StringBuilder compileModules()
 	{
 		StringBuilder output = new StringBuilder();
 		List<AngularModuleBase> angulars = new ArrayList<>();
@@ -236,28 +241,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 	 * @return
 	 */
 	@NotNull
-	public StringBuilder compileConfigurations()
-	{
-		StringBuilder output = new StringBuilder();
-		List<AngularConfigurationBase> angulars = new ArrayList<>();
-		angulars.addAll(getPage().getAngular().getAngularConfigurations());
-		angulars.forEach(directive ->
-		                 {
-			                 String function = directive.renderFunction();
-			                 StringBuilder configurations = FileTemplates.compileTemplate(directive.getReferenceName(), function);
-			                 configurations.append(STRING_NEWLINE_TEXT + STRING_TAB);
-			                 output.append(configurations);
-		                 });
-		return output;
-	}
-
-	/**
-	 * Builds up the directives from all the present children
-	 *
-	 * @return
-	 */
-	@NotNull
-	public StringBuilder compileFactories()
+	private StringBuilder compileFactories()
 	{
 		StringBuilder output = new StringBuilder();
 		List<AngularFactoryBase> angulars = new ArrayList<>();
@@ -278,7 +262,28 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 	 * @return
 	 */
 	@NotNull
-	public StringBuilder compileDirectives()
+	private StringBuilder compileConfigurations()
+	{
+		StringBuilder output = new StringBuilder();
+		List<AngularConfigurationBase> angulars = new ArrayList<>();
+		angulars.addAll(getPage().getAngular().getAngularConfigurations());
+		angulars.forEach(directive ->
+		                 {
+			                 String function = directive.renderFunction();
+			                 StringBuilder configurations = FileTemplates.compileTemplate(directive.getReferenceName(), function);
+			                 configurations.append(STRING_NEWLINE_TEXT + STRING_TAB);
+			                 output.append(configurations);
+		                 });
+		return output;
+	}
+
+	/**
+	 * Builds up the directives from all the present children
+	 *
+	 * @return
+	 */
+	@NotNull
+	private StringBuilder compileDirectives()
 	{
 		StringBuilder output = new StringBuilder();
 		List<AngularDirectiveBase> angulars = new ArrayList<>();
@@ -293,13 +298,20 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 		return output;
 	}
 
+	private StringBuilder compileWatchers()
+	{
+		StringBuilder output = new StringBuilder();
+		getPage().getAngular().getAngularWatchers().forEach(module -> output.append(FileTemplates.compileTemplate("AngularWatchVariable" + module.getWatchName(), module.toString())));
+		return output;
+	}
+
 	/**
 	 * Creates the controller insertion
 	 *
 	 * @return
 	 */
 	@NotNull
-	public StringBuilder compileControllerInsertions()
+	private StringBuilder compileControllerInsertions()
 	{
 		StringBuilder output = new StringBuilder();
 		if (!getPage().getAngular().getControllerInsertions().isEmpty())
@@ -317,7 +329,7 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 	 * @return
 	 */
 	@NotNull
-	public StringBuilder compileControllers()
+	private StringBuilder compileControllers()
 	{
 		StringBuilder output = new StringBuilder();
 		List<AngularControllerBase> angulars = new ArrayList<>();
