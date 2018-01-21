@@ -4,6 +4,9 @@ import za.co.mmagon.jwebswing.Event;
 
 import java.io.Serializable;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.CHAR_DOT;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.CHAR_UNDERSCORE;
+
 /**
  * Denotes an angular variable to watch with an event class mapped
  */
@@ -59,6 +62,10 @@ public class AngularVariableWatcher implements Serializable
 				       "function(scope){return scope." + variableName + ";}," +
 				       "function(newValue,oldValue){" +
 
+				       "jwCntrl.jw.isLoading || jwCntrl.perform(null" +
+				       ",[{'old':oldValue,'new':newValue}]," +
+				       "'AngularWatchEvent'," +
+				       "'" + eventClass.getCanonicalName().replace(CHAR_DOT, CHAR_UNDERSCORE) + "');" +
 				       "});";
 	}
 }
