@@ -25,14 +25,14 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 public enum JQueryReferencePool
 {
 	PersistJS(new JavascriptReference("PersistJS", 1.0, "persist-js/persist-all-min.js", -10).setPriority(RequirementsPriority.Top_Shelf)),
-	
+
 	JQuery(new JQueryReference()),
 	JQueryV2(new JavascriptReference("JQuery", 2.24, "bower_components/jquery/dist/jquery.js", "https://code.jquery.com/jquery-2.2.4.js").setPriority(RequirementsPriority.First)),
-	
-	JQueryV3(new JavascriptReference("Jquery3", 3.1, "bower_components/jquery-3/dist/jquery.min.js", "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js", 0, RequirementsPriority.First).setCordovaRequired(true)),
-	
+
+	JQueryV3(new JavascriptReference("Jquery3", 3.1, "bower_components/jquery-3/dist/core.min.js", "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js", 0, RequirementsPriority.First).setCordovaRequired(true)),
+
 	JQueryMigrate(new JQueryMigrateReference()),
-	
+
 	JQXWidgetFixes(new JavascriptReference("JQXWidgetFix", 1.0, "javascript/jwebswing/jqxfixes.js", 8));
 
     /*
@@ -41,17 +41,17 @@ public enum JQueryReferencePool
      * JQueryRightClickHandler(new JQueryRightClickHandlerReference()), JQueryScrollBars(new JWDataTablesJavaScriptReference()),
      *
      */
-	
+
 	private final JavascriptReference reference;
-	
+
 	JQueryReferencePool(JavascriptReference reference)
 	{
 		this.reference = reference;
 	}
-	
+
 	public JavascriptReference getJavaScriptReference()
 	{
 		return reference;
 	}
-	
+
 }
