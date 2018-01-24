@@ -1,5 +1,3 @@
-/* global JW_APP_NAME, BootstrapDialog, Pace, JW_SCOPE_INSERTIONS, jw, JW_WATCHERS */
-
 jw.afterInit = function () {
 };
 
