@@ -329,7 +329,7 @@ public class Page<J extends Page<J>> extends Html<J> implements IPage
 
 		if (!isConfigured())
 		{
-			log.log(Level.FINE, "Looking for plugins....");
+			log.log(Level.FINER, "Looking for plugins....");
 			Set<Class<? extends PageConfigurator>> configs = GuiceContext.reflect().getSubTypesOf(PageConfigurator.class);
 			List<PageConfigurator> configInstances = new ArrayList<>();
 			for (Class<? extends PageConfigurator> pc : configs)
@@ -344,7 +344,7 @@ public class Page<J extends Page<J>> extends Html<J> implements IPage
 			configInstances.sort(Comparator.comparing(PageConfigurator::getSortOrder));
 			for (PageConfigurator configInstance : configInstances)
 			{
-				log.log(Level.FINE, new StringBuilder().append("Configuring [").append(configInstance.getClass().getSimpleName()).append("]").toString());
+				log.log(Level.FINER, new StringBuilder().append("Configuring [").append(configInstance.getClass().getSimpleName()).append("]").toString());
 				configInstance.configure(this);
 			}
 		}

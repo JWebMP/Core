@@ -120,7 +120,7 @@ public class JWebSwingServlet extends JWDefaultServlet
 		}
 		if (session.isNew())
 		{
-			SESSION_LOG.log(Level.FINE, "[SessionID]-[{0}];[Name]-[User Login];[Action]-[Session Page Added];", request.getSession().getId());
+			SESSION_LOG.log(Level.FINER, "[SessionID]-[{0}];[Name]-[User Login];[Action]-[Session Page Added];", request.getSession().getId());
 		}
 	}
 
