@@ -39,6 +39,7 @@ import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -759,7 +760,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	{
 		if (!isInitialized())
 		{
-			getChildren().forEach(ComponentHierarchyBase::init);
+			new CopyOnWriteArrayList<>(getChildren()).forEach(ComponentHierarchyBase::init);
 		}
 		super.init();
 	}

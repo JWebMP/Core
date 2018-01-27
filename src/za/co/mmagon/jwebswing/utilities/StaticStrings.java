@@ -50,6 +50,7 @@ public interface StaticStrings extends Serializable
 	char CHAR_SLASH = '/';
 	char CHAR_BACKSLASH = '\\';
 	char CHAR_HASH = '#';
+	char CHAR_PLUS = '+';
 
 	String JAVASCRIPT_LOCATION = "/jwjs";
 	String AJAX_SCRIPT_LOCATION = "/jwajax";

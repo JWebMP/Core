@@ -29,6 +29,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 
+import static java.lang.String.format;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_EMPTY;
+
 /**
  * Contains a cached set of file templates usually per page
  *
@@ -131,14 +134,20 @@ public class FileTemplates implements Serializable
 		String templateOutput = template;
 		for (String templateVariable : getTemplateVariables().keySet())
 		{
-			String templateScript = Matcher.quoteReplacement(getTemplateVariables().get(templateVariable).toString());
+			String templateScript = null;
 			try
 			{
-				templateOutput = templateOutput.replaceAll("" + templateVariable + "", templateScript);
+				templateScript = Matcher.quoteReplacement(getTemplateVariables().get(templateVariable)
+						                                          .toString());
+				templateOutput = templateOutput.replaceAll(STRING_EMPTY + templateVariable + STRING_EMPTY, templateScript);
+			}
+			catch (NullPointerException iae)
+			{
+				LOG.log(Level.WARNING, "[Error]-[Unable to find specified template];[Script]-[" + templateVariable + "]", iae);
 			}
 			catch (IllegalArgumentException iae)
 			{
-				LOG.log(Level.WARNING, String.format("[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[{0}];[Script]-[{1}]", templateVariable, templateScript), iae);
+				LOG.log(Level.WARNING, format("[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[{0}];[Script]-[{1}]", templateVariable, templateScript), iae);
 			}
 		}
 		TemplateScripts.put(templateName, new StringBuilder(templateOutput.trim()));

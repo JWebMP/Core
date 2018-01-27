@@ -29,7 +29,6 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.logger.LogFactory;
 
-import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import java.io.Serializable;
@@ -50,16 +49,15 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_NEWLINE_TEXT
  *
  * @since 23 Apr 2016
  */
-public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J extends ComponentFeatureBase<F, J>>
-		extends ComponentDependancyBase<J>
-		implements IComponentFeatureBase<F, J>
+public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J extends ComponentFeatureBase<F, J>> extends ComponentDependancyBase<J> implements IComponentFeatureBase<F, J>
 {
 
 	/**
 	 * Logger for the Component
 	 */
 	@JsonIgnore
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("ComponentFeatureBase");
+	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
+			                                                    .getLogger("ComponentFeatureBase");
 	/**
 	 * Serial Version for all Components and their compatibility
 	 *
@@ -176,7 +174,8 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	@SuppressWarnings("unchecked")
 	public J addFeature(@NotNull ComponentFeatureBase feature)
 	{
-		if (!feature.getComponentType().equals(ComponentTypes.Feature))
+		if (!feature.getComponentType()
+				     .equals(ComponentTypes.Feature))
 		{
 			LOG.log(Level.WARNING, "Tried to add a non-feature to the feature collection");
 		}
@@ -331,7 +330,9 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 		                        });
 		allQueries.forEach(query ->
 		                   {
-			                   if (!query.trim().equals(STRING_NEWLINE_TEXT) && !sb.toString().contains(query))
+			                   if (!query.trim()
+					                        .equals(STRING_NEWLINE_TEXT) && !sb.toString()
+							                                                         .contains(query))
 			                   {
 				                   sb.append(query);
 			                   }
@@ -403,7 +404,6 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	 * @return
 	 */
 	@Override
-	@Nullable
 	public JavaScriptPart getOptions()
 	{
 		return null;
@@ -505,8 +505,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 			{
 				assignFunctionsToComponent();
 			}
-			getFeatures().forEach(feature
-					                      ->
+			getFeatures().forEach(feature ->
 			                      {
 				                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
 				                      if (!cfb.isConfigured())
@@ -547,7 +546,8 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	{
 		for (StringBuilder existingQuery : getQueriesAll())
 		{
-			if (existingQuery.toString().equalsIgnoreCase(query.toString()))
+			if (existingQuery.toString()
+					    .equalsIgnoreCase(query.toString()))
 			{
 				return (J) this;
 			}
