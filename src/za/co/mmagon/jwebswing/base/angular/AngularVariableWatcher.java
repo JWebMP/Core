@@ -4,8 +4,7 @@ import za.co.mmagon.jwebswing.Event;
 
 import java.io.Serializable;
 
-import static za.co.mmagon.jwebswing.utilities.StaticStrings.CHAR_DOT;
-import static za.co.mmagon.jwebswing.utilities.StaticStrings.CHAR_UNDERSCORE;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.*;
 
 /**
  * Denotes an angular variable to watch with an event class mapped
@@ -58,14 +57,11 @@ public class AngularVariableWatcher implements Serializable
 	@Override
 	public String toString()
 	{
-		return "$scope.$watch(" +
-				       "function(scope){return scope." + variableName + ";}," +
-				       "function(newValue,oldValue){" +
-
+		return "$scope.$watch('" + variableName + "'," +
+				       "function(newValue,oldValue){" + "if (newValue == oldValue){" + "}" + "else " + "{" +
 				       "jwCntrl.jw.isLoading || jwCntrl.perform(null" +
 				       ",[{'old':oldValue,'new':newValue}]," +
 				       "'AngularWatchEvent'," +
-				       "'" + eventClass.getCanonicalName().replace(CHAR_DOT, CHAR_UNDERSCORE) + "');" +
-				       "});";
+				       "'" + eventClass.getCanonicalName().replace(CHAR_DOT, CHAR_UNDERSCORE) + "');" + "}" + "});" + STRING_NEWLINE_TEXT;
 	}
 }

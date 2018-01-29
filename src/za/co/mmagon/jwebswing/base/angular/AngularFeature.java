@@ -212,7 +212,8 @@ public class AngularFeature extends Feature<JavaScriptPart, AngularFeature> impl
 		FileTemplates.getTemplateVariables().put("JW_DIRECTIVES", new StringBuilder(compileDirectives()));
 		FileTemplates.getTemplateVariables().put("JW_APP_CONTROLLER", new StringBuilder(getControllerName()));
 
-		FileTemplates.getTemplateVariables().put("JW_WATCHERS", compileWatchers());
+		FileTemplates.getTemplateVariables()
+				.put("JW_WATCHERS;", compileWatchers());
 
 		FileTemplates.getTemplateVariables().put("//%CONTROLLER_INSERTIONS%", new StringBuilder(compileControllerInsertions()));
 

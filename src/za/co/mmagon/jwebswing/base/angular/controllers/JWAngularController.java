@@ -58,13 +58,11 @@ public class JWAngularController extends AngularControllerBase
 			throw new UnsupportedOperationException("Didn't find FileTemplate for Angular Controller Classes.");
 		}
 		String output = controllerOutput.toString();
-
 		StringBuilder statementOutput = new StringBuilder();
-
 		Set<Class<? extends AngularControllerScopeStatement>> controllers = GuiceContext.reflect().getSubTypesOf(AngularControllerScopeStatement.class);
 		controllers.forEach(a ->
 		                    {
-			                    AngularControllerScopeStatement statement = GuiceContext.inject().getInstance(a);
+			                    AngularControllerScopeStatement statement = GuiceContext.getInstance(a);
 			                    if (!statementOutput.toString().contains(statement.getStatement()))
 			                    {
 				                    statementOutput.append(statement.getStatement()).append(StaticStrings.STRING_NEWLINE_TEXT);

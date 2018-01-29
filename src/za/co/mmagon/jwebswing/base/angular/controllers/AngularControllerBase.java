@@ -41,4 +41,5 @@ public abstract class AngularControllerBase extends AngularReferenceBase
 		super(moduleName);
 	}
 
+
 }
