@@ -69,7 +69,6 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
             },
             success: function (result, status, xhr) {
                 jw.actions.processResponse(result, $scope, $parse, $timeout, $compile, $rootScope);
-                //jw.actions.loadData(result, $scope, $parse, $timeout);
                 jw.isLoading = false;
                 if (jw.afterInit)
                     jw.afterInit();
@@ -125,9 +124,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
             window.Pace.start();
 
         var eventStuff = $scope.getEventObject($event);
-        var element = $event.currentTarget.id;
-        var el$ = $('#' + element);
-
+        var element = $event == null ? 'body' : $event.currentTarget.id;
         var getdate = new Date();
         var article = {};
         article.parameters = getParametersObject();
@@ -264,11 +261,15 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
             newEvent.target = $event.target.id;
             newEvent.which = $event.which;
         }
+        else
+        {
+            newEvent.type = 'async';
+            newEvent.componentID = 'body';
+            newEvent.target = 'body';
+            newEvent.detail = 'noactionevent';
+        }
         return newEvent;
     };
-
     JW_SCOPE_INSERTIONS;
-
     JW_WATCHERS;
-    //jw.pageLoading = false;
 }); //end of controller
