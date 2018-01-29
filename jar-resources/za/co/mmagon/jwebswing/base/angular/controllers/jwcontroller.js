@@ -129,8 +129,8 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
         var article = {};
         article.parameters = getParametersObject();
         article.componentId = element;
-        article.eventType = $event.type;
-        article.eventTypeFrom = $event.type;
+        article.eventType = eventStuff.type;
+        article.eventTypeFrom = eventStuff.type;
         article.datetime = getdate;
         article.value = eventStuff;
         article.eventId = eventId;
