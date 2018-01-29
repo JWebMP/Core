@@ -266,7 +266,6 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
             newEvent.type = 'async';
             newEvent.componentID = 'body';
             newEvent.target = 'body';
-            newEvent.detail = 'noactionevent';
         }
         return newEvent;
     };
