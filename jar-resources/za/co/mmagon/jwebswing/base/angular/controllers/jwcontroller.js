@@ -241,7 +241,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
      */
     $scope.getEventObject = function ($event) {
         var newEvent = {};
-        if ($event !== undefined) {
+        if ($event !== undefined && $event !== null) {
             newEvent.altKey = $event.altKey;
             newEvent.ctrlKey = $event.ctrlKey;
             newEvent.bubbles = $event.bubbles;
