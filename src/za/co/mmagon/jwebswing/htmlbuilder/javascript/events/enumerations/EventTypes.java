@@ -240,6 +240,7 @@ public enum EventTypes implements Comparable<EventTypes>
 	 */
 	data(null, null),
 	checked(CheckedAdapter.class, null),
+	async(null, null),
 	custom(null, null);
 
 	private final Class classType;
