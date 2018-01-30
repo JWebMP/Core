@@ -2,13 +2,24 @@ package za.co.mmagon.jwebswing.base.angular;
 
 import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.BaseTestClass;
-import za.co.mmagon.jwebswing.events.click.ClickAdapter;
+import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
+import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 
-class AngularVariableWatcherTest extends BaseTestClass
+public class AngularVariableWatcherTest extends BaseTestClass
 {
 	@Test
 	public void test()
 	{
-		System.out.println(new AngularVariableWatcher("watchVariable", "variable.name", ClickAdapter.class));
+		System.out.println(new AngularVariableWatcher("watchVariable", "variable.name", AngularChangeEventClass.class));
+	}
+
+	public class AngularChangeEventClass extends AngularChangeEvent<AngularChangeEventClass>
+	{
+
+		@Override
+		public void onChange(AjaxCall call, AjaxResponse response)
+		{
+
+		}
 	}
 }

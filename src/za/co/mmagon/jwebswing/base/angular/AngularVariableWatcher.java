@@ -15,9 +15,9 @@ public class AngularVariableWatcher implements Serializable
 	private static final long serialVersionUID = 1L;
 	private String watchName;
 	private String variableName;
-	private Class<? extends Event<?>> eventClass;
+	private Class<? extends AngularChangeEvent<?>> eventClass;
 
-	public AngularVariableWatcher(String watchName, String variableName, Class<? extends Event<?>> eventClass)
+	public AngularVariableWatcher(String watchName, String variableName, Class<? extends AngularChangeEvent<?>> eventClass)
 	{
 		this.watchName = watchName;
 		this.variableName = variableName;
@@ -49,7 +49,7 @@ public class AngularVariableWatcher implements Serializable
 		return eventClass;
 	}
 
-	public void setEventClass(Class<? extends Event<?>> eventClass)
+	public void setEventClass(Class<? extends AngularChangeEvent<?>> eventClass)
 	{
 		this.eventClass = eventClass;
 	}
@@ -57,12 +57,11 @@ public class AngularVariableWatcher implements Serializable
 	@Override
 	public String toString()
 	{
-		return "$scope.$watch('" + variableName + "'," + "function(newValue,oldValue){" + "if (newValue == oldValue){" + "}" + "else " +
-				       "{" + "$scope.jwcurrentsendobject= {'old':oldValue,'new':newValue};" + "jw.env.controller.jw.isLoading || jw.env" +
-				       ".controller.perform(null" + ",['jwcurrentsendobject']," + "'AngularWatchEvent'," + "'" + eventClass
-						                                                                                                 .getCanonicalName()
-				                                                                                                                                                                                                                                                                                                                                          .replace(
-						                                                                                                                                                                                                                                                                                                                                          CHAR_DOT,
-						                                                                                                                                                                                                                                                                                                                                          CHAR_UNDERSCORE) + "');" + "}" + "});" + STRING_NEWLINE_TEXT;
+		String returnable = "$scope.$watch('" + variableName + "'," + "function(newValue,oldValue){" + "if (newValue == oldValue){" + "}"
+				                    + "else " + "{" + "$scope.angularchangeeventobject= {'old':oldValue,'new':newValue};" + "jw.env" +
+				                    ".controller" + ".jw.isLoading || jw.env" + ".controller.perform(null" + "," +
+				                    "['angularchangeeventobject']," + "'AngularWatchEvent'," + "'" + eventClass.getCanonicalName();
+		returnable += returnable.replace(CHAR_DOT, CHAR_UNDERSCORE) + "');" + "}" + "});" + STRING_NEWLINE_TEXT;
+		return returnable;
 	}
 }

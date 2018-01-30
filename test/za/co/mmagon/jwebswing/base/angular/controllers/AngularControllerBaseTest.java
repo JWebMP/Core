@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.BaseTestClass;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.angular.AngularVariableWatcher;
-import za.co.mmagon.jwebswing.events.click.ClickAdapter;
+import za.co.mmagon.jwebswing.base.angular.AngularVariableWatcherTest;
 
 class AngularControllerBaseTest extends BaseTestClass
 {
@@ -23,7 +23,8 @@ class AngularControllerBaseTest extends BaseTestClass
 
 		p.getAngular()
 				.getAngularWatchers()
-				.add(new AngularVariableWatcher("watchName", "unexistingvariable.name", ClickAdapter.class));
+				.add(new AngularVariableWatcher("watchName", "unexistingvariable.name",
+				                                AngularVariableWatcherTest.AngularChangeEventClass.class));
 		System.out.println(p.getAngular()
 				                   .renderAngularJavascript(p));
 	}
