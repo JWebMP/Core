@@ -59,9 +59,11 @@ public class AngularVariableWatcher implements Serializable
 	{
 		String returnable = "$scope.$watch('" + variableName + "'," + "function(newValue,oldValue){" + "if (newValue == oldValue){" + "}"
 				                    + "else " + "{" + "$scope.angularchangeeventobject= {'old':oldValue,'new':newValue};" + "jw.env" +
-				                    ".controller" + ".jw.isLoading || jw.env" + ".controller.perform(null" + "," +
-				                    "['angularchangeeventobject']," + "'AngularWatchEvent'," + "'" + eventClass.getCanonicalName();
-		returnable += returnable.replace(CHAR_DOT, CHAR_UNDERSCORE) + "');" + "}" + "});" + STRING_NEWLINE_TEXT;
+				                    ".controller" + ".jw.isLoading || jw.env" + ".controller.perform(null" + "," + "['angularchangeeventobject']," + "'AngularWatchEvent'," + "'" + eventClass.getCanonicalName()
+						                                                                                                                                                                    .replace(
+								                                                                                                                                                                    CHAR_DOT,
+								                                                                                                                                                                    CHAR_UNDERSCORE) + "');";
+		returnable += "}" + "});" + STRING_NEWLINE_TEXT;
 		return returnable;
 	}
 }
