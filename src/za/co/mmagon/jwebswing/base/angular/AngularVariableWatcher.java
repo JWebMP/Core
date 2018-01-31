@@ -2,6 +2,7 @@ package za.co.mmagon.jwebswing.base.angular;
 
 import za.co.mmagon.jwebswing.Event;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 import static za.co.mmagon.jwebswing.utilities.StaticStrings.*;
@@ -17,7 +18,8 @@ public class AngularVariableWatcher implements Serializable
 	private String variableName;
 	private Class<? extends AngularChangeEvent<?>> eventClass;
 
-	public AngularVariableWatcher(String watchName, String variableName, Class<? extends AngularChangeEvent<?>> eventClass)
+	public AngularVariableWatcher(
+			@NotNull String watchName, @NotNull String variableName, @NotNull Class<? extends AngularChangeEvent<?>> eventClass)
 	{
 		this.watchName = watchName;
 		this.variableName = variableName;
@@ -29,7 +31,7 @@ public class AngularVariableWatcher implements Serializable
 		return watchName;
 	}
 
-	public void setWatchName(String watchName)
+	public void setWatchName(@NotNull String watchName)
 	{
 		this.watchName = watchName;
 	}
@@ -39,7 +41,7 @@ public class AngularVariableWatcher implements Serializable
 		return variableName;
 	}
 
-	public void setVariableName(String variableName)
+	public void setVariableName(@NotNull String variableName)
 	{
 		this.variableName = variableName;
 	}
@@ -49,7 +51,7 @@ public class AngularVariableWatcher implements Serializable
 		return eventClass;
 	}
 
-	public void setEventClass(Class<? extends AngularChangeEvent<?>> eventClass)
+	public void setEventClass(@NotNull Class<? extends AngularChangeEvent<?>> eventClass)
 	{
 		this.eventClass = eventClass;
 	}
@@ -65,5 +67,24 @@ public class AngularVariableWatcher implements Serializable
 								                                                                                                                                                                    CHAR_UNDERSCORE) + "');";
 		returnable += "}" + "});" + STRING_NEWLINE_TEXT;
 		return returnable;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return getWatchName().hashCode();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{ return true; }
+		if (o == null || getClass() != o.getClass())
+		{ return false; }
+
+		AngularVariableWatcher that = (AngularVariableWatcher) o;
+
+		return getWatchName().equals(that.getWatchName());
 	}
 }
