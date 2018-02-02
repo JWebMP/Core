@@ -32,7 +32,6 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.logging.Level;
 
 /**
@@ -44,10 +43,11 @@ import java.util.logging.Level;
  * @author GedMarc
  * @since 22 Apr 2016
  */
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility =
+		                                                                                                                    JsonAutoDetect
+				                                                                                                                    .Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ComponentBase<J extends ComponentBase<J>>
-		implements IComponentBase<J>
+public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase<J>
 {
 
 	/**
@@ -148,16 +148,14 @@ public class ComponentBase<J extends ComponentBase<J>>
 	}
 
 	/**
-	 * Gets the ID of this component
-	 * <p>
+	 * Default HashCode over-ride
 	 *
-	 * @return The ID of this component
+	 * @return
 	 */
 	@Override
-	@NotNull
-	public String getID()
+	public int hashCode()
 	{
-		return this.id;
+		return getID().hashCode();
 	}
 
 	/**
@@ -178,16 +176,18 @@ public class ComponentBase<J extends ComponentBase<J>>
 	}
 
 	/**
-	 * Returns the component rendering for JQuery string Requires the rendering for component is set
+	 * Gets the ID of this component
 	 * <p>
 	 *
-	 * @return $('#x').
+	 * @return The ID of this component
 	 */
 	@Override
 	@NotNull
-	public String getJQueryID()
+	public String getID()
 	{
-		return "$(\"" + getID(true) + "\").";
+		if (this.id == null)
+		{ this.id = GUIDGenerator.generateGuid(); }
+		return this.id;
 	}
 
 	/**
@@ -340,12 +340,16 @@ public class ComponentBase<J extends ComponentBase<J>>
 	}
 
 	/**
-	 * Run-Once on creation Executes a piece of code before running any rendering. Call super after your changes Marks the component as configured
+	 * Returns the component rendering for JQuery string Requires the rendering for component is set
+	 * <p>
+	 *
+	 * @return $(' # x ').
 	 */
 	@Override
-	public void preConfigure()
+	@NotNull
+	public String getJQueryID()
 	{
-		setConfigured(true);
+		return "$(\"" + getID(true) + "\").";
 	}
 
 	/**
@@ -440,14 +444,13 @@ public class ComponentBase<J extends ComponentBase<J>>
 	}
 
 	/**
-	 * Default HashCode over-ride
-	 *
-	 * @return
+	 * Run-Once on creation Executes a piece of code before running any rendering. Call super after your changes Marks the component as
+	 * configured
 	 */
 	@Override
-	public int hashCode()
+	public void preConfigure()
 	{
-		return super.hashCode();
+		setConfigured(true);
 	}
 
 	/**
@@ -535,15 +538,8 @@ public class ComponentBase<J extends ComponentBase<J>>
 			return false;
 		}
 		final ComponentBase<?> other = (ComponentBase<?>) obj;
-		if (!Objects.equals(this.id, other.id))
-		{
-			return false;
-		}
-		if (!Objects.equals(this.text, other.text))
-		{
-			return false;
-		}
-		return this.componentType == other.componentType;
+		return other.getID()
+				       .equals(getID());
 	}
 
 	/**
@@ -580,7 +576,8 @@ public class ComponentBase<J extends ComponentBase<J>>
 	@NotNull
 	public String getProperty(String propertyName)
 	{
-		return getProperties().get(propertyName).toString();
+		return getProperties().get(propertyName)
+				       .toString();
 	}
 
 	/**
@@ -593,7 +590,8 @@ public class ComponentBase<J extends ComponentBase<J>>
 	{
 		try
 		{
-			return getClass().getCanonicalName().replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE);
+			return getClass().getCanonicalName()
+					       .replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE);
 		}
 		catch (NullPointerException npe)
 		{

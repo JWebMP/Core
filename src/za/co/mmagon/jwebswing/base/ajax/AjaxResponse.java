@@ -30,11 +30,8 @@ import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 /**
  * A response sent back to the client
@@ -298,7 +295,7 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 	 */
 	public Set<String> getCssReferences(ComponentDependancyBase component)
 	{
-		Set<String> cssRender = new LinkedHashSet<>();
+		Set<String> cssRender = new TreeSet<>();
 		for (Object o : component.getCssReferencesAll())
 		{
 			CSSReference next = (CSSReference) o;

@@ -18,6 +18,7 @@ package za.co.mmagon.jwebswing.base;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import za.co.mmagon.jwebswing.BaseTestClass;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
@@ -28,37 +29,35 @@ import static za.co.mmagon.jwebswing.plugins.ajaxenabler.AjaxEnablerReferencePoo
  */
 public class ComponentDependancyBaseTest extends BaseTestClass
 {
-	
+
 	public ComponentDependancyBaseTest()
 	{
 	}
-	
+
 	@Test
 	public void testReferences()
 	{
 		ComponentDependancyBase cd = new ComponentDependancyBase(ComponentTypes.Abbreviation);
 		cd.setID("ID");
-		cd.addCssReference(null);
+		Assertions.assertThrows(NullPointerException.class, new Executable()
+		{
+			@Override
+			public void execute()
+			{
+				cd.addCssReference(null);
+			}
+		});
 		cd.addJavaScriptReference(AjaxEnabler.getJavaScriptReference());
 		System.out.println(cd);
-		Assertions.assertEquals("{\n"
-				                    + "  \"id\" : \"ID\",\n"
-				                    + "  \"componentType\" : \"abbreviation\",\n"
-				                    + "  \"tiny\" : false,\n"
-				                    + "  \"configured\" : true,\n"
-				                    + "  \"initialized\" : true,\n"
-				                    + "  \"touched\" : false,\n"
-				                    + "  \"cssReferences\" : [ null ],\n"
-				                    + "  \"javascriptReferences\" : [ {\n"
-				                    + "    \"cordovaRequired\" : false,\n"
-				                    + "    \"name\" : \"AjaxEnabler\",\n"
-				                    + "    \"version\" : 1.0,\n"
-				                    + "    \"reference\" : \"javascript/jwebswing/ajax-enabler.js\"\n"
-				                    + "  } ],\n"
-				                    + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentDependancyBase\"\n"
-				                    + "}", cd.toString());
+		Assertions.assertEquals(
+				"{\n" + "  \"id\" : \"ID\",\n" + "  \"componentType\" : \"abbreviation\",\n" + "  \"tiny\" : false,\n" + "  " +
+						"\"configured\"" + " : true,\n" + "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  " +
+						"\"javascriptReferences\" : [ {\n" + "    \"cordovaRequired\" : false,\n" + "    \"name\" : \"AjaxEnabler\",\n" +
+						"    \"version\" : 1.0,\n" + "    " + "\"reference\" : \"javascript/jwebswing/ajax-enabler.js\"\n" + "  } ],\n" +
+						"  \"componentClass\" : \"za.co.mmagon" + ".jwebswing.base.ComponentDependancyBase\"\n" + "}",
+				cd.toString());
 	}
-	
+
 	@Test
 	public void testClone()
 	{
@@ -69,38 +68,20 @@ public class ComponentDependancyBaseTest extends BaseTestClass
 		shell2.setID("shell2");
 		System.out.println(shell);
 		System.out.println(shell2);
-		String shellExpected = "{\n" +
-				                       "  \"id\" : \"shell\",\n" +
-				                       "  \"componentType\" : \"abbreviation\",\n" +
-				                       "  \"tiny\" : false,\n" +
-				                       "  \"configured\" : true,\n" +
-				                       "  \"initialized\" : true,\n" +
-				                       "  \"touched\" : false,\n" +
-				                       "  \"javascriptReferences\" : [ {\n" +
-				                       "    \"cordovaRequired\" : false,\n" +
-				                       "    \"name\" : \"AjaxEnabler\",\n" +
-				                       "    \"version\" : 1.0,\n" +
-				                       "    \"reference\" : \"javascript/jwebswing/ajax-enabler.js\"\n" +
-				                       "  } ],\n" +
-				                       "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentDependancyBase\"\n" +
-				                       "}";
-		String shell2Expected = "{\n" +
-				                        "  \"id\" : \"shell2\",\n" +
-				                        "  \"componentType\" : \"abbreviation\",\n" +
-				                        "  \"tiny\" : false,\n" +
-				                        "  \"configured\" : true,\n" +
-				                        "  \"initialized\" : true,\n" +
-				                        "  \"touched\" : false,\n" +
-				                        "  \"javascriptReferences\" : [ {\n" +
-				                        "    \"cordovaRequired\" : false,\n" +
-				                        "    \"name\" : \"AjaxEnabler\",\n" +
-				                        "    \"version\" : 1.0,\n" +
-				                        "    \"reference\" : \"javascript/jwebswing/ajax-enabler.js\"\n" +
-				                        "  } ],\n" +
-				                        "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentDependancyBase\"\n" +
-				                        "}";
+		String shellExpected = "{\n" + "  \"id\" : \"shell\",\n" + "  \"componentType\" : \"abbreviation\",\n" + "  \"tiny\" : false,\n" +
+				                       "  \"configured\" : true,\n" + "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  " +
+				                       "\"javascriptReferences\" : [ {\n" + "    \"cordovaRequired\" : false,\n" + "    \"name\" : " +
+				                       "\"AjaxEnabler\",\n" + "    \"version\" : 1.0,\n" + "    \"reference\" : " +
+				                       "\"javascript/jwebswing/ajax-enabler.js\"\n" + "  } ],\n" + "  \"componentClass\" : \"za.co.mmagon"
+				                       + ".jwebswing.base.ComponentDependancyBase\"\n" + "}";
+		String shell2Expected = "{\n" + "  \"id\" : \"shell2\",\n" + "  \"componentType\" : \"abbreviation\",\n" + "  \"tiny\" : false,\n"
+				                        + "  \"configured\" : true,\n" + "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  "
+				                        + "\"javascriptReferences\" : [ {\n" + "    \"cordovaRequired\" : false,\n" + "    \"name\" : " +
+				                        "\"AjaxEnabler\",\n" + "    \"version\" : 1.0,\n" + "    \"reference\" : " +
+				                        "\"javascript/jwebswing/ajax-enabler.js\"\n" + "  } ],\n" + "  \"componentClass\" : \"za.co" + ""
+				                        + ".mmagon" + ".jwebswing.base.ComponentDependancyBase\"\n" + "}";
 		Assertions.assertEquals(shell.toString(), shellExpected);
 		Assertions.assertEquals(shell2.toString(), shell2Expected);
 	}
-	
+
 }

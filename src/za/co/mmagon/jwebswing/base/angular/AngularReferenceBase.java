@@ -20,7 +20,6 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavascriptLiteralFunction;
 
 import javax.validation.constraints.NotNull;
 import java.util.Comparator;
-import java.util.Objects;
 
 /**
  * Is an angular module
@@ -28,7 +27,8 @@ import java.util.Objects;
  * @author GedMarc
  * @since 24 Jul 2016
  */
-public abstract class AngularReferenceBase extends JavascriptLiteralFunction implements Comparator<AngularReferenceBase>
+public abstract class AngularReferenceBase extends JavascriptLiteralFunction
+		implements Comparator<AngularReferenceBase>, Comparable<AngularReferenceBase>
 {
 
 	private static final long serialVersionUID = 1L;
@@ -74,13 +74,14 @@ public abstract class AngularReferenceBase extends JavascriptLiteralFunction imp
 	}
 
 	/**
-	 * Gets this modules sort order
+	 * Hash code identifier
 	 *
 	 * @return
 	 */
-	public int getSortOrder()
+	@Override
+	public int hashCode()
 	{
-		return sortOrder;
+		return super.hashCode();
 	}
 
 	/**
@@ -102,20 +103,6 @@ public abstract class AngularReferenceBase extends JavascriptLiteralFunction imp
 	public abstract String renderFunction();
 
 	/**
-	 * Hash code identifier
-	 *
-	 * @return
-	 */
-	@Override
-	public int hashCode()
-	{
-		int hash = 3;
-		hash = 41 * hash + Objects.hashCode(this.referenceName);
-		hash = 41 * hash + Objects.hashCode(this.sortOrder);
-		return hash;
-	}
-
-	/**
 	 * Equals based on sort order and name
 	 *
 	 * @param obj
@@ -125,24 +112,13 @@ public abstract class AngularReferenceBase extends JavascriptLiteralFunction imp
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (this == obj)
-		{
-			return true;
-		}
-		if (obj == null)
-		{
-			return false;
-		}
-		if (getClass() != obj.getClass())
-		{
-			return false;
-		}
-		final AngularReferenceBase other = (AngularReferenceBase) obj;
-		if (!Objects.equals(this.referenceName, other.referenceName))
-		{
-			return false;
-		}
-		return Objects.equals(this.sortOrder, other.sortOrder);
+		return super.equals(obj);
+	}
+
+	@Override
+	public int compareTo(AngularReferenceBase o)
+	{
+		return getSortOrder().compareTo(o.getSortOrder());
 	}
 
 	/**
@@ -165,4 +141,13 @@ public abstract class AngularReferenceBase extends JavascriptLiteralFunction imp
 		return new StringBuilder();
 	}
 
+	/**
+	 * Gets this modules sort order
+	 *
+	 * @return
+	 */
+	public Integer getSortOrder()
+	{
+		return sortOrder;
+	}
 }

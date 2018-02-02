@@ -52,5 +52,4 @@ public class ResizeStopDirective extends AngularDirectiveBase
 	{
 		return FileTemplates.getFileTemplate(ResizeStopDirective.class, "ResizeStop").toString();
 	}
-
 }

@@ -28,10 +28,12 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
  */
 public enum AngularReferencePool
 {
-	Angular1(new JavascriptReference("Angular1", 1.68, "bower_components/angular/angular.min.js", "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.8/angular.min.js", 5), null, 5),
+	Angular1(new JavascriptReference("Angular1", 1.68, "bower_components/angular/angular.min.js",
+	                                 "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.8/angular.min.js", 6), null, 5),
 	Angular1Sanitize(new JavascriptReference("Angular1Sanitize", 1.55, "javascript/angular/angular.js", "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.8/angular-sanitize.js", 5), null, 5),
 	Angular1Events(new JavascriptReference("Angular1Events", 1.0, "javascript/jwebswing/jwangular.js", 5), null, 5),
-	Angular1NGMessages(new JavascriptReference("Angular1Messages", 1.0, "bower_components/angular-messages/angular-messages.min.js", "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.8/angular-messages.js", 6), null, 6),
+	Angular1NGMessages(new JavascriptReference("Angular1Messages", 1.0, "bower_components/angular-messages/angular-messages.min.js",
+	                                           "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.8/angular-messages.js", 7), null, 6),
 
 	AngularDynamicScript(new JavascriptReference("AngularDynamicScript", 1.0, "as", 5), null, 5),
 	Angular2RX(new JavascriptReference("Angular2RX", 2.0, "javascript/angular/Rx.js", "https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.15/Rx.umd.js", 5), null, 5),

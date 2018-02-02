@@ -25,8 +25,8 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * This class marks a component as a web component.
@@ -38,9 +38,7 @@ import java.util.Set;
  * @author GedMarc
  * @since 23 Apr 2016
  */
-public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
-		extends ComponentBase<J>
-		implements IComponentDependancyBase<J>
+public class ComponentDependancyBase<J extends ComponentDependancyBase<J>> extends ComponentBase<J> implements IComponentDependancyBase<J>
 {
 
 	private static final long serialVersionUID = 1L;
@@ -122,8 +120,8 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	{
 		ComponentDependancyBase cloned = super.cloneComponent();
 
-		cloned.cssReferences = new LinkedHashSet();
-		cloned.javascriptReferences = new LinkedHashSet();
+		cloned.cssReferences = new TreeSet();
+		cloned.javascriptReferences = new TreeSet();
 		cloned.cssReferences.addAll(getCssReferences());
 		cloned.javascriptReferences.addAll(getJavascriptReferences());
 
@@ -142,7 +140,7 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	{
 		if (this.cssReferences == null)
 		{
-			this.cssReferences = new LinkedHashSet<>();
+			this.cssReferences = new TreeSet<>();
 		}
 		return this.cssReferences;
 	}
@@ -171,10 +169,11 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	@NotNull
 	public Set<CSSReference> getCssReferencesAll(@NotNull RequirementsPriority priority)
 	{
-		Set<CSSReference> arr = new LinkedHashSet<>();
+		Set<CSSReference> arr = new TreeSet<>();
 		for (CSSReference next : getCssReferencesAll())
 		{
-			if (next == null || !next.getPriority().equals(priority) || arr.contains(next))
+			if (next == null || !next.getPriority()
+					                     .equals(priority) || arr.contains(next))
 			{
 				continue;
 			}
@@ -196,10 +195,11 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	{
 		if (javascriptReferences == null)
 		{
-			javascriptReferences = new LinkedHashSet<>();
+			javascriptReferences = new TreeSet<>();
 		}
 		return javascriptReferences;
 	}
+
 
 	/**
 	 * Return all the CSS References associated with this component. Override and add the references required for the functionality
@@ -225,10 +225,11 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	@NotNull
 	public Set<JavascriptReference> getJavascriptReferencesAll(@NotNull RequirementsPriority priority)
 	{
-		Set<JavascriptReference> arr = new LinkedHashSet<>();
+		Set<JavascriptReference> arr = new TreeSet<>();
 		for (JavascriptReference next : getJavascriptReferencesAll())
 		{
-			if (!next.getPriority().equals(priority) || arr.contains(next))
+			if (!next.getPriority()
+					     .equals(priority) || arr.contains(next))
 			{
 				continue;
 			}
@@ -269,8 +270,6 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 		return (J) this;
 	}
 
-
-
 	@Override
 	public void destroy()
 	{
@@ -290,28 +289,12 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + getCssReferences().hashCode();
-		result = 31 * result + getJavascriptReferences().hashCode();
-		return result;
+		return super.hashCode();
 	}
 
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof ComponentDependancyBase))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-		ComponentDependancyBase<?> that = (ComponentDependancyBase<?>) o;
-		return getCssReferences().equals(that.getCssReferences()) && getJavascriptReferences().equals(that.getJavascriptReferences());
+		return super.equals(o);
 	}
 }

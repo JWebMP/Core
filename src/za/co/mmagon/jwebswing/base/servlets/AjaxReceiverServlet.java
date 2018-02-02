@@ -109,12 +109,12 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 			}
 
 			triggerEvent.fireEvent(ajaxCall, ajaxResponse);
-			output = new StringBuilder(ajaxResponse.toString());
 			ajaxResponse.getComponents().forEach(a ->
 			                                     {
 				                                     ComponentHierarchyBase c = (ComponentHierarchyBase) a;
 				                                     c.preConfigure();
 			                                     });
+			output = new StringBuilder(ajaxResponse.toString());
 		}
 		catch (InvalidRequestException ie)
 		{

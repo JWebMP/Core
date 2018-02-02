@@ -32,6 +32,7 @@ import za.co.mmagon.logger.LogFactory;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -49,7 +50,8 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_NEWLINE_TEXT
  *
  * @since 23 Apr 2016
  */
-public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J extends ComponentFeatureBase<F, J>> extends ComponentDependancyBase<J> implements IComponentFeatureBase<F, J>
+public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J extends ComponentFeatureBase<F, J>>
+		extends ComponentDependancyBase<J> implements IComponentFeatureBase<F, J>, Comparator<J>, Comparable<J>
 {
 
 	/**
@@ -340,6 +342,16 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 		return sb;
 	}
 
+
+	@Override
+	public int compare(ComponentFeatureBase o1, ComponentFeatureBase o2)
+	{
+		if (o2 == null)
+		{ return -1; }
+		return o1.getSortOrder()
+				       .compareTo(o2.getSortOrder());
+	}
+
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -374,12 +386,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	@Override
 	public int hashCode()
 	{
-		int hash = 7;
-		hash = 97 * hash + Objects.hashCode(this.features);
-		hash = 97 * hash + Objects.hashCode(this.queries);
-		hash = 97 * hash + this.sortOrder;
-		hash = 97 * hash + Objects.hashCode(this.name);
-		return hash;
+		return super.hashCode();
 	}
 
 	/**
@@ -690,4 +697,11 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 		super.destroy();
 	}
 
+	@Override
+	public int compareTo(J o)
+	{
+		if (o == null)
+		{ return 1; }
+		return getSortOrder().compareTo(o.getSortOrder());
+	}
 }

@@ -41,22 +41,18 @@ import java.util.logging.Logger;
  * @author GedMarc
  * @since 21 Feb 2017
  */
-@PluginInformation(pluginName = "AngularJS",
-		pluginUniqueName = "angular",
-		pluginDescription = "AngularJS is a toolset for building the framework most suited to your application development. It is fully extensible and works well with other libraries. Every feature can be modified or replaced to suit your unique development workflow and feature needs. Read on to find out how. ",
-		pluginVersion = "1.6",
-		pluginDependancyUniqueIDs = "jquery",
-		pluginCategories = "jquery, angular, data-binding, ng,google",
-		pluginSubtitle = "Data-binding is an automatic way of updating the view whenever the model changes, as well as updating the model whenever the view changes. This is awesome because it eliminates DOM manipulation from the list of things you have to worry about. ",
-		pluginGitUrl = "https://github.com/GedMarc/JWebSwing",
-		pluginSourceUrl = "https://angularjs.org",
-		pluginWikiUrl = "https://github.com/GedMarc/JWebSwing/wiki",
-		pluginOriginalHomepage = "https://angularjs.org",
-		pluginDownloadUrl = "https://angularjs.org/",
-		pluginIconUrl = "",
-		pluginIconImageUrl = "https://angularjs.org/img/AngularJS-large.png",
-		pluginLastUpdatedDate = "2017/03/30"
-)
+@PluginInformation(pluginName = "AngularJS", pluginUniqueName = "angular", pluginDescription = "AngularJS is a toolset for building the "
+		                                                                                               + "framework most suited to your "
+		                                                                                               + "application development. It is "
+		                                                                                               + "fully extensible and works well " +
+		                                                                                               "" + "" + "with other libraries. " +
+		                                                                                               "Every " + "feature can be modified" +
+		                                                                                               " or " + "replaced to suit your " +
+		                                                                                               "unique " + "development workflow " +
+		                                                                                               "and feature " + "needs. Read on to" +
+		                                                                                               " find out how. " + "",
+                   pluginVersion = "1.6", pluginDependancyUniqueIDs = "jquery", pluginCategories = "jquery, angular, data-binding, ng," +
+		                                                                                                   "google", pluginSubtitle = "Data-binding is an automatic way of updating the view whenever the model changes, as well as " + "updating the model whenever the view changes. This is awesome because it eliminates DOM " + "manipulation from the list of things you have to worry about. ", pluginGitUrl = "https://github.com/GedMarc/JWebSwing", pluginSourceUrl = "https://angularjs.org", pluginWikiUrl = "https://github.com/GedMarc/JWebSwing/wiki", pluginOriginalHomepage = "https://angularjs.org", pluginDownloadUrl = "https://angularjs.org/", pluginIconUrl = "", pluginIconImageUrl = "https://angularjs.org/img/AngularJS-large.png", pluginLastUpdatedDate = "2017/03/30")
 @Singleton
 public class AngularPageConfigurator extends PageConfigurator
 {
@@ -143,22 +139,19 @@ public class AngularPageConfigurator extends PageConfigurator
 	@SuppressWarnings("unchecked")
 	public Page configure(Page page)
 	{
-		if (!page.isConfigured())
+		if (required)
 		{
-			if (required)
+			page.getBody()
+					.addJavaScriptReference(AngularReferencePool.Angular1.getJavaScriptReference());
+			if (angularMessagesRequired)
 			{
-				page.getBody().getJavascriptReferences().add(AngularReferencePool.Angular1.getJavaScriptReference());
-				if (angularMessagesRequired)
-				{
-					page.getBody().getJavascriptReferences().add(AngularReferencePool.Angular1NGMessages.getJavaScriptReference());
-				}
-				page.getBody().addAttribute(AngularAttributes.ngApp, AngularFeature.getAppName());
-				page.getBody().addAttribute(AngularAttributes.ngController, AngularFeature.getControllerName() + " as jwCntrl");
+				page.getBody()
+						.addJavaScriptReference(AngularReferencePool.Angular1NGMessages.getJavaScriptReference());
 			}
-		}
-		else
-		{
-			log.finer("Page is already configured, angular not added this time round");
+			page.getBody()
+					.addAttribute(AngularAttributes.ngApp, AngularFeature.getAppName());
+			page.getBody()
+					.addAttribute(AngularAttributes.ngController, AngularFeature.getControllerName() + " as jwCntrl");
 		}
 		return page;
 	}

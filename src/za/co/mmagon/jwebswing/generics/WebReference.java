@@ -47,10 +47,12 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_EMPTY;
  * @version 2.0
  * @since Forever
  */
-public class WebReference<J extends WebReference> implements NamedPair<String, String>, Serializable, Comparator<WebReference>
+public class WebReference<J extends WebReference>
+		implements NamedPair<String, String>, Serializable, Comparator<WebReference>, Comparable<WebReference>
 {
 
-	private static final Logger LOG = LogFactory.getInstance().getLogger("Web Reference");
+	private static final Logger LOG = LogFactory.getInstance()
+			                                  .getLogger("Web Reference");
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The dummy reference for the sorting
@@ -286,29 +288,6 @@ public class WebReference<J extends WebReference> implements NamedPair<String, S
 		return (J) this;
 	}
 
-	@Override
-	public int hashCode()
-	{
-		return left.hashCode() ^ right.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object o)
-	{
-		if (o == null)
-		{
-			return false;
-		}
-		if (!(o instanceof WebReference))
-		{
-			return false;
-		}
-		WebReference pairo = (WebReference) o;
-		return this.left.equals(pairo.getLeft())
-				       && (!leftOnly
-						           && this.right.equals(pairo.getRight()));
-	}
-
 	/**
 	 * Returns if this pair is set to validate on the left field only
 	 *
@@ -447,17 +426,21 @@ public class WebReference<J extends WebReference> implements NamedPair<String, S
 	@Override
 	public int compare(WebReference o1, WebReference o2)
 	{
-		if (o1.getSortOrder().compareTo(o2.getSortOrder()) == 0)
+		if (o1.getSortOrder()
+				    .compareTo(o2.getSortOrder()) == 0)
 		{
-			return o1.toString().compareTo(o2.toString());
+			return o1.toString()
+					       .compareTo(o2.toString());
 		}
-		return o1.getSortOrder().compareTo(o2.getSortOrder());
+		return o1.getSortOrder()
+				       .compareTo(o2.getSortOrder());
 	}
 
 	/**
 	 * Default Sort Order
 	 * <p>
-	 * 0 - Root (JQuery) 5 - Core 10 - Core Accompanied 15 - Stand Alone Components 20 - Complex Components 500k - Default 600k - Atmosphere Reserved
+	 * 0 - Root (JQuery) 5 - Core 10 - Core Accompanied 15 - Stand Alone Components 20 - Complex Components 500k - Default 600k -
+	 * Atmosphere Reserved
 	 *
 	 * @return
 	 */
@@ -469,7 +452,8 @@ public class WebReference<J extends WebReference> implements NamedPair<String, S
 	/**
 	 * Default Sort Order
 	 * <p>
-	 * 0 - Root (JQuery) 5 - Core 10 - Core Accompanied 15 - Stand Alone Components 20 - Complex Components 500k - Default 600k - Atmosphere Reserved
+	 * 0 - Root (JQuery) 5 - Core 10 - Core Accompanied 15 - Stand Alone Components 20 - Complex Components 500k - Default 600k -
+	 * Atmosphere Reserved
 	 * <p>
 	 *
 	 * @param sortOrder
@@ -573,16 +557,22 @@ public class WebReference<J extends WebReference> implements NamedPair<String, S
 		{
 			StringBuilder sb = new StringBuilder(getLocalReference());
 
-			if (useMinAtEndOfExtension && !sb.toString().contains(".min."))
+			if (useMinAtEndOfExtension && !sb.toString()
+					                               .contains(".min."))
 			{
 				sb.insert(sb.lastIndexOf(StaticStrings.STRING_DOT), ".min");
 			}
 
 			try
 			{
-				if (!GuiceContext.isBuildingInjector() && (!(sb.toString().toLowerCase().startsWith("http://")
-						                                             || sb.toString().toLowerCase().startsWith("https://")
-						                                             || sb.toString().startsWith("//"))))
+				if (!GuiceContext.isBuildingInjector() && (!(sb.toString()
+						                                             .toLowerCase()
+						                                             .startsWith("http://") || sb.toString()
+								                                                                       .toLowerCase()
+								                                                                       .startsWith(
+										                                                                       "https://") || sb.toString()
+												                                                                                      .startsWith(
+														                                                                                      "//"))))
 				{
 					sb = renderUrlString(sb);
 				}
@@ -598,7 +588,8 @@ public class WebReference<J extends WebReference> implements NamedPair<String, S
 		else
 		{
 			StringBuilder sb = new StringBuilder(getRemoteReference());
-			if (useMinAtEndOfExtension && isCanMinifyAtRemote() && !sb.toString().contains(".min."))
+			if (useMinAtEndOfExtension && isCanMinifyAtRemote() && !sb.toString()
+					                                                        .contains(".min."))
 			{
 				sb.insert(sb.lastIndexOf(StaticStrings.STRING_DOT), ".min");
 			}
@@ -638,7 +629,8 @@ public class WebReference<J extends WebReference> implements NamedPair<String, S
 	{
 		try
 		{
-			HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);
+			HttpServletRequest request = GuiceContext.inject()
+					                             .getInstance(HttpServletRequest.class);
 			if (request != null)
 			{
 				String url = SessionHelper.getServerPath();
@@ -659,5 +651,13 @@ public class WebReference<J extends WebReference> implements NamedPair<String, S
 			LOG.log(Level.WARNING, "Error in getting url reference", e);
 		}
 		return sb;
+	}
+
+	@Override
+	public int compareTo(WebReference o)
+	{
+		if (o == null)
+		{ return 1; }
+		return getSortOrder().compareTo(o.getSortOrder());
 	}
 }

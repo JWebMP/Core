@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -158,7 +158,7 @@ public class JavascriptReference extends WebReference<JavascriptReference>
 	@Override
 	public int hashCode()
 	{
-		return 13;
+		return getName().hashCode();
 	}
 
 }
