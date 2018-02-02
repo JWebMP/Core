@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2017 Marc Magon
  *
  * This program is free software: you can redistribute it and/or modify
@@ -27,9 +27,8 @@ import za.co.mmagon.jwebswing.generics.WebReference;
  */
 public class CSSReference extends WebReference<CSSReference>
 {
-	
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Construct a new CSS File Reference
 	 * <p>
@@ -44,7 +43,7 @@ public class CSSReference extends WebReference<CSSReference>
 	{
 		super(name, version, localReference, remoteReference, sortOrder);
 	}
-	
+
 	/**
 	 * Construct a new CSS File Reference
 	 * <p>
@@ -58,7 +57,7 @@ public class CSSReference extends WebReference<CSSReference>
 	{
 		super(name, version, localReference, remoteReference);
 	}
-	
+
 	/**
 	 * Construct a new CSS File Reference
 	 * <p>
@@ -71,7 +70,7 @@ public class CSSReference extends WebReference<CSSReference>
 	{
 		super(name, version, localReference, localReference);
 	}
-	
+
 	/**
 	 * Construct a new CSS File Reference
 	 * <p>
@@ -85,28 +84,4 @@ public class CSSReference extends WebReference<CSSReference>
 	{
 		super(name, version, localReference, localReference, sortOrder);
 	}
-	
-	@Override
-	public boolean equals(Object o)
-	{
-		if (o instanceof CSSReference)
-		{
-			if (o.toString().equals(toString()))
-			{
-				return true;
-			}
-			return getName().equalsIgnoreCase(CSSReference.class.cast(o).getName());
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
-	@Override
-	public int hashCode()
-	{
-		return 5;
-	}
-	
 }

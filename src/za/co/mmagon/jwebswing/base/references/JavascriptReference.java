@@ -28,7 +28,6 @@ import za.co.mmagon.jwebswing.generics.WebReference;
  */
 public class JavascriptReference extends WebReference<JavascriptReference>
 {
-
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -136,29 +135,4 @@ public class JavascriptReference extends WebReference<JavascriptReference>
 		setSortOrder(sortOrder);
 		setPriority(priority);
 	}
-
-	@Override
-	public boolean equals(Object o)
-	{
-		if (o instanceof JavascriptReference)
-		{
-			if (o.toString().equals(toString()))
-			{
-				return true;
-			}
-
-			return getName().equalsIgnoreCase(JavascriptReference.class.cast(o).getName());
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return getName().hashCode();
-	}
-
 }
