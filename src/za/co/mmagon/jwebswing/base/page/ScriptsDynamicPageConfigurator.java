@@ -29,28 +29,42 @@ class ScriptsDynamicPageConfigurator extends PageConfigurator
 		if (!page.isConfigured())
 		{
 			Style s = getCss(page);
-			if (page.getOptions().isDynamicRender())
+			if (page.getOptions()
+					    .isDynamicRender())
 			{
 				if (s != null)
 				{
-					page.getHead().add(new CSSLink(SessionHelper.getServerPath() + SiteBinder.getCSSLocation().replaceAll(STRING_FORWARD_SLASH, STRING_EMPTY)));
+					page.getHead()
+							.add(new CSSLink(SessionHelper.getServerPath() + SiteBinder.getCSSLocation()
+									                                                 .replaceAll(STRING_FORWARD_SLASH, STRING_EMPTY)));
 				}
 				if (JQueryPageConfigurator.isRequired())
 				{
-					page.getBody().add(getDynamicReference(SiteBinder.getJWScriptLocation().replaceAll(STRING_FORWARD_SLASH, STRING_EMPTY)));
-					page.getBody().add(getDynamicReference(SiteBinder.getJavaScriptLocation().replaceAll(STRING_FORWARD_SLASH, STRING_EMPTY)));
+					page.getBody()
+							.add(getDynamicReference(SiteBinder.getJWScriptLocation()
+									                         .replaceAll(STRING_FORWARD_SLASH, STRING_EMPTY)));
+					page.getBody()
+							.add(getDynamicReference(SiteBinder.getJavaScriptLocation()
+									                         .replaceAll(STRING_FORWARD_SLASH, STRING_EMPTY)));
 				}
 				if (AngularPageConfigurator.isRequired())
 				{
-					page.getBody().add(getDynamicReference(SiteBinder.getAngularScriptLocation().replaceAll(STRING_FORWARD_SLASH, STRING_EMPTY)));
+					page.getBody()
+							.add(getDynamicReference(SiteBinder.getAngularScriptLocation()
+									                         .replaceAll(STRING_FORWARD_SLASH, STRING_EMPTY)));
 				}
 
 			}
 			else
 			{
-				page.getHead().add(s);
+				if (s != null)
+				{
+					page.getHead()
+							.add(s);
+				}
 				ComponentHierarchyBase addable;
-				if (page.getOptions().isScriptsInHead())
+				if (page.getOptions()
+						    .isScriptsInHead())
 				{
 					addable = page.getHead();
 				}
@@ -75,8 +89,10 @@ class ScriptsDynamicPageConfigurator extends PageConfigurator
 
 	private Style getCss(Page page)
 	{
-		StringBuilder css = page.getBody().renderCss(0);
-		if (css.toString().isEmpty())
+		StringBuilder css = page.getBody()
+				                    .renderCss(0);
+		if (css.toString()
+				    .isEmpty())
 		{
 			return null;
 		}
@@ -97,7 +113,9 @@ class ScriptsDynamicPageConfigurator extends PageConfigurator
 	{
 		FileTemplates.getFileTemplate(JWScriptServlet.class, JWScriptServlet.FILE_TEMPLATE_NAME, "siteloader");
 		StringBuilder jsScript = FileTemplates.renderTemplateScripts(JWScriptServlet.FILE_TEMPLATE_NAME);
-		if (!jsScript.toString().trim().isEmpty())
+		if (!jsScript.toString()
+				     .trim()
+				     .isEmpty())
 		{
 			return newScript(jsScript.toString());
 		}
@@ -107,7 +125,9 @@ class ScriptsDynamicPageConfigurator extends PageConfigurator
 	private Script getJavascriptScript(Page page)
 	{
 		StringBuilder js = page.renderJavascript();
-		if (!js.toString().trim().isEmpty())
+		if (!js.toString()
+				     .trim()
+				     .isEmpty())
 		{
 			return newScript(page.getNewLine() + js);
 		}
@@ -116,8 +136,11 @@ class ScriptsDynamicPageConfigurator extends PageConfigurator
 
 	private Script getAngularScript(Page page)
 	{
-		StringBuilder jsAngular = page.getAngular().renderAngularJavascript(page);
-		if (!jsAngular.toString().trim().isEmpty())
+		StringBuilder jsAngular = page.getAngular()
+				                          .renderAngularJavascript(page);
+		if (!jsAngular.toString()
+				     .trim()
+				     .isEmpty())
 		{
 			return newScript(jsAngular.toString());
 		}

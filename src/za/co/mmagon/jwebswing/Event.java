@@ -339,7 +339,6 @@ public abstract class Event<J extends Event<J>>
 			assignFunctionsToComponent();
 			if (getComponent() != null)
 			{
-				Page p = getComponent().getPage();
 				JQueryPageConfigurator.setRequired(true);
 				AngularPageConfigurator.setRequired(true);
 			}

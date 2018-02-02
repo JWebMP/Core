@@ -47,13 +47,7 @@ public class JQueryPageConfigurator extends PageConfigurator
 {
 
 	private static final long serialVersionUID = 1L;
-
 	private static boolean required;
-
-	/**
-	 * String property denoting JQuery is enabled on a page
-	 */
-	private static final String JQueryEnabledString = "jquery-enabled";
 	/**
 	 * If the page must render JQuery 3
 	 */

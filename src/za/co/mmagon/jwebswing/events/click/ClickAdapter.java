@@ -24,7 +24,6 @@ import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.BodyEvents;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.ParagraphEvents;
-import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTypes;
 import za.co.mmagon.jwebswing.plugins.ComponentInformation;
 import za.co.mmagon.logger.LogFactory;
@@ -40,16 +39,16 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRAC
  *
  * @author Marc Magon
  */
-public abstract class ClickAdapter extends Event<ClickAdapter>
-		implements ParagraphEvents, BodyEvents, GlobalEvents
+public abstract class ClickAdapter extends Event<ClickAdapter> implements ParagraphEvents, BodyEvents, GlobalEvents
 {
 
 	/**
 	 * Logger for the Component
 	 */
-	@ComponentInformation(name = "Click Event", description = "Server Side Event for Click.",
-			url = "https://www.armineasy.com/JWebSwing", wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
-	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("ClickEvent");
+	@ComponentInformation(name = "Click Event", description = "Server Side Event for Click.", url = "https://www.armineasy.com/JWebSwing",
+	                      wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
+	private static final java.util.logging.Logger log = LogFactory.getInstance()
+			                                                    .getLogger("ClickEvent");
 	private static final long serialVersionUID = 1L;
 
 	protected ClickAdapter()
@@ -60,7 +59,8 @@ public abstract class ClickAdapter extends Event<ClickAdapter>
 	/**
 	 * Performs a click
 	 *
-	 * @param component The component this click is going to be acting on
+	 * @param component
+	 * 		The component this click is going to be acting on
 	 */
 	public ClickAdapter(ComponentHierarchyBase component)
 	{
@@ -73,7 +73,9 @@ public abstract class ClickAdapter extends Event<ClickAdapter>
 
 		if (!isConfigured() && getComponent() != null)
 		{
-			getComponent().addAttribute(AngularAttributes.ngClick, "jwCntrl.jw.isLoading || " + STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
+			getComponent().addAttribute(AngularAttributes.ngClick,
+			                            "jwCntrl.jw.isLoading || " + STRING_ANGULAR_EVENT_START + renderVariables() +
+					                            STRING_CLOSING_BRACKET_SEMICOLON);
 			if (getComponent().getAttribute(AngularAttributes.ngDisabled) == null)
 			{
 				getComponent().addAttribute(AngularAttributes.ngDisabled, "jwCntrl.jw.isLoading");
@@ -87,8 +89,10 @@ public abstract class ClickAdapter extends Event<ClickAdapter>
 	 * Triggers on Click
 	 * <p>
 	 *
-	 * @param call     The physical AJAX call
-	 * @param response The physical Ajax Receiver
+	 * @param call
+	 * 		The physical AJAX call
+	 * @param response
+	 * 		The physical Ajax Receiver
 	 */
 	public abstract void onClick(AjaxCall call, AjaxResponse response) throws InvalidAttributeValueException;
 
