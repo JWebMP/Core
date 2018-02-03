@@ -34,7 +34,6 @@ import javax.validation.constraints.Null;
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
-import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Level;
 
@@ -355,32 +354,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (this == obj)
-		{
-			return true;
-		}
-		if (obj == null)
-		{
-			return false;
-		}
-		if (getClass() != obj.getClass())
-		{
-			return false;
-		}
-		final ComponentFeatureBase<?, ?> other = (ComponentFeatureBase<?, ?>) obj;
-		if (this.sortOrder != other.sortOrder)
-		{
-			return false;
-		}
-		if (!Objects.equals(this.name, other.name))
-		{
-			return false;
-		}
-		if (!Objects.equals(this.features, other.features))
-		{
-			return false;
-		}
-		return Objects.equals(this.queries, other.queries);
+		return super.equals(obj);
 	}
 
 	@Override
@@ -702,6 +676,16 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	{
 		if (o == null)
 		{ return 1; }
-		return getSortOrder().compareTo(o.getSortOrder());
+		Integer comp = getSortOrder().compareTo(o.getSortOrder());
+		if (comp == 0)
+		{
+			comp = getName().compareTo(o.getName());
+			if (comp == 0)
+			{
+				return getID().compareTo(o.getID());
+			}
+			return comp;
+		}
+		return comp;
 	}
 }
