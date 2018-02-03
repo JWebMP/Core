@@ -658,6 +658,10 @@ public class WebReference<J extends WebReference>
 	{
 		if (o == null)
 		{ return 1; }
+		if (getSortOrder().compareTo(o.getSortOrder()) == 0)
+		{
+			return getName().compareTo(o.getName());
+		}
 		return getSortOrder().compareTo(o.getSortOrder());
 	}
 }
