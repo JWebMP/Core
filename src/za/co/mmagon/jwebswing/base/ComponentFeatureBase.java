@@ -679,7 +679,8 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 		Integer comp = getSortOrder().compareTo(o.getSortOrder());
 		if (comp == 0)
 		{
-			comp = getName().compareTo(o.getName());
+			if (getName() != null)
+			{ comp = getName().compareTo(o.getName()); }
 			if (comp == 0)
 			{
 				return getID().compareTo(o.getID());
