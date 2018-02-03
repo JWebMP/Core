@@ -76,9 +76,15 @@ public abstract class ClickAdapter extends Event<ClickAdapter> implements Paragr
 			getComponent().addAttribute(AngularAttributes.ngClick,
 			                            "jwCntrl.jw.isLoading || " + STRING_ANGULAR_EVENT_START + renderVariables() +
 					                            STRING_CLOSING_BRACKET_SEMICOLON);
+
 			if (getComponent().getAttribute(AngularAttributes.ngDisabled) == null)
 			{
 				getComponent().addAttribute(AngularAttributes.ngDisabled, "jwCntrl.jw.isLoading");
+			}
+			else
+			{
+				getComponent().addAttribute(AngularAttributes.ngDisabled,
+				                            "jwCntrl.jw.isLoading || " + getComponent().getAttribute(AngularAttributes.ngDisabled));
 			}
 		}
 
