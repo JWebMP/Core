@@ -126,7 +126,7 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 	{
 		if (features == null)
 		{
-			features = new LinkedHashSet<>();
+			features = new TreeSet<>();
 		}
 		return features;
 	}
@@ -237,7 +237,7 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 	{
 		if (events == null)
 		{
-			events = new LinkedHashSet<>();
+			events = new TreeSet<>();
 		}
 		return events;
 	}
@@ -281,7 +281,7 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 	{
 		if (components == null)
 		{
-			components = new LinkedHashSet<>();
+			components = new TreeSet<>();
 		}
 		return components;
 	}

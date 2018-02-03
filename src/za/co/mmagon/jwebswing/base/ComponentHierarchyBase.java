@@ -342,7 +342,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	{
 		preConfigure();
 		StringBuilder sb = new StringBuilder();
-		Set<String> allScripts = new TreeSet<>();
+		Set<String> allScripts = new LinkedHashSet<>();
 		Set<StringBuilder> queries = getQueriesAll();
 		queries.forEach(a ->
 		                {

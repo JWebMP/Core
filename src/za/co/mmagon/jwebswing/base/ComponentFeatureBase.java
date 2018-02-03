@@ -670,7 +670,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	 */
 	@NotNull
 	@SuppressWarnings({"unused", "unchecked"})
-	protected J setComponent(ComponentHierarchyBase component)
+	public J setComponent(ComponentHierarchyBase component)
 	{
 		this.component = component;
 		return (J) this;
