@@ -108,6 +108,7 @@ public abstract class JWDefaultServlet extends HttpServlet
 			response.setHeader(ACCESS_CONTROL_ALLOW_METHODS_HEADER_NAME, "GET, POST");
 			response.setHeader(ACCESS_CONTROL_ALLOW_HEADERS_HEADER_NAME, "Content-Type, Accept");
 			out.write(output.toString());
+
 			long transferTime = new Date().getTime() - dataTransferDate.getTime();
 			log.log(Level.FINER, "[Network Reply Data Size]-[" + output.length() + "];");
 			log.log(Level.FINER, "[Network Reply]-[" + output + "];[Time]-[" + transferTime + "];");

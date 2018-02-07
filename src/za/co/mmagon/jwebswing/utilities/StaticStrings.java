@@ -9,8 +9,11 @@ public interface StaticStrings extends Serializable
 {
 	String REQUEST_SITE_HEADER_NAME = "jwsiteurl";
 
+	String HTML_HEADER_JSON = "text/json";
 	String HTML_HEADER_JAVASCRIPT = "application/javascript";
 	String HTML_HEADER_DEFAULT_CONTENT_TYPE = "text/html";
+
+	String UTF8 = "UTF-8";
 
 	String STRING_EMPTY = "";
 	String STRING_SPACE = " ";
@@ -92,7 +95,9 @@ public interface StaticStrings extends Serializable
 	/**
 	 * Default Medium text for Latin
 	 */
-	String MediumLatin = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero laboriosam dolor perspiciatis omnis exercitationem. Beatae, officia pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas suscipit facere rem dicta, debitis...";
+	String MediumLatin = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero laboriosam dolor perspiciatis omnis " +
+			                     "exercitationem. Beatae, officia pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas " +
+			                     "" + "suscipit facere rem dicta, debitis...";
 
 	String LocalStorageSessionAttributeKey = "LocalStorage";
 	String SessionStorageSessionAttributeKey = "SessionStorage";
