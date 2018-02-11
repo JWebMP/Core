@@ -40,7 +40,8 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_EMPTY;
  */
 public class FileTemplates implements Serializable
 {
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("FileTemplates");
+	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
+			                                                    .getLogger("FileTemplates");
 	/**
 	 * All registered templates
 	 */
@@ -57,6 +58,16 @@ public class FileTemplates implements Serializable
 	private FileTemplates()
 	{
 
+	}
+
+	/**
+	 * Removes a template
+	 *
+	 * @param templateName
+	 */
+	public static void removeTemplate(String templateName)
+	{
+		TemplateScripts.remove(templateName);
 	}
 
 	/**
@@ -113,7 +124,8 @@ public class FileTemplates implements Serializable
 	{
 		if (TemplateScripts.containsKey(template) && TemplateScripts.get(template) != null)
 		{
-			return processTemplate(template, getTemplateScripts().get(template).toString());
+			return processTemplate(template, getTemplateScripts().get(template)
+					                                 .toString());
 		}
 
 		return new StringBuilder();
@@ -147,7 +159,9 @@ public class FileTemplates implements Serializable
 			}
 			catch (IllegalArgumentException iae)
 			{
-				LOG.log(Level.WARNING, format("[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[{0}];[Script]-[{1}]", templateVariable, templateScript), iae);
+				LOG.log(Level.WARNING,
+				        format("[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[{0}];[Script]-[{1}]",
+				               templateVariable, templateScript), iae);
 			}
 		}
 		TemplateScripts.put(templateName, new StringBuilder(templateOutput.trim()));
@@ -157,7 +171,8 @@ public class FileTemplates implements Serializable
 	/**
 	 * Replaces all instances of the following
 	 * <p>
-	 * %%APP%% - the angular module application name %%DIRECTIVES%% - the angular directives %%MODULES%% the modules generates %%CONTROLLER%% the modules generates
+	 * %%APP%% - the angular module application name %%DIRECTIVES%% - the angular directives %%MODULES%% the modules generates
+	 * %%CONTROLLER%% the modules generates
 	 *
 	 * @param templateName
 	 * 		The template name
@@ -174,7 +189,8 @@ public class FileTemplates implements Serializable
 	/**
 	 * Replaces all instances of the following
 	 * <p>
-	 * %%APP%% - the angular module application name %%DIRECTIVES%% - the angular directives %%MODULES%% the modules generates %%CONTROLLER%% the modules generates
+	 * %%APP%% - the angular module application name %%DIRECTIVES%% - the angular directives %%MODULES%% the modules generates
+	 * %%CONTROLLER%% the modules generates
 	 *
 	 * @param referenceClass
 	 * 		The class to find where the file is at
@@ -223,7 +239,8 @@ public class FileTemplates implements Serializable
 			try
 			{
 				String templateFileName = fileName;
-				if (!(fileName.contains(".html") || fileName.contains(".htm") || fileName.contains(".js") || fileName.contains(".css") || fileName.contains(".min")))
+				if (!(fileName.contains(".html") || fileName.contains(".htm") || fileName.contains(".js") || fileName.contains(
+						".css") || fileName.contains(".min")))
 				{
 					templateFileName += ".js";
 				}
@@ -239,7 +256,13 @@ public class FileTemplates implements Serializable
 			}
 			catch (FileNotFoundException ex)
 			{
-				LOG.log(Level.SEVERE, "[Error]-[unable to find template file];[TemplateFile]-[" + templateName + "];[TemplatePath]-[" + referenceClass.getResource(templateName).getPath() + "]", ex);
+				LOG.log(Level.SEVERE,
+				        "[Error]-[unable to find template file];[TemplateFile]-[" + templateName + "];[TemplatePath]-[" + referenceClass
+						                                                                                                          .getResource(
+						        templateName)
+						                                                                                                          .getPath
+								                                                                                                           () + "]",
+				        ex);
 			}
 			catch (IOException ex)
 			{

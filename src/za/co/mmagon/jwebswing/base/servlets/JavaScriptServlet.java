@@ -59,6 +59,7 @@ public class JavaScriptServlet extends JWDefaultServlet
 		response.setContentType("text/javascript");
 		Date startDate = new Date();
 		Page page = GuiceContext.inject().getInstance(Page.class);
+		FileTemplates.removeTemplate(scriptReplacement);
 		if (page == null)
 		{
 			throw new MissingComponentException("Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
