@@ -1,7 +1,6 @@
 package za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import javafx.scene.input.DragEvent;
 import za.co.mmagon.jwebswing.events.activate.ActivateAdapter;
 import za.co.mmagon.jwebswing.events.beforeactivate.BeforeActivateAdapter;
 import za.co.mmagon.jwebswing.events.beforeclose.BeforeCloseAdapter;
@@ -10,15 +9,18 @@ import za.co.mmagon.jwebswing.events.beforestop.BeforeStopAdapter;
 import za.co.mmagon.jwebswing.events.blur.BlurAdapter;
 import za.co.mmagon.jwebswing.events.buttonclick.ButtonClickAdapter;
 import za.co.mmagon.jwebswing.events.cancel.CancelAdapter;
+import za.co.mmagon.jwebswing.events.change.ChangeAdapter;
 import za.co.mmagon.jwebswing.events.checked.CheckedAdapter;
 import za.co.mmagon.jwebswing.events.click.ClickAdapter;
 import za.co.mmagon.jwebswing.events.close.CloseAdapter;
 import za.co.mmagon.jwebswing.events.complete.CompleteAdapter;
 import za.co.mmagon.jwebswing.events.create.CreateAdapter;
 import za.co.mmagon.jwebswing.events.deactivate.DeactivateAdapter;
+import za.co.mmagon.jwebswing.events.drag.DragAdapter;
 import za.co.mmagon.jwebswing.events.dragstart.DragStartAdapter;
 import za.co.mmagon.jwebswing.events.dragstop.DragStopAdapter;
 import za.co.mmagon.jwebswing.events.drop.DropAdapter;
+import za.co.mmagon.jwebswing.events.focus.FocusAdapter;
 import za.co.mmagon.jwebswing.events.load.LoadAdapter;
 import za.co.mmagon.jwebswing.events.mousedown.MouseDownAdapter;
 import za.co.mmagon.jwebswing.events.mouseenter.MouseEnterAdapter;
@@ -45,8 +47,6 @@ import za.co.mmagon.jwebswing.events.unselected.UnselectedAdapter;
 import za.co.mmagon.jwebswing.events.update.UpdateAdapter;
 import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.commandevent.PerformCommandEvent;
 
-import javax.swing.event.ChangeEvent;
-import java.awt.event.FocusEvent;
 
 /**
  * Everything is a click so that makes it nice
@@ -96,7 +96,7 @@ public enum EventTypes implements Comparable<EventTypes>
 	 * <p>
 	 * Canceling this event prevents the value from being updated, but does not prevent the menu item from being focused.
 	 */
-	focus(FocusEvent.class, null),
+	focus(FocusAdapter.class, null),
 	/**
 	 * Registers when a drag starts Triggered when the user starts dragging the dialog.
 	 */
@@ -129,7 +129,7 @@ public enum EventTypes implements Comparable<EventTypes>
 	/**
 	 * Triggered while the dialog is being dragged.
 	 */
-	drag(DragEvent.class, null),
+	drag(DragAdapter.class, null),
 	/**
 	 * Triggered when the suggestion menu is opened or updated. Triggered when the dialog is opened.
 	 */
@@ -165,7 +165,7 @@ public enum EventTypes implements Comparable<EventTypes>
 	 * Triggered when the field is blurred, if the value has changed. Triggered when the value of the progressbar changes. Triggered when the selected item has changed. Not every select event will
 	 * fire a change event.
 	 */
-	change(ChangeEvent.class, null),
+	change(ChangeAdapter.class, null),
 	unselected(UnselectedAdapter.class, null),
 	selected(SelectedAdapter.class, null),
 	selecting(SelectingAdapter.class, null),
