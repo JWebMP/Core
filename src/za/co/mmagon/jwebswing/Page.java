@@ -503,38 +503,7 @@ public class Page<J extends Page<J>> extends Html<J> implements IPage
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof Page))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		Page page = (Page) o;
-
-		if (isPageInitialized() != page.isPageInitialized())
-		{
-			return false;
-		}
-		if (!getOptions().equals(page.getOptions()))
-		{
-			return false;
-		}
-		if (!getPageFields().equals(page.getPageFields()))
-		{
-			return false;
-		}
-		if (!getUserAgent().equals(page.getUserAgent()))
-		{
-			return false;
-		}
-		return getAngular().equals(page.getAngular());
+		return super.equals(o);
 	}
 
 	/**
@@ -622,6 +591,7 @@ public class Page<J extends Page<J>> extends Html<J> implements IPage
 		if (angular == null)
 		{
 			angular = GuiceContext.getInstance(AngularPageConfigurator.class);
+			AngularPageConfigurator.setRequired(true);
 		}
 		return angular;
 	}

@@ -220,49 +220,12 @@ public abstract class Html<J extends Html<J>>
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof Html))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		Html<?> html = (Html<?>) o;
-
-		if (!getHead().equals(html.getHead()))
-		{
-			return false;
-		}
-		if (getRunningEnvironment() != html.getRunningEnvironment())
-		{
-			return false;
-		}
-		if (!getBody().equals(html.getBody()))
-		{
-			return false;
-		}
-		if (getHtmlVersion() != html.getHtmlVersion())
-		{
-			return false;
-		}
-		return getBrowser() == html.getBrowser();
+		return super.equals(o);
 	}
 
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + getHead().hashCode();
-		result = 31 * result + getRunningEnvironment().hashCode();
-		result = 31 * result + getBody().hashCode();
-		result = 31 * result + getHtmlVersion().hashCode();
-		result = 31 * result + getBrowser().hashCode();
-		return result;
+		return super.hashCode();
 	}
 }

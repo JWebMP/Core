@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Base class for defining a Theme Includes an icon image for Pretties sake
@@ -221,12 +220,7 @@ public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 	@Override
 	public int hashCode()
 	{
-		int hash = 5;
-		hash = 53 * hash + Objects.hashCode(this.name);
-		hash = 53 * hash + Objects.hashCode(this.cssRefs);
-		hash = 53 * hash + Objects.hashCode(this.javascriptRefs);
-		hash = 53 * hash + (this.renderClassName ? 1 : 0);
-		return hash;
+		return super.hashCode();
 	}
 
 	/**
@@ -239,32 +233,7 @@ public abstract class Theme implements ITheme, Comparator<Theme>, Serializable
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (this == obj)
-		{
-			return true;
-		}
-		if (obj == null)
-		{
-			return false;
-		}
-		if (getClass() != obj.getClass())
-		{
-			return false;
-		}
-		final Theme other = (Theme) obj;
-		if (this.renderClassName != other.renderClassName)
-		{
-			return false;
-		}
-		if (!Objects.equals(this.name, other.name))
-		{
-			return false;
-		}
-		if (!Objects.equals(this.cssRefs, other.cssRefs))
-		{
-			return false;
-		}
-		return Objects.equals(this.javascriptRefs, other.javascriptRefs);
+		return super.equals(obj);
 	}
 
 }
