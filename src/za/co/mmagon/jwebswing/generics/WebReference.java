@@ -613,9 +613,12 @@ public class WebReference<J extends WebReference>
 	 *
 	 * @param specifiedClassName
 	 */
-	public void setSpecifiedClassName(String specifiedClassName)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setSpecifiedClassName(String specifiedClassName)
 	{
 		this.specifiedClassName = specifiedClassName;
+		return (J) this;
 	}
 
 	/**
@@ -654,6 +657,7 @@ public class WebReference<J extends WebReference>
 	}
 
 	@Override
+	@SuppressWarnings("all")
 	public int compareTo(WebReference o)
 	{
 		if (o == null)
