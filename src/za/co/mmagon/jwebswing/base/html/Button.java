@@ -20,6 +20,7 @@ import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
@@ -54,12 +55,11 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @since 2014/12/20
  */
 public class Button<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Button<C, A, F, E, J>>
-		extends Component<C, A, F, E, J>
-		implements GlobalChildren
+		extends Component<C, A, F, E, J> implements GlobalChildren, ListItemChildren
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructs a new button object with no text
 	 */
@@ -67,7 +67,7 @@ public class Button<C extends GlobalChildren, A extends Enum & AttributeDefiniti
 	{
 		this("");
 	}
-	
+
 	/**
 	 * Constructs a new button object with the given text
 	 * <p>

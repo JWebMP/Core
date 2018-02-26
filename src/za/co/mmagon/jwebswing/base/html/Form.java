@@ -20,6 +20,7 @@ import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.FormAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
 
@@ -65,9 +66,9 @@ import java.util.Objects;
  * @since forever
  */
 public class Form<J extends Form<J>>
-		extends Component<GlobalChildren, FormAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<GlobalChildren, FormAttributes, GlobalFeatures, GlobalEvents, J> implements ListItemChildren
 {
-	
+
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The label of this form
@@ -79,7 +80,7 @@ public class Form<J extends Form<J>>
 	 * Doesn't do anything here really, but children use it
 	 */
 	private boolean inline;
-	
+
 	/**
 	 * Constructs a new form
 	 */
@@ -87,7 +88,7 @@ public class Form<J extends Form<J>>
 	{
 		super(ComponentTypes.Form);
 	}
-	
+
 	@Override
 	protected StringBuilder renderBeforeTag()
 	{
@@ -103,7 +104,7 @@ public class Form<J extends Form<J>>
 			return super.renderBeforeTag();
 		}
 	}
-	
+
 	/**
 	 * Returns the label
 	 * @return
@@ -112,7 +113,7 @@ public class Form<J extends Form<J>>
 	{
 		return label;
 	}
-	
+
 	/**
 	 * Sets the label
 	 * @param label
@@ -123,7 +124,7 @@ public class Form<J extends Form<J>>
 		this.label = label;
 		return (J)this;
 	}
-	
+
 	/**
 	 * If this form is set to render inline
 	 * @return
@@ -132,7 +133,7 @@ public class Form<J extends Form<J>>
 	{
 		return inline;
 	}
-	
+
 	/**
 	 * If this form must be rendered inline by children
 	 * @param inline
@@ -143,7 +144,7 @@ public class Form<J extends Form<J>>
 		this.inline = inline;
 		return (J)this;
 	}
-	
+
 	@Override
 	public boolean equals(Object o)
 	{
@@ -163,7 +164,7 @@ public class Form<J extends Form<J>>
 		return inline == form.inline &&
 				Objects.equals(getLabel(), form.getLabel());
 	}
-	
+
 	@Override
 	public int hashCode()
 	{

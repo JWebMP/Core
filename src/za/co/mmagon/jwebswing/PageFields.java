@@ -288,7 +288,8 @@ public class PageFields<J extends PageFields<J>> extends JavaScriptPart<J>
 		}
 		catch (IOException | InvalidPathException ex)
 		{
-			Logger.getLogger(Page.class.getName()).log(Level.WARNING, "Unable to determine fav icon type from {0}", ex);
+			Logger.getLogger(Page.class.getName())
+					.log(Level.FINER, "Unable to determine fav icon type from {0}", ex);
 		}
 		favIconLink.addAttribute(CSSLinkAttributes.Type, mimeType);
 		favIconLink.addAttribute(CSSLinkAttributes.HRef, favIconURL);

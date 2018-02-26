@@ -54,12 +54,11 @@ import za.co.mmagon.jwebswing.base.html.attributes.HeaderTypes;
  * @author GedMarc
  * @since 24 Apr 2016
  */
-public class H1<J extends H1<J>>
-		extends HeaderText<J>
+public class H1<J extends H1<J>> extends HeaderText<J>
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * HTML Headings<p>
 	 * <p>
@@ -86,7 +85,8 @@ public class H1<J extends H1<J>>
 	 * <p>
 	 * The &lt;h1&gt; to &lt;h6&gt; tags are used to define HTML headings.<p>
 	 * <p>
-	 * &lt;h1&gt; defines the most important heading. &lt;h6&gt; defines the least important heading. Differences Between HTML 4.01 and HTML5<p>
+	 * &lt;h1&gt; defines the most important heading. &lt;h6&gt; defines the least important heading. Differences Between HTML 4.01 and
+	 * HTML5<p>
 	 * <p>
 	 * The "align" attribute is deprecated in HTML 4.01, and is not supported in HTML5. Use CSS to align elements.<p>
 	 * <p>
@@ -96,8 +96,9 @@ public class H1<J extends H1<J>>
 	 */
 	public H1()
 	{
+		this(null);
 	}
-	
+
 	/**
 	 * HTML Headings<p>
 	 * <p>
@@ -124,7 +125,8 @@ public class H1<J extends H1<J>>
 	 * <p>
 	 * The &lt;h1&gt; to &lt;h6&gt; tags are used to define HTML headings.<p>
 	 * <p>
-	 * &lt;h1&gt; defines the most important heading. &lt;h6&gt; defines the least important heading. Differences Between HTML 4.01 and HTML5<p>
+	 * &lt;h1&gt; defines the most important heading. &lt;h6&gt; defines the least important heading. Differences Between HTML 4.01 and
+	 * HTML5<p>
 	 * <p>
 	 * The "align" attribute is deprecated in HTML 4.01, and is not supported in HTML5. Use CSS to align elements.<p>
 	 * <p>
