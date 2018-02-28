@@ -61,18 +61,13 @@ public class BodyTest extends BaseTestClass
 		b.add(new Comment("meh"));
 		WebReference.setIsLocal(true);
 		System.out.println(p.toString(true));
-		assertEquals("<!DOCTYPE html>\n" +
-				             "<html>\n" +
-				             "\t<body id=\"body\">\n" +
-				             "\t\t<!-- meh -->\n" +
-				             "\t\t<!-- Priority [First] Values -->\n" +
-				             "\t\t<script src=\"bower_components/jquery-3/dist/jquery.min.js\" type=\"text/javascript\"></script>\n" +
-				             "\t\t<!-- Priority [Second] Values -->\n" +
-				             "\t\t<script src=\"bower_components/jquery-migrate/jquery-migrate.min.js\" type=\"text/javascript\"></script>\n" +
-				             "\t\t<script src=\"jwscr\" type=\"application/javascript\"></script>\n" +
-				             "\t\t<script src=\"jwjs\" type=\"application/javascript\"></script>\n" +
-				             "\t</body>\n" +
-				             "</html>", p.toString(true).toString());
+		assertEquals(
+				"<!DOCTYPE html>\n" + "<html>\n" + "\t<body id=\"body\">\n" + "\t\t<!-- meh -->\n" + "\t\t<!-- Priority [First] Values " +
+						"-->\n" + "\t\t<script src=\"bower_components/jquery-3/dist/jquery.min.js\" type=\"text/javascript\"></script>\n"
+						+ "\t\t<script src=\"jwscr\" type=\"application/javascript\"></script>\n" + "\t\t<script src=\"jwjs\" " +
+						"type=\"application/javascript\"></script>\n" + "\t</body>\n" + "</html>",
+				p.toString(true)
+						.toString());
 	}
 
 	@Test
@@ -83,17 +78,12 @@ public class BodyTest extends BaseTestClass
 		b.add(new Comment("meh"));
 		WebReference.setIsLocal(false);
 		System.out.println(p.toString(true));
-		assertEquals("<!DOCTYPE html>\n" +
-				             "<html>\n" +
-				             "\t<body id=\"body\">\n" +
-				             "\t\t<!-- meh -->\n" +
-				             "\t\t<!-- Priority [First] Values -->\n" +
-				             "\t\t<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js\" type=\"text/javascript\"></script>\n" +
-				             "\t\t<!-- Priority [Second] Values -->\n" +
-				             "\t\t<script src=\"http://code.jquery.com/jquery-migrate-1.4.1.js\" type=\"text/javascript\"></script>\n" +
-				             "\t\t<script src=\"jwscr\" type=\"application/javascript\"></script>\n" +
-				             "\t\t<script src=\"jwjs\" type=\"application/javascript\"></script>\n" +
-				             "\t</body>\n" +
-				             "</html>", p.toString(true).toString());
+		assertEquals(
+				"<!DOCTYPE html>\n" + "<html>\n" + "\t<body id=\"body\">\n" + "\t\t<!-- meh -->\n" + "\t\t<!-- Priority [First] Values " +
+						"-->\n" + "\t\t<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js\" " +
+						"type=\"text/javascript\"></script>\n" + "\t\t<script src=\"jwscr\" type=\"application/javascript\"></script>\n" +
+						"\t\t<script src=\"jwjs\" type=\"application/javascript\"></script>\n" + "\t</body>\n" + "</html>",
+				p.toString(true)
+						.toString());
 	}
 }

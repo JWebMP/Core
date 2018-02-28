@@ -29,7 +29,10 @@ import za.co.mmagon.jwebswing.plugins.PluginInformation;
  */
 @PluginInformation(pluginName = "JQuery",
 		pluginUniqueName = "jquery",
-		pluginDescription = "jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript.",
+		pluginDescription = "jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal "
+				                    + "and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that " +
+				                    "works" + " across a multitude of browsers. With a combination of versatility and extensibility, " +
+				                    "jQuery has " + "changed the way that millions of people write JavaScript.",
 		pluginVersion = "3.1.1",
 		pluginDependancyUniqueIDs = "",
 		pluginCategories = "javascript,jquery, framework, jwebswing",
@@ -41,8 +44,7 @@ import za.co.mmagon.jwebswing.plugins.PluginInformation;
 		pluginIconUrl = "jquery_icon.png",
 		pluginIconImageUrl = "jquery_logo.png",
 		pluginLastUpdatedDate = "2017/03/13",
-		pluginOriginalHomepage = "http://www.jquery.com"
-)
+		pluginOriginalHomepage = "http://www.jquery.com")
 public class JQueryPageConfigurator extends PageConfigurator
 {
 
@@ -52,6 +54,7 @@ public class JQueryPageConfigurator extends PageConfigurator
 	 * If the page must render JQuery 3
 	 */
 	private static boolean jquery3 = true;
+	private static boolean renderMigrate = false;
 
 	public JQueryPageConfigurator()
 	{
@@ -89,14 +92,36 @@ public class JQueryPageConfigurator extends PageConfigurator
 		JQueryPageConfigurator.jquery3 = jquery3;
 	}
 
+	/**
+	 * If the migrate plugin must be rendered. Default false
+	 *
+	 * @return
+	 */
+	public static boolean isRenderMigrate()
+	{
+		return renderMigrate;
+	}
+
+	/**
+	 * If the migrate plugin must be rendered. Default false
+	 *
+	 * @param renderMigrate
+	 */
+	public static void setRenderMigrate(boolean renderMigrate)
+	{
+		JQueryPageConfigurator.renderMigrate = renderMigrate;
+	}
+
 	@Override
 	public Page configure(Page page)
 	{
 		if (page != null)
 		{
-			if (page.getOptions().isLocalStorage())
+			if (page.getOptions()
+					    .isLocalStorage())
 			{
-				page.getBody().addJavaScriptReference(JQueryReferencePool.PersistJS.getJavaScriptReference());
+				page.getBody()
+						.addJavaScriptReference(JQueryReferencePool.PersistJS.getJavaScriptReference());
 			}
 			if (required)
 			{
@@ -106,12 +131,21 @@ public class JQueryPageConfigurator extends PageConfigurator
 				}
 				else if (isJquery3())
 				{
-					page.getBody().addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
-					page.getBody().addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
+					page.getBody()
+							.addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
+					if (renderMigrate)
+					{
+						page.getBody()
+								.addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
+					}
 				}
 				else
 				{
-					page.getBody().addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
+					if (renderMigrate)
+					{
+						page.getBody()
+								.addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
+					}
 				}
 			}
 		}
@@ -121,27 +155,40 @@ public class JQueryPageConfigurator extends PageConfigurator
 
 	private Page configureForInternetExplorer(Page page)
 	{
-		if (page.getBrowser().getBrowserGroup() == BrowserGroups.InternetExplorer)
+		if (page.getBrowser()
+				    .getBrowserGroup() == BrowserGroups.InternetExplorer)
 		{
-			if (page.getBrowser().getBrowserVersion() < 9)
+			if (page.getBrowser()
+					    .getBrowserVersion() < 9)
 			{
-				page.getBody().removeJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
-				page.getBody().removeJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
-				page.getBody().removeJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
-				page.getBody().addJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());
+				page.getBody()
+						.removeJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
+				page.getBody()
+						.removeJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
+				page.getBody()
+						.removeJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
+				page.getBody()
+						.addJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());
 			}
 		}
 		else
 		{
-			page.getBody().removeJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());
+			page.getBody()
+					.removeJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());
 			if (isJquery3())
 			{
-				page.getBody().addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
-				page.getBody().addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
+				page.getBody()
+						.addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
+				if (renderMigrate)
+				{
+					page.getBody()
+							.addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
+				}
 			}
 			else
 			{
-				page.getBody().addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
+				page.getBody()
+						.addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
 			}
 		}
 
