@@ -23,7 +23,6 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
@@ -76,7 +75,7 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_EMPTY;
  * @author Marc Magon
  */
 public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
-		extends Component<NoChildren, A, GlobalFeatures, GlobalEvents, J>
+		extends Component<GlobalChildren, A, GlobalFeatures, GlobalEvents, J>
 		implements GlobalChildren, ParagraphChildren
 {
 	private static final long serialVersionUID = 1L;
@@ -106,8 +105,16 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		if (inputType != null)
 		{
 			this.inputType = inputType;
-			addAttribute(Type, getInputType().name().toLowerCase());
+			addAttribute(Type, getInputType().name()
+			                                 .toLowerCase());
 			addAttribute(Name, getID());
+		}
+		if (!getInlineClosingTag() && getPage().getHtmlVersion()
+		                                       .name()
+		                                       .startsWith("X") || !getTag().equals("select"))
+		{
+			setInlineClosingTag(true);
+
 		}
 		setClosingTag(false);
 	}
@@ -149,13 +156,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured() &&
-				    getInlineClosingTag() == null || !getInlineClosingTag() &&
-						                                     getPage().getHtmlVersion().name().startsWith("X"))
-		{
-			setInlineClosingTag(true);
 
-		}
 		super.preConfigure();
 	}
 
@@ -253,20 +254,6 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	}
 
 	/**
-	 * Sets the pattern for this input object if required
-	 *
-	 * @param angularPatternName
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public J setPattern(String angularPatternName)
-	{
-		addAttribute(AngularAttributes.ngPattern, angularPatternName);
-		return (J) this;
-	}
-
-	/**
 	 * Sets the raw pattern for this input object if required
 	 *
 	 * @param pattern
@@ -287,25 +274,24 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		return (J) this;
 	}
 
+	/**
+	 * Sets the pattern for this input object if required
+	 *
+	 * @param angularPatternName
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public J setPattern(String angularPatternName)
+	{
+		addAttribute(AngularAttributes.ngPattern, angularPatternName);
+		return (J) this;
+	}
+
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof Input))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		Input<?, ?> input = (Input<?, ?>) o;
-
-		return getInputType() == input.getInputType();
+		return super.equals(o);
 	}
 
 	@Override

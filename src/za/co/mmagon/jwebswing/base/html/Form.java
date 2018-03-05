@@ -23,8 +23,9 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 
-import java.util.Objects;
+import javax.validation.constraints.NotNull;
 
 /**
  * Definition and Usage
@@ -66,7 +67,8 @@ import java.util.Objects;
  * @since forever
  */
 public class Form<J extends Form<J>>
-		extends Component<GlobalChildren, FormAttributes, GlobalFeatures, GlobalEvents, J> implements ListItemChildren
+		extends Component<GlobalChildren, FormAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ListItemChildren
 {
 
 	private static final long serialVersionUID = 1L;
@@ -74,12 +76,7 @@ public class Form<J extends Form<J>>
 	 * The label of this form
 	 */
 	private Label label;
-	/**
-	 * If this form must be applied as inline
-	 *
-	 * Doesn't do anything here really, but children use it
-	 */
-	private boolean inline;
+
 
 	/**
 	 * Constructs a new form
@@ -107,6 +104,7 @@ public class Form<J extends Form<J>>
 
 	/**
 	 * Returns the label
+	 *
 	 * @return
 	 */
 	public Label getLabel()
@@ -116,58 +114,43 @@ public class Form<J extends Form<J>>
 
 	/**
 	 * Sets the label
+	 *
 	 * @param label
+	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
 	public J setLabel(Label label)
 	{
 		this.label = label;
-		return (J)this;
+		return (J) this;
 	}
 
-	/**
-	 * If this form is set to render inline
-	 * @return
-	 */
-	public boolean isInline()
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setNoValidate(boolean noValidate)
 	{
-		return inline;
-	}
-
-	/**
-	 * If this form must be rendered inline by children
-	 * @param inline
-	 * @return
-	 */
-	public J setInline(boolean inline)
-	{
-		this.inline = inline;
-		return (J)this;
+		if (noValidate)
+		{
+			addAttribute(FormAttributes.NoValidate, StaticStrings.STRING_EMPTY);
+		}
+		else
+		{
+			removeAttribute(FormAttributes.NoValidate);
+		}
+		return (J) this;
 	}
 
 	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof Form))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-		Form<?> form = (Form<?>) o;
-		return inline == form.inline &&
-				Objects.equals(getLabel(), form.getLabel());
+		return super.equals(o);
 	}
 
 	@Override
 	public int hashCode()
 	{
-		return Objects.hash(super.hashCode(), getLabel(), inline);
+		return super.hashCode();
 	}
 }

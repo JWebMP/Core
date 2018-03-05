@@ -1,10 +1,8 @@
 package za.co.mmagon.jwebswing.base.angular.forms;
 
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.angular.forms.enumerations.InputErrorValidations;
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.base.html.DivSimple;
-import za.co.mmagon.jwebswing.base.html.Form;
-import za.co.mmagon.jwebswing.base.html.Input;
+import za.co.mmagon.jwebswing.base.html.*;
 
 import javax.validation.constraints.NotNull;
 
@@ -18,7 +16,8 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_DOT;
  *
  * @param <J>
  */
-public class AngularInputMessages<J extends AngularInputMessages<J>> extends DivSimple<J>
+public class AngularInputMessages<J extends AngularInputMessages<J>>
+		extends DivSimple<J>
 {
 	/**
 	 * Constructs a new angular block for the given inputFields and Names
@@ -30,10 +29,7 @@ public class AngularInputMessages<J extends AngularInputMessages<J>> extends Div
 	 */
 	public AngularInputMessages(Form formToApply, Input formInputName)
 	{
-		addAttribute("ng-messages", formToApply.getID() +
-				                            STRING_DOT + formInputName.getAttribute(Name) +
-				                            STRING_DOT +
-				                            "$error");
+		addAttribute("ng-messages", formToApply.getID() + STRING_DOT + formInputName.getAttribute(Name) + STRING_DOT + "$error");
 		addAttribute("role", "alert");
 		setRenderIDAttibute(false);
 	}
@@ -48,13 +44,21 @@ public class AngularInputMessages<J extends AngularInputMessages<J>> extends Div
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J addMessage(@NotNull InputErrorValidations forError, String message)
+	public J addMessage(@NotNull InputErrorValidations forError, String message, boolean inline)
 	{
-		Div d = new Div();
-		d.setRenderIDAttibute(false);
-		d.addAttribute("ng-message", forError.toString());
-		d.setText(message);
-		add(d);
+		ComponentHierarchyBase comp;
+		if (inline)
+		{
+			comp = new Span();
+		}
+		else
+		{
+			comp = new Div();
+		}
+		comp.setRenderIDAttibute(false);
+		comp.addAttribute("ng-message", forError.toString());
+		comp.setText(message);
+		add(comp);
 		return (J) this;
 	}
 }

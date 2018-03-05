@@ -17,26 +17,28 @@
 package za.co.mmagon.jwebswing.base.html.inputs;
 
 import za.co.mmagon.jwebswing.base.html.Input;
-import za.co.mmagon.jwebswing.base.html.attributes.InputFileTypeAttributes;
+import za.co.mmagon.jwebswing.base.html.attributes.InputTextAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.FormChildren;
+import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 
 /**
  * @param <J>
  *
  * @author GedMarc
  */
-public class InputFileType<J extends InputFileType<J>>
-		extends Input<InputFileTypeAttributes, J>
+public class InputTextAreaType<J extends InputTextAreaType<J>>
+		extends Input<InputTextAttributes, J>
+		implements ParagraphChildren, FormChildren
 {
 
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Constructs a new file type input
+	 * Constructs a search type input field
 	 */
-	public InputFileType()
+	public InputTextAreaType()
 	{
-		super(InputTypes.File);
-
+		super(InputTypes.TextArea);
 	}
 }

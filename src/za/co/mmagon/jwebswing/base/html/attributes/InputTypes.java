@@ -21,7 +21,8 @@ import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 /**
  * @author mmagon
  */
-public enum InputTypes implements AttributeDefinitions
+public enum InputTypes
+		implements AttributeDefinitions
 {
 
 	/**
@@ -140,12 +141,21 @@ public enum InputTypes implements AttributeDefinitions
 	/**
 	 * To store values as attributes
 	 */
-	Value;
+	Value,
+	/**
+	 * This is a tag not a type
+	 */
+	Select,
+	/**
+	 * This is a tag not a type
+	 */
+	TextArea;
 
 	@Override
 	public String toString()
 	{
-		return name().toLowerCase().replaceAll("_", "-");
+		return name().toLowerCase()
+		             .replaceAll("_", "-");
 	}
 
 	@Override

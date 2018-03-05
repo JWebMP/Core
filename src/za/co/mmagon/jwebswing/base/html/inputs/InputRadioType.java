@@ -65,4 +65,13 @@ public class InputRadioType<J extends InputRadioType<J>>
 		}
 		return (J) this;
 	}
+
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setGroup(String groupName)
+	{
+		addAttribute("name", groupName);
+		return (J) this;
+	}
+	
 }

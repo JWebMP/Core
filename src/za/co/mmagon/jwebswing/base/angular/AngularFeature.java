@@ -25,6 +25,7 @@ import za.co.mmagon.jwebswing.base.angular.controllers.AngularControllerBase;
 import za.co.mmagon.jwebswing.base.angular.controllers.JWAngularController;
 import za.co.mmagon.jwebswing.base.angular.directives.IAngularDirective;
 import za.co.mmagon.jwebswing.base.angular.factories.AngularFactoryBase;
+import za.co.mmagon.jwebswing.base.angular.modules.AngularMessagesModule;
 import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
 import za.co.mmagon.jwebswing.base.angular.modules.JWAngularModule;
 import za.co.mmagon.jwebswing.base.html.interfaces.HTMLFeatures;
@@ -110,6 +111,11 @@ public class AngularFeature
 			throw new NullComponentException("An Angular Application must always be tied with a parent component.");
 		}
 		this.page = page;
+
+		getPage().getAngular()
+		         .getAngularModules()
+		         .add(new AngularMessagesModule());
+
 		setJavascriptRenderedElsewhere(true);
 
 		jwAngularApp = new JWAngularModule(page);
@@ -123,6 +129,16 @@ public class AngularFeature
 			setControllerName(controllerName);
 		}
 		setRenderAfterLoad(false);
+	}
+
+	/**
+	 * Returns the page associated with this feature
+	 *
+	 * @return
+	 */
+	public Page getPage()
+	{
+		return page;
 	}
 
 	/**
@@ -152,16 +168,6 @@ public class AngularFeature
 			log.finer("Applied angular configuration to the page");
 		}
 		super.preConfigure();
-	}
-
-	/**
-	 * Returns the page associated with this feature
-	 *
-	 * @return
-	 */
-	public Page getPage()
-	{
-		return page;
 	}
 
 	/**

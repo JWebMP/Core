@@ -1,23 +1,20 @@
 package za.co.mmagon.jwebswing.base.angular.forms;
 
-import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.base.html.Form;
 import za.co.mmagon.jwebswing.base.html.Input;
-import za.co.mmagon.jwebswing.base.html.Span;
-import za.co.mmagon.jwebswing.base.html.attributes.FormAttributes;
-import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.jwebswing.generics.TopOrBottom;
 import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
-import za.co.mmagon.jwebswing.utilities.StaticStrings;
 
-import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 
 public class AngularForm<J extends AngularForm<J>>
 		extends Form<J>
 {
+	private String successClass;
+	private String successFeedbackClass;
+	private String errorClass;
+	private String errorFeedbackClass;
 
 
 	/**
@@ -26,52 +23,135 @@ public class AngularForm<J extends AngularForm<J>>
 	public AngularForm()
 	{
 		setTag("ng-form");
-		addAttribute(FormAttributes.NoValidate, StaticStrings.STRING_EMPTY);
 		JQueryPageConfigurator.setRequired(true);
 		AngularPageConfigurator.setRequired(true);
 	}
 
-
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public ComponentHierarchyBase applyMessages(ComponentHierarchyBase formGroup, AngularInputMessages messages,
-	                                            @Nullable TopOrBottom topOrBottom)
+	/**
+	 * Gets the success feedback classes
+	 *
+	 * @return
+	 */
+	public String getSuccessFeedbackClass()
 	{
-		if (topOrBottom == TopOrBottom.Top)
-		{
-			formGroup.add(messages);
-		}
-
-		if (topOrBottom == null)
-		{
-			Span inline = new Span();
-			inline.add(messages);
-			messages.setTag(ComponentTypes.Span.getComponentTag());
-			for (Object o : messages.getChildren())
-			{
-				ComponentHierarchyBase c = (ComponentHierarchyBase) o;
-				c.setTag(ComponentTypes.Span.getComponentTag());
-			}
-			add(inline);
-		}
-		else
-		{
-			add(formGroup);
-		}
-		if (topOrBottom == TopOrBottom.Bottom)
-		{
-			formGroup.add(messages);
-		}
-		return formGroup;
+		return successFeedbackClass;
 	}
 
+	/**
+	 * Sets the success feedback callback class
+	 *
+	 * @param successFeedbackClass
+	 *
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J updateOnBlur(Input inputComponent)
+	public J setSuccessFeedbackClass(String successFeedbackClass)
 	{
-		inputComponent.addAttribute(AngularAttributes.ngModelOptions, "{updateOn:'blur'}");
+		this.successFeedbackClass = successFeedbackClass;
 		return (J) this;
 	}
 
+	/**
+	 * Returns the error class for validation
+	 *
+	 * @return
+	 */
+	public String getErrorClass()
+	{
+		return errorClass;
+	}
 
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setErrorClass(String errorClass)
+	{
+		this.errorClass = errorClass;
+		return (J) this;
+	}
+
+	/**
+	 * Gets the error feedback class
+	 *
+	 * @return
+	 */
+	public String getErrorFeedbackClass()
+	{
+		return errorFeedbackClass;
+	}
+
+	/**
+	 * Sets the error feedback classes
+	 *
+	 * @param errorFeedbackClass
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setErrorFeedbackClass(String errorFeedbackClass)
+	{
+		this.errorFeedbackClass = errorFeedbackClass;
+		return (J) this;
+	}
+
+	/**
+	 * Protected method to call when all inputs are available to apply the classes
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
+	protected J applyClassesToAngularMessages()
+	{
+		getChildrenHierarchy(true).forEach(a ->
+		                                   {
+			                                   if (Input.class.isAssignableFrom(a.getClass()))
+			                                   {
+				                                   Input input = (Input) a;
+				                                   input.addAttribute(AngularAttributes.ngClass, buildValidationClass(input));
+			                                   }
+		                                   });
+		return (J) this;
+	}
+
+	/**
+	 * Builds the validation for the input
+	 *
+	 * @param input
+	 *
+	 * @return
+	 */
+	@NotNull
+	protected String buildValidationClass(@NotNull Input input)
+	{
+		String output = getID() + "." + input.getID() + ".$error";
+		output = "{'" + getSuccessClass() + "':" + output + "}";
+		return output;
+	}
+
+	/**
+	 * Gets the success class to use for validation
+	 *
+	 * @return
+	 */
+	public String getSuccessClass()
+	{
+		return successClass;
+	}
+
+	/**
+	 * Sets the success class to use for validation
+	 *
+	 * @param successClass
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setSuccessClass(String successClass)
+	{
+		this.successClass = successClass;
+		return (J) this;
+	}
 }

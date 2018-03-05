@@ -36,7 +36,8 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * &gt;option&lt; elements go inside a &gt;select&lt; or &gt;datalist&lt; element. Browser Support Element<p>
  * &gt;option&lt; Yes Yes Yes Yes Yes Tips and Notes<p>
  * <p>
- * Note: The &gt;option&lt; tag can be used without any attributes, but you usually need the value attribute, which indicates what is sent to the server.<p>
+ * Note: The &gt;option&lt; tag can be used without any attributes, but you usually need the value attribute, which indicates what is sent
+ * to the server.<p>
  * <p>
  * Tip: If you have a long list of options, you can group related options with the &gt;optgroup&lt; tag.<p>
  *
@@ -48,9 +49,9 @@ public class Option<J extends Option<J>>
 		extends Component<NoChildren, OptionAttributes, NoFeatures, NoEvents, J>
 		implements DataListChildren, SelectChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, DisplayObjectType
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructs a new Option tag
 	 * <p>
@@ -65,7 +66,7 @@ public class Option<J extends Option<J>>
 		addAttribute(OptionAttributes.Label, optionValue);
 		setText(optionValue);
 	}
-	
+
 	/**
 	 * Returns the label
 	 * <p>
@@ -76,7 +77,7 @@ public class Option<J extends Option<J>>
 	{
 		return getAttribute(OptionAttributes.Label);
 	}
-	
+
 	/**
 	 * Sets the label of this option tag
 	 * <p>
@@ -90,7 +91,7 @@ public class Option<J extends Option<J>>
 		addAttribute(OptionAttributes.Label, label);
 		return (J) this;
 	}
-	
+
 	/**
 	 * Returns the label
 	 * <p>
@@ -101,7 +102,7 @@ public class Option<J extends Option<J>>
 	{
 		return getAttribute(OptionAttributes.Value);
 	}
-	
+
 	/**
 	 * Sets the value of this option
 	 * <p>

@@ -43,7 +43,8 @@ import java.util.logging.Level;
  * <p>
  * In HTML 4.01, the &lt;hr&gt; tag represents a horizontal rule.<p>
  * <p>
- * However, the &lt;hr&gt; tag may still be displayed as a horizontal rule in visual browsers, but is now defined in semantic terms, rather than presentational terms.<p>
+ * However, the &lt;hr&gt; tag may still be displayed as a horizontal rule in visual browsers, but is now defined in semantic terms, rather
+ * than presentational terms.<p>
  * <p>
  * All the layout attributes are removed in HTML5. Use CSS instead. Differences Between HTML and XHTML<p>
  * <p>
@@ -61,7 +62,8 @@ public class HorizontalRule<J extends HorizontalRule<J>>
 		implements NoIDTag, NoClassAttribute
 {
 
-	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("HR");
+	private static final java.util.logging.Logger log = LogFactory.getInstance()
+	                                                              .getLogger("HR");
 	private static final HorizontalRule hr = new HorizontalRule();
 	private static final long serialVersionUID = 1L;
 
@@ -76,7 +78,7 @@ public class HorizontalRule<J extends HorizontalRule<J>>
 	 *
 	 * @return
 	 */
-	public static HorizontalRule getInstance()
+	public static HorizontalRule<?> getInstance()
 	{
 		return hr;
 	}
@@ -97,6 +99,12 @@ public class HorizontalRule<J extends HorizontalRule<J>>
 		return false;
 	}
 
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
+	}
+
 	/**
 	 * Differences Between HTML and XHTML
 	 * <p>
@@ -110,7 +118,10 @@ public class HorizontalRule<J extends HorizontalRule<J>>
 		super.preConfigure();
 		try
 		{
-			if (getPage().getBrowser().getHtmlVersion().name().startsWith("X"))
+			if (getPage().getBrowser()
+			             .getHtmlVersion()
+			             .name()
+			             .startsWith("X"))
 			{
 				setInlineClosingTag(true);
 			}
@@ -119,11 +130,5 @@ public class HorizontalRule<J extends HorizontalRule<J>>
 		{
 			log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
 		}
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
 	}
 }
