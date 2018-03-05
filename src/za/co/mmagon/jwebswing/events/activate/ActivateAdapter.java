@@ -39,16 +39,20 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRAC
  *
  * @author Marc Magon
  */
-@ComponentInformation(name = "Activate Event", description = "Server Side Event for Active Adapter.",
-		url = "https://www.armineasy.com/JWebSwing", wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
-public abstract class ActivateAdapter extends Event
+@ComponentInformation(name = "Activate Event",
+		description = "Server Side Event for Active Adapter.",
+		url = "https://www.armineasy.com/JWebSwing",
+		wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
+public abstract class ActivateAdapter
+		extends Event
 		implements GlobalEvents
 {
 
 	/**
 	 * Logger for the Component
 	 */
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("ActivateEvent");
+	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
+	                                                              .getLogger("ActivateEvent");
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The directive for this adapter
@@ -67,6 +71,19 @@ public abstract class ActivateAdapter extends Event
 		setComponent(component);
 	}
 
+	@Override
+	public void fireEvent(AjaxCall call, AjaxResponse response)
+	{
+		try
+		{
+			onActivate(call, response);
+		}
+		catch (Exception e)
+		{
+			LOG.log(Level.WARNING, "Error In Firing Event", e);
+		}
+	}
+
 	/**
 	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
 	 */
@@ -77,10 +94,37 @@ public abstract class ActivateAdapter extends Event
 		{
 			JQueryPageConfigurator.setRequired(true);
 			AngularPageConfigurator.setRequired(true);
-			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-			getComponent().addAttribute(AngularAttributes.ngActivate, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
+
+			getComponent().addAttribute(AngularAttributes.ngActivate,
+			                            STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
 		super.preConfigure();
+	}
+
+	/**
+	 * This object is never equal to another as an event
+	 *
+	 * @param obj
+	 *
+	 * @return
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		return false;
+	}
+
+	/**
+	 * A hash code
+	 *
+	 * @return
+	 */
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getDirective().hashCode();
+		return result;
 	}
 
 	/**
@@ -118,43 +162,4 @@ public abstract class ActivateAdapter extends Event
 	 * 		The physical Ajax Receiver
 	 */
 	public abstract void onActivate(AjaxCall call, AjaxResponse response);
-
-	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
-	{
-		try
-		{
-			onActivate(call, response);
-		}
-		catch (Exception e)
-		{
-			LOG.log(Level.WARNING, "Error In Firing Event", e);
-		}
-	}
-
-	/**
-	 * This object is never equal to another as an event
-	 *
-	 * @param obj
-	 *
-	 * @return
-	 */
-	@Override
-	public boolean equals(Object obj)
-	{
-		return false;
-	}
-
-	/**
-	 * A hash code
-	 *
-	 * @return
-	 */
-	@Override
-	public int hashCode()
-	{
-		int result = super.hashCode();
-		result = 31 * result + getDirective().hashCode();
-		return result;
-	}
 }

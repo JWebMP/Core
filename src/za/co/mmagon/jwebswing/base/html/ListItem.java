@@ -56,18 +56,18 @@ public class ListItem<J extends ListItem<J>>
 		extends Component<ListItemChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements ListChildren, NoNewLineForRawText, ListItemChildren
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructs a blank text List Item
 	 */
 	public ListItem()
 	{
 		this("");
-		
+
 	}
-	
+
 	/**
 	 * Constructs a list item with the given text
 	 *
@@ -78,7 +78,7 @@ public class ListItem<J extends ListItem<J>>
 		super(ComponentTypes.ListItem);
 		setText(text);
 	}
-	
+
 	/**
 	 * Returns a list item of the specified text
 	 *
@@ -92,7 +92,7 @@ public class ListItem<J extends ListItem<J>>
 		add(li);
 		return li;
 	}
-	
+
 	/**
 	 * Returns a list of the specified text
 	 *
@@ -102,8 +102,8 @@ public class ListItem<J extends ListItem<J>>
 	 */
 	public List addList(String textToAdd)
 	{
-		ListItem lit = new ListItem(textToAdd);
-		List li = new List(false);
+		ListItem<?> lit = new ListItem<>(textToAdd);
+		List<?, ?, ?, ?> li = new List<>(false);
 		lit.add(li);
 		super.add(li);
 		return li;

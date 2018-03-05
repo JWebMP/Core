@@ -14,9 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.base.html;
+package za.co.mmagon.jwebswing.base.html.inputs;
 
-import za.co.mmagon.jwebswing.base.html.attributes.InputPasswordTypeAttributes;
+import za.co.mmagon.jwebswing.base.html.Input;
+import za.co.mmagon.jwebswing.base.html.attributes.InputButtonTypeAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 
 /**
@@ -24,17 +25,29 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
  *
  * @author GedMarc
  */
-public class InputPasswordType<J extends InputPasswordType<J>>
-		extends Input<InputPasswordTypeAttributes, J>
+public class InputButtonType<J extends InputButtonType<J>>
+		extends Input<InputButtonTypeAttributes, J>
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
+	/**
+	 * Constructs a new instance of a button type
+	 */
+	public InputButtonType()
+	{
+		this(null);
+	}
+
 	/**
 	 * Constructs a new button with the given text
+	 *
+	 * @param text
 	 */
-	public InputPasswordType()
+	public InputButtonType(String text)
 	{
-		super(InputTypes.Password);
+		super(InputTypes.Button);
+		addAttribute(InputButtonTypeAttributes.Value, text);
 	}
+
 }

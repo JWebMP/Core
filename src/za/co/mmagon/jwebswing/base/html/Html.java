@@ -73,7 +73,7 @@ public abstract class Html<J extends Html<J>>
 	/**
 	 * The head object
 	 */
-	private final Head head;
+	private final Head<?> head;
 	@JsonProperty("RunningEnvironment")
 	private DevelopmentEnvironments runningEnvironment = DevelopmentEnvironments.Development;
 	/**
@@ -100,7 +100,8 @@ public abstract class Html<J extends Html<J>>
 	}
 
 	/**
-	 * Constructs a new HTML Tag with a HTML Version. This supplies the most wanted HTML Version, and CSS Support. When measured the HTML Version
+	 * Constructs a new HTML Tag with a HTML Version. This supplies the most wanted HTML Version, and CSS Support. When measured the HTML
+	 * Version
 	 * <p>
 	 *
 	 * @param browser
@@ -109,7 +110,7 @@ public abstract class Html<J extends Html<J>>
 	public Html(Browsers browser)
 	{
 		super(ComponentTypes.Html);
-		this.htmlVersion = browser.getHtmlVersion();
+		htmlVersion = browser.getHtmlVersion();
 		head = new Head();
 	}
 
@@ -123,8 +124,46 @@ public abstract class Html<J extends Html<J>>
 	protected StringBuilder renderBeforeTag()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append(getBrowser().getHtmlVersion().getDtd()).append(getNewLine());
+		sb.append(getBrowser().getHtmlVersion()
+		                      .getDtd())
+		  .append(getNewLine());
 		return sb;
+	}
+
+	/**
+	 * Returns the current browser or FireFox
+	 *
+	 * @return
+	 */
+	public Browsers getBrowser()
+	{
+		if (browser == null)
+		{
+			browser = Browsers.Firefox19;
+		}
+		return browser;
+	}
+
+	/**
+	 * Returns the current browser or FireFox
+	 *
+	 * @param browser
+	 */
+	public void setBrowser(Browsers browser)
+	{
+		this.browser = browser;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
 	}
 
 	/**
@@ -166,7 +205,7 @@ public abstract class Html<J extends Html<J>>
 	 *
 	 * @return
 	 */
-	public Head getHead()
+	public Head<?> getHead()
 	{
 		return head;
 	}
@@ -191,41 +230,5 @@ public abstract class Html<J extends Html<J>>
 	public void setBody(Body body)
 	{
 		this.body = body;
-	}
-
-	/**
-	 * Returns the current browser or FireFox
-	 *
-	 * @return
-	 */
-	public Browsers getBrowser()
-	{
-		if (browser == null)
-		{
-			browser = Browsers.Firefox19;
-		}
-		return browser;
-	}
-
-	/**
-	 * Returns the current browser or FireFox
-	 *
-	 * @param browser
-	 */
-	public void setBrowser(Browsers browser)
-	{
-		this.browser = browser;
-	}
-
-	@Override
-	public boolean equals(Object o)
-	{
-		return super.equals(o);
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
 	}
 }

@@ -8,7 +8,8 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.DivSimple;
 
-public class KeyUpAdapterTest extends BaseTestClass
+public class KeyUpAdapterTest
+		extends BaseTestClass
 {
 	@Test
 	public void test()
@@ -24,7 +25,10 @@ public class KeyUpAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-keyup=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.keyup.KeyUpAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals(
+				"<div id=\"test\" ng-keyup=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.keyup.KeyUpAdapterTest$1');"
+						+ "\"></div>",
+				test.toString(0));
 	}
 
 	@Test
@@ -32,7 +36,7 @@ public class KeyUpAdapterTest extends BaseTestClass
 	{
 		Div test = new DivSimple<>();
 		test.setID("test");
-		test.getPage().getAngular().getAngularDirectives().clear();
+
 		KeyUpAdapter aa = new KeyUpAdapter(test)
 		{
 			@Override
@@ -42,7 +46,6 @@ public class KeyUpAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		System.out.println(test.getPage().getAngular().getAngularDirectives());
-		Assertions.assertEquals(0, test.getPage().getAngular().getAngularDirectives().size());
+
 	}
 }

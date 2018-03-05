@@ -17,22 +17,23 @@
 package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.jupiter.api.Test;
+import za.co.mmagon.jwebswing.base.html.inputs.InputSubmitType;
 
 /**
  * @author GedMarc
  */
 public class InputSubmitTypeTest
 {
-	
+
 	public InputSubmitTypeTest()
 	{
 	}
-	
+
 	@Test
 	public void testSomeMethod()
 	{
 		InputSubmitType instance = new InputSubmitType();
 		System.out.println(instance.toString(true));
 	}
-	
+
 }

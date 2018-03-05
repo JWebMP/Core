@@ -14,9 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.base.html;
+package za.co.mmagon.jwebswing.base.html.inputs;
 
-import za.co.mmagon.jwebswing.base.html.attributes.InputSubmitTypeAttributes;
+import za.co.mmagon.jwebswing.base.html.Input;
+import za.co.mmagon.jwebswing.base.html.attributes.InputPasswordTypeAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 
 /**
@@ -24,17 +25,17 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
  *
  * @author GedMarc
  */
-public class InputSubmitType<J extends InputSubmitType<J>>
-		extends Input<InputSubmitTypeAttributes, J>
+public class InputPasswordType<J extends InputPasswordType<J>>
+		extends Input<InputPasswordTypeAttributes, J>
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
-	 * Constructs a search type input field
+	 * Constructs a new button with the given text
 	 */
-	public InputSubmitType()
+	public InputPasswordType()
 	{
-		super(InputTypes.Submit);
+		super(InputTypes.Password);
 	}
 }

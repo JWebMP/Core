@@ -38,13 +38,16 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRAC
  *
  * @author Marc Magon
  */
-public abstract class RightClickAdapter extends Event implements ParagraphEvents, BodyEvents, GlobalEvents
+public abstract class RightClickAdapter
+		extends Event
+		implements ParagraphEvents, BodyEvents, GlobalEvents
 {
 
 	/**
 	 * Logger for the Component
 	 */
-	private static final java.util.logging.Logger log = LogFactory.getInstance().getLogger("RightClickEvent");
+	private static final java.util.logging.Logger log = LogFactory.getInstance()
+	                                                              .getLogger("RightClickEvent");
 	private static final long serialVersionUID = 1L;
 	private RightClickDirective rightClickDirective;
 
@@ -61,15 +64,58 @@ public abstract class RightClickAdapter extends Event implements ParagraphEvents
 	}
 
 	@Override
+	public void fireEvent(AjaxCall call, AjaxResponse response)
+	{
+		try
+		{
+			onRightClick(call, response);
+		}
+		catch (Exception e)
+		{
+			log.log(Level.SEVERE, "Error In Firing Event", e);
+		}
+	}
+
+	@Override
 	public void preConfigure()
 	{
 		if (!isConfigured())
 		{
 
-			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-			getComponent().addAttribute(AngularAttributes.ngRightClick, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
+
+			getComponent().addAttribute(AngularAttributes.ngRightClick,
+			                            STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
 		super.preConfigure();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof RightClickAdapter))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		RightClickAdapter that = (RightClickAdapter) o;
+
+		return rightClickDirective.equals(that.rightClickDirective);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getDirective().hashCode();
+		return result;
 	}
 
 	/**
@@ -107,46 +153,4 @@ public abstract class RightClickAdapter extends Event implements ParagraphEvents
 	 * 		The physical Ajax Receiver
 	 */
 	public abstract void onRightClick(AjaxCall call, AjaxResponse response);
-
-	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
-	{
-		try
-		{
-			onRightClick(call, response);
-		}
-		catch (Exception e)
-		{
-			log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
-
-	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof RightClickAdapter))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		RightClickAdapter that = (RightClickAdapter) o;
-
-		return rightClickDirective.equals(that.rightClickDirective);
-	}
-
-	@Override
-	public int hashCode()
-	{
-		int result = super.hashCode();
-		result = 31 * result + getDirective().hashCode();
-		return result;
-	}
 }

@@ -14,9 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.base.html;
+package za.co.mmagon.jwebswing.base.html.inputs;
 
-import za.co.mmagon.jwebswing.base.html.attributes.InputFileTypeAttributes;
+import za.co.mmagon.jwebswing.base.html.Input;
+import za.co.mmagon.jwebswing.base.html.attributes.InputResetTypeAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 
 /**
@@ -24,17 +25,17 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
  *
  * @author GedMarc
  */
-public class InputFileType<J extends InputFileType<J>>
-		extends Input<InputFileTypeAttributes, J>
+public class InputResetType<J extends InputResetType<J>>
+		extends Input<InputResetTypeAttributes, J>
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
-	 * Constructs a new file type input
+	 * Constructs a new check box
 	 */
-	public InputFileType()
+	public InputResetType()
 	{
-		super(InputTypes.File);
+		super(InputTypes.Reset);
 	}
 }

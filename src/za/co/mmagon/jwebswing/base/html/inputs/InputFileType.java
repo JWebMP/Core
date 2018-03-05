@@ -14,9 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.base.html;
+package za.co.mmagon.jwebswing.base.html.inputs;
 
-import za.co.mmagon.jwebswing.base.html.attributes.InputCheckBoxTypeAttributes;
+import za.co.mmagon.jwebswing.base.html.Input;
+import za.co.mmagon.jwebswing.base.html.attributes.InputFileTypeAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 
 /**
@@ -24,37 +25,17 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
  *
  * @author GedMarc
  */
-public class InputCheckBoxType<J extends InputCheckBoxType<J>>
-		extends Input<InputCheckBoxTypeAttributes, J>
+public class InputFileType<J extends InputFileType<J>>
+		extends Input<InputFileTypeAttributes, J>
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
-	 * Constructs a new check box
+	 * Constructs a new file type input
 	 */
-	public InputCheckBoxType()
+	public InputFileType()
 	{
-		super(InputTypes.Checkbox);
-	}
-	
-	/**
-	 * Sets the checkbox accordingly
-	 *
-	 * @param checked
-	 *
-	 * @return
-	 */
-	public J setChecked(boolean checked)
-	{
-		if (checked)
-		{
-			addAttribute(InputCheckBoxTypeAttributes.Checked.toString(), null);
-		}
-		else
-		{
-			getAttributes().remove(InputCheckBoxTypeAttributes.Checked.toString());
-		}
-		return (J) this;
+		super(InputTypes.File);
 	}
 }

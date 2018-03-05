@@ -7,7 +7,8 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxCall;
 import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.html.Option;
 
-public class SelectedAdapterTest extends BaseTestClass
+public class SelectedAdapterTest
+		extends BaseTestClass
 {
 	@Test
 	public void test()
@@ -23,7 +24,10 @@ public class SelectedAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<option label=\"optionValue\" value=\"optionValue\" id=\"test\" ng-selected=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.selected.SelectedAdapterTest$1');\">optionValue</option>", test.toString(0));
+		Assertions.assertEquals(
+				"<option label=\"optionValue\" value=\"optionValue\" id=\"test\" ng-selected=\"jwCntrl.perform($event,[],'test','za.co" +
+						".mmagon.jwebswing.events.selected.SelectedAdapterTest$1');\">optionValue</option>",
+				test.toString(0));
 	}
 
 	@Test
@@ -31,7 +35,7 @@ public class SelectedAdapterTest extends BaseTestClass
 	{
 		Option test = new Option<>("optionValue");
 		test.setID("test");
-		test.getPage().getAngular().getAngularDirectives().clear();
+
 		SelectedAdapter aa = new SelectedAdapter(test)
 		{
 			@Override
@@ -41,8 +45,7 @@ public class SelectedAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		System.out.println(test.getPage().getAngular().getAngularDirectives());
-		Assertions.assertEquals(0, test.getPage().getAngular().getAngularDirectives().size());
+
 	}
 
 }

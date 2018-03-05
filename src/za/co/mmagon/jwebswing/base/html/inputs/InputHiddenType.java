@@ -14,29 +14,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.base.html;
+package za.co.mmagon.jwebswing.base.html.inputs;
 
-import za.co.mmagon.jwebswing.base.html.attributes.InputImageTypeAttributes;
+import za.co.mmagon.jwebswing.base.html.Input;
+import za.co.mmagon.jwebswing.base.html.attributes.InputHiddenTypeAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 
 /**
- * Specifies an image input type
- *
  * @param <J>
  *
  * @author GedMarc
  */
-public class InputImageType<J extends InputImageType<J>>
-		extends Input<InputImageTypeAttributes, J>
+public class InputHiddenType<J extends InputHiddenType<J>>
+		extends Input<InputHiddenTypeAttributes, J>
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructs a new button with the given text
 	 */
-	public InputImageType()
+	public InputHiddenType()
 	{
-		super(InputTypes.Image);
+		super(InputTypes.Hidden);
 	}
 }

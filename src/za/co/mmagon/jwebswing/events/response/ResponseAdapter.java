@@ -36,14 +36,16 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRAC
  *
  * @author Marc Magon
  */
-public abstract class ResponseAdapter extends Event
+public abstract class ResponseAdapter
+		extends Event
 		implements GlobalEvents
 {
 
 	/**
 	 * Logger for the Component
 	 */
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("ResponseEvent");
+	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
+	                                                              .getLogger("ResponseEvent");
 	private static final long serialVersionUID = 1L;
 	private ResponseDirective directive;
 
@@ -59,6 +61,19 @@ public abstract class ResponseAdapter extends Event
 
 	}
 
+	@Override
+	public void fireEvent(AjaxCall call, AjaxResponse response)
+	{
+		try
+		{
+			onResponse(call, response);
+		}
+		catch (Exception e)
+		{
+			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+		}
+	}
+
 	/**
 	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
 	 */
@@ -68,10 +83,32 @@ public abstract class ResponseAdapter extends Event
 		if (!isConfigured())
 		{
 
-			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-			getComponent().addAttribute(AngularAttributes.ngResponse, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
+
+			getComponent().addAttribute(AngularAttributes.ngResponse,
+			                            STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
 		super.preConfigure();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof ResponseAdapter))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		ResponseAdapter that = (ResponseAdapter) o;
+
+		return getDirective().equals(that.getDirective());
 	}
 
 	/**
@@ -99,6 +136,14 @@ public abstract class ResponseAdapter extends Event
 		this.directive = directive;
 	}
 
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getDirective().hashCode();
+		return result;
+	}
+
 	/**
 	 * Triggers on Click
 	 * <p>
@@ -109,46 +154,4 @@ public abstract class ResponseAdapter extends Event
 	 * 		The physical Ajax Receiver
 	 */
 	public abstract void onResponse(AjaxCall call, AjaxResponse response);
-
-	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
-	{
-		try
-		{
-			onResponse(call, response);
-		}
-		catch (Exception e)
-		{
-			LOG.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
-
-	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof ResponseAdapter))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		ResponseAdapter that = (ResponseAdapter) o;
-
-		return getDirective().equals(that.getDirective());
-	}
-
-	@Override
-	public int hashCode()
-	{
-		int result = super.hashCode();
-		result = 31 * result + getDirective().hashCode();
-		return result;
-	}
 }

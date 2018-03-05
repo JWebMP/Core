@@ -36,14 +36,16 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRAC
  *
  * @author Marc Magon
  */
-public abstract class SlideAdapter extends Event
+public abstract class SlideAdapter
+		extends Event
 		implements GlobalEvents
 {
 
 	/**
 	 * Logger for the Component
 	 */
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("SlideEvent");
+	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
+	                                                              .getLogger("SlideEvent");
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The directive for this adapter
@@ -62,6 +64,19 @@ public abstract class SlideAdapter extends Event
 
 	}
 
+	@Override
+	public void fireEvent(AjaxCall call, AjaxResponse response)
+	{
+		try
+		{
+			onSlide(call, response);
+		}
+		catch (Exception e)
+		{
+			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+		}
+	}
+
 	/**
 	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
 	 */
@@ -71,10 +86,32 @@ public abstract class SlideAdapter extends Event
 		if (!isConfigured())
 		{
 
-			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-			getComponent().addAttribute(AngularAttributes.ngSlide, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
+
+			getComponent().addAttribute(AngularAttributes.ngSlide,
+			                            STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
 		super.preConfigure();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof SlideAdapter))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		SlideAdapter that = (SlideAdapter) o;
+
+		return getDirective().equals(that.getDirective());
 	}
 
 	/**
@@ -100,40 +137,6 @@ public abstract class SlideAdapter extends Event
 	public void setDirective(SlideDirective directive)
 	{
 		this.directive = directive;
-	}
-
-	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof SlideAdapter))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		SlideAdapter that = (SlideAdapter) o;
-
-		return getDirective().equals(that.getDirective());
-	}
-
-	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
-	{
-		try
-		{
-			onSlide(call, response);
-		}
-		catch (Exception e)
-		{
-			LOG.log(Level.SEVERE, "Error In Firing Event", e);
-		}
 	}
 
 	@Override

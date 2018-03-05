@@ -8,7 +8,8 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.DivSimple;
 
-public class CreateAdapterTest extends BaseTestClass
+public class CreateAdapterTest
+		extends BaseTestClass
 {
 	@Test
 	public void test()
@@ -24,26 +25,11 @@ public class CreateAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-create=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.create.CreateAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals(
+				"<div id=\"test\" ng-create=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.create.CreateAdapterTest$1')" +
+						"" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + ";\"></div>",
+				test.toString(0));
 	}
 
-	@Test
-	public void testDirective()
-	{
-		Div test = new DivSimple<>();
-		test.setID("test");
-		test.getPage().getAngular().getAngularDirectives().clear();
-		CreateAdapter aa = new CreateAdapter(test)
-		{
-			@Override
-			public void onCreate(AjaxCall call, AjaxResponse response)
-			{
-
-			}
-		};
-		System.out.println(test.toString(0));
-		System.out.println(test.getPage().getAngular().getAngularDirectives());
-		Assertions.assertEquals(1, test.getPage().getAngular().getAngularDirectives().size());
-	}
 
 }

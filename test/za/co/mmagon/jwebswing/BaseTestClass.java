@@ -44,14 +44,12 @@ public class BaseTestClass
 		System.out.println("Reseting Instance");
 		JQueryPageConfigurator.setRequired(false);
 		AngularPageConfigurator.setRequired(false);
-		AngularPageConfigurator.setAngularMessagesRequired(false);
 	}
 
 	public Page getInstance()
 	{
 		JQueryPageConfigurator.setRequired(false);
 		AngularPageConfigurator.setRequired(false);
-		AngularPageConfigurator.setAngularMessagesRequired(false);
 		return resetInstance();
 	}
 
@@ -62,20 +60,21 @@ public class BaseTestClass
 		Body body = new Body(page);
 		page.setID("Page");
 		body.setID("Body");
-		page.getOptions().setDynamicRender(false);
+		page.getOptions()
+		    .setDynamicRender(false);
 		return page;
 	}
 
 	public void soutDivider()
 	{
-		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<===============================================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		System.out.println(
+				"<<<<<<<<<<<<<<<<<<<<<<<<<===============================================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 	}
 
 	public Page getPage()
 	{
 		JQueryPageConfigurator.setRequired(false);
 		AngularPageConfigurator.setRequired(false);
-		AngularPageConfigurator.setAngularMessagesRequired(false);
 		return resetInstance();
 	}
 

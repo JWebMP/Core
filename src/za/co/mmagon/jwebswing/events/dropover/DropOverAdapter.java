@@ -37,16 +37,20 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRAC
  *
  * @author Marc Magon
  */
-@ComponentInformation(name = "Drop Over Event", description = "Server Side Event for Drop Out",
-		url = "https://www.armineasy.com/JWebSwing", wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
-public abstract class DropOverAdapter extends Event
+@ComponentInformation(name = "Drop Over Event",
+		description = "Server Side Event for Drop Out",
+		url = "https://www.armineasy.com/JWebSwing",
+		wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
+public abstract class DropOverAdapter
+		extends Event
 		implements GlobalEvents
 {
 
 	/**
 	 * Logger for the Component
 	 */
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("DropOverEvent");
+	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
+	                                                              .getLogger("DropOverEvent");
 	private static final long serialVersionUID = 1L;
 	private DropOverDirective directive;
 
@@ -62,6 +66,19 @@ public abstract class DropOverAdapter extends Event
 
 	}
 
+	@Override
+	public void fireEvent(AjaxCall call, AjaxResponse response)
+	{
+		try
+		{
+			onDropOver(call, response);
+		}
+		catch (Exception e)
+		{
+			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+		}
+	}
+
 	/**
 	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
 	 */
@@ -71,10 +88,32 @@ public abstract class DropOverAdapter extends Event
 		if (!isConfigured())
 		{
 
-			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-			getComponent().addAttribute(AngularAttributes.ngDropOver, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
+
+			getComponent().addAttribute(AngularAttributes.ngDropOver,
+			                            STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
 		super.preConfigure();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof DropOverAdapter))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		DropOverAdapter that = (DropOverAdapter) o;
+
+		return getDirective().equals(that.getDirective());
 	}
 
 	/**
@@ -102,6 +141,14 @@ public abstract class DropOverAdapter extends Event
 		this.directive = directive;
 	}
 
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getDirective().hashCode();
+		return result;
+	}
+
 	/**
 	 * Triggers on Drop
 	 * <p>
@@ -112,46 +159,4 @@ public abstract class DropOverAdapter extends Event
 	 * 		The physical Ajax Receiver
 	 */
 	public abstract void onDropOver(AjaxCall call, AjaxResponse response);
-
-	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
-	{
-		try
-		{
-			onDropOver(call, response);
-		}
-		catch (Exception e)
-		{
-			LOG.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
-
-	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof DropOverAdapter))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		DropOverAdapter that = (DropOverAdapter) o;
-
-		return getDirective().equals(that.getDirective());
-	}
-
-	@Override
-	public int hashCode()
-	{
-		int result = super.hashCode();
-		result = 31 * result + getDirective().hashCode();
-		return result;
-	}
 }

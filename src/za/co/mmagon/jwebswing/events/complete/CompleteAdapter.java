@@ -37,43 +37,33 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRAC
  *
  * @author Marc Magon
  */
-@ComponentInformation(name = "Complete Event", description = "Server Side Event for Complete.",
-		url = "https://www.armineasy.com/JWebSwing", wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
-public abstract class CompleteAdapter extends Event
+@ComponentInformation(name = "Complete Event",
+		description = "Server Side Event for Complete.",
+		url = "https://www.armineasy.com/JWebSwing",
+		wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
+public abstract class CompleteAdapter
+		extends Event
 		implements GlobalEvents
 {
 
 	/**
 	 * Logger for the Component
 	 */
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("CompleteEvent");
+	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
+	                                                              .getLogger("CompleteEvent");
 	private static final long serialVersionUID = 1L;
 	private CompleteDirective directive;
 
 	/**
 	 * Performs a click
 	 *
-	 * @param component The component this click is going to be acting on
+	 * @param component
+	 * 		The component this click is going to be acting on
 	 */
 	public CompleteAdapter(Component component)
 	{
 		super(EventTypes.contextmenu, component);
 
-	}
-
-	/**
-	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-
-			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-			getComponent().addAttribute(AngularAttributes.ngComplete, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-		super.preConfigure();
 	}
 
 	/**
@@ -101,15 +91,6 @@ public abstract class CompleteAdapter extends Event
 		this.directive = directive;
 	}
 
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call     The physical AJAX call
-	 * @param response The physical Ajax Receiver
-	 */
-	public abstract void onComplete(AjaxCall call, AjaxResponse response);
-
 	@Override
 	public void fireEvent(AjaxCall call, AjaxResponse response)
 	{
@@ -123,6 +104,22 @@ public abstract class CompleteAdapter extends Event
 		}
 	}
 
+	/**
+	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
+	 */
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+
+
+			getComponent().addAttribute(AngularAttributes.ngComplete,
+			                            STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
+		}
+		super.preConfigure();
+	}
+
 	@Override
 	public boolean equals(Object o)
 	{
@@ -134,4 +131,15 @@ public abstract class CompleteAdapter extends Event
 	{
 		return super.hashCode();
 	}
+
+	/**
+	 * Triggers on Click
+	 * <p>
+	 *
+	 * @param call
+	 * 		The physical AJAX call
+	 * @param response
+	 * 		The physical Ajax Receiver
+	 */
+	public abstract void onComplete(AjaxCall call, AjaxResponse response);
 }

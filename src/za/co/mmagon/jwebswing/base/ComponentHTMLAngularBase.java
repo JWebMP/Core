@@ -48,8 +48,10 @@ import java.util.Map;
  * @author GedMarc
  * @since 27 Apr 2016
  */
-public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHTMLAngularBase<A, F, E, J>>
-		extends ComponentHTMLAttributeBase<A, F, E, J> implements IComponentHTMLAngularBase<J>
+public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends
+		                                                                                                                                 ComponentHTMLAngularBase<A, F, E, J>>
+		extends ComponentHTMLAttributeBase<A, F, E, J>
+		implements IComponentHTMLAngularBase<J>
 {
 
 	private static final long serialVersionUID = 1L;
@@ -88,6 +90,83 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 		return this;
 	}
 
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
+	}
+
+	/**
+	 * Adds all the attributes associated with angular
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public Map<String, String> getAttributes()
+	{
+		Map<String, String> allAttributes = super.getAttributes();
+		getAttributesAngular().forEach((key, value) -> allAttributes.put(key.toString(), value));
+		return allAttributes;
+	}
+
+	@Override
+	public void destroy()
+	{
+		if (angularObjects != null)
+		{
+			angularObjects.clear();
+			angularObjects = null;
+		}
+		if (attributesAngular != null)
+		{
+			attributesAngular.clear();
+			attributesAngular = null;
+		}
+		super.destroy();
+	}
+
+	/**
+	 * Returns all the angular attributes on this component
+	 *
+	 * @return
+	 */
+	@NotNull
+	@SuppressWarnings("all")
+	private Map<AngularAttributes, String> getAttributesAngular()
+	{
+		if (attributesAngular == null)
+		{
+			attributesAngular = new HashMap<>();
+		}
+		return attributesAngular;
+	}
+
+	/**
+	 * Binds this component to an angular variable. If it is an input is it bound directly, otherwise the text is set to what the variable
+	 * contains
+	 * <p>
+	 * Over-ride this to apply more functionality such as calendar binding
+	 *
+	 * @param variableName
+	 *
+	 * @return
+	 */
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J bind(@NotNull String variableName)
+	{
+		addAttribute(AngularAttributes.ngBind, variableName);
+		AngularPageConfigurator.setRequired(true);
+		return (J) this;
+	}
+
 	/**
 	 * Sets an Angular Attribute
 	 *
@@ -103,20 +182,6 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	{
 		getAttributesAngular().put(attribute, value);
 		return (J) this;
-	}
-
-	/**
-	 * Gets an angular attribute
-	 *
-	 * @param attribute
-	 *
-	 * @return
-	 */
-	@Override
-	@Nullable
-	public String getAttribute(@NotNull AngularAttributes attribute)
-	{
-		return getAttributesAngular().get(attribute);
 	}
 
 	/**
@@ -136,7 +201,8 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	{
 		if (dataObject instanceof JavaScriptPart)
 		{
-			JavaScriptPart.class.cast(dataObject).setReferenceId(getID());
+			JavaScriptPart.class.cast(dataObject)
+			                    .setReferenceId(getID());
 		}
 		getAngularObjects().put(name, dataObject);
 		return (J) this;
@@ -160,6 +226,20 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	}
 
 	/**
+	 * Gets an angular attribute
+	 *
+	 * @param attribute
+	 *
+	 * @return
+	 */
+	@Override
+	@Nullable
+	public String getAttribute(@NotNull AngularAttributes attribute)
+	{
+		return getAttributesAngular().get(attribute);
+	}
+
+	/**
 	 * Returns the DTO currently mapped
 	 *
 	 * @param <T>
@@ -180,91 +260,6 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	}
 
 	/**
-	 * Adds all the attributes associated with angular
-	 *
-	 * @return
-	 */
-	@Override
-	@NotNull
-	public Map<String, String> getAttributes()
-	{
-		Map<String, String> allAttributes = super.getAttributes();
-		getAttributesAngular().forEach((key, value) -> allAttributes.put(key.toString(), value));
-		return allAttributes;
-	}
-
-	/**
-	 * Returns all the angular attributes on this component
-	 *
-	 * @return
-	 */
-	@NotNull
-	@SuppressWarnings("all")
-	private Map<AngularAttributes, String> getAttributesAngular()
-	{
-		if (attributesAngular == null)
-		{
-			attributesAngular = new HashMap<>();
-		}
-		return attributesAngular;
-	}
-
-	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof ComponentHTMLAngularBase))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		ComponentHTMLAngularBase<?, ?, ?, ?> that = (ComponentHTMLAngularBase<?, ?, ?, ?>) o;
-
-		return getAttributesAngular().equals(that.getAttributesAngular()) && getAngularObjects().equals(that.getAngularObjects());
-	}
-
-	/**
-	 * Binds this component to an angular variable. If it is an input is it bound directly, otherwise the text is set to what the variable contains
-	 * <p>
-	 * Over-ride this to apply more functionality such as calendar binding
-	 *
-	 * @param variableName
-	 *
-	 * @return
-	 */
-	@NotNull
-	@SuppressWarnings("unchecked")
-	public J bind(@NotNull String variableName)
-	{
-		addAttribute(AngularAttributes.ngBind, variableName);
-		AngularPageConfigurator.setRequired(true);
-		return (J) this;
-	}
-
-	@Override
-	public void destroy()
-	{
-		if (this.angularObjects != null)
-		{
-			this.angularObjects.clear();
-			this.angularObjects = null;
-		}
-		if (this.attributesAngular != null)
-		{
-			this.attributesAngular.clear();
-			this.attributesAngular = null;
-		}
-		super.destroy();
-	}
-
-	/**
 	 * Instructs Angular to not show items that are bound until after the digest sequence
 	 *
 	 * @return
@@ -276,11 +271,5 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 		addAttribute(AngularAttributes.ngCloak, StaticStrings.STRING_EMPTY);
 		AngularPageConfigurator.setRequired(true);
 		return (J) this;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
 	}
 }

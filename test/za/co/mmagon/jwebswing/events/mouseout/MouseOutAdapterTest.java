@@ -8,7 +8,8 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.DivSimple;
 
-public class MouseOutAdapterTest extends BaseTestClass
+public class MouseOutAdapterTest
+		extends BaseTestClass
 {
 	@Test
 	public void test()
@@ -24,7 +25,10 @@ public class MouseOutAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-mouseleave=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.mouseout.MouseOutAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals(
+				"<div id=\"test\" ng-mouseleave=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.mouseout" + "" + "" + ""
+						+ ".MouseOutAdapterTest$1');\"></div>",
+				test.toString(0));
 	}
 
 	@Test
@@ -32,7 +36,7 @@ public class MouseOutAdapterTest extends BaseTestClass
 	{
 		Div test = new DivSimple<>();
 		test.setID("test");
-		test.getPage().getAngular().getAngularDirectives().clear();
+
 		MouseOutAdapter aa = new MouseOutAdapter(test)
 		{
 			@Override
@@ -42,7 +46,6 @@ public class MouseOutAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		System.out.println(test.getPage().getAngular().getAngularDirectives());
-		Assertions.assertEquals(0, test.getPage().getAngular().getAngularDirectives().size());
+
 	}
 }

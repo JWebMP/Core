@@ -14,9 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.base.html;
+package za.co.mmagon.jwebswing.base.html.inputs;
 
-import za.co.mmagon.jwebswing.base.html.attributes.InputResetTypeAttributes;
+import za.co.mmagon.jwebswing.base.html.Input;
+import za.co.mmagon.jwebswing.base.html.attributes.InputButtonTypeAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 
 /**
@@ -24,17 +25,29 @@ import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
  *
  * @author GedMarc
  */
-public class InputSearchType<J extends InputSearchType<J>>
-		extends Input<InputResetTypeAttributes, J>
+public class InputEmailType<J extends InputEmailType<J>>
+		extends Input<InputButtonTypeAttributes, J>
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
-	 * Constructs a search type input field
+	 * Constructs a new instance of a button type
 	 */
-	public InputSearchType()
+	public InputEmailType()
 	{
-		super(InputTypes.Search);
+		this(null);
 	}
+
+	/**
+	 * Constructs a new button with the given text
+	 *
+	 * @param text
+	 */
+	public InputEmailType(String text)
+	{
+		super(InputTypes.Email);
+		addAttribute(InputButtonTypeAttributes.Value, text);
+	}
+
 }

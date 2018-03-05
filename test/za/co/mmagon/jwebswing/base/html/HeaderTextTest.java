@@ -28,14 +28,14 @@ public class HeaderTextTest
 	public HeaderTextTest()
 	{
 	}
-	
+
 	@Test
 	public void reset()
 	{
 		HeaderText h1 = new HeaderText(HeaderTypes.H1, "bla");
 		HeaderText h2 = new HeaderText(HeaderTypes.H2, "bla");
 		h1.setID("id");
-		h2.setID("id");
+		h2.setID("id2");
 		System.out.println(h1.toString(true));
 		System.out.println(h2.toString(true));
 		Assertions.assertNotSame(h1, h2);

@@ -17,13 +17,15 @@
 package za.co.mmagon.jwebswing.base.angular;
 
 import org.junit.jupiter.api.Test;
+import za.co.mmagon.FileTemplates;
 import za.co.mmagon.jwebswing.BaseTestClass;
 import za.co.mmagon.jwebswing.Page;
 
 /**
  * @author Marc Magon
  */
-public class AngularFeatureTest extends BaseTestClass
+public class AngularFeatureTest
+		extends BaseTestClass
 {
 
 	public AngularFeatureTest()
@@ -34,9 +36,21 @@ public class AngularFeatureTest extends BaseTestClass
 	public void testSomeMethod()
 	{
 		Page p = getInstance();
-		p.getBody().add("Hello");
+		p.getBody()
+		 .add("Hello");
 		AngularPageConfigurator.setRequired(true);
 		System.out.println(p.toString(0));
+	}
+
+	@Test
+	public void testDirectivesServiceLocator()
+	{
+		StringBuilder sb = new StringBuilder();
+		AngularFeature af = new AngularFeature(new Page());
+		af.configureTemplateVariables();
+		sb.append(FileTemplates.renderTemplateScripts("jwangular"));
+
+		System.out.println(sb);
 	}
 
 }

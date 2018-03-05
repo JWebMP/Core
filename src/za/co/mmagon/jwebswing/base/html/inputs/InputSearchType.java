@@ -14,30 +14,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package za.co.mmagon.jwebswing.base.html;
+package za.co.mmagon.jwebswing.base.html.inputs;
 
-import za.co.mmagon.jwebswing.base.html.attributes.InputTextAttributes;
+import za.co.mmagon.jwebswing.base.html.Input;
+import za.co.mmagon.jwebswing.base.html.attributes.InputResetTypeAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.FormChildren;
-import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 
 /**
  * @param <J>
  *
  * @author GedMarc
  */
-public class InputTextType<J extends InputTextType<J>>
-		extends Input<InputTextAttributes, J>
-		implements ParagraphChildren, FormChildren
+public class InputSearchType<J extends InputSearchType<J>>
+		extends Input<InputResetTypeAttributes, J>
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructs a search type input field
 	 */
-	public InputTextType()
+	public InputSearchType()
 	{
-		super(InputTypes.Text);
+		super(InputTypes.Search);
 	}
 }

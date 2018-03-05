@@ -53,7 +53,8 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.*;
  * @since 23 Apr 2016
  */
 public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHTMLAttributeBase<A, F, E, J>>
-		extends ComponentHTMLBase<F, E, J> implements IComponentHTMLAttributeBase<A, J>
+		extends ComponentHTMLBase<F, E, J>
+		implements IComponentHTMLAttributeBase<A, J>
 {
 
 	/**
@@ -68,7 +69,8 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 * Logger for the Component
 	 */
 	@JsonIgnore
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("ComponentAttributes");
+	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
+	                                                              .getLogger("ComponentAttributes");
 
 	/**
 	 * The current stored attribute lists
@@ -106,26 +108,6 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	}
 
 	/**
-	 * Adds the ID attribute to the component
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			if (isRenderIDAttibute())
-			{
-				addAttribute(GlobalAttributes.ID, getID());
-			}
-			else
-			{
-				removeAttribute(GlobalAttributes.ID);
-			}
-		}
-		super.preConfigure();
-	}
-
-	/**
 	 * Renders all the Attribute HTML. The All Custom attributes can contain any value=parameter pair
 	 * <p>
 	 *
@@ -160,11 +142,15 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 			boolean isKeyword = value.isEmpty();
 			if (!isKeyword)
 			{
-				sb.append(key.toLowerCase()).append(STRING_EQUALS_DOUBLE_QUOTES).append(value).append(STRING_DOUBLE_QUOTES_SPACE);
+				sb.append(key.toLowerCase())
+				  .append(STRING_EQUALS_DOUBLE_QUOTES)
+				  .append(value)
+				  .append(STRING_DOUBLE_QUOTES_SPACE);
 			}
 			else
 			{
-				sb.append(key.toLowerCase()).append(STRING_SPACE);
+				sb.append(key.toLowerCase())
+				  .append(STRING_SPACE);
 			}
 		}
 		if (!getAttributes().isEmpty())
@@ -172,6 +158,102 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 			sb.deleteCharAt(sb.lastIndexOf(STRING_SPACE));
 		}
 		return sb;
+	}
+
+	/**
+	 * Adds the ID attribute to the component
+	 */
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			if (isRenderIDAttibute())
+			{
+				addAttribute(GlobalAttributes.ID, getID());
+			}
+			else
+			{
+				removeAttribute(GlobalAttributes.ID);
+			}
+		}
+		super.preConfigure();
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
+	}
+
+	/**
+	 * Returns if this component should render for the ID attribute
+	 * <p>
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("all")
+	public boolean isRenderIDAttibute()
+	{
+		if (!renderIDAttibute || (this instanceof NoIDTag))
+		{
+			return false;
+		}
+		else
+		{
+			return renderIDAttibute;
+		}
+	}
+
+	/**
+	 * Removes a key from the attribute set
+	 *
+	 * @param key
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J removeAttribute(GlobalAttributes key)
+	{
+		getAttributes().remove(key.toString());
+		return (J) this;
+	}
+
+	/**
+	 * Sets if this component should render an ID attribute
+	 * <p>
+	 *
+	 * @param renderIDAttibute
+	 *
+	 * @return
+	 */
+	@NotNull
+	@SuppressWarnings({"unchecked", "unused"})
+	public J setRenderIDAttibute(boolean renderIDAttibute)
+	{
+		this.renderIDAttibute = renderIDAttibute;
+		if (!renderIDAttibute)
+		{
+			getAttributes().remove(GlobalAttributes.ID.toString());
+		}
+		return (J) this;
+	}
+
+	/**
+	 * Renders the classes array as an in-line class string
+	 *
+	 * @return
+	 */
+	protected StringBuilder renderClasses()
+	{
+		return new StringBuilder();
 	}
 
 	/**
@@ -200,21 +282,6 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	}
 
 	/**
-	 * Returns the current raw attribute map
-	 *
-	 * @return
-	 */
-	@NotNull
-	protected Map<String, String> getAttributes()
-	{
-		if (attributes == null)
-		{
-			attributes = new TreeMap<>();
-		}
-		return attributes;
-	}
-
-	/**
 	 * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
 	 * <p>
 	 *
@@ -231,22 +298,6 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	public J addAttribute(@NotNull A attribute, @NotNull String value)
 	{
 		getAttributes().put(attribute.toString(), value);
-		return (J) this;
-	}
-
-	/**
-	 * Adds an attribute with an enum value. The toString() method is read
-	 *
-	 * @param attribute
-	 * @param value
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J addAttribute(@NotNull A attribute, @NotNull Enum value)
-	{
-		getAttributes().put(attribute.toString(), value.toString());
 		return (J) this;
 	}
 
@@ -332,7 +383,8 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		}
 		catch (NumberFormatException | NullPointerException nfe)
 		{
-			LOG.log(Level.FINE, "Invalid Global Attribute Reference [" + getClass().getSimpleName() + "] - [" + attribute + "]. Ignoring.", nfe);
+			LOG.log(Level.FINE, "Invalid Global Attribute Reference [" + getClass().getSimpleName() + "] - [" + attribute + "]. Ignoring.",
+			        nfe);
 			return bop;
 		}
 	}
@@ -425,64 +477,35 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		return Boolean.valueOf(s);
 	}
 
-	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof ComponentHTMLAttributeBase))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		ComponentHTMLAttributeBase<?, ?, ?, ?> that = (ComponentHTMLAttributeBase<?, ?, ?, ?>) o;
-
-		if (isRenderIDAttibute() != that.isRenderIDAttibute())
-		{
-			return false;
-		}
-		return getAttributes().equals(that.getAttributes());
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-
 	/**
-	 * Returns if this component should render for the ID attribute
-	 * <p>
+	 * Returns the current raw attribute map
 	 *
 	 * @return
 	 */
-	@SuppressWarnings("all")
-	public boolean isRenderIDAttibute()
+	@NotNull
+	protected Map<String, String> getAttributes()
 	{
-		if (!renderIDAttibute || (this instanceof NoIDTag))
+		if (attributes == null)
 		{
-			return false;
+			attributes = new TreeMap<>();
 		}
-		else
-		{
-			return renderIDAttibute;
-		}
+		return attributes;
 	}
 
 	/**
-	 * Renders the classes array as an in-line class string
+	 * Adds an attribute with an enum value. The toString() method is read
+	 *
+	 * @param attribute
+	 * @param value
 	 *
 	 * @return
 	 */
-	protected StringBuilder renderClasses()
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J addAttribute(@NotNull A attribute, @NotNull Enum value)
 	{
-		return new StringBuilder();
+		getAttributes().put(attribute.toString(), value.toString());
+		return (J) this;
 	}
 
 	/**
@@ -497,26 +520,6 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	{
 		addAttribute(GlobalAttributes.ID, id);
 		return super.setID(id);
-	}
-
-	/**
-	 * Sets if this component should render an ID attribute
-	 * <p>
-	 *
-	 * @param renderIDAttibute
-	 *
-	 * @return
-	 */
-	@NotNull
-	@SuppressWarnings({"unchecked", "unused"})
-	public J setRenderIDAttibute(boolean renderIDAttibute)
-	{
-		this.renderIDAttibute = renderIDAttibute;
-		if (!renderIDAttibute)
-		{
-			getAttributes().remove(GlobalAttributes.ID.toString());
-		}
-		return (J) this;
 	}
 
 	/**
@@ -562,21 +565,6 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J removeAttribute(GlobalAttributes key)
-	{
-		getAttributes().remove(key.toString());
-		return (J) this;
-	}
-
-	/**
-	 * Removes a key from the attribute set
-	 *
-	 * @param key
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	@NotNull
 	public J removeAttribute(A key)
 	{
 		getAttributes().remove(key.toString());
@@ -586,9 +574,9 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	@Override
 	public void destroy()
 	{
-		if (this.attributes != null)
+		if (attributes != null)
 		{
-			this.attributes.clear();
+			attributes.clear();
 			attributes = null;
 		}
 		super.destroy();
@@ -605,6 +593,19 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		cloned.attributes.putAll(getAttributes());
 
 		return (J) cloned;
+	}
+
+	/**
+	 * Shortcut to adding a style attribute
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J addStyle(String property, String value)
+	{
+		addStyle(property + ":" + value);
+		return (J) this;
 	}
 
 	/**
@@ -630,19 +631,6 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		{
 			addAttribute(GlobalAttributes.Style, getAttributes().get(GlobalAttributes.Style.toString()) + style);
 		}
-		return (J) this;
-	}
-
-	/**
-	 * Shortcut to adding a style attribute
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J addStyle(String property, String value)
-	{
-		addStyle(property + ":" + value);
 		return (J) this;
 	}
 }

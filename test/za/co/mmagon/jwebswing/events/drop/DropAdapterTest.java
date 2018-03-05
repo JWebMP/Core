@@ -8,7 +8,8 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.DivSimple;
 
-public class DropAdapterTest extends BaseTestClass
+public class DropAdapterTest
+		extends BaseTestClass
 {
 	@Test
 	public void test()
@@ -24,25 +25,10 @@ public class DropAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-drop=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.drop.DropAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals(
+				"<div id=\"test\" ng-drop=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.drop.DropAdapterTest$1');" +
+						"\"></div>",
+				test.toString(0));
 	}
 
-	@Test
-	public void testDirective()
-	{
-		Div test = new DivSimple<>();
-		test.setID("test");
-		test.getPage().getAngular().getAngularDirectives().clear();
-		DropAdapter aa = new DropAdapter(test)
-		{
-			@Override
-			public void onDrop(AjaxCall call, AjaxResponse response)
-			{
-
-			}
-		};
-		System.out.println(test.toString(0));
-		System.out.println(test.getPage().getAngular().getAngularDirectives());
-		Assertions.assertEquals(1, test.getPage().getAngular().getAngularDirectives().size());
-	}
 }

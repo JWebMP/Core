@@ -49,7 +49,8 @@ import java.util.Map;
  * @since 24 Apr 2016
  */
 public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentStyleBase<C, A, F, E, J>>
-		extends ComponentHierarchyBase<C, A, F, E, J> implements IComponentStyleBase<J>
+		extends ComponentHierarchyBase<C, A, F, E, J>
+		implements IComponentStyleBase<J>
 {
 
 	private static final long serialVersionUID = 1L;
@@ -212,7 +213,8 @@ public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enu
 	}
 
 	/**
-	 * Renders the component CSS at the specified tab count with the &lt;style&gt; tag This includes everything from this classes CSS, to the CSS for each field. It will also populate the lower level
+	 * Renders the component CSS at the specified tab count with the &lt;style&gt; tag This includes everything from this classes CSS, to
+	 * the CSS for each field. It will also populate the lower level
 	 * child CSS for fields in this class
 	 * <p>
 	 *
@@ -246,48 +248,25 @@ public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enu
 	}
 
 	@Override
-	public void destroy()
-	{
-		if (cssTypeHashMap != null)
-		{
-			this.cssTypeHashMap.clear();
-			this.cssTypeHashMap = null;
-		}
-		super.destroy();
-	}
-
-	@Override
 	public boolean equals(Object o)
 	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof ComponentStyleBase))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		ComponentStyleBase<?, ?, ?, ?, ?> that = (ComponentStyleBase<?, ?, ?, ?, ?>) o;
-
-		if (getCss() != null ? !getCss().equals(that.getCss()) : that.getCss() != null)
-		{
-			return false;
-		}
-		if (!getCssName().equals(that.getCssName()))
-		{
-			return false;
-		}
-		return getCssTypeHashMap() != null ? getCssTypeHashMap().equals(that.getCssTypeHashMap()) : that.getCssTypeHashMap() == null;
+		return super.equals(o);
 	}
 
 	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
+	}
+
+	@Override
+	public void destroy()
+	{
+		if (cssTypeHashMap != null)
+		{
+			cssTypeHashMap.clear();
+			cssTypeHashMap = null;
+		}
+		super.destroy();
 	}
 }

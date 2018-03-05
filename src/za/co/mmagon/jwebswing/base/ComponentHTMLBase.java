@@ -46,7 +46,8 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.*;
  * @since 23 Apr 2016
  */
 public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHTMLBase<F, E, J>>
-		extends ComponentEventBase<F, E, J> implements IComponentHTMLBase<J>
+		extends ComponentEventBase<F, E, J>
+		implements IComponentHTMLBase<J>
 {
 	/**
 	 * Serial Version for all Components and their compatibility
@@ -281,7 +282,9 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	}
 
 	/**
-	 * Builds up the HTML for this component and all it's children - Does not perform Pre Configure or Pre Render Use GetHTML() to perform a pre configure and render
+	 * Builds up the HTML for this component and all it's children - Does not perform Pre Configure or Pre Render Use GetHTML() to
+	 * perform a
+	 * pre configure and render
 	 * <p>
 	 * Executes the following methods in order
 	 * <p>
@@ -419,7 +422,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		{
 			return false;
 		}
-		return this.closingTag;
+		return closingTag;
 	}
 
 	/**
@@ -483,8 +486,18 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	@NotNull
 	public J setClosingTag(boolean noCloseTag)
 	{
-		this.closingTag = noCloseTag;
+		closingTag = noCloseTag;
 		return (J) this;
+	}
+
+	/**
+	 * Gets the number of tabs to apply for this component currently
+	 *
+	 * @return
+	 */
+	protected int getCurrentTabIndents()
+	{
+		return currentTabIndents;
 	}
 
 	/**
@@ -513,16 +526,6 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	{
 		this.newLineForRawText = newLineForRawText;
 		return (J) this;
-	}
-
-	/**
-	 * Gets the number of tabs to apply for this component currently
-	 *
-	 * @return
-	 */
-	protected int getCurrentTabIndents()
-	{
-		return currentTabIndents;
 	}
 
 	/**
@@ -709,57 +712,14 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	}
 
 	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof ComponentHTMLBase))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		ComponentHTMLBase<?, ?, ?> that = (ComponentHTMLBase<?, ?, ?>) o;
-
-		if (isNewLineForRawText() != that.isNewLineForRawText())
-		{
-			return false;
-		}
-		if (isNewLineForClosingTag() != that.isNewLineForClosingTag())
-		{
-			return false;
-		}
-		if (getCurrentTabIndents() != that.getCurrentTabIndents())
-		{
-			return false;
-		}
-		if (isRenderTextBeforeChildren() != that.isRenderTextBeforeChildren())
-		{
-			return false;
-		}
-		if (!getTag().equals(that.getTag()))
-		{
-			return false;
-		}
-		if (!isInlineClosingTag().equals(that.isInlineClosingTag()))
-		{
-			return false;
-		}
-		if (!isClosingTag().equals(that.isClosingTag()))
-		{
-			return false;
-		}
-		return getCurrentTabIndentString().equals(that.getCurrentTabIndentString());
-	}
-
-	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
 	}
 }

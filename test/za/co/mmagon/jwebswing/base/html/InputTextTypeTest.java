@@ -18,17 +18,18 @@ package za.co.mmagon.jwebswing.base.html;
 
 import org.junit.jupiter.api.Test;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTextAttributes;
+import za.co.mmagon.jwebswing.base.html.inputs.InputTextType;
 
 /**
  * @author GedMarc
  */
 public class InputTextTypeTest
 {
-	
+
 	public InputTextTypeTest()
 	{
 	}
-	
+
 	@Test
 	public void testSomeMethod()
 	{
@@ -36,5 +37,5 @@ public class InputTextTypeTest
 		itt.addAttribute(InputTextAttributes.Form, "form");
 		System.out.println(itt.toString(true));
 	}
-	
+
 }

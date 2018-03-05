@@ -31,7 +31,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
- * A Theme-Able Component. Only requirement is a tag, keeping it separate for the many different ways that other developers have done their themes
+ * A Theme-Able Component. Only requirement is a tag, keeping it separate for the many different ways that other developers have done their
+ * themes
  *
  * @param <A>
  * 		Set of attributes
@@ -45,8 +46,10 @@ import java.util.Set;
  * @author GedMarc
  * @since 23 Apr 2016
  */
-public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentThemeBase<A, F, E, J>>
-		extends ComponentHTMLAngularBase<A, F, E, J> implements IComponentThemeBase
+public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends
+		                                                                                                                           ComponentThemeBase<A, F, E, J>>
+		extends ComponentHTMLAngularBase<A, F, E, J>
+		implements IComponentThemeBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -112,15 +115,15 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 	public Set<JavascriptReference> getJavascriptReferencesAll()
 	{
 		Set<JavascriptReference> allJs = super.getJavascriptReferencesAll();
-		getThemes().forEach((Theme feature)
-				                    -> Theme.class.cast(feature).getJavascriptReferences().forEach(js ->
-				                                                                                   {
-					                                                                                   if (!allJs.contains(js))
-					                                                                                   {
-						                                                                                   allJs.add(js);
-					                                                                                   }
-				                                                                                   })
-		                   );
+		getThemes().forEach((Theme feature) -> Theme.class.cast(feature)
+		                                                  .getJavascriptReferences()
+		                                                  .forEach(js ->
+		                                                           {
+			                                                           if (!allJs.contains(js))
+			                                                           {
+				                                                           allJs.add(js);
+			                                                           }
+		                                                           }));
 		return allJs;
 	}
 
@@ -134,48 +137,33 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 	@NotNull
 	public Set<Theme> getThemes()
 	{
-		if (this.themes == null)
+		if (themes == null)
 		{
-			this.themes = new LinkedHashSet<>();
+			themes = new LinkedHashSet<>();
 		}
-		return this.themes;
-	}
-
-	@Override
-	public void destroy()
-	{
-		if (this.themes != null)
-		{
-			this.themes.clear();
-			this.themes = null;
-		}
-		super.destroy();
-	}
-
-	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof ComponentThemeBase))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		ComponentThemeBase<?, ?, ?, ?> that = (ComponentThemeBase<?, ?, ?, ?>) o;
-
-		return getThemes().equals(that.getThemes());
+		return themes;
 	}
 
 	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
+	}
+
+	@Override
+	public void destroy()
+	{
+		if (themes != null)
+		{
+			themes.clear();
+			themes = null;
+		}
+		super.destroy();
 	}
 }

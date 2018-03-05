@@ -39,16 +39,20 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRAC
  *
  * @author Marc Magon
  */
-@ComponentInformation(name = "Cancel Event", description = "Server Side Event for Cancel Click Event.",
-		url = "https://www.armineasy.com/JWebSwing", wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
-public abstract class CancelAdapter extends Event
+@ComponentInformation(name = "Cancel Event",
+		description = "Server Side Event for Cancel Click Event.",
+		url = "https://www.armineasy.com/JWebSwing",
+		wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
+public abstract class CancelAdapter
+		extends Event
 		implements GlobalEvents
 {
 
 	/**
 	 * Logger for the Component
 	 */
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance().getLogger("CancelEvent");
+	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
+	                                                              .getLogger("CancelEvent");
 	private static final long serialVersionUID = 1L;
 
 	private CancelDirective directive;
@@ -56,11 +60,25 @@ public abstract class CancelAdapter extends Event
 	/**
 	 * Performs a click
 	 *
-	 * @param component The component this click is going to be acting on
+	 * @param component
+	 * 		The component this click is going to be acting on
 	 */
 	public CancelAdapter(Component component)
 	{
 		super(EventTypes.cancel, component);
+	}
+
+	@Override
+	public void fireEvent(AjaxCall call, AjaxResponse response)
+	{
+		try
+		{
+			onCancel(call, response);
+		}
+		catch (Exception e)
+		{
+			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+		}
 	}
 
 	/**
@@ -72,20 +90,33 @@ public abstract class CancelAdapter extends Event
 		if (!isConfigured())
 		{
 			AngularPageConfigurator.setRequired(true);
-			getComponent().getPage().getAngular().getAngularDirectives().add(getDirective());
-			getComponent().addAttribute(AngularAttributes.ngCancel, STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
+
+			getComponent().addAttribute(AngularAttributes.ngCancel,
+			                            STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 		}
 		super.preConfigure();
 	}
 
-	/**
-	 * Triggers on Cancel
-	 * <p>
-	 *
-	 * @param call     The physical AJAX call
-	 * @param response The physical Ajax Receiver
-	 */
-	public abstract void onCancel(AjaxCall call, AjaxResponse response);
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (o == null || getClass() != o.getClass())
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		CancelAdapter that = (CancelAdapter) o;
+
+		return getDirective().equals(that.getDirective());
+	}
 
 	/**
 	 * Returns this directive
@@ -113,44 +144,21 @@ public abstract class CancelAdapter extends Event
 	}
 
 	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
-	{
-		try
-		{
-			onCancel(call, response);
-		}
-		catch (Exception e)
-		{
-			LOG.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
-
-	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (o == null || getClass() != o.getClass())
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		CancelAdapter that = (CancelAdapter) o;
-
-		return getDirective().equals(that.getDirective());
-	}
-
-	@Override
 	public int hashCode()
 	{
 		int result = super.hashCode();
 		result = 31 * result + getDirective().hashCode();
 		return result;
 	}
+
+	/**
+	 * Triggers on Cancel
+	 * <p>
+	 *
+	 * @param call
+	 * 		The physical AJAX call
+	 * @param response
+	 * 		The physical Ajax Receiver
+	 */
+	public abstract void onCancel(AjaxCall call, AjaxResponse response);
 }

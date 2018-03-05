@@ -23,7 +23,6 @@ import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.PageConfigurator;
 import za.co.mmagon.jwebswing.base.angular.configurations.AngularConfigurationBase;
 import za.co.mmagon.jwebswing.base.angular.controllers.AngularControllerBase;
-import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
 import za.co.mmagon.jwebswing.base.angular.factories.AngularFactoryBase;
 import za.co.mmagon.jwebswing.base.angular.modules.AngularMessagesModule;
 import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
@@ -41,42 +40,116 @@ import java.util.logging.Logger;
  * @author GedMarc
  * @since 21 Feb 2017
  */
-@PluginInformation(pluginName = "AngularJS", pluginUniqueName = "angular", pluginDescription = "AngularJS is a toolset for building the "
-		                                                                                               + "framework most suited to your "
-		                                                                                               + "application development. It is "
-		                                                                                               + "fully extensible and works well " +
-		                                                                                               "" + "" + "with other libraries. " +
-		                                                                                               "Every " + "feature can be modified" +
-		                                                                                               " or " + "replaced to suit your " +
-		                                                                                               "unique " + "development workflow " +
-		                                                                                               "and feature " + "needs. Read on to" +
-		                                                                                               " find out how. " + "",
-                   pluginVersion = "1.6", pluginDependancyUniqueIDs = "jquery", pluginCategories = "jquery, angular, data-binding, ng," +
-		                                                                                                   "google", pluginSubtitle = "Data-binding is an automatic way of updating the view whenever the model changes, as well as " + "updating the model whenever the view changes. This is awesome because it eliminates DOM " + "manipulation from the list of things you have to worry about. ", pluginGitUrl = "https://github.com/GedMarc/JWebSwing", pluginSourceUrl = "https://angularjs.org", pluginWikiUrl = "https://github.com/GedMarc/JWebSwing/wiki", pluginOriginalHomepage = "https://angularjs.org", pluginDownloadUrl = "https://angularjs.org/", pluginIconUrl = "", pluginIconImageUrl = "https://angularjs.org/img/AngularJS-large.png", pluginLastUpdatedDate = "2017/03/30")
+@PluginInformation(pluginName = "AngularJS",
+		pluginUniqueName = "angular",
+		pluginDescription = "AngularJS is a toolset for building the " + "framework most suited to your " + "application development. It "
+				                    + "is " + "fully extensible and works well " + "with other libraries. " + "Every " + "feature " +
+				                    "can" + " be modified" + " or " + "replaced to suit your " + "unique " + "development " + "workflow" +
+				                    " " + "and " + "feature " + "needs. Read on to" + " find out how. " + "",
+		pluginVersion = "1.6",
+		pluginDependancyUniqueIDs = "jquery",
+		pluginCategories = "jquery, angular, data-binding, ng," + "google",
+		pluginSubtitle = "Data-binding is an automatic way of updating the view whenever the model changes, as well as " + "updating the "
+				                 + "model whenever the view changes. This is awesome because it eliminates DOM " + "manipulation from the " +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "list" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + " of " + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "things" + "" + "" + "" + "" + "" + "" + "" + "" + " " + "you" + "" + "" + "" + "" + "" + "" + " " +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "have" + "" + "" + "" + "" + " " + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "to" + " " + "" + "worry" + " " + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + "" + "" + "about" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "" +
+				                 "" + "" + "" + "" + ". ",
+		pluginGitUrl = "https://github.com/GedMarc/JWebSwing",
+		pluginSourceUrl = "https://angularjs.org",
+		pluginWikiUrl = "https://github.com/GedMarc/JWebSwing/wiki",
+		pluginOriginalHomepage = "https://angularjs.org",
+		pluginDownloadUrl = "https://angularjs.org/",
+		pluginIconUrl = "",
+		pluginIconImageUrl = "https://angularjs.org/img/AngularJS-large.png",
+		pluginLastUpdatedDate = "2017/03/30")
 @Singleton
-public class AngularPageConfigurator extends PageConfigurator
+public class AngularPageConfigurator
+		extends PageConfigurator
 {
 
 	public static final String AngularEnabledString = "angular-enabled";
 	private static final Logger log = LogFactory.getLog("Angular Page Configurator");
+	private static final long serialVersionUID = 1L;
 	/**
 	 * If the angular functionality is require or not
 	 */
 	private static boolean required;
-
 	private static boolean angularMessagesRequired;
-
-	private static final long serialVersionUID = 1L;
 	/**
 	 * All the angular modules for this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Set<AngularModuleBase> angularModules;
-	/**
-	 * All of the angular directives for this component
-	 */
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private Set<AngularDirectiveBase> angularDirectives;
+
 	/**
 	 * All of the angular directives for this component
 	 */
@@ -121,6 +194,16 @@ public class AngularPageConfigurator extends PageConfigurator
 	}
 
 	/**
+	 * If the configurator is required
+	 *
+	 * @return
+	 */
+	public static boolean isRequired()
+	{
+		return required;
+	}
+
+	/**
 	 * Sets angular as a required component
 	 *
 	 * @param required
@@ -142,16 +225,13 @@ public class AngularPageConfigurator extends PageConfigurator
 		if (required)
 		{
 			page.getBody()
-					.addJavaScriptReference(AngularReferencePool.Angular1.getJavaScriptReference());
-			if (angularMessagesRequired)
-			{
-				page.getBody()
-						.addJavaScriptReference(AngularReferencePool.Angular1NGMessages.getJavaScriptReference());
-			}
+			    .addJavaScriptReference(AngularReferencePool.Angular1.getJavaScriptReference());
 			page.getBody()
-					.addAttribute(AngularAttributes.ngApp, AngularFeature.getAppName());
+			    .addJavaScriptReference(AngularReferencePool.Angular1NGMessages.getJavaScriptReference());
 			page.getBody()
-					.addAttribute(AngularAttributes.ngController, AngularFeature.getControllerName() + " as jwCntrl");
+			    .addAttribute(AngularAttributes.ngApp, AngularFeature.getAppName());
+			page.getBody()
+			    .addAttribute(AngularAttributes.ngController, AngularFeature.getControllerName() + " as jwCntrl");
 		}
 		return page;
 	}
@@ -183,32 +263,6 @@ public class AngularPageConfigurator extends PageConfigurator
 	public void setAngularModules(@NotNull Set<AngularModuleBase> angularModules)
 	{
 		this.angularModules = angularModules;
-	}
-
-	/**
-	 * Gets the list of angular directives
-	 *
-	 * @return
-	 */
-	@NotNull
-	public Set<AngularDirectiveBase> getAngularDirectives()
-	{
-		if (angularDirectives == null)
-		{
-			setAngularDirectives(new LinkedHashSet<>());
-
-		}
-		return angularDirectives;
-	}
-
-	/**
-	 * Sets the list of angular directives.
-	 *
-	 * @param angularDirectives
-	 */
-	public void setAngularDirectives(@NotNull Set<AngularDirectiveBase> angularDirectives)
-	{
-		this.angularDirectives = angularDirectives;
 	}
 
 	/**
@@ -276,6 +330,7 @@ public class AngularPageConfigurator extends PageConfigurator
 		AngularFeature af = new AngularFeature(page);
 		af.configureTemplateVariables();
 		sb.append(FileTemplates.renderTemplateScripts("jwangular"));
+		log.finest("Rendering the angular script");
 		return sb;
 	}
 
@@ -314,7 +369,7 @@ public class AngularPageConfigurator extends PageConfigurator
 	{
 		if (controllerInsertions == null)
 		{
-			this.controllerInsertions = new LinkedHashSet<>();
+			controllerInsertions = new LinkedHashSet<>();
 		}
 		return controllerInsertions;
 	}
@@ -351,36 +406,6 @@ public class AngularPageConfigurator extends PageConfigurator
 	public void setAngularConfigurations(@NotNull Set<AngularConfigurationBase> angularConfigurations)
 	{
 		this.angularConfigurations = angularConfigurations;
-	}
-
-	/**
-	 * If angular messages must be included
-	 *
-	 * @return
-	 */
-	public static boolean isAngularMessagesRequired()
-	{
-		return angularMessagesRequired;
-	}
-
-	/**
-	 * If anuglar messages are required
-	 *
-	 * @param angularMessagesRequired
-	 */
-	public static void setAngularMessagesRequired(boolean angularMessagesRequired)
-	{
-		AngularPageConfigurator.angularMessagesRequired = angularMessagesRequired;
-	}
-
-	/**
-	 * If the configurator is required
-	 *
-	 * @return
-	 */
-	public static boolean isRequired()
-	{
-		return required;
 	}
 
 	/**

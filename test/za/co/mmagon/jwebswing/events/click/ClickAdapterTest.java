@@ -27,7 +27,8 @@ import za.co.mmagon.jwebswing.base.html.DivSimple;
 /**
  * @author Marc Magon
  */
-public class ClickAdapterTest extends BaseTestClass
+public class ClickAdapterTest
+		extends BaseTestClass
 {
 
 	public ClickAdapterTest()
@@ -48,7 +49,10 @@ public class ClickAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-click=\"jwCntrl.jw.isLoading || jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.click.ClickAdapterTest$1');\" ng-disabled=\"jwCntrl.jw.isLoading\"></div>", test.toString(0));
+		Assertions.assertEquals(
+				"<div id=\"test\" ng-click=\"jwCntrl.jw.isLoading || jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events" + ""
+						+ ".click" + ".ClickAdapterTest$1');\" ng-disabled=\"jwCntrl.jw.isLoading\"></div>",
+				test.toString(0));
 	}
 
 	@Test
@@ -56,7 +60,7 @@ public class ClickAdapterTest extends BaseTestClass
 	{
 		Div test = new DivSimple<>();
 		test.setID("test");
-		test.getPage().getAngular().getAngularDirectives().clear();
+
 		ClickAdapter aa = new ClickAdapter(test)
 		{
 			@Override
@@ -66,7 +70,6 @@ public class ClickAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		System.out.println(test.getPage().getAngular().getAngularDirectives());
-		Assertions.assertEquals(0, test.getPage().getAngular().getAngularDirectives().size());
+
 	}
 }

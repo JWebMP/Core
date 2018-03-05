@@ -8,7 +8,8 @@ import za.co.mmagon.jwebswing.base.ajax.AjaxResponse;
 import za.co.mmagon.jwebswing.base.html.Div;
 import za.co.mmagon.jwebswing.base.html.DivSimple;
 
-public class BlurAdapterTest extends BaseTestClass
+public class BlurAdapterTest
+		extends BaseTestClass
 {
 	@Test
 	public void test()
@@ -24,14 +25,17 @@ public class BlurAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-blur=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.blur.BlurAdapterTest$1');\"></div>", test.toString(0));
+		Assertions.assertEquals(
+				"<div id=\"test\" ng-blur=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.blur.BlurAdapterTest$1');" +
+						"\"></div>",
+				test.toString(0));
 	}
 
 	@Test
 	public void testDirective()
 	{
 		Div test = new DivSimple<>();
-		test.getPage().getAngular().getAngularDirectives().clear();
+
 		test.setID("test");
 		BlurAdapter aa = new BlurAdapter(test)
 		{
@@ -42,7 +46,6 @@ public class BlurAdapterTest extends BaseTestClass
 			}
 		};
 		System.out.println(test.toString(0));
-		System.out.println(test.getPage().getAngular().getAngularDirectives());
-		Assertions.assertEquals(0, test.getPage().getAngular().getAngularDirectives().size());
+
 	}
 }

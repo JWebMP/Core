@@ -26,7 +26,9 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 24 Jul 2016
  */
-public abstract class AngularDirectiveBase extends AngularReferenceBase
+public abstract class AngularDirectiveBase
+		extends AngularReferenceBase
+		implements IAngularDirective
 {
 
 	private static final long serialVersionUID = 1L;
@@ -34,7 +36,8 @@ public abstract class AngularDirectiveBase extends AngularReferenceBase
 	/**
 	 * Constructs a directive with this name that always sorts default
 	 *
-	 * @param directiveName This modules name
+	 * @param directiveName
+	 * 		This modules name
 	 */
 	public AngularDirectiveBase(@NotNull String directiveName)
 	{
