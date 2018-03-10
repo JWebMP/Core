@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class ResponseDirective extends AngularDirectiveBase
+public class ResponseDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class ResponseDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(ResponseDirective.class, "Response").toString();
+		return FileTemplates.getFileTemplate(ResponseDirective.class, "Response", "Response.min.js")
+		                    .toString();
 	}
 
 }

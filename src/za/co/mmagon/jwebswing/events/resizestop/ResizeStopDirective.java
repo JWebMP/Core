@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class ResizeStopDirective extends AngularDirectiveBase
+public class ResizeStopDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,6 +51,7 @@ public class ResizeStopDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(ResizeStopDirective.class, "ResizeStop").toString();
+		return FileTemplates.getFileTemplate(ResizeStopDirective.class, "ResizeStop", "ResizeStop.min.js")
+		                    .toString();
 	}
 }

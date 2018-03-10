@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class BeforeStopDirective extends AngularDirectiveBase
+public class BeforeStopDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class BeforeStopDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(BeforeStopDirective.class, "BeforeStop").toString();
+		return FileTemplates.getFileTemplate(BeforeStopDirective.class, "BeforeStop", "BeforeStop.min.js")
+		                    .toString();
 	}
 
 }

@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class ActivateDirective extends AngularDirectiveBase
+public class ActivateDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class ActivateDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(ActivateDirective.class, "Activate").toString();
+		return FileTemplates.getFileTemplate(ActivateDirective.class, "Activate", "Activate.min.js")
+		                    .toString();
 	}
 
 }

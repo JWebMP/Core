@@ -38,10 +38,10 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_EMPTY;
  * @author GedMarc
  * @since A long time ago in a galaxy far away
  */
-public class FileTemplates implements Serializable
+public class FileTemplates
+		implements Serializable
 {
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
-			                                                    .getLogger("FileTemplates");
+	private static final java.util.logging.Logger LOG = LogFactory.getLog("FileTemplates");
 	/**
 	 * All registered templates
 	 */
@@ -71,26 +71,6 @@ public class FileTemplates implements Serializable
 	}
 
 	/**
-	 * Returns all the template variables currently loaded into memory
-	 *
-	 * @return
-	 */
-	public static Map<String, StringBuilder> getTemplateVariables()
-	{
-		return TemplateVariables;
-	}
-
-	/**
-	 * Sets all the template scripts currently loaded in memory
-	 *
-	 * @return
-	 */
-	public static Map<String, StringBuilder> getTemplateScripts()
-	{
-		return TemplateScripts;
-	}
-
-	/**
 	 * Gets the text string for the template script
 	 *
 	 * @param templateName
@@ -100,17 +80,6 @@ public class FileTemplates implements Serializable
 	public static StringBuilder getTemplateScript(String templateName)
 	{
 		return TemplateScripts.get(templateName);
-	}
-
-	/**
-	 * Sets the template script
-	 *
-	 * @param templateName
-	 * @param templateScript
-	 */
-	public static void setTemplateScript(String templateName, StringBuilder templateScript)
-	{
-		TemplateScripts.put(templateName, templateScript);
 	}
 
 	/**
@@ -125,7 +94,7 @@ public class FileTemplates implements Serializable
 		if (TemplateScripts.containsKey(template) && TemplateScripts.get(template) != null)
 		{
 			return processTemplate(template, getTemplateScripts().get(template)
-					                                 .toString());
+			                                                     .toString());
 		}
 
 		return new StringBuilder();
@@ -150,7 +119,7 @@ public class FileTemplates implements Serializable
 			try
 			{
 				templateScript = Matcher.quoteReplacement(getTemplateVariables().get(templateVariable)
-						                                          .toString());
+				                                                                .toString());
 				templateOutput = templateOutput.replaceAll(STRING_EMPTY + templateVariable + STRING_EMPTY, templateScript);
 			}
 			catch (NullPointerException iae)
@@ -166,6 +135,26 @@ public class FileTemplates implements Serializable
 		}
 		TemplateScripts.put(templateName, new StringBuilder(templateOutput.trim()));
 		return TemplateScripts.get(templateName);
+	}
+
+	/**
+	 * Sets all the template scripts currently loaded in memory
+	 *
+	 * @return
+	 */
+	public static Map<String, StringBuilder> getTemplateScripts()
+	{
+		return TemplateScripts;
+	}
+
+	/**
+	 * Returns all the template variables currently loaded into memory
+	 *
+	 * @return
+	 */
+	public static Map<String, StringBuilder> getTemplateVariables()
+	{
+		return TemplateVariables;
 	}
 
 	/**
@@ -259,9 +248,8 @@ public class FileTemplates implements Serializable
 				LOG.log(Level.SEVERE,
 				        "[Error]-[unable to find template file];[TemplateFile]-[" + templateName + "];[TemplatePath]-[" + referenceClass
 						                                                                                                          .getResource(
-						        templateName)
-						                                                                                                          .getPath
-								                                                                                                           () + "]",
+								                                                                                                          templateName)
+						                                                                                                          .getPath() + "]",
 				        ex);
 			}
 			catch (IOException ex)
@@ -274,5 +262,16 @@ public class FileTemplates implements Serializable
 			}
 		}
 		return TemplateScripts.get(templateName);
+	}
+
+	/**
+	 * Sets the template script
+	 *
+	 * @param templateName
+	 * @param templateScript
+	 */
+	public static void setTemplateScript(String templateName, StringBuilder templateScript)
+	{
+		TemplateScripts.put(templateName, templateScript);
 	}
 }

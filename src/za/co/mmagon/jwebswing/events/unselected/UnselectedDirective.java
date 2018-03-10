@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class UnselectedDirective extends AngularDirectiveBase
+public class UnselectedDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class UnselectedDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(UnselectedDirective.class, "Unselected").toString();
+		return FileTemplates.getFileTemplate(UnselectedDirective.class, "Unselected", "Unselected.min.js")
+		                    .toString();
 	}
 
 }

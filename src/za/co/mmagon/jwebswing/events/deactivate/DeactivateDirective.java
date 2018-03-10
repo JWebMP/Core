@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class DeactivateDirective extends AngularDirectiveBase
+public class DeactivateDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class DeactivateDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(DeactivateDirective.class, "Deactivate").toString();
+		return FileTemplates.getFileTemplate(DeactivateDirective.class, "Deactivate", "Deactivate.min.js")
+		                    .toString();
 	}
 
 }

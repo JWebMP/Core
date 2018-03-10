@@ -42,7 +42,8 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * Note: If you use the &gt;button&lt; element in an HTML form, different browsers may submit different values.
  * <p>
  * Use &gt;input&lt; to create buttons in an HTML form.<p>
- * Differences Between HTML 4.01 and HTML5 &gt;p&lt; HTML5 has the following new attributes: autofocus, form, formaction, formenctype, formmethod, formnovalidate, and formtarget. &gt;p&lt;
+ * Differences Between HTML 4.01 and HTML5 &gt;p&lt; HTML5 has the following new attributes: autofocus, form, formaction, formenctype,
+ * formmethod, formnovalidate, and formtarget. &gt;p&lt;
  * <p>
  *
  * @param <C>
@@ -55,7 +56,8 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * @since 2014/12/20
  */
 public class Button<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Button<C, A, F, E, J>>
-		extends Component<C, A, F, E, J> implements GlobalChildren, ListItemChildren
+		extends Component<C, A, F, E, J>
+		implements GlobalChildren, ListItemChildren
 {
 
 	private static final long serialVersionUID = 1L;
@@ -72,11 +74,13 @@ public class Button<C extends GlobalChildren, A extends Enum & AttributeDefiniti
 	 * Constructs a new button object with the given text
 	 * <p>
 	 *
-	 * @param text The text to show on the button
+	 * @param text
+	 * 		The text to show on the button
 	 */
 	public Button(String text)
 	{
 		super(ComponentTypes.Button);
+		addAttribute("type", "button");
 		setText(text);
 	}
 }

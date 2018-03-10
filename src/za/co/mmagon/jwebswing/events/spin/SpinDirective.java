@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class SpinDirective extends AngularDirectiveBase
+public class SpinDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class SpinDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(SpinDirective.class, "Spin").toString();
+		return FileTemplates.getFileTemplate(SpinDirective.class, "Spin", "Spin.min.js")
+		                    .toString();
 	}
 
 }

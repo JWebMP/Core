@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class CancelDirective extends AngularDirectiveBase
+public class CancelDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class CancelDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(CancelDirective.class, "Cancel").toString();
+		return FileTemplates.getFileTemplate(CancelDirective.class, "Cancel", "Cancel.min.js")
+		                    .toString();
 	}
 
 }

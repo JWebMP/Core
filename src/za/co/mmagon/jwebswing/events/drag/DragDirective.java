@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class DragDirective extends AngularDirectiveBase
+public class DragDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class DragDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(DragDirective.class, "Drag").toString();
+		return FileTemplates.getFileTemplate(DragDirective.class, "Drag", "Drag.min.js")
+		                    .toString();
 	}
 
 }

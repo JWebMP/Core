@@ -27,11 +27,12 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class BeforeActivateDirective extends AngularDirectiveBase
+public class BeforeActivateDirective
+		extends AngularDirectiveBase
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructs a new right click directive based on the angular object passed in
 	 * <p>
@@ -40,7 +41,7 @@ public class BeforeActivateDirective extends AngularDirectiveBase
 	{
 		super("ngBeforeActivate");
 	}
-	
+
 	/**
 	 * Renders the right click directive from the JavaScript file
 	 *
@@ -50,7 +51,8 @@ public class BeforeActivateDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(BeforeActivateDirective.class, "BeforeActivate").toString();
+		return FileTemplates.getFileTemplate(BeforeActivateDirective.class, "BeforeActivate", "BeforeActivate.min.js")
+		                    .toString();
 	}
-	
+
 }

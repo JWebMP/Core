@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class ReceiveDirective extends AngularDirectiveBase
+public class ReceiveDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class ReceiveDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(ReceiveDirective.class, "Receive").toString();
+		return FileTemplates.getFileTemplate(ReceiveDirective.class, "Receive", "Receive.min.js")
+		                    .toString();
 	}
 
 }

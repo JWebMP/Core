@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class UpdateDirective extends AngularDirectiveBase
+public class UpdateDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class UpdateDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(UpdateDirective.class, "Update").toString();
+		return FileTemplates.getFileTemplate(UpdateDirective.class, "Update", "Update.min.js")
+		                    .toString();
 	}
 
 }

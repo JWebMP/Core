@@ -27,11 +27,12 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class StartDirective extends AngularDirectiveBase
+public class StartDirective
+		extends AngularDirectiveBase
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructs a new right click directive based on the angular object passed in
 	 * <p>
@@ -40,7 +41,7 @@ public class StartDirective extends AngularDirectiveBase
 	{
 		super("ngStart");
 	}
-	
+
 	/**
 	 * Renders the right click directive from the JavaScript file
 	 *
@@ -50,7 +51,8 @@ public class StartDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(StartDirective.class, "Start").toString();
+		return FileTemplates.getFileTemplate(StartDirective.class, "Start", "Start.min.js")
+		                    .toString();
 	}
-	
+
 }

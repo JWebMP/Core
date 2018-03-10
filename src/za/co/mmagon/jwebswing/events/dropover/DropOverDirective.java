@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class DropOverDirective extends AngularDirectiveBase
+public class DropOverDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class DropOverDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(DropOverDirective.class, "DropOver").toString();
+		return FileTemplates.getFileTemplate(DropOverDirective.class, "DropOver", "DropOver.min.js")
+		                    .toString();
 	}
 
 }

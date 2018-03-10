@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class BeforeLoadDirective extends AngularDirectiveBase
+public class BeforeLoadDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class BeforeLoadDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(BeforeLoadDirective.class, "BeforeLoad").toString();
+		return FileTemplates.getFileTemplate(BeforeLoadDirective.class, "BeforeLoad", "BeforeLoad.min.js")
+		                    .toString();
 	}
 
 }

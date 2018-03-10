@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class CloseDirective extends AngularDirectiveBase
+public class CloseDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class CloseDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(CloseDirective.class, "Close").toString();
+		return FileTemplates.getFileTemplate(CloseDirective.class, "Close", "Close.min.js")
+		                    .toString();
 	}
 
 }

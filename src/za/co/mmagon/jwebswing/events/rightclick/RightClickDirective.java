@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class RightClickDirective extends AngularDirectiveBase
+public class RightClickDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class RightClickDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(RightClickDirective.class, "RightClick").toString();
+		return FileTemplates.getFileTemplate(RightClickDirective.class, "RightClick", "RightClick.min.js")
+		                    .toString();
 	}
 
 }

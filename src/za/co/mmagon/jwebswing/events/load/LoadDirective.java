@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class LoadDirective extends AngularDirectiveBase
+public class LoadDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class LoadDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(LoadDirective.class, "Load").toString();
+		return FileTemplates.getFileTemplate(LoadDirective.class, "Load", "Load.min.js")
+		                    .toString();
 	}
 
 }

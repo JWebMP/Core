@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class ButtonClickDirective extends AngularDirectiveBase
+public class ButtonClickDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class ButtonClickDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(ButtonClickDirective.class, "ButtonClick").toString();
+		return FileTemplates.getFileTemplate(ButtonClickDirective.class, "ButtonClick", "ButtonClick.min.js")
+		                    .toString();
 	}
 
 }

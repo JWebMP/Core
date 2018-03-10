@@ -428,6 +428,16 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	}
 
 	/**
+	 * Sets the classes set
+	 *
+	 * @param classes
+	 */
+	public void setClasses(Set<String> classes)
+	{
+		this.classes = classes;
+	}
+
+	/**
 	 * Set the theme applied to this component
 	 * <p>
 	 *

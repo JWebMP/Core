@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class SearchDirective extends AngularDirectiveBase
+public class SearchDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class SearchDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(SearchDirective.class, "Search").toString();
+		return FileTemplates.getFileTemplate(SearchDirective.class, "Search", "Search.min.js")
+		                    .toString();
 	}
 
 }

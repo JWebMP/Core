@@ -25,7 +25,8 @@ import za.co.mmagon.jwebswing.base.angular.directives.AngularDirectiveBase;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class DropOutDirective extends AngularDirectiveBase
+public class DropOutDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -47,7 +48,8 @@ public class DropOutDirective extends AngularDirectiveBase
 	@Override
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(DropOutDirective.class, "DropOut").toString();
+		return FileTemplates.getFileTemplate(DropOutDirective.class, "DropOut", "DropOut.min.js")
+		                    .toString();
 	}
 
 }

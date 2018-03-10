@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class SortDirective extends AngularDirectiveBase
+public class SortDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class SortDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(SortDirective.class, "Sort").toString();
+		return FileTemplates.getFileTemplate(SortDirective.class, "Sort", "Sort.min.js")
+		                    .toString();
 	}
 
 }

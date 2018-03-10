@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class FocusDirective extends AngularDirectiveBase
+public class FocusDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class FocusDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(FocusDirective.class, "Focus").toString();
+		return FileTemplates.getFileTemplate(FocusDirective.class, "Focus", "Focus.min.js")
+		                    .toString();
 	}
 
 }

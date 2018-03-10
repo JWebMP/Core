@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class RemoveDirective extends AngularDirectiveBase
+public class RemoveDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class RemoveDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(RemoveDirective.class, "Remove").toString();
+		return FileTemplates.getFileTemplate(RemoveDirective.class, "Remove", "Remove.min.js")
+		                    .toString();
 	}
 
 }

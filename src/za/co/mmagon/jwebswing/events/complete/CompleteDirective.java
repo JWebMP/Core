@@ -27,7 +27,8 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 25 Jun 2016
  */
-public class CompleteDirective extends AngularDirectiveBase
+public class CompleteDirective
+		extends AngularDirectiveBase
 {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +51,8 @@ public class CompleteDirective extends AngularDirectiveBase
 	@NotNull
 	public String renderFunction()
 	{
-		return FileTemplates.getFileTemplate(CompleteDirective.class, "Complete").toString();
+		return FileTemplates.getFileTemplate(CompleteDirective.class, "Complete", "Complete.min.js")
+		                    .toString();
 	}
 
 }
