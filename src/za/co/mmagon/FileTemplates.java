@@ -233,6 +233,10 @@ public class FileTemplates
 				{
 					templateFileName += ".js";
 				}
+				if (fileName.endsWith(".min"))
+				{
+					fileName = fileName + ".js";
+				}
 
 				byte[] fileContents;
 				try (InputStream is = referenceClass.getResourceAsStream(templateFileName))
