@@ -20,6 +20,7 @@ import za.co.mmagon.jwebswing.base.html.Input;
 import za.co.mmagon.jwebswing.base.html.attributes.InputCheckBoxTypeAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 import za.co.mmagon.jwebswing.base.html.interfaces.InputChoiceType;
+import za.co.mmagon.jwebswing.utilities.StaticStrings;
 
 import javax.validation.constraints.NotNull;
 
@@ -57,7 +58,7 @@ public class InputCheckBoxType<J extends InputCheckBoxType<J>>
 	{
 		if (checked)
 		{
-			addAttribute(InputCheckBoxTypeAttributes.Checked.toString(), null);
+			addAttribute(InputCheckBoxTypeAttributes.Checked.toString(), StaticStrings.STRING_EMPTY);
 		}
 		else
 		{

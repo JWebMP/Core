@@ -128,9 +128,7 @@ public class FileTemplates
 			}
 			catch (IllegalArgumentException iae)
 			{
-				LOG.log(Level.WARNING,
-				        format("[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[{0}];[Script]-[{1}]",
-				               templateVariable, templateScript), iae);
+				LOG.log(Level.WARNING, format("[Error]-[Invalid Variable Name for Regular Expression Search];[Variable]-[{0}];[Script]-[{1}]", templateVariable, templateScript), iae);
 			}
 		}
 		TemplateScripts.put(templateName, new StringBuilder(templateOutput.trim()));
@@ -222,14 +220,29 @@ public class FileTemplates
 	 */
 	public static StringBuilder getFileTemplate(Class referenceClass, String templateName, String fileName)
 	{
+		return getFileTemplate(referenceClass, templateName, fileName, false);
+	}
+
+	/**
+	 * Returns the template as a string
+	 *
+	 * @param referenceClass
+	 * 		The class to reference to locate the file
+	 * @param templateName
+	 * 		The file without .min.js or .js attached to it
+	 * @param fileName
+	 *
+	 * @return The string for the file
+	 */
+	public static StringBuilder getFileTemplate(Class referenceClass, String templateName, String fileName, boolean alwaysRefresh)
+	{
 		StringBuilder template = TemplateScripts.get(templateName);
-		if (template == null)
+		if (template == null || alwaysRefresh)
 		{
 			try
 			{
 				String templateFileName = fileName;
-				if (!(fileName.contains(".html") || fileName.contains(".htm") || fileName.contains(".js") || fileName.contains(
-						".css") || fileName.contains(".min")))
+				if (!(fileName.contains(".html") || fileName.contains(".htm") || fileName.contains(".js") || fileName.contains(".css") || fileName.contains(".min") || fileName.contains(".txt")))
 				{
 					templateFileName += ".js";
 				}
@@ -249,12 +262,8 @@ public class FileTemplates
 			}
 			catch (FileNotFoundException ex)
 			{
-				LOG.log(Level.SEVERE,
-				        "[Error]-[unable to find template file];[TemplateFile]-[" + templateName + "];[TemplatePath]-[" + referenceClass
-						                                                                                                          .getResource(
-						        templateName)
-				                                                                                                                        .getPath() + "]",
-				        ex);
+				LOG.log(Level.SEVERE, "[Error]-[unable to find template file];[TemplateFile]-[" + templateName + "];[TemplatePath]-[" + referenceClass.getResource(templateName)
+				                                                                                                                                      .getPath() + "]", ex);
 			}
 			catch (IOException ex)
 			{
