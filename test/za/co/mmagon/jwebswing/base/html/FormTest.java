@@ -24,34 +24,34 @@ import org.junit.jupiter.api.Test;
  */
 public class FormTest
 {
-	
+
 	Form f = new Form();
-	
+
 	public FormTest()
 	{
 	}
-	
-	private void reset()
-	{
-		f = new Form();
-		f.setID("id");
-	}
-	
+
 	@Test
 	public void testForm()
 	{
 		reset();
 		System.out.println(f.toString(true));
-		Assertions.assertEquals("<form id=\"id\"></form>", f.toString(true));
+		Assertions.assertEquals("<form id=\"id\" name=\"id\"></form>", f.toString(true));
 	}
-	
+
+	private void reset()
+	{
+		f = new Form();
+		f.setID("id");
+	}
+
 	@Test
 	public void testFormTiny()
 	{
 		reset();
 		f.setTiny(true);
 		System.out.println(f.toString(true));
-		Assertions.assertEquals("<form id=\"id\"></form>", f.toString(true));
+		Assertions.assertEquals("<form id=\"id\" name=\"id\"></form>", f.toString(true));
 		f.setTiny(false);
 	}
 }
