@@ -28,7 +28,6 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.events.enumerations.EventTy
 import za.co.mmagon.jwebswing.plugins.ComponentInformation;
 import za.co.mmagon.logger.LogFactory;
 
-import javax.management.InvalidAttributeValueException;
 import java.util.logging.Level;
 
 import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_ANGULAR_EVENT_START;
@@ -39,16 +38,20 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRAC
  *
  * @author Marc Magon
  */
-public abstract class ClickAdapter extends Event<ClickAdapter> implements ParagraphEvents, BodyEvents, GlobalEvents
+public abstract class ClickAdapter
+		extends Event<ClickAdapter>
+		implements ParagraphEvents, BodyEvents, GlobalEvents
 {
 
 	/**
 	 * Logger for the Component
 	 */
-	@ComponentInformation(name = "Click Event", description = "Server Side Event for Click.", url = "https://www.armineasy.com/JWebSwing",
-	                      wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
+	@ComponentInformation(name = "Click Event",
+			description = "Server Side Event for Click.",
+			url = "https://www.armineasy.com/JWebSwing",
+			wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
 	private static final java.util.logging.Logger log = LogFactory.getInstance()
-			                                                    .getLogger("ClickEvent");
+	                                                              .getLogger("ClickEvent");
 	private static final long serialVersionUID = 1L;
 
 	protected ClickAdapter()
@@ -68,14 +71,25 @@ public abstract class ClickAdapter extends Event<ClickAdapter> implements Paragr
 	}
 
 	@Override
+	public void fireEvent(AjaxCall call, AjaxResponse response)
+	{
+		try
+		{
+			onClick(call, response);
+		}
+		catch (Exception e)
+		{
+			log.log(Level.SEVERE, "Error In Firing Event", e);
+		}
+	}
+
+	@Override
 	public void preConfigure()
 	{
 
 		if (!isConfigured() && getComponent() != null)
 		{
-			getComponent().addAttribute(AngularAttributes.ngClick,
-			                            "jwCntrl.jw.isLoading || " + STRING_ANGULAR_EVENT_START + renderVariables() +
-					                            STRING_CLOSING_BRACKET_SEMICOLON);
+			getComponent().addAttribute(AngularAttributes.ngClick, "jwCntrl.jw.isLoading || " + STRING_ANGULAR_EVENT_START + renderVariables() + STRING_CLOSING_BRACKET_SEMICOLON);
 
 			if (getComponent().getAttribute(AngularAttributes.ngDisabled) == null)
 			{
@@ -83,8 +97,7 @@ public abstract class ClickAdapter extends Event<ClickAdapter> implements Paragr
 			}
 			else
 			{
-				getComponent().addAttribute(AngularAttributes.ngDisabled,
-				                            "jwCntrl.jw.isLoading || " + getComponent().getAttribute(AngularAttributes.ngDisabled));
+				getComponent().addAttribute(AngularAttributes.ngDisabled, "jwCntrl.jw.isLoading || " + getComponent().getAttribute(AngularAttributes.ngDisabled));
 			}
 		}
 
@@ -100,19 +113,6 @@ public abstract class ClickAdapter extends Event<ClickAdapter> implements Paragr
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onClick(AjaxCall call, AjaxResponse response) throws InvalidAttributeValueException;
-
-	@Override
-	public void fireEvent(AjaxCall call, AjaxResponse response)
-	{
-		try
-		{
-			onClick(call, response);
-		}
-		catch (Exception e)
-		{
-			log.log(Level.SEVERE, "Error In Firing Event", e);
-		}
-	}
+	public abstract void onClick(AjaxCall call, AjaxResponse response);
 
 }

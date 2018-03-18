@@ -18,6 +18,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.html.attributes.FormAttributes;
+import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.ListItemChildren;
@@ -140,6 +141,19 @@ public class Form<J extends Form<J>>
 			removeAttribute(FormAttributes.NoValidate);
 		}
 		return (J) this;
+	}
+
+	@Override
+	public J setID(String id)
+	{
+		addAttribute(GlobalAttributes.Name, id);
+		return super.setID(id);
+	}
+
+	@Override
+	public String getName()
+	{
+		return getAttribute(GlobalAttributes.Name);
 	}
 
 	@Override

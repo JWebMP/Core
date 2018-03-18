@@ -43,11 +43,12 @@ import java.util.logging.Level;
  * @author GedMarc
  * @since 22 Apr 2016
  */
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility =
-		                                                                                                                    JsonAutoDetect
-				                                                                                                                    .Visibility.NONE)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY,
+		getterVisibility = JsonAutoDetect.Visibility.NONE,
+		setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase<J>
+public class ComponentBase<J extends ComponentBase<J>>
+		implements IComponentBase<J>
 {
 
 	/**
@@ -107,7 +108,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
 	 */
 	public ComponentBase(@NotNull ComponentTypes componentType)
 	{
-		this.id = GUIDGenerator.generateGuid();
+		id = GUIDGenerator.generateGuid();
 		this.componentType = componentType;
 	}
 
@@ -137,7 +138,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
 		J component = null;
 		try
 		{
-			component = (J) this.clone();
+			component = (J) clone();
 			component.setID(GUIDGenerator.generateGuid());
 		}
 		catch (CloneNotSupportedException ex)
@@ -148,14 +149,20 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
 	}
 
 	/**
-	 * Default HashCode over-ride
+	 * Gets the ID of this component
+	 * <p>
 	 *
-	 * @return
+	 * @return The ID of this component
 	 */
 	@Override
-	public int hashCode()
+	@NotNull
+	public String getID()
 	{
-		return getID().hashCode();
+		if (id == null)
+		{
+			id = GUIDGenerator.generateGuid();
+		}
+		return id;
 	}
 
 	/**
@@ -172,22 +179,20 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
 	@NotNull
 	public String getID(boolean jQueryHolder)
 	{
-		return StaticStrings.STRING_HASH + this.id;
+		return StaticStrings.STRING_HASH + id;
 	}
 
 	/**
-	 * Gets the ID of this component
+	 * Returns the component rendering for JQuery string Requires the rendering for component is set
 	 * <p>
 	 *
-	 * @return The ID of this component
+	 * @return $(' # x ').
 	 */
 	@Override
 	@NotNull
-	public String getID()
+	public String getJQueryID()
 	{
-		if (this.id == null)
-		{ this.id = GUIDGenerator.generateGuid(); }
-		return this.id;
+		return "$(\"" + getID(true) + "\").";
 	}
 
 	/**
@@ -302,7 +307,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
 	@Override
 	public boolean isTiny()
 	{
-		return this.tiny;
+		return tiny;
 	}
 
 	/**
@@ -319,6 +324,18 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
 	{
 		this.tiny = tiny;
 		return (J) this;
+	}
+
+	/**
+	 * Returns if this component is needing refresh on next Ajax call
+	 * <p>
+	 *
+	 * @return true if going to be touched
+	 */
+	@Override
+	public boolean isTouched()
+	{
+		return touched;
 	}
 
 	/**
@@ -340,16 +357,13 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
 	}
 
 	/**
-	 * Returns the component rendering for JQuery string Requires the rendering for component is set
-	 * <p>
-	 *
-	 * @return $(' # x ').
+	 * Run-Once on creation Executes a piece of code before running any rendering. Call super after your changes Marks the component as
+	 * configured
 	 */
 	@Override
-	@NotNull
-	public String getJQueryID()
+	public void preConfigure()
 	{
-		return "$(\"" + getID(true) + "\").";
+		setConfigured(true);
 	}
 
 	/**
@@ -383,22 +397,6 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
 	}
 
 	/**
-	 * Sets this components Raw Text
-	 * <p>
-	 *
-	 * @param text
-	 * 		The text to display as Raw Text
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J setText(StringBuilder text)
-	{
-		this.text = text.toString();
-		return (J) this;
-	}
-
-	/**
 	 * Sets the ID of this component
 	 * <p>
 	 *
@@ -411,6 +409,96 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
 	public J setID(String id)
 	{
 		this.id = id;
+		return (J) this;
+	}
+
+	/**
+	 * Default HashCode over-ride
+	 *
+	 * @return
+	 */
+	@Override
+	public int hashCode()
+	{
+		return getID().hashCode();
+	}
+
+	/**
+	 * Default equals for a component
+	 *
+	 * @param obj
+	 * 		The incoming object
+	 *
+	 * @return True if the ID, Type and Text are the same
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+		{
+			return true;
+		}
+		if (obj == null)
+		{
+			return false;
+		}
+		if (getClass() != obj.getClass())
+		{
+			return false;
+		}
+		final ComponentBase<?> other = (ComponentBase<?>) obj;
+		return other.getID()
+		            .equals(getID());
+	}
+
+	/**
+	 * Renders the component as a JSON Object
+	 *
+	 * @return
+	 */
+	@Override
+	public String toString()
+	{
+		if (!isConfigured())
+		{
+			init();
+			preConfigure();
+		}
+		return new JavaScriptPart().objectAsString(this);
+	}
+
+	/**
+	 * Runs before anything Can be used as constructor intializations.
+	 */
+	public void init()
+	{
+		setInitialized(true);
+	}
+
+	/**
+	 * Returns the actual text object for analysis
+	 *
+	 * @return
+	 */
+	@Nullable
+	public String getText()
+	{
+		return text;
+	}
+
+	/**
+	 * Sets this components Raw Text
+	 * <p>
+	 *
+	 * @param text
+	 * 		The text to display as Raw Text
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setText(StringBuilder text)
+	{
+		this.text = text.toString();
 		return (J) this;
 	}
 
@@ -444,40 +532,6 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
 	}
 
 	/**
-	 * Run-Once on creation Executes a piece of code before running any rendering. Call super after your changes Marks the component as
-	 * configured
-	 */
-	@Override
-	public void preConfigure()
-	{
-		setConfigured(true);
-	}
-
-	/**
-	 * Renders the component as a JSON Object
-	 *
-	 * @return
-	 */
-	@Override
-	public String toString()
-	{
-		if (!isConfigured())
-		{
-			init();
-			preConfigure();
-		}
-		return new JavaScriptPart().objectAsString(this);
-	}
-
-	/**
-	 * Runs before anything Can be used as constructor intializations.
-	 */
-	public void init()
-	{
-		setInitialized(true);
-	}
-
-	/**
 	 * If this component has been initialized
 	 *
 	 * @return
@@ -500,46 +554,6 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
 	{
 		this.initialized = initialized;
 		return (J) this;
-	}
-
-	/**
-	 * Returns if this component is needing refresh on next Ajax call
-	 * <p>
-	 *
-	 * @return true if going to be touched
-	 */
-	@Override
-	public boolean isTouched()
-	{
-		return touched;
-	}
-
-	/**
-	 * Default equals for a component
-	 *
-	 * @param obj
-	 * 		The incoming object
-	 *
-	 * @return True if the ID, Type and Text are the same
-	 */
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-		{
-			return true;
-		}
-		if (obj == null)
-		{
-			return false;
-		}
-		if (getClass() != obj.getClass())
-		{
-			return false;
-		}
-		final ComponentBase<?> other = (ComponentBase<?>) obj;
-		return other.getID()
-				       .equals(getID());
 	}
 
 	/**
@@ -577,7 +591,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
 	public String getProperty(String propertyName)
 	{
 		return getProperties().get(propertyName)
-				       .toString();
+		                      .toString();
 	}
 
 	/**
@@ -591,7 +605,7 @@ public class ComponentBase<J extends ComponentBase<J>> implements IComponentBase
 		try
 		{
 			return getClass().getCanonicalName()
-					       .replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE);
+			                 .replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE);
 		}
 		catch (NullPointerException npe)
 		{

@@ -19,6 +19,7 @@ package za.co.mmagon.jwebswing.base.html;
 import za.co.mmagon.jwebswing.Component;
 import za.co.mmagon.jwebswing.base.angular.AngularAttributes;
 import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
+import za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.InputTypes;
 import za.co.mmagon.jwebswing.base.html.interfaces.AttributeDefinitions;
 import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
@@ -26,6 +27,8 @@ import za.co.mmagon.jwebswing.base.html.interfaces.GlobalFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.generics.ParagraphChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.GlobalEvents;
 import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
+
+import javax.validation.constraints.NotNull;
 
 import static za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes.Name;
 import static za.co.mmagon.jwebswing.base.html.attributes.GlobalAttributes.Type;
@@ -161,10 +164,17 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	}
 
 	@Override
+	@NotNull
 	public J setID(String id)
 	{
-		addAttribute(Name, getID());
+		addAttribute(Name, id);
 		return super.setID(id);
+	}
+
+	@Override
+	public String getName()
+	{
+		return getAttribute(GlobalAttributes.Name);
 	}
 
 	/**

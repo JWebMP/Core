@@ -22,12 +22,14 @@ import za.co.mmagon.jwebswing.htmlbuilder.javascript.JavaScriptPart;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * @author GedMarc
  * @since 25 Jan 2017
  */
-public class RegularExpressionsDTO extends JavaScriptPart
+public class RegularExpressionsDTO
+		extends JavaScriptPart
 {
 
 	/**
@@ -67,24 +69,13 @@ public class RegularExpressionsDTO extends JavaScriptPart
 	 */
 	private Map<String, Serializable> regularExpressions;
 
+
 	/**
 	 * Constructs a new instance of the regular expression dto
 	 */
 	public RegularExpressionsDTO()
 	{
 		//Nothing needed
-	}
-
-	/**
-	 * @param name
-	 * @param expression
-	 *
-	 * @return
-	 */
-	public RegularExpressionsDTO addExpression(String name, String expression)
-	{
-		getRegularExpressions().put(name, expression);
-		return this;
 	}
 
 	/**
@@ -98,9 +89,22 @@ public class RegularExpressionsDTO extends JavaScriptPart
 		addExpression("textFieldMin3", TextFieldMin3);
 		addExpression("alphaNumericField", AlphaNumericField);
 		addExpression("emailField", EmailPattern);
+		addExpression("email", EmailPattern);
 		addExpression("saID", SouthAfricanIDNumber);
 		addExpression("saPhoneNumber", SouthAfricanPhoneNumber);
 		addExpression("yyyy_MM_dd", yyyy_MM_dd);
+		return this;
+	}
+
+	/**
+	 * @param name
+	 * @param expression
+	 *
+	 * @return
+	 */
+	public RegularExpressionsDTO addExpression(String name, String expression)
+	{
+		getRegularExpressions().put(name, expression);
 		return this;
 	}
 
@@ -129,4 +133,13 @@ public class RegularExpressionsDTO extends JavaScriptPart
 		this.regularExpressions = regularExpressions;
 	}
 
+	public RegularExpressionsDTO addPasswordRegex(int minLength, boolean specialChars, boolean numbers, boolean lowerCase, boolean upperCase)
+	{
+		String pattern = "" + (specialChars ? "(?=.*[$@!%^&*()])" : "") + (numbers ? "(?=.*[0-9])" : "") + (lowerCase ? "(?=.*[a-z])" : "") + (upperCase
+		                                                                                                                                       ? "(?=.*[A-Z])"
+		                                                                                                                                       : "") + ".{" + minLength + ",}";
+		Pattern.compile(pattern);
+		addExpression("password", pattern);
+		return this;
+	}
 }

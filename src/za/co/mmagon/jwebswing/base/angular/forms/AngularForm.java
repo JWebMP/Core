@@ -8,6 +8,9 @@ import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 
 import javax.validation.constraints.NotNull;
 
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_EMPTY;
+import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SPACE;
+
 public class AngularForm<J extends AngularForm<J>>
 		extends Form<J>
 {
@@ -49,24 +52,6 @@ public class AngularForm<J extends AngularForm<J>>
 	public J setSuccessFeedbackClass(String successFeedbackClass)
 	{
 		this.successFeedbackClass = successFeedbackClass;
-		return (J) this;
-	}
-
-	/**
-	 * Returns the error class for validation
-	 *
-	 * @return
-	 */
-	public String getErrorClass()
-	{
-		return errorClass;
-	}
-
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J setErrorClass(String errorClass)
-	{
-		this.errorClass = errorClass;
 		return (J) this;
 	}
 
@@ -125,9 +110,51 @@ public class AngularForm<J extends AngularForm<J>>
 	@NotNull
 	protected String buildValidationClass(@NotNull Input input)
 	{
-		String output = getID() + "." + input.getID() + ".$error";
-		output = "{'" + getSuccessClass() + "':" + output + "}";
-		return output;
+		return buildValidationClass(input, STRING_EMPTY);
+	}
+
+	/**
+	 * Builds the validation for the input
+	 *
+	 * @param input
+	 *
+	 * @return
+	 */
+	@NotNull
+	protected String buildValidationClass(@NotNull Input input, String prependClass)
+	{
+
+		String finalOutput = "{";
+
+		String formInputIdentifier = (prependClass.isEmpty() ? STRING_EMPTY : STRING_SPACE) + getID() + "." + input.getID() + ".";
+
+		String errorOuput = prependClass + formInputIdentifier + "$invalid && " + formInputIdentifier + "$dirty && !" + formInputIdentifier + "$pristine";
+		errorOuput = "'" + getErrorClass() + "':" + errorOuput + "";
+
+		String successOutput = prependClass + getID() + "." + input.getID() + ".$valid && " + formInputIdentifier + "$dirty && !" + formInputIdentifier + "$pristine";
+		successOutput = "'" + getSuccessClass() + "':" + successOutput + "";
+
+		finalOutput += errorOuput + "," + successOutput + "}";
+
+		return finalOutput;
+	}
+
+	/**
+	 * Returns the error class for validation
+	 *
+	 * @return
+	 */
+	public String getErrorClass()
+	{
+		return errorClass;
+	}
+
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setErrorClass(String errorClass)
+	{
+		this.errorClass = errorClass;
+		return (J) this;
 	}
 
 	/**
