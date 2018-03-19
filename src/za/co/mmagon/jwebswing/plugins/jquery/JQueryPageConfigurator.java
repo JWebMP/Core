@@ -29,10 +29,7 @@ import za.co.mmagon.jwebswing.plugins.PluginInformation;
  */
 @PluginInformation(pluginName = "JQuery",
 		pluginUniqueName = "jquery",
-		pluginDescription = "jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal "
-				                    + "and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that " +
-				                    "works" + " across a multitude of browsers. With a combination of versatility and extensibility, " +
-				                    "jQuery has " + "changed the way that millions of people write JavaScript.",
+		pluginDescription = "jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal " + "and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that " + "works" + " across a multitude of browsers. With a combination of versatility and extensibility, " + "jQuery has " + "changed the way that millions of people write JavaScript.",
 		pluginVersion = "3.1.1",
 		pluginDependancyUniqueIDs = "",
 		pluginCategories = "javascript,jquery, framework, jwebswing",
@@ -45,7 +42,8 @@ import za.co.mmagon.jwebswing.plugins.PluginInformation;
 		pluginIconImageUrl = "jquery_logo.png",
 		pluginLastUpdatedDate = "2017/03/13",
 		pluginOriginalHomepage = "http://www.jquery.com")
-public class JQueryPageConfigurator extends PageConfigurator
+public class JQueryPageConfigurator
+		extends PageConfigurator
 {
 
 	private static final long serialVersionUID = 1L;
@@ -59,37 +57,6 @@ public class JQueryPageConfigurator extends PageConfigurator
 	public JQueryPageConfigurator()
 	{
 		setSortOrder(99999998); //Always before angular
-	}
-
-	/**
-	 * Sets the component/feature/hierarchy as JQuery required
-	 *
-	 * @param required
-	 */
-	@SuppressWarnings("unchecked")
-	public static void setRequired(boolean required)
-	{
-		JQueryPageConfigurator.required = required;
-	}
-
-	/**
-	 * Whether or not this page must render JQuery 3
-	 *
-	 * @return
-	 */
-	public static boolean isJquery3()
-	{
-		return jquery3;
-	}
-
-	/**
-	 * Whether or not this page must render JQuery 3
-	 *
-	 * @param jquery3
-	 */
-	public static void setJquery3(boolean jquery3)
-	{
-		JQueryPageConfigurator.jquery3 = jquery3;
 	}
 
 	/**
@@ -112,89 +79,6 @@ public class JQueryPageConfigurator extends PageConfigurator
 		JQueryPageConfigurator.renderMigrate = renderMigrate;
 	}
 
-	@Override
-	public Page configure(Page page)
-	{
-		if (page != null)
-		{
-			if (page.getOptions()
-					    .isLocalStorage())
-			{
-				page.getBody()
-						.addJavaScriptReference(JQueryReferencePool.PersistJS.getJavaScriptReference());
-			}
-			if (required)
-			{
-				if (page.getBrowser() != null)
-				{
-					page = configureForInternetExplorer(page);
-				}
-				else if (isJquery3())
-				{
-					page.getBody()
-							.addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
-					if (renderMigrate)
-					{
-						page.getBody()
-								.addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
-					}
-				}
-				else
-				{
-					if (renderMigrate)
-					{
-						page.getBody()
-								.addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
-					}
-				}
-			}
-		}
-
-		return page;
-	}
-
-	private Page configureForInternetExplorer(Page page)
-	{
-		if (page.getBrowser()
-				    .getBrowserGroup() == BrowserGroups.InternetExplorer)
-		{
-			if (page.getBrowser()
-					    .getBrowserVersion() < 9)
-			{
-				page.getBody()
-						.removeJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
-				page.getBody()
-						.removeJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
-				page.getBody()
-						.removeJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
-				page.getBody()
-						.addJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());
-			}
-		}
-		else
-		{
-			page.getBody()
-					.removeJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());
-			if (isJquery3())
-			{
-				page.getBody()
-						.addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
-				if (renderMigrate)
-				{
-					page.getBody()
-							.addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
-				}
-			}
-			else
-			{
-				page.getBody()
-						.addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
-			}
-		}
-
-		return page;
-	}
-
 	/**
 	 * Returns if JQuery is configured as required for the page
 	 *
@@ -203,5 +87,117 @@ public class JQueryPageConfigurator extends PageConfigurator
 	public static boolean isRequired()
 	{
 		return required;
+	}
+
+	/**
+	 * Sets the component/feature/hierarchy as JQuery required
+	 *
+	 * @param required
+	 */
+	@SuppressWarnings("unchecked")
+	public static void setRequired(boolean required)
+	{
+		JQueryPageConfigurator.required = required;
+	}
+
+	@Override
+	public Page configure(Page page)
+	{
+		if (page.getOptions()
+		        .isLocalStorage())
+		{
+			page.getBody()
+			    .addJavaScriptReference(JQueryReferencePool.PersistJS.getJavaScriptReference());
+		}
+		if (required)
+		{
+			if (page.getBrowser() != null)
+			{
+				page = configureForInternetExplorer(page);
+			}
+			else if (isJquery3())
+			{
+				page.getBody()
+				    .addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
+				if (renderMigrate)
+				{
+					page.getBody()
+					    .addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
+				}
+			}
+			else
+			{
+				if (renderMigrate)
+				{
+					page.getBody()
+					    .addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
+				}
+			}
+		}
+
+
+		return page;
+	}
+
+	private Page configureForInternetExplorer(Page page)
+	{
+		if (page.getBrowser()
+		        .getBrowserGroup() == BrowserGroups.InternetExplorer)
+		{
+			if (page.getBrowser()
+			        .getBrowserVersion() < 9)
+			{
+				page.getBody()
+				    .removeJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
+				page.getBody()
+				    .removeJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
+				page.getBody()
+				    .removeJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
+				page.getBody()
+				    .addJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());
+			}
+		}
+		else
+		{
+			page.getBody()
+			    .removeJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());
+			if (isJquery3())
+			{
+				page.getBody()
+				    .addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
+				if (renderMigrate)
+				{
+					page.getBody()
+					    .addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
+				}
+			}
+			else
+			{
+				page.getBody()
+				    .addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
+			}
+		}
+
+		return page;
+	}
+
+	/**
+	 * Whether or not this page must render JQuery 3
+	 *
+	 * @return
+	 */
+	public static boolean isJquery3()
+	{
+		return jquery3;
+	}
+
+	/**
+	 * Whether or not this page must render JQuery 3
+	 *
+	 * @param jquery3
+	 */
+	public static void setJquery3(boolean jquery3)
+	{
+		JQueryPageConfigurator.jquery3 = jquery3;
 	}
 }

@@ -366,20 +366,4 @@ public class SiteBinder
 		jsonObjectMapper.registerModule(new Jdk8Module());
 		jsonObjectMapper.registerModule(new JavaTimeModule());
 	}
-
-	/**
-	 * Configures json with the given properties
-	 *
-	 * @param jsonObjectMapper
-	 */
-	private void configureObjectMapperForJS(ObjectMapper jsonObjectMapper)
-	{
-		jsonObjectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-		jsonObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
-		jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
-		jsonObjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		jsonObjectMapper.registerModule(new ParameterNamesModule());
-		jsonObjectMapper.registerModule(new Jdk8Module());
-		jsonObjectMapper.registerModule(new JavaTimeModule());
-	}
 }

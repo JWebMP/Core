@@ -181,4 +181,16 @@ public class AngularForm<J extends AngularForm<J>>
 		this.successClass = successClass;
 		return (J) this;
 	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
+	}
 }

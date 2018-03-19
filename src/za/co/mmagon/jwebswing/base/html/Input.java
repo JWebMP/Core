@@ -114,7 +114,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		}
 		if (!getInlineClosingTag() && getPage().getHtmlVersion()
 		                                       .name()
-		                                       .startsWith("X") || !getTag().equals("select"))
+		                                       .startsWith("X") || !"select".equals(getTag()))
 		{
 			setInlineClosingTag(true);
 
@@ -147,20 +147,6 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		this.inputType = inputType;
 		addAttribute(Type, inputType.toString());
 		return (J) this;
-	}
-
-	/**
-	 * Differences Between HTML and XHTML
-	 * <p>
-	 * In HTML the base tag has no end tag.
-	 * <p>
-	 * In XHTML the base tag must be properly closed.
-	 */
-	@Override
-	public void preConfigure()
-	{
-
-		super.preConfigure();
 	}
 
 	@Override
