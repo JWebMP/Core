@@ -64,12 +64,15 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SEMICOLON;
  * @since 24 Apr 2016
  */
 @PageConfiguration
-public class Page<J extends Page<J>> extends Html<J> implements IPage
+public class Page<J extends Page<J>>
+		extends Html<J>
+		implements IPage
 {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final Logger log = LogFactory.getInstance().getLogger("Page");
+	private static final Logger log = LogFactory.getInstance()
+	                                            .getLogger("Page");
 	/**
 	 * The options available
 	 */
@@ -186,8 +189,7 @@ public class Page<J extends Page<J>> extends Html<J> implements IPage
 	 * @param component
 	 *
 	 * @return
-	 */
-	public <T extends ComponentHierarchyBase> T add(T component)
+	 */ public <T extends ComponentHierarchyBase> T add(T component)
 	{
 		return (T) getBody().add(component);
 	}
@@ -265,10 +267,10 @@ public class Page<J extends Page<J>> extends Html<J> implements IPage
 		{
 			getBody().destroy();
 		}
-		this.angular = null;
-		this.fields = null;
-		this.options = null;
-		this.userAgent = null;
+		angular = null;
+		fields = null;
+		options = null;
+		userAgent = null;
 
 		super.destroy();
 	}
@@ -330,7 +332,8 @@ public class Page<J extends Page<J>> extends Html<J> implements IPage
 		if (!isConfigured())
 		{
 			log.log(Level.FINER, "Looking for plugins....");
-			Set<Class<? extends PageConfigurator>> configs = GuiceContext.reflect().getSubTypesOf(PageConfigurator.class);
+			Set<Class<? extends PageConfigurator>> configs = GuiceContext.reflect()
+			                                                             .getSubTypesOf(PageConfigurator.class);
 			List<PageConfigurator> configInstances = new ArrayList<>();
 			for (Class<? extends PageConfigurator> pc : configs)
 			{
@@ -344,7 +347,8 @@ public class Page<J extends Page<J>> extends Html<J> implements IPage
 			configInstances.sort(Comparator.comparing(PageConfigurator::getSortOrder));
 			for (PageConfigurator configInstance : configInstances)
 			{
-				log.log(Level.FINER, new StringBuilder().append("Configuring [").append(configInstance.getClass().getSimpleName()).append("]").toString());
+				log.log(Level.FINER, "Configuring [" + configInstance.getClass()
+				                                                     .getSimpleName() + "]");
 				configInstance.configure(this);
 			}
 		}
@@ -369,11 +373,15 @@ public class Page<J extends Page<J>> extends Html<J> implements IPage
 		}
 		if (!isHeadEmpty())
 		{
-			pageOutput.append(getNewLine()).append(getCurrentTabIndentString()).append(getHead().toString(1));
+			pageOutput.append(getNewLine())
+			          .append(getCurrentTabIndentString())
+			          .append(getHead().toString(1));
 		}
 		if (bodyOutput != null)
 		{
-			pageOutput.append(getNewLine()).append(getCurrentTabIndentString()).append(bodyOutput);
+			pageOutput.append(getNewLine())
+			          .append(getCurrentTabIndentString())
+			          .append(bodyOutput);
 		}
 		return pageOutput;
 	}
@@ -396,84 +404,6 @@ public class Page<J extends Page<J>> extends Html<J> implements IPage
 			addVariablesScriptToPage();
 		}
 		super.preConfigure();
-	}
-
-	/**
-	 * Returns if the body object is empty
-	 *
-	 * @return
-	 */
-	private boolean isBodyEmpty()
-	{
-		return getBody().getChildren().isEmpty();
-	}
-
-	/**
-	 * Returns if the head object is empty
-	 *
-	 * @return
-	 */
-	private boolean isHeadEmpty()
-	{
-		return getHead().getChildren().isEmpty();
-	}
-
-	/**
-	 * Returns the cached component
-	 *
-	 * @param componentID
-	 * 		The component to look for
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public ComponentHierarchyBase getCachedComponent(String componentID)
-	{
-		for (Object chb : getBody().getChildrenHierarchy())
-		{
-			ComponentHierarchyBase<NoChildren, NoAttributes, NoFeatures, NoEvents, ? extends ComponentHierarchyBase> ch = (ComponentHierarchyBase) chb;
-			if (ch.getID().equals(componentID))
-			{
-				return ch;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Returns the component with only it's methods
-	 *
-	 * @return
-	 */
-	public IPage asMe()
-	{
-		return this;
-	}
-
-	/**
-	 * Adds the variables in the application to the collection
-	 */
-	@SuppressWarnings("unchecked")
-	private void addVariablesScriptToPage()
-	{
-		StringBuilder variablesScriptBuilder = new StringBuilder();
-		for (Object o : getBody().getVariablesAll())
-		{
-			String var = (String) o;
-			variablesScriptBuilder.append("var ").append(var).append(STRING_SEMICOLON);
-		}
-		if (variablesScriptBuilder.length() > 0)
-		{
-			Script variablesScript = new Script();
-			variablesScript.setID("variables");
-			variablesScript.setNewLineForRawText(true);
-			variablesScript.addAttribute(ScriptAttributes.Type, HTML_HEADER_JAVASCRIPT);
-			variablesScript.setText(variablesScriptBuilder.toString());
-			if (!getHead().getChildren().contains(variablesScript))
-			{
-				getHead().add(variablesScript);
-			}
-		}
 	}
 
 	/**
@@ -500,10 +430,88 @@ public class Page<J extends Page<J>> extends Html<J> implements IPage
 		getHead().add(getPageFields().getFavIconLink());
 	}
 
-	@Override
-	public boolean equals(Object o)
+	/**
+	 * Adds the variables in the application to the collection
+	 */
+	@SuppressWarnings("unchecked")
+	private void addVariablesScriptToPage()
 	{
-		return super.equals(o);
+		StringBuilder variablesScriptBuilder = new StringBuilder();
+		for (Object o : getBody().getVariablesAll())
+		{
+			String var = (String) o;
+			variablesScriptBuilder.append("var ")
+			                      .append(var)
+			                      .append(STRING_SEMICOLON);
+		}
+		if (variablesScriptBuilder.length() > 0)
+		{
+			Script variablesScript = new Script();
+			variablesScript.setID("variables");
+			variablesScript.setNewLineForRawText(true);
+			variablesScript.addAttribute(ScriptAttributes.Type, HTML_HEADER_JAVASCRIPT);
+			variablesScript.setText(variablesScriptBuilder.toString());
+			if (!getHead().getChildren()
+			              .contains(variablesScript))
+			{
+				getHead().add(variablesScript);
+			}
+		}
+	}
+
+	/**
+	 * Returns if the body object is empty
+	 *
+	 * @return
+	 */
+	private boolean isBodyEmpty()
+	{
+		return getBody().getChildren()
+		                .isEmpty();
+	}
+
+	/**
+	 * Returns if the head object is empty
+	 *
+	 * @return
+	 */
+	private boolean isHeadEmpty()
+	{
+		return getHead().getChildren()
+		                .isEmpty();
+	}
+
+	/**
+	 * Returns the cached component
+	 *
+	 * @param componentID
+	 * 		The component to look for
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public ComponentHierarchyBase getCachedComponent(String componentID)
+	{
+		for (Object chb : getBody().getChildrenHierarchy())
+		{
+			ComponentHierarchyBase<NoChildren, NoAttributes, NoFeatures, NoEvents, ? extends ComponentHierarchyBase> ch = (ComponentHierarchyBase) chb;
+			if (ch.getID()
+			      .equals(componentID))
+			{
+				return ch;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the component with only it's methods
+	 *
+	 * @return
+	 */
+	public IPage asMe()
+	{
+		return this;
 	}
 
 	/**
@@ -514,6 +522,16 @@ public class Page<J extends Page<J>> extends Html<J> implements IPage
 	public boolean isPageInitialized()
 	{
 		return pageInitialized;
+	}
+
+	/**
+	 * Sets if the page is initialized
+	 *
+	 * @param pageInitialized
+	 */
+	public void setPageInitialized(boolean pageInitialized)
+	{
+		this.pageInitialized = pageInitialized;
 	}
 
 	/**
@@ -540,20 +558,16 @@ public class Page<J extends Page<J>> extends Html<J> implements IPage
 		this.userAgent = userAgent;
 	}
 
-	/**
-	 * Sets if the page is initialized
-	 *
-	 * @param pageInitialized
-	 */
-	public void setPageInitialized(boolean pageInitialized)
-	{
-		this.pageInitialized = pageInitialized;
-	}
-
 	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
 	}
 
 	/**
@@ -576,7 +590,8 @@ public class Page<J extends Page<J>> extends Html<J> implements IPage
 	@Override
 	public Page addAngularVariable(String variableName)
 	{
-		getAngular().getAngularVariables().add(variableName);
+		getAngular().getAngularVariables()
+		            .add(variableName);
 		return this;
 	}
 

@@ -24,6 +24,7 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import com.google.inject.Singleton;
+import com.google.inject.TypeLiteral;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.name.Names;
 import com.google.inject.servlet.RequestScoped;
@@ -42,7 +43,6 @@ import za.co.mmagon.logger.LogFactory;
 
 import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +56,8 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.*;
  * @version 1.0
  * @since 20 Dec 2016
  */
-public class SiteBinder extends GuiceSiteBinder
+public class SiteBinder
+		extends GuiceSiteBinder
 {
 
 	private static final java.util.logging.Logger log = LogFactory.getLog("SiteBinder");
@@ -64,6 +65,8 @@ public class SiteBinder extends GuiceSiteBinder
 	 * The User Agent Parser
 	 */
 	private static final UserAgentStringParser userAgentParser = UADetectorServiceFactory.getResourceModuleParser();
+
+	private static TypeLiteral<Map<String, String>> localStorageTypeLiteral = new TypeLiteral<Map<String, String>>() {};
 
 	/**
 	 * Constructs a new instance, mostly for injection
@@ -161,11 +164,11 @@ public class SiteBinder extends GuiceSiteBinder
 		log.log(Level.INFO, "Configuring Servlet URL's");
 
 		module.bind(UserAgentStringParser.class)
-				.toInstance(userAgentParser);
+		      .toInstance(userAgentParser);
 		module.bind(AjaxResponse.class)
-				.in(RequestScoped.class);
+		      .in(RequestScoped.class);
 		module.bind(AjaxCall.class)
-				.in(RequestScoped.class);
+		      .in(RequestScoped.class);
 
 		log.fine("Bound Intercepter @SiteInterception");
 		module.bindInterceptor$(Matchers.any(), Matchers.annotatedWith(SiteInterception.class), new SiteIntercepters());
@@ -177,80 +180,79 @@ public class SiteBinder extends GuiceSiteBinder
 		//Bind Local Storage
 		log.fine("Bound Map.class with @Named(LocalStorage)");
 		module.bind(Map.class)
-				.annotatedWith(Names.named("LocalStorage"))
-				.toProvider(() ->
-				            {
-					            if (!GuiceContext.isBuildingInjector())
-					            {
-						            HttpSession session = GuiceContext.inject()
-								                                  .getInstance(HttpSession.class);
-						            Map attributeMap = (Map) session.getAttribute(LocalStorageSessionAttributeKey);
-						            if (attributeMap == null)
-						            {
-							            attributeMap = new HashMap();
-						            }
-						            return attributeMap;
-					            }
-					            return new HashMap();
-				            });
+		      .annotatedWith(Names.named("LocalStorage"))
+		      .toProvider(() ->
+		                  {
+			                  if (!GuiceContext.isBuildingInjector())
+			                  {
+				                  return GuiceContext.getInstance(SessionStorageProperties.class)
+				                                     .getLocalStorage();
+			                  }
+			                  return new HashMap();
+		                  });
+		module.bind(localStorageTypeLiteral)
+		      .annotatedWith(Names.named("LocalStorage"))
+		      .toProvider(() ->
+		                  {
+			                  if (!GuiceContext.isBuildingInjector())
+			                  {
+				                  return GuiceContext.getInstance(SessionStorageProperties.class)
+				                                     .getLocalStorage();
+			                  }
+			                  return new HashMap();
+		                  });
+
 		//Bind Session Storage
 		log.fine("Bound Map.class with @Named(SessionStorage)");
 		module.bind(Map.class)
-				.annotatedWith(Names.named("SessionStorage"))
-				.toProvider(() ->
-				            {
-					            if (!GuiceContext.isBuildingInjector())
-					            {
-						            HttpSession session = GuiceContext.inject()
-								                                  .getInstance(HttpSession.class);
-						            Map attributeMap = (Map) session.getAttribute(SessionStorageSessionAttributeKey);
-						            if (attributeMap == null)
-						            {
-							            attributeMap = new HashMap();
-						            }
-						            return attributeMap;
-					            }
-					            return new HashMap();
-				            });
+		      .annotatedWith(Names.named("SessionStorage"))
+		      .toProvider(() ->
+		                  {
+			                  if (!GuiceContext.isBuildingInjector())
+			                  {
+				                  return GuiceContext.getInstance(SessionStorageProperties.class)
+				                                     .getSessionStorage();
+			                  }
+			                  return new HashMap();
+		                  });
 		log.fine("Bound SessionStorageProperties");
 		module.bind(SessionStorageProperties.class);
 
 		log.fine("Bound Page.class");
 		module.bind(Page.class)
-				.toProvider(() ->
-				            {
-					            for (Class<? extends Page> next : getPages())
-					            {
-						            if (Modifier.isAbstract(next.getModifiers()) || next.equals(Page.class))
-						            {
-							            continue;
-						            }
-						            Page page = findPage(next);
-						            if (page != null)
-						            {
-							            return page;
-						            }
-					            }
-					            log.log(Level.WARNING,
-					                    "Returning blank page since no class was found that extends page or matches the given url");
-					            return new Page();
-				            });
+		      .toProvider(() ->
+		                  {
+			                  for (Class<? extends Page> next : getPages())
+			                  {
+				                  if (Modifier.isAbstract(next.getModifiers()) || next.equals(Page.class))
+				                  {
+					                  continue;
+				                  }
+				                  Page page = findPage(next);
+				                  if (page != null)
+				                  {
+					                  return page;
+				                  }
+			                  }
+			                  log.log(Level.WARNING, "Returning blank page since no class was found that extends page or matches the given url");
+			                  return new Page();
+		                  });
 
 		log.fine("Bound ObjectMapper.class @Named(JSON)");
 		module.bind(ObjectMapper.class)
-				.annotatedWith(Names.named("JSON"))
-				.toProvider(this::getJsonMapper)
-				.in(Singleton.class);
+		      .annotatedWith(Names.named("JSON"))
+		      .toProvider(this::getJsonMapper)
+		      .in(Singleton.class);
 		log.fine("Bound ObjectMapper.class @Named(JS)");
 		module.bind(ObjectMapper.class)
-				.annotatedWith(Names.named("JS"))
-				.toProvider(this::getJsonMapper)
-				.in(Singleton.class);
+		      .annotatedWith(Names.named("JS"))
+		      .toProvider(this::getJsonMapper)
+		      .in(Singleton.class);
 		log.fine("Bound ObjectMapper.class @Named(JSFunction)");
 		module.bind(ObjectMapper.class)
-				.annotatedWith(Names.named("JSFunction"))
-				.toProvider(this::getJsonMapper)
-				.in(Singleton.class);
+		      .annotatedWith(Names.named("JSFunction"))
+		      .toProvider(this::getJsonMapper)
+		      .in(Singleton.class);
 
 
 		for (Class<?> page : getPages())
@@ -263,37 +265,37 @@ public class SiteBinder extends GuiceSiteBinder
 				}
 				PageConfiguration pc = page.getAnnotation(PageConfiguration.class);
 				module.serveRegex$("(" + pc.url() + ")" + QUERY_PARAMETERS_REGEX)
-						.with(JWebSwingServlet.class);
+				      .with(JWebSwingServlet.class);
 				log.log(Level.CONFIG, "Serving Page URL [{0}] with [{1}]", new Object[]{pc.url(), page.getCanonicalName()});
 			}
 		}
 
 		module.serveRegex$("(" + JAVASCRIPT_LOCATION + ")" + QUERY_PARAMETERS_REGEX)
-				.with(JavaScriptServlet.class);
+		      .with(JavaScriptServlet.class);
 		log.log(Level.INFO, "Serving JavaScripts at {0}", JAVASCRIPT_LOCATION);
 
 		module.serveRegex$("(" + AJAX_SCRIPT_LOCATION + ")" + QUERY_PARAMETERS_REGEX)
-				.with(AjaxReceiverServlet.class);
+		      .with(AjaxReceiverServlet.class);
 		log.log(Level.INFO, "Serving Ajax at {0}", AJAX_SCRIPT_LOCATION);
 
 		module.serveRegex$("(" + CSS_LOCATION + ")" + QUERY_PARAMETERS_REGEX)
-				.with(CSSServlet.class);
+		      .with(CSSServlet.class);
 		log.log(Level.INFO, "Serving CSS at {0}", CSS_LOCATION);
 
 		module.serveRegex$("(" + ANGULAR_DATA_LOCATION + ")" + QUERY_PARAMETERS_REGEX)
-				.with(AngularDataServlet.class);
+		      .with(AngularDataServlet.class);
 		log.log(Level.INFO, "Serving Angular Data at " + ANGULAR_DATA_LOCATION);
 
 		module.serveRegex$("(" + ANGULAR_SCRIPT_LOCATION + ")" + QUERY_PARAMETERS_REGEX)
-				.with(AngularServlet.class);
+		      .with(AngularServlet.class);
 		log.log(Level.INFO, "Serving Angular JavaScript at {0}", ANGULAR_SCRIPT_LOCATION);
 
 		module.serveRegex$("(" + DATA_LOCATION + ")" + QUERY_PARAMETERS_REGEX)
-				.with(DataServlet.class);
+		      .with(DataServlet.class);
 		log.log(Level.INFO, "Serving Data at {0}", DATA_LOCATION);
 
 		module.serveRegex$("(" + JW_SCRIPT_LOCATION + ")" + QUERY_PARAMETERS_REGEX)
-				.with(JWScriptServlet.class);
+		      .with(JWScriptServlet.class);
 		log.log(Level.INFO, "Serving JW Default Script at {0}", JW_SCRIPT_LOCATION);
 
 		log.log(Level.CONFIG, "Finished with configuring URL's");
@@ -307,7 +309,39 @@ public class SiteBinder extends GuiceSiteBinder
 	public static Set<Class<? extends Page>> getPages()
 	{
 		return GuiceContext.reflect()
-				       .getTypesAnnotatedWith(PageConfiguration.class);
+		                   .getTypesAnnotatedWith(PageConfiguration.class);
+	}
+
+	@Nullable
+	private Page findPage(Class<? extends Page> next)
+	{
+		try
+		{
+			PageConfiguration pc = next.getAnnotation(PageConfiguration.class);
+			HttpServletRequest request = GuiceContext.getInstance(HttpServletRequest.class);
+			String pathInfo = request.getPathInfo();
+			if (pathInfo == null)
+			{
+				pathInfo = STRING_FORWARD_SLASH;
+			}
+
+			String pcUrl = pc.url();
+			if (pathInfo.equalsIgnoreCase(pcUrl) || SessionHelper.getServletUrl()
+			                                                     .equalsIgnoreCase(pc.url()))
+			{
+				return GuiceContext.inject()
+				                   .getInstance(next);
+			}
+			else
+			{
+				log.log(Level.SEVERE, "A JWebSwing Application must have a page applied. Please create a class that extends the za.co.mmagon.jwebswing" + ".Page object.");
+			}
+		}
+		catch (NullPointerException npe)
+		{
+			log.log(Level.WARNING, "Unable to process page : " + next + " due to null pointer", npe);
+		}
+		return null;
 	}
 
 	private ObjectMapper getJsonMapper()
@@ -331,40 +365,6 @@ public class SiteBinder extends GuiceSiteBinder
 		jsonObjectMapper.registerModule(new ParameterNamesModule());
 		jsonObjectMapper.registerModule(new Jdk8Module());
 		jsonObjectMapper.registerModule(new JavaTimeModule());
-	}
-
-	@Nullable
-	private Page findPage(Class<? extends Page> next)
-	{
-		try
-		{
-			PageConfiguration pc = next.getAnnotation(PageConfiguration.class);
-			HttpServletRequest request = GuiceContext.getInstance(HttpServletRequest.class);
-			String pathInfo = request.getPathInfo();
-			if (pathInfo == null)
-			{
-				pathInfo = STRING_FORWARD_SLASH;
-			}
-
-			String pcUrl = pc.url();
-			if (pathInfo.equalsIgnoreCase(pcUrl) || SessionHelper.getServletUrl()
-					                                        .equalsIgnoreCase(pc.url()))
-			{
-				return GuiceContext.inject()
-						       .getInstance(next);
-			}
-			else
-			{
-				log.log(Level.SEVERE,
-				        "A JWebSwing Application must have a page applied. Please create a class that extends the za.co.mmagon.jwebswing"
-						        + ".Page object.");
-			}
-		}
-		catch (NullPointerException npe)
-		{
-			log.log(Level.WARNING, "Unable to process page : " + next + " due to null pointer", npe);
-		}
-		return null;
 	}
 
 	/**

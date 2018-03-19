@@ -71,6 +71,7 @@ public interface StaticStrings
 	String QUERY_PARAMETERS_REGEX = "(\\?.*)?";
 
 	String LOCAL_STORAGE_PARAMETER_KEY = "jwamsmk";
+	String LOCAL_STORAGE_VARIABLE_KEY = "jwCntrl.jw.localstorage";
 
 	String ACCESS_CONTROL_ALLOW_ORIGIN_HEADER_NAME = "Access-Control-Allow-Origin";
 	String ACCESS_CONTROL_ALLOW_CREDENTIALS_HEADER_NAME = "Access-Control-Allow-Credentials";
@@ -97,9 +98,7 @@ public interface StaticStrings
 	/**
 	 * Default Medium text for Latin
 	 */
-	String MediumLatin = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero laboriosam dolor perspiciatis omnis " +
-			                     "exercitationem. Beatae, officia pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas"
-			                     + " dicta, " + "debitis...";
+	String MediumLatin = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero laboriosam dolor perspiciatis omnis " + "exercitationem. Beatae, officia pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas" + " dicta, " + "debitis...";
 
 	String LocalStorageSessionAttributeKey = "LocalStorage";
 	String SessionStorageSessionAttributeKey = "SessionStorage";

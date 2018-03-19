@@ -38,8 +38,8 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_CLOSING_BRAC
  *
  * @author Marc Magon
  */
-public abstract class ClickAdapter
-		extends Event<ClickAdapter>
+public abstract class ClickAdapter<J extends ClickAdapter<J>>
+		extends Event<J>
 		implements ParagraphEvents, BodyEvents, GlobalEvents
 {
 

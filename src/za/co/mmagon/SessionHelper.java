@@ -56,9 +56,11 @@ public class SessionHelper
 		{
 			try
 			{
-				HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);
+				HttpServletRequest request = GuiceContext.inject()
+				                                         .getInstance(HttpServletRequest.class);
 				StringBuffer buff = request.getRequestURL();
-				if (request.getHeader(REQUEST_SITE_HEADER_NAME) != null && !request.getHeader(REQUEST_SITE_HEADER_NAME).isEmpty())
+				if (request.getHeader(REQUEST_SITE_HEADER_NAME) != null && !request.getHeader(REQUEST_SITE_HEADER_NAME)
+				                                                                   .isEmpty())
 				{
 					buff = new StringBuffer(request.getHeader(REQUEST_SITE_HEADER_NAME));
 				}
@@ -68,7 +70,7 @@ public class SessionHelper
 			}
 			catch (Exception e)
 			{
-				log.log(Level.SEVERE, "Unable to get server path", e);
+				log.log(Level.FINER, "Unable to get server path", e);
 				return STRING_EMPTY;
 			}
 		}
@@ -84,7 +86,8 @@ public class SessionHelper
 	{
 		if (!GuiceContext.isBuildingInjector())
 		{
-			HttpServletRequest request = GuiceContext.inject().getInstance(HttpServletRequest.class);
+			HttpServletRequest request = GuiceContext.inject()
+			                                         .getInstance(HttpServletRequest.class);
 			String buff = request.getServletPath();
 			return buff.isEmpty() ? STRING_FORWARD_SLASH : buff;
 		}
