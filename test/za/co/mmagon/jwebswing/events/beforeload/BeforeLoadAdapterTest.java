@@ -26,8 +26,7 @@ public class BeforeLoadAdapterTest
 		};
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
-				"<div id=\"test\" ng-before-load=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.beforeload" + "" + "" +
-						".BeforeLoadAdapterTest$1');\"></div>",
+				"<div id=\"test\" ng-before-load=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','za.co.mmagon.jwebswing.events.beforeload" + "" + "" + ".BeforeLoadAdapterTest$1');\"></div>",
 				test.toString(0));
 	}
 

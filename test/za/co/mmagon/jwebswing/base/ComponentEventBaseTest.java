@@ -35,19 +35,20 @@ import za.co.mmagon.jwebswing.plugins.jquery.JQueryReferencePool;
  * @version 1
  * @since 2016/04/23
  */
-public class ComponentEventBaseTest extends BaseTestClass
+public class ComponentEventBaseTest
+		extends BaseTestClass
 {
-	
+
 	public ComponentEventBaseTest()
 	{
 	}
-	
+
 	@Test
 	public void testEventBase()
 	{
 		//System.out.println(findEvent());
 	}
-	
+
 	@Test
 	public void testClone()
 	{
@@ -59,83 +60,25 @@ public class ComponentEventBaseTest extends BaseTestClass
 			@Override
 			public void onClick(AjaxCall call, AjaxResponse response)
 			{
-				throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+				throw new UnsupportedOperationException("Not supported yet.");
 			}
 		});
-		Event.class.cast(shell.getEvents().stream().findFirst().get()).setID("clickEvent");
-		
+		Event.class.cast(shell.getEvents()
+		                      .stream()
+		                      .findFirst()
+		                      .get())
+		           .setID("clickEvent");
+
 		ComponentBase shell2 = shell.cloneComponent();
 		shell2.setID("shell2");
 		System.out.println(shell);
 		System.out.println(shell2);
-		String shellExpected = "{\n" +
-				                       "  \"id\" : \"shell\",\n" +
-				                       "  \"componentType\" : \"abbreviation\",\n" +
-				                       "  \"tiny\" : false,\n" +
-				                       "  \"configured\" : true,\n" +
-				                       "  \"initialized\" : true,\n" +
-				                       "  \"touched\" : false,\n" +
-				                       "  \"javascriptReferences\" : [ {\n" +
-				                       "    \"cordovaRequired\" : false,\n" +
-				                       "    \"name\" : \"PersistJS\",\n" +
-				                       "    \"version\" : 1.0,\n" +
-				                       "    \"reference\" : \"persist-js/persist-all-min.js\"\n" +
-				                       "  } ],\n" +
-				                       "  \"sortOrder\" : 1000,\n" +
-				                       "  \"renderAfterLoad\" : false,\n" +
-				                       "  \"javascriptRenderedElsewhere\" : false,\n" +
-				                       "  \"events\" : [ {\n" +
-				                       "    \"id\" : \"clickEvent\",\n" +
-				                       "    \"componentType\" : \"event\",\n" +
-				                       "    \"tiny\" : false,\n" +
-				                       "    \"configured\" : true,\n" +
-				                       "    \"initialized\" : true,\n" +
-				                       "    \"touched\" : false,\n" +
-				                       "    \"sortOrder\" : 1000,\n" +
-				                       "    \"name\" : \"click\",\n" +
-				                       "    \"renderAfterLoad\" : false,\n" +
-				                       "    \"javascriptRenderedElsewhere\" : false,\n" +
-				                       "    \"registeredComponents\" : [ \"za.co.mmagon.jwebswing.base.html.Div\" ],\n" +
-				                       "    \"eventType\" : \"click\"\n" +
-				                       "  } ],\n" +
-				                       "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentEventBase\"\n" +
-				                       "}";
-		String shell2Expected = "{\n" +
-				                        "  \"id\" : \"shell2\",\n" +
-				                        "  \"componentType\" : \"abbreviation\",\n" +
-				                        "  \"tiny\" : false,\n" +
-				                        "  \"configured\" : true,\n" +
-				                        "  \"initialized\" : true,\n" +
-				                        "  \"touched\" : false,\n" +
-				                        "  \"javascriptReferences\" : [ {\n" +
-				                        "    \"cordovaRequired\" : false,\n" +
-				                        "    \"name\" : \"PersistJS\",\n" +
-				                        "    \"version\" : 1.0,\n" +
-				                        "    \"reference\" : \"persist-js/persist-all-min.js\"\n" +
-				                        "  } ],\n" +
-				                        "  \"sortOrder\" : 1000,\n" +
-				                        "  \"renderAfterLoad\" : false,\n" +
-				                        "  \"javascriptRenderedElsewhere\" : false,\n" +
-				                        "  \"events\" : [ {\n" +
-				                        "    \"id\" : \"clickEvent\",\n" +
-				                        "    \"componentType\" : \"event\",\n" +
-				                        "    \"tiny\" : false,\n" +
-				                        "    \"configured\" : true,\n" +
-				                        "    \"initialized\" : true,\n" +
-				                        "    \"touched\" : false,\n" +
-				                        "    \"sortOrder\" : 1000,\n" +
-				                        "    \"name\" : \"click\",\n" +
-				                        "    \"renderAfterLoad\" : false,\n" +
-				                        "    \"javascriptRenderedElsewhere\" : false,\n" +
-				                        "    \"registeredComponents\" : [ \"za.co.mmagon.jwebswing.base.html.Div\" ],\n" +
-				                        "    \"eventType\" : \"click\"\n" +
-				                        "  } ],\n" +
-				                        "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentEventBase\"\n" +
-				                        "}";
+		String shellExpected = "{\n" + "  \"id\" : \"shell\",\n" + "  \"componentType\" : \"abbreviation\",\n" + "  \"tiny\" : false,\n" + "  \"configured\" : true,\n" + "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  \"javascriptReferences\" : [ {\n" + "    \"cordovaRequired\" : false,\n" + "    \"name\" : \"PersistJS\",\n" + "    \"version\" : 1.0,\n" + "    \"reference\" : \"persist-js/persist-all-min.js\"\n" + "  } ],\n" + "  \"sortOrder\" : 1000,\n" + "  \"renderAfterLoad\" : false,\n" + "  \"javascriptRenderedElsewhere\" : false,\n" + "  \"events\" : [ {\n" + "    \"id\" : \"clickEvent\",\n" + "    \"componentType\" : \"event\",\n" + "    \"tiny\" : false,\n" + "    \"configured\" : true,\n" + "    \"initialized\" : true,\n" + "    \"touched\" : false,\n" + "    \"sortOrder\" : 1000,\n" + "    \"variables\" : [ \"jwCntrl.jw.localstorage\" ],\n" + "    \"name\" : \"click\",\n" + "    \"renderAfterLoad\" : false,\n" + "    \"javascriptRenderedElsewhere\" : false,\n" + "    \"registeredComponents\" : [ \"za.co.mmagon.jwebswing.base.html.Div\" ],\n" + "    \"eventType\" : \"click\"\n" + "  } ],\n" + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentEventBase\"\n" + "}";
+		String shell2Expected = "{\n" + "  \"id\" : \"shell2\",\n" + "  \"componentType\" : \"abbreviation\",\n" + "  \"tiny\" : false,\n" + "  \"configured\" : true,\n" + "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  \"javascriptReferences\" : [ {\n" + "    \"cordovaRequired\" : false,\n" + "    \"name\" : \"PersistJS\",\n" + "    \"version\" : 1.0,\n" + "    \"reference\" : \"persist-js/persist-all-min.js\"\n" + "  } ],\n" + "  \"sortOrder\" : 1000,\n" + "  \"renderAfterLoad\" : false,\n" + "  \"javascriptRenderedElsewhere\" : false,\n" + "  \"events\" : [ {\n" + "    \"id\" : \"clickEvent\",\n" + "    \"componentType\" : \"event\",\n" + "    \"tiny\" : false,\n" + "    \"configured\" : true,\n" + "    \"initialized\" : true,\n" + "    \"touched\" : false,\n" + "    \"sortOrder\" : 1000,\n" + "    \"variables\" : [ \"jwCntrl.jw.localstorage\" ],\n" + "    \"name\" : \"click\",\n" + "    \"renderAfterLoad\" : false,\n" + "    \"javascriptRenderedElsewhere\" : false,\n" + "    \"registeredComponents\" : [ \"za.co.mmagon.jwebswing.base.html.Div\" ],\n" + "    \"eventType\" : \"click\"\n" + "  } ],\n" + "  \"componentClass\" : \"za.co.mmagon.jwebswing.base.ComponentEventBase\"\n" + "}";
 		Assertions.assertEquals(shell.toString(), shellExpected);
 		Assertions.assertEquals(shell2.toString(), shell2Expected);
 	}
-	
+
 	@Test
 	public void testHtml()
 	{
@@ -153,12 +96,16 @@ public class ComponentEventBaseTest extends BaseTestClass
 			}
 		});
 
-		Event.class.cast(shell.getEvents().stream().findFirst().get()).setID("clickEvent");
+		Event.class.cast(shell.getEvents()
+		                      .stream()
+		                      .findFirst()
+		                      .get())
+		           .setID("clickEvent");
 		d.addEvent(e);
-		
+
 		System.out.println(d.toString(true));
 	}
-	
+
 	@Test
 	public void testPageHtml()
 	{
@@ -176,12 +123,17 @@ public class ComponentEventBaseTest extends BaseTestClass
 			}
 		});
 
-		Event.class.cast(shell.getEvents().stream().findFirst().get()).setID("clickEvent");
+		Event.class.cast(shell.getEvents()
+		                      .stream()
+		                      .findFirst()
+		                      .get())
+		           .setID("clickEvent");
 		d.addEvent(e);
-		
+
 		Page page = getInstance();
-		page.getBody().add(d);
+		page.getBody()
+		    .add(d);
 		System.out.println(page.toString(true));
-		
+
 	}
 }

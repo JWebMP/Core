@@ -50,8 +50,7 @@ public class ClickAdapterTest
 		};
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
-				"<div id=\"test\" ng-click=\"jwCntrl.jw.isLoading || jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events" + ""
-						+ ".click" + ".ClickAdapterTest$1');\" ng-disabled=\"jwCntrl.jw.isLoading\"></div>",
+				"<div id=\"test\" ng-click=\"jwCntrl.jw.isLoading || jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','za.co.mmagon.jwebswing.events" + "" + ".click" + ".ClickAdapterTest$1');\" ng-disabled=\"jwCntrl.jw.isLoading\"></div>",
 				test.toString(0));
 	}
 

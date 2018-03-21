@@ -26,8 +26,7 @@ public class ResizeStopAdapterTest
 		};
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
-				"<div id=\"test\" ng-resize-stop=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.resizestop" + "" + "" +
-						".ResizeStopAdapterTest$1');\"></div>",
+				"<div id=\"test\" ng-resize-stop=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','za.co.mmagon.jwebswing.events.resizestop" + "" + "" + ".ResizeStopAdapterTest$1');\"></div>",
 				test.toString(0));
 	}
 

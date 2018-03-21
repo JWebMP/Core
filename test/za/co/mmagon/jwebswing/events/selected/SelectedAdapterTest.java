@@ -25,8 +25,7 @@ public class SelectedAdapterTest
 		};
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
-				"<option label=\"optionValue\" value=\"optionValue\" id=\"test\" ng-selected=\"jwCntrl.perform($event,[],'test','za.co" +
-						".mmagon.jwebswing.events.selected.SelectedAdapterTest$1');\">optionValue</option>",
+				"<option label=\"optionValue\" value=\"optionValue\" id=\"test\" ng-selected=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','za.co" + ".mmagon.jwebswing.events.selected.SelectedAdapterTest$1');\">optionValue</option>",
 				test.toString(0));
 	}
 

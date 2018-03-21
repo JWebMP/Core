@@ -26,8 +26,7 @@ public class ReceiveAdapterTest
 		};
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
-				"<div id=\"test\" ng-receive=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.receive" + "" + "" + "" +
-						"" + ".ReceiveAdapterTest$1');\"></div>",
+				"<div id=\"test\" ng-receive=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','za.co.mmagon.jwebswing.events.receive" + "" + "" + "" + "" + ".ReceiveAdapterTest$1');\"></div>",
 				test.toString(0));
 	}
 

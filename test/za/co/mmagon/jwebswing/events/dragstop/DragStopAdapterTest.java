@@ -26,8 +26,7 @@ public class DragStopAdapterTest
 		};
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
-				"<div id=\"test\" ng-drag-stop=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.dragstop" + "" + "" + ""
-						+ ".DragStopAdapterTest$1');\"></div>",
+				"<div id=\"test\" ng-drag-stop=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','za.co.mmagon.jwebswing.events.dragstop" + "" + "" + "" + ".DragStopAdapterTest$1');\"></div>",
 				test.toString(0));
 	}
 

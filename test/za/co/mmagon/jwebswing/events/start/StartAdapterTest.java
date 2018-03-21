@@ -26,8 +26,7 @@ public class StartAdapterTest
 		};
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
-				"<div id=\"test\" ng-start=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.start.StartAdapterTest$1');"
-						+ "\"></div>",
+				"<div id=\"test\" ng-start=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','za.co.mmagon.jwebswing.events.start.StartAdapterTest$1');" + "\"></div>",
 				test.toString(0));
 	}
 

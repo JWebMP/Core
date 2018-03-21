@@ -26,8 +26,7 @@ public class DragStartAdapterTest
 		};
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
-				"<div id=\"test\" ng-drag-start=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.dragstart" + "" + "" +
-						"" + ".DragStartAdapterTest$1');\"></div>",
+				"<div id=\"test\" ng-drag-start=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','za.co.mmagon.jwebswing.events.dragstart" + "" + "" + "" + ".DragStartAdapterTest$1');\"></div>",
 				test.toString(0));
 	}
 

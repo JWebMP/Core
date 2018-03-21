@@ -26,8 +26,7 @@ public class SlideAdapterTest
 		};
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
-				"<div id=\"test\" ng-slide=\"jwCntrl.perform($event,[],'test','za.co.mmagon.jwebswing.events.slide.SlideAdapterTest$1');"
-						+ "\"></div>",
+				"<div id=\"test\" ng-slide=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','za.co.mmagon.jwebswing.events.slide.SlideAdapterTest$1');" + "\"></div>",
 				test.toString(0));
 	}
 
