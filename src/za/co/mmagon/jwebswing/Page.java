@@ -29,6 +29,7 @@ import za.co.mmagon.jwebswing.base.client.InternetExplorerCompatibilityMode;
 import za.co.mmagon.jwebswing.base.html.*;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 import za.co.mmagon.jwebswing.base.html.attributes.ScriptAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.NoChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
@@ -179,19 +180,6 @@ public class Page<J extends Page<J>>
 	public AjaxResponse onConnect(AjaxCall<?> call, AjaxResponse response)
 	{
 		return response;
-	}
-
-	@SuppressWarnings("unchecked")
-	/**
-	 * Adds a component onto the body
-	 *
-	 * @param <T>
-	 * @param component
-	 *
-	 * @return
-	 */ public <T extends ComponentHierarchyBase> T add(T component)
-	{
-		return (T) getBody().add(component);
 	}
 
 	/**
@@ -588,6 +576,7 @@ public class Page<J extends Page<J>>
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public Page addAngularVariable(String variableName)
 	{
 		getAngular().getAngularVariables()
@@ -601,6 +590,7 @@ public class Page<J extends Page<J>>
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public AngularPageConfigurator getAngular()
 	{
 		if (angular == null)
@@ -618,6 +608,7 @@ public class Page<J extends Page<J>>
 	 * @return Document Type
 	 */
 	@Override
+	@NotNull
 	public DocumentType getDocumentType()
 	{
 		return new DocumentType(getBrowser().getHtmlVersion());
@@ -629,6 +620,7 @@ public class Page<J extends Page<J>>
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public final PageFields getPageFields()
 	{
 		if (fields == null)
@@ -643,9 +635,24 @@ public class Page<J extends Page<J>>
 	 *
 	 * @return
 	 */
+	@NotNull
 	public Page getPage()
 	{
 		return this;
 	}
 
+	/**
+	 * Shortcut method to getBody().add()
+	 *
+	 * @param picker
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J add(GlobalChildren picker)
+	{
+		getBody().add(picker);
+		return (J) this;
+	}
 }

@@ -21,6 +21,7 @@ import za.co.mmagon.jwebswing.Event;
 import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.base.ComponentBase;
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.references.CSSReference;
 import za.co.mmagon.jwebswing.base.references.JavascriptReference;
 import za.co.mmagon.jwebswing.htmlbuilder.css.themes.Theme;
@@ -30,20 +31,23 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @param <C> All allowed children
- * @param <J> This Class
+ * @param <C>
+ * 		All allowed children
+ * @param <J>
+ * 		This Class
  *
  * @author GedMarc
  * @since Sep 26, 2016
  */
-public interface IComponentHierarchyBase<C, J extends ComponentBase>
+public interface IComponentHierarchyBase<C extends GlobalChildren, J extends ComponentBase>
 {
 	/**
 	 * Add a new child to this component
 	 * <p>
 	 *
-	 * @param newChild The child to be added
-	 *                 <p>
+	 * @param newChild
+	 * 		The child to be added
+	 * 		<p>
 	 *
 	 * @return The new child added
 	 */
@@ -81,7 +85,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 *
 	 * @return An array list of components
 	 */
-	Set<ComponentHierarchyBase> getChildren();
+	Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> getChildren();
 
 	/**
 	 * Get an array list of all children and their children recursively Includes this object
@@ -89,29 +93,31 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 *
 	 * @return A complete array list of all children at time of call
 	 */
-	Set<ComponentHierarchyBase> getChildrenHierarchy();
+	Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> getChildrenHierarchy();
 
 	/**
 	 * Get an array list of all children and their children recursively Excludes this object
 	 * <p>
 	 *
-	 * @param trues Whether or not to include this component
-	 *              <p>
+	 * @param trues
+	 * 		Whether or not to include this component
+	 * 		<p>
 	 *
 	 * @return A complete array list of all children at time of call
 	 */
-	Set<ComponentHierarchyBase> getChildrenHierarchy(boolean trues);
+	Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> getChildrenHierarchy(boolean trues);
 
 	/**
 	 * Adds the children of this component onto the array list coming in
 	 * <p>
 	 *
-	 * @param componentsToAddTo The component Array List to add to
-	 *                          <p>
+	 * @param componentsToAddTo
+	 * 		The component Array List to add to
+	 * 		<p>
 	 *
 	 * @return original components added with
 	 */
-	Set<ComponentHierarchyBase> getChildrenHierarchy(Set<ComponentHierarchyBase> componentsToAddTo);
+	Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> getChildrenHierarchy(Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> componentsToAddTo);
 
 	/**
 	 * Adds in the JavaScript References for all the children
@@ -147,7 +153,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 *
 	 * @return
 	 */
-	ComponentHierarchyBase getParent();
+	ComponentHierarchyBase<?, ?, ?, ?, ?> getParent();
 
 	/**
 	 * Returns all the feature queries associated to this component and all its children
@@ -176,8 +182,9 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * Takes a component off this components child list
 	 * <p>
 	 *
-	 * @param childToRemove The child object to remove from this list
-	 *                      <p>
+	 * @param childToRemove
+	 * 		The child object to remove from this list
+	 * 		<p>
 	 *
 	 * @return True if the child was part of this components children's list
 	 */
@@ -195,7 +202,8 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * Sets the page this component belongs on.
 	 * <p>
 	 *
-	 * @param page A Page
+	 * @param page
+	 * 		A Page
 	 *
 	 * @return This Class
 	 */
@@ -208,7 +216,7 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 *
 	 * @return This Class
 	 */
-	J setParent(ComponentHierarchyBase parent);
+	J setParent(ComponentHierarchyBase<?, ?, ?, ?, ?> parent);
 
 	/**
 	 * Overrides this and all below components to set tiny false
@@ -240,8 +248,9 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * Adds a class name to the class list
 	 * <p>
 	 *
-	 * @param className The class name to add
-	 *                  <p>
+	 * @param className
+	 * 		The class name to add
+	 * 		<p>
 	 *
 	 * @return True if it was added, false if it already existed
 	 */
@@ -251,8 +260,9 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * Removes a class name from this component
 	 * <p>
 	 *
-	 * @param className Class Name to Remove
-	 *                  <p>
+	 * @param className
+	 * 		Class Name to Remove
+	 * 		<p>
 	 *
 	 * @return True if the class was removed, False if the class was not part of the collection
 	 */
@@ -288,7 +298,8 @@ public interface IComponentHierarchyBase<C, J extends ComponentBase>
 	 * Set the theme applied to this component
 	 * <p>
 	 *
-	 * @param theme The JQuery UI theme to apply to the component
+	 * @param theme
+	 * 		The JQuery UI theme to apply to the component
 	 *
 	 * @return This Class
 	 */

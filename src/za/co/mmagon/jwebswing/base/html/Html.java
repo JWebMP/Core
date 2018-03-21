@@ -213,11 +213,11 @@ public abstract class Html<J extends Html<J>>
 	/*
 	 * Returns the body object on the HTML Tag
 	 */
-	public Body getBody()
+	public Body<?, ?> getBody()
 	{
 		if (body == null)
 		{
-			body = new Body(Page.class.cast(this));
+			body = new Body<>(Page.class.cast(this));
 		}
 		return body;
 	}
@@ -227,8 +227,10 @@ public abstract class Html<J extends Html<J>>
 	 *
 	 * @param body
 	 */
-	public void setBody(Body body)
+	@SuppressWarnings("unchecked")
+	public J setBody(Body body)
 	{
 		this.body = body;
+		return (J) this;
 	}
 }

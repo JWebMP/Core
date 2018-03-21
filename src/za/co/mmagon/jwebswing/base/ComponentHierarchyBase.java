@@ -65,8 +65,7 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.STRING_SPACE;
  * @since 24 Apr 2016
  */
 @SuppressWarnings("unchecked")
-public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends
-		                                                                                                                                 GlobalEvents, J extends ComponentHierarchyBase<C, A, F, E, J>>
+public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHierarchyBase<C, A, F, E, J>>
 		extends ComponentThemeBase<A, F, E, J>
 		implements IComponentHierarchyBase<C, J>, GlobalChildren
 {
@@ -79,13 +78,13 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * The list of children of this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private Set<ComponentHierarchyBase> children;
+	private Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> children;
 
 	/**
 	 * My Parent
 	 */
 	@JsonIgnore
-	private ComponentHierarchyBase parent;
+	private ComponentHierarchyBase<?, ?, ?, ?, ?> parent;
 
 	/**
 	 * The list of class names for this object
@@ -97,7 +96,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * My Page
 	 */
 	@JsonIgnore
-	private Page page;
+	private Page<?> page;
 
 	/**
 	 * Constructs a new component that can be part of a tree
@@ -116,7 +115,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 */
 	@NotNull
 	@SuppressWarnings("unused")
-	public IComponentHierarchyBase asHierarchyBase()
+	public IComponentHierarchyBase<C, J> asHierarchyBase()
 	{
 		return this;
 	}
@@ -213,7 +212,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 */
 	@Override
 	@NotNull
-	public final Set<ComponentHierarchyBase> getChildren()
+	public final Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> getChildren()
 	{
 		if (children == null)
 		{
@@ -228,7 +227,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * @param children
 	 * 		The children set to apply
 	 */
-	public void setChildren(Set<ComponentHierarchyBase> children)
+	public void setChildren(Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> children)
 	{
 		this.children = children;
 	}
@@ -241,7 +240,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 */
 	@Override
 	@NotNull
-	public Set<ComponentHierarchyBase> getChildrenHierarchy()
+	public Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> getChildrenHierarchy()
 	{
 		return getChildrenHierarchy(true);
 	}
@@ -258,9 +257,9 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 */
 	@Override
 	@NotNull
-	public Set<ComponentHierarchyBase> getChildrenHierarchy(boolean trues)
+	public Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> getChildrenHierarchy(boolean trues)
 	{
-		Set<ComponentHierarchyBase> components = new LinkedHashSet<>();
+		Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> components = new LinkedHashSet<>();
 		if (trues)
 		{
 			components.add(this);
@@ -284,7 +283,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 */
 	@Override
 	@NotNull
-	public Set<ComponentHierarchyBase> getChildrenHierarchy(@NotNull Set<ComponentHierarchyBase> componentsToAddTo)
+	public Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> getChildrenHierarchy(@NotNull Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> componentsToAddTo)
 	{
 		getChildren().forEach(child ->
 		                      {
@@ -554,35 +553,6 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	}
 
 	/**
-	 * Returns all the feature queries associated to this component and all its children
-	 *
-	 * @return
-	 */
-	@Override
-	@NotNull
-	public Set<StringBuilder> getQueriesAll()
-	{
-		Set<StringBuilder> reallyAllQueries = new LinkedHashSet<>();
-		Set<ComponentHierarchyBase> allComponents = getChildrenHierarchy(true);
-		allComponents.forEach(
-				(Consumer<? super ComponentHierarchyBase>) componentQuery -> processComponentQueries(componentQuery, reallyAllQueries));
-		return reallyAllQueries;
-	}
-
-	/**
-	 * Initialize all children
-	 */
-	@Override
-	public void init()
-	{
-		if (!isInitialized())
-		{
-			new CopyOnWriteArrayList<>(getChildren()).forEach(ComponentHierarchyBase::init);
-		}
-		super.init();
-	}
-
-	/**
 	 * Processes the angular objects into a map
 	 *
 	 * @param next
@@ -608,6 +578,34 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 				             log.log(Level.WARNING, "Unable to render angular object", e);
 			             }
 		             });
+	}
+
+	/**
+	 * Returns all the feature queries associated to this component and all its children
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public Set<StringBuilder> getQueriesAll()
+	{
+		Set<StringBuilder> reallyAllQueries = new LinkedHashSet<>();
+		Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> allComponents = getChildrenHierarchy(true);
+		allComponents.forEach((Consumer<? super ComponentHierarchyBase>) componentQuery -> processComponentQueries(componentQuery, reallyAllQueries));
+		return reallyAllQueries;
+	}
+
+	/**
+	 * Initialize all children
+	 */
+	@Override
+	public void init()
+	{
+		if (!isInitialized())
+		{
+			new CopyOnWriteArrayList<>(getChildren()).forEach(ComponentHierarchyBase::init);
+		}
+		super.init();
 	}
 
 	/**
@@ -851,7 +849,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 
 		if (!isConfigured())
 		{
-			Set<ComponentHierarchyBase> clonedBase = getChildren();
+			Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> clonedBase = getChildren();
 			clonedBase.forEach(feature ->
 			                   {
 				                   if (!feature.isConfigured())
@@ -1026,7 +1024,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 */
 	@Nullable
 	@SuppressWarnings("unchecked")
-	private <T extends ComponentHierarchyBase> T findParent(@NotNull ComponentHierarchyBase root, @NotNull Class<T> parentType)
+	private <T extends ComponentHierarchyBase> T findParent(@NotNull ComponentHierarchyBase<?, ?, ?, ?, ?> root, @NotNull Class<T> parentType)
 	{
 		if (root.getParent() != null)
 		{
@@ -1043,7 +1041,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 
 	@Nullable
 	@SuppressWarnings({"unchecked", "unused"})
-	public <T extends ComponentHierarchyBase> T findChild(@NotNull Class<T> childType)
+	public <T extends ComponentHierarchyBase<?, ?, ?, ?, ?>> T findChild(@NotNull Class<T> childType)
 	{
 		for (ComponentHierarchyBase componentHierarchyBase : getChildren())
 		{

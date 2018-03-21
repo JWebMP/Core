@@ -67,6 +67,7 @@ public class SiteBinder
 	private static final UserAgentStringParser userAgentParser = UADetectorServiceFactory.getResourceModuleParser();
 
 	private static TypeLiteral<Map<String, String>> localStorageTypeLiteral = new TypeLiteral<Map<String, String>>() {};
+	private static TypeLiteral<Map<String, String>> sessionStorageTypeLiteral = new TypeLiteral<Map<String, String>>() {};
 
 	/**
 	 * Constructs a new instance, mostly for injection
@@ -214,6 +215,17 @@ public class SiteBinder
 				                                     .getSessionStorage();
 			                  }
 			                  return new HashMap();
+		                  });
+		module.bind(sessionStorageTypeLiteral)
+		      .annotatedWith(Names.named("SessionStorage"))
+		      .toProvider(() ->
+		                  {
+			                  if (!GuiceContext.isBuildingInjector())
+			                  {
+				                  return GuiceContext.getInstance(SessionStorageProperties.class)
+				                                     .getSessionStorage();
+			                  }
+			                  return new HashMap<>();
 		                  });
 		log.fine("Bound SessionStorageProperties");
 		module.bind(SessionStorageProperties.class);

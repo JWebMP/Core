@@ -16,7 +16,9 @@ import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 
 import static za.co.mmagon.jwebswing.utilities.StaticStrings.*;
 
-class ScriptsDynamicPageConfigurator extends PageConfigurator
+@SuppressWarnings("unused")
+class ScriptsDynamicPageConfigurator
+		extends PageConfigurator
 {
 	public ScriptsDynamicPageConfigurator()
 	{
@@ -30,28 +32,28 @@ class ScriptsDynamicPageConfigurator extends PageConfigurator
 		{
 			Style s = getCss(page);
 			if (page.getOptions()
-					    .isDynamicRender())
+			        .isDynamicRender())
 			{
 				if (s != null)
 				{
 					page.getHead()
-							.add(new CSSLink(SessionHelper.getServerPath() + SiteBinder.getCSSLocation()
-									                                                 .replaceAll(STRING_FORWARD_SLASH, STRING_EMPTY)));
+					    .add(new CSSLink(SessionHelper.getServerPath() + SiteBinder.getCSSLocation()
+					                                                               .replaceAll(STRING_FORWARD_SLASH, STRING_EMPTY)));
 				}
 				if (JQueryPageConfigurator.isRequired())
 				{
 					page.getBody()
-							.add(getDynamicReference(SiteBinder.getJWScriptLocation()
-									                         .replaceAll(STRING_FORWARD_SLASH, STRING_EMPTY)));
+					    .add(getDynamicReference(SiteBinder.getJWScriptLocation()
+					                                       .replaceAll(STRING_FORWARD_SLASH, STRING_EMPTY)));
 					page.getBody()
-							.add(getDynamicReference(SiteBinder.getJavaScriptLocation()
-									                         .replaceAll(STRING_FORWARD_SLASH, STRING_EMPTY)));
+					    .add(getDynamicReference(SiteBinder.getJavaScriptLocation()
+					                                       .replaceAll(STRING_FORWARD_SLASH, STRING_EMPTY)));
 				}
 				if (AngularPageConfigurator.isRequired())
 				{
 					page.getBody()
-							.add(getDynamicReference(SiteBinder.getAngularScriptLocation()
-									                         .replaceAll(STRING_FORWARD_SLASH, STRING_EMPTY)));
+					    .add(getDynamicReference(SiteBinder.getAngularScriptLocation()
+					                                       .replaceAll(STRING_FORWARD_SLASH, STRING_EMPTY)));
 				}
 
 			}
@@ -60,11 +62,11 @@ class ScriptsDynamicPageConfigurator extends PageConfigurator
 				if (s != null)
 				{
 					page.getHead()
-							.add(s);
+					    .add(s);
 				}
 				ComponentHierarchyBase addable;
 				if (page.getOptions()
-						    .isScriptsInHead())
+				        .isScriptsInHead())
 				{
 					addable = page.getHead();
 				}
@@ -87,35 +89,35 @@ class ScriptsDynamicPageConfigurator extends PageConfigurator
 		return page;
 	}
 
-	private Style getCss(Page page)
+	private Style<?> getCss(Page page)
 	{
 		StringBuilder css = page.getBody()
-				                    .renderCss(0);
+		                        .renderCss(0);
 		if (css.toString()
-				    .isEmpty())
+		       .isEmpty())
 		{
 			return null;
 		}
-		Style style = new Style();
+		Style<?> style = new Style();
 		style.setText(css);
 		return style;
 	}
 
-	private Script getDynamicReference(String urlLocation)
+	private Script<?> getDynamicReference(String urlLocation)
 	{
-		Script jwScript = new Script();
+		Script<?> jwScript = new Script();
 		jwScript.addAttribute(ScriptAttributes.Type, HTML_HEADER_JAVASCRIPT);
 		jwScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + urlLocation);
 		return jwScript;
 	}
 
-	private Script getSiteLoaderScript()
+	private Script<?> getSiteLoaderScript()
 	{
 		FileTemplates.getFileTemplate(JWScriptServlet.class, JWScriptServlet.FILE_TEMPLATE_NAME, "siteloader");
 		StringBuilder jsScript = FileTemplates.renderTemplateScripts(JWScriptServlet.FILE_TEMPLATE_NAME);
 		if (!jsScript.toString()
-				     .trim()
-				     .isEmpty())
+		             .trim()
+		             .isEmpty())
 		{
 			return newScript(jsScript.toString());
 		}
@@ -126,8 +128,8 @@ class ScriptsDynamicPageConfigurator extends PageConfigurator
 	{
 		StringBuilder js = page.renderJavascript();
 		if (!js.toString()
-				     .trim()
-				     .isEmpty())
+		       .trim()
+		       .isEmpty())
 		{
 			return newScript(page.getNewLine() + js);
 		}
@@ -137,10 +139,10 @@ class ScriptsDynamicPageConfigurator extends PageConfigurator
 	private Script getAngularScript(Page page)
 	{
 		StringBuilder jsAngular = page.getAngular()
-				                          .renderAngularJavascript(page);
+		                              .renderAngularJavascript(page);
 		if (!jsAngular.toString()
-				     .trim()
-				     .isEmpty())
+		              .trim()
+		              .isEmpty())
 		{
 			return newScript(jsAngular.toString());
 		}

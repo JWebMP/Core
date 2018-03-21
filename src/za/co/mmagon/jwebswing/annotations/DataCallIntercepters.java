@@ -30,7 +30,8 @@ import java.util.logging.Logger;
  * @author Marc Magon
  * @since 05 Apr 2017
  */
-class DataCallIntercepters implements org.aopalliance.intercept.MethodInterceptor
+class DataCallIntercepters
+		implements org.aopalliance.intercept.MethodInterceptor
 {
 
 	private static final Logger LOG = LogFactory.getLog(DataCallIntercepters.class.getName());
@@ -47,7 +48,8 @@ class DataCallIntercepters implements org.aopalliance.intercept.MethodIntercepto
 	public Object invoke(MethodInvocation invocation) throws Throwable
 	{
 		LOG.finer("Intercepting Data Calls");
-		Set<Class<? extends DataCallIntercepter>> res = GuiceContext.reflect().getSubTypesOf(DataCallIntercepter.class);
+		Set<Class<? extends DataCallIntercepter>> res = GuiceContext.reflect()
+		                                                            .getSubTypesOf(DataCallIntercepter.class);
 		List<DataCallIntercepter> outs = new ArrayList<>();
 		for (Class<? extends DataCallIntercepter> re : res)
 		{
@@ -60,8 +62,10 @@ class DataCallIntercepters implements org.aopalliance.intercept.MethodIntercepto
 		Collections.sort(outs, Comparator.comparing(DefaultIntercepter::sortOrder));
 		for (DataCallIntercepter out : outs)
 		{
-			LOG.log(Level.FINER, "Interception Occuring : {0}", out.getClass().getCanonicalName());
-			GuiceContext.getInstance(out.getClass()).intercept();
+			LOG.log(Level.FINER, "Data Call Interception Occuring : {0}", out.getClass()
+			                                                                 .getCanonicalName());
+			GuiceContext.getInstance(out.getClass())
+			            .intercept();
 		}
 		LOG.finer("Interception of Data Calls complete");
 		return invocation.proceed();

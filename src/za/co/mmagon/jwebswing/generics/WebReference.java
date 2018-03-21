@@ -52,7 +52,7 @@ public class WebReference<J extends WebReference>
 {
 
 	private static final Logger LOG = LogFactory.getInstance()
-			                                  .getLogger("Web Reference");
+	                                            .getLogger("Web Reference");
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The dummy reference for the sorting
@@ -158,8 +158,8 @@ public class WebReference<J extends WebReference>
 	 */
 	public WebReference(String name, Double version, String localReference, String remoteReference, int sortOrder)
 	{
-		this.left = localReference;
-		this.right = remoteReference;
+		left = localReference;
+		right = remoteReference;
 
 		this.name = name;
 		this.version = version;
@@ -167,27 +167,6 @@ public class WebReference<J extends WebReference>
 		this.remoteReference = remoteReference;
 
 		this.sortOrder = sortOrder;
-	}
-
-	/**
-	 * Whether or not to return the local reference or the remote reference
-	 *
-	 * @return
-	 */
-	@JsonProperty("local")
-	public static boolean isIsLocal()
-	{
-		return isLocal;
-	}
-
-	/**
-	 * Sets whether this reference should be local or remote
-	 *
-	 * @param isLocal
-	 */
-	public static void setIsLocal(boolean isLocal)
-	{
-		WebReference.isLocal = isLocal;
 	}
 
 	/**
@@ -229,7 +208,7 @@ public class WebReference<J extends WebReference>
 	 *
 	 * @return
 	 */
-	public static WebReference getDummyReference()
+	public static WebReference<?> getDummyReference()
 	{
 		return dummyReference;
 	}
@@ -257,7 +236,7 @@ public class WebReference<J extends WebReference>
 	public J setLeft(String left)
 	{
 		this.left = left;
-		this.localReference = left;
+		localReference = left;
 		return (J) this;
 	}
 
@@ -284,7 +263,7 @@ public class WebReference<J extends WebReference>
 	public J setRight(String right)
 	{
 		this.right = right;
-		this.remoteReference = right;
+		remoteReference = right;
 		return (J) this;
 	}
 
@@ -314,31 +293,6 @@ public class WebReference<J extends WebReference>
 	}
 
 	/**
-	 * Gets the name of this reference
-	 *
-	 * @return
-	 */
-	public String getName()
-	{
-		return name;
-	}
-
-	/**
-	 * Sets the name of this reference
-	 *
-	 * @param name
-	 *
-	 * @return
-	 */
-	@NotNull
-	@SuppressWarnings("unchecked")
-	public J setName(String name)
-	{
-		this.name = name;
-		return (J) this;
-	}
-
-	/**
 	 * Gets the double version of this reference
 	 *
 	 * @return
@@ -364,58 +318,6 @@ public class WebReference<J extends WebReference>
 	}
 
 	/**
-	 * Gets the physical local reference
-	 *
-	 * @return
-	 */
-	public String getLocalReference()
-	{
-		return localReference;
-	}
-
-	/**
-	 * Sets the physical local reference
-	 *
-	 * @param localReference
-	 *
-	 * @return
-	 */
-	@NotNull
-	@SuppressWarnings("unchecked")
-	public J setLocalReference(String localReference)
-	{
-		setLeft(localReference);
-		this.localReference = localReference;
-		return (J) this;
-	}
-
-	/**
-	 * Gets the physical remote reference
-	 *
-	 * @return
-	 */
-	public String getRemoteReference()
-	{
-		return remoteReference;
-	}
-
-	/**
-	 * Sets the remote physical reference
-	 *
-	 * @param remoteReference
-	 *
-	 * @return
-	 */
-	@NotNull
-	@SuppressWarnings("unchecked")
-	public J setRemoteReference(String remoteReference)
-	{
-		setRight(remoteReference);
-		this.remoteReference = remoteReference;
-		return (J) this;
-	}
-
-	/**
 	 * Compares two references to each other on sort order
 	 *
 	 * @param o1
@@ -427,13 +329,13 @@ public class WebReference<J extends WebReference>
 	public int compare(WebReference o1, WebReference o2)
 	{
 		if (o1.getSortOrder()
-				    .compareTo(o2.getSortOrder()) == 0)
+		      .compareTo(o2.getSortOrder()) == 0)
 		{
 			return o1.toString()
-					       .compareTo(o2.toString());
+			         .compareTo(o2.toString());
 		}
 		return o1.getSortOrder()
-				       .compareTo(o2.getSortOrder());
+		         .compareTo(o2.getSortOrder());
 	}
 
 	/**
@@ -469,27 +371,163 @@ public class WebReference<J extends WebReference>
 	}
 
 	/**
-	 * Return the priority of the reference
+	 * Returns either the local or remote reference depending on configuration
+	 * <p>
 	 *
 	 * @return
 	 */
-	public RequirementsPriority getPriority()
+	@Override
+	@JsonProperty("reference")
+	public final String toString()
 	{
-		return priority;
+		if (isIsLocal())
+		{
+			StringBuilder sb = new StringBuilder(getLocalReference());
+
+			if (useMinAtEndOfExtension && !sb.toString()
+			                                 .contains(".min."))
+			{
+				sb.insert(sb.lastIndexOf(StaticStrings.STRING_DOT), ".min");
+			}
+
+			try
+			{
+				if (!GuiceContext.isBuildingInjector() && (!(sb.toString()
+				                                               .toLowerCase()
+				                                               .startsWith("http://") || sb.toString()
+				                                                                           .toLowerCase()
+				                                                                           .startsWith("https://") || sb.toString()
+				                                                                                                        .startsWith("//"))))
+				{
+					sb = renderUrlString(sb);
+				}
+
+			}
+			catch (NoClassDefFoundError | Exception e)
+			{
+				LOG.log(Level.WARNING, "Error in getting url to append to the web reference", e);
+			}
+
+			return sb.toString();
+		}
+		else
+		{
+			StringBuilder sb = new StringBuilder(getRemoteReference());
+			if (useMinAtEndOfExtension && isCanMinifyAtRemote() && !sb.toString()
+			                                                          .contains(".min."))
+			{
+				sb.insert(sb.lastIndexOf(StaticStrings.STRING_DOT), ".min");
+			}
+
+			return sb.toString();
+		}
 	}
 
 	/**
-	 * Sets the priority of the reference
+	 * Whether or not to return the local reference or the remote reference
 	 *
-	 * @param priority
+	 * @return
+	 */
+	@JsonProperty("local")
+	public static boolean isIsLocal()
+	{
+		return isLocal;
+	}
+
+	/**
+	 * Sets whether this reference should be local or remote
+	 *
+	 * @param isLocal
+	 */
+	public static void setIsLocal(boolean isLocal)
+	{
+		WebReference.isLocal = isLocal;
+	}
+
+	/**
+	 * Gets the physical local reference
+	 *
+	 * @return
+	 */
+	public String getLocalReference()
+	{
+		return localReference;
+	}
+
+	/**
+	 * Sets the physical local reference
+	 *
+	 * @param localReference
 	 *
 	 * @return
 	 */
 	@NotNull
 	@SuppressWarnings("unchecked")
-	public J setPriority(RequirementsPriority priority)
+	public J setLocalReference(String localReference)
 	{
-		this.priority = priority;
+		setLeft(localReference);
+		this.localReference = localReference;
+		return (J) this;
+	}
+
+	/**
+	 * Renders the actual URL String
+	 *
+	 * @param sb
+	 *
+	 * @return
+	 */
+	private StringBuilder renderUrlString(StringBuilder sb)
+	{
+		try
+		{
+			HttpServletRequest request = GuiceContext.inject()
+			                                         .getInstance(HttpServletRequest.class);
+			if (request != null)
+			{
+				String url = SessionHelper.getServerPath();
+				if (url == null)
+				{
+					url = STRING_EMPTY;
+				}
+				else
+				{
+					url += STRING_EMPTY;
+				}
+				sb = sb.insert(0, url);
+				return sb;
+			}
+		}
+		catch (Exception e)
+		{
+			LOG.log(Level.WARNING, "Error in getting url reference", e);
+		}
+		return sb;
+	}
+
+	/**
+	 * Gets the physical remote reference
+	 *
+	 * @return
+	 */
+	public String getRemoteReference()
+	{
+		return remoteReference;
+	}
+
+	/**
+	 * Sets the remote physical reference
+	 *
+	 * @param remoteReference
+	 *
+	 * @return
+	 */
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setRemoteReference(String remoteReference)
+	{
+		setRight(remoteReference);
+		this.remoteReference = remoteReference;
 		return (J) this;
 	}
 
@@ -519,6 +557,31 @@ public class WebReference<J extends WebReference>
 	}
 
 	/**
+	 * Return the priority of the reference
+	 *
+	 * @return
+	 */
+	public RequirementsPriority getPriority()
+	{
+		return priority;
+	}
+
+	/**
+	 * Sets the priority of the reference
+	 *
+	 * @param priority
+	 *
+	 * @return
+	 */
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setPriority(RequirementsPriority priority)
+	{
+		this.priority = priority;
+		return (J) this;
+	}
+
+	/**
 	 * If this reference is a cordova reference, e.g. does it render in the dynamic site loader
 	 *
 	 * @return
@@ -544,61 +607,6 @@ public class WebReference<J extends WebReference>
 	}
 
 	/**
-	 * Returns either the local or remote reference depending on configuration
-	 * <p>
-	 *
-	 * @return
-	 */
-	@Override
-	@JsonProperty("reference")
-	public final String toString()
-	{
-		if (isIsLocal())
-		{
-			StringBuilder sb = new StringBuilder(getLocalReference());
-
-			if (useMinAtEndOfExtension && !sb.toString()
-					                               .contains(".min."))
-			{
-				sb.insert(sb.lastIndexOf(StaticStrings.STRING_DOT), ".min");
-			}
-
-			try
-			{
-				if (!GuiceContext.isBuildingInjector() && (!(sb.toString()
-						                                             .toLowerCase()
-						                                             .startsWith("http://") || sb.toString()
-								                                                                       .toLowerCase()
-								                                                                       .startsWith(
-										                                                                       "https://") || sb.toString()
-												                                                                                      .startsWith(
-														                                                                                      "//"))))
-				{
-					sb = renderUrlString(sb);
-				}
-
-			}
-			catch (NoClassDefFoundError | Exception e)
-			{
-				LOG.log(Level.WARNING, "Error in getting url to append to the web reference", e);
-			}
-
-			return sb.toString();
-		}
-		else
-		{
-			StringBuilder sb = new StringBuilder(getRemoteReference());
-			if (useMinAtEndOfExtension && isCanMinifyAtRemote() && !sb.toString()
-					                                                        .contains(".min."))
-			{
-				sb.insert(sb.lastIndexOf(StaticStrings.STRING_DOT), ".min");
-			}
-
-			return sb.toString();
-		}
-	}
-
-	/**
 	 * A specified class name that can identify these classes on the html
 	 *
 	 * @return
@@ -621,51 +629,43 @@ public class WebReference<J extends WebReference>
 		return (J) this;
 	}
 
-	/**
-	 * Renders the actual URL String
-	 *
-	 * @param sb
-	 *
-	 * @return
-	 */
-	private StringBuilder renderUrlString(StringBuilder sb)
-	{
-		try
-		{
-			HttpServletRequest request = GuiceContext.inject()
-					                             .getInstance(HttpServletRequest.class);
-			if (request != null)
-			{
-				String url = SessionHelper.getServerPath();
-				if (url == null)
-				{
-					url = STRING_EMPTY;
-				}
-				else
-				{
-					url += STRING_EMPTY;
-				}
-				sb = sb.insert(0, url);
-				return sb;
-			}
-		}
-		catch (Exception e)
-		{
-			LOG.log(Level.WARNING, "Error in getting url reference", e);
-		}
-		return sb;
-	}
-
 	@Override
 	@SuppressWarnings("all")
 	public int compareTo(WebReference o)
 	{
 		if (o == null)
-		{ return 1; }
+		{
+			return 1;
+		}
 		if (getSortOrder().compareTo(o.getSortOrder()) == 0)
 		{
 			return getName().compareTo(o.getName());
 		}
 		return getSortOrder().compareTo(o.getSortOrder());
+	}
+
+	/**
+	 * Gets the name of this reference
+	 *
+	 * @return
+	 */
+	public String getName()
+	{
+		return name;
+	}
+
+	/**
+	 * Sets the name of this reference
+	 *
+	 * @param name
+	 *
+	 * @return
+	 */
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setName(String name)
+	{
+		this.name = name;
+		return (J) this;
 	}
 }

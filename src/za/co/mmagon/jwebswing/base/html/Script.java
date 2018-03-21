@@ -18,6 +18,7 @@ package za.co.mmagon.jwebswing.base.html;
 
 import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.attributes.ScriptAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoClassAttribute;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
@@ -56,9 +57,11 @@ import java.util.logging.Logger;
  * Note: There are several ways an external script can be executed:
  * <p>
  * <p>
- * If async="async": The script is executed asynchronously with the rest of the page (the script will be executed while the page continues the parsing) If async is not present and defer="defer":
+ * If async="async": The script is executed asynchronously with the rest of the page (the script will be executed while the page continues the parsing) If async is not present and
+ * defer="defer":
  * The<p>
- * script is executed when the page has finished parsing If neither async or defer is present: The script is fetched and executed immediately, before the browser continues parsing the page<p>
+ * script is executed when the page has finished parsing If neither async or defer is present: The script is fetched and executed immediately, before the browser continues parsing
+ * the page<p>
  * <p>
  * <p>
  * Differences Between HTML 4.01 and HTML5<p>
@@ -78,10 +81,11 @@ import java.util.logging.Logger;
  */
 public class Script<J extends Script<J>>
 		extends ComponentHierarchyBase<NoChildren, ScriptAttributes, NoFeatures, NoEvents, J>
-		implements NoIDTag, HeadChildren, NoClassAttribute, BodyChildren
+		implements NoIDTag, HeadChildren, NoClassAttribute, BodyChildren, GlobalChildren
 {
 
-	private static final Logger logger = LogFactory.getInstance().getLogger("<SCRIPT>");
+	private static final Logger logger = LogFactory.getInstance()
+	                                               .getLogger("<SCRIPT>");
 	private static final long serialVersionUID = 1L;
 	private JavascriptReference reference;
 
@@ -94,6 +98,20 @@ public class Script<J extends Script<J>>
 	{
 		this(reference.toString());
 		this.reference = reference;
+	}
+
+	/**
+	 * Constructs a new script with a specified source and the type of JavaScript
+	 * <p>
+	 *
+	 * @param src
+	 * 		The source of the file
+	 */
+	public Script(String src)
+	{
+		this();
+		addAttribute(ScriptAttributes.Src, src);
+		addAttribute(ScriptAttributes.Type, "text/javascript");
 	}
 
 	/**
@@ -127,20 +145,6 @@ public class Script<J extends Script<J>>
 	}
 
 	/**
-	 * Constructs a new script with a specified source and the type of JavaScript
-	 * <p>
-	 *
-	 * @param src
-	 * 		The source of the file
-	 */
-	public Script(String src)
-	{
-		this();
-		addAttribute(ScriptAttributes.Src, src);
-		addAttribute(ScriptAttributes.Type, "text/javascript");
-	}
-
-	/**
 	 * Returns the currently set JavaScript with no indentation
 	 *
 	 * @return The JavaScript
@@ -156,6 +160,7 @@ public class Script<J extends Script<J>>
 	 * @param javascript
 	 * 		The JavaScript to directly insert
 	 */
+	@SuppressWarnings("unchecked")
 	public J setJavascript(String javascript)
 	{
 		setText(javascript);
@@ -177,6 +182,47 @@ public class Script<J extends Script<J>>
 		return getText(tabCount);
 	}
 
+	@Override
+	public int hashCode()
+	{
+		return getText(0).append(getAttribute(ScriptAttributes.Src))
+		                 .hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (obj == null)
+		{
+			return false;
+		}
+		if (obj.getClass() != getClass())
+		{
+			return false;
+		}
+
+		Script<?> s = (Script) obj;
+		if (s.getAttribute(ScriptAttributes.Src)
+		     .equals(getAttribute(ScriptAttributes.Src)))
+		{
+			if (s.getAttribute(ScriptAttributes.Type)
+			     .equals(getAttribute(ScriptAttributes.Type)))
+			{
+				return s.getText(0)
+				        .toString()
+				        .equals(getText(0).toString());
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	/**
 	 * Differences Between HTML and XHTML
 	 * <p>
@@ -192,7 +238,9 @@ public class Script<J extends Script<J>>
 		{
 			try
 			{
-				if (getPage().getHtmlVersion().name().startsWith("X"))
+				if (getPage().getHtmlVersion()
+				             .name()
+				             .startsWith("X"))
 				{
 					StringBuilder sb = new StringBuilder();
 					sb.append("//<![CDATA[");
@@ -206,46 +254,6 @@ public class Script<J extends Script<J>>
 				logger.log(Level.FINE, "Unable to determine whether XHTML or HTML. Skipping CDATA Implementation", e);
 			}
 		}
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (obj == null)
-		{
-			return false;
-		}
-		if (obj.getClass() != getClass())
-		{
-			return false;
-		}
-
-		Script s = (Script) obj;
-		if (s.getAttribute(ScriptAttributes.Src).equals(getAttribute(ScriptAttributes.Src)))
-		{
-			if (s.getAttribute(ScriptAttributes.Type).equals(getAttribute(ScriptAttributes.Type)))
-			{
-				if (s.getText(0).toString().equals(getText(0).toString()))
-				{
-					return true;
-				}
-			}
-			else
-			{
-				return false;
-			}
-		}
-		else
-		{
-			return false;
-		}
-		return false;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return 17;
 	}
 
 	/**

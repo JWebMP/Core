@@ -24,18 +24,19 @@ import za.co.mmagon.logger.LogFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
- *
  * @author Marc Magon
  * @since 05 Apr 2017
  */
-class AjaxCallIntercepters implements org.aopalliance.intercept.MethodInterceptor
+class AjaxCallIntercepters
+		implements org.aopalliance.intercept.MethodInterceptor
 {
 
 	private static final Logger LOG = LogFactory.getLog(AjaxCallIntercepters.class.getName());
 
 	/*
-	 * Constructs a new SiteIntercepters
+	 * Constructs a new AjaxCallIntercepters
 	 */
 	public AjaxCallIntercepters()
 	{
@@ -46,14 +47,16 @@ class AjaxCallIntercepters implements org.aopalliance.intercept.MethodIntercepto
 	public Object invoke(MethodInvocation invocation) throws Throwable
 	{
 		LOG.finer("Intercepting Ajax Call");
-		for (Class<? extends AjaxCallIntercepter> siClass : GuiceContext.reflect().getSubTypesOf(AjaxCallIntercepter.class))
+		for (Class<? extends AjaxCallIntercepter> siClass : GuiceContext.reflect()
+		                                                                .getSubTypesOf(AjaxCallIntercepter.class))
 		{
 			if (siClass.isInterface())
 			{
 				continue;
 			}
-			AjaxCallIntercepter si = GuiceContext.inject().getInstance(siClass);
-			LOG.log(Level.FINER, "Interception Occuring : {0}", siClass.getCanonicalName());
+			AjaxCallIntercepter si = GuiceContext.inject()
+			                                     .getInstance(siClass);
+			LOG.log(Level.FINER, "Ajax Call Interception Occuring : {0}", siClass.getCanonicalName());
 			si.intercept();
 		}
 		LOG.finer("Interception for Ajax Call Complete");

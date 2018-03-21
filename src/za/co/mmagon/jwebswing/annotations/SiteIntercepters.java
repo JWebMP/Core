@@ -22,7 +22,10 @@ import za.co.mmagon.jwebswing.interception.DefaultIntercepter;
 import za.co.mmagon.jwebswing.interception.SiteCallInterceptor;
 import za.co.mmagon.logger.LogFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,7 +33,8 @@ import java.util.logging.Logger;
  * @author Marc Magon
  * @since 05 Apr 2017
  */
-class SiteIntercepters implements org.aopalliance.intercept.MethodInterceptor
+class SiteIntercepters
+		implements org.aopalliance.intercept.MethodInterceptor
 {
 
 	private static final Logger LOG = LogFactory.getLog(SiteIntercepters.class.getName());
@@ -48,7 +52,8 @@ class SiteIntercepters implements org.aopalliance.intercept.MethodInterceptor
 	{
 
 		LOG.finer("Intercepting Site Call");
-		Set<Class<? extends SiteCallInterceptor>> res = GuiceContext.reflect().getSubTypesOf(SiteCallInterceptor.class);
+		Set<Class<? extends SiteCallInterceptor>> res = GuiceContext.reflect()
+		                                                            .getSubTypesOf(SiteCallInterceptor.class);
 		List<SiteCallInterceptor> outs = new ArrayList<>();
 		for (Class<? extends SiteCallInterceptor> re : res)
 		{
@@ -57,13 +62,15 @@ class SiteIntercepters implements org.aopalliance.intercept.MethodInterceptor
 				continue;
 			}
 			SiteCallInterceptor intercepter = re.newInstance();
-			GuiceContext.inject().injectMembers(intercepter);
+			GuiceContext.inject()
+			            .injectMembers(intercepter);
 			outs.add(intercepter);
 		}
-		Collections.sort(outs, Comparator.comparing(DefaultIntercepter::sortOrder));
+		outs.sort(Comparator.comparing(DefaultIntercepter::sortOrder));
 		for (SiteCallInterceptor out : outs)
 		{
-			LOG.log(Level.FINE, "Interception Occuring : {0}", out.getClass().getCanonicalName());
+			LOG.log(Level.FINE, "Site Interception Occuring : {0}", out.getClass()
+			                                                           .getCanonicalName());
 			out.intercept();
 		}
 		LOG.finer("Interception of Site Call Complete");

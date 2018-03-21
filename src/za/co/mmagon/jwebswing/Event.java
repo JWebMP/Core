@@ -47,7 +47,8 @@ import static za.co.mmagon.jwebswing.utilities.StaticStrings.*;
  * @since 23 Apr 2016
  */
 public abstract class Event<J extends Event<J>>
-		extends ComponentEventBase<GlobalFeatures, GlobalEvents, Event<J>> implements GlobalEvents
+		extends ComponentEventBase<GlobalFeatures, GlobalEvents, Event<J>>
+		implements GlobalEvents
 {
 
 	private static final long serialVersionUID = 1L;
@@ -70,17 +71,6 @@ public abstract class Event<J extends Event<J>>
 	/**
 	 * Creates an event with the given component and type
 	 *
-	 * @param eventTypes
-	 * @param component
-	 */
-	public Event(EventTypes eventTypes, ComponentHierarchyBase component)
-	{
-		this(eventTypes.name(), eventTypes, component);
-	}
-
-	/**
-	 * Creates an event with the given component and type
-	 *
 	 * @param component
 	 */
 	public Event(ComponentHierarchyBase component)
@@ -89,37 +79,14 @@ public abstract class Event<J extends Event<J>>
 	}
 
 	/**
-	 * Constructs an event with the given name
+	 * Creates an event with the given component and type
 	 *
-	 * @param name
-	 * @param eventType
-	 */
-	public Event(String name, EventTypes eventType)
-	{
-		this(name, eventType, null);
-	}
-
-	/**
-	 * Constructs an event with the given name
-	 *
-	 * @param name
-	 */
-	public Event(String name)
-	{
-		this(name, EventTypes.undefined);
-	}
-
-	/**
-	 * Constructs an event with the given name
-	 *
-	 * @param name
-	 * 		The name of this event
+	 * @param eventTypes
 	 * @param component
-	 * 		The component type of this event
 	 */
-	public Event(String name, ComponentHierarchyBase component)
+	public Event(EventTypes eventTypes, ComponentHierarchyBase component)
 	{
-		this(name, EventTypes.undefined, component);
+		this(eventTypes.name(), eventTypes, component);
 	}
 
 	/**
@@ -145,6 +112,7 @@ public abstract class Event<J extends Event<J>>
 			setID(component.getID());
 			getComponent().addEvent(this);
 		}
+		returnVariable(StaticStrings.LOCAL_STORAGE_VARIABLE_KEY);
 	}
 
 	/**
@@ -159,6 +127,23 @@ public abstract class Event<J extends Event<J>>
 	public Event<J> setID(String id)
 	{
 		return super.setID(id.replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE));
+	}
+
+	/**
+	 * Sets the given component and class for this events. Component instance is destroyed on delivery
+	 *
+	 * @param component
+	 *
+	 * @return
+	 */
+	@Override
+	public Event<J> setComponent(ComponentHierarchyBase component)
+	{
+		if (component != null)
+		{
+			getRegisteredComponents().add(component.getClass());
+		}
+		return super.setComponent(component);
 	}
 
 	/**
@@ -177,6 +162,69 @@ public abstract class Event<J extends Event<J>>
 	}
 
 	/**
+	 * A set of components that this event can construct/be called from (same thing)
+	 *
+	 * @return
+	 */
+	public Set<Class<? extends ComponentHierarchyBase>> getRegisteredComponents()
+	{
+		if (registeredComponents == null)
+		{
+			setRegisteredComponents(new HashSet<>());
+		}
+		return registeredComponents;
+	}
+
+	/**
+	 * A set of components that this event can construct/be called from (same thing)
+	 *
+	 * @param registeredComponents
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public J setRegisteredComponents(Set<Class<? extends ComponentHierarchyBase>> registeredComponents)
+	{
+		this.registeredComponents = registeredComponents;
+		return (J) this;
+	}
+
+	/**
+	 * Constructs an event with the given name
+	 *
+	 * @param name
+	 */
+	public Event(String name)
+	{
+		this(name, EventTypes.undefined);
+	}
+
+
+	/**
+	 * Constructs an event with the given name
+	 *
+	 * @param name
+	 * @param eventType
+	 */
+	public Event(String name, EventTypes eventType)
+	{
+		this(name, eventType, null);
+	}
+
+	/**
+	 * Constructs an event with the given name
+	 *
+	 * @param name
+	 * 		The name of this event
+	 * @param component
+	 * 		The component type of this event
+	 */
+	public Event(String name, ComponentHierarchyBase component)
+	{
+		this(name, EventTypes.undefined, component);
+	}
+
+	/**
 	 * Render the variable return array
 	 *
 	 * @return
@@ -184,7 +232,10 @@ public abstract class Event<J extends Event<J>>
 	public StringBuilder renderVariables()
 	{
 		final StringBuilder s = new StringBuilder(STRING_SQUARE_BRACE_OPEN);
-		getVariables().forEach(event -> s.append(STRING_SINGLE_QUOTES).append(event).append(STRING_SINGLE_QUOTES).append(STRING_COMMNA));
+		getVariables().forEach(event -> s.append(STRING_SINGLE_QUOTES)
+		                                 .append(event)
+		                                 .append(STRING_SINGLE_QUOTES)
+		                                 .append(STRING_COMMNA));
 		StringBuilder s2;
 		if (s.indexOf(STRING_COMMNA) > 0)
 		{
@@ -195,12 +246,15 @@ public abstract class Event<J extends Event<J>>
 			s2 = s;
 		}
 		s2.append(STRING_SQUARE_BRACE_CLOSED);
-		s2.append(",'").append(getID()).append(STRING_SINGLE_QUOTES);
-		s2.append(",'").append(getClassCanonicalName()).append(STRING_SINGLE_QUOTES);
+		s2.append(",'")
+		  .append(getID())
+		  .append(STRING_SINGLE_QUOTES);
+		s2.append(",'")
+		  .append(getClassCanonicalName())
+		  .append(STRING_SINGLE_QUOTES);
 
 		return s2;
 	}
-
 
 	/**
 	 * The method that is fired on call
@@ -253,8 +307,39 @@ public abstract class Event<J extends Event<J>>
 	@SuppressWarnings("unchecked")
 	public J setOnDemandQueries(List<Event> onDemandQueries)
 	{
-		this.runEvents = onDemandQueries;
+		runEvents = onDemandQueries;
 		return (J) this;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
+	}
+
+	/**
+	 * Runs the assign function to components then executes the parents configuration
+	 */
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured() && !GuiceContext.isBuildingInjector())
+		{
+			assignFunctionsToComponent();
+			if (getComponent() != null)
+			{
+				JQueryPageConfigurator.setRequired(true);
+				AngularPageConfigurator.setRequired(true);
+			}
+		}
+
+		super.preConfigure();
 	}
 
 	/**
@@ -279,110 +364,5 @@ public abstract class Event<J extends Event<J>>
 	public void setRunFeatures(List<Feature> runFeatures)
 	{
 		this.runFeatures = runFeatures;
-	}
-
-
-	/**
-	 * A set of components that this event can construct/be called from (same thing)
-	 *
-	 * @return
-	 */
-	public Set<Class<? extends ComponentHierarchyBase>> getRegisteredComponents()
-	{
-		if (registeredComponents == null)
-		{
-			setRegisteredComponents(new HashSet<>());
-		}
-		return registeredComponents;
-	}
-
-	/**
-	 * A set of components that this event can construct/be called from (same thing)
-	 *
-	 * @param registeredComponents
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public J setRegisteredComponents(Set<Class<? extends ComponentHierarchyBase>> registeredComponents)
-	{
-		this.registeredComponents = registeredComponents;
-		return (J) this;
-	}
-
-
-	/**
-	 * Sets the given component and class for this events. Component instance is destroyed on delivery
-	 *
-	 * @param component
-	 *
-	 * @return
-	 */
-	@Override
-	public Event<J> setComponent(ComponentHierarchyBase component)
-	{
-		if (component != null)
-		{
-			getRegisteredComponents().add(component.getClass());
-		}
-		return super.setComponent(component);
-	}
-
-	/**
-	 * Runs the assign function to components then executes the parents configuration
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured() && !GuiceContext.isBuildingInjector())
-		{
-			assignFunctionsToComponent();
-			if (getComponent() != null)
-			{
-				JQueryPageConfigurator.setRequired(true);
-				AngularPageConfigurator.setRequired(true);
-			}
-		}
-
-		super.preConfigure();
-	}
-
-	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof Event))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		Event<?> event = (Event<?>) o;
-
-		if (!getVariables().equals(event.getVariables()))
-		{
-			return false;
-		}
-		if (!getRunEvents().equals(event.getRunEvents()))
-		{
-			return false;
-		}
-		if (!getRunFeatures().equals(event.getRunFeatures()))
-		{
-			return false;
-		}
-		return getRegisteredComponents().equals(event.getRegisteredComponents());
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
 	}
 }

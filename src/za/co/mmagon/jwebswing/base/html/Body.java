@@ -54,15 +54,16 @@ import java.util.Objects;
  * <p>
  *
  * @param <C>
- * @param <F> Features Base
+ * @param <F>
+ * 		Features Base
  * @param <J>
  *
  * @author Marc Magon
  * @version 1.0
  * @since 2013/11/20
  */
-public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Body<C, F, J>>
-		extends Component<C, BodyAttributes, F, NoEvents, J>
+public class Body<F extends BodyFeatures, J extends Body<F, J>>
+		extends Component<GlobalChildren, BodyAttributes, F, NoEvents, J>
 		implements PageChildren, HtmlChildren, LayoutHandler, ContainerType
 {
 	private static final long serialVersionUID = 1L;
@@ -70,7 +71,7 @@ public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Bo
 	 * If this body has rendered the scripts on itself
 	 */
 	private boolean renderedScripts;
-	
+
 	/**
 	 * Instantiates an empty body
 	 */
@@ -78,7 +79,7 @@ public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Bo
 	{
 		this(null);
 	}
-	
+
 	/**
 	 * Constructs a new Body with the given Page input
 	 *
@@ -94,29 +95,6 @@ public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Bo
 		setID("body");
 	}
 
-	/**
-	 * If the scripts have been rendered
-	 *
-	 * @return
-	 */
-	protected boolean isRenderedScripts()
-	{
-		return renderedScripts;
-	}
-	
-	/**
-	 * If the scripts have been rendered
-	 *
-	 * @param renderedScripts
-	 *
-	 * @return
-	 */
-	protected Body setRenderedScripts(boolean renderedScripts)
-	{
-		this.renderedScripts = renderedScripts;
-		return this;
-	}
-	
 	@Override
 	public boolean equals(Object o)
 	{
@@ -132,10 +110,33 @@ public class Body<C extends GlobalChildren, F extends BodyFeatures, J extends Bo
 		{
 			return false;
 		}
-		Body<?, ?, ?> body = (Body<?, ?, ?>) o;
+		Body<?, ?> body = (Body<?, ?>) o;
 		return isRenderedScripts() == body.isRenderedScripts();
 	}
-	
+
+	/**
+	 * If the scripts have been rendered
+	 *
+	 * @return
+	 */
+	protected boolean isRenderedScripts()
+	{
+		return renderedScripts;
+	}
+
+	/**
+	 * If the scripts have been rendered
+	 *
+	 * @param renderedScripts
+	 *
+	 * @return
+	 */
+	protected Body setRenderedScripts(boolean renderedScripts)
+	{
+		this.renderedScripts = renderedScripts;
+		return this;
+	}
+
 	@Override
 	public int hashCode()
 	{

@@ -27,7 +27,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author MMagon
  */
-public class BodyTest extends BaseTestClass
+public class BodyTest
+		extends BaseTestClass
 {
 
 	private Page p;
@@ -62,12 +63,9 @@ public class BodyTest extends BaseTestClass
 		WebReference.setIsLocal(true);
 		System.out.println(p.toString(true));
 		assertEquals(
-				"<!DOCTYPE html>\n" + "<html>\n" + "\t<body id=\"body\">\n" + "\t\t<!-- meh -->\n" + "\t\t<!-- Priority [First] Values " +
-						"-->\n" + "\t\t<script src=\"bower_components/jquery-3/dist/jquery.min.js\" type=\"text/javascript\"></script>\n"
-						+ "\t\t<script src=\"jwscr\" type=\"application/javascript\"></script>\n" + "\t\t<script src=\"jwjs\" " +
-						"type=\"application/javascript\"></script>\n" + "\t</body>\n" + "</html>",
+				"<!DOCTYPE html>\n" + "<html>\n" + "\t<body id=\"body\">\n" + "\t\t<!-- meh -->\n" + "\t\t<script src=\"bower_components/jquery-3/dist/jquery.min.js\" type=\"text/javascript\"></script>\n" + "\t\t<script src=\"jwscr\" type=\"application/javascript\"></script>\n" + "\t\t<script src=\"jwjs\" type=\"application/javascript\"></script>\n" + "\t</body>\n" + "</html>",
 				p.toString(true)
-						.toString());
+				 .toString());
 	}
 
 	@Test
@@ -79,11 +77,8 @@ public class BodyTest extends BaseTestClass
 		WebReference.setIsLocal(false);
 		System.out.println(p.toString(true));
 		assertEquals(
-				"<!DOCTYPE html>\n" + "<html>\n" + "\t<body id=\"body\">\n" + "\t\t<!-- meh -->\n" + "\t\t<!-- Priority [First] Values " +
-						"-->\n" + "\t\t<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js\" " +
-						"type=\"text/javascript\"></script>\n" + "\t\t<script src=\"jwscr\" type=\"application/javascript\"></script>\n" +
-						"\t\t<script src=\"jwjs\" type=\"application/javascript\"></script>\n" + "\t</body>\n" + "</html>",
+				"<!DOCTYPE html>\n" + "<html>\n" + "\t<body id=\"body\">\n" + "\t\t<!-- meh -->\n" + "\t\t<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js\" type=\"text/javascript\"></script>\n" + "\t\t<script src=\"jwscr\" type=\"application/javascript\"></script>\n" + "\t\t<script src=\"jwjs\" type=\"application/javascript\"></script>\n" + "\t</body>\n" + "</html>",
 				p.toString(true)
-						.toString());
+				 .toString());
 	}
 }

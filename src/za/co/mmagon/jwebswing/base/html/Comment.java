@@ -16,8 +16,9 @@
  */
 package za.co.mmagon.jwebswing.base.html;
 
-import za.co.mmagon.jwebswing.Component;
+import za.co.mmagon.jwebswing.base.ComponentHierarchyBase;
 import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
+import za.co.mmagon.jwebswing.base.html.interfaces.GlobalChildren;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.children.*;
 import za.co.mmagon.jwebswing.base.html.interfaces.events.NoEvents;
@@ -30,12 +31,12 @@ import za.co.mmagon.jwebswing.utilities.TextUtilities;
  * @author GedMarc
  */
 public class Comment<J extends Comment<J>>
-		extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
-		implements HtmlChildren, HeadChildren, ImageMapChildren, BodyChildren
+		extends ComponentHierarchyBase<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+		implements HtmlChildren, HeadChildren, ImageMapChildren, BodyChildren, GlobalChildren, PageChildren
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Adds the specified comment in a comment block for HTML
 	 * <p>
@@ -47,20 +48,21 @@ public class Comment<J extends Comment<J>>
 		super(ComponentTypes.Comment);
 		setText(comment);
 	}
-	
+
 	/**
 	 * Over-rides the render HTML tag
 	 * <p>
 	 *
-	 * @param tabCount The specified tab count
-	 *                 <p>
+	 * @param tabCount
+	 * 		The specified tab count
+	 * 		<p>
 	 *
 	 * @return A customized string for comments
 	 */
 	@Override
 	protected StringBuilder renderHTML(int tabCount)
 	{
-		if(getText(0).length() == 0)
+		if (getText(0).length() == 0)
 		{
 			return new StringBuilder();
 		}

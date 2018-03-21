@@ -13,7 +13,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
-class CSSLinksInsertPageConfigurator extends RequirementsPriorityAbstractInsertPageConfigurator
+@SuppressWarnings("unused")
+class CSSLinksInsertPageConfigurator
+		extends RequirementsPriorityAbstractInsertPageConfigurator
 {
 	public CSSLinksInsertPageConfigurator()
 	{
@@ -21,7 +23,6 @@ class CSSLinksInsertPageConfigurator extends RequirementsPriorityAbstractInsertP
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public Page<?> configure(Page<?> page)
 	{
 		if (!page.isConfigured())
@@ -29,9 +30,12 @@ class CSSLinksInsertPageConfigurator extends RequirementsPriorityAbstractInsertP
 			renderBeforeLinks(page);
 			for (RequirementsPriority requirementsPriority : RequirementsPriority.values())
 			{
-				page.getHead().getChildren().addAll(getAllCssLinks(page, requirementsPriority));
+				page.getHead()
+				    .getChildren()
+				    .addAll(getAllCssLinks(page, requirementsPriority));
 			}
-			for (Object o : page.getHead().getChildren())
+			for (Object o : page.getHead()
+			                    .getChildren())
 			{
 				ComponentHierarchyBase headObject = (ComponentHierarchyBase) o;
 				headObject.preConfigure();
@@ -41,9 +45,10 @@ class CSSLinksInsertPageConfigurator extends RequirementsPriorityAbstractInsertP
 		return page;
 	}
 
-	private void renderBeforeLinks(Page page)
+	private void renderBeforeLinks(Page<?> page)
 	{
-		Set<Class<? extends RenderBeforeLinks>> renderBeforeScripts = GuiceContext.reflect().getSubTypesOf(RenderBeforeLinks.class);
+		Set<Class<? extends RenderBeforeLinks>> renderBeforeScripts = GuiceContext.reflect()
+		                                                                          .getSubTypesOf(RenderBeforeLinks.class);
 		List<RenderBeforeLinks> renderB = new ArrayList<>();
 		for (Class<? extends RenderBeforeLinks> renderBeforeScript : renderBeforeScripts)
 		{
@@ -54,18 +59,25 @@ class CSSLinksInsertPageConfigurator extends RequirementsPriorityAbstractInsertP
 		Paragraph before = new Paragraph().setTextOnly(true);
 		for (RenderBeforeLinks render : renderB)
 		{
-			before.setText(before.getText(0).toString() + render.render().toString());
+			before.setText(before.getText(0)
+			                     .toString() + render.render()
+			                                         .toString());
 		}
-		if (before.getText(0).toString().trim().length() > 0)
+		if (before.getText(0)
+		          .toString()
+		          .trim()
+		          .length() > 0)
 		{
-			page.getHead().add(before);
+			page.getHead()
+			    .add(before);
 		}
 	}
 
-	private void renderAfterLinks(Page page)
+	private void renderAfterLinks(Page<?> page)
 	{
 		//After
-		Set<Class<? extends RenderAfterLinks>> renderAfterLinks = GuiceContext.reflect().getSubTypesOf(RenderAfterLinks.class);
+		Set<Class<? extends RenderAfterLinks>> renderAfterLinks = GuiceContext.reflect()
+		                                                                      .getSubTypesOf(RenderAfterLinks.class);
 		List<RenderAfterLinks> renderA = new ArrayList<>();
 		for (Class<? extends RenderAfterLinks> renderBeforeScript : renderAfterLinks)
 		{
@@ -76,11 +88,17 @@ class CSSLinksInsertPageConfigurator extends RequirementsPriorityAbstractInsertP
 		Paragraph after = new Paragraph().setTextOnly(true);
 		for (RenderAfterLinks render : renderA)
 		{
-			after.setText(after.getText(0).toString() + render.render().toString());
+			after.setText(after.getText(0)
+			                   .toString() + render.render()
+			                                       .toString());
 		}
-		if (after.getText(0).toString().trim().length() > 0)
+		if (after.getText(0)
+		         .toString()
+		         .trim()
+		         .length() > 0)
 		{
-			page.getHead().add(after);
+			page.getHead()
+			    .add(after);
 		}
 	}
 }

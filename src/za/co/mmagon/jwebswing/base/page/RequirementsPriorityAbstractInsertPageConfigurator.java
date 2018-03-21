@@ -16,7 +16,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-abstract class RequirementsPriorityAbstractInsertPageConfigurator extends PageConfigurator
+abstract class RequirementsPriorityAbstractInsertPageConfigurator
+		extends PageConfigurator
 {
 
 	/**
@@ -31,13 +32,13 @@ abstract class RequirementsPriorityAbstractInsertPageConfigurator extends PageCo
 	 * @param javascript
 	 * 		to return JavaScript or not
 	 */
-	protected List<ComponentHierarchyBase> getPriorityRequirements(Page page, RequirementsPriority priority, List<ComponentHierarchyBase> input, boolean css, boolean javascript)
+	List<ComponentHierarchyBase<?, ?, ?, ?, ?>> getPriorityRequirements(Page<?> page, RequirementsPriority priority, List<ComponentHierarchyBase<?, ?, ?, ?, ?>> input, boolean css, boolean javascript)
 	{
-		Set<ComponentHierarchyBase> requirements = new LinkedHashSet<>();
+		Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> requirements = new LinkedHashSet<>();
 		if (css)
 		{
-			List<CSSLink> links = getAllCssLinks(page, priority);
-			for (CSSLink link : links)
+			List<CSSLink<?>> links = getAllCssLinks(page, priority);
+			for (CSSLink<?> link : links)
 			{
 				if (!input.contains(link))
 				{
@@ -47,7 +48,7 @@ abstract class RequirementsPriorityAbstractInsertPageConfigurator extends PageCo
 		}
 		if (javascript)
 		{
-			Set<Script> scripts = getAllScripts(page, priority);
+			Set<Script<?>> scripts = getAllScripts(page, priority);
 			for (Script script : scripts)
 			{
 				if (!input.contains(script))
@@ -67,18 +68,19 @@ abstract class RequirementsPriorityAbstractInsertPageConfigurator extends PageCo
 	 *
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	@NotNull
-	protected List<CSSLink> getAllCssLinks(Page page, @NotNull RequirementsPriority priority)
+	List<CSSLink<?>> getAllCssLinks(Page<?> page, @NotNull RequirementsPriority priority)
 	{
-		List<CSSReference> allReferences = new ArrayList<>(page.getBody().getCssReferencesAll(priority));
+		List<CSSReference> allReferences = new ArrayList<>(page.getBody()
+		                                                       .getCssReferencesAll(priority));
 		allReferences.sort(WebReference.getDummyReference());
-		ArrayList<CSSLink> allLinks = new ArrayList<>();
+		ArrayList<CSSLink<?>> allLinks = new ArrayList<>();
 
 		for (CSSReference reference : allReferences)
 		{
-			CSSLink link = new CSSLink(reference);
-			if (reference.getSpecifiedClassName() != null && !reference.getSpecifiedClassName().isEmpty())
+			CSSLink<?> link = new CSSLink<>(reference);
+			if (reference.getSpecifiedClassName() != null && !reference.getSpecifiedClassName()
+			                                                           .isEmpty())
 			{
 				link.addClass(reference.getSpecifiedClassName());
 			}
@@ -98,12 +100,12 @@ abstract class RequirementsPriorityAbstractInsertPageConfigurator extends PageCo
 	 *
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
-	protected Set<Script> getAllScripts(Page page, RequirementsPriority priority)
+	Set<Script<?>> getAllScripts(Page<?> page, RequirementsPriority priority)
 	{
-		List<JavascriptReference> allJavascripts = new ArrayList<>(page.getBody().getJavascriptReferencesAll(priority));
+		List<JavascriptReference> allJavascripts = new ArrayList<>(page.getBody()
+		                                                               .getJavascriptReferencesAll(priority));
 		allJavascripts.sort(WebReference.getDummyReference());
-		Set<Script> allScripts = new LinkedHashSet<>();
+		Set<Script<?>> allScripts = new LinkedHashSet<>();
 		for (JavascriptReference reference : allJavascripts)
 		{
 			Script script = new Script(reference);

@@ -8,7 +8,8 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.RequirementsPriority;
 import java.util.ArrayList;
 import java.util.List;
 
-class TopShelfScriptsInsertPageConfigurator extends RequirementsPriorityAbstractInsertPageConfigurator
+class TopShelfScriptsInsertPageConfigurator
+		extends RequirementsPriorityAbstractInsertPageConfigurator
 {
 	public TopShelfScriptsInsertPageConfigurator()
 	{
@@ -21,13 +22,15 @@ class TopShelfScriptsInsertPageConfigurator extends RequirementsPriorityAbstract
 	{
 		if (!page.isConfigured())
 		{
-			List<ComponentHierarchyBase> reqs = getPriorityRequirements(page, RequirementsPriority.Top_Shelf, new ArrayList<>(),
-			                                                            true, true);
+			List<ComponentHierarchyBase<?, ?, ?, ?, ?>> reqs = getPriorityRequirements(page, RequirementsPriority.Top_Shelf, new ArrayList<>(), true, true);
 			if (!reqs.isEmpty())
 			{
-				page.getHead().add(new Comment("Priority [" + RequirementsPriority.Top_Shelf + "] Values"));
+				page.getHead()
+				    .add(new Comment("Priority [" + RequirementsPriority.Top_Shelf + "] Values"));
 			}
-			page.getHead().getChildren().addAll(reqs);
+			page.getHead()
+			    .getChildren()
+			    .addAll(reqs);
 		}
 		return page;
 	}
