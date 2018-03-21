@@ -53,7 +53,6 @@ import java.util.Objects;
  * .<p>
  * <p>
  *
- * @param <C>
  * @param <F>
  * 		Features Base
  * @param <J>
