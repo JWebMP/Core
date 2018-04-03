@@ -35,10 +35,14 @@ import java.util.*;
  * @author GedMarc
  * @since 04 May 2015
  */
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY,
+		getterVisibility = JsonAutoDetect.Visibility.NONE,
+		setterVisibility = JsonAutoDetect.Visibility.NONE)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @RequestScoped
-public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J> implements IAjaxCall<J>
+public class AjaxCall<J extends AjaxCall<J>>
+		extends JavaScriptPart<J>
+		implements IAjaxCall<J>
 {
 
 	private static final long serialVersionUID = 1L;
@@ -87,6 +91,10 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J> implement
 	 * The class to create
 	 */
 	private String className;
+	/**
+	 * The given hash bang
+	 */
+	private String hashBang;
 
 	/**
 	 * JSon Jackson Constructor
@@ -119,11 +127,62 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J> implement
 		this.eventTypeFrom = EventTypes.valueOf(eventTypeFrom);
 	}
 
+	/**
+	 * Returns a list of variable angular watchers to apply on the ajax call.
+	 * Good for on binding changes
+	 *
+	 * @return
+	 */
+	public Set<AngularVariableWatcher> getVariableWatchers()
+	{
+		if (variableWatchers == null)
+		{
+			variableWatchers = new LinkedHashSet<>();
+		}
+		return variableWatchers;
+	}
+
+	/**
+	 * Sets the variable watchers list to a new list
+	 *
+	 * @param variableWatchers
+	 *
+	 * @return
+	 */
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setVariableWatchers(Set<AngularVariableWatcher> variableWatchers)
+	{
+		this.variableWatchers = variableWatchers;
+		return (J) this;
+	}
+
+	/**
+	 * The given hash bang
+	 *
+	 * @return
+	 */
+	public String getHashBang()
+	{
+		return hashBang;
+	}
+
+	/**
+	 * The given hash bang
+	 *
+	 * @param hashBang
+	 */
+	public void setHashBang(String hashBang)
+	{
+		this.hashBang = hashBang;
+	}
+
 	@Override
 	public final String getComponentId()
 	{
 		return componentId;
 	}
+
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -236,7 +295,8 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J> implement
 	{
 		for (AngularJsonVariable next : getVariableData())
 		{
-			if (next.getVariableName().equals(name))
+			if (next.getVariableName()
+			        .equals(name))
 			{
 				return next;
 			}
@@ -302,33 +362,5 @@ public class AjaxCall<J extends AjaxCall<J>> extends JavaScriptPart<J> implement
 		return (J) this;
 	}
 
-	/**
-	 * Returns a list of variable angular watchers to apply on the ajax call.
-	 * Good for on binding changes
-	 *
-	 * @return
-	 */
-	public Set<AngularVariableWatcher> getVariableWatchers()
-	{
-		if (variableWatchers == null)
-		{
-			variableWatchers = new LinkedHashSet<>();
-		}
-		return variableWatchers;
-	}
 
-	/**
-	 * Sets the variable watchers list to a new list
-	 *
-	 * @param variableWatchers
-	 *
-	 * @return
-	 */
-	@NotNull
-	@SuppressWarnings("unchecked")
-	public J setVariableWatchers(Set<AngularVariableWatcher> variableWatchers)
-	{
-		this.variableWatchers = variableWatchers;
-		return (J) this;
-	}
 }

@@ -45,24 +45,17 @@ import java.util.logging.Logger;
  * @author Marc Magon
  */
 @Singleton
-public class AjaxReceiverServlet extends JWDefaultServlet
+public class AjaxReceiverServlet
+		extends JWDefaultServlet
 {
 
-	private static final Logger log = LogFactory.getInstance().getLogger("AJAXServlet");
+	private static final Logger log = LogFactory.getInstance()
+	                                            .getLogger("AJAXServlet");
 	private static final long serialVersionUID = 1L;
 
 	public AjaxReceiverServlet()
 	{
 		//Quick construction
-	}
-
-	@SiteInterception
-	@AjaxCallInterception
-	protected void intercept()
-	{
-		/**
-		 * Intercepted with the annotations
-		 */
 	}
 
 	/**
@@ -109,44 +102,45 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 			}
 
 			triggerEvent.fireEvent(ajaxCall, ajaxResponse);
-			ajaxResponse.getComponents().forEach(a ->
-			                                     {
-				                                     ComponentHierarchyBase c = (ComponentHierarchyBase) a;
-				                                     c.preConfigure();
-			                                     });
+			ajaxResponse.getComponents()
+			            .forEach(a ->
+			                     {
+				                     ComponentHierarchyBase c = (ComponentHierarchyBase) a;
+				                     c.preConfigure();
+			                     });
 			output = new StringBuilder(ajaxResponse.toString());
 		}
 		catch (InvalidRequestException ie)
 		{
 			AjaxResponse ajaxResponse = new AjaxResponse();
 			ajaxResponse.setSuccess(false);
-			AjaxResponseReaction arr = new AjaxResponseReaction("Invalid Request Value",
-			                                                    "A value in the request was found to be incorrect.<br>"
-					                                                    + ie.getMessage(), ReactionType.DialogDisplay);
+			AjaxResponseReaction arr = new AjaxResponseReaction("Invalid Request Value", "A value in the request was found to be incorrect.<br>" + ie.getMessage(),
+			                                                    ReactionType.DialogDisplay);
 			arr.setResponseType(AjaxResponseType.Danger);
 			ajaxResponse.addReaction(arr);
 			output = new StringBuilder(ajaxResponse.toString());
-			log.log(Level.SEVERE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Exception]-[Invalid Request]", ie);
+			log.log(Level.SEVERE, "[SessionID]-[" + request.getSession()
+			                                               .getId() + "];" + "[Exception]-[Invalid Request]", ie);
 		}
 		catch (MissingComponentException mce)
 		{
 			AjaxResponse ajaxResponse = new AjaxResponse();
 			ajaxResponse.setSuccess(false);
-			AjaxResponseReaction arr = new AjaxResponseReaction("Invalid Request Value",
-			                                                    "The specified Component ID does not seem linked to the page.<br>"
-					                                                    + mce.getMessage(), ReactionType.DialogDisplay);
+			AjaxResponseReaction arr = new AjaxResponseReaction("Invalid Request Value", "The specified Component ID does not seem linked to the page.<br>" + mce.getMessage(),
+			                                                    ReactionType.DialogDisplay);
 			arr.setResponseType(AjaxResponseType.Danger);
 			ajaxResponse.addReaction(arr);
 			output = new StringBuilder(ajaxResponse.toString());
-			log.log(Level.SEVERE, "[SessionID]-[" + request.getSession().getId() + "];" + "[Exception]-[Missing Component]", mce);
+			log.log(Level.SEVERE, "[SessionID]-[" + request.getSession()
+			                                               .getId() + "];" + "[Exception]-[Missing Component]", mce);
 		}
 		catch (Exception T)
 		{
 			AjaxResponse ajaxResponse = new AjaxResponse();
 			ajaxResponse.setSuccess(false);
 			AjaxResponseReaction arr = new AjaxResponseReaction("Unknown Error",
-			                                                    "An AJAX call resulted in an unknown server error<br>"
-					                                                    + T.getMessage() + "<br>" + TextUtilities.stackTraceToString(T), ReactionType.DialogDisplay);
+			                                                    "An AJAX call resulted in an unknown server error<br>" + T.getMessage() + "<br>" + TextUtilities.stackTraceToString(
+					                                                    T), ReactionType.DialogDisplay);
 			arr.setResponseType(AjaxResponseType.Danger);
 			ajaxResponse.addReaction(arr);
 			output = new StringBuilder(ajaxResponse.toString());
@@ -164,17 +158,22 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 		try
 		{
 			AjaxCall call = GuiceContext.getInstance(AjaxCall.class);
-			Class eventClass = Class.forName(call.getClassName().replace(StaticStrings.CHAR_UNDERSCORE, StaticStrings.CHAR_DOT));
+			Class eventClass = Class.forName(call.getClassName()
+			                                     .replace(StaticStrings.CHAR_UNDERSCORE, StaticStrings.CHAR_DOT));
 			triggerEvent = (Event) GuiceContext.getInstance(eventClass);
+			triggerEvent.setID(call.getEventId());
 		}
 		catch (ClassNotFoundException cnfe)
 		{
-			Set<Class<? extends Event>> events = GuiceContext.reflect().getSubTypesOf(Event.class);
+			Set<Class<? extends Event>> events = GuiceContext.reflect()
+			                                                 .getSubTypesOf(Event.class);
 			events.removeIf(event -> Modifier.isAbstract(event.getModifiers()));
 			for (Class<? extends Event> event : events)
 			{
 				Event instance = GuiceContext.getInstance(event);
-				if (instance.getID().equals(GuiceContext.getInstance(AjaxCall.class).getEventId()))
+				if (instance.getID()
+				            .equals(GuiceContext.getInstance(AjaxCall.class)
+				                                .getEventId()))
 				{
 					triggerEvent = instance;
 					break;
@@ -187,5 +186,14 @@ public class AjaxReceiverServlet extends JWDefaultServlet
 			}
 		}
 		return triggerEvent;
+	}
+
+	@SiteInterception
+	@AjaxCallInterception
+	protected void intercept()
+	{
+		/**
+		 * Intercepted with the annotations
+		 */
 	}
 }

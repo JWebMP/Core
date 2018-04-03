@@ -135,8 +135,9 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
         article.value = eventStuff;
         article.eventId = eventId;
         article.className = className;
+        if (window.location.hash)
+            article.hashbang = window.location.hash.substr(1);
         article.variableData = [];
-
 
         for (var i = 0; i < dataVariables.length; i++) {
             var arrItem = dataVariables[i];
@@ -261,8 +262,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
             newEvent.target = $event.target.id;
             newEvent.which = $event.which;
         }
-        else
-        {
+        else {
             newEvent.type = 'async';
             newEvent.componentID = 'body';
             newEvent.target = 'body';

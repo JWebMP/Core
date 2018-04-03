@@ -687,7 +687,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	}
 
 	/**
-	 * Renders the text of this component before children or after
+	 * Renders the text of this component before children or after. Default true
 	 *
 	 * @param renderTextBeforeChildren
 	 *
@@ -701,14 +701,9 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	}
 
 	@Override
-	public void preConfigure()
+	public boolean equals(Object o)
 	{
-		if (!isInitialized())
-		{
-			init();
-		}
-		super.preConfigure();
-
+		return super.equals(o);
 	}
 
 	@Override
@@ -718,8 +713,13 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	}
 
 	@Override
-	public boolean equals(Object o)
+	public void preConfigure()
 	{
-		return super.equals(o);
+		if (!isInitialized())
+		{
+			init();
+		}
+		super.preConfigure();
+
 	}
 }
