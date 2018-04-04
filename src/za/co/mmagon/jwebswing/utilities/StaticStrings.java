@@ -52,6 +52,7 @@ public interface StaticStrings
 	char CHAR_UNDERSCORE = '_';
 	char CHAR_DOLLAR = '$';
 	char CHAR_DASH = '-';
+	char CHAR_QUESTIONMARK = '?';
 	char CHAR_SLASH = '/';
 	char CHAR_BACKSLASH = '\\';
 	char CHAR_HASH = '#';

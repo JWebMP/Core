@@ -40,7 +40,8 @@ import java.util.Map.Entry;
  * @since 27 Apr 2016
  */
 @RequestScoped
-public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
+public class AjaxResponse<J extends AjaxResponse<J>>
+		extends JavaScriptPart<J>
 {
 
 	private static final long serialVersionUID = 1L;
@@ -87,7 +88,7 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 	 * An additional list of features that can fire
 	 */
 	@JsonIgnore
-	private Set<Feature> features;
+	private Set<Feature<?, ?>> features;
 
 	/**
 	 * A list of local storage items and their keys
@@ -112,7 +113,8 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 		getFeatures().forEach(feature ->
 		                      {
 			                      feature.preConfigure();
-			                      list.add(feature.renderJavascript().toString());
+			                      list.add(feature.renderJavascript()
+			                                      .toString());
 		                      });
 		return list;
 	}
@@ -122,7 +124,7 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 	 *
 	 * @return
 	 */
-	public Set<Feature> getFeatures()
+	public Set<Feature<?, ?>> getFeatures()
 	{
 		if (features == null)
 		{
@@ -132,17 +134,13 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 	}
 
 	/**
-	 * Adds a DTO to the response call
+	 * Sets features assigned to the response
 	 *
-	 * @param name
-	 * 		The name of the variable
-	 * @param object
-	 * 		The DTO to pass through
+	 * @param features
 	 */
-	public void addDto(String name, Serializable object)
+	public void setFeatures(Set<Feature<?, ?>> features)
 	{
-		AngularJsonVariable variable = new AngularJsonVariable(name, object);
-		getAngularVariables().add(variable);
+		this.features = features;
 	}
 
 	/**
@@ -157,6 +155,30 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 	{
 		AngularJsonVariable variable = new AngularJsonVariable(name, object);
 		getAngularVariables().add(variable);
+	}
+
+	/**
+	 * Returns the list of angular variables from the server
+	 *
+	 * @return
+	 */
+	public Set<AngularJsonVariable> getAngularVariables()
+	{
+		if (angularVariables == null)
+		{
+			angularVariables = new LinkedHashSet<>();
+		}
+		return angularVariables;
+	}
+
+	/**
+	 * Sets the list of angular variables
+	 *
+	 * @param angularVariables
+	 */
+	public void setAngularVariables(Set<AngularJsonVariable> angularVariables)
+	{
+		this.angularVariables = angularVariables;
 	}
 
 	/**
@@ -195,13 +217,31 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 	}
 
 	/**
-	 * Sets features assigned to the response
+	 * Returns the list of components sending back
 	 *
-	 * @param features
+	 * @return
 	 */
-	public void setFeatures(Set<Feature> features)
+	public Set<ComponentHierarchyBase> getComponents()
 	{
-		this.features = features;
+		if (components == null)
+		{
+			components = new TreeSet<>();
+		}
+		return components;
+	}
+
+	/**
+	 * Returns a list of the needed component updates
+	 *
+	 * @return
+	 */
+	public Set<AjaxComponentUpdates> getComponentUpdates()
+	{
+		if (componentUpdates == null)
+		{
+			componentUpdates = new LinkedHashSet<>();
+		}
+		return componentUpdates;
 	}
 
 	/**
@@ -215,6 +255,20 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 	}
 
 	/**
+	 * Returns the list of client reactions available
+	 *
+	 * @return
+	 */
+	public Set<AjaxResponseReaction> getReactions()
+	{
+		if (reactions == null)
+		{
+			reactions = new LinkedHashSet<>();
+		}
+		return reactions;
+	}
+
+	/**
 	 * Returns all the event queries from the components
 	 *
 	 * @return
@@ -224,7 +278,8 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 	protected Set<String> getEventQueries()
 	{
 		Set<String> list = new LinkedHashSet<>();
-		getEvents().forEach(event -> list.add(event.renderJavascript().toString()));
+		getEvents().forEach(event -> list.add(event.renderJavascript()
+		                                           .toString()));
 		return list;
 	}
 
@@ -273,20 +328,6 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 	}
 
 	/**
-	 * Returns the list of components sending back
-	 *
-	 * @return
-	 */
-	public Set<ComponentHierarchyBase> getComponents()
-	{
-		if (components == null)
-		{
-			components = new TreeSet<>();
-		}
-		return components;
-	}
-
-	/**
 	 * Returns all the CSS references for all the components
 	 *
 	 * @param component
@@ -328,7 +369,8 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 	public StringBuilder getCssRenders(ComponentStyleBase component)
 	{
 		StringBuilder cssRender = new StringBuilder();
-		cssRender.append(component.renderCss(0).toString());
+		cssRender.append(component.renderCss(0)
+		                          .toString());
 		return cssRender;
 	}
 
@@ -409,7 +451,8 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 	public Set<String> getJsRenders(ComponentHierarchyBase component)
 	{
 		Set<String> jsRenders = new LinkedHashSet<>();
-		jsRenders.add(component.renderJavascriptAll().toString());
+		jsRenders.add(component.renderJavascriptAll()
+		                       .toString());
 		return jsRenders;
 	}
 
@@ -417,7 +460,8 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 	{
 		if (Event.class.isAssignableFrom(next.getClass()))
 		{
-			for (Object o : Event.class.cast(next).getRunEvents())
+			for (Object o : Event.class.cast(next)
+			                           .getRunEvents())
 			{
 				Event next1 = (Event) o;
 				next1.preConfigure();
@@ -435,20 +479,6 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 			StringBuilder query = (StringBuilder) o;
 			output.add(query.toString());
 		}
-	}
-
-	/**
-	 * Returns the list of client reactions available
-	 *
-	 * @return
-	 */
-	public Set<AjaxResponseReaction> getReactions()
-	{
-		if (reactions == null)
-		{
-			reactions = new LinkedHashSet<>();
-		}
-		return reactions;
 	}
 
 	/**
@@ -489,51 +519,14 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 		return getComponentUpdates();
 	}
 
-	/**
-	 * Returns a list of the needed component updates
-	 *
-	 * @return
-	 */
-	public Set<AjaxComponentUpdates> getComponentUpdates()
-	{
-		if (componentUpdates == null)
-		{
-			componentUpdates = new LinkedHashSet<>();
-		}
-		return componentUpdates;
-	}
-
-	/**
-	 * Returns the list of angular variables from the server
-	 *
-	 * @return
-	 */
-	public Set<AngularJsonVariable> getAngularVariables()
-	{
-		if (angularVariables == null)
-		{
-			angularVariables = new LinkedHashSet<>();
-		}
-		return angularVariables;
-	}
-
-	/**
-	 * Sets the list of angular variables
-	 *
-	 * @param angularVariables
-	 */
-	public void setAngularVariables(Set<AngularJsonVariable> angularVariables)
-	{
-		this.angularVariables = angularVariables;
-	}
-
 	@Override
 	@SuppressWarnings("unchecked")
 	public String toString()
 	{
 		for (ComponentHierarchyBase component : getComponents())
 		{
-			for (Object o : component.getAngularObjectsAll().entrySet())
+			for (Object o : component.getAngularObjectsAll()
+			                         .entrySet())
 			{
 				Entry<String, Serializable> object = (Entry<String, Serializable>) o;
 				String key = object.getKey();
@@ -542,6 +535,20 @@ public class AjaxResponse<J extends AjaxResponse<J>> extends JavaScriptPart<J>
 			}
 		}
 		return super.toString();
+	}
+
+	/**
+	 * Adds a DTO to the response call
+	 *
+	 * @param name
+	 * 		The name of the variable
+	 * @param object
+	 * 		The DTO to pass through
+	 */
+	public void addDto(String name, Serializable object)
+	{
+		AngularJsonVariable variable = new AngularJsonVariable(name, object);
+		getAngularVariables().add(variable);
 	}
 
 	/**
