@@ -254,7 +254,7 @@
     </issueManagement>
     <ciManagement>
         <system>TeamCity</system>
-        <url>http://jwebswing.com/teamcity</url>
+        <url>http://jwebmp.com/teamcity</url>
     </ciManagement>
     <reporting>
         <plugins>

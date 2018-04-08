@@ -69,8 +69,8 @@ class SiteIntercepters
 		outs.sort(Comparator.comparing(DefaultIntercepter::sortOrder));
 		for (SiteCallInterceptor out : outs)
 		{
-			LOG.log(Level.FINE, "Site Interception Occuring : {0}", out.getClass()
-			                                                           .getCanonicalName());
+			LOG.log(Level.FINER, "Site Interception Occuring : {0}", out.getClass()
+			                                                            .getCanonicalName());
 			out.intercept();
 		}
 		LOG.finer("Interception of Site Call Complete");
