@@ -52,22 +52,26 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.ComponentTypes;
  * The align attribute not supported in HTML5.
  * <p>
  *
- * @param <C> The Children Allowed
- * @param <A> The allowed attributes for the component
- * @param <F> The allowed features on the div type
- * @param <E> The allowed events
- * @param <J> The Clonable object
+ * @param <C>
+ * 		The Children Allowed
+ * @param <A>
+ * 		The allowed attributes for the component
+ * @param <F>
+ * 		The allowed features on the div type
+ * @param <E>
+ * 		The allowed events
+ * @param <J>
+ * 		The Clonable object
  *
  * @author Marc Magon
  */
 public class Div<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Div<C, A, F, E, J>>
 		extends Component<C, A, F, E, J>
-		implements BodyChildren, ImageMapChildren, AreaChildren, LayoutHandler,
-		ListItemChildren
+		implements BodyChildren, ImageMapChildren, AreaChildren, LayoutHandler, ListItemChildren, GlobalChildren
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Constructs a new Div Object
 	 */
@@ -75,7 +79,7 @@ public class Div<C extends GlobalChildren, A extends Enum & AttributeDefinitions
 	{
 		super(ComponentTypes.Div);
 	}
-	
+
 	/**
 	 * Use a different tag for this div
 	 * <p>
@@ -86,7 +90,7 @@ public class Div<C extends GlobalChildren, A extends Enum & AttributeDefinitions
 	{
 		super(myComponent);
 	}
-	
+
 	/**
 	 * Div with in-line text
 	 *
@@ -96,6 +100,6 @@ public class Div<C extends GlobalChildren, A extends Enum & AttributeDefinitions
 	{
 		super(ComponentTypes.Div);
 		setText(text);
-		
+
 	}
 }

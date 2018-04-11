@@ -19,9 +19,10 @@ package za.co.mmagon.jwebswing.base.html;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.ComponentHTMLBase;
+import za.co.mmagon.jwebswing.base.ComponentHTMLAttributeBase;
 import za.co.mmagon.jwebswing.base.client.Browsers;
 import za.co.mmagon.jwebswing.base.client.HTMLVersions;
+import za.co.mmagon.jwebswing.base.html.attributes.NoAttributes;
 import za.co.mmagon.jwebswing.base.html.interfaces.HTMLFeatures;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoClassAttribute;
 import za.co.mmagon.jwebswing.base.html.interfaces.NoIDTag;
@@ -65,7 +66,7 @@ import za.co.mmagon.jwebswing.base.servlets.enumarations.DevelopmentEnvironments
  * @since right from the start, 2007 with radio on live
  */
 public abstract class Html<J extends Html<J>>
-		extends ComponentHTMLBase<HTMLFeatures, NoEvents, J>
+		extends ComponentHTMLAttributeBase<NoAttributes, HTMLFeatures, NoEvents, J>
 		implements NoIDTag, NoClassAttribute
 {
 
