@@ -33,7 +33,6 @@ import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.events.NoEvents;
 import com.jwebmp.base.references.CSSReference;
 import com.jwebmp.base.references.JavascriptReference;
-import com.jwebmp.base.servlets.enumarations.DevelopmentEnvironments;
 import com.jwebmp.base.servlets.interfaces.IPage;
 import net.sf.uadetector.*;
 import za.co.mmagon.guiceinjection.GuiceContext;
@@ -126,10 +125,6 @@ public class Page<J extends Page<J>>
 		getPageFields().setCompatibilityMode(compatibilityMode);
 		getPageFields().setBase(base);
 		setID("jwPage");
-		if (getRunningEnvironment().ordinal() >= DevelopmentEnvironments.QA.ordinal())
-		{
-			getPageFields().setGenerator("https://sourceforge.net/projects/jwebswing/");
-		}
 	}
 
 	/**

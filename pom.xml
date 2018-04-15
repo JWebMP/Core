@@ -2,8 +2,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>za.co.mmagon</groupId>
-    <artifactId>jwebswing</artifactId>
+    <groupId>com.jwebmp</groupId>
+    <artifactId>jwebmp-core</artifactId>
     <version>0.0.0_0</version>
     <packaging>jar</packaging>
 
@@ -199,6 +199,34 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Selenium dependencies -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>htmlunit-driver</artifactId>
+            <version>2.25</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- You will need a driver dependency for every browser you use in
+        testing. You can find the meven dependencies at
+        https://mvnrepository.com/artifact/org.seleniumhq.selenium -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>3.11.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Normally you must download an exe for each browser. This library
+        will retrieve the the necessary file and place it in the classpath for
+        selenium to use -->
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>2.2.1</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>guice-injection</artifactId>
@@ -213,17 +241,16 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>jwebswing-interception</artifactId>
+            <artifactId>jwebmp-interception</artifactId>
             <version>${project.version}</version>
         </dependency>
 
-
-        <dependency>
+        <!--<dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
             <scope>provided</scope>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
 
@@ -242,7 +269,7 @@
     </distributionManagement>
     <organization>
         <name>Marc Magon</name>
-        <url>http://www.armin.software/</url>
+        <url>https://www.jwebmp.com/</url>
     </organization>
     <scm>
         <url>https://github.com/GedMarc?tab=repositories</url>
@@ -256,6 +283,14 @@
         <system>TeamCity</system>
         <url>http://jwebmp.com/teamcity</url>
     </ciManagement>
+    <developers>
+        <developer>
+            <id>GedMarc</id>
+            <name>Marc Magon</name>
+            <email>ged_marc@hotmail.com</email>
+            <url>https://github.com/GedMarc</url>
+        </developer>
+    </developers>
     <reporting>
         <plugins>
             <plugin>
