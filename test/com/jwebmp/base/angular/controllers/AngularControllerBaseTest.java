@@ -37,7 +37,7 @@ class AngularControllerBaseTest
 				return "render";
 			}
 		};
-		Page p = getPage();
+		Page p = new Page();
 
 		p.getAngular()
 		 .getAngularWatchers()

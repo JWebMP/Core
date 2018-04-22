@@ -63,7 +63,7 @@ public class CSSImplTest
 	@Test
 	public void testBackground()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getBackground()
 		   .setBackgroundColor$(ColourNames.DarkGoldenRod);
@@ -81,7 +81,7 @@ public class CSSImplTest
 	@Test
 	public void testGetBorder()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getBorder()
 		   .setBorderBottomColor$(ColourNames.PowderBlue);
@@ -95,7 +95,7 @@ public class CSSImplTest
 	@Test
 	public void testGetColour()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getBackground()
 		   .setBackgroundColor(new ColourCSSImpl("asdf"));
@@ -109,7 +109,7 @@ public class CSSImplTest
 	@Test
 	public void testGetDisplay()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getDisplay()
 		   .setDisplay(Displays.Inline);
@@ -123,7 +123,7 @@ public class CSSImplTest
 	@Test
 	public void testGetFont()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getFont()
 		   .setFontStyle(FontStyles.Normal);
@@ -137,7 +137,7 @@ public class CSSImplTest
 	@Test
 	public void testGetDimensions()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getDimensions()
 		   .setHeight(300);
@@ -151,7 +151,7 @@ public class CSSImplTest
 	@Test
 	public void testGetList()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getList()
 		   .setListStyleType(ListStyleType.circle);
@@ -165,7 +165,7 @@ public class CSSImplTest
 	@Test
 	public void testGetMargins()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getMargins()
 		   .setMarginBottom(new MeasurementCSSImpl(0));
@@ -179,7 +179,7 @@ public class CSSImplTest
 	@Test
 	public void testGetOutline()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getOutline()
 		   .setOutlineColor$(ColourNames.AliceBlue);
@@ -193,7 +193,7 @@ public class CSSImplTest
 	@Test
 	public void testGetPadding()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getPadding()
 		   .setPaddingBottom$(PaddingSetting.Auto);
@@ -207,7 +207,7 @@ public class CSSImplTest
 	@Test
 	public void testGetTable()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getTable()
 		   .setBorderCollapse(TableBorderCollapse.Separate);
@@ -221,7 +221,7 @@ public class CSSImplTest
 	@Test
 	public void testGetText()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getText()
 		   .setTextAlign(TextAlignments.Center);
@@ -235,7 +235,7 @@ public class CSSImplTest
 	@Test
 	public void testSetBackground()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getBackground()
 		   .setBackgroundColor$(ColourNames.DarkGoldenRod);
@@ -252,7 +252,7 @@ public class CSSImplTest
 	@Test
 	public void testSetBorder()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getBackground()
 		   .setBackgroundColor$(ColourNames.DarkGoldenRod);
@@ -274,7 +274,7 @@ public class CSSImplTest
 	@Test
 	public void testSetColour()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getText()
 		   .setColor(new ColourCSSImpl("asd"));
@@ -292,7 +292,7 @@ public class CSSImplTest
 	@Test
 	public void testSetDisplay()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getDisplay()
 		   .setDisplay(Displays.Inline);
@@ -310,7 +310,7 @@ public class CSSImplTest
 	@Test
 	public void testSetFonts()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getFont()
 		   .setFontStyle(FontStyles.Normal);
@@ -328,7 +328,7 @@ public class CSSImplTest
 	@Test
 	public void testSetDimensions()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getDimensions()
 		   .setHeight(500);
@@ -346,7 +346,7 @@ public class CSSImplTest
 	@Test
 	public void testSetList()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getList()
 		   .setListStylePosition(ListStylePosition.Inherit);
@@ -364,7 +364,7 @@ public class CSSImplTest
 	@Test
 	public void testSetMargins()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getMargins()
 		   .setMarginBottom(new MeasurementCSSImpl(500));
@@ -382,7 +382,7 @@ public class CSSImplTest
 	@Test
 	public void testSetOutline()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getOutline()
 		   .setOutlineStyle(BorderStyles.Dotted);
@@ -400,7 +400,7 @@ public class CSSImplTest
 	@Test
 	public void testSetPadding()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getPadding()
 		   .setPaddingLeft$(PaddingSetting.Inherit);
@@ -418,7 +418,7 @@ public class CSSImplTest
 	@Test
 	public void testSetTables()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getTable()
 		   .setTableCaptionSide(TableCaptionSides.Bottom);
@@ -436,7 +436,7 @@ public class CSSImplTest
 	@Test
 	public void testSetText()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getText()
 		   .setColor(new ColourCSSImpl("colour"));
@@ -454,7 +454,7 @@ public class CSSImplTest
 	@Test
 	public void testSetBackgroundDeep()
 	{
-		Page p = getInstance();
+		Page p = new Page();
 		CSSImpl imp = new CSSImpl();
 		imp.getBackground()
 		   .getBackground()

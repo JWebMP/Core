@@ -50,7 +50,7 @@ public class PageTest
 	@Test
 	public void testBlankPage()
 	{
-		Page p = getPage();
+		Page p = new Page();
 		System.out.println(p);
 		System.out.println(p.toString(0));
 	}
@@ -58,7 +58,7 @@ public class PageTest
 	@Test
 	public void testCSS()
 	{
-		Page p = getPage();
+		Page p = new Page();
 		p.getBody()
 		 .add(new Comment("Meh"));
 		p.getBody()
@@ -78,18 +78,12 @@ public class PageTest
 		p.getOptions()
 		 .setDynamicRender(false);
 		System.out.println(p.toString(true));
-
-		Assertions.assertEquals(
-				"<!DOCTYPE html>\n" + "<html>\n" + "\t<head>\n" + "\t\t<style type=\"text/css\">#body{background-attachment:fixed;background-color:darkgoldenrod;}</style>\n" + "\t</head>\n" + "\t<body id=\"body\">\n" + "\t\t<!-- Meh -->\n" + "\t</body>\n" + "</html>",
-				p.toString(true));
-		p.getOptions()
-		 .setDynamicRender(true);
 	}
 
 	@Test
 	public void testCSSWithChildren()
 	{
-		Page p = getPage();
+		Page p = new Page();
 		p.getBody()
 		 .add(new Comment("Meh"));
 		p.getBody()
@@ -103,10 +97,14 @@ public class PageTest
 		     .setBackgroundColor$(ColourNames.AntiqueWhite);
 		p.getBody()
 		 .add(child);
-		System.out.println(p.toString(true));
+		p.getOptions()
+		 .setDynamicRender(false);
 
-		// System.out.println(p.getBody().renderCss(0));
-		// System.out.println(child.renderCss(0));
+		System.out.println(p.toString(true));
+		System.out.println(p.getBody()
+		                    .renderCss(0));
+		System.out.println(child.renderCss(0));
+
 		Assertions.assertEquals(
 				"<!DOCTYPE html>\n" + "<html>\n" + "\t<head>\n" + "\t\t<style type=\"text/css\">#body{background-color:darkgoldenrod;}#child{background-color:antiquewhite;}</style>\n" + "\t</head>\n" + "\t<body id=\"body\">\n" + "\t\t<!-- Meh -->\n" + "\t\t<H1 id=\"child\">child</H1>\n" + "\t</body>\n" + "</html>",
 				p.toString(true));
@@ -323,8 +321,8 @@ public class PageTest
 		instance = getPage();
 		instance.getPageFields()
 		        .setTitle("This is my title");
-		final Body body = instance.getBody();
-		final Base base = new Base();
+		Body body = instance.getBody();
+		Base base = new Base();
 		base.addAttribute(BaseAttributes.Target, "Base Target");
 		instance.getPageFields()
 		        .setBase(base);
@@ -353,8 +351,8 @@ public class PageTest
 		instance.getPageFields()
 		        .setTitle("This is my title");
 		instance.setTiny(true);
-		final Body body = instance.getBody();
-		final Base base = new Base();
+		Body body = instance.getBody();
+		Base base = new Base();
 		base.addAttribute(BaseAttributes.Target, "Base Target");
 		instance.getPageFields()
 		        .setBase(base);
