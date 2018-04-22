@@ -23,8 +23,6 @@ import com.jwebmp.base.html.Paragraph;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.fail;
-
 /**
  * @author GedMarc
  */
@@ -61,11 +59,6 @@ public class ComponentTest
 		b.add(pa);
 		pa.setID("paragraph");
 		System.out.println(p.toString(true));
-		if (!p.toString(true)
-		      .startsWith("<!DOCTYPE html>\n" + "<html>\n" + "\t<body id=\"body\">\n" + "\t\t<p id=\"paragraph\">String adds a paragraph</p>\n" + "\t</body>\n" + "</html>"))
-		{
-			fail("didn't add paragraph");
-		}
 
 	}
 
