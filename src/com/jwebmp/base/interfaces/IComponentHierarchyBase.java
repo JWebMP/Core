@@ -26,7 +26,6 @@ import com.jwebmp.base.references.CSSReference;
 import com.jwebmp.base.references.JavascriptReference;
 import com.jwebmp.htmlbuilder.css.themes.Theme;
 
-import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 
@@ -77,7 +76,7 @@ public interface IComponentHierarchyBase<C extends GlobalChildren, J extends Com
 	 *
 	 * @return
 	 */
-	Map<String, Serializable> getAngularObjectsAll();
+	Map<String, Object> getAngularObjectsAll();
 
 	/**
 	 * Returns the children ArrayList of type Component

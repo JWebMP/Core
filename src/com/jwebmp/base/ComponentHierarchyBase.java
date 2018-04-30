@@ -195,9 +195,9 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * @return
 	 */
 	@Override
-	public Map<String, Serializable> getAngularObjectsAll()
+	public Map<String, Object> getAngularObjectsAll()
 	{
-		Map<String, Serializable> map = getAngularObjects();
+		Map<String, Object> map = getAngularObjects();
 		for (ComponentHierarchyBase next : getChildrenHierarchy(true))
 		{
 			processAngularObjects(next, map);
@@ -217,7 +217,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	{
 		if (children == null)
 		{
-			children = new LinkedHashSet<>();
+			children = new java.util.concurrent.CopyOnWriteArraySet<>();
 		}
 		return children;
 	}
@@ -553,6 +553,58 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		return (J) this;
 	}
 
+	@Override
+	public J addEvent(E event)
+	{
+		if (event != null)
+		{
+			ComponentEventBase.class.cast(event)
+			                        .setComponent(this);
+		}
+		return super.addEvent(event);
+	}
+
+	/**
+	 * Finds the event in all this components and child components
+	 *
+	 * @param eventId
+	 *
+	 * @return
+	 */
+	@Override
+	@Nullable
+	public ComponentEventBase findEvent(String eventId)
+	{
+		for (ComponentHierarchyBase child : getChildren())
+		{
+			for (Object jScript : child.getEventsAll())
+			{
+				if (Event.class.cast(jScript)
+				               .getID()
+				               .equals(eventId))
+				{
+					return (ComponentEventBase) jScript;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Overrides this and all below components to set tiny false
+	 *
+	 * @param tiny
+	 *
+	 * @return super.tiny
+	 */
+	@Override
+	@NotNull
+	public J setTiny(boolean tiny)
+	{
+		getChildren().forEach(child -> child.setTiny(tiny));
+		return super.setTiny(tiny);
+	}
+
 	/**
 	 * Processes the angular objects into a map
 	 *
@@ -560,7 +612,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * @param map
 	 */
 	@SuppressWarnings("unchecked")
-	private void processAngularObjects(@NotNull ComponentHierarchyBase next, @NotNull Map<String, Serializable> map)
+	private void processAngularObjects(@NotNull ComponentHierarchyBase next, @NotNull Map<String, Object> map)
 	{
 		next.getAngularObjects()
 		    .forEach((key, value) ->
@@ -667,15 +719,15 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	}
 
 	@Override
-	public boolean equals(Object o)
-	{
-		return super.equals(o);
-	}
-
-	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
 	}
 
 	@Override
@@ -903,47 +955,6 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	{
 		ComponentHierarchyBase cloned = super.cloneComponent();
 		return (J) cloned;
-	}
-
-	/**
-	 * Finds the event in all this components and child components
-	 *
-	 * @param eventId
-	 *
-	 * @return
-	 */
-	@Override
-	@Nullable
-	public ComponentEventBase findEvent(String eventId)
-	{
-		for (ComponentHierarchyBase child : getChildren())
-		{
-			for (Object jScript : child.getEventsAll())
-			{
-				if (Event.class.cast(jScript)
-				               .getID()
-				               .equals(eventId))
-				{
-					return (ComponentEventBase) jScript;
-				}
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Overrides this and all below components to set tiny false
-	 *
-	 * @param tiny
-	 *
-	 * @return super.tiny
-	 */
-	@Override
-	@NotNull
-	public J setTiny(boolean tiny)
-	{
-		getChildren().forEach(child -> child.setTiny(tiny));
-		return super.setTiny(tiny);
 	}
 
 	/**

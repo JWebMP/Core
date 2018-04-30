@@ -140,7 +140,6 @@ public class AngularForm<J extends AngularForm<J>>
 	@NotNull
 	protected String buildValidationClass(@NotNull Input input, String prependClass)
 	{
-
 		String finalOutput = "{";
 
 		String formInputIdentifier = (prependClass.isEmpty() ? STRING_EMPTY : STRING_SPACE) + getID() + "." + input.getID() + ".";

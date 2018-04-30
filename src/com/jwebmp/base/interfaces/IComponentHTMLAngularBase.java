@@ -19,7 +19,6 @@ package com.jwebmp.base.interfaces;
 import com.jwebmp.base.ComponentBase;
 import com.jwebmp.base.angular.AngularAttributes;
 
-import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -52,14 +51,14 @@ public interface IComponentHTMLAngularBase<J extends ComponentBase>
 	 *
 	 * @return This for chain setting
 	 */
-	J addDto(String name, Serializable dataObject);
+	J addDto(String name, Object dataObject);
 
 	/**
 	 * Returns the angular objects mapped to this component
 	 *
 	 * @return
 	 */
-	Map<String, Serializable> getAngularObjects();
+	Map<String, Object> getAngularObjects();
 
 	/**
 	 * Gets an angular attribute

@@ -24,7 +24,6 @@ import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.base.servlets.enumarations.RequirementsPriority;
 
 import javax.validation.constraints.NotNull;
-import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -191,7 +190,7 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	@NotNull
 	public Set<JavascriptReference> getJavascriptReferencesAll()
 	{
-		return Collections.synchronizedSet(getJavascriptReferences());
+		return getJavascriptReferences();
 	}
 
 	/**
@@ -207,14 +206,17 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	public Set<JavascriptReference> getJavascriptReferencesAll(@NotNull RequirementsPriority priority)
 	{
 		Set<JavascriptReference> arr = new TreeSet<>();
-		for (JavascriptReference next : getJavascriptReferencesAll())
+		synchronized (getJavascriptReferencesAll())
 		{
-			if (!next.getPriority()
-			         .equals(priority) || arr.contains(next))
+			for (JavascriptReference next : getJavascriptReferencesAll())
 			{
-				continue;
+				if (!next.getPriority()
+				         .equals(priority) || arr.contains(next))
+				{
+					continue;
+				}
+				arr.add(next);
 			}
-			arr.add(next);
 		}
 		return arr;
 	}

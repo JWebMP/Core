@@ -146,7 +146,7 @@ public class Form<J extends Form<J>>
 	@Override
 	public J setID(String id)
 	{
-		addAttribute(GlobalAttributes.Name, id);
+		addAttribute("name", id);
 		return super.setID(id);
 	}
 
@@ -154,6 +154,13 @@ public class Form<J extends Form<J>>
 	public String getName()
 	{
 		return getAttribute(GlobalAttributes.Name);
+	}
+
+	@Override
+	public J setName(String name)
+	{
+		addAttribute("name", name);
+		return super.setName(name);
 	}
 
 	@Override

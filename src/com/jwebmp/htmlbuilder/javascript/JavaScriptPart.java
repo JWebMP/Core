@@ -24,6 +24,7 @@ import com.google.inject.name.Names;
 import za.co.mmagon.guiceinjection.GuiceContext;
 import za.co.mmagon.logger.LogFactory;
 
+import javax.validation.constraints.NotNull;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
@@ -43,13 +44,17 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
  * @author mmagon
  * @since 2014/07/09
  */
-@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, setterVisibility = NONE)
+@JsonAutoDetect(fieldVisibility = ANY,
+		getterVisibility = NONE,
+		setterVisibility = NONE)
 @JsonInclude(NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
+public class JavaScriptPart<J extends JavaScriptPart<J>>
+		implements Serializable
 {
 
-	private static final Logger log = LogFactory.getInstance().getLogger("JavaScriptPart");
+	private static final Logger log = LogFactory.getInstance()
+	                                            .getLogger("JavaScriptPart");
 	/**
 	 * Version 2
 	 */
@@ -57,6 +62,11 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 
 	@JsonProperty(value = "$jwid")
 	private String referenceId;
+	/**
+	 * if empty braces should be rendered
+	 */
+	@JsonIgnore
+	private boolean renderEmptyBraces = false;
 
 	/**
 	 * Constructs a new javascript part
@@ -77,7 +87,8 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 	{
 		try
 		{
-			return getJsonObjectMapper().writeValueAsString(o).replaceAll("\r\n", "\n");
+			return getJsonObjectMapper().writeValueAsString(o)
+			                            .replaceAll("\r\n", "\n");
 		}
 		catch (JsonProcessingException ex)
 		{
@@ -360,7 +371,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 		}
 		if (s != null)
 		{
-			if ("{ }".equals(s))
+			if ("{ }".equals(s) && !isRenderEmptyBraces())
 			{
 				return "";
 			}
@@ -402,6 +413,26 @@ public class JavaScriptPart<J extends JavaScriptPart<J>> implements Serializable
 			log.log(Level.SEVERE, "Cant find javascript object mapper, returning default", e);
 			return new ObjectMapper();
 		}
+	}
+
+	public boolean isRenderEmptyBraces()
+	{
+		return renderEmptyBraces;
+	}
+
+	/**
+	 * If this part should render when its just empty braces
+	 *
+	 * @param renderEmptyBraces
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setRenderEmptyBraces(boolean renderEmptyBraces)
+	{
+		this.renderEmptyBraces = renderEmptyBraces;
+		return (J) this;
 	}
 
 	/**

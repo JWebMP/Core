@@ -37,6 +37,8 @@ public class SessionHelper
 	 */
 	private static String address = null;
 
+	private static boolean cacheAddress = false;
+
 	/*
 	 * Constructs a new SessionHelper
 	 */
@@ -52,29 +54,68 @@ public class SessionHelper
 	 */
 	public static String getServerPath()
 	{
-		if (address == null && !GuiceContext.isBuildingInjector())
+		if (isCacheAddress() && getAddress() != null)
 		{
-			try
-			{
-				HttpServletRequest request = GuiceContext.inject()
-				                                         .getInstance(HttpServletRequest.class);
-				StringBuffer buff = request.getRequestURL();
-				if (request.getHeader(REQUEST_SITE_HEADER_NAME) != null && !request.getHeader(REQUEST_SITE_HEADER_NAME)
-				                                                                   .isEmpty())
-				{
-					buff = new StringBuffer(request.getHeader(REQUEST_SITE_HEADER_NAME));
-				}
-				String address = buff.substring(0, buff.lastIndexOf(STRING_FORWARD_SLASH) + 1);
-				SessionHelper.address = address;
-				return address;
-			}
-			catch (Exception e)
-			{
-				log.log(Level.FINER, "Unable to get server path", e);
-				return STRING_EMPTY;
-			}
+			return getAddress();
 		}
+		try
+		{
+			HttpServletRequest request = GuiceContext.getInstance(HttpServletRequest.class);
+			StringBuffer buff = request.getRequestURL();
+			if (request.getHeader(REQUEST_SITE_HEADER_NAME) != null && !request.getHeader(REQUEST_SITE_HEADER_NAME)
+			                                                                   .isEmpty())
+			{
+				buff = new StringBuffer(request.getHeader(REQUEST_SITE_HEADER_NAME));
+			}
+			String address = buff.substring(0, buff.lastIndexOf(STRING_FORWARD_SLASH) + 1);
+			SessionHelper.address = address;
+			return address;
+		}
+		catch (Exception e)
+		{
+			log.log(Level.FINER, "Unable to get server path", e);
+			return STRING_EMPTY;
+		}
+	}
+
+	/**
+	 * If the helper is using the cached address
+	 *
+	 * @return
+	 */
+	public static boolean isCacheAddress()
+	{
+		return cacheAddress;
+	}
+
+	/**
+	 * Returns the current addross for the session helper
+	 *
+	 * @return
+	 */
+	public static String getAddress()
+	{
 		return address;
+	}
+
+	/**
+	 * Sets the current address for the session helper. Use with cacheAddress to use fully customized address paths
+	 *
+	 * @param address
+	 */
+	public static void setAddress(String address)
+	{
+		SessionHelper.address = address;
+	}
+
+	/**
+	 * If the address must be cached on first reponse, and used for future calls
+	 *
+	 * @param cacheAddress
+	 */
+	public static void setCacheAddress(boolean cacheAddress)
+	{
+		SessionHelper.cacheAddress = cacheAddress;
 	}
 
 	/**

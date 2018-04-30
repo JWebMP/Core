@@ -23,6 +23,8 @@ import com.jwebmp.base.html.interfaces.NoFeatures;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.htmlbuilder.javascript.JavaScriptPart;
 
+import java.util.Objects;
+
 /**
  * Container Class for Features. Splits from the hierarchy
  *
@@ -68,6 +70,7 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 		super(ComponentTypes.Feature);
 		setName(name);
 		setComponent(component);
+		component.addFeature(this);
 	}
 
 	/**
@@ -86,13 +89,26 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 	@Override
 	public int hashCode()
 	{
-		return super.hashCode();
+		return getName().hashCode();
 	}
 
 	@Override
 	public boolean equals(Object o)
 	{
-		return super.equals(o);
+		if (this == o)
+		{
+			return true;
+		}
+		if (o == null || getClass() != o.getClass())
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+		Feature<?, ?> feature = (Feature<?, ?>) o;
+		return Objects.equals(getName(), feature.getName());
 	}
 
 	/**

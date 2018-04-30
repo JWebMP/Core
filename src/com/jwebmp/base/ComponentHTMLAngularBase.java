@@ -29,7 +29,6 @@ import com.jwebmp.utilities.StaticStrings;
 
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,7 +63,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	 * All the angular DTO objects for this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private Map<String, Serializable> angularObjects;
+	private Map<String, Object> angularObjects;
 
 	/**
 	 * Constructs a new component with the angular features enabled
@@ -196,7 +195,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	@Override
 	@NotNull
 	@SuppressWarnings("unchecked")
-	public J addDto(@NotNull String name, @NotNull Serializable dataObject)
+	public J addDto(@NotNull String name, @NotNull Object dataObject)
 	{
 		if (dataObject instanceof JavaScriptPart)
 		{
@@ -214,7 +213,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	 */
 	@Override
 	@NotNull
-	public Map<String, Serializable> getAngularObjects()
+	public Map<String, Object> getAngularObjects()
 	{
 		if (angularObjects == null)
 		{

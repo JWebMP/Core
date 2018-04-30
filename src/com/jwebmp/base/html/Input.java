@@ -173,7 +173,14 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	public J bind(String variableName)
 	{
 		AngularPageConfigurator.setRequired(true);
-		addAttribute(AngularAttributes.ngModel, variableName);
+		if (variableName != null)
+		{
+			addAttribute(AngularAttributes.ngModel, variableName);
+		}
+		else
+		{
+			removeAttribute(AngularAttributes.ngModel.toString());
+		}
 		return (J) this;
 	}
 
