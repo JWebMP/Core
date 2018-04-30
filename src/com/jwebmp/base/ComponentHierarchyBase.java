@@ -905,7 +905,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 			Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> clonedBase = getChildren();
 			clonedBase.forEach(feature ->
 			                   {
-				                   if (!feature.isConfigured())
+				                   if (feature != null && !feature.isConfigured())
 				                   {
 					                   feature.preConfigure();
 				                   }
