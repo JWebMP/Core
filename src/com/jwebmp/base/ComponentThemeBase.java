@@ -116,10 +116,7 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 		Set<JavascriptReference> allJs = super.getJavascriptReferencesAll();
 		getThemes().forEach((Theme feature) -> Theme.class.cast(feature)
 		                                                  .getJavascriptReferences()
-		                                                  .forEach(js ->
-		                                                           {
-			                                                           allJs.add(js);
-		                                                           }));
+		                                                  .forEach(allJs::add));
 		return allJs;
 	}
 

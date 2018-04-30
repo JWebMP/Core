@@ -560,8 +560,10 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		{
 			ComponentEventBase.class.cast(event)
 			                        .setComponent(this);
+
+			return super.addEvent(event);
 		}
-		return super.addEvent(event);
+		return (J) this;
 	}
 
 	/**

@@ -199,7 +199,6 @@ public abstract class Event<J extends Event<J>>
 		this(name, EventTypes.undefined);
 	}
 
-
 	/**
 	 * Constructs an event with the given name
 	 *
@@ -231,7 +230,7 @@ public abstract class Event<J extends Event<J>>
 	 */
 	public StringBuilder renderVariables()
 	{
-		final StringBuilder s = new StringBuilder(STRING_SQUARE_BRACE_OPEN);
+		StringBuilder s = new StringBuilder(STRING_SQUARE_BRACE_OPEN);
 		getVariables().forEach(event -> s.append(STRING_SINGLE_QUOTES)
 		                                 .append(event)
 		                                 .append(STRING_SINGLE_QUOTES)

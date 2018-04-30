@@ -63,7 +63,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	 * All the angular DTO objects for this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private Map<String, Object> angularObjects;
+	private transient Map<String, Object> angularObjects;
 
 	/**
 	 * Constructs a new component with the angular features enabled
