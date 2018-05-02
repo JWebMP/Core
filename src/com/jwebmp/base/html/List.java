@@ -88,7 +88,8 @@ public class List<C extends ListChildren, A extends Enum & AttributeDefinitions,
 	 *
 	 * @return
 	 */
-	public ListItem addItem(String textToAdd)
+	@SuppressWarnings("unchecked")
+	public ListItem<?> addItem(String textToAdd)
 	{
 		ListItem li = new ListItem(textToAdd);
 		add((C) li);
@@ -102,7 +103,8 @@ public class List<C extends ListChildren, A extends Enum & AttributeDefinitions,
 	 *
 	 * @return
 	 */
-	public List addList(String textToAdd)
+	@SuppressWarnings("unchecked")
+	public List<?, ?, ?, ?> addList(String textToAdd)
 	{
 		ListItem lit = new ListItem(textToAdd);
 		List li = new List(false);

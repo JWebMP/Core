@@ -7,19 +7,27 @@
     <version>0.0.0_0</version>
     <packaging>jar</packaging>
 
-    <name>JWebSwing</name>
-    <description>The core of the JWebSwing library allowing you to create enterprise grade level applications
+    <name>JWebMP</name>
+    <description>The core of the JWebMP library allowing you to create enterprise grade level applications
     </description>
-    <url>https://github.com/GedMarc/JWebSwing</url>
+    <url>https://github.com/GedMarc/JWebMP</url>
+
+    <licenses>
+        <license>
+            <name>GPL 3</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <repositories>
-
         <repository>
             <id>jwebswing-snapshot</id>
             <name>JWebSwingArtifactory-snapshots</name>
             <url>https://jwebswing.com/artifactory/libs-snapshot</url>
         </repository>
     </repositories>
+
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -30,12 +38,17 @@
         <maven.javadoc.version>2.10.4</maven.javadoc.version>
         <maven.source.version>2.1.2</maven.source.version>
         <maven.resources.version>3.0.2</maven.resources.version>
+
         <netbeans.hint.license>gpl30</netbeans.hint.license>
+        <license.dir>${basedir}</license.dir>
+        <license.dir>${basedir}</license.dir>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <sonar.host.url>https://jwebmp.com/sonar</sonar.host.url>
         <sonar.exclusions>**bower_components</sonar.exclusions>
+
+
     </properties>
 
     <build>
@@ -72,6 +85,42 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.7.9</version>
             </plugin>
+            <!--
+                        <plugin>
+                            <groupId>com.mycila.maven-license-plugin</groupId>
+                            <artifactId>maven-license-plugin</artifactId>
+                            <version>1.10.b1</version>
+                            <configuration>
+                                <header>${license.dir}/license.txt</header>
+                                <properties>
+                                    <project>
+                                        ${project.name}
+                                    </project>
+                                    <founder>GedMarc</founder>
+                                    <year>2018</year>
+                                    <website>https://github.com/GedMarc/JWebMP</website>
+                                </properties>
+                                <includes>
+                                    <include>src/main/java/**</include>
+                                    <include>src/test/java/**</include>
+                                </includes>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <goals>
+                                        <goal>format</goal>
+                                    </goals>
+                                    <phase>process-sources</phase>
+                                </execution>
+                            </executions>
+                            <dependencies>
+                                <dependency>
+                                    <groupId>com.mycila</groupId>
+                                    <artifactId>licenses</artifactId>
+                                    <version>1</version>
+                                </dependency>
+                            </dependencies>
+                        </plugin>-->
 
         </plugins>
 
@@ -206,18 +255,12 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- You will need a driver dependency for every browser you use in
-        testing. You can find the meven dependencies at
-        https://mvnrepository.com/artifact/org.seleniumhq.selenium -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
             <version>3.11.0</version>
             <scope>test</scope>
         </dependency>
-        <!-- Normally you must download an exe for each browser. This library
-        will retrieve the the necessary file and place it in the classpath for
-        selenium to use -->
 
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
@@ -243,14 +286,6 @@
             <artifactId>jwebmp-interception</artifactId>
             <version>${project.version}</version>
         </dependency>
-
-        <!--<dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>7.0</version>
-            <scope>provided</scope>
-        </dependency>-->
-
     </dependencies>
 
 
@@ -266,30 +301,37 @@
             <url>https://jwebswing.com/artifactory/libs-release-local</url>
         </repository>
     </distributionManagement>
+
     <organization>
         <name>Marc Magon</name>
         <url>https://www.jwebmp.com/</url>
     </organization>
+
     <scm>
-        <url>https://github.com/GedMarc?tab=repositories</url>
-        <developerConnection>Marc Magon</developerConnection>
+        <url>https://github.com/GedMarc/JWebMP</url>
+        <developerConnection>https://jwebmp.com/jira</developerConnection>
     </scm>
+
     <issueManagement>
         <system>Github</system>
-        <url>https://github.com/GedMarc/JWebSwing/issues</url>
+        <url>https://github.com/GedMarc/JWebMP/issues</url>
     </issueManagement>
+
     <ciManagement>
         <system>TeamCity</system>
         <url>http://jwebmp.com/teamcity</url>
     </ciManagement>
+
     <developers>
         <developer>
             <id>GedMarc</id>
             <name>Marc Magon</name>
-            <email>ged_marc@hotmail.com</email>
+            <email>marc.magon@gmail.com</email>
             <url>https://github.com/GedMarc</url>
         </developer>
     </developers>
+
+
     <reporting>
         <plugins>
             <plugin>

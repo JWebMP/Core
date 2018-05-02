@@ -137,4 +137,14 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 	 */
 	@Override
 	protected abstract void assignFunctionsToComponent();
+
+	@Override
+	public J setComponent(ComponentHierarchyBase component)
+	{
+		if (component != null)
+		{
+			component.addFeature(this);
+		}
+		return super.setComponent(component);
+	}
 }
