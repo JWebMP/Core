@@ -22,9 +22,9 @@
 
     <repositories>
         <repository>
-            <id>jwebswing-snapshot</id>
-            <name>JWebSwingArtifactory-snapshots</name>
-            <url>https://jwebswing.com/artifactory/libs-snapshot</url>
+            <id>jwebmp-snapshot</id>
+            <name>JWebMPArtifactory-snapshots</name>
+            <url>https://jwebmp.com/artifactory/libs-snapshot</url>
         </repository>
     </repositories>
 
@@ -85,43 +85,6 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.7.9</version>
             </plugin>
-            <!--
-                        <plugin>
-                            <groupId>com.mycila.maven-license-plugin</groupId>
-                            <artifactId>maven-license-plugin</artifactId>
-                            <version>1.10.b1</version>
-                            <configuration>
-                                <header>${license.dir}/license.txt</header>
-                                <properties>
-                                    <project>
-                                        ${project.name}
-                                    </project>
-                                    <founder>GedMarc</founder>
-                                    <year>2018</year>
-                                    <website>https://github.com/GedMarc/JWebMP</website>
-                                </properties>
-                                <includes>
-                                    <include>src/main/java/**</include>
-                                    <include>src/test/java/**</include>
-                                </includes>
-                            </configuration>
-                            <executions>
-                                <execution>
-                                    <goals>
-                                        <goal>format</goal>
-                                    </goals>
-                                    <phase>process-sources</phase>
-                                </execution>
-                            </executions>
-                            <dependencies>
-                                <dependency>
-                                    <groupId>com.mycila</groupId>
-                                    <artifactId>licenses</artifactId>
-                                    <version>1</version>
-                                </dependency>
-                            </dependencies>
-                        </plugin>-->
-
         </plugins>
 
         <resources>
@@ -292,13 +255,13 @@
     <distributionManagement>
         <snapshotRepository>
             <id>snapshot</id>
-            <name>JWebSwingArtifactory-snapshots</name>
-            <url>https://jwebswing.com/artifactory/libs-snapshot-local</url>
+            <name>JWebMPArtifactory-snapshots</name>
+            <url>https://jwebmp.com/artifactory/libs-snapshot-local</url>
         </snapshotRepository>
         <repository>
             <id>central</id>
-            <name>JWebSwingArtifactory-releases</name>
-            <url>https://jwebswing.com/artifactory/libs-release-local</url>
+            <name>JWebMPArtifactory-releases</name>
+            <url>https://jwebmp.com/artifactory/libs-release-local</url>
         </repository>
     </distributionManagement>
 

@@ -144,7 +144,7 @@ public abstract class JWDefaultServlet
 		{
 			log.log(Level.FINER, "[SessionID]-[{0}];[Security]-[Component ID Incorrect]", request.getSession()
 			                                                                                     .getId());
-			throw new InvalidRequestException("Component ID Was Incorrect.");
+			//	throw new InvalidRequestException("Component ID Was Incorrect.");
 		}
 		return true;
 	}

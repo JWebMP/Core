@@ -42,7 +42,6 @@ public class AngularForm<J extends AngularForm<J>>
 	 */
 	public AngularForm()
 	{
-		setTag("ng-form");
 		JQueryPageConfigurator.setRequired(true);
 		AngularPageConfigurator.setRequired(true);
 	}
@@ -125,7 +124,7 @@ public class AngularForm<J extends AngularForm<J>>
 	 * @return
 	 */
 	@NotNull
-	protected String buildValidationClass(@NotNull Input input)
+	public String buildValidationClass(@NotNull Input input)
 	{
 		return buildValidationClass(input, STRING_EMPTY);
 	}
@@ -138,7 +137,7 @@ public class AngularForm<J extends AngularForm<J>>
 	 * @return
 	 */
 	@NotNull
-	protected String buildValidationClass(@NotNull Input input, String prependClass)
+	public String buildValidationClass(@NotNull Input input, String prependClass)
 	{
 		String finalOutput = "{";
 

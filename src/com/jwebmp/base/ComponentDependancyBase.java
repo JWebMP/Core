@@ -26,6 +26,7 @@ import com.jwebmp.base.servlets.enumarations.RequirementsPriority;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * This class marks a component as a web component.
@@ -206,18 +207,17 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	public Set<JavascriptReference> getJavascriptReferencesAll(@NotNull RequirementsPriority priority)
 	{
 		Set<JavascriptReference> arr = new TreeSet<>();
-		synchronized (getJavascriptReferencesAll())
+
+		for (JavascriptReference next : new CopyOnWriteArraySet<>(getJavascriptReferencesAll()))
 		{
-			for (JavascriptReference next : getJavascriptReferencesAll())
+			if (!next.getPriority()
+			         .equals(priority) || arr.contains(next))
 			{
-				if (!next.getPriority()
-				         .equals(priority) || arr.contains(next))
-				{
-					continue;
-				}
-				arr.add(next);
+				continue;
 			}
+			arr.add(next);
 		}
+
 		return arr;
 	}
 
