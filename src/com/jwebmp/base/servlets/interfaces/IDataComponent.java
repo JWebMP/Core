@@ -18,7 +18,7 @@ package com.jwebmp.base.servlets.interfaces;
 
 import com.jwebmp.htmlbuilder.javascript.JavaScriptPart;
 
-import java.util.Map;
+import javax.validation.constraints.NotNull;
 
 /**
  * Marks a component as one with Data that is available as either AJAX or direct
@@ -32,15 +32,9 @@ import java.util.Map;
 @FunctionalInterface
 public interface IDataComponent<J extends JavaScriptPart>
 {
-
 	/**
-	 * Returns the data object associated with this component.
-	 * Gets called from a separate Servlet in Asynchronous format. Sometimes the fields are set
-	 *
-	 * @param params
-	 * 		The request parameters received
-	 *
-	 * @return
+	 * Renders the physical data on call
 	 */
-	J getData(Map<String, String[]> params);
+	@NotNull
+	public abstract StringBuilder renderData();
 }

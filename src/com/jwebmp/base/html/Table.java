@@ -23,6 +23,8 @@ import com.jwebmp.base.html.interfaces.children.TableChildren;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Browser Support<p>
  * <p>
@@ -57,7 +59,7 @@ public class Table<J extends Table<J>>
 	 */
 	public Table()
 	{
-		super("table", ComponentTypes.Table, false);
+		super(ComponentTypes.Table.getComponentTag(), ComponentTypes.Table, false);
 	}
 
 	/**
@@ -79,6 +81,8 @@ public class Table<J extends Table<J>>
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
 	public J setCellSpacing(int cellSpacing)
 	{
 		addAttribute(TableAttributes.CellSpacing, cellSpacing);
@@ -104,9 +108,13 @@ public class Table<J extends Table<J>>
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
 	public J setCellPadding(int cellPadding)
 	{
 		addAttribute(TableAttributes.CellPadding, cellPadding);
 		return (J) this;
 	}
+
+	
 }

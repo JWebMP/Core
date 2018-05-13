@@ -436,6 +436,24 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	}
 
 	/**
+	 * Renders the output in tiny format
+	 *
+	 * @param tiny
+	 *
+	 * @return
+	 */
+	public String toString(@SuppressWarnings("unused") boolean tiny)
+	{
+		String output = toString();
+		output = output.replace("\n", "");
+		output = output.replace("\r", "");
+		output = output.replace("\t", "");
+		output = output.replace("  ", "");
+		output = output.replace(" : ", ":");
+		return output;
+	}
+
+	/**
 	 * Sets the JW ID to send if necessary
 	 *
 	 * @return

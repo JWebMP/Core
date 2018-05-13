@@ -17,13 +17,11 @@
 package com.jwebmp.base.servlets;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Singleton;
 import com.jwebmp.Page;
 import com.jwebmp.annotations.DataCallInterception;
 import com.jwebmp.annotations.SiteInterception;
-import com.jwebmp.base.ComponentHierarchyBase;
 import com.jwebmp.base.servlets.interfaces.IDataComponent;
 import com.jwebmp.exceptions.MissingComponentException;
 import za.co.mmagon.guiceinjection.GuiceContext;
@@ -36,6 +34,9 @@ import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static com.jwebmp.utilities.StaticStrings.CHAR_DOT;
+import static com.jwebmp.utilities.StaticStrings.CHAR_UNDERSCORE;
 
 /**
  * Provides the data for a specific component
@@ -96,6 +97,7 @@ public class DataServlet
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void processRequest(HttpServletRequest request) throws MissingComponentException
 	{
 		Date startDate = new Date();
@@ -112,45 +114,22 @@ public class DataServlet
 
 		String componentID = request.getParameter("component");
 		log.log(Level.CONFIG, "[SessionID]-[{0}];[DataFetch];[ComponentID]-[{1}]", new Object[]{session.getId(), componentID});
-		ComponentHierarchyBase hb = page.getCachedComponent(componentID);
-		if (hb == null)
+		try
+		{
+			Class<? extends IDataComponent<?>> clazz = (Class<? extends IDataComponent<?>>) Class.forName(componentID.replace(CHAR_UNDERSCORE, CHAR_DOT));
+			IDataComponent component = GuiceContext.getInstance(clazz);
+			StringBuilder renderData = component.renderData();
+			responseString.append(renderData);
+		}
+		catch (ClassCastException | ClassNotFoundException e)
 		{
 			throw new MissingComponentException("Unable to find the specified component : " + request.getParameter("component"));
 		}
-		StringBuilder output = new StringBuilder();
-
-		String searchString = (String) request.getSession()
-		                                      .getAttribute("search");
-		Integer totalCount = (Integer) request.getSession()
-		                                      .getAttribute("count");
-		String lastItemID = (String) request.getSession()
-		                                    .getAttribute("lastID");
-
-		log.info("Data Search Parameters : " + searchString + ",TotalCount " + totalCount + ",LastItemID [" + lastItemID + "]");
 
 		if (!GuiceContext.isBuildingInjector())
 		{
 			intercept();
 		}
-
-		if (IDataComponent.class.isAssignableFrom(hb.getClass()))
-		{
-			IDataComponent dc = (IDataComponent) hb;
-			String outputJson = null;
-			try
-			{
-				outputJson = jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true)
-				                             .writeValueAsString(dc.getData(request.getParameterMap()));
-			}
-			catch (JsonProcessingException e)
-			{
-				log.log(Level.SEVERE, "Unable to format JSON Data Request", e);
-			}
-			output.append(outputJson == null ? "" : outputJson);
-		}
-
-		responseString.append(output);
-
 		writeOutput(responseString, "application/json;charset=UTF-8", Charset.forName("UTF-8"));
 		log.log(Level.CONFIG, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}]",
 		        new Object[]{request.getSession().getId(), new Date().getTime() - startDate.getTime(), responseString.length()});
