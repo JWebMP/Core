@@ -23,6 +23,7 @@ import com.jwebmp.base.html.interfaces.NoFeatures;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.htmlbuilder.javascript.JavaScriptPart;
 
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
@@ -127,9 +128,12 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 	 *
 	 * @param options
 	 */
-	public void setOptions(O options)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setOptions(O options)
 	{
 		this.options = options;
+		return (J) this;
 	}
 
 	/**
