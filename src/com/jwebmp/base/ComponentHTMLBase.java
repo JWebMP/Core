@@ -163,7 +163,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	 */
 	@SuppressWarnings("unused")
 	@NotNull
-	private StringBuilder renderBeforeTag(StringBuilder tempStringBuilder)
+	protected StringBuilder renderBeforeTag(StringBuilder tempStringBuilder)
 	{
 		StringBuilder beforeTag = renderBeforeTag();
 		if (beforeTag != null && beforeTag.length() > 0)
@@ -181,7 +181,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	 * @return
 	 */
 	@NotNull
-	private StringBuilder renderTextBeforeChildren(StringBuilder tempStringBuilder)
+	protected StringBuilder renderTextBeforeChildren(StringBuilder tempStringBuilder)
 	{
 		StringBuilder rawText = getText(0);
 		if (isRenderTextBeforeChildren() && (rawText.length() > 0))
@@ -200,7 +200,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	 * @return
 	 */
 	@NotNull
-	private StringBuilder renderTextAfterChildren(StringBuilder tempStringBuilder)
+	protected StringBuilder renderTextAfterChildren(StringBuilder tempStringBuilder)
 	{
 		StringBuilder rawText = getText(0);
 		if (!isRenderTextBeforeChildren() && (rawText != null && rawText.length() > 0))
@@ -218,7 +218,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	 * @return
 	 */
 	@NotNull
-	private StringBuilder renderBeforeChildren(StringBuilder tempStringBuilder)
+	protected StringBuilder renderBeforeChildren(StringBuilder tempStringBuilder)
 	{
 		StringBuilder beforeChildren = renderBeforeChildren();
 		if (beforeChildren != null && beforeChildren.length() > 0)
@@ -236,7 +236,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	 * @return
 	 */
 	@NotNull
-	private StringBuilder renderChildren(StringBuilder tempStringBuilder)
+	protected StringBuilder renderChildren(StringBuilder tempStringBuilder)
 	{
 		StringBuilder childrenRender = renderChildren();
 		if (childrenRender != null && childrenRender.length() > 0)
@@ -254,7 +254,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	 * @return
 	 */
 	@NotNull
-	private StringBuilder renderAfterChildren(StringBuilder tempStringBuilder)
+	protected StringBuilder renderAfterChildren(StringBuilder tempStringBuilder)
 	{
 		StringBuilder afterChildren = renderAfterChildren();
 		if (afterChildren != null && afterChildren.length() > 0)
@@ -272,7 +272,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	 * @return
 	 */
 	@NotNull
-	private StringBuilder renderAfterTag(StringBuilder tempStringBuilder)
+	protected StringBuilder renderAfterTag(StringBuilder tempStringBuilder)
 	{
 		StringBuilder afterTag = renderAfterTag();
 		if (afterTag != null && afterTag.length() > 0)

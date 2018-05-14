@@ -67,6 +67,19 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
 	 *
 	 * @return
 	 */
+	J addAttribute(String attribute, String value);
+
+	/**
+	 * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
+	 * <p>
+	 *
+	 * @param attribute
+	 * 		The GlobalAttribute to set the attribute to
+	 * @param value
+	 * 		The value of the attribute
+	 *
+	 * @return
+	 */
 	J addAttribute(A attribute, Integer value);
 
 	/**
