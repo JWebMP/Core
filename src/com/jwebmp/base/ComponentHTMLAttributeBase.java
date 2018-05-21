@@ -69,8 +69,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 * Logger for the Component
 	 */
 	@JsonIgnore
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
-	                                                              .getLogger("ComponentAttributes");
+	private static final java.util.logging.Logger LOG = LogFactory.getLog("ComponentAttributes");
 
 	/**
 	 * The current stored attribute lists
@@ -81,8 +80,12 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	/**
 	 * Specifies if this component should render an ID attribute
 	 */
-	@JsonIgnore
 	private boolean renderIDAttibute = true;
+
+	/**
+	 * Renders the attributes with a single colon instead of a double colon, and replaces single colon values with double colons
+	 */
+	private boolean invertColonRender = false;
 
 	/**
 	 * Construct a new component that will render a tag
@@ -138,17 +141,38 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 			{
 				continue;
 			}
-			value = value.replaceAll(STRING_DOUBLE_QUOTES, STRING_SINGLE_QUOTES);
+			if (isInvertColonRender())
+			{
+				value = value.replaceAll(STRING_SINGLE_QUOTES, STRING_DOUBLE_QUOTES);
+			}
+			else
+			{
+				value = value.replaceAll(STRING_DOUBLE_QUOTES, STRING_SINGLE_QUOTES);
+			}
 			boolean isKeyword = value.isEmpty();
 			if (!isKeyword)
+			{
+				if (isInvertColonRender())
+				{
+					sb.append(key.toLowerCase())
+					  .append(STRING_EQUALS_SINGLE_QUOTES)
+					  .append(value)
+					  .append(STRING_SINGLE_QUOTES_SPACE);
+				}
+				else
+				{
+					sb.append(key.toLowerCase())
+					  .append(STRING_EQUALS_DOUBLE_QUOTES)
+					  .append(value)
+					  .append(STRING_DOUBLE_QUOTES_SPACE);
+				}
+			}
+			else
 			{
 				sb.append(key.toLowerCase())
 				  .append(STRING_EQUALS_DOUBLE_QUOTES)
 				  .append(value)
 				  .append(STRING_DOUBLE_QUOTES_SPACE);
-			}
-			else
-			{
 				sb.append(key.toLowerCase())
 				  .append(STRING_SPACE);
 			}
@@ -298,6 +322,26 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	public J addAttribute(@NotNull A attribute, @NotNull String value)
 	{
 		getAttributes().put(attribute.toString(), value);
+		return (J) this;
+	}
+
+	/**
+	 * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
+	 * <p>
+	 *
+	 * @param attribute
+	 * 		The valid Local Attribute to add
+	 * @param value
+	 * 		The value of the attribute
+	 *
+	 * @return
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public final J addAttribute(String attribute, String value)
+	{
+		getAttributes().put(attribute, value);
 		return (J) this;
 	}
 
@@ -492,6 +536,31 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	}
 
 	/**
+	 * Renders the attributes with a single colon instead of a double colon, and replaces single colon values with double colons
+	 *
+	 * @return
+	 */
+	public boolean isInvertColonRender()
+	{
+		return invertColonRender;
+	}
+
+	/**
+	 * Renders the attributes with a single colon instead of a double colon, and replaces single colon values with double colons
+	 *
+	 * @param invertColonRender
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setInvertColonRender(boolean invertColonRender)
+	{
+		this.invertColonRender = invertColonRender;
+		return (J) this;
+	}
+
+	/**
 	 * Adds an attribute with an enum value. The toString() method is read
 	 *
 	 * @param attribute
@@ -520,25 +589,6 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	{
 		addAttribute(GlobalAttributes.ID, id);
 		return super.setID(id);
-	}
-
-	/**
-	 * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
-	 * <p>
-	 *
-	 * @param attribute
-	 * 		The valid Local Attribute to add
-	 * @param value
-	 * 		The value of the attribute
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public final J addAttribute(String attribute, String value)
-	{
-		getAttributes().put(attribute, value);
-		return (J) this;
 	}
 
 	/**
@@ -604,7 +654,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	@NotNull
 	public J addStyle(String property, String value)
 	{
-		addStyle(property + ":" + value);
+		addStyle(property + STRING_DOUBLE_COLON + value);
 		return (J) this;
 	}
 

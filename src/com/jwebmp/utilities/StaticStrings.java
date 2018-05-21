@@ -41,9 +41,12 @@ public interface StaticStrings
 	String STRING_DOLLAR = "$";
 	String STRING_EQUALS = "=";
 	String STRING_NEWLINE_TEXT = "\n";
+	String STRING_DOUBLE_COLON = ":";
 	String STRING_SINGLE_QUOTES = "'";
 	String STRING_DOUBLE_QUOTES = "\"";
+	String STRING_SINGLE_QUOTES_SPACE = "\' ";
 	String STRING_DOUBLE_QUOTES_SPACE = "\" ";
+	String STRING_EQUALS_SINGLE_QUOTES = "=\'";
 	String STRING_EQUALS_DOUBLE_QUOTES = "=\"";
 	String STRING_SHARP_BRACE_OPEN = "<";
 	String STRING_SHARP_BRACE_SLASH_OPEN = "</";

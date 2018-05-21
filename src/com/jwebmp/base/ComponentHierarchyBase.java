@@ -37,7 +37,6 @@ import za.co.mmagon.logger.LogFactory;
 
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
@@ -137,7 +136,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	public J add(@NotNull C newChild)
 	{
 		ComponentHierarchyBase comp = ComponentHierarchyBase.class.cast(newChild);
-		if (comp != null)
+		if (comp != null && !comp.equals(this))
 		{
 			comp.setParent(this);
 			comp.setTiny(isTiny());
@@ -621,8 +620,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		             {
 			             try
 			             {
-				             map.put((String) key, (Serializable) next.getAngularObjects()
-				                                                      .get(key));
+				             map.put((String) key, next.getAngularObjects()
+				                                       .get(key));
 			             }
 			             catch (ClassCastException cce)
 			             {

@@ -27,6 +27,7 @@ import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 import za.co.mmagon.logger.LogFactory;
 
+import javax.validation.constraints.NotNull;
 import java.util.logging.Level;
 
 /**
@@ -188,10 +189,13 @@ public class Link<J extends Link<J>>
 	 *
 	 * @param directToAddress
 	 */
-	public void setDirectToAddress(String directToAddress)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setDirectToAddress(String directToAddress)
 	{
 		this.directToAddress = directToAddress;
 		addAttribute(LinkAttributes.HRef, directToAddress);
+		return (J) this;
 	}
 
 	/**
@@ -212,10 +216,13 @@ public class Link<J extends Link<J>>
 	 * @param targetFrameName
 	 * 		The target frame
 	 */
-	public void setTargetFrameName(String targetFrameName)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setTargetFrameName(String targetFrameName)
 	{
 		this.targetFrameName = targetFrameName;
 		addAttribute(LinkAttributes.Target, targetFrameName);
+		return (J) this;
 	}
 
 	@Override
