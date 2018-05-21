@@ -170,10 +170,6 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 			else
 			{
 				sb.append(key.toLowerCase())
-				  .append(STRING_EQUALS_DOUBLE_QUOTES)
-				  .append(value)
-				  .append(STRING_DOUBLE_QUOTES_SPACE);
-				sb.append(key.toLowerCase())
 				  .append(STRING_SPACE);
 			}
 		}
