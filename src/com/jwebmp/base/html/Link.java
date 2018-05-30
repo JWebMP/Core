@@ -22,6 +22,7 @@ import com.jwebmp.base.html.attributes.LinkAttributes;
 import com.jwebmp.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.base.html.interfaces.NoNewLineForRawText;
 import com.jwebmp.base.html.interfaces.children.BodyChildren;
+import com.jwebmp.base.html.interfaces.children.ListChildren;
 import com.jwebmp.base.html.interfaces.children.ListItemChildren;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
@@ -65,7 +66,7 @@ import java.util.logging.Level;
  */
 public class Link<J extends Link<J>>
 		extends Component<ComponentHierarchyBase, LinkAttributes, GlobalFeatures, GlobalEvents, J>
-		implements BodyChildren, NoNewLineForRawText, ListItemChildren
+		implements BodyChildren, NoNewLineForRawText, ListItemChildren, ListChildren
 {
 
 	private static final java.util.logging.Logger log = LogFactory.getInstance()

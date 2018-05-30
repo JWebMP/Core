@@ -881,16 +881,16 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 */
 	@NotNull
 	@SuppressWarnings("unchecked")
-	public J wrap(@NotNull ComponentHierarchyBase component)
+	public <T extends ComponentHierarchyBase> T wrap(@NotNull T component)
 	{
 		ComponentHierarchyBase existingParent = component.getParent();
 		if (existingParent != null)
 		{
 			existingParent.remove(component);
 			existingParent.add(this);
-			getChildren().add(component);
 		}
-		return (J) this;
+		getChildren().add(component);
+		return component;
 	}
 
 	@Override
