@@ -18,9 +18,6 @@ package com.jwebmp.base.dto;
 
 import com.jwebmp.utilities.regex.RegularExpressionsDTO;
 import org.junit.jupiter.api.Test;
-import za.co.mmagon.logger.LogFactory;
-
-import java.util.logging.Level;
 
 /**
  * @author GedMarc
@@ -35,7 +32,6 @@ public class RegularExpressionsTest
 	@Test
 	public void testSomeMethod()
 	{
-		LogFactory.configureConsoleColourOutput(Level.FINE);
 		RegularExpressionsDTO re = new RegularExpressionsDTO();
 		re.addExpression("TextField", "asdf");
 		System.out.println(re.toString());
