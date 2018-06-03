@@ -122,15 +122,11 @@ public class AngularDataServlet
 
 		Page page = GuiceContext.inject()
 		                        .getInstance(Page.class);
-		ComponentHierarchyBase triggerComponent;
+		ComponentHierarchyBase triggerComponent = null;
 		if (ComponentTypes.Body.getComponentTag()
 		                       .equals(ajaxCall.getComponentId()))
 		{
 			triggerComponent = page.getBody();
-		}
-		else
-		{
-			triggerComponent = page.getCachedComponent(componentId);
 		}
 		ajaxCall.setComponent(triggerComponent);
 		if (triggerComponent == null)

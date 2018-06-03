@@ -28,6 +28,7 @@ import com.jwebmp.base.html.interfaces.children.PageChildren;
 import com.jwebmp.base.html.interfaces.events.NoEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
@@ -93,6 +94,16 @@ public class Body<F extends BodyFeatures, J extends Body<F, J>>
 		}
 		setID("body");
 	}
+
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J setFullScreen()
+	{
+		addStyle("width:100%;height:100%;margin:0px;");
+		getPage().addStyle("width:100%;height:100%;margin:0px;");
+		return (J) this;
+	}
+
 
 	@Override
 	public boolean equals(Object o)

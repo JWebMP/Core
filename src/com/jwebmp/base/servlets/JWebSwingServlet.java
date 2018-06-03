@@ -26,7 +26,6 @@ import com.jwebmp.annotations.SiteInterception;
 import com.jwebmp.base.client.Browsers;
 import com.jwebmp.base.html.Body;
 import com.jwebmp.base.html.PreFormattedText;
-import com.jwebmp.base.references.JavascriptReference;
 import com.jwebmp.exceptions.MissingComponentException;
 import com.jwebmp.utilities.StaticStrings;
 import com.jwebmp.utilities.TextUtilities;
@@ -302,13 +301,6 @@ public class JWebSwingServlet
 				intercept();
 			}
 			Page page = getPageFromGuice();
-			if (page.getOptions()
-			        .isGoogleMapsJSApi())
-			{
-				page.getBody()
-				    .addJavaScriptReference(new JavascriptReference("Google Maps API Reference", 1.0, "https://maps.googleapis.com/maps/api/js?key=" + page.getOptions()
-				                                                                                                                                           .getGoogleMapsJSApi()));
-			}
 			output = getPageHTML();
 
 			Date endDate = new Date();

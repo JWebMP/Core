@@ -69,4 +69,5 @@ public interface IPage
 	 */
 	PageOptions getOptions();
 
+	boolean isMobileOrSmartTablet();
 }

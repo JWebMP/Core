@@ -107,6 +107,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 */
 	@JsonProperty("features")
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	@SuppressWarnings("unused")
 	protected Set<String> getFeatureQueries()
 	{
 		Set<String> list = new LinkedHashSet<>();

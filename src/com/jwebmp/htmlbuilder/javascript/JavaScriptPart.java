@@ -324,7 +324,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 				}
 				catch (com.fasterxml.jackson.databind.JsonMappingException mapException)
 				{
-					log.log(Level.FINE, "JSON Mapping Exception!", mapException);
+					log.log(Level.SEVERE, "JSON Mapping Exception!", mapException);
 				}
 				catch (JsonProcessingException ex)
 				{

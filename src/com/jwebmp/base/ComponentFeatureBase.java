@@ -20,7 +20,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jwebmp.Feature;
+import com.jwebmp.base.html.interfaces.AttributeDefinitions;
+import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.html.interfaces.GlobalFeatures;
+import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.interfaces.IComponentFeatureBase;
 import com.jwebmp.base.references.CSSReference;
 import com.jwebmp.base.references.JavascriptReference;
@@ -457,6 +460,14 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	}
 
 	/**
+	 * Use Add Query to add a query to the container
+	 */
+	protected void assignFunctionsToComponent()
+	{
+		//Nothing needed to be here
+	}
+
+	/**
 	 * Returns the queries
 	 *
 	 * @return
@@ -519,14 +530,6 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 		return features;
 	}
 
-	/**
-	 * Use Add Query to add a query to the container
-	 */
-	protected void assignFunctionsToComponent()
-	{
-		//Nothing needed to be here
-	}
-
 	@Override
 	public int compare(ComponentFeatureBase o1, ComponentFeatureBase o2)
 	{
@@ -561,21 +564,9 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
+		if (!isConfigured() && Feature.class.isAssignableFrom(getClass()))
 		{
-			if (this instanceof Feature)
-			{
-				assignFunctionsToComponent();
-			}
-			getFeatures().forEach(feature ->
-			                      {
-				                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
-				                      if (!cfb.isConfigured())
-				                      {
-					                      cfb.preConfigure();
-					                      cfb.assignFunctionsToComponent();
-				                      }
-			                      });
+			assignFunctionsToComponent();
 		}
 		super.preConfigure();
 	}
@@ -591,9 +582,12 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 			getFeatures().forEach(feature ->
 			                      {
 				                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
+				                      assignFunctionsToComponent();
 				                      if (!cfb.isConfigured())
 				                      {
 					                      cfb.init();
+					                      cfb.preConfigure();
+					                      cfb.assignFunctionsToComponent();
 				                      }
 			                      });
 		}
@@ -653,7 +647,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	 *
 	 * @return
 	 */
-	protected ComponentHierarchyBase getComponent()
+	protected <C extends GlobalChildren, A extends Enum & AttributeDefinitions, E extends GlobalEvents, J extends ComponentHierarchyBase<C, A, F, E, J>> ComponentHierarchyBase<C, A, F, E, J> getComponent()
 	{
 		return component;
 	}

@@ -721,6 +721,5 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 			init();
 		}
 		super.preConfigure();
-
 	}
 }

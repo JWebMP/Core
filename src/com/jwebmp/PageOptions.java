@@ -43,20 +43,13 @@ public class PageOptions
 	 * The local storage
 	 */
 	private boolean localStorage;
-	/**
-	 * The Google maps API key that highlights if it should render. Needed for the dynamic rendering sometimes
-	 */
-	private String googleMapsJSApi;
-	/**
-	 * The google maps paramters
-	 */
-	private String googleMapsParameters;
 
 	/**
 	 * Construct directly with the page
 	 */
 	protected PageOptions()
 	{
+		//No config required
 	}
 
 	/**
@@ -117,59 +110,5 @@ public class PageOptions
 	public void setLocalStorage(boolean localStorage)
 	{
 		this.localStorage = localStorage;
-	}
-
-	/**
-	 * Whether or not google maps api is being used
-	 *
-	 * @return
-	 */
-	public boolean isGoogleMapsJSApi()
-	{
-		if (googleMapsJSApi == null)
-		{
-			return false;
-		}
-		return !googleMapsJSApi.isEmpty();
-	}
-
-	/**
-	 * Returns the current assigned google maps api key
-	 *
-	 * @return
-	 */
-	public String getGoogleMapsJSApi()
-	{
-		return googleMapsJSApi;
-	}
-
-	/**
-	 * The api code for the google maps javascript implementation
-	 *
-	 * @param googleMapsJSApi
-	 */
-	public void setGoogleMapsJSApi(String googleMapsJSApi)
-	{
-		this.googleMapsJSApi = googleMapsJSApi;
-	}
-
-	/**
-	 * Gets the google maps parameters
-	 *
-	 * @return
-	 */
-	public String getGoogleMapsParameters()
-	{
-		return googleMapsParameters;
-	}
-
-	/**
-	 * Google Maps Parameters
-	 *
-	 * @param googleMapsParameters
-	 */
-	public void setGoogleMapsParameters(String googleMapsParameters)
-	{
-		this.googleMapsParameters = googleMapsParameters;
 	}
 }

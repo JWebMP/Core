@@ -17,20 +17,16 @@
 package com.jwebmp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.inject.servlet.RequestScoped;
 import com.jwebmp.annotations.PageConfiguration;
 import com.jwebmp.base.ComponentFeatureBase;
-import com.jwebmp.base.ComponentHierarchyBase;
 import com.jwebmp.base.ajax.AjaxCall;
 import com.jwebmp.base.ajax.AjaxResponse;
 import com.jwebmp.base.angular.AngularPageConfigurator;
 import com.jwebmp.base.client.InternetExplorerCompatibilityMode;
 import com.jwebmp.base.html.*;
-import com.jwebmp.base.html.attributes.NoAttributes;
 import com.jwebmp.base.html.attributes.ScriptAttributes;
 import com.jwebmp.base.html.interfaces.GlobalChildren;
-import com.jwebmp.base.html.interfaces.NoFeatures;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
-import com.jwebmp.base.html.interfaces.events.NoEvents;
 import com.jwebmp.base.references.CSSReference;
 import com.jwebmp.base.references.JavascriptReference;
 import com.jwebmp.base.servlets.interfaces.IPage;
@@ -40,10 +36,8 @@ import za.co.mmagon.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -64,6 +58,7 @@ import static com.jwebmp.utilities.StaticStrings.STRING_SEMICOLON;
  * @since 24 Apr 2016
  */
 @PageConfiguration
+@RequestScoped
 public class Page<J extends Page<J>>
 		extends Html<J>
 		implements IPage
@@ -376,7 +371,6 @@ public class Page<J extends Page<J>>
 	 * Configures the page and all its components
 	 */
 	@Override
-
 	@SuppressWarnings("unchecked")
 	public void preConfigure()
 	{
@@ -465,29 +459,6 @@ public class Page<J extends Page<J>>
 	}
 
 	/**
-	 * Returns the cached component
-	 *
-	 * @param componentID
-	 * 		The component to look for
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public ComponentHierarchyBase getCachedComponent(String componentID)
-	{
-		for (Object chb : getBody().getChildrenHierarchy())
-		{
-			ComponentHierarchyBase<NoChildren, NoAttributes, NoFeatures, NoEvents, ? extends ComponentHierarchyBase> ch = (ComponentHierarchyBase) chb;
-			if (ch.getID()
-			      .equals(componentID))
-			{
-				return ch;
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * Returns the component with only it's methods
 	 *
 	 * @return
@@ -515,30 +486,6 @@ public class Page<J extends Page<J>>
 	public void setPageInitialized(boolean pageInitialized)
 	{
 		this.pageInitialized = pageInitialized;
-	}
-
-	/**
-	 * Returns a readable user agent, or null if just a basic render
-	 *
-	 * @return
-	 */
-	public ReadableUserAgent getUserAgent()
-	{
-		if (userAgent == null)
-		{
-			userAgent = new UserAgent(DeviceCategory.EMPTY, UserAgentFamily.FIREFOX, "", "", OperatingSystem.EMPTY, "", "", UserAgentType.BROWSER, "", "", VersionNumber.UNKNOWN);
-		}
-		return userAgent;
-	}
-
-	/**
-	 * Sets the userAgent
-	 *
-	 * @param userAgent
-	 */
-	public void setUserAgent(ReadableUserAgent userAgent)
-	{
-		this.userAgent = userAgent;
 	}
 
 	@Override
@@ -623,6 +570,44 @@ public class Page<J extends Page<J>>
 			fields = new PageFields(this);
 		}
 		return fields;
+	}
+
+	/**
+	 * Returns if the user agent string registered the device as mobile
+	 *
+	 * @return
+	 */
+	@Override
+	public boolean isMobileOrSmartTablet()
+	{
+		Set<ReadableDeviceCategory.Category> mobiles = EnumSet.of(ReadableDeviceCategory.Category.SMARTPHONE, ReadableDeviceCategory.Category.SMART_TV,
+		                                                          ReadableDeviceCategory.Category.TABLET);
+		return mobiles.contains(getUserAgent().getDeviceCategory()
+		                                      .getCategory());
+	}
+
+	/**
+	 * Returns a readable user agent, or null if just a basic render
+	 *
+	 * @return
+	 */
+	public ReadableUserAgent getUserAgent()
+	{
+		if (userAgent == null)
+		{
+			userAgent = new UserAgent(DeviceCategory.EMPTY, UserAgentFamily.FIREFOX, "", "", OperatingSystem.EMPTY, "", "", UserAgentType.BROWSER, "", "", VersionNumber.UNKNOWN);
+		}
+		return userAgent;
+	}
+
+	/**
+	 * Sets the userAgent
+	 *
+	 * @param userAgent
+	 */
+	public void setUserAgent(ReadableUserAgent userAgent)
+	{
+		this.userAgent = userAgent;
 	}
 
 	/**

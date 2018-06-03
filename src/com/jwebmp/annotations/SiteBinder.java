@@ -34,6 +34,7 @@ import com.jwebmp.base.ComponentBase;
 import com.jwebmp.base.ajax.AjaxCall;
 import com.jwebmp.base.ajax.AjaxResponse;
 import com.jwebmp.base.servlets.*;
+import net.sf.uadetector.ReadableUserAgent;
 import net.sf.uadetector.UserAgentStringParser;
 import net.sf.uadetector.service.UADetectorServiceFactory;
 import za.co.mmagon.guiceinjection.GuiceContext;
@@ -231,6 +232,7 @@ public class SiteBinder
 		module.bind(SessionStorageProperties.class);
 
 		log.fine("Bound Page.class");
+
 		module.bind(Page.class)
 		      .toProvider(() ->
 		                  {
@@ -341,8 +343,14 @@ public class SiteBinder
 			if (pathInfo.equalsIgnoreCase(pcUrl) || SessionHelper.getServletUrl()
 			                                                     .equalsIgnoreCase(pc.url()))
 			{
-				return GuiceContext.inject()
-				                   .getInstance(next);
+				Page page = GuiceContext.inject()
+				                        .getInstance(next);
+				String headerInformation = request.getHeader("User-Agent");
+				ReadableUserAgent agent = GuiceContext.inject()
+				                                      .getInstance(UserAgentStringParser.class)
+				                                      .parse(headerInformation);
+				page.setUserAgent(agent);
+				return page;
 			}
 			else
 			{
@@ -378,4 +386,6 @@ public class SiteBinder
 		jsonObjectMapper.registerModule(new Jdk8Module());
 		jsonObjectMapper.registerModule(new JavaTimeModule());
 	}
+
+
 }
