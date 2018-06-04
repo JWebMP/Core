@@ -28,7 +28,6 @@
         </repository>
     </repositories>
 
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <src.dir>src</src.dir>
@@ -47,7 +46,6 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <sonar.host.url>https://jwebmp.com/sonar</sonar.host.url>
         <sonar.exclusions>**bower_components</sonar.exclusions>
-
 
     </properties>
 
