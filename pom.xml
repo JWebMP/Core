@@ -10,7 +10,6 @@
 
     <artifactId>jwebmp-core</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.0_0-SNAPSHOT</version>
 
     <name>JWebMP</name>
     <description>The core of the JWebMP library allowing you to create enterprise grade level applications
