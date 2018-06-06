@@ -30,7 +30,7 @@ import com.jwebmp.base.references.JavascriptReference;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.base.servlets.enumarations.RequirementsPriority;
 import com.jwebmp.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.logger.LogFactory;
+import com.jwebmp.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
@@ -40,7 +40,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.logging.Level;
 
-import static com.jwebmp.utilities.StaticStrings.STRING_NEWLINE_TEXT;
+import static com.jwebmp.utilities.StaticStrings.*;
 
 /**
  * Allows a component to have features and events

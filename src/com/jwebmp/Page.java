@@ -30,9 +30,9 @@ import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.references.CSSReference;
 import com.jwebmp.base.references.JavascriptReference;
 import com.jwebmp.base.servlets.interfaces.IPage;
+import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.logger.LogFactory;
 import net.sf.uadetector.*;
-import za.co.mmagon.guiceinjection.GuiceContext;
-import za.co.mmagon.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 import java.lang.reflect.Modifier;
@@ -41,8 +41,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.jwebmp.utilities.StaticStrings.HTML_HEADER_JAVASCRIPT;
-import static com.jwebmp.utilities.StaticStrings.STRING_SEMICOLON;
+import static com.jwebmp.utilities.StaticStrings.*;
 
 /**
  * Top level of any HTML page.

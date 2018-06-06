@@ -17,7 +17,7 @@
 package com.jwebmp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import za.co.mmagon.logger.LogFactory;
+import com.jwebmp.logger.LogFactory;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -29,8 +29,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 
-import static com.jwebmp.utilities.StaticStrings.STRING_EMPTY;
-import static java.lang.String.format;
+import static com.jwebmp.utilities.StaticStrings.*;
+import static java.lang.String.*;
 
 /**
  * Contains a cached set of file templates usually per page

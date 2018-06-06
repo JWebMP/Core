@@ -30,7 +30,7 @@ import com.jwebmp.htmlbuilder.css.interfaces.CSSShortHand;
 import com.jwebmp.htmlbuilder.css.measurement.MeasurementCSS;
 import com.jwebmp.htmlbuilder.css.measurement.MeasurementCSSImpl;
 import com.jwebmp.htmlbuilder.css.measurement.MeasurementTypes;
-import za.co.mmagon.logger.LogFactory;
+import com.jwebmp.logger.LogFactory;
 
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
@@ -42,8 +42,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.jwebmp.utilities.StaticStrings.STRING_COMMNA;
-import static com.jwebmp.utilities.StaticStrings.STRING_SPACE;
+import static com.jwebmp.utilities.StaticStrings.*;
 
 /**
  * Generates the necessary artifacts for CSS Production
@@ -81,7 +80,7 @@ public class CSSPropertiesFactory<A extends Annotation>
 	public Map<StringBuilder, Object> getCSSProperties(List<Annotation> classAnnotations)
 	{
 		Map<StringBuilder, Object> implementedProperties = new HashMap<>();
-		final Map<StringBuilder, Object> implementedProperties2 = new HashMap<>();
+		Map<StringBuilder, Object> implementedProperties2 = new HashMap<>();
 		classAnnotations.forEach(classAnnotation ->
 		                         {
 			                         Map<StringBuilder, Object> cssProperties = new HashMap<>();

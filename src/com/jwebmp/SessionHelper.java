@@ -16,8 +16,8 @@
  */
 package com.jwebmp;
 
-import za.co.mmagon.guiceinjection.GuiceContext;
-import za.co.mmagon.logger.LogFactory;
+import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.logging.Level;

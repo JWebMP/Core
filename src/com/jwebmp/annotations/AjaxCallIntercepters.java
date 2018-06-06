@@ -16,10 +16,10 @@
  */
 package com.jwebmp.annotations;
 
+import com.jwebmp.guiceinjection.GuiceContext;
 import com.jwebmp.interception.AjaxCallIntercepter;
+import com.jwebmp.logger.LogFactory;
 import org.aopalliance.intercept.MethodInvocation;
-import za.co.mmagon.guiceinjection.GuiceContext;
-import za.co.mmagon.logger.LogFactory;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

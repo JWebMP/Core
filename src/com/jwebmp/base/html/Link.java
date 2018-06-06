@@ -26,7 +26,7 @@ import com.jwebmp.base.html.interfaces.children.ListChildren;
 import com.jwebmp.base.html.interfaces.children.ListItemChildren;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.logger.LogFactory;
+import com.jwebmp.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 import java.util.logging.Level;

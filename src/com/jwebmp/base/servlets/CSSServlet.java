@@ -19,9 +19,9 @@ package com.jwebmp.base.servlets;
 import com.google.inject.Singleton;
 import com.jwebmp.Page;
 import com.jwebmp.exceptions.MissingComponentException;
+import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.logger.LogFactory;
 import com.jwebmp.utilities.StaticStrings;
-import za.co.mmagon.guiceinjection.GuiceContext;
-import za.co.mmagon.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

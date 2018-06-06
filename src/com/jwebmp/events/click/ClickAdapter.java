@@ -25,9 +25,9 @@ import com.jwebmp.base.html.interfaces.events.BodyEvents;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.html.interfaces.events.ParagraphEvents;
 import com.jwebmp.htmlbuilder.javascript.events.enumerations.EventTypes;
+import com.jwebmp.logger.LogFactory;
 import com.jwebmp.plugins.ComponentInformation;
 import com.jwebmp.utilities.StaticStrings;
-import za.co.mmagon.logger.LogFactory;
 
 import java.util.logging.Level;
 

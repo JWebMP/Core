@@ -24,11 +24,11 @@ import com.jwebmp.base.ComponentHierarchyBase;
 import com.jwebmp.base.ajax.*;
 import com.jwebmp.exceptions.InvalidRequestException;
 import com.jwebmp.exceptions.MissingComponentException;
+import com.jwebmp.guiceinjection.GuiceContext;
 import com.jwebmp.htmlbuilder.javascript.JavaScriptPart;
+import com.jwebmp.logger.LogFactory;
 import com.jwebmp.utilities.StaticStrings;
 import com.jwebmp.utilities.TextUtilities;
-import za.co.mmagon.guiceinjection.GuiceContext;
-import za.co.mmagon.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

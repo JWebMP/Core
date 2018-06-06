@@ -27,12 +27,12 @@ import com.jwebmp.base.client.Browsers;
 import com.jwebmp.base.html.Body;
 import com.jwebmp.base.html.PreFormattedText;
 import com.jwebmp.exceptions.MissingComponentException;
+import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.logger.LogFactory;
 import com.jwebmp.utilities.StaticStrings;
 import com.jwebmp.utilities.TextUtilities;
 import net.sf.uadetector.ReadableUserAgent;
 import net.sf.uadetector.UserAgentStringParser;
-import za.co.mmagon.guiceinjection.GuiceContext;
-import za.co.mmagon.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

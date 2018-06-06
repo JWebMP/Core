@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.jwebmp.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.logger.LogFactory;
+import com.jwebmp.logger.LogFactory;
 
 import java.io.IOException;
 import java.io.Serializable;

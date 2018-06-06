@@ -25,12 +25,12 @@ import com.jwebmp.base.ajax.*;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.base.servlets.options.AngularDataServletInitData;
 import com.jwebmp.exceptions.InvalidRequestException;
+import com.jwebmp.guiceinjection.GuiceContext;
 import com.jwebmp.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.htmlbuilder.javascript.events.enumerations.EventTypes;
+import com.jwebmp.logger.LogFactory;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import za.co.mmagon.guiceinjection.GuiceContext;
-import za.co.mmagon.logger.LogFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +42,7 @@ import java.time.ZonedDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static za.co.mmagon.guiceinjection.GuiceContext.getInstance;
+import static com.jwebmp.guiceinjection.GuiceContext.*;
 
 /**
  * Handles angular data binding calls, registers variables for access. Can handle population, use event binding for call back.

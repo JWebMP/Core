@@ -23,7 +23,7 @@ import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.children.TableColumnGroupChildren;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.logger.LogFactory;
+import com.jwebmp.logger.LogFactory;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

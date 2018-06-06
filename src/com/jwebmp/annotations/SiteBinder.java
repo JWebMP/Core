@@ -34,13 +34,13 @@ import com.jwebmp.base.ComponentBase;
 import com.jwebmp.base.ajax.AjaxCall;
 import com.jwebmp.base.ajax.AjaxResponse;
 import com.jwebmp.base.servlets.*;
+import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.guiceinjection.abstractions.GuiceSiteInjectorModule;
+import com.jwebmp.guiceinjection.interfaces.GuiceSiteBinder;
+import com.jwebmp.logger.LogFactory;
 import net.sf.uadetector.ReadableUserAgent;
 import net.sf.uadetector.UserAgentStringParser;
 import net.sf.uadetector.service.UADetectorServiceFactory;
-import za.co.mmagon.guiceinjection.GuiceContext;
-import za.co.mmagon.guiceinjection.abstractions.GuiceSiteInjectorModule;
-import za.co.mmagon.guiceinjection.interfaces.GuiceSiteBinder;
-import za.co.mmagon.logger.LogFactory;
 
 import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;

@@ -5,7 +5,7 @@ import com.jwebmp.base.ComponentStyleBase;
 import com.jwebmp.htmlbuilder.css.CSSImpl;
 import com.jwebmp.htmlbuilder.css.CSSPropertiesFactory;
 import com.jwebmp.htmlbuilder.css.enumarations.CSSTypes;
-import za.co.mmagon.logger.LogFactory;
+import com.jwebmp.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 import java.lang.reflect.Field;

@@ -16,7 +16,7 @@
  */
 package com.jwebmp.utilities;
 
-import za.co.mmagon.logger.LogFactory;
+import com.jwebmp.logger.LogFactory;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -240,7 +240,7 @@ public class TextUtilities
 	 *
 	 * @return
 	 */
-	public static <T extends Enum<T>> T getInstance(final String value, final Class<T> enumClass)
+	public static <T extends Enum<T>> T getInstance(String value, Class<T> enumClass)
 	{
 		return Enum.valueOf(enumClass, value);
 	}

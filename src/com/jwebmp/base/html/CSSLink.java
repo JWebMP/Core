@@ -28,7 +28,7 @@ import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.events.NoEvents;
 import com.jwebmp.base.references.CSSReference;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.logger.LogFactory;
+import com.jwebmp.logger.LogFactory;
 
 import java.util.Objects;
 import java.util.logging.Level;
@@ -209,7 +209,7 @@ public class CSSLink<J extends CSSLink<J>>
 		{
 			return false;
 		}
-		final CSSLink lin = (CSSLink) obj;
+		CSSLink lin = (CSSLink) obj;
 
 		return getAttribute(CSSLinkAttributes.HRef).equals(lin.getAttribute(CSSLinkAttributes.HRef));
 	}

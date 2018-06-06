@@ -22,11 +22,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.servlet.RequestScoped;
 import com.jwebmp.base.ajax.AjaxCall;
 import com.jwebmp.base.servlets.SessionStorageProperties;
+import com.jwebmp.guiceinjection.GuiceContext;
 import com.jwebmp.interception.AjaxCallIntercepter;
 import com.jwebmp.interception.DataCallIntercepter;
+import com.jwebmp.logger.LogFactory;
 import com.jwebmp.utilities.StaticStrings;
-import za.co.mmagon.guiceinjection.GuiceContext;
-import za.co.mmagon.logger.LogFactory;
 
 import java.util.Map;
 import java.util.logging.Level;

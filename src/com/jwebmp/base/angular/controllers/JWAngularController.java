@@ -17,8 +17,8 @@
 package com.jwebmp.base.angular.controllers;
 
 import com.jwebmp.FileTemplates;
+import com.jwebmp.guiceinjection.GuiceContext;
 import com.jwebmp.utilities.StaticStrings;
-import za.co.mmagon.guiceinjection.GuiceContext;
 
 import javax.validation.constraints.NotNull;
 import java.util.Set;

@@ -23,8 +23,8 @@ import com.jwebmp.base.ajax.AjaxResponse;
 import com.jwebmp.base.angular.AngularAttributes;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.htmlbuilder.javascript.events.enumerations.EventTypes;
+import com.jwebmp.logger.LogFactory;
 import com.jwebmp.utilities.StaticStrings;
-import za.co.mmagon.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 import java.util.logging.Level;
@@ -73,6 +73,14 @@ public abstract class SortAdapter
 	}
 
 	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getDirective().hashCode();
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object o)
 	{
 		if (this == o)
@@ -91,6 +99,21 @@ public abstract class SortAdapter
 		SortAdapter that = (SortAdapter) o;
 
 		return getDirective().equals(that.getDirective());
+	}
+
+	/**
+	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
+	 */
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+
+
+			getComponent().addAttribute(AngularAttributes.ngSort, StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
+		}
+		super.preConfigure();
 	}
 
 	/**
@@ -116,29 +139,6 @@ public abstract class SortAdapter
 	public void setDirective(SortDirective directive)
 	{
 		this.directive = directive;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		int result = super.hashCode();
-		result = 31 * result + getDirective().hashCode();
-		return result;
-	}
-
-	/**
-	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-
-
-			getComponent().addAttribute(AngularAttributes.ngSort, StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-		super.preConfigure();
 	}
 
 	/**

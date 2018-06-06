@@ -24,9 +24,9 @@ import com.jwebmp.base.angular.AngularAttributes;
 import com.jwebmp.base.angular.AngularPageConfigurator;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.htmlbuilder.javascript.events.enumerations.EventTypes;
+import com.jwebmp.logger.LogFactory;
 import com.jwebmp.plugins.ComponentInformation;
 import com.jwebmp.utilities.StaticStrings;
-import za.co.mmagon.logger.LogFactory;
 
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
@@ -109,6 +109,21 @@ public abstract class CancelAdapter
 	}
 
 	/**
+	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
+	 */
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			AngularPageConfigurator.setRequired(true);
+
+			getComponent().addAttribute(AngularAttributes.ngCancel, StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
+		}
+		super.preConfigure();
+	}
+
+	/**
 	 * Returns this directive
 	 *
 	 * @return
@@ -131,21 +146,6 @@ public abstract class CancelAdapter
 	public void setDirective(@Nullable CancelDirective directive)
 	{
 		this.directive = directive;
-	}
-
-	/**
-	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-			AngularPageConfigurator.setRequired(true);
-
-			getComponent().addAttribute(AngularAttributes.ngCancel, StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-		super.preConfigure();
 	}
 
 	/**

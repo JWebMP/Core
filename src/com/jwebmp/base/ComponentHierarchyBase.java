@@ -33,7 +33,7 @@ import com.jwebmp.base.references.CSSReference;
 import com.jwebmp.base.references.JavascriptReference;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.htmlbuilder.css.themes.Theme;
-import za.co.mmagon.logger.LogFactory;
+import com.jwebmp.logger.LogFactory;
 
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
@@ -43,8 +43,8 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.jwebmp.utilities.StaticStrings.STRING_SPACE;
-import static java.util.Comparator.comparing;
+import static com.jwebmp.utilities.StaticStrings.*;
+import static java.util.Comparator.*;
 
 
 /**

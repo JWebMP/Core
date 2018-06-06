@@ -26,9 +26,9 @@ import com.jwebmp.base.angular.controllers.AngularControllerBase;
 import com.jwebmp.base.angular.factories.AngularFactoryBase;
 import com.jwebmp.base.angular.modules.AngularMessagesModule;
 import com.jwebmp.base.angular.modules.AngularModuleBase;
+import com.jwebmp.logger.LogFactory;
 import com.jwebmp.plugins.PluginInformation;
 import com.jwebmp.plugins.jquery.JQueryPageConfigurator;
-import za.co.mmagon.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;

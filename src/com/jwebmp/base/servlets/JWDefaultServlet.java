@@ -21,10 +21,10 @@ import com.jwebmp.base.ajax.AjaxCall;
 import com.jwebmp.base.ajax.AjaxEventValue;
 import com.jwebmp.exceptions.InvalidRequestException;
 import com.jwebmp.exceptions.MissingComponentException;
+import com.jwebmp.guiceinjection.GuiceContext;
 import com.jwebmp.htmlbuilder.javascript.events.enumerations.EventTypes;
+import com.jwebmp.logger.LogFactory;
 import com.jwebmp.utilities.StaticStrings;
-import za.co.mmagon.guiceinjection.GuiceContext;
-import za.co.mmagon.logger.LogFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

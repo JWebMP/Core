@@ -19,9 +19,9 @@ package com.jwebmp.base.angular;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jwebmp.guiceinjection.GuiceContext;
 import com.jwebmp.htmlbuilder.javascript.JavaScriptPart;
-import za.co.mmagon.guiceinjection.GuiceContext;
-import za.co.mmagon.logger.LogFactory;
+import com.jwebmp.logger.LogFactory;
 
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;

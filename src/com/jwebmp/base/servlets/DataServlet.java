@@ -24,8 +24,8 @@ import com.jwebmp.annotations.DataCallInterception;
 import com.jwebmp.annotations.SiteInterception;
 import com.jwebmp.base.servlets.interfaces.IDataComponent;
 import com.jwebmp.exceptions.MissingComponentException;
-import za.co.mmagon.guiceinjection.GuiceContext;
-import za.co.mmagon.logger.LogFactory;
+import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,8 +35,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.jwebmp.utilities.StaticStrings.CHAR_DOT;
-import static com.jwebmp.utilities.StaticStrings.CHAR_UNDERSCORE;
+import static com.jwebmp.utilities.StaticStrings.*;
 
 /**
  * Provides the data for a specific component

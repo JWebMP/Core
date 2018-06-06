@@ -17,9 +17,9 @@
 
 package com.jwebmp;
 
+import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.logger.LogFactory;
 import org.junit.jupiter.api.Test;
-import za.co.mmagon.guiceinjection.GuiceContext;
-import za.co.mmagon.logger.LogFactory;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

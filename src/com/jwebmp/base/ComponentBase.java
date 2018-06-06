@@ -23,9 +23,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jwebmp.base.interfaces.IComponentBase;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.htmlbuilder.javascript.JavaScriptPart;
+import com.jwebmp.logger.LogFactory;
 import com.jwebmp.utilities.GUIDGenerator;
 import com.jwebmp.utilities.StaticStrings;
-import za.co.mmagon.logger.LogFactory;
 
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
@@ -446,7 +446,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 		{
 			return false;
 		}
-		final ComponentBase<?> other = (ComponentBase<?>) obj;
+		ComponentBase<?> other = (ComponentBase<?>) obj;
 		return other.getID()
 		            .equals(getID());
 	}

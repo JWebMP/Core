@@ -26,7 +26,7 @@ import com.jwebmp.base.html.interfaces.NoIDTag;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.interfaces.IComponentHTMLAttributeBase;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.logger.LogFactory;
+import com.jwebmp.logger.LogFactory;
 
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;

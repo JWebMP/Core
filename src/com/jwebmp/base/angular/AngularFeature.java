@@ -31,8 +31,8 @@ import com.jwebmp.base.angular.modules.JWAngularModule;
 import com.jwebmp.base.html.interfaces.HTMLFeatures;
 import com.jwebmp.exceptions.NullComponentException;
 import com.jwebmp.htmlbuilder.javascript.JavaScriptPart;
+import com.jwebmp.logger.LogFactory;
 import com.jwebmp.utilities.StaticStrings;
-import za.co.mmagon.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;

@@ -28,7 +28,7 @@ import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.events.NoEvents;
 import com.jwebmp.base.references.JavascriptReference;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.logger.LogFactory;
+import com.jwebmp.logger.LogFactory;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -183,6 +183,13 @@ public class Script<J extends Script<J>>
 	}
 
 	@Override
+	public int hashCode()
+	{
+		return getText(0).append(getAttribute(ScriptAttributes.Src))
+		                 .hashCode();
+	}
+
+	@Override
 	public boolean equals(Object obj)
 	{
 		if (obj == null)
@@ -214,13 +221,6 @@ public class Script<J extends Script<J>>
 		{
 			return false;
 		}
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return getText(0).append(getAttribute(ScriptAttributes.Src))
-		                 .hashCode();
 	}
 
 	/**

@@ -18,7 +18,7 @@ package com.jwebmp.base.servlets;
 
 import com.google.inject.Singleton;
 import com.jwebmp.Page;
-import za.co.mmagon.guiceinjection.GuiceContext;
+import com.jwebmp.guiceinjection.GuiceContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

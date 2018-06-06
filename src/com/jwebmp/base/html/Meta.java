@@ -23,7 +23,7 @@ import com.jwebmp.base.html.interfaces.children.HeadChildren;
 import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.events.NoEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
-import za.co.mmagon.logger.LogFactory;
+import com.jwebmp.logger.LogFactory;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -139,6 +139,12 @@ public class Meta
 	}
 
 	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
+	}
+
+	@Override
 	public boolean equals(Object o)
 	{
 		if (o instanceof Meta)
@@ -149,12 +155,6 @@ public class Meta
 			                               .entrySet());
 		}
 		return false;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
 	}
 
 	/**

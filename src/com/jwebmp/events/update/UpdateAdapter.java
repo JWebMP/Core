@@ -23,8 +23,8 @@ import com.jwebmp.base.ajax.AjaxResponse;
 import com.jwebmp.base.angular.AngularAttributes;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.htmlbuilder.javascript.events.enumerations.EventTypes;
+import com.jwebmp.logger.LogFactory;
 import com.jwebmp.utilities.StaticStrings;
-import za.co.mmagon.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 import java.util.logging.Level;
@@ -102,6 +102,21 @@ public abstract class UpdateAdapter
 	}
 
 	/**
+	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
+	 */
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+
+
+			getComponent().addAttribute(AngularAttributes.ngUpdate, StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
+		}
+		super.preConfigure();
+	}
+
+	/**
 	 * Returns the angular directive associated with the right click event
 	 *
 	 * @return
@@ -124,21 +139,6 @@ public abstract class UpdateAdapter
 	public void setDirective(UpdateDirective directive)
 	{
 		this.directive = directive;
-	}
-
-	/**
-	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (!isConfigured())
-		{
-
-
-			getComponent().addAttribute(AngularAttributes.ngUpdate, StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-		super.preConfigure();
 	}
 
 	/**
