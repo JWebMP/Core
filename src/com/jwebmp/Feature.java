@@ -71,7 +71,10 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 		super(ComponentTypes.Feature);
 		setName(name);
 		setComponent(component);
-		component.addFeature(this);
+		if (component != null)
+		{
+			component.addFeature(this);
+		}
 	}
 
 	/**
