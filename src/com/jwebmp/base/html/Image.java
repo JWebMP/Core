@@ -23,7 +23,6 @@ import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.base.html.interfaces.children.ImageMapChildren;
 import com.jwebmp.base.html.interfaces.children.ListItemChildren;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 
@@ -58,7 +57,7 @@ import com.jwebmp.base.servlets.enumarations.ComponentTypes;
  * @author Marc Magon
  */
 public class Image<J extends Image<J>>
-		extends Component<NoChildren, ImageAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<GlobalChildren, ImageAttributes, GlobalFeatures, GlobalEvents, J>
 		implements ImageMapChildren, FigureChildren, GlobalChildren, ListItemChildren
 {
 

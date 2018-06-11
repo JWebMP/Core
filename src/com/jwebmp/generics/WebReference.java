@@ -25,7 +25,6 @@ import com.jwebmp.guiceinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 import com.jwebmp.utilities.StaticStrings;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Comparator;
@@ -479,22 +478,17 @@ public class WebReference<J extends WebReference>
 	{
 		try
 		{
-			HttpServletRequest request = GuiceContext.inject()
-			                                         .getInstance(HttpServletRequest.class);
-			if (request != null)
+			String url = SessionHelper.getServerPath();
+			if (url == null)
 			{
-				String url = SessionHelper.getServerPath();
-				if (url == null)
-				{
-					url = StaticStrings.STRING_EMPTY;
-				}
-				else
-				{
-					url += StaticStrings.STRING_EMPTY;
-				}
-				sb = sb.insert(0, url);
-				return sb;
+				url = StaticStrings.STRING_EMPTY;
 			}
+			else
+			{
+				url += StaticStrings.STRING_EMPTY;
+			}
+			sb = sb.insert(0, url);
+			return sb;
 		}
 		catch (Exception e)
 		{

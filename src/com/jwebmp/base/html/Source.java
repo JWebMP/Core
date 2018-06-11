@@ -18,10 +18,10 @@ package com.jwebmp.base.html;
 
 import com.jwebmp.Component;
 import com.jwebmp.base.html.attributes.SourceAttributes;
+import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.html.interfaces.NoClosingTag;
 import com.jwebmp.base.html.interfaces.NoFeatures;
 import com.jwebmp.base.html.interfaces.children.AudioChildren;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.children.VideoChildren;
 import com.jwebmp.base.html.interfaces.events.NoEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
@@ -56,7 +56,7 @@ import com.jwebmp.base.servlets.enumarations.ComponentTypes;
  * @since Mar 1, 2015
  */
 public class Source<J extends Source<J>>
-		extends Component<NoChildren, SourceAttributes, NoFeatures, NoEvents, J>
+		extends Component<GlobalChildren, SourceAttributes, NoFeatures, NoEvents, J>
 		implements AudioChildren, VideoChildren, NoClosingTag
 {
 

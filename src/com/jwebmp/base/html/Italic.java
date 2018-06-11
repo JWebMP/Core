@@ -20,7 +20,6 @@ import com.jwebmp.Component;
 import com.jwebmp.base.html.attributes.NoAttributes;
 import com.jwebmp.base.html.interfaces.*;
 import com.jwebmp.base.html.interfaces.children.ListItemChildren;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
@@ -61,7 +60,7 @@ import com.jwebmp.base.servlets.enumarations.ComponentTypes;
  * @author Marc Magon
  */
 public class Italic<J extends Italic<J>>
-		extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, ParagraphChildren, GlobalChildren, ListItemChildren
 {
 

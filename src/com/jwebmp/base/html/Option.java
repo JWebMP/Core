@@ -18,12 +18,8 @@ package com.jwebmp.base.html;
 
 import com.jwebmp.Component;
 import com.jwebmp.base.html.attributes.OptionAttributes;
-import com.jwebmp.base.html.interfaces.DisplayObjectType;
-import com.jwebmp.base.html.interfaces.NoFeatures;
-import com.jwebmp.base.html.interfaces.NoNewLineBeforeClosingTag;
-import com.jwebmp.base.html.interfaces.NoNewLineForRawText;
+import com.jwebmp.base.html.interfaces.*;
 import com.jwebmp.base.html.interfaces.children.DataListChildren;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.children.SelectChildren;
 import com.jwebmp.base.html.interfaces.events.NoEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
@@ -46,7 +42,7 @@ import com.jwebmp.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  */
 public class Option<J extends Option<J>>
-		extends Component<NoChildren, OptionAttributes, NoFeatures, NoEvents, J>
+		extends Component<GlobalChildren, OptionAttributes, NoFeatures, NoEvents, J>
 		implements DataListChildren, SelectChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, DisplayObjectType
 {
 

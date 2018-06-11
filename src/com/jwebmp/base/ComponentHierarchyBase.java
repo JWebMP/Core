@@ -1100,6 +1100,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	@SuppressWarnings("unchecked")
 	private void processComponentQueries(@NotNull ComponentHierarchyBase componentQuery, @NotNull Set<StringBuilder> reallyAllQueries)
 	{
+		reallyAllQueries.addAll(getQueries());
+
 		List<ComponentFeatureBase> features = new ArrayList<>(componentQuery.getFeatures());
 		features.remove(null);
 		features.forEach(feature ->

@@ -18,8 +18,8 @@ package com.jwebmp.base.html;
 
 import com.jwebmp.Component;
 import com.jwebmp.base.html.attributes.AppletAttributes;
+import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.html.interfaces.GlobalFeatures;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 
@@ -32,7 +32,7 @@ import com.jwebmp.base.servlets.enumarations.ComponentTypes;
  * @since @version @author MMagon
  */
 public class Applet<J extends Applet<J>>
-		extends Component<NoChildren, AppletAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<GlobalChildren, AppletAttributes, GlobalFeatures, GlobalEvents, J>
 {
 
 	/**

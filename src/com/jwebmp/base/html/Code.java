@@ -18,8 +18,8 @@ package com.jwebmp.base.html;
 
 import com.jwebmp.Component;
 import com.jwebmp.base.html.attributes.CodeAttributes;
+import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.html.interfaces.GlobalFeatures;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.children.PhraseChildren;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
@@ -55,7 +55,7 @@ import com.jwebmp.base.servlets.enumarations.ComponentTypes;
  * @since Forever
  */
 public class Code<J extends Code<J>>
-		extends Component<NoChildren, CodeAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<GlobalChildren, CodeAttributes, GlobalFeatures, GlobalEvents, J>
 		implements PhraseChildren
 {
 

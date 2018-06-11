@@ -24,7 +24,6 @@ import com.jwebmp.base.html.interfaces.NoFeatures;
 import com.jwebmp.base.html.interfaces.NoIDTag;
 import com.jwebmp.base.html.interfaces.children.BodyChildren;
 import com.jwebmp.base.html.interfaces.children.HeadChildren;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.events.NoEvents;
 import com.jwebmp.base.references.JavascriptReference;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
@@ -80,7 +79,7 @@ import java.util.logging.Logger;
  * @since 2013/11/12
  */
 public class Script<J extends Script<J>>
-		extends ComponentHierarchyBase<NoChildren, ScriptAttributes, NoFeatures, NoEvents, J>
+		extends ComponentHierarchyBase<GlobalChildren, ScriptAttributes, NoFeatures, NoEvents, J>
 		implements NoIDTag, HeadChildren, NoClassAttribute, BodyChildren, GlobalChildren
 {
 

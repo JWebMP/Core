@@ -22,7 +22,6 @@ import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.base.html.interfaces.NoNewLineBeforeClosingTag;
 import com.jwebmp.base.html.interfaces.NoNewLineForRawText;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 
@@ -51,7 +50,7 @@ import com.jwebmp.base.servlets.enumarations.ComponentTypes;
  * @since Mar 1, 2015
  */
 public class TextArea<J extends TextArea<J>>
-		extends Component<NoChildren, TextAreaAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<GlobalChildren, TextAreaAttributes, GlobalFeatures, GlobalEvents, J>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, GlobalChildren
 {
 

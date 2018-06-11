@@ -18,8 +18,8 @@ package com.jwebmp.base.html;
 
 import com.jwebmp.Component;
 import com.jwebmp.base.html.attributes.TableColumnAttributes;
+import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.html.interfaces.GlobalFeatures;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.children.TableColumnGroupChildren;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
@@ -52,7 +52,7 @@ import java.util.logging.Logger;
  * @since 2014/12/20
  */
 public class TableColumn<J extends TableColumn<J>>
-		extends Component<NoChildren, TableColumnAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<GlobalChildren, TableColumnAttributes, GlobalFeatures, GlobalEvents, J>
 		implements TableColumnGroupChildren
 {
 

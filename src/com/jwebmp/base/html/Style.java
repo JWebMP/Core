@@ -18,11 +18,11 @@ package com.jwebmp.base.html;
 
 import com.jwebmp.base.ComponentHierarchyBase;
 import com.jwebmp.base.html.attributes.StyleAttributes;
+import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.html.interfaces.NoClassAttribute;
 import com.jwebmp.base.html.interfaces.NoFeatures;
 import com.jwebmp.base.html.interfaces.NoIDTag;
 import com.jwebmp.base.html.interfaces.children.HeadChildren;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.events.NoEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 
@@ -54,7 +54,7 @@ import com.jwebmp.base.servlets.enumarations.ComponentTypes;
  * @since 2013/11/12
  */
 public class Style<J extends Style<J>>
-		extends ComponentHierarchyBase<NoChildren, StyleAttributes, NoFeatures, NoEvents, J>
+		extends ComponentHierarchyBase<GlobalChildren, StyleAttributes, NoFeatures, NoEvents, J>
 		implements NoIDTag, HeadChildren, NoClassAttribute
 {
 

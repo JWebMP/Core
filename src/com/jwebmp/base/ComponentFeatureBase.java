@@ -475,7 +475,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	@JsonProperty("queries")
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	@NotNull
-	private Set<StringBuilder> getQueries()
+	public Set<StringBuilder> getQueries()
 	{
 		if (queries == null)
 		{

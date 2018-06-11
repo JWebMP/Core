@@ -19,9 +19,9 @@ package com.jwebmp.base.html;
 import com.jwebmp.Component;
 import com.jwebmp.FileTemplates;
 import com.jwebmp.base.html.attributes.NoAttributes;
+import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.html.interfaces.NoFeatures;
 import com.jwebmp.base.html.interfaces.children.BodyChildren;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.base.html.interfaces.events.NoEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
@@ -40,7 +40,7 @@ import java.io.InputStreamReader;
  * @since 06 Feb 2017
  */
 public class ImportFile<J extends ImportFile<J>>
-		extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+		extends Component<GlobalChildren, NoAttributes, NoFeatures, NoEvents, J>
 		implements BodyChildren, ParagraphChildren
 {
 

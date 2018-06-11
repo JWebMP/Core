@@ -39,6 +39,8 @@ public class SessionHelper
 
 	private static boolean cacheAddress = false;
 
+	private static String addressToBeUsedWhenNull = "";
+
 	/*
 	 * Constructs a new SessionHelper
 	 */
@@ -74,7 +76,7 @@ public class SessionHelper
 		catch (Exception e)
 		{
 			log.log(Level.FINER, "Unable to get server path", e);
-			return STRING_EMPTY;
+			return addressToBeUsedWhenNull;
 		}
 	}
 
@@ -133,5 +135,15 @@ public class SessionHelper
 			return buff.isEmpty() ? STRING_FORWARD_SLASH : buff;
 		}
 		return STRING_FORWARD_SLASH;
+	}
+
+	public static String getAddressToBeUsedWhenNull()
+	{
+		return addressToBeUsedWhenNull;
+	}
+
+	public static void setAddressToBeUsedWhenNull(String addressToBeUsedWhenNull)
+	{
+		SessionHelper.addressToBeUsedWhenNull = addressToBeUsedWhenNull;
 	}
 }

@@ -18,10 +18,10 @@ package com.jwebmp.base.html;
 
 import com.jwebmp.Component;
 import com.jwebmp.base.html.attributes.NoAttributes;
+import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.html.interfaces.NoClassAttribute;
 import com.jwebmp.base.html.interfaces.NoFeatures;
 import com.jwebmp.base.html.interfaces.NoIDTag;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.events.NoEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.logger.LogFactory;
@@ -58,7 +58,7 @@ import java.util.logging.Level;
  * @author Marc Magon
  */
 public class HorizontalRule<J extends HorizontalRule<J>>
-		extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+		extends Component<GlobalChildren, NoAttributes, NoFeatures, NoEvents, J>
 		implements NoIDTag, NoClassAttribute
 {
 

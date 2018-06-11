@@ -18,11 +18,7 @@ package com.jwebmp.base.html;
 
 import com.jwebmp.Component;
 import com.jwebmp.base.html.attributes.NoAttributes;
-import com.jwebmp.base.html.interfaces.FigureChildren;
-import com.jwebmp.base.html.interfaces.NoFeatures;
-import com.jwebmp.base.html.interfaces.NoNewLineBeforeClosingTag;
-import com.jwebmp.base.html.interfaces.NoNewLineForRawText;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
+import com.jwebmp.base.html.interfaces.*;
 import com.jwebmp.base.html.interfaces.events.NoEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 
@@ -45,7 +41,7 @@ import com.jwebmp.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  */
 public class FigureCaption<J extends FigureCaption<J>>
-		extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+		extends Component<GlobalChildren, NoAttributes, NoFeatures, NoEvents, J>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, FigureChildren
 {
 

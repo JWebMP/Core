@@ -18,8 +18,8 @@ package com.jwebmp.base.html;
 
 import com.jwebmp.Component;
 import com.jwebmp.base.html.attributes.IFrameAttributes;
+import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.html.interfaces.GlobalFeatures;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 
@@ -57,7 +57,7 @@ import com.jwebmp.base.servlets.enumarations.ComponentTypes;
  * @author Marc Magon
  */
 public class IFrame<J extends IFrame<J>>
-		extends Component<NoChildren, IFrameAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<GlobalChildren, IFrameAttributes, GlobalFeatures, GlobalEvents, J>
 {
 
 	private static final long serialVersionUID = 1L;

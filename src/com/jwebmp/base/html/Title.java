@@ -20,7 +20,6 @@ import com.jwebmp.Component;
 import com.jwebmp.base.html.attributes.NoAttributes;
 import com.jwebmp.base.html.interfaces.*;
 import com.jwebmp.base.html.interfaces.children.HeadChildren;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.events.NoEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 
@@ -51,7 +50,7 @@ import com.jwebmp.base.servlets.enumarations.ComponentTypes;
  * @since 2013/11/12
  */
 public class Title<J extends Title<J>>
-		extends Component<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+		extends Component<GlobalChildren, NoAttributes, NoFeatures, NoEvents, J>
 		implements NoIDTag, HeadChildren, OneValidTag, NoClassAttribute, NoNewLineForRawText, NoNewLineBeforeChildren, NoNewLineBeforeClosingTag
 {
 

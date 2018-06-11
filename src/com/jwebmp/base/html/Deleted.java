@@ -18,11 +18,7 @@ package com.jwebmp.base.html;
 
 import com.jwebmp.Component;
 import com.jwebmp.base.html.attributes.DeletedAttributes;
-import com.jwebmp.base.html.interfaces.NoFeatures;
-import com.jwebmp.base.html.interfaces.NoIDTag;
-import com.jwebmp.base.html.interfaces.NoNewLineBeforeClosingTag;
-import com.jwebmp.base.html.interfaces.NoNewLineForRawText;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
+import com.jwebmp.base.html.interfaces.*;
 import com.jwebmp.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.base.html.interfaces.events.NoEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
@@ -51,7 +47,7 @@ import com.jwebmp.base.servlets.enumarations.ComponentTypes;
  * @since 2014/12/21
  */
 public class Deleted<J extends Deleted<J>>
-		extends Component<NoChildren, DeletedAttributes, NoFeatures, NoEvents, J>
+		extends Component<GlobalChildren, DeletedAttributes, NoFeatures, NoEvents, J>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, ParagraphChildren
 {
 

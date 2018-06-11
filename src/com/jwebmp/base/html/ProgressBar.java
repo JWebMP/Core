@@ -18,8 +18,8 @@ package com.jwebmp.base.html;
 
 import com.jwebmp.Component;
 import com.jwebmp.base.html.attributes.ProgressBarAttributes;
+import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.html.interfaces.GlobalFeatures;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 
@@ -51,7 +51,7 @@ import com.jwebmp.base.servlets.enumarations.ComponentTypes;
  * @since Mar 1, 2015
  */
 public class ProgressBar<J extends ProgressBar<J>>
-		extends Component<NoChildren, ProgressBarAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<GlobalChildren, ProgressBarAttributes, GlobalFeatures, GlobalEvents, J>
 {
 
 	private static final long serialVersionUID = 1L;

@@ -26,7 +26,7 @@ class ScriptsDynamicPageConfigurator
 	}
 
 	@Override
-	public Page configure(Page page)
+	public Page configure(Page<?> page)
 	{
 		if (!page.isConfigured())
 		{
@@ -37,8 +37,8 @@ class ScriptsDynamicPageConfigurator
 				if (s != null)
 				{
 					page.getHead()
-					    .add(new CSSLink(SessionHelper.getServerPath() + SiteBinder.getCSSLocation()
-					                                                               .replaceAll(STRING_FORWARD_SLASH, STRING_EMPTY)));
+					    .add(new CSSLink<>(SessionHelper.getServerPath() + SiteBinder.getCSSLocation()
+					                                                                 .replaceAll(STRING_FORWARD_SLASH, STRING_EMPTY)));
 				}
 				if (JQueryPageConfigurator.isRequired())
 				{
@@ -79,6 +79,11 @@ class ScriptsDynamicPageConfigurator
 				{
 					addable.add(getSiteLoaderScript());
 					addable.add(getJavascriptScript(page));
+				}
+				Script javaScript = getJavascriptScript(page);
+				if (javaScript != null)
+				{
+					addable.add(javaScript);
 				}
 				if (AngularPageConfigurator.isRequired())
 				{
@@ -131,9 +136,22 @@ class ScriptsDynamicPageConfigurator
 		       .trim()
 		       .isEmpty())
 		{
-			return newScript(page.getNewLine() + js);
+			String[] lines = js.toString()
+			                   .split(page.getNewLine());
+			StringBuilder output = new StringBuilder();
+			for (String line : lines)
+			{
+				if (line == null || line.isEmpty())
+				{
+					continue;
+				}
+				output.append("\t\t\t" + line)
+				      .append(page.getNewLine());
+			}
+
+			return newScript(page.getNewLine() + output);
 		}
-		return new Script();
+		return null;
 	}
 
 	private Script getAngularScript(Page page)

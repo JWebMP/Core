@@ -18,8 +18,8 @@ package com.jwebmp.base.html;
 
 import com.jwebmp.Component;
 import com.jwebmp.base.html.attributes.TrackAttributes;
+import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.html.interfaces.NoFeatures;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.events.NoEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 
@@ -32,7 +32,7 @@ import com.jwebmp.base.servlets.enumarations.ComponentTypes;
  * @since Mar 1, 2015
  */
 public class Track<J extends Track<J>>
-		extends Component<NoChildren, TrackAttributes, NoFeatures, NoEvents, J>
+		extends Component<GlobalChildren, TrackAttributes, NoFeatures, NoEvents, J>
 {
 
 	private static final long serialVersionUID = 1L;

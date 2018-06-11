@@ -18,10 +18,10 @@ package com.jwebmp.base.html;
 
 import com.jwebmp.Component;
 import com.jwebmp.base.html.attributes.NoAttributes;
+import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.base.html.interfaces.NoNewLineBeforeClosingTag;
 import com.jwebmp.base.html.interfaces.children.FieldSetChildren;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 
@@ -43,7 +43,7 @@ import com.jwebmp.base.servlets.enumarations.ComponentTypes;
  * @since Feb 9, 2015
  */
 public class Legend<J extends Legend<J>>
-		extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements FieldSetChildren, NoNewLineBeforeClosingTag
 {
 

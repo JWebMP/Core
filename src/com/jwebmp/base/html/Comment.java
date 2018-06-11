@@ -31,7 +31,7 @@ import com.jwebmp.utilities.TextUtilities;
  * @author GedMarc
  */
 public class Comment<J extends Comment<J>>
-		extends ComponentHierarchyBase<NoChildren, NoAttributes, NoFeatures, NoEvents, J>
+		extends ComponentHierarchyBase<GlobalChildren, NoAttributes, NoFeatures, NoEvents, J>
 		implements HtmlChildren, HeadChildren, ImageMapChildren, BodyChildren, GlobalChildren, PageChildren
 {
 

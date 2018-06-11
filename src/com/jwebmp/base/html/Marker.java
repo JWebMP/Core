@@ -18,10 +18,10 @@ package com.jwebmp.base.html;
 
 import com.jwebmp.Component;
 import com.jwebmp.base.html.attributes.NoAttributes;
+import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.base.html.interfaces.NoNewLineBeforeClosingTag;
 import com.jwebmp.base.html.interfaces.NoNewLineForRawText;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
@@ -47,7 +47,7 @@ import com.jwebmp.base.servlets.enumarations.ComponentTypes;
  * @since Feb 9, 2015
  */
 public class Marker<J extends Marker<J>>
-		extends Component<NoChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 

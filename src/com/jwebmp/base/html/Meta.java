@@ -20,7 +20,6 @@ import com.jwebmp.base.ComponentHierarchyBase;
 import com.jwebmp.base.html.attributes.MetaAttributes;
 import com.jwebmp.base.html.interfaces.*;
 import com.jwebmp.base.html.interfaces.children.HeadChildren;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.events.NoEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.logger.LogFactory;
@@ -55,7 +54,7 @@ import java.util.logging.Logger;
  * @since 2013/11/12
  */
 public class Meta
-		extends ComponentHierarchyBase<NoChildren, MetaAttributes, NoFeatures, NoEvents, Meta>
+		extends ComponentHierarchyBase<GlobalChildren, MetaAttributes, NoFeatures, NoEvents, Meta>
 		implements NoIDTag, NoClosingTag, HeadChildren, NoClassAttribute, NoNewLineBeforeClosingTag
 {
 

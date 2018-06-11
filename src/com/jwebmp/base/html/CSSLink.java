@@ -20,11 +20,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jwebmp.Component;
 import com.jwebmp.base.html.attributes.CSSLinkAttributes;
+import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.html.interfaces.NoClosingTag;
 import com.jwebmp.base.html.interfaces.NoFeatures;
 import com.jwebmp.base.html.interfaces.NoIDTag;
 import com.jwebmp.base.html.interfaces.children.HeadChildren;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.events.NoEvents;
 import com.jwebmp.base.references.CSSReference;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
@@ -68,7 +68,7 @@ import java.util.logging.Logger;
  * @since 2013/11/12
  */
 public class CSSLink<J extends CSSLink<J>>
-		extends Component<NoChildren, CSSLinkAttributes, NoFeatures, NoEvents, J>
+		extends Component<GlobalChildren, CSSLinkAttributes, NoFeatures, NoEvents, J>
 		implements NoIDTag, NoClosingTag, HeadChildren
 {
 

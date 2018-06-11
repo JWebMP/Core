@@ -18,10 +18,10 @@ package com.jwebmp.base.html;
 
 import com.jwebmp.Component;
 import com.jwebmp.base.html.attributes.ParameterAttributes;
+import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.base.html.interfaces.NoNewLineBeforeClosingTag;
 import com.jwebmp.base.html.interfaces.NoNewLineForRawText;
-import com.jwebmp.base.html.interfaces.children.NoChildren;
 import com.jwebmp.base.html.interfaces.children.ObjectTagChildren;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
@@ -56,7 +56,7 @@ import java.util.logging.Level;
  * @since Mar 1, 2015
  */
 public class Parameter<J extends Parameter<J>>
-		extends Component<NoChildren, ParameterAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<GlobalChildren, ParameterAttributes, GlobalFeatures, GlobalEvents, J>
 		implements ObjectTagChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 

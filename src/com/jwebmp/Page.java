@@ -148,6 +148,18 @@ public class Page<J extends Page<J>>
 	}
 
 	/**
+	 * Adds the text as a given paragraph
+	 *
+	 * @param addText
+	 *
+	 * @return
+	 */
+	public Body add(String addText)
+	{
+		return getBody().add(addText);
+	}
+
+	/**
 	 * Initializes the page
 	 */
 	public void initialize()
@@ -267,6 +279,12 @@ public class Page<J extends Page<J>>
 		return options;
 	}
 
+	@Override
+	public Set<StringBuilder> getQueriesAll()
+	{
+		return getBody().getQueriesAll();
+	}
+
 	/**
 	 * Returns the JavaScript render for the body
 	 *
@@ -275,7 +293,13 @@ public class Page<J extends Page<J>>
 	@Override
 	public StringBuilder renderJavascript()
 	{
-		return getBody().renderJavascript();
+		return getBody().renderJavascriptAll();
+	}
+
+	@Override
+	public Set<StringBuilder> getQueries()
+	{
+		return getBody().getQueries();
 	}
 
 	@Override
@@ -594,7 +618,8 @@ public class Page<J extends Page<J>>
 	{
 		if (userAgent == null)
 		{
-			userAgent = new UserAgent(DeviceCategory.EMPTY, UserAgentFamily.FIREFOX, "", "", OperatingSystem.EMPTY, "", "", UserAgentType.BROWSER, "", "", VersionNumber.UNKNOWN);
+			userAgent = new UserAgent(DeviceCategory.EMPTY, UserAgentFamily.FIREFOX, STRING_EMPTY, STRING_EMPTY, OperatingSystem.EMPTY, STRING_EMPTY, STRING_EMPTY,
+			                          UserAgentType.BROWSER, STRING_EMPTY, STRING_EMPTY, VersionNumber.UNKNOWN);
 		}
 		return userAgent;
 	}
