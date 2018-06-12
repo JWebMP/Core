@@ -53,30 +53,20 @@ public class CSSComposer
 	 *
 	 * @return
 	 */
-	public List<CSSBlock> addComponent(ComponentStyleBase o, boolean includeChildren)
+	public Set<CSSBlock> addComponent(ComponentHierarchyBase o, boolean includeChildren)
 	{
-		ArrayList<CSSBlock> list = new ArrayList<>();
+		Set<CSSBlock> list = new HashSet<>();
 		if (includeChildren)
 		{
 			Set<ComponentHierarchyBase> comp = o.getChildrenHierarchy(true);
-			Set<ComponentStyleBase> compti = new LinkedHashSet<>();
-
 			comp.forEach(co ->
 			             {
-				             if (ComponentStyleBase.class.isAssignableFrom(co.getClass()))
+				             if (ComponentHierarchyBase.class.isAssignableFrom(co.getClass()))
 				             {
-					             ComponentStyleBase chb = ComponentStyleBase.class.cast(co);
-					             compti.add(chb);
+					             ComponentHierarchyBase chb = ComponentHierarchyBase.class.cast(co);
+					             addComponent(chb, list);
 				             }
 			             });
-
-			compti.forEach(a -> addComponent(a, list).forEach(a2 ->
-			                                                  {
-				                                                  if (!list.contains(a2))
-				                                                  {
-					                                                  list.add(a2);
-				                                                  }
-			                                                  }));
 		}
 		else
 		{
@@ -97,7 +87,7 @@ public class CSSComposer
 	 * @return True or False
 	 */
 	@SuppressWarnings("all")
-	public final List<CSSBlock> addComponent(ComponentStyleBase o, List<CSSBlock> componentBlocks)
+	public final Set<CSSBlock> addComponent(ComponentHierarchyBase o, Set<CSSBlock> componentBlocks)
 	{
 		CSSBlock annotatedCssBlocks = getPropertiesFactory().getCSSBlock(o.getID(), CSSTypes.None, getPropertiesFactory().getCSS(o), CSSBlockIdentifier.Class);
 
@@ -114,22 +104,25 @@ public class CSSComposer
 			}
 		}
 
-
-		Map<CSSTypes, CSSImpl> css = o.getCssTypeHashMap();
-		List<CSSBlock> blocks = new ArrayList<>();
-		css.forEach((key, value) ->
-		            {
-			            Map<StringBuilder, Object> typeCss = value.getMap();
-			            CSSBlock declaredCssBlocks = propertiesFactory.getCSSBlock(o.getID() + key.getCssName(), key, typeCss, CSSBlockIdentifier.Id);
-			            blocks.add(declaredCssBlocks);
-		            });
-		blocks.forEach(e ->
-		               {
-			               if (!componentBlocks.contains(e))
+		if (ComponentStyleBase.class.isAssignableFrom(o.getClass()))
+		{
+			ComponentStyleBase csb = (ComponentStyleBase) o;
+			Map<CSSTypes, CSSImpl> css = csb.getCssTypeHashMap();
+			List<CSSBlock> blocks = new ArrayList<>();
+			css.forEach((key, value) ->
+			            {
+				            Map<StringBuilder, Object> typeCss = value.getMap();
+				            CSSBlock declaredCssBlocks = propertiesFactory.getCSSBlock(o.getID() + key.getCssName(), key, typeCss, CSSBlockIdentifier.Id);
+				            blocks.add(declaredCssBlocks);
+			            });
+			blocks.forEach(e ->
 			               {
-				               componentBlocks.add(e);
-			               }
-		               });
+				               if (!componentBlocks.contains(e))
+				               {
+					               componentBlocks.add(e);
+				               }
+			               });
+		}
 
 		List<Field> fields = new ArrayList<>(Arrays.asList(o.getClass()
 		                                                    .getDeclaredFields()));
@@ -145,9 +138,9 @@ public class CSSComposer
 			               {
 				               log.log(Level.WARNING, "Unable to read field object " + field.getName(), e);
 			               }
-			               if (Objects.nonNull(fieldObject) && ComponentStyleBase.class.isAssignableFrom(fieldObject.getClass()))
+			               if (Objects.nonNull(fieldObject) && ComponentHierarchyBase.class.isAssignableFrom(fieldObject.getClass()))
 			               {
-				               ComponentStyleBase c = (ComponentStyleBase) fieldObject;
+				               ComponentHierarchyBase c = (ComponentHierarchyBase) fieldObject;
 				               CSSBlock newFieldBlock = getPropertiesFactory().getCSSBlock(c.getID(), CSSTypes.None, getPropertiesFactory().getCSS(field, o),
 				                                                                           CSSBlockIdentifier.Id);
 				               newFieldBlock.setBlockIdentifer(CSSBlockIdentifier.Id);
@@ -182,9 +175,9 @@ public class CSSComposer
 		return propertiesFactory;
 	}
 
-	public final List<CSSBlock> addComponent(ComponentStyleBase o)
+	public final Set<CSSBlock> addComponent(ComponentHierarchyBase o)
 	{
-		return addComponent(o, new ArrayList<>());
+		return addComponent(o, new LinkedHashSet<>());
 	}
 
 	/**

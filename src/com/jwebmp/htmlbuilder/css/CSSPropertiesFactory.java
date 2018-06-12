@@ -219,7 +219,7 @@ public class CSSPropertiesFactory<A extends Annotation>
 		}
 		if (cssDetails == null)
 		{
-			log.info("Field missing CSS Details {" + cssKey + "}");
+			log.finer("Field missing CSS Details {" + cssKey + "}");
 			return rawValues;
 		}
 		else if (returnedObject instanceof CSSEnumeration)
@@ -291,7 +291,7 @@ public class CSSPropertiesFactory<A extends Annotation>
 	 * @return The HashMap of String Object where Object should be rendered with toString()
 	 */
 	@Nullable
-	public <T extends Object> Map<StringBuilder, Object> getCSS(T objectIn)
+	public <T> Map<StringBuilder, Object> getCSS(T objectIn)
 	{
 		if (objectIn == null)
 		{
@@ -316,7 +316,7 @@ public class CSSPropertiesFactory<A extends Annotation>
 	 *
 	 * @return ArrayList of all applicable CSS annotations
 	 */
-	public <T extends Object> List<Annotation> getAllAppliedCSSAnnotations(T cssObjectIn)
+	public <T> List<Annotation> getAllAppliedCSSAnnotations(T cssObjectIn)
 	{
 		Class clazz = cssObjectIn.getClass();
 		List<Annotation> arrayList = Lists.newArrayList(clazz.getAnnotations());
@@ -335,7 +335,7 @@ public class CSSPropertiesFactory<A extends Annotation>
 	 *
 	 * @return The HashMap of String Object where Object should be rendered with toString()
 	 */
-	public <T extends Object> Map<StringBuilder, Object> getCSS(T objectIn, Annotation[] classAnnotations)
+	public <T> Map<StringBuilder, Object> getCSS(T objectIn, Annotation[] classAnnotations)
 	{
 		if (objectIn == null)
 		{

@@ -85,17 +85,6 @@ public class TextCSSImpl
 	}
 
 	/**
-	 * Returns nothing
-	 *
-	 * @return
-	 */
-	@Override
-	public String toString()
-	{
-		return "";
-	}
-
-	/**
 	 * Sets the colour
 	 *
 	 * @return
@@ -354,5 +343,6 @@ public class TextCSSImpl
 	{
 		color$ = Color$;
 	}
+
 
 }

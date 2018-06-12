@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.inject.servlet.RequestScoped;
 import com.jwebmp.annotations.PageConfiguration;
 import com.jwebmp.base.ComponentFeatureBase;
+import com.jwebmp.base.ComponentHierarchyBase;
 import com.jwebmp.base.ajax.AjaxCall;
 import com.jwebmp.base.ajax.AjaxResponse;
 import com.jwebmp.base.angular.AngularPageConfigurator;
@@ -154,9 +155,13 @@ public class Page<J extends Page<J>>
 	 *
 	 * @return
 	 */
-	public Body add(String addText)
+	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J add(String addText)
 	{
-		return getBody().add(addText);
+		getBody().add(addText);
+		return (J) this;
 	}
 
 	/**
@@ -227,24 +232,6 @@ public class Page<J extends Page<J>>
 		return getBody().getJavascriptReferences();
 	}
 
-	/**
-	 * Sets all component in the head and body to tiny
-	 *
-	 * @param tiny
-	 *
-	 * @return
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J setTiny(boolean tiny)
-	{
-		super.setTiny(tiny);
-		getHead().setTiny(tiny);
-		getBody().setTiny(tiny);
-		return (J) this;
-	}
-
 	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull
@@ -279,12 +266,6 @@ public class Page<J extends Page<J>>
 		return options;
 	}
 
-	@Override
-	public Set<StringBuilder> getQueriesAll()
-	{
-		return getBody().getQueriesAll();
-	}
-
 	/**
 	 * Returns the JavaScript render for the body
 	 *
@@ -300,113 +281,6 @@ public class Page<J extends Page<J>>
 	public Set<StringBuilder> getQueries()
 	{
 		return getBody().getQueries();
-	}
-
-	@Override
-	public void init()
-	{
-		if (!pageInitialized)
-		{
-			getBody().init();
-			pageInitialized = true;
-		}
-
-		if (!isConfigured())
-		{
-			log.log(Level.FINER, "Looking for plugins....");
-			Set<Class<? extends PageConfigurator>> configs = GuiceContext.reflect()
-			                                                             .getSubTypesOf(PageConfigurator.class);
-			List<PageConfigurator> configInstances = new ArrayList<>();
-			for (Class<? extends PageConfigurator> pc : configs)
-			{
-				if (Modifier.isAbstract(pc.getModifiers()))
-				{
-					continue;
-				}
-				PageConfigurator config = GuiceContext.getInstance(pc);
-				configInstances.add(config);
-			}
-			configInstances.sort(Comparator.comparing(PageConfigurator::getSortOrder));
-			for (PageConfigurator configInstance : configInstances)
-			{
-				log.log(Level.FINER, "Configuring [" + configInstance.getClass()
-				                                                     .getSimpleName() + "]");
-				configInstance.configure(this);
-			}
-		}
-
-		super.init();
-	}
-
-	/**
-	 * Renders all the children to a string builder
-	 *
-	 * @return
-	 */
-	@Override
-	protected StringBuilder renderChildren()
-	{
-		StringBuilder pageOutput = new StringBuilder();
-		StringBuilder bodyOutput = null;
-
-		if (!isBodyEmpty())
-		{
-			bodyOutput = new StringBuilder(getBody().toString(1));
-		}
-		if (!isHeadEmpty())
-		{
-			pageOutput.append(getNewLine())
-			          .append(getCurrentTabIndentString())
-			          .append(getHead().toString(1));
-		}
-		if (bodyOutput != null)
-		{
-			pageOutput.append(getNewLine())
-			          .append(getCurrentTabIndentString())
-			          .append(bodyOutput);
-		}
-		return pageOutput;
-	}
-
-	/**
-	 * Returns if the body object is empty
-	 *
-	 * @return
-	 */
-	private boolean isBodyEmpty()
-	{
-		return getBody().getChildren()
-		                .isEmpty();
-	}
-
-	/**
-	 * Returns if the head object is empty
-	 *
-	 * @return
-	 */
-	private boolean isHeadEmpty()
-	{
-		return getHead().getChildren()
-		                .isEmpty();
-	}
-
-	/**
-	 * Configures the page and all its components
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public void preConfigure()
-	{
-		if (!isInitialized())
-		{
-			init();
-		}
-		if (!isConfigured())
-		{
-			configurePageHeader();
-			addVariablesScriptToPage();
-		}
-		super.preConfigure();
 	}
 
 	@Override
@@ -426,59 +300,6 @@ public class Page<J extends Page<J>>
 		userAgent = null;
 
 		super.destroy();
-	}
-
-	/**
-	 * Builds up the Header Tag
-	 */
-	@SuppressWarnings("unchecked")
-	private void configurePageHeader()
-	{
-		if (getPageFields().getTitle() != null)
-		{
-			getHead().add(getPageFields().getTitle());
-		}
-		if (getPageFields().getBase() != null)
-		{
-			getHead().add(getPageFields().getBase());
-		}
-		getHead().add(getPageFields().getHttpEquivMeta());
-		getHead().add(getPageFields().getCacheControl());
-		getHead().add(getPageFields().getAuthor());
-		getHead().add(getPageFields().getApplicationName());
-		getHead().add(getPageFields().getGenerator());
-		getHead().add(getPageFields().getDescription());
-		getHead().add(getPageFields().getKeywords());
-		getHead().add(getPageFields().getFavIconLink());
-	}
-
-	/**
-	 * Adds the variables in the application to the collection
-	 */
-	@SuppressWarnings("unchecked")
-	private void addVariablesScriptToPage()
-	{
-		StringBuilder variablesScriptBuilder = new StringBuilder();
-		for (Object o : getBody().getVariablesAll())
-		{
-			String var = (String) o;
-			variablesScriptBuilder.append("var ")
-			                      .append(var)
-			                      .append(STRING_SEMICOLON);
-		}
-		if (variablesScriptBuilder.length() > 0)
-		{
-			Script variablesScript = new Script();
-			variablesScript.setID("variables");
-			variablesScript.setNewLineForRawText(true);
-			variablesScript.addAttribute(ScriptAttributes.Type, HTML_HEADER_JAVASCRIPT);
-			variablesScript.setText(variablesScriptBuilder.toString());
-			if (!getHead().getChildren()
-			              .contains(variablesScript))
-			{
-				getHead().add(variablesScript);
-			}
-		}
 	}
 
 	/**
@@ -512,15 +333,15 @@ public class Page<J extends Page<J>>
 	}
 
 	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-
-	@Override
 	public boolean equals(Object o)
 	{
 		return super.equals(o);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
 	}
 
 	/**
@@ -635,10 +456,37 @@ public class Page<J extends Page<J>>
 	}
 
 	/**
+	 * Shortcut method to getBody().add()
+	 *
+	 * @param picker
+	 *
+	 * @return
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J add(GlobalChildren picker)
+	{
+		getBody().add(picker);
+		return (J) this;
+	}
+
+	@Override
+	public Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> getChildrenHierarchy(@NotNull Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> componentsToAddTo)
+	{
+		Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> pageChildren = new LinkedHashSet<>();
+		pageChildren.addAll(getHead().getChildrenHierarchy(true));
+		pageChildren.addAll(getBody().getChildrenHierarchy(true));
+		pageChildren.add(this);
+		return pageChildren;
+	}
+
+	/**
 	 * Overidden method to return this, beware circular joins
 	 *
 	 * @return
 	 */
+	@Override
 	@NotNull
 	public Page getPage()
 	{
@@ -646,17 +494,198 @@ public class Page<J extends Page<J>>
 	}
 
 	/**
-	 * Shortcut method to getBody().add()
+	 * Sets all component in the head and body to tiny
 	 *
-	 * @param picker
+	 * @param tiny
 	 *
 	 * @return
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J add(GlobalChildren picker)
+	public J setTiny(boolean tiny)
 	{
-		getBody().add(picker);
+		super.setTiny(tiny);
+		getHead().setTiny(tiny);
+		getBody().setTiny(tiny);
 		return (J) this;
+	}
+
+	@Override
+	public Set<StringBuilder> getQueriesAll()
+	{
+		return getBody().getQueriesAll();
+	}
+
+	@Override
+	public void init()
+	{
+		if (!pageInitialized)
+		{
+			getBody().init();
+			pageInitialized = true;
+		}
+
+		if (!isConfigured())
+		{
+			log.log(Level.FINER, "Looking for plugins....");
+			Set<Class<? extends PageConfigurator>> configs = GuiceContext.reflect()
+			                                                             .getSubTypesOf(PageConfigurator.class);
+			List<PageConfigurator> configInstances = new ArrayList<>();
+			for (Class<? extends PageConfigurator> pc : configs)
+			{
+				if (Modifier.isAbstract(pc.getModifiers()))
+				{
+					continue;
+				}
+				PageConfigurator config = GuiceContext.getInstance(pc);
+				configInstances.add(config);
+			}
+			configInstances.sort(Comparator.comparing(PageConfigurator::getSortOrder));
+			for (PageConfigurator configInstance : configInstances)
+			{
+				log.log(Level.FINER, "Configuring [" + configInstance.getClass()
+				                                                     .getSimpleName() + "]");
+				configInstance.configure(this);
+			}
+		}
+
+		super.init();
+	}
+
+	/**
+	 * Renders all the children to a string builder
+	 *
+	 * @return
+	 */
+	@Override
+	protected StringBuilder renderChildren()
+	{
+		StringBuilder pageOutput = new StringBuilder();
+		StringBuilder bodyOutput = null;
+
+		boolean bodied = false;
+		boolean headed = false;
+
+		if (!isBodyEmpty())
+		{
+			bodyOutput = new StringBuilder(getBody().toString(1));
+		}
+		if (!isHeadEmpty())
+		{
+			pageOutput.append(getNewLine())
+			          .append(getCurrentTabIndentString())
+			          .append(getHead().toString(1))
+			          .append(getNewLine());
+			headed = true;
+		}
+		if (bodyOutput != null)
+		{
+			pageOutput.append(getNewLine())
+			          .append(getCurrentTabIndentString())
+			          .append(bodyOutput)
+			          .append(getNewLine());
+			bodied = true;
+		}
+
+		if (!headed && !bodied)
+		{
+			pageOutput.append(getNewLine());
+		}
+		return pageOutput;
+	}
+
+	/**
+	 * Returns if the body object is empty
+	 *
+	 * @return
+	 */
+	private boolean isBodyEmpty()
+	{
+		return getBody().getChildren()
+		                .isEmpty();
+	}
+
+	/**
+	 * Returns if the head object is empty
+	 *
+	 * @return
+	 */
+	private boolean isHeadEmpty()
+	{
+		return getHead().getChildren()
+		                .isEmpty();
+	}
+
+	/**
+	 * Configures the page and all its components
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public void preConfigure()
+	{
+		if (!isInitialized())
+		{
+			init();
+		}
+		if (!isConfigured())
+		{
+			configurePageHeader();
+			addVariablesScriptToPage();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Builds up the Header Tag
+	 */
+	@SuppressWarnings("unchecked")
+	private void configurePageHeader()
+	{
+		if (getPageFields().getTitle() != null)
+		{
+			getHead().add(getPageFields().getTitle());
+		}
+		if (getPageFields().getBase() != null)
+		{
+			getHead().add(getPageFields().getBase());
+		}
+		getHead().add(getPageFields().getHttpEquivMeta());
+		getHead().add(getPageFields().getCacheControl());
+		getHead().add(getPageFields().getAuthor());
+		getHead().add(getPageFields().getApplicationName());
+		getHead().add(getPageFields().getGenerator());
+		getHead().add(getPageFields().getDescription());
+		getHead().add(getPageFields().getKeywords());
+		getHead().add(getPageFields().getFavIconLink());
+	}
+
+	/**
+	 * Adds the variables in the application to the collection
+	 */
+	@SuppressWarnings("unchecked")
+	private void addVariablesScriptToPage()
+	{
+		StringBuilder variablesScriptBuilder = new StringBuilder();
+		for (Object o : getBody().getVariablesAll())
+		{
+			String var = (String) o;
+			variablesScriptBuilder.append("var ")
+			                      .append(var)
+			                      .append(STRING_SEMICOLON);
+		}
+		if (variablesScriptBuilder.length() > 0)
+		{
+			Script variablesScript = new Script();
+			variablesScript.setID("variables");
+			variablesScript.setNewLineForRawText(true);
+			variablesScript.addAttribute(ScriptAttributes.Type, HTML_HEADER_JAVASCRIPT);
+			variablesScript.setText(variablesScriptBuilder.toString());
+			if (!getHead().getChildren()
+			              .contains(variablesScript))
+			{
+				getHead().add(variablesScript);
+			}
+		}
 	}
 }

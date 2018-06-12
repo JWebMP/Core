@@ -12,6 +12,7 @@ import com.jwebmp.base.html.Script;
 import com.jwebmp.base.html.Style;
 import com.jwebmp.base.html.attributes.ScriptAttributes;
 import com.jwebmp.base.servlets.JWScriptServlet;
+import com.jwebmp.htmlbuilder.css.composer.CSSComposer;
 import com.jwebmp.plugins.jquery.JQueryPageConfigurator;
 
 import static com.jwebmp.utilities.StaticStrings.*;
@@ -96,8 +97,13 @@ class ScriptsDynamicPageConfigurator
 
 	private Style<?> getCss(Page page)
 	{
+		CSSComposer comp = new CSSComposer();
+		comp.addComponent(page, true);
+		String generated = comp.toString();
+
 		StringBuilder css = page.getBody()
-		                        .renderCss(0);
+		                        .renderCss(0)
+		                        .append(generated);
 		if (css.toString()
 		       .isEmpty())
 		{

@@ -19,7 +19,7 @@ package com.jwebmp.htmlbuilder.css.borders;
 import com.jwebmp.htmlbuilder.css.composer.CSSComposer;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 /**
  * @author GedMarc
@@ -36,7 +36,7 @@ public class BorderCSSTest
 	{
 		BorderCSSObjectTest cssObject = new BorderCSSObjectTest();
 		CSSComposer composer = new CSSComposer();
-		composer.addComponent(cssObject, new ArrayList<>());
+		composer.addComponent(cssObject, new LinkedHashSet<>());
 		System.out.println("out from : " + composer.toString());
 		//   Assertions.assertEquals(composer.toString(), "#TestBorder {border:really deep colour;border-bottom-color:colourTop;border-left-style:double;}#text {border-bottom-color:antiquewhite;}");
 	}

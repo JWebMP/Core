@@ -18,11 +18,12 @@ package com.jwebmp.base.html;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jwebmp.Component;
 import com.jwebmp.Page;
-import com.jwebmp.base.ComponentHTMLAttributeBase;
 import com.jwebmp.base.client.Browsers;
 import com.jwebmp.base.client.HTMLVersions;
 import com.jwebmp.base.html.attributes.NoAttributes;
+import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.html.interfaces.HTMLFeatures;
 import com.jwebmp.base.html.interfaces.NoClassAttribute;
 import com.jwebmp.base.html.interfaces.NoIDTag;
@@ -66,7 +67,7 @@ import com.jwebmp.base.servlets.enumarations.DevelopmentEnvironments;
  * @since right from the start, 2007 with radio on live
  */
 public abstract class Html<J extends Html<J>>
-		extends ComponentHTMLAttributeBase<NoAttributes, HTMLFeatures, NoEvents, J>
+		extends Component<GlobalChildren, NoAttributes, HTMLFeatures, NoEvents, J>
 		implements NoIDTag, NoClassAttribute
 {
 
@@ -156,15 +157,15 @@ public abstract class Html<J extends Html<J>>
 	}
 
 	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-
-	@Override
 	public boolean equals(Object o)
 	{
 		return super.equals(o);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
 	}
 
 	/**

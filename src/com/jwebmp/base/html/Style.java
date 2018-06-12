@@ -91,4 +91,18 @@ public class Style<J extends Style<J>>
 		setText(cssString);
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (o == null)
+		{
+			return false;
+		}
+		if (Style.class.isAssignableFrom(o.getClass()))
+		{
+			return getText(0).equals(Style.class.cast(o)
+			                                    .getText(0));
+		}
+		return false;
+	}
 }
