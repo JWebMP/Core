@@ -96,7 +96,7 @@ public class JWebSwingServlet
 	{
 		Page p = new Page();
 		p.getPageFields()
-		 .setTitle("ERROR : Error occured in application");
+		 .setTitle("ERROR : Error occurred in application");
 		p.getPageFields()
 		 .setAuthor("Marc Magon");
 		p.getPageFields()
