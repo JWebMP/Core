@@ -23,8 +23,7 @@ import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.utilities.StaticStrings;
 
-import static com.jwebmp.utilities.StaticStrings.CHAR_HASH;
-import static com.jwebmp.utilities.StaticStrings.STRING_DOT;
+import static com.jwebmp.utilities.StaticStrings.*;
 
 /**
  * Extention of a component with no HTML. Renders the ID and all references to it as a class name instead of ID form

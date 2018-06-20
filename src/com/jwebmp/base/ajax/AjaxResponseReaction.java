@@ -55,6 +55,10 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 	 */
 	@JsonProperty("type")
 	private AjaxResponseType responseType;
+	/**
+	 * Any applicable options
+	 */
+	private JavaScriptPart<?> options;
 
 	/**
 	 * Action timeout for request
@@ -147,6 +151,11 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 	{
 		this(null, reactionData, ReactionType.RedirectUrl, null);
 		setActionTimeout(actionTimeout);
+	}
+
+	public static AjaxResponseReaction showDialogFeature(String title, String message)
+	{
+		return null;
 	}
 
 	/**
@@ -265,4 +274,14 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 		return this;
 	}
 
+	public JavaScriptPart<?> getOptions()
+	{
+		return options;
+	}
+
+	public AjaxResponseReaction setOptions(JavaScriptPart<?> options)
+	{
+		this.options = options;
+		return this;
+	}
 }

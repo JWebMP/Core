@@ -59,8 +59,8 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 
 	/**
 	 * Serial Version for all Components and their compatibility
-	 *
-	 * @version 2 Version 2 - Updated CSS Library and References
+	 * <p>
+	 * version 2 Version 2 - Updated CSS Library and References
 	 */
 	@JsonIgnore
 	private static final long serialVersionUID = 1L;
@@ -101,7 +101,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	/**
 	 * Returns an Attribute Base interface of this component
 	 *
-	 * @return
+	 * @return A cleaner version
 	 */
 	@NotNull
 	@SuppressWarnings("unused")
@@ -235,8 +235,9 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 * Removes a key from the attribute set
 	 *
 	 * @param key
+	 * 		The global attribute key
 	 *
-	 * @return
+	 * @return This object
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
@@ -247,29 +248,9 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	}
 
 	/**
-	 * Sets if this component should render an ID attribute
-	 * <p>
-	 *
-	 * @param renderIDAttibute
-	 *
-	 * @return
-	 */
-	@NotNull
-	@SuppressWarnings({"unchecked", "unused"})
-	public J setRenderIDAttibute(boolean renderIDAttibute)
-	{
-		this.renderIDAttibute = renderIDAttibute;
-		if (!renderIDAttibute)
-		{
-			getAttributes().remove(GlobalAttributes.ID.toString());
-		}
-		return (J) this;
-	}
-
-	/**
 	 * Renders the classes array as an in-line class string
 	 *
-	 * @return
+	 * @return An empty string builder
 	 */
 	protected StringBuilder renderClasses()
 	{
@@ -285,7 +266,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 * @param value
 	 * 		The value of the attribute
 	 *
-	 * @return
+	 * @return This object
 	 */
 	@Override
 	@NotNull
@@ -302,6 +283,47 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	}
 
 	/**
+	 * Returns the current raw attribute map
+	 *
+	 * @return A Tree Map of Attributes
+	 */
+	@NotNull
+	protected Map<String, String> getAttributes()
+	{
+		if (attributes == null)
+		{
+			attributes = new TreeMap<>();
+		}
+		return attributes;
+	}
+
+	/**
+	 * Renders the attributes with a single colon instead of a double colon, and replaces single colon values with double colons
+	 *
+	 * @return the variable
+	 */
+	public boolean isInvertColonRender()
+	{
+		return invertColonRender;
+	}
+
+	/**
+	 * Renders the attributes with a single colon instead of a double colon, and replaces single colon values with double colons
+	 *
+	 * @param invertColonRender
+	 * 		set variable
+	 *
+	 * @return This object
+	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setInvertColonRender(boolean invertColonRender)
+	{
+		this.invertColonRender = invertColonRender;
+		return (J) this;
+	}
+
+	/**
 	 * Adds an attribute value to the attribute collection, and marks it with a GlobalAttribute Enumeration.
 	 * <p>
 	 *
@@ -310,7 +332,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 * @param value
 	 * 		The value of the attribute
 	 *
-	 * @return
+	 * @return This Object
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -330,7 +352,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 * @param value
 	 * 		The value of the attribute
 	 *
-	 * @return
+	 * @return This object
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -350,7 +372,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 * @param value
 	 * 		The value of the attribute
 	 *
-	 * @return
+	 * @return This Object
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -370,7 +392,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 * @param value
 	 * 		The value of the attribute
 	 *
-	 * @return
+	 * @return This object
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -517,42 +539,23 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	}
 
 	/**
-	 * Returns the current raw attribute map
+	 * Sets if this component should render an ID attribute
+	 * <p>
 	 *
-	 * @return
+	 * @param renderIDAttribute
+	 * 		If the ID must be rendered
+	 *
+	 * @return This Object
 	 */
 	@NotNull
-	protected Map<String, String> getAttributes()
+	@SuppressWarnings({"unchecked", "unused"})
+	public J setRenderIDAttribute(boolean renderIDAttribute)
 	{
-		if (attributes == null)
+		renderIDAttibute = renderIDAttribute;
+		if (!renderIDAttibute)
 		{
-			attributes = new TreeMap<>();
+			getAttributes().remove(GlobalAttributes.ID.toString());
 		}
-		return attributes;
-	}
-
-	/**
-	 * Renders the attributes with a single colon instead of a double colon, and replaces single colon values with double colons
-	 *
-	 * @return
-	 */
-	public boolean isInvertColonRender()
-	{
-		return invertColonRender;
-	}
-
-	/**
-	 * Renders the attributes with a single colon instead of a double colon, and replaces single colon values with double colons
-	 *
-	 * @param invertColonRender
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J setInvertColonRender(boolean invertColonRender)
-	{
-		this.invertColonRender = invertColonRender;
 		return (J) this;
 	}
 
@@ -560,9 +563,11 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 * Adds an attribute with an enum value. The toString() method is read
 	 *
 	 * @param attribute
+	 * 		The attribute key to add
 	 * @param value
+	 * 		The value of the attribute or "" for keyword only
 	 *
-	 * @return
+	 * @return This object
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
@@ -576,8 +581,9 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 * Sets the ID and adds the attribute to the global set
 	 *
 	 * @param id
+	 * 		the id to add as an attribute
 	 *
-	 * @return
+	 * @return This object
 	 */
 	@Override
 	@NotNull
@@ -591,8 +597,9 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 * Removes an attribute
 	 *
 	 * @param key
+	 * 		the key to remove
 	 *
-	 * @return
+	 * @return this object
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
@@ -606,8 +613,9 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 * Removes a key from the attribute set
 	 *
 	 * @param key
+	 * 		the key to remove
 	 *
-	 * @return
+	 * @return this attribute
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
@@ -634,17 +642,18 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	public J cloneComponent()
 	{
 		ComponentHTMLAttributeBase cloned = super.cloneComponent();
-
-		cloned.attributes = new TreeMap();
-		cloned.attributes.putAll(getAttributes());
-
+		if (cloned != null)
+		{
+			cloned.attributes = new TreeMap();
+			cloned.attributes.putAll(getAttributes());
+		}
 		return (J) cloned;
 	}
 
 	/**
 	 * Shortcut to adding a style attribute
 	 *
-	 * @return
+	 * @return This obejct
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
@@ -658,8 +667,9 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 * Shortcut to adding a style attribute
 	 *
 	 * @param style
+	 * 		the style string to add
 	 *
-	 * @return
+	 * @return This object
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull

@@ -19,6 +19,8 @@ package com.jwebmp.base.references;
 import com.jwebmp.base.servlets.enumarations.RequirementsPriority;
 import com.jwebmp.generics.WebReference;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * This class is a Java Reference
  *
@@ -30,6 +32,9 @@ public class JavascriptReference
 		extends WebReference<JavascriptReference>
 {
 	private static final long serialVersionUID = 1L;
+
+	private boolean defer;
+	private boolean async;
 
 	/**
 	 * @param name
@@ -135,5 +140,54 @@ public class JavascriptReference
 		super(name, version, localReference, remoteReference);
 		setSortOrder(sortOrder);
 		setPriority(priority);
+	}
+
+	/**
+	 * If this reference should render with defer
+	 *
+	 * @return
+	 */
+	public boolean isDefer()
+	{
+		return defer;
+	}
+
+
+	/**
+	 * If this reference should render with defer
+	 *
+	 * @param defer
+	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public JavascriptReference setDefer(boolean defer)
+	{
+		this.defer = defer;
+		return this;
+	}
+
+	/**
+	 * If this reference should render with asycn
+	 *
+	 * @return
+	 */
+	public boolean isAsync()
+	{
+		return async;
+	}
+
+	/**
+	 * Sets if this reference should render async
+	 *
+	 * @param async
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public JavascriptReference setAsync(boolean async)
+	{
+		this.async = async;
+		return this;
 	}
 }

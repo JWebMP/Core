@@ -294,9 +294,10 @@ jw.actions.processReactions = function (result) {
         var type = item.reactionType;
         var dialogType = item.type;
         var timeout = item.actionTimeout;
+        var options = item.options;
 
         if (type === 'DialogDisplay') {
-            jw.actions.showDialog(title, message, dialogType);
+            jw.actions.showDialog(title, message, dialogType, options);
         } else if (type === 'RedirectHome') {
             setTimeout('location.reload();', timeout);
         }
@@ -308,8 +309,13 @@ jw.actions.processReactions = function (result) {
  * @param message The message to display
  * @param type the type of dialog - Danger,Success,Warning,Primary,Information,Default
  */
-jw.actions.showDialog = function (title, message, type) {
+jw.actions.showDialog = function (title, message, type, options) {
     if (BootstrapDialog) {
+        if (options) {
+            options.title = title;
+            options.message = message;
+            BootstrapDialog.show(options);
+        }
         if (type === 'Danger')
             BootstrapDialog.show({
                 title: title,
@@ -322,6 +328,24 @@ jw.actions.showDialog = function (title, message, type) {
                 message: message,
                 type: BootstrapDialog.TYPE_SUCCESS
             });
+        else if (type === 'Secondary')
+            BootstrapDialog.show({
+                title: title,
+                message: message,
+                type: BootstrapDialog.TYPE_SECONDARY
+            });
+        else if (type === 'Dark')
+            BootstrapDialog.show({
+                title: title,
+                message: message,
+                type: BootstrapDialog.TYPE_DARK
+            });
+        else if (type === 'Light')
+            BootstrapDialog.show({
+                title: title,
+                message: message,
+                type: BootstrapDialog.TYPE_LIGHT
+            });
         else if (type === 'Warning')
             BootstrapDialog.show({
                 title: title,
@@ -332,7 +356,7 @@ jw.actions.showDialog = function (title, message, type) {
             BootstrapDialog.show({
                 title: title,
                 message: message,
-                type: BootstrapDialog.TYPE_INFO
+                type: BootstrapDialog.TYPE_PRIMARY
             });
         else if (type === 'Information')
             BootstrapDialog.show({

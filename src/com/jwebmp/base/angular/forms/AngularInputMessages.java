@@ -23,8 +23,8 @@ import com.jwebmp.base.html.*;
 
 import javax.validation.constraints.NotNull;
 
-import static com.jwebmp.base.html.attributes.GlobalAttributes.Name;
-import static com.jwebmp.utilities.StaticStrings.STRING_DOT;
+import static com.jwebmp.base.html.attributes.GlobalAttributes.*;
+import static com.jwebmp.utilities.StaticStrings.*;
 
 /**
  * Default angular messages div
@@ -48,7 +48,7 @@ public class AngularInputMessages<J extends AngularInputMessages<J>>
 	{
 		addAttribute("ng-messages", formToApply.getID() + STRING_DOT + formInputName.getAttribute(Name) + STRING_DOT + "$error");
 		addAttribute("role", "alert");
-		setRenderIDAttibute(false);
+		setRenderIDAttribute(false);
 	}
 
 	/**
@@ -72,8 +72,8 @@ public class AngularInputMessages<J extends AngularInputMessages<J>>
 		{
 			comp = new Div();
 		}
-		comp.setRenderIDAttibute(false);
-		comp.addAttribute("ng-message", forError.toString());
+		comp.setRenderIDAttribute(false)
+		    .addAttribute("ng-message", forError.toString());
 		comp.setText(message);
 		add(comp);
 		return (J) this;

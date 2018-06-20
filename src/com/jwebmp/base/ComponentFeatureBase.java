@@ -241,7 +241,14 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 		}
 		else
 		{
-			getFeatures().add((F) feature);
+			if (!getFeatures().contains(feature))
+			{
+				getFeatures().add((F) feature);
+				if (ComponentHierarchyBase.class.isAssignableFrom(getClass()))
+				{
+					feature.setComponent((ComponentHierarchyBase) this);
+				}
+			}
 		}
 		return (J) this;
 	}

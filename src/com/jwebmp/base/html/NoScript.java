@@ -66,7 +66,7 @@ public class NoScript<J extends NoScript<J>>
 	public void preConfigure()
 
 	{
-		setRenderIDAttibute(false);
+		setRenderIDAttribute(false);
 		super.preConfigure(); //To change body of generated methods, choose Tools | Templates.
 	}
 
