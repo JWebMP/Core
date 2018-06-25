@@ -19,10 +19,9 @@ package com.jwebmp.base.servlets;
 import com.google.inject.Singleton;
 import com.jwebmp.Page;
 import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.utilities.StaticStrings;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.nio.charset.Charset;
+import static com.jwebmp.utilities.StaticStrings.*;
 
 /**
  * @author GedMarc
@@ -33,49 +32,14 @@ public class AngularServlet
 {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Post handler
-	 *
-	 * @param request
-	 * @param response
-	 */
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-	{
-		super.doGet(request, response);
-		processRequest(request, response);
-	}
-
-	/**
-	 * Post handler
-	 *
-	 * @param request
-	 * @param response
-	 */
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	{
-		super.doGet(request, response);
-		processRequest(request, response);
-	}
-
-	/**
-	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-	 *
-	 * @param request
-	 * 		Servlet request
-	 * @param response
-	 * 		Servlet response
-	 */
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+	public void perform()
 	{
 		Page page = GuiceContext.inject()
 		                        .getInstance(Page.class);
-		page.toString(true);
+		intercept();
 		StringBuilder output = page.getAngular()
 		                           .renderAngularJavascript(page);
-		request.getHeaderNames();
-		response.getHeaderNames();
-		writeOutput(output, "application/javascript;charset=UTF-8", Charset.forName("UTF-8"));
+		writeOutput(output, StaticStrings.HTML_HEADER_JAVASCRIPT, UTF8_CHARSET);
 	}
 }

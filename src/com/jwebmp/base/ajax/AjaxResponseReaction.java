@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jwebmp.htmlbuilder.javascript.JavaScriptPart;
 
+import javax.annotation.Nullable;
 import java.io.Serializable;
 
 /**
@@ -274,11 +275,24 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 		return this;
 	}
 
+	/**
+	 * Assigns options to the response
+	 *
+	 * @return
+	 */
+	@Nullable
 	public JavaScriptPart<?> getOptions()
 	{
 		return options;
 	}
 
+	/**
+	 * Sets the options of the response
+	 *
+	 * @param options
+	 *
+	 * @return
+	 */
 	public AjaxResponseReaction setOptions(JavaScriptPart<?> options)
 	{
 		this.options = options;

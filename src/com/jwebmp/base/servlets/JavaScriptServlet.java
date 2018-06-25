@@ -21,15 +21,11 @@ import com.jwebmp.FileTemplates;
 import com.jwebmp.Page;
 import com.jwebmp.exceptions.MissingComponentException;
 import com.jwebmp.guiceinjection.GuiceContext;
-import com.jwebmp.logger.LogFactory;
 import com.jwebmp.utilities.StaticStrings;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.Charset;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * This Servlet supplies all the JavaScript for a given HTML Page
@@ -40,9 +36,6 @@ import java.util.logging.Logger;
 public class JavaScriptServlet
 		extends JWDefaultServlet
 {
-
-	private static final Logger log = LogFactory.getInstance()
-	                                            .getLogger("JavaScriptServlet");
 	private static final String scriptReplacement = "JW_JAVASCRIPT";
 
 	private static final long serialVersionUID = 1L;
@@ -55,72 +48,32 @@ public class JavaScriptServlet
 	 * @param response
 	 * 		Servlet response
 	 */
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws MissingComponentException
+	@Override
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 	{
-		response.setContentType("text/javascript");
-		Date startDate = new Date();
+
+	}
+
+	@Override
+	public void perform()
+	{
 		Page page = GuiceContext.inject()
 		                        .getInstance(Page.class);
+		intercept();
 		FileTemplates.removeTemplate(scriptReplacement);
 		if (page == null)
 		{
-			throw new MissingComponentException(
-					"Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
+			writeOutput(new StringBuilder(getErrorPageHtml(new MissingComponentException(
+					"Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ")).toString(
+					0)), StaticStrings.HTML_HEADER_JAVASCRIPT, Charset.forName("UTF-8"));
+			return;
 		}
 		FileTemplates.getFileTemplate(JavaScriptServlet.class, scriptReplacement, "javascriptScript");
 		FileTemplates.getTemplateVariables()
 		             .put(scriptReplacement, page.renderJavascript());
 		StringBuilder scripts = FileTemplates.renderTemplateScripts(scriptReplacement);
-		Date endDate = new Date();
 		writeOutput(scripts, StaticStrings.HTML_HEADER_JAVASCRIPT, Charset.forName("UTF-8"));
-		log.log(Level.FINE, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}];[Transer Time]=[{3}]",
-		        new Object[]{request.getSession().getId(), endDate.getTime() - startDate.getTime(), scripts.length(), new Date().getTime() - startDate.getTime()});
 		FileTemplates.getTemplateVariables()
 		             .remove(scriptReplacement);
-	}
-
-	/**
-	 * Handles the HTTP <code>GET</code> method.
-	 *
-	 * @param request
-	 * 		Servlet request
-	 * @param response
-	 * 		Servlet response
-	 */
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-	{
-		try
-		{
-			super.doGet(request, response);
-			processRequest(request, response);
-		}
-		catch (MissingComponentException ex)
-		{
-			Logger.getLogger(JavaScriptServlet.class.getName())
-			      .log(Level.SEVERE, null, ex);
-		}
-	}
-
-	/**
-	 * Handles the HTTP <code>GET</code> method.
-	 *
-	 * @param request
-	 * 		Servlet request
-	 * @param response
-	 * 		Servlet response
-	 */
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	{
-		try
-		{
-			doGet(request, response);
-		}
-		catch (Exception ex)
-		{
-			Logger.getLogger(JavaScriptServlet.class.getName())
-			      .log(Level.SEVERE, null, ex);
-		}
 	}
 }

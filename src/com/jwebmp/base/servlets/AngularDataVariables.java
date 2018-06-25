@@ -21,8 +21,6 @@ import com.jwebmp.Page;
 import com.jwebmp.guiceinjection.GuiceContext;
 import com.jwebmp.utilities.StaticStrings;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.Charset;
 
 /**
@@ -34,27 +32,12 @@ public class AngularDataVariables
 {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Post handler
-	 *
-	 * @param request
-	 * @param response
-	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	{
-		super.doGet(request, response);
-		processRequest();
-
-	}
-
-	/**
-	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-	 */
-	protected void processRequest()
+	public void perform()
 	{
 		Page page = GuiceContext.inject()
 		                        .getInstance(Page.class);
+		intercept();
 		StringBuilder output = page.getAngular()
 		                           .renderAngularJavascript(page);
 		writeOutput(output, StaticStrings.HTML_HEADER_JAVASCRIPT, Charset.forName("UTF-8"));

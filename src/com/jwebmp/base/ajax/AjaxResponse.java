@@ -28,7 +28,9 @@ import com.jwebmp.base.ComponentStyleBase;
 import com.jwebmp.base.references.CSSReference;
 import com.jwebmp.base.references.JavascriptReference;
 import com.jwebmp.htmlbuilder.javascript.JavaScriptPart;
+import org.aspectj.lang.annotation.SuppressAjWarnings;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
@@ -250,9 +252,12 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 *
 	 * @param reaction
 	 */
-	public void addReaction(AjaxResponseReaction reaction)
+	@SuppressAjWarnings("unchecked")
+	@NotNull
+	public J addReaction(AjaxResponseReaction reaction)
 	{
 		getReactions().add(reaction);
+		return (J) this;
 	}
 
 	/**

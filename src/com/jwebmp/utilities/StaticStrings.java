@@ -18,6 +18,7 @@
 package com.jwebmp.utilities;
 
 import java.io.Serializable;
+import java.nio.charset.Charset;
 
 /**
  * Default set of strings
@@ -29,9 +30,11 @@ public interface StaticStrings
 
 	String HTML_HEADER_JSON = "text/json";
 	String HTML_HEADER_JAVASCRIPT = "application/javascript";
+	String HTML_HEADER_CSS = "text/css";
 	String HTML_HEADER_DEFAULT_CONTENT_TYPE = "text/html";
 
 	String UTF8 = "UTF-8";
+	Charset UTF8_CHARSET = Charset.forName("UTF-8");
 
 	String STRING_EMPTY = "";
 	String STRING_SPACE = " ";
@@ -119,7 +122,10 @@ public interface StaticStrings
 	/**
 	 * Default Medium text for Latin
 	 */
-	String MediumLatin = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero laboriosam dolor perspiciatis omnis " + "exercitationem. Beatae, officia pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas" + " dicta, " + "debitis...";
+	String MediumLatin = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero laboriosam dolor perspiciatis omnis " +
+	                     "exercitationem. Beatae, officia pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas" +
+	                     " dicta, " +
+	                     "debitis...";
 
 	String LocalStorageSessionAttributeKey = "LocalStorage";
 	String SessionStorageSessionAttributeKey = "SessionStorage";

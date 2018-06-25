@@ -18,8 +18,6 @@ package com.jwebmp.base.servlets;
 
 import com.google.inject.Singleton;
 import com.jwebmp.Page;
-import com.jwebmp.annotations.DataCallInterception;
-import com.jwebmp.annotations.SiteInterception;
 import com.jwebmp.base.ComponentHierarchyBase;
 import com.jwebmp.base.ajax.*;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
@@ -32,10 +30,7 @@ import com.jwebmp.logger.LogFactory;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.nio.charset.Charset;
 import java.sql.Date;
 import java.time.ZonedDateTime;
@@ -43,6 +38,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static com.jwebmp.guiceinjection.GuiceContext.*;
+import static com.jwebmp.utilities.StaticStrings.*;
 
 /**
  * Handles angular data binding calls, registers variables for access. Can handle population, use event binding for call back.
@@ -58,47 +54,29 @@ public class AngularDataServlet
 	                                            .getLogger("AngularDataServlet");
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Validates and sends the post
-	 *
-	 * @param request
-	 * @param response
-	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	public void perform()
 	{
-		try
-		{
-			processRequest(request);
-		}
-		catch (IOException | ServletException | InvalidRequestException e)
-		{
-			LOG.log(Level.SEVERE, "Angular Data Servlet Do Post", e);
-		}
-	}
-
-	/**
-	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-	 *
-	 * @param request
-	 * 		Servlet request
-	 *
-	 * @throws ServletException
-	 * 		if a Servlet-specific error occurs
-	 * @throws IOException
-	 * 		if an I/O error occurs
-	 */
-	protected void processRequest(HttpServletRequest request) throws ServletException, IOException, InvalidRequestException
-	{
+		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
 		LOG.log(Level.FINER, "[SessionID]-[{0}];[Connection]-[Data Call Connection Established]", request.getSession()
 		                                                                                                 .getId());
 		String componentId = "";
-		StringBuilder jb = new StringBuilder(IOUtils.toString(request.getInputStream(), "UTF-8"));
-
-		AngularDataServletInitData<?> initData = new JavaScriptPart<>().From(jb.toString(), AngularDataServletInitData.class);
-		if (initData == null)
+		StringBuilder jb;
+		AngularDataServletInitData<?> initData;
+		try
 		{
-			throw new InvalidRequestException("Could not extract the initial data from the information sent in");
+			jb = new StringBuilder(IOUtils.toString(request.getInputStream(), "UTF-8"));
+			initData = new JavaScriptPart<>().From(jb.toString(), AngularDataServletInitData.class);
+			if (initData == null)
+			{
+				throw new InvalidRequestException("Could not extract the initial data from the information sent in");
+			}
+		}
+		catch (Exception e)
+		{
+			Page p = getErrorPageHtml(e);
+			writeOutput(new StringBuilder(p.toString(0)), HTML_HEADER_DEFAULT_CONTENT_TYPE, UTF8_CHARSET);
+			return;
 		}
 		if (jb.length() > 0)
 		{
@@ -128,13 +106,21 @@ public class AngularDataServlet
 		{
 			triggerComponent = page.getBody();
 		}
-		ajaxCall.setComponent(triggerComponent);
-		if (triggerComponent == null)
+		else
 		{
-			LOG.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Invalid Component Specified]", request.getSession()
-			                                                                                           .getId());
-			throw new ServletException("Component could not be found to process any events.");
+			try
+			{
+				Class<? extends ComponentHierarchyBase> component = (Class<? extends ComponentHierarchyBase>) Class.forName(ajaxCall.getComponentId());
+				triggerComponent = GuiceContext.get(component);
+			}
+			catch (Exception e)
+			{
+				Page p = getErrorPageHtml(e);
+				writeOutput(new StringBuilder(p.toString(0)), HTML_HEADER_DEFAULT_CONTENT_TYPE, UTF8_CHARSET);
+				return;
+			}
 		}
+		ajaxCall.setComponent(triggerComponent);
 		AjaxResponse<?> ajaxResponse = GuiceContext.inject()
 		                                           .getInstance(AjaxResponse.class);
 		try
@@ -152,12 +138,5 @@ public class AngularDataServlet
 		ajaxResponse.getComponents()
 		            .forEach(ComponentHierarchyBase::preConfigure);
 		writeOutput(new StringBuilder(ajaxResponse.toString()), "application/json;charset=UTF-8", Charset.forName("UTF-8"));
-	}
-
-	@SiteInterception
-	@DataCallInterception
-	protected void intercept()
-	{
-		//Provides interception on the given annotations
 	}
 }

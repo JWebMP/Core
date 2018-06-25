@@ -18,8 +18,6 @@ package com.jwebmp.base.servlets;
 
 import com.google.inject.Singleton;
 import com.jwebmp.Event;
-import com.jwebmp.annotations.AjaxCallInterception;
-import com.jwebmp.annotations.SiteInterception;
 import com.jwebmp.base.ComponentHierarchyBase;
 import com.jwebmp.base.ajax.*;
 import com.jwebmp.exceptions.InvalidRequestException;
@@ -31,7 +29,6 @@ import com.jwebmp.utilities.StaticStrings;
 import com.jwebmp.utilities.TextUtilities;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Modifier;
 import java.nio.charset.Charset;
 import java.util.Set;
@@ -58,37 +55,18 @@ public class AjaxReceiverServlet
 		//Quick construction
 	}
 
-	/**
-	 * Handles the HTTP <code>POST</code> method.
-	 *
-	 * @param request
-	 * 		Servlet request
-	 * @param response
-	 * 		Servlet response
-	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	{
-		super.doPost(request, response);
-		processRequest(request);
-	}
-
-	/**
-	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-	 *
-	 * @param request
-	 * 		Servlet request
-	 */
-	protected void processRequest(HttpServletRequest request)
+	public void perform()
 	{
 		StringBuilder output = new StringBuilder();
+		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
 		try
 		{
 			AjaxCall ajaxCallIncoming = (AjaxCall) new JavaScriptPart().From(request.getInputStream(), AjaxCall.class);
 			AjaxCall ajaxCall = GuiceContext.getInstance(AjaxCall.class);
 			ajaxCall.fromCall(ajaxCallIncoming);
 
-			AjaxResponse ajaxResponse = GuiceContext.getInstance(AjaxResponse.class);
+			AjaxResponse<?> ajaxResponse = GuiceContext.getInstance(AjaxResponse.class);
 
 			validateCall(ajaxCall);
 			validatePage();
@@ -103,11 +81,7 @@ public class AjaxReceiverServlet
 
 			triggerEvent.fireEvent(ajaxCall, ajaxResponse);
 			ajaxResponse.getComponents()
-			            .forEach(a ->
-			                     {
-				                     ComponentHierarchyBase c = (ComponentHierarchyBase) a;
-				                     c.preConfigure();
-			                     });
+			            .forEach(ComponentHierarchyBase::preConfigure);
 			output = new StringBuilder(ajaxResponse.toString());
 		}
 		catch (InvalidRequestException ie)
@@ -186,14 +160,5 @@ public class AjaxReceiverServlet
 			}
 		}
 		return triggerEvent;
-	}
-
-	@SiteInterception
-	@AjaxCallInterception
-	protected void intercept()
-	{
-		/**
-		 * Intercepted with the annotations
-		 */
 	}
 }

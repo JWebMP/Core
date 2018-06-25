@@ -20,19 +20,12 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Singleton;
 import com.jwebmp.Page;
-import com.jwebmp.annotations.DataCallInterception;
-import com.jwebmp.annotations.SiteInterception;
 import com.jwebmp.base.servlets.interfaces.IDataComponent;
-import com.jwebmp.exceptions.MissingComponentException;
 import com.jwebmp.guiceinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
+import org.aspectj.lang.annotation.SuppressAjWarnings;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.nio.charset.Charset;
-import java.util.Date;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static com.jwebmp.utilities.StaticStrings.*;
@@ -73,46 +66,13 @@ public class DataServlet
 		//Nothing Needed
 	}
 
-	/**
-	 * Handles the HTTP <code>GET</code> method.
-	 *
-	 * @param request
-	 * 		Servlet request
-	 * @param response
-	 * 		Servlet response
-	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	@SuppressAjWarnings("unchecked")
+	public void perform()
 	{
-		try
-		{
-			super.doGet(request, response);
-			processRequest(request);
-		}
-		catch (MissingComponentException ex)
-		{
-			Logger.getLogger(DataServlet.class.getName())
-			      .log(Level.SEVERE, null, ex);
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	public void processRequest(HttpServletRequest request) throws MissingComponentException
-	{
-		Date startDate = new Date();
-		StringBuilder responseString = new StringBuilder();
-		HttpSession session = GuiceContext.inject()
-		                                  .getInstance(HttpSession.class);
-		Page page = GuiceContext.inject()
-		                        .getInstance(Page.class);
-		if (page == null)
-		{
-			throw new MissingComponentException(
-					"Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ");
-		}
-
+		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
 		String componentID = request.getParameter("component");
-		log.log(Level.CONFIG, "[SessionID]-[{0}];[DataFetch];[ComponentID]-[{1}]", new Object[]{session.getId(), componentID});
+		StringBuilder responseString = new StringBuilder();
 		try
 		{
 			Class<? extends IDataComponent<?>> clazz = (Class<? extends IDataComponent<?>>) Class.forName(componentID.replace(CHAR_UNDERSCORE, CHAR_DOT));
@@ -120,24 +80,14 @@ public class DataServlet
 			StringBuilder renderData = component.renderData();
 			responseString.append(renderData);
 		}
-		catch (ClassCastException | ClassNotFoundException e)
+		catch (Exception e)
 		{
-			throw new MissingComponentException("Unable to find the specified component : " + request.getParameter("component"));
+			Page p = getErrorPageHtml(e);
+			writeOutput(new StringBuilder(p.toString(0)), HTML_HEADER_DEFAULT_CONTENT_TYPE, UTF8_CHARSET);
+			return;
 		}
-
-		if (!GuiceContext.isBuildingInjector())
-		{
-			intercept();
-		}
-		writeOutput(responseString, "application/json;charset=UTF-8", Charset.forName("UTF-8"));
-		log.log(Level.CONFIG, "[SessionID]-[{0}];[Render Time]-[{1}];[Data Size]-[{2}]",
-		        new Object[]{request.getSession().getId(), new Date().getTime() - startDate.getTime(), responseString.length()});
+		intercept();
+		writeOutput(responseString, HTML_HEADER_JSON, UTF8_CHARSET);
 	}
 
-	@SiteInterception
-	@DataCallInterception
-	protected void intercept()
-	{
-		//Interception Method
-	}
 }
