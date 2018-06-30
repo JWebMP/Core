@@ -16,7 +16,7 @@
  */
 package com.jwebmp;
 
-import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;

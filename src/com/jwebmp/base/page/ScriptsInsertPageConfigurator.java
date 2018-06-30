@@ -21,7 +21,7 @@ import com.jwebmp.Page;
 import com.jwebmp.base.ComponentHierarchyBase;
 import com.jwebmp.base.html.Paragraph;
 import com.jwebmp.base.servlets.enumarations.RequirementsPriority;
-import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.interfaces.RenderAfterScripts;
 import com.jwebmp.interfaces.RenderBeforeDynamicScripts;
 

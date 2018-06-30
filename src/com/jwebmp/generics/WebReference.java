@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jwebmp.SessionHelper;
 import com.jwebmp.base.html.interfaces.NamedPair;
 import com.jwebmp.base.servlets.enumarations.RequirementsPriority;
-import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 import com.jwebmp.utilities.StaticStrings;
 

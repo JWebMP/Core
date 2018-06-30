@@ -25,7 +25,7 @@ import com.jwebmp.base.angular.AngularPageConfigurator;
 import com.jwebmp.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
-import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.plugins.jquery.JQueryPageConfigurator;
 import com.jwebmp.utilities.StaticStrings;

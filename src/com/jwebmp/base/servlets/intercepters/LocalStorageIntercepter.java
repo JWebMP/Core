@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.servlet.RequestScoped;
 import com.jwebmp.base.ajax.AjaxCall;
 import com.jwebmp.base.servlets.SessionStorageProperties;
-import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.interception.AjaxCallIntercepter;
 import com.jwebmp.interception.DataCallIntercepter;
 import com.jwebmp.logger.LogFactory;

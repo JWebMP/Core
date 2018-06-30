@@ -20,7 +20,7 @@ import com.google.inject.Singleton;
 import com.jwebmp.Page;
 import com.jwebmp.annotations.SiteBinder;
 import com.jwebmp.annotations.SiteInterception;
-import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 import net.sf.uadetector.UserAgentStringParser;
 
@@ -86,6 +86,7 @@ public class JWebSwingServlet
 		writeOutput(getPageHTML(), HTML_HEADER_DEFAULT_CONTENT_TYPE, UTF8_CHARSET);
 	}
 
+	@Override
 	@SiteInterception
 	protected void intercept()
 	{

@@ -20,7 +20,7 @@ import com.google.inject.Singleton;
 import com.jwebmp.FileTemplates;
 import com.jwebmp.Page;
 import com.jwebmp.exceptions.MissingComponentException;
-import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.utilities.StaticStrings;
 
 import javax.servlet.http.HttpServletRequest;

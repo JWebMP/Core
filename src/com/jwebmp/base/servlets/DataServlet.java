@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Singleton;
 import com.jwebmp.Page;
 import com.jwebmp.base.servlets.interfaces.IDataComponent;
-import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 import org.aspectj.lang.annotation.SuppressAjWarnings;
 

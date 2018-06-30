@@ -31,7 +31,7 @@ import com.jwebmp.base.html.interfaces.GlobalChildren;
 import com.jwebmp.base.references.CSSReference;
 import com.jwebmp.base.references.JavascriptReference;
 import com.jwebmp.base.servlets.interfaces.IPage;
-import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 import net.sf.uadetector.*;
 

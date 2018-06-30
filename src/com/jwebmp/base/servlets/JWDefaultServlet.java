@@ -29,7 +29,7 @@ import com.jwebmp.base.html.Body;
 import com.jwebmp.base.html.PreFormattedText;
 import com.jwebmp.exceptions.InvalidRequestException;
 import com.jwebmp.exceptions.MissingComponentException;
-import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.logger.LogFactory;
 import com.jwebmp.utilities.StaticStrings;

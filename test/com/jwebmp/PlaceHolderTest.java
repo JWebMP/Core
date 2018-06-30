@@ -17,7 +17,7 @@
 
 package com.jwebmp;
 
-import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.guicedinjection.GuiceContext;
 import org.junit.jupiter.api.Test;
 
 class PlaceHolderTest

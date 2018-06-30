@@ -17,7 +17,7 @@
 
 package com.jwebmp;
 
-import com.jwebmp.guiceinjection.scanners.PackageContentsScanner;
+import com.jwebmp.guicedinjection.scanners.PackageContentsScanner;
 
 import java.util.HashSet;
 import java.util.Set;

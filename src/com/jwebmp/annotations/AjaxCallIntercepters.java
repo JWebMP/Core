@@ -16,14 +16,13 @@
  */
 package com.jwebmp.annotations;
 
-import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.interception.AjaxCallIntercepter;
 import com.jwebmp.logger.LogFactory;
 import org.aopalliance.intercept.MethodInvocation;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 /**
  * @author Marc Magon

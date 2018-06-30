@@ -19,7 +19,7 @@ package com.jwebmp.htmlbuilder.css.annotations;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.htmlbuilder.css.CSSPropertiesFactory;
 import com.jwebmp.logger.LogFactory;
 

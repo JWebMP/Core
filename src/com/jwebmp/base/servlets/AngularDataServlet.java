@@ -23,7 +23,7 @@ import com.jwebmp.base.ajax.*;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.base.servlets.options.AngularDataServletInitData;
 import com.jwebmp.exceptions.InvalidRequestException;
-import com.jwebmp.guiceinjection.GuiceContext;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.logger.LogFactory;
@@ -37,7 +37,7 @@ import java.time.ZonedDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.jwebmp.guiceinjection.GuiceContext.*;
+import static com.jwebmp.guicedinjection.GuiceContext.*;
 import static com.jwebmp.utilities.StaticStrings.*;
 
 /**
