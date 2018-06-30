@@ -30,7 +30,6 @@ import com.jwebmp.base.references.CSSReference;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.logger.LogFactory;
 
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -81,11 +80,6 @@ public class CSSLink<J extends CSSLink<J>>
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Boolean themeLink;
-
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	/**
-	 * If this link is a secondary theme link
-	 */ private Boolean prettifyTheme;
 	/**
 	 * An applied linked reference
 	 */
@@ -165,32 +159,6 @@ public class CSSLink<J extends CSSLink<J>>
 		{
 			LOG.log(Level.WARNING, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
 		}
-
-		if (isPrettifyTheme())
-		{
-			addClass("prettify");
-		}
-	}
-
-	/**
-	 * Gets the prettify theme
-	 *
-	 * @return
-	 */
-	public boolean isPrettifyTheme()
-	{
-		prettifyTheme = getAttribute(CSSLinkAttributes.HRef).contains("prettify/");
-		return prettifyTheme;
-	}
-
-	/**
-	 * Sets the prettify theme if required
-	 *
-	 * @param prettifyTheme
-	 */
-	public void setPrettifyTheme(boolean prettifyTheme)
-	{
-		this.prettifyTheme = prettifyTheme;
 	}
 
 	/**
@@ -217,7 +185,7 @@ public class CSSLink<J extends CSSLink<J>>
 	@Override
 	public int hashCode()
 	{
-		return Objects.hash(super.hashCode(), isPrettifyTheme(), getLinkedReference());
+		return super.hashCode();
 	}
 
 	/**

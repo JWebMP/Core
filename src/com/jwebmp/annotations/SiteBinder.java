@@ -34,9 +34,9 @@ import com.jwebmp.base.ComponentBase;
 import com.jwebmp.base.ajax.AjaxCall;
 import com.jwebmp.base.ajax.AjaxResponse;
 import com.jwebmp.base.servlets.*;
+import com.jwebmp.guicedservlets.GuiceSiteBinder;
+import com.jwebmp.guicedservlets.GuiceSiteInjectorModule;
 import com.jwebmp.guiceinjection.GuiceContext;
-import com.jwebmp.guiceinjection.abstractions.GuiceSiteInjectorModule;
-import com.jwebmp.guiceinjection.interfaces.GuiceSiteBinder;
 import com.jwebmp.logger.LogFactory;
 import net.sf.uadetector.ReadableUserAgent;
 import net.sf.uadetector.UserAgentStringParser;
@@ -268,7 +268,6 @@ public class SiteBinder
 		      .toProvider(this::getJsonMapper)
 		      .in(Singleton.class);
 
-
 		for (Class<?> page : getPages())
 		{
 			if (!(Modifier.isAbstract(page.getModifiers())))
@@ -386,6 +385,5 @@ public class SiteBinder
 		jsonObjectMapper.registerModule(new Jdk8Module());
 		jsonObjectMapper.registerModule(new JavaTimeModule());
 	}
-
 
 }

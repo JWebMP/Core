@@ -66,13 +66,19 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>guice-injection</artifactId>
+            <artifactId>guiced-injection</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>guiced-log-master</artifactId>
+            <artifactId>guiced-servlets</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>jwebmp-log-master</artifactId>
             <version>${project.version}</version>
         </dependency>
 

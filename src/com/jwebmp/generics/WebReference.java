@@ -62,8 +62,11 @@ public class WebReference<J extends WebReference>
 	/**
 	 * To use min at the end or not
 	 */
-	@JsonIgnore
 	private static boolean useMinAtEndOfExtension = false;
+	/**
+	 * If the version number should be appended for caching
+	 */
+	private static boolean useVersionIdentifier = false;
 	/**
 	 * The left side
 	 */
@@ -377,10 +380,10 @@ public class WebReference<J extends WebReference>
 	@JsonProperty("reference")
 	public final String toString()
 	{
+		StringBuilder sb = new StringBuilder();
 		if (isIsLocal())
 		{
-			StringBuilder sb = new StringBuilder(getLocalReference());
-
+			sb.append(getLocalReference());
 			if (useMinAtEndOfExtension && !sb.toString()
 			                                 .contains(".min."))
 			{
@@ -404,20 +407,22 @@ public class WebReference<J extends WebReference>
 			{
 				LOG.log(Level.WARNING, "Error in getting url to append to the web reference", e);
 			}
-
-			return sb.toString();
 		}
 		else
 		{
-			StringBuilder sb = new StringBuilder(getRemoteReference());
+			sb.append(getRemoteReference());
 			if (useMinAtEndOfExtension && isCanMinifyAtRemote() && !sb.toString()
 			                                                          .contains(".min."))
 			{
 				sb.insert(sb.lastIndexOf(StaticStrings.STRING_DOT), ".min");
 			}
-
-			return sb.toString();
 		}
+		if (isUseVersionIdentifier())
+		{
+			sb.append("?v=" + Double.toString(version));
+		}
+
+		return sb.toString();
 	}
 
 	/**
@@ -531,6 +536,26 @@ public class WebReference<J extends WebReference>
 	public boolean isCanMinifyAtRemote()
 	{
 		return canMinifyAtRemote;
+	}
+
+	/**
+	 * If the version number should be appended for caching
+	 *
+	 * @return
+	 */
+	public static boolean isUseVersionIdentifier()
+	{
+		return useVersionIdentifier;
+	}
+
+	/**
+	 * If the version number should be appended for caching
+	 *
+	 * @param useVersionIdentifier
+	 */
+	public static void setUseVersionIdentifier(boolean useVersionIdentifier)
+	{
+		WebReference.useVersionIdentifier = useVersionIdentifier;
 	}
 
 	/**

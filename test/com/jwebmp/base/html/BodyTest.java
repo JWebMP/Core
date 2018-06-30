@@ -23,7 +23,7 @@ import com.jwebmp.plugins.jquery.JQueryPageConfigurator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author MMagon
@@ -64,7 +64,15 @@ public class BodyTest
 		WebReference.setIsLocal(true);
 		System.out.println(p.toString(true));
 		Assertions.assertEquals(
-				"<!DOCTYPE html>\n" + "<html>\n" + "\t<body id=\"body\">\n" + "\t\t<!-- meh -->\n" + "\t\t<script src=\"bower_components/jquery-3/dist/jquery.min.js\" type=\"text/javascript\"></script>\n" + "\t\t<script src=\"jwscr\" type=\"application/javascript\"></script>\n" + "\t\t<script src=\"jwjs\" type=\"application/javascript\"></script>\n" + "\t</body>\n" + "</html>",
+				"<!DOCTYPE html>\n" +
+				"<html>\n" +
+				"\t<body id=\"body\">\n" +
+				"\t\t<!-- meh -->\n" +
+				"\t\t<script src=\"bower_components/jquery-3/dist/jquery.min.js\" type=\"text/javascript\"></script>\n" +
+				"\t\t<script src=\"jwscr\" type=\"application/javascript\"></script>\n" +
+				"\t\t<script src=\"jwjs\" type=\"application/javascript\"></script>\n" +
+				"\t</body>\n" +
+				"</html>",
 				p.toString(true));
 	}
 
@@ -77,7 +85,15 @@ public class BodyTest
 		WebReference.setIsLocal(false);
 		System.out.println(p.toString(true));
 		Assertions.assertEquals(
-				"<!DOCTYPE html>\n" + "<html>\n" + "\t<body id=\"body\">\n" + "\t\t<!-- meh -->\n" + "\t\t<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js\" type=\"text/javascript\"></script>\n" + "\t\t<script src=\"jwscr\" type=\"application/javascript\"></script>\n" + "\t\t<script src=\"jwjs\" type=\"application/javascript\"></script>\n" + "\t</body>\n" + "</html>",
+				"<!DOCTYPE html>\n" +
+				"<html>\n" +
+				"\t<body id=\"body\">\n" +
+				"\t\t<!-- meh -->\n" +
+				"\t\t<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js\" type=\"text/javascript\"></script>\n" +
+				"\t\t<script src=\"jwscr\" type=\"application/javascript\"></script>\n" +
+				"\t\t<script src=\"jwjs\" type=\"application/javascript\"></script>\n" +
+				"\t</body>\n" +
+				"</html>",
 				p.toString(true));
 	}
 }

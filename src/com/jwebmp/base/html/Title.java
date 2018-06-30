@@ -57,6 +57,14 @@ public class Title<J extends Title<J>>
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * Constructs a blank title
+	 */
+	public Title()
+	{
+		this(null);
+	}
+
+	/**
 	 * Constructs a header title
 	 *
 	 * @param title
