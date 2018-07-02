@@ -23,7 +23,6 @@ import com.jwebmp.Page;
 import com.jwebmp.base.servlets.interfaces.IDataComponent;
 import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
-import org.aspectj.lang.annotation.SuppressAjWarnings;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.logging.Logger;
@@ -67,7 +66,7 @@ public class DataServlet
 	}
 
 	@Override
-	@SuppressAjWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	public void perform()
 	{
 		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
