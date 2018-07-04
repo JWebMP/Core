@@ -15,8 +15,8 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
     , $compile
     , $parse
     , $timeout
-    , $rootScope
-                                                      //%CONTROLLER_INSERTIONS%
+    , $rootScope,
+                                                      CONTROLLER_INSERTIONS
 ) {
     var self = this;
     self.jw = window.jw;
@@ -42,10 +42,10 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
                 initData.modernizr = window.Modernizr;
             }
         } catch (e) {
-            console.warn("moderniz not enabled");
+            console.warn("modernizr not enabled");
         }
 
-        //PACE_TRACK_START
+        PACE_TRACK_START;
         $.ajax({
             type: "POST",
             url: 'jwad',
@@ -106,7 +106,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
                 }
             }
         });
-        //PACE_TRACK_END
+        PACE_TRACK_END;
     };
 
     $scope._init();
@@ -156,7 +156,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
         }
 
 
-        //PACE_TRACK_START
+        PACE_TRACK_START;
         $.ajax({
             type: "POST",
             url: "jwajax",
@@ -224,12 +224,13 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
                 } finally {
                     jw.isLoading = false;
                     jw.angularLoading = false;
-                    $("#preloader").hide();
+
+                    $("#preloader").remove();
                     $(".splashscreen").hide();
                 }
             }
         });
-        //PACE_TRACK_END
+        PACE_TRACK_END;
     };
 
     /**

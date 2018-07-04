@@ -199,6 +199,18 @@ public class AngularFeature
 	 */
 	public void configureTemplateVariables()
 	{
+		if (FileTemplates.getTemplateVariables()
+		                 .get("PACE_TRACK_START") == null)
+		{
+			FileTemplates.getTemplateVariables()
+			             .put("PACE_TRACK_START;", new StringBuilder(StaticStrings.STRING_EMPTY));
+		}
+		if (FileTemplates.getTemplateVariables()
+		                 .get("PACE_TRACK_END") == null)
+		{
+			FileTemplates.getTemplateVariables()
+			             .put("PACE_TRACK_END;", new StringBuilder(StaticStrings.STRING_EMPTY));
+		}
 		FileTemplates.getTemplateVariables()
 		             .put("JW_APP_NAME", new StringBuilder(getAppName()));
 		FileTemplates.getTemplateVariables()
@@ -211,12 +223,11 @@ public class AngularFeature
 		             .put("JW_DIRECTIVES", new StringBuilder(compileDirectives()));
 		FileTemplates.getTemplateVariables()
 		             .put("JW_APP_CONTROLLER", new StringBuilder(getControllerName()));
-
 		FileTemplates.getTemplateVariables()
 		             .put("JW_WATCHERS;", compileWatchers());
 
 		FileTemplates.getTemplateVariables()
-		             .put("//%CONTROLLER_INSERTIONS%", new StringBuilder(compileControllerInsertions()));
+		             .put("CONTROLLER_INSERTIONS", new StringBuilder(compileControllerInsertions()));
 
 		FileTemplates.getTemplateVariables()
 		             .put("JW_CONTROLLERS", new StringBuilder(compileControllers()));
@@ -249,7 +260,6 @@ public class AngularFeature
 	{
 		StringBuilder output = new StringBuilder();
 		List<AngularFactoryBase> angulars = new ArrayList<>();
-
 
 		angulars.addAll(getPage().getAngular()
 		                         .getAngularFactories());
