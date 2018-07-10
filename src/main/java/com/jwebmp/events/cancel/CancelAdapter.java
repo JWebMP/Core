@@ -28,7 +28,6 @@ import com.jwebmp.logger.LogFactory;
 import com.jwebmp.plugins.ComponentInformation;
 import com.jwebmp.utilities.StaticStrings;
 
-import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import java.util.logging.Level;
 
@@ -143,7 +142,7 @@ public abstract class CancelAdapter
 	 *
 	 * @param directive
 	 */
-	public void setDirective(@Nullable CancelDirective directive)
+	public void setDirective(CancelDirective directive)
 	{
 		this.directive = directive;
 	}

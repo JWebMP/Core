@@ -18,7 +18,6 @@ package com.jwebmp.utilities;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -89,7 +88,7 @@ public class EscapeChars
 	 * @throws java.io.UnsupportedEncodingException
 	 */
 	@NotNull
-	public static String forURL(@Nullable String aURLFragment) throws UnsupportedEncodingException
+	public static String forURL(String aURLFragment) throws UnsupportedEncodingException
 	{
 		String result = "";
 		try
@@ -136,8 +135,8 @@ public class EscapeChars
 	 */
 	public static String disableTags(String aText)
 	{
-		final StringBuilder result = new StringBuilder();
-		final StringCharacterIterator iterator = new StringCharacterIterator(aText);
+		StringBuilder result = new StringBuilder();
+		StringCharacterIterator iterator = new StringCharacterIterator(aText);
 		char character = iterator.current();
 		while (character != CharacterIterator.DONE)
 		{
@@ -160,7 +159,6 @@ public class EscapeChars
 		return result.toString();
 	}
 
-
 	/**
 	 * Replace characters having special meaning in regular expressions with their escaped equivalents, preceded by a '\' character.
 	 *
@@ -170,8 +168,8 @@ public class EscapeChars
 	 */
 	public static String forRegex(String aRegexFragment)
 	{
-		final StringBuilder result = new StringBuilder();
-		final StringCharacterIterator iterator = new StringCharacterIterator(aRegexFragment);
+		StringBuilder result = new StringBuilder();
+		StringCharacterIterator iterator = new StringCharacterIterator(aRegexFragment);
 		char character = iterator.current();
 		while (character != CharacterIterator.DONE)
 		{
