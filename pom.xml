@@ -72,7 +72,6 @@
             <version>${project.version}</version>
         </dependency>
 
-
         <dependency>
             <groupId>net.sf.qualitycheck</groupId>
             <artifactId>quality-check</artifactId>
