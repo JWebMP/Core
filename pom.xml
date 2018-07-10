@@ -15,24 +15,7 @@
     <description>The core of the JWebMP library allowing you to create enterprise grade level applications
     </description>
     <url>https://github.com/GedMarc/JWebMP</url>
-
-    <properties>
-        <src.dir>src</src.dir>
-        <test.dir>test</test.dir>
-    </properties>
-
-    <repositories>
-        <repository>
-            <id>jwebmp-snapshot</id>
-            <name>JWebMPArtifactory-snapshots</name>
-            <url>https://jwebmp.com/artifactory/libs-snapshot</url>
-        </repository>
-    </repositories>
-
     <build>
-        <sourceDirectory>${src.dir}</sourceDirectory>
-        <testSourceDirectory>${test.dir}</testSourceDirectory>
-
         <resources>
             <resource>
                 <directory>jar-resources</directory>
@@ -55,6 +38,7 @@
                 <directory>src</directory>
                 <includes>
                     <include>**/*.js</include>
+                    <include>**/*.json</include>
                     <include>**/*.css</include>
                     <include>**/*.min</include>
                     <include>**/*.html</include>
