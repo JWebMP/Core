@@ -100,6 +100,7 @@ public enum ComponentTypes
 	 *
 	 * @deprecated
 	 */
+	@Deprecated
 	BaseFont("basefont"),
 	/**
 	 * The Body Div

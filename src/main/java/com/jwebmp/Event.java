@@ -25,7 +25,6 @@ import com.jwebmp.base.angular.AngularPageConfigurator;
 import com.jwebmp.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.base.servlets.enumarations.ComponentTypes;
-import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.plugins.jquery.JQueryPageConfigurator;
 import com.jwebmp.utilities.StaticStrings;
@@ -67,6 +66,40 @@ public abstract class Event<J extends Event<J>>
 	 * A set of components that this event can construct
 	 */
 	private Set<Class<? extends ComponentHierarchyBase>> registeredComponents;
+
+	/**
+	 * Constructs an event with the given name
+	 *
+	 * @param name
+	 */
+	public Event(String name)
+	{
+		this(name, EventTypes.undefined);
+	}
+
+	/**
+	 * Constructs an event with the given name
+	 *
+	 * @param name
+	 * @param eventType
+	 */
+	public Event(String name, EventTypes eventType)
+	{
+		this(name, eventType, null);
+	}
+
+	/**
+	 * Constructs an event with the given name
+	 *
+	 * @param name
+	 * 		The name of this event
+	 * @param component
+	 * 		The component type of this event
+	 */
+	public Event(String name, ComponentHierarchyBase component)
+	{
+		this(name, EventTypes.undefined, component);
+	}
 
 	/**
 	 * Creates an event with the given component and type
@@ -187,40 +220,6 @@ public abstract class Event<J extends Event<J>>
 	{
 		this.registeredComponents = registeredComponents;
 		return (J) this;
-	}
-
-	/**
-	 * Constructs an event with the given name
-	 *
-	 * @param name
-	 */
-	public Event(String name)
-	{
-		this(name, EventTypes.undefined);
-	}
-
-	/**
-	 * Constructs an event with the given name
-	 *
-	 * @param name
-	 * @param eventType
-	 */
-	public Event(String name, EventTypes eventType)
-	{
-		this(name, eventType, null);
-	}
-
-	/**
-	 * Constructs an event with the given name
-	 *
-	 * @param name
-	 * 		The name of this event
-	 * @param component
-	 * 		The component type of this event
-	 */
-	public Event(String name, ComponentHierarchyBase component)
-	{
-		this(name, EventTypes.undefined, component);
 	}
 
 	/**
