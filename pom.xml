@@ -149,7 +149,6 @@
 
     <scm>
         <url>https://github.com/GedMarc/JWebMP</url>
-        <developerConnection>https://jwebmp.com/jira</developerConnection>
     </scm>
 
     <issueManagement>
@@ -161,14 +160,5 @@
         <system>TeamCity</system>
         <url>http://jwebmp.com/teamcity</url>
     </ciManagement>
-
-    <developers>
-        <developer>
-            <id>GedMarc</id>
-            <name>Marc Magon</name>
-            <email>marc.magon@gmail.com</email>
-            <url>https://github.com/GedMarc</url>
-        </developer>
-    </developers>
 
 </project>
