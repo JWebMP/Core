@@ -31,7 +31,7 @@
             <classifier>${jwebmp.runtime.classifier}</classifier>
             <type>jar</type>
         </dependency>
-        W
+
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>jwebmp-log-master</artifactId>
