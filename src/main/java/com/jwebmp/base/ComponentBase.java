@@ -479,7 +479,6 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 *
 	 * @return
 	 */
-
 	public String getText()
 	{
 		return text;
@@ -603,7 +602,12 @@ public class ComponentBase<J extends ComponentBase<J>>
 	{
 		try
 		{
-			return getClass().getCanonicalName()
+			if (getClass().getCanonicalName() != null)
+			{
+				return getClass().getCanonicalName()
+				                 .replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE);
+			}
+			return getClass().getSimpleName()
 			                 .replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE);
 		}
 		catch (NullPointerException npe)
