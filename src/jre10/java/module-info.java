@@ -128,10 +128,10 @@ module com.jwebmp.core {
 	exports com.jwebmp.components;
 
 	requires java.logging;
-	requires com.jwebmp.logmaster;
+	requires transitive com.jwebmp.logmaster;
 	requires com.fasterxml.jackson.annotation;
 	requires java.validation;
-	requires com.jwebmp.guicedinjection;
+	requires transitive com.jwebmp.guicedinjection;
 	requires aopalliance;
 	requires com.jwebmp.interception;
 	requires javax.servlet.api;
