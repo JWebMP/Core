@@ -150,6 +150,49 @@ module com.jwebmp.core {
 	requires java.sql;
 	requires com.google.common;
 
+	uses com.jwebmp.utilities.regex.IRegularExpressions;
+	uses com.jwebmp.base.angular.directives.IAngularDirective;
 
+	provides com.jwebmp.base.angular.directives.IAngularDirective with com.jwebmp.events.activate.ActivateDirective,
+			                                                              com.jwebmp.events.beforeactivate.BeforeActivateDirective,
+			                                                              com.jwebmp.events.beforeclose.BeforeCloseDirective,
+			                                                              com.jwebmp.events.beforeload.BeforeLoadDirective,
+			                                                              com.jwebmp.events.beforestop.BeforeStopDirective,
+			                                                              com.jwebmp.events.buttonclick.ButtonClickDirective,
+			                                                              com.jwebmp.events.cancel.CancelDirective,
+			                                                              com.jwebmp.events.close.CloseDirective,
+			                                                              com.jwebmp.events.complete.CompleteDirective,
+			                                                              com.jwebmp.events.create.CreateDirective,
+			                                                              com.jwebmp.events.deactivate.DeactivateDirective,
+			                                                              com.jwebmp.events.drag.DragDirective,
+			                                                              com.jwebmp.events.dragstart.DragStartDirective,
+			                                                              com.jwebmp.events.dragstop.DragStopDirective,
+			                                                              com.jwebmp.events.drop.DropDirective,
+			                                                              com.jwebmp.events.dropout.DropOutDirective,
+			                                                              com.jwebmp.events.dropover.DropOverDirective,
+			                                                              com.jwebmp.events.focus.FocusDirective,
+			                                                              com.jwebmp.events.load.LoadDirective,
+			                                                              com.jwebmp.events.receive.ReceiveDirective,
+			                                                              com.jwebmp.events.remove.RemoveDirective,
+			                                                              com.jwebmp.events.resize.ResizeDirective,
+			                                                              com.jwebmp.events.resizestart.ResizeStartDirective,
+			                                                              com.jwebmp.events.resizestop.ResizeStopDirective,
+			                                                              com.jwebmp.events.response.ResponseDirective,
+			                                                              com.jwebmp.events.rightclick.RightClickDirective,
+			                                                              com.jwebmp.events.search.SearchDirective,
+			                                                              com.jwebmp.events.select.SelectDirective,
+			                                                              com.jwebmp.events.selecting.SelectingDirective,
+			                                                              com.jwebmp.events.slide.SlideDirective,
+			                                                              com.jwebmp.events.sort.SortDirective,
+			                                                              com.jwebmp.events.spin.SpinDirective,
+			                                                              com.jwebmp.events.start.StartDirective,
+			                                                              com.jwebmp.events.stop.StopDirective,
+			                                                              com.jwebmp.events.unselected.UnselectedDirective,
+			                                                              com.jwebmp.events.update.UpdateDirective;
 
+	provides com.jwebmp.guicedinjection.scanners.PackageContentsScanner with com.jwebmp.JWebSwingPackageScanner;
+
+	provides com.jwebmp.utilities.regex.IRegularExpressions with com.jwebmp.utilities.regex.TextRegExPatterns,
+			                                                        com.jwebmp.utilities.regex.EmailAddressRegExPatterns,
+			                                                        com.jwebmp.utilities.regex.DateFormatRegExPatterns;
 }
