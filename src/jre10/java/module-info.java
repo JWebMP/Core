@@ -15,6 +15,12 @@ module com.jwebmp.core {
 	exports com.jwebmp.base.html;
 	exports com.jwebmp.base.html.attributes;
 	exports com.jwebmp.base.html.inputs;
+
+	opens com.jwebmp.base.html.interfaces;
+	opens com.jwebmp.base.html.interfaces.children;
+	opens com.jwebmp.base.html.interfaces.children.generics;
+	opens com.jwebmp.base.html.interfaces.events;
+
 	exports com.jwebmp.base.html.interfaces;
 	exports com.jwebmp.base.html.interfaces.children;
 	exports com.jwebmp.base.html.interfaces.children.generics;
@@ -28,6 +34,9 @@ module com.jwebmp.core {
 	exports com.jwebmp.base.servlets.enumarations;
 	exports com.jwebmp.base.servlets.intercepters;
 	exports com.jwebmp.base.servlets.interfaces;
+	opens com.jwebmp.base.servlets.interfaces;
+
+
 	exports com.jwebmp.base.servlets.options;
 
 	exports com.jwebmp.events.activate;
