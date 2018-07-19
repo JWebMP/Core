@@ -195,4 +195,7 @@ module com.jwebmp.core {
 	provides com.jwebmp.utilities.regex.IRegularExpressions with com.jwebmp.utilities.regex.TextRegExPatterns,
 			                                                        com.jwebmp.utilities.regex.EmailAddressRegExPatterns,
 			                                                        com.jwebmp.utilities.regex.DateFormatRegExPatterns;
+
+	opens com.jwebmp.base.servlets to com.google.guice;
+	opens com.jwebmp.base.page to com.google.guice;
 }

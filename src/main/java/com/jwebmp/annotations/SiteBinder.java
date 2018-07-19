@@ -44,7 +44,6 @@ import net.sf.uadetector.service.UADetectorServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Modifier;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -330,7 +329,7 @@ public class SiteBinder
 			}
 			else
 			{
-				log.log(Level.SEVERE, "A JWebSwing Application must have a page applied. Please create a class that extends the com.jwebmp" + ".Page object.");
+				log.log(Level.FINER, "Not the right page, moving on");
 			}
 		}
 		catch (NullPointerException npe)
