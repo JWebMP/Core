@@ -15,11 +15,11 @@ module com.jwebmp.core {
 	exports com.jwebmp.base.html;
 	exports com.jwebmp.base.html.attributes;
 	exports com.jwebmp.base.html.inputs;
-
+/*
 	opens com.jwebmp.base.html.interfaces;
 	opens com.jwebmp.base.html.interfaces.children;
 	opens com.jwebmp.base.html.interfaces.children.generics;
-	opens com.jwebmp.base.html.interfaces.events;
+	opens com.jwebmp.base.html.interfaces.events;*/
 
 	exports com.jwebmp.base.html.interfaces;
 	exports com.jwebmp.base.html.interfaces.children;
@@ -145,6 +145,7 @@ module com.jwebmp.core {
 	requires com.jwebmp.interception;
 	requires javax.servlet.api;
 	requires uadetector.core;
+
 	requires com.google.guice.extensions.servlet;
 	requires com.google.guice;
 	requires com.jwebmp.guicedservlets;
@@ -207,4 +208,11 @@ module com.jwebmp.core {
 
 	opens com.jwebmp.base.servlets to com.google.guice;
 	opens com.jwebmp.base.page to com.google.guice;
+	opens com.jwebmp.base.ajax to com.fasterxml.jackson.databind;
+	opens com.jwebmp.base.angular to com.fasterxml.jackson.databind;
+	opens com.jwebmp.htmlbuilder.javascript to com.fasterxml.jackson.databind;
+	opens com.jwebmp.htmlbuilder.css to com.fasterxml.jackson.databind;
+	opens com.jwebmp.htmlbuilder.css.interfaces to com.fasterxml.jackson.databind;
+	opens com.jwebmp.base to com.fasterxml.jackson.databind;
+	opens com.jwebmp to com.fasterxml.jackson.databind;
 }
