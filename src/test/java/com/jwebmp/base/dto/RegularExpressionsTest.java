@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.base.dto;
+package com.jwebmp.core.base.dto;
 
-import com.jwebmp.utilities.regex.RegularExpressionsDTO;
+import com.jwebmp.core.utilities.regex.RegularExpressionsDTO;
 import org.junit.jupiter.api.Test;
 
 /**

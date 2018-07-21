@@ -1,10 +1,10 @@
-package com.jwebmp.events.buttonclick;
+package com.jwebmp.core.events.buttonclick;
 
 import com.jwebmp.BaseTestClass;
-import com.jwebmp.base.ajax.AjaxCall;
-import com.jwebmp.base.ajax.AjaxResponse;
-import com.jwebmp.base.html.Div;
-import com.jwebmp.base.html.DivSimple;
+import com.jwebmp.core.base.ajax.AjaxCall;
+import com.jwebmp.core.base.ajax.AjaxResponse;
+import com.jwebmp.core.base.html.Div;
+import com.jwebmp.core.base.html.DivSimple;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +26,10 @@ public class ButtonClickAdapterTest
 		};
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
-				"<div id=\"test\" ng-button-click=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com.jwebmp.events.buttonclick" + "" + "" + ".ButtonClickAdapterTest$1');\"></div>",
+				"<div id=\"test\" ng-button-click=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com.jwebmp.core.events.buttonclick" +
+				"" +
+				"" +
+				".ButtonClickAdapterTest$1');\"></div>",
 				test.toString(0));
 	}
 

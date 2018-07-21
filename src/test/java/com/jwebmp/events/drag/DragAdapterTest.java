@@ -15,13 +15,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jwebmp.events.drag;
+package com.jwebmp.core.events.drag;
 
 import com.jwebmp.BaseTestClass;
-import com.jwebmp.base.ajax.AjaxCall;
-import com.jwebmp.base.ajax.AjaxResponse;
-import com.jwebmp.base.html.Div;
-import com.jwebmp.base.html.DivSimple;
+import com.jwebmp.core.base.ajax.AjaxCall;
+import com.jwebmp.core.base.ajax.AjaxResponse;
+import com.jwebmp.core.base.html.Div;
+import com.jwebmp.core.base.html.DivSimple;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -42,8 +42,9 @@ public class DragAdapterTest
 			}
 		};
 		System.out.println(test.toString(0));
-		Assertions.assertEquals("<div id=\"test\" ng-drag=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com.jwebmp.events.drag.DragAdapterTest$1');" + "\"></div>",
-		                        test.toString(0));
+		Assertions.assertEquals(
+				"<div id=\"test\" ng-drag=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com.jwebmp.core.events.drag.DragAdapterTest$1');" + "\"></div>",
+				test.toString(0));
 	}
 
 }

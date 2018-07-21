@@ -14,10 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.htmlbuilder.css.backgrounds;
+package com.jwebmp.core.htmlbuilder.css.backgrounds;
 
-import com.jwebmp.htmlbuilder.css.colours.ColourCSS;
-import com.jwebmp.htmlbuilder.css.image.ImageCSS;
+import com.jwebmp.core.htmlbuilder.css.colours.ColourCSS;
+import com.jwebmp.core.htmlbuilder.css.image.ImageCSS;
 import org.junit.jupiter.api.Test;
 
 /**

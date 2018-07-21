@@ -19,13 +19,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jwebmp.base.html;
+package com.jwebmp.core.base.html;
 
-import com.jwebmp.base.html.attributes.GlobalAttributes;
-import com.jwebmp.utilities.StaticStrings;
+import com.jwebmp.core.base.html.attributes.GlobalAttributes;
+import com.jwebmp.core.utilities.StaticStrings;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author MMagon

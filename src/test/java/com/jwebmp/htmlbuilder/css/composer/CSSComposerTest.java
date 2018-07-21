@@ -14,20 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.htmlbuilder.css.composer;
+package com.jwebmp.core.htmlbuilder.css.composer;
 
 import com.jwebmp.BaseTestClass;
-import com.jwebmp.Page;
-import com.jwebmp.base.html.Body;
-import com.jwebmp.base.html.Div;
-import com.jwebmp.base.html.H1;
-import com.jwebmp.htmlbuilder.css.backgrounds.BackgroundBlendMode;
-import com.jwebmp.htmlbuilder.css.backgrounds.BackgroundCSS;
-import com.jwebmp.htmlbuilder.css.backgrounds.BackgroundCSSImpl;
-import com.jwebmp.htmlbuilder.css.backgrounds.BackgroundClip;
-import com.jwebmp.htmlbuilder.css.borders.BorderCSSObjectTest;
-import com.jwebmp.htmlbuilder.css.colours.ColourNames;
-import com.jwebmp.htmlbuilder.css.enumarations.BorderStyles;
+import com.jwebmp.core.Page;
+import com.jwebmp.core.base.html.Body;
+import com.jwebmp.core.base.html.Div;
+import com.jwebmp.core.base.html.H1;
+import com.jwebmp.core.htmlbuilder.css.backgrounds.BackgroundBlendMode;
+import com.jwebmp.core.htmlbuilder.css.backgrounds.BackgroundCSS;
+import com.jwebmp.core.htmlbuilder.css.backgrounds.BackgroundCSSImpl;
+import com.jwebmp.core.htmlbuilder.css.backgrounds.BackgroundClip;
+import com.jwebmp.core.htmlbuilder.css.borders.BorderCSSObjectTest;
+import com.jwebmp.core.htmlbuilder.css.colours.ColourNames;
+import com.jwebmp.core.htmlbuilder.css.enumarations.BorderStyles;
 import org.junit.jupiter.api.Test;
 
 /**

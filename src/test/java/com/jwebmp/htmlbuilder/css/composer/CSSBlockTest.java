@@ -15,15 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jwebmp.htmlbuilder.css.composer;
+package com.jwebmp.core.htmlbuilder.css.composer;
 
-import com.jwebmp.htmlbuilder.css.enumarations.CSSTypes;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSTypes;
 import org.junit.jupiter.api.Test;
 
 import java.util.GregorianCalendar;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author MMagon

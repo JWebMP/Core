@@ -14,17 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.base;
+package com.jwebmp.core.base;
 
 import com.jwebmp.BaseTestClass;
-import com.jwebmp.Page;
-import com.jwebmp.base.angular.AngularPageConfigurator;
-import com.jwebmp.base.html.Body;
-import com.jwebmp.base.html.Comment;
-import com.jwebmp.base.html.Meta;
-import com.jwebmp.base.servlets.enumarations.ComponentTypes;
-import com.jwebmp.htmlbuilder.css.colours.ColourNames;
-import com.jwebmp.plugins.jquery.JQueryPageConfigurator;
+import com.jwebmp.core.Page;
+import com.jwebmp.core.base.angular.AngularPageConfigurator;
+import com.jwebmp.core.base.html.Body;
+import com.jwebmp.core.base.html.Comment;
+import com.jwebmp.core.base.html.Meta;
+import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
+import com.jwebmp.core.htmlbuilder.css.colours.ColourNames;
+import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import org.junit.jupiter.api.Test;
 
 /**

@@ -14,14 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.htmlbuilder.css;
+package com.jwebmp.core.htmlbuilder.css;
 
-import com.jwebmp.htmlbuilder.css.backgrounds.BackgroundCSSImpl;
-import com.jwebmp.htmlbuilder.css.backgrounds.BackgroundCSSObjectTest;
-import com.jwebmp.htmlbuilder.css.colours.ColourNames;
-import com.jwebmp.htmlbuilder.css.composer.CSSBlock;
-import com.jwebmp.htmlbuilder.css.composer.CSSBlockIdentifier;
-import com.jwebmp.htmlbuilder.css.enumarations.CSSTypes;
+import com.jwebmp.core.htmlbuilder.css.backgrounds.BackgroundCSSImpl;
+import com.jwebmp.core.htmlbuilder.css.backgrounds.BackgroundCSSObjectTest;
+import com.jwebmp.core.htmlbuilder.css.colours.ColourNames;
+import com.jwebmp.core.htmlbuilder.css.composer.CSSBlock;
+import com.jwebmp.core.htmlbuilder.css.composer.CSSBlockIdentifier;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSTypes;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;

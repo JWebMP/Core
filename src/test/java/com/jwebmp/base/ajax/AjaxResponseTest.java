@@ -15,9 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jwebmp.base.ajax;
+package com.jwebmp.core.base.ajax;
 
-import com.jwebmp.base.html.DivSimple;
+import com.jwebmp.core.base.html.DivSimple;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

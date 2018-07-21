@@ -14,15 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.base;
+package com.jwebmp.core.base;
 
 import com.jwebmp.BaseTestClass;
-import com.jwebmp.base.servlets.enumarations.ComponentTypes;
+import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-import static com.jwebmp.plugins.ajaxenabler.AjaxEnablerReferencePool.*;
+import static com.jwebmp.core.plugins.ajaxenabler.AjaxEnablerReferencePool.*;
 
 /**
  * @author ged_m
@@ -51,7 +51,7 @@ public class ComponentDependancyBaseTest
 		cd.addJavaScriptReference(AjaxEnabler.getJavaScriptReference());
 		System.out.println(cd);
 /*		Assertions.assertEquals(
-				"{\n" + "  \"id\" : \"ID\",\n" + "  \"componentType\" : \"abbreviation\",\n" + "  \"tiny\" : false,\n" + "  " + "\"configured\"" + " : true,\n" + "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  " + "\"javascriptReferences\" : [ {\n" + "    \"cordovaRequired\" : false,\n" + "    \"name\" : \"AjaxEnabler\",\n" + "    \"version\" : 1.0,\n" + "    " + "\"reference\" : \"javascript/jwebswing/ajax-enabler.js\"\n" + "  } ],\n" + "  \"componentClass\" : \"com.jwebmp.base.ComponentDependancyBase\"\n" + "}",
+				"{\n" + "  \"id\" : \"ID\",\n" + "  \"componentType\" : \"abbreviation\",\n" + "  \"tiny\" : false,\n" + "  " + "\"configured\"" + " : true,\n" + "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  " + "\"javascriptReferences\" : [ {\n" + "    \"cordovaRequired\" : false,\n" + "    \"name\" : \"AjaxEnabler\",\n" + "    \"version\" : 1.0,\n" + "    " + "\"reference\" : \"javascript/jwebswing/ajax-enabler.js\"\n" + "  } ],\n" + "  \"componentClass\" : \"com.jwebmp.core.base.ComponentDependancyBase\"\n" + "}",
 				cd.toString());*/
 	}
 
@@ -73,11 +73,11 @@ public class ComponentDependancyBaseTest
 		                       + "  \"initialized\" : true,\n"
 		                       + "  \"touched\" : false,\n" + "  " + "\"javascriptReferences\" : [ {\n" + "    \"cordovaRequired\" : false,\n" +
 		                       "    \"name\" : " + "\"AjaxEnabler\",\n" + "    \"version\" : 1.0,\n" + "    \"reference\" : " + "\"javascript/jwebswing/ajax-enabler.js\"\n" +
-		                       "  } ],\n" + "  \"componentClass\" : \"com.jwebmp.base.ComponentDependancyBase\"\n" + "}";
+		                       "  } ],\n" + "  \"componentClass\" : \"com.jwebmp.core.base.ComponentDependancyBase\"\n" + "}";
 		String shell2Expected = "{\n" + "  \"id\" : \"shell2\",\n" + "  \"componentType\" : \"abbreviation\",\n" + "  \"tiny\" : false,\n" + "  \"configured\" : true,\n" +
 		                        "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  " + "\"javascriptReferences\" : [ {\n" + "    \"cordovaRequired\" : false,\n" +
 		                        "    \"name\" : " + "\"AjaxEnabler\",\n" + "    \"version\" : 1.0,\n" + "    \"reference\" : " + "\"javascript/jwebswing/ajax-enabler.js\"\n" +
-		                        "  } ],\n" + "  \"componentClass\" : \"com.jwebmp.base.ComponentDependancyBase\"\n" + "}";
+		                        "  } ],\n" + "  \"componentClass\" : \"com.jwebmp.core.base.ComponentDependancyBase\"\n" + "}";
 		//Assertions.assertEquals(shell.toString(), shellExpected);
 		//Assertions.assertEquals(shell2.toString(), shell2Expected);
 	}

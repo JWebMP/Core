@@ -1,4 +1,4 @@
-package com.jwebmp.plugins.jquery;
+package com.jwebmp.core.plugins.jquery;
 
 import com.jwebmp.BaseTestClass;
 import org.junit.jupiter.api.Test;

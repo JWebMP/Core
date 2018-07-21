@@ -1,4 +1,4 @@
-package com.jwebmp.utilities;
+package com.jwebmp.core.utilities;
 
 import com.jwebmp.BaseTestClass;
 import org.junit.jupiter.api.Test;

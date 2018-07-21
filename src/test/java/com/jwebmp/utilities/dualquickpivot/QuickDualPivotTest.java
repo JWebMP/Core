@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jwebmp.utilities.dualquickpivot;
+package com.jwebmp.core.utilities.dualquickpivot;
 
 import com.jwebmp.BaseTestClass;
 import org.junit.jupiter.api.Test;

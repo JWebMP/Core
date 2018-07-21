@@ -16,6 +16,7 @@
  */
 package com.jwebmp.generics;
 
+import com.jwebmp.core.generics.LatitudeLongitueArray;
 import org.junit.jupiter.api.Test;
 
 /**

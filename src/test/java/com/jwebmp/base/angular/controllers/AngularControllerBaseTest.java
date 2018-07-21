@@ -15,12 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jwebmp.base.angular.controllers;
+package com.jwebmp.core.base.angular.controllers;
 
 import com.jwebmp.BaseTestClass;
-import com.jwebmp.Page;
-import com.jwebmp.base.angular.AngularVariableWatcher;
-import com.jwebmp.base.angular.AngularVariableWatcherTest;
+import com.jwebmp.core.Page;
+import com.jwebmp.core.base.angular.AngularVariableWatcher;
+import com.jwebmp.core.base.angular.AngularVariableWatcherTest;
 import org.junit.jupiter.api.Test;
 
 class AngularControllerBaseTest

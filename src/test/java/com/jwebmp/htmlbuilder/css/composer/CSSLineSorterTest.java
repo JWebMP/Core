@@ -15,14 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jwebmp.htmlbuilder.css.composer;
+package com.jwebmp.core.htmlbuilder.css.composer;
 
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author MMagon

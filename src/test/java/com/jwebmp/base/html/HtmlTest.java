@@ -15,16 +15,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jwebmp.base.html;
+package com.jwebmp.core.base.html;
 
 import com.jwebmp.BaseTestClass;
-import com.jwebmp.Page;
-import com.jwebmp.base.angular.AngularPageConfigurator;
-import com.jwebmp.base.client.Browsers;
-import com.jwebmp.plugins.jquery.JQueryPageConfigurator;
+import com.jwebmp.core.Page;
+import com.jwebmp.core.base.angular.AngularPageConfigurator;
+import com.jwebmp.core.base.client.Browsers;
+import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests all aspects of the HTML Raw Component

@@ -16,11 +16,13 @@
  */
 package com.jwebmp;
 
-import com.jwebmp.base.ComponentHierarchyBase;
-import com.jwebmp.base.html.Body;
-import com.jwebmp.base.html.Meta;
-import com.jwebmp.base.html.Paragraph;
-import com.jwebmp.base.servlets.enumarations.ComponentTypes;
+import com.jwebmp.core.Component;
+import com.jwebmp.core.Page;
+import com.jwebmp.core.base.ComponentHierarchyBase;
+import com.jwebmp.core.base.html.Body;
+import com.jwebmp.core.base.html.Meta;
+import com.jwebmp.core.base.html.Paragraph;
+import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import org.junit.jupiter.api.Test;
 
 /**

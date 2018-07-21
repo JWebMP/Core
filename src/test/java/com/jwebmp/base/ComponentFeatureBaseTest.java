@@ -14,10 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.base;
+package com.jwebmp.core.base;
 
 import com.jwebmp.BaseTestClass;
-import com.jwebmp.base.servlets.enumarations.ComponentTypes;
+import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +40,31 @@ public class ComponentFeatureBaseTest
 		cfb.addFeature(getFeature());
 		System.out.println(cfb);
 		Assertions.assertEquals(
-				"{\n" + "  \"id\" : \"testComp\",\n" + "  \"componentType\" : \"abbreviation\",\n" + "  \"tiny\" : false,\n" + "  \"configured\" : true,\n" + "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  \"features\" : [ {\n" + "    \"id\" : \"featureTest\",\n" + "    \"componentType\" : \"feature\",\n" + "    \"tiny\" : false,\n" + "    \"configured\" : true,\n" + "    \"initialized\" : true,\n" + "    \"touched\" : false,\n" + "    \"sortOrder\" : 1000,\n" + "    \"name\" : \"Test Feature\",\n" + "    \"renderAfterLoad\" : false,\n" + "    \"javascriptRenderedElsewhere\" : false,\n" + "    \"queries\" : [ \"Query Added\" ]\n" + "  } ],\n" + "  \"sortOrder\" : 1000,\n" + "  \"renderAfterLoad\" : false,\n" + "  \"javascriptRenderedElsewhere\" : false,\n" + "  \"componentClass\" : \"com.jwebmp.base.ComponentFeatureBase\"\n" + "}",
+				"{\n" +
+				"  \"id\" : \"testComp\",\n" +
+				"  \"componentType\" : \"abbreviation\",\n" +
+				"  \"tiny\" : false,\n" +
+				"  \"configured\" : true,\n" +
+				"  \"initialized\" : true,\n" +
+				"  \"touched\" : false,\n" +
+				"  \"features\" : [ {\n" +
+				"    \"id\" : \"featureTest\",\n" +
+				"    \"componentType\" : \"feature\",\n" +
+				"    \"tiny\" : false,\n" +
+				"    \"configured\" : true,\n" +
+				"    \"initialized\" : true,\n" +
+				"    \"touched\" : false,\n" +
+				"    \"sortOrder\" : 1000,\n" +
+				"    \"name\" : \"Test Feature\",\n" +
+				"    \"renderAfterLoad\" : false,\n" +
+				"    \"javascriptRenderedElsewhere\" : false,\n" +
+				"    \"queries\" : [ \"Query Added\" ]\n" +
+				"  } ],\n" +
+				"  \"sortOrder\" : 1000,\n" +
+				"  \"renderAfterLoad\" : false,\n" +
+				"  \"javascriptRenderedElsewhere\" : false,\n" +
+				"  \"componentClass\" : \"com.jwebmp.core.base.ComponentFeatureBase\"\n" +
+				"}",
 				cfb.toString());
 	}
 }

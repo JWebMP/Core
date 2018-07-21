@@ -14,14 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.base;
+package com.jwebmp.core.base;
 
-import com.jwebmp.Event;
-import com.jwebmp.base.ajax.AjaxCall;
-import com.jwebmp.base.ajax.AjaxResponse;
-import com.jwebmp.base.html.Div;
-import com.jwebmp.base.servlets.enumarations.ComponentTypes;
-import com.jwebmp.events.click.ClickAdapter;
+import com.jwebmp.core.Event;
+import com.jwebmp.core.base.ajax.AjaxCall;
+import com.jwebmp.core.base.ajax.AjaxResponse;
+import com.jwebmp.core.base.html.Div;
+import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
+import com.jwebmp.core.events.click.ClickAdapter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -122,8 +122,58 @@ public class ComponentHTMLBaseTest
 		shell2.setID("shell2");
 		System.out.println(shell);
 		System.out.println(shell2);
-		String shellExpected = "{\n" + "  \"id\" : \"shell\",\n" + "  \"componentType\" : \"abbreviation\",\n" + "  \"tiny\" : false,\n" + "  \"configured\" : true,\n" + "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  \"sortOrder\" : 1000,\n" + "  \"renderAfterLoad\" : false,\n" + "  \"javascriptRenderedElsewhere\" : false,\n" + "  \"events\" : [ {\n" + "    \"id\" : \"clickEvent\",\n" + "    \"componentType\" : \"event\",\n" + "    \"tiny\" : false,\n" + "    \"configured\" : true,\n" + "    \"initialized\" : true,\n" + "    \"touched\" : false,\n" + "    \"sortOrder\" : 1000,\n" + "    \"name\" : \"click\",\n" + "    \"renderAfterLoad\" : false,\n" + "    \"javascriptRenderedElsewhere\" : false,\n" + "    \"registeredComponents\" : [ \"com.jwebmp.base.html.Div\" ],\n" + "    \"eventType\" : \"click\"\n" + "  } ],\n" + "  \"componentClass\" : \"com.jwebmp.base.ComponentEventBase\"\n" + "}";
-		String shell2Expected = "{\n" + "  \"id\" : \"shell2\",\n" + "  \"componentType\" : \"abbreviation\",\n" + "  \"tiny\" : false,\n" + "  \"configured\" : true,\n" + "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  \"sortOrder\" : 1000,\n" + "  \"renderAfterLoad\" : false,\n" + "  \"javascriptRenderedElsewhere\" : false,\n" + "  \"events\" : [ {\n" + "    \"id\" : \"clickEvent\",\n" + "    \"componentType\" : \"event\",\n" + "    \"tiny\" : false,\n" + "    \"configured\" : true,\n" + "    \"initialized\" : true,\n" + "    \"touched\" : false,\n" + "    \"sortOrder\" : 1000,\n" + "    \"name\" : \"click\",\n" + "    \"renderAfterLoad\" : false,\n" + "    \"javascriptRenderedElsewhere\" : false,\n" + "    \"registeredComponents\" : [ \"com.jwebmp.base.html.Div\" ],\n" + "    \"eventType\" : \"click\"\n" + "  } ],\n" + "  \"componentClass\" : \"com.jwebmp.base.ComponentEventBase\"\n" + "}";
+		String shellExpected = "{\n" +
+		                       "  \"id\" : \"shell\",\n" +
+		                       "  \"componentType\" : \"abbreviation\",\n" +
+		                       "  \"tiny\" : false,\n" +
+		                       "  \"configured\" : true,\n" +
+		                       "  \"initialized\" : true,\n" +
+		                       "  \"touched\" : false,\n" +
+		                       "  \"sortOrder\" : 1000,\n" +
+		                       "  \"renderAfterLoad\" : false,\n" +
+		                       "  \"javascriptRenderedElsewhere\" : false,\n" +
+		                       "  \"events\" : [ {\n" +
+		                       "    \"id\" : \"clickEvent\",\n" +
+		                       "    \"componentType\" : \"event\",\n" +
+		                       "    \"tiny\" : false,\n" +
+		                       "    \"configured\" : true,\n" +
+		                       "    \"initialized\" : true,\n" +
+		                       "    \"touched\" : false,\n" +
+		                       "    \"sortOrder\" : 1000,\n" +
+		                       "    \"name\" : \"click\",\n" +
+		                       "    \"renderAfterLoad\" : false,\n" +
+		                       "    \"javascriptRenderedElsewhere\" : false,\n" +
+		                       "    \"registeredComponents\" : [ \"com.jwebmp.core.base.html.Div\" ],\n" +
+		                       "    \"eventType\" : \"click\"\n" +
+		                       "  } ],\n" +
+		                       "  \"componentClass\" : \"com.jwebmp.core.base.ComponentEventBase\"\n" +
+		                       "}";
+		String shell2Expected = "{\n" +
+		                        "  \"id\" : \"shell2\",\n" +
+		                        "  \"componentType\" : \"abbreviation\",\n" +
+		                        "  \"tiny\" : false,\n" +
+		                        "  \"configured\" : true,\n" +
+		                        "  \"initialized\" : true,\n" +
+		                        "  \"touched\" : false,\n" +
+		                        "  \"sortOrder\" : 1000,\n" +
+		                        "  \"renderAfterLoad\" : false,\n" +
+		                        "  \"javascriptRenderedElsewhere\" : false,\n" +
+		                        "  \"events\" : [ {\n" +
+		                        "    \"id\" : \"clickEvent\",\n" +
+		                        "    \"componentType\" : \"event\",\n" +
+		                        "    \"tiny\" : false,\n" +
+		                        "    \"configured\" : true,\n" +
+		                        "    \"initialized\" : true,\n" +
+		                        "    \"touched\" : false,\n" +
+		                        "    \"sortOrder\" : 1000,\n" +
+		                        "    \"name\" : \"click\",\n" +
+		                        "    \"renderAfterLoad\" : false,\n" +
+		                        "    \"javascriptRenderedElsewhere\" : false,\n" +
+		                        "    \"registeredComponents\" : [ \"com.jwebmp.core.base.html.Div\" ],\n" +
+		                        "    \"eventType\" : \"click\"\n" +
+		                        "  } ],\n" +
+		                        "  \"componentClass\" : \"com.jwebmp.core.base.ComponentEventBase\"\n" +
+		                        "}";
 		//		Assertions.assertEquals(shell.toString(), shellExpected);
 		//		Assertions.assertEquals(shell2.toString(), shell2Expected);
 	}

@@ -14,10 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.base.html;
+package com.jwebmp.core.base.html;
 
-import com.jwebmp.base.html.attributes.InputTextAttributes;
-import com.jwebmp.base.html.inputs.InputTextType;
+import com.jwebmp.core.base.html.attributes.InputTextAttributes;
+import com.jwebmp.core.base.html.inputs.InputTextType;
 import org.junit.jupiter.api.Test;
 
 /**

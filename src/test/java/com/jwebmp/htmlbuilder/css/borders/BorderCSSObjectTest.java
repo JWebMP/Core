@@ -14,14 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.htmlbuilder.css.borders;
+package com.jwebmp.core.htmlbuilder.css.borders;
 
-import com.jwebmp.base.html.Div;
-import com.jwebmp.base.html.H1;
-import com.jwebmp.htmlbuilder.css.colours.ColourCSS;
-import com.jwebmp.htmlbuilder.css.colours.ColourNames;
-import com.jwebmp.htmlbuilder.css.composer.CSSComposer;
-import com.jwebmp.htmlbuilder.css.enumarations.BorderStyles;
+import com.jwebmp.core.base.html.Div;
+import com.jwebmp.core.base.html.H1;
+import com.jwebmp.core.htmlbuilder.css.colours.ColourCSS;
+import com.jwebmp.core.htmlbuilder.css.colours.ColourNames;
+import com.jwebmp.core.htmlbuilder.css.composer.CSSComposer;
+import com.jwebmp.core.htmlbuilder.css.enumarations.BorderStyles;
 import org.junit.jupiter.api.Test;
 
 /**

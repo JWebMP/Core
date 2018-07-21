@@ -15,9 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jwebmp.base.servlet;
+package com.jwebmp.core.base.servlet;
 
-import com.jwebmp.base.servlets.AjaxReceiverServlet;
+import com.jwebmp.core.base.servlets.AjaxReceiverServlet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

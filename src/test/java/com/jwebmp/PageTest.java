@@ -16,21 +16,22 @@
  */
 package com.jwebmp;
 
-import com.jwebmp.base.angular.AngularPageConfigurator;
-import com.jwebmp.base.client.Browsers;
-import com.jwebmp.base.client.InternetExplorerCompatibilityMode;
-import com.jwebmp.base.html.Base;
-import com.jwebmp.base.html.Body;
-import com.jwebmp.base.html.Comment;
-import com.jwebmp.base.html.H1;
-import com.jwebmp.base.html.attributes.BaseAttributes;
-import com.jwebmp.base.servlets.enumarations.DevelopmentEnvironments;
-import com.jwebmp.htmlbuilder.css.backgrounds.BackgroundAttachments;
-import com.jwebmp.htmlbuilder.css.colours.ColourNames;
-import com.jwebmp.plugins.jquery.JQueryPageConfigurator;
+import com.jwebmp.core.Page;
+import com.jwebmp.core.base.angular.AngularPageConfigurator;
+import com.jwebmp.core.base.client.Browsers;
+import com.jwebmp.core.base.client.InternetExplorerCompatibilityMode;
+import com.jwebmp.core.base.html.Base;
+import com.jwebmp.core.base.html.Body;
+import com.jwebmp.core.base.html.Comment;
+import com.jwebmp.core.base.html.H1;
+import com.jwebmp.core.base.html.attributes.BaseAttributes;
+import com.jwebmp.core.base.servlets.enumarations.DevelopmentEnvironments;
+import com.jwebmp.core.htmlbuilder.css.backgrounds.BackgroundAttachments;
+import com.jwebmp.core.htmlbuilder.css.colours.ColourNames;
+import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author GedMarc

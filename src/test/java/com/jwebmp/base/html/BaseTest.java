@@ -15,15 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jwebmp.base.html;
+package com.jwebmp.core.base.html;
 
 import com.jwebmp.BaseTestClass;
-import com.jwebmp.Page;
-import com.jwebmp.base.client.Browsers;
-import com.jwebmp.base.html.attributes.BaseAttributes;
+import com.jwebmp.core.Page;
+import com.jwebmp.core.base.client.Browsers;
+import com.jwebmp.core.base.html.attributes.BaseAttributes;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author MMagon

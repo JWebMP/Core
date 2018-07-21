@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.htmlbuilder.css.borders;
+package com.jwebmp.core.htmlbuilder.css.borders;
 
-import com.jwebmp.htmlbuilder.css.composer.CSSComposer;
+import com.jwebmp.core.htmlbuilder.css.composer.CSSComposer;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedHashSet;

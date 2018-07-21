@@ -14,11 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.base.angular;
+package com.jwebmp.core.base.angular;
 
 import com.jwebmp.BaseTestClass;
-import com.jwebmp.FileTemplates;
-import com.jwebmp.Page;
+import com.jwebmp.core.FileTemplates;
+import com.jwebmp.core.Page;
 import org.junit.jupiter.api.Test;
 
 /**

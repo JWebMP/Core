@@ -1,4 +1,4 @@
-package com.jwebmp.base.html;
+package com.jwebmp.core.base.html;
 
 import com.jwebmp.BaseTestClass;
 import org.junit.jupiter.api.Assertions;

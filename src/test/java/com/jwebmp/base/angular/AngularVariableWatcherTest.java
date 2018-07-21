@@ -15,11 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jwebmp.base.angular;
+package com.jwebmp.core.base.angular;
 
 import com.jwebmp.BaseTestClass;
-import com.jwebmp.base.ajax.AjaxCall;
-import com.jwebmp.base.ajax.AjaxResponse;
+import com.jwebmp.core.base.ajax.AjaxCall;
+import com.jwebmp.core.base.ajax.AjaxResponse;
 import org.junit.jupiter.api.Test;
 
 public class AngularVariableWatcherTest

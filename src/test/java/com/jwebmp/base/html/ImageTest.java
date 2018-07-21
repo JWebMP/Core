@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jwebmp.base.html;
+package com.jwebmp.core.base.html;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

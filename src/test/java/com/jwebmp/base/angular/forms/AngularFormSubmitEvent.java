@@ -15,11 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jwebmp.base.angular.forms;
+package com.jwebmp.core.base.angular.forms;
 
-import com.jwebmp.base.ajax.AjaxCall;
-import com.jwebmp.base.ajax.AjaxResponse;
-import com.jwebmp.events.submit.SubmitAdapter;
+import com.jwebmp.core.base.ajax.AjaxCall;
+import com.jwebmp.core.base.ajax.AjaxResponse;
+import com.jwebmp.core.events.submit.SubmitAdapter;
 
 public class AngularFormSubmitEvent
 		extends SubmitAdapter

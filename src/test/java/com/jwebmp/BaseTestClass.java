@@ -16,9 +16,11 @@
  */
 package com.jwebmp;
 
-import com.jwebmp.base.angular.AngularPageConfigurator;
-import com.jwebmp.base.html.Body;
-import com.jwebmp.plugins.jquery.JQueryPageConfigurator;
+import com.jwebmp.core.Feature;
+import com.jwebmp.core.Page;
+import com.jwebmp.core.base.angular.AngularPageConfigurator;
+import com.jwebmp.core.base.html.Body;
+import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import org.junit.jupiter.api.BeforeAll;
 
 import java.io.FileWriter;

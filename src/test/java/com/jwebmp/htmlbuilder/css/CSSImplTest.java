@@ -14,26 +14,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.htmlbuilder.css;
+package com.jwebmp.core.htmlbuilder.css;
 
 import com.jwebmp.BaseTestClass;
-import com.jwebmp.Page;
-import com.jwebmp.htmlbuilder.css.backgrounds.BackgroundClip;
-import com.jwebmp.htmlbuilder.css.colours.ColourCSSImpl;
-import com.jwebmp.htmlbuilder.css.colours.ColourNames;
-import com.jwebmp.htmlbuilder.css.composer.CSSBlock;
-import com.jwebmp.htmlbuilder.css.composer.CSSBlockIdentifier;
-import com.jwebmp.htmlbuilder.css.displays.Displays;
-import com.jwebmp.htmlbuilder.css.enumarations.BorderStyles;
-import com.jwebmp.htmlbuilder.css.enumarations.CSSTypes;
-import com.jwebmp.htmlbuilder.css.fonts.FontStyles;
-import com.jwebmp.htmlbuilder.css.lists.ListStylePosition;
-import com.jwebmp.htmlbuilder.css.lists.ListStyleType;
-import com.jwebmp.htmlbuilder.css.measurement.MeasurementCSSImpl;
-import com.jwebmp.htmlbuilder.css.padding.PaddingSetting;
-import com.jwebmp.htmlbuilder.css.tables.TableBorderCollapse;
-import com.jwebmp.htmlbuilder.css.tables.TableCaptionSides;
-import com.jwebmp.htmlbuilder.css.text.TextAlignments;
+import com.jwebmp.core.Page;
+import com.jwebmp.core.htmlbuilder.css.backgrounds.BackgroundClip;
+import com.jwebmp.core.htmlbuilder.css.colours.ColourCSSImpl;
+import com.jwebmp.core.htmlbuilder.css.colours.ColourNames;
+import com.jwebmp.core.htmlbuilder.css.composer.CSSBlock;
+import com.jwebmp.core.htmlbuilder.css.composer.CSSBlockIdentifier;
+import com.jwebmp.core.htmlbuilder.css.displays.Displays;
+import com.jwebmp.core.htmlbuilder.css.enumarations.BorderStyles;
+import com.jwebmp.core.htmlbuilder.css.enumarations.CSSTypes;
+import com.jwebmp.core.htmlbuilder.css.fonts.FontStyles;
+import com.jwebmp.core.htmlbuilder.css.lists.ListStylePosition;
+import com.jwebmp.core.htmlbuilder.css.lists.ListStyleType;
+import com.jwebmp.core.htmlbuilder.css.measurement.MeasurementCSSImpl;
+import com.jwebmp.core.htmlbuilder.css.padding.PaddingSetting;
+import com.jwebmp.core.htmlbuilder.css.tables.TableBorderCollapse;
+import com.jwebmp.core.htmlbuilder.css.tables.TableCaptionSides;
+import com.jwebmp.core.htmlbuilder.css.text.TextAlignments;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -14,13 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.base;
+package com.jwebmp.core.base;
 
-import com.jwebmp.base.html.CSSLink;
-import com.jwebmp.base.html.Div;
+import com.jwebmp.core.base.html.CSSLink;
+import com.jwebmp.core.base.html.Div;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Marc Magon

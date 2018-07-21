@@ -1,8 +1,8 @@
-package com.jwebmp.base.ajax;
+package com.jwebmp.core.base.ajax;
 
 import com.jwebmp.BaseTestClass;
-import com.jwebmp.CSSComponent;
-import com.jwebmp.htmlbuilder.javascript.events.enumerations.EventTypes;
+import com.jwebmp.core.CSSComponent;
+import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

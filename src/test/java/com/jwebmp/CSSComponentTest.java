@@ -16,6 +16,7 @@
  */
 package com.jwebmp;
 
+import com.jwebmp.core.CSSComponent;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

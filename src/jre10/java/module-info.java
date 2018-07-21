@@ -1,139 +1,144 @@
+import com.jwebmp.JWebMPPackageScanner;
+import com.jwebmp.core.annotations.SiteBinderIGuiceSiteBinder;
+import com.jwebmp.guicedinjection.interfaces.IPackageContentsScanner;
+import com.jwebmp.guicedservlets.services.IGuiceSiteBinder;
+
 module com.jwebmp.core {
 
 	exports com.jwebmp;
-	exports com.jwebmp.base;
-	exports com.jwebmp.base.ajax;
-	exports com.jwebmp.base.angular;
-	exports com.jwebmp.base.angular.directives;
-	exports com.jwebmp.base.angular.controllers;
-	exports com.jwebmp.base.angular.factories;
-	exports com.jwebmp.base.angular.forms;
-	exports com.jwebmp.base.angular.modules;
-	exports com.jwebmp.base.angular.configurations;
-	exports com.jwebmp.base.client;
+	exports com.jwebmp.core.base;
+	exports com.jwebmp.core.base.ajax;
+	exports com.jwebmp.core.base.angular;
+	exports com.jwebmp.core.base.angular.directives;
+	exports com.jwebmp.core.base.angular.controllers;
+	exports com.jwebmp.core.base.angular.factories;
+	exports com.jwebmp.core.base.angular.forms;
+	exports com.jwebmp.core.base.angular.modules;
+	exports com.jwebmp.core.base.angular.configurations;
+	exports com.jwebmp.core.base.client;
 
-	exports com.jwebmp.base.html;
-	exports com.jwebmp.base.html.attributes;
-	exports com.jwebmp.base.html.inputs;
+	exports com.jwebmp.core.base.html;
+	exports com.jwebmp.core.base.html.attributes;
+	exports com.jwebmp.core.base.html.inputs;
 /*
-	opens com.jwebmp.base.html.interfaces;
-	opens com.jwebmp.base.html.interfaces.children;
-	opens com.jwebmp.base.html.interfaces.children.generics;
-	opens com.jwebmp.base.html.interfaces.events;*/
+	opens com.jwebmp.core.base.html.interfaces;
+	opens com.jwebmp.core.base.html.interfaces.children;
+	opens com.jwebmp.core.base.html.interfaces.children.generics;
+	opens com.jwebmp.core.base.html.interfaces.events;*/
 
-	exports com.jwebmp.base.html.interfaces;
-	exports com.jwebmp.base.html.interfaces.children;
-	exports com.jwebmp.base.html.interfaces.children.generics;
-	exports com.jwebmp.base.html.interfaces.events;
+	exports com.jwebmp.core.base.html.interfaces;
+	exports com.jwebmp.core.base.html.interfaces.children;
+	exports com.jwebmp.core.base.html.interfaces.children.generics;
+	exports com.jwebmp.core.base.html.interfaces.events;
 
-	exports com.jwebmp.base.interfaces;
+	exports com.jwebmp.core.base.interfaces;
 
-	exports com.jwebmp.base.page to com.jwebmp.guicedinjection;
+	exports com.jwebmp.core.base.page to com.jwebmp.guicedinjection;
 
-	exports com.jwebmp.base.servlets;
-	exports com.jwebmp.base.servlets.enumarations;
-	exports com.jwebmp.base.servlets.intercepters;
-	exports com.jwebmp.base.servlets.interfaces;
-	opens com.jwebmp.base.servlets.interfaces;
+	exports com.jwebmp.core.base.servlets;
+	exports com.jwebmp.core.base.servlets.enumarations;
+	exports com.jwebmp.core.base.servlets.intercepters;
+	exports com.jwebmp.core.base.servlets.interfaces;
+	opens com.jwebmp.core.base.servlets.interfaces;
 
 
-	exports com.jwebmp.base.servlets.options;
+	exports com.jwebmp.core.base.servlets.options;
 
-	exports com.jwebmp.events.activate;
-	exports com.jwebmp.events.beforeactivate;
-	exports com.jwebmp.events.beforeclose;
-	exports com.jwebmp.events.beforeload;
-	exports com.jwebmp.events.beforestop;
-	exports com.jwebmp.events.blur;
-	exports com.jwebmp.events.buttonclick;
-	exports com.jwebmp.events.cancel;
-	exports com.jwebmp.events.change;
-	exports com.jwebmp.events.checked;
-	exports com.jwebmp.events.click;
-	exports com.jwebmp.events.close;
-	exports com.jwebmp.events.complete;
-	exports com.jwebmp.events.create;
-	exports com.jwebmp.events.deactivate;
-	exports com.jwebmp.events.drag;
-	exports com.jwebmp.events.dragstart;
-	exports com.jwebmp.events.dragstop;
-	exports com.jwebmp.events.drop;
-	exports com.jwebmp.events.dropout;
-	exports com.jwebmp.events.dropover;
-	exports com.jwebmp.events.focus;
-	exports com.jwebmp.events.keydown;
-	exports com.jwebmp.events.keypressed;
-	exports com.jwebmp.events.keyup;
-	exports com.jwebmp.events.load;
-	exports com.jwebmp.events.mousedown;
-	exports com.jwebmp.events.mouseenter;
-	exports com.jwebmp.events.mousemove;
-	exports com.jwebmp.events.mouseout;
-	exports com.jwebmp.events.mouseover;
-	exports com.jwebmp.events.mouseup;
-	exports com.jwebmp.events.open;
-	exports com.jwebmp.events.receive;
-	exports com.jwebmp.events.remove;
-	exports com.jwebmp.events.resize;
-	exports com.jwebmp.events.resizestart;
-	exports com.jwebmp.events.resizestop;
-	exports com.jwebmp.events.response;
-	exports com.jwebmp.events.rightclick;
-	exports com.jwebmp.events.search;
-	exports com.jwebmp.events.select;
-	exports com.jwebmp.events.selected;
-	exports com.jwebmp.events.selecting;
-	exports com.jwebmp.events.slide;
-	exports com.jwebmp.events.sort;
-	exports com.jwebmp.events.spin;
-	exports com.jwebmp.events.start;
-	exports com.jwebmp.events.stop;
-	exports com.jwebmp.events.submit;
-	exports com.jwebmp.events.unselected;
-	exports com.jwebmp.events.update;
+	exports com.jwebmp.core.events.activate;
+	exports com.jwebmp.core.events.beforeactivate;
+	exports com.jwebmp.core.events.beforeclose;
+	exports com.jwebmp.core.events.beforeload;
+	exports com.jwebmp.core.events.beforestop;
+	exports com.jwebmp.core.events.blur;
+	exports com.jwebmp.core.events.buttonclick;
+	exports com.jwebmp.core.events.cancel;
+	exports com.jwebmp.core.events.change;
+	exports com.jwebmp.core.events.checked;
+	exports com.jwebmp.core.events.click;
+	exports com.jwebmp.core.events.close;
+	exports com.jwebmp.core.events.complete;
+	exports com.jwebmp.core.events.create;
+	exports com.jwebmp.core.events.deactivate;
+	exports com.jwebmp.core.events.drag;
+	exports com.jwebmp.core.events.dragstart;
+	exports com.jwebmp.core.events.dragstop;
+	exports com.jwebmp.core.events.drop;
+	exports com.jwebmp.core.events.dropout;
+	exports com.jwebmp.core.events.dropover;
+	exports com.jwebmp.core.events.focus;
+	exports com.jwebmp.core.events.keydown;
+	exports com.jwebmp.core.events.keypressed;
+	exports com.jwebmp.core.events.keyup;
+	exports com.jwebmp.core.events.load;
+	exports com.jwebmp.core.events.mousedown;
+	exports com.jwebmp.core.events.mouseenter;
+	exports com.jwebmp.core.events.mousemove;
+	exports com.jwebmp.core.events.mouseout;
+	exports com.jwebmp.core.events.mouseover;
+	exports com.jwebmp.core.events.mouseup;
+	exports com.jwebmp.core.events.open;
+	exports com.jwebmp.core.events.receive;
+	exports com.jwebmp.core.events.remove;
+	exports com.jwebmp.core.events.resize;
+	exports com.jwebmp.core.events.resizestart;
+	exports com.jwebmp.core.events.resizestop;
+	exports com.jwebmp.core.events.response;
+	exports com.jwebmp.core.events.rightclick;
+	exports com.jwebmp.core.events.search;
+	exports com.jwebmp.core.events.select;
+	exports com.jwebmp.core.events.selected;
+	exports com.jwebmp.core.events.selecting;
+	exports com.jwebmp.core.events.slide;
+	exports com.jwebmp.core.events.sort;
+	exports com.jwebmp.core.events.spin;
+	exports com.jwebmp.core.events.start;
+	exports com.jwebmp.core.events.stop;
+	exports com.jwebmp.core.events.submit;
+	exports com.jwebmp.core.events.unselected;
+	exports com.jwebmp.core.events.update;
 
 	exports com.jwebmp.exceptions;
 
 	exports com.jwebmp.generics;
 
 	exports com.jwebmp.annotations;
-	exports com.jwebmp.htmlbuilder.css;
-	exports com.jwebmp.htmlbuilder.css.animatable;
-	exports com.jwebmp.htmlbuilder.css.annotations;
-	exports com.jwebmp.htmlbuilder.css.backgrounds;
-	exports com.jwebmp.htmlbuilder.css.borders;
-	exports com.jwebmp.htmlbuilder.css.colours;
-	exports com.jwebmp.htmlbuilder.css.composer;
-	exports com.jwebmp.htmlbuilder.css.displays;
-	exports com.jwebmp.htmlbuilder.css.enumarations;
-	exports com.jwebmp.htmlbuilder.css.fonts;
-	exports com.jwebmp.htmlbuilder.css.heightwidth;
-	exports com.jwebmp.htmlbuilder.css.image;
-	exports com.jwebmp.htmlbuilder.css.interfaces;
-	exports com.jwebmp.htmlbuilder.css.lists;
-	exports com.jwebmp.htmlbuilder.css.margins;
-	exports com.jwebmp.htmlbuilder.css.measurement;
-	exports com.jwebmp.htmlbuilder.css.outline;
-	exports com.jwebmp.htmlbuilder.css.padding;
-	exports com.jwebmp.htmlbuilder.css.tables;
-	exports com.jwebmp.htmlbuilder.css.text;
-	exports com.jwebmp.htmlbuilder.css.themes;
+	exports com.jwebmp.core.htmlbuilder.css;
+	exports com.jwebmp.core.htmlbuilder.css.animatable;
+	exports com.jwebmp.core.htmlbuilder.css.annotations;
+	exports com.jwebmp.core.htmlbuilder.css.backgrounds;
+	exports com.jwebmp.core.htmlbuilder.css.borders;
+	exports com.jwebmp.core.htmlbuilder.css.colours;
+	exports com.jwebmp.core.htmlbuilder.css.composer;
+	exports com.jwebmp.core.htmlbuilder.css.displays;
+	exports com.jwebmp.core.htmlbuilder.css.enumarations;
+	exports com.jwebmp.core.htmlbuilder.css.fonts;
+	exports com.jwebmp.core.htmlbuilder.css.heightwidth;
+	exports com.jwebmp.core.htmlbuilder.css.image;
+	exports com.jwebmp.core.htmlbuilder.css.interfaces;
+	exports com.jwebmp.core.htmlbuilder.css.lists;
+	exports com.jwebmp.core.htmlbuilder.css.margins;
+	exports com.jwebmp.core.htmlbuilder.css.measurement;
+	exports com.jwebmp.core.htmlbuilder.css.outline;
+	exports com.jwebmp.core.htmlbuilder.css.padding;
+	exports com.jwebmp.core.htmlbuilder.css.tables;
+	exports com.jwebmp.core.htmlbuilder.css.text;
+	exports com.jwebmp.core.htmlbuilder.css.themes;
 
-	exports com.jwebmp.htmlbuilder.javascript;
-	exports com.jwebmp.htmlbuilder.javascript.events.commandevent;
-	exports com.jwebmp.htmlbuilder.javascript.events.enumerations;
-	exports com.jwebmp.htmlbuilder.javascript.events.interfaces;
+	exports com.jwebmp.core.htmlbuilder.javascript;
+	exports com.jwebmp.core.htmlbuilder.javascript.events.commandevent;
+	exports com.jwebmp.core.htmlbuilder.javascript.events.enumerations;
+	exports com.jwebmp.core.htmlbuilder.javascript.events.interfaces;
 
 	exports com.jwebmp.plugins;
-	exports com.jwebmp.plugins.ajaxenabler;
-	exports com.jwebmp.plugins.jquery;
+	exports com.jwebmp.core.plugins.ajaxenabler;
+	exports com.jwebmp.core.plugins.jquery;
 
-	exports com.jwebmp.utilities;
-	exports com.jwebmp.utilities.dualquickpivot;
-	exports com.jwebmp.utilities.regex;
+	exports com.jwebmp.core.utilities;
+	exports com.jwebmp.core.utilities.dualquickpivot;
+	exports com.jwebmp.core.utilities.regex;
 
-	exports com.jwebmp.base.references;
-	exports com.jwebmp.base.angular.forms.enumerations;
+	exports com.jwebmp.core.base.references;
+	exports com.jwebmp.core.base.angular.forms.enumerations;
 	exports com.jwebmp.components;
 
 	requires java.logging;
@@ -160,59 +165,60 @@ module com.jwebmp.core {
 	requires java.sql;
 	requires com.google.common;
 
-	uses com.jwebmp.utilities.regex.IRegularExpressions;
-	uses com.jwebmp.base.angular.directives.IAngularDirective;
+	uses com.jwebmp.core.utilities.regex.IRegularExpressions;
+	uses com.jwebmp.core.base.angular.directives.IAngularDirective;
 
-	provides com.jwebmp.base.angular.directives.IAngularDirective with com.jwebmp.events.activate.ActivateDirective,
-			                                                              com.jwebmp.events.beforeactivate.BeforeActivateDirective,
-			                                                              com.jwebmp.events.beforeclose.BeforeCloseDirective,
-			                                                              com.jwebmp.events.beforeload.BeforeLoadDirective,
-			                                                              com.jwebmp.events.beforestop.BeforeStopDirective,
-			                                                              com.jwebmp.events.buttonclick.ButtonClickDirective,
-			                                                              com.jwebmp.events.cancel.CancelDirective,
-			                                                              com.jwebmp.events.close.CloseDirective,
-			                                                              com.jwebmp.events.complete.CompleteDirective,
-			                                                              com.jwebmp.events.create.CreateDirective,
-			                                                              com.jwebmp.events.deactivate.DeactivateDirective,
-			                                                              com.jwebmp.events.drag.DragDirective,
-			                                                              com.jwebmp.events.dragstart.DragStartDirective,
-			                                                              com.jwebmp.events.dragstop.DragStopDirective,
-			                                                              com.jwebmp.events.drop.DropDirective,
-			                                                              com.jwebmp.events.dropout.DropOutDirective,
-			                                                              com.jwebmp.events.dropover.DropOverDirective,
-			                                                              com.jwebmp.events.focus.FocusDirective,
-			                                                              com.jwebmp.events.load.LoadDirective,
-			                                                              com.jwebmp.events.receive.ReceiveDirective,
-			                                                              com.jwebmp.events.remove.RemoveDirective,
-			                                                              com.jwebmp.events.resize.ResizeDirective,
-			                                                              com.jwebmp.events.resizestart.ResizeStartDirective,
-			                                                              com.jwebmp.events.resizestop.ResizeStopDirective,
-			                                                              com.jwebmp.events.response.ResponseDirective,
-			                                                              com.jwebmp.events.rightclick.RightClickDirective,
-			                                                              com.jwebmp.events.search.SearchDirective,
-			                                                              com.jwebmp.events.select.SelectDirective,
-			                                                              com.jwebmp.events.selecting.SelectingDirective,
-			                                                              com.jwebmp.events.slide.SlideDirective,
-			                                                              com.jwebmp.events.sort.SortDirective,
-			                                                              com.jwebmp.events.spin.SpinDirective,
-			                                                              com.jwebmp.events.start.StartDirective,
-			                                                              com.jwebmp.events.stop.StopDirective,
-			                                                              com.jwebmp.events.unselected.UnselectedDirective,
-			                                                              com.jwebmp.events.update.UpdateDirective;
+	provides IGuiceSiteBinder with SiteBinderIGuiceSiteBinder;
 
-	provides com.jwebmp.guicedinjection.scanners.PackageContentsScanner with com.jwebmp.JWebSwingPackageScanner;
+	provides com.jwebmp.core.base.angular.directives.IAngularDirective with com.jwebmp.core.events.activate.ActivateDirective,
+			                                                              com.jwebmp.core.events.beforeactivate.BeforeActivateDirective,
+			                                                              com.jwebmp.core.events.beforeclose.BeforeCloseDirective,
+			                                                              com.jwebmp.core.events.beforeload.BeforeLoadDirective,
+			                                                              com.jwebmp.core.events.beforestop.BeforeStopDirective,
+			                                                              com.jwebmp.core.events.buttonclick.ButtonClickDirective,
+			                                                              com.jwebmp.core.events.cancel.CancelDirective,
+			                                                              com.jwebmp.core.events.close.CloseDirective,
+			                                                              com.jwebmp.core.events.complete.CompleteDirective,
+			                                                              com.jwebmp.core.events.create.CreateDirective,
+			                                                              com.jwebmp.core.events.deactivate.DeactivateDirective,
+			                                                              com.jwebmp.core.events.drag.DragDirective,
+			                                                              com.jwebmp.core.events.dragstart.DragStartDirective,
+			                                                              com.jwebmp.core.events.dragstop.DragStopDirective,
+			                                                              com.jwebmp.core.events.drop.DropDirective,
+			                                                              com.jwebmp.core.events.dropout.DropOutDirective,
+			                                                              com.jwebmp.core.events.dropover.DropOverDirective,
+			                                                              com.jwebmp.core.events.focus.FocusDirective,
+			                                                              com.jwebmp.core.events.load.LoadDirective,
+			                                                              com.jwebmp.core.events.receive.ReceiveDirective,
+			                                                              com.jwebmp.core.events.remove.RemoveDirective,
+			                                                              com.jwebmp.core.events.resize.ResizeDirective,
+			                                                              com.jwebmp.core.events.resizestart.ResizeStartDirective,
+			                                                              com.jwebmp.core.events.resizestop.ResizeStopDirective,
+			                                                              com.jwebmp.core.events.response.ResponseDirective,
+			                                                              com.jwebmp.core.events.rightclick.RightClickDirective,
+			                                                              com.jwebmp.core.events.search.SearchDirective,
+			                                                              com.jwebmp.core.events.select.SelectDirective,
+			                                                              com.jwebmp.core.events.selecting.SelectingDirective,
+			                                                              com.jwebmp.core.events.slide.SlideDirective,
+			                                                              com.jwebmp.core.events.sort.SortDirective,
+			                                                              com.jwebmp.core.events.spin.SpinDirective,
+			                                                              com.jwebmp.core.events.start.StartDirective,
+			                                                              com.jwebmp.core.events.stop.StopDirective,
+			                                                              com.jwebmp.core.events.unselected.UnselectedDirective,
+			                                                              com.jwebmp.core.events.update.UpdateDirective;
 
-	provides com.jwebmp.utilities.regex.IRegularExpressions with com.jwebmp.utilities.regex.TextRegExPatterns,
-			                                                        com.jwebmp.utilities.regex.EmailAddressRegExPatterns,
-			                                                        com.jwebmp.utilities.regex.DateFormatRegExPatterns;
+	provides IPackageContentsScanner with JWebMPPackageScanner;
 
-	opens com.jwebmp.base.servlets to com.google.guice;
-	opens com.jwebmp.base.page to com.google.guice;
-	opens com.jwebmp.base.ajax to com.fasterxml.jackson.databind;
-	opens com.jwebmp.base.angular to com.fasterxml.jackson.databind;
-	opens com.jwebmp.htmlbuilder.javascript to com.fasterxml.jackson.databind;
-	opens com.jwebmp.htmlbuilder.css to com.fasterxml.jackson.databind;
-	opens com.jwebmp.htmlbuilder.css.interfaces to com.fasterxml.jackson.databind;
-	opens com.jwebmp.base to com.fasterxml.jackson.databind;
+	provides com.jwebmp.core.utilities.regex.IRegularExpressions with com.jwebmp.core.utilities.regex.TextRegExPatterns,
+			                                                        com.jwebmp.core.utilities.regex.EmailAddressRegExPatterns,
+			                                                        com.jwebmp.core.utilities.regex.DateFormatRegExPatterns;
+
+	opens com.jwebmp.core.base.servlets to com.google.guice;
+	opens com.jwebmp.core.base.page to com.google.guice;
+	opens com.jwebmp.core.base.ajax to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.base.angular to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.javascript to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.base to com.fasterxml.jackson.databind;
 	opens com.jwebmp to com.fasterxml.jackson.databind;
+
 }

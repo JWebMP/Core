@@ -14,10 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.base;
+package com.jwebmp.core.base;
 
 import com.jwebmp.BaseTestClass;
-import com.jwebmp.base.servlets.enumarations.ComponentTypes;
+import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -39,7 +39,15 @@ public class ComponentBaseTest
 		shell.setID("ID");
 		System.out.println(shell);
 		Assertions.assertEquals(
-				"{\n" + "  \"id\" : \"ID\",\n" + "  \"componentType\" : \"abbreviation\",\n" + "  \"tiny\" : false,\n" + "  \"configured\" : true,\n" + "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  \"componentClass\" : \"com.jwebmp.base.ComponentBase\"\n" + "}",
+				"{\n" +
+				"  \"id\" : \"ID\",\n" +
+				"  \"componentType\" : \"abbreviation\",\n" +
+				"  \"tiny\" : false,\n" +
+				"  \"configured\" : true,\n" +
+				"  \"initialized\" : true,\n" +
+				"  \"touched\" : false,\n" +
+				"  \"componentClass\" : \"com.jwebmp.core.base.ComponentBase\"\n" +
+				"}",
 				shell.toString());
 	}
 
@@ -51,7 +59,16 @@ public class ComponentBaseTest
 		shell.setText("This is raw text");
 		System.out.println(shell);
 		Assertions.assertEquals(
-				"{\n" + "  \"id\" : \"ID\",\n" + "  \"componentType\" : \"abbreviation\",\n" + "  \"text\" : \"This is raw text\",\n" + "  \"tiny\" : false,\n" + "  \"configured\" : true,\n" + "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  \"componentClass\" : \"com.jwebmp.base.ComponentBase\"\n" + "}",
+				"{\n" +
+				"  \"id\" : \"ID\",\n" +
+				"  \"componentType\" : \"abbreviation\",\n" +
+				"  \"text\" : \"This is raw text\",\n" +
+				"  \"tiny\" : false,\n" +
+				"  \"configured\" : true,\n" +
+				"  \"initialized\" : true,\n" +
+				"  \"touched\" : false,\n" +
+				"  \"componentClass\" : \"com.jwebmp.core.base.ComponentBase\"\n" +
+				"}",
 				shell.toString());
 	}
 
@@ -63,7 +80,15 @@ public class ComponentBaseTest
 		shell.setID("ID");
 		System.out.println(shell);
 		Assertions.assertEquals(
-				"{\n" + "  \"id\" : \"ID\",\n" + "  \"componentType\" : \"abbreviation\",\n" + "  \"tiny\" : true,\n" + "  \"configured\" : true,\n" + "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  \"componentClass\" : \"com.jwebmp.base.ComponentBase\"\n" + "}",
+				"{\n" +
+				"  \"id\" : \"ID\",\n" +
+				"  \"componentType\" : \"abbreviation\",\n" +
+				"  \"tiny\" : true,\n" +
+				"  \"configured\" : true,\n" +
+				"  \"initialized\" : true,\n" +
+				"  \"touched\" : false,\n" +
+				"  \"componentClass\" : \"com.jwebmp.core.base.ComponentBase\"\n" +
+				"}",
 				shell.toString());
 	}
 
@@ -76,8 +101,24 @@ public class ComponentBaseTest
 		shell2.setID("shell2");
 		System.out.println(shell);
 		System.out.println(shell2);
-		String shellExpected = "{\n" + "  \"id\" : \"shell\",\n" + "  \"componentType\" : \"abbreviation\",\n" + "  \"tiny\" : false,\n" + "  \"configured\" : true,\n" + "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  \"componentClass\" : \"com.jwebmp.base.ComponentBase\"\n" + "}";
-		String shell2Expected = "{\n" + "  \"id\" : \"shell2\",\n" + "  \"componentType\" : \"abbreviation\",\n" + "  \"tiny\" : false,\n" + "  \"configured\" : true,\n" + "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  \"componentClass\" : \"com.jwebmp.base.ComponentBase\"\n" + "}";
+		String shellExpected = "{\n" +
+		                       "  \"id\" : \"shell\",\n" +
+		                       "  \"componentType\" : \"abbreviation\",\n" +
+		                       "  \"tiny\" : false,\n" +
+		                       "  \"configured\" : true,\n" +
+		                       "  \"initialized\" : true,\n" +
+		                       "  \"touched\" : false,\n" +
+		                       "  \"componentClass\" : \"com.jwebmp.core.base.ComponentBase\"\n" +
+		                       "}";
+		String shell2Expected = "{\n" +
+		                        "  \"id\" : \"shell2\",\n" +
+		                        "  \"componentType\" : \"abbreviation\",\n" +
+		                        "  \"tiny\" : false,\n" +
+		                        "  \"configured\" : true,\n" +
+		                        "  \"initialized\" : true,\n" +
+		                        "  \"touched\" : false,\n" +
+		                        "  \"componentClass\" : \"com.jwebmp.core.base.ComponentBase\"\n" +
+		                        "}";
 		Assertions.assertEquals(shell.toString(), shellExpected);
 		Assertions.assertEquals(shell2.toString(), shell2Expected);
 	}
@@ -91,7 +132,18 @@ public class ComponentBaseTest
 		     .put("Property1", "Value 1");
 		System.out.println(shell);
 
-		String shellExpected = "{\n" + "  \"id\" : \"shell\",\n" + "  \"componentType\" : \"abbreviation\",\n" + "  \"tiny\" : false,\n" + "  \"configured\" : true,\n" + "  \"initialized\" : true,\n" + "  \"touched\" : false,\n" + "  \"properties\" : {\n" + "    \"Property1\" : \"Value 1\"\n" + "  },\n" + "  \"componentClass\" : \"com.jwebmp.base.ComponentBase\"\n" + "}";
+		String shellExpected = "{\n" +
+		                       "  \"id\" : \"shell\",\n" +
+		                       "  \"componentType\" : \"abbreviation\",\n" +
+		                       "  \"tiny\" : false,\n" +
+		                       "  \"configured\" : true,\n" +
+		                       "  \"initialized\" : true,\n" +
+		                       "  \"touched\" : false,\n" +
+		                       "  \"properties\" : {\n" +
+		                       "    \"Property1\" : \"Value 1\"\n" +
+		                       "  },\n" +
+		                       "  \"componentClass\" : \"com.jwebmp.core.base.ComponentBase\"\n" +
+		                       "}";
 
 		Assertions.assertEquals(shell.toString(), shellExpected);
 	}

@@ -1,9 +1,9 @@
-package com.jwebmp.events.selected;
+package com.jwebmp.core.events.selected;
 
 import com.jwebmp.BaseTestClass;
-import com.jwebmp.base.ajax.AjaxCall;
-import com.jwebmp.base.ajax.AjaxResponse;
-import com.jwebmp.base.html.Option;
+import com.jwebmp.core.base.ajax.AjaxCall;
+import com.jwebmp.core.base.ajax.AjaxResponse;
+import com.jwebmp.core.base.html.Option;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +25,7 @@ public class SelectedAdapterTest
 		};
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
-				"<option label=\"optionValue\" value=\"optionValue\" id=\"test\" ng-selected=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com.jwebmp.events.selected.SelectedAdapterTest$1');\">optionValue</option>",
+				"<option label=\"optionValue\" value=\"optionValue\" id=\"test\" ng-selected=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com.jwebmp.core.events.selected.SelectedAdapterTest$1');\">optionValue</option>",
 				test.toString(0));
 	}
 

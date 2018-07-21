@@ -16,9 +16,9 @@
  */
 package com.jwebmp;
 
-import com.jwebmp.generics.WebReference;
-import com.jwebmp.plugins.ajaxenabler.AjaxEnablerReferencePool;
-import com.jwebmp.plugins.jquery.JQueryReferencePool;
+import com.jwebmp.core.generics.WebReference;
+import com.jwebmp.core.plugins.ajaxenabler.AjaxEnablerReferencePool;
+import com.jwebmp.core.plugins.jquery.JQueryReferencePool;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

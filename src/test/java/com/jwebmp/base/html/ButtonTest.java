@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.base.html;
+package com.jwebmp.core.base.html;
 
-import com.jwebmp.base.html.attributes.ButtonAttributes;
+import com.jwebmp.core.base.html.attributes.ButtonAttributes;
 import org.junit.jupiter.api.Test;
 
 /**
