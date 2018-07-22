@@ -1,11 +1,11 @@
-import com.jwebmp.JWebMPPackageScanner;
-import com.jwebmp.core.annotations.SiteBinderIGuiceSiteBinder;
+import com.jwebmp.core.JWebMPPackageScanner;
+import com.jwebmp.core.annotations.SiteBinderGuiceSiteBinder;
 import com.jwebmp.guicedinjection.interfaces.IPackageContentsScanner;
 import com.jwebmp.guicedservlets.services.IGuiceSiteBinder;
 
 module com.jwebmp.core {
 
-	exports com.jwebmp;
+	exports com.jwebmp.core;
 	exports com.jwebmp.core.base;
 	exports com.jwebmp.core.base.ajax;
 	exports com.jwebmp.core.base.angular;
@@ -97,11 +97,11 @@ module com.jwebmp.core {
 	exports com.jwebmp.core.events.unselected;
 	exports com.jwebmp.core.events.update;
 
-	exports com.jwebmp.exceptions;
+	exports com.jwebmp.core.exceptions;
 
-	exports com.jwebmp.generics;
+	exports com.jwebmp.core.generics;
 
-	exports com.jwebmp.annotations;
+	exports com.jwebmp.core.annotations;
 	exports com.jwebmp.core.htmlbuilder.css;
 	exports com.jwebmp.core.htmlbuilder.css.animatable;
 	exports com.jwebmp.core.htmlbuilder.css.annotations;
@@ -129,7 +129,7 @@ module com.jwebmp.core {
 	exports com.jwebmp.core.htmlbuilder.javascript.events.enumerations;
 	exports com.jwebmp.core.htmlbuilder.javascript.events.interfaces;
 
-	exports com.jwebmp.plugins;
+	exports com.jwebmp.core.plugins;
 	exports com.jwebmp.core.plugins.ajaxenabler;
 	exports com.jwebmp.core.plugins.jquery;
 
@@ -139,7 +139,7 @@ module com.jwebmp.core {
 
 	exports com.jwebmp.core.base.references;
 	exports com.jwebmp.core.base.angular.forms.enumerations;
-	exports com.jwebmp.components;
+	exports com.jwebmp.core.components;
 
 	requires java.logging;
 	requires com.jwebmp.logmaster;
@@ -168,7 +168,7 @@ module com.jwebmp.core {
 	uses com.jwebmp.core.utilities.regex.IRegularExpressions;
 	uses com.jwebmp.core.base.angular.directives.IAngularDirective;
 
-	provides IGuiceSiteBinder with SiteBinderIGuiceSiteBinder;
+	provides IGuiceSiteBinder with SiteBinderGuiceSiteBinder;
 
 	provides com.jwebmp.core.base.angular.directives.IAngularDirective with com.jwebmp.core.events.activate.ActivateDirective,
 			                                                              com.jwebmp.core.events.beforeactivate.BeforeActivateDirective,
