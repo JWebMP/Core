@@ -19,12 +19,11 @@ package com.jwebmp.core;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.logger.LogFactory;
+import org.apache.commons.io.IOUtils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Serializable;
-import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -248,18 +247,11 @@ public class FileTemplates
 				{
 					templateFileName += ".js";
 				}
-				if (fileName.endsWith(".min"))
+				if (templateFileName.endsWith(".min"))
 				{
-					fileName = fileName + ".js";
+					templateFileName = templateFileName + ".js";
 				}
-
-				byte[] fileContents;
-				try (InputStream is = referenceClass.getResourceAsStream(templateFileName))
-				{
-					fileContents = new byte[is.available()];
-					is.read(fileContents, 0, is.available());
-				}
-				String contents = new String(fileContents, Charset.forName("UTF-8"));
+				String contents = IOUtils.toString(referenceClass.getResourceAsStream(templateFileName), StaticStrings.UTF8_CHARSET);
 				setTemplateScript(templateName, new StringBuilder(contents));
 			}
 			catch (FileNotFoundException ex)
@@ -274,6 +266,10 @@ public class FileTemplates
 			catch (NullPointerException npe)
 			{
 				LOG.log(Level.SEVERE, "template file [" + fileName + "(.js)] not found.", npe);
+			}
+			catch (Exception npe)
+			{
+				LOG.log(Level.SEVERE, "Exception Rendering Template", npe);
 			}
 		}
 		return TemplateScripts.get(templateName);

@@ -20,14 +20,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jwebmp.core.Feature;
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.Page;
-import com.jwebmp.core.base.angular.configurations.AngularConfigurationBase;
-import com.jwebmp.core.base.angular.controllers.AngularControllerBase;
 import com.jwebmp.core.base.angular.controllers.JWAngularController;
-import com.jwebmp.core.base.angular.directives.IAngularDirective;
-import com.jwebmp.core.base.angular.factories.AngularFactoryBase;
-import com.jwebmp.core.base.angular.modules.AngularMessagesModule;
 import com.jwebmp.core.base.angular.modules.AngularModuleBase;
 import com.jwebmp.core.base.angular.modules.JWAngularModule;
+import com.jwebmp.core.base.angular.services.*;
 import com.jwebmp.core.base.html.interfaces.HTMLFeatures;
 import com.jwebmp.core.exceptions.NullComponentException;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
@@ -35,10 +31,7 @@ import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ServiceLoader;
+import java.util.*;
 
 /**
  * The Angular 1 Feature Implementation
@@ -110,10 +103,6 @@ public class AngularFeature
 		}
 		this.page = page;
 
-		getPage().getAngular()
-		         .getAngularModules()
-		         .add(new AngularMessagesModule());
-
 		setJavascriptRenderedElsewhere(true);
 
 		jwAngularApp = new JWAngularModule(page);
@@ -156,14 +145,12 @@ public class AngularFeature
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured() && getPage().getBody()
-		                                .readChildrenPropertyFirstResult(AngularPageConfigurator.AngularEnabledString, true))
+		if (!isConfigured())
 		{
 			getPage().getBody()
-			         .addAttribute(AngularAttributes.ngApp, getAppName() + "");
+			         .addAttribute(AngularAttributes.ngApp, getAppName());
 			getPage().getBody()
 			         .addAttribute(AngularAttributes.ngController, controllerName + " as jwCntrl");
-			log.finer("Applied angular configuration to the page");
 		}
 		super.preConfigure();
 	}
@@ -257,18 +244,22 @@ public class AngularFeature
 	private StringBuilder compileFactories()
 	{
 		StringBuilder output = new StringBuilder();
-		List<AngularFactoryBase> angulars = new ArrayList<>();
-
-		angulars.addAll(getPage().getAngular()
-		                         .getAngularFactories());
-		angulars.forEach(directive ->
-		                 {
-			                 String function = directive.renderFunction();
-			                 StringBuilder outputString = FileTemplates.compileTemplate(directive.getReferenceName(), function);
-			                 outputString.append(StaticStrings.STRING_NEWLINE_TEXT + StaticStrings.STRING_TAB);
-			                 output.append(outputString);
-		                 });
+		ServiceLoader<IAngularFactory> factories = ServiceLoader.load(IAngularFactory.class);
+		buildString(output, factories);
 		return output;
+	}
+
+	private void buildString(StringBuilder output, ServiceLoader<? extends IAngularDefaultService> loader)
+	{
+		Set<IAngularDefaultService> sortedList = new TreeSet<>();
+		loader.forEach(sortedList::add);
+		sortedList.forEach(item ->
+		                   {
+			                   String function = item.renderFunction();
+			                   StringBuilder configurations = FileTemplates.compileTemplate(item.getReferenceName(), function);
+			                   configurations.append(StaticStrings.STRING_NEWLINE_TEXT + StaticStrings.STRING_TAB);
+			                   output.append(configurations);
+		                   });
 	}
 
 	/**
@@ -280,16 +271,8 @@ public class AngularFeature
 	private StringBuilder compileConfigurations()
 	{
 		StringBuilder output = new StringBuilder();
-		List<AngularConfigurationBase> angulars = new ArrayList<>();
-		angulars.addAll(getPage().getAngular()
-		                         .getAngularConfigurations());
-		angulars.forEach(directive ->
-		                 {
-			                 String function = directive.renderFunction();
-			                 StringBuilder configurations = FileTemplates.compileTemplate(directive.getReferenceName(), function);
-			                 configurations.append(StaticStrings.STRING_NEWLINE_TEXT + StaticStrings.STRING_TAB);
-			                 output.append(configurations);
-		                 });
+		ServiceLoader<IAngularConfiguration> loader = ServiceLoader.load(IAngularConfiguration.class);
+		buildString(output, loader);
 		return output;
 	}
 
@@ -303,13 +286,7 @@ public class AngularFeature
 	{
 		StringBuilder output = new StringBuilder();
 		ServiceLoader<IAngularDirective> directives = ServiceLoader.load(IAngularDirective.class);
-		directives.forEach(directive ->
-		                   {
-			                   String function = directive.renderFunction();
-			                   StringBuilder outputString = FileTemplates.compileTemplate(directive.getReferenceName(), function);
-			                   outputString.append(getNewLine() + StaticStrings.STRING_TAB);
-			                   output.append(outputString);
-		                   });
+		buildString(output, directives);
 		return output;
 	}
 
@@ -375,10 +352,12 @@ public class AngularFeature
 	private StringBuilder compileControllers()
 	{
 		StringBuilder output = new StringBuilder();
-		List<AngularControllerBase> angulars = new ArrayList<>();
-		angulars.add(jwAngularController);
-		angulars.addAll(getPage().getAngular()
-		                         .getAngularControllers());
+		Set<IAngularController> angulars = new TreeSet<>();
+		ServiceLoader<IAngularController> loader = ServiceLoader.load(IAngularController.class);
+		for (IAngularController item : loader)
+		{
+			angulars.add(item);
+		}
 		angulars.forEach(controller ->
 		                 {
 			                 String function = controller.renderFunction();

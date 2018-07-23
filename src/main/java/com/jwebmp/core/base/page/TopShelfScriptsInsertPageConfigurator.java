@@ -25,12 +25,18 @@ import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
 import java.util.ArrayList;
 import java.util.List;
 
-class TopShelfScriptsInsertPageConfigurator
+public class TopShelfScriptsInsertPageConfigurator
 		extends RequirementsPriorityAbstractInsertPageConfigurator
 {
 	public TopShelfScriptsInsertPageConfigurator()
 	{
-		setSortOrder(Integer.MAX_VALUE - 9);
+		//No config required
+	}
+
+	@Override
+	public Integer sortOrder()
+	{
+		return Integer.MAX_VALUE - 9;
 	}
 
 	@Override

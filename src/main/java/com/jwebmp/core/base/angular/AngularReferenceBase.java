@@ -19,7 +19,6 @@ package com.jwebmp.core.base.angular;
 import com.jwebmp.core.htmlbuilder.javascript.JavascriptLiteralFunction;
 
 import javax.validation.constraints.NotNull;
-import java.util.Comparator;
 
 /**
  * Is an angular module
@@ -29,7 +28,6 @@ import java.util.Comparator;
  */
 public abstract class AngularReferenceBase
 		extends JavascriptLiteralFunction
-		implements Comparator<AngularReferenceBase>, Comparable<AngularReferenceBase>
 {
 
 	private static final long serialVersionUID = 1L;
@@ -38,10 +36,6 @@ public abstract class AngularReferenceBase
 	 * The name of this module
 	 */
 	private String referenceName;
-	/**
-	 * The sort order for this module
-	 */
-	private Integer sortOrder = 0;
 
 	/**
 	 * Constructs a module with this name that always sorts default
@@ -57,7 +51,7 @@ public abstract class AngularReferenceBase
 	/**
 	 * Returns this modules name
 	 *
-	 * @return
+	 * @return This module name
 	 */
 	@NotNull
 	public String getReferenceName()
@@ -68,7 +62,7 @@ public abstract class AngularReferenceBase
 	/**
 	 * Sets this modules name
 	 *
-	 * @param referenceName
+	 * @param referenceName Sets this reference name
 	 */
 	public void setReferenceName(String referenceName)
 	{
@@ -78,7 +72,7 @@ public abstract class AngularReferenceBase
 	/**
 	 * Hash code identifier
 	 *
-	 * @return
+	 * @return The integer
 	 */
 	@Override
 	public int hashCode()
@@ -89,54 +83,14 @@ public abstract class AngularReferenceBase
 	/**
 	 * Equals based on sort order and name
 	 *
-	 * @param obj
+	 * @param obj object
 	 *
-	 * @return
+	 * @return The assigned object
 	 */
 	@Override
 	public boolean equals(Object obj)
 	{
 		return super.equals(obj);
-	}
-
-	@Override
-	public int compareTo(AngularReferenceBase o)
-	{
-		return getSortOrder().compareTo(o.getSortOrder());
-	}
-
-	/**
-	 * Gets this modules sort order
-	 *
-	 * @return
-	 */
-	public Integer getSortOrder()
-	{
-		return sortOrder;
-	}
-
-	/**
-	 * Sets this modules sort order
-	 *
-	 * @param sortOrder
-	 */
-	public final void setSortOrder(int sortOrder)
-	{
-		this.sortOrder = sortOrder;
-	}
-
-	/**
-	 * Always places this base last
-	 *
-	 * @param o1
-	 * @param o2
-	 *
-	 * @return
-	 */
-	@Override
-	public int compare(AngularReferenceBase o1, AngularReferenceBase o2)
-	{
-		return o1.sortOrder.compareTo(o2.sortOrder);
 	}
 
 	@Override

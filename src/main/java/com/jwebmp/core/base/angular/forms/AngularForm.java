@@ -19,6 +19,7 @@ package com.jwebmp.core.base.angular.forms;
 
 import com.jwebmp.core.base.angular.AngularAttributes;
 import com.jwebmp.core.base.angular.AngularPageConfigurator;
+import com.jwebmp.core.base.angular.modules.AngularMessagesModule;
 import com.jwebmp.core.base.html.Form;
 import com.jwebmp.core.base.html.Input;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
@@ -41,6 +42,7 @@ public class AngularForm<J extends AngularForm<J>>
 	{
 		JQueryPageConfigurator.setRequired(true);
 		AngularPageConfigurator.setRequired(true);
+		AngularMessagesModule.Enabled = true;
 	}
 
 	/**

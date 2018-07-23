@@ -2,9 +2,8 @@ package com.jwebmp.core.base.page;
 
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.Page;
-import com.jwebmp.core.PageConfigurator;
 import com.jwebmp.core.SessionHelper;
-import com.jwebmp.core.annotations.SiteBinderGuiceSiteBinder;
+import com.jwebmp.core.annotations.JWebMPSiteBinder;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.angular.AngularPageConfigurator;
 import com.jwebmp.core.base.html.CSSLink;
@@ -14,19 +13,22 @@ import com.jwebmp.core.base.html.attributes.ScriptAttributes;
 import com.jwebmp.core.base.servlets.JWScriptServlet;
 import com.jwebmp.core.htmlbuilder.css.composer.CSSComposer;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
+import com.jwebmp.core.services.IPageConfigurator;
 import com.jwebmp.core.utilities.StaticStrings;
 
 @SuppressWarnings("unused")
+public
 class ScriptsDynamicPageConfigurator
-		extends PageConfigurator
+		implements IPageConfigurator
 {
 	public ScriptsDynamicPageConfigurator()
 	{
-		setSortOrder(Integer.MAX_VALUE);
+		//No config required
 	}
 
 	@Override
-	public Page configure(Page<?> page)
+	@SuppressWarnings("unchecked")
+	public Page<?> configure(Page<?> page)
 	{
 		if (!page.isConfigured())
 		{
@@ -37,23 +39,23 @@ class ScriptsDynamicPageConfigurator
 				if (s != null)
 				{
 					page.getHead()
-					    .add(new CSSLink<>(SessionHelper.getServerPath() + SiteBinderGuiceSiteBinder.getCSSLocation()
-					                                                                                .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY)));
+					    .add(new CSSLink<>(SessionHelper.getServerPath() + JWebMPSiteBinder.getCSSLocation()
+					                                                                       .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY)));
 				}
 				if (JQueryPageConfigurator.isRequired())
 				{
 					page.getBody()
-					    .add(getDynamicReference(SiteBinderGuiceSiteBinder.getJWScriptLocation()
-					                                                      .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY)));
+					    .add(getDynamicReference(JWebMPSiteBinder.getJWScriptLocation()
+					                                             .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY)));
 					page.getBody()
-					    .add(getDynamicReference(SiteBinderGuiceSiteBinder.getJavaScriptLocation()
-					                                                      .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY)));
+					    .add(getDynamicReference(JWebMPSiteBinder.getJavaScriptLocation()
+					                                             .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY)));
 				}
 				if (AngularPageConfigurator.isRequired())
 				{
 					page.getBody()
-					    .add(getDynamicReference(SiteBinderGuiceSiteBinder.getAngularScriptLocation()
-					                                                      .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY)));
+					    .add(getDynamicReference(JWebMPSiteBinder.getAngularScriptLocation()
+					                                             .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY)));
 				}
 
 			}
@@ -92,6 +94,12 @@ class ScriptsDynamicPageConfigurator
 			}
 		}
 		return page;
+	}
+
+	@Override
+	public Integer sortOrder()
+	{
+		return Integer.MAX_VALUE;
 	}
 
 	private Style<?> getCss(Page page)

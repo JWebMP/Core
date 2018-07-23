@@ -33,7 +33,13 @@ public class ScriptsInsertPageConfigurator
 {
 	public ScriptsInsertPageConfigurator()
 	{
-		setSortOrder(Integer.MAX_VALUE - 8);
+		//No config required
+	}
+
+	@Override
+	public Integer sortOrder()
+	{
+		return Integer.MAX_VALUE - 8;
 	}
 
 	@Override
@@ -71,6 +77,7 @@ public class ScriptsInsertPageConfigurator
 		renderAfterScripts(scriptAddTo);
 	}
 
+	@SuppressWarnings("unchecked")
 	private void renderBeforeScripts(ComponentHierarchyBase scriptAddTo)
 	{
 		//script rendering in body
@@ -102,7 +109,7 @@ public class ScriptsInsertPageConfigurator
 	 * <p>
 	 * Does not do top shelf
 	 *
-	 * @param component
+	 * @param component The component to add scripts to
 	 */
 	@SuppressWarnings("unchecked")
 	private void addScriptsTo(Page<?> page, ComponentHierarchyBase component)
@@ -121,6 +128,7 @@ public class ScriptsInsertPageConfigurator
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void renderAfterScripts(ComponentHierarchyBase scriptAddTo)
 	{
 		Set<Class<? extends RenderAfterScripts>> renderAfterScripts = GuiceContext.reflect()

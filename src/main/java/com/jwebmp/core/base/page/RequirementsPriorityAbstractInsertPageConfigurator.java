@@ -18,7 +18,6 @@
 package com.jwebmp.core.base.page;
 
 import com.jwebmp.core.Page;
-import com.jwebmp.core.PageConfigurator;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.CSSLink;
 import com.jwebmp.core.base.html.Script;
@@ -26,6 +25,7 @@ import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
 import com.jwebmp.core.generics.WebReference;
+import com.jwebmp.core.services.IPageConfigurator;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Set;
 
 abstract class RequirementsPriorityAbstractInsertPageConfigurator
-		extends PageConfigurator
+		implements IPageConfigurator
 {
 
 	/**
@@ -80,9 +80,9 @@ abstract class RequirementsPriorityAbstractInsertPageConfigurator
 	/**
 	 * Gets all the links for all the bodies components
 	 *
-	 * @param priority
+	 * @param priority the priority to return
 	 *
-	 * @return
+	 * @return A list of newwly contructed links
 	 */
 	@NotNull
 	List<CSSLink<?>> getAllCssLinks(Page<?> page, @NotNull RequirementsPriority priority)
@@ -111,11 +111,11 @@ abstract class RequirementsPriorityAbstractInsertPageConfigurator
 	/**
 	 * Gets all the scripts for all the body components
 	 *
-	 * @param priority
+	 * @param priority A set of priorities
 	 *
-	 * @return
+	 * @return A set of newly constructed script objects
 	 */
-	Set<Script<?>> getAllScripts(Page<?> page, RequirementsPriority priority)
+	private Set<Script<?>> getAllScripts(Page<?> page, RequirementsPriority priority)
 	{
 		List<JavascriptReference> allJavascripts = new ArrayList<>(page.getBody()
 		                                                               .getJavascriptReferencesAll(priority));

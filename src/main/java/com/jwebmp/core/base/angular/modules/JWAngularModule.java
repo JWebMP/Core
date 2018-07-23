@@ -18,13 +18,15 @@ package com.jwebmp.core.base.angular.modules;
 
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.angular.AngularFeature;
+import com.jwebmp.core.base.angular.services.IAngularModule;
 import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
+import java.util.ServiceLoader;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * @author GedMarc
@@ -32,6 +34,7 @@ import java.util.Set;
  */
 public class JWAngularModule
 		extends AngularModuleBase
+		implements IAngularModule<JWAngularModule>
 {
 
 	private static final long serialVersionUID = 1L;
@@ -43,8 +46,13 @@ public class JWAngularModule
 	public JWAngularModule(Page component)
 	{
 		super("jwApp");
-		setSortOrder(9999999);
 		page = component;
+	}
+
+	@Override
+	public Integer getSortOrder()
+	{
+		return Integer.MAX_VALUE - 100;
 	}
 
 	public String renderFunction(Page fromComponent)
@@ -66,30 +74,13 @@ public class JWAngularModule
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + page.hashCode();
-		return result;
+		return super.hashCode();
 	}
 
 	@Override
-	public boolean equals(Object o)
+	public boolean equals(Object obj)
 	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof JWAngularModule))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		JWAngularModule that = (JWAngularModule) o;
-
-		return page.equals(that.page);
+		return super.equals(obj);
 	}
 
 	/**
@@ -104,32 +95,39 @@ public class JWAngularModule
 		String returnable = "var " + AngularFeature.getAppName() + " = angular.module(";
 		returnable += StaticStrings.STRING_SINGLE_QUOTES + AngularFeature.getAppName() + "',";
 
-		Set<String> moduleNames = new LinkedHashSet<>();
-		List<AngularModuleBase> modules = new ArrayList<>(page.getAngular()
-		                                                      .getAngularModules());
-		modules.sort((o1, o2) -> o1.compare(o1, o2));
-		for (AngularModuleBase module : modules)
+		ServiceLoader<IAngularModule> loader = ServiceLoader.load(IAngularModule.class);
+		if (loader.iterator()
+		          .hasNext())
 		{
-			moduleNames.add(module.getReferenceName());
-		}
+			Set<String> moduleNames = new LinkedHashSet<>();
+			Set<IAngularModule> modules = new TreeSet<>();
+			for (IAngularModule module : loader)
+			{
+				modules.add(GuiceContext.get(module.getClass()));
+			}
+			for (IAngularModule module : modules)
+			{
+				moduleNames.add(module.getReferenceName());
+			}
 
-		StringBuilder nameRenders = new StringBuilder();
-		for (String name : moduleNames)
-		{
-			nameRenders.append(StaticStrings.STRING_SINGLE_QUOTES)
-			           .append(name)
-			           .append("',");
-		}
+			StringBuilder nameRenders = new StringBuilder();
+			for (String name : moduleNames)
+			{
+				nameRenders.append(StaticStrings.STRING_SINGLE_QUOTES)
+				           .append(name)
+				           .append("',");
+			}
 
-		if (nameRenders.indexOf(StaticStrings.STRING_COMMNA) != -1)
-		{
-			nameRenders = nameRenders.deleteCharAt(nameRenders.lastIndexOf(StaticStrings.STRING_COMMNA));
-		}
-		nameRenders.insert(0, StaticStrings.STRING_SQUARE_BRACE_OPEN);
-		nameRenders.append(StaticStrings.STRING_SQUARE_BRACE_CLOSED);
-		returnable += nameRenders;
+			if (nameRenders.indexOf(StaticStrings.STRING_COMMNA) != -1)
+			{
+				nameRenders = nameRenders.deleteCharAt(nameRenders.lastIndexOf(StaticStrings.STRING_COMMNA));
+			}
+			nameRenders.insert(0, StaticStrings.STRING_SQUARE_BRACE_OPEN);
+			nameRenders.append(StaticStrings.STRING_SQUARE_BRACE_CLOSED);
+			returnable += nameRenders;
 
-		returnable += ");";
+			returnable += ");";
+		}
 		return returnable;
 	}
 }

@@ -18,6 +18,7 @@ package com.jwebmp.core.events.activate;
 
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.base.angular.directives.AngularDirectiveBase;
+import com.jwebmp.core.base.angular.services.IAngularDirective;
 
 import javax.validation.constraints.NotNull;
 
@@ -29,6 +30,7 @@ import javax.validation.constraints.NotNull;
  */
 public class ActivateDirective
 		extends AngularDirectiveBase
+		implements IAngularDirective<ActivateDirective>
 {
 
 	private static final long serialVersionUID = 1L;

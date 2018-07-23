@@ -14,12 +14,19 @@ import java.util.List;
 import java.util.Set;
 
 @SuppressWarnings("unused")
+public
 class CSSLinksInsertPageConfigurator
 		extends RequirementsPriorityAbstractInsertPageConfigurator
 {
 	public CSSLinksInsertPageConfigurator()
 	{
-		setSortOrder(Integer.MAX_VALUE - 10);
+		//No config required
+	}
+
+	@Override
+	public Integer sortOrder()
+	{
+		return Integer.MAX_VALUE - 10;
 	}
 
 	@Override

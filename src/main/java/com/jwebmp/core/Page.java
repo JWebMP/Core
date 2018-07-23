@@ -30,14 +30,14 @@ import com.jwebmp.core.base.html.attributes.ScriptAttributes;
 import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
-import com.jwebmp.core.base.servlets.interfaces.IPage;
+import com.jwebmp.core.services.IPage;
+import com.jwebmp.core.services.IPageConfigurator;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 import net.sf.uadetector.*;
 
 import javax.validation.constraints.NotNull;
-import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.List;
 import java.util.logging.Level;
@@ -360,7 +360,6 @@ public class Page<J extends Page<J>>
 	 *
 	 * @return
 	 */
-	@Override
 	@NotNull
 	public Page addAngularVariable(String variableName)
 	{
@@ -374,7 +373,6 @@ public class Page<J extends Page<J>>
 	 *
 	 * @return
 	 */
-	@Override
 	@NotNull
 	public AngularPageConfigurator getAngular()
 	{
@@ -450,9 +448,12 @@ public class Page<J extends Page<J>>
 	 *
 	 * @param userAgent
 	 */
-	public void setUserAgent(ReadableUserAgent userAgent)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setUserAgent(ReadableUserAgent userAgent)
 	{
 		this.userAgent = userAgent;
+		return (J) this;
 	}
 
 	/**
@@ -528,29 +529,27 @@ public class Page<J extends Page<J>>
 
 		if (!isConfigured())
 		{
-			log.log(Level.FINER, "Looking for plugins....");
-			Set<Class<? extends PageConfigurator>> configs = GuiceContext.reflect()
-			                                                             .getSubTypesOf(PageConfigurator.class);
-			List<PageConfigurator> configInstances = new ArrayList<>();
-			for (Class<? extends PageConfigurator> pc : configs)
-			{
-				if (Modifier.isAbstract(pc.getModifiers()))
-				{
-					continue;
-				}
-				PageConfigurator config = GuiceContext.getInstance(pc);
-				configInstances.add(config);
-			}
-			configInstances.sort(Comparator.comparing(PageConfigurator::getSortOrder));
-			for (PageConfigurator configInstance : configInstances)
-			{
-				log.log(Level.FINER, "Configuring [" + configInstance.getClass()
-				                                                     .getSimpleName() + "]");
-				configInstance.configure(this);
-			}
+			configurePage();
 		}
 
 		super.init();
+	}
+
+	private void configurePage()
+	{
+		ServiceLoader<IPageConfigurator> pageConfigurators = ServiceLoader.load(IPageConfigurator.class);
+		List<IPageConfigurator> sortedConfigurators = new ArrayList<>();
+		for (IPageConfigurator pageConfigurator : pageConfigurators)
+		{
+			sortedConfigurators.add(pageConfigurator);
+		}
+		Collections.sort(sortedConfigurators);
+		for (IPageConfigurator sortedConfigurator : sortedConfigurators)
+		{
+			log.log(Level.FINEST, "Loading IPageConfigurator - " + sortedConfigurator.getClass()
+			                                                                         .getSimpleName());
+			sortedConfigurator.configure(this);
+		}
 	}
 
 	/**

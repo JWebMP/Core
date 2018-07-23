@@ -18,7 +18,7 @@ package com.jwebmp.core.base.servlets;
 
 import com.google.inject.Singleton;
 import com.jwebmp.core.Page;
-import com.jwebmp.core.annotations.SiteBinderGuiceSiteBinder;
+import com.jwebmp.core.annotations.JWebMPSiteBinder;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.interception.SiteInterception;
@@ -101,7 +101,7 @@ public class JWebSwingServlet
 			GuiceContext.inject()
 			            .getInstance(UserAgentStringParser.class)
 			            .shutdown();
-			Set<Class<? extends Page>> pages = SiteBinderGuiceSiteBinder.getPages();
+			Set<Class<? extends Page>> pages = JWebMPSiteBinder.getPages();
 			for (Class<? extends Page> page : pages)
 			{
 				if (page.equals(Page.class) || Modifier.isAbstract(page.getModifiers()))

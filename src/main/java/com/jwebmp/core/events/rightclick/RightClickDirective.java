@@ -18,6 +18,7 @@ package com.jwebmp.core.events.rightclick;
 
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.base.angular.directives.AngularDirectiveBase;
+import com.jwebmp.core.base.angular.services.IAngularDirective;
 
 import javax.validation.constraints.NotNull;
 
@@ -29,6 +30,7 @@ import javax.validation.constraints.NotNull;
  */
 public class RightClickDirective
 		extends AngularDirectiveBase
+		implements IAngularDirective<RightClickDirective>
 {
 
 	private static final long serialVersionUID = 1L;

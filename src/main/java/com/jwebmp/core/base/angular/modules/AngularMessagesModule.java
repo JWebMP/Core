@@ -16,6 +16,8 @@
  */
 package com.jwebmp.core.base.angular.modules;
 
+import com.jwebmp.core.base.angular.services.IAngularModule;
+
 /**
  * Is an angular module
  *
@@ -24,9 +26,11 @@ package com.jwebmp.core.base.angular.modules;
  */
 public class AngularMessagesModule
 		extends AngularModuleBase
+		implements IAngularModule<AngularMessagesModule>
 {
 
 	private static final long serialVersionUID = 1L;
+	public static boolean Enabled = false;
 
 	/**
 	 * Constructs a module with this name that always sorts default
@@ -40,5 +44,11 @@ public class AngularMessagesModule
 	public String renderFunction()
 	{
 		return null;
+	}
+
+	@Override
+	public boolean enabled()
+	{
+		return Enabled;
 	}
 }

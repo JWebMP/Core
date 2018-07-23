@@ -17,11 +17,13 @@
 package com.jwebmp.core.base.angular.controllers;
 
 import com.jwebmp.core.FileTemplates;
+import com.jwebmp.core.base.angular.AngularReferenceBase;
+import com.jwebmp.core.base.angular.services.IAngularController;
+import com.jwebmp.core.base.angular.services.IAngularControllerScopeStatement;
 import com.jwebmp.core.utilities.StaticStrings;
-import com.jwebmp.guicedinjection.GuiceContext;
 
 import javax.validation.constraints.NotNull;
-import java.util.Set;
+import java.util.ServiceLoader;
 
 /**
  * Maps to the angular function of right click
@@ -30,7 +32,8 @@ import java.util.Set;
  * @since 25 Jun 2016
  */
 public class JWAngularController
-		extends AngularControllerBase
+		extends AngularReferenceBase
+		implements IAngularController<JWAngularController>
 {
 
 	private static final long serialVersionUID = 1L;
@@ -41,7 +44,6 @@ public class JWAngularController
 	public JWAngularController()
 	{
 		super("jwController");
-		setSortOrder(100);
 	}
 
 	/**
@@ -53,28 +55,27 @@ public class JWAngularController
 	@NotNull
 	public String renderFunction()
 	{
-		StringBuilder controllerOutput = FileTemplates.getFileTemplate(AngularControllerBase.class, "jwcontroller");
+		StringBuilder controllerOutput = FileTemplates.getFileTemplate(JWAngularController.class, "jwcontroller");
 		if (controllerOutput == null)
 		{
 			throw new UnsupportedOperationException("Didn't find FileTemplate for Angular Controller Classes.");
 		}
 		String output = controllerOutput.toString();
 		StringBuilder statementOutput = new StringBuilder();
-		Set<Class<? extends AngularControllerScopeStatement>> controllers = GuiceContext.reflect()
-		                                                                                .getSubTypesOf(AngularControllerScopeStatement.class);
-		controllers.forEach(a ->
-		                    {
-			                    AngularControllerScopeStatement statement = GuiceContext.getInstance(a);
-			                    if (!statementOutput.toString()
-			                                        .contains(statement.getStatement()))
-			                    {
-				                    statementOutput.append(statement.getStatement())
-				                                   .append(StaticStrings.STRING_NEWLINE_TEXT);
-			                    }
-		                    });
+
+		ServiceLoader<IAngularControllerScopeStatement> loader = ServiceLoader.load(IAngularControllerScopeStatement.class);
+		for (IAngularControllerScopeStatement statement : loader)
+		{
+			if (!statementOutput.toString()
+			                    .contains(statement.getStatement()))
+			{
+				statementOutput.append(statement.getStatement())
+				               .append(StaticStrings.STRING_NEWLINE_TEXT);
+			}
+		}
+
 		output = output.replace("JW_SCOPE_INSERTIONS;", statementOutput.toString());
 		output = output.replace("JW_SCOPE_INSERTIONS", statementOutput.toString());
 		return output;
 	}
-
 }

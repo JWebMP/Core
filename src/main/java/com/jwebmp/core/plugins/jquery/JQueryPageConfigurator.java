@@ -17,9 +17,9 @@
 package com.jwebmp.core.plugins.jquery;
 
 import com.jwebmp.core.Page;
-import com.jwebmp.core.PageConfigurator;
 import com.jwebmp.core.base.client.BrowserGroups;
 import com.jwebmp.core.plugins.PluginInformation;
+import com.jwebmp.core.services.IPageConfigurator;
 
 /**
  * This Configurator adds the JQuery portion onto the page rendering
@@ -27,6 +27,7 @@ import com.jwebmp.core.plugins.PluginInformation;
  * @author Marc Magon
  * @since 2017/03/13
  */
+@SuppressWarnings("WeakerAccess")
 @PluginInformation(pluginName = "JQuery",
 		pluginUniqueName = "jquery",
 		pluginDescription = "jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal " +
@@ -48,10 +49,8 @@ import com.jwebmp.core.plugins.PluginInformation;
 		pluginLastUpdatedDate = "2017/03/13",
 		pluginOriginalHomepage = "http://www.jquery.com")
 public class JQueryPageConfigurator
-		extends PageConfigurator
+		implements IPageConfigurator
 {
-
-	private static final long serialVersionUID = 1L;
 	private static boolean required;
 	/**
 	 * If the page must render JQuery 3
@@ -61,7 +60,18 @@ public class JQueryPageConfigurator
 
 	public JQueryPageConfigurator()
 	{
-		setSortOrder(99999998); //Always before angular
+
+	}
+
+	/**
+	 * Whether or not this page must render JQuery 3
+	 *
+	 * @param jquery3
+	 * 		if jquery 3 must be rendered
+	 */
+	public static void setJquery3(boolean jquery3)
+	{
+		JQueryPageConfigurator.jquery3 = jquery3;
 	}
 
 	/**
@@ -195,13 +205,20 @@ public class JQueryPageConfigurator
 		return jquery3;
 	}
 
-	/**
-	 * Whether or not this page must render JQuery 3
-	 *
-	 * @param jquery3
-	 */
-	public static void setJquery3(boolean jquery3)
+	@Override
+	public Integer sortOrder()
 	{
-		JQueryPageConfigurator.jquery3 = jquery3;
+		//Always before angular
+		return Integer.MAX_VALUE - 100;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (obj == null)
+		{
+			return false;
+		}
+		return getClass().equals(obj.getClass());
 	}
 }

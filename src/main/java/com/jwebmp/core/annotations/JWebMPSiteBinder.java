@@ -34,6 +34,7 @@ import com.jwebmp.core.base.ComponentBase;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.servlets.*;
+import com.jwebmp.core.services.IPage;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.guicedservlets.GuiceSiteInjectorModule;
@@ -44,8 +45,8 @@ import net.sf.uadetector.UserAgentStringParser;
 import net.sf.uadetector.service.UADetectorServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Modifier;
 import java.util.Map;
+import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.logging.Level;
 
@@ -54,7 +55,7 @@ import java.util.logging.Level;
  * @version 1.0
  * @since 20 Dec 2016
  */
-public class SiteBinderGuiceSiteBinder
+public class JWebMPSiteBinder
 		implements IGuiceSiteBinder<GuiceSiteInjectorModule>
 {
 
@@ -70,7 +71,7 @@ public class SiteBinderGuiceSiteBinder
 	/**
 	 * Constructs a new instance, mostly for injection
 	 */
-	public SiteBinderGuiceSiteBinder()
+	public JWebMPSiteBinder()
 	{
 		//Nothing Needed
 	}
@@ -161,12 +162,13 @@ public class SiteBinderGuiceSiteBinder
 	@Override
 	public void onBind(GuiceSiteInjectorModule module)
 	{
-		log.log(Level.FINE, "Configuring Servlet URL's");
-
+		log.fine("Bound UserAgentStringParser.class");
 		module.bind(UserAgentStringParser.class)
 		      .toInstance(userAgentParser);
+		log.fine("Bound AjaxResponse.class");
 		module.bind(AjaxResponse.class)
 		      .in(RequestScoped.class);
+		log.fine("Bound AjaxCall.class");
 		module.bind(AjaxCall.class)
 		      .in(RequestScoped.class);
 
@@ -197,28 +199,39 @@ public class SiteBinderGuiceSiteBinder
 		      .annotatedWith(Names.named("SessionStorage"))
 		      .toProvider(() -> GuiceContext.getInstance(SessionStorageProperties.class)
 		                                    .getSessionStorage());
-		log.fine("Bound SessionStorageProperties");
+		log.fine("Bound SessionStorageProperties.class");
 		module.bind(SessionStorageProperties.class)
 		      .in(SessionScoped.class);
 
 		log.fine("Bound Page.class");
-
+		final ServiceLoader<IPage> pages = ServiceLoader.load(IPage.class);
 		module.bind(Page.class)
 		      .toProvider(() ->
 		                  {
-			                  for (Class<? extends Page> next : getPages())
+			                  if (!pages.iterator()
+			                            .hasNext())
 			                  {
-				                  if (Modifier.isAbstract(next.getModifiers()) || next.equals(Page.class))
+				                  log.log(Level.WARNING, "Returning blank page since no class was found that extends page or matches the given url");
+				                  return new Page();
+			                  }
+			                  IPage outputPage = null;
+			                  for (IPage page : pages)
+			                  {
+				                  outputPage = findPage(page);
+				                  if (outputPage != null)
 				                  {
-					                  continue;
-				                  }
-				                  Page page = findPage(next);
-				                  if (page != null)
-				                  {
-					                  return page;
+					                  break;
 				                  }
 			                  }
-			                  log.log(Level.WARNING, "Returning blank page since no class was found that extends page or matches the given url");
+			                  if (outputPage != null)
+			                  {
+				                  if (!Page.class.isAssignableFrom(outputPage.getClass()))
+				                  {
+					                  log.severe("Page Binding IPage Services must Extend Page.class");
+					                  return new Page();
+				                  }
+				                  return (Page) outputPage;
+			                  }
 			                  return new Page();
 		                  });
 
@@ -238,18 +251,19 @@ public class SiteBinderGuiceSiteBinder
 		      .toProvider(this::getJsonMapper)
 		      .in(Singleton.class);
 
-		for (Class<?> page : getPages())
+		for (IPage page : pages)
 		{
-			if (!(Modifier.isAbstract(page.getModifiers())))
+			PageConfiguration pc = page.getClass()
+			                           .getAnnotation(PageConfiguration.class);
+			if (pc == null)
 			{
-				if (page.equals(Page.class))
-				{
-					continue;
-				}
-				PageConfiguration pc = page.getAnnotation(PageConfiguration.class);
+				log.log(Level.SEVERE, "Couldn't Find Page Configuration on IPage Object {0}", new Object[]{page.getClass().getCanonicalName()});
+			}
+			else
+			{
 				module.serveRegex$("(" + pc.url() + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 				      .with(JWebSwingServlet.class);
-				log.log(Level.CONFIG, "Serving Page URL [{0}] with [{1}]", new Object[]{pc.url(), page.getCanonicalName()});
+				log.log(Level.CONFIG, "Serving Page URL [{0}] with [{1}]", new Object[]{pc.url(), page.getClass().getCanonicalName()});
 			}
 		}
 
@@ -280,8 +294,6 @@ public class SiteBinderGuiceSiteBinder
 		module.serveRegex$("(" + StaticStrings.JW_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(JWScriptServlet.class);
 		log.log(Level.INFO, "Serving JW Default Script at {0}", StaticStrings.JW_SCRIPT_LOCATION);
-
-		log.log(Level.CONFIG, "Finished with configuring URL's");
 	}
 
 	/**
@@ -295,11 +307,12 @@ public class SiteBinderGuiceSiteBinder
 		                   .getTypesAnnotatedWith(PageConfiguration.class);
 	}
 
-	private Page findPage(Class<? extends Page> next)
+	private IPage findPage(IPage next)
 	{
 		try
 		{
-			PageConfiguration pc = next.getAnnotation(PageConfiguration.class);
+			PageConfiguration pc = next.getClass()
+			                           .getAnnotation(PageConfiguration.class);
 			HttpServletRequest request = GuiceContext.getInstance(HttpServletRequest.class);
 			String pathInfo = request.getPathInfo();
 			if (pathInfo == null)
@@ -311,8 +324,8 @@ public class SiteBinderGuiceSiteBinder
 			if (pathInfo.equalsIgnoreCase(pcUrl) || SessionHelper.getServletUrl()
 			                                                     .equalsIgnoreCase(pc.url()))
 			{
-				Page page = GuiceContext.inject()
-				                        .getInstance(next);
+				IPage page = GuiceContext.inject()
+				                         .getInstance(next.getClass());
 				String headerInformation = request.getHeader("User-Agent");
 				ReadableUserAgent agent = GuiceContext.inject()
 				                                      .getInstance(UserAgentStringParser.class)
@@ -327,7 +340,11 @@ public class SiteBinderGuiceSiteBinder
 		}
 		catch (NullPointerException npe)
 		{
-			log.log(Level.WARNING, "Unable to process page : " + next + " due to null pointer", npe);
+			log.log(Level.SEVERE, "Unable to process page : " + next + " due to null pointer", npe);
+		}
+		catch (Exception npe)
+		{
+			log.log(Level.SEVERE, "Unable to process page : " + next, npe);
 		}
 		return null;
 	}

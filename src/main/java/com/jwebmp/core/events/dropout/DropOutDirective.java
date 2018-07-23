@@ -18,6 +18,7 @@ package com.jwebmp.core.events.dropout;
 
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.base.angular.directives.AngularDirectiveBase;
+import com.jwebmp.core.base.angular.services.IAngularDirective;
 
 /**
  * Maps to the angular function of right click
@@ -27,6 +28,7 @@ import com.jwebmp.core.base.angular.directives.AngularDirectiveBase;
  */
 public class DropOutDirective
 		extends AngularDirectiveBase
+		implements IAngularDirective<DropOutDirective>
 {
 
 	private static final long serialVersionUID = 1L;

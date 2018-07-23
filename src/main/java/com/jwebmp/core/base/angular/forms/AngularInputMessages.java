@@ -19,6 +19,7 @@ package com.jwebmp.core.base.angular.forms;
 
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.angular.forms.enumerations.InputErrorValidations;
+import com.jwebmp.core.base.angular.modules.AngularMessagesModule;
 import com.jwebmp.core.base.html.*;
 import com.jwebmp.core.base.html.attributes.GlobalAttributes;
 import com.jwebmp.core.utilities.StaticStrings;
@@ -48,6 +49,7 @@ public class AngularInputMessages<J extends AngularInputMessages<J>>
 		addAttribute("ng-messages", formToApply.getID() + StaticStrings.STRING_DOT + formInputName.getAttribute(GlobalAttributes.Name) + StaticStrings.STRING_DOT + "$error");
 		addAttribute("role", "alert");
 		setRenderIDAttribute(false);
+		AngularMessagesModule.Enabled = true;
 	}
 
 	/**

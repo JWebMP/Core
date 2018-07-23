@@ -17,12 +17,15 @@
 package com.jwebmp.core.base.angular.configurations;
 
 import com.jwebmp.core.FileTemplates;
-import com.jwebmp.core.base.angular.controllers.AngularControllerBase;
+import com.jwebmp.core.base.angular.services.IAngularConfiguration;
+import com.jwebmp.core.base.angular.services.IAngularConfigurationScopeStatement;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
 
 import javax.validation.constraints.NotNull;
+import java.util.ServiceLoader;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Maps to the angular function of right click
@@ -31,7 +34,8 @@ import java.util.Set;
  * @since 25 Jun 2016
  */
 public class JWAngularConfiguration
-		extends AngularControllerBase
+		extends com.jwebmp.core.base.angular.AngularReferenceBase
+		implements IAngularConfiguration<JWAngularConfiguration>
 {
 
 	private static final long serialVersionUID = 1L;
@@ -42,7 +46,6 @@ public class JWAngularConfiguration
 	public JWAngularConfiguration()
 	{
 		super("jwController");
-		setSortOrder(100);
 	}
 
 	/**
@@ -54,7 +57,7 @@ public class JWAngularConfiguration
 	@NotNull
 	public String renderFunction()
 	{
-		StringBuilder controllerOutput = FileTemplates.getFileTemplate(AngularConfigurationBase.class, "JWAngularConfigurationTemplate", "jwangularconfiguration");
+		StringBuilder controllerOutput = FileTemplates.getFileTemplate(JWAngularConfiguration.class, "JWAngularConfigurationTemplate", "jwangularconfiguration");
 
 		if (controllerOutput == null)
 		{
@@ -63,21 +66,29 @@ public class JWAngularConfiguration
 
 		String output = controllerOutput.toString();
 		StringBuilder statementOutput = new StringBuilder();
-		Set<Class<? extends AngularConfigurationScopeStatement>> controllers = GuiceContext.reflect()
-		                                                                                   .getSubTypesOf(AngularConfigurationScopeStatement.class);
+
+		ServiceLoader<IAngularConfigurationScopeStatement> loader = ServiceLoader.load(IAngularConfigurationScopeStatement.class);
+		Set<IAngularConfigurationScopeStatement> controllers = new TreeSet<>();
+		if (loader.iterator()
+		          .hasNext())
+		{
+			for (IAngularConfigurationScopeStatement statement : loader)
+			{
+				controllers.add(GuiceContext.get(statement.getClass()));
+			}
+		}
 		controllers.forEach(a ->
 		                    {
-			                    AngularConfigurationScopeStatement statement = GuiceContext.inject()
-			                                                                               .getInstance(a);
 			                    if (!statementOutput.toString()
-			                                        .contains(statement.getStatement()))
+			                                        .contains(a.getStatement()))
 			                    {
-				                    statementOutput.append(statement.getStatement())
+				                    statementOutput.append(a.getStatement())
 				                                   .append(StaticStrings.STRING_NEWLINE_TEXT);
 			                    }
 		                    });
 		output = output.replace("JW_SCOPE_INSERTIONS;", statementOutput.toString());
 		output = output.replace("JW_SCOPE_INSERTIONS", statementOutput.toString());
+
 		return output;
 	}
 

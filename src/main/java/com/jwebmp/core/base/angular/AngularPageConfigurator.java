@@ -20,18 +20,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.inject.Singleton;
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.Page;
-import com.jwebmp.core.PageConfigurator;
-import com.jwebmp.core.base.angular.configurations.AngularConfigurationBase;
-import com.jwebmp.core.base.angular.controllers.AngularControllerBase;
-import com.jwebmp.core.base.angular.factories.AngularFactoryBase;
-import com.jwebmp.core.base.angular.modules.AngularMessagesModule;
-import com.jwebmp.core.base.angular.modules.AngularModuleBase;
 import com.jwebmp.core.plugins.PluginInformation;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
+import com.jwebmp.core.services.IPageConfigurator;
 import com.jwebmp.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -40,90 +34,31 @@ import java.util.logging.Logger;
  * @author GedMarc
  * @since 21 Feb 2017
  */
+@SuppressWarnings({"WeakerAccess", "UnusedReturnValue", "unused"})
 @PluginInformation(pluginName = "AngularJS",
+		pluginDescription = "Angular 1x implementation",
 		pluginUniqueName = "angular",
-		pluginDescription = "AngularJS is a toolset for building the " +
-		                    "framework most suited to your " +
-		                    "application development. It " +
-		                    "is " +
-		                    "fully extensible and works well " +
-		                    "with other libraries. " +
-		                    "Every " +
-		                    "feature " +
-		                    "can" +
-		                    " be modified" +
-		                    " or " +
-		                    "replaced to suit your " +
-		                    "unique " +
-		                    "development " +
-		                    "workflow" +
-		                    " " +
-		                    "and " +
-		                    "feature " +
-		                    "needs. Read on to" +
-		                    " find out how. " +
-		                    "",
 		pluginVersion = "1.6",
 		pluginDependancyUniqueIDs = "jquery",
 		pluginCategories = "jquery, angular, data-binding, ng," + "google",
-		pluginSubtitle = "Data-binding is an automatic way of updating the view whenever the model changes, as well as " +
-		                 "updating the " +
-		                 "model whenever the view changes. This is awesome because it eliminates DOM " +
-		                 "manipulation from the" +
-		                 "list  of " +
-		                 "things" +
-		                 " " +
-		                 "you" +
-		                 " " +
-		                 "have" +
-		                 " " +
-		                 "to" +
-		                 " " +
-		                 "worry  " +
-		                 "",
 		pluginGitUrl = "https://github.com/GedMarc/JWebSwing",
 		pluginSourceUrl = "https://angularjs.org",
 		pluginWikiUrl = "https://github.com/GedMarc/JWebSwing/wiki",
 		pluginOriginalHomepage = "https://angularjs.org",
 		pluginDownloadUrl = "https://angularjs.org/",
-		pluginIconUrl = "",
 		pluginIconImageUrl = "https://angularjs.org/img/AngularJS-large.png",
 		pluginLastUpdatedDate = "2017/03/30")
 @Singleton
 public class AngularPageConfigurator
-		extends PageConfigurator
+		implements IPageConfigurator
 {
-
-	public static final String AngularEnabledString = "angular-enabled";
 	private static final Logger log = LogFactory.getLog("Angular Page Configurator");
-	private static final long serialVersionUID = 1L;
 	/**
 	 * If the angular functionality is require or not
 	 */
 	private static boolean required;
+	@SuppressWarnings("unused")
 	private static boolean angularMessagesRequired;
-	/**
-	 * All the angular modules for this component
-	 */
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private Set<AngularModuleBase> angularModules;
-
-	/**
-	 * All of the angular directives for this component
-	 */
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private Set<AngularControllerBase> angularControllers;
-	/**
-	 * All of the angular directives for this component
-	 */
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private Set<AngularFactoryBase> angularFactories;
-
-	/**
-	 * All of the angular directives for this component
-	 */
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private Set<AngularConfigurationBase> angularConfigurations;
 
 	/**
 	 * All of the angular controller insertions for this component
@@ -144,16 +79,15 @@ public class AngularPageConfigurator
 	/**
 	 * Configures the angular page
 	 */
-	@SuppressWarnings("")
 	public AngularPageConfigurator()
 	{
-		setSortOrder(99999999); //Always dead last
+		//No config required
 	}
 
 	/**
 	 * If the configurator is required
 	 *
-	 * @return
+	 * @return If it is required to render
 	 */
 	public static boolean isRequired()
 	{
@@ -163,7 +97,7 @@ public class AngularPageConfigurator
 	/**
 	 * Sets angular as a required component
 	 *
-	 * @param required
+	 * @param required If it is required to render
 	 */
 	@SuppressWarnings("unchecked")
 	public static void setRequired(boolean required)
@@ -173,6 +107,12 @@ public class AngularPageConfigurator
 		{
 			JQueryPageConfigurator.setRequired(true);
 		}
+	}
+
+	@Override
+	public Integer sortOrder()
+	{
+		return Integer.MAX_VALUE - 100;
 	}
 
 	@Override
@@ -194,64 +134,9 @@ public class AngularPageConfigurator
 	}
 
 	/**
-	 * Gets a list of angular modules
-	 *
-	 * @return
-	 */
-	@NotNull
-	public Set<AngularModuleBase> getAngularModules()
-	{
-		if (angularModules == null)
-		{
-			setAngularModules(new LinkedHashSet<>());
-			if (angularMessagesRequired)
-			{
-				angularModules.add(new AngularMessagesModule());
-			}
-		}
-		return angularModules;
-	}
-
-	/**
-	 * Sets the angular modules
-	 *
-	 * @param angularModules
-	 */
-	public void setAngularModules(@NotNull Set<AngularModuleBase> angularModules)
-	{
-		this.angularModules = angularModules;
-	}
-
-	/**
-	 * Returns a list of all the angular controllers for this component
-	 *
-	 * @return
-	 */
-	@NotNull
-	public Set<AngularControllerBase> getAngularControllers()
-	{
-		if (angularControllers == null)
-		{
-			setAngularControllers(new LinkedHashSet<>());
-
-		}
-		return angularControllers;
-	}
-
-	/**
-	 * Sets the list of angular controllers for this component
-	 *
-	 * @param angularControllers
-	 */
-	public void setAngularControllers(@NotNull Set<AngularControllerBase> angularControllers)
-	{
-		this.angularControllers = angularControllers;
-	}
-
-	/**
 	 * Returns the list of angular variables
 	 *
-	 * @return
+	 * @return A list of assigned angular variables
 	 */
 	@NotNull
 	public Set<String> getAngularVariables()
@@ -266,19 +151,20 @@ public class AngularPageConfigurator
 	/**
 	 * Sets the list of angular variables
 	 *
-	 * @param angularVariables
+	 * @param angularVariables A list of assigned angular variables
 	 */
-	public void setAngularVariables(@NotNull Set<String> angularVariables)
+	public AngularPageConfigurator setAngularVariables(@NotNull Set<String> angularVariables)
 	{
 		this.angularVariables = angularVariables;
+		return this;
 	}
 
 	/**
 	 * Renders the complete angular javascript with the variables configured
 	 *
-	 * @param page
+	 * @param page The page to render for
 	 *
-	 * @return
+	 * @return The string builder object
 	 */
 	@NotNull
 	public StringBuilder renderAngularJavascript(Page page)
@@ -292,34 +178,9 @@ public class AngularPageConfigurator
 	}
 
 	/**
-	 * Returns a list of factories
-	 *
-	 * @return
-	 */
-	@NotNull
-	public Set<AngularFactoryBase> getAngularFactories()
-	{
-		if (angularFactories == null)
-		{
-			angularFactories = new LinkedHashSet<>();
-		}
-		return angularFactories;
-	}
-
-	/**
-	 * Sets the list of angular factories
-	 *
-	 * @param angularFactories
-	 */
-	public void setAngularFactories(@NotNull Set<AngularFactoryBase> angularFactories)
-	{
-		this.angularFactories = angularFactories;
-	}
-
-	/**
 	 * Returns the list of controller insertions
 	 *
-	 * @return
+	 * @return A set of controller insertions
 	 */
 	@NotNull
 	public Set<String> getControllerInsertions()
@@ -334,41 +195,19 @@ public class AngularPageConfigurator
 	/**
 	 * Sets the list of controller insertions
 	 *
-	 * @param controllerInsertions
+	 * @param controllerInsertions A set of controller insertions
 	 */
-	public void setControllerInsertions(@NotNull Set<String> controllerInsertions)
+	public AngularPageConfigurator setControllerInsertions(@NotNull Set<String> controllerInsertions)
 	{
 		this.controllerInsertions = controllerInsertions;
+		return this;
 	}
 
-	/**
-	 * Gets the Angular Configurations
-	 *
-	 * @return
-	 */
-	public Set<AngularConfigurationBase> getAngularConfigurations()
-	{
-		if (angularConfigurations == null)
-		{
-			angularConfigurations = new HashSet<>();
-		}
-		return angularConfigurations;
-	}
-
-	/**
-	 * Sets the current angular configuration base
-	 *
-	 * @param angularConfigurations
-	 */
-	public void setAngularConfigurations(@NotNull Set<AngularConfigurationBase> angularConfigurations)
-	{
-		this.angularConfigurations = angularConfigurations;
-	}
 
 	/**
 	 * Gets the list of angular watchers
 	 *
-	 * @return
+	 * @return A set of variable watchers assigned
 	 */
 	public Set<AngularVariableWatcher> getAngularWatchers()
 	{
@@ -382,10 +221,11 @@ public class AngularPageConfigurator
 	/**
 	 * Gets the list of angular watchers
 	 *
-	 * @param angularWatchers
+	 * @param angularWatchers A set of variable watchers assigned
 	 */
-	public void setAngularWatchers(@NotNull Set<AngularVariableWatcher> angularWatchers)
+	public AngularPageConfigurator setAngularWatchers(@NotNull Set<AngularVariableWatcher> angularWatchers)
 	{
 		this.angularWatchers = angularWatchers;
+		return this;
 	}
 }

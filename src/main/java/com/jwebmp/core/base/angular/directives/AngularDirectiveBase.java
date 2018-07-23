@@ -28,7 +28,6 @@ import javax.validation.constraints.NotNull;
  */
 public abstract class AngularDirectiveBase
 		extends AngularReferenceBase
-		implements IAngularDirective
 {
 
 	private static final long serialVersionUID = 1L;

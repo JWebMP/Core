@@ -23,7 +23,7 @@
             <version>${project.version}</version>
             <classifier>${jwebmp.runtime.classifier}</classifier>
             <type>jar</type>
-            <optional>true</optional>
+            <!--<optional>true</optional>-->
         </dependency>
 
         <dependency>
@@ -31,7 +31,7 @@
             <artifactId>guiced-servlets</artifactId>
             <version>${project.version}</version>
             <classifier>${jwebmp.runtime.classifier}</classifier>
-            <optional>true</optional>
+            <!--<optional>true</optional>-->
             <type>jar</type>
         </dependency>
 
@@ -40,7 +40,7 @@
             <artifactId>jwebmp-log-master</artifactId>
             <version>${project.version}</version>
             <classifier>${jwebmp.runtime.classifier}</classifier>
-            <optional>true</optional>
+            <!--<optional>true</optional>-->
             <type>jar</type>
         </dependency>
 
@@ -49,7 +49,7 @@
             <artifactId>jwebmp-interception</artifactId>
             <version>${project.version}</version>
             <classifier>${jwebmp.runtime.classifier}</classifier>
-            <optional>true</optional>
+            <!--<optional>true</optional>-->
             <type>jar</type>
         </dependency>
 
