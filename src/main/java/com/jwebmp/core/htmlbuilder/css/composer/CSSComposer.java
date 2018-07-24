@@ -11,6 +11,7 @@ import com.jwebmp.logger.LogFactory;
 import javax.validation.constraints.NotNull;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -126,27 +127,32 @@ public class CSSComposer
 
 		List<Field> fields = new ArrayList<>(Arrays.asList(o.getClass()
 		                                                    .getDeclaredFields()));
-		fields.forEach((Field field) ->
-		               {
-			               field.setAccessible(true);
-			               Object fieldObject = null;
-			               try
-			               {
-				               fieldObject = field.get(o);
-			               }
-			               catch (IllegalAccessException e)
-			               {
-				               log.log(Level.WARNING, "Unable to read field object " + field.getName(), e);
-			               }
-			               if (Objects.nonNull(fieldObject) && ComponentHierarchyBase.class.isAssignableFrom(fieldObject.getClass()))
-			               {
-				               ComponentHierarchyBase c = (ComponentHierarchyBase) fieldObject;
-				               CSSBlock newFieldBlock = getPropertiesFactory().getCSSBlock(c.getID(), CSSTypes.None, getPropertiesFactory().getCSS(field, o),
-				                                                                           CSSBlockIdentifier.Id);
-				               newFieldBlock.setBlockIdentifer(CSSBlockIdentifier.Id);
-				               componentBlocks.add(newFieldBlock);
-			               }
-		               });
+		for (Field field : fields)
+		{
+			if (Modifier.isStatic(field.getModifiers()) || Modifier.isFinal(field.getModifiers()))
+			{
+				continue;
+			}
+
+			field.setAccessible(true);
+			Object fieldObject = null;
+			try
+			{
+				fieldObject = field.get(o);
+			}
+			catch (IllegalAccessException e)
+			{
+				log.log(Level.WARNING, "Unable to read field object " + field.getName(), e);
+			}
+			if (Objects.nonNull(fieldObject) && ComponentHierarchyBase.class.isAssignableFrom(fieldObject.getClass()))
+			{
+				ComponentHierarchyBase c = (ComponentHierarchyBase) fieldObject;
+				CSSBlock newFieldBlock = getPropertiesFactory().getCSSBlock(c.getID(), CSSTypes.None, getPropertiesFactory().getCSS(field, o),
+				                                                            CSSBlockIdentifier.Id);
+				newFieldBlock.setBlockIdentifer(CSSBlockIdentifier.Id);
+				componentBlocks.add(newFieldBlock);
+			}
+		}
 
 		componentBlocks.forEach(getBlockMaster()::addBlock);
 		return componentBlocks;

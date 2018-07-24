@@ -202,7 +202,14 @@ public abstract class JWDefaultServlet
 	protected StringBuilder getPageHTML()
 	{
 		StringBuilder html;
-		html = new StringBuilder(getPageFromGuice().toString(true));
+		try
+		{
+			html = new StringBuilder(getPageFromGuice().toString(true));
+		}
+		catch (Throwable T)
+		{
+			return new StringBuilder(getErrorPageHtml(T).toString(0));
+		}
 		return html;
 	}
 

@@ -1,5 +1,5 @@
 import com.jwebmp.core.annotations.JWebMPSiteBinder;
-import com.jwebmp.core.base.angular.configurations.JWAngularConfiguration;
+import com.jwebmp.core.base.angular.controllers.JWAngularController;
 import com.jwebmp.core.base.angular.modules.AngularMessagesModule;
 import com.jwebmp.core.base.angular.services.*;
 import com.jwebmp.core.services.IPageConfigurator;
@@ -22,11 +22,6 @@ module com.jwebmp.core {
 	exports com.jwebmp.core.base.html;
 	exports com.jwebmp.core.base.html.attributes;
 	exports com.jwebmp.core.base.html.inputs;
-/*
-	opens com.jwebmp.core.base.html.interfaces;
-	opens com.jwebmp.core.base.html.interfaces.children;
-	opens com.jwebmp.core.base.html.interfaces.children.generics;
-	opens com.jwebmp.core.base.html.interfaces.events;*/
 
 	exports com.jwebmp.core.base.html.interfaces;
 	exports com.jwebmp.core.base.html.interfaces.children;
@@ -179,7 +174,8 @@ module com.jwebmp.core {
 	provides IGuiceSiteBinder with JWebMPSiteBinder;
 
 	provides IAngularModule with AngularMessagesModule;
-	provides IAngularConfiguration with JWAngularConfiguration;
+	provides IAngularController with JWAngularController;
+
 
 	provides IAngularDirective with com.jwebmp.core.events.activate.ActivateDirective,
 			                           com.jwebmp.core.events.beforeactivate.BeforeActivateDirective,
@@ -238,7 +234,31 @@ module com.jwebmp.core {
 	opens com.jwebmp.core.base to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core to com.fasterxml.jackson.databind;
 
-	opens com.jwebmp.core.base.servlets.interfaces;
+	opens com.jwebmp.core.htmlbuilder.css.annotations to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.css.interfaces to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.css.animatable to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.css.backgrounds to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.css.borders to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.css.colours to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.css.composer to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.css.displays to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.css.enumarations to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.css.fonts to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.css.heightwidth to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.css.image to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.css.lists to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.css.margins to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.css.measurement to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.css.outline to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.css.padding to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.css.tables to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.css.text to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.htmlbuilder.css.themes to com.fasterxml.jackson.databind;
+
+	opens com.jwebmp.core.base.servlets.interfaces to com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.base.servlets.options to com.fasterxml.jackson.databind;
+
+
 	exports com.jwebmp.core.services;
 	exports com.jwebmp.core.base.angular.services;
 

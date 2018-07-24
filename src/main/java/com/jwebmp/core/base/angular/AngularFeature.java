@@ -215,6 +215,9 @@ public class AngularFeature
 		             .put("CONTROLLER_INSERTIONS", new StringBuilder(compileControllerInsertions()));
 
 		FileTemplates.getTemplateVariables()
+		             .put("ANGULAR_CONFIG_FUNCTION ", new StringBuilder(compileControllerInsertions()));
+
+		FileTemplates.getTemplateVariables()
 		             .put("JW_CONTROLLERS", new StringBuilder(compileControllers()));
 		FileTemplates.getTemplateVariables()
 		             .put("jwangular", FileTemplates.compileTemplate(AngularFeature.class, "jwangular"));

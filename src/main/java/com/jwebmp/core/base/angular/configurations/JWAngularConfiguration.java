@@ -17,7 +17,6 @@
 package com.jwebmp.core.base.angular.configurations;
 
 import com.jwebmp.core.FileTemplates;
-import com.jwebmp.core.base.angular.services.IAngularConfiguration;
 import com.jwebmp.core.base.angular.services.IAngularConfigurationScopeStatement;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
@@ -35,7 +34,6 @@ import java.util.TreeSet;
  */
 public class JWAngularConfiguration
 		extends com.jwebmp.core.base.angular.AngularReferenceBase
-		implements IAngularConfiguration<JWAngularConfiguration>
 {
 
 	private static final long serialVersionUID = 1L;
@@ -88,7 +86,6 @@ public class JWAngularConfiguration
 		                    });
 		output = output.replace("JW_SCOPE_INSERTIONS;", statementOutput.toString());
 		output = output.replace("JW_SCOPE_INSERTIONS", statementOutput.toString());
-
 		return output;
 	}
 

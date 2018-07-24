@@ -19,6 +19,7 @@ package com.jwebmp.core.htmlbuilder.javascript;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.inject.Key;
 import com.google.inject.name.Names;
 import com.jwebmp.guicedinjection.GuiceContext;
@@ -86,8 +87,11 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	{
 		try
 		{
-			return getJsonObjectMapper().writeValueAsString(o)
-			                            .replaceAll("\r\n", "\n");
+			return getJsonObjectMapper()
+					       .writer()
+					       .withoutFeatures(SerializationFeature.FAIL_ON_UNWRAPPED_TYPE_IDENTIFIERS)
+					       .writeValueAsString(o)
+					       .replaceAll("\r\n", "\n");
 		}
 		catch (JsonProcessingException ex)
 		{

@@ -41,7 +41,12 @@ public interface IAngularDefaultService<J extends IAngularDefaultService<J>>
 		{
 			return -1;
 		}
-		return getSortOrder().compareTo(o.getSortOrder());
+		if (getClass().equals(o.getClass()))
+		{
+			return 0;
+		}
+		int result = getSortOrder().compareTo(o.getSortOrder());
+		return result == 0 ? 1 : result;
 	}
 
 }

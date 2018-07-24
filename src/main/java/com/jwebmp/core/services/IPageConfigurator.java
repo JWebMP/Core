@@ -35,7 +35,12 @@ public interface IPageConfigurator
 		{
 			return -1;
 		}
-		return sortOrder().compareTo(o.sortOrder());
+		int result = sortOrder().compareTo(o.sortOrder());
+		if (getClass().equals(o.getClass()))
+		{
+			return 0;
+		}
+		return result == 0 ? 1 : result;
 	}
 
 }

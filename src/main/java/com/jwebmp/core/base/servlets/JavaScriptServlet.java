@@ -19,7 +19,6 @@ package com.jwebmp.core.base.servlets;
 import com.google.inject.Singleton;
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.Page;
-import com.jwebmp.core.exceptions.MissingComponentException;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
 
@@ -59,15 +58,12 @@ public class JavaScriptServlet
 	{
 		Page page = GuiceContext.inject()
 		                        .getInstance(Page.class);
+		if (!page.isConfigured())
+		{
+			page.preConfigure();
+		}
 		intercept();
 		FileTemplates.removeTemplate(scriptReplacement);
-		if (page == null)
-		{
-			writeOutput(new StringBuilder(getErrorPageHtml(new MissingComponentException(
-					"Page has not been bound yet. Please use a binder to map Page to the required page object. Also consider using a @Provides method to apply custom logic. See https://github.com/google/guice/wiki/ProvidesMethods ")).toString(
-					0)), StaticStrings.HTML_HEADER_JAVASCRIPT, Charset.forName("UTF-8"));
-			return;
-		}
 		FileTemplates.getFileTemplate(JavaScriptServlet.class, scriptReplacement, "javascriptScript");
 		FileTemplates.getTemplateVariables()
 		             .put(scriptReplacement, page.renderJavascript());
