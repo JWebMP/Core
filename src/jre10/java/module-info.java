@@ -258,6 +258,7 @@ module com.jwebmp.core {
 	opens com.jwebmp.core.base.servlets.interfaces to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.base.servlets.options to com.fasterxml.jackson.databind;
 
+	opens com.jwebmp.core.utilities.regex to com.fasterxml.jackson.databind;
 
 	exports com.jwebmp.core.services;
 	exports com.jwebmp.core.base.angular.services;

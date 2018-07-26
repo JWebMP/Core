@@ -233,7 +233,8 @@ public class JWebMPSiteBinder
 				                  return (Page) outputPage;
 			                  }
 			                  return new Page();
-		                  });
+		                  })
+		      .in(RequestScoped.class);
 
 		log.fine("Bound ObjectMapper.class @Named(JSON)");
 		module.bind(ObjectMapper.class)
@@ -261,7 +262,9 @@ public class JWebMPSiteBinder
 			}
 			else
 			{
-				module.serveRegex$("(" + pc.url() + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
+				String url = pc.url();
+				url = "(" + url + StaticStrings.QUERY_PARAMETERS_REGEX + ")";
+				module.serveRegex$(url)
 				      .with(JWebSwingServlet.class);
 				log.log(Level.CONFIG, "Serving Page URL [{0}] with [{1}]", new Object[]{pc.url(), page.getClass().getCanonicalName()});
 			}

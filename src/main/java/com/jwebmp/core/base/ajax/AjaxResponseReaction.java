@@ -118,13 +118,32 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 	 * @param responseType
 	 * 		The specific response type (info, danger, warning etc)
 	 */
-	@SuppressWarnings("")
 	public AjaxResponseReaction(String reactionTitle, String reactionData, ReactionType reactionType, AjaxResponseType responseType)
+	{
+		this(reactionTitle, reactionData, reactionType, responseType, null);
+	}
+
+	/**
+	 * Constructs a reaction with the given parameters
+	 *
+	 * @param reactionTitle
+	 * 		The title if necessary
+	 * @param reactionData
+	 * 		The data if necessary (usually is)
+	 * @param reactionType
+	 * 		The specific reaction type (dialog, redirect etc)
+	 * @param responseType
+	 * 		The specific response type (info, danger, warning etc)
+	 * @param options
+	 * 		Apply options, usually BootstrapDialogOptions for dialog displays
+	 */
+	public AjaxResponseReaction(String reactionTitle, String reactionData, ReactionType reactionType, AjaxResponseType responseType, JavaScriptPart<?> options)
 	{
 		setReactionTitle(reactionTitle);
 		setReactionData(reactionData);
 		setReactionType(reactionType);
 		setResponseType(responseType);
+		setOptions(options);
 	}
 
 	/**

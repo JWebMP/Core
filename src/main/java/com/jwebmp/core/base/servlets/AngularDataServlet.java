@@ -131,7 +131,7 @@ public class AngularDataServlet
 		catch (Exception e)
 		{
 			ajaxResponse.addReaction(
-					new AjaxResponseReaction("Error Performing Data Request", ExceptionUtils.getStackTrace(e), ReactionType.DialogDisplay, AjaxResponseType.Danger));
+					new AjaxResponseReaction("Error Performing Angular Data Request", ExceptionUtils.getStackTrace(e), ReactionType.DialogDisplay, AjaxResponseType.Danger));
 			LOG.log(Level.SEVERE, "Unable to perform the data request", e);
 		}
 

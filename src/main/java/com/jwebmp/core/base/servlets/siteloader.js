@@ -1,8 +1,39 @@
 /* global BootstrapDialog, eval,cordova */
+function DeltaTimer(render, interval,referenceObject) {
+    var timeout;
+    var lastTime;
+    var thisTime = + new Date;
+    var deltaTime = thisTime - lastTime;
+    var delay = Math.max(interval - deltaTime, 0);
+
+    this.start = start;
+    this.stop = stop;
+
+    referenceObject.start = start();
+    referenceObject.stop = stop();
+
+    function start() {
+        timeout = setTimeout(loop, 0);
+        lastTime = + new Date;
+        return lastTime;
+    }
+
+    function stop() {
+        clearTimeout(timeout);
+        return lastTime;
+    }
+
+    function loop() {
+        timeout = setTimeout(loop, delay);
+        lastTime = thisTime + delay;
+        render(thisTime);
+    }
+}
 
 var jw = {isLoading: false, pageLoading: true};
 window.jw = jw;
 jw.siteAddress = 'SITEADDRESSINSERT';
+jw.sessionid = document.cookie.match(/JSESSIONID=[^;]+/);
 
 jw.angularLoading = false;
 
