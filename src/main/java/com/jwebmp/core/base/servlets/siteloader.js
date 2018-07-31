@@ -1,29 +1,46 @@
 /* global BootstrapDialog, eval,cordova */
-function DeltaTimer(render, interval,referenceObject) {
+function DeltaTimer(render, interval) {
     var timeout;
     var lastTime;
-    var thisTime = + new Date;
-    var deltaTime = thisTime - lastTime;
-    var delay = Math.max(interval - deltaTime, 0);
 
     this.start = start;
     this.stop = stop;
 
-    referenceObject.start = start();
-    referenceObject.stop = stop();
+    /**
+     @description Start the timer.
+     @public
+     @function
+     @returns {number} The UTC time in milliseconds when the timer started.
+     */
 
     function start() {
         timeout = setTimeout(loop, 0);
-        lastTime = + new Date;
+        lastTime = Date.now();
         return lastTime;
     }
+
+    /**
+     @description Stop the timer.
+     @public
+     @function
+     @returns {number} The UTC time in milliseconds when the timer stopped.
+     */
 
     function stop() {
         clearTimeout(timeout);
         return lastTime;
     }
 
+    /**
+     @description Loop the timer continuously and call the render function.
+     @private
+     @function
+     */
+
     function loop() {
+        var thisTime = Date.now();
+        var deltaTime = thisTime - lastTime;
+        var delay = Math.max(interval - deltaTime, 0);
         timeout = setTimeout(loop, delay);
         lastTime = thisTime + delay;
         render(thisTime);

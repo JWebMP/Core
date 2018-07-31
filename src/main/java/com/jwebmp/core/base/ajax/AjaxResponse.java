@@ -322,13 +322,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	protected Set<String> getAllCssReferences()
 	{
 		Set<String> output = new LinkedHashSet<>();
-		getComponents().forEach(next ->
-		                        {
-			                        if (ComponentDependancyBase.class.isAssignableFrom(next.getClass()))
-			                        {
-				                        output.addAll(getCssReferences(next));
-			                        }
-		                        });
+		getComponents().forEach(next -> output.addAll(getCssReferences(next)));
 		return output;
 	}
 
