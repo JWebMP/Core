@@ -788,7 +788,7 @@ public class CSSPropertiesFactory<A extends Annotation>
 		                                          .replaceAll("interface ", "") + "Impl";
 		try
 		{
-			newInstance = Class.forName(implementationClass)
+			newInstance = Class.forName(implementationClass).getDeclaredConstructor()
 			                   .newInstance();
 
 			for (Map.Entry<StringBuilder, Object> entry : fieldMapping.entrySet())
@@ -799,7 +799,7 @@ public class CSSPropertiesFactory<A extends Annotation>
 				processFieldMapEntry(newInstance, field, fieldObject);
 			}
 		}
-		catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException ex)
+		catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | NoSuchMethodException | InvocationTargetException ex)
 		{
 			log.log(Level.SEVERE, "[Instantiation]-[Failed " + implementationClass + "]", ex);
 		}

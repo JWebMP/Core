@@ -98,22 +98,7 @@ public class JWebSwingServlet
 		try
 		{
 			log.log(Level.INFO, "Destroying Servlet JWebSwing Servlet and all Static Objects");
-			GuiceContext.inject()
-			            .getInstance(UserAgentStringParser.class)
-			            .shutdown();
-			Set<Class<? extends Page>> pages = JWebMPSiteBinder.getPages();
-			for (Class<? extends Page> page : pages)
-			{
-				if (page.equals(Page.class) || Modifier.isAbstract(page.getModifiers()))
-				{
-					continue;
-				}
-				Page p = GuiceContext.getInstance(page);
-				p.destroy();
-			}
-
 			GuiceContext.destroy();
-			log.log(Level.INFO, "User Agent Parser Shutdown");
 		}
 		catch (Exception t)
 		{

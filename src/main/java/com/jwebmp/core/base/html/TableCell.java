@@ -115,7 +115,7 @@ public class TableCell<J extends TableCell<J>>
 		{
 			s = "0";
 		}
-		return new Integer(s);
+		return Integer.valueOf(s);
 	}
 
 	/**

@@ -315,17 +315,6 @@ public class JWebMPSiteBinder
 		log.log(Level.INFO, "Serving JW Default Script at {0}", StaticStrings.JW_SCRIPT_LOCATION);
 	}
 
-	/**
-	 * Returns all the mapped pages
-	 *
-	 * @return
-	 */
-	public static Set<Class<? extends Page>> getPages()
-	{
-		return GuiceContext.reflect()
-		                   .getTypesAnnotatedWith(PageConfiguration.class);
-	}
-
 	private IPage findPage(IPage next)
 	{
 		try
