@@ -255,6 +255,8 @@ module com.jwebmp.core {
 	opens com.jwebmp.core.htmlbuilder.css.text to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.htmlbuilder.css.themes to com.fasterxml.jackson.databind;
 
+	opens com.jwebmp.core.base.client to com.fasterxml.jackson.databind;
+
 	opens com.jwebmp.core.base.servlets.interfaces to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.base.servlets.options to com.fasterxml.jackson.databind;
 
