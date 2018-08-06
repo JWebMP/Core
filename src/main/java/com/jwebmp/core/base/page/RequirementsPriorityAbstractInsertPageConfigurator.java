@@ -33,6 +33,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.jwebmp.core.utilities.StaticStrings.*;
+
 abstract class RequirementsPriorityAbstractInsertPageConfigurator
 		implements IPageConfigurator
 {
@@ -100,6 +102,13 @@ abstract class RequirementsPriorityAbstractInsertPageConfigurator
 			{
 				link.addClass(reference.getSpecifiedClassName());
 			}
+			if(!reference.getAdditionalOptions().isEmpty())
+			{
+				for (String additionalOption : reference.getAdditionalOptions())
+				{
+					link.addAttribute(additionalOption, STRING_EMPTY);
+				}
+			}
 			if (!allLinks.contains(link))
 			{
 				allLinks.add(link);
@@ -124,6 +133,13 @@ abstract class RequirementsPriorityAbstractInsertPageConfigurator
 		for (JavascriptReference reference : allJavascripts)
 		{
 			Script script = new Script(reference);
+			if(!reference.getAdditionalOptions().isEmpty())
+			{
+				for (String additionalOption : reference.getAdditionalOptions())
+				{
+					script.addAttribute(additionalOption, STRING_EMPTY);
+				}
+			}
 			script.setNewLineForClosingTag(false);
 			allScripts.add(script);
 		}

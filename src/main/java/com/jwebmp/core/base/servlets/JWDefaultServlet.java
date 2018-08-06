@@ -308,8 +308,7 @@ public abstract class JWDefaultServlet
 	protected void readRequestVariables(HttpServletRequest request) throws MissingComponentException
 	{
 		Page currentPage = getPageFromGuice();
-		HttpSession session = GuiceContext.inject()
-		                                  .getInstance(HttpSession.class);
+		HttpSession session = GuiceContext.get(HttpSession.class);
 		if (currentPage == null)
 		{
 			throw new MissingComponentException("[No Page]-[getPage() returning null in servlet class]");
@@ -329,8 +328,7 @@ public abstract class JWDefaultServlet
 	protected void readBrowserInformation(HttpServletRequest request)
 	{
 		String headerInformation = request.getHeader("User-Agent");
-		ReadableUserAgent agent = GuiceContext.inject()
-		                                      .getInstance(UserAgentStringParser.class)
+		ReadableUserAgent agent = GuiceContext.get(UserAgentStringParser.class)
 		                                      .parse(headerInformation);
 		getPageFromGuice().setUserAgent(agent);
 		Browsers b;

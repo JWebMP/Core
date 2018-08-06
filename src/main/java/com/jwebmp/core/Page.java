@@ -56,6 +56,7 @@ import java.util.logging.Logger;
  * 		Replacement of the old page object
  * @since 24 Apr 2016
  */
+@SuppressWarnings({"NullableProblems", "unused"})
 @PageConfiguration
 @RequestScoped
 public class Page<J extends Page<J>>
@@ -151,8 +152,9 @@ public class Page<J extends Page<J>>
 	 * Adds the text as a given paragraph
 	 *
 	 * @param addText
+	 * 		The text to add to the body
 	 *
-	 * @return
+	 * @return This
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -177,12 +179,15 @@ public class Page<J extends Page<J>>
 	 * Local Storage, Modernizr and Session Storage are available at the time of this call
 	 *
 	 * @param call
+	 * 		The retrieved ajax call request scoped
 	 * @param response
+	 * 		The response ajax call request scoped
 	 *
-	 * @return
+	 * @return Not null
 	 */
 	@SuppressWarnings("unused")
-	public AjaxResponse onConnect(AjaxCall<?> call, AjaxResponse response)
+	@NotNull
+	public AjaxResponse onConnect(AjaxCall<?> call, AjaxResponse<?> response)
 	{
 		return response;
 	}
@@ -191,8 +196,9 @@ public class Page<J extends Page<J>>
 	 * Adds a css reference to the body
 	 *
 	 * @param cssReference
+	 * 		the reference to add
 	 *
-	 * @return
+	 * @return Always this
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -207,8 +213,9 @@ public class Page<J extends Page<J>>
 	 * Adds a java script reference to the body
 	 *
 	 * @param jsReference
+	 * 		Adds a javascript reference to the body
 	 *
-	 * @return
+	 * @return This page
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -219,14 +226,24 @@ public class Page<J extends Page<J>>
 		return (J) this;
 	}
 
+	/**
+	 * Returns the CSS references from the bdoy
+	 *
+	 * @return A set of references
+	 */
 	@Override
-	public Set getCssReferences()
+	public Set<CSSReference> getCssReferences()
 	{
 		return getBody().getCssReferences();
 	}
 
+	/**
+	 * Gets the java script references from the body object
+	 *
+	 * @return A set of javascript references
+	 */
 	@Override
-	public Set getJavascriptReferences()
+	public Set<JavascriptReference> getJavascriptReferences()
 	{
 		return getBody().getJavascriptReferences();
 	}
@@ -252,7 +269,7 @@ public class Page<J extends Page<J>>
 	/**
 	 * Returns all the dynamic options for a page
 	 *
-	 * @return
+	 * @return The options with the page
 	 */
 	@Override
 	@NotNull
@@ -268,7 +285,7 @@ public class Page<J extends Page<J>>
 	/**
 	 * Returns the JavaScript render for the body
 	 *
-	 * @return
+	 * @return A single string builder containing all the java scripts applicable
 	 */
 	@Override
 	public StringBuilder renderJavascript()
@@ -304,7 +321,7 @@ public class Page<J extends Page<J>>
 	/**
 	 * Returns the component with only it's methods
 	 *
-	 * @return
+	 * @return Returns a trimmed out version of this page
 	 */
 	public IPage asMe()
 	{
@@ -314,7 +331,7 @@ public class Page<J extends Page<J>>
 	/**
 	 * Whether or not the page is initialized
 	 *
-	 * @return
+	 * @return If initialized or not
 	 */
 	public boolean isPageInitialized()
 	{
@@ -325,6 +342,7 @@ public class Page<J extends Page<J>>
 	 * Sets if the page is initialized
 	 *
 	 * @param pageInitialized
+	 * 		If this page is initialized
 	 */
 	public void setPageInitialized(boolean pageInitialized)
 	{
@@ -347,6 +365,7 @@ public class Page<J extends Page<J>>
 	 * Sets teh fields currently set on the page
 	 *
 	 * @param fields
+	 * 		Sets the fields for this page object
 	 */
 	public void setFields(PageFields fields)
 	{
@@ -357,21 +376,23 @@ public class Page<J extends Page<J>>
 	 * Adds a variable into angular
 	 *
 	 * @param variableName
+	 * 		Adds an angular variable name
 	 *
-	 * @return
+	 * @return This page
 	 */
 	@NotNull
-	public Page addAngularVariable(String variableName)
+	@SuppressWarnings("unchecked")
+	public J addAngularVariable(String variableName)
 	{
 		getAngular().getAngularVariables()
 		            .add(variableName);
-		return this;
+		return (J) this;
 	}
 
 	/**
 	 * Returns the angular object
 	 *
-	 * @return
+	 * @return The angular page configurator
 	 */
 	@NotNull
 	public AngularPageConfigurator getAngular()
@@ -400,7 +421,7 @@ public class Page<J extends Page<J>>
 	/**
 	 * Returns the fields available for entry on this page
 	 *
-	 * @return
+	 * @return The fields for the header of this page object
 	 */
 	@Override
 	@NotNull
@@ -416,7 +437,7 @@ public class Page<J extends Page<J>>
 	/**
 	 * Returns if the user agent string registered the device as mobile
 	 *
-	 * @return
+	 * @return If the header agent reads as smartphone smart tv or tablet
 	 */
 	@Override
 	public boolean isMobileOrSmartTablet()
@@ -430,15 +451,24 @@ public class Page<J extends Page<J>>
 	/**
 	 * Returns a readable user agent, or null if just a basic render
 	 *
-	 * @return
+	 * @return The user agent, or an empty identifiable
 	 */
+	@NotNull
 	public ReadableUserAgent getUserAgent()
 	{
 		if (userAgent == null)
 		{
-			userAgent = new UserAgent(DeviceCategory.EMPTY, UserAgentFamily.FIREFOX, StaticStrings.STRING_EMPTY, StaticStrings.STRING_EMPTY, OperatingSystem.EMPTY,
-			                          StaticStrings.STRING_EMPTY, StaticStrings.STRING_EMPTY,
-			                          UserAgentType.BROWSER, StaticStrings.STRING_EMPTY, StaticStrings.STRING_EMPTY, VersionNumber.UNKNOWN);
+			try
+			{
+				ReadableUserAgent agent = GuiceContext.get(ReadableUserAgent.class);
+				setUserAgent(agent);
+			}
+			catch (Throwable T)
+			{
+				userAgent = new UserAgent(DeviceCategory.EMPTY, UserAgentFamily.FIREFOX, StaticStrings.STRING_EMPTY, StaticStrings.STRING_EMPTY, OperatingSystem.EMPTY,
+				                          StaticStrings.STRING_EMPTY, StaticStrings.STRING_EMPTY,
+				                          UserAgentType.BROWSER, StaticStrings.STRING_EMPTY, StaticStrings.STRING_EMPTY, VersionNumber.UNKNOWN);
+			}
 		}
 		return userAgent;
 	}
@@ -447,6 +477,7 @@ public class Page<J extends Page<J>>
 	 * Sets the userAgent
 	 *
 	 * @param userAgent
+	 * 		Sets the referenced user agent
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
@@ -459,16 +490,17 @@ public class Page<J extends Page<J>>
 	/**
 	 * Shortcut method to getBody().add()
 	 *
-	 * @param picker
+	 * @param child
+	 * 		The child add
 	 *
-	 * @return
+	 * @return Always this
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J add(GlobalChildren picker)
+	public J add(GlobalChildren child)
 	{
-		getBody().add(picker);
+		getBody().add(child);
 		return (J) this;
 	}
 
@@ -485,7 +517,7 @@ public class Page<J extends Page<J>>
 	/**
 	 * Overidden method to return this, beware circular joins
 	 *
-	 * @return
+	 * @return Hard override to this page
 	 */
 	@Override
 	@NotNull
@@ -498,8 +530,9 @@ public class Page<J extends Page<J>>
 	 * Sets all component in the head and body to tiny
 	 *
 	 * @param tiny
+	 * 		Sets this object, the head, and the body to tiny
 	 *
-	 * @return
+	 * @return Always this
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -523,16 +556,11 @@ public class Page<J extends Page<J>>
 	{
 		if (!pageInitialized)
 		{
+			getHead().init();
 			getBody().init();
 			pageInitialized = true;
 		}
-
-		if (!isConfigured())
-		{
-			configurePage();
-		}
-
-		super.init();
+		setInitialized(true);
 	}
 
 	private void configurePage()
@@ -555,7 +583,7 @@ public class Page<J extends Page<J>>
 	/**
 	 * Renders all the children to a string builder
 	 *
-	 * @return
+	 * @return The string representation of this page
 	 */
 	@Override
 	protected StringBuilder renderChildren()
@@ -597,7 +625,7 @@ public class Page<J extends Page<J>>
 	/**
 	 * Returns if the body object is empty
 	 *
-	 * @return
+	 * @return if the body is empty
 	 */
 	private boolean isBodyEmpty()
 	{
@@ -608,7 +636,7 @@ public class Page<J extends Page<J>>
 	/**
 	 * Returns if the head object is empty
 	 *
-	 * @return
+	 * @return if the head is empty
 	 */
 	private boolean isHeadEmpty()
 	{
@@ -629,10 +657,14 @@ public class Page<J extends Page<J>>
 		}
 		if (!isConfigured())
 		{
+			getHead().preConfigure();
+			getBody().preConfigure();
+
 			configurePageHeader();
 			addVariablesScriptToPage();
+			configurePage();
 		}
-		super.preConfigure();
+		setConfigured(true);
 	}
 
 	/**

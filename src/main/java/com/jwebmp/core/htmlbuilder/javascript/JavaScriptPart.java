@@ -95,7 +95,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 		}
 		catch (JsonProcessingException ex)
 		{
-			log.log(Level.SEVERE, "Unable to Serialize as JSON Json Processing Exception", ex);
+			log.log(Level.FINER, "Unable to Serialize as JSON Json Processing Exception", ex);
 			return "";
 		}
 		catch (Exception ex)

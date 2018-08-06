@@ -39,30 +39,17 @@ public class JavaScriptServlet
 
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-	 *
-	 * @param request
-	 * 		Servlet request
-	 * @param response
-	 * 		Servlet response
-	 */
-	@Override
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-	{
-
-	}
-
 	@Override
 	public void perform()
 	{
-		Page page = GuiceContext.inject()
-		                        .getInstance(Page.class);
+		Page page = GuiceContext.get(Page.class);
+		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
+		readBrowserInformation(request);
+		intercept();
 		if (!page.isConfigured())
 		{
 			page.preConfigure();
 		}
-		intercept();
 		FileTemplates.removeTemplate(scriptReplacement);
 		FileTemplates.getFileTemplate(JavaScriptServlet.class, scriptReplacement, "javascriptScript");
 		FileTemplates.getTemplateVariables()

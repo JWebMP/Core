@@ -98,8 +98,8 @@ public class AngularDataServlet
 			                                                                                     .getId());
 		}
 
-		Page page = GuiceContext.inject()
-		                        .getInstance(Page.class);
+		Page page = GuiceContext.get(Page.class);
+		readBrowserInformation(request);
 		ComponentHierarchyBase triggerComponent = null;
 		if (ComponentTypes.Body.getComponentTag()
 		                       .equals(ajaxCall.getComponentId()))

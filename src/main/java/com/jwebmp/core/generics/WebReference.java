@@ -27,7 +27,9 @@ import com.jwebmp.logger.LogFactory;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -43,6 +45,7 @@ import java.util.logging.Logger;
  * @version 2.0
  * @since Forever
  */
+@SuppressWarnings("unused")
 public class WebReference<J extends WebReference>
 		implements NamedPair<String, String>, Serializable, Comparator<WebReference>, Comparable<WebReference>
 {
@@ -85,7 +88,7 @@ public class WebReference<J extends WebReference>
 	 * The ridiculous sort order
 	 */
 	@JsonIgnore
-	private Integer sortOrder = 500000;
+	private Integer sortOrder;
 	/**
 	 * The default priority
 	 */
@@ -123,6 +126,8 @@ public class WebReference<J extends WebReference>
 	 */
 	@JsonIgnore
 	private String specifiedClassName;
+
+	private Set<String> additionalOptions;
 
 	/**
 	 * Sets this JavaScript Reference with the Name, the Version
@@ -171,7 +176,7 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Sets whether or not to use "min.js" or use a folder for the min directory
 	 *
-	 * @return
+	 * @return if min is used
 	 */
 	public static boolean isUseMinAtEndOfExtension()
 	{
@@ -182,6 +187,7 @@ public class WebReference<J extends WebReference>
 	 * Sets whether or not to append min into the filename
 	 *
 	 * @param useMinAtEndOfExtension
+	 * 		if min is used
 	 */
 	public static void setUseMinAtEndOfExtension(boolean useMinAtEndOfExtension)
 	{
@@ -192,8 +198,9 @@ public class WebReference<J extends WebReference>
 	 * Sorts an Array List of References
 	 *
 	 * @param arrayList
+	 * 		The list to apply
 	 *
-	 * @return
+	 * @return the sorted list
 	 */
 	@SuppressWarnings("unchecked")
 	public static List<? extends WebReference> sort(List<? extends WebReference> arrayList)
@@ -205,7 +212,7 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Returns a dummy reference for the sorting array
 	 *
-	 * @return
+	 * @return A dummy sortable
 	 */
 	public static WebReference<?> getDummyReference()
 	{
@@ -215,7 +222,7 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Gets the local reference
 	 *
-	 * @return
+	 * @return A dummy sortable
 	 */
 	@Override
 	public String getLeft()
@@ -227,8 +234,9 @@ public class WebReference<J extends WebReference>
 	 * Sets the local reference
 	 *
 	 * @param left
+	 * 		Left side, local reference
 	 *
-	 * @return
+	 * @return Always this
 	 */
 	@NotNull
 	@SuppressWarnings("unchecked")
@@ -242,7 +250,7 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Sets the local reference
 	 *
-	 * @return
+	 * @return Right side remote reference
 	 */
 	@Override
 	public String getRight()
@@ -254,8 +262,9 @@ public class WebReference<J extends WebReference>
 	 * Sets the remote reference
 	 *
 	 * @param right
+	 * 		The remote reference
 	 *
-	 * @return
+	 * @return Always this
 	 */
 	@NotNull
 	@SuppressWarnings("unchecked")
@@ -269,7 +278,7 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Returns if this pair is set to validate on the left field only
 	 *
-	 * @return
+	 * @return Local only
 	 */
 	public boolean isLeftOnly()
 	{
@@ -280,8 +289,9 @@ public class WebReference<J extends WebReference>
 	 * Sets if this pair should validate on the left pair only
 	 *
 	 * @param leftOnly
+	 * 		if local only
 	 *
-	 * @return
+	 * @return always this
 	 */
 	@NotNull
 	@SuppressWarnings("unchecked")
@@ -294,7 +304,7 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Gets the double version of this reference
 	 *
-	 * @return
+	 * @return the version double
 	 */
 	public Double getVersion()
 	{
@@ -305,8 +315,9 @@ public class WebReference<J extends WebReference>
 	 * Sets the double version of this reference
 	 *
 	 * @param version
+	 * 		the version of the reference
 	 *
-	 * @return
+	 * @return Always this
 	 */
 	@NotNull
 	@SuppressWarnings("unchecked")
@@ -320,9 +331,11 @@ public class WebReference<J extends WebReference>
 	 * Compares two references to each other on sort order
 	 *
 	 * @param o1
+	 * 		Compares
 	 * @param o2
+	 * 		Copmares
 	 *
-	 * @return
+	 * @return 0,-1,or 1
 	 */
 	@Override
 	public int compare(WebReference o1, WebReference o2)
@@ -340,10 +353,15 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Default Sort Order
 	 * <p>
-	 * 0 - Root (JQuery) 5 - Core 10 - Core Accompanied 15 - Stand Alone Components 20 - Complex Components 500k - Default 600k -
-	 * Atmosphere Reserved
+	 * 0 - Root (JQuery)
+	 * 5 - Core
+	 * 10 - Core Accompanied
+	 * 15 - Stand Alone Components
+	 * 20 - Complex Components
+	 * 500k - Default
+	 * 600k -  Atmosphere Reserved
 	 *
-	 * @return
+	 * @return The current sort order
 	 */
 	public Integer getSortOrder()
 	{
@@ -357,9 +375,9 @@ public class WebReference<J extends WebReference>
 	 * Atmosphere Reserved
 	 * <p>
 	 *
-	 * @param sortOrder
+	 * @param sortOrder The sort order to apply
 	 *
-	 * @return
+	 * @return Always this
 	 */
 	@NotNull
 	@SuppressWarnings("unchecked")
@@ -373,7 +391,7 @@ public class WebReference<J extends WebReference>
 	 * Returns either the local or remote reference depending on configuration
 	 * <p>
 	 *
-	 * @return
+	 * @return Always this
 	 */
 	@Override
 	@JsonProperty("reference")
@@ -418,7 +436,8 @@ public class WebReference<J extends WebReference>
 		}
 		if (isUseVersionIdentifier())
 		{
-			sb.append("?v=" + Double.toString(version));
+			sb.append("?v=")
+			  .append(Double.toString(version));
 		}
 
 		return sb.toString();
@@ -427,7 +446,7 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Whether or not to return the local reference or the remote reference
 	 *
-	 * @return
+	 * @return Always this
 	 */
 	@JsonProperty("local")
 	public static boolean isIsLocal()
@@ -438,7 +457,7 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Sets whether this reference should be local or remote
 	 *
-	 * @param isLocal
+	 * @param isLocal If local references must be used
 	 */
 	public static void setIsLocal(boolean isLocal)
 	{
@@ -448,7 +467,7 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Gets the physical local reference
 	 *
-	 * @return
+	 * @return The local reference
 	 */
 	public String getLocalReference()
 	{
@@ -458,12 +477,12 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Sets the physical local reference
 	 *
-	 * @param localReference
+	 * @param localReference The local reference
 	 *
-	 * @return
+	 * @return Always this
 	 */
 	@NotNull
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "UnusedReturnValue"})
 	public J setLocalReference(String localReference)
 	{
 		setLeft(localReference);
@@ -474,9 +493,9 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Renders the actual URL String
 	 *
-	 * @param sb
+	 * @param sb The string builder
 	 *
-	 * @return
+	 * @return The url to build
 	 */
 	private StringBuilder renderUrlString(StringBuilder sb)
 	{
@@ -504,7 +523,7 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Gets the physical remote reference
 	 *
-	 * @return
+	 * @return The remote reference
 	 */
 	public String getRemoteReference()
 	{
@@ -514,12 +533,12 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Sets the remote physical reference
 	 *
-	 * @param remoteReference
+	 * @param remoteReference The remote reference
 	 *
-	 * @return
+	 * @return Always this
 	 */
 	@NotNull
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "UnusedReturnValue"})
 	public J setRemoteReference(String remoteReference)
 	{
 		setRight(remoteReference);
@@ -530,8 +549,9 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Specifies if the remote has a min file
 	 *
-	 * @return
+	 * @return if minify with remote reference is allowed
 	 */
+	@SuppressWarnings("WeakerAccess")
 	public boolean isCanMinifyAtRemote()
 	{
 		return canMinifyAtRemote;
@@ -540,8 +560,9 @@ public class WebReference<J extends WebReference>
 	/**
 	 * If the version number should be appended for caching
 	 *
-	 * @return
+	 * @return if version identification is enabled
 	 */
+	@SuppressWarnings("WeakerAccess")
 	public static boolean isUseVersionIdentifier()
 	{
 		return useVersionIdentifier;
@@ -550,7 +571,7 @@ public class WebReference<J extends WebReference>
 	/**
 	 * If the version number should be appended for caching
 	 *
-	 * @param useVersionIdentifier
+	 * @param useVersionIdentifier If version identification is enabled
 	 */
 	public static void setUseVersionIdentifier(boolean useVersionIdentifier)
 	{
@@ -560,12 +581,12 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Specifies if the remote has a min file
 	 *
-	 * @param canMinifyAtRemote
+	 * @param canMinifyAtRemote If verifying on remote is allowed
 	 *
-	 * @return
+	 * @return Always this
 	 */
 	@NotNull
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "UnusedReturnValue"})
 	public J setCanMinifyAtRemote(boolean canMinifyAtRemote)
 	{
 		this.canMinifyAtRemote = canMinifyAtRemote;
@@ -575,7 +596,7 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Return the priority of the reference
 	 *
-	 * @return
+	 * @return The current priority
 	 */
 	public RequirementsPriority getPriority()
 	{
@@ -585,9 +606,9 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Sets the priority of the reference
 	 *
-	 * @param priority
+	 * @param priority The given priority to apply
 	 *
-	 * @return
+	 * @return Always this
 	 */
 	@NotNull
 	@SuppressWarnings("unchecked")
@@ -600,7 +621,7 @@ public class WebReference<J extends WebReference>
 	/**
 	 * If this reference is a cordova reference, e.g. does it render in the dynamic site loader
 	 *
-	 * @return
+	 * @ if cordova is required
 	 */
 	public boolean isCordovaRequired()
 	{
@@ -610,9 +631,9 @@ public class WebReference<J extends WebReference>
 	/**
 	 * If this reference is a cordova reference, e.g. does it render in the dynamic site loader
 	 *
-	 * @param cordovaRequired
+	 * @param cordovaRequired If cordova is requierd
 	 *
-	 * @return
+	 * @return Always this
 	 */
 	@NotNull
 	@SuppressWarnings("unchecked")
@@ -625,7 +646,7 @@ public class WebReference<J extends WebReference>
 	/**
 	 * A specified class name that can identify these classes on the html
 	 *
-	 * @return
+	 * @return A name to apply to the "class" attribute
 	 */
 	public String getSpecifiedClassName()
 	{
@@ -635,7 +656,7 @@ public class WebReference<J extends WebReference>
 	/**
 	 * A specified class name that can identify these classes on the html
 	 *
-	 * @param specifiedClassName
+	 * @param specifiedClassName A class string to add
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
@@ -663,7 +684,7 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Gets the name of this reference
 	 *
-	 * @return
+	 * @return the name of this reference
 	 */
 	public String getName()
 	{
@@ -673,9 +694,9 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Sets the name of this reference
 	 *
-	 * @param name
+	 * @param name The name of this reference
 	 *
-	 * @return
+	 * @return Always this
 	 */
 	@NotNull
 	@SuppressWarnings("unchecked")
@@ -683,5 +704,36 @@ public class WebReference<J extends WebReference>
 	{
 		this.name = name;
 		return (J) this;
+	}
+
+	/**
+	 * Returns any additional items in the tag that should be rendered
+	 *
+	 * @return The set
+	 */
+	@NotNull
+	public Set<String> getAdditionalOptions()
+	{
+		if (additionalOptions == null)
+		{
+			additionalOptions = new LinkedHashSet<>();
+		}
+		return additionalOptions;
+	}
+
+	/**
+	 * Sets the options to something specific
+	 *
+	 * @param additionalOptions
+	 * 		The options to add to the tag
+	 *
+	 * @return The tag
+	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public WebReference<J> setAdditionalOptions(Set<String> additionalOptions)
+	{
+		this.additionalOptions = additionalOptions;
+		return this;
 	}
 }

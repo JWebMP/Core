@@ -256,8 +256,7 @@ public class FileTemplates
 			}
 			catch (FileNotFoundException ex)
 			{
-				LOG.log(Level.SEVERE, "[Error]-[unable to find template file];[TemplateFile]-[" + templateName + "];[TemplatePath]-[" + referenceClass.getResource(templateName)
-				                                                                                                                                      .getPath() + "]", ex);
+				LOG.log(Level.SEVERE, "[Error]-[unable to find template file];[TemplateFile]-[" + templateName + "];[TemplatePath]-[" + referenceClass.getResource(templateName).getPath() + "]", ex);
 			}
 			catch (IOException ex)
 			{

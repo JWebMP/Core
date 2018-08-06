@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 import com.google.inject.name.Names;
@@ -162,16 +163,31 @@ public class JWebMPSiteBinder
 	@Override
 	public void onBind(GuiceSiteInjectorModule module)
 	{
+		log.fine("Bound HttpServletResponse.class");
+		log.fine("Bound HttpServletRequest.class");
+		log.fine("Bound HttpSession.class");
+
 		log.fine("Bound UserAgentStringParser.class");
 		module.bind(UserAgentStringParser.class)
 		      .toInstance(userAgentParser);
+		log.fine("Bound ReadableUserAgent.class");
+		module.bind(ReadableUserAgent.class)
+		      .toProvider(() ->
+		                  {
+			                  HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
+			                  String headerInformation = request.getHeader("User-Agent");
+			                  ReadableUserAgent agent = GuiceContext.get(UserAgentStringParser.class)
+			                                                        .parse(headerInformation);
+			                  return agent;
+		                  })
+		      .in(RequestScoped.class);
+
 		log.fine("Bound AjaxResponse.class");
 		module.bind(AjaxResponse.class)
 		      .in(RequestScoped.class);
 		log.fine("Bound AjaxCall.class");
 		module.bind(AjaxCall.class)
 		      .in(RequestScoped.class);
-
 		//Bind Local Storage
 		log.fine("Bound Map.class with @Named(LocalStorage)");
 		module.bind(Map.class)

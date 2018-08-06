@@ -28,6 +28,7 @@ import javax.validation.constraints.NotNull;
  * @version 1.0
  * @since 2014/12/09
  */
+@SuppressWarnings("unused")
 public class JavascriptReference
 		extends WebReference<JavascriptReference>
 {
@@ -72,6 +73,7 @@ public class JavascriptReference
 	 * @param localReference
 	 * 		The local reference
 	 * @param priority
+	 * 		The priority to apply
 	 */
 	@SuppressWarnings("")
 	public JavascriptReference(String name, Double version, String localReference, RequirementsPriority priority)
@@ -133,6 +135,7 @@ public class JavascriptReference
 	 * @param sortOrder
 	 * 		Default Sort Order
 	 * @param priority
+	 * 		The priority to apply
 	 */
 	@SuppressWarnings("")
 	public JavascriptReference(String name, Double version, String localReference, String remoteReference, Integer sortOrder, RequirementsPriority priority)
@@ -145,7 +148,7 @@ public class JavascriptReference
 	/**
 	 * If this reference should render with defer
 	 *
-	 * @return
+	 * @return If defer is enabled
 	 */
 	public boolean isDefer()
 	{
@@ -156,19 +159,28 @@ public class JavascriptReference
 	 * If this reference should render with defer
 	 *
 	 * @param defer
+	 * 		If defer is enabled
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
 	public JavascriptReference setDefer(boolean defer)
 	{
 		this.defer = defer;
+		if (defer)
+		{
+			getAdditionalOptions().add("defer");
+		}
+		else
+		{
+			getAdditionalOptions().remove("defer");
+		}
 		return this;
 	}
 
 	/**
-	 * If this reference should render with asycn
+	 * If this reference should render with asyc
 	 *
-	 * @return
+	 * @return If async is enabled
 	 */
 	public boolean isAsync()
 	{
@@ -179,14 +191,23 @@ public class JavascriptReference
 	 * Sets if this reference should render async
 	 *
 	 * @param async
+	 * 		If async is enabled
 	 *
-	 * @return
+	 * @return This
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
 	public JavascriptReference setAsync(boolean async)
 	{
 		this.async = async;
+		if (async)
+		{
+			getAdditionalOptions().add("async");
+		}
+		else
+		{
+			getAdditionalOptions().remove("async");
+		}
 		return this;
 	}
 }

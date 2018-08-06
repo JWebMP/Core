@@ -29,8 +29,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @param <J>
  * 		This type
  */
-public class DivSimple<J>
-		extends Div<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, DivSimple<J>>
+public class DivSimple<J extends DivSimple<J>>
+		extends Div<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 {
 	/**
 	 * Constructs a new simple div
