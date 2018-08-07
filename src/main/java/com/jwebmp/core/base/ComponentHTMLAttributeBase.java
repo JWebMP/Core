@@ -219,7 +219,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	@SuppressWarnings("all")
 	public boolean isRenderIDAttibute()
 	{
-		if (!renderIDAttibute || (this instanceof NoIDTag))
+		if (!renderIDAttibute || NoIDTag.class.isAssignableFrom(getClass()))
 		{
 			return false;
 		}
