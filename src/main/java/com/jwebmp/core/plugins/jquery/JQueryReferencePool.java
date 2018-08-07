@@ -27,9 +27,10 @@ public enum JQueryReferencePool
 	PersistJS(new JavascriptReference("PersistJS", 1.0, "persist-js/persist-all-min.js", -10).setPriority(RequirementsPriority.Top_Shelf)),
 
 	JQuery(new JQueryReference()),
-	JQueryV2(new JavascriptReference("JQuery", 2.24, "bower_components/jquery/dist/jquery.js", "https://code.jquery.com/jquery-2.2.4.js").setPriority(RequirementsPriority.First)),
+	JQueryV2(new JavascriptReference("JQuery", 3.31, "bower_components/jquery/dist/jquery.min.js", "https://code.jquery.com/jquery-3.3.1.js").setPriority(
+			RequirementsPriority.First)),
 
-	JQueryV3(new JavascriptReference("Jquery3", 3.1, "bower_components/jquery-3/dist/jquery.min.js", "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js", 0,
+	JQueryV3(new JavascriptReference("Jquery3", 3.31, "bower_components/jquery/dist/jquery.min.js", "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js", 0,
 	                                 RequirementsPriority.First).setCordovaRequired(true)),
 
 	JQueryMigrate(new JQueryMigrateReference()),
