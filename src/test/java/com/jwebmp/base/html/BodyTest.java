@@ -68,7 +68,7 @@ public class BodyTest
 				"<html>\n" +
 				"\t<body id=\"body\">\n" +
 				"\t\t<!-- meh -->\n" +
-				"\t\t<script src=\"bower_components/jquery-3/dist/jquery.min.js\" type=\"text/javascript\"></script>\n" +
+				"\t\t<script src=\"bower_components/jquery/dist/jquery.min.js\" type=\"text/javascript\"></script>\n" +
 				"\t\t<script src=\"jwscr\" type=\"application/javascript\"></script>\n" +
 				"\t\t<script src=\"jwjs\" type=\"application/javascript\"></script>\n" +
 				"\t</body>\n" +

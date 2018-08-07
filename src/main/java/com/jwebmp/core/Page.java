@@ -664,6 +664,7 @@ public class Page<J extends Page<J>>
 			addVariablesScriptToPage();
 			configurePage();
 		}
+		super.preConfigure();
 		setConfigured(true);
 	}
 

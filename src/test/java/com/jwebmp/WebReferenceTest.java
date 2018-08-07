@@ -59,7 +59,7 @@ public class WebReferenceTest
 		WebReference.sort(w);
 		System.out.println(w);
 
-		String expected = "[bower_components/jquery/dist/jquery.js, javascript/jwebswing/ajax-enabler.js]";
+		String expected = "[bower_components/jquery/dist/jquery.min.js, javascript/jwebswing/ajax-enabler.js]";
 		String result = w.toString();
 
 		Assertions.assertEquals(expected, result);

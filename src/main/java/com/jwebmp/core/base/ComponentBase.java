@@ -607,7 +607,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 				return getClass().getCanonicalName()
 				                 .replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE);
 			}
-			return getClass().getSimpleName()
+			return getClass().getName()
 			                 .replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE);
 		}
 		catch (NullPointerException npe)
