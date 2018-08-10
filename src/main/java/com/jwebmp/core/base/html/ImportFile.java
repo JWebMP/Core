@@ -26,6 +26,7 @@ import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
+import javax.validation.constraints.NotNull;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,6 +45,9 @@ public class ImportFile<J extends ImportFile<J>>
 		implements BodyChildren, ParagraphChildren
 {
 
+	/**
+	 * Field serialVersionUID
+	 */
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The actual name for the template
@@ -53,12 +57,12 @@ public class ImportFile<J extends ImportFile<J>>
 	/**
 	 * Constructs a new instance of an imported file via a stream
 	 *
-	 * @param templateName
-	 * @param inputStream
+	 * @param templateName The name of the template
+	 * @param inputStream The given input stream to read from
 	 *
-	 * @throws java.io.IOException
+	 * @throws java.io.IOException In case of anything
 	 */
-	public ImportFile(String templateName, InputStream inputStream) throws IOException
+	public ImportFile(@NotNull String templateName, @NotNull InputStream inputStream) throws IOException
 	{
 		super(ComponentTypes.Comment);
 		this.templateName = templateName;
@@ -74,12 +78,54 @@ public class ImportFile<J extends ImportFile<J>>
 		FileTemplates.setTemplateScript(templateName, sb);
 	}
 
+	/**
+	 * Builds up the HTML for this component and all it's children - Does not perform Pre Configure or Pre Render Use GetHTML() to
+	 * perform a
+	 * pre configure and render
+	 * <p>
+	 * Executes the following methods in order
+	 * <p>
+	 * (1)preRenderHTML - removed. Placed into toString()
+	 * <p>
+	 * (2)renderBeforeTag
+	 * <p>
+	 * (3)renderAdditionalInnerHTMLBeforeChildren
+	 * <p>
+	 * (4)renderAttributeHTML
+	 * <p>
+	 * (5)renderAdditionalInnerHTMLAfterChildren.
+	 * <p>
+	 * (5)postRenderHTML
+	 * <p>
+	 *
+	 * @param tabCount
+	 * 		Indentation depth
+	 * 		<p>
+	 *
+	 * @return The HTML
+	 */
 	@Override
+	@NotNull
 	protected StringBuilder renderHTML(int tabCount)
 	{
 		return FileTemplates.renderTemplateScripts(templateName);
 	}
 
+	/**
+	 * @return hash-int
+	 */
+	@Override
+	public int hashCode()
+	{
+		return templateName.hashCode();
+	}
+
+	/**
+	 * Method equals ...
+	 *
+	 * @param o of type Object
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object o)
 	{
@@ -95,25 +141,16 @@ public class ImportFile<J extends ImportFile<J>>
 		{
 			return false;
 		}
-
 		ImportFile<?> that = (ImportFile<?>) o;
-
 		return getTemplateName().equals(that.getTemplateName());
-	}
-
-	@Override
-	public int hashCode()
-	{
-		int result = super.hashCode();
-		result = 31 * result + getTemplateName().hashCode();
-		return result;
 	}
 
 	/**
 	 * Returns the template name for this file
 	 *
-	 * @return
+	 * @return The name of this template
 	 */
+	@SuppressWarnings("WeakerAccess")
 	public String getTemplateName()
 	{
 		return templateName;

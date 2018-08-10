@@ -6,6 +6,7 @@ import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class AjaxCallTest
@@ -18,6 +19,7 @@ public class AjaxCallTest
 		call.setComponent(new CSSComponent("TestComponent")
 		{
 			@Override
+			@NotNull
 			protected StringBuilder renderHTML(int tabCount)
 			{
 				return super.renderHTML(tabCount);

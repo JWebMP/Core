@@ -227,23 +227,6 @@ public interface IComponentHierarchyBase<C extends GlobalChildren, J extends Com
 	J setTiny(boolean tiny);
 
 	/**
-	 * Pre-Configure the children tree and extracts the JSON
-	 *
-	 * @return
-	 */
-	@Override
-	String toString();
-
-	/**
-	 * Returns the HTML with the specified tab count
-	 *
-	 * @param tabCount
-	 *
-	 * @return Indented HTML
-	 */
-	String toString(Integer tabCount);
-
-	/**
 	 * Adds a class name to the class list
 	 * <p>
 	 *
@@ -283,7 +266,7 @@ public interface IComponentHierarchyBase<C extends GlobalChildren, J extends Com
 	 *
 	 * @return
 	 */
-	J addClass(ICSSClassName className);
+	J addClass(ICssClassName className);
 
 	/**
 	 * Returns a complete list of all class names associated with this component

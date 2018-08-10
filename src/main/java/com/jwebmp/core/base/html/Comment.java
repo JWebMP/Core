@@ -25,6 +25,8 @@ import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.utilities.TextUtilities;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Defines a basic comment line
  *
@@ -60,6 +62,7 @@ public class Comment<J extends Comment<J>>
 	 * @return A customized string for comments
 	 */
 	@Override
+	@NotNull
 	protected StringBuilder renderHTML(int tabCount)
 	{
 		if (getText(0).length() == 0)

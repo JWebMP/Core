@@ -621,7 +621,7 @@ public class WebReference<J extends WebReference>
 	/**
 	 * If this reference is a cordova reference, e.g. does it render in the dynamic site loader
 	 *
-	 * @ if cordova is required
+	 * if cordova is required
 	 */
 	public boolean isCordovaRequired()
 	{

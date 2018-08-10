@@ -23,6 +23,7 @@ import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
@@ -82,6 +83,20 @@ public class DocumentType<J extends DocumentType<J>>
 	}
 
 	/**
+	 * Method for the attribute handling, Empty in the HTML base
+	 *
+	 * @param sb
+	 * 		The string builder to append attributes to
+	 *
+	 * @return A complete string for the attribute
+	 */
+	@Override
+	protected @NotNull StringBuilder renderAttributes(StringBuilder sb)
+	{
+		return new StringBuilder();
+	}
+
+	/**
 	 * Renders the DTD Clause
 	 *
 	 * @param outputHtml
@@ -89,6 +104,7 @@ public class DocumentType<J extends DocumentType<J>>
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public String toString(boolean outputHtml)
 	{
 		return toString();
@@ -113,6 +129,7 @@ public class DocumentType<J extends DocumentType<J>>
 	 * @return
 	 */
 	@Override
+	@NotNull
 	public String toString(Integer tabCount)
 	{
 		return toString();

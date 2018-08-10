@@ -25,6 +25,7 @@ import com.jwebmp.core.base.ComponentBase;
  * @author GedMarc
  * @since Sep 26, 2016
  */
+@SuppressWarnings("UnusedReturnValue")
 public interface IComponentHTMLBase<J extends ComponentBase>
 {
 
@@ -38,61 +39,56 @@ public interface IComponentHTMLBase<J extends ComponentBase>
 
 	/**
 	 * Whether or not this component should render a closing tag
-	 * <p>
-	 *
-	 * @return
+	 * @return if this tag has a closing tag
 	 */
 	Boolean isClosingTag();
 
 	/**
 	 * If a new line for the closing tag is required.
-	 * Also sets new line for raw text to false
 	 *
-	 * @return
+	 * @return If a new line is required
 	 */
 	Boolean isNewLineForClosingTag();
 
 	/**
 	 * If a new line for the closing tag is required.
-	 * Also sets new line for raw text to false
 	 *
-	 * @param newLineForClosingTag
+	 * @param newLineForClosingTag A new line is required for this objects closing tag
+	 * @return Always this object
 	 */
 	J setNewLineForClosingTag(boolean newLineForClosingTag);
 
 	/**
 	 * Sets if there must be a new line before the raw text starts
 	 *
-	 * @return
+	 * @return If newline for raw text must be generated
 	 */
+	@SuppressWarnings("unused")
 	Boolean isNewLineForRawText();
 
 	/**
 	 * Whether or not this component should render a closing tag
-	 * <p>
 	 *
 	 * @param noCloseTag
 	 * 		Whether or not to render the closing tag
 	 *
-	 * @return This Class
+	 * @return Always this object
 	 */
 	J setClosingTag(boolean noCloseTag);
 
 	/**
 	 * Sets the number of tab indents for this component
 	 *
-	 * @param currentTabIndents
-	 *
-	 * @return This Class
+	 * @param currentTabIndents the tab indentation count
+	 * @return Always this object
 	 */
 	J setCurrentTabIndents(int currentTabIndents);
 
 	/**
 	 * Sets if this component must place a new line before the raw text
 	 *
-	 * @param newLineForRawText
-	 *
-	 * @return This Class
+	 * @param newLineForRawText If there should be a new line for raw text
+	 * @return Always this object
 	 */
 	J setNewLineForRawText(boolean newLineForRawText);
 
@@ -113,8 +109,6 @@ public interface IComponentHTMLBase<J extends ComponentBase>
 	 *
 	 * @param outputHtml
 	 * 		Dummy holder for specifying HTML output
-	 * 		<p>
-	 *
 	 * @return The class and the associated ID and children count
 	 */
 	String toString(boolean outputHtml);
@@ -125,7 +119,7 @@ public interface IComponentHTMLBase<J extends ComponentBase>
 	 * @param tabCount
 	 * 		The number of tabs to indent by
 	 *
-	 * @return
+	 * @return The sting with the given tab counts
 	 */
 	String toString(Integer tabCount);
 

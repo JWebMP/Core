@@ -23,6 +23,8 @@ import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.utilities.StaticStrings;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Extention of a component with no HTML. Renders the ID and all references to it as a class name instead of ID form
  * <p>
@@ -59,6 +61,7 @@ public abstract class CSSComponent<J extends CSSComponent<J>>
 	 * @return
 	 */
 	@Override
+	@NotNull
 	protected StringBuilder renderHTML(int tabCount)
 	{
 		return new StringBuilder();

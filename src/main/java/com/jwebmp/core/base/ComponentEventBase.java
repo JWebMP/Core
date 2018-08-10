@@ -330,6 +330,14 @@ public class ComponentEventBase<F extends GlobalFeatures & Serializable, E exten
 		return super.hashCode();
 	}
 
+	/**
+	 * Method equals ...
+	 *
+	 * @param obj
+	 * 		of type Object
+	 *
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj)
 	{

@@ -27,8 +27,8 @@ import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
 import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
-import com.jwebmp.core.base.interfaces.ICSSClassName;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
+import com.jwebmp.core.base.interfaces.ICssClassName;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
@@ -394,7 +394,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	@Override
 	@NotNull
 	@SuppressWarnings("unchecked")
-	public J addClass(@NotNull ICSSClassName className)
+	public J addClass(@NotNull ICssClassName className)
 	{
 		if (!getClasses().contains(className.toString()))
 		{

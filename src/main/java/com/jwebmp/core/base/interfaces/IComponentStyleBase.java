@@ -20,9 +20,13 @@ import com.jwebmp.core.base.ComponentBase;
 import com.jwebmp.core.htmlbuilder.css.CSSImpl;
 import com.jwebmp.core.htmlbuilder.css.enumarations.CSSTypes;
 
+import javax.validation.constraints.NotNull;
 import java.util.Map;
 
+@SuppressWarnings("unused")
 /**
+ * A slim view of a component featuring the styling methods
+ *
  * @param <J>
  * 		Returns this class
  *
@@ -35,85 +39,88 @@ public interface IComponentStyleBase<J extends ComponentBase>
 	/**
 	 * Adds a CSS object to the component with the given type
 	 *
-	 * @param cssItem
+	 * @param type The CSS Type
+	 * @param cssItem Thee CSS Item to add
+	 *
+	 * @return Always this object
 	 */
 	J addCSSEntry(CSSTypes type, CSSImpl cssItem);
 
 	/**
-	 * Adds a CSS object to the component with the given type
+	 * Removes a CSS item for the component
+	 *
+	 * @param cssType The CSS Type Entry to remove
+	 *
+	 * @return Always this object
 	 */
-	J removeCSSEntry(CSSTypes type);
+	J removeCSSEntry(CSSTypes cssType);
 
 	/**
 	 * Gets the CSS Object used for styling
 	 *
-	 * @return
+	 * @return The CSS Implementation Object for default (CSSTypes.None)
 	 */
 	CSSImpl getCss();
 
 	/**
 	 * Sets the CSS Object used for styling
 	 *
-	 * @param css
+	 * @param css The CSS Implementation object to add
+	 * @return Always this object
 	 */
 	J setCss(CSSImpl css);
 
 	/**
 	 * Returns the currently assigned CSS Name
 	 *
-	 * @return
+	 * @return The currently assigned css Name for this objects style
 	 */
 	String getCssName();
 
 	/**
 	 * Sets the currently assigned CSS Name
 	 *
-	 * @param cssName
+	 * @param cssName Sets the CSS Name to a valid value
+	 * @return Always this object
 	 */
 	J setCssName(String cssName);
 
 	/**
 	 * Returns the current HashMap of all CSS Entries for the component
 	 *
-	 * @return
+	 * @return The CSS Types and Implementations for each type for this object
 	 */
 	Map<CSSTypes, CSSImpl> getCssTypeHashMap();
 
 	/**
-	 * Renders the component CSS at the specified tab count with the
-	 * &lt;style&gt; tag
+	 * Renders the component CSS at the specified tab count with the &lt;style&gt; tag
 	 * <p>
 	 *
 	 * @param tabCount
 	 * 		Tab indentation for the SQL
-	 * 		<p>
-	 *
 	 * @return The Component CSS
 	 */
 	StringBuilder renderCss(int tabCount);
 
 	/**
-	 * Renders the component CSS at the specified tab count with the
-	 * &lt;style&gt; tag This includes everything from this classes CSS, to the
-	 * CSS for each field. It will also populate the lower level
+	 * Renders the component CSS at the specified tab count with the &lt;style&gt; tag This includes everything from this classes CSS, to
+	 * the CSS for each field. It will also populate the lower level
 	 * child CSS for fields in this class
 	 * <p>
 	 *
 	 * @param tabCount
 	 * 		Tab indentation for the SQL
 	 * @param renderOpening
-	 * 		Whether or not to render the opening XML tag
-	 * 		for a CSS style
+	 * 		Whether or not to render the opening XML tag for a CSS style
 	 * @param renderInQuotations
-	 * 		Sets whether to render the CSS Fields in
-	 * 		Quotations
+	 * 		Sets whether to render the CSS Fields in Quotations
 	 * @param isAjaxCall
-	 * 		Sets whether the CSS is being called from an
-	 * 		AJAX call
+	 * 		Sets whether the CSS is being called from an AJAX call
 	 * 		<p>
 	 *
 	 * @return The Component CSS
 	 */
+	@NotNull
 	StringBuilder renderCss(int tabCount, boolean renderOpening, boolean renderInQuotations, boolean isAjaxCall);
 
 	/**

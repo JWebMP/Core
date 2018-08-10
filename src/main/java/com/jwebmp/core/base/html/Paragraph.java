@@ -29,6 +29,8 @@ import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.utilities.TextUtilities;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * This class defines a paragraph as per<p>
  * <p>
@@ -89,6 +91,7 @@ public class Paragraph<J extends Paragraph<J>>
 	}
 
 	@Override
+	@NotNull
 	protected StringBuilder renderHTML(int tabCount)
 	{
 		if (isTextOnly())
