@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
  * @author Marc Magon
  * @since 2017/03/13
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "unused"})
 @PluginInformation(pluginName = "JQuery",
 		pluginUniqueName = "jquery",
 		pluginDescription = "jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal " +
@@ -39,7 +39,6 @@ import javax.validation.constraints.NotNull;
 		                    "jQuery has " +
 		                    "changed the way that millions of people write JavaScript.",
 		pluginVersion = "3.1.1",
-		pluginDependancyUniqueIDs = "",
 		pluginCategories = "javascript,jquery, framework, jwebswing",
 		pluginSubtitle = " jQuery has changed the way that millions of people write JavaScript",
 		pluginGitUrl = "https://github.com/GedMarc/JWebSwing",
@@ -53,43 +52,42 @@ import javax.validation.constraints.NotNull;
 public class JQueryPageConfigurator
 		implements IPageConfigurator
 {
+	/**
+	 * Field required
+	 */
 	private static boolean required;
 	/**
 	 * If the page must render JQuery 3
 	 */
 	private static boolean jquery3 = true;
+	/**
+	 * Field renderMigrate
+	 */
 	private static boolean renderMigrate = false;
 
+	/**
+	 * Constructor JQueryPageConfigurator creates a new JQueryPageConfigurator instance.
+	 */
 	public JQueryPageConfigurator()
 	{
-
-	}
-
-	/**
-	 * Whether or not this page must render JQuery 3
-	 *
-	 * @param jquery3
-	 * 		if jquery 3 must be rendered
-	 */
-	public static void setJquery3(boolean jquery3)
-	{
-		JQueryPageConfigurator.jquery3 = jquery3;
+		//No config required
 	}
 
 	/**
 	 * If the migrate plugin must be rendered. Default false
 	 *
-	 * @return
+	 * @return if migrate reference should be used
 	 */
 	public static boolean isRenderMigrate()
 	{
-		return renderMigrate;
+		return JQueryPageConfigurator.renderMigrate;
 	}
 
 	/**
 	 * If the migrate plugin must be rendered. Default false
 	 *
 	 * @param renderMigrate
+	 * 		If migrate should be used
 	 */
 	public static void setRenderMigrate(boolean renderMigrate)
 	{
@@ -99,17 +97,18 @@ public class JQueryPageConfigurator
 	/**
 	 * Returns if JQuery is configured as required for the page
 	 *
-	 * @return
+	 * @return If the reference is required
 	 */
 	public static boolean isRequired()
 	{
-		return required;
+		return JQueryPageConfigurator.required;
 	}
 
 	/**
 	 * Sets the component/feature/hierarchy as JQuery required
 	 *
 	 * @param required
+	 * 		If is required
 	 */
 	@SuppressWarnings("unchecked")
 	public static void setRequired(boolean required)
@@ -117,6 +116,14 @@ public class JQueryPageConfigurator
 		JQueryPageConfigurator.required = required;
 	}
 
+	/**
+	 * Method configure ...
+	 *
+	 * @param page
+	 * 		of type Page
+	 *
+	 * @return Page
+	 */
 	@NotNull
 	@Override
 	public Page configure(Page page)
@@ -127,17 +134,17 @@ public class JQueryPageConfigurator
 			page.getBody()
 			    .addJavaScriptReference(JQueryReferencePool.PersistJS.getJavaScriptReference());
 		}
-		if (required)
+		if (JQueryPageConfigurator.required)
 		{
 			if (page.getBrowser() != null)
 			{
-				page = configureForInternetExplorer(page);
+				configureForInternetExplorer(page);
 			}
-			else if (isJquery3())
+			else if (JQueryPageConfigurator.isJquery3())
 			{
 				page.getBody()
 				    .addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
-				if (renderMigrate)
+				if (JQueryPageConfigurator.renderMigrate)
 				{
 					page.getBody()
 					    .addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
@@ -145,7 +152,7 @@ public class JQueryPageConfigurator
 			}
 			else
 			{
-				if (renderMigrate)
+				if (JQueryPageConfigurator.renderMigrate)
 				{
 					page.getBody()
 					    .addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
@@ -156,6 +163,15 @@ public class JQueryPageConfigurator
 		return page;
 	}
 
+	/**
+	 * Method configureForInternetExplorer ...
+	 *
+	 * @param page
+	 * 		of type Page
+	 *
+	 * @return Page
+	 */
+	@SuppressWarnings("UnusedReturnValue")
 	private Page configureForInternetExplorer(Page page)
 	{
 		if (page.getBrowser()
@@ -178,11 +194,11 @@ public class JQueryPageConfigurator
 		{
 			page.getBody()
 			    .removeJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());
-			if (isJquery3())
+			if (JQueryPageConfigurator.isJquery3())
 			{
 				page.getBody()
 				    .addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
-				if (renderMigrate)
+				if (JQueryPageConfigurator.renderMigrate)
 				{
 					page.getBody()
 					    .addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
@@ -201,13 +217,29 @@ public class JQueryPageConfigurator
 	/**
 	 * Whether or not this page must render JQuery 3
 	 *
-	 * @return
+	 * @return If jquery 3 must be rendered - always rendered now
 	 */
 	public static boolean isJquery3()
 	{
-		return jquery3;
+		return JQueryPageConfigurator.jquery3;
 	}
 
+	/**
+	 * Whether or not this page must render JQuery 3
+	 *
+	 * @param jquery3
+	 * 		if jquery 3 must be rendered
+	 */
+	public static void setJquery3(boolean jquery3)
+	{
+		JQueryPageConfigurator.jquery3 = jquery3;
+	}
+
+	/**
+	 * Sort order for startup, Default 100.
+	 *
+	 * @return the sort order never null
+	 */
 	@Override
 	public Integer sortOrder()
 	{
@@ -215,6 +247,25 @@ public class JQueryPageConfigurator
 		return Integer.MAX_VALUE - 100;
 	}
 
+	/**
+	 * Method hashCode ...
+	 *
+	 * @return int
+	 */
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
+	}
+
+	/**
+	 * Method equals ...
+	 *
+	 * @param obj
+	 * 		of type Object
+	 *
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj)
 	{

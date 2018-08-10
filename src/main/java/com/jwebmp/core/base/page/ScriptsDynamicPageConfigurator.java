@@ -18,16 +18,32 @@ import com.jwebmp.core.utilities.StaticStrings;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * Configures the dynamic script insertions that run last into the page
+ *
+ * @author GedMarc
+ * @since 2018/08/10
+ */
 @SuppressWarnings("unused")
-public
-class ScriptsDynamicPageConfigurator
+public class ScriptsDynamicPageConfigurator
 		implements IPageConfigurator
 {
+	/**
+	 * Constructor ScriptsDynamicPageConfigurator creates a new ScriptsDynamicPageConfigurator instance.
+	 */
 	public ScriptsDynamicPageConfigurator()
 	{
 		//No config required
 	}
 
+	/**
+	 * Configures the given page for the parameters
+	 *
+	 * @param page
+	 * 		The page incoming
+	 *
+	 * @return The original page incoming or a new page, never null
+	 */
 	@NotNull
 	@Override
 	@SuppressWarnings("unchecked")
@@ -83,7 +99,11 @@ class ScriptsDynamicPageConfigurator
 				if (JQueryPageConfigurator.isRequired())
 				{
 					addable.add(getSiteLoaderScript());
-					addable.add(getJavascriptScript(page));
+					Script ss = getJavascriptScript(page);
+					if (ss != null)
+					{
+						addable.add(ss);
+					}
 				}
 				Script javaScript = getJavascriptScript(page);
 				if (javaScript != null)
@@ -99,12 +119,25 @@ class ScriptsDynamicPageConfigurator
 		return page;
 	}
 
+	/**
+	 * Sort order for startup, Default 100.
+	 *
+	 * @return the sort order never null
+	 */
 	@Override
 	public Integer sortOrder()
 	{
 		return Integer.MAX_VALUE;
 	}
 
+	/**
+	 * Method getCss returns the CSS for the page
+	 *
+	 * @param page
+	 * 		of type Page
+	 *
+	 * @return Style<?>
+	 */
 	private Style<?> getCss(Page page)
 	{
 		CSSComposer comp = new CSSComposer();
@@ -124,6 +157,14 @@ class ScriptsDynamicPageConfigurator
 		return style;
 	}
 
+	/**
+	 * Method getDynamicReference ...
+	 *
+	 * @param urlLocation
+	 * 		of type String
+	 *
+	 * @return Script<?>
+	 */
 	private Script<?> getDynamicReference(String urlLocation)
 	{
 		Script<?> jwScript = new Script();
@@ -132,6 +173,11 @@ class ScriptsDynamicPageConfigurator
 		return jwScript;
 	}
 
+	/**
+	 * Method getSiteLoaderScript returns the siteLoaderScript of this ScriptsDynamicPageConfigurator object.
+	 *
+	 * @return the siteLoaderScript (type Script<?>) of this ScriptsDynamicPageConfigurator object.
+	 */
 	private Script<?> getSiteLoaderScript()
 	{
 		FileTemplates.getFileTemplate(JWScriptServlet.class, JWScriptServlet.FILE_TEMPLATE_NAME, "siteloader");
@@ -145,7 +191,15 @@ class ScriptsDynamicPageConfigurator
 		return new Script();
 	}
 
-	private Script getJavascriptScript(Page page)
+	/**
+	 * Method getJavascriptScript ...
+	 *
+	 * @param page
+	 * 		of type Page
+	 *
+	 * @return Script
+	 */
+	private Script getJavascriptScript(Page<?> page)
 	{
 		StringBuilder js = page.renderJavascript();
 		if (!js.toString()
@@ -161,7 +215,8 @@ class ScriptsDynamicPageConfigurator
 				{
 					continue;
 				}
-				output.append("\t\t\t" + line)
+				output.append("\t\t\t")
+				      .append(line)
 				      .append(page.getNewLine());
 			}
 
@@ -170,7 +225,15 @@ class ScriptsDynamicPageConfigurator
 		return null;
 	}
 
-	private Script getAngularScript(Page page)
+	/**
+	 * Method getAngularScript ...
+	 *
+	 * @param page
+	 * 		of type Page
+	 *
+	 * @return Script
+	 */
+	private Script getAngularScript(Page<?> page)
 	{
 		StringBuilder jsAngular = page.getAngular()
 		                              .renderAngularJavascript(page);
@@ -183,9 +246,17 @@ class ScriptsDynamicPageConfigurator
 		return new Script();
 	}
 
-	private Script newScript(String contents)
+	/**
+	 * Method newScript ...
+	 *
+	 * @param contents
+	 * 		of type String
+	 *
+	 * @return Script
+	 */
+	private Script<?> newScript(String contents)
 	{
-		Script s = new Script();
+		Script<?> s = new Script();
 		s.addAttribute(ScriptAttributes.Type, StaticStrings.HTML_HEADER_JAVASCRIPT);
 		s.setText(contents);
 		return s;

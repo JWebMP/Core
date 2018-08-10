@@ -29,8 +29,14 @@ public class AngularMessagesModule
 		implements IAngularModule<AngularMessagesModule>
 {
 
+	/**
+	 * Field serialVersionUID
+	 */
 	private static final long serialVersionUID = 1L;
-	public static boolean Enabled = false;
+	/**
+	 * Field messsgesModuleEnabled
+	 */
+	public static boolean messsgesModuleEnabled = false;
 
 	/**
 	 * Constructs a module with this name that always sorts default
@@ -40,15 +46,29 @@ public class AngularMessagesModule
 		super("ngMessages");
 	}
 
+	/**
+	 * Overwrite the render function
+	 *
+	 * @return Null
+	 *
+	 * @see com.jwebmp.core.base.angular.AngularReferenceBase#renderFunction()
+	 */
 	@Override
 	public String renderFunction()
 	{
 		return null;
 	}
 
+	/**
+	 * If this module is enabled by default
+	 *
+	 * @return if the module is enabled
+	 *
+	 * @see com.jwebmp.core.base.angular.services.IAngularModule#enabled()
+	 */
 	@Override
 	public boolean enabled()
 	{
-		return Enabled;
+		return AngularMessagesModule.messsgesModuleEnabled;
 	}
 }

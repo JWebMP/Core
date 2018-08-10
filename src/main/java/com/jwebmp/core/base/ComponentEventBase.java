@@ -132,7 +132,7 @@ public class ComponentEventBase<F extends GlobalFeatures & Serializable, E exten
 		                             .getComponentType()
 		                             .equals(ComponentTypes.Event))
 		{
-			LOG.log(Level.WARNING, "Tried to add a non event to the event collection");
+			ComponentEventBase.LOG.log(Level.WARNING, "Tried to add a non event to the event collection");
 		}
 		else
 		{
@@ -324,6 +324,11 @@ public class ComponentEventBase<F extends GlobalFeatures & Serializable, E exten
 		return allJs;
 	}
 
+	/**
+	 * Method hashCode ...
+	 *
+	 * @return int
+	 */
 	@Override
 	public int hashCode()
 	{

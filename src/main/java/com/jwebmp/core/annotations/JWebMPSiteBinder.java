@@ -23,7 +23,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
-import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 import com.google.inject.name.Names;
@@ -48,7 +47,6 @@ import net.sf.uadetector.service.UADetectorServiceFactory;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.ServiceLoader;
-import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -66,7 +64,13 @@ public class JWebMPSiteBinder
 	 */
 	private static final UserAgentStringParser userAgentParser = UADetectorServiceFactory.getResourceModuleParser();
 
+	/**
+	 * Field localStorageTypeLiteral
+	 */
 	private static TypeLiteral<Map<String, String>> localStorageTypeLiteral = new TypeLiteral<Map<String, String>>() {};
+	/**
+	 * Field sessionStorageTypeLiteral
+	 */
 	private static TypeLiteral<Map<String, String>> sessionStorageTypeLiteral = new TypeLiteral<Map<String, String>>() {};
 
 	/**
@@ -80,7 +84,7 @@ public class JWebMPSiteBinder
 	/**
 	 * gets the location of the JavaScript Servlet
 	 *
-	 * @return
+	 * @return The set script location for javascripts
 	 */
 	public static String getJavaScriptLocation()
 	{
@@ -90,7 +94,7 @@ public class JWebMPSiteBinder
 	/**
 	 * Gets the current Ajax location
 	 *
-	 * @return
+	 * @return The ajax screipt location
 	 */
 	public static String getAjaxScriptLocation()
 	{
@@ -100,7 +104,7 @@ public class JWebMPSiteBinder
 	/**
 	 * Gets the CSS Location
 	 *
-	 * @return
+	 * @return The CSS Location
 	 */
 	public static String getCSSLocation()
 	{
@@ -110,7 +114,7 @@ public class JWebMPSiteBinder
 	/**
 	 * Gets the angular script location
 	 *
-	 * @return
+	 * @return The Angular Scripts location
 	 */
 	public static String getAngularScriptLocation()
 	{
@@ -120,7 +124,7 @@ public class JWebMPSiteBinder
 	/**
 	 * Returns the angular data location
 	 *
-	 * @return
+	 * @return The Angular Data Scripts
 	 */
 	public static String getAngularDataLocation()
 	{
@@ -130,7 +134,7 @@ public class JWebMPSiteBinder
 	/**
 	 * The JW Script Location
 	 *
-	 * @return
+	 * @return the site script location
 	 */
 	public static String getJWScriptLocation()
 	{
@@ -146,7 +150,8 @@ public class JWebMPSiteBinder
 	 */
 	public static String getDataBindUrl(ComponentBase component)
 	{
-		return getDataLocation().replace(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY) + "?component=" + component.getID();
+		return JWebMPSiteBinder.getDataLocation()
+		                       .replace(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY) + "?component=" + component.getID();
 	}
 
 	/**
@@ -159,67 +164,69 @@ public class JWebMPSiteBinder
 		return StaticStrings.DATA_LOCATION;
 	}
 
+	/**
+	 * Method onBind ...
+	 *
+	 * @param module
+	 * 		of type GuiceSiteInjectorModule
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onBind(GuiceSiteInjectorModule module)
 	{
-		log.fine("Bound HttpServletResponse.class");
-		log.fine("Bound HttpServletRequest.class");
-		log.fine("Bound HttpSession.class");
+		JWebMPSiteBinder.log.fine("Bound HttpServletResponse.class");
+		JWebMPSiteBinder.log.fine("Bound HttpServletRequest.class");
+		JWebMPSiteBinder.log.fine("Bound HttpSession.class");
 
-		log.fine("Bound UserAgentStringParser.class");
+		JWebMPSiteBinder.log.fine("Bound UserAgentStringParser.class");
 		module.bind(UserAgentStringParser.class)
-		      .toInstance(userAgentParser);
-		log.fine("Bound ReadableUserAgent.class");
+		      .toInstance(JWebMPSiteBinder.userAgentParser);
+		JWebMPSiteBinder.log.fine("Bound ReadableUserAgent.class");
 		module.bind(ReadableUserAgent.class)
 		      .toProvider(() ->
 		                  {
 			                  HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
 			                  String headerInformation = request.getHeader("User-Agent");
-			                  ReadableUserAgent agent = GuiceContext.get(UserAgentStringParser.class)
-			                                                        .parse(headerInformation);
-			                  return agent;
+			                  return GuiceContext.get(UserAgentStringParser.class)
+			                                     .parse(headerInformation);
 		                  })
 		      .in(RequestScoped.class);
 
-		log.fine("Bound AjaxResponse.class");
+		JWebMPSiteBinder.log.fine("Bound AjaxResponse.class");
 		module.bind(AjaxResponse.class)
 		      .in(RequestScoped.class);
-		log.fine("Bound AjaxCall.class");
+		JWebMPSiteBinder.log.fine("Bound AjaxCall.class");
 		module.bind(AjaxCall.class)
 		      .in(RequestScoped.class);
 		//Bind Local Storage
-		log.fine("Bound Map.class with @Named(LocalStorage)");
+		JWebMPSiteBinder.log.fine("Bound Map.class with @Named(LocalStorage)");
 		module.bind(Map.class)
 		      .annotatedWith(Names.named("LocalStorage"))
 		      .toProvider(() ->
-		                  {
-			                  return GuiceContext.getInstance(SessionStorageProperties.class)
-			                                     .getLocalStorage();
-
-		                  });
-		module.bind(localStorageTypeLiteral)
+				                  GuiceContext.getInstance(SessionStorageProperties.class)
+				                              .getLocalStorage());
+		module.bind(JWebMPSiteBinder.localStorageTypeLiteral)
 		      .annotatedWith(Names.named("LocalStorage"))
 		      .toProvider(() ->
 				                  GuiceContext.getInstance(SessionStorageProperties.class)
 				                              .getLocalStorage());
 
 		//Bind Session Storage
-		log.fine("Bound Map.class with @Named(SessionStorage)");
+		JWebMPSiteBinder.log.fine("Bound Map.class with @Named(SessionStorage)");
 		module.bind(Map.class)
 		      .annotatedWith(Names.named("SessionStorage"))
 		      .toProvider(() ->
 				                  GuiceContext.getInstance(SessionStorageProperties.class)
 				                              .getSessionStorage());
-		module.bind(sessionStorageTypeLiteral)
+		module.bind(JWebMPSiteBinder.sessionStorageTypeLiteral)
 		      .annotatedWith(Names.named("SessionStorage"))
 		      .toProvider(() -> GuiceContext.getInstance(SessionStorageProperties.class)
 		                                    .getSessionStorage());
-		log.fine("Bound SessionStorageProperties.class");
+		JWebMPSiteBinder.log.fine("Bound SessionStorageProperties.class");
 		module.bind(SessionStorageProperties.class)
 		      .in(SessionScoped.class);
 
-		log.fine("Bound Page.class");
+		JWebMPSiteBinder.log.fine("Bound Page.class");
 		final ServiceLoader<IPage> pages = ServiceLoader.load(IPage.class);
 		module.bind(Page.class)
 		      .toProvider(() ->
@@ -227,7 +234,7 @@ public class JWebMPSiteBinder
 			                  if (!pages.iterator()
 			                            .hasNext())
 			                  {
-				                  log.log(Level.WARNING, "Returning blank page since no class was found that extends page or matches the given url");
+				                  JWebMPSiteBinder.log.log(Level.WARNING, "Returning blank page since no class was found that extends page or matches the given url");
 				                  return new Page();
 			                  }
 			                  IPage outputPage = null;
@@ -243,7 +250,7 @@ public class JWebMPSiteBinder
 			                  {
 				                  if (!Page.class.isAssignableFrom(outputPage.getClass()))
 				                  {
-					                  log.severe("Page Binding IPage Services must Extend Page.class");
+					                  JWebMPSiteBinder.log.severe("Page Binding IPage Services must Extend Page.class");
 					                  return new Page();
 				                  }
 				                  return (Page) outputPage;
@@ -252,17 +259,17 @@ public class JWebMPSiteBinder
 		                  })
 		      .in(RequestScoped.class);
 
-		log.fine("Bound ObjectMapper.class @Named(JSON)");
+		JWebMPSiteBinder.log.fine("Bound ObjectMapper.class @Named(JSON)");
 		module.bind(ObjectMapper.class)
 		      .annotatedWith(Names.named("JSON"))
 		      .toProvider(this::getJsonMapper)
 		      .in(Singleton.class);
-		log.fine("Bound ObjectMapper.class @Named(JS)");
+		JWebMPSiteBinder.log.fine("Bound ObjectMapper.class @Named(JS)");
 		module.bind(ObjectMapper.class)
 		      .annotatedWith(Names.named("JS"))
 		      .toProvider(this::getJsonMapper)
 		      .in(Singleton.class);
-		log.fine("Bound ObjectMapper.class @Named(JSFunction)");
+		JWebMPSiteBinder.log.fine("Bound ObjectMapper.class @Named(JSFunction)");
 		module.bind(ObjectMapper.class)
 		      .annotatedWith(Names.named("JSFunction"))
 		      .toProvider(this::getJsonMapper)
@@ -274,47 +281,58 @@ public class JWebMPSiteBinder
 			                           .getAnnotation(PageConfiguration.class);
 			if (pc == null)
 			{
-				log.log(Level.SEVERE, "Couldn't Find Page Configuration on IPage Object {0}", new Object[]{page.getClass().getCanonicalName()});
+				JWebMPSiteBinder.log.log(Level.SEVERE, "Couldn't Find Page Configuration on IPage Object {0}", new Object[]{page.getClass().getCanonicalName()});
 			}
 			else
 			{
-				String url = pc.url();
-				url = "(" + url + StaticStrings.QUERY_PARAMETERS_REGEX + ")";
-				module.serveRegex$(url)
+				StringBuilder url = new StringBuilder(pc.url());
+				url.insert(0, "(")
+				   .append(url)
+				   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
+				   .append(")");
+				module.serveRegex$(url.toString())
 				      .with(JWebSwingServlet.class);
-				log.log(Level.CONFIG, "Serving Page URL [{0}] with [{1}]", new Object[]{pc.url(), page.getClass().getCanonicalName()});
+				JWebMPSiteBinder.log.log(Level.CONFIG, "Serving Page URL [{0}] with [{1}]", new Object[]{pc.url(), page.getClass().getCanonicalName()});
 			}
 		}
 
 		module.serveRegex$("(" + StaticStrings.JAVASCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(JavaScriptServlet.class);
-		log.log(Level.INFO, "Serving JavaScripts at {0}", StaticStrings.JAVASCRIPT_LOCATION);
+		JWebMPSiteBinder.log.log(Level.INFO, "Serving JavaScripts at {0}", StaticStrings.JAVASCRIPT_LOCATION);
 
 		module.serveRegex$("(" + StaticStrings.AJAX_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(AjaxReceiverServlet.class);
-		log.log(Level.INFO, "Serving Ajax at {0}", StaticStrings.AJAX_SCRIPT_LOCATION);
+		JWebMPSiteBinder.log.log(Level.INFO, "Serving Ajax at {0}", StaticStrings.AJAX_SCRIPT_LOCATION);
 
 		module.serveRegex$("(" + StaticStrings.CSS_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(CSSServlet.class);
-		log.log(Level.INFO, "Serving CSS at {0}", StaticStrings.CSS_LOCATION);
+		JWebMPSiteBinder.log.log(Level.INFO, "Serving CSS at {0}", StaticStrings.CSS_LOCATION);
 
 		module.serveRegex$("(" + StaticStrings.ANGULAR_DATA_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(AngularDataServlet.class);
-		log.log(Level.INFO, "Serving Angular Data at " + StaticStrings.ANGULAR_DATA_LOCATION);
+		JWebMPSiteBinder.log.log(Level.INFO, "Serving Angular Data at " + StaticStrings.ANGULAR_DATA_LOCATION);
 
 		module.serveRegex$("(" + StaticStrings.ANGULAR_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(AngularServlet.class);
-		log.log(Level.INFO, "Serving Angular JavaScript at {0}", StaticStrings.ANGULAR_SCRIPT_LOCATION);
+		JWebMPSiteBinder.log.log(Level.INFO, "Serving Angular JavaScript at {0}", StaticStrings.ANGULAR_SCRIPT_LOCATION);
 
 		module.serveRegex$("(" + StaticStrings.DATA_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(DataServlet.class);
-		log.log(Level.INFO, "Serving Data at {0}", StaticStrings.DATA_LOCATION);
+		JWebMPSiteBinder.log.log(Level.INFO, "Serving Data at {0}", StaticStrings.DATA_LOCATION);
 
 		module.serveRegex$("(" + StaticStrings.JW_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(JWScriptServlet.class);
-		log.log(Level.INFO, "Serving JW Default Script at {0}", StaticStrings.JW_SCRIPT_LOCATION);
+		JWebMPSiteBinder.log.log(Level.INFO, "Serving JW Default Script at {0}", StaticStrings.JW_SCRIPT_LOCATION);
 	}
 
+	/**
+	 * Method findPage ...
+	 *
+	 * @param next
+	 * 		of type IPage
+	 *
+	 * @return IPage
+	 */
 	private IPage findPage(IPage next)
 	{
 		try
@@ -343,20 +361,25 @@ public class JWebMPSiteBinder
 			}
 			else
 			{
-				log.log(Level.FINER, "Not the right page, moving on");
+				JWebMPSiteBinder.log.log(Level.FINER, "Not the right page, moving on");
 			}
 		}
 		catch (NullPointerException npe)
 		{
-			log.log(Level.SEVERE, "Unable to process page : " + next + " due to null pointer", npe);
+			JWebMPSiteBinder.log.log(Level.SEVERE, "Unable to process page : " + next + " due to null pointer", npe);
 		}
 		catch (Exception npe)
 		{
-			log.log(Level.SEVERE, "Unable to process page : " + next, npe);
+			JWebMPSiteBinder.log.log(Level.SEVERE, "Unable to process page : " + next, npe);
 		}
 		return null;
 	}
 
+	/**
+	 * Method getJsonMapper returns the jsonMapper of this JWebMPSiteBinder object.
+	 *
+	 * @return the jsonMapper (type ObjectMapper) of this JWebMPSiteBinder object.
+	 */
 	private ObjectMapper getJsonMapper()
 	{
 		ObjectMapper jsonObjectMapper = new ObjectMapper();

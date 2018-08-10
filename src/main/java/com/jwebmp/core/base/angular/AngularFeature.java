@@ -44,11 +44,15 @@ public class AngularFeature
 		implements HTMLFeatures
 {
 
+	/**
+	 * Field serialVersionUID
+	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The logger for angular
 	 */
+	@SuppressWarnings("unused")
 	private static final java.util.logging.Logger log = LogFactory.getInstance()
 	                                                              .getLogger("AngularFeature");
 	/**
@@ -72,16 +76,17 @@ public class AngularFeature
 	/**
 	 * The linked page for this feature
 	 */
-	private final Page page;
+	private final Page<?> page;
 
 	/**
 	 * Adds on the Angular ComponentFeatureBase to the application to allow full data binding
 	 *
 	 * @param component
+	 * 		The page to be used
 	 */
-	public AngularFeature(Page component)
+	public AngularFeature(Page<?> component)
 	{
-		this(component, appName, controllerName);
+		this(component, AngularFeature.appName, AngularFeature.controllerName);
 	}
 
 	/**
@@ -94,6 +99,7 @@ public class AngularFeature
 	 * @param controllerName
 	 * 		The name of the controller
 	 */
+	@SuppressWarnings("WeakerAccess")
 	public AngularFeature(Page page, String applicationName, String controllerName)
 	{
 		super("AngularFeature");
@@ -109,30 +115,23 @@ public class AngularFeature
 		jwAngularController = new JWAngularController();
 		if (applicationName != null && !applicationName.isEmpty())
 		{
-			setAppName(applicationName);
+			AngularFeature.setAppName(applicationName);
 		}
 		if (controllerName != null && !controllerName.isEmpty())
 		{
-			setControllerName(controllerName);
+			AngularFeature.setControllerName(controllerName);
 		}
 		setRenderAfterLoad(false);
 	}
 
 	/**
-	 * Returns the page associated with this feature
+	 * Renders the JavaScript for this Builder
 	 *
-	 * @return
-	 */
-	public Page getPage()
-	{
-		return page;
-	}
-
-	/**
-	 * Returns an empty stringbuilder to not render any actual javascript
+	 * @return An empty string builder
 	 *
-	 * @return
+	 * @see com.jwebmp.core.base.ComponentFeatureBase#renderJavascript()
 	 */
+	@NotNull
 	@Override
 	public StringBuilder renderJavascript()
 	{
@@ -140,7 +139,7 @@ public class AngularFeature
 	}
 
 	/**
-	 * Compile the template
+	 * @see com.jwebmp.core.base.ComponentFeatureBase#preConfigure()
 	 */
 	@Override
 	public void preConfigure()
@@ -148,29 +147,40 @@ public class AngularFeature
 		if (!isConfigured())
 		{
 			getPage().getBody()
-			         .addAttribute(AngularAttributes.ngApp, getAppName());
+			         .addAttribute(AngularAttributes.ngApp, AngularFeature.getAppName());
 			getPage().getBody()
-			         .addAttribute(AngularAttributes.ngController, controllerName + " as jwCntrl");
+			         .addAttribute(AngularAttributes.ngController, AngularFeature.controllerName + " as jwCntrl");
 		}
 		super.preConfigure();
 	}
 
 	/**
+	 * Returns the page associated with this feature
+	 *
+	 * @return The associated page
+	 */
+	public Page<?> getPage()
+	{
+		return page;
+	}
+
+	/**
 	 * Returns the application name associated
 	 *
-	 * @return
+	 * @return The angular application name
 	 */
 	public static String getAppName()
 	{
-		return appName;
+		return AngularFeature.appName;
 	}
 
 	/**
 	 * Sets the angular application name associated
 	 *
 	 * @param appName
+	 * 		Sets the app name
 	 */
-	public static final void setAppName(String appName)
+	public static void setAppName(String appName)
 	{
 		AngularFeature.appName = appName;
 	}
@@ -197,7 +207,7 @@ public class AngularFeature
 			             .put("PACE_TRACK_END;", new StringBuilder(StaticStrings.STRING_EMPTY));
 		}
 		FileTemplates.getTemplateVariables()
-		             .put("JW_APP_NAME", new StringBuilder(getAppName()));
+		             .put("JW_APP_NAME", new StringBuilder(AngularFeature.getAppName()));
 		FileTemplates.getTemplateVariables()
 		             .put("JW_MODULES", new StringBuilder(compileModules()));
 		FileTemplates.getTemplateVariables()
@@ -207,7 +217,7 @@ public class AngularFeature
 		FileTemplates.getTemplateVariables()
 		             .put("JW_DIRECTIVES", new StringBuilder(compileDirectives()));
 		FileTemplates.getTemplateVariables()
-		             .put("JW_APP_CONTROLLER", new StringBuilder(getControllerName()));
+		             .put("JW_APP_CONTROLLER", new StringBuilder(AngularFeature.getControllerName()));
 		FileTemplates.getTemplateVariables()
 		             .put("JW_WATCHERS;", compileWatchers());
 
@@ -226,7 +236,7 @@ public class AngularFeature
 	/**
 	 * compiles the global JW Angular Module, where the separate modules get listed inside of JWAngularModule
 	 *
-	 * @return
+	 * @return The rendered modules
 	 */
 	@NotNull
 	private StringBuilder compileModules()
@@ -241,7 +251,7 @@ public class AngularFeature
 	/**
 	 * Builds up the directives from all the present children
 	 *
-	 * @return
+	 * @return The rendered factories
 	 */
 	@NotNull
 	private StringBuilder compileFactories()
@@ -252,23 +262,10 @@ public class AngularFeature
 		return output;
 	}
 
-	private void buildString(StringBuilder output, ServiceLoader<? extends IAngularDefaultService> loader)
-	{
-		Set<IAngularDefaultService> sortedList = new TreeSet<>();
-		loader.forEach(sortedList::add);
-		sortedList.forEach(item ->
-		                   {
-			                   String function = item.renderFunction();
-			                   StringBuilder configurations = FileTemplates.compileTemplate(item.getReferenceName(), function);
-			                   configurations.append(StaticStrings.STRING_NEWLINE_TEXT + StaticStrings.STRING_TAB);
-			                   output.append(configurations);
-		                   });
-	}
-
 	/**
 	 * Builds up the directives from all the present children
 	 *
-	 * @return
+	 * @return The rendered configurations
 	 */
 	@NotNull
 	private StringBuilder compileConfigurations()
@@ -282,7 +279,7 @@ public class AngularFeature
 	/**
 	 * Builds up the directives from all the present children
 	 *
-	 * @return
+	 * @return The returned directives
 	 */
 	@NotNull
 	private StringBuilder compileDirectives()
@@ -296,23 +293,29 @@ public class AngularFeature
 	/**
 	 * Gets the controller name for this controller
 	 *
-	 * @return
+	 * @return The angular controller name
 	 */
 	public static String getControllerName()
 	{
-		return controllerName;
+		return AngularFeature.controllerName;
 	}
 
 	/**
 	 * Sets the controller name for this application
 	 *
 	 * @param controllerName
+	 * 		Sets the controller name
 	 */
-	public static final void setControllerName(String controllerName)
+	public static void setControllerName(String controllerName)
 	{
 		AngularFeature.controllerName = controllerName;
 	}
 
+	/**
+	 * Adds variable watchers
+	 *
+	 * @return StringBuilder
+	 */
 	private StringBuilder compileWatchers()
 	{
 		StringBuilder output = new StringBuilder();
@@ -325,7 +328,7 @@ public class AngularFeature
 	/**
 	 * Creates the controller insertion
 	 *
-	 * @return
+	 * @return The insertions under the global app controller
 	 */
 	@NotNull
 	private StringBuilder compileControllerInsertions()
@@ -338,7 +341,6 @@ public class AngularFeature
 			output.append(StaticStrings.STRING_COMMNA);
 			getPage().getAngular()
 			         .getControllerInsertions()
-			         .stream()
 			         .forEach(a -> output.append(a)
 			                             .append(StaticStrings.STRING_COMMNA));
 			output.deleteCharAt(output.length() - 1);
@@ -349,7 +351,7 @@ public class AngularFeature
 	/**
 	 * Builds up the directives from all the present children
 	 *
-	 * @return
+	 * @return The rendered controllers
 	 */
 	@NotNull
 	private StringBuilder compileControllers()
@@ -371,20 +373,47 @@ public class AngularFeature
 		return output;
 	}
 
+	/**
+	 * Method buildString loads the string builder for the given loader
+	 *
+	 * @param output
+	 * 		of type StringBuilder
+	 * @param loader
+	 * 		of type ServiceLoader<? extends IAngularDefaultService>
+	 */
+	private void buildString(StringBuilder output, ServiceLoader<? extends IAngularDefaultService> loader)
+	{
+		Set<IAngularDefaultService> sortedList = new TreeSet<>();
+		loader.forEach(sortedList::add);
+		sortedList.forEach(item ->
+		                   {
+			                   String function = item.renderFunction();
+			                   StringBuilder configurations = FileTemplates.compileTemplate(item.getReferenceName(), function);
+			                   configurations.append(StaticStrings.STRING_NEWLINE_TEXT + StaticStrings.STRING_TAB);
+			                   output.append(configurations);
+		                   });
+	}
+
+	/**
+	 * @see com.jwebmp.core.Feature#hashCode()
+	 */
 	@Override
 	public int hashCode()
 	{
 		return Objects.hash(super.hashCode(), getJwAngularApp(), getJwAngularController(), getPage());
 	}
 
+	/**
+	 * @see com.jwebmp.core.Feature#equals(Object)
+	 */
 	@Override
-	public boolean equals(Object o)
+	public boolean equals(Object obj)
 	{
-		return super.equals(o);
+		return super.equals(obj);
 	}
 
 	/**
-	 * Returns the JavaScript for this feature
+	 * Any work that needs to get done pre render
 	 */
 	@Override
 	public void assignFunctionsToComponent()
@@ -395,8 +424,9 @@ public class AngularFeature
 	/**
 	 * Returns the physical angular application in use
 	 *
-	 * @return
+	 * @return The assigned angular module
 	 */
+	@SuppressWarnings("WeakerAccess")
 	@NotNull
 	public final JWAngularModule getJwAngularApp()
 	{
@@ -406,8 +436,9 @@ public class AngularFeature
 	/**
 	 * Get the JW Angular Controller associated for this application
 	 *
-	 * @return
+	 * @return The global controller
 	 */
+	@SuppressWarnings("WeakerAccess")
 	@NotNull
 	public final JWAngularController getJwAngularController()
 	{

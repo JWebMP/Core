@@ -23,7 +23,6 @@ import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.Charset;
 
 /**
@@ -35,10 +34,19 @@ import java.nio.charset.Charset;
 public class JavaScriptServlet
 		extends JWDefaultServlet
 {
+	/**
+	 * Field scriptReplacement
+	 */
 	private static final String scriptReplacement = "JW_JAVASCRIPT";
 
+	/**
+	 * Field serialVersionUID
+	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * When to perform any commands
+	 */
 	@Override
 	public void perform()
 	{
@@ -50,13 +58,13 @@ public class JavaScriptServlet
 		{
 			page.preConfigure();
 		}
-		FileTemplates.removeTemplate(scriptReplacement);
-		FileTemplates.getFileTemplate(JavaScriptServlet.class, scriptReplacement, "javascriptScript");
+		FileTemplates.removeTemplate(JavaScriptServlet.scriptReplacement);
+		FileTemplates.getFileTemplate(JavaScriptServlet.class, JavaScriptServlet.scriptReplacement, "javascriptScript");
 		FileTemplates.getTemplateVariables()
-		             .put(scriptReplacement, page.renderJavascript());
-		StringBuilder scripts = FileTemplates.renderTemplateScripts(scriptReplacement);
+		             .put(JavaScriptServlet.scriptReplacement, page.renderJavascript());
+		StringBuilder scripts = FileTemplates.renderTemplateScripts(JavaScriptServlet.scriptReplacement);
 		writeOutput(scripts, StaticStrings.HTML_HEADER_JAVASCRIPT, Charset.forName("UTF-8"));
 		FileTemplates.getTemplateVariables()
-		             .remove(scriptReplacement);
+		             .remove(JavaScriptServlet.scriptReplacement);
 	}
 }

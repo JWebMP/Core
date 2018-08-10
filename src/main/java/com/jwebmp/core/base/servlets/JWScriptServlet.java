@@ -32,21 +32,34 @@ import java.util.logging.Logger;
 public class JWScriptServlet
 		extends JWDefaultServlet
 {
+	/**
+	 * Field FILE_TEMPLATE_NAME
+	 */
 	public static final String FILE_TEMPLATE_NAME = "jwscript";
-	private static final Logger LOG = LogFactory.getInstance()
+	/**
+	 * Field log
+	 */
+	@SuppressWarnings("unused")
+	private static final Logger log = LogFactory.getInstance()
 	                                            .getLogger("JWScriptServlet");
+	/**
+	 * Field serialVersionUID
+	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * When to perform any commands
+	 */
 	@Override
 	public void perform()
 	{
 		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
-		FileTemplates.getFileTemplate(JWScriptServlet.class, FILE_TEMPLATE_NAME, "siteloader");
+		FileTemplates.getFileTemplate(JWScriptServlet.class, JWScriptServlet.FILE_TEMPLATE_NAME, "siteloader");
 		FileTemplates.getTemplateVariables()
 		             .put("SITEADDRESSINSERT", new StringBuilder(request.getRequestURL()
 		                                                                .toString()
 		                                                                .replace("jwscr", "")));
-		StringBuilder output = FileTemplates.renderTemplateScripts(FILE_TEMPLATE_NAME);
+		StringBuilder output = FileTemplates.renderTemplateScripts(JWScriptServlet.FILE_TEMPLATE_NAME);
 		writeOutput(output, StaticStrings.HTML_HEADER_JAVASCRIPT, StaticStrings.UTF8_CHARSET);
 	}
 

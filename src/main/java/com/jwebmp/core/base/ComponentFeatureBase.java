@@ -236,7 +236,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 		if (!feature.getComponentType()
 		            .equals(ComponentTypes.Feature))
 		{
-			LOG.log(Level.WARNING, "Tried to add a non-feature to the feature collection");
+			ComponentFeatureBase.LOG.log(Level.WARNING, "Tried to add a non-feature to the feature collection");
 		}
 		else
 		{
@@ -567,6 +567,9 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 		return super.setTiny(tiny);
 	}
 
+	/**
+	 * Compile the template
+	 */
 	@Override
 	public void preConfigure()
 	{

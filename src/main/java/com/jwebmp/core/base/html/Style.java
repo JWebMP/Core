@@ -53,11 +53,15 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @version 1.0
  * @since 2013/11/12
  */
+@SuppressWarnings("MissingClassJavaDoc")
 public class Style<J extends Style<J>>
 		extends ComponentHierarchyBase<GlobalChildren, StyleAttributes, NoFeatures, NoEvents, J>
 		implements NoIDTag, HeadChildren, NoClassAttribute
 {
 
+	/**
+	 * Field serialVersionUID
+	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -70,10 +74,10 @@ public class Style<J extends Style<J>>
 	}
 
 	/**
-	 * Returns the raw CSS Data
+	 * Returns the raw CSS Data (getText shortcut)
 	 * <p>
 	 *
-	 * @return
+	 * @return The generated css
 	 */
 	public String getCSS()
 	{
@@ -85,12 +89,25 @@ public class Style<J extends Style<J>>
 	 * <p>
 	 *
 	 * @param cssString
+	 * 		The css String (raw txt)
 	 */
 	public void setCSS(String cssString)
 	{
 		setText(cssString);
 	}
 
+	/**
+	 * @see com.jwebmp.core.base.ComponentHierarchyBase#hashCode()
+	 */
+	@Override
+	public int hashCode()
+	{
+		return getText(0).hashCode();
+	}
+
+	/**
+	 * @see com.jwebmp.core.base.ComponentHierarchyBase#equals(Object)
+	 */
 	@Override
 	public boolean equals(Object o)
 	{
@@ -100,8 +117,10 @@ public class Style<J extends Style<J>>
 		}
 		if (Style.class.isAssignableFrom(o.getClass()))
 		{
-			return getText(0).equals(Style.class.cast(o)
-			                                    .getText(0));
+			return getText(0).toString()
+			                 .equals(((Style) o)
+					                         .getText(0)
+					                         .toString());
 		}
 		return false;
 	}

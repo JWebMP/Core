@@ -88,7 +88,8 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	/**
 	 * Construct a new component that will render a tag
 	 *
-	 * @param componentType The type of component
+	 * @param componentType
+	 * 		The type of component
 	 */
 	public ComponentHTMLBase(ComponentTypes componentType)
 	{
@@ -151,7 +152,8 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	/**
 	 * The actual logic of the before tag rendering
 	 *
-	 * @param tempStringBuilder The StringBuilder to be manipulated
+	 * @param tempStringBuilder
+	 * 		The StringBuilder to be manipulated
 	 *
 	 * @return The render before with the given tag
 	 */
@@ -170,7 +172,8 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	/**
 	 * The actual logic of the render text before children
 	 *
-	 * @param tempStringBuilder The current string builder
+	 * @param tempStringBuilder
+	 * 		The current string builder
 	 *
 	 * @return The modified StringBuilder with the text rendered before the children
 	 */
@@ -214,7 +217,8 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	/**
 	 * The actual logic of the render text after children
 	 *
-	 * @param tempStringBuilder The current StringBuilder
+	 * @param tempStringBuilder
+	 * 		The current StringBuilder
 	 *
 	 * @return The StringBuilder with the raw text appended
 	 */
@@ -233,7 +237,8 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	/**
 	 * The actual logic of the render before children
 	 *
-	 * @param tempStringBuilder The current string builder
+	 * @param tempStringBuilder
+	 * 		The current string builder
 	 *
 	 * @return The modified string builder with everything rendered before the children
 	 */
@@ -315,7 +320,8 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	/**
 	 * The actual logic of the children rendering
 	 *
-	 * @param tempStringBuilder The current string builder
+	 * @param tempStringBuilder
+	 * 		The current string builder
 	 *
 	 * @return The newly modified string builder
 	 */
@@ -344,82 +350,8 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	}
 
 	/**
-	 * Placeholder for children rendering.
-	 * The component tag base object will never render any children, it only renders this tag
-	 *
-	 * @return Something new to render at this phase in the generation
-	 */
-
-	protected StringBuilder renderChildren()
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the HTML for the given object
-	 * <p>
-	 *
-	 * @param outputHtml
-	 * 		Dummy holder for specifying HTML output
-	 * @return The class and the associated ID and children count
-	 */
-	@Override
-	@NotNull
-	public String toString(boolean outputHtml)
-	{
-		return toString(0);
-	}
-
-	/**
-	 * The actual logic and the rendering after children
-	 *
-	 * @param tempStringBuilder The current temp String Builder
-	 *
-	 * @return The modified or final temp string builder
-	 */
-	@NotNull
-	private StringBuilder renderAfterChildren(StringBuilder tempStringBuilder)
-	{
-		StringBuilder afterChildren = renderAfterChildren();
-		if (afterChildren != null && afterChildren.length() > 0)
-		{
-			tempStringBuilder.append(afterChildren);
-		}
-		return tempStringBuilder;
-	}
-
-	/**
-	 * Renders the given string after the children
-	 *
-	 * @return Custom HTML String to be inserted directly before this components tag
-	 */
-
-	protected StringBuilder renderAfterChildren()
-	{
-		return null;
-	}
-
-	/**
-	 * The actual rendering of the after tag
-	 *
-	 * @param tempStringBuilder
-	 * 		The current temp string builder
-	 *
-	 * @return The modified string for the tag
-	 */
-	@NotNull
-	private StringBuilder renderAfterTag(StringBuilder tempStringBuilder)
-	{
-		StringBuilder afterTag = renderAfterTag();
-		if (afterTag != null && afterTag.length() > 0)
-		{
-			tempStringBuilder.append(afterTag);
-		}
-		return tempStringBuilder;
-	}
-
-	/**
 	 * Whether or not this component should render a closing tag
+	 *
 	 * @return if this tag has a closing tag
 	 */
 	@Override
@@ -453,7 +385,9 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	/**
 	 * If a new line for the closing tag is required.
 	 *
-	 * @param newLineForClosingTag A new line is required for this objects closing tag
+	 * @param newLineForClosingTag
+	 * 		A new line is required for this objects closing tag
+	 *
 	 * @return Always this object
 	 */
 	@Override
@@ -496,6 +430,90 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	}
 
 	/**
+	 * Overrides this tag name
+	 * <p>
+	 *
+	 * @param tag
+	 * 		The tag to use instead of the default
+	 *
+	 * @return This Class
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setTag(String tag)
+	{
+		this.tag = tag;
+		return (J) this;
+	}
+
+	/**
+	 * Returns the HTML for the given object
+	 * <p>
+	 *
+	 * @param outputHtml
+	 * 		Dummy holder for specifying HTML output
+	 *
+	 * @return The class and the associated ID and children count
+	 */
+	@Override
+	@NotNull
+	public String toString(boolean outputHtml)
+	{
+		return toString(0);
+	}
+
+	/**
+	 * Returns this components HTML after configuration and pre-rendering
+	 *
+	 * @param tabCount
+	 * 		The number of tabs to indent by
+	 *
+	 * @return The sting with the given tab counts
+	 */
+	@Override
+	@NotNull
+	public String toString(Integer tabCount)
+	{
+		if (!isConfigured())
+		{
+			preConfigure();
+		}
+		return String.valueOf(renderHTML(tabCount));
+	}
+
+	/**
+	 * Placeholder for children rendering.
+	 * The component tag base object will never render any children, it only renders this tag
+	 *
+	 * @return Something new to render at this phase in the generation
+	 */
+
+	protected StringBuilder renderChildren()
+	{
+		return null;
+	}
+
+	/**
+	 * The actual logic and the rendering after children
+	 *
+	 * @param tempStringBuilder
+	 * 		The current temp String Builder
+	 *
+	 * @return The modified or final temp string builder
+	 */
+	@NotNull
+	private StringBuilder renderAfterChildren(StringBuilder tempStringBuilder)
+	{
+		StringBuilder afterChildren = renderAfterChildren();
+		if (afterChildren != null && afterChildren.length() > 0)
+		{
+			tempStringBuilder.append(afterChildren);
+		}
+		return tempStringBuilder;
+	}
+
+	/**
 	 * Gets the number of tabs to apply for this component currently
 	 *
 	 * @return The current number of tab indents
@@ -503,6 +521,70 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	protected int getCurrentTabIndents()
 	{
 		return currentTabIndents;
+	}
+
+	/**
+	 * Sets the number of tab indents for this component
+	 *
+	 * @param currentTabIndents
+	 * 		the tab indentation count
+	 *
+	 * @return Always this object
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setCurrentTabIndents(int currentTabIndents)
+	{
+		this.currentTabIndents = currentTabIndents;
+		return (J) this;
+	}
+
+	/**
+	 * Sets if this component must place a new line before the raw text
+	 *
+	 * @param newLineForRawText
+	 * 		If there should be a new line for raw text
+	 *
+	 * @return Always this object
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setNewLineForRawText(boolean newLineForRawText)
+	{
+		this.newLineForRawText = newLineForRawText;
+		return (J) this;
+	}
+
+	/**
+	 * Renders the given string after the children
+	 *
+	 * @return Custom HTML String to be inserted directly before this components tag
+	 */
+
+	protected StringBuilder renderAfterChildren()
+	{
+		return null;
+	}
+
+	/**
+	 * The actual rendering of the after tag
+	 *
+	 * @param tempStringBuilder
+	 * 		The current temp string builder
+	 *
+	 * @return The modified string for the tag
+	 */
+	@NotNull
+	private StringBuilder renderAfterTag(StringBuilder tempStringBuilder)
+	{
+		StringBuilder afterTag = renderAfterTag();
+		if (afterTag != null && afterTag.length() > 0)
+		{
+			tempStringBuilder.append(afterTag);
+		}
+		return tempStringBuilder;
 	}
 
 	/**
@@ -562,37 +644,6 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	}
 
 	/**
-	 * Sets the number of tab indents for this component
-	 *
-	 * @param currentTabIndents the tab indentation count
-	 * @return Always this object
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J setCurrentTabIndents(int currentTabIndents)
-	{
-		this.currentTabIndents = currentTabIndents;
-		return (J) this;
-	}
-
-	/**
-	 * Whether or not to close this tag as /. Also sets whether to display the closing tag as separate
-	 * <p>
-	 *
-	 * @return True if must close on the same line
-	 */
-	@NotNull
-	protected Boolean isInlineClosingTag()
-	{
-		if (inlineClosingTag == null)
-		{
-			inlineClosingTag = false;
-		}
-		return inlineClosingTag;
-	}
-
-	/**
 	 * Returns the current tab indentation for this object
 	 * <p>
 	 *
@@ -617,38 +668,6 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	}
 
 	/**
-	 * Sets if this component must place a new line before the raw text
-	 *
-	 * @param newLineForRawText If there should be a new line for raw text
-	 * @return Always this object
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J setNewLineForRawText(boolean newLineForRawText)
-	{
-		this.newLineForRawText = newLineForRawText;
-		return (J) this;
-	}
-
-	/**
-	 * Overrides this tag name
-	 * <p>
-	 *
-	 * @param tag
-	 * 		The tag to use instead of the default
-	 *
-	 * @return This Class
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public J setTag(String tag)
-	{
-		this.tag = tag;
-		return (J) this;
-	}
-
-	/**
 	 * Renders String content after this tag is rendered
 	 * <p>
 	 *
@@ -661,30 +680,13 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	}
 
 	/**
-	 * Returns this components HTML after configuration and pre-rendering
-	 *
-	 * @param tabCount
-	 * 		The number of tabs to indent by
-	 *
-	 * @return The sting with the given tab counts
-	 */
-	@Override
-	@NotNull
-	public String toString(Integer tabCount)
-	{
-		if (!isConfigured())
-		{
-			preConfigure();
-		}
-		return String.valueOf(renderHTML(tabCount));
-	}
-
-	/**
 	 * Only returns in-line text if the tag is not closed in line
 	 *
-	 * @param sb The current string builder
+	 * @param sb
+	 * 		The current string builder
 	 *
 	 * @return The input text if the tag is closing in line, or the actual inline text if the tag does stuff
+	 *
 	 * @see ComponentBase#getText(StringBuilder)
 	 */
 	@Override
@@ -699,8 +701,23 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	}
 
 	/**
-	 * Method hashCode ...
-	 * @return int
+	 * Whether or not to close this tag as /. Also sets whether to display the closing tag as separate
+	 * <p>
+	 *
+	 * @return True if must close on the same line
+	 */
+	@NotNull
+	protected Boolean isInlineClosingTag()
+	{
+		if (inlineClosingTag == null)
+		{
+			inlineClosingTag = false;
+		}
+		return inlineClosingTag;
+	}
+
+	/**
+	 * @see ComponentEventBase#hashCode()
 	 */
 	@Override
 	public int hashCode()
@@ -708,7 +725,9 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		return super.hashCode();
 	}
 
-	/** @see ComponentEventBase#equals(Object) */
+	/**
+	 * @see ComponentEventBase#equals(Object)
+	 */
 	@Override
 	public boolean equals(Object o)
 	{

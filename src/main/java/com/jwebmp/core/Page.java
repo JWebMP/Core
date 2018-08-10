@@ -86,7 +86,7 @@ public class Page<J extends Page<J>>
 	/**
 	 * The angular feature
 	 */
-	private AngularPageConfigurator angular;
+	private transient AngularPageConfigurator angular;
 
 	/**
 	 * If this page has already gone through initialization
@@ -465,6 +465,7 @@ public class Page<J extends Page<J>>
 			}
 			catch (Throwable T)
 			{
+				Page.log.log(Level.FINER, "Readable User Agent can't be fetched, returning default", T);
 				userAgent = new UserAgent(DeviceCategory.EMPTY, UserAgentFamily.FIREFOX, StaticStrings.STRING_EMPTY, StaticStrings.STRING_EMPTY, OperatingSystem.EMPTY,
 				                          StaticStrings.STRING_EMPTY, StaticStrings.STRING_EMPTY,
 				                          UserAgentType.BROWSER, StaticStrings.STRING_EMPTY, StaticStrings.STRING_EMPTY, VersionNumber.UNKNOWN);
@@ -479,6 +480,7 @@ public class Page<J extends Page<J>>
 	 * @param userAgent
 	 * 		Sets the referenced user agent
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull
 	public J setUserAgent(ReadableUserAgent userAgent)
@@ -561,23 +563,6 @@ public class Page<J extends Page<J>>
 			pageInitialized = true;
 		}
 		setInitialized(true);
-	}
-
-	private void configurePage()
-	{
-		ServiceLoader<IPageConfigurator> pageConfigurators = ServiceLoader.load(IPageConfigurator.class);
-		List<IPageConfigurator> sortedConfigurators = new ArrayList<>();
-		for (IPageConfigurator pageConfigurator : pageConfigurators)
-		{
-			sortedConfigurators.add(pageConfigurator);
-		}
-		Collections.sort(sortedConfigurators);
-		for (IPageConfigurator sortedConfigurator : sortedConfigurators)
-		{
-			log.log(Level.FINEST, "Loading IPageConfigurator - " + sortedConfigurator.getClass()
-			                                                                         .getSimpleName());
-			sortedConfigurator.configure(this);
-		}
 	}
 
 	/**
@@ -718,6 +703,23 @@ public class Page<J extends Page<J>>
 			{
 				getHead().add(variablesScript);
 			}
+		}
+	}
+
+	private void configurePage()
+	{
+		ServiceLoader<IPageConfigurator> pageConfigurators = ServiceLoader.load(IPageConfigurator.class);
+		List<IPageConfigurator> sortedConfigurators = new ArrayList<>();
+		for (IPageConfigurator pageConfigurator : pageConfigurators)
+		{
+			sortedConfigurators.add(pageConfigurator);
+		}
+		Collections.sort(sortedConfigurators);
+		for (IPageConfigurator sortedConfigurator : sortedConfigurators)
+		{
+			Page.log.log(Level.FINEST, "Loading IPageConfigurator - " + sortedConfigurator.getClass()
+			                                                                              .getSimpleName());
+			sortedConfigurator.configure(this);
 		}
 	}
 }

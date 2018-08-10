@@ -623,11 +623,11 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 			             }
 			             catch (ClassCastException cce)
 			             {
-				             log.log(Level.WARNING, "Incorrect Object Type, Perhaps JavaScriptPart?", cce);
+				             ComponentHierarchyBase.log.log(Level.WARNING, "Incorrect Object Type, Perhaps JavaScriptPart?", cce);
 			             }
 			             catch (Exception e)
 			             {
-				             log.log(Level.WARNING, "Unable to render angular object", e);
+				             ComponentHierarchyBase.log.log(Level.WARNING, "Unable to render angular object", e);
 			             }
 		             });
 	}
@@ -717,12 +717,25 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		return allJs;
 	}
 
+	/**
+	 * Method hashCode ...
+	 *
+	 * @return int
+	 */
 	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
 	}
 
+	/**
+	 * Method equals ...
+	 *
+	 * @param o
+	 * 		of type Object
+	 *
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object o)
 	{
@@ -742,7 +755,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 				}
 				catch (Exception e)
 				{
-					log.log(Level.SEVERE, "UUnable to destroy", e);
+					ComponentHierarchyBase.log.log(Level.SEVERE, "UUnable to destroy", e);
 				}
 			}
 		}
@@ -757,76 +770,6 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 			classes = null;
 		}
 		super.destroy();
-	}
-
-	/**
-	 * Renders each child
-	 *
-	 * @return
-	 */
-	@Override
-	@NotNull
-	protected StringBuilder renderChildren()
-	{
-		StringBuilder sb = new StringBuilder();
-		if (renderBeforeChildren() != null)
-		{
-			sb.append(renderBeforeChildren());
-		}
-		getChildren().forEach(child -> sb.append(getNewLine())
-		                                 .append(child.toString(isTiny() ? 0 : getCurrentTabIndents() + 1)));
-		if (renderAfterChildren() != null)
-		{
-			sb.append(renderAfterChildren());
-		}
-		return sb;
-	}
-
-	/**
-	 * Ensure if there are children that new lines must be rendered
-	 * <p>
-	 * Boxed for operating purposes
-	 *
-	 * @return
-	 */
-	@Override
-	@NotNull
-	public Boolean isNewLineForClosingTag()
-	{
-		if (hasChildren() && !isTiny())
-		{
-			return true;
-		}
-		else
-		{
-			return super.isNewLineForClosingTag();
-		}
-	}
-
-	/**
-	 * Renders String content before the children tags are rendered
-	 * <p>
-	 *
-	 * @return Custom HTML String to be inserted before Children tags
-	 */
-	@Override
-
-	protected StringBuilder renderBeforeChildren()
-	{
-		return null;
-	}
-
-	/**
-	 * Renders String content after the children tags are rendered
-	 * <p>
-	 *
-	 * @return Custom HTML String to be inserted after Children tags
-	 */
-	@Override
-
-	protected StringBuilder renderAfterChildren()
-	{
-		return null;
 	}
 
 	/**
@@ -980,7 +923,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 				}
 				catch (Exception e)
 				{
-					log.log(Level.WARNING, "Property value was not a boolean.", e);
+					ComponentHierarchyBase.log.log(Level.WARNING, "Property value was not a boolean.", e);
 				}
 			}
 		}
@@ -1131,4 +1074,75 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 			                  reallyAllQueries.add(query.renderJavascript());
 		                  });
 	}
+
+	/**
+	 * Renders each child
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	protected StringBuilder renderChildren()
+	{
+		StringBuilder sb = new StringBuilder();
+		if (renderBeforeChildren() != null)
+		{
+			sb.append(renderBeforeChildren());
+		}
+		getChildren().forEach(child -> sb.append(getNewLine())
+		                                 .append(child.toString(isTiny() ? 0 : getCurrentTabIndents() + 1)));
+		if (renderAfterChildren() != null)
+		{
+			sb.append(renderAfterChildren());
+		}
+		return sb;
+	}
+
+	/**
+	 * Ensure if there are children that new lines must be rendered
+	 * <p>
+	 * Boxed for operating purposes
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public Boolean isNewLineForClosingTag()
+	{
+		if (hasChildren() && !isTiny())
+		{
+			return true;
+		}
+		else
+		{
+			return super.isNewLineForClosingTag();
+		}
+	}
+
+	/**
+	 * Renders String content before the children tags are rendered
+	 * <p>
+	 *
+	 * @return Custom HTML String to be inserted before Children tags
+	 */
+	@Override
+
+	protected StringBuilder renderBeforeChildren()
+	{
+		return null;
+	}
+
+	/**
+	 * Renders String content after the children tags are rendered
+	 * <p>
+	 *
+	 * @return Custom HTML String to be inserted after Children tags
+	 */
+	@Override
+
+	protected StringBuilder renderAfterChildren()
+	{
+		return null;
+	}
+
 }

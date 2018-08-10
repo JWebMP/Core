@@ -18,6 +18,8 @@ package com.jwebmp.core.base.interfaces;
 
 import com.jwebmp.core.base.ComponentBase;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @param <J>
  * 		This Type
@@ -25,7 +27,7 @@ import com.jwebmp.core.base.ComponentBase;
  * @author GedMarc
  * @since Sep 26, 2016
  */
-@SuppressWarnings("UnusedReturnValue")
+@SuppressWarnings({"UnusedReturnValue", "MissingClassJavaDoc"})
 public interface IComponentHTMLBase<J extends ComponentBase>
 {
 
@@ -39,6 +41,7 @@ public interface IComponentHTMLBase<J extends ComponentBase>
 
 	/**
 	 * Whether or not this component should render a closing tag
+	 *
 	 * @return if this tag has a closing tag
 	 */
 	Boolean isClosingTag();
@@ -53,7 +56,9 @@ public interface IComponentHTMLBase<J extends ComponentBase>
 	/**
 	 * If a new line for the closing tag is required.
 	 *
-	 * @param newLineForClosingTag A new line is required for this objects closing tag
+	 * @param newLineForClosingTag
+	 * 		A new line is required for this objects closing tag
+	 *
 	 * @return Always this object
 	 */
 	J setNewLineForClosingTag(boolean newLineForClosingTag);
@@ -79,7 +84,9 @@ public interface IComponentHTMLBase<J extends ComponentBase>
 	/**
 	 * Sets the number of tab indents for this component
 	 *
-	 * @param currentTabIndents the tab indentation count
+	 * @param currentTabIndents
+	 * 		the tab indentation count
+	 *
 	 * @return Always this object
 	 */
 	J setCurrentTabIndents(int currentTabIndents);
@@ -87,9 +94,12 @@ public interface IComponentHTMLBase<J extends ComponentBase>
 	/**
 	 * Sets if this component must place a new line before the raw text
 	 *
-	 * @param newLineForRawText If there should be a new line for raw text
+	 * @param newLineForRawText
+	 * 		If there should be a new line for raw text
+	 *
 	 * @return Always this object
 	 */
+	@NotNull
 	J setNewLineForRawText(boolean newLineForRawText);
 
 	/**
@@ -109,6 +119,7 @@ public interface IComponentHTMLBase<J extends ComponentBase>
 	 *
 	 * @param outputHtml
 	 * 		Dummy holder for specifying HTML output
+	 *
 	 * @return The class and the associated ID and children count
 	 */
 	String toString(boolean outputHtml);

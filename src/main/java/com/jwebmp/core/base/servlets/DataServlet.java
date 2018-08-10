@@ -43,8 +43,13 @@ public class DataServlet
 	/**
 	 * The Servlet base logger
 	 */
+	@SuppressWarnings("unused")
 	private static final Logger log = LogFactory.getInstance()
 	                                            .getLogger("DataServlet");
+
+	/**
+	 * Field serialVersionUID
+	 */
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The Object Mapper for rendering the JSON with Jackson
@@ -53,7 +58,7 @@ public class DataServlet
 
 	static
 	{
-		jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
+		DataServlet.jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
 	}
 
 	/**
@@ -64,6 +69,9 @@ public class DataServlet
 		//Nothing Needed
 	}
 
+	/**
+	 * When to perform any commands
+	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public void perform()
@@ -73,7 +81,7 @@ public class DataServlet
 		StringBuilder responseString = new StringBuilder();
 		try
 		{
-			Class<? extends IDataComponent<?>> clazz = (Class<? extends IDataComponent<?>>) Class.forName(
+			Class<? extends IDataComponent> clazz = (Class<? extends IDataComponent>) Class.forName(
 					componentID.replace(StaticStrings.CHAR_UNDERSCORE, StaticStrings.CHAR_DOT));
 			IDataComponent component = GuiceContext.getInstance(clazz);
 			StringBuilder renderData = component.renderData();

@@ -17,19 +17,12 @@
 package com.jwebmp.core.base.servlets;
 
 import com.google.inject.Singleton;
-import com.jwebmp.core.Page;
-import com.jwebmp.core.annotations.JWebMPSiteBinder;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.interception.SiteInterception;
 import com.jwebmp.logger.LogFactory;
-import net.sf.uadetector.UserAgentStringParser;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.lang.reflect.Modifier;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -63,28 +56,31 @@ public class JWebSwingServlet
 		//Nothing Needed
 	}
 
+	/**
+	 * When to perform any commands
+	 */
 	@Override
 	public void perform()
 	{
-		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
 		HttpServletResponse response = GuiceContext.get(HttpServletResponse.class);
-		sendPage(request, response);
+		sendPage(response);
 	}
 
 	/**
 	 * Sends the page out
 	 *
-	 * @param request
 	 * @param response
-	 *
-	 * @throws IOException
+	 * 		The response object
 	 */
-	private void sendPage(HttpServletRequest request, HttpServletResponse response)
+	private void sendPage(HttpServletResponse response)
 	{
 		response.setContentType(StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE);
 		writeOutput(getPageHTML(), StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE, StaticStrings.UTF8_CHARSET);
 	}
 
+	/**
+	 * Method interception holder for Site and Ajax Calls
+	 */
 	@Override
 	@SiteInterception
 	protected void intercept()
@@ -92,17 +88,20 @@ public class JWebSwingServlet
 		//Interception Method
 	}
 
+	/**
+	 * Destroys this object and all references to it
+	 */
 	@Override
 	public void destroy()
 	{
 		try
 		{
-			log.log(Level.INFO, "Destroying Servlet JWebSwing Servlet and all Static Objects");
+			JWebSwingServlet.log.log(Level.INFO, "Destroying Servlet JWebSwing Servlet and all Static Objects");
 			GuiceContext.destroy();
 		}
 		catch (Exception t)
 		{
-			log.log(Level.SEVERE, "Unable to destroy", t);
+			JWebSwingServlet.log.log(Level.SEVERE, "Unable to destroy", t);
 		}
 		super.destroy();
 	}

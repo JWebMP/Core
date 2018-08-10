@@ -49,7 +49,7 @@ public class AngularInputMessages<J extends AngularInputMessages<J>>
 		addAttribute("ng-messages", formToApply.getID() + StaticStrings.STRING_DOT + formInputName.getAttribute(GlobalAttributes.Name) + StaticStrings.STRING_DOT + "$error");
 		addAttribute("role", "alert");
 		setRenderIDAttribute(false);
-		AngularMessagesModule.Enabled = true;
+		AngularMessagesModule.messsgesModuleEnabled = true;
 	}
 
 	/**

@@ -28,12 +28,16 @@ import java.io.Serializable;
  * @author GedMarc
  * @since 27 Apr 2016
  */
+@SuppressWarnings({"unused", "MissingClassJavaDoc"})
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 		extends JavaScriptPart<J>
 		implements Serializable
 {
 
+	/**
+	 * Field serialVersionUID
+	 */
 	private static final long serialVersionUID = 1L;
 	/**
 	 * The title of the reaction
@@ -50,8 +54,9 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 	 */
 	@JsonProperty("reactionType")
 	private ReactionType reactionType;
-	/*
-	 * The level type of the reaction
+
+	/**
+	 * Field responseType
 	 */
 	@JsonProperty("type")
 	private AjaxResponseType responseType;
@@ -77,6 +82,7 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 	 * Constructs a reaction with the given message as a dialog
 	 *
 	 * @param reactionData
+	 * 		The data if necessary (usually is)
 	 */
 	public AjaxResponseReaction(String reactionData)
 	{
@@ -87,7 +93,9 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 	 * Constructs a reaction with the given title and message
 	 *
 	 * @param reactionTitle
+	 * 		The title if necessary
 	 * @param reactionData
+	 * 		The data if necessary (usually is)
 	 */
 	public AjaxResponseReaction(String reactionTitle, String reactionData)
 	{
@@ -98,8 +106,11 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 	 * Constructs a reaction with the given parameters
 	 *
 	 * @param reactionTitle
+	 * 		The title if necessary
 	 * @param reactionData
+	 * 		The data if necessary (usually is)
 	 * @param reactionType
+	 * 		The specific response type (info, danger, warning etc)
 	 */
 	public AjaxResponseReaction(String reactionTitle, String reactionData, ReactionType reactionType)
 	{
@@ -150,7 +161,9 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 	 * Constructs a reaction with the given message
 	 *
 	 * @param reactionData
+	 * 		The data if necessary (usually is)
 	 * @param reactionType
+	 * 		The specific reaction type (dialog, redirect etc)
 	 */
 	public AjaxResponseReaction(String reactionData, ReactionType reactionType)
 	{
@@ -172,15 +185,10 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 		setActionTimeout(actionTimeout);
 	}
 
-	public static AjaxResponseReaction showDialogFeature(String title, String message)
-	{
-		return null;
-	}
-
 	/**
 	 * Returns the given reaction title
 	 *
-	 * @return
+	 * @return The reactions title
 	 */
 	public String getReactionTitle()
 	{
@@ -191,8 +199,9 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 	 * Sets the given reaction title
 	 *
 	 * @param reactionTitle
+	 * 		The reactions title
 	 *
-	 * @return
+	 * @return This object
 	 */
 	public AjaxResponseReaction setReactionTitle(String reactionTitle)
 	{
@@ -203,7 +212,7 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 	/**
 	 * Gets the reaction message
 	 *
-	 * @return
+	 * @return the reaction data
 	 */
 	public String getReactionData()
 	{
@@ -215,8 +224,9 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 	 * Sets the given reaction message
 	 *
 	 * @param reactionData
+	 * 		Sets the data for the reaction
 	 *
-	 * @return
+	 * @return This object
 	 */
 	public AjaxResponseReaction setReactionData(String reactionData)
 	{
@@ -227,7 +237,7 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 	/**
 	 * Gets the reaction type
 	 *
-	 * @return
+	 * @return The assigned reaction type
 	 */
 	public ReactionType getReactionType()
 	{
@@ -238,8 +248,9 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 	 * Sets the reaction type
 	 *
 	 * @param reactionType
+	 * 		Ses the reaction type or defaults to dialog display
 	 *
-	 * @return
+	 * @return This object
 	 */
 	public AjaxResponseReaction setReactionType(ReactionType reactionType)
 	{
@@ -250,7 +261,7 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 	/**
 	 * Gets the response type for the reaction
 	 *
-	 * @return
+	 * @return The assigned response type
 	 */
 	public AjaxResponseType getResponseType()
 	{
@@ -261,8 +272,9 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 	 * Sets the response type for the reaction
 	 *
 	 * @param responseType
+	 * 		Sets the response type or info by default
 	 *
-	 * @return
+	 * @return This object
 	 */
 	public AjaxResponseReaction setResponseType(AjaxResponseType responseType)
 	{
@@ -273,7 +285,7 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 	/**
 	 * Apply a timeout before a navigation reaction occurs
 	 *
-	 * @return
+	 * @return The timeout for the action to occur
 	 */
 	public int getActionTimeout()
 	{
@@ -284,9 +296,11 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 	 * Apply a timeout before a navigation reaction occurs
 	 *
 	 * @param actionTimeout
+	 * 		The timeout for the action to occur
 	 *
-	 * @return
+	 * @return This object
 	 */
+	@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 	public AjaxResponseReaction setActionTimeout(int actionTimeout)
 	{
 		this.actionTimeout = actionTimeout;
@@ -296,7 +310,7 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 	/**
 	 * Assigns options to the response
 	 *
-	 * @return
+	 * @return Any assigned options as a java script part (json)
 	 */
 	public JavaScriptPart<?> getOptions()
 	{
@@ -307,8 +321,9 @@ public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 	 * Sets the options of the response
 	 *
 	 * @param options
+	 * 		The assigned options as a java script part (json)
 	 *
-	 * @return
+	 * @return This object
 	 */
 	public AjaxResponseReaction setOptions(JavaScriptPart<?> options)
 	{

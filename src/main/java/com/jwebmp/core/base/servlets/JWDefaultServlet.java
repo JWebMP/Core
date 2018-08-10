@@ -16,9 +16,6 @@
  */
 package com.jwebmp.core.base.servlets;
 
-import com.google.inject.Provides;
-import com.google.inject.name.Named;
-import com.google.inject.servlet.RequestScoped;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxEventValue;
@@ -28,6 +25,7 @@ import com.jwebmp.core.base.html.PreFormattedText;
 import com.jwebmp.core.exceptions.InvalidRequestException;
 import com.jwebmp.core.exceptions.MissingComponentException;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
+import com.jwebmp.core.services.IErrorPage;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.core.utilities.TextUtilities;
 import com.jwebmp.guicedinjection.GuiceContext;
@@ -47,6 +45,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.util.Date;
+import java.util.ServiceLoader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -57,6 +56,7 @@ import java.util.logging.Logger;
  * @version 1.0
  * @since Nov 14, 2016
  */
+@SuppressWarnings("unused")
 public abstract class JWDefaultServlet
 		extends HttpServlet
 {
@@ -71,6 +71,9 @@ public abstract class JWDefaultServlet
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Field allowOrigin
+	 */
 	private static String allowOrigin = "*";
 
 	/**
@@ -84,17 +87,18 @@ public abstract class JWDefaultServlet
 	/**
 	 * Sets the stream allow origins
 	 *
-	 * @return
+	 * @return The current origins allowed
 	 */
 	public static String getAllowOrigin()
 	{
-		return allowOrigin;
+		return JWDefaultServlet.allowOrigin;
 	}
 
 	/**
 	 * Sets the streams allow origins
 	 *
 	 * @param allowOrigin
+	 * 		The allowed origins, default *
 	 */
 	public static void setAllowOrigin(@NotNull String allowOrigin)
 	{
@@ -107,23 +111,24 @@ public abstract class JWDefaultServlet
 	 * @param ajaxCall
 	 * 		optional parameter to validate on more fields
 	 *
-	 * @return
+	 * @return If this call is valid
 	 */
+	@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 	public boolean validateCall(AjaxCall ajaxCall) throws InvalidRequestException
 	{
 		HttpServletRequest request = GuiceContext.getInstance(HttpServletRequest.class);
 		if (ajaxCall.getComponentId() == null)
 		{
-			log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Component ID Not Found]", request.getSession()
-			                                                                                      .getId());
+			JWDefaultServlet.log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Component ID Not Found]", request.getSession()
+			                                                                                                       .getId());
 			throw new InvalidRequestException("There is no Component ID in this call.");
 		}
 
 		String componentId = ajaxCall.getComponentId();
-		if (componentId == null || componentId.isEmpty())
+		if (componentId.isEmpty())
 		{
-			log.log(Level.FINER, "[SessionID]-[{0}];[Security]-[Component ID Incorrect]", request.getSession()
-			                                                                                     .getId());
+			JWDefaultServlet.log.log(Level.FINER, "[SessionID]-[{0}];[Security]-[Component ID Incorrect]", request.getSession()
+			                                                                                                      .getId());
 			//	throw new InvalidRequestException("Component ID Was Incorrect.");
 		}
 		return true;
@@ -132,10 +137,12 @@ public abstract class JWDefaultServlet
 	/**
 	 * Validates if the page is found and correct
 	 *
-	 * @return
+	 * @return If the page can be retrieved
 	 *
 	 * @throws com.jwebmp.core.exceptions.MissingComponentException
+	 * 		if page returned is null
 	 */
+	@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 	public boolean validatePage() throws MissingComponentException
 	{
 		Page page = GuiceContext.inject()
@@ -152,33 +159,36 @@ public abstract class JWDefaultServlet
 	 * Validates the request if it from a legitimate source
 	 *
 	 * @param ajaxCall
+	 * 		The incoming call object
 	 *
-	 * @return
+	 * @return if the request was validated
 	 *
 	 * @throws InvalidRequestException
+	 * 		If the request is invalid
 	 */
+	@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 	public boolean validateRequest(AjaxCall ajaxCall) throws InvalidRequestException
 	{
 		HttpServletRequest request = GuiceContext.getInstance(HttpServletRequest.class);
 		Date datetime = ajaxCall.getDatetime();
 		if (datetime == null)
 		{
-			log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Date Time Incorrect]", request.getSession()
-			                                                                                   .getId());
+			JWDefaultServlet.log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Date Time Incorrect]", request.getSession()
+			                                                                                                    .getId());
 			throw new InvalidRequestException("Invalid Date Time Value");
 		}
 		EventTypes eventType = ajaxCall.getEventType();
 		if (eventType == null)
 		{
-			log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Event Type Incorrect]", request.getSession()
-			                                                                                    .getId());
+			JWDefaultServlet.log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Event Type Incorrect]", request.getSession()
+			                                                                                                     .getId());
 			throw new InvalidRequestException("Invalid Event Type");
 		}
 		EventTypes eventTypeFrom = ajaxCall.getEventTypeFrom();
 		if (eventTypeFrom == null)
 		{
-			log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Event From Incorrect]", request.getSession()
-			                                                                                    .getId());
+			JWDefaultServlet.log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Event From Incorrect]", request.getSession()
+			                                                                                                     .getId());
 			throw new InvalidRequestException("Invalid Event Type From");
 		}
 
@@ -186,8 +196,8 @@ public abstract class JWDefaultServlet
 
 		if (value == null)
 		{
-			log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Value Is Missing]", request.getSession()
-			                                                                                .getId());
+			JWDefaultServlet.log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Value Is Missing]", request.getSession()
+			                                                                                                 .getId());
 			throw new InvalidRequestException("Invalid Event Value");
 		}
 
@@ -197,8 +207,9 @@ public abstract class JWDefaultServlet
 	/**
 	 * Generates the Page HTML
 	 *
-	 * @return
+	 * @return The page html
 	 */
+	@SuppressWarnings("WeakerAccess")
 	protected StringBuilder getPageHTML()
 	{
 		StringBuilder html;
@@ -216,8 +227,9 @@ public abstract class JWDefaultServlet
 	/**
 	 * Finds the page for the current URL
 	 *
-	 * @return
+	 * @return The page instance
 	 */
+	@SuppressWarnings("WeakerAccess")
 	protected Page getPageFromGuice()
 	{
 		return GuiceContext.inject()
@@ -225,28 +237,50 @@ public abstract class JWDefaultServlet
 	}
 
 	/**
-	 * Return the Mobile Page HTML
+	 * In the event of any error return this page.
 	 *
-	 * @param session
+	 * @param t
+	 * 		The exception thrown
 	 *
-	 * @return
+	 * @return The rendered HTML.
 	 */
-	@Provides
-	@Named("MobilePage")
-	@RequestScoped
-	protected StringBuilder getPageMobileHTML(HttpSession session)
+	@SuppressWarnings({"WeakerAccess", "unchecked"})
+	protected Page getErrorPageHtml(Throwable t)
 	{
-		log.log(Level.FINE, "Started Rendering Mobile HTML");
-		StringBuilder html;
-		html = new StringBuilder(getPageFromGuice().toString(true));
-		return html;
+		ServiceLoader<IErrorPage> errorPages = ServiceLoader.load(IErrorPage.class);
+		if (!errorPages.iterator()
+		               .hasNext())
+		{
+			Page<?> p = new Page();
+			p.getPageFields()
+			 .setTitle("Exception occured in application");
+			p.getPageFields()
+			 .setAuthor("Marc Magon");
+			p.getPageFields()
+			 .setDescription("JWebSwing Error Generated Page");
+			p.getPageFields()
+			 .setGenerator("JWebSwing - https://sourceforge.net/projects/jwebswing/");
+
+			Body b = p.getBody();
+			b.add("The following error was encountered during render<br/><hr/>");
+			b.add(new PreFormattedText(TextUtilities.stackTraceToString(t)));
+			return p;
+		}
+		else
+		{
+			return (Page) GuiceContext.get(errorPages.iterator()
+			                                         .next()
+			                                         .getClass());
+		}
 	}
 
 	/**
 	 * Does a default security check on the request
 	 *
 	 * @param req
+	 * 		The request
 	 * @param resp
+	 * 		The response
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -258,7 +292,7 @@ public abstract class JWDefaultServlet
 		}
 		catch (Exception e)
 		{
-			log.log(Level.SEVERE, "Unable to Do Get", e);
+			JWDefaultServlet.log.log(Level.SEVERE, "Unable to Do Get", e);
 		}
 	}
 
@@ -279,7 +313,7 @@ public abstract class JWDefaultServlet
 		}
 		catch (MissingComponentException mce)
 		{
-			log.log(Level.SEVERE, "No Page For Servlet", mce);
+			JWDefaultServlet.log.log(Level.SEVERE, "No Page For Servlet", mce);
 			Page p = new Page();
 			p.getBody()
 			 .add("No Page or Body Configured for the JWebSwingServlet. [getPage()] returned nothing");
@@ -287,7 +321,7 @@ public abstract class JWDefaultServlet
 		}
 		catch (Exception t)
 		{
-			log.log(Level.SEVERE, "Unable to render page", t);
+			JWDefaultServlet.log.log(Level.SEVERE, "Unable to render page", t);
 			response.setContentType(StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE);
 			writeOutput(new StringBuilder(getErrorPageHtml(t).toString(0)), StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE, StaticStrings.UTF8_CHARSET);
 		}
@@ -302,9 +336,12 @@ public abstract class JWDefaultServlet
 	 * Reads the variables into the HTTP session
 	 *
 	 * @param request
+	 * 		The physical request
 	 *
 	 * @throws com.jwebmp.core.exceptions.MissingComponentException
+	 * 		If something is wrong with the page
 	 */
+	@SuppressWarnings("WeakerAccess")
 	protected void readRequestVariables(HttpServletRequest request) throws MissingComponentException
 	{
 		Page currentPage = getPageFromGuice();
@@ -315,8 +352,8 @@ public abstract class JWDefaultServlet
 		}
 		if (session.isNew())
 		{
-			log.log(Level.FINER, "[SessionID]-[{0}];[Name]-[User Login];[Action]-[Session Page Added];", request.getSession()
-			                                                                                                    .getId());
+			JWDefaultServlet.log.log(Level.FINER, "[SessionID]-[{0}];[Name]-[User Login];[Action]-[Session Page Added];", request.getSession()
+			                                                                                                                     .getId());
 		}
 	}
 
@@ -324,7 +361,9 @@ public abstract class JWDefaultServlet
 	 * Reads the user agent header into the browser object and places it for the page to render
 	 *
 	 * @param request
+	 * 		The request to read from
 	 */
+	@SuppressWarnings("WeakerAccess")
 	protected void readBrowserInformation(HttpServletRequest request)
 	{
 		String headerInformation = request.getHeader("User-Agent");
@@ -349,24 +388,30 @@ public abstract class JWDefaultServlet
 		getPageFromGuice().setBrowser(b);
 
 		if (agent.getVersionNumber()
-		         .getMajor() == null || agent.getVersionNumber()
-		                                     .getMajor()
-		                                     .isEmpty())
+		         .getMajor()
+		         .isEmpty())
 		{
-			log.log(Level.INFO, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}];[Operating System]-[{3}];[Device Category]-[{4}];[Device]-[{5}];[CSS]-[{6}];[HTML]-[{7}];",
-			        new Object[]{request.getSession().getId(), b.getBrowserGroup().toString(), b.getBrowserVersion(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()});
+			JWDefaultServlet.log.log(Level.INFO,
+			                         "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}];[Operating System]-[{3}];[Device Category]-[{4}];[Device]-[{5}];[CSS]-[{6}];[HTML]-[{7}];",
+			                         new Object[]{request.getSession().getId(), b.getBrowserGroup().toString(), b.getBrowserVersion(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()});
 		}
 		else
 		{
-			log.log(Level.INFO, "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}.{3}];[Operating System]-[{4}];[Device Category]-[{5}];[Device]-[{6}];[CSS]-[{7}];[HTML]-[{8}];",
-			        new Object[]{request.getSession().getId(), agent.getName(), agent.getVersionNumber().getMajor(), agent.getVersionNumber().getMinor(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()});
+			JWDefaultServlet.log.log(Level.INFO,
+			                         "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}.{3}];[Operating System]-[{4}];[Device Category]-[{5}];[Device]-[{6}];[CSS]-[{7}];[HTML]-[{8}];",
+			                         new Object[]{request.getSession().getId(), agent.getName(), agent.getVersionNumber().getMajor(), agent.getVersionNumber().getMinor(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()});
 		}
 	}
 
 	/**
-	 * Writes the output to the request
+	 * The output to write to the output stream
 	 *
 	 * @param output
+	 * 		The specified output
+	 * @param contentType
+	 * 		The content type to send out
+	 * @param charSet
+	 * 		The charset to use
 	 */
 	public void writeOutput(StringBuilder output, String contentType, Charset charSet)
 	{
@@ -375,54 +420,31 @@ public abstract class JWDefaultServlet
 		{
 			Date dataTransferDate = new Date();
 			response.setContentType(contentType);
-			response.setCharacterEncoding(charSet == null ? Charset.forName("UTF-8")
-			                                                       .toString() : charSet.displayName());
-			response.setHeader(StaticStrings.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER_NAME, allowOrigin);
+			response.setCharacterEncoding(charSet == null ? StaticStrings.UTF8_CHARSET
+					                                                .toString() : charSet.displayName());
+			response.setHeader(StaticStrings.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER_NAME, JWDefaultServlet.allowOrigin);
 			response.setHeader(StaticStrings.ACCESS_CONTROL_ALLOW_CREDENTIALS_HEADER_NAME, "true");
 			response.setHeader(StaticStrings.ACCESS_CONTROL_ALLOW_METHODS_HEADER_NAME, "GET, POST");
 			response.setHeader(StaticStrings.ACCESS_CONTROL_ALLOW_HEADERS_HEADER_NAME, "Content-Type, Accept");
 			out.write(output.toString());
 
 			long transferTime = new Date().getTime() - dataTransferDate.getTime();
-			log.log(Level.FINER, "[Network Reply Data Size]-[" + output.length() + "];");
-			log.log(Level.FINER, "[Network Reply]-[" + output + "];[Time]-[" + transferTime + "];");
+			JWDefaultServlet.log.log(Level.FINER, "[Network Reply Data Size]-[" + output.length() + "];");
+			JWDefaultServlet.log.log(Level.FINER, "[Network Reply]-[" + output + "];[Time]-[" + transferTime + "];");
 		}
 		catch (IOException io)
 		{
-			log.log(Level.SEVERE, "Unable to send response to client", io);
+			JWDefaultServlet.log.log(Level.SEVERE, "Unable to send response to client", io);
 		}
-	}
-
-	/**
-	 * In the event of any error return this page.
-	 *
-	 * @param t
-	 * 		The exception thrown
-	 *
-	 * @return The rendered HTML.
-	 */
-	protected Page getErrorPageHtml(Throwable t)
-	{
-		Page p = new Page();
-		p.getPageFields()
-		 .setTitle("Exception occured in application");
-		p.getPageFields()
-		 .setAuthor("Marc Magon");
-		p.getPageFields()
-		 .setDescription("JWebSwing Error Generated Page");
-		p.getPageFields()
-		 .setGenerator("JWebSwing - https://sourceforge.net/projects/jwebswing/");
-		Body b = p.getBody();
-		b.add("The following error was encountered during render<br/><hr/>");
-		b.add(new PreFormattedText(TextUtilities.stackTraceToString(t)));
-		return p;
 	}
 
 	/**
 	 * Does a default security check on the request
 	 *
 	 * @param req
+	 * 		The request
 	 * @param resp
+	 * 		The response
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -435,7 +457,7 @@ public abstract class JWDefaultServlet
 		}
 		catch (Exception e)
 		{
-			log.log(Level.SEVERE, "Security Exception in Validation", e);
+			JWDefaultServlet.log.log(Level.SEVERE, "Security Exception in Validation", e);
 		}
 	}
 
@@ -454,17 +476,18 @@ public abstract class JWDefaultServlet
 		String sessionID = session.getId();
 		if (sessionID == null)
 		{
-			log.log(Level.SEVERE, "Session Doesn't Exist", new ServletException("There is no session for a data pull"));
+			JWDefaultServlet.log.log(Level.SEVERE, "Session Doesn't Exist", new ServletException("There is no session for a data pull"));
 			throw new ServletException("There is no session for a data pull");
 		}
 	}
 
+	/**
+	 * Method interception holder for Site and Ajax Calls
+	 */
 	@SiteInterception
 	@AjaxCallInterception
 	protected void intercept()
 	{
-		/**
-		 * Intercepted with the annotations
-		 */
+		//Nothing required
 	}
 }

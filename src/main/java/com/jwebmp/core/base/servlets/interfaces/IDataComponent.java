@@ -16,21 +16,16 @@
  */
 package com.jwebmp.core.base.servlets.interfaces;
 
-import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
-
 import javax.validation.constraints.NotNull;
 
 /**
  * Marks a component as one with Data that is available as either AJAX or direct
  *
- * @param <J>
- * 		The data DTO class
- *
  * @author GedMarc
  * @since Nov 9, 2016
  */
 @FunctionalInterface
-public interface IDataComponent<J extends JavaScriptPart>
+public interface IDataComponent
 {
 	/**
 	 * Renders the physical data on call

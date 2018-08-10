@@ -42,9 +42,15 @@ public abstract class SortAdapter
 	/**
 	 * Logger for the Component
 	 */
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
+	private static final java.util.logging.Logger log = LogFactory.getInstance()
 	                                                              .getLogger("SortEvent");
+	/**
+	 * Field serialVersionUID
+	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * Field directive
+	 */
 	private SortDirective directive;
 
 	/**
@@ -53,12 +59,21 @@ public abstract class SortAdapter
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
+	@SuppressWarnings("WeakerAccess")
 	public SortAdapter(Component component)
 	{
 		super(EventTypes.sort, component);
 
 	}
 
+	/**
+	 * The method that is fired on call
+	 *
+	 * @param call
+	 * 		The component that made the call
+	 * @param response
+	 * 		The Response Object Being Returned
+	 */
 	@Override
 	public void fireEvent(AjaxCall call, AjaxResponse response)
 	{
@@ -68,41 +83,32 @@ public abstract class SortAdapter
 		}
 		catch (Exception e)
 		{
-			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			SortAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 
+	/**
+	 * @see com.jwebmp.core.Event#hashCode()
+	 */
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + getDirective().hashCode();
-		return result;
+		return super.hashCode();
 	}
 
+	/**
+	 * @see com.jwebmp.core.Event#equals(Object)
+	 */
 	@Override
-	public boolean equals(Object o)
+	public boolean equals(Object obj)
 	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof SortAdapter))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		SortAdapter that = (SortAdapter) o;
-
-		return getDirective().equals(that.getDirective());
+		return super.equals(obj);
 	}
 
 	/**
 	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
+	 *
+	 * @see com.jwebmp.core.Event#preConfigure()
 	 */
 	@Override
 	public void preConfigure()
@@ -116,9 +122,20 @@ public abstract class SortAdapter
 	}
 
 	/**
+	 * Triggers on Click
+	 * <p>
+	 *
+	 * @param call
+	 * 		The physical AJAX call
+	 * @param response
+	 * 		The physical Ajax Receiver
+	 */
+	public abstract void onSort(AjaxCall call, AjaxResponse response);
+
+	/**
 	 * Returns the angular directive associated with the right click event
 	 *
-	 * @return
+	 * @return The applied directive
 	 */
 	@NotNull
 	public SortDirective getDirective()
@@ -134,20 +151,10 @@ public abstract class SortAdapter
 	 * Sets the right click angular event
 	 *
 	 * @param directive
+	 * 		The directive to use
 	 */
 	public void setDirective(SortDirective directive)
 	{
 		this.directive = directive;
 	}
-
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onSort(AjaxCall call, AjaxResponse response);
 }

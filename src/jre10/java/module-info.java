@@ -2,6 +2,7 @@ import com.jwebmp.core.annotations.JWebMPSiteBinder;
 import com.jwebmp.core.base.angular.controllers.JWAngularController;
 import com.jwebmp.core.base.angular.modules.AngularMessagesModule;
 import com.jwebmp.core.base.angular.services.*;
+import com.jwebmp.core.services.IErrorPage;
 import com.jwebmp.core.services.IPageConfigurator;
 import com.jwebmp.guicedservlets.services.IGuiceSiteBinder;
 
@@ -170,12 +171,12 @@ module com.jwebmp.core {
 	uses IAngularConfiguration;
 	uses IAngularController;
 	uses IAngularFactory;
+	uses IErrorPage;
 
 	provides IGuiceSiteBinder with JWebMPSiteBinder;
 
 	provides IAngularModule with AngularMessagesModule;
 	provides IAngularController with JWAngularController;
-
 
 	provides IAngularDirective with com.jwebmp.core.events.activate.ActivateDirective,
 			                           com.jwebmp.core.events.beforeactivate.BeforeActivateDirective,

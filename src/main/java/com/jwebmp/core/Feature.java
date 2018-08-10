@@ -90,12 +90,25 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 		return super.addQuery(sb);
 	}
 
+	/**
+	 * Method hashCode ...
+	 *
+	 * @return int
+	 */
 	@Override
 	public int hashCode()
 	{
 		return getName().hashCode();
 	}
 
+	/**
+	 * Method equals ...
+	 *
+	 * @param obj
+	 * 		of type Object
+	 *
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object o)
 	{

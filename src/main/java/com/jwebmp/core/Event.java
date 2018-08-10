@@ -43,6 +43,7 @@ import java.util.Set;
  * @author GedMarc
  * @since 23 Apr 2016
  */
+@SuppressWarnings("unused")
 public abstract class Event<J extends Event<J>>
 		extends ComponentEventBase<GlobalFeatures, GlobalEvents, Event<J>>
 		implements GlobalEvents
@@ -307,12 +308,25 @@ public abstract class Event<J extends Event<J>>
 		return (J) this;
 	}
 
+	/**
+	 * Method hashCode ...
+	 *
+	 * @return int
+	 */
 	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
 	}
 
+	/**
+	 * Method equals ...
+	 *
+	 * @param obj
+	 * 		of type Object
+	 *
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj)
 	{
