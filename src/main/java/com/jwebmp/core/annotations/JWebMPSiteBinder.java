@@ -287,7 +287,6 @@ public class JWebMPSiteBinder
 			{
 				StringBuilder url = new StringBuilder(pc.url());
 				url.insert(0, "(")
-				   .append(url)
 				   .append(StaticStrings.QUERY_PARAMETERS_REGEX)
 				   .append(")");
 				module.serveRegex$(url.toString())
