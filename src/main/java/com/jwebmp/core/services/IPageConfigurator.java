@@ -2,6 +2,7 @@ package com.jwebmp.core.services;
 
 import com.jwebmp.core.Page;
 
+import javax.validation.constraints.NotNull;
 import java.util.Comparator;
 
 /**
@@ -10,6 +11,15 @@ import java.util.Comparator;
 public interface IPageConfigurator
 		extends Comparator<IPageConfigurator>, Comparable<IPageConfigurator>
 {
+	/**
+	 * Configures the given page for the parameters
+	 *
+	 * @param page
+	 * 		The page incoming
+	 *
+	 * @return The original page incoming or a new page, never null
+	 */
+	@NotNull
 	Page<?> configure(Page<?> page);
 
 	default int compare(IPageConfigurator o1, IPageConfigurator o2)

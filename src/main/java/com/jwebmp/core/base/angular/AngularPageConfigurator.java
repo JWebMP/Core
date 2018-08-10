@@ -115,6 +115,7 @@ public class AngularPageConfigurator
 		return Integer.MAX_VALUE - 100;
 	}
 
+	@NotNull
 	@Override
 	@SuppressWarnings("unchecked")
 	public Page configure(Page page)

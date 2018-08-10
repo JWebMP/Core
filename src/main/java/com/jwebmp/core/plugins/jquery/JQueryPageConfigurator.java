@@ -21,6 +21,8 @@ import com.jwebmp.core.base.client.BrowserGroups;
 import com.jwebmp.core.plugins.PluginInformation;
 import com.jwebmp.core.services.IPageConfigurator;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * This Configurator adds the JQuery portion onto the page rendering
  *
@@ -115,6 +117,7 @@ public class JQueryPageConfigurator
 		JQueryPageConfigurator.required = required;
 	}
 
+	@NotNull
 	@Override
 	public Page configure(Page page)
 	{

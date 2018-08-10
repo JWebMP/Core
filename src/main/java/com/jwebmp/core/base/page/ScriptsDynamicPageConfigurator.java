@@ -16,6 +16,8 @@ import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import com.jwebmp.core.services.IPageConfigurator;
 import com.jwebmp.core.utilities.StaticStrings;
 
+import javax.validation.constraints.NotNull;
+
 @SuppressWarnings("unused")
 public
 class ScriptsDynamicPageConfigurator
@@ -26,6 +28,7 @@ class ScriptsDynamicPageConfigurator
 		//No config required
 	}
 
+	@NotNull
 	@Override
 	@SuppressWarnings("unchecked")
 	public Page<?> configure(Page<?> page)

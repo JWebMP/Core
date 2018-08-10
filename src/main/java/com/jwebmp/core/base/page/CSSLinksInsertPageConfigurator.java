@@ -8,6 +8,7 @@ import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.interception.interfaces.RenderAfterLinks;
 import com.jwebmp.interception.interfaces.RenderBeforeLinks;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -29,6 +30,7 @@ class CSSLinksInsertPageConfigurator
 		return Integer.MAX_VALUE - 10;
 	}
 
+	@NotNull
 	@Override
 	public Page<?> configure(Page<?> page)
 	{

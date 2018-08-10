@@ -25,6 +25,7 @@ import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.interception.interfaces.RenderAfterScripts;
 import com.jwebmp.interception.interfaces.RenderBeforeDynamicScripts;
 
+import javax.validation.constraints.NotNull;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -42,6 +43,7 @@ public class ScriptsInsertPageConfigurator
 		return Integer.MAX_VALUE - 8;
 	}
 
+	@NotNull
 	@Override
 	@SuppressWarnings("unchecked")
 	public Page<?> configure(Page<?> page)

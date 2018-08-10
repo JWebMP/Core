@@ -22,6 +22,7 @@ import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.Comment;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,7 @@ public class TopShelfScriptsInsertPageConfigurator
 		return Integer.MAX_VALUE - 9;
 	}
 
+	@NotNull
 	@Override
 	@SuppressWarnings("unchecked")
 	public Page<?> configure(Page<?> page)
