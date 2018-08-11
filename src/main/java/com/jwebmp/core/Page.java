@@ -38,10 +38,13 @@ import com.jwebmp.logger.LogFactory;
 import net.sf.uadetector.*;
 
 import javax.validation.constraints.NotNull;
-import java.util.*;
-import java.util.List;
+import java.util.EnumSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static com.jwebmp.core.services.JWebMPServicesBindings.*;
 
 /**
  * Top level of any HTML page.
@@ -656,13 +659,7 @@ public class Page<J extends Page<J>>
 
 	private void configurePage()
 	{
-		ServiceLoader<IPageConfigurator> pageConfigurators = ServiceLoader.load(IPageConfigurator.class);
-		List<IPageConfigurator> sortedConfigurators = new ArrayList<>();
-		for (IPageConfigurator pageConfigurator : pageConfigurators)
-		{
-			sortedConfigurators.add(GuiceContext.get(pageConfigurator.getClass()));
-		}
-		Collections.sort(sortedConfigurators);
+		Set<IPageConfigurator> sortedConfigurators = GuiceContext.get(IPageConfiguratorsKey);
 		for (IPageConfigurator sortedConfigurator : sortedConfigurators)
 		{
 			Page.log.log(Level.FINEST, "Loading IPageConfigurator - " + sortedConfigurator.getClass()

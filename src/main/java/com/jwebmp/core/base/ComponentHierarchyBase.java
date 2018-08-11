@@ -793,6 +793,25 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	}
 
 	/**
+	 * Pre-Configure the children tree
+	 *
+	 * @return
+	 */
+	@Override
+	@NotNull
+	public String toString()
+	{
+		getChildren().forEach(next ->
+		                      {
+			                      if (!next.isConfigured())
+			                      {
+				                      next.preConfigure();
+			                      }
+		                      });
+		return super.toString();
+	}
+
+	/**
 	 * Takes an instance and wraps around the component
 	 * <p>
 	 * e.g. BSRow.wrap(div) = iv class="row"myComponent//div
@@ -878,41 +897,6 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	{
 		ComponentHierarchyBase cloned = super.cloneComponent();
 		return (J) cloned;
-	}
-
-	/**
-	 * If this component is already configured
-	 *
-	 * @param configured
-	 * 		if it is or not configured
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J setConfigured(boolean configured)
-	{
-		getChildrenHierarchy(false).forEach(a -> a.setConfigured(false));
-		super.setConfigured(false);
-		return (J) this;
-	}
-
-	/**
-	 * Pre-Configure the children tree
-	 *
-	 * @return
-	 */
-	@Override
-	@NotNull
-	public String toString()
-	{
-		getChildren().forEach(next ->
-		                      {
-			                      if (!next.isConfigured())
-			                      {
-				                      next.preConfigure();
-			                      }
-		                      });
-		return super.toString();
 	}
 
 	/**
@@ -1089,9 +1073,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 			                  query.preConfigure();
 			                  reallyAllQueries.add(query.renderJavascript());
 		                  });
-	}
-
-	/**
+	}	/**
 	 * Renders each child
 	 *
 	 * @return
@@ -1113,6 +1095,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		}
 		return sb;
 	}
+
+
 
 	/**
 	 * Ensure if there are children that new lines must be rendered

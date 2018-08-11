@@ -26,7 +26,8 @@ import javax.validation.constraints.NotNull;
 import java.util.LinkedHashSet;
 import java.util.ServiceLoader;
 import java.util.Set;
-import java.util.TreeSet;
+
+import static com.jwebmp.core.services.JWebMPServicesBindings.*;
 
 /**
  * @author GedMarc
@@ -100,16 +101,11 @@ public class JWAngularModule
 		          .hasNext())
 		{
 			Set<String> moduleNames = new LinkedHashSet<>();
-			Set<IAngularModule> modules = new TreeSet<>();
-			for (IAngularModule module : loader)
-			{
-				modules.add(GuiceContext.get(module.getClass()));
-			}
+			Set<IAngularModule> modules = GuiceContext.get(AngularModulesKey);
 			for (IAngularModule module : modules)
 			{
 				moduleNames.add(module.getReferenceName());
 			}
-
 			StringBuilder nameRenders = new StringBuilder();
 			for (String name : moduleNames)
 			{
@@ -117,7 +113,6 @@ public class JWAngularModule
 				           .append(name)
 				           .append("',");
 			}
-
 			if (nameRenders.indexOf(StaticStrings.STRING_COMMNA) != -1)
 			{
 				nameRenders = nameRenders.deleteCharAt(nameRenders.lastIndexOf(StaticStrings.STRING_COMMNA));

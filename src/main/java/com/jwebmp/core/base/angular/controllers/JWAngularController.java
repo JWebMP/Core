@@ -21,9 +21,12 @@ import com.jwebmp.core.base.angular.AngularReferenceBase;
 import com.jwebmp.core.base.angular.services.IAngularController;
 import com.jwebmp.core.base.angular.services.IAngularControllerScopeStatement;
 import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 
 import javax.validation.constraints.NotNull;
-import java.util.ServiceLoader;
+import java.util.Set;
+
+import static com.jwebmp.core.services.JWebMPServicesBindings.*;
 
 /**
  * Maps to the angular function of right click
@@ -63,7 +66,7 @@ public class JWAngularController
 		String output = controllerOutput.toString();
 		StringBuilder statementOutput = new StringBuilder();
 
-		ServiceLoader<IAngularControllerScopeStatement> loader = ServiceLoader.load(IAngularControllerScopeStatement.class);
+		Set<IAngularControllerScopeStatement> loader = GuiceContext.get(AngularControllerScopeStatementsKey);
 		for (IAngularControllerScopeStatement statement : loader)
 		{
 			if (!statementOutput.toString()

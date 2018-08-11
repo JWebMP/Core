@@ -23,15 +23,19 @@ import com.jwebmp.core.Page;
 import com.jwebmp.core.base.angular.controllers.JWAngularController;
 import com.jwebmp.core.base.angular.modules.AngularModuleBase;
 import com.jwebmp.core.base.angular.modules.JWAngularModule;
-import com.jwebmp.core.base.angular.services.*;
+import com.jwebmp.core.base.angular.services.IAngularController;
+import com.jwebmp.core.base.angular.services.IAngularDefaultService;
 import com.jwebmp.core.base.html.interfaces.HTMLFeatures;
 import com.jwebmp.core.exceptions.NullComponentException;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 import java.util.*;
+
+import static com.jwebmp.core.services.JWebMPServicesBindings.*;
 
 /**
  * The Angular 1 Feature Implementation
@@ -257,8 +261,7 @@ public class AngularFeature
 	private StringBuilder compileFactories()
 	{
 		StringBuilder output = new StringBuilder();
-		ServiceLoader<IAngularFactory> factories = ServiceLoader.load(IAngularFactory.class);
-		buildString(output, factories);
+		buildString(output, GuiceContext.get(AngularFactoryKey));
 		return output;
 	}
 
@@ -271,8 +274,7 @@ public class AngularFeature
 	private StringBuilder compileConfigurations()
 	{
 		StringBuilder output = new StringBuilder();
-		ServiceLoader<IAngularConfiguration> loader = ServiceLoader.load(IAngularConfiguration.class);
-		buildString(output, loader);
+		buildString(output, GuiceContext.get(AngularConfigurationKey));
 		return output;
 	}
 
@@ -285,8 +287,7 @@ public class AngularFeature
 	private StringBuilder compileDirectives()
 	{
 		StringBuilder output = new StringBuilder();
-		ServiceLoader<IAngularDirective> directives = ServiceLoader.load(IAngularDirective.class);
-		buildString(output, directives);
+		buildString(output, GuiceContext.get(AngularDirectivesKey));
 		return output;
 	}
 
@@ -377,14 +378,10 @@ public class AngularFeature
 	 * Method buildString loads the string builder for the given loader
 	 *
 	 * @param output
-	 * 		of type StringBuilder
-	 * @param loader
-	 * 		of type ServiceLoader<? extends IAngularDefaultService>
+	 * 		of type StringBuilderW
 	 */
-	private void buildString(StringBuilder output, ServiceLoader<? extends IAngularDefaultService> loader)
+	private void buildString(StringBuilder output, Set<? extends IAngularDefaultService> sortedList)
 	{
-		Set<IAngularDefaultService> sortedList = new TreeSet<>();
-		loader.forEach(sortedList::add);
 		sortedList.forEach(item ->
 		                   {
 			                   String function = item.renderFunction();

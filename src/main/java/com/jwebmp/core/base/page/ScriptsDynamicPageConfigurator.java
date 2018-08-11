@@ -21,7 +21,9 @@ import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
 
 import javax.validation.constraints.NotNull;
-import java.util.ServiceLoader;
+import java.util.Set;
+
+import static com.jwebmp.core.services.JWebMPServicesBindings.*;
 
 /**
  * Configures the dynamic script insertions that run last into the page
@@ -33,15 +35,6 @@ import java.util.ServiceLoader;
 public class ScriptsDynamicPageConfigurator
 		implements IPageConfigurator
 {
-	/**
-	 * Field afterLoader
-	 */
-	private static final ServiceLoader<RenderAfterDynamicScripts> afterLoader = ServiceLoader.load(RenderAfterDynamicScripts.class);
-	/**
-	 * Field beforeLoader
-	 */
-	private static final ServiceLoader<RenderBeforeDynamicScripts> beforeLoader = ServiceLoader.load(RenderBeforeDynamicScripts.class);
-
 	/**
 	 * Constructor ScriptsDynamicPageConfigurator creates a new ScriptsDynamicPageConfigurator instance.
 	 */
@@ -68,11 +61,12 @@ public class ScriptsDynamicPageConfigurator
 			//Render Before Dynamic Scripts
 			Paragraph beforeText = new Paragraph().setTextOnly(true);
 			StringBuilder sbBeforeText = new StringBuilder();
-			for (RenderBeforeDynamicScripts renderAfterDynamicScripts : ScriptsDynamicPageConfigurator.beforeLoader)
+			Set<RenderBeforeDynamicScripts> beforeLoader = GuiceContext.get(RenderBeforeDynamicScriptsKey);
+			for (RenderBeforeDynamicScripts renderAfterDynamicScripts : beforeLoader)
 			{
 				sbBeforeText.append(GuiceContext.get(renderAfterDynamicScripts.getClass())
 				                                .render(page)
-				                                .append("\n"));
+				                                .append(page.getNewLine()));
 			}
 			if (!sbBeforeText.toString()
 			                 .isEmpty())
@@ -149,11 +143,12 @@ public class ScriptsDynamicPageConfigurator
 			//Render After Dynamic Scripts
 			Paragraph afterText = new Paragraph().setTextOnly(true);
 			StringBuilder sbAfterText = new StringBuilder();
-			for (RenderAfterDynamicScripts renderAfterDynamicScripts : ScriptsDynamicPageConfigurator.afterLoader)
+			Set<RenderAfterDynamicScripts> afterLoader = GuiceContext.get(RenderAfterDynamicScriptsKey);
+			for (RenderAfterDynamicScripts renderAfterDynamicScripts : afterLoader)
 			{
 				sbAfterText.append(GuiceContext.get(renderAfterDynamicScripts.getClass())
 				                               .render(page)
-				                               .append("\n"));
+				                               .append(page.getNewLine()));
 			}
 			if (!sbAfterText.toString()
 			                .isEmpty())
@@ -169,7 +164,9 @@ public class ScriptsDynamicPageConfigurator
 	/**
 	 * Sort order for startup, Default 100.
 	 *
-	 * @return the sort order never null
+	 * @return the sort order never null. Integer. MAX
+	 *
+	 * @see com.jwebmp.core.services.IPageConfigurator#sortOrder()
 	 */
 	@Override
 	public Integer sortOrder()

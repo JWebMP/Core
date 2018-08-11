@@ -9,9 +9,9 @@ import com.jwebmp.core.services.RenderBeforeLinks;
 import com.jwebmp.guicedinjection.GuiceContext;
 
 import javax.validation.constraints.NotNull;
-import java.util.ServiceLoader;
 import java.util.Set;
-import java.util.TreeSet;
+
+import static com.jwebmp.core.services.JWebMPServicesBindings.*;
 
 /**
  * Inserts the CSS Links into the page
@@ -60,12 +60,7 @@ public class CSSLinksInsertPageConfigurator
 
 	private void renderBeforeLinks(Page<?> page)
 	{
-		ServiceLoader<RenderBeforeLinks> loader = ServiceLoader.load(RenderBeforeLinks.class);
-		Set<RenderBeforeLinks> renderB = new TreeSet<>();
-		for (RenderBeforeLinks a : loader)
-		{
-			renderB.add(GuiceContext.get(a.getClass()));
-		}
+		Set<RenderBeforeLinks> renderB = GuiceContext.get(RenderBeforeLinksKey);
 		Paragraph before = new Paragraph().setTextOnly(true);
 		for (RenderBeforeLinks render : renderB)
 		{
@@ -85,10 +80,7 @@ public class CSSLinksInsertPageConfigurator
 
 	private void renderAfterLinks(Page<?> page)
 	{
-		//After
-		ServiceLoader<RenderAfterLinks> loader = ServiceLoader.load(RenderAfterLinks.class);
-		Set<RenderAfterLinks> renderA = new TreeSet<>();
-		loader.forEach(a -> renderA.add(GuiceContext.get(a.getClass())));
+		Set<RenderAfterLinks> renderA = GuiceContext.get(RenderAfterLinksKey);
 		Paragraph after = new Paragraph().setTextOnly(true);
 		for (RenderAfterLinks render : renderA)
 		{

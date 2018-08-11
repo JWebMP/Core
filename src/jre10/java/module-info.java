@@ -3,6 +3,7 @@ import com.jwebmp.core.base.angular.controllers.JWAngularController;
 import com.jwebmp.core.base.angular.modules.AngularMessagesModule;
 import com.jwebmp.core.base.angular.services.*;
 import com.jwebmp.core.services.*;
+import com.jwebmp.guicedinjection.interfaces.IGuiceDefaultBinder;
 import com.jwebmp.guicedservlets.services.IGuiceSiteBinder;
 
 module com.jwebmp.core {
@@ -179,6 +180,7 @@ module com.jwebmp.core {
 	uses RenderBeforeScripts;
 
 	provides IGuiceSiteBinder with JWebMPSiteBinder;
+	provides IGuiceDefaultBinder with JWebMPServicesBindings;
 
 	provides IAngularModule with AngularMessagesModule;
 	provides IAngularController with JWAngularController;

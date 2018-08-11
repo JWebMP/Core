@@ -132,7 +132,7 @@ public class ComponentEventBase<F extends GlobalFeatures & Serializable, E exten
 		                             .getComponentType()
 		                             .equals(ComponentTypes.Event))
 		{
-			ComponentEventBase.LOG.log(Level.WARNING, "Tried to add a non event to the event collection");
+			LOG.log(Level.WARNING, "Tried to add a non event to the event collection");
 		}
 		else
 		{
@@ -389,30 +389,17 @@ public class ComponentEventBase<F extends GlobalFeatures & Serializable, E exten
 		{
 			init();
 		}
-		super.preConfigure();
-	}
-
-	/**
-	 * Initialize all the features
-	 */
-	@Override
-	public void init()
-	{
-		if (!isInitialized())
+		if (!isConfigured())
 		{
-			getEvents().forEach(events ->
+			getEvents().forEach(event ->
 			                    {
-				                    ComponentEventBase cfb = (ComponentEventBase) events;
+				                    ComponentEventBase.class.cast(event)
+				                                            .preConfigure();
 				                    assignFunctionsToComponent();
-				                    if (!cfb.isConfigured())
-				                    {
-					                    cfb.init();
-					                    cfb.preConfigure();
-					                    cfb.assignFunctionsToComponent();
-				                    }
 			                    });
 		}
-		super.init();
+		super.preConfigure();
+
 	}
 
 	/**

@@ -26,8 +26,13 @@ import com.jwebmp.core.services.RenderBeforeScripts;
 import com.jwebmp.guicedinjection.GuiceContext;
 
 import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+import static com.jwebmp.core.services.JWebMPServicesBindings.*;
 
 public class ScriptsInsertPageConfigurator
 		extends RequirementsPriorityAbstractInsertPageConfigurator
@@ -82,9 +87,7 @@ public class ScriptsInsertPageConfigurator
 	@SuppressWarnings("unchecked")
 	private void renderBeforeScripts(ComponentHierarchyBase scriptAddTo)
 	{
-		ServiceLoader<RenderBeforeScripts> loader = ServiceLoader.load(RenderBeforeScripts.class);
-		Set<RenderBeforeScripts> renderB = new TreeSet<>();
-		loader.forEach(a -> renderB.add(GuiceContext.get(a.getClass())));
+		Set<RenderBeforeScripts> renderB = GuiceContext.get(RenderBeforeScriptsKey);
 		Paragraph before = new Paragraph().setTextOnly(true);
 		renderB.forEach(render -> before.setText(before.getText(0)
 		                                               .toString() + render.render(scriptAddTo.getPage())
@@ -126,9 +129,7 @@ public class ScriptsInsertPageConfigurator
 	@SuppressWarnings("unchecked")
 	private void renderAfterScripts(ComponentHierarchyBase scriptAddTo)
 	{
-		ServiceLoader<RenderAfterScripts> loader = ServiceLoader.load(RenderAfterScripts.class);
-		Set<RenderAfterScripts> renderA = new TreeSet<>();
-		loader.forEach(a -> renderA.add(GuiceContext.get(a.getClass())));
+		Set<RenderAfterScripts> renderA = GuiceContext.get(RenderAfterScriptsKey);
 		Paragraph after = new Paragraph().setTextOnly(true);
 		for (RenderAfterScripts render : renderA)
 		{
