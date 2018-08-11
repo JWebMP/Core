@@ -81,7 +81,7 @@ public class JWebMPServicesBindings
 		      .in(Singleton.class);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "MissingClassJavaDoc"})
 	private <T> Set<T> loaderToSet(ServiceLoader<T> loader)
 	{
 		Set<T> renderB = new TreeSet<>();
