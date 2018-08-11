@@ -83,9 +83,8 @@ public class ScriptsInsertPageConfigurator
 	private void renderBeforeScripts(ComponentHierarchyBase scriptAddTo)
 	{
 		ServiceLoader<RenderBeforeScripts> loader = ServiceLoader.load(RenderBeforeScripts.class);
-		List<RenderBeforeScripts> renderB = new ArrayList<>();
+		Set<RenderBeforeScripts> renderB = new TreeSet<>();
 		loader.forEach(a -> renderB.add(GuiceContext.get(a.getClass())));
-		renderB.sort(Comparator.comparingLong(RenderBeforeScripts::sortOrder));
 		Paragraph before = new Paragraph().setTextOnly(true);
 		renderB.forEach(render -> before.setText(before.getText(0)
 		                                               .toString() + render.render(scriptAddTo.getPage())
@@ -128,9 +127,8 @@ public class ScriptsInsertPageConfigurator
 	private void renderAfterScripts(ComponentHierarchyBase scriptAddTo)
 	{
 		ServiceLoader<RenderAfterScripts> loader = ServiceLoader.load(RenderAfterScripts.class);
-		List<RenderAfterScripts> renderA = new ArrayList<>();
+		Set<RenderAfterScripts> renderA = new TreeSet<>();
 		loader.forEach(a -> renderA.add(GuiceContext.get(a.getClass())));
-		renderA.sort(Comparator.comparingLong(RenderAfterScripts::sortOrder));
 		Paragraph after = new Paragraph().setTextOnly(true);
 		for (RenderAfterScripts render : renderA)
 		{

@@ -9,10 +9,9 @@ import com.jwebmp.core.services.RenderBeforeLinks;
 import com.jwebmp.guicedinjection.GuiceContext;
 
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 import java.util.ServiceLoader;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Inserts the CSS Links into the page
@@ -62,12 +61,11 @@ public class CSSLinksInsertPageConfigurator
 	private void renderBeforeLinks(Page<?> page)
 	{
 		ServiceLoader<RenderBeforeLinks> loader = ServiceLoader.load(RenderBeforeLinks.class);
-		List<RenderBeforeLinks> renderB = new ArrayList<>();
+		Set<RenderBeforeLinks> renderB = new TreeSet<>();
 		for (RenderBeforeLinks a : loader)
 		{
 			renderB.add(GuiceContext.get(a.getClass()));
 		}
-		renderB.sort(Comparator.comparingLong(RenderBeforeLinks::sortOrder));
 		Paragraph before = new Paragraph().setTextOnly(true);
 		for (RenderBeforeLinks render : renderB)
 		{
@@ -89,9 +87,8 @@ public class CSSLinksInsertPageConfigurator
 	{
 		//After
 		ServiceLoader<RenderAfterLinks> loader = ServiceLoader.load(RenderAfterLinks.class);
-		List<RenderAfterLinks> renderA = new ArrayList<>();
+		Set<RenderAfterLinks> renderA = new TreeSet<>();
 		loader.forEach(a -> renderA.add(GuiceContext.get(a.getClass())));
-		renderA.sort(Comparator.comparingLong(RenderAfterLinks::sortOrder));
 		Paragraph after = new Paragraph().setTextOnly(true);
 		for (RenderAfterLinks render : renderA)
 		{
