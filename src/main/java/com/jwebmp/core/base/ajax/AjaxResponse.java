@@ -447,11 +447,24 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 *
 	 * @return
 	 */
-	public Set<String> getJsRenders(ComponentHierarchyBase component)
+	@SuppressWarnings("WeakerAccess")
+	public Set<String> getJsRenders(ComponentHierarchyBase<?, ?, ?, ?, ?> component)
 	{
 		Set<String> jsRenders = new LinkedHashSet<>();
-		jsRenders.add(component.renderJavascriptAll()
-		                       .toString());
+		for (ComponentHierarchyBase<?, ?, ?, ?, ?> componentHierarchyBase : component.getChildrenHierarchy())
+		{
+			for (StringBuilder stringBuilder : componentHierarchyBase.getQueriesAll())
+			{
+				if (!stringBuilder.toString()
+				                  .isEmpty())
+				{
+					String string = stringBuilder.toString();
+					string = string.replace("\n", "");
+					string = string.replace("\t", "");
+					jsRenders.add(string);
+				}
+			}
+		}
 		return jsRenders;
 	}
 

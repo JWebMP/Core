@@ -110,21 +110,21 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 	 * @return boolean
 	 */
 	@Override
-	public boolean equals(Object o)
+	public boolean equals(Object obj)
 	{
-		if (this == o)
+		if (this == obj)
 		{
 			return true;
 		}
-		if (o == null || getClass() != o.getClass())
+		if (obj == null || getClass() != obj.getClass())
 		{
 			return false;
 		}
-		if (!super.equals(o))
+		if (!super.equals(obj))
 		{
 			return false;
 		}
-		Feature<?, ?> feature = (Feature<?, ?>) o;
+		Feature<?, ?> feature = (Feature<?, ?>) obj;
 		return Objects.equals(getName(), feature.getName());
 	}
 
