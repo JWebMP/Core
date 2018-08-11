@@ -117,6 +117,7 @@ public class CSSLink<J extends CSSLink<J>>
 		addAttribute(CSSLinkAttributes.Type, "text/css");
 		addAttribute(CSSLinkAttributes.Rel, "stylesheet");
 		addAttribute(CSSLinkAttributes.HRef, cssFile);
+		setInlineClosingTag(false);
 	}
 
 	/**
@@ -132,6 +133,7 @@ public class CSSLink<J extends CSSLink<J>>
 		addAttribute(CSSLinkAttributes.Type, type);
 		addAttribute(CSSLinkAttributes.Rel, rel);
 		addAttribute(CSSLinkAttributes.HRef, href);
+		setInlineClosingTag(false);
 	}
 
 	/**
@@ -161,6 +163,12 @@ public class CSSLink<J extends CSSLink<J>>
 		}
 	}
 
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
+	}
+
 	/**
 	 * Is a valid equals clause
 	 * <p>
@@ -180,12 +188,6 @@ public class CSSLink<J extends CSSLink<J>>
 		CSSLink lin = (CSSLink) obj;
 
 		return getAttribute(CSSLinkAttributes.HRef).equals(lin.getAttribute(CSSLinkAttributes.HRef));
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
 	}
 
 	/**

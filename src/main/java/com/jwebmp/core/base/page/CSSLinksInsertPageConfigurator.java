@@ -4,30 +4,29 @@ import com.jwebmp.core.Page;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.Paragraph;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
+import com.jwebmp.core.services.RenderAfterLinks;
+import com.jwebmp.core.services.RenderBeforeLinks;
 import com.jwebmp.guicedinjection.GuiceContext;
-import com.jwebmp.interception.interfaces.RenderAfterLinks;
-import com.jwebmp.interception.interfaces.RenderBeforeLinks;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
+import java.util.ServiceLoader;
 
+/**
+ * Inserts the CSS Links into the page
+ */
 @SuppressWarnings("unused")
-public
-class CSSLinksInsertPageConfigurator
+public class CSSLinksInsertPageConfigurator
 		extends RequirementsPriorityAbstractInsertPageConfigurator
 {
+	/**
+	 * Constructor CSSLinksInsertPageConfigurator creates a new CSSLinksInsertPageConfigurator instance.
+	 */
 	public CSSLinksInsertPageConfigurator()
 	{
 		//No config required
-	}
-
-	@Override
-	public Integer sortOrder()
-	{
-		return Integer.MAX_VALUE - 10;
 	}
 
 	@NotNull
@@ -54,22 +53,26 @@ class CSSLinksInsertPageConfigurator
 		return page;
 	}
 
+	@Override
+	public Integer sortOrder()
+	{
+		return Integer.MAX_VALUE - 10;
+	}
+
 	private void renderBeforeLinks(Page<?> page)
 	{
-		Set<Class<? extends RenderBeforeLinks>> renderBeforeScripts = GuiceContext.reflect()
-		                                                                          .getSubTypesOf(RenderBeforeLinks.class);
+		ServiceLoader<RenderBeforeLinks> loader = ServiceLoader.load(RenderBeforeLinks.class);
 		List<RenderBeforeLinks> renderB = new ArrayList<>();
-		for (Class<? extends RenderBeforeLinks> renderBeforeScript : renderBeforeScripts)
+		for (RenderBeforeLinks a : loader)
 		{
-			RenderBeforeLinks s = GuiceContext.getInstance(renderBeforeScript);
-			renderB.add(s);
+			renderB.add(GuiceContext.get(a.getClass()));
 		}
-		renderB.sort(Comparator.comparingInt(RenderBeforeLinks::sortOrder));
+		renderB.sort(Comparator.comparingLong(RenderBeforeLinks::sortOrder));
 		Paragraph before = new Paragraph().setTextOnly(true);
 		for (RenderBeforeLinks render : renderB)
 		{
 			before.setText(before.getText(0)
-			                     .toString() + render.render()
+			                     .toString() + render.render(page)
 			                                         .toString());
 		}
 		if (before.getText(0)
@@ -85,20 +88,15 @@ class CSSLinksInsertPageConfigurator
 	private void renderAfterLinks(Page<?> page)
 	{
 		//After
-		Set<Class<? extends RenderAfterLinks>> renderAfterLinks = GuiceContext.reflect()
-		                                                                      .getSubTypesOf(RenderAfterLinks.class);
+		ServiceLoader<RenderAfterLinks> loader = ServiceLoader.load(RenderAfterLinks.class);
 		List<RenderAfterLinks> renderA = new ArrayList<>();
-		for (Class<? extends RenderAfterLinks> renderBeforeScript : renderAfterLinks)
-		{
-			RenderAfterLinks s = GuiceContext.getInstance(renderBeforeScript);
-			renderA.add(s);
-		}
-		renderA.sort(Comparator.comparingInt(RenderAfterLinks::sortOrder));
+		loader.forEach(a -> renderA.add(GuiceContext.get(a.getClass())));
+		renderA.sort(Comparator.comparingLong(RenderAfterLinks::sortOrder));
 		Paragraph after = new Paragraph().setTextOnly(true);
 		for (RenderAfterLinks render : renderA)
 		{
 			after.setText(after.getText(0)
-			                   .toString() + render.render()
+			                   .toString() + render.render(page)
 			                                       .toString());
 		}
 		if (after.getText(0)

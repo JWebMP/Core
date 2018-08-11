@@ -389,17 +389,30 @@ public class ComponentEventBase<F extends GlobalFeatures & Serializable, E exten
 		{
 			init();
 		}
-		if (!isConfigured())
+		super.preConfigure();
+	}
+
+	/**
+	 * Initialize all the features
+	 */
+	@Override
+	public void init()
+	{
+		if (!isInitialized())
 		{
-			getEvents().forEach(event ->
+			getEvents().forEach(events ->
 			                    {
-				                    ComponentEventBase.class.cast(event)
-				                                            .preConfigure();
+				                    ComponentEventBase cfb = (ComponentEventBase) events;
 				                    assignFunctionsToComponent();
+				                    if (!cfb.isConfigured())
+				                    {
+					                    cfb.init();
+					                    cfb.preConfigure();
+					                    cfb.assignFunctionsToComponent();
+				                    }
 			                    });
 		}
-		super.preConfigure();
-
+		super.init();
 	}
 
 	/**

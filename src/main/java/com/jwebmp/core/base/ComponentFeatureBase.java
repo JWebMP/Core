@@ -39,6 +39,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Level;
 
 /**
@@ -531,7 +532,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	{
 		if (features == null)
 		{
-			features = new LinkedHashSet<>();
+			features = new TreeSet<>();
 		}
 		return features;
 	}

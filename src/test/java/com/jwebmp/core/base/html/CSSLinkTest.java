@@ -63,7 +63,7 @@ public class CSSLinkTest
 		 */
 		instance.getPage()
 		        .setBrowser(Browsers.InternetExplorer6);
-		expResult = "<link href=\"This is a link to something\" rel=\"stylesheet\" target=\"Target Frame\" type=\"text/css\">";
+		expResult = "<link href=\"This is a link to something\" rel=\"stylesheet\" target=\"Target Frame\" type=\"text/css\"/>";
 		instance.setTiny(false);
 		result = instance.toString(true);
 		System.out.println(instance.toString(true));

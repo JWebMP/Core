@@ -7,6 +7,7 @@ import com.jwebmp.core.annotations.JWebMPSiteBinder;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.angular.AngularPageConfigurator;
 import com.jwebmp.core.base.html.CSSLink;
+import com.jwebmp.core.base.html.Paragraph;
 import com.jwebmp.core.base.html.Script;
 import com.jwebmp.core.base.html.Style;
 import com.jwebmp.core.base.html.attributes.ScriptAttributes;
@@ -14,9 +15,13 @@ import com.jwebmp.core.base.servlets.JWScriptServlet;
 import com.jwebmp.core.htmlbuilder.css.composer.CSSComposer;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import com.jwebmp.core.services.IPageConfigurator;
+import com.jwebmp.core.services.RenderAfterDynamicScripts;
+import com.jwebmp.core.services.RenderBeforeDynamicScripts;
 import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 
 import javax.validation.constraints.NotNull;
+import java.util.ServiceLoader;
 
 /**
  * Configures the dynamic script insertions that run last into the page
@@ -28,6 +33,15 @@ import javax.validation.constraints.NotNull;
 public class ScriptsDynamicPageConfigurator
 		implements IPageConfigurator
 {
+	/**
+	 * Field afterLoader
+	 */
+	private static final ServiceLoader<RenderAfterDynamicScripts> afterLoader = ServiceLoader.load(RenderAfterDynamicScripts.class);
+	/**
+	 * Field beforeLoader
+	 */
+	private static final ServiceLoader<RenderBeforeDynamicScripts> beforeLoader = ServiceLoader.load(RenderBeforeDynamicScripts.class);
+
 	/**
 	 * Constructor ScriptsDynamicPageConfigurator creates a new ScriptsDynamicPageConfigurator instance.
 	 */
@@ -51,6 +65,23 @@ public class ScriptsDynamicPageConfigurator
 	{
 		if (!page.isConfigured())
 		{
+			//Render Before Dynamic Scripts
+			Paragraph beforeText = new Paragraph().setTextOnly(true);
+			StringBuilder sbBeforeText = new StringBuilder();
+			for (RenderBeforeDynamicScripts renderAfterDynamicScripts : ScriptsDynamicPageConfigurator.beforeLoader)
+			{
+				sbBeforeText.append(GuiceContext.get(renderAfterDynamicScripts.getClass())
+				                                .render(page)
+				                                .append("\n"));
+			}
+			if (!sbBeforeText.toString()
+			                 .isEmpty())
+			{
+				beforeText.setText(sbBeforeText.toString());
+				page.getBody()
+				    .add(beforeText);
+			}
+
 			Style s = getCss(page);
 			if (page.getOptions()
 			        .isDynamicRender())
@@ -76,7 +107,6 @@ public class ScriptsDynamicPageConfigurator
 					    .add(getDynamicReference(JWebMPSiteBinder.getAngularScriptLocation()
 					                                             .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY)));
 				}
-
 			}
 			else
 			{
@@ -114,6 +144,23 @@ public class ScriptsDynamicPageConfigurator
 				{
 					addable.add(getAngularScript(page));
 				}
+			}
+
+			//Render After Dynamic Scripts
+			Paragraph afterText = new Paragraph().setTextOnly(true);
+			StringBuilder sbAfterText = new StringBuilder();
+			for (RenderAfterDynamicScripts renderAfterDynamicScripts : ScriptsDynamicPageConfigurator.afterLoader)
+			{
+				sbAfterText.append(GuiceContext.get(renderAfterDynamicScripts.getClass())
+				                               .render(page)
+				                               .append("\n"));
+			}
+			if (!sbAfterText.toString()
+			                .isEmpty())
+			{
+				afterText.setText(sbAfterText.toString());
+				page.getBody()
+				    .add(afterText);
 			}
 		}
 		return page;

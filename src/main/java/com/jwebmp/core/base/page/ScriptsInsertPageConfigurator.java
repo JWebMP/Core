@@ -21,9 +21,9 @@ import com.jwebmp.core.Page;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.Paragraph;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
+import com.jwebmp.core.services.RenderAfterScripts;
+import com.jwebmp.core.services.RenderBeforeScripts;
 import com.jwebmp.guicedinjection.GuiceContext;
-import com.jwebmp.interception.interfaces.RenderAfterScripts;
-import com.jwebmp.interception.interfaces.RenderBeforeDynamicScripts;
 
 import javax.validation.constraints.NotNull;
 import java.util.*;
@@ -35,12 +35,6 @@ public class ScriptsInsertPageConfigurator
 	public ScriptsInsertPageConfigurator()
 	{
 		//No config required
-	}
-
-	@Override
-	public Integer sortOrder()
-	{
-		return Integer.MAX_VALUE - 8;
 	}
 
 	@NotNull
@@ -72,6 +66,12 @@ public class ScriptsInsertPageConfigurator
 		return page;
 	}
 
+	@Override
+	public Integer sortOrder()
+	{
+		return Integer.MAX_VALUE - 8;
+	}
+
 	private void getScripts(Page page, ComponentHierarchyBase scriptAddTo)
 	{
 		renderBeforeScripts(scriptAddTo);
@@ -82,20 +82,13 @@ public class ScriptsInsertPageConfigurator
 	@SuppressWarnings("unchecked")
 	private void renderBeforeScripts(ComponentHierarchyBase scriptAddTo)
 	{
-		//script rendering in body
-		Set<Class<? extends RenderBeforeDynamicScripts>> renderBeforeScripts = GuiceContext.reflect()
-		                                                                                   .getSubTypesOf(RenderBeforeDynamicScripts.class);
-		List<RenderBeforeDynamicScripts> renderB = new ArrayList<>();
-		for (Class<? extends RenderBeforeDynamicScripts> renderBeforeScript : renderBeforeScripts)
-		{
-			RenderBeforeDynamicScripts s = GuiceContext.getInstance(renderBeforeScript);
-			renderB.add(s);
-		}
-
-		renderB.sort(Comparator.comparingInt(RenderBeforeDynamicScripts::sortOrder));
+		ServiceLoader<RenderBeforeScripts> loader = ServiceLoader.load(RenderBeforeScripts.class);
+		List<RenderBeforeScripts> renderB = new ArrayList<>();
+		loader.forEach(a -> renderB.add(GuiceContext.get(a.getClass())));
+		renderB.sort(Comparator.comparingLong(RenderBeforeScripts::sortOrder));
 		Paragraph before = new Paragraph().setTextOnly(true);
 		renderB.forEach(render -> before.setText(before.getText(0)
-		                                               .toString() + render.render()
+		                                               .toString() + render.render(scriptAddTo.getPage())
 		                                                                   .toString()));
 		if (before.getText(0)
 		          .toString()
@@ -111,7 +104,8 @@ public class ScriptsInsertPageConfigurator
 	 * <p>
 	 * Does not do top shelf
 	 *
-	 * @param component The component to add scripts to
+	 * @param component
+	 * 		The component to add scripts to
 	 */
 	@SuppressWarnings("unchecked")
 	private void addScriptsTo(Page<?> page, ComponentHierarchyBase component)
@@ -133,20 +127,15 @@ public class ScriptsInsertPageConfigurator
 	@SuppressWarnings("unchecked")
 	private void renderAfterScripts(ComponentHierarchyBase scriptAddTo)
 	{
-		Set<Class<? extends RenderAfterScripts>> renderAfterScripts = GuiceContext.reflect()
-		                                                                          .getSubTypesOf(RenderAfterScripts.class);
+		ServiceLoader<RenderAfterScripts> loader = ServiceLoader.load(RenderAfterScripts.class);
 		List<RenderAfterScripts> renderA = new ArrayList<>();
-		for (Class<? extends RenderAfterScripts> renderBeforeScript : renderAfterScripts)
-		{
-			RenderAfterScripts s = GuiceContext.getInstance(renderBeforeScript);
-			renderA.add(s);
-		}
-		renderA.sort(Comparator.comparingInt(RenderAfterScripts::sortOrder));
+		loader.forEach(a -> renderA.add(GuiceContext.get(a.getClass())));
+		renderA.sort(Comparator.comparingLong(RenderAfterScripts::sortOrder));
 		Paragraph after = new Paragraph().setTextOnly(true);
 		for (RenderAfterScripts render : renderA)
 		{
 			after.setText(after.getText(0)
-			                   .toString() + render.render()
+			                   .toString() + render.render(scriptAddTo.getPage())
 			                                       .toString());
 		}
 		if (after.getText(0)

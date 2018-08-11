@@ -566,6 +566,31 @@ public class Page<J extends Page<J>>
 	}
 
 	/**
+	 * Configures the page and all its components
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public void preConfigure()
+	{
+		if (!isInitialized())
+		{
+			init();
+		}
+		if (!isConfigured())
+		{
+			configurePage();
+
+			getHead().preConfigure();
+			getBody().preConfigure();
+
+			configurePageHeader();
+			addVariablesScriptToPage();
+		}
+		super.preConfigure();
+		setConfigured(true);
+	}
+
+	/**
 	 * Renders all the children to a string builder
 	 *
 	 * @return The string representation of this page
@@ -629,28 +654,21 @@ public class Page<J extends Page<J>>
 		                .isEmpty();
 	}
 
-	/**
-	 * Configures the page and all its components
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public void preConfigure()
+	private void configurePage()
 	{
-		if (!isInitialized())
+		ServiceLoader<IPageConfigurator> pageConfigurators = ServiceLoader.load(IPageConfigurator.class);
+		List<IPageConfigurator> sortedConfigurators = new ArrayList<>();
+		for (IPageConfigurator pageConfigurator : pageConfigurators)
 		{
-			init();
+			sortedConfigurators.add(GuiceContext.get(pageConfigurator.getClass()));
 		}
-		if (!isConfigured())
+		Collections.sort(sortedConfigurators);
+		for (IPageConfigurator sortedConfigurator : sortedConfigurators)
 		{
-			getHead().preConfigure();
-			getBody().preConfigure();
-
-			configurePageHeader();
-			addVariablesScriptToPage();
-			configurePage();
+			Page.log.log(Level.FINEST, "Loading IPageConfigurator - " + sortedConfigurator.getClass()
+			                                                                              .getSimpleName());
+			sortedConfigurator.configure(this);
 		}
-		super.preConfigure();
-		setConfigured(true);
 	}
 
 	/**
@@ -703,23 +721,6 @@ public class Page<J extends Page<J>>
 			{
 				getHead().add(variablesScript);
 			}
-		}
-	}
-
-	private void configurePage()
-	{
-		ServiceLoader<IPageConfigurator> pageConfigurators = ServiceLoader.load(IPageConfigurator.class);
-		List<IPageConfigurator> sortedConfigurators = new ArrayList<>();
-		for (IPageConfigurator pageConfigurator : pageConfigurators)
-		{
-			sortedConfigurators.add(pageConfigurator);
-		}
-		Collections.sort(sortedConfigurators);
-		for (IPageConfigurator sortedConfigurator : sortedConfigurators)
-		{
-			Page.log.log(Level.FINEST, "Loading IPageConfigurator - " + sortedConfigurator.getClass()
-			                                                                              .getSimpleName());
-			sortedConfigurator.configure(this);
 		}
 	}
 }
