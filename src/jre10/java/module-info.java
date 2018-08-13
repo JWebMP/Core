@@ -156,8 +156,7 @@ module com.jwebmp.core {
 	requires com.fasterxml.jackson.datatype.jdk8;
 	requires com.fasterxml.jackson.datatype.jsr310;
 	requires com.fasterxml.jackson.core;
-	requires commons.io;
-	requires commons.lang3;
+
 	requires java.sql;
 	requires com.google.common;
 
