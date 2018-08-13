@@ -4,13 +4,11 @@ import com.google.inject.Key;
 import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 import com.jwebmp.core.base.angular.services.*;
-import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.guicedinjection.abstractions.GuiceInjectorModule;
 import com.jwebmp.guicedinjection.interfaces.IGuiceDefaultBinder;
 
 import java.util.ServiceLoader;
 import java.util.Set;
-import java.util.TreeSet;
 
 @SuppressWarnings("Convert2Diamond")
 public class JWebMPServicesBindings
@@ -79,16 +77,5 @@ public class JWebMPServicesBindings
 		module.bind(JWebMPServicesBindings.AngularFactoryKey)
 		      .toProvider(() -> loaderToSet(ServiceLoader.load(IAngularFactory.class)))
 		      .in(Singleton.class);
-	}
-
-	@SuppressWarnings({"unchecked", "MissingClassJavaDoc"})
-	private <T> Set<T> loaderToSet(ServiceLoader<T> loader)
-	{
-		Set<T> renderB = new TreeSet<>();
-		for (T newInstance : loader)
-		{
-			renderB.add((T) GuiceContext.get(newInstance.getClass()));
-		}
-		return renderB;
 	}
 }
