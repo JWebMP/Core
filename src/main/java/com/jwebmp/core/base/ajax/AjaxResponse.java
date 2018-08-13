@@ -461,6 +461,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 					String string = stringBuilder.toString();
 					string = string.replace("\n", "");
 					string = string.replace("\t", "");
+					string = string.replace("  ", "");
 					jsRenders.add(string);
 				}
 			}
