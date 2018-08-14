@@ -159,6 +159,7 @@ module com.jwebmp.core {
 
 	requires java.sql;
 	requires com.google.common;
+	requires org.apache.commons.io;
 
 	uses com.jwebmp.core.utilities.regex.IRegularExpressions;
 	uses IAngularDirective;
