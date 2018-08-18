@@ -391,13 +391,13 @@ public abstract class JWDefaultServlet
 		         .getMajor()
 		         .isEmpty())
 		{
-			JWDefaultServlet.log.log(Level.INFO,
+			JWDefaultServlet.log.log(Level.FINER,
 			                         "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}];[Operating System]-[{3}];[Device Category]-[{4}];[Device]-[{5}];[CSS]-[{6}];[HTML]-[{7}];",
 			                         new Object[]{request.getSession().getId(), b.getBrowserGroup().toString(), b.getBrowserVersion(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()});
 		}
 		else
 		{
-			JWDefaultServlet.log.log(Level.INFO,
+			JWDefaultServlet.log.log(Level.FINER,
 			                         "[SessionID]-[{0}];[Browser]-[{1}];[Version]-[{2}.{3}];[Operating System]-[{4}];[Device Category]-[{5}];[Device]-[{6}];[CSS]-[{7}];[HTML]-[{8}];",
 			                         new Object[]{request.getSession().getId(), agent.getName(), agent.getVersionNumber().getMajor(), agent.getVersionNumber().getMinor(), agent.getOperatingSystem().getName(), agent.getDeviceCategory().getCategory(), agent.getDeviceCategory().getName(), b.getCapableCSSVersion(), b.getHtmlVersion()});
 		}
