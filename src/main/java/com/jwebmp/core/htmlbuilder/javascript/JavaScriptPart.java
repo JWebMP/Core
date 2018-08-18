@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.google.common.base.CaseFormat;
 import com.google.inject.Key;
 import com.google.inject.name.Names;
 import com.jwebmp.guicedinjection.GuiceContext;
@@ -27,10 +28,10 @@ import com.jwebmp.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 import java.io.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -44,6 +45,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.*;
  * @author mmagon
  * @since 2014/07/09
  */
+@SuppressWarnings("MissingClassJavaDoc")
 @JsonAutoDetect(fieldVisibility = ANY,
 		getterVisibility = NONE,
 		setterVisibility = NONE)
@@ -95,12 +97,12 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 		}
 		catch (JsonProcessingException ex)
 		{
-			log.log(Level.FINER, "Unable to Serialize as JSON Json Processing Exception", ex);
+			JavaScriptPart.log.log(Level.FINER, "Unable to Serialize as JSON Json Processing Exception", ex);
 			return "";
 		}
 		catch (Exception ex)
 		{
-			log.log(Level.SEVERE, "Unable to Serialize as JSON", ex);
+			JavaScriptPart.log.log(Level.SEVERE, "Unable to Serialize as JSON", ex);
 			return "";
 		}
 	}
@@ -302,6 +304,11 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 		return lists;
 	}
 
+	/**
+	 * Method render ...
+	 *
+	 * @return String
+	 */
 	public String render()
 	{
 		return toString();
@@ -327,11 +334,11 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 				}
 				catch (com.fasterxml.jackson.databind.JsonMappingException mapException)
 				{
-					log.log(Level.SEVERE, "JSON Mapping Exception!", mapException);
+					JavaScriptPart.log.log(Level.SEVERE, "JSON Mapping Exception!", mapException);
 				}
 				catch (JsonProcessingException ex)
 				{
-					log.log(Level.SEVERE, "Error Writing as Javascript!", ex);
+					JavaScriptPart.log.log(Level.SEVERE, "Error Writing as Javascript!", ex);
 				}
 				break;
 			}
@@ -343,7 +350,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 				}
 				catch (JsonProcessingException ex)
 				{
-					log.log(Level.SEVERE, "Error Writing as JSON Data!", ex);
+					JavaScriptPart.log.log(Level.SEVERE, "Error Writing as JSON Data!", ex);
 				}
 				break;
 			}
@@ -355,7 +362,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 				}
 				catch (JsonProcessingException ex)
 				{
-					log.log(Level.SEVERE, "Error Writing as Javascript Function!", ex);
+					JavaScriptPart.log.log(Level.SEVERE, "Error Writing as Javascript Function!", ex);
 				}
 				break;
 			}
@@ -367,7 +374,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 				}
 				catch (JsonProcessingException ex)
 				{
-					log.log(Level.SEVERE, "Error Writing as Default!", ex);
+					JavaScriptPart.log.log(Level.SEVERE, "Error Writing as Default!", ex);
 				}
 				break;
 			}
@@ -413,11 +420,18 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 		}
 		catch (NullPointerException e)
 		{
-			log.log(Level.SEVERE, "Cant find javascript object mapper, returning default", e);
+			JavaScriptPart.log.log(Level.SEVERE, "Cant find javascript object mapper, returning default", e);
 			return new ObjectMapper();
 		}
 	}
 
+	/**
+	 * Method isRenderEmptyBraces returns the renderEmptyBraces of this JavaScriptPart object.
+	 * <p>
+	 * if empty braces should be rendered
+	 *
+	 * @return the renderEmptyBraces (type boolean) of this JavaScriptPart object.
+	 */
 	public boolean isRenderEmptyBraces()
 	{
 		return renderEmptyBraces;
@@ -436,6 +450,47 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	{
 		this.renderEmptyBraces = renderEmptyBraces;
 		return (J) this;
+	}
+
+	/**
+	 * Renders the fields (getDeclaredFields()) as a map of html attributes
+	 *
+	 * @return
+	 */
+	public Map<String, String> toAttributes()
+	{
+		Map<String, String> map = new LinkedHashMap<>();
+
+		List<Field> fields = Arrays.asList(getClass().getDeclaredFields());
+		for (Field field : fields)
+		{
+			if (Modifier.isFinal(field.getModifiers()) || Modifier.isStatic(field.getModifiers()))
+			{
+				continue;
+			}
+			field.setAccessible(true);
+			try
+			{
+				Object result = field.get(this);
+				if (result != null)
+				{
+					if (JavaScriptPart.class.isAssignableFrom(result.getClass()))
+					{
+						map.put(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_HYPHEN, field.getName()), JavaScriptPart.class.cast(result)
+						                                                                                                 .toString(true));
+					}
+					else
+					{
+						map.put(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_HYPHEN, field.getName()), result.toString());
+					}
+				}
+			}
+			catch (Exception e)
+			{
+				JavaScriptPart.log.log(Level.WARNING, "Cant format as attributes", e);
+			}
+		}
+		return map;
 	}
 
 	/**
@@ -476,28 +531,47 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 		this.referenceId = referenceId;
 	}
 
+	/**
+	 * Method isConfigured returns the configured of this JavaScriptPart object.
+	 *
+	 * @return the configured (type boolean) of this JavaScriptPart object.
+	 */
 	@JsonIgnore
 	public boolean isConfigured()
 	{
 		return true;
 	}
 
+	/**
+	 * Method isInitialized returns the initialized of this JavaScriptPart object.
+	 *
+	 * @return the initialized (type boolean) of this JavaScriptPart object.
+	 */
 	@JsonIgnore
 	public boolean isInitialized()
 	{
 		return true;
 	}
 
+	/**
+	 * Method init ...
+	 */
 	public void init()
 	{
 		//No configuration needed
 	}
 
+	/**
+	 * Method preConfigure ...
+	 */
 	public void preConfigure()
 	{
 		//No configuration needed
 	}
 
+	/**
+	 * Method destroy ...
+	 */
 	public void destroy()
 	{
 		//No configuration needed
