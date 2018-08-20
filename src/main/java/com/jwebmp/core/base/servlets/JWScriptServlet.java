@@ -25,6 +25,8 @@ import com.jwebmp.logger.LogFactory;
 import javax.servlet.http.HttpServletRequest;
 import java.util.logging.Logger;
 
+import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
+
 /**
  * @author GedMarc
  */
@@ -53,7 +55,7 @@ public class JWScriptServlet
 	@Override
 	public void perform()
 	{
-		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
+		HttpServletRequest request = GuiceContext.get(HttpServletRequestKey);
 		FileTemplates.getFileTemplate(JWScriptServlet.class, JWScriptServlet.FILE_TEMPLATE_NAME, "siteloader");
 		FileTemplates.getTemplateVariables()
 		             .put("SITEADDRESSINSERT", new StringBuilder(request.getRequestURL()

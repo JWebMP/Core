@@ -25,6 +25,8 @@ import com.jwebmp.guicedinjection.GuiceContext;
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.Charset;
 
+import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
+
 /**
  * This Servlet supplies all the JavaScript for a given HTML Page
  *
@@ -51,7 +53,7 @@ public class JavaScriptServlet
 	public void perform()
 	{
 		Page page = GuiceContext.get(Page.class);
-		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
+		HttpServletRequest request = GuiceContext.get(HttpServletRequestKey);
 		readBrowserInformation(request);
 		intercept();
 		if (!page.isConfigured())

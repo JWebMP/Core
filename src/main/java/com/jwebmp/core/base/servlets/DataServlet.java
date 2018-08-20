@@ -28,6 +28,8 @@ import com.jwebmp.logger.LogFactory;
 import javax.servlet.http.HttpServletRequest;
 import java.util.logging.Logger;
 
+import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
+
 /**
  * Provides the data for a specific component
  *
@@ -76,7 +78,7 @@ public class DataServlet
 	@SuppressWarnings("unchecked")
 	public void perform()
 	{
-		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
+		HttpServletRequest request = GuiceContext.get(HttpServletRequestKey);
 		String componentID = request.getParameter("component");
 		StringBuilder responseString = new StringBuilder();
 		try

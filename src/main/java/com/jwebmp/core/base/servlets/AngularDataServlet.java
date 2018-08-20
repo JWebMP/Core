@@ -39,6 +39,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static com.jwebmp.guicedinjection.GuiceContext.*;
+import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
 
 /**
  * Handles angular data binding calls, registers variables for access. Can handle population, use event binding for call back.
@@ -57,9 +58,9 @@ public class AngularDataServlet
 	@Override
 	public void perform()
 	{
-		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
-		LOG.log(Level.FINER, "[SessionID]-[{0}];[Connection]-[Data Call Connection Established]", request.getSession()
-		                                                                                                 .getId());
+		HttpServletRequest request = GuiceContext.get(HttpServletRequestKey);
+		AngularDataServlet.LOG.log(Level.FINER, "[SessionID]-[{0}];[Connection]-[Data Call Connection Established]", request.getSession()
+		                                                                                                                    .getId());
 		String componentId = "";
 		StringBuilder jb;
 		AngularDataServletInitData<?> initData;
@@ -94,8 +95,8 @@ public class AngularDataServlet
 		ajaxCall.setEventType(EventTypes.data);
 		if (componentId == null || componentId.isEmpty())
 		{
-			LOG.log(Level.FINER, "[SessionID]-[{0}];[Security]-[Component ID Incorrect]", request.getSession()
-			                                                                                     .getId());
+			AngularDataServlet.LOG.log(Level.FINER, "[SessionID]-[{0}];[Security]-[Component ID Incorrect]", request.getSession()
+			                                                                                                        .getId());
 		}
 
 		Page page = GuiceContext.get(Page.class);
@@ -132,11 +133,14 @@ public class AngularDataServlet
 		{
 			ajaxResponse.addReaction(
 					new AjaxResponseReaction("Error Performing Angular Data Request", ExceptionUtils.getStackTrace(e), ReactionType.DialogDisplay, AjaxResponseType.Danger));
-			LOG.log(Level.SEVERE, "Unable to perform the data request", e);
+			AngularDataServlet.LOG.log(Level.SEVERE, "Unable to perform the data request", e);
 		}
 
-		ajaxResponse.getComponents()
-		            .forEach(ComponentHierarchyBase::preConfigure);
+		for (ComponentHierarchyBase componentHierarchyBase : ajaxResponse.getComponents())
+		{
+			componentHierarchyBase.preConfigure();
+		}
+
 		writeOutput(new StringBuilder(ajaxResponse.toString()), "application/json;charset=UTF-8", Charset.forName("UTF-8"));
 	}
 }

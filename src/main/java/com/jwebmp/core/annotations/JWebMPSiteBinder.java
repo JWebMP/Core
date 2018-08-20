@@ -49,6 +49,8 @@ import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.logging.Level;
 
+import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
+
 /**
  * @author GedMarc
  * @version 1.0
@@ -185,7 +187,7 @@ public class JWebMPSiteBinder
 		module.bind(ReadableUserAgent.class)
 		      .toProvider(() ->
 		                  {
-			                  HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
+			                  HttpServletRequest request = GuiceContext.get(HttpServletRequestKey);
 			                  String headerInformation = request.getHeader("User-Agent");
 			                  return GuiceContext.get(UserAgentStringParser.class)
 			                                     .parse(headerInformation);

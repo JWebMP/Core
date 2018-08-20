@@ -26,6 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
+
 /**
  * The base Servlet for the JWebSwing environment. Constructs each page on call
  *
@@ -62,7 +64,7 @@ public class JWebSwingServlet
 	@Override
 	public void perform()
 	{
-		HttpServletResponse response = GuiceContext.get(HttpServletResponse.class);
+		HttpServletResponse response = GuiceContext.get(HttpServletResponseKey);
 		sendPage(response);
 	}
 

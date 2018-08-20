@@ -49,6 +49,8 @@ import java.util.ServiceLoader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
+
 /**
  * Provides default methods for authentication authorization etc
  *
@@ -345,7 +347,7 @@ public abstract class JWDefaultServlet
 	protected void readRequestVariables(HttpServletRequest request) throws MissingComponentException
 	{
 		Page currentPage = getPageFromGuice();
-		HttpSession session = GuiceContext.get(HttpSession.class);
+		HttpSession session = GuiceContext.get(HttpSessionKey);
 		if (currentPage == null)
 		{
 			throw new MissingComponentException("[No Page]-[getPage() returning null in servlet class]");

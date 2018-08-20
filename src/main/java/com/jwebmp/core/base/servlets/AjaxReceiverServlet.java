@@ -35,6 +35,8 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
+
 /**
  * Handles all AJAX Requests performed by a client connection. Session codes are used in order to identify
  * <p>
@@ -59,7 +61,7 @@ public class AjaxReceiverServlet
 	public void perform()
 	{
 		StringBuilder output = new StringBuilder();
-		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
+		HttpServletRequest request = GuiceContext.get(HttpServletRequestKey);
 		try
 		{
 			AjaxCall ajaxCallIncoming = (AjaxCall) new JavaScriptPart().From(request.getInputStream(), AjaxCall.class);
@@ -89,8 +91,8 @@ public class AjaxReceiverServlet
 			arr.setResponseType(AjaxResponseType.Danger);
 			ajaxResponse.addReaction(arr);
 			output = new StringBuilder(ajaxResponse.toString());
-			log.log(Level.SEVERE, "[SessionID]-[" + request.getSession()
-			                                               .getId() + "];" + "[Exception]-[Invalid Request]", ie);
+			AjaxReceiverServlet.log.log(Level.SEVERE, "[SessionID]-[" + request.getSession()
+			                                                                   .getId() + "];" + "[Exception]-[Invalid Request]", ie);
 		}
 		catch (MissingComponentException mce)
 		{
@@ -101,8 +103,8 @@ public class AjaxReceiverServlet
 			arr.setResponseType(AjaxResponseType.Danger);
 			ajaxResponse.addReaction(arr);
 			output = new StringBuilder(ajaxResponse.toString());
-			log.log(Level.SEVERE, "[SessionID]-[" + request.getSession()
-			                                               .getId() + "];" + "[Exception]-[Missing Component]", mce);
+			AjaxReceiverServlet.log.log(Level.SEVERE, "[SessionID]-[" + request.getSession()
+			                                                                   .getId() + "];" + "[Exception]-[Missing Component]", mce);
 		}
 		catch (Exception T)
 		{
@@ -114,7 +116,7 @@ public class AjaxReceiverServlet
 			arr.setResponseType(AjaxResponseType.Danger);
 			ajaxResponse.addReaction(arr);
 			output = new StringBuilder(ajaxResponse.toString());
-			log.log(Level.SEVERE, "Unknown in ajax reply\n", T);
+			AjaxReceiverServlet.log.log(Level.SEVERE, "Unknown in ajax reply\n", T);
 		}
 		finally
 		{
@@ -151,7 +153,7 @@ public class AjaxReceiverServlet
 			}
 			if (triggerEvent == null)
 			{
-				log.log(Level.FINEST, "Unable to find the event class specified", cnfe);
+				AjaxReceiverServlet.log.log(Level.FINEST, "Unable to find the event class specified", cnfe);
 				throw new InvalidRequestException("The Event To Be Triggered Could Not Be Found");
 			}
 		}

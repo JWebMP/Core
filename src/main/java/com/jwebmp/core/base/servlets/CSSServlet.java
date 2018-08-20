@@ -21,7 +21,7 @@ import com.jwebmp.core.Page;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
 
-import javax.servlet.http.HttpServletRequest;
+import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
 
 /**
  * This Servlet supplies all the JavaScript for a given HTML Page
@@ -39,7 +39,7 @@ public class CSSServlet
 	{
 		StringBuilder scripts = new StringBuilder();
 		Page page = GuiceContext.get(Page.class);
-		readBrowserInformation(GuiceContext.get(HttpServletRequest.class));
+		readBrowserInformation(GuiceContext.get(HttpServletRequestKey));
 		StringBuilder css = page.getBody()
 		                        .renderCss(0);
 		scripts.append(css);
