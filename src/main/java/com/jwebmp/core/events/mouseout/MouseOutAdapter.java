@@ -66,7 +66,7 @@ public abstract class MouseOutAdapter
 		}
 		catch (Exception e)
 		{
-			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			MouseOutAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 
@@ -76,7 +76,7 @@ public abstract class MouseOutAdapter
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
+		if (getComponent() != null)
 		{
 
 			getComponent().addAttribute(AngularAttributes.ngMouseleave,

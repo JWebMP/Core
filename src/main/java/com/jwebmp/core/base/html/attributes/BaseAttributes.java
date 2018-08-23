@@ -29,7 +29,8 @@ public enum BaseAttributes
 		implements AttributeDefinitions
 {
 	Target,
-	HRef,;
+	HRef,
+	;
 
 	@Override
 	public String toString()

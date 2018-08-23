@@ -20,6 +20,7 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
 import com.jwebmp.core.base.html.interfaces.*;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -48,8 +49,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  */
 public class LineBreak<J extends LineBreak<J>>
-		extends Component<GlobalChildren, NoAttributes, NoFeatures, NoEvents, J>
-		implements NoNewLineBeforeClosingTag, NoClosingTag, NoNewLineForRawText, GlobalChildren, NoIDTag
+		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, NoEvents, J>
+		implements NoNewLineBeforeClosingTag, NoClosingTag, NoNewLineForRawText, NoIDTag
 {
 
 	private static final LineBreak br = new LineBreak();
@@ -71,7 +72,7 @@ public class LineBreak<J extends LineBreak<J>>
 	 */
 	public static LineBreak getLineBreak()
 	{
-		return br;
+		return LineBreak.br;
 	}
 
 	/**

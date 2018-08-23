@@ -66,7 +66,7 @@ public abstract class KeyUpAdapter
 		}
 		catch (Exception e)
 		{
-			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			KeyUpAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 
@@ -76,7 +76,7 @@ public abstract class KeyUpAdapter
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
+		if (getComponent() != null)
 		{
 			AngularPageConfigurator.setRequired(true);
 			getComponent().addAttribute(AngularAttributes.ngKeyup, StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);

@@ -21,6 +21,7 @@ import com.jwebmp.core.base.html.attributes.NoAttributes;
 import com.jwebmp.core.base.html.interfaces.*;
 import com.jwebmp.core.base.html.interfaces.children.HeadChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -50,8 +51,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since 2013/11/12
  */
 public class Title<J extends Title<J>>
-		extends Component<GlobalChildren, NoAttributes, NoFeatures, NoEvents, J>
-		implements NoIDTag, HeadChildren, OneValidTag, NoClassAttribute, NoNewLineForRawText, NoNewLineBeforeChildren, NoNewLineBeforeClosingTag
+		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, NoEvents, J>
+		implements NoIDTag, HeadChildren<IComponentHierarchyBase, J>, OneValidTag, NoClassAttribute, NoNewLineForRawText, NoNewLineBeforeChildren, NoNewLineBeforeClosingTag
 {
 
 	private static final long serialVersionUID = 1L;

@@ -19,13 +19,13 @@ package com.jwebmp.core.base.html;
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.HeaderTypes;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
 import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
 import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
 import com.jwebmp.core.base.html.interfaces.children.HeaderGroupChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 
 /**
  * HTML Headings<p>
@@ -64,8 +64,9 @@ import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
  * @since forever
  */
 public class HeaderText<J extends HeaderText<J>>
-		extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements BodyChildren, HeaderGroupChildren, GlobalChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
+		extends Component<IComponentHierarchyBase, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements BodyChildren<IComponentHierarchyBase, J>,
+				           HeaderGroupChildren<IComponentHierarchyBase, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText
 
 {
 
@@ -121,6 +122,14 @@ public class HeaderText<J extends HeaderText<J>>
 	}
 
 	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + getHeaderType().hashCode();
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object o)
 	{
 		if (this == o)
@@ -139,14 +148,6 @@ public class HeaderText<J extends HeaderText<J>>
 		HeaderText<?> that = (HeaderText<?>) o;
 
 		return getHeaderType() == that.getHeaderType();
-	}
-
-	@Override
-	public int hashCode()
-	{
-		int result = super.hashCode();
-		result = 31 * result + getHeaderType().hashCode();
-		return result;
 	}
 
 	/**

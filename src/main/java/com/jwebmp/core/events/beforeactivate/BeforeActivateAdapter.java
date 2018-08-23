@@ -21,16 +21,13 @@ import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.angular.AngularAttributes;
-import com.jwebmp.core.base.angular.AngularPageConfigurator;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
-import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
-import java.util.Objects;
 import java.util.logging.Level;
 
 /**
@@ -104,33 +101,20 @@ public abstract class BeforeActivateAdapter
 		}
 		catch (Exception e)
 		{
-			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			BeforeActivateAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 
 	@Override
 	public int hashCode()
 	{
-		return Objects.hash(super.hashCode(), getComponent());
+		return super.hashCode();
 	}
 
 	@Override
-	public boolean equals(Object o)
+	public boolean equals(Object obj)
 	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof BeforeActivateAdapter))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-		BeforeActivateAdapter that = (BeforeActivateAdapter) o;
-		return Objects.equals(getComponent(), that.getComponent());
+		return super.equals(obj);
 	}
 
 	/**
@@ -139,14 +123,12 @@ public abstract class BeforeActivateAdapter
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
+		if (getComponent() != null)
 		{
-			JQueryPageConfigurator.setRequired(true);
-			AngularPageConfigurator.setRequired(true);
-
 			getComponent().addAttribute(AngularAttributes.ngBeforeActivate,
 			                            StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
 		}
+
 		super.preConfigure();
 	}
 

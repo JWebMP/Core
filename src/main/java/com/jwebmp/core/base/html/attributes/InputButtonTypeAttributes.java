@@ -51,7 +51,8 @@ public enum InputButtonTypeAttributes
 	/**
 	 * Sets the value of the name attribute of an input button
 	 */
-	Name,;
+	Name,
+	;
 
 	@Override
 	public boolean isKeyword()

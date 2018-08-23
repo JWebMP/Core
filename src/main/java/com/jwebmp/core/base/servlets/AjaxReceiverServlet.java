@@ -18,7 +18,6 @@ package com.jwebmp.core.base.servlets;
 
 import com.google.inject.Singleton;
 import com.jwebmp.core.Event;
-import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.ajax.*;
 import com.jwebmp.core.exceptions.InvalidRequestException;
 import com.jwebmp.core.exceptions.MissingComponentException;
@@ -78,8 +77,7 @@ public class AjaxReceiverServlet
 
 			intercept();
 			triggerEvent.fireEvent(ajaxCall, ajaxResponse);
-			ajaxResponse.getComponents()
-			            .forEach(ComponentHierarchyBase::preConfigure);
+
 			output = new StringBuilder(ajaxResponse.toString());
 		}
 		catch (InvalidRequestException ie)

@@ -18,11 +18,11 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.NoClassAttribute;
 import com.jwebmp.core.base.html.interfaces.NoFeatures;
 import com.jwebmp.core.base.html.interfaces.NoIDTag;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.logger.LogFactory;
 
@@ -58,7 +58,7 @@ import java.util.logging.Level;
  * @author Marc Magon
  */
 public class HorizontalRule<J extends HorizontalRule<J>>
-		extends Component<GlobalChildren, NoAttributes, NoFeatures, NoEvents, J>
+		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, NoEvents, J>
 		implements NoIDTag, NoClassAttribute
 {
 
@@ -80,7 +80,7 @@ public class HorizontalRule<J extends HorizontalRule<J>>
 	 */
 	public static HorizontalRule<?> getInstance()
 	{
-		return hr;
+		return HorizontalRule.hr;
 	}
 
 	/**
@@ -94,15 +94,15 @@ public class HorizontalRule<J extends HorizontalRule<J>>
 	}
 
 	@Override
-	public boolean equals(Object obj)
-	{
-		return false;
-	}
-
-	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		return false;
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class HorizontalRule<J extends HorizontalRule<J>>
 		}
 		catch (Exception e)
 		{
-			log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
+			HorizontalRule.log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
 		}
 	}
 }

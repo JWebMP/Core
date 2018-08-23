@@ -68,37 +68,20 @@ public abstract class SelectingAdapter
 		}
 		catch (Exception e)
 		{
-			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			SelectingAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + getDirective().hashCode();
-		return result;
+		return super.hashCode();
 	}
 
 	@Override
-	public boolean equals(Object o)
+	public boolean equals(Object obj)
 	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof SelectingAdapter))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		SelectingAdapter that = (SelectingAdapter) o;
-
-		return getDirective().equals(that.getDirective());
+		return super.equals(obj);
 	}
 
 	/**
@@ -107,7 +90,7 @@ public abstract class SelectingAdapter
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
+		if (getComponent() != null)
 		{
 
 			getComponent().addAttribute(AngularAttributes.ngSelecting,
@@ -115,6 +98,17 @@ public abstract class SelectingAdapter
 		}
 		super.preConfigure();
 	}
+
+	/**
+	 * Triggers on Click
+	 * <p>
+	 *
+	 * @param call
+	 * 		The physical AJAX call
+	 * @param response
+	 * 		The physical Ajax Receiver
+	 */
+	public abstract void onSelecting(AjaxCall call, AjaxResponse response);
 
 	/**
 	 * Returns the angular directive associated with the right click event
@@ -140,15 +134,4 @@ public abstract class SelectingAdapter
 	{
 		this.directive = directive;
 	}
-
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onSelecting(AjaxCall call, AjaxResponse response);
 }

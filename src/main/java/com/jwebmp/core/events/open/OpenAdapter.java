@@ -66,7 +66,7 @@ public abstract class OpenAdapter
 		}
 		catch (Exception e)
 		{
-			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			OpenAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 
@@ -76,7 +76,7 @@ public abstract class OpenAdapter
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
+		if (getComponent() != null)
 		{
 
 			getComponent().addAttribute(AngularAttributes.ngOpen, StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);

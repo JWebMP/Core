@@ -21,6 +21,7 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.angular.AngularAttributes;
 import com.jwebmp.core.base.angular.forms.AngularForm;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.BodyEvents;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.html.interfaces.events.ParagraphEvents;
@@ -37,8 +38,8 @@ import java.util.logging.Level;
  * @author Marc Magon
  */
 public abstract class SubmitAdapter
-		extends Event<SubmitAdapter>
-		implements ParagraphEvents, BodyEvents, GlobalEvents
+		extends Event<GlobalFeatures, SubmitAdapter>
+		implements ParagraphEvents<GlobalFeatures, SubmitAdapter>, BodyEvents<GlobalFeatures, SubmitAdapter>, GlobalEvents
 {
 
 	/**
@@ -77,14 +78,14 @@ public abstract class SubmitAdapter
 		}
 		catch (Exception e)
 		{
-			log.log(Level.SEVERE, "Error In Firing Event", e);
+			SubmitAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured() && getComponent() != null)
+		if (getComponent() != null)
 		{
 			getComponent().addAttribute(AngularAttributes.ngSubmit,
 			                            "jwCntrl.jw.isLoading || " + StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);

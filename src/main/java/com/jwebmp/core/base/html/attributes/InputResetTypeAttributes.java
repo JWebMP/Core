@@ -60,7 +60,8 @@ public enum InputResetTypeAttributes
 	 * Sets the required value of the Check Box
 	 * HTML 5 Only
 	 */
-	Required,;
+	Required,
+	;
 
 	/**
 	 *

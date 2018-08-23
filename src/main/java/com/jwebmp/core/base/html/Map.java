@@ -50,7 +50,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class Map<J extends Map<J>>
 		extends Component<MapChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements ImageMapChildren
+		implements ImageMapChildren<MapChildren, J>
 {
 
 	private static final long serialVersionUID = 1L;

@@ -20,12 +20,12 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.html.attributes.BodyAttributes;
 import com.jwebmp.core.base.html.interfaces.ContainerType;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.LayoutHandler;
 import com.jwebmp.core.base.html.interfaces.children.BodyFeatures;
 import com.jwebmp.core.base.html.interfaces.children.HtmlChildren;
 import com.jwebmp.core.base.html.interfaces.children.PageChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 import javax.validation.constraints.NotNull;
@@ -63,8 +63,8 @@ import java.util.Objects;
  * @since 2013/11/20
  */
 public class Body<F extends BodyFeatures, J extends Body<F, J>>
-		extends Component<GlobalChildren, BodyAttributes, F, NoEvents, J>
-		implements PageChildren, HtmlChildren, LayoutHandler, ContainerType
+		extends Component<IComponentHierarchyBase, BodyAttributes, F, NoEvents, J>
+		implements PageChildren, HtmlChildren<IComponentHierarchyBase, J>, LayoutHandler, ContainerType<IComponentHierarchyBase, J>
 {
 	private static final long serialVersionUID = 1L;
 	/**
@@ -105,6 +105,12 @@ public class Body<F extends BodyFeatures, J extends Body<F, J>>
 	}
 
 	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), isRenderedScripts());
+	}
+
+	@Override
 	public boolean equals(Object o)
 	{
 		if (this == o)
@@ -121,12 +127,6 @@ public class Body<F extends BodyFeatures, J extends Body<F, J>>
 		}
 		Body<?, ?> body = (Body<?, ?>) o;
 		return isRenderedScripts() == body.isRenderedScripts();
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return Objects.hash(super.hashCode(), isRenderedScripts());
 	}
 
 	/**

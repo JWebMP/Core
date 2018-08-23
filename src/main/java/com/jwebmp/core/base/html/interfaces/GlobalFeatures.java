@@ -16,15 +16,16 @@
  */
 package com.jwebmp.core.base.html.interfaces;
 
-import java.io.Serializable;
+import com.jwebmp.core.base.ComponentBase;
+import com.jwebmp.core.base.interfaces.IComponentFeatureBase;
 
 /**
  * Defines a collection of features available on most component types
  *
  * @author MMagon
  */
-public interface GlobalFeatures
-		extends Serializable
+public interface GlobalFeatures<F extends GlobalFeatures, J extends ComponentBase>
+		extends IComponentFeatureBase<F, J>
 {
 
 }

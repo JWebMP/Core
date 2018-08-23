@@ -21,7 +21,6 @@ import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.angular.AngularAttributes;
-import com.jwebmp.core.base.angular.AngularPageConfigurator;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
@@ -74,37 +73,20 @@ public abstract class CancelAdapter
 		}
 		catch (Exception e)
 		{
-			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			CancelAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + getDirective().hashCode();
-		return result;
+		return super.hashCode();
 	}
 
 	@Override
-	public boolean equals(Object o)
+	public boolean equals(Object obj)
 	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (o == null || getClass() != o.getClass())
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		CancelAdapter that = (CancelAdapter) o;
-
-		return getDirective().equals(that.getDirective());
+		return super.equals(obj);
 	}
 
 	/**
@@ -113,14 +95,23 @@ public abstract class CancelAdapter
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
+		if (getComponent() != null)
 		{
-			AngularPageConfigurator.setRequired(true);
-
 			getComponent().addAttribute(AngularAttributes.ngCancel, StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
 		}
 		super.preConfigure();
 	}
+
+	/**
+	 * Triggers on Cancel
+	 * <p>
+	 *
+	 * @param call
+	 * 		The physical AJAX call
+	 * @param response
+	 * 		The physical Ajax Receiver
+	 */
+	public abstract void onCancel(AjaxCall call, AjaxResponse response);
 
 	/**
 	 * Returns this directive
@@ -146,15 +137,4 @@ public abstract class CancelAdapter
 	{
 		this.directive = directive;
 	}
-
-	/**
-	 * Triggers on Cancel
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onCancel(AjaxCall call, AjaxResponse response);
 }

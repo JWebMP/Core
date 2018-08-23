@@ -22,10 +22,10 @@ import com.jwebmp.core.base.angular.AngularPageConfigurator;
 import com.jwebmp.core.base.html.attributes.GlobalAttributes;
 import com.jwebmp.core.base.html.attributes.InputTypes;
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.utilities.StaticStrings;
 
@@ -75,8 +75,8 @@ import javax.validation.constraints.NotNull;
  * @author Marc Magon
  */
 public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
-		extends Component<GlobalChildren, A, GlobalFeatures, GlobalEvents, J>
-		implements GlobalChildren, ParagraphChildren
+		extends Component<IComponentHierarchyBase, A, GlobalFeatures, GlobalEvents, J>
+		implements ParagraphChildren<IComponentHierarchyBase, J>
 {
 	private static final long serialVersionUID = 1L;
 
@@ -154,6 +154,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		return super.setID(id);
 	}
 
+	@NotNull
 	@Override
 	public String getName()
 	{
@@ -289,14 +290,14 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	}
 
 	@Override
-	public boolean equals(Object o)
-	{
-		return super.equals(o);
-	}
-
-	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
 	}
 }

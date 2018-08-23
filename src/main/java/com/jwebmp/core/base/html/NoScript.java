@@ -18,11 +18,11 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.NoIDTag;
 import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -45,8 +45,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since Feb 9, 2015
  */
 public class NoScript<J extends NoScript<J>>
-		extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements BodyChildren, NoIDTag
+		extends Component<IComponentHierarchyBase, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements BodyChildren<IComponentHierarchyBase, J>, NoIDTag
 {
 
 	private static final long serialVersionUID = 1L;

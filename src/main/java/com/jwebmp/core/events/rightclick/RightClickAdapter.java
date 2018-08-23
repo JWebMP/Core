@@ -70,43 +70,26 @@ public abstract class RightClickAdapter
 		}
 		catch (Exception e)
 		{
-			log.log(Level.SEVERE, "Error In Firing Event", e);
+			RightClickAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + getDirective().hashCode();
-		return result;
+		return super.hashCode();
 	}
 
 	@Override
-	public boolean equals(Object o)
+	public boolean equals(Object obj)
 	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof RightClickAdapter))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		RightClickAdapter that = (RightClickAdapter) o;
-
-		return rightClickDirective.equals(that.rightClickDirective);
+		return super.equals(obj);
 	}
 
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
+		if (getComponent() != null)
 		{
 
 			getComponent().addAttribute(AngularAttributes.ngRightClick,
@@ -114,6 +97,17 @@ public abstract class RightClickAdapter
 		}
 		super.preConfigure();
 	}
+
+	/**
+	 * Triggers on Click
+	 * <p>
+	 *
+	 * @param call
+	 * 		The physical AJAX call
+	 * @param response
+	 * 		The physical Ajax Receiver
+	 */
+	public abstract void onRightClick(AjaxCall call, AjaxResponse response);
 
 	/**
 	 * Returns the angular directive associated with the right click event
@@ -139,15 +133,4 @@ public abstract class RightClickAdapter
 	{
 		this.rightClickDirective = rightClickDirective;
 	}
-
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onRightClick(AjaxCall call, AjaxResponse response);
 }

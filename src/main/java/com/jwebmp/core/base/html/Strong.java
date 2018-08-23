@@ -42,7 +42,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class Strong<J extends Strong<J>>
 		extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements PhraseChildren, ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
+		implements PhraseChildren<ParagraphChildren, J>, ParagraphChildren<ParagraphChildren, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
 	private static final long serialVersionUID = 1L;

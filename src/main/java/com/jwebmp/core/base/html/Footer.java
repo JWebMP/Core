@@ -20,7 +20,6 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.NoIDTag;
-import com.jwebmp.core.base.html.interfaces.children.AddressChildren;
 import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
@@ -50,7 +49,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class Footer<J extends Footer<J>>
 		extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements AddressChildren, NoIDTag
+		implements NoIDTag
 {
 
 	private static final long serialVersionUID = 1L;

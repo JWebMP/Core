@@ -68,37 +68,20 @@ public abstract class ResizeStartAdapter
 		}
 		catch (Exception e)
 		{
-			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			ResizeStartAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + getDirective().hashCode();
-		return result;
+		return super.hashCode();
 	}
 
 	@Override
-	public boolean equals(Object o)
+	public boolean equals(Object obj)
 	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof ResizeStartAdapter))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		ResizeStartAdapter that = (ResizeStartAdapter) o;
-
-		return getDirective().equals(that.getDirective());
+		return super.equals(obj);
 	}
 
 	/**
@@ -107,7 +90,7 @@ public abstract class ResizeStartAdapter
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
+		if (getComponent() != null)
 		{
 
 			getComponent().addAttribute(AngularAttributes.ngResizeStart,
@@ -115,6 +98,17 @@ public abstract class ResizeStartAdapter
 		}
 		super.preConfigure();
 	}
+
+	/**
+	 * Triggers on Click
+	 * <p>
+	 *
+	 * @param call
+	 * 		The physical AJAX call
+	 * @param response
+	 * 		The physical Ajax Receiver
+	 */
+	public abstract void onResizeStart(AjaxCall call, AjaxResponse response);
 
 	/**
 	 * Returns the angular directive associated with the right click event
@@ -140,15 +134,4 @@ public abstract class ResizeStartAdapter
 	{
 		this.directive = directive;
 	}
-
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onResizeStart(AjaxCall call, AjaxResponse response);
 }

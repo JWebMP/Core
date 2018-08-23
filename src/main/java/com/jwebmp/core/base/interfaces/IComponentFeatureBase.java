@@ -19,11 +19,13 @@ package com.jwebmp.core.base.interfaces;
 import com.jwebmp.core.base.ComponentBase;
 import com.jwebmp.core.base.ComponentFeatureBase;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
+import com.jwebmp.core.base.html.interfaces.LifeCycle;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 /**
@@ -34,6 +36,7 @@ import java.util.Set;
  * @since 2016/09/26
  */
 public interface IComponentFeatureBase<F extends GlobalFeatures, J extends ComponentBase>
+		extends LifeCycle
 {
 	/**
 	 * Adds a feature to the collection
@@ -110,7 +113,7 @@ public interface IComponentFeatureBase<F extends GlobalFeatures, J extends Compo
 	/**
 	 * Sets if this feature must be rendered in an $(document).ready statement
 	 *
-	 * @return
+	 * @return If this feature has executed the assignFunctionToComponents method
 	 */
 	boolean isRenderAfterLoad();
 
@@ -148,4 +151,16 @@ public interface IComponentFeatureBase<F extends GlobalFeatures, J extends Compo
 	 */
 	boolean scriptAvailable();
 
+	/**
+	 * Returns a list of all the features associated with this component
+	 * <p>
+	 *
+	 * @return An ArrayList of features
+	 */
+	@NotNull Set<F> getFeatures();
+
+	/**
+	 * Checks if this feature has been configured and rendered with all the features
+	 */
+	void checkAssignedFunctions();
 }

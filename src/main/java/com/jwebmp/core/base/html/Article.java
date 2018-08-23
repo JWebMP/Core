@@ -18,7 +18,6 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
 import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
@@ -67,7 +66,7 @@ import java.io.Serializable;
  */
 public class Article<J extends Article<J>>
 		extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements GlobalChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, Serializable
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, Serializable
 {
 	/**
 	 * Serial Version for all Components and their compatibility

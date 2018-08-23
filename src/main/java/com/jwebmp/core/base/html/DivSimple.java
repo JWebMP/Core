@@ -18,9 +18,9 @@
 package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.base.html.attributes.NoAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -30,7 +30,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * 		This type
  */
 public class DivSimple<J extends DivSimple<J>>
-		extends Div<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Div<IComponentHierarchyBase, NoAttributes, GlobalFeatures, GlobalEvents, J>
 {
 	/**
 	 * Constructs a new simple div

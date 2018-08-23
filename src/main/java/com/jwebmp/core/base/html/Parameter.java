@@ -18,12 +18,12 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.ParameterAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
 import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
 import com.jwebmp.core.base.html.interfaces.children.ObjectTagChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.logger.LogFactory;
 
@@ -56,8 +56,8 @@ import java.util.logging.Level;
  * @since Mar 1, 2015
  */
 public class Parameter<J extends Parameter<J>>
-		extends Component<GlobalChildren, ParameterAttributes, GlobalFeatures, GlobalEvents, J>
-		implements ObjectTagChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText
+		extends Component<IComponentHierarchyBase, ParameterAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ObjectTagChildren<IComponentHierarchyBase, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
 	/**
@@ -100,7 +100,7 @@ public class Parameter<J extends Parameter<J>>
 		}
 		catch (Exception e)
 		{
-			log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
+			Parameter.log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
 		}
 	}
 }

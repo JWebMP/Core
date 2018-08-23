@@ -98,7 +98,7 @@ public abstract class CompleteAdapter
 		}
 		catch (Exception e)
 		{
-			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			CompleteAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 
@@ -120,9 +120,8 @@ public abstract class CompleteAdapter
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
+		if (getComponent() != null)
 		{
-
 			getComponent().addAttribute(AngularAttributes.ngComplete,
 			                            StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
 		}

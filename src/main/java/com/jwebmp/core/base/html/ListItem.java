@@ -54,7 +54,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class ListItem<J extends ListItem<J>>
 		extends Component<ListItemChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements ListChildren, NoNewLineForRawText, ListItemChildren
+		implements ListChildren<ListItemChildren, J>, NoNewLineForRawText, ListItemChildren<ListItemChildren, J>
 {
 
 	private static final long serialVersionUID = 1L;

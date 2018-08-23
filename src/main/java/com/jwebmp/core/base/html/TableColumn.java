@@ -18,10 +18,10 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.TableColumnAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.children.TableColumnGroupChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.logger.LogFactory;
 
@@ -52,8 +52,8 @@ import java.util.logging.Logger;
  * @since 2014/12/20
  */
 public class TableColumn<J extends TableColumn<J>>
-		extends Component<GlobalChildren, TableColumnAttributes, GlobalFeatures, GlobalEvents, J>
-		implements TableColumnGroupChildren
+		extends Component<IComponentHierarchyBase, TableColumnAttributes, GlobalFeatures, GlobalEvents, J>
+		implements TableColumnGroupChildren<IComponentHierarchyBase, J>
 {
 
 	private static final Logger log = LogFactory.getInstance()
@@ -90,7 +90,7 @@ public class TableColumn<J extends TableColumn<J>>
 		}
 		catch (Exception e)
 		{
-			log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
+			TableColumn.log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
 		}
 	}
 

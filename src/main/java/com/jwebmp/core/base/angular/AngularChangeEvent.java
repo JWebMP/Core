@@ -21,9 +21,10 @@ import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 
 public abstract class AngularChangeEvent<J extends AngularChangeEvent<J>>
-		extends Event<J>
+		extends Event<GlobalFeatures, J>
 {
 	public AngularChangeEvent(ComponentHierarchyBase component)
 	{

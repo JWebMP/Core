@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.base.html.interfaces.children;
 
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
+import com.jwebmp.core.base.ComponentBase;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 
 /**
  * Children valid for the body tag
@@ -26,8 +27,8 @@ import com.jwebmp.core.base.html.interfaces.GlobalChildren;
  * @since 1013/11/14
  */
 
-public interface BodyChildren
-		extends GlobalChildren
+public interface BodyChildren<C extends IComponentHierarchyBase, J extends ComponentBase>
+		extends IComponentHierarchyBase<C, J>
 {
 
 }

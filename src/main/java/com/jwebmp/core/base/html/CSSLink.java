@@ -20,12 +20,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.CSSLinkAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.NoClosingTag;
 import com.jwebmp.core.base.html.interfaces.NoFeatures;
 import com.jwebmp.core.base.html.interfaces.NoIDTag;
 import com.jwebmp.core.base.html.interfaces.children.HeadChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.logger.LogFactory;
@@ -67,8 +67,8 @@ import java.util.logging.Logger;
  * @since 2013/11/12
  */
 public class CSSLink<J extends CSSLink<J>>
-		extends Component<GlobalChildren, CSSLinkAttributes, NoFeatures, NoEvents, J>
-		implements NoIDTag, NoClosingTag, HeadChildren
+		extends Component<IComponentHierarchyBase, CSSLinkAttributes, NoFeatures, NoEvents, J>
+		implements NoIDTag, NoClosingTag, HeadChildren<IComponentHierarchyBase, J>
 {
 
 	private static final Logger LOG = LogFactory.getInstance()
@@ -159,7 +159,7 @@ public class CSSLink<J extends CSSLink<J>>
 		}
 		catch (Exception e)
 		{
-			LOG.log(Level.WARNING, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
+			CSSLink.LOG.log(Level.WARNING, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
 		}
 	}
 

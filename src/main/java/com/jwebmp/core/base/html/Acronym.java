@@ -19,10 +19,14 @@ package com.jwebmp.core.base.html;
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.client.HTMLVersions;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
-import com.jwebmp.core.base.html.interfaces.*;
+import com.jwebmp.core.base.html.interfaces.NoFeatures;
+import com.jwebmp.core.base.html.interfaces.NoIDTag;
+import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
+import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
 import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
 import com.jwebmp.core.base.html.interfaces.children.HtmlChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.logger.LogFactory;
 
@@ -56,8 +60,8 @@ import java.util.logging.Level;
  * @since 2014 09 22
  */
 public class Acronym<J extends Acronym<J>>
-		extends Component<GlobalChildren, NoAttributes, NoFeatures, GlobalEvents, J>
-		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, HtmlChildren, BodyChildren, Serializable, NoIDTag
+		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, GlobalEvents, J>
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, HtmlChildren<IComponentHierarchyBase, J>, BodyChildren<IComponentHierarchyBase, J>, Serializable, NoIDTag
 {
 
 	/**
@@ -101,7 +105,7 @@ public class Acronym<J extends Acronym<J>>
 		}
 		catch (Exception e)
 		{
-			LOG.log(Level.FINE, "Unable to determine whether HTML or HTML5. Document type not set?", e);
+			Acronym.LOG.log(Level.FINE, "Unable to determine whether HTML or HTML5. Document type not set?", e);
 		}
 	}
 }

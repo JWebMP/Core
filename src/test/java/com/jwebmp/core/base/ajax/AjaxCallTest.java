@@ -25,18 +25,21 @@ public class AjaxCallTest
 				return super.renderHTML(tabCount);
 			}
 
+			@NotNull
 			@Override
 			public String getJQueryID()
 			{
 				return super.getJQueryID();
 			}
 
+			@NotNull
 			@Override
 			public String getID(boolean jQueryHolder)
 			{
 				return super.getID(jQueryHolder);
 			}
 
+			@NotNull
 			@Override
 			public String getID()
 			{
@@ -75,7 +78,39 @@ public class AjaxCallTest
 		System.out.println(call.toString());
 
 		Assertions.assertEquals(
-				"{\n" + "  \"componentId\" : \"ComponentID\",\n" + "  \"datetime\" : 61471692000000,\n" + "  \"eventType\" : \"undefined\",\n" + "  \"value\" : {\n" + "    \"altKey\" : true,\n" + "    \"ctrlKey\" : true,\n" + "    \"bubbles\" : true,\n" + "    \"cancelable\" : true,\n" + "    \"clientX\" : 0,\n" + "    \"clientY\" : 0,\n" + "    \"componentID\" : \"ComponentID\",\n" + "    \"detail\" : 0,\n" + "    \"eventPhase\" : 0,\n" + "    \"metaKey\" : true,\n" + "    \"offsetX\" : 0,\n" + "    \"offsetY\" : 0,\n" + "    \"pageX\" : 0,\n" + "    \"pageY\" : 0,\n" + "    \"screenX\" : 0,\n" + "    \"screenY\" : 0,\n" + "    \"shiftKey\" : true,\n" + "    \"type\" : \"undefined\",\n" + "    \"data\" : \"data\",\n" + "    \"target\" : \"target\",\n" + "    \"which\" : \"which\"\n" + "  },\n" + "  \"eventId\" : \"EventID\",\n" + "  \"parameters\" : {\n" + "    \"Test\" : \"value\"\n" + "  },\n" + "  \"className\" : \"classname\"\n" + "}",
+				"{\n" +
+				"  \"componentId\" : \"ComponentID\",\n" +
+				"  \"datetime\" : 61471692000000,\n" +
+				"  \"eventType\" : \"undefined\",\n" +
+				"  \"value\" : {\n" +
+				"    \"altKey\" : true,\n" +
+				"    \"ctrlKey\" : true,\n" +
+				"    \"bubbles\" : true,\n" +
+				"    \"cancelable\" : true,\n" +
+				"    \"clientX\" : 0,\n" +
+				"    \"clientY\" : 0,\n" +
+				"    \"componentID\" : \"ComponentID\",\n" +
+				"    \"detail\" : 0,\n" +
+				"    \"eventPhase\" : 0,\n" +
+				"    \"metaKey\" : true,\n" +
+				"    \"offsetX\" : 0,\n" +
+				"    \"offsetY\" : 0,\n" +
+				"    \"pageX\" : 0,\n" +
+				"    \"pageY\" : 0,\n" +
+				"    \"screenX\" : 0,\n" +
+				"    \"screenY\" : 0,\n" +
+				"    \"shiftKey\" : true,\n" +
+				"    \"type\" : \"undefined\",\n" +
+				"    \"data\" : \"data\",\n" +
+				"    \"target\" : \"target\",\n" +
+				"    \"which\" : \"which\"\n" +
+				"  },\n" +
+				"  \"eventId\" : \"EventID\",\n" +
+				"  \"parameters\" : {\n" +
+				"    \"Test\" : \"value\"\n" +
+				"  },\n" +
+				"  \"className\" : \"classname\"\n" +
+				"}",
 				call.toString());
 	}
 

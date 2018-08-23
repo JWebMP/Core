@@ -67,7 +67,7 @@ public abstract class MouseMoveAdapter
 		}
 		catch (Exception e)
 		{
-			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			MouseMoveAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 
@@ -77,7 +77,7 @@ public abstract class MouseMoveAdapter
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
+		if (getComponent() != null)
 		{
 			AngularPageConfigurator.setRequired(true);
 			getComponent().addAttribute(AngularAttributes.ngMousemove,

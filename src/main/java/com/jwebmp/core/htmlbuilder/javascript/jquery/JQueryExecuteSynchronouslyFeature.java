@@ -31,7 +31,7 @@ import java.util.List;
  * @author MMagon
  */
 public class JQueryExecuteSynchronouslyFeature
-		extends Feature<JavaScriptPart, JQueryExecuteSynchronouslyFeature>
+		extends Feature<JQueryExecuteSynchronouslyFeature, JavaScriptPart, JQueryExecuteSynchronouslyFeature>
 {
 
 	private List<ComponentFeatureBase> orderedWhenList = new ArrayList();

@@ -21,6 +21,7 @@ import com.jwebmp.core.base.html.attributes.BaseAttributes;
 import com.jwebmp.core.base.html.interfaces.*;
 import com.jwebmp.core.base.html.interfaces.children.HeadChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.logger.LogFactory;
 
@@ -59,8 +60,8 @@ import java.util.logging.Level;
  * @since 2013/11/12
  */
 public class Base<J extends Base<J>>
-		extends Component<GlobalChildren, BaseAttributes, NoFeatures, NoEvents, J>
-		implements NoIDTag, NoClosingTag, HeadChildren, NoClosingBracket, NoClassAttribute
+		extends Component<IComponentHierarchyBase, BaseAttributes, NoFeatures, NoEvents, J>
+		implements NoIDTag, NoClosingTag, HeadChildren<IComponentHierarchyBase, J>, NoClosingBracket, NoClassAttribute
 {
 
 	/**
@@ -115,7 +116,7 @@ public class Base<J extends Base<J>>
 		}
 		catch (Exception e)
 		{
-			log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
+			Base.log.log(Level.FINE, "Unable to determine whether XHTML or HTML. Will still render correctly, just not W3 Compliant.", e);
 		}
 	}
 

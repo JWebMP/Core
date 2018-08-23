@@ -58,7 +58,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class TableBodyGroup<J extends TableBodyGroup<J>>
 		extends Component<TableBodyGroupChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements TableChildren
+		implements TableChildren<TableBodyGroupChildren, J>
 {
 
 	private static final long serialVersionUID = 1L;

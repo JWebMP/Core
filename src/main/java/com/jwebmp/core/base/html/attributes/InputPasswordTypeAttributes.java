@@ -71,7 +71,8 @@ public enum InputPasswordTypeAttributes
 	/**
 	 * Sets or returns the value of the size attribute of a password field
 	 */
-	Size,;
+	Size,
+	;
 
 	@Override
 	public boolean isKeyword()

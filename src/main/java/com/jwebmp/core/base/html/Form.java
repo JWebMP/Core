@@ -19,10 +19,10 @@ package com.jwebmp.core.base.html;
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.FormAttributes;
 import com.jwebmp.core.base.html.attributes.GlobalAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.children.ListItemChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.utilities.StaticStrings;
 
@@ -68,8 +68,8 @@ import javax.validation.constraints.NotNull;
  * @since forever
  */
 public class Form<J extends Form<J>>
-		extends Component<GlobalChildren, FormAttributes, GlobalFeatures, GlobalEvents, J>
-		implements ListItemChildren
+		extends Component<IComponentHierarchyBase, FormAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ListItemChildren<IComponentHierarchyBase, J>
 {
 
 	private static final long serialVersionUID = 1L;
@@ -142,6 +142,7 @@ public class Form<J extends Form<J>>
 		return (J) this;
 	}
 
+	@NotNull
 	@Override
 	public J setID(String id)
 	{
@@ -149,28 +150,30 @@ public class Form<J extends Form<J>>
 		return super.setID(id);
 	}
 
+	@NotNull
 	@Override
 	public String getName()
 	{
 		return getAttribute(GlobalAttributes.Name);
 	}
 
+	@NotNull
 	@Override
-	public J setName(String name)
+	public J setName(@NotNull String name)
 	{
 		addAttribute("name", name);
 		return super.setName(name);
 	}
 
 	@Override
-	public boolean equals(Object o)
-	{
-		return super.equals(o);
-	}
-
-	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
 	}
 }

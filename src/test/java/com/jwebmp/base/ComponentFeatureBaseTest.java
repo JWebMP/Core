@@ -56,12 +56,12 @@ public class ComponentFeatureBaseTest
 				"    \"touched\" : false,\n" +
 				"    \"sortOrder\" : 1000,\n" +
 				"    \"name\" : \"Test Feature\",\n" +
-				"    \"renderAfterLoad\" : false,\n" +
+				"    \"renderAfterLoad\" : true,\n" +
 				"    \"javascriptRenderedElsewhere\" : false,\n" +
 				"    \"queries\" : [ \"Query Added\" ]\n" +
 				"  } ],\n" +
 				"  \"sortOrder\" : 1000,\n" +
-				"  \"renderAfterLoad\" : false,\n" +
+				"  \"renderAfterLoad\" : true,\n" +
 				"  \"javascriptRenderedElsewhere\" : false,\n" +
 				"  \"componentClass\" : \"com.jwebmp.core.base.ComponentFeatureBase\"\n" +
 				"}",

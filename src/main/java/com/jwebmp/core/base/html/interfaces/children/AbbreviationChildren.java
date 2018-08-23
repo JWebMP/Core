@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.base.html.interfaces.children;
 
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 
 /**
  * Defines Abbreviation Children
@@ -24,7 +24,7 @@ import com.jwebmp.core.base.html.interfaces.GlobalChildren;
  * @author GedMarc
  */
 public interface AbbreviationChildren
-		extends GlobalChildren
+		extends IComponentHierarchyBase
 {
 
 }

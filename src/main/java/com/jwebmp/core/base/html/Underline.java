@@ -18,7 +18,6 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
 import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
@@ -64,7 +63,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class Underline<J extends Underline<J>>
 		extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements GlobalChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag
+		implements NoNewLineForRawText, NoNewLineBeforeClosingTag
 {
 
 	private static final long serialVersionUID = 1L;

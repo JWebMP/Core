@@ -249,6 +249,7 @@ public abstract class JWDefaultServlet
 	@SuppressWarnings({"WeakerAccess", "unchecked"})
 	protected Page getErrorPageHtml(Throwable t)
 	{
+		JWDefaultServlet.log.log(Level.SEVERE, "Exception incoming", t);
 		ServiceLoader<IErrorPage> errorPages = ServiceLoader.load(IErrorPage.class);
 		if (!errorPages.iterator()
 		               .hasNext())

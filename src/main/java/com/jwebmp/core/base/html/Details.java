@@ -18,7 +18,6 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.children.DetailsChildren;
 import com.jwebmp.core.base.html.interfaces.children.PhraseChildren;
@@ -50,7 +49,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class Details<J extends Details<J>>
 		extends Component<DetailsChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements GlobalChildren, ParagraphChildren, PhraseChildren
+		implements ParagraphChildren<DetailsChildren, J>, PhraseChildren<DetailsChildren, J>
 {
 
 	private static final long serialVersionUID = 1L;

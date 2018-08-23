@@ -21,6 +21,7 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 
 /**
@@ -32,7 +33,7 @@ import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
  * @since 2012-12-30
  */
 public abstract class PerformCommandEvent
-		extends Event<PerformCommandEvent>
+		extends Event<GlobalFeatures, PerformCommandEvent>
 {
 
 	public PerformCommandEvent(Component component)

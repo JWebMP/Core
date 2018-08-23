@@ -21,9 +21,9 @@ import com.jwebmp.core.base.html.attributes.NoAttributes;
 import com.jwebmp.core.base.html.interfaces.NoClassAttribute;
 import com.jwebmp.core.base.html.interfaces.NoFeatures;
 import com.jwebmp.core.base.html.interfaces.NoIDTag;
-import com.jwebmp.core.base.html.interfaces.children.HeadChildren;
 import com.jwebmp.core.base.html.interfaces.children.HtmlChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -71,9 +71,9 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @version 1.0
  * @since 2013/11/12
  */
-public class Head<J extends Head<J>>
-		extends ComponentHierarchyBase<HeadChildren, NoAttributes, NoFeatures, NoEvents, J>
-		implements NoIDTag, HtmlChildren, NoClassAttribute
+public class Head<C extends IComponentHierarchyBase, J extends Head<C, J>>
+		extends ComponentHierarchyBase<C, NoAttributes, NoFeatures, NoEvents, J>
+		implements NoIDTag, HtmlChildren<C, J>, NoClassAttribute
 {
 
 	private static final long serialVersionUID = 1L;

@@ -27,7 +27,6 @@ import com.jwebmp.core.base.angular.services.IAngularController;
 import com.jwebmp.core.base.angular.services.IAngularDefaultService;
 import com.jwebmp.core.base.html.interfaces.HTMLFeatures;
 import com.jwebmp.core.exceptions.NullComponentException;
-import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
@@ -44,7 +43,7 @@ import static com.jwebmp.core.services.JWebMPServicesBindings.*;
  * @since 16 Apr 2016
  */
 public class AngularFeature
-		extends Feature<JavaScriptPart, AngularFeature>
+		extends Feature
 		implements HTMLFeatures
 {
 

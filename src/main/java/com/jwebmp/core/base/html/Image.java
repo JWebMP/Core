@@ -24,6 +24,7 @@ import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.children.ImageMapChildren;
 import com.jwebmp.core.base.html.interfaces.children.ListItemChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -57,8 +58,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @author Marc Magon
  */
 public class Image<J extends Image<J>>
-		extends Component<GlobalChildren, ImageAttributes, GlobalFeatures, GlobalEvents, J>
-		implements ImageMapChildren, FigureChildren, GlobalChildren, ListItemChildren
+		extends Component<IComponentHierarchyBase, ImageAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ImageMapChildren<IComponentHierarchyBase, J>, FigureChildren<IComponentHierarchyBase, J>, GlobalChildren, ListItemChildren<IComponentHierarchyBase, J>
 {
 
 	private static final long serialVersionUID = 1L;
@@ -76,6 +77,12 @@ public class Image<J extends Image<J>>
 	}
 
 	@Override
+	public int hashCode()
+	{
+		return 7;
+	}
+
+	@Override
 	public boolean equals(Object obj)
 	{
 		if (!(obj instanceof Image))
@@ -83,14 +90,8 @@ public class Image<J extends Image<J>>
 			return false;
 		}
 
-		return getAttribute(ImageAttributes.Src).equals(Image.class.cast(obj)
-		                                                           .getAttribute(ImageAttributes.Src));
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return 7;
+		return getAttribute(ImageAttributes.Src).equals(((Image) obj)
+				                                                .getAttribute(ImageAttributes.Src));
 	}
 
 }

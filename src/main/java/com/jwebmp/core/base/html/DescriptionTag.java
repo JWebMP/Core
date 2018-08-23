@@ -18,9 +18,13 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
-import com.jwebmp.core.base.html.interfaces.*;
+import com.jwebmp.core.base.html.interfaces.NoFeatures;
+import com.jwebmp.core.base.html.interfaces.NoIDTag;
+import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
+import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
 import com.jwebmp.core.base.html.interfaces.children.DescriptionListChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -48,8 +52,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  */
 public class DescriptionTag<J extends DescriptionTag<J>>
-		extends Component<GlobalChildren, NoAttributes, NoFeatures, NoEvents, J>
-		implements NoIDTag, NoNewLineBeforeClosingTag, NoNewLineForRawText, DescriptionListChildren
+		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, NoEvents, J>
+		implements NoIDTag, NoNewLineBeforeClosingTag, NoNewLineForRawText, DescriptionListChildren<IComponentHierarchyBase, J>
 {
 
 	private static final long serialVersionUID = 1L;

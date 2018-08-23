@@ -52,7 +52,7 @@ public class AngularVariableWatcher
 		this.variableName = variableName;
 	}
 
-	public Class<? extends Event<?>> getEventClass()
+	public Class<? extends Event<?, ?>> getEventClass()
 	{
 		return eventClass;
 	}

@@ -61,7 +61,7 @@ import javax.validation.constraints.NotNull;
  */
 public class Paragraph<J extends Paragraph<J>>
 		extends Component<ParagraphChildren, ParagraphAttributes, GlobalFeatures, GlobalEvents, J>
-		implements BodyChildren, NoNewLineForRawText, ParagraphChildren, DetailsChildren, HeadChildren
+		implements BodyChildren<ParagraphChildren, J>, NoNewLineForRawText, ParagraphChildren<ParagraphChildren, J>, DetailsChildren<ParagraphChildren, J>, HeadChildren<ParagraphChildren, J>
 {
 
 	private static final long serialVersionUID = 1L;
@@ -151,14 +151,14 @@ public class Paragraph<J extends Paragraph<J>>
 	}
 
 	@Override
-	public boolean equals(Object o)
-	{
-		return super.equals(o);
-	}
-
-	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
 	}
 }

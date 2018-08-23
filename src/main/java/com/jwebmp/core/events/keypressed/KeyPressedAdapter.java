@@ -67,7 +67,7 @@ public abstract class KeyPressedAdapter
 		}
 		catch (Exception e)
 		{
-			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			KeyPressedAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 
@@ -77,7 +77,7 @@ public abstract class KeyPressedAdapter
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
+		if (getComponent() != null)
 		{
 
 			AngularPageConfigurator.setRequired(true);

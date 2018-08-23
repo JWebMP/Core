@@ -18,10 +18,10 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.NoFeatures;
 import com.jwebmp.core.base.html.interfaces.children.*;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.utilities.TextUtilities;
 
@@ -32,9 +32,9 @@ import javax.validation.constraints.NotNull;
  *
  * @author GedMarc
  */
-public class Comment<J extends Comment<J>>
-		extends ComponentHierarchyBase<GlobalChildren, NoAttributes, NoFeatures, NoEvents, J>
-		implements HtmlChildren, HeadChildren, ImageMapChildren, BodyChildren, GlobalChildren, PageChildren
+public class Comment<C extends IComponentHierarchyBase, J extends Comment<C, J>>
+		extends ComponentHierarchyBase<C, NoAttributes, NoFeatures, NoEvents, J>
+		implements HtmlChildren<C, J>, HeadChildren<C, J>, ImageMapChildren<C, J>, BodyChildren<C, J>, PageChildren
 {
 
 	private static final long serialVersionUID = 1L;

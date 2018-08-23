@@ -18,9 +18,13 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.LabelAttributes;
-import com.jwebmp.core.base.html.interfaces.*;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
+import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeChildren;
+import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
+import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
 import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -51,8 +55,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since Feb 9, 2015
  */
 public class Label<J extends Label<J>>
-		extends Component<GlobalChildren, LabelAttributes, GlobalFeatures, GlobalEvents, J>
-		implements ParagraphChildren, NoNewLineBeforeChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag
+		extends Component<IComponentHierarchyBase, LabelAttributes, GlobalFeatures, GlobalEvents, J>
+		implements ParagraphChildren<IComponentHierarchyBase, J>, NoNewLineBeforeChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag
 {
 
 	private static final long serialVersionUID = 1L;
@@ -125,6 +129,12 @@ public class Label<J extends Label<J>>
 	}
 
 	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
+	}
+
+	@Override
 	public boolean equals(Object o)
 	{
 		if (this == o)
@@ -147,12 +157,6 @@ public class Label<J extends Label<J>>
 			return false;
 		}
 		return getForFormComponent() != null ? getForFormComponent().equals(label.getForFormComponent()) : label.getForFormComponent() == null;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
 	}
 
 	/**

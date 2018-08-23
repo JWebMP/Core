@@ -21,6 +21,7 @@ import com.jwebmp.core.base.html.attributes.TimeAttributes;
 import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -50,7 +51,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since Mar 1, 2015
  */
 public class Time<J extends Time<J>>
-		extends Component<GlobalChildren, TimeAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<IComponentHierarchyBase, TimeAttributes, GlobalFeatures, GlobalEvents, J>
 		implements GlobalChildren
 {
 

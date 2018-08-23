@@ -18,10 +18,14 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.OptionAttributes;
-import com.jwebmp.core.base.html.interfaces.*;
+import com.jwebmp.core.base.html.interfaces.DisplayObjectType;
+import com.jwebmp.core.base.html.interfaces.NoFeatures;
+import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
+import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
 import com.jwebmp.core.base.html.interfaces.children.DataListChildren;
 import com.jwebmp.core.base.html.interfaces.children.SelectChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -42,8 +46,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  */
 public class Option<J extends Option<J>>
-		extends Component<GlobalChildren, OptionAttributes, NoFeatures, NoEvents, J>
-		implements DataListChildren, SelectChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, DisplayObjectType
+		extends Component<IComponentHierarchyBase, OptionAttributes, NoFeatures, NoEvents, J>
+		implements DataListChildren<IComponentHierarchyBase, J>, SelectChildren<IComponentHierarchyBase, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText, DisplayObjectType<IComponentHierarchyBase, J>
 {
 
 	private static final long serialVersionUID = 1L;

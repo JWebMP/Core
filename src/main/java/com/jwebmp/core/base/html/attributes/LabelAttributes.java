@@ -36,7 +36,8 @@ public enum LabelAttributes
 	/**
 	 * Sets or returns the value of the for attribute of a label
 	 */
-	For,;
+	For,
+	;
 
 	@Override
 	public boolean isKeyword()

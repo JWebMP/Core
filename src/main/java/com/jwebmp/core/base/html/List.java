@@ -58,7 +58,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class List<C extends ListChildren, A extends Enum & AttributeDefinitions, E extends GlobalEvents, J extends List<C, A, E, J>>
 		extends Component<C, A, GlobalFeatures, E, J>
-		implements ListChildren, DisplayObjectType, ListItemChildren
+		implements ListChildren<C, J>, DisplayObjectType<C, J>, ListItemChildren<C, J>
 {
 
 	private static final long serialVersionUID = 1L;

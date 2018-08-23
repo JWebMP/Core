@@ -16,13 +16,16 @@
  */
 package com.jwebmp.core.base.html.interfaces;
 
+import com.jwebmp.core.base.ComponentBase;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
+
 /**
  * @author Marc Magon
  * @version 1.0
  * @since 07 Aug 2015
  */
-public interface DisplayObjects
-		extends GlobalChildren
+public interface DisplayObjects<C extends IComponentHierarchyBase, J extends ComponentBase>
+		extends IComponentHierarchyBase<C, J>
 {
 
 }

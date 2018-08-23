@@ -17,8 +17,10 @@
 
 package com.jwebmp.core.htmlbuilder.javascript.events.interfaces;
 
+import com.jwebmp.core.base.ComponentBase;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.servlets.interfaces.IFeature;
 
 /**
@@ -27,9 +29,8 @@ import com.jwebmp.core.base.servlets.interfaces.IFeature;
  *
  * @author Marc Magon
  */
-@FunctionalInterface
-public interface IEvent
-		extends IFeature
+public interface IEvent<F extends GlobalFeatures, J extends ComponentBase>
+		extends IFeature<F, J>
 {
 
 	/**

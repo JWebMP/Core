@@ -55,7 +55,8 @@ public enum InputHiddenTypeAttributes
 	/**
 	 * Sets or returns the default value of the hidden input field
 	 */
-	DefaultValue,;
+	DefaultValue,
+	;
 
 	/**
 	 *

@@ -18,10 +18,10 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.EmbedAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.NoClosingTag;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -46,7 +46,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since 2014/12/21
  */
 public class Embed<J extends Embed<J>>
-		extends Component<GlobalChildren, EmbedAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<IComponentHierarchyBase, EmbedAttributes, GlobalFeatures, GlobalEvents, J>
 		implements NoClosingTag
 {
 

@@ -16,13 +16,15 @@
  */
 package com.jwebmp.core.base.html.interfaces.children;
 
+import com.jwebmp.core.base.ComponentBase;
 import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 
 /**
  * @author GedMarc
  */
-public interface BiDirectionalOverrideChildren
-		extends ParagraphChildren
+public interface BiDirectionalOverrideChildren<C extends IComponentHierarchyBase, J extends ComponentBase>
+		extends ParagraphChildren<C, J>
 {
 
 }

@@ -19,28 +19,24 @@ package com.jwebmp.core.base;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jwebmp.core.Feature;
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentFeatureBase;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.core.utilities.StaticStrings;
-import com.jwebmp.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
-import java.io.Serializable;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.logging.Level;
 
 /**
  * Allows a component to have features and events
@@ -52,21 +48,15 @@ import java.util.logging.Level;
  *
  * @since 23 Apr 2016
  */
-public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J extends ComponentFeatureBase<F, J>>
+@SuppressWarnings({"MissingClassJavaDoc", "WeakerAccess", "UnusedReturnValue"})
+public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentFeatureBase<F, J>>
 		extends ComponentDependancyBase<J>
 		implements IComponentFeatureBase<F, J>, Comparator<J>, Comparable<J>
 {
-
-	/**
-	 * Logger for the Component
-	 */
-	@JsonIgnore
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
-	                                                              .getLogger("ComponentFeatureBase");
 	/**
 	 * Serial Version for all Components and their compatibility
-	 *
-	 * @version 2 Version 2 - Updated CSS Library and References
+	 * <p>
+	 * Version 2 - Updated CSS Library and References
 	 */
 	@JsonIgnore
 	private static final long serialVersionUID = 2L;
@@ -99,9 +89,11 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	 */
 	private String name;
 	/**
-	 * Whether this feature is rendered after load
+	 * Whether this feature *WAS* rendered after the load
+	 * Preconfigure is called before assignFunctionToComponents must be
 	 */
 	private boolean renderAfterLoad;
+
 	/**
 	 * The assigned priority for the given application
 	 */
@@ -116,6 +108,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	 * Constructs a new feature with the given name
 	 *
 	 * @param name
+	 * 		The name of this component/feature
 	 */
 	public ComponentFeatureBase(@NotNull String name)
 	{
@@ -128,6 +121,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	 * Constructs a new component that can have features
 	 *
 	 * @param componentType
+	 * 		The given component type of this component
 	 */
 	public ComponentFeatureBase(ComponentTypes componentType)
 	{
@@ -137,7 +131,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	/**
 	 * Returns an Attribute Base interface of this component
 	 *
-	 * @return
+	 * @return This, but smaller
 	 */
 	@SuppressWarnings({"unused"})
 	@NotNull
@@ -149,7 +143,9 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	/**
 	 * Adds in the JavaScript References for the Features
 	 *
-	 * @return
+	 * @return All the CSS References
+	 *
+	 * @see ComponentDependancyBase#getCssReferencesAll()
 	 */
 	@Override
 	@NotNull
@@ -161,7 +157,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 			                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
 			                      for (Object css : cfb.getCssReferencesAll())
 			                      {
-				                      allCss.add(CSSReference.class.cast(css));
+				                      allCss.add((CSSReference) css);
 			                      }
 		                      });
 		return allCss;
@@ -170,7 +166,9 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	/**
 	 * Adds in the JavaScript References for the Features
 	 *
-	 * @return
+	 * @return All the references
+	 *
+	 * @see ComponentDependancyBase#getJavascriptReferencesAll()
 	 */
 	@Override
 	@NotNull
@@ -183,24 +181,38 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 			                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
 			                      for (Object js : cfb.getJavascriptReferencesAll())
 			                      {
-				                      allJs.add(JavascriptReference.class.cast(js));
+				                      allJs.add((JavascriptReference) js);
 			                      }
 		                      });
 		return allJs;
 	}
 
+	/**
+	 * @see ComponentDependancyBase#hashCode()
+	 */
 	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
 	}
 
+	/**
+	 * Method equals ...
+	 *
+	 * @param obj
+	 * 		of type Object
+	 *
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj)
 	{
 		return super.equals(obj);
 	}
 
+	/**
+	 * Destroys this class cleanly
+	 */
 	@Override
 	public void destroy()
 	{
@@ -226,30 +238,20 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	 * Adds a feature to the collection
 	 *
 	 * @param feature
+	 * 		Any given feature
 	 *
-	 * @return
+	 * @return This class
+	 *
+	 * @see com.jwebmp.core.base.interfaces.IComponentFeatureBase#addFeature(ComponentFeatureBase)
 	 */
 	@Override
 	@NotNull
 	@SuppressWarnings("unchecked")
 	public J addFeature(@NotNull ComponentFeatureBase feature)
 	{
-		if (!feature.getComponentType()
-		            .equals(ComponentTypes.Feature))
-		{
-			ComponentFeatureBase.LOG.log(Level.WARNING, "Tried to add a non-feature to the feature collection");
-		}
-		else
-		{
-			if (!getFeatures().contains(feature))
-			{
-				getFeatures().add((F) feature);
-				if (ComponentHierarchyBase.class.isAssignableFrom(getClass()))
-				{
-					feature.setComponent((ComponentHierarchyBase) this);
-				}
-			}
-		}
+		getFeatures().add((F) feature);
+		feature.init();
+		feature.preConfigure();
 		return (J) this;
 	}
 
@@ -257,6 +259,9 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	 * Adds a variable to the collection
 	 *
 	 * @param variable
+	 * 		Adds a variable for this feature to assign
+	 *
+	 * @see com.jwebmp.core.base.interfaces.IComponentFeatureBase#addVariable(String)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -280,25 +285,11 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	}
 
 	/**
-	 * Sets the name of the feature
-	 *
-	 * @param name
-	 * 		Sets the name of the feature
-	 *
-	 * @return
-	 */
-	@NotNull
-	@SuppressWarnings("unchecked")
-	public J setName(@NotNull String name)
-	{
-		this.name = name;
-		return (J) this;
-	}
-
-	/**
 	 * Returns any client side options available with this component
 	 *
-	 * @return
+	 * @return Returns null currently
+	 *
+	 * @see com.jwebmp.core.base.interfaces.IComponentFeatureBase#getOptions()
 	 */
 	@Override
 	public JavaScriptPart getOptions()
@@ -309,7 +300,9 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	/**
 	 * Gets the render priority of this feature
 	 *
-	 * @return
+	 * @return The assigned priority of this feature generation
+	 *
+	 * @see com.jwebmp.core.base.interfaces.IComponentFeatureBase#getPriority()
 	 */
 	@Override
 	@NotNull
@@ -321,7 +314,9 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	/**
 	 * Returns all Queries Associated with a component
 	 *
-	 * @return
+	 * @return A full set of all queries
+	 *
+	 * @see com.jwebmp.core.base.interfaces.IComponentFeatureBase#getQueriesAll()
 	 */
 	@Override
 	@NotNull
@@ -333,7 +328,9 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	/**
 	 * Sets the sort order for this feature. Default 10000
 	 *
-	 * @return
+	 * @return A full set of all queries
+	 *
+	 * @see com.jwebmp.core.base.interfaces.IComponentFeatureBase#getSortOrder()
 	 */
 	@Override
 	@NotNull
@@ -346,8 +343,9 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	 * Gets the sort order for this feature Default 10000
 	 *
 	 * @param sortOrder
+	 * 		the given sort order
 	 *
-	 * @return
+	 * @return This class
 	 */
 	@NotNull
 	@SuppressWarnings("unchecked")
@@ -360,7 +358,9 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	/**
 	 * Returns the list of variables
 	 *
-	 * @return
+	 * @return A unique set of variables
+	 *
+	 * @see com.jwebmp.core.base.interfaces.IComponentFeatureBase#getVariables()
 	 */
 	@Override
 	@NotNull
@@ -376,7 +376,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	/**
 	 * Sets if this feature must be rendered in an $(document).ready statement
 	 *
-	 * @return
+	 * @return If this feature has executed the assignFunctionToComponents method
 	 */
 	@Override
 	public boolean isRenderAfterLoad()
@@ -407,6 +407,11 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	 * Removes a variable from the collection
 	 *
 	 * @param variable
+	 * 		the variable to remove
+	 *
+	 * @return Always this
+	 *
+	 * @see com.jwebmp.core.base.interfaces.IComponentFeatureBase#removeVariable(String)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -419,17 +424,14 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	/**
 	 * Renders the JavaScript for this Builder
 	 *
-	 * @return
+	 * @return The complete javascript for this object
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull
 	public StringBuilder renderJavascript()
 	{
-		if (!isConfigured())
-		{
-			preConfigure();
-		}
+		checkAssignedFunctions();
 		StringBuilder sb = new StringBuilder();
 		Set<String> allQueries = new LinkedHashSet<>();
 		getQueriesAll().forEach(query ->
@@ -467,6 +469,40 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	}
 
 	/**
+	 * Returns a list of all the features associated with this component
+	 * <p>
+	 *
+	 * @return An ArrayList of features
+	 */
+	@NotNull
+	@Override
+	public Set<F> getFeatures()
+	{
+		if (features == null)
+		{
+			features = new TreeSet<>();
+		}
+		return features;
+	}
+
+	/**
+	 * Checks if this feature has been configured and rendered with all the features
+	 */
+	@Override
+	public void checkAssignedFunctions()
+	{
+		if (!isRenderAfterLoad())
+		{
+			if (!getFeatures().isEmpty())
+			{
+				getFeatures().forEach(IComponentFeatureBase::checkAssignedFunctions);
+			}
+			assignFunctionsToComponent();
+			setRenderAfterLoad(true);
+		}
+	}
+
+	/**
 	 * Use Add Query to add a query to the container
 	 */
 	protected void assignFunctionsToComponent()
@@ -477,7 +513,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	/**
 	 * Returns the queries
 	 *
-	 * @return
+	 * @return A set of queries added to this component/feature
 	 */
 	@JsonProperty("queries")
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -495,11 +531,12 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	 * Sets if this feature must be rendered in an $(document).ready statement
 	 *
 	 * @param renderAfterLoad
+	 * 		if this feature has called assignTo...
 	 *
-	 * @return
+	 * @return Always this class
 	 */
 	@NotNull
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "UnusedReturnValue"})
 	public J setRenderAfterLoad(boolean renderAfterLoad)
 	{
 		this.renderAfterLoad = renderAfterLoad;
@@ -510,8 +547,9 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	 * Sets the render priority of this feature
 	 *
 	 * @param priority
+	 * 		The priority to use
 	 *
-	 * @return
+	 * @return J
 	 */
 	@NotNull
 	@SuppressWarnings("unchecked")
@@ -522,21 +560,31 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	}
 
 	/**
-	 * Returns a list of all the features associated with this component
-	 * <p>
+	 * Sets the name of the feature
 	 *
-	 * @return An ArrayList of features
+	 * @param name
+	 * 		Sets the name of the feature
+	 *
+	 * @return Always this
 	 */
 	@NotNull
-	public Set<F> getFeatures()
+	@SuppressWarnings("unchecked")
+	public J setName(@NotNull String name)
 	{
-		if (features == null)
-		{
-			features = new TreeSet<>();
-		}
-		return features;
+		this.name = name;
+		return (J) this;
 	}
 
+	/**
+	 * Method compare ...
+	 *
+	 * @param o1
+	 * 		of type ComponentFeatureBase
+	 * @param o2
+	 * 		of type ComponentFeatureBase
+	 *
+	 * @return int
+	 */
 	@Override
 	public int compare(ComponentFeatureBase o1, ComponentFeatureBase o2)
 	{
@@ -552,9 +600,13 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	 * Sets all features beneath to tiny
 	 *
 	 * @param tiny
+	 * 		if this must render tiny
 	 *
-	 * @return
+	 * @return Always this class
+	 *
+	 * @see ComponentBase#setTiny(boolean)
 	 */
+	@NotNull
 	@Override
 	@Null
 	@SuppressWarnings("unchecked")
@@ -569,47 +621,26 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	}
 
 	/**
-	 * Compile the template
+	 * Renders the component as a JSON Object
+	 *
+	 * @return The string as a json object
+	 *
+	 * @see ComponentBase#toString()
 	 */
 	@Override
-	public void preConfigure()
+	public String toString()
 	{
-		if (!isConfigured() && Feature.class.isAssignableFrom(getClass()))
-		{
-			assignFunctionsToComponent();
-		}
-		super.preConfigure();
-	}
-
-	/**
-	 * Initialize all the features
-	 */
-	@Override
-	public void init()
-	{
-		if (!isInitialized())
-		{
-			getFeatures().forEach(feature ->
-			                      {
-				                      ComponentFeatureBase cfb = (ComponentFeatureBase) feature;
-				                      assignFunctionsToComponent();
-				                      if (!cfb.isConfigured())
-				                      {
-					                      cfb.init();
-					                      cfb.preConfigure();
-					                      cfb.assignFunctionsToComponent();
-				                      }
-			                      });
-		}
-		super.init();
+		checkAssignedFunctions();
+		return super.toString();
 	}
 
 	/**
 	 * Adds a query to the object queue
 	 *
 	 * @param query
+	 * 		The query to add
 	 *
-	 * @return
+	 * @return Always this
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
@@ -630,7 +661,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	/**
 	 * Returns if the JavaScript for this component is rendered elsewhere
 	 *
-	 * @return
+	 * @return if the elements must be rendered elsewhere
 	 */
 	public boolean isJavascriptRenderedElsewhere()
 	{
@@ -641,8 +672,9 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	 * Returns if the JavaScript for this component is rendered elsewhere
 	 *
 	 * @param javascriptRenderedElsewhere
+	 * 		if it must render manually somewhere else
 	 *
-	 * @return
+	 * @return this class
 	 */
 	@NotNull
 	@SuppressWarnings({"unused", "unchecked"})
@@ -655,9 +687,9 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	/**
 	 * Returns any hierarchal assigned component
 	 *
-	 * @return
+	 * @return the assigned component
 	 */
-	protected <C extends GlobalChildren, A extends Enum & AttributeDefinitions, E extends GlobalEvents, J extends ComponentHierarchyBase<C, A, F, E, J>> ComponentHierarchyBase<C, A, F, E, J> getComponent()
+	protected <C extends IComponentHierarchyBase, A extends Enum & AttributeDefinitions, E extends GlobalEvents, J extends ComponentHierarchyBase<C, A, F, E, J>> ComponentHierarchyBase<C, A, F, E, J> getComponent()
 	{
 		return component;
 	}
@@ -666,8 +698,9 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 	 * Returns any hierarchal assigned component
 	 *
 	 * @param component
+	 * 		the component use
 	 *
-	 * @return
+	 * @return Always this
 	 */
 	@NotNull
 	@SuppressWarnings({"unused", "unchecked"})
@@ -677,6 +710,14 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 		return (J) this;
 	}
 
+	/**
+	 * Method compareTo ...
+	 *
+	 * @param o
+	 * 		of type J
+	 *
+	 * @return int
+	 */
 	@Override
 	public int compareTo(J o)
 	{
@@ -684,7 +725,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures & Serializable, J ext
 		{
 			return 1;
 		}
-		Integer comp = getSortOrder().compareTo(o.getSortOrder());
+		int comp = getSortOrder().compareTo(o.getSortOrder());
 		if (comp == 0)
 		{
 			if (getName() != null)

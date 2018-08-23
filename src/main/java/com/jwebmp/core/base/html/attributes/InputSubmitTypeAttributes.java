@@ -75,7 +75,8 @@ public enum InputSubmitTypeAttributes
 	/**
 	 * Sets or returns the value of the value attribute of the submit button
 	 */
-	Value,;
+	Value,
+	;
 
 	@Override
 	public boolean isKeyword()

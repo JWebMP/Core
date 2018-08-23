@@ -27,7 +27,7 @@ import com.jwebmp.core.base.angular.AngularPageConfigurator;
 import com.jwebmp.core.base.client.InternetExplorerCompatibilityMode;
 import com.jwebmp.core.base.html.*;
 import com.jwebmp.core.base.html.attributes.ScriptAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.services.IPage;
@@ -63,7 +63,7 @@ import static com.jwebmp.core.services.JWebMPServicesBindings.*;
 @PageConfiguration
 @RequestScoped
 public class Page<J extends Page<J>>
-		extends Html<J>
+		extends Html<IComponentHierarchyBase, J>
 		implements IPage
 {
 
@@ -158,11 +158,13 @@ public class Page<J extends Page<J>>
 	 * 		The text to add to the body
 	 *
 	 * @return This
+	 *
+	 * @see Component#add(String)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J add(String addText)
+	public J add(@NotNull String addText)
 	{
 		getBody().add(addText);
 		return (J) this;
@@ -202,6 +204,8 @@ public class Page<J extends Page<J>>
 	 * 		the reference to add
 	 *
 	 * @return Always this
+	 *
+	 * @see com.jwebmp.core.base.ComponentDependancyBase#addCssReference(CSSReference)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -219,6 +223,8 @@ public class Page<J extends Page<J>>
 	 * 		Adds a javascript reference to the body
 	 *
 	 * @return This page
+	 *
+	 * @see com.jwebmp.core.base.ComponentDependancyBase#addJavaScriptReference(JavascriptReference)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -233,6 +239,8 @@ public class Page<J extends Page<J>>
 	 * Returns the CSS references from the bdoy
 	 *
 	 * @return A set of references
+	 *
+	 * @see com.jwebmp.core.base.ComponentDependancyBase#getCssReferences()
 	 */
 	@Override
 	public Set<CSSReference> getCssReferences()
@@ -244,6 +252,8 @@ public class Page<J extends Page<J>>
 	 * Gets the java script references from the body object
 	 *
 	 * @return A set of javascript references
+	 *
+	 * @see com.jwebmp.core.base.ComponentDependancyBase#getJavascriptReferences()
 	 */
 	@Override
 	public Set<JavascriptReference> getJavascriptReferences()
@@ -251,19 +261,31 @@ public class Page<J extends Page<J>>
 		return getBody().getJavascriptReferences();
 	}
 
+	/**
+	 * Adds a feature to the collection
+	 *
+	 * @param feature
+	 *
+	 * @return
+	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J addFeature(ComponentFeatureBase feature)
+	public J addFeature(@NotNull ComponentFeatureBase feature)
 	{
 		getBody().addFeature(feature);
 		return (J) this;
 	}
 
+	/**
+	 * Adds a variable to the collection
+	 *
+	 * @param variable
+	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J addVariable(String variable)
+	public J addVariable(@NotNull String variable)
 	{
 		getBody().addVariable(variable);
 		return (J) this;
@@ -273,6 +295,8 @@ public class Page<J extends Page<J>>
 	 * Returns all the dynamic options for a page
 	 *
 	 * @return The options with the page
+	 *
+	 * @see com.jwebmp.core.base.ComponentFeatureBase#getOptions()
 	 */
 	@Override
 	@NotNull
@@ -289,19 +313,31 @@ public class Page<J extends Page<J>>
 	 * Returns the JavaScript render for the body
 	 *
 	 * @return A single string builder containing all the java scripts applicable
+	 *
+	 * @see com.jwebmp.core.base.ComponentFeatureBase#renderJavascript()
 	 */
+	@NotNull
 	@Override
 	public StringBuilder renderJavascript()
 	{
 		return getBody().renderJavascriptAll();
 	}
 
+	/**
+	 * Returns the queries
+	 *
+	 * @return The bodies direct queries
+	 */
+	@NotNull
 	@Override
 	public Set<StringBuilder> getQueries()
 	{
 		return getBody().getQueries();
 	}
 
+	/**
+	 * Method destroy ...
+	 */
 	@Override
 	public void destroy()
 	{
@@ -352,16 +388,29 @@ public class Page<J extends Page<J>>
 		this.pageInitialized = pageInitialized;
 	}
 
-	@Override
-	public boolean equals(Object o)
-	{
-		return super.equals(o);
-	}
-
+	/**
+	 * Method hashCode ...
+	 *
+	 * @return int
+	 */
 	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
+	}
+
+	/**
+	 * Method equals ...
+	 *
+	 * @param o
+	 * 		of type Object
+	 *
+	 * @return boolean
+	 */
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
 	}
 
 	/**
@@ -425,6 +474,8 @@ public class Page<J extends Page<J>>
 	 * Returns the fields available for entry on this page
 	 *
 	 * @return The fields for the header of this page object
+	 *
+	 * @see com.jwebmp.core.services.IPage#getPageFields()
 	 */
 	@Override
 	@NotNull
@@ -441,6 +492,8 @@ public class Page<J extends Page<J>>
 	 * Returns if the user agent string registered the device as mobile
 	 *
 	 * @return If the header agent reads as smartphone smart tv or tablet
+	 *
+	 * @see com.jwebmp.core.services.IPage#isMobileOrSmartTablet()
 	 */
 	@Override
 	public boolean isMobileOrSmartTablet()
@@ -482,6 +535,8 @@ public class Page<J extends Page<J>>
 	 *
 	 * @param userAgent
 	 * 		Sets the referenced user agent
+	 *
+	 * @see com.jwebmp.core.services.IPage#setUserAgent(ReadableUserAgent)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -493,51 +548,14 @@ public class Page<J extends Page<J>>
 	}
 
 	/**
-	 * Shortcut method to getBody().add()
-	 *
-	 * @param child
-	 * 		The child add
-	 *
-	 * @return Always this
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	@NotNull
-	public J add(GlobalChildren child)
-	{
-		getBody().add(child);
-		return (J) this;
-	}
-
-	@Override
-	public Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> getChildrenHierarchy(@NotNull Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> componentsToAddTo)
-	{
-		Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> pageChildren = new LinkedHashSet<>();
-		pageChildren.addAll(getHead().getChildrenHierarchy(true));
-		pageChildren.addAll(getBody().getChildrenHierarchy(true));
-		pageChildren.add(this);
-		return pageChildren;
-	}
-
-	/**
-	 * Overidden method to return this, beware circular joins
-	 *
-	 * @return Hard override to this page
-	 */
-	@Override
-	@NotNull
-	public Page getPage()
-	{
-		return this;
-	}
-
-	/**
 	 * Sets all component in the head and body to tiny
 	 *
 	 * @param tiny
 	 * 		Sets this object, the head, and the body to tiny
 	 *
 	 * @return Always this
+	 *
+	 * @see com.jwebmp.core.base.ComponentHierarchyBase#setTiny(boolean)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -551,21 +569,34 @@ public class Page<J extends Page<J>>
 	}
 
 	@Override
-	public Set<StringBuilder> getQueriesAll()
+	public J add(@NotNull IComponentHierarchyBase child)
 	{
-		return getBody().getQueriesAll();
+		getBody().add(child);
+		return (J) this;
 	}
 
 	@Override
-	public void init()
+	public @NotNull Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> getChildrenHierarchy()
 	{
-		if (!pageInitialized)
-		{
-			getHead().init();
-			getBody().init();
-			pageInitialized = true;
-		}
-		setInitialized(true);
+		Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> pageChildren = new LinkedHashSet<>();
+		pageChildren.addAll(getHead().getChildrenHierarchy(true));
+		pageChildren.addAll(getBody().getChildrenHierarchy(true));
+		pageChildren.add(this);
+		return pageChildren;
+	}
+
+	/**
+	 * Overidden method to return this, beware circular joins
+	 *
+	 * @return Hard override to this page
+	 *
+	 * @see com.jwebmp.core.base.ComponentHierarchyBase#getPage()
+	 */
+	@Override
+	@NotNull
+	public Page getPage()
+	{
+		return this;
 	}
 
 	/**
@@ -594,10 +625,25 @@ public class Page<J extends Page<J>>
 	}
 
 	/**
+	 * Returns all the feature queries associated to this component and all its children
+	 *
+	 * @return The bodies list of queries
+	 */
+	@NotNull
+	@Override
+	public Set<StringBuilder> getQueriesAll()
+	{
+		return getBody().getQueriesAll();
+	}
+
+	/**
 	 * Renders all the children to a string builder
 	 *
 	 * @return The string representation of this page
+	 *
+	 * @see com.jwebmp.core.base.ComponentHierarchyBase#renderChildren()
 	 */
+	@NotNull
 	@Override
 	protected StringBuilder renderChildren()
 	{
@@ -657,6 +703,24 @@ public class Page<J extends Page<J>>
 		                .isEmpty();
 	}
 
+	/**
+	 * Initialize all children
+	 */
+	@Override
+	public void init()
+	{
+		if (!pageInitialized)
+		{
+			getHead().init();
+			getBody().init();
+			pageInitialized = true;
+		}
+		setInitialized(true);
+	}
+
+	/**
+	 * Method configurePage ...
+	 */
 	private void configurePage()
 	{
 		Set<IPageConfigurator> sortedConfigurators = GuiceContext.get(IPageConfiguratorsKey);
@@ -682,14 +746,38 @@ public class Page<J extends Page<J>>
 		{
 			getHead().add(getPageFields().getBase());
 		}
-		getHead().add(getPageFields().getHttpEquivMeta());
-		getHead().add(getPageFields().getCacheControl());
-		getHead().add(getPageFields().getAuthor());
-		getHead().add(getPageFields().getApplicationName());
-		getHead().add(getPageFields().getGenerator());
-		getHead().add(getPageFields().getDescription());
-		getHead().add(getPageFields().getKeywords());
-		getHead().add(getPageFields().getFavIconLink());
+		if (getPageFields().getHttpEquivMeta() != null)
+		{
+			getHead().add(getPageFields().getHttpEquivMeta());
+		}
+		if (getPageFields().getCacheControl() != null)
+		{
+			getHead().add(getPageFields().getCacheControl());
+		}
+		if (getPageFields().getAuthor() != null)
+		{
+			getHead().add(getPageFields().getAuthor());
+		}
+		if (getPageFields().getApplicationName() != null)
+		{
+			getHead().add(getPageFields().getApplicationName());
+		}
+		if (getPageFields().getGenerator() != null)
+		{
+			getHead().add(getPageFields().getGenerator());
+		}
+		if (getPageFields().getDescription() != null)
+		{
+			getHead().add(getPageFields().getDescription());
+		}
+		if (getPageFields().getKeywords() != null)
+		{
+			getHead().add(getPageFields().getKeywords());
+		}
+		if (getPageFields().getFavIconLink() != null)
+		{
+			getHead().add(getPageFields().getFavIconLink());
+		}
 	}
 
 	/**

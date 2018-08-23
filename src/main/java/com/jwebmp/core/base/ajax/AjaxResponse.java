@@ -40,6 +40,7 @@ import java.util.Map.Entry;
  * @author GedMarc
  * @since 27 Apr 2016
  */
+@SuppressWarnings("MissingClassJavaDoc")
 @RequestScoped
 public class AjaxResponse<J extends AjaxResponse<J>>
 		extends JavaScriptPart<J>
@@ -89,7 +90,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 * An additional list of features that can fire
 	 */
 	@JsonIgnore
-	private Set<Feature<?, ?>> features;
+	private Set<Feature<?, ?, ?>> features;
 
 	/**
 	 * A list of local storage items and their keys
@@ -126,7 +127,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 *
 	 * @return
 	 */
-	public Set<Feature<?, ?>> getFeatures()
+	public Set<Feature<?, ?, ?>> getFeatures()
 	{
 		if (features == null)
 		{
@@ -140,7 +141,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 *
 	 * @param features
 	 */
-	public void setFeatures(Set<Feature<?, ?>> features)
+	public void setFeatures(Set<Feature<?, ?, ?>> features)
 	{
 		this.features = features;
 	}
@@ -215,6 +216,8 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 		getComponents().add(component);
 		AjaxComponentUpdates newComponent = new AjaxComponentUpdates(component);
 		getComponentUpdates().add(newComponent);
+		component.init();
+		component.preConfigure();
 		return newComponent;
 	}
 
@@ -223,13 +226,18 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 *
 	 * @return
 	 */
-	public Set<ComponentHierarchyBase> getComponents()
+	protected Set<ComponentHierarchyBase> getComponents()
 	{
 		if (components == null)
 		{
 			components = new TreeSet<>();
 		}
 		return components;
+	}
+
+	protected void setComponents(Set<ComponentHierarchyBase> components)
+	{
+		this.components = components;
 	}
 
 	/**
@@ -354,7 +362,9 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	protected String getAllCss()
 	{
 		StringBuilder sb = new StringBuilder();
-		getComponents().forEach(next -> sb.append(getCssRenders(ComponentStyleBase.class.cast(next))));
+		List<ComponentHierarchyBase> workable = new ArrayList<>(getComponents());
+		workable.forEach(next -> sb.append(getCssRenders(ComponentStyleBase.class.cast(next))));
+
 		return sb.toString();
 	}
 

@@ -67,7 +67,7 @@ abstract class RequirementsPriorityAbstractInsertPageConfigurator
 		}
 		if (javascript)
 		{
-			Set<Script<?>> scripts = getAllScripts(page, priority);
+			Set<Script<?, ?>> scripts = getAllScripts(page, priority);
 			for (Script script : scripts)
 			{
 				if (!input.contains(script))
@@ -82,7 +82,8 @@ abstract class RequirementsPriorityAbstractInsertPageConfigurator
 	/**
 	 * Gets all the links for all the bodies components
 	 *
-	 * @param priority the priority to return
+	 * @param priority
+	 * 		the priority to return
 	 *
 	 * @return A list of newwly contructed links
 	 */
@@ -102,7 +103,8 @@ abstract class RequirementsPriorityAbstractInsertPageConfigurator
 			{
 				link.addClass(reference.getSpecifiedClassName());
 			}
-			if(!reference.getAdditionalOptions().isEmpty())
+			if (!reference.getAdditionalOptions()
+			              .isEmpty())
 			{
 				for (String additionalOption : reference.getAdditionalOptions())
 				{
@@ -120,20 +122,22 @@ abstract class RequirementsPriorityAbstractInsertPageConfigurator
 	/**
 	 * Gets all the scripts for all the body components
 	 *
-	 * @param priority A set of priorities
+	 * @param priority
+	 * 		A set of priorities
 	 *
 	 * @return A set of newly constructed script objects
 	 */
-	private Set<Script<?>> getAllScripts(Page<?> page, RequirementsPriority priority)
+	private Set<Script<?, ?>> getAllScripts(Page<?> page, RequirementsPriority priority)
 	{
 		List<JavascriptReference> allJavascripts = new ArrayList<>(page.getBody()
 		                                                               .getJavascriptReferencesAll(priority));
 		allJavascripts.sort(WebReference.getDummyReference());
-		Set<Script<?>> allScripts = new LinkedHashSet<>();
+		Set<Script<?, ?>> allScripts = new LinkedHashSet<>();
 		for (JavascriptReference reference : allJavascripts)
 		{
 			Script script = new Script(reference);
-			if(!reference.getAdditionalOptions().isEmpty())
+			if (!reference.getAdditionalOptions()
+			              .isEmpty())
 			{
 				for (String additionalOption : reference.getAdditionalOptions())
 				{

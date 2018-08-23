@@ -59,7 +59,6 @@ import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
 public class JWebMPSiteBinder
 		implements IGuiceSiteBinder<GuiceSiteInjectorModule>
 {
-
 	private static final java.util.logging.Logger log = LogFactory.getLog("JWebMPCoreBinder");
 	/**
 	 * The User Agent Parser

@@ -18,12 +18,12 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.SourceAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.NoClosingTag;
 import com.jwebmp.core.base.html.interfaces.NoFeatures;
 import com.jwebmp.core.base.html.interfaces.children.AudioChildren;
 import com.jwebmp.core.base.html.interfaces.children.VideoChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -56,8 +56,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since Mar 1, 2015
  */
 public class Source<J extends Source<J>>
-		extends Component<GlobalChildren, SourceAttributes, NoFeatures, NoEvents, J>
-		implements AudioChildren, VideoChildren, NoClosingTag
+		extends Component<IComponentHierarchyBase, SourceAttributes, NoFeatures, NoEvents, J>
+		implements AudioChildren<IComponentHierarchyBase, J>, VideoChildren<IComponentHierarchyBase, J>, NoClosingTag
 {
 
 	private static final long serialVersionUID = 1L;

@@ -42,6 +42,7 @@ import java.util.logging.Level;
  * @author GedMarc
  * @since 22 Apr 2016
  */
+@SuppressWarnings("MissingClassJavaDoc")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY,
 		getterVisibility = JsonAutoDetect.Visibility.NONE,
 		setterVisibility = JsonAutoDetect.Visibility.NONE)
@@ -142,7 +143,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 		}
 		catch (CloneNotSupportedException ex)
 		{
-			log.log(Level.SEVERE, "Cloning Error in Shell", ex);
+			ComponentBase.log.log(Level.SEVERE, "Cloning Error in Shell", ex);
 		}
 		return component;
 	}
@@ -612,7 +613,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 		}
 		catch (NullPointerException npe)
 		{
-			log.log(Level.FINE, "Null Pointer in getting canonical name", npe);
+			ComponentBase.log.log(Level.FINE, "Null Pointer in getting canonical name", npe);
 			return getClass().getTypeName();
 		}
 	}

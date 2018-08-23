@@ -86,7 +86,8 @@ public enum InputFileTypeAttributes
 	/**
 	 * Sets or returns whether a user is allowed to select more than one file in the file upload field
 	 */
-	Multiple,;
+	Multiple,
+	;
 
 	/**
 	 *

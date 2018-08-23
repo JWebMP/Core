@@ -45,7 +45,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class FieldSet<J extends FieldSet<J>>
 		extends Component<FieldSetChildren, NoAttributes, NoFeatures, NoEvents, J>
-		implements FormChildren, NoIDTag
+		implements FormChildren<FieldSetChildren, J>, NoIDTag
 {
 
 	private static final long serialVersionUID = 1L;
@@ -60,7 +60,6 @@ public class FieldSet<J extends FieldSet<J>>
 	public FieldSet()
 	{
 		super(ComponentTypes.FieldSet);
-		add(legend);
 	}
 
 	/**
@@ -94,31 +93,14 @@ public class FieldSet<J extends FieldSet<J>>
 	}
 
 	@Override
-	public boolean equals(Object o)
+	public int hashCode()
 	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof FieldSet))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		FieldSet<?> fieldSet = (FieldSet<?>) o;
-
-		return legend.equals(fieldSet.legend);
+		return super.hashCode();
 	}
 
 	@Override
-	public int hashCode()
+	public boolean equals(Object o)
 	{
-		int result = super.hashCode();
-		result = 31 * result + legend.hashCode();
-		return result;
+		return super.equals(o);
 	}
 }

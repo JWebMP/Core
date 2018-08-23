@@ -46,7 +46,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class TableRow<J extends TableRow<J>>
 		extends Component<TableRowChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements TableChildren, TableHeaderGroupChildren, TableBodyGroupChildren, TableFooterGroupChildren
+		implements TableChildren<TableRowChildren, J>, TableHeaderGroupChildren<TableRowChildren, J>, TableBodyGroupChildren<TableRowChildren, J>, TableFooterGroupChildren<TableRowChildren, J>
 {
 
 	private static final long serialVersionUID = 1L;

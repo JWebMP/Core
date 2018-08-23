@@ -19,9 +19,9 @@ package com.jwebmp.core.base.html;
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.GlobalAttributes;
 import com.jwebmp.core.base.html.attributes.KeyGenAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -53,7 +53,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since 2015/02/09
  */
 public class KeyGen<J extends KeyGen<J>>
-		extends Component<GlobalChildren, KeyGenAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<IComponentHierarchyBase, KeyGenAttributes, GlobalFeatures, GlobalEvents, J>
 {
 
 	private static final long serialVersionUID = 1L;

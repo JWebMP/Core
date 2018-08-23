@@ -54,7 +54,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class Superscript<J extends Superscript<J>>
 		extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, ParagraphChildren, PhraseChildren
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, ParagraphChildren<ParagraphChildren, J>, PhraseChildren<ParagraphChildren, J>
 {
 
 	private static final long serialVersionUID = 1L;

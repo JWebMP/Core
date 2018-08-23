@@ -97,7 +97,8 @@ public enum GlobalAttributes
 	 * Screen Reader labelled by
 	 */
 	Aria_LabelledBy,
-	Aria_Controls,;
+	Aria_Controls,
+	;
 
 	GlobalAttributes()
 	{

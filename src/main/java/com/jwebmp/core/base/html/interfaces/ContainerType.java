@@ -16,6 +16,9 @@
  */
 package com.jwebmp.core.base.html.interfaces;
 
+import com.jwebmp.core.base.ComponentBase;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
+
 /**
  * Defines a class that can contain the general element types
  * <p>
@@ -24,8 +27,8 @@ package com.jwebmp.core.base.html.interfaces;
  * @version 1.0
  * @since 07 Aug 2015
  */
-public interface ContainerType
-		extends DisplayObjects
+public interface ContainerType<C extends IComponentHierarchyBase, J extends ComponentBase>
+		extends DisplayObjects<C, J>
 {
 
 }

@@ -16,6 +16,8 @@
  */
 package com.jwebmp.core.base.html.interfaces.events;
 
+import com.jwebmp.core.base.ComponentBase;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.htmlbuilder.javascript.events.interfaces.IEvent;
 
 /**
@@ -26,8 +28,8 @@ import com.jwebmp.core.htmlbuilder.javascript.events.interfaces.IEvent;
  * @since 2014/09/11
  */
 
-public interface BodyEvents
-		extends IEvent
+public interface BodyEvents<F extends GlobalFeatures, J extends ComponentBase>
+		extends IEvent<F, J>
 {
 
 }

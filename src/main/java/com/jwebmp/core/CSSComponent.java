@@ -73,6 +73,7 @@ public abstract class CSSComponent<J extends CSSComponent<J>>
 	 *
 	 * @return $(' # x ').
 	 */
+	@NotNull
 	@Override
 	public String getJQueryID()
 	{
@@ -89,6 +90,7 @@ public abstract class CSSComponent<J extends CSSComponent<J>>
 	 *
 	 * @return An ID starting with .
 	 */
+	@NotNull
 	@Override
 	public String getID(boolean jQueryHolder)
 	{
@@ -100,6 +102,7 @@ public abstract class CSSComponent<J extends CSSComponent<J>>
 	 *
 	 * @return
 	 */
+	@NotNull
 	@Override
 	public String getID()
 	{

@@ -18,7 +18,6 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.NoFeatures;
 import com.jwebmp.core.base.html.interfaces.NoIDTag;
 import com.jwebmp.core.base.html.interfaces.children.DescriptionListChildren;
@@ -32,7 +31,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class DescriptionList<J extends DescriptionList<J>>
 		extends Component<DescriptionListChildren, NoAttributes, NoFeatures, NoEvents, J>
-		implements GlobalChildren, NoIDTag
+		implements NoIDTag
 {
 
 	private static final long serialVersionUID = 1L;

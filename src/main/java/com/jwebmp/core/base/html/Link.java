@@ -25,6 +25,7 @@ import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
 import com.jwebmp.core.base.html.interfaces.children.ListChildren;
 import com.jwebmp.core.base.html.interfaces.children.ListItemChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.logger.LogFactory;
 
@@ -65,8 +66,8 @@ import java.util.logging.Level;
  * @author Marc Magon
  */
 public class Link<J extends Link<J>>
-		extends Component<ComponentHierarchyBase, LinkAttributes, GlobalFeatures, GlobalEvents, J>
-		implements BodyChildren, NoNewLineForRawText, ListItemChildren, ListChildren
+		extends Component<IComponentHierarchyBase, LinkAttributes, GlobalFeatures, GlobalEvents, J>
+		implements BodyChildren<IComponentHierarchyBase, J>, NoNewLineForRawText, ListItemChildren<IComponentHierarchyBase, J>, ListChildren<IComponentHierarchyBase, J>
 {
 
 	private static final java.util.logging.Logger log = LogFactory.getInstance()
@@ -101,7 +102,7 @@ public class Link<J extends Link<J>>
 		this(directToAddress, null);
 		if (directToAddress == null || directToAddress.isEmpty())
 		{
-			log.log(Level.FINE, "Invalid Link Address.");
+			Link.log.log(Level.FINE, "Invalid Link Address.");
 		}
 	}
 
@@ -227,14 +228,14 @@ public class Link<J extends Link<J>>
 	}
 
 	@Override
-	public boolean equals(Object o)
-	{
-		return super.equals(o);
-	}
-
-	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
 	}
 }

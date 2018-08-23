@@ -18,9 +18,9 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.NoFeatures;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -43,7 +43,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * 		No support in I.E. - can't be used, the results are not compatible - may make as a server function but the point is client side.
  */
 public class Output<J extends Output<J>>
-		extends Component<GlobalChildren, NoAttributes, NoFeatures, NoEvents, J>
+		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, NoEvents, J>
 {
 
 	private static final long serialVersionUID = 1L;

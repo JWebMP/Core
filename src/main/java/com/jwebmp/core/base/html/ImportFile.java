@@ -19,11 +19,11 @@ package com.jwebmp.core.base.html;
 import com.jwebmp.core.Component;
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.NoFeatures;
 import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
 import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 import javax.validation.constraints.NotNull;
@@ -41,8 +41,8 @@ import java.io.InputStreamReader;
  * @since 06 Feb 2017
  */
 public class ImportFile<J extends ImportFile<J>>
-		extends Component<GlobalChildren, NoAttributes, NoFeatures, NoEvents, J>
-		implements BodyChildren, ParagraphChildren
+		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, NoEvents, J>
+		implements BodyChildren<IComponentHierarchyBase, J>, ParagraphChildren<IComponentHierarchyBase, J>
 {
 
 	/**
@@ -57,10 +57,13 @@ public class ImportFile<J extends ImportFile<J>>
 	/**
 	 * Constructs a new instance of an imported file via a stream
 	 *
-	 * @param templateName The name of the template
-	 * @param inputStream The given input stream to read from
+	 * @param templateName
+	 * 		The name of the template
+	 * @param inputStream
+	 * 		The given input stream to read from
 	 *
-	 * @throws java.io.IOException In case of anything
+	 * @throws java.io.IOException
+	 * 		In case of anything
 	 */
 	public ImportFile(@NotNull String templateName, @NotNull InputStream inputStream) throws IOException
 	{
@@ -123,7 +126,9 @@ public class ImportFile<J extends ImportFile<J>>
 	/**
 	 * Method equals ...
 	 *
-	 * @param o of type Object
+	 * @param o
+	 * 		of type Object
+	 *
 	 * @return boolean
 	 */
 	@Override

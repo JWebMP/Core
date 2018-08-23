@@ -18,10 +18,10 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.CanvasAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -54,7 +54,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since forever, was created for the jwimagemap
  */
 public class Canvas<J extends Canvas<J>>
-		extends Component<GlobalChildren, CanvasAttributes, GlobalFeatures, GlobalEvents, J>
+		extends Component<IComponentHierarchyBase, CanvasAttributes, GlobalFeatures, GlobalEvents, J>
 		implements NoNewLineBeforeClosingTag
 {
 

@@ -67,7 +67,7 @@ public abstract class MouseUpAdapter
 		}
 		catch (Exception e)
 		{
-			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			MouseUpAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 
@@ -77,7 +77,7 @@ public abstract class MouseUpAdapter
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
+		if (getComponent() != null)
 		{
 
 			AngularPageConfigurator.setRequired(true);

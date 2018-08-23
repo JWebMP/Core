@@ -24,6 +24,7 @@ package com.jwebmp.core.base.interfaces;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jwebmp.core.base.ComponentBase;
 import com.jwebmp.core.base.ComponentEventBase;
+import com.jwebmp.core.base.html.interfaces.LifeCycle;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
@@ -41,7 +42,12 @@ import java.util.Set;
  * @since $(date)
  */
 public interface IComponentEventBase<E extends GlobalEvents, J extends ComponentBase>
+		extends LifeCycle
 {
+	/**
+	 * Checks if this feature has been configured and rendered with all the features
+	 */
+	void checkAssignedFunctions();
 
 	/**
 	 * Adds an event to this object

@@ -22,6 +22,7 @@ import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.children.AreaChildren;
 import com.jwebmp.core.base.html.interfaces.children.MapChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 import java.io.Serializable;
@@ -51,9 +52,9 @@ import java.io.Serializable;
  * @version 1.0
  * @since 2013/11/22
  */
-public class Area<J extends Area<J>>
-		extends ComponentHierarchyBase<AreaChildren, AreaAttributes, GlobalFeatures, GlobalEvents, J>
-		implements MapChildren, Serializable
+public class Area<C extends IComponentHierarchyBase & AreaChildren, J extends Area<C, J>>
+		extends ComponentHierarchyBase<C, AreaAttributes, GlobalFeatures, GlobalEvents, J>
+		implements MapChildren<C, J>, Serializable
 {
 
 	/**

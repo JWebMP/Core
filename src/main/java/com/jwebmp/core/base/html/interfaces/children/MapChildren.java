@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.base.html.interfaces.children;
 
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
+import com.jwebmp.core.base.ComponentBase;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 
 /**
  * Describes a valid child for the MAP Tag
@@ -25,8 +26,8 @@ import com.jwebmp.core.base.html.interfaces.GlobalChildren;
  * @version 1.0
  * @since 2013/11/22
  */
-public interface MapChildren
-		extends GlobalChildren
+public interface MapChildren<C extends IComponentHierarchyBase, J extends ComponentBase>
+		extends IComponentHierarchyBase<C, J>
 {
 
 }

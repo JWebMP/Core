@@ -19,7 +19,6 @@ package com.jwebmp.core;
 import com.jwebmp.core.base.ComponentFeatureBase;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
-import com.jwebmp.core.base.html.interfaces.NoFeatures;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 
@@ -37,11 +36,15 @@ import java.util.Objects;
  * @author GedMarc
  * @since 23 Apr 2016
  */
-public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
-		extends ComponentFeatureBase<NoFeatures, J>
-		implements GlobalFeatures
+@SuppressWarnings("MissingClassJavaDoc")
+public abstract class Feature<F extends GlobalFeatures, O extends JavaScriptPart, J extends Feature<F, O, J>>
+		extends ComponentFeatureBase<F, J>
+		implements GlobalFeatures<F, J>
 {
 
+	/**
+	 * Field serialVersionUID
+	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -53,6 +56,7 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 	 * Constructs a feature that can be used with all components
 	 *
 	 * @param name
+	 * 		The unique name of the feature
 	 */
 	public Feature(String name)
 	{
@@ -64,13 +68,15 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 	 * Constructs a feature that can be used with all components
 	 *
 	 * @param name
+	 * 		The unique name and component for the feature
 	 * @param component
+	 * 		The given component
 	 */
 	public Feature(String name, ComponentHierarchyBase component)
 	{
 		super(ComponentTypes.Feature);
 		setName(name);
-		setComponent(component);
+		super.setComponent(component);
 		if (component != null)
 		{
 			component.addFeature(this);
@@ -81,8 +87,9 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 	 * Adds a query to builder
 	 *
 	 * @param query
+	 * 		Adds a query as a string builder
 	 *
-	 * @return
+	 * @return Always this class
 	 */
 	public J addQuery(String query)
 	{
@@ -124,14 +131,16 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 		{
 			return false;
 		}
-		Feature<?, ?> feature = (Feature<?, ?>) obj;
+		Feature<?, ?, ?> feature = (Feature<?, ?, ?>) obj;
 		return Objects.equals(getName(), feature.getName());
 	}
 
 	/**
 	 * Returns any client side options available with this component
 	 *
-	 * @return
+	 * @return The options object that is nullable
+	 *
+	 * @see com.jwebmp.core.base.ComponentFeatureBase#getOptions()
 	 */
 	@Override
 	public O getOptions()
@@ -140,9 +149,42 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 	}
 
 	/**
+	 * Use Add Query to add a query to the container
+	 */
+	@Override
+	protected abstract void assignFunctionsToComponent();
+
+	/**
+	 * Returns any hierarchal assigned component
+	 *
+	 * @param component
+	 * 		The component to use
+	 *
+	 * @return This component
+	 *
+	 * @see com.jwebmp.core.base.ComponentFeatureBase#setComponent(ComponentHierarchyBase)
+	 */
+	@SuppressWarnings("unchecked")
+	@NotNull
+	@Override
+	public J setComponent(ComponentHierarchyBase component)
+	{
+		if (this.getComponent() != null)
+		{
+			getComponent().removeFeature((F) this);
+		}
+		if (component != null)
+		{
+			component.addFeature(this);
+		}
+		return super.setComponent(component);
+	}
+
+	/**
 	 * Sets the options object
 	 *
 	 * @param options
+	 * 		The options object
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
@@ -152,19 +194,4 @@ public abstract class Feature<O extends JavaScriptPart, J extends Feature<O, J>>
 		return (J) this;
 	}
 
-	/**
-	 * Any work that needs to get done pre render
-	 */
-	@Override
-	protected abstract void assignFunctionsToComponent();
-
-	@Override
-	public J setComponent(ComponentHierarchyBase component)
-	{
-		if (component != null)
-		{
-			component.addFeature(this);
-		}
-		return super.setComponent(component);
-	}
 }

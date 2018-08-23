@@ -16,11 +16,14 @@
  */
 package com.jwebmp.core.base.html.interfaces;
 
+import com.jwebmp.core.base.ComponentBase;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
+
 /**
  * @author GedMarc
  */
-public interface FigureChildren
-		extends GlobalChildren
+public interface FigureChildren<C extends IComponentHierarchyBase, J extends ComponentBase>
+		extends IComponentHierarchyBase<C, J>
 {
 
 }

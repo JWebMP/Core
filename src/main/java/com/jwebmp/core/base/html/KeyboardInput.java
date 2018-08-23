@@ -18,10 +18,10 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.children.PhraseChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -51,8 +51,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since 2015/02/09
  */
 public class KeyboardInput<J extends KeyboardInput<J>>
-		extends Component<GlobalChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements PhraseChildren
+		extends Component<IComponentHierarchyBase, NoAttributes, GlobalFeatures, GlobalEvents, J>
+		implements PhraseChildren<IComponentHierarchyBase, J>
 {
 
 	private static final long serialVersionUID = 1L;

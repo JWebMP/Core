@@ -38,7 +38,6 @@ import com.jwebmp.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -62,13 +61,20 @@ import static java.util.Comparator.*;
  * @author GedMarc
  * @since 24 Apr 2016
  */
-@SuppressWarnings("unchecked")
-public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHierarchyBase<C, A, F, E, J>>
+@SuppressWarnings({"unchecked", "MissingClassJavaDoc"})
+public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentHierarchyBase<C, A, F, E, J>>
 		extends ComponentThemeBase<A, F, E, J>
 		implements IComponentHierarchyBase<C, J>, GlobalChildren
 {
 
+	/**
+	 * Field serialVersionUID
+	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Field log
+	 */
 	private static final Logger log = LogFactory.getInstance()
 	                                            .getLogger("ComponentHierarchyBase");
 
@@ -76,7 +82,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * The list of children of this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> children;
+	private Set<C> children;
 
 	/**
 	 * My Parent
@@ -100,6 +106,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * Constructs a new component that can be part of a tree
 	 *
 	 * @param componentType
+	 * 		The component type of the class
 	 */
 	public ComponentHierarchyBase(@NotNull ComponentTypes componentType)
 	{
@@ -109,13 +116,218 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	/**
 	 * Returns a Hierarchy Base interface of this component
 	 *
-	 * @return
+	 * @return The smaller neater version as a child hierarchy
 	 */
 	@NotNull
 	@SuppressWarnings("unused")
 	public IComponentHierarchyBase<C, J> asHierarchyBase()
 	{
 		return this;
+	}
+
+	/**
+	 * Finds the event in all this components and child components
+	 *
+	 * @param eventId
+	 *
+	 * @return
+	 *
+	 * @see ComponentEventBase#findEvent(String)
+	 */
+	@Override
+	public ComponentEventBase findEvent(@NotNull String eventId)
+	{
+		for (C child : getChildren())
+		{
+			for (Object jScript : child.getEventsAll())
+			{
+				if (((Event) jScript)
+						    .getID()
+						    .equals(eventId))
+				{
+					return (ComponentEventBase) jScript;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Overrides this and all below components to set tiny false
+	 *
+	 * @param tiny
+	 *
+	 * @return super.tiny
+	 *
+	 * @see ComponentEventBase#setTiny(boolean)
+	 */
+	@Override
+	@NotNull
+	public J setTiny(boolean tiny)
+	{
+		getChildren().forEach(child -> child.setTiny(tiny));
+		return super.setTiny(tiny);
+	}
+
+	/**
+	 * Returns the parent id for the parent property so JSON doesn't go circular
+	 *
+	 * @return
+	 */
+	@JsonProperty("parent")
+	private String getParentJSON()
+	{
+		if (getParent() != null)
+		{
+			return getParent().getID();
+		}
+		return null;
+	}
+
+	/**
+	 * Adds in the JavaScript References for all the children
+	 *
+	 * @return
+	 *
+	 * @see ComponentThemeBase#getCssReferencesAll()
+	 */
+	@Override
+	@NotNull
+	public Set<CSSReference> getCssReferencesAll()
+	{
+		Set<CSSReference> allCss = super.getCssReferencesAll();
+		getChildren().forEach(child ->
+		                      {
+			                      for (Object jScript : child.getCssReferencesAll())
+			                      {
+				                      allCss.add((CSSReference) jScript);
+			                      }
+		                      });
+		return allCss;
+	}
+
+	/**
+	 * Adds in the JavaScript References for all the children
+	 *
+	 * @return
+	 *
+	 * @see ComponentThemeBase#getJavascriptReferencesAll()
+	 */
+	@Override
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public Set<JavascriptReference> getJavascriptReferencesAll()
+	{
+		Set<JavascriptReference> allJs = super.getJavascriptReferencesAll();
+		getChildren().forEach(child ->
+		                      {
+			                      for (Object jScript : child.getJavascriptReferencesAll())
+			                      {
+				                      allJs.add((JavascriptReference) jScript);
+			                      }
+		                      });
+		return allJs;
+	}
+
+	/**
+	 * Method hashCode ...
+	 *
+	 * @return int
+	 */
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
+	}
+
+	/**
+	 * Method equals ...
+	 *
+	 * @param o
+	 * 		of type Object
+	 *
+	 * @return boolean
+	 */
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
+	}
+
+	/**
+	 * Method destroy ...
+	 */
+	@Override
+	public void destroy()
+	{
+		if (children != null)
+		{
+			for (C next : children)
+			{
+				try
+				{
+					next.destroy();
+				}
+				catch (Exception e)
+				{
+					ComponentHierarchyBase.log.log(Level.SEVERE, "UUnable to destroy", e);
+				}
+			}
+		}
+		if (children != null)
+		{
+			children.clear();
+			children = null;
+		}
+		if (classes != null)
+		{
+			classes.clear();
+			classes = null;
+		}
+		super.destroy();
+	}
+
+	/**
+	 * Returns a complete list of events
+	 *
+	 * @return
+	 */
+	@NotNull
+	@SuppressWarnings("unused")
+	public Set<Feature> getFeaturesAll()
+	{
+		Set<Feature> allFeatures = new LinkedHashSet<>();
+		getChildrenHierarchy().forEach(child ->
+		                               {
+			                               for (Object event : child.getFeatures())
+			                               {
+				                               allFeatures.add((Feature) event);
+			                               }
+		                               });
+		return allFeatures;
+	}
+
+	/**
+	 * Takes an instance and wraps around the component
+	 * <p>
+	 * e.g. BSRow.wrap(div) = iv class="row"myComponent//div
+	 *
+	 * @param component
+	 *
+	 * @return
+	 */
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public <T extends ComponentHierarchyBase> T wrap(@NotNull T component)
+	{
+		ComponentHierarchyBase existingParent = component.getParent();
+		if (existingParent != null)
+		{
+			existingParent.remove(component);
+			existingParent.add(this);
+		}
+		getChildren().add((C) component);
+		return component;
 	}
 
 	/**
@@ -133,14 +345,12 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	@NotNull
 	public J add(@NotNull C newChild)
 	{
-		ComponentHierarchyBase comp = ComponentHierarchyBase.class.cast(newChild);
-		if (comp != null && !comp.equals(this))
-		{
-			comp.setParent(this);
-			comp.setTiny(isTiny());
-			comp.setPage(getPage());
-			getChildren().add(comp);
-		}
+		newChild.setParent(this);
+		newChild.setTiny(isTiny());
+		newChild.setPage(getPage());
+		getChildren().add(newChild);
+		newChild.init();
+		newChild.preConfigure();
 		return (J) this;
 	}
 
@@ -148,8 +358,11 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * Returns null sets the text
 	 *
 	 * @param text
+	 * 		Sets this tags raw text, does not add a component
 	 *
-	 * @return
+	 * @return J Always this class
+	 *
+	 * @see com.jwebmp.core.base.interfaces.IComponentHierarchyBase#add(String)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -165,31 +378,32 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * <p>
 	 *
 	 * @param classComponent
+	 * 		Adds a class as a component to this object
 	 *
-	 * @return
+	 * @return This class
+	 *
+	 * @see com.jwebmp.core.base.interfaces.IComponentHierarchyBase#addClass(CSSComponent)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public J addClass(@NotNull CSSComponent classComponent)
 	{
 		String className = classComponent.getID();
-		getPage().getBody()
-		         .add(classComponent);
+		add((C) classComponent);
 		if (!getClasses().contains(className))
 		{
 			addClass(className);
-			return (J) this;
+
 		}
-		else
-		{
-			return (J) this;
-		}
+		return (J) this;
 	}
 
 	/**
 	 * Returns All the angular objects mapped to this component and its children
 	 *
-	 * @return
+	 * @return A map of String,Object
+	 *
+	 * @see com.jwebmp.core.base.interfaces.IComponentHierarchyBase#getAngularObjectsAll()
 	 */
 	@Override
 	public Map<String, Object> getAngularObjectsAll()
@@ -210,7 +424,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 */
 	@Override
 	@NotNull
-	public final Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> getChildren()
+	public final Set<C> getChildren()
 	{
 		if (children == null)
 		{
@@ -225,7 +439,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * @param children
 	 * 		The children set to apply
 	 */
-	public void setChildren(Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> children)
+	public void setChildren(Set<C> children)
 	{
 		this.children = children;
 	}
@@ -238,7 +452,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 */
 	@Override
 	@NotNull
-	public Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> getChildrenHierarchy()
+	public Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> getChildrenHierarchy()
 	{
 		return getChildrenHierarchy(true);
 	}
@@ -255,12 +469,12 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 */
 	@Override
 	@NotNull
-	public Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> getChildrenHierarchy(boolean trues)
+	public Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> getChildrenHierarchy(boolean trues)
 	{
-		Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> components = new LinkedHashSet<>();
+		Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> components = new LinkedHashSet<>();
 		if (trues)
 		{
-			components.add(this);
+			components.add((ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>) this);
 		}
 		getChildrenHierarchy(components);
 
@@ -278,14 +492,16 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * 		<p>
 	 *
 	 * @return original components added with
+	 *
+	 * @see com.jwebmp.core.base.interfaces.IComponentHierarchyBase#getChildrenHierarchy(Set<ComponentHierarchyBase<?, ?, ?, ?, ?>>)
 	 */
 	@Override
 	@NotNull
-	public Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> getChildrenHierarchy(@NotNull Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> componentsToAddTo)
+	public Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> getChildrenHierarchy(@NotNull Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> componentsToAddTo)
 	{
 		getChildren().forEach(child ->
 		                      {
-			                      componentsToAddTo.add(child);
+			                      componentsToAddTo.add((ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>) child);
 			                      child.getChildrenHierarchy(componentsToAddTo);
 		                      });
 		return componentsToAddTo;
@@ -294,7 +510,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	/**
 	 * Returns a complete list of events
 	 *
-	 * @return
+	 * @return A unique set of all events
 	 */
 	@Override
 	@NotNull
@@ -305,7 +521,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		                                   {
 			                                   for (Object event : child.getEvents())
 			                                   {
-				                                   allEvents.add(Event.class.cast(event));
+				                                   allEvents.add((Event) event);
 			                                   }
 		                                   });
 		return allEvents;
@@ -331,7 +547,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	/**
 	 * Gets the parent of this hierarchy item
 	 *
-	 * @return
+	 * @return The parent object
 	 */
 	@Override
 
@@ -344,6 +560,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * Sets the parent of this item
 	 *
 	 * @param parent
+	 * 		Sets the parent object
 	 */
 	@Override
 	@NotNull
@@ -391,6 +608,37 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		return (J) this;
 	}
 
+	/**
+	 * Enumeration to remove
+	 *
+	 * @param className
+	 *
+	 * @return
+	 */
+	@Override
+	public boolean removeClass(@NotNull Enum className)
+	{
+		if (getClasses().contains(className.toString()))
+		{
+			getClasses().remove(className.toString());
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	/**
+	 * Method addClass ...
+	 *
+	 * @param className
+	 * 		of type ICssClassName
+	 *
+	 * @return J
+	 *
+	 * @see com.jwebmp.core.base.interfaces.IComponentHierarchyBase#addClass(ICssClassName)
+	 */
 	@Override
 	@NotNull
 	@SuppressWarnings("unchecked")
@@ -428,10 +676,15 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * Sets the classes set
 	 *
 	 * @param classes
+	 * 		a new set of classes
 	 */
-	public void setClasses(Set<String> classes)
+	@NotNull
+	@SuppressWarnings("unchecked")
+	@Override
+	public J setClasses(Set<String> classes)
 	{
 		this.classes = classes;
+		return (J) this;
 	}
 
 	/**
@@ -440,6 +693,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 *
 	 * @param theme
 	 * 		The JQuery UI theme to apply to the component
+	 *
+	 * @see com.jwebmp.core.base.interfaces.IComponentHierarchyBase#addTheme(Theme)
 	 */
 	@Override
 	@NotNull
@@ -501,8 +756,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	@Override
 	public boolean remove(C childToRemove)
 	{
-		ComponentHierarchyBase comp = (ComponentHierarchyBase) childToRemove;
-		getChildren().remove(comp);
+		getChildren().remove(childToRemove);
 		return true;
 	}
 
@@ -534,12 +788,125 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	}
 
 	/**
+	 * Configures the page and all its components
+	 *
+	 * @see ComponentHTMLAttributeBase#preConfigure()
+	 */
+	@Override
+	public void preConfigure()
+	{
+		if (hasChildren())
+		{
+			setNewLineForClosingTag(true);
+		}
+		else
+		{
+			setNewLineForClosingTag(false);
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Renders the classes array as an in-line class string
+	 *
+	 * @return
+	 *
+	 * @see ComponentHTMLAttributeBase#renderClasses()
+	 */
+	@Override
+	@NotNull
+	protected StringBuilder renderClasses()
+	{
+		StringBuilder sb = new StringBuilder();
+		Set eachClass = getClasses();
+		eachClass.forEach(a -> sb.append(a)
+		                         .append(StaticStrings.STRING_SPACE));
+		if (sb.length() > 0)
+		{
+			sb.deleteCharAt(sb.length() - 1);
+		}
+		return sb;
+	}
+
+	/**
+	 * @see ComponentHTMLAttributeBase#cloneComponent()
+	 */
+	@Override
+	@NotNull
+	@SuppressWarnings("unchecked")
+	public J cloneComponent()
+	{
+		ComponentHierarchyBase cloned = super.cloneComponent();
+		return (J) cloned;
+	}
+
+	/**
+	 * Returns all the feature queries associated to this component and all its children
+	 *
+	 * @return
+	 *
+	 * @see ComponentFeatureBase#getQueriesAll()
+	 */
+	@Override
+	@NotNull
+	public Set<StringBuilder> getQueriesAll()
+	{
+		Set<StringBuilder> reallyAllQueries = new LinkedHashSet<>();
+		Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> allComponents = getChildrenHierarchy(true);
+		allComponents.forEach((Consumer<? super ComponentHierarchyBase>) componentQuery -> processComponentQueries(componentQuery, reallyAllQueries));
+		return reallyAllQueries;
+	}
+
+	/**
+	 * Pre-Configure the children tree
+	 *
+	 * @return
+	 *
+	 * @see ComponentBase#toString()
+	 */
+	@Override
+	@NotNull
+	public String toString()
+	{
+		getChildren().forEach(next ->
+		                      {
+			                      if (!next.isConfigured())
+			                      {
+				                      next.preConfigure();
+			                      }
+		                      });
+		return super.toString();
+	}
+
+	/**
+	 * Processes the queries
+	 *
+	 * @param componentQuery
+	 * @param reallyAllQueries
+	 */
+	@SuppressWarnings("unchecked")
+	private void processComponentQueries(@NotNull ComponentHierarchyBase componentQuery, @NotNull Set<StringBuilder> reallyAllQueries)
+	{
+		reallyAllQueries.addAll(getQueries());
+		List<ComponentFeatureBase> features = new ArrayList<>(componentQuery.getFeatures());
+		features.forEach(feature -> reallyAllQueries.add(feature.renderJavascript()));
+		features.sort(comparing(ComponentFeatureBase::getSortOrder));
+		Set<ComponentEventBase> events = componentQuery.getEvents();
+		events.forEach(event -> reallyAllQueries.add(event.renderJavascript()));
+		features.sort(comparing(ComponentFeatureBase::getSortOrder));
+		List<ComponentHierarchyBase> myQueries = new ArrayList<>();
+		myQueries.forEach(query -> reallyAllQueries.add(query.renderJavascript()));
+	}
+
+	/**
 	 * Sets the page this component belongs on.
 	 * Null to reset the page hierarchy for all children
 	 * <p>
 	 *
 	 * @param page
 	 * 		A Page
+	 *
+	 * @see com.jwebmp.core.base.interfaces.IComponentHierarchyBase#setPage(Page)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -548,60 +915,6 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		this.page = page;
 		getChildren().forEach(child -> child.setPage(page));
 		return (J) this;
-	}
-
-	@Override
-	public J addEvent(E event)
-	{
-		if (event != null)
-		{
-			ComponentEventBase.class.cast(event)
-			                        .setComponent(this);
-
-			return super.addEvent(event);
-		}
-		return (J) this;
-	}
-
-	/**
-	 * Finds the event in all this components and child components
-	 *
-	 * @param eventId
-	 *
-	 * @return
-	 */
-	@Override
-
-	public ComponentEventBase findEvent(String eventId)
-	{
-		for (ComponentHierarchyBase child : getChildren())
-		{
-			for (Object jScript : child.getEventsAll())
-			{
-				if (Event.class.cast(jScript)
-				               .getID()
-				               .equals(eventId))
-				{
-					return (ComponentEventBase) jScript;
-				}
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Overrides this and all below components to set tiny false
-	 *
-	 * @param tiny
-	 *
-	 * @return super.tiny
-	 */
-	@Override
-	@NotNull
-	public J setTiny(boolean tiny)
-	{
-		getChildren().forEach(child -> child.setTiny(tiny));
-		return super.setTiny(tiny);
 	}
 
 	/**
@@ -633,273 +946,6 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	}
 
 	/**
-	 * Returns all the feature queries associated to this component and all its children
-	 *
-	 * @return
-	 */
-	@Override
-	@NotNull
-	public Set<StringBuilder> getQueriesAll()
-	{
-		Set<StringBuilder> reallyAllQueries = new LinkedHashSet<>();
-		Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> allComponents = getChildrenHierarchy(true);
-		allComponents.forEach((Consumer<? super ComponentHierarchyBase>) componentQuery -> processComponentQueries(componentQuery, reallyAllQueries));
-		return reallyAllQueries;
-	}
-
-	/**
-	 * Initialize all children
-	 */
-	@Override
-	public void init()
-	{
-		if (!isInitialized())
-		{
-			new CopyOnWriteArrayList<>(getChildren()).forEach(ComponentHierarchyBase::init);
-		}
-		super.init();
-	}
-
-	/**
-	 * Returns the parent id for the parent property so JSON doesn't go circular
-	 *
-	 * @return
-	 */
-	@JsonProperty("parent")
-
-	private String getParentJSON()
-	{
-		if (getParent() != null)
-		{
-			return getParent().getID();
-		}
-		return null;
-	}
-
-	/**
-	 * Adds in the JavaScript References for all the children
-	 *
-	 * @return
-	 */
-	@Override
-	@NotNull
-	public Set<CSSReference> getCssReferencesAll()
-	{
-		Set<CSSReference> allCss = super.getCssReferencesAll();
-		getChildren().forEach(child ->
-		                      {
-			                      for (Object jScript : child.getCssReferencesAll())
-			                      {
-				                      allCss.add(CSSReference.class.cast(jScript));
-			                      }
-		                      });
-		return allCss;
-	}
-
-	/**
-	 * Adds in the JavaScript References for all the children
-	 *
-	 * @return
-	 */
-	@Override
-	@NotNull
-	@SuppressWarnings("unchecked")
-	public Set<JavascriptReference> getJavascriptReferencesAll()
-	{
-		Set<JavascriptReference> allJs = super.getJavascriptReferencesAll();
-		getChildren().forEach(child ->
-		                      {
-			                      for (Object jScript : child.getJavascriptReferencesAll())
-			                      {
-				                      allJs.add(JavascriptReference.class.cast(jScript));
-			                      }
-		                      });
-		return allJs;
-	}
-
-	/**
-	 * Method hashCode ...
-	 *
-	 * @return int
-	 */
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-
-	/**
-	 * Method equals ...
-	 *
-	 * @param o
-	 * 		of type Object
-	 *
-	 * @return boolean
-	 */
-	@Override
-	public boolean equals(Object o)
-	{
-		return super.equals(o);
-	}
-
-	@Override
-	public void destroy()
-	{
-		if (children != null)
-		{
-			for (ComponentHierarchyBase next : children)
-			{
-				try
-				{
-					next.destroy();
-				}
-				catch (Exception e)
-				{
-					ComponentHierarchyBase.log.log(Level.SEVERE, "UUnable to destroy", e);
-				}
-			}
-		}
-		if (children != null)
-		{
-			children.clear();
-			children = null;
-		}
-		if (classes != null)
-		{
-			classes.clear();
-			classes = null;
-		}
-		super.destroy();
-	}
-
-	/**
-	 * Returns a complete list of events
-	 *
-	 * @return
-	 */
-	@NotNull
-	@SuppressWarnings("unused")
-	public Set<Feature> getFeaturesAll()
-	{
-		Set<Feature> allFeatures = new LinkedHashSet<>();
-		getChildrenHierarchy().forEach(child ->
-		                               {
-			                               for (Object event : child.getFeatures())
-			                               {
-				                               allFeatures.add(Feature.class.cast(event));
-			                               }
-		                               });
-		return allFeatures;
-	}
-
-	/**
-	 * Pre-Configure the children tree
-	 *
-	 * @return
-	 */
-	@Override
-	@NotNull
-	public String toString()
-	{
-		getChildren().forEach(next ->
-		                      {
-			                      if (!next.isConfigured())
-			                      {
-				                      next.preConfigure();
-			                      }
-		                      });
-		return super.toString();
-	}
-
-	/**
-	 * Takes an instance and wraps around the component
-	 * <p>
-	 * e.g. BSRow.wrap(div) = iv class="row"myComponent//div
-	 *
-	 * @param component
-	 *
-	 * @return
-	 */
-	@NotNull
-	@SuppressWarnings("unchecked")
-	public <T extends ComponentHierarchyBase> T wrap(@NotNull T component)
-	{
-		ComponentHierarchyBase existingParent = component.getParent();
-		if (existingParent != null)
-		{
-			existingParent.remove(component);
-			existingParent.add(this);
-		}
-		getChildren().add(component);
-		return component;
-	}
-
-	@Override
-	public void preConfigure()
-	{
-		if (!isInitialized())
-		{
-			init();
-		}
-
-		if (!isConfigured())
-		{
-			Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> clonedBase = getChildren();
-			clonedBase.forEach(feature ->
-			                   {
-				                   if (feature != null && !feature.isConfigured())
-				                   {
-					                   feature.preConfigure();
-				                   }
-			                   });
-			if (hasChildren())
-			{
-				setNewLineForClosingTag(true);
-			}
-			else
-			{
-				setNewLineForClosingTag(false);
-			}
-		}
-		super.preConfigure();
-	}
-
-	/**
-	 * Renders the classes array as an in-line class string
-	 *
-	 * @return
-	 */
-	@Override
-	@NotNull
-	protected StringBuilder renderClasses()
-	{
-		StringBuilder sb = new StringBuilder();
-		Set eachClass = getClasses();
-		eachClass.forEach(a ->
-		                  {
-			                  if (a instanceof String)
-			                  {
-				                  sb.append(a)
-				                    .append(StaticStrings.STRING_SPACE);
-			                  }
-		                  });
-		if (sb.length() > 0)
-		{
-			sb.deleteCharAt(sb.length() - 1);
-		}
-		return sb;
-	}
-
-	@Override
-	@NotNull
-	@SuppressWarnings("unchecked")
-	public J cloneComponent()
-	{
-		ComponentHierarchyBase cloned = super.cloneComponent();
-		return (J) cloned;
-	}
-
-	/**
 	 * Iterates through all the children checking if a boolean property has been placed, Returns the first instance of true or always false
 	 *
 	 * @param propertyName
@@ -928,26 +974,6 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 			}
 		}
 		return false;
-	}
-
-	/**
-	 * Enumeration to remove
-	 *
-	 * @param className
-	 *
-	 * @return
-	 */
-	public boolean removeClass(@NotNull Enum className)
-	{
-		if (getClasses().contains(className.toString()))
-		{
-			getClasses().remove(className.toString());
-			return true;
-		}
-		else
-		{
-			return false;
-		}
 	}
 
 	/**
@@ -993,10 +1019,18 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		return null;
 	}
 
+	/**
+	 * Method findChild ...
+	 *
+	 * @param childType
+	 * 		of type Class<T>
+	 *
+	 * @return T
+	 */
 	@SuppressWarnings({"unchecked", "unused"})
 	public <T extends ComponentHierarchyBase<?, ?, ?, ?, ?>> T findChild(@NotNull Class<T> childType)
 	{
-		for (ComponentHierarchyBase componentHierarchyBase : getChildren())
+		for (C componentHierarchyBase : getChildren())
 		{
 			if (componentHierarchyBase.getClass()
 			                          .equals(childType))
@@ -1020,7 +1054,7 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	@SuppressWarnings("unused")
 	protected boolean containsClass(@NotNull Class classType)
 	{
-		for (ComponentHierarchyBase next : getChildren())
+		for (C next : getChildren())
 		{
 			if (next.getClass()
 			        .equals(classType))
@@ -1032,51 +1066,11 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	}
 
 	/**
-	 * Processes the queries
-	 *
-	 * @param componentQuery
-	 * @param reallyAllQueries
-	 */
-	@SuppressWarnings("unchecked")
-	private void processComponentQueries(@NotNull ComponentHierarchyBase componentQuery, @NotNull Set<StringBuilder> reallyAllQueries)
-	{
-		reallyAllQueries.addAll(getQueries());
-
-		List<ComponentFeatureBase> features = new ArrayList<>(componentQuery.getFeatures());
-		features.remove(null);
-		features.forEach(feature ->
-		                 {
-			                 if (feature != null)
-			                 {
-				                 feature.preConfigure();
-				                 reallyAllQueries.add(feature.renderJavascript());
-			                 }
-		                 });
-
-		features.sort(comparing(ComponentFeatureBase::getSortOrder));
-		Set<ComponentEventBase> events = componentQuery.getEvents();
-		events.remove(null);
-		events.forEach(event ->
-		               {
-			               if (event != null)
-			               {
-				               event.preConfigure();
-				               reallyAllQueries.add(event.renderJavascript());
-			               }
-		               });
-
-		features.sort(comparing(ComponentFeatureBase::getSortOrder));
-		List<ComponentHierarchyBase> myQueries = new ArrayList<>();
-		myQueries.removeIf(Objects::isNull);
-		myQueries.forEach(query ->
-		                  {
-			                  query.preConfigure();
-			                  reallyAllQueries.add(query.renderJavascript());
-		                  });
-	}	/**
 	 * Renders each child
 	 *
 	 * @return
+	 *
+	 * @see ComponentHTMLBase#renderChildren()
 	 */
 	@Override
 	@NotNull
@@ -1088,7 +1082,9 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 			sb.append(renderBeforeChildren());
 		}
 		getChildren().forEach(child -> sb.append(getNewLine())
-		                                 .append(child.toString(isTiny() ? 0 : getCurrentTabIndents() + 1)));
+		                                 .append(child.toString(child.asBase()
+		                                                             .isTiny() ? 0 : getCurrentTabIndents() + 1)));
+
 		if (renderAfterChildren() != null)
 		{
 			sb.append(renderAfterChildren());
@@ -1096,14 +1092,14 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 		return sb;
 	}
 
-
-
 	/**
 	 * Ensure if there are children that new lines must be rendered
 	 * <p>
 	 * Boxed for operating purposes
 	 *
 	 * @return
+	 *
+	 * @see ComponentHTMLBase#isNewLineForClosingTag()
 	 */
 	@Override
 	@NotNull
@@ -1124,6 +1120,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * <p>
 	 *
 	 * @return Custom HTML String to be inserted before Children tags
+	 *
+	 * @see ComponentHTMLBase#renderBeforeChildren()
 	 */
 	@Override
 
@@ -1137,6 +1135,8 @@ public class ComponentHierarchyBase<C extends GlobalChildren, A extends Enum & A
 	 * <p>
 	 *
 	 * @return Custom HTML String to be inserted after Children tags
+	 *
+	 * @see ComponentHTMLBase#renderAfterChildren()
 	 */
 	@Override
 

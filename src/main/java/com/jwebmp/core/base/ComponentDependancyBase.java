@@ -273,18 +273,34 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 		return (J) cloned;
 	}
 
+	/**
+	 * Method hashCode ...
+	 *
+	 * @return int
+	 */
 	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
 	}
 
+	/**
+	 * Method equals ...
+	 *
+	 * @param obj
+	 * 		of type Object
+	 *
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object o)
 	{
 		return super.equals(o);
 	}
 
+	/**
+	 * Destroys this class cleanly
+	 */
 	@Override
 	public void destroy()
 	{

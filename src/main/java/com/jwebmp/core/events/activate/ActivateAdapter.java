@@ -21,11 +21,9 @@ import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.angular.AngularAttributes;
-import com.jwebmp.core.base.angular.AngularPageConfigurator;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
-import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.logger.LogFactory;
 
@@ -66,7 +64,6 @@ public abstract class ActivateAdapter
 	public ActivateAdapter(Component component)
 	{
 		super(EventTypes.activate, component);
-		setComponent(component);
 	}
 
 	@Override
@@ -78,34 +75,20 @@ public abstract class ActivateAdapter
 		}
 		catch (Exception e)
 		{
-			LOG.log(Level.WARNING, "Error In Firing Event", e);
+			ActivateAdapter.LOG.log(Level.WARNING, "Error In Firing Event", e);
 		}
 	}
 
-	/**
-	 * A hash code
-	 *
-	 * @return
-	 */
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + getDirective().hashCode();
-		return result;
+		return super.hashCode();
 	}
 
-	/**
-	 * This object is never equal to another as an event
-	 *
-	 * @param obj
-	 *
-	 * @return
-	 */
 	@Override
 	public boolean equals(Object obj)
 	{
-		return false;
+		return super.equals(obj);
 	}
 
 	/**
@@ -114,16 +97,24 @@ public abstract class ActivateAdapter
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
+		if (getComponent() != null)
 		{
-			JQueryPageConfigurator.setRequired(true);
-			AngularPageConfigurator.setRequired(true);
-
 			getComponent().addAttribute(AngularAttributes.ngActivate,
 			                            StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
 		}
 		super.preConfigure();
 	}
+
+	/**
+	 * Triggers on Click
+	 * <p>
+	 *
+	 * @param call
+	 * 		The physical AJAX call
+	 * @param response
+	 * 		The physical Ajax Receiver
+	 */
+	public abstract void onActivate(AjaxCall call, AjaxResponse response);
 
 	/**
 	 * Returns the angular directive associated with the right click event
@@ -149,15 +140,4 @@ public abstract class ActivateAdapter
 	{
 		this.directive = directive;
 	}
-
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onActivate(AjaxCall call, AjaxResponse response);
 }

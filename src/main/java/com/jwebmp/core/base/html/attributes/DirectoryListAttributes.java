@@ -30,7 +30,8 @@ public enum DirectoryListAttributes
 	 *
 	 * @deprecated
 	 */
-	Compact,;
+	Compact,
+	;
 
 	@Override
 	public boolean isKeyword()

@@ -32,7 +32,7 @@ import java.util.List;
  * @since 2012-12-30
  */
 public abstract class PerformCommandFeature
-		extends Feature<JavaScriptPart, PerformCommandFeature>
+		extends Feature<PerformCommandFeature, JavaScriptPart, PerformCommandFeature>
 {
 
 	private static final long serialVersionUID = 1L;

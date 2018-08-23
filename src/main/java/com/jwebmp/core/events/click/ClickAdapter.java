@@ -21,6 +21,7 @@ import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.angular.AngularAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.BodyEvents;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.html.interfaces.events.ParagraphEvents;
@@ -37,8 +38,8 @@ import java.util.logging.Level;
  * @author Marc Magon
  */
 public abstract class ClickAdapter<J extends ClickAdapter<J>>
-		extends Event<J>
-		implements ParagraphEvents, BodyEvents, GlobalEvents
+		extends Event<GlobalFeatures, J>
+		implements ParagraphEvents<GlobalFeatures, J>, BodyEvents<GlobalFeatures, J>, GlobalEvents
 {
 
 	/**
@@ -77,15 +78,14 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
 		}
 		catch (Exception e)
 		{
-			log.log(Level.SEVERE, "Error In Firing Event", e);
+			ClickAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 
 	@Override
 	public void preConfigure()
 	{
-
-		if (!isConfigured() && getComponent() != null)
+		if (getComponent() != null)
 		{
 			getComponent().addAttribute(AngularAttributes.ngClick,
 			                            "jwCntrl.jw.isLoading || " + StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
@@ -99,7 +99,6 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
 				getComponent().addAttribute(AngularAttributes.ngDisabled, "jwCntrl.jw.isLoading || " + getComponent().getAttribute(AngularAttributes.ngDisabled));
 			}
 		}
-
 		super.preConfigure();
 	}
 

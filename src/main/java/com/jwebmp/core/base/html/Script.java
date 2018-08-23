@@ -18,13 +18,13 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.attributes.ScriptAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.NoClassAttribute;
 import com.jwebmp.core.base.html.interfaces.NoFeatures;
 import com.jwebmp.core.base.html.interfaces.NoIDTag;
 import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
 import com.jwebmp.core.base.html.interfaces.children.HeadChildren;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.logger.LogFactory;
@@ -78,9 +78,9 @@ import java.util.logging.Logger;
  * @version 1.0
  * @since 2013/11/12
  */
-public class Script<J extends Script<J>>
-		extends ComponentHierarchyBase<GlobalChildren, ScriptAttributes, NoFeatures, NoEvents, J>
-		implements NoIDTag, HeadChildren, NoClassAttribute, BodyChildren, GlobalChildren
+public class Script<C extends IComponentHierarchyBase, J extends Script<C, J>>
+		extends ComponentHierarchyBase<C, ScriptAttributes, NoFeatures, NoEvents, J>
+		implements NoIDTag, HeadChildren<C, J>, NoClassAttribute, BodyChildren<C, J>
 {
 
 	private static final Logger logger = LogFactory.getInstance()
@@ -200,7 +200,7 @@ public class Script<J extends Script<J>>
 			return false;
 		}
 
-		Script<?> s = (Script) obj;
+		Script<?, ?> s = (Script) obj;
 		if (s.getAttribute(ScriptAttributes.Src)
 		     .equals(getAttribute(ScriptAttributes.Src)))
 		{
@@ -250,7 +250,7 @@ public class Script<J extends Script<J>>
 			}
 			catch (Exception e)
 			{
-				logger.log(Level.FINE, "Unable to determine whether XHTML or HTML. Skipping CDATA Implementation", e);
+				Script.logger.log(Level.FINE, "Unable to determine whether XHTML or HTML. Skipping CDATA Implementation", e);
 			}
 		}
 	}

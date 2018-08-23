@@ -44,7 +44,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class OptionGroup<J extends OptionGroup<J>>
 		extends Component<SelectChildren, OptionGroupAttributes, GlobalFeatures, GlobalEvents, J>
-		implements SelectChildren, NoIDTag, NoNewLineBeforeClosingTag
+		implements SelectChildren<SelectChildren, J>, NoIDTag, NoNewLineBeforeClosingTag
 {
 
 	private static final long serialVersionUID = 1L;

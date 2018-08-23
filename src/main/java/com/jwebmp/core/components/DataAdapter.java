@@ -21,9 +21,11 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.Div;
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * This Class is a data adapter
@@ -42,7 +44,7 @@ import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
  * @author GedMarc
  * @since 01 Jan 2016
  */
-public class DataAdapter<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends DataAdapter<C, A, F, E, J>>
+public class DataAdapter<C extends IComponentHierarchyBase, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends DataAdapter<C, A, F, E, J>>
 		extends Div<C, A, F, E, J>
 {
 
@@ -72,6 +74,7 @@ public class DataAdapter<C extends GlobalChildren, A extends Enum & AttributeDef
 	 *
 	 * @return
 	 */
+	@NotNull
 	@Override
 	public String toString()
 	{

@@ -19,7 +19,6 @@ package com.jwebmp.core.base.html;
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
 import com.jwebmp.core.base.html.interfaces.ContainerType;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.children.AreaChildren;
 import com.jwebmp.core.base.html.interfaces.children.BodyChildren;
@@ -27,6 +26,7 @@ import com.jwebmp.core.base.html.interfaces.children.ListItemChildren;
 import com.jwebmp.core.base.html.interfaces.children.MapChildren;
 import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -59,9 +59,9 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @author Marc Magon
  * @since forever
  */
-public class Span<C extends GlobalChildren, A extends Enum & AttributeDefinitions, J extends Span<C, A, J>>
+public class Span<C extends IComponentHierarchyBase, A extends Enum & AttributeDefinitions, J extends Span<C, A, J>>
 		extends Component<C, A, GlobalFeatures, GlobalEvents, J>
-		implements BodyChildren, MapChildren, AreaChildren, ContainerType, ParagraphChildren, ListItemChildren
+		implements BodyChildren<C, J>, MapChildren<C, J>, AreaChildren<C, J>, ContainerType<C, J>, ParagraphChildren<C, J>, ListItemChildren<C, J>
 {
 
 	private static final long serialVersionUID = 1L;

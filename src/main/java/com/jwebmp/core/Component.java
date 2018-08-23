@@ -21,12 +21,11 @@ import com.jwebmp.core.base.ComponentStyleBase;
 import com.jwebmp.core.base.html.Paragraph;
 import com.jwebmp.core.base.html.Span;
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.interfaces.ICssStructure;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.jwebmp.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 
@@ -51,17 +50,11 @@ import javax.validation.constraints.NotNull;
  * @version 1.0
  * @since 2009/10/01
  */
-public class Component<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component<C, A, F, E, J>>
+@SuppressWarnings("MissingClassJavaDoc")
+public class Component<C extends IComponentHierarchyBase, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Component<C, A, F, E, J>>
 		extends ComponentStyleBase<C, A, F, E, J>
 		implements ICssStructure<J>
 {
-
-	/**
-	 * Logger for the Component
-	 */
-	@JsonIgnore
-	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
-	                                                              .getLogger("Component");
 	/**
 	 * Serial Version for all Components and their compatibility
 	 *
@@ -127,7 +120,7 @@ public class Component<C extends GlobalChildren, A extends Enum & AttributeDefin
 	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J add(String textToAdd)
+	public J add(@NotNull String textToAdd)
 	{
 		Paragraph p = new Paragraph();
 		p.setText(textToAdd);

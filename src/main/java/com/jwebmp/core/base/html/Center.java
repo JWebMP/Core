@@ -20,6 +20,7 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
 import com.jwebmp.core.base.html.interfaces.*;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -41,7 +42,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @author GedMarc
  */
 public class Center<J extends Center<J>>
-		extends Component<GlobalChildren, NoAttributes, NoFeatures, NoEvents, J>
+		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, NoEvents, J>
 		implements NoIDTag, NoClassAttribute, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
@@ -64,7 +65,7 @@ public class Center<J extends Center<J>>
 	 */
 	public static Center getCenter()
 	{
-		return center;
+		return Center.center;
 	}
 
 	/**

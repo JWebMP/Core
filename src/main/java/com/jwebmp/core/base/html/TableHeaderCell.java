@@ -22,6 +22,7 @@ import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.children.TableRowChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -63,8 +64,8 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since 2012/10/01
  */
 public class TableHeaderCell<J extends TableHeaderCell<J>>
-		extends Component<Component, TableCellAttributes, GlobalFeatures, GlobalEvents, J>
-		implements TableRowChildren
+		extends Component<IComponentHierarchyBase, TableCellAttributes, GlobalFeatures, GlobalEvents, J>
+		implements TableRowChildren<IComponentHierarchyBase, J>
 {
 
 	private static final long serialVersionUID = 1L;

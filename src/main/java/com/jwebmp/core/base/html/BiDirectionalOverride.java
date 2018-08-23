@@ -23,7 +23,6 @@ import com.jwebmp.core.base.html.interfaces.NoIDTag;
 import com.jwebmp.core.base.html.interfaces.NoNewLineBeforeClosingTag;
 import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
 import com.jwebmp.core.base.html.interfaces.children.BiDirectionalOverrideChildren;
-import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
@@ -51,7 +50,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class BiDirectionalOverride<J extends BiDirectionalOverride<J>>
 		extends Component<BiDirectionalOverrideChildren, BiDirectionalOverrideAttributes, GlobalFeatures, GlobalEvents, J>
-		implements ParagraphChildren, NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag
+		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag
 {
 
 	private static final long serialVersionUID = 1L;

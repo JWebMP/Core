@@ -180,9 +180,11 @@ public class ScriptsDynamicPageConfigurator
 	 * @param page
 	 * 		of type Page
 	 *
-	 * @return Style<?>
+	 * @return Style<?
+                       *       	   	   ,
+                       *       	   	   ?>
 	 */
-	private Style<?> getCss(Page page)
+	private Style<?, ?> getCss(Page page)
 	{
 		CSSComposer comp = new CSSComposer();
 		comp.addComponent(page, true);
@@ -196,7 +198,7 @@ public class ScriptsDynamicPageConfigurator
 		{
 			return null;
 		}
-		Style<?> style = new Style();
+		Style<?, ?> style = new Style();
 		style.setText(css);
 		return style;
 	}
@@ -207,11 +209,13 @@ public class ScriptsDynamicPageConfigurator
 	 * @param urlLocation
 	 * 		of type String
 	 *
-	 * @return Script<?>
+	 * @return Script<?
+                       *       	   	   ,
+                       *       	   	   ?>
 	 */
-	private Script<?> getDynamicReference(String urlLocation)
+	private Script<?, ?> getDynamicReference(String urlLocation)
 	{
-		Script<?> jwScript = new Script();
+		Script<?, ?> jwScript = new Script();
 		jwScript.addAttribute(ScriptAttributes.Type, StaticStrings.HTML_HEADER_JAVASCRIPT);
 		jwScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + urlLocation);
 		return jwScript;
@@ -220,9 +224,9 @@ public class ScriptsDynamicPageConfigurator
 	/**
 	 * Method getSiteLoaderScript returns the siteLoaderScript of this ScriptsDynamicPageConfigurator object.
 	 *
-	 * @return the siteLoaderScript (type Script<?>) of this ScriptsDynamicPageConfigurator object.
+	 * @return the siteLoaderScript (type Script<?,?>) of this ScriptsDynamicPageConfigurator object.
 	 */
-	private Script<?> getSiteLoaderScript()
+	private Script<?, ?> getSiteLoaderScript()
 	{
 		FileTemplates.getFileTemplate(JWScriptServlet.class, JWScriptServlet.FILE_TEMPLATE_NAME, "siteloader");
 		StringBuilder jsScript = FileTemplates.renderTemplateScripts(JWScriptServlet.FILE_TEMPLATE_NAME);
@@ -298,9 +302,9 @@ public class ScriptsDynamicPageConfigurator
 	 *
 	 * @return Script
 	 */
-	private Script<?> newScript(String contents)
+	private Script<?, ?> newScript(String contents)
 	{
-		Script<?> s = new Script();
+		Script<?, ?> s = new Script();
 		s.addAttribute(ScriptAttributes.Type, StaticStrings.HTML_HEADER_JAVASCRIPT);
 		s.setText(contents);
 		return s;

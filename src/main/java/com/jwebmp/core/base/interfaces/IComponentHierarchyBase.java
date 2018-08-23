@@ -26,6 +26,7 @@ import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.htmlbuilder.css.themes.Theme;
 
+import javax.validation.constraints.NotNull;
 import java.util.Map;
 import java.util.Set;
 
@@ -38,7 +39,9 @@ import java.util.Set;
  * @author GedMarc
  * @since Sep 26, 2016
  */
-public interface IComponentHierarchyBase<C extends GlobalChildren, J extends ComponentBase>
+@SuppressWarnings("MissingClassJavaDoc")
+public interface IComponentHierarchyBase<C extends IComponentHierarchyBase, J extends ComponentBase>
+		extends GlobalChildren
 {
 	/**
 	 * Add a new child to this component
@@ -84,7 +87,7 @@ public interface IComponentHierarchyBase<C extends GlobalChildren, J extends Com
 	 *
 	 * @return An array list of components
 	 */
-	Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> getChildren();
+	Set<C> getChildren();
 
 	/**
 	 * Get an array list of all children and their children recursively Includes this object
@@ -92,7 +95,7 @@ public interface IComponentHierarchyBase<C extends GlobalChildren, J extends Com
 	 *
 	 * @return A complete array list of all children at time of call
 	 */
-	Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> getChildrenHierarchy();
+	Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> getChildrenHierarchy();
 
 	/**
 	 * Get an array list of all children and their children recursively Excludes this object
@@ -104,7 +107,7 @@ public interface IComponentHierarchyBase<C extends GlobalChildren, J extends Com
 	 *
 	 * @return A complete array list of all children at time of call
 	 */
-	Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> getChildrenHierarchy(boolean trues);
+	Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> getChildrenHierarchy(boolean trues);
 
 	/**
 	 * Adds the children of this component onto the array list coming in
@@ -116,7 +119,7 @@ public interface IComponentHierarchyBase<C extends GlobalChildren, J extends Com
 	 *
 	 * @return original components added with
 	 */
-	Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> getChildrenHierarchy(Set<ComponentHierarchyBase<?, ?, ?, ?, ?>> componentsToAddTo);
+	Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> getChildrenHierarchy(Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> componentsToAddTo);
 
 	/**
 	 * Adds in the JavaScript References for all the children
@@ -251,6 +254,15 @@ public interface IComponentHierarchyBase<C extends GlobalChildren, J extends Com
 	J removeClass(String className);
 
 	/**
+	 * Enumeration to remove
+	 *
+	 * @param className
+	 *
+	 * @return
+	 */
+	boolean removeClass(@NotNull Enum className);
+
+	/**
 	 * Sets the ID and adds the attribute to the global set
 	 *
 	 * @param id
@@ -277,6 +289,15 @@ public interface IComponentHierarchyBase<C extends GlobalChildren, J extends Com
 	Set<String> getClasses();
 
 	/**
+	 * Sets the classes set
+	 *
+	 * @param classes
+	 * 		a new set of classes
+	 */
+	@SuppressWarnings("unchecked")
+	J setClasses(Set<String> classes);
+
+	/**
 	 * Set the theme applied to this component
 	 * <p>
 	 *
@@ -287,13 +308,40 @@ public interface IComponentHierarchyBase<C extends GlobalChildren, J extends Com
 	 */
 	J addTheme(Theme theme);
 
-	void init();
+	/**
+	 * Returns the HTML for the given object
+	 * <p>
+	 *
+	 * @param outputHtml
+	 * 		Dummy holder for specifying HTML output
+	 *
+	 * @return The class and the associated ID and children count
+	 */
+	String toString(boolean outputHtml);
 
-	void preConfigure();
+	/**
+	 * Returns this components HTML after configuration and pre-rendering
+	 *
+	 * @param tabCount
+	 * 		The number of tabs to indent by
+	 *
+	 * @return The sting with the given tab counts
+	 */
+	String toString(Integer tabCount);
 
-	boolean isConfigured();
+	IComponentThemeBase asThemeBase();
 
-	boolean isInitialized();
+	IComponentHTMLAngularBase asAngularBase();
 
-	void destroy();
+	IComponentHTMLAttributeBase asAttributeBase();
+
+	IComponentHTMLBase asTagBase();
+
+	IComponentEventBase asEventBase();
+
+	IComponentFeatureBase asFeatureBase();
+
+	IComponentDependancyBase asDependancyBase();
+
+	IComponentBase asBase();
 }

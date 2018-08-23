@@ -29,6 +29,7 @@ import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import com.jwebmp.core.utilities.StaticStrings;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -44,8 +45,8 @@ import java.util.Set;
  * @since 23 Apr 2016
  */
 @SuppressWarnings("unused")
-public abstract class Event<J extends Event<J>>
-		extends ComponentEventBase<GlobalFeatures, GlobalEvents, Event<J>>
+public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
+		extends ComponentEventBase<F, GlobalEvents, J>
 		implements GlobalEvents
 {
 
@@ -105,26 +106,12 @@ public abstract class Event<J extends Event<J>>
 		setName(name);
 		setComponent(component);
 		setEventType(eventType);
+		returnVariable(StaticStrings.LOCAL_STORAGE_VARIABLE_KEY);
 		if (getComponent() != null)
 		{
 			setID(component.getID());
 			getComponent().addEvent(this);
 		}
-		returnVariable(StaticStrings.LOCAL_STORAGE_VARIABLE_KEY);
-	}
-
-	/**
-	 * Sets the ID as whatever with dots as underscores
-	 *
-	 * @param id
-	 * 		The ID
-	 *
-	 * @return
-	 */
-	@Override
-	public Event<J> setID(String id)
-	{
-		return super.setID(id.replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE));
 	}
 
 	/**
@@ -134,8 +121,9 @@ public abstract class Event<J extends Event<J>>
 	 *
 	 * @return
 	 */
+	@NotNull
 	@Override
-	public Event<J> setComponent(ComponentHierarchyBase component)
+	public J setComponent(ComponentHierarchyBase component)
 	{
 		if (component != null)
 		{
@@ -339,17 +327,24 @@ public abstract class Event<J extends Event<J>>
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
-		{
-			assignFunctionsToComponent();
-			if (getComponent() != null)
-			{
-				JQueryPageConfigurator.setRequired(true);
-				AngularPageConfigurator.setRequired(true);
-			}
-		}
-
+		JQueryPageConfigurator.setRequired(true);
+		AngularPageConfigurator.setRequired(true);
 		super.preConfigure();
+	}
+
+	/**
+	 * Sets the ID as whatever with dots as underscores
+	 *
+	 * @param id
+	 * 		The ID
+	 *
+	 * @return
+	 */
+	@NotNull
+	@Override
+	public J setID(String id)
+	{
+		return super.setID(id.replace(StaticStrings.CHAR_DOT, StaticStrings.CHAR_UNDERSCORE));
 	}
 
 	/**

@@ -18,9 +18,9 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.TrackAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.NoFeatures;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 /**
@@ -32,7 +32,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @since Mar 1, 2015
  */
 public class Track<J extends Track<J>>
-		extends Component<GlobalChildren, TrackAttributes, NoFeatures, NoEvents, J>
+		extends Component<IComponentHierarchyBase, TrackAttributes, NoFeatures, NoEvents, J>
 {
 
 	private static final long serialVersionUID = 1L;

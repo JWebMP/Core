@@ -18,9 +18,9 @@ package com.jwebmp.core.base;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.interfaces.IComponentStyleBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.htmlbuilder.css.CSSImpl;
@@ -47,10 +47,9 @@ import java.util.Map;
  *
  * @author GedMarc
  * @since 24 Apr 2016
- *
  */
 @SuppressWarnings("MissingClassJavaDoc")
-public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentStyleBase<C, A, F, E, J>>
+public abstract class ComponentStyleBase<C extends IComponentHierarchyBase, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentStyleBase<C, A, F, E, J>>
 		extends ComponentHierarchyBase<C, A, F, E, J>
 		implements IComponentStyleBase<J>
 {
@@ -78,7 +77,8 @@ public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enu
 	/**
 	 * Constructs a tag with styling options enabled
 	 *
-	 * @param componentType The type of component this is
+	 * @param componentType
+	 * 		The type of component this is
 	 */
 	public ComponentStyleBase(ComponentTypes componentType)
 	{
@@ -100,8 +100,10 @@ public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enu
 	/**
 	 * Adds a CSS object to the component with the given type
 	 *
-	 * @param type The CSS Type
-	 * @param cssItem Thee CSS Item to add
+	 * @param type
+	 * 		The CSS Type
+	 * @param cssItem
+	 * 		Thee CSS Item to add
 	 *
 	 * @return Always this object
 	 */
@@ -117,7 +119,8 @@ public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enu
 	/**
 	 * Removes a CSS item for the component
 	 *
-	 * @param cssType The CSS Type Entry to remove
+	 * @param cssType
+	 * 		The CSS Type Entry to remove
 	 *
 	 * @return Always this object
 	 */
@@ -150,7 +153,9 @@ public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enu
 	/**
 	 * Sets the CSS Object used for styling
 	 *
-	 * @param css The CSS Implementation object to add
+	 * @param css
+	 * 		The CSS Implementation object to add
+	 *
 	 * @return Always this object
 	 */
 	@Override
@@ -177,7 +182,9 @@ public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enu
 	/**
 	 * Sets the currently assigned CSS Name
 	 *
-	 * @param cssName Sets the CSS Name to a valid value
+	 * @param cssName
+	 * 		Sets the CSS Name to a valid value
+	 *
 	 * @return Always this object
 	 */
 	@Override
@@ -211,6 +218,7 @@ public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enu
 	 *
 	 * @param tabCount
 	 * 		Tab indentation for the SQL
+	 *
 	 * @return The Component CSS
 	 */
 	@Override
@@ -267,7 +275,9 @@ public abstract class ComponentStyleBase<C extends GlobalChildren, A extends Enu
 	/**
 	 * Method equals ...
 	 *
-	 * @param o of type Object
+	 * @param o
+	 * 		of type Object
+	 *
 	 * @return boolean
 	 */
 	@Override

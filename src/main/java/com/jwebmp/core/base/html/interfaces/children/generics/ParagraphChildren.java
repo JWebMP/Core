@@ -16,15 +16,16 @@
  */
 package com.jwebmp.core.base.html.interfaces.children.generics;
 
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
+import com.jwebmp.core.base.ComponentBase;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 
 /**
  * Specifies all children that are paragraph or textual in nature
  *
  * @author GedMarc
  */
-public interface ParagraphChildren
-		extends GlobalChildren
+public interface ParagraphChildren<C extends IComponentHierarchyBase, J extends ComponentBase>
+		extends IComponentHierarchyBase<C, J>
 {
 
 }

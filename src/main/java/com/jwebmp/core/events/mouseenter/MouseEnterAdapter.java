@@ -67,7 +67,7 @@ public abstract class MouseEnterAdapter
 		}
 		catch (Exception e)
 		{
-			LOG.log(Level.SEVERE, "Error In Firing Event", e);
+			MouseEnterAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
 
@@ -77,7 +77,7 @@ public abstract class MouseEnterAdapter
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
+		if (getComponent() != null)
 		{
 
 			AngularPageConfigurator.setRequired(true);

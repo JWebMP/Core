@@ -29,7 +29,8 @@ public enum OptionGroupAttributes
 	/**
 	 * Specifies the label for an option group
 	 */
-	Label,;
+	Label,
+	;
 
 	@Override
 	public boolean isKeyword()

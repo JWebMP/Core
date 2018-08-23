@@ -23,11 +23,11 @@ import com.jwebmp.core.Page;
 import com.jwebmp.core.base.client.Browsers;
 import com.jwebmp.core.base.client.HTMLVersions;
 import com.jwebmp.core.base.html.attributes.NoAttributes;
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
 import com.jwebmp.core.base.html.interfaces.HTMLFeatures;
 import com.jwebmp.core.base.html.interfaces.NoClassAttribute;
 import com.jwebmp.core.base.html.interfaces.NoIDTag;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.base.servlets.enumarations.DevelopmentEnvironments;
 
@@ -66,8 +66,8 @@ import com.jwebmp.core.base.servlets.enumarations.DevelopmentEnvironments;
  * @author Marc Magon
  * @since right from the start, 2007 with radio on live
  */
-public abstract class Html<J extends Html<J>>
-		extends Component<GlobalChildren, NoAttributes, HTMLFeatures, NoEvents, J>
+public abstract class Html<C extends IComponentHierarchyBase, J extends Html<C, J>>
+		extends Component<C, NoAttributes, HTMLFeatures, NoEvents, J>
 		implements NoIDTag, NoClassAttribute
 {
 
@@ -75,7 +75,7 @@ public abstract class Html<J extends Html<J>>
 	/**
 	 * The head object
 	 */
-	private final Head<?> head;
+	private final Head<IComponentHierarchyBase, ?> head;
 	@JsonProperty("RunningEnvironment")
 	private DevelopmentEnvironments runningEnvironment = DevelopmentEnvironments.Development;
 	/**
@@ -157,15 +157,15 @@ public abstract class Html<J extends Html<J>>
 	}
 
 	@Override
-	public boolean equals(Object o)
-	{
-		return super.equals(o);
-	}
-
-	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
 	}
 
 	/**
@@ -207,7 +207,7 @@ public abstract class Html<J extends Html<J>>
 	 *
 	 * @return
 	 */
-	public Head<?> getHead()
+	public Head<IComponentHierarchyBase, ?> getHead()
 	{
 		return head;
 	}
@@ -219,7 +219,7 @@ public abstract class Html<J extends Html<J>>
 	{
 		if (body == null)
 		{
-			body = new Body<>(Page.class.cast(this));
+			body = new Body<>((Page) this);
 		}
 		return body;
 	}

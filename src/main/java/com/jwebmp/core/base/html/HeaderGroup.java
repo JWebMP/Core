@@ -47,7 +47,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  */
 public class HeaderGroup<J extends HeaderGroup<J>>
 		extends Component<HeaderGroupChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
-		implements BodyChildren
+		implements BodyChildren<HeaderGroupChildren, J>
 {
 
 	private static final long serialVersionUID = 1L;

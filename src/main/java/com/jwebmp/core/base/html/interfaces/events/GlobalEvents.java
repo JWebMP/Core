@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.base.html.interfaces.events;
 
-import java.io.Serializable;
+import com.jwebmp.core.base.html.interfaces.LifeCycle;
 
 /**
  * Defines a global event that can be added to all components
@@ -25,7 +25,10 @@ import java.io.Serializable;
  * @since 214/12/20
  */
 public interface GlobalEvents
-		extends Serializable
+		extends LifeCycle
 {
-
+	/**
+	 * Checks if this feature has been configured and rendered with all the features
+	 */
+	void checkAssignedFunctions();
 }

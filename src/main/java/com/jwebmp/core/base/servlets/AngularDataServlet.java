@@ -136,11 +136,6 @@ public class AngularDataServlet
 			AngularDataServlet.LOG.log(Level.SEVERE, "Unable to perform the data request", e);
 		}
 
-		for (ComponentHierarchyBase componentHierarchyBase : ajaxResponse.getComponents())
-		{
-			componentHierarchyBase.preConfigure();
-		}
-
 		writeOutput(new StringBuilder(ajaxResponse.toString()), "application/json;charset=UTF-8", Charset.forName("UTF-8"));
 	}
 }

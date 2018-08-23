@@ -29,7 +29,8 @@ public enum TimeAttributes
 	/**
 	 * Represent a machine-readable date/time of the time element
 	 */
-	DateTime,;
+	DateTime,
+	;
 
 	@Override
 	public boolean isKeyword()

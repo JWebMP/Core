@@ -16,7 +16,8 @@
  */
 package com.jwebmp.core.base.html.interfaces.children;
 
-import com.jwebmp.core.base.html.interfaces.GlobalChildren;
+import com.jwebmp.core.base.ComponentBase;
+import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 
 /**
  * Defines children available to the list component
@@ -25,8 +26,8 @@ import com.jwebmp.core.base.html.interfaces.GlobalChildren;
  * @version 1.0
  * @since 2014/06/16
  */
-public interface ListItemChildren
-		extends GlobalChildren
+public interface ListItemChildren<C extends IComponentHierarchyBase, J extends ComponentBase>
+		extends IComponentHierarchyBase<C, J>
 {
 
 }

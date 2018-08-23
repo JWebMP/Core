@@ -443,7 +443,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		}
 		catch (NumberFormatException | NullPointerException nfe)
 		{
-			LOG.log(Level.FINE, "Invalid Global Attribute Reference [" + getClass().getSimpleName() + "] - [" + attribute + "]. Ignoring.", nfe);
+			ComponentHTMLAttributeBase.LOG.log(Level.FINE, "Invalid Global Attribute Reference [" + getClass().getSimpleName() + "] - [" + attribute + "]. Ignoring.", nfe);
 			return bop;
 		}
 	}
@@ -633,6 +633,11 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		super.destroy();
 	}
 
+	/**
+	 * Method cloneComponent ...
+	 *
+	 * @return J
+	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull

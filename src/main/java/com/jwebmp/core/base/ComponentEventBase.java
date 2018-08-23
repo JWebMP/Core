@@ -29,7 +29,6 @@ import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.logging.Level;
@@ -48,7 +47,7 @@ import java.util.logging.Level;
  * @version 2.0
  * @since 23 Apr 2013
  */
-public class ComponentEventBase<F extends GlobalFeatures & Serializable, E extends GlobalEvents, J extends ComponentEventBase<F, E, J>>
+public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents, J extends ComponentEventBase<F, E, J>>
 		extends ComponentFeatureBase<F, J>
 		implements IComponentEventBase<E, J>
 {
@@ -132,12 +131,14 @@ public class ComponentEventBase<F extends GlobalFeatures & Serializable, E exten
 		                             .getComponentType()
 		                             .equals(ComponentTypes.Event))
 		{
-			LOG.log(Level.WARNING, "Tried to add a non event to the event collection");
+			ComponentEventBase.LOG.log(Level.WARNING, "Tried to add a non event to the event collection");
 		}
 		else
 		{
 			getEvents().add(event);
 		}
+		event.init();
+		event.preConfigure();
 		return (J) this;
 	}
 
@@ -360,6 +361,16 @@ public class ComponentEventBase<F extends GlobalFeatures & Serializable, E exten
 		super.destroy();
 	}
 
+	@Override
+	public void checkAssignedFunctions()
+	{
+		if (!getEvents().isEmpty())
+		{
+			getEvents().forEach(a -> a.checkAssignedFunctions());
+		}
+		super.checkAssignedFunctions();
+	}
+
 	/**
 	 * Sets this component and all its children components tiny
 	 *
@@ -380,32 +391,11 @@ public class ComponentEventBase<F extends GlobalFeatures & Serializable, E exten
 	}
 
 	/**
-	 * Run all Assign Function To Components and Pre Configures for all Events
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (!isInitialized())
-		{
-			init();
-		}
-		if (!isConfigured())
-		{
-			getEvents().forEach(event ->
-			                    {
-				                    ComponentEventBase.class.cast(event)
-				                                            .preConfigure();
-				                    assignFunctionsToComponent();
-			                    });
-		}
-		super.preConfigure();
-
-	}
-
-	/**
 	 * Clones the component and all its events
 	 *
 	 * @return
+	 *
+	 * @see ComponentDependancyBase#cloneComponent()
 	 */
 	@Override
 	@NotNull
