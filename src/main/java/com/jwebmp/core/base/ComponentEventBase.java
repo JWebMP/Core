@@ -137,6 +137,12 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 		{
 			getEvents().add(event);
 		}
+		if (ComponentHierarchyBase.class.isAssignableFrom(getClass()))
+		{
+			event.asEventBase()
+			     .asFeatureBase()
+			     .setComponent((ComponentHierarchyBase) this);
+		}
 		event.init();
 		event.preConfigure();
 		return (J) this;
@@ -361,22 +367,28 @@ public class ComponentEventBase<F extends GlobalFeatures, E extends GlobalEvents
 		super.destroy();
 	}
 
+	/**
+	 * Checks if this feature has been configured and rendered with all the features
+	 */
 	@Override
 	public void checkAssignedFunctions()
 	{
 		if (!getEvents().isEmpty())
 		{
-			getEvents().forEach(a -> a.checkAssignedFunctions());
+			getEvents().forEach(GlobalEvents::checkAssignedFunctions);
 		}
 		super.checkAssignedFunctions();
 	}
 
 	/**
-	 * Sets this component and all its children components tiny
+	 * Sets all features beneath to tiny
 	 *
 	 * @param tiny
+	 * 		if this must render tiny
 	 *
-	 * @return
+	 * @return Always this class
+	 *
+	 * @see com.jwebmp.core.base.ComponentBase#setTiny(boolean)
 	 */
 	@Override
 	@NotNull

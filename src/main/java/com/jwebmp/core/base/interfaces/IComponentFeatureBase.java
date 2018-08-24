@@ -18,6 +18,7 @@ package com.jwebmp.core.base.interfaces;
 
 import com.jwebmp.core.base.ComponentBase;
 import com.jwebmp.core.base.ComponentFeatureBase;
+import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.LifeCycle;
 import com.jwebmp.core.base.references.CSSReference;
@@ -163,4 +164,7 @@ public interface IComponentFeatureBase<F extends GlobalFeatures, J extends Compo
 	 * Checks if this feature has been configured and rendered with all the features
 	 */
 	void checkAssignedFunctions();
+
+	@SuppressWarnings({"unused", "unchecked"})
+	J setComponent(ComponentHierarchyBase component);
 }

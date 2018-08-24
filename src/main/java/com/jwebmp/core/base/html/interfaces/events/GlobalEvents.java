@@ -17,6 +17,7 @@
 package com.jwebmp.core.base.html.interfaces.events;
 
 import com.jwebmp.core.base.html.interfaces.LifeCycle;
+import com.jwebmp.core.base.interfaces.IComponentEventBase;
 
 /**
  * Defines a global event that can be added to all components
@@ -31,4 +32,9 @@ public interface GlobalEvents
 	 * Checks if this feature has been configured and rendered with all the features
 	 */
 	void checkAssignedFunctions();
+
+	default IComponentEventBase asEventBase()
+	{
+		return (IComponentEventBase) this;
+	}
 }

@@ -704,6 +704,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 */
 	@NotNull
 	@SuppressWarnings({"unused", "unchecked"})
+	@Override
 	public J setComponent(ComponentHierarchyBase component)
 	{
 		this.component = component;

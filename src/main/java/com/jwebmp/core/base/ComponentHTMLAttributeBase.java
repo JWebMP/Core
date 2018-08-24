@@ -644,11 +644,8 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	public J cloneComponent()
 	{
 		ComponentHTMLAttributeBase cloned = super.cloneComponent();
-		if (cloned != null)
-		{
-			cloned.attributes = new TreeMap();
-			cloned.attributes.putAll(getAttributes());
-		}
+		cloned.attributes = new TreeMap();
+		cloned.attributes.putAll(getAttributes());
 		return (J) cloned;
 	}
 

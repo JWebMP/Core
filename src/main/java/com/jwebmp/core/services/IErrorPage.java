@@ -6,6 +6,7 @@ import com.jwebmp.core.Page;
  * Designates an error page
  */
 @SuppressWarnings("MissingClassJavaDoc")
+@FunctionalInterface
 public interface IErrorPage
 {
 	/**
@@ -14,5 +15,5 @@ public interface IErrorPage
 	 * @return The completed string to send back to the client
 	 */
 	@SuppressWarnings("unused")
-	Page<?> renderPage();
+	Page<?> renderPage(Throwable T);
 }

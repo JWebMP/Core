@@ -143,4 +143,10 @@ public interface IComponentEventBase<E extends GlobalEvents, J extends Component
 	 * @return
 	 */
 	ComponentEventBase findEvent(String eventId);
+
+	IComponentFeatureBase asFeatureBase();
+
+	IComponentDependancyBase asDependancyBase();
+
+	IComponentBase asBase();
 }

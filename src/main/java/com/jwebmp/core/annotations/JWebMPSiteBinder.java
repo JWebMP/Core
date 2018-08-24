@@ -29,7 +29,6 @@ import com.google.inject.name.Names;
 import com.google.inject.servlet.RequestScoped;
 import com.google.inject.servlet.SessionScoped;
 import com.jwebmp.core.Page;
-import com.jwebmp.core.SessionHelper;
 import com.jwebmp.core.base.ComponentBase;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
@@ -46,7 +45,6 @@ import net.sf.uadetector.service.UADetectorServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
-import java.util.ServiceLoader;
 import java.util.logging.Level;
 
 import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
@@ -228,36 +226,9 @@ public class JWebMPSiteBinder
 		      .in(SessionScoped.class);
 
 		JWebMPSiteBinder.log.fine("Bound Page.class");
-		final ServiceLoader<IPage> pages = ServiceLoader.load(IPage.class);
+
 		module.bind(Page.class)
-		      .toProvider(() ->
-		                  {
-			                  if (!pages.iterator()
-			                            .hasNext())
-			                  {
-				                  JWebMPSiteBinder.log.log(Level.WARNING, "Returning blank page since no class was found that extends page or matches the given url");
-				                  return new Page();
-			                  }
-			                  IPage outputPage = null;
-			                  for (IPage page : pages)
-			                  {
-				                  outputPage = findPage(page);
-				                  if (outputPage != null)
-				                  {
-					                  break;
-				                  }
-			                  }
-			                  if (outputPage != null)
-			                  {
-				                  if (!Page.class.isAssignableFrom(outputPage.getClass()))
-				                  {
-					                  JWebMPSiteBinder.log.severe("Page Binding IPage Services must Extend Page.class");
-					                  return new Page();
-				                  }
-				                  return (Page) outputPage;
-			                  }
-			                  return new Page();
-		                  })
+		      .toProvider(new PageProvider())
 		      .in(RequestScoped.class);
 
 		JWebMPSiteBinder.log.fine("Bound ObjectMapper.class @Named(JSON)");
@@ -276,7 +247,7 @@ public class JWebMPSiteBinder
 		      .toProvider(this::getJsonMapper)
 		      .in(Singleton.class);
 
-		for (IPage page : pages)
+		for (IPage page : PageProvider.getPages())
 		{
 			PageConfiguration pc = page.getClass()
 			                           .getAnnotation(PageConfiguration.class);
@@ -323,56 +294,6 @@ public class JWebMPSiteBinder
 		module.serveRegex$("(" + StaticStrings.JW_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(JWScriptServlet.class);
 		JWebMPSiteBinder.log.log(Level.INFO, "Serving JW Default Script at {0}", StaticStrings.JW_SCRIPT_LOCATION);
-	}
-
-	/**
-	 * Method findPage ...
-	 *
-	 * @param next
-	 * 		of type IPage
-	 *
-	 * @return IPage
-	 */
-	private IPage findPage(IPage next)
-	{
-		try
-		{
-			PageConfiguration pc = next.getClass()
-			                           .getAnnotation(PageConfiguration.class);
-			HttpServletRequest request = GuiceContext.getInstance(HttpServletRequest.class);
-			String pathInfo = request.getPathInfo();
-			if (pathInfo == null)
-			{
-				pathInfo = StaticStrings.STRING_FORWARD_SLASH;
-			}
-
-			String pcUrl = pc.url();
-			if (pathInfo.equalsIgnoreCase(pcUrl) || SessionHelper.getServletUrl()
-			                                                     .equalsIgnoreCase(pc.url()))
-			{
-				IPage page = GuiceContext.inject()
-				                         .getInstance(next.getClass());
-				String headerInformation = request.getHeader("User-Agent");
-				ReadableUserAgent agent = GuiceContext.inject()
-				                                      .getInstance(UserAgentStringParser.class)
-				                                      .parse(headerInformation);
-				page.setUserAgent(agent);
-				return page;
-			}
-			else
-			{
-				JWebMPSiteBinder.log.log(Level.FINER, "Not the right page, moving on");
-			}
-		}
-		catch (NullPointerException npe)
-		{
-			JWebMPSiteBinder.log.log(Level.SEVERE, "Unable to process page : " + next + " due to null pointer", npe);
-		}
-		catch (Exception npe)
-		{
-			JWebMPSiteBinder.log.log(Level.SEVERE, "Unable to process page : " + next, npe);
-		}
-		return null;
 	}
 
 	/**

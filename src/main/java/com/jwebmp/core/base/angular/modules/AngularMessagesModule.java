@@ -36,7 +36,7 @@ public class AngularMessagesModule
 	/**
 	 * Field messsgesModuleEnabled
 	 */
-	public static boolean messsgesModuleEnabled = false;
+	private static boolean messsgesModuleEnabled = false;
 
 	/**
 	 * Constructs a module with this name that always sorts default
@@ -44,6 +44,31 @@ public class AngularMessagesModule
 	public AngularMessagesModule()
 	{
 		super("ngMessages");
+	}
+
+	/**
+	 * Method isMesssgesModuleEnabled returns the messsgesModuleEnabled of this AngularMessagesModule object.
+	 * <p>
+	 * Field messsgesModuleEnabled
+	 *
+	 * @return the messsgesModuleEnabled (type boolean) of this AngularMessagesModule object.
+	 */
+	public static boolean isMesssgesModuleEnabled()
+	{
+		return AngularMessagesModule.messsgesModuleEnabled;
+	}
+
+	/**
+	 * Method setMesssgesModuleEnabled sets the messsgesModuleEnabled of this AngularMessagesModule object.
+	 * <p>
+	 * Field messsgesModuleEnabled
+	 *
+	 * @param messsgesModuleEnabled
+	 * 		the messsgesModuleEnabled of this AngularMessagesModule object.
+	 */
+	public static void setMesssgesModuleEnabled(boolean messsgesModuleEnabled)
+	{
+		AngularMessagesModule.messsgesModuleEnabled = messsgesModuleEnabled;
 	}
 
 	/**

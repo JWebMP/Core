@@ -42,7 +42,7 @@ public class AngularForm<J extends AngularForm<J>>
 	{
 		JQueryPageConfigurator.setRequired(true);
 		AngularPageConfigurator.setRequired(true);
-		AngularMessagesModule.messsgesModuleEnabled = true;
+		AngularMessagesModule.setMesssgesModuleEnabled(true);
 	}
 
 	/**
@@ -197,14 +197,14 @@ public class AngularForm<J extends AngularForm<J>>
 	}
 
 	@Override
-	public boolean equals(Object o)
-	{
-		return super.equals(o);
-	}
-
-	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
 	}
 }

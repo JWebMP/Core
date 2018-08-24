@@ -161,6 +161,7 @@ module com.jwebmp.core {
 	requires com.google.common;
 	requires org.apache.commons.io;
 	requires org.apache.commons.lang3;
+	requires org.apache.commons.text;
 
 	uses com.jwebmp.core.utilities.regex.IRegularExpressions;
 	uses IAngularDirective;

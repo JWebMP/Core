@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.utilities;
 
-import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.text.StringEscapeUtils;
 
 import javax.validation.constraints.NotNull;
 import java.io.UnsupportedEncodingException;
@@ -40,7 +40,7 @@ public class EscapeChars
 	private static final Pattern SCRIPT_END = Pattern.compile("</SCRIPT>", Pattern.CASE_INSENSITIVE);
 
 	private static final Character[] EscapeRegexCharsetRaw = new Character[]{StaticStrings.CHAR_DOT, '\\', '?', '*', '+', '&', ':', '{', '}', '[', ']', '(', ')', '^', '$'};
-	private static final List<Character> EscapeRegexCharset = Arrays.asList(EscapeRegexCharsetRaw);
+	private static final List<Character> EscapeRegexCharset = Arrays.asList(EscapeChars.EscapeRegexCharsetRaw);
 
 	/**
 	 * Static only
@@ -173,7 +173,7 @@ public class EscapeChars
 		char character = iterator.current();
 		while (character != CharacterIterator.DONE)
 		{
-			if (EscapeRegexCharset.contains(character))
+			if (EscapeChars.EscapeRegexCharset.contains(character))
 			{
 				result.append('\\' + character);
 			}
@@ -208,9 +208,9 @@ public class EscapeChars
 	public static String forScriptTagsOnly(String aText)
 	{
 		String result;
-		Matcher matcher = SCRIPT.matcher(aText);
+		Matcher matcher = EscapeChars.SCRIPT.matcher(aText);
 		result = matcher.replaceAll("&gt;SCRIPT&lt;");
-		matcher = SCRIPT_END.matcher(result);
+		matcher = EscapeChars.SCRIPT_END.matcher(result);
 		result = matcher.replaceAll("&gt;/SCRIPT&lt;");
 		return result;
 	}
