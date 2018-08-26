@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
+import com.jwebmp.core.services.IRegularExpressions;
 import com.jwebmp.logger.LogFactory;
 
 import java.io.Serializable;
@@ -74,13 +75,13 @@ public class RegularExpressionsDTO
 		Map<String, Pattern> patterns = new LinkedHashMap<>();
 		for (IRegularExpressions regexConfig : regexConfigs)
 		{
-			log.finer("Regex Config Found [" + regexConfig.getClass()
-			                                              .getSimpleName() + "]");
+			RegularExpressionsDTO.log.finer("Regex Config Found [" + regexConfig.getClass()
+			                                                                    .getSimpleName() + "]");
 			patterns.putAll(regexConfig.addPatterns());
 		}
 		for (Map.Entry<String, Pattern> entry : patterns.entrySet())
 		{
-			log.finer("Client RegEx [" + entry.getKey() + "] bound to registered pattern");
+			RegularExpressionsDTO.log.finer("Client RegEx [" + entry.getKey() + "] bound to registered pattern");
 			addExpression(entry.getKey(), entry.getValue()
 			                                   .toString());
 		}

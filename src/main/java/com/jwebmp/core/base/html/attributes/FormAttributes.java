@@ -31,8 +31,6 @@ public enum FormAttributes
 	/**
 	 * Not supported in HTML5. Specifies a comma-separated list of file types that the server accepts (that can be submitted through the file upload)
 	 * <p>
-	 *
-	 * @deprecated
 	 */
 	Accept,
 	/**
@@ -64,8 +62,6 @@ public enum FormAttributes
 	/**
 	 * In XHTML, the name attribute is deprecated. Use the global id attribute instead.
 	 * Specifies the name of a form
-	 *
-	 * @deprecated
 	 */
 	Name,
 	/**

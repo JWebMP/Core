@@ -35,14 +35,14 @@ public enum IFrameAttributes
 	 * <p>
 	 *
 	 * @deprecated
-	 */
+	 */@Deprecated
 	Align,
 	/**
 	 * Not supported in HTML5. Specifies whether or not to display a border around an &lt;iframe&gt;
 	 * <p>
 	 *
 	 * @deprecated
-	 */
+	 */@Deprecated
 	FrameBorder,
 	/**
 	 * Specifies the height of an &lt;iframe&gt;
@@ -59,14 +59,14 @@ public enum IFrameAttributes
 	 * <p>
 	 *
 	 * @deprecated
-	 */
+	 */@Deprecated
 	MarginHeight,
 	/**
 	 * Not supported in HTML5. Specifies the left and right margins of the content of an &lt;iframe&gt;
 	 * <p>
 	 *
 	 * @deprecated
-	 */
+	 */@Deprecated
 	MarginWidth,
 	/**
 	 * Specifies the name of an &lt;iframe&gt;
@@ -93,7 +93,7 @@ public enum IFrameAttributes
 	 * <p>
 	 *
 	 * @deprecated
-	 */
+	 */@Deprecated
 	Scrolling,
 	/**
 	 * Specifies that the &lt;iframe&gt; should look like it is a part of the containing document
@@ -119,7 +119,7 @@ public enum IFrameAttributes
 	/**
 	 * Returns the name in lowercase form
 	 *
-	 * @return
+	 * @return The actual string
 	 */
 	@Override
 	public String toString()
@@ -127,6 +127,11 @@ public enum IFrameAttributes
 		return name().toLowerCase();
 	}
 
+	/**
+	 * Returns if this attribute is just a keyword, or a key/value pair
+	 *
+	 * @return
+	 */
 	@Override
 	public boolean isKeyword()
 	{

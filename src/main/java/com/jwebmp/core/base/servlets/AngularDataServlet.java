@@ -27,12 +27,12 @@ import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
+import com.jwebmp.interception.services.AjaxCallIntercepter;
 import com.jwebmp.logger.LogFactory;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.nio.charset.Charset;
 import java.sql.Date;
 import java.time.ZonedDateTime;
 import java.util.logging.Level;
@@ -40,6 +40,7 @@ import java.util.logging.Logger;
 
 import static com.jwebmp.guicedinjection.GuiceContext.*;
 import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
+import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 
 /**
  * Handles angular data binding calls, registers variables for access. Can handle population, use event binding for call back.
@@ -126,7 +127,9 @@ public class AngularDataServlet
 		                                           .getInstance(AjaxResponse.class);
 		try
 		{
-			intercept();
+			GuiceContext.get(AjaxCallInterceptorKey)
+			            .forEach(AjaxCallIntercepter::intercept);
+
 			page.onConnect(ajaxCall, ajaxResponse);
 		}
 		catch (Exception e)
@@ -136,6 +139,6 @@ public class AngularDataServlet
 			AngularDataServlet.LOG.log(Level.SEVERE, "Unable to perform the data request", e);
 		}
 
-		writeOutput(new StringBuilder(ajaxResponse.toString()), "application/json;charset=UTF-8", Charset.forName("UTF-8"));
+		writeOutput(new StringBuilder(ajaxResponse.toString()), "application/json;charset=UTF-8", StaticStrings.UTF8_CHARSET);
 	}
 }

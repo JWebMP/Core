@@ -2,9 +2,12 @@ import com.jwebmp.core.annotations.JWebMPSiteBinder;
 import com.jwebmp.core.base.angular.controllers.JWAngularController;
 import com.jwebmp.core.base.angular.modules.AngularMessagesModule;
 import com.jwebmp.core.base.angular.services.*;
+import com.jwebmp.core.base.servlets.intercepters.LocalStorageIntercepter;
 import com.jwebmp.core.services.*;
 import com.jwebmp.guicedinjection.interfaces.IGuiceDefaultBinder;
 import com.jwebmp.guicedservlets.services.IGuiceSiteBinder;
+import com.jwebmp.interception.services.AjaxCallIntercepter;
+import com.jwebmp.interception.services.DataCallIntercepter;
 
 module com.jwebmp.core {
 
@@ -163,7 +166,7 @@ module com.jwebmp.core {
 	requires org.apache.commons.lang3;
 	requires org.apache.commons.text;
 
-	uses com.jwebmp.core.utilities.regex.IRegularExpressions;
+	uses IRegularExpressions;
 	uses IAngularDirective;
 	uses com.jwebmp.core.services.IPageConfigurator;
 	uses com.jwebmp.core.services.IPage;
@@ -180,6 +183,9 @@ module com.jwebmp.core {
 	uses RenderAfterScripts;
 	uses RenderAfterDynamicScripts;
 	uses RenderBeforeScripts;
+
+	provides DataCallIntercepter with LocalStorageIntercepter;
+	provides AjaxCallIntercepter with LocalStorageIntercepter;
 
 	provides IGuiceSiteBinder with JWebMPSiteBinder;
 	provides IGuiceDefaultBinder with JWebMPServicesBindings;
@@ -224,9 +230,9 @@ module com.jwebmp.core {
 			                           com.jwebmp.core.events.unselected.UnselectedDirective,
 			                           com.jwebmp.core.events.update.UpdateDirective;
 
-	provides com.jwebmp.core.utilities.regex.IRegularExpressions with com.jwebmp.core.utilities.regex.TextRegExPatterns,
-			                                                             com.jwebmp.core.utilities.regex.EmailAddressRegExPatterns,
-			                                                             com.jwebmp.core.utilities.regex.DateFormatRegExPatterns;
+	provides IRegularExpressions with com.jwebmp.core.utilities.regex.TextRegExPatterns,
+			                             com.jwebmp.core.utilities.regex.EmailAddressRegExPatterns,
+			                             com.jwebmp.core.utilities.regex.DateFormatRegExPatterns;
 
 	provides IPageConfigurator with com.jwebmp.core.base.angular.AngularPageConfigurator,
 			                           com.jwebmp.core.base.page.ScriptsDynamicPageConfigurator,
@@ -235,7 +241,7 @@ module com.jwebmp.core {
 			                           com.jwebmp.core.base.page.TopShelfScriptsInsertPageConfigurator,
 			                           com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 
-	opens com.jwebmp.core.base.servlets to com.google.guice;
+	opens com.jwebmp.core.base.servlets to com.google.guice, com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.base.page to com.google.guice;
 	opens com.jwebmp.core.base.ajax to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.base.html to com.fasterxml.jackson.databind;

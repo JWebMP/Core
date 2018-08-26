@@ -24,8 +24,8 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.servlets.SessionStorageProperties;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
-import com.jwebmp.interception.AjaxCallIntercepter;
-import com.jwebmp.interception.DataCallIntercepter;
+import com.jwebmp.interception.services.AjaxCallIntercepter;
+import com.jwebmp.interception.services.DataCallIntercepter;
 import com.jwebmp.logger.LogFactory;
 
 import java.util.Map;
@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 @SuppressWarnings("unused")
 @RequestScoped
 public class LocalStorageIntercepter
-		implements DataCallIntercepter, AjaxCallIntercepter
+		implements DataCallIntercepter<LocalStorageIntercepter>, AjaxCallIntercepter<LocalStorageIntercepter>
 {
 	private static final Logger log = LogFactory.getLog("LocalStorageIntercepter");
 
@@ -51,7 +51,7 @@ public class LocalStorageIntercepter
 			if (call.getVariable(StaticStrings.LOCAL_STORAGE_VARIABLE_KEY) != null && !localStorage.containsKey(StaticStrings.LOCAL_STORAGE_PARAMETER_KEY))
 			{
 				ObjectMapper mapper = GuiceContext.getInstance(ObjectMapper.class);
-				log.finer("Local Storage key found");
+				LocalStorageIntercepter.log.finer("Local Storage key found");
 				Map<String, String> result = mapper.readValue(call.getVariable(StaticStrings.LOCAL_STORAGE_VARIABLE_KEY)
 				                                                  .getVariableText(), new TypeReference<Map<String, String>>() {});
 				localStorage.put(StaticStrings.LOCAL_STORAGE_PARAMETER_KEY, result.get(StaticStrings.LOCAL_STORAGE_PARAMETER_KEY));
@@ -59,7 +59,7 @@ public class LocalStorageIntercepter
 		}
 		catch (Exception e)
 		{
-			log.log(Level.WARNING, "Unable to check for local storage key", e);
+			LocalStorageIntercepter.log.log(Level.WARNING, "Unable to check for local storage key", e);
 		}
 	}
 

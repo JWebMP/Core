@@ -1,4 +1,4 @@
-package com.jwebmp.core.utilities.regex;
+package com.jwebmp.core.services;
 
 import java.io.Serializable;
 import java.util.Map;

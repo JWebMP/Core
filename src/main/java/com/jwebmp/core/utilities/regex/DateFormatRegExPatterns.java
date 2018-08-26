@@ -1,5 +1,7 @@
 package com.jwebmp.core.utilities.regex;
 
+import com.jwebmp.core.services.IRegularExpressions;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -16,7 +18,7 @@ public class DateFormatRegExPatterns
 	public Map<String, Pattern> addPatterns()
 	{
 		Map<String, Pattern> patternMap = new LinkedHashMap<>();
-		patternMap.put("date_yyyy_MM_dd", Pattern.compile(yyyy_MM_dd));
+		patternMap.put("date_yyyy_MM_dd", Pattern.compile(DateFormatRegExPatterns.yyyy_MM_dd));
 		return patternMap;
 	}
 

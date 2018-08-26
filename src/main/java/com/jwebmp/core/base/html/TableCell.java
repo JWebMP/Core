@@ -16,6 +16,7 @@
  */
 package com.jwebmp.core.base.html;
 
+import com.google.common.base.Strings;
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.TableCellAttributes;
 import com.jwebmp.core.base.html.interfaces.GlobalChildren;
@@ -24,6 +25,8 @@ import com.jwebmp.core.base.html.interfaces.children.TableRowChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * A Basic Table Cell Component<p>
@@ -63,11 +66,15 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @version 1.0
  * @since 2012/10/01
  */
+@SuppressWarnings("MissingClassJavaDoc")
 public class TableCell<J extends TableCell<J>>
 		extends Component<IComponentHierarchyBase, TableCellAttributes, GlobalFeatures, GlobalEvents, J>
 		implements TableRowChildren<IComponentHierarchyBase, J>
 {
 
+	/**
+	 * Field serialVersionUID
+	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -89,7 +96,7 @@ public class TableCell<J extends TableCell<J>>
 		super(ComponentTypes.TableCell);
 		if (dataDisplay != null)
 		{
-			add(Component.class.cast(dataDisplay));
+			add((Component) dataDisplay);
 		}
 	}
 
@@ -97,6 +104,7 @@ public class TableCell<J extends TableCell<J>>
 	 * A paragraph as a child. Good for testing or Render on Load
 	 *
 	 * @param dataDisplay
+	 * 		The display for the table cell
 	 */
 	public TableCell(String dataDisplay)
 	{
@@ -112,7 +120,7 @@ public class TableCell<J extends TableCell<J>>
 	public int getColumnSpan()
 	{
 		String s = getAttribute(TableCellAttributes.ColSpan);
-		if (s == null || s.isEmpty())
+		if (Strings.isNullOrEmpty(s))
 		{
 			s = "0";
 		}
@@ -123,6 +131,8 @@ public class TableCell<J extends TableCell<J>>
 	 * @param columnSpan
 	 * 		Sets this table cells column span
 	 */
+	@NotNull
+	@SuppressWarnings("unchecked")
 	public J setColumnSpan(int columnSpan)
 	{
 		addAttribute(TableCellAttributes.ColSpan, columnSpan);
@@ -136,7 +146,7 @@ public class TableCell<J extends TableCell<J>>
 	 */
 	public int getRowSpan()
 	{
-		return new Integer(getAttribute(TableCellAttributes.RowSpan));
+		return Integer.parseInt(getAttribute(TableCellAttributes.RowSpan));
 	}
 
 	/**
@@ -145,6 +155,8 @@ public class TableCell<J extends TableCell<J>>
 	 * @param rowSpan
 	 * 		Integer that is row span
 	 */
+	@NotNull
+	@SuppressWarnings("unchecked")
 	public J setRowSpan(int rowSpan)
 	{
 		addAttribute(TableCellAttributes.RowSpan, Integer.toString(rowSpan));

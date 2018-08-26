@@ -425,6 +425,8 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 * Renders the JavaScript for this Builder
 	 *
 	 * @return The complete javascript for this object
+	 *
+	 * @see com.jwebmp.core.base.interfaces.IComponentFeatureBase#renderJavascript()
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
@@ -719,13 +721,10 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	 *
 	 * @return int
 	 */
+	@SuppressWarnings("ConstantConditions")
 	@Override
-	public int compareTo(J o)
+	public int compareTo(@NotNull J o)
 	{
-		if (o == null)
-		{
-			return 1;
-		}
 		int comp = getSortOrder().compareTo(o.getSortOrder());
 		if (comp == 0)
 		{

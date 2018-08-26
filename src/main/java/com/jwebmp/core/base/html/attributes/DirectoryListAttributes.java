@@ -29,7 +29,7 @@ public enum DirectoryListAttributes
 	 * Not supported in HTML5. Specifies that the list should render smaller than normal
 	 *
 	 * @deprecated
-	 */
+	 */@Deprecated
 	Compact,
 	;
 

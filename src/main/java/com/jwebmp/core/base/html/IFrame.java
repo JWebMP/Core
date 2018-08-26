@@ -139,7 +139,7 @@ public class IFrame<J extends IFrame<J>>
 	 */
 	public int getWidthInPixels()
 	{
-		return new Integer(getAttribute(IFrameAttributes.Width));
+		return Integer.parseInt(getAttribute(IFrameAttributes.Width));
 	}
 
 	/**
@@ -161,7 +161,7 @@ public class IFrame<J extends IFrame<J>>
 	 */
 	public int getHeightInPixles()
 	{
-		return new Integer(getAttribute(IFrameAttributes.Height));
+		return Integer.parseInt(getAttribute(IFrameAttributes.Height));
 	}
 
 	/**

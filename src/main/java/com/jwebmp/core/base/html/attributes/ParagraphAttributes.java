@@ -39,6 +39,7 @@ public enum ParagraphAttributes
 	 *
 	 * @deprecated Not supported in HTML 5
 	 */
+	@Deprecated
 	Align;
 
 	@Override

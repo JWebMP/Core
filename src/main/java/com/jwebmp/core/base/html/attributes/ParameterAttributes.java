@@ -38,6 +38,7 @@ public enum ParameterAttributes
 	 *
 	 * @deprecated
 	 */
+	@Deprecated
 	Type,
 	/**
 	 * Specifies the value of the parameter
@@ -53,6 +54,7 @@ public enum ParameterAttributes
 	 *
 	 * @deprecated
 	 */
+	@Deprecated
 	ValueType;
 
 	@Override

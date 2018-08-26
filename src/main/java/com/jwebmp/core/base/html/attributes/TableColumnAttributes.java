@@ -32,7 +32,7 @@ public enum TableColumnAttributes
 	 * <p>
 	 *
 	 * @deprecated
-	 */
+	 */@Deprecated
 	Align,
 	/**
 	 * Not supported in HTML5.
@@ -41,14 +41,14 @@ public enum TableColumnAttributes
 	 * <p>
 	 *
 	 * @deprecated
-	 */
+	 */@Deprecated
 	Char,
 	/**
 	 * Not supported in HTML5. Specifies the number of characters the content will be aligned from the character specified by the char attribute
 	 * <p>
 	 *
 	 * @deprecated
-	 */
+	 */@Deprecated
 	CharOff,
 	/**
 	 * Specifies the number of columns a col element should span
@@ -61,7 +61,7 @@ public enum TableColumnAttributes
 	 * <p>
 	 *
 	 * @deprecated
-	 */
+	 */@Deprecated
 	VAlign,
 	/**
 	 * Not supported in HTML5.
@@ -69,7 +69,7 @@ public enum TableColumnAttributes
 	 * Specifies the width of a col element
 	 *
 	 * @deprecated
-	 */
+	 */@Deprecated
 	Width;
 
 	@Override

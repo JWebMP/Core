@@ -1,5 +1,7 @@
 package com.jwebmp.core.utilities.regex;
 
+import com.jwebmp.core.services.IRegularExpressions;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -38,12 +40,12 @@ public class TextRegExPatterns
 	{
 		Map<String, Pattern> patternMap = new LinkedHashMap<>();
 
-		patternMap.put("textField", Pattern.compile(TextOnlyField));
-		patternMap.put("textFieldMin3", Pattern.compile(TextFieldMin3));
-		patternMap.put("alphaNumericField", Pattern.compile(AlphaNumericField));
-		patternMap.put("alphaNumericFieldMin3", Pattern.compile(AlphaNumericFieldMin3));
-		patternMap.put("textFieldMin3Words", Pattern.compile(TextFieldMin3Words));
-		patternMap.put("whiteSpacesNoNewLines", Pattern.compile(WhiteSpacesNoNewLines));
+		patternMap.put("textField", Pattern.compile(TextRegExPatterns.TextOnlyField));
+		patternMap.put("textFieldMin3", Pattern.compile(TextRegExPatterns.TextFieldMin3));
+		patternMap.put("alphaNumericField", Pattern.compile(TextRegExPatterns.AlphaNumericField));
+		patternMap.put("alphaNumericFieldMin3", Pattern.compile(TextRegExPatterns.AlphaNumericFieldMin3));
+		patternMap.put("textFieldMin3Words", Pattern.compile(TextRegExPatterns.TextFieldMin3Words));
+		patternMap.put("whiteSpacesNoNewLines", Pattern.compile(TextRegExPatterns.WhiteSpacesNoNewLines));
 
 		return patternMap;
 	}

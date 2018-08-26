@@ -21,11 +21,13 @@ import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
+import com.jwebmp.interception.services.AjaxCallIntercepter;
 
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.Charset;
 
 import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
+import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 
 /**
  * This Servlet supplies all the JavaScript for a given HTML Page
@@ -55,7 +57,10 @@ public class JavaScriptServlet
 		Page page = GuiceContext.get(Page.class);
 		HttpServletRequest request = GuiceContext.get(HttpServletRequestKey);
 		readBrowserInformation(request);
-		intercept();
+
+		GuiceContext.get(AjaxCallInterceptorKey)
+		            .forEach(AjaxCallIntercepter::intercept);
+
 		if (!page.isConfigured())
 		{
 			page.preConfigure();

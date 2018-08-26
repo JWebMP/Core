@@ -25,6 +25,7 @@ import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.core.utilities.TextUtilities;
 import com.jwebmp.guicedinjection.GuiceContext;
+import com.jwebmp.interception.services.AjaxCallIntercepter;
 import com.jwebmp.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +36,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
+import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 
 /**
  * Handles all AJAX Requests performed by a client connection. Session codes are used in order to identify
@@ -75,7 +77,9 @@ public class AjaxReceiverServlet
 
 			Event triggerEvent = processEvent();
 
-			intercept();
+			GuiceContext.get(AjaxCallInterceptorKey)
+			            .forEach(AjaxCallIntercepter::intercept);
+
 			triggerEvent.fireEvent(ajaxCall, ajaxResponse);
 
 			output = new StringBuilder(ajaxResponse.toString());

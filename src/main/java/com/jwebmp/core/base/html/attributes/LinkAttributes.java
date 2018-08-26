@@ -62,12 +62,13 @@ public enum LinkAttributes
 	 *
 	 * @deprecated
 	 */
+	@Deprecated
 	Charset(HTMLVersions.HTML401Transitional),
 	/**
 	 * Specifies the coordinates of a link
 	 *
 	 * @deprecated
-	 */
+	 */@Deprecated
 	Coords(HTMLVersions.HTML401Transitional),
 	/**
 	 * Specifies that the target will be downloaded when a user clicks
@@ -90,7 +91,7 @@ public enum LinkAttributes
 	 * Not Supported in HTML5 use global attribute ID instead
 	 *
 	 * @deprecated
-	 */
+	 */@Deprecated
 	Name(HTMLVersions.HTML401Transitional),
 	/**
 	 * Specifies the relationship between the current document and the linked document
@@ -100,13 +101,13 @@ public enum LinkAttributes
 	 * Not supported in HTML5.
 	 *
 	 * @deprecated
-	 */
+	 */@Deprecated
 	Rev(HTMLVersions.HTML401Transitional, true),
 	/**
 	 * Specifies the shape of a link
 	 *
 	 * @deprecated
-	 */
+	 */@Deprecated
 	Shape(HTMLVersions.HTML401Transitional),
 	/**
 	 * Specifies where to open the linked document

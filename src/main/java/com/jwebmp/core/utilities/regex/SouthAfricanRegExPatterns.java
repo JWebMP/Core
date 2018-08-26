@@ -1,5 +1,7 @@
 package com.jwebmp.core.utilities.regex;
 
+import com.jwebmp.core.services.IRegularExpressions;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -14,8 +16,8 @@ public class SouthAfricanRegExPatterns
 	public Map<String, Pattern> addPatterns()
 	{
 		Map<String, Pattern> patternMap = new LinkedHashMap<>();
-		patternMap.put("saID", Pattern.compile(SouthAfricanIDNumber));
-		patternMap.put("saPhoneNumber", Pattern.compile(SouthAfricanPhoneNumber));
+		patternMap.put("saID", Pattern.compile(SouthAfricanRegExPatterns.SouthAfricanIDNumber));
+		patternMap.put("saPhoneNumber", Pattern.compile(SouthAfricanRegExPatterns.SouthAfricanPhoneNumber));
 		return patternMap;
 	}
 

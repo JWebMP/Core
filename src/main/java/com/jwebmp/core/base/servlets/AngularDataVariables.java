@@ -20,8 +20,9 @@ import com.google.inject.Singleton;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
+import com.jwebmp.interception.services.DataCallIntercepter;
 
-import java.nio.charset.Charset;
+import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 
 /**
  * @author GedMarc
@@ -37,9 +38,12 @@ public class AngularDataVariables
 	{
 		Page page = GuiceContext.inject()
 		                        .getInstance(Page.class);
-		intercept();
+
+		GuiceContext.get(DataCallInterceptorKey)
+		            .forEach(DataCallIntercepter::intercept);
+
 		StringBuilder output = page.getAngular()
 		                           .renderAngularJavascript(page);
-		writeOutput(output, StaticStrings.HTML_HEADER_JAVASCRIPT, Charset.forName("UTF-8"));
+		writeOutput(output, StaticStrings.HTML_HEADER_JAVASCRIPT, StaticStrings.UTF8_CHARSET);
 	}
 }

@@ -19,7 +19,6 @@ package com.jwebmp.core.base.servlets;
 import com.google.inject.Singleton;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
-import com.jwebmp.interception.SiteInterception;
 import com.jwebmp.logger.LogFactory;
 
 import javax.servlet.http.HttpServletResponse;
@@ -78,16 +77,6 @@ public class JWebSwingServlet
 	{
 		response.setContentType(StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE);
 		writeOutput(getPageHTML(), StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE, StaticStrings.UTF8_CHARSET);
-	}
-
-	/**
-	 * Method interception holder for Site and Ajax Calls
-	 */
-	@Override
-	@SiteInterception
-	protected void intercept()
-	{
-		//Interception Method
 	}
 
 	/**

@@ -29,8 +29,7 @@ import com.jwebmp.core.services.IErrorPage;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.core.utilities.TextUtilities;
 import com.jwebmp.guicedinjection.GuiceContext;
-import com.jwebmp.interception.AjaxCallInterception;
-import com.jwebmp.interception.SiteInterception;
+import com.jwebmp.interception.services.SiteCallIntercepter;
 import com.jwebmp.logger.LogFactory;
 import net.sf.uadetector.ReadableUserAgent;
 import net.sf.uadetector.UserAgentStringParser;
@@ -50,6 +49,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
+import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 
 /**
  * Provides default methods for authentication authorization etc
@@ -202,6 +202,9 @@ public abstract class JWDefaultServlet
 			throw new InvalidRequestException("Invalid Event Value");
 		}
 
+		GuiceContext.get(SiteCallInterceptorKey)
+		            .forEach(SiteCallIntercepter::intercept);
+
 		return true;
 	}
 
@@ -255,7 +258,7 @@ public abstract class JWDefaultServlet
 		{
 			Page<?> p = new Page();
 			p.getPageFields()
-			 .setTitle("Exception occured in application");
+			 .setTitle("Exception occurred in application");
 			p.getPageFields()
 			 .setAuthor("Marc Magon");
 			p.getPageFields()
@@ -483,13 +486,4 @@ public abstract class JWDefaultServlet
 		}
 	}
 
-	/**
-	 * Method interception holder for Site and Ajax Calls
-	 */
-	@SiteInterception
-	@AjaxCallInterception
-	protected void intercept()
-	{
-		//Nothing required
-	}
 }

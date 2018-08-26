@@ -20,6 +20,9 @@ import com.google.inject.Singleton;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
+import com.jwebmp.interception.services.AjaxCallIntercepter;
+
+import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 
 /**
  * @author GedMarc
@@ -35,7 +38,9 @@ public class AngularServlet
 	{
 		Page page = GuiceContext.inject()
 		                        .getInstance(Page.class);
-		intercept();
+		GuiceContext.get(AjaxCallInterceptorKey)
+		            .forEach(AjaxCallIntercepter::intercept);
+
 		StringBuilder output = page.getAngular()
 		                           .renderAngularJavascript(page);
 		writeOutput(output, StaticStrings.HTML_HEADER_JAVASCRIPT, StaticStrings.UTF8_CHARSET);

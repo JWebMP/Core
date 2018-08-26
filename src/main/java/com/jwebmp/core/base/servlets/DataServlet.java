@@ -23,12 +23,14 @@ import com.jwebmp.core.Page;
 import com.jwebmp.core.base.servlets.interfaces.IDataComponent;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
+import com.jwebmp.interception.services.DataCallIntercepter;
 import com.jwebmp.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.logging.Logger;
 
 import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
+import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 
 /**
  * Provides the data for a specific component
@@ -95,7 +97,8 @@ public class DataServlet
 			writeOutput(new StringBuilder(p.toString(0)), StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE, StaticStrings.UTF8_CHARSET);
 			return;
 		}
-		intercept();
+		GuiceContext.get(DataCallInterceptorKey)
+		            .forEach(DataCallIntercepter::intercept);
 		writeOutput(responseString, StaticStrings.HTML_HEADER_JSON, StaticStrings.UTF8_CHARSET);
 	}
 
