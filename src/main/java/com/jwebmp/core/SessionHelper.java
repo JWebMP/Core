@@ -55,9 +55,9 @@ public class SessionHelper
 	 */
 	public static String getServerPath()
 	{
-		if (isCacheAddress() && getAddress() != null)
+		if (SessionHelper.isCacheAddress() && SessionHelper.getAddress() != null)
 		{
-			return getAddress();
+			return SessionHelper.getAddress();
 		}
 		try
 		{
@@ -74,8 +74,8 @@ public class SessionHelper
 		}
 		catch (Exception e)
 		{
-			log.log(Level.FINER, "Unable to get server path", e);
-			return addressToBeUsedWhenNull;
+			SessionHelper.log.log(Level.FINER, "Unable to get server path", e);
+			return SessionHelper.addressToBeUsedWhenNull;
 		}
 	}
 
@@ -86,7 +86,7 @@ public class SessionHelper
 	 */
 	public static boolean isCacheAddress()
 	{
-		return cacheAddress;
+		return SessionHelper.cacheAddress;
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class SessionHelper
 	 */
 	public static String getAddress()
 	{
-		return address;
+		return SessionHelper.address;
 	}
 
 	/**
@@ -130,12 +130,23 @@ public class SessionHelper
 		                                         .getInstance(HttpServletRequest.class);
 		String buff = request.getServletPath();
 		return buff.isEmpty() ? StaticStrings.STRING_FORWARD_SLASH : buff;
+	}
 
+	/**
+	 * Returns the client IP Address
+	 *
+	 * @return String of the client ip
+	 */
+	public static String getClientIPAddress()
+	{
+		HttpServletRequest request = GuiceContext.inject()
+		                                         .getInstance(HttpServletRequest.class);
+		return request.getRemoteAddr();
 	}
 
 	public static String getAddressToBeUsedWhenNull()
 	{
-		return addressToBeUsedWhenNull;
+		return SessionHelper.addressToBeUsedWhenNull;
 	}
 
 	public static void setAddressToBeUsedWhenNull(String addressToBeUsedWhenNull)

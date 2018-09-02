@@ -255,7 +255,7 @@ public class JWebMPSiteBinder
 			{
 				JWebMPSiteBinder.log.log(Level.SEVERE, "Couldn't Find Page Configuration on IPage Object {0}", new Object[]{page.getClass().getCanonicalName()});
 			}
-			else
+			else if (!pc.ignore())
 			{
 				StringBuilder url = new StringBuilder(pc.url());
 				url.insert(0, "(")
@@ -269,31 +269,31 @@ public class JWebMPSiteBinder
 
 		module.serveRegex$("(" + StaticStrings.JAVASCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(JavaScriptServlet.class);
-		JWebMPSiteBinder.log.log(Level.INFO, "Serving JavaScripts at {0}", StaticStrings.JAVASCRIPT_LOCATION);
+		JWebMPSiteBinder.log.log(Level.FINE, "Serving JavaScripts at {0}", StaticStrings.JAVASCRIPT_LOCATION);
 
 		module.serveRegex$("(" + StaticStrings.AJAX_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(AjaxReceiverServlet.class);
-		JWebMPSiteBinder.log.log(Level.INFO, "Serving Ajax at {0}", StaticStrings.AJAX_SCRIPT_LOCATION);
+		JWebMPSiteBinder.log.log(Level.FINE, "Serving Ajax at {0}", StaticStrings.AJAX_SCRIPT_LOCATION);
 
 		module.serveRegex$("(" + StaticStrings.CSS_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(CSSServlet.class);
-		JWebMPSiteBinder.log.log(Level.INFO, "Serving CSS at {0}", StaticStrings.CSS_LOCATION);
+		JWebMPSiteBinder.log.log(Level.FINE, "Serving CSS at {0}", StaticStrings.CSS_LOCATION);
 
 		module.serveRegex$("(" + StaticStrings.ANGULAR_DATA_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(AngularDataServlet.class);
-		JWebMPSiteBinder.log.log(Level.INFO, "Serving Angular Data at " + StaticStrings.ANGULAR_DATA_LOCATION);
+		JWebMPSiteBinder.log.log(Level.FINE, "Serving Angular Data at " + StaticStrings.ANGULAR_DATA_LOCATION);
 
 		module.serveRegex$("(" + StaticStrings.ANGULAR_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(AngularServlet.class);
-		JWebMPSiteBinder.log.log(Level.INFO, "Serving Angular JavaScript at {0}", StaticStrings.ANGULAR_SCRIPT_LOCATION);
+		JWebMPSiteBinder.log.log(Level.FINE, "Serving Angular JavaScript at {0}", StaticStrings.ANGULAR_SCRIPT_LOCATION);
 
 		module.serveRegex$("(" + StaticStrings.DATA_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(DataServlet.class);
-		JWebMPSiteBinder.log.log(Level.INFO, "Serving Data at {0}", StaticStrings.DATA_LOCATION);
+		JWebMPSiteBinder.log.log(Level.FINE, "Serving Data at {0}", StaticStrings.DATA_LOCATION);
 
 		module.serveRegex$("(" + StaticStrings.JW_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(JWScriptServlet.class);
-		JWebMPSiteBinder.log.log(Level.INFO, "Serving JW Default Script at {0}", StaticStrings.JW_SCRIPT_LOCATION);
+		JWebMPSiteBinder.log.log(Level.FINE, "Serving JW Default Script at {0}", StaticStrings.JW_SCRIPT_LOCATION);
 	}
 
 	/**

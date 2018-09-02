@@ -43,4 +43,11 @@ public @interface PageConfiguration
 	 * @return
 	 */
 	PageTypes type() default PageTypes.Default;
+
+	/**
+	 * If this configuration should be ignored on deployed
+	 *
+	 * @return
+	 */
+	boolean ignore() default false;
 }
