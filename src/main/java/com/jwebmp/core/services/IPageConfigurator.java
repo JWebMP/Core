@@ -22,6 +22,7 @@ public interface IPageConfigurator
 	@NotNull
 	Page<?> configure(Page<?> page);
 
+	@Override
 	default int compare(IPageConfigurator o1, IPageConfigurator o2)
 	{
 		return o1.sortOrder()
@@ -53,4 +54,10 @@ public interface IPageConfigurator
 		return result == 0 ? 1 : result;
 	}
 
+	/**
+	 * If this page configurator is enabled
+	 *
+	 * @return if the configuration must run
+	 */
+	boolean enabled();
 }

@@ -31,9 +31,7 @@ import com.jwebmp.core.utilities.StaticStrings;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Container Class for Events. Splits from the component hierarchy
@@ -62,10 +60,6 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private List<Feature> runFeatures;
-	/**
-	 * A set of components that this event can construct
-	 */
-	private Set<Class<? extends ComponentHierarchyBase>> registeredComponents;
 
 	/**
 	 * Constructs an event with the given name
@@ -107,11 +101,6 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 		setComponent(component);
 		setEventType(eventType);
 		returnVariable(StaticStrings.LOCAL_STORAGE_VARIABLE_KEY);
-		if (getComponent() != null)
-		{
-			setID(component.getID());
-			getComponent().addEvent(this);
-		}
 	}
 
 	/**
@@ -125,10 +114,6 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	@Override
 	public J setComponent(ComponentHierarchyBase component)
 	{
-		if (component != null)
-		{
-			getRegisteredComponents().add(component.getClass());
-		}
 		return super.setComponent(component);
 	}
 
@@ -144,34 +129,6 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	public J returnVariable(String returnVariable)
 	{
 		getVariables().add(returnVariable);
-		return (J) this;
-	}
-
-	/**
-	 * A set of components that this event can construct/be called from (same thing)
-	 *
-	 * @return
-	 */
-	public Set<Class<? extends ComponentHierarchyBase>> getRegisteredComponents()
-	{
-		if (registeredComponents == null)
-		{
-			setRegisteredComponents(new HashSet<>());
-		}
-		return registeredComponents;
-	}
-
-	/**
-	 * A set of components that this event can construct/be called from (same thing)
-	 *
-	 * @param registeredComponents
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public J setRegisteredComponents(Set<Class<? extends ComponentHierarchyBase>> registeredComponents)
-	{
-		this.registeredComponents = registeredComponents;
 		return (J) this;
 	}
 

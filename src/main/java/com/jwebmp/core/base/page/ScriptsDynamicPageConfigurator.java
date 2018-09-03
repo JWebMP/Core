@@ -36,11 +36,41 @@ public class ScriptsDynamicPageConfigurator
 		implements IPageConfigurator
 {
 	/**
+	 * If this configurator is enabled
+	 */
+	private static boolean enabled = true;
+
+	/**
 	 * Constructor ScriptsDynamicPageConfigurator creates a new ScriptsDynamicPageConfigurator instance.
 	 */
 	public ScriptsDynamicPageConfigurator()
 	{
 		//No config required
+	}
+
+	/**
+	 * Method isEnabled returns the enabled of this AngularAnimatedChangePageConfigurator object.
+	 * <p>
+	 * If this configurator is enabled
+	 *
+	 * @return the enabled (type boolean) of this AngularAnimatedChangePageConfigurator object.
+	 */
+	public static boolean isEnabled()
+	{
+		return ScriptsDynamicPageConfigurator.enabled;
+	}
+
+	/**
+	 * Method setEnabled sets the enabled of this AngularAnimatedChangePageConfigurator object.
+	 * <p>
+	 * If this configurator is enabled
+	 *
+	 * @param mustEnable
+	 * 		the enabled of this AngularAnimatedChangePageConfigurator object.
+	 */
+	public static void setEnabled(boolean mustEnable)
+	{
+		ScriptsDynamicPageConfigurator.enabled = mustEnable;
 	}
 
 	/**
@@ -120,6 +150,7 @@ public class ScriptsDynamicPageConfigurator
 					addable = page.getBody();
 				}
 
+				boolean addedScript = false;
 				if (JQueryPageConfigurator.isRequired())
 				{
 					addable.add(getSiteLoaderScript());
@@ -127,12 +158,16 @@ public class ScriptsDynamicPageConfigurator
 					if (ss != null)
 					{
 						addable.add(ss);
+						addedScript = true;
 					}
 				}
-				Script javaScript = getJavascriptScript(page);
-				if (javaScript != null)
+				if (!addedScript)
 				{
-					addable.add(javaScript);
+					Script javaScript = getJavascriptScript(page);
+					if (javaScript != null)
+					{
+						addable.add(javaScript);
+					}
 				}
 				if (AngularPageConfigurator.isRequired())
 				{
@@ -172,6 +207,12 @@ public class ScriptsDynamicPageConfigurator
 	public Integer sortOrder()
 	{
 		return Integer.MAX_VALUE;
+	}
+
+	@Override
+	public boolean enabled()
+	{
+		return ScriptsDynamicPageConfigurator.enabled;
 	}
 
 	/**
@@ -229,6 +270,8 @@ public class ScriptsDynamicPageConfigurator
 	private Script<?, ?> getSiteLoaderScript()
 	{
 		FileTemplates.getFileTemplate(JWScriptServlet.class, JWScriptServlet.FILE_TEMPLATE_NAME, "siteloader");
+		FileTemplates.getTemplateVariables()
+		             .put("SITEADDRESSINSERT", new StringBuilder(SessionHelper.getServerPath()));
 		StringBuilder jsScript = FileTemplates.renderTemplateScripts(JWScriptServlet.FILE_TEMPLATE_NAME);
 		if (!jsScript.toString()
 		             .trim()

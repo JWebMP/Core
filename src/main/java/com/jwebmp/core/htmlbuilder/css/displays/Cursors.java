@@ -201,7 +201,8 @@ public enum Cursors
 	@Override
 	public String toString()
 	{
-		return name().replaceAll("_", "-");
+		return name().toLowerCase()
+		             .replaceAll("_", "-");
 	}
 
 	@Override

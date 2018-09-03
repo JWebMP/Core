@@ -41,11 +41,11 @@ public class SlideAdapterTest
 
 			}
 		};
+		test.addEvent(aa);
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
 				"<div id=\"test\" ng-slide=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com_jwebmp_core_events_slide_SlideAdapterTest$1');" + "\"></div>",
 				test.toString(0));
 	}
-
 
 }

@@ -41,6 +41,7 @@ public class DropOutAdapterTest
 
 			}
 		};
+		test.addEvent(aa);
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
 				"<div id=\"test\" ng-drop-out=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com_jwebmp_core_events_dropout_DropOutAdapterTest$1');\"></div>",

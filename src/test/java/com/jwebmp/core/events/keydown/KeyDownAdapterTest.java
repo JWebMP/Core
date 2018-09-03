@@ -24,6 +24,7 @@ public class KeyDownAdapterTest
 
 			}
 		};
+		test.addEvent(aa);
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
 				"<div id=\"test\" ng-keydown=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com_jwebmp_core_events_keydown_KeyDownAdapterTest$1');\"></div>",
@@ -44,6 +45,7 @@ public class KeyDownAdapterTest
 
 			}
 		};
+		test.addEvent(aa);
 		System.out.println(test.toString(0));
 
 	}

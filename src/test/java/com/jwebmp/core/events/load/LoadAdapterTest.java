@@ -42,6 +42,7 @@ public class LoadAdapterTest
 
 			}
 		};
+		test.addEvent(aa);
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
 				"<div id=\"test\" ng-load=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com_jwebmp_core_events_load_LoadAdapterTest$1');" + "\"></div>",

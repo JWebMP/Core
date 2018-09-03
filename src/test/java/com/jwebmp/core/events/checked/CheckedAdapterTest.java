@@ -24,6 +24,7 @@ public class CheckedAdapterTest
 
 			}
 		};
+		test.addEvent(aa);
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
 				"<div id=\"test\" ng-checked=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com_jwebmp_core_events_checked_CheckedAdapterTest$1');\"></div>",
@@ -44,6 +45,7 @@ public class CheckedAdapterTest
 
 			}
 		};
+		test.addEvent(aa);
 		System.out.println(test.toString(0));
 
 	}

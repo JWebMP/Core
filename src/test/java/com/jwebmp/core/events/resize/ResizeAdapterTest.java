@@ -41,11 +41,11 @@ public class ResizeAdapterTest
 
 			}
 		};
+		test.addEvent(aa);
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
 				"<div id=\"test\" ng-resize=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com_jwebmp_core_events_resize_ResizeAdapterTest$1')" + ";" + "\"></div>",
 				test.toString(0));
 	}
-
 
 }

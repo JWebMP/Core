@@ -87,14 +87,26 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
 	{
 		if (getComponent() != null)
 		{
-			getComponent().addAttribute(AngularAttributes.ngClick,
-			                            "jwCntrl.jw.isLoading || " + StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
+			String command = //"jwCntrl.jw.isLoading || " +
+					StaticStrings.STRING_ANGULAR_EVENT_START +
+					renderVariables() +
+					StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON;
+
+			if (getComponent().getAttribute(AngularAttributes.ngClick) == null)
+			{
+				getComponent().addAttribute(AngularAttributes.ngClick, command);
+			}
+			else
+			{
+				getComponent().addAttribute(AngularAttributes.ngClick, getComponent().getAttribute(AngularAttributes.ngClick) + command);
+			}
 
 			if (getComponent().getAttribute(AngularAttributes.ngDisabled) == null)
 			{
 				getComponent().addAttribute(AngularAttributes.ngDisabled, "jwCntrl.jw.isLoading");
 			}
-			else
+			else if (!getComponent().getAttribute(AngularAttributes.ngDisabled)
+			                        .equals("jwCntrl.jw.isLoading"))
 			{
 				getComponent().addAttribute(AngularAttributes.ngDisabled, "jwCntrl.jw.isLoading || " + getComponent().getAttribute(AngularAttributes.ngDisabled));
 			}

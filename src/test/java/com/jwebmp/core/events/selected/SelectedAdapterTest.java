@@ -23,6 +23,7 @@ public class SelectedAdapterTest
 
 			}
 		};
+		test.addEvent(aa);
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
 				"<option label=\"optionValue\" value=\"optionValue\" id=\"test\" ng-selected=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com_jwebmp_core_events_selected_SelectedAdapterTest$1');\">optionValue</option>",

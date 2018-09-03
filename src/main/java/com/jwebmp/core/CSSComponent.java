@@ -34,7 +34,7 @@ import javax.validation.constraints.NotNull;
  * @author GedMarc
  * @since 2015/04/24
  */
-public abstract class CSSComponent<J extends CSSComponent<J>>
+public class CSSComponent<J extends CSSComponent<J>>
 		extends Component<CSSComponent, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements GlobalChildren
 {

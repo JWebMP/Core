@@ -41,6 +41,7 @@ public class DeactivateAdapterTest
 
 			}
 		};
+		test.addEvent(aa);
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
 				"<div id=\"test\" ng-de-activate=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com_jwebmp_core_events_deactivate_DeactivateAdapterTest$1');\"></div>",

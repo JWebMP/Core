@@ -41,6 +41,7 @@ public class ResizeStopAdapterTest
 
 			}
 		};
+		test.addEvent(aa);
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
 				"<div id=\"test\" ng-resize-stop=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com_jwebmp_core_events_resizestop_ResizeStopAdapterTest$1');\"></div>",

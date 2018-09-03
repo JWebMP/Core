@@ -723,11 +723,13 @@ public class Page<J extends Page<J>>
 	 */
 	private void configurePage()
 	{
-		Set<IPageConfigurator> sortedConfigurators = GuiceContext.get(IPageConfiguratorsKey);
+		Set<IPageConfigurator> sortedConfigurators = new LinkedHashSet<>(GuiceContext.get(IPageConfiguratorsKey));
+		sortedConfigurators.removeIf(a -> !a.enabled());
 		for (IPageConfigurator sortedConfigurator : sortedConfigurators)
 		{
-			Page.log.log(Level.FINEST, "Loading IPageConfigurator - " + sortedConfigurator.getClass()
-			                                                                              .getSimpleName());
+			Page.log.log(Level.FINEST, "Loading IPageConfigurator - " +
+			                           sortedConfigurator.getClass()
+			                                             .getSimpleName());
 			sortedConfigurator.configure(this);
 		}
 	}

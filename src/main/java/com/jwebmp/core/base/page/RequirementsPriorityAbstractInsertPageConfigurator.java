@@ -38,6 +38,41 @@ import static com.jwebmp.core.utilities.StaticStrings.*;
 abstract class RequirementsPriorityAbstractInsertPageConfigurator
 		implements IPageConfigurator
 {
+	/**
+	 * If this configurator is enabled
+	 */
+	private static boolean enabled = true;
+
+	/**
+	 * Method isEnabled returns the enabled of this AngularAnimatedChangePageConfigurator object.
+	 * <p>
+	 * If this configurator is enabled
+	 *
+	 * @return the enabled (type boolean) of this AngularAnimatedChangePageConfigurator object.
+	 */
+	public static boolean isEnabled()
+	{
+		return RequirementsPriorityAbstractInsertPageConfigurator.enabled;
+	}
+
+	/**
+	 * Method setEnabled sets the enabled of this AngularAnimatedChangePageConfigurator object.
+	 * <p>
+	 * If this configurator is enabled
+	 *
+	 * @param mustEnable
+	 * 		the enabled of this AngularAnimatedChangePageConfigurator object.
+	 */
+	public static void setEnabled(boolean mustEnable)
+	{
+		RequirementsPriorityAbstractInsertPageConfigurator.enabled = mustEnable;
+	}
+
+	@Override
+	public boolean enabled()
+	{
+		return RequirementsPriorityAbstractInsertPageConfigurator.enabled;
+	}
 
 	/**
 	 * Adds all the stuff for a given priority

@@ -48,6 +48,7 @@ public class ClickAdapterTest
 
 			}
 		};
+		test.addEvent(aa);
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
 				"<div id=\"test\" ng-click=\"jwCntrl.jw.isLoading || jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com_jwebmp_core_events_click" +
@@ -69,6 +70,36 @@ public class ClickAdapterTest
 
 			}
 		};
+		test.addEvent(aa);
+		System.out.println(test.toString(0));
+
+	}
+
+	@Test
+	public void testDouble()
+	{
+		Div test = new DivSimple<>();
+		test.setID("test");
+
+		ClickAdapter aa = new ClickAdapter(test)
+		{
+			@Override
+			public void onClick(AjaxCall call, AjaxResponse response)
+			{
+
+			}
+		};
+		ClickAdapter ab = new ClickAdapter(test)
+		{
+			@Override
+			public void onClick(AjaxCall call, AjaxResponse response)
+			{
+
+			}
+		};
+		ab.setID("test4");
+		test.addEvent(aa);
+		test.addEvent(ab);
 		System.out.println(test.toString(0));
 
 	}

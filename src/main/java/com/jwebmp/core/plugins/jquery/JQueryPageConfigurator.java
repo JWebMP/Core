@@ -53,6 +53,10 @@ public class JQueryPageConfigurator
 		implements IPageConfigurator
 {
 	/**
+	 * If this configurator is enabled
+	 */
+	private static boolean enabled = true;
+	/**
 	 * Field required
 	 */
 	private static boolean required;
@@ -71,6 +75,31 @@ public class JQueryPageConfigurator
 	public JQueryPageConfigurator()
 	{
 		//No config required
+	}
+
+	/**
+	 * Method isEnabled returns the enabled of this AngularAnimatedChangePageConfigurator object.
+	 * <p>
+	 * If this configurator is enabled
+	 *
+	 * @return the enabled (type boolean) of this AngularAnimatedChangePageConfigurator object.
+	 */
+	public static boolean isEnabled()
+	{
+		return JQueryPageConfigurator.enabled;
+	}
+
+	/**
+	 * Method setEnabled sets the enabled of this AngularAnimatedChangePageConfigurator object.
+	 * <p>
+	 * If this configurator is enabled
+	 *
+	 * @param mustEnable
+	 * 		the enabled of this AngularAnimatedChangePageConfigurator object.
+	 */
+	public static void setEnabled(boolean mustEnable)
+	{
+		JQueryPageConfigurator.enabled = mustEnable;
 	}
 
 	/**
@@ -245,6 +274,12 @@ public class JQueryPageConfigurator
 	{
 		//Always before angular
 		return Integer.MAX_VALUE - 100;
+	}
+
+	@Override
+	public boolean enabled()
+	{
+		return JQueryPageConfigurator.enabled;
 	}
 
 	/**

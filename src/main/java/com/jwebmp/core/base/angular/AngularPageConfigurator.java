@@ -54,23 +54,24 @@ public class AngularPageConfigurator
 {
 	private static final Logger log = LogFactory.getLog("Angular Page Configurator");
 	/**
+	 * If this configurator is enabled
+	 */
+	private static boolean enabled = true;
+	/**
 	 * If the angular functionality is require or not
 	 */
 	private static boolean required;
 	@SuppressWarnings("unused")
 	private static boolean angularMessagesRequired;
-
 	/**
 	 * All of the angular controller insertions for this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Set<String> controllerInsertions;
-
 	/**
 	 * All the angular variables
 	 */
 	private Set<String> angularVariables;
-
 	/**
 	 * A set of event data event watchers
 	 */
@@ -85,19 +86,45 @@ public class AngularPageConfigurator
 	}
 
 	/**
+	 * Method isEnabled returns the enabled of this AngularAnimatedChangePageConfigurator object.
+	 * <p>
+	 * If this configurator is enabled
+	 *
+	 * @return the enabled (type boolean) of this AngularAnimatedChangePageConfigurator object.
+	 */
+	public static boolean isEnabled()
+	{
+		return AngularPageConfigurator.enabled;
+	}
+
+	/**
+	 * Method setEnabled sets the enabled of this AngularAnimatedChangePageConfigurator object.
+	 * <p>
+	 * If this configurator is enabled
+	 *
+	 * @param mustEnable
+	 * 		the enabled of this AngularAnimatedChangePageConfigurator object.
+	 */
+	public static void setEnabled(boolean mustEnable)
+	{
+		AngularPageConfigurator.enabled = mustEnable;
+	}
+
+	/**
 	 * If the configurator is required
 	 *
 	 * @return If it is required to render
 	 */
 	public static boolean isRequired()
 	{
-		return required;
+		return AngularPageConfigurator.required;
 	}
 
 	/**
 	 * Sets angular as a required component
 	 *
-	 * @param required If it is required to render
+	 * @param required
+	 * 		If it is required to render
 	 */
 	@SuppressWarnings("unchecked")
 	public static void setRequired(boolean required)
@@ -109,18 +136,12 @@ public class AngularPageConfigurator
 		}
 	}
 
-	@Override
-	public Integer sortOrder()
-	{
-		return Integer.MAX_VALUE - 100;
-	}
-
 	@NotNull
 	@Override
 	@SuppressWarnings("unchecked")
 	public Page configure(Page page)
 	{
-		if (required)
+		if (AngularPageConfigurator.required)
 		{
 			page.getBody()
 			    .addJavaScriptReference(AngularReferencePool.Angular1.getJavaScriptReference());
@@ -132,6 +153,18 @@ public class AngularPageConfigurator
 			    .addAttribute(AngularAttributes.ngController, AngularFeature.getControllerName() + " as jwCntrl");
 		}
 		return page;
+	}
+
+	@Override
+	public Integer sortOrder()
+	{
+		return Integer.MAX_VALUE - 100;
+	}
+
+	@Override
+	public boolean enabled()
+	{
+		return AngularPageConfigurator.enabled;
 	}
 
 	/**
@@ -152,7 +185,8 @@ public class AngularPageConfigurator
 	/**
 	 * Sets the list of angular variables
 	 *
-	 * @param angularVariables A list of assigned angular variables
+	 * @param angularVariables
+	 * 		A list of assigned angular variables
 	 */
 	public AngularPageConfigurator setAngularVariables(@NotNull Set<String> angularVariables)
 	{
@@ -163,7 +197,8 @@ public class AngularPageConfigurator
 	/**
 	 * Renders the complete angular javascript with the variables configured
 	 *
-	 * @param page The page to render for
+	 * @param page
+	 * 		The page to render for
 	 *
 	 * @return The string builder object
 	 */
@@ -174,7 +209,7 @@ public class AngularPageConfigurator
 		AngularFeature af = new AngularFeature(page);
 		af.configureTemplateVariables();
 		sb.append(FileTemplates.renderTemplateScripts("jwangular"));
-		log.finest("Rendering the angular script");
+		AngularPageConfigurator.log.finest("Rendering the angular script");
 		return sb;
 	}
 
@@ -196,14 +231,14 @@ public class AngularPageConfigurator
 	/**
 	 * Sets the list of controller insertions
 	 *
-	 * @param controllerInsertions A set of controller insertions
+	 * @param controllerInsertions
+	 * 		A set of controller insertions
 	 */
 	public AngularPageConfigurator setControllerInsertions(@NotNull Set<String> controllerInsertions)
 	{
 		this.controllerInsertions = controllerInsertions;
 		return this;
 	}
-
 
 	/**
 	 * Gets the list of angular watchers
@@ -222,7 +257,8 @@ public class AngularPageConfigurator
 	/**
 	 * Gets the list of angular watchers
 	 *
-	 * @param angularWatchers A set of variable watchers assigned
+	 * @param angularWatchers
+	 * 		A set of variable watchers assigned
 	 */
 	public AngularPageConfigurator setAngularWatchers(@NotNull Set<AngularVariableWatcher> angularWatchers)
 	{

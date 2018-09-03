@@ -41,6 +41,7 @@ public class BeforeStopAdapterTest
 
 			}
 		};
+		test.addEvent(aa);
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
 				"<div id=\"test\" ng-before-stop=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com_jwebmp_core_events_beforestop_BeforeStopAdapterTest$1');\"></div>",
