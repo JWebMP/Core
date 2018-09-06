@@ -34,3 +34,4 @@ com.jwebmp.core.events.start.StartDirective
 com.jwebmp.core.events.stop.StopDirective
 com.jwebmp.core.events.unselected.UnselectedDirective
 com.jwebmp.core.events.update.UpdateDirective
+com.jwebmp.core.events.click.ClickDisabledDirective

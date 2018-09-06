@@ -196,6 +196,10 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 	@SuppressWarnings("unchecked")
 	public J addDto(@NotNull String name, @NotNull Object dataObject)
 	{
+		if (dataObject == null)
+		{
+			dataObject = new JavaScriptPart<>();
+		}
 		if (dataObject instanceof JavaScriptPart)
 		{
 			JavaScriptPart.class.cast(dataObject)

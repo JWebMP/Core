@@ -41,7 +41,7 @@ public class SpinAdapterTest
 
 			}
 		};
-		test.addEvent(aa);
+		test.addEvent(aa.setID("test"));
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
 				"<div id=\"test\" ng-spin=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com_jwebmp_core_events_spin_SpinAdapterTest$1');" + "\"></div>",

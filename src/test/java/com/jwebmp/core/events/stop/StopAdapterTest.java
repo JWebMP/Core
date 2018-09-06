@@ -41,7 +41,7 @@ public class StopAdapterTest
 
 			}
 		};
-		test.addEvent(aa);
+		test.addEvent(aa.setID("test"));
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
 				"<div id=\"test\" ng-stop=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com_jwebmp_core_events_stop_StopAdapterTest$1');" + "\"></div>",

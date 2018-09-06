@@ -41,7 +41,7 @@ public class BlurAdapterTest
 
 			}
 		};
-		test.addEvent(aa);
+		test.addEvent(aa.setID("test"));
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
 				"<div id=\"test\" ng-blur=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com_jwebmp_core_events_blur_BlurAdapterTest$1');" + "\"></div>",
@@ -62,7 +62,7 @@ public class BlurAdapterTest
 
 			}
 		};
-		test.addEvent(aa);
+		test.addEvent(aa.setID("test"));
 		System.out.println(test.toString(0));
 
 	}

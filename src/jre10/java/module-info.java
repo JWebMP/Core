@@ -3,6 +3,7 @@ import com.jwebmp.core.base.angular.controllers.JWAngularController;
 import com.jwebmp.core.base.angular.modules.AngularMessagesModule;
 import com.jwebmp.core.base.angular.services.*;
 import com.jwebmp.core.base.servlets.intercepters.LocalStorageIntercepter;
+import com.jwebmp.core.events.click.ClickDisabledDirective;
 import com.jwebmp.core.services.*;
 import com.jwebmp.guicedinjection.interfaces.IGuiceDefaultBinder;
 import com.jwebmp.guicedservlets.services.IGuiceSiteBinder;
@@ -228,7 +229,8 @@ module com.jwebmp.core {
 			                           com.jwebmp.core.events.start.StartDirective,
 			                           com.jwebmp.core.events.stop.StopDirective,
 			                           com.jwebmp.core.events.unselected.UnselectedDirective,
-			                           com.jwebmp.core.events.update.UpdateDirective;
+			                           com.jwebmp.core.events.update.UpdateDirective,
+			                           ClickDisabledDirective;
 
 	provides IRegularExpressions with com.jwebmp.core.utilities.regex.TextRegExPatterns,
 			                             com.jwebmp.core.utilities.regex.EmailAddressRegExPatterns,

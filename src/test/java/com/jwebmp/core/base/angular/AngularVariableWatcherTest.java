@@ -18,6 +18,7 @@
 package com.jwebmp.core.base.angular;
 
 import com.jwebmp.BaseTestClass;
+import com.jwebmp.core.Page;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,12 @@ public class AngularVariableWatcherTest
 	@Test
 	public void test()
 	{
-		System.out.println(new AngularVariableWatcher("watchVariable", "variable.name", AngularChangeEventClass.class));
+		new Page().getAngular()
+		          .getAngularWatchers()
+		          .add(
+				          new AngularVariableWatcher("watchVariable", "variable.name", AngularChangeEventClass.class)
+		              );
+		System.out.println();
 	}
 
 	public class AngularChangeEventClass

@@ -183,6 +183,7 @@ JW_APP_NAME.controller('JW_APP_CONTROLLER', function ($scope
                     jw.actions.processResponse(result, $scope, $parse, $timeout, $compile, $rootScope);
                 } catch (e) {
                     console.log("Error in processing response : " + result);
+                    console.log(e);
                 }
                 try {
                     jw.isLoading = false;

@@ -26,6 +26,8 @@ import com.jwebmp.core.utilities.StaticStrings;
 
 import javax.validation.constraints.NotNull;
 
+import static com.jwebmp.core.utilities.StaticStrings.*;
+
 /**
  * Default angular messages div
  * <p>
@@ -33,6 +35,7 @@ import javax.validation.constraints.NotNull;
  *
  * @param <J>
  */
+@SuppressWarnings("MissingClassJavaDoc")
 public class AngularInputMessages<J extends AngularInputMessages<J>>
 		extends DivSimple<J>
 {
@@ -55,10 +58,42 @@ public class AngularInputMessages<J extends AngularInputMessages<J>>
 	/**
 	 * Adds a message for the given error form
 	 *
-	 * @param forError
 	 * @param message
+	 * 		The message to display
+	 * @param inline
+	 * 		If must be a div or span, in line or next line
 	 *
-	 * @return
+	 * @return J
+	 */
+	@SuppressWarnings({"unchecked", "WeakerAccess"})
+	@NotNull
+	public J addMessageDefault(String message, boolean inline)
+	{
+		ComponentHierarchyBase comp;
+		if (inline)
+		{
+			comp = new Span();
+		}
+		else
+		{
+			comp = new Div();
+		}
+		comp.setRenderIDAttribute(false)
+		    .addAttribute("ng-message-default", STRING_EMPTY);
+		comp.setText(message);
+		add(comp);
+		return (J) this;
+	}
+
+	/**
+	 * Adds a message for the given error form
+	 *
+	 * @param forError
+	 * 		The error type the message is for
+	 * @param message
+	 * 		The message or raw html to display
+	 *
+	 * @return J
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull

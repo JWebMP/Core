@@ -41,7 +41,7 @@ public class OpenAdapterTest
 
 			}
 		};
-		test.addEvent(aa);
+		test.addEvent(aa.setID("test"));
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
 				"<div id=\"test\" ng-open=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com_jwebmp_core_events_open_OpenAdapterTest$1');" + "\"></div>",

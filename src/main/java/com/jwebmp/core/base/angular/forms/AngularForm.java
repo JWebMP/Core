@@ -27,12 +27,31 @@ import com.jwebmp.core.utilities.StaticStrings;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * Attaches angular form control to a form tag for validation and constraints
+ *
+ * @param <J>
+ * 		Always this object type
+ */
+@SuppressWarnings({"MissingClassJavaDoc", "UnusedReturnValue", "WeakerAccess", "unused"})
 public class AngularForm<J extends AngularForm<J>>
 		extends Form<J>
 {
+	/**
+	 * The class to be used during success operations
+	 */
 	private String successClass;
+	/**
+	 * The class to be used for feedback success operations
+	 */
 	private String successFeedbackClass;
+	/**
+	 * The class to be used for the error class
+	 */
 	private String errorClass;
+	/**
+	 * The class for the error feedback text
+	 */
 	private String errorFeedbackClass;
 
 	/**
@@ -48,7 +67,7 @@ public class AngularForm<J extends AngularForm<J>>
 	/**
 	 * Gets the success feedback classes
 	 *
-	 * @return
+	 * @return the allocated success feedback
 	 */
 	public String getSuccessFeedbackClass()
 	{
@@ -59,8 +78,9 @@ public class AngularForm<J extends AngularForm<J>>
 	 * Sets the success feedback callback class
 	 *
 	 * @param successFeedbackClass
+	 * 		the new class to apply
 	 *
-	 * @return
+	 * @return this object
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
@@ -73,7 +93,7 @@ public class AngularForm<J extends AngularForm<J>>
 	/**
 	 * Gets the error feedback class
 	 *
-	 * @return
+	 * @return The error feedback class
 	 */
 	public String getErrorFeedbackClass()
 	{
@@ -84,8 +104,9 @@ public class AngularForm<J extends AngularForm<J>>
 	 * Sets the error feedback classes
 	 *
 	 * @param errorFeedbackClass
+	 * 		The error feedback class
 	 *
-	 * @return
+	 * @return Always this object
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
@@ -98,7 +119,7 @@ public class AngularForm<J extends AngularForm<J>>
 	/**
 	 * Protected method to call when all inputs are available to apply the classes
 	 *
-	 * @return
+	 * @return Always this object
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
@@ -119,8 +140,9 @@ public class AngularForm<J extends AngularForm<J>>
 	 * Builds the validation for the input
 	 *
 	 * @param input
+	 * 		The input to build a validation for
 	 *
-	 * @return
+	 * @return The generated validation class
 	 */
 	@NotNull
 	public String buildValidationClass(@NotNull Input input)
@@ -132,8 +154,9 @@ public class AngularForm<J extends AngularForm<J>>
 	 * Builds the validation for the input
 	 *
 	 * @param input
+	 * 		The input to build a validatoin for
 	 *
-	 * @return
+	 * @return Any prepending classes to use
 	 */
 	@NotNull
 	public String buildValidationClass(@NotNull Input input, String prependClass)
@@ -156,13 +179,23 @@ public class AngularForm<J extends AngularForm<J>>
 	/**
 	 * Returns the error class for validation
 	 *
-	 * @return
+	 * @return The error class
 	 */
 	public String getErrorClass()
 	{
 		return errorClass;
 	}
 
+	/**
+	 * Method setErrorClass sets the errorClass of this AngularForm object.
+	 * <p>
+	 * The class to be used for the error class
+	 *
+	 * @param errorClass
+	 * 		the errorClass of this AngularForm object.
+	 *
+	 * @return J
+	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
 	public J setErrorClass(String errorClass)
@@ -174,7 +207,7 @@ public class AngularForm<J extends AngularForm<J>>
 	/**
 	 * Gets the success class to use for validation
 	 *
-	 * @return
+	 * @return The success class
 	 */
 	public String getSuccessClass()
 	{
@@ -185,8 +218,9 @@ public class AngularForm<J extends AngularForm<J>>
 	 * Sets the success class to use for validation
 	 *
 	 * @param successClass
+	 * 		The success class to use
 	 *
-	 * @return
+	 * @return J
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
@@ -196,12 +230,27 @@ public class AngularForm<J extends AngularForm<J>>
 		return (J) this;
 	}
 
+	/**
+	 * Method hashCode ...
+	 *
+	 * @return int
+	 */
+	@SuppressWarnings("InconsistentJavaDoc")
 	@Override
 	public int hashCode()
 	{
 		return super.hashCode();
 	}
 
+	/**
+	 * Method equals ...
+	 *
+	 * @param o
+	 * 		of type Object
+	 *
+	 * @return boolean
+	 */
+	@SuppressWarnings("InconsistentJavaDoc")
 	@Override
 	public boolean equals(Object o)
 	{

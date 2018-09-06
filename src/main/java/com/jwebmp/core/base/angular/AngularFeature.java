@@ -58,6 +58,7 @@ public class AngularFeature
 	@SuppressWarnings("unused")
 	private static final java.util.logging.Logger log = LogFactory.getInstance()
 	                                                              .getLogger("AngularFeature");
+
 	/**
 	 * The name of this angular application
 	 */
@@ -82,7 +83,8 @@ public class AngularFeature
 	private final Page<?> page;
 
 	/**
-	 * Adds on the Angular ComponentFeatureBase to the application to allow full data binding
+	 * Adds on th
+	 * processing responsee Angular ComponentFeatureBase to the application to allow full data binding
 	 *
 	 * @param component
 	 * 		The page to be used
@@ -147,13 +149,11 @@ public class AngularFeature
 	@Override
 	public void preConfigure()
 	{
-		if (!isConfigured())
-		{
-			getPage().getBody()
-			         .addAttribute(AngularAttributes.ngApp, AngularFeature.getAppName());
-			getPage().getBody()
-			         .addAttribute(AngularAttributes.ngController, AngularFeature.controllerName + " as jwCntrl");
-		}
+		getPage().getBody()
+		         .addAttribute(AngularAttributes.ngApp, AngularFeature.getAppName());
+		getPage().getBody()
+		         .addAttribute(AngularAttributes.ngController, AngularFeature.controllerName + " as jwCntrl");
+
 		super.preConfigure();
 	}
 

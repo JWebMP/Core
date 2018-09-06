@@ -48,10 +48,10 @@ public class ClickAdapterTest
 
 			}
 		};
-		test.addEvent(aa);
+		test.addEvent(aa.setID("test"));
 		System.out.println(test.toString(0));
 		Assertions.assertEquals(
-				"<div id=\"test\" ng-click=\"jwCntrl.jw.isLoading || jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com_jwebmp_core_events_click" +
+				"<div id=\"test\" ng-click=\"jwCntrl.perform($event,['jwCntrl.jw.localstorage'],'test','com_jwebmp_core_events_click" +
 				"_ClickAdapterTest$1');\" ng-disabled=\"jwCntrl.jw.isLoading\"></div>",
 				test.toString(0));
 	}
@@ -70,7 +70,7 @@ public class ClickAdapterTest
 
 			}
 		};
-		test.addEvent(aa);
+		test.addEvent(aa.setID("test"));
 		System.out.println(test.toString(0));
 
 	}
@@ -98,7 +98,7 @@ public class ClickAdapterTest
 			}
 		};
 		ab.setID("test4");
-		test.addEvent(aa);
+		test.addEvent(aa.setID("test"));
 		test.addEvent(ab);
 		System.out.println(test.toString(0));
 
