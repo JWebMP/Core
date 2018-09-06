@@ -231,6 +231,9 @@ public class JWebMPSiteBinder
 		      .toProvider(new PageProvider())
 		      .in(RequestScoped.class);
 
+		module.bind(ObjectMapper.class)
+		      .toProvider(this::getJsonMapper)
+		      .in(Singleton.class);
 		JWebMPSiteBinder.log.fine("Bound ObjectMapper.class @Named(JSON)");
 		module.bind(ObjectMapper.class)
 		      .annotatedWith(Names.named("JSON"))
@@ -319,6 +322,7 @@ public class JWebMPSiteBinder
 		jsonObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
 		jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
 		jsonObjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		jsonObjectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
 		jsonObjectMapper.registerModule(new ParameterNamesModule());
 		jsonObjectMapper.registerModule(new Jdk8Module());
 		jsonObjectMapper.registerModule(new JavaTimeModule());
