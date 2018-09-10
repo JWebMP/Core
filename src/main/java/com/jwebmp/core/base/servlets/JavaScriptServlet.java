@@ -21,12 +21,12 @@ import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
+import com.jwebmp.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.AjaxCallIntercepter;
 
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.Charset;
 
-import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
 import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 
 /**
@@ -55,7 +55,7 @@ public class JavaScriptServlet
 	public void perform()
 	{
 		Page page = GuiceContext.get(Page.class);
-		HttpServletRequest request = GuiceContext.get(HttpServletRequestKey);
+		HttpServletRequest request = GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
 		readBrowserInformation(request);
 
 		GuiceContext.get(AjaxCallInterceptorKey)

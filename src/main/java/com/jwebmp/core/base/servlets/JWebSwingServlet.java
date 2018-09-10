@@ -19,13 +19,12 @@ package com.jwebmp.core.base.servlets;
 import com.google.inject.Singleton;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
+import com.jwebmp.guicedservlets.GuicedServletKeys;
 import com.jwebmp.logger.LogFactory;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
 
 /**
  * The base Servlet for the JWebSwing environment. Constructs each page on call
@@ -63,7 +62,7 @@ public class JWebSwingServlet
 	@Override
 	public void perform()
 	{
-		HttpServletResponse response = GuiceContext.get(HttpServletResponseKey);
+		HttpServletResponse response = GuiceContext.get(GuicedServletKeys.getHttpServletResponseKey());
 		sendPage(response);
 	}
 

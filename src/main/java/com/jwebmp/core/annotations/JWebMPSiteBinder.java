@@ -37,6 +37,7 @@ import com.jwebmp.core.services.IPage;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.guicedservlets.GuiceSiteInjectorModule;
+import com.jwebmp.guicedservlets.GuicedServletKeys;
 import com.jwebmp.guicedservlets.services.IGuiceSiteBinder;
 import com.jwebmp.logger.LogFactory;
 import net.sf.uadetector.ReadableUserAgent;
@@ -46,8 +47,6 @@ import net.sf.uadetector.service.UADetectorServiceFactory;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.logging.Level;
-
-import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
 
 /**
  * @author GedMarc
@@ -184,7 +183,7 @@ public class JWebMPSiteBinder
 		module.bind(ReadableUserAgent.class)
 		      .toProvider(() ->
 		                  {
-			                  HttpServletRequest request = GuiceContext.get(HttpServletRequestKey);
+			                  HttpServletRequest request = GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
 			                  String headerInformation = request.getHeader("User-Agent");
 			                  return GuiceContext.get(UserAgentStringParser.class)
 			                                     .parse(headerInformation);

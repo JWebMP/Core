@@ -20,12 +20,11 @@ import com.google.inject.Singleton;
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
+import com.jwebmp.guicedservlets.GuicedServletKeys;
 import com.jwebmp.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.logging.Logger;
-
-import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
 
 /**
  * @author GedMarc
@@ -55,7 +54,7 @@ public class JWScriptServlet
 	@Override
 	public void perform()
 	{
-		HttpServletRequest request = GuiceContext.get(HttpServletRequestKey);
+		HttpServletRequest request = GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
 		FileTemplates.getFileTemplate(JWScriptServlet.class, JWScriptServlet.FILE_TEMPLATE_NAME, "siteloader");
 		FileTemplates.getTemplateVariables()
 		             .put("SITEADDRESSINSERT", new StringBuilder(request.getRequestURL()

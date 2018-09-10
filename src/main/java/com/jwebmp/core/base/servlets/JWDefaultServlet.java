@@ -29,6 +29,7 @@ import com.jwebmp.core.services.IErrorPage;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.core.utilities.TextUtilities;
 import com.jwebmp.guicedinjection.GuiceContext;
+import com.jwebmp.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.SiteCallIntercepter;
 import com.jwebmp.logger.LogFactory;
 import net.sf.uadetector.ReadableUserAgent;
@@ -48,7 +49,6 @@ import java.util.ServiceLoader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
 import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 
 /**
@@ -350,7 +350,7 @@ public abstract class JWDefaultServlet
 	protected void readRequestVariables(HttpServletRequest request) throws MissingComponentException
 	{
 		Page currentPage = getPageFromGuice();
-		HttpSession session = GuiceContext.get(HttpSessionKey);
+		HttpSession session = GuiceContext.get(GuicedServletKeys.getHttpSessionKey());
 		if (currentPage == null)
 		{
 			throw new MissingComponentException("[No Page]-[getPage() returning null in servlet class]");

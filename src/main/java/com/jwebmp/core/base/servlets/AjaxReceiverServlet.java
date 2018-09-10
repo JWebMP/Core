@@ -25,6 +25,7 @@ import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.core.utilities.TextUtilities;
 import com.jwebmp.guicedinjection.GuiceContext;
+import com.jwebmp.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.AjaxCallIntercepter;
 import com.jwebmp.logger.LogFactory;
 
@@ -35,7 +36,6 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
 import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 
 /**
@@ -62,7 +62,7 @@ public class AjaxReceiverServlet
 	public void perform()
 	{
 		StringBuilder output = new StringBuilder();
-		HttpServletRequest request = GuiceContext.get(HttpServletRequestKey);
+		HttpServletRequest request = GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
 		try
 		{
 			AjaxCall ajaxCallIncoming = (AjaxCall) new JavaScriptPart().From(request.getInputStream(), AjaxCall.class);

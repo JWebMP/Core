@@ -23,13 +23,13 @@ import com.jwebmp.core.Page;
 import com.jwebmp.core.base.servlets.interfaces.IDataComponent;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
+import com.jwebmp.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.DataCallIntercepter;
 import com.jwebmp.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.logging.Logger;
 
-import static com.jwebmp.guicedservlets.GuicedServletKeys.*;
 import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 
 /**
@@ -80,7 +80,7 @@ public class DataServlet
 	@SuppressWarnings("unchecked")
 	public void perform()
 	{
-		HttpServletRequest request = GuiceContext.get(HttpServletRequestKey);
+		HttpServletRequest request = GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
 		String componentID = request.getParameter("component");
 		StringBuilder responseString = new StringBuilder();
 		try
