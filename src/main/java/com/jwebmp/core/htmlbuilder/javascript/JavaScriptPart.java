@@ -45,7 +45,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.*;
  * @author mmagon
  * @since 2014/07/09
  */
-@SuppressWarnings("MissingClassJavaDoc")
+@SuppressWarnings({"MissingClassJavaDoc", "unused"})
 @JsonAutoDetect(fieldVisibility = ANY,
 		getterVisibility = NONE,
 		setterVisibility = NONE)
@@ -54,14 +54,18 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.*;
 public class JavaScriptPart<J extends JavaScriptPart<J>>
 		implements Serializable
 {
-
+	/**
+	 * The logger
+	 */
 	private static final Logger log = LogFactory.getInstance()
 	                                            .getLogger("JavaScriptPart");
 	/**
 	 * Version 2
 	 */
 	private static final long serialVersionUID = 2L;
-
+	/**
+	 * A reference id that can be returned with a given variable
+	 */
 	@JsonProperty(value = "$jwid")
 	private String referenceId;
 	/**
