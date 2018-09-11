@@ -18,9 +18,11 @@ package com.jwebmp.core.base.ajax;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
 import java.io.IOException;
@@ -206,6 +208,7 @@ public class AngularJsonVariable
 	{
 		try
 		{
+
 			return new JavaScriptPart<>().From(getVariableText(), classType);
 		}
 		catch (Exception e)
@@ -233,6 +236,30 @@ public class AngularJsonVariable
 	public void setVariableText(String variableText)
 	{
 		this.variableText = variableText;
+	}
+
+	/**
+	 * Returns the variable object in the format requested
+	 *
+	 * @param <T>
+	 * 		Generic type of JavaScript part
+	 *
+	 * @return
+	 */
+	public <T> T update(T object)
+	{
+		try
+		{
+			ObjectMapper om = GuiceContext.getInstance(ObjectMapper.class);
+			om.readerForUpdating(object)
+			  .readValue(getVariableText());
+			return object;
+		}
+		catch (Exception e)
+		{
+			log.log(Level.WARNING, "Error in decoding Ajax Response Variable", e);
+			return null;
+		}
 	}
 
 }

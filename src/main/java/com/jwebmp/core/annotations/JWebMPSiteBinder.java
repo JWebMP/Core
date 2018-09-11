@@ -248,6 +248,11 @@ public class JWebMPSiteBinder
 		      .annotatedWith(Names.named("JSFunction"))
 		      .toProvider(this::getJsonMapper)
 		      .in(Singleton.class);
+		JWebMPSiteBinder.log.fine("Bound ObjectMapper.class @Named(CSS)");
+		module.bind(ObjectMapper.class)
+		      .annotatedWith(Names.named("CSS"))
+		      .toProvider(this::getCSSMapper)
+		      .in(Singleton.class);
 
 		for (IPage page : PageProvider.getPages())
 		{
@@ -327,4 +332,32 @@ public class JWebMPSiteBinder
 		jsonObjectMapper.registerModule(new JavaTimeModule());
 	}
 
+	/**
+	 * Method getJsonMapper returns the jsonMapper of this JWebMPSiteBinder object.
+	 *
+	 * @return the jsonMapper (type ObjectMapper) of this JWebMPSiteBinder object.
+	 */
+	private ObjectMapper getCSSMapper()
+	{
+		ObjectMapper jsonObjectMapper = new ObjectMapper();
+		configureObjectMapperForCSS(jsonObjectMapper);
+		return jsonObjectMapper;
+	}
+
+	/**
+	 * Configures json with the given properties
+	 *
+	 * @param jsonObjectMapper
+	 */
+	private void configureObjectMapperForCSS(ObjectMapper jsonObjectMapper)
+	{
+		jsonObjectMapper.disable(SerializationFeature.INDENT_OUTPUT);
+		jsonObjectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
+		jsonObjectMapper.disable(JsonGenerator.Feature.QUOTE_FIELD_NAMES);
+		jsonObjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		jsonObjectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+		jsonObjectMapper.registerModule(new ParameterNamesModule());
+		jsonObjectMapper.registerModule(new Jdk8Module());
+		jsonObjectMapper.registerModule(new JavaTimeModule());
+	}
 }

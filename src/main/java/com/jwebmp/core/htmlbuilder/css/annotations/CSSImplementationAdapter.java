@@ -19,6 +19,7 @@ package com.jwebmp.core.htmlbuilder.css.annotations;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.jwebmp.core.htmlbuilder.css.CSSPropertiesFactory;
 import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
@@ -133,6 +134,8 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 		try
 		{
 			return GuiceContext.getInstance(ObjectMapper.class)
+			                   .writer()
+			                   .withoutFeatures(SerializationFeature.INDENT_OUTPUT)
 			                   .writeValueAsString(this);
 		}
 		catch (Exception e)

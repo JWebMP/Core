@@ -64,10 +64,12 @@ public class CSSImplTest
 	public void testBackground()
 	{
 		Page p = new Page();
+		p.setTiny(true);
 		CSSImpl imp = new CSSImpl();
 		imp.getBackground()
 		   .setBackgroundColor$(ColourNames.DarkGoldenRod);
 		System.out.println("CSS Map : " + imp.getMap());
+
 		imp = new CSSImpl();
 		imp.getBackground()
 		   .setBackgroundColor$(ColourNames.DarkGoldenRod);
