@@ -28,6 +28,8 @@ import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.logging.Level;
 
+import static com.fasterxml.jackson.databind.SerializationFeature.*;
+
 /**
  * @param <A>
  * 		The annotation type
@@ -136,6 +138,7 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 			return GuiceContext.getInstance(ObjectMapper.class)
 			                   .writer()
 			                   .withoutFeatures(SerializationFeature.INDENT_OUTPUT)
+			                   .withoutFeatures(WRITE_ENUMS_USING_TO_STRING)
 			                   .writeValueAsString(this);
 		}
 		catch (Exception e)
