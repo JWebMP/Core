@@ -126,10 +126,18 @@ public class SessionHelper
 	 */
 	public static String getServletUrl()
 	{
-		HttpServletRequest request = GuiceContext.inject()
-		                                         .getInstance(HttpServletRequest.class);
-		String buff = request.getServletPath();
-		return buff.isEmpty() ? StaticStrings.STRING_FORWARD_SLASH : buff;
+		try
+		{
+			HttpServletRequest request = GuiceContext.inject()
+			                                         .getInstance(HttpServletRequest.class);
+			String buff = request.getServletPath();
+			return buff.isEmpty() ? StaticStrings.STRING_FORWARD_SLASH : buff;
+		}
+		catch (Throwable T)
+		{
+			log.log(Level.WARNING, "Unable to get request, returning default /", T);
+			return "/";
+		}
 	}
 
 	/**
