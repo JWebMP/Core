@@ -19,7 +19,8 @@ package com.jwebmp.core.htmlbuilder.javascript;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.ObjectReader;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.common.base.CaseFormat;
 import com.google.inject.Key;
 import com.google.inject.name.Names;
@@ -93,11 +94,9 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	{
 		try
 		{
-			return getJsonObjectMapper()
-					       .writer()
-					       .withoutFeatures(SerializationFeature.FAIL_ON_UNWRAPPED_TYPE_IDENTIFIERS)
-					       .writeValueAsString(o)
-					       .replaceAll("\r\n", "\n");
+			ObjectWriter writer = GuiceContext.get(Key.get(ObjectWriter.class, Names.named("JSON")));
+			return writer.writeValueAsString(o)
+			             .replaceAll("\r\n", "\n");
 		}
 		catch (JsonProcessingException ex)
 		{
@@ -116,19 +115,9 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 *
 	 * @return
 	 */
-	public ObjectMapper getJsonObjectMapper()
+	public ObjectWriter getJsonObjectMapper()
 	{
-		return GuiceContext.getInstance(Key.get(ObjectMapper.class, Names.named("JSON")));
-	}
-
-	/**
-	 * Returns the raw function renderer
-	 *
-	 * @return
-	 */
-	public ObjectMapper getFunctionObjectMapper()
-	{
-		return GuiceContext.getInstance(Key.get(ObjectMapper.class, Names.named("JSFUNCTION")));
+		return GuiceContext.getInstance(Key.get(ObjectWriter.class, Names.named("JSON")));
 	}
 
 	/**
@@ -145,7 +134,28 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public <T> T From(InputStream file, Class<T> clazz) throws IOException
 	{
-		return getJsonObjectMapper().readValue(file, clazz);
+		return getJsonObjectReader().forType(clazz)
+		                            .readValue(file);
+	}
+
+	/**
+	 * Returns the raw function renderer
+	 *
+	 * @return
+	 */
+	public ObjectMapper getFunctionObjectMapper()
+	{
+		return GuiceContext.getInstance(Key.get(ObjectMapper.class, Names.named("JSFUNCTION")));
+	}
+
+	/**
+	 * Returns the JSON Renderer
+	 *
+	 * @return
+	 */
+	public ObjectReader getJsonObjectReader()
+	{
+		return GuiceContext.getInstance(Key.get(ObjectReader.class, Names.named("JSON")));
 	}
 
 	/**
@@ -161,7 +171,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public <T> T From(File file, Class<T> clazz) throws IOException
 	{
-		return getJsonObjectMapper().readValue(file, clazz);
+		return getJsonObjectReader().forType(clazz).readValue(file);
 	}
 
 	/**
@@ -177,7 +187,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public <T> T From(Reader file, Class<T> clazz) throws IOException
 	{
-		return getJsonObjectMapper().readValue(file, clazz);
+		return getJsonObjectReader().forType(clazz).readValue(file);
 	}
 
 	/**
@@ -193,7 +203,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public <T> T From(String content, Class<T> clazz) throws IOException
 	{
-		return getJsonObjectMapper().readValue(content, clazz);
+		return getJsonObjectReader().forType(clazz).readValue(content);
 	}
 
 	/**
@@ -209,7 +219,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public <T> T From(URL content, Class<T> clazz) throws IOException
 	{
-		return getJsonObjectMapper().readValue(content, clazz);
+		return getJsonObjectReader().forType(clazz).readValue(content);
 	}
 
 	/**
@@ -226,7 +236,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public <T> List<T> FromToList(InputStream file, Class<T> clazz) throws IOException
 	{
-		T list = getJsonObjectMapper().readValue(file, clazz);
+		T list = getJsonObjectReader().forType(clazz).readValue(file);
 		ArrayList<T> lists = new ArrayList<>();
 		lists.addAll(Arrays.asList((T[]) list));
 		return lists;
@@ -245,7 +255,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public <T> List<T> FromToList(URL content, Class<T> clazz) throws IOException
 	{
-		T list = getJsonObjectMapper().readValue(content, clazz);
+		T list = getJsonObjectReader().forType(clazz).readValue(content);
 		ArrayList<T> lists = new ArrayList<>();
 		lists.addAll(Arrays.asList((T[]) list));
 		return lists;
@@ -264,7 +274,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public <T> List<T> FromToList(File file, Class<T> clazz) throws IOException
 	{
-		T list = getJsonObjectMapper().readValue(file, clazz);
+		T list = getJsonObjectReader().forType(clazz).readValue(file);
 		ArrayList<T> lists = new ArrayList<>();
 		lists.addAll(Arrays.asList((T[]) list));
 		return lists;
@@ -283,7 +293,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public <T> List<T> FromToList(Reader file, Class<T> clazz) throws IOException
 	{
-		T list = getJsonObjectMapper().readValue(file, clazz);
+		T list = getJsonObjectReader().forType(clazz).readValue(file);
 		ArrayList<T> lists = new ArrayList<>();
 		lists.addAll(Arrays.asList((T[]) list));
 		return lists;
@@ -302,7 +312,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public <T> List<T> FromToList(String content, Class<T> clazz) throws IOException
 	{
-		T list = getJsonObjectMapper().readValue(content, clazz);
+		T list = getJsonObjectReader().forType(clazz).readValue(content);
 		ArrayList<T> lists = new ArrayList<>();
 		lists.addAll(Arrays.asList((T[]) list));
 		return lists;
@@ -416,16 +426,29 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 *
 	 * @return
 	 */
-	public ObjectMapper getJavascriptObjectMapper()
+	public ObjectWriter getJavascriptObjectMapper()
 	{
 		try
 		{
-			return GuiceContext.getInstance(Key.get(ObjectMapper.class, Names.named("JS")));
+			return GuiceContext.getInstance(Key.get(ObjectWriter.class, Names.named("JSON")));
 		}
 		catch (NullPointerException e)
 		{
 			JavaScriptPart.log.log(Level.SEVERE, "Cant find javascript object mapper, returning default", e);
-			return new ObjectMapper();
+			return null;
+		}
+	}
+
+	public ObjectReader getJavascriptObjectReader()
+	{
+		try
+		{
+			return GuiceContext.getInstance(Key.get(ObjectReader.class, Names.named("JSON")));
+		}
+		catch (NullPointerException e)
+		{
+			JavaScriptPart.log.log(Level.SEVERE, "Cant find javascript object mapper, returning default", e);
+			return null;
 		}
 	}
 
