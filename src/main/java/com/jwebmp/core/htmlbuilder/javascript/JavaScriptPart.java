@@ -529,12 +529,16 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public String toString(@SuppressWarnings("unused") boolean tiny)
 	{
-		String output = toString();
-		output = output.replace("\n", "");
-		output = output.replace("\r", "");
-		output = output.replace("\t", "");
-		output = output.replace("  ", "");
-		output = output.replace(" : ", ":");
+		String output = null;
+		try
+		{
+			output = GuiceContext.get(Key.get(ObjectWriter.class, Names.named("JSONTiny")))
+			                     .writeValueAsString(this);
+		}
+		catch (JsonProcessingException e)
+		{
+			JavaScriptPart.log.log(Level.WARNING, "Cant render tiny", e);
+		}
 		return output;
 	}
 

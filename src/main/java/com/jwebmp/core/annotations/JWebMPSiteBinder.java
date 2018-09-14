@@ -239,6 +239,11 @@ public class JWebMPSiteBinder
 		      .toProvider(this::getJsonMapper);
 		JWebMPSiteBinder.log.fine("Bound ObjectWriter.class @Named(JSON)");
 
+		module.bind(ObjectWriter.class)
+		      .annotatedWith(Names.named("JSONTiny"))
+		      .toProvider(this::getJsonMapperTiny);
+		JWebMPSiteBinder.log.fine("Bound ObjectWriter.class @Named(JSONTiny)");
+
 		module.bind(ObjectReader.class)
 		      .annotatedWith(Names.named("JSON"))
 		      .toProvider(this::getJsonReader);
@@ -312,6 +317,19 @@ public class JWebMPSiteBinder
 	{
 		ObjectWriter ow = GuiceContext.get(ObjectMapper.class)
 		                              .writerWithDefaultPrettyPrinter();
+		configureObjectMapperForJSON(ow);
+		return ow;
+	}
+
+	/**
+	 * Method getJsonMapper returns the jsonMapper of this JWebMPSiteBinder object.
+	 *
+	 * @return the jsonMapper (type ObjectMapper) of this JWebMPSiteBinder object.
+	 */
+	private ObjectWriter getJsonMapperTiny()
+	{
+		ObjectWriter ow = GuiceContext.get(ObjectMapper.class)
+		                              .writer();
 		configureObjectMapperForJSON(ow);
 		return ow;
 	}
