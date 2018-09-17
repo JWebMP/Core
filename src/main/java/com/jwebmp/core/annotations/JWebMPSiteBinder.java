@@ -62,10 +62,13 @@ public class JWebMPSiteBinder
 	/**
 	 * Field localStorageTypeLiteral
 	 */
+	@SuppressWarnings("Convert2Diamond")
 	private static TypeLiteral<Map<String, String>> localStorageTypeLiteral = new TypeLiteral<Map<String, String>>() {};
+
 	/**
 	 * Field sessionStorageTypeLiteral
 	 */
+	@SuppressWarnings("Convert2Diamond")
 	private static TypeLiteral<Map<String, String>> sessionStorageTypeLiteral = new TypeLiteral<Map<String, String>>() {};
 
 	/**
@@ -165,7 +168,6 @@ public class JWebMPSiteBinder
 	 * @param module
 	 * 		of type GuiceSiteInjectorModule
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void onBind(GuiceSiteInjectorModule module)
 	{
@@ -197,22 +199,19 @@ public class JWebMPSiteBinder
 		JWebMPSiteBinder.log.fine("Bound Map.class with @Named(LocalStorage)");
 		module.bind(Map.class)
 		      .annotatedWith(Names.named("LocalStorage"))
-		      .toProvider(() ->
-				                  GuiceContext.getInstance(SessionStorageProperties.class)
-				                              .getLocalStorage());
+		      .toProvider(() -> GuiceContext.getInstance(SessionStorageProperties.class)
+		                                    .getLocalStorage());
 		module.bind(JWebMPSiteBinder.localStorageTypeLiteral)
 		      .annotatedWith(Names.named("LocalStorage"))
-		      .toProvider(() ->
-				                  GuiceContext.getInstance(SessionStorageProperties.class)
-				                              .getLocalStorage());
+		      .toProvider(() -> GuiceContext.getInstance(SessionStorageProperties.class)
+		                                    .getLocalStorage());
 
 		//Bind Session Storage
 		JWebMPSiteBinder.log.fine("Bound Map.class with @Named(SessionStorage)");
 		module.bind(Map.class)
 		      .annotatedWith(Names.named("SessionStorage"))
-		      .toProvider(() ->
-				                  GuiceContext.getInstance(SessionStorageProperties.class)
-				                              .getSessionStorage());
+		      .toProvider(() -> GuiceContext.getInstance(SessionStorageProperties.class)
+		                                    .getSessionStorage());
 		module.bind(JWebMPSiteBinder.sessionStorageTypeLiteral)
 		      .annotatedWith(Names.named("SessionStorage"))
 		      .toProvider(() -> GuiceContext.getInstance(SessionStorageProperties.class)
@@ -265,7 +264,7 @@ public class JWebMPSiteBinder
 			                           .getAnnotation(PageConfiguration.class);
 			if (pc == null)
 			{
-				JWebMPSiteBinder.log.log(Level.SEVERE, "Couldnt Find Page Configuration on IPage Object {0}", new Object[] { page.getClass().getCanonicalName() });
+				JWebMPSiteBinder.log.log(Level.SEVERE, "Couldnt Find Page Configuration on IPage Object {0}", new Object[]{page.getClass().getCanonicalName()});
 			}
 			else if (!pc.ignore())
 			{
