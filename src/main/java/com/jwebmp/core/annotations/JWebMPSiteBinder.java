@@ -265,7 +265,7 @@ public class JWebMPSiteBinder
 			                           .getAnnotation(PageConfiguration.class);
 			if (pc == null)
 			{
-				JWebMPSiteBinder.log.log(Level.SEVERE, "Couldn't Find Page Configuration on IPage Object {0}", new Object[]{page.getClass().getCanonicalName()});
+				JWebMPSiteBinder.log.log(Level.SEVERE, "Couldnt Find Page Configuration on IPage Object {0}", new Object[] { page.getClass().getCanonicalName() });
 			}
 			else if (!pc.ignore())
 			{
@@ -322,19 +322,6 @@ public class JWebMPSiteBinder
 	}
 
 	/**
-	 * Method getJsonMapper returns the jsonMapper of this JWebMPSiteBinder object.
-	 *
-	 * @return the jsonMapper (type ObjectMapper) of this JWebMPSiteBinder object.
-	 */
-	private ObjectWriter getJsonMapperTiny()
-	{
-		ObjectWriter ow = GuiceContext.get(ObjectMapper.class)
-		                              .writer();
-		configureObjectMapperForJSON(ow);
-		return ow;
-	}
-
-	/**
 	 * Configures json with the given properties
 	 *
 	 * @param writer
@@ -345,6 +332,19 @@ public class JWebMPSiteBinder
 		writer.with(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
 		writer.with(JsonGenerator.Feature.QUOTE_FIELD_NAMES);
 		writer.withoutFeatures(SerializationFeature.FAIL_ON_UNWRAPPED_TYPE_IDENTIFIERS);
+	}
+
+	/**
+	 * Method getJsonMapper returns the jsonMapper of this JWebMPSiteBinder object.
+	 *
+	 * @return the jsonMapper (type ObjectMapper) of this JWebMPSiteBinder object.
+	 */
+	private ObjectWriter getJsonMapperTiny()
+	{
+		ObjectWriter ow = GuiceContext.get(ObjectMapper.class)
+		                              .writer();
+		configureObjectMapperForJSON(ow);
+		return ow;
 	}
 
 	private ObjectReader getJsonReader()
