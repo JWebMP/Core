@@ -62,13 +62,11 @@ public class JWebMPSiteBinder
 	/**
 	 * Field localStorageTypeLiteral
 	 */
-	@SuppressWarnings("Convert2Diamond")
 	private static TypeLiteral<Map<String, String>> localStorageTypeLiteral = new TypeLiteral<Map<String, String>>() {};
 
 	/**
 	 * Field sessionStorageTypeLiteral
 	 */
-	@SuppressWarnings("Convert2Diamond")
 	private static TypeLiteral<Map<String, String>> sessionStorageTypeLiteral = new TypeLiteral<Map<String, String>>() {};
 
 	/**
@@ -316,7 +314,7 @@ public class JWebMPSiteBinder
 	{
 		ObjectWriter ow = GuiceContext.get(ObjectMapper.class)
 		                              .writerWithDefaultPrettyPrinter();
-		configureObjectMapperForJSON(ow);
+		ow = configureObjectMapperForJSON(ow);
 		return ow;
 	}
 
@@ -325,12 +323,14 @@ public class JWebMPSiteBinder
 	 *
 	 * @param writer
 	 */
-	private void configureObjectMapperForJSON(ObjectWriter writer)
+	private ObjectWriter configureObjectMapperForJSON(ObjectWriter writer)
 	{
-		writer.with(SerializationFeature.INDENT_OUTPUT);
-		writer.with(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
-		writer.with(JsonGenerator.Feature.QUOTE_FIELD_NAMES);
-		writer.withoutFeatures(SerializationFeature.FAIL_ON_UNWRAPPED_TYPE_IDENTIFIERS);
+		writer = writer.with(SerializationFeature.INDENT_OUTPUT);
+		writer = writer.with(SerializationFeature.INDENT_OUTPUT);
+		writer = writer.with(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
+		writer = writer.with(JsonGenerator.Feature.QUOTE_FIELD_NAMES);
+		writer = writer.withoutFeatures(SerializationFeature.FAIL_ON_UNWRAPPED_TYPE_IDENTIFIERS);
+		return writer;
 	}
 
 	/**
@@ -342,7 +342,7 @@ public class JWebMPSiteBinder
 	{
 		ObjectWriter ow = GuiceContext.get(ObjectMapper.class)
 		                              .writer();
-		configureObjectMapperForJSON(ow);
+		ow = configureObjectMapperForJSON(ow);
 		return ow;
 	}
 
@@ -350,7 +350,7 @@ public class JWebMPSiteBinder
 	{
 		ObjectReader ow = GuiceContext.get(ObjectMapper.class)
 		                              .reader();
-		configureObjectMapperForJSON(ow);
+		ow = configureObjectMapperForJSON(ow);
 		return ow;
 	}
 
@@ -359,10 +359,11 @@ public class JWebMPSiteBinder
 	 *
 	 * @param reader
 	 */
-	private void configureObjectMapperForJSON(ObjectReader reader)
+	private ObjectReader configureObjectMapperForJSON(ObjectReader reader)
 	{
-		reader.without(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-		reader.with(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		reader = reader.without(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+		reader = reader.with(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		return reader;
 	}
 
 	/**
@@ -374,7 +375,7 @@ public class JWebMPSiteBinder
 	{
 		ObjectWriter ow = GuiceContext.get(ObjectMapper.class)
 		                              .writer();
-		configureObjectMapperForCSS(ow);
+		ow = configureObjectMapperForCSS(ow);
 		return ow;
 	}
 
@@ -383,11 +384,12 @@ public class JWebMPSiteBinder
 	 *
 	 * @param jsonObjectMapper
 	 */
-	private void configureObjectMapperForCSS(ObjectWriter jsonObjectMapper)
+	private ObjectWriter configureObjectMapperForCSS(ObjectWriter jsonObjectMapper)
 	{
-		jsonObjectMapper.without(SerializationFeature.INDENT_OUTPUT);
-		jsonObjectMapper.with(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
-		jsonObjectMapper.without(JsonGenerator.Feature.QUOTE_FIELD_NAMES);
+		jsonObjectMapper = jsonObjectMapper.without(SerializationFeature.INDENT_OUTPUT);
+		jsonObjectMapper = jsonObjectMapper.with(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
+		jsonObjectMapper = jsonObjectMapper.without(JsonGenerator.Feature.QUOTE_FIELD_NAMES);
+		return jsonObjectMapper;
 	}
 
 	/**
@@ -399,13 +401,14 @@ public class JWebMPSiteBinder
 	{
 		ObjectReader ow = GuiceContext.get(ObjectMapper.class)
 		                              .reader();
-		configureObjectMapperForCSS(ow);
+		ow = configureObjectMapperForCSS(ow);
 		return ow;
 	}
 
-	private void configureObjectMapperForCSS(ObjectReader jsonObjectMapper)
+	private ObjectReader configureObjectMapperForCSS(ObjectReader jsonObjectMapper)
 	{
-		jsonObjectMapper.without(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-		jsonObjectMapper.with(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		jsonObjectMapper = jsonObjectMapper.without(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+		jsonObjectMapper = jsonObjectMapper.with(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		return jsonObjectMapper;
 	}
 }
