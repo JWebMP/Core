@@ -105,8 +105,7 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
 			{
 				getComponent().addAttribute(AngularAttributes.ngDisabled, "jwCntrl.jw.isLoading");
 			}
-			else if (!getComponent().getAttribute(AngularAttributes.ngDisabled)
-			                        .equals("jwCntrl.jw.isLoading"))
+			else if (!"jwCntrl.jw.isLoading".equals(getComponent().getAttribute(AngularAttributes.ngDisabled)))
 			{
 				getComponent().addAttribute(AngularAttributes.ngDisabled, "jwCntrl.jw.isLoading || " + getComponent().getAttribute(AngularAttributes.ngDisabled));
 			}
