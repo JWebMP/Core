@@ -23,7 +23,7 @@ public class PageProvider
 	/**
 	 * Method getPages returns the pages of this PageProvider object.
 	 *
-	 * @return the pages (type ServiceLoader<IPage>) of this PageProvider object.
+	 * @return the pages (type ServiceLoader IPage ) of this PageProvider object.
 	 */
 	public static ServiceLoader<IPage> getPages()
 	{
