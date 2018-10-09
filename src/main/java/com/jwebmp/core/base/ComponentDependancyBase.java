@@ -287,7 +287,7 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 	/**
 	 * Method equals ...
 	 *
-	 * @param obj
+	 * @param o
 	 * 		of type Object
 	 *
 	 * @return boolean
