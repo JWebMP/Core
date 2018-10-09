@@ -492,8 +492,8 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 * 		<p>
 	 *
 	 * @return original components added with
-	 *
-	 * @see com.jwebmp.core.base.interfaces.IComponentHierarchyBase#getChildrenHierarchy(Set ComponentHierarchyBase ?, ?, ?, ?, ? )
+	 * 		<p>
+	 * 		see com.jwebmp.core.base.interfaces.IComponentHierarchyBase#getChildrenHierarchy(Set ComponentHierarchyBase ?, ?, ?, ?, ? )
 	 */
 	@Override
 	@NotNull
