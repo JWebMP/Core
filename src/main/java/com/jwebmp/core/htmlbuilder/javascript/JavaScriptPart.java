@@ -111,16 +111,6 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	}
 
 	/**
-	 * Returns the JSON Renderer
-	 *
-	 * @return
-	 */
-	public ObjectWriter getJsonObjectMapper()
-	{
-		return GuiceContext.getInstance(Key.get(ObjectWriter.class, Names.named("JSON")));
-	}
-
-	/**
 	 * Read direct from the stream
 	 *
 	 * @param <T>
@@ -139,16 +129,6 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	}
 
 	/**
-	 * Returns the raw function renderer
-	 *
-	 * @return
-	 */
-	public ObjectMapper getFunctionObjectMapper()
-	{
-		return GuiceContext.getInstance(Key.get(ObjectMapper.class, Names.named("JSFUNCTION")));
-	}
-
-	/**
 	 * Returns the JSON Renderer
 	 *
 	 * @return
@@ -156,6 +136,16 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	public ObjectReader getJsonObjectReader()
 	{
 		return GuiceContext.getInstance(Key.get(ObjectReader.class, Names.named("JSON")));
+	}
+
+	/**
+	 * Returns the raw function renderer
+	 *
+	 * @return
+	 */
+	public ObjectMapper getFunctionObjectMapper()
+	{
+		return GuiceContext.getInstance(Key.get(ObjectMapper.class, Names.named("JSFUNCTION")));
 	}
 
 	/**
@@ -171,7 +161,8 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public <T> T From(File file, Class<T> clazz) throws IOException
 	{
-		return getJsonObjectReader().forType(clazz).readValue(file);
+		return getJsonObjectReader().forType(clazz)
+		                            .readValue(file);
 	}
 
 	/**
@@ -187,7 +178,8 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public <T> T From(Reader file, Class<T> clazz) throws IOException
 	{
-		return getJsonObjectReader().forType(clazz).readValue(file);
+		return getJsonObjectReader().forType(clazz)
+		                            .readValue(file);
 	}
 
 	/**
@@ -203,7 +195,8 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public <T> T From(String content, Class<T> clazz) throws IOException
 	{
-		return getJsonObjectReader().forType(clazz).readValue(content);
+		return getJsonObjectReader().forType(clazz)
+		                            .readValue(content);
 	}
 
 	/**
@@ -219,7 +212,8 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public <T> T From(URL content, Class<T> clazz) throws IOException
 	{
-		return getJsonObjectReader().forType(clazz).readValue(content);
+		return getJsonObjectReader().forType(clazz)
+		                            .readValue(content);
 	}
 
 	/**
@@ -236,7 +230,8 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public <T> List<T> FromToList(InputStream file, Class<T> clazz) throws IOException
 	{
-		T list = getJsonObjectReader().forType(clazz).readValue(file);
+		T list = getJsonObjectReader().forType(clazz)
+		                              .readValue(file);
 		ArrayList<T> lists = new ArrayList<>();
 		lists.addAll(Arrays.asList((T[]) list));
 		return lists;
@@ -255,7 +250,8 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public <T> List<T> FromToList(URL content, Class<T> clazz) throws IOException
 	{
-		T list = getJsonObjectReader().forType(clazz).readValue(content);
+		T list = getJsonObjectReader().forType(clazz)
+		                              .readValue(content);
 		ArrayList<T> lists = new ArrayList<>();
 		lists.addAll(Arrays.asList((T[]) list));
 		return lists;
@@ -274,7 +270,8 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public <T> List<T> FromToList(File file, Class<T> clazz) throws IOException
 	{
-		T list = getJsonObjectReader().forType(clazz).readValue(file);
+		T list = getJsonObjectReader().forType(clazz)
+		                              .readValue(file);
 		ArrayList<T> lists = new ArrayList<>();
 		lists.addAll(Arrays.asList((T[]) list));
 		return lists;
@@ -293,7 +290,8 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public <T> List<T> FromToList(Reader file, Class<T> clazz) throws IOException
 	{
-		T list = getJsonObjectReader().forType(clazz).readValue(file);
+		T list = getJsonObjectReader().forType(clazz)
+		                              .readValue(file);
 		ArrayList<T> lists = new ArrayList<>();
 		lists.addAll(Arrays.asList((T[]) list));
 		return lists;
@@ -312,7 +310,8 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public <T> List<T> FromToList(String content, Class<T> clazz) throws IOException
 	{
-		T list = getJsonObjectReader().forType(clazz).readValue(content);
+		T list = getJsonObjectReader().forType(clazz)
+		                              .readValue(content);
 		ArrayList<T> lists = new ArrayList<>();
 		lists.addAll(Arrays.asList((T[]) list));
 		return lists;
@@ -439,17 +438,14 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 		}
 	}
 
-	public ObjectReader getJavascriptObjectReader()
+	/**
+	 * Returns the JSON Renderer
+	 *
+	 * @return
+	 */
+	public ObjectWriter getJsonObjectMapper()
 	{
-		try
-		{
-			return GuiceContext.getInstance(Key.get(ObjectReader.class, Names.named("JSON")));
-		}
-		catch (NullPointerException e)
-		{
-			JavaScriptPart.log.log(Level.SEVERE, "Cant find javascript object mapper, returning default", e);
-			return null;
-		}
+		return GuiceContext.getInstance(Key.get(ObjectWriter.class, Names.named("JSON")));
 	}
 
 	/**
@@ -479,6 +475,19 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 		return (J) this;
 	}
 
+	public ObjectReader getJavascriptObjectReader()
+	{
+		try
+		{
+			return GuiceContext.getInstance(Key.get(ObjectReader.class, Names.named("JSON")));
+		}
+		catch (NullPointerException e)
+		{
+			JavaScriptPart.log.log(Level.SEVERE, "Cant find javascript object mapper, returning default", e);
+			return null;
+		}
+	}
+
 	/**
 	 * Renders the fields (getDeclaredFields()) as a map of html attributes
 	 *
@@ -488,7 +497,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	{
 		Map<String, String> map = new LinkedHashMap<>();
 
-		List<Field> fields = Arrays.asList(getClass().getDeclaredFields());
+		Field[] fields = getClass().getDeclaredFields();
 		for (Field field : fields)
 		{
 			if (Modifier.isFinal(field.getModifiers()) || Modifier.isStatic(field.getModifiers()))
@@ -503,8 +512,8 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 				{
 					if (JavaScriptPart.class.isAssignableFrom(result.getClass()))
 					{
-						map.put(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_HYPHEN, field.getName()), JavaScriptPart.class.cast(result)
-						                                                                                                 .toString(true));
+						map.put(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_HYPHEN, field.getName()), ((JavaScriptPart) result)
+								                                                                             .toString(true));
 					}
 					else
 					{
