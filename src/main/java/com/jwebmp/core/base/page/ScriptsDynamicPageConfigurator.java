@@ -33,7 +33,7 @@ import static com.jwebmp.core.services.JWebMPServicesBindings.*;
  */
 @SuppressWarnings("unused")
 public class ScriptsDynamicPageConfigurator
-		implements IPageConfigurator
+		implements IPageConfigurator<ScriptsDynamicPageConfigurator>
 {
 	/**
 	 * If this configurator is enabled
@@ -196,19 +196,6 @@ public class ScriptsDynamicPageConfigurator
 		return page;
 	}
 
-	/**
-	 * Sort order for startup, Default 100.
-	 *
-	 * @return the sort order never null. Integer. MAX
-	 *
-	 * @see com.jwebmp.core.services.IPageConfigurator#sortOrder()
-	 */
-	@Override
-	public Integer sortOrder()
-	{
-		return Integer.MAX_VALUE;
-	}
-
 	@Override
 	public boolean enabled()
 	{
@@ -351,5 +338,18 @@ public class ScriptsDynamicPageConfigurator
 		s.addAttribute(ScriptAttributes.Type, StaticStrings.HTML_HEADER_JAVASCRIPT);
 		s.setText(contents);
 		return s;
+	}
+
+	/**
+	 * Sort order for startup, Default 100.
+	 *
+	 * @return the sort order never null. Integer. MAX
+	 *
+	 * @see com.jwebmp.core.services.IPageConfigurator#sortOrder()
+	 */
+	@Override
+	public Integer sortOrder()
+	{
+		return Integer.MAX_VALUE;
 	}
 }

@@ -358,7 +358,8 @@ public class AngularFeature
 	{
 		StringBuilder output = new StringBuilder();
 		Set<IAngularController> angulars = new TreeSet<>();
-		ServiceLoader<IAngularController> loader = ServiceLoader.load(IAngularController.class);
+		Set<IAngularController> loader = GuiceContext.instance()
+		                                             .getLoader(IAngularController.class, ServiceLoader.load(IAngularController.class));
 		for (IAngularController item : loader)
 		{
 			angulars.add(item);

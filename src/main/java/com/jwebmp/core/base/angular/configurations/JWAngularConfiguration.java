@@ -65,7 +65,9 @@ public class JWAngularConfiguration
 		String output = controllerOutput.toString();
 		StringBuilder statementOutput = new StringBuilder();
 
-		ServiceLoader<IAngularConfigurationScopeStatement> loader = ServiceLoader.load(IAngularConfigurationScopeStatement.class);
+		Set<IAngularConfigurationScopeStatement> loader = GuiceContext.instance()
+		                                                              .getLoader(IAngularConfigurationScopeStatement.class,
+		                                                                         ServiceLoader.load(IAngularConfigurationScopeStatement.class));
 		Set<IAngularConfigurationScopeStatement> controllers = new TreeSet<>();
 		if (loader.iterator()
 		          .hasNext())

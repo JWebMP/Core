@@ -167,6 +167,7 @@ module com.jwebmp.core {
 	requires org.apache.commons.lang3;
 	requires org.apache.commons.text;
 
+
 	uses IRegularExpressions;
 	uses IAngularDirective;
 	uses com.jwebmp.core.services.IPageConfigurator;
@@ -184,6 +185,7 @@ module com.jwebmp.core {
 	uses RenderAfterScripts;
 	uses RenderAfterDynamicScripts;
 	uses RenderBeforeScripts;
+
 
 	provides DataCallIntercepter with LocalStorageIntercepter;
 	provides AjaxCallIntercepter with LocalStorageIntercepter;

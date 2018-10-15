@@ -38,7 +38,7 @@ import java.util.logging.Level;
 @ComponentInformation(name = "Drop Over Event",
 		description = "Server Side Event for Drop Out",
 		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
+		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
 public abstract class DropOverAdapter
 		extends Event
 		implements GlobalEvents

@@ -4,8 +4,8 @@ import com.google.inject.Key;
 import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 import com.jwebmp.core.base.angular.services.*;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.guicedinjection.abstractions.GuiceInjectorModule;
-import com.jwebmp.guicedinjection.interfaces.IDefaultService;
 import com.jwebmp.guicedinjection.interfaces.IGuiceDefaultBinder;
 
 import java.util.ServiceLoader;
@@ -36,47 +36,61 @@ public class JWebMPServicesBindings
 	public void onBind(GuiceInjectorModule module)
 	{
 		module.bind(JWebMPServicesBindings.IPageConfiguratorsKey)
-		      .toProvider(() -> IDefaultService.loaderToSet(ServiceLoader.load(IPageConfigurator.class)))
+		      .toProvider(() -> GuiceContext.instance()
+		                                    .getLoader(IPageConfigurator.class, ServiceLoader.load(IPageConfigurator.class)))
 		      .in(Singleton.class);
 		module.bind(JWebMPServicesBindings.RenderAfterScriptsKey)
-		      .toProvider(() -> IDefaultService.loaderToSet(ServiceLoader.load(RenderAfterScripts.class)))
+		      .toProvider(() -> GuiceContext.instance()
+		                                    .getLoader(RenderAfterScripts.class, ServiceLoader.load(RenderAfterScripts.class)))
 		      .in(Singleton.class);
 		module.bind(JWebMPServicesBindings.RenderAfterDynamicScriptsKey)
-		      .toProvider(() -> IDefaultService.loaderToSet(ServiceLoader.load(RenderAfterDynamicScripts.class)))
+		      .toProvider(() -> GuiceContext.instance()
+		                                    .getLoader(RenderAfterDynamicScripts.class, ServiceLoader.load(RenderAfterDynamicScripts.class)))
 		      .in(Singleton.class);
 		module.bind(JWebMPServicesBindings.RenderBeforeScriptsKey)
-		      .toProvider(() -> IDefaultService.loaderToSet(ServiceLoader.load(RenderBeforeScripts.class)))
+		      .toProvider(() -> GuiceContext.instance()
+		                                    .getLoader(RenderBeforeScripts.class, ServiceLoader.load(RenderBeforeScripts.class)))
 		      .in(Singleton.class);
 		module.bind(JWebMPServicesBindings.RenderBeforeDynamicScriptsKey)
-		      .toProvider(() -> IDefaultService.loaderToSet(ServiceLoader.load(RenderBeforeDynamicScripts.class)))
+		      .toProvider(() -> GuiceContext.instance()
+		                                    .getLoader(RenderBeforeDynamicScripts.class, ServiceLoader.load(RenderBeforeDynamicScripts.class)))
 		      .in(Singleton.class);
 		module.bind(JWebMPServicesBindings.RenderBeforeLinksKey)
-		      .toProvider(() -> IDefaultService.loaderToSet(ServiceLoader.load(RenderBeforeLinks.class)))
+		      .toProvider(() -> GuiceContext.instance()
+		                                    .getLoader(RenderBeforeLinks.class, ServiceLoader.load(RenderBeforeLinks.class)))
 		      .in(Singleton.class);
 		module.bind(JWebMPServicesBindings.RenderAfterLinksKey)
-		      .toProvider(() -> IDefaultService.loaderToSet(ServiceLoader.load(RenderAfterLinks.class)))
+		      .toProvider(() -> GuiceContext.instance()
+		                                    .getLoader(RenderAfterLinks.class, ServiceLoader.load(RenderAfterLinks.class)))
 		      .in(Singleton.class);
 
 		module.bind(JWebMPServicesBindings.AngularDirectivesKey)
-		      .toProvider(() -> IDefaultService.loaderToSet(ServiceLoader.load(IAngularDirective.class)))
+		      .toProvider(() -> GuiceContext.instance()
+		                                    .getLoader(IAngularDirective.class, ServiceLoader.load(IAngularDirective.class)))
 		      .in(Singleton.class);
 		module.bind(JWebMPServicesBindings.AngularControllerScopeStatementsKey)
-		      .toProvider(() -> IDefaultService.loaderToSet(ServiceLoader.load(IAngularControllerScopeStatement.class)))
+		      .toProvider(() -> GuiceContext.instance()
+		                                    .getLoader(IAngularControllerScopeStatement.class, ServiceLoader.load(IAngularControllerScopeStatement.class)))
 		      .in(Singleton.class);
 		module.bind(JWebMPServicesBindings.AngularModulesKey)
-		      .toProvider(() -> IDefaultService.loaderToSet(ServiceLoader.load(IAngularModule.class)))
+		      .toProvider(() -> GuiceContext.instance()
+		                                    .getLoader(IAngularModule.class, ServiceLoader.load(IAngularModule.class)))
 		      .in(Singleton.class);
 		module.bind(JWebMPServicesBindings.AngularConfigurationScopeStatementKey)
-		      .toProvider(() -> IDefaultService.loaderToSet(ServiceLoader.load(IAngularConfigurationScopeStatement.class)))
+		      .toProvider(() -> GuiceContext.instance()
+		                                    .getLoader(IAngularConfigurationScopeStatement.class, ServiceLoader.load(IAngularConfigurationScopeStatement.class)))
 		      .in(Singleton.class);
 		module.bind(JWebMPServicesBindings.AngularConfigurationKey)
-		      .toProvider(() -> IDefaultService.loaderToSet(ServiceLoader.load(IAngularConfiguration.class)))
+		      .toProvider(() -> GuiceContext.instance()
+		                                    .getLoader(IAngularConfiguration.class, ServiceLoader.load(IAngularConfiguration.class)))
 		      .in(Singleton.class);
 		module.bind(JWebMPServicesBindings.AngularControllerKey)
-		      .toProvider(() -> IDefaultService.loaderToSet(ServiceLoader.load(IAngularController.class)))
+		      .toProvider(() -> GuiceContext.instance()
+		                                    .getLoader(IAngularController.class, ServiceLoader.load(IAngularController.class)))
 		      .in(Singleton.class);
 		module.bind(JWebMPServicesBindings.AngularFactoryKey)
-		      .toProvider(() -> IDefaultService.loaderToSet(ServiceLoader.load(IAngularFactory.class)))
+		      .toProvider(() -> GuiceContext.instance()
+		                                    .getLoader(IAngularFactory.class, ServiceLoader.load(IAngularFactory.class)))
 		      .in(Singleton.class);
 	}
 }

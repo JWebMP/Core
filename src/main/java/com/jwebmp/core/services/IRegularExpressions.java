@@ -1,6 +1,7 @@
 package com.jwebmp.core.services;
 
-import java.io.Serializable;
+import com.jwebmp.guicedinjection.interfaces.IDefaultService;
+
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -8,8 +9,8 @@ import java.util.regex.Pattern;
  * Marks default regular expressions to add to the DTO, used with a Service Locator
  */
 @FunctionalInterface
-public interface IRegularExpressions
-		extends Serializable
+public interface IRegularExpressions<J extends IRegularExpressions<J>>
+		extends IDefaultService<J>
 {
 	/**
 	 * Returns a map of patterns to add

@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.core.services.IRegularExpressions;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
 import java.io.Serializable;
@@ -71,9 +72,9 @@ public class RegularExpressionsDTO
 	 */
 	public RegularExpressionsDTO addDefaults()
 	{
-		ServiceLoader<IRegularExpressions> regexConfigs = ServiceLoader.load(IRegularExpressions.class);
 		Map<String, Pattern> patterns = new LinkedHashMap<>();
-		for (IRegularExpressions regexConfig : regexConfigs)
+		for (IRegularExpressions regexConfig : GuiceContext.instance()
+		                                                   .getLoader(IRegularExpressions.class, ServiceLoader.load(IRegularExpressions.class)))
 		{
 			RegularExpressionsDTO.log.finer("Regex Config Found [" + regexConfig.getClass()
 			                                                                    .getSimpleName() + "]");

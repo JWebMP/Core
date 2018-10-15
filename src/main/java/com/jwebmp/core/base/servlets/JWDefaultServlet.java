@@ -46,6 +46,7 @@ import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -252,7 +253,8 @@ public abstract class JWDefaultServlet
 	protected Page getErrorPageHtml(Throwable t)
 	{
 		JWDefaultServlet.log.log(Level.SEVERE, "Exception incoming", t);
-		ServiceLoader<IErrorPage> errorPages = ServiceLoader.load(IErrorPage.class);
+		Set<IErrorPage> errorPages = GuiceContext.instance()
+		                                         .getLoader(IErrorPage.class, ServiceLoader.load(IErrorPage.class));
 		if (!errorPages.iterator()
 		               .hasNext())
 		{

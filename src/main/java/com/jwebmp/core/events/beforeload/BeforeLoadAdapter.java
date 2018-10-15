@@ -38,7 +38,7 @@ import java.util.logging.Level;
 @ComponentInformation(name = "Before Load Event",
 		description = "Server Side Event for Before Load Event.",
 		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
+		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
 public abstract class BeforeLoadAdapter
 		extends Event
 		implements GlobalEvents

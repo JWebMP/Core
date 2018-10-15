@@ -38,7 +38,7 @@ import java.util.logging.Level;
 @ComponentInformation(name = "Focus Event",
 		description = "Server Side Event for Focus",
 		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
+		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
 public abstract class FocusAdapter
 		extends Event
 		implements GlobalEvents

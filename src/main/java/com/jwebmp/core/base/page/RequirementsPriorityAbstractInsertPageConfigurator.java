@@ -35,8 +35,8 @@ import java.util.Set;
 
 import static com.jwebmp.core.utilities.StaticStrings.*;
 
-abstract class RequirementsPriorityAbstractInsertPageConfigurator
-		implements IPageConfigurator
+abstract class RequirementsPriorityAbstractInsertPageConfigurator<J extends RequirementsPriorityAbstractInsertPageConfigurator<J>>
+		implements IPageConfigurator<J>
 {
 	/**
 	 * If this configurator is enabled

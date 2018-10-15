@@ -18,7 +18,7 @@ import static com.jwebmp.core.services.JWebMPServicesBindings.*;
  */
 @SuppressWarnings("unused")
 public class CSSLinksInsertPageConfigurator
-		extends RequirementsPriorityAbstractInsertPageConfigurator
+		extends RequirementsPriorityAbstractInsertPageConfigurator<CSSLinksInsertPageConfigurator>
 {
 	/**
 	 * Constructor CSSLinksInsertPageConfigurator creates a new CSSLinksInsertPageConfigurator instance.
@@ -50,12 +50,6 @@ public class CSSLinksInsertPageConfigurator
 			renderAfterLinks(page);
 		}
 		return page;
-	}
-
-	@Override
-	public Integer sortOrder()
-	{
-		return Integer.MAX_VALUE - 10;
 	}
 
 	private void renderBeforeLinks(Page<?> page)
@@ -96,5 +90,11 @@ public class CSSLinksInsertPageConfigurator
 			page.getHead()
 			    .add(after);
 		}
+	}
+
+	@Override
+	public Integer sortOrder()
+	{
+		return Integer.MAX_VALUE - 10;
 	}
 }

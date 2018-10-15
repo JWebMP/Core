@@ -96,7 +96,8 @@ public class JWAngularModule
 		String returnable = "var " + AngularFeature.getAppName() + " = angular.module(";
 		returnable += StaticStrings.STRING_SINGLE_QUOTES + AngularFeature.getAppName() + "',";
 
-		ServiceLoader<IAngularModule> loader = ServiceLoader.load(IAngularModule.class);
+		Set<IAngularModule> loader = GuiceContext.instance()
+		                                         .getLoader(IAngularModule.class, ServiceLoader.load(IAngularModule.class));
 		if (loader.iterator()
 		          .hasNext())
 		{

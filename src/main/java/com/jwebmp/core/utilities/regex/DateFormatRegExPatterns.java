@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 public class DateFormatRegExPatterns
-		implements IRegularExpressions
+		implements IRegularExpressions<DateFormatRegExPatterns>
 {
 	/**
 	 * yyyy-MM-dd

@@ -41,16 +41,16 @@ import javax.validation.constraints.NotNull;
 		pluginVersion = "3.1.1",
 		pluginCategories = "javascript,jquery, framework, jwebswing",
 		pluginSubtitle = " jQuery has changed the way that millions of people write JavaScript",
-		pluginGitUrl = "https://github.com/GedMarc/JWebSwing",
+		pluginGitUrl = "https://github.com/GedMarc/JWebMP",
 		pluginSourceUrl = "https://github.com/jquery/jquery",
-		pluginWikiUrl = "https://github.com/GedMarc/JWebSwing/wiki",
+		pluginWikiUrl = "https://github.com/GedMarc/JWebMP/wiki",
 		pluginDownloadUrl = "",
 		pluginIconUrl = "jquery_icon.png",
 		pluginIconImageUrl = "jquery_logo.png",
 		pluginLastUpdatedDate = "2017/03/13",
 		pluginOriginalHomepage = "http://www.jquery.com")
 public class JQueryPageConfigurator
-		implements IPageConfigurator
+		implements IPageConfigurator<JQueryPageConfigurator>
 {
 	/**
 	 * If this configurator is enabled
@@ -264,6 +264,12 @@ public class JQueryPageConfigurator
 		JQueryPageConfigurator.jquery3 = jquery3;
 	}
 
+	@Override
+	public boolean enabled()
+	{
+		return JQueryPageConfigurator.enabled;
+	}
+
 	/**
 	 * Sort order for startup, Default 100.
 	 *
@@ -274,12 +280,6 @@ public class JQueryPageConfigurator
 	{
 		//Always before angular
 		return Integer.MAX_VALUE - 100;
-	}
-
-	@Override
-	public boolean enabled()
-	{
-		return JQueryPageConfigurator.enabled;
 	}
 
 	/**

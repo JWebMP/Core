@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 public class TextRegExPatterns
-		implements IRegularExpressions
+		implements IRegularExpressions<TextRegExPatterns>
 {
 	/**
 	 * Forces only text at least one character

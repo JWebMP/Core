@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TopShelfScriptsInsertPageConfigurator
-		extends RequirementsPriorityAbstractInsertPageConfigurator
+		extends RequirementsPriorityAbstractInsertPageConfigurator<TopShelfScriptsInsertPageConfigurator>
 {
 	public TopShelfScriptsInsertPageConfigurator()
 	{

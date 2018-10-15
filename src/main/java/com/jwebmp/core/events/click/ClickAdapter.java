@@ -48,7 +48,7 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
 	@ComponentInformation(name = "Click Event",
 			description = "Server Side Event for Click.",
 			url = "https://www.armineasy.com/JWebSwing",
-			wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
+			wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
 	private static final java.util.logging.Logger log = LogFactory.getInstance()
 	                                                              .getLogger("ClickEvent");
 	private static final long serialVersionUID = 1L;

@@ -37,7 +37,7 @@ import java.util.logging.Level;
 @ComponentInformation(name = "Change Event",
 		description = "Server Side Event for Change.",
 		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
+		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
 public abstract class ChangeAdapter
 		extends Event
 		implements GlobalEvents

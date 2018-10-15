@@ -35,7 +35,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import static com.jwebmp.core.services.JWebMPServicesBindings.*;
 
 public class ScriptsInsertPageConfigurator
-		extends RequirementsPriorityAbstractInsertPageConfigurator
+		extends RequirementsPriorityAbstractInsertPageConfigurator<ScriptsInsertPageConfigurator>
 {
 	public ScriptsInsertPageConfigurator()
 	{
@@ -69,12 +69,6 @@ public class ScriptsInsertPageConfigurator
 			}
 		}
 		return page;
-	}
-
-	@Override
-	public Integer sortOrder()
-	{
-		return Integer.MAX_VALUE - 8;
 	}
 
 	private void getScripts(Page page, ComponentHierarchyBase scriptAddTo)
@@ -144,5 +138,11 @@ public class ScriptsInsertPageConfigurator
 		{
 			scriptAddTo.add(after);
 		}
+	}
+
+	@Override
+	public Integer sortOrder()
+	{
+		return Integer.MAX_VALUE - 8;
 	}
 }

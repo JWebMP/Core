@@ -62,11 +62,13 @@ public class JWebMPSiteBinder
 	/**
 	 * Field localStorageTypeLiteral
 	 */
+	@SuppressWarnings("Convert2Diamond")
 	private static TypeLiteral<Map<String, String>> localStorageTypeLiteral = new TypeLiteral<Map<String, String>>() {};
 
 	/**
 	 * Field sessionStorageTypeLiteral
 	 */
+	@SuppressWarnings("Convert2Diamond")
 	private static TypeLiteral<Map<String, String>> sessionStorageTypeLiteral = new TypeLiteral<Map<String, String>>() {};
 
 	/**
@@ -169,10 +171,6 @@ public class JWebMPSiteBinder
 	@Override
 	public void onBind(GuiceSiteInjectorModule module)
 	{
-		JWebMPSiteBinder.log.fine("Bound HttpServletResponse.class");
-		JWebMPSiteBinder.log.fine("Bound HttpServletRequest.class");
-		JWebMPSiteBinder.log.fine("Bound HttpSession.class");
-
 		JWebMPSiteBinder.log.fine("Bound UserAgentStringParser.class");
 		module.bind(UserAgentStringParser.class)
 		      .toInstance(JWebMPSiteBinder.userAgentParser);

@@ -38,7 +38,7 @@ import java.util.logging.Level;
 @ComponentInformation(name = "Drag Start Event",
 		description = "Server Side Event for Drag Start.",
 		url = "https://www.armineasy.com/JWebSwing",
-		wikiUrl = "https://github.com/GedMarc/JWebSwing/wiki")
+		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
 public abstract class DragStartAdapter
 		extends Event
 		implements GlobalEvents

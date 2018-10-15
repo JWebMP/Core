@@ -41,16 +41,16 @@ import java.util.logging.Logger;
 		pluginVersion = "1.6",
 		pluginDependancyUniqueIDs = "jquery",
 		pluginCategories = "jquery, angular, data-binding, ng," + "google",
-		pluginGitUrl = "https://github.com/GedMarc/JWebSwing",
+		pluginGitUrl = "https://github.com/GedMarc/JWebMP",
 		pluginSourceUrl = "https://angularjs.org",
-		pluginWikiUrl = "https://github.com/GedMarc/JWebSwing/wiki",
+		pluginWikiUrl = "https://github.com/GedMarc/JWebMP/wiki",
 		pluginOriginalHomepage = "https://angularjs.org",
 		pluginDownloadUrl = "https://angularjs.org/",
 		pluginIconImageUrl = "https://angularjs.org/img/AngularJS-large.png",
 		pluginLastUpdatedDate = "2017/03/30")
 @Singleton
 public class AngularPageConfigurator
-		implements IPageConfigurator
+		implements IPageConfigurator<AngularPageConfigurator>
 {
 	private static final Logger log = LogFactory.getLog("Angular Page Configurator");
 	/**
@@ -156,15 +156,15 @@ public class AngularPageConfigurator
 	}
 
 	@Override
-	public Integer sortOrder()
-	{
-		return Integer.MAX_VALUE - 100;
-	}
-
-	@Override
 	public boolean enabled()
 	{
 		return AngularPageConfigurator.enabled;
+	}
+
+	@Override
+	public Integer sortOrder()
+	{
+		return Integer.MAX_VALUE - 100;
 	}
 
 	/**

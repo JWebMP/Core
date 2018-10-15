@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 public class EmailAddressRegExPatterns
-		implements IRegularExpressions
+		implements IRegularExpressions<EmailAddressRegExPatterns>
 {
 	/**
 	 * Global standard for email recognition
