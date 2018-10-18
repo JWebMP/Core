@@ -12,35 +12,26 @@ import net.sf.uadetector.UserAgentStringParser;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 public class PageProvider
 		implements Provider<Page>
 {
 	private static final java.util.logging.Logger log = LogFactory.getLog("PageProvider");
-	private static final ServiceLoader<IPage> pages = ServiceLoader.load(IPage.class);
-
-	/**
-	 * Method getPages returns the pages of this PageProvider object.
-	 *
-	 * @return the pages (type ServiceLoader IPage ) of this PageProvider object.
-	 */
-	public static ServiceLoader<IPage> getPages()
-	{
-		return PageProvider.pages;
-	}
 
 	@Override
 	public Page get()
 	{
-		if (!PageProvider.pages.iterator()
-		                       .hasNext())
+		Set<IPage> pages = getPages();
+		if (!pages.iterator()
+		          .hasNext())
 		{
 			PageProvider.log.log(Level.WARNING, "Returning blank page since no class was found that extends page or matches the given url");
 			return new Page();
 		}
 		IPage outputPage = null;
-		for (IPage page : PageProvider.pages)
+		for (IPage page : pages)
 		{
 			outputPage = findPage(page);
 			if (outputPage != null)
@@ -58,6 +49,17 @@ public class PageProvider
 			return (Page) outputPage;
 		}
 		return new Page();
+	}
+
+	/**
+	 * Method getPages returns the pages of this PageProvider object.
+	 *
+	 * @return the pages (type ServiceLoader IPage ) of this PageProvider object.
+	 */
+	public static Set<IPage> getPages()
+	{
+		return GuiceContext.instance()
+		                   .getLoader(IPage.class, ServiceLoader.load(IPage.class));
 	}
 
 	/**
