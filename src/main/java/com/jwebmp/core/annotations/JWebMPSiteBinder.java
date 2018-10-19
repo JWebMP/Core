@@ -33,6 +33,7 @@ import com.jwebmp.core.base.servlets.*;
 import com.jwebmp.core.services.IPage;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
+import com.jwebmp.guicedinjection.interfaces.IDefaultService;
 import com.jwebmp.guicedservlets.GuiceSiteInjectorModule;
 import com.jwebmp.guicedservlets.GuicedServletKeys;
 import com.jwebmp.guicedservlets.services.IGuiceSiteBinder;
@@ -43,6 +44,8 @@ import net.sf.uadetector.service.UADetectorServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
+import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -254,7 +257,9 @@ public class JWebMPSiteBinder
 		      .toProvider(this::getCSSReader);
 		JWebMPSiteBinder.log.fine("Bound ObjectReader.class @Named(CSS)");
 
-		for (IPage page : PageProvider.getPages())
+		Set<IPage> notInjectedPages = IDefaultService.loaderToSetNoInjection(ServiceLoader.load(IPage.class));
+
+		for (IPage page : notInjectedPages)
 		{
 			PageConfiguration pc = page.getClass()
 			                           .getAnnotation(PageConfiguration.class);
