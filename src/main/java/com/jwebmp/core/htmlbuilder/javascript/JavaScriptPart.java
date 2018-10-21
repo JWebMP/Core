@@ -64,6 +64,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 * Version 2
 	 */
 	private static final long serialVersionUID = 2L;
+
 	/**
 	 * A reference id that can be returned with a given variable
 	 */
