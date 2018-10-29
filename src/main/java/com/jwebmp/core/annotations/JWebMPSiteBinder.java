@@ -16,11 +16,6 @@
  */
 package com.jwebmp.core.annotations;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import com.google.inject.TypeLiteral;
 import com.google.inject.name.Names;
 import com.google.inject.servlet.RequestScoped;
@@ -33,7 +28,6 @@ import com.jwebmp.core.base.servlets.*;
 import com.jwebmp.core.services.IPage;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
-import com.jwebmp.guicedinjection.interfaces.IDefaultService;
 import com.jwebmp.guicedservlets.GuiceSiteInjectorModule;
 import com.jwebmp.guicedservlets.GuicedServletKeys;
 import com.jwebmp.guicedservlets.services.IGuiceSiteBinder;
@@ -56,6 +50,9 @@ import java.util.logging.Level;
 public class JWebMPSiteBinder
 		implements IGuiceSiteBinder<GuiceSiteInjectorModule>
 {
+	/**
+	 * Field log
+	 */
 	private static final java.util.logging.Logger log = LogFactory.getLog("JWebMPCoreBinder");
 	/**
 	 * The User Agent Parser
@@ -225,39 +222,8 @@ public class JWebMPSiteBinder
 		      .toProvider(new PageProvider())
 		      .in(RequestScoped.class);
 
-		module.bind(ObjectMapper.class)
-		      .toInstance(new ObjectMapper().registerModule(new ParameterNamesModule())
-		                                    .registerModule(new Jdk8Module())
-		                                    .registerModule(new JavaTimeModule()));
-
-		JWebMPSiteBinder.log.fine("Bound ObjectMapper.class as Instance");
-
-		module.bind(ObjectWriter.class)
-		      .annotatedWith(Names.named("JSON"))
-		      .toProvider(this::getJsonMapper);
-		JWebMPSiteBinder.log.fine("Bound ObjectWriter.class @Named(JSON)");
-
-		module.bind(ObjectWriter.class)
-		      .annotatedWith(Names.named("JSONTiny"))
-		      .toProvider(this::getJsonMapperTiny);
-		JWebMPSiteBinder.log.fine("Bound ObjectWriter.class @Named(JSONTiny)");
-
-		module.bind(ObjectReader.class)
-		      .annotatedWith(Names.named("JSON"))
-		      .toProvider(this::getJsonReader);
-		JWebMPSiteBinder.log.fine("Bound ObjectReader.class @Named(JSON)");
-
-		module.bind(ObjectWriter.class)
-		      .annotatedWith(Names.named("CSS"))
-		      .toProvider(this::getCSSMapper);
-		JWebMPSiteBinder.log.fine("Bound ObjectWriter.class @Named(CSS)");
-
-		module.bind(ObjectReader.class)
-		      .annotatedWith(Names.named("CSS"))
-		      .toProvider(this::getCSSReader);
-		JWebMPSiteBinder.log.fine("Bound ObjectReader.class @Named(CSS)");
-
-		Set<IPage> notInjectedPages = IDefaultService.loaderToSetNoInjection(ServiceLoader.load(IPage.class));
+		Set<IPage> notInjectedPages = GuiceContext.instance()
+		                                          .getLoader(IPage.class, true, ServiceLoader.load(IPage.class));
 
 		for (IPage page : notInjectedPages)
 		{
@@ -306,112 +272,5 @@ public class JWebMPSiteBinder
 		module.serveRegex$("(" + StaticStrings.JW_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(JWScriptServlet.class);
 		JWebMPSiteBinder.log.log(Level.FINE, "Serving JW Default Script at {0}", StaticStrings.JW_SCRIPT_LOCATION);
-	}
-
-	/**
-	 * Method getJsonMapper returns the jsonMapper of this JWebMPSiteBinder object.
-	 *
-	 * @return the jsonMapper (type ObjectMapper) of this JWebMPSiteBinder object.
-	 */
-	private ObjectWriter getJsonMapper()
-	{
-		ObjectWriter ow = GuiceContext.get(ObjectMapper.class)
-		                              .writerWithDefaultPrettyPrinter();
-		ow = configureObjectMapperForJSON(ow);
-		return ow;
-	}
-
-	/**
-	 * Configures json with the given properties
-	 *
-	 * @param writer
-	 */
-	private ObjectWriter configureObjectMapperForJSON(ObjectWriter writer)
-	{
-		writer = writer.with(SerializationFeature.INDENT_OUTPUT);
-		writer = writer.with(SerializationFeature.INDENT_OUTPUT);
-		writer = writer.with(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
-		writer = writer.with(JsonGenerator.Feature.QUOTE_FIELD_NAMES);
-		writer = writer.withoutFeatures(SerializationFeature.FAIL_ON_UNWRAPPED_TYPE_IDENTIFIERS);
-		return writer;
-	}
-
-	/**
-	 * Method getJsonMapper returns the jsonMapper of this JWebMPSiteBinder object.
-	 *
-	 * @return the jsonMapper (type ObjectMapper) of this JWebMPSiteBinder object.
-	 */
-	private ObjectWriter getJsonMapperTiny()
-	{
-		ObjectWriter ow = GuiceContext.get(ObjectMapper.class)
-		                              .writer();
-		ow = configureObjectMapperForJSON(ow);
-		return ow;
-	}
-
-	private ObjectReader getJsonReader()
-	{
-		ObjectReader ow = GuiceContext.get(ObjectMapper.class)
-		                              .reader();
-		ow = configureObjectMapperForJSON(ow);
-		return ow;
-	}
-
-	/**
-	 * Configures json with the given properties
-	 *
-	 * @param reader
-	 */
-	private ObjectReader configureObjectMapperForJSON(ObjectReader reader)
-	{
-		reader = reader.without(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-		reader = reader.with(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-		return reader;
-	}
-
-	/**
-	 * Method getJsonMapper returns the jsonMapper of this JWebMPSiteBinder object.
-	 *
-	 * @return the jsonMapper (type ObjectMapper) of this JWebMPSiteBinder object.
-	 */
-	private ObjectWriter getCSSMapper()
-	{
-		ObjectWriter ow = GuiceContext.get(ObjectMapper.class)
-		                              .writer();
-		ow = configureObjectMapperForCSS(ow);
-		return ow;
-	}
-
-	/**
-	 * Configures json with the given properties
-	 *
-	 * @param jsonObjectMapper
-	 */
-	private ObjectWriter configureObjectMapperForCSS(ObjectWriter jsonObjectMapper)
-	{
-		jsonObjectMapper = jsonObjectMapper.without(SerializationFeature.INDENT_OUTPUT);
-		jsonObjectMapper = jsonObjectMapper.with(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
-		jsonObjectMapper = jsonObjectMapper.without(JsonGenerator.Feature.QUOTE_FIELD_NAMES);
-		return jsonObjectMapper;
-	}
-
-	/**
-	 * Method getJsonMapper returns the jsonMapper of this JWebMPSiteBinder object.
-	 *
-	 * @return the jsonMapper (type ObjectMapper) of this JWebMPSiteBinder object.
-	 */
-	private ObjectReader getCSSReader()
-	{
-		ObjectReader ow = GuiceContext.get(ObjectMapper.class)
-		                              .reader();
-		ow = configureObjectMapperForCSS(ow);
-		return ow;
-	}
-
-	private ObjectReader configureObjectMapperForCSS(ObjectReader jsonObjectMapper)
-	{
-		jsonObjectMapper = jsonObjectMapper.without(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-		jsonObjectMapper = jsonObjectMapper.with(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-		return jsonObjectMapper;
 	}
 }

@@ -28,7 +28,10 @@ import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.net.URL;
@@ -38,6 +41,7 @@ import java.util.logging.Logger;
 
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.*;
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.*;
+import static com.jwebmp.core.annotations.ObjectMapperBinder.*;
 
 /**
  * Defines a section of a JavaScript part e.g. Position
@@ -53,18 +57,12 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.*;
 @JsonInclude(NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JavaScriptPart<J extends JavaScriptPart<J>>
-		implements Serializable
 {
 	/**
 	 * The logger
 	 */
 	private static final Logger log = LogFactory.getInstance()
 	                                            .getLogger("JavaScriptPart");
-	/**
-	 * Version 2
-	 */
-	private static final long serialVersionUID = 2L;
-
 	/**
 	 * A reference id that can be returned with a given variable
 	 */
@@ -88,16 +86,16 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 * Returns the object presented as a JSON strong
 	 *
 	 * @param o
+	 * 		An object to represent
 	 *
-	 * @return
+	 * @return the string
 	 */
 	public String objectAsString(Object o)
 	{
 		try
 		{
 			ObjectWriter writer = GuiceContext.get(Key.get(ObjectWriter.class, Names.named("JSON")));
-			return writer.writeValueAsString(o)
-			             .replaceAll("\r\n", "\n");
+			return writer.writeValueAsString(o);
 		}
 		catch (JsonProcessingException ex)
 		{
@@ -136,7 +134,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public ObjectReader getJsonObjectReader()
 	{
-		return GuiceContext.getInstance(Key.get(ObjectReader.class, Names.named("JSON")));
+		return GuiceContext.getInstance(JSONObjectReader);
 	}
 
 	/**
@@ -404,9 +402,6 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 		{
 			return "";
 		}
-
-		s = s.replaceAll("\r\n", "\n");
-
 		return s;
 	}
 
@@ -480,7 +475,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	{
 		try
 		{
-			return GuiceContext.getInstance(Key.get(ObjectReader.class, Names.named("JSON")));
+			return GuiceContext.getInstance(JSONObjectReader);
 		}
 		catch (NullPointerException e)
 		{
@@ -542,10 +537,10 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 		String output = null;
 		try
 		{
-			output = GuiceContext.get(Key.get(ObjectWriter.class, Names.named("JSONTiny")))
+			output = GuiceContext.get(JSONObjectWriterTiny)
 			                     .writeValueAsString(this);
 		}
-		catch (JsonProcessingException e)
+		catch (Exception e)
 		{
 			JavaScriptPart.log.log(Level.WARNING, "Cant render tiny", e);
 		}

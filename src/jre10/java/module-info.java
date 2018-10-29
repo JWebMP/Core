@@ -1,4 +1,5 @@
 import com.jwebmp.core.annotations.JWebMPSiteBinder;
+import com.jwebmp.core.annotations.ObjectMapperBinder;
 import com.jwebmp.core.base.angular.controllers.JWAngularController;
 import com.jwebmp.core.base.angular.modules.AngularMessagesModule;
 import com.jwebmp.core.base.angular.services.*;
@@ -191,7 +192,7 @@ module com.jwebmp.core {
 	provides AjaxCallIntercepter with LocalStorageIntercepter;
 
 	provides IGuiceSiteBinder with JWebMPSiteBinder;
-	provides IGuiceDefaultBinder with JWebMPServicesBindings;
+	provides IGuiceDefaultBinder with JWebMPServicesBindings, ObjectMapperBinder;
 
 	provides IAngularModule with AngularMessagesModule;
 	provides IAngularController with JWAngularController;

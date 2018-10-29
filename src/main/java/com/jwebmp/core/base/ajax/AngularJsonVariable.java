@@ -39,9 +39,7 @@ import java.util.logging.Logger;
 public class AngularJsonVariable
 		extends JavaScriptPart
 {
-
-	private static final long serialVersionUID = 1L;
-	private static final Logger log = LogFactory.getLog(AngularJsonVariable.class.getName());
+	private static final Logger log = LogFactory.getLog("AngularJsonVariable");
 
 	/**
 	 * The variable name to use
@@ -57,7 +55,7 @@ public class AngularJsonVariable
 	/**
 	 * The actual variable object
 	 */
-	private Serializable variable;
+	private Object variable;
 	/**
 	 * The owner id of this DTO
 	 */
@@ -94,7 +92,7 @@ public class AngularJsonVariable
 	 * @param variableObject
 	 * 		The JSON object to use
 	 */
-	public AngularJsonVariable(String variableName, Serializable variableObject)
+	public AngularJsonVariable(String variableName, Object variableObject)
 	{
 		this.variableName = variableName;
 		variable = variableObject;

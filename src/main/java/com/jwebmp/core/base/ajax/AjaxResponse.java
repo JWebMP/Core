@@ -568,7 +568,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 * @param object
 	 * 		The DTO to pass through
 	 */
-	public void addDto(String name, Serializable object)
+	public void addDto(String name, Object object)
 	{
 		AngularJsonVariable variable = new AngularJsonVariable(name, object);
 		getAngularVariables().add(variable);

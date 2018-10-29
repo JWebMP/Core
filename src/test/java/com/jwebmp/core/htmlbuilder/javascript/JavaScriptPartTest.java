@@ -33,14 +33,12 @@ public class JavaScriptPartTest
 	{
 		JavaScriptPartImpl bean = new JavaScriptPartImpl();
 		System.out.println(bean.toString());
-
-		//assertEuq
+		System.out.println(bean.toString(true));
 	}
 
 	public class JavaScriptPartImpl
 			extends JavaScriptPart
 	{
-
 		private String name = "name";
 
 		public JavaScriptPartImpl()
@@ -48,12 +46,14 @@ public class JavaScriptPartTest
 
 		}
 
-		@Override
-		public JavascriptPartType getJavascriptType()
+		public String getName()
 		{
-			return JavascriptPartType.Javascript;
+			return name;
 		}
 
+		public void setName(String name)
+		{
+			this.name = name;
+		}
 	}
-
 }
