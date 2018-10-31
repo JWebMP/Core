@@ -67,7 +67,6 @@ public class TableHeader<J extends TableHeader<J>>
 		implements TableChildren<IComponentHierarchyBase, J>, TableRowChildren<IComponentHierarchyBase, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs an empty Table Header

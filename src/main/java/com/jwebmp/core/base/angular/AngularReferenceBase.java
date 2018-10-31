@@ -30,7 +30,6 @@ public abstract class AngularReferenceBase
 		extends JavascriptLiteralFunction
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The name of this module
@@ -62,7 +61,8 @@ public abstract class AngularReferenceBase
 	/**
 	 * Sets this modules name
 	 *
-	 * @param referenceName Sets this reference name
+	 * @param referenceName
+	 * 		Sets this reference name
 	 */
 	public void setReferenceName(String referenceName)
 	{
@@ -83,7 +83,8 @@ public abstract class AngularReferenceBase
 	/**
 	 * Equals based on sort order and name
 	 *
-	 * @param obj object
+	 * @param obj
+	 * 		object
 	 *
 	 * @return The assigned object
 	 */

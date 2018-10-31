@@ -58,7 +58,6 @@ public class S<J extends S<J>>
 		implements ParagraphChildren<ParagraphChildren, J>, NoNewLineForRawText, NoNewLineBeforeClosingTag
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new instance of S

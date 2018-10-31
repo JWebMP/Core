@@ -39,7 +39,7 @@ public class AngularFileTransferData<J extends AngularFileTransferData<J>>
 		extends JavaScriptPart<J>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * If this transfer is part of a multipart
 	 */

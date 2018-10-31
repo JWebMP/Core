@@ -40,7 +40,6 @@ public class BorderLeftCSSImpl
 		implements CSSImplementationClass<BorderLeftCSS, BorderLeftCSSImpl>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	@CSSDetail(cssName = "border-left-color",
 			cssVersion = CSSVersions.CSS21)

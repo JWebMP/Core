@@ -66,7 +66,6 @@ public class DocumentType<J extends DocumentType<J>>
 		implements NoNewLineForRawText
 {
 
-	private static final long serialVersionUID = 1L;
 
 	private final HTMLVersions clientHtmlVersion;
 

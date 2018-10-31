@@ -22,8 +22,6 @@ import com.jwebmp.core.htmlbuilder.css.annotations.CSSImplementationAdapter;
 import com.jwebmp.core.htmlbuilder.css.annotations.CSSImplementationClass;
 import com.jwebmp.core.htmlbuilder.css.annotations.CSSImplementationValue;
 
-import java.io.Serializable;
-
 /**
  * Defines a Colour by anything
  *
@@ -31,13 +29,13 @@ import java.io.Serializable;
  */
 public class ColourCSSImpl
 		extends CSSImplementationAdapter<ColourCSS, ColourCSSImpl>
-		implements Serializable, CSSImplementationValue, CSSImplementationClass<ColourCSS, ColourCSSImpl>
+		implements CSSImplementationValue, CSSImplementationClass<ColourCSS, ColourCSSImpl>
 {
 
 	/**
 	 * Version 1
 	 */
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The actual value
 	 */

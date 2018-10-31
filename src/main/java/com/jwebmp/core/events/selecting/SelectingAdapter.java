@@ -44,7 +44,7 @@ public abstract class SelectingAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("SelectingEvent");
-	private static final long serialVersionUID = 1L;
+
 	private SelectingDirective directive;
 
 	/**

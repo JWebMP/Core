@@ -65,7 +65,6 @@ public class TableHeaderGroup<J extends TableHeaderGroup<J>>
 		implements TableChildren<TableHeaderGroupChildren, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new blank header group

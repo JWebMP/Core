@@ -54,7 +54,6 @@ public class ProgressBar<J extends ProgressBar<J>>
 		extends Component<IComponentHierarchyBase, ProgressBarAttributes, GlobalFeatures, GlobalEvents, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new progress bar

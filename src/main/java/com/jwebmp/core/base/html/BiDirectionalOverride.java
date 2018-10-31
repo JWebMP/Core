@@ -53,7 +53,6 @@ public class BiDirectionalOverride<J extends BiDirectionalOverride<J>>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a bold section of text

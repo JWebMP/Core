@@ -12,7 +12,6 @@ public class PlaceHolder<J extends PlaceHolder<J>>
 		extends DivSimple<J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/*
 	 * Constructs a new PlaceHolder with the given ID

@@ -61,7 +61,6 @@ public class TableBodyGroup<J extends TableBodyGroup<J>>
 		implements TableChildren<TableBodyGroupChildren, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new instance of a table body group

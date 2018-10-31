@@ -28,7 +28,7 @@ import com.jwebmp.core.generics.WebReference;
 public class CSSReference
 		extends WebReference<CSSReference>
 {
-	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * Construct a new CSS File Reference

@@ -85,7 +85,7 @@ public class Script<C extends IComponentHierarchyBase, J extends Script<C, J>>
 
 	private static final Logger logger = LogFactory.getInstance()
 	                                               .getLogger("<SCRIPT>");
-	private static final long serialVersionUID = 1L;
+
 	private JavascriptReference reference;
 
 	/**

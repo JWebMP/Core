@@ -49,7 +49,7 @@ public abstract class DragStartAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("DragStartEvent");
-	private static final long serialVersionUID = 1L;
+
 	private DragStartDirective directive;
 
 	/**

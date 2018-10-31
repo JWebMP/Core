@@ -34,7 +34,6 @@ public class DescriptionList<J extends DescriptionList<J>>
 		implements NoIDTag
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Construct a new Definition List

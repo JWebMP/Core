@@ -28,7 +28,6 @@ import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -63,7 +62,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 * @version 2 Version 2 - Updated CSS Library and References
 	 */
 	@JsonIgnore
-	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * The ID of the component rendering for
@@ -99,7 +98,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 * A set of properties for this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private Map<String, Serializable> properties;
+	private Map<String, Object> properties;
 
 	/**
 	 * Constructs a new Component Shell
@@ -222,7 +221,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 */
 	@Override
 	@NotNull
-	public Map<String, Serializable> getProperties()
+	public Map<String, Object> getProperties()
 	{
 		if (properties == null)
 		{
@@ -374,7 +373,7 @@ public class ComponentBase<J extends ComponentBase<J>>
 	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J setProperties(Map<String, Serializable> properties)
+	public J setProperties(Map<String, Object> properties)
 	{
 		this.properties = properties;
 		return (J) this;

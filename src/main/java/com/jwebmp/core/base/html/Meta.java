@@ -59,7 +59,7 @@ public class Meta<C extends IComponentHierarchyBase & GlobalChildren>
 		implements NoIDTag, NoClosingTag, HeadChildren<C, Meta<C>>, NoClassAttribute, NoNewLineBeforeClosingTag
 {
 
-	private static final long serialVersionUID = 1L;
+
 	private static Logger log = LogFactory.getInstance()
 	                                      .getLogger("<META>");
 

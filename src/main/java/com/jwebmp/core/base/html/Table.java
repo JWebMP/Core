@@ -52,7 +52,6 @@ public class Table<J extends Table<J>>
 		extends Component<TableChildren, TableAttributes, GlobalFeatures, GlobalEvents, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs an Empty Table

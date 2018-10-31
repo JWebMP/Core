@@ -51,7 +51,7 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
 			wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
 	private static final java.util.logging.Logger log = LogFactory.getInstance()
 	                                                              .getLogger("ClickEvent");
-	private static final long serialVersionUID = 1L;
+
 
 	protected ClickAdapter()
 	{

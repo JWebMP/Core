@@ -53,7 +53,6 @@ public class NavigationSection<J extends NavigationSection<J>>
 		extends Component<IComponentHierarchyBase, NoAttributes, GlobalFeatures, GlobalEvents, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Construct a new navigation section

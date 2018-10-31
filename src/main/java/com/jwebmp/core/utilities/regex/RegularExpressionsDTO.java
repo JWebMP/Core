@@ -25,7 +25,6 @@ import com.jwebmp.core.services.IRegularExpressions;
 import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -49,13 +48,13 @@ public class RegularExpressionsDTO
 		extends JavaScriptPart
 {
 	private static final Logger log = LogFactory.getLog("RegularExpressionDTO");
-	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * Default regular expressions
 	 */
 	@JsonValue
-	private Map<String, Serializable> regularExpressions;
+	private Map<String, Object> regularExpressions;
 
 	/**
 	 * Constructs a new instance of the regular expression dto
@@ -107,7 +106,7 @@ public class RegularExpressionsDTO
 	 *
 	 * @return
 	 */
-	public Map<String, Serializable> getRegularExpressions()
+	public Map<String, Object> getRegularExpressions()
 	{
 		if (regularExpressions == null)
 		{
@@ -121,7 +120,7 @@ public class RegularExpressionsDTO
 	 *
 	 * @param regularExpressions
 	 */
-	public void setRegularExpressions(Map<String, Serializable> regularExpressions)
+	public void setRegularExpressions(Map<String, Object> regularExpressions)
 	{
 		this.regularExpressions = regularExpressions;
 	}

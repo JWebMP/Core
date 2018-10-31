@@ -55,7 +55,6 @@ public class Time<J extends Time<J>>
 		implements GlobalChildren
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new time object

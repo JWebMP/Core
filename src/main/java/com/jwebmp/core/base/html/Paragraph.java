@@ -64,7 +64,7 @@ public class Paragraph<J extends Paragraph<J>>
 		implements BodyChildren<ParagraphChildren, J>, NoNewLineForRawText, ParagraphChildren<ParagraphChildren, J>, DetailsChildren<ParagraphChildren, J>, HeadChildren<ParagraphChildren, J>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Sets if this paragraph must render the text directly without a tag
 	 */

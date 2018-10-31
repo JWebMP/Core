@@ -74,7 +74,7 @@ public class CSSLink<J extends CSSLink<J>>
 	private static final Logger LOG = LogFactory.getInstance()
 	                                            .getLogger("HeadCSSLink");
 
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * If this link is a theme link
 	 */

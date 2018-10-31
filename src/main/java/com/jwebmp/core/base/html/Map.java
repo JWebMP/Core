@@ -53,7 +53,6 @@ public class Map<J extends Map<J>>
 		implements ImageMapChildren<MapChildren, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new Map for use with the Image Map Useless really without

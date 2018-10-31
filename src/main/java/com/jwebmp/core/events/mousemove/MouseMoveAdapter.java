@@ -44,7 +44,7 @@ public abstract class MouseMoveAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("MouseMoveEvent");
-	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * Performs a click

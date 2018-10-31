@@ -45,7 +45,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 		implements IAjaxCall<J>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The component ID that was sent back
 	 */

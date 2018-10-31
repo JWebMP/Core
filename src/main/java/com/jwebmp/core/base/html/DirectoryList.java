@@ -45,7 +45,6 @@ public class DirectoryList<J extends DirectoryList<J>>
 		extends Component<DirectoryListChildren<DirectoryListChildren, J>, DirectoryListAttributes, NoFeatures, NoEvents, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 *

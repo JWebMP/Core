@@ -49,7 +49,7 @@ public abstract class BeforeCloseAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("BeforeCloseEvent");
-	private static final long serialVersionUID = 1L;
+
 	private BeforeCloseDirective directive;
 
 	/**

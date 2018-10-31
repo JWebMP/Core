@@ -49,7 +49,7 @@ public abstract class BeforeActivateAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("BeforeActivateEvent");
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The directive for this adapter
 	 */

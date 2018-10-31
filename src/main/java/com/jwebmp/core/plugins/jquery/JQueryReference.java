@@ -34,7 +34,6 @@ class JQueryReference
 		extends JavascriptReference
 {
 
-	private static final long serialVersionUID = 1L;
 
 	public JQueryReference()
 	{

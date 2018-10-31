@@ -38,7 +38,7 @@ public class AngularChangeDto<J extends AngularChangeDto<J>>
 		extends JavaScriptPart<J>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	private static Logger log = LogFactory.getLog("AngularChangeDto");
 	@JsonProperty("old")
 	private String oldProperty;

@@ -34,8 +34,8 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.Date;
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,7 +54,7 @@ public class AngularDataServlet
 {
 	private static final Logger LOG = LogFactory.getInstance()
 	                                            .getLogger("AngularDataServlet");
-	private static final long serialVersionUID = 1L;
+
 
 	@Override
 	public void perform()

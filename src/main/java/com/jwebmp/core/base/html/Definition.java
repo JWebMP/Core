@@ -55,7 +55,6 @@ public class Definition<J extends Definition<J>>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, ParagraphChildren<IComponentHierarchyBase, J>, NoIDTag
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Specifies text that is defined as a definition

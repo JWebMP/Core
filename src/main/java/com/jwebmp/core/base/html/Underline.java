@@ -66,7 +66,6 @@ public class Underline<J extends Underline<J>>
 		implements NoNewLineForRawText, NoNewLineBeforeClosingTag
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs new Underlined Text

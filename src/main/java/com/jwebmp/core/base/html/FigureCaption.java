@@ -49,7 +49,6 @@ public class FigureCaption<J extends FigureCaption<J>>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, FigureChildren<IComponentHierarchyBase, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Defines a new Figure Captions

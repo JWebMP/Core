@@ -50,7 +50,6 @@ public class Option<J extends Option<J>>
 		implements DataListChildren<IComponentHierarchyBase, J>, SelectChildren<IComponentHierarchyBase, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText, DisplayObjectType<IComponentHierarchyBase, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new Option tag

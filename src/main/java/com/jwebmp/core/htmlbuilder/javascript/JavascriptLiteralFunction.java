@@ -31,7 +31,7 @@ public abstract class JavascriptLiteralFunction<J extends JavascriptLiteralFunct
 		extends JavascriptFunction<J>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The closing string '}'
 	 */

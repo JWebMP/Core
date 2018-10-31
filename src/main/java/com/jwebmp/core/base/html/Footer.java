@@ -52,7 +52,6 @@ public class Footer<J extends Footer<J>>
 		implements NoIDTag
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Construct a new instance of a footer

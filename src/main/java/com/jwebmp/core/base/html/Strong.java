@@ -45,7 +45,6 @@ public class Strong<J extends Strong<J>>
 		implements PhraseChildren<ParagraphChildren, J>, ParagraphChildren<ParagraphChildren, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a blank instance of strong

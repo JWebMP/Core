@@ -60,7 +60,6 @@ public class Button<C extends IComponentHierarchyBase, A extends Enum & Attribut
 		implements ListItemChildren<C, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new button object with no text

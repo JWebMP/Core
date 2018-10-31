@@ -30,7 +30,6 @@ public class NameValuePairCSSImpl
 		implements CSSImplementationClass<NameValuePairCSS, NameValuePairCSSImpl>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	private String name;
 	private String value;

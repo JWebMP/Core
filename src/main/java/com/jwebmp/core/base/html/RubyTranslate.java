@@ -59,7 +59,6 @@ public class RubyTranslate<J extends RubyTranslate<J>>
 		implements RubyChildren<IComponentHierarchyBase, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new instance of ruby translate

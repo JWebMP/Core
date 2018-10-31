@@ -58,7 +58,6 @@ public class Select<J extends Select<J>>
 		implements GlobalChildren
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 *

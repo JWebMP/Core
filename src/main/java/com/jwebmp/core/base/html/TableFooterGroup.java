@@ -63,7 +63,6 @@ public class TableFooterGroup<J extends TableFooterGroup<J>>
 		implements TableChildren<TableFooterGroupChildren, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new Table Footer Group

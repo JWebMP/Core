@@ -48,7 +48,7 @@ public abstract class DropOutAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("DropOutEvent");
-	private static final long serialVersionUID = 1L;
+
 	private DropOutDirective directive;
 
 	/**

@@ -58,7 +58,7 @@ public class TableColumn<J extends TableColumn<J>>
 
 	private static final Logger log = LogFactory.getInstance()
 	                                            .getLogger("TableColumn");
-	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * Constructs a new table column

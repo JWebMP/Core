@@ -49,7 +49,7 @@ public abstract class FocusAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("FocusEvent");
-	private static final long serialVersionUID = 1L;
+
 	private FocusDirective directive;
 
 	/**

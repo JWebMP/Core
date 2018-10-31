@@ -32,7 +32,6 @@ public class InputSelectType<J extends InputSelectType<J>>
 		extends Input<InputButtonTypeAttributes, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	private boolean multiple;
 

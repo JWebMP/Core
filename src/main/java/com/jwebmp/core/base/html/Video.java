@@ -46,7 +46,6 @@ public class Video<J extends Video<J>>
 		extends Component<VideoChildren, VideoAttributes, GlobalFeatures, GlobalEvents, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 *

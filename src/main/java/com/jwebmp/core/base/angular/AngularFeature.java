@@ -50,7 +50,7 @@ public class AngularFeature
 	/**
 	 * Field serialVersionUID
 	 */
-	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * The logger for angular

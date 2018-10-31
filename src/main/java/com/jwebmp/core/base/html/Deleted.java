@@ -55,7 +55,6 @@ public class Deleted<J extends Deleted<J>>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, ParagraphChildren<IComponentHierarchyBase, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The text marked as deleted

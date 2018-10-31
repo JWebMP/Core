@@ -72,7 +72,7 @@ public class Base<J extends Base<J>>
 	/**
 	 * Serial Version for all Components and their compatibility
 	 */
-	private static final long serialVersionUID = 1l;
+
 
 	/**
 	 * Constructs a base instance with the given reference

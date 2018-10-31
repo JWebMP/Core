@@ -33,7 +33,6 @@ public abstract class FunctionPart
 		extends JavascriptLiteralFunction
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new literal function part

@@ -45,7 +45,6 @@ public class Variable<J extends Variable<J>>
 		implements PhraseChildren<ParagraphChildren, J>, ParagraphChildren<ParagraphChildren, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new strong text

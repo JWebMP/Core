@@ -70,7 +70,6 @@ public class Div<C extends IComponentHierarchyBase, A extends Enum & AttributeDe
 		implements BodyChildren<C, J>, ImageMapChildren<C, J>, AreaChildren<C, J>, LayoutHandler, ListItemChildren<C, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new Div Object

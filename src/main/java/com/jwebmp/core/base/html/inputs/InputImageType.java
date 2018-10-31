@@ -31,7 +31,6 @@ public class InputImageType<J extends InputImageType<J>>
 		extends Input<InputImageTypeAttributes, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new button with the given text

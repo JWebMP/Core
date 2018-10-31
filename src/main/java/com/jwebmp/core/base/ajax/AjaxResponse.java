@@ -30,7 +30,6 @@ import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -46,7 +45,6 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 		extends JavaScriptPart<J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Whether or not the response is a success or not
@@ -363,7 +361,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	{
 		StringBuilder sb = new StringBuilder();
 		List<ComponentHierarchyBase> workable = new ArrayList<>(getComponents());
-		workable.forEach(next -> sb.append(getCssRenders(ComponentStyleBase.class.cast(next))));
+		workable.forEach(next -> sb.append(getCssRenders((ComponentStyleBase) next)));
 
 		return sb.toString();
 	}
@@ -551,9 +549,9 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 			for (Object o : component.getAngularObjectsAll()
 			                         .entrySet())
 			{
-				Entry<String, Serializable> object = (Entry<String, Serializable>) o;
+				Entry<String, Object> object = (Entry<String, Object>) o;
 				String key = object.getKey();
-				Serializable value = object.getValue();
+				Object value = object.getValue();
 				addDto(key, value);
 			}
 		}

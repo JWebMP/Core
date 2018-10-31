@@ -30,7 +30,6 @@ public abstract class AngularModuleBase
 		extends AngularReferenceBase
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a module with this name that always sorts default

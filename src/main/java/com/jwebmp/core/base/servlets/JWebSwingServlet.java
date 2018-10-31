@@ -46,7 +46,7 @@ public class JWebSwingServlet
 	/**
 	 * Version 1
 	 */
-	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * Constructs a new JWebSwing Servlet that is not session aware

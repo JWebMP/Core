@@ -43,7 +43,6 @@ public class SampleCode<J extends SampleCode<J>>
 		implements ParagraphChildren<PhraseChildren, J>, PhraseChildren<PhraseChildren, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Defines a set of sample code

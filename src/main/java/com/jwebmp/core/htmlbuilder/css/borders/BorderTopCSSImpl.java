@@ -40,7 +40,6 @@ public class BorderTopCSSImpl
 		implements CSSImplementationClass<BorderTopCSS, BorderTopCSSImpl>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	@CSSDetail(cssName = "border-top-color",
 			cssVersion = CSSVersions.CSS21)

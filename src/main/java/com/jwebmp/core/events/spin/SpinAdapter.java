@@ -44,7 +44,7 @@ public abstract class SpinAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("SpinEvent");
-	private static final long serialVersionUID = 1L;
+
 	private SpinDirective directive;
 
 	/**

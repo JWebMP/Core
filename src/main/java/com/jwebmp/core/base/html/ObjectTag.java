@@ -69,7 +69,6 @@ public class ObjectTag<J extends ObjectTag<J>>
 		implements NoNewLineForRawText
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 *

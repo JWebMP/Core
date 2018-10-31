@@ -29,7 +29,6 @@ public class InputResetType<J extends InputResetType<J>>
 		extends Input<InputResetTypeAttributes, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new check box

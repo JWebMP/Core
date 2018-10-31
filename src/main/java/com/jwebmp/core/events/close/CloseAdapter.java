@@ -49,7 +49,7 @@ public abstract class CloseAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("CloseEvent");
-	private static final long serialVersionUID = 1L;
+
 	private CloseDirective directive;
 
 	/**

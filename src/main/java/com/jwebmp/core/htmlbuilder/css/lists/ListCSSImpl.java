@@ -40,7 +40,6 @@ public class ListCSSImpl
 		implements CSSImplementationClass<ListCSS, ListCSSImpl>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	@CSSDetail(cssName = "list-style-image",
 			cssVersion = CSSVersions.CSS21)

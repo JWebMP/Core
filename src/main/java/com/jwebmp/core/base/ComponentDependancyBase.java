@@ -43,7 +43,6 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 		implements IComponentDependancyBase<J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The CSS String List of this component

@@ -51,7 +51,6 @@ public class DataDescription<J extends DataDescription<J>>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, DescriptionListChildren<IComponentHierarchyBase, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new Data Description object

@@ -39,7 +39,6 @@ public class OutlineCSSImpl
 		implements CSSImplementationClass<OutlineCSS, OutlineCSSImpl>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	@CSSDetail(cssName = "outline-color",
 			cssVersion = CSSVersions.CSS21)

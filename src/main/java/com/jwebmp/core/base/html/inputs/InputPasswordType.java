@@ -29,7 +29,6 @@ public class InputPasswordType<J extends InputPasswordType<J>>
 		extends Input<InputPasswordTypeAttributes, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new button with the given text

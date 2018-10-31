@@ -44,7 +44,7 @@ public abstract class RemoveAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("RemoveEvent");
-	private static final long serialVersionUID = 1L;
+
 	private RemoveDirective directive;
 
 	/**

@@ -48,7 +48,7 @@ public class ImportFile<J extends ImportFile<J>>
 	/**
 	 * Field serialVersionUID
 	 */
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The actual name for the template
 	 */

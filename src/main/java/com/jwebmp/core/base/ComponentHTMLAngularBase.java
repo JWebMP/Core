@@ -51,7 +51,6 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 		implements IComponentHTMLAngularBase<J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * All the angular attributes for this component
@@ -202,7 +201,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 		}
 		if (dataObject instanceof JavaScriptPart)
 		{
-			JavaScriptPart.class.cast(dataObject)
+			((JavaScriptPart) dataObject)
 			                    .setReferenceId(getID());
 		}
 		getAngularObjects().put(name, dataObject);

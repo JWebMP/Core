@@ -46,7 +46,7 @@ public abstract class RightClickAdapter
 	 */
 	private static final java.util.logging.Logger log = LogFactory.getInstance()
 	                                                              .getLogger("RightClickEvent");
-	private static final long serialVersionUID = 1L;
+
 	private RightClickDirective rightClickDirective;
 
 	/**

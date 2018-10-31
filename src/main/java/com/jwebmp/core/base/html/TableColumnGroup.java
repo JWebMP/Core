@@ -49,7 +49,6 @@ public class TableColumnGroup<J extends TableColumnGroup<J>>
 		extends Component<TableColumnGroupChildren, NoAttributes, NoFeatures, NoEvents, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new Table Column Group

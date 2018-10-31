@@ -72,7 +72,7 @@ public class Acronym<J extends Acronym<J>>
 	/**
 	 * Serial Version for all Components and their compatibility
 	 */
-	private static final long serialVersionUID = 1l;
+
 
 	/**
 	 * Constructs an Acronym

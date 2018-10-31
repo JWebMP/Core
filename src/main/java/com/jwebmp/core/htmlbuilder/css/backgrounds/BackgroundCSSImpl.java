@@ -37,7 +37,6 @@ public class BackgroundCSSImpl
 		implements CSSImplementationClass<BackgroundCSS, BackgroundCSSImpl>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	@CSSDetail(cssName = "background-attachment",
 			cssVersion = CSSVersions.CSS21,

@@ -51,7 +51,6 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 		implements IComponentThemeBase
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The associated theme
@@ -114,7 +113,7 @@ public class ComponentThemeBase<A extends Enum & AttributeDefinitions, F extends
 	public Set<JavascriptReference> getJavascriptReferencesAll()
 	{
 		Set<JavascriptReference> allJs = super.getJavascriptReferencesAll();
-		getThemes().forEach((Theme feature) -> allJs.addAll(Theme.class.cast(feature)
+		getThemes().forEach((Theme feature) -> allJs.addAll(((Theme) feature)
 		                                                               .getJavascriptReferences()));
 		return allJs;
 	}

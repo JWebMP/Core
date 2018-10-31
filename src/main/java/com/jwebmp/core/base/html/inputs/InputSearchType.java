@@ -29,7 +29,6 @@ public class InputSearchType<J extends InputSearchType<J>>
 		extends Input<InputResetTypeAttributes, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a search type input field

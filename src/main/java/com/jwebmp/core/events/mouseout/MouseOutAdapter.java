@@ -43,7 +43,7 @@ public abstract class MouseOutAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("MouseOutEvent");
-	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * Performs a click

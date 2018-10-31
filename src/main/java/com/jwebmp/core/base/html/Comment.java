@@ -37,7 +37,6 @@ public class Comment<C extends IComponentHierarchyBase, J extends Comment<C, J>>
 		implements HtmlChildren<C, J>, HeadChildren<C, J>, ImageMapChildren<C, J>, BodyChildren<C, J>, PageChildren
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Adds the specified comment in a comment block for HTML

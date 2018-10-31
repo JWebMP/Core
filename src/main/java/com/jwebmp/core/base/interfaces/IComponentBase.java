@@ -18,7 +18,6 @@ package com.jwebmp.core.base.interfaces;
 
 import com.jwebmp.core.base.ComponentBase;
 
-import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -31,7 +30,7 @@ import java.util.Map;
  * @since 2016/09/26
  */
 public interface IComponentBase<J extends ComponentBase<J>>
-		extends Cloneable, Serializable
+		extends Cloneable
 {
 
 	/**
@@ -83,7 +82,7 @@ public interface IComponentBase<J extends ComponentBase<J>>
 	 *
 	 * @return
 	 */
-	Map<String, Serializable> getProperties();
+	Map<String, Object> getProperties();
 
 	/**
 	 * returns a new StringSuilder of the raw text with the specific tab counts
@@ -143,7 +142,7 @@ public interface IComponentBase<J extends ComponentBase<J>>
 	 *
 	 * @return
 	 */
-	J setProperties(Map<String, Serializable> properties);
+	J setProperties(Map<String, Object> properties);
 
 	/**
 	 * Sets this components Raw Text

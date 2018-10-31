@@ -76,7 +76,6 @@ public class Head<C extends IComponentHierarchyBase, J extends Head<C, J>>
 		implements NoIDTag, HtmlChildren<C, J>, NoClassAttribute
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new Head Tag

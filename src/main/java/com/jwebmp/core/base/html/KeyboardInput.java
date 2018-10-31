@@ -55,7 +55,6 @@ public class KeyboardInput<J extends KeyboardInput<J>>
 		implements PhraseChildren<IComponentHierarchyBase, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new Keyboard Input

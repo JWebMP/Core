@@ -21,16 +21,15 @@ import com.jwebmp.core.Event;
 import com.jwebmp.core.utilities.StaticStrings;
 
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 
 /**
  * Denotes an angular variable to watch with an event class mapped
  */
 public class AngularVariableWatcher
-		implements Serializable
+
 {
 
-	private static final long serialVersionUID = 1L;
+
 	private String watchName;
 	private String variableName;
 	private Class<? extends AngularChangeEvent<?>> eventClass;

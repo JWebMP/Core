@@ -78,7 +78,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		extends Component<IComponentHierarchyBase, A, GlobalFeatures, GlobalEvents, J>
 		implements ParagraphChildren<IComponentHierarchyBase, J>
 {
-	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * The input type of this input tag

@@ -64,7 +64,6 @@ public class Span<C extends IComponentHierarchyBase, A extends Enum & AttributeD
 		implements BodyChildren<C, J>, MapChildren<C, J>, AreaChildren<C, J>, ContainerType<C, J>, ParagraphChildren<C, J>, ListItemChildren<C, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new instance of a Span item

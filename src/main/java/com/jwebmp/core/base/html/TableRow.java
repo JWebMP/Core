@@ -49,7 +49,6 @@ public class TableRow<J extends TableRow<J>>
 		implements TableChildren<TableRowChildren, J>, TableHeaderGroupChildren<TableRowChildren, J>, TableBodyGroupChildren<TableRowChildren, J>, TableFooterGroupChildren<TableRowChildren, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Construct a new default table row with no Ajax support

@@ -44,7 +44,7 @@ public abstract class ResizeStartAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("ResizeStartEvent");
-	private static final long serialVersionUID = 1L;
+
 	private ResizeStartDirective directive;
 
 	/**

@@ -71,7 +71,7 @@ public abstract class Html<C extends IComponentHierarchyBase, J extends Html<C, 
 		implements NoIDTag, NoClassAttribute
 {
 
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The head object
 	 */

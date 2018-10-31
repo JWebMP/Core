@@ -29,7 +29,6 @@ public class InputEmailType<J extends InputEmailType<J>>
 		extends Input<InputButtonTypeAttributes, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new instance of a button type

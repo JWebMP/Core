@@ -65,7 +65,7 @@ public class HorizontalRule<J extends HorizontalRule<J>>
 	private static final java.util.logging.Logger log = LogFactory.getInstance()
 	                                                              .getLogger("HR");
 	private static final HorizontalRule hr = new HorizontalRule();
-	private static final long serialVersionUID = 1L;
+
 
 	public HorizontalRule()
 	{

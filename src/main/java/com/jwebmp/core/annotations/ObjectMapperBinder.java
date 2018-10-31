@@ -1,5 +1,7 @@
 package com.jwebmp.core.annotations;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
@@ -49,7 +51,12 @@ public class ObjectMapperBinder
 		module.bind(DefaultObjectMapper)
 		      .toInstance(new ObjectMapper().registerModule(new ParameterNamesModule())
 		                                    .registerModule(new Jdk8Module())
-		                                    .registerModule(new JavaTimeModule()));
+		                                    .registerModule(new JavaTimeModule())
+		                                    .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
+		                                    .setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.NONE)
+		                                    .setVisibility(PropertyAccessor.IS_GETTER, JsonAutoDetect.Visibility.NONE)
+		                                    .setVisibility(PropertyAccessor.SETTER, JsonAutoDetect.Visibility.NONE)
+		                 );
 
 		log.fine("Bound ObjectWriter.class @Named(JSON)");
 
@@ -60,6 +67,7 @@ public class ObjectMapperBinder
 				                              .with(SerializationFeature.INDENT_OUTPUT)
 				                              .with(SerializationFeature.WRITE_ENUMS_USING_TO_STRING)
 				                              .with(JsonGenerator.Feature.QUOTE_FIELD_NAMES)
+				                              .without(SerializationFeature.FAIL_ON_EMPTY_BEANS)
 				                              .withoutFeatures(SerializationFeature.FAIL_ON_UNWRAPPED_TYPE_IDENTIFIERS));
 
 		module.bind(JSONObjectWriterTiny)
@@ -69,6 +77,7 @@ public class ObjectMapperBinder
 				                              .without(SerializationFeature.INDENT_OUTPUT)
 				                              .with(SerializationFeature.WRITE_ENUMS_USING_TO_STRING)
 				                              .with(JsonGenerator.Feature.QUOTE_FIELD_NAMES)
+				                              .without(SerializationFeature.FAIL_ON_EMPTY_BEANS)
 				                              .withoutFeatures(SerializationFeature.FAIL_ON_UNWRAPPED_TYPE_IDENTIFIERS));
 
 

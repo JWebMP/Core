@@ -57,7 +57,6 @@ public class Superscript<J extends Superscript<J>>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, ParagraphChildren<ParagraphChildren, J>, PhraseChildren<ParagraphChildren, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs and empty super script tag

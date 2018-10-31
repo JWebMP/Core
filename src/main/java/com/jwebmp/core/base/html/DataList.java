@@ -50,7 +50,6 @@ public class DataList<J extends DataList<J>>
 		extends Component<DataListChildren, NoAttributes, NoFeatures, NoEvents, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Creates a new DataList with the given.

@@ -37,7 +37,6 @@ public class MarginsCSSImpl
 		implements CSSImplementationClass<MarginsCSS, MarginsCSSImpl>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	@CSSDetail(cssName = "margin",
 			cssVersion = CSSVersions.CSS21)

@@ -29,7 +29,7 @@ public class AjaxComponentUpdates<J extends AjaxComponentUpdates<J>>
 		extends JavaScriptPart<J>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The stored HTML
 	 */

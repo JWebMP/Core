@@ -19,7 +19,6 @@ package com.jwebmp.core.htmlbuilder.css.composer;
 
 import com.jwebmp.core.utilities.StaticStrings;
 
-import java.io.Serializable;
 import java.util.Comparator;
 import java.util.StringTokenizer;
 
@@ -33,7 +32,7 @@ import java.util.StringTokenizer;
  * @since 07 Apr 2013
  */
 public class CSSLine
-		implements Serializable, Comparable<CSSLine>, Comparator<CSSLine>
+		implements Comparable<CSSLine>, Comparator<CSSLine>
 {
 
 	private String property;

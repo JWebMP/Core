@@ -49,7 +49,7 @@ public abstract class CancelAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("CancelEvent");
-	private static final long serialVersionUID = 1L;
+
 
 	private CancelDirective directive;
 

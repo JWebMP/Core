@@ -32,7 +32,6 @@ public class JQueryMigrateReference
 		extends JavascriptReference
 {
 
-	private static final long serialVersionUID = 1L;
 
 	public JQueryMigrateReference()
 	{

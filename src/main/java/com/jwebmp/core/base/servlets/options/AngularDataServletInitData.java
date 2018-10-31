@@ -31,7 +31,6 @@ public class AngularDataServletInitData<J extends AngularDataServletInitData<J>>
 		extends JavaScriptPart<J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The local storage map to be set for the provider

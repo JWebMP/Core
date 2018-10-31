@@ -13,7 +13,7 @@ public class ColourHex
 		implements CssColour<ColourHex>, Serializable
 {
 
-	private static final long serialVersionUID = 1L;
+
 	private String thisHex;
 
 	public ColourHex(String thisHex)

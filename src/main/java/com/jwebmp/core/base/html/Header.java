@@ -58,7 +58,6 @@ public class Header<J extends Header<J>>
 		implements NoIDTag, GlobalChildren
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Construct a new instance of a footer

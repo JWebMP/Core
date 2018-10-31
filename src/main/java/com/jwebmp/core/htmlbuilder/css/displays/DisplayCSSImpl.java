@@ -33,7 +33,6 @@ public class DisplayCSSImpl
 		implements CSSImplementationClass<DisplayCSS, DisplayCSSImpl>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	@CSSDetail(cssName = "display",
 			cssVersion = CSSVersions.CSS21)

@@ -52,7 +52,7 @@ public class WebReference<J extends WebReference>
 
 	private static final Logger LOG = LogFactory.getInstance()
 	                                            .getLogger("Web Reference");
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The dummy reference for the sorting
 	 */

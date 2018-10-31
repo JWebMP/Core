@@ -58,7 +58,6 @@ public class Canvas<J extends Canvas<J>>
 		implements NoNewLineBeforeClosingTag
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new canvas

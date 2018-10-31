@@ -33,7 +33,7 @@ public class TableCSSImpl
 		implements CSSImplementationClass<TableCSS, TableCSSImpl>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	@CSSDetail(cssName = "border-collapse",
 			cssVersion = CSSVersions.CSS21)
 	private TableBorderCollapse borderCollapse;

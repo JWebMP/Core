@@ -47,7 +47,6 @@ public class OptionGroup<J extends OptionGroup<J>>
 		implements SelectChildren<SelectChildren, J>, NoIDTag, NoNewLineBeforeClosingTag
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new OptionGroup for select Children

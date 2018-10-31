@@ -47,7 +47,7 @@ public abstract class SortAdapter
 	/**
 	 * Field serialVersionUID
 	 */
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Field directive
 	 */

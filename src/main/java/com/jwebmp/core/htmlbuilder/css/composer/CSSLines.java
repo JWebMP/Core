@@ -21,7 +21,6 @@ import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.core.utilities.TextUtilities;
 
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +32,7 @@ import java.util.List;
  * @since 07 Apr 2013
  */
 public class CSSLines
-		implements Serializable
+
 {
 	/**
 	 * If this should be rendered as tiny

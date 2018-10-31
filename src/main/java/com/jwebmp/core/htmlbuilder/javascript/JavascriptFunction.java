@@ -29,7 +29,6 @@ public abstract class JavascriptFunction<J extends JavascriptFunction<J>>
 		extends JavaScriptPart<J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new function

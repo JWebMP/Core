@@ -51,7 +51,7 @@ public class AjaxReceiverServlet
 
 	private static final Logger log = LogFactory.getInstance()
 	                                            .getLogger("AJAXServlet");
-	private static final long serialVersionUID = 1L;
+
 
 	public AjaxReceiverServlet()
 	{

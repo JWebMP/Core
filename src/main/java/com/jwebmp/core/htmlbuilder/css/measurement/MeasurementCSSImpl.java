@@ -18,7 +18,6 @@ public class MeasurementCSSImpl
 		implements CSSImplementationValue, CSSImplementationClass<MeasurementCSS, MeasurementCSSImpl>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	@CSSDetail
 	private double value;
@@ -130,11 +129,11 @@ public class MeasurementCSSImpl
 	@Override
 	public String toString()
 	{
-		if (Double.class.cast(value)
+		if (((Double) value)
 		                .toString()
 		                .endsWith(".0"))
 		{
-			Integer valInt = Double.class.cast(value)
+			Integer valInt = ((Double) value)
 			                             .intValue();
 			if (MeasurementType().isRequiresQuotes())
 			{

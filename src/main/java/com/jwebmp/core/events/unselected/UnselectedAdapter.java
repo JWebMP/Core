@@ -44,7 +44,7 @@ public abstract class UnselectedAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("UnselectedEvent");
-	private static final long serialVersionUID = 1L;
+
 	private UnselectedDirective directive;
 
 	/**

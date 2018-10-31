@@ -47,7 +47,7 @@ public class Center<J extends Center<J>>
 {
 
 	private static final Center center = new Center();
-	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * Constructs a new center placement. Better to use the static option

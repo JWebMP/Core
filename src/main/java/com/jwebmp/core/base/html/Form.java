@@ -72,7 +72,7 @@ public class Form<J extends Form<J>>
 		implements ListItemChildren<IComponentHierarchyBase, J>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The label of this form
 	 */

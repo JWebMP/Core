@@ -48,7 +48,7 @@ public class CSSImpl
 		implements CSSImplementationClass<CSS, CSSImpl>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The animation CSS
 	 */

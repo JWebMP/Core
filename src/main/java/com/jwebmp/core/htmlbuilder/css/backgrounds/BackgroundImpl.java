@@ -41,7 +41,7 @@ public class BackgroundImpl
 		implements CSSShortHand, CSSImplementationClass<Background, BackgroundImpl>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	@CSSDetail(cssName = "background-attachment",
 			cssVersion = CSSVersions.CSS21,
 			jsName = "backgroundAttachment")

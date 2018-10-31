@@ -36,7 +36,6 @@ public class PaddingCSSImpl
 		implements CSSImplementationClass<PaddingCSS, PaddingCSSImpl>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	@CSSDetail(cssName = "padding",
 			cssVersion = CSSVersions.CSS21)

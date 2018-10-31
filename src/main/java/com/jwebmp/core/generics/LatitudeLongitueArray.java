@@ -26,7 +26,6 @@ public class LatitudeLongitueArray
 		extends XYObject<Double, Double>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/*
 	 * Constructs a new LatitudeLongitueArray. X is latitude usually

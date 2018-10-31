@@ -51,7 +51,6 @@ public class Marker<J extends Marker<J>>
 		implements ParagraphChildren<IComponentHierarchyBase, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Specifies text that is a marker

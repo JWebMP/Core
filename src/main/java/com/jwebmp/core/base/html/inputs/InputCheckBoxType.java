@@ -34,7 +34,6 @@ public class InputCheckBoxType<J extends InputCheckBoxType<J>>
 		implements InputChoiceType<J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new check box

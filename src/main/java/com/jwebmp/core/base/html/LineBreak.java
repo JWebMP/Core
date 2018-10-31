@@ -54,7 +54,7 @@ public class LineBreak<J extends LineBreak<J>>
 {
 
 	private static final LineBreak br = new LineBreak();
-	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * Inserts a new object of a line break. Rather access this class statically.

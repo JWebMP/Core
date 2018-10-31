@@ -62,7 +62,6 @@ public class Image<J extends Image<J>>
 		implements ImageMapChildren<IComponentHierarchyBase, J>, FigureChildren<IComponentHierarchyBase, J>, GlobalChildren, ListItemChildren<IComponentHierarchyBase, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Construct a new Image

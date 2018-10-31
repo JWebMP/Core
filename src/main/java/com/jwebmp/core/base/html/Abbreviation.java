@@ -63,7 +63,7 @@ public class Abbreviation<J extends Abbreviation<J>>
 	/**
 	 * Serial Version for all Components and their compatibility
 	 */
-	private static final long serialVersionUID = 1l;
+
 
 	/**
 	 * Constructs a new Abbreviation Tag

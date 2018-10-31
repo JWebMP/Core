@@ -66,7 +66,7 @@ public class Body<F extends BodyFeatures, J extends Body<F, J>>
 		extends Component<IComponentHierarchyBase, BodyAttributes, F, NoEvents, J>
 		implements PageChildren, HtmlChildren<IComponentHierarchyBase, J>, LayoutHandler, ContainerType<IComponentHierarchyBase, J>
 {
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * If this body has rendered the scripts on itself
 	 */

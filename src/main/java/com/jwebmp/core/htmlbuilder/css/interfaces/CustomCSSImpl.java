@@ -31,7 +31,6 @@ public class CustomCSSImpl
 		implements CSSImplementationClass<CustomCSS, CustomCSSImpl>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	private NameValuePairCSSImpl[] valuePair;
 

@@ -48,7 +48,7 @@ public class DataAdapter<C extends IComponentHierarchyBase, A extends Enum & Att
 		extends Div<C, A, F, E, J>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	private Component linkedComponent;
 	private String dataAdapterID;
 

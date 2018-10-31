@@ -19,7 +19,7 @@ public class SessionStorageProperties<J extends SessionStorageProperties<J>>
 		extends JavaScriptPart<J>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The client browser local storage
 	 */

@@ -49,7 +49,7 @@ public abstract class CreateAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("CreateEvent");
-	private static final long serialVersionUID = 1L;
+
 	private CreateDirective directive;
 
 	/**

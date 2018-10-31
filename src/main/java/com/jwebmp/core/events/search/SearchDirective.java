@@ -33,7 +33,6 @@ public class SearchDirective
 		implements IAngularDirective<SearchDirective>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new right click directive based on the angular object passed in

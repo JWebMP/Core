@@ -38,7 +38,7 @@ public class JWAngularModule
 		implements IAngularModule<JWAngularModule>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The attached page
 	 */

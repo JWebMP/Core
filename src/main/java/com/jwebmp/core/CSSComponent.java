@@ -39,7 +39,6 @@ public class CSSComponent<J extends CSSComponent<J>>
 		implements GlobalChildren
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new CSS Class with the given features and events associated

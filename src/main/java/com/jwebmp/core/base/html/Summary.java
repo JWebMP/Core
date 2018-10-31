@@ -53,7 +53,6 @@ public class Summary<J extends Summary<J>>
 		implements DetailsChildren<IComponentHierarchyBase, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new instance of summary

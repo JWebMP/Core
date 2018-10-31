@@ -55,7 +55,6 @@ public class TextArea<J extends TextArea<J>>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, GlobalChildren
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new blank instance of a text area

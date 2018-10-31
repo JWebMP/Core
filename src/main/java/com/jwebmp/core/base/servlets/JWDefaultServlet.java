@@ -72,7 +72,7 @@ public abstract class JWDefaultServlet
 	/**
 	 * Version 1
 	 */
-	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * Field allowOrigin

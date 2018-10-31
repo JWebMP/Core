@@ -23,7 +23,6 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -38,7 +37,7 @@ import static java.lang.String.*;
  * @since A long time ago in a galaxy far away
  */
 public class FileTemplates
-		implements Serializable
+
 {
 	private static final java.util.logging.Logger LOG = LogFactory.getLog("FileTemplates");
 	/**
@@ -52,7 +51,6 @@ public class FileTemplates
 	@JsonIgnore
 	private static final Map<String, StringBuilder> TemplateVariables = new ConcurrentHashMap<>();
 
-	private static final long serialVersionUID = 1L;
 
 	private FileTemplates()
 	{
@@ -256,7 +254,8 @@ public class FileTemplates
 			}
 			catch (FileNotFoundException ex)
 			{
-				LOG.log(Level.SEVERE, "[Error]-[unable to find template file];[TemplateFile]-[" + templateName + "];[TemplatePath]-[" + referenceClass.getResource(templateName).getPath() + "]", ex);
+				LOG.log(Level.SEVERE, "[Error]-[unable to find template file];[TemplateFile]-[" + templateName + "];[TemplatePath]-[" + referenceClass.getResource(templateName)
+				                                                                                                                                      .getPath() + "]", ex);
 			}
 			catch (IOException ex)
 			{
@@ -264,7 +263,7 @@ public class FileTemplates
 			}
 			catch (NullPointerException npe)
 			{
-				LOG.log(Level.SEVERE, "template file [" + fileName + "(.js)] not found.", npe);
+				LOG.log(Level.SEVERE, "template file [" + fileName + "(.js)] not found.");
 			}
 			catch (Exception npe)
 			{

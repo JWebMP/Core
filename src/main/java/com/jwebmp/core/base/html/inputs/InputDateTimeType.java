@@ -29,7 +29,6 @@ public class InputDateTimeType<J extends InputDateTimeType<J>>
 		extends Input<InputButtonTypeAttributes, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new instance of a button type

@@ -51,7 +51,6 @@ public class Emphasized<J extends Emphasized<J>>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, PhraseChildren<IComponentHierarchyBase, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new Emphasized Text String

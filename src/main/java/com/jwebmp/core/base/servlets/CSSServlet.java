@@ -31,7 +31,7 @@ import com.jwebmp.guicedservlets.GuicedServletKeys;
 public class CSSServlet
 		extends JWDefaultServlet
 {
-	private static final long serialVersionUID = 1L;
+
 
 	@Override
 	public void perform()

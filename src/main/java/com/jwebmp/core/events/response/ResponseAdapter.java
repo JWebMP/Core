@@ -44,7 +44,7 @@ public abstract class ResponseAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("ResponseEvent");
-	private static final long serialVersionUID = 1L;
+
 	private ResponseDirective directive;
 
 	/**

@@ -60,7 +60,6 @@ public class Source<J extends Source<J>>
 		implements AudioChildren<IComponentHierarchyBase, J>, VideoChildren<IComponentHierarchyBase, J>, NoClosingTag
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new source tag

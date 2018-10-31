@@ -39,7 +39,7 @@ public class BorderCSSImpl
 		implements CSSImplementationClass<BorderCSS, BorderCSSImpl>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	@CSSDetail(cssName = "border-bottom-color",
 			cssVersion = CSSVersions.CSS21)
 	private ColourCSSImpl borderBottomColor;

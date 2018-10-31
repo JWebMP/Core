@@ -32,7 +32,7 @@ public class AngularMessagesModule
 	/**
 	 * Field serialVersionUID
 	 */
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Field messsgesModuleEnabled
 	 */

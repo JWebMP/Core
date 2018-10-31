@@ -43,7 +43,7 @@ public abstract class OpenAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("OpenEvent");
-	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * Performs a click

@@ -50,7 +50,6 @@ public class Figure<J extends Figure<J>>
 		implements NoIDTag
 {
 
-	private static final long serialVersionUID = 1L;
 
 	public Figure()
 	{

@@ -65,7 +65,7 @@ public class Address<J extends Address<J>>
 	/**
 	 * Serial Version for all Components and their compatibility
 	 */
-	private static final long serialVersionUID = 1l;
+
 
 	/**
 	 * Constructs a new instance of address

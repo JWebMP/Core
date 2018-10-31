@@ -26,7 +26,6 @@ import com.jwebmp.core.plugins.ComponentInformation;
 import com.jwebmp.core.utilities.StaticStrings;
 
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 
 /**
  * This event is triggered when a button is clicked.
@@ -39,10 +38,10 @@ import java.io.Serializable;
 		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
 public abstract class ButtonClickAdapter
 		extends Event
-		implements Serializable
+
 {
 
-	private static final long serialVersionUID = 1L;
+
 	private ButtonClickDirective directive;
 
 	/**

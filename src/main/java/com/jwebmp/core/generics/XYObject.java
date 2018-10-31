@@ -38,10 +38,9 @@ import java.util.Date;
  * @since 25 Dec 2015
  */
 public class XYObject<X extends Serializable, Y extends Serializable>
-		implements Serializable
+
 {
 
-	private static final long serialVersionUID = 1L;
 
 	private final SimpleDateFormat outputFormat;
 
@@ -87,7 +86,7 @@ public class XYObject<X extends Serializable, Y extends Serializable>
 			{
 				if (getX() instanceof Date)
 				{
-					return "['" + outputFormat.format(Date.class.cast(getX())) + "'," + getY() + "]";
+					return "['" + outputFormat.format((Date) getX()) + "'," + getY() + "]";
 				}
 				else if (getX() instanceof String)
 				{

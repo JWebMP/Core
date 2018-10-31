@@ -31,7 +31,7 @@ import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 public class AngularDataVariables
 		extends JWDefaultServlet
 {
-	private static final long serialVersionUID = 1L;
+
 
 	@Override
 	public void perform()

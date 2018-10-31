@@ -46,7 +46,6 @@ public class Output<J extends Output<J>>
 		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, NoEvents, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 *

@@ -35,7 +35,6 @@ public class TextShadowsCSSImpl
 		implements CSSImplementationClass<TextShadows, TextShadowsCSSImpl>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	@CSSDetail(cssName = "h-shadow",
 			cssVersion = CSSVersions.CSS21)

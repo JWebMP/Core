@@ -16,7 +16,10 @@
  */
 package com.jwebmp.core.htmlbuilder.javascript;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
@@ -39,8 +42,6 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.*;
-import static com.fasterxml.jackson.annotation.JsonInclude.Include.*;
 import static com.jwebmp.core.annotations.ObjectMapperBinder.*;
 
 /**
@@ -51,10 +52,7 @@ import static com.jwebmp.core.annotations.ObjectMapperBinder.*;
  * @since 2014/07/09
  */
 @SuppressWarnings({"MissingClassJavaDoc", "unused"})
-@JsonAutoDetect(fieldVisibility = ANY,
-		getterVisibility = NONE,
-		setterVisibility = NONE)
-@JsonInclude(NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JavaScriptPart<J extends JavaScriptPart<J>>
 {
@@ -66,12 +64,10 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	/**
 	 * A reference id that can be returned with a given variable
 	 */
-	@JsonProperty(value = "$jwid")
 	private String referenceId;
 	/**
 	 * if empty braces should be rendered
 	 */
-	@JsonIgnore
 	private boolean renderEmptyBraces = false;
 
 	/**
@@ -94,8 +90,9 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	{
 		try
 		{
-			ObjectWriter writer = GuiceContext.get(Key.get(ObjectWriter.class, Names.named("JSON")));
-			return writer.writeValueAsString(o);
+			ObjectWriter writer = GuiceContext.get(JSONObjectWriter);
+			return writer.writeValueAsString(o)
+			             .replace("\r\n", "\n");
 		}
 		catch (JsonProcessingException ex)
 		{
@@ -132,6 +129,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 *
 	 * @return
 	 */
+	@JsonIgnore
 	public ObjectReader getJsonObjectReader()
 	{
 		return GuiceContext.getInstance(JSONObjectReader);
@@ -142,6 +140,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 *
 	 * @return
 	 */
+	@JsonIgnore
 	public ObjectMapper getFunctionObjectMapper()
 	{
 		return GuiceContext.getInstance(Key.get(ObjectMapper.class, Names.named("JSFUNCTION")));
@@ -333,6 +332,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 * @return The string to be added to the JavaScript
 	 */
 	@Override
+	@JsonIgnore
 	public String toString()
 	{
 		String s = null;
@@ -402,7 +402,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 		{
 			return "";
 		}
-		return s;
+		return s.replace("\r\n", "\n");
 	}
 
 	/**
@@ -411,6 +411,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 *
 	 * @return
 	 */
+	@JsonIgnore
 	public JavascriptPartType getJavascriptType()
 	{
 		return JavascriptPartType.Javascript;
@@ -421,11 +422,12 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 *
 	 * @return
 	 */
+	@JsonIgnore
 	public ObjectWriter getJavascriptObjectMapper()
 	{
 		try
 		{
-			return GuiceContext.getInstance(Key.get(ObjectWriter.class, Names.named("JSON")));
+			return GuiceContext.getInstance(JSONObjectWriter);
 		}
 		catch (NullPointerException e)
 		{
@@ -439,6 +441,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 *
 	 * @return
 	 */
+	@JsonIgnore
 	public ObjectWriter getJsonObjectMapper()
 	{
 		return GuiceContext.getInstance(Key.get(ObjectWriter.class, Names.named("JSON")));
@@ -451,6 +454,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 *
 	 * @return the renderEmptyBraces (type boolean) of this JavaScriptPart object.
 	 */
+	@JsonIgnore
 	public boolean isRenderEmptyBraces()
 	{
 		return renderEmptyBraces;
@@ -465,12 +469,14 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
+	@JsonIgnore
 	public J setRenderEmptyBraces(boolean renderEmptyBraces)
 	{
 		this.renderEmptyBraces = renderEmptyBraces;
 		return (J) this;
 	}
 
+	@JsonIgnore
 	public ObjectReader getJavascriptObjectReader()
 	{
 		try
@@ -492,6 +498,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	public Map<String, String> toAttributes()
 	{
 		Map<String, String> map = new LinkedHashMap<>();
+
 
 		Field[] fields = getClass().getDeclaredFields();
 		for (Field field : fields)
@@ -532,6 +539,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 *
 	 * @return
 	 */
+	@JsonIgnore
 	public String toString(@SuppressWarnings("unused") boolean tiny)
 	{
 		String output = null;
@@ -552,6 +560,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 *
 	 * @return
 	 */
+	@JsonProperty(value = "$jwid")
 	public String getReferenceId()
 	{
 		return referenceId;
@@ -562,6 +571,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 *
 	 * @param referenceId
 	 */
+	@JsonProperty(value = "$jwid")
 	public void setReferenceId(String referenceId)
 	{
 		this.referenceId = referenceId;
@@ -612,4 +622,6 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	{
 		//No configuration needed
 	}
+
+
 }

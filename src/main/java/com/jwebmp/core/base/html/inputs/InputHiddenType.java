@@ -29,7 +29,6 @@ public class InputHiddenType<J extends InputHiddenType<J>>
 		extends Input<InputHiddenTypeAttributes, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new button with the given text

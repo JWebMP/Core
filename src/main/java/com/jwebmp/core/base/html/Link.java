@@ -72,7 +72,7 @@ public class Link<J extends Link<J>>
 
 	private static final java.util.logging.Logger log = LogFactory.getInstance()
 	                                                              .getLogger("ALink");
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The address directing to
 	 */

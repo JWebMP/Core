@@ -55,7 +55,6 @@ public class Title<J extends Title<J>>
 		implements NoIDTag, HeadChildren<IComponentHierarchyBase, J>, OneValidTag, NoClassAttribute, NoNewLineForRawText, NoNewLineBeforeChildren, NoNewLineBeforeClosingTag
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a blank title

@@ -54,7 +54,6 @@ public class TableCaption<J extends TableCaption<J>>
 		implements TableChildren<IComponentHierarchyBase, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new table caption

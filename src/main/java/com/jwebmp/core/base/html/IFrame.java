@@ -60,7 +60,6 @@ public class IFrame<J extends IFrame<J>>
 		extends Component<IComponentHierarchyBase, IFrameAttributes, GlobalFeatures, GlobalEvents, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new IFrame

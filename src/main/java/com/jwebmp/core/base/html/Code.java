@@ -59,7 +59,6 @@ public class Code<J extends Code<J>>
 		implements PhraseChildren<IComponentHierarchyBase, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new Code Objects

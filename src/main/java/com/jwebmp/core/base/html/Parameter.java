@@ -68,7 +68,7 @@ public class Parameter<J extends Parameter<J>>
 	/**
 	 * Serial Version for all Components and their compatibility
 	 */
-	private static final long serialVersionUID = 1l;
+
 
 	/**
 	 *

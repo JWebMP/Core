@@ -20,7 +20,6 @@ public abstract class Theme
 		implements ITheme, Comparator<Theme>, Serializable
 {
 
-	private static final long serialVersionUID = 1L;
 
 	private final String name;
 	private final String cssClassName;
@@ -132,7 +131,7 @@ public abstract class Theme
 	@Override
 	public final String getSize30Icon()
 	{
-		return this.icon30;
+		return icon30;
 	}
 
 	/**
@@ -144,7 +143,7 @@ public abstract class Theme
 	@Override
 	public final String getSize60Icon()
 	{
-		return this.icon60;
+		return icon60;
 	}
 
 	/**
@@ -156,7 +155,7 @@ public abstract class Theme
 	@Override
 	public final String getSize90Icon()
 	{
-		return this.icon90;
+		return icon90;
 	}
 
 	/**

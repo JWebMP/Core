@@ -35,7 +35,6 @@ public class FontsCSSImpl
 		implements CSSImplementationClass<FontsCSS, FontsCSSImpl>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	@CSSDetail(cssName = "font-family",
 			cssVersion = CSSVersions.CSS21)

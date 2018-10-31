@@ -67,7 +67,6 @@ public class Page<J extends Page<J>>
 		implements IPage
 {
 
-	private static final long serialVersionUID = 1L;
 
 	private static final Logger log = LogFactory.getInstance()
 	                                            .getLogger("Page");

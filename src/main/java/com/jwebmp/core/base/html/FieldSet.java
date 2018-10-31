@@ -48,7 +48,7 @@ public class FieldSet<J extends FieldSet<J>>
 		implements FormChildren<FieldSetChildren, J>, NoIDTag
 {
 
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The legend if any is applied
 	 */

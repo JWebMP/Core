@@ -32,7 +32,7 @@ import javax.validation.constraints.NotNull;
 public class JavascriptReference
 		extends WebReference<JavascriptReference>
 {
-	private static final long serialVersionUID = 1L;
+
 
 	private boolean defer;
 	private boolean async;

@@ -49,7 +49,7 @@ public abstract class DropOverAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("DropOverEvent");
-	private static final long serialVersionUID = 1L;
+
 	private DropOverDirective directive;
 
 	/**

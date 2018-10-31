@@ -35,7 +35,7 @@ public abstract class PerformCommandFeature
 		extends Feature<PerformCommandFeature, JavaScriptPart, PerformCommandFeature>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The given command name to execute
 	 */

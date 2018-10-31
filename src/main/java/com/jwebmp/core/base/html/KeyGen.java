@@ -56,7 +56,6 @@ public class KeyGen<J extends KeyGen<J>>
 		extends Component<IComponentHierarchyBase, KeyGenAttributes, GlobalFeatures, GlobalEvents, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new KeyGen with the given name

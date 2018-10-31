@@ -70,7 +70,6 @@ public class HeaderText<J extends HeaderText<J>>
 
 {
 
-	private static final long serialVersionUID = 1L;
 
 	private HeaderTypes headerType;
 
@@ -90,7 +89,7 @@ public class HeaderText<J extends HeaderText<J>>
 	 * @param text
 	 * 		The text for the header
 	 */
-	public HeaderText(final HeaderTypes headerType, String text)
+	public HeaderText(HeaderTypes headerType, String text)
 	{
 		super(headerType.name(), headerType.getLinkedComponent());
 		setText(text == null ? "" : text);

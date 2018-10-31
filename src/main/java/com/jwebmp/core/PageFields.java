@@ -43,7 +43,7 @@ public class PageFields<J extends PageFields<J>>
 		extends JavaScriptPart<J>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The back reference to the page
 	 */
@@ -249,13 +249,10 @@ public class PageFields<J extends PageFields<J>>
 	 * 		The Title of the page
 	 */
 	@SuppressWarnings("unchecked")
-	public final J setTitle(Title Title)
+	public final J setTitle(String Title)
 	{
-		title = Title;
-		if (title != null)
-		{
-			title.setPage(page);
-		}
+		title = new Title(Title);
+		title.setPage(page);
 		return (J) this;
 	}
 
@@ -266,10 +263,13 @@ public class PageFields<J extends PageFields<J>>
 	 * 		The Title of the page
 	 */
 	@SuppressWarnings("unchecked")
-	public final J setTitle(String Title)
+	public final J setTitle(Title Title)
 	{
-		title = new Title(Title);
-		title.setPage(page);
+		title = Title;
+		if (title != null)
+		{
+			title.setPage(page);
+		}
 		return (J) this;
 	}
 

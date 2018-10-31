@@ -54,15 +54,6 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		extends ComponentHTMLBase<F, E, J>
 		implements IComponentHTMLAttributeBase<A, J>
 {
-
-	/**
-	 * Serial Version for all Components and their compatibility
-	 * <p>
-	 * version 2 Version 2 - Updated CSS Library and References
-	 */
-	@JsonIgnore
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Logger for the Component
 	 */
@@ -178,18 +169,6 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 		return sb;
 	}
 
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object o)
-	{
-		return super.equals(o);
-	}
-
 	/**
 	 * Adds the ID attribute to the component
 	 */
@@ -208,6 +187,18 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 			}
 		}
 		super.preConfigure();
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		return super.equals(o);
 	}
 
 	/**

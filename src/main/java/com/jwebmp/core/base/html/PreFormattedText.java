@@ -57,7 +57,6 @@ public class PreFormattedText<J extends PreFormattedText<J>>
 		implements BodyChildren<IComponentHierarchyBase, J>, NoNewLineForRawText, NoNewLineBeforeClosingTag, ParagraphChildren<IComponentHierarchyBase, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Creates a new Pre tag

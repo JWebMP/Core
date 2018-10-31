@@ -53,7 +53,6 @@ public class Subscript<J extends Subscript<J>>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs an empty sub script

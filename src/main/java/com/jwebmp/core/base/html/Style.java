@@ -62,7 +62,7 @@ public class Style<C extends IComponentHierarchyBase, J extends Style<C, J>>
 	/**
 	 * Field serialVersionUID
 	 */
-	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * Constructs a new blank Style tag

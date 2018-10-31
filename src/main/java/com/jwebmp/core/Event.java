@@ -48,7 +48,6 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 		implements GlobalEvents
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * A list of all queries to execute on ajax response

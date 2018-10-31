@@ -33,7 +33,6 @@ public class InputRadioType<J extends InputRadioType<J>>
 		implements InputChoiceType<J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new check box

@@ -16,6 +16,7 @@
  */
 package com.jwebmp.core.htmlbuilder.javascript;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -29,31 +30,15 @@ public class JavaScriptPartTest
 	}
 
 	@Test
-	public void testDisplay()
+	public void testDisplay() throws JsonProcessingException
 	{
+		Tutorial tut = new Tutorial(8L, "title", "language");
+		System.out.println(new JavaScriptPart().getJavascriptObjectMapper()
+		                                       .writeValueAsString(tut));
 		JavaScriptPartImpl bean = new JavaScriptPartImpl();
 		System.out.println(bean.toString());
 		System.out.println(bean.toString(true));
 	}
 
-	public class JavaScriptPartImpl
-			extends JavaScriptPart
-	{
-		private String name = "name";
 
-		public JavaScriptPartImpl()
-		{
-
-		}
-
-		public String getName()
-		{
-			return name;
-		}
-
-		public void setName(String name)
-		{
-			this.name = name;
-		}
-	}
 }

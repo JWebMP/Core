@@ -61,7 +61,6 @@ public class List<C extends ListChildren, A extends Enum & AttributeDefinitions,
 		implements ListChildren<C, J>, DisplayObjectType<C, J>, ListItemChildren<C, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs an unordered list

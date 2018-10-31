@@ -54,7 +54,7 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	 * Version 2 - Updated CSS Library and References
 	 */
 	@JsonIgnore
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The actual tag string of this component
 	 */
@@ -717,6 +717,19 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	}
 
 	/**
+	 * Run all Assign Function To Components and Pre Configures for all Events
+	 */
+	@Override
+	public void preConfigure()
+	{
+		if (!isInitialized())
+		{
+			init();
+		}
+		super.preConfigure();
+	}
+
+	/**
 	 * @see ComponentEventBase#hashCode()
 	 */
 	@Override
@@ -732,18 +745,5 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	public boolean equals(Object o)
 	{
 		return super.equals(o);
-	}
-
-	/**
-	 * Run all Assign Function To Components and Pre Configures for all Events
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (!isInitialized())
-		{
-			init();
-		}
-		super.preConfigure();
 	}
 }

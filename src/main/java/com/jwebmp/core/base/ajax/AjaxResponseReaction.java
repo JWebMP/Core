@@ -20,8 +20,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 
-import java.io.Serializable;
-
 /**
  * Denotes a specific reaction to occur at the client
  *
@@ -32,13 +30,13 @@ import java.io.Serializable;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class AjaxResponseReaction<J extends AjaxResponseReaction<J>>
 		extends JavaScriptPart<J>
-		implements Serializable
+
 {
 
 	/**
 	 * Field serialVersionUID
 	 */
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The title of the reaction
 	 */

@@ -58,7 +58,6 @@ public class H1<J extends H1<J>>
 		extends HeaderText<J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * HTML Headings<p>

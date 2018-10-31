@@ -29,7 +29,6 @@ public class InputFileType<J extends InputFileType<J>>
 		extends Input<InputFileTypeAttributes, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new file type input

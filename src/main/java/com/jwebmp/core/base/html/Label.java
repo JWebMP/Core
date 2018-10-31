@@ -59,7 +59,7 @@ public class Label<J extends Label<J>>
 		implements ParagraphChildren<IComponentHierarchyBase, J>, NoNewLineBeforeChildren, NoNewLineForRawText, NoNewLineBeforeClosingTag
 {
 
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The component this is for
 	 */

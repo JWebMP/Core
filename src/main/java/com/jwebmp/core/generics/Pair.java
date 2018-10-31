@@ -18,7 +18,6 @@ package com.jwebmp.core.generics;
 
 import com.jwebmp.core.base.html.interfaces.NamedPair;
 
-import java.io.Serializable;
 import java.util.Comparator;
 
 /**
@@ -31,11 +30,11 @@ import java.util.Comparator;
  *
  * @author MMagon
  */
-public class Pair<L extends Serializable, R extends Serializable>
-		implements NamedPair<L, R>, Serializable, Comparable<Pair>, Comparator<Pair>
+public class Pair<L, R>
+		implements NamedPair<L, R>, Comparable<Pair>, Comparator<Pair>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	private static boolean leftOnly = true;
 	/**
 	 * The left side

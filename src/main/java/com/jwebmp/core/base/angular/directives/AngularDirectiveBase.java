@@ -30,7 +30,6 @@ public abstract class AngularDirectiveBase
 		extends AngularReferenceBase
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a directive with this name that always sorts default

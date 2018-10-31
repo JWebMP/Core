@@ -48,7 +48,7 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 		implements CSSImplementationClass<A, T>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The default adapter
 	 */

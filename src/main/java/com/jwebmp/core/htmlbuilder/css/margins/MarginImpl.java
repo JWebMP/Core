@@ -36,7 +36,6 @@ public class MarginImpl
 		implements CSSImplementationClass<Margin, MarginImpl>, CSSShortHand
 {
 
-	private static final long serialVersionUID = 1L;
 
 	@CSSDetail(cssName = "margin-right",
 			cssVersion = CSSVersions.CSS21)

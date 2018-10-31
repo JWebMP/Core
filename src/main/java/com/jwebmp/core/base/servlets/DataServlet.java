@@ -54,7 +54,7 @@ public class DataServlet
 	/**
 	 * Field serialVersionUID
 	 */
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The Object Mapper for rendering the JSON with Jackson
 	 */

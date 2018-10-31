@@ -51,7 +51,6 @@ public class SmallText<J extends SmallText<J>>
 		implements ParagraphChildren<IComponentHierarchyBase, J>, PhraseChildren<IComponentHierarchyBase, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Construct a new instance of the small text

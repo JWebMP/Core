@@ -52,7 +52,6 @@ public class Details<J extends Details<J>>
 		implements ParagraphChildren<DetailsChildren, J>, PhraseChildren<DetailsChildren, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new Details section.

@@ -56,7 +56,7 @@ public abstract class ComponentStyleBase<C extends IComponentHierarchyBase, A ex
 	/**
 	 * Field serialVersionUID
 	 */
-	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * The CSS Object for all styling

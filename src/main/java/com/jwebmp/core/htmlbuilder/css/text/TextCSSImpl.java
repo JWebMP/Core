@@ -35,7 +35,7 @@ public class TextCSSImpl
 		implements CSSImplementationClass<TextCSS, TextCSSImpl>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	@CSSDetail(cssName = "color",
 			cssVersion = CSSVersions.CSS21)
 	private ColourCSSImpl color;

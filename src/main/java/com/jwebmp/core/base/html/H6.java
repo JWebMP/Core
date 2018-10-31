@@ -58,7 +58,6 @@ public class H6<J extends H6<J>>
 		extends HeaderText<J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	public H6()
 	{

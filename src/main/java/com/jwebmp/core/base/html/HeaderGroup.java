@@ -50,7 +50,6 @@ public class HeaderGroup<J extends HeaderGroup<J>>
 		implements BodyChildren<HeaderGroupChildren, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Definition and Usage<p>

@@ -34,7 +34,6 @@ import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.math.BigDecimal;
@@ -51,12 +50,12 @@ import java.util.logging.Logger;
  * @since 17 Jan 2016
  */
 public class CSSPropertiesFactory<A extends Annotation>
-		implements Serializable
+
 {
 	public static final int DefaultIntValue = Integer.MIN_VALUE;
 	public static final double DefaultDoubleValue = Integer.MIN_VALUE;
 	@JsonIgnore
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The default logger
 	 */
@@ -424,7 +423,7 @@ public class CSSPropertiesFactory<A extends Annotation>
 				Object obj = field.get(classImpl);
 				if (CSSImplementationClass.class.isAssignableFrom(obj.getClass()))
 				{
-					m.putAll(getCSSProperties(CSSImplementationClass.class.cast(obj)));
+					m.putAll(getCSSProperties((CSSImplementationClass) obj));
 				}
 			}
 			catch (IllegalArgumentException | IllegalAccessException ex)
@@ -788,7 +787,8 @@ public class CSSPropertiesFactory<A extends Annotation>
 		                                          .replaceAll("interface ", "") + "Impl";
 		try
 		{
-			newInstance = Class.forName(implementationClass).getDeclaredConstructor()
+			newInstance = Class.forName(implementationClass)
+			                   .getDeclaredConstructor()
 			                   .newInstance();
 
 			for (Map.Entry<StringBuilder, Object> entry : fieldMapping.entrySet())

@@ -40,7 +40,6 @@ public class BorderRightCSSImpl
 		implements CSSImplementationClass<BorderRightCSS, BorderRightCSSImpl>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	@CSSDetail(cssName = "border-right-color",
 			cssVersion = CSSVersions.CSS21)

@@ -47,7 +47,6 @@ public class Legend<J extends Legend<J>>
 		implements FieldSetChildren<IComponentHierarchyBase, J>, NoNewLineBeforeClosingTag
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 *

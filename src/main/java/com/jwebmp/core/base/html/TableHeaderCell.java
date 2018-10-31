@@ -68,7 +68,6 @@ public class TableHeaderCell<J extends TableHeaderCell<J>>
 		implements TableRowChildren<IComponentHierarchyBase, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a normal table cell
@@ -89,7 +88,7 @@ public class TableHeaderCell<J extends TableHeaderCell<J>>
 		super(ComponentTypes.TableCell);
 		if (dataDisplay != null)
 		{
-			add(Component.class.cast(dataDisplay));
+			add((Component) dataDisplay);
 		}
 		setTag("th");
 	}

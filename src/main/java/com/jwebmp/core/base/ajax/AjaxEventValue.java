@@ -31,7 +31,7 @@ public class AjaxEventValue<J extends AjaxEventValue<J>>
 		extends JavaScriptPart<J>
 {
 
-	private static final long serialVersionUID = 1L;
+
 	/**
 	 * If the alt key was pressed
 	 */

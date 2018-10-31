@@ -28,7 +28,6 @@ public class AnimateCSSImpl
 		implements CSSImplementationClass<AnimateCSS, AnimateCSSImpl>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The implementation class for animate CSS

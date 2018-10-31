@@ -35,7 +35,6 @@ public class Track<J extends Track<J>>
 		extends Component<IComponentHierarchyBase, TrackAttributes, NoFeatures, NoEvents, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new track

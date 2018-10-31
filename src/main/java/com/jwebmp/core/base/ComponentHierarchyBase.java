@@ -70,7 +70,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	/**
 	 * Field serialVersionUID
 	 */
-	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * Field log

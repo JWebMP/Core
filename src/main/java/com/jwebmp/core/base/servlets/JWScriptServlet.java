@@ -46,7 +46,7 @@ public class JWScriptServlet
 	/**
 	 * Field serialVersionUID
 	 */
-	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * When to perform any commands

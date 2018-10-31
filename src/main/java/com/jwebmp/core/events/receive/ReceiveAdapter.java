@@ -44,7 +44,7 @@ public abstract class ReceiveAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("ReceiveEvent");
-	private static final long serialVersionUID = 1L;
+
 	private ReceiveDirective directive;
 
 	/**

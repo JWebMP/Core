@@ -45,7 +45,7 @@ public abstract class Feature<F extends GlobalFeatures, O extends JavaScriptPart
 	/**
 	 * Field serialVersionUID
 	 */
-	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * The options object associated with this feature
@@ -169,7 +169,7 @@ public abstract class Feature<F extends GlobalFeatures, O extends JavaScriptPart
 	@Override
 	public J setComponent(ComponentHierarchyBase component)
 	{
-		if (this.getComponent() != null)
+		if (getComponent() != null)
 		{
 			getComponent().removeFeature((F) this);
 		}

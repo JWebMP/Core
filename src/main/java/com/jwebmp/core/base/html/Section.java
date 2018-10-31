@@ -48,7 +48,6 @@ public class Section<J extends Section<J>>
 		extends Component<IComponentHierarchyBase, NoAttributes, GlobalFeatures, GlobalEvents, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Create a new section

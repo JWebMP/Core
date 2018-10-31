@@ -57,7 +57,6 @@ public class ListItem<J extends ListItem<J>>
 		implements ListChildren<ListItemChildren, J>, NoNewLineForRawText, ListItemChildren<ListItemChildren, J>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a blank text List Item

@@ -56,7 +56,6 @@ public class Quotation<J extends Quotation<J>>
 		implements ParagraphChildren<IComponentHierarchyBase, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new Quotation

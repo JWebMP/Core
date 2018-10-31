@@ -49,7 +49,6 @@ public class NoScript<J extends NoScript<J>>
 		implements BodyChildren<IComponentHierarchyBase, J>, NoIDTag
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 *

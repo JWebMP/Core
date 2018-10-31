@@ -75,7 +75,7 @@ public class TableCell<J extends TableCell<J>>
 	/**
 	 * Field serialVersionUID
 	 */
-	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * Constructs a normal table cell
