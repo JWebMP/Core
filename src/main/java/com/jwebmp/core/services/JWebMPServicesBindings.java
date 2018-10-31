@@ -11,7 +11,7 @@ import com.jwebmp.guicedinjection.interfaces.IGuiceDefaultBinder;
 import java.util.ServiceLoader;
 import java.util.Set;
 
-@SuppressWarnings("Convert2Diamond")
+@SuppressWarnings({"Convert2Diamond", "MissingFieldJavaDoc"})
 public class JWebMPServicesBindings
 		implements IGuiceDefaultBinder<JWebMPServicesBindings, GuiceInjectorModule>
 {

@@ -1,9 +1,9 @@
 package com.jwebmp.core.base.angular.services;
 
-import java.util.Comparator;
+import com.jwebmp.guicedinjection.interfaces.IDefaultService;
 
 public interface IAngularDefaultService<J extends IAngularDefaultService<J>>
-		extends Comparable<J>, Comparator<J>
+		extends IDefaultService<J>
 {
 	/**
 	 * Returns the unique reference name of the directive
@@ -19,22 +19,7 @@ public interface IAngularDefaultService<J extends IAngularDefaultService<J>>
 	 */
 	String renderFunction();
 
-	default int compare(J o1, J o2)
-	{
-		return o1.getSortOrder()
-		         .compareTo(o2.getSortOrder());
-	}
-
-	/**
-	 * Returns any applicable sort order or 0 is assumed
-	 *
-	 * @return The sort order
-	 */
-	default Integer getSortOrder()
-	{
-		return 100;
-	}
-
+	@Override
 	default int compareTo(J o)
 	{
 		if (o == null)
@@ -45,7 +30,7 @@ public interface IAngularDefaultService<J extends IAngularDefaultService<J>>
 		{
 			return 0;
 		}
-		int result = getSortOrder().compareTo(o.getSortOrder());
+		int result = sortOrder().compareTo(o.sortOrder());
 		return result == 0 ? 1 : result;
 	}
 

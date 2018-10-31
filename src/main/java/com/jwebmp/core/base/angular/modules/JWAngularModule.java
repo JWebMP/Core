@@ -51,7 +51,7 @@ public class JWAngularModule
 	}
 
 	@Override
-	public Integer getSortOrder()
+	public Integer sortOrder()
 	{
 		return Integer.MAX_VALUE - 100;
 	}
