@@ -55,15 +55,6 @@ public class ComponentBase<J extends ComponentBase<J>>
 	 */
 	@JsonIgnore
 	protected static final java.util.logging.Logger log = LogFactory.getLog("ComponentBase");
-
-	/**
-	 * Serial Version for all Components and their compatibility
-	 *
-	 * @version 2 Version 2 - Updated CSS Library and References
-	 */
-	@JsonIgnore
-
-
 	/**
 	 * The ID of the component rendering for
 	 */
