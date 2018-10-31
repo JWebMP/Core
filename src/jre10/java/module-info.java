@@ -142,16 +142,16 @@ module com.jwebmp.core {
 	exports com.jwebmp.core.base.angular.forms.enumerations;
 	exports com.jwebmp.core.components;
 
-	requires com.jwebmp.interception;
+	requires transitive com.jwebmp.interception;
 
-	requires uadetector.core;
+	requires transitive uadetector.core;
 
 	requires transitive com.jwebmp.guicedservlets;
-	requires uadetector.resources;
+	requires transitive uadetector.resources;
 
-	requires org.apache.commons.io;
-	requires org.apache.commons.lang3;
-	requires org.apache.commons.text;
+	requires transitive org.apache.commons.io;
+	requires transitive org.apache.commons.lang3;
+	requires transitive org.apache.commons.text;
 
 
 	uses IRegularExpressions;

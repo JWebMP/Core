@@ -202,7 +202,7 @@ public class ComponentHTMLAngularBase<A extends Enum & AttributeDefinitions, F e
 		if (dataObject instanceof JavaScriptPart)
 		{
 			((JavaScriptPart) dataObject)
-			                    .setReferenceId(getID());
+					.setReferenceId(getID());
 		}
 		getAngularObjects().put(name, dataObject);
 		return (J) this;

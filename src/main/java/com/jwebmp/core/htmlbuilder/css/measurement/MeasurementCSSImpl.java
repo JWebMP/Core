@@ -130,11 +130,11 @@ public class MeasurementCSSImpl
 	public String toString()
 	{
 		if (((Double) value)
-		                .toString()
-		                .endsWith(".0"))
+				    .toString()
+				    .endsWith(".0"))
 		{
 			Integer valInt = ((Double) value)
-			                             .intValue();
+					                 .intValue();
 			if (MeasurementType().isRequiresQuotes())
 			{
 				return StaticStrings.STRING_SINGLE_QUOTES + valInt + MeasurementType().getHtmlAnnotation() + StaticStrings.STRING_SINGLE_QUOTES;
