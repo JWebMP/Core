@@ -88,9 +88,9 @@ public class HorizontalRule<J extends HorizontalRule<J>>
 	 *
 	 * @return
 	 */
-	public static HorizontalRule getNewInstance()
+	public static HorizontalRule<?> getNewInstance()
 	{
-		return new HorizontalRule();
+		return new HorizontalRule<>();
 	}
 
 	@Override

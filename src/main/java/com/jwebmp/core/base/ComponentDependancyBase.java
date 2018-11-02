@@ -42,8 +42,6 @@ public class ComponentDependancyBase<J extends ComponentDependancyBase<J>>
 		extends ComponentBase<J>
 		implements IComponentDependancyBase<J>
 {
-
-
 	/**
 	 * The CSS String List of this component
 	 */

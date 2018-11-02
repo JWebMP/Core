@@ -54,13 +54,6 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		implements IComponentFeatureBase<F, J>, Comparator<J>, Comparable<J>
 {
 	/**
-	 * Serial Version for all Components and their compatibility
-	 * <p>
-	 * Version 2 - Updated CSS Library and References
-	 */
-	@JsonIgnore
-	private static final long serialVersionUID = 2L;
-	/**
 	 * A linked component if required
 	 */
 	@JsonIgnore
