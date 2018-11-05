@@ -5,8 +5,11 @@ import com.jwebmp.core.base.angular.modules.AngularMessagesModule;
 import com.jwebmp.core.base.angular.services.*;
 import com.jwebmp.core.base.servlets.intercepters.LocalStorageIntercepter;
 import com.jwebmp.core.events.click.ClickDisabledDirective;
+import com.jwebmp.core.implementations.JWebMPModuleExclusions;
 import com.jwebmp.core.services.*;
 import com.jwebmp.guicedinjection.interfaces.IGuiceDefaultBinder;
+import com.jwebmp.guicedinjection.interfaces.IGuiceScanJarExclusions;
+import com.jwebmp.guicedinjection.interfaces.IGuiceScanModuleExclusions;
 import com.jwebmp.guicedservlets.services.IGuiceSiteBinder;
 import com.jwebmp.interception.services.AjaxCallIntercepter;
 import com.jwebmp.interception.services.DataCallIntercepter;
@@ -196,6 +199,9 @@ module com.jwebmp.core {
 
 	provides IAngularModule with AngularMessagesModule;
 	provides IAngularController with JWAngularController;
+
+	provides IGuiceScanJarExclusions with JWebMPModuleExclusions;
+	provides IGuiceScanModuleExclusions with JWebMPModuleExclusions;
 
 	provides IAngularDirective with com.jwebmp.core.events.activate.ActivateDirective,
 			                           com.jwebmp.core.events.beforeactivate.BeforeActivateDirective,
