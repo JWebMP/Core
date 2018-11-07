@@ -2,6 +2,7 @@ package com.jwebmp.core.services;
 
 import com.jwebmp.core.Page;
 import com.jwebmp.guicedinjection.interfaces.IDefaultService;
+import com.jwebmp.guicedinjection.interfaces.IServiceEnablement;
 
 import javax.validation.constraints.NotNull;
 
@@ -9,7 +10,7 @@ import javax.validation.constraints.NotNull;
  * A service for configuration built pages
  */
 public interface IPageConfigurator<J extends IPageConfigurator<J>>
-		extends IDefaultService<J>
+		extends IDefaultService<J>, IServiceEnablement<J>
 {
 	/**
 	 * Configures the given page for the parameters
@@ -21,11 +22,4 @@ public interface IPageConfigurator<J extends IPageConfigurator<J>>
 	 */
 	@NotNull
 	Page<?> configure(Page<?> page);
-
-	/**
-	 * If this page configurator is enabled
-	 *
-	 * @return if the configuration must run
-	 */
-	boolean enabled();
 }

@@ -56,4 +56,14 @@ public class SortDirective
 		                    .toString();
 	}
 
+	/**
+	 * If this page configurator is enabled
+	 *
+	 * @return if the configuration must run
+	 */
+	@Override
+	public boolean enabled()
+	{
+		return true;
+	}
 }

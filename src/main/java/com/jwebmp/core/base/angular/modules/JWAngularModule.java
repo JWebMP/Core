@@ -105,7 +105,10 @@ public class JWAngularModule
 			Set<IAngularModule> modules = GuiceContext.get(AngularModulesKey);
 			for (IAngularModule module : modules)
 			{
-				moduleNames.add(module.getReferenceName());
+				if (module.enabled())
+				{
+					moduleNames.add(module.getReferenceName());
+				}
 			}
 			StringBuilder nameRenders = new StringBuilder();
 			for (String name : moduleNames)
@@ -125,5 +128,16 @@ public class JWAngularModule
 			returnable += ");";
 		}
 		return returnable;
+	}
+
+	/**
+	 * If this page configurator is enabled
+	 *
+	 * @return if the configuration must run
+	 */
+	@Override
+	public boolean enabled()
+	{
+		return true;
 	}
 }

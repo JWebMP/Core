@@ -55,4 +55,16 @@ public class ResizeStopDirective
 		return FileTemplates.getFileTemplate(ResizeStopDirective.class, "ResizeStop", "ResizeStop.min.js")
 		                    .toString();
 	}
+
+
+	/**
+	 * If this page configurator is enabled
+	 *
+	 * @return if the configuration must run
+	 */
+	@Override
+	public boolean enabled()
+	{
+		return true;
+	}
 }

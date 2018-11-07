@@ -362,7 +362,10 @@ public class AngularFeature
 		                                             .getLoader(IAngularController.class, ServiceLoader.load(IAngularController.class));
 		for (IAngularController item : loader)
 		{
-			angulars.add(item);
+			if (item.enabled())
+			{
+				angulars.add(item);
+			}
 		}
 		angulars.forEach(controller ->
 		                 {
@@ -384,10 +387,13 @@ public class AngularFeature
 	{
 		sortedList.forEach(item ->
 		                   {
-			                   String function = item.renderFunction();
-			                   StringBuilder configurations = FileTemplates.compileTemplate(item.getReferenceName(), function);
-			                   configurations.append(StaticStrings.STRING_NEWLINE_TEXT + StaticStrings.STRING_TAB);
-			                   output.append(configurations);
+			                   if (item.enabled())
+			                   {
+				                   String function = item.renderFunction();
+				                   StringBuilder configurations = FileTemplates.compileTemplate(item.getReferenceName(), function);
+				                   configurations.append(StaticStrings.STRING_NEWLINE_TEXT + StaticStrings.STRING_TAB);
+				                   output.append(configurations);
+			                   }
 		                   });
 	}
 

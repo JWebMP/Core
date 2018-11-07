@@ -80,4 +80,16 @@ public class JWAngularController
 		output = output.replace("JW_SCOPE_INSERTIONS", statementOutput.toString());
 		return output;
 	}
+
+
+	/**
+	 * If this page configurator is enabled
+	 *
+	 * @return if the configuration must run
+	 */
+	@Override
+	public boolean enabled()
+	{
+		return true;
+	}
 }

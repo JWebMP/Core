@@ -1,9 +1,12 @@
 package com.jwebmp.core.base.angular.services;
 
 import com.jwebmp.guicedinjection.interfaces.IDefaultService;
+import com.jwebmp.guicedinjection.interfaces.IServiceEnablement;
+
+import javax.validation.constraints.NotNull;
 
 public interface IAngularDefaultService<J extends IAngularDefaultService<J>>
-		extends IDefaultService<J>
+		extends IDefaultService<J>, IServiceEnablement<J>
 {
 	/**
 	 * Returns the unique reference name of the directive
@@ -19,7 +22,16 @@ public interface IAngularDefaultService<J extends IAngularDefaultService<J>>
 	 */
 	String renderFunction();
 
+	/**
+	 * Method compareTo ...
+	 *
+	 * @param o
+	 * 		of type J
+	 *
+	 * @return int
+	 */
 	@Override
+	@NotNull
 	default int compareTo(J o)
 	{
 		if (o == null)
