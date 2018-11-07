@@ -46,12 +46,6 @@ public class AngularFeature
 		extends Feature
 		implements HTMLFeatures
 {
-
-	/**
-	 * Field serialVersionUID
-	 */
-
-
 	/**
 	 * The logger for angular
 	 */
