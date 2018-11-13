@@ -157,7 +157,6 @@ module com.jwebmp.core {
 	requires transitive net.sf.uadetector.core;
 	requires transitive net.sf.uadetector.resources;
 
-	requires com.fasterxml.jackson.annotation;
 	requires java.validation;
 
 	requires aopalliance;
@@ -167,7 +166,7 @@ module com.jwebmp.core {
 	requires com.google.guice.extensions.servlet;
 	requires com.google.guice;
 
-
+	requires com.fasterxml.jackson.annotation;
 	requires com.fasterxml.jackson.databind;
 	requires com.fasterxml.jackson.module.paramnames;
 	requires com.fasterxml.jackson.datatype.jdk8;
