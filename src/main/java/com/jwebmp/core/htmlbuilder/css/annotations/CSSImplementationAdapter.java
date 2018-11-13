@@ -57,7 +57,7 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 	/**
 	 * The properties factory
 	 */
-	private CSSPropertiesFactory<A> propertyFactory;
+	private transient CSSPropertiesFactory<A> propertyFactory;
 
 	/**
 	 * For implementing generic methods on CSS

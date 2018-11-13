@@ -83,12 +83,12 @@ public class Page<J extends Page<J>>
 	 * The current user agent of the render
 	 */
 	@JsonIgnore
-	private transient ReadableUserAgent userAgent;
+	private ReadableUserAgent userAgent;
 
 	/**
 	 * The angular feature
 	 */
-	private transient AngularPageConfigurator angular;
+	private AngularPageConfigurator angular;
 
 	/**
 	 * If this page has already gone through initialization

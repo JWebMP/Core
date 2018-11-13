@@ -263,7 +263,7 @@ public class FileTemplates
 			}
 			catch (NullPointerException npe)
 			{
-				LOG.log(Level.SEVERE, "template file [" + fileName + "(.js)] not found.");
+				LOG.log(Level.SEVERE, "template file [" + fileName + "(.js)] not found.", npe);
 			}
 			catch (Exception npe)
 			{

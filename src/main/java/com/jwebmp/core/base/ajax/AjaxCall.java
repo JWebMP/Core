@@ -44,8 +44,6 @@ public class AjaxCall<J extends AjaxCall<J>>
 		extends JavaScriptPart<J>
 		implements IAjaxCall<J>
 {
-
-
 	/**
 	 * The component ID that was sent back
 	 */

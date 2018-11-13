@@ -21,13 +21,11 @@ import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
 public interface IAjaxCall<J extends AjaxCall<J>>
-		extends Serializable
 {
 	/**
 	 * Returns this component ID
