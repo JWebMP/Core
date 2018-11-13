@@ -28,6 +28,9 @@ module com.jwebmp.core {
 	exports com.jwebmp.core.base.angular.configurations;
 	exports com.jwebmp.core.base.client;
 
+	exports com.jwebmp.core.services;
+	exports com.jwebmp.core.base.angular.services;
+
 	exports com.jwebmp.core.base.html;
 	exports com.jwebmp.core.base.html.attributes;
 	exports com.jwebmp.core.base.html.inputs;
@@ -145,27 +148,34 @@ module com.jwebmp.core {
 	exports com.jwebmp.core.base.angular.forms.enumerations;
 	exports com.jwebmp.core.components;
 
-	requires java.logging;
-	requires com.jwebmp.logmaster;
+	requires transitive java.logging;
+	requires transitive com.jwebmp.logmaster;
+	requires transitive com.jwebmp.guicedinjection;
+	requires transitive com.jwebmp.interception;
+	requires transitive com.jwebmp.guicedservlets;
+
+	requires transitive net.sf.uadetector.core;
+	requires transitive net.sf.uadetector.resources;
+
 	requires com.fasterxml.jackson.annotation;
 	requires java.validation;
-	requires com.jwebmp.guicedinjection;
+
 	requires aopalliance;
-	requires com.jwebmp.interception;
+
 	requires javax.servlet.api;
-	requires uadetector.core;
 
 	requires com.google.guice.extensions.servlet;
 	requires com.google.guice;
-	requires com.jwebmp.guicedservlets;
-	requires uadetector.resources;
+
+
 	requires com.fasterxml.jackson.databind;
 	requires com.fasterxml.jackson.module.paramnames;
 	requires com.fasterxml.jackson.datatype.jdk8;
 	requires com.fasterxml.jackson.datatype.jsr310;
 	requires com.fasterxml.jackson.core;
 
-	requires java.sql;
+	//requires java.sql;
+
 	requires com.google.common;
 	requires org.apache.commons.io;
 	requires org.apache.commons.lang3;
@@ -289,7 +299,5 @@ module com.jwebmp.core {
 
 	opens com.jwebmp.core.utilities.regex to com.fasterxml.jackson.databind;
 
-	exports com.jwebmp.core.services;
-	exports com.jwebmp.core.base.angular.services;
 
 }

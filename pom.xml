@@ -27,28 +27,21 @@
         </dependency>
 
         <dependency>
-            <groupId>net.sf.qualitycheck</groupId>
-            <artifactId>quality-check</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>net.sf.uadetector</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>uadetector-core</artifactId>
+            <version>${project.version}</version>
+            <classifier>${jwebmp.runtime.classifier}</classifier>
+            <!--<optional>true</optional>-->
+            <type>jar</type>
         </dependency>
 
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>net.sf.uadetector</groupId>
-            <artifactId>uadetector-json</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>net.sf.uadetector</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>uadetector-resources</artifactId>
+            <version>${project.version}</version>
+            <classifier>${jwebmp.runtime.classifier}</classifier>
+            <!--<optional>true</optional>-->
+            <type>jar</type>
         </dependency>
 
         <dependency>
