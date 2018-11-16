@@ -1,19 +1,3 @@
-import com.jwebmp.core.annotations.JWebMPSiteBinder;
-import com.jwebmp.core.annotations.ObjectMapperBinder;
-import com.jwebmp.core.base.angular.controllers.JWAngularController;
-import com.jwebmp.core.base.angular.modules.AngularMessagesModule;
-import com.jwebmp.core.base.angular.services.*;
-import com.jwebmp.core.base.servlets.intercepters.LocalStorageIntercepter;
-import com.jwebmp.core.events.click.ClickDisabledDirective;
-import com.jwebmp.core.implementations.JWebMPModuleExclusions;
-import com.jwebmp.core.services.*;
-import com.jwebmp.guicedinjection.interfaces.IGuiceDefaultBinder;
-import com.jwebmp.guicedinjection.interfaces.IGuiceScanJarExclusions;
-import com.jwebmp.guicedinjection.interfaces.IGuiceScanModuleExclusions;
-import com.jwebmp.guicedservlets.services.IGuiceSiteBinder;
-import com.jwebmp.interception.services.AjaxCallIntercepter;
-import com.jwebmp.interception.services.DataCallIntercepter;
-
 module com.jwebmp.core {
 
 	exports com.jwebmp.core;
@@ -27,6 +11,9 @@ module com.jwebmp.core {
 	exports com.jwebmp.core.base.angular.modules;
 	exports com.jwebmp.core.base.angular.configurations;
 	exports com.jwebmp.core.base.client;
+
+	exports com.jwebmp.core.services;
+	exports com.jwebmp.core.base.angular.services;
 
 	exports com.jwebmp.core.base.html;
 	exports com.jwebmp.core.base.html.attributes;
@@ -145,27 +132,33 @@ module com.jwebmp.core {
 	exports com.jwebmp.core.base.angular.forms.enumerations;
 	exports com.jwebmp.core.components;
 
-	requires java.logging;
-	requires com.jwebmp.logmaster;
-	requires com.fasterxml.jackson.annotation;
+	requires transitive java.logging;
+	requires transitive com.jwebmp.logmaster;
+	requires transitive com.jwebmp.guicedinjection;
+	requires transitive com.jwebmp.interception;
+	requires transitive com.jwebmp.guicedservlets;
+
+	requires transitive net.sf.uadetector.core;
+	requires transitive net.sf.uadetector.resources;
+
 	requires java.validation;
-	requires com.jwebmp.guicedinjection;
+
 	requires aopalliance;
-	requires com.jwebmp.interception;
+
 	requires javax.servlet.api;
-	requires uadetector.core;
 
 	requires com.google.guice.extensions.servlet;
 	requires com.google.guice;
-	requires com.jwebmp.guicedservlets;
-	requires uadetector.resources;
+
+	requires com.fasterxml.jackson.annotation;
 	requires com.fasterxml.jackson.databind;
 	requires com.fasterxml.jackson.module.paramnames;
 	requires com.fasterxml.jackson.datatype.jdk8;
 	requires com.fasterxml.jackson.datatype.jsr310;
 	requires com.fasterxml.jackson.core;
 
-	requires java.sql;
+	//requires java.sql;
+
 	requires com.google.common;
 	requires org.apache.commons.io;
 	requires org.apache.commons.lang3;
@@ -289,7 +282,5 @@ module com.jwebmp.core {
 
 	opens com.jwebmp.core.utilities.regex to com.fasterxml.jackson.databind;
 
-	exports com.jwebmp.core.services;
-	exports com.jwebmp.core.base.angular.services;
 
 }
