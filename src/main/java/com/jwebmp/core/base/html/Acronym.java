@@ -69,10 +69,6 @@ public class Acronym<J extends Acronym<J>>
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("Acronym");
-	/**
-	 * Serial Version for all Components and their compatibility
-	 */
-
 
 	/**
 	 * Constructs an Acronym
@@ -82,8 +78,17 @@ public class Acronym<J extends Acronym<J>>
 	 */
 	public Acronym(String text)
 	{
-		super(ComponentTypes.Acronym.getComponentTag(), ComponentTypes.Acronym);
+		this();
 		setText(text);
+	}
+
+	/**
+	 * Constructs an Acronym
+	 * <p>
+	 */
+	public Acronym()
+	{
+		super(ComponentTypes.Acronym.getComponentTag(), ComponentTypes.Acronym);
 	}
 
 	/**

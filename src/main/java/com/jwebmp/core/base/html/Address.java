@@ -62,9 +62,6 @@ public class Address<J extends Address<J>>
 		extends Component<AddressChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, Serializable
 {
-	/**
-	 * Serial Version for all Components and their compatibility
-	 */
 
 
 	/**

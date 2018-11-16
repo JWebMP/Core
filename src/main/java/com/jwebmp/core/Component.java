@@ -16,7 +16,6 @@
  */
 package com.jwebmp.core;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jwebmp.core.base.ComponentStyleBase;
 import com.jwebmp.core.base.html.Paragraph;
 import com.jwebmp.core.base.html.Span;
@@ -56,12 +55,12 @@ public class Component<C extends IComponentHierarchyBase, A extends Enum & Attri
 		implements ICssStructure<J>
 {
 	/**
-	 * Serial Version for all Components and their compatibility
-	 *
-	 * @version 2 Version 2 - Updated CSS Library and References
+	 * Don't setup anything constructor - dangerous
 	 */
-	@JsonIgnore
-	private static final long serialVersionUID = 2L;
+	public Component()
+	{
+		this("notspecified", ComponentTypes.Span);
+	}
 
 	/**
 	 * Construct a new Component with a custom tag

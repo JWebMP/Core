@@ -69,11 +69,6 @@ public class Article<J extends Article<J>>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, Serializable
 {
 	/**
-	 * Serial Version for all Components and their compatibility
-	 */
-
-
-	/**
 	 * Constructs a new instance of article
 	 */
 	public Article()
