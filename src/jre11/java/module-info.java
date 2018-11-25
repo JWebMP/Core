@@ -168,7 +168,6 @@ module com.jwebmp.core {
 
 	requires com.fasterxml.jackson.annotation;
 	requires com.fasterxml.jackson.databind;
-	requires com.fasterxml.jackson.module.paramnames;
 	requires com.fasterxml.jackson.datatype.jdk8;
 	requires com.fasterxml.jackson.datatype.jsr310;
 	requires com.fasterxml.jackson.core;
@@ -179,7 +178,6 @@ module com.jwebmp.core {
 	requires org.apache.commons.io;
 	requires org.apache.commons.lang3;
 	requires org.apache.commons.text;
-
 
 	uses IRegularExpressions;
 	uses IAngularDirective;
