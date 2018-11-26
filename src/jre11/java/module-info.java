@@ -148,14 +148,14 @@ module com.jwebmp.core {
 	exports com.jwebmp.core.base.angular.forms.enumerations;
 	exports com.jwebmp.core.components;
 
-	requires transitive java.logging;
-	requires transitive com.jwebmp.logmaster;
-	requires transitive com.jwebmp.guicedinjection;
-	requires transitive com.jwebmp.interception;
-	requires transitive com.jwebmp.guicedservlets;
+	requires java.logging;
+	requires com.jwebmp.logmaster;
+	requires com.jwebmp.guicedinjection;
+	requires com.jwebmp.interception;
+	requires com.jwebmp.guicedservlets;
 
-	requires transitive net.sf.uadetector.core;
-	requires transitive net.sf.uadetector.resources;
+	requires net.sf.uadetector.core;
+	requires net.sf.uadetector.resources;
 
 	requires java.validation;
 
@@ -169,8 +169,6 @@ module com.jwebmp.core {
 	requires com.fasterxml.jackson.annotation;
 	requires com.fasterxml.jackson.databind;
 	requires com.fasterxml.jackson.core;
-
-	//requires java.sql;
 
 	requires com.google.common;
 	requires org.apache.commons.io;
