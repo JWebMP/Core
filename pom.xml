@@ -45,18 +45,30 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.commons</groupId>
+            <groupId>com.jwebmp</groupId>
             <artifactId>commons-lang3</artifactId>
+            <version>${project.version}</version>
+            <classifier>${jwebmp.runtime.classifier}</classifier>
+            <!--<optional>true</optional>-->
+            <type>jar</type>
         </dependency>
 
         <dependency>
-            <groupId>org.apache.commons</groupId>
+            <groupId>com.jwebmp</groupId>
             <artifactId>commons-text</artifactId>
+            <version>${project.version}</version>
+            <classifier>${jwebmp.runtime.classifier}</classifier>
+            <!--<optional>true</optional>-->
+            <type>jar</type>
         </dependency>
 
         <dependency>
-            <groupId>commons-io</groupId>
+            <groupId>com.jwebmp</groupId>
             <artifactId>commons-io</artifactId>
+            <version>${project.version}</version>
+            <classifier>${jwebmp.runtime.classifier}</classifier>
+            <!--<optional>true</optional>-->
+            <type>jar</type>
         </dependency>
 
         <dependency>
