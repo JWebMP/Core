@@ -130,8 +130,11 @@ public class CSSLink<J extends CSSLink<J>>
 	public CSSLink(String type, String rel, String href)
 	{
 		super("link", ComponentTypes.CSSLink);
+		if(type != null)
 		addAttribute(CSSLinkAttributes.Type, type);
+		if(rel != null)
 		addAttribute(CSSLinkAttributes.Rel, rel);
+		if(href != null)
 		addAttribute(CSSLinkAttributes.HRef, href);
 		setInlineClosingTag(false);
 	}

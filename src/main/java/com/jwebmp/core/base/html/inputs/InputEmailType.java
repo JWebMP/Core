@@ -46,6 +46,7 @@ public class InputEmailType<J extends InputEmailType<J>>
 	public InputEmailType(String text)
 	{
 		super(InputTypes.Email);
+		if(text != null)
 		addAttribute(InputButtonTypeAttributes.Value, text);
 	}
 

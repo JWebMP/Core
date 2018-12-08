@@ -274,7 +274,7 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	@NotNull
 	public String getName()
 	{
-		return name;
+		return name == null ? getClassCanonicalName() : name;
 	}
 
 	/**

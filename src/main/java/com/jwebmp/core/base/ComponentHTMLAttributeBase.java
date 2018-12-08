@@ -328,6 +328,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	@NotNull
 	public J addAttribute(@NotNull A attribute, @NotNull String value)
 	{
+
 		getAttributes().put(attribute.toString(), value);
 		return (J) this;
 	}
