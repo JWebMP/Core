@@ -93,6 +93,13 @@ public class AngularDataServlet
 		ajaxCall.setComponentId(componentId);
 		ajaxCall.setDatetime(Date.from(ZonedDateTime.now()
 		                                            .toInstant()));
+		ajaxCall.getParameters()
+		        .putAll(initData.getLocalStorage());
+		ajaxCall.getParameters()
+		        .putAll(initData.getSessionStorage());
+		ajaxCall.getParameters()
+		        .putAll(initData.getParameters());
+
 		ajaxCall.setEventType(EventTypes.data);
 		if (componentId == null || componentId.isEmpty())
 		{
