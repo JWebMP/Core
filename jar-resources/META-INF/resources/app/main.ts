@@ -1,8 +1,8 @@
+// @ts-ignore
 import {bootstrap} from 'angular2/platform/browser';
+// @ts-ignore
 import {Component} from 'angular2/core';
 //import {AppComponent} from './app.component';
-
-//bootstrap(AppComponent);
 
 export class Hero {
     id: number;
