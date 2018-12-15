@@ -14,12 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.core.base.servlets;
+package com.jwebmp.core.base.angular.servlets;
 
 import com.google.inject.Singleton;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.ajax.*;
+import com.jwebmp.core.base.servlets.JWDefaultServlet;
+import com.jwebmp.core.base.servlets.SessionStorageProperties;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.base.servlets.options.AngularDataServletInitData;
 import com.jwebmp.core.exceptions.InvalidRequestException;
@@ -82,7 +84,7 @@ public class AngularDataServlet
 		}
 		if (jb.length() > 0)
 		{
-			getInstance(SessionStorageProperties.class).setLocalStorage(initData.getLocalStorage());
+			GuiceContext.getInstance(SessionStorageProperties.class).setLocalStorage(initData.getLocalStorage());
 			getInstance(SessionStorageProperties.class).setSessionStorage(initData.getSessionStorage());
 			componentId = initData.getParameters()
 			                      .get("objectId");

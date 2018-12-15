@@ -146,7 +146,6 @@ module com.jwebmp.core {
 
 	exports com.jwebmp.core.base.references;
 	exports com.jwebmp.core.base.angular.forms.enumerations;
-	exports com.jwebmp.core.components;
 
 	requires java.logging;
 	requires com.jwebmp.logmaster;
@@ -256,6 +255,7 @@ module com.jwebmp.core {
 			                           com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 
 	opens com.jwebmp.core.base.servlets to com.google.guice, com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.base.angular.servlets to com.google.guice, com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.base.page to com.google.guice;
 	opens com.jwebmp.core.base.ajax to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.base.html to com.fasterxml.jackson.databind;
@@ -291,6 +291,7 @@ module com.jwebmp.core {
 	opens com.jwebmp.core.base.servlets.options to com.fasterxml.jackson.databind;
 
 	opens com.jwebmp.core.utilities.regex to com.fasterxml.jackson.databind;
+	exports com.jwebmp.core.components;
 
 
 }

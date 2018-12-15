@@ -14,13 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.core.base.servlets;
+package com.jwebmp.core.base.angular;
 
 import com.google.inject.Singleton;
 import com.jwebmp.core.Page;
+import com.jwebmp.core.base.servlets.JWDefaultServlet;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
-import com.jwebmp.interception.services.AjaxCallIntercepter;
+import com.jwebmp.interception.services.DataCallIntercepter;
 
 import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
 
@@ -28,7 +29,7 @@ import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
  * @author GedMarc
  */
 @Singleton
-public class AngularServlet
+public class AngularDataVariables
 		extends JWDefaultServlet
 {
 
@@ -38,8 +39,9 @@ public class AngularServlet
 	{
 		Page page = GuiceContext.inject()
 		                        .getInstance(Page.class);
-		GuiceContext.get(AjaxCallInterceptorKey)
-		            .forEach(AjaxCallIntercepter::intercept);
+
+		GuiceContext.get(DataCallInterceptorKey)
+		            .forEach(DataCallIntercepter::intercept);
 
 		StringBuilder output = page.getAngular()
 		                           .renderAngularJavascript(page);

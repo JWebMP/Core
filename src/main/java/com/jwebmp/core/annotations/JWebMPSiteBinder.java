@@ -24,6 +24,8 @@ import com.jwebmp.core.Page;
 import com.jwebmp.core.base.ComponentBase;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
+import com.jwebmp.core.base.angular.servlets.AngularDataServlet;
+import com.jwebmp.core.base.angular.servlets.AngularServlet;
 import com.jwebmp.core.base.servlets.*;
 import com.jwebmp.core.services.IPage;
 import com.jwebmp.core.utilities.StaticStrings;
