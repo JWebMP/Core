@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.module.guice.ObjectMapperModule;
 import com.google.inject.Key;
 import com.google.inject.name.Names;
 import com.jwebmp.guicedinjection.GuiceContext;
@@ -18,7 +19,7 @@ public class ObjectMapperBinder
 	/**
 	 * The default object mapping
 	 */
-	public static final Key<ObjectMapper> DefaultObjectMapper = Key.get(ObjectMapper.class);
+	public static final Key<ObjectMapper> DefaultObjectMapper = Key.get(ObjectMapper.class, Names.named("Default"));
 	/**
 	 * The default object writer
 	 */
@@ -45,8 +46,10 @@ public class ObjectMapperBinder
 	@Override
 	public void onBind(GuiceInjectorModule module)
 	{
+		module.install(new ObjectMapperModule());
+
 		module.bind(DefaultObjectMapper)
-		      .toInstance(new ObjectMapper()//.registerModule(new Jdk8Module())
+		      .toInstance(new ObjectMapper().findAndRegisterModules()
 		                                    .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
 		                                    .setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.NONE)
 		                                    .setVisibility(PropertyAccessor.IS_GETTER, JsonAutoDetect.Visibility.NONE)

@@ -173,6 +173,7 @@ module com.jwebmp.core {
 	requires org.apache.commons.io;
 	requires org.apache.commons.lang3;
 	requires org.apache.commons.text;
+	requires jackson.module.guice;
 
 	uses IRegularExpressions;
 	uses IAngularDirective;
