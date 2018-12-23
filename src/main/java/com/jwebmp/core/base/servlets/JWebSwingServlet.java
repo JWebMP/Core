@@ -43,10 +43,6 @@ public class JWebSwingServlet
 	 */
 	private static final Logger log = LogFactory.getInstance()
 	                                            .getLogger("JWebSwingServlet");
-	/**
-	 * Version 1
-	 */
-
 
 	/**
 	 * Constructs a new JWebSwing Servlet that is not session aware
