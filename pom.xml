@@ -72,6 +72,15 @@
         </dependency>
 
         <dependency>
+            <groupId>com.jwebmp.jackson.module</groupId>
+            <artifactId>jackson-module-guice</artifactId>
+            <version>${project.version}</version>
+            <classifier>${jwebmp.runtime.classifier}</classifier>
+            <!--<optional>true</optional>-->
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
         </dependency>
