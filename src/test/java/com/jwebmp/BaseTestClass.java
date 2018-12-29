@@ -20,6 +20,8 @@ import com.jwebmp.core.Feature;
 import com.jwebmp.core.Page;
 import com.jwebmp.testing.BaseTest;
 
+import static com.jwebmp.core.base.servlets.enumarations.DevelopmentEnvironments.*;
+
 /**
  * This Class
  *
@@ -51,6 +53,12 @@ public class BaseTestClass
 
 	public Page<?> getInstance()
 	{
+		if (instance == null)
+		{
+			instance = new Page<>().setTiny(false)
+			                       .setRunningEnvironment(Development);
+		}
+
 		return instance;
 	}
 

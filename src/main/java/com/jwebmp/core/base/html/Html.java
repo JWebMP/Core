@@ -31,6 +31,8 @@ import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.base.servlets.enumarations.DevelopmentEnvironments;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * The base HTML Component.<p>
  * <p>
@@ -197,9 +199,12 @@ public abstract class Html<C extends IComponentHierarchyBase, J extends Html<C, 
 	 * @param runningEnvironmentSetting
 	 * 		The running environment value
 	 */
-	public void setRunningEnvironment(DevelopmentEnvironments runningEnvironmentSetting)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setRunningEnvironment(DevelopmentEnvironments runningEnvironmentSetting)
 	{
 		runningEnvironment = runningEnvironmentSetting;
+		return (J) this;
 	}
 
 	/**
