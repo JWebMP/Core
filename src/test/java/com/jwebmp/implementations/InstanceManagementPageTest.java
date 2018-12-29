@@ -16,7 +16,6 @@ public class InstanceManagementPageTest
 		implements ITestInstanceResetService, ITestInstanceDestroyService, ITestInstanceInitializerService,
 				           IDefaultService<InstanceManagementPageTest>
 {
-
 	@Override
 	public void reset(BaseTest testInstance)
 	{
@@ -35,6 +34,7 @@ public class InstanceManagementPageTest
 			                   .getInstance()
 			                   .destroy();
 		}
+		GuiceContext.destroy();
 	}
 
 	@Override

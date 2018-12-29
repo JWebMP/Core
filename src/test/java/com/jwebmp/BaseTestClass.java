@@ -51,7 +51,6 @@ public class BaseTestClass
 
 	public Page<?> getInstance()
 	{
-
 		return instance;
 	}
 

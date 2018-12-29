@@ -42,11 +42,6 @@ public class ComponentEventBaseTest
 	{
 	}
 
-	@Test
-	public void testEventBase()
-	{
-		//System.out.println(findEvent());
-	}
 
 	@Test
 	public void testClone()
