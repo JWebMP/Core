@@ -20,14 +20,15 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
-import javax.validation.constraints.NotNull;
+import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -39,8 +40,8 @@ import java.util.logging.Level;
 		description = "Server Side Event for Close.",
 		url = "https://www.armineasy.com/JWebSwing",
 		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
-public abstract class CloseAdapter
-		extends Event
+public abstract class CloseAdapter<J extends CloseAdapter<J>>
+		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
 {
 
@@ -49,8 +50,6 @@ public abstract class CloseAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("CloseEvent");
-
-	private CloseDirective directive;
 
 	/**
 	 * Performs a click
@@ -63,67 +62,18 @@ public abstract class CloseAdapter
 		super(EventTypes.contextmenu, component);
 	}
 
-	/**
-	 * Returns the angular directive associated with the right click event
-	 *
-	 * @return
-	 */
-	@NotNull
-	public CloseDirective getDirective()
-	{
-		if (directive == null)
-		{
-			directive = new CloseDirective();
-		}
-		return directive;
-	}
-
-	/**
-	 * Sets the right click angular event
-	 *
-	 * @param directive
-	 */
-	public void setDirective(CloseDirective directive)
-	{
-		this.directive = directive;
-	}
-
 	@Override
 	public void fireEvent(AjaxCall call, AjaxResponse response)
 	{
 		try
 		{
 			onClose(call, response);
+			onCall();
 		}
 		catch (Exception e)
 		{
 			CloseAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		return super.equals(obj);
-	}
-
-	/**
-	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (getComponent() != null)
-		{
-			getComponent().addAttribute(AngularAttributes.ngClose, StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-		super.preConfigure();
 	}
 
 	/**
@@ -136,4 +86,14 @@ public abstract class CloseAdapter
 	 * 		The physical Ajax Receiver
 	 */
 	public abstract void onClose(AjaxCall call, AjaxResponse response);
+
+	/**
+	 * Method onCall ...
+	 */
+	private void onCall()
+	{
+		Set<IOnCloseService> services = GuiceContext.instance()
+		                                            .getLoader(IOnCloseService.class, ServiceLoader.load(IOnCloseService.class));
+		services.forEach(service -> service.onCall(this));
+	}
 }

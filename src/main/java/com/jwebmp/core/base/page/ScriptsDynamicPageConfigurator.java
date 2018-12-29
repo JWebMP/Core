@@ -1,19 +1,16 @@
 package com.jwebmp.core.base.page;
 
-import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.SessionHelper;
 import com.jwebmp.core.annotations.JWebMPSiteBinder;
 import com.jwebmp.core.base.ComponentHierarchyBase;
-import com.jwebmp.core.base.angular.AngularPageConfigurator;
 import com.jwebmp.core.base.html.CSSLink;
 import com.jwebmp.core.base.html.Paragraph;
 import com.jwebmp.core.base.html.Script;
 import com.jwebmp.core.base.html.Style;
 import com.jwebmp.core.base.html.attributes.ScriptAttributes;
-import com.jwebmp.core.base.servlets.JWScriptServlet;
 import com.jwebmp.core.htmlbuilder.css.composer.CSSComposer;
-import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
+import com.jwebmp.core.services.IDynamicRenderingServlet;
 import com.jwebmp.core.services.IPageConfigurator;
 import com.jwebmp.core.services.RenderAfterDynamicScripts;
 import com.jwebmp.core.services.RenderBeforeDynamicScripts;
@@ -21,6 +18,7 @@ import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
 
 import javax.validation.constraints.NotNull;
+import java.util.ServiceLoader;
 import java.util.Set;
 
 import static com.jwebmp.core.services.JWebMPServicesBindings.*;
@@ -116,20 +114,16 @@ public class ScriptsDynamicPageConfigurator
 					    .add(new CSSLink<>(SessionHelper.getServerPath() + JWebMPSiteBinder.getCSSLocation()
 					                                                                       .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY)));
 				}
-				if (JQueryPageConfigurator.isRequired())
+
+				Set<IDynamicRenderingServlet> dynamicRenderingServlets = GuiceContext.instance()
+				                                                                     .getLoader(IDynamicRenderingServlet.class, ServiceLoader.load(IDynamicRenderingServlet.class));
+				for (IDynamicRenderingServlet dynamicRenderingServlet : dynamicRenderingServlets)
 				{
-					page.getBody()
-					    .add(getDynamicReference(JWebMPSiteBinder.getJWScriptLocation()
-					                                             .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY)));
-					page.getBody()
-					    .add(getDynamicReference(JWebMPSiteBinder.getJavaScriptLocation()
-					                                             .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY)));
-				}
-				if (AngularPageConfigurator.isRequired())
-				{
-					page.getBody()
-					    .add(getDynamicReference(JWebMPSiteBinder.getAngularScriptLocation()
-					                                             .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY)));
+					if (dynamicRenderingServlet.enabled())
+					{
+						page.getBody()
+						    .add(getDynamicReference(dynamicRenderingServlet.getScriptLocation()));
+					}
 				}
 			}
 			else
@@ -150,31 +144,16 @@ public class ScriptsDynamicPageConfigurator
 					addable = page.getBody();
 				}
 
-				boolean addedScript = false;
-				if (JQueryPageConfigurator.isRequired())
+				Set<IDynamicRenderingServlet> dynamicRenderingServlets = GuiceContext.instance()
+				                                                                     .getLoader(IDynamicRenderingServlet.class, ServiceLoader.load(IDynamicRenderingServlet.class));
+				for (IDynamicRenderingServlet dynamicRenderingServlet : dynamicRenderingServlets)
 				{
-					addable.add(getSiteLoaderScript());
-					Script ss = getJavascriptScript(page);
-					if (ss != null)
+					if (dynamicRenderingServlet.enabled())
 					{
-						addable.add(ss);
-						addedScript = true;
+						addable.add(dynamicRenderingServlet.renderScript());
 					}
-				}
-				if (!addedScript)
-				{
-					Script javaScript = getJavascriptScript(page);
-					if (javaScript != null)
-					{
-						addable.add(javaScript);
-					}
-				}
-				if (AngularPageConfigurator.isRequired())
-				{
-					addable.add(getAngularScript(page));
 				}
 			}
-
 			//Render After Dynamic Scripts
 			Paragraph afterText = new Paragraph().setTextOnly(true);
 			StringBuilder sbAfterText = new StringBuilder();
@@ -194,12 +173,6 @@ public class ScriptsDynamicPageConfigurator
 			}
 		}
 		return page;
-	}
-
-	@Override
-	public boolean enabled()
-	{
-		return ScriptsDynamicPageConfigurator.enabled;
 	}
 
 	/**
@@ -243,86 +216,16 @@ public class ScriptsDynamicPageConfigurator
 	 */
 	private Script<?, ?> getDynamicReference(String urlLocation)
 	{
+		if (urlLocation == null)
+		{
+			return null;
+		}
 		Script<?, ?> jwScript = new Script();
 		jwScript.addAttribute(ScriptAttributes.Type, StaticStrings.HTML_HEADER_JAVASCRIPT);
 		jwScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + urlLocation);
 		return jwScript;
 	}
 
-	/**
-	 * Method getSiteLoaderScript returns the siteLoaderScript of this ScriptsDynamicPageConfigurator object.
-	 *
-	 * @return the siteLoaderScript (type Script<?,?>) of this ScriptsDynamicPageConfigurator object.
-	 */
-	private Script<?, ?> getSiteLoaderScript()
-	{
-		FileTemplates.getFileTemplate(JWScriptServlet.class, JWScriptServlet.FILE_TEMPLATE_NAME, "siteloader");
-		FileTemplates.getTemplateVariables()
-		             .put("SITEADDRESSINSERT", new StringBuilder(SessionHelper.getServerPath()));
-		StringBuilder jsScript = FileTemplates.renderTemplateScripts(JWScriptServlet.FILE_TEMPLATE_NAME);
-		if (!jsScript.toString()
-		             .trim()
-		             .isEmpty())
-		{
-			return newScript(jsScript.toString());
-		}
-		return new Script();
-	}
-
-	/**
-	 * Method getJavascriptScript ...
-	 *
-	 * @param page
-	 * 		of type Page
-	 *
-	 * @return Script
-	 */
-	private Script getJavascriptScript(Page<?> page)
-	{
-		StringBuilder js = page.renderJavascript();
-		if (!js.toString()
-		       .trim()
-		       .isEmpty())
-		{
-			String[] lines = js.toString()
-			                   .split(page.getNewLine());
-			StringBuilder output = new StringBuilder();
-			for (String line : lines)
-			{
-				if (line == null || line.isEmpty())
-				{
-					continue;
-				}
-				output.append("\t\t\t")
-				      .append(line)
-				      .append(page.getNewLine());
-			}
-
-			return newScript(page.getNewLine() + output);
-		}
-		return null;
-	}
-
-	/**
-	 * Method getAngularScript ...
-	 *
-	 * @param page
-	 * 		of type Page
-	 *
-	 * @return Script
-	 */
-	private Script getAngularScript(Page<?> page)
-	{
-		StringBuilder jsAngular = page.getAngular()
-		                              .renderAngularJavascript(page);
-		if (!jsAngular.toString()
-		              .trim()
-		              .isEmpty())
-		{
-			return newScript(jsAngular.toString());
-		}
-		return new Script();
-	}
 
 	/**
 	 * Method newScript ...
@@ -338,6 +241,12 @@ public class ScriptsDynamicPageConfigurator
 		s.addAttribute(ScriptAttributes.Type, StaticStrings.HTML_HEADER_JAVASCRIPT);
 		s.setText(contents);
 		return s;
+	}
+
+	@Override
+	public boolean enabled()
+	{
+		return ScriptsDynamicPageConfigurator.enabled;
 	}
 
 	/**

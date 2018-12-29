@@ -20,14 +20,15 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
-import javax.validation.constraints.NotNull;
+import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -39,8 +40,8 @@ import java.util.logging.Level;
 		description = "Server Side Event for Drag Start.",
 		url = "https://www.armineasy.com/JWebSwing",
 		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
-public abstract class DragStartAdapter
-		extends Event
+public abstract class DragStartAdapter<J extends DragStartAdapter<J>>
+		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
 {
 
@@ -49,8 +50,6 @@ public abstract class DragStartAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("DragStartEvent");
-
-	private DragStartDirective directive;
 
 	/**
 	 * Performs a click
@@ -61,7 +60,6 @@ public abstract class DragStartAdapter
 	public DragStartAdapter(Component component)
 	{
 		super(EventTypes.dragStart, component);
-
 	}
 
 	@Override
@@ -70,38 +68,12 @@ public abstract class DragStartAdapter
 		try
 		{
 			onDragStart(call, response);
+			onCall();
 		}
 		catch (Exception e)
 		{
 			LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		return super.equals(obj);
-	}
-
-	/**
-	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (getComponent() != null)
-		{
-
-			getComponent().addAttribute(AngularAttributes.ngDragStart,
-			                            StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-		super.preConfigure();
 	}
 
 	/**
@@ -116,27 +88,12 @@ public abstract class DragStartAdapter
 	public abstract void onDragStart(AjaxCall call, AjaxResponse response);
 
 	/**
-	 * Returns the angular directive associated with the right click event
-	 *
-	 * @return
+	 * Method onCall ...
 	 */
-	@NotNull
-	public DragStartDirective getDirective()
+	private void onCall()
 	{
-		if (directive == null)
-		{
-			directive = new DragStartDirective();
-		}
-		return directive;
-	}
-
-	/**
-	 * Sets the right click angular event
-	 *
-	 * @param directive
-	 */
-	public void setDirective(DragStartDirective directive)
-	{
-		this.directive = directive;
+		Set<IOnDragStartService> services = GuiceContext.instance()
+		                                                .getLoader(IOnDragStartService.class, ServiceLoader.load(IOnDragStartService.class));
+		services.forEach(service -> service.onCall(this));
 	}
 }

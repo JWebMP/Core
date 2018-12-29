@@ -20,15 +20,16 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.BodyEvents;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.html.interfaces.events.ParagraphEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
-import javax.validation.constraints.NotNull;
+import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -36,18 +37,15 @@ import java.util.logging.Level;
  *
  * @author Marc Magon
  */
-public abstract class RightClickAdapter
-		extends Event
-		implements ParagraphEvents, BodyEvents, GlobalEvents
+public abstract class RightClickAdapter<J extends RightClickAdapter<J>>
+		extends Event<GlobalFeatures, J>
+		implements ParagraphEvents<GlobalFeatures, J>, BodyEvents<GlobalFeatures, J>, GlobalEvents
 {
-
 	/**
 	 * Logger for the Component
 	 */
 	private static final java.util.logging.Logger log = LogFactory.getInstance()
 	                                                              .getLogger("RightClickEvent");
-
-	private RightClickDirective rightClickDirective;
 
 	/**
 	 * Performs a click
@@ -67,35 +65,12 @@ public abstract class RightClickAdapter
 		try
 		{
 			onRightClick(call, response);
+			onCall();
 		}
 		catch (Exception e)
 		{
 			RightClickAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
 		}
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		return super.equals(obj);
-	}
-
-	@Override
-	public void preConfigure()
-	{
-		if (getComponent() != null)
-		{
-
-			getComponent().addAttribute(AngularAttributes.ngRightClick,
-			                            StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-		super.preConfigure();
 	}
 
 	/**
@@ -109,28 +84,14 @@ public abstract class RightClickAdapter
 	 */
 	public abstract void onRightClick(AjaxCall call, AjaxResponse response);
 
-	/**
-	 * Returns the angular directive associated with the right click event
-	 *
-	 * @return
-	 */
-	@NotNull
-	public RightClickDirective getDirective()
-	{
-		if (rightClickDirective == null)
-		{
-			rightClickDirective = new RightClickDirective();
-		}
-		return rightClickDirective;
-	}
 
 	/**
-	 * Sets the right click angular event
-	 *
-	 * @param rightClickDirective
+	 * Method onCall ...
 	 */
-	public void setDirective(RightClickDirective rightClickDirective)
+	private void onCall()
 	{
-		this.rightClickDirective = rightClickDirective;
+		Set<IOnRightClickService> services = GuiceContext.instance()
+		                                                 .getLoader(IOnRightClickService.class, ServiceLoader.load(IOnRightClickService.class));
+		services.forEach(service -> service.onCall(this));
 	}
 }

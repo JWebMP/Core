@@ -18,13 +18,11 @@ package com.jwebmp.core.base;
 
 import com.jwebmp.BaseTestClass;
 import com.jwebmp.core.Page;
-import com.jwebmp.core.base.angular.AngularPageConfigurator;
 import com.jwebmp.core.base.html.Body;
 import com.jwebmp.core.base.html.Comment;
 import com.jwebmp.core.base.html.Meta;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.htmlbuilder.css.colours.ColourNames;
-import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -54,7 +52,7 @@ public class ComponentStyleBaseTest
 	@Test
 	public void testCSS()
 	{
-		Page p = new Page();
+		Page p = getInstance();
 		Body b = p.getBody();
 
 		b.getCss()
@@ -64,16 +62,14 @@ public class ComponentStyleBaseTest
 		//System.out.println(p.toString(true));
 		p.getOptions()
 		 .setDynamicRender(true);
-		JQueryPageConfigurator.setRequired(false);
-		AngularPageConfigurator.setRequired(false);
+
 
 		if (p.toString(true)
 		     .startsWith(
-				     "<!DOCTYPE html>\n" + "<html>\n" + "\t<head>\n" + "\t\t<style type=\"text/css\">#body {background-color:darkgoldenrod;}</style>\n" + "\t</head>\n" + "\t<body id=\"body\" ng-app=\"jwApp\" ng-controller=\"jwController as jwCntrl\">"))
+				     "<!DOCTYPE html>\n" + "<html>\n" + "\t<head>\n" + "\t\t<style type=\"text/css\">#body {background-color:darkgoldenrod;}</style>\n" + "\t</head>\n" +
+				     "\t<body id=\"body\" ng-app=\"jwApp\" ng-controller=\"jwController as jwCntrl\">"))
 		{
 		}
-
-
 		/*Assertions.assertEquals("<!DOCTYPE html>\n"
 				                    + "<html>\n"
 				                    + "	<head>\n"

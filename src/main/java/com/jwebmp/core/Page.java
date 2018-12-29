@@ -23,7 +23,6 @@ import com.jwebmp.core.base.ComponentFeatureBase;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularPageConfigurator;
 import com.jwebmp.core.base.client.InternetExplorerCompatibilityMode;
 import com.jwebmp.core.base.html.*;
 import com.jwebmp.core.base.html.attributes.ScriptAttributes;
@@ -84,11 +83,6 @@ public class Page<J extends Page<J>>
 	 */
 	@JsonIgnore
 	private ReadableUserAgent userAgent;
-
-	/**
-	 * The angular feature
-	 */
-	private AngularPageConfigurator angular;
 
 	/**
 	 * If this page has already gone through initialization
@@ -348,7 +342,6 @@ public class Page<J extends Page<J>>
 		{
 			getBody().destroy();
 		}
-		angular = null;
 		fields = null;
 		options = null;
 		userAgent = null;
@@ -421,39 +414,6 @@ public class Page<J extends Page<J>>
 	public void setFields(PageFields fields)
 	{
 		this.fields = fields;
-	}
-
-	/**
-	 * Adds a variable into angular
-	 *
-	 * @param variableName
-	 * 		Adds an angular variable name
-	 *
-	 * @return This page
-	 */
-	@NotNull
-	@SuppressWarnings("unchecked")
-	public J addAngularVariable(String variableName)
-	{
-		getAngular().getAngularVariables()
-		            .add(variableName);
-		return (J) this;
-	}
-
-	/**
-	 * Returns the angular object
-	 *
-	 * @return The angular page configurator
-	 */
-	@NotNull
-	public AngularPageConfigurator getAngular()
-	{
-		if (angular == null)
-		{
-			angular = GuiceContext.getInstance(AngularPageConfigurator.class);
-			AngularPageConfigurator.setRequired(true);
-		}
-		return angular;
 	}
 
 	/**
@@ -567,6 +527,15 @@ public class Page<J extends Page<J>>
 		return (J) this;
 	}
 
+	/**
+	 * Method adds to the body
+	 *
+	 * @param child
+	 * 		of type IComponentHierarchyBase
+	 *
+	 * @return J
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public J add(@NotNull IComponentHierarchyBase child)
 	{
@@ -720,6 +689,7 @@ public class Page<J extends Page<J>>
 	/**
 	 * Method configurePage ...
 	 */
+	@SuppressWarnings("unchecked")
 	private void configurePage()
 	{
 		Set<IPageConfigurator> sortedConfigurators = new LinkedHashSet<>(GuiceContext.get(IPageConfiguratorsKey));

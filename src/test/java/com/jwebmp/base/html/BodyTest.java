@@ -60,6 +60,7 @@ public class BodyTest
 		p = getInstance();
 		resetBody();
 		JQueryPageConfigurator.setRequired(true);
+		JQueryPageConfigurator.setEnabled(true);
 		b.add(new Comment("meh"));
 		WebReference.setIsLocal(true);
 		System.out.println(p.toString(true));
@@ -81,6 +82,7 @@ public class BodyTest
 	{
 		resetBody();
 		JQueryPageConfigurator.setRequired(true);
+		JQueryPageConfigurator.setEnabled(true);
 		b.add(new Comment("meh"));
 		WebReference.setIsLocal(false);
 		System.out.println(p.toString(true));

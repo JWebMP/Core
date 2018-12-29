@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.inject.servlet.RequestScoped;
 import com.jwebmp.core.base.ComponentHierarchyBase;
-import com.jwebmp.core.base.angular.AngularVariableWatcher;
+import com.jwebmp.core.databind.ClientVariableWatcher;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 
@@ -76,7 +76,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 	/**
 	 * Is an incoming string of angular data
 	 */
-	private Set<AngularVariableWatcher> variableWatchers;
+	private Set<ClientVariableWatcher> variableWatchers;
 	/**
 	 * The event ID
 	 */
@@ -131,7 +131,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 	 *
 	 * @return
 	 */
-	public Set<AngularVariableWatcher> getVariableWatchers()
+	public Set<ClientVariableWatcher> getVariableWatchers()
 	{
 		if (variableWatchers == null)
 		{
@@ -149,7 +149,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 	 */
 	@NotNull
 	@SuppressWarnings("unchecked")
-	public J setVariableWatchers(Set<AngularVariableWatcher> variableWatchers)
+	public J setVariableWatchers(Set<ClientVariableWatcher> variableWatchers)
 	{
 		this.variableWatchers = variableWatchers;
 		return (J) this;

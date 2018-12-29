@@ -18,13 +18,7 @@ package com.jwebmp;
 
 import com.jwebmp.core.Feature;
 import com.jwebmp.core.Page;
-import com.jwebmp.core.base.angular.AngularPageConfigurator;
-import com.jwebmp.core.base.html.Body;
-import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
-import org.junit.jupiter.api.BeforeAll;
-
-import java.io.FileWriter;
-import java.io.IOException;
+import com.jwebmp.testing.BaseTest;
 
 /**
  * This Class
@@ -33,64 +27,12 @@ import java.io.IOException;
  * @since 13 Jan 2016
  */
 public class BaseTestClass
+		extends BaseTest
 {
+	private Page<?> instance;
 
 	public BaseTestClass()
 	{
-
-	}
-
-	@BeforeAll
-	public static void beforeAll()
-	{
-		System.out.println("Reseting Instance");
-		JQueryPageConfigurator.setRequired(false);
-		AngularPageConfigurator.setRequired(false);
-	}
-
-	public Page getInstance()
-	{
-		JQueryPageConfigurator.setRequired(false);
-		AngularPageConfigurator.setRequired(false);
-		return resetInstance();
-	}
-
-	public Page resetInstance()
-	{
-		soutDivider();
-		Page page = new Page();
-		Body body = new Body(page);
-		page.setID("Page");
-		body.setID("Body");
-		page.getOptions()
-		    .setDynamicRender(false);
-		return page;
-	}
-
-	public void soutDivider()
-	{
-		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<===============================================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-	}
-
-	public Page getPage()
-	{
-		JQueryPageConfigurator.setRequired(false);
-		AngularPageConfigurator.setRequired(false);
-		return resetInstance();
-	}
-
-	protected void writeValuesToFile(String expected, String rendered)
-	{
-		try (FileWriter fw = new FileWriter("c:/temp/equalsText.txt"))
-		{
-			fw.write(rendered);
-			fw.write("\n\n-----\n\n");
-			fw.write(expected);
-		}
-		catch (IOException ex)
-		{
-			System.out.println("Couldn't write to file");
-		}
 	}
 
 	public Feature getFeature()
@@ -106,4 +48,18 @@ public class BaseTestClass
 		f.setID("featureTest");
 		return f;
 	}
+
+	public Page<?> getInstance()
+	{
+
+		return instance;
+	}
+
+	public BaseTest setInstance(Page<?> instance)
+	{
+		this.instance = instance;
+		return this;
+	}
+
+
 }

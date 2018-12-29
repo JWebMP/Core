@@ -20,14 +20,15 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
-import javax.validation.constraints.NotNull;
+import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -39,8 +40,8 @@ import java.util.logging.Level;
 		description = "Server Side Event for Complete.",
 		url = "https://www.armineasy.com/JWebSwing",
 		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
-public abstract class CompleteAdapter
-		extends Event
+public abstract class CompleteAdapter<J extends CompleteAdapter<J>>
+		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
 {
 
@@ -49,8 +50,6 @@ public abstract class CompleteAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("CompleteEvent");
-
-	private CompleteDirective directive;
 
 	/**
 	 * Performs a click
@@ -64,68 +63,18 @@ public abstract class CompleteAdapter
 
 	}
 
-	/**
-	 * Returns the angular directive associated with the right click event
-	 *
-	 * @return
-	 */
-	@NotNull
-	public CompleteDirective getDirective()
-	{
-		if (directive == null)
-		{
-			directive = new CompleteDirective();
-		}
-		return directive;
-	}
-
-	/**
-	 * Sets the right click angular event
-	 *
-	 * @param directive
-	 */
-	public void setDirective(CompleteDirective directive)
-	{
-		this.directive = directive;
-	}
-
 	@Override
 	public void fireEvent(AjaxCall call, AjaxResponse response)
 	{
 		try
 		{
 			onComplete(call, response);
+			onCall();
 		}
 		catch (Exception e)
 		{
 			CompleteAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object o)
-	{
-		return super.equals(o);
-	}
-
-	/**
-	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (getComponent() != null)
-		{
-			getComponent().addAttribute(AngularAttributes.ngComplete,
-			                            StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-		super.preConfigure();
 	}
 
 	/**
@@ -138,4 +87,14 @@ public abstract class CompleteAdapter
 	 * 		The physical Ajax Receiver
 	 */
 	public abstract void onComplete(AjaxCall call, AjaxResponse response);
+
+	/**
+	 * Method onCall ...
+	 */
+	private void onCall()
+	{
+		Set<IOnCompleteService> services = GuiceContext.instance()
+		                                               .getLoader(IOnCompleteService.class, ServiceLoader.load(IOnCompleteService.class));
+		services.forEach(service -> service.onCall(this));
+	}
 }

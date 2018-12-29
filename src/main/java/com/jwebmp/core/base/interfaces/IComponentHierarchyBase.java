@@ -331,7 +331,7 @@ public interface IComponentHierarchyBase<C extends IComponentHierarchyBase, J ex
 
 	IComponentThemeBase asThemeBase();
 
-	IComponentHTMLAngularBase asAngularBase();
+	IComponentDataBindingBase asAngularBase();
 
 	IComponentHTMLAttributeBase asAttributeBase();
 

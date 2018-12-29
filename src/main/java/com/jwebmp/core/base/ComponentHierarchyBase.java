@@ -408,7 +408,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	@Override
 	public Map<String, Object> getAngularObjectsAll()
 	{
-		Map<String, Object> map = getAngularObjects();
+		Map<String, Object> map = getJsonObjects();
 		for (ComponentHierarchyBase next : getChildrenHierarchy(true))
 		{
 			processAngularObjects(next, map);
@@ -926,12 +926,12 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	@SuppressWarnings("unchecked")
 	private void processAngularObjects(@NotNull ComponentHierarchyBase next, @NotNull Map<String, Object> map)
 	{
-		next.getAngularObjects()
+		next.getJsonObjects()
 		    .forEach((key, value) ->
 		             {
 			             try
 			             {
-				             map.put((String) key, next.getAngularObjects()
+				             map.put((String) key, next.getJsonObjects()
 				                                       .get(key));
 			             }
 			             catch (ClassCastException cce)

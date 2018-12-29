@@ -20,13 +20,14 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
-import javax.validation.constraints.NotNull;
+import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -34,8 +35,8 @@ import java.util.logging.Level;
  *
  * @author Marc Magon
  */
-public abstract class ResizeStopAdapter
-		extends Event
+public abstract class ResizeStopAdapter<J extends ResizeStopAdapter<J>>
+		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
 {
 
@@ -44,8 +45,6 @@ public abstract class ResizeStopAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("ResizeStopEvent");
-
-	private ResizeStopDirective directive;
 
 	/**
 	 * Performs a click
@@ -65,38 +64,12 @@ public abstract class ResizeStopAdapter
 		try
 		{
 			onResizeStop(call, response);
+			onCall();
 		}
 		catch (Exception e)
 		{
 			ResizeStopAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		return super.equals(obj);
-	}
-
-	/**
-	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (getComponent() != null)
-		{
-
-			getComponent().addAttribute(AngularAttributes.ngResizeStop,
-			                            StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-		super.preConfigure();
 	}
 
 	/**
@@ -111,27 +84,12 @@ public abstract class ResizeStopAdapter
 	public abstract void onResizeStop(AjaxCall call, AjaxResponse response);
 
 	/**
-	 * Returns the angular directive associated with the right click event
-	 *
-	 * @return
+	 * Method onCall ...
 	 */
-	@NotNull
-	public ResizeStopDirective getDirective()
+	private void onCall()
 	{
-		if (directive == null)
-		{
-			directive = new ResizeStopDirective();
-		}
-		return directive;
-	}
-
-	/**
-	 * Sets the right click angular event
-	 *
-	 * @param directive
-	 */
-	public void setDirective(ResizeStopDirective directive)
-	{
-		this.directive = directive;
+		Set<IOnResizeStopService> services = GuiceContext.instance()
+		                                                 .getLoader(IOnResizeStopService.class, ServiceLoader.load(IOnResizeStopService.class));
+		services.forEach(service -> service.onCall(this));
 	}
 }

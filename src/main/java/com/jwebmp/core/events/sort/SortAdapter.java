@@ -20,13 +20,14 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
-import javax.validation.constraints.NotNull;
+import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -34,8 +35,8 @@ import java.util.logging.Level;
  *
  * @author Marc Magon
  */
-public abstract class SortAdapter
-		extends Event
+public abstract class SortAdapter<J extends SortAdapter<J>>
+		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
 {
 
@@ -44,14 +45,6 @@ public abstract class SortAdapter
 	 */
 	private static final java.util.logging.Logger log = LogFactory.getInstance()
 	                                                              .getLogger("SortEvent");
-	/**
-	 * Field serialVersionUID
-	 */
-
-	/**
-	 * Field directive
-	 */
-	private SortDirective directive;
 
 	/**
 	 * Performs a click
@@ -63,7 +56,6 @@ public abstract class SortAdapter
 	public SortAdapter(Component component)
 	{
 		super(EventTypes.sort, component);
-
 	}
 
 	/**
@@ -88,40 +80,6 @@ public abstract class SortAdapter
 	}
 
 	/**
-	 * @see com.jwebmp.core.Event#hashCode()
-	 */
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-
-	/**
-	 * @see com.jwebmp.core.Event#equals(Object)
-	 */
-	@Override
-	public boolean equals(Object obj)
-	{
-		return super.equals(obj);
-	}
-
-	/**
-	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
-	 *
-	 * @see com.jwebmp.core.Event#preConfigure()
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (getComponent() != null)
-		{
-
-			getComponent().addAttribute(AngularAttributes.ngSort, StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-		super.preConfigure();
-	}
-
-	/**
 	 * Triggers on Click
 	 * <p>
 	 *
@@ -133,28 +91,12 @@ public abstract class SortAdapter
 	public abstract void onSort(AjaxCall call, AjaxResponse response);
 
 	/**
-	 * Returns the angular directive associated with the right click event
-	 *
-	 * @return The applied directive
+	 * Method onCall ...
 	 */
-	@NotNull
-	public SortDirective getDirective()
+	private void onCall()
 	{
-		if (directive == null)
-		{
-			directive = new SortDirective();
-		}
-		return directive;
-	}
-
-	/**
-	 * Sets the right click angular event
-	 *
-	 * @param directive
-	 * 		The directive to use
-	 */
-	public void setDirective(SortDirective directive)
-	{
-		this.directive = directive;
+		Set<IOnSortService> services = GuiceContext.instance()
+		                                           .getLoader(IOnSortService.class, ServiceLoader.load(IOnSortService.class));
+		services.forEach(service -> service.onCall(this));
 	}
 }

@@ -24,8 +24,6 @@ import com.jwebmp.core.Page;
 import com.jwebmp.core.base.ComponentBase;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.servlets.AngularDataServlet;
-import com.jwebmp.core.base.angular.servlets.AngularServlet;
 import com.jwebmp.core.base.servlets.*;
 import com.jwebmp.core.services.IPage;
 import com.jwebmp.core.utilities.StaticStrings;
@@ -112,26 +110,6 @@ public class JWebMPSiteBinder
 	}
 
 	/**
-	 * Gets the angular script location
-	 *
-	 * @return The Angular Scripts location
-	 */
-	public static String getAngularScriptLocation()
-	{
-		return StaticStrings.ANGULAR_SCRIPT_LOCATION;
-	}
-
-	/**
-	 * Returns the angular data location
-	 *
-	 * @return The Angular Data Scripts
-	 */
-	public static String getAngularDataLocation()
-	{
-		return StaticStrings.ANGULAR_DATA_LOCATION;
-	}
-
-	/**
 	 * The JW Script Location
 	 *
 	 * @return the site script location
@@ -170,6 +148,7 @@ public class JWebMPSiteBinder
 	 * @param module
 	 * 		of type GuiceSiteInjectorModule
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onBind(GuiceSiteInjectorModule module)
 	{
@@ -259,20 +238,13 @@ public class JWebMPSiteBinder
 		      .with(CSSServlet.class);
 		JWebMPSiteBinder.log.log(Level.FINE, "Serving CSS at {0}", StaticStrings.CSS_LOCATION);
 
-		module.serveRegex$("(" + StaticStrings.ANGULAR_DATA_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
-		      .with(AngularDataServlet.class);
-		JWebMPSiteBinder.log.log(Level.FINE, "Serving Angular Data at " + StaticStrings.ANGULAR_DATA_LOCATION);
-
-		module.serveRegex$("(" + StaticStrings.ANGULAR_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
-		      .with(AngularServlet.class);
-		JWebMPSiteBinder.log.log(Level.FINE, "Serving Angular JavaScript at {0}", StaticStrings.ANGULAR_SCRIPT_LOCATION);
-
 		module.serveRegex$("(" + StaticStrings.DATA_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(DataServlet.class);
 		JWebMPSiteBinder.log.log(Level.FINE, "Serving Data at {0}", StaticStrings.DATA_LOCATION);
 
 		module.serveRegex$("(" + StaticStrings.JW_SCRIPT_LOCATION + ")" + StaticStrings.QUERY_PARAMETERS_REGEX)
 		      .with(JWScriptServlet.class);
+
 		JWebMPSiteBinder.log.log(Level.FINE, "Serving JW Default Script at {0}", StaticStrings.JW_SCRIPT_LOCATION);
 	}
 }

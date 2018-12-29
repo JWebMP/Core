@@ -20,14 +20,15 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
-import javax.validation.constraints.NotNull;
+import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -39,8 +40,8 @@ import java.util.logging.Level;
 		description = "Server Side Event for DeActivate.",
 		url = "https://www.armineasy.com/JWebSwing",
 		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
-public abstract class DeactivateAdapter
-		extends Event
+public abstract class DeactivateAdapter<J extends DeactivateAdapter<J>>
+		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
 {
 
@@ -49,8 +50,6 @@ public abstract class DeactivateAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("DeactivateEvent");
-
-	private DeactivateDirective directive;
 
 	/**
 	 * Performs a click
@@ -70,38 +69,12 @@ public abstract class DeactivateAdapter
 		try
 		{
 			onDeactivate(call, response);
+			onCall();
 		}
 		catch (Exception e)
 		{
 			DeactivateAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		return super.equals(obj);
-	}
-
-	/**
-	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (getComponent() != null)
-		{
-
-			getComponent().addAttribute(AngularAttributes.ngDeActivate,
-			                            StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-		super.preConfigure();
 	}
 
 	/**
@@ -116,27 +89,13 @@ public abstract class DeactivateAdapter
 	public abstract void onDeactivate(AjaxCall call, AjaxResponse response);
 
 	/**
-	 * Returns the angular directive associated with the right click event
-	 *
-	 * @return
+	 * Method onCall ...
 	 */
-	@NotNull
-	public DeactivateDirective getDirective()
+	private void onCall()
 	{
-		if (directive == null)
-		{
-			directive = new DeactivateDirective();
-		}
-		return directive;
+		Set<IOnDeActivateService> services = GuiceContext.instance()
+		                                                 .getLoader(IOnDeActivateService.class, ServiceLoader.load(IOnDeActivateService.class));
+		services.forEach(service -> service.onCall(this));
 	}
 
-	/**
-	 * Sets the right click angular event
-	 *
-	 * @param directive
-	 */
-	public void setDirective(DeactivateDirective directive)
-	{
-		this.directive = directive;
-	}
 }

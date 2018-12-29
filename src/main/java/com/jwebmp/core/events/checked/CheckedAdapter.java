@@ -20,12 +20,14 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
+import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -33,8 +35,8 @@ import java.util.logging.Level;
  *
  * @author Marc Magon
  */
-public abstract class CheckedAdapter
-		extends Event
+public abstract class CheckedAdapter<J extends CheckedAdapter<J>>
+		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
 {
 
@@ -63,24 +65,12 @@ public abstract class CheckedAdapter
 		try
 		{
 			onChecked(call, response);
+			onCall();
 		}
 		catch (Exception e)
 		{
 			CheckedAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
-	}
-
-	/**
-	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (getComponent() != null)
-		{
-			getComponent().addAttribute(AngularAttributes.ngChecked, StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-		super.preConfigure();
 	}
 
 	/**
@@ -94,4 +84,13 @@ public abstract class CheckedAdapter
 	 */
 	public abstract void onChecked(AjaxCall call, AjaxResponse response);
 
+	/**
+	 * Method onCall ...
+	 */
+	private void onCall()
+	{
+		Set<IOnCheckedService> services = GuiceContext.instance()
+		                                              .getLoader(IOnCheckedService.class, ServiceLoader.load(IOnCheckedService.class));
+		services.forEach(service -> service.onCall(this));
+	}
 }

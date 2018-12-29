@@ -17,7 +17,6 @@
 package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
-import com.jwebmp.core.base.angular.AngularPageConfigurator;
 import com.jwebmp.core.base.html.attributes.ParagraphAttributes;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
@@ -126,28 +125,6 @@ public class Paragraph<J extends Paragraph<J>>
 	{
 		this.textOnly = textOnly;
 		return this;
-	}
-
-	/**
-	 * Don't use the bind attribute, append in curly braces
-	 *
-	 * @param variableName
-	 *
-	 * @return
-	 */
-	@Override
-	public J bind(String variableName)
-	{
-		AngularPageConfigurator.setRequired(true);
-		if (variableName.contains("{{"))
-		{
-			setText(getText(0) + variableName);
-		}
-		else
-		{
-			setText(getText(0) + "{{" + variableName + "}}");
-		}
-		return (J) this;
 	}
 
 	@Override

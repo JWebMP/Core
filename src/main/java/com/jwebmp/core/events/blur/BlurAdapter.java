@@ -20,13 +20,15 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
+import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -38,8 +40,8 @@ import java.util.logging.Level;
 		description = "Server Side Event for Blur Event.",
 		url = "https://www.armineasy.com/JWebSwing",
 		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
-public abstract class BlurAdapter
-		extends Event
+public abstract class BlurAdapter<J extends BlurAdapter<J>>
+		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
 {
 
@@ -48,7 +50,6 @@ public abstract class BlurAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("BlurEvent");
-
 
 	/**
 	 * Performs a click
@@ -68,24 +69,12 @@ public abstract class BlurAdapter
 		try
 		{
 			onBlur(call, response);
+			onCall();
 		}
 		catch (Exception e)
 		{
 			BlurAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
-	}
-
-	/**
-	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (getComponent() != null)
-		{
-			getComponent().addAttribute(AngularAttributes.ngBlur, StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-		super.preConfigure();
 	}
 
 	/**
@@ -99,4 +88,10 @@ public abstract class BlurAdapter
 	 */
 	public abstract void onBlur(AjaxCall call, AjaxResponse response);
 
+	private void onCall()
+	{
+		Set<IOnBlurService> services = GuiceContext.instance()
+		                                           .getLoader(IOnBlurService.class, ServiceLoader.load(IOnBlurService.class));
+		services.forEach(service -> service.onCall(this));
+	}
 }

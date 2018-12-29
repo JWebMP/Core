@@ -20,14 +20,15 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
-import javax.validation.constraints.NotNull;
+import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -39,8 +40,8 @@ import java.util.logging.Level;
 		description = "Server Side Event for Cancel Click Event.",
 		url = "https://www.armineasy.com/JWebSwing",
 		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
-public abstract class CancelAdapter
-		extends Event
+public abstract class CancelAdapter<J extends CancelAdapter<J>>
+		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
 {
 
@@ -49,9 +50,6 @@ public abstract class CancelAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("CancelEvent");
-
-
-	private CancelDirective directive;
 
 	/**
 	 * Performs a click
@@ -70,36 +68,12 @@ public abstract class CancelAdapter
 		try
 		{
 			onCancel(call, response);
+			onCall();
 		}
 		catch (Exception e)
 		{
 			CancelAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		return super.equals(obj);
-	}
-
-	/**
-	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (getComponent() != null)
-		{
-			getComponent().addAttribute(AngularAttributes.ngCancel, StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-		super.preConfigure();
 	}
 
 	/**
@@ -114,27 +88,13 @@ public abstract class CancelAdapter
 	public abstract void onCancel(AjaxCall call, AjaxResponse response);
 
 	/**
-	 * Returns this directive
-	 *
-	 * @return
+	 * Method onCall ...
 	 */
-	@NotNull
-	public CancelDirective getDirective()
+	private void onCall()
 	{
-		if (directive == null)
-		{
-			setDirective(new CancelDirective());
-		}
-		return directive;
+		Set<IOnCancelService> services = GuiceContext.instance()
+		                                             .getLoader(IOnCancelService.class, ServiceLoader.load(IOnCancelService.class));
+		services.forEach(service -> service.onCall(this));
 	}
 
-	/**
-	 * Sets the given directive
-	 *
-	 * @param directive
-	 */
-	public void setDirective(CancelDirective directive)
-	{
-		this.directive = directive;
-	}
 }

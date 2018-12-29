@@ -27,14 +27,14 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.common.base.CaseFormat;
 import com.google.inject.Key;
 import com.google.inject.name.Names;
+import com.jwebmp.core.FileTemplates;
+import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
+import org.apache.commons.io.IOUtils;
 
 import javax.validation.constraints.NotNull;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.net.URL;
@@ -42,6 +42,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static com.jwebmp.core.FileTemplates.*;
 import static com.jwebmp.core.annotations.ObjectMapperBinder.*;
 
 /**
@@ -56,6 +57,7 @@ import static com.jwebmp.core.annotations.ObjectMapperBinder.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JavaScriptPart<J extends JavaScriptPart<J>>
 {
+
 	/**
 	 * The logger
 	 */
@@ -623,5 +625,86 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 		//No configuration needed
 	}
 
+	/**
+	 * Returns the template as a string
+	 *
+	 * @param templateName
+	 * 		The file without .min.js or .js attached to it
+	 *
+	 * @return The string for the file
+	 */
+	public StringBuilder getFileTemplate(String templateName)
+	{
+		return getFileTemplate(templateName, templateName);
+	}
+
+	/**
+	 * Returns the template as a string
+	 *
+	 * @param templateName
+	 * 		The file without .min.js or .js attached to it
+	 * @param fileName
+	 *
+	 * @return The string for the file
+	 */
+	public StringBuilder getFileTemplate(String templateName, String fileName)
+	{
+		return getFileTemplate(templateName, fileName, false);
+	}
+
+	/**
+	 * Returns the template as a string
+	 *
+	 * @param templateName
+	 * 		The file without .min.js or .js attached to it
+	 * @param fileName
+	 *
+	 * @return The string for the file
+	 */
+	public StringBuilder getFileTemplate(String templateName, String fileName, boolean alwaysRefresh)
+	{
+		StringBuilder template = FileTemplates.getTemplateScripts()
+		                                      .get(templateName);
+		if (template == null || alwaysRefresh)
+		{
+			try
+			{
+				String templateFileName = fileName;
+				if (!(fileName.contains(".html") || fileName.contains(".htm") || fileName.contains(".js") || fileName.contains(".css") || fileName.contains(
+						".min") || fileName.contains(".txt")))
+				{
+					templateFileName += ".js";
+				}
+				if (templateFileName.endsWith(".min"))
+				{
+					templateFileName = templateFileName + ".js";
+				}
+				Class clazz = getClass();
+				InputStream is = clazz.getResourceAsStream(templateFileName);
+				String contents = IOUtils.toString(is, StaticStrings.UTF8_CHARSET);
+				setTemplateScript(templateName, new StringBuilder(contents));
+				is.close();
+			}
+			catch (FileNotFoundException ex)
+			{
+				log.log(Level.SEVERE, "[Error]-[unable to find template file];[TemplateFile]-[" + templateName + "];[TemplatePath]-[" + getClass().getResource(templateName)
+				                                                                                                                                  .getPath() + "]", ex);
+			}
+			catch (IOException ex)
+			{
+				log.log(Level.SEVERE, "Unable to read file contents jwangular template File", ex);
+			}
+			catch (NullPointerException npe)
+			{
+				log.log(Level.SEVERE, "template file [" + fileName + "(.js)] not found.", npe);
+			}
+			catch (Exception npe)
+			{
+				log.log(Level.SEVERE, "Exception Rendering Template", npe);
+			}
+		}
+		return FileTemplates.getTemplateScripts()
+		                    .get(templateName);
+	}
 
 }

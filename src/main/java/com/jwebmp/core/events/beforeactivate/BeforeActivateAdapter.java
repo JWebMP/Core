@@ -20,14 +20,15 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
-import javax.validation.constraints.NotNull;
+import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -39,8 +40,8 @@ import java.util.logging.Level;
 		description = "Server Side Event for Before Active Adapter.",
 		url = "https://www.armineasy.com/JWebSwing",
 		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
-public abstract class BeforeActivateAdapter
-		extends Event
+public abstract class BeforeActivateAdapter<J extends BeforeActivateAdapter<J>>
+		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
 {
 
@@ -51,11 +52,6 @@ public abstract class BeforeActivateAdapter
 	                                                              .getLogger("BeforeActivateEvent");
 
 	/**
-	 * The directive for this adapter
-	 */
-	private BeforeActivateDirective directive;
-
-	/**
 	 * Performs a click
 	 *
 	 * @param component
@@ -64,33 +60,8 @@ public abstract class BeforeActivateAdapter
 	public BeforeActivateAdapter(Component component)
 	{
 		super(EventTypes.beforeActivate, component);
-
 	}
 
-	/**
-	 * Returns the angular directive associated with the right click event
-	 *
-	 * @return
-	 */
-	@NotNull
-	public BeforeActivateDirective getDirective()
-	{
-		if (directive == null)
-		{
-			directive = new BeforeActivateDirective();
-		}
-		return directive;
-	}
-
-	/**
-	 * Sets the right click angular event
-	 *
-	 * @param directive
-	 */
-	public void setDirective(BeforeActivateDirective directive)
-	{
-		this.directive = directive;
-	}
 
 	@Override
 	public void fireEvent(AjaxCall call, AjaxResponse response)
@@ -98,38 +69,12 @@ public abstract class BeforeActivateAdapter
 		try
 		{
 			onBeforeActivate(call, response);
+			onCall();
 		}
 		catch (Exception e)
 		{
 			BeforeActivateAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		return super.equals(obj);
-	}
-
-	/**
-	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (getComponent() != null)
-		{
-			getComponent().addAttribute(AngularAttributes.ngBeforeActivate,
-			                            StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-
-		super.preConfigure();
 	}
 
 	/**
@@ -142,4 +87,11 @@ public abstract class BeforeActivateAdapter
 	 * 		The physical Ajax Receiver
 	 */
 	public abstract void onBeforeActivate(AjaxCall call, AjaxResponse response);
+
+	private void onCall()
+	{
+		Set<IOnBeforeActivateService> services = GuiceContext.instance()
+		                                                     .getLoader(IOnBeforeActivateService.class, ServiceLoader.load(IOnBeforeActivateService.class));
+		services.forEach(service -> service.onCall(this));
+	}
 }

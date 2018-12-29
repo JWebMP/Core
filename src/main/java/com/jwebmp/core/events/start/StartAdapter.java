@@ -20,13 +20,14 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
-import javax.validation.constraints.NotNull;
+import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -34,8 +35,8 @@ import java.util.logging.Level;
  *
  * @author Marc Magon
  */
-public abstract class StartAdapter
-		extends Event
+public abstract class StartAdapter<J extends StartAdapter<J>>
+		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
 {
 
@@ -44,8 +45,6 @@ public abstract class StartAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("StartEvent");
-
-	private StartDirective directive;
 
 	/**
 	 * Performs a click
@@ -56,7 +55,6 @@ public abstract class StartAdapter
 	public StartAdapter(Component component)
 	{
 		super(EventTypes.start, component);
-
 	}
 
 	@Override
@@ -65,37 +63,12 @@ public abstract class StartAdapter
 		try
 		{
 			onStart(call, response);
+			onCall();
 		}
 		catch (Exception e)
 		{
 			StartAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		return super.equals(obj);
-	}
-
-	/**
-	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (getComponent() != null)
-		{
-
-			getComponent().addAttribute(AngularAttributes.ngStart, StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-		super.preConfigure();
 	}
 
 	/**
@@ -110,27 +83,12 @@ public abstract class StartAdapter
 	public abstract void onStart(AjaxCall call, AjaxResponse response);
 
 	/**
-	 * Returns the angular directive associated with the right click event
-	 *
-	 * @return
+	 * Method onCall ...
 	 */
-	@NotNull
-	public StartDirective getDirective()
+	private void onCall()
 	{
-		if (directive == null)
-		{
-			directive = new StartDirective();
-		}
-		return directive;
-	}
-
-	/**
-	 * Sets the right click angular event
-	 *
-	 * @param directive
-	 */
-	public void setDirective(StartDirective directive)
-	{
-		this.directive = directive;
+		Set<IOnStartService> services = GuiceContext.instance()
+		                                            .getLoader(IOnStartService.class, ServiceLoader.load(IOnStartService.class));
+		services.forEach(service -> service.onCall(this));
 	}
 }

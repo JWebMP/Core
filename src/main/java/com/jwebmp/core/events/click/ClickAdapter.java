@@ -20,16 +20,17 @@ import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularAttributes;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.BodyEvents;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.html.interfaces.events.ParagraphEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
+import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -75,42 +76,12 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
 		try
 		{
 			onClick(call, response);
+			onCall();
 		}
 		catch (Exception e)
 		{
 			ClickAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
 		}
-	}
-
-	@Override
-	public void preConfigure()
-	{
-		if (getComponent() != null)
-		{
-			String command = //"jwCntrl.jw.isLoading || " +
-					StaticStrings.STRING_ANGULAR_EVENT_START +
-					renderVariables() +
-					StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON;
-
-			if (getComponent().getAttribute(AngularAttributes.ngClick) == null)
-			{
-				getComponent().addAttribute(AngularAttributes.ngClick, command);
-			}
-			else
-			{
-				getComponent().addAttribute(AngularAttributes.ngClick, getComponent().getAttribute(AngularAttributes.ngClick) + command);
-			}
-
-			if (getComponent().getAttribute(AngularAttributes.ngDisabled) == null)
-			{
-				getComponent().addAttribute(AngularAttributes.ngDisabled, "jwCntrl.jw.isLoading");
-			}
-			else if (!"jwCntrl.jw.isLoading".equals(getComponent().getAttribute(AngularAttributes.ngDisabled)))
-			{
-				getComponent().addAttribute(AngularAttributes.ngDisabled, "jwCntrl.jw.isLoading || " + getComponent().getAttribute(AngularAttributes.ngDisabled));
-			}
-		}
-		super.preConfigure();
 	}
 
 	/**
@@ -124,4 +95,13 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
 	 */
 	public abstract void onClick(AjaxCall call, AjaxResponse response);
 
+	/**
+	 * Method onCall ...
+	 */
+	private void onCall()
+	{
+		Set<IOnClickService> services = GuiceContext.instance()
+		                                            .getLoader(IOnClickService.class, ServiceLoader.load(IOnClickService.class));
+		services.forEach(service -> service.onCall(this));
+	}
 }

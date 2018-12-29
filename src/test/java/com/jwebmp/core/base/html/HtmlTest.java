@@ -19,9 +19,7 @@ package com.jwebmp.core.base.html;
 
 import com.jwebmp.BaseTestClass;
 import com.jwebmp.core.Page;
-import com.jwebmp.core.base.angular.AngularPageConfigurator;
 import com.jwebmp.core.base.client.Browsers;
-import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -72,8 +70,6 @@ public class HtmlTest
 	@Test
 	public void testOutput()
 	{
-		JQueryPageConfigurator.setRequired(false);
-		AngularPageConfigurator.setRequired(false);
 		//System.out.println("testOutput");
 		Html instance = new HtmlImpl();
 		instance.setBrowser(Browsers.Firefox19);

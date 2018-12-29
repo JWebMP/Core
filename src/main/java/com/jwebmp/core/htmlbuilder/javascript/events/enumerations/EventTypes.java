@@ -43,6 +43,7 @@ import com.jwebmp.core.events.sort.SortAdapter;
 import com.jwebmp.core.events.spin.SpinAdapter;
 import com.jwebmp.core.events.start.StartAdapter;
 import com.jwebmp.core.events.stop.StopAdapter;
+import com.jwebmp.core.events.submit.SubmitAdapter;
 import com.jwebmp.core.events.unselected.UnselectedAdapter;
 import com.jwebmp.core.events.update.UpdateAdapter;
 import com.jwebmp.core.htmlbuilder.javascript.events.commandevent.PerformCommandEvent;
@@ -251,6 +252,8 @@ public enum EventTypes
 	 */
 	data(null, null),
 	checked(CheckedAdapter.class, null),
+	submit(SubmitAdapter.class, null),
+
 	async(null, null),
 	custom(null, null);
 

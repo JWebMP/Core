@@ -17,6 +17,14 @@
     <url>https://github.com/GedMarc/JWebMP</url>
 
     <dependencies>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>jwebmp-testlib</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>jwebmp-interception</artifactId>

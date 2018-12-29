@@ -20,13 +20,14 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularAttributes;
-import com.jwebmp.core.base.angular.AngularPageConfigurator;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
+import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -34,8 +35,8 @@ import java.util.logging.Level;
  *
  * @author Marc Magon
  */
-public abstract class MouseEnterAdapter
-		extends Event
+public abstract class MouseEnterAdapter<J extends MouseEnterAdapter<J>>
+		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
 {
 
@@ -64,27 +65,12 @@ public abstract class MouseEnterAdapter
 		try
 		{
 			onMouseEnter(call, response);
+			onCall();
 		}
 		catch (Exception e)
 		{
 			MouseEnterAdapter.LOG.log(Level.SEVERE, "Error In Firing Event", e);
 		}
-	}
-
-	/**
-	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (getComponent() != null)
-		{
-
-			AngularPageConfigurator.setRequired(true);
-			getComponent().addAttribute(AngularAttributes.ngMouseenter,
-			                            StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-		super.preConfigure();
 	}
 
 	/**
@@ -98,4 +84,13 @@ public abstract class MouseEnterAdapter
 	 */
 	public abstract void onMouseEnter(AjaxCall call, AjaxResponse response);
 
+	/**
+	 * Method onCall ...
+	 */
+	private void onCall()
+	{
+		Set<IOnMouseEnterService> services = GuiceContext.instance()
+		                                                 .getLoader(IOnMouseEnterService.class, ServiceLoader.load(IOnMouseEnterService.class));
+		services.forEach(service -> service.onCall(this));
+	}
 }

@@ -1,4 +1,3 @@
-com.jwebmp.core.base.angular.AngularPageConfigurator
 com.jwebmp.core.base.page.ScriptsDynamicPageConfigurator
 com.jwebmp.core.base.page.CSSLinksInsertPageConfigurator
 com.jwebmp.core.base.page.ScriptsInsertPageConfigurator

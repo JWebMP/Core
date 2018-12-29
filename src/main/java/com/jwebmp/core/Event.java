@@ -21,7 +21,6 @@ import com.jwebmp.core.base.ComponentEventBase;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularPageConfigurator;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
@@ -284,7 +283,6 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	public void preConfigure()
 	{
 		JQueryPageConfigurator.setRequired(true);
-		AngularPageConfigurator.setRequired(true);
 		super.preConfigure();
 	}
 

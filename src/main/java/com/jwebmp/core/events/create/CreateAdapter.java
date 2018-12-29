@@ -20,14 +20,15 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
-import javax.validation.constraints.NotNull;
+import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -39,8 +40,8 @@ import java.util.logging.Level;
 		description = "Server Side Event for Create.",
 		url = "https://www.armineasy.com/JWebSwing",
 		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
-public abstract class CreateAdapter
-		extends Event
+public abstract class CreateAdapter<J extends CreateAdapter<J>>
+		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
 {
 
@@ -49,8 +50,6 @@ public abstract class CreateAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("CreateEvent");
-
-	private CreateDirective directive;
 
 	/**
 	 * Performs a click
@@ -70,6 +69,7 @@ public abstract class CreateAdapter
 		try
 		{
 			onCreate(call, response);
+			onCall();
 		}
 		catch (Exception e)
 		{
@@ -77,30 +77,6 @@ public abstract class CreateAdapter
 		}
 	}
 
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		return super.equals(obj);
-	}
-
-	/**
-	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (getComponent() != null)
-		{
-			getComponent().addAttribute(AngularAttributes.ngCreate, StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-		super.preConfigure();
-	}
 
 	/**
 	 * Triggers on Click
@@ -114,27 +90,12 @@ public abstract class CreateAdapter
 	public abstract void onCreate(AjaxCall call, AjaxResponse response);
 
 	/**
-	 * Returns the angular directive associated with the right click event
-	 *
-	 * @return
+	 * Method onCall ...
 	 */
-	@NotNull
-	public CreateDirective getDirective()
+	private void onCall()
 	{
-		if (directive == null)
-		{
-			directive = new CreateDirective();
-		}
-		return directive;
-	}
-
-	/**
-	 * Sets the right click angular event
-	 *
-	 * @param directive
-	 */
-	public void setDirective(CreateDirective directive)
-	{
-		this.directive = directive;
+		Set<IOnCreateService> services = GuiceContext.instance()
+		                                             .getLoader(IOnCreateService.class, ServiceLoader.load(IOnCreateService.class));
+		services.forEach(service -> service.onCall(this));
 	}
 }

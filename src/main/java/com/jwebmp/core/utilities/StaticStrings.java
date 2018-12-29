@@ -23,6 +23,7 @@ import java.nio.charset.Charset;
 /**
  * Default set of strings
  */
+@SuppressWarnings("MissingFieldJavaDoc")
 public interface StaticStrings
 		extends Serializable
 {

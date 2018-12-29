@@ -20,12 +20,13 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 
-import javax.validation.constraints.NotNull;
+import java.util.ServiceLoader;
+import java.util.Set;
 
 /**
  * This event is triggered when a button is clicked.
@@ -36,14 +37,10 @@ import javax.validation.constraints.NotNull;
 		description = "Server Side Event for Button Click Event.",
 		url = "https://www.armineasy.com/JWebSwing",
 		wikiUrl = "https://github.com/GedMarc/JWebMP/wiki")
-public abstract class ButtonClickAdapter
-		extends Event
+public abstract class ButtonClickAdapter<J extends ButtonClickAdapter<J>>
+		extends Event<GlobalFeatures, J>
 
 {
-
-
-	private ButtonClickDirective directive;
-
 	/**
 	 * This event is triggered when a button is clicked.
 	 *
@@ -67,31 +64,9 @@ public abstract class ButtonClickAdapter
 	public void fireEvent(AjaxCall ajaxObject, AjaxResponse ajaxReceiver)
 	{
 		onButtonClick(ajaxObject, ajaxReceiver);
+		onCall();
 	}
 
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		return super.equals(obj);
-	}
-
-	@Override
-	public void preConfigure()
-	{
-		if (getComponent() != null)
-		{
-			getComponent().addAttribute(AngularAttributes.ngButtonClick,
-			                            StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-
-		super.preConfigure();
-	}
 
 	/**
 	 * Triggers on Activation
@@ -105,27 +80,13 @@ public abstract class ButtonClickAdapter
 	public abstract void onButtonClick(AjaxCall ajaxObject, AjaxResponse ajaxReceiver);
 
 	/**
-	 * Returns this directive
-	 *
-	 * @return
+	 * Method onCall ...
 	 */
-	@NotNull
-	public ButtonClickDirective getDirective()
+	private void onCall()
 	{
-		if (directive == null)
-		{
-			setDirective(new ButtonClickDirective());
-		}
-		return directive;
+		Set<IOnButtonClickService> services = GuiceContext.instance()
+		                                                  .getLoader(IOnButtonClickService.class, ServiceLoader.load(IOnButtonClickService.class));
+		services.forEach(service -> service.onCall(this));
 	}
 
-	/**
-	 * Sets this directive
-	 *
-	 * @param directive
-	 */
-	public void setDirective(ButtonClickDirective directive)
-	{
-		this.directive = directive;
-	}
 }

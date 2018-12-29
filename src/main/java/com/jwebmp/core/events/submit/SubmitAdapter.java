@@ -19,17 +19,18 @@ package com.jwebmp.core.events.submit;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularAttributes;
-import com.jwebmp.core.base.angular.forms.AngularForm;
+import com.jwebmp.core.base.html.Form;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.BodyEvents;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.html.interfaces.events.ParagraphEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.ComponentInformation;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
+import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -55,7 +56,7 @@ public abstract class SubmitAdapter
 
 	protected SubmitAdapter()
 	{
-		super("Submit", EventTypes.click);
+		super("Submit", EventTypes.submit);
 	}
 
 	/**
@@ -64,9 +65,9 @@ public abstract class SubmitAdapter
 	 * @param component
 	 * 		The component this click is going to be acting on
 	 */
-	public SubmitAdapter(AngularForm component)
+	public SubmitAdapter(Form component)
 	{
-		super(EventTypes.click, component);
+		super(EventTypes.submit, component);
 	}
 
 	@Override
@@ -74,23 +75,13 @@ public abstract class SubmitAdapter
 	{
 		try
 		{
-			onClick(call, response);
+			onSubmit(call, response);
+			onCall();
 		}
 		catch (Exception e)
 		{
 			SubmitAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
 		}
-	}
-
-	@Override
-	public void preConfigure()
-	{
-		if (getComponent() != null)
-		{
-			getComponent().addAttribute(AngularAttributes.ngSubmit,
-			                            "jwCntrl.jw.isLoading || " + StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-		super.preConfigure();
 	}
 
 	/**
@@ -102,6 +93,15 @@ public abstract class SubmitAdapter
 	 * @param response
 	 * 		The physical Ajax Receiver
 	 */
-	public abstract void onClick(AjaxCall call, AjaxResponse response);
+	public abstract void onSubmit(AjaxCall call, AjaxResponse response);
 
+	/**
+	 * Method onCall ...
+	 */
+	private void onCall()
+	{
+		Set<IOnSubmitService> services = GuiceContext.instance()
+		                                             .getLoader(IOnSubmitService.class, ServiceLoader.load(IOnSubmitService.class));
+		services.forEach(service -> service.onCall(this));
+	}
 }

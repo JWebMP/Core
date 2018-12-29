@@ -20,12 +20,14 @@ import com.jwebmp.core.Component;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
-import com.jwebmp.core.base.angular.AngularAttributes;
+import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 
+import java.util.ServiceLoader;
+import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -33,8 +35,8 @@ import java.util.logging.Level;
  *
  * @author Marc Magon
  */
-public abstract class KeyDownAdapter
-		extends Event
+public abstract class KeyDownAdapter<J extends KeyDownAdapter<J>>
+		extends Event<GlobalFeatures, J>
 		implements GlobalEvents
 {
 
@@ -43,7 +45,6 @@ public abstract class KeyDownAdapter
 	 */
 	private static final java.util.logging.Logger LOG = LogFactory.getInstance()
 	                                                              .getLogger("KeyDownEvent");
-
 
 	/**
 	 * Performs a click
@@ -54,7 +55,6 @@ public abstract class KeyDownAdapter
 	public KeyDownAdapter(Component component)
 	{
 		super(EventTypes.keyDown, component);
-
 	}
 
 	@Override
@@ -63,6 +63,7 @@ public abstract class KeyDownAdapter
 		try
 		{
 			onKeyDown(call, response);
+			onCall();
 		}
 		catch (Exception e)
 		{
@@ -70,19 +71,6 @@ public abstract class KeyDownAdapter
 		}
 	}
 
-	/**
-	 * Sets JQuery and Angular enabled, adds the directive to angular, and the attribute to the component
-	 */
-	@Override
-	public void preConfigure()
-	{
-		if (getComponent() != null)
-		{
-
-			getComponent().addAttribute(AngularAttributes.ngKeydown, StaticStrings.STRING_ANGULAR_EVENT_START + renderVariables() + StaticStrings.STRING_CLOSING_BRACKET_SEMICOLON);
-		}
-		super.preConfigure();
-	}
 
 	/**
 	 * Triggers on Click
@@ -95,4 +83,13 @@ public abstract class KeyDownAdapter
 	 */
 	public abstract void onKeyDown(AjaxCall call, AjaxResponse response);
 
+	/**
+	 * Method onCall ...
+	 */
+	private void onCall()
+	{
+		Set<IOnKeyDownService> services = GuiceContext.instance()
+		                                              .getLoader(IOnKeyDownService.class, ServiceLoader.load(IOnKeyDownService.class));
+		services.forEach(service -> service.onCall(this));
+	}
 }

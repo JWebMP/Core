@@ -17,8 +17,6 @@
 package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.Component;
-import com.jwebmp.core.base.angular.AngularAttributes;
-import com.jwebmp.core.base.angular.AngularPageConfigurator;
 import com.jwebmp.core.base.html.attributes.GlobalAttributes;
 import com.jwebmp.core.base.html.attributes.InputTypes;
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
@@ -162,29 +160,6 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	}
 
 	/**
-	 * Push to model instead of bind
-	 *
-	 * @param variableName
-	 *
-	 * @return
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public J bind(String variableName)
-	{
-		AngularPageConfigurator.setRequired(true);
-		if (variableName != null)
-		{
-			addAttribute(AngularAttributes.ngModel, variableName);
-		}
-		else
-		{
-			removeAttribute(AngularAttributes.ngModel.toString());
-		}
-		return (J) this;
-	}
-
-	/**
 	 * Sets this input as required in the form
 	 *
 	 * @return
@@ -285,7 +260,7 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 	@SuppressWarnings("unchecked")
 	public J setPattern(String angularPatternName)
 	{
-		addAttribute(AngularAttributes.ngPattern, angularPatternName);
+		addAttribute("ng-pattern", angularPatternName);
 		return (J) this;
 	}
 
