@@ -42,16 +42,10 @@ public class BiDirectionalIsolationTest
 	@Test
 	public void testSetText()
 	{
-		reset();
+		getInstance();
 		bdi.setText("set text demo");
 		System.out.println(bdi.toString(true));
 		Assertions.assertEquals("<bdi>set text demo</bdi>", bdi.toString(true));
 	}
 
-	private void reset()
-	{
-		bdi = new BiDirectionalIsolation("test");
-		p = getInstance();
-		b.add(bdi);
-	}
 }

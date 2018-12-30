@@ -27,7 +27,8 @@ import com.jwebmp.core.base.html.attributes.BaseAttributes;
 import com.jwebmp.core.base.servlets.enumarations.DevelopmentEnvironments;
 import com.jwebmp.core.htmlbuilder.css.backgrounds.BackgroundAttachments;
 import com.jwebmp.core.htmlbuilder.css.colours.ColourNames;
-import org.junit.jupiter.api.Test;
+import com.jwebmp.testing.IBaseTest;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,6 +39,35 @@ public class PageTest
 		extends BaseTestClass
 {
 	Page instance;
+
+
+	@AfterAll
+	public static void tearDownAll()
+	{
+		IBaseTest.tearDownAll();
+	}
+
+	@BeforeAll
+	public static void initAll()
+	{
+		IBaseTest.initAll();
+	}
+
+
+	@Override
+	@AfterEach
+	public void tearDown()
+	{
+		super.tearDown();
+	}
+
+	@Override
+	@BeforeEach
+	public void init()
+	{
+		super.init();
+		instance = getInstance();
+	}
 
 	public PageTest()
 	{
