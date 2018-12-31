@@ -1,13 +1,15 @@
 package com.jwebmp.core.databind;
 
 import com.jwebmp.core.base.ComponentDataBindingBase;
+import com.jwebmp.guicedinjection.interfaces.IDefaultService;
 
 import javax.validation.constraints.NotNull;
 
 /**
  * SPI to do something when on bind is called
  */
-public interface IOnDataBind
+public interface IOnDataBind<J extends IOnDataBind<J>>
+		extends IDefaultService<J>
 {
 	/**
 	 * SPI to do something when on bind is called
