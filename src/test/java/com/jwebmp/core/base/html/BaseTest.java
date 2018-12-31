@@ -21,7 +21,8 @@ import com.jwebmp.BaseTestClass;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.client.Browsers;
 import com.jwebmp.core.base.html.attributes.BaseAttributes;
-import org.junit.jupiter.api.Test;
+import com.jwebmp.testing.IBaseTest;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,6 +32,34 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BaseTest
 		extends BaseTestClass
 {
+
+	@AfterAll
+	public static void tearDownAll()
+	{
+		IBaseTest.tearDownAll();
+	}
+
+	@BeforeAll
+	public static void initAll()
+	{
+		IBaseTest.initAll();
+	}
+
+
+	@Override
+	@AfterEach
+	public void tearDown()
+	{
+		super.tearDown();
+	}
+
+	@Override
+	@BeforeEach
+	public void init()
+	{
+		super.init();
+	}
+
 
 	public BaseTest()
 	{

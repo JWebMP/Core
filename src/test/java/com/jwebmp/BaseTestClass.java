@@ -31,8 +31,6 @@ import static com.jwebmp.core.base.servlets.enumarations.DevelopmentEnvironments
 public class BaseTestClass
 		extends BaseTest
 {
-	private Page<?> instance;
-
 	public BaseTestClass()
 	{
 	}
@@ -53,16 +51,7 @@ public class BaseTestClass
 
 	public Page<?> getInstance()
 	{
-		instance = new Page<>().setTiny(false)
-		                       .setRunningEnvironment(Development);
-		return instance;
+		return new Page<>().setTiny(false)
+		                   .setRunningEnvironment(Development);
 	}
-
-	public BaseTest setInstance(Page<?> instance)
-	{
-		this.instance = instance;
-		return this;
-	}
-
-
 }
