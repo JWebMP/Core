@@ -53,12 +53,8 @@ public class BaseTestClass
 
 	public Page<?> getInstance()
 	{
-		if (instance == null)
-		{
-			instance = new Page<>().setTiny(false)
-			                       .setRunningEnvironment(Development);
-		}
-
+		instance = new Page<>().setTiny(false)
+		                       .setRunningEnvironment(Development);
 		return instance;
 	}
 
