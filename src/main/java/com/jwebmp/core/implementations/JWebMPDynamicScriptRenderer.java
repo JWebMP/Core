@@ -1,6 +1,7 @@
 package com.jwebmp.core.implementations;
 
 import com.jwebmp.core.FileTemplates;
+import com.jwebmp.core.Page;
 import com.jwebmp.core.SessionHelper;
 import com.jwebmp.core.annotations.JWebMPSiteBinder;
 import com.jwebmp.core.base.html.Script;
@@ -13,14 +14,14 @@ public class JWebMPDynamicScriptRenderer
 		implements IDynamicRenderingServlet<JWebMPDynamicScriptRenderer>
 {
 	@Override
-	public String getScriptLocation()
+	public String getScriptLocation(Page<?> page)
 	{
 		return JWebMPSiteBinder.getJWScriptLocation()
 		                       .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY);
 	}
 
 	@Override
-	public Script renderScript()
+	public Script renderScript(Page<?> page)
 	{
 		return getSiteLoaderScript();
 	}

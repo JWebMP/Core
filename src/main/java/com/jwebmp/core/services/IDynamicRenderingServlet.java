@@ -1,5 +1,6 @@
 package com.jwebmp.core.services;
 
+import com.jwebmp.core.Page;
 import com.jwebmp.core.base.html.Script;
 import com.jwebmp.core.base.html.attributes.ScriptAttributes;
 import com.jwebmp.core.utilities.StaticStrings;
@@ -17,14 +18,14 @@ public interface IDynamicRenderingServlet<J extends IDynamicRenderingServlet<J>>
 	 *
 	 * @return The script
 	 */
-	String getScriptLocation();
+	String getScriptLocation(Page<?> page);
 
 	/**
 	 * Render the script that can be dynamically built
 	 *
 	 * @return The string builder for the script
 	 */
-	Script renderScript();
+	Script renderScript(Page<?> page);
 
 	/**
 	 * Method newScript ...

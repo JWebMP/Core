@@ -122,7 +122,7 @@ public class ScriptsDynamicPageConfigurator
 					if (dynamicRenderingServlet.enabled())
 					{
 						page.getBody()
-						    .add(getDynamicReference(dynamicRenderingServlet.getScriptLocation()));
+						    .add(getDynamicReference(dynamicRenderingServlet.getScriptLocation(page)));
 					}
 				}
 			}
@@ -150,7 +150,7 @@ public class ScriptsDynamicPageConfigurator
 				{
 					if (dynamicRenderingServlet.enabled())
 					{
-						addable.add(dynamicRenderingServlet.renderScript());
+						addable.add(dynamicRenderingServlet.renderScript(page));
 					}
 				}
 			}

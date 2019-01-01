@@ -6,22 +6,21 @@ import com.jwebmp.core.base.html.Script;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import com.jwebmp.core.services.IDynamicRenderingServlet;
 import com.jwebmp.core.utilities.StaticStrings;
-import com.jwebmp.guicedinjection.GuiceContext;
 
 public class JWebMPJavaScriptDynamicScriptRenderer
 		implements IDynamicRenderingServlet<JWebMPJavaScriptDynamicScriptRenderer>
 {
 	@Override
-	public String getScriptLocation()
+	public String getScriptLocation(Page<?> page)
 	{
 		return JWebMPSiteBinder.getJavaScriptLocation()
 		                       .replaceAll(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY);
 	}
 
 	@Override
-	public Script renderScript()
+	public Script renderScript(Page<?> page)
 	{
-		return getJavascriptScript();
+		return getJavascriptScript(page);
 	}
 
 
@@ -30,9 +29,8 @@ public class JWebMPJavaScriptDynamicScriptRenderer
 	 *
 	 * @return Script
 	 */
-	private Script getJavascriptScript()
+	private Script getJavascriptScript(Page<?> page)
 	{
-		Page page = GuiceContext.get(Page.class);
 		StringBuilder js = page.renderJavascript();
 		if (!js.toString()
 		       .trim()
