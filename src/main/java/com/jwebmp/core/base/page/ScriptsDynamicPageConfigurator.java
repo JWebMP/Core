@@ -150,7 +150,11 @@ public class ScriptsDynamicPageConfigurator
 				{
 					if (dynamicRenderingServlet.enabled())
 					{
-						addable.add(dynamicRenderingServlet.renderScript(page));
+						Script script = dynamicRenderingServlet.renderScript(page);
+						if (script != null)
+						{
+							addable.add(script);
+						}
 					}
 				}
 			}
