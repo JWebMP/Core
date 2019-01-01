@@ -65,8 +65,6 @@ public class Page<J extends Page<J>>
 		extends Html<IComponentHierarchyBase, J>
 		implements IPage
 {
-
-
 	private static final Logger log = LogFactory.getInstance()
 	                                            .getLogger("Page");
 	/**
