@@ -281,6 +281,15 @@ public interface IComponentHierarchyBase<C extends IComponentHierarchyBase, J ex
 	J addClass(ICssClassName className);
 
 	/**
+	 * Adds a class name with the given css class name compatible
+	 *
+	 * @param className
+	 *
+	 * @return
+	 */
+	J addClass(ICssClassName className, ICssClassName... classNames);
+
+	/**
 	 * Returns a complete list of all class names associated with this component
 	 * <p>
 	 *

@@ -399,6 +399,28 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	}
 
 	/**
+	 * Adds the given CSS Class Name with the given references
+	 * <p>
+	 *
+	 * @param className
+	 * 		Adds a class as a component to this object
+	 *
+	 * @return This class
+	 *
+	 * @see com.jwebmp.core.base.interfaces.IComponentHierarchyBase#addClass(CSSComponent)
+	 */
+	@Override
+	public J addClass(ICssClassName className, ICssClassName... classNames)
+	{
+		addClass(className);
+		for (ICssClassName name : classNames)
+		{
+			addClass(name);
+		}
+		return (J) this;
+	}
+
+	/**
 	 * Returns All the angular objects mapped to this component and its children
 	 *
 	 * @return A map of String,Object
