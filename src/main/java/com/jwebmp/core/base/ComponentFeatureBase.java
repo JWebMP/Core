@@ -680,33 +680,6 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 	}
 
 	/**
-	 * Returns any hierarchal assigned component
-	 *
-	 * @return the assigned component
-	 */
-	protected <C extends IComponentHierarchyBase, A extends Enum & AttributeDefinitions, E extends GlobalEvents, J extends ComponentHierarchyBase<C, A, F, E, J>> ComponentHierarchyBase<C, A, F, E, J> getComponent()
-	{
-		return component;
-	}
-
-	/**
-	 * Returns any hierarchal assigned component
-	 *
-	 * @param component
-	 * 		the component use
-	 *
-	 * @return Always this
-	 */
-	@NotNull
-	@SuppressWarnings({"unused", "unchecked"})
-	@Override
-	public J setComponent(ComponentHierarchyBase component)
-	{
-		this.component = component;
-		return (J) this;
-	}
-
-	/**
 	 * Method compareTo ...
 	 *
 	 * @param o
@@ -733,4 +706,34 @@ public class ComponentFeatureBase<F extends GlobalFeatures, J extends ComponentF
 		}
 		return comp;
 	}
+
+	/**
+	 * Returns any hierarchal assigned component
+	 *
+	 * @return the assigned component
+	 */
+	@Override
+	public <C extends IComponentHierarchyBase, A extends Enum & AttributeDefinitions, E extends GlobalEvents, J extends ComponentHierarchyBase<C, A, F, E, J>> ComponentHierarchyBase<C, A, F, E, J> getComponent()
+	{
+		return component;
+	}
+
+	/**
+	 * Returns any hierarchal assigned component
+	 *
+	 * @param component
+	 * 		the component use
+	 *
+	 * @return Always this
+	 */
+	@NotNull
+	@SuppressWarnings({"unused", "unchecked"})
+	@Override
+	public J setComponent(ComponentHierarchyBase component)
+	{
+		this.component = component;
+		return (J) this;
+	}
+
+
 }

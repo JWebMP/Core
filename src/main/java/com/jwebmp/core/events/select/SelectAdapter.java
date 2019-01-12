@@ -22,7 +22,6 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
-import com.jwebmp.core.events.search.IOnSearchService;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
@@ -89,8 +88,30 @@ public abstract class SelectAdapter<J extends SelectAdapter<J>>
 	 */
 	private void onCall()
 	{
-		Set<IOnSearchService> services = GuiceContext.instance()
-		                                             .getLoader(IOnSearchService.class, ServiceLoader.load(IOnSearchService.class));
+		Set<IOnSelectService> services = GuiceContext.instance()
+		                                             .getLoader(IOnSelectService.class, ServiceLoader.load(IOnSelectService.class));
 		services.forEach(service -> service.onCall(this));
+	}
+
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnSelectService> services = GuiceContext.instance()
+		                                             .getLoader(IOnSelectService.class, ServiceLoader.load(IOnSelectService.class));
+		services.forEach(service -> service.onCreate(this));
 	}
 }

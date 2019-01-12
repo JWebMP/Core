@@ -93,4 +93,26 @@ public abstract class CheckedAdapter<J extends CheckedAdapter<J>>
 		                                              .getLoader(IOnCheckedService.class, ServiceLoader.load(IOnCheckedService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnCheckedService> services = GuiceContext.instance()
+		                                              .getLoader(IOnCheckedService.class, ServiceLoader.load(IOnCheckedService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

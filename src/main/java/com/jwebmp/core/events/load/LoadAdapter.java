@@ -92,4 +92,25 @@ public abstract class LoadAdapter<J extends LoadAdapter<J>>
 		                                           .getLoader(IOnLoadService.class, ServiceLoader.load(IOnLoadService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnLoadService> services = GuiceContext.instance()
+		                                           .getLoader(IOnLoadService.class, ServiceLoader.load(IOnLoadService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

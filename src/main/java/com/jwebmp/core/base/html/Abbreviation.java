@@ -61,11 +61,6 @@ public class Abbreviation<J extends Abbreviation<J>>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 	/**
-	 * Serial Version for all Components and their compatibility
-	 */
-
-
-	/**
 	 * Constructs a new Abbreviation Tag
 	 */
 	public Abbreviation()

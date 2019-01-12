@@ -97,4 +97,26 @@ public abstract class CancelAdapter<J extends CancelAdapter<J>>
 		services.forEach(service -> service.onCall(this));
 	}
 
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnCancelService> services = GuiceContext.instance()
+		                                             .getLoader(IOnCancelService.class, ServiceLoader.load(IOnCancelService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
+
 }

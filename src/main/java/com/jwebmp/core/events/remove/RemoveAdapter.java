@@ -92,4 +92,26 @@ public abstract class RemoveAdapter<J extends RemoveAdapter<J>>
 		                                             .getLoader(IOnRemoveService.class, ServiceLoader.load(IOnRemoveService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnRemoveService> services = GuiceContext.instance()
+		                                             .getLoader(IOnRemoveService.class, ServiceLoader.load(IOnRemoveService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

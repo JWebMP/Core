@@ -93,4 +93,26 @@ public abstract class MouseEnterAdapter<J extends MouseEnterAdapter<J>>
 		                                                 .getLoader(IOnMouseEnterService.class, ServiceLoader.load(IOnMouseEnterService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnMouseEnterService> services = GuiceContext.instance()
+		                                                 .getLoader(IOnMouseEnterService.class, ServiceLoader.load(IOnMouseEnterService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

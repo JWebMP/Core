@@ -76,6 +76,27 @@ public abstract class ActivateAdapter<J extends ActivateAdapter<J>>
 		}
 	}
 
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnActivateService> services = GuiceContext.instance()
+		                                               .getLoader(IOnActivateService.class, ServiceLoader.load(IOnActivateService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
+
 	/**
 	 * Triggers on Click
 	 * <p>
@@ -90,6 +111,7 @@ public abstract class ActivateAdapter<J extends ActivateAdapter<J>>
 	/**
 	 * Occurs when the event is called
 	 */
+	@SuppressWarnings("unchecked")
 	private void onCall()
 	{
 		Set<IOnActivateService> services = GuiceContext.instance()

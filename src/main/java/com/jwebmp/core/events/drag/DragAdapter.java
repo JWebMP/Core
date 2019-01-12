@@ -97,4 +97,27 @@ public abstract class DragAdapter<J extends DragAdapter<J>>
 		                                           .getLoader(IOnDragService.class, ServiceLoader.load(IOnDragService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnDragService> services = GuiceContext.instance()
+		                                           .getLoader(IOnDragService.class, ServiceLoader.load(IOnDragService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
+
 }

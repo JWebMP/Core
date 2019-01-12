@@ -30,8 +30,6 @@ import javax.validation.constraints.NotNull;
 public class AjaxEventValue<J extends AjaxEventValue<J>>
 		extends JavaScriptPart<J>
 {
-
-
 	/**
 	 * If the alt key was pressed
 	 */

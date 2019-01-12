@@ -93,4 +93,26 @@ public abstract class KeyUpAdapter<J extends KeyUpAdapter<J>>
 		                                            .getLoader(IOnKeyUpService.class, ServiceLoader.load(IOnKeyUpService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnKeyUpService> services = GuiceContext.instance()
+		                                            .getLoader(IOnKeyUpService.class, ServiceLoader.load(IOnKeyUpService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

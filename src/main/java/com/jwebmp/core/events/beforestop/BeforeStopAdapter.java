@@ -96,4 +96,25 @@ public abstract class BeforeStopAdapter<J extends BeforeStopAdapter<J>>
 		services.forEach(service -> service.onCall(this));
 	}
 
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnBeforeStopService> services = GuiceContext.instance()
+		                                                 .getLoader(IOnBeforeStopService.class, ServiceLoader.load(IOnBeforeStopService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

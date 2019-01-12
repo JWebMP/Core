@@ -36,10 +36,10 @@ import java.util.logging.Logger;
  * @author GedMarc
  * @since 08 May 2016
  */
-public class AngularJsonVariable
+public class JsonVariable
 		extends JavaScriptPart
 {
-	private static final Logger log = LogFactory.getLog("AngularJsonVariable");
+	private static final Logger log = LogFactory.getLog("JsonVariable");
 
 	/**
 	 * The variable name to use
@@ -65,7 +65,7 @@ public class AngularJsonVariable
 	/**
 	 * Constructs a blank object
 	 */
-	public AngularJsonVariable()
+	public JsonVariable()
 	{
 	}
 
@@ -77,7 +77,7 @@ public class AngularJsonVariable
 	 * @param variableObject
 	 * 		The JSON object to use
 	 */
-	public AngularJsonVariable(String variableName, String variableObject)
+	public JsonVariable(String variableName, String variableObject)
 	{
 		this.variableName = variableName;
 		variableText = variableObject;
@@ -92,7 +92,7 @@ public class AngularJsonVariable
 	 * @param variableObject
 	 * 		The JSON object to use
 	 */
-	public AngularJsonVariable(String variableName, Object variableObject)
+	public JsonVariable(String variableName, Object variableObject)
 	{
 		this.variableName = variableName;
 		variable = variableObject;
@@ -106,7 +106,7 @@ public class AngularJsonVariable
 	 * @param variableObject
 	 * 		The JSON object to use
 	 */
-	public AngularJsonVariable(String variableName, JavaScriptPart variableObject)
+	public JsonVariable(String variableName, JavaScriptPart variableObject)
 	{
 		this.variableName = variableName;
 		variable = variableObject;

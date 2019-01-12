@@ -46,8 +46,6 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 		extends ComponentEventBase<F, GlobalEvents, J>
 		implements GlobalEvents
 {
-
-
 	/**
 	 * A list of all queries to execute on ajax response
 	 */
@@ -63,6 +61,7 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	 * Constructs an event with the given name
 	 *
 	 * @param name
+	 * 		The name of the event
 	 */
 	public Event(String name)
 	{
@@ -73,7 +72,9 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	 * Constructs an event with the given name
 	 *
 	 * @param name
+	 * 		The name of the event
 	 * @param eventType
+	 * 		The event type of this event
 	 */
 	public Event(String name, EventTypes eventType)
 	{
@@ -90,7 +91,6 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	 * @param component
 	 * 		The component type of this event
 	 */
-	@SuppressWarnings("unchecked")
 	public Event(String name, EventTypes eventType, ComponentHierarchyBase component)
 	{
 		super(ComponentTypes.Event);
@@ -105,6 +105,7 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	 * Sets the given component and class for this events. Component instance is destroyed on delivery
 	 *
 	 * @param component
+	 * 		The component to set
 	 *
 	 * @return
 	 */

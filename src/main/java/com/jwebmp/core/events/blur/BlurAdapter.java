@@ -94,4 +94,27 @@ public abstract class BlurAdapter<J extends BlurAdapter<J>>
 		                                           .getLoader(IOnBlurService.class, ServiceLoader.load(IOnBlurService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnBlurService> services = GuiceContext.instance()
+		                                           .getLoader(IOnBlurService.class, ServiceLoader.load(IOnBlurService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
+
 }

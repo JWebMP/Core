@@ -97,4 +97,28 @@ public abstract class DropOverAdapter<J extends DropOverAdapter<J>>
 		                                               .getLoader(IOnDropOverService.class, ServiceLoader.load(IOnDropOverService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnDropOverService> services = GuiceContext.instance()
+		                                               .getLoader(IOnDropOverService.class, ServiceLoader.load(IOnDropOverService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
+
+
 }

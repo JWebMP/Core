@@ -72,7 +72,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 	/**
 	 * Is an incoming string of angular data
 	 */
-	private Set<AngularJsonVariable> variableData;
+	private Set<JsonVariable> variableData;
 	/**
 	 * Is an incoming string of angular data
 	 */
@@ -270,7 +270,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 
 	@Override
 	@NotNull
-	public Set<AngularJsonVariable> getVariableData()
+	public Set<JsonVariable> getVariableData()
 	{
 		if (variableData == null)
 		{
@@ -288,9 +288,9 @@ public class AjaxCall<J extends AjaxCall<J>>
 	}
 
 	@Override
-	public AngularJsonVariable getVariable(String name)
+	public JsonVariable getVariable(String name)
 	{
-		for (AngularJsonVariable next : getVariableData())
+		for (JsonVariable next : getVariableData())
 		{
 			if (next.getVariableName()
 			        .equals(name))
@@ -318,7 +318,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 	@Override
 	@SuppressWarnings("unchecked")
 	@NotNull
-	public J setVariableData(Set<AngularJsonVariable> variableData)
+	public J setVariableData(Set<JsonVariable> variableData)
 	{
 		this.variableData = variableData;
 		return (J) this;

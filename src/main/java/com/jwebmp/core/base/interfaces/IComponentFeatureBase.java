@@ -19,8 +19,10 @@ package com.jwebmp.core.base.interfaces;
 import com.jwebmp.core.base.ComponentBase;
 import com.jwebmp.core.base.ComponentFeatureBase;
 import com.jwebmp.core.base.ComponentHierarchyBase;
+import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.LifeCycle;
+import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
@@ -141,7 +143,7 @@ public interface IComponentFeatureBase<F extends GlobalFeatures, J extends Compo
 	/**
 	 * Renders the JavaScript for this Builder
 	 *
-	 * @return
+	 * @return A string builder containing the raw JavaScript to send
 	 */
 	StringBuilder renderJavascript();
 
@@ -165,6 +167,13 @@ public interface IComponentFeatureBase<F extends GlobalFeatures, J extends Compo
 	 */
 	void checkAssignedFunctions();
 
-	@SuppressWarnings({"unused", "unchecked"})
-	J setComponent(ComponentHierarchyBase component);
+	@SuppressWarnings({"unused"})
+	J setComponent(ComponentHierarchyBase<?, ?, ?, ?, ?> component);
+
+	/**
+	 * Gets the component
+	 *
+	 * @return A typed component
+	 */
+	<C extends IComponentHierarchyBase, A extends Enum & AttributeDefinitions, E extends GlobalEvents, J extends ComponentHierarchyBase<C, A, F, E, J>> ComponentHierarchyBase<C, A, F, E, J> getComponent();
 }

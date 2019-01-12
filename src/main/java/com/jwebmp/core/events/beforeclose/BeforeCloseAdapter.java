@@ -95,4 +95,26 @@ public abstract class BeforeCloseAdapter<J extends BeforeCloseAdapter<J>>
 		                                                  .getLoader(IOnBeforeCloseService.class, ServiceLoader.load(IOnBeforeCloseService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnBeforeCloseService> services = GuiceContext.instance()
+		                                                  .getLoader(IOnBeforeCloseService.class, ServiceLoader.load(IOnBeforeCloseService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

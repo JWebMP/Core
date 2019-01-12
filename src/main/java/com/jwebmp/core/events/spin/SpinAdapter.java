@@ -92,4 +92,25 @@ public abstract class SpinAdapter<J extends SpinAdapter<J>>
 		                                           .getLoader(IOnSpinService.class, ServiceLoader.load(IOnSpinService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnSpinService> services = GuiceContext.instance()
+		                                           .getLoader(IOnSpinService.class, ServiceLoader.load(IOnSpinService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

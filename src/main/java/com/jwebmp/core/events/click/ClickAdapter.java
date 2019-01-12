@@ -104,4 +104,25 @@ public abstract class ClickAdapter<J extends ClickAdapter<J>>
 		                                            .getLoader(IOnClickService.class, ServiceLoader.load(IOnClickService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnClickService> services = GuiceContext.instance()
+		                                            .getLoader(IOnClickService.class, ServiceLoader.load(IOnClickService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

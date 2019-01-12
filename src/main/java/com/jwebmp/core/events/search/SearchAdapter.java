@@ -92,4 +92,26 @@ public abstract class SearchAdapter<J extends SearchAdapter<J>>
 		                                             .getLoader(IOnSearchService.class, ServiceLoader.load(IOnSearchService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnSearchService> services = GuiceContext.instance()
+		                                             .getLoader(IOnSearchService.class, ServiceLoader.load(IOnSearchService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

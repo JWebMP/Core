@@ -34,8 +34,8 @@ public class JQueryExecuteSynchronouslyFeature
 		extends Feature<JQueryExecuteSynchronouslyFeature, JavaScriptPart, JQueryExecuteSynchronouslyFeature>
 {
 
-	private List<ComponentFeatureBase> orderedWhenList = new ArrayList();
-	private List<ComponentFeatureBase> orderedThenList = new ArrayList();
+	private List<ComponentFeatureBase> orderedWhenList = new ArrayList<>();
+	private List<ComponentFeatureBase> orderedThenList = new ArrayList<>();
 
 	public JQueryExecuteSynchronouslyFeature()
 	{
@@ -57,35 +57,13 @@ public class JQueryExecuteSynchronouslyFeature
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + orderedWhenList.hashCode();
-		result = 31 * result + orderedThenList.hashCode();
-		return result;
+		return super.hashCode();
 	}
 
 	@Override
-	public boolean equals(Object o)
+	public boolean equals(Object obj)
 	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof JQueryExecuteSynchronouslyFeature))
-		{
-			return false;
-		}
-		if (!super.equals(o))
-		{
-			return false;
-		}
-
-		JQueryExecuteSynchronouslyFeature that = (JQueryExecuteSynchronouslyFeature) o;
-
-		if (!orderedWhenList.equals(that.orderedWhenList))
-		{
-			return false;
-		}
-		return orderedThenList.equals(that.orderedThenList);
+		return super.equals(obj);
 	}
 
 	@Override

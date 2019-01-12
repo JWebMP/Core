@@ -92,4 +92,25 @@ public abstract class UnselectedAdapter<J extends UnselectedAdapter<J>>
 		                                                 .getLoader(IOnUnSelectedService.class, ServiceLoader.load(IOnUnSelectedService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnUnSelectedService> services = GuiceContext.instance()
+		                                                 .getLoader(IOnUnSelectedService.class, ServiceLoader.load(IOnUnSelectedService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

@@ -95,4 +95,27 @@ public abstract class KeyPressedAdapter<J extends KeyPressedAdapter<J>>
 		                                                 .getLoader(IOnKeyPressedService.class, ServiceLoader.load(IOnKeyPressedService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnKeyPressedService> services = GuiceContext.instance()
+		                                                 .getLoader(IOnKeyPressedService.class, ServiceLoader.load(IOnKeyPressedService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
+
 }

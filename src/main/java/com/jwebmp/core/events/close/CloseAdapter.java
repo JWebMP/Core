@@ -96,4 +96,26 @@ public abstract class CloseAdapter<J extends CloseAdapter<J>>
 		                                            .getLoader(IOnCloseService.class, ServiceLoader.load(IOnCloseService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnCloseService> services = GuiceContext.instance()
+		                                            .getLoader(IOnCloseService.class, ServiceLoader.load(IOnCloseService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

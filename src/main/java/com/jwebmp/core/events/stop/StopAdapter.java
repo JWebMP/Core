@@ -91,4 +91,25 @@ public abstract class StopAdapter<J extends StopAdapter<J>>
 		                                           .getLoader(IOnStopService.class, ServiceLoader.load(IOnStopService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnStopService> services = GuiceContext.instance()
+		                                           .getLoader(IOnStopService.class, ServiceLoader.load(IOnStopService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

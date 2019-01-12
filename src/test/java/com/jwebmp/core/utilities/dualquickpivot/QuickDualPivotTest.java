@@ -14,4 +14,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.jwebmp.core.events.resizestart;
+
+package com.jwebmp.core.utilities.dualquickpivot;
+
+import org.junit.jupiter.api.Test;
+
+public class QuickDualPivotTest
+{
+	@Test
+	public void testMe()
+	{
+		String[] args = new String[]{"test", "asdf", "zxcvzxcv", "asdfasd"};
+		QuickDualPivot.sort(args);
+		for (int i = 0; i < args.length; i++)
+		{
+			System.out.println(args[i]);
+		}
+	}
+}

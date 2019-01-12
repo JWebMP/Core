@@ -93,4 +93,25 @@ public abstract class MouseMoveAdapter<J extends MouseMoveAdapter<J>>
 		                                                .getLoader(IOnMouseMoveService.class, ServiceLoader.load(IOnMouseMoveService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnMouseMoveService> services = GuiceContext.instance()
+		                                                .getLoader(IOnMouseMoveService.class, ServiceLoader.load(IOnMouseMoveService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

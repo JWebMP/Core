@@ -57,7 +57,7 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 */
 	@JsonProperty("variables")
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private Set<AngularJsonVariable> angularVariables;
+	private Set<JsonVariable> jsonVariables;
 
 	/**
 	 * All relevant client reactions to perform
@@ -154,8 +154,8 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 */
 	public void addDto(String name, String object)
 	{
-		AngularJsonVariable variable = new AngularJsonVariable(name, object);
-		getAngularVariables().add(variable);
+		JsonVariable variable = new JsonVariable(name, object);
+		getJsonVariables().add(variable);
 	}
 
 	/**
@@ -163,23 +163,23 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 *
 	 * @return
 	 */
-	public Set<AngularJsonVariable> getAngularVariables()
+	public Set<JsonVariable> getJsonVariables()
 	{
-		if (angularVariables == null)
+		if (jsonVariables == null)
 		{
-			angularVariables = new LinkedHashSet<>();
+			jsonVariables = new LinkedHashSet<>();
 		}
-		return angularVariables;
+		return jsonVariables;
 	}
 
 	/**
 	 * Sets the list of angular variables
 	 *
-	 * @param angularVariables
+	 * @param jsonVariables
 	 */
-	public void setAngularVariables(Set<AngularJsonVariable> angularVariables)
+	public void setJsonVariables(Set<JsonVariable> jsonVariables)
 	{
-		this.angularVariables = angularVariables;
+		this.jsonVariables = jsonVariables;
 	}
 
 	/**
@@ -507,13 +507,13 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 *
 	 * @param variable
 	 */
-	public void clearVariable(AngularJsonVariable variable)
+	public void clearVariable(JsonVariable variable)
 	{
 		if (variable != null)
 		{
 			variable.setVariableText(null);
 			variable.setVariable(null);
-			getAngularVariables().add(variable);
+			getJsonVariables().add(variable);
 		}
 	}
 
@@ -524,8 +524,8 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 */
 	public void clearVariable(String variableName)
 	{
-		AngularJsonVariable var = new AngularJsonVariable(variableName, (JavaScriptPart) null);
-		getAngularVariables().add(var);
+		JsonVariable var = new JsonVariable(variableName, (JavaScriptPart) null);
+		getJsonVariables().add(var);
 	}
 
 	/**
@@ -568,8 +568,8 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	 */
 	public void addDto(String name, Object object)
 	{
-		AngularJsonVariable variable = new AngularJsonVariable(name, object);
-		getAngularVariables().add(variable);
+		JsonVariable variable = new JsonVariable(name, object);
+		getJsonVariables().add(variable);
 	}
 
 	/**

@@ -16,7 +16,6 @@
  */
 package com.jwebmp.core.htmlbuilder.css;
 
-import com.jwebmp.BaseTestClass;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.htmlbuilder.css.backgrounds.BackgroundClip;
 import com.jwebmp.core.htmlbuilder.css.colours.ColourCSSImpl;
@@ -43,7 +42,6 @@ import org.junit.jupiter.api.Test;
  * @author ged_m
  */
 public class CSSImplTest
-		extends BaseTestClass
 {
 
 	public CSSImplTest()

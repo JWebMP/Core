@@ -9,5 +9,10 @@ public interface IOnEventServiceBase<J extends IOnEventServiceBase<J>>
 	/**
 	 * Occurs when the event is called
 	 */
-	void onCall(Event e);
+	void onCreate(Event<?, ?> e);
+
+	/**
+	 * Occurs when the event is called
+	 */
+	void onCall(Event<?, ?> e);
 }

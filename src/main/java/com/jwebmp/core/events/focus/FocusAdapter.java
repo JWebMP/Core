@@ -97,4 +97,27 @@ public abstract class FocusAdapter<J extends FocusAdapter<J>>
 		                                            .getLoader(IOnFocusService.class, ServiceLoader.load(IOnFocusService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnFocusService> services = GuiceContext.instance()
+		                                            .getLoader(IOnFocusService.class, ServiceLoader.load(IOnFocusService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
+
 }

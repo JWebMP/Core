@@ -97,4 +97,26 @@ public abstract class CompleteAdapter<J extends CompleteAdapter<J>>
 		                                               .getLoader(IOnCompleteService.class, ServiceLoader.load(IOnCompleteService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnCompleteService> services = GuiceContext.instance()
+		                                               .getLoader(IOnCompleteService.class, ServiceLoader.load(IOnCompleteService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

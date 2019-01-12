@@ -91,4 +91,26 @@ public abstract class SlideAdapter<J extends SlideAdapter<J>>
 		                                            .getLoader(IOnSlideService.class, ServiceLoader.load(IOnSlideService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnSlideService> services = GuiceContext.instance()
+		                                            .getLoader(IOnSlideService.class, ServiceLoader.load(IOnSlideService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

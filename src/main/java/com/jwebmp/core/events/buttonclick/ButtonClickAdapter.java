@@ -89,4 +89,25 @@ public abstract class ButtonClickAdapter<J extends ButtonClickAdapter<J>>
 		services.forEach(service -> service.onCall(this));
 	}
 
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnButtonClickService> services = GuiceContext.instance()
+		                                                  .getLoader(IOnButtonClickService.class, ServiceLoader.load(IOnButtonClickService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

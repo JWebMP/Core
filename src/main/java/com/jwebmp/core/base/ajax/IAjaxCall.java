@@ -123,7 +123,7 @@ public interface IAjaxCall<J extends AjaxCall<J>>
 	 * @return
 	 */
 	@NotNull
-	Set<AngularJsonVariable> getVariableData();
+	Set<JsonVariable> getVariableData();
 
 	/**
 	 * Sets this calls event type from
@@ -141,7 +141,7 @@ public interface IAjaxCall<J extends AjaxCall<J>>
 	 *
 	 * @return
 	 */
-	AngularJsonVariable getVariable(String name);
+	JsonVariable getVariable(String name);
 
 	/**
 	 * The event ID
@@ -165,7 +165,7 @@ public interface IAjaxCall<J extends AjaxCall<J>>
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
-	J setVariableData(Set<AngularJsonVariable> variableData);
+	J setVariableData(Set<JsonVariable> variableData);
 
 	/**
 	 * Returns a list of parameters

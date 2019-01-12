@@ -18,6 +18,8 @@ package com.jwebmp;
 
 import com.jwebmp.core.Feature;
 import com.jwebmp.core.Page;
+import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
+import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.testing.BaseTest;
 
 import static com.jwebmp.core.base.servlets.enumarations.DevelopmentEnvironments.*;
@@ -51,6 +53,14 @@ public class BaseTestClass
 
 	public Page<?> getInstance()
 	{
+		JQueryPageConfigurator.setEnabled(false);
+		JQueryPageConfigurator.setRequired(false);
+		GuiceContext.destroy();
+
+		JQueryPageConfigurator.setEnabled(false);
+		JQueryPageConfigurator.setRequired(false);
+		GuiceContext.inject();
+
 		return new Page<>().setTiny(false)
 		                   .setRunningEnvironment(Development);
 	}

@@ -90,6 +90,27 @@ public abstract class SortAdapter<J extends SortAdapter<J>>
 	 */
 	public abstract void onSort(AjaxCall call, AjaxResponse response);
 
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnSortService> services = GuiceContext.instance()
+		                                           .getLoader(IOnSortService.class, ServiceLoader.load(IOnSortService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
+
 	/**
 	 * Method onCall ...
 	 */

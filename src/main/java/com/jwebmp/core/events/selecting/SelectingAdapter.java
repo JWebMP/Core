@@ -92,4 +92,25 @@ public abstract class SelectingAdapter<J extends SelectingAdapter<J>>
 		                                                .getLoader(IOnSelectingService.class, ServiceLoader.load(IOnSelectingService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnSelectingService> services = GuiceContext.instance()
+		                                                .getLoader(IOnSelectingService.class, ServiceLoader.load(IOnSelectingService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

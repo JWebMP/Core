@@ -95,4 +95,26 @@ public abstract class MouseUpAdapter<J extends MouseUpAdapter<J>>
 		services.forEach(service -> service.onCall(this));
 	}
 
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnMouseUpService> services = GuiceContext.instance()
+		                                              .getLoader(IOnMouseUpService.class, ServiceLoader.load(IOnMouseUpService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
+
 }

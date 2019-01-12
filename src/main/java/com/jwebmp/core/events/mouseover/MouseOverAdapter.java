@@ -93,4 +93,24 @@ public abstract class MouseOverAdapter<J extends MouseOverAdapter<J>>
 		services.forEach(service -> service.onCall(this));
 	}
 
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnMouseOverService> services = GuiceContext.instance()
+		                                                .getLoader(IOnMouseOverService.class, ServiceLoader.load(IOnMouseOverService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

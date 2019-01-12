@@ -87,6 +87,7 @@ public enum EventTypes
 	 * Registers a normal click event
 	 */
 	click(ClickAdapter.class, null),
+	changed(null, null),
 	/**
 	 * Known as focus-lost in Swing Triggered when the menu loses focus.
 	 */

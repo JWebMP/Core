@@ -93,4 +93,26 @@ public abstract class OpenAdapter<J extends OpenAdapter<J>>
 		                                           .getLoader(IOnOpenService.class, ServiceLoader.load(IOnOpenService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnOpenService> services = GuiceContext.instance()
+		                                           .getLoader(IOnOpenService.class, ServiceLoader.load(IOnOpenService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

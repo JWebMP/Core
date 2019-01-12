@@ -98,4 +98,26 @@ public abstract class DeactivateAdapter<J extends DeactivateAdapter<J>>
 		services.forEach(service -> service.onCall(this));
 	}
 
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnDeActivateService> services = GuiceContext.instance()
+		                                                 .getLoader(IOnDeActivateService.class, ServiceLoader.load(IOnDeActivateService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
+
 }

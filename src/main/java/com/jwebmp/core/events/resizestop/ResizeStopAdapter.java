@@ -92,4 +92,25 @@ public abstract class ResizeStopAdapter<J extends ResizeStopAdapter<J>>
 		                                                 .getLoader(IOnResizeStopService.class, ServiceLoader.load(IOnResizeStopService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnResizeStopService> services = GuiceContext.instance()
+		                                                 .getLoader(IOnResizeStopService.class, ServiceLoader.load(IOnResizeStopService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

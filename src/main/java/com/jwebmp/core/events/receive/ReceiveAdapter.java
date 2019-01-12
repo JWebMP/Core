@@ -91,4 +91,25 @@ public abstract class ReceiveAdapter<J extends ReceiveAdapter<J>>
 		                                              .getLoader(IOnReceiveService.class, ServiceLoader.load(IOnReceiveService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnReceiveService> services = GuiceContext.instance()
+		                                              .getLoader(IOnReceiveService.class, ServiceLoader.load(IOnReceiveService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

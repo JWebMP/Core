@@ -104,4 +104,26 @@ public abstract class SubmitAdapter
 		                                             .getLoader(IOnSubmitService.class, ServiceLoader.load(IOnSubmitService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnSubmitService> services = GuiceContext.instance()
+		                                             .getLoader(IOnSubmitService.class, ServiceLoader.load(IOnSubmitService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }

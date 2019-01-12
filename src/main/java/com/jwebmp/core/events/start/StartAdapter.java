@@ -91,4 +91,25 @@ public abstract class StartAdapter<J extends StartAdapter<J>>
 		                                            .getLoader(IOnStartService.class, ServiceLoader.load(IOnStartService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+	@Override
+	public void preConfigure()
+	{
+		if (!isConfigured())
+		{
+			onCreate();
+		}
+		super.preConfigure();
+	}
+
+	/**
+	 * Occurs when the event is called
+	 */
+	@SuppressWarnings("unchecked")
+	private void onCreate()
+	{
+		Set<IOnStartService> services = GuiceContext.instance()
+		                                            .getLoader(IOnStartService.class, ServiceLoader.load(IOnStartService.class));
+		services.forEach(service -> service.onCreate(this));
+	}
 }
