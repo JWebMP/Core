@@ -59,7 +59,13 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 public class IFrame<J extends IFrame<J>>
 		extends Component<IComponentHierarchyBase, IFrameAttributes, GlobalFeatures, GlobalEvents, J>
 {
-
+	/**
+	 * Constructs a new IFrame
+	 */
+	public IFrame()
+	{
+		//Default Constructor
+	}
 
 	/**
 	 * Constructs a new IFrame

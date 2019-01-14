@@ -44,15 +44,18 @@ public class ImportFile<J extends ImportFile<J>>
 		extends Component<IComponentHierarchyBase, NoAttributes, NoFeatures, NoEvents, J>
 		implements BodyChildren<IComponentHierarchyBase, J>, ParagraphChildren<IComponentHierarchyBase, J>
 {
-
-	/**
-	 * Field serialVersionUID
-	 */
-
 	/**
 	 * The actual name for the template
 	 */
-	private final String templateName;
+	private String templateName;
+
+	/**
+	 * Constructs a new instance of an imported file via a stream
+	 */
+	public ImportFile()
+	{
+		//Default Constructor
+	}
 
 	/**
 	 * Constructs a new instance of an imported file via a stream
@@ -159,5 +162,20 @@ public class ImportFile<J extends ImportFile<J>>
 	public String getTemplateName()
 	{
 		return templateName;
+	}
+
+	/**
+	 * Sets the template name
+	 *
+	 * @param templateName
+	 * 		THe template name to use. Mandatory
+	 *
+	 * @return Always this
+	 */
+	@SuppressWarnings("unchecked")
+	public J setTemplateName(String templateName)
+	{
+		this.templateName = templateName;
+		return (J) this;
 	}
 }

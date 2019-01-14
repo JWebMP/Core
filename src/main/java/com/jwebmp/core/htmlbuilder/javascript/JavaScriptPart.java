@@ -56,6 +56,7 @@ import static com.jwebmp.core.annotations.ObjectMapperBinder.*;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JavaScriptPart<J extends JavaScriptPart<J>>
+		implements Serializable
 {
 
 	/**

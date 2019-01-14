@@ -18,6 +18,7 @@ package com.jwebmp.core.base.interfaces;
 
 import com.jwebmp.core.base.ComponentBase;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -30,7 +31,7 @@ import java.util.Map;
  * @since 2016/09/26
  */
 public interface IComponentBase<J extends ComponentBase<J>>
-		extends Cloneable
+		extends Cloneable, Serializable
 {
 
 	/**

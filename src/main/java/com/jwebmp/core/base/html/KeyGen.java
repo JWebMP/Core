@@ -55,13 +55,20 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 public class KeyGen<J extends KeyGen<J>>
 		extends Component<IComponentHierarchyBase, KeyGenAttributes, GlobalFeatures, GlobalEvents, J>
 {
-
+	/**
+	 * Constructs a new KeyGen
+	 */
+	public KeyGen()
+	{
+		//Default Constructor
+	}
 
 	/**
 	 * Constructs a new KeyGen with the given name
 	 * <p>
 	 *
 	 * @param name
+	 * 		The name
 	 */
 	public KeyGen(String name)
 	{
