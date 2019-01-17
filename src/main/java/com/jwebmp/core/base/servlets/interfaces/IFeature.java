@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Marc Magon
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 /**
  * Specifies a feature that can be added to a component A feature is a client side script that runs. Essentially is JavaScript commands that get added to a system.
  *
- * @author Marc Magon
+ * @author GedMarc
  * @version 1.8
  * 		<p>
  * 		1.0 - Initial Creation 1.2 Added minified support 1.3 CSS file additional support

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Marc Magon
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -56,7 +56,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @param <J>
  * 		The component itself for cloning
  *
- * @author Marc Magon
+ * @author GedMarc
  * @since forever
  */
 public class Span<C extends IComponentHierarchyBase, A extends Enum & AttributeDefinitions, J extends Span<C, A, J>>

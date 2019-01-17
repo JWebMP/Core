@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Marc Magon
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -351,7 +351,7 @@ public class PageTest
 		instance.getPageFields()
 		        .setBase(base);
 		instance.getPageFields()
-		        .setAuthor("Author Marc Magon");
+		        .setAuthor("Author GedMarc");
 		instance.getPageFields()
 		        .setDescription("Page Description");
 		instance.getPageFields()
@@ -365,7 +365,7 @@ public class PageTest
 		body.setID(null);
 		System.out.println(result = instance.toString(true));
 		String expResult = "<!DOCTYPE html>\n" + "<html>\n" + "\t<head>\n" + "\t\t<title>This is my title</title>\n" + "\t\t<base target=\"Base Target\">\n" +
-		                   "\t\t<meta content=\"IE=10\" http-equiv=\"X-UA-Compatible\">\n" + "\t\t<meta content=\"Author Marc Magon\" name=\"author\">\n" +
+		                   "\t\t<meta content=\"IE=10\" http-equiv=\"X-UA-Compatible\">\n" + "\t\t<meta content=\"Author GedMarc\" name=\"author\">\n" +
 		                   "\t\t<meta content=\"Application Name\" name=\"application-name\">\n" + "\t\t<meta content=\"Generator\" name=\"generator\">\n" +
 		                   "\t\t<meta content=\"Page Description\" name=\"description\">\n" + "\t</head>\n" + "</html>";
 		assertEquals(expResult, result);
@@ -384,7 +384,7 @@ public class PageTest
 		instance.getPageFields()
 		        .setBase(base);
 		instance.getPageFields()
-		        .setAuthor("Author Marc Magon");
+		        .setAuthor("Author GedMarc");
 		instance.getPageFields()
 		        .setDescription("Page Description");
 		instance.getPageFields()
@@ -396,7 +396,7 @@ public class PageTest
 		instance.setRunningEnvironment(DevelopmentEnvironments.Production);
 		String result;
 		System.out.println(result = instance.toString(true));
-		String expResult = "<!DOCTYPE html><html><head><title>This is my title</title><base target=\"Base Target\"><meta content=\"IE=10\" http-equiv=\"X-UA-Compatible\"><meta content=\"Author Marc Magon\" name=\"author\"><meta content=\"Application Name\" name=\"application-name\"><meta content=\"Generator\" name=\"generator\"><meta content=\"Page Description\" name=\"description\"></head></html>";
+		String expResult = "<!DOCTYPE html><html><head><title>This is my title</title><base target=\"Base Target\"><meta content=\"IE=10\" http-equiv=\"X-UA-Compatible\"><meta content=\"Author GedMarc\" name=\"author\"><meta content=\"Application Name\" name=\"application-name\"><meta content=\"Generator\" name=\"generator\"><meta content=\"Page Description\" name=\"description\"></head></html>";
 		assertEquals(expResult, result);
 	}
 

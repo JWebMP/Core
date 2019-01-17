@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Provides the base required to enable Theming
  *
- * @author Marc Magon
+ * @author GedMarc
  * @version 1.0
  * @since 2012/10/01
  */

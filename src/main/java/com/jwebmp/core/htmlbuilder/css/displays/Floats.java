@@ -8,7 +8,7 @@ import com.jwebmp.core.htmlbuilder.css.CSSEnumeration;
  * <p>
  * The clear property is used to control the behavior of floating elements.
  *
- * @author Marc Magon
+ * @author GedMarc
  */
 public enum Floats
 		implements CSSEnumeration<Floats>

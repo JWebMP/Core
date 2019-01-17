@@ -51,7 +51,7 @@ import com.jwebmp.core.htmlbuilder.javascript.events.commandevent.PerformCommand
 /**
  * Everything is a click so that makes it nice
  *
- * @author Marc Magon
+ * @author GedMarc
  */
 public enum EventTypes
 		implements Comparable<EventTypes>

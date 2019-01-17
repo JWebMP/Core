@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Marc Magon
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -519,7 +519,8 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 */
 	@Override
 	@NotNull
-	public Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> getChildrenHierarchy(@NotNull Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> componentsToAddTo)
+	public Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> getChildrenHierarchy(
+			@NotNull Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> componentsToAddTo)
 	{
 		getChildren().forEach(child ->
 		                      {

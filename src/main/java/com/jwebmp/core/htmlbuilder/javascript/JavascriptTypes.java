@@ -1,7 +1,7 @@
 package com.jwebmp.core.htmlbuilder.javascript;
 
 /**
- * @author Marc Magon
+ * @author GedMarc
  */
 public enum JavascriptTypes
 {

@@ -5,7 +5,7 @@ import com.jwebmp.core.utilities.StaticStrings;
 /**
  * Defines any measurement
  *
- * @author Marc Magon
+ * @author GedMarc
  * @since forever, so far in fact i wasn't capturing dates...
  */
 public final class Measurement

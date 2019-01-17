@@ -5,7 +5,7 @@ import com.jwebmp.core.htmlbuilder.css.annotations.CSSAnnotationType;
 import java.lang.annotation.*;
 
 /**
- * @author Marc Magon
+ * @author GedMarc
  */
 @Target({ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE, ElementType.PACKAGE, ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
 @Retention(RetentionPolicy.RUNTIME)

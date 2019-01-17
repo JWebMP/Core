@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Marc Magon
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -90,7 +90,7 @@ public class H4<J extends H4<J>>
 	 * The "align" attribute is deprecated in HTML 4.01, and is not supported in HTML5. Use CSS to align elements.<p>
 	 * <p>
 	 *
-	 * @author Marc Magon
+	 * @author GedMarc
 	 * @since forever
 	 */
 	public H4()
@@ -131,7 +131,7 @@ public class H4<J extends H4<J>>
 	 *
 	 * @param text
 	 *
-	 * @author Marc Magon
+	 * @author GedMarc
 	 * @since forever
 	 */
 	public H4(String text)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Marc Magon
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ import com.jwebmp.core.base.servlets.interfaces.IFeature;
  * The interface denoting an event type
  * <p>
  *
- * @author Marc Magon
+ * @author GedMarc
  */
 public interface IEvent<F extends GlobalFeatures, J extends ComponentBase>
 		extends IFeature<F, J>

@@ -11,7 +11,7 @@ import com.jwebmp.core.utilities.StaticStrings;
 /**
  * Any basic measurement
  *
- * @author Marc Magon
+ * @author GedMarc
  */
 public class MeasurementCSSImpl
 		extends CSSImplementationAdapter<MeasurementCSS, MeasurementCSSImpl>

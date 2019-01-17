@@ -3,7 +3,7 @@ package com.jwebmp.core.htmlbuilder.css.enumarations;
 /**
  * Defines a specific CSS Type
  *
- * @author Marc Magon
+ * @author GedMarc
  */
 public enum CssSelectorChainItem
 {

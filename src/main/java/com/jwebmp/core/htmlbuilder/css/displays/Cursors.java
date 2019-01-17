@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Marc Magon
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ import com.jwebmp.core.htmlbuilder.css.annotations.CSSAnnotationType;
  * CSS2 JavaScript
  * syntax: object.style.cursor="crosshair" Try it
  *
- * @author Marc Magon
+ * @author GedMarc
  * @version 2.0
  * 		<p>
  * 		2.0 Added all the new stuff, and added the javadoc things

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Marc Magon
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,8 +39,10 @@ public interface IComponentStyleBase<J extends ComponentBase>
 	/**
 	 * Adds a CSS object to the component with the given type
 	 *
-	 * @param type The CSS Type
-	 * @param cssItem Thee CSS Item to add
+	 * @param type
+	 * 		The CSS Type
+	 * @param cssItem
+	 * 		Thee CSS Item to add
 	 *
 	 * @return Always this object
 	 */
@@ -49,7 +51,8 @@ public interface IComponentStyleBase<J extends ComponentBase>
 	/**
 	 * Removes a CSS item for the component
 	 *
-	 * @param cssType The CSS Type Entry to remove
+	 * @param cssType
+	 * 		The CSS Type Entry to remove
 	 *
 	 * @return Always this object
 	 */
@@ -65,7 +68,9 @@ public interface IComponentStyleBase<J extends ComponentBase>
 	/**
 	 * Sets the CSS Object used for styling
 	 *
-	 * @param css The CSS Implementation object to add
+	 * @param css
+	 * 		The CSS Implementation object to add
+	 *
 	 * @return Always this object
 	 */
 	J setCss(CSSImpl css);
@@ -80,7 +85,9 @@ public interface IComponentStyleBase<J extends ComponentBase>
 	/**
 	 * Sets the currently assigned CSS Name
 	 *
-	 * @param cssName Sets the CSS Name to a valid value
+	 * @param cssName
+	 * 		Sets the CSS Name to a valid value
+	 *
 	 * @return Always this object
 	 */
 	J setCssName(String cssName);
@@ -98,6 +105,7 @@ public interface IComponentStyleBase<J extends ComponentBase>
 	 *
 	 * @param tabCount
 	 * 		Tab indentation for the SQL
+	 *
 	 * @return The Component CSS
 	 */
 	StringBuilder renderCss(int tabCount);

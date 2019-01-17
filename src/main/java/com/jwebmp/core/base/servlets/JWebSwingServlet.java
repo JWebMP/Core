@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Marc Magon
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 /**
  * The base Servlet for the JWebSwing environment. Constructs each page on call
  *
- * @author Marc Magon
+ * @author GedMarc
  * @version 1.1
  * @since 2012/10/09
  */

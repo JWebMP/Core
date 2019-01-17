@@ -24,7 +24,7 @@ import java.lang.annotation.*;
  * Based on w3 schools
  * <p>
  *
- * @author Marc Magon
+ * @author GedMarc
  */
 @Target({ElementType.FIELD, ElementType.TYPE, ElementType.LOCAL_VARIABLE})
 @Retention(RetentionPolicy.RUNTIME)

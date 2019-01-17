@@ -13,7 +13,7 @@ import com.jwebmp.core.htmlbuilder.css.CSSEnumeration;
  * JavaScript syntax: object.style.borderBottomStyle="dotted"
  * <p>
  *
- * @author Marc Magon
+ * @author GedMarc
  */
 public enum BorderStyles
 		implements CSSEnumeration<BorderStyles>

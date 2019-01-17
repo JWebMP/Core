@@ -7,7 +7,7 @@ import com.jwebmp.core.utilities.StaticStrings;
 import java.io.Serializable;
 
 /**
- * @author Marc Magon
+ * @author GedMarc
  */
 public class ColourHex
 		implements CssColour<ColourHex>, Serializable

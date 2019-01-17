@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Marc Magon
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ import com.jwebmp.core.base.client.CSSVersions;
 import com.jwebmp.core.htmlbuilder.css.CSSEnumeration;
 
 /**
- * @author Marc Magon
+ * @author GedMarc
  */
 public enum TextTransforms
 		implements CSSEnumeration<TextTransforms>

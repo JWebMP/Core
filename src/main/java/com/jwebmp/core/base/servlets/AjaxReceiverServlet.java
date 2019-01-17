@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Marc Magon
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ import static com.jwebmp.interception.JWebMPInterceptionBinder.*;
  * Handles all AJAX Requests performed by a client connection. Session codes are used in order to identify
  * <p>
  *
- * @author Marc Magon
+ * @author GedMarc
  */
 @Singleton
 public class AjaxReceiverServlet

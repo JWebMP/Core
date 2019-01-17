@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Marc Magon
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  *
  * @param <J>
  *
- * @author Marc Magon
+ * @author GedMarc
  */
 public class BiDirectionalIsolation<J extends BiDirectionalIsolation<J>>
 		extends Component<IComponentHierarchyBase, NoAttributes, GlobalFeatures, GlobalEvents, J>

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Base class for defining a Theme Includes an icon image for Pretties sake
  *
- * @author Marc Magon
+ * @author GedMarc
  * @version 2.0
  * @since 2.0 on 20140705
  */

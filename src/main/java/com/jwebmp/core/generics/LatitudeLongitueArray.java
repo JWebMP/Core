@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Marc Magon
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@ package com.jwebmp.core.generics;
 /**
  * A lat long array [lat,long]
  *
- * @author Marc Magon
+ * @author GedMarc
  * @since 10 Jun 2017
  */
 public class LatitudeLongitueArray

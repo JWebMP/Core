@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Marc Magon
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -52,7 +52,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * @param <F>
  * @param <E>
  *
- * @author Marc Magon
+ * @author GedMarc
  * @since 2014/12/20
  */
 public class Button<C extends IComponentHierarchyBase, A extends Enum & AttributeDefinitions, F extends GlobalFeatures, E extends GlobalEvents, J extends Button<C, A, F, E, J>>

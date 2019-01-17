@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Marc Magon
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -375,7 +375,8 @@ public class WebReference<J extends WebReference>
 	 * Atmosphere Reserved
 	 * <p>
 	 *
-	 * @param sortOrder The sort order to apply
+	 * @param sortOrder
+	 * 		The sort order to apply
 	 *
 	 * @return Always this
 	 */
@@ -457,7 +458,8 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Sets whether this reference should be local or remote
 	 *
-	 * @param isLocal If local references must be used
+	 * @param isLocal
+	 * 		If local references must be used
 	 */
 	public static void setIsLocal(boolean isLocal)
 	{
@@ -477,7 +479,8 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Sets the physical local reference
 	 *
-	 * @param localReference The local reference
+	 * @param localReference
+	 * 		The local reference
 	 *
 	 * @return Always this
 	 */
@@ -493,7 +496,8 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Renders the actual URL String
 	 *
-	 * @param sb The string builder
+	 * @param sb
+	 * 		The string builder
 	 *
 	 * @return The url to build
 	 */
@@ -533,7 +537,8 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Sets the remote physical reference
 	 *
-	 * @param remoteReference The remote reference
+	 * @param remoteReference
+	 * 		The remote reference
 	 *
 	 * @return Always this
 	 */
@@ -571,7 +576,8 @@ public class WebReference<J extends WebReference>
 	/**
 	 * If the version number should be appended for caching
 	 *
-	 * @param useVersionIdentifier If version identification is enabled
+	 * @param useVersionIdentifier
+	 * 		If version identification is enabled
 	 */
 	public static void setUseVersionIdentifier(boolean useVersionIdentifier)
 	{
@@ -581,7 +587,8 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Specifies if the remote has a min file
 	 *
-	 * @param canMinifyAtRemote If verifying on remote is allowed
+	 * @param canMinifyAtRemote
+	 * 		If verifying on remote is allowed
 	 *
 	 * @return Always this
 	 */
@@ -606,7 +613,8 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Sets the priority of the reference
 	 *
-	 * @param priority The given priority to apply
+	 * @param priority
+	 * 		The given priority to apply
 	 *
 	 * @return Always this
 	 */
@@ -620,7 +628,7 @@ public class WebReference<J extends WebReference>
 
 	/**
 	 * If this reference is a cordova reference, e.g. does it render in the dynamic site loader
-	 *
+	 * <p>
 	 * if cordova is required
 	 */
 	public boolean isCordovaRequired()
@@ -631,7 +639,8 @@ public class WebReference<J extends WebReference>
 	/**
 	 * If this reference is a cordova reference, e.g. does it render in the dynamic site loader
 	 *
-	 * @param cordovaRequired If cordova is requierd
+	 * @param cordovaRequired
+	 * 		If cordova is requierd
 	 *
 	 * @return Always this
 	 */
@@ -656,7 +665,8 @@ public class WebReference<J extends WebReference>
 	/**
 	 * A specified class name that can identify these classes on the html
 	 *
-	 * @param specifiedClassName A class string to add
+	 * @param specifiedClassName
+	 * 		A class string to add
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
@@ -694,7 +704,8 @@ public class WebReference<J extends WebReference>
 	/**
 	 * Sets the name of this reference
 	 *
-	 * @param name The name of this reference
+	 * @param name
+	 * 		The name of this reference
 	 *
 	 * @return Always this
 	 */

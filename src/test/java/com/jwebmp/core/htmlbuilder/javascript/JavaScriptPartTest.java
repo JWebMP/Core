@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Marc Magon
+ * Copyright (C) 2015 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author Marc Magon
+ * @author GedMarc
  */
 public class JavaScriptPartTest
 {

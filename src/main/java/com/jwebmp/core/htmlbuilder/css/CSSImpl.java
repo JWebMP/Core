@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Marc Magon
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ import java.util.Map;
  * This class is an object implementation of the CSS Annotations
  * <p>
  *
- * @author Marc Magon
+ * @author GedMarc
  * @since 2012/10/01
  */
 public class CSSImpl

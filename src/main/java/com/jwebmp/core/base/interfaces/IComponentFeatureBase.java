@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Marc Magon
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -160,7 +160,8 @@ public interface IComponentFeatureBase<F extends GlobalFeatures, J extends Compo
 	 *
 	 * @return An ArrayList of features
 	 */
-	@NotNull Set<F> getFeatures();
+	@NotNull
+	Set<F> getFeatures();
 
 	/**
 	 * Checks if this feature has been configured and rendered with all the features

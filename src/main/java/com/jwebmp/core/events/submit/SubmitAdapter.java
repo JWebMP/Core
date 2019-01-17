@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Marc Magon
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ import java.util.logging.Level;
 /**
  * Handles all click events. Over-ride methods.
  *
- * @author Marc Magon
+ * @author GedMarc
  */
 public abstract class SubmitAdapter
 		extends Event<GlobalFeatures, SubmitAdapter>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Marc Magon
+ * Copyright (C) 2017 GedMarc
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ import com.jwebmp.core.htmlbuilder.css.annotations.CSSAnnotationType;
  * Default value: inline Inherited: no Version:
  * CSS1 JavaScript syntax: object.style.display="inline"
  *
- * @author Marc Magon
+ * @author GedMarc
  * @version 1.0
  * @since 2013/01/22
  */
