@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 /**
  * SPI for handling variable watchers. The returned string must be JavaScript that will watch the given variable
  */
+@FunctionalInterface
 public interface IClientVariableWatcher
 {
 	/**

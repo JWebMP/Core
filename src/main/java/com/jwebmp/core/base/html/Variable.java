@@ -44,10 +44,16 @@ public class Variable<J extends Variable<J>>
 		extends Component<ParagraphChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements PhraseChildren<ParagraphChildren, J>, ParagraphChildren<ParagraphChildren, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
-
+	/**
+	 * Constructs a new variable tag
+	 */
+	public Variable()
+	{
+		this(null);
+	}
 
 	/**
-	 * Constructs a new strong text
+	 * Constructs a new variable tag
 	 *
 	 * @param text
 	 * 		The text to highlight

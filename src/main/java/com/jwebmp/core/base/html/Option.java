@@ -49,7 +49,14 @@ public class Option<J extends Option<J>>
 		extends Component<IComponentHierarchyBase, OptionAttributes, NoFeatures, NoEvents, J>
 		implements DataListChildren<IComponentHierarchyBase, J>, SelectChildren<IComponentHierarchyBase, J>, NoNewLineBeforeClosingTag, NoNewLineForRawText, DisplayObjectType<IComponentHierarchyBase, J>
 {
-
+	/**
+	 * Constructs a new Option tag
+	 * <p>
+	 */
+	public Option()
+	{
+		this(null);
+	}
 
 	/**
 	 * Constructs a new Option tag

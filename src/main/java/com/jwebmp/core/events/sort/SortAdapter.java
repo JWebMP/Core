@@ -71,6 +71,7 @@ public abstract class SortAdapter<J extends SortAdapter<J>>
 	{
 		try
 		{
+			onCall();
 			onSort(call, response);
 		}
 		catch (Exception e)
@@ -78,17 +79,6 @@ public abstract class SortAdapter<J extends SortAdapter<J>>
 			SortAdapter.log.log(Level.SEVERE, "Error In Firing Event", e);
 		}
 	}
-
-	/**
-	 * Triggers on Click
-	 * <p>
-	 *
-	 * @param call
-	 * 		The physical AJAX call
-	 * @param response
-	 * 		The physical Ajax Receiver
-	 */
-	public abstract void onSort(AjaxCall call, AjaxResponse response);
 
 	@Override
 	public void preConfigure()
@@ -120,4 +110,15 @@ public abstract class SortAdapter<J extends SortAdapter<J>>
 		                                           .getLoader(IOnSortService.class, ServiceLoader.load(IOnSortService.class));
 		services.forEach(service -> service.onCall(this));
 	}
+
+	/**
+	 * Triggers on Click
+	 * <p>
+	 *
+	 * @param call
+	 * 		The physical AJAX call
+	 * @param response
+	 * 		The physical Ajax Receiver
+	 */
+	public abstract void onSort(AjaxCall call, AjaxResponse response);
 }

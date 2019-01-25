@@ -33,7 +33,7 @@ public class WordBreakTest
 	@Test
 	public void testSomeMethod()
 	{
-		WordBreak wb = WordBreak.wordBreak;
+		WordBreak wb = WordBreak.wordBreakInstance;
 		System.out.println(wb.toString(true));
 		assertEquals("" + "<wbr></wbr>", wb.toString(true));
 	}

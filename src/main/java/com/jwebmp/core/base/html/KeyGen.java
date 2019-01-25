@@ -60,7 +60,7 @@ public class KeyGen<J extends KeyGen<J>>
 	 */
 	public KeyGen()
 	{
-		//Default Constructor
+		this(null);
 	}
 
 	/**

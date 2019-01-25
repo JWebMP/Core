@@ -59,9 +59,8 @@ public class WordBreak<J extends WordBreak<J>>
 	/**
 	 * Static instance of Word Break
 	 */
-	public static final WordBreak wordBreak = new WordBreak();
-
-
+	public static final WordBreak wordBreakInstance = new WordBreak();
+	
 	/**
 	 * Singleton instance of word breaks
 	 */

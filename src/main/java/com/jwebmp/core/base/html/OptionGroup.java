@@ -46,7 +46,13 @@ public class OptionGroup<J extends OptionGroup<J>>
 		extends Component<SelectChildren, OptionGroupAttributes, GlobalFeatures, GlobalEvents, J>
 		implements SelectChildren<SelectChildren, J>, NoIDTag, NoNewLineBeforeClosingTag
 {
-
+	/**
+	 * Constructs a new OptionGroup for select Children
+	 */
+	public OptionGroup()
+	{
+		this(null);
+	}
 
 	/**
 	 * Constructs a new OptionGroup for select Children

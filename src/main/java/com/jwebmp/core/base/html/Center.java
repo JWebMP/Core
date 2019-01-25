@@ -26,15 +26,15 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 /**
  * Definition and Usage
  * <p>
- * The center tag is not supported in HTML5. Use CSS instead.
+ * The centerInstance tag is not supported in HTML5. Use CSS instead.
  * <p>
- * The center tag is used to center-align text.
+ * The centerInstance tag is used to centerInstance-align text.
  * <p>
  * Browser Support Yes Yes Yes Yes Yes
  * <p>
  * Differences Between HTML 4.01 and HT1ML5
  * <p>
- * The center tag is not supported in HTML5.
+ * The centerInstance tag is not supported in HTML5.
  * <p>
  *
  * @param <J>
@@ -46,11 +46,10 @@ public class Center<J extends Center<J>>
 		implements NoIDTag, NoClassAttribute, NoNewLineBeforeClosingTag, NoNewLineForRawText
 {
 
-	private static final Center center = new Center();
-
+	private static final Center centerInstance = new Center();
 
 	/**
-	 * Constructs a new center placement. Better to use the static option
+	 * Constructs a new centerInstance placement. Better to use the static option
 	 */
 	private Center()
 	{
@@ -58,18 +57,18 @@ public class Center<J extends Center<J>>
 	}
 
 	/**
-	 * Return a center placement object
+	 * Return a centerInstance placement object
 	 * <p>
 	 *
 	 * @return
 	 */
-	public static Center getCenter()
+	public static Center getCenterInstance()
 	{
-		return Center.center;
+		return Center.centerInstance;
 	}
 
 	/**
-	 * Returns a new instance of the center object. Better to reference the static field.
+	 * Returns a new instance of the centerInstance object. Better to reference the static field.
 	 * <p>
 	 *
 	 * @return

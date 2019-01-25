@@ -218,12 +218,9 @@ public class ScriptsDynamicPageConfigurator
                        *       	   	   ,
                        *       	   	   ?>
 	 */
+	@NotNull
 	private Script<?, ?> getDynamicReference(String urlLocation)
 	{
-		if (urlLocation == null)
-		{
-			return null;
-		}
 		Script<?, ?> jwScript = new Script();
 		jwScript.addAttribute(ScriptAttributes.Type, StaticStrings.HTML_HEADER_JAVASCRIPT);
 		jwScript.addAttribute(ScriptAttributes.Src, SessionHelper.getServerPath() + urlLocation);

@@ -49,7 +49,14 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 public class DataList<J extends DataList<J>>
 		extends Component<DataListChildren, NoAttributes, NoFeatures, NoEvents, J>
 {
-
+	/**
+	 * Creates a new DataList with the given.
+	 * <p>
+	 */
+	public DataList()
+	{
+		this(null);
+	}
 
 	/**
 	 * Creates a new DataList with the given.

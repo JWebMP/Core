@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 /**
  * SPI to do something when on bind is called
  */
+@FunctionalInterface
 public interface IOnDataBindCloak
 {
 	/**

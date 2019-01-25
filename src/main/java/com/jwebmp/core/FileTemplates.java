@@ -133,6 +133,8 @@ public class FileTemplates
 		return TemplateScripts.get(templateName);
 	}
 
+	//public boolean doesFileExist()
+
 	/**
 	 * Sets all the template scripts currently loaded in memory
 	 *

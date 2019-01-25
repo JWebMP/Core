@@ -30,12 +30,12 @@ public class CenterTest
 	}
 
 	/**
-	 * Test of getCenter method, of class Center.
+	 * Test of getCenterInstance method, of class Center.
 	 */
 	@Test
 	public void testGetCenter()
 	{
-		Center c = Center.getCenter();
+		Center c = Center.getCenterInstance();
 		System.out.println(c.toString(true));
 		Assertions.assertEquals("<center></center>", c.toString(true));
 	}
