@@ -1,17 +1,3 @@
-import com.jwebmp.core.annotations.JWebMPSiteBinder;
-import com.jwebmp.core.annotations.ObjectMapperBinder;
-import com.jwebmp.core.base.servlets.intercepters.LocalStorageIntercepter;
-import com.jwebmp.core.implementations.JWebMPDynamicScriptRenderer;
-import com.jwebmp.core.implementations.JWebMPJavaScriptDynamicScriptRenderer;
-import com.jwebmp.core.implementations.JWebMPModuleExclusions;
-import com.jwebmp.core.services.*;
-import com.jwebmp.guicedinjection.interfaces.IGuiceDefaultBinder;
-import com.jwebmp.guicedinjection.interfaces.IGuiceScanJarExclusions;
-import com.jwebmp.guicedinjection.interfaces.IGuiceScanModuleExclusions;
-import com.jwebmp.guicedservlets.services.IGuiceSiteBinder;
-import com.jwebmp.interception.services.AjaxCallIntercepter;
-import com.jwebmp.interception.services.DataCallIntercepter;
-
 module com.jwebmp.core {
 
 	exports com.jwebmp.core;
@@ -167,19 +153,19 @@ module com.jwebmp.core {
 
 	requires com.fasterxml.jackson.module.guice;
 
-	uses IRegularExpressions;
+	uses com.jwebmp.core.services.IRegularExpressions;
 
 	uses com.jwebmp.core.services.IPageConfigurator;
 	uses com.jwebmp.core.services.IPage;
 
 
-	uses IErrorPage;
-	uses RenderBeforeLinks;
-	uses RenderAfterLinks;
-	uses RenderBeforeDynamicScripts;
-	uses RenderAfterScripts;
-	uses RenderAfterDynamicScripts;
-	uses RenderBeforeScripts;
+	uses com.jwebmp.core.services.IErrorPage;
+	uses com.jwebmp.core.services.RenderBeforeLinks;
+	uses com.jwebmp.core.services.RenderAfterLinks;
+	uses com.jwebmp.core.services.RenderBeforeDynamicScripts;
+	uses com.jwebmp.core.services.RenderAfterScripts;
+	uses com.jwebmp.core.services.RenderAfterDynamicScripts;
+	uses com.jwebmp.core.services.RenderBeforeScripts;
 
 
 	uses com.jwebmp.core.events.activate.IOnActivateService;
@@ -235,34 +221,34 @@ module com.jwebmp.core {
 	uses com.jwebmp.core.databind.IOnDataBindCloak;
 
 
-	uses IDynamicRenderingServlet;
+	uses com.jwebmp.core.services.IDynamicRenderingServlet;
 	uses com.jwebmp.core.events.dropout.IOnDropOutService;
 	uses com.jwebmp.core.events.mousedown.IOnMouseDownService;
 	uses com.jwebmp.core.events.resizestart.IOnResizeStartService;
 
 
-	provides DataCallIntercepter with LocalStorageIntercepter;
-	provides AjaxCallIntercepter with LocalStorageIntercepter;
+	provides com.jwebmp.interception.services.DataCallIntercepter with com.jwebmp.core.base.servlets.intercepters.LocalStorageIntercepter;
+	provides com.jwebmp.interception.services.AjaxCallIntercepter with com.jwebmp.core.base.servlets.intercepters.LocalStorageIntercepter;
 
-	provides IGuiceSiteBinder with JWebMPSiteBinder;
-	provides IGuiceDefaultBinder with JWebMPServicesBindings, ObjectMapperBinder;
-
-
-	provides IGuiceScanJarExclusions with JWebMPModuleExclusions;
-	provides IGuiceScanModuleExclusions with JWebMPModuleExclusions;
-
-	provides IDynamicRenderingServlet with JWebMPDynamicScriptRenderer, JWebMPJavaScriptDynamicScriptRenderer;
+	provides com.jwebmp.guicedservlets.services.IGuiceSiteBinder with com.jwebmp.core.annotations.JWebMPSiteBinder;
+	provides com.jwebmp.guicedinjection.interfaces.IGuiceDefaultBinder with com.jwebmp.core.services.JWebMPServicesBindings, com.jwebmp.core.annotations.ObjectMapperBinder;
 
 
-	provides IRegularExpressions with com.jwebmp.core.utilities.regex.TextRegExPatterns,
-			                             com.jwebmp.core.utilities.regex.EmailAddressRegExPatterns,
-			                             com.jwebmp.core.utilities.regex.DateFormatRegExPatterns;
+	provides com.jwebmp.guicedinjection.interfaces.IGuiceScanJarExclusions with com.jwebmp.core.implementations.JWebMPModuleExclusions;
+	provides com.jwebmp.guicedinjection.interfaces.IGuiceScanModuleExclusions with com.jwebmp.core.implementations.JWebMPModuleExclusions;
 
-	provides IPageConfigurator with com.jwebmp.core.base.page.ScriptsDynamicPageConfigurator,
-			                           com.jwebmp.core.base.page.CSSLinksInsertPageConfigurator,
-			                           com.jwebmp.core.base.page.ScriptsInsertPageConfigurator,
-			                           com.jwebmp.core.base.page.TopShelfScriptsInsertPageConfigurator,
-			                           com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
+	provides com.jwebmp.core.services.IDynamicRenderingServlet with com.jwebmp.core.implementations.JWebMPDynamicScriptRenderer, com.jwebmp.core.implementations.JWebMPJavaScriptDynamicScriptRenderer;
+
+
+	provides com.jwebmp.core.services.IRegularExpressions with com.jwebmp.core.utilities.regex.TextRegExPatterns,
+			                                                      com.jwebmp.core.utilities.regex.EmailAddressRegExPatterns,
+			                                                      com.jwebmp.core.utilities.regex.DateFormatRegExPatterns;
+
+	provides com.jwebmp.core.services.IPageConfigurator with com.jwebmp.core.base.page.ScriptsDynamicPageConfigurator,
+			                                                    com.jwebmp.core.base.page.CSSLinksInsertPageConfigurator,
+			                                                    com.jwebmp.core.base.page.ScriptsInsertPageConfigurator,
+			                                                    com.jwebmp.core.base.page.TopShelfScriptsInsertPageConfigurator,
+			                                                    com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 
 	opens com.jwebmp.core.base.servlets to com.google.guice, com.fasterxml.jackson.databind;
 
