@@ -54,7 +54,14 @@ public class Deleted<J extends Deleted<J>>
 		extends Component<IComponentHierarchyBase, DeletedAttributes, NoFeatures, NoEvents, J>
 		implements NoNewLineBeforeClosingTag, NoNewLineForRawText, NoIDTag, ParagraphChildren<IComponentHierarchyBase, J>
 {
-
+	/**
+	 * The text marked as deleted
+	 * <p>
+	 */
+	public Deleted()
+	{
+		//No config
+	}
 
 	/**
 	 * The text marked as deleted

@@ -44,8 +44,6 @@ import java.util.Map.Entry;
 public class AjaxResponse<J extends AjaxResponse<J>>
 		extends JavaScriptPart<J>
 {
-
-
 	/**
 	 * Whether or not the response is a success or not
 	 */
@@ -200,6 +198,21 @@ public class AjaxResponse<J extends AjaxResponse<J>>
 	public void setSuccess(boolean success)
 	{
 		this.success = success;
+	}
+
+	/**
+	 * Convenience method to add a feature to the feature group
+	 *
+	 * @param feature
+	 * 		The feature to add
+	 *
+	 * @return J Always this
+	 */
+	@SuppressWarnings("unchecked")
+	public J addFeature(Feature<?, ?, ?> feature)
+	{
+		getFeatures().add(feature);
+		return (J) this;
 	}
 
 	/**
