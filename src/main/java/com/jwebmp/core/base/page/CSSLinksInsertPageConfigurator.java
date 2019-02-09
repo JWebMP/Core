@@ -32,7 +32,7 @@ public class CSSLinksInsertPageConfigurator
 	@Override
 	public Page<?> configure(Page<?> page)
 	{
-		if (!page.isConfigured())
+		if (!page.isConfigured() && enabled())
 		{
 			renderBeforeLinks(page);
 			for (RequirementsPriority requirementsPriority : RequirementsPriority.values())

@@ -47,7 +47,7 @@ public class ScriptsInsertPageConfigurator
 	@SuppressWarnings("unchecked")
 	public Page<?> configure(Page<?> page)
 	{
-		if (!page.isConfigured())
+		if (!page.isConfigured() && enabled())
 		{
 			ComponentHierarchyBase addable;
 			if (page.getOptions()

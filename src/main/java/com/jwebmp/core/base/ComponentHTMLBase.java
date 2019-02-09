@@ -430,6 +430,18 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 	}
 
 	/**
+	 * Renders as an inline tiny html tag
+	 *
+	 * @return A string of the html tag
+	 */
+	@Override
+	@NotNull
+	public String toTinyString()
+	{
+		return setTiny(true).toString(0);
+	}
+
+	/**
 	 * Overrides this tag name
 	 * <p>
 	 *

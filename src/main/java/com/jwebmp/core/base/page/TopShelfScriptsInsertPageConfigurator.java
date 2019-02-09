@@ -45,7 +45,7 @@ public class TopShelfScriptsInsertPageConfigurator
 	@SuppressWarnings("unchecked")
 	public Page<?> configure(Page<?> page)
 	{
-		if (!page.isConfigured())
+		if (!page.isConfigured() && enabled())
 		{
 			List<ComponentHierarchyBase<?, ?, ?, ?, ?>> reqs = getPriorityRequirements(page, RequirementsPriority.Top_Shelf, new ArrayList<>(), true, true);
 			if (!reqs.isEmpty())

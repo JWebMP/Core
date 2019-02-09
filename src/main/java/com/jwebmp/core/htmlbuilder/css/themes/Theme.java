@@ -19,8 +19,6 @@ import java.util.List;
 public abstract class Theme
 		implements ITheme, Comparator<Theme>, Serializable
 {
-
-
 	private final String name;
 	private final String cssClassName;
 	private final String icon30;

@@ -84,7 +84,7 @@ public class ScriptsDynamicPageConfigurator
 	@SuppressWarnings("unchecked")
 	public Page<?> configure(Page<?> page)
 	{
-		if (!page.isConfigured())
+		if (!page.isConfigured() && enabled())
 		{
 			//Render Before Dynamic Scripts
 			Paragraph beforeText = new Paragraph().setTextOnly(true);
@@ -179,6 +179,12 @@ public class ScriptsDynamicPageConfigurator
 		return page;
 	}
 
+	@Override
+	public boolean enabled()
+	{
+		return ScriptsDynamicPageConfigurator.enabled;
+	}
+
 	/**
 	 * Method getCss returns the CSS for the page
 	 *
@@ -227,7 +233,6 @@ public class ScriptsDynamicPageConfigurator
 		return jwScript;
 	}
 
-
 	/**
 	 * Method newScript ...
 	 *
@@ -242,12 +247,6 @@ public class ScriptsDynamicPageConfigurator
 		s.addAttribute(ScriptAttributes.Type, StaticStrings.HTML_HEADER_JAVASCRIPT);
 		s.setText(contents);
 		return s;
-	}
-
-	@Override
-	public boolean enabled()
-	{
-		return ScriptsDynamicPageConfigurator.enabled;
 	}
 
 	/**

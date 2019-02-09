@@ -82,6 +82,14 @@ public interface IComponentHTMLBase<J extends ComponentBase>
 	J setClosingTag(boolean noCloseTag);
 
 	/**
+	 * Renders as an inline tiny html tag
+	 *
+	 * @return A string of the html tag
+	 */
+	@NotNull
+	String toTinyString();
+
+	/**
 	 * Sets the number of tab indents for this component
 	 *
 	 * @param currentTabIndents

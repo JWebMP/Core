@@ -41,16 +41,20 @@ public abstract class Feature<F extends GlobalFeatures, O extends JavaScriptPart
 		extends ComponentFeatureBase<F, J>
 		implements GlobalFeatures<F, J>
 {
-
-	/**
-	 * Field serialVersionUID
-	 */
-
-
 	/**
 	 * The options object associated with this feature
 	 */
+
 	private O options;
+
+	/**
+	 * Constructs a feature that can be used with all components, but the name is fixed, so only the first one will ever exist....
+	 * Don't use this
+	 */
+	public Feature()
+	{
+		this("No Name Feature");
+	}
 
 	/**
 	 * Constructs a feature that can be used with all components
