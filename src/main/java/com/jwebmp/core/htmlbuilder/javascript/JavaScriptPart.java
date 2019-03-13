@@ -135,7 +135,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	@JsonIgnore
 	public ObjectReader getJsonObjectReader()
 	{
-		return GuiceContext.getInstance(JSONObjectReader);
+		return GuiceContext.get(JSONObjectReader);
 	}
 
 	/**
@@ -146,7 +146,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	@JsonIgnore
 	public ObjectMapper getFunctionObjectMapper()
 	{
-		return GuiceContext.getInstance(Key.get(ObjectMapper.class, Names.named("JSFUNCTION")));
+		return GuiceContext.get(Key.get(ObjectMapper.class, Names.named("JSFUNCTION")));
 	}
 
 	/**
@@ -430,7 +430,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	{
 		try
 		{
-			return GuiceContext.getInstance(JSONObjectWriter);
+			return GuiceContext.get(JSONObjectWriter);
 		}
 		catch (NullPointerException e)
 		{
@@ -447,7 +447,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	@JsonIgnore
 	public ObjectWriter getJsonObjectMapper()
 	{
-		return GuiceContext.getInstance(Key.get(ObjectWriter.class, Names.named("JSON")));
+		return GuiceContext.get(Key.get(ObjectWriter.class, Names.named("JSON")));
 	}
 
 	/**
@@ -484,7 +484,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	{
 		try
 		{
-			return GuiceContext.getInstance(JSONObjectReader);
+			return GuiceContext.get(JSONObjectReader);
 		}
 		catch (NullPointerException e)
 		{

@@ -44,12 +44,12 @@ public class LocalStorageIntercepter
 	{
 		try
 		{
-			AjaxCall<?> call = GuiceContext.getInstance(AjaxCall.class);
-			SessionStorageProperties<?> storageProperties = GuiceContext.getInstance(SessionStorageProperties.class);
+			AjaxCall<?> call = GuiceContext.get(AjaxCall.class);
+			SessionStorageProperties<?> storageProperties = GuiceContext.get(SessionStorageProperties.class);
 			Map<String, String> localStorage = storageProperties.getLocalStorage();
 			if (call.getVariable(StaticStrings.LOCAL_STORAGE_VARIABLE_KEY) != null && !localStorage.containsKey(StaticStrings.LOCAL_STORAGE_PARAMETER_KEY))
 			{
-				ObjectMapper mapper = GuiceContext.getInstance(ObjectMapper.class);
+				ObjectMapper mapper = GuiceContext.get(ObjectMapper.class);
 				LocalStorageIntercepter.log.finer("Local Storage key found");
 				Map<String, String> result = mapper.readValue(call.getVariable(StaticStrings.LOCAL_STORAGE_VARIABLE_KEY)
 				                                                  .getVariableText(), new TypeReference<Map<String, String>>() {});

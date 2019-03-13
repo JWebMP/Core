@@ -141,6 +141,7 @@ module com.jwebmp.core {
 
 	requires com.google.guice.extensions.servlet;
 	requires com.google.guice;
+	requires io.github.classgraph;
 
 	requires com.fasterxml.jackson.annotation;
 	requires com.fasterxml.jackson.databind;

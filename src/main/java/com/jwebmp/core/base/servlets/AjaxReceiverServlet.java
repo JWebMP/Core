@@ -32,6 +32,7 @@ import com.jwebmp.logger.LogFactory;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Modifier;
 import java.nio.charset.Charset;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,10 +67,10 @@ public class AjaxReceiverServlet
 		try
 		{
 			AjaxCall ajaxCallIncoming = (AjaxCall) new JavaScriptPart().From(request.getInputStream(), AjaxCall.class);
-			AjaxCall ajaxCall = GuiceContext.getInstance(AjaxCall.class);
+			AjaxCall ajaxCall = GuiceContext.get(AjaxCall.class);
 			ajaxCall.fromCall(ajaxCallIncoming);
 
-			AjaxResponse<?> ajaxResponse = GuiceContext.getInstance(AjaxResponse.class);
+			AjaxResponse<?> ajaxResponse = GuiceContext.get(AjaxResponse.class);
 
 			validateCall(ajaxCall);
 			validatePage();
@@ -126,27 +127,27 @@ public class AjaxReceiverServlet
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	protected Event processEvent() throws InvalidRequestException
 	{
 		Event triggerEvent = null;
 		try
 		{
-			AjaxCall call = GuiceContext.getInstance(AjaxCall.class);
+			AjaxCall call = GuiceContext.get(AjaxCall.class);
 			Class eventClass = Class.forName(call.getClassName()
 			                                     .replace(StaticStrings.CHAR_UNDERSCORE, StaticStrings.CHAR_DOT));
-			triggerEvent = (Event) GuiceContext.getInstance(eventClass);
+			triggerEvent = (Event) GuiceContext.get(eventClass);
 			triggerEvent.setID(call.getEventId());
 		}
 		catch (ClassNotFoundException cnfe)
 		{
-			Set<Class<? extends Event>> events = GuiceContext.reflect()
-			                                                 .getSubTypesOf(Event.class);
+			Set<Class<? extends Event>> events = new HashSet(GuiceContext.instance().getScanResult().getSubclasses(Event.class.getCanonicalName()).loadClasses());
 			events.removeIf(event -> Modifier.isAbstract(event.getModifiers()));
 			for (Class<? extends Event> event : events)
 			{
-				Event instance = GuiceContext.getInstance(event);
+				Event instance = GuiceContext.get(event);
 				if (instance.getID()
-				            .equals(GuiceContext.getInstance(AjaxCall.class)
+				            .equals(GuiceContext.get(AjaxCall.class)
 				                                .getEventId()))
 				{
 					triggerEvent = instance;

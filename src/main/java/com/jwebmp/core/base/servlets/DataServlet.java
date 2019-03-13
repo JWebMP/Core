@@ -87,7 +87,7 @@ public class DataServlet
 		{
 			Class<? extends IDataComponent> clazz = (Class<? extends IDataComponent>) Class.forName(
 					componentID.replace(StaticStrings.CHAR_UNDERSCORE, StaticStrings.CHAR_DOT));
-			IDataComponent component = GuiceContext.getInstance(clazz);
+			IDataComponent component = GuiceContext.get(clazz);
 			StringBuilder renderData = component.renderData();
 			responseString.append(renderData);
 		}

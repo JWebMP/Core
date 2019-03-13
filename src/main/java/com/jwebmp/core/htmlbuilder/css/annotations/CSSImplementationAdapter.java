@@ -135,7 +135,7 @@ public class CSSImplementationAdapter<A extends Annotation, T extends CSSImpleme
 	{
 		try
 		{
-			return GuiceContext.getInstance(ObjectMapper.class)
+			return GuiceContext.get(ObjectMapper.class)
 			                   .writer()
 			                   .withoutFeatures(SerializationFeature.INDENT_OUTPUT)
 			                   .withoutFeatures(WRITE_ENUMS_USING_TO_STRING)

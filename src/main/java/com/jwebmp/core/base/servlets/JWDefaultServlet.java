@@ -119,7 +119,7 @@ public abstract class JWDefaultServlet
 	@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 	public boolean validateCall(AjaxCall ajaxCall) throws InvalidRequestException
 	{
-		HttpServletRequest request = GuiceContext.getInstance(HttpServletRequest.class);
+		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
 		if (ajaxCall.getComponentId() == null)
 		{
 			JWDefaultServlet.log.log(Level.SEVERE, "[SessionID]-[{0}];[Security]-[Component ID Not Found]", request.getSession()
@@ -171,7 +171,7 @@ public abstract class JWDefaultServlet
 	@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 	public boolean validateRequest(AjaxCall ajaxCall) throws InvalidRequestException
 	{
-		HttpServletRequest request = GuiceContext.getInstance(HttpServletRequest.class);
+		HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
 		Date datetime = ajaxCall.getDatetime();
 		if (datetime == null)
 		{
@@ -422,7 +422,7 @@ public abstract class JWDefaultServlet
 	 */
 	public void writeOutput(StringBuilder output, String contentType, Charset charSet)
 	{
-		HttpServletResponse response = GuiceContext.getInstance(HttpServletResponse.class);
+		HttpServletResponse response = GuiceContext.get(HttpServletResponse.class);
 		try (PrintWriter out = response.getWriter())
 		{
 			Date dataTransferDate = new Date();

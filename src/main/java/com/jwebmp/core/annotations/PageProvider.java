@@ -76,7 +76,7 @@ public class PageProvider
 		{
 			PageConfiguration pc = next.getClass()
 			                           .getAnnotation(PageConfiguration.class);
-			HttpServletRequest request = GuiceContext.getInstance(HttpServletRequest.class);
+			HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
 			String pathInfo = request.getPathInfo();
 			if (pathInfo == null)
 			{

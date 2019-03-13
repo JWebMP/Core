@@ -61,7 +61,7 @@ public class SessionHelper
 		}
 		try
 		{
-			HttpServletRequest request = GuiceContext.getInstance(HttpServletRequest.class);
+			HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
 			StringBuffer buff = request.getRequestURL();
 			if (request.getHeader(StaticStrings.REQUEST_SITE_HEADER_NAME) != null && !request.getHeader(StaticStrings.REQUEST_SITE_HEADER_NAME)
 			                                                                                 .isEmpty())

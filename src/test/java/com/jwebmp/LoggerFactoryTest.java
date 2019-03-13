@@ -62,7 +62,6 @@ public class LoggerFactoryTest
 		GuiceContext.inject();
 		System.out.println("Testing Initialization");
 		GuiceContext.inject();
-		GuiceContext.reflect();
 	}
 
 }

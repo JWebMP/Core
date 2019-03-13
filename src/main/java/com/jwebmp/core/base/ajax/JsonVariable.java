@@ -248,7 +248,7 @@ public class JsonVariable
 	{
 		try
 		{
-			ObjectMapper om = GuiceContext.getInstance(ObjectMapper.class);
+			ObjectMapper om = GuiceContext.get(ObjectMapper.class);
 			om.readerForUpdating(object)
 			  .readValue(getVariableText());
 			return object;
