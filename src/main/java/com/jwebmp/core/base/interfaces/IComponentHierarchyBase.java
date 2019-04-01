@@ -55,6 +55,9 @@ public interface IComponentHierarchyBase<C extends IComponentHierarchyBase, J ex
 	 */
 	J add(C newChild);
 
+	@SuppressWarnings("unchecked")
+	J add(@NotNull Integer position, C newChild);
+
 	/**
 	 * Returns null sets the text
 	 *

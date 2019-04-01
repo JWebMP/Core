@@ -17,6 +17,7 @@
 package com.jwebmp.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.hash.Hashing;
 import com.google.inject.servlet.RequestScoped;
 import com.jwebmp.core.annotations.PageConfiguration;
 import com.jwebmp.core.base.ComponentFeatureBase;
@@ -29,6 +30,7 @@ import com.jwebmp.core.base.html.attributes.ScriptAttributes;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
+import com.jwebmp.core.base.servlets.SessionStorageProperties;
 import com.jwebmp.core.services.IPage;
 import com.jwebmp.core.services.IPageConfigurator;
 import com.jwebmp.core.utilities.StaticStrings;
@@ -37,13 +39,13 @@ import com.jwebmp.logger.LogFactory;
 import net.sf.uadetector.*;
 
 import javax.validation.constraints.NotNull;
-import java.util.EnumSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static com.jwebmp.core.services.JWebMPServicesBindings.*;
+import static com.jwebmp.guicedinjection.GuiceContext.*;
 
 /**
  * Top level of any HTML page.
@@ -777,4 +779,31 @@ public class Page<J extends Page<J>>
 			}
 		}
 	}
+
+
+	/**
+	 * Gets the local storage key from the system
+	 */
+	@SuppressWarnings("unchecked")
+	public UUID getLocalStorageKey()
+	{
+		SessionStorageProperties sp = get(SessionStorageProperties.class);
+		Map<String, String> localStorage = sp.getLocalStorage();
+		if (!localStorage.containsKey(StaticStrings.LOCAL_STORAGE_PARAMETER_KEY))
+		{
+			String uuid = UUID.randomUUID()
+			                  .toString();
+			String clientIP = SessionHelper.getClientIPAddress();
+			String storageKey = Hashing.sha512()
+			                           .hashString(uuid + clientIP, StaticStrings.UTF8_CHARSET)
+			                           .toString();
+			get(AjaxResponse.class).getLocalStorage()
+			                       .put(StaticStrings.LOCAL_STORAGE_PARAMETER_KEY, storageKey);
+
+			localStorage.put(StaticStrings.LOCAL_STORAGE_PARAMETER_KEY, uuid);
+		}
+		String guid = localStorage.get(StaticStrings.LOCAL_STORAGE_PARAMETER_KEY);
+		return UUID.fromString(guid);
+	}
+
 }

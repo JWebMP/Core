@@ -355,6 +355,32 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	}
 
 	/**
+	 * Add a new child to this component
+	 * <p>
+	 *
+	 * @param newChild
+	 * 		The child to be added
+	 * 		<p>
+	 *
+	 * @return The new child added
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J add(@NotNull Integer position, @NotNull C newChild)
+	{
+		newChild.setParent(this);
+		newChild.setTiny(isTiny());
+		newChild.setPage(getPage());
+		ArrayList<C> componentHierarchyBases = new ArrayList(getChildren());
+		componentHierarchyBases.add(position, newChild);
+		setChildren(new LinkedHashSet<>(componentHierarchyBases));
+		newChild.init();
+		newChild.preConfigure();
+		return (J)this;
+	}
+
+	/**
 	 * Returns null sets the text
 	 *
 	 * @param text

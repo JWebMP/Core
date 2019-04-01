@@ -100,10 +100,6 @@ public class Link<J extends Link<J>>
 	public Link(String directToAddress)
 	{
 		this(directToAddress, null);
-		if (directToAddress == null || directToAddress.isEmpty())
-		{
-			Link.log.log(Level.FINE, "Invalid Link Address.");
-		}
 	}
 
 	/**
