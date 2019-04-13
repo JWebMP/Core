@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.jwebmp</groupId>
-        <artifactId>jwebmp-builder</artifactId>
+        <groupId>com.jwebmp.core</groupId>
+        <artifactId>jwebmp-core-modules</artifactId>
         <version>0.0.0_0-SNAPSHOT</version>
     </parent>
 
@@ -19,72 +19,62 @@
     <dependencies>
 
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>com.jwebmp.core</groupId>
             <artifactId>jwebmp-testlib</artifactId>
-            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>com.jwebmp.core</groupId>
             <artifactId>jwebmp-interception</artifactId>
-            <version>${project.version}</version>
-            <classifier>${jwebmp.runtime.classifier}</classifier>
-            <!--<optional>true</optional>-->
             <type>jar</type>
         </dependency>
 
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>com.jwebmp.thirdparty</groupId>
             <artifactId>uadetector-core</artifactId>
-            <version>${project.version}</version>
-            <classifier>${jwebmp.runtime.classifier}</classifier>
-            <!--<optional>true</optional>-->
             <type>jar</type>
         </dependency>
 
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>com.jwebmp.guicedee</groupId>
+            <artifactId>guiced-log-master</artifactId>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jwebmp.guicedee.servlets</groupId>
+            <artifactId>guiced-servlets</artifactId>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jwebmp.thirdparty</groupId>
             <artifactId>uadetector-resources</artifactId>
-            <version>${project.version}</version>
-            <classifier>${jwebmp.runtime.classifier}</classifier>
-            <!--<optional>true</optional>-->
             <type>jar</type>
         </dependency>
 
         <dependency>
-            <groupId>com.jwebmp</groupId>
+            <groupId>com.jwebmp.jpms.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>${project.version}</version>
-            <classifier>${jwebmp.runtime.classifier}</classifier>
-            <!--<optional>true</optional>-->
             <type>jar</type>
         </dependency>
 
         <dependency>
-            <groupId>com.jwebmp</groupId>
+            <groupId>com.jwebmp.jpms.commons</groupId>
             <artifactId>commons-text</artifactId>
-            <version>${project.version}</version>
-            <classifier>${jwebmp.runtime.classifier}</classifier>
-            <!--<optional>true</optional>-->
             <type>jar</type>
         </dependency>
 
         <dependency>
-            <groupId>com.jwebmp</groupId>
+            <groupId>com.jwebmp.jpms.commons</groupId>
             <artifactId>commons-io</artifactId>
-            <version>${project.version}</version>
-            <classifier>${jwebmp.runtime.classifier}</classifier>
-            <!--<optional>true</optional>-->
             <type>jar</type>
         </dependency>
 
         <dependency>
-            <groupId>com.jwebmp.jackson.module</groupId>
+            <groupId>com.jwebmp.jpms.jackson.module</groupId>
             <artifactId>jackson-module-guice</artifactId>
-            <version>${project.version}</version>
-            <classifier>${jwebmp.runtime.classifier}</classifier>
-            <!--<optional>true</optional>-->
             <type>jar</type>
         </dependency>
 
