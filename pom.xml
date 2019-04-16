@@ -31,6 +31,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.jwebmp.guicedee</groupId>
+            <artifactId>guiced-injection</artifactId>
+            <type>jar</type>
+        </dependency>
+        
+        <dependency>
             <groupId>com.jwebmp.thirdparty</groupId>
             <artifactId>uadetector-core</artifactId>
             <type>jar</type>
@@ -77,6 +83,22 @@
             <artifactId>jackson-module-guice</artifactId>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>com.jwebmp.jpms.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.jwebmp.jpms.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.jwebmp.jpms.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <type>jar</type>
+        </dependency>
+
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
