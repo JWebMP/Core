@@ -794,11 +794,8 @@ public class Page<J extends Page<J>>
 			String uuid = UUID.randomUUID()
 			                  .toString();
 			String clientIP = SessionHelper.getClientIPAddress();
-			String storageKey = Hashing.sha512()
-			                           .hashString(uuid + clientIP, StaticStrings.UTF8_CHARSET)
-			                           .toString();
 			get(AjaxResponse.class).getLocalStorage()
-			                       .put(StaticStrings.LOCAL_STORAGE_PARAMETER_KEY, storageKey);
+			                       .put(StaticStrings.LOCAL_STORAGE_PARAMETER_KEY, uuid);
 
 			localStorage.put(StaticStrings.LOCAL_STORAGE_PARAMETER_KEY, uuid);
 		}
