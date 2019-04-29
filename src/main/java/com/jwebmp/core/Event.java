@@ -24,13 +24,17 @@ import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
+import com.jwebmp.core.events.IEventConfigurator;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import com.jwebmp.core.utilities.StaticStrings;
+import com.jwebmp.guicedinjection.GuiceContext;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ServiceLoader;
+import java.util.Set;
 
 /**
  * Container Class for Events. Splits from the component hierarchy
@@ -91,6 +95,7 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	 * @param component
 	 * 		The component type of this event
 	 */
+	@SuppressWarnings("unchecked")
 	public Event(String name, EventTypes eventType, ComponentHierarchyBase component)
 	{
 		super(ComponentTypes.Event);
@@ -98,7 +103,13 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 		setName(name);
 		setComponent(component);
 		setEventType(eventType);
-		returnVariable(StaticStrings.LOCAL_STORAGE_VARIABLE_KEY);
+
+		Set<IEventConfigurator> eventConfiguratorSet = GuiceContext.instance()
+		                                                           .getLoader(IEventConfigurator.class, ServiceLoader.load(IEventConfigurator.class));
+		for (IEventConfigurator iEventConfigurator : eventConfiguratorSet)
+		{
+			iEventConfigurator.configureEvent(this);
+		}
 	}
 
 	/**

@@ -24,25 +24,10 @@ import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
  */
 public enum JQueryReferencePool
 {
-	PersistJS(new JavascriptReference("PersistJS", 1.0, "persist-js/persist-all-min.js", -10).setPriority(RequirementsPriority.Top_Shelf)),
-
-	JQuery(new JQueryReference()),
-	JQueryV2(new JavascriptReference("JQuery", 3.31, "bower_components/jquery/dist/jquery.min.js", "https://code.jquery.com/jquery-3.3.1.js").setPriority(
+	JQueryV3(new JavascriptReference("JQuery", 3.31, "bower_components/jquery/dist/jquery.min.js", "https://code.jquery.com/jquery-3.3.1.js").setPriority(
 			RequirementsPriority.First)),
 
-	JQueryV3(new JavascriptReference("Jquery3", 3.31, "bower_components/jquery/dist/jquery.min.js", "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js", 0,
-	                                 RequirementsPriority.First).setCordovaRequired(true)),
-
-	JQueryMigrate(new JQueryMigrateReference()),
-
-	JQXWidgetFixes(new JavascriptReference("JQXWidgetFix", 1.0, "javascript/jwebswing/jqxfixes.js", 8));
-
-	/*
-	 * JQueryCrossDomain(new JQueryCrossDomainReference()), JQueryMigrate(new JQueryMigrateReference()), JQueryCookieHandler(new JQueryCookieHandlerReference()),
-	 *
-	 * JQueryRightClickHandler(new JQueryRightClickHandlerReference()), JQueryScrollBars(new JWDataTablesJavaScriptReference()),
-	 *
-	 */
+	JQueryMigrate(new JQueryMigrateReference());
 
 	private final JavascriptReference reference;
 

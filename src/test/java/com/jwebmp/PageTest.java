@@ -201,7 +201,7 @@ public class PageTest
 		String result;
 		instance = getInstance();
 		instance.setRunningEnvironment(DevelopmentEnvironments.Development);
-		instance.getPageFields()
+		instance.getOptions()
 		        .setAuthor("Marc Magon");
 		System.out.println(result = instance.toString(true));
 		String expResult = "<!DOCTYPE html>\n" + "<html>\n" + "\t<head>\n" + "\t\t<meta content=\"Marc Magon\" name=\"author\">\n" + "\t</head>\n" + "</html>";
@@ -215,7 +215,7 @@ public class PageTest
 		instance = getInstance();
 		instance.setTiny(true);
 		instance.setRunningEnvironment(DevelopmentEnvironments.Production);
-		instance.getPageFields()
+		instance.getOptions()
 		        .setAuthor("Marc Magon");
 		System.out.println(result = instance.toString(true));
 		String expResult = "<!DOCTYPE html><html><head><meta content=\"Marc Magon\" name=\"author\"></head></html>";
@@ -229,7 +229,7 @@ public class PageTest
 		instance = getInstance();
 		instance.setTiny(false);
 		instance.setRunningEnvironment(DevelopmentEnvironments.Development);
-		instance.getPageFields()
+		instance.getOptions()
 		        .setDescription("This is my page description... It can be very very long");
 		System.out.println(result = instance.toString(true));
 		String expResult =
@@ -245,7 +245,7 @@ public class PageTest
 		instance = getInstance();
 		instance.setTiny(true);
 		instance.setRunningEnvironment(DevelopmentEnvironments.Production);
-		instance.getPageFields()
+		instance.getOptions()
 		        .setDescription("This is my page description... It can be very very long");
 		System.out.println(result = instance.toString(true));
 		String expResult = "<!DOCTYPE html><html><head><meta content=\"This is my page description... It can be very very long\" name=\"description\"></head></html>";
@@ -258,7 +258,7 @@ public class PageTest
 		String result;
 		instance = getInstance();
 		instance.setRunningEnvironment(DevelopmentEnvironments.Development);
-		instance.getPageFields()
+		instance.getOptions()
 		        .setGenerator("This is my page description... It can be very very long");
 		System.out.println(result = instance.toString(true));
 		String expResult = "<!DOCTYPE html>\n" + "<html>\n" + "\t<head>\n" + "\t\t<meta content=\"This is my page description... It can be very very long\" name=\"generator\">\n" +
@@ -273,7 +273,7 @@ public class PageTest
 		instance = getInstance();
 		instance.setTiny(true);
 		instance.setRunningEnvironment(DevelopmentEnvironments.Production);
-		instance.getPageFields()
+		instance.getOptions()
 		        .setGenerator("This is my page description... It can be very very long");
 		System.out.println(result = instance.toString(true));
 		String expResult = "<!DOCTYPE html><html><head><meta content=\"This is my page description... It can be very very long\" name=\"generator\"></head></html>";
@@ -286,7 +286,7 @@ public class PageTest
 		String result;
 		instance = getInstance();
 		instance.setRunningEnvironment(DevelopmentEnvironments.Development);
-		instance.getPageFields()
+		instance.getOptions()
 		        .setKeywords("This is my page description... It can be very very long");
 		System.out.println(result = instance.toString(true));
 		String expResult = "<!DOCTYPE html>\n" + "<html>\n" + "\t<head>\n" + "\t\t<meta content=\"This is my page description... It can be very very long\" name=\"keywords\">\n" +
@@ -301,7 +301,7 @@ public class PageTest
 		instance = getInstance();
 		instance.setTiny(true);
 		instance.setRunningEnvironment(DevelopmentEnvironments.Production);
-		instance.getPageFields()
+		instance.getOptions()
 		        .setKeywords("This is my page description... It can be very very long");
 		System.out.println(result = instance.toString(true));
 		String expResult = "<!DOCTYPE html><html><head><meta content=\"This is my page description... It can be very very long\" name=\"keywords\"></head></html>";
@@ -316,7 +316,7 @@ public class PageTest
 		instance.setBrowser(Browsers.InternetExplorer10);
 		Base b = new Base();
 		b.addAttribute(BaseAttributes.Target, "The Base Target");
-		instance.getPageFields()
+		instance.getOptions()
 		        .setBase(b);
 		instance.setTiny(false);
 		instance.setRunningEnvironment(DevelopmentEnvironments.Development);
@@ -330,7 +330,7 @@ public class PageTest
 	{
 		String result;
 		instance = getInstance();
-		instance.getPageFields()
+		instance.getOptions()
 		        .setBase(new Base());
 		instance.setTiny(true);
 		instance.setRunningEnvironment(DevelopmentEnvironments.Production);
@@ -343,22 +343,22 @@ public class PageTest
 	public void testAll()
 	{
 		instance = getInstance();
-		instance.getPageFields()
+		instance.getOptions()
 		        .setTitle("This is my title");
 		Body body = instance.getBody();
 		Base base = new Base();
 		base.addAttribute(BaseAttributes.Target, "Base Target");
-		instance.getPageFields()
+		instance.getOptions()
 		        .setBase(base);
-		instance.getPageFields()
+		instance.getOptions()
 		        .setAuthor("Author GedMarc");
-		instance.getPageFields()
+		instance.getOptions()
 		        .setDescription("Page Description");
-		instance.getPageFields()
+		instance.getOptions()
 		        .setApplicationNameMeta("Application Name");
-		instance.getPageFields()
+		instance.getOptions()
 		        .setGenerator("Generator");
-		instance.getPageFields()
+		instance.getOptions()
 		        .setCompatibilityMode(InternetExplorerCompatibilityMode.IE10);
 		instance.setRunningEnvironment(DevelopmentEnvironments.Development);
 		String result;
@@ -375,23 +375,23 @@ public class PageTest
 	public void testAllTiny()
 	{
 		instance = getInstance();
-		instance.getPageFields()
+		instance.getOptions()
 		        .setTitle("This is my title");
 		instance.setTiny(true);
 		Body body = instance.getBody();
 		Base base = new Base();
 		base.addAttribute(BaseAttributes.Target, "Base Target");
-		instance.getPageFields()
+		instance.getOptions()
 		        .setBase(base);
-		instance.getPageFields()
+		instance.getOptions()
 		        .setAuthor("Author GedMarc");
-		instance.getPageFields()
+		instance.getOptions()
 		        .setDescription("Page Description");
-		instance.getPageFields()
+		instance.getOptions()
 		        .setApplicationNameMeta("Application Name");
-		instance.getPageFields()
+		instance.getOptions()
 		        .setGenerator("Generator");
-		instance.getPageFields()
+		instance.getOptions()
 		        .setCompatibilityMode(InternetExplorerCompatibilityMode.IE10);
 		instance.setRunningEnvironment(DevelopmentEnvironments.Production);
 		String result;

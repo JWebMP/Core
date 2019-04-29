@@ -16,7 +16,9 @@
  */
 package com.jwebmp.core.base;
 
+import com.jwebmp.BaseTestClass;
 import com.jwebmp.core.Event;
+import com.jwebmp.core.Page;
 import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.html.Div;
@@ -26,27 +28,32 @@ import com.jwebmp.core.plugins.jquery.JQueryReferencePool;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author ged_m
+ * Enables the Events System in the Component Hierarchy Tree
+ *
+ * @author GedMarc
+ * @version 1
+ * @since 2016/04/23
  */
-public class ComponentHTMLAttributeTest
+public class ComponentEventBaseTest
+		extends BaseTestClass
 {
 
-	public ComponentHTMLAttributeTest()
+	public ComponentEventBaseTest()
 	{
 	}
+
 
 	@Test
 	public void testClone()
 	{
-		ComponentHTMLAttributeBase shell = new ComponentHTMLAttributeBase(ComponentTypes.Abbreviation);
+		ComponentEventBase shell = new ComponentEventBase(ComponentTypes.Abbreviation);
 		shell.setID("shell");
-		shell.addJavaScriptReference(JQueryReferencePool.PersistJS.getJavaScriptReference());
 		shell.addEvent(new ClickAdapter(new Div())
 		{
 			@Override
 			public void onClick(AjaxCall call, AjaxResponse response)
 			{
-				throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+				throw new UnsupportedOperationException("Not supported yet.");
 			}
 		});
 		Event.class.cast(shell.getEvents()
@@ -66,12 +73,6 @@ public class ComponentHTMLAttributeTest
 		                       "  \"configured\" : true,\n" +
 		                       "  \"initialized\" : true,\n" +
 		                       "  \"touched\" : false,\n" +
-		                       "  \"javascriptReferences\" : [ {\n" +
-		                       "    \"cordovaRequired\" : false,\n" +
-		                       "    \"name\" : \"PersistJS\",\n" +
-		                       "    \"version\" : 1.0,\n" +
-		                       "    \"reference\" : \"persist-js/persist-all-min.js\"\n" +
-		                       "  } ],\n" +
 		                       "  \"sortOrder\" : 1000,\n" +
 		                       "  \"renderAfterLoad\" : false,\n" +
 		                       "  \"javascriptRenderedElsewhere\" : false,\n" +
@@ -83,21 +84,14 @@ public class ComponentHTMLAttributeTest
 		                       "    \"initialized\" : true,\n" +
 		                       "    \"touched\" : false,\n" +
 		                       "    \"sortOrder\" : 1000,\n" +
+		                       "    \"variables\" : [ \"jwCntrl.jw.localstorage\" ],\n" +
 		                       "    \"name\" : \"click\",\n" +
 		                       "    \"renderAfterLoad\" : false,\n" +
 		                       "    \"javascriptRenderedElsewhere\" : false,\n" +
 		                       "    \"registeredComponents\" : [ \"com.jwebmp.core.base.html.Div\" ],\n" +
 		                       "    \"eventType\" : \"click\"\n" +
 		                       "  } ],\n" +
-		                       "  \"tag\" : \"abbr\",\n" +
-		                       "  \"closingTag\" : true,\n" +
-		                       "  \"newLineForRawText\" : false,\n" +
-		                       "  \"newLineForClosingTag\" : true,\n" +
-		                       "  \"renderTextBeforeChildren\" : true,\n" +
-		                       "  \"attributes\" : {\n" +
-		                       "    \"id\" : \"shell\"\n" +
-		                       "  },\n" +
-		                       "  \"componentClass\" : \"com.jwebmp.core.base.ComponentHTMLAttributeBase\"\n" +
+		                       "  \"componentClass\" : \"com.jwebmp.core.base.ComponentEventBase\"\n" +
 		                       "}";
 		String shell2Expected = "{\n" +
 		                        "  \"id\" : \"shell2\",\n" +
@@ -106,12 +100,6 @@ public class ComponentHTMLAttributeTest
 		                        "  \"configured\" : true,\n" +
 		                        "  \"initialized\" : true,\n" +
 		                        "  \"touched\" : false,\n" +
-		                        "  \"javascriptReferences\" : [ {\n" +
-		                        "    \"cordovaRequired\" : false,\n" +
-		                        "    \"name\" : \"PersistJS\",\n" +
-		                        "    \"version\" : 1.0,\n" +
-		                        "    \"reference\" : \"persist-js/persist-all-min.js\"\n" +
-		                        "  } ],\n" +
 		                        "  \"sortOrder\" : 1000,\n" +
 		                        "  \"renderAfterLoad\" : false,\n" +
 		                        "  \"javascriptRenderedElsewhere\" : false,\n" +
@@ -123,23 +111,74 @@ public class ComponentHTMLAttributeTest
 		                        "    \"initialized\" : true,\n" +
 		                        "    \"touched\" : false,\n" +
 		                        "    \"sortOrder\" : 1000,\n" +
+		                        "    \"variables\" : [ \"jwCntrl.jw.localstorage\" ],\n" +
 		                        "    \"name\" : \"click\",\n" +
 		                        "    \"renderAfterLoad\" : false,\n" +
 		                        "    \"javascriptRenderedElsewhere\" : false,\n" +
 		                        "    \"registeredComponents\" : [ \"com.jwebmp.core.base.html.Div\" ],\n" +
 		                        "    \"eventType\" : \"click\"\n" +
 		                        "  } ],\n" +
-		                        "  \"tag\" : \"abbr\",\n" +
-		                        "  \"closingTag\" : true,\n" +
-		                        "  \"newLineForRawText\" : false,\n" +
-		                        "  \"newLineForClosingTag\" : true,\n" +
-		                        "  \"renderTextBeforeChildren\" : true,\n" +
-		                        "  \"attributes\" : {\n" +
-		                        "    \"id\" : \"shell2\"\n" +
-		                        "  },\n" +
-		                        "  \"componentClass\" : \"com.jwebmp.core.base.ComponentHTMLAttributeBase\"\n" +
+		                        "  \"componentClass\" : \"com.jwebmp.core.base.ComponentEventBase\"\n" +
 		                        "}";
 		//		Assertions.assertEquals(shell.toString(), shellExpected);
 		//	Assertions.assertEquals(shell2.toString(), shell2Expected);
+	}
+
+	@Test
+	public void testHtml()
+	{
+		ComponentEventBase shell = new ComponentEventBase(ComponentTypes.Abbreviation);
+		shell.setID("shell");
+		shell.addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
+		Event e;
+		Div d;
+		shell.addEvent(e = new ClickAdapter(d = new Div())
+		{
+			@Override
+			public void onClick(AjaxCall call, AjaxResponse response)
+			{
+				throw new UnsupportedOperationException("Not supported yet.");
+			}
+		});
+
+		Event.class.cast(shell.getEvents()
+		                      .stream()
+		                      .findFirst()
+		                      .get())
+		           .setID("clickEvent");
+		d.addEvent(e);
+
+		System.out.println(d.toString(true));
+	}
+
+	@Test
+	public void testPageHtml()
+	{
+		ComponentEventBase shell = new ComponentEventBase(ComponentTypes.Abbreviation);
+		shell.setID("shell");
+		shell.addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
+		Event e;
+		Div d;
+		shell.addEvent(e = new ClickAdapter(d = new Div())
+		{
+			@Override
+			public void onClick(AjaxCall call, AjaxResponse response)
+			{
+				throw new UnsupportedOperationException("Not supported yet.");
+			}
+		});
+
+		Event.class.cast(shell.getEvents()
+		                      .stream()
+		                      .findFirst()
+		                      .get())
+		           .setID("clickEvent");
+		d.addEvent(e);
+
+		Page page = getInstance();
+		page.getBody()
+		    .add(d);
+		System.out.println(page.toString(true));
+
 	}
 }

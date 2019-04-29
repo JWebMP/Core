@@ -17,7 +17,6 @@
 package com.jwebmp.core.plugins.jquery;
 
 import com.jwebmp.core.Page;
-import com.jwebmp.core.base.client.BrowserGroups;
 import com.jwebmp.core.plugins.PluginInformation;
 import com.jwebmp.core.services.IPageConfigurator;
 
@@ -60,10 +59,6 @@ public class JQueryPageConfigurator
 	 * Field required
 	 */
 	private static boolean required;
-	/**
-	 * If the page must render JQuery 3
-	 */
-	private static boolean jquery3 = true;
 	/**
 	 * Field renderMigrate
 	 */
@@ -157,43 +152,16 @@ public class JQueryPageConfigurator
 	@Override
 	public Page configure(Page page)
 	{
-		if (page.getOptions()
-		        .isLocalStorage())
-		{
-			page.getBody()
-			    .addJavaScriptReference(JQueryReferencePool.PersistJS.getJavaScriptReference());
-		}
 		if (JQueryPageConfigurator.required)
 		{
-			if (page.getBrowser() != null)
-			{
-				configureForInternetExplorer(page);
-			}
-			else if (JQueryPageConfigurator.isJquery3())
-			{
-				page.getBody()
-				    .addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
-				if (JQueryPageConfigurator.renderMigrate)
-				{
-					page.getBody()
-					    .addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
-				}
-			}
-			else
-			{
-				if (JQueryPageConfigurator.renderMigrate)
-				{
-					page.getBody()
-					    .addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
-				}
-			}
+			configureJQuery(page);
 		}
 
 		return page;
 	}
 
 	/**
-	 * Method configureForInternetExplorer ...
+	 * Method configureJQuery ...
 	 *
 	 * @param page
 	 * 		of type Page
@@ -201,67 +169,16 @@ public class JQueryPageConfigurator
 	 * @return Page
 	 */
 	@SuppressWarnings("UnusedReturnValue")
-	private Page configureForInternetExplorer(Page page)
+	private Page configureJQuery(Page page)
 	{
-		if (page.getBrowser()
-		        .getBrowserGroup() == BrowserGroups.InternetExplorer)
-		{
-			if (page.getBrowser()
-			        .getBrowserVersion() < 9)
-			{
-				page.getBody()
-				    .removeJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
-				page.getBody()
-				    .removeJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
-				page.getBody()
-				    .removeJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
-				page.getBody()
-				    .addJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());
-			}
-		}
-		else
+		page.getBody()
+		    .addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
+		if (JQueryPageConfigurator.renderMigrate)
 		{
 			page.getBody()
-			    .removeJavaScriptReference(JQueryReferencePool.JQuery.getJavaScriptReference());
-			if (JQueryPageConfigurator.isJquery3())
-			{
-				page.getBody()
-				    .addJavaScriptReference(JQueryReferencePool.JQueryV3.getJavaScriptReference());
-				if (JQueryPageConfigurator.renderMigrate)
-				{
-					page.getBody()
-					    .addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
-				}
-			}
-			else
-			{
-				page.getBody()
-				    .addJavaScriptReference(JQueryReferencePool.JQueryV2.getJavaScriptReference());
-			}
+			    .addJavaScriptReference(JQueryReferencePool.JQueryMigrate.getJavaScriptReference());
 		}
-
 		return page;
-	}
-
-	/**
-	 * Whether or not this page must render JQuery 3
-	 *
-	 * @return If jquery 3 must be rendered - always rendered now
-	 */
-	public static boolean isJquery3()
-	{
-		return JQueryPageConfigurator.jquery3;
-	}
-
-	/**
-	 * Whether or not this page must render JQuery 3
-	 *
-	 * @param jquery3
-	 * 		if jquery 3 must be rendered
-	 */
-	public static void setJquery3(boolean jquery3)
-	{
-		JQueryPageConfigurator.jquery3 = jquery3;
 	}
 
 	@Override

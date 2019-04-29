@@ -17,7 +17,6 @@
 package com.jwebmp.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.common.hash.Hashing;
 import com.google.inject.servlet.RequestScoped;
 import com.jwebmp.core.annotations.PageConfiguration;
 import com.jwebmp.core.base.ComponentFeatureBase;
@@ -73,10 +72,6 @@ public class Page<J extends Page<J>>
 	 * The options available
 	 */
 	private PageOptions options;
-	/**
-	 * The fields available
-	 */
-	private PageFields fields;
 
 	/**
 	 * The current user agent of the render
@@ -112,9 +107,9 @@ public class Page<J extends Page<J>>
 	 */
 	public Page(Title title, InternetExplorerCompatibilityMode compatibilityMode, Base base)
 	{
-		getPageFields().setTitle(title);
-		getPageFields().setCompatibilityMode(compatibilityMode);
-		getPageFields().setBase(base);
+		this.getOptions().setTitle(title);
+		this.getOptions().setCompatibilityMode(compatibilityMode);
+		this.getOptions().setBase(base);
 		setID("jwPage");
 	}
 
@@ -297,7 +292,7 @@ public class Page<J extends Page<J>>
 	{
 		if (options == null)
 		{
-			options = new PageOptions();
+			options = new PageOptions(this);
 		}
 		return options;
 	}
@@ -342,7 +337,6 @@ public class Page<J extends Page<J>>
 		{
 			getBody().destroy();
 		}
-		fields = null;
 		options = null;
 		userAgent = null;
 
@@ -406,17 +400,6 @@ public class Page<J extends Page<J>>
 	}
 
 	/**
-	 * Sets teh fields currently set on the page
-	 *
-	 * @param fields
-	 * 		Sets the fields for this page object
-	 */
-	public void setFields(PageFields fields)
-	{
-		this.fields = fields;
-	}
-
-	/**
 	 * Returns the document type that will be rendered with this HTML page real-time
 	 * <p>
 	 *
@@ -429,23 +412,6 @@ public class Page<J extends Page<J>>
 		return new DocumentType(getBrowser().getHtmlVersion());
 	}
 
-	/**
-	 * Returns the fields available for entry on this page
-	 *
-	 * @return The fields for the header of this page object
-	 *
-	 * @see com.jwebmp.core.services.IPage#getPageFields()
-	 */
-	@Override
-	@NotNull
-	public final PageFields getPageFields()
-	{
-		if (fields == null)
-		{
-			fields = new PageFields(this);
-		}
-		return fields;
-	}
 
 	/**
 	 * Returns if the user agent string registered the device as mobile
@@ -709,45 +675,45 @@ public class Page<J extends Page<J>>
 	@SuppressWarnings("unchecked")
 	private void configurePageHeader()
 	{
-		if (getPageFields().getTitle() != null)
+		if (this.getOptions().getTitle() != null)
 		{
-			getHead().add(getPageFields().getTitle());
+			getHead().add(this.getOptions().getTitle());
 		}
-		if (getPageFields().getBase() != null)
+		if (this.getOptions().getBase() != null)
 		{
-			getHead().add(getPageFields().getBase());
+			getHead().add(this.getOptions().getBase());
 		}
-		if (getPageFields().getHttpEquivMeta() != null)
+		if (this.getOptions().getHttpEquivMeta() != null)
 		{
-			getHead().add(getPageFields().getHttpEquivMeta());
+			getHead().add(this.getOptions().getHttpEquivMeta());
 		}
-		if (getPageFields().getCacheControl() != null)
+		if (this.getOptions().getCacheControl() != null)
 		{
-			getHead().add(getPageFields().getCacheControl());
+			getHead().add(this.getOptions().getCacheControl());
 		}
-		if (getPageFields().getAuthor() != null)
+		if (this.getOptions().getAuthor() != null)
 		{
-			getHead().add(getPageFields().getAuthor());
+			getHead().add(this.getOptions().getAuthor());
 		}
-		if (getPageFields().getApplicationName() != null)
+		if (this.getOptions().getApplicationName() != null)
 		{
-			getHead().add(getPageFields().getApplicationName());
+			getHead().add(this.getOptions().getApplicationName());
 		}
-		if (getPageFields().getGenerator() != null)
+		if (this.getOptions().getGenerator() != null)
 		{
-			getHead().add(getPageFields().getGenerator());
+			getHead().add(this.getOptions().getGenerator());
 		}
-		if (getPageFields().getDescription() != null)
+		if (this.getOptions().getDescription() != null)
 		{
-			getHead().add(getPageFields().getDescription());
+			getHead().add(this.getOptions().getDescription());
 		}
-		if (getPageFields().getKeywords() != null)
+		if (this.getOptions().getKeywords() != null)
 		{
-			getHead().add(getPageFields().getKeywords());
+			getHead().add(this.getOptions().getKeywords());
 		}
-		if (getPageFields().getFavIconLink() != null)
+		if (this.getOptions().getFavIconLink() != null)
 		{
-			getHead().add(getPageFields().getFavIconLink());
+			getHead().add(this.getOptions().getFavIconLink());
 		}
 	}
 

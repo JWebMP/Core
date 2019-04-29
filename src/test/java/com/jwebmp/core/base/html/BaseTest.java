@@ -72,7 +72,7 @@ public class BaseTest
 		JQueryPageConfigurator.setRequired(false);
 		Page page = getInstance();
 		Base instance = new Base();
-		page.getPageFields()
+		page.getOptions()
 		    .setBase(instance);
 		instance.addAttribute(BaseAttributes.Target, "Target Frame");
 		instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
@@ -89,7 +89,7 @@ public class BaseTest
 		JQueryPageConfigurator.setRequired(false);
 		Page page = getInstance();
 		Base instance = new Base();
-		page.getPageFields()
+		page.getOptions()
 		    .setBase(instance);
 		instance.addAttribute(BaseAttributes.Target, "Target Frame");
 		instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
@@ -109,7 +109,7 @@ public class BaseTest
 		JQueryPageConfigurator.setRequired(false);
 		Page page = getInstance();
 		Base instance = new Base();
-		page.getPageFields()
+		page.getOptions()
 		    .setBase(instance);
 		instance.addAttribute(BaseAttributes.Target, "Target Frame");
 		instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
@@ -129,7 +129,7 @@ public class BaseTest
 		JQueryPageConfigurator.setRequired(false);
 		Page page = getInstance();
 		Base instance = new Base();
-		page.getPageFields()
+		page.getOptions()
 		    .setBase(instance);
 		instance.addAttribute(BaseAttributes.Target, "Target Frame");
 		instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
@@ -145,7 +145,7 @@ public class BaseTest
 		JQueryPageConfigurator.setRequired(false);
 		Page page = getInstance();
 		Base instance = new Base();
-		page.getPageFields()
+		page.getOptions()
 		    .setBase(instance);
 		instance.addAttribute(BaseAttributes.Target, "Target Frame");
 		instance.addAttribute(BaseAttributes.HRef, "This is a link to something");
@@ -165,7 +165,7 @@ public class BaseTest
 		JQueryPageConfigurator.setRequired(false);
 		Page page = getInstance();
 		Base instance = new Base();
-		page.getPageFields()
+		page.getOptions()
 		    .setBase(instance);
 		instance.addAttribute(BaseAttributes.Target, "Target Frame");
 		instance.addAttribute(BaseAttributes.HRef, "This is a link to something");

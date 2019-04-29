@@ -23,7 +23,6 @@ module com.jwebmp.core {
 
 	exports com.jwebmp.core.base.servlets;
 	exports com.jwebmp.core.base.servlets.enumarations;
-	exports com.jwebmp.core.base.servlets.intercepters;
 	exports com.jwebmp.core.base.servlets.interfaces;
 
 	exports com.jwebmp.core.base.servlets.options;
@@ -226,10 +225,8 @@ module com.jwebmp.core {
 	uses com.jwebmp.core.events.dropout.IOnDropOutService;
 	uses com.jwebmp.core.events.mousedown.IOnMouseDownService;
 	uses com.jwebmp.core.events.resizestart.IOnResizeStartService;
+	uses com.jwebmp.core.events.IEventConfigurator;
 
-
-	provides com.jwebmp.interception.services.DataCallIntercepter with com.jwebmp.core.base.servlets.intercepters.LocalStorageIntercepter;
-	provides com.jwebmp.interception.services.AjaxCallIntercepter with com.jwebmp.core.base.servlets.intercepters.LocalStorageIntercepter;
 
 	provides com.jwebmp.guicedservlets.services.IGuiceSiteBinder with com.jwebmp.core.annotations.JWebMPSiteBinder;
 	provides com.jwebmp.guicedinjection.interfaces.IGuiceDefaultBinder with com.jwebmp.core.services.JWebMPServicesBindings, com.jwebmp.core.annotations.ObjectMapperBinder;
@@ -289,6 +286,8 @@ module com.jwebmp.core {
 
 	opens com.jwebmp.core.utilities.regex to com.fasterxml.jackson.databind;
 	exports com.jwebmp.core.components;
+	exports com.jwebmp.core.events;
+	exports com.jwebmp.core.enumerations;
 
 
 }

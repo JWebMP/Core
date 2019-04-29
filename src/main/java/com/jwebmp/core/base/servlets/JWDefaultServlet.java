@@ -259,13 +259,13 @@ public abstract class JWDefaultServlet
 		               .hasNext())
 		{
 			Page<?> p = new Page();
-			p.getPageFields()
+			p.getOptions()
 			 .setTitle("Exception occurred in application");
-			p.getPageFields()
+			p.getOptions()
 			 .setAuthor("Marc Magon");
-			p.getPageFields()
+			p.getOptions()
 			 .setDescription("JWebSwing Error Generated Page");
-			p.getPageFields()
+			p.getOptions()
 			 .setGenerator("JWebSwing - https://sourceforge.net/projects/jwebswing/");
 
 			Body b = p.getBody();

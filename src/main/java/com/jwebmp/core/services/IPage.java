@@ -16,7 +16,6 @@
  */
 package com.jwebmp.core.services;
 
-import com.jwebmp.core.PageFields;
 import com.jwebmp.core.PageOptions;
 import com.jwebmp.core.base.html.DocumentType;
 import net.sf.uadetector.ReadableUserAgent;
@@ -43,14 +42,8 @@ public interface IPage<J extends IPage<J>>
 	 *
 	 * @return The Page Fields object
 	 */
-	PageFields getPageFields();
-
-	/**
-	 * Returns all the dynamic options for a pageom.jwebmp.plugins.angularprettycheckboxes.AngularPrettyCheckboxesPageConfigurator
-	 *
-	 * @return The options associated wiht this page
-	 */
 	PageOptions getOptions();
+
 
 	/**
 	 * If the page is currently in mobile or smart tablet

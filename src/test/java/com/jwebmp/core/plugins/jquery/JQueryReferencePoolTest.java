@@ -9,7 +9,7 @@ public class JQueryReferencePoolTest
 	@Test
 	public void getJavaScriptReference()
 	{
-		JQueryReferencePool jr = JQueryReferencePool.JQueryV2;
+		JQueryReferencePool jr = JQueryReferencePool.JQueryV3;
 		System.out.println(jr.toString());
 		System.out.println(jr.getJavaScriptReference()
 		                     .toString());
