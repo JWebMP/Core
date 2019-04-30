@@ -5,6 +5,8 @@ public enum AppleMobileStatusBarStyles
 	Default,
 	Black,
 	Black_Translucent,
+	Blue_Translucent,
+	Blue,
 
 	;
 
