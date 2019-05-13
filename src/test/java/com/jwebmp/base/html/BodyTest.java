@@ -91,7 +91,7 @@ public class BodyTest
 				"<html>\n" +
 				"\t<body id=\"body\">\n" +
 				"\t\t<!-- meh -->\n" +
-				"\t\t<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js\" type=\"text/javascript\"></script>\n" +
+				"\t\t<script src=\"https://code.jquery.com/jquery-3.3.1.js\" type=\"text/javascript\"></script>\n" +
 				"\t\t<script src=\"jwscr\" type=\"application/javascript\"></script>\n" +
 				"\t\t<script src=\"jwjs\" type=\"application/javascript\"></script>\n" +
 				"\t</body>\n" +
