@@ -359,4 +359,20 @@ public class AjaxCall<J extends AjaxCall<J>>
 		return (J) this;
 	}
 
+	protected void updateVariable(AjaxCall call, String dtoName, Object newDto)
+	{
+		for (Iterator iterator = call.getVariableData()
+		                             .iterator(); iterator.hasNext(); )
+		{
+			Object variableDatum = iterator.next();
+			JsonVariable a = (JsonVariable) variableDatum;
+			if (a.getVariableName()
+			     .equals(dtoName))
+			{
+				iterator.remove();
+			}
+		}
+		call.getVariableData()
+		    .add(new JsonVariable(dtoName, newDto).toString());
+	}
 }

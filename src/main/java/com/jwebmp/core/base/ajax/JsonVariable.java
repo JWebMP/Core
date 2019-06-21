@@ -27,6 +27,7 @@ import com.jwebmp.logger.LogFactory;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -260,4 +261,24 @@ public class JsonVariable
 		}
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (o == null || getClass() != o.getClass())
+		{
+			return false;
+		}
+		JsonVariable that = (JsonVariable) o;
+		return Objects.equals(getVariableName(), that.getVariableName());
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(getVariableName());
+	}
 }
