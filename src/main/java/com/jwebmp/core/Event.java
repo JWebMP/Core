@@ -36,6 +36,8 @@ import java.util.List;
 import java.util.ServiceLoader;
 import java.util.Set;
 
+import static com.jwebmp.core.utilities.StaticStrings.*;
+
 /**
  * Container Class for Events. Splits from the component hierarchy
  *
@@ -184,9 +186,9 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 	public StringBuilder renderVariables()
 	{
 		StringBuilder s = new StringBuilder(StaticStrings.STRING_SQUARE_BRACE_OPEN);
-		getVariables().forEach(event -> s.append(StaticStrings.STRING_SINGLE_QUOTES)
+		getVariables().forEach(event -> s.append(STRING_SINGLE_QUOTES)
 		                                 .append(event)
-		                                 .append(StaticStrings.STRING_SINGLE_QUOTES)
+		                                 .append(STRING_SINGLE_QUOTES)
 		                                 .append(StaticStrings.STRING_COMMNA));
 		StringBuilder s2;
 		if (s.indexOf(StaticStrings.STRING_COMMNA) > 0)
@@ -197,13 +199,13 @@ public abstract class Event<F extends GlobalFeatures, J extends Event<F, J>>
 		{
 			s2 = s;
 		}
-		s2.append(StaticStrings.STRING_SQUARE_BRACE_CLOSED);
-		s2.append(",'")
+		s2.append(STRING_SQUARE_BRACE_CLOSED);
+		s2.append(STRING_COMMNA_SEMICOLON)
 		  .append(getID())
-		  .append(StaticStrings.STRING_SINGLE_QUOTES);
-		s2.append(",'")
+		  .append(STRING_SINGLE_QUOTES);
+		s2.append(STRING_COMMNA_SEMICOLON)
 		  .append(getClassCanonicalName())
-		  .append(StaticStrings.STRING_SINGLE_QUOTES);
+		  .append(STRING_SINGLE_QUOTES);
 
 		return s2;
 	}

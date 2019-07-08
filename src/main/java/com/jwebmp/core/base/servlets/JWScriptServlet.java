@@ -18,6 +18,7 @@ package com.jwebmp.core.base.servlets;
 
 import com.google.inject.Singleton;
 import com.jwebmp.core.FileTemplates;
+import com.jwebmp.core.SessionHelper;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.guicedservlets.GuicedServletKeys;
@@ -57,9 +58,7 @@ public class JWScriptServlet
 		HttpServletRequest request = GuiceContext.get(GuicedServletKeys.getHttpServletRequestKey());
 		FileTemplates.getFileTemplate(JWScriptServlet.class, JWScriptServlet.FILE_TEMPLATE_NAME, "siteloader");
 		FileTemplates.getTemplateVariables()
-		             .put("SITEADDRESSINSERT", new StringBuilder(request.getRequestURL()
-		                                                                .toString()
-		                                                                .replace("jwscr", "")));
+		             .put("SITEADDRESSINSERT", new StringBuilder(SessionHelper.getServerPath()));
 		StringBuilder output = FileTemplates.renderTemplateScripts(JWScriptServlet.FILE_TEMPLATE_NAME);
 		writeOutput(output, StaticStrings.HTML_HEADER_JAVASCRIPT, StaticStrings.UTF8_CHARSET);
 	}

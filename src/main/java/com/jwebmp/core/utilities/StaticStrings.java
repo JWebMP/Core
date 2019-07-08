@@ -60,6 +60,7 @@ public interface StaticStrings
 	String STRING_HASH = "#";
 	String STRING_DASH = "-";
 	String STRING_COMMNA = ",";
+	String STRING_COMMNA_SEMICOLON = ",'";
 	String STRING_DOT = ".";
 	String STRING_SEMICOLON = ";";
 	String STRING_BRACES_OPEN = "{";

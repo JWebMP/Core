@@ -121,10 +121,10 @@ public class Paragraph<J extends Paragraph<J>>
 	 *
 	 * @return
 	 */
-	public Paragraph setTextOnly(boolean textOnly)
+	public J setTextOnly(boolean textOnly)
 	{
 		this.textOnly = textOnly;
-		return this;
+		return (J) this;
 	}
 
 	@Override
