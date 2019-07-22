@@ -1,7 +1,6 @@
 package com.jwebmp.core.implementations;
 
 import com.jwebmp.core.Page;
-import com.jwebmp.core.annotations.JWebMPSiteBinder;
 import com.jwebmp.core.base.html.Script;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import com.jwebmp.core.services.IDynamicRenderingServlet;

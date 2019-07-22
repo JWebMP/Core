@@ -2,7 +2,7 @@ package com.jwebmp.core.base.page;
 
 import com.jwebmp.core.Page;
 import com.jwebmp.core.SessionHelper;
-import com.jwebmp.core.annotations.JWebMPSiteBinder;
+import com.jwebmp.core.implementations.JWebMPSiteBinder;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.CSSLink;
 import com.jwebmp.core.base.html.Paragraph;

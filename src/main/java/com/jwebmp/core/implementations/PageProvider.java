@@ -1,8 +1,9 @@
-package com.jwebmp.core.annotations;
+package com.jwebmp.core.implementations;
 
 import com.google.inject.Provider;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.SessionHelper;
+import com.jwebmp.core.annotations.PageConfiguration;
 import com.jwebmp.core.services.IPage;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.guicedinjection.GuiceContext;

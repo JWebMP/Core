@@ -3,7 +3,6 @@ package com.jwebmp.core.implementations;
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.SessionHelper;
-import com.jwebmp.core.annotations.JWebMPSiteBinder;
 import com.jwebmp.core.base.html.Script;
 import com.jwebmp.core.base.servlets.JWScriptServlet;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;

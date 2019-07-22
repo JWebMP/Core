@@ -229,8 +229,8 @@ module com.jwebmp.core {
 	uses com.jwebmp.core.events.IEventConfigurator;
 
 
-	provides com.jwebmp.guicedservlets.services.IGuiceSiteBinder with com.jwebmp.core.annotations.JWebMPSiteBinder;
-	provides com.jwebmp.guicedinjection.interfaces.IGuiceDefaultBinder with com.jwebmp.core.services.JWebMPServicesBindings, com.jwebmp.core.annotations.ObjectMapperBinder;
+	provides com.jwebmp.guicedservlets.services.IGuiceSiteBinder with com.jwebmp.core.implementations.JWebMPSiteBinder;
+	provides com.jwebmp.guicedinjection.interfaces.IGuiceDefaultBinder with com.jwebmp.core.services.JWebMPServicesBindings;
 
 
 	provides com.jwebmp.guicedinjection.interfaces.IGuiceScanJarExclusions with com.jwebmp.core.implementations.JWebMPModuleExclusions;
@@ -289,6 +289,7 @@ module com.jwebmp.core {
 	exports com.jwebmp.core.components;
 	exports com.jwebmp.core.events;
 	exports com.jwebmp.core.enumerations;
+	exports com.jwebmp.core.implementations;
 
 
 }

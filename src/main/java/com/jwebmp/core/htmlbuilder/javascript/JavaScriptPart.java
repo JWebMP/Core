@@ -40,7 +40,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static com.jwebmp.core.FileTemplates.*;
-import static com.jwebmp.core.annotations.ObjectMapperBinder.*;
+import static com.jwebmp.guicedinjection.interfaces.ObjectBinderKeys.*;
 
 /**
  * Defines a section of a JavaScript part e.g. Position
