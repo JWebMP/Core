@@ -78,15 +78,17 @@ public class PageProvider
 			PageConfiguration pc = next.getClass()
 			                           .getAnnotation(PageConfiguration.class);
 			HttpServletRequest request = GuiceContext.get(HttpServletRequest.class);
-			String pathInfo = request.getPathInfo();
+			//String uri = request.getRequestURI();
+			String pathInfo = request.getRequestURI();
 			if (pathInfo == null)
 			{
 				pathInfo = StaticStrings.STRING_FORWARD_SLASH;
 			}
 
-			String pcUrl = pc.url();
-			if (pathInfo.equalsIgnoreCase(pcUrl) || SessionHelper.getServletUrl()
-			                                                     .equalsIgnoreCase(pc.url()))
+			String pcUrl = pc.url().toLowerCase();
+			pathInfo = pathInfo.toLowerCase();
+			if (pathInfo.startsWith(pcUrl) || SessionHelper.getServletUrl()
+			                                                     .startsWith(pc.url()))
 			{
 				IPage page = GuiceContext.inject()
 				                         .getInstance(next.getClass());
