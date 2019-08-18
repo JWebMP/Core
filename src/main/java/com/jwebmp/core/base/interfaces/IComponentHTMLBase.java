@@ -17,6 +17,7 @@
 package com.jwebmp.core.base.interfaces;
 
 import com.jwebmp.core.base.ComponentBase;
+import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
 import javax.validation.constraints.NotNull;
 
@@ -120,6 +121,18 @@ public interface IComponentHTMLBase<J extends ComponentBase>
 	 * @return This Class
 	 */
 	J setTag(String tag);
+
+	/**
+	 * Overrides this tag name
+	 * <p>
+	 *
+	 * @param tag
+	 * 		The tag to use instead of the default
+	 *
+	 * @return This Class
+	 */
+	@SuppressWarnings("unchecked")
+	J setTag(ComponentTypes tag);
 
 	/**
 	 * Returns the HTML for the given object

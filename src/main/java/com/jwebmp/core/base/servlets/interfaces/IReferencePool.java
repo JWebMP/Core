@@ -25,7 +25,7 @@ import java.io.Serializable;
  * @author GedMarc
  * @since Oct 24, 2016
  */
-public interface IReferencePool
+public interface IReferencePool<J extends IReferencePool<J>>
 		extends Serializable
 {
 

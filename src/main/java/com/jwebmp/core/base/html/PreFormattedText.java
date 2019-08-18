@@ -56,8 +56,6 @@ public class PreFormattedText<J extends PreFormattedText<J>>
 		extends Component<IComponentHierarchyBase, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements BodyChildren<IComponentHierarchyBase, J>, NoNewLineForRawText, NoNewLineBeforeClosingTag, ParagraphChildren<IComponentHierarchyBase, J>
 {
-
-
 	/**
 	 * Creates a new Pre tag
 	 */
@@ -69,7 +67,7 @@ public class PreFormattedText<J extends PreFormattedText<J>>
 	/**
 	 * Constructs a new Pre-formatted Text Object with the given text set as the raw text
 	 *
-	 * @param preFormattedText
+	 * @param preFormattedText The text to load
 	 */
 	public PreFormattedText(String preFormattedText)
 	{

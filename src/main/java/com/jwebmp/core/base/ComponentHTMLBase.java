@@ -48,12 +48,6 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		extends ComponentEventBase<F, E, J>
 		implements IComponentHTMLBase<J>
 {
-	/**
-	 * Serial Version for all Components and their compatibility
-	 * <p>
-	 * Version 2 - Updated CSS Library and References
-	 */
-	@JsonIgnore
 
 	/**
 	 * The actual tag string of this component
@@ -458,6 +452,25 @@ public abstract class ComponentHTMLBase<F extends GlobalFeatures, E extends Glob
 		this.tag = tag;
 		return (J) this;
 	}
+
+	/**
+	 * Overrides this tag name
+	 * <p>
+	 *
+	 * @param tag
+	 * 		The tag to use instead of the default
+	 *
+	 * @return This Class
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J setTag(ComponentTypes tag)
+	{
+		this.tag = tag.getComponentTag();
+		return (J) this;
+	}
+
 
 	/**
 	 * Returns the HTML for the given object

@@ -1,10 +1,16 @@
 function jwCheckJS() {
-    if (angular) {
-        while (jw.angularLoading) {
+    try {
+        if (angular !== undefined && angular) {
+            while (jw.angularLoading) {
 
+            }
+            jw.afterInit = jw.jwDoJavascript();
+        } else {
+            jw.jwDoJavascript();
         }
-        jw.afterInit = jw.jwDoJavascript();
-    } else {
+    }catch(e)
+    {
+        console.log('no angular found');
         jw.jwDoJavascript();
     }
 }

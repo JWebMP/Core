@@ -349,8 +349,6 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		newChild.setTiny(isTiny());
 		newChild.setPage(getPage());
 		getChildren().add(newChild);
-		newChild.init();
-		newChild.preConfigure();
 		return (J) this;
 	}
 
@@ -375,8 +373,6 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		ArrayList<C> componentHierarchyBases = new ArrayList(getChildren());
 		componentHierarchyBases.add(position, newChild);
 		setChildren(new LinkedHashSet<>(componentHierarchyBases));
-		newChild.init();
-		newChild.preConfigure();
 		return (J)this;
 	}
 
