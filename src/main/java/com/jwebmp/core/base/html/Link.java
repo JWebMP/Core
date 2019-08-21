@@ -30,7 +30,6 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
-import java.util.logging.Level;
 
 /**
  * Browser Support<p>
@@ -67,7 +66,9 @@ import java.util.logging.Level;
  */
 public class Link<J extends Link<J>>
 		extends Component<IComponentHierarchyBase, LinkAttributes, GlobalFeatures, GlobalEvents, J>
-		implements BodyChildren<IComponentHierarchyBase, J>, NoNewLineForRawText, ListItemChildren<IComponentHierarchyBase, J>, ListChildren<IComponentHierarchyBase, J>
+		implements BodyChildren<IComponentHierarchyBase, J>, NoNewLineForRawText,
+				           ListItemChildren<IComponentHierarchyBase, J>,
+				           ListChildren<IComponentHierarchyBase, J>
 {
 
 	private static final java.util.logging.Logger log = LogFactory.getInstance()
