@@ -60,11 +60,7 @@ public class JavaScriptServlet
 
 		GuiceContext.get(AjaxCallInterceptorKey)
 		            .forEach(AjaxCallIntercepter::intercept);
-
-		if (!page.isConfigured())
-		{
-			page.preConfigure();
-		}
+		page.toString(0);
 		FileTemplates.removeTemplate(JavaScriptServlet.scriptReplacement);
 		FileTemplates.getFileTemplate(JavaScriptServlet.class, JavaScriptServlet.scriptReplacement, "javascriptScript");
 		FileTemplates.getTemplateVariables()
