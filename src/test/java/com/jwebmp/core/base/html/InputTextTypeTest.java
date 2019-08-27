@@ -17,6 +17,7 @@
 package com.jwebmp.core.base.html;
 
 import com.jwebmp.core.base.html.attributes.InputTextAttributes;
+import com.jwebmp.core.base.html.inputs.InputCheckBoxType;
 import com.jwebmp.core.base.html.inputs.InputTextType;
 import org.junit.jupiter.api.Test;
 
@@ -38,4 +39,15 @@ public class InputTextTypeTest
 		System.out.println(itt.toString(true));
 	}
 
+	@Test
+	public void testCheckBox()
+	{
+		InputCheckBoxType<?> itt = new InputCheckBoxType();
+		itt.setText("text");
+		System.out.println(itt.toString(true));
+
+		Input<?,?> itt2 = new Input<>();
+		itt2.setText("text");
+		System.out.println(itt2.toString(true));
+	}
 }

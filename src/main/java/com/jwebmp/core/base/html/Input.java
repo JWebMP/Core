@@ -117,6 +117,19 @@ public class Input<A extends Enum & AttributeDefinitions, J extends Input<A, J>>
 		setClosingTag(false);
 	}
 
+	@Override
+	public void preConfigure()
+	{
+		if(!isConfigured())
+		{
+			if(getText() != null && !getText().isEmpty())
+			{
+				setInlineClosingTag(false);
+			}
+		}
+		super.preConfigure();
+	}
+
 	/**
 	 * Returns the input type of the input field
 	 * <p>
