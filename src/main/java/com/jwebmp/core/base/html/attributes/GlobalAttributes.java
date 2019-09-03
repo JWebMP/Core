@@ -18,6 +18,8 @@ package com.jwebmp.core.base.html.attributes;
 
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
 
+import static com.jwebmp.core.utilities.StaticStrings.*;
+
 /**
  * This class holds CSS Enumerations that are global across all HTML elements
  * <p>
@@ -97,8 +99,18 @@ public enum GlobalAttributes
 	 * Screen Reader labelled by
 	 */
 	Aria_LabelledBy,
+	/**
+	 * The controls
+	 */
 	Aria_Controls,
-	;
+	/**
+	 * The Aria Live
+	 */
+	Aria_Live,
+	/**
+	 * Sets the aria atomic values
+	 */
+	Aria_Atomic;;
 
 	GlobalAttributes()
 	{
@@ -113,7 +125,8 @@ public enum GlobalAttributes
 	@Override
 	public String toString()
 	{
-		return name().toLowerCase();
+		return name().toLowerCase()
+		             .replace(CHAR_UNDERSCORE, CHAR_DASH);
 	}
 
 	@Override

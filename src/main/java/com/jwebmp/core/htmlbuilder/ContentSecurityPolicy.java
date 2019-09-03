@@ -7,6 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static com.jwebmp.core.base.html.attributes.MetaAttributes.*;
+import static com.jwebmp.core.base.servlets.enumarations.ComponentTypes.*;
 
 @RequestScoped
 public class ContentSecurityPolicy<J extends ContentSecurityPolicy<J>>
@@ -35,7 +36,7 @@ public class ContentSecurityPolicy<J extends ContentSecurityPolicy<J>>
 
 	public ContentSecurityPolicy()
 	{
-		setTag("meta");
+		setTag(Metadata);
 		addAttribute(Http_Equiv.toString(), httpEquivName);
 	}
 

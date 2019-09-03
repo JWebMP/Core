@@ -57,13 +57,57 @@ public class Select<J extends Select<J>>
 		extends Component<SelectChildren, NoAttributes, GlobalFeatures, GlobalEvents, J>
 		implements GlobalChildren
 {
-
-
 	/**
-	 *
+	 * Constructs a new Select object
 	 */
 	public Select()
 	{
 		super(ComponentTypes.Select);
+	}
+
+
+	/**
+	 * Adds a new option to the list that is currently selected.
+	 * <p>
+	 * No single selection checks are performed, thats up to you
+	 *
+	 * @param optionName
+	 * 		The name to display
+	 * @param optionValue
+	 * 		The value to show
+	 *
+	 * @return This object
+	 */
+	public J addOption(String optionName, String optionValue)
+	{
+		return addOption(optionName, optionValue, false);
+	}
+
+	/**
+	 * Adds a new option to the list with a selected class.
+	 * <p>
+	 * No single selection checks are performed, thats up to you
+	 *
+	 * @param optionName
+	 * 		The name to display
+	 * @param optionValue
+	 * 		The value to show
+	 * @param selected
+	 * 		If the selected class is added
+	 *
+	 * @return This object
+	 */
+	@SuppressWarnings("unchecked")
+	public J addOption(String optionName, String optionValue, boolean selected)
+	{
+		Option<?> option = new Option<>();
+		option.setLabel(optionName);
+		option.setValue(optionValue);
+		if (selected)
+		{
+			option.addClass("selected");
+		}
+		add(option);
+		return (J) this;
 	}
 }
