@@ -256,6 +256,11 @@ public interface IComponentHierarchyBase<C extends IComponentHierarchyBase, J ex
 	 */
 	J removeClass(String className);
 
+	@SuppressWarnings("unchecked")
+	J removeClass(String className, String... classNames);
+
+	J removeClass(@NotNull Enum className, Enum... classNames);
+
 	/**
 	 * Enumeration to remove
 	 *

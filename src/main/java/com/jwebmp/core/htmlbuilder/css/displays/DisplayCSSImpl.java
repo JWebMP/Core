@@ -327,7 +327,7 @@ public class DisplayCSSImpl
 	 *
 	 * @param oursor
 	 */
-	public void setOursor(Cursors oursor)
+	public void setCursor(Cursors oursor)
 	{
 		this.oursor = oursor;
 	}

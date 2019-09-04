@@ -373,7 +373,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		ArrayList<C> componentHierarchyBases = new ArrayList(getChildren());
 		componentHierarchyBases.add(position, newChild);
 		setChildren(new LinkedHashSet<>(componentHierarchyBases));
-		return (J)this;
+		return (J) this;
 	}
 
 	/**
@@ -651,6 +651,45 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	{
 		getClasses().remove(className);
 		return (J) this;
+	}
+
+	/**
+	 * Removes a class name from this component
+	 * <p>
+	 *
+	 * @param className
+	 * 		Class Name to Remove
+	 * 		<p>
+	 *
+	 * @return True if the class was removed, False if the class was not part of the collection
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public J removeClass(String className, String... classNames)
+	{
+		this.removeClass(className);
+		for (String name : classNames)
+		{
+			this.removeClass(name);
+		}
+		return (J)this;
+	}
+	/**
+	 * Enumeration to remove
+	 *
+	 * @param className
+	 *
+	 * @return
+	 */
+	@Override
+	public J removeClass(@NotNull Enum className, Enum... classNames)
+	{
+		this.removeClass(className);
+		for (Enum name : classNames)
+		{
+			this.removeClass(name);
+		}
+		return (J)this;
 	}
 
 	/**
