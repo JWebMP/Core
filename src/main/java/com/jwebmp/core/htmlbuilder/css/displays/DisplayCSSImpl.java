@@ -32,8 +32,6 @@ public class DisplayCSSImpl
 		extends CSSImplementationAdapter<DisplayCSS, DisplayCSSImpl>
 		implements CSSImplementationClass<DisplayCSS, DisplayCSSImpl>
 {
-
-
 	@CSSDetail(cssName = "display",
 			cssVersion = CSSVersions.CSS21)
 	private Displays display;
