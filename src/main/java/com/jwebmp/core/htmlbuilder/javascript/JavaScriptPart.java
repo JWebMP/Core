@@ -30,7 +30,6 @@ import com.jwebmp.guicedinjection.GuiceContext;
 import com.jwebmp.logger.LogFactory;
 import org.apache.commons.io.IOUtils;
 
-import javax.validation.constraints.NotNull;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -468,7 +467,6 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	@NotNull
 	@JsonIgnore
 	public J setRenderEmptyBraces(boolean renderEmptyBraces)
 	{
