@@ -37,7 +37,7 @@
             </dependency>
 
         <dependency>
-            <groupId>com.jwebmp.guicedee</groupId>
+            <groupId>com.jwebmp.jpms.guicedee</groupId>
             <artifactId>guiced-injection</artifactId>
             <type>jar</type>
             </dependency>
@@ -49,13 +49,13 @@
             </dependency>
 
         <dependency>
-            <groupId>com.jwebmp.guicedee</groupId>
+            <groupId>com.jwebmp.jpms.guicedee</groupId>
             <artifactId>guiced-log-master</artifactId>
             <type>jar</type>
             </dependency>
 
         <dependency>
-            <groupId>com.jwebmp.guicedee.servlets</groupId>
+            <groupId>com.jwebmp.jpms.guicedee.servlets</groupId>
             <artifactId>guiced-servlets</artifactId>
             <type>jar</type>
             </dependency>
@@ -67,19 +67,19 @@
             </dependency>
 
         <dependency>
-            <groupId>com.jwebmp.jpms.thirdparty.commons</groupId>
+            <groupId>com.jwebmp.jpms.thirdparty</groupId>
             <artifactId>commons-lang3</artifactId>
             <type>jar</type>
             </dependency>
 
         <dependency>
-            <groupId>com.jwebmp.jpms.thirdparty.commons</groupId>
+            <groupId>com.jwebmp.jpms.thirdparty</groupId>
             <artifactId>commons-text</artifactId>
             <type>jar</type>
             </dependency>
 
         <dependency>
-            <groupId>com.jwebmp.jpms.thirdparty.commons</groupId>
+            <groupId>com.jwebmp.jpms.thirdparty</groupId>
             <artifactId>commons-io</artifactId>
             <type>jar</type>
             </dependency>
