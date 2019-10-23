@@ -37,7 +37,7 @@
             </dependency>
 
         <dependency>
-            <groupId>com.jwebmp.jpms.guicedee</groupId>
+            <groupId>com.guicedee</groupId>
             <artifactId>guiced-injection</artifactId>
             <type>jar</type>
             </dependency>
@@ -49,13 +49,13 @@
             </dependency>
 
         <dependency>
-            <groupId>com.jwebmp.jpms.guicedee</groupId>
+            <groupId>com.guicedee</groupId>
             <artifactId>guiced-log-master</artifactId>
             <type>jar</type>
             </dependency>
 
         <dependency>
-            <groupId>com.jwebmp.jpms.guicedee.servlets</groupId>
+            <groupId>com.guicedee.servlets</groupId>
             <artifactId>guiced-servlets</artifactId>
             <type>jar</type>
             </dependency>
