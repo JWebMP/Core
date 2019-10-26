@@ -24,10 +24,10 @@ import com.jwebmp.core.exceptions.MissingComponentException;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.core.utilities.TextUtilities;
-import com.jwebmp.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.GuiceContext;
 import com.jwebmp.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.AjaxCallIntercepter;
-import com.jwebmp.logger.LogFactory;
+import com.guicedee.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Modifier;

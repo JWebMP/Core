@@ -2,8 +2,8 @@ package com.jwebmp.implementations;
 
 import com.jwebmp.BaseTestClass;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
-import com.jwebmp.guicedinjection.GuiceContext;
-import com.jwebmp.guicedinjection.interfaces.IDefaultService;
+import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.interfaces.IDefaultService;
 import com.jwebmp.testing.BaseTest;
 import com.jwebmp.testing.services.ITestInstanceDestroyService;
 import com.jwebmp.testing.services.ITestInstanceInitializerService;

@@ -22,7 +22,7 @@ import com.jwebmp.core.SessionHelper;
 import com.jwebmp.core.base.html.interfaces.NamedPair;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
 import com.jwebmp.core.utilities.StaticStrings;
-import com.jwebmp.logger.LogFactory;
+import com.guicedee.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;

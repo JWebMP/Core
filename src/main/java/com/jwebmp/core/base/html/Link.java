@@ -27,7 +27,7 @@ import com.jwebmp.core.base.html.interfaces.children.ListItemChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.jwebmp.logger.LogFactory;
+import com.guicedee.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 

@@ -1,8 +1,8 @@
 package com.jwebmp.core.services;
 
 import com.jwebmp.core.Page;
-import com.jwebmp.guicedinjection.interfaces.IDefaultService;
-import com.jwebmp.guicedinjection.interfaces.IServiceEnablement;
+import com.guicedee.guicedinjection.interfaces.IDefaultService;
+import com.guicedee.guicedinjection.interfaces.IServiceEnablement;
 
 import javax.validation.constraints.NotNull;
 

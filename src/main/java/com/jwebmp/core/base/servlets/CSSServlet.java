@@ -19,7 +19,7 @@ package com.jwebmp.core.base.servlets;
 import com.google.inject.Singleton;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.utilities.StaticStrings;
-import com.jwebmp.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.GuiceContext;
 import com.jwebmp.guicedservlets.GuicedServletKeys;
 
 /**

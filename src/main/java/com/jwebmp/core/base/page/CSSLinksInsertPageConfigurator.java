@@ -6,7 +6,7 @@ import com.jwebmp.core.base.html.Paragraph;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
 import com.jwebmp.core.services.RenderAfterLinks;
 import com.jwebmp.core.services.RenderBeforeLinks;
-import com.jwebmp.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.GuiceContext;
 
 import javax.validation.constraints.NotNull;
 import java.util.Set;

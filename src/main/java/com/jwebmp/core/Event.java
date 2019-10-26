@@ -28,7 +28,7 @@ import com.jwebmp.core.events.IEventConfigurator;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import com.jwebmp.core.utilities.StaticStrings;
-import com.jwebmp.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.GuiceContext;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;

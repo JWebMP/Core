@@ -3,9 +3,9 @@ package com.jwebmp.core.services;
 import com.google.inject.Key;
 import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
-import com.jwebmp.guicedinjection.GuiceContext;
-import com.jwebmp.guicedinjection.abstractions.GuiceInjectorModule;
-import com.jwebmp.guicedinjection.interfaces.IGuiceDefaultBinder;
+import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.abstractions.GuiceInjectorModule;
+import com.guicedee.guicedinjection.interfaces.IGuiceDefaultBinder;
 
 import java.util.ServiceLoader;
 import java.util.Set;

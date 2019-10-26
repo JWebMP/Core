@@ -20,9 +20,9 @@ import com.google.inject.Singleton;
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.SessionHelper;
 import com.jwebmp.core.utilities.StaticStrings;
-import com.jwebmp.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.GuiceContext;
 import com.jwebmp.guicedservlets.GuicedServletKeys;
-import com.jwebmp.logger.LogFactory;
+import com.guicedee.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.logging.Logger;

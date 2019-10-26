@@ -28,10 +28,10 @@ import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.services.IErrorPage;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.core.utilities.TextUtilities;
-import com.jwebmp.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.GuiceContext;
 import com.jwebmp.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.SiteCallIntercepter;
-import com.jwebmp.logger.LogFactory;
+import com.guicedee.logger.LogFactory;
 import net.sf.uadetector.ReadableUserAgent;
 import net.sf.uadetector.UserAgentStringParser;
 

@@ -19,7 +19,7 @@ module com.jwebmp.core {
 
 	exports com.jwebmp.core.base.interfaces;
 
-	exports com.jwebmp.core.base.page to com.jwebmp.guicedinjection;
+	exports com.jwebmp.core.base.page to com.guicedee.guicedinjection;
 
 	exports com.jwebmp.core.base.servlets;
 	exports com.jwebmp.core.base.servlets.enumarations;
@@ -125,10 +125,10 @@ module com.jwebmp.core {
 	exports com.jwebmp.core.base.references;
 
 	requires java.logging;
-	requires com.jwebmp.logmaster;
-	requires com.jwebmp.guicedinjection;
+	requires com.guicedee.logmaster;
+	requires com.guicedee.guicedinjection;
 	requires com.jwebmp.interception;
-	requires com.jwebmp.guicedservlets;
+	requires com.guicedee.guicedservlets;
 
 	requires net.sf.uadetector.core;
 	requires net.sf.uadetector.resources;
@@ -229,12 +229,12 @@ module com.jwebmp.core {
 	uses com.jwebmp.core.events.IEventConfigurator;
 
 
-	provides com.jwebmp.guicedservlets.services.IGuiceSiteBinder with com.jwebmp.core.implementations.JWebMPSiteBinder;
-	provides com.jwebmp.guicedinjection.interfaces.IGuiceDefaultBinder with com.jwebmp.core.services.JWebMPServicesBindings;
+	provides com.guicedee.guicedservlets.services.IGuiceSiteBinder with com.jwebmp.core.implementations.JWebMPSiteBinder;
+	provides com.guicedee.guicedinjection.interfaces.IGuiceDefaultBinder with com.jwebmp.core.services.JWebMPServicesBindings;
 
 
-	provides com.jwebmp.guicedinjection.interfaces.IGuiceScanJarExclusions with com.jwebmp.core.implementations.JWebMPModuleExclusions;
-	provides com.jwebmp.guicedinjection.interfaces.IGuiceScanModuleExclusions with com.jwebmp.core.implementations.JWebMPModuleExclusions;
+	provides com.guicedee.guicedinjection.interfaces.IGuiceScanJarExclusions with com.jwebmp.core.implementations.JWebMPModuleExclusions;
+	provides com.guicedee.guicedinjection.interfaces.IGuiceScanModuleExclusions with com.jwebmp.core.implementations.JWebMPModuleExclusions;
 
 	provides com.jwebmp.core.services.IDynamicRenderingServlet with com.jwebmp.core.implementations.JWebMPDynamicScriptRenderer, com.jwebmp.core.implementations.JWebMPJavaScriptDynamicScriptRenderer;
 

@@ -19,7 +19,7 @@ package com.jwebmp;
 import com.jwebmp.core.Feature;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
-import com.jwebmp.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.GuiceContext;
 import com.jwebmp.testing.BaseTest;
 
 import static com.jwebmp.core.base.servlets.enumarations.DevelopmentEnvironments.*;

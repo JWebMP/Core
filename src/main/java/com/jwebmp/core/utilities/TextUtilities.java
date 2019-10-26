@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.utilities;
 
-import com.jwebmp.logger.LogFactory;
+import com.guicedee.logger.LogFactory;
 
 import java.io.IOException;
 import java.io.PrintWriter;

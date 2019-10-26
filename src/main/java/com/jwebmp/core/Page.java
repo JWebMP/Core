@@ -33,8 +33,8 @@ import com.jwebmp.core.base.servlets.SessionStorageProperties;
 import com.jwebmp.core.services.IPage;
 import com.jwebmp.core.services.IPageConfigurator;
 import com.jwebmp.core.utilities.StaticStrings;
-import com.jwebmp.guicedinjection.GuiceContext;
-import com.jwebmp.logger.LogFactory;
+import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.logger.LogFactory;
 import net.sf.uadetector.*;
 
 import javax.validation.constraints.NotNull;
@@ -44,7 +44,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static com.jwebmp.core.services.JWebMPServicesBindings.*;
-import static com.jwebmp.guicedinjection.GuiceContext.*;
+import static com.guicedee.guicedinjection.GuiceContext.*;
 
 /**
  * Top level of any HTML page.

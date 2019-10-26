@@ -22,8 +22,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.core.services.IRegularExpressions;
-import com.jwebmp.guicedinjection.GuiceContext;
-import com.jwebmp.logger.LogFactory;
+import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.logger.LogFactory;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;

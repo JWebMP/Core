@@ -1,7 +1,7 @@
 package com.jwebmp.core.events;
 
 import com.jwebmp.core.Event;
-import com.jwebmp.guicedinjection.interfaces.IDefaultService;
+import com.guicedee.guicedinjection.interfaces.IDefaultService;
 
 import javax.validation.constraints.NotNull;
 

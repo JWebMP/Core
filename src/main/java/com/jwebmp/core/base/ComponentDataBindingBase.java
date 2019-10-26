@@ -25,7 +25,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.databind.IOnDataBind;
 import com.jwebmp.core.databind.IOnDataBindCloak;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
-import com.jwebmp.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.GuiceContext;
 
 import javax.validation.constraints.NotNull;
 import java.util.HashMap;

@@ -20,7 +20,7 @@ import com.google.inject.Singleton;
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.utilities.StaticStrings;
-import com.jwebmp.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.GuiceContext;
 import com.jwebmp.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.AjaxCallIntercepter;
 

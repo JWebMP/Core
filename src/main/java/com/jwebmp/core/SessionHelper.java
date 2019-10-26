@@ -17,8 +17,8 @@
 package com.jwebmp.core;
 
 import com.jwebmp.core.utilities.StaticStrings;
-import com.jwebmp.guicedinjection.GuiceContext;
-import com.jwebmp.logger.LogFactory;
+import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.logging.Level;

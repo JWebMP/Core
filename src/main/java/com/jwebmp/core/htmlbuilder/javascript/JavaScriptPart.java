@@ -26,8 +26,8 @@ import com.google.inject.Key;
 import com.google.inject.name.Names;
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.utilities.StaticStrings;
-import com.jwebmp.guicedinjection.GuiceContext;
-import com.jwebmp.logger.LogFactory;
+import com.guicedee.guicedinjection.GuiceContext;
+import com.guicedee.logger.LogFactory;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;
@@ -39,7 +39,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static com.jwebmp.core.FileTemplates.*;
-import static com.jwebmp.guicedinjection.interfaces.ObjectBinderKeys.*;
+import static com.guicedee.guicedinjection.interfaces.ObjectBinderKeys.*;
 
 /**
  * Defines a section of a JavaScript part e.g. Position

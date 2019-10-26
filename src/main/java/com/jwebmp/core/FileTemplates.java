@@ -18,7 +18,7 @@ package com.jwebmp.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jwebmp.core.utilities.StaticStrings;
-import com.jwebmp.logger.LogFactory;
+import com.guicedee.logger.LogFactory;
 import org.apache.commons.io.IOUtils;
 
 import java.io.FileNotFoundException;

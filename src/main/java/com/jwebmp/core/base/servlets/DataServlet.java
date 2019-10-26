@@ -22,10 +22,10 @@ import com.google.inject.Singleton;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.servlets.interfaces.IDataComponent;
 import com.jwebmp.core.utilities.StaticStrings;
-import com.jwebmp.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.GuiceContext;
 import com.jwebmp.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.DataCallIntercepter;
-import com.jwebmp.logger.LogFactory;
+import com.guicedee.logger.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.logging.Logger;

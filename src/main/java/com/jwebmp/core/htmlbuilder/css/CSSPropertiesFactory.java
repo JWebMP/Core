@@ -31,7 +31,7 @@ import com.jwebmp.core.htmlbuilder.css.measurement.MeasurementCSS;
 import com.jwebmp.core.htmlbuilder.css.measurement.MeasurementCSSImpl;
 import com.jwebmp.core.htmlbuilder.css.measurement.MeasurementTypes;
 import com.jwebmp.core.utilities.StaticStrings;
-import com.jwebmp.logger.LogFactory;
+import com.guicedee.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 import java.lang.annotation.Annotation;

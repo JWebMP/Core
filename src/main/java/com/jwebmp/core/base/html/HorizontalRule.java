@@ -24,7 +24,7 @@ import com.jwebmp.core.base.html.interfaces.NoIDTag;
 import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.jwebmp.logger.LogFactory;
+import com.guicedee.logger.LogFactory;
 
 import java.util.logging.Level;
 

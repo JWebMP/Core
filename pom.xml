@@ -21,11 +21,12 @@
         <dependency>
             <groupId>com.jwebmp.core</groupId>
             <artifactId>jwebmp-testlib</artifactId>
-            <scope>test</scope><type>jar</type>
-            </dependency>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
 
         <dependency>
-            <groupId>com.jwebmp.jpms.thirdparty</groupId>
+             <groupId>com.guicedee.services</groupId>
             <artifactId>guava</artifactId>
             <type>jar</type>
         </dependency>
@@ -34,97 +35,101 @@
             <groupId>com.jwebmp.core</groupId>
             <artifactId>jwebmp-interception</artifactId>
             <type>jar</type>
-            </dependency>
+        </dependency>
 
         <dependency>
             <groupId>com.guicedee</groupId>
             <artifactId>guiced-injection</artifactId>
             <type>jar</type>
-            </dependency>
-        
+        </dependency>
+
         <dependency>
-            <groupId>com.jwebmp.jpms.thirdparty</groupId>
+             <groupId>com.guicedee.services</groupId>
             <artifactId>uadetector-core</artifactId>
             <type>jar</type>
-            </dependency>
+        </dependency>
 
         <dependency>
             <groupId>com.guicedee</groupId>
             <artifactId>guiced-log-master</artifactId>
             <type>jar</type>
-            </dependency>
+        </dependency>
 
         <dependency>
-            <groupId>com.guicedee.servlets</groupId>
+            <groupId>com.guicedee.services</groupId>
             <artifactId>guiced-servlets</artifactId>
             <type>jar</type>
-            </dependency>
+        </dependency>
 
         <dependency>
-            <groupId>com.jwebmp.jpms.thirdparty</groupId>
+             <groupId>com.guicedee.services</groupId>
             <artifactId>uadetector-resources</artifactId>
             <type>jar</type>
-            </dependency>
+        </dependency>
 
         <dependency>
-            <groupId>com.jwebmp.jpms.thirdparty</groupId>
+             <groupId>com.guicedee.services</groupId>
             <artifactId>commons-lang3</artifactId>
             <type>jar</type>
-            </dependency>
+        </dependency>
 
         <dependency>
-            <groupId>com.jwebmp.jpms.thirdparty</groupId>
+             <groupId>com.guicedee.services</groupId>
             <artifactId>commons-text</artifactId>
             <type>jar</type>
-            </dependency>
+        </dependency>
 
         <dependency>
-            <groupId>com.jwebmp.jpms.thirdparty</groupId>
+             <groupId>com.guicedee.services</groupId>
             <artifactId>commons-io</artifactId>
             <type>jar</type>
-            </dependency>
+        </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-guice</artifactId>
             <type>jar</type>
-            </dependency>
+        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
             <type>jar</type>
-            </dependency>
+        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <type>jar</type>
-            </dependency>
+        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <type>jar</type>
-            </dependency>
+        </dependency>
 
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId><type>jar</type>
-            </dependency>
+            <artifactId>junit-jupiter-api</artifactId>
+            <type>jar</type>
+        </dependency>
 
         <dependency>
             <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId><type>jar</type>
-            </dependency>
+            <artifactId>assertj-core</artifactId>
+            <type>jar</type>
+        </dependency>
 
         <dependency>
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId><type>jar</type>
-            </dependency>
+            <artifactId>mockito-core</artifactId>
+            <type>jar</type>
+        </dependency>
 
         <dependency>
             <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId><type>jar</type>
-            </dependency>
+            <artifactId>hamcrest-all</artifactId>
+            <type>jar</type>
+        </dependency>
 
     </dependencies>
 

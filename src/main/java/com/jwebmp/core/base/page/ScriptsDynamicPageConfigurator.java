@@ -15,7 +15,7 @@ import com.jwebmp.core.services.IPageConfigurator;
 import com.jwebmp.core.services.RenderAfterDynamicScripts;
 import com.jwebmp.core.services.RenderBeforeDynamicScripts;
 import com.jwebmp.core.utilities.StaticStrings;
-import com.jwebmp.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.GuiceContext;
 
 import javax.validation.constraints.NotNull;
 import java.util.ServiceLoader;

@@ -1,7 +1,7 @@
 package com.jwebmp.core.databind;
 
 import com.jwebmp.core.base.ComponentDataBindingBase;
-import com.jwebmp.guicedinjection.interfaces.IDefaultService;
+import com.guicedee.guicedinjection.interfaces.IDefaultService;
 
 import javax.validation.constraints.NotNull;
 

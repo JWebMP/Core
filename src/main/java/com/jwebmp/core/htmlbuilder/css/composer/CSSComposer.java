@@ -6,7 +6,7 @@ import com.jwebmp.core.htmlbuilder.css.CSSImpl;
 import com.jwebmp.core.htmlbuilder.css.CSSPropertiesFactory;
 import com.jwebmp.core.htmlbuilder.css.enumarations.CSSTypes;
 import com.jwebmp.core.utilities.StaticStrings;
-import com.jwebmp.logger.LogFactory;
+import com.guicedee.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 import java.lang.annotation.Annotation;

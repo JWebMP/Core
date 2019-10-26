@@ -6,7 +6,7 @@
 
     <listener>
         <description>The core declarations for JWebMP</description>
-        <listener-class>com.jwebmp.guicedinjection.GuiceContext</listener-class>
+        <listener-class>com.guicedee.guicedinjection.GuiceContext</listener-class>
     </listener>
 
 </web-fragment>

@@ -4,8 +4,8 @@ import com.jwebmp.core.Page;
 import com.jwebmp.core.base.html.Script;
 import com.jwebmp.core.base.html.attributes.ScriptAttributes;
 import com.jwebmp.core.utilities.StaticStrings;
-import com.jwebmp.guicedinjection.interfaces.IDefaultService;
-import com.jwebmp.guicedinjection.interfaces.IServiceEnablement;
+import com.guicedee.guicedinjection.interfaces.IDefaultService;
+import com.guicedee.guicedinjection.interfaces.IServiceEnablement;
 
 /**
  * Renders a script that can be done dynamically through a servlet or placed directly into the page at a location (sort order)

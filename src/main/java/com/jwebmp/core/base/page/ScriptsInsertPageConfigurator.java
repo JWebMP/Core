@@ -23,7 +23,7 @@ import com.jwebmp.core.base.html.Paragraph;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
 import com.jwebmp.core.services.RenderAfterScripts;
 import com.jwebmp.core.services.RenderBeforeScripts;
-import com.jwebmp.guicedinjection.GuiceContext;
+import com.guicedee.guicedinjection.GuiceContext;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;

@@ -23,7 +23,7 @@ import com.jwebmp.core.base.html.interfaces.children.TableColumnGroupChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.jwebmp.logger.LogFactory;
+import com.guicedee.logger.LogFactory;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
