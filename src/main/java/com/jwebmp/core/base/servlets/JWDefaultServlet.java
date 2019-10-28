@@ -29,7 +29,7 @@ import com.jwebmp.core.services.IErrorPage;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.core.utilities.TextUtilities;
 import com.guicedee.guicedinjection.GuiceContext;
-import com.jwebmp.guicedservlets.GuicedServletKeys;
+import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.SiteCallIntercepter;
 import com.guicedee.logger.LogFactory;
 import net.sf.uadetector.ReadableUserAgent;

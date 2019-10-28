@@ -20,7 +20,7 @@ import com.google.inject.Singleton;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
-import com.jwebmp.guicedservlets.GuicedServletKeys;
+import com.guicedee.guicedservlets.GuicedServletKeys;
 
 /**
  * This Servlet supplies all the JavaScript for a given HTML Page

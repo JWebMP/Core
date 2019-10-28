@@ -25,7 +25,7 @@ import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.jwebmp.core.utilities.TextUtilities;
 import com.guicedee.guicedinjection.GuiceContext;
-import com.jwebmp.guicedservlets.GuicedServletKeys;
+import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.AjaxCallIntercepter;
 import com.guicedee.logger.LogFactory;
 

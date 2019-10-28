@@ -21,7 +21,7 @@ import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
-import com.jwebmp.guicedservlets.GuicedServletKeys;
+import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.AjaxCallIntercepter;
 
 import javax.servlet.http.HttpServletRequest;

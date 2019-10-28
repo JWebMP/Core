@@ -1,4 +1,35 @@
 module com.jwebmp.core {
+	requires java.logging;
+	requires com.guicedee.logmaster;
+	requires com.guicedee.guicedinjection;
+	requires com.jwebmp.interception;
+	requires com.guicedee.guicedservlets;
+
+	requires net.sf.uadetector.core;
+	requires net.sf.uadetector.resources;
+
+	requires java.validation;
+
+	requires aopalliance;
+
+	requires javax.servlet.api;
+
+	requires com.google.guice.extensions.servlet;
+	requires com.google.guice;
+	requires io.github.classgraph;
+
+	requires com.fasterxml.jackson.annotation;
+	requires com.fasterxml.jackson.databind;
+	requires com.fasterxml.jackson.core;
+
+	requires com.google.common;
+	requires org.apache.commons.io;
+	requires org.apache.commons.lang3;
+	requires org.apache.commons.text;
+
+
+	requires com.fasterxml.jackson.module.guice;
+
 
 	exports com.jwebmp.core;
 	exports com.jwebmp.core.base;
@@ -123,36 +154,6 @@ module com.jwebmp.core {
 	exports com.jwebmp.core.utilities.regex;
 
 	exports com.jwebmp.core.base.references;
-
-	requires java.logging;
-	requires com.guicedee.logmaster;
-	requires com.guicedee.guicedinjection;
-	requires com.jwebmp.interception;
-	requires com.guicedee.guicedservlets;
-
-	requires net.sf.uadetector.core;
-	requires net.sf.uadetector.resources;
-
-	requires java.validation;
-
-	requires aopalliance;
-
-	requires javax.servlet.api;
-
-	requires com.google.guice.extensions.servlet;
-	requires com.google.guice;
-	requires io.github.classgraph;
-
-	requires com.fasterxml.jackson.annotation;
-	requires com.fasterxml.jackson.databind;
-	requires com.fasterxml.jackson.core;
-
-	requires com.google.common;
-	requires org.apache.commons.io;
-	requires org.apache.commons.lang3;
-	requires org.apache.commons.text;
-
-	requires com.fasterxml.jackson.module.guice;
 
 	uses com.jwebmp.core.services.IRegularExpressions;
 

@@ -23,7 +23,7 @@ import com.jwebmp.core.Page;
 import com.jwebmp.core.base.servlets.interfaces.IDataComponent;
 import com.jwebmp.core.utilities.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
-import com.jwebmp.guicedservlets.GuicedServletKeys;
+import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.DataCallIntercepter;
 import com.guicedee.logger.LogFactory;
 
