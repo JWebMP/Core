@@ -50,21 +50,6 @@ public class DataServlet
 	@SuppressWarnings("unused")
 	private static final Logger log = LogFactory.getInstance()
 	                                            .getLogger("DataServlet");
-
-	/**
-	 * Field serialVersionUID
-	 */
-
-	/**
-	 * The Object Mapper for rendering the JSON with Jackson
-	 */
-	private static final ObjectMapper jsonObjectMapper = new ObjectMapper();
-
-	static
-	{
-		DataServlet.jsonObjectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, true);
-	}
-
 	/**
 	 * A data server
 	 */

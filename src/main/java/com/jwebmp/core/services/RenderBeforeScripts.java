@@ -23,6 +23,6 @@ package com.jwebmp.core.services;
  * @since 30 May 2017
  */
 public interface RenderBeforeScripts
-		extends DefaultRenderer<RenderBeforeLinks>
+		extends DefaultRenderer<RenderBeforeScripts>
 {
 }

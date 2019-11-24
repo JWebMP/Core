@@ -1,17 +1,15 @@
 package com.jwebmp.implementations;
 
+import com.guicedee.guicedinjection.GuiceContext;
 import com.jwebmp.BaseTestClass;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
-import com.guicedee.guicedinjection.GuiceContext;
-import com.guicedee.guicedinjection.interfaces.IDefaultService;
 import com.jwebmp.testing.BaseTest;
 import com.jwebmp.testing.services.ITestInstanceDestroyService;
 import com.jwebmp.testing.services.ITestInstanceInitializerService;
 import com.jwebmp.testing.services.ITestInstanceResetService;
 
-public class InstanceManagementPageTest
-		implements ITestInstanceResetService, ITestInstanceDestroyService, ITestInstanceInitializerService,
-				           IDefaultService<InstanceManagementPageTest>
+public class InstanceManagementPageTest<J extends InstanceManagementPageTest<J>>
+		implements ITestInstanceResetService<J>, ITestInstanceDestroyService<J>, ITestInstanceInitializerService<J>
 {
 	@Override
 	public void reset(BaseTest testInstance)

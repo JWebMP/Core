@@ -1,5 +1,6 @@
 package com.jwebmp.core.services;
 
+import com.guicedee.guicedinjection.interfaces.IDefaultService;
 import com.jwebmp.core.Page;
 
 /**
@@ -7,7 +8,7 @@ import com.jwebmp.core.Page;
  */
 @SuppressWarnings("MissingClassJavaDoc")
 @FunctionalInterface
-public interface IErrorPage
+public interface IErrorPage extends IDefaultService<IErrorPage>
 {
 	/**
 	 * Renders the page

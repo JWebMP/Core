@@ -261,6 +261,7 @@ module com.jwebmp.core {
 
 	opens com.jwebmp.core.implementations to com.google.guice, com.fasterxml.jackson.databind;
 
+	opens com.jwebmp.core.htmlbuilder.css to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.htmlbuilder.css.annotations to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.htmlbuilder.css.interfaces to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.htmlbuilder.css.animatable to com.fasterxml.jackson.databind;

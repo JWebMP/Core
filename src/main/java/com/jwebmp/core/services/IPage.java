@@ -16,6 +16,7 @@
  */
 package com.jwebmp.core.services;
 
+import com.guicedee.guicedinjection.interfaces.IDefaultService;
 import com.jwebmp.core.PageOptions;
 import com.jwebmp.core.base.html.DocumentType;
 import net.sf.uadetector.ReadableUserAgent;
@@ -27,6 +28,7 @@ import net.sf.uadetector.ReadableUserAgent;
  * @since Nov 21, 2016
  */
 public interface IPage<J extends IPage<J>>
+	extends IDefaultService<J>
 {
 	/**
 	 * Returns the document type that will be rendered with this HTML page real-time

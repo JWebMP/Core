@@ -95,7 +95,7 @@ public interface StaticStrings
 	 * A default regex to identify query parameters
 	 */
 	String QUERY_PARAMETERS_REGEX = "(\\?.*)?";
-	String NOT_WEB_SOCKETS = "(?!jwebmpwssocket)";
+	String NOT_WEB_SOCKETS = "(?!wssocket)";
 
 	String SESSION_STORAGE_PARAMETER_KEY = "sessionid";
 	String LOCAL_STORAGE_PARAMETER_KEY = "jwamsmk";

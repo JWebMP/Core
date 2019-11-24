@@ -20,15 +20,12 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
-import com.jwebmp.core.services.IRegularExpressions;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.logger.LogFactory;
+import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
+import com.jwebmp.core.services.IRegularExpressions;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.ServiceLoader;
+import java.util.*;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
@@ -61,7 +58,7 @@ public class RegularExpressionsDTO
 	 */
 	public RegularExpressionsDTO()
 	{
-		//Nothing needed
+		addDefaults();
 	}
 
 	/**
@@ -72,13 +69,14 @@ public class RegularExpressionsDTO
 	public RegularExpressionsDTO addDefaults()
 	{
 		Map<String, Pattern> patterns = new LinkedHashMap<>();
-		for (IRegularExpressions regexConfig : GuiceContext.instance()
-		                                                   .getLoader(IRegularExpressions.class, ServiceLoader.load(IRegularExpressions.class)))
-		{
-			RegularExpressionsDTO.log.finer("Regex Config Found [" + regexConfig.getClass()
-			                                                                    .getSimpleName() + "]");
-			patterns.putAll(regexConfig.addPatterns());
-		}
+		Set<IRegularExpressions> regess = GuiceContext.instance()
+		                                              .getLoader(IRegularExpressions.class, ServiceLoader.load(IRegularExpressions.class));
+		regess.forEach(regexConfig ->
+		               {
+			               RegularExpressionsDTO.log.finer("Regex Config Found [" + regexConfig.getClass()
+			                                                                                   .getSimpleName() + "]");
+			               patterns.putAll(regexConfig.addPatterns());
+		               });
 		for (Map.Entry<String, Pattern> entry : patterns.entrySet())
 		{
 			RegularExpressionsDTO.log.finer("Client RegEx [" + entry.getKey() + "] bound to registered pattern");
