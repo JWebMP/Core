@@ -121,7 +121,7 @@ public class FileTemplates
 			}
 			catch (NullPointerException iae)
 			{
-				LOG.log(Level.WARNING, "[Error]-[Unable to find specified template];[Script]-[" + templateVariable + "]", iae);
+				LOG.log(Level.FINER, "[Error]-[Unable to find specified template];[Script]-[" + templateVariable + "]", iae);
 			}
 			catch (IllegalArgumentException iae)
 			{

@@ -11,6 +11,7 @@ import com.guicedee.logger.LogFactory;
 import javax.validation.constraints.NotNull;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.InaccessibleObjectException;
 import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.logging.Level;
@@ -140,7 +141,7 @@ public class CSSComposer
 			{
 				fieldObject = field.get(o);
 			}
-			catch (IllegalAccessException e)
+			catch (RuntimeException | IllegalAccessException e)
 			{
 				log.log(Level.WARNING, "Unable to read field object " + field.getName(), e);
 			}
