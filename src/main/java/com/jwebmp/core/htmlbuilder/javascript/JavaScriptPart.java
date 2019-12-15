@@ -87,22 +87,28 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 */
 	public String objectAsString(Object o)
 	{
-		try
-		{
-			ObjectWriter writer = GuiceContext.get(JSONObjectWriter);
-			return writer.writeValueAsString(o)
-			             .replace("\r\n", "\n");
-		}
-		catch (JsonProcessingException ex)
-		{
-			JavaScriptPart.log.log(Level.FINER, "Unable to Serialize as JSON Json Processing Exception", ex);
-			return "";
-		}
-		catch (Exception ex)
-		{
-			JavaScriptPart.log.log(Level.SEVERE, "Unable to Serialize as JSON", ex);
-			return "";
-		}
+			try
+			{
+				if (GuiceContext.buildingInjector)
+				{
+					return new ObjectMapper().writeValueAsString(o)
+					                         .replace("\r\n", "\n");
+				}
+				ObjectWriter writer = GuiceContext.get(JSONObjectWriter);
+				return writer.writeValueAsString(o)
+				             .replace("\r\n", "\n");
+			}
+			catch (JsonProcessingException ex)
+			{
+				JavaScriptPart.log.log(Level.FINER, "Unable to Serialize as JSON Json Processing Exception", ex);
+				return "";
+			}
+			catch (Exception ex)
+			{
+				JavaScriptPart.log.log(Level.SEVERE, "Unable to Serialize as JSON", ex);
+				return "";
+			}
+
 	}
 
 	/**
@@ -496,7 +502,6 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	public Map<String, String> toAttributes()
 	{
 		Map<String, String> map = new LinkedHashMap<>();
-
 
 		Field[] fields = getClass().getDeclaredFields();
 		for (Field field : fields)
