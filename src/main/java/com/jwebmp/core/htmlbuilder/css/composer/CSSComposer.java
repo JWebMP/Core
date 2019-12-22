@@ -11,7 +11,6 @@ import com.guicedee.logger.LogFactory;
 import javax.validation.constraints.NotNull;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.lang.reflect.InaccessibleObjectException;
 import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.logging.Level;
