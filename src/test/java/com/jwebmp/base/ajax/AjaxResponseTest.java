@@ -26,9 +26,9 @@ public class AjaxResponseTest
 	@Test
 	public void testResponse()
 	{
-		AjaxResponse ar = new AjaxResponse();
+		AjaxResponse<?> ar = new AjaxResponse<>();
 		ar.setSuccess(false);
-		ar.addReaction(new AjaxResponseReaction("Title", "Data", ReactionType.DialogDisplay, AjaxResponseType.Warning));
+		ar.addReaction(new AjaxResponseReaction<>("Title", "Data", ReactionType.DialogDisplay, AjaxResponseType.Warning));
 		System.out.println(ar);
 		Assertions.assertEquals(
 				"{\n" + "  \"success\" : false,\n" + "  \"reactions\" : [ {\n" + "    \"actionTimeout\" : 0,\n" + "    \"reactionTitle\" : \"Title\",\n" + "    \"reactionMessage\" : \"Data\",\n" + "    \"reactionType\" : \"DialogDisplay\",\n" + "    \"type\" : \"Warning\"\n" + "  } ]\n" + "}",
@@ -38,9 +38,9 @@ public class AjaxResponseTest
 	@Test
 	public void testResponseFull()
 	{
-		AjaxResponse ar = new AjaxResponse();
+		AjaxResponse<?> ar = new AjaxResponse<>();
 		ar.setSuccess(false);
-		ar.addReaction(new AjaxResponseReaction("Title", "Data", ReactionType.DialogDisplay, AjaxResponseType.Warning));
+		ar.addReaction(new AjaxResponseReaction<>("Title", "Data", ReactionType.DialogDisplay, AjaxResponseType.Warning));
 
 		ar.addComponent(new DivSimple<>().setID("id"));
 		ar.getLocalStorage()
@@ -48,7 +48,7 @@ public class AjaxResponseTest
 		ar.getSessionStorage()
 		  .put("session", "storage");
 
-		ar.addDto("Dto", new AjaxResponse());
+		ar.addDto("Dto", new AjaxResponse<>());
 		//	ar.
 
 		System.out.println(ar);

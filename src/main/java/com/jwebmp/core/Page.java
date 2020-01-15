@@ -180,7 +180,7 @@ public class Page<J extends Page<J>>
 	 */
 	@SuppressWarnings("unused")
 	@NotNull
-	public AjaxResponse onConnect(AjaxCall<?> call, AjaxResponse<?> response)
+	public AjaxResponse onConnect(AjaxCall call, AjaxResponse response)
 	{
 		return response;
 	}

@@ -1,9 +1,9 @@
 module com.jwebmp.core {
 	requires java.logging;
-	requires com.guicedee.logmaster;
-	requires com.guicedee.guicedinjection;
-	requires com.jwebmp.interception;
-	requires com.guicedee.guicedservlets;
+	requires transitive com.guicedee.logmaster;
+	requires transitive com.guicedee.guicedinjection;
+	requires transitive com.jwebmp.interception;
+	requires transitive com.guicedee.guicedservlets;
 
 	requires net.sf.uadetector.core;
 	requires net.sf.uadetector.resources;
@@ -12,7 +12,7 @@ module com.jwebmp.core {
 
 	requires aopalliance;
 
-	requires javax.servlet.api;
+	requires transitive javax.servlet.api;
 
 	requires com.google.guice.extensions.servlet;
 	requires com.google.guice;
@@ -27,9 +27,7 @@ module com.jwebmp.core {
 	requires org.apache.commons.lang3;
 	requires org.apache.commons.text;
 
-
 	requires com.fasterxml.jackson.module.guice;
-
 
 	exports com.jwebmp.core;
 	exports com.jwebmp.core.base;
@@ -37,7 +35,6 @@ module com.jwebmp.core {
 
 	exports com.jwebmp.core.base.client;
 	exports com.jwebmp.core.services;
-
 
 	exports com.jwebmp.core.base.html;
 	exports com.jwebmp.core.base.html.attributes;
@@ -160,7 +157,6 @@ module com.jwebmp.core {
 	uses com.jwebmp.core.services.IPageConfigurator;
 	uses com.jwebmp.core.services.IPage;
 
-
 	uses com.jwebmp.core.services.IErrorPage;
 	uses com.jwebmp.core.services.RenderBeforeLinks;
 	uses com.jwebmp.core.services.RenderAfterLinks;
@@ -168,7 +164,6 @@ module com.jwebmp.core {
 	uses com.jwebmp.core.services.RenderAfterScripts;
 	uses com.jwebmp.core.services.RenderAfterDynamicScripts;
 	uses com.jwebmp.core.services.RenderBeforeScripts;
-
 
 	uses com.jwebmp.core.events.activate.IOnActivateService;
 	uses com.jwebmp.core.events.beforeactivate.IOnBeforeActivateService;
@@ -222,23 +217,20 @@ module com.jwebmp.core {
 	uses com.jwebmp.core.databind.IOnDataBind;
 	uses com.jwebmp.core.databind.IOnDataBindCloak;
 
-
 	uses com.jwebmp.core.services.IDynamicRenderingServlet;
 	uses com.jwebmp.core.events.dropout.IOnDropOutService;
 	uses com.jwebmp.core.events.mousedown.IOnMouseDownService;
 	uses com.jwebmp.core.events.resizestart.IOnResizeStartService;
 	uses com.jwebmp.core.events.IEventConfigurator;
 
-
 	provides com.guicedee.guicedservlets.services.IGuiceSiteBinder with com.jwebmp.core.implementations.JWebMPSiteBinder;
 	provides com.guicedee.guicedinjection.interfaces.IGuiceDefaultBinder with com.jwebmp.core.services.JWebMPServicesBindings;
-
 
 	provides com.guicedee.guicedinjection.interfaces.IGuiceScanJarExclusions with com.jwebmp.core.implementations.JWebMPModuleExclusions;
 	provides com.guicedee.guicedinjection.interfaces.IGuiceScanModuleExclusions with com.jwebmp.core.implementations.JWebMPModuleExclusions;
 
-	provides com.jwebmp.core.services.IDynamicRenderingServlet with com.jwebmp.core.implementations.JWebMPDynamicScriptRenderer, com.jwebmp.core.implementations.JWebMPJavaScriptDynamicScriptRenderer;
-
+	provides com.jwebmp.core.services.IDynamicRenderingServlet with com.jwebmp.core.implementations.JWebMPDynamicScriptRenderer,
+			                                                           com.jwebmp.core.implementations.JWebMPJavaScriptDynamicScriptRenderer;
 
 	provides com.jwebmp.core.services.IRegularExpressions with com.jwebmp.core.utilities.regex.TextRegExPatterns,
 			                                                      com.jwebmp.core.utilities.regex.EmailAddressRegExPatterns,
@@ -293,6 +285,5 @@ module com.jwebmp.core {
 	exports com.jwebmp.core.events;
 	exports com.jwebmp.core.enumerations;
 	exports com.jwebmp.core.implementations;
-
 
 }

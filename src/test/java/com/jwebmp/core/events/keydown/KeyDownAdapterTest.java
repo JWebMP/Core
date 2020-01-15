@@ -25,6 +25,15 @@ public class KeyDownAdapterTest
 
 			}
 		};
+
+		new KeyDownAdapter(test){
+			@Override
+			public void onKeyDown(AjaxCall call, AjaxResponse response)
+			{
+
+			}
+		}
+		;
 		test.addEvent(aa.setID("test"));
 		assertTrue(!test.getEvents()
 		                .isEmpty());

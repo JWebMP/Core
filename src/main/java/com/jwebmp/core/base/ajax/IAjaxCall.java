@@ -40,7 +40,7 @@ public interface IAjaxCall<J extends AjaxCall<J>>
 	 * @param incoming
 	 */
 	@SuppressWarnings("unchecked")
-	J fromCall(AjaxCall incoming);
+	J fromCall(AjaxCall<?> incoming);
 
 	/**
 	 * Returns this date time of this call
@@ -55,7 +55,7 @@ public interface IAjaxCall<J extends AjaxCall<J>>
 	 * @param component
 	 */
 	@SuppressWarnings("unchecked")
-	J setComponent(ComponentHierarchyBase component);
+	J setComponent(ComponentHierarchyBase<?,?,?,?,?> component);
 
 	/**
 	 * Gets event type
@@ -92,7 +92,7 @@ public interface IAjaxCall<J extends AjaxCall<J>>
 	 *
 	 * @return
 	 */
-	AjaxEventValue getValue();
+	AjaxEventValue<?> getValue();
 
 	/**
 	 * The Event ID
@@ -107,7 +107,7 @@ public interface IAjaxCall<J extends AjaxCall<J>>
 	 *
 	 * @return
 	 */
-	ComponentHierarchyBase getComponent();
+	ComponentHierarchyBase<?,?,?,?,?> getComponent();
 
 	/**
 	 * Sets the event type
@@ -156,7 +156,7 @@ public interface IAjaxCall<J extends AjaxCall<J>>
 	 * @param value
 	 */
 	@SuppressWarnings("unchecked")
-	J setValue(AjaxEventValue value);
+	J setValue(AjaxEventValue<?> value);
 
 	/**
 	 * Sets the array list of bound objects?

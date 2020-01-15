@@ -35,6 +35,7 @@ import java.util.*;
  * @author GedMarc
  * @since 04 May 2015
  */
+@SuppressWarnings({"JavaDoc", "unused"})
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY,
 		getterVisibility = JsonAutoDetect.Visibility.NONE,
 		setterVisibility = JsonAutoDetect.Visibility.NONE)
@@ -63,12 +64,12 @@ public class AjaxCall<J extends AjaxCall<J>>
 	/**
 	 * The angular event variable
 	 */
-	private AjaxEventValue value;
+	private AjaxEventValue<?> value;
 	/**
 	 * The component object that this call is linked to
 	 */
 	@JsonIgnore
-	private ComponentHierarchyBase component;
+	private ComponentHierarchyBase<?,?,?,?,?> component;
 	/**
 	 * Is an incoming string of angular data
 	 */
@@ -116,7 +117,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 	 * @param value
 	 * 		The Value
 	 */
-	public AjaxCall(String componentId, Date datetime, String eventType, String eventTypeFrom, AjaxEventValue value)
+	public AjaxCall(String componentId, Date datetime, String eventType, String eventTypeFrom, AjaxEventValue<?> value)
 	{
 		this.componentId = componentId;
 		this.datetime = datetime;
@@ -183,7 +184,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public J fromCall(AjaxCall incoming)
+	public J fromCall(AjaxCall<?> incoming)
 	{
 		setComponent(incoming.getComponent());
 		setComponentId(incoming.getComponentId());
@@ -206,7 +207,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public J setComponent(ComponentHierarchyBase component)
+	public J setComponent(ComponentHierarchyBase<?,?,?,?,?> component)
 	{
 		this.component = component;
 		return (J) this;
@@ -241,7 +242,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 	}
 
 	@Override
-	public AjaxEventValue getValue()
+	public AjaxEventValue<?> getValue()
 	{
 		return value;
 	}
@@ -255,7 +256,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 	}
 
 	@Override
-	public ComponentHierarchyBase getComponent()
+	public ComponentHierarchyBase<?,?,?,?,?> getComponent()
 	{
 		return component;
 	}
@@ -309,7 +310,7 @@ public class AjaxCall<J extends AjaxCall<J>>
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public J setValue(AjaxEventValue value)
+	public J setValue(AjaxEventValue<?> value)
 	{
 		this.value = value;
 		return (J) this;
@@ -359,20 +360,12 @@ public class AjaxCall<J extends AjaxCall<J>>
 		return (J) this;
 	}
 
-	protected void updateVariable(AjaxCall call, String dtoName, Object newDto)
+	protected void updateVariable(AjaxCall<?> call, String dtoName, Object newDto)
 	{
-		for (Iterator iterator = call.getVariableData()
-		                             .iterator(); iterator.hasNext(); )
-		{
-			Object variableDatum = iterator.next();
-			JsonVariable a = (JsonVariable) variableDatum;
-			if (a.getVariableName()
-			     .equals(dtoName))
-			{
-				iterator.remove();
-			}
-		}
 		call.getVariableData()
-		    .add(new JsonVariable(dtoName, newDto).toString());
+		    .removeIf(variableDatum -> (variableDatum).getVariableName()
+		                                              .equals(dtoName));
+		call.getVariableData()
+		    .add(new JsonVariable(dtoName, newDto));
 	}
 }

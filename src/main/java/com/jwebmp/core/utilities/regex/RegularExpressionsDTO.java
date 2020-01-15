@@ -42,7 +42,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.*;
 @JsonInclude(NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RegularExpressionsDTO
-		extends JavaScriptPart
+		extends JavaScriptPart<RegularExpressionsDTO>
 {
 	private static final Logger log = LogFactory.getLog("RegularExpressionDTO");
 
@@ -66,6 +66,7 @@ public class RegularExpressionsDTO
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public RegularExpressionsDTO addDefaults()
 	{
 		Map<String, Pattern> patterns = new LinkedHashMap<>();
@@ -123,6 +124,7 @@ public class RegularExpressionsDTO
 		this.regularExpressions = regularExpressions;
 	}
 
+	@SuppressWarnings("ResultOfMethodCallIgnored")
 	public RegularExpressionsDTO addPasswordRegex(int minLength, boolean specialChars, boolean numbers, boolean lowerCase, boolean upperCase)
 	{
 		String pattern = "" + (specialChars ? "(?=.*[$@!%^&*()])" : "") + (numbers ? "(?=.*[0-9])" : "") + (lowerCase ? "(?=.*[a-z])" : "") + (upperCase

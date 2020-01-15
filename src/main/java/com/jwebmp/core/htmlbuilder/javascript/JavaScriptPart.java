@@ -48,7 +48,7 @@ import static com.guicedee.guicedinjection.interfaces.ObjectBinderKeys.*;
  * @author mmagon
  * @since 2014/07/09
  */
-@SuppressWarnings({"MissingClassJavaDoc", "unused"})
+@SuppressWarnings({"MissingClassJavaDoc", "unused", "unchecked"})
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JavaScriptPart<J extends JavaScriptPart<J>>
@@ -499,6 +499,7 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("rawtypes")
 	public Map<String, String> toAttributes()
 	{
 		Map<String, String> map = new LinkedHashMap<>();
@@ -625,87 +626,4 @@ public class JavaScriptPart<J extends JavaScriptPart<J>>
 	{
 		//No configuration needed
 	}
-
-	/**
-	 * Returns the template as a string
-	 *
-	 * @param templateName
-	 * 		The file without .min.js or .js attached to it
-	 *
-	 * @return The string for the file
-	 */
-	public StringBuilder getFileTemplate(String templateName)
-	{
-		return getFileTemplate(templateName, templateName);
-	}
-
-	/**
-	 * Returns the template as a string
-	 *
-	 * @param templateName
-	 * 		The file without .min.js or .js attached to it
-	 * @param fileName
-	 *
-	 * @return The string for the file
-	 */
-	public StringBuilder getFileTemplate(String templateName, String fileName)
-	{
-		return getFileTemplate(templateName, fileName, false);
-	}
-
-	/**
-	 * Returns the template as a string
-	 *
-	 * @param templateName
-	 * 		The file without .min.js or .js attached to it
-	 * @param fileName
-	 *
-	 * @return The string for the file
-	 */
-	public StringBuilder getFileTemplate(String templateName, String fileName, boolean alwaysRefresh)
-	{
-		StringBuilder template = FileTemplates.getTemplateScripts()
-		                                      .get(templateName);
-		if (template == null || alwaysRefresh)
-		{
-			try
-			{
-				String templateFileName = fileName;
-				if (!(fileName.contains(".html") || fileName.contains(".htm") || fileName.contains(".js") || fileName.contains(".css") || fileName.contains(
-						".min") || fileName.contains(".txt")))
-				{
-					templateFileName += ".js";
-				}
-				if (templateFileName.endsWith(".min"))
-				{
-					templateFileName = templateFileName + ".js";
-				}
-				Class clazz = getClass();
-				InputStream is = clazz.getResourceAsStream(templateFileName);
-				String contents = IOUtils.toString(is, StaticStrings.UTF8_CHARSET);
-				setTemplateScript(templateName, new StringBuilder(contents));
-				is.close();
-			}
-			catch (FileNotFoundException ex)
-			{
-				log.log(Level.SEVERE, "[Error]-[unable to find template file];[TemplateFile]-[" + templateName + "];[TemplatePath]-[" + getClass().getResource(templateName)
-				                                                                                                                                  .getPath() + "]", ex);
-			}
-			catch (IOException ex)
-			{
-				log.log(Level.SEVERE, "Unable to read file contents jwangular template File", ex);
-			}
-			catch (NullPointerException npe)
-			{
-				log.log(Level.SEVERE, "template file [" + fileName + "(.js)] not found.", npe);
-			}
-			catch (Exception npe)
-			{
-				log.log(Level.SEVERE, "Exception Rendering Template", npe);
-			}
-		}
-		return FileTemplates.getTemplateScripts()
-		                    .get(templateName);
-	}
-
 }
