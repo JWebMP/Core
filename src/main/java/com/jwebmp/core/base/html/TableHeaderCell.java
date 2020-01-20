@@ -25,6 +25,8 @@ import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * A Basic Table Cell Component<p>
  * <p>
@@ -68,7 +70,6 @@ public class TableHeaderCell<J extends TableHeaderCell<J>>
 		implements TableRowChildren<IComponentHierarchyBase, J>
 {
 
-
 	/**
 	 * Constructs a normal table cell
 	 */
@@ -100,7 +101,8 @@ public class TableHeaderCell<J extends TableHeaderCell<J>>
 	 */
 	public TableHeaderCell(String dataDisplay)
 	{
-		this(new Paragraph(dataDisplay));
+		this(new Paragraph<>(dataDisplay)
+				     .setTextOnly(true));
 	}
 
 	/**
@@ -115,13 +117,14 @@ public class TableHeaderCell<J extends TableHeaderCell<J>>
 		{
 			s = "0";
 		}
-		return Integer.valueOf(s);
+		return Integer.parseInt(s);
 	}
 
 	/**
 	 * @param columnSpan
 	 * 		Sets this table cells column span
 	 */
+	@SuppressWarnings("unchecked")
 	public J setColumnSpan(int columnSpan)
 	{
 		addAttribute(TableCellAttributes.ColSpan, columnSpan);
@@ -135,7 +138,7 @@ public class TableHeaderCell<J extends TableHeaderCell<J>>
 	 */
 	public int getRowSpan()
 	{
-		return Integer.valueOf(getAttribute(TableCellAttributes.RowSpan));
+		return Integer.parseInt(getAttribute(TableCellAttributes.RowSpan));
 	}
 
 	/**
@@ -144,9 +147,26 @@ public class TableHeaderCell<J extends TableHeaderCell<J>>
 	 * @param rowSpan
 	 * 		Integer that is row span
 	 */
+	@SuppressWarnings("unchecked")
 	public J setRowSpan(int rowSpan)
 	{
 		addAttribute(TableCellAttributes.RowSpan, Integer.toString(rowSpan));
+		return (J) this;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public J add(@NotNull String textToAdd)
+	{
+		setText(textToAdd);
+		return (J) this;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public J add(String textToAdd, boolean inline)
+	{
+		setText(textToAdd);
 		return (J) this;
 	}
 }
