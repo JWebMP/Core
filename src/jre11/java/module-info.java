@@ -226,7 +226,6 @@ module com.jwebmp.core {
 	provides com.guicedee.guicedservlets.services.IGuiceSiteBinder with com.jwebmp.core.implementations.JWebMPSiteBinder;
 	provides com.guicedee.guicedinjection.interfaces.IGuiceDefaultBinder with com.jwebmp.core.services.JWebMPServicesBindings;
 
-	provides com.guicedee.guicedinjection.interfaces.IGuiceScanJarExclusions with com.jwebmp.core.implementations.JWebMPModuleExclusions;
 	provides com.guicedee.guicedinjection.interfaces.IGuiceScanModuleExclusions with com.jwebmp.core.implementations.JWebMPModuleExclusions;
 
 	provides com.jwebmp.core.services.IDynamicRenderingServlet with com.jwebmp.core.implementations.JWebMPDynamicScriptRenderer,
