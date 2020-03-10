@@ -27,7 +27,6 @@ module com.jwebmp.core {
 	requires org.apache.commons.lang3;
 	requires org.apache.commons.text;
 
-	requires static com.fasterxml.jackson.module.guice;
 
 	exports com.jwebmp.core;
 	exports com.jwebmp.core.base;
