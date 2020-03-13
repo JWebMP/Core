@@ -240,15 +240,16 @@ module com.jwebmp.core {
 			                                                    com.jwebmp.core.base.page.TopShelfScriptsInsertPageConfigurator,
 			                                                    com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 
-	opens com.jwebmp.core.base.servlets to  com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.base.servlets to com.google.guice, com.fasterxml.jackson.databind;
 
+	opens com.jwebmp.core.base.page to com.google.guice;
 	opens com.jwebmp.core.base.ajax to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.base.html to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.htmlbuilder.javascript to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.base to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core to com.fasterxml.jackson.databind;
 
-	opens com.jwebmp.core.implementations to  com.fasterxml.jackson.databind;
+	opens com.jwebmp.core.implementations to com.google.guice, com.fasterxml.jackson.databind;
 
 	opens com.jwebmp.core.htmlbuilder.css to com.fasterxml.jackson.databind;
 	opens com.jwebmp.core.htmlbuilder.css.annotations to com.fasterxml.jackson.databind;
