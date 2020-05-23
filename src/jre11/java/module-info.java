@@ -12,7 +12,7 @@ module com.jwebmp.core {
 
 	requires aopalliance;
 
-	requires transitive javax.servlet.api;
+	requires transitive java.servlet;
 
 	requires com.google.guice.extensions.servlet;
 	requires com.google.guice;
