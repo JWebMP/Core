@@ -1,5 +1,5 @@
 module com.jwebmp.core {
-	requires java.logging;
+
 	requires transitive com.guicedee.logmaster;
 	requires transitive com.guicedee.guicedinjection;
 	requires transitive com.jwebmp.interception;
@@ -16,9 +16,7 @@ module com.jwebmp.core {
 
 	requires com.google.guice.extensions.servlet;
 	requires com.google.guice;
-	requires io.github.classgraph;
 
-	requires com.fasterxml.jackson.annotation;
 	requires com.fasterxml.jackson.databind;
 	requires com.fasterxml.jackson.core;
 
@@ -26,7 +24,6 @@ module com.jwebmp.core {
 	requires org.apache.commons.io;
 	requires org.apache.commons.lang3;
 	requires org.apache.commons.text;
-
 
 	exports com.jwebmp.core;
 	exports com.jwebmp.core.base;
@@ -227,18 +224,11 @@ module com.jwebmp.core {
 
 	provides com.guicedee.guicedinjection.interfaces.IGuiceScanModuleExclusions with com.jwebmp.core.implementations.JWebMPModuleExclusions;
 
-	provides com.jwebmp.core.services.IDynamicRenderingServlet with com.jwebmp.core.implementations.JWebMPDynamicScriptRenderer,
-			                                                           com.jwebmp.core.implementations.JWebMPJavaScriptDynamicScriptRenderer;
+	provides com.jwebmp.core.services.IDynamicRenderingServlet with com.jwebmp.core.implementations.JWebMPDynamicScriptRenderer, com.jwebmp.core.implementations.JWebMPJavaScriptDynamicScriptRenderer;
 
-	provides com.jwebmp.core.services.IRegularExpressions with com.jwebmp.core.utilities.regex.TextRegExPatterns,
-			                                                      com.jwebmp.core.utilities.regex.EmailAddressRegExPatterns,
-			                                                      com.jwebmp.core.utilities.regex.DateFormatRegExPatterns;
+	provides com.jwebmp.core.services.IRegularExpressions with com.jwebmp.core.utilities.regex.TextRegExPatterns, com.jwebmp.core.utilities.regex.EmailAddressRegExPatterns, com.jwebmp.core.utilities.regex.DateFormatRegExPatterns;
 
-	provides com.jwebmp.core.services.IPageConfigurator with com.jwebmp.core.base.page.ScriptsDynamicPageConfigurator,
-			                                                    com.jwebmp.core.base.page.CSSLinksInsertPageConfigurator,
-			                                                    com.jwebmp.core.base.page.ScriptsInsertPageConfigurator,
-			                                                    com.jwebmp.core.base.page.TopShelfScriptsInsertPageConfigurator,
-			                                                    com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
+	provides com.jwebmp.core.services.IPageConfigurator with com.jwebmp.core.base.page.ScriptsDynamicPageConfigurator, com.jwebmp.core.base.page.CSSLinksInsertPageConfigurator, com.jwebmp.core.base.page.ScriptsInsertPageConfigurator, com.jwebmp.core.base.page.TopShelfScriptsInsertPageConfigurator, com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 
 	opens com.jwebmp.core.base.servlets to com.google.guice, com.fasterxml.jackson.databind;
 
