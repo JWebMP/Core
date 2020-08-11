@@ -18,11 +18,11 @@ package com.jwebmp.core.generics;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.SessionHelper;
 import com.jwebmp.core.base.html.interfaces.NamedPair;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
 import com.jwebmp.core.utilities.StaticStrings;
-import com.guicedee.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -46,17 +46,11 @@ import java.util.logging.Logger;
  * @since Forever
  */
 @SuppressWarnings("unused")
-public class WebReference<J extends WebReference>
-		implements NamedPair<String, String>, Serializable, Comparator<WebReference>, Comparable<WebReference>
+public class WebReference<J extends WebReference<J>>
+		implements NamedPair<String, String>, Serializable, Comparator<J>, Comparable<J>
 {
-
 	private static final Logger LOG = LogFactory.getInstance()
 	                                            .getLogger("Web Reference");
-
-	/**
-	 * The dummy reference for the sorting
-	 */
-	private static final WebReference dummyReference = new WebReference(null, null, null, null);
 	/**
 	 * If the reference is local
 	 */
@@ -124,9 +118,10 @@ public class WebReference<J extends WebReference>
 	/**
 	 * A specified class name that can identify these classes on the html
 	 */
-	@JsonIgnore
 	private String specifiedClassName;
-
+	/**
+	 * Any additional options to be rendered with the reference
+	 */
 	private Set<String> additionalOptions;
 
 	/**
@@ -202,21 +197,10 @@ public class WebReference<J extends WebReference>
 	 *
 	 * @return the sorted list
 	 */
-	@SuppressWarnings("unchecked")
-	public static List<? extends WebReference> sort(List<? extends WebReference> arrayList)
+	public static List<WebReference<?>> sort(List<WebReference<?>> arrayList)
 	{
-		arrayList.sort(dummyReference);
+		arrayList.sort(WebReference::compareTo);
 		return arrayList;
-	}
-
-	/**
-	 * Returns a dummy reference for the sorting array
-	 *
-	 * @return A dummy sortable
-	 */
-	public static WebReference<?> getDummyReference()
-	{
-		return dummyReference;
 	}
 
 	/**
@@ -435,10 +419,11 @@ public class WebReference<J extends WebReference>
 				sb.insert(sb.lastIndexOf(StaticStrings.STRING_DOT), ".min");
 			}
 		}
+		sb.append("?");
 		if (isUseVersionIdentifier())
 		{
-			sb.append("?v=")
-			  .append(Double.toString(version));
+			sb.append("v=")
+			  .append(version);
 		}
 
 		return sb.toString();
@@ -740,7 +725,6 @@ public class WebReference<J extends WebReference>
 	 *
 	 * @return The tag
 	 */
-	@SuppressWarnings("unchecked")
 	@NotNull
 	public WebReference<J> setAdditionalOptions(Set<String> additionalOptions)
 	{

@@ -103,7 +103,7 @@ abstract class RequirementsPriorityAbstractInsertPageConfigurator<J extends Requ
 		if (javascript)
 		{
 			Set<Script<?, ?>> scripts = getAllScripts(page, priority);
-			for (Script script : scripts)
+			for (Script<?,?> script : scripts)
 			{
 				if (!input.contains(script))
 				{
@@ -127,7 +127,7 @@ abstract class RequirementsPriorityAbstractInsertPageConfigurator<J extends Requ
 	{
 		List<CSSReference> allReferences = new ArrayList<>(page.getBody()
 		                                                       .getCssReferencesAll(priority));
-		allReferences.sort(WebReference.getDummyReference());
+		allReferences.sort(WebReference::compareTo);
 		ArrayList<CSSLink<?>> allLinks = new ArrayList<>();
 
 		for (CSSReference reference : allReferences)
@@ -166,11 +166,11 @@ abstract class RequirementsPriorityAbstractInsertPageConfigurator<J extends Requ
 	{
 		List<JavascriptReference> allJavascripts = new ArrayList<>(page.getBody()
 		                                                               .getJavascriptReferencesAll(priority));
-		allJavascripts.sort(WebReference.getDummyReference());
+		allJavascripts.sort(WebReference::compareTo);
 		Set<Script<?, ?>> allScripts = new LinkedHashSet<>();
 		for (JavascriptReference reference : allJavascripts)
 		{
-			Script script = new Script(reference);
+			Script<?,?> script = new Script<>(reference);
 			if (!reference.getAdditionalOptions()
 			              .isEmpty())
 			{

@@ -28,8 +28,6 @@ import com.jwebmp.core.generics.WebReference;
 public class CSSReference
 		extends WebReference<CSSReference>
 {
-
-
 	/**
 	 * Construct a new CSS File Reference
 	 * <p>

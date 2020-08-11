@@ -4,9 +4,4 @@
               xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-fragment_3_0.xsd">
     <name>JWebMPCore</name>
 
-    <listener>
-        <description>The core declarations for JWebMP</description>
-        <listener-class>com.guicedee.guicedinjection.GuiceContext</listener-class>
-    </listener>
-
 </web-fragment>

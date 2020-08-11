@@ -47,7 +47,7 @@ public class WebReferenceTest
 	public void testSort()
 	{
 		WebReference.setIsLocal(true);
-		List<WebReference> w = new LinkedList<>();
+		List<WebReference<?>> w = new LinkedList<>();
 		// w.add(AtmosphereReferencePool.JQueryAtmospherePush.getJavaScriptReference());
 		w.add(JQueryReferencePool.JQueryV3.getJavaScriptReference()
 		                                  .setSortOrder(0));// new JQueryReferenceV2());
