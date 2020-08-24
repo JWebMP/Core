@@ -1,6 +1,6 @@
 package com.jwebmp.core.htmlbuilder.css.measurement;
 
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 
 /**
  * Defines any measurement

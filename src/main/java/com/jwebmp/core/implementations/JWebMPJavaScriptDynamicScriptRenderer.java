@@ -4,7 +4,7 @@ import com.jwebmp.core.Page;
 import com.jwebmp.core.base.html.Script;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import com.jwebmp.core.services.IDynamicRenderingServlet;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 
 public class JWebMPJavaScriptDynamicScriptRenderer
 		implements IDynamicRenderingServlet<JWebMPJavaScriptDynamicScriptRenderer>

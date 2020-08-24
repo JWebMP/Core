@@ -19,7 +19,7 @@ package com.jwebmp.core.base.servlets;
 import com.google.inject.Singleton;
 import com.jwebmp.core.FileTemplates;
 import com.jwebmp.core.SessionHelper;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.guicedee.logger.LogFactory;
@@ -60,7 +60,7 @@ public class JWScriptServlet
 		FileTemplates.getTemplateVariables()
 		             .put("SITEADDRESSINSERT", new StringBuilder(SessionHelper.getServerPath()));
 		StringBuilder output = FileTemplates.renderTemplateScripts(JWScriptServlet.FILE_TEMPLATE_NAME);
-		writeOutput(output, StaticStrings.HTML_HEADER_JAVASCRIPT, StaticStrings.UTF8_CHARSET);
+		writeOutput(output, StaticStrings.HTML_HEADER_JAVASCRIPT, StaticStrings.UTF_CHARSET);
 	}
 
 }

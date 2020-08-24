@@ -16,13 +16,15 @@
  */
 package com.jwebmp.core;
 
-import com.jwebmp.core.utilities.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.logger.LogFactory;
+import com.jwebmp.core.utilities.StaticStrings;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static com.guicedee.guicedinjection.json.StaticStrings.STRING_FORWARD_SLASH;
 
 /**
  * @author GedMarc
@@ -68,7 +70,7 @@ public class SessionHelper
 			{
 				buff = new StringBuffer(request.getHeader(StaticStrings.REQUEST_SITE_HEADER_NAME));
 			}
-			String address = buff.substring(0, buff.lastIndexOf(StaticStrings.STRING_FORWARD_SLASH) + 1);
+			String address = buff.substring(0, buff.lastIndexOf(STRING_FORWARD_SLASH) + 1);
 			SessionHelper.address = address;
 			return address;
 		}
@@ -131,7 +133,7 @@ public class SessionHelper
 			HttpServletRequest request = GuiceContext.inject()
 			                                         .getInstance(HttpServletRequest.class);
 			String buff = request.getServletPath();
-			return buff.isEmpty() ? StaticStrings.STRING_FORWARD_SLASH : buff;
+			return buff.isEmpty() ? STRING_FORWARD_SLASH : buff;
 		}
 		catch (Throwable T)
 		{

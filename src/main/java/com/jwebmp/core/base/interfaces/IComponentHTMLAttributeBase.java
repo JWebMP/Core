@@ -149,6 +149,47 @@ public interface IComponentHTMLAttributeBase<A extends Enum & AttributeDefinitio
 	 */
 	String getAttribute(A attributeValue);
 
+
+	/**
+	 * Gets this list of decoded attribute values
+	 * <p>
+	 *
+	 * @param attributeValue
+	 * 		The Valid Local Attribute to Return
+	 * 		<p>
+	 *
+	 * @return A String of the attribute value currently set
+	 */
+	String getAttribute(String attributeValue);
+
+	/**
+	 * Gets this list of decoded attribute values
+	 * <p>
+	 *
+	 * @param attributeValue
+	 * 		The decoded value to Return
+	 * @param uselessInt
+	 * 		A useless parameter purely to return the type integer
+	 * 		<p>
+	 *
+	 * @return A HashMap if this components local attributes. Never null
+	 */
+	Integer getAttribute(String attributeValue, Integer uselessInt);
+
+	/**
+	 * Gets this list of decoded attribute values
+	 * <p>
+	 *
+	 * @param attributeValue
+	 * 		The decoded value to Return
+	 * @param uselessInt
+	 * 		A useless parameter purely to return the type Boolean
+	 * 		<p>
+	 *
+	 * @return A HashMap if this components local attributes. Never null
+	 */
+	Boolean getAttribute(String attributeValue, Boolean uselessInt);
+
 	/**
 	 * Gets this list of local attribute values
 	 * <p>

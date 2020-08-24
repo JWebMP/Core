@@ -17,7 +17,7 @@
 package com.jwebmp.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.logger.LogFactory;
 import org.apache.commons.io.IOUtils;
 
@@ -251,7 +251,7 @@ public class FileTemplates
 				{
 					templateFileName = templateFileName + ".js";
 				}
-				String contents = IOUtils.toString(referenceClass.getResourceAsStream(templateFileName), StaticStrings.UTF8_CHARSET);
+				String contents = IOUtils.toString(referenceClass.getResourceAsStream(templateFileName), StaticStrings.UTF_CHARSET);
 				setTemplateScript(templateName, new StringBuilder(contents));
 			}
 			catch (FileNotFoundException ex)

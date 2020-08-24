@@ -25,7 +25,7 @@ import com.jwebmp.core.base.html.interfaces.children.generics.ParagraphChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 
 import javax.validation.constraints.NotNull;
 

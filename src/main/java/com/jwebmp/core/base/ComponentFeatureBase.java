@@ -29,7 +29,7 @@ import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;

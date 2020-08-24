@@ -19,7 +19,7 @@ package com.jwebmp.core.generics;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;

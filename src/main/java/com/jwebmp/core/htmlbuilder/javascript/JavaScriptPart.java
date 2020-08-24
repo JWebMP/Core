@@ -25,7 +25,7 @@ import com.google.common.base.CaseFormat;
 import com.google.inject.Key;
 import com.google.inject.name.Names;
 import com.jwebmp.core.FileTemplates;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.logger.LogFactory;
 import org.apache.commons.io.IOUtils;

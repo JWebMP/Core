@@ -24,7 +24,7 @@ import com.jwebmp.core.base.html.interfaces.children.ListItemChildren;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 
 import javax.validation.constraints.NotNull;
 
@@ -175,5 +175,16 @@ public class Form<J extends Form<J>>
 	public boolean equals(Object o)
 	{
 		return super.equals(o);
+	}
+	
+	
+	/**
+	 * Returns the id of the form to use for components
+	 *
+	 * @return the owning form id
+	 */
+	public String getFormID()
+	{
+		return getID();
 	}
 }

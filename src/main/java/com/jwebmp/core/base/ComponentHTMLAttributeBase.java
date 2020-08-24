@@ -18,6 +18,8 @@ package com.jwebmp.core.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.guicedee.guicedinjection.json.StringToBoolean;
+import com.guicedee.guicedinjection.json.StringToIntegerRelaxed;
 import com.jwebmp.core.base.html.attributes.GlobalAttributes;
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
 import com.jwebmp.core.base.html.interfaces.GlobalFeatures;
@@ -26,7 +28,7 @@ import com.jwebmp.core.base.html.interfaces.NoIDTag;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHTMLAttributeBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
@@ -477,6 +479,53 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 			s = StaticStrings.STRING_EMPTY;
 		}
 		return s;
+	}
+
+	/**
+	 * @param attributeValue The decoded value to Return
+	 *                       <p>
+	 * @return
+	 */
+	@Override
+	public String getAttribute(String attributeValue) {
+		String s = getAttributes().get(attributeValue);
+		if (s == null)
+		{
+			s = StaticStrings.STRING_EMPTY;
+		}
+		return s;
+	}
+
+	/**
+	 * @param attributeValue The decoded value to Return
+	 * @param uselessInt     A useless parameter purely to return the type integer
+	 *                       <p>
+	 * @return
+	 */
+	@Override
+	public Integer getAttribute(String attributeValue, Integer uselessInt) {
+		String s = getAttributes().get(attributeValue);
+		if (s == null)
+		{
+			s = StaticStrings.STRING_EMPTY;
+		}
+		return new StringToIntegerRelaxed().convert(s);
+	}
+
+	/**
+	 * @param attributeValue The decoded value to Return
+	 * @param uselessInt     A useless parameter purely to return the type Boolean
+	 *                       <p>
+	 * @return
+	 */
+	@Override
+	public Boolean getAttribute(String attributeValue, Boolean uselessInt) {
+		String s = getAttributes().get(attributeValue);
+		if (s == null)
+		{
+			s = StaticStrings.STRING_EMPTY;
+		}
+		return new StringToBoolean().convert(s);
 	}
 
 	/**

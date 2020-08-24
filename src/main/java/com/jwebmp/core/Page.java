@@ -32,9 +32,9 @@ import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.SessionStorageProperties;
 import com.jwebmp.core.services.IPage;
 import com.jwebmp.core.services.IPageConfigurator;
-import com.jwebmp.core.utilities.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.logger.LogFactory;
+import com.jwebmp.core.utilities.StaticStrings;
 import net.sf.uadetector.*;
 
 import javax.validation.constraints.NotNull;
@@ -43,6 +43,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static com.guicedee.guicedinjection.json.StaticStrings.STRING_EMPTY;
+import static com.guicedee.guicedinjection.json.StaticStrings.STRING_SEMICOLON;
 import static com.jwebmp.core.services.JWebMPServicesBindings.*;
 import static com.guicedee.guicedinjection.GuiceContext.*;
 
@@ -447,9 +449,9 @@ public class Page<J extends Page<J>>
 			catch (Throwable T)
 			{
 				Page.log.log(Level.FINER, "Readable User Agent can't be fetched, returning default", T);
-				userAgent = new UserAgent(DeviceCategory.EMPTY, UserAgentFamily.FIREFOX, StaticStrings.STRING_EMPTY, StaticStrings.STRING_EMPTY, OperatingSystem.EMPTY,
-				                          StaticStrings.STRING_EMPTY, StaticStrings.STRING_EMPTY,
-				                          UserAgentType.BROWSER, StaticStrings.STRING_EMPTY, StaticStrings.STRING_EMPTY, VersionNumber.UNKNOWN);
+				userAgent = new UserAgent(DeviceCategory.EMPTY, UserAgentFamily.FIREFOX, STRING_EMPTY, STRING_EMPTY, OperatingSystem.EMPTY,
+				                          STRING_EMPTY, STRING_EMPTY,
+				                          UserAgentType.BROWSER, STRING_EMPTY, STRING_EMPTY, VersionNumber.UNKNOWN);
 			}
 		}
 		return userAgent;
@@ -729,7 +731,7 @@ public class Page<J extends Page<J>>
 			String var = (String) o;
 			variablesScriptBuilder.append("var ")
 			                      .append(var)
-			                      .append(StaticStrings.STRING_SEMICOLON);
+			                      .append(STRING_SEMICOLON);
 		}
 		if (variablesScriptBuilder.length() > 0)
 		{

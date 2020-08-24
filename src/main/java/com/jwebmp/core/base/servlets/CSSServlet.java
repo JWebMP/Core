@@ -18,7 +18,7 @@ package com.jwebmp.core.base.servlets;
 
 import com.google.inject.Singleton;
 import com.jwebmp.core.Page;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.guicedservlets.GuicedServletKeys;
 
@@ -42,6 +42,6 @@ public class CSSServlet
 		StringBuilder css = page.getBody()
 		                        .renderCss(0);
 		scripts.append(css);
-		writeOutput(css, StaticStrings.HTML_HEADER_CSS, StaticStrings.UTF8_CHARSET);
+		writeOutput(css, StaticStrings.HTML_HEADER_CSS, StaticStrings.UTF_CHARSET);
 	}
 }

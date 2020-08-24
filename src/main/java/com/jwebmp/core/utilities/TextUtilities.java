@@ -25,6 +25,8 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static com.guicedee.guicedinjection.json.StaticStrings.*;
+
 /**
  * Provides default text functions
  *
@@ -66,9 +68,9 @@ public class TextUtilities
 	public static synchronized StringBuilder cleanCamelCaseName(StringBuilder buildStringSB)
 	{
 		String buildString = buildStringSB.toString();
-		buildString = buildString.replace('$', StaticStrings.CHAR_SPACE);
-		buildString = buildString.replace(StaticStrings.CHAR_UNDERSCORE, StaticStrings.CHAR_DASH);
-		buildString = buildString.replace(StaticStrings.CHAR_DASH, StaticStrings.CHAR_SPACE);
+		buildString = buildString.replace('$', CHAR_SPACE);
+		buildString = buildString.replace(CHAR_UNDERSCORE, CHAR_DASH);
+		buildString = buildString.replace(CHAR_DASH, CHAR_SPACE);
 		String firstChar = buildString.substring(0, 1)
 		                              .toUpperCase();
 		buildString = firstChar + buildString.substring(1, buildString.length());
@@ -81,12 +83,12 @@ public class TextUtilities
 			if (prevChar == ' ' && !Character.isUpperCase(buildStringChar))
 			{
 				buildStringChar = Character.toUpperCase(buildStringChar);
-				cleanCamelCase.append(StaticStrings.STRING_SPACE)
+				cleanCamelCase.append(STRING_SPACE)
 				              .append(buildStringChar);
 			}
 			else if (Character.isUpperCase(buildStringChar))
 			{
-				cleanCamelCase.append(StaticStrings.STRING_SPACE)
+				cleanCamelCase.append(STRING_SPACE)
 				              .append(buildStringChar);
 			}
 			else
@@ -121,9 +123,9 @@ public class TextUtilities
 	public static synchronized StringBuilder cleanAttributeName(StringBuilder buildStringSB)
 	{
 		String buildString = buildStringSB.toString();
-		buildString = buildString.replace('$', StaticStrings.CHAR_SPACE);
-		buildString = buildString.replace(StaticStrings.CHAR_UNDERSCORE, StaticStrings.CHAR_DASH);
-		buildString = buildString.replace(StaticStrings.CHAR_DASH, StaticStrings.CHAR_SPACE)
+		buildString = buildString.replace('$', CHAR_SPACE);
+		buildString = buildString.replace(CHAR_UNDERSCORE, CHAR_DASH);
+		buildString = buildString.replace(CHAR_DASH, CHAR_SPACE)
 		                         .trim();
 		StringTokenizer st = new StringTokenizer(buildString);
 		StringBuilder outputString = new StringBuilder();
@@ -140,7 +142,7 @@ public class TextUtilities
 			newSb.append(firstChar);
 			newSb.append(restOfIt);
 			outputString.append(newSb)
-			            .append(StaticStrings.STRING_SPACE);
+			            .append(STRING_SPACE);
 		}
 		return new StringBuilder(outputString);
 	}
@@ -179,7 +181,7 @@ public class TextUtilities
 			newSb.deleteCharAt(0);
 			newSb.insert(0, firstChar);
 			buildString.append(newSb)
-			           .append(StaticStrings.STRING_SPACE);
+			           .append(STRING_SPACE);
 		}
 		return new StringBuilder(buildString);
 	}
@@ -254,9 +256,9 @@ public class TextUtilities
 	 */
 	public static StringBuilder removeLastInstanceOf(StringBuilder sb)
 	{
-		if (sb.length() > 0 && sb.lastIndexOf(StaticStrings.STRING_COMMNA) != -1)
+		if (sb.length() > 0 && sb.lastIndexOf(STRING_COMMNA) != -1)
 		{
-			return sb.deleteCharAt(sb.lastIndexOf(StaticStrings.STRING_COMMNA));
+			return sb.deleteCharAt(sb.lastIndexOf(STRING_COMMNA));
 		}
 		return sb;
 	}

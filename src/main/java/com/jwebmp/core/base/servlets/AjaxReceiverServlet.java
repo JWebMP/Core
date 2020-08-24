@@ -22,7 +22,7 @@ import com.jwebmp.core.base.ajax.*;
 import com.jwebmp.core.exceptions.InvalidRequestException;
 import com.jwebmp.core.exceptions.MissingComponentException;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 import com.jwebmp.core.utilities.TextUtilities;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.guicedservlets.GuicedServletKeys;

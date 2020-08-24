@@ -30,7 +30,7 @@ import com.jwebmp.core.htmlbuilder.css.interfaces.CSSShortHand;
 import com.jwebmp.core.htmlbuilder.css.measurement.MeasurementCSS;
 import com.jwebmp.core.htmlbuilder.css.measurement.MeasurementCSSImpl;
 import com.jwebmp.core.htmlbuilder.css.measurement.MeasurementTypes;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;

@@ -18,7 +18,7 @@ package com.jwebmp.core.htmlbuilder.css.lists;
 
 import com.jwebmp.core.base.client.CSSVersions;
 import com.jwebmp.core.htmlbuilder.css.CSSEnumeration;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 
 /**
  * @author GedMarc

@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Singleton;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.servlets.interfaces.IDataComponent;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.DataCallIntercepter;
@@ -79,12 +79,12 @@ public class DataServlet
 		catch (Exception e)
 		{
 			Page p = getErrorPageHtml(e);
-			writeOutput(new StringBuilder(p.toString(0)), StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE, StaticStrings.UTF8_CHARSET);
+			writeOutput(new StringBuilder(p.toString(0)), StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE, StaticStrings.UTF_CHARSET);
 			return;
 		}
 		GuiceContext.get(DataCallInterceptorKey)
 		            .forEach(DataCallIntercepter::intercept);
-		writeOutput(responseString, StaticStrings.HTML_HEADER_JSON, StaticStrings.UTF8_CHARSET);
+		writeOutput(responseString, StaticStrings.HTML_HEADER_JSON, StaticStrings.UTF_CHARSET);
 	}
 
 }

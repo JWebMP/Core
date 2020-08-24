@@ -6,7 +6,7 @@ import com.jwebmp.core.htmlbuilder.css.CSSDetail;
 import com.jwebmp.core.htmlbuilder.css.annotations.CSSImplementationAdapter;
 import com.jwebmp.core.htmlbuilder.css.annotations.CSSImplementationClass;
 import com.jwebmp.core.htmlbuilder.css.annotations.CSSImplementationValue;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 
 /**
  * Any basic measurement

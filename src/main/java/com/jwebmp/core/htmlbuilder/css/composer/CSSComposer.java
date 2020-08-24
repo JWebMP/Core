@@ -5,7 +5,7 @@ import com.jwebmp.core.base.ComponentStyleBase;
 import com.jwebmp.core.htmlbuilder.css.CSSImpl;
 import com.jwebmp.core.htmlbuilder.css.CSSPropertiesFactory;
 import com.jwebmp.core.htmlbuilder.css.enumarations.CSSTypes;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;

@@ -104,13 +104,13 @@ public interface IComponentHierarchyBase<C extends IComponentHierarchyBase, J ex
 	 * Get an array list of all children and their children recursively Excludes this object
 	 * <p>
 	 *
-	 * @param trues
+	 * @param includeSelf
 	 * 		Whether or not to include this component
 	 * 		<p>
 	 *
 	 * @return A complete array list of all children at time of call
 	 */
-	Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> getChildrenHierarchy(boolean trues);
+	Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> getChildrenHierarchy(boolean includeSelf);
 
 	/**
 	 * Adds the children of this component onto the array list coming in

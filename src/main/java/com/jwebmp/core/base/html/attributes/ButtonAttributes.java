@@ -17,7 +17,7 @@
 package com.jwebmp.core.base.html.attributes;
 
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 
 /**
  * Defines The Attributes that are valid for Buttons

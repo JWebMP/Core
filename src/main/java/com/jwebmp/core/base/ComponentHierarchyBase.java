@@ -33,7 +33,7 @@ import com.jwebmp.core.base.references.CSSReference;
 import com.jwebmp.core.base.references.JavascriptReference;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.jwebmp.core.htmlbuilder.css.themes.Theme;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.logger.LogFactory;
 
 import javax.validation.constraints.NotNull;
@@ -505,7 +505,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 * Get an array list of all children and their children recursively Excludes this object
 	 * <p>
 	 *
-	 * @param trues
+	 * @param includeSelf
 	 * 		Whether or not to include this component
 	 * 		<p>
 	 *
@@ -513,10 +513,10 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	 */
 	@Override
 	@NotNull
-	public Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> getChildrenHierarchy(boolean trues)
+	public Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> getChildrenHierarchy(boolean includeSelf)
 	{
 		Set<ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>> components = new LinkedHashSet<>();
-		if (trues)
+		if (includeSelf)
 		{
 			components.add((ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>) this);
 		}

@@ -20,7 +20,7 @@ package com.jwebmp.core.htmlbuilder.javascript.events.commandevent;
 import com.jwebmp.core.Component;
 import com.jwebmp.core.Feature;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 
 import java.util.Iterator;
 import java.util.List;

@@ -26,7 +26,7 @@ import com.jwebmp.core.exceptions.InvalidRequestException;
 import com.jwebmp.core.exceptions.MissingComponentException;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 import com.jwebmp.core.services.IErrorPage;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 import com.jwebmp.core.utilities.TextUtilities;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.guicedservlets.GuicedServletKeys;
@@ -324,13 +324,13 @@ public abstract class JWDefaultServlet
 			Page p = new Page();
 			p.getBody()
 			 .add("No Page or Body Configured for the JWebSwingServlet. [getPage()] returned nothing");
-			writeOutput(new StringBuilder(p.toString(0)), StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE, StaticStrings.UTF8_CHARSET);
+			writeOutput(new StringBuilder(p.toString(0)), StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE, StaticStrings.UTF_CHARSET);
 		}
 		catch (Exception t)
 		{
 			JWDefaultServlet.log.log(Level.SEVERE, "Unable to render page", t);
 			response.setContentType(StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE);
-			writeOutput(new StringBuilder(getErrorPageHtml(t).toString(0)), StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE, StaticStrings.UTF8_CHARSET);
+			writeOutput(new StringBuilder(getErrorPageHtml(t).toString(0)), StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE, StaticStrings.UTF_CHARSET);
 		}
 	}
 
@@ -427,7 +427,7 @@ public abstract class JWDefaultServlet
 		{
 			Date dataTransferDate = new Date();
 			response.setContentType(contentType);
-			response.setCharacterEncoding(charSet == null ? StaticStrings.UTF8_CHARSET
+			response.setCharacterEncoding(charSet == null ? StaticStrings.UTF_CHARSET
 					                                                .toString() : charSet.displayName());
 			response.setHeader(StaticStrings.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER_NAME, JWDefaultServlet.allowOrigin);
 			response.setHeader(StaticStrings.ACCESS_CONTROL_ALLOW_CREDENTIALS_HEADER_NAME, "true");

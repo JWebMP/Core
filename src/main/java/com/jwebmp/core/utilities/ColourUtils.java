@@ -16,6 +16,9 @@
  */
 package com.jwebmp.core.utilities;
 
+import com.guicedee.guicedinjection.json.StaticStrings;
+import static com.guicedee.guicedinjection.json.StaticStrings.STRING_COMMNA;
+
 /**
  * Provides basics for Colours
  *
@@ -62,7 +65,7 @@ public class ColourUtils
 		String maxRGB = hexToRGB(colourMax);
 		String minRGB = hexToRGB(colourMin);
 
-		colMax[0] = Integer.parseInt(maxRGB.split(StaticStrings.STRING_COMMNA)[0]);
+		colMax[0] = Integer.parseInt(maxRGB.split(STRING_COMMNA)[0]);
 		colMax[1] = Integer.parseInt(maxRGB.split(StaticStrings.STRING_COMMNA)[1]);
 		colMax[2] = Integer.parseInt(maxRGB.split(StaticStrings.STRING_COMMNA)[2]);
 

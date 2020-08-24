@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.guicedee.guicedinjection.json.StaticStrings.CHAR_DOT;
+
 /**
  * Convenience methods for escaping special characters related to HTML, XML, and regular expressions.
  * <p>
@@ -39,7 +41,7 @@ public class EscapeChars
 	private static final Pattern SCRIPT = Pattern.compile("<SCRIPT>", Pattern.CASE_INSENSITIVE);
 	private static final Pattern SCRIPT_END = Pattern.compile("</SCRIPT>", Pattern.CASE_INSENSITIVE);
 
-	private static final Character[] EscapeRegexCharsetRaw = new Character[]{StaticStrings.CHAR_DOT, '\\', '?', '*', '+', '&', ':', '{', '}', '[', ']', '(', ')', '^', '$'};
+	private static final Character[] EscapeRegexCharsetRaw = new Character[]{CHAR_DOT, '\\', '?', '*', '+', '&', ':', '{', '}', '[', ']', '(', ')', '^', '$'};
 	private static final List<Character> EscapeRegexCharset = Arrays.asList(EscapeChars.EscapeRegexCharsetRaw);
 
 	/**

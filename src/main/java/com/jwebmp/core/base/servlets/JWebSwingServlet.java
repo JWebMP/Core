@@ -17,7 +17,7 @@
 package com.jwebmp.core.base.servlets;
 
 import com.google.inject.Singleton;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.guicedee.logger.LogFactory;
@@ -71,7 +71,7 @@ public class JWebSwingServlet
 	private void sendPage(HttpServletResponse response)
 	{
 		response.setContentType(StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE);
-		writeOutput(getPageHTML(), StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE, StaticStrings.UTF8_CHARSET);
+		writeOutput(getPageHTML(), StaticStrings.HTML_HEADER_DEFAULT_CONTENT_TYPE, StaticStrings.UTF_CHARSET);
 	}
 
 	/**

@@ -2,7 +2,7 @@ package com.jwebmp.core.htmlbuilder.css.colours;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.jwebmp.core.base.client.CSSVersions;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 
 import java.io.Serializable;
 

@@ -5,7 +5,7 @@ import com.jwebmp.core.Page;
 import com.jwebmp.core.SessionHelper;
 import com.jwebmp.core.annotations.PageConfiguration;
 import com.jwebmp.core.services.IPage;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.logger.LogFactory;
 import net.sf.uadetector.ReadableUserAgent;

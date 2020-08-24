@@ -25,7 +25,7 @@ import com.jwebmp.core.base.html.interfaces.NoNewLineForRawText;
 import com.jwebmp.core.base.html.interfaces.events.GlobalEvents;
 import com.jwebmp.core.base.interfaces.IComponentHTMLBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 import com.jwebmp.core.utilities.TextUtilities;
 
 import javax.validation.constraints.NotNull;

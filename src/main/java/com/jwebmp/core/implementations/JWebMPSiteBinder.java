@@ -27,12 +27,12 @@ import com.jwebmp.core.base.ajax.AjaxCall;
 import com.jwebmp.core.base.ajax.AjaxResponse;
 import com.jwebmp.core.base.servlets.*;
 import com.jwebmp.core.services.IPage;
-import com.jwebmp.core.utilities.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.guicedee.guicedservlets.services.GuiceSiteInjectorModule;
 import com.guicedee.guicedservlets.services.IGuiceSiteBinder;
 import com.guicedee.logger.LogFactory;
+import com.jwebmp.core.utilities.StaticStrings;
 import net.sf.uadetector.ReadableUserAgent;
 import net.sf.uadetector.UserAgentStringParser;
 import net.sf.uadetector.service.UADetectorServiceFactory;
@@ -42,6 +42,9 @@ import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.logging.Level;
+
+import static com.guicedee.guicedinjection.json.StaticStrings.STRING_EMPTY;
+import static com.guicedee.guicedinjection.json.StaticStrings.STRING_FORWARD_SLASH;
 
 /**
  * @author GedMarc
@@ -130,7 +133,7 @@ public class JWebMPSiteBinder
 	public static String getDataBindUrl(ComponentBase component)
 	{
 		return JWebMPSiteBinder.getDataLocation()
-		                       .replace(StaticStrings.STRING_FORWARD_SLASH, StaticStrings.STRING_EMPTY) + "?component=" + component.getID();
+		                       .replace(STRING_FORWARD_SLASH, STRING_EMPTY) + "?component=" + component.getID();
 	}
 
 	/**

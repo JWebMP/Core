@@ -3,7 +3,7 @@ package com.jwebmp.core.services;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.html.Script;
 import com.jwebmp.core.base.html.attributes.ScriptAttributes;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.guicedinjection.interfaces.IDefaultService;
 import com.guicedee.guicedinjection.interfaces.IServiceEnablement;
 

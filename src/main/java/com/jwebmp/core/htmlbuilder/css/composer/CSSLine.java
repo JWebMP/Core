@@ -17,7 +17,7 @@
 
 package com.jwebmp.core.htmlbuilder.css.composer;
 
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 
 import java.util.Comparator;
 import java.util.StringTokenizer;

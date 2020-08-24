@@ -18,7 +18,7 @@ package com.jwebmp.core.base.html.attributes;
 
 import com.jwebmp.core.base.client.HTMLVersions;
 import com.jwebmp.core.base.html.interfaces.AttributeDefinitions;
-import com.jwebmp.core.utilities.StaticStrings;
+import com.guicedee.guicedinjection.json.StaticStrings;
 
 /**
  * Definition and Usage
