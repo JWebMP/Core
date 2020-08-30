@@ -40,5 +40,16 @@ public class InputTextAreaType<J extends InputTextAreaType<J>>
 	public InputTextAreaType()
 	{
 		super(InputTypes.TextArea);
+		setTag("textarea");
+		setInlineClosingTag(false);
+		setClosingTag(true);
+	}
+	
+	@Override
+	public J setValue(String value)
+	{
+		setText(value);
+		//noinspection unchecked
+		return (J) this;
 	}
 }
