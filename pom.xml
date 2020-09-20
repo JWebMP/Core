@@ -22,67 +22,56 @@
             <groupId>com.jwebmp.core</groupId>
             <artifactId>jwebmp-testlib</artifactId>
             <scope>test</scope>
-            <type>jar</type>
         </dependency>
 
         <dependency>
              <groupId>com.guicedee.services</groupId>
             <artifactId>guava</artifactId>
-            <type>jar</type>
         </dependency>
 
         <dependency>
             <groupId>com.jwebmp.core</groupId>
             <artifactId>jwebmp-interception</artifactId>
-            <type>jar</type>
         </dependency>
 
         <dependency>
             <groupId>com.guicedee</groupId>
             <artifactId>guiced-injection</artifactId>
-            <type>jar</type>
         </dependency>
 
         <dependency>
              <groupId>com.guicedee.services</groupId>
             <artifactId>uadetector-core</artifactId>
-            <type>jar</type>
         </dependency>
 
         <dependency>
             <groupId>com.guicedee</groupId>
             <artifactId>guiced-log-master</artifactId>
-            <type>jar</type>
         </dependency>
 
         <dependency>
             <groupId>com.guicedee.servlets</groupId>
             <artifactId>guiced-servlets</artifactId>
-            <type>jar</type>
         </dependency>
 
         <dependency>
              <groupId>com.guicedee.services</groupId>
             <artifactId>uadetector-resources</artifactId>
-            <type>jar</type>
         </dependency>
 
         <dependency>
              <groupId>com.guicedee.services</groupId>
             <artifactId>commons-lang3</artifactId>
-            <type>jar</type>
         </dependency>
 
         <dependency>
              <groupId>com.guicedee.services</groupId>
             <artifactId>commons-text</artifactId>
-            <type>jar</type>
         </dependency>
 
         <dependency>
              <groupId>com.guicedee.services</groupId>
             <artifactId>commons-io</artifactId>
-            <type>jar</type>
         </dependency>
     </dependencies>
 
