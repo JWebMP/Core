@@ -37,7 +37,7 @@ import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.utilities.StaticStrings;
 import net.sf.uadetector.*;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.*;
 import java.util.Map;
 import java.util.logging.Level;

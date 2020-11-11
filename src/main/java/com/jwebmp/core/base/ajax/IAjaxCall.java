@@ -20,7 +20,7 @@ package com.jwebmp.core.base.ajax;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;

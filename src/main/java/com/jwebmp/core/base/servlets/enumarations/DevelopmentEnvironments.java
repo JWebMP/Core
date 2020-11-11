@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.base.servlets.enumarations;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.Properties;
 
 /**

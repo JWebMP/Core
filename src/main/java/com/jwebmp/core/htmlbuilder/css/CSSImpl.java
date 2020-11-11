@@ -32,7 +32,7 @@ import com.jwebmp.core.htmlbuilder.css.padding.PaddingCSSImpl;
 import com.jwebmp.core.htmlbuilder.css.tables.TableCSSImpl;
 import com.jwebmp.core.htmlbuilder.css.text.TextCSSImpl;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 

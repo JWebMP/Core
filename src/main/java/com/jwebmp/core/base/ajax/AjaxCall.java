@@ -25,7 +25,7 @@ import com.jwebmp.core.databind.ClientVariableWatcher;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.jwebmp.core.htmlbuilder.javascript.events.enumerations.EventTypes;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.*;
 
 /**

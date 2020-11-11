@@ -17,7 +17,7 @@
 
 package com.jwebmp.core.base.html.interfaces;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * An input type that designates a choice - checkbox/radio

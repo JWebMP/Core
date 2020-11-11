@@ -26,7 +26,7 @@ import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.interfaces.ICssStructure;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * The base class for all HTML generation, Everything must extend a component

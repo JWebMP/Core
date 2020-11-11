@@ -31,8 +31,8 @@ import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.guicedee.guicedinjection.json.StaticStrings;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.Set;

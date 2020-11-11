@@ -25,7 +25,7 @@ import com.jwebmp.core.services.RenderAfterScripts;
 import com.jwebmp.core.services.RenderBeforeScripts;
 import com.guicedee.guicedinjection.GuiceContext;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

@@ -28,7 +28,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.guicedee.guicedinjection.json.StaticStrings;
 import com.jwebmp.core.utilities.TextUtilities;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * Denotes a component that has a tag. By default these can add events, features, variables etc

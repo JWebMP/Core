@@ -27,7 +27,7 @@ import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.DataCallIntercepter;
 import com.guicedee.logger.LogFactory;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.logging.Logger;
 
 import static com.jwebmp.interception.JWebMPInterceptionBinder.*;

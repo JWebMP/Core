@@ -4,7 +4,7 @@ import com.jwebmp.core.Page;
 import com.guicedee.guicedinjection.interfaces.IDefaultService;
 import com.guicedee.guicedinjection.interfaces.IServiceEnablement;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * A service for configuration built pages

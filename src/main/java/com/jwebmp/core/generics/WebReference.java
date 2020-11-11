@@ -24,7 +24,7 @@ import com.jwebmp.core.base.html.interfaces.NamedPair;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
 import com.guicedee.guicedinjection.json.StaticStrings;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.LinkedHashSet;

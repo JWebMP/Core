@@ -19,7 +19,7 @@ package com.jwebmp.core.base.interfaces;
 import com.jwebmp.core.base.ComponentBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * @param <J>

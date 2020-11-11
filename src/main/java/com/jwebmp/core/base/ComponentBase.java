@@ -27,7 +27,7 @@ import com.jwebmp.core.utilities.GUIDGenerator;
 import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.logger.LogFactory;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;

@@ -31,7 +31,7 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.logger.LogFactory;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;

@@ -16,7 +16,7 @@
  */
 package com.jwebmp.core.base.servlets.interfaces;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * Marks a component as one with Data that is available as either AJAX or direct

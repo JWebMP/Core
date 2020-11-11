@@ -19,7 +19,7 @@ package com.jwebmp.core.base.references;
 import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
 import com.jwebmp.core.generics.WebReference;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * This class is a Java Reference

@@ -3,7 +3,7 @@ package com.jwebmp.core.databind;
 import com.jwebmp.core.Event;
 import com.jwebmp.core.events.change.ChangeAdapter;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * A specification for notifications of client variable changes (on client data change)

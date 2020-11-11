@@ -1,6 +1,6 @@
 package com.jwebmp.core.htmlbuilder.css.colours;
 
-import javax.validation.constraints.Max;
+import jakarta.validation.constraints.Max;
 import java.lang.annotation.Annotation;
 
 public class ColourRGBImpl

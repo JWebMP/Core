@@ -18,7 +18,7 @@ package com.jwebmp.core.utilities;
 
 import org.apache.commons.text.StringEscapeUtils;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.CharacterIterator;

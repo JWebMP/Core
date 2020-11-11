@@ -27,7 +27,7 @@ import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.guicedee.guicedinjection.json.StaticStrings;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * Please note I have left out all the input type attributes that are not cross-browser - rather use the features available.<p>

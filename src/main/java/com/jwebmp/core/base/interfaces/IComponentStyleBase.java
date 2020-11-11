@@ -20,7 +20,7 @@ import com.jwebmp.core.base.ComponentBase;
 import com.jwebmp.core.htmlbuilder.css.CSSImpl;
 import com.jwebmp.core.htmlbuilder.css.enumarations.CSSTypes;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.Map;
 
 @SuppressWarnings("unused")

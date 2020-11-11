@@ -3,7 +3,7 @@ package com.jwebmp.core.events;
 import com.jwebmp.core.Event;
 import com.guicedee.guicedinjection.interfaces.IDefaultService;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * This event can be used to configure any events that are created

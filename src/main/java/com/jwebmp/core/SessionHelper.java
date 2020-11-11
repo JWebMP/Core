@@ -20,7 +20,7 @@ import com.guicedee.guicedinjection.GuiceContext;
 import com.guicedee.logger.LogFactory;
 import com.jwebmp.core.utilities.StaticStrings;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

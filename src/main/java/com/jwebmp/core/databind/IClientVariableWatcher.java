@@ -2,7 +2,7 @@ package com.jwebmp.core.databind;
 
 import com.jwebmp.core.events.change.ChangeAdapter;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * SPI for handling variable watchers. The returned string must be JavaScript that will watch the given variable

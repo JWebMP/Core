@@ -3,7 +3,7 @@ package com.jwebmp.core.base.servlets;
 import com.google.inject.servlet.SessionScoped;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;

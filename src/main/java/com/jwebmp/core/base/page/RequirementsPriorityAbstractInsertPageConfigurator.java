@@ -27,7 +27,7 @@ import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
 import com.jwebmp.core.generics.WebReference;
 import com.jwebmp.core.services.IPageConfigurator;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;

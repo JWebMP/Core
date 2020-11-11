@@ -36,7 +36,7 @@ import com.jwebmp.core.htmlbuilder.css.themes.Theme;
 import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.logger.LogFactory;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.logging.Level;

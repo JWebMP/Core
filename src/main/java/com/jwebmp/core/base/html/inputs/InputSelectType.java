@@ -21,7 +21,7 @@ import com.jwebmp.core.base.html.Option;
 import com.jwebmp.core.base.html.attributes.InputButtonTypeAttributes;
 import com.jwebmp.core.base.html.attributes.InputTypes;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * @param <J>

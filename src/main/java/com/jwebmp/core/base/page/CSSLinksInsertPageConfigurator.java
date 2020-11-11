@@ -8,7 +8,7 @@ import com.jwebmp.core.services.RenderAfterLinks;
 import com.jwebmp.core.services.RenderBeforeLinks;
 import com.guicedee.guicedinjection.GuiceContext;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.Set;
 
 import static com.jwebmp.core.services.JWebMPServicesBindings.*;

@@ -27,7 +27,7 @@ import com.jwebmp.core.databind.IOnDataBindCloak;
 import com.jwebmp.core.htmlbuilder.javascript.JavaScriptPart;
 import com.guicedee.guicedinjection.GuiceContext;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ServiceLoader;

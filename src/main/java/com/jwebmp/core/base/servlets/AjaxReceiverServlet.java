@@ -29,7 +29,7 @@ import com.guicedee.guicedservlets.GuicedServletKeys;
 import com.jwebmp.interception.services.AjaxCallIntercepter;
 import com.guicedee.logger.LogFactory;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.lang.reflect.Modifier;
 import java.nio.charset.Charset;
 import java.util.HashSet;

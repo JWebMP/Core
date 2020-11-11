@@ -30,7 +30,7 @@ import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.guicedinjection.GuiceContext;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;
