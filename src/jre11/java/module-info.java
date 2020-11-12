@@ -8,7 +8,7 @@ module com.jwebmp.core {
 	requires net.sf.uadetector.core;
 	requires net.sf.uadetector.resources;
 
-	requires java.validation;
+	requires jakarta.validation;
 
 	requires aopalliance;
 
