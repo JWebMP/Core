@@ -24,8 +24,8 @@ import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
  */
 public enum JQueryReferencePool
 {
-	JQueryV3(new JavascriptReference("JQuery", 3.31, "bower_components/jquery/dist/jquery.min.js", "https://code.jquery.com/jquery-3.3.1.js").setPriority(
-			RequirementsPriority.First)),
+	JQueryV3(new JavascriptReference("JQuery", 3.51, "bower_components/jquery/dist/jquery.min.js", "https://code.jquery.com/jquery-3.5.1.js")
+		.setPriority(RequirementsPriority.First)),
 
 	JQueryMigrate(new JQueryMigrateReference());
 

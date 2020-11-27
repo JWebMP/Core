@@ -115,6 +115,13 @@ public class Meta<C extends IComponentHierarchyBase & GlobalChildren>
 				addAttribute(MetaAttributes.Name, MetadataFields.Description.getDataNameField());
 				break;
 			}
+			case ViewPort:
+			{
+
+				addAttribute(MetaAttributes.Content, value);
+				addAttribute(MetaAttributes.Name, MetadataFields.ViewPort.getDataNameField());
+				break;
+			}
 			case Keywords:
 			{
 				addAttribute(MetaAttributes.Content, value);
@@ -193,6 +200,7 @@ public class Meta<C extends IComponentHierarchyBase & GlobalChildren>
 		Author("author"),
 		Keywords("keywords"),
 		Description("description"),
+		ViewPort("viewport"),
 		http_equiv("X-UA-Compatible"),
 		Name("name");
 

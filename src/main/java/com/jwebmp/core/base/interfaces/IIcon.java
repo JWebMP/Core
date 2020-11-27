@@ -5,7 +5,7 @@ import com.jwebmp.core.base.ComponentHierarchyBase;
 /**
  * Interface that denotes the type of Icon
  */
-public interface IIcon<J extends IIcon<J>>
+public interface IIcon<J extends IIcon<J>> extends com.jwebmp.core.base.html.interfaces.children.ListItemChildren
 {
 	/**
 	 * If the string class or a component should be used.

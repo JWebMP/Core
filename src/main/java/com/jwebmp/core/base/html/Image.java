@@ -16,6 +16,7 @@
  */
 package com.jwebmp.core.base.html;
 
+import com.google.common.base.Strings;
 import com.jwebmp.core.Component;
 import com.jwebmp.core.base.html.attributes.ImageAttributes;
 import com.jwebmp.core.base.html.interfaces.FigureChildren;
@@ -54,43 +55,68 @@ import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
  * <p>
  *
  * @param <J>
- *
  * @author GedMarc
  */
 public class Image<J extends Image<J>>
-		extends Component<IComponentHierarchyBase, ImageAttributes, GlobalFeatures, GlobalEvents, J>
-		implements ImageMapChildren<IComponentHierarchyBase, J>, FigureChildren<IComponentHierarchyBase, J>, GlobalChildren, ListItemChildren<IComponentHierarchyBase, J>
+        extends Component<IComponentHierarchyBase, ImageAttributes, GlobalFeatures, GlobalEvents, J>
+        implements ImageMapChildren<IComponentHierarchyBase, J>, FigureChildren<IComponentHierarchyBase, J>, GlobalChildren, ListItemChildren<IComponentHierarchyBase, J>
 {
+    /**
+     * Construct a new Image
+     */
+    public Image()
+    {
+        this(null);
+    }
 
+    /**
+     * Construct a new Image
+     *
+     * @param image
+     */
+    public Image(String image)
+    {
+        super(ComponentTypes.Image);
+        setInlineClosingTag(true);
+        addAttribute(ImageAttributes.Src, image);
+    }
 
-	/**
-	 * Construct a new Image
-	 *
-	 * @param image
-	 */
-	public Image(String image)
-	{
-		super(ComponentTypes.Image);
-		setInlineClosingTag(true);
-		addAttribute(ImageAttributes.Src, image);
-	}
+    public J bind(String binding)
+    {
+        if (Strings.isNullOrEmpty(binding))
+        {
+            removeAttribute("ng-src");
+        } else
+            addAttribute("ng-src", "{{" + binding + "}}");
+        return (J) this;
+    }
 
-	@Override
-	public int hashCode()
-	{
-		return 7;
-	}
+    public J bindAlt(String binding)
+    {
+        if (Strings.isNullOrEmpty(binding))
+        {
+            removeAttribute("alt");
+        } else
+            addAttribute("alt", "{{" + binding + "}}");
+        return (J) this;
+    }
 
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (!(obj instanceof Image))
-		{
-			return false;
-		}
+    @Override
+    public int hashCode()
+    {
+        return 7;
+    }
 
-		return getAttribute(ImageAttributes.Src).equals(((Image) obj)
-				                                                .getAttribute(ImageAttributes.Src));
-	}
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (!(obj instanceof Image))
+        {
+            return false;
+        }
+
+        return getAttribute(ImageAttributes.Src).equals(((Image) obj)
+                .getAttribute(ImageAttributes.Src));
+    }
 
 }

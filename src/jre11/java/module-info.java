@@ -110,7 +110,7 @@ module com.jwebmp.core {
 	exports com.jwebmp.core.generics;
 
 	exports com.jwebmp.core.annotations;
-	exports com.jwebmp.core.htmlbuilder;
+
 	exports com.jwebmp.core.htmlbuilder.css;
 	exports com.jwebmp.core.htmlbuilder.css.animatable;
 	exports com.jwebmp.core.htmlbuilder.css.annotations;

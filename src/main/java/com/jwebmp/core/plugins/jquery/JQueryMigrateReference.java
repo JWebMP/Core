@@ -35,7 +35,7 @@ public class JQueryMigrateReference
 
 	public JQueryMigrateReference()
 	{
-		super("JQueryMigrate", 1.21, "bower_components/jquery-migrate/jquery-migrate.min.js", "http://code.jquery.com/jquery-migrate-1.4.1.js");
+		super("JQueryMigrate", 3.20, "bower_components/jquery-migrate/jquery-migrate.min.js", "http://code.jquery.com/jquery-migrate-3.2.0.js");
 		setSortOrder(2);
 		setPriority(RequirementsPriority.Second);
 	}
