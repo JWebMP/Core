@@ -345,6 +345,8 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	@NotNull
 	public J add(@NotNull C newChild)
 	{
+		if(newChild == null)
+			return (J)this;
 		newChild.setParent(this);
 		newChild.setTiny(isTiny());
 		newChild.setPage(getPage());
@@ -367,6 +369,8 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	@NotNull
 	public J add(@NotNull Integer position, @NotNull C newChild)
 	{
+		if(newChild == null)
+			return (J)this;
 		newChild.setParent(this);
 		newChild.setTiny(isTiny());
 		newChild.setPage(getPage());
@@ -1165,10 +1169,9 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		{
 			sb.append(renderBeforeChildren());
 		}
-		getChildren().forEach(child -> sb.append(getNewLine())
-		                                 .append(child.toString(child.asBase()
+		getChildren().stream().filter(Objects::nonNull).forEach(child -> sb.append(getNewLine())
+		                                                                   .append(child.toString(child.asBase()
 		                                                             .isTiny() ? 0 : getCurrentTabIndents() + 1)));
-
 		if (renderAfterChildren() != null)
 		{
 			sb.append(renderAfterChildren());

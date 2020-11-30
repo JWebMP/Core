@@ -24,6 +24,7 @@ import com.jwebmp.core.base.html.interfaces.events.NoEvents;
 import com.jwebmp.core.base.interfaces.IComponentHierarchyBase;
 import com.jwebmp.core.base.servlets.enumarations.ComponentTypes;
 import com.guicedee.logger.LogFactory;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -156,7 +157,7 @@ public class Meta<C extends IComponentHierarchyBase & GlobalChildren>
 	{
 		if (o instanceof Meta)
 		{
-			Meta m = (Meta) o;
+			Meta<?> m = (Meta<?>) o;
 			return getAttributes().entrySet()
 			                      .equals(m.getAttributes()
 			                               .entrySet());
@@ -236,5 +237,24 @@ public class Meta<C extends IComponentHierarchyBase & GlobalChildren>
 		{
 			this.dataNameField = dataNameField;
 		}
+	}
+
+	@Override
+	public @NotNull Integer getSortOrder()
+	{
+		if(getAttributes().containsKey("charset"))
+			return 0;
+
+		if(getAttributes().containsValue("viewport"))
+		{
+			return 3;
+		}
+
+		if(getAttributes().containsValue("Content-Security-Policy"))
+		{
+			return Integer.MAX_VALUE - 2;
+		}
+
+		return super.getSortOrder();
 	}
 }

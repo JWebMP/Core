@@ -279,7 +279,7 @@ public class ComponentHTMLAttributeBase<A extends Enum & AttributeDefinitions, F
 	 * @return A Tree Map of Attributes
 	 */
 	@NotNull
-	protected Map<String, String> getAttributes()
+	public Map<String, String> getAttributes()
 	{
 		if (attributes == null)
 		{

@@ -1,5 +1,6 @@
 package com.jwebmp.core.base;
 
+import com.google.common.base.Strings;
 import com.google.inject.servlet.RequestScoped;
 import com.jwebmp.core.base.html.DivSimple;
 import com.jwebmp.core.base.interfaces.IContentSecurityPolicy;
@@ -92,7 +93,7 @@ public class ContentSecurityPolicy<J extends ContentSecurityPolicy<J>>
 			{
 				output.append("child-src ").append(setToList(childSrc)).append(" ; ");
 			}
-			if(!output.isEmpty())
+			if(!Strings.isNullOrEmpty(output.toString()))
 			    addAttribute("content", output.toString());
             super.preConfigure();
         }
