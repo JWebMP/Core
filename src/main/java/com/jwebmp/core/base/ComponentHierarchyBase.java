@@ -550,8 +550,11 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	{
 		getChildren().forEach(child ->
 		                      {
-			                      componentsToAddTo.add((ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>) child);
-			                      child.getChildrenHierarchy(componentsToAddTo);
+		                      	if(child != null )
+		                        {
+			                        componentsToAddTo.add((ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>) child);
+			                        child.getChildrenHierarchy(componentsToAddTo);
+		                        }
 		                      });
 		return componentsToAddTo;
 	}
@@ -568,6 +571,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		Set<Event> allEvents = new LinkedHashSet<>();
 		getChildrenHierarchy(true).forEach(child ->
 		                                   {
+		                                   	if(child != null)
 			                                   for (Object event : child.getEvents())
 			                                   {
 				                                   allEvents.add((Event) event);
