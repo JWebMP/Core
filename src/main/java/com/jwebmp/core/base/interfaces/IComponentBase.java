@@ -144,7 +144,10 @@ public interface IComponentBase<J extends ComponentBase<J>>
 	 * @return
 	 */
 	J setProperties(Map<String, Object> properties);
-
+	
+	@SuppressWarnings("unchecked")
+	J appendText(String text);
+	
 	/**
 	 * Sets this components Raw Text
 	 * <p>

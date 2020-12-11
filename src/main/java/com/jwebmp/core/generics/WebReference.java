@@ -25,23 +25,19 @@ import com.jwebmp.core.base.servlets.enumarations.RequirementsPriority;
 import com.guicedee.guicedinjection.json.StaticStrings;
 
 import jakarta.validation.constraints.NotNull;
+
 import java.io.Serializable;
-import java.util.Comparator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * Denotes a specific Web Reference, either remotely or locally
  *
- * @param <J>
- * 		The type implementation
- *
+ * @param <J> The type implementation
  * @author MMagon
- * 		<p>
- * 		2.0 Added Sorting
+ * <p>
+ * 2.0 Added Sorting
  * @version 2.0
  * @since Forever
  */
@@ -123,51 +119,45 @@ public class WebReference<J extends WebReference<J>>
 	 * Any additional options to be rendered with the reference
 	 */
 	private Set<String> additionalOptions;
-
+	
+	private String linkId;
+	private final Map<String, String> additionalAttributes = new LinkedHashMap<>();
+	
 	/**
 	 * Sets this JavaScript Reference with the Name, the Version
 	 *
-	 * @param name
-	 * 		The Name of the Plugin
-	 * @param version
-	 * 		The version of the Plugin
-	 * @param localReference
-	 * 		The local Reference
-	 * @param remoteReference
-	 * 		The Remote Reference
+	 * @param name            The Name of the Plugin
+	 * @param version         The version of the Plugin
+	 * @param localReference  The local Reference
+	 * @param remoteReference The Remote Reference
 	 */
 	public WebReference(String name, Double version, String localReference, String remoteReference)
 	{
 		this(name, version, localReference, remoteReference, 500000);
 	}
-
+	
 	/**
 	 * Sets this JavaScript Reference with the Name, the Version
 	 *
-	 * @param name
-	 * 		The Name of the Plugin
-	 * @param version
-	 * 		The version of the Plugin
-	 * @param localReference
-	 * 		The local Reference
-	 * @param remoteReference
-	 * 		The Remote Reference
-	 * @param sortOrder
-	 * 		The Sorting Order for the Reference
+	 * @param name            The Name of the Plugin
+	 * @param version         The version of the Plugin
+	 * @param localReference  The local Reference
+	 * @param remoteReference The Remote Reference
+	 * @param sortOrder       The Sorting Order for the Reference
 	 */
 	public WebReference(String name, Double version, String localReference, String remoteReference, int sortOrder)
 	{
 		left = localReference;
 		right = remoteReference;
-
+		
 		this.name = name;
 		this.version = version;
 		this.localReference = localReference;
 		this.remoteReference = remoteReference;
-
+		
 		this.sortOrder = sortOrder;
 	}
-
+	
 	/**
 	 * Sets whether or not to use "min.js" or use a folder for the min directory
 	 *
@@ -177,24 +167,21 @@ public class WebReference<J extends WebReference<J>>
 	{
 		return useMinAtEndOfExtension;
 	}
-
+	
 	/**
 	 * Sets whether or not to append min into the filename
 	 *
-	 * @param useMinAtEndOfExtension
-	 * 		if min is used
+	 * @param useMinAtEndOfExtension if min is used
 	 */
 	public static void setUseMinAtEndOfExtension(boolean useMinAtEndOfExtension)
 	{
 		WebReference.useMinAtEndOfExtension = useMinAtEndOfExtension;
 	}
-
+	
 	/**
 	 * Sorts an Array List of References
 	 *
-	 * @param arrayList
-	 * 		The list to apply
-	 *
+	 * @param arrayList The list to apply
 	 * @return the sorted list
 	 */
 	public static List<WebReference<?>> sort(List<WebReference<?>> arrayList)
@@ -202,7 +189,7 @@ public class WebReference<J extends WebReference<J>>
 		arrayList.sort(WebReference::compareTo);
 		return arrayList;
 	}
-
+	
 	/**
 	 * Gets the local reference
 	 *
@@ -213,13 +200,11 @@ public class WebReference<J extends WebReference<J>>
 	{
 		return localReference;
 	}
-
+	
 	/**
 	 * Sets the local reference
 	 *
-	 * @param left
-	 * 		Left side, local reference
-	 *
+	 * @param left Left side, local reference
 	 * @return Always this
 	 */
 	@NotNull
@@ -230,7 +215,7 @@ public class WebReference<J extends WebReference<J>>
 		localReference = left;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Sets the local reference
 	 *
@@ -241,13 +226,11 @@ public class WebReference<J extends WebReference<J>>
 	{
 		return remoteReference;
 	}
-
+	
 	/**
 	 * Sets the remote reference
 	 *
-	 * @param right
-	 * 		The remote reference
-	 *
+	 * @param right The remote reference
 	 * @return Always this
 	 */
 	@NotNull
@@ -258,7 +241,7 @@ public class WebReference<J extends WebReference<J>>
 		remoteReference = right;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns if this pair is set to validate on the left field only
 	 *
@@ -268,13 +251,11 @@ public class WebReference<J extends WebReference<J>>
 	{
 		return leftOnly;
 	}
-
+	
 	/**
 	 * Sets if this pair should validate on the left pair only
 	 *
-	 * @param leftOnly
-	 * 		if local only
-	 *
+	 * @param leftOnly if local only
 	 * @return always this
 	 */
 	@NotNull
@@ -284,7 +265,7 @@ public class WebReference<J extends WebReference<J>>
 		this.leftOnly = leftOnly;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Gets the double version of this reference
 	 *
@@ -294,13 +275,11 @@ public class WebReference<J extends WebReference<J>>
 	{
 		return version;
 	}
-
+	
 	/**
 	 * Sets the double version of this reference
 	 *
-	 * @param version
-	 * 		the version of the reference
-	 *
+	 * @param version the version of the reference
 	 * @return Always this
 	 */
 	@NotNull
@@ -310,15 +289,12 @@ public class WebReference<J extends WebReference<J>>
 		this.version = version;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Compares two references to each other on sort order
 	 *
-	 * @param o1
-	 * 		Compares
-	 * @param o2
-	 * 		Copmares
-	 *
+	 * @param o1 Compares
+	 * @param o2 Copmares
 	 * @return 0,-1,or 1
 	 */
 	@Override
@@ -333,7 +309,7 @@ public class WebReference<J extends WebReference<J>>
 		return o1.getSortOrder()
 		         .compareTo(o2.getSortOrder());
 	}
-
+	
 	/**
 	 * Default Sort Order
 	 * <p>
@@ -351,7 +327,7 @@ public class WebReference<J extends WebReference<J>>
 	{
 		return sortOrder;
 	}
-
+	
 	/**
 	 * Default Sort Order
 	 * <p>
@@ -359,9 +335,7 @@ public class WebReference<J extends WebReference<J>>
 	 * Atmosphere Reserved
 	 * <p>
 	 *
-	 * @param sortOrder
-	 * 		The sort order to apply
-	 *
+	 * @param sortOrder The sort order to apply
 	 * @return Always this
 	 */
 	@NotNull
@@ -371,7 +345,7 @@ public class WebReference<J extends WebReference<J>>
 		this.sortOrder = sortOrder;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns either the local or remote reference depending on configuration
 	 * <p>
@@ -391,7 +365,7 @@ public class WebReference<J extends WebReference<J>>
 			{
 				sb.insert(sb.lastIndexOf(StaticStrings.STRING_DOT), ".min");
 			}
-
+			
 			try
 			{
 				if ((!(sb.toString()
@@ -403,7 +377,7 @@ public class WebReference<J extends WebReference<J>>
 				{
 					sb = renderUrlString(sb);
 				}
-
+				
 			}
 			catch (NoClassDefFoundError | Exception e)
 			{
@@ -425,10 +399,10 @@ public class WebReference<J extends WebReference<J>>
 			sb.append("v=")
 			  .append(version);
 		}
-
+		
 		return sb.toString();
 	}
-
+	
 	/**
 	 * Whether or not to return the local reference or the remote reference
 	 *
@@ -439,18 +413,17 @@ public class WebReference<J extends WebReference<J>>
 	{
 		return isLocal;
 	}
-
+	
 	/**
 	 * Sets whether this reference should be local or remote
 	 *
-	 * @param isLocal
-	 * 		If local references must be used
+	 * @param isLocal If local references must be used
 	 */
 	public static void setIsLocal(boolean isLocal)
 	{
 		WebReference.isLocal = isLocal;
 	}
-
+	
 	/**
 	 * Gets the physical local reference
 	 *
@@ -460,13 +433,11 @@ public class WebReference<J extends WebReference<J>>
 	{
 		return localReference;
 	}
-
+	
 	/**
 	 * Sets the physical local reference
 	 *
-	 * @param localReference
-	 * 		The local reference
-	 *
+	 * @param localReference The local reference
 	 * @return Always this
 	 */
 	@NotNull
@@ -477,13 +448,11 @@ public class WebReference<J extends WebReference<J>>
 		this.localReference = localReference;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Renders the actual URL String
 	 *
-	 * @param sb
-	 * 		The string builder
-	 *
+	 * @param sb The string builder
 	 * @return The url to build
 	 */
 	private StringBuilder renderUrlString(StringBuilder sb)
@@ -508,7 +477,7 @@ public class WebReference<J extends WebReference<J>>
 		}
 		return sb;
 	}
-
+	
 	/**
 	 * Gets the physical remote reference
 	 *
@@ -518,13 +487,11 @@ public class WebReference<J extends WebReference<J>>
 	{
 		return remoteReference;
 	}
-
+	
 	/**
 	 * Sets the remote physical reference
 	 *
-	 * @param remoteReference
-	 * 		The remote reference
-	 *
+	 * @param remoteReference The remote reference
 	 * @return Always this
 	 */
 	@NotNull
@@ -535,7 +502,7 @@ public class WebReference<J extends WebReference<J>>
 		this.remoteReference = remoteReference;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Specifies if the remote has a min file
 	 *
@@ -546,7 +513,7 @@ public class WebReference<J extends WebReference<J>>
 	{
 		return canMinifyAtRemote;
 	}
-
+	
 	/**
 	 * If the version number should be appended for caching
 	 *
@@ -557,24 +524,21 @@ public class WebReference<J extends WebReference<J>>
 	{
 		return useVersionIdentifier;
 	}
-
+	
 	/**
 	 * If the version number should be appended for caching
 	 *
-	 * @param useVersionIdentifier
-	 * 		If version identification is enabled
+	 * @param useVersionIdentifier If version identification is enabled
 	 */
 	public static void setUseVersionIdentifier(boolean useVersionIdentifier)
 	{
 		WebReference.useVersionIdentifier = useVersionIdentifier;
 	}
-
+	
 	/**
 	 * Specifies if the remote has a min file
 	 *
-	 * @param canMinifyAtRemote
-	 * 		If verifying on remote is allowed
-	 *
+	 * @param canMinifyAtRemote If verifying on remote is allowed
 	 * @return Always this
 	 */
 	@NotNull
@@ -584,7 +548,7 @@ public class WebReference<J extends WebReference<J>>
 		this.canMinifyAtRemote = canMinifyAtRemote;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Return the priority of the reference
 	 *
@@ -594,13 +558,11 @@ public class WebReference<J extends WebReference<J>>
 	{
 		return priority;
 	}
-
+	
 	/**
 	 * Sets the priority of the reference
 	 *
-	 * @param priority
-	 * 		The given priority to apply
-	 *
+	 * @param priority The given priority to apply
 	 * @return Always this
 	 */
 	@NotNull
@@ -610,7 +572,7 @@ public class WebReference<J extends WebReference<J>>
 		this.priority = priority;
 		return (J) this;
 	}
-
+	
 	/**
 	 * If this reference is a cordova reference, e.g. does it render in the dynamic site loader
 	 * <p>
@@ -620,13 +582,11 @@ public class WebReference<J extends WebReference<J>>
 	{
 		return cordovaRequired;
 	}
-
+	
 	/**
 	 * If this reference is a cordova reference, e.g. does it render in the dynamic site loader
 	 *
-	 * @param cordovaRequired
-	 * 		If cordova is requierd
-	 *
+	 * @param cordovaRequired If cordova is requierd
 	 * @return Always this
 	 */
 	@NotNull
@@ -636,7 +596,7 @@ public class WebReference<J extends WebReference<J>>
 		this.cordovaRequired = cordovaRequired;
 		return (J) this;
 	}
-
+	
 	/**
 	 * A specified class name that can identify these classes on the html
 	 *
@@ -646,12 +606,11 @@ public class WebReference<J extends WebReference<J>>
 	{
 		return specifiedClassName;
 	}
-
+	
 	/**
 	 * A specified class name that can identify these classes on the html
 	 *
-	 * @param specifiedClassName
-	 * 		A class string to add
+	 * @param specifiedClassName A class string to add
 	 */
 	@SuppressWarnings("unchecked")
 	@NotNull
@@ -660,7 +619,7 @@ public class WebReference<J extends WebReference<J>>
 		this.specifiedClassName = specifiedClassName;
 		return (J) this;
 	}
-
+	
 	@Override
 	@SuppressWarnings("all")
 	public int compareTo(WebReference o)
@@ -675,7 +634,7 @@ public class WebReference<J extends WebReference<J>>
 		}
 		return getSortOrder().compareTo(o.getSortOrder());
 	}
-
+	
 	/**
 	 * Gets the name of this reference
 	 *
@@ -685,13 +644,11 @@ public class WebReference<J extends WebReference<J>>
 	{
 		return name;
 	}
-
+	
 	/**
 	 * Sets the name of this reference
 	 *
-	 * @param name
-	 * 		The name of this reference
-	 *
+	 * @param name The name of this reference
 	 * @return Always this
 	 */
 	@NotNull
@@ -701,7 +658,7 @@ public class WebReference<J extends WebReference<J>>
 		this.name = name;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns any additional items in the tag that should be rendered
 	 *
@@ -716,13 +673,11 @@ public class WebReference<J extends WebReference<J>>
 		}
 		return additionalOptions;
 	}
-
+	
 	/**
 	 * Sets the options to something specific
 	 *
-	 * @param additionalOptions
-	 * 		The options to add to the tag
-	 *
+	 * @param additionalOptions The options to add to the tag
 	 * @return The tag
 	 */
 	@NotNull
@@ -730,5 +685,46 @@ public class WebReference<J extends WebReference<J>>
 	{
 		this.additionalOptions = additionalOptions;
 		return this;
+	}
+	
+	/**
+	 * Gets the id that must be applied to the link that is generated
+	 *
+	 * @return
+	 */
+	public String getLinkId()
+	{
+		return linkId;
+	}
+	
+	/**
+	 * Sets the link id that must be applied when it is generated
+	 *
+	 * @param linkId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public J setLinkId(String linkId)
+	{
+		this.linkId = linkId;
+		return (J) this;
+	}
+	
+	/**
+	 * Adds a new attribute to be rendered
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public J addAttribute(String key, String value)
+	{
+		additionalAttributes.put(key, value);
+		return (J)this;
+	}
+	
+	public Map<String, String> getAdditionalAttributes()
+	{
+		return additionalAttributes;
 	}
 }

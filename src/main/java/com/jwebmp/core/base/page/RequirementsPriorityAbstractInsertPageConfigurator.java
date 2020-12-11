@@ -17,6 +17,7 @@
 
 package com.jwebmp.core.base.page;
 
+import com.google.common.base.Strings;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.ComponentHierarchyBase;
 import com.jwebmp.core.base.html.CSSLink;
@@ -139,6 +140,12 @@ abstract class RequirementsPriorityAbstractInsertPageConfigurator<J extends Requ
 			{
 				link.addClass(reference.getSpecifiedClassName());
 			}
+			if (!Strings.isNullOrEmpty(reference.getLinkId()))
+			{
+				link.setID(reference.getLinkId());
+				link.setRenderIDAttribute(true);
+			}
+			reference.getAdditionalAttributes().forEach(link::addAttribute);
 			if (!reference.getAdditionalOptions()
 			              .isEmpty())
 			{

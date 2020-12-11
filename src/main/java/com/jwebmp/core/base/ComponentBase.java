@@ -369,7 +369,24 @@ public class ComponentBase<J extends ComponentBase<J>>
 		this.properties = properties;
 		return (J) this;
 	}
-
+	
+	/**
+	 * Sets this components Raw Text
+	 * <p>
+	 *
+	 * @param text
+	 * 		The text to display as Raw Text
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public J appendText(String text)
+	{
+		this.text = this.text + text;
+		return (J) this;
+	}
+	
+	
 	/**
 	 * Sets this components Raw Text
 	 * <p>

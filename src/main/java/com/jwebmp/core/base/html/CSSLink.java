@@ -68,7 +68,7 @@ import java.util.logging.Logger;
  */
 public class CSSLink<J extends CSSLink<J>>
 		extends Component<IComponentHierarchyBase, CSSLinkAttributes, NoFeatures, NoEvents, J>
-		implements NoIDTag, NoClosingTag, HeadChildren<IComponentHierarchyBase, J>
+		implements NoClosingTag, HeadChildren<IComponentHierarchyBase, J>
 {
 
 	private static final Logger LOG = LogFactory.getInstance()
@@ -91,6 +91,7 @@ public class CSSLink<J extends CSSLink<J>>
 	public CSSLink()
 	{
 		super(ComponentTypes.CSSLink);
+		setRenderIDAttribute(false);
 	}
 
 	/**

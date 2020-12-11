@@ -44,6 +44,32 @@ public interface IComponentHierarchyBase<C extends IComponentHierarchyBase, J ex
 		extends GlobalChildren
 {
 	/**
+	 * Takes an instance and wraps around the component
+	 * <p>
+	 * e.g. BSRow.wrap(div) = iv class="row"myComponent//div
+	 *
+	 * @param component
+	 * @return
+	 */
+	@NotNull
+	@SuppressWarnings("unchecked")
+	<T extends ComponentHierarchyBase> T wrap(@NotNull T component);
+	
+	
+	/**
+	 * Takes all children and embeds them into the current children hierarchy
+	 * None of the details for the transient container is kept
+	 * <p>
+	 * e.g. myComponent.embed(div)
+	 *
+	 * @param component
+	 * @return
+	 */
+	@NotNull
+	@SuppressWarnings("unchecked")
+	<T extends ComponentHierarchyBase> T embed(@NotNull T component);
+	
+	/**
 	 * Add a new child to this component
 	 * <p>
 	 *

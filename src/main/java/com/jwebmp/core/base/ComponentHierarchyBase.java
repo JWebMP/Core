@@ -37,6 +37,7 @@ import com.guicedee.guicedinjection.json.StaticStrings;
 import com.guicedee.logger.LogFactory;
 
 import jakarta.validation.constraints.NotNull;
+
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.logging.Level;
@@ -47,17 +48,11 @@ import static java.util.Comparator.*;
 /**
  * Provides the Hierarchy for any component. Manages children and parent relationships
  *
- * @param <C>
- * 		All allowed children
- * @param <A>
- * 		All attributes for this component
- * @param <F>
- * 		All features allowed for this component
- * @param <E>
- * 		All events allowed for this component
- * @param <J>
- * 		Always this class
- *
+ * @param <C> All allowed children
+ * @param <A> All attributes for this component
+ * @param <F> All features allowed for this component
+ * @param <E> All events allowed for this component
+ * @param <J> Always this class
  * @author GedMarc
  * @since 24 Apr 2016
  */
@@ -66,53 +61,52 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		extends ComponentThemeBase<A, F, E, J>
 		implements IComponentHierarchyBase<C, J>, GlobalChildren
 {
-
+	
 	/**
 	 * Field serialVersionUID
 	 */
-
-
+	
+	
 	/**
 	 * Field log
 	 */
 	private static final Logger log = LogFactory.getInstance()
 	                                            .getLogger("ComponentHierarchyBase");
-
+	
 	/**
 	 * The list of children of this component
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Set<C> children;
-
+	
 	/**
 	 * My Parent
 	 */
 	@JsonIgnore
 	private ComponentHierarchyBase<?, ?, ?, ?, ?> parent;
-
+	
 	/**
 	 * The list of class names for this object
 	 */
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Set<String> classes;
-
+	
 	/**
 	 * My Page
 	 */
 	@JsonIgnore
 	private Page<?> page;
-
+	
 	/**
 	 * Constructs a new component that can be part of a tree
 	 *
-	 * @param componentType
-	 * 		The component type of the class
+	 * @param componentType The component type of the class
 	 */
 	public ComponentHierarchyBase(@NotNull ComponentTypes componentType)
 	{
 		super(componentType);
 	}
-
+	
 	/**
 	 * Returns a Hierarchy Base interface of this component
 	 *
@@ -124,14 +118,12 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	{
 		return this;
 	}
-
+	
 	/**
 	 * Finds the event in all this components and child components
 	 *
 	 * @param eventId
-	 *
 	 * @return
-	 *
 	 * @see ComponentEventBase#findEvent(String)
 	 */
 	@Override
@@ -142,8 +134,8 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 			for (Object jScript : child.getEventsAll())
 			{
 				if (((Event) jScript)
-						    .getID()
-						    .equals(eventId))
+						.getID()
+						.equals(eventId))
 				{
 					return (ComponentEventBase) jScript;
 				}
@@ -151,14 +143,12 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		}
 		return null;
 	}
-
+	
 	/**
 	 * Overrides this and all below components to set tiny false
 	 *
 	 * @param tiny
-	 *
 	 * @return super.tiny
-	 *
 	 * @see ComponentEventBase#setTiny(boolean)
 	 */
 	@Override
@@ -168,7 +158,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		getChildren().forEach(child -> child.setTiny(tiny));
 		return super.setTiny(tiny);
 	}
-
+	
 	/**
 	 * Returns the parent id for the parent property so JSON doesn't go circular
 	 *
@@ -183,12 +173,11 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		}
 		return null;
 	}
-
+	
 	/**
 	 * Adds in the JavaScript References for all the children
 	 *
 	 * @return
-	 *
 	 * @see ComponentThemeBase#getCssReferencesAll()
 	 */
 	@Override
@@ -205,12 +194,11 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		                      });
 		return allCss;
 	}
-
+	
 	/**
 	 * Adds in the JavaScript References for all the children
 	 *
 	 * @return
-	 *
 	 * @see ComponentThemeBase#getJavascriptReferencesAll()
 	 */
 	@Override
@@ -228,7 +216,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		                      });
 		return allJs;
 	}
-
+	
 	/**
 	 * Method hashCode ...
 	 *
@@ -239,13 +227,11 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	{
 		return super.hashCode();
 	}
-
+	
 	/**
 	 * Method equals ...
 	 *
-	 * @param o
-	 * 		of type Object
-	 *
+	 * @param o of type Object
 	 * @return boolean
 	 */
 	@Override
@@ -253,7 +239,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	{
 		return super.equals(o);
 	}
-
+	
 	/**
 	 * Method destroy ...
 	 */
@@ -286,7 +272,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		}
 		super.destroy();
 	}
-
+	
 	/**
 	 * Returns a complete list of events
 	 *
@@ -306,18 +292,18 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		                               });
 		return allFeatures;
 	}
-
+	
 	/**
 	 * Takes an instance and wraps around the component
 	 * <p>
 	 * e.g. BSRow.wrap(div) = iv class="row"myComponent//div
 	 *
 	 * @param component
-	 *
 	 * @return
 	 */
 	@NotNull
 	@SuppressWarnings("unchecked")
+	@Override
 	public <T extends ComponentHierarchyBase> T wrap(@NotNull T component)
 	{
 		ComponentHierarchyBase existingParent = component.getParent();
@@ -329,15 +315,36 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		getChildren().add((C) component);
 		return component;
 	}
-
+	
+	/**
+	 * Takes all children and embeds them into the current children hierarchy
+	 * None of the details for the transient container is kept
+	 * <p>
+	 * e.g. myComponent.embed(div)
+	 *
+	 * @param component
+	 * @return
+	 */
+	@NotNull
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T extends ComponentHierarchyBase> T embed(@NotNull T component)
+	{
+		component.getChildren()
+		         .stream()
+		         .filter(Objects::nonNull)
+		         .forEach(a -> {
+			         add((C) a);
+		         });
+		return component;
+	}
+	
 	/**
 	 * Add a new child to this component
 	 * <p>
 	 *
-	 * @param newChild
-	 * 		The child to be added
-	 * 		<p>
-	 *
+	 * @param newChild The child to be added
+	 *                 <p>
 	 * @return The new child added
 	 */
 	@Override
@@ -345,23 +352,23 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	@NotNull
 	public J add(@NotNull C newChild)
 	{
-		if(newChild == null)
-			return (J)this;
+		if (newChild == null)
+		{
+			return (J) this;
+		}
 		newChild.setParent(this);
 		newChild.setTiny(isTiny());
 		newChild.setPage(getPage());
 		getChildren().add(newChild);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Add a new child to this component
 	 * <p>
 	 *
-	 * @param newChild
-	 * 		The child to be added
-	 * 		<p>
-	 *
+	 * @param newChild The child to be added
+	 *                 <p>
 	 * @return The new child added
 	 */
 	@Override
@@ -369,8 +376,10 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	@NotNull
 	public J add(@NotNull Integer position, @NotNull C newChild)
 	{
-		if(newChild == null)
-			return (J)this;
+		if (newChild == null)
+		{
+			return (J) this;
+		}
 		newChild.setParent(this);
 		newChild.setTiny(isTiny());
 		newChild.setPage(getPage());
@@ -379,15 +388,12 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		setChildren(new LinkedHashSet<>(componentHierarchyBases));
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns null sets the text
 	 *
-	 * @param text
-	 * 		Sets this tags raw text, does not add a component
-	 *
+	 * @param text Sets this tags raw text, does not add a component
 	 * @return J Always this class
-	 *
 	 * @see com.jwebmp.core.base.interfaces.IComponentHierarchyBase#add(String)
 	 */
 	@Override
@@ -398,16 +404,13 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		setText(text);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Adds the given CSS Class Name with the given references
 	 * <p>
 	 *
-	 * @param classComponent
-	 * 		Adds a class as a component to this object
-	 *
+	 * @param classComponent Adds a class as a component to this object
 	 * @return This class
-	 *
 	 * @see com.jwebmp.core.base.interfaces.IComponentHierarchyBase#addClass(CSSComponent)
 	 */
 	@Override
@@ -419,20 +422,17 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		if (!getClasses().contains(className))
 		{
 			addClass(className);
-
+			
 		}
 		return (J) this;
 	}
-
+	
 	/**
 	 * Adds the given CSS Class Name with the given references
 	 * <p>
 	 *
-	 * @param className
-	 * 		Adds a class as a component to this object
-	 *
+	 * @param className Adds a class as a component to this object
 	 * @return This class
-	 *
 	 * @see com.jwebmp.core.base.interfaces.IComponentHierarchyBase#addClass(CSSComponent)
 	 */
 	@Override
@@ -445,12 +445,11 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		}
 		return (J) this;
 	}
-
+	
 	/**
 	 * Returns All the angular objects mapped to this component and its children
 	 *
 	 * @return A map of String,Object
-	 *
 	 * @see com.jwebmp.core.base.interfaces.IComponentHierarchyBase#getAngularObjectsAll()
 	 */
 	@Override
@@ -463,7 +462,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		}
 		return map;
 	}
-
+	
 	/**
 	 * Returns the children ArrayList of type Component
 	 * <p>
@@ -480,18 +479,17 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		}
 		return children;
 	}
-
+	
 	/**
 	 * Sets the children of this object
 	 *
-	 * @param children
-	 * 		The children set to apply
+	 * @param children The children set to apply
 	 */
 	public void setChildren(Set<C> children)
 	{
 		this.children = children;
 	}
-
+	
 	/**
 	 * Get an array list of all children and their children recursively Includes this object
 	 * <p>
@@ -504,15 +502,13 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	{
 		return getChildrenHierarchy(true);
 	}
-
+	
 	/**
 	 * Get an array list of all children and their children recursively Excludes this object
 	 * <p>
 	 *
-	 * @param includeSelf
-	 * 		Whether or not to include this component
-	 * 		<p>
-	 *
+	 * @param includeSelf Whether or not to include this component
+	 *                    <p>
 	 * @return A complete array list of all children at time of call
 	 */
 	@Override
@@ -525,23 +521,21 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 			components.add((ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>) this);
 		}
 		getChildrenHierarchy(components);
-
+		
 		return components;
 	}
-
+	
 	/**
 	 * Adds the children of this component onto the array list coming in
 	 * <p>
 	 * <p>
 	 * <p>
 	 *
-	 * @param componentsToAddTo
-	 * 		The component Array List to add to
-	 * 		<p>
-	 *
+	 * @param componentsToAddTo The component Array List to add to
+	 *                          <p>
 	 * @return original components added with
-	 * 		<p>
-	 * 		see com.jwebmp.core.base.interfaces.IComponentHierarchyBase#getChildrenHierarchy(Set ComponentHierarchyBase ?, ?, ?, ?, ? )
+	 * <p>
+	 * see com.jwebmp.core.base.interfaces.IComponentHierarchyBase#getChildrenHierarchy(Set ComponentHierarchyBase ?, ?, ?, ?, ? )
 	 */
 	@Override
 	@NotNull
@@ -550,15 +544,15 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	{
 		getChildren().forEach(child ->
 		                      {
-		                      	if(child != null )
-		                        {
-			                        componentsToAddTo.add((ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>) child);
-			                        child.getChildrenHierarchy(componentsToAddTo);
-		                        }
+			                      if (child != null)
+			                      {
+				                      componentsToAddTo.add((ComponentHierarchyBase<IComponentHierarchyBase, ?, ?, ?, ?>) child);
+				                      child.getChildrenHierarchy(componentsToAddTo);
+			                      }
 		                      });
 		return componentsToAddTo;
 	}
-
+	
 	/**
 	 * Returns a complete list of events
 	 *
@@ -571,15 +565,17 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		Set<Event> allEvents = new LinkedHashSet<>();
 		getChildrenHierarchy(true).forEach(child ->
 		                                   {
-		                                   	if(child != null)
-			                                   for (Object event : child.getEvents())
+			                                   if (child != null)
 			                                   {
-				                                   allEvents.add((Event) event);
+				                                   for (Object event : child.getEvents())
+				                                   {
+					                                   allEvents.add((Event) event);
+				                                   }
 			                                   }
 		                                   });
 		return allEvents;
 	}
-
+	
 	/**
 	 * Get the page this component exists on
 	 * <p>
@@ -596,24 +592,23 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		}
 		return page;
 	}
-
+	
 	/**
 	 * Gets the parent of this hierarchy item
 	 *
 	 * @return The parent object
 	 */
 	@Override
-
+	
 	public ComponentHierarchyBase getParent()
 	{
 		return parent;
 	}
-
+	
 	/**
 	 * Sets the parent of this item
 	 *
-	 * @param parent
-	 * 		Sets the parent object
+	 * @param parent Sets the parent object
 	 */
 	@Override
 	@NotNull
@@ -623,15 +618,13 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		this.parent = parent;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Adds a class name to the class list
 	 * <p>
 	 *
-	 * @param className
-	 * 		The class name to add
-	 * 		<p>
-	 *
+	 * @param className The class name to add
+	 *                  <p>
 	 * @return True if it was added, false if it already existed
 	 */
 	@Override
@@ -642,15 +635,13 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		getClasses().add(className);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Removes a class name from this component
 	 * <p>
 	 *
-	 * @param className
-	 * 		Class Name to Remove
-	 * 		<p>
-	 *
+	 * @param className Class Name to Remove
+	 *                  <p>
 	 * @return True if the class was removed, False if the class was not part of the collection
 	 */
 	@Override
@@ -660,15 +651,13 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		getClasses().remove(className);
 		return (J) this;
 	}
-
+	
 	/**
 	 * Removes a class name from this component
 	 * <p>
 	 *
-	 * @param className
-	 * 		Class Name to Remove
-	 * 		<p>
-	 *
+	 * @param className Class Name to Remove
+	 *                  <p>
 	 * @return True if the class was removed, False if the class was not part of the collection
 	 */
 	@Override
@@ -680,13 +669,13 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		{
 			this.removeClass(name);
 		}
-		return (J)this;
+		return (J) this;
 	}
+	
 	/**
 	 * Enumeration to remove
 	 *
 	 * @param className
-	 *
 	 * @return
 	 */
 	@Override
@@ -697,14 +686,13 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		{
 			this.removeClass(name);
 		}
-		return (J)this;
+		return (J) this;
 	}
-
+	
 	/**
 	 * Enumeration to remove
 	 *
 	 * @param className
-	 *
 	 * @return
 	 */
 	@Override
@@ -720,15 +708,12 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 			return false;
 		}
 	}
-
+	
 	/**
 	 * Method addClass ...
 	 *
-	 * @param className
-	 * 		of type ICssClassName
-	 *
+	 * @param className of type ICssClassName
 	 * @return J
-	 *
 	 * @see com.jwebmp.core.base.interfaces.IComponentHierarchyBase#addClass(ICssClassName)
 	 */
 	@Override
@@ -746,7 +731,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 			return (J) this;
 		}
 	}
-
+	
 	/**
 	 * Returns a complete list of all class names associated with this component
 	 * <p>
@@ -763,12 +748,11 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		}
 		return classes;
 	}
-
+	
 	/**
 	 * Sets the classes set
 	 *
-	 * @param classes
-	 * 		a new set of classes
+	 * @param classes a new set of classes
 	 */
 	@NotNull
 	@SuppressWarnings("unchecked")
@@ -778,14 +762,12 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		this.classes = classes;
 		return (J) this;
 	}
-
+	
 	/**
 	 * Set the theme applied to this component
 	 * <p>
 	 *
-	 * @param theme
-	 * 		The JQuery UI theme to apply to the component
-	 *
+	 * @param theme The JQuery UI theme to apply to the component
 	 * @see com.jwebmp.core.base.interfaces.IComponentHierarchyBase#addTheme(Theme)
 	 */
 	@Override
@@ -798,10 +780,10 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 			getThemes().add(theme);
 			addClass(theme.getClassName());
 		}
-
+		
 		return (J) this;
 	}
-
+	
 	/**
 	 * *
 	 * Returns all the variables for all the components
@@ -822,7 +804,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		                               });
 		return allVariables;
 	}
-
+	
 	/**
 	 * Returns if this object has children or not
 	 * <p>
@@ -834,15 +816,13 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 	{
 		return !getChildren().isEmpty();
 	}
-
+	
 	/**
 	 * Takes a component off this components child list
 	 * <p>
 	 *
-	 * @param childToRemove
-	 * 		The child object to remove from this list
-	 * 		<p>
-	 *
+	 * @param childToRemove The child object to remove from this list
+	 *                      <p>
 	 * @return True if the child was part of this components children's list
 	 */
 	@Override
@@ -851,7 +831,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		getChildren().remove(childToRemove);
 		return true;
 	}
-
+	
 	/**
 	 * *
 	 * Returns all the JavaScript for all the components
@@ -878,7 +858,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		allScripts.forEach(sb.append(getNewLine())::append);
 		return sb;
 	}
-
+	
 	/**
 	 * Configures the page and all its components
 	 *
@@ -897,12 +877,11 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		}
 		super.preConfigure();
 	}
-
+	
 	/**
 	 * Renders the classes array as an in-line class string
 	 *
 	 * @return
-	 *
 	 * @see ComponentHTMLAttributeBase#renderClasses()
 	 */
 	@Override
@@ -919,7 +898,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		}
 		return sb;
 	}
-
+	
 	/**
 	 * @see ComponentHTMLAttributeBase#cloneComponent()
 	 */
@@ -931,12 +910,11 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		ComponentHierarchyBase cloned = super.cloneComponent();
 		return (J) cloned;
 	}
-
+	
 	/**
 	 * Returns all the feature queries associated to this component and all its children
 	 *
 	 * @return
-	 *
 	 * @see ComponentFeatureBase#getQueriesAll()
 	 */
 	@Override
@@ -948,12 +926,11 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		allComponents.forEach((Consumer<? super ComponentHierarchyBase>) componentQuery -> processComponentQueries(componentQuery, reallyAllQueries));
 		return reallyAllQueries;
 	}
-
+	
 	/**
 	 * Pre-Configure the children tree
 	 *
 	 * @return
-	 *
 	 * @see ComponentBase#toString()
 	 */
 	@Override
@@ -969,7 +946,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		                      });
 		return super.toString();
 	}
-
+	
 	/**
 	 * Processes the queries
 	 *
@@ -989,15 +966,13 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		List<ComponentHierarchyBase> myQueries = new ArrayList<>();
 		myQueries.forEach(query -> reallyAllQueries.add(query.renderJavascript()));
 	}
-
+	
 	/**
 	 * Sets the page this component belongs on.
 	 * Null to reset the page hierarchy for all children
 	 * <p>
 	 *
-	 * @param page
-	 * 		A Page
-	 *
+	 * @param page A Page
 	 * @see com.jwebmp.core.base.interfaces.IComponentHierarchyBase#setPage(Page)
 	 */
 	@Override
@@ -1008,7 +983,7 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		getChildren().forEach(child -> child.setPage(page));
 		return (J) this;
 	}
-
+	
 	/**
 	 * Processes the angular objects into a map
 	 *
@@ -1036,13 +1011,12 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 			             }
 		             });
 	}
-
+	
 	/**
 	 * Iterates through all the children checking if a boolean property has been placed, Returns the first instance of true or always false
 	 *
 	 * @param propertyName
 	 * @param returnBool
-	 *
 	 * @return
 	 */
 	@SuppressWarnings("unused")
@@ -1067,34 +1041,28 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		}
 		return false;
 	}
-
+	
 	/**
 	 * Returns the first parent in the chain of the class type
 	 *
-	 * @param <T>
-	 * 		The class type
-	 * @param parentType
-	 * 		The type to look for
-	 *
+	 * @param <T>        The class type
+	 * @param parentType The type to look for
 	 * @return
 	 */
-
+	
 	public <T extends ComponentHierarchyBase> T findParent(Class<T> parentType)
 	{
 		return findParent(this, parentType);
 	}
-
+	
 	/**
 	 * Recursive method for going through the parent base
 	 *
-	 * @param root
-	 * 		The root
-	 * @param parentType
-	 * 		The parent type
-	 *
+	 * @param root       The root
+	 * @param parentType The parent type
 	 * @return
 	 */
-
+	
 	@SuppressWarnings("unchecked")
 	private <T extends ComponentHierarchyBase> T findParent(@NotNull ComponentHierarchyBase<?, ?, ?, ?, ?> root, @NotNull Class<T> parentType)
 	{
@@ -1110,13 +1078,11 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		}
 		return null;
 	}
-
+	
 	/**
 	 * Method findChild ...
 	 *
-	 * @param childType
-	 * 		of type Class T
-	 *
+	 * @param childType of type Class T
 	 * @return T
 	 */
 	@SuppressWarnings({"unchecked", "unused"})
@@ -1132,15 +1098,13 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		}
 		return null;
 	}
-
+	
 	/**
 	 * Convenience method for checking if a tag has already been added as a child
 	 * <p>
 	 *
-	 * @param classType
-	 * 		The Tag type to check for
-	 * 		<p>
-	 *
+	 * @param classType The Tag type to check for
+	 *                  <p>
 	 * @return The Obvious
 	 */
 	@SuppressWarnings("unused")
@@ -1156,12 +1120,11 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		}
 		return false;
 	}
-
+	
 	/**
 	 * Renders each child
 	 *
 	 * @return
-	 *
 	 * @see ComponentHTMLBase#renderChildren()
 	 */
 	@Override
@@ -1173,8 +1136,10 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		{
 			sb.append(renderBeforeChildren());
 		}
-		getChildren().stream().filter(Objects::nonNull).forEach(child -> sb.append(getNewLine())
-		                                                                   .append(child.toString(child.asBase()
+		getChildren().stream()
+		             .filter(Objects::nonNull)
+		             .forEach(child -> sb.append(getNewLine())
+		                                 .append(child.toString(child.asBase()
 		                                                             .isTiny() ? 0 : getCurrentTabIndents() + 1)));
 		if (renderAfterChildren() != null)
 		{
@@ -1182,14 +1147,13 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 		}
 		return sb;
 	}
-
+	
 	/**
 	 * Ensure if there are children that new lines must be rendered
 	 * <p>
 	 * Boxed for operating purposes
 	 *
 	 * @return
-	 *
 	 * @see ComponentHTMLBase#isNewLineForClosingTag()
 	 */
 	@Override
@@ -1205,35 +1169,33 @@ public class ComponentHierarchyBase<C extends IComponentHierarchyBase, A extends
 			return super.isNewLineForClosingTag();
 		}
 	}
-
+	
 	/**
 	 * Renders String content before the children tags are rendered
 	 * <p>
 	 *
 	 * @return Custom HTML String to be inserted before Children tags
-	 *
 	 * @see ComponentHTMLBase#renderBeforeChildren()
 	 */
 	@Override
-
+	
 	protected StringBuilder renderBeforeChildren()
 	{
 		return null;
 	}
-
+	
 	/**
 	 * Renders String content after the children tags are rendered
 	 * <p>
 	 *
 	 * @return Custom HTML String to be inserted after Children tags
-	 *
 	 * @see ComponentHTMLBase#renderAfterChildren()
 	 */
 	@Override
-
+	
 	protected StringBuilder renderAfterChildren()
 	{
 		return null;
 	}
-
+	
 }
